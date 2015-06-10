@@ -1,6 +1,6 @@
 [module]
 
-id = apps.optinomic.com
+id = com.optinomic.apps.example
 name = Example with Makefile
 short_description = An example app
 version = 1.0
