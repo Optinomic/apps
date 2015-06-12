@@ -25,11 +25,11 @@ include(example/templates/show_craving.html)
 
 [javascript]
 
-include(example/main.js)
+include(craving/main.js)
 
 [css]
 
-include(example/style.css)
+include(craving/style.css)
 
 [survey]
 
