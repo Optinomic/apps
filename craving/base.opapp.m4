@@ -51,7 +51,7 @@ min_lastpage = 1
 [event]
 
 type = daily
-time = 13:00
+time = 19:00
 due_after = 86400
 overdue = ignore
 description = A daily reminder to disable this example module
