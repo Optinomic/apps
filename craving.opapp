@@ -1,0 +1,23 @@
+[module]
+
+id = com.optinomic.apps.craving
+name = Craving-Tracking
+short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
+version = 1.0
+
+[description]
+
+Substanzverlangen oder Craving (engl. Begierde, Verlangen) ist ein Fachbegriff aus der Suchtmedizin. Craving oder constant craving umschreibt das kontinuierliche und nahezu unbezwingbare Verlangen eines Suchtkranken, sein Suchtmittel (Alkohol, Tabak, sonstige Drogen) zu konsumieren. Craving ist das zentrale Moment des Abhängigkeits- und Entzugssyndroms.
+
+[developer]
+
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com
+
+[template show_craving]
+
