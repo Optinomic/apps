@@ -21,7 +21,7 @@ website = http://www.optinomic.com
 
 [template show_craving]
 
-include(example/templates/show_craving.html)
+include(craving/templates/show_craving.html)
 
 [javascript]
 
@@ -59,13 +59,13 @@ survey = my_craving
 
 [email new_event html]
 
-include(example/emails/new_event.html)
+include(craving/emails/new_event.html)
 
 [email overdue html]
 
-include(example/emails/overdue.html)
+include(craving/emails/overdue.html)
 
 
 [calculation another_calculation javascript]
 
-include(example/calculations/another_calculation.js)
+include(craving/calculations/another_calculation.js)
