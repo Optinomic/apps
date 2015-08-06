@@ -3,7 +3,7 @@
 id = com.optinomic.apps.craving
 name = Craving-Tracking
 short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
-version = 0.1
+version = 1.0
 
 [description]
 
