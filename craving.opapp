@@ -3,7 +3,7 @@
 id = com.optinomic.apps.craving
 name = Craving-Tracking
 short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
-version = 1.0
+version = 0.1
 
 [description]
 
@@ -22,7 +22,7 @@ website = http://www.optinomic.com
 [template show_craving]
 
 <div style="margin-left:-9px;">
-    <p class="flow-text">This is CRAVING - show_token.html</p>
+    <p class="flow-text">This is CRAVING - show_craving.html</p>
 </div>
 
 
@@ -35,7 +35,8 @@ website = http://www.optinomic.com
 
 [css]
 
-html, body {
+html,
+body {
     background-color: #ffffff !important;
 }
 
