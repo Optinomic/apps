@@ -29,7 +29,7 @@ include(craving/main.js)
 
 [css]
 
-include(optinomic/lib/css/optinomic.css)
+include(../lib/css/optinomic.css)
 
 [survey]
 
