@@ -30,7 +30,7 @@ include(craving/main.js)
 
 [css]
 
-include(lib/css/set/optinomic_material_bootstrap.css)
+include(lib/css/set/optinomic.css)
 include(craving/style.css)
 
 [survey]
