@@ -17,7 +17,7 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com
+website = http://www.optinomic.com/
 
 [template show_craving]
 
@@ -38,10 +38,13 @@ website = http://www.optinomic.com
 
 [css]
 
+/* Includes */
+
 .craving {
     color: red !important;
     font-size: 48px;
 }
+ 
 
 /* Required for Angular UI Bootstrap */
 
@@ -56,7 +59,7 @@ website = http://www.optinomic.com
 /* General Imports */
 
 body {
-    background-color: #9E9E9E;
+    background-color: #FFFFFF;
     background-repeat: repeat-x;
 }
 

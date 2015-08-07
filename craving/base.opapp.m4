@@ -17,7 +17,7 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
+website = http://www.optinomic.com
 
 [template show_craving]
 
@@ -29,7 +29,7 @@ include(craving/templates/show_craving.html)
 include(craving/main.js)
 
 [css]
-
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css" />
 include(lib/css/optinomic.css)
 
 [survey]
