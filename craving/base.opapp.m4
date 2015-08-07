@@ -19,7 +19,7 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template show_craving]
+[template show_craving 6 12]
 
 include(craving/templates/show_craving.html)
 
@@ -30,7 +30,7 @@ include(craving/main.js)
 
 [css]
 
-include(lib/css/set/optinomic_material.css)
+include(lib/css/set/optinomic_material_bootstrap.css)
 include(craving/style.css)
 
 [survey]
