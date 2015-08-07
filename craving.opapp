@@ -21,7 +21,6 @@ website = http://www.optinomic.com
 
 [template show_craving]
 
-
 <div style="margin-left:-9px;">
     <h1>Craving</h1>
     <p class="flow-text">This is show_craving.html</p>
