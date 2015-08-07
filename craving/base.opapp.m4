@@ -31,7 +31,7 @@ include(craving/main.js)
 [css]
 
 include(lib/css/set/optinomic_material.css)
-include(craving/css/style.css)
+include(craving/style.css)
 
 [survey]
 
