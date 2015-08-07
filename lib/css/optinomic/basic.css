@@ -1,11 +1,20 @@
-html, body {
+html,
+body {
+    height: 100% !important;
+    color: rgba(0, 0, 0, .87);
+    background: #FFFFFF;
+    background-color: #FFFFFF !important;
+    position: relative;
     line-height: 1.5 !important;
     font-size: 13px !important;
     font-family: "Roboto", sans-serif !important;
     font-weight: normal !important;
-    background-color: #FFFFFF !important;
 }
 
+body {
+    margin: 0;
+    padding: 0
+}
 
 @media print {
     .no-print,
