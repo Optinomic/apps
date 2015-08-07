@@ -1,4 +1,7 @@
-include(craving/style.css)
+/* Includes */
+
+include(craving/style.css) 
+include('https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css')
 /* Required for Angular UI Bootstrap */
 
 .nav,
@@ -12,7 +15,7 @@ include(craving/style.css)
 /* General Imports */
 
 body {
-    background-color: #9E9E9E;
+    background-color: #FFFFFF;
     background-repeat: repeat-x;
 }
 
