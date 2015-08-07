@@ -1,7 +1,17 @@
-body {
-    background-color: #FFFFFF;
-    width: 100%;
-    height: 100% !important;
+html, body {
+    line-height: 1.5 !important;
+    font-size: 13px !important;
+    font-family: "Roboto", sans-serif !important;
+    font-weight: normal !important;
+    background-color: #FFFFFF !important;
+}
+
+
+@media print {
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
 }
 
 *:focus {
@@ -37,20 +47,6 @@ a:visited {
 .carousel,
 .panel-title a {
     cursor: pointer;
-}
-
-@media print {
-    .no-print,
-    .no-print * {
-        display: none !important;
-    }
-}
-
-html {
-    line-height: 1.5;
-    font-size: 13px;
-    font-family: "Roboto", sans-serif;
-    font-weight: normal;
 }
 
 h1,
