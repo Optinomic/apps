@@ -17,7 +17,7 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com
+website = http://www.optinomic.com/
 
 [template show_craving 6 12]
 
@@ -69,7 +69,40 @@ html, body {
     }
 }
 
+*:focus {
+    outline: none;
+}
 
+a:link {
+    text-decoration: none !important;
+    color: #212121 !important;
+}
+
+a:visited {
+    color: #212121 !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    /* for vertical scrollbars */
+    height: 6px;
+    /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
 
 h1,
 h2,
