@@ -52,6 +52,10 @@ website = http://www.optinomic.com/
 
 
 
+.craving {
+    color: red !important;
+    font-size: 48px;
+}
 
 
 [survey]
