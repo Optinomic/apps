@@ -21,7 +21,6 @@ website = http://www.optinomic.com
 
 [template show_craving]
 
-include(https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css)
 include(craving/templates/show_craving.html)
 
 
