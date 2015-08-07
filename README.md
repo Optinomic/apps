@@ -1,3 +1,7 @@
+
+
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
+
 # Optinomic Applications
 
 
@@ -6,8 +10,11 @@ You need to have [Optinomic](http://www.optinomic.com) to run the applications.
 
 
 
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 
+
+####Makefile
+```make``` use  http://www.gnu.org/software/m4/manual/
+ 
 
 ####Contact
 
