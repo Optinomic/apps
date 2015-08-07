@@ -1,6 +1,7 @@
 body {
     background-color: #FFFFFF;
-    background-repeat: repeat-x;
+    width: 100%;
+    height: 100% !important;
 }
 
 *:focus {
@@ -46,8 +47,6 @@ a:visited {
 }
 
 html {
-    width: 100%;
-    height: 100% !important;
     line-height: 1.5;
     font-size: 13px;
     font-family: "Roboto", sans-serif;
