@@ -26,13 +26,13 @@ include(craving/templates/show_craving.html)
 
 [javascript]
 
-include(lib/js/set/angular_material.html)
 include(craving/main.js)
 
 [css]
 
 include(lib/css/set/optinomic_material_bootstrap.css)
 include(craving/style.css)
+include(lib/js/set/angular_material.html)
 
 [survey]
 
