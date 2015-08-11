@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100% !important;
+    position: static !important;
     color: rgba(0, 0, 0, .87) !important;
     background: #FFFFFF;
     background-color: #FFFFFF !important;

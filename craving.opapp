@@ -17,13 +17,13 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com
+website = http://www.optinomic.com/
 
 [template show_craving 6 10]
 
 <div>
     <h1>Craving</h1>
-    <p class="flow-text">This is show_craving.html Yea</p>
+    <p class="flow-text">This is show_craving.html</p>
 </div>
 <div layout="row" layout-margin layout-fill layout-padding>
     <div flex>
@@ -67,7 +67,6 @@ website = http://www.optinomic.com
 
 body,
 html {
-    height: 100%;
     color: rgba(0, 0, 0, .87);
     background: #fff;
 }
@@ -10299,7 +10298,7 @@ md-tooltip.md-show {
  
 html,
 body {
-    height: 100% !important;
+    position: static !important;
     color: rgba(0, 0, 0, .87) !important;
     background: #FFFFFF;
     background-color: #FFFFFF !important;
