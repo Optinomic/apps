@@ -1,10 +1,8 @@
 html,
 body {
-    height: 100% !important;
     color: rgba(0, 0, 0, .87) !important;
     background: #FFFFFF;
     background-color: #FFFFFF !important;
-    position: relative !important;
     line-height: 1.5 !important;
     font-size: 13px !important;
     font-family: "Roboto", sans-serif !important;
