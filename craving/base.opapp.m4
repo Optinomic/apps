@@ -17,9 +17,9 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
+website = http://www.optinomic.com
 
-[template show_craving 6 12]
+[template show_craving 6 10]
 
 include(craving/templates/show_craving.html)
 
