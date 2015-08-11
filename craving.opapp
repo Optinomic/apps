@@ -73,6 +73,10 @@ html {
     position: relative
 }
 
+body {
+    margin: 0;
+    padding: 0
+}
 
 [tabindex='-1']:focus {
     outline: 0
@@ -238,14 +242,6 @@ input[type=search]::-webkit-search-decoration {
     .md-padding {
         padding: 16px
     }
-}
-
-body,
-html {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased
 }
 
 h1,
