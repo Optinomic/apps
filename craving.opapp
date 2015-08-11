@@ -17,7 +17,7 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com
+website = http://www.optinomic.com/
 
 [template show_craving 6 12]
 
@@ -64,19 +64,6 @@ website = http://www.optinomic.com
  * @license MIT
  * v0.10.0
  */
-
-body,
-html {
-    height: 100%;
-    color: rgba(0, 0, 0, .87);
-    background: #fff;
-    position: relative
-}
-
-body {
-    margin: 0;
-    padding: 0
-}
 
 [tabindex='-1']:focus {
     outline: 0
