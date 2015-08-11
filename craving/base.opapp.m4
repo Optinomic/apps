@@ -26,6 +26,7 @@ include(lib/js/set/angular_material.html)
 
 [javascript]
 
+include(lib/js/angular/angular_main_module.js)
 include(craving/main.js)
 
 [css]

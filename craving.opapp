@@ -23,6 +23,7 @@ website = http://www.optinomic.com
 <div>
     <h1>Craving</h1>
     <p class="flow-text">This is show_craving.html</p>
+    <md-button class="md-primary">Primary (ink)</md-button>
 </div>
 <div layout="row" layout-margin layout-fill layout-padding>
     <div flex>
@@ -52,6 +53,40 @@ website = http://www.optinomic.com
 
 
 [javascript]
+
+'use strict';
+
+/**
+ * @name optinomic - App
+ *
+ * Main module of the application.
+ */
+angular
+    .module('optinomicApp', [
+        'ngAnimate',
+        'ngAria',
+        'ngRoute',
+        'ngMaterial'
+    ])
+    .config(function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controller: 'AppCtrl'
+            })
+            .when('/about', {
+                controller: 'AppCtrl'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
+    })
+    .controller('AppCtrl', function($scope) {
+        $scope.awesomeThings = [
+            'HTML5 Boilerplate',
+            'AngularJS',
+            'Karma'
+        ];
+    });
 
 (function() {
 
