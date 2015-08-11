@@ -20,8 +20,8 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com
 
 [template show_craving 6 10]
-
 include(craving/templates/show_craving.html)
+include(lib/js/set/angular_material.html)
 
 
 [javascript]
@@ -32,7 +32,6 @@ include(craving/main.js)
 
 include(lib/css/set/optinomic_material_bootstrap.css)
 include(craving/style.css)
-include(lib/js/set/angular_material.html)
 
 [survey]
 
