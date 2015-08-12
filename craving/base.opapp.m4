@@ -3,7 +3,7 @@
 id = com.optinomic.apps.craving
 name = Craving-Tracking
 short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
-version = 1.0
+version = include(VERSION)
 
 [description]
 
@@ -20,19 +20,19 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 [template show_craving 6 3]
-include(craving/templates/show_craving.html)
-include(lib/js/set/angular_material.html)
+include(templates/show_craving.html)
+include(../lib/js/set/angular_material.html)
 
 
 [javascript]
 
-include(lib/js/angular/angular_app_init.js)
-include(craving/main.js)
+include(../lib/js/angular/angular_app_init.js)
+include(main.js)
 
 [css]
 
-include(lib/css/set/optinomic_material_bootstrap.css)
-include(craving/style.css)
+include(../lib/css/set/optinomic_material_bootstrap.css)
+include(style.css)
 
 [survey]
 
@@ -62,13 +62,13 @@ survey = my_craving
 
 [email new_event html]
 
-include(craving/emails/new_event.html)
+include(emails/new_event.html)
 
 [email overdue html]
 
-include(craving/emails/overdue.html)
+include(emails/overdue.html)
 
 
 [calculation another_calculation javascript]
 
-include(craving/calculations/another_calculation.js)
+include(calculations/another_calculation.js)

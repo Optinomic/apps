@@ -3,7 +3,7 @@
 id = com.optinomic.apps.example
 name = Example with Makefile
 short_description = An example app
-version = 1.0
+version = include(VERSION)
 
 [description]
 
@@ -21,15 +21,15 @@ website = http://www.optinomic.com
 
 [template show_token]
 
-include(example/templates/show_token.html)
+include(templates/show_token.html)
 
 [javascript]
 
-include(example/main.js)
+include(main.js)
 
 [css]
 
-include(example/style.css)
+include(style.css)
 
 [survey]
 
@@ -57,7 +57,7 @@ base_url = http://localhost:3002
 
 [survey_markup my_ng_survey]
 
-include(example/survey_markups/my_ng_survey.html)
+include(survey_markups/my_ng_survey.html)
 
 [event]
 
@@ -70,16 +70,16 @@ survey = my_survey
 
 [email new_event plain]
 
-include(example/emails/new_event.plain)
+include(emails/new_event.plain)
 
 [email overdue html]
 
-include(example/emails/overdue.html)
+include(emails/overdue.html)
 
 [calculation my_calculation lua]
 
-include(example/calculations/my_calculation.lua)
+include(calculations/my_calculation.lua)
 
 [calculation another_calculation javascript]
 
-include(example/calculations/another_calculation.js)
+include(calculations/another_calculation.js)

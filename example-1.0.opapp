@@ -5,6 +5,7 @@ name = Example with Makefile
 short_description = An example app
 version = 1.0
 
+
 [description]
 
 Just a silly module doing nothing. This is just an example - to show how Optinomic-Apps can be built.
