@@ -13,7 +13,6 @@ app.controller('AppCtrl', function($scope, $routeParams, $location) {
     console.log('$routeParams, ', $routeParams);
 
 
-    var pid = $location.search().patient_id;
-    console.log('$location, ', $location.search(), pid);
+    console.log('$location, ', $location, $location.search());
 
 });
