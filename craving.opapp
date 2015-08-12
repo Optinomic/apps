@@ -17,7 +17,7 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
+website = http://www.optinomic.com
 
 [template show_craving 6 10]
 <div ng-app="optinomicApp" ng-controller="AppCtrl">
@@ -63,22 +63,35 @@ website = http://www.optinomic.com/
  *
  * Main module of the application.
  */
-angular.module('optinomicApp', [
-    'ngAnimate',
-    'ngAria',
-    'ngRoute',
-    'ngMaterial'
-]);
+app = angular
+    .module('optinomicApp', [
+        'ngAnimate',
+        'ngAria',
+        'ngRoute',
+        'ngMaterial'
+    ])
+    .config(function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controllerAs: 'ctrl',
+                controller: 'AppCtrl'
+            })
 
+        .otherwise({
+            redirectTo: '/'
+        });
+    });
 
-angular.controller('AppCtrl', function($scope) {
-    $scope.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-    ];
+/**
+ * @name optinomic - App
+ *
+ * Main module of the application.
+ */
+app.controller('AppCtrl', function() {
+    this.foo = 'Angular';
 
-    console.log('Hello ANGULAR!', $scope.awesomeThings);
+    console.log('Welcome, ', this.foo);
+
 });
 
 
