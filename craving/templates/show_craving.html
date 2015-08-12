@@ -1,17 +1,17 @@
 <md-content layout-padding ng-app="optinomicApp" ng-controller="AppCtrl">
     <div>
-        <h2 class="md-display-1">Headline</h2>
-        <p class="flow-text">Some Text</p>
+        <h2 class="md-display-1">{{app.title}}</h2>
+        <p class="flow-text">{{app.subtitle}}</p>
     </div>
     <div layout="row">
         <div flex>
-            <h1 class="md-display-3">Headline</h1>
-            <h3 class="md-headline">Headline</h3>
+            <h3 class="md-headline">Smaller Subtitle</h3>
+            <p class="md-caption">Caption</p>
         </div>
         <div flex>
             <p class="md-body-2">Body copy with
                 <mark>medium</mark> weight.</p>
-            <md-button>Button</md-button>
+            <md-button class="md-raised md-primary">Button</md-button>
             <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
             <span class="md-caption">Caption</span>
             <button type="button" class="btn btn-primary">Bootstrap Primary</button>
