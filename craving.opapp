@@ -17,31 +17,40 @@ github_user = ottigerb
 email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
+website = http://www.optinomic.com
 
 [template show_craving 6 10]
 <div ng-app="optinomicApp" ng-controller="AppCtrl">
-    <div>
-        <h1>Craving</h1>
-        <p class="flow-text">This is show_craving.html</p>
-        <md-button class="md-primary">Primary (ink)</md-button>
-    </div>
-    <div layout="row" layout-margin layout-fill layout-padding>
-        <div flex>
-            <h1 class="md-display-3">Headline</h1>
-            <h2 class="md-display-1">Headline</h2>
-            <h3 class="md-headline">Headline</h3>
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <h3>
+        	<span>My App Title</span>
+      		</h3>
         </div>
-        <div flex>
-            <p class="md-body-2">Body copy with
-                <mark>medium</mark> weight.</p>
-            <md-button>Button</md-button>
-            <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
-            <span class="md-caption">Caption</span>
-            <button type="button" class="btn btn-primary">Bootstrap Primary</button>
+    </md-toolbar>
+    <md-content flex>
+        <div>
+            <h1>Craving</h1>
+            <p class="flow-text">This is show_craving.html</p>
+            <md-button class="md-primary">Primary (ink)</md-button>
         </div>
-    </div>
-    <p class="craving">local style loded</p>
+        <div layout="row">
+            <div flex>
+                <h1 class="md-display-3">Headline</h1>
+                <h2 class="md-display-1">Headline</h2>
+                <h3 class="md-headline">Headline</h3>
+            </div>
+            <div flex>
+                <p class="md-body-2">Body copy with
+                    <mark>medium</mark> weight.</p>
+                <md-button>Button</md-button>
+                <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
+                <span class="md-caption">Caption</span>
+                <button type="button" class="btn btn-primary">Bootstrap Primary</button>
+            </div>
+        </div>
+        <p class="craving">local style loded</p>
+    </md-content>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
@@ -83,9 +92,9 @@ var app = angular
     });
 
 /**
- * @name optinomic - App
- *
- * Main module of the application.
+ * @name Optinomic - AppCtrl
+ * --------------------------------------
+ * Main ctl of the Optinomic-Application.
  */
 app.controller('AppCtrl', function() {
     this.foo = 'Angular';
