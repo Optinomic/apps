@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService) {
+app.controller('AppCtrl', function($scope) {
 
     // -----------------------------------
     // Init
@@ -41,9 +41,9 @@ app.controller('AppCtrl', function($scope, dataService) {
     //$scope.loadMainData();
 
 
-    dataService.getSurveyResponses('$scope.app.id').success(function(data) {
-        console.log('(DATA): getMainAppData:', data);
-    });
+    //dataService.getSurveyResponses('$scope.app.id').success(function(data) {
+    //    console.log('(DATA): getMainAppData:', data);
+    //});
 
 
 });

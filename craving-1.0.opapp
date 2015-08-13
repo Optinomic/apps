@@ -111,7 +111,7 @@ angular.module('optinomicDataModule', [
     'ngMaterial'
 ]);
 
-angular.module('optinomicDataModule').config(function($locationProvider, $routeProvider) {
+angular.module('optinomicDataModule').config(function($routeProvider) {
     $routeProvider
         .when('/', {
             controllerAs: 'ctrl',
@@ -249,7 +249,7 @@ angular.module('optinomicDataModule')
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService) {
+app.controller('AppCtrl', function($scope) {
 
     // -----------------------------------
     // Init
@@ -287,9 +287,9 @@ app.controller('AppCtrl', function($scope, dataService) {
     //$scope.loadMainData();
 
 
-    dataService.getSurveyResponses('$scope.app.id').success(function(data) {
-        console.log('(DATA): getMainAppData:', data);
-    });
+    //dataService.getSurveyResponses('$scope.app.id').success(function(data) {
+    //    console.log('(DATA): getMainAppData:', data);
+    //});
 
 
 });
