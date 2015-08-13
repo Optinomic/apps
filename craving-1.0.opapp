@@ -242,6 +242,10 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.getAppCalculations = function(app_identifier, calculation_identifier) {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + app_identifier + "/" + calculation_identifier, {});
+        };
+
         // -------------------------------------------------------------------------
         // Helper - Functions
         // -------------------------------------------------------------------------
@@ -292,19 +296,19 @@ angular.module('optinomicDataModule')
 
             // Init
             var deferred = $q.defer();
-            var return_data = {};
             var api = '';
-
+            var return_data = {};
+            return_data.identifier = app_identifier;
 
             // ------------------------------------------------
-            // Action 1:  Patients
+            // Action 1:  Survey Responses
             // ------------------------------------------------
 
             api = dataService.getSurveyResponses(app_identifier);
             var aSurveyResponses = dataService.getData(api);
 
             aSurveyResponses.then(function(data) {
-                var survey_responses = data;
+                var survey_responses = data.survey_responses;
                 return_data.survey_responses = survey_responses;
 
                 // Deferred when done.
@@ -313,7 +317,6 @@ angular.module('optinomicDataModule')
                     console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
-
 
             }, function(error) {
                 // Error
@@ -370,16 +373,21 @@ app.controller('AppCtrl', function($scope, dataService) {
 
             console.log('(DATA): getMainAppData:', data);
 
+            //Run Functions
+            $scope.loadResults();
+
             $scope.init = true;
         });
     };
     $scope.loadMainData();
 
 
-    //dataService.getSurveyResponses('$scope.app.id').success(function(data) {
-    //    console.log('(DATA): getMainAppData:', data);
-    //});
+    $scope.loadResults = function() {
 
+        dataService.getAppCalculations('$scope.app.id', 'another_calculation').success(function(data) {
+            console.log('(DATA): getAppCalculations:', data);
+        });
+    };
 
 });
 

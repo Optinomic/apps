@@ -36,15 +36,20 @@ app.controller('AppCtrl', function($scope, dataService) {
 
             console.log('(DATA): getMainAppData:', data);
 
+            //Run Functions
+            $scope.loadResults();
+
             $scope.init = true;
         });
     };
     $scope.loadMainData();
 
 
-    //dataService.getSurveyResponses('$scope.app.id').success(function(data) {
-    //    console.log('(DATA): getMainAppData:', data);
-    //});
+    $scope.loadResults = function() {
 
+        dataService.getAppCalculations('$scope.app.id', 'another_calculation').success(function(data) {
+            console.log('(DATA): getAppCalculations:', data);
+        });
+    };
 
 });
