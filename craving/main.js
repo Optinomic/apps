@@ -12,7 +12,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.app = {
         'id': 'com.optinomic.apps.craving',
-        'pid': dataService.getPatientID(),
+        'pid': parseInt(dataService.getPatientID()),
         'token': dataService.getToken(),
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
@@ -27,20 +27,20 @@ app.controller('AppCtrl', function($scope, dataService) {
     // Functions
     // -----------------------------------
 
-    //$scope.loadMainData = function() {
-    //    // -----------------------------------
-    //    // Get Data 
-    //    // -----------------------------------
-    //    var dataPromiseMain = dataService.getMainAppData($scope.app.id);
-    //    dataPromiseMain.then(function(data) {
+    $scope.loadMainData = function() {
+        // -----------------------------------
+        // Get Data 
+        // -----------------------------------
+        var dataPromiseMain = dataService.getMainAppData($scope.app.id);
+        dataPromiseMain.then(function(data) {
 
-    //        console.log('(DATA): getMainAppData:', data);
+            console.log('(DATA): getMainAppData:', data);
 
 
-    //        $scope.init = true;
-    //    });
-    //};
-    //$scope.loadMainData();
+            $scope.init = true;
+        });
+    };
+    $scope.loadMainData();
 
 
     //dataService.getSurveyResponses('$scope.app.id').success(function(data) {

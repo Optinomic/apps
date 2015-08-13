@@ -21,14 +21,14 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 [template show_craving 6 4]
-<div ng-app="optinomicApp" ng-controller="AppCtrl as ctrl" ng-cloak>
+<div ng-app="optinomicApp" ng-controller="AppCtrl" ng-cloak>
     <div>
-        <h1 class="md-display-1">{{ctrl.app.title}}</h1>
-        <p class="flow-text">{{ctrl.app.subtitle}}</p>
+        <h1 class="md-display-1">{{app.title}}</h1>
+        <p class="flow-text">{{app.subtitle}}</p>
     </div>
     <div layout="row">
         <div flex>
-            <h3 class="md-headline">Smaller Subtitle for {{ctrl.app.title}}</h3>
+            <h3 class="md-headline">Subtitle for {{app.title}}</h3>
             <p class="md-caption">Caption:</p>
             <md-button class="md-raised md-primary">Button</md-button>
         </div>
@@ -329,7 +329,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.app = {
         'id': 'com.optinomic.apps.craving',
-        'pid': dataService.getPatientID(),
+        'pid': parseInt(dataService.getPatientID()),
         'token': dataService.getToken(),
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
@@ -344,20 +344,20 @@ app.controller('AppCtrl', function($scope, dataService) {
     // Functions
     // -----------------------------------
 
-    //$scope.loadMainData = function() {
-    //    // -----------------------------------
-    //    // Get Data 
-    //    // -----------------------------------
-    //    var dataPromiseMain = dataService.getMainAppData($scope.app.id);
-    //    dataPromiseMain.then(function(data) {
+    $scope.loadMainData = function() {
+        // -----------------------------------
+        // Get Data 
+        // -----------------------------------
+        var dataPromiseMain = dataService.getMainAppData($scope.app.id);
+        dataPromiseMain.then(function(data) {
 
-    //        console.log('(DATA): getMainAppData:', data);
+            console.log('(DATA): getMainAppData:', data);
 
 
-    //        $scope.init = true;
-    //    });
-    //};
-    //$scope.loadMainData();
+            $scope.init = true;
+        });
+    };
+    $scope.loadMainData();
 
 
     //dataService.getSurveyResponses('$scope.app.id').success(function(data) {
