@@ -37,7 +37,7 @@ app.controller('AppCtrl', function($scope, dataService) {
             console.log('(DATA): getMainAppData:', data);
 
             //Run Functions
-            $scope.loadResults();
+            //$scope.loadResults();
 
             $scope.init = true;
         });

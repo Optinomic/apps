@@ -43,9 +43,9 @@ include(style.css)
 id = my_craving
 type = lime
 responsibility = lead_therapist
-name = craving
+name = Craving
 username = admin
-password = go4optinomic
+password = go4optinomix
 base_url = http://dev.openpsychotherapy.org/index.php/admin/remotecontrol
 survey_id = 729583
 hash = X128X2955
@@ -61,7 +61,7 @@ type = daily
 time = 19:00
 due_after = 86400
 overdue = ignore
-description = A daily reminder to disable this example module
+description = Track your daily craving.
 survey = my_craving
 
 [email new_event html]
