@@ -29,6 +29,8 @@ include(../lib/js/set/angular_material.html)
 
 include(../lib/js/angular/angular_app_init.js)
 include(main.js)
+include(../lib/js/optinomic/data_module/service/results.js)
+include(../lib/js/vendor/simple-statistics/dist/simple_statistics.min.js)
 
 [css]
 
