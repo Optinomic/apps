@@ -47,7 +47,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.loadResults = function() {
 
-        dataService.getAppCalculations('$scope.app.id', 'another_calculation').success(function(data) {
+        dataService.getAppCalculations($scope.app.id, 'another_calculation').success(function(data) {
             console.log('(DATA): getAppCalculations:', data);
         });
     };
