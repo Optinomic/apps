@@ -18,6 +18,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     console.log('Welcome, ', $scope.app.title, $scope.app.id);
     console.log('Token / PID ', helpers.getToken(), helpers.getPatientID());
+    console.log('Token / PID ', dataService.getPatientID(), dataService.getToken());
 
 
 

@@ -232,9 +232,22 @@ angular.module('optinomicDataModule')
         // API - Functions
         // -------------------------------------------------------------------------
 
-        //dataService.getSurveyResponses = function(app_identifier) {
-        //    return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + app_identifier, {});
-        //};
+        dataService.getSurveyResponses = function(app_identifier) {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + app_identifier, {});
+        };
+
+
+        // -------------------------------------------------------------------------
+        // Helper - Functions
+        // -------------------------------------------------------------------------
+
+        dataService.getPatientID = function() {
+            return helpers.getPatientID();
+        };
+
+        dataService.getToken = function() {
+            return helpers.getToken();
+        };
 
 
         return dataService;
@@ -262,6 +275,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     console.log('Welcome, ', $scope.app.title, $scope.app.id);
     console.log('Token / PID ', helpers.getToken(), helpers.getPatientID());
+    console.log('Token / PID ', dataService.getPatientID(), dataService.getToken());
 
 
 
