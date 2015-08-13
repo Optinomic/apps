@@ -264,6 +264,21 @@ angular.module('optinomicDataModule')
             return allPromised;
         };
 
+        dataService.getData = function(api_call) {
+            var deferred = $q.defer();
+
+            api_call.success(function(data) {
+                deferred.resolve(data);
+                //console.log('===> Success - getData   ', data, deferred);
+            });
+            api_call.error(function(data) {
+                deferred.reject(data);
+                console.log('===> ERROR! getData   ', data, deferred);
+            });
+            return deferred.promise;
+        };
+
+
 
         // -------------------------------------------------------------------------
         // Main - Functions
@@ -284,8 +299,9 @@ angular.module('optinomicDataModule')
             // Action 1:  Patients
             // ------------------------------------------------
 
-            api = patientsService.getPatients();
-            var aSurveyResponses = getDataService.getSurveyResponses('com.optinomic.apps.craving');
+            api = dataService.getSurveyResponses(app_identifier);
+            var aSurveyResponses = dataService.getData(api);
+
             aSurveyResponses.then(function(data) {
                 var survey_responses = data;
                 return_data.survey_responses = survey_responses;
