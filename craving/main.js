@@ -10,9 +10,11 @@ app.controller('AppCtrl', function($scope, $routeParams, $location, simpleStatis
     };
 
     console.log('Welcome, ', this.app.title);
+
+
     console.log('$routeParams, ', $routeParams);
-
-
     console.log('$location, ', $location, $location.search());
+
+    console.log('Token = ', helpers.getToken());
 
 });

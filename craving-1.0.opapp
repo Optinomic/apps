@@ -20,7 +20,7 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template show_craving 6 3]
+[template show_craving 6 4]
 <div ng-app="optinomicApp" ng-controller="AppCtrl as ctrl" ng-cloak>
     <div>
         <h1 class="md-display-1">{{ctrl.app.title}}</h1>
@@ -119,27 +119,22 @@ app.controller('AppCtrl', function($scope, $routeParams, $location, simpleStatis
     };
 
     console.log('Welcome, ', this.app.title);
+
+
     console.log('$routeParams, ', $routeParams);
-
-
     console.log('$location, ', $location, $location.search());
+
+    console.log('Token = ', helpers.getToken());
 
 });
 
 'use strict';
 
 /**
- * @ngdoc service
- * @name optinomicAppLibraryApp.simpleStatistics
- * @description
- * # simpleStatistics (ss) :: A simple, literate statistics system.
- * Service in the optinomicAppLibraryApp taken from http://www.macwright.org/simple-statistics/
+ * Service for getting Data from API
  */
 angular.module('optinomicDataModule')
     .service('resultsService', function() {
-        // AngularJS will instantiate a singleton by calling "new" on this function
-
-
 
 
     });
