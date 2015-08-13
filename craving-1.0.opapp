@@ -82,7 +82,6 @@ var app = angular
         });
     })
     .run(function($rootScope) {
-
         $rootScope.safeApply = function(fn) {
             var phase = $rootScope.$$phase;
             if (phase === '$apply' || phase === '$digest') {
@@ -120,6 +119,12 @@ angular.module('optinomicDataModule').config(function($routeProvider) {
         .otherwise({
             redirectTo: '/'
         });
+});
+
+angular.module('optinomicDataModule').factory('config', function() {
+    return {
+        apiUrl: "http://10.211.55.10:3001/"
+    };
 });
 
 angular.module('optinomicDataModule').factory('apiService', function($http, config) {
@@ -223,7 +228,7 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
  * Service for getting Data from API
  */
 angular.module('optinomicDataModule')
-    .service('dataService', function() {
+    .service('dataService', function($q, apiService) {
 
 
         var dataService = {};
@@ -249,6 +254,61 @@ angular.module('optinomicDataModule')
             return helpers.getToken();
         };
 
+        dataService.checkSuccess = function(max, count) {
+
+            var allPromised = false;
+            if (max === count) {
+                allPromised = true;
+            }
+            //console.log('checkSuccess:', allPromised, max, count);
+            return allPromised;
+        };
+
+
+        // -------------------------------------------------------------------------
+        // Main - Functions
+        // -------------------------------------------------------------------------
+
+        dataService.getMainAppData = function(app_identifier) {
+
+            var deferred = $q.defer();
+
+            // Actions
+            var actions = 1;
+            var actions_count = 0;
+
+            var return_data = {};
+
+
+            // ------------------------------------------------
+            // Action 1:  Patients
+            // ------------------------------------------------
+
+            api = patientsService.getPatients();
+            var aSurveyResponses = getDataService.getSurveyResponses('com.optinomic.apps.craving');
+            aSurveyResponses.then(function(data) {
+                var survey_responses = data;
+                return_data.survey_responses = survey_responses;
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    console.log('==> deferred', return_data);
+                    deferred.resolve(return_data);
+                };
+
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+            return deferred.promise;
+        };
+
+
 
         return dataService;
 
@@ -269,13 +329,14 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.app = {
         'id': 'com.optinomic.apps.craving',
+        'pid': dataService.getPatientID(),
+        'token': dataService.getToken(),
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     };
 
-    console.log('Welcome, ', $scope.app.title, $scope.app.id);
-    console.log('Token / PID ', helpers.getToken(), helpers.getPatientID());
-    console.log('Token / PID ', dataService.getPatientID(), dataService.getToken());
+    console.log('Welcome, ', $scope.app.title, $scope.app);
+    console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
 

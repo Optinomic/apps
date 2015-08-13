@@ -12,13 +12,14 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.app = {
         'id': 'com.optinomic.apps.craving',
+        'pid': dataService.getPatientID(),
+        'token': dataService.getToken(),
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     };
 
-    console.log('Welcome, ', $scope.app.title, $scope.app.id);
-    console.log('Token / PID ', helpers.getToken(), helpers.getPatientID());
-    console.log('Token / PID ', dataService.getPatientID(), dataService.getToken());
+    console.log('Welcome, ', $scope.app.title, $scope.app);
+    console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
 
