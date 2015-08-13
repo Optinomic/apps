@@ -252,7 +252,7 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
  * Service for getting Data from API
  */
 angular.module('optinomicDataModule')
-    .service('dataService', function() {
+    .service('dataService', function($q, apiService) {
 
 
         var dataService = {};
