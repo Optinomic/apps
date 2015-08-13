@@ -119,13 +119,13 @@ app.controller('AppCtrl', function($scope, dataService) {
     // -----------------------------------
     $scope.init = false;
 
-    this.app = {
+    $scope.app = {
         'id': 'com.optinomic.apps.craving',
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     };
 
-    console.log('Welcome, ', this.app.title);
+    console.log('Welcome, ', $scope.app.title, $scope.app.id);
     console.log('Token / PID ', helpers.getToken(), helpers.getPatientID());
 
 
@@ -138,7 +138,7 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
-        var dataPromiseMain = dataService.getMainAppData(this.app.id);
+        var dataPromiseMain = dataService.getMainAppData($scope.app.id);
         dataPromiseMain.then(function(data) {
 
             console.log('(DATA): getMainAppData:', data);
