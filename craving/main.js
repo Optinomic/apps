@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $routeParams, $location, simpleStatistics) {
+app.controller('AppCtrl', function($scope, $routeParams, $location, resultsService) {
     this.app = {
         'title': 'Craving-App',
         'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
