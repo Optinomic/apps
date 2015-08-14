@@ -23,9 +23,9 @@ website = http://www.optinomic.com/
 [template show_craving 6 4]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init" ng-include="'lib/html/optinomic/templates/loading.html'"></div>
+        <div ng-if="!init" ng-include="'../../lib/html/optinomic/templates/loading.html'"></div>
         <div ng-if="init">
-            <div ng-if="!haveData" ng-include="'lib/html/optinomic/templates/no_data.html'"></div>
+            <div ng-if="!haveData" ng-include="'../../lib/html/optinomic/templates/no_data.html'"></div>
             <div ng-if="haveData">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
