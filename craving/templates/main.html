@@ -4,29 +4,19 @@
             include(../lib/html/optinomic/templates/loading.html)
         </div>
         <div ng-if="init">
-            <div ng-if="d.haveData === true">
-                <div>
-                    <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
-                    <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
-                </div>
-                <div layout="row">
-                    <div flex>
-                        <h3 class="md-headline">Subtitle</h3>
-                        <p class="md-caption">Caption:</p>
-                        <md-button ng-click="d.haveData = !d.haveData" class="md-raised md-primary no-print">Data {{haveData}}</md-button>
-                    </div>
-                    <div flex>
-                        <p class="md-body-2">Body copy with
-                            <mark>medium</mark> weight.</p>
-                        <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
-                        <span class="md-caption">Caption</span>
-                        <p class="craving">Local style loded</p>
-                    </div>
-                </div>
+            <div ng-if="d.haveData">
+                <!-- 
+
+					Attention:
+					Create a copy of 'main' for every 'template' an change the following 'partials' include:
+
+                -->
+                include(templates/partials/data.html)
             </div>
-            <div ng-if="d.haveData === false">
+            <div ng-if="!d.haveData">
                 include(../lib/html/optinomic/templates/no_data.html)
             </div>
         </div>
     </div>
 </div>
+include(../lib/js/set/angular_material.html)

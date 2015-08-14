@@ -21,7 +21,7 @@ website = http://www.optinomic.com/
 
 [template show_craving 6 4]
 include(templates/main.html)
-include(../lib/js/set/angular_material.html)
+
 
 [dependencies]
 
