@@ -20,6 +20,7 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
+        $scope.haveData = false;
         var dataPromiseMain = dataService.getMainAppData($scope.appID);
         dataPromiseMain.then(function(data) {
 
@@ -27,6 +28,11 @@ app.controller('AppCtrl', function($scope, dataService) {
 
             // Save Data
             $scope.d.dataMain = data;
+
+            // Check if we have survey_responses | data.
+            if (data.survey_responses.length !== 0) {
+                $scope.haveData = true;
+            }
 
             // Run Functions
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);

@@ -28,7 +28,7 @@ website = http://www.optinomic.com/
 
         </div>
         <div ng-if="init">
-            <div ng-if="d.dataMain.survey_responses.length != 0">
+            <div ng-if="haveData">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
                     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
@@ -48,8 +48,7 @@ website = http://www.optinomic.com/
                     </div>
                 </div>
             </div>
-            <div ng-if="!d.dataMain.survey_responses.length = 0">
-                <p>no data</p>
+            <div ng-if="!haveData">
                 <div ng-if="!haveData">
     <div>
         <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data {{haveData}}</h3>
@@ -585,6 +584,7 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
+        $scope.haveData = false;
         var dataPromiseMain = dataService.getMainAppData($scope.appID);
         dataPromiseMain.then(function(data) {
 
@@ -592,6 +592,11 @@ app.controller('AppCtrl', function($scope, dataService) {
 
             // Save Data
             $scope.d.dataMain = data;
+
+            // Check if we have survey_responses | data.
+            if (data.survey_responses.length !== 0) {
+                $scope.haveData = true;
+            }
 
             // Run Functions
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
