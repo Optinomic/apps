@@ -77,7 +77,7 @@ website = http://www.optinomic.com/
 
         </div>
         <div ng-if="init">
-            <div ng-if="d.haveData">
+            <div>
                 <!-- 
 
 					Attention:
@@ -91,18 +91,7 @@ website = http://www.optinomic.com/
 <div ag-grid="d.gridOptions" class="ag-fresh" style="height: 100%;"></div>
 
             </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">Sorry</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-    </div>
-    <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
-    </md-content>
-</div>
 
-            </div>
         </div>
     </div>
 </div>
