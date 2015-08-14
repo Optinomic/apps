@@ -1189,31 +1189,30 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     var columnDefs = [{
-    	headerTooltip: "Mein Tooltip",
-        headerName: "Marke",
+        headerTooltip: "PID",
+        headerName: "Patient-ID",
+        editable: false,
+        field: "PID"
+    }, {
+        headerTooltip: "FID",
+        headerName: "Fall-ID",
+        editable: false,
+        field: "FID"
+    }, {
+        headerName: "Datum",
         editable: true,
-        field: "make"
+        field: "datestamp"
     }, {
-        headerName: "Modell",
-        field: "model"
+        headerTooltip: "Suchtdruck_1",
+        headerName: "Suchtdruck",
+        editable: false,
+        field: "Suchtdruck_1"
     }, {
-        headerName: "Preis",
-        field: "price"
+        headerName: "Bemerkungen",
+        editable: true,
+        field: "diary"
     }];
 
-    var rowData = [{
-        make: "Toyota",
-        model: "Celica",
-        price: 35000
-    }, {
-        make: "Ford",
-        model: "Mondeo",
-        price: 32000
-    }, {
-        make: "Porsche",
-        model: "Boxter",
-        price: 72000
-    }];
 
     //$scope.d.gridOptions = {
     //    columnDefs: columnDefs,
@@ -1222,7 +1221,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     //};
 
     $scope.d.gridOptions = {
-    	columnDefs: null,
+        columnDefs: columnDefs,
         rowData: $scope.d.craving,
         dontUseScrolls: false,
         enableSorting: true
