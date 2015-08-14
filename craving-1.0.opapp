@@ -51,7 +51,7 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData === false">
                 <div ng-if="!d.haveData">
     <div>
-        <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data {{d.haveData}}</h3>
+        <h3 class="md-headline"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> Data {{d.haveData}}</h3>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-button ng-click="d.haveData = !d.haveData" class="md-raised md-primary no-print">Button {{d.haveData}}</md-button>
