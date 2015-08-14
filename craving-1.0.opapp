@@ -30,7 +30,7 @@ website = http://www.optinomic.com/
         <div ng-if="init">
             <div ng-if="!haveData">
     <div>
-        <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data</h3>
+        <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data {{haveData}}</h3>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-button ng-click="haveData = !haveData" ng-init="haveData=false" class="md-raised md-primary no-print">Get Data</md-button>
@@ -154,7 +154,6 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
         };
 
         var token = helpers.getToken();
-        console.log('apiService - Token = ', token);
         headers["X-API-Token"] = token;
 
         var reqConf = {
@@ -454,7 +453,6 @@ angular.module('optinomicDataModule')
                 // Deferred when done.
                 actions_count = actions_count + 1;
                 if (dataService.checkSuccess(actions, actions_count)) {
-                    console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
             }, function(error) {
@@ -483,7 +481,6 @@ angular.module('optinomicDataModule')
                 // Deferred when done.
                 actions_count = actions_count + 1;
                 if (dataService.checkSuccess(actions, actions_count)) {
-                    console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
             }, function(error) {
@@ -516,7 +513,6 @@ angular.module('optinomicDataModule')
                 // Deferred when done.
                 actions_count = actions_count + 1;
                 if (dataService.checkSuccess(actions, actions_count)) {
-                    console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
             }, function(error) {
@@ -538,7 +534,6 @@ angular.module('optinomicDataModule')
                 // Deferred when done.
                 actions_count = actions_count + 1;
                 if (dataService.checkSuccess(actions, actions_count)) {
-                    console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
             }, function(error) {
@@ -552,6 +547,7 @@ angular.module('optinomicDataModule')
 
             return deferred.promise;
         };
+
 
 
 
