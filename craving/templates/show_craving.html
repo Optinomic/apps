@@ -1,7 +1,5 @@
 <div ng-app="optinomicApp" ng-controller="AppCtrl" ng-cloak>
-    <div ng-if="init !== true">
-        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-    </div>
+    include(../lib/html/optinomic/templates/loading.html)
     <div ng-if="init">
         <div>
             <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
