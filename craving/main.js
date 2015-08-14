@@ -9,7 +9,7 @@ app.controller('AppCtrl', function($scope, dataService) {
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
-
+    $scope.d = dataService;
 
 
     // -----------------------------------
@@ -20,7 +20,7 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
-        $scope.haveData = false;
+        $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData($scope.appID);
         dataPromiseMain.then(function(data) {
 
@@ -31,7 +31,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
             // Check if we have survey_responses | data.
             if (data.survey_responses.length !== 0) {
-                $scope.haveData = true;
+                $scope.d.haveData = true;
                 console.log('(DATA): haveData:', data.survey_responses.length, $scope.haveData);
             }
 

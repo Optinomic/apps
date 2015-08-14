@@ -4,7 +4,7 @@
             include(../lib/html/optinomic/templates/loading.html)
         </div>
         <div ng-if="init">
-            <div ng-if="haveData">
+            <div ng-if="d.haveData === true">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
                     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="!haveData">
+            <div ng-if="d.haveData === false">
                 include(../lib/html/optinomic/templates/no_data.html)
             </div>
         </div>
