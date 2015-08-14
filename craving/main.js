@@ -9,10 +9,10 @@ app.controller('AppCtrl', function($scope, dataService) {
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
-    $scope.init = false;
+    $scope.init = false; //Is App initalised?
+    $scope.d = {}; //Where Data is stored.
 
     console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
-
 
 
     // -----------------------------------
