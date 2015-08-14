@@ -241,7 +241,6 @@ angular.module('optinomicDataModule')
             return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + app_identifier, {});
         };
 
-
         dataService.getAppCalculations = function(app_identifier, calculation_identifier) {
             return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + app_identifier + "/" + calculation_identifier, {});
         };
@@ -250,6 +249,11 @@ angular.module('optinomicDataModule')
         dataService.getConfig = function() {
             return apiService.get("/extra_config", {});
         };
+
+        dataService.getAllApps = function() {
+            return apiService.get("/modules", {});
+        };
+
 
 
         // -------------------------------------------------------------------------
@@ -405,7 +409,7 @@ angular.module('optinomicDataModule')
         dataService.getMainAppData = function(app_identifier) {
 
             // Actions
-            var actions = 2;
+            var actions = 3;
             var actions_count = 0;
 
             // Init
@@ -466,6 +470,33 @@ angular.module('optinomicDataModule')
                 deferred.reject(return_data);
                 console.log('-- Error:', error);
             });
+
+
+            // ------------------------------------------------
+            // Action 3:  Get current App Info
+            // ------------------------------------------------
+
+            api = dataService.getAllApps();
+            var aApps = dataService.getData(api);
+
+            aApps.then(function(data) {
+                return_data.apps = data;
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    console.log('==> deferred', return_data);
+                    deferred.resolve(return_data);
+                };
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+
 
             return deferred.promise;
         };
