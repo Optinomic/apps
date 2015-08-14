@@ -1,3 +1,5 @@
 include(lib/css/vendor/angular-material/0.10.0/angular-material.min.css)
+include(../lib/js/vendor/ag-grid/dist/angular-grid.css) 
+include(../lib/js/vendor/ag-grid/dist/theme-fresh.css) 
 include(lib/css/optinomic/basic.css)
 

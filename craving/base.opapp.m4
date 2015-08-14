@@ -23,6 +23,9 @@ website = http://www.optinomic.com/
 [template show_craving 6 4]
 include(templates/main.html)
 
+[template show_survey_data 6 4]
+include(templates/data.html)
+
 
 [dependencies]
 
