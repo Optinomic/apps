@@ -28,7 +28,7 @@ website = http://www.optinomic.com/
 
         </div>
         <div ng-if="init">
-            <div ng-if="d.dataMain.survey_responses">
+            <div ng-if="d.dataMain.survey_responses.length !== 0">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
                     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
@@ -48,7 +48,7 @@ website = http://www.optinomic.com/
                     </div>
                 </div>
             </div>
-            <div ng-if="!d.dataMain.survey_responses">
+            <div ng-if="!d.dataMain.survey_responses.length === 0">
                 <p>no data</p>
                 <div ng-if="!haveData">
     <div>
