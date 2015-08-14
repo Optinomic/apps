@@ -1,7 +1,7 @@
 <div ng-if="!haveData">
-    <div class="alert alert-info alert-dismissible" role="alert">
+    <div>
         <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data</h3>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
-    <md-button ng-click="haveData = true" class="md-raised md-primary no-print">Emulate Data</md-button>
+    <md-button ng-click="haveData = !haveData" ng-init="haveData=false" class="md-raised md-primary no-print">Get Data</md-button>
 </div>
