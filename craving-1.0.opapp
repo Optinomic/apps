@@ -246,6 +246,12 @@ angular.module('optinomicDataModule')
             return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + app_identifier + "/" + calculation_identifier, {});
         };
 
+
+        dataService.getConfig = function() {
+            return apiService.get("/extra_config", {});
+        };
+
+
         // -------------------------------------------------------------------------
         // Helper - Functions
         // -------------------------------------------------------------------------
@@ -283,6 +289,114 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.getClinicData = function(clinic_key) {
+
+            // This function is a 'clone' from 
+            // /client/app/modules/optinomic-module/service/clinics-service.js
+            // Update here and there!   
+
+            var data = {};
+
+
+            switch (clinic_key) {
+                case '1':
+                    {
+                        data = {
+
+                            firebaseRoot: 'https://optinomic.firebaseio.com/',
+
+                            customer: {
+                                id: 1,
+                                contact: {
+                                    name: 'Klinik Südhang',
+                                    slogan: 'Kompetenzzentrum für Mensch und Sucht',
+                                    address: 'Südhang 1, 3038 Kirchlindach',
+                                    phone: '+41 (0)31 828 14 14',
+                                    email: 'info@suedhang.ch',
+                                    logo: 'http://suedhang.ch/images/content/Logo_Suedhang_Retina.png',
+                                    www: 'http://suedhang.ch/de/'
+                                },
+                                admin: {
+                                    name: 'Katrin Schläfli',
+                                    phone: '+41 (0)31 828 14 15',
+                                    email: 'katrin.schlaefli@suedhang.ch'
+                                }
+                            },
+
+                            talksRooms: [{
+                                id: 0,
+                                name: 'GeneralInformation',
+                                icon: 'mdi-duck',
+                                journal: {
+                                    integrate_in_timeline: true
+                                }
+                            }, {
+                                id: 1,
+                                name: 'QuestionsAndAnswers',
+                                icon: 'mdi-help',
+                                journal: {
+                                    integrate_in_timeline: false
+                                }
+                            }]
+
+                        };
+                        break;
+                    }
+
+                default:
+                    {
+                        data = {
+
+                            firebaseRoot: 'https://optinomic.firebaseio.com/',
+
+                            customer: {
+                                id: 1,
+                                contact: {
+                                    name: 'Optinomic',
+                                    slogan: 'Testumgebung',
+                                    address: 'Haldenstr.7, 8942 Oberrieden',
+                                    phone: '+41 (0)44 508 26 76',
+                                    email: 'info@optinomic.com',
+                                    logo: 'http://www.optinomic.com/wp-content/uploads/2014/09/optinomic_logo_medium.png',
+                                    www: 'http://www.optinomic.com'
+                                },
+                                admin: {
+                                    name: 'Beat Ottiger',
+                                    phone: '+41(0)79 635 85 84',
+                                    email: 'beat@optinomic.com'
+                                }
+                            },
+
+                            talksRooms: [{
+                                id: 0,
+                                name: 'GeneralInformation',
+                                icon: 'mdi-duck',
+                                journal: {
+                                    integrate_in_timeline: true
+                                }
+                            }, {
+                                id: 1,
+                                name: 'QuestionsAndAnswers',
+                                icon: 'mdi-help',
+                                journal: {
+                                    integrate_in_timeline: false
+                                }
+                            }]
+
+                        };
+                    }
+            }
+
+
+            data.all = {
+                client_version: '20150717'
+            };
+
+            return data;
+        };
+
+
+
 
         // -------------------------------------------------------------------------
         // Main - Functions
@@ -291,7 +405,7 @@ angular.module('optinomicDataModule')
         dataService.getMainAppData = function(app_identifier) {
 
             // Actions
-            var actions = 1;
+            var actions = 2;
             var actions_count = 0;
 
             // Init
@@ -308,8 +422,7 @@ angular.module('optinomicDataModule')
             var aSurveyResponses = dataService.getData(api);
 
             aSurveyResponses.then(function(data) {
-                var survey_responses = data.survey_responses;
-                return_data.survey_responses = survey_responses;
+                return_data.survey_responses = data.survey_responses;
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
@@ -324,6 +437,29 @@ angular.module('optinomicDataModule')
                 console.log('-- Error:', error);
             });
 
+
+            // ------------------------------------------------
+            // Action 2:  Get Config
+            // ------------------------------------------------
+
+            api = dataService.getConfig();
+            var aConfig = dataService.getData(api);
+
+            aConfig.then(function(data) {
+                return_data.config = data;
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    console.log('==> deferred', return_data);
+                    deferred.resolve(return_data);
+                };
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
 
             return deferred.promise;
         };
