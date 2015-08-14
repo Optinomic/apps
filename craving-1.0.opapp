@@ -20,6 +20,93 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[template info 6 5]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="init">
+            <div ng-if="d.haveData">
+                <!-- 
+
+					Attention:
+					Create a copy of 'main' for every 'template' an change the following 'partials' include:
+
+                -->
+                <div>
+    <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    <p class="md-body-2">
+        {{d.dataMain.apps.current.short_description}}
+        <small class="text-muted">( {{d.dataMain.apps.current.version}} | {{d.dataMain.apps.current.identifier}} )</small>
+    </p>
+</div>
+<div layout="row">
+    <div flex>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <p class="md-caption text-muted">Version:</p>
+        <p class="md-body-2">{{d.dataMain.apps.current.version}}</p>
+        <p class="md-caption text-muted">Identifier (ID):</p>
+        <p class="md-body-2">{{d.dataMain.apps.current.identifier}}</p>
+        <p class="md-caption text-muted">Developer:</p>
+        <p class="md-body-2">
+            {{d.dataMain.apps.current.developer.first_name}} {{d.dataMain.apps.current.developer.last_name}}
+        </p>
+        <p class="md-caption text-muted">Dependencies (Count):</p>
+        <p class="md-body-2">{{d.dataMain.apps.current.dependencies.length}}</p>
+        <p class="md-caption text-muted">Surveys:</p>
+        <p class="md-body-2" ng-repeat="survey in d.dataMain.apps.current.surveys">
+            {{survey.name}}, {{survey.identifier}}
+        </p>
+        <p class="md-caption text-muted">Templates:</p>
+        <p class="md-body-2" ng-repeat="template in d.dataMain.apps.current.templates">
+            {{template.name}}
+        </p>
+    </div>
+    <div flex>
+        <h3 class="md-headline">Patient</h3>
+        <p class="md-caption text-muted">Name:</p>
+        <p class="md-body-2">
+            {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}
+        </p>
+        <h3 class="md-headline">Parameter</h3>
+        <p class="md-caption text-muted">PID:</p>
+        <p class="md-body-2">{{d.dataMain.params.PID}}</p>
+        <p class="md-caption text-muted">Token:</p>
+        <p class="md-body-2">{{d.dataMain.params.token}}</p>
+        <h3 class="md-headline">Data</h3>
+        <p class="md-caption text-muted">Survey Responses (Count):</p>
+        <p class="md-body-2">{{d.dataMain.survey_responses.length}}</p>
+        <p class="md-caption text-muted">Events (Count):</p>
+        <p class="md-body-2">{{d.dataMain.events.length}}</p>
+    </div>
+</div>
+
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">Data</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-button ng-click="d.haveData = !d.haveData" class="md-raised md-primary no-print">Button {{d.haveData}}</md-button>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/angular.moment/0.10.1/angular-moment.min.js"></script>
+
+
+
 [template show_craving 6 4]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">

@@ -19,6 +19,9 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[template info 6 5]
+include(templates/info.html)
+
 [template show_craving 6 4]
 include(templates/main.html)
 
