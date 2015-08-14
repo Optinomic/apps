@@ -3,13 +3,13 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService) {
+app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
-    $scope.d = dataService;
+    $scope.d = scopeDService;
 
 
     // -----------------------------------

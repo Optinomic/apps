@@ -37,7 +37,7 @@ website = http://www.optinomic.com/
                     <div flex>
                         <h3 class="md-headline">Subtitle</h3>
                         <p class="md-caption">Caption:</p>
-                        <md-button ng-click="haveData = !haveData" class="md-raised md-primary no-print">Button {{haveData}}</md-button>
+                        <md-button ng-click="d.haveData = !d.haveData" class="md-raised md-primary no-print">Data {{haveData}}</md-button>
                     </div>
                     <div flex>
                         <p class="md-body-2">Body copy with
@@ -242,6 +242,20 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
         isBusy: isBusy
     };
 });
+
+'use strict';
+
+/**
+ * Service for storing/sharing Data
+ */
+angular.module('optinomicDataModule')
+    .service('scopeDService', function() {
+
+        var scopeDService = {};
+
+        return scopeDService;
+
+    });
 
 'use strict';
 
@@ -568,13 +582,13 @@ angular.module('optinomicDataModule')
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService) {
+app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
-    $scope.d = dataService;
+    $scope.d = scopeDService;
 
 
     // -----------------------------------
