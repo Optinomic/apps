@@ -63,18 +63,7 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption">Task(s): {{d.dataMain.events.length}}</p>
-        <md-list>
-            <md-list-item class="md-2-line" ng-repeat="item in d.dataMain.events">
-                <md-button href="{{item.data.url}}" title="{{item.data.survey_name}}" target="_blank" ng-disabled="false" aria-label="{{item.data.survey_name}}" class="launch">
-                    DoIt
-                </md-button>
-                <div class="md-list-item-text">
-                    <h3>{{item.data.survey_name}}</h3>
-                    <p>{{item.data.module}}</p>
-                </div>
-            </md-list-item>
-        </md-list>
+        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
     </md-content>
 </div>
 
