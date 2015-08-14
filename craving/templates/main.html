@@ -1,9 +1,9 @@
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        include(../lib/html/optinomic/templates/loading.html)
+        <div ng-if="!init" ng-include="'lib/html/optinomic/templates/loading.html'"></div>
         <div ng-if="init">
-            include(../lib/html/optinomic/templates/no_data.html)
-            <div ng-if="!haveData">
+            <div ng-if="!haveData" ng-include="'lib/html/optinomic/templates/no_data.html'"></div>
+            <div ng-if="haveData">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
                     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
@@ -12,7 +12,7 @@
                     <div flex>
                         <h3 class="md-headline">Subtitle</h3>
                         <p class="md-caption">Caption:</p>
-                        <md-button class="md-raised md-primary no-print">Button</md-button>
+                        <md-button ng-click="haveData = !haveData" class="md-raised md-primary no-print">Button {{haveData}}</md-button>
                     </div>
                     <div flex>
                         <p class="md-body-2">Body copy with
