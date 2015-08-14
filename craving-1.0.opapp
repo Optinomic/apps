@@ -113,7 +113,7 @@ website = http://www.optinomic.com/
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/angular.moment/0.10.1/angular-moment.min.js"></script>
 
-<script src="../lib/js/vendor/ag-grid/dist/angular-grid.js"></script>
+<script src="/lib/js/vendor/ag-grid/dist/angular-grid.js"></script>
 
 
 
