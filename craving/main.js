@@ -17,9 +17,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     var columnDefs = [{
-    	headerTooltip: "Mein Tooltip"
+    	headerTooltip: "Mein Tooltip",
         headerName: "Marke",
-        editable: true
+        editable: true,
         field: "make"
     }, {
         headerName: "Modell",
