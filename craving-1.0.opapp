@@ -21,28 +21,38 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 [template show_craving 6 4]
-<div ng-app="optinomicApp" ng-controller="AppCtrl" ng-cloak>
-    <div ng-if="init !== true">
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="init !== true">
     <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 </div>
 
-    <div ng-if="init">
-        <div>
-            <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
-            <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
-        </div>
-        <div layout="row">
-            <div flex>
-                <h3 class="md-headline">Subtitle</h3>
-                <p class="md-caption">Caption:</p>
-                <md-button class="md-raised md-primary no-print">Button</md-button>
-            </div>
-            <div flex>
-                <p class="md-body-2">Body copy with
-                    <mark>medium</mark> weight.</p>
-                <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
-                <span class="md-caption">Caption</span>
-                <p class="craving">Local style loded</p>
+        <div ng-if="init">
+            <div ng-if="!haveData">
+    <h1 class="md-display-1">Data</h1>
+    <p class="flow-text">Keine Daten verfügbar.</p>
+    <md-button ng-click="haveData = !haveData;" class="md-raised md-primary no-print">Emulate Data</md-button>
+</div>
+
+            <div ng-if="haveData">
+                <div>
+                    <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
+                    <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
+                </div>
+                <div layout="row">
+                    <div flex>
+                        <h3 class="md-headline">Subtitle</h3>
+                        <p class="md-caption">Caption:</p>
+                        <md-button class="md-raised md-primary no-print">Button</md-button>
+                    </div>
+                    <div flex>
+                        <p class="md-body-2">Body copy with
+                            <mark>medium</mark> weight.</p>
+                        <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
+                        <span class="md-caption">Caption</span>
+                        <p class="craving">Local style loded</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -76,17 +86,6 @@ var app = angular
         'ngRoute',
         'ngMaterial'
     ])
-    .config(function($routeProvider) {
-        $routeProvider
-            .when('/', {
-                controllerAs: 'ctrl',
-                controller: 'AppCtrl'
-            })
-
-        .otherwise({
-            redirectTo: '/'
-        });
-    })
     .run(function($rootScope) {
         $rootScope.safeApply = function(fn) {
             var phase = $rootScope.$$phase;
@@ -99,8 +98,6 @@ var app = angular
             }
         };
     });
-
-
 
 
 /**
@@ -119,12 +116,22 @@ angular.module('optinomicDataModule', [
 angular.module('optinomicDataModule').config(function($routeProvider) {
     $routeProvider
         .when('/', {
+            templateUrl: '../lib/html/optinomic/init.html',
             controllerAs: 'ctrl',
             controller: 'AppCtrl'
         })
         .otherwise({
             redirectTo: '/'
         });
+});
+
+angular.module('optinomicDataModule').controller('MainCtrl', function($scope, dataService) {
+    // ---------------------------------------
+    // Initialize
+    // ---------------------------------------
+    $scope.init = false; //Is App initalised?
+    $scope.haveData = false; //Do we have data for this patient?
+    $scope.d = {}; //Where Data is stored.
 });
 
 angular.module('optinomicDataModule').factory('config', function() {
