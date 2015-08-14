@@ -51,7 +51,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.gridOptions = {
         columnDefs: columnDefs,
         rowData: $scope.d.craving,
+        pinnedColumnCount: 1
         dontUseScrolls: false,
+        enableFilter: true,
+        enableColResize: true,
         enableSorting: true
     };
 

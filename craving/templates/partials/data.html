@@ -2,4 +2,9 @@
     <h1 class="md-display-1">Data: {{d.dataMain.apps.current.name}}</h1>
     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
 </div>
+<div>
+    <md-button ng-click="d.resizeGrid()" class="md-icon-button" aria-label="Resize">
+        Resize
+    </md-button>
+</div>
 <div ag-grid="d.gridOptions" class="ag-fresh" style="height: 100%;"></div>
