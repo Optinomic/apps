@@ -23,9 +23,22 @@ website = http://www.optinomic.com/
 [template show_craving 6 4]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init" ng-include="'../../lib/html/optinomic/templates/loading.html'"></div>
+        <div ng-if="!init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
         <div ng-if="init">
-            <div ng-if="!haveData" ng-include="'../../lib/html/optinomic/templates/no_data.html'"></div>
+            <div ng-if="!haveData">
+                <p>no data</p>
+                <div ng-if="!haveData">
+    <div>
+        <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data {{haveData}}</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-button ng-click="haveData = !haveData" ng-init="haveData=false" class="md-raised md-primary no-print">Get Data</md-button>
+</div>
+
+            </div>
             <div ng-if="haveData">
                 <div>
                     <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
