@@ -9,8 +9,6 @@ app.controller('AppCtrl', function($scope, dataService) {
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
-    $scope.init = false; //Is App initalised?
-    $scope.d = {}; //Where Data is stored.
 
 
 
@@ -35,6 +33,7 @@ app.controller('AppCtrl', function($scope, dataService) {
             //$scope.loadResults();
 
             $scope.init = true;
+            $scope.haveData = true;
         });
     };
     $scope.loadMainData();
