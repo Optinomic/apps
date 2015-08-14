@@ -22,22 +22,27 @@ website = http://www.optinomic.com/
 
 [template show_craving 6 4]
 <div ng-app="optinomicApp" ng-controller="AppCtrl" ng-cloak>
-    <div>
-        <h1 class="md-display-1">{{app.title}}</h1>
-        <p class="flow-text">{{app.subtitle}}</p>
+    <div ng-if="init !== true">
+        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
     </div>
-    <div layout="row">
-        <div flex>
-            <h3 class="md-headline">Subtitle for {{app.title}}</h3>
-            <p class="md-caption">Caption:</p>
-            <md-button class="md-raised md-primary no-print">Button</md-button>
+    <div ng-if="init">
+        <div>
+            <h1 class="md-display-1">{{app.title}}</h1>
+            <p class="flow-text">{{app.subtitle}}</p>
         </div>
-        <div flex>
-            <p class="md-body-2">Body copy with
-                <mark>medium</mark> weight.</p>
-            <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
-            <span class="md-caption">Caption</span>
-            <p class="craving">Local style loded</p>
+        <div layout="row">
+            <div flex>
+                <h3 class="md-headline">Subtitle for {{app.title}}</h3>
+                <p class="md-caption">Caption:</p>
+                <md-button class="md-raised md-primary no-print">Button</md-button>
+            </div>
+            <div flex>
+                <p class="md-body-2">Body copy with
+                    <mark>medium</mark> weight.</p>
+                <p class="md-body-1">Regular body copy <small class="md-caption">with small text</small>.</p>
+                <span class="md-caption">Caption</span>
+                <p class="craving">Local style loded</p>
+            </div>
         </div>
     </div>
 </div>
@@ -528,17 +533,9 @@ app.controller('AppCtrl', function($scope, dataService) {
     // -----------------------------------
     // Init
     // -----------------------------------
+    $scope.appID = 'com.optinomic.apps.craving';
     $scope.init = false;
 
-    $scope.app = {
-        'id': 'com.optinomic.apps.craving',
-        'pid': parseInt(dataService.getPatientID()),
-        'token': dataService.getToken(),
-        'title': 'Craving-App',
-        'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    };
-
-    console.log('Welcome, ', $scope.app.id, $scope.app);
     console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
@@ -551,12 +548,15 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
-        var dataPromiseMain = dataService.getMainAppData($scope.app.id);
+        var dataPromiseMain = dataService.getMainAppData($scope.appID);
         dataPromiseMain.then(function(data) {
 
-            console.log('(DATA): getMainAppData:', data);
+            console.log('(DATA): loadedMainData:', data);
 
-            //Run Functions
+            // Save Data
+            $scope.d.dataMain = data;
+
+            // Run Functions
             //$scope.loadResults();
 
             $scope.init = true;
@@ -567,7 +567,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.loadResults = function() {
 
-        var call = dataService.getAppCalculations($scope.app.id, 'another_calculation');
+        var call = dataService.getAppCalculations($scope.appID, 'another_calculation');
 
         call.success(function(data) {
             console.log('(DATA): getAppCalculations:', data);

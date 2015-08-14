@@ -8,17 +8,9 @@ app.controller('AppCtrl', function($scope, dataService) {
     // -----------------------------------
     // Init
     // -----------------------------------
+    $scope.appID = 'com.optinomic.apps.craving';
     $scope.init = false;
 
-    $scope.app = {
-        'id': 'com.optinomic.apps.craving',
-        'pid': parseInt(dataService.getPatientID()),
-        'token': dataService.getToken(),
-        'title': 'Craving-App',
-        'subtitle': 'Some Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod labore et dolore ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    };
-
-    console.log('Welcome, ', $scope.app.id, $scope.app);
     console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
@@ -31,12 +23,15 @@ app.controller('AppCtrl', function($scope, dataService) {
         // -----------------------------------
         // Get Data 
         // -----------------------------------
-        var dataPromiseMain = dataService.getMainAppData($scope.app.id);
+        var dataPromiseMain = dataService.getMainAppData($scope.appID);
         dataPromiseMain.then(function(data) {
 
-            console.log('(DATA): getMainAppData:', data);
+            console.log('(DATA): loadedMainData:', data);
 
-            //Run Functions
+            // Save Data
+            $scope.d.dataMain = data;
+
+            // Run Functions
             //$scope.loadResults();
 
             $scope.init = true;
@@ -47,7 +42,7 @@ app.controller('AppCtrl', function($scope, dataService) {
 
     $scope.loadResults = function() {
 
-        var call = dataService.getAppCalculations($scope.app.id, 'another_calculation');
+        var call = dataService.getAppCalculations($scope.appID, 'another_calculation');
 
         call.success(function(data) {
             console.log('(DATA): getAppCalculations:', data);
