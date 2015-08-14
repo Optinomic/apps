@@ -40,7 +40,6 @@ app.controller('AppCtrl', function($scope, dataService) {
             //$scope.loadResults();
 
             $scope.init = true;
-            $scope.haveData = true;
         });
     };
     $scope.loadMainData();
