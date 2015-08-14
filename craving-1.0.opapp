@@ -260,7 +260,7 @@ angular.module('optinomicDataModule')
         };
 
         dataService.getCurrentPatient = function() {
-            return apiService.get("/patients/" + dataService.getPatientID(), {});
+            return apiService.get("/patients/" + dataService.getPatientID() + "/full", {});
         };
 
 
