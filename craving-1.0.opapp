@@ -29,9 +29,12 @@ website = http://www.optinomic.com/
 
         <div ng-if="init">
             <div ng-if="!haveData">
-    <h1 class="md-display-1">Data</h1>
-    <p class="flow-text">Keine Daten verfügbar.</p>
-    <md-button ng-click="haveData = !haveData;" class="md-raised md-primary no-print">Emulate Data</md-button>
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="md-headline"><i class="mdi mdi-database-outline"></i> Data</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-button ng-click="haveData = true;" class="md-raised md-primary no-print">Emulate Data</md-button>
 </div>
 
             <div ng-if="haveData">
