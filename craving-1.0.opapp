@@ -64,12 +64,14 @@ website = http://www.optinomic.com/
     </div>
     <md-content>
         <p class="md-caption">Task(s): {{d.dataMain.events.length}}</p>
-        <md-list class="md-2-line">
-            <md-list-item ng-repeat="event in d.dataMain.events">
-                <img src="http://socialengineexperts.com/wp-content/products/images/tasks_icon.png" class="md-avatar" alt="Task" />
+        <md-list>
+            <md-list-item class="md-2-line" ng-repeat="item in d.dataMain.events">
+                <md-button href="{{item.data.url}}" title="{{item.data.survey_name}}" target="_blank" ng-disabled="false" aria-label="{{item.data.survey_name}}" class="launch">
+                    DoIt
+                </md-button>
                 <div class="md-list-item-text">
-                    <h3>{{ event.survey_name }}</h3>
-                    <p>{{ event.module }}</p>
+                    <h3>{{item.data.survey_name}}</h3>
+                    <p>{{item.data.module}}</p>
                 </div>
             </md-list-item>
         </md-list>
