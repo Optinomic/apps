@@ -1,7 +1,17 @@
 <div ng-if="!d.haveData">
     <div>
-        <h3 class="md-headline">Data</h3>
+        <h3 class="md-headline">Sorry</h3>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
-    <md-button ng-click="d.haveData = !d.haveData" class="md-raised md-primary no-print">Button {{d.haveData}}</md-button>
+    <div>
+        <p class="md-caption">Task(s): {{d.dataMain.events.length}}</p>
+        <md-list class="md-2-line">
+            <md-list-item ng-repeat="event in d.dataMain.events">
+                <div class="md-list-item-text">
+                    <h3>{{ event.survey_name }}</h3>
+                    <p>{{ event.module }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
 </div>
