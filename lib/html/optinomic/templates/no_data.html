@@ -3,15 +3,16 @@
         <h3 class="md-headline">Sorry</h3>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
-    <div>
+    <md-content>
         <p class="md-caption">Task(s): {{d.dataMain.events.length}}</p>
         <md-list class="md-2-line">
             <md-list-item ng-repeat="event in d.dataMain.events">
+                <img src="http://socialengineexperts.com/wp-content/products/images/tasks_icon.png" class="md-avatar" alt="Task" />
                 <div class="md-list-item-text">
                     <h3>{{ event.survey_name }}</h3>
                     <p>{{ event.module }}</p>
                 </div>
             </md-list-item>
         </md-list>
-    </div>
+    </md-content>
 </div>
