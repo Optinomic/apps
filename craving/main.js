@@ -12,7 +12,6 @@ app.controller('AppCtrl', function($scope, dataService) {
     $scope.init = false; //Is App initalised?
     $scope.d = {}; //Where Data is stored.
 
-    console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
     // -----------------------------------
@@ -32,6 +31,7 @@ app.controller('AppCtrl', function($scope, dataService) {
             $scope.d.dataMain = data;
 
             // Run Functions
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             //$scope.loadResults();
 
             $scope.init = true;

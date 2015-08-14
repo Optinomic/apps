@@ -27,12 +27,12 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="init">
         <div>
-            <h1 class="md-display-1">{{app.title}}</h1>
-            <p class="flow-text">{{app.subtitle}}</p>
+            <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
+            <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
         </div>
         <div layout="row">
             <div flex>
-                <h3 class="md-headline">Subtitle for {{app.title}}</h3>
+                <h3 class="md-headline">Subtitle</h3>
                 <p class="md-caption">Caption:</p>
                 <md-button class="md-raised md-primary no-print">Button</md-button>
             </div>
@@ -259,6 +259,10 @@ angular.module('optinomicDataModule')
             return apiService.get("/modules", {});
         };
 
+        dataService.getCurrentPatient = function() {
+            return apiService.get("/patients/" + dataService.getPatientID(), {});
+        };
+
 
 
         // -------------------------------------------------------------------------
@@ -423,6 +427,10 @@ angular.module('optinomicDataModule')
             var return_data = {};
             return_data.identifier = app_identifier;
 
+            return_data.params = {};
+            return_data.params.PID = dataService.getPatientID();
+            return_data.params.token = dataService.getToken();
+
             // ------------------------------------------------
             // Action 1:  Survey Responses
             // ------------------------------------------------
@@ -439,7 +447,6 @@ angular.module('optinomicDataModule')
                     console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
-
             }, function(error) {
                 // Error
                 deferred.reject(return_data);
@@ -469,7 +476,6 @@ angular.module('optinomicDataModule')
                     console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
-
             }, function(error) {
                 // Error
                 deferred.reject(return_data);
@@ -503,7 +509,28 @@ angular.module('optinomicDataModule')
                     console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
 
+            // ------------------------------------------------
+            // Action 4:  Patient - Details
+            // ------------------------------------------------
+
+            api = dataService.getCurrentPatient();
+            var aPatient = dataService.getData(api);
+
+            aPatient.then(function(data) {
+                return_data.patient = data;
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    console.log('==> deferred', return_data);
+                    deferred.resolve(return_data);
+                };
             }, function(error) {
                 // Error
                 deferred.reject(return_data);
@@ -537,7 +564,6 @@ app.controller('AppCtrl', function($scope, dataService) {
     $scope.init = false; //Is App initalised?
     $scope.d = {}; //Where Data is stored.
 
-    console.log('PID / Token', dataService.getPatientID(), dataService.getToken());
 
 
     // -----------------------------------
@@ -557,6 +583,7 @@ app.controller('AppCtrl', function($scope, dataService) {
             $scope.d.dataMain = data;
 
             // Run Functions
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             //$scope.loadResults();
 
             $scope.init = true;
