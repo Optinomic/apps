@@ -17,13 +17,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     var columnDefs = [{
-        headerName: "Make",
+    	headerTooltip: "Mein Tooltip"
+        headerName: "Marke",
+        editable: true
         field: "make"
     }, {
-        headerName: "Model",
+        headerName: "Modell",
         field: "model"
     }, {
-        headerName: "Price",
+        headerName: "Preis",
         field: "price"
     }];
 
@@ -41,10 +43,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         price: 72000
     }];
 
+    //$scope.d.gridOptions = {
+    //    columnDefs: columnDefs,
+    //    rowData: rowData,
+    //    dontUseScrolls: false
+    //};
+
     $scope.d.gridOptions = {
-        columnDefs: columnDefs,
-        rowData: rowData,
-        dontUseScrolls: false
+    	columnDefs: null,
+        rowData: d.craving,
+        dontUseScrolls: false,
+        enableSorting: true
     };
 
 
