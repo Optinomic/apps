@@ -40,7 +40,7 @@ website = http://www.optinomic.com/
     <h3 class="md-headline">Data: {{d.dataMain.apps.current.name}}</h3>
 </div>
 <div>
-    <md-button ng-click="d.functions.resizeGrid()" class="md-icon-button" aria-label="Resize">
+    <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
         Resize
     </md-button>
 </div>
@@ -92,7 +92,7 @@ website = http://www.optinomic.com/
     <h3 class="md-headline">Data: {{d.dataMain.apps.current.name}}</h3>
 </div>
 <div>
-    <md-button ng-click="d.functions.resizeGrid()" class="md-icon-button" aria-label="Resize">
+    <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
         Resize
     </md-button>
 </div>
