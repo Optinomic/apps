@@ -37,15 +37,15 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h1 class="md-display-1">Data: {{d.dataMain.apps.current.name}}</h1>
+    <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
 </div>
 <div>
-    <md-button ng-click="d.resizeGrid()" class="md-icon-button" aria-label="Resize">
+    <md-button ng-click="scopeDService.resizeGrid()" class="md-icon-button" aria-label="Resize">
         Resize
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 250px;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 350px;"></div>
 
             </div>
             <div ng-if="!d.haveData">
@@ -74,7 +74,7 @@ website = http://www.optinomic.com/
 
 
 
-[template show_survey_data 6 4]
+[template show_survey_data 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!init">
@@ -90,15 +90,15 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h1 class="md-display-1">Data: {{d.dataMain.apps.current.name}}</h1>
+    <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
     <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
 </div>
 <div>
-    <md-button ng-click="d.resizeGrid()" class="md-icon-button" aria-label="Resize">
+    <md-button ng-click="scopeDService.resizeGrid()" class="md-icon-button" aria-label="Resize">
         Resize
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 250px;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 350px;"></div>
 
             </div>
 
