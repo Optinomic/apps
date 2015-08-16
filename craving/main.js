@@ -20,7 +20,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         headerTooltip: "PID",
         headerName: "Patient-ID",
         editable: false,
-        field: "PID"
+        field: "PID",
+        width: 80
     }, {
         headerTooltip: "FID",
         headerName: "Fall-ID",
