@@ -1,9 +1,8 @@
 <div>
-    <h1 class="md-display-1">{{d.dataMain.apps.current.name}}</h1>
-    <p class="flow-text">{{d.dataMain.apps.current.short_description}}</p>
+    <h3 class="md-headline">{{d.dataMain.apps.current.name}}: {{d.dataMain.apps.current.name}}</h3>
 </div>
 <div>
-    <md-button ng-click="scopeDService.resizeGrid()" class="md-icon-button" aria-label="Resize">
+    <md-button ng-click="d.functions.resizeGrid()" class="md-icon-button" aria-label="Resize">
         Resize
     </md-button>
 </div>
