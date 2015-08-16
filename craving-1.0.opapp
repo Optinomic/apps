@@ -45,7 +45,7 @@ website = http://www.optinomic.com/
         Resize
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 100%;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 250px;"></div>
 
             </div>
             <div ng-if="!d.haveData">
@@ -98,7 +98,7 @@ website = http://www.optinomic.com/
         Resize
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 100%;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 250px;"></div>
 
             </div>
 
@@ -304,6 +304,7 @@ angular.module('optinomicDataModule')
         // http://www.angulargrid.com/angular-grid-resizing/index.php
         // -----------------------------------------------------------
         scopeDService.resizeGrid = function() {
+            console.log('resizeGrid:', $scope.d.gridOptions)
             $scope.d.gridOptions.api.sizeColumnsToFit();
         };
 
