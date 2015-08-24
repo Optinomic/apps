@@ -60,13 +60,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-    $scope.d.options = {
-        'title': 'Suchtdruck',
-        'focusField': 'Suchtdruck_1',
-        'fillDates': true,
-        'firstWeekDay': 'Mo',
-        'patient': 'Testpatient'
-    };
+
 
 
     // -----------------------------------
@@ -94,7 +88,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Run Functions
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+
             //$scope.loadResults();
+
+            $scope.setTimelineChartOptions();
+
 
             $scope.init = true;
 
@@ -116,6 +114,24 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         call.error(function(data) {
             console.log('(ERROR): getAppCalculations:', data);
         });
+    };
+
+
+    $scope.setTimelineChartOptions = function() {
+        // Chart: Timeline Options
+
+        var myPatient = $scope.d.dataMain.patient.patient.data;
+        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
+
+        $scope.d.options = {
+            'title': 'Suchtdruck',
+            'focusField': 'Suchtdruck_1',
+            'fillDates': true,
+            'firstWeekDay': 'Mo',
+            'patient': patientFullName
+        };
+
+
     };
 
 });
