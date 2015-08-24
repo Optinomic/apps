@@ -60,6 +60,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
+    $scope.d.options = {
+        'title': 'Suchtdruck',
+        'focusField': 'Suchtdruck_1',
+        'fillDates': true,
+        'firstWeekDay': 'Mo',
+        'patient': 'Testpatient'
+    };
+
+
     // -----------------------------------
     // Functions
     // -----------------------------------
@@ -88,6 +97,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             //$scope.loadResults();
 
             $scope.init = true;
+
+
+            //FAKE DATA:  Do this in 'loadResults'.success
+            $scope.d.haveData = true;
         });
     };
     $scope.loadMainData();
