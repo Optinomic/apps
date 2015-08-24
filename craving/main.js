@@ -17,17 +17,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     var columnDefs = [{
-        headerTooltip: "PID",
-        headerName: "Patient-ID",
-        editable: false,
-        field: "PID",
-        width: 80
-    }, {
-        headerTooltip: "FID",
-        headerName: "Fall-ID",
-        editable: false,
-        field: "FID"
-    }, {
         headerName: "Datum",
         editable: true,
         field: "datestamp"
@@ -40,6 +29,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         headerName: "Bemerkungen",
         editable: true,
         field: "diary"
+    }, {
+        headerTooltip: "PID",
+        headerName: "Patient-ID",
+        editable: false,
+        field: "PID",
+        width: 90
+    }, {
+        headerTooltip: "FID",
+        headerName: "Fall-ID",
+        editable: false,
+        field: "FID",
+        width: 90
     }];
 
 
@@ -92,6 +93,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             //$scope.loadResults();
 
             $scope.setTimelineChartOptions();
+            $scope.d.functions.resizeGrid();
 
 
             $scope.init = true;
