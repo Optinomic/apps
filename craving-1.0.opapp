@@ -91,12 +91,10 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h3 class="md-headline">Chart: {{d.dataMain.apps.current.name}}</h3>
-</div>
-<div>
     <chart-timeline data='d.craving' options='d.options'>
     </chart-timeline>
 </div>
+<p class="md-caption">Chart: {{d.dataMain.apps.current.name}}</p>
 
             </div>
             <div ng-if="!d.haveData">
