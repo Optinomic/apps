@@ -3316,9 +3316,9 @@ angular.module('optinomicDataModule')
 angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, simpleStatistics) {
         return {
-            //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            templateUrl: 'timeline.html',
+            //templateUrl: 'timeline.html',
             restrict: 'E',
             //replace: true,
             //transclude: true,
