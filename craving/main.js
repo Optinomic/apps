@@ -8,15 +8,57 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Init
     // -----------------------------------
-
     $scope.appID = 'com.optinomic.apps.craving';
     $scope.d = scopeDService;
+
+
+    // -----------------------------------
+    // DataView : angulargrid.com
+
+    var columnDefs = [{
+        headerName: "Datum",
+        editable: true,
+        field: "datestamp"
+    }, {
+        headerTooltip: "Suchtdruck_1",
+        headerName: "Suchtdruck",
+        editable: false,
+        field: "Suchtdruck_1"
+    }, {
+        headerName: "Bemerkungen",
+        editable: true,
+        field: "diary"
+    }, {
+        headerTooltip: "PID",
+        headerName: "Patient-ID",
+        editable: false,
+        field: "PID",
+        width: 90
+    }, {
+        headerTooltip: "FID",
+        headerName: "Fall-ID",
+        editable: false,
+        field: "FID",
+        width: 90
+    }];
+
+    // DataView - Options
+    $scope.d.gridOptions = {
+        columnDefs: columnDefs,
+        rowData: $scope.d.craving,
+        pinnedColumnCount: 1,
+        dontUseScrolls: false,
+        enableFilter: true,
+        enableColResize: true,
+        enableSorting: true
+    };
 
 
 
     // -----------------------------------
     // Functions
     // -----------------------------------
+
 
     $scope.loadMainData = function() {
         // -----------------------------------
@@ -45,8 +87,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setTimelineChartOptions();
 
 
-
             $scope.init = true;
+
 
             //FAKE DATA:  Do this in 'loadResults'.success
             $scope.d.haveData = true;
@@ -54,57 +96,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
-
-
-    $scope.appInit = function() {
-        // -----------------------------------
-        // Init - App: 
-        // -----------------------------------
-        $scope.init = false;
-
-        // -----------------------------------
-        // DataView : angulargrid.com
-        // -----------------------------------
-
-        var columnDefs = [{
-            headerName: "Datum",
-            editable: true,
-            field: "datestamp"
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck",
-            editable: false,
-            field: "Suchtdruck_1"
-        }, {
-            headerName: "Bemerkungen",
-            editable: true,
-            field: "diary"
-        }, {
-            headerTooltip: "PID",
-            headerName: "Patient-ID",
-            editable: false,
-            field: "PID",
-            width: 90
-        }, {
-            headerTooltip: "FID",
-            headerName: "Fall-ID",
-            editable: false,
-            field: "FID",
-            width: 90
-        }];
-
-        // Data Grid - Options
-        $scope.d.gridOptions = {
-            columnDefs: columnDefs,
-            rowData: $scope.d.craving,
-            pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            enableColResize: true,
-            enableSorting: true
-        };
-    };
-    $scope.appInit();
 
 
 
@@ -137,7 +128,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
-    };
 
+
+    };
 
 });
