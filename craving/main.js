@@ -93,7 +93,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             //$scope.loadResults();
 
             $scope.setTimelineChartOptions();
-            $scope.d.functions.resizeGrid();
 
 
             $scope.init = true;
