@@ -3280,7 +3280,7 @@ angular.module('optinomicDataModule')
             //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             templateUrl: 'timeline.html',
-            //template: "chartTimeline directive works: <b>{{data.length}}</b>",
+            //template: 'chartTimeline directive works: {{data.length}}',
             restrict: 'E',
             //replace: true,
             //transclude: true,
