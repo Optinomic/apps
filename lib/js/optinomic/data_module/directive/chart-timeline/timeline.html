@@ -1,0 +1,159 @@
+<div ng-if="myOptions.defaultChart === 'day'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-primary">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="day" class="chart chart-line" data="dateCharts.day.data" labels="dateCharts.day.labels" series="dateCharts.day.series" options="chartOptions" legend="true">
+    </canvas>
+    <div style="margin-top: -52px;" class="pull-right">
+        <md-switch ng-model="myOptions.fillDates" aria-label="{{translations.fill}}">
+            {{translations.fill}}
+        </md-switch>
+    </div>
+</div>
+<div ng-if="myOptions.defaultChart === 'weekday'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-primary">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="weekday" class="chart chart-line" data="dateCharts.weekday.data" labels="dateCharts.weekday.labels" series="dateCharts.weekday.series" legend="true">
+    </canvas>
+</div>
+<div ng-if="myOptions.defaultChart === 'week'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-primary">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="week" class="chart chart-line" data="dateCharts.week.data" labels="dateCharts.week.labels" series="dateCharts.week.series" legend="true">
+    </canvas>
+    <div style="margin-top: -52px;" class="pull-right">
+        <md-switch ng-model="myOptions.fillDates" aria-label="{{translations.fill}}">
+            {{translations.fill}}
+        </md-switch>
+    </div>
+</div>
+<div ng-if="myOptions.defaultChart === 'month'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-primary">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="month" class="chart chart-line" data="dateCharts.month.data" labels="dateCharts.month.labels" series="dateCharts.month.series" legend="true">
+    </canvas>
+    <div style="margin-top: -52px;" class="pull-right">
+        <md-switch ng-model="myOptions.fillDates" aria-label="{{translations.fill}}">
+            {{translations.fill}}
+        </md-switch>
+    </div>
+</div>
+<div ng-if="myOptions.defaultChart === 'quarter'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-primary">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="quarter" class="chart chart-line" data="dateCharts.quarter.data" labels="dateCharts.quarter.labels" series="dateCharts.quarter.series" legend="true">
+    </canvas>
+</div>
+<div ng-if="myOptions.defaultChart === 'year'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-primary">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-default">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="year" class="chart chart-bar" data="dateCharts.year.data" labels="dateCharts.year.labels" series="dateCharts.year.series" legend="true">
+    </canvas>
+</div>
+<div ng-if="myOptions.defaultChart === 'am_pm'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('quarter')" class="md-default">{{translations.quarter}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-primary">{{translations.hour}}</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="am_pm" class="chart chart-bar" data="dateCharts.am_pm.data" labels="dateCharts.am_pm.labels" series="dateCharts.am_pm.series" legend="true">
+    </canvas>
+</div>
+<div ng-if="myOptions.defaultChart === 'hour'">
+    <div layout="row">
+        <div hide-sm>
+            <p class="md-title" style="margin-top: 8px;">{{myOptions.title}}</p>
+        </div>
+        <div flex>
+            <md-button ng-click="showChart('day')" class="md-default">{{translations.day}}</md-button>
+            <md-button ng-click="showChart('week')" class="md-default">{{translations.week}}</md-button>
+            <md-button ng-click="showChart('month')" class="md-default">{{translations.month}}</md-button>
+            <md-button ng-click="showChart('year')" class="md-default">{{translations.year}}</md-button>
+            <md-button ng-click="showChart('weekday')" class="md-default">{{translations.weekday}}</md-button>
+            <md-button ng-click="showChart('hour')" class="md-primary">{{translations.hour}}</md-button>
+            <md-button ng-click="showChart('am_pm')" class="md-primary">am / pm</md-button>
+        </div>
+    </div>
+    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="hour" class="chart chart-line" data="dateCharts.hour.data" labels="dateCharts.hour.labels" series="dateCharts.hour.series" legend="true">
+    </canvas>
+</div>
