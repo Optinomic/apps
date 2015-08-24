@@ -3274,8 +3274,8 @@ angular.module('optinomicDataModule')
         return {
             //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            //templateUrl: 'timeline.html',
-            template: '<p>chartTimeline - Data: {{scope.data.length}}</p>',
+            templateUrl: 'timeline.html',
+            //template: '<p>chartTimeline - Data: {{scope.data.length}}</p>',
             restrict: 'E',
             //replace: true,
             //transclude: true,
@@ -3972,6 +3972,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     $scope.appID = 'com.optinomic.apps.craving';
+    $scope.d = scopeDService;
+
     $scope.appInit();
     $scope.loadMainData();
 
@@ -4021,7 +4023,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
         // Init - App: 
         // -----------------------------------
-        $scope.d = scopeDService;
         $scope.init = false;
 
         // -----------------------------------

@@ -10,6 +10,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     $scope.appID = 'com.optinomic.apps.craving';
+    $scope.d = scopeDService;
+
     $scope.appInit();
     $scope.loadMainData();
 
@@ -59,7 +61,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
         // Init - App: 
         // -----------------------------------
-        $scope.d = scopeDService;
         $scope.init = false;
 
         // -----------------------------------
