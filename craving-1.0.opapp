@@ -21,7 +21,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template show_craving 6 4]
+[template show_craving 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!init">
@@ -3310,9 +3310,9 @@ angular.module('optinomicDataModule')
 angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, simpleStatistics) {
         return {
-            templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            //templateUrl: 'timeline.html',
+            templateUrl: 'timeline.html',
             restrict: 'E',
             //replace: true,
             //transclude: true,
