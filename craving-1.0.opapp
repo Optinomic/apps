@@ -89,7 +89,7 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h3 class="md-headline">Data: {{d.dataMain.apps.current.name}}</h3>
+    <h3 class="md-headline">Chart: {{d.dataMain.apps.current.name}}</h3>
 </div>
 <div>
     <chart-timeline data='d.craving' options='d.options'>
@@ -3310,7 +3310,7 @@ angular.module('optinomicDataModule')
 angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, simpleStatistics) {
         return {
-            templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: 'lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             restrict: 'E',
             //replace: true,
             //transclude: true,
