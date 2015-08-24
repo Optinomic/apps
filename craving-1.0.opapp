@@ -217,7 +217,9 @@ angular.module('optinomicDataModule', [
     'ngAria',
     'ngRoute',
     'ngMaterial',
-    'angularGrid'
+    'angularGrid',
+    'chart.js',
+    'angularMoment'
 ]);
 
 angular.module('optinomicDataModule').config(function($routeProvider) {
