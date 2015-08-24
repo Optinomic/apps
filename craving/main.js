@@ -12,8 +12,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.appID = 'com.optinomic.apps.craving';
     $scope.d = scopeDService;
 
-    $scope.appInit();
-    $scope.loadMainData();
 
 
     // -----------------------------------
@@ -54,6 +52,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.haveData = true;
         });
     };
+    $scope.loadMainData();
 
 
 
@@ -105,6 +104,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableSorting: true
         };
     };
+    $scope.appInit();
 
 
 
