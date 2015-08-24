@@ -4,16 +4,18 @@
             include(../lib/html/optinomic/templates/loading.html)
         </div>
         <div ng-if="init">
-            <div>
+            <div ng-if="d.haveData">
                 <!-- 
 
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
+                    Attention:
+                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
 
                 -->
                 include(templates/partials/data.html)
             </div>
-
+            <div ng-if="!d.haveData">
+                include(../lib/html/optinomic/templates/no_data.html)
+            </div>
         </div>
     </div>
 </div>

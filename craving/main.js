@@ -8,60 +8,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Init
     // -----------------------------------
+
     $scope.appID = 'com.optinomic.apps.craving';
-    $scope.d = scopeDService;
-
-
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-
-    var columnDefs = [{
-        headerName: "Datum",
-        editable: true,
-        field: "datestamp"
-    }, {
-        headerTooltip: "Suchtdruck_1",
-        headerName: "Suchtdruck",
-        editable: false,
-        field: "Suchtdruck_1"
-    }, {
-        headerName: "Bemerkungen",
-        editable: true,
-        field: "diary"
-    }, {
-        headerTooltip: "PID",
-        headerName: "Patient-ID",
-        editable: false,
-        field: "PID",
-        width: 90
-    }, {
-        headerTooltip: "FID",
-        headerName: "Fall-ID",
-        editable: false,
-        field: "FID",
-        width: 90
-    }];
-
-
-    //$scope.d.gridOptions = {
-    //    columnDefs: columnDefs,
-    //    rowData: rowData,
-    //    dontUseScrolls: false
-    //};
-
-    $scope.d.gridOptions = {
-        columnDefs: columnDefs,
-        rowData: $scope.d.craving,
-        pinnedColumnCount: 1,
-        dontUseScrolls: false,
-        enableFilter: true,
-        enableColResize: true,
-        enableSorting: true
-    };
-
-
-
+    $scope.appInit();
+    $scope.loadMainData();
 
 
     // -----------------------------------
@@ -70,7 +20,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.loadMainData = function() {
         // -----------------------------------
-        // Get Data 
+        // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData($scope.appID);
@@ -95,18 +45,72 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setTimelineChartOptions();
 
 
-            $scope.init = true;
 
+            $scope.init = true;
 
             //FAKE DATA:  Do this in 'loadResults'.success
             $scope.d.haveData = true;
         });
     };
-    $scope.loadMainData();
+
+
+
+    $scope.appInit = function() {
+        // -----------------------------------
+        // Init - App: 
+        // -----------------------------------
+        $scope.d = scopeDService;
+        $scope.init = false;
+
+        // -----------------------------------
+        // DataView : angulargrid.com
+        // -----------------------------------
+
+        var columnDefs = [{
+            headerName: "Datum",
+            editable: true,
+            field: "datestamp"
+        }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
+            editable: false,
+            field: "Suchtdruck_1"
+        }, {
+            headerName: "Bemerkungen",
+            editable: true,
+            field: "diary"
+        }, {
+            headerTooltip: "PID",
+            headerName: "Patient-ID",
+            editable: false,
+            field: "PID",
+            width: 90
+        }, {
+            headerTooltip: "FID",
+            headerName: "Fall-ID",
+            editable: false,
+            field: "FID",
+            width: 90
+        }];
+
+        // Data Grid - Options
+        $scope.d.gridOptions = {
+            columnDefs: columnDefs,
+            rowData: $scope.d.craving,
+            pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            enableColResize: true,
+            enableSorting: true
+        };
+    };
+
 
 
     $scope.loadResults = function() {
-
+        // -----------------------------------
+        // Get Survey-Results: 
+        // -----------------------------------
         var call = dataService.getAppCalculations($scope.appID, 'another_calculation');
 
         call.success(function(data) {
@@ -119,8 +123,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.setTimelineChartOptions = function() {
+        // -----------------------------------
         // Chart: Timeline Options
-
+        // -----------------------------------
         var myPatient = $scope.d.dataMain.patient.patient.data;
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
@@ -131,8 +136,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
-
-
     };
+
 
 });
