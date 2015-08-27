@@ -29,6 +29,19 @@ website = http://www.optinomic.com
 </div>
 
 
+[pdf_template show_items for_pdf_template]
+
+{% in calculations.for_pdf_template %}
+Here is the list of items from the calculation for\_pdf\_template:
+
+\begin{itemize}
+{% forall .items %}
+\item {%= .name %} {% if .value %} ({%= .value %}){% end %}
+{% end %}
+\end{itemize}
+{% end %}
+
+
 [javascript]
 
 (function() {
@@ -117,6 +130,18 @@ Hello $patient$,
 A task is overdue <a href="$survey_link$">here</a>.
 
 Thank you
+
+
+[calculation for_pdf_template javascript]
+
+function main(responses) {
+  return {
+    "items": [
+      { "name": "Item 1", "value": 11.99 },
+      { "name": "Item 2" }
+    ]
+  };
+}
 
 
 [calculation my_calculation lua]

@@ -25,6 +25,10 @@ website = http://www.optinomic.com
 
 include(templates/show_token.html)
 
+[pdf_template show_items for_pdf_template]
+
+include(pdf_templates/show_items.tex)
+
 [javascript]
 
 include(main.js)
@@ -77,6 +81,10 @@ include(emails/new_event.plain)
 [email overdue html]
 
 include(emails/overdue.html)
+
+[calculation for_pdf_template javascript]
+
+include(calculations/for_pdf_template.js)
 
 [calculation my_calculation lua]
 
