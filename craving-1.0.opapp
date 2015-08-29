@@ -3356,7 +3356,7 @@ angular.module('optinomicDataModule')
 
                     Options = Options === undefined ? {} : Options;
                     var myWidth = window.innerWidth / 100 * 95;
-                    var myHeight = window.innerHeight - 150;
+                    var myHeight = window.innerHeight - 173;
 
 
                     // Set Given Options or Defaults
