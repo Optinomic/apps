@@ -3275,11 +3275,11 @@ angular.module('optinomicDataModule')
  * # chartTimeline
  */
 angular.module('optinomicDataModule')
-    .directive('chartTimeline', function($filter, simpleStatistics) {
+    .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
         return {
             //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
             //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: '$sce.getTrustedResourceUrl(https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html)',
             //template: 'chartTimeline directive works: {{data.length}}',
             restrict: 'E',
             //replace: true,
