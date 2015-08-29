@@ -791,7 +791,7 @@ angular.module('optinomicDataModule')
             'lastpage': '5'
         }, {
             'Suchtdruck_1': '50',
-            'datestamp': '2013-06-30 19:10:00',
+            'datestamp': '2014-06-30 19:10:00',
             'refurl': '',
             'ipaddr': '178.82.213.88',
             'optinomixHASH': '14173705778560900000001',
@@ -807,7 +807,7 @@ angular.module('optinomicDataModule')
             'lastpage': '5'
         }, {
             'Suchtdruck_1': '12',
-            'datestamp': '2014-01-02 19:03:56',
+            'datestamp': '2014-12-02 19:03:56',
             'refurl': '',
             'ipaddr': '178.82.213.88',
             'optinomixHASH': '14175433891820340000001',
@@ -823,7 +823,7 @@ angular.module('optinomicDataModule')
             'lastpage': '5'
         }, {
             'Suchtdruck_1': '71',
-            'datestamp': '2013-07-04 20:03:39',
+            'datestamp': '2014-07-04 20:03:39',
             'refurl': '',
             'ipaddr': '178.82.213.88',
             'optinomixHASH': '14177161619822780000001',
@@ -859,9 +859,9 @@ angular.module('optinomicDataModule')
             'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
             'ipaddr': '178.82.213.88',
             'optinomixHASH': '7aa71f9c78f78e59',
-            'submitdate': '2013-12-05 11:42:47',
+            'submitdate': '2014-12-05 11:42:47',
             'survey_name': 'craving',
-            'startdate': '2013-12-05 11:42:43',
+            'startdate': '2014-12-05 11:42:43',
             'diary': '',
             'startlanguage': 'de',
             'PID': '12',
@@ -3282,10 +3282,9 @@ angular.module('optinomicDataModule')
 angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
         return {
-            //templateUrl: '/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            //templateUrl: '../lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            //templateUrl: 'scripts/directives/charttimeline.html',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            //template: 'chartTimeline directive works: {{data.length}}',
+
             restrict: 'E',
             //replace: true,
             //transclude: true,
@@ -3316,8 +3315,6 @@ angular.module('optinomicDataModule')
                     scaleShowLabels: true
                 };
 
-                scope.myURL = $sce.getTrustedResourceUrl('https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html');
-                console.log('scope.myURL = ', scope.myURL)
 
                 function updateStuff() {
 
@@ -3342,6 +3339,7 @@ angular.module('optinomicDataModule')
 
                     scope.results_grouped = GroupResults(scope.result_data);
                     scope.dateCharts = CreateChartObjects(scope.results_grouped)
+                    scope.showChart(scope.myOptions.defaultChart);
 
                     //console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
                 }
@@ -3356,7 +3354,7 @@ angular.module('optinomicDataModule')
 
                     Options = Options === undefined ? {} : Options;
                     var myWidth = window.innerWidth / 100 * 95;
-                    var myHeight = window.innerHeight - 173;
+                    var myHeight = window.innerHeight - 150;
 
 
                     // Set Given Options or Defaults
@@ -3396,6 +3394,7 @@ angular.module('optinomicDataModule')
                         scope.translations.year = 'Jahr';
                         scope.translations.weekday = 'Wochentag';
                         scope.translations.hour = 'Stunde';
+                        scope.translations.settings = 'Einstellungen';
                     } else {
                         scope.translations.fill = 'All calendar days';
                         scope.translations.day = 'Day';
@@ -3405,7 +3404,41 @@ angular.module('optinomicDataModule')
                         scope.translations.year = 'Year';
                         scope.translations.weekday = 'Weekday';
                         scope.translations.hour = 'Hour';
+                        scope.translations.settings = 'Settings';
                     };
+
+                    scope.chartTypes = [{
+                        name: 'day',
+                        title: scope.translations.day
+
+                    }, {
+                        name: 'week',
+                        title: scope.translations.week
+
+                    }, {
+                        name: 'month',
+                        title: scope.translations.month
+
+                    }, {
+                        name: 'quarter',
+                        title: scope.translations.quarter
+
+                    }, {
+                        name: 'year',
+                        title: scope.translations.year
+
+                    }, {
+                        name: 'weekday',
+                        title: scope.translations.weekday
+
+                    }, {
+                        name: 'hour',
+                        title: scope.translations.hour
+
+                    }, {
+                        name: 'am_pm',
+                        title: 'am | pm'
+                    }];
 
                     //console.log('Options Return', ReturnedOptions);
                     return ReturnedOptions;
@@ -3414,7 +3447,10 @@ angular.module('optinomicDataModule')
 
                 scope.showChart = function(name) {
                     scope.myOptions.defaultChart = name;
-                    console.log('Show Chart: ', scope.myOptions.defaultChart)
+                    //console.log('Show Chart: ', scope.myOptions.defaultChart);
+
+                    // Save selected Chart as dateChart 
+                    scope.dateChart = scope.dateCharts[name];
                 };
 
                 // Array Gruppieren
@@ -3969,6 +4005,7 @@ angular.module('optinomicDataModule')
 
             }
         };
+
     });
 
 
