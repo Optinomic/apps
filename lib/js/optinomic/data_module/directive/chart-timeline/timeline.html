@@ -4,13 +4,13 @@
             <p class="md-title" style="margin-top: 14px;">{{myOptions.title}} &nbsp;&nbsp;&nbsp;&nbsp;</p>
         </div>
         <div flex>
-            <md-input-container style="margin-top: -8px;">
+            <md-input-container style="margin-top: -14px;">
                 <md-select class="md-subhead" ng-model="myOptions.defaultChart" aria-label="{{myOptions.title}} - {{chart.name}}">
                     <md-option ng-repeat="chart in chartTypes" value="{{chart.name}}">{{chart.title}}</md-option>
                 </md-select>
             </md-input-container>
         </div>
-        <div>
+        <div style="margin-top: 6px;">
             <md-switch ng-model="myOptions.fillDates" aria-label="{{translations.fill}}">
                 {{translations.fill}}
             </md-switch>
