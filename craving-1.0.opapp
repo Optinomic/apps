@@ -3535,13 +3535,13 @@ angular.module('optinomicDataModule')
                     });
 
 
-                    var array_sort_weekday = sortByKey(array, 'date_weekday');
+                    var array_sort_weekday = sortByKey(scope.data, 'date_weekday');
 
                     resultsGrouped.weekday = groupBy(array_sort_weekday, function(item) {
                         return [item.date_info.date_weekday];
                     });
 
-                    var array_sort_quarter = sortByKey(array, 'date_quarter');
+                    var array_sort_quarter = sortByKey(scope.data, 'date_quarter');
 
                     resultsGrouped.quarter = groupBy(array_sort_quarter, function(item) {
                         return [item.date_info.date_quarter];
