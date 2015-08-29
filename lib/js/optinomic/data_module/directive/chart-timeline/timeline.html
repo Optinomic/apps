@@ -1,7 +1,7 @@
 <div>
     <div layout="row">
         <div>
-            <p class="md-title" style="margin-top: 12px;">{{myOptions.title}} &nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p class="md-title" style="margin-top: 16px;">{{myOptions.title}} &nbsp;&nbsp;&nbsp;&nbsp;</p>
         </div>
         <div flex>
             <md-input-container style="margin-top: -12px;">
@@ -16,6 +16,6 @@
             </md-switch>
         </div>
     </div>
-    <canvas height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="day" class="chart chart-line" data="dateChart.data" labels="dateChart.labels" series="dateCharts.series" options="chartOptions" legend="true">
+    <canvas style="margin-top: -12px;" height="{{myOptions.screenHeight}}" width="{{myOptions.screenWidth}}" id="day" class="chart chart-line" data="dateChart.data" labels="dateChart.labels" series="dateCharts.series" options="chartOptions" legend="true">
     </canvas>
 </div>

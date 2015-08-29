@@ -839,13 +839,13 @@ angular.module('optinomicDataModule')
             'lastpage': '5'
         }, {
             'Suchtdruck_1': '66',
-            'datestamp': '2015-01-05 11:35:07',
+            'datestamp': '2014-12-05 11:35:07',
             'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
             'ipaddr': '178.82.213.88',
             'optinomixHASH': '55455ed9e59a09d2',
             'submitdate': '2014-12-05 11:35:07',
             'survey_name': 'craving',
-            'startdate': '2015-01-05 11:35:04',
+            'startdate': '2014-12-05 11:35:04',
             'diary': '',
             'startlanguage': 'de',
             'PID': '12',
@@ -3354,7 +3354,7 @@ angular.module('optinomicDataModule')
 
                     Options = Options === undefined ? {} : Options;
                     var myWidth = window.innerWidth / 100 * 95;
-                    var myHeight = window.innerHeight - 150;
+                    var myHeight = window.innerHeight - 160;
 
 
                     // Set Given Options or Defaults
