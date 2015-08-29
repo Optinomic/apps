@@ -9,11 +9,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Init
     // -----------------------------------
     $scope.appID = 'com.optinomic.apps.craving';
+
+    // Data-Sharing (do not remove)
     $scope.d = scopeDService;
 
 
     // -----------------------------------
     // DataView : angulargrid.com
+    // -----------------------------------
 
     var columnDefs = [{
         headerName: "Datum",
@@ -117,6 +120,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setTimelineChartOptions = function() {
         // -----------------------------------
         // Chart: Timeline Options
+        // - fillDates:  Still experimental
         // -----------------------------------
         var myPatient = $scope.d.dataMain.patient.patient.data;
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
@@ -124,7 +128,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.options = {
             'title': 'Suchtdruck',
             'focusField': 'Suchtdruck_1',
-            'fillDates': true,
+            'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
