@@ -26,6 +26,8 @@ include(templates/chart_timeline.html)
 [template show_survey_data 6 7]
 include(templates/data.html)
 
+[template show_plot 6 7]
+include(templates/plot.html)
 
 
 [dependencies]
