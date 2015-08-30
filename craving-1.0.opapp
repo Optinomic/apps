@@ -3283,7 +3283,7 @@ angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
         return {
             //templateUrl: 'scripts/directives/charttimeline.html',
-            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
 
             restrict: 'E',
             //replace: true,
