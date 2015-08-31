@@ -68,7 +68,6 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
@@ -79,7 +78,7 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Radian/0.1.3/radian.min.js"></script>
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 
 
 
@@ -120,7 +119,6 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
@@ -131,7 +129,7 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Radian/0.1.3/radian.min.js"></script>
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 
 
 
@@ -175,7 +173,6 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
@@ -186,7 +183,7 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Radian/0.1.3/radian.min.js"></script>
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 
 
 
