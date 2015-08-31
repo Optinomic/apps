@@ -26,7 +26,7 @@ include(templates/chart_timeline.html)
 [template data_survey_responses 6 7]
 include(templates/data.html)
 
-[template chart_tscore 6 7]
+[template chart_tscore 6 8]
 include(templates/tscore.html)
 
 

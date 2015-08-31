@@ -132,7 +132,7 @@ website = http://www.optinomic.com/
 
 
 
-[template chart_tscore 6 7]
+[template chart_tscore 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!init">
