@@ -1,5 +1,4 @@
 <div ng-if="plot_done">
-    <p>screenHeight = {{myOptions.screenHeight}} | screenWidth = {{myOptions.screenWidth}}</p>
     <plot width="{{myOptions.screenWidth}}" height="{{myOptions.screenHeight}}" axis-x-label="T-Wert" range-x="0,100" axis-y="off" legend-switches>
         <!-- Decoration -->
         <area label="20-80" x="[[plot.area_1]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#E3F2FD">
