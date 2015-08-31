@@ -1,9 +1,9 @@
 <div ng-if="plot_done">
-    <plot width="{{myOptions.screenWidth}}" height="{{myOptions.screenHeight}}" axis-x-label="T-Wert" range-x="0,100" axis-y="off" legend-switches>
+    <plot ng-attr-width="{{myOptions.screenWidth}}" ng-attr-height="{{myOptions.screenHeight}}" axis-x-label="T-Wert" range-x="0,100" axis-y="off" legend-switches>
         <!-- Decoration -->
-        <area label="20-80" x="[[plot.area_1]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#E3F2FD">
-        <area label="30-70" x="[[plot.area_2]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#BBDEFB">
-        <area label="40-60" x="[[plot.area_3]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#90CAF9">
+        <area x="[[plot.area_1]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#E3F2FD">
+        <area x="[[plot.area_2]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#BBDEFB">
+        <area x="[[plot.area_3]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#90CAF9">
         <lines label="center" x="[[plot.line_mw_x]]" y="[[plot.line_mw_y]]" stroke="black" stroke-width=2>
         </lines>
         <!-- Trenner -->
@@ -12,18 +12,18 @@
             </lines>
         </div>
         <!-- Description -->
-        <points X="[[plot.xs]]" Y="[[plot.ys_label]]" MARKER="text" MARKER-TEXT="[[plot.titles]]" MARKER-ALIGNMENT="left" MARKER-FONT-SIZE="24">
+        <points x="[[plot.xs]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="left" MARKER-FONT-SIZE="14" fill="#3F51B5" label="Left Titles">
         </points>
-        <points x="[[plot.xs_max]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="right" MARKER-FONT-SIZE="12">
+        <points x="[[plot.xs_max]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="right" MARKER-FONT-SIZE="14" fill="#3F51B5" label="Right Titles">
         </points>
         <!-- Result Line -->
+        <lines ng-repeat="answer in plot.answers" y="[[plot.ys]]" x="[[answer.t_scores]]" stroke="[[answer.colour]]" stroke-width="3" stroke-opacity="1" label="[[answer.label]]">
+        </lines>
         <div ng-if="myOptions.show_scores">
             <points ng-repeat="answer in plot.answers" x="[[answer.t_scores]]" y="[[plot.ys]]" fill="#ffffff" STROKE="#ffffff" STROKE-WIDTH="0" FILL-OPACITY="0.5" MARKER-SIZE="300">
             </points>
-            <points ng-repeat="answer in plot.answers" x="[[answer.t_scores]]" y="[[plot.ys]]" marker="text" marker-text="[[answer.t_scores]]" MARKER-ALIGNMENT="center" MARKER-FONT-SIZE="13" MARKER-FONT-WEIGHT="bold">
+            <points ng-repeat="answer in plot.answers" x="[[answer.t_scores]]" y="[[plot.ys]]" marker-text="[[answer.t_scores]]" MARKER-ALIGNMENT="center" MARKER-FONT-SIZE="13" MARKER-FONT-WEIGHT="bold" marker="text">
             </points>
         </div>
-        <lines ng-repeat="answer in plot.answers" y="[[plot.ys]]" x="[[answer.t_scores]]" stroke="[[answer.colour]]" stroke-width="3" stroke-opacity="0.7" label="[[answer.label]]">
-        </lines>
     </plot>
 </div>
