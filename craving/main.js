@@ -14,47 +14,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d = scopeDService;
 
 
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-
-    var columnDefs = [{
-        headerName: "Datum",
-        editable: true,
-        field: "datestamp"
-    }, {
-        headerTooltip: "Suchtdruck_1",
-        headerName: "Suchtdruck",
-        editable: false,
-        field: "Suchtdruck_1"
-    }, {
-        headerName: "Bemerkungen",
-        editable: true,
-        field: "diary"
-    }, {
-        headerTooltip: "PID",
-        headerName: "Patient-ID",
-        editable: false,
-        field: "PID",
-        width: 90
-    }, {
-        headerTooltip: "FID",
-        headerName: "Fall-ID",
-        editable: false,
-        field: "FID",
-        width: 90
-    }];
-
-    // DataView - Options
-    $scope.d.gridOptions = {
-        columnDefs: columnDefs,
-        rowData: $scope.d.craving,
-        pinnedColumnCount: 1,
-        dontUseScrolls: false,
-        enableFilter: true,
-        enableColResize: true,
-        enableSorting: true
-    };
 
 
 
@@ -82,16 +41,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): haveData:', data.survey_responses.length, $scope.haveData);
             }
 
-            // Run Functions
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-
+            // Load Data / Calculations
             //$scope.loadResults();
 
+
+            // Run Functions a.s.a Data:
+            $scope.setDataView();
             $scope.setTimelineChartOptions();
+            $scope.setTscoreChart();
 
 
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.init = true;
-
 
             //FAKE DATA:  Do this in 'loadResults'.success
             $scope.d.haveData = true;
@@ -101,6 +62,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
+
+    // -----------------------------------
+    // Data: Get Calculations 
+    // -----------------------------------
 
     $scope.loadResults = function() {
         // -----------------------------------
@@ -115,6 +80,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('(ERROR): getAppCalculations:', data);
         });
     };
+
+
+
+    // -----------------------------------
+    // Chart: Timeline
+    // -----------------------------------
 
 
     $scope.setTimelineChartOptions = function() {
@@ -135,5 +106,140 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     };
+
+    // -----------------------------------
+    // Chart: T-Score
+    // -----------------------------------
+
+
+
+
+    $scope.getRandomInt = function(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+
+    $scope.getAnswer = function() {
+        var score_answer = [{
+            "question": "GSI",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Psychotizismus",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Paranoides Denken",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Phobische Angst",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Aggressivität/ Feindseligkeit",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Ängstlichkeit",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Depressivität",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Unsicherheit im Sozialkontakt",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Zwanghaftigkeit",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }, {
+            "question": "Somatisierung",
+            "t_score": $scope.getRandomInt(0, 100),
+            "stanine": 0,
+            "sum_score": 0
+        }];
+
+        return score_answer;
+    };
+
+
+    $scope.setTscoreChart = function() {
+
+        // Options
+        $scope.options_plot = {
+            'show_scores': true
+        };
+
+
+        // Results
+        $scope.plotdata = [{
+            "label": "Eintritt",
+            "scores": $scope.getAnswer()
+        }, {
+            "label": "Austritt",
+            "scores": $scope.getAnswer()
+        }];
+
+    };
+
+
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
+    $scope.setDataView = function() {
+
+        var columnDefs = [{
+            headerName: "Datum",
+            editable: true,
+            field: "datestamp"
+        }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
+            editable: false,
+            field: "Suchtdruck_1"
+        }, {
+            headerName: "Bemerkungen",
+            editable: true,
+            field: "diary"
+        }, {
+            headerTooltip: "PID",
+            headerName: "Patient-ID",
+            editable: false,
+            field: "PID",
+            width: 90
+        }, {
+            headerTooltip: "FID",
+            headerName: "Fall-ID",
+            editable: false,
+            field: "FID",
+            width: 90
+        }];
+
+        // DataView - Options
+        $scope.d.gridOptions = {
+            columnDefs: columnDefs,
+            rowData: $scope.d.craving,
+            pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            enableColResize: true,
+            enableSorting: true
+        };
+
+    };
+
 
 });
