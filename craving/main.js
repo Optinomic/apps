@@ -8,6 +8,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Init
     // -----------------------------------
+    // Needs to be the same as in base.opapp.m4: [module] | id
     $scope.appID = 'com.optinomic.apps.craving';
 
     // Data-Sharing (do not remove)
@@ -32,30 +33,31 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             console.log('(DATA): loadedMainData:', data);
 
-            // Save Data
+            // Save Data to $scope.d
             $scope.d.dataMain = data;
 
             // Check if we have survey_responses | data.
             if (data.survey_responses.length !== 0) {
                 $scope.d.haveData = true;
-                console.log('(DATA): haveData:', data.survey_responses.length, $scope.haveData);
+                console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
+
+                // Get Calculations from this app.
+                $scope.getCalculation('another_calculation');
+
             }
+            //FAKE DATA:  Remove this later!
+            $scope.d.haveData = true;
 
-            // Load Data / Calculations
-            //$scope.loadResults();
 
-
-            // Run Functions a.s.a Data:
+            // Run Functions a.s.a Data is loaded:
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
 
 
+            // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.init = true;
-
-            //FAKE DATA:  Do this in 'loadResults'.success
-            $scope.d.haveData = true;
         });
     };
     $scope.loadMainData();
@@ -67,11 +69,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Data: Get Calculations 
     // -----------------------------------
 
-    $scope.loadResults = function() {
+    $scope.getCalculation = function(calc_name) {
         // -----------------------------------
         // Get Survey-Results: 
         // -----------------------------------
-        var call = dataService.getAppCalculations($scope.appID, 'another_calculation');
+        var call = dataService.getAppCalculations($scope.appID, calc_name);
 
         call.success(function(data) {
             console.log('(DATA): getAppCalculations:', data);
@@ -219,12 +221,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Patient-ID",
             editable: false,
             field: "PID",
+            hide: true,
             width: 90
         }, {
             headerTooltip: "FID",
             headerName: "Fall-ID",
             editable: false,
             field: "FID",
+            hide: true,
             width: 90
         }];
 
@@ -236,7 +240,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             dontUseScrolls: false,
             enableFilter: true,
             enableColResize: true,
-            enableSorting: true
+            enableSorting: true,
+            showToolPanel: true
         };
 
     };
