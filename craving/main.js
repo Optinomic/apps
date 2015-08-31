@@ -206,7 +206,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var columnDefs = [{
             headerName: "Datum",
             editable: true,
-            field: "datestamp"
+            field: "datestamp",
+            sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck",
@@ -241,7 +242,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableFilter: true,
             enableColResize: true,
             enableSorting: true,
-            showToolPanel: true
+            showToolPanel: false
         };
 
     };
