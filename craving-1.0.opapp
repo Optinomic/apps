@@ -81,7 +81,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 
 
 
@@ -135,7 +135,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 
 
 
@@ -192,7 +192,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 
 
 
