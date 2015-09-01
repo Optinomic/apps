@@ -81,7 +81,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
 
 
 
@@ -135,7 +135,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
 
 
 
@@ -192,7 +192,7 @@ website = http://www.optinomic.com/
 <!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
 -->
-<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_2/radian.js"></script>
 
 
 
@@ -3370,7 +3370,7 @@ angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
         return {
             //templateUrl: 'scripts/directives/charttimeline.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: 'http://apps.optinomic.org/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
 
             restrict: 'E',
             //replace: true,
@@ -4108,7 +4108,7 @@ angular.module('optinomicDataModule')
 
         return {
             //templateUrl: 'scripts/directives/chart_tscore.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html',
+            templateUrl: 'http://apps.optinomic.org/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html',
 
             restrict: 'E',
             //replace: true,
