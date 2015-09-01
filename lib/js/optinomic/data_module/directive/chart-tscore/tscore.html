@@ -12,9 +12,9 @@
             </lines>
         </div>
         <!-- Description -->
-        <points x="[[plot.xs]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="left" MARKER-FONT-SIZE="14" fill="#3F51B5" label="Left Titles">
+        <points x="[[plot.xs]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="left" MARKER-FONT-SIZE="12" fill="#3F51B5" label="Left Titles">
         </points>
-        <points x="[[plot.xs_max]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="right" MARKER-FONT-SIZE="14" fill="#3F51B5" label="Right Titles">
+        <points x="[[plot.xs_max]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="right" MARKER-FONT-SIZE="12" fill="#3F51B5" label="Right Titles">
         </points>
         <!-- Result Line -->
         <lines ng-repeat="answer in plot.answers" y="[[plot.ys]]" x="[[answer.t_scores]]" stroke="[[answer.colour]]" stroke-width="3" stroke-opacity="1" label="[[answer.label]]">
