@@ -1,5 +1,5 @@
-<div ng-if="plot_done" style="margin-left:-120px; overflow-y: hidden; ">
-    <plot ng-attr-width="{{myOptions.screenWidth + 240}}" ng-attr-height="{{myOptions.screenHeight}}" axis-x-label="T-Wert" range-x="0,100" axis-y="off" legend-switches>
+<div ng-if="plot_done" style="margin-left:-140px; overflow: hidden; ">
+    <plot ng-attr-width="{{myOptions.screenWidth}}" ng-attr-height="{{myOptions.screenHeight}}" axis-x-label="T-Wert" range-x="0,100" axis-y="off" legend-switches style="overflow: hidden;">
         <!-- Decoration -->
         <area x="[[plot.area_1]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#E3F2FD">
         <area x="[[plot.area_2]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#BBDEFB">

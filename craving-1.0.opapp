@@ -4146,7 +4146,8 @@ angular.module('optinomicDataModule')
                 function initOptions(Options) {
 
                     Options = Options === undefined ? {} : Options;
-                    var myWidth = window.innerWidth / 100 * 95;
+                    //var myWidth = window.innerWidth / 100 * 95 + 280;
+                    var myWidth = window.innerWidth + 280;
                     //var myHeight = window.innerHeight - 150;
                     var myHeight = 60 * scope.data[0].scores.length;
 
