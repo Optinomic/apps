@@ -78,7 +78,10 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+-->
+<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
 
 
 
@@ -129,7 +132,10 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+-->
+<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
 
 
 
@@ -183,7 +189,10 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+-->
+<script src="http://apps.optinomic.org/lib/js/vendor/radian_0_1_3/radian.js"></script>
 
 
 
@@ -229,7 +238,8 @@ var app = angular
             'self',
             // Allow loading from outer templates domain.
             'https://rawgit.com/Optinomic/apps/master/lib/**',
-            'https://cdn.rawgit.com/Optinomic/apps/master/lib/**'
+            'https://cdn.rawgit.com/Optinomic/apps/master/lib/**',
+            'http://apps.optinomic.org/**'
         ]);
     });
 
