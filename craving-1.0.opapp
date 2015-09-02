@@ -4209,11 +4209,6 @@ angular.module('optinomicDataModule')
                     var maxHeight = 10 / data[0].scores.length;
 
 
-                    var meanAnswer = {
-                        "label": 'Mean',
-                        "t_scores": [],
-                        "colour": getColor(data.length + 1)
-                    };
 
 
 
@@ -4277,13 +4272,28 @@ angular.module('optinomicDataModule')
 
 
                     // Calculate MEAN and save it
-                    console.log('Starting Array for Statistics: ', allScores);
+
+
+                    var meanAnswer = {
+                        "label": 'Mean',
+                        "t_scores": [],
+                        "colour": getColor(data.length + 1)
+                    };
+
+                    for (var x in allScores) {
+                        var currentScore = allScores[x];
+                        var calcMean = simpleStatistics.mean(currentScore);
+                        meanAnswer.t_scores.push(calcMean);
+                    };
+
+                    console.log('Starting Array for Statistics: ', allScores, meanAnswer);
 
                     // Prepare RETURN
 
                     var plot = {
 
                         "answers": my_answers,
+                        "meanAnswer": meanAnswer,
 
                         "titles": my_titles,
 
