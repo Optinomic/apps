@@ -5,6 +5,7 @@ name = Example with Makefile
 short_description = An example app
 version = 1.0
 
+type = patient
 
 [description]
 

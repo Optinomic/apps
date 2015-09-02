@@ -5,6 +5,7 @@ name = Craving-Tracking
 short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
 version = 1.0
 
+type = patient
 
 [description]
 
@@ -37,7 +38,7 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h3 class="md-headline">Data: {{d.dataMain.apps.current.name}}</h3>
+    <h3 class="md-headline">Ergebnisse (Messungen): {{d.dataMain.apps.current.name}}</h3>
 </div>
 <div>
     <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
@@ -1230,7 +1231,7 @@ angular.module('optinomicDataModule')
 
             aApps.then(function(data) {
                 var myApp = {};
-                myApp.all = data.modules;
+                myApp.all = data.patient_modules;
 
                 // Save current app details
                 myApp.all.forEach(function(current_app, myindex) {

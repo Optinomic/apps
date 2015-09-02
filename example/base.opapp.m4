@@ -4,6 +4,7 @@ id = com.optinomic.apps.example
 name = Example with Makefile
 short_description = An example app
 version = include(VERSION)
+type = patient
 
 [description]
 
