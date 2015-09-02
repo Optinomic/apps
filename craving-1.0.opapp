@@ -4110,7 +4110,7 @@ angular.module('optinomicDataModule')
 
         return {
             //templateUrl: 'scripts/directives/chart_tscore.html',
-            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?v20150901',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?v20150902',
 
             restrict: 'E',
             //replace: true,
@@ -4133,9 +4133,8 @@ angular.module('optinomicDataModule')
                     scope.plot_done = false;
                     scope.myOptions = initOptions(scope.myOptions);
                     scope.plot = preparePlot(scope.data);
-                    scope.plot = addMeanPlot(scope.plot);
+                    scope.plot = scope.getShowAnswers();
 
-                    scope.plot_done = true;
                 }
 
 
@@ -4148,7 +4147,7 @@ angular.module('optinomicDataModule')
 
                     Options = Options === undefined ? {} : Options;
                     //var myWidth = window.innerWidth / 100 * 95 + 280;
-                    var myWidth = window.innerWidth + 300;
+                    var myWidth = window.innerWidth + 280;
                     //var myHeight = window.innerHeight - 150;
                     var myHeight = 60 * scope.data[0].scores.length;
 
@@ -4166,14 +4165,18 @@ angular.module('optinomicDataModule')
                     var screenWidth = Options.screenWidth === undefined ? myWidth : Options.screenWidth;
                     var screenHeight = Options.screenHeight === undefined ? myHeight : Options.screenHeight;
                     var colours = Options.colours === undefined ? default_colours : Options.colours;
+                    var show_responses = Options.show_responses === undefined ? true : Options.show_responses;
                     var show_scores = Options.show_scores === undefined ? false : Options.show_scores;
+                    var show_mean = Options.show_mean === undefined ? false : Options.show_mean;
 
 
                     var ReturnedOptions = {
                         'screenWidth': screenWidth,
                         'screenHeight': screenHeight,
                         'colours': colours,
-                        'show_scores': show_scores
+                        'show_responses': show_responses,
+                        'show_scores': show_scores,
+                        'show_mean': show_mean
                     };
 
                     //console.log('Options Return', ReturnedOptions);
@@ -4234,7 +4237,8 @@ angular.module('optinomicDataModule')
                         var answer = {
                             "label": current.label,
                             "t_scores": [],
-                            "colour": getColor(x)
+                            "colour": getColor(x),
+                            "show": scope.myOptions.show_scores
                         };
 
                         // scope.myOptions.default_colours[x]
@@ -4245,7 +4249,6 @@ angular.module('optinomicDataModule')
 
                             var myCount = parseInt(y) + 1;
                             var myHeight = maxHeight * myCount;
-
 
 
                             my_xs.push(0);
@@ -4277,7 +4280,8 @@ angular.module('optinomicDataModule')
                     var meanAnswer = {
                         "label": 'Mean',
                         "t_scores": [],
-                        "colour": getColor(data.length + 1)
+                        "colour": getColor(data.length),
+                        "show": scope.myOptions.show_mean
                     };
 
                     for (var x in allScores) {
@@ -4323,13 +4327,22 @@ angular.module('optinomicDataModule')
                 };
 
 
-                // Add MeanPlot
-                function addMeanPlot(data) {
+                // Show - Selected  Answers
+                scope.getShowAnswers = function() {
 
-                    var plot_anwers = data;
+                    var plot_answers = scope.plot;
+                    plot_answers.answersShow = [];
 
-                    return plot_anwers;
+                    for (var x in plot_answers.answers) {
+                        var current = plot_answers.answers[x];
+                        if (current.show) {
+                            plot_answers.answersShow.push(current);
+                        }
+                    };
 
+                    //console.log('plot_answers -> ', plot_answers)
+                    scope.plot_done = true;
+                    return plot_answers;
                 };
 
 
@@ -4346,13 +4359,12 @@ angular.module('optinomicDataModule')
 
 
                 scope.$watch('myOptions', function() {
-                    updateStuff();
+                    scope.getShowAnswers();
                 }, true);
 
 
             }
         };
-
     });
 
 
