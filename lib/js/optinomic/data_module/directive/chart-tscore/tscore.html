@@ -26,7 +26,7 @@
         </points>
     </plot>
 </div>
-<div ng-if="plot_done" layout="row" layout-align="start start">
+<div ng-if="plot_done" layout="row" layout-align="start start" style="margin-top:-12px;">
     <div ng-repeat="me in plot.answers">
         <md-switch class="md-primary" style="color:{{me.colour}};" ng-change="getShowAnswers()" ng-model="me.show" aria-label="{{ me.label }}">
             {{me.label}}
@@ -34,7 +34,7 @@
     </div>
     <div>
         <md-switch class="md-warn" style="color:{{me.colour}};" ng-model="myOptions.show_scores" aria-label="Show Scores">
-            {{scope.translations.showScores}}
+            {{translations.showScores}}
         </md-switch>
     </div>
 </div>

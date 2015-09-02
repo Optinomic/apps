@@ -4169,7 +4169,6 @@ angular.module('optinomicDataModule')
                     var show_responses = Options.show_responses === undefined ? true : Options.show_responses;
                     var show_scores = Options.show_scores === undefined ? true : Options.show_scores;
                     var show_mean = Options.show_mean === undefined ? false : Options.show_mean;
-                    var show_mean_only = Options.show_mean_only === undefined ? false : Options.show_mean_only;
 
 
                     var ReturnedOptions = {
@@ -4179,8 +4178,7 @@ angular.module('optinomicDataModule')
                         'colours': colours,
                         'show_responses': show_responses,
                         'show_scores': show_scores,
-                        'show_mean': show_mean,
-                        'show_mean_only': show_mean_only
+                        'show_mean': show_mean
                     };
 
                     // Some Translations
