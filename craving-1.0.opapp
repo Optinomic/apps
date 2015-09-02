@@ -4215,6 +4215,14 @@ angular.module('optinomicDataModule')
                         "colour": getColor(data.length + 1)
                     };
 
+
+
+                    var allScores = [];
+                    for (var y in data[0].scores) {
+                        allScores[y] = [];
+                    };
+
+
                     for (var x in data) {
                         var current = data[x];
                         //console.log('current = ', current)
@@ -4225,11 +4233,7 @@ angular.module('optinomicDataModule')
                         var my_ys = [];
                         var my_ys_label = [];
                         var trenner = [];
-                        var allScores = [];
 
-                        for (var y in current.scores) {
-                            allScores[y] = [];
-                        };
 
 
                         var answer = {
