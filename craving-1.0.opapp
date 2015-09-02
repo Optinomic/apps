@@ -4257,7 +4257,7 @@ angular.module('optinomicDataModule')
 
                             my_titles.push(score.question);
                             answer.t_scores.push(score.t_score);
-                            allScores.push(score.t_score);
+                            allScores[y].push(score.t_score);
 
                         };
 
