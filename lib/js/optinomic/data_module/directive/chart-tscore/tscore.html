@@ -17,7 +17,7 @@
         <points x="[[plot.xs_max]]" y="[[plot.ys_label]]" marker="text" marker-text="[[plot.titles]]" MARKER-ALIGNMENT="right" MARKER-FONT-SIZE="12" fill="#3F51B5" label="Right Titles">
         </points>
         <!-- Result Line -->
-        <lines ng-repeat="answer in plot.answersShow" y="[[plot.ys]]" x="[[answer.t_scores]]" stroke="[[answer.colour]]" stroke-width="4" stroke-opacity="0.7" label="[[answer.label]]">
+        <lines ng-repeat="answer in plot.answersShow" y="[[plot.ys]]" x="[[answer.t_scores]]" stroke="[[answer.colour]]" stroke-width="4" stroke-opacity="0.8" label="[[answer.label]]">
         </lines>
         <!-- Score Value -->
         <points ng-if="myOptions.show_scores" ng-repeat="answer in plot.answersShow" x="[[answer.t_scores]]" y="[[plot.ys]]" fill="#ffffff" STROKE="#ffffff" STROKE-WIDTH="0" FILL-OPACITY="0.4" MARKER-SIZE="310">
@@ -28,9 +28,9 @@
 </div>
 <div ng-if="plot_done" layout="row" layout-align="start start" style="margin-top:-12px;">
     <div ng-repeat="me in plot.answers">
-        <md-switch class="md-primary" style="color:{{me.colour}};" ng-change="getShowAnswers()" ng-model="me.show" aria-label="{{ me.label }}">
+        <md-checkbox class="md-primary" style="color:{{me.colour}};" ng-change="getShowAnswers()" ng-model="me.show" aria-label="{{ me.label }}">
             {{me.label}}
-        </md-switch>
+        </md-checkbox>
     </div>
     <div>
         <md-switch class="md-warn" style="color:{{me.colour}};" ng-model="myOptions.show_scores" aria-label="Show Scores">
