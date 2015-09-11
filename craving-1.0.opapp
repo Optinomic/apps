@@ -50,7 +50,10 @@ website = http://www.optinomic.com/
 </div>
 <div ag-grid="d.gridOptions" class="ag-fresh" style="width: 99%; height: 360px;"></div>
 <p class="small md-caption">
-    Selection: {{d.gridOptions.selectedRows.Suchtdruck}} | {{d.gridOptions.selectedRows.Suchtdruck_1}}
+    Selection:
+    <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
+        {{selecteRow.data.datestamp}}: {{selecteRow.data.Suchtdruck_1}} <span class="small">{{selecteRow.id}}</span>
+    </span>
 </p>
 
             </div>
