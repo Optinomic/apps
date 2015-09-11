@@ -336,7 +336,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
 
 });
 
-angular.module('optinomicDataModule').factory('apiService', function($http, config) {
+angular.module('optinomicDataModule').factory('apiService', function($http) {
     var ongoing_requests = [];
 
     var request = function(method, path, query, body) {
@@ -348,10 +348,11 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
         };
 
         var token = helpers.getToken();
+        var apiUrl = helpers.getApiURL();
         headers["X-API-Token"] = token;
 
         var reqConf = {
-            url: config.apiUrl + path,
+            url: apiUrl + path,
             method: method,
             params: query,
             data: body,
@@ -408,9 +409,8 @@ angular.module('optinomicDataModule').factory('apiService', function($http, conf
     };
 
     var getConfig = function() {
-
         var Config = {
-            url: config.apiUrl
+            url: apiUrl
         };
 
         //console.log('getConfig = ', Config);
