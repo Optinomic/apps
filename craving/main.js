@@ -8,13 +8,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Init
     // -----------------------------------
-    // Needs to be the same as in base.opapp.m4: [module] | id
-    $scope.appID = 'com.optinomic.apps.craving';
 
     // Data-Sharing (do not remove)
     $scope.d = scopeDService;
-
-
 
 
 
@@ -22,13 +18,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Functions
     // -----------------------------------
 
-
     $scope.loadMainData = function() {
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
-        var dataPromiseMain = dataService.getMainAppData($scope.appID);
+        var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
             console.log('(DATA): loadedMainData:', data);
@@ -42,7 +37,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
                 // Get Calculations from this app.
-                $scope.getCalculation('another_calculation');
+                $scope.d.getCalculation('another_calculation');
 
             }
             //FAKE DATA:  Remove this later!
@@ -62,26 +57,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
-
-
-
-    // -----------------------------------
-    // Data: Get Calculations 
-    // -----------------------------------
-
-    $scope.getCalculation = function(calc_name) {
-        // -----------------------------------
-        // Get Survey-Results: 
-        // -----------------------------------
-        var call = dataService.getAppCalculations($scope.appID, calc_name);
-
-        call.success(function(data) {
-            console.log('(DATA): getAppCalculations:', data);
-        });
-        call.error(function(data) {
-            console.log('(ERROR): getAppCalculations:', data);
-        });
-    };
 
 
 

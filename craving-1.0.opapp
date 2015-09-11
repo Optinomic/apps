@@ -286,10 +286,11 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
 
 
     // -----------------------------------
-    // General Functions
+    // General shared Functions - $scope.d
     // -----------------------------------
 
     $scope.d.functions = {};
+
     // -----------------------------------------------------------
     // GRID
     // http://www.angulargrid.com/angular-grid-resizing/index.php
@@ -311,14 +312,28 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
     };
 
 
+    // -----------------------------------
+    // Data: Get Calculations 
+    // -----------------------------------
 
+    $scope.d.functions.getCalculation = function(calc_name) {
 
-});
+        var call = dataService.getAppCalculations(calc_name);
 
-angular.module('optinomicDataModule').factory('config', function() {
-    return {
-        apiUrl: "http://10.211.55.10:3001/"
+        call.success(function(data) {
+            // Save Data to $scope.d
+            $scope.d.calculations = $scope.d.calculations === undefined ? {} : $scope.d.calculations;
+            $scope.d.calculations[calc_name] = data;
+            console.log('(DATA): getAppCalculation: ', calc_name, data);
+        });
+        call.error(function(data) {
+            console.log('(ERROR): getAppCalculations:', calc_name, data);
+        });
     };
+
+
+
+
 });
 
 angular.module('optinomicDataModule').factory('apiService', function($http, config) {
@@ -971,7 +986,7 @@ angular.module('optinomicDataModule')
  * Service for getting Data from API
  */
 angular.module('optinomicDataModule')
-    .service('dataService', function($q, apiService, config) {
+    .service('dataService', function($q, apiService) {
 
 
         var dataService = {};
@@ -980,12 +995,12 @@ angular.module('optinomicDataModule')
         // API - Functions
         // -------------------------------------------------------------------------
 
-        dataService.getSurveyResponses = function(app_identifier) {
-            return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + app_identifier, {});
+        dataService.getSurveyResponses = function() {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + helpers.getAppID(), {});
         };
 
-        dataService.getAppCalculations = function(app_identifier, calculation_identifier) {
-            return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + app_identifier + "/" + calculation_identifier, {});
+        dataService.getAppCalculations = function(calculation_identifier) {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + helpers.getAppID() + "/" + calculation_identifier, {});
         };
 
 
@@ -1017,6 +1032,21 @@ angular.module('optinomicDataModule')
         dataService.getToken = function() {
             return helpers.getToken();
         };
+
+        dataService.getAppName = function() {
+            return helpers.getAppName();
+        };
+
+        dataService.getAppID = function() {
+            return helpers.getAppID();
+        };
+
+        dataService.getApiURL = function() {
+            return helpers.getApiURL();
+        };
+
+
+
 
         dataService.checkSuccess = function(max, count) {
 
@@ -1156,7 +1186,7 @@ angular.module('optinomicDataModule')
         // Main - Functions
         // -------------------------------------------------------------------------
 
-        dataService.getMainAppData = function(app_identifier) {
+        dataService.getMainAppData = function() {
 
             // Actions
             var actions = 5;
@@ -1166,11 +1196,21 @@ angular.module('optinomicDataModule')
             var deferred = $q.defer();
             var api = '';
             var return_data = {};
+
+
+            // ------------------------------------------------
+            // Get Params from Helper Functions
+            // ------------------------------------------------
+            var app_identifier = dataService.getAppID();
             return_data.identifier = app_identifier;
 
             return_data.params = {};
             return_data.params.PID = dataService.getPatientID();
             return_data.params.token = dataService.getToken();
+            return_data.params.app_name = dataService.getAppName();
+            return_data.params.app_id = app_identifier;
+            return_data.params.api_url = dataService.getApiURL();
+
 
             // ------------------------------------------------
             // Action 1:  Survey Responses
@@ -1206,9 +1246,10 @@ angular.module('optinomicDataModule')
                 return_data.config = configData;
 
                 // Get Clini-Data
+                // ToDo - Move Entries from getClinicData!
                 return_data.config.data = dataService.getClinicData(configData.key);
                 return_data.config.api = {};
-                return_data.config.api.url = config.apiUrl;
+                return_data.config.api.url = dataService.getApiURL();
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
@@ -4391,13 +4432,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Init
     // -----------------------------------
-    // Needs to be the same as in base.opapp.m4: [module] | id
-    $scope.appID = 'com.optinomic.apps.craving';
 
     // Data-Sharing (do not remove)
     $scope.d = scopeDService;
-
-
 
 
 
@@ -4405,13 +4442,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Functions
     // -----------------------------------
 
-
     $scope.loadMainData = function() {
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
-        var dataPromiseMain = dataService.getMainAppData($scope.appID);
+        var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
             console.log('(DATA): loadedMainData:', data);
@@ -4425,7 +4461,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
                 // Get Calculations from this app.
-                $scope.getCalculation('another_calculation');
+                $scope.d.getCalculation('another_calculation');
 
             }
             //FAKE DATA:  Remove this later!
@@ -4445,26 +4481,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
-
-
-
-    // -----------------------------------
-    // Data: Get Calculations 
-    // -----------------------------------
-
-    $scope.getCalculation = function(calc_name) {
-        // -----------------------------------
-        // Get Survey-Results: 
-        // -----------------------------------
-        var call = dataService.getAppCalculations($scope.appID, calc_name);
-
-        call.success(function(data) {
-            console.log('(DATA): getAppCalculations:', data);
-        });
-        call.error(function(data) {
-            console.log('(ERROR): getAppCalculations:', data);
-        });
-    };
 
 
 
