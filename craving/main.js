@@ -192,7 +192,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Datum",
             editable: false,
             field: "datestamp",
-            cellClass: 'flow-text',
+            cellClass: 'md-subhead',
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
@@ -204,7 +204,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck",
-            cellClass: 'md-body-1',
+            cellClass: 'md-body-2',
             width: 90,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
