@@ -39,7 +39,6 @@ website = http://www.optinomic.com/
                 -->
                 <div>
     <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-    <p class="flow-right">{{selecteRow.datestamp}}: {{selecteRow.Suchtdruck_1}}</p>
 </div>
 <div>
     <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
@@ -50,6 +49,12 @@ website = http://www.optinomic.com/
     </md-button>
 </div>
 <div ag-grid="d.gridOptions" class="ag-fresh" style="width: 99%; height: 360px;"></div>
+<p class="small md-caption">
+    Selection:
+    <span ng-repeat="selecteRow in gridOptions.selectedRows">
+        {{selecteRow.Suchtdruck}} | {{selecteRow.Suchtdruck_1}}
+    </span>
+</p>
 
             </div>
             <div ng-if="!d.haveData">
@@ -4618,8 +4623,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck",
+            headerName: "Suchtdruck_1",
             editable: false,
+            hide: true,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",

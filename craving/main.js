@@ -193,8 +193,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck",
+            headerName: "Suchtdruck_1",
             editable: false,
+            hide: true,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",

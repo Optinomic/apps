@@ -1,6 +1,5 @@
 <div>
     <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-    <p class="flow-right">{{selecteRow.datestamp}}: {{selecteRow.Suchtdruck_1}}</p>
 </div>
 <div>
     <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
@@ -11,3 +10,9 @@
     </md-button>
 </div>
 <div ag-grid="d.gridOptions" class="ag-fresh" style="width: 99%; height: 360px;"></div>
+<p class="small md-caption">
+    Selection:
+    <span ng-repeat="selecteRow in gridOptions.selectedRows">
+        {{selecteRow.Suchtdruck}} | {{selecteRow.Suchtdruck_1}}
+    </span>
+</p>
