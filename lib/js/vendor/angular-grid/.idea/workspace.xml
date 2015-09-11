@@ -1,0 +1,1405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9d0d0bd7-2164-48a2-8a2d-658337a50042" name="Default" comment="fixes #385 - now colId is used consistently when getting / setting filter">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/angular-grid-column-api/index.php" afterPath="$PROJECT_DIR$/docs/angular-grid-column-api/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/angular-grid-datasource/index.php" afterPath="$PROJECT_DIR$/docs/angular-grid-datasource/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/angular-grid-filtering/index.php" afterPath="$PROJECT_DIR$/docs/angular-grid-filtering/index.php" />
+    </list>
+    <ignored path="angular-grid.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="angular-grid" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="example.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/example.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="446" column="0" selection-start-line="446" selection-start-column="0" selection-end-line="446" selection-end-column="0" />
+              <folding>
+                <marker date="1441704990797" expanded="true" signature="14849:14859" placeholder="{...}" />
+                <marker date="1441704990797" expanded="true" signature="15302:15308" placeholder="{...}" />
+                <marker date="1441704990797" expanded="true" signature="19939:19966" placeholder="..." />
+                <marker date="1441704990797" expanded="true" signature="19993:20011" placeholder="..." />
+                <marker date="1441704990797" expanded="true" signature="20072:20096" placeholder="..." />
+                <marker date="1441704990797" expanded="true" signature="21485:21498" placeholder="..." />
+                <marker date="1441704990797" expanded="true" signature="21525:21543" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/angular-grid-filtering/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="318" column="23" selection-start-line="318" selection-start-column="23" selection-end-line="318" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="renderedCell.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/rendering/renderedCell.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="630" column="65" selection-start-line="630" selection-start-column="65" selection-end-line="630" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="notes.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/notes.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.20767888">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grid.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/grid.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="545" column="0" selection-start-line="545" selection-start-column="0" selection-end-line="545" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="virtualPaging.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/angular-grid-virtual-paging/virtualPaging.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gridOptions.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/entities/gridOptions.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rowRenderer.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/rendering/rowRenderer.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="248" column="0" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+              <folding>
+                <marker date="1441704990816" expanded="true" signature="257:23351" placeholder="{...}" />
+                <marker date="1441704990816" expanded="true" signature="20101:20584" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/utils.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="227" column="47" selection-start-line="227" selection-start-column="47" selection-end-line="227" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gridApi.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ts/gridApi.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/docs/angular-grid-lock/index.php" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-cell-expressions/exampleCellExpressions.js" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-cell-expressions/exampleCellExpressions.html" />
+        <option value="$PROJECT_DIR$/src/ts/headerRendering/headerRenderer.ts" />
+        <option value="$PROJECT_DIR$/src/ts/groupCreator.ts" />
+        <option value="$PROJECT_DIR$/src/ts/masterSlaveController.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-lock/exampleLocking.html" />
+        <option value="$PROJECT_DIR$/src/ts/selectionController.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-angular-compiling/example1.html" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-grouping-headers/example1.js" />
+        <option value="$PROJECT_DIR$/src/ts/gridPanel/gridPanel.ts" />
+        <option value="$PROJECT_DIR$/src/ts/utils.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/ts/headerRendering/renderedHeaderGroupCell.ts" />
+        <option value="$PROJECT_DIR$/src/ts/log.ts" />
+        <option value="$PROJECT_DIR$/src/ts/logger.ts" />
+        <option value="$PROJECT_DIR$/src/ts/main.ts" />
+        <option value="$PROJECT_DIR$/src/ts/columnChangeEvent.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-lock/exampleLocking.js" />
+        <option value="$PROJECT_DIR$/src/ts/masterSlaveService.ts" />
+        <option value="$PROJECT_DIR$/docs/documentation_header.php" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-master-slave/exampleFloatingFooter.html" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-master-slave/exampleMasterSlave.js" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-master-slave/exampleFloatingFooter.js" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-master-slave/index.php" />
+        <option value="$PROJECT_DIR$/src/ts/gridOptionsWrapper.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterApply.js" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-grid-options/index.php" />
+        <option value="$PROJECT_DIR$/src/ts/entities/gridOptions.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-master-slave/exampleMasterSlave.html" />
+        <option value="$PROJECT_DIR$/docs/example-expressions-and-context/monthlySales.js" />
+        <option value="$PROJECT_DIR$/src/ts/grid.ts" />
+        <option value="$PROJECT_DIR$/src/ts/expressionService.ts" />
+        <option value="$PROJECT_DIR$/src/ts/rendering/rowRenderer.ts" />
+        <option value="$PROJECT_DIR$/src/ts/columnController.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterModel.js" />
+        <option value="$PROJECT_DIR$/docs/example.html" />
+        <option value="$PROJECT_DIR$/bower.json" />
+        <option value="$PROJECT_DIR$/src/ts/widgets/agPopupService.ts" />
+        <option value="$PROJECT_DIR$/src/ts/gridApi.ts" />
+        <option value="$PROJECT_DIR$/src/ts/filter/numberFilter.ts" />
+        <option value="$PROJECT_DIR$/src/ts/filter/textFilter.ts" />
+        <option value="$PROJECT_DIR$/src/ts/filter/filterManager.ts" />
+        <option value="$PROJECT_DIR$/src/ts/filter/setFilter.ts" />
+        <option value="$PROJECT_DIR$/src/ts/filter/setFilterModel.ts" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-column-api/index.php" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-datasource/index.php" />
+        <option value="$PROJECT_DIR$/docs/example.js" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-filtering/index.php" />
+        <option value="$PROJECT_DIR$/docs/angular-grid-virtual-paging/virtualPaging.js" />
+        <option value="$PROJECT_DIR$/notes.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+      </GulpfileState>
+    </gulpfiles>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1272" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="angular-grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="angular-grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="angular-grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs" />
+    <property name="FullScreen" value="false" />
+    <property name="typescript-compiler-editor-notification" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="107" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="136" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="138" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="812" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="130" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="129" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="130" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="804" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\workspaceij\angular-grid\docs\angular-grid-master-slave" />
+      <recent name="C:\dev\workspaceij\angular-grid\docs\angular-grid-lock" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/bower.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/angular-grid.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/angular-grid.d.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/angular-grid.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/angular-grid.min.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/angular-grid.min.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/theme-fresh.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dist/theme-fresh.min.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-angular-compiling/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-api/index.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-cell-expressions/exampleCellExpressions.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-cell-rendering/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-cell-styling/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-cell-template/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-column-api/columnStateExample.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-column-definitions/index.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-context/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-editing/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterApi.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterApply.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterExternal.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterModel.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-getting-started/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-getting-started/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-getting-started/example3.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-getting-started/index.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grid-options/index.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping-headers/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example3.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example4.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example5.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/example6.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-grouping/groupingFooters.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-header-rendering/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-icons/icons.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-internationalisation/index.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-internationalisation/internationalisation.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-internationalisation/internationalisation.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-loading-rows/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-loading/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-master-slave/exampleFloatingFooter.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-master-slave/exampleMasterSlave.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-no-scrolls/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-pagination/paging.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-pagination/pagingServerSide.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-pinning/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-refresh/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-refresh/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-resizing/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-resizing/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-selection/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-selection/example2.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-selection/example3.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-selection/example4.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-selection/groupSelection.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-sorting/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-sorting/exampleSortingOrder.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-sorting/sortingApi.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-styling/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-tool-panel/toolPanelExample.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-value-getters/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-virtual-paging/virtualPaging.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-virtual-paging/virtualPagingServerSide.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-width-and-height/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/angular-grid.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/angular-grid.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/angular-grid.min.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/angular-grid.min.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/theme-fresh.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/dist/theme-fresh.min.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/documentation.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/documentation_header.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-account-report/account.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-data-grid/basic.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-expressions-and-context/monthlySales.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-file-browser/fileBrowser.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-native-javascript-grid/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-native-javascript-grid/html5grid.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-web-component-grid/example1.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example-web-component-grid/webComponentDataGrid.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/example.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/styles/angular-grid.styl</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/styles/theme-fresh.styl</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/columnController.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/entities/colDef.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/entities/gridOptions.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/entities/rowNode.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/filter/filterManager.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/grid.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/gridApi.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/gridOptionsWrapper.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/gridPanel/gridPanel.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/layout/borderLayout.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/rendering/renderedCell.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/rendering/renderedRow.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/rendering/rowRenderer.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/ts/selectionController.ts</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-floating/exampleFloating.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-floating/exampleFloating.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/docs/angular-grid-floating/index.php</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
+  <component name="RunManager" selected="PHP Built-in Web Server.ag-grid">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+    <configuration default="false" name="ag-grid" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$/docs" port="8082">
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="PHP Built-in Web Server.ag-grid" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d0d0bd7-2164-48a2-8a2d-658337a50042" name="Default" comment="" />
+      <created>1439287334030</created>
+      <option name="number" value="Default" />
+      <updated>1439287334030</updated>
+      <workItem from="1439287335333" duration="9274000" />
+      <workItem from="1439305648182" duration="48452000" />
+      <workItem from="1439798817938" duration="2691000" />
+      <workItem from="1439814358305" duration="18750000" />
+      <workItem from="1440493589574" duration="22980000" />
+      <workItem from="1441102724221" duration="14315000" />
+      <workItem from="1441372723322" duration="1197000" />
+      <workItem from="1441619811543" duration="4225000" />
+    </task>
+    <task id="LOCAL-00001" summary="moved to TypeScript 1.5.3">
+      <created>1439287779171</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1439287779171</updated>
+    </task>
+    <task id="LOCAL-00002" summary="took out not needed console.log('init')">
+      <created>1439288600578</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1439288600578</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first pass of master / child">
+      <created>1439308510808</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1439308510808</updated>
+    </task>
+    <task id="LOCAL-00004" summary="bug fix - sizeColsToFix was broken when used with column headers">
+      <created>1439371559198</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1439371559198</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed documentation for api.getColumnState()">
+      <created>1439371882141</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1439371882141</updated>
+    </task>
+    <task id="LOCAL-00006" summary="IE was not firing for 'backspace, delete' for the filter text boxes">
+      <created>1439391625652</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1439391625652</updated>
+    </task>
+    <task id="LOCAL-00007" summary="bug fix - sizeColsToFix was not working when columns were not fitting">
+      <created>1439392049112</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1439392049112</updated>
+    </task>
+    <task id="LOCAL-00008" summary="iteration of master / slave grids">
+      <created>1439394739105</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1439394739105</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixes #375">
+      <created>1439459038719</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1439459038719</updated>
+    </task>
+    <task id="LOCAL-00010" summary="iteration of loating rows">
+      <created>1439481036990</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1439481036990</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added in hook for 'filter modified'">
+      <created>1439542233402</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1439542233402</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixes #376 - group column was not resizable if defined in grid options">
+      <created>1439547106704</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1439547106704</updated>
+    </task>
+    <task id="LOCAL-00013" summary="bug fix - the group column was not getting it's width set correctly">
+      <created>1439547829804</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1439547829804</updated>
+    </task>
+    <task id="LOCAL-00014" summary="bug fixes for column controller">
+      <created>1439566928646</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1439566928646</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixes #387">
+      <created>1439908732584</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1439908732584</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fixes #385 - now colId is used consistently when getting / setting filter">
+      <created>1439916719586</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1439916719586</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added typescript definitions to bower.json">
+      <created>1440505377787</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1440505377787</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added eventSource to afterGuiAttached">
+      <created>1440581016757</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1440581016757</updated>
+    </task>
+    <task id="LOCAL-00019" summary="iteration of excel like filtering">
+      <created>1440777958575</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1440777958575</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="121884000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1272" y="-8" width="1296" height="1040" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32673267" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33883387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27669904" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3080308" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="moved to TypeScript 1.5.3" />
+    <MESSAGE value="took out not needed console.log('init')" />
+    <MESSAGE value="first pass of master / child" />
+    <MESSAGE value="bug fix - sizeColsToFix was broken when used with column headers" />
+    <MESSAGE value="fixed documentation for api.getColumnState()" />
+    <MESSAGE value="IE was not firing for 'backspace, delete' for the filter text boxes" />
+    <MESSAGE value="bug fix - sizeColsToFix was not working when columns were not fitting" />
+    <MESSAGE value="iteration of master / slave grids" />
+    <MESSAGE value="fixes #375" />
+    <MESSAGE value="iteration of loating rows" />
+    <MESSAGE value="added in hook for 'filter modified'" />
+    <MESSAGE value="fixes #376 - group column was not resizable if defined in grid options" />
+    <MESSAGE value="bug fix - the group column was not getting it's width set correctly" />
+    <MESSAGE value="bug fixes for column controller" />
+    <MESSAGE value="fixes #387" />
+    <MESSAGE value="fixes #385 - now colId is used consistently when getting / setting filter" />
+    <MESSAGE value="added typescript definitions to bower.json" />
+    <MESSAGE value="added eventSource to afterGuiAttached" />
+    <MESSAGE value="iteration of excel like filtering" />
+    <option name="LAST_COMMIT_MESSAGE" value="iteration of excel like filtering" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-master-slave/exampleMasterSlave.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693">
+          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/cellRenderers/groupCellRendererFactory.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-master-slave/exampleMasterSlave.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26288658">
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/masterSlaveService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/expressionService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/example-expressions-and-context/monthlySales.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-cell-expressions/exampleCellExpressions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5506756">
+          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/documentation_header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.538462">
+          <caret line="292" column="52" selection-start-line="292" selection-start-column="33" selection-end-line="292" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-no-scrolls/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.538462">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-getting-started/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="28" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/entities/column.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/svgFactory.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="110" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77272725">
+          <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-filtering/exampleFilterModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11888112">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/example.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="46" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/angular-grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20101352">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/angular-grid.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24070796">
+          <caret line="0" column="883" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="10614" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.3396225">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/widgets/agPopupService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/virtualDom/vElement.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/virtualDom/vHtmlElement.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.172414">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/headerRendering/renderedHeaderCell.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67221296">
+          <caret line="90" column="35" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/rendering/renderedRow.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/rowControllers/paginationController.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5716783">
+          <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/columnChangeEvent.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2972028">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/layout/borderLayout.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5751748">
+          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/angular-grid.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1546" column="8" selection-start-line="1546" selection-start-column="8" selection-end-line="1546" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/columnController.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75874126">
+          <caret line="486" column="49" selection-start-line="486" selection-start-column="49" selection-end-line="486" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/valueService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53496504">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/rowControllers/inMemoryRowController.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="27" selection-start-line="82" selection-start-column="27" selection-end-line="82" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/filter/textFilter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/filter/numberFilter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/filter/setFilter.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028286189">
+          <caret line="129" column="34" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/filter/setFilterModel.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028286189">
+          <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/entities/colDef.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-column-api/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.8461537">
+          <caret line="194" column="9" selection-start-line="194" selection-start-column="9" selection-end-line="194" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-datasource/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39652175">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/main.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2762063">
+          <caret line="77" column="5" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/filter/filterManager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37770382">
+          <caret line="407" column="29" selection-start-line="407" selection-start-column="16" selection-end-line="407" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/example.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="446" column="0" selection-start-line="446" selection-start-column="0" selection-end-line="446" selection-end-column="0" />
+          <folding>
+            <marker date="1441704990797" expanded="true" signature="14849:14859" placeholder="{...}" />
+            <marker date="1441704990797" expanded="true" signature="15302:15308" placeholder="{...}" />
+            <marker date="1441704990797" expanded="true" signature="19939:19966" placeholder="..." />
+            <marker date="1441704990797" expanded="true" signature="19993:20011" placeholder="..." />
+            <marker date="1441704990797" expanded="true" signature="20072:20096" placeholder="..." />
+            <marker date="1441704990797" expanded="true" signature="21485:21498" placeholder="..." />
+            <marker date="1441704990797" expanded="true" signature="21525:21543" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/entities/gridOptions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/rendering/rowRenderer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="248" column="0" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+          <folding>
+            <marker date="1441704990816" expanded="true" signature="257:23351" placeholder="{...}" />
+            <marker date="1441704990816" expanded="true" signature="20101:20584" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/utils.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="227" column="47" selection-start-line="227" selection-start-column="47" selection-end-line="227" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/gridApi.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-virtual-paging/virtualPaging.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/angular-grid-filtering/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="318" column="23" selection-start-line="318" selection-start-column="23" selection-end-line="318" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/grid.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="545" column="0" selection-start-line="545" selection-start-column="0" selection-end-line="545" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ts/rendering/renderedCell.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="630" column="65" selection-start-line="630" selection-start-column="65" selection-end-line="630" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20767888">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
