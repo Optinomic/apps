@@ -15348,7 +15348,7 @@ md-tooltip.md-show {
 }
 
 .ag-optinomic .ag-row-selected {
-    background-color: #E8EAF6 !important;
+    background-color: #C5CAE9 !important;
 }
 
 .ag-optinomic .ag-body .ag-row-odd {
