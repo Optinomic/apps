@@ -11,15 +11,9 @@
         </md-button>
     </div>
 </div>
-<md-card>
-    <md-card-content>
-        <div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 400px;"></div>
-    </md-card-content>
-    <md-card-footer>
-        <p class="small md-caption">
-            <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
-        -> {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
-            </span>
-        </p>
-    </md-card-footer>
-</md-card>
+<div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 400px;"></div>
+<p class="small md-caption">
+    <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
+        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
+    </span>
+</p>
