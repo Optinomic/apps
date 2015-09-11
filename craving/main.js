@@ -193,18 +193,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "datestamp",
             cellClass: 'md-subhead',
-            sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
             editable: true,
+            width: 110,
             newValueHandler: editValueHandler,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
             cellClass: 'md-body-2',
-            width: 90,
+            width: 110,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
         }, {

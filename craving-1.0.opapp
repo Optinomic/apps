@@ -4623,18 +4623,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "datestamp",
             cellClass: 'md-subhead',
-            sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
             editable: true,
+            width: 110,
             newValueHandler: editValueHandler,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
             cellClass: 'md-body-2',
-            width: 90,
+            width: 110,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
         }, {
@@ -15291,10 +15291,18 @@ md-tooltip.md-show {
 
 .ag-fresh .ag-header-cell {
     border-right: 1px solid #E0E0E0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    line-height: 24px
 }
 
 .ag-fresh .ag-header-group-cell {
     border-right: 1px solid #E0E0E0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    line-height: 24px
 }
 
 .ag-fresh .ag-header-group-cell-with-group {
@@ -15320,10 +15328,10 @@ md-tooltip.md-show {
 
 .ag-fresh .ag-header-cell-menu-button {
     padding: 2px;
-    margin-top: 2px;
+    margin-top: 1px;
     border: 1px solid transparent;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
