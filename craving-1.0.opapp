@@ -37,7 +37,7 @@ website = http://www.optinomic.com/
                     Create a copy of 'main' for every 'template' an change the following 'partials' include:
 
                 -->
-                <div layout="row" layout-sm="column">
+                <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
@@ -50,12 +50,18 @@ website = http://www.optinomic.com/
         </md-button>
     </div>
 </div>
-<div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 400px;"></div>
-<p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
-        -> {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})</span>
-    </span>
-</p>
+<md-card>
+    <md-card-content>
+        <div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 400px;"></div>
+    </md-card-content>
+    <md-card-footer>
+        <p class="small md-caption">
+            <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
+        -> {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
+            </span>
+        </p>
+    </md-card-footer>
+</md-card>
 
             </div>
             <div ng-if="!d.haveData">
@@ -4621,15 +4627,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var columnDefs = [{
             headerName: "Datum",
-            editable: false,
+            editable: true,
             field: "datestamp",
-            cellClass: 'md-subhead',
+            cellClass: 'md-body-1',
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
             editable: true,
             width: 110,
             newValueHandler: editValueHandler,
+            cellClass: 'md-body-1',
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
@@ -4650,6 +4657,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "PID",
             hide: true,
+            cellClass: 'md-body-1',
             width: 90
         }, {
             headerTooltip: "FID",
@@ -4657,6 +4665,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "FID",
             hide: true,
+            cellClass: 'md-body-1',
             width: 90
         }];
 

@@ -190,15 +190,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var columnDefs = [{
             headerName: "Datum",
-            editable: false,
+            editable: true,
             field: "datestamp",
-            cellClass: 'md-subhead',
+            cellClass: 'md-body-1',
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
             editable: true,
             width: 110,
             newValueHandler: editValueHandler,
+            cellClass: 'md-body-1',
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
@@ -219,6 +220,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "PID",
             hide: true,
+            cellClass: 'md-body-1',
             width: 90
         }, {
             headerTooltip: "FID",
@@ -226,6 +228,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "FID",
             hide: true,
+            cellClass: 'md-body-1',
             width: 90
         }];
 
