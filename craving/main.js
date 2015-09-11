@@ -189,6 +189,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "Suchtdruck_1"
         }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
+            width: 90,
+            valueGetter: parseInt(data.Suchtdruck_1),
+            filter: 'number'
+        }, {
             headerName: "Bemerkungen",
             editable: true,
             field: "diary"
@@ -215,6 +221,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
+            rowSelection: 'single',
             enableColResize: true,
             enableSorting: true,
             showToolPanel: false

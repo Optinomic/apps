@@ -38,7 +38,8 @@ website = http://www.optinomic.com/
 
                 -->
                 <div>
-    <h3 class="md-headline">Ergebnisse (Messungen): {{d.dataMain.apps.current.name}}</h3>
+    <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    <p class="flow-right">{{selecteRow.datestamp}}: {{selecteRow.Suchtdruck_1}}</p>
 </div>
 <div>
     <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
@@ -4613,6 +4614,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: false,
             field: "Suchtdruck_1"
         }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
+            width: 90,
+            valueGetter: parseInt(data.Suchtdruck_1),
+            filter: 'number'
+        }, {
             headerName: "Bemerkungen",
             editable: true,
             field: "diary"
@@ -4639,6 +4646,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
+            rowSelection: 'single',
             enableColResize: true,
             enableSorting: true,
             showToolPanel: false
