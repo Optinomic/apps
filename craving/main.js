@@ -199,13 +199,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Suchtdruck_1",
             editable: true,
             newValueHandler: editValueHandler,
-            hide: true,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
-            editable: true,
-            newValueHandler: editValueHandler,
             cellClass: 'md-body-2',
             width: 90,
             valueGetter: 'parseInt(data.Suchtdruck_1)',

@@ -4629,13 +4629,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Suchtdruck_1",
             editable: true,
             newValueHandler: editValueHandler,
-            hide: true,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
-            editable: true,
-            newValueHandler: editValueHandler,
             cellClass: 'md-body-2',
             width: 90,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
@@ -15255,198 +15252,247 @@ md-tooltip.md-show {
 }
  
 .ag-fresh .ag-root {
-  border: 1px solid #808080;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border: 1px solid #E0E0E0;
+    font-family: "Roboto", sans-serif, "Helvetica Neue", Helvetica, Arial;
 }
+
 .ag-fresh .ag-cell {
-  padding: 2px;
+    padding: 2px;
 }
+
 .ag-fresh .ag-cell-focus {
-  border: 1px solid #a9a9a9;
+    border: 1px solid #a9a9a9;
 }
+
 .ag-fresh .ag-cell-no-focus {
-  border-right: 1px dotted #808080;
-  border-top: 1px solid transparent;
-  border-left: 1px solid transparent;
-  border-bottom: 1px solid transparent;
+    border-right: 1px dotted #E0E0E0;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
 }
+
 .ag-fresh .ag-pinned-header {
-  background: -webkit-linear-gradient(#fff, #d3d3d3);
-  background: -moz-linear-gradient(#fff, #d3d3d3);
-  background: -o-linear-gradient(#fff, #d3d3d3);
-  background: -ms-linear-gradient(#fff, #d3d3d3);
-  background: linear-gradient(#fff, #d3d3d3);
-  border-bottom: 1px solid #808080;
+    background: -webkit-linear-gradient(#fff, #EEEEEE);
+    background: -moz-linear-gradient(#fff, #EEEEEE);
+    background: -o-linear-gradient(#fff, #EEEEEE);
+    background: -ms-linear-gradient(#fff, #EEEEEE);
+    background: linear-gradient(#fff, #EEEEEE);
+    border-bottom: 1px solid #E0E0E0;
 }
+
 .ag-fresh .ag-header-container {
-  background: -webkit-linear-gradient(#fff, #d3d3d3);
-  background: -moz-linear-gradient(#fff, #d3d3d3);
-  background: -o-linear-gradient(#fff, #d3d3d3);
-  background: -ms-linear-gradient(#fff, #d3d3d3);
-  background: linear-gradient(#fff, #d3d3d3);
-  border-bottom: 1px solid #808080;
+    background: -webkit-linear-gradient(#fff, #EEEEEE);
+    background: -moz-linear-gradient(#fff, #EEEEEE);
+    background: -o-linear-gradient(#fff, #EEEEEE);
+    background: -ms-linear-gradient(#fff, #EEEEEE);
+    background: linear-gradient(#fff, #EEEEEE);
+    border-bottom: 1px solid #E0E0E0;
 }
+
 .ag-fresh .ag-header-cell {
-  border-right: 1px solid #808080;
+    border-right: 1px solid #E0E0E0;
 }
+
 .ag-fresh .ag-header-group-cell {
-  border-right: 1px solid #808080;
+    border-right: 1px solid #E0E0E0;
 }
+
 .ag-fresh .ag-header-group-cell-with-group {
-  border-bottom: 1px solid #808080;
+    border-bottom: 1px solid #E0E0E0;
 }
+
 .ag-fresh .ag-header-cell-label {
-  padding: 4px 2px 4px 2px;
+    padding: 4px 2px 4px 2px;
 }
+
 .ag-fresh .ag-header-cell-text {
-  padding-left: 2px;
+    padding-left: 2px;
 }
+
 .ag-fresh .ag-header-group-cell-label {
-  padding: 4px;
-  font-weight: bold;
+    padding: 4px;
+    font-weight: bold;
 }
+
 .ag-fresh .ag-header-group-text {
-  margin-right: 2px;
+    margin-right: 2px;
 }
+
 .ag-fresh .ag-header-cell-menu-button {
-  padding: 2px;
-  margin-top: 4px;
-  border: 1px solid transparent;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box; /* When using bootstrap, box-sizing was set to 'border-box' */
+    padding: 2px;
+    margin-top: 2px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    /* When using bootstrap, box-sizing was set to 'border-box' */
 }
+
 .ag-fresh .ag-header-cell-menu-button:hover {
-  border: 1px solid #000;
+    border: 1px solid #000;
 }
+
 .ag-fresh .ag-header-icon {
-  color: #800000;
+    color: #800000;
 }
+
 .ag-fresh .ag-row-selected {
-  background-color: #b0e0e6 !important;
+    background-color: #b0e0e6 !important;
 }
+
 .ag-fresh .ag-body .ag-row-odd {
-  background-color: #f6f6f6;
+    background-color: #f6f6f6;
 }
+
 .ag-fresh .ag-body .ag-row-even {
-  background-color: #fff;
+    background-color: #fff;
 }
+
 .ag-fresh .ag-floating-top .ag-row {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
+
 .ag-fresh .ag-floating-bottom .ag-row {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
+
 .ag-fresh .ag-loading-panel {
-  background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
+
 .ag-fresh .ag-loading-center {
-  background-color: #fff;
-  border: 1px solid #a9a9a9;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  padding: 10px;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 10px;
 }
+
 .ag-fresh .ag-body {
-  background-color: #fafafa;
+    background-color: #fafafa;
 }
+
 .ag-fresh .ag-group-cell-entire-row {
-  background-color: #aaa;
-  padding: 4px;
+    background-color: #aaa;
+    padding: 4px;
 }
+
 .ag-fresh .ag-footer-cell-entire-row {
-  background-color: #aaa;
-  padding: 4px;
+    background-color: #aaa;
+    padding: 4px;
 }
+
 .ag-fresh .ag-group-cell {
-  font-style: italic;
+    font-style: italic;
 }
+
 .ag-fresh .ag-group-expand {
-  padding-right: 2px;
+    padding-right: 2px;
 }
+
 .ag-fresh .ag-footer-cell {
-  font-style: italic;
+    font-style: italic;
 }
+
 .ag-fresh .ag-filter-checkbox {
-  position: relative;
-  top: 2px;
-  left: 2px;
+    position: relative;
+    top: 2px;
+    left: 2px;
 }
+
 .ag-fresh .ag-filter-header-container {
-  border-bottom: 1px solid #d3d3d3;
+    border-bottom: 1px solid #EEEEEE;
 }
+
 .ag-fresh .ag-filter-apply-panel {
-  border-top: 1px solid #d3d3d3;
-  padding: 2px;
+    border-top: 1px solid #EEEEEE;
+    padding: 2px;
 }
+
 .ag-fresh .ag-filter {
-  border: 1px solid #000;
-  background-color: #f0f0f0;
+    border: 1px solid #000;
+    background-color: #f0f0f0;
 }
+
 .ag-fresh .ag-filter-value {
-  margin-left: 4px;
+    margin-left: 4px;
 }
+
 .ag-fresh .ag-selection-checkbox {
-  margin-left: 4px;
+    margin-left: 4px;
 }
+
 .ag-fresh .ag-paging-panel {
-  padding: 4px;
+    padding: 4px;
 }
+
 .ag-fresh .ag-paging-button {
-  margin-left: 4px;
-  margin-right: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
+
 .ag-fresh .ag-paging-row-summary-panel {
-  display: inline-block;
-  width: 300px;
+    display: inline-block;
+    width: 300px;
 }
+
 .ag-fresh .ag-column-not-visible {
-  opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
-  filter: alpha(opacity=75);
+    opacity: 0.75;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+    filter: alpha(opacity=75);
 }
+
 .ag-fresh .ag-not-dragging {
-  border: 1px solid transparent;
+    border: 1px solid transparent;
 }
+
 .ag-fresh .ag-drop-target-above {
-  border-top: 5px solid #a9a9a9;
+    border-top: 5px solid #a9a9a9;
 }
+
 .ag-fresh .ag-drop-target-below {
-  border-bottom: 5px solid #a9a9a9;
+    border-bottom: 5px solid #a9a9a9;
 }
+
 .ag-fresh .ag-dragging {
-  border: 1px dotted #a9a9a9;
+    border: 1px dotted #a9a9a9;
 }
+
 .ag-fresh .ag-list-item-selected {
-  color: #f0f0f0;
+    color: #f0f0f0;
 }
+
 .ag-fresh .ag-list-item-not-selected {
-  font-style: italic;
-  color: #a0a0a0;
+    font-style: italic;
+    color: #a0a0a0;
 }
+
 .ag-fresh .ag-tool-panel-container {
-  background-color: #eee;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid #a9a9a9;
-  padding: 4px;
+    background-color: #eee;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #a9a9a9;
+    padding: 4px;
 }
+
 .ag-fresh .ag-list-selection {
-  background-color: #fff;
-  border: 1px solid #a9a9a9;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 .ag-fresh .ag-popup-list .ag-list-item:hover {
-  background-color: #add8e6;
+    background-color: #add8e6;
 }
+
 .ag-fresh .ag-visible-icons {
-  padding-left: 2px;
-  padding-right: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
  
 .radian .axis line,.radian .axis path{stroke:#000;fill:none;shape-rendering:crispEdges}.radian svg{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;display:block;width:100%;height:100%}.radian svg .no-data text{font-size:24px;font-weight:700}.radian .background{fill:#fff;fill-opacity:0}div.radian{position:relative}div.radian div.radian,div.radian-ui{position:absolute}div.radian-ui{background-color:transparent;top:0;left:0}div.radian-axis-switch,div.radian-histogram-switch,div.radian-legend,div.radian-stroke-switch{position:absolute;white-space:nowrap}.radian .axis path{stroke-opacity:.75}.radian .axis line{stroke-opacity:.25}.radian .axis line.zero,.radian .axis path.domain{stroke-opacity:.75}.radian .axis .axisMaxMin text{font-weight:700}.radian .brush .extent{stroke:#fff;fill-opacity:.125;shape-rendering:crispEdges}.tab-content.radian-tabs{overflow:visible}
