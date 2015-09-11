@@ -178,19 +178,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
 
-    function toIntSuchtdruck(params) {
-        return parseInt(params.data.Suchtdruck_1);
-    }
 
-
-
-    function numberNewValueHandler(params) {
-        var valueAsNumber = parseInt(params.newValue);
-        if (isNaN(valueAsNumber)) {
-            window.alert("Invalid value " + params.newValue + ", must be a number");
-        } else {
-            params.data.number = valueAsNumber;
-        }
+    function editValueHandler(params) {
+        console.log('editValueHandler => Save: ', params);
     }
 
 
@@ -206,6 +196,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
             editable: true,
+            newValueHandler: editValueHandler,
             hide: true,
             field: "Suchtdruck_1"
         }, {
@@ -224,6 +215,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }, {
             headerName: "Bemerkungen",
             editable: true,
+            newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
             field: "diary"
         }, {
@@ -251,7 +243,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableFilter: true,
             rowSelection: 'single',
             enableColResize: true,
-            enableCellExpressions = true
+            enableCellExpressions = true,
             enableSorting: true,
             showToolPanel: false
         };
