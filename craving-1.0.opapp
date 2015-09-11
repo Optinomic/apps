@@ -76,7 +76,7 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js?commit=e2c7cb67acbd9d3d7cc3370fb0140ac77dc40451"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
 <!--
@@ -130,7 +130,7 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js?commit=e2c7cb67acbd9d3d7cc3370fb0140ac77dc40451"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
 <!--
@@ -187,7 +187,7 @@ website = http://www.optinomic.com/
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js?commit=e2c7cb67acbd9d3d7cc3370fb0140ac77dc40451"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
 <!--
