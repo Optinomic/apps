@@ -48,7 +48,7 @@ website = http://www.optinomic.com/
         Tool
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 360px;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="width: 90%; height: 73% !important;"></div>
 
             </div>
             <div ng-if="!d.haveData">
