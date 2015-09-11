@@ -184,12 +184,23 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
+    function numberNewValueHandler(params) {
+        var valueAsNumber = parseInt(params.newValue);
+        if (isNaN(valueAsNumber)) {
+            window.alert("Invalid value " + params.newValue + ", must be a number");
+        } else {
+            params.data.number = valueAsNumber;
+        }
+    }
+
+
     $scope.setDataView = function() {
 
         var columnDefs = [{
             headerName: "Datum",
             editable: false,
             field: "datestamp",
+            cellClass: 'flow-text',
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
@@ -200,12 +211,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck",
+            cellClass: 'md-body-1',
+            width: 90,
+            valueGetter: 'parseInt(data.Suchtdruck_1)',
+            filter: 'number'
+        }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
             width: 90,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
         }, {
             headerName: "Bemerkungen",
             editable: true,
+            cellClass: 'md-body-1',
             field: "diary"
         }, {
             headerTooltip: "PID",
@@ -232,6 +251,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableFilter: true,
             rowSelection: 'single',
             enableColResize: true,
+            enableCellExpressions = true
             enableSorting: true,
             showToolPanel: false
         };

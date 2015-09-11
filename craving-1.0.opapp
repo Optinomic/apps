@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
 <p class="small md-caption">
     Selection:
     <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
-        {{selecteRow.data.datestamp}}: {{selecteRow.data.Suchtdruck_1}} <span class="small">{{selecteRow.id}}</span>
+        {{selecteRow.data.datestamp}}: <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})</span>
     </span>
 </p>
 
@@ -4620,6 +4620,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Datum",
             editable: false,
             field: "datestamp",
+            cellClass: 'flow-text',
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
@@ -4630,12 +4631,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck",
+            cellClass: 'md-body-1',
+            width: 90,
+            valueGetter: 'parseInt(data.Suchtdruck_1)',
+            filter: 'number'
+        }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck",
             width: 90,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
         }, {
             headerName: "Bemerkungen",
             editable: true,
+            cellClass: 'md-body-1',
             field: "diary"
         }, {
             headerTooltip: "PID",
@@ -4662,6 +4671,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableFilter: true,
             rowSelection: 'single',
             enableColResize: true,
+            enableCellExpressions = true
             enableSorting: true,
             showToolPanel: false
         };
