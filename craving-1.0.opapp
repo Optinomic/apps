@@ -37,22 +37,23 @@ website = http://www.optinomic.com/
                     Create a copy of 'main' for every 'template' an change the following 'partials' include:
 
                 -->
-                <div>
-    <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+                <div layout="row" layout-sm="column">
+    <div flex>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    </div>
+    <div>
+        <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
+            Resize
+        </md-button>
+        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
+            Tool
+        </md-button>
+    </div>
 </div>
-<div>
-    <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
-        Resize
-    </md-button>
-    <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-        Tool
-    </md-button>
-</div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="width: 99%; height: 360px;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="width: 100%; height: 400px;"></div>
 <p class="small md-caption">
-    Selection:
     <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
-        {{selecteRow.data.datestamp}}: <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})</span>
+        -> {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})</span>
     </span>
 </p>
 
