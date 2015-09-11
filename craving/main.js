@@ -176,6 +176,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
+
+
+    function toIntSuchtdruck(params) {
+        return parseInt(params.data.Suchtdruck_1);
+    }
+
+
+
     $scope.setDataView = function() {
 
         var columnDefs = [{
@@ -192,7 +200,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck",
             width: 90,
-            valueGetter: parseInt(params.data.Suchtdruck_1),
+            valueGetter: valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
         }, {
             headerName: "Bemerkungen",
