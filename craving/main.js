@@ -188,13 +188,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var columnDefs = [{
             headerName: "Datum",
-            editable: true,
+            editable: false,
             field: "datestamp",
             sortingOrder: ['asc']
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck_1",
-            editable: false,
+            editable: true,
             hide: true,
             field: "Suchtdruck_1"
         }, {

@@ -11,8 +11,5 @@
 </div>
 <div ag-grid="d.gridOptions" class="ag-fresh" style="width: 99%; height: 360px;"></div>
 <p class="small md-caption">
-    Selection:
-    <span ng-repeat="selecteRow in gridOptions.selectedRows">
-        {{selecteRow.Suchtdruck}} | {{selecteRow.Suchtdruck_1}}
-    </span>
+    Selection: {{d.gridOptions.selectedRows.Suchtdruck}} | {{d.gridOptions.selectedRows.Suchtdruck_1}}
 </p>
