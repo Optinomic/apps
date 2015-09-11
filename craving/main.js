@@ -236,6 +236,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             showToolPanel: false
         };
 
+        console.log('GRID', $scope.d.gridOptions)
     };
 
 
