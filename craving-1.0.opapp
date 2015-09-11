@@ -48,7 +48,7 @@ website = http://www.optinomic.com/
         Tool
     </md-button>
 </div>
-<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 350px;"></div>
+<div ag-grid="d.gridOptions" class="ag-fresh" style="height: 360px;"></div>
 
             </div>
             <div ng-if="!d.haveData">
@@ -4637,7 +4637,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             columnDefs: columnDefs,
             rowData: $scope.d.craving,
             pinnedColumnCount: 1,
-            dontUseScrolls: false,
+            dontUseScrolls: true,
             enableFilter: true,
             enableColResize: true,
             enableSorting: true,

@@ -213,7 +213,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             columnDefs: columnDefs,
             rowData: $scope.d.craving,
             pinnedColumnCount: 1,
-            dontUseScrolls: false,
+            dontUseScrolls: true,
             enableFilter: true,
             enableColResize: true,
             enableSorting: true,
