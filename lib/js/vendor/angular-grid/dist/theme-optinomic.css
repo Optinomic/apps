@@ -1,24 +1,24 @@
-.ag-fresh .ag-root {
+.ag-optinomic .ag-root {
     border: 1px solid #E0E0E0;
     font-family: "Roboto", sans-serif, "Helvetica Neue", Helvetica, Arial;
 }
 
-.ag-fresh .ag-cell {
+.ag-optinomic .ag-cell {
     padding: 2px;
 }
 
-.ag-fresh .ag-cell-focus {
+.ag-optinomic .ag-cell-focus {
     border: 1px solid #a9a9a9;
 }
 
-.ag-fresh .ag-cell-no-focus {
+.ag-optinomic .ag-cell-no-focus {
     border-right: 1px dotted #E0E0E0;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
     border-bottom: 1px solid transparent;
 }
 
-.ag-fresh .ag-pinned-header {
+.ag-optinomic .ag-pinned-header {
     background: -webkit-linear-gradient(#fff, #EEEEEE);
     background: -moz-linear-gradient(#fff, #EEEEEE);
     background: -o-linear-gradient(#fff, #EEEEEE);
@@ -27,7 +27,7 @@
     border-bottom: 1px solid #E0E0E0;
 }
 
-.ag-fresh .ag-header-container {
+.ag-optinomic .ag-header-container {
     background: -webkit-linear-gradient(#fff, #EEEEEE);
     background: -moz-linear-gradient(#fff, #EEEEEE);
     background: -o-linear-gradient(#fff, #EEEEEE);
@@ -36,7 +36,7 @@
     border-bottom: 1px solid #E0E0E0;
 }
 
-.ag-fresh .ag-header-cell {
+.ag-optinomic .ag-header-cell {
     border-right: 1px solid #E0E0E0;
     font-size: 14px;
     font-weight: 500;
@@ -44,7 +44,7 @@
     line-height: 24px
 }
 
-.ag-fresh .ag-header-group-cell {
+.ag-optinomic .ag-header-group-cell {
     border-right: 1px solid #E0E0E0;
     font-size: 14px;
     font-weight: 500;
@@ -52,28 +52,28 @@
     line-height: 24px
 }
 
-.ag-fresh .ag-header-group-cell-with-group {
+.ag-optinomic .ag-header-group-cell-with-group {
     border-bottom: 1px solid #E0E0E0;
 }
 
-.ag-fresh .ag-header-cell-label {
+.ag-optinomic .ag-header-cell-label {
     padding: 4px 2px 4px 2px;
 }
 
-.ag-fresh .ag-header-cell-text {
+.ag-optinomic .ag-header-cell-text {
     padding-left: 2px;
 }
 
-.ag-fresh .ag-header-group-cell-label {
+.ag-optinomic .ag-header-group-cell-label {
     padding: 4px;
     font-weight: bold;
 }
 
-.ag-fresh .ag-header-group-text {
+.ag-optinomic .ag-header-group-text {
     margin-right: 2px;
 }
 
-.ag-fresh .ag-header-cell-menu-button {
+.ag-optinomic .ag-header-cell-menu-button {
     padding: 2px;
     margin-top: 1px;
     border: 1px solid transparent;
@@ -85,39 +85,39 @@
     /* When using bootstrap, box-sizing was set to 'border-box' */
 }
 
-.ag-fresh .ag-header-cell-menu-button:hover {
+.ag-optinomic .ag-header-cell-menu-button:hover {
     border: 1px solid #000;
 }
 
-.ag-fresh .ag-header-icon {
+.ag-optinomic .ag-header-icon {
     color: #800000;
 }
 
-.ag-fresh .ag-row-selected {
-    background-color: #b0e0e6 !important;
+.ag-optinomic .ag-row-selected {
+    background-color: #E8EAF6 !important;
 }
 
-.ag-fresh .ag-body .ag-row-odd {
+.ag-optinomic .ag-body .ag-row-odd {
     background-color: #f6f6f6;
 }
 
-.ag-fresh .ag-body .ag-row-even {
+.ag-optinomic .ag-body .ag-row-even {
     background-color: #fff;
 }
 
-.ag-fresh .ag-floating-top .ag-row {
+.ag-optinomic .ag-floating-top .ag-row {
     background-color: #f0f0f0;
 }
 
-.ag-fresh .ag-floating-bottom .ag-row {
+.ag-optinomic .ag-floating-bottom .ag-row {
     background-color: #f0f0f0;
 }
 
-.ag-fresh .ag-loading-panel {
+.ag-optinomic .ag-loading-panel {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.ag-fresh .ag-loading-center {
+.ag-optinomic .ag-loading-center {
     background-color: #fff;
     border: 1px solid #a9a9a9;
     -webkit-border-radius: 10px;
@@ -125,106 +125,106 @@
     padding: 10px;
 }
 
-.ag-fresh .ag-body {
+.ag-optinomic .ag-body {
     background-color: #fafafa;
 }
 
-.ag-fresh .ag-group-cell-entire-row {
+.ag-optinomic .ag-group-cell-entire-row {
     background-color: #aaa;
     padding: 4px;
 }
 
-.ag-fresh .ag-footer-cell-entire-row {
+.ag-optinomic .ag-footer-cell-entire-row {
     background-color: #aaa;
     padding: 4px;
 }
 
-.ag-fresh .ag-group-cell {
+.ag-optinomic .ag-group-cell {
     font-style: italic;
 }
 
-.ag-fresh .ag-group-expand {
+.ag-optinomic .ag-group-expand {
     padding-right: 2px;
 }
 
-.ag-fresh .ag-footer-cell {
+.ag-optinomic .ag-footer-cell {
     font-style: italic;
 }
 
-.ag-fresh .ag-filter-checkbox {
+.ag-optinomic .ag-filter-checkbox {
     position: relative;
     top: 2px;
     left: 2px;
 }
 
-.ag-fresh .ag-filter-header-container {
+.ag-optinomic .ag-filter-header-container {
     border-bottom: 1px solid #EEEEEE;
 }
 
-.ag-fresh .ag-filter-apply-panel {
+.ag-optinomic .ag-filter-apply-panel {
     border-top: 1px solid #EEEEEE;
     padding: 2px;
 }
 
-.ag-fresh .ag-filter {
+.ag-optinomic .ag-filter {
     border: 1px solid #000;
     background-color: #f0f0f0;
 }
 
-.ag-fresh .ag-filter-value {
+.ag-optinomic .ag-filter-value {
     margin-left: 4px;
 }
 
-.ag-fresh .ag-selection-checkbox {
+.ag-optinomic .ag-selection-checkbox {
     margin-left: 4px;
 }
 
-.ag-fresh .ag-paging-panel {
+.ag-optinomic .ag-paging-panel {
     padding: 4px;
 }
 
-.ag-fresh .ag-paging-button {
+.ag-optinomic .ag-paging-button {
     margin-left: 4px;
     margin-right: 4px;
 }
 
-.ag-fresh .ag-paging-row-summary-panel {
+.ag-optinomic .ag-paging-row-summary-panel {
     display: inline-block;
     width: 300px;
 }
 
-.ag-fresh .ag-column-not-visible {
+.ag-optinomic .ag-column-not-visible {
     opacity: 0.75;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
     filter: alpha(opacity=75);
 }
 
-.ag-fresh .ag-not-dragging {
+.ag-optinomic .ag-not-dragging {
     border: 1px solid transparent;
 }
 
-.ag-fresh .ag-drop-target-above {
+.ag-optinomic .ag-drop-target-above {
     border-top: 5px solid #a9a9a9;
 }
 
-.ag-fresh .ag-drop-target-below {
+.ag-optinomic .ag-drop-target-below {
     border-bottom: 5px solid #a9a9a9;
 }
 
-.ag-fresh .ag-dragging {
+.ag-optinomic .ag-dragging {
     border: 1px dotted #a9a9a9;
 }
 
-.ag-fresh .ag-list-item-selected {
+.ag-optinomic .ag-list-item-selected {
     color: #f0f0f0;
 }
 
-.ag-fresh .ag-list-item-not-selected {
+.ag-optinomic .ag-list-item-not-selected {
     font-style: italic;
     color: #a0a0a0;
 }
 
-.ag-fresh .ag-tool-panel-container {
+.ag-optinomic .ag-tool-panel-container {
     background-color: #eee;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -233,7 +233,7 @@
     padding: 4px;
 }
 
-.ag-fresh .ag-list-selection {
+.ag-optinomic .ag-list-selection {
     background-color: #fff;
     border: 1px solid #a9a9a9;
     -webkit-box-sizing: border-box;
@@ -241,11 +241,11 @@
     box-sizing: border-box;
 }
 
-.ag-fresh .ag-popup-list .ag-list-item:hover {
+.ag-optinomic .ag-popup-list .ag-list-item:hover {
     background-color: #add8e6;
 }
 
-.ag-fresh .ag-visible-icons {
+.ag-optinomic .ag-visible-icons {
     padding-left: 2px;
     padding-right: 2px;
 }
