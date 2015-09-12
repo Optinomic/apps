@@ -56,7 +56,7 @@ website = http://www.optinomic.com/
         </md-button>
     </div>
 </div>
-<div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 438px;"></div>
+<div ag-grid="d.gridOptions" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
     <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
@@ -4630,7 +4630,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Datum",
             editable: true,
             suppressSizeToFit: true,
-            width: 130,
+            width: 145,
             field: "datestamp",
             cellClass: 'md-body-1',
         }, {

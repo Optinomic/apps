@@ -193,7 +193,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Datum",
             editable: true,
             suppressSizeToFit: true,
-            width: 130,
+            width: 145,
             field: "datestamp",
             cellClass: 'md-body-1',
         }, {
