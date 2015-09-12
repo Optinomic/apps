@@ -192,6 +192,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerTooltip: "Datum",
             headerName: "Datum",
             editable: true,
+            suppressSizeToFit: true,
+            width: 130,
             field: "datestamp",
             cellClass: 'md-body-1',
         }, {
