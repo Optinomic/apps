@@ -42,6 +42,12 @@ website = http://www.optinomic.com/
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div>
+        <md-input-container>
+            <label>Filter</label>
+            <input ng-model="d.gridOptions.quickFilterText">
+        </md-input-container>
+    </div>
+    <div>
         <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
             Resize
         </md-button>
@@ -4644,7 +4650,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: true,
             newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
-            field: "diary"
+            field: "diary",
+            filter: 'text'
         }, {
             headerTooltip: "PID",
             headerName: "Patient-ID",

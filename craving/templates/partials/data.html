@@ -3,6 +3,12 @@
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div>
+        <md-input-container>
+            <label>Filter</label>
+            <input ng-model="d.gridOptions.quickFilterText">
+        </md-input-container>
+    </div>
+    <div>
         <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
             Resize
         </md-button>

@@ -213,7 +213,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: true,
             newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
-            field: "diary"
+            field: "diary",
+            filter: 'text'
         }, {
             headerTooltip: "PID",
             headerName: "Patient-ID",
