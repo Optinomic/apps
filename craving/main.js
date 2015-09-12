@@ -189,6 +189,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setDataView = function() {
 
         var columnDefs = [{
+            headerTooltip: "Datum",
             headerName: "Datum",
             editable: true,
             field: "datestamp",
@@ -198,13 +199,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerName: "Suchtdruck_1",
             editable: true,
             width: 110,
+            hide: true,
             newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
+            suppressSizeToFit: true,
             field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
             cellClass: 'md-body-2',
+            suppressSizeToFit: true,
             width: 110,
             valueGetter: 'parseInt(data.Suchtdruck_1)',
             filter: 'number'
