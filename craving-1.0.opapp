@@ -364,6 +364,16 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                         var date = new Date(result[property]);
                         var propertyName = property + '_week';
                         result[propertyName] = $filter("amDateFormat")(date, 'YYYY, ww');
+
+                        var propertyName = property + '_day';
+                        result[propertyName] = $filter("amDateFormat")(date, 'Do. MMMM YYYY');
+
+                        var propertyName = property + '_day_full';
+                        result[propertyName] = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+
+                        var propertyName = property + '_time';
+                        result[propertyName] = $filter("amDateFormat")(date, 'HH:mm');
+
                     };
 
                 }
@@ -416,6 +426,25 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     line.suppressSizeToFit = true;
                 };
 
+                if ((property === 'datestamp_week') || (property === 'startdate_week') || (property === 'submitdate_week')) {
+                    line.width = 145;
+                    line.hide = true;
+                };
+
+                if ((property === 'datestamp_day') || (property === 'startdate_day') || (property === 'submitdate_day')) {
+                    line.width = 145;
+                    line.hide = true;
+                };
+
+                if ((property === 'datestamp_day_full') || (property === 'startdate_day_full') || (property === 'submitdate_day_full')) {
+                    line.width = 145;
+                    line.hide = true;
+                };
+
+                if ((property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
+                    line.width = 145;
+                    line.hide = true;
+                };
 
                 if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
                     line.width = 110;
