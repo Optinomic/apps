@@ -44,7 +44,7 @@ website = http://www.optinomic.com/
     <div>
         <md-input-container>
             <label>Filter</label>
-            <input ng-model="d.gridOptions.quickFilterText">
+            <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
     <div>
@@ -58,7 +58,7 @@ website = http://www.optinomic.com/
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.gridOptions.selectedNodesById">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
     </span>
 </p>
