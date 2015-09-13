@@ -186,9 +186,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     }
 
 
+
+
+
     $scope.setDataView = function() {
 
-        var columnDefs = [{
+        var ColumnDefs = $scope.d.functions.createColumnDefs($scope.d.craving);
+        console.log('ColumnDefs', ColumnDefs);
+
+        columnDefs = [{
             headerTooltip: "Datum",
             headerName: "Datum",
             editable: true,
