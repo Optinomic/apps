@@ -336,7 +336,6 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
 
         var Data = [];
         surveyResults = surveyResults === undefined ? {} : surveyResults;
-        editable = editable === undefined ? false : editable;
 
         // Loop trough every result
         surveyResults.forEach(function(result) {
