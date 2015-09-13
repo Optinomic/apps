@@ -187,9 +187,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setDataView = function() {
 
         var columnDefs = $scope.d.functions.createColumnDefs($scope.d.craving, true);
-        console.log('columnDefs', columnDefs);
 
-        columnDefs = [{
+        var OLDcolumnDefs = [{
             headerTooltip: "Datum",
             headerName: "Datum",
             editable: true,
@@ -244,7 +243,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.gridOptions = {
             headerHeight: 45,
             rowHeight: 28,
-            columnDefs: $scope.d.functions.createColumnDefs(rowData, true),
+            columnDefs: columnDefs,
             rowData: rowData,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
