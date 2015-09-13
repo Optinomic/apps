@@ -191,6 +191,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.grid = {};
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+        $scope.d.functions.refreshView();
 
 
         // DataView - Options

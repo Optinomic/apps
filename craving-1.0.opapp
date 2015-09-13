@@ -51,6 +51,9 @@ website = http://www.optinomic.com/
         <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
             Resize
         </md-button>
+        <md-button ng-click="d.functions.refreshView()" class="md-primary" aria-label="Tool">
+            Refresh
+        </md-button>
         <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
             Tool
         </md-button>
@@ -312,6 +315,13 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         console.log('resizeGrid:', $scope.d.grid.options)
         $scope.d.grid.options.api.sizeColumnsToFit();
     };
+
+    $scope.d.functions.refreshView = function() {
+        console.log('refreshView:', $scope.d.grid.options)
+        $scope.d.grid.options.api.refreshView();
+    };
+
+
 
     $scope.d.functions.toggleToolPanel = function() {
         var visible = $scope.d.grid.options.api.isToolPanelShowing();
@@ -4753,6 +4763,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.grid = {};
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+        $scope.d.functions.refreshView();
 
 
         // DataView - Options
