@@ -324,6 +324,13 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
         };
     };
 
+
+    $scope.d.functions.editValueHandler = function(params) {
+        //If API-Safe success then update GRID:
+        params.data[params.colDef.field] = params.newValue
+        console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
+    };
+
     $scope.d.functions.createColumnDefs = function(surveyResults, editable) {
 
         surveyResults = surveyResults === undefined ? {} : surveyResults;
@@ -351,7 +358,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
 
                     // Set newValueHandler if editable
                     if (editable) {
-                        line.newValueHandler = editValueHandler;
+                        line.newValueHandler = $scope.d.functions.editValueHandler;
                     };
 
                     // Handle some known special properties
@@ -4691,11 +4698,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-    function editValueHandler(params) {
-        //If API-Safe success then update GRID:
-        params.data[params.colDef.field] = params.newValue
-        console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
-    };
+
 
 
 

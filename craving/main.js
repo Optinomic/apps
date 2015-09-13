@@ -179,11 +179,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-    function editValueHandler(params) {
-        //If API-Safe success then update GRID:
-        params.data[params.colDef.field] = params.newValue
-        console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
-    };
+
 
 
 
