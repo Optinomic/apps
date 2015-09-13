@@ -183,15 +183,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         //If API-Safe success then update GRID:
         params.data[params.colDef.field] = params.newValue
         console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
-    }
-
+    };
 
 
 
 
     $scope.setDataView = function() {
 
-        var ColumnDefs = $scope.d.functions.createColumnDefs($scope.d.craving);
+        var columnDefs = $scope.d.functions.createColumnDefs($scope.d.craving, true);
         console.log('ColumnDefs', ColumnDefs);
 
         columnDefs = [{
@@ -245,12 +244,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             width: 90
         }];
 
+        var rowData = $scope.d.craving;
+
         // DataView - Options
         $scope.d.gridOptions = {
             headerHeight: 45,
             rowHeight: 28,
-            columnDefs: columnDefs,
-            rowData: $scope.d.craving,
+            columnDefs: $scope.d.functions.createColumnDefs(rowData, true),
+            rowData: rowData,
             pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,

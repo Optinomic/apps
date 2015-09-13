@@ -324,10 +324,11 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
         };
     };
 
-    $scope.d.functions.createColumnDefs = function(surveyResults) {
+    $scope.d.functions.createColumnDefs = function(surveyResults, editable) {
 
         surveyResults = surveyResults === undefined ? {} : surveyResults;
-        var DataView = {};
+        editable = editable === undefined ? false : editable;
+        var DataView = [];
 
 
         // Loop trough every result
@@ -337,7 +338,39 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
             for (var property in result) {
                 if (result.hasOwnProperty(property)) {
                     // do stuff
-                    console.log('createDataView :: ', result, property);
+                    console.log('createDataView :: ', property);
+
+                    // Set Default
+                    var line = {
+                        headerTooltip: property,
+                        headerName: property,
+                        editable: editable,
+                        cellClass: 'md-body-1',
+                        field: property
+                    };
+
+                    // Set newValueHandler if editable
+                    if (editable) {
+                        line.newValueHandler = editValueHandler;
+                    };
+
+                    // Handle some known special properties
+                    if ((property === 'PID') || (property === 'FID') || (property === 'id')) {
+                        line.width = 110;
+                        line.suppressSizeToFit = true;
+                    };
+
+                    if ((property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
+                        line.width = 145;
+                        line.suppressSizeToFit = true;
+                    };
+
+                    if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl')) {
+                        line.width = 110;
+                        line.hide = true;
+                    };
+
+
                 }
             }
 
@@ -4662,15 +4695,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         //If API-Safe success then update GRID:
         params.data[params.colDef.field] = params.newValue
         console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
-    }
-
+    };
 
 
 
 
     $scope.setDataView = function() {
 
-        var ColumnDefs = $scope.d.functions.createColumnDefs($scope.d.craving);
+        var columnDefs = $scope.d.functions.createColumnDefs($scope.d.craving, true);
         console.log('ColumnDefs', ColumnDefs);
 
         columnDefs = [{
@@ -4724,12 +4756,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             width: 90
         }];
 
+        var rowData = $scope.d.craving;
+
         // DataView - Options
         $scope.d.gridOptions = {
             headerHeight: 45,
             rowHeight: 28,
-            columnDefs: columnDefs,
-            rowData: $scope.d.craving,
+            columnDefs: $scope.d.functions.createColumnDefs(rowData, true),
+            rowData: rowData,
             pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
