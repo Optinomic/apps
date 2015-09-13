@@ -203,7 +203,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             editable: true,
             width: 110,
             hide: true,
-            newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
             suppressSizeToFit: true,
             field: "Suchtdruck_1"
@@ -218,7 +217,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }, {
             headerName: "Bemerkungen",
             editable: true,
-            newValueHandler: editValueHandler,
             cellClass: 'md-body-1',
             field: "diary",
             filter: 'text'
