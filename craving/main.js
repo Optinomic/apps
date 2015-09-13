@@ -189,8 +189,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var resultsArray = $scope.d.craving;
 
         $scope.d.grid = {};
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
 
         // DataView - Options
