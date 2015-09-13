@@ -186,7 +186,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setDataView = function() {
 
-        var columnDefs = $scope.d.functions.createColumnDefs($scope.d.craving, true);
+        var resultsArray = $scope.d.craving;
+
+        var columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
+        var rowData = $scope.d.functions.enrichResults(resultsArray);
 
         var OLDcolumnDefs = [{
             headerTooltip: "Datum",
@@ -237,7 +240,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             width: 90
         }];
 
-        var rowData = $scope.d.craving;
 
         // DataView - Options
         $scope.d.gridOptions = {
