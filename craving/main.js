@@ -262,7 +262,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-        console.log('GRID', $scope.d.gridOptions)
+        console.log('dataGRID: ', $scope.d.grid);
     };
 
 
