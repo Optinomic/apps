@@ -360,7 +360,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
                 };
 
                 // Handle some known special properties
-                if ((property === 'PID') || (property === 'FID') || (property === 'id')) {
+                if ((property === 'PID') || (property === 'FID')) {
+                    line.hide = true;
                     line.width = 110;
                     line.suppressSizeToFit = true;
                 };
@@ -370,11 +371,14 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
                     line.suppressSizeToFit = true;
                 };
 
-                if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl')) {
+                if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
                     line.width = 110;
                     line.hide = true;
                 };
 
+                if ((property === 'survey_name') || (property === 'lastpage')) {
+                    line.hide = true;
+                };
 
                 // Push Line to Return-Array
                 DataView.push(line);
