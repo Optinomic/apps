@@ -338,9 +338,12 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
         var DataView = [];
 
 
+
         // Iterate through object properties
         for (var property in surveyResults[0]) {
             if (result.hasOwnProperty(property)) {
+                // do stuff
+                //console.log('createColumnDefs :: ', property);
 
                 // Set Default
                 var line = {
@@ -376,52 +379,55 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, da
                 // Push Line to Return-Array
                 DataView.push(line);
 
-            };
+            }
+        };
 
+        // Loop trough every result
+        // surveyResults.forEach(function(result) {
+        // });
+
+        // var line = {
+        //     source: 'Talks',
+        //     room: scope.d.roomID,
+        //     done: false,
+        //     date_created: date.toString(),
+        //     date_created_sort: $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
+        //     date_created_week: $filter("amDateFormat")(date, 'YYYY, ww'),
+        //     date_created_day: $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY'),
+        //     date_created_time: $filter("amDateFormat")(date, 'HH:mm'),
+        //     from_uid: parseInt(sessionService.getUserID()),
+        //     to_user_id: null,
+        //     to_user_role: null,
+        //     to_patient_id: parseInt($routeParams.pid),
+        //     to_patient_group: null,
+        //     text: null,
+        //     answer: {},
+        //     icon: 'mdi-comment-text-outline'
+        // };
+
+        console.log('createColumnDefs :: ', DataView);
+        return DataView;
+    };
+
+
+    // -----------------------------------
+    // Data: Get Calculations 
+    // -----------------------------------
+
+    $scope.d.functions.getCalculation = function(calc_name) {
+
+        var call = dataService.getAppCalculations(calc_name);
+
+        call.success(function(data) {
+            // Save Data to $scope.d
+            $scope.d.calculations = $scope.d.calculations === undefined ? {} : $scope.d.calculations;
+            $scope.d.calculations[calc_name] = data;
+            console.log('(DATA): getAppCalculation: ', calc_name, data);
         });
-
-    // var line = {
-    //     source: 'Talks',
-    //     room: scope.d.roomID,
-    //     done: false,
-    //     date_created: date.toString(),
-    //     date_created_sort: $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
-    //     date_created_week: $filter("amDateFormat")(date, 'YYYY, ww'),
-    //     date_created_day: $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY'),
-    //     date_created_time: $filter("amDateFormat")(date, 'HH:mm'),
-    //     from_uid: parseInt(sessionService.getUserID()),
-    //     to_user_id: null,
-    //     to_user_role: null,
-    //     to_patient_id: parseInt($routeParams.pid),
-    //     to_patient_group: null,
-    //     text: null,
-    //     answer: {},
-    //     icon: 'mdi-comment-text-outline'
-    // };
-
-    console.log('createColumnDefs :: ', DataView);
-    return DataView;
-};
-
-
-// -----------------------------------
-// Data: Get Calculations 
-// -----------------------------------
-
-$scope.d.functions.getCalculation = function(calc_name) {
-
-    var call = dataService.getAppCalculations(calc_name);
-
-    call.success(function(data) {
-        // Save Data to $scope.d
-        $scope.d.calculations = $scope.d.calculations === undefined ? {} : $scope.d.calculations;
-        $scope.d.calculations[calc_name] = data;
-        console.log('(DATA): getAppCalculation: ', calc_name, data);
-    });
-    call.error(function(data) {
-        console.log('(ERROR): getAppCalculations:', calc_name, data);
-    });
-};
+        call.error(function(data) {
+            console.log('(ERROR): getAppCalculations:', calc_name, data);
+        });
+    };
 
 
 
