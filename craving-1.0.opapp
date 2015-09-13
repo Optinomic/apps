@@ -42,7 +42,7 @@ website = http://www.optinomic.com/
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div>
-        <md-input-container style="margin-top:12px;">
+        <md-input-container>
             <label>Filter</label>
             <input ng-model="d.gridOptions.quickFilterText">
         </md-input-container>
@@ -424,11 +424,13 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                 if ((property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
                     line.width = 145;
                     line.suppressSizeToFit = true;
+                    sort = 'asc';
                 };
 
                 if ((property === 'datestamp_year') || (property === 'startdate_year') || (property === 'submitdate_year')) {
                     line.width = 145;
                     line.hide = true;
+                    filter = 'number';
                 };
 
                 if ((property === 'datestamp_week') || (property === 'startdate_week') || (property === 'submitdate_week')) {
@@ -465,29 +467,6 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
             }
         };
-
-        // Loop trough every result
-        // surveyResults.forEach(function(result) {
-        // });
-
-        // var line = {
-        //     source: 'Talks',
-        //     room: scope.d.roomID,
-        //     done: false,
-        //     date_created: date.toString(),
-        //     date_created_sort: $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
-        //     date_created_week: $filter("amDateFormat")(date, 'YYYY, ww'),
-        //     date_created_day: $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY'),
-        //     date_created_time: $filter("amDateFormat")(date, 'HH:mm'),
-        //     from_uid: parseInt(sessionService.getUserID()),
-        //     to_user_id: null,
-        //     to_user_role: null,
-        //     to_patient_id: parseInt($routeParams.pid),
-        //     to_patient_group: null,
-        //     text: null,
-        //     answer: {},
-        //     icon: 'mdi-comment-text-outline'
-        // };
 
         console.log('createColumnDefs :: ', DataView);
         return DataView;
