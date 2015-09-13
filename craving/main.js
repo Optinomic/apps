@@ -246,7 +246,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             rowHeight: 28,
             columnDefs: $scope.d.functions.createColumnDefs(rowData, true),
             rowData: rowData,
-            pinnedColumnCount: 1,
+            //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
             rowSelection: 'single',
