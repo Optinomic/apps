@@ -188,8 +188,28 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var resultsArray = $scope.d.craving;
 
-        var columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
-        var rowData = $scope.d.functions.enrichResults(resultsArray);
+        $scope.d.grid = {};
+        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
+        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+
+
+        // DataView - Options
+        $scope.d.grid.options = {
+            headerHeight: 45,
+            rowHeight: 28,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false
+        };
+
+
 
         var OLDcolumnDefs = [{
             headerTooltip: "Datum",
@@ -241,21 +261,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }];
 
 
-        // DataView - Options
-        $scope.d.gridOptions = {
-            headerHeight: 45,
-            rowHeight: 28,
-            columnDefs: columnDefs,
-            rowData: rowData,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
 
         console.log('GRID', $scope.d.gridOptions)
     };
