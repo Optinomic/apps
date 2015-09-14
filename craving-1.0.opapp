@@ -208,7 +208,7 @@ website = http://www.optinomic.com/
 
 
 
-[template chart_tscore 6 7]
+[template chart_stanine 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!init">
