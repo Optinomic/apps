@@ -35,22 +35,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 $scope.d.haveData = true;
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
-
-            }
-            // Get Calculations from this app.
-            $scope.d.functions.getCalculation('another_calculation');
-
-
-            //FAKE DATA:  Remove this later!
-            $scope.d.haveData = true;
+            };
 
 
             // Run Functions a.s.a Data is loaded:
+            $scope.d.functions.getAllCalculations();
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
             $scope.setStanineView();
 
+            //FAKE DATA:  Remove this later!
+            $scope.d.haveData = true;
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -61,11 +57,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-
     // -----------------------------------
     // Chart: Timeline
     // -----------------------------------
-
 
     $scope.setTimelineChartOptions = function() {
         // -----------------------------------
@@ -82,79 +76,68 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
-
-
     };
-
-
-
-    $scope.getRandomInt = function(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
 
 
     // -----------------------------------
     // Chart: T-Score
     // -----------------------------------
 
-
-
     $scope.getAnswer = function() {
         var score_answer = [{
             "question": "GSI",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Psychotizismus",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Paranoides Denken",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Phobische Angst",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Ängstlichkeit",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Depressivität",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Zwanghaftigkeit",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }, {
             "question": "Somatisierung",
-            "t_score": $scope.getRandomInt(0, 100),
+            "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
         }];
 
         return score_answer;
     };
-
 
     $scope.setTscoreChart = function() {
 
@@ -172,7 +155,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "label": "Austritt",
             "scores": $scope.getAnswer()
         }];
-
     };
 
 
@@ -180,32 +162,31 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Stanine - Chart
     // -----------------------------------
 
-
     $scope.getAnswerStanine = function() {
         var score_answer = [{
             "question": "Stress durch Unsicherheit",
             "sub_left": "Stabiles Umfeld. Keine Belastung.",
             "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.getRandomInt(1, 9),
-            "sum_score": $scope.getRandomInt(0, 100)
+            "stanine": $scope.d.functions.getRandomInt(1, 9),
+            "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
             "question": "Stress durch Überforderung",
             "sub_left": "Keine Belastung durch Überforderung",
             "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.getRandomInt(1, 9),
-            "sum_score": $scope.getRandomInt(0, 100)
+            "stanine": $scope.d.functions.getRandomInt(1, 9),
+            "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
             "question": "Stress durch Verlust",
             "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
             "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.getRandomInt(1, 9),
-            "sum_score": $scope.getRandomInt(0, 100)
+            "stanine": $scope.d.functions.getRandomInt(1, 9),
+            "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
             "question": "Soziale Unterstützung",
             "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
             "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.getRandomInt(1, 9),
-            "sum_score": $scope.getRandomInt(0, 100)
+            "stanine": $scope.d.functions.getRandomInt(1, 9),
+            "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }];
 
         return score_answer;
@@ -230,15 +211,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "norm_name": "Normalbereich",
             "start_result": $scope.stanine.data.length - 1
         };
-
     };
 
 
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
-
-
     $scope.setDataView = function() {
 
         var resultsArray = $scope.d.craving;
