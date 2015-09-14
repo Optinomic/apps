@@ -48,6 +48,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
+            $scope.setStanineView();
 
 
             // Finishing: Console Info & Init = done.
