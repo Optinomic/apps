@@ -114,8 +114,7 @@ website = http://www.optinomic.com/
 					Create a copy of 'main' for every 'template' an change the following 'partials' include:
 
                 -->
-                <chart-timeline data='d.craving' options='d.options'>
-</chart-timeline>
+                <chart-timeline data='d.craving' options='d.options'></chart-timeline>
 
             </div>
             <div ng-if="!d.haveData">
@@ -210,7 +209,7 @@ website = http://www.optinomic.com/
 
 
 
-[template chart_tscore 6 6]
+[template chart_tscore 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!init">
