@@ -25,18 +25,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-
-            console.log('(DATA): loadedMainData:', data);
+            // console.log('(DATA): loadedMainData:', data);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-            // Check if we have survey_responses | data.
+            // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 $scope.d.haveData = true;
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
-
 
             // Run Functions a.s.a Data is loaded:
             $scope.d.functions.getAllCalculations();
@@ -223,6 +221,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.grid = {};
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+
+        // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
 
@@ -242,9 +242,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             showToolPanel: false
         };
 
-
-
-        var OLDcolumnDefs = [{
+        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
+        var columnDefsManually = [{
             headerTooltip: "Datum",
             headerName: "Datum",
             editable: true,
@@ -252,15 +251,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             width: 145,
             field: "datestamp",
             cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck_1",
-            editable: true,
-            width: 110,
-            hide: true,
-            cellClass: 'md-body-1',
-            suppressSizeToFit: true,
-            field: "Suchtdruck_1"
         }, {
             headerTooltip: "Suchtdruck_1",
             headerName: "Suchtdruck (Int)",
@@ -293,9 +283,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             width: 90
         }];
 
-
-
-        console.log('dataGRID: ', $scope.d.grid);
+        //console.log('dataGRID: ', $scope.d.grid);
     };
 
 
