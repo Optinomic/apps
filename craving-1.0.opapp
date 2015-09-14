@@ -536,7 +536,19 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         call.success(function(data) {
             // Save Data to $scope.d
             $scope.d.calculations = $scope.d.calculations === undefined ? [] : $scope.d.calculations;
-            $scope.d.calculations[calc_name] = data.calculation_result;
+
+
+            var date = new Date();
+
+            var objectToPush = {
+                'calculation_name': calc_name,
+                'calculation_result': data.calculation_result,
+                'calculated_datestamp': date,
+                'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+            };
+
+            $scope.d.calculations.push(objectToPush);
             console.log('(DATA): getAppCalculation: ', calc_name, data);
         });
         call.error(function(data) {
