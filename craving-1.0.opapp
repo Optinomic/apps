@@ -535,8 +535,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
         call.success(function(data) {
             // Save Data to $scope.d
-            $scope.d.calculations = $scope.d.calculations === undefined ? {} : $scope.d.calculations;
-            $scope.d.calculations[calc_name] = data;
+            $scope.d.calculations = $scope.d.calculations === undefined ? [] : $scope.d.calculations;
+            $scope.d.calculations[calc_name] = data.calculation_result;
             console.log('(DATA): getAppCalculation: ', calc_name, data);
         });
         call.error(function(data) {
