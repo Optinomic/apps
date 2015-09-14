@@ -67,7 +67,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var myPatient = $scope.d.dataMain.patient.patient.data;
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
-        $scope.d.options = {
+        $scope.d.timeline = {};
+        $scope.d.timeline.data = $scope.d.craving;
+
+        $scope.d.timeline.options = {
             'title': 'Suchtdruck',
             'focusField': 'Suchtdruck_1',
             'fillDates': false,
