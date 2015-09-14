@@ -10,7 +10,7 @@
     <table class="table table-bordered">
         <!-- Header -->
         <tr>
-            <td class="hidden-xs text-right" style="border-left-style:hidden !important; border-top-style:hidden !important">
+            <td class="text-right" style="border-left-style:hidden !important; border-top-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     Stanine
                     <br>%
@@ -70,7 +70,7 @@
                     <br>4%
                 </p>
             </td>
-            <td class="hidden-xs text-left" style="border-top-style:hidden !important; border-right-style:hidden !important">
+            <td class="text-left" style="border-top-style:hidden !important; border-right-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     Stanine
                     <br>%
@@ -79,7 +79,7 @@
         </tr>
         <!-- Results -->
         <tr ng-repeat="result in data[myOptions.start_result].scores" style="">
-            <td class="hidden-xs text-right" style="width: 28%; border-left-style:hidden !important;">
+            <td class="text-right" style="width: 28%; border-left-style:hidden !important;">
                 <p class="md-body-2" style="margin-top:-5px;">
                     {{result.question}}
                 </p>
@@ -135,7 +135,7 @@
                     <p class="md-headline" style="margin-top: 8px;">X</p>
                 </div>
             </td>
-            <td class="hidden-xs text-left" style="width: 28%; border-right-style:hidden !important;">
+            <td class="text-left" style="width: 28%; border-right-style:hidden !important;">
                 <p class="md-body-2" style="margin-top:-5px;">
                     {{result.question}}
                 </p>
@@ -149,7 +149,7 @@
         </tr>
         <!-- Footer -->
         <tr>
-            <td class="hidden-xs text-right" style="border-left-style:hidden !important; border-bottom-style:hidden !important">
+            <td class="text-right" style="border-left-style:hidden !important; border-bottom-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     %
                     <br>Stanine
@@ -209,7 +209,7 @@
                     <br><b>9</b>
                 </p>
             </td>
-            <td class="hidden-xs text-left" style="border-bottom-style:hidden !important; border-right-style:hidden !important">
+            <td class="text-left" style="border-bottom-style:hidden !important; border-right-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     %
                     <br>Stanine
@@ -237,13 +237,6 @@
                     <i class="mdi mdi-chevron-right"></i>
                 </md-button>
             </div>
-        </div>
-    </div>
-    <div class="visible-xs">
-        <div ng-repeat="result in data[myOptions.start_result].scores">
-            <p class="text-center md-body-1">
-                {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
-            </p>
         </div>
     </div>
 </div>
