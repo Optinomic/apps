@@ -36,10 +36,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.haveData = true;
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
-                // Get Calculations from this app.
-                $scope.d.getCalculation('another_calculation');
 
             }
+            // Get Calculations from this app.
+            $scope.d.getCalculation('another_calculation');
+
+
             //FAKE DATA:  Remove this later!
             $scope.d.haveData = true;
 
