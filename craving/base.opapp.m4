@@ -30,6 +30,8 @@ include(templates/chart_timeline.html)
 [template chart_tscore 6 9]
 include(templates/tscore.html)
 
+[template chart_tscore 6 6]
+include(templates/stanine.html)
 
 [dependencies]
 

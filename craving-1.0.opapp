@@ -210,6 +210,58 @@ website = http://www.optinomic.com/
 
 
 
+[template chart_tscore 6 6]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="init">
+            <div ng-if="d.haveData">
+                <!-- 
+
+					Attention:
+					Create a copy of 'main' for every 'template' an change the following 'partials' include:
+
+                -->
+                <chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
+
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">Sorry</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-content>
+        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/angular-grid/master/dist/angular-grid.min.js?commit=e2c7cb67acbd9d3d7cc3370fb0140ac77dc40451"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+-->
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
+
 
 [dependencies]
 
@@ -4802,16 +4854,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     };
 
-    // -----------------------------------
-    // Chart: T-Score
-    // -----------------------------------
-
-
 
 
     $scope.getRandomInt = function(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+
+    // -----------------------------------
+    // Chart: T-Score
+    // -----------------------------------
+
 
 
     $scope.getAnswer = function() {
@@ -4892,14 +4945,66 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // DataView : angulargrid.com
+    // Stanine - Chart
     // -----------------------------------
 
 
+    $scope.getAnswerStanine = function() {
+        var score_answer = [{
+            "question": "Stress durch Unsicherheit",
+            "sub_left": "Stabiles Umfeld. Keine Belastung.",
+            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Stress durch Überforderung",
+            "sub_left": "Keine Belastung durch Überforderung",
+            "sub_right": "Überforderung in wichtigen Lebensbereichen",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Stress durch Verlust",
+            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
+            "sub_right": "Belastung durch Verlust und negative Ereignisse",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Soziale Unterstützung",
+            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
+            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }];
+
+        return score_answer;
+    };
+
+    $scope.setStanineView = function() {
+
+        $scope.stanine = {};
+        $scope.stanine.data = [{
+            "label": "Eintritt",
+            "scores": $scope.getAnswerStanine()
+        }, {
+            "label": "Verlauf 12.12.1996",
+            "scores": $scope.getAnswerStanine()
+        }, {
+            "label": "Austritt",
+            "scores": $scope.getAnswerStanine()
+        }];
+
+        $scope.stanine.options = {
+            "population_name": "Männer, 31-50 Jahre",
+            "norm_name": "Normalbereich",
+            "start_result": $scope.stanine.data.length - 1
+        };
+
+    };
 
 
-
-
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
 
 
     $scope.setDataView = function() {

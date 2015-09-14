@@ -84,16 +84,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     };
 
-    // -----------------------------------
-    // Chart: T-Score
-    // -----------------------------------
-
-
 
 
     $scope.getRandomInt = function(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+
+    // -----------------------------------
+    // Chart: T-Score
+    // -----------------------------------
+
 
 
     $scope.getAnswer = function() {
@@ -174,14 +175,66 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // DataView : angulargrid.com
+    // Stanine - Chart
     // -----------------------------------
 
 
+    $scope.getAnswerStanine = function() {
+        var score_answer = [{
+            "question": "Stress durch Unsicherheit",
+            "sub_left": "Stabiles Umfeld. Keine Belastung.",
+            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Stress durch Überforderung",
+            "sub_left": "Keine Belastung durch Überforderung",
+            "sub_right": "Überforderung in wichtigen Lebensbereichen",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Stress durch Verlust",
+            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
+            "sub_right": "Belastung durch Verlust und negative Ereignisse",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }, {
+            "question": "Soziale Unterstützung",
+            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
+            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
+            "stanine": $scope.getRandomInt(1, 9),
+            "sum_score": $scope.getRandomInt(0, 100)
+        }];
+
+        return score_answer;
+    };
+
+    $scope.setStanineView = function() {
+
+        $scope.stanine = {};
+        $scope.stanine.data = [{
+            "label": "Eintritt",
+            "scores": $scope.getAnswerStanine()
+        }, {
+            "label": "Verlauf 12.12.1996",
+            "scores": $scope.getAnswerStanine()
+        }, {
+            "label": "Austritt",
+            "scores": $scope.getAnswerStanine()
+        }];
+
+        $scope.stanine.options = {
+            "population_name": "Männer, 31-50 Jahre",
+            "norm_name": "Normalbereich",
+            "start_result": $scope.stanine.data.length - 1
+        };
+
+    };
 
 
-
-
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
 
 
     $scope.setDataView = function() {
