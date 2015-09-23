@@ -76,7 +76,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.craving;
 
         $scope.d.timeline.options = {
-            'title': 'GSI (Mean)',
+            'title': 'Summe (∑) - Mean',
             'focusField': 'Suchtdruck_1',
             'fillDates': false,
             'firstWeekDay': 'Mo',
