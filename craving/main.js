@@ -86,12 +86,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.getAnswer = function() {
         var score_answer = [{
-            "question": "GSI",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
+            "question": "GSI (Global Severity Index)",
             "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
@@ -117,11 +112,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "sum_score": 0
         }, {
             "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
             "t_score": $scope.d.functions.getRandomInt(0, 100),
             "stanine": 0,
             "sum_score": 0
