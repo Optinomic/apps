@@ -182,11 +182,11 @@ website = http://www.optinomic.com/
             <md-option value="3">|</md-option>
         </md-select>
     </div>
-    <div>
-        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Download
-        </md-button>
-    </div>
+</div>
+<div>
+    <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
+        Download
+    </md-button>
 </div>
 
             </div>
@@ -4929,6 +4929,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+    // -----------------------------------
+    // Fake - Download
+    // -----------------------------------
+    $scope.file = 1;
+    $scope.delimitter = 1;
 
     // -----------------------------------
     // Chart: Timeline
@@ -4946,7 +4951,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.craving;
 
         $scope.d.timeline.options = {
-            'title': 'Suchtdruck',
+            'title': 'GSI (Mean)',
             'focusField': 'Suchtdruck_1',
             'fillDates': false,
             'firstWeekDay': 'Mo',

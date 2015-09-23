@@ -54,6 +54,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+    // -----------------------------------
+    // Fake - Download
+    // -----------------------------------
+    $scope.file = 1;
+    $scope.delimitter = 1;
 
     // -----------------------------------
     // Chart: Timeline
@@ -71,7 +76,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.craving;
 
         $scope.d.timeline.options = {
-            'title': 'Suchtdruck',
+            'title': 'GSI (Mean)',
             'focusField': 'Suchtdruck_1',
             'fillDates': false,
             'firstWeekDay': 'Mo',
