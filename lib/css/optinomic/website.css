@@ -1,0 +1,302 @@
+.optinomic-kunden-pic {
+    width: 250px!important
+}
+
+.optinomic-section-header {
+    height: 0!important
+}
+
+.optinomic-bereich-header {
+    font-family: Roboto, sans-serif;
+    font-weight: 200;
+    font-size: 2.0rem;
+    line-height: 1.35 !important;
+}
+
+.optinomic-bereich-title {
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    font-size: 4.1rem
+}
+
+.flow-text {
+    font-family: Roboto, sans-serif;
+    line-height: 1.3;
+    font-weight: 400;
+    font-size: 14px
+}
+
+@media only screen and (min-width:360px) {
+    .flow-text {
+        font-size: 1.2rem!important
+    }
+}
+
+@media only screen and (min-width:0) {
+    .flow-text {
+        line-height: .8rem!important
+    }
+}
+
+@media only screen and (min-width:390px) {
+    .flow-text {
+        font-size: 1.224rem!important
+    }
+}
+
+@media only screen and (min-width:30px) {
+    .flow-text {
+        line-height: .904rem!important
+    }
+}
+
+@media only screen and (min-width:420px) {
+    .flow-text {
+        font-size: 1.248rem!important
+    }
+}
+
+@media only screen and (min-width:60px) {
+    .flow-text {
+        line-height: 1.008rem!important
+    }
+}
+
+@media only screen and (min-width:450px) {
+    .flow-text {
+        font-size: 1.272rem!important
+    }
+}
+
+@media only screen and (min-width:90px) {
+    .flow-text {
+        line-height: 1.112rem!important
+    }
+}
+
+@media only screen and (min-width:480px) {
+    .flow-text {
+        font-size: 1.296rem!important
+    }
+}
+
+@media only screen and (min-width:120px) {
+    .flow-text {
+        line-height: 1.216rem!important
+    }
+}
+
+@media only screen and (min-width:510px) {
+    .flow-text {
+        font-size: 1.32rem!important
+    }
+}
+
+@media only screen and (min-width:150px) {
+    .flow-text {
+        line-height: 1.32rem!important
+    }
+}
+
+@media only screen and (min-width:540px) {
+    .flow-text {
+        font-size: 1.344rem!important
+    }
+}
+
+@media only screen and (min-width:180px) {
+    .flow-text {
+        line-height: 1.424rem!important
+    }
+}
+
+@media only screen and (min-width:570px) {
+    .flow-text {
+        font-size: 1.368rem!important
+    }
+}
+
+@media only screen and (min-width:210px) {
+    .flow-text {
+        line-height: 1.528rem!important
+    }
+}
+
+@media only screen and (min-width:600px) {
+    .flow-text {
+        font-size: 1.392rem!important
+    }
+}
+
+@media only screen and (min-width:240px) {
+    .flow-text {
+        line-height: 1.632rem!important
+    }
+}
+
+@media only screen and (min-width:630px) {
+    .flow-text {
+        font-size: 1.416rem!important
+    }
+}
+
+@media only screen and (min-width:270px) {
+    .flow-text {
+        line-height: 1.736rem!important
+    }
+}
+
+@media only screen and (min-width:660px) {
+    .flow-text {
+        font-size: 1.44rem!important
+    }
+}
+
+@media only screen and (min-width:300px) {
+    .flow-text {
+        line-height: 1.84rem!important
+    }
+}
+
+@media only screen and (min-width:690px) {
+    .flow-text {
+        font-size: 1.464rem!important
+    }
+}
+
+@media only screen and (min-width:330px) {
+    .flow-text {
+        line-height: 1.944rem!important
+    }
+}
+
+@media only screen and (min-width:720px) {
+    .flow-text {
+        font-size: 1.488rem!important
+    }
+}
+
+@media only screen and (min-width:360px) {
+    .flow-text {
+        line-height: 2.048rem!important
+    }
+}
+
+@media only screen and (min-width:750px) {
+    .flow-text {
+        font-size: 1.512rem!important
+    }
+}
+
+@media only screen and (min-width:390px) {
+    .flow-text {
+        line-height: 2.152rem!important
+    }
+}
+
+@media only screen and (min-width:780px) {
+    .flow-text {
+        font-size: 1.536rem!important
+    }
+}
+
+@media only screen and (min-width:420px) {
+    .flow-text {
+        line-height: 2.256rem!important
+    }
+}
+
+@media only screen and (min-width:810px) {
+    .flow-text {
+        font-size: 1.56rem!important
+    }
+}
+
+@media only screen and (min-width:450px) {
+    .flow-text {
+        line-height: 2.36rem!important
+    }
+}
+
+@media only screen and (min-width:840px) {
+    .flow-text {
+        font-size: 1.584rem!important
+    }
+}
+
+@media only screen and (min-width:480px) {
+    .flow-text {
+        line-height: 2.464rem!important
+    }
+}
+
+@media only screen and (min-width:870px) {
+    .flow-text {
+        font-size: 1.608rem!important
+    }
+}
+
+@media only screen and (min-width:510px) {
+    .flow-text {
+        line-height: 2.568rem!important
+    }
+}
+
+@media only screen and (min-width:900px) {
+    .flow-text {
+        font-size: 1.632rem!important
+    }
+}
+
+@media only screen and (min-width:540px) {
+    .flow-text {
+        line-height: 2.672rem!important
+    }
+}
+
+@media only screen and (min-width:930px) {
+    .flow-text {
+        font-size: 1.656rem!important
+    }
+}
+
+@media only screen and (min-width:570px) {
+    .flow-text {
+        line-height: 2.776rem!important
+    }
+}
+
+@media only screen and (min-width: 360px) {
+    .et_pb_promo_description h2 {
+        font-size: 1.15rem !important;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+    .et_pb_promo_description h2 {
+        font-size: 1.3rem !important;
+    }
+}
+
+@media only screen and (min-width: 870px) {
+    .et_pb_promo_description h2 {
+        font-size: 1.85rem !important;
+    }
+}
+
+.et_pb_promo_description h2 {
+    font-weight: 300;
+    line-height: 1.5 !important;
+}
+
+.keywords {
+    font-size: 14px;
+    margin-top: -18px;
+    color: #BDBDBD !important;
+}
+
+@media screen and (max-width: 900px) {
+    .notonmobile {
+        display: none;
+    }
+}
