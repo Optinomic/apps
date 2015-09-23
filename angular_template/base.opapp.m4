@@ -1,14 +1,14 @@
 [module]
 
-id = com.optinomic.apps.craving
-name = Craving-Tracking
-short_description = Substanzverlangen (Alkohol, Tabak, sonstige Drogen) des Patienten
+id = com.optinomic.apps.template
+name = Optinomic-App (Template)
+short_description = Use this as a starting-point for your apps.
 version = include(VERSION)
 type = patient
 
 [description]
 
-Substanzverlangen oder Craving (engl. Begierde, Verlangen) ist ein Fachbegriff aus der Suchtmedizin. Craving oder constant craving umschreibt das kontinuierliche und nahezu unbezwingbare Verlangen eines Suchtkranken, sein Suchtmittel (Alkohol, Tabak, sonstige Drogen) zu konsumieren. Craving ist das zentrale Moment des Abhängigkeits- und Entzugssyndroms.
+Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
 
 [developer]
 
@@ -21,8 +21,6 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
 
 [template data_survey_responses 6 7]
 include(templates/data.html)
@@ -33,6 +31,11 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
+[template chart_timeline 6 7]
+include(templates/chart_timeline.html)
+
+[template data_download 6 3]
+include(templates/download.html)
 
 
 [dependencies]

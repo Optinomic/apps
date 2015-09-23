@@ -1,0 +1,20 @@
+<div ng-controller="SurveyController">
+  <div ng-hide="thankyou">
+    <div>
+      <label>How are you feeling today from a scale of 1 to 5?</label>
+      <select ng-model="result.score">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+
+    <button ng-click="saveresult()">Send</button>
+  </div>
+
+  <div ng-show="thankyou">
+    Thank you for your response. You can now close the window.
+  </div>
+</div>

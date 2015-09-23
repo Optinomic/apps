@@ -54,6 +54,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+    // -----------------------------------
+    // Fake - Download
+    // -----------------------------------
+    $scope.file = 1;
+    $scope.delimitter = 1;
 
     // -----------------------------------
     // Chart: Timeline
