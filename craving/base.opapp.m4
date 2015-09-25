@@ -50,19 +50,19 @@ include(style.css)
 
 [survey]
 
-id = my_craving
+id = daily_mood
 type = lime
 responsibility = lead_therapist
 name = Craving
 username = admin
-password = go4optinomix
-base_url = http://dev.openpsychotherapy.org/index.php
-survey_id = 729583
-hash = X128X2955
-pid = X128X2956
-fid = X128X2957
+password = 23or5P6gSv3YjAcJCUe4
+base_url = http://limesurvey.optinomic.org/index.php
+survey_id = 368847
+hash = X1X1
+pid = X1X2
+fid = X1X3
 min_questions =
-min_lastpage = 1
+min_lastpage = 2
 
 
 [event]
@@ -71,7 +71,7 @@ type = daily
 time = 19:00
 due_after = 86400
 overdue = ignore
-description = Track your daily craving.
+description = Track your daily mood.
 survey = my_craving
 
 [email new_event html]
