@@ -1,3 +1,4 @@
+
 [module]
 
 id = com.optinomic.apps.craving
@@ -69,6 +70,18 @@ min_questions =
 min_lastpage = 2
 
 
+[survey]
+
+id = my_ng_survey
+type = ng
+responsibility = lead_therapist
+name = Angular survey example
+
+[survey_markup my_ng_survey]
+
+include(survey_markups/my_ng_survey.html)
+
+
 [event]
 
 type = daily
@@ -77,6 +90,16 @@ due_after = 86400
 overdue = ignore
 description = Track your daily craving.
 survey = daily_mood
+
+[event]
+
+type = daily
+time = 12:00
+due_after = 86400
+overdue = ignore
+description = Track your daily mood with ng-survey.
+survey = my_ng_survey
+
 
 [email new_event html]
 

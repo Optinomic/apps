@@ -1,3 +1,4 @@
+
 [module]
 
 id = com.optinomic.apps.craving
@@ -4876,7 +4877,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-            // console.log('(DATA): loadedMainData:', data);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -4887,8 +4887,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
 
-            // Run Functions a.s.a Data is loaded:
+            // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
+
+            // Run App-Functions:
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
@@ -4899,12 +4901,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.init = true;
+            $scope.d.init = true;
         });
     };
     $scope.loadMainData();
 
 
+    // -----------------------------------
+    // Fake - Download
+    // -----------------------------------
+    $scope.file = 1;
+    $scope.delimitter = 1;
 
     // -----------------------------------
     // Chart: Timeline
@@ -21150,6 +21157,36 @@ min_questions =
 min_lastpage = 2
 
 
+[survey]
+
+id = my_ng_survey
+type = ng
+responsibility = lead_therapist
+name = Angular survey example
+
+[survey_markup my_ng_survey]
+
+<div ng-controller="SurveyController">
+    <div ng-hide="thankyou">
+        <div>
+            <label>How are you feeling today from a scale of 1 to 5?</label>
+            <select ng-model="result.score">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button ng-click="saveresult()">Send</button>
+    </div>
+    <div ng-show="thankyou">
+        Thank you for your response. You can now close the window.
+    </div>
+</div>
+
+
+
 [event]
 
 type = daily
@@ -21158,6 +21195,16 @@ due_after = 86400
 overdue = ignore
 description = Track your daily craving.
 survey = daily_mood
+
+[event]
+
+type = daily
+time = 12:00
+due_after = 86400
+overdue = ignore
+description = Track your daily mood with ng-survey.
+survey = my_ng_survey
+
 
 [email new_event html]
 
