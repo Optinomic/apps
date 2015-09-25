@@ -76,7 +76,7 @@ time = 19:00
 due_after = 86400
 overdue = ignore
 description = Track your daily craving.
-survey = my_craving
+survey = daily_mood
 
 [email new_event html]
 
