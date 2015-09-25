@@ -30,15 +30,10 @@ website = http://www.optinomic.com/
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <div layout="row" layout-sm="column" layout-align="start end">
+<div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
@@ -53,7 +48,7 @@ website = http://www.optinomic.com/
             Resize
         </md-button>
         <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Tool
+            Toolbox
         </md-button>
     </div>
 </div>
@@ -63,7 +58,6 @@ website = http://www.optinomic.com/
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
     </span>
 </p>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -100,6 +94,7 @@ website = http://www.optinomic.com/
 
 
 
+
 [template chart_tscore 6 9]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
@@ -107,7 +102,7 @@ website = http://www.optinomic.com/
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
                 <!-- 
 
@@ -283,13 +278,13 @@ website = http://www.optinomic.com/
                 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
-        <md-select ng-model="file">
+        <md-select ng-model="file" ng-init="1">
             <md-option value="1">Survey Results (Rawdata)</md-option>
             <md-option value="2">TARPSY (Daten 2015, Lieferung 2016)</md-option>
         </md-select>
     </div>
     <div>
-        <md-select ng-model="delimitter">
+        <md-select ng-model="delimitter" ng-init="1">
             <md-option value="1">;</md-option>
             <md-option value="2">,</md-option>
             <md-option value="3">|</md-option>
@@ -298,7 +293,7 @@ website = http://www.optinomic.com/
 </div>
 <div>
     <md-button ng-click="" class="md-primary" aria-label="Tool">
-        Download (not implemented yet)
+        Download (not implemented)
     </md-button>
 </div>
 
@@ -4900,7 +4895,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-            // console.log('(DATA): loadedMainData:', data);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -4911,8 +4905,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
 
-            // Run Functions a.s.a Data is loaded:
+            // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
+
+            // Run App-Functions:
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
@@ -4923,7 +4919,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.init = true;
+            $scope.d.init = true;
         });
     };
     $scope.loadMainData();
@@ -21162,13 +21158,12 @@ p {
 }
 
 
-
 [survey]
 
 id = daily_mood
 type = lime
 responsibility = lead_therapist
-name = Craving
+name = Tägliche Stimmung
 username = admin
 password = 23or5P6gSv3YjAcJCUe4
 base_url = http://limesurvey.optinomic.org/index.php

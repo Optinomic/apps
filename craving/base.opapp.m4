@@ -39,7 +39,7 @@ include(templates/stanine.html)
 
 [javascript]
 
-include(../lib/m4/optinomic/optinomic_app_api.m4)
+include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
 
 
@@ -53,7 +53,7 @@ include(style.css)
 id = daily_mood
 type = lime
 responsibility = lead_therapist
-name = Craving
+name = Tägliche Stimmung
 username = admin
 password = 23or5P6gSv3YjAcJCUe4
 base_url = http://limesurvey.optinomic.org/index.php

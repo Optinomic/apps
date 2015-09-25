@@ -25,7 +25,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-            // console.log('(DATA): loadedMainData:', data);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -36,8 +35,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
 
-            // Run Functions a.s.a Data is loaded:
+            // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
+
+            // Run App-Functions:
             $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
@@ -48,7 +49,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.init = true;
+            $scope.d.init = true;
         });
     };
     $scope.loadMainData();

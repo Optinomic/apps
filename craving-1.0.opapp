@@ -21089,7 +21089,7 @@ p {
 id = daily_mood
 type = lime
 responsibility = lead_therapist
-name = Craving
+name = Tägliche Stimmung
 username = admin
 password = 23or5P6gSv3YjAcJCUe4
 base_url = http://limesurvey.optinomic.org/index.php
