@@ -22,75 +22,18 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template chart_timeline 6 7]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="init">
-            <div ng-if="d.haveData">
-                <!-- 
-
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
-
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">Sorry</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-    </div>
-    <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<!--
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
--->
-<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-
-
 
 [template data_survey_responses 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <div layout="row" layout-sm="column" layout-align="start end">
+<div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
@@ -105,7 +48,7 @@ website = http://www.optinomic.com/
             Resize
         </md-button>
         <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Tool
+            Toolbox
         </md-button>
     </div>
 </div>
@@ -115,7 +58,6 @@ website = http://www.optinomic.com/
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
     </span>
 </p>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -149,29 +91,24 @@ website = http://www.optinomic.com/
 <script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 -->
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
 
 
 
 [template chart_tscore 6 9]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <h3 class="md-headline">
+<h3 class="md-headline">
     T-Score: {{d.dataMain.apps.current.name}}
 </h3>
 <chart-tscore data='plotdata' options='options_plot'></chart-tscore>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -208,26 +145,137 @@ website = http://www.optinomic.com/
 
 
 
+
 [template chart_stanine 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <h3 class="md-headline">
+<h3 class="md-headline">
     Stanine: {{d.dataMain.apps.current.name}}
 </h3>
 <chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">Sorry</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-content>
+        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+    </md-content>
+</div>
 
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+-->
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
+
+
+
+[template chart_timeline 6 7]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">Sorry</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-content>
+        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+-->
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
+
+
+
+[template data_download 6 3]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div layout="row" layout-sm="column" layout-align="start end">
+    <div flex>
+        <md-select ng-model="file" ng-init="1">
+            <md-option value="1">Survey Results (Rawdata)</md-option>
+            <md-option value="2">TARPSY (Daten 2015, Lieferung 2016)</md-option>
+        </md-select>
+    </div>
+    <div>
+        <md-select ng-model="delimitter" ng-init="1">
+            <md-option value="1">;</md-option>
+            <md-option value="2">,</md-option>
+            <md-option value="3">|</md-option>
+        </md-select>
+    </div>
+</div>
+<div>
+    <md-button ng-click="" class="md-primary" aria-label="Tool">
+        Download (not implemented)
+    </md-button>
+</div>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -21107,7 +21155,7 @@ type = daily
 time = 19:00
 due_after = 86400
 overdue = ignore
-description = Track your daily mood.
+description = Track your daily craving.
 survey = daily_mood
 
 [email new_event html]

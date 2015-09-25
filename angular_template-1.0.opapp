@@ -26,7 +26,7 @@ website = http://www.optinomic.com/
 [template data_survey_responses 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
@@ -98,23 +98,17 @@ website = http://www.optinomic.com/
 [template chart_tscore 6 9]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
         <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <h3 class="md-headline">
+<h3 class="md-headline">
     T-Score: {{d.dataMain.apps.current.name}}
 </h3>
 <chart-tscore data='plotdata' options='options_plot'></chart-tscore>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -148,29 +142,24 @@ website = http://www.optinomic.com/
 <script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 -->
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
 
 
 
 [template chart_stanine 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <h3 class="md-headline">
+<h3 class="md-headline">
     Stanine: {{d.dataMain.apps.current.name}}
 </h3>
 <chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -204,26 +193,21 @@ website = http://www.optinomic.com/
 <script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 -->
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
 
 
 
 [template chart_timeline 6 7]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
-
+<chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -260,22 +244,18 @@ website = http://www.optinomic.com/
 
 
 
+
 [template data_download 6 3]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
 
         </div>
-        <div ng-if="init">
+        <div ng-if="d.init">
             <div ng-if="d.haveData">
-                <!-- 
 
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="file" ng-init="1">
@@ -296,7 +276,6 @@ website = http://www.optinomic.com/
         Download (not implemented)
     </md-button>
 </div>
-
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -330,6 +309,7 @@ website = http://www.optinomic.com/
 <script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
 -->
 <script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+
 
 
 
