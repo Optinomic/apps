@@ -1,22 +1,23 @@
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!init">
-            include(../lib/html/optinomic/templates/loading.html)
-        </div>
-        <div ng-if="init">
-            <div ng-if="d.haveData">
-                <!-- 
-
-					Attention:
-					Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                include(templates/partials/download.html)
-            </div>
-            <div ng-if="!d.haveData">
-                include(../lib/html/optinomic/templates/no_data.html)
-            </div>
-        </div>
+include(../lib/html/optinomic/page/start.m4)
+<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div layout="row" layout-sm="column" layout-align="start end">
+    <div flex>
+        <md-select ng-model="file" ng-init="1">
+            <md-option value="1">Survey Results (Rawdata)</md-option>
+            <md-option value="2">TARPSY (Daten 2015, Lieferung 2016)</md-option>
+        </md-select>
+    </div>
+    <div>
+        <md-select ng-model="delimitter" ng-init="1">
+            <md-option value="1">;</md-option>
+            <md-option value="2">,</md-option>
+            <md-option value="3">|</md-option>
+        </md-select>
     </div>
 </div>
-include(../lib/js/set/angular_material_grid_chart.html)
+<div>
+    <md-button ng-click="" class="md-primary" aria-label="Tool">
+        Download (not implemented)
+    </md-button>
+</div>
+include(../lib/html/optinomic/page/end.m4)

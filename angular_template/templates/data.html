@@ -1,3 +1,4 @@
+include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
@@ -13,7 +14,7 @@
             Resize
         </md-button>
         <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Tool
+            Toolbox
         </md-button>
     </div>
 </div>
@@ -23,3 +24,4 @@
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
     </span>
 </p>
+include(../lib/html/optinomic/page/end.m4)

@@ -21,8 +21,6 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
 
 [template data_survey_responses 6 7]
 include(templates/data.html)
@@ -33,6 +31,11 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
+[template chart_timeline 6 7]
+include(templates/chart_timeline.html)
+
+[template data_download 6 3]
+include(templates/download.html)
 
 
 [dependencies]
@@ -71,7 +74,7 @@ type = daily
 time = 19:00
 due_after = 86400
 overdue = ignore
-description = Track your daily mood.
+description = Track your daily craving.
 survey = daily_mood
 
 [email new_event html]

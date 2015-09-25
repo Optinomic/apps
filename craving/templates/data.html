@@ -1,22 +1,27 @@
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!init">
-            include(../lib/html/optinomic/templates/loading.html)
-        </div>
-        <div ng-if="init">
-            <div ng-if="d.haveData">
-                <!-- 
-
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                include(templates/partials/data.html)
-            </div>
-            <div ng-if="!d.haveData">
-                include(../lib/html/optinomic/templates/no_data.html)
-            </div>
-        </div>
+include(../lib/html/optinomic/page/start.m4)
+<div layout="row" layout-sm="column" layout-align="start end">
+    <div flex>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    </div>
+    <div>
+        <md-input-container>
+            <label>Filter</label>
+            <input ng-model="d.grid.options.quickFilterText">
+        </md-input-container>
+    </div>
+    <div>
+        <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
+            Resize
+        </md-button>
+        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
+            Toolbox
+        </md-button>
     </div>
 </div>
-include(../lib/js/set/angular_material_grid_chart.html)
+<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+<p class="small md-caption">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
+        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
+    </span>
+</p>
+include(../lib/html/optinomic/page/end.m4)

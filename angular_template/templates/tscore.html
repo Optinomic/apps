@@ -1,22 +1,6 @@
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!init">
-            include(../lib/html/optinomic/templates/loading.html)
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-                <!-- 
-
-                    Attention:
-                    Create a copy of 'main' for every 'template' an change the following 'partials' include:
-
-                -->
-                include(templates/partials/tscore.html)
-            </div>
-            <div ng-if="!d.haveData">
-                include(../lib/html/optinomic/templates/no_data.html)
-            </div>
-        </div>
-    </div>
-</div>
-include(../lib/js/set/angular_material_grid_chart.html)
+include(../lib/html/optinomic/page/start.m4)
+<h3 class="md-headline">
+    T-Score: {{d.dataMain.apps.current.name}}
+</h3>
+<chart-tscore data='plotdata' options='options_plot'></chart-tscore>
+include(../lib/html/optinomic/page/end.m4)
