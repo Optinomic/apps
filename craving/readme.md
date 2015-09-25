@@ -1,7 +1,7 @@
 
 
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Optinomic-App (Template)
+## Optinomic-App
 
 
 #### Ressources
