@@ -68,18 +68,6 @@ min_questions =
 min_lastpage = 2
 
 
-[survey]
-
-id = my_ng_survey
-type = ng
-responsibility = lead_therapist
-name = Angular survey example
-
-[survey_markup my_ng_survey]
-
-include(survey_markups/my_ng_survey.html)
-
-
 [event]
 
 type = daily
