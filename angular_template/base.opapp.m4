@@ -77,14 +77,6 @@ overdue = ignore
 description = Track your daily craving.
 survey = daily_mood
 
-[event]
-
-type = daily
-time = 12:00
-due_after = 86400
-overdue = ignore
-description = Track your daily mood with ng-survey.
-survey = my_ng_survey
 
 
 [email new_event html]
