@@ -1,3 +1,18 @@
+<style>
+.optinomic-hide-sm {
+    visibility: visible;
+    overflow: hidden;
+    max-height: 12px !important;
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+    .optinomic-hide-sm {
+        visibility: hidden;
+        position: absolute;
+        position-left: 3;
+    }
+}
+</style>
 <div style="min-width:100%;">
     <div class="text-center">
         <p class="md-subhead" style="margin-top: 5px; margin-bottom: 5px;">
@@ -10,7 +25,7 @@
     <table class="table table-bordered">
         <!-- Header -->
         <tr>
-            <td class="text-right" style="border-left-style:hidden !important; border-top-style:hidden !important">
+            <td class="optinomic-hide-sm text-right" style="border-left-style:hidden !important; border-top-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     Stanine
                     <br>%
@@ -70,7 +85,7 @@
                     <br>4%
                 </p>
             </td>
-            <td class="text-left" style="border-top-style:hidden !important; border-right-style:hidden !important">
+            <td class="optinomic-hide-sm text-left" style="border-top-style:hidden !important; border-right-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     Stanine
                     <br>%
@@ -78,8 +93,8 @@
             </td>
         </tr>
         <!-- Results -->
-        <tr ng-repeat="result in data[myOptions.start_result].scores" style="">
-            <td class="text-right" style="width: 28%; border-left-style:hidden !important;">
+        <tr ng-repeat="result in data[myOptions.start_result].scores">
+            <td class="optinomic-hide-sm text-right" style="width: 28%; border-left-style:hidden !important;">
                 <p class="md-body-2" style="margin-top:-5px;">
                     {{result.question}}
                 </p>
@@ -87,55 +102,103 @@
                     {{result.sub_left}}
                 </p>
                 <p style="visibility:hidden; max-height:1px !important; margin-top:-10px;">
-                    {{result.question}} {{result.sub_left}} {{result.question}} {{result.sub_left}}
+                    {{result.question}} {{result.sub_right}} {{result.question}} {{result.sub_left}}
                 </p>
+                <md-tooltip show-gt-sm md-direction="right">
+                    {{result.question}}: {{result.sub_left}}
+                </md-tooltip>
             </td>
             <td class="text-center" style="background-color: #E8EAF6">
                 <div ng-show="result.stanine === 1">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="right">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #C5CAE9">
                 <div ng-show="result.stanine === 2">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="right">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #C5CAE9">
                 <div ng-show="result.stanine === 3">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="right">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #9FA8DA">
                 <div ng-show="result.stanine === 4">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="top">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #9FA8DA">
                 <div ng-show="result.stanine === 5">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="top">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #9FA8DA">
                 <div ng-show="result.stanine === 6">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="top">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #C5CAE9">
                 <div ng-show="result.stanine === 7">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="left">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #C5CAE9">
                 <div ng-show="result.stanine === 8">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="left">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
             <td class="text-center" style="background-color: #E8EAF6">
                 <div ng-show="result.stanine === 9">
-                    <p class="md-headline" style="margin-top: 8px;">X</p>
+                    <p class="md-headline" style="margin-top: 8px;">
+                        X
+                        <md-tooltip hide-gt-sm md-direction="left">
+                            {{result.question}}: &nbsp;&nbsp;<b>{{result.stanine}}</b>
+                        </md-tooltip>
+                    </p>
                 </div>
             </td>
-            <td class="text-left" style="width: 28%; border-right-style:hidden !important;">
+            <td class="optinomic-hide-sm text-left" style="width: 28%; border-right-style:hidden !important;">
                 <p class="md-body-2" style="margin-top:-5px;">
                     {{result.question}}
                 </p>
@@ -145,11 +208,14 @@
                 <p style="visibility:hidden; max-height:1px !important; margin-top:-10px;">
                     {{result.question}} {{result.sub_right}} {{result.question}} {{result.sub_left}}
                 </p>
+                <md-tooltip show-gt-sm md-direction="left">
+                    {{result.question}}: {{result.sub_right}}
+                </md-tooltip>
             </td>
         </tr>
         <!-- Footer -->
         <tr>
-            <td class="text-right" style="border-left-style:hidden !important; border-bottom-style:hidden !important">
+            <td class="optinomic-hide-sm text-right" style="border-left-style:hidden !important; border-bottom-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     %
                     <br>Stanine
@@ -209,7 +275,7 @@
                     <br><b>9</b>
                 </p>
             </td>
-            <td class="text-left" style="border-bottom-style:hidden !important; border-right-style:hidden !important">
+            <td class="optinomic-hide-sm text-left" style="border-bottom-style:hidden !important; border-right-style:hidden !important">
                 <p class="md-caption" style="max-height: 18px !important; color:#757575;">
                     %
                     <br>Stanine
