@@ -1,5 +1,4 @@
 [module]
-
 id = com.optinomic.apps.template
 name = Optinomic-App (Template)
 short_description = Use this as a starting-point for your apps.
@@ -8,11 +7,9 @@ version = 1.0
 type = patient
 
 [description]
-
 Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
 
 [developer]
-
 first_name = Beat
 last_name = Ottiger
 github_user = ottigerb
@@ -38,19 +35,19 @@ website = http://www.optinomic.com/
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div>
-        <md-input-container>
+        <md-input-container class="md-primary">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
     <div>
-        <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
+        <md-button ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
             <md-tooltip md-direction="top">
                 Grösse anpassen
             </md-tooltip>
         </md-button>
-        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
+        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
             <i class="mdi mdi-table-edit"></i>
             <md-tooltip md-direction="top">
                 Toolpanel ein-/ausblenden
@@ -323,7 +320,6 @@ website = http://www.optinomic.com/
 [dependencies]
 
 [javascript]
-
 'use strict';
 
 /**
@@ -5157,7 +5153,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 [css]
-
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -21145,7 +21140,6 @@ p {
 
 
 [survey]
-
 id = daily_mood
 type = lime
 responsibility = lead_therapist
@@ -21162,7 +21156,6 @@ min_lastpage = 2
 
 
 [event]
-
 type = daily
 time = 19:00
 due_after = 86400
@@ -21171,14 +21164,11 @@ description = Track your daily craving.
 survey = daily_mood
 
 
-
 [email new_event html]
-
 $patient$, bitte beurteilen Sie ihr aktuelles Suchtverlangen <a href="$survey_link$">here</a> Besten Dank.
 
 
 [email overdue html]
-
 Hello $patient$,
 
 A task is overdue <a href="$survey_link$">here</a>.
@@ -21188,7 +21178,6 @@ Thank you
 
 
 [calculation another_calculation javascript]
-
 function main(responses) {
     return {
         "a": 66.9,
