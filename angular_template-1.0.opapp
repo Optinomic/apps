@@ -39,16 +39,22 @@ website = http://www.optinomic.com/
     </div>
     <div>
         <md-input-container>
-            <label>Filter <i class="mdi mdi-filter-outline"></i></label>
+            <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
     <div>
         <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
-            Resize
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="top">
+                Grösse anpassen
+            </md-tooltip>
         </md-button>
         <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Toolbox
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="top">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
         </md-button>
     </div>
 </div>
