@@ -21260,10 +21260,8 @@ p {
 id = daily_mood
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
-username = admin
-password = 23or5P6gSv3YjAcJCUe4
-base_url = http://limesurvey.optinomic.org/index.php
+name = Craving - Test
+host = default
 survey_id = 368847
 hash = X1X1
 pid = X1X2

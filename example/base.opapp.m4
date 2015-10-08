@@ -38,21 +38,21 @@ include(main.js)
 
 include(style.css)
 
+
 [survey]
 
 id = my_survey
 type = lime
 responsibility = lead_therapist
-name = Example survey
-username = admin
-password = something
-base_url = http://dev.openpsychotherapy.org/index.php
-survey_id = 12
-hash = 67890
-pid = 4567
-fid = 34567
-min_questions = A,B,C
+name = Craving - Test
+host = default
+survey_id = 368847
+hash = X1X1
+pid = X1X2
+fid = X1X3
+min_questions =
 min_lastpage = 2
+
 
 [survey]
 
