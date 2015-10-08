@@ -4881,10 +4881,10 @@ angular.module('optinomicDataModule')
                 myshow_scale_ranges: '=scaleRanges'
             },
 
-            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-stanine/stanine.html?V20151007',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/score-threshold/score-threshold.html?V201510081723',
 
 
-            link: function(scope, element, attrs, ngModel) {
+            link: function(scope, element, attrs) {
 
                 function get_position(my_value) {
                     var my_corrected_value = my_value - scope.min;
