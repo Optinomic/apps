@@ -4446,7 +4446,7 @@ angular.module('optinomicDataModule')
 
         return {
             //templateUrl: 'scripts/directives/chart_tscore.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?V20151008',
 
             restrict: 'E',
             //replace: true,
@@ -4472,7 +4472,6 @@ angular.module('optinomicDataModule')
                     scope.plot = scope.getShowAnswers();
 
                 }
-
 
                 // -----------------------------------------------
                 // FUNCTIONS
@@ -4505,6 +4504,7 @@ angular.module('optinomicDataModule')
                     var show_responses = Options.show_responses === undefined ? true : Options.show_responses;
                     var show_scores = Options.show_scores === undefined ? true : Options.show_scores;
                     var show_mean = Options.show_mean === undefined ? false : Options.show_mean;
+                    var axis_label = Options.axis_label === undefined ? 'T-Wert' : Options.axis_label;
 
 
                     var ReturnedOptions = {
@@ -4514,7 +4514,8 @@ angular.module('optinomicDataModule')
                         'colours': colours,
                         'show_responses': show_responses,
                         'show_scores': show_scores,
-                        'show_mean': show_mean
+                        'show_mean': show_mean,
+                        'axis_label': axis_label
                     };
 
                     // Some Translations
@@ -4558,9 +4559,7 @@ angular.module('optinomicDataModule')
 
                     var my_answers = [];
                     var maxHeight = 10 / data[0].scores.length;
-
-
-
+                    //var maxHeight = 1.25;
 
 
                     var allScores = [];
@@ -4601,7 +4600,7 @@ angular.module('optinomicDataModule')
 
                             my_xs.push(0);
                             my_xs_max.push(100);
-                            my_ys.push(myCount);
+                            my_ys.push(myHeight);
                             my_ys_label.push(myHeight - 0.2);
                             trenner.push([myHeight, myHeight]);
 
@@ -4640,7 +4639,7 @@ angular.module('optinomicDataModule')
 
                     my_answers.push(meanAnswer);
 
-                    console.log('Starting Array for Statistics: ', allScores, meanAnswer);
+                    //console.log('Starting Array for Statistics: ', allScores, meanAnswer);
 
                     // Prepare RETURN
 
@@ -4713,6 +4712,7 @@ angular.module('optinomicDataModule')
 
             }
         };
+
     });
 
 'use strict';
@@ -4824,7 +4824,7 @@ angular.module('optinomicDataModule')
 
 
                     scope.myOptions.start_result = jetzt;
-                    console.log('nextResult', direction);
+                    //console.log('nextResult', direction);
                     updateStuff();
 
                 }
