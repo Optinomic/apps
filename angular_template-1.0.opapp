@@ -30,7 +30,7 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="row" layout-align="start end">
+<div layout="row" layout-align="start center">
     <div flex hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
@@ -40,7 +40,7 @@ website = http://www.optinomic.com/
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
-    <div>
+    <div style="font-size: 18px;">
         <md-button ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
             <md-tooltip md-direction="top">

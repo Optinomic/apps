@@ -35,22 +35,28 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="row" layout-sm="column" layout-align="start end">
-    <div flex>
+<div layout="row" layout-align="start center">
+    <div flex hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div>
-        <md-input-container>
-            <label>Filter</label>
+        <md-input-container class="md-primary">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
-    <div>
-        <md-button ng-click="d.functions.resizeGrid()" class="md-primary" aria-label="Resize">
-            Resize
+    <div style="font-size: 18px;">
+        <md-button ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="top">
+                Grösse anpassen
+            </md-tooltip>
         </md-button>
-        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary" aria-label="Tool">
-            Toolbox
+        <md-button ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="top">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
         </md-button>
     </div>
 </div>
