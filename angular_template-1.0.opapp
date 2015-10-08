@@ -4912,11 +4912,11 @@ angular.module('optinomicDataModule')
  * # scoreThreshold: Displays a simple score - with ranges if needed.
  */
 angular.module('optinomicDataModule')
-    .directive('scoreThreshold', function(simpleStatistics) {
+    .directive('scoreThreshold', function() {
         return {
             restrict: 'E',
-            replace: true,
-            transclude: true,
+            //replace: true,
+            //transclude: true,
             scope: {
                 myscore: '=score',
                 mymax: '=max',
@@ -5006,6 +5006,7 @@ angular.module('optinomicDataModule')
                 '&nbsp;' +
                 '</div>' +
                 '</div>',
+
             link: function(scope, element, attrs, ngModel) {
 
                 function get_position(my_value) {
