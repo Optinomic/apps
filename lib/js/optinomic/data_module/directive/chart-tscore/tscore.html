@@ -1,4 +1,4 @@
-<div ng-if="plot_done" style="margin-left:-160px; overflow: hidden; overflow-x:hidden;">
+<div ng-if="plot_done" style="margin-left:-150px; overflow: hidden; overflow-x:hidden;">
     <plot ng-attr-width="{{myOptions.screenWidth}}" ng-attr-height="{{myOptions.screenHeight}}" axis-x-label="{{myOptions.axis_label}}" range-x="0,100" axis-y="off" legend-switches>
         <!-- Decoration -->
         <area x="[[plot.area_1]]" ymin="[[plot.area_sc_min]]" y="[[plot.area_sc_max]]" fill="#E8EAF6" fill-opacity="0.5">
@@ -26,7 +26,7 @@
         </points>
     </plot>
 </div>
-<div ng-if="plot_done" layout="row" layout-align="start center" style="margin-top:-12px; margin-right:150px;">
+<div ng-if="plot_done" layout="row" layout-align="start center" style="margin-top:-12px;">
     <div ng-repeat="me in plot.answers">
         <md-checkbox class="md-primary" style="color:{{me.colour}};" ng-change="getShowAnswers()" ng-model="me.show" aria-label="{{ me.label }}">
             {{me.label}}
