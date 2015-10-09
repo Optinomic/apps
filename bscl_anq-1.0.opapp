@@ -5071,7 +5071,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'show_scores': true
         };
 
-        console.log('setTscoreChart', $scope.d.dataMain.calculations);
+
+        var myCalculations = $scope.d.dataMain.calculations;
+        myCalculations.forEach(function(calculation, myindex) {
+
+            if (calculation.calculation_name === "get_results") {
+                console.log('_> Calculation: ', calculation, myindex);
+
+            };
+        });
+
 
     };
 
