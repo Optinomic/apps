@@ -15,9 +15,13 @@ function main(responses) {
             var result = response.data.response;
 
             myResults.sum_scores = {};
-            //myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + parseInt(result.BSCL[BSCL_sq504V13]) + parseInt(result.BSCL[BSCL_sq504V40]) + parseInt(result.BSCL[BSCL_sq504V46]) + parseInt(result.BSCL[sq504V06]);
             myResults.sum_scores.gaga = 1 + 2;
-            myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + 2;
+
+            var field = '';
+            field = 'BSCL[sq504V06]';
+            myResults.sum_scores.aggr = parseInt(result[field]) + 2;
+
+            //myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + parseInt(result.BSCL[BSCL_sq504V13]) + parseInt(result.BSCL[BSCL_sq504V40]) + parseInt(result.BSCL[BSCL_sq504V46]) + parseInt(result.BSCL[sq504V06]);
 
             //    result.sum_scores.angst = parseInt(result.BSCL[BSCL_sq504V01]) + parseInt(result.BSCL[BSCL_sq504V12]) + parseInt(result.BSCL[BSCL_sq504V19]) + parseInt(result.BSCL[BSCL_sq504V38]) + parseInt(result.BSCL[BSCL_sq504V45]) + parseInt(result.BSCL[BSCL_sq504V49]);
             //    result.sum_scores.depr = parseInt(result.BSCL[BSCL_sq504V09]) + parseInt(result.BSCL[BSCL_sq504V16]) + parseInt(result.BSCL[BSCL_sq504V17]) + parseInt(result.BSCL[BSCL_sq504V18]) + parseInt(result.BSCL[BSCL_sq504V35]) + parseInt(result.BSCL[BSCL_sq504V50]);
