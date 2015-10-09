@@ -1653,11 +1653,11 @@ angular.module('optinomicDataModule')
             var resp = response.data;
 
             var date = resp.filled;
-            filled_year = $filter("amDateFormat")(date, 'YYYY');
-            filled_week = $filter("amDateFormat")(date, 'YYYY, ww');
-            filled_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            filled_weekday = $filter("amDateFormat")(date, 'dddd');
-            filled_time = $filter("amDateFormat")(date, 'HH:mm');
+            resp.filled_year = $filter("amDateFormat")(date, 'YYYY');
+            resp.filled_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            resp.filled_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            resp.filled_weekday = $filter("amDateFormat")(date, 'dddd');
+            resp.filled_time = $filter("amDateFormat")(date, 'HH:mm');
 
             return response;
         };
