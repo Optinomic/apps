@@ -193,7 +193,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
 
-        $scope.getCalculation('get_results');
 
     };
 
