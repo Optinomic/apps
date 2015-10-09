@@ -46,6 +46,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
+            $scope.d.functions._InitData('dataMain', true);
         });
     };
     $scope.loadMainData();
@@ -57,9 +58,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.$watch('d._init', function(newValue, oldValue) {
         if ($scope.d._init.calculations === true) {
             // -----------------------------------
-            console.log('FIRE: Calculations Done! ');
+            console.log('FIRE: Calculations Done! ', $scope.d.calculations);
 
-            console.log('Calculations: ', $scope.d.calculations);
+            var myCalculations = $scope.d.calculations;
+            myCalculations.forEach(function(calculation, myindex) {
+                console.log('Calculation: ', calculation, myindex);
+            });
 
 
             // -----------------------------------
