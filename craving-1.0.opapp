@@ -36,10 +36,10 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <div layout="row" layout-align="start center">
-    <div flex hide-sm>
+    <div hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
-    <div>
+    <div flex>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
             <md-tooltip md-direction="top">
@@ -52,7 +52,6 @@ website = http://www.optinomic.com/
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
-        <div>&nbsp;</div>
     </div>
     <div>
         <md-input-container class="md-primary">
