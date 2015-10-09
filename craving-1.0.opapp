@@ -449,9 +449,12 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     };
 
 
+
     $scope.d.functions.enrichResults = function(surveyResults) {
 
         surveyResults = surveyResults === undefined ? {} : surveyResults;
+
+        console.log('enrichResults', surveyResults);
 
         // Loop trough every result
         surveyResults.forEach(function(result) {
@@ -594,7 +597,6 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         call.success(function(data) {
             // Save Data to $scope.d
             $scope.d.calculations = $scope.d.calculations === undefined ? [] : $scope.d.calculations;
-
 
             var date = new Date();
 
