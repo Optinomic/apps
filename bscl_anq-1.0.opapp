@@ -248,6 +248,23 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
     $scope.d.functions = {};
 
+
+    // -----------------------------------------------------------
+    // Init / Done
+    // -----------------------------------------------------------
+    $scope.d.functions._InitData = function(source, received) {
+        $scope.d._init = $scope.d._init === undefined ? {} : $scope.d._init;
+        $scope.d._init[source] = received;
+
+        $scope.d.init = received;
+        $scope.init = received;
+
+        $scope.checkPatientPage();
+    };
+    $scope.d.functions._InitData('dataMain', false);
+    $scope.d.functions._InitData('calculations', false);
+
+
     // -----------------------------------------------------------
     // GRID
     // http://www.angulargrid.com/angular-grid-resizing/index.php
@@ -280,8 +297,6 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         params.data[params.colDef.field] = params.newValue
         console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
     };
-
-
 
     $scope.d.functions.enrichResults = function(surveyResults) {
 
@@ -458,7 +473,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             $scope.d.functions.getCalculation(calculation);
         });
 
-        $scope.d.calculations.finished === true;
+        $scope.d.functions._InitData('calculations', true);
     };
 
 
@@ -4879,8 +4894,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // ---------------------------------------------
     // Do Stuff when all Calculations are calculated
     // ---------------------------------------------
-    $scope.$watch('d.calculations', function(newValue, oldValue) {
-        if ($scope.d.calculations.finished === true) {
+    $scope.$watch('d._init', function(newValue, oldValue) {
+        if ($scope.d._init.calculations === true) {
             // -----------------------------------
             console.log('FIRE: Calculations Done! ');
 
@@ -21923,11 +21938,9 @@ function main(responses) {
     };
 
 
-
     // Return
-    return {
-        "results": calc.getResults(responses)
-    };
+    return calc.getResults(responses);
+
 };
 
 

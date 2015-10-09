@@ -791,9 +791,7 @@ function main(responses) {
     };
 
 
-
     // Return
-    return {
-        "results": calc.getResults(responses)
-    };
+    return calc.getResults(responses);
+
 };

@@ -54,8 +54,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // ---------------------------------------------
     // Do Stuff when all Calculations are calculated
     // ---------------------------------------------
-    $scope.$watch('d.calculations', function(newValue, oldValue) {
-        if ($scope.d.calculations.finished === true) {
+    $scope.$watch('d._init', function(newValue, oldValue) {
+        if ($scope.d._init.calculations === true) {
             // -----------------------------------
             console.log('FIRE: Calculations Done! ');
 

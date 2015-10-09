@@ -415,6 +415,23 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
     $scope.d.functions = {};
 
+
+    // -----------------------------------------------------------
+    // Init / Done
+    // -----------------------------------------------------------
+    $scope.d.functions._InitData = function(source, received) {
+        $scope.d._init = $scope.d._init === undefined ? {} : $scope.d._init;
+        $scope.d._init[source] = received;
+
+        $scope.d.init = received;
+        $scope.init = received;
+
+        $scope.checkPatientPage();
+    };
+    $scope.d.functions._InitData('dataMain', false);
+    $scope.d.functions._InitData('calculations', false);
+
+
     // -----------------------------------------------------------
     // GRID
     // http://www.angulargrid.com/angular-grid-resizing/index.php
@@ -447,8 +464,6 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         params.data[params.colDef.field] = params.newValue
         console.log('editValueHandler => Save: ', params.colDef.field, params.newValue, params);
     };
-
-
 
     $scope.d.functions.enrichResults = function(surveyResults) {
 
@@ -625,7 +640,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             $scope.d.functions.getCalculation(calculation);
         });
 
-        $scope.d.calculations.finished === true;
+        $scope.d.functions._InitData('calculations', true);
     };
 
 
