@@ -21073,8 +21073,10 @@ function main(responses) {
         responses_array.forEach(function(response, myindex) {
             var result = response.data.response;
 
-            var myResults.sum_scores = {};
-            myResults.sum_scores.aggr = 1 + 2 + 3;
+            myResults.sum_scores = 1 + 2 + 3;
+
+            // var myResults.sum_scores = {};
+            // myResults.sum_scores.aggr = 1 + 2 + 3;
             //myResults.sum_scores.aggr = parseInt(BSCL[sq504V06]) + parseInt(BSCL[BSCL_sq504V13]) + parseInt(BSCL[BSCL_sq504V40]) + parseInt(BSCL[BSCL_sq504V46]) + parseInt(BSCL[sq504V06]);
             //    result.sum_scores.angst = parseInt(BSCL[BSCL_sq504V01]) + parseInt(BSCL[BSCL_sq504V12]) + parseInt(BSCL[BSCL_sq504V19]) + parseInt(BSCL[BSCL_sq504V38]) + parseInt(BSCL[BSCL_sq504V45]) + parseInt(BSCL[BSCL_sq504V49]);
             //    result.sum_scores.depr = parseInt(BSCL[BSCL_sq504V09]) + parseInt(BSCL[BSCL_sq504V16]) + parseInt(BSCL[BSCL_sq504V17]) + parseInt(BSCL[BSCL_sq504V18]) + parseInt(BSCL[BSCL_sq504V35]) + parseInt(BSCL[BSCL_sq504V50]);
