@@ -58,6 +58,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.getAnswer = function(calc) {
 
+        console.log('getAnswer', calc);
+
         var myResults = calc.calculation_result.results;
 
         var score_answer = [{
@@ -139,6 +141,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (responses) {
 
                 responses.forEach(function(response, myindex) {
+
                     var plot_item = {
                         "label": response.datestamp_day + ' ' + response.datestamp_time,
                         "scores": $scope.getAnswer(response)
@@ -146,7 +149,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     $scope.plotdata.push(plot_item);
                 });
             };
-
 
             // Save Data to $scope.d
             $scope.d.calculation = {
