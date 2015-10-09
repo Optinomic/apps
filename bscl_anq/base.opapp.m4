@@ -71,5 +71,5 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation calculate_scores javascript]
+include(calculations/scores.js)

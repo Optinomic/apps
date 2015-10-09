@@ -21056,11 +21056,5 @@ Thank you
 
 
 
-[calculation another_calculation javascript]
-function main(responses) {
-    return {
-        "a": 66.9,
-        "responses": responses
-    };
-}
+[calculation calculate_scores javascript]
 
