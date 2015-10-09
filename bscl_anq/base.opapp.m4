@@ -57,7 +57,7 @@ min_lastpage = 2
 
 [event]
 type = daily
-time = 17:20
+time = 09:00
 due_after = 86400
 overdue = ignore
 description = BSCL - ANQ
