@@ -134,6 +134,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         call.success(function(data) {
 
+            console.log('success', calc_name, data);
+
             // Results
             $scope.plotdata = [];
 
