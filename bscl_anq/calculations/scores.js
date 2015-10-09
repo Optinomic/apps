@@ -597,11 +597,7 @@ function main(responses) {
             myResults.scale_scores.gsi = parseFloat(myResults.sum_scores.gsi / 53);
 
 
-            //myResults.t_scores = {};
-            //// GSI
-            //result_item = 0;
-            //myscope[i].label.results[result_item].sum_score = myscope[i].sum_score_gsi;
-            //myscope[i].label.results[result_item].scale_score = myscope[i].scale_score_gsi;
+
 
             var score_answer = [{
                 "scale": 0,
@@ -684,7 +680,6 @@ function main(responses) {
 
     // Return
     return {
-        "results": calc.getResults(responses),
-        "responses": responses
+        "results": calc.getResults(responses)
     };
 };
