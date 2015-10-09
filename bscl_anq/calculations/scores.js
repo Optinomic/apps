@@ -29,16 +29,16 @@ function main(responses) {
             myResults.sum_scores.zusatz = parseInt(result['BSCL[sq504V11]']) + parseInt(result['BSCL[sq504V25]']) + parseInt(result['BSCL[sq504V39]']) + parseInt(result['BSCL[sq504V52]']);
 
             myResults.scale_scores = {};
-            myResults.scale_scores.aggr = parseFloat(result.sum_scores.aggr / 5);
-            myResults.scale_scores.angst = parseFloat(result.sum_scores.angst / 6);
-            myResults.scale_scores.depr = parseFloat(result.sum_scores.depr / 6);
-            myResults.scale_scores.paranoid = parseFloat(result.sum_scores.paranoid / 5);
-            myResults.scale_scores.phobisch = parseFloat(result.sum_scores.phobisch / 5);
-            myResults.scale_scores.psychot = parseFloat(result.sum_scores.psychot / 5);
-            myResults.scale_scores.somat = parseFloat(result.sum_scores.somat / 7);
-            myResults.scale_scores.soz = parseFloat(result.sum_scores.soz / 4);
-            myResults.scale_scores.zwang = parseFloat(result.sum_scores.zwang / 6);
-            myResults.scale_scores.zusatz = parseFloat(result.sum_scores.zusatz / 4);
+            myResults.scale_scores.aggr = parseFloat(myResults.sum_scores.aggr / 5);
+            myResults.scale_scores.angst = parseFloat(myResults.sum_scores.angst / 6);
+            myResults.scale_scores.depr = parseFloat(myResults.sum_scores.depr / 6);
+            myResults.scale_scores.paranoid = parseFloat(myResults.sum_scores.paranoid / 5);
+            myResults.scale_scores.phobisch = parseFloat(myResults.sum_scores.phobisch / 5);
+            myResults.scale_scores.psychot = parseFloat(myResults.sum_scores.psychot / 5);
+            myResults.scale_scores.somat = parseFloat(myResults.sum_scores.somat / 7);
+            myResults.scale_scores.soz = parseFloat(myResults.sum_scores.soz / 4);
+            myResults.scale_scores.zwang = parseFloat(myResults.sum_scores.zwang / 6);
+            myResults.scale_scores.zusatz = parseFloat(myResults.sum_scores.zusatz / 4);
 
             myResults.sum_scores.gsi =
                 myResults.sum_scores.aggr +
