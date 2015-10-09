@@ -297,7 +297,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
         surveyResults = surveyResults === undefined ? [] : surveyResults;
 
-        console.log('enrichResults', surveyResults);
+        //console.log('enrichResults', surveyResults);
 
         // Loop trough every result
         surveyResults.forEach(function(result) {
@@ -1446,11 +1446,18 @@ angular.module('optinomicDataModule')
 
                             aCalculation.then(function(data) {
 
-                                var calc_item = {
-                                    "name": calculatons,
-                                    "results": data.calculation_result
-                                }
-                                return_data.calculations.push(calc_item);
+
+                                var date = new Date();
+
+                                var objectToPush = {
+                                    'calculation_name': calculatons,
+                                    'calculation_results': data.calculation_result,
+                                    'calculated_datestamp': date,
+                                    'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                    'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                };
+
+                                return_data.calculations.push(objectToPush);
 
                                 // Deferred when done.
                                 actions_count = actions_count + 1;
