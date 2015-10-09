@@ -19,7 +19,7 @@ function main(responses) {
 
             var field = '';
             field = 'BSCL[sq504V06]';
-            myResults.sum_scores.aggr = parseInt(result[field]) + 2;
+            myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[BSCL_sq504V13]']) + parseInt(result['BSCL[BSCL_sq504V40]']) + parseInt(result['BSCL[BSCL_sq504V46]']) + parseInt(result['BSCL[sq504V06]']);
 
             //myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + parseInt(result.BSCL[BSCL_sq504V13]) + parseInt(result.BSCL[BSCL_sq504V40]) + parseInt(result.BSCL[BSCL_sq504V46]) + parseInt(result.BSCL[sq504V06]);
 
