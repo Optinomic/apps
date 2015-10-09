@@ -44,9 +44,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setTscoreChart();
             $scope.setStanineView();
 
-            //FAKE DATA:  Remove this later!
-            $scope.d.haveData = true;
-
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;

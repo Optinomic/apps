@@ -1391,7 +1391,7 @@ angular.module('optinomicDataModule')
  * Service for getting Data from API
  */
 angular.module('optinomicDataModule')
-    .service('dataService', function($q, apiService) {
+    .service('dataService', function($q, $filter, apiService) {
 
 
         var dataService = {};
@@ -1407,7 +1407,6 @@ angular.module('optinomicDataModule')
         dataService.getAppCalculations = function(calculation_identifier) {
             return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + helpers.getAppID() + "/" + calculation_identifier, {});
         };
-
 
         dataService.getConfig = function() {
             return apiService.get("/extra_config", {});
@@ -1625,7 +1624,14 @@ angular.module('optinomicDataModule')
             var aSurveyResponses = dataService.getData(api);
 
             aSurveyResponses.then(function(data) {
-                return_data.survey_responses = data.survey_responses;
+
+                var responses = data.survey_responses;
+
+                responses.forEach(function(response, myindex) {
+                    dataService.getResponsesExtras(response);
+                });
+
+                return_data.survey_responses = responses
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
@@ -1748,7 +1754,18 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.getResponsesExtras = function(response) {
+            var resp = response.data;
 
+            var date = resp.filled;
+            filled_year = $filter("amDateFormat")(date, 'YYYY');
+            filled_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            filled_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            filled_weekday = $filter("amDateFormat")(date, 'dddd');
+            filled_time = $filter("amDateFormat")(date, 'HH:mm');
+
+            return response;
+        };
 
         return dataService;
 
@@ -5115,9 +5132,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
             $scope.setStanineView();
-
-            //FAKE DATA:  Remove this later!
-            $scope.d.haveData = true;
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
