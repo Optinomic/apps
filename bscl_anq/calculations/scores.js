@@ -552,7 +552,6 @@ function main(responses) {
         var myResults = {};
         var responses_array = myResponses.survey_responses;
 
-        myResults.plotdata = [];
 
 
         responses_array.forEach(function(response, myindex) {
@@ -597,141 +596,9 @@ function main(responses) {
             myResults.scale_scores.gsi = parseFloat(myResults.sum_scores.gsi / 53);
 
 
+            myResults.t_scores = {};
+            myResults.t_scores.gsi = calc.get_t_score(0, myResults.sum_scores.gsi);
 
-
-            //var score_answer = [{
-            //    "scale": 0,
-            //    "question": "GSI (Global Severity Index)",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.gsi,
-            //    "sum_score": myResults.sum_scores.gsi
-            //}, {
-            //    "scale": 1,
-            //    "question": "Psychotizismus",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.psychot,
-            //    "sum_score": myResults.sum_scores.psychot
-            //}, {
-            //    "scale": 2,
-            //    "question": "Paranoides Denken",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.paranoid,
-            //    "sum_score": myResults.sum_scores.paranoid
-            //}, {
-            //    "scale": 3,
-            //    "question": "Phobische Angst",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.phobisch,
-            //    "sum_score": myResults.sum_scores.phobisch
-            //}, {
-            //    "scale": 4,
-            //    "question": "Aggressivität/ Feindseligkeit",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.aggr,
-            //    "sum_score": myResults.sum_scores.aggr
-            //}, {
-            //    "scale": 5,
-            //    "question": "Ängstlichkeit",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.angst,
-            //    "sum_score": myResults.sum_scores.angst
-            //}, {
-            //    "scale": 6,
-            //    "question": "Depressivität",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.depr,
-            //    "sum_score": myResults.sum_scores.depr
-            //}, {
-            //    "scale": 7,
-            //    "question": "Unsicherheit im Sozialkontakt",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.soz,
-            //    "sum_score": myResults.sum_scores.soz
-            //}, {
-            //    "scale": 8,
-            //    "question": "Zwanghaftigkeit",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.zwang,
-            //    "sum_score": myResults.sum_scores.zwang
-            //}, {
-            //    "scale": 9,
-            //    "question": "Somatisierung",
-            //    "t_score": 0,
-            //    "scale_score": myResults.scale_scores.somat,
-            //    "sum_score": myResults.sum_scores.somat
-            //}];
-
-
-            var score_answer = [{
-                "scale": 0,
-                "question": "GSI (Global Severity Index)",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 1,
-                "question": "Psychotizismus",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 2,
-                "question": "Paranoides Denken",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 3,
-                "question": "Phobische Angst",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 4,
-                "question": "Aggressivität/ Feindseligkeit",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 5,
-                "question": "Ängstlichkeit",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 6,
-                "question": "Depressivität",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 7,
-                "question": "Unsicherheit im Sozialkontakt",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 8,
-                "question": "Zwanghaftigkeit",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }, {
-                "scale": 9,
-                "question": "Somatisierung",
-                "t_score": 0,
-                "scale_score": 0,
-                "sum_score": 0
-            }];
-
-
-            // Results
-            var current_response = {
-                "label": result['startdate'],
-                "scores": []
-            };
-            current_response.scores.push(score_answer);
-            myResults.plotdata.push(current_response);
 
         });
         //
