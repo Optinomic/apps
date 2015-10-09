@@ -1,12 +1,12 @@
 [module]
 id = ch.suedhang.apps.bscl.anq
-name = Optinomic-App (Template)
+name = BSCL (ANQ)
 short_description = Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
 version = include(VERSION)
 type = patient
 
 [description]
-Deutsche Normstichprobe (N = 600 gesunde Erwachsene)
+Deutsche Normstichprobe (N = 600 gesunde Erwachsene).
 
 Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.
 
