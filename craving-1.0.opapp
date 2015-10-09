@@ -4702,7 +4702,7 @@ angular.module('optinomicDataModule')
                     };
 
 
-                    if (scope.data.length >= = 1) {
+                    if (scope.data.length > 1) {
                         // Calculate MEAN and save it
                         var meanAnswer = {
                             "label": scope.translations.mean,
