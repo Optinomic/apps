@@ -742,6 +742,8 @@ angular.module('optinomicDataModule')
 
         var scopeDService = {};
 
+        scopeDService.calculations = [];
+        scopeDService.calculations.finished = false;
 
         // -----------------------------------------------------------
         // Demo-Data  (ToRemove)
