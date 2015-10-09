@@ -198,7 +198,7 @@ website = http://www.optinomic.com/
 
 
 
-[template simple_score 2 4]
+[template score_range 2 4]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">

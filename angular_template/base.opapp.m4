@@ -28,7 +28,7 @@ include(templates/chart_timeline.html)
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template simple_score 2 4]
+[template score_range 2 4]
 include(templates/range.html)
 
 [template chart_tscore 6 9]
