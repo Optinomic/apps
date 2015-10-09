@@ -60,7 +60,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         console.log('getAnswer', calc);
 
-        var myResults = calc.calculation_result.results;
+        var myResults = calc;
 
         var score_answer = [{
             "scale": 0,
@@ -134,6 +134,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         call.success(function(data) {
 
+            // Save Data to $scope.d
+            $scope.d.calculation = {
+                'calculation_name': calc_name,
+                'calculation_result': data.calculation_result,
+                'calculated_datestamp': date,
+                'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+            };
+
             console.log('success', calc_name, data);
 
             // Results
@@ -151,17 +160,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     $scope.plotdata.push(plot_item);
                 });
             };
-
-            // Save Data to $scope.d
-            $scope.d.calculation = {
-                'calculation_name': calc_name,
-                'calculation_result': data.calculation_result,
-                'calculation_plot': $scope.plotdata,
-                'calculated_datestamp': date,
-                'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-                'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
-            };
-
 
         });
         call.error(function(data) {
