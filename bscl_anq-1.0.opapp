@@ -21067,11 +21067,11 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
+        console.log('START: getResults: ', myResponses);
         var myResults = {};
         var responses_array = myResponses.survey_responses;
 
         responses_array.forEach(function(response, myindex) {
-
             var result = response.data.response;
 
             var result.sum_scores = {};
@@ -21086,7 +21086,6 @@ function main(responses) {
             result.sum_scores.zwang = parseInt(BSCL[BSCL_sq504V05]) + parseInt(BSCL[BSCL_sq504V15]) + parseInt(BSCL[BSCL_sq504V26]) + parseInt(BSCL[BSCL_sq504V27]) + parseInt(BSCL[BSCL_sq504V32]) + parseInt(BSCL[BSCL_sq504V36]);
             result.sum_scores.zusatz = parseInt(BSCL[BSCL_sq504V11]) + parseInt(BSCL[BSCL_sq504V25]) + parseInt(BSCL[BSCL_sq504V39]) + parseInt(BSCL[BSCL_sq504V52]);
 
-
             var result.scale_scores = {};
             result.scale_scores.aggr = parseFloat(result.sum_scores.aggr / 5);
             result.scale_scores.angst = parseFloat(result.sum_scores.angst / 6);
@@ -21098,7 +21097,6 @@ function main(responses) {
             result.scale_scores.soz = parseFloat(result.sum_scores.soz / 4);
             result.scale_scores.zwang = parseFloat(result.sum_scores.zwang / 6);
             result.scale_scores.zusatz = parseFloat(result.sum_scores.zusatz / 4);
-
 
             result.sum_scores.gsi =
                 result.sum_scores.aggr +
@@ -21113,6 +21111,7 @@ function main(responses) {
                 result.sum_scores.zusatz
 
             result.scale_scores.gsi = parseFloat(result.sum_scores.gsi / 53);
+            console.log('LOOP: ', result);
 
         });
 
