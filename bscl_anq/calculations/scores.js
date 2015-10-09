@@ -685,7 +685,6 @@ function main(responses) {
     // Return
     return {
         "results": calc.getResults(responses),
-        "plot": myResults.plotdata,
         "responses": responses
     };
 };
