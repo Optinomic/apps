@@ -723,7 +723,6 @@ function main(responses) {
     // F U N C T I O N  -  Main
     // ------------------------------------------
     calc.getResults = function(myResponses) {
-        myResults.finished = false;
 
         var myResults = {};
         var responses_array = myResponses.survey_responses;
@@ -787,8 +786,7 @@ function main(responses) {
             myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, null, null);
 
         });
-        //
-        myResults.finished = true;
+
         return myResults;
     };
 

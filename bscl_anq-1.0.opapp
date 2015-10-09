@@ -457,6 +457,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         allCalculations.forEach(function(calculation) {
             $scope.d.functions.getCalculation(calculation);
         });
+
+        $scope.d.calculations.finished === true;
     };
 
 
@@ -4878,7 +4880,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Do Stuff when all Calculations are calculated
     // ---------------------------------------------
     $scope.$watch('d.calculations', function(newValue, oldValue) {
-        if ($scope.d.calculations[0].finished === true) {
+        if ($scope.d.calculations.finished === true) {
             // -----------------------------------
             console.log('FIRE: Calculations Done! ');
 
@@ -21853,7 +21855,6 @@ function main(responses) {
     // F U N C T I O N  -  Main
     // ------------------------------------------
     calc.getResults = function(myResponses) {
-        myResults.finished = false;
 
         var myResults = {};
         var responses_array = myResponses.survey_responses;
@@ -21917,8 +21918,7 @@ function main(responses) {
             myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, null, null);
 
         });
-        //
-        myResults.finished = true;
+
         return myResults;
     };
 
