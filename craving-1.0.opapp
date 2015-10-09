@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
-        &nbsp;
+        <div>&nbsp;</div>
     </div>
     <div>
         <md-input-container class="md-primary">
