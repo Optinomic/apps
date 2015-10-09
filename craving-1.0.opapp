@@ -1614,7 +1614,7 @@ angular.module('optinomicDataModule')
                             aCalculation.then(function(data) {
 
                                 var calc_item = {
-                                    "name": calculatons;
+                                    "name": calculatons,
                                     "results": data.calculation_result
                                 }
                                 return_data.calculations.push(calc_item);
