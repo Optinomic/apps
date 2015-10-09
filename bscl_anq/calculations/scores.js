@@ -598,7 +598,15 @@ function main(responses) {
 
             myResults.t_scores = {};
             myResults.t_scores.gsi = calc.get_t_score(0, myResults.sum_scores.gsi);
-
+            myResults.t_scores.psychot = calc.get_t_score(1, myResults.scale_scores.psychot);
+            myResults.t_scores.paranoid = calc.get_t_score(2, myResults.sum_scores.paranoid);
+            myResults.t_scores.phobisch = calc.get_t_score(3, myResults.sum_scores.phobisch);
+            myResults.t_scores.aggr = calc.get_t_score(4, myResults.sum_scores.aggr);
+            myResults.t_scores.angst = calc.get_t_score(5, myResults.sum_scores.angst);
+            myResults.t_scores.depr = calc.get_t_score(6, myResults.sum_scores.depr);
+            myResults.t_scores.soz = calc.get_t_score(7, myResults.sum_scores.soz);
+            myResults.t_scores.zwang = calc.get_t_score(8, myResults.sum_scores.zwang);
+            myResults.t_scores.somat = calc.get_t_score(9, myResults.sum_scores.somat);
 
         });
         //
