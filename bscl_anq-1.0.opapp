@@ -21074,7 +21074,6 @@ function main(responses) {
             var result = response.data.response;
 
             myResults.sum_scores = {};
-            myResults.sum_scores.gaga = 1 + 2;
 
             var field = '';
 
@@ -21082,28 +21081,28 @@ function main(responses) {
             field = 'BSCL[sq504V06]';
             myResults.sum_scores.test1 = parseInt(result[field]) + 15;
             myResults.sum_scores.aggr = parseInt(result[field]);
-            field = 'BSCL[BSCL_sq504V13]';
+            field = 'BSCL[sq504V13]';
             myResults.sum_scores.aggr = myResults.sum_scores.aggr + parseInt(result[field]);
-            field = 'BSCL[BSCL_sq504V40]';
+            field = 'BSCL[sq504V40]';
             myResults.sum_scores.aggr = myResults.sum_scores.aggr + parseInt(result[field]);
-            field = 'BSCL[BSCL_sq504V41]';
+            field = 'BSCL[sq504V41]';
             myResults.sum_scores.aggr = myResults.sum_scores.aggr + parseInt(result[field]);
-            field = 'BSCL[BSCL_sq504V46]';
+            field = 'BSCL[sq504V46]';
             myResults.sum_scores.aggr = myResults.sum_scores.aggr + parseInt(result[field]);
 
-            myResults.sum_scores.aggr2 = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[BSCL_sq504V13]']) + parseInt(result['BSCL[BSCL_sq504V40]']) + parseInt(result['BSCL[BSCL_sq504V46]']) + parseInt(result['BSCL[sq504V06]']);
+            myResults.sum_scores.aggr2 = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V46]']) + parseInt(result['BSCL[sq504V06]']);
 
-            //myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + parseInt(result.BSCL[BSCL_sq504V13]) + parseInt(result.BSCL[BSCL_sq504V40]) + parseInt(result.BSCL[BSCL_sq504V46]) + parseInt(result.BSCL[sq504V06]);
+            //myResults.sum_scores.aggr = parseInt(result[BSCL[sq504V06]]) + parseInt(result.BSCL[sq504V13]) + parseInt(result.BSCL[sq504V40]) + parseInt(result.BSCL[sq504V46]) + parseInt(result.BSCL[sq504V06]);
 
-            //    result.sum_scores.angst = parseInt(result.BSCL[BSCL_sq504V01]) + parseInt(result.BSCL[BSCL_sq504V12]) + parseInt(result.BSCL[BSCL_sq504V19]) + parseInt(result.BSCL[BSCL_sq504V38]) + parseInt(result.BSCL[BSCL_sq504V45]) + parseInt(result.BSCL[BSCL_sq504V49]);
-            //    result.sum_scores.depr = parseInt(result.BSCL[BSCL_sq504V09]) + parseInt(result.BSCL[BSCL_sq504V16]) + parseInt(result.BSCL[BSCL_sq504V17]) + parseInt(result.BSCL[BSCL_sq504V18]) + parseInt(result.BSCL[BSCL_sq504V35]) + parseInt(result.BSCL[BSCL_sq504V50]);
-            //    result.sum_scores.paranoid = parseInt(result.BSCL[BSCL_sq504V04]) + parseInt(result.BSCL[BSCL_sq504V10]) + parseInt(result.BSCL[BSCL_sq504V24]) + parseInt(result.BSCL[BSCL_sq504V48]) + parseInt(result.BSCL[BSCL_sq504V51]);
-            //    result.sum_scores.phobisch = parseInt(result.BSCL[BSCL_sq504V08]) + parseInt(result.BSCL[BSCL_sq504V28]) + parseInt(result.BSCL[BSCL_sq504V31]) + parseInt(result.BSCL[BSCL_sq504V43]) + parseInt(result.BSCL[BSCL_sq504V47]);
-            //    result.sum_scores.psychot = parseInt(result.BSCL[BSCL_sq504V03]) + parseInt(result.BSCL[BSCL_sq504V14]) + parseInt(result.BSCL[BSCL_sq504V34]) + parseInt(result.BSCL[BSCL_sq504V44]) + parseInt(result.BSCL[BSCL_sq504V53]);
-            //    result.sum_scores.somat = parseInt(result.BSCL[BSCL_sq504V02]) + parseInt(result.BSCL[BSCL_sq504V23]) + parseInt(result.BSCL[BSCL_sq504V29]) + parseInt(result.BSCL[BSCL_sq504V30]) + parseInt(result.BSCL[BSCL_sq504V33]) + parseInt(result.BSCL[BSCL_sq504V37]);
-            //    result.sum_scores.soz = parseInt(result.BSCL[BSCL_sq504V20]) + parseInt(result.BSCL[BSCL_sq504V21]) + parseInt(result.BSCL[BSCL_sq504V22]) + parseInt(result.BSCL[BSCL_sq504V42]);
-            //    result.sum_scores.zwang = parseInt(result.BSCL[BSCL_sq504V05]) + parseInt(result.BSCL[BSCL_sq504V15]) + parseInt(result.BSCL[BSCL_sq504V26]) + parseInt(result.BSCL[BSCL_sq504V27]) + parseInt(result.BSCL[BSCL_sq504V32]) + parseInt(result.BSCL[BSCL_sq504V36]);
-            //    result.sum_scores.zusatz = parseInt(result.BSCL[BSCL_sq504V11]) + parseInt(result.BSCL[BSCL_sq504V25]) + parseInt(result.BSCL[BSCL_sq504V39]) + parseInt(result.BSCL[BSCL_sq504V52]);
+            //    result.sum_scores.angst = parseInt(result.BSCL[sq504V01]) + parseInt(result.BSCL[sq504V12]) + parseInt(result.BSCL[sq504V19]) + parseInt(result.BSCL[sq504V38]) + parseInt(result.BSCL[sq504V45]) + parseInt(result.BSCL[sq504V49]);
+            //    result.sum_scores.depr = parseInt(result.BSCL[sq504V09]) + parseInt(result.BSCL[sq504V16]) + parseInt(result.BSCL[sq504V17]) + parseInt(result.BSCL[sq504V18]) + parseInt(result.BSCL[sq504V35]) + parseInt(result.BSCL[sq504V50]);
+            //    result.sum_scores.paranoid = parseInt(result.BSCL[sq504V04]) + parseInt(result.BSCL[sq504V10]) + parseInt(result.BSCL[sq504V24]) + parseInt(result.BSCL[sq504V48]) + parseInt(result.BSCL[sq504V51]);
+            //    result.sum_scores.phobisch = parseInt(result.BSCL[sq504V08]) + parseInt(result.BSCL[sq504V28]) + parseInt(result.BSCL[sq504V31]) + parseInt(result.BSCL[sq504V43]) + parseInt(result.BSCL[sq504V47]);
+            //    result.sum_scores.psychot = parseInt(result.BSCL[sq504V03]) + parseInt(result.BSCL[sq504V14]) + parseInt(result.BSCL[sq504V34]) + parseInt(result.BSCL[sq504V44]) + parseInt(result.BSCL[sq504V53]);
+            //    result.sum_scores.somat = parseInt(result.BSCL[sq504V02]) + parseInt(result.BSCL[sq504V23]) + parseInt(result.BSCL[sq504V29]) + parseInt(result.BSCL[sq504V30]) + parseInt(result.BSCL[sq504V33]) + parseInt(result.BSCL[sq504V37]);
+            //    result.sum_scores.soz = parseInt(result.BSCL[sq504V20]) + parseInt(result.BSCL[sq504V21]) + parseInt(result.BSCL[sq504V22]) + parseInt(result.BSCL[sq504V42]);
+            //    result.sum_scores.zwang = parseInt(result.BSCL[sq504V05]) + parseInt(result.BSCL[sq504V15]) + parseInt(result.BSCL[sq504V26]) + parseInt(result.BSCL[sq504V27]) + parseInt(result.BSCL[sq504V32]) + parseInt(result.BSCL[sq504V36]);
+            //    result.sum_scores.zusatz = parseInt(result.BSCL[sq504V11]) + parseInt(result.BSCL[sq504V25]) + parseInt(result.BSCL[sq504V39]) + parseInt(result.BSCL[sq504V52]);
             //
             //    result.scale_scores = {};
             //    result.scale_scores.aggr = parseFloat(result.sum_scores.aggr / 5);
