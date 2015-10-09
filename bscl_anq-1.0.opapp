@@ -21672,9 +21672,184 @@ function main(responses) {
 
         }
 
-
-        //console.log('get_t_score::  Scale:' + scale + ', Score:' + score + ' = T-Wert:' + t_score);
         return t_score;
+    };
+
+    calc.get_stanine = function(scale, score, gender, eintrittsort) {
+        // Variablen initialisieren
+
+        // Falls gender nicht gesetzt ist = Mann
+        if (gender === null) {
+            gender = 'male';
+        }
+
+        // Falls gender nicht gesetzt ist = Mann
+        if ((eintrittsort === '') || (eintrittsort === null) || (eintrittsort === undefined)) {
+            // 1 = Entzug
+            // 2 = Entwöhnung
+            eintrittsort = '2';
+        }
+
+        var stanine = 0;
+
+
+        if (scale === 0) {
+            if (gender === 'male') {
+
+                if (eintrittsort === '1') {
+
+                    stanine = 1;
+
+                    if (score >= 3) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 8) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 16) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 28) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 43) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 62) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 86) {
+                        stanine = 8;
+                    }
+
+                    if (score >= 110) {
+                        stanine = 9;
+                    }
+                }
+
+                if (eintrittsort === '2') {
+                    stanine = 1;
+
+                    if (score >= 1) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 2) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 6) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 10) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 17) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 29) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 46) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 69) {
+                        stanine = 8;
+                    }
+                    if (score >= 88) {
+                        stanine = 9;
+                    }
+                }
+
+            } else {
+
+                if (eintrittsort === '1') {
+                    stanine = 1;
+
+                    if (score >= 5) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 12) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 20) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 33) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 51) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 72) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 99) {
+                        stanine = 8;
+                    }
+
+                    if (score >= 127) {
+                        stanine = 9;
+                    }
+                }
+
+                if (eintrittsort === '2') {
+                    stanine = 1;
+
+                    if (score >= 2) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 6) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 13) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 24) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 33) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 56) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 76) {
+                        stanine = 8;
+                    }
+                    if (score >= 100) {
+                        stanine = 9;
+                    }
+                }
+
+            }
+
+        }
+
+        return stanine;
     };
 
     // ------------------------------------------
@@ -21684,8 +21859,6 @@ function main(responses) {
 
         var myResults = {};
         var responses_array = myResponses.survey_responses;
-
-
 
         responses_array.forEach(function(response, myindex) {
             var result = response.data.response;
@@ -21741,12 +21914,17 @@ function main(responses) {
             myResults.t_scores.zwang = calc.get_t_score(8, myResults.sum_scores.zwang);
             myResults.t_scores.somat = calc.get_t_score(9, myResults.sum_scores.somat);
 
+            myResults.stanine = {};
+            // scale, score, gender, eintrittsort  -- toDO: Gender / Eintrittsort
+            myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, null, null);
+
         });
         //
         //myResults.result_responses = responses_array;
 
         return myResults;
     };
+
 
 
     // Return
