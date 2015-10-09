@@ -4966,20 +4966,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
             // Results
-            $scope.plot = [];
-
-            var responses = $scope.d.dataMain.survey_responses_array;
-            if (responses) {
-
-
-                responses.forEach(function(response, myindex) {
-                    var plot_item = {
-                        "label": response.datestamp_day + ' ' + response.datestamp_time,
-                        "scores": $scope.getAnswer(response)
-                    }
-                    $scope.plotdata.push(plot_item);
-                });
-            };
+            //$scope.plot = [];
+            //
+            //var responses = $scope.d.dataMain.survey_responses_array;
+            //if (responses) {
+            //
+            //
+            //    responses.forEach(function(response, myindex) {
+            //        var plot_item = {
+            //            "label": response.datestamp_day + ' ' + response.datestamp_time,
+            //            "scores": $scope.getAnswer(response)
+            //        }
+            //        $scope.plotdata.push(plot_item);
+            //    });
+            //};
             //console.log('(DATA): getAppCalculation: ', calc_name, data);
         });
         call.error(function(data) {
@@ -4997,9 +4997,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         $scope.getCalculation('get_results');
-
-
-
 
     };
 
