@@ -1705,6 +1705,34 @@ angular.module('optinomicDataModule')
                 myApp.all.forEach(function(current_app, myindex) {
                     if (current_app.identifier === app_identifier) {
                         myApp.current = current_app;
+
+
+                        // ------------------------------------------------
+                        // Action 3a:  App - Calculations
+                        // ------------------------------------------------
+                        actions = actions + current_app.calculations.length;
+                        current_app.calculations.forEach(function(calculatons, myindex) {
+
+                            api = dataService.getAppCalculations(calculatons);
+                            var aCalculation = dataService.getData(api);
+
+                            aCalculation.then(function(data) {
+
+                                return_data.calculations = data;
+
+                                // Deferred when done.
+                                actions_count = actions_count + 1;
+                                if (dataService.checkSuccess(actions, actions_count)) {
+                                    deferred.resolve(return_data);
+                                };
+                            }, function(error) {
+                                // Error
+                                deferred.reject(return_data);
+                                console.log('-- Error:', error);
+                            });
+
+                        });
+
                     }
                 });
 
@@ -1763,6 +1791,9 @@ angular.module('optinomicDataModule')
                 deferred.reject(return_data);
                 console.log('-- Error:', error);
             });
+
+
+
 
 
 
