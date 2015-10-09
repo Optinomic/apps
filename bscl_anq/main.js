@@ -32,8 +32,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
-                // Run Public-Functions:
-                $scope.d.functions.getAllCalculations();
 
                 // Run App-Functions:
                 $scope.setDataView();

@@ -4533,23 +4533,23 @@ angular.module('optinomicDataModule')
                     };
 
 
-                    // Calculate MEAN and save it
+                    if (scope.data.length >= = 1) {
+                        // Calculate MEAN and save it
+                        var meanAnswer = {
+                            "label": scope.translations.mean,
+                            "t_scores": [],
+                            "colour": getColor(data.length),
+                            "show": scope.myOptions.show_mean
+                        };
 
+                        for (var x in allScores) {
+                            var currentScore = allScores[x];
+                            var calcMean = simpleStatistics.mean(currentScore);
+                            meanAnswer.t_scores.push(calcMean);
+                        };
 
-                    var meanAnswer = {
-                        "label": scope.translations.mean,
-                        "t_scores": [],
-                        "colour": getColor(data.length),
-                        "show": scope.myOptions.show_mean
+                        my_answers.push(meanAnswer);
                     };
-
-                    for (var x in allScores) {
-                        var currentScore = allScores[x];
-                        var calcMean = simpleStatistics.mean(currentScore);
-                        meanAnswer.t_scores.push(calcMean);
-                    };
-
-                    my_answers.push(meanAnswer);
 
                     //console.log('Starting Array for Statistics: ', allScores, meanAnswer);
 
@@ -4905,8 +4905,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
-                // Run Public-Functions:
-                $scope.d.functions.getAllCalculations();
 
                 // Run App-Functions:
                 $scope.setDataView();
