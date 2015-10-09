@@ -452,7 +452,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
     $scope.d.functions.enrichResults = function(surveyResults) {
 
-        surveyResults = surveyResults === undefined ? {} : surveyResults;
+        surveyResults = surveyResults === undefined ? [] : surveyResults;
 
         console.log('enrichResults', surveyResults);
 

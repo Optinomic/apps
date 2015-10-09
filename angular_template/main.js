@@ -13,7 +13,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d = scopeDService;
 
 
-
     // -----------------------------------
     // Functions
     // -----------------------------------
@@ -31,10 +30,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
+                console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
                 $scope.setDataView();
-
-                console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
 
             // Run Public-Functions:
