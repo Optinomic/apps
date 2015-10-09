@@ -164,7 +164,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Results
-                $scope.d.plot = [];
+                $scope.d.tscore_plot = [];
 
                 var responses = $scope.d.dataMain.survey_responses_array;
                 if (responses) {
@@ -174,7 +174,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                             "label": response.datestamp_day + ' ' + response.datestamp_time,
                             "scores": $scope.getAnswer(calculation)
                         }
-                        $scope.plotdata.push(plot_item);
+                        $scope.d.tscore_plot.push(plot_item);
                     });
                 };
 
