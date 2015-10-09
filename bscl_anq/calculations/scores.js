@@ -14,7 +14,8 @@ function main(responses) {
         responses_array.forEach(function(response, myindex) {
             var result = response.data.response;
 
-            myResults.sum_scores = 1 + 2 + 3;
+            myResults.sum_scores = {};
+            myResults.sum_scores.aggr = 1 + 2 + 3;
 
             // var myResults.sum_scores = {};
             // myResults.sum_scores.aggr = 1 + 2 + 3;
