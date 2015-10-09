@@ -6,10 +6,10 @@ function main(responses) {
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
-    calc.getResults = function(responses) {
+    calc.getResults = function(myResponses) {
 
         var myResults = {};
-        var responses_array = responses.survey_responses;
+        var responses_array = myResponses.survey_responses;
 
 
         responses_array.forEach(function(response, myindex) {
@@ -63,9 +63,10 @@ function main(responses) {
         return myResults;
     };
 
-    // Run Functions
-    calc.results = calc.getResults(responses);
 
     // Return
-    return calc;
-}
+    return {
+        "results": calc.getResults(responses),
+        "responses": responses
+    };
+};
