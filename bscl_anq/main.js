@@ -148,47 +148,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-    //$scope.getCalculation = function(calc_name) {
-    //    // Get specific calculation
-    //    var call = dataService.getAppCalculations(calc_name);
-    //
-    //    call.success(function(data) {
-    //        console.log('getCalculation', data);
-    //
-    //        // Save Data to $scope.d
-    //        var date = new Date();
-    //        $scope.d.calculation = {
-    //            'calculation_name': calc_name,
-    //            'calculation_result': data.calculation_result,
-    //            'calculated_datestamp': date,
-    //            'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-    //            'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
-    //        };
-    //
-    //
-    //        // Results
-    //        //$scope.plot = [];
-    //        //
-    //        //var responses = $scope.d.dataMain.survey_responses_array;
-    //        //if (responses) {
-    //        //
-    //        //
-    //        //    responses.forEach(function(response, myindex) {
-    //        //        var plot_item = {
-    //        //            "label": response.datestamp_day + ' ' + response.datestamp_time,
-    //        //            "scores": $scope.getAnswer(response)
-    //        //        }
-    //        //        $scope.plotdata.push(plot_item);
-    //        //    });
-    //        //};
-    //        //console.log('(DATA): getAppCalculation: ', calc_name, data);
-    //    });
-    //    call.error(function(data) {
-    //        console.log('(ERROR): getAppCalculations:', calc_name, data);
-    //    });
-    //};
-
-
     $scope.setTscoreChart = function() {
 
         // Options
@@ -203,9 +162,24 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (calculation.calculation_name === "get_results") {
                 console.log('_> Calculation: ', calculation, myindex);
 
+
+                // Results
+                $scope.d.plot = [];
+
+                var responses = $scope.d.dataMain.survey_responses_array;
+                if (responses) {
+
+                    responses.forEach(function(response, myindex) {
+                        var plot_item = {
+                            "label": response.datestamp_day + ' ' + response.datestamp_time,
+                            "scores": $scope.getAnswer(calculation)
+                        }
+                        $scope.plotdata.push(plot_item);
+                    });
+                };
+
             };
         });
-
 
     };
 
