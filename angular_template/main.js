@@ -261,7 +261,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
-        var resultsArray = $scope.d.dataMain_survey_responses_array;
+        var resultsArray = $scope.d.dataMain.survey_responses_array;
+
+
 
         $scope.d.grid = {};
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
@@ -312,7 +314,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }];
 
 
-
         // DataView - Options
         $scope.d.grid.options = {
             headerHeight: 45,
@@ -328,6 +329,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableSorting: true,
             showToolPanel: false
         };
+
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
