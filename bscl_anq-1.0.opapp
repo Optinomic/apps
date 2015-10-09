@@ -4960,7 +4960,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             responses.forEach(function(response, myindex) {
                 var plot_item = {
                     "label": response.datestamp_day + ' ' + response.datestamp_time,
-                    "scores": $scope.getAnswer(response);
+                    "scores": $scope.getAnswer(response)
                 }
                 $scope.plotdata.push(plot_item);
             });
