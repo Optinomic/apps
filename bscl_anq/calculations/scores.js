@@ -723,7 +723,6 @@ function main(responses) {
     // F U N C T I O N  -  Main
     // ------------------------------------------
     calc.getResults = function(myResponses) {
-        myResults.finished = false;
 
         var myResults = {};
         var responses_array = myResponses.survey_responses;
@@ -788,7 +787,7 @@ function main(responses) {
 
         });
         //
-        myResults.finished = true;
+        //myResults.finished = true;
         return myResults;
     };
 
