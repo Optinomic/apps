@@ -32,6 +32,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 $scope.d.haveData = true;
+
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
 
@@ -262,7 +263,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
-        var resultsArray = $scope.d.craving;
+        var resultsArray = $scope.d.dataMain_survey_responses_array;
 
         $scope.d.grid = {};
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
@@ -270,23 +271,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
-
-        // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
-
+        // columnDefsManually: If you want to create columnDefs manually:
         // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
         var columnDefsManually = [{
             headerTooltip: "Datum",
@@ -327,6 +312,24 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             cellClass: 'md-body-1',
             width: 90
         }];
+
+
+
+        // DataView - Options
+        $scope.d.grid.options = {
+            headerHeight: 45,
+            rowHeight: 28,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false
+        };
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
