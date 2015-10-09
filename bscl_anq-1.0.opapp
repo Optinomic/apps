@@ -21056,5 +21056,12 @@ Thank you
 
 
 
-[calculation calculate_scores javascript]
+[calculation get_results javascript]
+function main(responses) {
+    return {
+        "a": 66.9,
+        "responses": responses
+    };
+}
+
 
