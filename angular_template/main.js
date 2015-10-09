@@ -32,6 +32,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 $scope.d.haveData = true;
+                $scope.setDataView();
 
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
             };
@@ -40,7 +41,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.functions.getAllCalculations();
 
             // Run App-Functions:
-            $scope.setDataView();
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
             $scope.setStanineView();
