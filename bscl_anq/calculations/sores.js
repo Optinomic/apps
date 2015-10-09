@@ -6,7 +6,7 @@ function main(responses) {
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
-    result_return.getResults = function(responses) {
+    calc.getResults = function(responses) {
 
         var myResults = {};
         var responses_array = responses.survey_responses;
