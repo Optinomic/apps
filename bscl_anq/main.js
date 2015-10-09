@@ -55,20 +55,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // ---------------------------------------------
     // Do Stuff when all Calculations are calculated
     // ---------------------------------------------
-    $scope.$watch('d._init', function(newValue, oldValue) {
-        if ($scope.d._init.calculations === true) {
-            // -----------------------------------
-            console.log('FIRE: Calculations Done! ', $scope.d.calculations);
-
-            var myCalculations = $scope.d.calculations;
-            myCalculations.forEach(function(calculation, myindex) {
-                console.log('Calculation: ', calculation, myindex);
-            });
-
-
-            // -----------------------------------
-        };
-    }, true);
+    //$scope.$watch('d._init', function(newValue, oldValue) {
+    //    if ($scope.d._init.calculations === true) {
+    //        // -----------------------------------
+    //        console.log('FIRE: Calculations Done! ', $scope.d.calculations);
+    //
+    //        var myCalculations = $scope.d.calculations;
+    //        myCalculations.forEach(function(calculation, myindex) {
+    //            console.log('Calculation: ', calculation, myindex);
+    //        });
+    //
+    //
+    //        // -----------------------------------
+    //    };
+    //}, true);
 
 
     // -----------------------------------
@@ -196,7 +196,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'show_scores': true
         };
 
-
+        console.log('setTscoreChart', $scope.d.dataMain.calculations);
 
     };
 

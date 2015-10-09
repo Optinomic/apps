@@ -1706,7 +1706,7 @@ angular.module('optinomicDataModule')
                     if (current_app.identifier === app_identifier) {
                         myApp.current = current_app;
 
-
+                        return_data.calculations = [];
                         // ------------------------------------------------
                         // Action 3a:  App - Calculations
                         // ------------------------------------------------
@@ -1718,7 +1718,11 @@ angular.module('optinomicDataModule')
 
                             aCalculation.then(function(data) {
 
-                                return_data.calculations = data;
+                                var calc_item = {
+                                    "name": calculatons;
+                                    "results": data.calculation_result
+                                }
+                                return_data.calculations.push(calc_item);
 
                                 // Deferred when done.
                                 actions_count = actions_count + 1;
