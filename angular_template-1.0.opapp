@@ -47,6 +47,7 @@ website = http://www.optinomic.com/
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
+        &nbsp;
     </div>
     <div>
         <md-input-container class="md-primary">
@@ -5128,7 +5129,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.craving;
 
         $scope.d.timeline.options = {
-            'title': 'Summe (∑) - Mean',
+            'title': 'Suchtdruck (∑)',
             'focusField': 'Suchtdruck_1',
             'fillDates': false,
             'firstWeekDay': 'Mo',
