@@ -791,6 +791,7 @@ function main(responses) {
 
             // write results back
             myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
             allResults.push(myResults);
 
         });
