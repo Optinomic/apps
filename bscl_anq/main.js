@@ -147,7 +147,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     $scope.d.tscore_plot = [];
 
                     //var responses = $scope.d.dataMain.survey_responses_array;
-                    var calculations = calculation.calculation_results;
+                    var calculations = calculation.calculation_result;
                     if (calculations) {
 
                         calculations.forEach(function(calculation, myindex) {
@@ -158,7 +158,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                             $scope.d.tscore_plot.push(plot_item);
                         });
                     };
+
                 };
+
             });
         });
 
