@@ -56,7 +56,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.getAnswer = function(calc) {
 
         var myResults = calc;
-        console.log('getAnswer', myResults);
+        //console.log('getAnswer', myResults);
 
         var score_answer = [{
             "scale": 0,
@@ -124,7 +124,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         return score_answer;
     };
 
-
     $scope.setTscoreChart = function() {
 
         // Options
@@ -144,14 +143,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             mySurveyResponseCalculations.forEach(function(calculation, myindex) {
 
                 if (calculation.calculation_name === "get_results") {
-                    console.log('-> Calculation: ', calculation, myindex);
-
 
                     //var responses = $scope.d.dataMain.survey_responses_array;
                     var inner_calculation = calculation.calculation_result;
                     if (inner_calculation) {
 
-                        var myLabel = survey_response.data.filled_day + ' ' + survey_response.data.filled_time;
+                        var myLabel = survey_response.data.filled_day + ', ' + survey_response.data.filled_time;
 
                         var plot_item = {
                             "label": myLabel,
@@ -164,7 +161,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             });
         });
-
     };
 
 
