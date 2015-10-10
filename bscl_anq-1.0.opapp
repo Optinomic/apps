@@ -1464,6 +1464,8 @@ angular.module('optinomicDataModule')
 
                                     var all_results = data.calculation_result
                                     all_results.forEach(function(current_result, myindex) {
+                                        console.log('(+) Compare: ', current_result.response, response.data);
+
                                         if (current_result.response === response.data.response) {
                                             var myResult = current_result;
 
