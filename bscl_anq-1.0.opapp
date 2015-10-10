@@ -1464,9 +1464,10 @@ angular.module('optinomicDataModule')
 
                                     var all_results = data.calculation_result
                                     all_results.forEach(function(current_result, myindex) {
-                                        console.log('(+) Compare: ', current_result.response, response.data);
+                                        console.log('(+) Compare: ', current_result.response, response.data.response);
 
-                                        if (current_result.response === response.data.response) {
+                                        if (current_result.response.data.response === response.data.response) {
+                                            console.log('(+) EQUAL: ', current_result.response, response.data.response);
                                             var myResult = current_result;
 
                                             var objectToPush = {
