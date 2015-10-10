@@ -55,7 +55,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.getAnswer = function(calc) {
 
-        var myResults = calc.calculation_results;
+        var myResults = calc;
         console.log('getAnswer', myResults);
 
         var score_answer = [{
