@@ -1730,6 +1730,7 @@ angular.module('optinomicDataModule')
                                 };
 
                                 return_data.calculations.push(objectToPush);
+                                console.log('(+) LOOP - calculations: ', data, return_data.calculations);
 
 
                                 // Assign Calculation Result to survey_response
@@ -1737,25 +1738,28 @@ angular.module('optinomicDataModule')
                                     console.log('(+) LOOP - survey_responses: ', response, myindex);
                                     var inner_calculations = [];
 
-                                    var all_results = data.calculation_result
-                                    all_results.forEach(function(current_result, myindex) {
-                                        //console.log('(+) Compare: ', current_result.response.data.response, response.data.response);
+                                    var all_results = data.calculation_result;
+                                    if (all_results) {
+                                        all_results.forEach(function(current_result, myindex) {
+                                            //console.log('(+) Compare: ', current_result.response.data.response, response.data.response);
 
-                                        if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.data.response)) {
-                                            var myResult = current_result;
-                                            //console.log('(+) EQUAL: ', current_result);
+                                            if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.data.response)) {
+                                                var myResult = current_result;
+                                                //console.log('(+) EQUAL: ', current_result);
 
-                                            var objectToPush = {
-                                                'calculation_name': calculatons,
-                                                'calculation_result': myResult,
-                                                'calculated_datestamp': date,
-                                                'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-                                                'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                                var objectToPush = {
+                                                    'calculation_name': calculatons,
+                                                    'calculation_result': myResult,
+                                                    'calculated_datestamp': date,
+                                                    'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                                    'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                                };
+                                                inner_calculations.push(objectToPush);
                                             };
-                                            inner_calculations.push(objectToPush);
-                                        };
-                                    });
-                                    response.calculations = inner_calculations;
+                                        });
+                                        response.calculations = inner_calculations;
+                                    };
+
                                 });
 
                                 // Deferred when done.
