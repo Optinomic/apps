@@ -7,7 +7,7 @@ function main(responses) {
 
     calc.doSomething = function() {
         var score = 73;
-        return t_score;
+        return score;
     };
 
 
