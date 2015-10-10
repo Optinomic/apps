@@ -135,27 +135,31 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // Create - Plot-Data from Calculation Results
-        var myCalculations = $scope.d.dataMain.calculations;
-        myCalculations.forEach(function(calculation, myindex) {
+        var mySurveyResponses = $scope.d.dataMain.survey_responses;
+        mySurveyResponses.forEach(function(survey_response, myindex) {
 
-            if (calculation.calculation_name === "get_results") {
-                console.log('-> Calculation: ', calculation, myindex);
+            var mySurveyResponseCalculations = survey_response.calculations;
+            mySurveyResponseCalculations.forEach(function(calculation, myindex) {
 
-                $scope.d.tscore_plot = [];
+                if (calculation.calculation_name === "get_results") {
+                    console.log('-> Calculation: ', calculation, myindex);
 
-                //var responses = $scope.d.dataMain.survey_responses_array;
-                var calculations = calculation.calculation_results;
-                if (calculations) {
+                    $scope.d.tscore_plot = [];
 
-                    calculations.forEach(function(calculation, myindex) {
-                        var plot_item = {
-                            "label": calculation.response.data.filled,
-                            "scores": $scope.getAnswer(calculation)
-                        }
-                        $scope.d.tscore_plot.push(plot_item);
-                    });
+                    //var responses = $scope.d.dataMain.survey_responses_array;
+                    var calculations = calculation.calculation_results;
+                    if (calculations) {
+
+                        calculations.forEach(function(calculation, myindex) {
+                            var plot_item = {
+                                "label": calculation.response.data.filled,
+                                "scores": $scope.getAnswer(calculation)
+                            }
+                            $scope.d.tscore_plot.push(plot_item);
+                        });
+                    };
                 };
-            };
+            });
         });
 
     };
