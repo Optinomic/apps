@@ -731,6 +731,8 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
+
+
             myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
             myResults.sum_scores.angst = parseInt(result['BSCL[sq504V01]']) + parseInt(result['BSCL[sq504V12]']) + parseInt(result['BSCL[sq504V19]']) + parseInt(result['BSCL[sq504V38]']) + parseInt(result['BSCL[sq504V45]']) + parseInt(result['BSCL[sq504V49]']);
@@ -788,6 +790,8 @@ function main(responses) {
 
 
             // write results back
+            myResults.hash = result.optinomixHASH;
+            myResults.response = response;
             response.data.calculation = myResults;
             allResults.push(myResults);
 

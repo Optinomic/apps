@@ -4934,6 +4934,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var score_answer = [{
             "scale": 0,
             "question": "GSI (Global Severity Index)",
+            "stanine": myResults.stanine.gsi,
             "t_score": myResults.t_scores.gsi,
             "scale_score": myResults.scale_scores.gsi,
             "sum_score": myResults.sum_scores.gsi
@@ -5006,14 +5007,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
 
+        // Create - Plot-Data from Calculation Results
         var myCalculations = $scope.d.dataMain.calculations;
         myCalculations.forEach(function(calculation, myindex) {
 
             if (calculation.calculation_name === "get_results") {
-                console.log('_> Calculation: ', calculation, myindex);
+                console.log('-> Calculation: ', calculation, myindex);
 
-
-                // Results
                 $scope.d.tscore_plot = [];
 
                 var responses = $scope.d.dataMain.survey_responses_array;
@@ -5030,6 +5030,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             };
         });
+
     };
 
 
@@ -21873,6 +21874,8 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
+
+
             myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
             myResults.sum_scores.angst = parseInt(result['BSCL[sq504V01]']) + parseInt(result['BSCL[sq504V12]']) + parseInt(result['BSCL[sq504V19]']) + parseInt(result['BSCL[sq504V38]']) + parseInt(result['BSCL[sq504V45]']) + parseInt(result['BSCL[sq504V49]']);
@@ -21930,6 +21933,8 @@ function main(responses) {
 
 
             // write results back
+            myResults.hash = result.optinomixHASH;
+            myResults.response = response;
             response.data.calculation = myResults;
             allResults.push(myResults);
 

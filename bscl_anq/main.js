@@ -61,6 +61,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var score_answer = [{
             "scale": 0,
             "question": "GSI (Global Severity Index)",
+            "stanine": myResults.stanine.gsi,
             "t_score": myResults.t_scores.gsi,
             "scale_score": myResults.scale_scores.gsi,
             "sum_score": myResults.sum_scores.gsi
@@ -133,14 +134,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
 
+        // Create - Plot-Data from Calculation Results
         var myCalculations = $scope.d.dataMain.calculations;
         myCalculations.forEach(function(calculation, myindex) {
 
             if (calculation.calculation_name === "get_results") {
-                console.log('_> Calculation: ', calculation, myindex);
+                console.log('-> Calculation: ', calculation, myindex);
 
-
-                // Results
                 $scope.d.tscore_plot = [];
 
                 var responses = $scope.d.dataMain.survey_responses_array;
@@ -157,6 +157,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             };
         });
+
     };
 
 
