@@ -724,10 +724,11 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-        var myResults = {};
         var responses_array = myResponses.survey_responses;
+        var allResults = [];
 
         responses_array.forEach(function(response, myindex) {
+            var myResults = {};
             var result = response.data.response;
 
             myResults.sum_scores = {};
@@ -785,9 +786,14 @@ function main(responses) {
             // scale, score, gender, eintrittsort  -- toDO: Gender / Eintrittsort
             myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, null, null);
 
+
+            // write results back
+            response.data.calculation = myResults;
+            allResults.push(myResults);
+
         });
 
-        return myResults;
+        return allResults;
     };
 
 
