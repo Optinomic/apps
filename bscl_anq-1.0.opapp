@@ -4926,10 +4926,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Chart: T-Score <chart-tscore>
     // -----------------------------------
 
-    $scope.getAnswer = function(calc, index) {
-        console.log('getAnswer', calc);
+    $scope.getAnswer = function(calc) {
 
-        var myResults = calc.calculation_results[index];
+        var myResults = calc.calculation_results;
+        console.log('getAnswer', myResults);
 
         var score_answer = [{
             "scale": 0,
@@ -5016,18 +5016,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 $scope.d.tscore_plot = [];
 
-                var responses = $scope.d.dataMain.survey_responses_array;
-                if (responses) {
+                //var responses = $scope.d.dataMain.survey_responses_array;
+                var calculations = calculation.calculation_results;
+                if (calculations) {
 
-                    responses.forEach(function(response, myindex) {
+                    calculations.forEach(function(calculation, myindex) {
                         var plot_item = {
-                            "label": response.datestamp_day + ' ' + response.datestamp_time,
-                            "scores": $scope.getAnswer(calculation, myindex)
+                            "label": calculation.response.data.filled,
+                            "scores": $scope.getAnswer(calculation)
                         }
                         $scope.d.tscore_plot.push(plot_item);
                     });
                 };
-
             };
         });
 
