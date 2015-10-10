@@ -32,7 +32,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
-
                 // Run App-Functions:
                 $scope.setDataView();
                 $scope.setTscoreChart();
@@ -50,34 +49,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
-    // ---------------------------------------------
-    // Do Stuff when all Calculations are calculated
-    // ---------------------------------------------
-    //$scope.$watch('d._init', function(newValue, oldValue) {
-    //    if ($scope.d._init.calculations === true) {
-    //        // -----------------------------------
-    //        console.log('FIRE: Calculations Done! ', $scope.d.calculations);
-    //
-    //        var myCalculations = $scope.d.calculations;
-    //        myCalculations.forEach(function(calculation, myindex) {
-    //            console.log('Calculation: ', calculation, myindex);
-    //        });
-    //
-    //
-    //        // -----------------------------------
-    //    };
-    //}, true);
-
-
     // -----------------------------------
     // Chart: T-Score <chart-tscore>
     // -----------------------------------
 
-
-    $scope.getAnswer = function(calc) {
+    $scope.getAnswer = function(calc, index) {
         console.log('getAnswer', calc);
 
-        var myResults = calc.calculation_results;
+        var myResults = calc.calculation_results[index];
 
         var score_answer = [{
             "scale": 0,
@@ -145,12 +124,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-
     $scope.setTscoreChart = function() {
 
         // Options
         $scope.options_plot = {
-            'show_scores': true
+            'show_scores': true,
+            'language': 'De'
         };
 
 
@@ -170,7 +149,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     responses.forEach(function(response, myindex) {
                         var plot_item = {
                             "label": response.datestamp_day + ' ' + response.datestamp_time,
-                            "scores": $scope.getAnswer(calculation)
+                            "scores": $scope.getAnswer(calculation, myindex)
                         }
                         $scope.d.tscore_plot.push(plot_item);
                     });
@@ -178,9 +157,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             };
         });
-
     };
-
 
 
     // -----------------------------------
