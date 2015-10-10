@@ -5047,16 +5047,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     $scope.d.tscore_plot = [];
 
                     //var responses = $scope.d.dataMain.survey_responses_array;
-                    var calculations = calculation.calculation_result;
-                    if (calculations) {
+                    var inner_calculation = calculation.calculation_result;
+                    if (inner_calculation) {
 
-                        calculations.forEach(function(calculation, myindex) {
-                            var plot_item = {
-                                "label": calculation.response.data.filled,
-                                "scores": $scope.getAnswer(calculation)
-                            }
-                            $scope.d.tscore_plot.push(plot_item);
-                        });
+                        var plot_item = {
+                            "label": calculation.response.data.filled,
+                            "scores": $scope.getAnswer(inner_calculation)
+                        }
+                        $scope.d.tscore_plot.push(plot_item);
                     };
 
                 };
