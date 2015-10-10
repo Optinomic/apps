@@ -5051,7 +5051,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     if (inner_calculation) {
 
                         var plot_item = {
-                            "label": calculation.response.data.filled,
+                            "label": 'Label',
                             "scores": $scope.getAnswer(inner_calculation)
                         }
                         $scope.d.tscore_plot.push(plot_item);
