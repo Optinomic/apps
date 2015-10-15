@@ -148,7 +148,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     var inner_calculation = calculation.calculation_result;
                     if (inner_calculation) {
 
-                        var myLabel = survey_response.data.filled_day + ', ' + survey_response.data.filled_time;
+
+                        var myLabel = '';
+
+                        // ToDo:  Add Labels like:
+                        //var label_messung = 'Verlauf';
+                        //
+                        //if (myscope[i].q501V04 === "1") {
+                        //    label_messung = 'Eintritt';
+                        //}
+                        //if (myscope[i].q501V04 === "2") {
+                        //    label_messung = 'Austritt';
+                        //}
+
+                        myLabel = survey_response.data.filled_day + ', ' + survey_response.data.filled_time;
 
                         var plot_item = {
                             "label": myLabel,
