@@ -57,7 +57,6 @@ min_lastpage = 2
 
 [event]
 type = on_activation
-time = 08:00
 due_after = 86400
 overdue = send_reminder_once
 description = BSCL - ANQ
