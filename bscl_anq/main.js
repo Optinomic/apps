@@ -153,7 +153,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-                        if (survey_response.q501V05 === '0') {
+                        if (survey_response.data.response.q501V05 === '0') {
                             // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
                         };
 
@@ -161,13 +161,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                         myLabel = survey_response.data.filled_day;
 
 
-                        if (survey_response.q501V05 === '1') {
+                        if (survey_response.data.response.q501V05 === '1') {
                             myLabel = 'Eintritt';
                         };
-                        if (survey_response.q501V05 === '2') {
+                        if (survey_response.data.response.q501V05 === '2') {
                             myLabel = 'Austritt';
                         };
-                        if (survey_response.q501V05 === '3') {
+                        if (survey_response.data.response.q501V05 === '3') {
                             myLabel = 'Übertritt';
                         };
 
