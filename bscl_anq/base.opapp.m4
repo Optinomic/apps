@@ -56,10 +56,9 @@ min_lastpage = 2
 
 
 [event]
-type = daily
-time = 19:00
+type = on_activation
 due_after = 86400
-overdue = ignore
+overdue = send_reminder_once
 description = BSCL - ANQ
 survey = bscl_anq
 
