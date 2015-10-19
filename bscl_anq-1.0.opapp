@@ -4412,7 +4412,7 @@ angular.module('optinomicDataModule')
 
                 function updateStuff() {
 
-                    //console.log('============= chartTScore (START): ', scope, scope.data.length, scope.myOptions);
+                    console.log('============= chartTScore (START): ', scope, scope.data.length, scope.myOptions);
 
                     scope.plot_done = false;
                     scope.myOptions = initOptions(scope.myOptions);
@@ -4590,7 +4590,6 @@ angular.module('optinomicDataModule')
                         my_answers.push(meanAnswer);
                     };
 
-                    //console.log('Starting Array for Statistics: ', allScores, meanAnswer);
 
                     // Prepare RETURN
 
