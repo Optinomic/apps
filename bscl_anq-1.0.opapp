@@ -4573,6 +4573,7 @@ angular.module('optinomicDataModule')
                         // Calculate MEAN and save it
                         var meanAnswer = {
                             "label": scope.translations.mean,
+                            "label_datestamp": 'mean',
                             "t_scores": [],
                             "colour": getColor(data.length),
                             "show": scope.myOptions.show_mean
