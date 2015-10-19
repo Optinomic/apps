@@ -21937,6 +21937,7 @@ function main(responses) {
 
 
         allResults.patient = currentPatient;
+        allResults.patient_gender = currentPatientGender;
 
         var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
