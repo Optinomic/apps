@@ -21935,10 +21935,6 @@ function main(responses) {
         };
 
 
-
-        allResults.patient = currentPatient;
-        allResults.patient_gender = currentPatientGender;
-
         var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
@@ -21946,8 +21942,8 @@ function main(responses) {
 
 
 
-            myResults.patient = {};
-            currentPatient.gender = myResponses.patient;
+            myResults.patient = currentPatient;
+            myResults.patient_gender = currentPatientGender;
 
             myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
