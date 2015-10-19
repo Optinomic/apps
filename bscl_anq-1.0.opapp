@@ -5053,30 +5053,43 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 if (calculation.calculation_name === "get_results") {
 
+
+
+
                     //var responses = $scope.d.dataMain.survey_responses_array;
                     var inner_calculation = calculation.calculation_result;
                     if (inner_calculation) {
 
 
-                        var myLabel = '';
 
-                        // ToDo:  Add Labels like:
-                        //var label_messung = 'Verlauf';
-                        //
-                        //if (myscope[i].q501V04 === "1") {
-                        //    label_messung = 'Eintritt';
-                        //}
-                        //if (myscope[i].q501V04 === "2") {
-                        //    label_messung = 'Austritt';
-                        //}
+                        if (survey_response.q501V05 === '0') {
+                            // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
 
-                        myLabel = survey_response.data.filled_day + ', ' + survey_response.data.filled_time;
+                            var myLabel = '';
+                            myLabel = survey_response.data.filled_day;
 
-                        var plot_item = {
-                            "label": myLabel,
-                            "scores": $scope.getAnswer(inner_calculation)
-                        }
-                        $scope.d.tscore_plot.push(plot_item);
+
+                            if (survey_response.q501V05 === '1') {
+                                myLabel = 'Eintritt';
+                            };
+                            if (survey_response.q501V05 === '2') {
+                                myLabel = 'Austritt';
+                            };
+                            if (survey_response.q501V05 === '3') {
+                                myLabel = 'Übertritt';
+                            };
+
+
+                            var plot_item = {
+                                "label": myLabel,
+                                "label_datestamp": survey_response.data.filled_day + ', ' + survey_response.data.filled_time,
+                                "scores": $scope.getAnswer(inner_calculation)
+                            }
+                            $scope.d.tscore_plot.push(plot_item);
+
+                        };
+
+
                     };
 
                 };
