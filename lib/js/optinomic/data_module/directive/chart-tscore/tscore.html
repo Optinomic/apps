@@ -30,10 +30,10 @@
     <div ng-repeat="me in plot.answers">
         <md-checkbox class="md-primary" style="color:{{me.colour}};" ng-change="getShowAnswers()" ng-model="me.show" aria-label="{{ me.label }}">
             {{me.label}}
+            <md-tooltip md-direction="top">
+                {{me.label_datestamp}}
+            </md-tooltip>
         </md-checkbox>
-        <md-tooltip ng-if="me.label_datestamp">
-            {{me.label_datestamp}}
-        </md-tooltip>
     </div>
     <span flex></span>
     <div>
