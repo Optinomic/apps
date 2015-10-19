@@ -21189,10 +21189,9 @@ min_lastpage = 2
 
 
 [event]
-type = on_activation
+type = daily
+time = 19:00
 due_after = 86400
-overdue = send_x_reminders
-reminder_count = 3
 description = BSCL - ANQ
 survey = bscl_anq
 
