@@ -729,6 +729,18 @@ function main(responses) {
 
 
         var currentPatient = myResponses.patient;
+
+
+
+        currentPatientGender = "male"
+        if (currentPatient.gender === 'male') {
+            currentPatientGender = "male"
+        } else {
+            currentPatientGender = "female"
+        };
+
+
+
         allResults.patient = currentPatient;
 
         var responses_array = myResponses.survey_responses;
@@ -737,6 +749,11 @@ function main(responses) {
             var result = response.data.response;
 
 
+
+            myResults.patient = {};
+            currentPatient.gender = myResponses.patient;
+
+            myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
             myResults.sum_scores.angst = parseInt(result['BSCL[sq504V01]']) + parseInt(result['BSCL[sq504V12]']) + parseInt(result['BSCL[sq504V19]']) + parseInt(result['BSCL[sq504V38]']) + parseInt(result['BSCL[sq504V45]']) + parseInt(result['BSCL[sq504V49]']);
             myResults.sum_scores.depr = parseInt(result['BSCL[sq504V09]']) + parseInt(result['BSCL[sq504V16]']) + parseInt(result['BSCL[sq504V17]']) + parseInt(result['BSCL[sq504V18]']) + parseInt(result['BSCL[sq504V35]']) + parseInt(result['BSCL[sq504V50]']);
