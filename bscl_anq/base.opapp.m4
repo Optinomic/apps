@@ -59,6 +59,7 @@ min_lastpage = 2
 type = daily
 time = 19:00
 due_after = 86400
+overdue = ignore
 description = BSCL - ANQ
 survey = bscl_anq
 
