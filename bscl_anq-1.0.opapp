@@ -21178,7 +21178,7 @@ p {
 [survey]
 id = bscl_anq
 type = lime
-responsibility = lead_therapist_and_deputy
+responsibility = patient_via_email
 name = BSCL - ANQ
 host = default
 survey_id = 693172
