@@ -44,14 +44,13 @@ include(style.css)
 [survey]
 id = bscl_anq
 type = lime
-responsibility = patient_via_email
+responsibility = lead_therapist
 name = BSCL - ANQ
 host = default
 survey_id = 693172
 hash = X6X78
 pid = X6X73
 fid = X6X77
-min_questions =
 min_lastpage = 2
 
 
