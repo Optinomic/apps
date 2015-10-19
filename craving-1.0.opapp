@@ -4750,8 +4750,9 @@ angular.module('optinomicDataModule')
                         for (var x in allScores) {
                             var currentScore = allScores[x];
                             var calcMean = simpleStatistics.mean(currentScore);
-                            calcMean = calcMean.toFixed(1); //Round to 1 Decimal-place
-                            meanAnswer.t_scores.push(calcMean);
+
+                            var mw = Math.round(calcMean * 10) / 10 //Round to 1 Decimal-place
+                            meanAnswer.t_scores.push(mw);
                         };
 
                         my_answers.push(meanAnswer);
