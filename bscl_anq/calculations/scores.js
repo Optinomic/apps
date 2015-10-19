@@ -546,11 +546,11 @@ function main(responses) {
         // Variablen initialisieren
 
         // Falls gender nicht gesetzt ist = Mann
-        if (gender === null) {
+        if ((gender === '') || (gender === null) || (gender === undefined)) {
             gender = 'male';
         }
 
-        // Falls gender nicht gesetzt ist = Mann
+        // Falls eintrittsort nicht gesetzt ist = Entwöhnung
         if ((eintrittsort === '') || (eintrittsort === null) || (eintrittsort === undefined)) {
             // 1 = Entzug
             // 2 = Entwöhnung
@@ -726,29 +726,13 @@ function main(responses) {
 
 
         var allResults = [];
-
-
         var currentPatient = myResponses.patient;
-
-
-
-        currentPatientGender = "male"
-        if (currentPatient.gender === 'male') {
-            currentPatientGender = "male"
-        } else {
-            currentPatientGender = "female"
-        };
-
+        //var responses_foreign = myResponses.foreign_survey_responses;
 
         var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
-
-
-
-            myResults.patient = currentPatient;
-            myResults.patient_gender = currentPatientGender;
 
             myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
@@ -802,8 +786,7 @@ function main(responses) {
             myResults.t_scores.somat = calc.get_t_score(9, myResults.sum_scores.somat);
 
             myResults.stanine = {};
-            // scale, score, gender, eintrittsort  -- toDO: Gender / Eintrittsort
-            myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, null, null);
+            myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, currentPatient.data.gender, result['Eintrittsort']);
 
 
             // write results back
