@@ -21920,20 +21920,18 @@ function main(responses) {
     calc.getResults = function(myResponses) {
 
 
-        var currentPatient = myResponses.patient;
-        console.log('getResults: ', myResponses);
-
-
-        var responses_array = myResponses.survey_responses;
         var allResults = [];
 
+
+        var currentPatient = myResponses.patient;
+        allResults.patient = currentPatient;
+
+        var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
 
 
-
-            myResults.sum_scores = {};
             myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
             myResults.sum_scores.angst = parseInt(result['BSCL[sq504V01]']) + parseInt(result['BSCL[sq504V12]']) + parseInt(result['BSCL[sq504V19]']) + parseInt(result['BSCL[sq504V38]']) + parseInt(result['BSCL[sq504V45]']) + parseInt(result['BSCL[sq504V49]']);
             myResults.sum_scores.depr = parseInt(result['BSCL[sq504V09]']) + parseInt(result['BSCL[sq504V16]']) + parseInt(result['BSCL[sq504V17]']) + parseInt(result['BSCL[sq504V18]']) + parseInt(result['BSCL[sq504V35]']) + parseInt(result['BSCL[sq504V50]']);
