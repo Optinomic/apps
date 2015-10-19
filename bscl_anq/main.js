@@ -155,30 +155,30 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                         if (survey_response.q501V05 === '0') {
                             // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
-
-                            var myLabel = '';
-                            myLabel = survey_response.data.filled_day;
-
-
-                            if (survey_response.q501V05 === '1') {
-                                myLabel = 'Eintritt';
-                            };
-                            if (survey_response.q501V05 === '2') {
-                                myLabel = 'Austritt';
-                            };
-                            if (survey_response.q501V05 === '3') {
-                                myLabel = 'Übertritt';
-                            };
-
-
-                            var plot_item = {
-                                "label": myLabel,
-                                "label_datestamp": survey_response.data.filled_day + ', ' + survey_response.data.filled_time,
-                                "scores": $scope.getAnswer(inner_calculation)
-                            }
-                            $scope.d.tscore_plot.push(plot_item);
-
                         };
+
+                        var myLabel = '';
+                        myLabel = survey_response.data.filled_day;
+
+
+                        if (survey_response.q501V05 === '1') {
+                            myLabel = 'Eintritt';
+                        };
+                        if (survey_response.q501V05 === '2') {
+                            myLabel = 'Austritt';
+                        };
+                        if (survey_response.q501V05 === '3') {
+                            myLabel = 'Übertritt';
+                        };
+
+
+                        var plot_item = {
+                            "label": myLabel,
+                            "label_datestamp": survey_response.data.filled_day + ', ' + survey_response.data.filled_time,
+                            "scores": $scope.getAnswer(inner_calculation)
+                        }
+                        $scope.d.tscore_plot.push(plot_item);
+
 
 
                     };
