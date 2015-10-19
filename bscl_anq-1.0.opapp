@@ -4412,7 +4412,7 @@ angular.module('optinomicDataModule')
 
                 function updateStuff() {
 
-                    console.log('============= chartTScore (START): ', scope, scope.data.length, scope.myOptions);
+                    //console.log('============= chartTScore (START): ', scope, scope.data.length, scope.myOptions);
 
                     scope.plot_done = false;
                     scope.myOptions = initOptions(scope.myOptions);
@@ -4531,6 +4531,7 @@ angular.module('optinomicDataModule')
 
                         var answer = {
                             "label": current.label,
+                            "label_datestamp": current.label_datestamp,
                             "t_scores": [],
                             "colour": getColor(x),
                             "show": scope.myOptions.show_scores
