@@ -3860,7 +3860,7 @@ angular.module('optinomicDataModule')
 
                 function updateStuff() {
 
-                    console.log('============= chartTimeline (START): ', scope, scope.data.length, scope.myOptions);
+                    //console.log('============= chartTimeline (START): ', scope, scope.data.length, scope.myOptions);
 
                     scope.myOptions = initOptions(scope.myOptions);
 

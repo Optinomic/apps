@@ -724,6 +724,11 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
+
+        var currentPatient = myResponses.patient;
+        console.log('getResults: ', myResponses);
+
+
         var responses_array = myResponses.survey_responses;
         var allResults = [];
 
@@ -793,7 +798,6 @@ function main(responses) {
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
             allResults.push(myResults);
-
         });
 
         return allResults;
