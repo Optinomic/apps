@@ -63,20 +63,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            //rowData: $scope.d.grid.rowData,
-            //columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
+        //$scope.d.grid.options = {
+        //    headerHeight: 45,
+        //    rowHeight: 28,
+        //    //rowData: $scope.d.grid.rowData,
+        //    //columnDefs: $scope.d.grid.columnDefs,
+        //    //pinnedColumnCount: 1,
+        //    dontUseScrolls: false,
+        //    enableFilter: true,
+        //    rowSelection: 'single',
+        //    enableColResize: true,
+        //    enableCellExpressions: true,
+        //    enableSorting: true,
+        //    showToolPanel: false
+        //};
 
 
         //console.log('dataGRID: ', $scope.d.grid);
