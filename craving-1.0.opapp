@@ -405,7 +405,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     // -----------------------------------
     $scope.d = scopeDService;
 
-    if (helpers.getPatientID() === '0') {
+    if (helpers.getPatientID() === 0) {
         console.log('User-App: Token', helpers.getToken());
         $scope.d.app_type = 'user';
     } else {
@@ -1700,7 +1700,7 @@ angular.module('optinomicDataModule')
             // Action 4:  Patient - Details
             // ------------------------------------------------
 
-            if (helpers.getPatientID() === 0) {
+            if (helpers.getPatientID() === '0') {
                 actions_count = actions_count + 1;
             } else {
                 api = dataService.getCurrentPatient();
@@ -1726,7 +1726,7 @@ angular.module('optinomicDataModule')
             // Action 5:  Patient Events
             // ------------------------------------------------
 
-            if (helpers.getPatientID() === 0) {
+            if (helpers.getPatientID() === '0') {
                 actions_count = actions_count + 1;
             } else {
                 api = dataService.getPatientEvents(app_identifier);
