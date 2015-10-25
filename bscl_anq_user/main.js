@@ -67,7 +67,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerHeight: 45,
             rowHeight: 28,
             //rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
+            //columnDefs: $scope.d.grid.columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,

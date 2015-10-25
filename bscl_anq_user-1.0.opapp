@@ -158,8 +158,13 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     // -----------------------------------
     $scope.d = scopeDService;
 
-
-    console.log('PID / Token', helpers.getPatientID(), helpers.getToken());
+    if (helpers.getPatientID() === '0') {
+        console.log('User-App: Token', helpers.getToken());
+        $scope.d.app_type = 'user';
+    } else {
+        console.log('Patient-App: PID / Token', helpers.getPatientID(), helpers.getToken());
+        $scope.d.app_type = 'patient';
+    };
 
 
     // -----------------------------------
@@ -4901,7 +4906,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             headerHeight: 45,
             rowHeight: 28,
             //rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
+            //columnDefs: $scope.d.grid.columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
