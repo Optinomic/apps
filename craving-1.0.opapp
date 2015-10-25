@@ -1322,8 +1322,8 @@ angular.module('optinomicDataModule')
             return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + helpers.getAppID() + "/" + calculation_identifier, {});
         };
 
-        dataService.getAppCalculationsUser = function(module_identifier, calculation_identifier) {
-            return apiService.get("/calculations/" + module_identifier + "/" + calculation_identifier, {});
+        dataService.getAppCalculationsUser = function(my_module_identifier, my_calculation_identifier) {
+            return apiService.get("/calculations/" + my_module_identifier + "/" + my_calculation_identifier, {});
         };
 
         dataService.getConfig = function() {
