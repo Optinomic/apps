@@ -510,11 +510,11 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     // -----------------------------------
     $scope.d = scopeDService;
 
-    if (helpers.getPatientID() === 0) {
-        console.log('User-App: Token', helpers.getToken());
+    if (parseInt(helpers.getPatientID()) === 0) {
+        console.log('User-App: Token=', helpers.getToken());
         $scope.d.app_type = 'user';
     } else {
-        console.log('Patient-App: PID / Token', helpers.getPatientID(), helpers.getToken());
+        console.log('Patient-App: PID=', parseInt(helpers.getPatientID()), ' Token=', helpers.getToken());
         $scope.d.app_type = 'patient';
     };
 
