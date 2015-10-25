@@ -1805,47 +1805,54 @@ angular.module('optinomicDataModule')
             // Action 4:  Patient - Details
             // ------------------------------------------------
 
-            api = dataService.getCurrentPatient();
-            var aPatient = dataService.getData(api);
-
-            aPatient.then(function(data) {
-                return_data.patient = data;
-
-                // Deferred when done.
+            if (helpers.getPatientID() === 0) {
                 actions_count = actions_count + 1;
-                if (dataService.checkSuccess(actions, actions_count)) {
-                    deferred.resolve(return_data);
-                };
-            }, function(error) {
-                // Error
-                deferred.reject(return_data);
-                console.log('-- Error:', error);
-            });
+            } else {
+                api = dataService.getCurrentPatient();
+                var aPatient = dataService.getData(api);
+
+                aPatient.then(function(data) {
+                    return_data.patient = data;
+
+                    // Deferred when done.
+                    actions_count = actions_count + 1;
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(return_data);
+                    };
+                }, function(error) {
+                    // Error
+                    deferred.reject(return_data);
+                    console.log('-- Error:', error);
+                });
+            };
+
 
             // ------------------------------------------------
             // Action 5:  Patient Events
             // ------------------------------------------------
 
-            api = dataService.getPatientEvents(app_identifier);
-            var aEvents = dataService.getData(api);
-
-            aEvents.then(function(data) {
-
-                return_data.events = data.events;
-
-                // Deferred when done.
+            if (helpers.getPatientID() === 0) {
                 actions_count = actions_count + 1;
-                if (dataService.checkSuccess(actions, actions_count)) {
-                    deferred.resolve(return_data);
-                };
-            }, function(error) {
-                // Error
-                deferred.reject(return_data);
-                console.log('-- Error:', error);
-            });
+            } else {
+                api = dataService.getPatientEvents(app_identifier);
+                var aEvents = dataService.getData(api);
 
+                aEvents.then(function(data) {
 
+                    return_data.events = data.events;
 
+                    // Deferred when done.
+                    actions_count = actions_count + 1;
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(return_data);
+                    };
+                }, function(error) {
+                    // Error
+                    deferred.reject(return_data);
+                    console.log('-- Error:', error);
+                });
+
+            };
 
 
 
