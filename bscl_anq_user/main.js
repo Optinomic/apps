@@ -35,7 +35,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.haveData = true;
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log('Welcome, ', $scope.d);
             $scope.d.init = true;
             $scope.d.functions._InitData('dataMain', true);
         });
