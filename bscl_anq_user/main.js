@@ -29,7 +29,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.dataMain = data;
 
             // Run App-Functions:
-            $scope.setDataView();
+            //$scope.setDataView();
 
             // Display Results
             $scope.d.haveData = true;

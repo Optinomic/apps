@@ -1377,8 +1377,8 @@ angular.module('optinomicDataModule')
                         current_app.calculations.forEach(function(calculatons, myindex) {
 
                             if (parseInt(helpers.getPatientID()) === 0) {
-                                console.log('REPLACE STR HERE: ', current_app)
-                                api = dataService.getAppCalculationsUser('ch.suedhang.apps.bscl.anq_user', calculatons);
+                                console.log('User App - Calculation: ', current_app.identifier, calculatons)
+                                api = dataService.getAppCalculationsUser(current_app.identifier, calculatons);
                             } else {
                                 api = dataService.getAppCalculations(calculatons);
                             };
@@ -4892,7 +4892,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.dataMain = data;
 
             // Run App-Functions:
-            $scope.setDataView();
+            //$scope.setDataView();
 
             // Display Results
             $scope.d.haveData = true;
@@ -20940,10 +20940,11 @@ p {
 
 
 [calculation get_all_results javascript]
-function main(responses) {
+function main(data) {
 
     var calc = {
-        "responses": responses
+        "responses": data,
+        "sugus": 'blau'
     };
 
 

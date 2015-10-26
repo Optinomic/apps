@@ -1,7 +1,8 @@
-function main(responses) {
+function main(data) {
 
     var calc = {
-        "responses": responses
+        "responses": data,
+        "sugus": 'blau'
     };
 
 
