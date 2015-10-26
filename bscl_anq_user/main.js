@@ -24,7 +24,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-            console.log('START, ', $scope.d.dataMain.apps.current.name, $scope.d);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -36,7 +35,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.haveData = true;
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            //console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log('Welcome, ', $scope.d);
             $scope.d.init = true;
             $scope.d.functions._InitData('dataMain', true);
         });
