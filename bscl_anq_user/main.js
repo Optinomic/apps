@@ -24,6 +24,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
+            console.log('START, ', $scope.d.dataMain.apps.current.name, $scope.d);
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
