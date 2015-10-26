@@ -20924,7 +20924,6 @@ p {
 
 
 
-
 [calculation get_all_results javascript]
 function main(responses) {
 

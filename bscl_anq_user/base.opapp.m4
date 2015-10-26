@@ -38,7 +38,6 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-
 [calculation get_all_results javascript]
 include(calculations/scores.js)
 
