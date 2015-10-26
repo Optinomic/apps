@@ -39,3 +39,7 @@ include(style.css)
 
 
 
+[calculation get_all_results javascript]
+include(calculations/scores.js)
+
+
