@@ -4900,7 +4900,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setDataView = function() {
 
         // GetData from Calculations
-        var myAPI = dataService.getAppCalculationsUser('ch.suedhang.apps.bscl.anq_user', 'get_all_results');
+        var myAPI = dataService.getAppCalculationsUser('ch.suedhang.apps.bscl.anq', 'get_all_results');
 
         myAPI.success(function(data) {
             console.log('(+) getAppCalculationsUser: ', data);
