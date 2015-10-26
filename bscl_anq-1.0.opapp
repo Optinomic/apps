@@ -1447,72 +1447,76 @@ angular.module('optinomicDataModule')
                         // Action 3a:  App - Calculations
                         // ------------------------------------------------
                         actions = actions + current_app.calculations.length;
-                        current_app.calculations.forEach(function(calculatons, myindex) {
-
-                            api = dataService.getAppCalculations(calculatons);
-                            var aCalculation = dataService.getData(api);
-
-                            aCalculation.then(function(data) {
 
 
-                                var date = new Date();
+                        if (parseInt(helpers.getPatientID()) !== 0) {
+                            current_app.calculations.forEach(function(calculatons, myindex) {
 
-                                var objectToPush = {
-                                    'calculation_name': calculatons,
-                                    'calculation_results': data.calculation_result,
-                                    'calculated_datestamp': date,
-                                    'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-                                    'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
-                                };
+                                api = dataService.getAppCalculations(calculatons);
+                                var aCalculation = dataService.getData(api);
 
-                                return_data.calculations.push(objectToPush);
-                                //console.log('(+) LOOP - calculations: ', data.calculation_result);
+                                aCalculation.then(function(data) {
 
 
-                                // Assign Calculation Result to survey_response
-                                var all_results = data.calculation_result;
+                                    var date = new Date();
 
-                                return_data.survey_responses.forEach(function(response, myindex) {
-                                    //console.log('(+) LOOP - survey_responses: ', response, all_results, myindex);
-                                    var inner_calculations = [];
-
-                                    if (all_results) {
-                                        all_results.forEach(function(current_result, myindex) {
-                                            //console.log('(+) Compare: ', current_result.response.data.response, response.data.response);
-
-                                            if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.data.response)) {
-                                                var myResult = current_result;
-                                                //console.log('(+) EQUAL: ', current_result);
-
-                                                var objectToPush = {
-                                                    'calculation_name': calculatons,
-                                                    'calculation_result': myResult,
-                                                    'calculated_datestamp': date,
-                                                    'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-                                                    'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
-                                                };
-                                                inner_calculations.push(objectToPush);
-                                            };
-                                        });
-                                        response.calculations = inner_calculations;
+                                    var objectToPush = {
+                                        'calculation_name': calculatons,
+                                        'calculation_results': data.calculation_result,
+                                        'calculated_datestamp': date,
+                                        'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                        'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
                                     };
 
+                                    return_data.calculations.push(objectToPush);
+                                    //console.log('(+) LOOP - calculations: ', data.calculation_result);
+
+
+                                    // Assign Calculation Result to survey_response
+                                    var all_results = data.calculation_result;
+
+                                    return_data.survey_responses.forEach(function(response, myindex) {
+                                        //console.log('(+) LOOP - survey_responses: ', response, all_results, myindex);
+                                        var inner_calculations = [];
+
+                                        if (all_results) {
+                                            all_results.forEach(function(current_result, myindex) {
+                                                //console.log('(+) Compare: ', current_result.response.data.response, response.data.response);
+
+                                                if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.data.response)) {
+                                                    var myResult = current_result;
+                                                    //console.log('(+) EQUAL: ', current_result);
+
+                                                    var objectToPush = {
+                                                        'calculation_name': calculatons,
+                                                        'calculation_result': myResult,
+                                                        'calculated_datestamp': date,
+                                                        'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                                        'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                                    };
+                                                    inner_calculations.push(objectToPush);
+                                                };
+                                            });
+                                            response.calculations = inner_calculations;
+                                        };
+
+                                    });
+
+                                    // Deferred when done.
+                                    actions_count = actions_count + 1;
+                                    if (dataService.checkSuccess(actions, actions_count)) {
+                                        deferred.resolve(return_data);
+                                    };
+                                }, function(error) {
+                                    // Error
+                                    deferred.reject(return_data);
+                                    console.log('-- Error:', error);
                                 });
 
-                                // Deferred when done.
-                                actions_count = actions_count + 1;
-                                if (dataService.checkSuccess(actions, actions_count)) {
-                                    deferred.resolve(return_data);
-                                };
-                            }, function(error) {
-                                // Error
-                                deferred.reject(return_data);
-                                console.log('-- Error:', error);
                             });
+                        };
 
-                        });
-
-                    }
+                    };
                 });
 
                 return_data.apps = myApp;
