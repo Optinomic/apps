@@ -20939,7 +20939,7 @@ p {
 
 
 
-[calculation get_all_results javascript]
+[calculation get_all_results javascript ch.suedhang.apps.bscl.anq]
 function main(data) {
 
     var calc = {

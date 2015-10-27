@@ -38,7 +38,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation get_all_results javascript]
+[calculation get_all_results javascript ch.suedhang.apps.bscl.anq]
 include(calculations/scores.js)
 
 
