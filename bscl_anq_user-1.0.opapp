@@ -35,7 +35,7 @@ ch.suedhang.apps.bscl.anq >= 1.0
             <div ng-if="d.haveData">
 
 <div>
-    <h3 class="md-headline">Hello: {{d.dataMain.apps.current.name}}</h3>
+    <h3 class="md-headline">Hello, {{d.dataMain.apps.current.name}}</h3>
 </div>
             </div>
             <div ng-if="!d.haveData">
