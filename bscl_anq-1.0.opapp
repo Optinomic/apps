@@ -1428,7 +1428,6 @@ angular.module('optinomicDataModule')
             // ------------------------------------------------
             // Action 3:  Get current App Info
             // ------------------------------------------------
-
             api = dataService.getAllApps();
             var aApps = dataService.getData(api);
 
@@ -1440,6 +1439,8 @@ angular.module('optinomicDataModule')
                 } else {
                     myApp.all = data.patient_modules;
                 };
+
+                console.log('myApp', myApp);
 
                 // Save current app details
                 myApp.all.forEach(function(current_app, myindex) {
@@ -1460,16 +1461,14 @@ angular.module('optinomicDataModule')
                                 console.log('User App - Calculation: ', current_app.identifier, calculatons)
                                 api = dataService.getAppCalculationsUser(current_app.identifier, calculatons);
                             } else {
+                                console.log('Patient App - Calculation: ', current_app.identifier, calculatons)
                                 api = dataService.getAppCalculations(calculatons);
                             };
-
                             var aCalculation = dataService.getData(api);
 
                             aCalculation.then(function(data) {
 
-
                                 var date = new Date();
-
                                 var objectToPush = {
                                     'calculation_name': calculatons,
                                     'calculation_results': data.calculation_result,
@@ -1480,7 +1479,6 @@ angular.module('optinomicDataModule')
 
                                 return_data.calculations.push(objectToPush);
                                 //console.log('(+) LOOP - calculations: ', data.calculation_result);
-
 
 
                                 if (parseInt(helpers.getPatientID()) !== 0) {
