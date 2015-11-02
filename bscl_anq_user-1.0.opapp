@@ -5061,9 +5061,9 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             $scope.calculations = JSON.stringify(all_results, null, 4);
             var my_groups = $scope.createGroups(all_results);
-            var my_calculations = $scope.calculateGroups(my_groups)
+            $scope.my_calculations = $scope.calculateGroups(my_groups)
             $scope.setTscoreChart();
-            console.log('(!) ', my_groups, my_calculations);
+            console.log('(!) ', my_groups, $scope.my_calculations);
 
             // Display Results
             $scope.d.haveData = true;
@@ -5250,7 +5250,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
-            var my_result_group = data.patient_groups[patient_group.data.name];
+            var my_result_group = $scope.my_calculations.patient_groups[patient_group.data.name];
 
             var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
 
