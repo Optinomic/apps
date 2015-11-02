@@ -117,7 +117,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
 
             patient_group.mean_results = mean_t_scores;
-            patient_group.mean_results_1 = simpleStatistics.mean(mean_t_scores);
+            patient_group.mean_results_aggr = simpleStatistics.mean(mean_t_scores.aggr);
 
             console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
         });
