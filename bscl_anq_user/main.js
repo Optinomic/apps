@@ -61,8 +61,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var all_groups = $scope.d.dataMain.patient_groups;
             all_groups.forEach(function(patient_group, myindex) {
                 my_return.patient_groups[patient_group.data.name] = patient_group;
-                my_return.patient_groups[patient_group.data.name].results = [];
-
 
                 var patients_in_group = my_return.patient_groups[patient_group.data.name].patients;
                 console.log('patients_in_group ', patient_group.data.name, patients_in_group);
@@ -70,6 +68,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 if (patients_in_group !== undefined) {
                     patients_in_group.forEach(function(inner_patient, myindex) {
                         if (current_patient === inner_patient.id) {
+                            my_return.patient_groups[patient_group.data.name].results = my_return.patient_groups[patient_group.data.name].results === undefined ? [] : my_return.patient_groups[patient_group.data.name].results;
                             my_return.patient_groups[patient_group.data.name].results.push(current_result);
                         };
                     });
