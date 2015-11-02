@@ -5119,10 +5119,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var mean_t_scores = {};
             mean_t_scores.aggr = [];
             mean_t_scores.angst = [];
+            mean_t_scores.depr = [];
+            mean_t_scores.gsi = [];
+            mean_t_scores.paranoid = [];
+            mean_t_scores.phobisch = [];
+            mean_t_scores.psychot = [];
+            mean_t_scores.somat = [];
+            mean_t_scores.soz = [];
+            mean_t_scores.zwang = [];
 
             my_results.forEach(function(inner_result, myindex) {
                 mean_t_scores.aggr.push(inner_result.results.t_scores.aggr);
                 mean_t_scores.angst.push(inner_result.results.t_scores.angst);
+                mean_t_scores.depr.push(inner_result.results.t_scores.depr);
+                mean_t_scores.gsi.push(inner_result.results.t_scores.gsi);
+                mean_t_scores.paranoid.push(inner_result.results.t_scores.paranoid);
+                mean_t_scores.phobisch.push(inner_result.results.t_scores.phobisch);
+                mean_t_scores.psychot.push(inner_result.results.t_scores.psychot);
+                mean_t_scores.somat.push(inner_result.results.t_scores.somat);
+                mean_t_scores.soz.push(inner_result.results.t_scores.soz);
+                mean_t_scores.zwang.push(inner_result.results.t_scores.zwang);
             });
 
             patient_group.mean_results = mean_t_scores;
