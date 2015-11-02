@@ -793,11 +793,11 @@ function main(data) {
 
         // Prepare all 'responses' in a nice array
 
-        var return_data = {};
-        return_data.all = [];
+        var prepare_return_data = {};
+        prepare_return_data.all = [];
 
         var all_responses = my_data;
-        return_data.all = my_data;
+        prepare_return_data.all = all_responses;
 
         // all_responses.forEach(function(response, myindex) {
         //     var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
@@ -817,14 +817,14 @@ function main(data) {
         // });
 
 
-        // Group prepared array into patient_groups
+        // Get Results
         // return_data.all.forEach(function(current_resonse, myindex) {
         //     current_resonse.results = calc.getResults(current_resonse);
         // });
 
 
 
-        return return_data
+        return prepare_return_data
     };
 
 
