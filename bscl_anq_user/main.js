@@ -225,7 +225,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         var all_groups = $scope.my_calculations;
         all_groups.forEach(function(calculation, myindex) {
 
-            var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
+            //var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
             console.log('my_results', my_results);
 
 
