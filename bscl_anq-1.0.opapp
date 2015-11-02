@@ -1703,14 +1703,14 @@ angular.module('optinomicDataModule')
                     }, function(error) {
                         // Error
                         deferred.reject(return_data);
-                        getDataService.onError(error);
+                        console.log('-- Error:', error);
                     });
                 });
 
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
-                if (getDataService.checkSuccess(function_name, actions, actions_count)) {
+                if (dataService.checkSuccess(function_name, actions, actions_count)) {
                     //console.log('==> deferred', return_data);
                     deferred.resolve(return_data);
                 };
@@ -1719,7 +1719,7 @@ angular.module('optinomicDataModule')
             }, function(error) {
                 // Error
                 deferred.reject(return_data);
-                getDataService.onError(error);
+                console.log('-- Error:', error);
             });
 
 
