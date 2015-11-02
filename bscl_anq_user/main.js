@@ -49,7 +49,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.calculateGroups = function(results) {
-        console.log('calculateGroups: ', all_results);
+        console.log('calculateGroups: ', results);
 
     };
 
