@@ -33,7 +33,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             var all_results = $scope.d.dataMain.calculations[0].calculation_results.all === undefined ? [] : $scope.d.dataMain.calculations[0].calculation_results.all;
 
-            $scope.calculations = JSON.stringify(all_results, null, 4);
+
             var my_groups = $scope.createGroups(all_results);
             $scope.my_calculations = $scope.calculateGroups(my_groups)
             console.log('(!) ', my_groups, $scope.my_calculations);
@@ -236,11 +236,12 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
                     "scores": $scope.getAnswer(calculation.results_mean)
                 }
                 $scope.d.tscore_plot.push(plot_item);
+
             };
 
         });
         console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
-
+        $scope.calculations = JSON.stringify($scope.d.tscore_plot, null, 4);
 
 
 

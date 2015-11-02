@@ -24,6 +24,59 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.bscl.anq >= 1.0
 
 
+[template tscore 6 10]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<div>
+    <h3 class="md-headline">Hello, {{d.dataMain.apps.current.name}}</h3>
+    <pre>{{calculations}}</pre>
+</div>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">Sorry</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+    </div>
+    <md-content>
+        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.2/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
+
+
+
+
 [template data_survey_responses 6 14]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
@@ -5059,7 +5112,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             var all_results = $scope.d.dataMain.calculations[0].calculation_results.all === undefined ? [] : $scope.d.dataMain.calculations[0].calculation_results.all;
 
-            $scope.calculations = JSON.stringify(all_results, null, 4);
+
             var my_groups = $scope.createGroups(all_results);
             $scope.my_calculations = $scope.calculateGroups(my_groups)
             console.log('(!) ', my_groups, $scope.my_calculations);
@@ -5262,11 +5315,12 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
                     "scores": $scope.getAnswer(calculation.results_mean)
                 }
                 $scope.d.tscore_plot.push(plot_item);
+
             };
 
         });
         console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
-
+        $scope.calculations = JSON.stringify($scope.d.tscore_plot, null, 4);
 
 
 

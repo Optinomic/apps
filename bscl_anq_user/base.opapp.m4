@@ -23,6 +23,9 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.bscl.anq >= 1.0
 
 
+[template tscore 6 10]
+include(templates/data.html)
+
 [template data_survey_responses 6 14]
 include(templates/data.html)
 
