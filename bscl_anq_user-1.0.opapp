@@ -5111,7 +5111,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
-            var my_results = my_return.patient_groups[patient_group.data.name];
+            var my_result_group = my_return.patient_groups[patient_group.data.name];
+
+            var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
+
+
+
             console.log('Resultate: ', patient_group.data.name, my_results);
         });
 
