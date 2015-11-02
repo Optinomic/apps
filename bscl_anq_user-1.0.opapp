@@ -1366,7 +1366,7 @@ angular.module('optinomicDataModule')
         dataService.getMainAppData = function() {
 
             // Actions
-            var actions = 5;
+            var actions = 6;
             var actions_count = 0;
 
             // Init
