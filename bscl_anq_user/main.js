@@ -49,8 +49,19 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.calculateGroups = function(results) {
-        console.log('calculateGroups: ', results);
 
+        var my_return = {};
+        my_return.all = results;
+
+        my_return.patient_groups = {};
+        var all_groups = $scope.d.dataMain.patient_groups;
+        all_groups.forEach(function(patient_group, myindex) {
+            my_return.patient_groups[patient_group.data.name] = patient_group;
+            my_return.patient_groups[patient_group.data.name].results = [];
+        });
+
+        console.log('calculateGroups: ', my_return);
+        return my_return;
     };
 
 
