@@ -5060,8 +5060,10 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             var all_results = $scope.d.dataMain.calculations[0].calculation_results.all === undefined ? [] : $scope.d.dataMain.calculations[0].calculation_results.all;
 
             $scope.calculations = JSON.stringify(all_results, null, 4);
-            $scope.calculateGroups(all_results);
+            $scope.my_groups = $scope.createGroups(all_results);
+            $scope.my_calculations = $scope.calculateGroups($scope.my_groups)
             $scope.setTscoreChart();
+            console.log('(!) ', my_groups, my_calculations);
 
             // Display Results
             $scope.d.haveData = true;
@@ -5076,7 +5078,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
 
 
-    $scope.calculateGroups = function(results) {
+    $scope.createGroups = function(results) {
 
         var my_return = {};
         my_return.all = results;
@@ -5093,32 +5095,35 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
                 //console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
                 if (patients_in_group !== undefined) {
-                    console.log('(?)', patient_group.data.name, patients_in_group);
+                    //console.log('(?)', patient_group.data.name, patients_in_group);
 
                     patients_in_group.forEach(function(inner_patient, myindex) {
                         if (current_patient === inner_patient.id) {
                             my_return.patient_groups[patient_group.data.name].results = my_return.patient_groups[patient_group.data.name].results === undefined ? [] : my_return.patient_groups[patient_group.data.name].results;
                             my_return.patient_groups[patient_group.data.name].results.push(current_result);
 
-                            console.log('(+)', patient_group.data.name, current_result);
+                            //console.log('(+)', patient_group.data.name, current_result);
                         };
                     });
                 };
-
-
-
             });
         });
 
+        return my_return;
+    };
+
+
+    $scope.calculateGroups = function(data) {
+
+        var my_return = [];
 
         console.log('Resultate 1: ', my_return.patient_groups);
 
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
-            var my_result_group = my_return.patient_groups[patient_group.data.name];
+            var my_result_group = data[patient_group.data.name];
 
             var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
-            var anzahl_resultate = my_results.length;
 
             var mean_t_scores = {};
             mean_t_scores.aggr = [];
@@ -5163,6 +5168,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
 
             console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
+            my_return.push(patient_group);
         });
 
 
