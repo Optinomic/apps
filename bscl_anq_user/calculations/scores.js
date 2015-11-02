@@ -831,10 +831,7 @@ function main(data) {
     calc.responses = calc.prepare(data);
     //console.log('(+) calc.responses', calc.responses);
 
-    //calc.zzz_entry_data = data;
-
-
-
+    calc.entry_data = data;
 
 
 
