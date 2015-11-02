@@ -233,7 +233,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
                 var plot_item = {
                     "label": calculation.data.name,
                     "label_datestamp": 'Yeah',
-                    "scores": $scope.getAnswer(calculation.results_mean.t_scores)
+                    "scores": $scope.getAnswer(calculation.results_mean)
                 }
                 $scope.d.tscore_plot.push(plot_item);
             };
