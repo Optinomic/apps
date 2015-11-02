@@ -116,9 +116,20 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             });
 
 
-            patient_group.mean_results = mean_t_scores;
-            patient_group.mean_results_aggr = simpleStatistics.mean(mean_t_scores.aggr);
-            patient_group.mean_results_aggr = Math.round(patient_group.mean_results_aggr * 10) / 10;
+            patient_group.results_mean = {};
+            patient_group.results_mean.source = mean_t_scores;
+
+            patient_group.results_mean.t_scores = {};
+            patient_group.results_mean.t_scores.aggr = Math.round(simpleStatistics.mean(mean_t_scores.aggr) * 10) / 10
+            patient_group.results_mean.t_scores.angst = Math.round(simpleStatistics.mean(mean_t_scores.angst) * 10) / 10
+            patient_group.results_mean.t_scores.depr = Math.round(simpleStatistics.mean(mean_t_scores.depr) * 10) / 10
+            patient_group.results_mean.t_scores.gsi = Math.round(simpleStatistics.mean(mean_t_scores.gsi) * 10) / 10
+            patient_group.results_mean.t_scores.paranoid = Math.round(simpleStatistics.mean(mean_t_scores.paranoid) * 10) / 10
+            patient_group.results_mean.t_scores.phobisch = Math.round(simpleStatistics.mean(mean_t_scores.phobisch) * 10) / 10
+            patient_group.results_mean.t_scores.psychot = Math.round(simpleStatistics.mean(mean_t_scores.psychot) * 10) / 10
+            patient_group.results_mean.t_scores.somat = Math.round(simpleStatistics.mean(mean_t_scores.somat) * 10) / 10
+            patient_group.results_mean.t_scores.soz = Math.round(simpleStatistics.mean(mean_t_scores.soz) * 10) / 10
+            patient_group.results_mean.t_scores.zwang = Math.round(simpleStatistics.mean(mean_t_scores.zwang) * 10) / 10
 
 
             console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
