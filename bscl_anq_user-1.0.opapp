@@ -5116,7 +5116,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
             var anzahl_resultate = my_results.length;
 
-            mean_t_scores = {};
+            var mean_t_scores = {};
             mean_t_scores.aggr = [];
             mean_t_scores.angst = [];
 
