@@ -793,33 +793,33 @@ function main(data) {
 
         // Prepare all 'responses' in a nice array
 
-        // var all_responses = my_data;
-        // 
-        // var prepare_return_data = {};
-        // prepare_return_data.all = all_responses;
+        var all_responses = my_data;
 
-        // all_responses.forEach(function(response, myindex) {
-        //     var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
-        // 
-        //     if (inner_response.length >= 1) {
-        //         //console.log('(?) inner_response', inner_response);
-        // 
-        //         inner_response.forEach(function(real_response, myindex) {
-        //             real_response.data.id = real_response.id;
-        //             real_response.data.patient = response.patient.data;
-        //             real_response.data.patient.pid = response.patient.id;
-        // 
-        //             //console.log('(?) real_response', real_response.data);
-        //             prepare_return_data.all.push(real_response.data);
-        //         });
-        //     };
-        // });
+        var prepare_return_data = {};
+        prepare_return_data.all = all_responses;
+
+        all_responses.forEach(function(response, myindex) {
+            var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
+
+            if (inner_response.length >= 1) {
+                //console.log('(?) inner_response', inner_response);
+
+                inner_response.forEach(function(real_response, myindex) {
+                    real_response.data.id = real_response.id;
+                    real_response.data.patient = response.patient.data;
+                    real_response.data.patient.pid = response.patient.id;
+
+                    //console.log('(?) real_response', real_response.data);
+                    prepare_return_data.all.push(real_response.data);
+                });
+            };
+        });
 
 
-        // Get Results
-        // return_data.all.forEach(function(current_resonse, myindex) {
-        //     current_resonse.results = calc.getResults(current_resonse);
-        // });
+        Get Results
+        return_data.all.forEach(function(current_resonse, myindex) {
+            current_resonse.results = calc.getResults(current_resonse);
+        });
 
 
 
