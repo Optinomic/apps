@@ -5257,9 +5257,9 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             if (calculation.results.length >= 1) {
                 var plot_item = {
-                    "label": 'daa',
+                    "label": calculation.data.name,
                     "label_datestamp": 'Yeah',
-                    "scores": $scope.getAnswer(my_results.t_scores)
+                    "scores": $scope.getAnswer(calculation.results_mean.t_scores)
                 }
                 $scope.d.tscore_plot.push(plot_item);
             };
