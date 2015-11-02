@@ -63,9 +63,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_return.patient_groups[patient_group.data.name] = patient_group;
                 my_return.patient_groups[patient_group.data.name].results = [];
 
-                if (current_patient === my_return.patient_groups[patient_group.data.name].patients.id) {
-                    my_return.patient_groups[patient_group.data.name].results.push(current_result);
-                };
+                my_return.patient_groups[patient_group.data.name].patients.forEach(function(patient_in_group, myindex) {
+                    if (current_patient === patient_in_group.id) {
+                        my_return.patient_groups[patient_group.data.name].results.push(current_result);
+                    };
+                });
+
+
             });
 
 
