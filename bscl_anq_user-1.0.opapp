@@ -5061,6 +5061,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             $scope.calculations = JSON.stringify(all_results, null, 4);
             $scope.calculateGroups(all_results);
+            $scope.setTscoreChart();
 
             // Display Results
             $scope.d.haveData = true;
@@ -5089,15 +5090,22 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_return.patient_groups[patient_group.data.name] = patient_group;
 
                 var patients_in_group = my_return.patient_groups[patient_group.data.name].patients;
-                console.log('patients_in_group ', patient_group.data.name, patients_in_group);
+                //console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
+                var have_results = false;
                 if (patients_in_group !== undefined) {
                     patients_in_group.forEach(function(inner_patient, myindex) {
                         if (current_patient === inner_patient.id) {
                             my_return.patient_groups[patient_group.data.name].results = my_return.patient_groups[patient_group.data.name].results === undefined ? [] : my_return.patient_groups[patient_group.data.name].results;
                             my_return.patient_groups[patient_group.data.name].results.push(current_result);
+                            have_results = true;
                         };
                     });
+                };
+
+                if (have_results) {
+                    var anzahl_resultate = my_return.patient_groups[patient_group.data.name].results.length;
+                    console.log('RESULTATE', anzahl_resultate);
                 };
 
             });
@@ -5113,42 +5121,135 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // DataView : angulargrid.com
+    // Chart: T-Score <chart-tscore>
     // -----------------------------------
-    $scope.setDataView = function() {
 
-        // GetData from Calculations
-        var myAPI = dataService.getAppCalculationsUser('ch.suedhang.apps.bscl.anq_user', 'get_all_results');
-        console.log('myAPI', myAPI);
+    $scope.getAnswer = function(calc) {
 
-        myAPI.success(function(data) {
-            console.log('(+) getAppCalculationsUser: ', data);
-        });
+        var myResults = calc;
+        //console.log('getAnswer', myResults);
 
-        myAPI.error(function(error) {
-            console.log('(!) Error - getAppCalculationsUser: ', error);
-        });
+        var score_answer = [{
+            "scale": 0,
+            "question": "GSI (Global Severity Index)",
+            "stanine": myResults.stanine.gsi,
+            "t_score": myResults.t_scores.gsi,
+            "scale_score": myResults.scale_scores.gsi,
+            "sum_score": myResults.sum_scores.gsi
+        }, {
+            "scale": 1,
+            "question": "Psychotizismus",
+            "t_score": myResults.t_scores.psychot,
+            "scale_score": myResults.scale_scores.psychot,
+            "sum_score": myResults.sum_scores.psychot
+        }, {
+            "scale": 2,
+            "question": "Paranoides Denken",
+            "t_score": myResults.t_scores.paranoid,
+            "scale_score": myResults.scale_scores.paranoid,
+            "sum_score": myResults.sum_scores.paranoid
+        }, {
+            "scale": 3,
+            "question": "Phobische Angst",
+            "t_score": myResults.t_scores.phobisch,
+            "scale_score": myResults.scale_scores.phobisch,
+            "sum_score": myResults.sum_scores.phobisch
+        }, {
+            "scale": 4,
+            "question": "Aggressivität/ Feindseligkeit",
+            "t_score": myResults.t_scores.aggr,
+            "scale_score": myResults.scale_scores.aggr,
+            "sum_score": myResults.sum_scores.aggr
+        }, {
+            "scale": 5,
+            "question": "Ängstlichkeit",
+            "t_score": myResults.t_scores.angst,
+            "scale_score": myResults.scale_scores.angst,
+            "sum_score": myResults.sum_scores.angst
+        }, {
+            "scale": 6,
+            "question": "Depressivität",
+            "t_score": myResults.t_scores.depr,
+            "scale_score": myResults.scale_scores.depr,
+            "sum_score": myResults.sum_scores.depr
+        }, {
+            "scale": 7,
+            "question": "Unsicherheit im Sozialkontakt",
+            "t_score": myResults.t_scores.soz,
+            "scale_score": myResults.scale_scores.soz,
+            "sum_score": myResults.sum_scores.soz
+        }, {
+            "scale": 8,
+            "question": "Zwanghaftigkeit",
+            "t_score": myResults.t_scores.zwang,
+            "scale_score": myResults.scale_scores.zwang,
+            "sum_score": myResults.sum_scores.zwang
+        }, {
+            "scale": 9,
+            "question": "Somatisierung",
+            "t_score": myResults.t_scores.somat,
+            "scale_score": myResults.scale_scores.somat,
+            "sum_score": myResults.sum_scores.somat
+        }];
 
-
-        // DataView - Options
-        //$scope.d.grid.options = {
-        //    headerHeight: 45,
-        //    rowHeight: 28,
-        //    //rowData: $scope.d.grid.rowData,
-        //    //columnDefs: $scope.d.grid.columnDefs,
-        //    //pinnedColumnCount: 1,
-        //    dontUseScrolls: false,
-        //    enableFilter: true,
-        //    rowSelection: 'single',
-        //    enableColResize: true,
-        //    enableCellExpressions: true,
-        //    enableSorting: true,
-        //    showToolPanel: false
-        //};
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
+        return score_answer;
     };
+
+    $scope.setTscoreChart = function() {
+
+        // Options
+        $scope.options_plot = {
+            'show_scores': true,
+            'language': 'De'
+        };
+
+
+        // // Create - Plot-Data from Calculation Results
+        // $scope.d.tscore_plot = [];
+        // 
+        // var mySurveyResponses = $scope.d.dataMain.survey_responses;
+        // mySurveyResponses.forEach(function(survey_response, myindex) {
+        // 
+        //     var mySurveyResponseCalculations = survey_response.calculations;
+        //     mySurveyResponseCalculations.forEach(function(calculation, myindex) {
+        // 
+        //         if (calculation.calculation_name === "get_results") {
+        // 
+        //             var inner_calculation = calculation.calculation_result;
+        //             if (inner_calculation) {
+        // 
+        //                 if (survey_response.data.response.q501V05 === '0') {
+        //                     // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
+        // 
+        //                     var myLabel = '';
+        //                     myLabel = survey_response.data.filled_day;
+        // 
+        // 
+        //                     if (survey_response.data.response.q501V04 === '1') {
+        //                         myLabel = 'Eintritt';
+        //                     };
+        //                     if (survey_response.data.response.q501V04 === '2') {
+        //                         myLabel = 'Austritt';
+        //                     };
+        //                     if (survey_response.data.response.q501V04 === '3') {
+        //                         myLabel = 'Übertritt';
+        //                     };
+        // 
+        //                     console.log();
+        // 
+        //                     var plot_item = {
+        //                         "label": myLabel,
+        //                         "label_datestamp": survey_response.data.filled_day + ', ' + survey_response.data.filled_time,
+        //                         "scores": $scope.getAnswer(inner_calculation)
+        //                     }
+        //                     $scope.d.tscore_plot.push(plot_item);
+        //                 };
+        //             };
+        //         };
+        //     });
+        // });
+    };
+
 
 
 });
