@@ -79,7 +79,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 if (have_results) {
                     var anzahl_resultate = my_return.patient_groups[patient_group.data.name].results.length;
-                    console.log('RESULTATE', anzahl_resultate);
+                    console.log('RESULTATE', patient_group.data.name, anzahl_resultate);
                 };
 
             });
