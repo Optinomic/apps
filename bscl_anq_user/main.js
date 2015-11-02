@@ -80,6 +80,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             });
         });
 
+
+        console.log('Resultate 1: ', my_return.patient_groups);
+
         my_return.patient_groups.forEach(function(patient_group, myindex) {
 
             //var my_results = patient_group[patient_group.data.name].results === undefined ? [] : patient_group[patient_group.data.name].results;
