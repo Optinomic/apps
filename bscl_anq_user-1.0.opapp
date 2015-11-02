@@ -24,7 +24,7 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.bscl.anq >= 1.0
 
 
-[template Calculations 6 14]
+[template data_survey_responses 6 14]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -1579,7 +1579,7 @@ angular.module('optinomicDataModule')
 
                 aPatient.then(function(data) {
                     return_data.patient = data;
-                    console.log('createPatientExtras', data);
+                    //console.log('createPatientExtras', data);
                     return_data.patient.data = dataService.createPatientExtras(data.patient.data);
 
                     // Deferred when done.
@@ -21100,6 +21100,22 @@ p {
     color: red !important;
     font-size: 8px;
 }
+
+
+
+[calculation get_all_results javascript ch.suedhang.apps.bscl.anq]
+function main(data) {
+
+    var calc = {
+        "responses": data,
+        "sugus": 'blau'
+    };
+
+
+    // Return
+    return calc;
+
+};
 
 
 
