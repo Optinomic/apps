@@ -1562,15 +1562,12 @@ angular.module('optinomicDataModule')
             patient.extras.birthday_age = patient.birthday + ' | ' + patient.age;
             patient.extras.name = patient.last_name + ' ' + patient.first_name;
 
-            $translate(patient.gender).then(function(translated) {
-                patient.extras.ansprache = translated;
 
-                patient.extras.full_name = patient.last_name + ' ' + patient.first_name;
-                if (patient.title) {
-                    patient.extras.full_name = patient.title + ' ' + patient.extras.full_name;
-                };
-                patient.extras.full_name = translated + ' ' + patient.extras.full_name;
-            });
+            patient.extras.full_name = patient.last_name + ' ' + patient.first_name;
+            if (patient.title) {
+                patient.extras.full_name = patient.title + ' ' + patient.extras.full_name;
+            };
+            patient.extras.full_name = translated + ' ' + patient.extras.full_name;
 
             patient.extras.fulladdress = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
 
