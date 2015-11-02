@@ -1,8 +1,6 @@
 function main(data) {
 
 
-
-
     var calc = {};
 
     calc.get_t_score = function(scale, score) {
@@ -810,6 +808,7 @@ function main(data) {
                     real_response.data.id = real_response.id;
                     real_response.data.patient = response.patient.data;
                     real_response.data.patient.pid = response.patient.id;
+
                     //console.log('(?) real_response', real_response.data);
                     return_data.all.push(real_response.data);
                 });
@@ -828,10 +827,15 @@ function main(data) {
     };
 
 
+
     calc.responses = calc.prepare(data);
     //console.log('(+) calc.responses', calc.responses);
 
-    calc.entry_data = data;
+    //calc.zzz_entry_data = data;
+
+
+
+
 
 
     // Return
