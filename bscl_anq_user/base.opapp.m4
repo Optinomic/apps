@@ -23,7 +23,7 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.bscl.anq >= 1.0
 
 
-[template data_survey_responses 6 7]
+[template Calculations 6 14]
 include(templates/data.html)
 
 
@@ -36,9 +36,5 @@ include(main.js)
 [css]
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
-
-
-[calculation get_all_results javascript ch.suedhang.apps.bscl.anq]
-include(calculations/scores.js)
 
 
