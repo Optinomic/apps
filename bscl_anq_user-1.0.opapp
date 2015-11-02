@@ -5252,17 +5252,17 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         all_groups.forEach(function(calculation, myindex) {
 
             //var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
-            console.log('my_results', my_results);
+            console.log('my_results', calculation);
 
 
-            if (my_results.length >= 1) {
-                var plot_item = {
-                    "label": patient_group.data.name,
-                    "label_datestamp": 'Yeah',
-                    "scores": $scope.getAnswer(my_results.t_scores)
-                }
-                $scope.d.tscore_plot.push(plot_item);
-            };
+            //if (my_results.length >= 1) {
+            //    var plot_item = {
+            //        "label": 'daa',
+            //        "label_datestamp": 'Yeah',
+            //        "scores": $scope.getAnswer(my_results.t_scores)
+            //    }
+            //    $scope.d.tscore_plot.push(plot_item);
+            //};
 
         });
         console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
