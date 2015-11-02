@@ -83,14 +83,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         console.log('Resultate 1: ', my_return.patient_groups);
 
-        my_return.patient_groups.forEach(function(patient_group, myindex) {
-
-            //var my_results = patient_group[patient_group.data.name].results === undefined ? [] : patient_group[patient_group.data.name].results;
-
-            console.log('Resultate: ', patient_group);
-
+        var all_groups = $scope.d.dataMain.patient_groups;
+        all_groups.forEach(function(patient_group, myindex) {
+            var my_results = my_return.patient_groups[patient_group.data.name];
+            console.log('Resultate: ', patient_group.data.name, my_results);
         });
-
 
 
 
