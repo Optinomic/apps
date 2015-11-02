@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -115,7 +115,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 mean_t_scores.zwang.push(inner_result.results.t_scores.zwang);
             });
 
+
             patient_group.mean_results = mean_t_scores;
+            patient_group.mean_results_1 = simpleStatistics.mean(mean_t_scores);
+
             console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
         });
 
