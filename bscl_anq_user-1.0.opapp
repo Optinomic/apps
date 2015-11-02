@@ -5114,7 +5114,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             var my_groups = $scope.createGroups(all_results);
             $scope.my_calculations = $scope.calculateGroups(my_groups)
-            console.log('(!) ', my_groups, $scope.my_calculations);
+                //console.log('(!) ', my_groups, $scope.my_calculations);
             $scope.setTscoreChart();
 
             // Display Results
@@ -5169,13 +5169,11 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
         var my_return = [];
 
-        console.log('Resultate 1: ', data);
-
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
             var my_result_group = data.patient_groups[patient_group.data.name];
 
-            console.log('my_result_group 1: ', patient_group.data.name, my_result_group);
+            // console.log('my_result_group 1: ', patient_group.data.name, my_result_group);
 
 
             var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
@@ -5222,13 +5220,13 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             patient_group.results_mean.t_scores.zwang = Math.round(simpleStatistics.mean(mean_t_scores.zwang) * 10) / 10
 
 
-            console.log('Resultate: ', patient_group.data.name, my_results);
+            //console.log('Resultate: ', patient_group.data.name, my_results);
             my_return.push(patient_group);
         });
 
 
 
-        console.log('calculateGroups: ', my_return);
+        //console.log('calculateGroups: ', my_return);
         return my_return;
     };
 
@@ -5304,7 +5302,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         all_groups.forEach(function(calculation, myindex) {
 
             calculation.results_mean = calculation.results_mean === undefined ? [] : calculation.results_mean;
-            console.log('my_results', calculation);
+            //console.log('my_results', calculation);
 
 
             if (calculation.results_mean.source.aggr.length !== 0) {
@@ -5318,7 +5316,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             };
 
         });
-        console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
+        // console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
         $scope.calculations = JSON.stringify($scope.d.tscore_plot, null, 4);
 
 
