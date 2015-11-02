@@ -229,7 +229,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             console.log('my_results', calculation);
 
 
-            if (calculation.results_mean.length !== 0) {
+            if (calculation.results_mean.source.aggr.length !== 0) {
                 var plot_item = {
                     "label": calculation.data.name,
                     "label_datestamp": 'Yeah',
