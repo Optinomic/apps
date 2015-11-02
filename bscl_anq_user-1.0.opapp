@@ -5303,11 +5303,11 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         var all_groups = $scope.my_calculations;
         all_groups.forEach(function(calculation, myindex) {
 
-            //var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
+            calculation.results_mean = calculation.results_mean === undefined ? [] : calculation.results_mean;
             console.log('my_results', calculation);
 
 
-            if (calculation.results_mean) {
+            if (calculation.results_mean.length !== 0) {
                 var plot_item = {
                     "label": calculation.data.name,
                     "label_datestamp": 'Yeah',
