@@ -817,9 +817,9 @@ function main(data) {
 
 
         // Group prepared array into patient_groups
-        return_data.all.forEach(function(current_resonse, myindex) {
-            current_resonse.results = calc.getResults(current_resonse);
-        });
+        // return_data.all.forEach(function(current_resonse, myindex) {
+        //     current_resonse.results = calc.getResults(current_resonse);
+        // });
 
 
 
