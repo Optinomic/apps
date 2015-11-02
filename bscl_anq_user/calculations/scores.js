@@ -828,7 +828,7 @@ function main(data) {
     };
 
 
-    //calc.responses = calc.prepare(data);
+    calc.responses = calc.prepare(data);
     //console.log('(+) calc.responses', calc.responses);
 
     calc.entry_data = data;
