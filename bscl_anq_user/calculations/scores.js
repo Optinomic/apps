@@ -810,7 +810,7 @@ function main(data) {
         //             real_response.data.patient.pid = response.patient.id;
         // 
         //             //console.log('(?) real_response', real_response.data);
-        //             return_data.all.push(real_response.data);
+        //             prepare_return_data.all.push(real_response.data);
         //         });
         //     };
         // });
@@ -823,12 +823,12 @@ function main(data) {
 
 
 
-        return prepare_return_data
+        return prepare_return_data;
     };
 
 
 
-    //calc.responses = calc.prepare(data);
+    calc.responses = calc.prepare(data);
     //console.log('(+) calc.responses', calc.responses);
 
     calc.entry_data = data;
