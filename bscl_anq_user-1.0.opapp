@@ -5193,64 +5193,43 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         var score_answer = [{
             "scale": 0,
             "question": "GSI (Global Severity Index)",
-            "stanine": myResults.stanine.gsi,
-            "t_score": myResults.t_scores.gsi,
-            "scale_score": myResults.scale_scores.gsi,
-            "sum_score": myResults.sum_scores.gsi
+            "t_score": myResults.t_scores.gsi
         }, {
             "scale": 1,
             "question": "Psychotizismus",
-            "t_score": myResults.t_scores.psychot,
-            "scale_score": myResults.scale_scores.psychot,
-            "sum_score": myResults.sum_scores.psychot
+            "t_score": myResults.t_scores.psychot
         }, {
             "scale": 2,
             "question": "Paranoides Denken",
-            "t_score": myResults.t_scores.paranoid,
-            "scale_score": myResults.scale_scores.paranoid,
-            "sum_score": myResults.sum_scores.paranoid
+            "t_score": myResults.t_scores.paranoid
         }, {
             "scale": 3,
             "question": "Phobische Angst",
-            "t_score": myResults.t_scores.phobisch,
-            "scale_score": myResults.scale_scores.phobisch,
-            "sum_score": myResults.sum_scores.phobisch
+            "t_score": myResults.t_scores.phobisch
         }, {
             "scale": 4,
             "question": "Aggressivität/ Feindseligkeit",
-            "t_score": myResults.t_scores.aggr,
-            "scale_score": myResults.scale_scores.aggr,
-            "sum_score": myResults.sum_scores.aggr
+            "t_score": myResults.t_scores.aggr
         }, {
             "scale": 5,
             "question": "Ängstlichkeit",
-            "t_score": myResults.t_scores.angst,
-            "scale_score": myResults.scale_scores.angst,
-            "sum_score": myResults.sum_scores.angst
+            "t_score": myResults.t_scores.angst
         }, {
             "scale": 6,
             "question": "Depressivität",
-            "t_score": myResults.t_scores.depr,
-            "scale_score": myResults.scale_scores.depr,
-            "sum_score": myResults.sum_scores.depr
+            "t_score": myResults.t_scores.depr
         }, {
             "scale": 7,
             "question": "Unsicherheit im Sozialkontakt",
-            "t_score": myResults.t_scores.soz,
-            "scale_score": myResults.scale_scores.soz,
-            "sum_score": myResults.sum_scores.soz
+            "t_score": myResults.t_scores.soz
         }, {
             "scale": 8,
             "question": "Zwanghaftigkeit",
-            "t_score": myResults.t_scores.zwang,
-            "scale_score": myResults.scale_scores.zwang,
-            "sum_score": myResults.sum_scores.zwang
+            "t_score": myResults.t_scores.zwang
         }, {
             "scale": 9,
             "question": "Somatisierung",
-            "t_score": myResults.t_scores.somat,
-            "scale_score": myResults.scale_scores.somat,
-            "sum_score": myResults.sum_scores.somat
+            "t_score": myResults.t_scores.somat
         }];
 
         return score_answer;
@@ -5266,7 +5245,31 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
 
         // // Create - Plot-Data from Calculation Results
-        // $scope.d.tscore_plot = [];
+        $scope.d.tscore_plot = [];
+
+
+        var all_groups = $scope.d.dataMain.patient_groups;
+        all_groups.forEach(function(patient_group, myindex) {
+            var my_result_group = data.patient_groups[patient_group.data.name];
+
+            var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
+
+
+            if (my_results.length >= 1) {
+                var plot_item = {
+                    "label": patient_group.data.name,
+                    "label_datestamp": 'Yeah',
+                    "scores": $scope.getAnswer(my_results.t_scores)
+                }
+                $scope.d.tscore_plot.push(plot_item);
+            };
+
+        });
+        console.log('$scope.d.tscore_plot', $scope.d.tscore_plot);
+
+
+
+
         // 
         // var mySurveyResponses = $scope.d.dataMain.survey_responses;
         // mySurveyResponses.forEach(function(survey_response, myindex) {
