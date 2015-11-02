@@ -31,7 +31,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run App-Functions:
             //$scope.setDataView();
 
-            $scope.calculations = JSON.stringify($scope.d.dataMain.calculations[0].calculation_results.resonses.all, null, 4);
+            $scope.calculations = JSON.stringify($scope.d.dataMain.calculations[0].calculation_results, null, 4);
 
             // Display Results
             $scope.d.haveData = true;
