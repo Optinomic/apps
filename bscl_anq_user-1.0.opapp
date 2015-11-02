@@ -5061,9 +5061,10 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
             $scope.calculations = JSON.stringify(all_results, null, 4);
             $scope.my_groups = $scope.createGroups(all_results);
-            $scope.my_calculations = $scope.calculateGroups($scope.my_groups)
+            //$scope.my_calculations = $scope.calculateGroups($scope.my_groups)
             $scope.setTscoreChart();
-            console.log('(!) ', my_groups, my_calculations);
+            $scope.my_calculations = [];
+            console.log('(!) ', $scope.my_groups, $scope.my_calculations);
 
             // Display Results
             $scope.d.haveData = true;
