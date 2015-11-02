@@ -95,7 +95,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
-            var my_result_group = data[patient_group.data.name];
+            var my_result_group = data.patient_groups[patient_group.data.name];
 
             console.log('my_result_group 1: ', patient_group.data.name, my_result_group);
 
