@@ -21922,14 +21922,14 @@ function main(data) {
         });
 
 
-        Get Results
-        return_data.all.forEach(function(current_resonse, myindex) {
+        // Get Results
+        prepare_return_data.all.forEach(function(current_resonse, myindex) {
             current_resonse.results = calc.getResults(current_resonse);
         });
 
 
 
-        return my_data;
+        return prepare_return_data;
     };
 
 
