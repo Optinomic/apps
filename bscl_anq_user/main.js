@@ -31,12 +31,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run App-Functions:
             //$scope.setDataView();
 
+            $scope.calculations = JSON.stringify($scope.d.dataMain.calculations, null, 4);
+
             // Display Results
             $scope.d.haveData = true;
 
             // Finishing: Console Info & Init = done.
-            //console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            console.log('Welcome, ', $scope.d);
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
             $scope.d.functions._InitData('dataMain', true);
         });

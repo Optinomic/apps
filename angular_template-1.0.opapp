@@ -1728,7 +1728,6 @@ angular.module('optinomicDataModule')
                     myApp.all = data.patient_modules;
                 };
 
-                console.log('myApp', myApp);
 
                 // Save current app details
                 myApp.all.forEach(function(current_app, myindex) {
