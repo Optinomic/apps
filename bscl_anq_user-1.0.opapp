@@ -5060,11 +5060,10 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             var all_results = $scope.d.dataMain.calculations[0].calculation_results.all === undefined ? [] : $scope.d.dataMain.calculations[0].calculation_results.all;
 
             $scope.calculations = JSON.stringify(all_results, null, 4);
-            $scope.my_groups = $scope.createGroups(all_results);
-            //$scope.my_calculations = $scope.calculateGroups($scope.my_groups)
+            var my_groups = $scope.createGroups(all_results);
+            var my_calculations = $scope.calculateGroups(my_groups)
             $scope.setTscoreChart();
-            $scope.my_calculations = [];
-            console.log('(!) ', $scope.my_groups, $scope.my_calculations);
+            console.log('(!) ', my_groups, my_calculations);
 
             // Display Results
             $scope.d.haveData = true;
@@ -5118,11 +5117,14 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
         var my_return = [];
 
-        console.log('Resultate 1: ', my_return.patient_groups);
+        console.log('Resultate 1: ', data);
 
         var all_groups = $scope.d.dataMain.patient_groups;
         all_groups.forEach(function(patient_group, myindex) {
             var my_result_group = data[patient_group.data.name];
+
+            console.log('my_result_group 1: ', patient_group.data.name, my_result_group);
+
 
             var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
 
