@@ -222,11 +222,11 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
         $scope.d.tscore_plot = [];
 
 
-        var all_groups = $scope.d.dataMain.patient_groups;
-        all_groups.forEach(function(patient_group, myindex) {
-            var my_result_group = $scope.my_calculations.patient_groups[patient_group.data.name];
+        var all_groups = $scope.my_calculations;
+        all_groups.forEach(function(calculation, myindex) {
 
             var my_results = my_result_group.results_mean === undefined ? [] : my_result_group.results_mean;
+            console.log('my_results', my_results);
 
 
             if (my_results.length >= 1) {
