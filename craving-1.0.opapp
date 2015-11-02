@@ -1836,7 +1836,7 @@ angular.module('optinomicDataModule')
                 aPatient.then(function(data) {
                     return_data.patient = data;
                     console.log('createPatientExtras', data);
-                    return_data.patient.data = dataService.createPatientExtras(data.data);
+                    return_data.patient.data = dataService.createPatientExtras(data.patient.data);
 
                     // Deferred when done.
                     actions_count = actions_count + 1;
