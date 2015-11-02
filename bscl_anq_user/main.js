@@ -36,8 +36,8 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             $scope.calculations = JSON.stringify(all_results, null, 4);
             var my_groups = $scope.createGroups(all_results);
             $scope.my_calculations = $scope.calculateGroups(my_groups)
-            $scope.setTscoreChart();
             console.log('(!) ', my_groups, $scope.my_calculations);
+            $scope.setTscoreChart();
 
             // Display Results
             $scope.d.haveData = true;
