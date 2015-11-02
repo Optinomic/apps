@@ -34,10 +34,9 @@ ch.suedhang.apps.bscl.anq >= 1.0
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div>
-    <h3 class="md-headline">Hello, {{d.dataMain.apps.current.name}}</h3>
-    <pre>{{calculations}}</pre>
-</div>
+<h3 class="md-headline">T-Score: {{d.dataMain.apps.current.name}}</h3>
+<p class="md-caption text-muted" style="text-align: center;">Deutsche Normstichprobe (N = 600 gesunde Erwachsene).</p>
+<chart-tscore data='d.tscore_plot' options='options_plot'></chart-tscore>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
