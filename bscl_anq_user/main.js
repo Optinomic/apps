@@ -31,7 +31,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run App-Functions:
             //$scope.setDataView();
 
-            var all_results = $scope.d.dataMain.calculations[0].calculation_results.all
+            var all_results = $scope.d.dataMain.calculations[0].calculation_results.all === undefined ? [] : $scope.d.dataMain.calculations[0].calculation_results.all;
+
             $scope.calculations = JSON.stringify(all_results, null, 4);
             $scope.calculateGroups(all_results);
 
