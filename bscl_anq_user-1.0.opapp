@@ -21899,10 +21899,9 @@ function main(data) {
 
         // Prepare all 'responses' in a nice array
 
-        var prepare_return_data = {};
-        prepare_return_data.all = [];
-
         var all_responses = my_data;
+
+        var prepare_return_data = {};
         prepare_return_data.all = all_responses;
 
         // all_responses.forEach(function(response, myindex) {
