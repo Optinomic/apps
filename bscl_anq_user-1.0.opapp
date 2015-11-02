@@ -5255,7 +5255,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             console.log('my_results', calculation);
 
 
-            if (calculation.results.length >= 1) {
+            if (calculation.results_mean) {
                 var plot_item = {
                     "label": calculation.data.name,
                     "label_datestamp": 'Yeah',
