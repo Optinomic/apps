@@ -1553,7 +1553,7 @@ angular.module('optinomicDataModule')
 
 
         dataService.createPatientExtras = function(patient) {
-            console.log('createPatientExtras ', patient);
+            //console.log('createPatientExtras ', patient);
             patient.age = $filter('dateToAge')(patient.birthdate);
             patient.birthday = $filter('date')(patient.birthdate);
 
@@ -1835,7 +1835,8 @@ angular.module('optinomicDataModule')
 
                 aPatient.then(function(data) {
                     return_data.patient = data;
-                    return_data.patient.data = dataService.createPatientExtras(return_data.patient.data);
+                    console.log('createPatientExtras', data);
+                    return_data.patient.data = dataService.createPatientExtras(data.data);
 
                     // Deferred when done.
                     actions_count = actions_count + 1;
