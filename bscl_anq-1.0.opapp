@@ -217,6 +217,8 @@ angular.module('optinomicDataModule', [
     'radian'
 ]);
 
+
+
 angular.module('optinomicDataModule').config(function($routeProvider) {
     $routeProvider
         .when('/', {
@@ -228,6 +230,35 @@ angular.module('optinomicDataModule').config(function($routeProvider) {
             redirectTo: '/'
         });
 });
+
+
+
+// -----------------------
+// Filters
+// -----------------------
+angular.module('optinomicDataModule').filter('dateToAge', function() {
+    return function(input, arg) {
+        var today = new Date();
+        var birthDate = new Date(input);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+
+        return age;
+    };
+});
+
+
+angular.module('optinomicDataModule').filter('date', function() {
+    return function(input, arg) {
+        var new_date = new Date(input);
+        return new_date.toLocaleDateString();
+    };
+});
+
+
 
 angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $filter, dataService, scopeDService, simpleStatistics) {
 
