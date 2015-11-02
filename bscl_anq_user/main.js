@@ -66,11 +66,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 var patients_in_group = my_return.patient_groups[patient_group.data.name].patients;
                 console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
-                //my_return.patient_groups[patient_group.data.name].patients.forEach(function(patient_in_group, myindex) {
-                //    if (current_patient === patient_in_group.id) {
-                //        my_return.patient_groups[patient_group.data.name].results.push(current_result);
-                //    };
-                //});
+                patients_in_group.forEach(function(inner_patient, myindex) {
+                    if (current_patient === inner_patient.id) {
+                        my_return.patient_groups[patient_group.data.name].results.push(current_result);
+                    };
+                });
 
             });
 
