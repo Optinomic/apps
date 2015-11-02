@@ -815,10 +815,9 @@ function main(data) {
 
 
         // Get Results
-        // prepare_return_data.all.forEach(function(current_resonse, myindex) {
-        //     current_resonse.results = calc.getResults(current_resonse);
-        // });
-
+        prepare_return_data.all.forEach(function(current_resonse, myindex) {
+            current_resonse.results = calc.getResults(current_resonse);
+        });
 
 
         return prepare_return_data;
