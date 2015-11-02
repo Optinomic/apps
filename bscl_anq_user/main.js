@@ -31,7 +31,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run App-Functions:
             //$scope.setDataView();
 
-            $scope.calculations = JSON.stringify($scope.d.dataMain.calculations[0].calculation_results, null, 4);
+            var all_results = $scope.d.dataMain.calculations[0].calculation_results.all
+            $scope.calculations = JSON.stringify(all_results, null, 4);
+            $scope.calculateGroups(all_results);
 
             // Display Results
             $scope.d.haveData = true;
@@ -44,6 +46,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
+
+
+    $scope.calculateGroups = function(results) {
+        console.log('calculateGroups: ', all_results);
+
+    };
 
 
     // -----------------------------------
