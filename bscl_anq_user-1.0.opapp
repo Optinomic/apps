@@ -5093,10 +5093,14 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
                 //console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
                 if (patients_in_group !== undefined) {
+                    console.log('(?)', patient_group.data.name, patients_in_group);
+
                     patients_in_group.forEach(function(inner_patient, myindex) {
                         if (current_patient === inner_patient.id) {
                             my_return.patient_groups[patient_group.data.name].results = my_return.patient_groups[patient_group.data.name].results === undefined ? [] : my_return.patient_groups[patient_group.data.name].results;
                             my_return.patient_groups[patient_group.data.name].results.push(current_result);
+
+                            console.log('(+)', patient_group.data.name, current_result);
                         };
                     });
                 };
