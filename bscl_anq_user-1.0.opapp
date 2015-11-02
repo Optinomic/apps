@@ -21902,30 +21902,26 @@ function main(data) {
         // Prepare all 'responses' in a nice array
 
         var return_data = {};
-        my_data.forEach(function(calculation, myindex) {
-            return_data.all = [];
+        return_data.all = [];
 
-            if (calculation.calculation_name === 'get_all_results') {
-                var all_responses = calculation.calculation_results.responses;
+        var all_responses = my_data;
 
-                var responses_prepared = [];
-                all_responses.forEach(function(response, myindex) {
-                    var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
+        all_responses.forEach(function(response, myindex) {
+            var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
 
-                    if (inner_response.length >= 1) {
-                        //console.log('(?) inner_response', inner_response);
+            if (inner_response.length >= 1) {
+                //console.log('(?) inner_response', inner_response);
 
-                        inner_response.forEach(function(real_response, myindex) {
-                            real_response.data.id = real_response.id;
-                            real_response.data.patient = response.patient.data;
-                            real_response.data.patient.pid = response.patient.id;
-                            //console.log('(?) real_response', real_response.data);
-                            return_data.all.push(real_response.data);
-                        });
-                    };
+                inner_response.forEach(function(real_response, myindex) {
+                    real_response.data.id = real_response.id;
+                    real_response.data.patient = response.patient.data;
+                    real_response.data.patient.pid = response.patient.id;
+                    //console.log('(?) real_response', real_response.data);
+                    return_data.all.push(real_response.data);
                 });
             };
         });
+
 
         // Group prepared array into patient_groups
         return_data.all.forEach(function(current_resonse, myindex) {
