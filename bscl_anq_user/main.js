@@ -66,26 +66,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 var patients_in_group = my_return.patient_groups[patient_group.data.name].patients;
                 //console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
-                var have_results = false;
                 if (patients_in_group !== undefined) {
                     patients_in_group.forEach(function(inner_patient, myindex) {
                         if (current_patient === inner_patient.id) {
                             my_return.patient_groups[patient_group.data.name].results = my_return.patient_groups[patient_group.data.name].results === undefined ? [] : my_return.patient_groups[patient_group.data.name].results;
                             my_return.patient_groups[patient_group.data.name].results.push(current_result);
-                            have_results = true;
                         };
                     });
                 };
 
-                if (have_results) {
-                    var anzahl_resultate = my_return.patient_groups[patient_group.data.name].results.length;
-                    console.log('RESULTATE', patient_group.data.name, anzahl_resultate);
-                };
+
 
             });
+        });
 
+        all_groups.forEach(function(patient_group, myindex) {
+            var my_results = patient_group[patient_group.data.name].results;
+            console.log('Resultate: ', patient_group.data.name, my_results);
 
         });
+
 
 
 
