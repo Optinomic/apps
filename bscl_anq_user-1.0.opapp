@@ -21899,10 +21899,10 @@ function main(data) {
 
         // Prepare all 'responses' in a nice array
 
-        var all_responses = my_data;
-
-        var prepare_return_data = {};
-        prepare_return_data.all = all_responses;
+        // var all_responses = my_data;
+        // 
+        // var prepare_return_data = {};
+        // prepare_return_data.all = all_responses;
 
         // all_responses.forEach(function(response, myindex) {
         //     var inner_response = response.foreign_survey_responses['ch.suedhang.apps.bscl.anq'];
@@ -21929,20 +21929,20 @@ function main(data) {
 
 
 
-        return prepare_return_data;
+        return my_data;
     };
 
 
 
-    calc.responses = calc.prepare(data);
+    //calc.responses = calc.prepare(data);
     //console.log('(+) calc.responses', calc.responses);
 
-    calc.entry_data = data;
+    //calc.entry_data = data;
 
 
 
     // Return
-    return calc;
+    return calc.prepare(data);
 
 };
 
