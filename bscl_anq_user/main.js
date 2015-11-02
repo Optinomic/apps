@@ -144,7 +144,7 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
             patient_group.results_mean.t_scores.zwang = Math.round(simpleStatistics.mean(mean_t_scores.zwang) * 10) / 10
 
 
-            console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
+            console.log('Resultate: ', patient_group.data.name, my_results);
             my_return.push(patient_group);
         });
 
