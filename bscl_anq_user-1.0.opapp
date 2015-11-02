@@ -5089,12 +5089,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_return.patient_groups[patient_group.data.name] = patient_group;
                 my_return.patient_groups[patient_group.data.name].results = [];
 
-                my_return.patient_groups[patient_group.data.name].patients.forEach(function(patient_in_group, myindex) {
-                    if (current_patient === patient_in_group.id) {
-                        my_return.patient_groups[patient_group.data.name].results.push(current_result);
-                    };
-                });
+                var patients_in_group = my_return.patient_groups[patient_group.data.name].patients;
+                console.log('patients_in_group ', patient_group.data.name, patients_in_group);
 
+                //my_return.patient_groups[patient_group.data.name].patients.forEach(function(patient_in_group, myindex) {
+                //    if (current_patient === patient_in_group.id) {
+                //        my_return.patient_groups[patient_group.data.name].results.push(current_result);
+                //    };
+                //});
 
             });
 
