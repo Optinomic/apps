@@ -88,10 +88,19 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var my_result_group = my_return.patient_groups[patient_group.data.name];
 
             var my_results = my_result_group.results === undefined ? [] : my_result_group.results;
+            var anzahl_resultate = my_results.length;
 
+            mean_t_scores = {};
+            mean_t_scores.aggr = [];
+            mean_t_scores.angst = [];
 
+            my_results.forEach(function(inner_result, myindex) {
+                mean_t_scores.aggr.push(inner_result.results.t_scores.aggr);
+                mean_t_scores.angst.push(inner_result.results.t_scores.angst);
+            });
 
-            console.log('Resultate: ', patient_group.data.name, my_results);
+            patient_group.mean_results = mean_t_scores;
+            console.log('Resultate: ', patient_group.data.name, anzahl_resultate, my_results);
         });
 
 
