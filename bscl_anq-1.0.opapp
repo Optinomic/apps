@@ -1694,13 +1694,13 @@ angular.module('optinomicDataModule')
 
                     return_data.events.forEach(function(current_event, myindex) {
 
-                        var date = current_event.created_at;
+                        var date = current_event.data.created_at;
 
-                        current_event.extras = {};
-                        current_event.extras.created_year = $filter("amDateFormat")(date, 'YYYY');
-                        current_event.extras.created_week = $filter("amDateFormat")(date, 'YYYY, ww');
-                        current_event.extras.created_date = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-                        current_event.extras.created_time = $filter("amDateFormat")(date, 'HH:mm');
+                        current_event.data.extras = {};
+                        current_event.data.extras.created_year = $filter("amDateFormat")(date, 'YYYY');
+                        current_event.data.extras.created_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                        current_event.data.extras.created_date = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                        current_event.data.extras.created_time = $filter("amDateFormat")(date, 'HH:mm');
 
                     });
 
