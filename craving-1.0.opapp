@@ -74,7 +74,10 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
     </md-content>
 </div>
 
@@ -127,7 +130,10 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
     </md-content>
 </div>
 
@@ -180,7 +186,10 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
     </md-content>
 </div>
 
@@ -230,7 +239,10 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
     </md-content>
 </div>
 
@@ -300,7 +312,10 @@ website = http://www.optinomic.com/
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
     </div>
     <md-content>
-        <p class="md-caption text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
     </md-content>
 </div>
 
