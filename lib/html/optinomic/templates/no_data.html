@@ -6,7 +6,7 @@
     <md-content>
         <p class="md-body-2 text-muted">Total Task(s) for {{d.dataMain.patient.patient.data.last_name}}: {{d.dataMain.events.length}}</p>
         <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            {{event.data.created_at.substing(0,10)}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+            {{event.extras.created_date}}, {{event.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
         </p>
     </md-content>
 </div>
