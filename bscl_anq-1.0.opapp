@@ -1694,7 +1694,7 @@ angular.module('optinomicDataModule')
 
                     return_data.events.forEach(function(current_event, myindex) {
 
-                        date = current_event.created_at;
+                        var date = current_event.created_at;
 
                         current_event.extras = {};
                         current_event.extras.created_year = $filter("amDateFormat")(date, 'YYYY');
