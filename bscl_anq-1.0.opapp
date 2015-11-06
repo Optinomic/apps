@@ -1213,7 +1213,7 @@ angular.module('optinomicDataModule')
                 delimiter: my_delimiter
             };
             console.log('runSQL: ', body);
-            return apiService.get("/run_sql", body);
+            return apiService.post("/run_sql", body);
         };
 
         dataService.getAllApps = function() {

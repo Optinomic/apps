@@ -441,7 +441,7 @@ website = http://www.optinomic.com/
 </div>
 <div>
     <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Download
+        Download {{sql_field}}
     </md-button>
 </div>
             </div>
@@ -1537,7 +1537,7 @@ angular.module('optinomicDataModule')
                 delimiter: my_delimiter
             };
             console.log('runSQL: ', body);
-            return apiService.get("/run_sql", body);
+            return apiService.post("/run_sql", body);
         };
 
         dataService.getAllApps = function() {
@@ -5529,8 +5529,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         if (parseInt($scope.file) === 1) {
             var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
-            var api = dataService.getConfig();
-
         } else {
             var api = dataService.getConfig();
 

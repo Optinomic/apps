@@ -63,8 +63,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         if (parseInt($scope.file) === 1) {
             var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
-            var api = dataService.getConfig();
-
         } else {
             var api = dataService.getConfig();
 
