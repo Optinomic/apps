@@ -3,18 +3,18 @@ include(../lib/html/optinomic/page/start.m4)
 <div>
     <md-input-container class="md-block">
         <label>SQL</label>
-        <textarea ng-model="sql_field" columns="1000"></textarea>
+        <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
-        <md-select ng-model="file" ng-init="1">
+        <md-select ng-model="d.export.file" ng-init="1">
             <md-option value="1">SQL - field</md-option>
             <md-option value="2">Config</md-option>
         </md-select>
     </div>
     <div>
-        <md-select ng-model="delimitter" ng-init=";">
+        <md-select ng-model="d.export.delimitter" ng-init=";">
             <md-option value=";">Semicolon (;)</md-option>
             <md-option value=",">Comma (,)</md-option>
             <md-option value="|">Pipe (|)</md-option>
@@ -23,7 +23,7 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div>
     <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Download {{sql_field}}
+        Download {{d.export.sql_field}}
     </md-button>
 </div>
 include(../lib/html/optinomic/page/end.m4)

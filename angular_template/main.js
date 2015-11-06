@@ -54,9 +54,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // Download
     // -----------------------------------
-    $scope.file = 1;
-    $scope.delimitter = ';';
-    $scope.sql_field = 'select * from information_schema.tables';
+    $scope.d.export = {};
+    $scope.d.export.file = 1;
+    $scope.d.export.delimitter = ';';
+    $scope.d.export.sql_field = 'select * from information_schema.tables';
 
     $scope.export = function() {
         console.log('export: ', $scope.sql_field, $scope.delimitter);
