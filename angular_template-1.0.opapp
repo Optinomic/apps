@@ -424,6 +424,9 @@ website = http://www.optinomic.com/
         <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
+<div ng-if="d.export.data">
+    <pre>{{d.export.data}}</pre>
+</div>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="d.export.file" ng-init="1">
