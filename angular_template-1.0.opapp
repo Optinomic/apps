@@ -407,7 +407,7 @@ website = http://www.optinomic.com/
 
 
 
-[template data_download 6 3]
+[template data_download 6 14]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -21906,4 +21906,6 @@ function main(responses) {
     // Return
     return calc.getResults(responses);
 }
+
+
 
