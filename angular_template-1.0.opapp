@@ -5527,7 +5527,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         console.log('export: ', $scope.sql_field, $scope.delimitter);
 
 
-        api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+        var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
