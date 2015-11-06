@@ -1179,9 +1179,11 @@ angular.module('optinomicDataModule')
             return apiService.get("/extra_config", {});
         };
 
-        dataService.runSQL = function(query, delimiter) {
-            query = query === undefined ? 'select * from information_schema.tables' : query;
-            delimiter = delimiter === undefined ? ';' : delimiter;
+        dataService.runSQL = function(my_query, my_delimiter) {
+            console.log('runSQL: ', my_query, my_delimiter);
+
+            my_query = my_query === undefined ? 'select * from information_schema.tables' : my_query;
+            my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
 
             var body = {
                 query: query,

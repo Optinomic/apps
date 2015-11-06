@@ -70,7 +70,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }
 
 
-        var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
