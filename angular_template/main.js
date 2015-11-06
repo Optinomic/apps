@@ -60,14 +60,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export.sql_field = 'select * from information_schema.tables';
 
     $scope.export = function() {
-        console.log('export: ', $scope.sql_field, $scope.delimitter);
 
         if (parseInt($scope.file) === 1) {
-            var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
-        } else {
-            var api = dataService.getConfig();
+            console.log('export: ', $scope.d.export);
 
-        }
+            var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter);
+        } else {
+            console.log('CONFIG :export: ', $scope.d.export);
+            var api = dataService.getConfig();
+        };
 
 
         var aSQL = dataService.getData(api);
