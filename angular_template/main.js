@@ -61,6 +61,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.export = function() {
         console.log('export: ', $scope.sql_field, $scope.delimitter);
 
+        if (parseInt($scope.file) === 1) {
+            var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+
+        } else {
+            var api = dataService.getConfig();
+
+        }
+
 
         var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
         var aSQL = dataService.getData(api);

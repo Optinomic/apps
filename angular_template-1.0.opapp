@@ -421,18 +421,18 @@ website = http://www.optinomic.com/
 <div>
     <md-input-container class="md-block">
         <label>SQL</label>
-        <textarea ng-model="sql_field" columns="10"></textarea>
+        <textarea ng-model="sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="file" ng-init="1">
             <md-option value="1">SQL - field</md-option>
-            <md-option value="2">All Tables</md-option>
+            <md-option value="2">Config</md-option>
         </md-select>
     </div>
     <div>
-        <md-select ng-model="delimitter" ng-init="1">
+        <md-select ng-model="delimitter" ng-init=";">
             <md-option value=";">Semicolon (;)</md-option>
             <md-option value=",">Comma (,)</md-option>
             <md-option value="|">Pipe (|)</md-option>
@@ -5525,6 +5525,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.export = function() {
         console.log('export: ', $scope.sql_field, $scope.delimitter);
+
+        if (parseInt($scope.file) === 1) {
+            var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+
+        } else {
+            var api = dataService.getConfig();
+
+        }
 
 
         var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
