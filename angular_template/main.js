@@ -55,6 +55,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Download
     // -----------------------------------
     $scope.d.export = {};
+    $scope.d.export.data = {};
+    $scope.d.export.have_data = false;
     $scope.d.export.file = 1;
     $scope.d.export.delimitter = ';';
     $scope.d.export.sql_field = 'select * from information_schema.tables';
@@ -75,7 +77,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
-            console.log('export - Done: ', data);
+            $scope.d.export.have_data = true;
+
+            $scope.d.export.data = data;
+            console.log('export - Done: ', $scope.d.export.data);
         });
 
 

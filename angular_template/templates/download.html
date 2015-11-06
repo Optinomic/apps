@@ -6,7 +6,7 @@ include(../lib/html/optinomic/page/start.m4)
         <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
-<div ng-if="d.export.data">
+<div ng-if="d.export.have_data">
     <pre>{{d.export.data}}</pre>
 </div>
 <div layout="row" layout-sm="column" layout-align="start end">
