@@ -1529,13 +1529,14 @@ angular.module('optinomicDataModule')
         };
 
         dataService.runSQL = function(query, delimiter) {
-            query = query === undefined || '' ? 'select * from information_schema.tables' : query;
+            query = query === undefined ? 'select * from information_schema.tables' : query;
             delimiter = delimiter === undefined ? ';' : delimiter;
 
             var body = {
                 query: query,
                 delimiter: delimiter
             };
+            console.log('runSQL: ', body);
             return apiService.get("/run_sql", body);
         };
 
