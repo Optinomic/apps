@@ -1,5 +1,11 @@
 include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div>
+    <md-input-container class="md-block">
+        <label>SQL</label>
+        <textarea ng-model="sql_field" columns="10"></textarea>
+    </md-input-container>
+</div>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="file" ng-init="1">
@@ -16,8 +22,8 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
 </div>
 <div>
-    <md-button ng-click="" class="md-primary" aria-label="Tool">
-        Download (not implemented)
+    <md-button ng-click="export()" class="md-primary" aria-label="Export">
+        Download
     </md-button>
 </div>
 include(../lib/html/optinomic/page/end.m4)

@@ -418,6 +418,12 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div>
+    <md-input-container class="md-block">
+        <label>SQL</label>
+        <textarea ng-model="sql_field" columns="10"></textarea>
+    </md-input-container>
+</div>
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="file" ng-init="1">
@@ -434,8 +440,8 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div>
-    <md-button ng-click="" class="md-primary" aria-label="Tool">
-        Download (not implemented)
+    <md-button ng-click="export()" class="md-primary" aria-label="Export">
+        Download
     </md-button>
 </div>
             </div>
@@ -1523,7 +1529,7 @@ angular.module('optinomicDataModule')
         };
 
         dataService.runSQL = function(query, delimiter) {
-            query = query === undefined ? 'select * from information_schema.tables' : query;
+            query = query === undefined || '' ? 'select * from information_schema.tables' : query;
             delimiter = delimiter === undefined ? ';' : delimiter;
 
             var body = {
@@ -5515,16 +5521,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.file = 1;
     $scope.delimitter = ';';
-    $scope.sql_field = '';
+    $scope.sql_field = 'select * from information_schema.tables';
 
     $scope.export = function() {
+        console.log('export: ', $scope.sql_field, $scope.delimitter);
 
 
         api = dataService.runSQL($scope.sql_field, $scope.delimitter);
-        var aSurveyResponses = dataService.getData(api);
+        var aSQL = dataService.getData(api);
 
-        aSurveyResponses.then(function(data) {});
-
+        aSQL.then(function(data) {
+            console.log('export - Done: ', data);
+        });
 
 
     };

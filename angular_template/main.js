@@ -56,16 +56,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.file = 1;
     $scope.delimitter = ';';
-    $scope.sql_field = '';
+    $scope.sql_field = 'select * from information_schema.tables';
 
     $scope.export = function() {
+        console.log('export: ', $scope.sql_field, $scope.delimitter);
 
 
         api = dataService.runSQL($scope.sql_field, $scope.delimitter);
-        var aSurveyResponses = dataService.getData(api);
+        var aSQL = dataService.getData(api);
 
-        aSurveyResponses.then(function(data) {});
-
+        aSQL.then(function(data) {
+            console.log('export - Done: ', data);
+        });
 
 
     };
