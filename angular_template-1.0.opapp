@@ -421,15 +421,15 @@ website = http://www.optinomic.com/
 <div layout="row" layout-sm="column" layout-align="start end">
     <div flex>
         <md-select ng-model="file" ng-init="1">
-            <md-option value="1">Survey Results (Rawdata)</md-option>
-            <md-option value="2">TARPSY (Daten 2015, Lieferung 2016)</md-option>
+            <md-option value="1">SQL - field</md-option>
+            <md-option value="2">All Tables</md-option>
         </md-select>
     </div>
     <div>
         <md-select ng-model="delimitter" ng-init="1">
-            <md-option value="1">;</md-option>
-            <md-option value="2">,</md-option>
-            <md-option value="3">|</md-option>
+            <md-option value=";">Semicolon (;)</md-option>
+            <md-option value=",">Comma (,)</md-option>
+            <md-option value="|">Pipe (|)</md-option>
         </md-select>
     </div>
 </div>
@@ -1520,6 +1520,17 @@ angular.module('optinomicDataModule')
 
         dataService.getConfig = function() {
             return apiService.get("/extra_config", {});
+        };
+
+        dataService.runSQL = function(query, delimiter) {
+            query = query === undefined ? 'select * from information_schema.tables' : query;
+            delimiter = delimiter === undefined ? ';' : delimiter;
+
+            var body = {
+                query: query,
+                delimiter: delimiter
+            };
+            return apiService.get("/run_sql", body);
         };
 
         dataService.getAllApps = function() {
@@ -5500,10 +5511,25 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // Fake - Download
+    // Download
     // -----------------------------------
     $scope.file = 1;
-    $scope.delimitter = 1;
+    $scope.delimitter = ';';
+    $scope.sql_field = '';
+
+    $scope.export = function() {
+
+
+        api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+        var aSurveyResponses = dataService.getData(api);
+
+        aSurveyResponses.then(function(data) {});
+
+
+
+    };
+
+
 
 
 

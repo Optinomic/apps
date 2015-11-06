@@ -52,10 +52,25 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // Fake - Download
+    // Download
     // -----------------------------------
     $scope.file = 1;
-    $scope.delimitter = 1;
+    $scope.delimitter = ';';
+    $scope.sql_field = '';
+
+    $scope.export = function() {
+
+
+        api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+        var aSurveyResponses = dataService.getData(api);
+
+        aSurveyResponses.then(function(data) {});
+
+
+
+    };
+
+
 
 
 
