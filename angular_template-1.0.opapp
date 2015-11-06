@@ -1529,9 +1529,7 @@ angular.module('optinomicDataModule')
         };
 
         dataService.runSQL = function(my_query, my_delimiter) {
-            console.log('runSQL: ', my_query, my_delimiter);
-
-            my_query = my_query === undefined ? 'select * from information_schema.tables' : my_query;
+            //my_query = my_query === undefined ? 'select * from information_schema.tables' : my_query;
             my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
 
             var body = {
@@ -5531,6 +5529,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         if (parseInt($scope.file) === 1) {
             var api = dataService.runSQL($scope.sql_field, $scope.delimitter);
+            var api = dataService.getConfig();
 
         } else {
             var api = dataService.getConfig();
