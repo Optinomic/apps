@@ -59,7 +59,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export.have_data = false;
     $scope.d.export.file = 1;
     $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = 'select * from information_schema.tables';
+    $scope.d.export.sql_field = "select * from information_schema.tables";
+
+    $scope.d.export.sql_field = "include(templates/export.sql)";
 
     $scope.export = function() {
 
@@ -78,7 +80,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         aSQL.then(function(data) {
             $scope.d.export.have_data = true;
-
             $scope.d.export.data = data;
             console.log('export - Done: ', $scope.d.export.data);
         });

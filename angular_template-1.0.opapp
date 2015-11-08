@@ -5528,7 +5528,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export.have_data = false;
     $scope.d.export.file = 1;
     $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = 'select * from information_schema.tables';
+    $scope.d.export.sql_field = "select * from information_schema.tables";
+
+    $scope.d.export.sql_field = "SELECT 
+  patient.id
+  , patient.last_name 
+  , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga
+  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40
+  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as gaga
+FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
+WHERE module = 'ch.suedhang.apps.bscl.anq'
+";
 
     $scope.export = function() {
 
@@ -5547,7 +5557,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         aSQL.then(function(data) {
             $scope.d.export.have_data = true;
-
             $scope.d.export.data = data;
             console.log('export - Done: ', $scope.d.export.data);
         });
