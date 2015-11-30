@@ -66,6 +66,14 @@ min_questions =
 min_lastpage = 2
 
 
+[survey]
+id = my_ng_survey
+type = ng
+responsibility = patient_via_email
+name = Second example survey
+host = default
+
+
 [event]
 type = daily
 time = 19:00
