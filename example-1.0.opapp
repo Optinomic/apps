@@ -80,7 +80,7 @@ id = my_ng_survey
 type = ng
 responsibility = lead_therapist
 name = Second example survey
-base_url = http://localhost:3002
+host = default
 
 [survey_markup my_ng_survey]
 

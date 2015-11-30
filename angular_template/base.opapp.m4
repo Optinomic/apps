@@ -73,6 +73,9 @@ responsibility = patient_via_email
 name = Second example survey
 host = default
 
+[survey_markup my_ng_survey]
+include(survey_markups/my_ng_survey.html)
+
 
 [event]
 type = daily
