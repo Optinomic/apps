@@ -424,29 +424,20 @@ website = http://www.optinomic.com/
         <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
-<div ng-if="d.export.have_data">
-    <pre>{{d.export.data}}</pre>
-</div>
 <div layout="row" layout-sm="column" layout-align="start end">
-    <div flex>
-        <md-select ng-model="d.export.file" ng-init="1">
-            <md-option value="1">SQL - field</md-option>
-            <md-option value="2">Config</md-option>
-        </md-select>
-    </div>
-    <div flex>
-        <md-select ng-model="d.export.header" ng-init="True">
-            <md-option value="True">With header</md-option>
-            <md-option value="False">No header</md-option>
-        </md-select>
-    </div>
     <div flex>
         <md-select ng-model="d.export.format" ng-init="csv">
             <md-option value="csv">CSV</md-option>
             <md-option value="json">JSON</md-option>
         </md-select>
     </div>
-    <div>
+    <div flex ng-if="d.export.format === 'csv'">
+        <md-select ng-model="d.export.header" ng-init="True">
+            <md-option value="True">With header</md-option>
+            <md-option value="False">No header</md-option>
+        </md-select>
+    </div>
+    <div flex ng-if="d.export.format === 'csv'">
         <md-select ng-model="d.export.delimitter" ng-init=";">
             <md-option value=";">Semicolon (;)</md-option>
             <md-option value=",">Comma (,)</md-option>
@@ -456,8 +447,11 @@ website = http://www.optinomic.com/
 </div>
 <div>
     <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Download {{d.export.sql_field}}
+        Run SQL
     </md-button>
+</div>
+<div ng-if="d.export.have_data">
+    <pre>{{d.export.data}}</pre>
 </div>
             </div>
             <div ng-if="!d.haveData">
@@ -5575,15 +5569,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.export = function() {
 
-        if (parseInt($scope.d.export.file) === 1) {
-            console.log('export: ', $scope.d.export);
-
-            var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
-        } else {
-            $scope.d.export.sql_field = 'select * from information_schema.tables';
-            console.log('CONFIG :export: ', $scope.d.export);
-            var api = dataService.getConfig();
-        };
+        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
 
 
         var aSQL = dataService.getData(api);

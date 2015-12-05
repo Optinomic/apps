@@ -79,15 +79,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.export = function() {
 
-        if (parseInt($scope.d.export.file) === 1) {
-            console.log('export: ', $scope.d.export);
-
-            var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
-        } else {
-            $scope.d.export.sql_field = 'select * from information_schema.tables';
-            console.log('CONFIG :export: ', $scope.d.export);
-            var api = dataService.getConfig();
-        };
+        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
 
 
         var aSQL = dataService.getData(api);
