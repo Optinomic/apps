@@ -14,9 +14,9 @@ include(../lib/html/optinomic/page/start.m4)
         </md-select>
     </div>
     <div flex>
-        <md-select ng-model="d.export.direct" ng-init="csv">
-            <md-option value="True">File-Download</md-option>
-            <md-option value="False">Bildschrim</md-option>
+        <md-select ng-model="d.export.direct" ng-init="True">
+            <md-option value="False">File-Download</md-option>
+            <md-option value="True">Screen</md-option>
         </md-select>
     </div>
     <div flex ng-if="d.export.format === 'csv'">
