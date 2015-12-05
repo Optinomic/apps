@@ -80,7 +80,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.export = function() {
 
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
+        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
