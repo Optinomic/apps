@@ -431,6 +431,12 @@ website = http://www.optinomic.com/
             <md-option value="json">JSON</md-option>
         </md-select>
     </div>
+    <div flex>
+        <md-select ng-model="d.export.direct" ng-init="csv">
+            <md-option value="True">File-Download</md-option>
+            <md-option value="False">Bildschrim</md-option>
+        </md-select>
+    </div>
     <div flex ng-if="d.export.format === 'csv'">
         <md-select ng-model="d.export.header" ng-init="True">
             <md-option value="True">With header</md-option>
@@ -1542,6 +1548,7 @@ angular.module('optinomicDataModule')
             my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
             my_including_headers = my_including_headers === undefined ? 'True' : my_including_headers;
             my_format = my_format === undefined ? 'csv' : my_format;
+            my_direct = my_direct === undefined ? 'False' : my_direct;
 
 
             if (my_format === 'csv') {
@@ -1549,12 +1556,14 @@ angular.module('optinomicDataModule')
                     "query": my_query,
                     "delimiter": my_delimiter,
                     "including_headers": my_including_headers,
+                    "direct": my_direct,
                     "format": my_format
                 };
             } else {
                 var body = {
                     "query": my_query,
                     "delimiter": my_delimiter,
+                    "direct": my_direct,
                     "format": my_format
                 };
             };
@@ -5547,8 +5556,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export = {};
     $scope.d.export.data = {};
     $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True'
-    $scope.d.export.format = 'csv'
+    $scope.d.export.header = 'True';
+    $scope.d.export.direct = 'False';
+    $scope.d.export.format = 'csv';
     $scope.d.export.file = 1;
     $scope.d.export.delimitter = ';';
     $scope.d.export.sql_field = "select * from information_schema.tables";
@@ -5570,8 +5580,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.export = function() {
 
         var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
-
-
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
@@ -5579,7 +5587,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.export.data = data;
             console.log('export - Done: ', $scope.d.export.data);
         });
-
 
     };
 

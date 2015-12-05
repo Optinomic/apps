@@ -57,8 +57,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export = {};
     $scope.d.export.data = {};
     $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True'
-    $scope.d.export.format = 'csv'
+    $scope.d.export.header = 'True';
+    $scope.d.export.direct = 'False';
+    $scope.d.export.format = 'csv';
     $scope.d.export.file = 1;
     $scope.d.export.delimitter = ';';
     $scope.d.export.sql_field = "select * from information_schema.tables";
@@ -80,8 +81,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.export = function() {
 
         var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format);
-
-
         var aSQL = dataService.getData(api);
 
         aSQL.then(function(data) {
@@ -89,7 +88,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.export.data = data;
             console.log('export - Done: ', $scope.d.export.data);
         });
-
 
     };
 

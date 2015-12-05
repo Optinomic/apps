@@ -1406,6 +1406,7 @@ angular.module('optinomicDataModule')
             my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
             my_including_headers = my_including_headers === undefined ? 'True' : my_including_headers;
             my_format = my_format === undefined ? 'csv' : my_format;
+            my_direct = my_direct === undefined ? 'False' : my_direct;
 
 
             if (my_format === 'csv') {
@@ -1413,12 +1414,14 @@ angular.module('optinomicDataModule')
                     "query": my_query,
                     "delimiter": my_delimiter,
                     "including_headers": my_including_headers,
+                    "direct": my_direct,
                     "format": my_format
                 };
             } else {
                 var body = {
                     "query": my_query,
                     "delimiter": my_delimiter,
+                    "direct": my_direct,
                     "format": my_format
                 };
             };
