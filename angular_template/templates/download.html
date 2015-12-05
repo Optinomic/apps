@@ -16,6 +16,18 @@ include(../lib/html/optinomic/page/start.m4)
             <md-option value="2">Config</md-option>
         </md-select>
     </div>
+    <div flex>
+        <md-select ng-model="d.export.header" ng-init="True">
+            <md-option value="True">With header</md-option>
+            <md-option value="False">No header</md-option>
+        </md-select>
+    </div>
+    <div flex>
+        <md-select ng-model="d.export.format" ng-init="csv">
+            <md-option value="csv">CSV</md-option>
+            <md-option value="json">JSON</md-option>
+        </md-select>
+    </div>
     <div>
         <md-select ng-model="d.export.delimitter" ng-init=";">
             <md-option value=";">Semicolon (;)</md-option>
