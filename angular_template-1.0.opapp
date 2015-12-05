@@ -1543,15 +1543,19 @@ angular.module('optinomicDataModule')
             return apiService.get("/extra_config", {});
         };
 
-        dataService.runSQL = function(my_query, my_delimiter) {
+        dataService.runSQL = function(my_query, my_delimiter, my_including_headers, my_format) {
             //my_query = my_query === undefined ? 'select * from information_schema.tables' : my_query;
             my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
+            my_including_headers = my_including_headers === undefined ? 'True' : my_including_headers;
+            my_format = my_format === undefined ? 'csv' : my_format;
 
             var body = {
-                query: my_query,
-                delimiter: my_delimiter
+                "query": my_query,
+                "delimiter": my_delimiter,
+                "including_headers": my_including_headers,
+                "format": my_format
             };
-            console.log('runSQL: ', body);
+            console.log('(!) runSQL: ', body);
             return apiService.post("/run_sql", body);
         };
 
