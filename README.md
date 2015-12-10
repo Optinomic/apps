@@ -14,7 +14,7 @@ for you to install on your server.
 
 Apps are generated simply by typing:
 
-$ ./gen.sh
+```$ ./gen.sh```
 
 For an app defined in `some_name/base.opapp.m4`, it will generate a file like
 `some-name-2.12.opapp` where the version is stored in `some_name/VERSION`.
