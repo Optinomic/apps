@@ -22191,7 +22191,7 @@ name = Second example survey
 host = default
 
 [survey_markup my_ng_survey]
-<div ng-controller="SurveyController">
+<div>
     <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
         <div flex="50" layout="column">
             <md-card ng-hide="thankyou">
