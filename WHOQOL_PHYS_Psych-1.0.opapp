@@ -29,15 +29,12 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<h3 class="md-headline">Physische Lebensqualität</h3>
 <div ng-repeat="current_result in d.dataMain.calculations[0].calculation_results">
-    <p>{{current_result.PHYS_avg}}</p>
-    <p>{{current_result.PSYCH_avg}}</p>
+    <h3 class="md-headline">Physische Lebensqualität</h3>
+    <score-threshold score="{{current_result.PHYS_avg}}" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+    <h3 class="md-headline">Psychische Lebensqualität</h3>
+    <score-threshold score="{{current_result.PSYCH_avg}}" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
 </div>
-<p>{{d.calculations}}}</p>
-<score-threshold score="45" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
-<h3 class="md-headline">Psychische Lebensqualität</h3>
-<score-threshold score="15" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
