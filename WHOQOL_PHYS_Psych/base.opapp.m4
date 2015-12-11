@@ -64,7 +64,7 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation phys_psych_calculation javascript]
+include(calculations/phys_psych_calculation.js)
 
 
