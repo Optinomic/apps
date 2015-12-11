@@ -62,6 +62,7 @@ function main(responses) {
             PSYCH_avg = PSYCH_sum / 6;
             PSYCH_avg = (PSYCH_avg * 4 - 4) * (100 / 16);
 
+            //myResults.PSYCH_avg = Math.round(PSYCH_avg);
             myResults.PSYCH_avg = calc.roundToOne(PSYCH_avg);
 
 
