@@ -1568,8 +1568,7 @@ angular.module('optinomicDataModule')
                 };
             };
 
-
-            console.log('(!) runSQL: ', body);
+            //console.log('(!) runSQL: ', body);
             return apiService.post("/run_sql", body);
         };
 
