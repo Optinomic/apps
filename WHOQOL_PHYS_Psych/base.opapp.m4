@@ -1,12 +1,12 @@
 [module]
-id = com.optinomic.apps.template
-name = Optinomic-App (Template)
-short_description = Use this as a starting-point for your apps.
+id = com.optinomic.apps.whoqol
+name = WHOQOL - PHYS / Psych
+short_description = The World Health Organization Quality of Life (WHOQOL) - PHYS / Psych.
 version = include(VERSION)
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+Beurteilung der Lebensquälität | Dimensionen PHYS & PSYCH.
 
 [developer]
 first_name = Beat
@@ -18,27 +18,9 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
-
-[template simple_score 4 4]
+[template simple_score 6 4]
 include(templates/score.html)
 
-[template score_range 2 4]
-include(templates/range.html)
-
-[template chart_tscore 6 9]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
-
-[template data_download 6 14]
-include(templates/download.html)
 
 
 [dependencies]
@@ -53,37 +35,33 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = daily_mood
+id = WHOQOL
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = WHOQOL
 host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
+survey_id = 663948
+hash = X8X140
+pid = X8X141
+fid = X8X142
 min_questions =
 min_lastpage = 2
 
 
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
-
-
 [event]
-type = daily
-time = 19:00
+type = on_activation
 due_after = 86400
 overdue = ignore
-description = Track your daily craving.
-survey = daily_mood
+description = WHOQOL ausfüllen.
+survey = WHOQOL
+
+[event]
+type = before_exit
+days = 3
+due_after = 86400
+overdue = ignore
+description = WHOQOL ausfüllen.
+survey = WHOQOL
 
 
 [email new_event html]
