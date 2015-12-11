@@ -1,6 +1,14 @@
 function main(responses) {
     var calc = {};
 
+    // ------------------------------------------
+    // H e l p e r   -   F U N C T I O N S
+    // ------------------------------------------
+
+    calc.roundToOne = function(num) {
+        return +(Math.round(num + "e+1") + "e-1");
+    };
+
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
@@ -35,7 +43,7 @@ function main(responses) {
 
             PHYS_avg = PHYS_sum / 7;
             PHYS_avg = (PHYS_avg * 4 - 4) * (100 / 16);
-            myResults.PHYS_avg = PHYS_avg;
+            myResults.PHYS_avg = calc.roundToOne(PHYS_avg);
 
 
             // Berchnung PSYCH
@@ -54,7 +62,11 @@ function main(responses) {
             PSYCH_avg = PSYCH_sum / 6;
             PSYCH_avg = (PSYCH_avg * 4 - 4) * (100 / 16);
 
-            myResults.PSYCH_avg = PSYCH_avg;
+            myResults.PSYCH_avg = calc.roundToOne(PSYCH_avg);
+
+
+            // Something
+            // myResults.something = calc.doSomething();
 
 
             // Write Results for the Return
