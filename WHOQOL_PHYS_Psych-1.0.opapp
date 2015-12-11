@@ -29,6 +29,22 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
+<div ng-init="d.navigator = 0">
+    <md-card>
+        <md-card-title layout-margin layout-padding>
+            <md-card-title-text>
+                <span class="md-subhead">Physische Lebensqualität</span>
+                <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                <span class="md-subhead">Psychische Lebensqualität</span>
+                <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+            </md-card-title-text>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="d.navigator = d.navigator + 1"> + </md-button>
+                <md-button ng-click="d.navigator = d.navigator - 1"> - </md-button>
+            </md-card-actions>
+        </md-card-title>
+    </md-card>
+</div>
 <div ng-repeat="current_result in d.dataMain.calculations[0].calculation_results">
     <md-card>
         <md-card-title layout-margin layout-padding>
@@ -40,24 +56,6 @@ website = http://www.optinomic.com/
             </md-card-title-text>
         </md-card-title>
     </md-card>
-</div>
-<div ng-repeat="current_result in d.dataMain.calculations[0].calculation_results">
-    <div class="row m">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="t_c">
-                Physische Lebensqualität = {{current_result.PHYS_sum}}
-            </div>
-            <score-threshold score="current_result.PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
-        </div>
-    </div>
-    <div class="row m">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="t_c">
-                Psychische Lebensqualität = {{current_result.PSYCH_sum}}
-            </div>
-            <score-threshold score="current_result.PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
-        </div>
-    </div>
 </div>
             </div>
             <div ng-if="!d.haveData">
