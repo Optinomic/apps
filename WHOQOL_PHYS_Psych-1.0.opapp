@@ -21454,13 +21454,6 @@ overdue = ignore
 description = WHOQOL ausfüllen.
 survey = WHOQOL
 
-[event]
-type = before_exit
-days = 3
-due_after = 86400
-overdue = ignore
-description = WHOQOL ausfüllen.
-survey = WHOQOL
 
 
 [email new_event html]
