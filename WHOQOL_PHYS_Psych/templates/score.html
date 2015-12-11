@@ -1,9 +1,8 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="current_result in d.dataMain.calculations[0].calculation_results">
     <md-card>
-        <md-card-title>
+        <md-card-title layout-margin layout-padding>
             <md-card-title-text>
-                <span class="md-headline">WHOQOL - PHYS / Psych</span>
                 <span class="md-subhead">Physische Lebensqualität</span>
                 <score-threshold score="current_result.PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
                 <span class="md-subhead">Psychische Lebensqualität</span>
@@ -11,5 +10,23 @@ include(../lib/html/optinomic/page/start.m4)
             </md-card-title-text>
         </md-card-title>
     </md-card>
+</div>
+<div ng-repeat="current_result in d.dataMain.calculations[0].calculation_results">
+    <div class="row m">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="t_c">
+                Physische Lebensqualität = {{current_result.PHYS_sum}}
+            </div>
+            <score-threshold score="current_result.PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+        </div>
+    </div>
+    <div class="row m">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="t_c">
+                Psychische Lebensqualität = {{current_result.PSYCH_sum}}
+            </div>
+            <score-threshold score="current_result.PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+        </div>
+    </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
