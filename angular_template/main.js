@@ -224,7 +224,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'show_scores': true
         };
 
-
         // Results
         $scope.plotdata = [{
             "label": "Eintritt",
