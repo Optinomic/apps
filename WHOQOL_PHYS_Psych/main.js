@@ -60,11 +60,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var date = d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
 
-        var filled_date = {
+        d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date = {
             'filled_datestamp': date,
             'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
             'filled_time': $filter("amDateFormat")(date, 'HH:mm')
         };
+
+        console.log('setCurrentResultDate', d.dataMain.calculations[0].calculation_results[d.navigator].response.data);
 
     };
 
