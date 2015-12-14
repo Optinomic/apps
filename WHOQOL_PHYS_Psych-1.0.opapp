@@ -5163,7 +5163,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             'filled_time': $filter("amDateFormat")(date, 'HH:mm')
         };
 
-        console.log('setCurrentResultDate', d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
+        console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
 
     };
 
