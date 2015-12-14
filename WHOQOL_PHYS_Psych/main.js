@@ -55,9 +55,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.d.navigator = 0;
 
-
     $scope.setCurrentResultDate = function() {
-
         var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
 
         $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
@@ -66,8 +64,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             'filled_time': $filter("amDateFormat")(date, 'HH:mm')
         };
 
-        console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
-
+        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
     };
 
 
