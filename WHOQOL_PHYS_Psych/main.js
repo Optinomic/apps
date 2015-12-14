@@ -39,6 +39,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.functions.getAllCalculations();
 
             // Run App-Functions:
+            $scope.setCurrentResultDate();
 
 
             // Finishing: Console Info & Init = done.
@@ -53,24 +54,46 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     $scope.d.navigator = 0;
+
+
+    $scope.setCurrentResultDate = function() {
+
+        var date = d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
+
+        var filled_date = {
+            'filled_datestamp': date,
+            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
+        };
+
+    };
+
+
+
+
+
+
     $scope.prev = function() {
-        var count = d.dataMain.calculations[0].calculation_results[d.navigator].length;
+        var count = d.dataMain.calculations[0].calculation_results.length;
 
         if (count === 0) {
             $scope.d.navigator = count - 1;
         } else {
             $scope.d.navigator = $scope.d.navigator + 1
         };
+        $scope.setCurrentResultDate();
     };
 
     $scope.next = function() {
-        var count = d.dataMain.calculations[0].calculation_results[d.navigator].length;
+        var count = d.dataMain.calculations[0].calculation_results.length;
 
         if (count === $scope.d.navigator) {
             $scope.d.navigator = 0;
         } else {
             $scope.d.navigator = $scope.d.navigator + 1
         };
+        $scope.setCurrentResultDate();
+
     };
 
 
