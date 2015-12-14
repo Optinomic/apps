@@ -76,7 +76,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.prev = function() {
-        var count = d.dataMain.calculations[0].calculation_results.length;
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length;
 
         if (count === 0) {
             $scope.d.navigator = count - 1;
@@ -87,7 +87,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
     $scope.next = function() {
-        var count = d.dataMain.calculations[0].calculation_results.length;
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length;
 
         if (count === $scope.d.navigator) {
             $scope.d.navigator = 0;
