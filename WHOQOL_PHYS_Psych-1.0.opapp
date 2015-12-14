@@ -5157,13 +5157,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var date = $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
 
-        $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date = {
+        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
             'filled_datestamp': date,
             'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
             'filled_time': $filter("amDateFormat")(date, 'HH:mm')
         };
 
-        console.log('setCurrentResultDate', d.dataMain.calculations[0].calculation_results[d.navigator].response.data);
+        console.log('setCurrentResultDate', d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
 
     };
 
