@@ -48,6 +48,30 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
+    // -----------------------------------
+    // Navigation
+    // -----------------------------------
+
+    $scope.d.navigator = 0;
+    $scope.prev = function() {
+        var count = d.dataMain.calculations[0].calculation_results[d.navigator].length;
+
+        if (count === 0) {
+            $scope.d.navigator = count - 1;
+        } else {
+            $scope.d.navigator = $scope.d.navigator + 1
+        };
+    };
+
+    $scope.next = function() {
+        var count = d.dataMain.calculations[0].calculation_results[d.navigator].length;
+
+        if (count === $scope.d.navigator) {
+            $scope.d.navigator = 0;
+        } else {
+            $scope.d.navigator = $scope.d.navigator + 1
+        };
+    };
 
 
     // -----------------------------------

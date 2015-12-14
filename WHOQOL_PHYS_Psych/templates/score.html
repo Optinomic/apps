@@ -9,8 +9,8 @@ include(../lib/html/optinomic/page/start.m4)
                 <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
             </md-card-title-text>
             <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="d.navigator = d.navigator + 1"> + </md-button>
-                <md-button ng-click="d.navigator = d.navigator - 1"> - </md-button>
+                <md-button ng-click="next"> + </md-button>
+                <md-button ng-click="prev"> - </md-button>
             </md-card-actions>
         </md-card-title>
     </md-card>
