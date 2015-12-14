@@ -5155,7 +5155,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setCurrentResultDate = function() {
 
-        var date = $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
+        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
 
         $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
             'filled_datestamp': date,
