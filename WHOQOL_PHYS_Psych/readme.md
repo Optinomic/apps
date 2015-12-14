@@ -4,8 +4,8 @@
 ## Optinomic-App 
 
 
-#### Ressources
-- [angular grid](http://www.angulargrid.com/index.html)  ::  Grid used for data-views.
+#### Beschreibung
+- Beurteilung der Dimensionen - Phyisischen und Psychischen Lebensquälität - gemäss "The World Health Organization Quality of Life (WHOQOL)".
 
 
 ###Contact
