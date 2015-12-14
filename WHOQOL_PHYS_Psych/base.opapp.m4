@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Beurteilung der Lebensquälität | Dimensionen PHYS & PSYCH.
+Beurteilung der Phyisischen und Psychischen Lebensquälität.
 
 [developer]
 first_name = Beat

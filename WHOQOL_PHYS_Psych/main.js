@@ -71,23 +71,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-
-
-
-
     $scope.prev = function() {
-        var count = $scope.d.dataMain.calculations[0].calculation_results.length;
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
 
-        if (count === 0) {
-            $scope.d.navigator = count - 1;
+        if ($scope.d.navigator === 0) {
+            $scope.d.navigator = count;
         } else {
-            $scope.d.navigator = $scope.d.navigator + 1
+            $scope.d.navigator = $scope.d.navigator - 1
         };
         $scope.setCurrentResultDate();
     };
 
     $scope.next = function() {
-        var count = $scope.d.dataMain.calculations[0].calculation_results.length;
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
 
         if (count === $scope.d.navigator) {
             $scope.d.navigator = 0;
