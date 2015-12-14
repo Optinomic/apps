@@ -32,14 +32,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
-                $scope.setDataView();
+
+                // Run App-Functions:
+                $scope.setCurrentResultDate();
             };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            // Run App-Functions:
-            $scope.setCurrentResultDate();
 
 
             // Finishing: Console Info & Init = done.
@@ -92,15 +92,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
-
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
-    };
 
 
 });
