@@ -5155,9 +5155,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setCurrentResultDate = function() {
 
-        var date = d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
+        var date = $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled;
 
-        d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date = {
+        $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date = {
             'filled_datestamp': date,
             'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
             'filled_time': $filter("amDateFormat")(date, 'HH:mm')
