@@ -1,7 +1,7 @@
 [module]
 id = com.optinomic.apps.whoqol
-name = WHOQOL - PHYS / Psych
-short_description = The World Health Organization Quality of Life (WHOQOL) - PHYS / Psych.
+name = WHOQOL - Phys. / Psych.
+short_description = The World Health Organization Quality of Life (WHOQOL)
 version = include(VERSION)
 type = patient
 
@@ -22,8 +22,8 @@ website = http://www.optinomic.com/
 include(templates/score.html)
 
 
-
 [dependencies]
+
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
