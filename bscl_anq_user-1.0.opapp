@@ -1494,6 +1494,15 @@ angular.module('optinomicDataModule')
                 console.log('(!) - getSurveyResponses: ', data);
 
                 var responses = data.survey_responses;
+
+
+                return_data.survey_responses_group survey_responses_group = dataService.groupBy(responses, function(item) {
+                    return [item.event.survey_name];
+                });
+
+
+
+
                 var survey_responses_arrays = {};
                 var survey_responses_array = [];
 
@@ -1827,6 +1836,22 @@ angular.module('optinomicDataModule')
 
             return response;
         };
+
+
+
+        dataService.groupBy = function(array, f) {
+            var groups = {};
+            array.forEach(function(o) {
+                var group = JSON.stringify(f(o));
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            });
+            return Object.keys(groups).map(function(group) {
+                return groups[group];
+            })
+        }
+
+
 
         return dataService;
 
