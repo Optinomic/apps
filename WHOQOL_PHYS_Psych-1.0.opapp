@@ -1452,19 +1452,38 @@ angular.module('optinomicDataModule')
                 var responses = data.survey_responses;
 
 
-                // Group Responses by survey_name
                 return_data.survey_responses_group = dataService.groupBy(responses, function(item) {
                     return [item.event.survey_name];
                 });
 
-                // Store Group Definitons
-                return_data.survey_responses_group_definitions = [];
-                return_data.survey_responses_group.forEach(function(current_group, myindex) {
-                    return_data.survey_responses_group_definitions[myindex] = {
-                        'survey_name': current_group[0].event.survey_name
+
+
+
+                var survey_responses_arrays = {};
+                var survey_responses_array = [];
+
+                responses.forEach(function(response, myindex) {
+                    //console.log('(!!) - getSurveyResponses - response: ', response);
+
+                    dataService.getResponsesExtras(response);
+
+
+                    survey_responses_array.push(response.entity.data.response)
+
+                    survey_responses_arrays[response.event.survey_name] = {
+                        'survey': response.event.survey_name,
+                        'data': survey_responses_array
+
                     };
+
+
+                    //survey_responses_arrays[response.event.survey_name] = [];
+                    //survey_responses_arrays[response.event.survey_name].push(response.entity.data.response);
                 });
 
+                return_data.survey_responses = responses;
+                return_data.survey_responses_arrays = survey_responses_arrays;
+                return_data.survey_responses_array = [];
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
