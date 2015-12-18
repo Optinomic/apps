@@ -145,7 +145,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
         $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
+        $scope.d.timeline.data = $scope.d.dataMain.survey_responses;
 
         $scope.d.timeline.options = {
             'title': 'Suchtdruck (∑)',
@@ -296,7 +296,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
-        var resultsArray = $scope.d.dataMain.survey_responses_group[1];
+        var resultsArray = $scope.d.dataMain.survey_responses;
 
 
 
