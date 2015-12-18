@@ -351,7 +351,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             var response = result.entity.data.response;
 
             // Iterate through object properties
-            for (var property in result) {
+            for (var property in response) {
                 if (result.hasOwnProperty(property)) {
 
                     //     date_created_sort: $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
