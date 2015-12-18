@@ -1531,12 +1531,16 @@ angular.module('optinomicDataModule')
                 // Store Group Definitions with survey_name
                 return_data.survey_responses_group_definitions = [];
                 return_data.survey_responses_group.forEach(function(current_group, myindex) {
-                    return_data.survey_responses_group[myindex] = {
+
+                    var myObject = {
                         'id': myindex,
                         'survey': current_group[0].event.survey_name,
                         'description': current_group[0].event.description,
                         'module': current_group[0].event.module
                     };
+
+                    return_data.survey_responses_group[myindex].push(myObject);
+                    console.log('(!) - survey_responses_group', current_group, return_data.survey_responses_group);
                 });
 
 
@@ -1677,7 +1681,7 @@ angular.module('optinomicDataModule')
 
                                         if (all_results) {
                                             all_results.forEach(function(current_result, myindex) {
-                                                console.log('(+) Compare: ', current_result.response.data.response, response.entity.data.response);
+                                                // console.log('(+) Compare: ', current_result.response.data.response, response.entity.data.response);
 
                                                 if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.entity.data.response)) {
                                                     var myResult = current_result;
