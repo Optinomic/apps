@@ -1519,26 +1519,26 @@ angular.module('optinomicDataModule')
                 console.log('(!) - getSurveyResponses: ', data);
 
                 var responses = data.survey_responses;
-                var survey_responses_array = {};
-                var survey_responses_arrays = [];
+                var survey_responses_arrays = {};
+                var survey_responses_array = [];
 
                 responses.forEach(function(response, myindex) {
                     //console.log('(!!) - getSurveyResponses - response: ', response);
 
-                    var a = new Array();
-                    a['survey'] = response.event.survey_name;
-                    a['data'] = response.entity.data.response;
+                    dataService.getResponsesExtras(response);
 
-                    var objectToPush = {
+
+                    survey_responses_array.push(response.entity.data.response)
+
+                    survey_responses_arrays[response.event.survey_name] = {
                         'survey': response.event.survey_name,
-                        'data': response.entity.data.response
+                        'data': survey_responses_array
 
                     };
 
-                    dataService.getResponsesExtras(response);
+
                     //survey_responses_arrays[response.event.survey_name] = [];
                     //survey_responses_arrays[response.event.survey_name].push(response.entity.data.response);
-                    survey_responses_arrays.push(a);
                 });
 
                 return_data.survey_responses = responses;
