@@ -1736,7 +1736,7 @@ angular.module('optinomicDataModule')
                         'module': current_group[0].event.module
                     };
 
-                    return_data.survey_responses_group_definitions[myindex].push(myObject);
+                    return_data.survey_responses_group_definitions.push(myObject);
                 });
 
 
