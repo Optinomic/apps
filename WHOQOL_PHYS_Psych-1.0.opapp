@@ -1452,7 +1452,7 @@ angular.module('optinomicDataModule')
                 var responses = data.survey_responses;
 
 
-                return_data.survey_responses_group survey_responses_group = dataService.groupBy(responses, function(item) {
+                return_data.survey_responses_group = dataService.groupBy(responses, function(item) {
                     return [item.event.survey_name];
                 });
 
