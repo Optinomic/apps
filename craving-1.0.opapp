@@ -1717,9 +1717,10 @@ angular.module('optinomicDataModule')
 
                 var responses = data.survey_responses;
                 var survey_responses_array = [];
+
                 responses.forEach(function(response, myindex) {
                     dataService.getResponsesExtras(response);
-                    survey_responses_array.push(response.data.response);
+                    survey_responses_array[response.event.survey_name].push(response.entity.data.response);
                 });
 
                 return_data.survey_responses = responses;
@@ -2021,7 +2022,7 @@ angular.module('optinomicDataModule')
 
 
         dataService.getResponsesExtras = function(response) {
-            var resp = response.data;
+            var resp = response.entity.data;
 
             var date = resp.filled;
             resp.filled_year = $filter("amDateFormat")(date, 'YYYY');
