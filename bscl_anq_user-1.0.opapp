@@ -1509,6 +1509,7 @@ angular.module('optinomicDataModule')
 
                     var myObject = {
                         'id': myindex,
+                        'count': current_group[0].length,
                         'survey': current_group[0].event.survey_name,
                         'description': current_group[0].event.description,
                         'module': current_group[0].event.module
