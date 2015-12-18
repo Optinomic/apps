@@ -1516,6 +1516,8 @@ angular.module('optinomicDataModule')
 
             aSurveyResponses.then(function(data) {
 
+                console.log('(!!) - getSurveyResponses: ', data);
+
                 var responses = data.survey_responses;
                 var survey_responses_array = [];
                 responses.forEach(function(response, myindex) {
