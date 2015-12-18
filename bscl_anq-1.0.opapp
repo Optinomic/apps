@@ -1534,8 +1534,8 @@ angular.module('optinomicDataModule')
 
                     var myObject = {
                         'id': myindex,
-                        'count': current_group[0].length,
                         'survey': current_group[0].event.survey_name,
+                        'count': return_data.survey_responses_group[myindex].length,
                         'description': current_group[0].event.description,
                         'module': current_group[0].event.module
                     };
@@ -1543,36 +1543,6 @@ angular.module('optinomicDataModule')
                     return_data.survey_responses_group_definitions.push(myObject);
                 });
 
-
-
-
-
-
-                //var survey_responses_arrays = {};
-                //var survey_responses_array = [];
-                //
-                //responses.forEach(function(response, myindex) {
-                //    //console.log('(!!) - getSurveyResponses - response: ', response);
-                //
-                //    dataService.getResponsesExtras(response);
-                //
-                //
-                //    survey_responses_array.push(response.entity.data.response)
-                //
-                //    survey_responses_arrays[response.event.survey_name] = {
-                //        'survey': response.event.survey_name,
-                //        'data': survey_responses_array
-                //
-                //    };
-                //
-                //
-                //    //survey_responses_arrays[response.event.survey_name] = [];
-                //    //survey_responses_arrays[response.event.survey_name].push(response.entity.data.response);
-                //});
-                //
-                //return_data.survey_responses = responses;
-                //return_data.survey_responses_arrays = survey_responses_arrays;
-                //return_data.survey_responses_array = [];
 
                 // Deferred when done.
                 actions_count = actions_count + 1;

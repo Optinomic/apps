@@ -296,7 +296,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
+        var resultsArray = $scope.d.dataMain.survey_responses_group[1];
 
 
 
