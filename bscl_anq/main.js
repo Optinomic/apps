@@ -151,7 +151,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                             // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
 
                             var myLabel = '';
-                            myLabel = survey_response.data.filled_day;
+                            myLabel = survey_response.entity.data.filled_day;
 
 
                             if (survey_response.entity.data.response.q501V04 === '1') {
@@ -168,7 +168,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                             var plot_item = {
                                 "label": myLabel,
-                                "label_datestamp": survey_response.data.filled_day + ', ' + survey_response.data.filled_time,
+                                "label_datestamp": survey_response.entity.data.filled_day + ', ' + survey_response.entity.data.filled_time,
                                 "scores": $scope.getAnswer(inner_calculation)
                             }
                             $scope.d.tscore_plot.push(plot_item);
