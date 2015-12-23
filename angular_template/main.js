@@ -304,18 +304,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // If we have multiple surveys - make sure to take the right 'responses'.
         var currentResultGroup = 0;
-        $scope.d.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
+        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
             if (current_group_def.survey === 'Second example survey') {
                 currentResultGroup = current_group_def.id;
             };
         });
 
         // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
-        $scope.d.survey_responses_array = [];
-        $scope.d.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
-            $scope.d.survey_responses_array.push(current_result.entity.data.response);
+        $scope.d.dataMain.survey_responses_array = [];
+        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
+            $scope.d.dataMain.survey_responses_array.push(current_result.entity.data.response);
         });
-        var resultsArray = $scope.d.survey_responses_array;
+        var resultsArray = $scope.d.dataMain.survey_responses_array;
 
 
         // Init Responses
