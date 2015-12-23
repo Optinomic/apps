@@ -314,7 +314,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                 }
             };
 
-            console.log('(i) enrichResults - ', my_response);
+            //console.log('(i) enrichResults - ', my_response);
 
         });
 
@@ -385,7 +385,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                 };
 
                 if ((property === 'filled_time') || (property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
-                    line.width = 145;
+                    line.width = 100;
                     line.hide = true;
                 };
 

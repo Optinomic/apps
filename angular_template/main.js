@@ -315,7 +315,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
-            my_response.survey = current_result.event.survey_name;
+            my_response.survey_name = current_result.event.survey_name;
 
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
