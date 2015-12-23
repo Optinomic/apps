@@ -291,7 +291,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     //     date_created_time: $filter("amDateFormat")(date, 'HH:mm'),
 
 
-                    if ((property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
+                    if ((property === 'datestamp') || (property === 'startdate') || (property === 'submitdate') || (property === 'filled')) {
 
                         var date = new Date(result[property]);
                         var propertyName = property + '_year';

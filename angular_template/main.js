@@ -300,8 +300,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
-
-
         // If we have multiple surveys - make sure to take the right 'responses'.
         var currentResultGroup = 0;
         $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
@@ -313,7 +311,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
         $scope.d.dataMain.survey_responses_array = [];
         $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
-            $scope.d.dataMain.survey_responses_array.push(current_result.entity.data.response);
+            var my_response = current_result.entity.data.response;
+
+            // If ng-survey survey @ filled-datestamp to 'response'
+            my_response.filled = current_result.entity.data.filled;
+
+            $scope.d.dataMain.survey_responses_array.push(my_response);
         });
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
