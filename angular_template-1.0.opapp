@@ -5684,11 +5684,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
         $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses;
+        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
 
         $scope.d.timeline.options = {
             'title': 'Suchtdruck (∑)',
-            'focusField': 'dailyMood[mood]',
+            'focusField': 'score',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
