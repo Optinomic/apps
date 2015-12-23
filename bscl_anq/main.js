@@ -144,29 +144,23 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 if (calculation.calculation_name === "get_results") {
 
-
-
-
-                    //var responses = $scope.d.dataMain.survey_responses_array;
                     var inner_calculation = calculation.calculation_result;
                     if (inner_calculation) {
 
-
-
-                        if (survey_response.data.response.q501V05 === '0') {
+                        if (survey_response.entity.data.response.q501V05 === '0') {
                             // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
 
                             var myLabel = '';
                             myLabel = survey_response.data.filled_day;
 
 
-                            if (survey_response.data.response.q501V04 === '1') {
+                            if (survey_response.entity.data.response.q501V04 === '1') {
                                 myLabel = 'Eintritt';
                             };
-                            if (survey_response.data.response.q501V04 === '2') {
+                            if (survey_response.entity.data.response.q501V04 === '2') {
                                 myLabel = 'Austritt';
                             };
-                            if (survey_response.data.response.q501V04 === '3') {
+                            if (survey_response.entity.data.response.q501V04 === '3') {
                                 myLabel = 'Übertritt';
                             };
 
@@ -178,16 +172,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                                 "scores": $scope.getAnswer(inner_calculation)
                             }
                             $scope.d.tscore_plot.push(plot_item);
-
                         };
-
-
-
-
                     };
-
                 };
-
             });
         });
     };

@@ -4331,13 +4331,13 @@ angular.module('optinomicDataModule')
                         setDateInfo(scope.result_data, scope.myOptions.firstWeekDay, scope.myOptions.language);
 
                     }
-                    console.log('chartTimeline: ', scope, scope.result_data.length);
+                    //console.log('chartTimeline: ', scope, scope.result_data.length);
 
                     scope.results_grouped = GroupResults(scope.result_data);
                     scope.dateCharts = CreateChartObjects(scope.results_grouped)
                     scope.showChart(scope.myOptions.defaultChart);
 
-                    console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
+                    //console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
                 }
 
 
