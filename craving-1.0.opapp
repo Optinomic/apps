@@ -4195,7 +4195,7 @@ angular.module('optinomicDataModule')
                     scope.dateCharts = CreateChartObjects(scope.results_grouped)
                     scope.showChart(scope.myOptions.defaultChart);
 
-                    //console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
+                    console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
                 }
 
 
