@@ -4331,7 +4331,7 @@ angular.module('optinomicDataModule')
                         setDateInfo(scope.result_data, scope.myOptions.firstWeekDay, scope.myOptions.language);
 
                     }
-                    //console.log('chartTimeline: result_data', scope.result_data, scope.result_data.length);
+                    console.log('chartTimeline: result_data', scope.result_data, scope.result_data.length);
 
                     scope.results_grouped = GroupResults(scope.result_data);
                     scope.dateCharts = CreateChartObjects(scope.results_grouped)
@@ -5687,8 +5687,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
 
         $scope.d.timeline.options = {
-            'title': 'Suchtdruck (∑)',
+            'title': 'Tägliche Stimmung (∑)',
             'focusField': 'score',
+            'dateField': 'filled',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName

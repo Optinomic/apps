@@ -152,8 +152,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
 
         $scope.d.timeline.options = {
-            'title': 'Suchtdruck (∑)',
+            'title': 'Tägliche Stimmung (∑)',
             'focusField': 'score',
+            'dateField': 'filled',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
