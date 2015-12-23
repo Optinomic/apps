@@ -323,7 +323,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         // Loop trough every result
         surveyResults.forEach(function(result) {
 
-            var my_response = result.entity.data.response;
+            var my_response = result;
 
             // Iterate through object properties
             for (var property in my_response) {
