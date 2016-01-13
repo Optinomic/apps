@@ -32,7 +32,7 @@ website = http://www.optinomic.com/
 <div ng-if="d.appState === 'show'">
     <div ng-repeat="entry in d.historyEntrys">
         <h3 class="md-headline">{{entry.datum}}</h3>
-        <p class="md-caption">{{$index}} | {{entry.dauer}} | {{entry.user}}</p>
+        <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
         <p class="flow-text">{{entry.verlauf}}
             <md-button ng-click="entryEdit($index)">Edit</md-button>
         </p>
@@ -5406,10 +5406,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.entryEdit = function(currentIndex) {
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.historyEditEntry = $scope.d.historyEntrys[currentIndex];
+        $scope.d.historyEditEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyEditEntryID = currentIndex;
-        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
         $scope.d.appState = 'edit';
+
+        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
     };
 
     $scope.entryDelete = function() {

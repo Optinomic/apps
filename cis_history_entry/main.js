@@ -68,10 +68,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.entryEdit = function(currentIndex) {
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.historyEditEntry = $scope.d.historyEntrys[currentIndex];
+        $scope.d.historyEditEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyEditEntryID = currentIndex;
-        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
         $scope.d.appState = 'edit';
+
+        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
     };
 
     $scope.entryDelete = function() {
