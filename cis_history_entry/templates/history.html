@@ -1,10 +1,32 @@
 include(../lib/html/optinomic/page/start.m4)
-<p></p>
-<div ng-repeat="entry in d.historyEntrys">
-    <h3 class="md-headline">{{entry.datum}}</h3>
-    <p class="flow-text">{{entry.verlauf}}</p>
+<div ng-if="d.appState === 'show'">
+    <div ng-repeat="entry in d.historyEntrys">
+        <h3 class="md-headline">{{entry.datum}}</h3>
+        <p class="flow-text">{{entry.verlauf}}</p>
+    </div>
+</div>
+<div ng-if="d.appState === 'new'">
+    <div layout-gt-sm="row" layout-padding>
+        <md-input-container>
+            <label>datum</label>
+            <input ng-model="d.historyNewEntry.datum">
+        </md-input-container>
+        <md-input-container>
+            <label>dauer</label>
+            <input ng-model="d.historyNewEntry.dauer">
+        </md-input-container>
+        <md-input-container>
+            <label>user</label>
+            <input ng-model="d.historyNewEntry.user">
+        </md-input-container>
+    </div>
+    <md-input-container class="md-block">
+        <label>Verlauf</label>
+        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="20"></textarea>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
 </div>
 <div>
-    <md-button class="md-raised" ng-click="putHisoryPost()">Neu</md-button>
+    <md-button class="md-raised" ng-click="entryNew()">Neu</md-button>
 </div>
 include(../lib/html/optinomic/page/end.m4)

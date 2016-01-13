@@ -1892,7 +1892,6 @@ angular.module('optinomicDataModule')
 
             aUsers.then(function(data) {
 
-
                 // All Users
                 var users = data.users;
                 return_data.users = {};

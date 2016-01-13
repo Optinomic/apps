@@ -30,7 +30,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Run App-Functions
             $scope.appInit();
-            $scope.getHisoryPosts();
+            $scope.getHisoryEntrys();
 
 
             // Finishing: Console Info & Init = done.
@@ -44,18 +44,44 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
-        $scope.d.nodeTree = 'gaga';
         $scope.d.haveData = true;
+        $scope.d.appState = 'show'
     };
 
 
-    $scope.getHisoryPosts = function() {
+
+    $scope.entryCancel = function() {
+        $scope.d.appState = 'show'
+    };
+
+    $scope.entryNew = function() {
+        $scope.d.appState = 'new'
+
+        // Push new Entry and Save
+        $scope.d.historyNewEntry = {
+            datum: new Date(),
+            dauer: 12,
+            user: $scope.d.dataMain.users.current.id,
+            verlauf: "Dies ist ein neuer Testeintrag bla bla bla.."
+        };
+    };
+
+    $scope.entryEdit = function() {
+        $scope.d.appState = 'edit'
+    };
+
+    $scope.entryDelete = function() {
+        $scope.d.appState = 'show'
+    };
+
+
+    $scope.getHisoryEntrys = function() {
 
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
             // Create Array if not already exists.
             $scope.d.historyEntrys = data === undefined ? [] : data;
-            console.log('(+) getHisoryPosts ', data, $scope.d.historyEntrys);
+            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
         });
 
     };
@@ -65,24 +91,19 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         console.log('RUN: putHisoryPost');
 
         // Get Current Entrys
-        $scope.getHisoryPosts();
+        $scope.getHisoryEntrys();
 
 
         // Push new Entry and Save
-        var entry = {
-            datum: "21.5.1973",
-            dauer: 12,
-            verlauf: "Dies ist ein Testeintrag bla bla bla.."
-        };
 
-        $scope.d.historyEntrys.push(entry);
+        $scope.d.historyEntrys.push($scope.d.historyNewEntry);
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
-            console.log('(+) getHisoryPosts ', data);
+            console.log('(+) putHisoryPost ', data);
 
             // Get Current Entrys
-            $scope.getHisoryPosts();
+            $scope.getHisoryEntrys();
         });
 
 
