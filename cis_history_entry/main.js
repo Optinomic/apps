@@ -67,8 +67,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
     $scope.entryEdit = function(currentIndex) {
-        console.log('entryEdit: ', currentIndex);
+        // Store current entry - just for, do not save if 'cancel'.
+        $scope.d.historyEditEntry = $scope.d.historyEntrys[currentIndex];
         $scope.d.historyEditEntryID = currentIndex;
+        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
         $scope.d.appState = 'edit';
     };
 
@@ -103,6 +105,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
             $scope.d.historyEntrys.push($scope.d.historyNewEntry);
+        };
+
+        // Save edited entry.
+        if ($scope.d.appState === 'edit') {
+            $scope.d.historyEntrys[$scope.d.historyEditEntryID] = $scope.d.historyEditEntry;
         };
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
