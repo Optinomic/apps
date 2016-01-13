@@ -9,8 +9,8 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div ng-if="d.appState === 'edit'">
     <md-input-container class="md-block">
-        <label>EDIT - Verlauf</label>
-        <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
+        <label>EDIT - Verlauf: {{d.historyEditEntryID}}</label>
+        <textarea ng-model="d.historyEntrys[d.historyEditEntryID].verlauf" columns="1" rows="10"></textarea>
     </md-input-container>
     <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 </div>
