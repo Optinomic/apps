@@ -27,11 +27,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            $scope.d.haveData = true;
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
-                $scope.d.haveData = true;
 
 
                 // Run App-Functions:
