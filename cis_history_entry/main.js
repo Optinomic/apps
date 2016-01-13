@@ -54,7 +54,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
             // Create Array if not already exists.
-            $scope.d.historyEntrys = data.historyEntrys === undefined ? [] : data.historyEntrys;
+            $scope.d.historyEntrys = data === undefined ? [] : data;
             console.log('(+) getHisoryPosts ', data, $scope.d.historyEntrys);
         });
 
