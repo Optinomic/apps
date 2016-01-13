@@ -45,8 +45,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
         $scope.d.nodeTree = 'gaga';
-        $scope.d.haveData = true;
         $scope.d.appState = 'show'
+        $scope.d.haveData = true;
     };
 
 
@@ -82,7 +82,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         api_call.then(function(data) {
             // Create Array if not already exists.
             $scope.d.historyEntrys = data === undefined ? [] : data;
-            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
+            console.log('(+) getHisoryEntrys ', data, $scope.d.historyEntrys);
         });
 
     };
@@ -103,6 +103,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('(+) putHisoryPost ', data);
 
             // Update Entrys
+            $scope.appInit();
             $scope.getHisoryEntrys();
         });
 
