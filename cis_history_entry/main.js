@@ -80,7 +80,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
             // Create Array if not already exists.
-            $scope.d.historyEntrys = data === {} ? [] : data;
+            if (dataService.isEmpty(data)) {
+                $scope.d.historyEntrys = [];
+            } else {
+                $scope.d.historyEntrys = data;
+            };
             console.log('(+) getHisoryEntrys ', data, $scope.d.historyEntrys);
         });
 
