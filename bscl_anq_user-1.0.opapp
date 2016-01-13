@@ -1166,6 +1166,10 @@ angular.module('optinomicDataModule')
         // API - Functions
         // -------------------------------------------------------------------------
 
+        dataService.getUsers = function() {
+            return apiService.get("/users", {});
+        };
+
         dataService.getSurveyResponses = function() {
             return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + helpers.getAppID(), {});
         };
@@ -1255,7 +1259,7 @@ angular.module('optinomicDataModule')
         // -------------------------------------------------------------------------
 
         dataService.getPatientID = function() {
-            return helpers.getPatientID();
+            return parseInt(helpers.getPatientID());
         };
 
         dataService.getToken = function() {
@@ -1275,7 +1279,7 @@ angular.module('optinomicDataModule')
         };
 
         dataService.getUserID = function() {
-            return helpers.getUserID();
+            return parseInt(helpers.getUserID());
         };
 
 
@@ -1502,7 +1506,7 @@ angular.module('optinomicDataModule')
         dataService.getMainAppData = function() {
 
             // Actions
-            var actions = 6;
+            var actions = 7;
             var actions_count = 0;
 
             // Init
@@ -1525,6 +1529,8 @@ angular.module('optinomicDataModule')
             return_data.params.app_id = app_identifier;
             return_data.params.api_url = dataService.getApiURL();
             //console.log('Parameters', return_data.params);
+
+
 
             // ------------------------------------------------
             // Action 1:  Survey Responses
@@ -1852,6 +1858,32 @@ angular.module('optinomicDataModule')
 
 
 
+            // ------------------------------------------------
+            // Action 7:  All Users
+            // ------------------------------------------------
+
+            api = dataService.getUsers();
+            var aUsers = dataService.getData(api);
+
+            aUsers.then(function(data) {
+
+                //console.log('(!) - getSurveyResponses: ', data);
+
+                // All Users
+                return_data.users = {};
+                return_data.users.all = data.users;
+
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(return_data);
+                };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
 
 
             return deferred.promise;
