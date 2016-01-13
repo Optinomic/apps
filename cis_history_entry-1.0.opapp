@@ -32,8 +32,16 @@ website = http://www.optinomic.com/
 <div ng-if="d.appState === 'show'">
     <div ng-repeat="entry in d.historyEntrys">
         <h3 class="md-headline">{{entry.datum}}</h3>
+        <p class="md-caption">{{$index}}</p>
+        <md-button ng-click="entryEdit($index)">Edit</md-button>
         <p class="flow-text">{{entry.verlauf}}</p>
     </div>
+</div>
+<div ng-if="d.appState === 'edit'">
+    <md-input-container class="md-block">
+        <label>EDIT - Verlauf</label>
+        <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
+    </md-input-container>
 </div>
 <div ng-if="d.appState === 'new'">
     <div layout-gt-sm="row" layout-padding>
