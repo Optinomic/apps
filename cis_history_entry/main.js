@@ -80,10 +80,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) getHisoryPosts ', data);
+
+            // Get Current Entrys
+            $scope.getHisoryPosts();
         });
 
-        // Get Current Entrys
-        $scope.getHisoryPosts();
+
     };
 
 
