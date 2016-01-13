@@ -5365,7 +5365,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
-        $scope.d.nodeTree = 'gaga';
         $scope.d.appState = 'show'
         $scope.d.haveData = true;
     };
@@ -5421,16 +5420,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
-            console.log('(+) putHisoryPost ', data);
+            console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
             // Update Entrys
             $scope.appInit();
             $scope.getHisoryEntrys();
         });
 
-
     };
-
 
 
 });
