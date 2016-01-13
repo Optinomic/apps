@@ -48,7 +48,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-input-container ng-if="d.historyNewEntry.tarmed_gruppe">
             <label>KAPITEL</label>
             <md-select ng-model="d.historyNewEntry.tarmed_kapitel" aria-label="TARMED Kapitel">
-                <md-option ng-repeat="kapitel in d.tarmed[d.historyNewEntry.tarmed]" value="{{kapitel.Code}}">
+                <md-option ng-repeat="kapitel in d.tarmed[d.historyNewEntry.tarmed].Kapitel" value="{{kapitel.Code}}">
                     {{kapitel.Name}} ({{kapitel.Code}})
                 </md-option>
             </md-select>
@@ -56,7 +56,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-input-container ng-if="d.historyNewEntry.tarmed_kapitel">
             <label>KAPITEL</label>
             <md-select ng-model="d.historyNewEntry.tarmed_tarifpositions" aria-label="TARMED Tarifpositions">
-                <md-option ng-repeat="tarifpos in d.tarmed[d.historyNewEntry.tarmed].Tarifposition" value="{{kapitel.Code}}">
+                <md-option ng-repeat="tarifpos in d.tarmed[d.historyNewEntry.tarmed].Kapitel.Tarifposition" value="{{kapitel.Code}}">
                     {{tarifpos.Name}} ({{tarifpos.Code}})
                 </md-option>
             </md-select>
