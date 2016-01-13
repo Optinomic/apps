@@ -1822,13 +1822,7 @@ angular.module('optinomicDataModule')
 
             aPromise.then(function(data) {
 
-
-                if (dataService.isEmpty(data)) {
-                    // Possible Empty-Default
-                    return_data = {};
-                } else {
-                    return_data = data;
-                };
+                return_data = data[node_tree] === undefined ? {} : data[node_tree];
 
                 deferred.resolve(return_data);
 
@@ -1862,7 +1856,7 @@ angular.module('optinomicDataModule')
                 };
 
 
-                console.log('(?)', node_tree, full_settings, json_value);
+                // console.log('(?)', node_tree, full_settings, json_value);
 
                 var api = dataService.putPatientAnnotations(full_settings);
                 var aPromise = dataService.getData(api);
