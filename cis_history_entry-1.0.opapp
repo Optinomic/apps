@@ -5365,6 +5365,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
+        $scope.d.nodeTree = 'gaga';
         $scope.d.haveData = true;
         $scope.d.appState = 'show'
     };
@@ -5378,7 +5379,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.entryNew = function() {
         $scope.d.appState = 'new'
 
-        // Push new Entry and Save
+        // Init New Entry
         $scope.d.historyNewEntry = {
             datum: new Date(),
             dauer: 12,
@@ -5416,14 +5417,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // Push new Entry and Save
-
         $scope.d.historyEntrys.push($scope.d.historyNewEntry);
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) putHisoryPost ', data);
 
-            // Get Current Entrys
+            // Update Entrys
             $scope.getHisoryEntrys();
         });
 
