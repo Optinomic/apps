@@ -67,7 +67,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
     $scope.entryEdit = function(currentIndex) {
-        $scope.d.historyEditEntry = $scope.d.historyEntrys[currentIndex];
+        console.log('entryEdit: ', currentIndex);
+        $scope.d.historyEditEntryID = currentIndex;
         $scope.d.appState = 'edit';
     };
 

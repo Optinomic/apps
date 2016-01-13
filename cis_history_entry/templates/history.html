@@ -2,9 +2,10 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.appState === 'show'">
     <div ng-repeat="entry in d.historyEntrys">
         <h3 class="md-headline">{{entry.datum}}</h3>
-        <p class="md-caption">{{$index}}</p>
-        <md-button ng-click="entryEdit($index)">Edit</md-button>
-        <p class="flow-text">{{entry.verlauf}}</p>
+        <p class="md-caption">{{$index}} | {{entry.dauer}} | {{entry.user}}</p>
+        <p class="flow-text">{{entry.verlauf}}
+            <md-button ng-click="entryEdit($index)">Edit</md-button>
+        </p>
     </div>
 </div>
 <div ng-if="d.appState === 'edit'">
