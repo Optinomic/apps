@@ -43,7 +43,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentry';
+        $scope.d.nodeTree = 'hisoryentrys';
         $scope.d.haveData = true;
     };
 
