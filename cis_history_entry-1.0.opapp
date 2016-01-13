@@ -31,11 +31,16 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <div ng-repeat="entry in d.historyEntrys">
-    <h3 class="md-headline">{{entry.datum}}</h3>
-    <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
-    <p class="flow-text">{{entry.verlauf}}
-        <md-button ng-click="entryEdit($index)">Edit</md-button>
-    </p>
+    <div layout="row" layout-xs="column" layout-align="start center">
+        <div flex>
+            <h3 class="md-headline">{{entry.datum}}</h3>
+            <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
+            <p class="flow-text">{{entry.verlauf}}</p>
+        </div>
+        <div>
+            <md-button ng-click="entryEdit($index)">Edit</md-button>
+        </div>
+    </div>
 </div>
 
 </div>
