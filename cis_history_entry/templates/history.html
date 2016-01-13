@@ -1,73 +1,12 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.appState === 'show'">
-    <div ng-repeat="entry in d.historyEntrys">
-        <h3 class="md-headline">{{entry.datum}}</h3>
-        <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
-        <p class="flow-text">{{entry.verlauf}}
-            <md-button ng-click="entryEdit($index)">Edit</md-button>
-        </p>
-    </div>
+    include(templates/verlaufseintrag_all.html)
 </div>
 <div ng-if="d.appState === 'edit'">
-    <h3 class="md-headline">Verlaufseintrag bearbeiten</h3>
-    <md-input-container class="md-block">
-        <label>EDIT - Verlauf</label>
-        <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
-    </md-input-container>
-    <pre>
-    	{{d.historyEditEntry}}
-    </pre>
-    <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
-    <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
+    include(templates/verlaufseintrag_edit.html)
 </div>
 <div ng-if="d.appState === 'new'">
-    <h3 class="md-headline">Neuer Verlaufseintrag</h3>
-    <div layout-gt-sm="row" layout-padding>
-        <md-input-container>
-            <label>datum</label>
-            <input ng-model="d.historyNewEntry.datum">
-        </md-input-container>
-        <md-input-container>
-            <label>dauer</label>
-            <input ng-model="d.historyNewEntry.dauer">
-        </md-input-container>
-        <md-input-container>
-            <label>user</label>
-            <input ng-model="d.historyNewEntry.user">
-        </md-input-container>
-    </div>
-    <div layout-gt-sm="row" layout-padding>
-        <md-input-container>
-            <label>TARMED</label>
-            <md-select ng-model="d.historyNewEntry.tarmed_gruppe" aria-label="TARMED">
-                <md-option ng-repeat="gruppe in d.tarmed" value="{{$index}}">
-                    {{gruppe.Name}} ({{gruppe.Code}})
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container ng-if="d.historyNewEntry.tarmed_gruppe">
-            <label>KAPITEL</label>
-            <md-select ng-model="d.historyNewEntry.tarmed_kapitel" aria-label="TARMED Kapitel">
-                <md-option ng-repeat="kapitel in d.tarmed[d.historyNewEntry.tarmed_gruppe].Kapitel" value="{{$index}}">
-                    {{kapitel.Name}} ({{kapitel.Code}})
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container ng-if="d.historyNewEntry.tarmed_kapitel">
-            <label>KAPITEL</label>
-            <md-select ng-model="d.historyNewEntry.tarmed_tarifpositions" aria-label="TARMED Tarifpositions">
-                <md-option ng-repeat="tarifpos in d.tarmed[d.historyNewEntry.tarmed_gruppe].Kapitel[d.historyNewEntry.tarmed_kapitel].Tarifposition" value="{{tarifpos.Code}}">
-                    {{tarifpos.Name}} ({{tarifpos.Code}})
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <md-input-container class="md-block">
-        <label>Verlauf</label>
-        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-    </md-input-container>
-    <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
-    <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
+    include(templates/verlaufseintrag_new.html)
 </div>
 <div ng-if="d.appState === 'show'">
     <md-button class="md-raised" ng-click="entryNew()">Neu</md-button>

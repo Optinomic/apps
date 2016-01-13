@@ -1,0 +1,10 @@
+<h3 class="md-headline">Verlaufseintrag bearbeiten</h3>
+<md-input-container class="md-block">
+    <label>EDIT - Verlauf</label>
+    <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
+</md-input-container>
+<pre>
+    	{{d.historyEditEntry}}
+    </pre>
+<md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
+<md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>

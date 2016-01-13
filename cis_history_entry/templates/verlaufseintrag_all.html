@@ -1,0 +1,7 @@
+<div ng-repeat="entry in d.historyEntrys">
+    <h3 class="md-headline">{{entry.datum}}</h3>
+    <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
+    <p class="flow-text">{{entry.verlauf}}
+        <md-button ng-click="entryEdit($index)">Edit</md-button>
+    </p>
+</div>
