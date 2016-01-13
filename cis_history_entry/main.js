@@ -51,11 +51,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.entryCancel = function() {
-        $scope.d.appState = 'show'
+        $scope.d.appState = 'show';
     };
 
     $scope.entryNew = function() {
-        $scope.d.appState = 'new'
+        $scope.d.appState = 'new';
 
         // Init New Entry
         $scope.d.historyNewEntry = {
@@ -66,12 +66,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
     };
 
-    $scope.entryEdit = function() {
-        $scope.d.appState = 'edit'
+    $scope.entryEdit = function(currentIndex) {
+        $scope.d.historyEditEntry = $scope.d.historyEntrys[currentIndex];
+        $scope.d.appState = 'edit';
     };
 
     $scope.entryDelete = function() {
-        $scope.d.appState = 'show'
+        $scope.d.appState = 'show';
     };
 
 
@@ -98,8 +99,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.getHisoryEntrys();
 
 
-        // Push new Entry and Save
-        $scope.d.historyEntrys.push($scope.d.historyNewEntry);
+        // Push new Entry if 'new'
+        if ($scope.d.appState === 'new') {
+            $scope.d.historyEntrys.push($scope.d.historyNewEntry);
+        };
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {

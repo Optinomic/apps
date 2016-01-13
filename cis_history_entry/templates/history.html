@@ -12,6 +12,7 @@ include(../lib/html/optinomic/page/start.m4)
         <label>EDIT - Verlauf</label>
         <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
     </md-input-container>
+    <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 </div>
 <div ng-if="d.appState === 'new'">
     <div layout-gt-sm="row" layout-padding>
@@ -32,6 +33,7 @@ include(../lib/html/optinomic/page/start.m4)
         <label>Verlauf</label>
         <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
     </md-input-container>
+    <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
     <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
 </div>
 <div ng-if="d.appState === 'show'">
