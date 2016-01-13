@@ -44,6 +44,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
+        $scope.d.nodeTree = 'gaga';
         $scope.d.haveData = true;
     };
 
@@ -60,6 +61,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.putHisoryPost = function() {
 
         console.log('RUN: putHisoryPost');
+
+        // Get Current Entrys
+        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        api_call.then(function(data) {
+            console.log('(+) getHisoryPosts ', data);
+            $scope.d.historyEntrys = data;
+        });
+
+
 
         var entry = {
             datum: "21.5.1973",
