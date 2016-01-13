@@ -1809,12 +1809,21 @@ angular.module('optinomicDataModule')
 
             aUsers.then(function(data) {
 
-                //console.log('(!) - getSurveyResponses: ', data);
 
                 // All Users
+                var users = data.users;
                 return_data.users = {};
-                return_data.users.all = data.users;
+                return_data.users.all = users;
 
+                users.forEach(function(user, myindex) {
+                    user.data.uid = user.id;
+                    user.data = dataService.createUserExtras(user.data);
+
+                    // Store Current User
+                    if (user.id === dataService.getUserID) {
+                        return_data.users.current = user;
+                    };
+                });
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
@@ -1846,7 +1855,52 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.createUserExtras = function(user) {
+            user.age = $filter('dateToAge')(user.birthday);
+            user.birthdate = user.birthday;
+            //user.birthdate = $filter('date')(user.birthday);
+            //user.birthdate = $filter("amDateFormat")(date, 'YYYY-MM-DD');
+            //user.birthday_date = moment(user.birthday).toDate();
 
+            user.extras = {};
+            user.extras.age = user.age;
+            user.extras.birthdate = $filter("amDateFormat")(user.birthday, 'YYYY-MM-DD');
+            user.extras.birthday_date = moment(user.extras.birthdate).toDate();
+            user.extras.birthday_age = $filter("amDateFormat")(user.birthday, 'DD.MM.YYYY') + ' | ' + user.age;
+            user.extras.name = user.last_name + ' ' + user.first_name;
+
+
+            $translate(user.gender).then(function(translated) {
+                user.extras.ansprache = translated;
+            });
+
+
+            user.extras.full_name = user.last_name + ' ' + user.first_name;
+            if (user.initials) {
+                user.extras.full_name = user.extras.full_name + ' (' + user.initials + ')'
+            };
+
+            $translate(user.role).then(function(translated) {
+                user.extras.infoline = translated + ' - ' + user.description;
+            });
+
+
+
+            // -----------------------------------
+            // Female = Pink | Male = Blue
+            // -----------------------------------
+            var myColor = "md-accent";
+            var myColorAccent = "md-warn";
+            if (user.gender === "female") {
+                myColor = "md-warn";
+                myColorAccent = "md-accent";
+            }
+            user.color = {};
+            user.color.color = myColor;
+            user.color.accent = myColorAccent;
+
+            return user;
+        };
 
         //------------------------------------------
         // Patient - Annotations
