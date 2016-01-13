@@ -29,7 +29,11 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<p>Verlauf</p>
+<p></p>
+<div ng-repeat="entry in d.historyEntrys">
+    <h3 class="md-headline">{{entry.datum}}</h3>
+    <p class="flow-text">{{entry.verlauf}}</p>
+</div>
 <div>
     <md-button class="md-raised" ng-click="putHisoryPost()">Neu</md-button>
 </div>
