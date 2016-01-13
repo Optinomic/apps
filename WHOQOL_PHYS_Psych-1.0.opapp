@@ -5426,10 +5426,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 body,
 html {
-    height: 100%;
     color: rgba(0, 0, 0, .87);
     background: #fff;
-    position: relative
 }
 
 body {

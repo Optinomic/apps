@@ -5665,10 +5665,8 @@ app.controller('AppCtrl', function($scope, simpleStatistics, dataService, scopeD
 
 body,
 html {
-    height: 100%;
     color: rgba(0, 0, 0, .87);
     background: #fff;
-    position: relative
 }
 
 body {
