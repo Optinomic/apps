@@ -1874,42 +1874,30 @@ angular.module('optinomicDataModule')
         //------------------------------------------
 
 
-        dataService.getPatientAnnotationsData = function() {
+        dataService.getPatientAnnotationsData = function(node_tree) {
             var deferred = $q.defer();
             var return_data = {};
 
 
             var api = dataService.getPatientAnnotations();
-            var aPromise = getDataService.getData(api);
+            var aPromise = dataService.getData(api);
 
             aPromise.then(function(data) {
 
 
-                if (annotationsService.isEmpty(data)) {
-                    var cloneDefault = JSON.parse(JSON.stringify(optinomicAppData.default.settings.user));
-                    return_data = cloneDefault;
-                    //console.log('(!) get default settings for user ', user_id);
+                if (dataService.isEmpty(data)) {
+                    // Possible Empty-Default
+                    return_data = {};
                 } else {
                     return_data = data;
-
-                    return_data.patientListFilter = return_data.patientListFilter === undefined ? {} : return_data.patientListFilter;
-
-                    if (annotationsService.isEmpty(return_data.patientListFilter)) {
-                        var cloneDefaultFilter = JSON.parse(JSON.stringify(optinomicAppData.default.settings.user.patientListFilter));
-                        return_data.patientListFilter = cloneDefaultFilter;
-                        //console.log('(!) get fresh patientListFilter settings', return_data.patientListFilter, optinomicAppData.default.settings.user.patientListFilter);
-                    };
-
-                    //console.log('(-) get user settings', return_data);
                 };
 
-                //console.log('(=) deferred.resolved - user_settings', return_data);
                 deferred.resolve(return_data);
 
             }, function(error) {
                 // Error
                 deferred.reject(return_data);
-                console.log('ERROR: getUserAnnotations', error);
+                console.log('ERROR: getPatientAnnotationsData', error);
             });
 
             return deferred.promise;
@@ -1917,12 +1905,11 @@ angular.module('optinomicDataModule')
 
         dataService.putPatientAnnotationsData = function(node_tree, json_value) {
 
-            var user_id = sessionService.getUserID();
             var deferred = $q.defer();
             var return_data = {};
 
 
-            var mySettings = annotationsService.getUserSettings(user_id);
+            var mySettings = dataService.getPatientAnnotations();
             mySettings.then(function(current_data) {
 
 
@@ -1939,19 +1926,19 @@ angular.module('optinomicDataModule')
 
                 console.log('(?)', node_tree, full_settings, json_value);
 
-                var api = annotationsService.putUserAnnotations(user_id, full_settings);
-                var aPromise = getDataService.getData(api);
+                var api = dataService.putPatientAnnotations(full_settings);
+                var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
 
-                    console.log('(+) putUserSettings', data, full_settings);
+                    console.log('(+) putPatientAnnotationsData', data, full_settings);
 
                     deferred.resolve(return_data);
 
                 }, function(error) {
                     // Error
                     deferred.reject(error);
-                    console.log('ERROR: putUserSettings', error);
+                    console.log('ERROR: putPatientAnnotationsData', error);
                 });
 
             });
