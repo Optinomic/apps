@@ -31,9 +31,9 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <md-card ng-repeat="entry in d.historyEntrys">
+    <md-card>
         <md-card-content>
-            <div layout="column" layout-gt-xs="row">
+            <div ng-repeat="entry in d.historyEntrys" layout="column" layout-gt-xs="row">
                 <div flex>
                     <h3 class="md-headline">{{entry.datum}}</h3>
                     <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
@@ -46,6 +46,17 @@ website = http://www.optinomic.com/
         </md-card-content>
     </md-card>
 </md-content>
+<div layout="row">
+    <div flex="20">
+        [flex="20"]
+    </div>
+    <div flex="70">
+        [flex="70"]
+    </div>
+    <div flex hide-sm hide-xs>
+        [flex]
+    </div>
+</div>
 
 </div>
 <div ng-if="d.appState === 'edit'">
