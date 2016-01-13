@@ -5166,15 +5166,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.getPatientAnnotations = function() {
         var patient_id = $scope.d.dataMain.params.PID;
-        apiStr = '/patients/' + patient_id + '/annotations';
+        var apiStr = '/patients/' + patient_id + '/annotations';
         return apiService.get(apiStr, {});
     };
 
     $scope.putPatientAnnotations = function(json_value) {
         var patient_id = $scope.d.dataMain.params.PID;
-
-        apiStr = '/patients/' + patient_id + '/annotations';
-
+        var apiStr = '/patients/' + patient_id + '/annotations';
         var body = {
             "value": json_value
         };
