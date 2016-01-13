@@ -1274,6 +1274,10 @@ angular.module('optinomicDataModule')
             return helpers.getApiURL();
         };
 
+        dataService.getUserID = function() {
+            return helpers.getUserID();
+        };
+
 
         dataService.groupBy = function(array, f) {
             var groups = {};
@@ -1515,6 +1519,7 @@ angular.module('optinomicDataModule')
 
             return_data.params = {};
             return_data.params.PID = dataService.getPatientID();
+            return_data.params.userID = dataService.getUserID();
             return_data.params.token = dataService.getToken();
             return_data.params.app_name = dataService.getAppName();
             return_data.params.app_id = app_identifier;
@@ -1926,8 +1931,7 @@ angular.module('optinomicDataModule')
 
                 aPromise.then(function(data) {
 
-                    console.log('(+) putPatientAnnotationsData', data, full_settings);
-
+                    //console.log('(+) putPatientAnnotationsData', data, full_settings);
                     deferred.resolve(return_data);
 
                 }, function(error) {
