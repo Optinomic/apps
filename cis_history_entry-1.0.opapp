@@ -5136,6 +5136,19 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.haveData = true;
 
 
+            $scope.getPatientAnnotations()
+
+
+            var api_call = $scope.getPatientAnnotations();
+            api_call.success(function(data) {
+                console.log('(+) getPatientAnnotations ', data);
+            });
+            api_call.error(function(data) {
+                console.log('(!) getPatientAnnotations - Error ', data);
+
+            });
+
+
 
 
             // Finishing: Console Info & Init = done.
@@ -5144,6 +5157,29 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
     };
     $scope.loadMainData();
+
+
+    // -----------------------------------
+    // Annotations
+    // -----------------------------------
+
+
+    $scope.getPatientAnnotations = function() {
+        var patient_id = $scope.d.dataMain.params.PID;
+        apiStr = '/patients/' + patient_id + '/annotations';
+        return apiService.get(apiStr, {});
+    };
+
+    $scope.putPatientAnnotations = function(json_value) {
+        var patient_id = $scope.d.dataMain.params.PID;
+
+        apiStr = '/patients/' + patient_id + '/annotations';
+
+        var body = {
+            "value": json_value
+        };
+        return apiService.put(apiStr, body);
+    };
 
 
 
