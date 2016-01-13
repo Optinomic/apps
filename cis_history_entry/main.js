@@ -51,12 +51,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.getHisoryPosts = function() {
 
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
-        api_call.success(function(data) {
+        api_call.then(function(data) {
             console.log('(+) getHisoryPosts ', data);
-        });
-        api_call.error(function(data) {
-            console.log('(!) getHisoryPosts - Error ', data);
-
         });
 
     };
@@ -72,14 +68,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, entry);
-        api_call.success(function(data) {
+        api_call.then(function(data) {
             console.log('(+) getHisoryPosts ', data);
         });
-        api_call.error(function(data) {
-            console.log('(!) getHisoryPosts - Error ', data);
-
-        });
-
     };
 
 
