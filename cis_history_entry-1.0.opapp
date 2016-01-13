@@ -5265,7 +5265,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         api_call.then(function(data) {
             // Create Array if not already exists.
             $scope.d.historyEntrys = data.historyEntrys === undefined ? [] : data.historyEntrys;
-            console.log('(+) getHisoryPosts ', data, $scope.d.entrys.historyEntrys);
+            console.log('(+) getHisoryPosts ', data, $scope.d.historyEntrys);
         });
 
     };
@@ -5275,26 +5275,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         console.log('RUN: putHisoryPost');
 
         // Get Current Entrys
-        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
-        api_call.then(function(data) {
-            console.log('(+) getHisoryPosts ', data);
-            $scope.d.entrys = data;
-        });
+        $scope.getHisoryPosts();
 
 
-
+        // Push new Entry and Save
         var entry = {
             datum: "21.5.1973",
             dauer: 12,
             verlauf: "Dies ist ein Testeintrag bla bla bla.."
         };
 
-        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, entry);
+        $scope.d.historyEntrys.push(entry);
+
+        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) getHisoryPosts ', data);
         });
-    };
 
+        // Get Current Entrys
+        $scope.getHisoryPosts();
+    };
 
 
 
