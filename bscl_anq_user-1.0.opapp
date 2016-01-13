@@ -1232,6 +1232,23 @@ angular.module('optinomicDataModule')
             return apiService.get(apiStr, {});
         };
 
+        dataService.getPatientAnnotations = function() {
+            var patient_id = dataService.getPatientID();
+            var apiStr = '/patients/' + patient_id + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putPatientAnnotations = function(json_value) {
+            var patient_id = dataService.getPatientID();
+            var apiStr = '/patients/' + patient_id + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
+
+
+
 
         // -------------------------------------------------------------------------
         // Helper - Functions
@@ -1258,6 +1275,25 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.groupBy = function(array, f) {
+            var groups = {};
+            array.forEach(function(o) {
+                var group = JSON.stringify(f(o));
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            });
+            return Object.keys(groups).map(function(group) {
+                return groups[group];
+            })
+        }
+
+        dataService.isEmpty = function(obj) {
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        };
 
 
         dataService.checkSuccess = function(max, count) {
@@ -1832,17 +1868,101 @@ angular.module('optinomicDataModule')
 
 
 
-        dataService.groupBy = function(array, f) {
-            var groups = {};
-            array.forEach(function(o) {
-                var group = JSON.stringify(f(o));
-                groups[group] = groups[group] || [];
-                groups[group].push(o);
+
+        //------------------------------------------
+        // Patient - Annotations
+        //------------------------------------------
+
+
+        dataService.getPatientAnnotationsData = function() {
+            var deferred = $q.defer();
+            var return_data = {};
+
+
+            var api = dataService.getPatientAnnotations();
+            var aPromise = getDataService.getData(api);
+
+            aPromise.then(function(data) {
+
+
+                if (annotationsService.isEmpty(data)) {
+                    var cloneDefault = JSON.parse(JSON.stringify(optinomicAppData.default.settings.user));
+                    return_data = cloneDefault;
+                    //console.log('(!) get default settings for user ', user_id);
+                } else {
+                    return_data = data;
+
+                    return_data.patientListFilter = return_data.patientListFilter === undefined ? {} : return_data.patientListFilter;
+
+                    if (annotationsService.isEmpty(return_data.patientListFilter)) {
+                        var cloneDefaultFilter = JSON.parse(JSON.stringify(optinomicAppData.default.settings.user.patientListFilter));
+                        return_data.patientListFilter = cloneDefaultFilter;
+                        //console.log('(!) get fresh patientListFilter settings', return_data.patientListFilter, optinomicAppData.default.settings.user.patientListFilter);
+                    };
+
+                    //console.log('(-) get user settings', return_data);
+                };
+
+                //console.log('(=) deferred.resolved - user_settings', return_data);
+                deferred.resolve(return_data);
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('ERROR: getUserAnnotations', error);
             });
-            return Object.keys(groups).map(function(group) {
-                return groups[group];
-            })
-        }
+
+            return deferred.promise;
+        };
+
+        dataService.putPatientAnnotationsData = function(node_tree, json_value) {
+
+            var user_id = sessionService.getUserID();
+            var deferred = $q.defer();
+            var return_data = {};
+
+
+            var mySettings = annotationsService.getUserSettings(user_id);
+            mySettings.then(function(current_data) {
+
+
+                if (node_tree === 'clear') {
+                    // Overwrite Settings with given json_value
+                    full_settings = json_value;
+                } else {
+                    // Save given json_value in given node_tree
+                    var full_settings = current_data;
+                    full_settings[node_tree] = json_value;
+                    //full_settings = JSON.stringify(full_settings);
+                };
+
+
+                console.log('(?)', node_tree, full_settings, json_value);
+
+                var api = annotationsService.putUserAnnotations(user_id, full_settings);
+                var aPromise = getDataService.getData(api);
+
+                aPromise.then(function(data) {
+
+                    console.log('(+) putUserSettings', data, full_settings);
+
+                    deferred.resolve(return_data);
+
+                }, function(error) {
+                    // Error
+                    deferred.reject(error);
+                    console.log('ERROR: putUserSettings', error);
+                });
+
+            });
+
+
+
+            return deferred.promise;
+        };
+
+
+
 
 
 

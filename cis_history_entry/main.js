@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService, apiService) {
+app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -27,22 +27,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService, apiServic
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
-            $scope.d.haveData = true;
 
-
-            $scope.getPatientAnnotations()
-
-
-            var api_call = $scope.getPatientAnnotations();
-            api_call.success(function(data) {
-                console.log('(+) getPatientAnnotations ', data);
-            });
-            api_call.error(function(data) {
-                console.log('(!) getPatientAnnotations - Error ', data);
-
-            });
-
-
+            // Run App-Functions
+            $scope.appInit();
+            $scope.getHisoryPosts();
 
 
             // Finishing: Console Info & Init = done.
@@ -53,25 +41,25 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService, apiServic
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Annotations
-    // -----------------------------------
-
-
-    $scope.getPatientAnnotations = function() {
-        var patient_id = $scope.d.dataMain.params.PID;
-        var apiStr = '/patients/' + patient_id + '/annotations';
-        return apiService.get(apiStr, {});
+    $scope.appInit = function() {
+        $scope.d.nodeTree = 'hisoryentry';
+        $scope.d.haveData = true;
     };
 
-    $scope.putPatientAnnotations = function(json_value) {
-        var patient_id = $scope.d.dataMain.params.PID;
-        var apiStr = '/patients/' + patient_id + '/annotations';
-        var body = {
-            "value": json_value
-        };
-        return apiService.put(apiStr, body);
+    $scope.getHisoryPosts = function() {
+
+        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        api_call.success(function(data) {
+            console.log('(+) getHisoryPosts ', data);
+        });
+        api_call.error(function(data) {
+            console.log('(!) getHisoryPosts - Error ', data);
+
+        });
+
     };
+
+
 
 
 
