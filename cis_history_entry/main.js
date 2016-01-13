@@ -46,6 +46,124 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.nodeTree = 'hisoryentrys';
         $scope.d.appState = 'show'
         $scope.d.haveData = true;
+
+
+        $scope.d.tarmed = [{
+            "Name": "Grundleistungen",
+            "Code": "00",
+            "Kapitel": [{
+                "Name": "Ärztliche Zeugnisse, Berichte, Schreiben",
+                "Code": "00.06",
+                "Tarifposition": [{
+                    "Name": "Formalisierter Arztbericht",
+                    "Beschreibung": "KV , UV , MV (Zwischenbericht, Verlaufsbericht, Formalisiertes Beiblatt IV",
+                    "Code": "00.2205"
+                }]
+            }]
+        }, {
+            "Name": "Psychiatrie",
+            "Code": "02",
+            "Kapitel": [{
+                "Name": "Psychiatrische Diagnostik und Therapie",
+                "Code": "02.01",
+                "Tarifposition": [{
+                    "Name": "Einzeltherapie, erste Sitzung",
+                    "Code": "02.0010"
+                }, {
+                    "Name": "Einzeltherapie, jede weitere Sitzung",
+                    "Code": "02.0020"
+                }, {
+                    "Name": "Paartherapie",
+                    "Code": "02.0030"
+                }, {
+                    "Name": "Familientherapie",
+                    "Code": "02.0040"
+                }, {
+                    "Name": "Gruppentherapie",
+                    "Code": "02.0050"
+                }, {
+                    "Name": "Telefonische Konsultation durch den Facharzt für Psychiatrie",
+                    "Code": "02.0060"
+                }, {
+                    "Name": "Ärztliche Leistung in Abwesenheit des Patienten(inkl.Aktenstudium) durch den Facharzt für Psychiatrie",
+                    "Code": "02.0070"
+                }, {
+                    "Name": "Psychiatrische Krisenintervention",
+                    "Code": "02.0080"
+                }, {
+                    "Name": "Psychologische und psychiatrische Testabklärung durch den Facharzt, als alleinige psychiatrische Leistung",
+                    "Code": "02.0090"
+                }]
+            }, {
+                "Name": "Nichtärztliche Diagnostik und Therapie in der Psychiatrie",
+                "Code": "02.02",
+                "Tarifposition": [{
+                    "Name": "Einzelsetting",
+                    "Code": "02.0110"
+                }, {
+                    "Name": "Paarsetting",
+                    "Code": "02.0120"
+                }, {
+                    "Name": "Familiensetting",
+                    "Code": "02.0130"
+                }, {
+                    "Name": "Gruppensetting",
+                    "Code": "02.0140"
+                }, {
+                    "Name": "Telefonische Konsultation durch behandelnden Psychologen / Psychotherapeuten",
+                    "Code": "02.0150"
+                }, {
+                    "Name": "Leistung in Abwesenheit des Patienten durch behandelnden Psychologen / Psychotherapeuten",
+                    "Code": "02.0160"
+                }]
+            }, {
+                "Name": "Delegierte psychotherapeutische Behandlung in der Arztpraxis",
+                "Code": "02.03",
+                "Tarifposition": [{
+                    "Name": "Einzelsetting",
+                    "Code": "02.0210"
+                }, {
+                    "Name": "Paarsetting",
+                    "Code": "02.0220"
+                }, {
+                    "Name": "Familiensetting",
+                    "Code": "02.0230"
+                }, {
+                    "Name": "Gruppensetting",
+                    "Code": "02.0240"
+                }, {
+                    "Name": "Telefonische Konsultation durch delegierten Psychologen / Psychotherapeuten",
+                    "Code": "02.0250"
+                }, {
+                    "Name": "Leistung in Abwesenheit des Patienten durch delegierten Psychologen / Psychotherapeuten",
+                    "Code": "02.0260"
+                }]
+            }, {
+                "Name": "Nichtärztliche ambulante Behandlung in der Psychiatrie",
+                "Code": "02.04",
+                "Tarifposition": [{
+                    "Name": "Einzelsetting",
+                    "Code": "02.0310"
+                }, {
+                    "Name": "Paarsetting",
+                    "Code": "02.0320"
+                }, {
+                    "Name": "Familiensetting",
+                    "Code": "02.0330"
+                }, {
+                    "Name": "Gruppensetting",
+                    "Code": "02.0340"
+                }, {
+                    "Name": "Telefonische Konsultation durch nichtärztliches, behandelndes Personal in der Psychiatrie",
+                    "Code": "02.0350"
+                }, {
+                    "Name": "Leistungen in Abwesenheit des Patienten durch nichtärztliches, behandelndes Personal in der Psychiatrie",
+                    "Code": "02.0360"
+                }]
+            }]
+        }];
+
+
     };
 
 

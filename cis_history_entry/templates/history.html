@@ -35,6 +35,14 @@ include(../lib/html/optinomic/page/start.m4)
             <label>user</label>
             <input ng-model="d.historyNewEntry.user">
         </md-input-container>
+        <md-input-container>
+            <label>TARMED</label>
+            <md-select ng-model="d.historyNewEntry.tarmedKapitel">
+                <md-option ng-repeat="kapitel in d.tarmed" value="{{kapitel.code}}">
+                    {{kapitel.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
     </div>
     <md-input-container class="md-block">
         <label>Verlauf</label>
