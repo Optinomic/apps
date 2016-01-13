@@ -68,8 +68,8 @@ website = http://www.optinomic.com/
         <md-input-container>
             <label>TARMED</label>
             <md-select ng-model="d.historyNewEntry.tarmedKapitel" aria-label="TARMED Kapitel">
-                <md-option ng-repeat="Kapitel in d.tarmed" value="{{Kapitel.Code}}">
-                    {{kapitel.Name}}
+                <md-option ng-repeat="kapitel in d.tarmed" value="{{kapitel.Code}}">
+                    {{kapitel.Name}} ({{kapitel}})
                 </md-option>
             </md-select>
         </md-input-container>
