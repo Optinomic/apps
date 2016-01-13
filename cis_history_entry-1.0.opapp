@@ -45,18 +45,18 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
     </md-card>
+    <div layout="row">
+        <div flex="20">
+            [flex="20"]
+        </div>
+        <div flex="70">
+            [flex="70"]
+        </div>
+        <div flex hide-sm hide-xs>
+            [flex]
+        </div>
+    </div>
 </md-content>
-<div layout="row">
-    <div flex="20">
-        [flex="20"]
-    </div>
-    <div flex="70">
-        [flex="70"]
-    </div>
-    <div flex hide-sm hide-xs>
-        [flex]
-    </div>
-</div>
 
 </div>
 <div ng-if="d.appState === 'edit'">
