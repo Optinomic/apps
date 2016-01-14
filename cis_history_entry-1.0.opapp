@@ -104,12 +104,10 @@ website = http://www.optinomic.com/
         </md-select>
     </md-input-container>
 </div>
-<div layout-gt-xs="row" layout-margin>
-    <md-input-container class="md-block">
-        <label>Verlauf</label>
-        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-    </md-input-container>
-</div>
+<md-input-container class="md-block">
+    <label>Verlauf</label>
+    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+</md-input-container>
 <pre>
 	{{d.historyNewEntry | json}}
 </pre>
@@ -149,12 +147,10 @@ website = http://www.optinomic.com/
         </md-select>
     </md-input-container>
 </div>
-<div layout-gt-xs="row" layout-margin>
-    <md-input-container class="md-block">
-        <label>Verlauf</label>
-        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-    </md-input-container>
-</div>
+<md-input-container class="md-block">
+    <label>Verlauf</label>
+    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+</md-input-container>
 <pre>
 	{{d.historyNewEntry | json}}
 </pre>
@@ -5654,7 +5650,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
             // Update Entrys
-            $scope.appInit();
+            $scope.d.appState = 'show';
             $scope.getHisoryEntrys();
         });
     };

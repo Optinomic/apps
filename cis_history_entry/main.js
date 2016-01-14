@@ -212,7 +212,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
             // Update Entrys
-            $scope.appInit();
+            $scope.d.appState = 'show';
             $scope.getHisoryEntrys();
         });
     };
