@@ -257,7 +257,7 @@ var app = angular
             }
         };
     })
-    .config(function($sceDelegateProvider, $mdThemingProvider, $mdDateLocaleProvider) {
+    .config(function($sceDelegateProvider) {
         $sceDelegateProvider.resourceUrlWhitelist([
             // Allow same origin resource loads.
             'self',
@@ -267,58 +267,6 @@ var app = angular
             'http://apps.optinomic.org/lib/**'
         ]);
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('grey', {
-                'default': '800', // by default use shade 400 from the pink palette for primary intentions
-                'hue-1': '300', // use shade 100 for the <code>md-hue-1</code> class
-                'hue-2': '500', // use shade 600 for the <code>md-hue-2</code> class
-                'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
-            })
-            // If you specify less than all of the keys, it will inherit from the
-            // default shades
-            .accentPalette('indigo', {
-                'default': '500', // by default use shade 400 from the pink palette for primary intentions
-                'hue-1': '800', // use shade 100 for the <code>md-hue-1</code> class
-                'hue-2': '300', // use shade 600 for the <code>md-hue-2</code> class
-                'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
-            })
-            .warnPalette('pink', {
-                'default': '500', // by default use shade 400 from the pink palette for primary intentions
-                'hue-1': '50', // use shade 100 for the <code>md-hue-1</code> class
-                'hue-2': '100', // use shade 600 for the <code>md-hue-2</code> class
-                'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
-            });
-
-
-        // ---------------------------------------------------------------------------------------------------------------
-        // The $mdDateLocaleProvider is the provider that creates the $mdDateLocale service. 
-        // This provider that allows the user to specify messages, formatters, and parsers for date internationalization. 
-        // The $mdDateLocale service itself is consumed by Angular Material components that that deal with dates.
-        // ---------------------------------------------------------------------------------------------------------------
-
-        $mdDateLocaleProvider.months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-        //$mdDateLocaleProvider.shortMonths = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'];
-        $mdDateLocaleProvider.shortMonths = $mdDateLocaleProvider.months;
-        $mdDateLocaleProvider.days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
-        $mdDateLocaleProvider.shortDays = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
-
-        // Example uses moment.js to parse and format dates.
-        $mdDateLocaleProvider.parseDate = function(dateString) {
-            return moment(dateString).toDate();
-        };
-        $mdDateLocaleProvider.formatDate = function(date) {
-            return moment(date).'L';
-        };
-
-        $mdDateLocaleProvider.formatDate = function(date) {
-            return moment(date).'L';
-        };
-
-        $mdDateLocaleProvider.weekNumberFormatter = function(weekNumber) {
-            return 'Kalenderwoche ' + weekNumber;
-        };
-        $mdDateLocaleProvider.msgCalendar = 'Kalender';
-        $mdDateLocaleProvider.msgOpenCalendar = 'Kalender öffnen';
     });
 
 
