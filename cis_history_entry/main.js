@@ -60,12 +60,14 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         }
         $http.get(url)
             .success(function(response) {
-                var entries = response['feed']['entry'];
-                $scope.d.parsedEntries = [];
-                for (key in entries) {
-                    var content = entries[key];
-                    $scope.d.parsedEntries.push(parse(content));
-                }
+                console.log('loadTarmedSheet - success: ', response);
+
+                //var entries = response['feed']['entry'];
+                //$scope.d.parsedEntries = [];
+                //for (key in entries) {
+                //    var content = entries[key];
+                //    $scope.d.parsedEntries.push(parse(content));
+                //}
             });
     };
 
