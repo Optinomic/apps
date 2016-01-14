@@ -1991,7 +1991,6 @@ angular.module('optinomicDataModule')
             var deferred = $q.defer();
             var return_data = {};
 
-            json_value = JSON.stringify(json_value);
 
             var mySettings = dataService.getPatientAnnotations();
             mySettings.then(function(current_data) {
@@ -2008,9 +2007,7 @@ angular.module('optinomicDataModule')
                 };
 
 
-                // console.log('(?)', node_tree, full_settings, json_value);
-
-                var api = dataService.putPatientAnnotations(full_settings);
+                var api = dataService.putPatientAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
