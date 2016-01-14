@@ -31,7 +31,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             // Run App-Functions
             $scope.appInit();
             $scope.getHisoryEntrys();
-            $scope.loadTarmedSheet;
+            $scope.loadTarmedSheet();
 
 
             // Finishing: Console Info & Init = done.
@@ -61,10 +61,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $http.get(url)
             .success(function(response) {
                 var entries = response['feed']['entry'];
-                $scope.parsedEntries = [];
+                $scope.d.parsedEntries = [];
                 for (key in entries) {
                     var content = entries[key];
-                    $scope.parsedEntries.push(parse(content));
+                    $scope.d.parsedEntries.push(parse(content));
                 }
             });
     };
