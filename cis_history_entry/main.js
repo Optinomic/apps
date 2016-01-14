@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             // Run App-Functions
             $scope.appInit();
             $scope.getHisoryEntrys();
-            $scope.loadTarmedSheet();
 
 
             // Finishing: Console Info & Init = done.
@@ -43,9 +42,13 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
 
 
-    $scope.loadTarmedSheet = function() {
+    $scope.loadTARMEDSheet = function() {
+
+        // https://docs.google.com/spreadsheets/d/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/pubhtml
 
         var url = 'https://spreadsheets.google.com/feeds/list/1lZWwacSVxTD_ciOsuNsrzeMTNAl0Dj8SOrbaMqPKM7U/od6/public/values?alt=json'
+        var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
+
         var parse = function(entry) {
             console.log('loadTarmedSheet - entry: ', entry);
             var category = entry['gsx$category']['$t'];
@@ -58,15 +61,25 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
                 url: url
             };
         }
+
         $http.get(url)
             .success(function(response) {
-                console.log('loadTarmedSheet - success: ', response);
+                console.log('(!) loadTARMEDSheet - success: ', response);
 
-                //var entries = response['feed']['entry'];
+                var entries = response['feed']['entry'];
+
+                $scope.d.parsedEntries = [];
+                entries.forEach(function(content, myindex) {
+                    //$scope.d.parsedEntries.push(parse(content));
+                    console.log('(-) loadTARMEDSheet - content: ', myindex, content);
+
+                });
+
+
                 //$scope.d.parsedEntries = [];
                 //for (key in entries) {
                 //    var content = entries[key];
-                //    $scope.d.parsedEntries.push(parse(content));
+                //    
                 //}
             });
     };
@@ -76,6 +89,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $scope.d.appState = 'show'
         $scope.d.haveData = true;
 
+        $scope.loadTARMEDSheet();
 
         $scope.d.tarmed = [{
             "Name": "Grundleistungen",
