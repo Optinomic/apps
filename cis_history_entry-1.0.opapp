@@ -50,13 +50,45 @@ website = http://www.optinomic.com/
 </div>
 <div ng-if="d.appState === 'edit'">
     <h3 class="md-headline">Verlaufseintrag bearbeiten</h3>
+<div layout-gt-sm="row" layout-padding>
+    <md-input-container>
+        <label>datum</label>
+        <input ng-model="d.historyNewEntry.datum">
+    </md-input-container>
+    <md-input-container>
+        <label>dauer</label>
+        <input ng-model="d.historyNewEntry.dauer">
+    </md-input-container>
+    <md-input-container>
+        <label>user</label>
+        <input ng-model="d.historyNewEntry.user">
+    </md-input-container>
+</div>
+<div layout-gt-sm="row" layout-padding>
+    <md-input-container>
+        <label>Leistungsgruppe</label>
+        <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+            <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+        <label>Tarifposition</label>
+        <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+            <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
 <md-input-container class="md-block">
-    <label>EDIT - Verlauf</label>
-    <textarea ng-model="d.historyEditEntry.verlauf" columns="1" rows="10"></textarea>
+    <label>Verlauf</label>
+    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-    	{{d.historyEditEntry}}
-    </pre>
+	{{d.historyNewEntry}}
+</pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
 
@@ -88,7 +120,7 @@ website = http://www.optinomic.com/
     </md-input-container>
     <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
         <label>Tarifposition</label>
-        <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="d.historyNewEntry.tarmed.selected = d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id][$index]" aria-label="TARMED Tarifpositions">
+        <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
             <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
                 {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
             </md-option>
@@ -99,6 +131,9 @@ website = http://www.optinomic.com/
     <label>Verlauf</label>
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
+<pre>
+	{{d.historyNewEntry}}
+</pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
 
@@ -5480,6 +5515,17 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $scope.d.appState = 'show';
     };
 
+
+    $scope.storeSelectedTARMED = function() {
+        var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
+        entries.forEach(function(content, myindex) {
+            if (content.kapitel_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
+                $scope.d.historyNewEntry.tarmed.selected = content;
+            };
+        });
+    };
+
+
     $scope.entryNew = function() {
         $scope.d.appState = 'new';
 
@@ -5498,11 +5544,11 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
     $scope.entryEdit = function(currentIndex) {
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.historyEditEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
-        $scope.d.historyEditEntryID = currentIndex;
+        $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.historyNewEntryID = currentIndex;
         $scope.d.appState = 'edit';
 
-        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
+        console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
     };
 
     $scope.entryDelete = function() {
@@ -5540,7 +5586,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.historyEntrys[$scope.d.historyEditEntryID] = $scope.d.historyEditEntry;
+            $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
         };
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);

@@ -24,7 +24,7 @@
     </md-input-container>
     <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
         <label>Tarifposition</label>
-        <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="d.historyNewEntry.tarmed.selected = d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id][$index]" aria-label="TARMED Tarifpositions">
+        <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
             <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
                 {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
             </md-option>
@@ -35,5 +35,8 @@
     <label>Verlauf</label>
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
+<pre>
+	{{d.historyNewEntry}}
+</pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>

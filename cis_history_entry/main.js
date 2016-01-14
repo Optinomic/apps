@@ -111,6 +111,17 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $scope.d.appState = 'show';
     };
 
+
+    $scope.storeSelectedTARMED = function() {
+        var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
+        entries.forEach(function(content, myindex) {
+            if (content.kapitel_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
+                $scope.d.historyNewEntry.tarmed.selected = content;
+            };
+        });
+    };
+
+
     $scope.entryNew = function() {
         $scope.d.appState = 'new';
 
@@ -129,11 +140,11 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
     $scope.entryEdit = function(currentIndex) {
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.historyEditEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
-        $scope.d.historyEditEntryID = currentIndex;
+        $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.historyNewEntryID = currentIndex;
         $scope.d.appState = 'edit';
 
-        console.log('entryEdit: ', currentIndex, $scope.d.historyEditEntry);
+        console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
     };
 
     $scope.entryDelete = function() {
@@ -171,7 +182,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.historyEntrys[$scope.d.historyEditEntryID] = $scope.d.historyEditEntry;
+            $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
         };
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
