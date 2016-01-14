@@ -5570,16 +5570,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
                 // Enrich Datum.
                 data.forEach(function(content, myindex) {
                     var date = content.datum;
-
                     content.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
                     content.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
-                    content.datum_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+                    content.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                    content.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
                     content.datum_time = $filter("amDateFormat")(date, 'HH:mm');
-
                 });
 
                 $scope.d.historyEntrys = data;
-
             };
             console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
         });
