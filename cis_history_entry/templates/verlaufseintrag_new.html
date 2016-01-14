@@ -14,7 +14,7 @@
     </md-input-container>
 </div>
 <div layout-gt-sm="row" layout-padding>
-    <md-input-container ng-if="d.historyNewEntry.tarmed_gruppe">
+    <md-input-container>
         <label>Leistungsgruppe</label>
         <md-select ng-model="d.historyNewEntry.tarmed_kapitel" aria-label="TARMED Kapitel">
             <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
