@@ -516,24 +516,20 @@ angular.module('optinomicDataModule').factory('apiService', function($http) {
         return request("GET", path, query, "");
     };
 
-    var post = function(path, query, body) {
-        return request("POST", path, query, body);
+    var post = function(path, body) {
+        return request("POST", path, {}, body);
     };
 
-    var put = function(path, query, body) {
-        return request("PUT", path, query, body);
+    var put = function(path, body) {
+        return request("PUT", path, {}, body);
     };
 
     var del = function(path, query) {
         return request("DELETE", path, query, "");
     };
 
-    var patch = function(path, query, body) {
-        return request("PATCH", path, query, body);
-    };
-
-    var isBusy = function() {
-        return ongoing_requests.length > 0;
+    var patch = function(path, body) {
+        return request("PATCH", path, {}, body);
     };
 
     var getConfig = function() {
