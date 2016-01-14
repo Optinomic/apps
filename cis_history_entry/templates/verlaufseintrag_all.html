@@ -17,7 +17,7 @@
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
-            <md-button ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
+            <md-button ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
         </md-card-actions>
     </md-card>
 </md-content>

@@ -1,4 +1,18 @@
 include(../lib/html/optinomic/page/start.m4)
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+        <h2>
+          <span>Verlaufseintrag</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="More">
+            <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
 <div ng-if="d.appState === 'show'">
     include(templates/verlaufseintrag_all.html)
 </div>

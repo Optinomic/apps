@@ -98,20 +98,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             });
     };
 
-    $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new3';
-        $scope.d.appState = 'show'
-
-        $scope.loadTARMEDSheet();
-    };
-
-
-
-    $scope.entryCancel = function() {
-        $scope.d.appState = 'show';
-    };
-
-
     $scope.storeSelectedTARMED = function() {
         var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
             //console.log('storeSelectedTARMED', entries);
@@ -124,6 +110,28 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             };
         });
     };
+
+    $scope.appInit = function() {
+        $scope.d.nodeTree = 'hisoryentrys_new3';
+        $scope.d.appState = 'show'
+
+        $scope.loadTARMEDSheet();
+    };
+
+
+
+    // -----------------------------------
+    // Actions
+    // -----------------------------------
+
+
+    $scope.entryCancel = function() {
+        // Cancel
+        $scope.d.appState = 'show';
+    };
+
+
+
 
 
     $scope.entryNew = function() {

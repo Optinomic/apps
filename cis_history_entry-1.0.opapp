@@ -29,6 +29,20 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+        <h2>
+          <span>Verlaufseintrag</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="More">
+            <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
 <div ng-if="d.appState === 'show'">
     <md-content>
     <md-card ng-repeat="entry in d.historyEntrys track by $index">
@@ -49,7 +63,7 @@ website = http://www.optinomic.com/
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
-            <md-button ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
+            <md-button ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
         </md-card-actions>
     </md-card>
 </md-content>
@@ -5508,20 +5522,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             });
     };
 
-    $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new3';
-        $scope.d.appState = 'show'
-
-        $scope.loadTARMEDSheet();
-    };
-
-
-
-    $scope.entryCancel = function() {
-        $scope.d.appState = 'show';
-    };
-
-
     $scope.storeSelectedTARMED = function() {
         var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
             //console.log('storeSelectedTARMED', entries);
@@ -5534,6 +5534,28 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             };
         });
     };
+
+    $scope.appInit = function() {
+        $scope.d.nodeTree = 'hisoryentrys_new3';
+        $scope.d.appState = 'show'
+
+        $scope.loadTARMEDSheet();
+    };
+
+
+
+    // -----------------------------------
+    // Actions
+    // -----------------------------------
+
+
+    $scope.entryCancel = function() {
+        // Cancel
+        $scope.d.appState = 'show';
+    };
+
+
+
 
 
     $scope.entryNew = function() {
