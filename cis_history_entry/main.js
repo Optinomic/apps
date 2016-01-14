@@ -173,7 +173,6 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
     $scope.putHisoryPost = function() {
 
-        console.log('RUN: putHisoryPost');
 
         // Get Current Entrys
         $scope.getHisoryEntrys();
@@ -188,6 +187,9 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         if ($scope.d.appState === 'edit') {
             $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
         };
+
+
+        console.log('RUN: putHisoryPost', JSON.stringify($scope.d.historyEntrys, null, "    "));
 
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, JSON.stringify($scope.d.historyEntrys));
