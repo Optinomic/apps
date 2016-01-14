@@ -1,16 +1,21 @@
 <md-content>
-    <md-card>
-        <md-card-content>
-            <div ng-repeat="entry in d.historyEntrys track by $index" layout="column" layout-gt-xs="row">
-                <div flex>
-                    <h3 class="md-headline">{{entry.datum}}</h3>
-                    <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
-                    <p class="flow-text">{{entry.verlauf}}</p>
-                </div>
-                <div>
-                    <md-button ng-click="entryEdit($index)">Edit</md-button>
-                </div>
-            </div>
+    <md-card ng-repeat="entry in d.historyEntrys track by $index">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">
+                	{{entry.tarmed.selected.tarifpos_beschreibung}}
+                    	<md-tooltip md-direction="bottom">
+                    	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
+                    	</md-tooltip>
+                </span>
+                <span class="md-subhead">{{entry.datum_day}} | {{entry.dauer * 5}} Minuten | {{entry.user}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+            <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
+        </md-card-actions>
     </md-card>
 </md-content>
