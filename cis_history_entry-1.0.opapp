@@ -622,6 +622,10 @@ angular.module('optinomicDataModule').factory('apiService', function($http) {
         return request("PATCH", path, {}, body);
     };
 
+    var isBusy = function() {
+        return ongoing_requests.length > 0;
+    };
+
     var getConfig = function() {
         var Config = {
             url: apiUrl
@@ -638,7 +642,7 @@ angular.module('optinomicDataModule').factory('apiService', function($http) {
         get: get,
         post: post,
         put: put,
-        delete: del,
+        del: del,
         patch: patch,
         isBusy: isBusy
     };
