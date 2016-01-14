@@ -99,7 +99,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new2';
+        $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
@@ -175,7 +175,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
 
         // Get Current Entrys
-        $scope.getHisoryEntrys();
+        //$scope.getHisoryEntrys();
 
 
         // Push new Entry if 'new'

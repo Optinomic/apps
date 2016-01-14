@@ -87,7 +87,7 @@ website = http://www.optinomic.com/
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-	{{d.historyEntrys | json}}
+	{{d.historyNewEntry | json}}
 </pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
@@ -132,7 +132,7 @@ website = http://www.optinomic.com/
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-	{{d.historyEntrys | json}}
+	{{d.historyNewEntry | json}}
 </pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
@@ -1904,7 +1904,6 @@ angular.module('optinomicDataModule')
             });
 
 
-
             // ------------------------------------------------
             // Action 7:  All Users
             // ------------------------------------------------
@@ -2019,6 +2018,8 @@ angular.module('optinomicDataModule')
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 //console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
 
+                return_data = JSON.parse(return_data);
+
                 deferred.resolve(return_data);
 
             }, function(error) {
@@ -2035,6 +2036,7 @@ angular.module('optinomicDataModule')
             var deferred = $q.defer();
             var return_data = {};
 
+            json_value = JSON.stringify(json_value);
 
             var mySettings = dataService.getPatientAnnotations();
             mySettings.then(function(current_data) {
@@ -5503,7 +5505,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new2';
+        $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
@@ -5579,7 +5581,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
 
         // Get Current Entrys
-        $scope.getHisoryEntrys();
+        //$scope.getHisoryEntrys();
 
 
         // Push new Entry if 'new'

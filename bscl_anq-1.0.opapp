@@ -1884,7 +1884,6 @@ angular.module('optinomicDataModule')
             });
 
 
-
             // ------------------------------------------------
             // Action 7:  All Users
             // ------------------------------------------------
@@ -1999,6 +1998,8 @@ angular.module('optinomicDataModule')
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 //console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
 
+                return_data = JSON.parse(return_data);
+
                 deferred.resolve(return_data);
 
             }, function(error) {
@@ -2015,6 +2016,7 @@ angular.module('optinomicDataModule')
             var deferred = $q.defer();
             var return_data = {};
 
+            json_value = JSON.stringify(json_value);
 
             var mySettings = dataService.getPatientAnnotations();
             mySettings.then(function(current_data) {
