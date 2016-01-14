@@ -36,7 +36,7 @@
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-	{{d.historyNewEntry}}
+	{{JSON.stringify(d.historyNewEntry, null, "    ")}}
 </pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>

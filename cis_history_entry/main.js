@@ -99,7 +99,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new';
+        $scope.d.nodeTree = 'hisoryentrys_new2';
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
@@ -192,7 +192,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         console.log('RUN: putHisoryPost', JSON.stringify($scope.d.historyEntrys, null, "    "));
 
 
-        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, JSON.stringify($scope.d.historyEntrys));
+        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
