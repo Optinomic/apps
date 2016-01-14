@@ -5518,8 +5518,12 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
     $scope.storeSelectedTARMED = function() {
         var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
+            //console.log('storeSelectedTARMED', entries);
+
         entries.forEach(function(content, myindex) {
-            if (content.kapitel_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
+            //console.log('-- storeSelectedTARMED', content);
+
+            if (content.tarifpos_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
                 $scope.d.historyNewEntry.tarmed.selected = content;
             };
         });
