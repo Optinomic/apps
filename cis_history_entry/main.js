@@ -43,14 +43,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
 
     $scope.loadTARMEDSheet = function() {
-
-        // https://docs.google.com/spreadsheets/d/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/pubhtml
-
-        var url = 'https://spreadsheets.google.com/feeds/list/1lZWwacSVxTD_ciOsuNsrzeMTNAl0Dj8SOrbaMqPKM7U/od6/public/values?alt=json'
         var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
 
         var parse = function(entry) {
-            console.log('parse - loadTarmedSheet - entry: ', entry);
+            //console.log('parse - loadTarmedSheet - entry: ', entry);
             var leistungsgruppe_code = entry['gsx$leistungsgruppecode']['$t'];
             var leistungsgruppe_beschreibung = entry['gsx$leistungsgruppebeschreibung']['$t'];
             var kapitel_code = entry['gsx$kapitelcode']['$t'];
@@ -76,14 +72,25 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
                 var entries = response['feed']['entry'];
 
-                $scope.d.parsedTARMED = [];
+                $scope.d.TARMEDall = [];
                 entries.forEach(function(content, myindex) {
-                    $scope.d.parsedTARMED.push(parse(content));
-                    console.log('(-) loadTARMEDSheet - content: ', myindex, content);
-
+                    $scope.d.TARMEDall.push(parse(content));
+                    //console.log('(-) loadTARMEDSheet - content: ', myindex, content);
                 });
 
-                console.log('(!) parsedTARMED - success: ', $scope.d.parsedTARMED);
+                console.log('(!) TARMEDall', $scope.d.TARMEDall);
+
+                // Group Responses
+                $scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
+                    return [item.leistungsgruppe_code];
+                });
+                console.log('(!) TARMEDleistungsgruppe', $scope.d.TARMEDleistungsgruppe);
+
+
+                $scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
+                    return [item.kapitel_code];
+                });
+                console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
 
             });
     };
