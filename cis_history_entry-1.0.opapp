@@ -31,15 +31,15 @@ website = http://www.optinomic.com/
     <md-button ng-click="entryNew()" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i> Neuer Verlaufseintrag
     </md-button>
-    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #3F51B5;">
+    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i> Einstellungen
     </md-button>
 </div>
 <div ng-if="d.appState !== 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #3F51B5;">
-        <i class="md-title mdi mdi-close-circle-outline"></i> Cancel
+    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
     </md-button>
-    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
         <i class="md-title mdi mdi-content-save"></i> Speichern
     </md-button>
 </div>
@@ -71,7 +71,8 @@ website = http://www.optinomic.com/
 
 </div>
 <div ng-if="d.appState === 'edit'">
-    <h3 class="md-headline">Verlaufseintrag bearbeiten</h3> <div layout-gt-sm="row" layout-padding>
+    <h3 class="md-headline">Verlaufseintrag bearbeiten</h3> <div layout-gt-xs="row" layout-margin>
+    <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Enter date"></md-datepicker>
     <md-input-container>
         <label>datum</label>
         <input ng-model="d.historyNewEntry.datum">
@@ -85,7 +86,7 @@ website = http://www.optinomic.com/
         <input ng-model="d.historyNewEntry.user">
     </md-input-container>
 </div>
-<div layout-gt-sm="row" layout-padding>
+<div layout-gt-xs="row" layout-margin>
     <md-input-container>
         <label>Leistungsgruppe</label>
         <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
@@ -103,17 +104,20 @@ website = http://www.optinomic.com/
         </md-select>
     </md-input-container>
 </div>
-<md-input-container class="md-block">
-    <label>Verlauf</label>
-    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-</md-input-container>
+<div layout-gt-xs="row" layout-margin>
+    <md-input-container class="md-block">
+        <label>Verlauf</label>
+        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+    </md-input-container>
+</div>
 <pre>
 	{{d.historyNewEntry | json}}
 </pre>
 
 </div>
 <div ng-if="d.appState === 'new'">
-    <h3 class="md-headline">Neuer Verlaufseintrag erstellen</h3> <div layout-gt-sm="row" layout-padding>
+    <h3 class="md-headline">Neuer Verlaufseintrag erstellen</h3> <div layout-gt-xs="row" layout-margin>
+    <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Enter date"></md-datepicker>
     <md-input-container>
         <label>datum</label>
         <input ng-model="d.historyNewEntry.datum">
@@ -127,7 +131,7 @@ website = http://www.optinomic.com/
         <input ng-model="d.historyNewEntry.user">
     </md-input-container>
 </div>
-<div layout-gt-sm="row" layout-padding>
+<div layout-gt-xs="row" layout-margin>
     <md-input-container>
         <label>Leistungsgruppe</label>
         <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
@@ -145,10 +149,12 @@ website = http://www.optinomic.com/
         </md-select>
     </md-input-container>
 </div>
-<md-input-container class="md-block">
-    <label>Verlauf</label>
-    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-</md-input-container>
+<div layout-gt-xs="row" layout-margin>
+    <md-input-container class="md-block">
+        <label>Verlauf</label>
+        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+    </md-input-container>
+</div>
 <pre>
 	{{d.historyNewEntry | json}}
 </pre>
@@ -158,15 +164,15 @@ website = http://www.optinomic.com/
     <md-button ng-click="entryNew()" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i> Neuer Verlaufseintrag
     </md-button>
-    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #3F51B5;">
+    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i> Einstellungen
     </md-button>
 </div>
 <div ng-if="d.appState !== 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #3F51B5;">
-        <i class="md-title mdi mdi-close-circle-outline"></i> Cancel
+    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
     </md-button>
-    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
         <i class="md-title mdi mdi-content-save"></i> Speichern
     </md-button>
 </div>

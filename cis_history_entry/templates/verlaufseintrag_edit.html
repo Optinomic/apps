@@ -1,4 +1,5 @@
-<div layout-gt-sm="row" layout-padding>
+<div layout-gt-xs="row" layout-margin>
+    <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Enter date"></md-datepicker>
     <md-input-container>
         <label>datum</label>
         <input ng-model="d.historyNewEntry.datum">
@@ -12,7 +13,7 @@
         <input ng-model="d.historyNewEntry.user">
     </md-input-container>
 </div>
-<div layout-gt-sm="row" layout-padding>
+<div layout-gt-xs="row" layout-margin>
     <md-input-container>
         <label>Leistungsgruppe</label>
         <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
@@ -30,10 +31,12 @@
         </md-select>
     </md-input-container>
 </div>
-<md-input-container class="md-block">
-    <label>Verlauf</label>
-    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-</md-input-container>
+<div layout-gt-xs="row" layout-margin>
+    <md-input-container class="md-block">
+        <label>Verlauf</label>
+        <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+    </md-input-container>
+</div>
 <pre>
 	{{d.historyNewEntry | json}}
 </pre>
