@@ -80,16 +80,16 @@ website = http://www.optinomic.com/
 <div layout-gt-sm="row" layout-padding>
     <md-input-container>
         <label>Leistungsgruppe</label>
-        <md-select ng-model="d.historyNewEntry.tarmed_kapitel" aria-label="TARMED Kapitel">
+        <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
             <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
                 {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
             </md-option>
         </md-select>
     </md-input-container>
-    <md-input-container ng-if="d.historyNewEntry.tarmed_kapitel">
+    <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
         <label>Tarifposition</label>
-        <md-select ng-model="d.historyNewEntry.tarmed_tarifpositions" aria-label="TARMED Tarifpositions">
-            <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed_kapitel]" value="{{tarifpos.tarifpos_code}}">
+        <md-select ng-model="d.historyNewEntry.tarmed_tarifpositions" md-on-close="d.historyNewEntry.tarmed.selcted = d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" aria-label="TARMED Tarifpositions">
+            <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
                 {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
             </md-option>
         </md-select>
@@ -5449,9 +5449,9 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
                 //console.log('(!) TARMEDall', $scope.d.TARMEDall);
 
                 // Group Responses
-                $scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
-                    return [item.leistungsgruppe_code];
-                });
+                //$scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
+                //    return [item.leistungsgruppe_code];
+                //});
                 //console.log('(!) TARMEDleistungsgruppe', $scope.d.TARMEDleistungsgruppe);
 
 
@@ -5459,8 +5459,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
                     return [item.kapitel_code];
                 });
                 //console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
-                $scope.d.haveData = true;
 
+
+                // Set 'haveData' because we do not have a survey here!
+                $scope.d.haveData = true;
 
             });
     };
@@ -5470,7 +5472,6 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
-
     };
 
 
@@ -5487,6 +5488,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             datum: new Date(),
             dauer: 12,
             user: $scope.d.dataMain.users.current.id,
+            tarmed: {
+                kapitel_id: 3,
+                selected: {}
+            },
             verlauf: "Dies ist ein neuer Testeintrag bla bla bla.."
         };
     };

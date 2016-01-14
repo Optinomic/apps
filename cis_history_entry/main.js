@@ -80,9 +80,9 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
                 //console.log('(!) TARMEDall', $scope.d.TARMEDall);
 
                 // Group Responses
-                $scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
-                    return [item.leistungsgruppe_code];
-                });
+                //$scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
+                //    return [item.leistungsgruppe_code];
+                //});
                 //console.log('(!) TARMEDleistungsgruppe', $scope.d.TARMEDleistungsgruppe);
 
 
@@ -90,8 +90,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
                     return [item.kapitel_code];
                 });
                 //console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
-                $scope.d.haveData = true;
 
+
+                // Set 'haveData' because we do not have a survey here!
+                $scope.d.haveData = true;
 
             });
     };
@@ -101,7 +103,6 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
-
     };
 
 
@@ -118,6 +119,10 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             datum: new Date(),
             dauer: 12,
             user: $scope.d.dataMain.users.current.id,
+            tarmed: {
+                kapitel_id: 3,
+                selected: {}
+            },
             verlauf: "Dies ist ein neuer Testeintrag bla bla bla.."
         };
     };
