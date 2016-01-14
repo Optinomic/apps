@@ -2018,7 +2018,7 @@ angular.module('optinomicDataModule')
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 //console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
 
-                return_data = JSON.parse(return_data);
+                return_data = JSON.parse(JSON.stringify(return_data));
 
                 deferred.resolve(return_data);
 
