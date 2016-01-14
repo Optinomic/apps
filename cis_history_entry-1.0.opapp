@@ -5503,7 +5503,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys';
+        $scope.d.nodeTree = 'hisoryentrys_new';
         $scope.d.appState = 'show'
 
         $scope.loadTARMEDSheet();
