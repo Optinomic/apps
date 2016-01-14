@@ -30,10 +30,10 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <div ng-if="d.appState === 'show'">
-    <md-content class="md-padding">
+    <md-content>
     <md-card>
         <md-card-content>
-            <div ng-repeat="entry in d.historyEntrys" layout="column" layout-gt-xs="row">
+            <div ng-repeat="entry in d.historyEntrys track by $index" layout="column" layout-gt-xs="row">
                 <div flex>
                     <h3 class="md-headline">{{entry.datum}}</h3>
                     <p class="md-caption">{{$index}} | {{entry.dauer}} x 5 = {{entry.dauer * 5}} Minuten | {{entry.user}}</p>
