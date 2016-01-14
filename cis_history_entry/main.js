@@ -166,7 +166,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             } else {
                 // Enrich Datum.
                 data.forEach(function(content, myindex) {
-                    date = content.datum;
+                    var date = content.datum;
 
                     content.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
                     content.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
