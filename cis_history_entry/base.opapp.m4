@@ -6,7 +6,6 @@ version = include(VERSION)
 type = patient
 
 [description]
-Verlaufseintrag: Beschreiben Sie hier Einträge aller Art.
 
 [developer]
 first_name = Beat
