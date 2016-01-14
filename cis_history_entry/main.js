@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run App-Functions
             $scope.appInit();
             $scope.getHisoryEntrys();
+            $scope.loadTarmedSheet;
 
 
             // Finishing: Console Info & Init = done.
@@ -41,6 +42,32 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+
+    $scope.loadTarmedSheet = function() {
+
+        var url = 'https://spreadsheets.google.com/feeds/list/1lZWwacSVxTD_ciOsuNsrzeMTNAl0Dj8SOrbaMqPKM7U/od6/public/values?alt=json'
+        var parse = function(entry) {
+            console.log('loadTarmedSheet - entry: ', entry);
+            var category = entry['gsx$category']['$t'];
+            var description = entry['gsx$description']['$t'];
+            var title = entry['gsx$title']['$t'];
+            return {
+                category: category,
+                description: description,
+                title: title,
+                url: url
+            };
+        }
+        $http.get(url)
+            .success(function(response) {
+                var entries = response['feed']['entry'];
+                $scope.parsedEntries = [];
+                for (key in entries) {
+                    var content = entries[key];
+                    $scope.parsedEntries.push(parse(content));
+                }
+            });
+    };
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys';
