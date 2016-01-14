@@ -5427,15 +5427,23 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
 
         var parse = function(entry) {
-            console.log('loadTarmedSheet - entry: ', entry);
-            var category = entry['gsx$category']['$t'];
-            var description = entry['gsx$description']['$t'];
-            var title = entry['gsx$title']['$t'];
+            console.log('parse - loadTarmedSheet - entry: ', entry);
+            var leistungsgruppe_code = entry['gsx$leistungsgruppecode']['$t'];
+            var leistungsgruppe_beschreibung = entry['gsx$leistungsgruppebeschreibung']['$t'];
+            var kapitel_code = entry['gsx$kapitelcode']['$t'];
+            var kapitel_beschreibung = entry['gsx$kapitelbeschreibung']['$t'];
+            var tarifpos_code = entry['gsx$tarifpositioncode']['$t'];
+            var tarifpos_beschreibung = entry['gsx$tarifpositionbeschreibung']['$t'];
+            var tarifpos_info = entry['gsx$tarifpositionzusatz']['$t'];
+
             return {
-                category: category,
-                description: description,
-                title: title,
-                url: url
+                leistungsgruppe_code: leistungsgruppe_code,
+                leistungsgruppe_beschreibung: leistungsgruppe_beschreibung,
+                kapitel_code: kapitel_code,
+                kapitel_beschreibung: kapitel_beschreibung,
+                tarifpos_code: tarifpos_code,
+                tarifpos_beschreibung: tarifpos_beschreibung,
+                tarifpos_info: tarifpos_info
             };
         }
 
@@ -5445,19 +5453,15 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
 
                 var entries = response['feed']['entry'];
 
-                $scope.d.parsedEntries = [];
+                $scope.d.parsedTARMED = [];
                 entries.forEach(function(content, myindex) {
-                    //$scope.d.parsedEntries.push(parse(content));
+                    $scope.d.parsedTARMED.push(parse(content));
                     console.log('(-) loadTARMEDSheet - content: ', myindex, content);
 
                 });
 
+                console.log('(!) parsedTARMED - success: ', $scope.d.parsedTARMED);
 
-                //$scope.d.parsedEntries = [];
-                //for (key in entries) {
-                //    var content = entries[key];
-                //    
-                //}
             });
     };
 
