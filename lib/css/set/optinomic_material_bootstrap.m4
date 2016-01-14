@@ -1,5 +1,5 @@
-include(../lib/css/vendor/bootstrap/3.3.5/css/bootstrap.min.css) 
 include(../lib/css/vendor/angular-material/1.0.0/angular-material.css) 
+include(../lib/css/vendor/bootstrap/3.3.5/css/bootstrap.min.css) 
 include(../lib/css/vendor/mdi/css/materialdesignicons.min.css) 
 include(../lib/js/vendor/ag-grid/dist/ag-grid.min.css) 
 include(../lib/js/vendor/ag-grid/dist/theme-optinomic.css) 
