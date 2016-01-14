@@ -131,10 +131,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
 
-
-
-
     $scope.entryNew = function() {
+        // New
         $scope.d.appState = 'new';
 
         // Init New Entry
@@ -151,6 +149,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
     $scope.entryEdit = function(currentIndex) {
+        // EDIT
         // Store current entry - just for, do not save if 'cancel'.
         $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyNewEntryID = currentIndex;
@@ -165,6 +164,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
 
     $scope.getHisoryEntrys = function() {
+        // Get Data
 
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
@@ -186,15 +186,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             };
             console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
         });
-
     };
 
     $scope.putHisoryPost = function() {
-
+        // Save
 
         // Get Current Entrys
-        //$scope.getHisoryEntrys();
-
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
@@ -218,7 +215,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             $scope.appInit();
             $scope.getHisoryEntrys();
         });
-
     };
 
 

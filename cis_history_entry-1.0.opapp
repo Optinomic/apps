@@ -29,8 +29,8 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <div layout="column" layout-gt-xs="row" layout-align="end center">
-    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Hinzufügen">
-        <i class="md-headline mdi mdi-plus"></i>
+    <md-button ng-click="entryNew()" class="md-icon-button " aria-label="Hinzufügen">
+        <i class="md-title mdi mdi-plus"></i>
         <md-tooltip md-direction="bottom">
             Neuer Verlaufseintrag hinzufügen.
         </md-tooltip>
@@ -40,12 +40,12 @@ website = http://www.optinomic.com/
     </div>
     <span flex></span>
     <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen">
-        <i class="mdi mdi-dots-vertical"></i>
+        <i class="md-title mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
         </md-tooltip>
     </md-button>
-    <div flex="10"></div>
+    <div flex="5">&nbsp;</div>
 </div>
 <div ng-if="d.appState === 'show'">
     <md-content>
@@ -5559,10 +5559,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
 
-
-
-
     $scope.entryNew = function() {
+        // New
         $scope.d.appState = 'new';
 
         // Init New Entry
@@ -5579,6 +5577,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
     $scope.entryEdit = function(currentIndex) {
+        // EDIT
         // Store current entry - just for, do not save if 'cancel'.
         $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyNewEntryID = currentIndex;
@@ -5593,6 +5592,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
 
     $scope.getHisoryEntrys = function() {
+        // Get Data
 
         var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
@@ -5614,15 +5614,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             };
             console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
         });
-
     };
 
     $scope.putHisoryPost = function() {
-
+        // Save
 
         // Get Current Entrys
-        //$scope.getHisoryEntrys();
-
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
@@ -5646,7 +5643,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             $scope.appInit();
             $scope.getHisoryEntrys();
         });
-
     };
 
 
@@ -5672,7 +5668,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
 .mdi {
     display: inline-block;
-    font: normal normal normal 48px/1 "Material Design Icons";
+    font: normal normal normal 24px/1 "Material Design Icons";
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;

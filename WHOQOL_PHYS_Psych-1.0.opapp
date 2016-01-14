@@ -5429,7 +5429,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 .mdi {
     display: inline-block;
-    font: normal normal normal 48px/1 "Material Design Icons";
+    font: normal normal normal 24px/1 "Material Design Icons";
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;

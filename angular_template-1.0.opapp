@@ -6143,7 +6143,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 .mdi {
     display: inline-block;
-    font: normal normal normal 48px/1 "Material Design Icons";
+    font: normal normal normal 24px/1 "Material Design Icons";
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -28101,6 +28101,7 @@ pid = X1X2
 fid = X1X3
 min_questions =
 min_lastpage = 2
+
 
 
 [survey]

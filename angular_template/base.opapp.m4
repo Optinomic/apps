@@ -66,6 +66,7 @@ min_questions =
 min_lastpage = 2
 
 
+
 [survey]
 id = my_ng_survey
 type = ng

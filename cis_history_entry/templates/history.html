@@ -1,7 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
 <div layout="column" layout-gt-xs="row" layout-align="end center">
-    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Hinzufügen">
-        <i class="md-headline mdi mdi-plus"></i>
+    <md-button ng-click="entryNew()" class="md-icon-button " aria-label="Hinzufügen">
+        <i class="md-title mdi mdi-plus"></i>
         <md-tooltip md-direction="bottom">
             Neuer Verlaufseintrag hinzufügen.
         </md-tooltip>
@@ -11,12 +11,12 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <span flex></span>
     <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen">
-        <i class="mdi mdi-dots-vertical"></i>
+        <i class="md-title mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
         </md-tooltip>
     </md-button>
-    <div flex="10"></div>
+    <div flex="5">&nbsp;</div>
 </div>
 <div ng-if="d.appState === 'show'">
     include(templates/verlaufseintrag_all.html)
