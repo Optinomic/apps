@@ -5406,7 +5406,7 @@ angular.module('optinomicDataModule')
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -5567,9 +5567,21 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             if (dataService.isEmpty(data)) {
                 $scope.d.historyEntrys = [];
             } else {
+                // Enrich Datum.
+                data.forEach(function(content, myindex) {
+                    date = content.datum;
+
+                    content.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
+                    content.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                    content.datum_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+                    content.datum_time = $filter("amDateFormat")(date, 'HH:mm');
+
+                });
+
                 $scope.d.historyEntrys = data;
+
             };
-            console.log('(+) getHisoryEntrys ', data, $scope.d.historyEntrys);
+            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
         });
 
     };
