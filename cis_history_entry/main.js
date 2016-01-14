@@ -189,7 +189,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         };
 
 
-        console.log('RUN: putHisoryPost', JSON.stringify($scope.d.historyEntrys, null, "    "));
+        console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
 
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);

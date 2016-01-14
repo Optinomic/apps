@@ -87,7 +87,7 @@ website = http://www.optinomic.com/
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-	{{JSON.stringify(d.historyNewEntry, null, "    ")}}
+	{{d.historyEntrys | json}}
 </pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
@@ -132,7 +132,7 @@ website = http://www.optinomic.com/
     <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
-	{{JSON.stringify(d.historyNewEntry, null, "    ")}}
+	{{d.historyEntrys | json}}
 </pre>
 <md-button class="md-raised" ng-click="entryCancel()">Cancel</md-button>
 <md-button class="md-raised" ng-click="putHisoryPost()">Save</md-button>
@@ -5593,7 +5593,7 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
         };
 
 
-        console.log('RUN: putHisoryPost', JSON.stringify($scope.d.historyEntrys, null, "    "));
+        console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
 
 
         var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
