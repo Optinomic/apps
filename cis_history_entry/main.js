@@ -189,7 +189,8 @@ app.controller('AppCtrl', function($scope, $http, dataService, scopeDService) {
             $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
         };
 
-        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
+
+        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, JSON.stringify($scope.d.historyEntrys));
         api_call.then(function(data) {
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
