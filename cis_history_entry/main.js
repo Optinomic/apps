@@ -152,8 +152,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
         $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.historyNewEntry.datum = new Date($scope.d.historyNewEntry.datum);
+
         $scope.d.historyNewEntryID = currentIndex;
         $scope.d.appState = 'edit';
+
 
         console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
     };
