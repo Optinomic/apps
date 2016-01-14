@@ -590,7 +590,7 @@ angular.module('optinomicDataModule').config(function($routeProvider) {
 });
 
 
-angular.module('optinomicDataModule').config(function($mdThemingProvider, $mdDateLocaleProvider) {
+angular.module('optinomicApp').config(function($mdThemingProvider, $mdDateLocaleProvider) {
 
     $mdThemingProvider.theme('default')
         .primaryPalette('grey', {
