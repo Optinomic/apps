@@ -29,12 +29,15 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="column" layout-gt-xs="row" layout-align="end center">
+<div class="md-whiteframe-1dp" layout="column" layout-gt-xs="row" layout-align="end center">
     <div>
         <h3 class="md-headline">Verlaufseintrag</h3>
     </div>
     <span flex></span>
     <md-button class="md-raised" ng-click="entryNew()">Neu</md-button>
+    <md-button class="md-icon-button" aria-label="Settings">
+        <i class="mdi mdi-auto-fix"></i>
+    </md-button>
 </div>
 <div ng-if="d.appState === 'show'">
     <md-content>
