@@ -1,7 +1,7 @@
 [module]
 id = com.optinomic.cis.hisoryentry
 name = Verlaufseintrag
-short_description = Verlaufseintrag.
+short_description = Psychiatrie und Psychotherapie, Verlaufseinträge mit TARMED Tarifpositionen.
 version = include(VERSION)
 type = patient
 
