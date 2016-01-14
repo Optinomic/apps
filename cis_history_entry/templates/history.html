@@ -3,12 +3,9 @@ include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
     include(templates/verlaufseintrag_all.html)
 </div>
 <div ng-if="d.appState === 'edit'">
-    include(templates/verlaufseintrag_edit.html)
+    <h3 class="md-headline">Verlaufseintrag bearbeiten</h3> include(templates/verlaufseintrag_edit.html)
 </div>
 <div ng-if="d.appState === 'new'">
-    include(templates/verlaufseintrag_new.html)
-</div>
-<div ng-if="d.appState === 'show'">
-    <md-button style="background-color: #E8EAF6;" ng-click="entryNew()">Neu</md-button>
+    <h3 class="md-headline">Neuer Verlaufseintrag erstellen</h3> include(templates/verlaufseintrag_edit.html)
 </div>
 include(templates/toolbar.html) include(../lib/html/optinomic/page/end.m4)

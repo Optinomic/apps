@@ -1,8 +1,16 @@
-<div layout="column" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryNew()" aria-label="Hinzufügen" style="background-color: #E8EAF6;">
+<div ng-if="d.appState === 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
+    <md-button ng-click="entryNew()" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i> Neuer Verlaufseintrag
     </md-button>
-    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="background-color: #E8EAF6;">
+    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-dots-vertical"></i> Einstellungen
+    </md-button>
+</div>
+<div ng-if="d.appState !== 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
+    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #3F51B5;">
+        <i class="md-title mdi mdi-close-circle-outline"></i> Cancel
+    </md-button>
+    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+        <i class="md-title mdi mdi-content-save"></i> Speichern
     </md-button>
 </div>
