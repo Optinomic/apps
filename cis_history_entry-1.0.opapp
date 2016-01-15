@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:d.appInit.predicate:d.appInit.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index | filter:d.appInit.filter as results | orderBy:d.appInit.predicate:d.appInit.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -5803,7 +5803,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.nodeTree = 'hisoryentrys_new4';
 
         $scope.d.appInit = {
-            filter: [],
+            filter: '',
             predicate: 'datum_sort',
             reverse: true,
             debug: false

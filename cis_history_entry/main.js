@@ -111,7 +111,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.nodeTree = 'hisoryentrys_new4';
 
         $scope.d.appInit = {
-            filter: [],
+            filter: '',
             predicate: 'datum_sort',
             reverse: true,
             debug: false
