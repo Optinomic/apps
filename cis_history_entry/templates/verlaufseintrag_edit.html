@@ -1,19 +1,22 @@
 <md-card>
-    <md-card-title>
-        <md-card-title-text>
-            <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
-            <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
-        </md-card-title-text>
-    </md-card-title>
+    <div style="background-color: #424242; color: #FAFAFA">
+        <md-card-title>
+            <md-card-title-text>
+                <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+        </md-card-content>
+    </div>
     <md-card-content>
-        <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+        <md-input-container class="md-block">
+            <label>Verlauf</label>
+            <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+        </md-input-container>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="start center">
-        <md-card-icon-actions>
-            <md-button class="md-icon-button" aria-label="Favorite">
-                <i class="md-title mdi mdi-dots-vertical"></i>
-            </md-button>
-        </md-card-icon-actions>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
@@ -21,12 +24,6 @@
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
     </md-card-actions>
-    <md-card-content>
-        <md-input-container class="md-block">
-            <label>Verlauf</label>
-            <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-        </md-input-container>
-    </md-card-content>
 </md-card>
 <div>
     &nbsp;
