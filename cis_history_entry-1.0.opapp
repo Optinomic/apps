@@ -139,15 +139,16 @@ website = http://www.optinomic.com/
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
+        <p>&nbsp;</p>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-input-container flex class="md-block flow-text">
                 <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
                 <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
             </md-input-container>
-            <pre ng-if="d.appInit.debug">
+        </div>
+        <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
-        </div>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
@@ -220,15 +221,16 @@ website = http://www.optinomic.com/
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
+        <p>&nbsp;</p>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-input-container flex class="md-block flow-text">
                 <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
                 <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
             </md-input-container>
-            <pre ng-if="d.appInit.debug">
+        </div>
+        <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
-        </div>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
