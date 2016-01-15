@@ -239,14 +239,42 @@ website = http://www.optinomic.com/
         </md-card-title>
     </div>
     <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <p>Settings</p>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Dauer (Anzahl 5 Minuten)</label>
+                <input ng-model="d.historyNewEntry.dauer" type="number">
+            </md-input-container>
         </div>
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <p>More Settings</p>
+            <p>Filer</p>
+            <p>- Ascending / Descending</p>
+            <md-switch ng-model="data.cb1" aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
+                Switch 2 (md-warn): {{ data.cb2 }}
+            </md-switch>
+            <p>- Default Filter: Current Week</p>
+            <md-switch ng-model="data.cb2" aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
+                Switch 2 (md-warn): {{ data.cb2 }}
+            </md-switch>
         </div>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
