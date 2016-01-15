@@ -17,7 +17,7 @@
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
-            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" ng-click="showConfirm($event)" aria-label="Löschen" style="color: #9E9E9E;">
+            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" ng-click="showConfirm($event, $index)" aria-label="Löschen" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-delete"></i>
                 <md-tooltip md-direction="bottom">
                     Neuer Verlaufseintrag

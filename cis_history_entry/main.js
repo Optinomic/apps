@@ -145,23 +145,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // Dialogs
     // -----------------------------------
 
-    $scope.showConfirm = function(ev) {
+    $scope.showConfirm = function(ev, my_index) {
         console.log('showConfirm: ', ev);
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('Would you like to delete this?')
-            .textContent('All of the banks have agreed to forgive you your debts.')
-            .ariaLabel('Lucky day')
+            .title('Verlaufseintrag löschen?')
+            .textContent('Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?')
+            .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
             .cancel('Abbrechen');
         $mdDialog.show(confirm).then(function() {
 
-            $scope.d.historyEntrys.splice(my_index, 1);
+            //$scope.d.historyEntrys.splice(my_index, 1);
             console.log('Deleted! ');
 
 
         }, function() {
+            console.log('Cancel! ');
+
             $scope.entryCancel();
         });
     };
