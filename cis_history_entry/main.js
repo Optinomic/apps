@@ -111,7 +111,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'show';
 
         $scope.d.appInit = {
-            filter: '',
+            filter: [],
             predicate: 'datum_sort',
             reverse: true,
             debug: false
