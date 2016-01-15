@@ -21,6 +21,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
+        $scope.d.appState = 'loading';
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
@@ -108,7 +109,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys_new4';
-        $scope.d.appState = 'show';
 
         $scope.d.appInit = {
             filter: [],
@@ -177,6 +177,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
                 return [item.datum_week];
             });
+            $scope.d.appState = 'show';
 
             //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
         });
