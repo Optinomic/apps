@@ -5834,7 +5834,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.saveUserSettings = function() {
 
-        json_value = $scope.d.userSettings;
+        var json_value = $scope.d.userSettings;
         var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
