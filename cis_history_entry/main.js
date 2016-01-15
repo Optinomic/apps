@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -196,10 +196,33 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         var toDelete = $scope.d.historyEntrys[my_index];
         console.log('Should I deleted: ', toDelete);
 
-        $scope.d.historyEntrys.splice(my_index, 1);
-        console.log('Deleted! ');
+        showConfirm($event);
+
+
 
     };
+
+
+    $scope.showConfirm = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete this?')
+            .textContent('All of the banks have agreed to forgive you your debts.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Löschen')
+            .cancel('Abbrechen');
+        $mdDialog.show(confirm).then(function() {
+
+            $scope.d.historyEntrys.splice(my_index, 1);
+            console.log('Deleted! ');
+
+
+        }, function() {
+            $scope.entryCancel();
+        });
+    };
+
 
 
     $scope.entrySave = function() {

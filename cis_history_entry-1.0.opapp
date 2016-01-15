@@ -70,13 +70,13 @@ website = http://www.optinomic.com/
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
-            entryDelete
-            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryDelete($index)" aria-label="Löschen">
+            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" ng-click="entryDelete($index)" aria-label="Löschen" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-delete"></i>
                 <md-tooltip md-direction="bottom">
                     Neuer Verlaufseintrag
                 </md-tooltip>
             </md-button>
+            <span flex></span>
             <md-button ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
         </md-card-actions>
     </md-card>
@@ -5555,7 +5555,7 @@ angular.module('optinomicDataModule')
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -5748,10 +5748,33 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         var toDelete = $scope.d.historyEntrys[my_index];
         console.log('Should I deleted: ', toDelete);
 
-        $scope.d.historyEntrys.splice(my_index, 1);
-        console.log('Deleted! ');
+        showConfirm($event);
+
+
 
     };
+
+
+    $scope.showConfirm = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete this?')
+            .textContent('All of the banks have agreed to forgive you your debts.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Löschen')
+            .cancel('Abbrechen');
+        $mdDialog.show(confirm).then(function() {
+
+            $scope.d.historyEntrys.splice(my_index, 1);
+            console.log('Deleted! ');
+
+
+        }, function() {
+            $scope.entryCancel();
+        });
+    };
+
 
 
     $scope.entrySave = function() {
