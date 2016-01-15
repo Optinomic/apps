@@ -124,7 +124,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.getUserSettings = function() {
 
-
         var userSettingsDefault = {
             kapitel_id: 3,
             selected_tarifpos_code: "02.0210",
@@ -132,7 +131,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             week_filter: true,
             sort_reverse: false
         };
-
 
         var api_call = dataService.getUserAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
@@ -147,6 +145,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
 
     };
+
+    $scope.saveUserSettings = function() {
+
+        json_value = $scope.d.userSettings;
+        var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
+        api_call.then(function(data) {
+            console.log('(+) saveUserSettings - saved: ', json_value);
+            $scope.d.appState = 'show';
+        });
+
+    };
+
 
 
     $scope.getHisoryEntrys = function() {
@@ -250,7 +260,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.historyEntrys.splice(my_index, 1);
         console.log('Deleted - Index', my_index);
     };
-
 
 
     $scope.entrySave = function() {
