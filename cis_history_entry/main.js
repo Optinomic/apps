@@ -113,8 +113,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'hisoryentrys_new3';
-        $scope.d.appState = 'show'
+        $scope.d.appState = 'show';
 
+        $scope.d.appSort = {
+            predicate: 'datum_sort',
+            reverse: true
+        };
         $scope.loadTARMEDSheet();
     };
 
