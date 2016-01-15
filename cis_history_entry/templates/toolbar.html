@@ -1,5 +1,5 @@
 <div ng-if="d.appState === 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryNew()" aria-label="Hinzufügen" style="color: #3F51B5;">
+    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i>
         <md-tooltip md-direction="bottom">
             Neuer Verlaufseintrag
@@ -9,7 +9,7 @@
         <label>Filter: {{d.sort.filter}}</label>
         <input ng-model="d.sort.filter">
     </md-input-container>
-    <md-button ng-click="entryNew()" aria-label="Einstellungen" style="color: #9E9E9E;">
+    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
