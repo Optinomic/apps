@@ -5523,13 +5523,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
                 });
                 //console.log('(!) TARMEDall', $scope.d.TARMEDall);
 
-                // Group Responses
-                //$scope.d.TARMEDleistungsgruppe = dataService.groupBy($scope.d.TARMEDall, function(item) {
-                //    return [item.leistungsgruppe_code];
-                //});
-                //console.log('(!) TARMEDleistungsgruppe', $scope.d.TARMEDleistungsgruppe);
-
-
                 $scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                     return [item.kapitel_code];
                 });
@@ -5624,26 +5617,29 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
             if (dataService.isEmpty(data)) {
                 $scope.d.historyEntrys = [];
             } else {
-                // Enrich Datum.
-                data.forEach(function(content, myindex) {
-                    var date = content.datum;
-                    content.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
-                    content.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
-                    content.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-                    content.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
-                    content.datum_time = $filter("amDateFormat")(date, 'HH:mm');
-                });
-
                 $scope.d.historyEntrys = data;
             };
-            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys);
+
+            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
+                return [item.datum_week];
+            });
+
+            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
+
+
         });
     };
 
     $scope.putHisoryPost = function() {
         // Save
 
-        // Get Current Entrys
+        // Datum erweitern.
+        var date = $scope.d.historyNewEntry.datum;
+        $scope.d.historyNewEntry.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
+        $scope.d.historyNewEntry.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+        $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+        $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+        $scope.d.historyNewEntry.datum_time = $filter("amDateFormat")(date, 'HH:mm');
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
