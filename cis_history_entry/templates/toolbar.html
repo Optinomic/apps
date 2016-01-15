@@ -1,9 +1,13 @@
-<div ng-if="d.appState === 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
+<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start end">
     <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i>
-        <md-tooltip md-direction="bottom">
+        <md-tooltip md-direction="top">
             Neuer Verlaufseintrag
         </md-tooltip>
+    </md-button>
+    <md-button md-primary ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Reverse">
+        <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
     </md-button>
     <md-input-container flex class="md-block">
         <label>Filter: {{d.sort.filter}}</label>
@@ -11,7 +15,7 @@
     </md-input-container>
     <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
+        <md-tooltip md-direction="top">
             Einstellungen
         </md-tooltip>
     </md-button>

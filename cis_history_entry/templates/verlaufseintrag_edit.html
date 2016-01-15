@@ -26,7 +26,7 @@
         <md-divider></md-divider>
         <p>&nbsp;</p>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container flex>
+            <md-input-container>
                 <label>Leistungsgruppe</label>
                 <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
                     <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
@@ -34,7 +34,7 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex ng-if="d.historyNewEntry.tarmed.kapitel_id">
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
                 <label>Tarifposition</label>
                 <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
                     <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
@@ -63,11 +63,8 @@
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
-        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-        </md-button>
         <span flex>&nbsp;</span>
-        <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
+        <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
     </md-card-actions>
