@@ -97,10 +97,18 @@ website = http://www.optinomic.com/
     </div>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start end">
-            <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-            <md-input-container>
+            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+            <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
                 <input ng-model="d.historyNewEntry.dauer" type="number">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Benutzer</label>
+                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="user.id">
+                        {{user.data.extras.full_name}}
+                    </md-option>
+                </md-select>
             </md-input-container>
         </div>
     </md-card-content>
@@ -122,19 +130,6 @@ website = http://www.optinomic.com/
 <div>
     &nbsp;
 </div>
-<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-    <div>
-        <md-input-container>
-            <label>Title</label>
-            <input ng-model="user.title">
-        </md-input-container>
-        <md-input-container>
-            <label>Email</label>
-            <input ng-model="user.email" type="email">
-        </md-input-container>
-        <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-    </div>
-</md-content>
 <div>
     &nbsp;
 </div>
@@ -192,10 +187,18 @@ website = http://www.optinomic.com/
     </div>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start end">
-            <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-            <md-input-container>
+            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+            <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
                 <input ng-model="d.historyNewEntry.dauer" type="number">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Benutzer</label>
+                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="user.id">
+                        {{user.data.extras.full_name}}
+                    </md-option>
+                </md-select>
             </md-input-container>
         </div>
     </md-card-content>
@@ -217,19 +220,6 @@ website = http://www.optinomic.com/
 <div>
     &nbsp;
 </div>
-<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-    <div>
-        <md-input-container>
-            <label>Title</label>
-            <input ng-model="user.title">
-        </md-input-container>
-        <md-input-container>
-            <label>Email</label>
-            <input ng-model="user.email" type="email">
-        </md-input-container>
-        <md-datepicker ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-    </div>
-</md-content>
 <div>
     &nbsp;
 </div>
