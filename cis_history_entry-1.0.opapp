@@ -86,7 +86,7 @@ website = http://www.optinomic.com/
 
 </div>
 <div ng-if="d.appState === 'edit'">
-    <h3 class="md-headline">Verlaufseintrag bearbeiten</h3> <md-card>
+    <md-card>
     <div style="background-color: #424242; color: #FAFAFA">
         <md-card-title>
             <md-card-title-text>
@@ -96,7 +96,7 @@ website = http://www.optinomic.com/
         </md-card-title>
     </div>
     <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start end">
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
             <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
@@ -105,23 +105,44 @@ website = http://www.optinomic.com/
             <md-input-container flex>
                 <label>Benutzer</label>
                 <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
-                    <md-option ng-repeat="user in d.dataMain.users.all" value="user.id">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
                         {{user.data.extras.full_name}}
                     </md-option>
                 </md-select>
             </md-input-container>
         </div>
+        <md-divider></md-divider>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-divider></md-divider>
     </md-card-content>
     <md-card-content>
-        <md-input-container class="md-block">
-            <label>Verlauf</label>
-            <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+        <md-input-container class="md-block flow-text">
+            <label>Verlaufseintrag</label>
+            <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
+        <span flex>&nbsp;</span>
         <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
@@ -176,7 +197,7 @@ website = http://www.optinomic.com/
 
 </div>
 <div ng-if="d.appState === 'new'">
-    <h3 class="md-headline">Neuer Verlaufseintrag erstellen</h3> <md-card>
+    <md-card>
     <div style="background-color: #424242; color: #FAFAFA">
         <md-card-title>
             <md-card-title-text>
@@ -186,7 +207,7 @@ website = http://www.optinomic.com/
         </md-card-title>
     </div>
     <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start end">
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
             <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
@@ -195,23 +216,44 @@ website = http://www.optinomic.com/
             <md-input-container flex>
                 <label>Benutzer</label>
                 <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
-                    <md-option ng-repeat="user in d.dataMain.users.all" value="user.id">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
                         {{user.data.extras.full_name}}
                     </md-option>
                 </md-select>
             </md-input-container>
         </div>
+        <md-divider></md-divider>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-divider></md-divider>
     </md-card-content>
     <md-card-content>
-        <md-input-container class="md-block">
-            <label>Verlauf</label>
-            <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+        <md-input-container class="md-block flow-text">
+            <label>Verlaufseintrag</label>
+            <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
+        <span flex>&nbsp;</span>
         <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
