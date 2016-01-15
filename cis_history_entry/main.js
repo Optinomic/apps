@@ -116,7 +116,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             reverse: true,
             debug: false
         };
+
         $scope.loadTARMEDSheet();
+        $scope.getUserSettings();
+    };
+
+
+    $scope.getUserSettings = function() {
+
+
+        var userSettingsDefault = {
+            kapitel_id: 3,
+            selected_tarifpos_code: "02.0230",
+            dauer: 14,
+            week_filter: true,
+            sort_reverse: false
+        };
+
+        $scope.d.userSettings = userSettingsDefault;
+
     };
 
 
