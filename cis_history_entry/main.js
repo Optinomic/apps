@@ -146,6 +146,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
 
     $scope.showConfirm = function(ev) {
+        console.log('showConfirm: ', ev);
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Would you like to delete this?')
@@ -219,9 +220,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var toDelete = $scope.d.historyEntrys[my_index];
         console.log('Should I deleted: ', toDelete);
-
-        $scope.showConfirm($event);
-
 
 
     };
