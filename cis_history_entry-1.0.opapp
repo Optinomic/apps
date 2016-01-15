@@ -254,7 +254,7 @@ website = http://www.optinomic.com/
             <md-input-container ng-if="d.userSettings.kapitel_id">
                 <label>Tarifposition</label>
                 <md-select ng-model="d.userSettings.selected_tarifpos_code" md-on-close="" aria-label="TARMED Tarifpositions">
-                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.userSettings.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
                         {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
                     </md-option>
                 </md-select>
@@ -263,11 +263,15 @@ website = http://www.optinomic.com/
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
-        <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
-        <md-input-container class="md-block">
-            <label>Dauer ( Anzahl 5 Minuten )</label>
-            <input ng-model="d.userSettings.dauer" type="number">
-        </md-input-container>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container class="md-block">
+                <label>Dauer ( Anzahl 5 Minuten )</label>
+                <input ng-model="d.userSettings.dauer" type="number">
+            </md-input-container>
+        </div>
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
