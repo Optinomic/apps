@@ -267,7 +267,7 @@ website = http://www.optinomic.com/
             <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
         </div>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container class="md-block">
+            <md-input-container flex class="md-block">
                 <label>Dauer ( Anzahl 5 Minuten )</label>
                 <input ng-model="d.userSettings.dauer" type="number">
             </md-input-container>
@@ -5720,7 +5720,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var userSettingsDefault = {
             kapitel_id: 3,
-            selected_tarifpos_code: "02.0230",
+            selected_tarifpos_code: "02.0210",
             dauer: 14,
             week_filter: true,
             sort_reverse: false

@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var userSettingsDefault = {
             kapitel_id: 3,
-            selected_tarifpos_code: "02.0230",
+            selected_tarifpos_code: "02.0210",
             dauer: 14,
             week_filter: true,
             sort_reverse: false

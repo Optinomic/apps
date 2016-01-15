@@ -35,7 +35,7 @@
             <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
         </div>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container class="md-block">
+            <md-input-container flex class="md-block">
                 <label>Dauer ( Anzahl 5 Minuten )</label>
                 <input ng-model="d.userSettings.dauer" type="number">
             </md-input-container>
