@@ -8,10 +8,10 @@
         </md-card-title>
     </div>
     <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+        <div layout="row" layout-gt-xs="row" layout-align="space-between end" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
             <md-input-container flex>
-                <label>Dauer (Anzahl 5 Minuten)</label>
+                <label>Dauer (Anzahl 5 Minuten) | {{d.historyNewEntry.dauer * 5}} Minuten </label>
                 <input ng-model="d.historyNewEntry.dauer" type="number">
             </md-input-container>
             <md-input-container flex>
