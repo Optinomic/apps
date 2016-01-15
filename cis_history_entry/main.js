@@ -115,7 +115,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show';
 
-        $scope.d.appSort = {
+        $scope.d.sort = {
+            filter: '',
             predicate: 'datum_sort',
             reverse: true
         };

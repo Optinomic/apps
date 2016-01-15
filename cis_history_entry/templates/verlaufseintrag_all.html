@@ -1,10 +1,14 @@
 <md-input-container>
-    <label>OrderBy: Reverse: {{d.appSort.reverse}}</label>
+    <label>OrderBy: Reverse: {{d.sort.reverse}}</label>
     <input ng-model="d.appSort.predicate">
 </md-input-container>
-<md-button md-primary ng-click="d.appSort.reverse = !d.appSort.reverse" aria-label="Reverse">Reverse</md-button>
+<md-input-container>
+    <label>OrderBy: Reverse: {{d.sort.filter}}</label>
+    <input ng-model="d.appSort.predicate">
+</md-input-container>
+<md-button md-primary ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Reverse">Reverse</md-button>
 <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appSort.predicate:d.appSort.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys | filter:d.sort.filter | orderBy:d.sort.predicate:d.sort.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
