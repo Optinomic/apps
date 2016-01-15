@@ -239,8 +239,8 @@ website = http://www.optinomic.com/
         </md-card-title>
     </div>
     <md-card-content>
+        <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
             <md-input-container>
                 <label>Leistungsgruppe</label>
                 <md-select ng-model="d.userSettings.kapitel_id" aria-label="TARMED Kapitel">
@@ -257,23 +257,22 @@ website = http://www.optinomic.com/
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex>
-                <label>Dauer (Anzahl 5 Minuten)</label>
-                <input ng-model="d.userSettings.dauer" type="number">
-            </md-input-container>
         </div>
+        <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? </p>
+        <md-input-container flex>
+            <label>Dauer ( Anzahl 5 Minuten | {{d.userSettings.dauer * 5}} Minuten )</label>
+            <input ng-model="d.userSettings.dauer" type="number">
+        </md-input-container>
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <p>Filer</p>
-            <p>- Ascending / Descending</p>
-            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" ng-true-value="'yup'" ng-false-value="'nope'" class="md-accent">
-                Neuste Einträge zuoberst: {{ d.userSettings.sort_reverse }}
+            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
+                Neuste Einträge zuoberst anzeigen.
             </md-switch>
             <p>- Default Filter: Current Week</p>
-            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
-                Wochnfilter aktiviert: {{ d.userSettings.week_filter }}
+            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
+                Wochnfilter standardmässig aktivieren.
             </md-switch>
         </div>
         <pre ng-if="d.appInit.debug">
