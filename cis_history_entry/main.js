@@ -160,6 +160,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
     };
 
+
+    $scope.entrySettings = function() {
+        // Cancel
+        $scope.d.appState = 'settings';
+    };
+
+
+
     $scope.entryDelete = function() {
         $scope.d.appState = 'show';
     };

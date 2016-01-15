@@ -28,12 +28,6 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
  <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
-        <i class="md-title mdi mdi-plus"></i>
-        <md-tooltip md-direction="bottom">
-            Neuer Verlaufseintrag
-        </md-tooltip>
-    </md-button>
     <md-button md-primary class="md-icon-button" ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Sortierung">
         <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
@@ -42,7 +36,13 @@ website = http://www.optinomic.com/
         <label>Filter: {{d.sort.filter}}</label>
         <input ng-model="d.sort.filter">
     </md-input-container>
-    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+    <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
+        <i class="md-title mdi mdi-plus"></i>
+        <md-tooltip md-direction="bottom">
+            Neuer Verlaufseintrag
+        </md-tooltip>
+    </md-button>
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
@@ -129,8 +129,6 @@ website = http://www.optinomic.com/
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-    </md-card-content>
-    <md-card-content>
         <pre ng-if="d.sort.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
@@ -203,8 +201,6 @@ website = http://www.optinomic.com/
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-    </md-card-content>
-    <md-card-content>
         <pre ng-if="d.sort.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
@@ -224,13 +220,39 @@ website = http://www.optinomic.com/
 </md-card>
 
 </div>
+<div ng-if="d.appState === 'settings'">
+    <md-card>
+    <div style="background-color: #424242; color: #FAFAFA">
+        <md-card-title>
+            <md-card-title-text>
+                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
+            </md-card-title-text>
+        </md-card-title>
+    </div>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p>Settings</p>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p>More Settings</p>
+        </div>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="entryCancel()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern (!)
+        </md-button>
+    </md-card-actions>
+</md-card>
+
+</div>
 <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
-        <i class="md-title mdi mdi-plus"></i>
-        <md-tooltip md-direction="bottom">
-            Neuer Verlaufseintrag
-        </md-tooltip>
-    </md-button>
     <md-button md-primary class="md-icon-button" ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Sortierung">
         <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
@@ -239,7 +261,13 @@ website = http://www.optinomic.com/
         <label>Filter: {{d.sort.filter}}</label>
         <input ng-model="d.sort.filter">
     </md-input-container>
-    <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+    <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
+        <i class="md-title mdi mdi-plus"></i>
+        <md-tooltip md-direction="bottom">
+            Neuer Verlaufseintrag
+        </md-tooltip>
+    </md-button>
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
@@ -5672,6 +5700,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
         console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
     };
+
+
+    $scope.entrySettings = function() {
+        // Cancel
+        $scope.d.appState = 'settings';
+    };
+
+
 
     $scope.entryDelete = function() {
         $scope.d.appState = 'show';

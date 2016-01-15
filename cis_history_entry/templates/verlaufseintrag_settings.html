@@ -1,0 +1,29 @@
+<md-card>
+    <div style="background-color: #424242; color: #FAFAFA">
+        <md-card-title>
+            <md-card-title-text>
+                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
+            </md-card-title-text>
+        </md-card-title>
+    </div>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p>Settings</p>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p>More Settings</p>
+        </div>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="entryCancel()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern (!)
+        </md-button>
+    </md-card-actions>
+</md-card>

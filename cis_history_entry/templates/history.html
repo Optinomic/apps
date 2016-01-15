@@ -8,4 +8,7 @@ include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
 <div ng-if="d.appState === 'new'">
     include(templates/verlaufseintrag_edit.html)
 </div>
+<div ng-if="d.appState === 'settings'">
+    include(templates/verlaufseintrag_settings.html)
+</div>
 include(templates/toolbar.html) include(../lib/html/optinomic/page/end.m4)

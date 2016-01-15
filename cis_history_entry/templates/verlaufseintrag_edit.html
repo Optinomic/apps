@@ -50,8 +50,6 @@
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-    </md-card-content>
-    <md-card-content>
         <pre ng-if="d.sort.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
