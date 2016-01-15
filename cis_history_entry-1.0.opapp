@@ -46,7 +46,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'[datum_sort]'">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'[entry.datum_sort]'">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -106,7 +106,7 @@ website = http://www.optinomic.com/
 </div>
 <md-input-container class="md-block">
     <label>Verlauf</label>
-    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+    <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
 	{{d.historyNewEntry | json}}
@@ -149,7 +149,7 @@ website = http://www.optinomic.com/
 </div>
 <md-input-container class="md-block">
     <label>Verlauf</label>
-    <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+    <textarea class="flow-text" ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
 </md-input-container>
 <pre>
 	{{d.historyNewEntry | json}}
