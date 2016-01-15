@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -5845,6 +5845,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
+            $scope.getUserSettings();
             $scope.d.appState = 'show';
         });
 

@@ -153,6 +153,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
+            $scope.getUserSettings();
             $scope.d.appState = 'show';
         });
 
