@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys track by $index | filter:d.appInit.filter as results | orderBy:d.appInit.predicate:d.appInit.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
