@@ -46,7 +46,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'-datum_sort'">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'datum_sort'">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
