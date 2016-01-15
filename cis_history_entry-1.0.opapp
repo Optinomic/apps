@@ -46,7 +46,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'datum_sort' | groupBy: 'datum_week'">
+    <md-card ng-repeat="entry in d.historyEntrys track by $index | orderBy:'datum_sort'">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -263,6 +263,38 @@ var app = angular
             'http://apps.optinomic.org/lib/**'
         ]);
 
+    })
+    .config(function($mdDateLocaleProvider) {
+        // ---------------------------------------------------------------------------------------------------------------
+        // The $mdDateLocaleProvider is the provider that creates the $mdDateLocale service. 
+        // This provider that allows the user to specify messages, formatters, and parsers for date internationalization. 
+        // The $mdDateLocale service itself is consumed by Angular Material components that that deal with dates.
+        // ---------------------------------------------------------------------------------------------------------------
+
+        $mdDateLocaleProvider.months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+        //$mdDateLocaleProvider.shortMonths = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'];
+        $mdDateLocaleProvider.shortMonths = $mdDateLocaleProvider.months;
+        $mdDateLocaleProvider.days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+        $mdDateLocaleProvider.shortDays = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+
+        // Example uses moment.js to parse and format dates.
+        $mdDateLocaleProvider.parseDate = function(dateString) {
+            return moment(dateString).toDate();
+        };
+        $mdDateLocaleProvider.formatDate = function(date) {
+            return moment(date).'L';
+        };
+
+        $mdDateLocaleProvider.formatDate = function(date) {
+            return moment(date).'L';
+        };
+
+        $mdDateLocaleProvider.weekNumberFormatter = function(weekNumber) {
+            return 'Kalenderwoche ' + weekNumber;
+        };
+        $mdDateLocaleProvider.msgCalendar = 'Kalender';
+        $mdDateLocaleProvider.msgOpenCalendar = 'Kalender öffnen';
+
     });
 
 
@@ -326,6 +358,7 @@ angular.module('optinomicDataModule').filter('date', function() {
         return new_date.toLocaleDateString();
     };
 });
+
 
 
 
