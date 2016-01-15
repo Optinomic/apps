@@ -107,7 +107,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new3';
+        $scope.d.nodeTree = 'hisoryentrys_new4';
         $scope.d.appState = 'show';
 
         $scope.d.appInit = {
