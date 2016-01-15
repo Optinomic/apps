@@ -236,6 +236,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.historyNewEntry.dauer = $scope.d.userSettings.dauer;
         $scope.d.historyNewEntry.tarmed.kapitel_id = $scope.d.userSettings.kapitel_id;
         $scope.d.historyNewEntry.tarmed.selected_tarifpos_code = $scope.d.userSettings.selected_tarifpos_code;
+        $scope.storeSelectedTARMED();
+
     };
 
     $scope.entryEdit = function(currentIndex) {

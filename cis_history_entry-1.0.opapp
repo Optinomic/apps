@@ -139,13 +139,15 @@ website = http://www.optinomic.com/
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
-        <md-input-container class="md-block flow-text">
-            <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
-            <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-        </md-input-container>
-        <pre ng-if="d.appInit.debug">
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container class="md-block flow-text">
+                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
+                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+            </md-input-container>
+            <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
+        </div>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
@@ -218,13 +220,15 @@ website = http://www.optinomic.com/
     </md-card-content>
     <md-divider></md-divider>
     <md-card-content>
-        <md-input-container class="md-block flow-text">
-            <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
-            <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-        </md-input-container>
-        <pre ng-if="d.appInit.debug">
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container class="md-block flow-text">
+                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
+                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+            </md-input-container>
+            <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
+        </div>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
         <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
@@ -5922,6 +5926,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.historyNewEntry.dauer = $scope.d.userSettings.dauer;
         $scope.d.historyNewEntry.tarmed.kapitel_id = $scope.d.userSettings.kapitel_id;
         $scope.d.historyNewEntry.tarmed.selected_tarifpos_code = $scope.d.userSettings.selected_tarifpos_code;
+        $scope.storeSelectedTARMED();
+
     };
 
     $scope.entryEdit = function(currentIndex) {
