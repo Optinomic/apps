@@ -28,13 +28,13 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
  <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button md-primary class="md-icon-button" ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Sortierung">
-        <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
-        <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
     </md-button>
     <md-input-container flex class="md-block">
-        <label>Filter: {{d.sort.filter}}</label>
-        <input ng-model="d.sort.filter">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
     </md-input-container>
     <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
         <i class="md-title mdi mdi-plus"></i>
@@ -52,7 +52,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys | filter:d.sort.filter | orderBy:d.sort.predicate:d.sort.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -70,6 +70,13 @@ website = http://www.optinomic.com/
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            entryDelete
+            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryDelete($index)" aria-label="Löschen">
+                <i class="md-title mdi mdi-delete"></i>
+                <md-tooltip md-direction="bottom">
+                    Neuer Verlaufseintrag
+                </md-tooltip>
+            </md-button>
             <md-button ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
         </md-card-actions>
     </md-card>
@@ -130,19 +137,19 @@ website = http://www.optinomic.com/
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-        <pre ng-if="d.sort.debug">
+        <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.sort.debug = !d.sort.debug" aria-label="Debugging" style="color: #9E9E9E;">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-bug"></i>
         </md-button>
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
         <span flex>&nbsp;</span>
-        <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
     </md-card-actions>
@@ -203,19 +210,19 @@ website = http://www.optinomic.com/
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-        <pre ng-if="d.sort.debug">
+        <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.sort.debug = !d.sort.debug" aria-label="Debugging" style="color: #9E9E9E;">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-bug"></i>
         </md-button>
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
         <span flex>&nbsp;</span>
-        <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
     </md-card-actions>
@@ -255,13 +262,13 @@ website = http://www.optinomic.com/
 
 </div>
 <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button md-primary class="md-icon-button" ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Sortierung">
-        <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
-        <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
     </md-button>
     <md-input-container flex class="md-block">
-        <label>Filter: {{d.sort.filter}}</label>
-        <input ng-model="d.sort.filter">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
     </md-input-container>
     <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
         <i class="md-title mdi mdi-plus"></i>
@@ -5588,6 +5595,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
 
     $scope.loadTARMEDSheet = function() {
+        // Load TARMED Tarifpositionen and save them to $scope
         var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
 
         var parse = function(entry) {
@@ -5637,6 +5645,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
     $scope.storeSelectedTARMED = function() {
+        // If user selects a TARMED Tarifposition save the entry.
         var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
             //console.log('storeSelectedTARMED', entries);
 
@@ -5653,7 +5662,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show';
 
-        $scope.d.sort = {
+        $scope.d.appInit = {
             filter: '',
             predicate: 'datum_sort',
             reverse: true,
@@ -5662,6 +5671,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.loadTARMEDSheet();
     };
 
+
+    $scope.getHisoryEntrys = function() {
+        // Get Data
+
+        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        api_call.then(function(data) {
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.historyEntrys = [];
+            } else {
+                $scope.d.historyEntrys = data;
+            };
+
+            // Group Resuls by Calendar-Week
+            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
+                return [item.datum_week];
+            });
+
+            //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
+        });
+    };
 
 
     // -----------------------------------
@@ -5712,35 +5742,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
 
-
-    $scope.entryDelete = function() {
+    $scope.entryDelete = function(my_index) {
         $scope.d.appState = 'show';
+
+        var toDelete = $scope.d.historyEntrys[my_index];
+        console.log('Should I deleted: ', toDelete);
+
+        $scope.d.historyEntrys.splice(my_index, 1);
+        console.log('Deleted! ');
+
     };
 
 
-    $scope.getHisoryEntrys = function() {
-        // Get Data
-
-        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
-        api_call.then(function(data) {
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.historyEntrys = [];
-            } else {
-                $scope.d.historyEntrys = data;
-            };
-
-            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
-                return [item.datum_week];
-            });
-
-            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
-
-
-        });
-    };
-
-    $scope.putHisoryPost = function() {
+    $scope.entrySave = function() {
         // Save
 
         // Datum erweitern.

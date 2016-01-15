@@ -1,11 +1,11 @@
 <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button md-primary class="md-icon-button" ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Sortierung">
-        <i ng-if="d.sort.reverse" class="md-title mdi mdi-sort-descending"></i>
-        <i ng-if="!d.sort.reverse" class="md-title mdi mdi-sort-ascending"></i>
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
     </md-button>
     <md-input-container flex class="md-block">
-        <label>Filter: {{d.sort.filter}}</label>
-        <input ng-model="d.sort.filter">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
     </md-input-container>
     <md-button ng-click="entryNew()" class="md-fab md-mini" aria-label="Hinzufügen">
         <i class="md-title mdi mdi-plus"></i>

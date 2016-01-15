@@ -43,6 +43,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
 
 
     $scope.loadTARMEDSheet = function() {
+        // Load TARMED Tarifpositionen and save them to $scope
         var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
 
         var parse = function(entry) {
@@ -92,6 +93,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
     $scope.storeSelectedTARMED = function() {
+        // If user selects a TARMED Tarifposition save the entry.
         var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
             //console.log('storeSelectedTARMED', entries);
 
@@ -108,7 +110,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show';
 
-        $scope.d.sort = {
+        $scope.d.appInit = {
             filter: '',
             predicate: 'datum_sort',
             reverse: true,
@@ -117,6 +119,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.loadTARMEDSheet();
     };
 
+
+    $scope.getHisoryEntrys = function() {
+        // Get Data
+
+        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        api_call.then(function(data) {
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.historyEntrys = [];
+            } else {
+                $scope.d.historyEntrys = data;
+            };
+
+            // Group Resuls by Calendar-Week
+            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
+                return [item.datum_week];
+            });
+
+            //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
+        });
+    };
 
 
     // -----------------------------------
@@ -167,35 +190,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
     };
 
 
-
-    $scope.entryDelete = function() {
+    $scope.entryDelete = function(my_index) {
         $scope.d.appState = 'show';
+
+        var toDelete = $scope.d.historyEntrys[my_index];
+        console.log('Should I deleted: ', toDelete);
+
+        $scope.d.historyEntrys.splice(my_index, 1);
+        console.log('Deleted! ');
+
     };
 
 
-    $scope.getHisoryEntrys = function() {
-        // Get Data
-
-        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
-        api_call.then(function(data) {
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.historyEntrys = [];
-            } else {
-                $scope.d.historyEntrys = data;
-            };
-
-            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
-                return [item.datum_week];
-            });
-
-            console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
-
-
-        });
-    };
-
-    $scope.putHisoryPost = function() {
+    $scope.entrySave = function() {
         // Save
 
         // Datum erweitern.

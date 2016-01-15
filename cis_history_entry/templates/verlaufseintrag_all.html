@@ -1,5 +1,5 @@
 <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys | filter:d.sort.filter | orderBy:d.sort.predicate:d.sort.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -17,6 +17,13 @@
             <p class="flow-text">{{entry.verlauf}}</p>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            entryDelete
+            <md-button class="md-icon-button" ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryDelete($index)" aria-label="Löschen">
+                <i class="md-title mdi mdi-delete"></i>
+                <md-tooltip md-direction="bottom">
+                    Neuer Verlaufseintrag
+                </md-tooltip>
+            </md-button>
             <md-button ng-if="entry.user === d.dataMain.users.current.id" md-primary ng-click="entryEdit($index)" aria-label="Bearbeiten">Bearbeiten</md-button>
         </md-card-actions>
     </md-card>

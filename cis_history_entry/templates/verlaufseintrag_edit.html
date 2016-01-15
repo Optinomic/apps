@@ -51,19 +51,19 @@
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
-        <pre ng-if="d.sort.debug">
+        <pre ng-if="d.appInit.debug">
 		{{d.historyNewEntry | json}}
 		</pre>
     </md-card-content>
     <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.sort.debug = !d.sort.debug" aria-label="Debugging" style="color: #9E9E9E;">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-bug"></i>
         </md-button>
         <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
             <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
         </md-button>
         <span flex>&nbsp;</span>
-        <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #3F51B5;">
+        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
             <i class="md-title mdi mdi-content-save"></i> Speichern
         </md-button>
     </md-card-actions>
