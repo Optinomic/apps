@@ -146,6 +146,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     };
 
+
     $scope.saveUserSettings = function() {
 
         var json_value = $scope.d.userSettings;
