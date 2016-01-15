@@ -46,12 +46,16 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-input-container>
-    <label>OrderBy: Reverse: {{d.appSort.reverse}}</label>
+    <label>OrderBy: Reverse: {{d.sort.reverse}}</label>
     <input ng-model="d.appSort.predicate">
 </md-input-container>
-<md-button md-primary ng-click="d.appSort.reverse = !d.appSort.reverse" aria-label="Reverse">Reverse</md-button>
+<md-input-container>
+    <label>Filter: {{d.sort.filter}}</label>
+    <input ng-model="d.appSort.filter">
+</md-input-container>
+<md-button md-primary ng-click="d.sort.reverse = !d.sort.reverse" aria-label="Reverse">Reverse</md-button>
 <md-content>
-    <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appSort.predicate:d.appSort.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys | filter:d.sort.filter | orderBy:d.sort.predicate:d.sort.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -5559,7 +5563,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.d.nodeTree = 'hisoryentrys_new3';
         $scope.d.appState = 'show';
 
-        $scope.d.appSort = {
+        $scope.d.sort = {
+            filter: '',
             predicate: 'datum_sort',
             reverse: true
         };
