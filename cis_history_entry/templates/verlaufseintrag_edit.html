@@ -54,7 +54,7 @@
     <md-divider></md-divider>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container class="md-block flow-text">
+            <md-input-container flex class="md-block flow-text">
                 <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
                 <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
             </md-input-container>
