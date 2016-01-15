@@ -47,7 +47,7 @@
     </md-card-content>
     <md-card-content>
         <md-input-container class="md-block flow-text">
-            <label>Verlaufseintrag ( {{tarifpos.tarifpos_code}} | {{d.historyNewEntry.dauer * 5}} Minuten)</label>
+            <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
             <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
         </md-input-container>
     </md-card-content>

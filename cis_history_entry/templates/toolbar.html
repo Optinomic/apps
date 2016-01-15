@@ -1,4 +1,4 @@
-<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start end">
+<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start start">
     <md-button ng-click="entryNew()" class="md-icon-button" aria-label="Hinzufügen" style="color: #3F51B5;">
         <i class="md-title mdi mdi-plus"></i>
         <md-tooltip md-direction="top">
@@ -18,13 +18,5 @@
         <md-tooltip md-direction="top">
             Einstellungen
         </md-tooltip>
-    </md-button>
-</div>
-<div ng-if="d.appState !== 'show'" layout="column" layout-gt-xs="row" layout-align="start center">
-    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-    </md-button>
-    <md-button ng-click="putHisoryPost()" aria-label="Speichern" style="color: #4CAF50;">
-        <i class="md-title mdi mdi-content-save"></i> Speichern
     </md-button>
 </div>
