@@ -111,7 +111,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, dataService, scopeDSe
         $scope.d.sort = {
             filter: '',
             predicate: 'datum_sort',
-            reverse: true
+            reverse: true,
+            debug: false
         };
         $scope.loadTARMEDSheet();
     };
