@@ -18,7 +18,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template history_entry 6 12]
+[template history_entry 6 15]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -102,8 +102,9 @@ website = http://www.optinomic.com/
                 </md-select>
             </md-input-container>
         </div>
-        <md-divider></md-divider>
-        <p>&nbsp;</p>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-input-container>
                 <label>Leistungsgruppe</label>
@@ -122,8 +123,8 @@ website = http://www.optinomic.com/
                 </md-select>
             </md-input-container>
         </div>
-        <md-divider></md-divider>
     </md-card-content>
+    <md-divider></md-divider>
     <md-card-content>
         <md-input-container class="md-block flow-text">
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
@@ -174,8 +175,9 @@ website = http://www.optinomic.com/
                 </md-select>
             </md-input-container>
         </div>
-        <md-divider></md-divider>
-        <p>&nbsp;</p>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-input-container>
                 <label>Leistungsgruppe</label>
@@ -194,8 +196,8 @@ website = http://www.optinomic.com/
                 </md-select>
             </md-input-container>
         </div>
-        <md-divider></md-divider>
     </md-card-content>
+    <md-divider></md-divider>
     <md-card-content>
         <md-input-container class="md-block flow-text">
             <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
@@ -274,7 +276,9 @@ website = http://www.optinomic.com/
         </md-tooltip>
     </md-button>
 </div>
-             </div>
+
+<div>&nbsp;</div>
+            </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
     <div>
