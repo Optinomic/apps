@@ -2,6 +2,9 @@
     <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
         <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
     </md-button>
     <md-input-container flex class="md-block">
         <label>Filter: {{d.appInit.filter}}</label>
