@@ -7,7 +7,9 @@
         </md-card-title>
     </div>
     <md-card-content>
-        <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
+        </div>
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <md-input-container>
                 <label>Leistungsgruppe</label>
@@ -26,9 +28,12 @@
                 </md-select>
             </md-input-container>
         </div>
-        <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? </p>
-        <md-input-container flex>
-            <label>Dauer ( Anzahl 5 Minuten | {{d.userSettings.dauer * 5}} Minuten )</label>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
+        <md-input-container class="md-block">
+            <label>Dauer ( Anzahl 5 Minuten )</label>
             <input ng-model="d.userSettings.dauer" type="number">
         </md-input-container>
     </md-card-content>
@@ -38,7 +43,6 @@
             <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
                 Neuste Einträge zuoberst anzeigen.
             </md-switch>
-            <p>- Default Filter: Current Week</p>
             <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
                 Wochnfilter standardmässig aktivieren.
             </md-switch>
