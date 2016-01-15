@@ -133,7 +133,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             sort_reverse: false
         };
 
-        $scope.d.userSettings = userSettingsDefault;
+
+        var api_call = dataService.getUserAnnotationsData($scope.d.nodeTree);
+        api_call.then(function(data) {
+            if (dataService.isEmpty(data)) {
+                console.log('DEFAULT - getUserSettings');
+                $scope.d.userSettings = userSettingsDefault;
+            } else {
+                console.log('LOADED - getUserSettings', data);
+                $scope.d.userSettings = data;
+            };
+
+        });
 
     };
 

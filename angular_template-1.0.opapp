@@ -1627,6 +1627,20 @@ angular.module('optinomicDataModule')
             return apiService.put(apiStr, body);
         };
 
+        dataService.getUserAnnotations = function() {
+            var user_id = dataService.getUserID();
+            var apiStr = '/users/' + user_id + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putUserAnnotations = function(json_value) {
+            var user_id = dataService.getUserID();
+            var apiStr = '/users/' + user_id + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
 
 
 
@@ -2402,9 +2416,76 @@ angular.module('optinomicDataModule')
             return deferred.promise;
         };
 
+        //------------------------------------------
+        // User - Annotations
+        //------------------------------------------
+
+
+        dataService.getUserAnnotationsData = function(node_tree) {
+            var deferred = $q.defer();
+            var return_data = {};
+
+
+            var api = dataService.getUserAnnotations();
+            var aPromise = dataService.getData(api);
+
+            aPromise.then(function(data) {
+
+                return_data = data[node_tree] === undefined ? {} : data[node_tree];
+                //console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
+
+                return_data = JSON.parse(JSON.stringify(return_data));
+
+                deferred.resolve(return_data);
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('ERROR: getUserAnnotationsData', error);
+            });
+
+            return deferred.promise;
+        };
+
+        dataService.putUserAnnotationsData = function(node_tree, json_value) {
+
+            var deferred = $q.defer();
+            var return_data = {};
+
+
+            var mySettings = dataService.getUserAnnotations();
+            mySettings.then(function(current_data) {
+
+
+                if (node_tree === 'clear') {
+                    // Overwrite Settings with given json_value
+                    full_settings = json_value;
+                } else {
+                    // Save given json_value in given node_tree
+                    var full_settings = current_data;
+                    full_settings[node_tree] = json_value;
+                };
+
+
+                var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
+                var aPromise = dataService.getData(api);
+
+                aPromise.then(function(data) {
+
+                    deferred.resolve(return_data);
+
+                }, function(error) {
+                    // Error
+                    deferred.reject(error);
+                    console.log('ERROR: putUserAnnotationsData', error);
+                });
+
+            });
 
 
 
+            return deferred.promise;
+        };
 
 
         return dataService;
