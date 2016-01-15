@@ -141,6 +141,30 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
     };
 
+    // -----------------------------------
+    // Dialogs
+    // -----------------------------------
+
+    $scope.showConfirm = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete this?')
+            .textContent('All of the banks have agreed to forgive you your debts.')
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Löschen')
+            .cancel('Abbrechen');
+        $mdDialog.show(confirm).then(function() {
+
+            $scope.d.historyEntrys.splice(my_index, 1);
+            console.log('Deleted! ');
+
+
+        }, function() {
+            $scope.entryCancel();
+        });
+    };
+
 
     // -----------------------------------
     // Actions
@@ -203,25 +227,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.showConfirm = function(ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.confirm()
-            .title('Would you like to delete this?')
-            .textContent('All of the banks have agreed to forgive you your debts.')
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Löschen')
-            .cancel('Abbrechen');
-        $mdDialog.show(confirm).then(function() {
 
-            $scope.d.historyEntrys.splice(my_index, 1);
-            console.log('Deleted! ');
-
-
-        }, function() {
-            $scope.entryCancel();
-        });
-    };
 
 
 
