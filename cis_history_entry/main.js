@@ -220,7 +220,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var toDelete = $scope.d.historyEntrys[my_index];
         console.log('Should I deleted: ', toDelete);
 
-        showConfirm($event);
+        $scope.showConfirm($event);
 
 
 
