@@ -1991,7 +1991,7 @@ angular.module('optinomicDataModule')
 
                 console.log('(1) saveAnnotationsData', full_data);
 
-                if (dataService.isEmpty(full_data)) = {
+                if (dataService.isEmpty(full_data)) {
                     full_data = {};
                 } else {
                     // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
