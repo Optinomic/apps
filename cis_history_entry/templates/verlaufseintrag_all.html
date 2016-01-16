@@ -1,5 +1,7 @@
 <md-content ng-if="d.appState !== 'loading'">
-    <md-card ng-repeat="entry in d.historyEntrys track by entry.uniqueid | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
+    <!-- <md-card ng-repeat="entry in d.historyEntrys track by entry.uniqueid | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
+    -->
+    <md-card ng-repeat="entry in d.historyEntrys track by entry.uniqueid">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
