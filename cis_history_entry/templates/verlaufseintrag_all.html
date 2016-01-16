@@ -8,7 +8,7 @@
                     	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
                     	</md-tooltip>
                 </span>
-                <span class="md-subhead " style="margin-top: -12px; color:#9E9E9E; ">
+                <span class="md-subhead " style="margin-top: -12px; color:#757575; ">
                 	<span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
                 	{{user.data.extras.full_name}}
                 	</span> | {{entry.dauer * 5}} Minuten
@@ -22,8 +22,8 @@
         <md-card-actions layout="column " layout-gt-xs="row " layout-align="end center ">
             <md-button class="md-icon-button " ng-if="entry.user===d .dataMain.users.current.id " ng-click="showConfirm($event, $index) " aria-label="Löschen " style="color: #9E9E9E; ">
                 <i class="md-title mdi mdi-delete "></i>
-                <md-tooltip md-direction="bottom ">
-                    Neuer Verlaufseintrag
+                <md-tooltip md-direction="top ">
+                    Verlaufseintrag löschen
                 </md-tooltip>
             </md-button>
             <span flex></span>
