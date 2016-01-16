@@ -10,7 +10,7 @@
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#9E9E9E; ">
                 {{entry.datum_day}} | {{entry.dauer * 5}} Minuten | 
-                <span ng-if="user.id === entry.user" ng-repeat="user in d.dataMain.users.all"></span> {{user.data.extras.full_name}}
+                <span ng-if="user.id === entry.user" ng-repeat="user in d.dataMain.users.all"></span> {{user.data.extras.full_name}} {{entry.user}} user= {{user}}
                 </span>
             </md-card-title-text>
         </md-card-title>
