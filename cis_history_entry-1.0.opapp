@@ -28,6 +28,12 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
  <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-dots-vertical"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
     <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
         <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
@@ -39,12 +45,6 @@ website = http://www.optinomic.com/
         <label>Filter: {{d.appInit.filter}}</label>
         <input ng-model="d.appInit.filter">
     </md-input-container>
-    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
-            Einstellungen
-        </md-tooltip>
-    </md-button>
 </div>
 
 <div ng-if="d.appState === 'show'">
@@ -327,6 +327,12 @@ website = http://www.optinomic.com/
 
 </div>
 <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-dots-vertical"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
     <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
         <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
@@ -338,18 +344,12 @@ website = http://www.optinomic.com/
         <label>Filter: {{d.appInit.filter}}</label>
         <input ng-model="d.appInit.filter">
     </md-input-container>
-    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
-            Einstellungen
-        </md-tooltip>
-    </md-button>
 </div>
 
 <div>&nbsp;</div>
 <div class="optinomic-page-fab">
     <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
-        <i class="md-title mdi mdi-plus" style="font-size:38px; color:#FCE4EC margin-top:10px;"></i>
+        <i class="md-title mdi mdi-plus" style="font-size:38px; color:#FCE4EC padding-top:10px;"></i>
         <md-tooltip md-direction="left">
             Neuer Verlaufseintrag
         </md-tooltip>
