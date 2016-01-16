@@ -2054,21 +2054,22 @@ angular.module('optinomicDataModule')
         //------------------------------------------
 
 
-        dataService.getUserAnnotationsData = function(node_tree) {
+        dataService.getUserAnnotationsData = function(app_id, node_tree) {
             var deferred = $q.defer();
             var return_data = {};
-
 
             var api = dataService.getUserAnnotations();
             var aPromise = dataService.getData(api);
 
             aPromise.then(function(data) {
 
-                return_data = data[node_tree] === undefined ? {} : data[node_tree];
-                console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
+                console.log('(1) getUserAnnotationsData', data);
 
+                return_data = data.app[app_id][node_tree] === undefined ? {} : data.app[app_id][node_tree];
                 return_data = JSON.parse(JSON.stringify(return_data));
 
+
+                console.log('(Return) getUserAnnotationsData', return_data);
                 deferred.resolve(return_data);
 
             }, function(error) {
@@ -2084,42 +2085,26 @@ angular.module('optinomicDataModule')
 
             var deferred = $q.defer();
             var return_data = {};
-            var full_settings = {};
             var full_data = {};
-
-            var my_data = {};
-            my_data[node_tree] = json_value;
-
-            console.log('(0) putUserAnnotationsData START', my_data);
-
 
 
             var mySettings = dataService.getUserAnnotations();
             mySettings.then(function(current_data) {
 
                 full_data = current_data.data;
-
-
-                console.log('(1) putUserAnnotationsData START', full_data, current_data);
-
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
-                    full_settings = {};
-                } else {
-                    // Save given json_value in given node_tree
-                    full_settings = full_data;
+                    full_data = {};
                 };
 
-                console.log('(2) putUserAnnotationsData', full_settings);
+                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                full_data.app = full_data.app === undefined ? {} : full_data.app;
+                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                full_data.app[app_id][node_tree] = json_value;
 
 
-                full_settings.app = full_settings.app === undefined ? {} : full_settings.app;
-                full_settings.app[app_id] = full_settings.app[app_id] === undefined ? {} : full_settings.app[app_id];
-                full_settings.app[app_id][node_tree] = json_value;
-
-                console.log('(3) putUserAnnotationsData', full_settings);
-
-                var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
+                // Save and proceed.
+                var api = dataService.putUserAnnotations(JSON.stringify(full_data));
                 var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
@@ -2134,8 +2119,6 @@ angular.module('optinomicDataModule')
                 });
 
             });
-
-
 
             return deferred.promise;
         };

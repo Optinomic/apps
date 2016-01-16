@@ -108,7 +108,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'hisoryentrys_new4';
+        $scope.d.nodeTree = 'verlaufseintrag';
 
         $scope.d.appInit = {
             filter: '',
@@ -132,7 +132,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             sort_reverse: false
         };
 
-        var api_call = dataService.getUserAnnotationsData($scope.d.nodeTree);
+        var appID = $scope.d.dataMain.params.app_id;
+        var tree = $scope.d.nodeTree;
+        var api_call = dataService.getUserAnnotationsData(appID, tree);
         api_call.then(function(data) {
             if (dataService.isEmpty(data)) {
                 $scope.d.userSettings = userSettingsDefault;
@@ -149,9 +151,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.saveUserSettings = function() {
 
+        var appID = $scope.d.dataMain.params.app_id;
+        var tree = $scope.d.nodeTree;
         var json_value = $scope.d.userSettings;
-        console.log('saveUserSettings', json_value);
-        var api_call = dataService.putUserAnnotationsData($scope.d.dataMain.params.app_id, $scope.d.nodeTree, json_value);
+        var api_call = dataService.putUserAnnotationsData(appID, tree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
             $scope.getUserSettings();
