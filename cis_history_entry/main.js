@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             if (dataService.isEmpty(data)) {
                 $scope.d.historyEntrys = [];
             } else {
-                $scope.d.historyEntrys = data;
+                $scope.d.historyEntrys = angular.copy(data);
             };
 
             // Group Resuls by Calendar-Week
