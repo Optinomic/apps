@@ -11521,7 +11521,7 @@ p {
 
 .optinomic-page-fab {
     position: fixed;
-    top: 35px;
+    top: 15px;
     right: 30px;
 }
 
