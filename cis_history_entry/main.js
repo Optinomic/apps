@@ -132,9 +132,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             sort_reverse: false
         };
 
-        var appID = $scope.d.dataMain.params.app_id;
         var tree = $scope.d.nodeTree;
-        var api_call = dataService.getUserAnnotationsData(appID, tree);
+        var api_call = dataService.getAnnotationsData('user', tree);
         api_call.then(function(data) {
             if (dataService.isEmpty(data)) {
                 $scope.d.userSettings = userSettingsDefault;
@@ -151,10 +150,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.saveUserSettings = function() {
 
-        var appID = $scope.d.dataMain.params.app_id;
         var tree = $scope.d.nodeTree;
         var json_value = $scope.d.userSettings;
-        var api_call = dataService.putUserAnnotationsData(appID, tree, json_value);
+        var api_call = dataService.saveAnnotationsData('user', tree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
             $scope.getUserSettings();
@@ -168,7 +166,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getHisoryEntrys = function() {
         // Get Data
 
-        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
         api_call.then(function(data) {
             // Create Array if not already exists.
             if (dataService.isEmpty(data)) {
@@ -297,7 +295,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
 
 
-        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 

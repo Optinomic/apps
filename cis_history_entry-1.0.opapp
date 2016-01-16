@@ -2230,12 +2230,101 @@ angular.module('optinomicDataModule')
             return user;
         };
 
+
+
+        //------------------------------------------
+        // Patient / User - Annotations
+        //------------------------------------------
+
+        dataService.getAnnotationsData = function(api_direction, node_tree) {
+            var deferred = $q.defer();
+            var return_data = {};
+            var app_id = dataService.getAppID();
+
+            if (api_direction === 'user') {
+                var api = dataService.getUserAnnotations();
+            } else {
+                var api = dataService.getPatientAnnotations();
+            };
+
+            var aPromise = dataService.getData(api);
+            aPromise.then(function(data) {
+
+                return_data = data.app === undefined ? {} : data.app;
+                return_data = return_data[app_id] === undefined ? {} : return_data[app_id];
+                return_data = return_data[node_tree] === undefined ? {} : return_data[node_tree];
+                return_data = JSON.parse(JSON.stringify(return_data));
+                console.log('(!) getAnnotationsData - Success', return_data);
+                deferred.resolve(return_data);
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('ERROR: getAnnotationsData', error);
+            });
+
+            return deferred.promise;
+        };
+
+        dataService.saveAnnotationsData = function(app_id, node_tree, json_value) {
+
+            var deferred = $q.defer();
+            var return_data = {};
+            var full_data = {};
+            var app_id = dataService.getAppID();
+
+            if (api_direction === 'user') {
+                var api_read = dataService.getUserAnnotations();
+            } else {
+                var api_read = dataService.getPatientAnnotations();
+            };
+
+            var aPromise = dataService.getData(api_read);
+            aPromise.then(function(current_data) {
+
+                full_data = current_data.data;
+                if (node_tree === 'clear') {
+                    // Overwrite Settings with given json_value
+                    full_data = {};
+                };
+
+                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                full_data.app = full_data.app === undefined ? {} : full_data.app;
+                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                full_data.app[app_id][node_tree] = json_value;
+
+
+                // Save and proceed.
+                if (api_direction === 'user') {
+                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
+                } else {
+                    var api_write = dataService.putPatientAnnotations(JSON.stringify(full_data));
+                };
+
+                var aPromise = dataService.getData(api_write);
+                aPromise.then(function(data) {
+
+                    console.log('(!) saveAnnotationsData - Success', return_data);
+                    deferred.resolve(return_data);
+
+                }, function(error) {
+                    // Error
+                    deferred.reject(error);
+                    console.log('ERROR: putUserAnnotationsData', error);
+                });
+
+            });
+
+            return deferred.promise;
+        };
+
+
         //------------------------------------------
         // Patient - Annotations
         //------------------------------------------
 
 
-        dataService.getPatientAnnotationsData = function(node_tree) {
+        dataService.getPatientAnnotationsData = function(app_id, node_tree) {
             var deferred = $q.defer();
             var return_data = {};
 
@@ -2261,44 +2350,44 @@ angular.module('optinomicDataModule')
             return deferred.promise;
         };
 
-        dataService.putPatientAnnotationsData = function(node_tree, json_value) {
+        dataService.putPatientAnnotationsData = function(app_id, node_tree, json_value) {
 
             var deferred = $q.defer();
             var return_data = {};
+            var full_data = {};
 
 
-            var mySettings = dataService.getPatientAnnotations();
+            var mySettings = dataService.getUserAnnotations();
             mySettings.then(function(current_data) {
 
-
+                full_data = current_data.data;
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
-                    full_settings = json_value;
-                } else {
-                    // Save given json_value in given node_tree
-                    var full_settings = current_data;
-                    full_settings[node_tree] = json_value;
-                    //full_settings = JSON.stringify(full_settings);
+                    full_data = {};
                 };
 
+                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                full_data.app = full_data.app === undefined ? {} : full_data.app;
+                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                full_data.app[app_id][node_tree] = json_value;
 
-                var api = dataService.putPatientAnnotations(JSON.stringify(full_settings));
+
+                // Save and proceed.
+                var api = dataService.putPatientAnnotations(JSON.stringify(full_data));
                 var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
+                    console.log('(!) Success');
 
-                    //console.log('(+) putPatientAnnotationsData', data, full_settings);
                     deferred.resolve(return_data);
 
                 }, function(error) {
                     // Error
                     deferred.reject(error);
-                    console.log('ERROR: putPatientAnnotationsData', error);
+                    console.log('ERROR: putUserAnnotationsData', error);
                 });
 
             });
-
-
 
             return deferred.promise;
         };
@@ -5832,9 +5921,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             sort_reverse: false
         };
 
-        var appID = $scope.d.dataMain.params.app_id;
         var tree = $scope.d.nodeTree;
-        var api_call = dataService.getUserAnnotationsData(appID, tree);
+        var api_call = dataService.getAnnotationsData('user', tree);
         api_call.then(function(data) {
             if (dataService.isEmpty(data)) {
                 $scope.d.userSettings = userSettingsDefault;
@@ -5851,10 +5939,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.saveUserSettings = function() {
 
-        var appID = $scope.d.dataMain.params.app_id;
         var tree = $scope.d.nodeTree;
         var json_value = $scope.d.userSettings;
-        var api_call = dataService.putUserAnnotationsData(appID, tree, json_value);
+        var api_call = dataService.saveAnnotationsData('user', tree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
             $scope.getUserSettings();
@@ -5868,7 +5955,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getHisoryEntrys = function() {
         // Get Data
 
-        var api_call = dataService.getPatientAnnotationsData($scope.d.nodeTree);
+        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
         api_call.then(function(data) {
             // Create Array if not already exists.
             if (dataService.isEmpty(data)) {
@@ -5997,7 +6084,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
 
 
-        var api_call = dataService.putPatientAnnotationsData($scope.d.nodeTree, $scope.d.historyEntrys);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
             console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
 
