@@ -140,6 +140,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 console.log('DEFAULT - getUserSettings', $scope.d.userSettings);
             } else {
                 $scope.d.userSettings = data;
+
+                //Apply loaded appInit
+                $scope.d.appInit.reverse = $scope.d.userSettings.sort_reverse;
+
+                if ($scope.d.userSettings.week_filter) {
+                    $scope.d.appInit.filter = '2016, 03';
+                };
+
                 console.log('LOADED - getUserSettings', $scope.d.userSettings);
             };
 
@@ -166,8 +174,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getHisoryEntrys = function() {
         // Get Data
 
+        $scope.d.historyEntrys = [];
         var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
         api_call.then(function(data) {
+
             // Create Array if not already exists.
             if (dataService.isEmpty(data)) {
                 $scope.d.historyEntrys = [];
@@ -179,6 +189,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
                 return [item.datum_week];
             });
+
             $scope.d.appState = 'show';
 
             //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
