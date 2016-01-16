@@ -2086,6 +2086,9 @@ angular.module('optinomicDataModule')
             var return_data = {};
             var full_settings = {};
 
+            console.log('(?) putUserAnnotationsData START', json_value);
+
+
 
             var mySettings = dataService.getUserAnnotations();
             mySettings.then(function(current_data) {
@@ -2106,8 +2109,7 @@ angular.module('optinomicDataModule')
                 var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
-
-                    console.log('(!) putUserAnnotationsData', data, return_data);
+                    console.log('(!) Success');
 
                     deferred.resolve(return_data);
 
