@@ -1,21 +1,21 @@
 <md-content ng-if="d.appState !== 'loading'">
     <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
-        <md-card-title>
+        <md-card-title style="background-color:#FAFAFA">
             <md-card-title-text>
                 <span class="md-headline ">
-                	{{entry.tarmed.selected.tarifpos_beschreibung}}
+                	{{entry.datum_day}} | {{entry.tarmed.selected.tarifpos_beschreibung}}
                     	<md-tooltip md-direction="top ">
                     	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
                     	</md-tooltip>
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#9E9E9E; ">
-                {{entry.datum_day}} | {{entry.dauer * 5}} Minuten | 
                 	<span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
                 	{{user.data.extras.full_name}}
-                	</span>
+                	</span> | {{entry.dauer * 5}} Minuten
                 </span>
             </md-card-title-text>
         </md-card-title>
+        <md-divider></md-divider>
         <md-card-content>
             <p class="flow-text ">{{entry.verlauf}}</p>
         </md-card-content>
