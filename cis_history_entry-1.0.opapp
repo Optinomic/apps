@@ -2268,6 +2268,9 @@ angular.module('optinomicDataModule')
 
         dataService.saveAnnotationsData = function(api_direction, node_tree, json_value) {
 
+            console.log('(START) saveAnnotationsData', api_direction, node_tree, json_value);
+
+
             var deferred = $q.defer();
             var return_data = {};
             var full_data = {};
@@ -2290,14 +2293,11 @@ angular.module('optinomicDataModule')
 
                 console.log('(1) saveAnnotationsData', full_data);
 
-                if (dataService.isEmpty(full_data)) {
-                    full_data = {};
-                } else {
-                    // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
-                    full_data.app = full_data.app === undefined ? {} : full_data.app;
-                    full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
-                    full_data.app[app_id][node_tree] = json_value;
-                };
+
+                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                full_data.app = full_data.app === undefined ? {} : full_data.app;
+                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                full_data.app[app_id][node_tree] = json_value;
 
                 console.log('(2) saveAnnotationsData', full_data);
 
