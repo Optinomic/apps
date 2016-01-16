@@ -2397,7 +2397,7 @@ angular.module('optinomicDataModule')
             var aPromise = dataService.getData(api_read);
             aPromise.then(function(current_data) {
 
-                full_data = current_data.data;
+                full_data = current_data;
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
                     full_data = {};
