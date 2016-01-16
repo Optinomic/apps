@@ -2381,7 +2381,7 @@ angular.module('optinomicDataModule')
             return deferred.promise;
         };
 
-        dataService.saveAnnotationsData = function(app_id, node_tree, json_value) {
+        dataService.saveAnnotationsData = function(api_direction, node_tree, json_value) {
 
             var deferred = $q.defer();
             var return_data = {};
