@@ -135,11 +135,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getUserAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
             if (dataService.isEmpty(data)) {
-                console.log('DEFAULT - getUserSettings');
                 $scope.d.userSettings = userSettingsDefault;
+                console.log('DEFAULT - getUserSettings', $scope.d.userSettings);
             } else {
-                console.log('LOADED - getUserSettings', data);
                 $scope.d.userSettings = data;
+                console.log('LOADED - getUserSettings', $scope.d.userSettings);
             };
 
         });
@@ -150,6 +150,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.saveUserSettings = function() {
 
         var json_value = $scope.d.userSettings;
+        console.log('saveUserSettings', json_value);
         var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);
