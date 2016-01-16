@@ -291,6 +291,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
         $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
         $scope.d.historyNewEntry.datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        $scope.d.historyNewEntry.uniqueid = dataService.uniqueid();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {

@@ -55,7 +55,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content ng-if="d.appState !== 'loading'">
-    <md-card ng-repeat="entry in d.historyEntrys track by entry.datum | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
+    <md-card ng-repeat="entry in d.historyEntrys track by entry.uniqueid | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline">
@@ -2294,8 +2294,6 @@ angular.module('optinomicDataModule')
             var full_data = {};
             var app_id = dataService.getAppID();
 
-            //create uniqueid
-            json_value.uniqueid = dataService.uniqueid();
 
             if (api_direction === 'user') {
                 var api_read = dataService.getUserAnnotations();
@@ -5963,6 +5961,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
         $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
         $scope.d.historyNewEntry.datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        $scope.d.historyNewEntry.uniqueid = dataService.uniqueid();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
