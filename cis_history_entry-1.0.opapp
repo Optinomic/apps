@@ -31,6 +31,9 @@ website = http://www.optinomic.com/
     <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
         <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
     </md-button>
     <md-input-container flex class="md-block">
         <label>Filter: {{d.appInit.filter}}</label>
@@ -324,6 +327,9 @@ website = http://www.optinomic.com/
     <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
         <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
         <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
     </md-button>
     <md-input-container flex class="md-block">
         <label>Filter: {{d.appInit.filter}}</label>
@@ -818,8 +824,8 @@ angular.module('optinomicDataModule').factory('apiService', function($http) {
         return request("POST", path, {}, body);
     };
 
-    var put = function(path, body) {
-        return request("PUT", path, {}, body);
+    var put = function(path, query) {
+        return request("PUT", path, query, {});
     };
 
     var del = function(path, query) {
@@ -1513,7 +1519,9 @@ angular.module('optinomicDataModule')
         };
 
         dataService.putUserAnnotations = function(json_value) {
+
             var user_id = dataService.getUserID();
+            console.log('(!!) API - CALL: putUserAnnotations', user_id, json_value);
             var apiStr = '/users/' + user_id + '/annotations';
             var body = {
                 "value": json_value
@@ -2330,6 +2338,7 @@ angular.module('optinomicDataModule')
 
             var deferred = $q.defer();
             var return_data = {};
+            var full_settings = {};
 
 
             var mySettings = dataService.getUserAnnotations();
@@ -2341,10 +2350,11 @@ angular.module('optinomicDataModule')
                     full_settings = json_value;
                 } else {
                     // Save given json_value in given node_tree
-                    var full_settings = current_data;
+                    full_settings = current_data;
                     full_settings[node_tree] = json_value;
                 };
 
+                console.log();
 
                 var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
@@ -5827,11 +5837,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getUserAnnotationsData($scope.d.nodeTree);
         api_call.then(function(data) {
             if (dataService.isEmpty(data)) {
-                console.log('DEFAULT - getUserSettings');
                 $scope.d.userSettings = userSettingsDefault;
+                console.log('DEFAULT - getUserSettings', $scope.d.userSettings);
             } else {
-                console.log('LOADED - getUserSettings', data);
                 $scope.d.userSettings = data;
+                console.log('LOADED - getUserSettings', $scope.d.userSettings);
             };
 
         });
@@ -5842,6 +5852,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.saveUserSettings = function() {
 
         var json_value = $scope.d.userSettings;
+        console.log('saveUserSettings', json_value);
         var api_call = dataService.putUserAnnotationsData($scope.d.nodeTree, json_value);
         api_call.then(function(data) {
             console.log('(+) saveUserSettings - saved: ', json_value);

@@ -525,8 +525,8 @@ angular.module('optinomicDataModule').factory('apiService', function($http) {
         return request("POST", path, {}, body);
     };
 
-    var put = function(path, body) {
-        return request("PUT", path, {}, body);
+    var put = function(path, query) {
+        return request("PUT", path, query, {});
     };
 
     var del = function(path, query) {
@@ -1220,7 +1220,9 @@ angular.module('optinomicDataModule')
         };
 
         dataService.putUserAnnotations = function(json_value) {
+
             var user_id = dataService.getUserID();
+            console.log('(!!) API - CALL: putUserAnnotations', user_id, json_value);
             var apiStr = '/users/' + user_id + '/annotations';
             var body = {
                 "value": json_value
@@ -2037,6 +2039,7 @@ angular.module('optinomicDataModule')
 
             var deferred = $q.defer();
             var return_data = {};
+            var full_settings = {};
 
 
             var mySettings = dataService.getUserAnnotations();
@@ -2048,10 +2051,11 @@ angular.module('optinomicDataModule')
                     full_settings = json_value;
                 } else {
                     // Save given json_value in given node_tree
-                    var full_settings = current_data;
+                    full_settings = current_data;
                     full_settings[node_tree] = json_value;
                 };
 
+                console.log();
 
                 var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
