@@ -2059,11 +2059,18 @@ angular.module('optinomicDataModule')
                     full_data = {};
                 };
 
-                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
-                full_data.app = full_data.app === undefined ? {} : full_data.app;
-                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
-                full_data.app[app_id][node_tree] = json_value;
+                console.log('(1) saveAnnotationsData', full_data);
 
+                if (dataService.isEmpty(full_data)) = {
+                    full_data = {};
+                } else {
+                    // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                    full_data.app = full_data.app === undefined ? {} : full_data.app;
+                    full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                    full_data.app[app_id][node_tree] = json_value;
+                };
+
+                console.log('(2) saveAnnotationsData', full_data);
 
                 // Save and proceed.
                 if (api_direction === 'user') {
