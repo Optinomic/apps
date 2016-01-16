@@ -1292,7 +1292,7 @@ angular.module('optinomicDataModule')
         dataService.putUserAnnotations = function(json_value) {
 
             var user_id = dataService.getUserID();
-            console.log('(!!) API - CALL: putUserAnnotations', user_id, json_value);
+            //console.log('(!!) API - CALL: putUserAnnotations', user_id, json_value);
             var apiStr = '/users/' + user_id + '/annotations';
             var body = {
                 "value": json_value
@@ -2090,7 +2090,7 @@ angular.module('optinomicDataModule')
             aPromise.then(function(data) {
 
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
-                //console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
+                console.log('(!): getPatientAnnotationsData', data, data[node_tree], return_data);
 
                 return_data = JSON.parse(JSON.stringify(return_data));
 
@@ -2110,6 +2110,7 @@ angular.module('optinomicDataModule')
             var deferred = $q.defer();
             var return_data = {};
             var full_settings = {};
+            var full_data = {};
 
             var my_data = {};
             my_data[node_tree] = json_value;
@@ -2121,19 +2122,27 @@ angular.module('optinomicDataModule')
             var mySettings = dataService.getUserAnnotations();
             mySettings.then(function(current_data) {
 
+                full_data = current_data.data;
 
-                console.log('(1) putUserAnnotationsData START', current_data);
+
+                console.log('(1) putUserAnnotationsData START', full_data, current_data);
 
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
-                    full_settings = json_value;
+                    full_settings = {};
                 } else {
                     // Save given json_value in given node_tree
-                    full_settings = current_data;
-                    full_settings[node_tree] = json_value;
+                    full_settings = full_data;
                 };
 
-                console.log('(2) putUserAnnotationsData', current_data, full_settings);
+                console.log('(2) putUserAnnotationsData', full_settings);
+
+
+                full_settings.app = full_settings.app === undefined ? {} : full_settings.app;
+                full_settings.app[app_id] = full_settings.app[app_id] === undefined ? {} : full_settings.app[app_id];
+                full_settings.app[app_id][node_tree] = json_value;
+
+                console.log('(3) putUserAnnotationsData', full_settings);
 
                 var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
