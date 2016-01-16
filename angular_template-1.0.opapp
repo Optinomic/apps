@@ -12233,6 +12233,12 @@ p {
     }
 }
 
+.optinomic-page-fab {
+    position: absolute;
+    top: 75px;
+    right: 30px;
+}
+
 /*!
  * Angular Material Design
  * https://github.com/angular/material

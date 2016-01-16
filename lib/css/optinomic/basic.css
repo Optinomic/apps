@@ -368,3 +368,9 @@ p {
         line-height: 2.776rem !important;
     }
 }
+
+.optinomic-page-fab {
+    position: absolute;
+    top: 75px;
+    right: 30px;
+}
