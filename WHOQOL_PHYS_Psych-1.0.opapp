@@ -2035,19 +2035,24 @@ angular.module('optinomicDataModule')
             return deferred.promise;
         };
 
-        dataService.putUserAnnotationsData = function(node_tree, json_value) {
+        dataService.putUserAnnotationsData = function(app_id, node_tree, json_value) {
 
             var deferred = $q.defer();
             var return_data = {};
             var full_settings = {};
 
-            console.log('(?) putUserAnnotationsData START', json_value);
+            var my_data = {};
+            my_data[node_tree] = json_value;
+
+            console.log('(0) putUserAnnotationsData START', my_data);
 
 
 
             var mySettings = dataService.getUserAnnotations();
             mySettings.then(function(current_data) {
 
+
+                console.log('(1) putUserAnnotationsData START', current_data);
 
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
@@ -2058,7 +2063,7 @@ angular.module('optinomicDataModule')
                     full_settings[node_tree] = json_value;
                 };
 
-                console.log('(?) putUserAnnotationsData', current_data, full_settings);
+                console.log('(2) putUserAnnotationsData', current_data, full_settings);
 
                 var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
