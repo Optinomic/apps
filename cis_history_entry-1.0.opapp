@@ -103,7 +103,7 @@ website = http://www.optinomic.com/
         </md-card-title-text>
     </md-card-title>
     <md-card-content>
-        <div style="margin-top: 6px; height: 148px;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+        <div style="margin-top: -12px; max-height: 48px;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
             <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
@@ -188,7 +188,7 @@ website = http://www.optinomic.com/
         </md-card-title-text>
     </md-card-title>
     <md-card-content>
-        <div style="margin-top: 6px; height: 148px;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+        <div style="margin-top: -12px; max-height: 48px;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
             <md-input-container flex>
                 <label>Dauer (Anzahl 5 Minuten)</label>
