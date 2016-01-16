@@ -57,7 +57,7 @@ website = http://www.optinomic.com/
     <md-content ng-if="d.appState !== 'loading'">
     <!-- <md-card ng-repeat="entry in d.historyEntrys track by entry.uniqueid | filter:d.appInit.filter | orderBy:d.appInit.predicate:d.appInit.reverse">
     -->
-    <md-card ng-repeat="entry in d.historyEntrys track by uniqueid | orderBy:[datum_sort]">
+    <md-card ng-repeat="entry in d.historyEntrys | orderBy:'datum_sort'">
         <md-card-title>
             <md-card-title-text>
                 <span class="md-headline ">
@@ -5958,7 +5958,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Datum erweitern.
         var date = $scope.d.historyNewEntry.datum;
-        $scope.d.historyNewEntry.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmm');
+        $scope.d.historyNewEntry.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
         $scope.d.historyNewEntry.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
         $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
         $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
