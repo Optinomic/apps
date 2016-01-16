@@ -2055,12 +2055,14 @@ angular.module('optinomicDataModule')
                     full_settings[node_tree] = json_value;
                 };
 
-                console.log();
+                console.log('(?) putUserAnnotationsData', current_data, full_settings);
 
                 var api = dataService.putUserAnnotations(JSON.stringify(full_settings));
                 var aPromise = dataService.getData(api);
 
                 aPromise.then(function(data) {
+
+                    console.log('(!) putUserAnnotationsData', data, return_data);
 
                     deferred.resolve(return_data);
 
