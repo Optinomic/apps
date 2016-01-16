@@ -91,14 +91,17 @@ website = http://www.optinomic.com/
 </div>
 <div ng-if="d.appState === 'edit'">
     <md-card>
-    <div style="background-color: #424242; color: #FAFAFA">
-        <md-card-title>
-            <md-card-title-text>
-                <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
-                <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
-            </md-card-title-text>
-        </md-card-title>
-    </div>
+    <md-card-title style="background-color: #424242; color: #FAFAFA">
+        <md-card-title-text>
+            <span class="md-headline ">
+                	{{d.dataMain.patient.patient.extras.name}} ({{d.dataMain.patient.patient.extras.birthday_age}})
+            </span>
+            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+            <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
+            <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
+            </span>
+        </md-card-title-text>
+    </md-card-title>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
@@ -173,14 +176,17 @@ website = http://www.optinomic.com/
 </div>
 <div ng-if="d.appState === 'new'">
     <md-card>
-    <div style="background-color: #424242; color: #FAFAFA">
-        <md-card-title>
-            <md-card-title-text>
-                <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
-                <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
-            </md-card-title-text>
-        </md-card-title>
-    </div>
+    <md-card-title style="background-color: #424242; color: #FAFAFA">
+        <md-card-title-text>
+            <span class="md-headline ">
+                	{{d.dataMain.patient.patient.extras.name}} ({{d.dataMain.patient.patient.extras.birthday_age}})
+            </span>
+            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+            <span ng-if="d.appState === 'edit'" class="md-headline">Verlaufseintrag bearbeiten</span>
+            <span ng-if="d.appState === 'new'" class="md-headline">Neuer Verlaufseintrag erstellen</span>
+            </span>
+        </md-card-title-text>
+    </md-card-title>
     <md-card-content>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
