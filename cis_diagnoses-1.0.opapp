@@ -5725,22 +5725,36 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var parse = function(entry) {
             //console.log('parse - loadTarmedSheet - entry: ', entry);
-            var leistungsgruppe_code = entry['gsx$leistungsgruppecode']['$t'];
-            var leistungsgruppe_beschreibung = entry['gsx$leistungsgruppebeschreibung']['$t'];
-            var kapitel_code = entry['gsx$kapitelcode']['$t'];
-            var kapitel_beschreibung = entry['gsx$kapitelbeschreibung']['$t'];
-            var tarifpos_code = entry['gsx$tarifpositioncode']['$t'];
-            var tarifpos_beschreibung = entry['gsx$tarifpositionbeschreibung']['$t'];
-            var tarifpos_info = entry['gsx$tarifpositionzusatz']['$t'];
+            var icd_id = entry['gsx$id']['$t'];
+            var icd_code = entry['gsx$code']['$t'];
+            var icd_parent = entry['gsx$parent']['$t'];
+            var icd_titel = entry['gsx$titel']['$t'];
+            var icd_titel_orig = entry['gsx$titelorig']['$t'];
+            var icd_valid_from = entry['gsx$validfrom']['$t'];
+            var icd_valid_to = entry['gsx$validto']['$t'];
+            var icd_class = entry['gsx$class']['$t'];
+            var icd_annotation = entry['gsx$annotation']['$t'];
+            var icd_application = entry['gsx$application']['$t'];
+            var icd_exklusiva = entry['gsx$exklusiva']['$t'];
+            var icd_precision = entry['gsx$precision']['$t'];
+            var icd_inklusiva = entry['gsx$inklusiva']['$t'];
+            var icd_note = entry['gsx$note']['$t'];
 
             return {
-                leistungsgruppe_code: leistungsgruppe_code,
-                leistungsgruppe_beschreibung: leistungsgruppe_beschreibung,
-                kapitel_code: kapitel_code,
-                kapitel_beschreibung: kapitel_beschreibung,
-                tarifpos_code: tarifpos_code,
-                tarifpos_beschreibung: tarifpos_beschreibung,
-                tarifpos_info: tarifpos_info
+                icd_id: icd_id,
+                icd_code: icd_code,
+                icd_parent: icd_parent,
+                icd_titel: icd_titel,
+                icd_titel_orig: icd_titel_orig,
+                icd_valid_from: icd_valid_from,
+                icd_valid_to: icd_valid_to,
+                icd_class: icd_class,
+                icd_annotation: icd_annotation,
+                icd_application: icd_application,
+                icd_exklusiva: icd_exklusiva,
+                icd_precision: icd_precision,
+                icd_inklusiva: icd_inklusiva,
+                icd_note: icd_note
             };
         }
 
@@ -5750,12 +5764,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 var entries = response['feed']['entry'];
 
-                $scope.d.TARMEDall = [];
+                $scope.d.ICD10_all = [];
                 entries.forEach(function(content, myindex) {
-                    //$scope.d.TARMEDall.push(parse(content));
-                    console.log('(-) loadTARMEDSheet - content: ', myindex, content);
+                    $scope.d.ICD10_all.push(parse(content));
                 });
-                //console.log('(!) TARMEDall', $scope.d.TARMEDall);
+                console.log('(!) ICD10_all', $scope.d.ICD10_all);
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                 //    return [item.kapitel_code];
