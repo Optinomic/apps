@@ -46,316 +46,23 @@ website = http://www.optinomic.com/
         <input ng-model="d.appInit.filter">
     </md-input-container>
 </div>
-
-<div ng-if="d.appState === 'show'">
-    <md-content ng-if="d.appState !== 'loading'">
-    <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
-        <md-card-title style="background-color:#FAFAFA">
-            <md-card-title-text>
-                <span class="md-headline ">
-                	{{entry.datum_day}} | {{entry.tarmed.selected.tarifpos_beschreibung}}
-                    	<md-tooltip md-direction="top ">
-                    	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
-                    	</md-tooltip>
-                </span>
-                <span class="md-subhead " style="margin-top: -12px; color:#757575; ">
-                	<span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
-                	{{user.data.extras.full_name}}
-                	</span> | {{entry.dauer * 5}} Minuten
-                </span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <p class="flow-text ">{{entry.verlauf}}</p>
-        </md-card-content>
-        <md-card-actions layout="column " layout-gt-xs="row " layout-align="end center ">
-            <md-button class="md-icon-button " ng-if="entry.user===d .dataMain.users.current.id " ng-click="showConfirm($event, $index) " aria-label="Löschen " style="color: #9E9E9E; ">
-                <i class="md-title mdi mdi-delete "></i>
-                <md-tooltip md-direction="top ">
-                    Verlaufseintrag löschen
-                </md-tooltip>
-            </md-button>
-            <span flex></span>
-            <md-button ng-if="entry.user===d .dataMain.users.current.id " md-primary ng-click="entryEdit($index) " aria-label="Bearbeiten ">Bearbeiten</md-button>
-        </md-card-actions>
-    </md-card>
-</md-content>
-
-</div>
-<div ng-if="d.appState === 'edit'">
-    <md-card>
-    <md-card-title style="background-color: #424242; color: #FAFAFA">
-        <md-card-title-text>
-            <span class="md-headline ">
-                	{{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+ <p>EDIT</p>
+<div>
+    <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_code" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose" md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+            <span class="item-title">
+            - 
+            <span> {{item.icd_code}} </span>
             </span>
-            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
-            <span ng-if="d.appState === 'edit'" class="md-subhead">Verlaufseintrag bearbeiten</span>
-            <span ng-if="d.appState === 'new'" class="md-subhead">Neuer Verlaufseintrag erstellen</span>
+            <span class="item-metadata">
+            <span class="item-metastat">
+              <strong>{{item.icd_titel}}</strong> 
             </span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-content>
-        <div style="margin-top: 24px; max-height: 50px !important;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-            <md-input-container flex>
-                <label>Dauer (Anzahl 5 Minuten)</label>
-                <input ng-model="d.historyNewEntry.dauer" type="number">
-            </md-input-container>
-            <md-input-container flex>
-                <label>Benutzer</label>
-                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
-                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
-                        {{user.data.extras.full_name}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container>
-                <label>Leistungsgruppe</label>
-                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
-                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
-                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
-                <label>Tarifposition</label>
-                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
-                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
-                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-dots-vertical"></i>
-                <md-tooltip md-direction="bottom">
-                    Standards festlegen
-                </md-tooltip>
-            </md-button>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <p>&nbsp;</p>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container flex class="md-block flow-text">
-                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
-                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-            </md-input-container>
-        </div>
-        <pre ng-if="d.appInit.debug">
-		{{d.historyNewEntry | json}}
-		</pre>
-    </md-card-content>
-    <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-bug"></i>
-        </md-button>
-        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-        </md-button>
-        <span flex>&nbsp;</span>
-        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
-            <i class="md-title mdi mdi-content-save"></i> Speichern
-        </md-button>
-    </md-card-actions>
-</md-card>
-
-</div>
-<div ng-if="d.appState === 'new'">
-    <md-card>
-    <md-card-title style="background-color: #424242; color: #FAFAFA">
-        <md-card-title-text>
-            <span class="md-headline ">
-                	{{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
             </span>
-            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
-            <span ng-if="d.appState === 'edit'" class="md-subhead">Verlaufseintrag bearbeiten</span>
-            <span ng-if="d.appState === 'new'" class="md-subhead">Neuer Verlaufseintrag erstellen</span>
-            </span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-content>
-        <div style="margin-top: 24px; max-height: 50px !important;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
-            <md-input-container flex>
-                <label>Dauer (Anzahl 5 Minuten)</label>
-                <input ng-model="d.historyNewEntry.dauer" type="number">
-            </md-input-container>
-            <md-input-container flex>
-                <label>Benutzer</label>
-                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
-                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
-                        {{user.data.extras.full_name}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container>
-                <label>Leistungsgruppe</label>
-                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
-                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
-                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
-                <label>Tarifposition</label>
-                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
-                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
-                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-dots-vertical"></i>
-                <md-tooltip md-direction="bottom">
-                    Standards festlegen
-                </md-tooltip>
-            </md-button>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <p>&nbsp;</p>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container flex class="md-block flow-text">
-                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
-                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
-            </md-input-container>
-        </div>
-        <pre ng-if="d.appInit.debug">
-		{{d.historyNewEntry | json}}
-		</pre>
-    </md-card-content>
-    <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-bug"></i>
-        </md-button>
-        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-        </md-button>
-        <span flex>&nbsp;</span>
-        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
-            <i class="md-title mdi mdi-content-save"></i> Speichern
-        </md-button>
-    </md-card-actions>
-</md-card>
-
+        </md-item-template>
+    </md-autocomplete>
 </div>
-<div ng-if="d.appState === 'settings'">
-    <md-card>
-    <div style="background-color: #424242; color: #FAFAFA">
-        <md-card-title>
-            <md-card-title-text>
-                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
-            </md-card-title-text>
-        </md-card-title>
-    </div>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
-        </div>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container>
-                <label>Leistungsgruppe</label>
-                <md-select ng-model="d.userSettings.kapitel_id" aria-label="TARMED Kapitel">
-                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
-                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container ng-if="d.userSettings.kapitel_id">
-                <label>Tarifposition</label>
-                <md-select ng-model="d.userSettings.selected_tarifpos_code" md-on-close="" aria-label="TARMED Tarifpositions">
-                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.userSettings.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
-                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
-        </div>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container flex class="md-block">
-                <label>Dauer ( Anzahl 5 Minuten )</label>
-                <input ng-model="d.userSettings.dauer" type="number">
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
-                Neuste Einträge zuoberst anzeigen.
-            </md-switch>
-            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
-                Wochnfilter standardmässig aktivieren.
-            </md-switch>
-        </div>
-        <pre ng-if="d.appInit.debug">
-		{{d.userSettings | json}}
-		</pre>
-    </md-card-content>
-    <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-bug"></i>
-        </md-button>
-        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-        </md-button>
-        <span flex>&nbsp;</span>
-        <md-button ng-click="saveUserSettings()" aria-label="Speichern" style="color: #3F51B5;">
-            <i class="md-title mdi mdi-content-save"></i> Speichern
-        </md-button>
-    </md-card-actions>
-</md-card>
-
-</div>
-<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
-        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
-        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
-        <md-tooltip md-direction="bottom">
-            Sortierung der Einträge
-        </md-tooltip>
-    </md-button>
-    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
-            Einstellungen
-        </md-tooltip>
-    </md-button>
-    <md-input-container flex class="md-block">
-        <label>Filter: {{d.appInit.filter}}</label>
-        <input ng-model="d.appInit.filter">
-    </md-input-container>
-</div>
-
-<div>&nbsp;</div>
-<div class="optinomic-page-fab" ng-if="d.appState === 'show'">
-    <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
-        <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
-        <md-tooltip md-direction="left">
-            Neuer Verlaufseintrag
-        </md-tooltip>
-    </md-button>
-</div>
-            </div>
+             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
     <div>
@@ -5798,15 +5505,70 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.appInit = function() {
         $scope.d.nodeTree = 'diagnoses';
 
-        $scope.d.appInit = {
-            filter: '',
-            predicate: 'datum_sort',
-            reverse: true,
-            debug: false
-        };
+        $scope.d.appInit = {};
+        var self = $scope.d.appInit;
+        self.simulateQuery = false;
+        self.isDisabled = false;
+        self.repos = loadAll();
+        self.querySearch = querySearch;
+        self.selectedItemChange = selectedItemChange;
+        self.searchTextChange = searchTextChange;
 
         $scope.loadICD10Sheet();
     };
+
+
+
+
+
+    // ******************************
+    // Internal methods
+    // ******************************
+    /**
+     * Search for repos... use $timeout to simulate
+     * remote dataservice call.
+     */
+    function querySearch(query) {
+        var results = query ? self.repos.filter(createFilterFor(query)) : self.repos,
+            deferred;
+        if (self.simulateQuery) {
+            deferred = $q.defer();
+            $timeout(function() {
+                deferred.resolve(results);
+            }, Math.random() * 1000, false);
+            return deferred.promise;
+        } else {
+            return results;
+        }
+    }
+
+    function searchTextChange(text) {
+        $log.info('Text changed to ' + text);
+    }
+
+    function selectedItemChange(item) {
+        $log.info('Item changed to ' + JSON.stringify(item));
+    }
+    /**
+     * Build components` list of key/value pairs
+     */
+    function loadAll() {
+        var catalog = $scope.d.ICD10_all;
+        return catalog.map(function(diagn) {
+            diagn.value = diagn.icd_code;
+            return diagn;
+        });
+    }
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+        return function filterFn(item) {
+            return (item.value.indexOf(lowercaseQuery) === 0);
+        };
+    }
+
 
 
     //$scope.getUserSettings = function() {
@@ -5820,7 +5582,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     //    };
     //
     //    var tree = $scope.d.nodeTree;
-    //    var api_call = dataService.getAnnotationsData('user', tree);
+    //    var api_call = dataService.getAnnotationsData('user, tree);
     //    api_call.then(function(data) {
     //        if (dataService.isEmpty(data)) {
     //            $scope.d.userSettings = userSettingsDefault;
