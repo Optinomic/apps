@@ -164,11 +164,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      * Build `components` list of key/value pairs
      */
     function loadAll() {
-        var catalog = $scope.d.ICD10_all;
-        return catalog.map(function(diagn) {
-            diagn.value = diagn.icd_code;
-            return diagn;
-        });
+        //var catalog = $scope.d.ICD10_all;
+        //return catalog.map(function(diagn) {
+        //    diagn.value = diagn.icd_code;
+        //    return diagn;
+        //});
+        return $scope.d.ICD10_all;
     }
     /**
      * Create filter function for a query string
