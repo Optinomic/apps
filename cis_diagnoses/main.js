@@ -93,7 +93,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     $scope.d.ICD10_all.push(parse(content));
                 });
                 console.log('(!) ICD10_all', $scope.d.ICD10_all);
-                $scope.d.appInit.repos = $scope.d.ICD10_all;
+                $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                 //    return [item.kapitel_code];
@@ -125,7 +125,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.nodeTree = 'diagnoses';
 
         $scope.d.appInit = {};
-        var self = $scope.d.appInit;
+
         $scope.d.appInit.simulateQuery = false;
         $scope.d.appInit.isDisabled = false;
         $scope.d.appInit.repos = $scope.d.ICD10_all;
@@ -164,13 +164,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     /**
      * Build `components` list of key/value pairs
      */
-    function loadAll() {
-        //var catalog = $scope.d.ICD10_all;
-        //return catalog.map(function(diagn) {
-        //    diagn.value = diagn.icd_code;
-        //    return diagn;
-        //});
-        return $scope.d.ICD10_all;
+    function loadAll(catalog) {
+        return catalog.map(function(diagn) {
+            diagn.value = diagn.icd_code;
+            return diagn;
+        });
     }
 
     /**
