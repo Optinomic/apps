@@ -3,17 +3,11 @@
     <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_code" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose" md-menu-class="autocomplete-custom-template">
         <md-item-template>
             <span class="item-title">
-            - 
-            <span> {{item.icd_code}} </span>
-            </span>
-            <span class="item-metadata">
+            {{item.icd_code}}
+            <span> 
             <span class="item-metastat">
               <strong>{{item.icd_titel}}</strong> 
             </span>
-            </span>
         </md-item-template>
     </md-autocomplete>
-</div>
-<div ng-repeat="item in d.appInit.querySearch(d.appInit.searchText)">
-    {{item}}
 </div>
