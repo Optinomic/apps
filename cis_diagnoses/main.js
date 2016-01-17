@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var self = $scope.d.appInit;
         self.simulateQuery = false;
         self.isDisabled = false;
-        self.repos = loadAll();
+        self.repos = $scope.d.ICD10_all;
         self.querySearch = querySearch;
         self.selectedItemChange = selectedItemChange;
         self.searchTextChange = searchTextChange;
@@ -171,6 +171,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         //});
         return $scope.d.ICD10_all;
     }
+
     /**
      * Create filter function for a query string
      */
