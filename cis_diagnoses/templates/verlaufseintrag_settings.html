@@ -1,0 +1,70 @@
+<md-card>
+    <div style="background-color: #424242; color: #FAFAFA">
+        <md-card-title>
+            <md-card-title-text>
+                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
+            </md-card-title-text>
+        </md-card-title>
+    </div>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.userSettings.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.userSettings.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.userSettings.selected_tarifpos_code" md-on-close="" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.userSettings.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container flex class="md-block">
+                <label>Dauer ( Anzahl 5 Minuten )</label>
+                <input ng-model="d.userSettings.dauer" type="number">
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
+                Neuste Einträge zuoberst anzeigen.
+            </md-switch>
+            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
+                Wochnfilter standardmässig aktivieren.
+            </md-switch>
+        </div>
+        <pre ng-if="d.appInit.debug">
+		{{d.userSettings | json}}
+		</pre>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-bug"></i>
+        </md-button>
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="saveUserSettings()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern
+        </md-button>
+    </md-card-actions>
+</md-card>
