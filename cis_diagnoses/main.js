@@ -160,17 +160,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function selectedItemChange(item) {
         console.log('Item changed to ', JSON.stringify(item));
     }
+
     /**
-     * Build `components` list of key/value pairs
+     * Build `diagnoses` list of key/value pairs
      */
     function loadAll() {
-        //var catalog = $scope.d.ICD10_all;
-        //return catalog.map(function(diagn) {
-        //    diagn.value = diagn.icd_code;
-        //    return diagn;
-        //});
-        return $scope.d.ICD10_all;
+        console.log('loadAll - START');
+        return $scope.d.ICD10_all.map(function(diagn) {
+            diagn.value = diagn.icd_titel.toLowerCase();
+            console.log('loadAll - diagn', diagn);
+            return diagn;
+        });
     }
+
     /**
      * Create filter function for a query string
      */
