@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
-            $scope.getHisoryEntrys();
 
 
             // Finishing: Console Info & Init = done.
