@@ -14,3 +14,6 @@
         </md-item-template>
     </md-autocomplete>
 </div>
+<div ng-repeat="item in d.appInit.querySearch(d.appInit.searchText)">
+    {{item}}
+</div>
