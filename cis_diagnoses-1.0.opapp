@@ -5475,6 +5475,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     $scope.d.ICD10_all.push(parse(content));
                 });
                 console.log('(!) ICD10_all', $scope.d.ICD10_all);
+                $scope.d.appInit.repos = $scope.d.ICD10_all;
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                 //    return [item.kapitel_code];
@@ -5507,12 +5508,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.appInit = {};
         var self = $scope.d.appInit;
-        self.simulateQuery = false;
-        self.isDisabled = false;
-        self.repos = $scope.d.ICD10_all;
-        self.querySearch = querySearch;
-        self.selectedItemChange = selectedItemChange;
-        self.searchTextChange = searchTextChange;
+        $scope.d.appInit.simulateQuery = false;
+        $scope.d.appInit.isDisabled = false;
+        $scope.d.appInit.repos = $scope.d.ICD10_all;
+        $scope.d.appInit.querySearch = querySearch;
+        $scope.d.appInit.selectedItemChange = selectedItemChange;
+        $scope.d.appInit.searchTextChange = searchTextChange;
 
         $scope.loadICD10Sheet();
     };
@@ -5529,7 +5530,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      * remote dataservice call.
      */
     function querySearch(query) {
-        var results = query ? self.repos.filter(createFilterFor(query)) : self.repos,
+        var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
 
         return results;
