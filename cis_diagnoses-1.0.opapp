@@ -5533,6 +5533,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
 
+        console.log('querySearch', query, results);
         return results;
     }
 
@@ -5548,7 +5549,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      */
     function loadAll(catalog) {
         return catalog.map(function(diagn) {
-            diagn.value = diagn.icd_code;
+            diagn.value = diagn.icd_titel.toLowerCase();
             return diagn;
         });
     }
