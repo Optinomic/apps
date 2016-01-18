@@ -27,11 +27,7 @@
             </div>
         </md-card-content>
         <md-card-content>
-<<<<<<< HEAD
             <p>{{d.appInit.selectedItem.icd_code}}</p>
-=======
-            <p style="height: 10px !important;">{{d.appInit.selectedItem}}</p>
->>>>>>> parent of 26287d1... wip
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.diagn_selected">
@@ -74,7 +70,7 @@
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedICD10Data">
-            <div layout="column" layout-gt-xs="row" layout-align="center start" layout-margin>
+            <div layout="column" layout-gt-xs="column" layout-align="center start" layout-margin>
                 <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 <p class="md-caption">ICD-10</p>
             </div>
