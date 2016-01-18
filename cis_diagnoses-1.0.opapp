@@ -5726,7 +5726,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function createFilterFor(query) {
         var lowercaseQuery = angular.lowercase(query);
         return function filterFn(item) {
-            return (item._lowerTitel.indexOf(lowercaseQuery) !== null) ||
+            return (item._lowerTitel.indexOf(lowercaseQuery) >= 0) ||
                 (item._lowerCode.indexOf(lowercaseQuery) === 0);
         };
     }
