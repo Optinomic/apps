@@ -21,7 +21,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
-        $scope.d.appState = 'loading';
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
@@ -35,8 +34,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.d.init = true;
-            $scope.d.haveData = true;
+
 
         });
     };
@@ -133,7 +131,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.nodeTree = 'diagnoses';
 
         $scope.d.appInit = {};
-
         $scope.d.appInit.simulateQuery = false;
         $scope.d.appInit.isDisabled = false;
         $scope.d.appInit.noCache = false;
@@ -141,6 +138,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.querySearch = querySearch;
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
+
+        $scope.d.init = true;
+        $scope.d.haveData = true;
+        $scope.d.appState = 'show';
 
     };
 
