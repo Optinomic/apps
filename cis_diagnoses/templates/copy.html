@@ -29,6 +29,40 @@
         <md-card-content>
             <p>{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
+        <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <p>&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <label>Diagnose - Beschriftung</label>
+                    <input ng-model="d.newEntry.custom_text">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_annotation">
+                    <h3 class="md-subhead">Anmerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_annotation}}</p>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Anwendung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_application}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_inklusiva">
+                    <h3 class="md-subhead">Eingrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_inklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_exklusiva">
+                    <h3 class="md-subhead">Abgrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_exklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Bemerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.note}}</p>
+                </div>
+            </div>
+        </md-card-content>
         <md-divider ng-if="d.appInit.debug"></md-divider>
         <md-card-content ng-if="d.appInit.debug">
             <pre>
