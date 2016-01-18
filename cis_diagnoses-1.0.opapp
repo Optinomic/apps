@@ -80,7 +80,7 @@ website = http://www.optinomic.com/
                 </md-autocomplete>
             </div>
         </md-card-content>
-        <md-card-content>
+        <md-card-content stlye="max-height:1px !important;">
             <p style="height: 10px !important;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
@@ -172,7 +172,7 @@ website = http://www.optinomic.com/
                 </md-autocomplete>
             </div>
         </md-card-content>
-        <md-card-content>
+        <md-card-content stlye="max-height:1px !important;">
             <p style="height: 10px !important;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
