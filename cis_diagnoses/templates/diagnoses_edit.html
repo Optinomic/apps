@@ -1,5 +1,4 @@
-<p>EDIT</p>
-<div ng-if="d.haveData">
+<div ng-if="d.loadedICD10Data">
     <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_display" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose">
         <md-item-template>
             <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
@@ -20,6 +19,6 @@
         </pre>
     </div>
 </div>
-<div ng-if="!d.haveData">
+<div ng-if="!d.loadedICD10Data">
     <p>Loading ICD-10</p>
 </div>

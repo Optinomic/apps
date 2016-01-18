@@ -109,6 +109,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Set 'haveData' because we do not have a survey here!
                 $scope.d.haveData = true;
+                $scope.d.loadedICD10Data = true;
 
             });
     };
@@ -134,13 +135,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.appInit.simulateQuery = false;
         $scope.d.appInit.isDisabled = false;
-        $scope.d.appInit.noCache = true;
-        $scope.d.appInit.repos = $scope.d.ICD10_all;
+        $scope.d.appInit.noCache = false;
+        $scope.d.appInit.repos = [];
         $scope.d.appInit.querySearch = querySearch;
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
 
-        $scope.loadICD10Sheet();
     };
 
 
@@ -155,10 +155,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      * remote dataservice call.
      */
     function querySearch(query) {
+        $scope.d.loadedICD10Data = false;
         var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
 
-        console.log('querySearch', createFilterFor(query), results);
+        //console.log('querySearch', createFilterFor(query), results);
+        $scope.d.loadedICD10Data = true;
         return results;
     }
 
@@ -309,21 +311,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryNew = function() {
         // New
+        $scope.d.loadedICD10Data = false;
         $scope.d.appState = 'new';
 
         // Init New Entry
-        $scope.d.historyNewEntry = {
+        $scope.d.newEntry = {
             datum: new Date(),
             user: $scope.d.dataMain.users.current.id,
-            tarmed: {},
-            verlauf: ""
+            diagn: {},
+            custom_text: ""
         };
 
-        // Set UserDefaultSettings
-        $scope.d.historyNewEntry.dauer = $scope.d.userSettings.dauer;
-        $scope.d.historyNewEntry.tarmed.kapitel_id = $scope.d.userSettings.kapitel_id;
-        $scope.d.historyNewEntry.tarmed.selected_tarifpos_code = $scope.d.userSettings.selected_tarifpos_code;
-        $scope.storeSelectedTARMED();
+        $scope.loadICD10Sheet();
 
     };
 
