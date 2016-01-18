@@ -82,6 +82,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 icd_precision: icd_precision,
                 icd_inklusiva: icd_inklusiva,
                 icd_note: icd_note,
+                icd_display: icd_display,
                 value: value
             };
         }
