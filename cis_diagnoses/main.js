@@ -63,7 +63,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var icd_precision = entry['gsx$precision']['$t'];
             var icd_inklusiva = entry['gsx$inklusiva']['$t'];
             var icd_note = entry['gsx$note']['$t'];
-            var value = icd_code + ", " + icd_titel + ", " + icd_precision;
+            var icd_display = icd_titel + ", " + icd_code;
+            var value = icd_code + ", " + icd_titel;
             value = value.toLowerCase();
 
             return {
@@ -133,10 +134,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.appInit.simulateQuery = false;
         $scope.d.appInit.isDisabled = false;
+        $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = $scope.d.ICD10_all;
         $scope.d.appInit.querySearch = querySearch;
         $scope.d.appInit.selectedItemChange = selectedItemChange;
-        $scope.d.appInit.selectedItem = {};
         $scope.d.appInit.searchTextChange = searchTextChange;
 
         $scope.loadICD10Sheet();
