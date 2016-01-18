@@ -136,6 +136,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.repos = $scope.d.ICD10_all;
         $scope.d.appInit.querySearch = querySearch;
         $scope.d.appInit.selectedItemChange = selectedItemChange;
+        $scope.d.appInit.selectedItem = {};
         $scope.d.appInit.searchTextChange = searchTextChange;
 
         $scope.loadICD10Sheet();
@@ -166,6 +167,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     function selectedItemChange(item) {
         console.log('Item changed to ', JSON.stringify(item));
+        $scope.d.appInit.selectedItem = item;
     }
     /**
      * Build `components` list of key/value pairs
