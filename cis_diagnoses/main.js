@@ -63,6 +63,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var icd_precision = entry['gsx$precision']['$t'];
             var icd_inklusiva = entry['gsx$inklusiva']['$t'];
             var icd_note = entry['gsx$note']['$t'];
+            var value = icd_code + ", " + icd_titel + ", " + icd_precision;
+            value = value.toLowerCase();
 
             return {
                 icd_id: icd_id,
@@ -78,7 +80,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 icd_exklusiva: icd_exklusiva,
                 icd_precision: icd_precision,
                 icd_inklusiva: icd_inklusiva,
-                icd_note: icd_note
+                icd_note: icd_note,
+                value: value
             };
         }
 
@@ -93,7 +96,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     $scope.d.ICD10_all.push(parse(content));
                 });
                 console.log('(!) ICD10_all', $scope.d.ICD10_all);
-                $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+                //$scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+                $scope.d.appInit.repos = $scope.d.ICD10_all;
+
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                 //    return [item.kapitel_code];

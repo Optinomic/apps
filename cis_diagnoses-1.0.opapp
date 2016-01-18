@@ -47,17 +47,15 @@ website = http://www.optinomic.com/
     </md-input-container>
 </div>
  <p>EDIT</p>
-<div>
+<div ng-if="d.haveData">
     <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_code" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose" md-menu-class="autocomplete-custom-template">
         <md-item-template>
-            <span class="item-title">
-            {{item.icd_code}}
-            <span> 
-            <span class="item-metastat">
-              <strong>{{item.icd_titel}}</strong> 
-            </span>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.icd_code}}, {{item.icd_titel}}</span>
         </md-item-template>
     </md-autocomplete>
+</div>
+<div ng-if="!d.haveData">
+    <p>Loading ICD-10</p>
 </div>
              </div>
             <div ng-if="!d.haveData">
@@ -5442,6 +5440,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var icd_precision = entry['gsx$precision']['$t'];
             var icd_inklusiva = entry['gsx$inklusiva']['$t'];
             var icd_note = entry['gsx$note']['$t'];
+            var value = icd_code + ", " + icd_titel + ", " + icd_precision;
+            value = value.toLowerCase();
 
             return {
                 icd_id: icd_id,
@@ -5457,7 +5457,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 icd_exklusiva: icd_exklusiva,
                 icd_precision: icd_precision,
                 icd_inklusiva: icd_inklusiva,
-                icd_note: icd_note
+                icd_note: icd_note,
+                value: value
             };
         }
 
@@ -5472,7 +5473,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     $scope.d.ICD10_all.push(parse(content));
                 });
                 console.log('(!) ICD10_all', $scope.d.ICD10_all);
-                $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+                //$scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+                $scope.d.appInit.repos = $scope.d.ICD10_all;
+
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
                 //    return [item.kapitel_code];
