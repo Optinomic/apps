@@ -1,0 +1,19 @@
+<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
+    </md-button>
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-dots-vertical"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
+    <md-input-container flex class="md-block">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
+    </md-input-container>
+</div>
