@@ -115,14 +115,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     //$scope.storeSelectedTARMED = function() {
     //    // If user selects a TARMED Tarifposition save the entry.
-    //    var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
+    //    var entries = $scope.d.TARMEDkapitel[$scope.d.newEntry.tarmed.kapitel_id]
     //        //console.log('storeSelectedTARMED', entries);
     //
     //    entries.forEach(function(content, myindex) {
     //        //console.log('-- storeSelectedTARMED', content);
     //
-    //        if (content.tarifpos_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
-    //            $scope.d.historyNewEntry.tarmed.selected = content;
+    //        if (content.tarifpos_code === $scope.d.newEntry.tarmed.selected_tarifpos_code) {
+    //            $scope.d.newEntry.tarmed.selected = content;
     //        };
     //    });
     //};
@@ -351,14 +351,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryEdit = function(currentIndex) {
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
-        $scope.d.historyNewEntry.datum = new Date($scope.d.historyNewEntry.datum);
+        $scope.d.newEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.newEntry.datum = new Date($scope.d.newEntry.datum);
 
-        $scope.d.historyNewEntryID = currentIndex;
+        $scope.d.newEntryID = currentIndex;
         $scope.d.appState = 'edit';
 
 
-        console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
+        console.log('entryEdit: ', currentIndex, $scope.d.newEntry);
     };
 
 
@@ -378,22 +378,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Save
 
         // Datum erweitern.
-        var date = $scope.d.historyNewEntry.datum;
-        $scope.d.historyNewEntry.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-        $scope.d.historyNewEntry.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
-        $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-        $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
-        $scope.d.historyNewEntry.datum_time = $filter("amDateFormat")(date, 'HH:mm');
-        $scope.d.historyNewEntry.uniqueid = dataService.uniqueid();
+        var date = $scope.d.newEntry.datestamp;
+        $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+        $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
+        $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+        $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+        $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
+        $scope.d.newEntry.uniqueid = dataService.uniqueid();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
-            $scope.d.historyEntrys.push($scope.d.historyNewEntry);
+            $scope.d.historyEntrys.push($scope.d.newEntry);
         };
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
+            $scope.d.historyEntrys[$scope.d.newEntryID] = $scope.d.newEntry;
         };
 
 
@@ -402,7 +402,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
         api_call.then(function(data) {
-            console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
+            console.log('(+) putHisoryPost - saved: ', $scope.d.newEntry);
 
             // Update Entrys
             $scope.d.appState = 'show';
