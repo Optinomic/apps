@@ -157,12 +157,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      * remote dataservice call.
      */
     function querySearch(query) {
-        $scope.d.loadedICD10Data = false;
         var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
 
         //console.log('querySearch', createFilterFor(query), results);
-        $scope.d.loadedICD10Data = true;
         return results;
     }
 
@@ -191,7 +189,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function createFilterFor(query) {
         var lowercaseQuery = angular.lowercase(query);
         return function filterFn(item) {
-            return (item._lowerTitel.indexOf(lowercaseQuery) === 0) ||
+            return (item._lowerTitel.indexOf(lowercaseQuery) !== null) ||
                 (item._lowerCode.indexOf(lowercaseQuery) === 0);
         };
     }
