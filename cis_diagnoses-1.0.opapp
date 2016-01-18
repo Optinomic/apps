@@ -67,6 +67,7 @@ website = http://www.optinomic.com/
         </md-card-title>
         <md-card-content ng-if="d.loadedICD10Data">
             <div>
+                <p>&nbsp;</p>
                 <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
                     <md-item-template>
                         <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
@@ -80,20 +81,24 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
         <md-divider ng-if="d.loadedICD10Data"></md-divider>
-        <md-card-content ng-if="d.loadedICD10Data">
-            <div>
-                <h3 class="md-headline">Selektiert</h3>
-                <pre>
-                {{d.appInit.selectedItem}}
-            </pre>
-            </div>
-            <md-divider ng-if="d.loadedICD10Data"></md-divider>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
             <p>&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
                     <input ng-model="d.NewEntry.custom_text">
                 </md-input-container>
+            </div>
+            <pre ng-if="d.appInit.debug">
+                {{d.NewEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <div>
+                <h3 class="md-header">Selektiert</h3>
+                <pre>
+                {{d.appInit.selectedItem}}
+            </pre>
             </div>
             <pre ng-if="d.appInit.debug">
                 {{d.NewEntry | json}}
@@ -135,6 +140,7 @@ website = http://www.optinomic.com/
         </md-card-title>
         <md-card-content ng-if="d.loadedICD10Data">
             <div>
+                <p>&nbsp;</p>
                 <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
                     <md-item-template>
                         <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
@@ -148,20 +154,24 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
         <md-divider ng-if="d.loadedICD10Data"></md-divider>
-        <md-card-content ng-if="d.loadedICD10Data">
-            <div>
-                <h3 class="md-headline">Selektiert</h3>
-                <pre>
-                {{d.appInit.selectedItem}}
-            </pre>
-            </div>
-            <md-divider ng-if="d.loadedICD10Data"></md-divider>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
             <p>&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
                     <input ng-model="d.NewEntry.custom_text">
                 </md-input-container>
+            </div>
+            <pre ng-if="d.appInit.debug">
+                {{d.NewEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <div>
+                <h3 class="md-header">Selektiert</h3>
+                <pre>
+                {{d.appInit.selectedItem}}
+            </pre>
             </div>
             <pre ng-if="d.appInit.debug">
                 {{d.NewEntry | json}}
@@ -5783,16 +5793,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Item changed to ', JSON.stringify(item));
         $scope.d.appInit.selectedItem = item;
 
-        if (!dataService.isEmpty(item) || (item != undefined) || (item != null)) {
-
+        if (item === undefined) {
+            $scope.d.newEntry = {
+                datestamp: new Date(),
+                user: $scope.d.dataMain.users.current.id,
+                diagn: {},
+                diagn_selected: false,
+                custom_text: ""
+            };
+        } else {
             // Create JSON to save
             $scope.d.newEntry = {
                 datestamp: new Date(),
                 user: $scope.d.dataMain.users.current.id,
                 diagn: item,
+                diagn_selected: true,
                 custom_text: item.icd_display
             };
-        }
+            console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
+        };
 
     }
     /**

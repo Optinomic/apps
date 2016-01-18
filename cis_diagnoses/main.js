@@ -174,16 +174,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Item changed to ', JSON.stringify(item));
         $scope.d.appInit.selectedItem = item;
 
-        if (!dataService.isEmpty(item) || (item != undefined) || (item != null)) {
-
+        if (item === undefined) {
+            $scope.d.newEntry = {
+                datestamp: new Date(),
+                user: $scope.d.dataMain.users.current.id,
+                diagn: {},
+                diagn_selected: false,
+                custom_text: ""
+            };
+        } else {
             // Create JSON to save
             $scope.d.newEntry = {
                 datestamp: new Date(),
                 user: $scope.d.dataMain.users.current.id,
                 diagn: item,
+                diagn_selected: true,
                 custom_text: item.icd_display
             };
-        }
+            console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
+        };
 
     }
     /**
