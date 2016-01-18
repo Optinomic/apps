@@ -36,6 +36,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
+            $scope.d.haveData = true;
+
         });
     };
     $scope.loadMainData();
@@ -108,7 +110,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
                 // Set 'haveData' because we do not have a survey here!
-                $scope.d.haveData = true;
                 $scope.d.loadedICD10Data = true;
 
             });
