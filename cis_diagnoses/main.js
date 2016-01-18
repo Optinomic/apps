@@ -136,6 +136,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
         $scope.d.appInit.querySearch = querySearch;
+        $scope.d.appInit.selectedItem = {};
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
@@ -307,7 +308,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryCancel = function() {
         // Cancel
-        $scope.d.appState = 'show';
+        $scope.appInit();
     };
 
 
