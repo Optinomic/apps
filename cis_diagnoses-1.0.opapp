@@ -93,7 +93,7 @@ website = http://www.optinomic.com/
                 {{d.NewEntry | json}}
             </pre>
         </md-card-content>
-        <md-card-content ng-if="d.newEntry.diagn_selected">
+        <md-card-content>
             <div>
                 <h3 class="md-header">Selektiert</h3>
                 <pre>
@@ -166,7 +166,7 @@ website = http://www.optinomic.com/
                 {{d.NewEntry | json}}
             </pre>
         </md-card-content>
-        <md-card-content ng-if="d.newEntry.diagn_selected">
+        <md-card-content>
             <div>
                 <h3 class="md-header">Selektiert</h3>
                 <pre>
