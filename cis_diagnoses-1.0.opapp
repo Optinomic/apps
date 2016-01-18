@@ -74,8 +74,12 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div ng-if="!d.loadedICD10Data">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     <p>Loading ICD-10</p>
 </div>
+<md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+    <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+</md-button>
 
 </div>
 <div ng-if="d.appState === 'new'">
@@ -101,8 +105,12 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div ng-if="!d.loadedICD10Data">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     <p>Loading ICD-10</p>
 </div>
+<md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+    <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+</md-button>
 
 </div>
 <div ng-if="d.appState === 'settings'">
