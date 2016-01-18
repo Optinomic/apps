@@ -58,7 +58,7 @@ website = http://www.optinomic.com/
             <h3 class="md-headline">Diagnosen | ICD-10</h3>
         </div>
         <div>
-            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_display" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose">
+            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
                 <md-item-template>
                     <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
              - {{item.icd_display}}
@@ -78,7 +78,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="!d.loadedICD10Data">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <p class="md-caption">&nbsp;ICD-10</p>
+        <p class="md-caption">&nbsp;&nbsp;&nbsp;ICD-10</p>
     </div>
     <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
@@ -93,7 +93,7 @@ website = http://www.optinomic.com/
             <h3 class="md-headline">Diagnosen | ICD-10</h3>
         </div>
         <div>
-            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_display" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose">
+            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
                 <md-item-template>
                     <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
              - {{item.icd_display}}
@@ -113,7 +113,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="!d.loadedICD10Data">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <p class="md-caption">&nbsp;ICD-10</p>
+        <p class="md-caption">&nbsp;&nbsp;&nbsp;ICD-10</p>
     </div>
     <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
         <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
@@ -5682,6 +5682,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
+        $scope.d.appInit.autofocus = true
 
         $scope.d.init = true;
         $scope.d.haveData = true;
