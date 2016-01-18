@@ -131,8 +131,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.nodeTree = 'diagnoses';
 
         $scope.d.appInit = {};
-        $scope.d.appInit.simulateQuery = false;
-        $scope.d.appInit.isDisabled = false;
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
         $scope.d.appInit.querySearch = querySearch;
@@ -193,6 +191,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
+
 
     }
     /**
