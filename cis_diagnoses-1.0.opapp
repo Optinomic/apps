@@ -53,71 +53,137 @@ website = http://www.optinomic.com/
 </div>
 <div ng-if="d.appState === 'edit'">
     <md-content class="md-padding">
-    <div ng-if="d.loadedICD10Data">
-        <div>
-            <h3 class="md-headline">Diagnosen | ICD-10</h3>
-        </div>
-        <div>
-            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
-                <md-item-template>
-                    <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
-             - {{item.icd_display}}
-            </span>
-                </md-item-template>
-                <md-not-found>
-                    Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
-                </md-not-found>
-            </md-autocomplete>
-        </div>
-        <div>
-            <h3 class="md-headline">Selektiert</h3>
-            <pre>
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                </span>
+                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Diagnose bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Diagnose hinzufügen</span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="d.loadedICD10Data">
+            <div>
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
+                    <md-item-template>
+                        <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
+                    - {{item.icd_display}}
+                    </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
+                    </md-not-found>
+                </md-autocomplete>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.loadedICD10Data"></md-divider>
+        <md-card-content ng-if="d.loadedICD10Data">
+            <div>
+                <h3 class="md-headline">Selektiert</h3>
+                <pre>
                 {{d.appInit.selectedItem}}
             </pre>
-        </div>
-    </div>
-    <div ng-if="!d.loadedICD10Data">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <p class="md-caption">&nbsp;&nbsp;&nbsp;ICD-10</p>
-    </div>
-    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-    </md-button>
+            </div>
+            <md-divider ng-if="d.loadedICD10Data"></md-divider>
+            <p>&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <label>Diagnose - Beschriftung</label>
+                    <input ng-model="d.NewEntry.custom_text">
+                </md-input-container>
+            </div>
+            <pre ng-if="d.appInit.debug">
+                {{d.NewEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="!d.loadedICD10Data">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
+        </md-card-content>
+        <md-card-actions ng-if="d.loadedICD10Data" layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex>&nbsp;</span>
+            <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Speichern
+            </md-button>
+        </md-card-actions>
+    </md-card>
 </md-content>
 
 </div>
 <div ng-if="d.appState === 'new'">
     <md-content class="md-padding">
-    <div ng-if="d.loadedICD10Data">
-        <div>
-            <h3 class="md-headline">Diagnosen | ICD-10</h3>
-        </div>
-        <div>
-            <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
-                <md-item-template>
-                    <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
-             - {{item.icd_display}}
-            </span>
-                </md-item-template>
-                <md-not-found>
-                    Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
-                </md-not-found>
-            </md-autocomplete>
-        </div>
-        <div>
-            <h3 class="md-headline">Selektiert</h3>
-            <pre>
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                </span>
+                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Diagnose bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Diagnose hinzufügen</span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="d.loadedICD10Data">
+            <div>
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
+                    <md-item-template>
+                        <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
+                    - {{item.icd_display}}
+                    </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
+                    </md-not-found>
+                </md-autocomplete>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.loadedICD10Data"></md-divider>
+        <md-card-content ng-if="d.loadedICD10Data">
+            <div>
+                <h3 class="md-headline">Selektiert</h3>
+                <pre>
                 {{d.appInit.selectedItem}}
             </pre>
-        </div>
-    </div>
-    <div ng-if="!d.loadedICD10Data">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <p class="md-caption">&nbsp;&nbsp;&nbsp;ICD-10</p>
-    </div>
-    <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-    </md-button>
+            </div>
+            <md-divider ng-if="d.loadedICD10Data"></md-divider>
+            <p>&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <label>Diagnose - Beschriftung</label>
+                    <input ng-model="d.NewEntry.custom_text">
+                </md-input-container>
+            </div>
+            <pre ng-if="d.appInit.debug">
+                {{d.NewEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="!d.loadedICD10Data">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
+        </md-card-content>
+        <md-card-actions ng-if="d.loadedICD10Data" layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex>&nbsp;</span>
+            <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Speichern
+            </md-button>
+        </md-card-actions>
+    </md-card>
 </md-content>
 
 </div>
@@ -5679,7 +5745,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
         $scope.d.appInit.querySearch = querySearch;
-        $scope.d.appInit.selectedItem = {};
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
@@ -5717,6 +5782,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function selectedItemChange(item) {
         console.log('Item changed to ', JSON.stringify(item));
         $scope.d.appInit.selectedItem = item;
+
+        if (!dataService.isEmpty(item) || (item != undefined) || (item != null)) {
+
+            // Create JSON to save
+            $scope.d.newEntry = {
+                datestamp: new Date(),
+                user: $scope.d.dataMain.users.current.id,
+                diagn: item,
+                custom_text: item.icd_display
+            };
+        }
+
     }
     /**
      * Build components` list of key/value pairs
@@ -5862,7 +5939,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init New Entry
         $scope.d.newEntry = {
-            datum: new Date(),
+            datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
             custom_text: ""

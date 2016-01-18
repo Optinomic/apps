@@ -136,7 +136,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
         $scope.d.appInit.querySearch = querySearch;
-        $scope.d.appInit.selectedItem = {};
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
@@ -174,6 +173,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function selectedItemChange(item) {
         console.log('Item changed to ', JSON.stringify(item));
         $scope.d.appInit.selectedItem = item;
+
+        if (!dataService.isEmpty(item) || (item != undefined) || (item != null)) {
+
+            // Create JSON to save
+            $scope.d.newEntry = {
+                datestamp: new Date(),
+                user: $scope.d.dataMain.users.current.id,
+                diagn: item,
+                custom_text: item.icd_display
+            };
+        }
+
     }
     /**
      * Build `components` list of key/value pairs
@@ -319,7 +330,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init New Entry
         $scope.d.newEntry = {
-            datum: new Date(),
+            datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
             custom_text: ""
