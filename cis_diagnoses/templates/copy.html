@@ -27,7 +27,7 @@
             </div>
         </md-card-content>
         <md-card-content>
-            <p>{{d.appInit.selectedItem.icd_code}}</p>
+            <p style="height: 10px !important;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.diagn_selected">
@@ -70,12 +70,9 @@
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedICD10Data">
-            <div layout="column" layout-gt-xs="column" layout-align="center start" layout-margin>
-                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                <p class="md-caption">ICD-10</p>
-            </div>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
         </md-card-content>
-        <md-divider ng-if="d.loadedICD10Data"></md-divider>
         <md-card-actions ng-if="d.loadedICD10Data" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
