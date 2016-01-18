@@ -1,10 +1,15 @@
 <p>EDIT</p>
 <div ng-if="d.haveData">
-    <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_code" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose" md-menu-class="autocomplete-custom-template">
+    <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-item-text="item.icd_titel" md-min-length="0" placeholder="Selektieren Sie eine ICD-10 Diagnose" md-menu-class="autocomplete-custom-template">
         <md-item-template>
-            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.icd_code}}, {{item.icd_titel}}</span>
+            <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">{{item.icd_code}}, {{item.icd_titel}}</span>
         </md-item-template>
     </md-autocomplete>
+    <div>
+        <p>Results</p>
+        <p>Query: {{d.appInit.querySearch(d.appInit.searchText).length}}</p>
+        <p>Total: {{d.appInit.repos.length}}</p>
+    </div>
 </div>
 <div ng-if="!d.haveData">
     <p>Loading ICD-10</p>
