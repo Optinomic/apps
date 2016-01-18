@@ -86,22 +86,43 @@ website = http://www.optinomic.com/
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
-                    <input ng-model="d.NewEntry.custom_text">
+                    <input ng-model="d.newEntry.custom_text">
                 </md-input-container>
             </div>
-            <pre ng-if="d.appInit.debug">
-                {{d.NewEntry | json}}
-            </pre>
         </md-card-content>
-        <md-card-content>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_annotation">
+                    <h3 class="md-subhead">Anmerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_annotation}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Anwendung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_application}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_inklusiva">
+                    <h3 class="md-subhead">Eingrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_inklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_exklusiva">
+                    <h3 class="md-subhead">Abgrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_exklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Bemerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.note}}</p>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-content style="visibility:hidden">
             <div>
                 <h3 class="md-header">Selektiert</h3>
                 <pre>
                 {{d.appInit.selectedItem}}
-            </pre>
+                </pre>
             </div>
             <pre ng-if="d.appInit.debug">
-                {{d.NewEntry | json}}
+                {{d.newEntry | json}}
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedICD10Data">
@@ -159,22 +180,43 @@ website = http://www.optinomic.com/
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
-                    <input ng-model="d.NewEntry.custom_text">
+                    <input ng-model="d.newEntry.custom_text">
                 </md-input-container>
             </div>
-            <pre ng-if="d.appInit.debug">
-                {{d.NewEntry | json}}
-            </pre>
         </md-card-content>
-        <md-card-content>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_annotation">
+                    <h3 class="md-subhead">Anmerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_annotation}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Anwendung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_application}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_inklusiva">
+                    <h3 class="md-subhead">Eingrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_inklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_exklusiva">
+                    <h3 class="md-subhead">Abgrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_exklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Bemerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.note}}</p>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-content style="visibility:hidden">
             <div>
                 <h3 class="md-header">Selektiert</h3>
                 <pre>
                 {{d.appInit.selectedItem}}
-            </pre>
+                </pre>
             </div>
             <pre ng-if="d.appInit.debug">
-                {{d.NewEntry | json}}
+                {{d.newEntry | json}}
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedICD10Data">
