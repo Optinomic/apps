@@ -27,21 +27,51 @@
             </div>
         </md-card-content>
         <md-card-content>
-            <p>{{d.appInit.selectedItem.icd_code}}</p>
+            <p style="height: 10px !important;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.debug"></md-divider>
+        <md-divider ng-if="d.loadedICD10Data"></md-divider>
+        <md-card-content ng-if="d.newEntry.diagn_selected">
+            <p>&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <label>Diagnose - Beschriftung</label>
+                    <input ng-model="d.newEntry.custom_text">
+                </md-input-container>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_annotation">
+                    <h3 class="md-subhead">Anmerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_annotation}}</p>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Anwendung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_application}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_inklusiva">
+                    <h3 class="md-subhead">Eingrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_inklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_exklusiva">
+                    <h3 class="md-subhead">Abgrenzung:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.icd_exklusiva}}</p>
+                </div>
+                <div flex ng-if="d.appInit.selectedItem.icd_application">
+                    <h3 class="md-subhead">Bemerkungen:</h3>
+                    <p class="md-body-1">{{d.appInit.selectedItem.note}}</p>
+                </div>
+            </div>
+        </md-card-content>
         <md-card-content ng-if="d.appInit.debug">
             <pre>
                 {{d.newEntry | json}}
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedICD10Data">
-            <div layout="column" layout-gt-xs="column" layout-align="center start" layout-margin>
-                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                <p class="md-caption">ICD-10</p>
-            </div>
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
         </md-card-content>
-        <md-divider ng-if="d.loadedICD10Data"></md-divider>
         <md-card-actions ng-if="d.loadedICD10Data" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
