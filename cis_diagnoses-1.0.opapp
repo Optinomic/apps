@@ -81,7 +81,7 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
         <md-card-content>
-            <p style="text-align:right; height:10px !important; color:#F5F5F5; margin-top:-40px;">{{d.appInit.selectedItem.icd_code}}</p>
+            <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.diagn_selected">
@@ -174,7 +174,7 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
         <md-card-content>
-            <p style="text-align:right; height:10px !important; color:#F5F5F5; margin-top:-40px;">{{d.appInit.selectedItem.icd_code}}</p>
+            <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.icd_code}}</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.diagn_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.diagn_selected">
