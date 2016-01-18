@@ -55,7 +55,7 @@ website = http://www.optinomic.com/
             </span>
         </md-item-template>
         <md-not-found>
-            Keine Diagnosen "{{d.appInit..searchText}}" konnten gefunden werden.
+            Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
         </md-not-found>
     </md-autocomplete>
     <div>
