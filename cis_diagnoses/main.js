@@ -175,7 +175,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      */
     function loadAll(catalog) {
         return catalog.map(function(diagn) {
-            diagn.value = diagn.icd_titel.toLowerCase() + ", " + diagn.code = diagn.icd_code.toLowerCase();
+            diagn.value = diagn.icd_titel.toLowerCase() + ", " + diagn.icd_code.toLowerCase();
             return diagn;
         });
     }
