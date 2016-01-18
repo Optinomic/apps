@@ -19,6 +19,15 @@ website = http://www.optinomic.com/
 
 
 [template history_entry 6 15]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
 <div ng-if="d.appState === 'show'">
     <h3 class="md-headline">
     <i class="md-title mdi mdi-chevron-right"></i>
