@@ -158,7 +158,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
 
-        console.log('querySearch', query, results);
+        console.log('querySearch', createFilterFor(query), results);
         return results;
     }
 
@@ -175,8 +175,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      */
     function loadAll(catalog) {
         return catalog.map(function(diagn) {
-            diagn.code = diagn.icd_code.toLowerCase();
-            diagn.value = diagn.icd_titel.toLowerCase();
+            diagn.value = diagn.icd_titel.toLowerCase() + ", " + diagn.code = diagn.icd_code.toLowerCase();
             return diagn;
         });
     }
