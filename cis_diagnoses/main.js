@@ -134,7 +134,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.appInit.simulateQuery = false;
         $scope.d.appInit.isDisabled = false;
-        $scope.d.appInit.noCache = false;
+        $scope.d.appInit.noCache = true;
         $scope.d.appInit.repos = $scope.d.ICD10_all;
         $scope.d.appInit.querySearch = querySearch;
         $scope.d.appInit.selectedItemChange = selectedItemChange;
@@ -175,7 +175,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      */
     function loadAll(catalog) {
         return catalog.map(function(diagn) {
-            diagn.value = diagn.icd_titel.toLowerCase() + ", " + diagn.icd_code.toLowerCase();
+            diagn._lowerCode = diagn.icd_code.toLowerCase();
+            diagn._lowerTitel = diagn.icd_titel.toLowerCase();
             return diagn;
         });
     }
@@ -186,7 +187,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function createFilterFor(query) {
         var lowercaseQuery = angular.lowercase(query);
         return function filterFn(item) {
-            return (item.value.indexOf(lowercaseQuery) === 0);
+            return (item._lowerTitel.indexOf(lowercaseQuery) === 0) ||
+                (item._lowerCode.indexOf(lowercaseQuery) === 0);
         };
     }
 
