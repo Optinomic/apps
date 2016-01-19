@@ -5969,7 +5969,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
 
     $scope.showConfirm = function(ev, my_uid) {
-        console.log('showConfirm: ', ev, my_index);
+        console.log('showConfirm: ', ev, my_uid);
 
         var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', my_uid);
 
