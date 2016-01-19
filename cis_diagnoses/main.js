@@ -28,6 +28,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
+            $scope.d.loadedICD10Data = false;
+
             // Run App-Functions
             $scope.appInit();
             $scope.getEntrys();
@@ -181,6 +183,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 diagn: {},
                 diagn_selected: false,
+                diagn_rank: null,
                 custom_text: ""
             };
         } else {
@@ -190,13 +193,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 diagn: item,
                 diagn_selected: true,
+                diagn_rank: $scope.d.diagnoses.length + 1,
                 custom_text: item.icd_display
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
-
-
     }
+
     /**
      * Build `components` list of key/value pairs
      */
@@ -332,18 +335,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryNew = function() {
         // New
-        $scope.d.loadedICD10Data = false;
         $scope.d.appState = 'new';
 
-        // Init New Entry
-        $scope.d.newEntry = {
-            datestamp: new Date(),
-            user: $scope.d.dataMain.users.current.id,
-            diagn: {},
-            diagn_rank: $scope.d.diagnoses.length + 1
-        };
+        if ($scope.d.ICD10_all !== undefined) {
+            $scope.loadICD10Sheet();
+        }
 
-        $scope.loadICD10Sheet();
     };
 
     $scope.entryEdit = function(currentIndex) {
