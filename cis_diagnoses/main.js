@@ -438,6 +438,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryDelete = function(my_index) {
         $scope.d.diagnoses.splice(my_index, 1);
         console.log('Deleted - Index', my_index);
+
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.diagnoses);
+        api_call.then(function(data) {
+            console.log('(+) entryDelete - success: ', $scope.d.diagnoses);
+
+            // Update Entrys
+            $scope.d.appState = 'show';
+            $scope.getEntrys();
+        });
     };
 
 
