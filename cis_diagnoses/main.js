@@ -350,18 +350,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryNew = function() {
         // New
 
-        // Init New Entry
-        $scope.d.newEntry = {
-            datestamp: new Date(),
-            user: $scope.d.dataMain.users.current.id,
-            diagn: {},
-            custom_text: '',
-            diagn_rank: $scope.d.diagnoses.length + 1
-        };
-
-        $scope.loadICD10();
-        $scope.d.appInit.selectedItem = {};
         $scope.d.appState = 'new';
+        $scope.loadICD10();
+
+        // Init New Entry
+        $scope.d.appInit.selectedItem = {};
+        $scope.selectedItemChange(undefined)
 
 
     };
