@@ -343,7 +343,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryEdit = function(currentIndex) {
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.newEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.newEntry = angular.copy($scope.d.diagnoses[currentIndex]);
         $scope.d.newEntry.datum = new Date($scope.d.newEntry.datum);
 
         $scope.d.newEntryID = currentIndex;
@@ -361,7 +361,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
     $scope.entryDelete = function(my_index) {
-        $scope.d.historyEntrys.splice(my_index, 1);
+        $scope.d.diagnoses.splice(my_index, 1);
         console.log('Deleted - Index', my_index);
     };
 
@@ -380,25 +380,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
-            $scope.d.historyEntrys.push($scope.d.newEntry);
+            $scope.d.diagnoses.push($scope.d.newEntry);
         };
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.historyEntrys[$scope.d.newEntryID] = $scope.d.newEntry;
+            $scope.d.diagnoses[$scope.d.newEntryID] = $scope.d.newEntry;
         };
 
 
-        console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
+        console.log('Try to save @ putHisoryPost: ', $scope.d.diagnoses);
 
 
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.diagnoses);
         api_call.then(function(data) {
-            console.log('(+) putHisoryPost - saved: ', $scope.d.newEntry);
+            console.log('(+) entrySave - success: ', $scope.d.newEntry);
 
             // Update Entrys
             $scope.d.appState = 'show';
-            $scope.getHisoryEntrys();
+            $scope.getEntrys();
         });
     };
 
