@@ -48,10 +48,12 @@ website = http://www.optinomic.com/
 </div>
 
 <div ng-if="d.appState === 'show'">
-    <h3 class="md-headline">
-    <i class="md-title mdi mdi-chevron-right"></i>
-    Mittelgradige depressive Episode | Ohne somatisches Syndrom, F32.10
-</h3>
+    <md-content class="md-padding">
+    <div ng-repeat="diagn in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+        <i class="md-title mdi mdi-chevron-right"></i>
+        <p class="flow-text">diagn.custom_text</p>
+    </div>
+</md-content>
 
 </div>
 <div ng-if="d.appState === 'edit'">
@@ -5802,7 +5804,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
-        $scope.d.appInit.autofocus = true
+        $scope.d.appInit.autofocus = true;
+
+        $scope.d.appInit.predicate = 'diagn_rank';
+        $scope.d.appInit.reverse = false;
 
         $scope.d.diagnoses = [];
 

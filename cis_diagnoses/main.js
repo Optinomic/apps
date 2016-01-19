@@ -140,7 +140,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.selectedItemChange = selectedItemChange;
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
-        $scope.d.appInit.autofocus = true
+        $scope.d.appInit.autofocus = true;
+
+        $scope.d.appInit.predicate = 'diagn_rank';
+        $scope.d.appInit.reverse = false;
 
         $scope.d.diagnoses = [];
 
