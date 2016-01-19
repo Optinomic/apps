@@ -49,9 +49,8 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <div ng-repeat="diagn in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-        <i class="md-title mdi mdi-chevron-right"></i>
-        <p class="flow-text">diagn.custom_text</p>
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+        <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
     </div>
 </md-content>
 
