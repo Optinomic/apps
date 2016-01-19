@@ -339,6 +339,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryNew = function() {
         // New
+
+        $scope.loadICD10Sheet();
         $scope.d.appState = 'new';
 
 
@@ -398,7 +400,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
         $scope.d.diagnoses[nextIndex].diagn_rank = $scope.d.diagnoses[nextIndex].diagn_rank - 1;
 
-        console.log('entryDown', $scope.d.diagnoses[myIndex], currentIndex, nextIndex);
+        console.log('entryDown', $scope.d.diagnoses[currentIndex], currentIndex, nextIndex);
     };
 
 
