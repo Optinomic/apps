@@ -5999,7 +5999,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // New
         $scope.d.appState = 'new';
 
-        if ($scope.d.ICD10_all !== undefined) {
+        if ($scope.d.loadedICD10Data === false) {
             $scope.loadICD10Sheet();
         }
 
