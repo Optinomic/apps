@@ -82,7 +82,7 @@
                 <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button ng-if="d.newEntry.diagn_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> Speichern
             </md-button>
         </md-card-actions>
