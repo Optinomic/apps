@@ -358,6 +358,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'edit';
 
         $scope.loadICD10Sheet();
+        $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
 
 
@@ -368,6 +369,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entrySettings = function() {
         // Cancel
         $scope.d.appState = 'settings';
+    };
+
+    $scope.entryUp = function(currentUID) {
+        // Diagnose aufwerten
+
+        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+        console.log('entryUp', $scope.d.diagnoses[myIndex]);
+    };
+
+    $scope.entryDown = function(currentUID) {
+        // Diagnose abwerten
+
+        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+        console.log('entryDown', $scope.d.diagnoses[myIndex]);
     };
 
 

@@ -38,7 +38,22 @@ website = http://www.optinomic.com/
     <md-content class="md-padding">
     <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
         <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
-        <md-button md-primary ng-click="entryEdit(entry.uniqueid) " aria-label="Bearbeiten ">Bearbeiten</md-button>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-button class="md-icon-button " ng-click="showConfirm($event, $index) " aria-label="Löschen " style="color: #9E9E9E; ">
+                <i class="md-title mdi mdi-delete "></i>
+                <md-tooltip md-direction="top ">
+                    Diagnose löschen
+                </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-menu-up"></i>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="entryDown(entry.uniqueid)" aria-label="Down" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-menu-down"></i>
+            </md-button>
+            <span flex></span>
+            <md-button md-primary ng-click="entryEdit(entry.uniqueid) " aria-label="Bearbeiten ">Bearbeiten</md-button>
+        </div>
     </div>
 </md-content>
 
@@ -6001,6 +6016,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'edit';
 
         $scope.loadICD10Sheet();
+        $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
 
 
@@ -6011,6 +6027,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entrySettings = function() {
         // Cancel
         $scope.d.appState = 'settings';
+    };
+
+    $scope.entryUp = function(currentUID) {
+        // Diagnose aufwerten
+
+        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+        console.log('entryUp', $scope.d.diagnoses[myIndex]);
+    };
+
+    $scope.entryDown = function(currentUID) {
+        // Diagnose abwerten
+
+        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+        console.log('entryDown', $scope.d.diagnoses[myIndex]);
     };
 
 
