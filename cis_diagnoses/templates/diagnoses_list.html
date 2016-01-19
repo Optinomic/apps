@@ -4,17 +4,24 @@
             <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
         </div>
         <div ng-if="d.appInit.show_controls[$index].show_controls" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-button class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-menu-up"></i>
+                <md-tooltip md-direction="top ">
+                    Diagnose aufwerten
+                </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="entryDown(entry.uniqueid)" aria-label="Down" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-menu-down"></i>
+                <md-tooltip md-direction="top ">
+                    Diagnose abwerten
+                </md-tooltip>
+            </md-button>
+            <span flex></span>
             <md-button class="md-icon-button " ng-click="showConfirm($event, entry.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
                 <i class="md-title mdi mdi-delete "></i>
                 <md-tooltip md-direction="top ">
                     Diagnose löschen
                 </md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-menu-up"></i>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="entryDown(entry.uniqueid)" aria-label="Down" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-menu-down"></i>
             </md-button>
             <span flex></span>
             <md-button md-primary ng-click="entryEdit(entry.uniqueid) " aria-label="Bearbeiten ">Bearbeiten</md-button>
