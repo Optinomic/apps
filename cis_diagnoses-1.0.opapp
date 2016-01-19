@@ -6016,6 +6016,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryNew = function() {
         // New
 
+        // Init New Entry
+        $scope.d.newEntry = {
+            datestamp: new Date(),
+            user: $scope.d.dataMain.users.current.id,
+            diagn: {},
+            custom_text: '',
+            diagn_rank: $scope.d.diagnoses.length + 1
+        };
+
+        $scope.d.appInit.selectedItem = {};
         $scope.loadICD10();
         $scope.d.appState = 'new';
 
@@ -6030,7 +6040,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         $scope.d.newEntry = angular.copy($scope.d.diagnoses[myIndex]);
-        $scope.d.newEntry.datum_edit = new Date();
+        $scope.d.newEntry.datestamp_edit = new Date();
 
         $scope.d.newEntryID = myIndex;
         $scope.d.appState = 'edit';
@@ -6089,23 +6099,34 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entrySave = function() {
         // Save
 
-        // Datum erweitern.
-        var date = $scope.d.newEntry.datestamp;
-        $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-        $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
-        $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-        $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
-        $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
             $scope.d.diagnoses.push($scope.d.newEntry);
+
+            // Datum erweitern.
+            var date = $scope.d.newEntry.datestamp;
+            $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+            $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+            $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
+
         };
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
             $scope.d.diagnoses[$scope.d.newEntryID] = $scope.d.newEntry;
+
+            // Datum erweitern.
+            var date = $scope.d.newEntry.datestamp_edit;
+            $scope.d.newEntry.datestamp_edit_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+            $scope.d.newEntry.datestamp_edit_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            $scope.d.newEntry.datestamp_edit_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+            $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
+
         };
 
 
