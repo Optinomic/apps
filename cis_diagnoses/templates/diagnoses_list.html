@@ -1,5 +1,5 @@
 <md-content class="md-padding">
-    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
         <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
     </div>
 </md-content>
