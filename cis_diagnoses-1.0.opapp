@@ -5969,14 +5969,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
 
     $scope.showConfirm = function(ev, my_uid) {
-        console.log('showConfirm: ', ev, my_uid);
+        console.log('showConfirm: ', ev, my_uid, $scope.d.diagnoses[myIndex]);
 
         var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', my_uid);
 
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Verlaufseintrag löschen?')
-            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + $scope.d.diagnoses[myIndex].custom_text + ') löschen möchten?')
+            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + my_uid + ') löschen möchten?')
             .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
