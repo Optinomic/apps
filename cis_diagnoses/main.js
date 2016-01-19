@@ -28,7 +28,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-            $scope.d.loadedICD10Data = false;
 
             // Run App-Functions
             $scope.appInit();
@@ -150,6 +149,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.init = true;
         $scope.d.haveData = true;
+        $scope.d.loadedICD10Data = false;
         $scope.d.appState = 'show';
 
     };
@@ -341,7 +341,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // New
         $scope.d.appState = 'new';
 
-        $scope.loadICD10Sheet();
+
     };
 
     $scope.entryEdit = function(currentUID) {
@@ -357,8 +357,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntryID = myIndex;
         $scope.d.appState = 'edit';
 
+        $scope.loadICD10Sheet();
 
-        console.log('entryEdit: ', currentIndex, $scope.d.newEntry);
+
+        console.log('entryEdit: ', myIndex, $scope.d.newEntry);
     };
 
 
