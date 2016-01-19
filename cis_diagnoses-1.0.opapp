@@ -6092,7 +6092,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Diagnose abwerten
 
         // Diagnosen nach 'rank' sortieren
-        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
+        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank');
 
         var max = $scope.d.diagnoses.length - 1;
         var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
@@ -6113,6 +6113,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryDelete = function(my_index) {
         $scope.d.diagnoses.splice(my_index, 1);
+
+        // Diagnosen nach 'rank' sortieren
+        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank');
+        // Diagnosen neu hochnummerieren.
+        $scope.d.diagnoses.forEach(function(diagn, myindex) {
+            diagn.diagn_rank = myindex + 1;
+        });
+
         console.log('Deleted - Index', my_index);
         $scope.saveDiagnoses();
     };
