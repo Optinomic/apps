@@ -6020,8 +6020,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.loadICD10();
 
         // Init New Entry
+        $scope.d.appInit.searchText = '';
         $scope.d.appInit.selectedItem = {};
-        $scope.selectedItemChange(undefined)
+        $scope.d.newEntry = {
+            datestamp: new Date(),
+            user: $scope.d.dataMain.users.current.id,
+            diagn: {},
+            diagn_selected: false,
+            diagn_rank: null,
+            custom_text: ""
+        };
 
 
     };
