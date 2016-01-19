@@ -6001,6 +6001,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'edit';
 
         $scope.loadICD10Sheet();
+        $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
 
 
         console.log('entryEdit: ', myIndex, $scope.d.newEntry);
