@@ -340,7 +340,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
-            diagn_rank: $scope.d.diagnoses.length + 1;
+            diagn_rank: $scope.d.diagnoses.length + 1
         };
 
         $scope.loadICD10Sheet();
