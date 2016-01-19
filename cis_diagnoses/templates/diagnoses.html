@@ -11,7 +11,6 @@ include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
 <div ng-if="d.appState === 'settings'">
     include(templates/diagnoses_settings.html)
 </div>
-include(templates/toolbar.html)
 <div>&nbsp;</div>
 <div class="optinomic-page-fab" ng-if="d.appState === 'show'">
     <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
