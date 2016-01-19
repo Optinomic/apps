@@ -5692,6 +5692,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.getEntrys();
 
 
             // Finishing: Console Info & Init = done.
@@ -5931,30 +5932,26 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-    //$scope.getHisoryEntrys = function() {
-    //    // Get Data
-    //
-    //    $scope.d.historyEntrys = [];
-    //    var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
-    //    api_call.then(function(data) {
-    //
-    //        // Create Array if not already exists.
-    //        if (dataService.isEmpty(data)) {
-    //            $scope.d.historyEntrys = [];
-    //        } else {
-    //            $scope.d.historyEntrys = angular.copy(data);
-    //        };
-    //
-    //        // Group Resuls by Calendar-Week
-    //        $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
-    //            return [item.datum_week];
-    //        });
-    //
-    //        $scope.d.appState = 'show';
-    //
-    //        //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
-    //    });
-    //};
+    $scope.getEntrys = function() {
+        // Get Data
+
+        $scope.d.diagnoses = [];
+        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
+        api_call.then(function(data) {
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.diagnoses = [];
+            } else {
+                $scope.d.diagnoses = angular.copy(data);
+            };
+
+
+            $scope.d.appState = 'show';
+
+            console.log('(+) getEntrys ', $scope.d.diagnoses);
+        });
+    };
 
     // -----------------------------------
     // Dialogs
@@ -6005,7 +6002,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
-            diagn_rank: custom_text: $scope.d.diagnoses.length + 1;
+            diagn_rank: $scope.d.diagnoses.length + 1;
         };
 
         $scope.loadICD10Sheet();
