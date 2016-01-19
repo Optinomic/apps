@@ -139,6 +139,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.autofocus = true
 
+        $scope.d.diagnoses = [];
+
         $scope.d.init = true;
         $scope.d.haveData = true;
         $scope.d.appState = 'show';
@@ -341,11 +343,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
-            custom_text: ""
+            diagn_rank: custom_text: $scope.d.diagnoses.length + 1;
         };
 
         $scope.loadICD10Sheet();
-
     };
 
     $scope.entryEdit = function(currentIndex) {

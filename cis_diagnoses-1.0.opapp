@@ -92,7 +92,7 @@ website = http://www.optinomic.com/
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
-                    <input ng-model="d.newEntry.custom_text">
+                    <textarea ng-model="d.newEntry.custom_text" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
@@ -185,7 +185,7 @@ website = http://www.optinomic.com/
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
                     <label>Diagnose - Beschriftung</label>
-                    <input ng-model="d.newEntry.custom_text">
+                    <textarea ng-model="d.newEntry.custom_text" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
@@ -5801,6 +5801,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.autofocus = true
 
+        $scope.d.diagnoses = [];
+
         $scope.d.init = true;
         $scope.d.haveData = true;
         $scope.d.appState = 'show';
@@ -6003,11 +6005,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
             diagn: {},
-            custom_text: ""
+            diagn_rank: custom_text: $scope.d.diagnoses.length + 1;
         };
 
         $scope.loadICD10Sheet();
-
     };
 
     $scope.entryEdit = function(currentIndex) {
