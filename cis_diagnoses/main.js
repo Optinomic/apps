@@ -326,6 +326,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
+    $scope.loadICD10 = function() {
+
+        if ($scope.d.loadedICD10Data) {
+            $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+        } else {
+            $scope.loadICD10Sheet();
+        };
+
+    };
+
     // -----------------------------------
     // Actions
     // -----------------------------------
@@ -340,7 +350,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryNew = function() {
         // New
 
-        $scope.loadICD10Sheet();
+        $scope.loadICD10();
         $scope.d.appState = 'new';
 
 
@@ -359,7 +369,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntryID = myIndex;
         $scope.d.appState = 'edit';
 
-        $scope.loadICD10Sheet();
+        $scope.loadICD10();
         $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
 
