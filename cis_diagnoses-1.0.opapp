@@ -18,7 +18,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template history_entry 6 15]
+[template history_entry 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -36,11 +36,11 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
         </div>
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+        <div ng-if="d.appInit.show_controls[$index].show_controls" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-button class="md-icon-button " ng-click="showConfirm($event, entry.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
                 <i class="md-title mdi mdi-delete "></i>
                 <md-tooltip md-direction="top ">
@@ -5806,6 +5806,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.autofocus = true;
+        $scope.d.appInit.show_controls = [];
 
         $scope.d.appInit.filter = '';
         $scope.d.appInit.predicate = 'diagn_rank';
