@@ -36,8 +36,10 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-        <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+        </div>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-button class="md-icon-button " ng-click="showConfirm($event, $index) " aria-label="Löschen " style="color: #9E9E9E; ">
                 <i class="md-title mdi mdi-delete "></i>
@@ -1742,6 +1744,13 @@ angular.module('optinomicDataModule')
             return true;
         };
 
+        dataService.sortByKey = function(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        };
 
         dataService.checkSuccess = function(max, count) {
 
@@ -1759,7 +1768,6 @@ angular.module('optinomicDataModule')
                     return i;
                 }
             }
-
         };
 
         // --------------------------------------------------
@@ -6032,17 +6040,31 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryUp = function(currentUID) {
         // Diagnose aufwerten
 
-        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        // Diagnosen nach 'rank' sortieren
+        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
 
-        console.log('entryUp', $scope.d.diagnoses[myIndex]);
+        // Rank anpassen
+        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var prevIndex = currentIndex - 1;
+        $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank - 1;
+        $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank + 1;
+
+        console.log('entryUp', $scope.d.diagnoses[currentIndex], currentIndex, prevIndex);
     };
 
     $scope.entryDown = function(currentUID) {
         // Diagnose abwerten
 
-        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        // Diagnosen nach 'rank' sortieren
+        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
 
-        console.log('entryDown', $scope.d.diagnoses[myIndex]);
+        // Rank anpassen
+        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var nexIndex = currentIndex + 1;
+        $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
+        $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank - 1;
+
+        console.log('entryDown', $scope.d.diagnoses[myIndex], currentIndex, nextIndex);
     };
 
 

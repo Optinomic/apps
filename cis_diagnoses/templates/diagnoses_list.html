@@ -1,6 +1,8 @@
 <md-content class="md-padding">
-    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-        <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+        </div>
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <md-button class="md-icon-button " ng-click="showConfirm($event, $index) " aria-label="Löschen " style="color: #9E9E9E; ">
                 <i class="md-title mdi mdi-delete "></i>
