@@ -192,10 +192,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
         } else {
             // Create JSON to save
+            var reduced_item = {
+                icd_class: item.icd_class,
+                icd_code: item.icd_code,
+                icd_display: item.icd_display,
+                icd_id: item.icd_id,
+                icd_titel: item.icd_titel
+            }
+
             $scope.d.newEntry = {
                 datestamp: new Date(),
                 user: $scope.d.dataMain.users.current.id,
-                diagn: item,
+                diagn: reduced_item,
                 diagn_selected: true,
                 diagn_rank: $scope.d.diagnoses.length + 1,
                 custom_text: item.icd_display
@@ -303,14 +311,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
 
     $scope.showConfirm = function(ev, my_uid) {
-        console.log('showConfirm: ', ev, my_uid, $scope.d.diagnoses[myIndex]);
+        console.log('showConfirm: ', ev, my_uid);
 
         var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', my_uid);
 
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Verlaufseintrag löschen?')
-            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + my_uid + ') löschen möchten?')
+            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + $scope.d.diagnoses[myIndex].custom_text + ') löschen möchten?')
             .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
