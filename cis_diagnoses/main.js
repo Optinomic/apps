@@ -411,6 +411,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank - 1;
             $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank + 1;
 
+            $scope.saveDiagnoses();
             console.log('entryUp', $scope.d.diagnoses[currentIndex], currentIndex, prevIndex);
         };
 
@@ -431,6 +432,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
             $scope.d.diagnoses[nextIndex].diagn_rank = $scope.d.diagnoses[nextIndex].diagn_rank - 1;
 
+            $scope.saveDiagnoses();
             console.log('entryDown', $scope.d.diagnoses[currentIndex], currentIndex, nextIndex);
         };
 
@@ -441,10 +443,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryDelete = function(my_index) {
         $scope.d.diagnoses.splice(my_index, 1);
         console.log('Deleted - Index', my_index);
+        $scope.saveDiagnoses();
+    };
 
+
+    $scope.saveDiagnoses = function() {
         var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.diagnoses);
         api_call.then(function(data) {
-            console.log('(+) entryDelete - success: ', $scope.d.diagnoses);
+            console.log('(+) saveDiagnoses - success: ', $scope.d.diagnoses);
 
             // Update Entrys
             $scope.d.appState = 'show';
