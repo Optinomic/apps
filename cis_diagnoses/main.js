@@ -361,9 +361,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryNew = function() {
         // New
 
-        $scope.d.appState = 'new';
-        $scope.loadICD10();
-
         // Init New Entry
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.selectedItem = {};
@@ -375,8 +372,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             diagn_rank: null,
             custom_text: ""
         };
-
-
+        $scope.loadICD10();
+        $scope.d.appState = 'new';
     };
 
     $scope.entryEdit = function(currentUID) {
