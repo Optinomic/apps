@@ -6066,12 +6066,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
 
         // Rank anpassen
+        var max = $scope.d.diagnoses.length - 1;
         var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
-        var prevIndex = currentIndex - 1;
-        $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank - 1;
-        $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank + 1;
 
-        console.log('entryUp', $scope.d.diagnoses[currentIndex], currentIndex, prevIndex);
+        if (currentIndex !== max) {
+            var prevIndex = currentIndex - 1;
+            $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank - 1;
+            $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank + 1;
+
+            console.log('entryUp', $scope.d.diagnoses[currentIndex], currentIndex, prevIndex);
+        };
+
     };
 
     $scope.entryDown = function(currentUID) {
@@ -6080,13 +6085,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Diagnosen nach 'rank' sortieren
         $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
 
-        // Rank anpassen
         var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
-        var nextIndex = currentIndex + 1;
-        $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
-        $scope.d.diagnoses[nextIndex].diagn_rank = $scope.d.diagnoses[nextIndex].diagn_rank - 1;
 
-        console.log('entryDown', $scope.d.diagnoses[currentIndex], currentIndex, nextIndex);
+        // Rank anpassen
+        if (currentIndex !== 0) {
+            var nextIndex = currentIndex + 1;
+            $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
+            $scope.d.diagnoses[nextIndex].diagn_rank = $scope.d.diagnoses[nextIndex].diagn_rank - 1;
+
+            console.log('entryDown', $scope.d.diagnoses[currentIndex], currentIndex, nextIndex);
+        };
+
+
     };
 
 
