@@ -359,8 +359,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             diagn_rank: $scope.d.diagnoses.length + 1
         };
 
-        $scope.d.appInit.selectedItem = {};
         $scope.loadICD10();
+        $scope.d.appInit.selectedItem = {};
         $scope.d.appState = 'new';
 
 
@@ -375,13 +375,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.newEntry = angular.copy($scope.d.diagnoses[myIndex]);
         $scope.d.newEntry.datestamp_edit = new Date();
-
         $scope.d.newEntryID = myIndex;
-        $scope.d.appState = 'edit';
 
         $scope.loadICD10();
         $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
+        $scope.d.appState = 'edit';
 
 
         console.log('entryEdit: ', myIndex, $scope.d.newEntry);
