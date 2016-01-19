@@ -1305,38 +1305,6 @@ angular.module('optinomicDataModule')
             return parseInt(helpers.getUserID());
         };
 
-
-        dataService.groupBy = function(array, f) {
-            var groups = {};
-            array.forEach(function(o) {
-                var group = JSON.stringify(f(o));
-                groups[group] = groups[group] || [];
-                groups[group].push(o);
-            });
-            return Object.keys(groups).map(function(group) {
-                return groups[group];
-            })
-        }
-
-        dataService.isEmpty = function(obj) {
-            for (var prop in obj) {
-                if (obj.hasOwnProperty(prop))
-                    return false;
-            }
-            return true;
-        };
-
-
-        dataService.checkSuccess = function(max, count) {
-
-            var allPromised = false;
-            if (max === count) {
-                allPromised = true;
-            }
-            //console.log('checkSuccess:', allPromised, max, count);
-            return allPromised;
-        };
-
         dataService.getData = function(api_call) {
             var deferred = $q.defer();
 
@@ -1519,6 +1487,50 @@ angular.module('optinomicDataModule')
             return patient;
         };
 
+        // -------------------------------------------------------------------------
+        // Array - Functions
+        // -------------------------------------------------------------------------
+
+
+        dataService.groupBy = function(array, f) {
+            var groups = {};
+            array.forEach(function(o) {
+                var group = JSON.stringify(f(o));
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            });
+            return Object.keys(groups).map(function(group) {
+                return groups[group];
+            })
+        }
+
+        dataService.isEmpty = function(obj) {
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        };
+
+
+        dataService.checkSuccess = function(max, count) {
+
+            var allPromised = false;
+            if (max === count) {
+                allPromised = true;
+            }
+            //console.log('checkSuccess:', allPromised, max, count);
+            return allPromised;
+        };
+
+        dataService.findIndex = function(array, attr, value) {
+            for (var i = 0; i < array.length; i += 1) {
+                if (array[i][attr] === value) {
+                    return i;
+                }
+            }
+
+        };
 
         // --------------------------------------------------
         // Create uniqueID

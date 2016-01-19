@@ -1,5 +1,6 @@
 <md-content class="md-padding">
     <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
         <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+        <md-button md-primary ng-click="entryEdit(entry.uniqueid) " aria-label="Bearbeiten ">Bearbeiten</md-button>
     </div>
 </md-content>

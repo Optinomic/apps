@@ -333,7 +333,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryCancel = function() {
         // Cancel
-        $scope.appInit();
+        $scope.getEntrys();
     };
 
 
@@ -344,13 +344,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.loadICD10Sheet();
     };
 
-    $scope.entryEdit = function(currentIndex) {
+    $scope.entryEdit = function(currentUID) {
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
-        $scope.d.newEntry = angular.copy($scope.d.diagnoses[currentIndex]);
-        $scope.d.newEntry.datum = new Date($scope.d.newEntry.datum);
 
-        $scope.d.newEntryID = currentIndex;
+        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+
+        $scope.d.newEntry = angular.copy($scope.d.diagnoses[myIndex]);
+        $scope.d.newEntry.datum_edit = new Date();
+
+        $scope.d.newEntryID = myIndex;
         $scope.d.appState = 'edit';
 
 
