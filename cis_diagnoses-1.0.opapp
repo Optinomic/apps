@@ -62,7 +62,7 @@ website = http://www.optinomic.com/
                 </md-button>
             </div>
             <div flex>
-                <a ng-href="entry.icd_url_info">
+                <a target="_blank" ng-href="{{entry.icd_url_info}}">
                     <p class="flow-text">{{entry.custom_text}}</p>
                 </a>
             </div>
@@ -420,7 +420,7 @@ website = http://www.optinomic.com/
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
             </div>
             <div flex>
-                <a ng-href="entry.icd_url_info">
+                <a target="_blank" ng-href="{{entry.icd_url_info}}">
                     <p class="flow-text">{{entry.custom_text}}</p>
                 </a>
             </div>
