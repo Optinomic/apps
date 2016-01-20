@@ -19,15 +19,16 @@ website = http://www.optinomic.com/
 
 [template hisoryentry_list 6 15]
 include(templates/history.html)
+include(templates/chart_templates.html)
 
 [template Vaadin 6 6]
 include(templates/vaadin_example.html)
+include(templates/chart_templates.html)
 
 
 [dependencies]
 
 [javascript]
-include(templates/chart_templates.html)
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
 
