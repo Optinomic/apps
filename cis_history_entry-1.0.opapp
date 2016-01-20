@@ -28158,9 +28158,8 @@ md-tooltip.md-show {
 }
  
 
-</style> <!-- Vaadin Chart --> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script> <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> <style type="text/css"> .craving {
-    color: red !important;
-    font-size: 8px;
+.indigo {
+    color: #3F51B5 !important;
 }
 
 
