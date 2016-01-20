@@ -19,7 +19,9 @@
                 </md-button>
             </div>
             <div flex>
-                <p class="flow-text">{{entry.custom_text}}</p>
+                <a ng-href="entry.icd_url_info">
+                    <p class="flow-text">{{entry.custom_text}}</p>
+                </a>
             </div>
             <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
                 &nbsp;

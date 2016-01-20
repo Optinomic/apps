@@ -1,3 +1,4 @@
+include(../lib/html/optinomic/page/start.m4)
 <md-content class="md-padding">
     <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
@@ -12,3 +13,4 @@
         </div>
     </div>
 </md-content>
+include(../lib/html/optinomic/page/end.m4)
