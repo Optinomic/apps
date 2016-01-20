@@ -27,7 +27,6 @@ include(templates/vaadin_example.html)
 [dependencies]
 
 [javascript]
-include(templates/chart_templates.html)
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
 
