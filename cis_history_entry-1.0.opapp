@@ -415,6 +415,23 @@ Vaadin Chart
 [dependencies]
 
 [javascript]
+<script type="text/html" id="tmpl-area-spline">
+    <vaadin-areaspline-chart>
+        <title>Monthly supply and demand</title>
+        <subtitle>Last six months</subtitle>
+        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+        <tooltip shared="true" value-suffix="t"></tooltip>
+        <x-axis>
+            <categories>January, February, March, April, May, June</categories>
+        </x-axis>
+        <y-axis>
+            <title>Metric tons</title>
+        </y-axis>
+        <data-series name="Supply"></data-series>
+        <data-series name="Demand"></data-series>
+    </vaadin-areaspline-chart>
+</script>
+
 'use strict';
 
 /**
