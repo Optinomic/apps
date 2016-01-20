@@ -88,7 +88,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
                 // Set 'haveData' because we do not have a survey here!
-                $scope.d.haveData = true;
 
             });
     };
@@ -117,8 +116,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             debug: false
         };
 
-        $scope.loadTARMEDSheet();
+        $scope.d.haveData = true;
         $scope.getUserSettings();
+        $scope.loadTARMEDSheet();
     };
 
 
@@ -200,7 +200,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // Dialogs
     // -----------------------------------
 
-    $scope.showConfirm = function(ev, my_index) {
+    $scope.showConfirm = function(ev, currentUID) {
+
+        var my_index = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
+
         console.log('showConfirm: ', ev, my_index);
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
@@ -219,6 +223,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             console.log('You selected: Cancel!');
             $scope.entryCancel();
+
+        });
+    };
+
+    $scope.saveHistory = function() {
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
+        api_call.then(function(data) {
+            console.log('(+) saveHistory - success: ', $scope.d.historyNewEntry);
+
+            // Update Entrys
+            $scope.getHisoryEntrys();
+            $scope.d.appState = 'show';
 
         });
     };
@@ -255,9 +271,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     };
 
-    $scope.entryEdit = function(currentIndex) {
+    $scope.entryEdit = function(currentUID) {
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
+        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+
         $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyNewEntry.datum = new Date($scope.d.historyNewEntry.datum);
 
@@ -278,6 +296,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryDelete = function(my_index) {
         $scope.d.historyEntrys.splice(my_index, 1);
         console.log('Deleted - Index', my_index);
+        $scope.saveHistory();
     };
 
 
@@ -305,16 +324,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
+        $scope.saveHistory();
 
 
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
-        api_call.then(function(data) {
-            console.log('(+) putHisoryPost - saved: ', $scope.d.historyNewEntry);
-
-            // Update Entrys
-            $scope.d.appState = 'show';
-            $scope.getHisoryEntrys();
-        });
     };
 
 
