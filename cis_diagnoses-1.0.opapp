@@ -55,8 +55,11 @@ website = http://www.optinomic.com/
                     </md-tooltip>
                 </md-button>
             </div>
+            <div>
+                <p class="flow-text">{{entry.diagn_rank}}</p>
+            </div>
             <div flex>
-                <p class="flow-text">{{entry.diagn_rank}}. {{entry.custom_text}}</p>
+                <p class="flow-text">{{entry.custom_text}}</p>
             </div>
             <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
                 &nbsp;
