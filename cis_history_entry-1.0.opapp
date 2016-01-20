@@ -5895,14 +5895,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.showConfirm = function(ev, currentUID) {
 
-        var my_index = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var my_index = dataService.findIndex($scope.d.historyEntrys, 'uniqueid', currentUID);
 
+        var anz_characters_to_show = 20;
+        var dispay_text = $scope.d.historyEntrys[myIndex].datum_day + ' | ' + $scope.d.historyEntrys[myIndex].verlauf.substring(0, anz_characters_to_show);
+        if ($scope.d.historyEntrys[myIndex].verlauf.length > anz_characters_to_show) {
+            dispay_text = dispay_text + '...';
+        };
 
         console.log('showConfirm: ', ev, my_index);
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Verlaufseintrag löschen?')
-            .textContent('Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?')
+            .textContent('Sind Sie sicher, dass Sie den Eintrag (' + dispay_text + ') löschen möchten?')
             .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
@@ -5967,7 +5972,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryEdit = function(currentUID) {
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
-        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var currentIndex = dataService.findIndex($scope.d.historyEntrys, 'uniqueid', currentUID);
 
         $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
         $scope.d.historyNewEntry.datum = new Date($scope.d.historyNewEntry.datum);
