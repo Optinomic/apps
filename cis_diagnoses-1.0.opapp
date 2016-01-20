@@ -6204,10 +6204,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
-        $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/recherche.html?sp=0&sp=Sf32.3";
-
-
-
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
             $scope.d.diagnoses.push($scope.d.newEntry);
