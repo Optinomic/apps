@@ -6165,12 +6165,6 @@ angular.module('optinomicDataModule')
 
 
 [css]
-</style>
-<!-- Ottiger: Vaadin Chart -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
-<style type="text/css">
-
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.

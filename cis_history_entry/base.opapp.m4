@@ -32,7 +32,6 @@ include(main.js)
 
 
 [css]
-include(polymer_vaadin.html)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
