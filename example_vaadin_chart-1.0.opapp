@@ -103,7 +103,5 @@ document.addEventListener('WebComponentsReady', function() {
 
 
 [css]
-html, body {
-    background-color: #ffffff !important;
-}
+</style> <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script> <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> <style type="text/css">
 
