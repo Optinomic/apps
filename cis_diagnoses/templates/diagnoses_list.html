@@ -1,10 +1,10 @@
 <md-content class="md-padding">
     <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" class="grid-border-top">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <div flex="2" ng-if="!d.appInit.show_controls[$index].show_controls">
+            <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
                 &nbsp;
             </div>
-            <div flex="2" ng-if="d.appInit.show_controls[$index].show_controls">
+            <div flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
                 <md-button ng-if="entry.diagn_rank !== 1" class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-menu-up"></i>
                     <md-tooltip md-direction="top">
