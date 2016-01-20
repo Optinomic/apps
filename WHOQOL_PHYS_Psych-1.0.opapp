@@ -92,6 +92,9 @@ website = http://www.optinomic.com/
 <script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
 -->
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
+<!-- Vaadin Charts -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 
 
 
@@ -467,6 +470,16 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     }
 
 
+});
+
+
+
+// Wait until Web Components are loaded and registered
+// before bootstrapping your app
+document.addEventListener('WebComponentsReady', function() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['app']);
+    });
 });
 
 angular.module('optinomicDataModule').factory('apiService', function($http) {
