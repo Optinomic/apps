@@ -38,6 +38,9 @@ website = http://www.optinomic.com/
     <md-content class="md-padding">
     <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" ng-class="grid-border-top: d.appInit.show_controls[$index].show_controls">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <div>
+                <p class="flow-text">{{entry.diagn_rank}}.</p>
+            </div>
             <div flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
                 <md-button ng-if="entry.diagn_rank !== 1" class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-menu-up"></i>
@@ -51,9 +54,6 @@ website = http://www.optinomic.com/
                         Diagnose abwerten
                     </md-tooltip>
                 </md-button>
-            </div>
-            <div>
-                <p class="flow-text">{{entry.diagn_rank}}.</p>
             </div>
             <div flex>
                 <p class="flow-text">{{entry.custom_text}}</p>
