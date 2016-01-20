@@ -1,3 +1,9 @@
+document.addEventListener('WebComponentsReady', function () {
+  angular.element(document).ready(function () {
+    angular.bootstrap(document, ['app']);
+  });
+});
+
 include(../lib/js/angular/angular_app_init.js)
 include(../lib/js/optinomic/data_module/service/api-service.js)
 include(../lib/js/optinomic/data_module/service/scope-d-service.js)

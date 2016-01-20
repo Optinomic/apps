@@ -106,6 +106,12 @@ Vaadin Chart
 
 
 [javascript]
+document.addEventListener('WebComponentsReady', function () {
+  angular.element(document).ready(function () {
+    angular.bootstrap(document, ['app']);
+  });
+});
+
 'use strict';
 
 /**
