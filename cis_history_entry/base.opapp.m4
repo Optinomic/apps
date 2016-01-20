@@ -27,8 +27,8 @@ include(templates/vaadin_example.html)
 [dependencies]
 
 [javascript]
+include(polymer_vaadin.html)
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
 
 
 [css]
