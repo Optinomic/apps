@@ -344,30 +344,3 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.demandData = [29, 11, 50, 63, 65, 61];
 
 });
-
-
-
-angular.module('optinomicDataModule')
-    .directive('areaSpline', function() {
-        return {
-
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_history_entry/templates/chart_templates.html',
-
-            scope: {
-                supply: '=',
-                demand: '='
-            },
-
-            link: function($scope, $element, $attrs) {
-                var chartNode = $element.children()[0];
-                chartNode.reloadConfiguration();
-                // Watch and update the series data
-                $scope.$watch('supply', function(newData, oldData) {
-                    chartNode.chart.series[0].setData(newData);
-                }, true);
-                $scope.$watch('demand', function(newData, oldData) {
-                    chartNode.chart.series[1].setData(newData);
-                }, true);
-            }
-        };
-    });
