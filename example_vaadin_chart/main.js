@@ -26,6 +26,32 @@ app.directive('pieWithLegend', function() {
     };
 });
 
+
+app.directive('areaSpline', function() {
+    return {
+        scope: {
+            supply: '=',
+            demand: '='
+        },
+
+        link: function($scope, $element, $attrs) {
+            var chartNode = $element.children()[0];
+            chartNode.reloadConfiguration();
+            // Watch and update the series data
+            $scope.$watch('supply', function(newData, oldData) {
+                chartNode.chart.series[0].setData(newData);
+            }, true);
+            $scope.$watch('demand', function(newData, oldData) {
+                chartNode.chart.series[1].setData(newData);
+            }, true);
+        },
+
+        template: function() {
+            return document.getElementById('tmpl-area-spline').innerHTML;
+        }
+    };
+})
+
 app.controller('ChartCtrl', function($scope) {
 
     $scope.chartData = [
@@ -36,6 +62,10 @@ app.controller('ChartCtrl', function($scope) {
         ["Consumers", 12.4],
         ["Subsidies", 1.4]
     ];
+
+    $scope.supplyData = [35, 28, 45, 60, 80, 74];
+    $scope.demandData = [29, 11, 50, 63, 65, 61];
+
 
 });
 
