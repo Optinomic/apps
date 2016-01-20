@@ -298,25 +298,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.diagnoses = [];
             } else {
                 $scope.d.diagnoses = angular.copy(data);
-
-                $scope.d.diagnoses.forEach(function(diagn, myindex) {
-                    diagn.diagn_rank = myindex + 1;
-
-                    // Create URL's for nice lookup
-
-                    var code_full = diagn.diagn.icd_code;
-                    var code_dot = code_full.indexOf('.');
-                    var code_parent = code_full.substring(0, code_dot);
-
-                    if (code_dot !== -1) {
-                        // http://www.icd-code.de/suche/icd/code/F52.-.html?sp=Sf52.7
-                        diagn.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_parent + ".-.html?sp=S" + code_full;
-                    } else {
-                        // http://www.icd-code.de/suche/icd/recherche.html?sp=0&sp=SA23
-                        diagn.icd_url_info = "http://www.icd-code.de/suche/icd/recherche.html?sp=0&sp=S" + code_full;
-                    };
-                });
-
             };
 
 
@@ -498,7 +479,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
 
 
+        // Create URL's for nice lookup
 
+        var code_full = $scope.d.newEntry.diagn.icd_code;
+        var code_dot = code_full.indexOf('.');
+        var code_parent = code_full.substring(0, code_dot);
+
+        if (code_dot !== -1) {
+            // http://www.icd-code.de/suche/icd/code/F52.-.html?sp=Sf52.7
+            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_parent + ".-.html?sp=S" + code_full;
+        } else {
+            // http://www.icd-code.de/suche/icd/code/Z63.html?sp=Sz63
+            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_full + ".html?sp=S" + code_full;
+        };
 
 
         // Push new Entry if 'new'
