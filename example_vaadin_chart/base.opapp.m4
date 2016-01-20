@@ -21,7 +21,7 @@ website = http://www.optinomic.com
 
 [dependencies]
 
-[template show_token 6 15]
+[template show_token 6 25]
 include(templates/show_token.html)
 
 
