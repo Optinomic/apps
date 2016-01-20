@@ -5212,7 +5212,7 @@ angular.module('optinomicDataModule')
     .directive('areaSpline', function() {
         return {
 
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_history_entry/templates/chart_templates.html',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/cis_history_entry/templates/chart_templates.html',
 
             scope: {
                 supply: '=',
