@@ -24,11 +24,11 @@ website = http://www.optinomic.com
 
 [template show_token]
 <div id="chart" ng-controller="ChartCtrl">
+    <p>Spline:</p>
+    <area-spline supply="supplyData" demand="demandData"></area-spline>
     <p>Chart should be here:</p>
     <pie-with-legend data="chartData"></pie-with-legend>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -47,6 +47,22 @@ website = http://www.optinomic.com
         </plot-options>
         <data-series name="Revenue share"></data-series>
     </vaadin-pie-chart>
+</script>
+<script type="text/html" id="tmpl-area-spline">
+    <vaadin-areaspline-chart>
+        <title>Monthly supply and demand</title>
+        <subtitle>Last six months</subtitle>
+        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+        <tooltip shared="true" value-suffix="t"></tooltip>
+        <x-axis>
+            <categories>January, February, March, April, May, June</categories>
+        </x-axis>
+        <y-axis>
+            <title>Metric tons</title>
+        </y-axis>
+        <data-series name="Supply"></data-series>
+        <data-series name="Demand"></data-series>
+    </vaadin-areaspline-chart>
 </script>
 
 
@@ -79,6 +95,32 @@ angular.module('app', [])
         };
     })
 
+.directive('areaSpline', function() {
+    return {
+        scope: {
+            supply: '=',
+            demand: '='
+        },
+
+        link: function($scope, $element, $attrs) {
+            var chartNode = $element.children()[0];
+            chartNode.reloadConfiguration();
+            // Watch and update the series data
+            $scope.$watch('supply', function(newData, oldData) {
+                chartNode.chart.series[0].setData(newData);
+            }, true);
+            $scope.$watch('demand', function(newData, oldData) {
+                chartNode.chart.series[1].setData(newData);
+            }, true);
+        },
+
+        template: function() {
+
+            return document.getElementById('tmpl-area-spline').innerHTML;
+        }
+    };
+})
+
 .controller('ChartCtrl', function($scope) {
 
     $scope.chartData = [
@@ -89,6 +131,9 @@ angular.module('app', [])
         ["Consumers", 12.4],
         ["Subsidies", 1.4]
     ];
+
+    $scope.supplyData = [35, 28, 45, 60, 80, 74];
+    $scope.demandData = [29, 11, 50, 63, 65, 61];
 
 });
 
