@@ -19,7 +19,7 @@ angular.module('app', [])
                 // document body for convenience. As usual with Angular Directive
                 // templates, you can also use plain template string instead of
                 // this function, or place your directive template in a separate
-                // file and load it with the `templateUrl` option.
+                // file and load it with the templateUrl option.
                 return document.getElementById('tmpl-pie-with-legend').innerHTML;
             }
         };
