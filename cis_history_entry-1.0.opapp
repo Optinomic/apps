@@ -6090,6 +6090,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 app.directive('areaSpline', function() {
     return {
+
+        templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_history_entry/templates/chart_templates.html',
+
         scope: {
             supply: '=',
             demand: '='
@@ -6105,15 +6108,6 @@ app.directive('areaSpline', function() {
             $scope.$watch('demand', function(newData, oldData) {
                 chartNode.chart.series[1].setData(newData);
             }, true);
-        },
-
-        template: function() {
-            // The directive template HTML is placed inside script tag in the
-            // document body for convenience. As usual with Angular Directive
-            // templates, you can also use plain template string instead of
-            // this function, or place your directive template in a separate
-            // file and load it with the templateUrl` option.
-            return document.getElementById('tmpl-area-spline).innerHTML;
         }
     };
 });
