@@ -337,9 +337,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
+
+    // Vaadin Chart Example
+    $scope.supplyData = [35, 28, 45, 60, 80, 74];
+    $scope.demandData = [29, 11, 50, 63, 65, 61];
+
+
 });
 
-app.directive('areaSpline', function() {
+angular.module('optinomicDataModule').directive('areaSpline', function() {
     return {
         scope: {
             supply: '=',
