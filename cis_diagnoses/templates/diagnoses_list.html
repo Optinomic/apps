@@ -1,5 +1,5 @@
 <md-content class="md-padding">
-    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" class="grid-border-top">
+    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" ng-class="grid-border-top: d.appInit.show_controls[$index].show_controls">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
                 &nbsp;
