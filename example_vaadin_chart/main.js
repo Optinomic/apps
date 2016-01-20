@@ -1,31 +1,31 @@
-angular.module('app', [])
-    .directive('pieWithLegend', function() {
-        return {
-            scope: {
-                data: '='
-            },
+var app = angular.module('app', []);
+app.directive('pieWithLegend', function() {
+    return {
+        scope: {
+            data: '='
+        },
 
-            link: function($scope, $element, $attrs) {
-                var chartNode = $element.children()[0];
-                chartNode.reloadConfiguration();
-                $scope.$watch('data', function(newData, oldData) {
-                    // Update the series data
-                    chartNode.chart.series[0].setData(newData);
-                }, true);
-            },
+        link: function($scope, $element, $attrs) {
+            var chartNode = $element.children()[0];
+            chartNode.reloadConfiguration();
+            $scope.$watch('data', function(newData, oldData) {
+                // Update the series data
+                chartNode.chart.series[0].setData(newData);
+            }, true);
+        },
 
-            template: function() {
-                // The directive template HTML is placed inside script tag in the
-                // document body for convenience. As usual with Angular Directive
-                // templates, you can also use plain template string instead of
-                // this function, or place your directive template in a separate
-                // file and load it with the templateUrl option.
-                return document.getElementById('tmpl-pie-with-legend').innerHTML;
-            }
-        };
-    })
+        template: function() {
+            // The directive template HTML is placed inside script tag in the
+            // document body for convenience. As usual with Angular Directive
+            // templates, you can also use plain template string instead of
+            // this function, or place your directive template in a separate
+            // file and load it with the templateUrl option.
+            return document.getElementById('tmpl-pie-with-legend').innerHTML;
+        }
+    };
+})
 
-.directive('areaSpline', function() {
+app.directive('areaSpline', function() {
     return {
         scope: {
             supply: '=',
@@ -51,7 +51,7 @@ angular.module('app', [])
     };
 })
 
-.controller('ChartCtrl', function($scope) {
+app.controller('ChartCtrl', function($scope) {
 
     $scope.chartData = [
         ["Aerospace", 90.0],
