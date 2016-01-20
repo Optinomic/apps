@@ -43,5 +43,6 @@ angular.module('app', [])
 document.addEventListener('WebComponentsReady', function() {
     angular.element(document).ready(function() {
         angular.bootstrap(document, ['app']);
+        console.log('angular.element(document).ready', document);
     });
 });

@@ -23,11 +23,12 @@ website = http://www.optinomic.com
 [dependencies]
 
 [template show_token]
-<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <div id="chart" ng-controller="ChartCtrl">
+    <p>Chart should be here:</p>
     <pie-with-legend data="chartData"></pie-with-legend>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -96,6 +97,7 @@ angular.module('app', [])
 document.addEventListener('WebComponentsReady', function() {
     angular.element(document).ready(function() {
         angular.bootstrap(document, ['app']);
+        console.log('angular.element(document).ready', document);
     });
 });
 
