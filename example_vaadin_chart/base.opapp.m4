@@ -1,5 +1,4 @@
 [module]
-
 id = com.optinomic.apps.example.vaadin_chart
 name = Example Vaadin Chart Example
 short_description = Example Vaadin Chart Example

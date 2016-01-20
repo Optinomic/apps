@@ -1,0 +1,107 @@
+[module]
+id = com.optinomic.apps.example.vaadin_chart
+name = Example Vaadin Chart Example
+short_description = Example Vaadin Chart Example
+version = 1.0
+
+type = patient
+
+[description]
+
+Just a silly module doing a example Vaadin Chart Example. This is just an example - to show how Optinomic-Apps can be built.
+
+[developer]
+
+first_name = Tom
+last_name = Feron
+github_user = thoferon
+email = tho.feron@gmail.com
+company = Optinomic
+phone = +44 207 568789
+website = http://www.optinomic.com
+
+[dependencies]
+
+[template show_token]
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+<div id="chart" ng-controller="ChartCtrl">
+    <pie-with-legend data="chartData"></pie-with-legend>
+</div>
+<script type="text/html" id="tmpl-pie-with-legend">
+    <vaadin-pie-chart>
+        <title>Revenue by industry</title>
+        <subtitle>2015</subtitle>
+        <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
+        <plot-options>
+            <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
+                <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
+                </data-labels>
+            </pie>
+        </plot-options>
+        <data-series name="Revenue share"></data-series>
+    </vaadin-pie-chart>
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+
+
+[javascript]
+angular.module('app', [])
+    .directive('pieWithLegend', function() {
+        return {
+            scope: {
+                data: '='
+            },
+
+            link: function($scope, $element, $attrs) {
+                var chartNode = $element.children()[0];
+                chartNode.reloadConfiguration();
+                $scope.$watch('data', function(newData, oldData) {
+                    // Update the series data
+                    chartNode.chart.series[0].setData(newData);
+                }, true);
+            },
+
+            template: function() {
+                // The directive template HTML is placed inside script tag in the
+                // document body for convenience. As usual with Angular Directive
+                // templates, you can also use plain template string instead of
+                // this function, or place your directive template in a separate
+                // file and load it with the templateUrl` option.
+                return document.getElementById('tmpl-pie-with-legend).innerHTML;
+            }
+        };
+    })
+
+.controller('ChartCtrl', function($scope) {
+
+    $scope.chartData = [
+        ["Aerospace", 90.0],
+        ["Medical", 453.6],
+        ["Agriculture ", 25.6],
+        ["Automotive", 17.0],
+        ["Consumers", 12.4],
+        ["Subsidies", 1.4]
+    ];
+
+});
+
+// Wait until Web Components are loaded and registered
+// before bootstrapping your app
+document.addEventListener('WebComponentsReady', function() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['app']);
+    });
+});
+
+
+[css]
+html, body {
+    background-color: #ffffff !important;
+}
+
