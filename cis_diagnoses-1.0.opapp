@@ -36,9 +36,12 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" class="grid-border-top">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <div flex="5">
+            <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
+                &nbsp;
+            </div>
+            <div flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
                 <md-button ng-if="entry.diagn_rank !== 1" class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-menu-up"></i>
                     <md-tooltip md-direction="bottom">
@@ -60,15 +63,13 @@ website = http://www.optinomic.com/
                             Diagnose löschen
                         </md-tooltip>
                     </md-button>
+                    <md-button ng-if="d.appInit.show_controls[$index].show_controls" class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
+                        <i class="md-title mdi mdi-pencil"></i>
+                        <md-tooltip md-direction="bottom">
+                            Diagnose bearbeiten
+                        </md-tooltip>
+                    </md-button>
                 </p>
-            </div>
-            <div ng-if="d.appInit.show_controls[$index].show_controls">
-                <md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #9E9E9E;">
-                    <i class="md-title mdi mdi-pencil"></i>
-                    <md-tooltip md-direction="bottom">
-                        Diagnose bearbeiten
-                    </md-tooltip>
-                </md-button>
             </div>
         </div>
     </div>
@@ -12260,6 +12261,30 @@ p {
     position: fixed;
     top: 15px;
     right: 30px;
+}
+
+.grid-border-top {
+    border-top-color: #E0E0E0;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.grid-border-bottom {
+    border-bottom-color: #E0E0E0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.grid-border-left {
+    border-left-color: #E0E0E0;
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+
+.grid-border-right {
+    border-right-color: #E0E0E0;
+    border-right-style: solid;
+    border-right-width: 1px;
 }
 
 /*!

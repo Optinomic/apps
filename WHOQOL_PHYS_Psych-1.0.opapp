@@ -11543,6 +11543,30 @@ p {
     right: 30px;
 }
 
+.grid-border-top {
+    border-top-color: #E0E0E0;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.grid-border-bottom {
+    border-bottom-color: #E0E0E0;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.grid-border-left {
+    border-left-color: #E0E0E0;
+    border-left-style: solid;
+    border-left-width: 1px;
+}
+
+.grid-border-right {
+    border-right-color: #E0E0E0;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+
 /*!
  * Angular Material Design
  * https://github.com/angular/material
