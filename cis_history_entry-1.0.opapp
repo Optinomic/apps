@@ -143,7 +143,7 @@ website = http://www.optinomic.com/
     <md-divider></md-divider>
     <md-card-content>
         <p>&nbsp;</p>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+        <div layout-margin>
             <md-input-container flex class="md-block flow-text">
                 <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
                 <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
@@ -228,7 +228,7 @@ website = http://www.optinomic.com/
     <md-divider></md-divider>
     <md-card-content>
         <p>&nbsp;</p>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+        <div layout-margin>
             <md-input-container flex class="md-block flow-text">
                 <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
                 <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
