@@ -205,8 +205,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var my_index = dataService.findIndex($scope.d.historyEntrys, 'uniqueid', currentUID);
 
         var anz_characters_to_show = 20;
-        var dispay_text = $scope.d.historyEntrys[myIndex].datum_day + ' | ' + $scope.d.historyEntrys[myIndex].verlauf.substring(0, anz_characters_to_show);
-        if ($scope.d.historyEntrys[myIndex].verlauf.length > anz_characters_to_show) {
+        var dispay_text = $scope.d.historyEntrys[my_index].datum_day + ' | ' + $scope.d.historyEntrys[my_index].verlauf.substring(0, anz_characters_to_show);
+        if ($scope.d.historyEntrys[my_index].verlauf.length > anz_characters_to_show) {
             dispay_text = dispay_text + '...';
         };
 
