@@ -18,7 +18,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template diagnoses_list 6 8]
+[template diagnoses_list 6 12]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -42,7 +42,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
-    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter" ng-class="grid-border-top: d.appInit.show_controls[$index].show_controls">
+    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div>
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
@@ -398,6 +398,24 @@ website = http://www.optinomic.com/
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
 
 
+
+
+
+[template diagnoses_report 6 6]
+<md-content class="md-padding">
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <div>
+                <p class="flow-text">{{entry.diagn_rank}}.</p>
+            </div>
+            <div flex>
+                <a ng-href="entry.icd_url_info">
+                    <p class="flow-text">{{entry.custom_text}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</md-content>
 
 
 
@@ -6169,6 +6187,26 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Save
 
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
+
+
+        // Create URL's for nice lookup
+
+        var code_full = $scope.d.newEntry.diagn.icd_code;
+        var code_dot = code_full.indexOf('.');
+        var code_parent = code_full.substring(0, code_dot);
+
+        if (code_dot !== -1) {
+            // http://www.icd-code.de/suche/icd/code/F52.-.html?sp=Sf52.7
+            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_parent + ".-.html?sp=S" + code_full;
+        } else {
+            // http://www.icd-code.de/suche/icd/code/Z63.html?sp=Sz63
+            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_full + ".html?sp=S" + code_full;
+        };
+
+
+        $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/recherche.html?sp=0&sp=Sf32.3";
+
+
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {

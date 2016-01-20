@@ -1,0 +1,14 @@
+<md-content class="md-padding">
+    <div ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <div>
+                <p class="flow-text">{{entry.diagn_rank}}.</p>
+            </div>
+            <div flex>
+                <a ng-href="entry.icd_url_info">
+                    <p class="flow-text">{{entry.custom_text}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</md-content>

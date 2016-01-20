@@ -17,8 +17,12 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template diagnoses_list 6 8]
+[template diagnoses_list 6 12]
 include(templates/diagnoses.html)
+
+
+[template diagnoses_report 6 6]
+include(templates/diagnoses_report.html)
 
 
 [dependencies]
