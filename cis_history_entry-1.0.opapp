@@ -377,8 +377,6 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
@@ -400,103 +398,9 @@ website = http://www.optinomic.com/
 -->
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
 
- <script type="text/html" id="tmpl-area-spline">
-    <vaadin-areaspline-chart>
-        <title>Monthly supply and demand</title>
-        <subtitle>Last six months</subtitle>
-        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
-        <tooltip shared="true" value-suffix="t"></tooltip>
-        <x-axis>
-            <categories>January, February, March, April, May, June</categories>
-        </x-axis>
-        <y-axis>
-            <title>Metric tons</title>
-        </y-axis>
-        <data-series name="Supply"></data-series>
-        <data-series name="Demand"></data-series>
-    </vaadin-areaspline-chart>
-</script>
+ 
 
 
-
-[template Vaadin 6 6]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<p>Vaadin Chart</p>
-<area-spline supply="d.supplyData" demand="demandData"></area-spline>
-<script type="text/html" id="tmpl-area-spline">
-    <vaadin-areaspline-chart>
-        <title>Monthly supply and demand</title>
-        <subtitle>Last six months</subtitle>
-        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
-        <tooltip shared="true" value-suffix="t"></tooltip>
-        <x-axis>
-            <categories>January, February, March, April, May, June</categories>
-        </x-axis>
-        <y-axis>
-            <title>Metric tons</title>
-        </y-axis>
-        <data-series name="Supply"></data-series>
-        <data-series name="Demand"></data-series>
-    </vaadin-areaspline-chart>
-</script>
-             </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<!--
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
--->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
-
-
-
-
-
-[dependencies]
 
 [javascript]
 'use strict';
@@ -5788,12 +5692,6 @@ angular.module('optinomicDataModule')
     });
 
 
-
-document.addEventListener('WebComponentsReady', function () {
-  angular.element(document).ready(function () {
-    angular.bootstrap(document, ['optinomicApp']);
-  });
-});
 /**
  * @name Optinomic - AppCtrl
  * ---------------------------------------
@@ -6140,31 +6038,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.demandData = [29, 11, 50, 63, 65, 61];
 
 });
-
-angular.module('optinomicDataModule')
-    .directive('areaSpline', function() {
-        return {
-
-            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/cis_history_entry/templates/chart_templates.html',
-
-            scope: {
-                supply: '=',
-                demand: '='
-            },
-
-            link: function($scope, $element, $attrs) {
-                var chartNode = $element.children()[0];
-                chartNode.reloadConfiguration();
-                // Watch and update the series data
-                $scope.$watch('supply', function(newData, oldData) {
-                    chartNode.chart.series[0].setData(newData);
-                }, true);
-                $scope.$watch('demand', function(newData, oldData) {
-                    chartNode.chart.series[1].setData(newData);
-                }, true);
-            }
-        };
-    });
 
 
 

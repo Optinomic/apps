@@ -20,11 +20,6 @@ website = http://www.optinomic.com/
 [template hisoryentry_list 6 15]
 include(templates/history.html)
 
-[template Vaadin 6 6]
-include(templates/vaadin_example.html)
-
-
-[dependencies]
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
