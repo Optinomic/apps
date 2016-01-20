@@ -22,7 +22,6 @@ include(templates/history.html)
 
 [template Vaadin 6 6]
 include(templates/vaadin_example.html)
-include(templates/chart_templates.html)
 
 
 [dependencies]

@@ -403,13 +403,28 @@ Vaadin Chart
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
 <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 
+ <script type="text/html" id="tmpl-area-spline">
+    <vaadin-areaspline-chart>
+        <title>Monthly supply and demand</title>
+        <subtitle>Last six months</subtitle>
+        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+        <tooltip shared="true" value-suffix="t"></tooltip>
+        <x-axis>
+            <categories>January, February, March, April, May, June</categories>
+        </x-axis>
+        <y-axis>
+            <title>Metric tons</title>
+        </y-axis>
+        <data-series name="Supply"></data-series>
+        <data-series name="Demand"></data-series>
+    </vaadin-areaspline-chart>
+</script>
 
 
 
 [template Vaadin 6 6]
 <p>Vaadin Chart</p>
 <area-spline supply="d.supplyData" demand="demandData"></area-spline>
-
 <script type="text/html" id="tmpl-area-spline">
     <vaadin-areaspline-chart>
         <title>Monthly supply and demand</title>
@@ -426,6 +441,7 @@ Vaadin Chart
         <data-series name="Demand"></data-series>
     </vaadin-areaspline-chart>
 </script>
+
 
 
 
