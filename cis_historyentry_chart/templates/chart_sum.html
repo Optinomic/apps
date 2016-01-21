@@ -1,4 +1,4 @@
 include(templates/elements.html) include(../lib/html/optinomic/page/start.m4)
-<p>Behandlungsdichte - outside DATA</p>
-<chart-behandlungsdichte my-series-data="{{d.chartData}}"></chart-behandlungsdichte>
+<p>Behandlungsdichte</p>
+<chart-behandlungsdichte my-series-data="{{d.chartData[0].data}}"></chart-behandlungsdichte>
 include(../lib/html/optinomic/page/end.m4) include(../lib/js/set/polymer_vaadin.html)
