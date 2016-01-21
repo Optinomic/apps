@@ -6077,6 +6077,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.chartData = data_series;
             console.log('$scope.d.chartData', $scope.d.chartData);
 
+            console.log(JSON.stringify($scope.d.chartData));
+
 
             $scope.d.mySeriesData = [];
             $scope.d.historyEntrys.forEach(function(entry, myindex) {
