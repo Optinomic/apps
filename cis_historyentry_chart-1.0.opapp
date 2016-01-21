@@ -424,7 +424,7 @@ website = http://www.optinomic.com/
     <template>
         <template is="dom-repeat" items="[[mySeriesData]]">
             <div># <span>{{index}}</span></div>
-            <div>{{item.name}}</div>
+            <div>{{item.name}} | {{item.data}}</div>
         </template>
         <vaadin-line-chart id="chart">
             <title>Behandlungsdichte</title>
@@ -434,8 +434,10 @@ website = http://www.optinomic.com/
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <data-series is="dom-repeat" items="[[mySeriesData]]" id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
-            </data-series>
+            <template is="dom-repeat" items="[[mySeriesData]]">
+                <data-series id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
+                </data-series>
+            </template>
         </vaadin-line-chart>
     </template>
     <script>
@@ -443,11 +445,26 @@ website = http://www.optinomic.com/
         is: 'chart-behandlungsdichte',
 
         ready: function() {
-            console.log('(READY) chart-behandlungsdichte', this);
+            console.log('(ready) chart-behandlungsdichte', this.mySeriesData);
         },
 
         created: function() {
-            console.log('(created) chart-behandlungsdichte', this);
+            console.log('(created) chart-behandlungsdichte', this.mySeriesData, this.$.mySeriesData);
+        },
+
+        attached: function() {
+            console.log('(attached) chart-behandlungsdichte', this);
+
+            this.async(function() {
+                var chartWC = this.$.chart;
+                if (chartWC) {
+                    var chart = chartWC.chart;
+                    if (chart && chart.series) {
+                        var data = [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6];
+                        chart.series[0].setData(data);
+                    }
+                }
+            }, 2);
         },
 
         properties: {
