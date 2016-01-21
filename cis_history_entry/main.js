@@ -5,6 +5,8 @@
  */
 app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
 
+    console.log('(!) AppCtrl - Verlaufseintrag', app);
+
     // -----------------------------------
     // Init
     // -----------------------------------

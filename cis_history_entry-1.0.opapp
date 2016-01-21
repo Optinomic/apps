@@ -435,7 +435,7 @@ var app = angular
 
     });
 
-
+console.log('(!) optinomicApp', app);
 
 /**
  * @name Optinomic - optinomic/data_module
@@ -5687,6 +5687,8 @@ angular.module('optinomicDataModule')
  * Controller of the Optinomic-Application.
  */
 app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
+
+    console.log('(!) AppCtrl - Verlaufseintrag', app);
 
     // -----------------------------------
     // Init
