@@ -9,7 +9,7 @@
         -->
         <vaadin-line-chart id="chart">
             <title>Behandlungsdichte</title>
-            <tooltip enabled="false"></tooltip>
+            <tooltip formatter="function() {return '' + this.series.name + ' ' + this.x + ': ' + this.y + 'Minuten';}"></tooltip>
             <plot-options>
                 <series>
                 </series>

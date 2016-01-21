@@ -229,7 +229,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             entrys.forEach(function(entry, myindex) {
                 var inner_array = []
                 inner_array.push(entry.datum.substring(0, 16));
-                inner_array.push(entry.dauer);
+                inner_array.push(entry.dauer * 5);
                 $scope.d.mySeriesData.push(inner_array);
             });
 
