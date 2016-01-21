@@ -6083,6 +6083,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             $scope.d.mySeriesData = [];
             var entrys = dataService.sortByKey($scope.d.mySeriesData, 'datum');
+            console.log('===> entrys', entrys);
             entrys.forEach(function(entry, myindex) {
                 var inner_array = []
                 inner_array.push(entry.datum.substring(0, 16));
