@@ -6108,7 +6108,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.historyEntrysTARMED.forEach(function(serie, myindex) {
 
                 var serie_to_push = {
-                    name: serie[0].tarmed.selected.tarifpos_beschreibung ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
+                    name: serie[0].tarmed.selected.tarifpos_beschreibung + ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
                     data: []
                 };
 
