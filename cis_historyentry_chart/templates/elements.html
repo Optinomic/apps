@@ -27,6 +27,14 @@
             }
         },
 
+        observers: [
+            'updateData(chartdata)'
+        ],
+
+        updateData: function(chartdata) {
+            console.log('(updateData) chart-behandlungsdichte', chartdata);
+        },
+
         ready: function() {
             console.log('(ready) chart-behandlungsdichte', this.properties);
         },
