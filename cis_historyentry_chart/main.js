@@ -350,7 +350,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 // before bootstrapping your app
 document.addEventListener('WebComponentsReady', function() {
     angular.element(document).ready(function() {
-        angular.bootstrap(document, ['app']);
+        angular.bootstrap(document, ['optinomicApp']);
         console.log('angular.element(document).ready', document);
     });
 });
