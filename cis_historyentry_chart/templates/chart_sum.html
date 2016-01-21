@@ -5,6 +5,13 @@
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="wc-data-button">
     <template>
+        <template>
+            <p>TEST</p>
+        </template>
+        <template is="dom-repeat" items="[[mySeriesData]]">
+            <div># <span>{{index}}</span></div>
+            <div>{{item}}</div>
+        </template>
         <vaadin-line-chart id="wcDataExample">
             <title>Click button to add point</title>
             <tooltip enabled="false"></tooltip>
@@ -16,10 +23,6 @@
             <data-series id="mySeriesId" data="[[mySeriesData]]">
             </data-series>
         </vaadin-line-chart>
-        <template is="dom-repeat" items="[[mySeriesData]]">
-            <div># <span>{{index}}</span></div>
-            <div>{{item}}</div>
-        </template>
     </template>
     <script>
     Polymer({
@@ -112,4 +115,3 @@
 include(../lib/html/optinomic/page/start.m4)
 <p>Behandlungsdichte - outside DATA</p>
 <wc-data-button my-series-data="{{d.mySeriesData}}"></wc-data-button>
-include(../lib/html/optinomic/page/end.m4)
