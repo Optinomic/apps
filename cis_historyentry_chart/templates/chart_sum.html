@@ -1,7 +1,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> include(../lib/html/optinomic/page/start.m4)
-<p>CHART Summe</p>
-<dom-module id="date-axis-and-click-event-example">
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+<dom-module id="chart-behandungsdichte">
     <template>
         <vaadin-spline-chart id="dateAxisAndClickEvent">
             <title>Date axis and click events</title>
@@ -63,7 +62,7 @@
     </template>
     <script>
     Polymer({
-        is: 'date-axis-and-click-event-example',
+        is: 'chart-behandungsdichte',
 
         showLabel: function(message, xPixels, yPixels) {
             var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
@@ -84,7 +83,9 @@
     });
     </script>
 </dom-module>
-<date-axis-and-click-event-example></date-axis-and-click-event-example>
+include(../lib/html/optinomic/page/start.m4)
+<p>CHART Summe</p>
+<chart-behandungsdichte></chart-behandungsdichte>
 <pre>
-	{{$scope.d.historyEntrys}}
+	{{d.historyEntrys}}
 </pre> include(../lib/html/optinomic/page/end.m4)
