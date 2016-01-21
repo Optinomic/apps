@@ -6053,7 +6053,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 return [item.datum_week];
             });
 
-            // Group Resuls by Calendar-Week
+
+            // $scope.d.historyEntrys.forEach(function(entry, myindex) {
+            //     entry.selected_tarifpos_code = item.selected_tarifpos_code
+            // });
+
+            // Group Resuls by TARMED Code
             $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
                 return [item.tarmed.selected_tarifpos_code];
             });
