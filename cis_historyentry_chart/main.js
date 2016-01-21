@@ -191,37 +191,37 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             });
 
 
-            //Group Resuls by TARMED Code
-            $scope.d.historyEntrysTARMED = dataService.groupBy($scope.d.historyEntrys, function(item) {
-                return [item.tarmed.selected_tarifpos_code];
-            });
-
-            // Create SeriesArray Data for Chart
-            var data_series = [];
-            $scope.d.historyEntrysTARMED.forEach(function(serie, myindex) {
-
-                var serie_to_push = {
-                    name: serie[0].tarmed.selected.tarifpos_beschreibung + ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
-                    data: []
-                };
-
-                serie.forEach(function(entry, myindex) {
-                    var inner_array = []
-                    inner_array.push(entry.datum.substring(0, 16));
-                    inner_array.push(entry.dauer);
-
-                    serie_to_push.data.push(inner_array);
-                });
-
-                data_series.push(serie_to_push);
-
-            });
-
-
-            $scope.d.chartData = data_series;
-            console.log('$scope.d.chartData', $scope.d.chartData);
-
-            console.log(JSON.stringify($scope.d.chartData));
+            ////Group Resuls by TARMED Code
+            //$scope.d.historyEntrysTARMED = dataService.groupBy($scope.d.historyEntrys, function(item) {
+            //    return [item.tarmed.selected_tarifpos_code];
+            //});
+            //
+            //// Create SeriesArray Data for Chart
+            //var data_series = [];
+            //$scope.d.historyEntrysTARMED.forEach(function(serie, myindex) {
+            //
+            //    var serie_to_push = {
+            //        name: serie[0].tarmed.selected.tarifpos_beschreibung + ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
+            //        data: []
+            //    };
+            //
+            //    serie.forEach(function(entry, myindex) {
+            //        var inner_array = []
+            //        inner_array.push(entry.datum.substring(0, 16));
+            //        inner_array.push(entry.dauer);
+            //
+            //        serie_to_push.data.push(inner_array);
+            //    });
+            //
+            //    data_series.push(serie_to_push);
+            //
+            //});
+            //
+            //
+            //$scope.d.chartData = data_series;
+            //console.log('$scope.d.chartData', $scope.d.chartData);
+            //
+            //console.log(JSON.stringify($scope.d.chartData));
 
 
             $scope.d.mySeriesData = [];

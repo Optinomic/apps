@@ -13,7 +13,7 @@
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <data-series id="SeriesID" name="test" data="[[chartdata.0.data]]">
+            <data-series id="SeriesID" name="Behandlungen" data="[[chartdata]]">
             </data-series>
         </vaadin-line-chart>
     </template>
@@ -34,21 +34,21 @@
         updateData: function(chartdata) {
             console.log('(updateData) chart-behandlungsdichte', chartdata);
 
-            var chartWC = this.$.chart;
-
-
-            if (chartWC) {
-                var chart = chartWC.chart;
-                if (chart && chart.series) {
-
-                    chart.series[1] = {};
-                    var data = chartdata[0].data;
-
-                    console.log('(updateData) async', data, chart, chart.getConfiguration());
-
-                    //chart.series[1].setData(data);
-                }
-            };
+            //var chartWC = this.$.chart;
+            //
+            //
+            //if (chartWC) {
+            //    var chart = chartWC.chart;
+            //    if (chart && chart.series) {
+            //
+            //        chart.series[1] = {};
+            //        var data = chartdata[0].data;
+            //
+            //        console.log('(updateData) async', data, chart, chart.getConfiguration());
+            //
+            //        //chart.series[1].setData(data);
+            //    }
+            //};
 
         }
 
