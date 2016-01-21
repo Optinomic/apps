@@ -6082,7 +6082,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             //console.log(JSON.stringify($scope.d.chartData));
 
             $scope.d.mySeriesData = [];
-            var entrys = dataService.sortByKey($scope.d.mySeriesData, 'datum');
+            var entrys = dataService.sortByKey($scope.d.historyEntrys, 'datum');
             console.log('===> entrys', entrys);
             entrys.forEach(function(entry, myindex) {
                 var inner_array = []
