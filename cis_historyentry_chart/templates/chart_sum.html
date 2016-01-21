@@ -1,5 +1,5 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> include(../lib/html/optinomic/page/start.m4)
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <dom-module id="chart-behandungsdichte">
     <template>
         <vaadin-spline-chart id="dateAxisAndClickEvent">
@@ -8,17 +8,45 @@
             <legend enabled="false"></legend>
             <data-series>
                 <data>
-                    <point ng-repeat="entry in d.historyEntrys">
-                        <date>{{entry.datum}}</date>
-                        <y>{{entry.dauer}}</y>
+                    <point>
+                        <date>2013-02-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:10</date>
+                        <y>106.4</y>
                     </point>
                 </data>
             </data-series>
+            <data-series name="Tokyo" data="[[seriesData]]"></data-series>
         </vaadin-spline-chart>
     </template>
     <script>
     Polymer({
         is: 'chart-behandungsdichte',
+
+        properties: {
+            seriesData: {
+                type: Array,
+                value: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }
+        },
 
         showLabel: function(message, xPixels, yPixels) {
             var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
@@ -39,6 +67,7 @@
     });
     </script>
 </dom-module>
+include(../lib/html/optinomic/page/start.m4)
 <p>Behandlungsdichte</p>
 <chart-behandungsdichte></chart-behandungsdichte>
 <pre>

@@ -403,15 +403,7 @@ website = http://www.optinomic.com/
 
 [template hisoryentry_sum_chart 6 8]
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html"> <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
 <dom-module id="chart-behandungsdichte">
     <template>
         <vaadin-spline-chart id="dateAxisAndClickEvent">
@@ -420,17 +412,45 @@ website = http://www.optinomic.com/
             <legend enabled="false"></legend>
             <data-series>
                 <data>
-                    <point ng-repeat="entry in d.historyEntrys">
-                        <date>{{entry.datum}}</date>
-                        <y>{{entry.dauer}}</y>
+                    <point>
+                        <date>2013-02-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:10</date>
+                        <y>106.4</y>
                     </point>
                 </data>
             </data-series>
+            <data-series name="Tokyo" data="[[seriesData]]"></data-series>
         </vaadin-spline-chart>
     </template>
     <script>
     Polymer({
         is: 'chart-behandungsdichte',
+
+        properties: {
+            seriesData: {
+                type: Array,
+                value: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }
+        },
 
         showLabel: function(message, xPixels, yPixels) {
             var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
@@ -451,6 +471,15 @@ website = http://www.optinomic.com/
     });
     </script>
 </dom-module>
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
 <p>Behandlungsdichte</p>
 <chart-behandungsdichte></chart-behandungsdichte>
 <pre>
