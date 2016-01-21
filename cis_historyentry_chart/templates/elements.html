@@ -34,11 +34,13 @@
         updateData: function(chartdata) {
             console.log('(updateData) chart-behandlungsdichte', chartdata);
 
-            this.async(function() {
+            this.async(function(chartdata) {
                 var chartWC = this.$.chart;
                 if (chartWC) {
                     var chart = chartWC.chart;
                     if (chart && chart.series) {
+                        console.log('(updateData) async', chartdata, chart);
+
                         var data = chartdata[0].data;
                         chart.series[0].setData(data);
                         var data = chartdata[1].data;
