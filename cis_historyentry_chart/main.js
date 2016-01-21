@@ -227,7 +227,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.mySeriesData = [];
             $scope.d.historyEntrys.forEach(function(entry, myindex) {
                 var inner_array = []
-                inner_array.push(entry.datum);
+                inner_array.push(entry.datum.substring(0, 10));
                 inner_array.push(entry.dauer);
                 $scope.d.mySeriesData.push(inner_array);
 
