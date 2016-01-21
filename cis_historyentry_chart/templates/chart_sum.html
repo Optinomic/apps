@@ -21,11 +21,7 @@
         is: 'wc-data-button',
         properties: {
             mySeriesData: {
-                type: Array,
-                value: [
-                    [(new Date()).getTime() - 1000, Math.random()],
-                    [(new Date()).getTime(), Math.random()]
-                ]
+                type: Array
             }
         },
         _addSeriesPoint: function() {
@@ -121,6 +117,8 @@
 include(../lib/html/optinomic/page/start.m4)
 <p>Behandlungsdichte</p>
 <wc-data-button></wc-data-button>
+<p>Behandlungsdichte - outside DATA</p>
+<wc-data-button my-series-data="{{d.mySeriesData}}"></wc-data-button>
 <p>Behandlungsdichte</p>
 <button on-click="_addSeriesPoint">Add series point</button>
 <chart-behandungsdichte></chart-behandungsdichte>

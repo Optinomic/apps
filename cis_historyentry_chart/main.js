@@ -343,6 +343,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.supplyData = [35, 28, 45, 60, 80, 74];
     $scope.demandData = [29, 11, 50, 63, 65, 61];
 
+    $scope.d.mySeriesData = [
+        ["2016-01-11T23:00:00.000Z", 14],
+        ["2016-01-21T08:32:42.539Z", 12]
+    ];
+
 });
 
 
