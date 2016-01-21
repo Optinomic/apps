@@ -1,0 +1,87 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
+<link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+<p>CHART Summe</p>
+<dom-module id="date-axis-and-click-event-example">
+    <template>
+        <vaadin-spline-chart id="dateAxisAndClickEvent">
+            <title>Date axis and click events</title>
+            <x-axis type="datetime"></x-axis>
+            <legend enabled="false"></legend>
+            <data-series>
+                <data>
+                    <point>
+                        <date>2013-02-10T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2013-02-12T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2013-02-13T12:10</date>
+                        <y>36.4</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:10</date>
+                        <y>156.4</y>
+                    </point>
+                    <point>
+                        <date>2014-02-10T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2014-02-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2014-02-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2014-02-12T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2014-02-13T12:10</date>
+                        <y>36.4</y>
+                    </point>
+                    <point>
+                        <date>2014-03-11T12:10</date>
+                        <y>156.4</y>
+                    </point>
+                </data>
+            </data-series>
+        </vaadin-spline-chart>
+    </template>
+    <script>
+    Polymer({
+        is: 'date-axis-and-click-event-example',
+
+        showLabel: function(message, xPixels, yPixels) {
+            var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
+                .attr({
+                    fill: Highcharts.getOptions().colors[2],
+                    padding: 10,
+                    r: 5,
+                    zIndex: 8
+                })
+                .css({
+                    color: '#FFFFFF'
+                })
+                .add();
+            this.async(function() {
+                label.fadeOut();
+            }, 1000);
+        }
+    });
+    </script>
+</dom-module>
+<date-axis-and-click-event-example></date-axis-and-click-event-example>

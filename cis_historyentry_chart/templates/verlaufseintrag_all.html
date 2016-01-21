@@ -1,0 +1,33 @@
+<md-content ng-if="d.appState !== 'loading'">
+    <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <md-card-title style="background-color:#FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                	{{entry.datum_day}} | {{entry.tarmed.selected.tarifpos_beschreibung}}
+                    	<md-tooltip md-direction="top">
+                    	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
+                    	</md-tooltip>
+                </span>
+                <span class="md-subhead" style="margin-top: -12px; color:#757575;">
+                	<span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
+                	{{user.data.extras.full_name}}
+                	</span> | {{entry.dauer * 5}} Minuten
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+            <p class="flow-text">{{entry.verlauf}}</p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            <md-button class="md-icon-button" ng-if="entry.user===d.dataMain.users.current.id" ng-click="showConfirm($event, entry.uniqueid)" aria-label="Löschen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-delete"></i>
+                <md-tooltip md-direction="top">
+                    Verlaufseintrag löschen
+                </md-tooltip>
+            </md-button>
+            <span flex></span>
+            <md-button ng-if="entry.user===d.dataMain.users.current.id" md-primary ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten">Bearbeiten</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
