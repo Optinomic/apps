@@ -206,8 +206,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
 
                 serie.forEach(function(entry, myindex) {
-                    serie_to_push.data.push(entry.datum);
-                    serie_to_push.data.push(entry.dauer);
+                    var inner_array = []
+                    inner_array.push(entry.datum.substring(0, 16));
+                    inner_array.push(entry.dauer);
+
+                    serie_to_push.data.push(inner_array);
                 });
 
                 data_series.push(serie_to_push);
@@ -216,7 +219,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             $scope.d.chartData = data_series;
-            console.log('$scope.d.historyEntrysTARMED', $scope.d.historyEntrysTARMED);
+            console.log('$scope.d.chartData', $scope.d.chartData);
 
 
             $scope.d.mySeriesData = [];
