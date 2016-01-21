@@ -3,7 +3,7 @@
     <template>
         <template is="dom-repeat" items="[[mySeriesData]]">
             <div># <span>{{index}}</span></div>
-            <div>{{item.name}} | {{item.data}}</div>
+            <div>{{item.name}}</div>
         </template>
         <vaadin-line-chart id="chart">
             <title>Behandlungsdichte</title>
@@ -13,10 +13,8 @@
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <template is="dom-repeat" items="[[mySeriesData]]">
-                <data-series id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
-                </data-series>
-            </template>
+            <data-series id="SeriesID" name="test" data="[[mySeriesData.0.data]]">
+            </data-series>
         </vaadin-line-chart>
     </template>
     <script>
