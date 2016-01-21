@@ -6109,7 +6109,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 var serie_to_push = {
                     name: serie[0].tarmed.selected.tarifpos_beschreibung ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
-                    data[]
+                    data: []
                 };
 
                 serie.forEach(function(entry, myindex) {
