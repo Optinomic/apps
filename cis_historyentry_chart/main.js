@@ -196,9 +196,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // });
 
             // Group Resuls by TARMED Code
-            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
-                return [item.tarmed.selected_tarifpos_code];
-            });
+            //$scope.d.historyEntrysTARMED = dataService.groupBy($scope.d.historyEntrys, function(item) {
+            //    return [item.tarmed.selected_tarifpos_code];
+            //});
 
 
             // Create SeriesArray Data for Chart
