@@ -371,12 +371,3 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 });
-
-// Wait until Web Components are loaded and registered
-// before bootstrapping your app
-document.addEventListener('WebComponentsReady', function() {
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ['optinomicApp']);
-        console.log('angular.element(document).ready', document);
-    });
-});
