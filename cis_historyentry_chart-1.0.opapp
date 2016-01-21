@@ -426,7 +426,7 @@ website = http://www.optinomic.com/
             <div># <span>{{index}}</span></div>
             <div>{{item.name}}</div>
         </template>
-        <vaadin-line-chart id="wcDataExample">
+        <vaadin-line-chart id="chart">
             <title>Behandlungsdichte</title>
             <tooltip enabled="false"></tooltip>
             <plot-options>
@@ -434,10 +434,8 @@ website = http://www.optinomic.com/
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <template is="dom-repeat" items="[[mySeriesData]]">
-                <data-series id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
-                </data-series>
-            </template>
+            <data-series is="dom-repeat" items="[[mySeriesData]]" id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
+            </data-series>
         </vaadin-line-chart>
     </template>
     <script>
