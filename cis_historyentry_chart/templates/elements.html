@@ -38,11 +38,12 @@
             if (chartWC) {
                 var chart = chartWC.chart;
                 if (chart && chart.series) {
-                    console.log('(updateData) async', chartdata, chart);
 
+                    chart.series[1] = {};
                     var data = chartdata[0].data;
-                    chart.series[0].setData(data);
-                    var data = chartdata[1].data;
+
+                    console.log('(updateData) async', data, chart.series[1]);
+
                     chart.series[1].setData(data);
                 }
             };
