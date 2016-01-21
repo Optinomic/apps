@@ -1,12 +1,6 @@
 <head>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
     <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
-    <div id="chart" ng-controller="ChartCtrl">
-        <p>Spline:</p>
-        <area-spline supply="supplyData" demand="demandData"></area-spline>
-        <p>Pie:</p>
-        <pie-with-legend data="chartData"></pie-with-legend>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
@@ -43,7 +37,14 @@
         </vaadin-areaspline-chart>
     </script>
 </head>
-<p>POLYMER</p>
+<p>1 POLYMER</p>
+<div id="chart" ng-controller="ChartCtrl">
+    <p>Spline:</p>
+    <area-spline supply="supplyData" demand="demandData"></area-spline>
+    <p>Pie:</p>
+    <pie-with-legend data="chartData"></pie-with-legend>
+</div>
+<p>2 POLYMER</p>
 <dom-module id="date-axis-and-click-event-example">
     <template>
         <vaadin-spline-chart id="dateAxisAndClickEvent" on-chart-click="chartClickListener" on-point-click="pointClickListener">
