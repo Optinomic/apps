@@ -451,11 +451,11 @@ website = http://www.optinomic.com/
         },
 
         ready: function() {
-            console.log('(ready) chart-behandlungsdichte', mySeriesData);
+            console.log('(ready) chart-behandlungsdichte', this);
         },
 
         created: function() {
-            console.log('(created) chart-behandlungsdichte', mySeriesData);
+            console.log('(created) chart-behandlungsdichte', this);
         },
 
         attached: function() {
