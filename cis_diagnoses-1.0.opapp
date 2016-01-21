@@ -378,6 +378,27 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
+
 
 
 
@@ -428,6 +449,27 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
+
 
 
 

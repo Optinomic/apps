@@ -19,57 +19,6 @@ website = http://www.optinomic.com/
 
 
 [template hisoryentry_list 6 15]
-<head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
-
-</head>
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
- <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
-        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
-        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
-        <md-tooltip md-direction="bottom">
-            Sortierung der Einträge
-        </md-tooltip>
-    </md-button>
-    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
-        <i class="md-title mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
-            Einstellungen
-        </md-tooltip>
-    </md-button>
-    <md-input-container flex class="md-block">
-        <label>Filter: {{d.appInit.filter}}</label>
-        <input ng-model="d.appInit.filter">
-    </md-input-container>
-</div>
-
 <div ng-if="d.appState === 'show'">
     <md-content ng-if="d.appState !== 'loading'">
     <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
@@ -400,6 +349,27 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
+
 
 
 
