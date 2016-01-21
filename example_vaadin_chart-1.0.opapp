@@ -24,47 +24,47 @@ website = http://www.optinomic.com/
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js" type="text/javascript">
     </script>
     <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+    </script>
+    <script type="text/html" id="tmpl-pie-with-legend">
+        <vaadin-pie-chart>
+            <title>Revenue by industry</title>
+            <subtitle>2015</subtitle>
+            <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
+            <plot-options>
+                <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
+                    <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
+                    </data-labels>
+                </pie>
+            </plot-options>
+            <data-series name="Revenue share"></data-series>
+        </vaadin-pie-chart>
+    </script>
+    <script type="text/html" id="tmpl-area-spline">
+        <vaadin-areaspline-chart>
+            <title>Monthly supply and demand</title>
+            <subtitle>Last six months</subtitle>
+            <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+            <tooltip shared="true" value-suffix="t"></tooltip>
+            <x-axis>
+                <categories>January, February, March, April, May, June</categories>
+            </x-axis>
+            <y-axis>
+                <title>Metric tons</title>
+            </y-axis>
+            <data-series name="Supply"></data-series>
+            <data-series name="Demand"></data-series>
+        </vaadin-areaspline-chart>
+    </script>
 </head>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script type="text/html" id="tmpl-pie-with-legend">
-    <vaadin-pie-chart>
-        <title>Revenue by industry</title>
-        <subtitle>2015</subtitle>
-        <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
-        <plot-options>
-            <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
-                <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
-                </data-labels>
-            </pie>
-        </plot-options>
-        <data-series name="Revenue share"></data-series>
-    </vaadin-pie-chart>
-</script>
-<script type="text/html" id="tmpl-area-spline">
-    <vaadin-areaspline-chart>
-        <title>Monthly supply and demand</title>
-        <subtitle>Last six months</subtitle>
-        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
-        <tooltip shared="true" value-suffix="t"></tooltip>
-        <x-axis>
-            <categories>January, February, March, April, May, June</categories>
-        </x-axis>
-        <y-axis>
-            <title>Metric tons</title>
-        </y-axis>
-        <data-series name="Supply"></data-series>
-        <data-series name="Demand"></data-series>
-    </vaadin-areaspline-chart>
-</script>
 <div>
     <p>1 POLYMER</p>
     <div id="chart" ng-controller="ChartCtrl">
