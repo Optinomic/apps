@@ -414,10 +414,6 @@ document.addEventListener('WebComponentsReady', function() {
 
 
 [template hisoryentry_sum_chart 6 8]
-<head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
-    <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
-</head>
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="wc-data-button">
     <template>
@@ -528,7 +524,7 @@ document.addEventListener('WebComponentsReady', function() {
     });
     </script>
 </dom-module>
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+ <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
@@ -594,13 +590,11 @@ document.addEventListener('WebComponentsReady', function() {
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
 
 </head>
-
-
-
-
-[javascript]
-'use strict';
-
+ <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js"></script>
+    <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+</head>
+<script type="text/javascript">
 // Wait until Web Components are loaded and registered
 // before bootstrapping your app
 document.addEventListener('WebComponentsReady', function() {
@@ -609,6 +603,13 @@ document.addEventListener('WebComponentsReady', function() {
         console.log('angular.element(document).ready', document);
     });
 });
+</script>
+
+
+
+
+[javascript]
+'use strict';
 
 /**
  * @name Optinomic - App

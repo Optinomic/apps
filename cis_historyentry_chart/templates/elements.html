@@ -1,0 +1,110 @@
+<!--This example defines a Web Component that binds a property to series data and pushes new points-->
+<dom-module id="wc-data-button">
+    <template>
+        <template>
+            <p>TEST</p>
+        </template>
+        <template is="dom-repeat" items="[[mySeriesData]]">
+            <div># <span>{{index}}</span></div>
+            <div>{{item}}</div>
+        </template>
+        <vaadin-line-chart id="wcDataExample">
+            <title>Click button to add point</title>
+            <tooltip enabled="false"></tooltip>
+            <plot-options>
+                <series>
+                </series>
+            </plot-options>
+            <x-axis type="datetime"></x-axis>
+            <data-series id="mySeriesId" data="[[mySeriesData]]">
+            </data-series>
+        </vaadin-line-chart>
+    </template>
+    <script>
+    Polymer({
+        is: 'wc-data-button',
+        properties: {
+            mySeriesData: {
+                type: Array
+            }
+        }
+    });
+    </script>
+</dom-module>
+<dom-module id="chart-behandungsdichte">
+    <template>
+        <vaadin-spline-chart id="dateAxisAndClickEvent">
+            <title>Date axis and click events</title>
+            <x-axis type="datetime"></x-axis>
+            <legend enabled="false"></legend>
+            <data-series>
+                <data>
+                    <point>
+                        <date>2013-02-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-02-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:00</date>
+                        <y>71.5</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:05</date>
+                        <y>29.9</y>
+                    </point>
+                    <point>
+                        <date>2013-03-11T12:10</date>
+                        <y>106.4</y>
+                    </point>
+                </data>
+            </data-series>
+            <data-series name="Tokyo" data="[[seriesData]]"></data-series>
+        </vaadin-spline-chart>
+    </template>
+    <script>
+    Polymer({
+        is: 'chart-behandungsdichte',
+
+        properties: {
+            seriesData: {
+                type: Array,
+
+                value: [{
+                    date: '2013-03-08T12:05',
+                    y: 56
+                }, {
+                    date: '2013-03-09T12:05',
+                    y: 156
+                }, {
+                    date: '2013-03-12T12:05',
+                    y: 46
+                }]
+            }
+        },
+
+        showLabel: function(message, xPixels, yPixels) {
+            var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
+                .attr({
+                    fill: Highcharts.getOptions().colors[2],
+                    padding: 10,
+                    r: 5,
+                    zIndex: 8
+                })
+                .css({
+                    color: '#FFFFFF'
+                })
+                .add();
+            this.async(function() {
+                label.fadeOut();
+            }, 1000);
+        }
+    });
+    </script>
+</dom-module>
