@@ -73,7 +73,17 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+// Wait until Web Components are loaded and registered
+// before bootstrapping your app
+document.addEventListener('WebComponentsReady', function() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['optinomicApp']);
+        console.log('angular.element(document).ready', document);
+    });
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
