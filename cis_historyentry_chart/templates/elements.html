@@ -6,7 +6,7 @@
             <div>{{item}}</div>
         </template>
         <vaadin-line-chart id="wcDataExample">
-            <title>Behandlungsdichte Test</title>
+            <title>Behandlungsdichte</title>
             <tooltip enabled="false"></tooltip>
             <plot-options>
                 <series>
@@ -19,14 +19,14 @@
     </template>
     <script>
     Polymer({
-        is: 'wc-data-button',
+        is: 'chart-behandlungsdichte',
         properties: {
             mySeriesData: {
                 type: Array
             }
         },
         ready: function() {
-            console.log('READY', this);
+            console.log('(READY) chart-behandlungsdichte', this);
         }
 
     });
