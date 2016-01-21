@@ -1,156 +1,158 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js" type="text/javascript"></script>
     <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-    <script type="text/html" id="tmpl-pie-with-legend">
-        <vaadin-pie-chart>
-            <title>Revenue by industry</title>
-            <subtitle>2015</subtitle>
-            <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
-            <plot-options>
-                <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
-                    <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
-                    </data-labels>
-                </pie>
-            </plot-options>
-            <data-series name="Revenue share"></data-series>
-        </vaadin-pie-chart>
-    </script>
-    <script type="text/html" id="tmpl-area-spline">
-        <vaadin-areaspline-chart>
-            <title>Monthly supply and demand</title>
-            <subtitle>Last six months</subtitle>
-            <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
-            <tooltip shared="true" value-suffix="t"></tooltip>
-            <x-axis>
-                <categories>January, February, March, April, May, June</categories>
-            </x-axis>
-            <y-axis>
-                <title>Metric tons</title>
-            </y-axis>
-            <data-series name="Supply"></data-series>
-            <data-series name="Demand"></data-series>
-        </vaadin-areaspline-chart>
-    </script>
 </head>
-<p>1 POLYMER</p>
-<div id="chart" ng-controller="ChartCtrl">
-    <p>Spline:</p>
-    <area-spline supply="supplyData" demand="demandData"></area-spline>
-    <p>Pie:</p>
-    <pie-with-legend data="chartData"></pie-with-legend>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script type="text/html" id="tmpl-pie-with-legend">
+    <vaadin-pie-chart>
+        <title>Revenue by industry</title>
+        <subtitle>2015</subtitle>
+        <tooltip point-format="<b>{point.percentage:.1f}%</b>"></tooltip>
+        <plot-options>
+            <pie allow-point-select="true" show-in-legend="true" cursor="pointer">
+                <data-labels enabled="true" format="{point.name}: {point.y:.1f} M€">
+                </data-labels>
+            </pie>
+        </plot-options>
+        <data-series name="Revenue share"></data-series>
+    </vaadin-pie-chart>
+</script>
+<script type="text/html" id="tmpl-area-spline">
+    <vaadin-areaspline-chart>
+        <title>Monthly supply and demand</title>
+        <subtitle>Last six months</subtitle>
+        <legend layout="vertical" align="left" vertical-align="top" x="150" y="100" floating="true"></legend>
+        <tooltip shared="true" value-suffix="t"></tooltip>
+        <x-axis>
+            <categories>January, February, March, April, May, June</categories>
+        </x-axis>
+        <y-axis>
+            <title>Metric tons</title>
+        </y-axis>
+        <data-series name="Supply"></data-series>
+        <data-series name="Demand"></data-series>
+    </vaadin-areaspline-chart>
+</script>
+<div>
+    <p>1 POLYMER</p>
+    <div id="chart" ng-controller="ChartCtrl">
+        <p>Spline:</p>
+        <area-spline supply="supplyData" demand="demandData"></area-spline>
+        <p>Pie:</p>
+        <pie-with-legend data="chartData"></pie-with-legend>
+    </div>
+    <p>2 POLYMER</p>
+    <dom-module id="date-axis-and-click-event-example">
+        <template>
+            <vaadin-spline-chart id="dateAxisAndClickEvent" on-chart-click="chartClickListener" on-point-click="pointClickListener">
+                <title>Date axis and click events</title>
+                <x-axis type="datetime"></x-axis>
+                <legend enabled="false"></legend>
+                <data-series>
+                    <data>
+                        <point>
+                            <date>2013-02-10T12:00</date>
+                            <y>71.5</y>
+                        </point>
+                        <point>
+                            <date>2013-02-11T12:05</date>
+                            <y>29.9</y>
+                        </point>
+                        <point>
+                            <date>2013-02-11T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2013-02-12T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2013-02-13T12:10</date>
+                            <y>36.4</y>
+                        </point>
+                        <point>
+                            <date>2013-03-11T12:10</date>
+                            <y>156.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-10T12:00</date>
+                            <y>71.5</y>
+                        </point>
+                        <point>
+                            <date>2014-02-11T12:05</date>
+                            <y>29.9</y>
+                        </point>
+                        <point>
+                            <date>2014-02-11T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-12T12:10</date>
+                            <y>106.4</y>
+                        </point>
+                        <point>
+                            <date>2014-02-13T12:10</date>
+                            <y>36.4</y>
+                        </point>
+                        <point>
+                            <date>2014-03-11T12:10</date>
+                            <y>156.4</y>
+                        </point>
+                    </data>
+                </data-series>
+            </vaadin-spline-chart>
+        </template>
+        <script>
+        Polymer({
+            is: 'date-axis-and-click-event-example',
+
+            chartClickListener: function(e) {
+                //get the Highcharts event with chart specific details
+                var originalEvent = e.detail.originalEvent;
+
+                var xValue = originalEvent.xAxis[0].value,
+                    yValue = originalEvent.yAxis[0].value,
+                    xPixels = originalEvent.xAxis[0].axis.toPixels(xValue),
+                    yPixels = originalEvent.yAxis[0].axis.toPixels(yValue),
+                    dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', xValue),
+                    yFormatted = Highcharts.numberFormat(yValue, 2);
+                this.showLabel('Chart click: x: ' + dateFormatted + ', y: ' + yFormatted, xPixels, yPixels);
+            },
+
+            pointClickListener: function(e) {
+                //get the Highcharts event with chart specific details
+                var originalEvent = e.detail.originalEvent;
+                var point = e.detail.point;
+
+                var xPixels = originalEvent.chartX,
+                    yPixels = originalEvent.chartY,
+                    dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', point.x);
+                this.showLabel('Point click: x: ' + dateFormatted + ', y: ' + point.y, xPixels, yPixels);
+
+            },
+
+            showLabel: function(message, xPixels, yPixels) {
+                var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
+                    .attr({
+                        fill: Highcharts.getOptions().colors[2],
+                        padding: 10,
+                        r: 5,
+                        zIndex: 8
+                    })
+                    .css({
+                        color: '#FFFFFF'
+                    })
+                    .add();
+                this.async(function() {
+                    label.fadeOut();
+                }, 1000);
+            }
+        });
+        </script>
+    </dom-module>
+    <date-axis-and-click-event-example></date-axis-and-click-event-example>
 </div>
-<p>2 POLYMER</p>
-<dom-module id="date-axis-and-click-event-example">
-    <template>
-        <vaadin-spline-chart id="dateAxisAndClickEvent" on-chart-click="chartClickListener" on-point-click="pointClickListener">
-            <title>Date axis and click events</title>
-            <x-axis type="datetime"></x-axis>
-            <legend enabled="false"></legend>
-            <data-series>
-                <data>
-                    <point>
-                        <date>2013-02-10T12:00</date>
-                        <y>71.5</y>
-                    </point>
-                    <point>
-                        <date>2013-02-11T12:05</date>
-                        <y>29.9</y>
-                    </point>
-                    <point>
-                        <date>2013-02-11T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2013-02-12T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2013-02-13T12:10</date>
-                        <y>36.4</y>
-                    </point>
-                    <point>
-                        <date>2013-03-11T12:10</date>
-                        <y>156.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-10T12:00</date>
-                        <y>71.5</y>
-                    </point>
-                    <point>
-                        <date>2014-02-11T12:05</date>
-                        <y>29.9</y>
-                    </point>
-                    <point>
-                        <date>2014-02-11T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-12T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-13T12:10</date>
-                        <y>36.4</y>
-                    </point>
-                    <point>
-                        <date>2014-03-11T12:10</date>
-                        <y>156.4</y>
-                    </point>
-                </data>
-            </data-series>
-        </vaadin-spline-chart>
-    </template>
-    <script>
-    Polymer({
-        is: 'date-axis-and-click-event-example',
-
-        chartClickListener: function(e) {
-            //get the Highcharts event with chart specific details
-            var originalEvent = e.detail.originalEvent;
-
-            var xValue = originalEvent.xAxis[0].value,
-                yValue = originalEvent.yAxis[0].value,
-                xPixels = originalEvent.xAxis[0].axis.toPixels(xValue),
-                yPixels = originalEvent.yAxis[0].axis.toPixels(yValue),
-                dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', xValue),
-                yFormatted = Highcharts.numberFormat(yValue, 2);
-            this.showLabel('Chart click: x: ' + dateFormatted + ', y: ' + yFormatted, xPixels, yPixels);
-        },
-
-        pointClickListener: function(e) {
-            //get the Highcharts event with chart specific details
-            var originalEvent = e.detail.originalEvent;
-            var point = e.detail.point;
-
-            var xPixels = originalEvent.chartX,
-                yPixels = originalEvent.chartY,
-                dateFormatted = Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', point.x);
-            this.showLabel('Point click: x: ' + dateFormatted + ', y: ' + point.y, xPixels, yPixels);
-
-        },
-
-        showLabel: function(message, xPixels, yPixels) {
-            var label = this.$.dateAxisAndClickEvent.chart.renderer.label(message, xPixels, yPixels)
-                .attr({
-                    fill: Highcharts.getOptions().colors[2],
-                    padding: 10,
-                    r: 5,
-                    zIndex: 8
-                })
-                .css({
-                    color: '#FFFFFF'
-                })
-                .add();
-            this.async(function() {
-                label.fadeOut();
-            }, 1000);
-        }
-    });
-    </script>
-</dom-module>
-<date-axis-and-click-event-example></date-axis-and-click-event-example>
