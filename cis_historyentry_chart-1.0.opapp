@@ -407,6 +407,10 @@ website = http://www.optinomic.com/
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="wc-data-button">
     <template>
+        <template is="dom-repeat" items="{{mySeriesData}}">
+            <div># <span>{{index}}</span></div>
+            <div>{{item}}</div>
+        </template>
         <vaadin-line-chart id="wcDataExample">
             <title>Click button to add point</title>
             <tooltip enabled="false"></tooltip>
@@ -418,7 +422,6 @@ website = http://www.optinomic.com/
             <data-series id="mySeriesId" data="[[mySeriesData]]">
             </data-series>
         </vaadin-line-chart>
-        <button on-click="_addSeriesPoint">Add series point</button>
     </template>
     <script>
     Polymer({
@@ -427,16 +430,6 @@ website = http://www.optinomic.com/
             mySeriesData: {
                 type: Array
             }
-        },
-        _addSeriesPoint: function() {
-            var x = (new Date()).getTime(),
-                y = Math.random();
-            /**
-             * Mutations to array properties (push, pop, splice, shift, unshift) must be performed using
-             * methods provided on Polymer elements, such that the changes are observable to any elements bound to
-             * the same array
-             */
-            this.push('mySeriesData', [x, y]);
         }
     });
     </script>
@@ -527,59 +520,8 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<p>Behandlungsdichte</p>
-<wc-data-button></wc-data-button>
 <p>Behandlungsdichte - outside DATA</p>
 <wc-data-button my-series-data="{{d.mySeriesData}}"></wc-data-button>
-<p>Behandlungsdichte</p>
-<button on-click="_addSeriesPoint">Add series point</button>
-<chart-behandungsdichte></chart-behandungsdichte>
-<pre>
-	{{d.historyEntrys}}
-</pre>             </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js"></script>
-<!--
-<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
--->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
-
-
 
 
 
@@ -6065,6 +6007,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 return [item.datum_week];
             });
 
+
+            // Create SeriesArray Data for Chart
+            $scope.d.mySeriesData = [];
+            $scope.d.historyEntrysWeek.forEach(function(entry, myindex) {
+                var inner_array = []
+                inner_array.push(entry.datum);
+                inner_array.push(entry.dauer);
+                $scope.d.mySeriesData.push(inner_array);
+
+            });
+
+
             $scope.d.appState = 'show';
 
             //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
@@ -6218,10 +6172,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.supplyData = [35, 28, 45, 60, 80, 74];
     $scope.demandData = [29, 11, 50, 63, 65, 61];
 
-    $scope.d.mySeriesData = [
-        ["2016-01-11T23:00:00.000Z", 14],
-        ["2016-01-21T08:32:42.539Z", 12]
-    ];
+
 
 });
 

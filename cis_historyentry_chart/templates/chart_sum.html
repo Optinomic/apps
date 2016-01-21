@@ -3,6 +3,10 @@
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="wc-data-button">
     <template>
+        <template is="dom-repeat" items="{{mySeriesData}}">
+            <div># <span>{{index}}</span></div>
+            <div>{{item}}</div>
+        </template>
         <vaadin-line-chart id="wcDataExample">
             <title>Click button to add point</title>
             <tooltip enabled="false"></tooltip>
@@ -14,7 +18,6 @@
             <data-series id="mySeriesId" data="[[mySeriesData]]">
             </data-series>
         </vaadin-line-chart>
-        <button on-click="_addSeriesPoint">Add series point</button>
     </template>
     <script>
     Polymer({
@@ -23,16 +26,6 @@
             mySeriesData: {
                 type: Array
             }
-        },
-        _addSeriesPoint: function() {
-            var x = (new Date()).getTime(),
-                y = Math.random();
-            /**
-             * Mutations to array properties (push, pop, splice, shift, unshift) must be performed using
-             * methods provided on Polymer elements, such that the changes are observable to any elements bound to
-             * the same array
-             */
-            this.push('mySeriesData', [x, y]);
         }
     });
     </script>
@@ -115,13 +108,5 @@
     </script>
 </dom-module>
 include(../lib/html/optinomic/page/start.m4)
-<p>Behandlungsdichte</p>
-<wc-data-button></wc-data-button>
 <p>Behandlungsdichte - outside DATA</p>
 <wc-data-button my-series-data="{{d.mySeriesData}}"></wc-data-button>
-<p>Behandlungsdichte</p>
-<button on-click="_addSeriesPoint">Add series point</button>
-<chart-behandungsdichte></chart-behandungsdichte>
-<pre>
-	{{d.historyEntrys}}
-</pre> include(../lib/html/optinomic/page/end.m4)
