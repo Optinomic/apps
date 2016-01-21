@@ -1,7 +1,7 @@
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="chart-behandlungsdichte">
     <template>
-        <template is="dom-repeat" items="[[data]]">
+        <template is="dom-repeat" items="[[chartdata]]">
             <div># <span>{{index}}</span></div>
             <div>{{item.name}}</div>
         </template>
@@ -13,7 +13,7 @@
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <data-series id="SeriesID" name="test" data="[[data.0.data]]">
+            <data-series id="SeriesID" name="test" data="[[chartdata.0.data]]">
             </data-series>
         </vaadin-line-chart>
     </template>
@@ -22,21 +22,21 @@
         is: 'chart-behandlungsdichte',
 
         properties: {
-            data: {
+            chartdata: {
                 type: Array
             }
         },
 
         ready: function() {
-            console.log('(ready) chart-behandlungsdichte', this);
+            console.log('(ready) chart-behandlungsdichte', this.properties);
         },
 
         created: function() {
-            console.log('(created) chart-behandlungsdichte', this.data);
+            console.log('(created) chart-behandlungsdichte', this.properties);
         },
 
         attached: function() {
-            console.log('(attached) chart-behandlungsdichte', this.data);
+            console.log('(attached) chart-behandlungsdichte', this.properties);
         }
 
 
