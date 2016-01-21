@@ -457,7 +457,6 @@ website = http://www.optinomic.com/
 
             var chartWC = this.$.chart;
 
-            console.log('(updateData) chartWC', chartWC);
 
             if (chartWC) {
                 var chart = chartWC.chart;
@@ -466,9 +465,9 @@ website = http://www.optinomic.com/
                     chart.series[1] = {};
                     var data = chartdata[0].data;
 
-                    console.log('(updateData) async', data, chart);
+                    console.log('(updateData) async', data, chart, chart.getConfiguration());
 
-                    chart.series[1].setData(data);
+                    //chart.series[1].setData(data);
                 }
             };
 
