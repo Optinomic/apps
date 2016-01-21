@@ -190,10 +190,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 return [item.datum_week];
             });
 
+            // Group Resuls by Calendar-Week
+            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
+                return [item.tarmed.selected_tarifpos_code];
+            });
+
 
             // Create SeriesArray Data for Chart
+            $scope.d.chartData = {};
+
+
             $scope.d.mySeriesData = [];
-            $scope.d.historyEntrysWeek.forEach(function(entry, myindex) {
+            $scope.d.historyEntrys.forEach(function(entry, myindex) {
                 var inner_array = []
                 inner_array.push(entry.datum);
                 inner_array.push(entry.dauer);
