@@ -65,9 +65,9 @@ website = http://www.optinomic.com/
         </vaadin-areaspline-chart>
     </script>
 </head>
-<div>
+<div ng-controller="ChartCtrl">
     <p>1 POLYMER</p>
-    <div id="chart" ng-controller="ChartCtrl">
+    <div id="chart">
         <p>Spline:</p>
         <area-spline supply="supplyData" demand="demandData"></area-spline>
         <p>Pie:</p>
