@@ -3,7 +3,7 @@
     <template>
         <template is="dom-repeat" items="[[mySeriesData]]">
             <div># <span>{{index}}</span></div>
-            <div>{{item}}</div>
+            <div>{{item.name}}</div>
         </template>
         <vaadin-line-chart id="wcDataExample">
             <title>Behandlungsdichte</title>
@@ -13,20 +13,28 @@
                 </series>
             </plot-options>
             <x-axis type="datetime"></x-axis>
-            <data-series id="mySeriesId" data="[[mySeriesData.0.data]]">
-            </data-series>
+            <template is="dom-repeat" items="[[mySeriesData]]">
+                <data-series id="SeriesID{{index}}" name="{{item.name}}" data="{{item.data}}">
+                </data-series>
+            </template>
         </vaadin-line-chart>
     </template>
     <script>
     Polymer({
         is: 'chart-behandlungsdichte',
+
+        ready: function() {
+            console.log('(READY) chart-behandlungsdichte', this);
+        },
+
+        created: function() {
+            console.log('(created) chart-behandlungsdichte', this);
+        },
+
         properties: {
             mySeriesData: {
                 type: Array
             }
-        },
-        ready: function() {
-            console.log('(READY) chart-behandlungsdichte', this);
         }
 
     });
