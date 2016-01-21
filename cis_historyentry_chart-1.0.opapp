@@ -377,7 +377,8 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -398,6 +399,7 @@ website = http://www.optinomic.com/
 	-->
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
 
+</head>
 
 
 
@@ -570,7 +572,8 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js"></script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -591,6 +594,7 @@ website = http://www.optinomic.com/
 	-->
 <script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js"></script>
 
+</head>
 
 
 
