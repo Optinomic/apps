@@ -371,3 +371,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 });
+
+
+document.addEventListener('WebComponentsReady', function() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['optinomicApp']);
+        console.log('angular.element(document).ready', document);
+    });
+});
