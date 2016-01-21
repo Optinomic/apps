@@ -454,18 +454,19 @@ website = http://www.optinomic.com/
 
         updateData: function(chartdata) {
             console.log('(updateData) chart-behandlungsdichte', chartdata);
-        },
 
-        ready: function() {
-            console.log('(ready) chart-behandlungsdichte', this.properties);
-        },
-
-        created: function() {
-            console.log('(created) chart-behandlungsdichte', this.properties);
-        },
-
-        attached: function() {
-            console.log('(attached) chart-behandlungsdichte', this.properties);
+            this.async(function() {
+                var chartWC = this.$.chart;
+                if (chartWC) {
+                    var chart = chartWC.chart;
+                    if (chart && chart.series) {
+                        var data = chartdata[0].data;
+                        chart.series[0].setData(data);
+                        var data = chartdata[1].data;
+                        chart.series[1].setData(data);
+                    }
+                }
+            }, 2);
         }
 
 
