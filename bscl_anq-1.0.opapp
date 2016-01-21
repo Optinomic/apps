@@ -248,7 +248,6 @@ var app = angular
 
     });
 
-console.log('(!) optinomicApp', app);
 
 /**
  * @name Optinomic - optinomic/data_module
