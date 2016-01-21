@@ -604,6 +604,14 @@ website = http://www.optinomic.com/
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js">
     </script>
     <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+    <script type="text/javascript">
+    document.addEventListener('WebComponentsReady', function() {
+        angular.element(document).ready(function() {
+            angular.bootstrap(document, ['optinomicApp']);
+            console.log('angular.element(document).ready', document);
+        });
+    });
+    </script>
 </head>
 
 
@@ -6269,14 +6277,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-});
-
-
-document.addEventListener('WebComponentsReady', function() {
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ['optinomicApp']);
-        console.log('angular.element(document).ready', document);
-    });
 });
 
 
