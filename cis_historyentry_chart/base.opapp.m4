@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 [template hisoryentry_list 6 15]
 include(templates/history.html)
 
-[template hisoryentry_sum_chart 6 5]
+[template hisoryentry_sum_chart 6 8]
 include(templates/chart_sum.html)
 
 

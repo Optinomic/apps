@@ -8,53 +8,9 @@
             <legend enabled="false"></legend>
             <data-series>
                 <data>
-                    <point>
-                        <date>2013-02-10T12:00</date>
-                        <y>71.5</y>
-                    </point>
-                    <point>
-                        <date>2013-02-11T12:05</date>
-                        <y>29.9</y>
-                    </point>
-                    <point>
-                        <date>2013-02-11T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2013-02-12T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2013-02-13T12:10</date>
-                        <y>36.4</y>
-                    </point>
-                    <point>
-                        <date>2013-03-11T12:10</date>
-                        <y>156.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-10T12:00</date>
-                        <y>71.5</y>
-                    </point>
-                    <point>
-                        <date>2014-02-11T12:05</date>
-                        <y>29.9</y>
-                    </point>
-                    <point>
-                        <date>2014-02-11T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-12T12:10</date>
-                        <y>106.4</y>
-                    </point>
-                    <point>
-                        <date>2014-02-13T12:10</date>
-                        <y>36.4</y>
-                    </point>
-                    <point>
-                        <date>2014-03-11T12:10</date>
-                        <y>156.4</y>
+                    <point ng-repeat="entry in d.historyEntrys">
+                        <date>{{entry.datum}}</date>
+                        <y>{{entry.dauer}}</y>
                     </point>
                 </data>
             </data-series>
@@ -84,7 +40,7 @@
     </script>
 </dom-module>
 include(../lib/html/optinomic/page/start.m4)
-<p>CHART Summe</p>
+<p>Behandlungsdichte</p>
 <chart-behandungsdichte></chart-behandungsdichte>
 <pre>
 	{{d.historyEntrys}}
