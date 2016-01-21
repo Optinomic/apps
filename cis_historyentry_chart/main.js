@@ -191,10 +191,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             });
 
 
-            // $scope.d.historyEntrys.forEach(function(entry, myindex) {
-            //     entry.selected_tarifpos_code = item.selected_tarifpos_code
-            // });
-
             //Group Resuls by TARMED Code
             $scope.d.historyEntrysTARMED = dataService.groupBy($scope.d.historyEntrys, function(item) {
                 return [item.tarmed.selected_tarifpos_code];
@@ -206,7 +202,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 var serie_to_push = {
                     name: serie[0].tarmed.selected.tarifpos_beschreibung ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
-                    data[];
+                    data[]
                 };
 
                 serie.forEach(function(entry, myindex) {
@@ -217,6 +213,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 data_series.push(serie_to_push);
 
             });
+
 
             $scope.d.chartData = data_series;
             console.log('$scope.d.historyEntrysTARMED', $scope.d.historyEntrysTARMED);
