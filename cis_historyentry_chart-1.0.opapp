@@ -6107,11 +6107,26 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 return [item.tarmed.selected_tarifpos_code];
             });
 
-            console.log('$scope.d.historyEntrysTARMED', $scope.d.historyEntrysTARMED);
             // Create SeriesArray Data for Chart
-            $scope.d.chartData = {
+            var data_series = [];
+            $scope.d.historyEntrysTARMED.forEach(function(serie, myindex) {
 
-            };
+                var serie_to_push = {
+                    name: serie[0].tarmed.selected.tarifpos_beschreibung ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
+                    data[];
+                };
+
+                serie.forEach(function(entry, myindex) {
+                    serie_to_push.data.push(entry.datum);
+                    serie_to_push.data.push(entry.dauer);
+                });
+
+                data_series.push(serie_to_push);
+
+            });
+
+            $scope.d.chartData = data_series;
+            console.log('$scope.d.historyEntrysTARMED', $scope.d.historyEntrysTARMED);
 
 
             $scope.d.mySeriesData = [];
