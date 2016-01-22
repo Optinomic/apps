@@ -418,7 +418,7 @@ website = http://www.optinomic.com/
 
 
 
-[template hisoryentry_sum_chart 6 8]
+[template hisoryentry_sum_chart 6 7]
 <!--This example defines a Web Component that binds a property to series data and pushes new points-->
 <dom-module id="chart-behandlungsdichte">
     <template>
@@ -433,7 +433,7 @@ website = http://www.optinomic.com/
             <x-axis type="datetime">
                 <date-time-label-formats month="%e. %b" year="%b">
                 </date-time-label-formats>
-                <title>Date</title>
+                <title>Datum</title>
             </x-axis>
             <y-axis min="0">
                 <title>Dauer der Behandlungen (Minuten)</title>
