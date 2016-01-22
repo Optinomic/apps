@@ -41,12 +41,73 @@
         </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p>&nbsp;</p>
+            <p class="md-subhead">Medikament</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <md-input-container flex class="md-block flow-text">
-                    <label>Medikament</label>
-                    <textarea ng-model="d.newEntry.medi_name" columns="1" rows="10"></textarea>
-                </md-input-container>
+                <div>
+                    <md-input-container flex class="md-block flow-text">
+                        <label>Medikament</label>
+                        <input ng-model="d.newEntry.medication_name">
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                        <label>Verabreichung</label>
+                        <md-select ng-model="d.newEntry.medication_verabreichung">
+                            <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
+                                {{verabreichung}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-card-content>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <p class="md-subhead">Verordnung</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <md-input-container flex class="md-block">
+                        <label>Start</label>
+                        <input ng-model="d.newEntry.medication_start_verordnung_datum">
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container flex class="md-block">
+                        <label>Arzt / Visum</label>
+                        <input ng-model="d.newEntry.medication_start_verordnung_user">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <p class="md-subhead">Dosierung</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                        <md-input-container class="md-block">
+                            <label>Mo</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mo" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Mi</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mi" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Ab</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_ab" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Na</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_na" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div>
+                    <md-input-container flex class="md-block">
+                        <label>Interval</label>
+                        <input ng-model="d.newEntry.medication_dosierung_interval">
+                    </md-input-container>
+                </div>
             </div>
         </md-card-content>
         <md-divider ng-if="d.appInit.debug"></md-divider>

@@ -142,12 +142,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.medication_verabreichung = ['oral', 'parenteral', 'topisch']
         $scope.d.medication_status = [{
+            id: 0,
             title: 'aktiv',
             color: '#FFFFFF'
         }, {
+            id: 1,
             title: 'gestoppt',
             color: '#9FA8DA'
         }, {
+            id: 2,
             title: 'verweigert',
             color: '#EF9A9A'
         }];
