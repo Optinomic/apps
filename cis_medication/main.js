@@ -56,7 +56,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var medi_code = entry['gsx$pharmacode']['$t'];
             var medi_name = entry['gsx$bezeichnung']['$t'];
             var medi_info = entry['gsx$zusatz']['$t'];
-            var medi_activated = entry['gsx$aktiviert']['$t'];
+
+            if (entry['gsx$aktiviert']['$t'] === 'T') {
+                var medi_activated = true;
+            } else {
+                var medi_activated = false;
+            };
 
             return {
                 medi_order: medi_order,

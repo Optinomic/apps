@@ -20,9 +20,9 @@
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found ng-init="d.appInit.medi_not_found = true">
-                        <div ng-click="entryCancel()">
-                            Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    <md-not-found>
+                        <div ng-init="d.appInit.medi_not_found = true">
+                            {{d.appInit.medi_not_found}} Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
                         </div>
                     </md-not-found>
                 </md-autocomplete>

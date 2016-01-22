@@ -111,9 +111,9 @@ website = http://www.optinomic.com/
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found ng-init="d.appInit.medi_not_found = true">
-                        <div ng-click="entryCancel()">
-                            Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    <md-not-found>
+                        <div ng-init="d.appInit.medi_not_found = true">
+                            {{d.appInit.medi_not_found}} Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
                         </div>
                     </md-not-found>
                 </md-autocomplete>
@@ -189,9 +189,9 @@ website = http://www.optinomic.com/
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found ng-init="d.appInit.medi_not_found = true">
-                        <div ng-click="entryCancel()">
-                            Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    <md-not-found>
+                        <div ng-init="d.appInit.medi_not_found = true">
+                            {{d.appInit.medi_not_found}} Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
                         </div>
                     </md-not-found>
                 </md-autocomplete>
@@ -5737,7 +5737,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var medi_code = entry['gsx$pharmacode']['$t'];
             var medi_name = entry['gsx$bezeichnung']['$t'];
             var medi_info = entry['gsx$zusatz']['$t'];
-            var medi_activated = entry['gsx$aktiviert']['$t'];
+
+            if (entry['gsx$aktiviert']['$t'] === 'T') {
+                var medi_activated = true;
+            } else {
+                var medi_activated = false;
+            };
 
             return {
                 medi_order: medi_order,
