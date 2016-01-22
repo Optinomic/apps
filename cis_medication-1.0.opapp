@@ -95,7 +95,6 @@ website = http://www.optinomic.com/
             <md-card-title-text>
                 <span class="md-headline ">
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
-                {{d.appInit.querySearch(d.appInit.searchText).length}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
                 <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
@@ -123,10 +122,10 @@ website = http://www.optinomic.com/
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.medi_not_found"></md-divider>
-        <md-card-content ng-if="d.appInit.medi_not_found">
+        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0"></md-divider>
+        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0">
             <p>&nbsp;</p>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
             </md-button>
         </md-card-content>
@@ -174,7 +173,6 @@ website = http://www.optinomic.com/
             <md-card-title-text>
                 <span class="md-headline ">
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
-                {{d.appInit.querySearch(d.appInit.searchText).length}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
                 <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
@@ -202,10 +200,10 @@ website = http://www.optinomic.com/
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.medi_not_found"></md-divider>
-        <md-card-content ng-if="d.appInit.medi_not_found">
+        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0"></md-divider>
+        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0">
             <p>&nbsp;</p>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
             </md-button>
         </md-card-content>
