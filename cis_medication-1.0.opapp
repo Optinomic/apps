@@ -122,13 +122,16 @@ website = http://www.optinomic.com/
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
-        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
-            <p>&nbsp;</p>
-            <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
-                <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
-            </md-button>
-        </md-card-content>
+        <div ng-if="d.loadedMedicationData">
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+            <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
+                <p class="md-subhead">Kein Standardmedikament</p>
+                <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
+                </md-button>
+            </md-card-content>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p>&nbsp;</p>
@@ -148,7 +151,7 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            <p class="md-caption">&nbsp;Medikamentenkatalog</p>
+            <p class="md-caption">Medikamentenkatalog</p>
         </md-card-content>
         <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
@@ -200,13 +203,16 @@ website = http://www.optinomic.com/
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
-        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
-            <p>&nbsp;</p>
-            <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
-                <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
-            </md-button>
-        </md-card-content>
+        <div ng-if="d.loadedMedicationData">
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+            <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
+                <p class="md-subhead">Kein Standardmedikament</p>
+                <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
+                </md-button>
+            </md-card-content>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p>&nbsp;</p>
@@ -226,7 +232,7 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            <p class="md-caption">&nbsp;Medikamentenkatalog</p>
+            <p class="md-caption">Medikamentenkatalog</p>
         </md-card-content>
         <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
