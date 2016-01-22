@@ -132,7 +132,7 @@ website = http://www.optinomic.com/
         </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">&nbsp;</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div flex>
                     <md-input-container class="md-block flow-text">
@@ -161,11 +161,12 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                 </div>
-                <md-input-container>
+                <md-input-container flex>
                     <label>Arzt / Visum</label>
                     <md-select ng-model="d.newEntry.medication_start_verordnung_user">
                         <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
@@ -173,7 +174,7 @@ website = http://www.optinomic.com/
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container flex="15">
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
                         <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
@@ -185,7 +186,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Dosierung | {{d.newEntry.medication_name}}</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Dosierung</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div>
                     <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
@@ -218,11 +222,12 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
                 </div>
-                <md-input-container>
+                <md-input-container flex>
                     <label>Arzt / Visum</label>
                     <md-select ng-model="d.newEntry.medication_stop_verordnung_user">
                         <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
@@ -230,7 +235,7 @@ website = http://www.optinomic.com/
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container flex="15">
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
                         <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
@@ -312,7 +317,7 @@ website = http://www.optinomic.com/
         </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">&nbsp;</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div flex>
                     <md-input-container class="md-block flow-text">
@@ -341,11 +346,12 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                 </div>
-                <md-input-container>
+                <md-input-container flex>
                     <label>Arzt / Visum</label>
                     <md-select ng-model="d.newEntry.medication_start_verordnung_user">
                         <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
@@ -353,7 +359,7 @@ website = http://www.optinomic.com/
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container flex="15">
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
                         <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
@@ -365,7 +371,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Dosierung | {{d.newEntry.medication_name}}</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Dosierung</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div>
                     <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
@@ -398,11 +407,12 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
+            <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
                 </div>
-                <md-input-container>
+                <md-input-container flex>
                     <label>Arzt / Visum</label>
                     <md-select ng-model="d.newEntry.medication_stop_verordnung_user">
                         <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
@@ -410,7 +420,7 @@ website = http://www.optinomic.com/
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container>
+                <md-input-container flex="15">
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
                         <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">

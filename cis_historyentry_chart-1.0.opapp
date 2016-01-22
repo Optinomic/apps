@@ -491,7 +491,6 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<p>Behandlungsdichte</p>
 <chart-behandlungsdichte chartdata="{{d.mySeriesData}}"></chart-behandlungsdichte>
             </div>
             <div ng-if="!d.haveData">
