@@ -5822,6 +5822,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.loadedMedicationData = false;
         $scope.d.appState = 'show';
 
+
+        $scope.d.medication_verabreichung = ['oral', 'parenteral', 'topisch']
+        $scope.d.medication_status = [{
+            title: 'aktiv',
+            color: '#FFFFFF'
+        }, {
+            title: 'gestoppt',
+            color: '#9FA8DA'
+        }, {
+            title: 'verweigert',
+            color: '#EF9A9A'
+        }];
+
     };
 
 
@@ -5853,8 +5866,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         if (item === undefined) {
             $scope.d.newEntry = {
-                datestamp: new Date(),
-                user: $scope.d.dataMain.users.current.id,
                 medication: {},
                 medication_selected: false
             };
@@ -5866,7 +5877,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 medication: item,
                 medication_selected: true,
-                medi_name: item.medi_name
+                medication_name: item.medi_name,
+                medication_verabreichung: 'oral',
+                medication_start_verordnung_datum: new Date(),
+                medication_start_verordnung_user: $scope.d.dataMain.users.current.id,
+                medication_dosierung_mo: 0,
+                medication_dosierung_mi: 0,
+                medication_dosierung_ab: 0,
+                medication_dosierung_na: 0,
+                medication_dosierung_interval: '',
+                medication_stop_verordnung_datum: null,
+                medication_stop_verordnung_user: null,
+                medication_bemerkungen: '',
+                medication_status: $scope.d.medication_status[0]
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
@@ -6084,65 +6107,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.entryUp = function(currentUID) {
-        // Diagnose aufwerten
 
-        // Diagnosen nach 'rank' sortieren
-        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank')
-
-        // Rank anpassen
-        var currentIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
-
-        if (currentIndex !== 0) {
-            var prevIndex = currentIndex - 1;
-            $scope.d.medication[currentIndex].diagn_rank = $scope.d.medication[currentIndex].diagn_rank - 1;
-            $scope.d.medication[prevIndex].diagn_rank = $scope.d.medication[prevIndex].diagn_rank + 1;
-
-            $scope.saveDiagnoses();
-            console.log('entryUp', $scope.d.medication[currentIndex], currentIndex, prevIndex);
-        };
-
-    };
-
-    $scope.entryDown = function(currentUID) {
-        // Diagnose abwerten
-
-        // Diagnosen nach 'rank' sortieren
-        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank');
-
-        var max = $scope.d.medication.length - 1;
-        var currentIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
-
-        // Rank anpassen
-        if (currentIndex !== max) {
-            var nextIndex = currentIndex + 1;
-            $scope.d.medication[currentIndex].diagn_rank = $scope.d.medication[currentIndex].diagn_rank + 1;
-            $scope.d.medication[nextIndex].diagn_rank = $scope.d.medication[nextIndex].diagn_rank - 1;
-
-            $scope.saveDiagnoses();
-            console.log('entryDown', $scope.d.medication[currentIndex], currentIndex, nextIndex);
-        };
-
-
-    };
 
 
     $scope.entryDelete = function(my_index) {
         $scope.d.medication.splice(my_index, 1);
 
-        // Diagnosen nach 'rank' sortieren
-        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank');
-        // Diagnosen neu hochnummerieren.
-        $scope.d.medication.forEach(function(diagn, myindex) {
-            diagn.diagn_rank = myindex + 1;
-        });
+        // Medikamente nach 'rank' sortieren
+        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'medi_name');
 
         console.log('Deleted - Index', my_index);
-        $scope.saveDiagnoses();
+        $scope.saveMedication();
     };
 
 
-    $scope.saveDiagnoses = function() {
+    $scope.saveMedication = function() {
         var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
         api_call.then(function(data) {
             console.log('(+) saveDiagnoses - success: ', $scope.d.medication);
@@ -6159,20 +6138,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
 
-
         // Create URL's for nice lookup
-
-        var code_full = $scope.d.newEntry.diagn.icd_code;
-        var code_dot = code_full.indexOf('.');
+        var code_full = $scope.d.newEntry.medi_name;
+        var code_dot = code_full.indexOf(' ');
         var code_parent = code_full.substring(0, code_dot);
 
+        var search_string = "";
+
         if (code_dot !== -1) {
-            // http://www.icd-code.de/suche/icd/code/F52.-.html?sp=Sf52.7
-            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_parent + ".-.html?sp=S" + code_full;
+            search_string = code_full;
         } else {
-            // http://www.icd-code.de/suche/icd/code/Z63.html?sp=Sz63
-            $scope.d.newEntry.icd_url_info = "http://www.icd-code.de/suche/icd/code/" + code_full + ".html?sp=S" + code_full;
+            search_string = code_parent;
         };
+        $scope.d.newEntry.url_compendium = "https://compendium.ch/search/all/" + search_string + "/contains/de";
+        $scope.d.newEntry.url_open_drug_db = "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/" + search_string + "/search_type/st_oddb#best_result";
 
 
         // Push new Entry if 'new'
@@ -6186,7 +6165,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
             $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
-
         };
 
         // Save edited entry.
@@ -6204,17 +6182,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
-        console.log('Try to save @ putHisoryPost: ', $scope.d.medication);
-
-
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
-        api_call.then(function(data) {
-            console.log('(+) entrySave - success: ', $scope.d.newEntry);
-
-            // Update Entrys
-            $scope.d.appState = 'show';
-            $scope.getEntrys();
-        });
+        console.log('Try to save: ', $scope.d.medication);
+        $scope.saveMedication();
     };
 
 
