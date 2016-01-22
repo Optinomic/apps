@@ -209,7 +209,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_stop_verordnung_datum: null,
                 medication_stop_verordnung_user: null,
                 medication_bemerkungen: '',
-                medication_status: $scope.d.medication_status[0]
+                medication_status: 0
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };

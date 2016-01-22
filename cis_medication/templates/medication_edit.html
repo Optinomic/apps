@@ -42,7 +42,7 @@
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">&nbsp;</p>
-            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <div layout="row" layout-gt-xs="row" layout-align="start end" layout-margin>
                 <div flex>
                     <md-input-container class="md-block flow-text">
                         <label>Medikament</label>
@@ -60,8 +60,8 @@
                     </md-input-container>
                 </div>
             </div>
-            <div>
-                <md-input-container flex class="md-block flow-text">
+            <div layout="row" layout-gt-xs="row" layout-align="start end" layout-margin>
+                <md-input-container flex class="md-block">
                     <label>Bemerkungen</label>
                     <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
                 </md-input-container>
@@ -70,7 +70,7 @@
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
-            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <div layout="row" layout-gt-xs="row" layout-align="start end" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                 </div>
@@ -83,7 +83,7 @@
                 <md-input-container>
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
-                        <md-option ng-repeat="status in d.medication_status" value="{{status}}">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
                             {{status.title}}
                         </md-option>
                     </md-select>
@@ -114,7 +114,7 @@
                         </md-input-container>
                     </div>
                 </div>
-                <div flex="33">
+                <div flex="45">
                     <md-input-container flex class="md-block">
                         <label>Interval</label>
                         <input ng-model="d.newEntry.medication_dosierung_interval">
@@ -125,7 +125,7 @@
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
-            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <div layout="row" layout-gt-xs="row" layout-align="start end" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
                 </div>
@@ -138,7 +138,7 @@
                 <md-input-container>
                     <label>Status</label>
                     <md-select ng-model="d.newEntry.medication_status">
-                        <md-option ng-repeat="status in d.medication_status" value="{{status}}">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
                             {{status.title}}
                         </md-option>
                     </md-select>
