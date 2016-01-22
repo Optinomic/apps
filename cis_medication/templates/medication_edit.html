@@ -41,10 +41,10 @@
         </div>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Medikament</p>
+            <p class="md-subhead">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <div>
-                    <md-input-container flex class="md-block flow-text">
+                <div flex>
+                    <md-input-container class="md-block flow-text">
                         <label>Medikament</label>
                         <input ng-model="d.newEntry.medication_name">
                     </md-input-container>
@@ -60,54 +60,89 @@
                     </md-input-container>
                 </div>
             </div>
+            <div>
+                <md-input-container flex class="md-block flow-text">
+                    <label>Bemerkungen</label>
+                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
+                </md-input-container>
+            </div>
         </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung</p>
+            <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div>
-                    <md-input-container flex class="md-block">
-                        <label>Start</label>
-                        <input ng-model="d.newEntry.medication_start_verordnung_datum">
-                    </md-input-container>
+                    <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                 </div>
-                <div>
+                <div flex>
                     <md-input-container flex class="md-block">
                         <label>Arzt / Visum</label>
                         <input ng-model="d.newEntry.medication_start_verordnung_user">
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <p class="md-subhead">Dosierung | {{d.newEntry.medication_name}}</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                        <md-input-container class="md-block">
+                            <label>Morgen</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mo" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Mittag</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mi" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Abend</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_ab" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Nacht</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_na" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex="33">
+                    <md-input-container flex class="md-block">
+                        <label>Interval</label>
+                        <input ng-model="d.newEntry.medication_dosierung_interval">
                     </md-input-container>
                 </div>
             </div>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Dosierung</p>
+            <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div>
-                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                        <md-input-container class="md-block">
-                            <label>Mo</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mo" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Mi</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mi" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Ab</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_ab" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Na</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_na" />
-                        </md-input-container>
-                    </div>
+                    <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
                 </div>
-                <div>
+                <div flex>
                     <md-input-container flex class="md-block">
-                        <label>Interval</label>
-                        <input ng-model="d.newEntry.medication_dosierung_interval">
+                        <label>Arzt / Visum</label>
+                        <input ng-model="d.newEntry.medication_stop_verordnung_user">
                     </md-input-container>
                 </div>
+                <md-input-container>
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
             </div>
         </md-card-content>
         <md-divider ng-if="d.appInit.debug"></md-divider>
