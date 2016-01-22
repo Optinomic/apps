@@ -43,11 +43,10 @@ website = http://www.optinomic.com/
 <div ng-if="d.appState === 'show'">
     <md-content class="md-padding">
     <div ng-repeat="entry in d.medication | orderBy:d.appInit.sortStr | filter:d.appInit.filter">
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
             <div flex>
                 <a target="_blank" ng-href="{{entry.url_compendium}}">
-                    <span class="small" style="color:#9E9E9E">-</span>
-                    <p class="flow-text">{{entry.medication_name}}</p>
+                    <p class="flow-text"><span class="small" style="color:#9E9E9E">-</span> {{entry.medication_name}}</p>
                 </a>
             </div>
             <div>
