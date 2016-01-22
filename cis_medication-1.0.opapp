@@ -142,7 +142,7 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
+            <p class="md-caption">&nbsp;Medikamentenkatalog</p>
         </md-card-content>
         <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
@@ -214,7 +214,7 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
+            <p class="md-caption">&nbsp;Medikamentenkatalog</p>
         </md-card-content>
         <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
