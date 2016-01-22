@@ -108,8 +108,8 @@ website = http://www.optinomic.com/
                 <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
                     <md-item-template>
                         <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
-                    - {{item.medi_name}}
-                    </span>
+                        - {{item.medi_name}} | {{item.medi_code}}
+                        </span>
                     </md-item-template>
                     <md-not-found>
                         <div ng-init="d.appInit.medi_not_found = true">
@@ -125,7 +125,7 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
         <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
             <p>&nbsp;</p>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+            <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
             </md-button>
         </md-card-content>
@@ -186,8 +186,8 @@ website = http://www.optinomic.com/
                 <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
                     <md-item-template>
                         <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
-                    - {{item.medi_name}}
-                    </span>
+                        - {{item.medi_name}} | {{item.medi_code}}
+                        </span>
                     </md-item-template>
                     <md-not-found>
                         <div ng-init="d.appInit.medi_not_found = true">
@@ -203,7 +203,7 @@ website = http://www.optinomic.com/
         <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
         <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
             <p>&nbsp;</p>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+            <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
             </md-button>
         </md-card-content>
