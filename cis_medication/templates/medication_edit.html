@@ -65,13 +65,17 @@
                     <label>Bemerkungen</label>
                     <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
                 </md-input-container>
+                <div flex="15">
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
+                </div>
             </div>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                 <p class="md-subhead">Verordnung (Start)</p>
-                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
@@ -99,7 +103,7 @@
         <md-card-content ng-if="d.newEntry.medication_selected">
             <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                 <p class="md-subhead">Dosierung</p>
-                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div>
@@ -134,7 +138,7 @@
         <md-card-content ng-if="d.newEntry.medication_selected">
             <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                 <p class="md-subhead">Verordnung (Stop)</p>
-                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
@@ -167,7 +171,7 @@
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-            <p class="md-caption">Medikamentenkatalog</p>
+            <p class="md-caption">Medikamenten-Katalog</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
