@@ -111,11 +111,8 @@ website = http://www.optinomic.com/
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found>
+                    <md-not-found ng-click="entryCancel()">
                         Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
-                        <md-button ng-if="d.newEntry.medication_selected" ng-click="entryCancel()" aria-label="Speichern" style="color: #3F51B5;">
-                            <i class="md-title mdi mdi-content-save"></i> Kein Standardmedikament
-                        </md-button>
                     </md-not-found>
                 </md-autocomplete>
             </div>
@@ -183,11 +180,8 @@ website = http://www.optinomic.com/
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found>
+                    <md-not-found ng-click="entryCancel()">
                         Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
-                        <md-button ng-if="d.newEntry.medication_selected" ng-click="entryCancel()" aria-label="Speichern" style="color: #3F51B5;">
-                            <i class="md-title mdi mdi-content-save"></i> Kein Standardmedikament
-                        </md-button>
                     </md-not-found>
                 </md-autocomplete>
             </div>
