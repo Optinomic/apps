@@ -20,14 +20,23 @@
                     - {{item.medi_name}}
                     </span>
                     </md-item-template>
-                    <md-not-found ng-click="entryCancel()">
-                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    <md-not-found ng-init="d.appInit.medi_not_found = true">
+                        <div ng-click="entryCancel()">
+                            Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                        </div>
                     </md-not-found>
                 </md-autocomplete>
             </div>
         </md-card-content>
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
+        </md-card-content>
+        <md-divider ng-if="d.appInit.medi_not_found"></md-divider>
+        <md-card-content ng-if="d.appInit.medi_not_found">
+            <p>&nbsp;</p>
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
+            </md-button>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
