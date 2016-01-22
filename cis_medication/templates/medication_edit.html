@@ -4,7 +4,7 @@
             <md-card-title-text>
                 <span class="md-headline ">
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
-                {{d.appInit.medi_not_found}}
+                {{d.appInit.querySearch(d.appInit.searchText).length}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
                 <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
