@@ -211,6 +211,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_bemerkungen: '',
                 medication_status: 0
             };
+
+            $scope.createLinks();
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
     }
@@ -452,14 +454,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
     };
 
-
-    $scope.entrySave = function() {
-        // Save
-
-        $scope.d.newEntry.uniqueid = dataService.uniqueid();
-
+    $scope.createLinks = function() {
         // Create URL's for nice lookup
-        var code_full = $scope.d.newEntry.medi_name;
+        var code_full = $scope.d.newEntry.medication_name;
         var code_dot = code_full.indexOf(' ');
         var code_parent = code_full.substring(0, code_dot);
 
@@ -473,6 +470,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.url_compendium = "https://compendium.ch/search/all/" + search_string + "/contains/de";
         $scope.d.newEntry.url_open_drug_db = "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/" + search_string + "/search_type/st_oddb#best_result";
 
+    };
+
+
+    $scope.entrySave = function() {
+        // Save
+
+        $scope.d.newEntry.uniqueid = dataService.uniqueid();
+        $scope.createLinks();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {

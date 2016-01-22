@@ -141,7 +141,7 @@ website = http://www.optinomic.com/
                     </md-input-container>
                 </div>
                 <div>
-                    <md-input-container>
+                    <md-input-container flex="15">
                         <label>Verabreichung</label>
                         <md-select ng-model="d.newEntry.medication_verabreichung">
                             <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
@@ -160,8 +160,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Start)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
@@ -221,8 +223,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Stop)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
@@ -326,7 +330,7 @@ website = http://www.optinomic.com/
                     </md-input-container>
                 </div>
                 <div>
-                    <md-input-container>
+                    <md-input-container flex="15">
                         <label>Verabreichung</label>
                         <md-select ng-model="d.newEntry.medication_verabreichung">
                             <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
@@ -345,8 +349,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Start)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
@@ -406,8 +412,10 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Stop)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
@@ -6106,6 +6114,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_bemerkungen: '',
                 medication_status: 0
             };
+
+            $scope.createLinks();
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
     }
@@ -6347,14 +6357,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
     };
 
-
-    $scope.entrySave = function() {
-        // Save
-
-        $scope.d.newEntry.uniqueid = dataService.uniqueid();
-
+    $scope.createLinks = function() {
         // Create URL's for nice lookup
-        var code_full = $scope.d.newEntry.medi_name;
+        var code_full = $scope.d.newEntry.medication_name;
         var code_dot = code_full.indexOf(' ');
         var code_parent = code_full.substring(0, code_dot);
 
@@ -6368,6 +6373,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.url_compendium = "https://compendium.ch/search/all/" + search_string + "/contains/de";
         $scope.d.newEntry.url_open_drug_db = "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/" + search_string + "/search_type/st_oddb#best_result";
 
+    };
+
+
+    $scope.entrySave = function() {
+        // Save
+
+        $scope.d.newEntry.uniqueid = dataService.uniqueid();
+        $scope.createLinks();
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {

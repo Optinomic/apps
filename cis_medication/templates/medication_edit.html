@@ -50,7 +50,7 @@
                     </md-input-container>
                 </div>
                 <div>
-                    <md-input-container>
+                    <md-input-container flex="15">
                         <label>Verabreichung</label>
                         <md-select ng-model="d.newEntry.medication_verabreichung">
                             <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
@@ -69,8 +69,10 @@
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Start) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Start)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
@@ -130,8 +132,10 @@
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
-            <p class="md-subhead">Verordnung (Stop) | {{d.newEntry.medication_name}}</p>
-            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Stop)</p>
+                <p class="md-caption">{{d.newEntry.medication_name}}</p>
+            </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <div>
                     <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
