@@ -507,26 +507,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         };
 
-        $scope.d.medication = {
-            "datestamp": "2016-01-22T20:31:50.098Z",
-            "user": 2,
-            "medication_name": "NEW2 SYMBICORT 100/6 Turbuhaler",
-            "medication_verabreichung": "oral",
-            "medication_start_verordnung_datum": "2016-01-22T20:31:50.098Z",
-            "medication_start_verordnung_user": 2,
-            "medication_dosierung_mo": 0,
-            "medication_dosierung_mi": 0,
-            "medication_dosierung_ab": 0,
-            "medication_dosierung_na": 2,
-            "medication_dosierung_interval": "",
-            "medication_stop_verordnung_datum": "",
-            "medication_stop_verordnung_user": "",
-            "medication_bemerkungen": "",
-            "medication_status": 0,
-            "url_compendium": "https://compendium.ch/search/all/SYMBICORT/contains/de",
-            "url_open_drug_db": "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/SYMBICORT/search_type/st_oddb#best_result"
-        };
-
         console.log('Try to save: ', $scope.d.medication);
         $scope.saveMedication();
     };
