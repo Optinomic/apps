@@ -125,6 +125,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.autofocus = true;
+        $scope.d.appInit.medi_not_found = false;
+
         $scope.d.appInit.show_controls = [];
 
         $scope.d.appInit.filter = '';

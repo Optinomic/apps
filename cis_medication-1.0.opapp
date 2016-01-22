@@ -95,6 +95,7 @@ website = http://www.optinomic.com/
             <md-card-title-text>
                 <span class="md-headline ">
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                {{d.appInit.medi_not_found}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
                 <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
@@ -173,6 +174,7 @@ website = http://www.optinomic.com/
             <md-card-title-text>
                 <span class="md-headline ">
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                {{d.appInit.medi_not_found}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
                 <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
@@ -5806,6 +5808,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.searchTextChange = searchTextChange;
         $scope.d.appInit.searchText = '';
         $scope.d.appInit.autofocus = true;
+        $scope.d.appInit.medi_not_found = false;
+
         $scope.d.appInit.show_controls = [];
 
         $scope.d.appInit.filter = '';
