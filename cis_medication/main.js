@@ -463,9 +463,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var search_string = "";
 
         if (code_dot !== -1) {
-            search_string = code_full;
-        } else {
             search_string = code_parent;
+        } else {
+            search_string = code_full;
         };
         $scope.d.newEntry.url_compendium = "https://compendium.ch/search/all/" + search_string + "/contains/de";
         $scope.d.newEntry.url_open_drug_db = "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/" + search_string + "/search_type/st_oddb#best_result";

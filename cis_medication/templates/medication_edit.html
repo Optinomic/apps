@@ -49,8 +49,8 @@
                         <input ng-model="d.newEntry.medication_name">
                     </md-input-container>
                 </div>
-                <div>
-                    <md-input-container flex="15">
+                <div flex="15">
+                    <md-input-container>
                         <label>Verabreichung</label>
                         <md-select ng-model="d.newEntry.medication_verabreichung">
                             <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
