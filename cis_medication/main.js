@@ -44,10 +44,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-    $scope.loadICD10Sheet = function() {
-        // Load ICD-10 Catalog and save them to $scope
-        // https://docs.google.com/spreadsheets/d/1PwRVRdExti7295w4OTalHllnkoBNxznTnuOBmNecRWo/pubhtml
-        var url = 'https://spreadsheets.google.com/feeds/list/1PwRVRdExti7295w4OTalHllnkoBNxznTnuOBmNecRWo/od6/public/values?alt=json'
+    $scope.loadMediCatalog = function() {
+        // Load Medication Catalog and save them to $scope
+
+        // https://docs.google.com/spreadsheets/d/1TLZqqd4_7h2z4CSrDNznEw5oepSCHEH2oMeWOBNa0wo/pubhtml
+        var url = 'https://spreadsheets.google.com/feeds/list/1TLZqqd4_7h2z4CSrDNznEw5oepSCHEH2oMeWOBNa0wo/od6/public/values?alt=json'
 
         var parse = function(entry) {
             //console.log('parse - loadTarmedSheet - entry: ', entry);
@@ -94,13 +95,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 var entries = response['feed']['entry'];
 
-                $scope.d.ICD10_all = [];
+                console.log('(!) loadMediCatalog', entries);
+
+                $scope.d.Medikamente_all = [];
                 entries.forEach(function(content, myindex) {
-                    $scope.d.ICD10_all.push(parse(content));
+                    //$scope.d.Medikamente_all.push(parse(content));
                 });
-                console.log('(!) ICD10_all', $scope.d.ICD10_all);
-                //$scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
-                $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+                console.log('(!) loadMediCatalog', $scope.d.Medikamente_all);
+
+                //$scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
+                $scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
 
 
                 //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
@@ -110,7 +114,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
                 // Set 'haveData' because we do not have a survey here!
-                $scope.d.loadedICD10Data = true;
+                $scope.d.loadedMedicationData = true;
 
             });
     };
@@ -130,7 +134,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     //};
 
     $scope.appInit = function() {
-        $scope.d.nodeTree = 'diagnoses';
+        $scope.d.nodeTree = 'medication';
 
         $scope.d.appInit = {};
         $scope.d.appInit.noCache = false;
@@ -143,14 +147,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.show_controls = [];
 
         $scope.d.appInit.filter = '';
-        $scope.d.appInit.predicate = 'diagn_rank';
+        $scope.d.appInit.predicate = '';
         $scope.d.appInit.reverse = false;
 
-        $scope.d.diagnoses = [];
+        $scope.d.medication = [];
 
         $scope.d.init = true;
         $scope.d.haveData = true;
-        $scope.d.loadedICD10Data = false;
+        $scope.d.loadedMedicationData = false;
         $scope.d.appState = 'show';
 
     };
@@ -206,7 +210,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 diagn: reduced_item,
                 diagn_selected: true,
-                diagn_rank: $scope.d.diagnoses.length + 1,
+                diagn_rank: $scope.d.medication.length + 1,
                 custom_text: item.icd_display
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
@@ -289,21 +293,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getEntrys = function() {
         // Get Data
 
-        $scope.d.diagnoses = [];
+        $scope.d.medication = [];
         var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
         api_call.then(function(data) {
 
             // Create Array if not already exists.
             if (dataService.isEmpty(data)) {
-                $scope.d.diagnoses = [];
+                $scope.d.medication = [];
             } else {
-                $scope.d.diagnoses = angular.copy(data);
+                $scope.d.medication = angular.copy(data);
             };
 
 
             $scope.d.appState = 'show';
 
-            console.log('(+) getEntrys ', $scope.d.diagnoses);
+            console.log('(+) getEntrys ', $scope.d.medication);
         });
     };
 
@@ -314,12 +318,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.showConfirm = function(ev, my_uid) {
         console.log('showConfirm: ', ev, my_uid);
 
-        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', my_uid);
+        var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', my_uid);
 
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
             .title('Verlaufseintrag löschen?')
-            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + $scope.d.diagnoses[myIndex].custom_text + ') löschen möchten?')
+            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + $scope.d.medication[myIndex].custom_text + ') löschen möchten?')
             .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
@@ -338,12 +342,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.loadICD10 = function() {
+    $scope.loadMedis = function() {
 
-        if ($scope.d.loadedICD10Data) {
-            $scope.d.appInit.repos = loadAll($scope.d.ICD10_all);
+        if ($scope.d.loadedMedicationData) {
+            $scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
         } else {
-            $scope.loadICD10Sheet();
+            $scope.loadMediCatalog();
         };
 
     };
@@ -373,7 +377,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             diagn_rank: null,
             custom_text: ""
         };
-        $scope.loadICD10();
+        $scope.loadMedis();
         $scope.d.appState = 'new';
     };
 
@@ -381,14 +385,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
 
-        var myIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
 
 
-        $scope.d.newEntry = angular.copy($scope.d.diagnoses[myIndex]);
+        $scope.d.newEntry = angular.copy($scope.d.medication[myIndex]);
         $scope.d.newEntry.datestamp_edit = new Date();
         $scope.d.newEntryID = myIndex;
 
-        $scope.loadICD10();
+        $scope.loadMedis();
         $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
         $scope.d.appState = 'edit';
@@ -407,18 +411,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Diagnose aufwerten
 
         // Diagnosen nach 'rank' sortieren
-        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank')
+        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank')
 
         // Rank anpassen
-        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var currentIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
 
         if (currentIndex !== 0) {
             var prevIndex = currentIndex - 1;
-            $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank - 1;
-            $scope.d.diagnoses[prevIndex].diagn_rank = $scope.d.diagnoses[prevIndex].diagn_rank + 1;
+            $scope.d.medication[currentIndex].diagn_rank = $scope.d.medication[currentIndex].diagn_rank - 1;
+            $scope.d.medication[prevIndex].diagn_rank = $scope.d.medication[prevIndex].diagn_rank + 1;
 
             $scope.saveDiagnoses();
-            console.log('entryUp', $scope.d.diagnoses[currentIndex], currentIndex, prevIndex);
+            console.log('entryUp', $scope.d.medication[currentIndex], currentIndex, prevIndex);
         };
 
     };
@@ -427,19 +431,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Diagnose abwerten
 
         // Diagnosen nach 'rank' sortieren
-        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank');
+        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank');
 
-        var max = $scope.d.diagnoses.length - 1;
-        var currentIndex = dataService.findIndex($scope.d.diagnoses, 'uniqueid', currentUID);
+        var max = $scope.d.medication.length - 1;
+        var currentIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
 
         // Rank anpassen
         if (currentIndex !== max) {
             var nextIndex = currentIndex + 1;
-            $scope.d.diagnoses[currentIndex].diagn_rank = $scope.d.diagnoses[currentIndex].diagn_rank + 1;
-            $scope.d.diagnoses[nextIndex].diagn_rank = $scope.d.diagnoses[nextIndex].diagn_rank - 1;
+            $scope.d.medication[currentIndex].diagn_rank = $scope.d.medication[currentIndex].diagn_rank + 1;
+            $scope.d.medication[nextIndex].diagn_rank = $scope.d.medication[nextIndex].diagn_rank - 1;
 
             $scope.saveDiagnoses();
-            console.log('entryDown', $scope.d.diagnoses[currentIndex], currentIndex, nextIndex);
+            console.log('entryDown', $scope.d.medication[currentIndex], currentIndex, nextIndex);
         };
 
 
@@ -447,12 +451,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
     $scope.entryDelete = function(my_index) {
-        $scope.d.diagnoses.splice(my_index, 1);
+        $scope.d.medication.splice(my_index, 1);
 
         // Diagnosen nach 'rank' sortieren
-        $scope.d.diagnoses = dataService.sortByKey($scope.d.diagnoses, 'diagn_rank');
+        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'diagn_rank');
         // Diagnosen neu hochnummerieren.
-        $scope.d.diagnoses.forEach(function(diagn, myindex) {
+        $scope.d.medication.forEach(function(diagn, myindex) {
             diagn.diagn_rank = myindex + 1;
         });
 
@@ -462,9 +466,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
     $scope.saveDiagnoses = function() {
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.diagnoses);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
         api_call.then(function(data) {
-            console.log('(+) saveDiagnoses - success: ', $scope.d.diagnoses);
+            console.log('(+) saveDiagnoses - success: ', $scope.d.medication);
 
             // Update Entrys
             $scope.d.appState = 'show';
@@ -496,7 +500,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
-            $scope.d.diagnoses.push($scope.d.newEntry);
+            $scope.d.medication.push($scope.d.newEntry);
 
             // Datum erweitern.
             var date = $scope.d.newEntry.datestamp;
@@ -510,7 +514,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.diagnoses[$scope.d.newEntryID] = $scope.d.newEntry;
+            $scope.d.medication[$scope.d.newEntryID] = $scope.d.newEntry;
 
             // Datum erweitern.
             var date = $scope.d.newEntry.datestamp_edit;
@@ -523,10 +527,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
-        console.log('Try to save @ putHisoryPost: ', $scope.d.diagnoses);
+        console.log('Try to save @ putHisoryPost: ', $scope.d.medication);
 
 
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.diagnoses);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
         api_call.then(function(data) {
             console.log('(+) entrySave - success: ', $scope.d.newEntry);
 
