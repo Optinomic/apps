@@ -177,7 +177,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 medication: item,
                 medication_selected: true,
-                diagn_rank: $scope.d.medication.length + 1
+                medi_name: item.medi_name
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
