@@ -31,8 +31,8 @@
         <md-card-content>
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
         </md-card-content>
-        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0"></md-divider>
-        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length > 0">
+        <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
             <p>&nbsp;</p>
             <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> {{d.appInit.searchText}} als "kein Standardmedikament" erfassen.
