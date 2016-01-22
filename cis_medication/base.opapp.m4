@@ -1,7 +1,7 @@
 [module]
 id = com.optinomic.cis.medication
-name = Diagnosen
-short_description = Medikamente
+name = Medikamente
+short_description = Medikamente (Verodnung, Reserve, Reserveanwendung)
 version = include(VERSION)
 type = patient
 
