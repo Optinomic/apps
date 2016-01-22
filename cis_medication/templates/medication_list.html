@@ -1,42 +1,30 @@
 <md-content class="md-padding">
-    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.medication | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+    <div ng-repeat="entry in d.medication | orderBy:d.appInit.sortStr | filter:d.appInit.filter">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <div>
-                <p class="flow-text">{{entry.diagn_rank}}.</p>
-            </div>
-            <div flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
-                <md-button ng-if="entry.diagn_rank !== 1" class="md-icon-button" ng-click="entryUp(entry.uniqueid)" aria-label="Up" style="color: #3F51B5;">
-                    <i class="md-title mdi mdi-menu-up"></i>
-                    <md-tooltip md-direction="top">
-                        Diagnose aufwerten
-                    </md-tooltip>
-                </md-button>
-                <md-button ng-if="entry.diagn_rank !== d.diagnoses.length" class="md-icon-button" ng-click="entryDown(entry.uniqueid)" aria-label="Down" style="color: #3F51B5;">
-                    <i class="md-title mdi mdi-menu-down"></i>
-                    <md-tooltip md-direction="bottom">
-                        Diagnose abwerten
-                    </md-tooltip>
-                </md-button>
-            </div>
             <div flex>
-                <a target="_blank" ng-href="{{entry.icd_url_info}}">
-                    <p class="flow-text">{{entry.custom_text}}</p>
+                <a target="_blank" ng-href="{{entry.url_compendium}}">
+                    <p class="flow-text">{{entry.medication_name}}</p>
                 </a>
             </div>
-            <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
-                &nbsp;
+            <div>
+                <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                    <p class="flow-text">{{entry.medication_dosierung_mo}}</p>
+                    <p class="flow-text">{{entry.medication_dosierung_mi}}</p>
+                    <p class="flow-text">{{entry.medication_dosierung_ab}}</p>
+                    <p class="flow-text">{{entry.medication_dosierung_na}}</p>
+                </div>
             </div>
             <div flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
                 <md-button class="md-icon-button " ng-click="showConfirm($event, entry.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
                     <i class="md-title mdi mdi-delete "></i>
                     <md-tooltip md-direction="bottom">
-                        Diagnose löschen
+                        Medikament löschen
                     </md-tooltip>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-pencil"></i>
                     <md-tooltip md-direction="bottom">
-                        Diagnose bearbeiten
+                        Medikament bearbeiten
                     </md-tooltip>
                 </md-button>
             </div>

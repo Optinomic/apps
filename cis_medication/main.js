@@ -129,8 +129,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.show_controls = [];
 
         $scope.d.appInit.filter = '';
-        $scope.d.appInit.predicate = '';
-        $scope.d.appInit.reverse = false;
+        $scope.d.appInit.sortStr = '[medication_status, medication_name]';
 
         $scope.d.medication = [];
 
