@@ -52,40 +52,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var parse = function(entry) {
             //console.log('parse - loadTarmedSheet - entry: ', entry);
-            var icd_id = entry['gsx$id']['$t'];
-            var icd_code = entry['gsx$code']['$t'];
-            var icd_parent = entry['gsx$parent']['$t'];
-            var icd_titel = entry['gsx$titel']['$t'];
-            var icd_titel_orig = entry['gsx$titelorig']['$t'];
-            var icd_valid_from = entry['gsx$validfrom']['$t'];
-            var icd_valid_to = entry['gsx$validto']['$t'];
-            var icd_class = entry['gsx$class']['$t'];
-            var icd_annotation = entry['gsx$annotation']['$t'];
-            var icd_application = entry['gsx$application']['$t'];
-            var icd_exklusiva = entry['gsx$exklusiva']['$t'];
-            var icd_precision = entry['gsx$precision']['$t'];
-            var icd_inklusiva = entry['gsx$inklusiva']['$t'];
-            var icd_note = entry['gsx$note']['$t'];
-            var icd_display = icd_titel + ", " + icd_code;
-            //var value = icd_code + ", " + icd_titel;
-            //value = value.toLowerCase();
+            var medi_order = entry['gsx$reihenfolge']['$t'];
+            var medi_code = entry['gsx$pharmacode']['$t'];
+            var medi_name = entry['gsx$bezeichnung']['$t'];
+            var medi_info = entry['gsx$zusatz']['$t'];
+            var medi_activated = entry['gsx$aktiviert']['$t'];
 
             return {
-                icd_id: icd_id,
-                icd_code: icd_code,
-                icd_parent: icd_parent,
-                icd_titel: icd_titel,
-                icd_titel_orig: icd_titel_orig,
-                icd_valid_from: icd_valid_from,
-                icd_valid_to: icd_valid_to,
-                icd_class: icd_class,
-                icd_annotation: icd_annotation,
-                icd_application: icd_application,
-                icd_exklusiva: icd_exklusiva,
-                icd_precision: icd_precision,
-                icd_inklusiva: icd_inklusiva,
-                icd_note: icd_note,
-                icd_display: icd_display
+                medi_order: medi_order,
+                medi_code: medi_code,
+                medi_name: medi_name,
+                medi_info: medi_info,
+                medi_activated: medi_activated
             };
         }
 
@@ -95,11 +73,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 var entries = response['feed']['entry'];
 
-                console.log('(!) loadMediCatalog', entries);
-
                 $scope.d.Medikamente_all = [];
                 entries.forEach(function(content, myindex) {
-                    //$scope.d.Medikamente_all.push(parse(content));
+                    $scope.d.Medikamente_all.push(parse(content));
                 });
                 console.log('(!) loadMediCatalog', $scope.d.Medikamente_all);
 
@@ -190,28 +166,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry = {
                 datestamp: new Date(),
                 user: $scope.d.dataMain.users.current.id,
-                diagn: {},
-                diagn_selected: false,
-                diagn_rank: null,
-                custom_text: ""
+                medication: {},
+                medication_selected: false
             };
         } else {
             // Create JSON to save
-            var reduced_item = {
-                icd_class: item.icd_class,
-                icd_code: item.icd_code,
-                icd_display: item.icd_display,
-                icd_id: item.icd_id,
-                icd_titel: item.icd_titel
-            }
 
             $scope.d.newEntry = {
                 datestamp: new Date(),
                 user: $scope.d.dataMain.users.current.id,
-                diagn: reduced_item,
-                diagn_selected: true,
-                diagn_rank: $scope.d.medication.length + 1,
-                custom_text: item.icd_display
+                medication: item,
+                medication_selected: true,
+                diagn_rank: $scope.d.medication.length + 1
             };
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
@@ -221,10 +187,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
      * Build `components` list of key/value pairs
      */
     function loadAll(catalog) {
-        return catalog.map(function(diagn) {
-            diagn._lowerCode = diagn.icd_code.toLowerCase();
-            diagn._lowerTitel = diagn.icd_titel.toLowerCase();
-            return diagn;
+        return catalog.map(function(entry) {
+            entry._lowerCode = entry.medi_code.toLowerCase();
+            entry._lowerName = entry.medi_name.toLowerCase();
+            return entry;
         });
     }
 
@@ -234,7 +200,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     function createFilterFor(query) {
         var lowercaseQuery = angular.lowercase(query);
         return function filterFn(item) {
-            return (item._lowerTitel.indexOf(lowercaseQuery) >= 0) ||
+            return (item._lowerName.indexOf(lowercaseQuery) >= 0) ||
                 (item._lowerCode.indexOf(lowercaseQuery) === 0);
         };
     }

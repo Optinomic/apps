@@ -6,22 +6,23 @@
                     {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
-                <span ng-if="d.appState === 'edit'" class="md-subhead">Diagnose bearbeiten</span>
-                <span ng-if="d.appState === 'new'" class="md-subhead">Diagnose hinzufügen</span>
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Medikament hinzufügen</span>
                 </span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content ng-if="d.loadedICD10Data">
+        <md-card-content ng-if="d.loadedMedicationData">
             <div>
                 <p>&nbsp;</p>
-                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie eine ICD-10 Diagnose">
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.icd_display" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
                     <md-item-template>
                         <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
-                    - {{item.icd_display}}
+                    - {{item.medi_name}}
                     </span>
                     </md-item-template>
                     <md-not-found>
-                        Keine Diagnosen "{{d.appInit.searchText}}" konnten gefunden werden.
+                        <p>Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.</p>
+                        <p>Medikament erfassen.</p>
                     </md-not-found>
                 </md-autocomplete>
             </div>
@@ -34,7 +35,7 @@
             <p>&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <md-input-container flex class="md-block flow-text">
-                    <label>Diagnose - Beschriftung</label>
+                    <label>Medikament - Beschriftung</label>
                     <textarea ng-model="d.newEntry.custom_text" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
@@ -70,11 +71,11 @@
                 {{d.newEntry | json}}
             </pre>
         </md-card-content>
-        <md-card-content ng-if="!d.loadedICD10Data">
+        <md-card-content ng-if="!d.loadedMedicationData">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
             <p class="md-caption">&nbsp;&nbsp;ICD-10</p>
         </md-card-content>
-        <md-card-actions ng-if="d.loadedICD10Data" layout-gt-xs="row" layout-align="start center">
+        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
