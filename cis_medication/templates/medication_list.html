@@ -1,7 +1,7 @@
 <md-content class="md-padding">
     <div ng-repeat="entry in d.medication | orderBy:d.appInit.sortStr | filter:d.appInit.filter">
         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <div flex>
+            <div>
                 <a target="_blank" ng-href="{{entry.url_compendium}}">
                     <p class="flow-text"><span class="small" style="color:#9E9E9E">-</span> {{entry.medication_name}}</p>
                 </a>
@@ -17,6 +17,7 @@
                     <p class="flow-text">{{entry.medication_dosierung_na}}</p>
                 </div>
             </div>
+            <span flex> &nbsp;</span>
             <div flex="15">
                 <md-button class="md-icon-button " ng-click="showConfirm($event, entry.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
                     <i class="md-title mdi mdi-delete "></i>
