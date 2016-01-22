@@ -112,9 +112,7 @@ website = http://www.optinomic.com/
                         </span>
                     </md-item-template>
                     <md-not-found>
-                        <div ng-init="d.appInit.medi_not_found = true">
-                            {{d.appInit.medi_not_found}} Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
-                        </div>
+                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
                     </md-not-found>
                 </md-autocomplete>
             </div>
@@ -126,7 +124,7 @@ website = http://www.optinomic.com/
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
-                <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                <md-button ng-click="entryNotDefaultMedication()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
                 </md-button>
             </md-card-content>
@@ -193,9 +191,7 @@ website = http://www.optinomic.com/
                         </span>
                     </md-item-template>
                     <md-not-found>
-                        <div ng-init="d.appInit.medi_not_found = true">
-                            {{d.appInit.medi_not_found}} Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
-                        </div>
+                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
                     </md-not-found>
                 </md-autocomplete>
             </div>
@@ -207,7 +203,7 @@ website = http://www.optinomic.com/
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
-                <md-button ng-click="entrySave()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                <md-button ng-click="entryNotDefaultMedication()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
                 </md-button>
             </md-card-content>
@@ -6065,6 +6061,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Cancel
         $scope.d.appState = 'settings';
     };
+
+
+
+    $scope.entryNotDefaultMedication = function() {
+        $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
+    };
+
 
     $scope.entryUp = function(currentUID) {
         // Diagnose aufwerten

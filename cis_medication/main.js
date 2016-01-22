@@ -379,6 +379,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'settings';
     };
 
+
+
+    $scope.entryNotDefaultMedication = function() {
+        $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
+    };
+
+
     $scope.entryUp = function(currentUID) {
         // Diagnose aufwerten
 
