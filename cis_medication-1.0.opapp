@@ -124,7 +124,7 @@ website = http://www.optinomic.com/
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
-                <md-button ng-click="entryNotDefaultMedication()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
                 </md-button>
             </md-card-content>
@@ -203,7 +203,7 @@ website = http://www.optinomic.com/
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
-                <md-button ng-click="entryNotDefaultMedication()" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
                 </md-button>
             </md-card-content>
@@ -6064,7 +6064,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-    $scope.entryNotDefaultMedication = function() {
+    $scope.entryNotDefaultMedication = function(new_medication_name) {
 
         var not_default = {
             "medi_order": "999999",
@@ -6076,11 +6076,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             "_lowerName": "kein standardmedikament (bitte spezifizieren)"
         };
 
-        $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
+        // $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
         $scope.d.appInit.selectedItem = not_default;
         $scope.d.newEntry.medication_selected = true;
         $scope.d.newEntry.medication = not_default;
-        $scope.d.newEntry.medi_name = "";
+        $scope.d.newEntry.medi_name = new_medication_name;
     };
 
 

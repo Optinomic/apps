@@ -381,7 +381,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-    $scope.entryNotDefaultMedication = function() {
+    $scope.entryNotDefaultMedication = function(new_medication_name) {
 
         var not_default = {
             "medi_order": "999999",
@@ -393,11 +393,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             "_lowerName": "kein standardmedikament (bitte spezifizieren)"
         };
 
-        $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
+        // $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
         $scope.d.appInit.selectedItem = not_default;
         $scope.d.newEntry.medication_selected = true;
         $scope.d.newEntry.medication = not_default;
-        $scope.d.newEntry.medi_name = "";
+        $scope.d.newEntry.medi_name = new_medication_name;
     };
 
 
