@@ -1699,6 +1699,37 @@ angular.module('optinomicDataModule')
         };
 
 
+        dataService.getPatientModuleAnnotations = function() {
+            var patient_id = dataService.getPatientID();
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putPatientModuleAnnotations = function() {
+            var patient_id = dataService.getPatientID();
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
+            return apiService.put(apiStr, {});
+        };
+
+
+        dataService.getModuleAnnotations = function() {
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/modules/' + module_identifier + '/patient_annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putModuleAnnotations = function() {
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/modules/' + module_identifier + '/annotations';
+            return apiService.put(apiStr, {});
+        };
+
 
         // -------------------------------------------------------------------------
         // Helper - Functions
@@ -2449,7 +2480,7 @@ angular.module('optinomicDataModule')
             if (api_direction === 'user') {
                 var api = dataService.getUserAnnotations();
             } else {
-                var api = dataService.getPatientAnnotations();
+                var api = dataService.getPatientModuleAnnotations();
             };
 
             var aPromise = dataService.getData(api);
@@ -2485,7 +2516,7 @@ angular.module('optinomicDataModule')
             if (api_direction === 'user') {
                 var api_read = dataService.getUserAnnotations();
             } else {
-                var api_read = dataService.getPatientAnnotations();
+                var api_read = dataService.getPatientModuleAnnotations();
             };
 
             var aPromise = dataService.getData(api_read);
@@ -2511,7 +2542,7 @@ angular.module('optinomicDataModule')
                 if (api_direction === 'user') {
                     var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
                 } else {
-                    var api_write = dataService.putPatientAnnotations(JSON.stringify(full_data));
+                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
                 };
 
                 var aPromise = dataService.getData(api_write);
