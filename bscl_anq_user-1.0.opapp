@@ -2158,6 +2158,7 @@ angular.module('optinomicDataModule')
                     var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
                 } else {
                     var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
+                    var api_write = dataService.putModuleAnnotations(JSON.stringify(full_data));
                 };
 
                 var aPromise = dataService.getData(api_write);
@@ -2169,7 +2170,7 @@ angular.module('optinomicDataModule')
                 }, function(error) {
                     // Error
                     deferred.reject(error);
-                    console.log('ERROR: putUserAnnotationsData', error);
+                    console.log('ERROR: saveAnnotationsData', error);
                 });
 
             });
