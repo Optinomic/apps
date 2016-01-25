@@ -1317,27 +1317,30 @@ angular.module('optinomicDataModule')
             return apiService.get(apiStr, {});
         };
 
-        dataService.putPatientModuleAnnotations = function() {
+        dataService.putPatientModuleAnnotations = function(json_value) {
             var patient_id = dataService.getPatientID();
             var module_identifier = dataService.getAppID();
-
             var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
-            return apiService.put(apiStr, {});
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
         };
 
 
         dataService.getModuleAnnotations = function() {
             var module_identifier = dataService.getAppID();
-
             var apiStr = '/modules/' + module_identifier + '/patient_annotations';
             return apiService.get(apiStr, {});
         };
 
-        dataService.putModuleAnnotations = function() {
+        dataService.putModuleAnnotations = function(json_value) {
             var module_identifier = dataService.getAppID();
-
             var apiStr = '/modules/' + module_identifier + '/annotations';
-            return apiService.put(apiStr, {});
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
         };
 
 
@@ -2096,8 +2099,8 @@ angular.module('optinomicDataModule')
             var aPromise = dataService.getData(api);
             aPromise.then(function(data) {
 
-                return_data = data.app === undefined ? {} : data.app;
-                return_data = return_data[app_id] === undefined ? {} : return_data[app_id];
+                // return_data = data.app === undefined ? {} : data.app;
+                // return_data = return_data[app_id] === undefined ? {} : return_data[app_id];
                 return_data = return_data[node_tree] === undefined ? {} : return_data[node_tree];
                 return_data = JSON.parse(JSON.stringify(return_data));
                 console.log('(!) getAnnotationsData - Success', return_data);
@@ -2142,9 +2145,11 @@ angular.module('optinomicDataModule')
 
 
                 // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
-                full_data.app = full_data.app === undefined ? {} : full_data.app;
-                full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
-                full_data.app[app_id][node_tree] = json_value;
+                //full_data.app = full_data.app === undefined ? {} : full_data.app;
+                //full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                //full_data.app[app_id][node_tree] = json_value;
+                full_data[node_tree] = full_data[node_tree] === undefined ? {} : full_data[node_tree];
+                full_data[node_tree] = json_value;
 
                 console.log('(!) saveAnnotationsData', api_direction, full_data);
 
