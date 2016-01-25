@@ -505,7 +505,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
             $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
-
+            $scope.d.newEntry.datestamp = $scope.d.newEntry.datestamp.toString();
         };
 
         // Save edited entry.
@@ -519,7 +519,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             $scope.d.newEntry.datestamp_edit_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
             $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
-
+            $scope.d.newEntry.datestamp_edit = $scope.d.newEntry.datestamp_edit.toString();
         };
 
 
