@@ -27864,13 +27864,13 @@ host = default
                             <span class="md-headline" style="color:#3F51B5">Die Depressions-Angst-Stress-Skalen (DASS)</span>
                             <span class="md-subhead" style="color:#9E9E9E">Screening auf Depressivität, Angst und Stress.</span>
                         </md-card-title-text>
-                        <md-card-content>
-                            <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche<b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden.</p>
-                        </md-card-content>
-                        <md-card-actions layout="row" layout-align="end center">
-                            <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
-                        </md-card-actions>
                     </md-card-title>
+                    <md-card-content>
+                        <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche</b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden.</p>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item === 1">
                     <md-card-title>
