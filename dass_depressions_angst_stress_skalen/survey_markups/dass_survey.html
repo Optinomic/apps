@@ -1,0 +1,353 @@
+<div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex="50" layout="column">
+            <div ng-hide="thankyou">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">1. Ich fand es schwer, mich zu beruhigen.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">2.) Ich spürte, dass mein Mund trocken war.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">3. Ich konnte überhaupt keine positiven Gefühle mehr erleben.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">4. Ich hatte Atemprobleme (z.B. übermäßig schnelles Atmen, Atemlosigkeit ohne körperliche Anstrengung). </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">5. Es fiel mir schwer, mich dazu aufzuraffen, Dinge zu erledigen.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">6. Ich tendierte dazu, auf Situationen überzureagieren. </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">7. Ich zitterte (z.B. an den Händen). </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">8. Ich fand alles anstrengend.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">9. Ich machte mir Sorgen über Situationen, in denen ich in Panik geraten und mich lächerlich machen könnte.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">10.  Ich hatte das Gefühl, dass ich mich auf nichts mehr freuen konnte.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">11. Ich bemerkte, dass ich mich schnell aufregte. </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">12. Ich fand es schwierig, mich zu entspannen.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">13. Ich fühlte mich niedergeschlagen und traurig.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">14. Ich reagierte ungehalten auf alles, was mich davon abhielt, meine momentane Tätigkeit fortzuführen. </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">15. Ich fühlte mich einer Panik nahe.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">16. Ich war nicht in der Lage, mich für irgendetwas zu begeistern.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">17. Ich fühlte mich als Person nicht viel wert.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">18. Ich fand mich ziemlich empfindlich.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">19.  Ich habe meinen Herzschlag gespürt, ohne dass ich mich körperlich angestrengt hatte (z.B. Gefühl von Herzrasen oder Herzstolpern).</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">20. Ich fühlte mich grundlos ängstlich. </span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">21. Ich empfand das Leben als sinnlos.</span>
+                            <span class="md-subhead">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
+                            <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                            </md-slider>
+                            <span class="md-caption">Legende:<br>
+                            0: Traf gar nicht auf mich zu<br>
+                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
+                            2: Traf in beträchtlichem Maße auf mich zu oder ziemlich oft<br>
+                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
+                        </span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="saveresult()">Speichern</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div ng-show="thankyou">
+                <h1 class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
