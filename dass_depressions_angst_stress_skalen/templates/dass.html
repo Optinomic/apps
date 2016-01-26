@@ -10,8 +10,9 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
-            <h3 class="md-subhead">Depression 
+            <h3 class="md-subhead">Depression
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <span class="md-caption text-muted">Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff}}</span>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
@@ -22,8 +23,13 @@ include(../lib/html/optinomic/page/start.m4)
                     <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="md-body-1">{{d.depression_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-content layout-margin>
+            <p>&nbsp;</p>
             <h3 class="md-subhead">Angst 
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <span class="md-caption text-muted">Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff}}</span>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
@@ -34,8 +40,13 @@ include(../lib/html/optinomic/page/start.m4)
                     <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="md-body-1">{{d.angst_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-content layout-margin>
+            <p>&nbsp;</p>
             <h3 class="md-subhead">Stress 
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <span class="md-caption text-muted">Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff}}</span>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
