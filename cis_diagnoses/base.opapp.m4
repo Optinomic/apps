@@ -22,7 +22,7 @@ include(templates/diagnoses.html)
 
 
 [template diagnoses_report 6 6]
-include(templates/diagnoses_report.html)
+include(templates/diagnoses_report_only.html)
 
 
 [dependencies]
