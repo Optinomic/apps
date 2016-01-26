@@ -13,7 +13,7 @@
                         <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche</b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden. {{result.current_item}} </p>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Start</md-button>
                     </md-card-actions>
                 </md-card>
                 <md-card ng-if="result.current_item === 1">
@@ -32,10 +32,12 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="result.current_item = result.current_item + 1">({{result.current_item}}) Weiter</md-button>
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
-                <md-card ng-if="result.current_item > 1">
+                <md-card ng-if="result.current_item === 2">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">2.) Ich spürte, dass mein Mund trocken war.</span>
@@ -51,10 +53,12 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
-                <md-card ng-if="result.current_item === '3'">
+                <md-card ng-if="result.current_item === 3">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">3. Ich konnte überhaupt keine positiven Gefühle mehr erleben.</span>
@@ -70,6 +74,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -89,6 +95,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -108,6 +116,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -127,6 +137,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -146,6 +158,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -165,6 +179,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -184,6 +200,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -203,6 +221,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -222,6 +242,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -241,6 +263,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -260,6 +284,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -279,6 +305,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -298,6 +326,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -317,6 +347,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -336,6 +368,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -355,6 +389,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -374,6 +410,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
@@ -393,6 +431,8 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
