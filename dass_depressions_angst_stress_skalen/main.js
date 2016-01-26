@@ -36,10 +36,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 // Run App-Functions:
                 $scope.setDataView();
-                $scope.setTimelineChartOptions();
-                $scope.setTscoreChart();
-                $scope.setStanineView();
-
 
             };
 
@@ -105,32 +101,43 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     // Ranges initialisieren
-    $scope.scale_ranges = {
+    $scope.depression_scale_range = {
         "ranges": [{
             "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
+            "to": 9,
+            "result": "Keine erhöhte Wahrscheinlichkeit für das Vorliegen einer depressiven Störung.",
             "result_color": "green"
         }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
+            "from": 10,
+            "to": 21,
+            "result": "Erhöhte Wahrscheinlichkeit für das Vorliegen einer depressiven Störung.",
+            "result_color": "green"
+        }]
+    };
+    $scope.angst_scale_range = {
+        "ranges": [{
+            "from": 0,
+            "to": 5,
+            "result": "Keine erhöhte Wahrscheinlichkeit für das Vorliegen einer Angststörung.",
             "result_color": "green"
         }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
+            "from": 7,
+            "to": 21,
+            "result": "Erhöhte Wahrscheinlichkeit für das Vorliegen einer Angststörung.",
+            "result_color": "green"
+        }]
+    };
+    $scope.depression_scale_range = {
+        "ranges": [{
+            "from": 0,
+            "to": 9,
+            "result": "Keine erhöhte Wahrscheinlichkeit für das Vorliegen einer stressbedingten Störung.",
+            "result_color": "green"
         }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
+            "from": 10,
+            "to": 21,
+            "result": "Erhöhte Wahrscheinlichkeit für das Vorliegen einer stressbedingten Störung.",
+            "result_color": "green"
         }]
     };
 
