@@ -1,6 +1,6 @@
 [module]
 id = com.optinomic.apps.dass
-name = Die Depressions-AngstStress-Skalen (DASS)
+name = Die Depressions-Angst-Stress-Skalen (DASS)
 short_description = Screening auf Depressivität, Angst und Stress.
 version = include(VERSION)
 type = patient
