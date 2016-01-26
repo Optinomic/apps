@@ -16,7 +16,7 @@
                         <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
-                <md-card ng-if="current_item == 1">
+                <md-card ng-if="current_item == '1'">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">{{current_item}}.) Ich fand es schwer, mich zu beruhigen.</span>
@@ -35,7 +35,7 @@
                         <md-button ng-click="current_item = current_item + 1">({{current_item}}) Weiter</md-button>
                     </md-card-actions>
                 </md-card>
-                <md-card ng-if="current_item == 2">
+                <md-card ng-if="current_item > 1">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">2.) Ich spürte, dass mein Mund trocken war.</span>
