@@ -1,7 +1,7 @@
-<div ng-init="current_item = 0">
+<div>
     <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
         <div flex="50" layout="column">
-            <div ng-hide="thankyou">
+            <div ng-hide="thankyou" ng-init="current_item = 0">
                 <md-card ng-if="current_item === 0">
                     <md-card-title>
                         <md-card-title-text>
@@ -10,10 +10,10 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content>
-                        <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche</b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden.</p>
+                        <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche</b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden. {{current_item}} </p>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-click="current_item = 1">Weiter</md-button>
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
                     </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item === 1">
@@ -21,7 +21,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">1. Ich fand es schwer, mich zu beruhigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_01" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_01" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -40,7 +40,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">2.) Ich spürte, dass mein Mund trocken war.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_02" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_02" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -56,7 +56,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">3. Ich konnte überhaupt keine positiven Gefühle mehr erleben.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_03" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_03" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -72,7 +72,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">4. Ich hatte Atemprobleme (z.B. übermäßig schnelles Atmen, Atemlosigkeit ohne körperliche Anstrengung). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_04" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_04" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -88,7 +88,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">5. Es fiel mir schwer, mich dazu aufzuraffen, Dinge zu erledigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_05" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_05" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -104,7 +104,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">6. Ich tendierte dazu, auf Situationen überzureagieren. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_06" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_06" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -120,7 +120,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">7. Ich zitterte (z.B. an den Händen). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_07" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_07" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -136,7 +136,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">8. Ich fand alles anstrengend.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_08" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_08" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -152,7 +152,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">9. Ich machte mir Sorgen über Situationen, in denen ich in Panik geraten und mich lächerlich machen könnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_09" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_09" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -168,7 +168,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">10.  Ich hatte das Gefühl, dass ich mich auf nichts mehr freuen konnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_10" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_10" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -184,7 +184,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">11. Ich bemerkte, dass ich mich schnell aufregte. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_11" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_11" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -200,7 +200,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">12. Ich fand es schwierig, mich zu entspannen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_12" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_12" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -216,7 +216,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">13. Ich fühlte mich niedergeschlagen und traurig.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_13" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_13" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -232,7 +232,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">14. Ich reagierte ungehalten auf alles, was mich davon abhielt, meine momentane Tätigkeit fortzuführen. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_14" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_14" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -248,7 +248,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">15. Ich fühlte mich einer Panik nahe.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_15" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_15" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -264,7 +264,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">16. Ich war nicht in der Lage, mich für irgendetwas zu begeistern.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_16" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_16" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -280,7 +280,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">17. Ich fühlte mich als Person nicht viel wert.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_17" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_17" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -296,7 +296,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">18. Ich fand mich ziemlich empfindlich.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_18" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_18" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -312,7 +312,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">19.  Ich habe meinen Herzschlag gespürt, ohne dass ich mich körperlich angestrengt hatte (z.B. Gefühl von Herzrasen oder Herzstolpern).</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_19" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_19" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -328,7 +328,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">20. Ich fühlte mich grundlos ängstlich. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_20" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_20" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
@@ -344,7 +344,7 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">21. Ich empfand das Leben als sinnlos.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_21" step="1" min="0" max="10" aria-label="score">
+                            <md-slider flex class="md-primary" ng-model="result.dass_item_21" step="1" min="0" max="10" aria-label="score">
                             </md-slider>
                             <span class="md-caption">Legende:<br>
                             0: Traf gar nicht auf mich zu<br>
