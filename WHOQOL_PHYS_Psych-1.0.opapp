@@ -32,12 +32,14 @@ website = http://www.optinomic.com/
 <div ng-init="d.navigator = 0">
     <md-card>
         <md-card-title layout-margin layout-padding>
-            <md-card-title-text>
-                <span class="md-subhead">Physische Lebensqualität</span>
-                <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
-                <span class="md-subhead">Psychische Lebensqualität</span>
-                <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
-            </md-card-title-text>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-subhead">Physische Lebensqualität</span>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <span class="md-subhead">Psychische Lebensqualität</span>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                </md-card-title-text>
+            </md-card-title>
             <md-card-actions layout="row" layout-align="start center">
                 <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
                     <i class="mdi mdi-chevron-left"></i>

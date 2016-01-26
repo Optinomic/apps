@@ -1,11 +1,16 @@
 include(../lib/html/optinomic/page/start.m4)
-<div layout="row" layout-align="start center">
-    <div hide-sm>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-    </div>
+<div>
+    <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+</div>
+<div ng-repeat="calculation in d.dataMain.calculations[0].calculation_result" layout="column" layout-gt-xs="column" layout-sm="column" layout-align="space-between stretch">
     <div flex>
-        <p>DASS</p>
-        <pre>{{d.dataMain.survey_responses.length}}</pre>
+        <h3 class="md-subhead">Depression</h3>
+        <score-threshold score="calculation.response.data.response.depression_scale_score" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
+        <h3 class="md-subhead">Angst</h3>
+        <score-threshold score="calculation.response.data.response.angst_scale_score" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
+        <h3 class="md-subhead">Stress</h3>
+        <score-threshold score="calculation.response.data.response.stress_scale_score" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
+        <p class="md-caption text-muted">{{calculation.response.data.filled}}</p>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
