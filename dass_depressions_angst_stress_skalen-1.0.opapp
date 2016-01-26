@@ -33,63 +33,63 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<md-content class="md-padding">
-    <md-card ng-repeat="calculation in d.dataMain.calculations[0].calculation_results">
+<md-content class="md-padding" ng-init="d.navigator = 0">
+    <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">
             <md-card-title-text>
                 <span class="md-headline ">
                     Die Depressions-Angst-Stress-Skalen (DASS)
                 </span>
-                <span class="md-subhead">{{calculation.response.data.filled}}</span>
+                <span class="md-subhead">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled}}</span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
             <p>&nbsp;</p>
             <h3 class="md-subhead">Depression 
-                <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex="35">
-                    <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex="65">
-                    <p ng-if="!calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[0].result}}</p>
-                    <p ng-if="calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[1].result}}</p>
+                    <p ng-if="!d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="flow-text">{{d.depression_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="flow-text">{{d.depression_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
             <h3 class="md-subhead">Angst 
-                <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex="35">
-                    <score-threshold score="calculation.angst_scale_score" scale-ranges="d.dangst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score" scale-ranges="d.dangst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex="65">
-                    <p ng-if="!calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[0].result}}</p>
-                    <p ng-if="calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[1].result}}</p>
+                    <p ng-if="!d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
             <h3 class="md-subhead">Stress 
-                <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <div flex="35">
-                    <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                <div flex="55">
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
-                <div flex="65">
-                    <p ng-if="!calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[0].result}}</p>
-                    <p ng-if="calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[1].result}}</p>
+                <div flex="45">
+                    <p ng-if="!d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="flow-text">{{d.stress_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="flow-text">{{d.stress_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
+                <i class="mdi mdi-chevron-left"></i>
             </md-button>
-            <span flex class="text-align:center;">{{calculation.response.data.filled}}</span>
-            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-bug"></i>
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_date}}, {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_time}} ({{d.navigator + 1}}/{{d.dataMain.calculations[0].calculation_results.length}})</p>
+            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
+                <i class="mdi mdi-chevron-right"></i>
             </md-button>
         </md-card-actions>
     </md-card>
@@ -5731,6 +5731,48 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }]
     };
 
+
+    // -----------------------------------
+    // Navigation
+    // -----------------------------------
+
+    $scope.d.navigator = 0;
+
+    $scope.setCurrentResultDate = function() {
+        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
+
+        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
+            'filled_datestamp': date,
+            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
+        };
+
+        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
+    };
+
+
+    $scope.prev = function() {
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
+
+        if ($scope.d.navigator === 0) {
+            $scope.d.navigator = count;
+        } else {
+            $scope.d.navigator = $scope.d.navigator - 1
+        };
+        $scope.setCurrentResultDate();
+    };
+
+    $scope.next = function() {
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
+
+        if (count === $scope.d.navigator) {
+            $scope.d.navigator = 0;
+        } else {
+            $scope.d.navigator = $scope.d.navigator + 1
+        };
+        $scope.setCurrentResultDate();
+
+    };
 
 
     // -----------------------------------
