@@ -1,22 +1,63 @@
 include(../lib/html/optinomic/page/start.m4)
-<div>
-    <h3 class="md-headline">Die Depressions-Angst-Stress-Skalen (DASS)</h3>
-</div>
-<div ng-repeat="calculation in d.dataMain.calculations[0].calculation_results" layout="column" layout-gt-xs="column" layout-sm="column" layout-align="space-between stretch">
-    <div flex>
-        <h3 class="md-subhead">Depression 
-            <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Angst 
-            <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.angst_scale_score" scale-ranges="d.angst_scale_range" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Stress
-            <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-min-max="true"></score-threshold>
-        <p class="md-caption text-muted">{{calculation.response.data.filled}}</p>
-    </div>
-</div>
+<md-content class="md-padding">
+    <md-card ng-repeat="calculation in d.dataMain.calculations[0].calculation_results">
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    Die Depressions-Angst-Stress-Skalen (DASS)
+                </span>
+                <span class="md-subhead">{{calculation.response.data.filled}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>&nbsp;</p>
+            <h3 class="md-subhead">Depression 
+                <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[0].result}}</p>
+                    <p ng-if="calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[1].result}}</p>
+                </div>
+            </div>
+            <h3 class="md-subhead">Angst 
+                <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.angst_scale_score" scale-ranges="d.dangst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[0].result}}</p>
+                    <p ng-if="calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[1].result}}</p>
+                </div>
+            </div>
+            <h3 class="md-subhead">Stress 
+                <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[0].result}}</p>
+                    <p ng-if="calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[1].result}}</p>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex class="text-align:center;">{{calculation.response.data.filled}}</span>
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
 include(../lib/html/optinomic/page/end.m4)

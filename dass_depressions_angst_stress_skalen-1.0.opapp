@@ -33,26 +33,67 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div>
-    <h3 class="md-headline">Die Depressions-Angst-Stress-Skalen (DASS)</h3>
-</div>
-<div ng-repeat="calculation in d.dataMain.calculations[0].calculation_results" layout="column" layout-gt-xs="column" layout-sm="column" layout-align="space-between stretch">
-    <div flex>
-        <h3 class="md-subhead">Depression 
-            <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Angst 
-            <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.angst_scale_score" scale-ranges="d.angst_scale_range" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Stress
-            <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-        </h3>
-        <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-min-max="true"></score-threshold>
-        <p class="md-caption text-muted">{{calculation.response.data.filled}}</p>
-    </div>
-</div>
+<md-content class="md-padding">
+    <md-card ng-repeat="calculation in d.dataMain.calculations[0].calculation_results">
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    Die Depressions-Angst-Stress-Skalen (DASS)
+                </span>
+                <span class="md-subhead">{{calculation.response.data.filled}}</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <p>&nbsp;</p>
+            <h3 class="md-subhead">Depression 
+                <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[0].result}}</p>
+                    <p ng-if="calculation.depression_cutoff_reached" class="flow-text">{{d.depression_scale_range[1].result}}</p>
+                </div>
+            </div>
+            <h3 class="md-subhead">Angst 
+                <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.angst_scale_score" scale-ranges="d.dangst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[0].result}}</p>
+                    <p ng-if="calculation.angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range[1].result}}</p>
+                </div>
+            </div>
+            <h3 class="md-subhead">Stress 
+                <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+            </h3>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="35">
+                    <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="65">
+                    <p ng-if="!calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[0].result}}</p>
+                    <p ng-if="calculation.stress_cutoff_reached" class="flow-text">{{d.stress_scale_range[1].result}}</p>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex class="text-align:center;">{{calculation.response.data.filled}}</span>
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -5680,176 +5721,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         "ranges": [{
             "from": 0,
             "to": 9,
-            "result": "Keine erhöhte Wahrscheinlichkeit für das Vorliegen einer stressbedingten Störung.",
+            "result": "Keine erhöhte Wahrscheinlichkeit für das Vorliegen einer Stressbelastung.",
             "result_color": "green"
         }, {
             "from": 10,
             "to": 21,
-            "result": "Erhöhte Wahrscheinlichkeit für das Vorliegen einer stressbedingten Störung.",
+            "result": "Erhöhte Wahrscheinlichkeit für das Vorliegen einer Stressbelastung.",
             "result_color": "green"
         }]
     };
 
-
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Tägliche Stimmung (∑)',
-            'focusField': 'score',
-            'dateField': 'filled',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function() {
-        var score_answer = [{
-            "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setTscoreChart = function() {
-
-        // Options
-        $scope.options_plot = {
-            'show_scores': true
-        };
-
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
-    };
-
-
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
-
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-    };
 
 
     // -----------------------------------
