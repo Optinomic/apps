@@ -30,7 +30,7 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="row" layout-align="start center">
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
     <div hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>

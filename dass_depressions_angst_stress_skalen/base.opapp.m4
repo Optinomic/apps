@@ -22,6 +22,9 @@ http://survey.demo.optinomic.org//surveys/6bb35ef1-8aa6-43cb-a094-7c0de9f2d24d
 http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
 
 
+[template data_survey_responses 6 7]
+include(templates/dass.html)
+
 
 [template data_survey_responses 6 7]
 include(templates/data.html)
