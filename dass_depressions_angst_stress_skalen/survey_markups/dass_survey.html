@@ -19,9 +19,9 @@
                 <md-card ng-if="result.current_item === 1">
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Ich fand es schwer, mich zu beruhigen.</span>
+                            <span class="md-headline" style="color:#3F51B5">1.) Ich fand es schwer, mich zu beruhigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = 0" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = result.dass_item_01 === undefined ? 0 : result.dass_item_01" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
