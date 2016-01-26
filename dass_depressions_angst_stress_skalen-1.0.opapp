@@ -27854,10 +27854,10 @@ name = Fragebogen: Die Depressions-AngstStress-Skalen (DASS)
 host = default
 
 [survey_markup dass_survey]
-<div>
+<div ng-init="current_item = 0">
     <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
         <div flex="50" layout="column">
-            <div ng-hide="thankyou" ng-init="current_item = 0">
+            <div ng-hide="thankyou">
                 <md-card ng-if="current_item == 0">
                     <md-card-title>
                         <md-card-title-text>
@@ -27875,7 +27875,7 @@ host = default
                 <md-card ng-if="current_item == 1">
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline" style="color:#3F51B5">1. Ich fand es schwer, mich zu beruhigen.</span>
+                            <span class="md-headline" style="color:#3F51B5">{{current_item}}.) Ich fand es schwer, mich zu beruhigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
                             <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_01" step="1" min="0" max="10" aria-label="DASS_Item">
                             </md-slider>
@@ -27886,10 +27886,10 @@ host = default
                             3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
                         </span>
                         </md-card-title-text>
-                        <md-card-actions layout="row" layout-align="end center">
-                            <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
-                        </md-card-actions>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">({{current_item}}) Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 2">
                     <md-card-title>
@@ -27906,6 +27906,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 3">
                     <md-card-title>
@@ -27922,6 +27925,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 4">
                     <md-card-title>
@@ -27938,6 +27944,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 5">
                     <md-card-title>
@@ -27954,6 +27963,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 6">
                     <md-card-title>
@@ -27970,6 +27982,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 7">
                     <md-card-title>
@@ -27986,6 +28001,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 8">
                     <md-card-title>
@@ -28002,6 +28020,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 9">
                     <md-card-title>
@@ -28018,6 +28039,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 10">
                     <md-card-title>
@@ -28034,6 +28058,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 11">
                     <md-card-title>
@@ -28050,6 +28077,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 12">
                     <md-card-title>
@@ -28066,6 +28096,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 13">
                     <md-card-title>
@@ -28082,6 +28115,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 14">
                     <md-card-title>
@@ -28098,6 +28134,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 15">
                     <md-card-title>
@@ -28114,6 +28153,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 16">
                     <md-card-title>
@@ -28130,6 +28172,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 17">
                     <md-card-title>
@@ -28146,6 +28191,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 18">
                     <md-card-title>
@@ -28162,6 +28210,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 19">
                     <md-card-title>
@@ -28178,6 +28229,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 20">
                     <md-card-title>
@@ -28194,6 +28248,9 @@ host = default
                         </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="current_item = current_item + 1">Weiter</md-button>
+                    </md-card-actions>
                 </md-card>
                 <md-card ng-if="current_item == 21">
                     <md-card-title>
