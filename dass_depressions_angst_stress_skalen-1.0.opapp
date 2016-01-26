@@ -19,11 +19,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-http://survey.demo.optinomic.org//surveys/6bb35ef1-8aa6-43cb-a094-7c0de9f2d24d
-http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
-
-
-[template dass_result 6 7]
+[template dass_result 6 9]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -53,7 +49,7 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
                     <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex="45">
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached  === false" class="flow-text">{{d.depression_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached === false" class="flow-text">{{d.depression_scale_range.ranges[0].result}}</p>
                     <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="flow-text">{{d.depression_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
@@ -62,11 +58,11 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex="55">
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score" scale-ranges="d.dangst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score" scale-ranges="d.angst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <divflex="45">
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached === false" class="flow-text">{{d.dangst_scale_range.ranges[0].result}}</p>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="flow-text">{{d.dangst_scale_range.ranges[1].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached === false" class="flow-text">{{d.angst_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="flow-text">{{d.angst_scale_range.ranges[1].result}}</p>
             </div>
             <h3 class="md-subhead">Stress 
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
@@ -76,7 +72,7 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
                     <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex="45">
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached  === false" class="flow-text">{{d.stress_scale_range.ranges[0].result}}</p>
+                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached === false" class="flow-text">{{d.stress_scale_range.ranges[0].result}}</p>
                     <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="flow-text">{{d.stress_scale_range.ranges[1].result}}</p>
                 </div>
             </div>
@@ -5625,6 +5621,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run App-Functions:
                 $scope.setDataView();
+                $scope.setCurrentResultDate();
 
             };
 

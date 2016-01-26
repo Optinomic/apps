@@ -18,11 +18,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-http://survey.demo.optinomic.org//surveys/6bb35ef1-8aa6-43cb-a094-7c0de9f2d24d
-http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
-
-
-[template dass_result 6 7]
+[template dass_result 6 9]
 include(templates/dass.html)
 
 

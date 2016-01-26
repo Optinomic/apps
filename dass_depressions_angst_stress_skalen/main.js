@@ -36,6 +36,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run App-Functions:
                 $scope.setDataView();
+                $scope.setCurrentResultDate();
 
             };
 
