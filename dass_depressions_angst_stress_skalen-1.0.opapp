@@ -38,11 +38,17 @@ http://survey.demo.optinomic.org//surveys/7f2906d3-3af1-4367-b497-6c88f9504783
 </div>
 <div ng-repeat="calculation in d.dataMain.calculations[0].calculation_results" layout="column" layout-gt-xs="column" layout-sm="column" layout-align="space-between stretch">
     <div flex>
-        <h3 class="md-subhead">Depression</h3>
-        <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Angst</h3>
+        <h3 class="md-subhead">Depression 
+            <i ng-if="calculation.depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+        </h3>
+        <score-threshold score="calculation.depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+        <h3 class="md-subhead">Angst 
+            <i ng-if="calculation.angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+        </h3>
         <score-threshold score="calculation.angst_scale_score" scale-ranges="d.angst_scale_range" min="0" max="21" show-percent-scale="true" show-min-max="true"></score-threshold>
-        <h3 class="md-subhead">Stress</h3>
+        <h3 class="md-subhead">Stress
+            <i ng-if="calculation.stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
+        </h3>
         <score-threshold score="calculation.stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-min-max="true"></score-threshold>
         <p class="md-caption text-muted">{{calculation.response.data.filled}}</p>
     </div>
@@ -5670,7 +5676,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "result_color": "green"
         }]
     };
-    $scope.d.depression_scale_range = {
+    $scope.d.stress_scale_range = {
         "ranges": [{
             "from": 0,
             "to": 9,

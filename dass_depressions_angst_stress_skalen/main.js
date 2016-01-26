@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "result_color": "green"
         }]
     };
-    $scope.d.depression_scale_range = {
+    $scope.d.stress_scale_range = {
         "ranges": [{
             "from": 0,
             "to": 9,
