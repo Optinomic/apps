@@ -101,7 +101,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     // Ranges initialisieren
-    $scope.depression_scale_range = {
+    $scope.d.depression_scale_range = {
         "ranges": [{
             "from": 0,
             "to": 9,
@@ -114,7 +114,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "result_color": "green"
         }]
     };
-    $scope.angst_scale_range = {
+    $scope.d.angst_scale_range = {
         "ranges": [{
             "from": 0,
             "to": 5,
@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "result_color": "green"
         }]
     };
-    $scope.depression_scale_range = {
+    $scope.d.depression_scale_range = {
         "ranges": [{
             "from": 0,
             "to": 9,
