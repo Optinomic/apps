@@ -27877,7 +27877,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Ich fand es schwer, mich zu beruhigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_01" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = 0" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27888,7 +27888,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -27898,7 +27898,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">2.) Ich spürte, dass mein Mund trocken war.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_02" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_02 = 0" ng-model="result.dass_item_02" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27909,7 +27909,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -27919,7 +27919,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">3. Ich konnte überhaupt keine positiven Gefühle mehr erleben.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_03" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_03 = 0" ng-model="result.dass_item_03" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27930,7 +27930,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -27940,7 +27940,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">4. Ich hatte Atemprobleme (z.B. übermässig schnelles Atmen, Atemlosigkeit ohne körperliche Anstrengung). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_04" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_04 = 0" ng-model="result.dass_item_04" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27951,7 +27951,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -27961,7 +27961,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">5. Es fiel mir schwer, mich dazu aufzuraffen, Dinge zu erledigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_05" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_05 = 0" ng-model="result.dass_item_05" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27972,7 +27972,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -27982,7 +27982,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">6. Ich tendierte dazu, auf Situationen überzureagieren. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_06" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_06 = 0" ng-model="result.dass_item_06" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -27993,7 +27993,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28003,7 +28003,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">7. Ich zitterte (z.B. an den Händen). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_07" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_07 = 0" ng-model="result.dass_item_07" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28014,7 +28014,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28024,7 +28024,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">8. Ich fand alles anstrengend.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_08" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_08 = 0" ng-model="result.dass_item_08" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28035,7 +28035,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28045,7 +28045,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">9. Ich machte mir Sorgen über Situationen, in denen ich in Panik geraten und mich lächerlich machen könnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_09" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_09 = 0" ng-model="result.dass_item_09" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28056,7 +28056,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28066,7 +28066,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">10.  Ich hatte das Gefühl, dass ich mich auf nichts mehr freuen konnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_10" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_10 = 0" ng-model="result.dass_item_10" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28077,7 +28077,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28087,7 +28087,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">11. Ich bemerkte, dass ich mich schnell aufregte. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_11" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_11 = 0" ng-model="result.dass_item_11" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28098,7 +28098,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28108,7 +28108,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">12. Ich fand es schwierig, mich zu entspannen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_12" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_12 = 0" ng-model="result.dass_item_12" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28119,7 +28119,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28129,7 +28129,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">13. Ich fühlte mich niedergeschlagen und traurig.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_13" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_13 = 0" ng-model="result.dass_item_13" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28140,7 +28140,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28150,7 +28150,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">14. Ich reagierte ungehalten auf alles, was mich davon abhielt, meine momentane Tätigkeit fortzuführen. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_14" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_14 = 0" ng-model="result.dass_item_14" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28161,7 +28161,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28171,7 +28171,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">15. Ich fühlte mich einer Panik nahe.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_15" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_15 = 0" ng-model="result.dass_item_15" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28182,7 +28182,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28192,7 +28192,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">16. Ich war nicht in der Lage, mich für irgendetwas zu begeistern.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_16" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_16 = 0" ng-model="result.dass_item_16" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28203,7 +28203,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28213,7 +28213,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">17. Ich fühlte mich als Person nicht viel wert.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_17" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_17 = 0" ng-model="result.dass_item_17" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28224,7 +28224,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28234,7 +28234,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">18. Ich fand mich ziemlich empfindlich.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_18" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_18 = 0" ng-model="result.dass_item_18" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28245,7 +28245,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28255,7 +28255,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">19.  Ich habe meinen Herzschlag gespürt, ohne dass ich mich körperlich angestrengt hatte (z.B. Gefühl von Herzrasen oder Herzstolpern).</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_19" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_19 = 0" ng-model="result.dass_item_19" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28266,7 +28266,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28276,7 +28276,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">20. Ich fühlte mich grundlos ängstlich. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_20" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_20 = 0" ng-model="result.dass_item_20" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
@@ -28287,7 +28287,7 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 21</p>
+                        <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
                     </md-card-actions>
@@ -28297,7 +28297,7 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">21. Ich empfand das Leben als sinnlos.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-model="result.dass_item_21" step="1" min="0" max="10" aria-label="DASS_Item">
+                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_21 = 0" ng-model="result.dass_item_21" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
                             <span class="md-caption">
                             0: Traf gar nicht auf mich zu<br>
