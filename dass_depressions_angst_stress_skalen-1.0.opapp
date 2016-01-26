@@ -28480,7 +28480,7 @@ function main(responses) {
             // Depression
             d.depression_scale_score = result.dass_item_03 + result.dass_item_05 + result.dass_item_10 + result.dass_item_13 + result.dass_item_16 + result.dass_item_17 + result.dass_item_21;
             d.depression_cutoff = 10;
-            d.depression_cutoff_reached = calc.checkCutOff(d.depression_scale_score, d.cutoff_depression);
+            d.depression_cutoff_reached = calc.checkCutOff(d.depression_scale_score, d.depression_cutoff);
 
             // Angst
             d.angst_scale_score = result.dass_item_02 + result.dass_item_04 + result.dass_item_07 + result.dass_item_09 + result.dass_item_15 + result.dass_item_19 + result.dass_item_20;
