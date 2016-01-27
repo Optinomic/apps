@@ -27910,22 +27910,26 @@ host = default
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content>
-                        <p class="md-caption text-muted">Legende: {{result.dass_item_01}}</p>
-                        <p ng-click="result.dass_item_01 = 0" class="md-body-1">
-                            0: Traf gar nicht auf mich zu
-                            <span ng-if="result.dass_item_01 = 0" style="color:#4CAF50; font-size:18px;">✓</span>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_01}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_01 = 0" href="">
+                                <span ng-if="result.dass_item_01 === 0" style="color:#4CAF50; font-size:18px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
                         </p>
-                        <p ng-click="result.dass_item_01 = 1" class="md-body-1">
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
-                            <span ng-if="result.dass_item_01 = 1" style="color:#4CAF50; font-size:18px;">✓</span>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_01 = 1" href="">
+                                <span ng-if="result.dass_item_01 === 1" style="color:#4CAF50; font-size:18px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
                         </p>
-                        <p ng-click="result.dass_item_01 = 2" class="md-body-1">
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
-                            <span ng-if="result.dass_item_01 = 2" style="color:#4CAF50; font-size:18px;">✓</span>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_01 = 2" href="">
+                                <span ng-if="result.dass_item_01 === 2" style="color:#4CAF50; font-size:18px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
                         </p>
-                        <p ng-click="result.dass_item_01 = 3" class="md-body-1">
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit
-                            <span ng-if="result.dass_item_01 = 3" style="color:#4CAF50; font-size:18px;">✓</span>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_01 = 3" href="">
+                                <span ng-if="result.dass_item_01 === 3" style="color:#4CAF50; font-size:18px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
                         </p>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
@@ -27939,16 +27943,33 @@ host = default
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">2.) Ich spürte, dass mein Mund trocken war.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_02 = result.dass_item_02 === undefined ? 0 : result.dass_item_02" ng-model="result.dass_item_02" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_02 = result.dass_item_02 === undefined ? 0 : result.dass_item_02" ng-model="result.dass_item_02" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_01}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_02 = 0" href="">
+                                <span ng-if="result.dass_item_02 === 0" style="color:#4CAF50; font-size:18px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_02 = 1" href="">
+                                <span ng-if="result.dass_item_02 === 1" style="color:#4CAF50; font-size:18px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_02 = 2" href="">
+                                <span ng-if="result.dass_item_02 === 2" style="color:#4CAF50; font-size:18px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_02 = 3" href="">
+                                <span ng-if="result.dass_item_02 === 3" style="color:#4CAF50; font-size:18px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
