@@ -27907,14 +27907,35 @@ host = default
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
                             <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = result.dass_item_01 === undefined ? 0 : result.dass_item_01" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                             </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <p class="md-caption text-muted">Legende:</p>
+                        <a ng-click="result.dass_item_01 = 0">
+                            <p class="md-body-1">
+                                0: Traf gar nicht auf mich zu
+                                <i ng-if="result.dass_item_01 = 0" class="mdi mdi-check" style="color:#4CAF50"></i>
+                            </p>
+                        </a>
+                        <a ng-click="result.dass_item_01 = 1">
+                            <p class="md-body-1">
+                                1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                                <i ng-if="result.dass_item_01 = 1" class="mdi mdi-check" style="color:#4CAF50"></i>
+                            </p>
+                        </a>
+                        <a ng-click="result.dass_item_01 = 2">
+                            <p class="md-body-1">
+                                2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                                <i ng-if="result.dass_item_01 = 2" class="mdi mdi-check" style="color:#4CAF50"></i>
+                            </p>
+                        </a>
+                        <a ng-click="result.dass_item_01 = 3">
+                            <p class="md-body-1">
+                                3: Traf sehr stark auf mich zu oder die meiste Zeit
+                                <i ng-if="result.dass_item_01 = 3" class="mdi mdi-check" style="color:#4CAF50"></i>
+                            </p>
+                        </a>
+                    </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
