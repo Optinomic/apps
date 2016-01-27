@@ -652,7 +652,6 @@ website = http://www.optinomic.com/
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
     </span>
 </p>
-<div ag-grid="d.grid_test" class="ag-optinomic" style="height: 100%; height: 410px;"></div>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
