@@ -529,11 +529,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             headerTooltip: "Morgen",
             headerName: "Morgen",
-            cellClass: 'md-body-2',
             suppressSizeToFit: true,
             width: 40,
-            valueGetter: 'parseInt(data.medication_dosierung_mo)',
-            filter: 'number'
+            field: "medication_dosierung_mo",
+            cellClass: 'md-body-2',
         }, {
             headerTooltip: "Mittag",
             headerName: "Mittag",
@@ -544,19 +543,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             headerTooltip: "Abend",
             headerName: "Abend",
-            cellClass: 'md-body-2',
             suppressSizeToFit: true,
             width: 40,
-            valueGetter: 'parseInt(medication_dosierung_ab)',
-            filter: 'number'
+            field: "medication_dosierung_ab",
+            cellClass: 'md-body-2',
+        }, {
+            headerTooltip: "Nacht",
+            headerName: "Nacht",
+            suppressSizeToFit: true,
+            width: 40,
+            field: "medication_dosierung_na",
+            cellClass: 'md-body-2',
         }];
-        console.log('Manually: my_columnDefs', my_columnDefs);
 
         my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
-        console.log('Auto: my_columnDefs', my_columnDefs);
 
         // Init
         $scope.d.grid = {};
+        $scope.d.grid.columnDefs = my_columnDefs;
+        $scope.d.grid.rowData = resultsArray;
 
         // DataView - Options
         $scope.d.grid.options = {
