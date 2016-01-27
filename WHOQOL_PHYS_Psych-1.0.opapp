@@ -437,6 +437,22 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     // Toast
     // -----------------------------------
 
+    $scope.getToastPosition = function() {
+        $scope.toastPosition = {
+            bottom: false,
+            top: true,
+            left: false,
+            right: true
+        };
+
+        return Object.keys($scope.toastPosition)
+            .filter(function(pos) {
+                return $scope.toastPosition[pos];
+            })
+            .join(' ');
+    };
+
+
     $scope.d.functions.showSimpleToast = function(mycontent) {
         $mdToast.show(
             $mdToast.simple()
