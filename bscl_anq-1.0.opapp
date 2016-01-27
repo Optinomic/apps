@@ -312,7 +312,7 @@ angular.module('optinomicDataModule').filter('date', function() {
 
 
 
-angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $filter, dataService, scopeDService, simpleStatistics) {
+angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $filter, $mdToast, dataService, scopeDService, simpleStatistics) {
 
     // -----------------------------------
     // Init
@@ -371,7 +371,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         };
     };
 
-    // Optinomic - Grip - Functions
+    // Optinomic - Grid - Functions
 
     $scope.d.functions.editValueHandler = function(params) {
         //If API-Safe success then update GRID:
@@ -517,6 +517,19 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         return DataView;
     };
 
+
+    // -----------------------------------
+    // Toast
+    // -----------------------------------
+
+    $scope.d.functions.showSimpleToast = function(mycontent) {
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(mycontent)
+            .position($scope.getToastPosition())
+            .hideDelay(3000)
+        );
+    };
 
     // -----------------------------------
     // Calculations

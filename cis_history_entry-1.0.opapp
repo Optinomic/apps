@@ -32,6 +32,7 @@ website = http://www.optinomic.com/
     <md-card style="background-color:#FFFDE7">
         <md-card-content>
             <div layout-margin>
+                <p>&nbsp;</p>
                 <md-input-container flex class="md-block flow-text">
                     <label>Notizen </label>
                     <textarea ng-model="d.historyEntrysNotes.notes" columns="1" rows="10" aria-label="Notizen"></textarea>
@@ -39,7 +40,7 @@ website = http://www.optinomic.com/
             </div>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
-            <p class="md-caption" style="color:#FDD835">{{d.historyEntrysNotes.datestamp.datum_day}}, {{d.historyEntrysNotes.datestamp.datum_time}}</p>
+            <p class="md-caption" style="color:#757575">{{d.historyEntrysNotes.datestamp.datum_day}}, {{d.historyEntrysNotes.datestamp.datum_time}}</p>
             <span flex></span>
             <md-button md-primary ng-click="clearNotes()" aria-label="Speichern">Löschen</md-button>
             <md-button md-accent ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
@@ -620,7 +621,7 @@ angular.module('optinomicDataModule').filter('date', function() {
 
 
 
-angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $filter, dataService, scopeDService, simpleStatistics) {
+angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $filter, $mdToast, dataService, scopeDService, simpleStatistics) {
 
     // -----------------------------------
     // Init
@@ -679,7 +680,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         };
     };
 
-    // Optinomic - Grip - Functions
+    // Optinomic - Grid - Functions
 
     $scope.d.functions.editValueHandler = function(params) {
         //If API-Safe success then update GRID:
@@ -825,6 +826,19 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         return DataView;
     };
 
+
+    // -----------------------------------
+    // Toast
+    // -----------------------------------
+
+    $scope.d.functions.showSimpleToast = function(mycontent) {
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent(mycontent)
+            .position($scope.getToastPosition())
+            .hideDelay(3000)
+        );
+    };
 
     // -----------------------------------
     // Calculations
@@ -6064,6 +6078,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Update Entrys
             $scope.getNotes();
             console.log('(+) saveNotes - success: ', $scope.d.historyEntrysNotes);
+
+            $scope.d.functions.showSimpleToast('Notitzen erfolgreich gespeichert');
         });
     };
 

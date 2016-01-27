@@ -210,6 +210,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Update Entrys
             $scope.getNotes();
             console.log('(+) saveNotes - success: ', $scope.d.historyEntrysNotes);
+
+            $scope.d.functions.showSimpleToast('Notitzen erfolgreich gespeichert');
         });
     };
 
