@@ -172,8 +172,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
-            headerName: "Make",
-            field: "make"
+            headerName: "Marke",
+            field: "medication_name"
         }, {
             headerName: "Model",
             field: "model"
@@ -183,15 +183,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         var rowData = [{
-            make: "Toyota",
+            medication_name: "Toyota",
             model: "Celica",
             price: 35000
         }, {
-            make: "Ford",
+            medication_name: "Ford",
             model: "Mondeo",
             price: 32000
         }, {
-            make: "Porsche",
+            medication_name: "Porsche",
             model: "Boxter",
             price: 72000
         }];
@@ -626,6 +626,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             rowSelection: 'single',
             showToolPanel: false,
             init_done: true
+        };
+
+        $scope.d.grid_test = {
+            columnDefs: my_columnDefs,
+            rowData: resultsArray
         };
 
         //console.log('dataGRID: ', $scope.d.grid);
