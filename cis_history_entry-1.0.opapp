@@ -29,16 +29,11 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <md-content ng-if="d.appState !== 'loading'">
-    <md-card>
-        <md-card-title style="background-color:#FAFAFA">
+    <md-card style="background-color:#FFFDE7">
+        <md-card-title style="background-color:#FFF9C4">
             <md-card-title-text>
-                <span class="md-headline">
+                <span class="md-subhead">
                     Notizen
-                </span>
-                <span class="md-subhead" style="margin-top: -12px; color:#757575;">
-                    <span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
-                    {{user.data.extras.full_name}}
-                    </span>
                 </span>
             </md-card-title-text>
         </md-card-title>
@@ -46,10 +41,10 @@ website = http://www.optinomic.com/
         <md-card-content>
             <div layout-margin>
                 <md-input-container flex class="md-block flow-text">
-                    <textarea ng-model="d.historyNewEntryNotes" columns="1" rows="10"></textarea>
+                    <textarea ng-model="d.historyNewEntryNotes.notes" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
-            <pre>{{d.historyEntrysNotes.notes}}</pre>
+            <pre>{{d.historyEntrysNotes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
             <span flex></span>
@@ -6043,7 +6038,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
 
 
-        $scope.d.historyEntrysNotes = [];
+        $scope.d.historyEntrysNotes = {};
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 

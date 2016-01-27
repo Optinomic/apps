@@ -198,7 +198,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
 
 
-        $scope.d.historyEntrysNotes = [];
+        $scope.d.historyEntrysNotes = {};
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
