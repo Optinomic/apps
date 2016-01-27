@@ -173,13 +173,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
     $scope.getNotes = function() {
-        $scope.d.historyEntrysNotes = {};
-        $scope.d.historyEntrysNotes.notes = '';
+
 
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
-            $scope.d.historyEntrysNotes.data = data;
+            // Create Object if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.historyEntrysNotes = {};
+                $scope.d.historyEntrysNotes.notes = '';
+            } else {
+                $scope.d.historyEntrysNotes = angular.copy(data);
+            };
 
             console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);
         });
