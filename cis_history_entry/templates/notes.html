@@ -1,27 +1,21 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.appState !== 'loading'">
     <md-card style="background-color:#FFFDE7">
-        <md-card-title style="background-color:#FFF9C4">
-            <md-card-title-text>
-                <span class="md-headline">
-                    Notizen
-                </span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-divider></md-divider>
         <md-card-content>
             <div layout-margin>
                 <md-input-container flex class="md-block flow-text">
-                    <textarea ng-model="d.historyEntrysNotes.notes" columns="1" rows="10"></textarea>
+                    <label>Notizen </label>
+                    <textarea ng-model="d.historyEntrysNotes.notes" columns="1" rows="10" aria-label="Notizen"></textarea>
                 </md-input-container>
             </div>
-            <pre>{{d.historyEntrysNotes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            <p class="md-caption" style="color:#FDD835">{{d.historyEntrysNotes.datestamp.datum_day}}, {{d.historyEntrysNotes.datestamp.datum_time}}</p>
             <span flex></span>
             <md-button md-primary ng-click="clearNotes()" aria-label="Speichern">Löschen</md-button>
-            <md-button md-primary ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
+            <md-button md-accent ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
         </md-card-actions>
     </md-card>
 </md-content>
+<div>&nbsp;</div>
 include(../lib/html/optinomic/page/end.m4)

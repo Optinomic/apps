@@ -191,6 +191,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
     $scope.saveNotes = function() {
+
+
+        var datestamp = {};
+
+        // Datestamp festhalten und erweitern.
+        var date = new Date();
+        datestamp.datum = date;
+        datestamp.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+        datestamp.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+        datestamp.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+        datestamp.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+        datestamp.datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        $scope.d.historyEntrysNotes.datestamp = datestamp;
+
         var api_call = dataService.saveAnnotationsData('patient', 'notes', $scope.d.historyEntrysNotes);
         api_call.then(function(data) {
             // Update Entrys
