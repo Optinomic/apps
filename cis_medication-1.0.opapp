@@ -6247,25 +6247,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-        $scope.d.grid = {};
-        $scope.d.grid.options = {
-            columnDefs: [],
-            dontUseScrolls: false,
-            enableCellExpressions: true,
-            enableColResize: true,
-            enableFilter: true,
-            enableSorting: true,
-            headerHeight: 45,
-            rowData: [],
-            rowHeight: 28,
-            rowSelection: 'single',
-            showToolPanel: false,
-            init_done: false
+        $scope.d.grid = {
+            options: {}
         };
-
-
-
-
 
     };
 
@@ -6672,25 +6656,51 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
 
 
+        var columnDefs = [{
+            headerName: "Make",
+            field: "make"
+        }, {
+            headerName: "Model",
+            field: "model"
+        }, {
+            headerName: "Price",
+            field: "price"
+        }];
+
+        var rowData = [{
+            make: "Toyota",
+            model: "Celica",
+            price: 35000
+        }, {
+            make: "Ford",
+            model: "Mondeo",
+            price: 32000
+        }, {
+            make: "Porsche",
+            model: "Boxter",
+            price: 72000
+        }];
+
+
         // DataView - Options
         $scope.d.grid.options = {
             //pinnedColumnCount: 1,
-            columnDefs: my_columnDefs,
+            columnDefs: columnDefs,
             dontUseScrolls: false,
             enableCellExpressions: true,
             enableColResize: true,
             enableFilter: true,
             enableSorting: true,
             headerHeight: 45,
-            rowData: resultsArray,
+            rowData: rowData,
             rowHeight: 28,
             rowSelection: 'single',
             showToolPanel: false,
             init_done: true
         };
 
-        $scope.d.grid.options.api.setDatasource(resultsArray);
-        $scope.d.grid.options.api.refreshView();
+        //$scope.d.grid.options.api.setDatasource(resultsArray);
+        //$scope.d.grid.options.api.refreshView();
         // $scope.d.functions.refreshView();
         //console.log('dataGRID: ', $scope.d.grid);
     };
