@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 [template medication_list 6 12]
 include(templates/medication.html)
 
-[template medication_list 6 8]
+[template medication_table 6 8]
 include(templates/medication_table.html)
 
 

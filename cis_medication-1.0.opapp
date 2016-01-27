@@ -611,7 +611,7 @@ website = http://www.optinomic.com/
 
 
 
-[template medication_list 6 8]
+[template medication_table 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
