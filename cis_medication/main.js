@@ -520,13 +520,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var resultsArray = $scope.d.medication;
 
-
-        // Init Responses
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = resultsArray;
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = [{
+        var columnDefs = [{
             headerTooltip: "Medikament",
             headerName: "Medikament",
             editable: true,
@@ -558,12 +552,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
+        // Init
+        $scope.d.grid = {};
+
         // DataView - Options
         $scope.d.grid.options = {
             headerHeight: 45,
             rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
+            rowData: resultsArray,
+            columnDefs: columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
@@ -573,6 +570,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             enableSorting: true,
             showToolPanel: false
         };
+
+        $scope.d.grid.init_done = true;
 
 
         //console.log('dataGRID: ', $scope.d.grid);

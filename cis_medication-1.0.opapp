@@ -621,20 +621,20 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
+<div ng-if="d.grid.init_done" layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
     <div hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div flex>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
-            <md-tooltip md-direction="top">
+            <md-tooltip md-direction="bottom">
                 Grösse anpassen
             </md-tooltip>
         </md-button>
         <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
             <i class="mdi mdi-table-edit"></i>
-            <md-tooltip md-direction="top">
+            <md-tooltip md-direction="bottom">
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
@@ -649,7 +649,7 @@ website = http://www.optinomic.com/
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
     <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
-        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
+        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
     </span>
 </p>
             </div>
@@ -6607,13 +6607,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var resultsArray = $scope.d.medication;
 
-
-        // Init Responses
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = resultsArray;
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = [{
+        var columnDefs = [{
             headerTooltip: "Medikament",
             headerName: "Medikament",
             editable: true,
@@ -6645,12 +6639,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
+        // Init
+        $scope.d.grid = {};
+
         // DataView - Options
         $scope.d.grid.options = {
             headerHeight: 45,
             rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
+            rowData: resultsArray,
+            columnDefs: columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
@@ -6660,6 +6657,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             enableSorting: true,
             showToolPanel: false
         };
+
+        $scope.d.grid.init_done = true;
 
 
         //console.log('dataGRID: ', $scope.d.grid);
