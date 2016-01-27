@@ -1310,6 +1310,8 @@ angular.module('optinomicDataModule')
 
 
         dataService.getPatientModuleAnnotations = function() {
+            // GET annotations on a module and a patient in particular
+
             var patient_id = dataService.getPatientID();
             var module_identifier = dataService.getAppID();
 
@@ -1317,7 +1319,19 @@ angular.module('optinomicDataModule')
             return apiService.get(apiStr, {});
         };
 
+        dataService.getAllPatientsModuleAnnotations = function() {
+            // to get the annotations of the above endpoint for ALL patients.
+
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/modules/' + module_identifier + '/patient_annotations';
+            return apiService.get(apiStr, {});
+        };
+
+
         dataService.putPatientModuleAnnotations = function(json_value) {
+            // PUT annotations on a module and a patient in particular
+
             var patient_id = dataService.getPatientID();
             var module_identifier = dataService.getAppID();
             var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
@@ -1329,12 +1343,16 @@ angular.module('optinomicDataModule')
 
 
         dataService.getModuleAnnotations = function() {
+            // GET annotations on modules, nothing to do with patients here
+
             var module_identifier = dataService.getAppID();
-            var apiStr = '/modules/' + module_identifier + '/patient_annotations';
+            var apiStr = '/modules/' + module_identifier + '/annotations';
             return apiService.get(apiStr, {});
         };
 
         dataService.putModuleAnnotations = function(json_value) {
+            // PUT annotations on modules, nothing to do with patients here
+
             var module_identifier = dataService.getAppID();
             var apiStr = '/modules/' + module_identifier + '/annotations';
             var body = {
