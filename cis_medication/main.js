@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
-            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -157,7 +156,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var columnDefs = [{
             headerName: "Make",
-            field: "make"
+            field: "medication_name"
         }, {
             headerName: "Model",
             field: "model"
@@ -183,7 +182,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid = {};
         $scope.d.grid.options = {};
         $scope.d.grid.options.columnDefs = columnDefs;
-        $scope.d.grid.options.rowData = rowData;
+        $scope.d.grid.options.rowData = [];
     };
 
 
@@ -332,8 +331,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             } else {
                 $scope.d.medication = angular.copy(data);
             };
+            $scope.setDataView();
 
-            $scope.d.grid.options.rowData = $scope.d.medication;
             $scope.d.appState = 'show';
 
             //console.log('(+) getEntrys ', $scope.d.medication);
@@ -627,7 +626,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.rowData = NEWrowData;
 
         //$scope.d.grid.options.api.setRowData(resultsArray);
-
 
 
         //$scope.d.grid.options.api.setDatasource(resultsArray);
