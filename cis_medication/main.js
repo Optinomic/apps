@@ -602,9 +602,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             rowData: rowData,
             rowHeight: 28,
             rowSelection: 'single',
-            showToolPanel: false,
-            init_done: true
+            showToolPanel: false
         };
+
+        $scope.d.grid.options.api.setRowData(rowData);
+
+
 
         //$scope.d.grid.options.api.setDatasource(resultsArray);
         //$scope.d.grid.options.api.refreshView();

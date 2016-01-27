@@ -621,7 +621,7 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div ng-if="d.grid.init_done" layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
     <div hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
@@ -6695,9 +6695,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             rowData: rowData,
             rowHeight: 28,
             rowSelection: 'single',
-            showToolPanel: false,
-            init_done: true
+            showToolPanel: false
         };
+
+        $scope.d.grid.options.api.setRowData(rowData);
+
+
 
         //$scope.d.grid.options.api.setDatasource(resultsArray);
         //$scope.d.grid.options.api.refreshView();
