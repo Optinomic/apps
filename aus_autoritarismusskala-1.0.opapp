@@ -2171,12 +2171,7 @@ angular.module('optinomicDataModule')
             var aPromise = dataService.getData(api);
             aPromise.then(function(data) {
 
-                console.log('(!) getAnnotationsData - Success - data', data);
-
-
-                // return_data = data.app === undefined ? {} : data.app;
-                // return_data = return_data[app_id] === undefined ? {} : return_data[app_id];
-                return_data = return_data[node_tree] === undefined ? {} : return_data[node_tree];
+                return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 return_data = JSON.parse(JSON.stringify(return_data));
                 console.log('(!) getAnnotationsData - Success', return_data);
                 deferred.resolve(return_data);
