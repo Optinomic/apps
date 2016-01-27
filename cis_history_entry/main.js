@@ -33,6 +33,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.getNotes();
             $scope.getHisoryEntrys();
 
 
@@ -171,7 +172,28 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     };
 
+    $scope.getNotes = function() {
+        $scope.d.historyEntrysNotes = {};
+        $scope.d.historyEntrysNotes.notes = '';
 
+        var api_call = dataService.getAnnotationsData('patient', 'notes');
+        api_call.then(function(data) {
+
+            $scope.d.historyEntrysNotes.data = data;
+
+            console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);
+        });
+
+    };
+
+    $scope.saveNotes = function() {
+        var api_call = dataService.saveAnnotationsData('patient', 'notes', $scope.d.historyEntrysNotes);
+        api_call.then(function(data) {
+            // Update Entrys
+            $scope.getNotes();
+            console.log('(+) saveHistory - success: ', $scope.d.historyEntrysNotes);
+        });
+    };
 
     $scope.getHisoryEntrys = function() {
         // Get Data
@@ -198,15 +220,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
 
 
-        $scope.d.historyEntrysNotes = {};
-        var api_call = dataService.getAnnotationsData('patient', 'notes');
-        api_call.then(function(data) {
-
-            $scope.d.historyEntrysNotes = angular.copy(data);
-            $scope.d.appState = 'show';
-
-            console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);
-        });
 
 
     };
@@ -262,17 +275,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.saveNotes = function() {
-        var api_call = dataService.saveAnnotationsData('patient', 'notes', $scope.d.historyEntrysNotes);
-        api_call.then(function(data) {
-            console.log('(+) saveHistory - success: ', $scope.d.historyEntrysNotes);
 
-            // Update Entrys
-            $scope.getHisoryEntrys();
-            $scope.d.appState = 'show';
-
-        });
-    };
 
 
 
