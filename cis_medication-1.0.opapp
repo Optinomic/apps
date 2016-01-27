@@ -611,6 +611,109 @@ website = http://www.optinomic.com/
 
 
 
+[template medication_list 6 8]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
+    <div hide-sm>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    </div>
+    <div flex>
+        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="top">
+                Grösse anpassen
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="top">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div>
+        <md-input-container class="md-primary">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
+            <input ng-model="d.grid.options.quickFilterText">
+        </md-input-container>
+    </div>
+</div>
+<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+<p class="small md-caption">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
+        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
+    </span>
+</p>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+        <p class="flow-text">&nbsp;</p>
+    </div>
+    <md-content>
+        <p class="md-body-2 text-muted">
+            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
+        </p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
+</script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
+</script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
+</script>
+
+</head>
+
+
 
 
 [javascript]
@@ -2582,7 +2685,7 @@ angular.module('optinomicDataModule')
 
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 return_data = JSON.parse(JSON.stringify(return_data));
-                console.log('(!) getAnnotationsData - Success', node_tree, return_data);
+                // console.log('(!) getAnnotationsData - Success', node_tree, return_data);
                 deferred.resolve(return_data);
 
             }, function(error) {
@@ -2630,7 +2733,7 @@ angular.module('optinomicDataModule')
                 full_data[node_tree] = full_data[node_tree] === undefined ? {} : full_data[node_tree];
                 full_data[node_tree] = json_value;
 
-                console.log('(!) saveAnnotationsData', api_direction, full_data);
+                // console.log('(!) saveAnnotationsData', api_direction, full_data);
 
                 // Save and proceed.
                 if (api_direction === 'user') {
@@ -6016,6 +6119,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Run App-Functions
             $scope.appInit();
             $scope.getEntrys();
+            $scope.setDataView();
 
 
             // Finishing: Console Info & Init = done.
@@ -6290,7 +6394,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             $scope.d.appState = 'show';
 
-            console.log('(+) getEntrys ', $scope.d.medication);
+            //console.log('(+) getEntrys ', $scope.d.medication);
         });
     };
 
@@ -6494,6 +6598,73 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Try to save: ', $scope.d.medication);
         $scope.saveMedication();
     };
+
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
+    $scope.setDataView = function() {
+
+
+        var resultsArray = $scope.d.medication;
+
+
+        // Init Responses
+        $scope.d.grid = {};
+        $scope.d.grid.rowData = resultsArray;
+
+        // automatic or manually like (columnDefsManually)
+        $scope.d.grid.columnDefs = [{
+            headerTooltip: "Medikament",
+            headerName: "Medikament",
+            editable: true,
+            field: "medication_name",
+            cellClass: 'md-body-1',
+        }, {
+            headerTooltip: "Morgen",
+            headerName: "Morgen",
+            cellClass: 'md-body-2',
+            suppressSizeToFit: true,
+            width: 40,
+            valueGetter: 'parseInt(data.medication_dosierung_mo)',
+            filter: 'number'
+        }, {
+            headerTooltip: "Mittag",
+            headerName: "Mittag",
+            suppressSizeToFit: true,
+            width: 40,
+            field: "medication_dosierung_mi",
+            cellClass: 'md-body-2',
+        }, {
+            headerTooltip: "Abend",
+            headerName: "Abend",
+            cellClass: 'md-body-2',
+            suppressSizeToFit: true,
+            width: 40,
+            valueGetter: 'parseInt(medication_dosierung_ab)',
+            filter: 'number'
+        }];
+
+
+        // DataView - Options
+        $scope.d.grid.options = {
+            headerHeight: 45,
+            rowHeight: 28,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false
+        };
+
+
+        //console.log('dataGRID: ', $scope.d.grid);
+    };
+
 
 
 });

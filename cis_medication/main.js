@@ -32,6 +32,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Run App-Functions
             $scope.appInit();
             $scope.getEntrys();
+            $scope.setDataView();
 
 
             // Finishing: Console Info & Init = done.
@@ -306,7 +307,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             $scope.d.appState = 'show';
 
-            console.log('(+) getEntrys ', $scope.d.medication);
+            //console.log('(+) getEntrys ', $scope.d.medication);
         });
     };
 
@@ -510,6 +511,73 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         console.log('Try to save: ', $scope.d.medication);
         $scope.saveMedication();
     };
+
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
+    $scope.setDataView = function() {
+
+
+        var resultsArray = $scope.d.medication;
+
+
+        // Init Responses
+        $scope.d.grid = {};
+        $scope.d.grid.rowData = resultsArray;
+
+        // automatic or manually like (columnDefsManually)
+        $scope.d.grid.columnDefs = [{
+            headerTooltip: "Medikament",
+            headerName: "Medikament",
+            editable: true,
+            field: "medication_name",
+            cellClass: 'md-body-1',
+        }, {
+            headerTooltip: "Morgen",
+            headerName: "Morgen",
+            cellClass: 'md-body-2',
+            suppressSizeToFit: true,
+            width: 40,
+            valueGetter: 'parseInt(data.medication_dosierung_mo)',
+            filter: 'number'
+        }, {
+            headerTooltip: "Mittag",
+            headerName: "Mittag",
+            suppressSizeToFit: true,
+            width: 40,
+            field: "medication_dosierung_mi",
+            cellClass: 'md-body-2',
+        }, {
+            headerTooltip: "Abend",
+            headerName: "Abend",
+            cellClass: 'md-body-2',
+            suppressSizeToFit: true,
+            width: 40,
+            valueGetter: 'parseInt(medication_dosierung_ab)',
+            filter: 'number'
+        }];
+
+
+        // DataView - Options
+        $scope.d.grid.options = {
+            headerHeight: 45,
+            rowHeight: 28,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false
+        };
+
+
+        //console.log('dataGRID: ', $scope.d.grid);
+    };
+
 
 
 });

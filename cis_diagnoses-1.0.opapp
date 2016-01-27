@@ -2486,7 +2486,7 @@ angular.module('optinomicDataModule')
 
                 return_data = data[node_tree] === undefined ? {} : data[node_tree];
                 return_data = JSON.parse(JSON.stringify(return_data));
-                console.log('(!) getAnnotationsData - Success', node_tree, return_data);
+                // console.log('(!) getAnnotationsData - Success', node_tree, return_data);
                 deferred.resolve(return_data);
 
             }, function(error) {
@@ -2534,7 +2534,7 @@ angular.module('optinomicDataModule')
                 full_data[node_tree] = full_data[node_tree] === undefined ? {} : full_data[node_tree];
                 full_data[node_tree] = json_value;
 
-                console.log('(!) saveAnnotationsData', api_direction, full_data);
+                // console.log('(!) saveAnnotationsData', api_direction, full_data);
 
                 // Save and proceed.
                 if (api_direction === 'user') {
@@ -6423,6 +6423,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.getEntrys();
         });
     };
+
 
 
 });
