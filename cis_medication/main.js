@@ -154,6 +154,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
+        $scope.d.grid = {
+            columnDefs: [],
+            dontUseScrolls: false,
+            enableCellExpressions: true,
+            enableColResize: true,
+            enableFilter: true,
+            enableSorting: true,
+            headerHeight: 45,
+            rowData: [],
+            rowHeight: 28,
+            rowSelection: 'single',
+            showToolPanel: false,
+            init_done = false
+        };
+
     };
 
 
@@ -560,27 +575,23 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init
         $scope.d.grid = {};
-        $scope.d.grid.columnDefs = my_columnDefs;
-        $scope.d.grid.rowData = resultsArray;
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: resultsArray,
-            columnDefs: my_columnDefs,
+        $scope.d.grid = {
             //pinnedColumnCount: 1,
+            columnDefs: my_columnDefs,
             dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
             enableCellExpressions: true,
+            enableColResize: true,
+            enableFilter: true,
             enableSorting: true,
-            showToolPanel: false
+            headerHeight: 45,
+            rowData: resultsArray,
+            rowHeight: 28,
+            rowSelection: 'single',
+            showToolPanel: false,
+            init_done = true
         };
-
-        $scope.d.grid.init_done = true;
-
 
         //console.log('dataGRID: ', $scope.d.grid);
     };

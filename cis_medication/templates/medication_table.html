@@ -20,13 +20,13 @@ include(../lib/html/optinomic/page/start.m4)
     <div>
         <md-input-container class="md-primary">
             <label><i class="mdi mdi-filter"></i> Filter</label>
-            <input ng-model="d.grid.options.quickFilterText">
+            <input ng-model="d.grid.quickFilterText">
         </md-input-container>
     </div>
 </div>
-<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+<div ag-grid="d.grid" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.selectedNodesById">
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
     </span>
 </p>

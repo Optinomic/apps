@@ -642,13 +642,13 @@ website = http://www.optinomic.com/
     <div>
         <md-input-container class="md-primary">
             <label><i class="mdi mdi-filter"></i> Filter</label>
-            <input ng-model="d.grid.options.quickFilterText">
+            <input ng-model="d.grid.quickFilterText">
         </md-input-container>
     </div>
 </div>
-<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+<div ag-grid="d.grid" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.selectedNodesById">
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
     </span>
 </p>
@@ -6241,6 +6241,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
+        $scope.d.grid = {
+            columnDefs: [],
+            dontUseScrolls: false,
+            enableCellExpressions: true,
+            enableColResize: true,
+            enableFilter: true,
+            enableSorting: true,
+            headerHeight: 45,
+            rowData: [],
+            rowHeight: 28,
+            rowSelection: 'single',
+            showToolPanel: false,
+            init_done = false
+        };
+
     };
 
 
@@ -6647,27 +6662,23 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init
         $scope.d.grid = {};
-        $scope.d.grid.columnDefs = my_columnDefs;
-        $scope.d.grid.rowData = resultsArray;
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: resultsArray,
-            columnDefs: my_columnDefs,
+        $scope.d.grid = {
             //pinnedColumnCount: 1,
+            columnDefs: my_columnDefs,
             dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
             enableCellExpressions: true,
+            enableColResize: true,
+            enableFilter: true,
             enableSorting: true,
-            showToolPanel: false
+            headerHeight: 45,
+            rowData: resultsArray,
+            rowHeight: 28,
+            rowSelection: 'single',
+            showToolPanel: false,
+            init_done = true
         };
-
-        $scope.d.grid.init_done = true;
-
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
