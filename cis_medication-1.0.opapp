@@ -642,13 +642,13 @@ website = http://www.optinomic.com/
     <div>
         <md-input-container class="md-primary">
             <label><i class="mdi mdi-filter"></i> Filter</label>
-            <input ng-model="d.grid.quickFilterText">
+            <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
 </div>
-<div ag-grid="d.grid" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 <p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.selectedNodesById">
+    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
     </span>
 </p>
@@ -6665,11 +6665,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
 
-        // Init
-        $scope.d.grid = {};
 
         // DataView - Options
-        $scope.d.grid = {
+        $scope.d.grid.options = {
             //pinnedColumnCount: 1,
             columnDefs: my_columnDefs,
             dontUseScrolls: false,

@@ -578,11 +578,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
 
-        // Init
-        $scope.d.grid = {};
 
         // DataView - Options
-        $scope.d.grid = {
+        $scope.d.grid.options = {
             //pinnedColumnCount: 1,
             columnDefs: my_columnDefs,
             dontUseScrolls: false,
