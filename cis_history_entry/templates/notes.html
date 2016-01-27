@@ -1,0 +1,26 @@
+include(../lib/html/optinomic/page/start.m4)
+<md-content ng-if="d.appState !== 'loading'">
+    <md-card>
+        <md-card-title style="background-color:#FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    Notizen
+                </span>
+                <span class="md-subhead" style="margin-top: -12px; color:#757575;">
+                    <span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
+                    {{user.data.extras.full_name}}
+                    </span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+            <pre>{{d.historyEntrysNotes}}</pre>
+        </md-card-content>
+        <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            <span flex></span>
+            <md-button md-primary ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+include(../lib/html/optinomic/page/end.m4)
