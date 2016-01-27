@@ -12,13 +12,14 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content>
             <div layout-margin>
                 <md-input-container flex class="md-block flow-text">
-                    <textarea ng-model="d.historyNewEntryNotes.notes" columns="1" rows="10"></textarea>
+                    <textarea ng-model="d.historyEntrysNotes.notes" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
             <pre>{{d.historyEntrysNotes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
             <span flex></span>
+            <md-button md-primary ng-click="clearNotes()" aria-label="Speichern">Löschen</md-button>
             <md-button md-primary ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
         </md-card-actions>
     </md-card>

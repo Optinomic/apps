@@ -174,7 +174,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.getNotes = function() {
 
-
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
@@ -186,7 +185,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.historyEntrysNotes = angular.copy(data);
             };
 
-            console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);
+            console.log('(+) getNotes', $scope.d.historyEntrysNotes);
         });
 
     };
@@ -196,9 +195,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         api_call.then(function(data) {
             // Update Entrys
             $scope.getNotes();
-            console.log('(+) saveHistory - success: ', $scope.d.historyEntrysNotes);
+            console.log('(+) saveNotes - success: ', $scope.d.historyEntrysNotes);
         });
     };
+
+    $scope.clearNotes = function() {
+        var api_call = dataService.saveAnnotationsData('patient', 'notes', {});
+        api_call.then(function(data) {
+            // Update Entrys
+            $scope.getNotes();
+            console.log('(+) clearNotes - success: ', $scope.d.historyEntrysNotes);
+        });
+    };
+
 
     $scope.getHisoryEntrys = function() {
         // Get Data

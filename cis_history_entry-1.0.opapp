@@ -41,13 +41,14 @@ website = http://www.optinomic.com/
         <md-card-content>
             <div layout-margin>
                 <md-input-container flex class="md-block flow-text">
-                    <textarea ng-model="d.historyNewEntryNotes.notes" columns="1" rows="10"></textarea>
+                    <textarea ng-model="d.historyEntrysNotes.notes" columns="1" rows="10"></textarea>
                 </md-input-container>
             </div>
             <pre>{{d.historyEntrysNotes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
             <span flex></span>
+            <md-button md-primary ng-click="clearNotes()" aria-label="Speichern">Löschen</md-button>
             <md-button md-primary ng-click="saveNotes()" aria-label="Speichern">Speichern</md-button>
         </md-card-actions>
     </md-card>
@@ -6033,7 +6034,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.getNotes = function() {
 
-
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
@@ -6045,7 +6045,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.historyEntrysNotes = angular.copy(data);
             };
 
-            console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);
+            console.log('(+) getNotes', $scope.d.historyEntrysNotes);
         });
 
     };
@@ -6055,9 +6055,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         api_call.then(function(data) {
             // Update Entrys
             $scope.getNotes();
-            console.log('(+) saveHistory - success: ', $scope.d.historyEntrysNotes);
+            console.log('(+) saveNotes - success: ', $scope.d.historyEntrysNotes);
         });
     };
+
+    $scope.clearNotes = function() {
+        var api_call = dataService.saveAnnotationsData('patient', 'notes', {});
+        api_call.then(function(data) {
+            // Update Entrys
+            $scope.getNotes();
+            console.log('(+) clearNotes - success: ', $scope.d.historyEntrysNotes);
+        });
+    };
+
 
     $scope.getHisoryEntrys = function() {
         // Get Data
