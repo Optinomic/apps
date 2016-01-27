@@ -165,9 +165,24 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "price"
         }];
 
+        var rowData = [{
+            make: "Toyota",
+            model: "Celica",
+            price: 35000
+        }, {
+            make: "Ford",
+            model: "Mondeo",
+            price: 32000
+        }, {
+            make: "Porsche",
+            model: "Boxter",
+            price: 72000
+        }];
+
         $scope.d.grid = {};
         $scope.d.grid.options = {};
         $scope.d.grid.columnDefs = columnDefs;
+        $scope.d.grid.rowData = rowData;
     };
 
 
@@ -615,7 +630,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             showToolPanel: false
         };
 
-        $scope.d.grid.options.api.setRowData(rowData);
+        $scope.d.grid.options.api.setRowData(resultsArray);
 
 
 
