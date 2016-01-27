@@ -66,6 +66,16 @@ nur wenig erforschter Aspekt erfasst.
 Fragebögen · Psychische Belastung ·
 Schmerz · Sensitivität · Spezifität
 
+
+
+###### Auswertung / Interpretation
+- [Auswertung](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Auswertung.pdf)
+
+
+###### Fragebogen / Printversion
+- [DASS21-G Nilges, Essau, 2015](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21.pdf)
+
+
 ###### Weiterführende Links
 - [DASS Homepage](http://www.psy.unsw.edu.au/dass/)
 
@@ -75,19 +85,10 @@ Schmerz · Sensitivität · Spezifität
 
 
 
-#### Auswertung / Interpretation
-- [Auswertung](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Auswertung.pdf)
-
-
-#### Fragebogen / Printversion
-- [DASS21-G Nilges, Essau, 2015](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21.pdf)
 
 
 
-
-
-
-###Contact
+###Anschrift
 *Optinomic GmbH*   
 *Haldenstrasse 7*     
 *CH - 8942 Oberrieden*     
