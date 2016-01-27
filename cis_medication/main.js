@@ -154,10 +154,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-        $scope.d.grid = {
-            options: {}
-        };
+        var columnDefs = [{
+            headerName: "Make",
+            field: "make"
+        }, {
+            headerName: "Model",
+            field: "model"
+        }, {
+            headerName: "Price",
+            field: "price"
+        }];
 
+        $scope.d.grid = {};
+        $scope.d.grid.options = {};
+        $scope.d.grid.columnDefs = columnDefs;
     };
 
 
