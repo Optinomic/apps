@@ -331,6 +331,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication = [];
             } else {
                 $scope.d.medication = angular.copy(data);
+                $scope.setDataView();
             };
 
 
@@ -588,31 +589,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
 
 
-        var columnDefs = [{
-            headerName: "Make",
-            field: "make"
-        }, {
-            headerName: "Model",
-            field: "model"
-        }, {
-            headerName: "Price",
-            field: "price"
-        }];
-
-        var rowData = [{
-            make: "Toyota",
-            model: "Celica",
-            price: 35000
-        }, {
-            make: "Ford",
-            model: "Mondeo",
-            price: 32000
-        }, {
-            make: "Porsche",
-            model: "Boxter",
-            price: 72000
-        }];
-
 
         // DataView - Options
         // $scope.d.grid.options = {
@@ -631,7 +607,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // };
 
         $scope.d.grid.options.rowData = resultsArray;
-        $scope.d.grid.options.api.setRowData(resultsArray);
+        //$scope.d.grid.options.api.setRowData(resultsArray);
 
 
 
