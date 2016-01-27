@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -605,7 +606,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         //     showToolPanel: false
         // };
 
-        $scope.d.grid.options.rowData = resultsArray;
+        var NEWrowData = [{
+            make: "Toyota",
+            model: "Celica",
+            price: 35000
+        }, {
+            make: "BMW",
+            model: "Mondeo",
+            price: 32000
+        }, {
+            make: "Ford",
+            model: "Focus",
+            price: 32000
+        }, {
+            make: "Porsche",
+            model: "Boxter",
+            price: 72000
+        }];
+
+        $scope.d.grid.options.rowData = NEWrowData;
 
         //$scope.d.grid.options.api.setRowData(resultsArray);
 
