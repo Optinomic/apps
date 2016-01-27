@@ -596,7 +596,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             init_done: true
         };
 
-        $scope.d.functions.refreshView();
+        // $scope.d.functions.refreshView();
         //console.log('dataGRID: ', $scope.d.grid);
     };
 

@@ -4,6 +4,12 @@ include(../lib/html/optinomic/page/start.m4)
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
     <div flex>
+        <md-button style="font-size: 18px;" ng-click="d.functions.refreshView()" class="md-primary md-icon-button" aria-label="Refresh">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="bottom">
+                Refresh
+            </md-tooltip>
+        </md-button>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
             <md-tooltip md-direction="bottom">
