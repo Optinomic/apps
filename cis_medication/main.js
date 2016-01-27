@@ -166,7 +166,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             rowHeight: 28,
             rowSelection: 'single',
             showToolPanel: false,
-            init_done = false
+            init_done: false
         };
 
     };
@@ -590,7 +590,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             rowHeight: 28,
             rowSelection: 'single',
             showToolPanel: false,
-            init_done = true
+            init_done: true
         };
 
         //console.log('dataGRID: ', $scope.d.grid);
