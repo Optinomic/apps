@@ -40,11 +40,11 @@ include(style.css)
 [survey]
 id = aus_survey
 type = ng
-responsibility = lead_therapist_and_deputy
+responsibility = patient_via_email
 name = Selbstbeurteilungsskala: Autoritarismusskala (AUS)
 host = default
 
-[survey_markup dass_survey]
+[survey_markup aus_survey]
 include(survey_markups/aus_survey.html)
 
 [event]
@@ -53,7 +53,7 @@ time = 08:00
 due_after = 86400
 overdue = ignore
 description = Event: Die Autoritarismusskala (AUS)
-survey = dass_survey
+survey = aus_survey
 
 
 [email new_event html]

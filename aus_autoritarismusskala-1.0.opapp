@@ -27746,11 +27746,11 @@ md-tooltip.md-show {
 [survey]
 id = aus_survey
 type = ng
-responsibility = lead_therapist_and_deputy
+responsibility = patient_via_email
 name = Selbstbeurteilungsskala: Autoritarismusskala (AUS)
 host = default
 
-[survey_markup dass_survey]
+[survey_markup aus_survey]
 <div ng-init="result.current_item = 0">
     <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
         <div flex="50" layout="column">
@@ -28131,7 +28131,7 @@ time = 08:00
 due_after = 86400
 overdue = ignore
 description = Event: Die Autoritarismusskala (AUS)
-survey = dass_survey
+survey = aus_survey
 
 
 [email new_event html]
