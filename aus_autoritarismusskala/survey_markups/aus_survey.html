@@ -1,0 +1,372 @@
+<div ng-init="result.current_item = 0">
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex="50" layout="column">
+            <div ng-hide="thankyou">
+                <md-card ng-if="result.current_item === 0">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-display-1" style="color:#3F51B5">Die Autoritarismusskala (AUS)</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Selbstbeurteilungsskala: Den Glauben an Autoritäten und die Neigung zu autoritärer Unterordnung erfassen.</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p class="md-body-1">Im folgenden finden Sie ganz unterschiedliche Aussagen zu verschiedenen Themen. Wahrscheinlich werden Sie einigen Aussagen sehr zustimmen und andere stark ablehnen. Bei wieder anderen sind Sie vielleicht unentschieden. Nehmen Sie bitte zu jede der folgenden Aussagen Stellung und entscheiden Sie, inwieweit jede auf Sie ganz persönlich zutrifft.</p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="result.current_item = result.current_item + 1">Start</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 1">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">1.) Gehorsam und Achtung gegenüber Autoritäten sind die wichtigsten Tugenden, die Kinder lernen sollten.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_01 = result.aus_item_01 === undefined ? 1 : result.aus_item_01" ng-model="result.aus_item_01" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_01}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_01 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_01 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 2">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">2.) Ein Mensch mit schlechten Umgangsformen kann nicht erwarten, mit anständigen Menschen gut auszukommen.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_02 = result.aus_item_02 === undefined ? 1 : result.aus_item_02" ng-model="result.aus_item_02" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_02}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_02 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_02 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 3">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">3.) Wenn die Leute weniger reden und mehr arbeiten würden, ginge es jedem besser.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_03 = result.aus_item_03 === undefined ? 1 : result.aus_item_03" ng-model="result.aus_item_03" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_03}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_03 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_03 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 4">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">4.) Kein anständiger Mensch käme jemals auf den Gedanken, einen Freund zu verletzen.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_04 = result.aus_item_04 === undefined ? 1 : result.aus_item_04" ng-model="result.aus_item_04" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_04}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_04 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_04 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 5">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">5.) Irgendwann muss man die rebellischen Ideen der Jugendzeit überwinden.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_05 = result.aus_item_05 === undefined ? 1 : result.aus_item_05" ng-model="result.aus_item_05" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_05}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_05 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_05 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 6">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">6.) Junge Leute haben ab und zu rebellische Ideen, aber wenn sie älter werden, sollten sie darüber hinwegkommen und ihren Platz im Leben finden.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_06 = result.aus_item_06 === undefined ? 1 : result.aus_item_06" ng-model="result.aus_item_06" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_06}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_06 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_06 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 7">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">7.) Bücher und Filme sollten sich nicht so viel mit den Schattenseiten des Lebens befassen.</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Stimmen Sie dieser Aussage zu?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.aus_item_07 = result.aus_item_07 === undefined ? 1 : result.aus_item_07" ng-model="result.aus_item_07" step="1" min="1" max="6" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.aus_item_07}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: stimmt überhaupt nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: stimmt weitgehend nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt eher nicht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.aus_item_07 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.aus_item_07 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="saveresult()">Speichern</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div ng-show="thankyou">
+                <h1 class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
