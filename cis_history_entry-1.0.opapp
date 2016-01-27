@@ -44,7 +44,12 @@ website = http://www.optinomic.com/
         </md-card-title>
         <md-divider></md-divider>
         <md-card-content>
-            <pre>{{d.historyEntrysNotes}}</pre>
+            <div layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <textarea ng-model="d.historyNewEntryNotes" columns="1" rows="10"></textarea>
+                </md-input-container>
+            </div>
+            <pre>{{d.historyEntrysNotes.notes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
             <span flex></span>
@@ -6042,13 +6047,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.historyEntrysNotes = [];
-            } else {
-                $scope.d.historyEntrysNotes = angular.copy(data);
-            };
-
+            $scope.d.historyEntrysNotes = angular.copy(data);
             $scope.d.appState = 'show';
 
             console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);

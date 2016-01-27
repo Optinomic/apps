@@ -202,13 +202,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getAnnotationsData('patient', 'notes');
         api_call.then(function(data) {
 
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.historyEntrysNotes = [];
-            } else {
-                $scope.d.historyEntrysNotes = angular.copy(data);
-            };
-
+            $scope.d.historyEntrysNotes = angular.copy(data);
             $scope.d.appState = 'show';
 
             console.log('(+) getHisoryEntrys Notes', $scope.d.historyEntrysNotes);

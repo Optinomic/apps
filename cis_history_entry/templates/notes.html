@@ -15,7 +15,12 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-divider></md-divider>
         <md-card-content>
-            <pre>{{d.historyEntrysNotes}}</pre>
+            <div layout-margin>
+                <md-input-container flex class="md-block flow-text">
+                    <textarea ng-model="d.historyNewEntryNotes" columns="1" rows="10"></textarea>
+                </md-input-container>
+            </div>
+            <pre>{{d.historyEntrysNotes.notes}}</pre>
         </md-card-content>
         <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
             <span flex></span>
