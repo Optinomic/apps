@@ -520,7 +520,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var resultsArray = $scope.d.medication;
 
-        var columnDefs = [{
+        var my_columnDefs = [{
             headerTooltip: "Medikament",
             headerName: "Medikament",
             editable: true,
@@ -550,7 +550,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             valueGetter: 'parseInt(medication_dosierung_ab)',
             filter: 'number'
         }];
+        console.log('Manually: my_columnDefs', my_columnDefs);
 
+        my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
+        console.log('Auto: my_columnDefs', my_columnDefs);
 
         // Init
         $scope.d.grid = {};
@@ -560,7 +563,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerHeight: 45,
             rowHeight: 28,
             rowData: resultsArray,
-            columnDefs: columnDefs,
+            columnDefs: my_columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
