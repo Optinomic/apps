@@ -167,15 +167,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         var rowData = [{
-            make: "Toyota",
+            medication_name: "Toyota",
             model: "Celica",
             price: 35000
         }, {
-            make: "Ford",
+            medication_name: "Ford",
             model: "Mondeo",
             price: 32000
         }, {
-            make: "Porsche",
+            medication_name: "Porsche",
             model: "Boxter",
             price: 72000
         }];
@@ -333,7 +333,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication = angular.copy(data);
             };
 
-            $scope.setDataView();
+            $scope.d.grid.options.rowData = $scope.d.medication;
             $scope.d.appState = 'show';
 
             //console.log('(+) getEntrys ', $scope.d.medication);
@@ -607,19 +607,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // };
 
         var NEWrowData = [{
-            make: "Toyota",
+            medication_name: "Toyota",
             model: "Celica",
             price: 35000
         }, {
-            make: "BMW",
+            medication_name: "BMW",
             model: "Mondeo",
             price: 32000
         }, {
-            make: "Ford",
+            medication_name: "Ford",
             model: "Focus",
             price: 32000
         }, {
-            make: "Porsche",
+            medication_name: "Porsche",
             model: "Boxter",
             price: 72000
         }];
