@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid = {};
         $scope.d.grid.options = {};
         $scope.d.grid.options.columnDefs = columnDefs;
-        $scope.d.grid.options.rowData = [];
+        $scope.d.grid.options.rowData = rowData;
     };
 
 
