@@ -34,51 +34,21 @@ website = http://www.optinomic.com/
         <md-card-title style="background-color: #424242; color: #FAFAFA">
             <md-card-title-text>
                 <span class="md-headline">
-                    Die Depressions-Angst-Stress-Skalen (DASS)
+                    {{d.dataMain.apps.current.name}}
                 </span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
-            <h3 class="md-subhead">Depression
-                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
-            </h3>
+            <h3 class="md-subhead">Autoritarismus</h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score" scale-ranges="d.depression_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score_sum" min="0" max="42" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached === false" class="md-body-1">{{d.depression_scale_range.ranges[0].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff}} )</span></p>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="md-body-1">{{d.depression_scale_range.ranges[1].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff}} )</span></p>
-                </div>
-            </div>
-            <p>&nbsp;</p>
-            <h3 class="md-subhead">Angst 
-                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
-            </h3>
-            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score" scale-ranges="d.angst_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
-                </div>
-                <div flex>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached === false" class="md-body-1">{{d.angst_scale_range.ranges[0].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff}} )</span></p>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="md-body-1">{{d.angst_scale_range.ranges[1].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff}} )</span></p>
-                </div>
-            </div>
-            <p>&nbsp;</p>
-            <h3 class="md-subhead">Stress 
-                <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
-            </h3>
-            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score" scale-ranges="d.stress_scale_range" min="0" max="21" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
-                </div>
-                <div flex>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached === false" class="md-body-1">{{d.stress_scale_range.ranges[0].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff}} )</span></p>
-                    <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="md-body-1">{{d.stress_scale_range.ranges[1].result}} <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_scale_score}}, CutOff: {{d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff}} )</span></p>
+                    <p class="md-body-1">Autoritarismus ist gekennzeichnet durch Glauben an Autoritäten, autoritäre Unterordnung und Intoleranz gegenüber anderen Personen und zielt somit auf die sozial-bewertende Ebene.
+                        <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score}}, Summe: {{d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score_sum}} )</span>
+                    </p>
                 </div>
             </div>
         </md-card-content>
@@ -27798,17 +27768,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_01 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_01 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_01 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_01 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_01 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_01 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_01 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_01 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_01 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -27847,17 +27817,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_02 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_02 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_02 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_02 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_02 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_02 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_02 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_02 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_02 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -27896,17 +27866,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_03 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_03 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_03 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_03 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_03 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_03 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_03 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_03 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_03 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -27945,17 +27915,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_04 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_04 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_04 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_04 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_04 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_04 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_04 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_04 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_04 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -27994,17 +27964,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_05 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_05 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_05 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_05 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_05 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_05 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_05 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_05 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_05 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -28043,17 +28013,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_06 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_06 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_06 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_06 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_06 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_06 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_06 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_06 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_06 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
@@ -28092,17 +28062,17 @@ host = default
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_07 = 4" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_07 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt ein wenig
+                                <span ng-if="result.aus_item_07 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: stimmt ein wenig
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_07 = 5" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_07 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt weitgehend
+                                <span ng-if="result.aus_item_07 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: stimmt weitgehend
                             </a>
                         </p>
                         <p class="md-body-1">
                             <a ng-click="result.aus_item_07 = 6" href="" style="color:#212121; text-decoration: none;">
-                                <span ng-if="result.aus_item_07 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 3: stimmt genau
+                                <span ng-if="result.aus_item_07 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: stimmt genau
                             </a>
                         </p>
                     </md-card-content>
