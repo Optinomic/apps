@@ -155,14 +155,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         var columnDefs = [{
-            headerName: "Make",
+            headerName: "Medikament",
             field: "medication_name"
-        }, {
-            headerName: "Model",
-            field: "model"
-        }, {
-            headerName: "Price",
-            field: "price"
         }];
 
         var rowData = [{
