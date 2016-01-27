@@ -32,7 +32,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // Run App-Functions
             $scope.appInit();
             $scope.getEntrys();
-            $scope.setDataView();
 
 
             // Finishing: Console Info & Init = done.
@@ -302,6 +301,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication = [];
             } else {
                 $scope.d.medication = angular.copy(data);
+                $scope.setDataView();
             };
 
 
