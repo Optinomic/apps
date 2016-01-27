@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -330,7 +331,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication = [];
             } else {
                 $scope.d.medication = angular.copy(data);
-                $scope.setDataView();
             };
 
 
@@ -615,21 +615,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // DataView - Options
-        $scope.d.grid.options = {
-            //pinnedColumnCount: 1,
-            columnDefs: columnDefs,
-            dontUseScrolls: false,
-            enableCellExpressions: true,
-            enableColResize: true,
-            enableFilter: true,
-            enableSorting: true,
-            headerHeight: 45,
-            rowData: rowData,
-            rowHeight: 28,
-            rowSelection: 'single',
-            showToolPanel: false
-        };
+        // $scope.d.grid.options = {
+        //     //pinnedColumnCount: 1,
+        //     columnDefs: columnDefs,
+        //     dontUseScrolls: false,
+        //     enableCellExpressions: true,
+        //     enableColResize: true,
+        //     enableFilter: true,
+        //     enableSorting: true,
+        //     headerHeight: 45,
+        //     rowData: rowData,
+        //     rowHeight: 28,
+        //     rowSelection: 'single',
+        //     showToolPanel: false
+        // };
 
+        $scope.d.grid.options.rowData = resultsArray;
         $scope.d.grid.options.api.setRowData(resultsArray);
 
 
