@@ -12,6 +12,7 @@
                     <md-card-content>
                         <p class="md-body-1">Bitte lesen Sie jede Aussage aufmerksam durch. Beurteilen Sie, wie sehr die Aussage während <b>der letzten Woche</b> auf Sie zutraf. Es gibt keine richtigen oder falschen Antworten. Versuchen Sie, sich spontan für eine Antwort zu entscheiden.</p>
                     </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button ng-click="result.current_item = result.current_item + 1">Start</md-button>
                     </md-card-actions>
@@ -21,33 +22,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">1.) Ich fand es schwer, mich zu beruhigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = result.dass_item_01 === undefined ? 0 : result.dass_item_01" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_01 = result.dass_item_01 === undefined ? 0 : result.dass_item_01" ng-model="result.dass_item_01" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
                         <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_01}}</p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_01 = 0" href="">
-                                <span ng-if="result.dass_item_01 === 0" style="color:#4CAF50; font-size:18px;">✓</span> 0: Traf gar nicht auf mich zu
+                            <a ng-click="result.dass_item_01 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_01 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_01 = 1" href="">
-                                <span ng-if="result.dass_item_01 === 1" style="color:#4CAF50; font-size:18px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            <a ng-click="result.dass_item_01 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_01 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_01 = 2" href="">
-                                <span ng-if="result.dass_item_01 === 2" style="color:#4CAF50; font-size:18px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            <a ng-click="result.dass_item_01 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_01 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_01 = 3" href="">
-                                <span ng-if="result.dass_item_01 === 3" style="color:#4CAF50; font-size:18px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            <a ng-click="result.dass_item_01 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_01 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
                             </a>
                         </p>
                     </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -66,26 +68,27 @@
                         </md-slider>
                         <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_01}}</p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_02 = 0" href="">
-                                <span ng-if="result.dass_item_02 === 0" style="color:#4CAF50; font-size:18px;">✓</span> 0: Traf gar nicht auf mich zu
+                            <a ng-click="result.dass_item_02 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_02 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_02 = 1" href="">
-                                <span ng-if="result.dass_item_02 === 1" style="color:#4CAF50; font-size:18px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            <a ng-click="result.dass_item_02 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_02 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_02 = 2" href="">
-                                <span ng-if="result.dass_item_02 === 2" style="color:#4CAF50; font-size:18px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            <a ng-click="result.dass_item_02 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_02 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
                             </a>
                         </p>
                         <p class="md-body-1">
-                            <a ng-click="result.dass_item_02 = 3" href="">
-                                <span ng-if="result.dass_item_02 === 3" style="color:#4CAF50; font-size:18px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            <a ng-click="result.dass_item_02 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_02 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
                             </a>
                         </p>
                     </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -97,16 +100,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">3. Ich konnte überhaupt keine positiven Gefühle mehr erleben.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_03 = result.dass_item_03 === undefined ? 0 : result.dass_item_03" ng-model="result.dass_item_03" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_03 = result.dass_item_03 === undefined ? 0 : result.dass_item_03" ng-model="result.dass_item_03" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_03}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_03 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_03 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_03 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_03 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_03 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_03 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_03 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_03 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -118,16 +139,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">4. Ich hatte Atemprobleme (z.B. übermässig schnelles Atmen, Atemlosigkeit ohne körperliche Anstrengung). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_04 = result.dass_item_04 === undefined ? 0 : result.dass_item_04" ng-model="result.dass_item_04" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_04 = result.dass_item_04 === undefined ? 0 : result.dass_item_04" ng-model="result.dass_item_04" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_04}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_04 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_04 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_04 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_04 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_04 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_04 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_04 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_04 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -139,16 +178,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">5. Es fiel mir schwer, mich dazu aufzuraffen, Dinge zu erledigen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_05 = result.dass_item_05 === undefined ? 0 : result.dass_item_05" ng-model="result.dass_item_05" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_05 = result.dass_item_05 === undefined ? 0 : result.dass_item_05" ng-model="result.dass_item_05" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_05}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_05 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_05 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_05 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_05 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_05 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_05 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_05 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_05 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -160,16 +217,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">6. Ich tendierte dazu, auf Situationen überzureagieren. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_06 = result.dass_item_06 === undefined ? 0 : result.dass_item_06" ng-model="result.dass_item_06" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_06 = result.dass_item_06 === undefined ? 0 : result.dass_item_06" ng-model="result.dass_item_06" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_06}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_06 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_06 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_06 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_06 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_06 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_06 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_06 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_06 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -181,16 +256,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">7. Ich zitterte (z.B. an den Händen). </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_07 = result.dass_item_07 === undefined ? 0 : result.dass_item_07" ng-model="result.dass_item_07" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_07 = result.dass_item_07 === undefined ? 0 : result.dass_item_07" ng-model="result.dass_item_07" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_07}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_07 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_07 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_07 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_07 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_07 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_07 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_07 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_07 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -202,16 +295,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">8. Ich fand alles anstrengend.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_08 = result.dass_item_08 === undefined ? 0 : result.dass_item_08" ng-model="result.dass_item_08" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_08 = result.dass_item_08 === undefined ? 0 : result.dass_item_08" ng-model="result.dass_item_08" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_08}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_08 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_08 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_08 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_08 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_08 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_08 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_08 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_08 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -223,16 +334,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">9. Ich machte mir Sorgen über Situationen, in denen ich in Panik geraten und mich lächerlich machen könnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_09 = result.dass_item_09 === undefined ? 0 : result.dass_item_09" ng-model="result.dass_item_09" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_09 = result.dass_item_09 === undefined ? 0 : result.dass_item_09" ng-model="result.dass_item_09" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_09}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_09 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_09 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_09 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_09 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_09 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_09 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_09 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_09 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -244,16 +373,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">10.  Ich hatte das Gefühl, dass ich mich auf nichts mehr freuen konnte.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_10 = result.dass_item_10 === undefined ? 0 : result.dass_item_10" ng-model="result.dass_item_10" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_10 = result.dass_item_10 === undefined ? 0 : result.dass_item_10" ng-model="result.dass_item_10" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_10}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_10 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_10 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_10 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_10 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_10 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_10 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_10 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_10 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -265,16 +412,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">11. Ich bemerkte, dass ich mich schnell aufregte. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_11 = result.dass_item_11 === undefined ? 0 : result.dass_item_11" ng-model="result.dass_item_11" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_11 = result.dass_item_11 === undefined ? 0 : result.dass_item_11" ng-model="result.dass_item_11" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_11}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_11 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_11 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_11 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_11 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_11 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_11 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_11 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_11 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -286,16 +451,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">12. Ich fand es schwierig, mich zu entspannen.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_12 = result.dass_item_12 === undefined ? 0 : result.dass_item_12" ng-model="result.dass_item_12" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_12 = result.dass_item_12 === undefined ? 0 : result.dass_item_12" ng-model="result.dass_item_12" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_12}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_12 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_12 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_12 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_12 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_12 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_12 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_12 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_12 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -307,16 +490,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">13. Ich fühlte mich niedergeschlagen und traurig.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_13 = result.dass_item_13 === undefined ? 0 : result.dass_item_13" ng-model="result.dass_item_13" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_13 = result.dass_item_13 === undefined ? 0 : result.dass_item_13" ng-model="result.dass_item_13" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_13}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_13 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_13 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_13 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_13 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_13 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_13 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_13 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_13 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -328,16 +529,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">14. Ich reagierte ungehalten auf alles, was mich davon abhielt, meine momentane Tätigkeit fortzuführen. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_14 = result.dass_item_14 === undefined ? 0 : result.dass_item_14" ng-model="result.dass_item_14" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_14 = result.dass_item_14 === undefined ? 0 : result.dass_item_14" ng-model="result.dass_item_14" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_14}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_14 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_14 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_14 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_14 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_14 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_14 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_14 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_14 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -349,16 +568,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">15. Ich fühlte mich einer Panik nahe.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_15 = result.dass_item_15 === undefined ? 0 : result.dass_item_15" ng-model="result.dass_item_15" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_15 = result.dass_item_15 === undefined ? 0 : result.dass_item_15" ng-model="result.dass_item_15" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_15}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_15 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_15 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_15 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_15 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_15 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_15 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_15 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_15 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -370,16 +607,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">16. Ich war nicht in der Lage, mich für irgendetwas zu begeistern.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_16 = result.dass_item_16 === undefined ? 0 : result.dass_item_16" ng-model="result.dass_item_16" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_16 = result.dass_item_16 === undefined ? 0 : result.dass_item_16" ng-model="result.dass_item_16" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_16}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_16 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_16 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_16 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_16 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_16 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_16 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_16 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_16 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -391,16 +646,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">17. Ich fühlte mich als Person nicht viel wert.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_17 = result.dass_item_17 === undefined ? 0 : result.dass_item_17" ng-model="result.dass_item_17" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_17 = result.dass_item_17 === undefined ? 0 : result.dass_item_17" ng-model="result.dass_item_17" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_17}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_17 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_17 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_17 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_17 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_17 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_17 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_17 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_17 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -412,16 +685,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">18. Ich fand mich ziemlich empfindlich.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_18 = result.dass_item_18 === undefined ? 0 : result.dass_item_18" ng-model="result.dass_item_18" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_18 = result.dass_item_18 === undefined ? 0 : result.dass_item_18" ng-model="result.dass_item_18" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_18}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_18 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_18 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_18 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_18 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_18 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_18 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_18 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_18 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -433,16 +724,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">19.  Ich habe meinen Herzschlag gespürt, ohne dass ich mich körperlich angestrengt hatte (z.B. Gefühl von Herzrasen oder Herzstolpern).</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_19 = result.dass_item_19 === undefined ? 0 : result.dass_item_19" ng-model="result.dass_item_19" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_19 = result.dass_item_19 === undefined ? 0 : result.dass_item_19" ng-model="result.dass_item_19" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_19}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_19 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_19 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_19 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_19 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_19 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_19 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_19 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_19 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -454,16 +763,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">20. Ich fühlte mich grundlos ängstlich. </span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_20 = result.dass_item_20 === undefined ? 0 : result.dass_item_20" ng-model="result.dass_item_20" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_20 = result.dass_item_20 === undefined ? 0 : result.dass_item_20" ng-model="result.dass_item_20" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_20}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_20 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_20 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_20 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_20 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_20 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_20 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_20 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_20 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <p class="md-caption">{{result.current_item}} von 21 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
@@ -475,16 +802,34 @@
                         <md-card-title-text>
                             <span class="md-headline" style="color:#3F51B5">21. Ich empfand das Leben als sinnlos.</span>
                             <span class="md-subhead" style="color:#9E9E9E">Wie sehr traf diese Aussage während der letzten Woche auf Sie zu? Bitte beantworten Sie spontan.</span>
-                            <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_21 = result.dass_item_21 === undefined ? 0 : result.dass_item_21" ng-model="result.dass_item_21" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
-                            </md-slider>
-                            <span class="md-caption">
-                            0: Traf gar nicht auf mich zu<br>
-                            1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal<br>
-                            2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft<br>
-                            3: Traf sehr stark auf mich zu oder die meiste Zeit<br>
-                        </span>
                         </md-card-title-text>
                     </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_21 = result.dass_item_21 === undefined ? 0 : result.dass_item_21" ng-model="result.dass_item_21" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_21}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_21 = 0" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_21 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_21 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_21 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Traf bis zu einem gewissen Grad auf mich zu oder manchmal
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_21 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_21 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: Traf in beträchtlichem Masse auf mich zu oder ziemlich oft
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.dass_item_21 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.dass_item_21 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: Traf sehr stark auf mich zu oder die meiste Zeit
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button ng-click="saveresult()">Speichern</md-button>
                     </md-card-actions>
