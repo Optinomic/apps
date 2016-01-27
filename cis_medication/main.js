@@ -154,7 +154,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-        $scope.d.grid = {
+        $scope.d.grid = {};
+        $scope.d.grid.options = {
             columnDefs: [],
             dontUseScrolls: false,
             enableCellExpressions: true,
@@ -169,37 +170,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             init_done: false
         };
 
-
-
-        var columnDefs = [{
-            headerName: "Marke",
-            field: "medication_name"
-        }, {
-            headerName: "Model",
-            field: "model"
-        }, {
-            headerName: "Price",
-            field: "price"
-        }];
-
-        var rowData = [{
-            medication_name: "Toyota",
-            model: "Celica",
-            price: 35000
-        }, {
-            medication_name: "Ford",
-            model: "Mondeo",
-            price: 32000
-        }, {
-            medication_name: "Porsche",
-            model: "Boxter",
-            price: 72000
-        }];
-
-        $scope.d.grid_test = {
-            columnDefs: columnDefs,
-            rowData: rowData
-        };
 
 
 
@@ -628,11 +598,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             init_done: true
         };
 
-        $scope.d.grid_test = {
-            columnDefs: my_columnDefs,
-            rowData: resultsArray
-        };
-
+        $scope.d.functions.refreshView();
         //console.log('dataGRID: ', $scope.d.grid);
     };
 
