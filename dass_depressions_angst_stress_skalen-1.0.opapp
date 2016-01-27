@@ -27950,7 +27950,7 @@ host = default
                     <md-card-content>
                         <md-slider flex class="md-primary" md-discrete ng-init="result.dass_item_02 = result.dass_item_02 === undefined ? 0 : result.dass_item_02" ng-model="result.dass_item_02" step="1" min="0" max="3" aria-label="DASS_Item{{result.current_item}}">
                         </md-slider>
-                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_01}}</p>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.dass_item_02}}</p>
                         <p class="md-body-1">
                             <a ng-click="result.dass_item_02 = 0" href="" style="color:#212121; text-decoration: none;">
                                 <span ng-if="result.dass_item_02 === 0" style="color:#4CAF50; font-size:24px;">✓</span> 0: Traf gar nicht auf mich zu
