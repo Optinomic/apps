@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -303,7 +304,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             } else {
                 $scope.d.medication = angular.copy(data);
             };
-            $scope.setDataView();
 
             $scope.d.appState = 'show';
 
