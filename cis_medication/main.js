@@ -154,29 +154,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-        var columnDefs = [{
-            headerName: "Medikament",
-            field: "medication_name"
-        }];
 
-        var rowData = [{
-            medication_name: "Toyota",
-            model: "Celica",
-            price: 35000
-        }, {
-            medication_name: "Ford",
-            model: "Mondeo",
-            price: 32000
-        }, {
-            medication_name: "Porsche",
-            model: "Boxter",
-            price: 72000
-        }];
-
-        $scope.d.grid = {};
-        $scope.d.grid.options = {};
-        $scope.d.grid.options.columnDefs = columnDefs;
-        $scope.d.grid.options.rowData = rowData;
     };
 
 
@@ -584,6 +562,31 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
+        var columnDefs = [{
+            headerName: "Medikament",
+            field: "medication_name"
+        }];
+
+        var rowData = [{
+            medication_name: "Toyota",
+            model: "Celica",
+            price: 35000
+        }, {
+            medication_name: "Ford",
+            model: "Mondeo",
+            price: 32000
+        }, {
+            medication_name: "Porsche",
+            model: "Boxter",
+            price: 72000
+        }];
+
+        $scope.d.grid = {};
+        $scope.d.grid.options = {};
+        $scope.d.grid.options.columnDefs = columnDefs;
+        $scope.d.grid.options.rowData = rowData;
+
+
         // DataView - Options
         // $scope.d.grid.options = {
         //     //pinnedColumnCount: 1,
@@ -618,7 +621,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             price: 72000
         }];
 
-        $scope.d.grid.options.rowData = NEWrowData;
+        // $scope.d.grid.options.rowData = NEWrowData;
 
         //$scope.d.grid.options.api.setRowData(NEWrowData);
 
