@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
-            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -306,7 +305,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             $scope.d.appState = 'show';
+            $scope.setDataView();
             $scope.updateDataView();
+
 
             //console.log('(+) getEntrys ', $scope.d.medication);
         });
