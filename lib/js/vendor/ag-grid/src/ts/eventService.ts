@@ -10,6 +10,12 @@ module ag.grid {
 
         private globalListeners: Function[] = [];
 
+        private logger: Logger;
+
+        public init(loggerFactory: LoggerFactory) {
+            this.logger = loggerFactory.create('EventService');
+        }
+
         private getListenerList(eventType: string): Function[] {
             var listenerList = this.allListeners[eventType];
             if (!listenerList) {
@@ -39,10 +45,13 @@ module ag.grid {
             _.removeFromArray(this.globalListeners, listener);
         }
 
+        // why do we pass the type here? the type is in ColumnChangeEvent, so unless the
+        // type is not in other types of events???
         public dispatchEvent(eventType: string, event?: any): void {
             if (!event) {
                 event = {};
             }
+            //this.logger.log('dispatching: ' + event);
             var listenerList = this.getListenerList(eventType);
             listenerList.forEach( (listener)=> {
                 listener(event);

@@ -18,9 +18,12 @@ module ag.grid {
         private cColumnList: any;
         private layout: any;
         private popupService: PopupService;
+        private dragAndDropService: DragAndDropService;
 
         constructor(columnController: ColumnController, gridOptionsWrapper: GridOptionsWrapper,
-                    popupService: PopupService, eventService: EventService) {
+                    popupService: PopupService, eventService: EventService,
+                    dragAndDropService: DragAndDropService) {
+            this.dragAndDropService = dragAndDropService;
             this.popupService = popupService;
             this.gridOptionsWrapper = gridOptionsWrapper;
             this.setupComponents();
@@ -57,8 +60,8 @@ module ag.grid {
                 that.columnController.removeValueColumn(column);
             });
 
-            var agValueType = new AgDropdownList(this.popupService);
-            agValueType.setModel([constants.SUM, constants.MIN, constants.MAX]);
+            var agValueType = new AgDropdownList(this.popupService, this.dragAndDropService);
+            agValueType.setModel([Column.AGG_SUM, Column.AGG_MIN, Column.AGG_MAX]);
             agValueType.setSelected(column.aggFunc);
             agValueType.setWidth(45);
 
@@ -78,10 +81,10 @@ module ag.grid {
 
         private setupComponents() {
             var localeTextFunc = this.gridOptionsWrapper.getLocaleTextFunc();
-            var columnsLocalText = localeTextFunc('valueColumns', 'Value Columns');
-            var emptyMessage = localeTextFunc('valueColumnsEmptyMessage', 'Drag columns from above to create values');
+            var columnsLocalText = localeTextFunc('valueColumns', 'Aggregations');
+            var emptyMessage = localeTextFunc('valueColumnsEmptyMessage', 'Drag columns from above to aggregate values');
 
-            this.cColumnList = new AgList();
+            this.cColumnList = new AgList(this.dragAndDropService);
             this.cColumnList.setCellRenderer(this.cellRenderer.bind(this));
             this.cColumnList.setEmptyMessage(emptyMessage);
             this.cColumnList.addStyles({height: '100%', overflow: 'auto'});

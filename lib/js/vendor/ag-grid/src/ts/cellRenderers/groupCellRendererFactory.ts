@@ -8,7 +8,10 @@ module ag.grid {
     var utils = Utils;
     var constants = Constants;
 
-    export function groupCellRendererFactory(gridOptionsWrapper: any, selectionRendererFactory: any) {
+    export function groupCellRendererFactory(gridOptionsWrapper: GridOptionsWrapper,
+                                    selectionRendererFactory: SelectionRendererFactory,
+                                    expressionService: ExpressionService,
+                                    eventService: EventService) {
 
         return function groupCellRenderer(params: any) {
 
@@ -39,7 +42,9 @@ module ag.grid {
             // only do this if an indent - as this overwrites the padding that
             // the theme set, which will make things look 'not aligned' for the
             // first group level.
-            if (node.footer || node.level > 0) {
+            var suppressPadding = params.colDef && params.colDef.cellRenderer
+                && params.colDef.cellRenderer.suppressPadding;
+            if (!suppressPadding && (node.footer || node.level > 0)) {
                 var paddingFactor: any;
                 if (params.colDef && params.colDef.cellRenderer && params.colDef.cellRenderer.padding >= 0) {
                     paddingFactor = params.colDef.cellRenderer.padding;
@@ -109,6 +114,9 @@ module ag.grid {
             var refreshIndex = getRefreshFromIndex(params);
             params.api.onGroupExpandedOrCollapsed(refreshIndex);
             showAndHideExpandAndContract(eExpandIcon, eContractIcon, params.node.expanded);
+
+            var event: any = {node: params.node};
+            eventService.dispatchEvent(Events.EVENT_ROW_GROUP_OPENED, event)
         }
 
         function createGroupExpandIcon(expanded: any) {
@@ -124,8 +132,25 @@ module ag.grid {
 
         // creates cell with 'Total {{key}}' for a group
         function createFooterCell(eGroupCell: any, params: any) {
-            var textToDisplay = "Total " + getGroupName(params);
-            var eText = document.createTextNode(textToDisplay);
+            var footerValue: string;
+            var groupName = getGroupName(params);
+            if (params.colDef && params.colDef.cellRenderer && params.colDef.cellRenderer.footerValueGetter) {
+                var footerValueGetter = params.colDef.cellRenderer.footerValueGetter;
+                // params is same as we were given, except we set the value as the item to display
+                var paramsClone: any = utils.cloneObject(params);
+                paramsClone.value = groupName;
+                if (typeof footerValueGetter === 'function') {
+                    footerValue = footerValueGetter(paramsClone);
+                } else if (typeof footerValueGetter === 'string') {
+                    footerValue = expressionService.evaluate(footerValueGetter, paramsClone);
+                } else {
+                    console.warn('ag-Grid: footerValueGetter should be either a function or a string (expression)');
+                }
+            } else {
+                footerValue = 'Total ' + groupName;
+            }
+
+            var eText = document.createTextNode(footerValue);
             eGroupCell.appendChild(eText);
         }
 

@@ -2,10 +2,12 @@
 <html style="height: 100%">
     <head lang="en">
     <meta charset="UTF-8">
-        <title>ag-Grid Grid - A Data Grid for AngularJS</title>
-        <meta name="description" content="A high performance and feature rich data grid for AngularJS. This grid is faster than ui-grid and ng-grid.">
-        <meta name="keywords" content="angularjs angular grid table ui-grid ng-grid"/>
-        <meta property="og:image" content="http://www.ag-grid.com/images/angular-grid.png"/>
+        <title>ag-Grid - Enterprise Javascript Data Grid</title>
+        <meta name="description"
+              content=
+              "Javascript data grid that's feature rich and blazing fast with a brilliant API. Supports Plain Javascript, React, AngularJS 1 & 2 and Web Componets. ag-Grid simply is the best JavaScript data grid you can get.">
+        <meta name="keywords" content="javascript data grid react angularjs angular 2 web components"/>
+        <meta property="og:image" content="https://www.ag-grid.com/images/angular-grid.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!--
@@ -35,7 +37,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
 -->
 
-        <link rel="shortcut icon" href="http://www.ag-grid.com/favicon.ico" />
+        <link rel="shortcut icon" href="https://www.ag-grid.com/favicon.ico" />
 
         <!--maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css-->
         <style>
@@ -75,7 +77,7 @@
                 <div class="row">
                     <div class="col-md-12 top-header big-text">
                         <span class="top-button-wrapper">
-                            <a class="top-button-selected" href="/index.php"> <i class="fa fa-home"></i> Home</a>
+                            <a class="top-button-selected" href="/"> <i class="fa fa-home"></i> Home</a>
                         </span>
                         <span class="top-button-wrapper">
                             <a class="top-button" href="/example.php"> <i class="fa fa-bicycle"></i> Test Drive</a>
@@ -84,10 +86,10 @@
                             <a class="top-button" href="/documentation.php">  <i class="fa fa-book"></i> Documentation</a>
                         </span>
                         <span class="top-button-wrapper">
-                            <a class="top-button" href="/why-the-world-needed-another-angularjs-grid/"> <i class="fa fa-road"></i> Story</a>
+                            <a class="top-button" href="/media.php"> <i class="fa fa-road"></i> Media</a>
                         </span>
                         <span class="top-button-wrapper">
-                            <a class="top-button" href="http://www.angulargrid.com/forum"> <i class="fa fa-users"></i> Forum</a>
+                            <a class="top-button" href="/forum"> <i class="fa fa-users"></i> Forum</a>
                         </span>
                     </div>
                 </div>
@@ -150,7 +152,9 @@
                             The Best Javascript Data Grid
                         </h2>
                         <div style="font-size: 16px;">
-                            Feature rich, high performance, no dependencies.
+                            Feature rich, high performance, great API, no dependencies.
+                        </div>
+                        <div>
                         </div>
 
 <!--
@@ -161,7 +165,7 @@
 
                         <div style="margin-top: 30px;">
                             <div class="col-md-12" style="text-align: center;">
-                                <a class="btn btn-primary header-button" href="http://www.ag-grid.com/dist" role="button">
+                                <a class="btn btn-primary header-button" href="https://www.ag-grid.com/dist" role="button">
                                     <i class="fa fa-download header-icon"></i> Download
                                 </a>
                                 <a class="btn btn-primary header-button" href="example.html" role="button">
@@ -182,51 +186,79 @@
             </div>
         </div>
 
-        <div class="container">
+<!--        <div class="container">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12" style="text-align: center;">
+                </div>
+            </div>
+        </div>
 
-            <div class="row" style="margin-top: 50px;">
+        <div class="horizontal-rule">
+            <hr/>
+        </div>
+-->
+        <div class="container">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12" style="text-align: center;">
+                    <h4>'ag' stads for <b>Ag</b>nostic - choose your framework</h4>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
                 <style>
                     .usage-footer {
                         padding: 20px;
                     }
                 </style>
-                <div class="col-md-3" style="text-align: center;">
+                <div class="col-md-1" style="text-align: center;">
+                </div>
+                <div class="col-md-2" style="text-align: center;">
                     <a href="/best-javascript-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/javascript.png"/>
+                            <img style="height: 100px;" src="images/javascript_large.png"/>
                         </div>
                         <div class="usage-footer">
-                            <b>Pure Javascript</b>
+                            <h4>Pure Javascipt</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3" style="text-align: center;">
+                <div class="col-md-2" style="text-align: center;">
+                    <a href="/best-react-grid/index.php">
+                        <div>
+                            <img style="height: 100px;" src="images/react_large.png"/>
+                        </div>
+                        <div class="usage-footer">
+                            <h4>React</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-2" style="text-align: center;">
                     <a href="/best-angularjs-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/angularjs.png"/>
+                            <img style="height: 100px;" src="images/angularjs_large.png"/>
                         </div>
                         <div class="usage-footer">
-                            <b>AngularJS 1.x</b>
+                            <h4>AngularJS 1.x</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3" style="text-align: center;">
+                <div class="col-md-2" style="text-align: center;">
                     <a href="/best-angularjs-2-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/angular2.png"/>
+                            <img style="height: 100px;" src="images/angular2_large.png"/>
                         </div>
                         <div class="usage-footer">
-                            <b>AngularJS 2</b>
+                            <h4>AngularJS 2</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3" style="text-align: center;">
+                <div class="col-md-2" style="text-align: center;">
                     <a href="/best-web-component-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/webComponents.png"/>
+                            <img style="height: 100px;" src="images/webComponents_large.png"/>
                         </div>
                         <div class="usage-footer">
-                            <b>Web Component</b>
+                            <h4>Web Component</h4>
                         </div>
                     </a>
                 </div>
@@ -431,7 +463,7 @@
             <hr>
 
             <footer class="license">
-                © Niall Crosby 2015
+                © ag-Grid Ltd 2015-2016
             </footer>
         </div>
 
@@ -443,18 +475,18 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
 
-<script src="./dist/ag-grid.min.js?ignore=notused9"></script>
-<link rel="stylesheet" type="text/css" href="./dist/ag-grid.min.css?ignore=notused9">
-<link rel="stylesheet" type="text/css" href="./dist/theme-fresh.min.css?ignore=notused9">
-<link rel="stylesheet" type="text/css" href="./dist/theme-dark.min.css?ignore=notused9">
+<script src="dist/ag-grid.min.js?ignore=notused17"></script>
+<link rel="stylesheet" type="text/css" href="./dist/ag-grid.min.css?ignore=notused17">
+<link rel="stylesheet" type="text/css" href="./dist/theme-fresh.min.css?ignore=notused17">
+<link rel="stylesheet" type="text/css" href="./dist/theme-dark.min.css?ignore=notused17">
 
-<link href="example-file-browser/fileBrowser.css?ignore=notused9" rel="stylesheet">
-<link href="best-angularjs-grid/basic.css?ignore=notused9" rel="stylesheet">
-<link href="example-account-report/account.css?ignore=notused9" rel="stylesheet">
+<link href="example-file-browser/fileBrowser.css?ignore=notused17" rel="stylesheet">
+<link href="best-angularjs-grid/basic.css?ignore=notused17" rel="stylesheet">
+<link href="example-account-report/account.css?ignore=notused17" rel="stylesheet">
 
-<script src="best-angularjs-grid/basic.js?ignore=notused9"></script>
-<script src="example-account-report/account.js?ignore=notused9"></script>
-<script src="example-file-browser/fileBrowser.js?ignore=notused9"></script>
-<script src="index-script.js"></script>
+<script src="minimised/basic.js?ignore=notused17"></script>
+<script src="minimised/account.js?ignore=notused17"></script>
+<script src="minimised/fileBrowser.js?ignore=notused17"></script>
+<script src="minimised/index-script.js"></script>
 
 <?php include_once("analytics.php"); ?>

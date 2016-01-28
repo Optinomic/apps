@@ -41,7 +41,7 @@ include '../documentation_header.php';
 
     <p>
         HTML Code:
-        <pre><code>&lt;ag-grid id="myGrid">&lt;/agile-grid></code></pre>
+        <pre><code>&lt;ag-grid id="myGrid">&lt;/ag-grid></code></pre>
         Javascript Code:<br/>
     <pre><code>var myGrid = document.querySelector('#myGrid');
 myGrid.setGridOptions(gridOptions);</code></pre>
@@ -74,10 +74,10 @@ myGrid.setGridOptions(gridOptions);</code></pre>
         <li><b>Attributes:</b> Attributes can be used for setting up the grid.
             The example uses such properties for the simple data types (ie when
             they are not Javascript objects). Notice that boolean attributes are defaulted
-            to 'true' IF they attribute is provided WITHOUT any value. If the attribute is not provided,
+            to 'true' IF the attribute is provided WITHOUT any value. If the attribute is not provided,
             it is taken as false. Attributes can be changed after the grid is initialised,
             and the grid will update if appropriate (eg open up your dev tools and
-            change the 'group-headers' and set it to 'false'
+            change the 'group-headers' and set it to 'false').
         </li>
         <li><b>Properties:</b> The more complex properties (eg row and column data)
             are attached directly to the grid DOM element.
@@ -100,6 +100,13 @@ myGrid.setGridOptions(gridOptions);</code></pre>
     </ul>
 
     <show-example example="webComponentDataGrid"></show-example>
+
+    <h2>Destroy</h2>
+
+    <p>
+        To get the grid to release resources, call api.destroy(). If you do not do this, old grids will hang around
+        and add to a memory leak problem in your application.
+    </p>
 
     <h2>Next Steps...</h2>
 

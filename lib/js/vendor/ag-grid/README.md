@@ -2,6 +2,8 @@
 ag-Grid
 ==============
 
+"ag" stands for AGnostic
+
 #### Install with Bower
 ```sh
 $ bower install ag-grid
@@ -24,9 +26,9 @@ To build:
 - `bower install`
 - `gulp` or `gulp release`
 
-Normal 'gulp' does not include minification or source maps, and starts a watch. This is for development.
+Default gulp task is for development. It includes source maps, does not include minification, and starts a watch.
 
-'gulp release' does minification and no source maps. This is for releasing.
+'release' gulp task does minification and no source maps. This is for releasing.
 
 If you are doing a Pull Request:
 - Make your code changes in `src/` files only, don't update dist files
@@ -39,21 +41,15 @@ Asking Questions
 ==============
 
 Please do not use GitHub issues to ask questions. Ask questions on the
-[website forum](http://www.angulargrid.com/forum).
+[website forum](http://www.ag-grid.com/forum).
 
 
 Contributing
 ==============
 
-I am not looking for contributors for this project. If you have ideas, feel free to
+ag-Grid is not looking for contributors for the project. If you have ideas, feel free to
 get in touch and let me know. Or if you want to suggest something, feel free to
 create a pull request with your ideas.
-
-My reason for not looking for contributors is that this grid is my hobby,
-something I work on in my spare time and enjoy. The design is something of a passion,
-and I'm bringing the grid into a particular direction. To take on contributors
-would require overhead of organisation, as well as agreeing direction (both
-technical implementation and functional requirements).
 
 If you would like to help, then please provide me with guidance and advice.
 I don't claim to know everything, so welcome others opinions on the direction

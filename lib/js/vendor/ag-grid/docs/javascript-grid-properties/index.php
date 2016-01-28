@@ -33,7 +33,7 @@ include '../documentation_header.php';
     </p>
 
     <h4>
-        <img src="/images/webcomponents.png" height="20px"/>
+        <img src="/images/webComponents.png" height="20px"/>
         Web Components
     </h4>
     <p>
@@ -52,12 +52,8 @@ include '../documentation_header.php';
             <td>Array of Column Definitions..</td>
         </tr>
         <tr>
-            <th>groupHeaders</th>
-            <td>Whether to group the headers.</td>
-        </tr>
-        <tr>
             <th>headerHeight</th>
-            <td>Height, in pixels, of the header row. If not grouping headers, default is 25. If grouping headers, default is 50.</td>
+            <td>Height, in pixels, of the header row. The default is 25px. If grouping, each group row will be this height.</td>
         </tr>
         <tr>
             <th>rowData</th>
@@ -81,16 +77,17 @@ include '../documentation_header.php';
                 hold down ctrl + click the row.</td>
         </tr>
         <tr>
-            <th>pinnedColumnCount</th>
-            <td>Number of columns to pin. Default is 0.</td>
-        </tr>
-        <tr>
             <th>rowHeight</th>
             <td>Height of rows, in pixels. Default is 25 pixels.</td>
         </tr>
         <tr>
             <th>enableColResize</th>
             <td>Set to true or false.</td>
+        </tr>
+        <tr>
+            <th>suppressAutoSize</th>
+            <td>If enableColResize=true suppressAutoSize suppressAutoSize=false, then double clicking the resize
+                bar in the header will not auto-size the column.</td>
         </tr>
         <tr>
             <th>enableSorting, enableServerSideSorting</th>
@@ -136,9 +133,9 @@ include '../documentation_header.php';
                 Turn on if you want to user AngularJS in your custom column headers.</td>
         </tr>
         <tr>
-            <th>groupKeys<br/> groupUseEntireRow<br/>
-                groupDefaultExpanded<br/> groupAggFields <br/>
-                groupSelectsChildren<br/> groupSuppressAutoColumn <br/> groupHidePivotColumns <br/> groupSuppressBlankHeader</th>
+            <th>groupUseEntireRow<br/>
+                groupDefaultExpanded<br/>
+                groupSelectsChildren<br/> groupSuppressAutoColumn <br/> groupHideGroupColumns <br/> groupSuppressBlankHeader</th>
             <td>Parameters for grouping. See the section on grouping for details explanation.</td>
         </tr>
         <tr>
@@ -160,12 +157,22 @@ include '../documentation_header.php';
             <td>The default width for each col. Widths specified in column definitions get preference over this.</td>
         </tr>
         <tr>
+            <th>rowClass</th>
+            <td>The class to give a particular row. Provide either a string (class name) or array of string (array
+                of class names). If you want a different class per row, then use the callback getRowClass(params) instead.</td>
+        </tr>
+        <tr>
+            <th>rowStyle</th>
+            <td>The style for a particular row. Provide an array of CSS key / value pairs eg {color: 'red'}.
+            If you a different style per row, then use the callback getRowStyle(params) instead.</td>
+        </tr>
+        <tr>
             <th>rowsAlreadyGrouped</th>
             <td>Set to true if data provided to the grid is already in node structure (this is for passing
                 already aggregated data to the grid).</td>
         </tr>
         <tr>
-            <th>rowsBuffer</th>
+            <th>rowBuffer</th>
             <td>The number of rows rendered outside the scrollable viewable area the grid renders. Defaults to 20.
                 Having a buffer means the grid will have rows ready to show as the user slowly scrolls vertically.</td>
         </tr>
@@ -174,13 +181,13 @@ include '../documentation_header.php';
             <td>Set to true to show the tool panel by default.</td>
         </tr>
         <tr>
-            <th>toolPanelSuppressPivot</th>
-            <td>Set to true to not show the values or the pivots in the tool panel. It does not make sense
-                to show the values if no pivot functionality is allowed.</td>
+            <th>toolPanelSuppressGroups</th>
+            <td>Set to true to not show the values or the row groups in the tool panel. It does not make sense
+                to show the values if no row grouping functionality is allowed.</td>
         </tr>
         <tr>
             <th>toolPanelSuppressValues</th>
-            <td>Set to true to not show the values in the tool panel. The pivot may optionally still
+            <td>Set to true to not show the values in the tool panel. The row group may optionally still
                 be shown. This is useful when you are providing your own aggregate function.</td>
         </tr>
         <tr>
@@ -197,6 +204,18 @@ include '../documentation_header.php';
                 over the column header.</td>
         </tr>
         <tr>
+            <th>suppressLoadingOverlay</th>
+            <td>Disables the 'loading' overlay.</td>
+        </tr>
+        <tr>
+            <th>suppressNoRowsOverlay</th>
+            <td>Disables the 'no rows' overlay.</td>
+        </tr>
+        <tr>
+            <th>singleClickEdit</th>
+            <td>Set to true to allow editable cells to start editing with a single click.</td>
+        </tr>
+        <tr>
             <th>suppressHorizontalScroll</th>
             <td>Set to true to never show the horizontal scroll. This is useful if the grid is a slave grid,
                 and will scroll with a master grid.</td>
@@ -205,6 +224,25 @@ include '../documentation_header.php';
             <th>slaveGrids</th>
             <td>A list of grids to treat as slaves. If a grid is a slave, it's columns and horizontal scrolling
                 will try to mirror the columns of the master.</td>
+        </tr>
+        <tr>
+            <th>overlayLoadingTemplate</th>
+            <td>Provide a template for 'loading' overlay if not happy with the provided.</td>
+        </tr>
+        <tr>
+            <th>overlayNoRowsTemplate</th>
+            <td>Provide a template for 'no rows' overlay if not happy with the provided.</td>
+        </tr>
+        <tr>
+            <th>suppressParentsInRowNodes</th>
+            <td>If true, rowNodes don't get their parents set. The grid doesn't use the parent reference,
+                it's included to help the client code navigate the node tree if it wants by providing bi-direction
+                navigation up and down the tree. If this is a problem (eg if you need to convert the tree to JSON,
+                which requires no cyclic dependencies) then set this to true.</td>
+        </tr>
+        <tr>
+            <th>headerCellTemplate</th>
+            <td>String for HTML header template to use.</td>
         </tr>
 
     </table>

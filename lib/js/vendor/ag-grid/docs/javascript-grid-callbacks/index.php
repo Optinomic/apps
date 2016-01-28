@@ -33,11 +33,11 @@ include '../documentation_header.php';
     </p>
 
     <h4>
-        <img src="/images/webcomponents.png" height="20px"/>
+        <img src="/images/webComponents.png" height="20px"/>
         Web Components
     </h4>
     <p>
-        Add callbacks to the gridOptions or set as AngularJS properties.
+        Add callbacks to the gridOptions or set as component properties.
     </p>
 
     <h2>List of Callbacks</h2>
@@ -65,12 +65,16 @@ include '../documentation_header.php';
             <td>Callback version of property 'rowStyle'. Function should return an object of CSS values.</td>
         </tr>
         <tr>
+            <th>getRowHeight(params)</th>
+            <td>Callback version of property 'rowHeight'. Function should return a positive number.</td>
+        </tr>
+        <tr>
             <th>headerCellRenderer(params)</th>
             <td>Provide a function for custom header rendering.</td>
         </tr>
         <tr>
             <th>groupRowInnerRenderer(params)<br/> groupAggFunction(params)<br/> groupRowRenderer(params)</th>
-            <td>Callbacks for grouping. See the section on grouping for details explanation.</td>
+            <td>Callbacks for grouping. See the section on <a href="../angular-grid-grouping/index.php#groupingCallbacks">row grouping</a> for detailed explanation.</td>
         </tr>
         <tr>
             <th>isScrollLag()</th>
@@ -79,6 +83,22 @@ include '../documentation_header.php';
                 true to turn off scroll lag feature or b) return true of false from the function
                 isScrollLag. This is a function, as it's expected your code will check the environment to decide
                 whether to use scroll lag or not.</td>
+        </tr>
+        <tr>
+            <th>getBusinessKeyForNode(node)</th>
+            <td>Return a business key for the node. If implemented, then each row in the dom will have an attribute
+                <i>row-id='abc'</i> where abc is what you return as the business key. This is useful for automated
+            testing, as it provides a way for your tool to identify rules based on unique business keys.</td>
+        </tr>
+        <tr>
+            <th>checkboxSelection(params)</th>
+            <td>Callback to say if a cell should have checkbox selection. Same as property on colDef,
+            except this gets called for each column. If you want the first column to have selection,
+            regardless of the column, get this to return "params.colIndex===0"</td>
+        </tr>
+        <tr>
+            <th>getHeaderCellTemplate</th>
+            <td>Function to use instead of headerCellTemplate, should return string or html DOM element.</td>
         </tr>
 
     </table>

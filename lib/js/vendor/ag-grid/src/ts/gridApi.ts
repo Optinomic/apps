@@ -1,10 +1,13 @@
 /// <reference path="grid.ts" />
 /// <reference path="rendering/rowRenderer.ts" />
 /// <reference path="headerRendering/headerRenderer.ts" />
+/// <reference path="csvCreator.ts" />
 
 module ag.grid {
 
     export class GridApi {
+
+        private csvCreator: CsvCreator;
 
         constructor(private grid: Grid,
                     private rowRenderer: RowRenderer,
@@ -17,12 +20,22 @@ module ag.grid {
                     private gridPanel: GridPanel,
                     private valueService: ValueService,
                     private masterSlaveService: MasterSlaveService,
-                    private eventService: EventService) {
+                    private eventService: EventService,
+                    private floatingRowModel: FloatingRowModel) {
+            this.csvCreator = new CsvCreator(this.inMemoryRowController, this.columnController, this.grid, this.valueService);
         }
 
         /** Used internally by grid. Not intended to be used by the client. Interface may change between releases. */
         public __getMasterSlaveService(): MasterSlaveService {
             return this.masterSlaveService;
+        }
+
+        public getDataAsCsv(params?: CsvExportParams): string {
+            return this.csvCreator.getDataAsCsv(params);
+        }
+
+        public exportDataAsCsv(params?: CsvExportParams): void {
+            this.csvCreator.exportDataAsCsv(params)
         }
 
         public setDatasource(datasource:any) {
@@ -35,27 +48,27 @@ module ag.grid {
         }
 
         public setRowData(rowData:any) {
-            this.grid.setRows(rowData);
+            this.grid.setRowData(rowData);
         }
 
         public setRows(rows:any) {
             console.log('ag-Grid: setRows deprecated, please use setRowData()');
-            this.grid.setRows(rows);
+            this.grid.setRowData(rows);
         }
 
         public onNewRows() {
             console.log('ag-Grid: onNewRows deprecated, please use setRowData()');
-            this.grid.setRows();
+            this.grid.setRowData();
         }
 
         public setFloatingTopRowData(rows: any[]): void {
-            this.gridOptionsWrapper.setFloatingTopRowData(rows);
+            this.floatingRowModel.setFloatingTopRowData(rows);
             this.gridPanel.onBodyHeightChange();
             this.refreshView();
         }
 
         public setFloatingBottomRowData(rows: any[]): void {
-            this.gridOptionsWrapper.setFloatingBottomRowData(rows);
+            this.floatingRowModel.setFloatingBottomRowData(rows);
             this.gridPanel.onBodyHeightChange();
             this.refreshView();
         }
@@ -72,6 +85,18 @@ module ag.grid {
         public unselectAll() {
             console.error("unselectAll deprecated, call deselectAll instead");
             this.deselectAll();
+        }
+
+        public refreshRows(rowNodes: RowNode[]): void {
+            this.rowRenderer.refreshRows(rowNodes);
+        }
+
+        public refreshCells(rowNodes: RowNode[], colIds: string[]): void {
+            this.rowRenderer.refreshCells(rowNodes, colIds);
+        }
+
+        public rowDataChanged(rows:any) {
+            this.rowRenderer.rowDataChanged(rows);
         }
 
         public refreshView() {
@@ -92,6 +117,18 @@ module ag.grid {
             this.headerRenderer.updateFilterIcons();
         }
 
+        public isAnyFilterPresent(): boolean {
+            return this.filterManager.isAnyFilterPresent();
+        }
+
+        public isAdvancedFilterPresent(): boolean {
+            return this.filterManager.isAdvancedFilterPresent();
+        }
+
+        public isQuickFilterPresent(): boolean {
+            return this.filterManager.isQuickFilterPresent();
+        }
+
         public getModel() {
             return this.grid.getRowModel();
         }
@@ -110,12 +147,11 @@ module ag.grid {
             this.grid.updateModelAndRefresh(Constants.STEP_MAP);
         }
 
-        public addVirtualRowListener(rowIndex:any, callback:any) {
-            this.grid.addVirtualRowListener(rowIndex, callback);
-        }
-
-        public rowDataChanged(rows:any) {
-            this.rowRenderer.rowDataChanged(rows);
+        public addVirtualRowListener(eventName: string, rowIndex: number, callback: Function) {
+            if (typeof eventName !== 'string') {
+                console.log('ag-Grid: addVirtualRowListener has changed, the first parameter should be the event name, pleae check the documentation.');
+            }
+            this.grid.addVirtualRowListener(eventName, rowIndex, callback);
         }
 
         public setQuickFilter(newFilter:any) {
@@ -126,16 +162,16 @@ module ag.grid {
             this.selectionController.selectIndex(index, tryMulti, suppressEvents);
         }
 
-        public deselectIndex(index:any) {
-            this.selectionController.deselectIndex(index);
+        public deselectIndex(index: number, suppressEvents: boolean = false) {
+            this.selectionController.deselectIndex(index, suppressEvents);
         }
 
-        public selectNode(node:any, tryMulti:any, suppressEvents:any) {
+        public selectNode(node:any, tryMulti: boolean = false, suppressEvents: boolean = false) {
             this.selectionController.selectNode(node, tryMulti, suppressEvents);
         }
 
-        public deselectNode(node:any) {
-            this.selectionController.deselectNode(node);
+        public deselectNode(node:any, suppressEvents: boolean = false) {
+            this.selectionController.deselectNode(node, suppressEvents);
         }
 
         public selectAll() {
@@ -158,12 +194,28 @@ module ag.grid {
                 console.warn('ag-grid: sizeColumnsToFit does not work when forPrint=true');
                 return;
             }
-            var availableWidth = this.gridPanel.getWidthForSizeColsToFit();
-            this.columnController.sizeColumnsToFit(availableWidth);
+            var availableWidth = this.gridPanel.sizeColumnsToFit();
         }
 
-        public showLoading(show:any) {
-            this.grid.showLoadingPanel(show);
+        public showLoadingOverlay(): void {
+            this.grid.showLoadingOverlay();
+        }
+
+        public showNoRowsOverlay(): void {
+            this.grid.showNoRowsOverlay();
+        }
+
+        public hideOverlay(): void {
+            this.grid.hideOverlay();
+        }
+
+        public showLoading(show: any) {
+            console.warn('ag-Grid: showLoading is deprecated, please use api.showLoadingOverlay() and api.hideOverlay() instead');
+            if (show) {
+                this.grid.showLoadingOverlay();
+            } else {
+                this.grid.hideOverlay();
+            }
         }
 
         public isNodeSelected(node:any) {
@@ -232,7 +284,7 @@ module ag.grid {
         public getColumnDef(key:any) {
             var column = this.columnController.getColumn(key);
             if (column) {
-                return column.colDef;
+                return column.getColDef();
             } else {
                 return null;
             }
@@ -271,39 +323,12 @@ module ag.grid {
             this.gridPanel.onBodyHeightChange();
         }
 
-        public setGroupHeaders(groupHeaders: boolean) {
-            this.gridOptionsWrapper.setGroupHeaders(groupHeaders);
-            this.columnController.onColumnsChanged();
-            // if using the default height, then this is impacted by the header count
-            this.gridPanel.onBodyHeightChange();
-        }
-
         public showToolPanel(show:any) {
             this.grid.showToolPanel(show);
         }
 
         public isToolPanelShowing() {
             return this.grid.isToolPanelShowing();
-        }
-
-        public hideColumn(colId:any, hide:any) {
-            console.warn('ag-Grid: hideColumn deprecated - use hideColumn on columnApi instead eg api.columnApi.hideColumn()');
-            this.columnController.hideColumns([colId], hide);
-        }
-
-        public hideColumns(colIds:any, hide:any) {
-            console.warn('ag-Grid: hideColumns deprecated - use hideColumns on columnApi instead eg api.columnApi.hideColumns()');
-            this.columnController.hideColumns(colIds, hide);
-        }
-
-        public getColumnState() {
-            console.warn('ag-Grid: getColumnState deprecated - use getColumnState on columnApi instead eg api.columnApi.getState()');
-            return this.columnController.getState();
-        }
-
-        public setColumnState(state:any) {
-            console.warn('ag-Grid: setColumnState deprecated - use setColumnState on columnApi instead eg api.columnApi.setState()');
-            this.columnController.setState(state);
         }
 
         public doLayout() {
@@ -330,8 +355,16 @@ module ag.grid {
             this.eventService.removeGlobalListener(listener);
         }
 
-        public refreshPivot(): void {
-            this.grid.refreshPivot();
+        public dispatchEvent(eventType: string, event?: any): void {
+            this.eventService.dispatchEvent(eventType, event);
+        }
+
+        public refreshRowGroup(): void {
+            this.grid.refreshRowGroup();
+        }
+
+        public destroy(): void {
+            this.grid.destroy();
         }
     }
 }

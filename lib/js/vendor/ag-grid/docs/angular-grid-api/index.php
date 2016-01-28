@@ -34,7 +34,7 @@ include '../documentation_header.php';
     </p>
 
     <h4>
-        <img src="/images/webcomponents.png" height="20px"/>
+        <img src="/images/webComponents.png" height="20px"/>
         Web Components
     </h4>
     <p>
@@ -66,6 +66,10 @@ include '../documentation_header.php';
                 open, will stay.</td>
         </tr>
         <tr>
+            <th>sizeColumnsToFit()</th>
+            <td>Gets columns to adjust in size to fit the grid horizontally.</td>
+        </tr>
+        <tr>
             <th>selectAll()</th>
             <td>Select all rows (even rows that are not visible due to grouping being and their groups not expanded).</td>
         </tr>
@@ -80,7 +84,7 @@ include '../documentation_header.php';
                 is true, then <i>rowSelected</i> and <i>selectionChanged</i> will not be called during the selection.</td>
         </tr>
         <tr>
-            <th>deselectIndex(index)<br/>deselectNode(node)</th>
+            <th>deselectIndex(index, suppressEvents)<br/>deselectNode(node, suppressEvents)</th>
             <td>Deselects the row node at the given index / node.</td>
         </tr>
         <tr>
@@ -123,13 +127,25 @@ include '../documentation_header.php';
                 are not marked as volatile will be left alone, hence keeping any context or state that they have.</td>
         </tr>
         <tr>
+            <th>refreshRows(rowNodes)</th>
+            <td>Rips out the virtual rows showing representing the provided list of row nodes and then redraws them.</td>
+        </tr>
+        <tr>
+            <th>refreshCells(rowNodes, colIds)</th>
+            <td>Gets the individual cells for the provided rowNodes to refresh, the row itself and all other cells stay intact.</td>
+        </tr>
+        <tr>
             <th>refreshHeader()</th>
             <td>Redraws the header. Useful if a column name changes, or something else that changes how the column header is displayed.</td>
         </tr>
         <tr>
             <th>refreshGroupRows()</th>
             <td>Rip out and re-insert all visible header and footer rows only. Only need to call if update the aggregate data yourself,
-            as this gets called after <i>recomputeAggregates()</i> anyway.</td>
+                as this gets called after <i>recomputeAggregates()</i> anyway.</td>
+        </tr>
+        <tr>
+            <th>refreshGroup()</th>
+            <td>Gets the grid to recompute the row groups.</td>
         </tr>
         <tr>
             <th>getModel()</th>
@@ -164,10 +180,33 @@ include '../documentation_header.php';
             </td>
         </tr>
         <tr>
-            <th>addVirtualRowListener(rowIndex, callback)</th>
-            <td>Register a callback for notifications about a particular virtualised row. When
-                the row is removed from the table (due to virtualisation), the callback is removed.
-                This callback is intended for cell renderers, that want to register for events
+            <th>isQuickFilterPresent()</th>
+            <td>
+                Returns true if the quick filter is set, otherwise false.
+            </td>
+        </tr>
+        <tr>
+            <th>isAdvancedFilterPresent()</th>
+            <td>
+                Returns true if the advanced filter is set, otherwise false.
+            </td>
+        </tr>
+        <tr>
+            <th>isAnyFilterPresent()</th>
+            <td>
+                Returns true if any filter is set. This includes quick filter, advanced filter or external filter.
+            </td>
+        </tr>
+        <tr>
+            <th>addVirtualRowListener(event, rowIndex, callback)</th>
+            <td>Register a callback for notifications about a particular virtualised row.
+                Unlike normal events, you do not need to unregister virtual row listeners.
+                When the row is removed from the grid, all associated row listeners will
+                also be removed. There are two events: 'virtualRowRemoved' - listen
+                for this event if your cellRenderer needs to do clean down after the
+                row no longer exists. 'virtualRowSelected' - listen for this event
+                if you want your cell listener to do something when the row is selected.
+                This callback is intended for cellRenderers that want to register for events
                 for the rendered row - thus if the row is no longer rendered on the screen, the
                 callbacks stop. If the row is redrawn, then the cell renderer must register
                 another callback.
@@ -175,7 +214,7 @@ include '../documentation_header.php';
         </tr>
         <tr>
             <th>getRenderedNodes()</th>
-            <td>Retrieve rendered nodes. Due to virtulisation this will contain only the current visible rows and the amount in the buffer.
+            <td>Retrieve rendered nodes. Due to virtualisation this will contain only the current visible rows and the amount in the buffer.
             </td>
         </tr>
         <tr>
@@ -208,6 +247,17 @@ include '../documentation_header.php';
             <td>Returns the API for the filter for the column. Either provide the colDef (matches on object
                 reference) or the column field attribute (matches on string comparison). Matching by field
                 is normal. Matching by colDef is useful when field is missing or not unique.
+            </td>
+        </tr>
+        <tr>
+            <th>getFilterModel()</th>
+            <td>Gets the current state of all the advanced filters. Used for saving filter state.
+            </td>
+        </tr>
+        <tr>
+            <th>setFilterModel(model)</th>
+            <td>Sets the state of all the advanced filters. Provide it with what you get from getFilterModel()
+                to restore filter state.
             </td>
         </tr>
         <tr>
@@ -256,13 +306,10 @@ include '../documentation_header.php';
                 This is useful if you want the raw value eg for csv export.</td>
         </tr>
         <tr>
-            <th>setGroupHeaders(value)</th>
-            <td>To set group headers (true / false) after the grid has initialised.</td>
-        </tr>
-        <tr>
             <th>setHeaderHeight(value)</th>
             <td>To set the header height (in pixels) after the grid has initialised. Set to null or undefined
-                to use the default.</td>
+                to use the default of 25px. If havling multiple rows in the header, due to column grouping,
+                this will be the height of each row.</td>
         </tr>
         <tr>
             <th>forEachNode(callback)</th>
@@ -281,7 +328,42 @@ include '../documentation_header.php';
             <td>Similar to forEachNode, except skips any filtered out data and each the callback
                 is called in the order the rows are displayed in the grid.</td>
         </tr>
-
+        <tr>
+            <th>exportDataAsCsv(params)</th>
+            <td>Does a CSV export of the grid's data.</td>
+        </tr>
+        <tr>
+            <th>getDataAsCsv(params)</th>
+            <td>Similar to exportDataAsCsv, except returns result as a string rather than export it.</td>
+        </tr>
+        <tr>
+            <th>addEventListener(eventType, listener)</th>
+            <td>Add an event listener for the said event type. Works similar to addEventListener for a browser DOM element.</td>
+        </tr>
+        <tr>
+            <th>addGlobalListener(listener)</th>
+            <td>Add an event listener for all event types coming from the grid.</td>
+        </tr>
+        <tr>
+            <th>removeEventListener(eventType, listener)</th>
+            <td>Remove an event listener.</td>
+        </tr>
+        <tr>
+            <th>removeGlobalListener(listener)</th>
+            <td>Remove a global event listener.</td>
+        </tr>
+        <tr>
+            <th>dispatchEvent(eventType, event)</th>
+            <td>Dispatch an event through the grid. Useful if you are doing a custom cellRenderer and want
+                to fire events such as 'cellValueChanged'.</td>
+        </tr>
+        <tr>
+            <th>destroy()</th>
+            <td>Gets the grid to destroy and release resources. If you are using Angular (version 1 or 2)
+            you do not need to call this, as the grid links in with the AngularJS lifecycle. However if you
+            are using Web Components or native Javascript, you do need to call this, to avoid a memory
+            leak in your application.</td>
+        </tr>
     </table>
 
 </div>

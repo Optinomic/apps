@@ -2,43 +2,68 @@ module ag.grid {
 
     export class ComponentUtil {
 
-        public static SIMPLE_PROPERTIES = [
-            'sortingOrder',
-            'icons','localeText','localeTextFunc',
-            'groupColumnDef','context','rowStyle','rowClass','headerCellRenderer',
-            'groupDefaultExpanded','slaveGrids','rowSelection'
+        public static EVENTS = [
+            // core grid events
+            'modelUpdated', 'cellClicked', 'cellDoubleClicked', 'cellContextMenu', 'cellValueChanged', 'cellFocused',
+            'rowSelected', 'rowDeselected', 'selectionChanged', 'beforeFilterChanged', 'afterFilterChanged',
+            'filterModified', 'beforeSortChanged', 'afterSortChanged', 'virtualRowRemoved',
+            'rowClicked', 'rowDoubleClicked', 'ready', 'gridSizeChanged', 'rowGroupOpened',
+            // column events
+            'columnEverythingChanged','columnRowGroupChanged','columnValueChanged','columnMoved',
+            'columnVisible','columnGroupOpened','columnResized','columnPinnedCountChanged'
         ];
 
-        public static SIMPLE_NUMBER_PROPERTIES = [
-            'rowHeight','rowBuffer','colWidth'
+        // function below fills this with onXXX methods, based on the above events
+        private static EVENT_CALLBACKS: string[];
+
+        public static STRING_PROPERTIES = [
+            'sortingOrder', 'rowClass', 'rowSelection', 'overlayLoadingTemplate',
+            'overlayNoRowsTemplate', 'headerCellTemplate', 'quickFilterText'];
+
+        public static OBJECT_PROPERTIES = [
+            'rowStyle','context','groupColumnDef','localeText','icons','datasource'
         ];
 
-        public static SIMPLE_BOOLEAN_PROPERTIES = [
-            'virtualPaging','toolPanelSuppressPivot','toolPanelSuppressValues','rowsAlreadyGrouped',
+        public static ARRAY_PROPERTIES = [
+            'slaveGrids','rowData','floatingTopRowData','floatingBottomRowData','columnDefs'
+        ];
+
+        public static NUMBER_PROPERTIES = [
+            'rowHeight','rowBuffer','colWidth','headerHeight','groupDefaultExpanded'
+        ];
+
+        public static BOOLEAN_PROPERTIES = [
+            'virtualPaging','toolPanelSuppressGroups','toolPanelSuppressValues','rowsAlreadyGrouped',
             'suppressRowClickSelection','suppressCellSelection','suppressHorizontalScroll','debug',
             'enableColResize','enableCellExpressions','enableSorting','enableServerSideSorting',
             'enableFilter','enableServerSideFilter','angularCompileRows','angularCompileFilters',
-            'angularCompileHeaders','groupSuppressAutoColumn','groupSelectsChildren','groupHidePivotColumns',
+            'angularCompileHeaders','groupSuppressAutoColumn','groupSelectsChildren','groupHideGroupColumns',
             'groupIncludeFooter','groupUseEntireRow','groupSuppressRow','groupSuppressBlankHeader','forPrint',
-            'suppressMenuHide','rowDeselection','unSortIcon','suppressMultiSort','suppressScrollLag'
+            'suppressMenuHide','rowDeselection','unSortIcon','suppressMultiSort','suppressScrollLag',
+            'singleClickEdit','suppressLoadingOverlay','suppressNoRowsOverlay','suppressAutoSize',
+            'suppressParentsInRowNodes','showToolPanel'
         ];
 
-        public static WITH_IMPACT_NUMBER_PROPERTIES = ['pinnedColumnCount','headerHeight'];
-        public static WITH_IMPACT_BOOLEAN_PROPERTIES = ['groupHeaders','showToolPanel'];
-        public static WITH_IMPACT_OTHER_PROPERTIES = [
-            'rowData','floatingTopRowData','floatingBottomRowData','groupKeys',
-            'groupAggFields','columnDefs','datasource','quickFilterText'];
+        public static FUNCTION_PROPERTIES = ['headerCellRenderer', 'localeTextFunc', 'groupRowInnerRenderer',
+            'groupRowRenderer', 'groupAggFunction', 'isScrollLag', 'isExternalFilterPresent',
+            'doesExternalFilterPass', 'getRowClass','getRowStyle', 'getHeaderCellTemplate'];
 
-        public static CALLBACKS = ['groupRowInnerRenderer', 'groupRowRenderer', 'groupAggFunction',
-            'isScrollLag','isExternalFilterPresent','doesExternalFilterPass','getRowClass','getRowStyle',
-            'headerCellRenderer'];
+        public static ALL_PROPERTIES = ComponentUtil.ARRAY_PROPERTIES
+            .concat(ComponentUtil.OBJECT_PROPERTIES)
+            .concat(ComponentUtil.STRING_PROPERTIES)
+            .concat(ComponentUtil.NUMBER_PROPERTIES)
+            .concat(ComponentUtil.FUNCTION_PROPERTIES)
+            .concat(ComponentUtil.BOOLEAN_PROPERTIES);
 
-        public static ALL_PROPERTIES = ComponentUtil.SIMPLE_PROPERTIES
-            .concat(ComponentUtil.SIMPLE_NUMBER_PROPERTIES)
-            .concat(ComponentUtil.SIMPLE_BOOLEAN_PROPERTIES)
-            .concat(ComponentUtil.WITH_IMPACT_NUMBER_PROPERTIES)
-            .concat(ComponentUtil.WITH_IMPACT_BOOLEAN_PROPERTIES)
-            .concat(ComponentUtil.WITH_IMPACT_OTHER_PROPERTIES);
+        public static getEventCallbacks(): string[] {
+            if (!ComponentUtil.EVENT_CALLBACKS) {
+                ComponentUtil.EVENT_CALLBACKS = [];
+                ComponentUtil.EVENTS.forEach( (eventName: string)=> {
+                    ComponentUtil.EVENT_CALLBACKS.push(ComponentUtil.getCallbackForEvent(eventName));
+                });
+            }
+            return ComponentUtil.EVENT_CALLBACKS;
+        }
 
         public static copyAttributesToGridOptions(gridOptions: GridOptions, component: any): GridOptions {
             // create empty grid options if none were passed
@@ -48,103 +73,107 @@ module ag.grid {
             // to allow array style lookup in TypeScript, take type away from 'this' and 'gridOptions'
             var pGridOptions = <any>gridOptions;
             // add in all the simple properties
-            ComponentUtil.SIMPLE_PROPERTIES.concat(ComponentUtil.WITH_IMPACT_OTHER_PROPERTIES).forEach( (key)=> {
+            ComponentUtil.ARRAY_PROPERTIES
+                .concat(ComponentUtil.STRING_PROPERTIES)
+                .concat(ComponentUtil.OBJECT_PROPERTIES)
+                .concat(ComponentUtil.FUNCTION_PROPERTIES)
+                .forEach( (key)=> {
                 if (typeof (component)[key] !== 'undefined') {
                     pGridOptions[key] = component[key];
                 }
             });
-            ComponentUtil.SIMPLE_BOOLEAN_PROPERTIES.concat(ComponentUtil.WITH_IMPACT_BOOLEAN_PROPERTIES).forEach( (key)=> {
+            ComponentUtil.BOOLEAN_PROPERTIES.forEach( (key)=> {
                 if (typeof (component)[key] !== 'undefined') {
                     pGridOptions[key] = ComponentUtil.toBoolean(component[key]);
                 }
             });
-            ComponentUtil.SIMPLE_NUMBER_PROPERTIES.concat(ComponentUtil.WITH_IMPACT_NUMBER_PROPERTIES).forEach( (key)=> {
+            ComponentUtil.NUMBER_PROPERTIES.forEach( (key)=> {
                 if (typeof (component)[key] !== 'undefined') {
                     pGridOptions[key] = ComponentUtil.toNumber(component[key]);
+                }
+            });
+            ComponentUtil.getEventCallbacks().forEach( (funcName) => {
+                if (typeof (component)[funcName] !== 'undefined') {
+                    pGridOptions[funcName] = component[funcName];
                 }
             });
 
             return gridOptions;
         }
 
-        public static processOnChange(changes: any, gridOptions: GridOptions, component: any): void {
-            if (!component._initialised || !changes) { return; }
+        public static getCallbackForEvent(eventName: string): string {
+            if (!eventName || eventName.length < 2) {
+                return eventName;
+            } else {
+                return 'on' + eventName[0].toUpperCase() + eventName.substr(1);
+            }
+        }
+
+        // change this method, the caller should know if it's initialised or not, plus 'initialised'
+        // is not relevant for all component types.
+        // maybe pass in the api and columnApi instead???
+        public static processOnChange(changes: any, gridOptions: GridOptions, api: GridApi): void {
+            //if (!component._initialised || !changes) { return; }
+            if (!changes) { return; }
 
             // to allow array style lookup in TypeScript, take type away from 'this' and 'gridOptions'
-            //var pThis = <any>this;
             var pGridOptions = <any> gridOptions;
 
             // check if any change for the simple types, and if so, then just copy in the new value
-            ComponentUtil.SIMPLE_PROPERTIES.forEach( (key)=> {
+            ComponentUtil.ARRAY_PROPERTIES
+                .concat(ComponentUtil.OBJECT_PROPERTIES)
+                .concat(ComponentUtil.STRING_PROPERTIES)
+                .forEach( (key)=> {
                 if (changes[key]) {
                     pGridOptions[key] = changes[key].currentValue;
                 }
             });
-            ComponentUtil.SIMPLE_BOOLEAN_PROPERTIES.forEach( (key)=> {
+            ComponentUtil.BOOLEAN_PROPERTIES.forEach( (key)=> {
                 if (changes[key]) {
                     pGridOptions[key] = ComponentUtil.toBoolean(changes[key].currentValue);
                 }
             });
-            ComponentUtil.SIMPLE_NUMBER_PROPERTIES.forEach( (key)=> {
+            ComponentUtil.NUMBER_PROPERTIES.forEach( (key)=> {
                 if (changes[key]) {
                     pGridOptions[key] = ComponentUtil.toNumber(changes[key].currentValue);
                 }
             });
+            ComponentUtil.getEventCallbacks().forEach( (funcName)=> {
+                if (changes[funcName]) {
+                    pGridOptions[funcName] = changes[funcName].currentValue;
+                }
+            });
 
             if (changes.showToolPanel) {
-                component.api.showToolPanel(component.showToolPanel);
+                api.showToolPanel(changes.showToolPanel.currentValue);
             }
 
             if (changes.quickFilterText) {
-                component.api.setQuickFilter(component.quickFilterText);
+                api.setQuickFilter(changes.quickFilterText.currentValue);
             }
 
             if (changes.rowData) {
-                component.api.setRows(component.rowData);
+                api.setRowData(changes.rowData.currentValue);
             }
 
             if (changes.floatingTopRowData) {
-                component.api.setFloatingTopRowData(component.floatingTopRowData);
+                api.setFloatingTopRowData(changes.floatingTopRowData.currentValue);
             }
 
             if (changes.floatingBottomRowData) {
-                component.api.setFloatingBottomRowData(component.floatingBottomRowData);
+                api.setFloatingBottomRowData(changes.floatingBottomRowData.currentValue);
             }
 
             if (changes.columnDefs) {
-                component.api.setColumnDefs(component.columnDefs);
+                api.setColumnDefs(changes.columnDefs.currentValue);
             }
 
             if (changes.datasource) {
-                component.api.setDatasource(component.datasource);
-            }
-
-            if (changes.pinnedColumnCount) {
-                component.columnApi.setPinnedColumnCount(component.pinnedColumnCount);
-            }
-
-            if (changes.pinnedColumnCount) {
-                component.columnApi.setPinnedColumnCount(component.pinnedColumnCount);
-            }
-
-            if (changes.groupHeaders) {
-                component.api.setGroupHeaders(component.groupHeaders);
+                api.setDatasource(changes.datasource.currentValue);
             }
 
             if (changes.headerHeight) {
-                component.api.setHeaderHeight(component.headerHeight);
-            }
-
-            // need to review these, they are not impacting anything, they should
-            // call something on the API to update the grid
-            if (changes.groupKeys) {
-                component.gridOptions.groupKeys = component.groupKeys;
-            }
-            if (changes.groupAggFunction) {
-                component.gridOptions.groupAggFunction = component.groupAggFunction;
-            }
-            if (changes.groupAggFields) {
-                component.gridOptions.groupAggFields = component.groupAggFields;
+                api.setHeaderHeight(changes.headerHeight.currentValue);
             }
         }
 

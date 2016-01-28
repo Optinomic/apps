@@ -108,7 +108,7 @@ module ag.grid {
         }
 
         // returns true if any advanced filter (ie not quick filter) active
-        private isAdvancedFilterPresent() {
+        public isAdvancedFilterPresent() {
             var atLeastOneActive = false;
 
             _.iterateObject(this.allFilters, function (key, filterWrapper) {
@@ -208,7 +208,7 @@ module ag.grid {
             });
         }
 
-        private isQuickFilterPresent(): boolean {
+        public isQuickFilterPresent(): boolean {
             return this.quickFilter !== null;
         }
 
@@ -251,39 +251,12 @@ module ag.grid {
             var that = this;
             this.columnController.getAllColumns().forEach(function (column: Column) {
                 var data = node.data;
-                var value = that.valueService.getValue(column.colDef, data, node);
+                var value = that.valueService.getValue(column.getColDef(), data, node);
                 if (value && value !== '') {
                     aggregatedText = aggregatedText + value.toString().toUpperCase() + "_";
                 }
             });
             node.quickFilterAggregateText = aggregatedText;
-        }
-
-        public refreshDisplayedValues() {
-            if (!this.rowModel.getTopLevelNodes) {
-                console.error('ag-Grid: could not find getTopLevelNodes on rowModel. you cannot use setFilter when' +
-                    'doing virtualScrolling as the filter has no way of getting the full set of values to display. ' +
-                    'Either stop using this filter type, or provide the filter with a set of values (see the docs' +
-                    'on configuring the setFilter).')
-            }
-	    	var rows = this.rowModel.getTopLevelNodes();
-    		var colKeys = Object.keys(this.allFilters);
-
-            for (var i = 0, l = colKeys.length; i < l; i++) {
-                var colId = colKeys[i];
-                var filterWrapper = this.allFilters[colId];
-                // if no filter, always pass
-                if (filterWrapper === undefined || (typeof filterWrapper.filter.setFilteredDisplayValues !== 'function')) {
-                    continue;
-                }
-                var displayedFilterValues = new Array();
-                for (var j = 0; j < rows.length; j++) {
-                    if (this.doesFilterPass(rows[j], i)) {
-                        displayedFilterValues.push(rows[j])
-                    }
-                }
-                filterWrapper.filter.setFilteredDisplayValues(displayedFilterValues)
-            }
         }
 
         public onNewRowsLoaded() {
@@ -299,7 +272,7 @@ module ag.grid {
         private createValueGetter(column: Column) {
             var that = this;
             return function valueGetter(node: any) {
-                return that.valueService.getValue(column.colDef, node.data, node);
+                return that.valueService.getValue(column.getColDef(), node.data, node);
             };
         }
 
@@ -313,19 +286,18 @@ module ag.grid {
         }
 
         private getOrCreateFilterWrapper(column: Column) {
-            var filterWrapper = this.allFilters[column.colId];
+            var filterWrapper = this.allFilters[column.getColId()];
 
             if (!filterWrapper) {
                 filterWrapper = this.createFilterWrapper(column);
-                this.allFilters[column.colId] = filterWrapper;
-                this.refreshDisplayedValues();
+                this.allFilters[column.getColId()] = filterWrapper;
             }
 
             return filterWrapper;
         }
 
         private createFilterWrapper(column: Column) {
-            var colDef = column.colDef;
+            var colDef = column.getColDef();
 
             var filterWrapper = {
                 column: column,
@@ -338,7 +310,7 @@ module ag.grid {
                 // if user provided a filter, just use it
                 // first up, create child scope if needed
                 if (this.gridOptionsWrapper.isAngularCompileFilters()) {
-                    filterWrapper.scope = this.$scope.$new();;
+                    filterWrapper.scope = this.$scope.$new();
                 }
                 // now create filter (had to cast to any to get 'new' working)
                 this.assertMethodHasNoParameters(colDef.filter);
@@ -399,6 +371,14 @@ module ag.grid {
             return filterWrapper;
         }
 
+        public destroy() {
+            _.iterateObject(this.allFilters, (key: string, filterWrapper: any) => {
+                if (filterWrapper.filter.destroy) {
+                    filterWrapper.filter.destroy();
+                }
+            });
+        }
+
         private assertMethodHasNoParameters(theMethod: any) {
             var getRowsParams = _.getFunctionParameters(theMethod);
             if (getRowsParams.length > 0) {
@@ -411,8 +391,10 @@ module ag.grid {
 
             var filterWrapper = this.getOrCreateFilterWrapper(column);
 
-            this.popupService.positionPopup(eventSource, filterWrapper.gui, 200);
+            // need to show filter before positioning, as only after filter
+            // is visible can we find out what the width of it is
             var hidePopup = this.popupService.addAsModalPopup(filterWrapper.gui, true);
+            this.popupService.positionPopup(eventSource, filterWrapper.gui, true);
 
             if (filterWrapper.filter.afterGuiAttached) {
                 var params = {

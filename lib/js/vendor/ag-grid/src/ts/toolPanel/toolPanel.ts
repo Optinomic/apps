@@ -17,32 +17,32 @@ module ag.grid {
         }
 
         public init(columnController: any, inMemoryRowController: any, gridOptionsWrapper: GridOptionsWrapper,
-             popupService: PopupService, eventService: EventService) {
+             popupService: PopupService, eventService: EventService, dragAndDropService: DragAndDropService) {
 
-            var suppressPivotAndValues = gridOptionsWrapper.isToolPanelSuppressPivot();
+            var suppressGroupAndValues = gridOptionsWrapper.isToolPanelSuppressGroups();
             var suppressValues = gridOptionsWrapper.isToolPanelSuppressValues();
 
-            var showPivot = !suppressPivotAndValues;
-            var showValues = !suppressPivotAndValues && !suppressValues;
+            var showGroups = !suppressGroupAndValues;
+            var showValues = !suppressGroupAndValues && !suppressValues;
 
             // top list, column reorder and visibility
-            var columnSelectionPanel = new ColumnSelectionPanel(columnController, gridOptionsWrapper, eventService);
-            var heightColumnSelection = suppressPivotAndValues ? '100%' : '50%';
+            var columnSelectionPanel = new ColumnSelectionPanel(columnController, gridOptionsWrapper, eventService, dragAndDropService);
+            var heightColumnSelection = suppressGroupAndValues ? '100%' : '50%';
             this.layout.addPanel(columnSelectionPanel.layout, heightColumnSelection);
             var dragSource = columnSelectionPanel.getDragSource();
 
             if (showValues) {
                 var valuesSelectionPanel = new ValuesSelectionPanel(columnController, gridOptionsWrapper,
-                    popupService, eventService);
+                    popupService, eventService, dragAndDropService);
                 this.layout.addPanel(valuesSelectionPanel.getLayout(), '25%');
                 valuesSelectionPanel.addDragSource(dragSource);
             }
 
-            if (showPivot) {
+            if (showGroups) {
                 var groupSelectionPanel = new GroupSelectionPanel(columnController, inMemoryRowController,
-                    gridOptionsWrapper, eventService);
-                var heightPivotSelection = showValues ? '25%' : '50%';
-                this.layout.addPanel(groupSelectionPanel.layout, heightPivotSelection);
+                    gridOptionsWrapper, eventService, dragAndDropService);
+                var heightGroupSelection = showValues ? '25%' : '50%';
+                this.layout.addPanel(groupSelectionPanel.layout, heightGroupSelection);
                 groupSelectionPanel.addDragSource(dragSource);
             }
 

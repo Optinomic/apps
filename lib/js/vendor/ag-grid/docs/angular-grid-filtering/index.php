@@ -106,9 +106,20 @@ columnDefinition = {
                 automatically as the selection changes.</li>
             <li><b>suppressRemoveEntries:</b> Set to true to stop the filter from removing values that are no
                 longer available (like what Excel does).</li>
+            <li><b>comparator(a,b):</b> Comparator for sorting. If not provided, the colDef comparator is used. If colDef
+                also not provided, the default (agGrid provided) comparator is used.</li>
         </ul>
-
     </p>
+
+    <note>
+        The comparator for a set filter is only provided the values as the first two parameters, whereas the comparator for the colDef
+        is also provided the row data as additional parameters. This is because when sorting rows, row data exists. For example,
+        take 100 rows split across the colors {white,black}. The colDef comparator will be sorting 100 rows, however the
+        filter will be only sorting two values.
+        <br/>
+        If you are providing a comparator that depends on the row data, and you are using set filter, be sure to provide
+        the set filter with an alternative comparator that doesn't depend on the row data.
+    </note>
 
     <h4>Text and Number Filter Parameters</h4>
     <p>
@@ -139,6 +150,12 @@ columnDefinition = {
         a complete list, if listing days of the week, and no data for Wednesday exists, then presenting
         the filter to the user could give the impression that the filter is broken because it is missing
         Wednesday as an option.
+    </p>
+
+    <p>
+        The example also demonstrates using the <i>ag-header-cell-filtered</i> class, which is applied to the header
+        cell when the header is filtered. By default, no style is applied to this class, the example shows
+        applying a different color background to this style.
     </p>
 
     <show-example example="example1"></show-example>
@@ -219,11 +236,13 @@ columnDefinition = {
     MyCustomFilter.prototype.getGui = function () {}
     MyCustomFilter.prototype.isFilterActive = function() {}
     MyCustomFilter.prototype.doesFilterPass = function (params) {}
+    MyCustomFilter.prototype.getApi = function () {}
 
     // optional methods
     MyCustomFilter.prototype.afterGuiAttached = function(params) {}
     MyCustomFilter.prototype.onNewRowsLoaded = function () {}
     MyCustomFilter.prototype.onAnyFilterChanged = function () {}
+    MyCustomFilter.prototype.destroy = function () {}
 
     </pre>
 
@@ -307,14 +326,46 @@ columnDefinition = {
         </tr>
         <tr>
             <th>getApi</th>
-            <td>Returns the API for the filter. Useful if you want your filter manipulated via an API.</td>
+            <td>Returns the API for the filter. Useful if you want your filter manipulated via an API.
+            <pre>MyCustomFilter.prototype.getApi = function () {
+    return {
+        // called by api.getFilterModel() - if not implemented, then api.getFilterModel() will fail
+        getModel: function() {
+            // return how you want your model to look when someone
+            // either calls getModel() directly on this filter,
+            // or someone calls 'getFilterModel' on the main api
+            var model = {value: theFilter.value};
+            return model;
+        },
+        // called by api.setFilterModel(model) - if not implemented, then api.getFilterModel() will fail
+        setModel: function(model) {
+            // this will be passed the model that was returned in
+            // get model.
+            theFilter.value = model.value;
+        },
+        // then add as many of your own methods that you want,
+        // only you will be calling these.
+        clearMyValues: function() {
+        }
+    }
+}</pre>
+            </td>
+            <tr>
+                <th>destroy</th>
+                <td>Gets called when the grid is destroyed. If your custom filter needs to do
+                    any resource cleaning up, do it here. A filter is NOT destroyed when it is
+                    made 'not visible', as the gui is kept to be shown again if the user selects
+                    that filter again. The filter is destroyed when the grid is destroyed.
+                </td>
+            </tr>
         </tr>
     </table>
 
     <h3>Custom Filter Example</h3>
 
     <p>
-        The example below shows a custom filter on the Athlete column.
+        The example below shows two custom filters. The first is on the Athlete column and is implemented
+        using AngularJS. The second is on the Year column and is implemented using native Javascript.
     </p>
 
     <show-example example="example2"></show-example>
@@ -324,11 +375,11 @@ columnDefinition = {
     <p>
         It is possible to set filters via the API. You do this by first getting an API to the filter
         in question (ie for a particular column) and then making calls on the filter API. Getting
-        the API is done via the gridOptions api method getFilterApiForColDef(colDef).
+        the API is done via the gridOptions api method getFilterApi(colDef).
     </p>
     <p>
         Each column has it's own private filter and associated API. So if you want to change filters
-        on more than one column, you have to call getFilterApiForColDef(colDef) for each column.
+        on more than one column, you have to call getFilterApi(colDef) for each column.
     </p>
     <p>
         Each filter type has it's own API. So if it's a set filter, the filter API is specific

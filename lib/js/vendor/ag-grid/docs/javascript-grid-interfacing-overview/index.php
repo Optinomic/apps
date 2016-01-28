@@ -11,9 +11,9 @@ include '../documentation_header.php';
     <h2>Interfacing Overview</h2>
 
     <p>
-        The interface to ag-Grid is modelled around Web Components. This gives ag-Grid a consistent
+        The interface to ag-Grid is modelled around standard DOM elements. This gives ag-Grid a consistent
         feel to already existing DOM elements (nice for everyone). It also has the added benefit
-        of fitting nicely into AngularJS 2.
+        of fitting nicely into Web Components, React and AngularJS 2.
     </p>
     <p>
         Each interaction with the grid can be broken down into the following categories:
@@ -22,24 +22,20 @@ include '../documentation_header.php';
         <li><b>Properties</b>: Properties are for changing the state inside the grid. These are
         analogous to properties on a DOM object.</li>
         <li><b>Events</b>: Events are for handling changes from the grid. These are analogous
-        to evens in the DOM.</li>
+        to events in the DOM.</li>
         <li><b>Callbacks</b>: Functions that you provide that the grid calls, as a way of
-        modifying behaviour of the grid.</li>
+        modifying behaviour of the grid. This is the grid asking the application a question
+        such as 'what color should this cell be', it is not a means to pass state into or
+        out of the grid.</li>
         <li><b>API</b>: API into the grid, to provide features that are not representable
         via properties and events.</li>
     </ul>
-
-    <p>
-        Even if you do not use AngularJS 2 or Web Components, the model above is
-        good for understanding the interface, as it helps towards it been self documenting
-        and predictable.
-    </p>
 
     <h2>
         <img src="/images/javascript.png" height="50"/>
         <img src="/images/angularjs.png" height="50px"/>
         <img src="/images/angular2.png" height="50px"/>
-        <img src="/images/webcomponents.png" height="50px"/>
+        <img src="/images/webComponents.png" height="50px"/>
         Grid Options
     </h2>
 
@@ -54,7 +50,7 @@ include '../documentation_header.php';
         The example below shows the different type of items on the gridOptions.
     </p>
     <pre><code>var gridOptions = {
-    // PROPERTIES - object properties, myRowData and myColDefs is created somewhere in our application
+    // PROPERTIES - object properties, myRowData and myColDefs are created somewhere in your application
     rowData: myRowData,
     colDef: myColDefs,
 
@@ -83,27 +79,32 @@ gridOptions.api.refreshView();
 gridOptions.columnApi.sizeColumnsToFit();
 </code></pre>
 
+    <h3>Two Ways of Event Binding</h3>
+
     <p>
         In addition to adding event listeners directly onto the gridOptions, it is possible
         to register for events, similar to registering for events on native DOM elements.
         This means there are two ways to listen for events, which again aligns with how DOM elements work.
-        Registering for events can be done through the API as follows:
+        The first is to put an <i>onXXX()</i> method (where XXX = the event name) like in
+        the example above, the second is to register for the event like in the following example:
     </p>
 
     <pre><code>// create handler function
-function myOnRowClicked(event) {
+function myRowClickedHandler(event) {
     console.log('the row was clicked');
 }
 
 // add the handler function
-gridOptions.api.addEventListener('rowClicked', myOnRowClicked);
+gridOptions.api.addEventListener('rowClicked', myRowClickedHandler);
 </code></pre>
 
+    <h3>Default Boolean Properties</h3>
+
     <p>
-        Where the value is a boolean (true or false), then false (or leave blank) is the default value.
-        For this reason, on / off items are presented in such was as the most common usage is
-        false, eg suppressCellSelection is worded as such as most people will want cell selection
-        to be turned on.
+        Where the property is a boolean (true or false), then false (or leave blank) is the default value.
+        For this reason, on / off items are presented in such was as the most common usage (which will
+        be the default) is false, eg suppressCellSelection is worded as such as most people will want cell
+        selection to be turned on.
     </p>
 
     <h2>
@@ -143,14 +144,16 @@ gridOptions.api.addEventListener('rowClicked', myOnRowClicked);
     <p>
         All of the above (attributes, properties, callbacks and event handlers) are registered
         using their 'dash' syntax and not camelcase. For example, the property enableSorting
-        is bound using enable-sorting.
+        is bound using enable-sorting. <i>enable-sorting</i>. The following example shows
+        some bindings:
     </p>
 
     <pre><code>&lt;ag-grid-ng2
     // give an AngularJS ID to the grid
     #myGrid
 
-    // these are boolean values, which if included without a value, default to Yes
+    // these are boolean values, which if included without a value, default to true
+    // (which is different to leaving them out, in which case the default is false)
     enable-sorting
     enable-filter
 
@@ -180,7 +183,7 @@ gridOptions.api.addEventListener('rowClicked', myOnRowClicked);
     <pre><code>&lt;button (click)="<b>agGrid</b>.api.deselectAll()">Clear Selection&lt;/button></code></pre>
 
     <h2>
-        <img src="/images/webcomponents.png" height="50px"/>
+        <img src="/images/webComponents.png" height="50px"/>
         Web Components
     </h2>
 
@@ -200,8 +203,8 @@ gridOptions.api.addEventListener('rowClicked', myOnRowClicked);
     </ul>
 
     <p>
-        Attributes are registered using their 'dash' syntax and not camelcase. For example,
-        the property enableSorting is bound using enable-sorting.
+        Bindings are registered using their 'dash' syntax and not camelcase. For example,
+        the property enableSorting is bound using <i>enable-sorting</i>.
     </p>
 
     <p>
@@ -271,7 +274,7 @@ myGrid.showToolPanel = true;
     <h2>Next Steps...</h2>
 
     <p>
-        And that's it doc, that's you know how to interface with the grid. Go now and find out about all
+        And that's it Doc, now you know how to interface with the grid. Go now and find out about all
         the great attributes, properties, callbacks and events you can use. Interact
         well. Be safe. Don't do drugs.
     </p>

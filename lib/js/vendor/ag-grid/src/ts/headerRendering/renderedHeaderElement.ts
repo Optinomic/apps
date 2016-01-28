@@ -11,17 +11,14 @@ module ag.grid {
             this.eRoot = eRoot;
         }
 
-        public getERoot(): HTMLElement {
-            return this.eRoot;
-        }
-
         // methods implemented by the base classes
         public destroy(): void {}
         public refreshFilterIcon(): void {}
         public refreshSortIcon(): void {}
         public onDragStart(): void {}
-        public onDragging(dragChange: number): void {}
+        public onDragging(dragChange: number, finished: boolean): void {}
         public onIndividualColumnResized(column: Column): void {}
+        public getGui(): HTMLElement { return null; }
 
         public addDragHandler(eDraggableElement: any) {
             var that = this;
@@ -31,19 +28,20 @@ module ag.grid {
                 that.dragStartX = downEvent.clientX;
 
                 var listenersToRemove = <any> {};
+                var lastDelta = 0;
 
                 listenersToRemove.mousemove = function (moveEvent: any) {
                     var newX = moveEvent.clientX;
-                    var change = newX - that.dragStartX;
-                    that.onDragging(change);
+                    lastDelta = newX - that.dragStartX;
+                    that.onDragging(lastDelta, false);
                 };
 
                 listenersToRemove.mouseup = function () {
-                    that.stopDragging(listenersToRemove);
+                    that.stopDragging(listenersToRemove, lastDelta);
                 };
 
                 listenersToRemove.mouseleave = function () {
-                    that.stopDragging(listenersToRemove);
+                    that.stopDragging(listenersToRemove, lastDelta);
                 };
 
                 that.eRoot.addEventListener('mousemove', listenersToRemove.mousemove);
@@ -52,12 +50,13 @@ module ag.grid {
             });
         }
 
-        public stopDragging(listenersToRemove: any) {
+        public stopDragging(listenersToRemove: any, dragChange: number) {
             this.eRoot.style.cursor = "";
             var that = this;
             _.iterateObject(listenersToRemove, function (key: any, listener: any) {
                 that.eRoot.removeEventListener(key, listener);
             });
+            that.onDragging(dragChange, true);
         }
 
     }

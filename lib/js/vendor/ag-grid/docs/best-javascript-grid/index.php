@@ -19,16 +19,13 @@ include '../documentation_header.php';
     </p>
 
     <p>
-        To use ag-Grid using pure Javascript call the global <i>agGridGlobalFunc()</i> function to initialise an instance of the grid.
+        To use ag-Grid using pure Javascript new <i>ag.grid.Grid(div, gridOptions)</i> function to initialise an instance of the grid.
     </p>
 
-    <pre>agGridGlobalFunc(cssSelectorForDiv, gridOptions);</pre>
-
-    <p>
-        Where:<br>
-        <b>cssSelectorForDiv:</b> The CSS selector for the div to contain the grid.<br>
-        <b>gridOptions:</b> The grid options to pass to the grid.<br>
-    </p>
+    <pre>    // example creating a grid using raw Javascript
+    var eGridDiv = document.querySelector('#myGrid'); // get a reference to the grid div
+    new ag.grid.Grid(eGridDiv, gridOptions); //create a new grid
+</pre>
 
     <h2>Simple Plain Javascript Example</h2>
 
@@ -41,12 +38,19 @@ include '../documentation_header.php';
     <h2>Complex Plain Javascript Example</h2>
 
     <p>
-        This below example has much more details. The mechanism for setting up the grid
+        The below example has much more details. The mechanism for setting up the grid
         is the same as above. Don't worry about the finer details for now, how all the
         different options are configured is explained in the relevant parts of the documentation.
     </p>
 
     <show-example example="html5grid"></show-example>
+
+    <h2>Destroy</h2>
+
+    <p>
+        To get the grid to release resources, call api.destroy(). If you do not do this, old grids will hang around
+        and add to a memory leak problem in your application.
+    </p>
 
     <h2>Next Steps...</h2>
 

@@ -612,105 +612,6 @@ website = http://www.optinomic.com/
 
 
 
-[template medication_grid 6 8]
-<head>
-    <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
-</head>
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
-    <div hide-sm>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-    </div>
-    <div flex>
-        <p>Grid</p>
-        <vaadin-grid style="height: 300px;">
-            <table>
-                <colgroup>
-                    <col name="d.medication.medication_name">
-                        <col name="d.medication.medication_dosierung_mo">
-                            <col name="d.medication.medication_dosierung_mi">
-                                <col name="d.medication.medication_dosierung_ab">
-                                    <col name="d.medication.medication_dosierung_na">
-                </colgroup>
-            </table>
-        </vaadin-grid>
-        <pre>
-            {{d.medication}}
-        </pre>
-    </div>
-</div>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=2_0_1">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
 [template medication_table 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
@@ -6727,6 +6628,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.saveMedication();
     };
 
+
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
@@ -12252,7 +12154,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 /*# sourceMappingURL=materialdesignicons.min.css.map */
  
-ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-no-scrolls{white-space:nowrap;display:inline-block}.ag-scrolls{height:100%}.ag-popup-backdrop{position:fixed;left:0;top:0;width:100%;height:100%}.ag-header{position:absolute;top:0;left:0;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;width:100%}.ag-pinned-header{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-header-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-scrolls .ag-header-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap;height:100%}.ag-no-scrolls .ag-header-container{white-space:nowrap}.ag-header-cell{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;vertical-align:bottom;text-align:center;display:inline-block}.ag-header-cell-grouped{height:50%}.ag-header-cell-not-grouped{height:100%}.ag-header-group{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;height:100%}.ag-header-group-cell{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:center;height:50%;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-group-cell-label{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-cell-label{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-cell-resize{height:100%;width:4px;float:right;cursor:col-resize}.ag-header-cell-menu-button{float:right}.ag-loading-panel{display:table;width:100%;height:100%}.ag-loading-wrapper{display:table-cell;vertical-align:middle;text-align:center}.ag-body{height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.ag-floating-top{position:absolute;left:0;width:100%;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-pinned-floating-top{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%;position:relative}.ag-floating-top-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-floating-top-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap}.ag-floating-bottom{position:absolute;left:0;width:100%;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-pinned-floating-bottom{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%;position:relative}.ag-floating-bottom-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-floating-bottom-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap}.ag-pinned-cols-viewport{float:left;position:absolute;overflow:hidden}.ag-pinned-cols-container{display:inline-block;position:relative}.ag-body-viewport-wrapper{height:100%}.ag-body-viewport{overflow:auto;height:100%}.ag-scrolls .ag-body-container{position:relative;display:inline-block}.ag-scrolls .ag-row{white-space:nowrap;position:absolute;width:100%}.agile-gird-row:hover{background-color:#f0f8ff}.ag-cell{display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;float:left}.ag-group-cell-entire-row{width:100%;display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-footer-cell-entire-row{width:100%;display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-large .ag-root{font-size:20px}.ag-filter{position:absolute;z-index:100}.ag-filter-list-viewport{overflow-x:auto;height:200px;width:200px}.ag-filter-list-container{position:relative;overflow:hidden}.ag-filter-item{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;position:absolute}.ag-filter-filter{width:170px;margin:4px}.ag-filter-select{width:110px;margin:4px 4px 0 4px}.ag-no-vertical-scroll .ag-scrolls{height:unset}.ag-no-vertical-scroll .ag-body{height:unset}.ag-no-vertical-scroll .ag-body-viewport-wrapper{height:unset}.ag-no-vertical-scroll .ag-body-viewport{height:unset}.ag-list-selection{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.ag-tool-panel-container{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;width:200px} 
+ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-no-scrolls{white-space:nowrap;display:inline-block}.ag-scrolls{height:100%}.ag-popup-backdrop{position:fixed;left:0;top:0;width:100%;height:100%}.ag-header{position:absolute;top:0;left:0;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;width:100%}.ag-pinned-left-header{float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-pinned-right-header{float:right;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-header-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;height:100%}.ag-scrolls .ag-header-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap;height:100%}.ag-no-scrolls .ag-header-container{white-space:nowrap}.ag-header-cell{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;vertical-align:bottom;text-align:center;display:inline-block;height:100%}.ag-header-group-cell{display:inline-block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-group-cell-label{display:table-cell;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-cell-label{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-header-cell-resize{height:100%;width:4px;float:right;cursor:col-resize}.ag-header-expand-icon{padding-left:4px}.ag-header-cell-menu-button{float:right}.ag-overlay-panel{display:table;width:100%;height:100%;pointer-events:none}.ag-overlay-wrapper{display:table-cell;vertical-align:middle;text-align:center}.ag-body{height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.ag-floating-top{position:absolute;left:0;width:100%;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-pinned-left-floating-top{float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-pinned-right-floating-top{float:right;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-floating-top-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;height:100%}.ag-floating-top-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap}.ag-floating-bottom{position:absolute;left:0;width:100%;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.ag-pinned-left-floating-bottom{float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-pinned-right-floating-bottom{float:right;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;overflow:hidden;height:100%}.ag-floating-bottom-viewport{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;height:100%}.ag-floating-bottom-container{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;white-space:nowrap}.ag-pinned-left-cols-viewport{float:left;overflow:hidden}.ag-pinned-left-cols-container{display:inline-block;position:relative}.ag-pinned-right-cols-viewport{float:right;overflow-x:hidden;overflow-y:auto}.ag-pinned-right-cols-container{display:inline-block;position:relative}.ag-body-viewport-wrapper{height:100%}.ag-body-viewport{overflow-x:auto;overflow-y:auto;height:100%}.ag-scrolls .ag-body-container{position:relative;display:inline-block}.ag-scrolls .ag-row{white-space:nowrap;position:absolute;width:100%}.agile-gird-row:hover{background-color:#f0f8ff}.ag-cell{display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;float:left}.ag-group-cell-entire-row{width:100%;display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-footer-cell-entire-row{width:100%;display:inline-block;white-space:nowrap;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden}.ag-large .ag-root{font-size:20px}.ag-filter{position:absolute;z-index:100}.ag-filter-list-viewport{overflow-x:auto;height:200px;width:200px}.ag-filter-list-container{position:relative;overflow:hidden}.ag-filter-item{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;position:absolute}.ag-filter-filter{width:170px;margin:4px}.ag-filter-select{width:110px;margin:4px 4px 0 4px}.ag-no-vertical-scroll .ag-scrolls{height:unset}.ag-no-vertical-scroll .ag-body{height:unset}.ag-no-vertical-scroll .ag-body-viewport-wrapper{height:unset}.ag-no-vertical-scroll .ag-body-viewport{height:unset}.ag-list-selection{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.ag-tool-panel-container{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;width:200px} 
 .ag-optinomic .ag-root {
     border: 1px solid #E0E0E0;
     font-family: "Roboto", sans-serif, "Helvetica Neue", Helvetica, Arial;
