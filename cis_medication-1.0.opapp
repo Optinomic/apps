@@ -613,7 +613,11 @@ website = http://www.optinomic.com/
 
 
 [template medication_grid 6 8]
-<link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/0.3.0/vaadin-core-elements/vaadin-core-elements.html"> <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+<head>
+    <script src="https://cdn.vaadin.com/vaadin-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/latest/vaadin-grid/vaadin-grid.html">
+</head>
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
             <md-progress-linear md-mode="indeterminate"></md-progress-linear>
@@ -628,7 +632,7 @@ website = http://www.optinomic.com/
     </div>
     <div flex>
         <p>Grid</p>
-        <vaadin-grid id="simple">
+        <vaadin-grid style="height: 300px;">
             <table>
                 <colgroup>
                     <col name="d.medication.medication_name">
@@ -640,7 +644,7 @@ website = http://www.optinomic.com/
             </table>
         </vaadin-grid>
         <pre>
-        	{{d.medication}}
+            {{d.medication}}
         </pre>
     </div>
 </div>
