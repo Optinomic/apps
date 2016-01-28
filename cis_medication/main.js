@@ -519,103 +519,56 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     $scope.setDataView = function() {
 
-        console.log(' ===== setDataView =====');
+        // If we have multiple surveys - make sure to take the right 'responses'.
+        var currentResultGroup = 0;
+        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
+            if (current_group_def.survey === 'aus_survey') {
+                currentResultGroup = current_group_def.id;
+            };
+        });
 
-        var resultsArray = $scope.d.medication;
+        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
+        $scope.d.dataMain.survey_responses_array = [];
+        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
+            var my_response = current_result.entity.data.response;
 
-        var my_columnDefs = [{
-            headerTooltip: "Medikament",
-            headerName: "Medikament",
-            editable: true,
-            field: "medication_name",
-            cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Morgen",
-            headerName: "Morgen",
-            suppressSizeToFit: true,
-            width: 40,
-            field: "medication_dosierung_mo",
-            cellClass: 'md-body-2',
-        }, {
-            headerTooltip: "Mittag",
-            headerName: "Mittag",
-            suppressSizeToFit: true,
-            width: 40,
-            field: "medication_dosierung_mi",
-            cellClass: 'md-body-2',
-        }, {
-            headerTooltip: "Abend",
-            headerName: "Abend",
-            suppressSizeToFit: true,
-            width: 40,
-            field: "medication_dosierung_ab",
-            cellClass: 'md-body-2',
-        }, {
-            headerTooltip: "Nacht",
-            headerName: "Nacht",
-            suppressSizeToFit: true,
-            width: 40,
-            field: "medication_dosierung_na",
-            cellClass: 'md-body-2',
-        }];
+            // If ng-survey survey @ some more info to 'response'.
+            my_response.filled = current_result.entity.data.filled;
+            my_response.survey_name = current_result.event.survey_name;
 
-        my_columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true);
+            $scope.d.dataMain.survey_responses_array.push(my_response);
+        });
+        var resultsArray = $scope.d.dataMain.survey_responses_array;
 
 
+        // Init Responses
+        $scope.d.grid = {};
+        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
 
-        var columnDefs = [{
-            headerName: "Medikament",
-            field: "medication_name"
-        }];
-
-        var rowData = [{
-            medication_name: "Toyota",
-            model: "Celica",
-            price: 35000
-        }, {
-            medication_name: "Ford",
-            model: "Mondeo",
-            price: 32000
-        }, {
-            medication_name: "Porsche",
-            model: "Boxter",
-            price: 72000
-        }];
-
-        // $scope.d.grid = {};
-        // $scope.d.grid.options = {};
-        // $scope.d.grid.options.columnDefs = columnDefs;
-        // $scope.d.grid.options.rowData = rowData;
+        // automatic
+        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
 
         // DataView - Options
         $scope.d.grid.options = {
-            //pinnedColumnCount: 1,
-            columnDefs: columnDefs,
-            dontUseScrolls: false,
-            enableCellExpressions: true,
-            enableColResize: true,
-            enableFilter: true,
-            enableSorting: true,
             headerHeight: 45,
-            rowData: rowData,
             rowHeight: 28,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
             rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
             showToolPanel: false
         };
 
 
-
-        // $scope.d.grid.options.rowData = NEWrowData;
-
-        //$scope.d.grid.options.api.setRowData(NEWrowData);
-
-
-        //$scope.d.grid.options.api.setDatasource(resultsArray);
-        //$scope.d.grid.options.api.refreshView();
-        // $scope.d.functions.refreshView();
         //console.log('dataGRID: ', $scope.d.grid);
     };
+
 
     $scope.updateDataView = function() {
 
