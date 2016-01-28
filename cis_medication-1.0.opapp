@@ -6667,7 +6667,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // EVENTS
             onReady: function(event) {
-                console.log('the grid is now ready');
+                console.log('the grid is now ready - updating');
+                $scope.updateDataView();
             },
         };
 
