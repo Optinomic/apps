@@ -16,7 +16,7 @@ generate() {
 
     echo Generating $filename ...
     cd "$path/$name"
-    m4 base.opapp.m4 > "$path/$filename"
+    m4 "$path/helpers.m4" base.opapp.m4 > "$path/$filename"
     cd "$path"
 }
 
