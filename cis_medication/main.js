@@ -602,7 +602,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         $scope.d.grid.options.rowData = NEWrowData;
-        $scope.d.grid.options.api.setRowData(NEWrowData);
+        $scope.d.grid.options.api.onNewDatasource();
+        //$scope.d.grid.options.api.setRowData(NEWrowData);
 
 
     };
