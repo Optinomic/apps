@@ -1,0 +1,24 @@
+<link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/0.3.0/vaadin-core-elements/vaadin-core-elements.html"> include(../lib/html/optinomic/page/start.m4)
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
+    <div hide-sm>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    </div>
+    <div flex>
+        <p>Grid</p>
+        <vaadin-grid id="simple">
+            <table>
+                <colgroup>
+                    <col name="d.medication.medication_name">
+                        <col name="d.medication.medication_dosierung_mo">
+                            <col name="d.medication.medication_dosierung_mi">
+                                <col name="d.medication.medication_dosierung_ab">
+                                    <col name="d.medication.medication_dosierung_na">
+                </colgroup>
+            </table>
+        </vaadin-grid>
+        <pre>
+        	{{d.medication}}
+        </pre>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)
