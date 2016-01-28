@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
+            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -305,7 +306,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             $scope.d.appState = 'show';
-            $scope.setDataView();
             $scope.updateDataView();
 
 
@@ -521,23 +521,48 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.setDataView = function() {
 
 
+        var columnDefs = [{
+            headerName: "Make",
+            field: "make"
+        }, {
+            headerName: "Model",
+            field: "model"
+        }, {
+            headerName: "Price",
+            field: "price"
+        }];
+
+        var rowData = [{
+            make: "Toyota",
+            model: "Celica",
+            price: 35000
+        }, {
+            make: "Ford",
+            model: "Mondeo",
+            price: 32000
+        }, {
+            make: "Porsche",
+            model: "Boxter",
+            price: 72000
+        }];
+
         var resultsArray = $scope.d.dataMain.users.all;
 
 
         // Init Responses
         $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+        //$scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
 
         // automatic
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
+        //$scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
 
         // DataView - Options
         $scope.d.grid.options = {
             headerHeight: 45,
             rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
+            rowData: rowData,
+            columnDefs: columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
@@ -559,23 +584,29 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var NEWrowData = [{
-            medication_name: "Mercedes",
+            make: "Mercedes",
             model: "Celica",
             price: 35000
         }, {
-            medication_name: "BMW",
+            make: "BMW",
             model: "Mondeo",
             price: 32000
         }, {
-            medication_name: "Ford",
+            make: "Ford",
             model: "Focus",
             price: 32000
         }, {
-            medication_name: "Porsche",
+            make: "Porsche",
             model: "Boxter",
             price: 72000
         }];
     };
+
+
+
+    $scope.d.grid.options.rowData = NEWrowData;
+
+
 
     // $scope.d.grid.options.api.setRowData(NEWrowData);
 
