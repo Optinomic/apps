@@ -306,7 +306,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             $scope.d.appState = 'show';
-            $scope.updateDataView();
 
 
             //console.log('(+) getEntrys ', $scope.d.medication);
@@ -570,18 +569,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             enableColResize: true,
             enableCellExpressions: true,
             enableSorting: true,
-            showToolPanel: false
+            showToolPanel: false,
+
+            // EVENTS
+            onReady: function(event) {
+                console.log('the grid is now ready');
+            },
         };
-
-
-        $scope.d.grid.options.ready(function() {
-            console.log('GRID is READY!');
-            $scope.d.grid.options.api.onNewDatasource();
-
-        });
-
-
-        console.log('Ready ', $scope.d.grid.options.ready());
 
 
         //console.log('dataGRID: ', $scope.d.grid);
@@ -612,7 +606,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         $scope.d.grid.options.rowData = NEWrowData;
-        //$scope.d.grid.options.api.setRowData(NEWrowData);
+        $scope.d.grid.options.api.setRowData(NEWrowData);
 
 
     };
