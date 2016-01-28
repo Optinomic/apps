@@ -574,9 +574,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
+        console.log('Ready ', $scope.d.grid.options.ready());
+
+
         //console.log('dataGRID: ', $scope.d.grid);
     };
 
+    $scope.d.grid.options.ready = function() {
+        console.log('I am Ready !');
+
+    };
 
     $scope.updateDataView = function() {
 
