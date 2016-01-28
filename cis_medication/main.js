@@ -600,14 +600,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             model: "Boxter",
             price: 72000
         }];
+
+        $scope.d.grid.options.rowData = NEWrowData;
+        // $scope.d.grid.options.api.setRowData(NEWrowData);
+
+
     };
 
 
 
-    $scope.d.grid.options.rowData = NEWrowData;
-
-
-
-    // $scope.d.grid.options.api.setRowData(NEWrowData);
 
 });
