@@ -6400,6 +6400,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             $scope.d.appState = 'show';
+            $scope.updateDataView();
 
             //console.log('(+) getEntrys ', $scope.d.medication);
         });
@@ -6612,7 +6613,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     $scope.setDataView = function() {
 
-        console.log('================================== setDataView');
+        console.log(' ===== setDataView =====');
 
         var resultsArray = $scope.d.medication;
 
@@ -6675,30 +6676,48 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             price: 72000
         }];
 
-        $scope.d.grid = {};
-        $scope.d.grid.options = {};
-        $scope.d.grid.options.columnDefs = columnDefs;
-        $scope.d.grid.options.rowData = rowData;
+        // $scope.d.grid = {};
+        // $scope.d.grid.options = {};
+        // $scope.d.grid.options.columnDefs = columnDefs;
+        // $scope.d.grid.options.rowData = rowData;
 
 
         // DataView - Options
-        // $scope.d.grid.options = {
-        //     //pinnedColumnCount: 1,
-        //     columnDefs: columnDefs,
-        //     dontUseScrolls: false,
-        //     enableCellExpressions: true,
-        //     enableColResize: true,
-        //     enableFilter: true,
-        //     enableSorting: true,
-        //     headerHeight: 45,
-        //     rowData: rowData,
-        //     rowHeight: 28,
-        //     rowSelection: 'single',
-        //     showToolPanel: false
-        // };
+        $scope.d.grid.options = {
+            //pinnedColumnCount: 1,
+            columnDefs: columnDefs,
+            dontUseScrolls: false,
+            enableCellExpressions: true,
+            enableColResize: true,
+            enableFilter: true,
+            enableSorting: true,
+            headerHeight: 45,
+            rowData: rowData,
+            rowHeight: 28,
+            rowSelection: 'single',
+            showToolPanel: false
+        };
+
+
+
+        // $scope.d.grid.options.rowData = NEWrowData;
+
+        //$scope.d.grid.options.api.setRowData(NEWrowData);
+
+
+        //$scope.d.grid.options.api.setDatasource(resultsArray);
+        //$scope.d.grid.options.api.refreshView();
+        // $scope.d.functions.refreshView();
+        //console.log('dataGRID: ', $scope.d.grid);
+    };
+
+    $scope.updateDataView = function() {
+
+        console.log(' ===== updateDataView =====');
+
 
         var NEWrowData = [{
-            medication_name: "Toyota",
+            medication_name: "Mercedes",
             model: "Celica",
             price: 35000
         }, {
@@ -6714,19 +6733,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             model: "Boxter",
             price: 72000
         }];
-
-        // $scope.d.grid.options.rowData = NEWrowData;
-
-        //$scope.d.grid.options.api.setRowData(NEWrowData);
-
-
-        //$scope.d.grid.options.api.setDatasource(resultsArray);
-        //$scope.d.grid.options.api.refreshView();
-        // $scope.d.functions.refreshView();
-        //console.log('dataGRID: ', $scope.d.grid);
     };
 
-
+    $scope.d.grid.options.api.setRowData(NEWrowData);
 
 });
 
