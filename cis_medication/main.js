@@ -574,6 +574,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
+        $scope.d.grid.options.ready(function() {
+            console.log('GRID is READY!');
+            $scope.d.grid.options.api.onNewDatasource();
+
+        });
+
+
         console.log('Ready ', $scope.d.grid.options.ready());
 
 
@@ -605,7 +612,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         $scope.d.grid.options.rowData = NEWrowData;
-        $scope.d.grid.options.api.onNewDatasource();
         //$scope.d.grid.options.api.setRowData(NEWrowData);
 
 
