@@ -310,7 +310,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
-                    //row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
+
+                    var index = parseInt(row.medication_status);
+                    row.medication_status_bezeichnung = $scope.d.appInit.medication_status[index];
+
 
                     row.medication_start_verordnung_user_initals = '?';
                     row.medication_start_verordnung_user_name = '?';
@@ -616,9 +619,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_status",
-            headerName: "Status Code",
+            headerName: "Status ID",
             headerTooltip: "Status Code",
             width: 52,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status_bezeichnung",
+            headerName: "Status",
+            headerTooltip: "Status Bezeichnung",
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -684,20 +694,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
-            hide: true
-        }, {
-            cellClass: 'md-body-1',
-            editable: false,
-            field: "medication_status",
-            headerName: "Status #",
-            headerTooltip: "Status Code",
-            hide: true
-        }, {
-            cellClass: 'md-body-1',
-            editable: false,
-            field: "medication_status_bezeichnung",
-            headerName: "Status",
-            headerTooltip: "Status Bezeichnung",
             hide: true
         }, {
             cellClass: 'md-body-1',
