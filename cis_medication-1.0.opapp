@@ -621,18 +621,6 @@ website = http://www.optinomic.com/
         </div>
         <div ng-if="d.init">
             <div ng-if="d.haveData">
- <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
-    <div flex="5">
-        &nbsp;
-    </div>
-    <md-input-container flex class="md-block">
-        <label>Medikamente filtern: {{d.appInit.filter}}</label>
-        <input ng-model="d.appInit.filter">
-    </md-input-container>
-    <div flex="5">
-        &nbsp;
-    </div>
-</div>
 
 <div ng-if="d.appState === 'show'">
     <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
@@ -653,6 +641,12 @@ website = http://www.optinomic.com/
             <i class="mdi mdi-table-edit"></i>
             <md-tooltip md-direction="bottom">
                 Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="d.appState === 'show'" ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
+            <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
+            <md-tooltip md-direction="left">
+                Neues Medikament erfassen
             </md-tooltip>
         </md-button>
     </div>
@@ -1118,15 +1112,6 @@ website = http://www.optinomic.com/
     </md-card-actions>
 </md-card>
 
-</div>
-<div>&nbsp;</div>
-<div class="optinomic-page-fab" ng-if="d.appState === 'show'">
-    <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
-        <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
-        <md-tooltip md-direction="left">
-            Neues Medikament erfassen
-        </md-tooltip>
-    </md-button>
 </div>
             </div>
             <div ng-if="!d.haveData">
