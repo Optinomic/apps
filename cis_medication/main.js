@@ -564,12 +564,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.setDataView = function() {
 
         var columnDefs = [{
-            headerName: 'Edit',
-            width: 52,
-            cellRenderer: function(params) {
-                return '<span title="the tooltip">GORILLA</span>';
-            }
-        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -737,6 +731,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Bearbeitungszeit",
             headerTooltip: "Bearbeitet - Zeit",
             hide: true
+        }, {
+            headerName: 'Edit',
+            width: 52,
+            cellRenderer: function(params) {
+                return '<span class="md-title">GORILLA</span>';
+            }
         }];
 
 
