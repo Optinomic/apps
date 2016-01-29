@@ -3,13 +3,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div hide-sm>
         <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
     </div>
-    <div flex>
-        <md-button style="font-size: 18px;" ng-click="d.functions.refreshView()" class="md-primary md-icon-button" aria-label="Refresh">
-            <i class="mdi mdi-auto-fix"></i>
-            <md-tooltip md-direction="bottom">
-                Refresh
-            </md-tooltip>
-        </md-button>
+    <div>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
             <i class="mdi mdi-auto-fix"></i>
             <md-tooltip md-direction="bottom">
@@ -23,8 +17,8 @@ include(../lib/html/optinomic/page/start.m4)
             </md-tooltip>
         </md-button>
     </div>
-    <div>
-        <md-input-container class="md-primary">
+    <div flex>
+        <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
