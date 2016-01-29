@@ -608,28 +608,29 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            width: 52,
+            width: 62,
             hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user",
             headerName: "Start UID",
-            headerTooltip: "Verordnung durch Benutzer ID",
+            headerTooltip: "Verordnung durch Benutzer ID - Start",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user_name",
             headerName: "Start Name",
-            headerTooltip: "Name des Verordners",
+            headerTooltip: "Name des Verordners - Start",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user_initals",
             headerName: "Start Kürzel",
-            headerTooltip: "Kürzel des Verordners",
+            headerTooltip: "Kürzel des Verordners - Start",
+            width: 32,
             hide: false
         }, {
             cellClass: 'md-body-1',
@@ -643,7 +644,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             editable: false,
             field: "medication_stop_verordnung_user",
             headerName: "Stop UID",
-            headerTooltip: "Verordnung durch Benutzer ID",
+            headerTooltip: "Verordnung durch Benutzer ID - Stop",
             hide: true
         }, {
             cellClass: 'md-body-1',
