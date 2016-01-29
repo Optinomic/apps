@@ -738,7 +738,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Sorting
 
-        var sort = [{
+        var sortModel = [{
             colId: 'medication_status',
             sort: 'asc'
         }, {
