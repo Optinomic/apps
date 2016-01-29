@@ -535,81 +535,82 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Medikament",
             headerTooltip: "Medikament-Name",
             pinned: 'left',
-
-            cellStyle: function(params) {
-
-                console.log('setDataView ================================>', params);
-                if (params.medication_status === 0) {
-                    // mark police cells as red
-                    return {
-                        color: '#1A237E',
-                        backgroundColor: '#E8EAF6'
-                    };
-                };
-            }
         }, {
-            cellClass: 'flow-text',
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mo",
             headerName: "Morgen",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 80,
-            suppressSizeToFit: true,
-            cellStyle: function(params) {
-                if (params.medication_status === 0) {
-                    // mark police cells as red
-                    return {
-                        color: '#FCE4EC',
-                        backgroundColor: '#880E4F'
-                    };
-                };
-            }
+            width: 75,
+            suppressSizeToFit: true
         }, {
-            cellClass: 'flow-text',
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mi",
             headerName: "Mittag",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 80,
-            suppressSizeToFit: true,
-            cellStyle: function(params) {
-                if (params.medication_status === 0) {
-                    // mark police cells as red
-                    return {
-                        color: 'red',
-                        backgroundColor: 'green'
-                    };
-                };
-            }
+            width: 75,
+            suppressSizeToFit: true
         }, {
-            cellClass: 'flow-text',
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_ab",
             headerName: "Abend",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 80,
+            width: 75,
             suppressSizeToFit: true
         }, {
-            cellClass: 'flow-text',
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_na",
             headerName: "Nacht",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 80,
+            width: 75,
             suppressSizeToFit: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_verabreichung",
+            headerName: "Interval",
+            headerTooltip: "Verabreichung - Interval",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_verabreichung",
+            headerName: "Verabreichung",
+            headerTooltip: "Dosierung - Nacht",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_datum",
+            headerName: "Start",
+            headerTooltip: "Verordnung - Start",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user",
+            headerName: "Verordner",
+            headerTooltip: "Verordnung durch User",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status",
+            headerName: "Status",
+            headerTooltip: "Status",
+            hide: true
         }];
-
 
 
         // Init 
         $scope.d.grid = {};
-
-
-
 
 
         // DataView - Options
