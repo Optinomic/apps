@@ -739,10 +739,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Sorting
 
         var sort = [{
-            colId: medication_status,
+            colId: 'medication_status',
             sort: 'asc'
         }, {
-            colId: medication_name,
+            colId: 'medication_name',
             sort: 'asc'
         }];
 
