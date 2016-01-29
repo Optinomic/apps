@@ -529,20 +529,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             cellClass: 'md-body-1',
             editable: false,
-            field: "medication_dosierung_mi",
-            headerName: "Morgen",
-            headerTooltip: "Dosierung - Morgen",
-            hide: true,
-            width: 110,
-            suppressSizeToFit: true
-        }, {
-            cellClass: 'md-body-1',
-            editable: false,
             field: "medication_dosierung_mo",
             headerName: "Morgen",
             headerTooltip: "Dosierung - Morgen",
-            hide: true,
-            width: 110,
+            hide: false,
+            width: 90,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -550,8 +541,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_dosierung_mi",
             headerName: "Mittag",
             headerTooltip: "Dosierung - Mittag",
-            hide: true,
-            width: 110,
+            hide: false,
+            width: 90,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -559,8 +550,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_dosierung_ab",
             headerName: "Abend",
             headerTooltip: "Dosierung - Abend",
+            hide: false,
+            width: 90,
+            suppressSizeToFit: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_dosierung_na",
+            headerName: "Morgen",
+            headerTooltip: "Dosierung - Nacht",
             hide: true,
-            width: 110,
+            width: 90,
             suppressSizeToFit: true
         }];
 
@@ -694,7 +694,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             "datestamp_time": "20:45",
             "datestamp_full_day": "Wednesday, 27th January 2016",
             "medication_dosierung_mo": 0,
-            "medication_name": "AMARYL Tabl 2 mg",
+            "medication_name": "AMARYL ARRAY Tabl 2 mg",
             "medication_dosierung_interval": "",
             "uniqueid": "FUNCGJM2CPHWC41VFCIEOFYS6DQTAYJF",
             "medication_dosierung_na": 0,
@@ -720,6 +720,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.grid.options.rowData = NEWrowData;
         $scope.d.grid.options.api.setRowData(NEWrowData);
+
+        // Set Optimal Size
+        $scope.d.functions.resizeGrid();
 
 
     };
