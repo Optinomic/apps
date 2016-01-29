@@ -717,13 +717,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 if (params.data.medication_status === 0) {
                     // 0 = Offen 
-                    return {
-                        'flow-text';
-                    };
+                    {
+                        return 'flow-text';
+                    }
                 } else {
-                    return {
-                        'md-caption'
-                    };
+                    {
+                        return 'md-caption';
+                    }
                 }
             }
         });
