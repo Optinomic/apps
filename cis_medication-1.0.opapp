@@ -1223,6 +1223,7 @@ angular.module('optinomicDataModule')
         // Angular-Grid - https://www.ag-grid.com/
         // -----------------------------------------------------------
 
+        scopeDService._init = {};
         scopeDService._init.grid = {
             grid_ready: false,
             data_loader: 0
@@ -1231,7 +1232,7 @@ angular.module('optinomicDataModule')
 
         scopeDService.grid = {};
         scopeDService.grid.options = {
-            headerHeight: 48,
+            headerHeight: 50,
             rowData: [],
             columnDefs: [],
             //pinnedColumnCount: 1,
