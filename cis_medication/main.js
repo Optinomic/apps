@@ -541,7 +541,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Morgen",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 70,
+            width: 80,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -550,7 +550,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mittag",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 70,
+            width: 80,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -559,16 +559,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Abend",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 70,
+            width: 80,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_na",
-            headerName: "Morgen",
+            headerName: "Nacht",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 70,
+            width: 80,
             suppressSizeToFit: true
         }];
 
@@ -766,7 +766,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // Update Data-Grid when Data loaded & Grid is ready
     // -------------------------------------------------
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
-        if (($scope.d._init.grid === true) && ($scope.d._init.grid.data_loader > 0)) {
+        if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
             console.log('FIRE: updateDataView');
             $scope.updateDataView();
