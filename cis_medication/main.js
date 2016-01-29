@@ -757,11 +757,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             },
 
-            onrowSelectedy: function(event) {
+            onrowSelected: function(event) {
                 console.log('Row - Selected: ', event);
 
             },
 
+            onRowSelected: function(event) {
+                console.log('Row 2 - Selected: ', event);
+
+            }
 
         };
 
