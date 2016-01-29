@@ -489,6 +489,23 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
         $scope.createLinks();
 
+        if ($scope.d.newEntry.medication_start_verordnung_datum) {
+            var date = $scope.d.newEntry.medication_start_verordnung_datum;
+            $scope.d.newEntry.medication_start_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+            $scope.d.newEntry.medication_start_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            $scope.d.newEntry.medication_start_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            $scope.d.newEntry.medication_start_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        };
+
+        if ($scope.d.newEntry.medication_stop_verordnung_datum) {
+            var date = $scope.d.newEntry.medication_stop_verordnung_datum;
+            $scope.d.newEntry.medication_stop_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+            $scope.d.newEntry.medication_stop_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            $scope.d.newEntry.medication_stop_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            $scope.d.newEntry.medication_stop_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        };
+
+
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
             $scope.d.medication.push($scope.d.newEntry);
@@ -498,9 +515,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
             $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
             $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.datestamp_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
             $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
-            $scope.d.newEntry.datestamp = $scope.d.newEntry.datestamp.toString();
         };
 
         // Save edited entry.
@@ -512,9 +527,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_edit_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
             $scope.d.newEntry.datestamp_edit_week = $filter("amDateFormat")(date, 'YYYY, ww');
             $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.datestamp_edit_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
             $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
-            $scope.d.newEntry.datestamp_edit = $scope.d.newEntry.datestamp_edit.toString();
         };
 
         console.log('Try to save: ', $scope.d.medication);
@@ -539,37 +552,37 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mo",
-            headerName: "Morgen",
+            headerName: "Mo.",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 75,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mi",
-            headerName: "Mittag",
+            headerName: "Mi.",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 75,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_ab",
-            headerName: "Abend",
+            headerName: "Ab.",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 75,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_na",
-            headerName: "Nacht",
+            headerName: "Na.",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 75,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -583,7 +596,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             editable: false,
             field: "medication_verabreichung",
             headerName: "Verabreichung",
-            headerTooltip: "Dosierung - Nacht",
+            headerTooltip: "Verabreichung",
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -596,8 +609,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user",
-            headerName: "Verordner",
-            headerTooltip: "Verordnung durch User",
+            headerName: "Verordnet durch",
+            headerTooltip: "Verordnung durch Benutzer",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_datum",
+            headerName: "Stop",
+            headerTooltip: "Verordnung - Stop",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user",
+            headerName: "Gestoppt durch",
+            headerTooltip: "Verordnung durch Benutzer",
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -605,6 +632,41 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_status",
             headerName: "Status",
             headerTooltip: "Status",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_bemerkungen",
+            headerName: "Bemerkung",
+            headerTooltip: "Bemerkungen zur Medikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_day",
+            headerName: "Erstelldatum",
+            headerTooltip: "Erstellt - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_time",
+            headerName: "Erstellzeit",
+            headerTooltip: "Erstellt - Zeit",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_day",
+            headerName: "Bearbeitungsdatum",
+            headerTooltip: "Bearbeitet - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_time",
+            headerName: "Bearbeitungszeit",
+            headerTooltip: "Bearbeitet - Zeit",
             hide: true
         }];
 
@@ -615,7 +677,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // DataView - Options
         $scope.d.grid.options = {
-            headerHeight: 45,
+            headerHeight: 48,
             rowHeight: 28,
             rowData: [],
             columnDefs: columnDefs,
