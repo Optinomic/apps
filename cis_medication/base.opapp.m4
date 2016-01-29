@@ -5,6 +5,7 @@ short_description = Medikamente (Verodnung, Reserve, Reserveanwendung)
 version = include(VERSION)
 type = patient
 
+[description]
 
 [developer]
 first_name = Beat
