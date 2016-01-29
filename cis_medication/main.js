@@ -156,6 +156,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
+        // Data Grid
+        $scope.d._init.grid = {
+            grid_ready: false,
+            data_loader: 0
+        };
+
+
     };
 
 
@@ -307,6 +314,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             $scope.d.appState = 'show';
 
+            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
             console.log('(+) getEntrys ', $scope.d.medication);
         });
@@ -533,7 +541,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Morgen",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 90,
+            width: 70,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -542,7 +550,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mittag",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 90,
+            width: 70,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -551,7 +559,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Abend",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 90,
+            width: 70,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -559,8 +567,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_dosierung_na",
             headerName: "Morgen",
             headerTooltip: "Dosierung - Nacht",
-            hide: true,
-            width: 90,
+            hide: false,
+            width: 70,
             suppressSizeToFit: true
         }];
 
@@ -592,13 +600,36 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // EVENTS
             onReady: function(event) {
                 console.log('the grid is now ready - updating');
-                $scope.updateDataView();
+                $scope.d._init.grid.grid_ready = true;
+
             },
         };
 
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
+
+
+    // -----------------------------------
+    // Do Stuff when all Data is loaded
+    // -----------------------------------
+
+    $scope.$watch('d._init.dataMain', function(newValue, oldValue) {
+        //console.log('=== $watch - userSidebar MainCtrl ===');
+        if (newValue === true) {
+            console.log('FIRE: ViewPatientsCtrl');
+            $scope.setPatientViews();
+
+            // Open corresponding SideNav 
+            $scope.openSidenav(1);
+
+            if (!$scope.d.patient_page) {
+                $scope.setCurrentPage();
+            };
+        }
+    });
+
+
 
 
     $scope.updateDataView = function() {
@@ -718,8 +749,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             }
         }];
 
-        $scope.d.grid.options.rowData = NEWrowData;
-        $scope.d.grid.options.api.setRowData(NEWrowData);
+        var new_data = $scope.d.medication
+
+        // Set Data
+        $scope.d.grid.options.rowData = new_data;
+        $scope.d.grid.options.api.setRowData(new_data);
 
         // Set Optimal Size
         $scope.d.functions.resizeGrid();
@@ -727,6 +761,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     };
 
+
+    // -------------------------------------------------
+    // Update Data-Grid when Data loaded & Grid is ready
+    // -------------------------------------------------
+    $scope.$watch('d._init.grid', function(newValue, oldValue) {
+        if (($scope.d._init.grid === true) && ($scope.d._init.grid.data_loader > 0)) {
+            // -----------------------------------
+            console.log('FIRE: updateDataView');
+            $scope.updateDataView();
+
+        };
+    }, true);
 
 
 
