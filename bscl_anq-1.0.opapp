@@ -11346,8 +11346,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-header-cell:hover {
-    border-right: 1px solid #E0E0E0;
-    border-left: 1px solid #E0E0E0;
+    border-right: 1px solid #F5F5F5;
 }
 
 .ag-optinomic .ag-header-cell {
@@ -11432,7 +11431,8 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body .ag-row-odd:hover {
-    border-top: 1px solid #BDBDBD;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
 }
@@ -11444,7 +11444,8 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body .ag-row-even:hover {
-    border-top: 1px solid #BDBDBD;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
 }

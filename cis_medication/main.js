@@ -156,11 +156,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-        // Data Grid
-        $scope.d._init.grid = {
-            grid_ready: false,
-            data_loader: 0
-        };
+
 
 
     };
@@ -555,7 +551,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mo.",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 48,
+            width: 50,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -564,7 +560,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mi.",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 48,
+            width: 50,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -573,7 +569,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Ab.",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 48,
+            width: 50,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -582,7 +578,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Na.",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 48,
+            width: 50,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -671,13 +667,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-        // Init 
-        $scope.d.grid = {};
-
 
         // DataView - Options
         $scope.d.grid.options = {
-            headerHeight: 48,
+            headerHeight: 50,
             rowHeight: 28,
             rowData: [],
             columnDefs: columnDefs,
