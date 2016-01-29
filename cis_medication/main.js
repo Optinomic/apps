@@ -722,7 +722,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Add special fields to the grid
         new_data.forEach(function(row, myindex) {
 
-            row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
+            //row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
 
             row.medication_start_verordnung_user_initals = '?';
             row.medication_start_verordnung_user_name = '?';
@@ -751,7 +751,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerTooltip: "Status Bezeichnung",
             hide: true
         };
-        $scope.d.grid.options.columnDefs.push(field_status_bezeichnung);
+        //$scope.d.grid.options.columnDefs.push(field_status_bezeichnung);
 
         var user = {
             cellClass: 'md-body-1',
