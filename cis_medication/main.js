@@ -731,12 +731,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Bearbeitungszeit",
             headerTooltip: "Bearbeitet - Zeit",
             hide: true
-        }, {
-            headerName: 'Edit',
-            width: 52,
-            cellRenderer: function(params) {
-                return '<span class="md-title">GORILLA</span>';
-            }
         }];
 
 
