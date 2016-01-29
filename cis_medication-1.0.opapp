@@ -6828,16 +6828,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellClass = function(params) {
 
+                var return_class = null
+
                 if (params.data.medication_status === 1) {
-                    return 'medication-stop';
-                } else {
-                    if (params.data.medication_status === 2) {
-                        return 'medication-verweigert';
-                    } else {
-                        return null;
-                    };
+                    return_class = 'medication-stop';
                 };
 
+                if (params.data.medication_status === 2) {
+                    return_class = 'medication-verweigert';
+                };
+
+                return return_class;
             }
         });
 
