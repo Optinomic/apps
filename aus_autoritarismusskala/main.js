@@ -134,8 +134,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // DataView - Options
         $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
+            headerHeight: 50,
+            rowHeight: 50,
             rowData: $scope.d.grid.rowData,
             columnDefs: $scope.d.grid.columnDefs,
             //pinnedColumnCount: 1,

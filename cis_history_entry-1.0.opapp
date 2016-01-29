@@ -1017,8 +1017,36 @@ angular.module('optinomicDataModule')
 
 
         // -----------------------------------------------------------
-        // Demo-Data  (ToRemove)
+        // Angular-Grid - https://www.ag-grid.com/
         // -----------------------------------------------------------
+
+        scopeDService._init.grid = {
+            grid_ready: false,
+            data_loader: 0
+        };
+
+
+        scopeDService.grid = {};
+        scopeDService.grid.options = {
+            headerHeight: 48,
+            rowData: [],
+            columnDefs: [],
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false,
+            rowHeight: 50,
+
+            // EVENTS
+            onReady: function(event) {
+                console.log('Angular-Grid is ready!');
+                $scope.d._init.grid.grid_ready = true;
+            }
+        };
 
         scopeDService.craving = [{
             'Suchtdruck_1': '52',
