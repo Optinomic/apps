@@ -761,6 +761,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             onRowSelected: function(event) {
                 console.log('Row - Selected: ', event.node.data);
 
+                $scope.d.medication_detail = event.node.data;
+
+                $scope.d.appState = 'show_detail';
+
             }
 
         };
