@@ -566,8 +566,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-
-
         // Init 
         $scope.d.grid = {};
         //$scope.d.grid.options.rowData = $scope.d.functions.enrichResults(resultsArray);
