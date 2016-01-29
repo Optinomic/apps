@@ -534,6 +534,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_name",
             headerName: "Medikament",
             headerTooltip: "Medikament-Name",
+            pinned: 'left',
+
             cellStyle: function(params) {
 
                 console.log('setDataView ================================>', params);
