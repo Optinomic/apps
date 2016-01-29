@@ -11021,7 +11021,8 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-cell {
-    padding: 2px;
+    padding-top: auto;
+    padding-bottom: auto;
 }
 
 .ag-optinomic .ag-cell-focus {
@@ -11036,20 +11037,20 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-pinned-header {
-    background: -webkit-linear-gradient(#fff, #EEEEEE);
-    background: -moz-linear-gradient(#fff, #EEEEEE);
-    background: -o-linear-gradient(#fff, #EEEEEE);
-    background: -ms-linear-gradient(#fff, #EEEEEE);
-    background: linear-gradient(#fff, #EEEEEE);
+    background: -webkit-linear-gradient(#fff, #FAFAFA);
+    background: -moz-linear-gradient(#fff, #FAFAFA);
+    background: -o-linear-gradient(#fff, #FAFAFA);
+    background: -ms-linear-gradient(#fff, #FAFAFA);
+    background: linear-gradient(#fff, #FAFAFA);
     border-bottom: 1px solid #E0E0E0;
 }
 
 .ag-optinomic .ag-header-container {
-    background: -webkit-linear-gradient(#fff, #EEEEEE);
-    background: -moz-linear-gradient(#fff, #EEEEEE);
-    background: -o-linear-gradient(#fff, #EEEEEE);
-    background: -ms-linear-gradient(#fff, #EEEEEE);
-    background: linear-gradient(#fff, #EEEEEE);
+    background: -webkit-linear-gradient(#fff, #FAFAFA);
+    background: -moz-linear-gradient(#fff, #FAFAFA);
+    background: -o-linear-gradient(#fff, #FAFAFA);
+    background: -ms-linear-gradient(#fff, #FAFAFA);
+    background: linear-gradient(#fff, #FAFAFA);
     border-bottom: 1px solid #E0E0E0;
 }
 
@@ -11115,11 +11116,19 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body .ag-row-odd {
-    background-color: #f6f6f6;
+    background-color: #fff;
+}
+
+.ag-optinomic .ag-body .ag-row-odd:hover {
+    background-color: #E0E0E0;
 }
 
 .ag-optinomic .ag-body .ag-row-even {
     background-color: #fff;
+}
+
+.ag-optinomic .ag-body .ag-row-even:hover {
+    background-color: #E0E0E0;
 }
 
 .ag-optinomic .ag-floating-top .ag-row {
@@ -11143,7 +11152,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body {
-    background-color: #fafafa;
+    background-color: #FAFAFA;
 }
 
 .ag-optinomic .ag-group-cell-entire-row {
