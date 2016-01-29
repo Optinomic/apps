@@ -623,8 +623,11 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-    <div hide-sm>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+    <div flex>
+        <md-input-container class="md-primary md-block">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
+            <input ng-model="d.grid.options.quickFilterText">
+        </md-input-container>
     </div>
     <div>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
@@ -639,12 +642,6 @@ website = http://www.optinomic.com/
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
-    </div>
-    <div flex>
-        <md-input-container class="md-primary md-block">
-            <label><i class="mdi mdi-filter"></i> Filter</label>
-            <input ng-model="d.grid.options.quickFilterText">
-        </md-input-container>
     </div>
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
@@ -6668,7 +6665,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mo.",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -6677,7 +6674,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mi.",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -6686,7 +6683,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Ab.",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -6695,7 +6692,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Na.",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',

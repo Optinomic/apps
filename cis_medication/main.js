@@ -551,7 +551,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mo.",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -560,7 +560,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mi.",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -569,7 +569,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Ab.",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -578,7 +578,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Na.",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 50,
+            width: 52,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
