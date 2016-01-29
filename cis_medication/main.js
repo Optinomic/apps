@@ -563,6 +563,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
+            headerName: 'Action',
+            width: 48,
+            hide: false,
+            template: '<md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;"><i class="md-title mdi mdi-pencil"></i><md-tooltip md-direction="bottom">Medikament bearbeiten</md-tooltip></md-button>'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -626,7 +631,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_status_bezeichnung",
             headerName: "Status",
             headerTooltip: "Status Bezeichnung",
-            hide: true
+            width: 52,
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -640,7 +646,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            width: 58,
+            width: 52,
             hide: false
         }, {
             cellClass: 'md-body-1',
@@ -662,7 +668,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Start",
-            width: 32,
+            width: 28,
             hide: false
         }, {
             cellClass: 'md-body-1',
@@ -670,6 +676,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_datum_day",
             headerName: "Stop",
             headerTooltip: "Verordnung - Stop",
+            width: 52,
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -691,6 +698,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
+            width: 28,
             hide: true
         }, {
             cellClass: 'md-body-1',
