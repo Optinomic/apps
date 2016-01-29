@@ -565,6 +565,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
+            headerName: 'Edit',
+            width: 52,
+            templateUrl: 'template_edit.html'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
