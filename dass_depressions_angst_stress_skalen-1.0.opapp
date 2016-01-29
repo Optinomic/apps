@@ -11361,7 +11361,8 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-cell {
     margin: auto;
-    padding: 12px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .ag-optinomic .ag-cell-focus {
@@ -11444,38 +11445,38 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     border-top: 1px solid #E0E0E0;
     background-color: #fff;
     color: #212121;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-odd:hover {
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-even {
     border-top: 1px solid #E0E0E0;
     background-color: #fff;
     color: #212121;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-even:hover {
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-floating-top .ag-row {
     background-color: #fff;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-floating-bottom .ag-row {
     background-color: #fff;
-    min-height: 48px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-loading-panel {
