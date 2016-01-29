@@ -12383,10 +12383,10 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-header-cell-menu-button {
-    margin-top: -6px;
+    margin-top: -10px;
     color: #E0E0E0;
     padding: 2px;
-    border: 1px solid transparent;
+    border: 1px solid #F5F5F5;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -webkit-box-sizing: content-box;
