@@ -308,7 +308,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.appState = 'show';
 
 
-            //console.log('(+) getEntrys ', $scope.d.medication);
+            console.log('(+) getEntrys ', $scope.d.medication);
         });
     };
 
