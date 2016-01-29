@@ -1,4 +1,3 @@
-include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
     <div flex>
         <md-input-container class="md-primary md-block">
@@ -22,9 +21,3 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
-<p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
-        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.medication_name}}</b>
-    </span>
-</p>
-include(../lib/html/optinomic/page/end.m4)
