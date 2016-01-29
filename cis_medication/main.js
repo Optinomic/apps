@@ -566,7 +566,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var columnDefs = [{
             headerName: 'Edit',
             width: 52,
-            template: '<p>Go</p>'
+            cellRenderer: function(params) {
+                return '<span title="the tooltip">GORILLA</span>';
+            }
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -748,7 +750,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
-            angularCompileRows: true,
             rowSelection: 'single',
             enableColResize: true,
             enableCellExpressions: true,
