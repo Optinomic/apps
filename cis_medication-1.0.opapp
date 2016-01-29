@@ -6677,11 +6677,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
-            headerName: 'Action',
-            width: 48,
-            hide: false,
-            template: '<md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;"><i class="md-title mdi mdi-pencil"></i><md-tooltip md-direction="bottom">Medikament bearbeiten</md-tooltip></md-button>'
-        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -6874,7 +6869,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 console.log('the grid is now ready - updating');
                 $scope.d._init.grid.grid_ready = true;
 
-            }
+            },
+
+            onrowSelectedy: function(event) {
+                console.log('Row - Selected: ', event);
+
+            },
 
 
         };
