@@ -79,11 +79,12 @@ website = http://www.optinomic.com/
         <md-card-content>
             <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-                <div flex>
+                <div>
                     <p class="md-caption">Medikament</p>
                     <p class="flow-text">{{d.medication_detail.medication_name}}</p>
                 </div>
-                <div flex="35">
+                <div flex="25">
+                    <p class="md-caption">Dosierung</p>
                     <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                         <p class="flow-text">{{d.medication_detail.medication_dosierung_mo}}</p>
                         <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
@@ -92,10 +93,10 @@ website = http://www.optinomic.com/
                         <p class="flow-text">{{d.medication_detail.medication_dosierung_ab}}</p>
                         <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
                         <p class="flow-text">{{d.medication_detail.medication_dosierung_na}}</p>
-                        <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
                     </div>
                 </div>
-                <div flex="15">
+                <div flex>
+                    <p class="md-caption">Informationen</p>
                     <md-button class="md-primary" ng-href="{{d.medication_detail.url_compendium}}" target="_blank">compendium.ch</md-button>
                     <md-button class="md-primary" ng-href="{{d.medication_detail.url_open_drug_db}}" target="_blank">oddb.org</md-button>
                 </div>
@@ -103,15 +104,15 @@ website = http://www.optinomic.com/
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-bug"></i>
+            <md-button class="md-icon-button" ng-click="showConfirm($event, d.medication_detail.uniqueid) " aria-label="Löschen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-delete"></i>
             </md-button>
-            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            <md-button ng-click="entryEdit()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Bearbeiten
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button ng-if="d.medication_detail.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
-                <i class="md-title mdi mdi-content-save"></i> Bearbeiten
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Zurück
             </md-button>
         </md-card-actions>
     </md-card>
