@@ -715,13 +715,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             columnDef.cellStyle = function(params) {
                 console.log('Updating cellStyle', params);
                 if (params.data.medication_status === 0) {
-                    //mark police cells as red
+                    // 0 = Offen 
                     return {
-                        backgroundColor: 'green'
+                        'background-color': '#9FA8DA';
                     };
                 } else {
                     return {
-                        backgroundColor: 'blue'
+                        'background-color': 'blue'
                     };
                 }
             };
