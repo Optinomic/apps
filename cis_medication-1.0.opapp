@@ -6425,8 +6425,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
 
-                    var index = parseInt(row.medication_status);
-                    row.medication_status_bezeichnung = $scope.d.appInit.medication_status[index];
+                    row.medication_status_bezeichnung = '?';
+                    $scope.d.appInit.medication_status.forEach(function(status, myindex) {
+                        if (status.id === parseInt(row.medication_status)) {
+                            row.medication_status_bezeichnung = status.title;
+                        };
+                    });
 
 
                     row.medication_start_verordnung_user_initals = '?';
