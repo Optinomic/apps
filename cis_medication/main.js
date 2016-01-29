@@ -713,18 +713,26 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellClass = function(params) {
-                console.log('Updating cellStyle', params);
-
                 if (params.data.medication_status === 0) {
                     // 0 = Offen 
                     {
-                        return 'flow-text';
+                        return 'medication-stop';
                     }
-                } else {
+                };
+
+                if (params.data.medication_status === 1) {
+                    // 0 = Offen 
                     {
-                        return 'md-caption';
+                        return 'medication-stop';
                     }
-                }
+                };
+
+                if (params.data.medication_status === 2) {
+                    // 0 = Offen 
+                    {
+                        return 'medication-verweigert';
+                    }
+                };
             }
         });
 

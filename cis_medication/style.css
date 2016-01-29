@@ -1,4 +1,9 @@
-.craving {
-    color: red !important;
-    font-size: 8px;
+.medication-stop {
+    color: #1A237E !important;
+    background-color: #C5CAE9;
+}
+
+.medication-verweigert {
+    color: #B71C1C !important;
+    background-color: #FFCDD2;
 }
