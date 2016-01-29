@@ -6826,16 +6826,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // columnDefs - cellStyle or medication_status
 
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
-            columnDef.cellStyle = function(params) {
+            columnDef.cellClass = function(params) {
                 console.log('Updating cellStyle', params);
                 if (params.data.medication_status === 0) {
                     // 0 = Offen 
                     return {
-                        'background-color': '#9FA8DA';
+                        'flow-text';
                     };
                 } else {
                     return {
-                        'background-color': 'blue'
+                        'md-caption'
                     };
                 }
             };
