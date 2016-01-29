@@ -6828,7 +6828,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellStyle = function(params) {
                 console.log('Updating cellStyle', params);
-                if (data.medication_status === 0) {
+                if (params.data.medication_status === 0) {
                     //mark police cells as red
                     return {
                         backgroundColor: 'green'
