@@ -11919,7 +11919,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     background-color: #fff;
 }
 
-.ag-optinomic .ag-header-container:hover {
+.ag-optinomic .ag-header-cell:hover {
     border-right: 1px solid #E0E0E0;
     border-left: 1px solid #E0E0E0;
 }
