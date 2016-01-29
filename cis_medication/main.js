@@ -521,46 +521,66 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
-            headerName: "Make",
-            field: "make"
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_name",
+            headerName: "Medikament",
+            headerTooltip: "Medikament-Name"
         }, {
-            headerName: "Model",
-            field: "model"
+            cellClass: 'md-body-1'
+            editable: false,
+            field: "medication_dosierung_mi",
+            headerName: "Morgen",
+            headerTooltip: "Dosierung - Morgen",
+            hide: true,
+            width: 110,
+            suppressSizeToFit: true
         }, {
-            headerName: "Price",
-            field: "price"
+            cellClass: 'md-body-1'
+            editable: false,
+            field: "medication_dosierung_mo",
+            headerName: "Morgen",
+            headerTooltip: "Dosierung - Morgen",
+            hide: true,
+            width: 110,
+            suppressSizeToFit: true
+        }, {
+            cellClass: 'md-body-1'
+            editable: false,
+            field: "medication_dosierung_mi",
+            headerName: "Mittag",
+            headerTooltip: "Dosierung - Mittag",
+            hide: true,
+            width: 110,
+            suppressSizeToFit: true
+        }, {
+            cellClass: 'md-body-1'
+            editable: false,
+            field: "medication_dosierung_ab",
+            headerName: "Abend",
+            headerTooltip: "Dosierung - Abend",
+            hide: true,
+            width: 110,
+            suppressSizeToFit: true
         }];
 
-        var rowData = [{
-            make: "Toyota",
-            model: "Celica",
-            price: 35000
-        }, {
-            make: "Ford",
-            model: "Mondeo",
-            price: 32000
-        }, {
-            make: "Porsche",
-            model: "Boxter",
-            price: 72000
-        }];
-
-        var resultsArray = $scope.d.dataMain.users.all;
 
 
-        // Init Responses
+
+
+        // Init 
         $scope.d.grid = {};
-        //$scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
+        //$scope.d.grid.options.rowData = $scope.d.functions.enrichResults(resultsArray);
 
         // automatic
-        //$scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
+        //$scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
 
         // DataView - Options
         $scope.d.grid.options = {
             headerHeight: 45,
             rowHeight: 28,
-            rowData: rowData,
+            rowData: [],
             columnDefs: columnDefs,
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
@@ -589,21 +609,115 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var NEWrowData = [{
-            make: "Mercedes",
-            model: "Celica",
-            price: 35000
+            "datestamp_week": "2016, 05",
+            "datestamp_edit": "Wed Jan 27 2016 20:41:39 GMT+0100 (CET)",
+            "medication_start_verordnung_user": 2,
+            "datestamp": "Wed Jan 27 2016 20:36:24 GMT+0100 (CET)",
+            "medication_verabreichung": "oral",
+            "medication_stop_verordnung_datum": null,
+            "url_open_drug_db": "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/SYMBICORT/search_type/st_oddb#best_result",
+            "medication_dosierung_ab": 0,
+            "medication_dosierung_mi": 0,
+            "datestamp_time": "20:36",
+            "datestamp_full_day": "Wednesday, 27th January 2016",
+            "medication_dosierung_mo": 0,
+            "medication_name": "SYMBICORT 100/6 Turbuhaler",
+            "datestamp_edit_time": "20:41",
+            "medication_dosierung_interval": "",
+            "uniqueid": "XV27WPB2HYI6X9EF754SDW3C3T0VW6KR",
+            "medication_dosierung_na": 1,
+            "datestamp_edit_sort": "201601272041393939",
+            "user": 2,
+            "datestamp_day": "27.01.2016",
+            "medication_start_verordnung_datum": "2016-01-27T19:36:24.131Z",
+            "datestamp_edit_week": "2016, 05",
+            "datestamp_edit_day": "27.01.2016",
+            "medication_stop_verordnung_user": null,
+            "datestamp_sort": "201601272036242424",
+            "medication_selected": true,
+            "$$hashKey": "object:757",
+            "medication_bemerkungen": "",
+            "medication_status": 0,
+            "datestamp_edit_full_day": "Wednesday, 27th January 2016",
+            "url_compendium": "https://compendium.ch/search/all/SYMBICORT/contains/de",
+            "medication": {
+                "medi_order": "100",
+                "medi_info": "120 Dos",
+                "medi_activated": true,
+                "_lowerName": "symbicort 100/6 turbuhaler",
+                "_lowerCode": "2321493",
+                "medi_code": "2321493",
+                "medi_name": "SYMBICORT 100/6 Turbuhaler"
+            }
         }, {
-            make: "BMW",
-            model: "Mondeo",
-            price: 32000
+            "datestamp_week": "2016, 05",
+            "medication_start_verordnung_user": 2,
+            "datestamp": "Wed Jan 27 2016 20:44:45 GMT+0100 (CET)",
+            "medication_verabreichung": "oral",
+            "medication_stop_verordnung_datum": null,
+            "url_open_drug_db": "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/Sugus/search_type/st_oddb#best_result",
+            "medication_dosierung_ab": 1,
+            "medication_dosierung_mi": 1,
+            "datestamp_time": "20:44",
+            "datestamp_full_day": "Wednesday, 27th January 2016",
+            "medication_dosierung_mo": 0,
+            "medication_name": "Sugus (gelb)",
+            "medication_dosierung_interval": "",
+            "uniqueid": "KYT0Q2KXLE7Q4VOY3IHVN9HF5SEJJ44X",
+            "medication_dosierung_na": 0,
+            "user": 2,
+            "datestamp_day": "27.01.2016",
+            "medication_start_verordnung_datum": "2016-01-27T19:44:45.998Z",
+            "medication_stop_verordnung_user": null,
+            "datestamp_sort": "201601272044454545",
+            "medication_selected": true,
+            "$$hashKey": "object:758",
+            "medication_bemerkungen": "",
+            "medication_status": 0,
+            "url_compendium": "https://compendium.ch/search/all/Sugus/contains/de",
+            "medication": {
+                "medi_order": "999999",
+                "medi_info": "",
+                "medi_activated": true,
+                "_lowerName": "kein standardmedikament (bitte spezifizieren)",
+                "_lowerCode": "",
+                "medi_code": "",
+                "medi_name": "Kein Standardmedikament (bitte spezifizieren)"
+            }
         }, {
-            make: "Ford",
-            model: "Focus",
-            price: 32000
-        }, {
-            make: "Porsche",
-            model: "Boxter",
-            price: 72000
+            "datestamp_week": "2016, 05",
+            "medication_start_verordnung_user": 2,
+            "datestamp": "Wed Jan 27 2016 20:45:49 GMT+0100 (CET)",
+            "medication_verabreichung": "oral",
+            "medication_stop_verordnung_datum": null,
+            "url_open_drug_db": "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/AMARYL/search_type/st_oddb#best_result",
+            "medication_dosierung_ab": 0,
+            "medication_dosierung_mi": 0,
+            "datestamp_time": "20:45",
+            "datestamp_full_day": "Wednesday, 27th January 2016",
+            "medication_dosierung_mo": 0,
+            "medication_name": "AMARYL Tabl 2 mg",
+            "medication_dosierung_interval": "",
+            "uniqueid": "FUNCGJM2CPHWC41VFCIEOFYS6DQTAYJF",
+            "medication_dosierung_na": 0,
+            "user": 2,
+            "datestamp_day": "27.01.2016",
+            "medication_start_verordnung_datum": "2016-01-27T19:45:49.356Z",
+            "medication_stop_verordnung_user": null,
+            "datestamp_sort": "201601272045494949",
+            "medication_selected": true,
+            "medication_bemerkungen": "",
+            "medication_status": 0,
+            "url_compendium": "https://compendium.ch/search/all/AMARYL/contains/de",
+            "medication": {
+                "medi_order": "100",
+                "medi_info": "30 Stk",
+                "medi_activated": false,
+                "_lowerName": "amaryl tabl 2 mg",
+                "_lowerCode": "1686206",
+                "medi_code": "1686206",
+                "medi_name": "AMARYL Tabl 2 mg"
+            }
         }];
 
         $scope.d.grid.options.rowData = NEWrowData;
