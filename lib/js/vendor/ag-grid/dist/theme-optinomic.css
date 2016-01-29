@@ -36,18 +36,16 @@
 
 .ag-optinomic .ag-header-cell {
     color: #9E9E9E;
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
-    border-right: 1px solid #F5F5F5;
+    margin-top: 12px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .ag-optinomic .ag-header-group-cell {
     color: #9E9E9E;
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
-    border-right: 1px solid #F5F5F5;
+    margin-top: 12px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .ag-optinomic .ag-header-group-cell-with-group {
@@ -55,32 +53,28 @@
 }
 
 .ag-optinomic .ag-header-cell-label {
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
     text-align: left;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-cell-text {
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
     text-align: left !important;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-group-cell-label {
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
+    color: #9E9E9E;
+    margin-top: 12px;
+    padding-left: 2px;
+    padding-right: 2px;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-group-text {
-    margin: auto;
-    padding-left: 6px;
-    padding-right: 6px;
+    color: #9E9E9E;
+    margin-top: 12px;
+    padding-left: 2px;
+    padding-right: 2px;
     color: #9E9E9E;
 }
 
@@ -117,6 +111,7 @@
 }
 
 .ag-optinomic .ag-body .ag-row-odd:hover {
+    width: 100%;
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
@@ -129,6 +124,7 @@
 }
 
 .ag-optinomic .ag-body .ag-row-even:hover {
+    width: 100%;
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
