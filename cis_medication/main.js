@@ -748,6 +748,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             //pinnedColumnCount: 1,
             dontUseScrolls: false,
             enableFilter: true,
+            angularCompileRows: true,
             rowSelection: 'single',
             enableColResize: true,
             enableCellExpressions: true,
