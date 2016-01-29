@@ -736,6 +736,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.rowData = new_data;
         $scope.d.grid.options.api.setRowData(new_data);
 
+        // Sorting
+
+        var sort = [{
+            colId: medication_status,
+            sort: 'asc'
+        }, {
+            colId: medication_name,
+            sort: 'asc'
+        }];
+
+        $scope.d.grid.options.api.setSortModel(sortModel);
+
         // Set Optimal Size
         $scope.d.functions.resizeGrid();
 
