@@ -529,12 +529,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
-            cellClass: 'md-body-1',
+            cellClass: 'flow-text',
             editable: false,
             field: "medication_name",
             headerName: "Medikament",
             headerTooltip: "Medikament-Name",
             cellStyle: function(params) {
+
+                console.log('setDataView ================================>', params);
                 if (params.medication_status === 0) {
                     // mark police cells as red
                     return {
@@ -544,7 +546,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
             }
         }, {
-            cellClass: 'md-body-1',
+            cellClass: 'flow-text',
             editable: false,
             field: "medication_dosierung_mo",
             headerName: "Morgen",
@@ -562,7 +564,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
             }
         }, {
-            cellClass: 'md-body-1',
+            cellClass: 'flow-text',
             editable: false,
             field: "medication_dosierung_mi",
             headerName: "Mittag",
@@ -580,7 +582,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
             }
         }, {
-            cellClass: 'md-body-1',
+            cellClass: 'flow-text',
             editable: false,
             field: "medication_dosierung_ab",
             headerName: "Abend",
@@ -589,7 +591,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 80,
             suppressSizeToFit: true
         }, {
-            cellClass: 'md-body-1',
+            cellClass: 'flow-text',
             editable: false,
             field: "medication_dosierung_na",
             headerName: "Nacht",
