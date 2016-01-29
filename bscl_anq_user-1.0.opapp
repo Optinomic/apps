@@ -11276,7 +11276,6 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     font-weight: 400;
     letter-spacing: .010em;
     line-height: 24px;
-    border: 1px solid #FAFAFA;
     background-color: #fff;
 }
 
@@ -11287,7 +11286,8 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-cell-focus {
-    border: 1px solid #E0E0E0;
+    border-right: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
 }
 
 .ag-optinomic .ag-cell-no-focus {
@@ -11308,10 +11308,18 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-cell {
     color: #9E9E9E;
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-right: 1px solid #F5F5F5;
 }
 
 .ag-optinomic .ag-header-group-cell {
     color: #9E9E9E;
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-right: 1px solid #F5F5F5;
 }
 
 .ag-optinomic .ag-header-group-cell-with-group {
@@ -11319,20 +11327,32 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-header-cell-label {
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
     text-align: left;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-cell-text {
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
     text-align: left !important;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-group-cell-label {
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
     color: #9E9E9E;
 }
 
 .ag-optinomic .ag-header-group-text {
+    margin: auto;
+    padding-left: 6px;
+    padding-right: 6px;
     color: #9E9E9E;
 }
 
@@ -11366,38 +11386,32 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     border-top: 1px solid #E0E0E0;
     background-color: #fff;
     color: #212121;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-odd:hover {
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-even {
     border-top: 1px solid #E0E0E0;
     background-color: #fff;
     color: #212121;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-body .ag-row-even:hover {
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-floating-top .ag-row {
     background-color: #fff;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-floating-bottom .ag-row {
     background-color: #fff;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-loading-panel {
