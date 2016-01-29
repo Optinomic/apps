@@ -11028,7 +11028,6 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     margin-top: 12px;
     padding-left: 6px;
     padding-right: 6px;
-    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-cell-focus {
@@ -11044,6 +11043,11 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-pinned-header {
+    background-color: #fff;
+    border-right: 1px solid #E0E0E0;
+}
+
+.ag-optinomic .ag-pinned-cols-container {
     background-color: #fff;
     border-right: 1px solid #E0E0E0;
 }
@@ -11097,6 +11101,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-header-cell-menu-button {
+    margin-top: -6px;
     color: #E0E0E0;
     padding: 2px;
     margin-top: 1px;
@@ -11115,6 +11120,10 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-icon {
     color: #9E9E9E;
+}
+
+.ag-optinomic .ag-row {
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-row-selected {

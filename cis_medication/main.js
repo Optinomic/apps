@@ -529,7 +529,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
-            cellClass: 'flow-text',
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
             headerName: "Medikament",
