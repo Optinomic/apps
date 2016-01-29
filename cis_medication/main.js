@@ -715,12 +715,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             columnDef.cellClass = function(params) {
 
                 var return_class = null
+                var status = parseInt(params.data.medication_status);
 
-                if (params.data.medication_status === 1) {
+                if (status === 1) {
                     return_class = 'medication-stop';
                 };
 
-                if (params.data.medication_status === 2) {
+                if (status === 2) {
                     return_class = 'medication-verweigert';
                 };
 
