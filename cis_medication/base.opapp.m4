@@ -5,7 +5,6 @@ short_description = Medikamente (Verodnung, Reserve, Reserveanwendung)
 version = include(VERSION)
 type = patient
 
-[description]
 
 [developer]
 first_name = Beat
@@ -17,11 +16,13 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template medication_list 6 12]
-include(templates/medication.html)
 
 [template medication_table 6 8]
 include(templates/medication_grid.html)
+
+[template medication_list 6 12]
+include(templates/medication.html)
+
 
 
 [javascript]

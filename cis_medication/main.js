@@ -389,7 +389,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryCancel = function() {
         // Cancel
+        $scope.updateDataView();
         $scope.getEntrys();
+
     };
 
 
@@ -460,8 +462,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-
-
     $scope.entryDelete = function(my_index) {
         $scope.d.medication.splice(my_index, 1);
 
@@ -481,6 +481,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Update Entrys
             $scope.d.appState = 'show';
+            $scope.updateDataView();
             $scope.getEntrys();
         });
     };
