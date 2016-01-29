@@ -6822,6 +6822,28 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Enrich results
         var new_data = $scope.d.functions.enrichResults($scope.d.medication);
 
+
+        // columnDefs - cellStyle or medication_status
+
+        $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
+            columnDef.cellStyle = function(params) {
+                console.log('Updating cellStyle', params);
+                if (data.medication_status === 0) {
+                    //mark police cells as red
+                    return {
+                        backgroundColor: 'green'
+                    };
+                } else {
+                    return {
+                        backgroundColor: 'blue'
+                    };
+                }
+            };
+        });
+
+
+
+
         // Set Data
         $scope.d.grid.options.rowData = new_data;
         $scope.d.grid.options.api.setRowData(new_data);
