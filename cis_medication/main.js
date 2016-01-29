@@ -714,6 +714,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellClass = function(params) {
                 console.log('Updating cellStyle', params);
+
                 if (params.data.medication_status === 0) {
                     // 0 = Offen 
                     return {
@@ -724,7 +725,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                         'md-caption'
                     };
                 }
-            };
+            }
         });
 
 
