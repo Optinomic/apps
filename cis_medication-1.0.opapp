@@ -660,11 +660,10 @@ website = http://www.optinomic.com/
         <md-card-title style="background-color: #424242; color: #FAFAFA">
             <md-card-title-text>
                 <span class="md-headline ">
-                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                    {{d.medication_detail.medication_name}}
                 </span>
                 <span class="md-subhead " style="margin-top: -12px; color:#757575;">
-                <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
-                <span ng-if="d.appState === 'new'" class="md-subhead">Medikament hinzufügen</span>
+                {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
                 </span>
             </md-card-title-text>
         </md-card-title>
@@ -678,22 +677,6 @@ website = http://www.optinomic.com/
                         <input ng-model="d.medication_detail.medication_name">
                     </md-input-container>
                 </div>
-                <div flex="15">
-                    <md-input-container>
-                        <label>Verabreichung</label>
-                        <md-select ng-model="d.medication_detail.medication_verabreichung">
-                            <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
-                                {{verabreichung}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-            </div>
-            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-                <md-input-container flex class="md-block">
-                    <label>Bemerkungen</label>
-                    <textarea ng-model="d.medication_detail.medication_bemerkungen" columns="1" rows="10"></textarea>
-                </md-input-container>
                 <div flex="15">
                     <md-button class="md-primary" ng-href="{{d.medication_detail.url_compendium}}" target="_blank">compendium.ch</md-button>
                     <md-button class="md-primary" ng-href="{{d.medication_detail.url_open_drug_db}}" target="_blank">oddb.org</md-button>
@@ -735,8 +718,8 @@ website = http://www.optinomic.com/
                 </div>
             </div>
         </md-card-content>
-        <md-divider ng-if="d.medication_detail.medication_selected"></md-divider>
-        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
