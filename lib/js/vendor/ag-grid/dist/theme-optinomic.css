@@ -8,7 +8,7 @@
 }
 
 .ag-optinomic .ag-cell {
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 6px;
     padding-right: 6px;
 }
@@ -37,14 +37,14 @@
 
 .ag-optinomic .ag-header-cell {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
 }
 
 .ag-optinomic .ag-header-group-cell {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
 }
@@ -65,7 +65,7 @@
 
 .ag-optinomic .ag-header-group-cell-label {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
     color: #9E9E9E;
@@ -73,7 +73,7 @@
 
 .ag-optinomic .ag-header-group-text {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
     color: #9E9E9E;
@@ -83,7 +83,6 @@
     margin-top: -6px;
     color: #E0E0E0;
     padding: 2px;
-    margin-top: 1px;
     border: 1px solid transparent;
     -webkit-border-radius: 2px;
     border-radius: 2px;

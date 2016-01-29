@@ -713,26 +713,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellClass = function(params) {
-                if (params.data.medication_status === 0) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-stop';
-                    }
-                };
 
                 if (params.data.medication_status === 1) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-stop';
-                    }
+                    return 'medication-stop';
+                } else {
+                    if (params.data.medication_status === 2) {
+                        return 'medication-verweigert';
+                    } else {
+                        return null;
+                    };
                 };
 
-                if (params.data.medication_status === 2) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-verweigert';
-                    }
-                };
             }
         });
 

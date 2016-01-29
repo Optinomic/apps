@@ -6827,26 +6827,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
             columnDef.cellClass = function(params) {
-                if (params.data.medication_status === 0) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-stop';
-                    }
-                };
 
                 if (params.data.medication_status === 1) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-stop';
-                    }
+                    return 'medication-stop';
+                } else {
+                    if (params.data.medication_status === 2) {
+                        return 'medication-verweigert';
+                    } else {
+                        return null;
+                    };
                 };
 
-                if (params.data.medication_status === 2) {
-                    // 0 = Offen 
-                    {
-                        return 'medication-verweigert';
-                    }
-                };
             }
         });
 
@@ -12318,7 +12309,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-cell {
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 6px;
     padding-right: 6px;
 }
@@ -12347,14 +12338,14 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-cell {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
 }
 
 .ag-optinomic .ag-header-group-cell {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
 }
@@ -12375,7 +12366,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-group-cell-label {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
     color: #9E9E9E;
@@ -12383,7 +12374,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-group-text {
     color: #9E9E9E;
-    margin-top: 12px;
+    padding-top: 12px;
     padding-left: 2px;
     padding-right: 2px;
     color: #9E9E9E;
@@ -12393,7 +12384,6 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     margin-top: -6px;
     color: #E0E0E0;
     padding: 2px;
-    margin-top: 1px;
     border: 1px solid transparent;
     -webkit-border-radius: 2px;
     border-radius: 2px;
