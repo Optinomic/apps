@@ -11839,9 +11839,10 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-cell {
-    margin: auto;
+    margin-top: 12px;
     padding-left: 6px;
     padding-right: 6px;
+    min-height: 48px !important;
 }
 
 .ag-optinomic .ag-cell-focus {
@@ -11942,7 +11943,6 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body .ag-row-odd:hover {
-    width: 100%;
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
@@ -11955,7 +11955,6 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 }
 
 .ag-optinomic .ag-body .ag-row-even:hover {
-    width: 100%;
     border-top: 1px solid #BDBDBD;
     background-color: #EEEEEE;
     color: #000000;
