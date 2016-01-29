@@ -527,7 +527,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Medikament",
             headerTooltip: "Medikament-Name"
         }, {
-            cellClass: 'md-body-1'
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mi",
             headerName: "Morgen",
@@ -536,7 +536,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 110,
             suppressSizeToFit: true
         }, {
-            cellClass: 'md-body-1'
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mo",
             headerName: "Morgen",
@@ -545,7 +545,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 110,
             suppressSizeToFit: true
         }, {
-            cellClass: 'md-body-1'
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_mi",
             headerName: "Mittag",
@@ -554,7 +554,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 110,
             suppressSizeToFit: true
         }, {
-            cellClass: 'md-body-1'
+            cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung_ab",
             headerName: "Abend",
