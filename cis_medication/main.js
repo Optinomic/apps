@@ -306,10 +306,35 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication = [];
             } else {
                 $scope.d.medication = angular.copy(data);
+
+
+                // Add special fields
+                $scope.d.medication.forEach(function(row, myindex) {
+                    //row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
+
+                    row.medication_start_verordnung_user_initals = '?';
+                    row.medication_start_verordnung_user_name = '?';
+                    row.medication_stop_verordnung_user_initals = '?';
+                    row.medication_stop_verordnung_user_name = '?';
+                    $scope.d.dataMain.users.all.forEach(function(user, myindex) {
+                        if (user.id === row.medication_start_verordnung_user) {
+                            row.medication_start_verordnung_user_initals = user.data.initials;
+                            row.medication_start_verordnung_user_name = user.data.extras.name;
+                        };
+
+                        if (user.id === row.medication_stop_verordnung_user) {
+                            row.medication_stop_verordnung_user_initals = user.data.initials;
+                            row.medication_stop_verordnung_user_name = user.data.extras.name;
+                        };
+                    });
+
+                });
+
             };
 
-            $scope.d.appState = 'show';
 
+
+            $scope.d.appState = 'show';
             $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
             console.log('(+) getEntrys ', $scope.d.medication);
@@ -608,27 +633,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            width: 62,
+            width: 58,
             hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user",
-            headerName: "Start UID",
+            headerName: "UID",
             headerTooltip: "Verordnung durch Benutzer ID - Start",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user_name",
-            headerName: "Start Name",
+            headerName: "Name",
             headerTooltip: "Name des Verordners - Start",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user_initals",
-            headerName: "Start Kürzel",
+            headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Start",
             width: 32,
             hide: false
@@ -643,21 +668,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_stop_verordnung_user",
-            headerName: "Stop UID",
+            headerName: "UID",
             headerTooltip: "Verordnung durch Benutzer ID - Stop",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_stop_verordnung_user_name",
-            headerName: "Stop Name",
+            headerName: "Name",
             headerTooltip: "Name des Verordners - Stop Datum",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_stop_verordnung_user_initals",
-            headerName: "Stop Kürzel",
+            headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
             hide: true
         }, {
@@ -754,32 +779,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var new_data = $scope.d.functions.enrichResults($scope.d.medication);
 
 
-
-        // Add special fields to the grid
-        new_data.forEach(function(row, myindex) {
-            //row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
-
-            row.medication_start_verordnung_user_initals = '?';
-            row.medication_start_verordnung_user_name = '?';
-            row.medication_stop_verordnung_user_initals = '?';
-            row.medication_stop_verordnung_user_name = '?';
-            $scope.d.dataMain.users.all.forEach(function(user, myindex) {
-                if (user.id === row.medication_start_verordnung_user) {
-                    row.medication_start_verordnung_user_initals = user.data.initials;
-                    row.medication_start_verordnung_user_name = user.data.extras.name;
-                };
-
-                if (user.id === row.medication_stop_verordnung_user) {
-                    row.medication_stop_verordnung_user_initals = user.data.initials;
-                    row.medication_stop_verordnung_user_name = user.data.extras.name;
-                };
-            });
-
-        });
-
-
-
-
         // columnDefs - cellStyle or medication_status
 
         $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
@@ -799,8 +798,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 return return_class;
             }
         });
-
-
 
 
         // Set Data
