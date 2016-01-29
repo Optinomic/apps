@@ -583,9 +583,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             cellClass: 'md-body-1',
             editable: false,
-            field: "medication_verabreichung",
+            field: "medication_dosierung_interval",
             headerName: "Interval",
             headerTooltip: "Verabreichung - Interval",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status",
+            headerName: "Status Code",
+            headerTooltip: "Status Code",
+            width: 52,
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -597,21 +605,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             cellClass: 'md-body-1',
             editable: false,
-            field: "medication_start_verordnung_datum",
+            field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            hide: true
+            width: 52,
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_user",
-            headerName: "Verordnet durch",
-            headerTooltip: "Verordnung durch Benutzer",
+            headerName: "Start UID",
+            headerTooltip: "Verordnung durch Benutzer ID",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
-            field: "medication_stop_verordnung_datum",
+            field: "medication_stop_verordnung_datum_day",
             headerName: "Stop",
             headerTooltip: "Verordnung - Stop",
             hide: true
@@ -619,15 +628,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_stop_verordnung_user",
-            headerName: "Gestoppt durch",
-            headerTooltip: "Verordnung durch Benutzer",
+            headerName: "Stop UID",
+            headerTooltip: "Verordnung durch Benutzer ID",
             hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_status",
-            headerName: "Status",
-            headerTooltip: "Status",
+            headerName: "Status #",
+            headerTooltip: "Status Code",
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -707,6 +716,82 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Enrich results
         var new_data = $scope.d.functions.enrichResults($scope.d.medication);
+
+
+
+        // Add special fields to the grid
+        new_data.forEach(function(row, myindex) {
+
+            row.medication_status_bezeichnung = $scope.d.appInit.medication_status[parseInt(row.medication_status)];
+
+            row.medication_start_verordnung_user_initals = '?';
+            row.medication_start_verordnung_user_name = '?';
+            row.medication_stop_verordnung_user_initals = '?';
+            row.medication_stop_verordnung_user_name = '?';
+            $scope.d.dataMain.users.all.forEach(function(user, myindex) {
+                if (user.id === row.medication_start_verordnung_user) {
+                    row.medication_start_verordnung_user_initals = user.data.initials;
+                    row.medication_start_verordnung_user_name = user.data.extras.name;
+                };
+
+                if (user.id === row.medication_stop_verordnung_user) {
+                    row.medication_stop_verordnung_user_initals = user.data.initials;
+                    row.medication_stop_verordnung_user_name = user.data.extras.name;
+                };
+            });
+
+        });
+
+
+        var field_status_bezeichnung = {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status_bezeichnung",
+            headerName: "Status",
+            headerTooltip: "Status Bezeichnung",
+            hide: true
+        };
+        $scope.d.grid.options.columnDefs.push(field_status_bezeichnung);
+
+        var user = {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_initals",
+            headerName: "Start Kürzel",
+            headerTooltip: "Kürzel des Verordners",
+            hide: true
+        };
+        $scope.d.grid.options.columnDefs.push(user);
+
+        var user = {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_name",
+            headerName: "Start Name",
+            headerTooltip: "Name des Verordners",
+            hide: true
+        };
+        $scope.d.grid.options.columnDefs.push(user);
+
+        var user = {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_initals",
+            headerName: "Stop Kürzel",
+            headerTooltip: "Kürzel des Verordners - Stop Datum",
+            hide: true
+        };
+        $scope.d.grid.options.columnDefs.push(user);
+
+        var user = {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_name",
+            headerName: "Stop Name",
+            headerTooltip: "Name des Verordners - Stop Datum",
+            hide: true
+        };
+        $scope.d.grid.options.columnDefs.push(user);
 
 
         // columnDefs - cellStyle or medication_status
