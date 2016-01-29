@@ -3,11 +3,6 @@
 # Ideas for Optinomic Applications
 
 
-### Depressions-Angst-Stress-Skalen (DASS)
-
-http://www2.psy.unsw.edu.au/groups/dass/
-http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Nilges%20Essau.htm
-
 
 
 ### Interessting Sources

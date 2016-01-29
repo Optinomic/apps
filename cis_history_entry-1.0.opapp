@@ -30,7 +30,7 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <md-content ng-if="d.appState !== 'loading'">
-    <md-card style="background-color:#FFFDE7">
+    <md-card style="background-color:#FFFDE7; min-height:">
         <md-card-content>
             <div layout-margin>
                 <p>&nbsp;</p>

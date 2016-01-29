@@ -78,14 +78,14 @@ website = http://www.optinomic.com/
         <md-divider></md-divider>
         <md-card-content>
             <p class="md-caption">&nbsp;</p>
-            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin layout-padding>
                 <div>
                     <p class="md-caption">Medikament</p>
                     <p class="flow-text">{{d.medication_detail.medication_name}}</p>
                 </div>
                 <div flex="25">
                     <p class="md-caption">Dosierung</p>
-                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center">
                         <p class="flow-text">{{d.medication_detail.medication_dosierung_mo}}</p>
                         <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
                         <p class="flow-text">{{d.medication_detail.medication_dosierung_mi}}</p>
@@ -7098,6 +7098,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
+
+
     $scope.entryDelete = function(my_index) {
         $scope.d.medication.splice(my_index, 1);
 
@@ -7117,7 +7119,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Update Entrys
             $scope.d.appState = 'show';
-            $scope.updateDataView();
             $scope.getEntrys();
         });
     };
@@ -7200,6 +7201,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
+            headerName: 'Edit',
+            headerTooltip: "Medikament bearbeiten",
+            width: 52,
+            hide: false,
+            template: '<md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;"><i class="md-title mdi mdi-pencil"></i><md-tooltip md-direction="bottom">Medikament bearbeiten</md-tooltip></md-button>'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",

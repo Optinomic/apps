@@ -462,6 +462,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
+
+
     $scope.entryDelete = function(my_index) {
         $scope.d.medication.splice(my_index, 1);
 
@@ -481,7 +483,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Update Entrys
             $scope.d.appState = 'show';
-            $scope.updateDataView();
             $scope.getEntrys();
         });
     };
@@ -564,6 +565,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         var columnDefs = [{
+            headerName: 'Edit',
+            headerTooltip: "Medikament bearbeiten",
+            width: 52,
+            hide: false,
+            template: '<md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;"><i class="md-title mdi mdi-pencil"></i><md-tooltip md-direction="bottom">Medikament bearbeiten</md-tooltip></md-button>'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
