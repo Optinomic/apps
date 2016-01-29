@@ -12302,17 +12302,9 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     padding-right: 6px;
 }
 
-.ag-optinomic .ag-cell-focus {
-    border-right: 1px solid #E0E0E0;
-    border-left: 1px solid #E0E0E0;
-}
+.ag-optinomic .ag-cell-focus {}
 
-.ag-optinomic .ag-cell-no-focus {
-    border-right: 1px solid transparent;
-    border-top: 1px solid transparent;
-    border-left: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-}
+.ag-optinomic .ag-cell-no-focus {}
 
 .ag-optinomic .ag-pinned-header {
     background-color: #fff;
@@ -12326,6 +12318,11 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
 
 .ag-optinomic .ag-header-container {
     background-color: #fff;
+}
+
+.ag-optinomic .ag-header-container:hover {
+    border-right: 1px solid #E0E0E0;
+    border-left: 1px solid #E0E0E0;
 }
 
 .ag-optinomic .ag-header-cell {
