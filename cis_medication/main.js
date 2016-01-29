@@ -563,14 +563,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     $scope.setDataView = function() {
 
-        var edit_template = include_as_js_string(templates / template_edit.html);
-        console.log('edit_template', edit_template);
-
-
         var columnDefs = [{
             headerName: 'Edit',
             width: 52,
-            template: ''
+            templateUrl: '../template_edit.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
