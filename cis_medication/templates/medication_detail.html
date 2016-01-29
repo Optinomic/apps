@@ -1,0 +1,95 @@
+<md-content class="md-padding">
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                </span>
+                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Medikament bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Medikament hinzufügen</span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex>
+                    <md-input-container class="md-block flow-text">
+                        <label>Medikament</label>
+                        <input ng-model="d.newEntry.medication_name">
+                    </md-input-container>
+                </div>
+                <div flex="15">
+                    <md-input-container>
+                        <label>Verabreichung</label>
+                        <md-select ng-model="d.newEntry.medication_verabreichung">
+                            <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
+                                {{verabreichung}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <md-input-container flex class="md-block">
+                    <label>Bemerkungen</label>
+                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
+                </md-input-container>
+                <div flex="15">
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Dosierung</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                        <md-input-container class="md-block">
+                            <label>Morgen</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mo" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Mittag</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mi" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Abend</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_ab" />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Nacht</label>
+                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_na" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex="60">
+                    <md-input-container flex class="md-block">
+                        <label>Interval</label>
+                        <input ng-model="d.newEntry.medication_dosierung_interval">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex>&nbsp;</span>
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Bearbeiten
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>

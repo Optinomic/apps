@@ -2,6 +2,9 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.appState === 'show'">
     include(templates/medication_table.html)
 </div>
+<div ng-if="d.appState === 'show_detail'">
+    include(templates/medication_detail.html)
+</div>
 <div ng-if="d.appState === 'edit'">
     include(templates/medication_edit.html)
 </div>
