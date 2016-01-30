@@ -738,6 +738,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Bearbeitungszeit",
             headerTooltip: "Bearbeitet - Zeit",
             hide: true
+        }, {
+            headerName: 'Edit',
+            width: 90,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
         }];
 
 
