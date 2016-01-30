@@ -7399,14 +7399,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             onRowSelected: function(event) {
                 console.log('Row - Selected: ', event.node.data);
-                $scope.d.grid.selected_row = event.node.data;
-                $scope.d.grid.is_row_selected = true;
-            },
 
-            onRowDeselected: function(event) {
-                console.log('Row - Deselected: ', event.node.data);
-                $scope.d.grid.selected_row = null;
-                $scope.d.grid.is_row_selected = false;
+                if (event.node.data === $scope.d.grid.selected_row) {
+                    $scope.d.grid.selected_row = null;
+                    $scope.d.grid.is_row_selected = false;
+                    $scope.d.grid.options.api.deselectAll();
+                } else {
+                    $scope.d.grid.selected_row = event.node.data;
+                    $scope.d.grid.is_row_selected = true;
+                };
+
+
             }
 
 
