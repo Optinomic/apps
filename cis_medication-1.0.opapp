@@ -40,7 +40,7 @@ website = http://www.optinomic.com/
     </div>
     <div flex ng-if="d.grid.is_row_selected">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-            <div flex="25">
+            <div flex="75">
                 <p class="md-subhead" style="margin-top:5px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
             </div>
             <div flex="25">
