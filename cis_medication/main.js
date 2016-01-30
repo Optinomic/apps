@@ -311,6 +311,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
 
+                    row.display = row.medication_name + '&nbsp;&nbsp;&nbsp;';
+                    row.display = row.display + ' ( ' + row.medication_dosierung_mo;
+                    row.display = row.display + ' - ' + row.medication_dosierung_mi;
+                    row.display = row.display + ' - ' + row.medication_dosierung_ab;
+                    row.display = row.display + ' - ' + row.medication_dosierung_na + ' ) ';
+
+
                     row.medication_status_bezeichnung = $scope.d.medication_status[parseInt(row.medication_status)].title;
 
                     row.medication_start_verordnung_user_initals = '?';
