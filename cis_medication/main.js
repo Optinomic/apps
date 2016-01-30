@@ -359,8 +359,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title('Verlaufseintrag löschen?')
-            .textContent('Sind Sie sicher, dass Sie die Diagnose (' + $scope.d.medication[myIndex].custom_text + ') löschen möchten?')
+            .title('Medikament löschen?')
+            .textContent('Sind Sie sicher, dass Sie das Medikament (' + $scope.d.medication[myIndex].display + ') löschen möchten?')
             .ariaLabel('Eintrag löschen')
             .targetEvent(ev)
             .ok('Löschen')
@@ -741,17 +741,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }, {
             headerName: ' E',
             headerTooltip: "Medikament bearbeiten",
-            width: 52,
+            width: 20,
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
         }, {
             headerName: ' D',
             headerTooltip: "Medikament löschen",
-            width: 52,
+            width: 20,
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
         }, {
             headerName: ' ?',
             headerTooltip: "In Compedium nachschlagen",
-            width: 52,
+            width: 20,
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }];
 
