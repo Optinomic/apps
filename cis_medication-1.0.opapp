@@ -32,11 +32,14 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-    <div flex>
+    <div flex ng-if="!d.grid.is_row_selected">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
+    </div>
+    <div flex ng-if="d.grid.is_row_selected">
+        <p class="md-body-1"><i class="mdi mdi-chevron-double-right"></i> {{d.medication_detail.medication_name}}&nbsp;&nbsp;&nbsp;{{d.medication_detail.medication_dosierung_mo}} - {{d.medication_detail.medication_dosierung_mi}} - {{d.medication_detail.medication_dosierung_ab}} - {{d.medication_detail.medication_dosierung_na}}</p>
     </div>
     <div>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
@@ -7391,18 +7394,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             onReady: function(event) {
                 console.log('the grid is now ready - updating');
                 $scope.d._init.grid.grid_ready = true;
-
             },
 
 
             onRowSelected: function(event) {
                 console.log('Row - Selected: ', event.node.data);
+                $scope.d.grid.selected_row = event.node.data;
+                $scope.d.grid.is_row_selected = true;
+            },
 
-                $scope.d.medication_detail = event.node.data;
-
-                $scope.d.appState = 'show_detail';
-
+            onRowDeselected: function(event) {
+                console.log('Row - Deselected: ', event.node.data);
+                $scope.d.grid.selected_row = null;
+                $scope.d.grid.is_row_selected = false;
             }
+
 
         };
 

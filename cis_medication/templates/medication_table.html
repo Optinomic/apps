@@ -1,9 +1,12 @@
 <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-    <div flex>
+    <div flex ng-if="!d.grid.is_row_selected">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
+    </div>
+    <div flex ng-if="d.grid.is_row_selected">
+        <p class="md-body-1"><i class="mdi mdi-chevron-double-right"></i> {{d.medication_detail.medication_name}}&nbsp;&nbsp;&nbsp;{{d.medication_detail.medication_dosierung_mo}} - {{d.medication_detail.medication_dosierung_mi}} - {{d.medication_detail.medication_dosierung_ab}} - {{d.medication_detail.medication_dosierung_na}}</p>
     </div>
     <div>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">

@@ -755,18 +755,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             onReady: function(event) {
                 console.log('the grid is now ready - updating');
                 $scope.d._init.grid.grid_ready = true;
-
             },
 
 
             onRowSelected: function(event) {
                 console.log('Row - Selected: ', event.node.data);
+                $scope.d.grid.selected_row = event.node.data;
+                $scope.d.grid.is_row_selected = true;
+            },
 
-                $scope.d.medication_detail = event.node.data;
-
-                $scope.d.appState = 'show_detail';
-
+            onRowDeselected: function(event) {
+                console.log('Row - Deselected: ', event.node.data);
+                $scope.d.grid.selected_row = null;
+                $scope.d.grid.is_row_selected = false;
             }
+
 
         };
 
