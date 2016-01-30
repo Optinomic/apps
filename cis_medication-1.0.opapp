@@ -7396,9 +7396,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerTooltip: "Bearbeitet - Zeit",
             hide: true
         }, {
-            headerName: 'Edit',
+            headerName: ' E',
+            headerTooltip: "Medikament bearbeiten",
             width: 52,
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: ' D',
+            headerTooltip: "Medikament löschen",
+            width: 52,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
+            headerName: ' ?',
+            headerTooltip: "In Compedium nachschlagen",
+            width: 52,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }];
 
 
