@@ -39,7 +39,7 @@ website = http://www.optinomic.com/
         </md-input-container>
     </div>
     <div flex ng-if="d.grid.is_row_selected">
-        <p class="md-body-1"><i class="mdi mdi-chevron-double-right"></i> {{d.medication_detail.medication_name}}&nbsp;&nbsp;&nbsp;{{d.medication_detail.medication_dosierung_mo}} - {{d.medication_detail.medication_dosierung_mi}} - {{d.medication_detail.medication_dosierung_ab}} - {{d.medication_detail.medication_dosierung_na}}</p>
+        <p class="md-body-1"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.medication_name}}&nbsp;&nbsp;&nbsp;{{d.grid.selected_row.medication_dosierung_mo}} - {{d.grid.selected_row.medication_dosierung_mi}} - {{d.grid.selected_row.medication_dosierung_ab}} - {{d.grid.selected_row.medication_dosierung_na}}</p>
     </div>
     <div>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
