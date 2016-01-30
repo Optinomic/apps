@@ -761,6 +761,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             enableSorting: true,
             showToolPanel: false,
             rowHeight: 50,
+            angularCompileRows: true,
+
 
             // EVENTS
             onReady: function(event) {
