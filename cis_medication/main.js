@@ -576,7 +576,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_name",
             headerName: "Medikament",
             headerTooltip: "Medikament-Name",
-            pinned: 'left',
+            pinned: 'left'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -751,10 +751,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             suppressSizeToFit: true,
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
         }, {
-            headerName: ' ?',
+            headerName: null,
             headerTooltip: "In Compedium nachschlagen",
             width: 30,
             suppressSizeToFit: true,
+            pinned: 'left',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }];
 
