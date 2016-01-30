@@ -311,7 +311,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
 
-                    row.display = row.medication_name + '&nbsp;&nbsp;&nbsp;';
+                    row.display = row.medication_name + ' ';
                     row.display = row.display + ' ( ' + row.medication_dosierung_mo;
                     row.display = row.display + ' - ' + row.medication_dosierung_mi;
                     row.display = row.display + ' - ' + row.medication_dosierung_ab;

@@ -40,17 +40,17 @@ website = http://www.optinomic.com/
     </div>
     <div flex ng-if="d.grid.is_row_selected">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-            <p class="flow-text"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
-            <md-button class="md-icon-button " ng-click="showConfirm($event, d.grid.selected_row.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
-                <i class="md-title mdi mdi-delete "></i>
-                <md-tooltip md-direction="bottom">
-                    Medikament löschen
-                </md-tooltip>
-            </md-button>
             <md-button class="md-icon-button" ng-click="entryEdit(d.grid.selected_row.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-pencil"></i>
                 <md-tooltip md-direction="bottom">
                     Medikament bearbeiten
+                </md-tooltip>
+            </md-button>
+            <p flex class="md-subhead"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
+            <md-button class="md-icon-button " ng-click="showConfirm($event, d.grid.selected_row.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
+                <i class="md-title mdi mdi-delete "></i>
+                <md-tooltip md-direction="bottom">
+                    Medikament löschen
                 </md-tooltip>
             </md-button>
         </div>
@@ -6964,7 +6964,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
 
-                    row.display = row.medication_name + '&nbsp;&nbsp;&nbsp;';
+                    row.display = row.medication_name + ' ';
                     row.display = row.display + ' ( ' + row.medication_dosierung_mo;
                     row.display = row.display + ' - ' + row.medication_dosierung_mi;
                     row.display = row.display + ' - ' + row.medication_dosierung_ab;
