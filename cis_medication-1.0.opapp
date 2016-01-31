@@ -38,8 +38,8 @@ website = http://www.optinomic.com/
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
-    <div flex ng-if="d.grid.is_row_selected" style="height: 72px; padding-left: 5px;">
-        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+    <div flex ng-if="d.grid.is_row_selected" style="height: 92px; padding: 12px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch" ayout-padding class="md-whiteframe-2dp">
             <div flex="75">
                 <p class="md-subhead" style="margin-top:5px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
             </div>
