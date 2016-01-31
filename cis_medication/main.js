@@ -571,6 +571,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.setDataView = function() {
 
         var columnDefs = [{
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            pinned: 'left',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+        }, {
+            headerName: ' E',
+            headerTooltip: "Medikament bearbeiten",
+            width: 30,
+            suppressSizeToFit: true,
+            pinned: 'right',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: ' D',
+            headerTooltip: "Medikament löschen",
+            width: 30,
+            suppressSizeToFit: true,
+            pinned: 'right',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -738,25 +759,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Bearbeitungszeit",
             headerTooltip: "Bearbeitet - Zeit",
             hide: true
-        }, {
-            headerName: ' E',
-            headerTooltip: "Medikament bearbeiten",
-            width: 30,
-            suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
-        }, {
-            headerName: ' D',
-            headerTooltip: "Medikament löschen",
-            width: 30,
-            suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
-        }, {
-            headerName: null,
-            headerTooltip: "In Compedium nachschlagen",
-            width: 30,
-            suppressSizeToFit: true,
-            pinned: 'left',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }];
 
 
