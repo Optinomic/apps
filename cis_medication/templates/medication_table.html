@@ -5,8 +5,8 @@
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
-    <div flex ng-if="d.grid.is_row_selected">
-        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div flex ng-if="d.grid.is_row_selected" class="md-whiteframe-2dp">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" layout-margin layout-padding>
             <div flex="75">
                 <p class="md-subhead" style="margin-top:5px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
             </div>

@@ -578,14 +578,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             pinned: 'left',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }, {
-            headerName: ' E',
+            headerName: null,
             headerTooltip: "Medikament bearbeiten",
             width: 30,
             suppressSizeToFit: true,
             pinned: 'right',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
         }, {
-            headerName: ' D',
+            headerName: null,
             headerTooltip: "Medikament löschen",
             width: 30,
             suppressSizeToFit: true,
