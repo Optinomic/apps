@@ -19,6 +19,13 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
+[template title_verordnung 6 1]
+<div class="grid-border-bottom">
+    <p class="flow-text grid-h2">
+        <br> Verordnung
+    </p>
+</div>
+
 
 [template medication_table 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
