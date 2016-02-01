@@ -560,7 +560,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         };
 
         // Sort by 'headerName'
-        DataView = sortByKey(DataView, headerName);
+        DataView = sortByKey(DataView, 'headerName');
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
