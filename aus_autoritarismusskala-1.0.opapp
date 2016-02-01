@@ -468,6 +468,15 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         editable = editable === undefined ? false : editable;
 
 
+        var sortByKey = function(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        };
+
+
         // Iterate through object properties
         var result = surveyResults[0]
         for (var property in result) {
@@ -499,6 +508,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                 if ((property === 'filled') || (property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
                     line.width = 145;
                     line.suppressSizeToFit = true;
+                    line.hide = true;
                 };
 
                 if ((property === 'filled_year') || (property === 'datestamp_year') || (property === 'startdate_year') || (property === 'submitdate_year')) {
@@ -515,7 +525,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
                 if ((property === 'filled_day') || (property === 'datestamp_day') || (property === 'startdate_day') || (property === 'submitdate_day')) {
                     line.width = 145;
-                    line.hide = true;
+                    line.hide = false;
+                    line.width = 58;
+                    line.suppressSizeToFit = true;
+                    line.pinned = 'left';
                 };
 
                 if ((property === 'filled_weekday') || (property === 'datestamp_weekday') || (property === 'startdate_weekday') || (property === 'submitdate_weekday')) {
@@ -525,7 +538,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
                 if ((property === 'filled_time') || (property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
                     line.width = 100;
-                    line.hide = true;
+                    line.hide = false;
+                    line.width = 38;
+                    line.suppressSizeToFit = true;
+                    line.pinned = 'left';
                 };
 
                 if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
@@ -543,6 +559,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             }
         };
 
+        // Sort by 'headerName'
+        DataView = sortByKey(DataView, headerName);
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
