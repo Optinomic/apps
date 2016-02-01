@@ -413,7 +413,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
                 if ((property === 'filled_day') || (property === 'datestamp_day') || (property === 'startdate_day') || (property === 'submitdate_day')) {
                     line.hide = false;
-                    line.width = 78;
+                    line.width = 88;
                     line.suppressSizeToFit = true;
                     line.pinned = 'left';
                 };
@@ -425,6 +425,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
                 if ((property === 'filled_time') || (property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
                     line.hide = false;
+                    line.width = 78;
                     line.suppressSizeToFit = true;
                     line.pinned = 'left';
                 };
