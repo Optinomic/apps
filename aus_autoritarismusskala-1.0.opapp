@@ -11261,7 +11261,7 @@ ag-grid-ng2{display:inline-block}.ag-root{font-size:14px;cursor:default;position
     font-weight: 400;
     letter-spacing: .010em;
     line-height: 24px;
-    background-color: #fff;
+    background-color: #FAFAFA;
 }
 
 .ag-optinomic .ag-cell {
