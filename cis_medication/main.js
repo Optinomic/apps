@@ -663,6 +663,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_verabreichung",
             headerName: "Verabreichung",
             headerTooltip: "Verabreichung",
+            width: 62,
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -762,50 +763,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 50,
-            rowHeight: 28,
-            rowData: [],
-            columnDefs: columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false,
-            rowHeight: 50,
-            angularCompileRows: true,
-
-
-            // EVENTS
-            onReady: function(event) {
-                console.log('the grid is now ready - updating');
-                $scope.d._init.grid.grid_ready = true;
-            },
-
-
-            onRowSelected: function(event) {
-                console.log('Row - Selected: ', event.node.data);
-
-                if (event.node.data === $scope.d.grid.selected_row) {
-                    $scope.d.grid.selected_row = null;
-                    $scope.d.grid.is_row_selected = false;
-                    $scope.d.grid.options.api.deselectAll();
-                } else {
-                    $scope.d.grid.selected_row = event.node.data;
-                    $scope.d.grid.is_row_selected = true;
-                };
-
-
-            }
-
-
-        };
-
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.columnDefs = columnDefs;
 
         //console.log('dataGRID: ', $scope.d.grid);
     };

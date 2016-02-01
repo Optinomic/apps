@@ -1148,8 +1148,10 @@ angular.module('optinomicDataModule')
 
 
         scopeDService.grid = {};
-        scopeDService.grid.options = {
+
+        scopeDService.grid.default_options = {
             headerHeight: 50,
+            rowHeight: 28,
             rowData: [],
             columnDefs: [],
             //pinnedColumnCount: 1,
@@ -1161,11 +1163,29 @@ angular.module('optinomicDataModule')
             enableSorting: true,
             showToolPanel: false,
             rowHeight: 50,
+            angularCompileRows: true,
+
 
             // EVENTS
             onReady: function(event) {
-                console.log('Angular-Grid is ready!');
-                $scope.d._init.grid.grid_ready = true;
+                console.log('the grid is now ready - updating');
+                scopeDService._init.grid.grid_ready = true;
+            },
+
+
+            onRowSelected: function(event) {
+                console.log('Row - Selected: ', event.node.data);
+
+                if (event.node.data === $scope.d.grid.selected_row) {
+                    scopeDService.grid.selected_row = null;
+                    scopeDService.grid.is_row_selected = false;
+                    scopeDService.grid.options.api.deselectAll();
+                } else {
+                    scopeDService.grid.selected_row = event.node.data;
+                    scopeDService.grid.is_row_selected = true;
+                };
+
+
             }
         };
 
