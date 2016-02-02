@@ -72,7 +72,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     var sql_string = include_as_js_string(export.sql);
 
-    console.log('sql_string - somevar - somevar - somevar', sql_string);
+    console.log('===================> sql_string - somevar - somevar - Included? ', sql_string);
 
     // ToDO: M4 - Import - remove new lines.
 

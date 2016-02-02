@@ -5617,7 +5617,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
   patient.id 
   ";
 
-    console.log('sql_string - somevar - somevar - somevar', sql_string);
+    console.log('===================> sql_string - somevar - somevar - Included? ', sql_string);
 
     // ToDO: M4 - Import - remove new lines.
 
