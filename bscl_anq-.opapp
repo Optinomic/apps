@@ -1,14 +1,16 @@
 
 [module]
-id = com.optinomic.apps.template
-name = Optinomic-App (Template)
-short_description = Use this as a starting-point for your apps.
+id = ch.suedhang.apps.bscl.anq
+name = BSCL (ANQ)
+short_description = Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
 version = 1.0
 
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.
+
+Es handelt sich bei den 53 Items der BSCL um die fünf bis sechs ladungsstärksten Items pro Skala aus der 90 Items umfassenden SCL-90. Die Urheber- und Markenrechte an der BSCL liegen beim Hogrefe Verlag. 
 
 [developer]
 first_name = Beat
@@ -18,6 +20,81 @@ email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
+
+
+[template chart_tscore 6 10]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<h3 class="md-headline">T-Score: {{d.dataMain.apps.current.name}}</h3>
+<p class="md-caption text-muted" style="text-align: center;">Deutsche Normstichprobe (N = 600 gesunde Erwachsene).</p>
+<chart-tscore data='d.tscore_plot' options='options_plot'></chart-tscore>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+        <p class="flow-text">&nbsp;</p>
+    </div>
+    <md-content>
+        <p class="md-body-2 text-muted">
+            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
+        </p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
+</script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
+</script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
+</script>
+
+</head>
 
 
 
@@ -31,9 +108,9 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
+<div layout="row" layout-align="start center">
     <div hide-sm>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <h3 class="md-headline">Rohdaten</h3>
     </div>
     <div flex>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
@@ -62,512 +139,6 @@ website = http://www.optinomic.com/
         :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
     </span>
 </p>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_timeline 6 7]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template simple_score 4 4]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">BDI-II: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-<score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
-<h3 class="md-headline">Hallo - Simple Score: {{d.dataMain.apps.current.name}}</h3>
-<score-threshold score="15" min="10" max="20" show-percent-scale="true" show-min-max="true"></score-threshold>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template score_range 2 4]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<div>
-    <h5 class="md-subhead">BDI-II Summenwerte und Interpretation</h5>
-    <table class="table table-condensed" style="width: 80%;">
-        <tr ng-repeat="range in scale_ranges.ranges">
-            <td style="text-align:right !important;">
-                <small>{{range.from}}-{{range.to}}&nbsp;</small>
-            </td>
-            <td>
-                <small>{{range.result}}</small>
-            </td>
-        </tr>
-    </table>
-</div>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_tscore 6 9]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">
-    T-Score: {{d.dataMain.apps.current.name}}
-</h3>
-<chart-tscore data='plotdata' options='options_plot'></chart-tscore>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_stanine 6 7]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">
-    Stanine: {{d.dataMain.apps.current.name}}
-</h3>
-<chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template data_download 6 14]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div>
-    <md-input-container class="md-block">
-        <label>SQL</label>
-        <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
-    </md-input-container>
-</div>
-<div layout="row" layout-sm="column" layout-align="start end">
-    <div flex>
-        <md-select ng-model="d.export.format" ng-init="csv">
-            <md-option value="csv">CSV</md-option>
-            <md-option value="json">JSON</md-option>
-        </md-select>
-    </div>
-    <div flex>
-        <md-select ng-model="d.export.direct" ng-init="True">
-            <md-option value="False">File-Download</md-option>
-            <md-option value="True">Screen</md-option>
-        </md-select>
-    </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.header" ng-init="True">
-            <md-option value="True">With header</md-option>
-            <md-option value="False">No header</md-option>
-        </md-select>
-    </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.delimitter" ng-init=";">
-            <md-option value=";">Semicolon (;)</md-option>
-            <md-option value=",">Comma (,)</md-option>
-            <md-option value="|">Pipe (|)</md-option>
-        </md-select>
-    </div>
-</div>
-<div>
-    <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Run SQL
-    </md-button>
-</div>
-<div ng-if="d.export.have_data">
-    <pre>{{d.export.data}}</pre>
-</div>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -5574,197 +5145,94 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
-                $scope.d.haveData = true;
-
 
                 // Run App-Functions:
                 $scope.setDataView();
-                $scope.setTimelineChartOptions();
                 $scope.setTscoreChart();
-                $scope.setStanineView();
 
-
+                // Display Results
+                $scope.d.haveData = true;
             };
-
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
-
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
+            $scope.d.functions._InitData('dataMain', true);
         });
     };
     $scope.loadMainData();
 
 
     // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
-
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
-
-    var sql_string = "SELECT 
-  patient.id 
-  ";
-
-    console.log('sql_string - somevar - somevar - somevar', sql_string);
-
-    // ToDO: M4 - Import - remove new lines.
-
-    //var sql_import_string = "in_clude(templates/export.sql)";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
-
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
-
-    $scope.export = function() {
-
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
-
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
-
-    };
-
-
-
-
-
-
-    // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
-
-
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Tägliche Stimmung (∑)',
-            'focusField': 'score',
-            'dateField': 'filled',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
     // Chart: T-Score <chart-tscore>
     // -----------------------------------
 
-    $scope.getAnswer = function() {
+    $scope.getAnswer = function(calc) {
+
+        var myResults = calc;
+        //console.log('getAnswer', myResults);
+
         var score_answer = [{
+            "scale": 0,
             "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "stanine": myResults.stanine.gsi,
+            "t_score": myResults.t_scores.gsi,
+            "scale_score": myResults.scale_scores.gsi,
+            "sum_score": myResults.sum_scores.gsi
         }, {
+            "scale": 1,
             "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.psychot,
+            "scale_score": myResults.scale_scores.psychot,
+            "sum_score": myResults.sum_scores.psychot
         }, {
+            "scale": 2,
             "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.paranoid,
+            "scale_score": myResults.scale_scores.paranoid,
+            "sum_score": myResults.sum_scores.paranoid
         }, {
+            "scale": 3,
             "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.phobisch,
+            "scale_score": myResults.scale_scores.phobisch,
+            "sum_score": myResults.sum_scores.phobisch
         }, {
+            "scale": 4,
             "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.aggr,
+            "scale_score": myResults.scale_scores.aggr,
+            "sum_score": myResults.sum_scores.aggr
         }, {
+            "scale": 5,
             "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.angst,
+            "scale_score": myResults.scale_scores.angst,
+            "sum_score": myResults.sum_scores.angst
         }, {
+            "scale": 6,
             "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.depr,
+            "scale_score": myResults.scale_scores.depr,
+            "sum_score": myResults.sum_scores.depr
         }, {
+            "scale": 7,
             "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.soz,
+            "scale_score": myResults.scale_scores.soz,
+            "sum_score": myResults.sum_scores.soz
         }, {
+            "scale": 8,
             "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.zwang,
+            "scale_score": myResults.scale_scores.zwang,
+            "sum_score": myResults.sum_scores.zwang
         }, {
+            "scale": 9,
             "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
+            "t_score": myResults.t_scores.somat,
+            "scale_score": myResults.scale_scores.somat,
+            "sum_score": myResults.sum_scores.somat
         }];
 
         return score_answer;
@@ -5774,73 +5242,55 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Options
         $scope.options_plot = {
-            'show_scores': true
+            'show_scores': true,
+            'language': 'De'
         };
 
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
-    };
+
+        // Create - Plot-Data from Calculation Results
+        $scope.d.tscore_plot = [];
+
+        var mySurveyResponses = $scope.d.dataMain.survey_responses;
+        mySurveyResponses.forEach(function(survey_response, myindex) {
+
+            var mySurveyResponseCalculations = survey_response.calculations;
+            mySurveyResponseCalculations.forEach(function(calculation, myindex) {
+
+                if (calculation.calculation_name === "get_results") {
+
+                    var inner_calculation = calculation.calculation_result;
+                    if (inner_calculation) {
+
+                        if (survey_response.entity.data.response.q501V05 === '0') {
+                            // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
+
+                            var myLabel = '';
+                            myLabel = survey_response.entity.data.filled_day;
 
 
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
+                            if (survey_response.entity.data.response.q501V04 === '1') {
+                                myLabel = 'Eintritt';
+                            };
+                            if (survey_response.entity.data.response.q501V04 === '2') {
+                                myLabel = 'Austritt';
+                            };
+                            if (survey_response.entity.data.response.q501V04 === '3') {
+                                myLabel = 'Übertritt';
+                            };
 
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
+                            console.log();
 
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
+                            var plot_item = {
+                                "label": myLabel,
+                                "label_datestamp": survey_response.entity.data.filled_day + ', ' + survey_response.entity.data.filled_time,
+                                "scores": $scope.getAnswer(inner_calculation)
+                            }
+                            $scope.d.tscore_plot.push(plot_item);
+                        };
+                    };
+                };
+            });
+        });
     };
 
 
@@ -5852,7 +5302,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // If we have multiple surveys - make sure to take the right 'responses'.
         var currentResultGroup = 0;
         $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
-            if (current_group_def.survey === 'Second example survey') {
+            if (current_group_def.survey === 'BSCL - ANQ') {
                 currentResultGroup = current_group_def.id;
             };
         });
@@ -5870,6 +5320,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
+
+        $scope.d.grid = {};
+        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
 
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
@@ -5918,546 +5371,24 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // DataView - Options
-        $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
-        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
+        $scope.d.grid.options = {
+            headerHeight: 50,
+            rowHeight: 50,
+            rowData: $scope.d.grid.rowData,
+            columnDefs: $scope.d.grid.columnDefs,
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false
+        };
 
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
-
-
-    // Testdata
-    $scope.d.craving = [{
-        'Suchtdruck_1': '52',
-        'datestamp': '2014-10-17 12:21:57',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '4284fe621ec08b05',
-        'submitdate': '2014-10-17 12:21:57',
-        'survey_name': 'craving',
-        'startdate': '2014-10-17 12:20:51',
-        'diary': 'Created by [Do it now craving] - Button',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '97',
-        'something': 1052,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '88',
-        'datestamp': '2014-10-19 19:04:04',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14137380042493700000001',
-        'submitdate': '2014-10-19 19:04:04',
-        'survey_name': 'craving',
-        'startdate': '2014-10-19 19:03:44',
-        'diary': 'Ich wünsche Dir einen wunderschönen Tag \n',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '103',
-        'something': null,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '7',
-        'datestamp': '2014-10-20 20:43:08',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14138244019509190000001',
-        'submitdate': '2014-10-20 20:43:08',
-        'survey_name': 'craving',
-        'startdate': '2014-10-20 20:42:51',
-        'diary': 'Another - 21h - entry.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '107',
-        'something': 1007,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '1',
-        'datestamp': '2014-10-20 21:06:22',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14136516032177690000001',
-        'submitdate': '2014-10-20 21:06:22',
-        'survey_name': 'craving',
-        'startdate': '2014-10-20 21:06:07',
-        'diary': 'Another - 21:06',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '108',
-        'something': 1001,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '74',
-        'datestamp': '2014-10-21 19:00:41',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14139108024947040000001',
-        'submitdate': '2014-10-21 19:00:41',
-        'survey_name': 'craving',
-        'startdate': '2014-10-21 19:00:30',
-        'diary': '19h done',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '110',
-        'something': 1074,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '65',
-        'datestamp': '2014-10-22 19:00:35',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14139972021894060000001',
-        'submitdate': '2014-10-22 19:00:35',
-        'survey_name': 'craving',
-        'startdate': '2014-10-22 19:00:26',
-        'diary': '19h ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '114',
-        'something': 1065,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '76',
-        'datestamp': '2014-10-23 19:01:08',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14140836022057210000001',
-        'submitdate': '2014-10-23 19:01:08',
-        'survey_name': 'craving',
-        'startdate': '2014-10-23 19:00:59',
-        'diary': '19h - done',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '115',
-        'something': 1076,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '63',
-        'datestamp': '2014-11-03 08:44:43',
-        'refurl': 'http://demo.optinomic.org/patient/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14149513586844010000001',
-        'submitdate': '2014-11-03 08:44:43',
-        'survey_name': 'craving',
-        'startdate': '2014-11-03 08:44:14',
-        'diary': 'Clicked the button at patient - page.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '117',
-        'something': null,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-03 23:58:11',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14150377811281420000001',
-        'submitdate': '2014-11-03 23:58:11',
-        'survey_name': 'craving',
-        'startdate': '2014-11-03 23:57:40',
-        'diary': 'Mail from 21h - filled out @ 24h',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '118',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '73',
-        'datestamp': '2014-11-05 07:21:19',
-        'refurl': '',
-        'ipaddr': '213.55.184.232',
-        'optinomixHASH': '14151241706791780000001',
-        'submitdate': '2014-11-05 07:21:19',
-        'survey_name': 'craving',
-        'startdate': '2014-11-05 07:20:59',
-        'diary': 'Done ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '119',
-        'something': 1073,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '85',
-        'datestamp': '2014-11-05 22:39:44',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14152105862270580000001',
-        'submitdate': '2014-11-05 22:39:44',
-        'survey_name': 'craving',
-        'startdate': '2014-11-05 22:38:47',
-        'diary': 'First Mail - received @ 22:39',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '120',
-        'something': 1085,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '69',
-        'datestamp': '2014-11-06 19:40:49',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '2e5c3412deda4289',
-        'submitdate': '2014-11-06 19:40:49',
-        'survey_name': 'craving',
-        'startdate': '2014-11-06 19:40:31',
-        'diary': '19:34 Mail',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '122',
-        'something': 1069,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '83',
-        'datestamp': '2014-11-07 22:16:57',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14153845888512990000001',
-        'submitdate': '2014-11-07 22:16:57',
-        'survey_name': 'craving',
-        'startdate': '2014-11-07 22:15:33',
-        'diary': 'First reminder mail - initial mail ignored. If no more mail is coming = perfect! :) ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '123',
-        'something': 1083,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '69',
-        'datestamp': '2014-11-09 08:08:20',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14154702512222380000001',
-        'submitdate': '2014-11-09 08:08:20',
-        'survey_name': 'craving',
-        'startdate': '2014-11-09 08:07:55',
-        'diary': '7h mail. Working fine ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '124',
-        'something': 1069,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-09 19:18:06',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14155569998988060000001',
-        'submitdate': '2014-11-09 19:18:06',
-        'survey_name': 'craving',
-        'startdate': '2014-11-09 19:17:56',
-        'diary': '19:17',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '129',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-10 19:32:51',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14156431713785170000001',
-        'submitdate': '2014-11-10 19:32:51',
-        'survey_name': 'craving',
-        'startdate': '2014-11-10 19:32:36',
-        'diary': 'It works ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '130',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '21',
-        'datestamp': '2014-11-11 22:02:35',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14157295822147370000001',
-        'submitdate': '2014-11-11 22:02:35',
-        'survey_name': 'craving',
-        'startdate': '2014-11-11 22:02:28',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '134',
-        'something': 1021,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-12 19:13:38',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14158159705041450000001',
-        'submitdate': '2014-11-12 19:13:38',
-        'survey_name': 'craving',
-        'startdate': '2014-11-12 19:13:31',
-        'diary': '19:13',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '136',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-13 21:13:37',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14159023711522110000001',
-        'submitdate': '2014-11-13 21:13:37',
-        'survey_name': 'craving',
-        'startdate': '2014-11-13 21:13:32',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '140',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-14 19:21:50',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14159887748010720000001',
-        'submitdate': '2014-11-14 19:21:50',
-        'survey_name': 'craving',
-        'startdate': '2014-11-14 19:21:37',
-        'diary': '19:13',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '141',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '11',
-        'datestamp': '2014-11-15 23:14:36',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14160751712906030000001',
-        'submitdate': '2014-11-15 23:14:36',
-        'survey_name': 'craving',
-        'startdate': '2014-11-15 23:14:16',
-        'diary': '23:13 Reminder ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '146',
-        'something': 1011,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '9',
-        'datestamp': '2014-11-16 19:34:06',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14161615695617110000001',
-        'submitdate': '2014-11-16 19:34:06',
-        'survey_name': 'craving',
-        'startdate': '2014-11-16 19:33:46',
-        'diary': 'Just done ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '147',
-        'something': 1009,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-17 19:14:37',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14162479738556080000001',
-        'submitdate': '2014-11-17 19:14:37',
-        'survey_name': 'craving',
-        'startdate': '2014-11-17 19:14:26',
-        'diary': 'Soon! :-)',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '150',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '27',
-        'datestamp': '2014-11-18 19:16:39',
-        'refurl': '',
-        'ipaddr': '10.176.233.247',
-        'optinomixHASH': '14163343771849490000001',
-        'submitdate': '2014-11-18 19:16:39',
-        'survey_name': 'craving',
-        'startdate': '2014-11-18 19:16:11',
-        'diary': 'Not deactivated already? ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '155',
-        'something': 1027,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '61',
-        'datestamp': '2014-11-24 11:08:24',
-        'refurl': 'http://demo.optinomic.org/patient/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '54567848a61d38f',
-        'submitdate': '2014-11-24 11:08:24',
-        'survey_name': 'craving',
-        'startdate': '2014-11-24 11:08:05',
-        'diary': 'On activation - now every 2 days @ 19h',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '166',
-        'something': 1061,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '100',
-        'datestamp': '2014-11-24 19:11:18',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14168521788955520000001',
-        'submitdate': '2014-11-24 19:11:18',
-        'survey_name': 'craving',
-        'startdate': '2014-11-24 19:10:34',
-        'diary': 'Already today? Next should be Wednesday. ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '167',
-        'something': 1100,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '75',
-        'datestamp': '2014-11-26 19:04:50',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14170249737049020000001',
-        'submitdate': '2014-11-26 19:04:50',
-        'survey_name': 'craving',
-        'startdate': '2014-11-26 19:04:31',
-        'diary': 'Mittwoch -> Freitag should be next.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '171',
-        'something': 1075,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-28 19:04:48',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14171977715331030000001',
-        'submitdate': '2014-11-28 19:04:48',
-        'survey_name': 'craving',
-        'startdate': '2014-11-28 19:04:35',
-        'diary': 'Firday - it works! :-)',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '174',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-06-30 19:10:00',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14173705778560900000001',
-        'submitdate': '2014-11-30 19:10:00',
-        'survey_name': 'craving',
-        'startdate': '2014-11-30 19:09:55',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '182',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '12',
-        'datestamp': '2014-12-02 19:03:56',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14175433891820340000001',
-        'submitdate': '2014-12-02 19:03:56',
-        'survey_name': 'craving',
-        'startdate': '2014-12-02 19:03:49',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '184',
-        'something': 1012,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-07-04 20:03:39',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14177161619822780000001',
-        'submitdate': '2014-12-04 20:03:39',
-        'survey_name': 'craving',
-        'startdate': '2014-12-04 20:03:35',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '187',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '66',
-        'datestamp': '2014-12-05 11:35:07',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '55455ed9e59a09d2',
-        'submitdate': '2014-12-05 11:35:07',
-        'survey_name': 'craving',
-        'startdate': '2014-12-05 11:35:04',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '188',
-        'something': 1066,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-12-05 11:42:47',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '7aa71f9c78f78e59',
-        'submitdate': '2014-12-05 11:42:47',
-        'survey_name': 'craving',
-        'startdate': '2014-12-05 11:42:43',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '191',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }];
-
 
 
 });
@@ -28489,64 +27420,27 @@ md-tooltip.md-show {
 
 
 [survey]
-id = daily_mood
+id = bscl_anq
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = BSCL - ANQ
 host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
+survey_id = 693172
+hash = X6X78
+pid = X6X73
+fid = X6X77
 min_questions =
 min_lastpage = 2
 
 
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-<div>
-    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
-        <div flex="50" layout="column">
-            <md-card ng-hide="thankyou">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Wie ist ihre aktuelle Stimmung?</span>
-                        <span class="md-subhead">Bitte beantworten Sie spontan.</span>
-                        <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
-                        </md-slider>
-                        <span class="md-caption">Legende: 0 = sehr schlecht | 10 = sehr gut</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-actions layout="row" layout-align="end center">
-                    <md-button ng-click="saveresult()">Speichern</md-button>
-                </md-card-actions>
-            </md-card>
-            <div ng-show="thankyou">
-                <h1 class="md-display-4">Herzlichen Dank</h1>
-                <span class="md-subhead" style="margin-top:-48px;">
-                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
-                </span>
-            </div>
-        </div>
-    </md-content>
-</div>
-
-
-
 [event]
-type = daily
-time = 19:00
+type = on_activation
+time = 08:00
 due_after = 86400
 overdue = ignore
-description = Track your daily craving.
-survey = daily_mood
+description = BSCL - ANQ
+survey = bscl_anq
+
 
 
 [email new_event html]
@@ -28562,38 +27456,799 @@ Thank you
 
 
 
-[calculation another_calculation javascript]
+[calculation get_results javascript]
 function main(responses) {
+
     var calc = {};
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
+    calc.get_t_score = function(scale, score) {
+        // Variablen initialisieren
+        var t_score = 0;
+
+        if (scale !== 0) {
+            t_score = 40;
+
+            if (scale === 1) {
+                // Psychotizismus
+                t_score = 44;
+                if (score >= 1) {
+                    t_score = 54;
+                }
+                if (score >= 2) {
+                    t_score = 59;
+                }
+                if (score >= 3) {
+                    t_score = 63;
+                }
+                if (score >= 4) {
+                    t_score = 68;
+                }
+                if (score >= 5) {
+                    t_score = 71;
+                }
+                if (score >= 6) {
+                    t_score = 73;
+                }
+                if (score >= 7) {
+                    t_score = 76;
+                }
+                if (score >= 9) {
+                    t_score = 78;
+                }
+                if (score >= 10) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 2) {
+                // Paranoides Denken
+                t_score = 41;
+                if (score >= 1) {
+                    t_score = 49;
+                }
+                if (score >= 2) {
+                    t_score = 54;
+                }
+                if (score >= 3) {
+                    t_score = 58;
+                }
+                if (score >= 4) {
+                    t_score = 61;
+                }
+                if (score >= 5) {
+                    t_score = 65;
+                }
+                if (score >= 6) {
+                    t_score = 68;
+                }
+                if (score >= 7) {
+                    t_score = 71;
+                }
+                if (score >= 8) {
+                    t_score = 74;
+                }
+                if (score >= 13) {
+                    t_score = 78;
+                }
+                if (score >= 14) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 3) {
+                // Phobische Angst
+                t_score = 45;
+                if (score >= 1) {
+                    t_score = 55;
+                }
+                if (score >= 2) {
+                    t_score = 61;
+                }
+                if (score >= 3) {
+                    t_score = 65;
+                }
+                if (score >= 4) {
+                    t_score = 69;
+                }
+                if (score >= 5) {
+                    t_score = 74;
+                }
+                if (score >= 6) {
+                    t_score = 76;
+                }
+                if (score >= 7) {
+                    t_score = 78;
+                }
+                if (score >= 8) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 4) {
+                // Aggressivität/ Feindseligkeit
+                t_score = 38;
+                if (score >= 1) {
+                    t_score = 48;
+                }
+                if (score >= 2) {
+                    t_score = 55;
+                }
+                if (score >= 3) {
+                    t_score = 59;
+                }
+                if (score >= 4) {
+                    t_score = 63;
+                }
+                if (score >= 5) {
+                    t_score = 66;
+                }
+                if (score >= 6) {
+                    t_score = 69;
+                }
+                if (score >= 7) {
+                    t_score = 71;
+                }
+                if (score >= 8) {
+                    t_score = 72;
+                }
+                if (score >= 9) {
+                    t_score = 75;
+                }
+                if (score >= 10) {
+                    t_score = 78;
+                }
+                if (score >= 11) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 5) {
+                // Ängstlichkeit
+                t_score = 38;
+                if (score >= 1) {
+                    t_score = 48;
+                }
+                if (score >= 2) {
+                    t_score = 52;
+                }
+                if (score >= 3) {
+                    t_score = 57;
+                }
+                if (score >= 4) {
+                    t_score = 60;
+                }
+                if (score >= 5) {
+                    t_score = 63;
+                }
+                if (score >= 6) {
+                    t_score = 66;
+                }
+                if (score >= 7) {
+                    t_score = 70;
+                }
+                if (score >= 8) {
+                    t_score = 73;
+                }
+                if (score >= 9) {
+                    t_score = 76;
+                }
+                if (score >= 10) {
+                    t_score = 78;
+                }
+                if (score >= 16) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 6) {
+                // Depressivität
+                t_score = 41;
+                if (score >= 1) {
+                    t_score = 50;
+                }
+                if (score >= 2) {
+                    t_score = 55;
+                }
+                if (score >= 3) {
+                    t_score = 58;
+                }
+                if (score >= 4) {
+                    t_score = 61;
+                }
+                if (score >= 5) {
+                    t_score = 64;
+                }
+                if (score >= 6) {
+                    t_score = 67;
+                }
+                if (score >= 7) {
+                    t_score = 69;
+                }
+                if (score >= 8) {
+                    t_score = 71;
+                }
+                if (score >= 9) {
+                    t_score = 72;
+                }
+                if (score >= 10) {
+                    t_score = 74;
+                }
+                if (score >= 11) {
+                    t_score = 75;
+                }
+                if (score >= 13) {
+                    t_score = 76;
+                }
+                if (score >= 15) {
+                    t_score = 78;
+                }
+                if (score >= 16) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 7) {
+                // Unsicherheit im Sozialkontakt
+                t_score = 40;
+                if (score >= 1) {
+                    t_score = 48;
+                }
+                if (score >= 2) {
+                    t_score = 54;
+                }
+                if (score >= 3) {
+                    t_score = 58;
+                }
+                if (score >= 4) {
+                    t_score = 63;
+                }
+                if (score >= 5) {
+                    t_score = 66;
+                }
+                if (score >= 6) {
+                    t_score = 69;
+                }
+                if (score >= 7) {
+                    t_score = 72;
+                }
+                if (score >= 8) {
+                    t_score = 75;
+                }
+                if (score >= 9) {
+                    t_score = 77;
+                }
+                if (score >= 10) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 8) {
+                // Zwanghaftigkeit
+                t_score = 35;
+                if (score >= 1) {
+                    t_score = 43;
+                }
+                if (score >= 2) {
+                    t_score = 48;
+                }
+                if (score >= 3) {
+                    t_score = 51;
+                }
+                if (score >= 4) {
+                    t_score = 55;
+                }
+                if (score >= 5) {
+                    t_score = 58;
+                }
+                if (score >= 6) {
+                    t_score = 62;
+                }
+                if (score >= 7) {
+                    t_score = 64;
+                }
+                if (score >= 8) {
+                    t_score = 66;
+                }
+                if (score >= 9) {
+                    t_score = 68;
+                }
+                if (score >= 10) {
+                    t_score = 69;
+                }
+                if (score >= 11) {
+                    t_score = 72;
+                }
+                if (score >= 12) {
+                    t_score = 74;
+                }
+                if (score >= 14) {
+                    t_score = 75;
+                }
+                if (score >= 15) {
+                    t_score = 78;
+                }
+                if (score >= 16) {
+                    t_score = 80;
+                }
+            }
+            if (scale === 9) {
+                // Somatisierung
+                t_score = 40;
+
+                if (score >= 1) {
+                    t_score = 49;
+                }
+
+                if (score >= 2) {
+                    t_score = 54;
+                }
+
+                if (score >= 3) {
+                    t_score = 57;
+                }
+
+                if (score >= 4) {
+                    t_score = 61;
+                }
+
+                if (score >= 5) {
+                    t_score = 63;
+                }
+
+                if (score >= 6) {
+                    t_score = 65;
+                }
+
+                if (score >= 7) {
+                    t_score = 66;
+                }
+
+                if (score >= 8) {
+                    t_score = 69;
+                }
+
+                if (score >= 9) {
+                    t_score = 72;
+                }
+
+                if (score >= 10) {
+                    t_score = 74;
+                }
+
+                if (score >= 11) {
+                    t_score = 75;
+                }
+
+                if (score >= 12) {
+                    t_score = 75;
+                }
+
+                if (score >= 13) {
+                    t_score = 77;
+                }
+
+                if (score >= 14) {
+                    t_score = 80;
+                }
+            }
+
+
+
+        } else {
+
+            // GSI
+            t_score = 24;
+
+            if (score >= 1) {
+                t_score = 30;
+            }
+
+            if (score >= 2) {
+                t_score = 34;
+            }
+
+            if (score >= 3) {
+                t_score = 36;
+            }
+
+            if (score >= 4) {
+                t_score = 38;
+            }
+
+            if (score >= 5) {
+                t_score = 40;
+            }
+
+            if (score >= 6) {
+                t_score = 41;
+            }
+
+            if (score >= 7) {
+                t_score = 43;
+            }
+
+            if (score >= 8) {
+                t_score = 44;
+            }
+
+            if (score >= 9) {
+                t_score = 45;
+            }
+
+            if (score >= 10) {
+                t_score = 46;
+            }
+
+            if (score >= 11) {
+                t_score = 48;
+            }
+
+            if (score >= 13) {
+                t_score = 49;
+            }
+
+            if (score >= 14) {
+                t_score = 50;
+            }
+
+            if (score >= 15) {
+                t_score = 51;
+            }
+
+            if (score >= 16) {
+                t_score = 52;
+            }
+
+            if (score >= 17) {
+                t_score = 53;
+            }
+
+            if (score >= 19) {
+                t_score = 54;
+            }
+
+            if (score >= 20) {
+                t_score = 55;
+            }
+
+            if (score >= 22) {
+                t_score = 56;
+            }
+
+            if (score >= 23) {
+                t_score = 57;
+            }
+
+            if (score >= 25) {
+                t_score = 58;
+            }
+
+            if (score >= 27) {
+                t_score = 59;
+            }
+
+            if (score >= 29) {
+                t_score = 60;
+            }
+
+            if (score >= 31) {
+                t_score = 61;
+            }
+
+            if (score >= 32) {
+                t_score = 62;
+            }
+
+            if (score >= 33) {
+                t_score = 63;
+            }
+
+            if (score >= 34) {
+                t_score = 64;
+            }
+
+            if (score >= 35) {
+                t_score = 65;
+            }
+
+            if (score >= 37) {
+                t_score = 66;
+            }
+
+            if (score >= 40) {
+                t_score = 67;
+            }
+
+            if (score >= 41) {
+                t_score = 68;
+            }
+
+            if (score >= 42) {
+                t_score = 69;
+            }
+
+            if (score >= 47) {
+                t_score = 70;
+            }
+
+            if (score >= 48) {
+                t_score = 71;
+            }
+
+            if (score >= 51) {
+                t_score = 72;
+            }
+
+            if (score >= 60) {
+                t_score = 73;
+            }
+
+            if (score >= 61) {
+                t_score = 74;
+            }
+
+            if (score >= 65) {
+                t_score = 75;
+            }
+
+            if (score >= 70) {
+                t_score = 77;
+            }
+
+            if (score >= 75) {
+                t_score = 80;
+            }
+
+        }
+
+        return t_score;
     };
 
+    calc.get_stanine = function(scale, score, gender, eintrittsort) {
+        // Variablen initialisieren
+
+        // Falls gender nicht gesetzt ist = Mann
+        if ((gender === '') || (gender === null) || (gender === undefined)) {
+            gender = 'male';
+        }
+
+        // Falls eintrittsort nicht gesetzt ist = Entwöhnung
+        if ((eintrittsort === '') || (eintrittsort === null) || (eintrittsort === undefined)) {
+            // 1 = Entzug
+            // 2 = Entwöhnung
+            eintrittsort = '2';
+        }
+
+        var stanine = 0;
+
+
+        if (scale === 0) {
+            if (gender === 'male') {
+
+                if (eintrittsort === '1') {
+
+                    stanine = 1;
+
+                    if (score >= 3) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 8) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 16) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 28) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 43) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 62) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 86) {
+                        stanine = 8;
+                    }
+
+                    if (score >= 110) {
+                        stanine = 9;
+                    }
+                }
+
+                if (eintrittsort === '2') {
+                    stanine = 1;
+
+                    if (score >= 1) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 2) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 6) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 10) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 17) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 29) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 46) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 69) {
+                        stanine = 8;
+                    }
+                    if (score >= 88) {
+                        stanine = 9;
+                    }
+                }
+
+            } else {
+
+                if (eintrittsort === '1') {
+                    stanine = 1;
+
+                    if (score >= 5) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 12) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 20) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 33) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 51) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 72) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 99) {
+                        stanine = 8;
+                    }
+
+                    if (score >= 127) {
+                        stanine = 9;
+                    }
+                }
+
+                if (eintrittsort === '2') {
+                    stanine = 1;
+
+                    if (score >= 2) {
+                        stanine = 2;
+                    }
+
+                    if (score >= 6) {
+                        stanine = 3;
+                    }
+
+                    if (score >= 13) {
+                        stanine = 4;
+                    }
+
+                    if (score >= 24) {
+                        stanine = 5;
+                    }
+
+                    if (score >= 33) {
+                        stanine = 6;
+                    }
+
+                    if (score >= 56) {
+                        stanine = 7;
+                    }
+
+                    if (score >= 76) {
+                        stanine = 8;
+                    }
+                    if (score >= 100) {
+                        stanine = 9;
+                    }
+                }
+
+            }
+
+        }
+
+        return stanine;
+    };
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-        var responses_array = myResponses.survey_responses;
-        var allResults = [];
 
+        var allResults = [];
+        var currentPatient = myResponses.patient;
+        //var responses_foreign = myResponses.foreign_survey_responses;
+
+        var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
 
-            // Something
-            myResults.something = calc.doSomething();
+            myResults.sum_scores = {};
+            myResults.sum_scores.aggr = parseInt(result['BSCL[sq504V06]']) + parseInt(result['BSCL[sq504V13]']) + parseInt(result['BSCL[sq504V40]']) + parseInt(result['BSCL[sq504V41]']) + parseInt(result['BSCL[sq504V46]']);
+            myResults.sum_scores.angst = parseInt(result['BSCL[sq504V01]']) + parseInt(result['BSCL[sq504V12]']) + parseInt(result['BSCL[sq504V19]']) + parseInt(result['BSCL[sq504V38]']) + parseInt(result['BSCL[sq504V45]']) + parseInt(result['BSCL[sq504V49]']);
+            myResults.sum_scores.depr = parseInt(result['BSCL[sq504V09]']) + parseInt(result['BSCL[sq504V16]']) + parseInt(result['BSCL[sq504V17]']) + parseInt(result['BSCL[sq504V18]']) + parseInt(result['BSCL[sq504V35]']) + parseInt(result['BSCL[sq504V50]']);
+            myResults.sum_scores.paranoid = parseInt(result['BSCL[sq504V04]']) + parseInt(result['BSCL[sq504V10]']) + parseInt(result['BSCL[sq504V24]']) + parseInt(result['BSCL[sq504V48]']) + parseInt(result['BSCL[sq504V51]']);
+            myResults.sum_scores.phobisch = parseInt(result['BSCL[sq504V08]']) + parseInt(result['BSCL[sq504V28]']) + parseInt(result['BSCL[sq504V31]']) + parseInt(result['BSCL[sq504V43]']) + parseInt(result['BSCL[sq504V47]']);
+            myResults.sum_scores.psychot = parseInt(result['BSCL[sq504V03]']) + parseInt(result['BSCL[sq504V14]']) + parseInt(result['BSCL[sq504V34]']) + parseInt(result['BSCL[sq504V44]']) + parseInt(result['BSCL[sq504V53]']);
+            myResults.sum_scores.somat = parseInt(result['BSCL[sq504V02]']) + parseInt(result['BSCL[sq504V23]']) + parseInt(result['BSCL[sq504V29]']) + parseInt(result['BSCL[sq504V30]']) + parseInt(result['BSCL[sq504V33]']) + parseInt(result['BSCL[sq504V37]']);
+            myResults.sum_scores.soz = parseInt(result['BSCL[sq504V20]']) + parseInt(result['BSCL[sq504V21]']) + parseInt(result['BSCL[sq504V22]']) + parseInt(result['BSCL[sq504V42]']);
+            myResults.sum_scores.zwang = parseInt(result['BSCL[sq504V05]']) + parseInt(result['BSCL[sq504V15]']) + parseInt(result['BSCL[sq504V26]']) + parseInt(result['BSCL[sq504V27]']) + parseInt(result['BSCL[sq504V32]']) + parseInt(result['BSCL[sq504V36]']);
+            myResults.sum_scores.zusatz = parseInt(result['BSCL[sq504V11]']) + parseInt(result['BSCL[sq504V25]']) + parseInt(result['BSCL[sq504V39]']) + parseInt(result['BSCL[sq504V52]']);
+
+            myResults.scale_scores = {};
+            myResults.scale_scores.aggr = parseFloat(myResults.sum_scores.aggr / 5);
+            myResults.scale_scores.angst = parseFloat(myResults.sum_scores.angst / 6);
+            myResults.scale_scores.depr = parseFloat(myResults.sum_scores.depr / 6);
+            myResults.scale_scores.paranoid = parseFloat(myResults.sum_scores.paranoid / 5);
+            myResults.scale_scores.phobisch = parseFloat(myResults.sum_scores.phobisch / 5);
+            myResults.scale_scores.psychot = parseFloat(myResults.sum_scores.psychot / 5);
+            myResults.scale_scores.somat = parseFloat(myResults.sum_scores.somat / 7);
+            myResults.scale_scores.soz = parseFloat(myResults.sum_scores.soz / 4);
+            myResults.scale_scores.zwang = parseFloat(myResults.sum_scores.zwang / 6);
+            myResults.scale_scores.zusatz = parseFloat(myResults.sum_scores.zusatz / 4);
+
+            myResults.sum_scores.gsi =
+                myResults.sum_scores.aggr +
+                myResults.sum_scores.angst +
+                myResults.sum_scores.depr +
+                myResults.sum_scores.paranoid +
+                myResults.sum_scores.phobisch +
+                myResults.sum_scores.psychot +
+                myResults.sum_scores.somat +
+                myResults.sum_scores.soz +
+                myResults.sum_scores.zwang +
+                myResults.sum_scores.zusatz
+
+            myResults.scale_scores.gsi = parseFloat(myResults.sum_scores.gsi / 53);
 
 
-            // Write Results for the Return
-            // Do not modify stuff here
+            myResults.t_scores = {};
+            myResults.t_scores.gsi = calc.get_t_score(0, myResults.sum_scores.gsi);
+            myResults.t_scores.psychot = calc.get_t_score(1, myResults.scale_scores.psychot);
+            myResults.t_scores.paranoid = calc.get_t_score(2, myResults.sum_scores.paranoid);
+            myResults.t_scores.phobisch = calc.get_t_score(3, myResults.sum_scores.phobisch);
+            myResults.t_scores.aggr = calc.get_t_score(4, myResults.sum_scores.aggr);
+            myResults.t_scores.angst = calc.get_t_score(5, myResults.sum_scores.angst);
+            myResults.t_scores.depr = calc.get_t_score(6, myResults.sum_scores.depr);
+            myResults.t_scores.soz = calc.get_t_score(7, myResults.sum_scores.soz);
+            myResults.t_scores.zwang = calc.get_t_score(8, myResults.sum_scores.zwang);
+            myResults.t_scores.somat = calc.get_t_score(9, myResults.sum_scores.somat);
+
+            myResults.stanine = {};
+            myResults.stanine.gsi = calc.get_stanine(0, myResults.sum_scores.gsi, currentPatient.data.gender, result['Eintrittsort']);
+
+
+            // write results back
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
             allResults.push(myResults);
@@ -28605,7 +28260,7 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
-}
 
+};
 
 

@@ -1,14 +1,13 @@
 
 [module]
-id = com.optinomic.apps.template
-name = Optinomic-App (Template)
-short_description = Use this as a starting-point for your apps.
+id = com.optinomic.cis.hisoryentry_chart
+name = Verlaufseintrag
+short_description = Psychiatrie und Psychotherapie, Verlaufseinträge mit TARMED Tarifpositionen.
 version = 1.0
 
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
 
 [developer]
 first_name = Beat
@@ -20,8 +19,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-
-[template data_survey_responses 6 7]
+[template hisoryentry_list 6 15]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -30,543 +28,333 @@ website = http://www.optinomic.com/
         </div>
         <div ng-if="d.init">
             <div ng-if="d.haveData">
-
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start stretch">
-    <div hide-sm>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-    </div>
-    <div flex>
-        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
-            <i class="mdi mdi-auto-fix"></i>
-            <md-tooltip md-direction="top">
-                Grösse anpassen
-            </md-tooltip>
-        </md-button>
-        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
-            <i class="mdi mdi-table-edit"></i>
-            <md-tooltip md-direction="top">
-                Toolpanel ein-/ausblenden
-            </md-tooltip>
-        </md-button>
-    </div>
-    <div>
-        <md-input-container class="md-primary">
-            <label><i class="mdi mdi-filter"></i> Filter</label>
-            <input ng-model="d.grid.options.quickFilterText">
-        </md-input-container>
-    </div>
-</div>
-<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
-<p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
-        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
-    </span>
-</p>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_timeline 6 7]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template simple_score 4 4]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">BDI-II: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-<score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
-<h3 class="md-headline">Hallo - Simple Score: {{d.dataMain.apps.current.name}}</h3>
-<score-threshold score="15" min="10" max="20" show-percent-scale="true" show-min-max="true"></score-threshold>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template score_range 2 4]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<div>
-    <h5 class="md-subhead">BDI-II Summenwerte und Interpretation</h5>
-    <table class="table table-condensed" style="width: 80%;">
-        <tr ng-repeat="range in scale_ranges.ranges">
-            <td style="text-align:right !important;">
-                <small>{{range.from}}-{{range.to}}&nbsp;</small>
-            </td>
-            <td>
-                <small>{{range.result}}</small>
-            </td>
-        </tr>
-    </table>
-</div>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_tscore 6 9]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">
-    T-Score: {{d.dataMain.apps.current.name}}
-</h3>
-<chart-tscore data='plotdata' options='options_plot'></chart-tscore>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template chart_stanine 6 7]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">
-    Stanine: {{d.dataMain.apps.current.name}}
-</h3>
-<chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
-            </div>
-            <div ng-if="!d.haveData">
-                <div ng-if="!d.haveData">
-    <div>
-        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
-        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
-        <p class="flow-text">&nbsp;</p>
-    </div>
-    <md-content>
-        <p class="md-body-2 text-muted">
-            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
-        </p>
-        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
-            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
-        </p>
-    </md-content>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
-</script>
-<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
-</script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
-</script>
-<!--
-	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
-	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
-	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
-	-->
-<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
-</script>
-
-</head>
-
-
-
-[template data_download 6 14]
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
-    <div ng-controller="AppCtrl">
-        <div ng-if="!d.init">
-            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-
-        </div>
-        <div ng-if="d.init">
-            <div ng-if="d.haveData">
-
-<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div>
-    <md-input-container class="md-block">
-        <label>SQL</label>
-        <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
+ <div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
+    </md-button>
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-dots-vertical"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
+    <md-input-container flex class="md-block">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
     </md-input-container>
 </div>
-<div layout="row" layout-sm="column" layout-align="start end">
-    <div flex>
-        <md-select ng-model="d.export.format" ng-init="csv">
-            <md-option value="csv">CSV</md-option>
-            <md-option value="json">JSON</md-option>
-        </md-select>
-    </div>
-    <div flex>
-        <md-select ng-model="d.export.direct" ng-init="True">
-            <md-option value="False">File-Download</md-option>
-            <md-option value="True">Screen</md-option>
-        </md-select>
-    </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.header" ng-init="True">
-            <md-option value="True">With header</md-option>
-            <md-option value="False">No header</md-option>
-        </md-select>
-    </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.delimitter" ng-init=";">
-            <md-option value=";">Semicolon (;)</md-option>
-            <md-option value=",">Comma (,)</md-option>
-            <md-option value="|">Pipe (|)</md-option>
-        </md-select>
-    </div>
+
+<div ng-if="d.appState === 'show'">
+    <md-content ng-if="d.appState !== 'loading'">
+    <md-card ng-repeat="entry in d.historyEntrys | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+        <md-card-title style="background-color:#FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                	{{entry.datum_day}} | {{entry.tarmed.selected.tarifpos_beschreibung}}
+                    	<md-tooltip md-direction="top">
+                    	{{entry.tarmed.selected.leistungsgruppe_beschreibung}}: {{entry.tarmed.selected.kapitel_beschreibung}}, {{entry.tarmed.selected.tarifpos_beschreibung}} ({{entry.tarmed.selected.tarifpos_code}})
+                    	</md-tooltip>
+                </span>
+                <span class="md-subhead" style="margin-top: -12px; color:#757575;">
+                	<span ng-repeat="user in d.dataMain.users.all" ng-if="user.id === entry.user" >
+                	{{user.data.extras.full_name}}
+                	</span> | {{entry.dauer * 5}} Minuten
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-divider></md-divider>
+        <md-card-content>
+            <p class="flow-text">{{entry.verlauf}}</p>
+        </md-card-content>
+        <md-card-actions layout="column" layout-gt-xs="row" layout-align="end center">
+            <md-button class="md-icon-button" ng-if="entry.user===d.dataMain.users.current.id" ng-click="showConfirm($event, entry.uniqueid)" aria-label="Löschen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-delete"></i>
+                <md-tooltip md-direction="top">
+                    Verlaufseintrag löschen
+                </md-tooltip>
+            </md-button>
+            <span flex></span>
+            <md-button ng-if="entry.user===d.dataMain.users.current.id" md-primary ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten">Bearbeiten</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+
 </div>
-<div>
-    <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Run SQL
+<div ng-if="d.appState === 'edit'">
+    <md-card>
+    <md-card-title style="background-color: #424242; color: #FAFAFA">
+        <md-card-title-text>
+            <span class="md-headline ">
+                	{{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+            </span>
+            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+            <span ng-if="d.appState === 'edit'" class="md-subhead">Verlaufseintrag bearbeiten</span>
+            <span ng-if="d.appState === 'new'" class="md-subhead">Neuer Verlaufseintrag erstellen</span>
+            </span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <div style="margin-top: 24px; max-height: 50px !important;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+            <md-input-container flex>
+                <label>Dauer (Anzahl 5 Minuten)</label>
+                <input ng-model="d.historyNewEntry.dauer" type="number">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Benutzer</label>
+                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                        {{user.data.extras.full_name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-dots-vertical"></i>
+                <md-tooltip md-direction="bottom">
+                    Standards festlegen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <p>&nbsp;</p>
+        <div layout-margin>
+            <md-input-container flex class="md-block flow-text">
+                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
+                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+            </md-input-container>
+        </div>
+        <pre ng-if="d.appInit.debug">
+		{{d.historyNewEntry | json}}
+		</pre>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-bug"></i>
+        </md-button>
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern
+        </md-button>
+    </md-card-actions>
+</md-card>
+
+</div>
+<div ng-if="d.appState === 'new'">
+    <md-card>
+    <md-card-title style="background-color: #424242; color: #FAFAFA">
+        <md-card-title-text>
+            <span class="md-headline ">
+                	{{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+            </span>
+            <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+            <span ng-if="d.appState === 'edit'" class="md-subhead">Verlaufseintrag bearbeiten</span>
+            <span ng-if="d.appState === 'new'" class="md-subhead">Neuer Verlaufseintrag erstellen</span>
+            </span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <div style="margin-top: 24px; max-height: 50px !important;" layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-datepicker flex ng-model="d.historyNewEntry.datum" md-placeholder="Bitte geben Sie das Datum an."></md-datepicker>
+            <md-input-container flex>
+                <label>Dauer (Anzahl 5 Minuten)</label>
+                <input ng-model="d.historyNewEntry.dauer" type="number">
+            </md-input-container>
+            <md-input-container flex>
+                <label>Benutzer</label>
+                <md-select ng-model="d.historyNewEntry.user" aria-label="Benutzer">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                        {{user.data.extras.full_name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.historyNewEntry.tarmed.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.historyNewEntry.tarmed.selected_tarifpos_code" md-on-close="storeSelectedTARMED()" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.historyNewEntry.tarmed.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-dots-vertical"></i>
+                <md-tooltip md-direction="bottom">
+                    Standards festlegen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <p>&nbsp;</p>
+        <div layout-margin>
+            <md-input-container flex class="md-block flow-text">
+                <label>Verlaufseintrag ( {{d.historyNewEntry.tarmed.selected.tarifpos_beschreibung}} | {{d.historyNewEntry.dauer * 5}} Minuten )</label>
+                <textarea ng-model="d.historyNewEntry.verlauf" columns="1" rows="10"></textarea>
+            </md-input-container>
+        </div>
+        <pre ng-if="d.appInit.debug">
+		{{d.historyNewEntry | json}}
+		</pre>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-bug"></i>
+        </md-button>
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern
+        </md-button>
+    </md-card-actions>
+</md-card>
+
+</div>
+<div ng-if="d.appState === 'settings'">
+    <md-card>
+    <div style="background-color: #424242; color: #FAFAFA">
+        <md-card-title>
+            <md-card-title-text>
+                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
+            </md-card-title-text>
+        </md-card-title>
+    </div>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container>
+                <label>Leistungsgruppe</label>
+                <md-select ng-model="d.userSettings.kapitel_id" aria-label="TARMED Kapitel">
+                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
+                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container ng-if="d.userSettings.kapitel_id">
+                <label>Tarifposition</label>
+                <md-select ng-model="d.userSettings.selected_tarifpos_code" md-on-close="" aria-label="TARMED Tarifpositions">
+                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.userSettings.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
+                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <md-input-container flex class="md-block">
+                <label>Dauer ( Anzahl 5 Minuten )</label>
+                <input ng-model="d.userSettings.dauer" type="number">
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
+                Neuste Einträge zuoberst anzeigen.
+            </md-switch>
+            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
+                Wochnfilter standardmässig aktivieren.
+            </md-switch>
+        </div>
+        <pre ng-if="d.appInit.debug">
+		{{d.userSettings | json}}
+		</pre>
+    </md-card-content>
+    <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-bug"></i>
+        </md-button>
+        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+        </md-button>
+        <span flex>&nbsp;</span>
+        <md-button ng-click="saveUserSettings()" aria-label="Speichern" style="color: #3F51B5;">
+            <i class="md-title mdi mdi-content-save"></i> Speichern
+        </md-button>
+    </md-card-actions>
+</md-card>
+
+</div>
+<div ng-if="d.appState === 'show'" layout="row" layout-gt-xs="row" layout-align="start center">
+    <md-button md-primary class="md-icon-button" ng-click="d.appInit.reverse = !d.appInit.reverse" aria-label="Sortierung">
+        <i ng-if="d.appInit.reverse" class="md-title mdi mdi-sort-descending"></i>
+        <i ng-if="!d.appInit.reverse" class="md-title mdi mdi-sort-ascending"></i>
+        <md-tooltip md-direction="bottom">
+            Sortierung der Einträge
+        </md-tooltip>
     </md-button>
+    <md-button ng-click="entrySettings()" class="md-icon-button" aria-label="Einstellungen" style="color: #9E9E9E;">
+        <i class="md-title mdi mdi-dots-vertical"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
+    <md-input-container flex class="md-block">
+        <label>Filter: {{d.appInit.filter}}</label>
+        <input ng-model="d.appInit.filter">
+    </md-input-container>
 </div>
-<div ng-if="d.export.have_data">
-    <pre>{{d.export.data}}</pre>
+
+<div>&nbsp;</div>
+<div class="optinomic-page-fab" ng-if="d.appState === 'show'">
+    <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
+        <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
+        <md-tooltip md-direction="left">
+            Neuer Verlaufseintrag
+        </md-tooltip>
+    </md-button>
 </div>
             </div>
             <div ng-if="!d.haveData">
@@ -631,8 +419,156 @@ website = http://www.optinomic.com/
 
 
 
+[template hisoryentry_sum_chart 6 7]
+<!--This example defines a Web Component that binds a property to series data and pushes new points-->
+<dom-module id="chart-behandlungsdichte">
+    <template>
+        <vaadin-line-chart id="chart">
+            <title>Behandlungsdichte</title>
+            <tooltip formatter="function() {return '' + 'Behandlung: ' + Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) + ': ' + this.y + 'Minuten';}"></tooltip>
+            <plot-options>
+                <spline>
+                    <marker enabled="true"></marker>
+                </spline>
+            </plot-options>
+            <x-axis type="datetime">
+                <date-time-label-formats month="%e. %b" year="%b">
+                </date-time-label-formats>
+                <title>Datum</title>
+            </x-axis>
+            <y-axis min="0">
+                <title>Dauer der Behandlungen (Minuten)</title>
+            </y-axis>
+            <data-series id="SeriesID" name="Behandlungen" data="[[chartdata]]">
+            </data-series>
+        </vaadin-line-chart>
+    </template>
+    <script>
+    Polymer({
+        is: 'chart-behandlungsdichte',
 
-[dependencies]
+        properties: {
+            chartdata: {
+                type: Array
+            }
+        },
+
+        observers: [
+            'updateData(chartdata)'
+        ],
+
+        updateData: function(chartdata) {
+            console.log('(updateData) chart-behandlungsdichte', chartdata);
+
+            //var chartWC = this.$.chart;
+            //
+            //
+            //if (chartWC) {
+            //    var chart = chartWC.chart;
+            //    if (chart && chart.series) {
+            //
+            //        chart.series[1] = {};
+            //        var data = chartdata[0].data;
+            //
+            //        console.log('(updateData) async', data, chart, chart.getConfiguration());
+            //
+            //        //chart.series[1].setData(data);
+            //    }
+            //};
+
+        }
+
+
+
+    });
+    </script>
+</dom-module>
+ <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<chart-behandlungsdichte chartdata="{{d.mySeriesData}}"></chart-behandlungsdichte>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+        <p class="flow-text">&nbsp;</p>
+    </div>
+    <md-content>
+        <p class="md-body-2 text-muted">
+            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
+        </p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
+</script>
+<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
+</script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
+</script>
+
+</head>
+ <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.19/webcomponents-lite.min.js">
+    </script>
+    <link rel="import" href="https://cdn.vaadin.com/vaadin-charts/3.0.0-alpha7/charts-component.html">
+    <script type="text/javascript">
+    document.addEventListener('WebComponentsReady', function() {
+        angular.element(document).ready(function() {
+            angular.bootstrap(document, ['optinomicApp']);
+            console.log('angular.element(document).ready', document);
+        });
+    });
+    </script>
+</head>
+
+
+
 
 [javascript]
 'use strict';
@@ -5546,7 +5482,7 @@ angular.module('optinomicDataModule')
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -5564,6 +5500,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
+        $scope.d.appState = 'loading';
         $scope.d.haveData = false;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
@@ -5571,23 +5508,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-            // Check if we have survey_responses @ data.
-            if (data.survey_responses.length !== 0) {
-                console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
-                $scope.d.haveData = true;
-
-
-                // Run App-Functions:
-                $scope.setDataView();
-                $scope.setTimelineChartOptions();
-                $scope.setTscoreChart();
-                $scope.setStanineView();
-
-
-            };
-
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
+            // Run App-Functions
+            $scope.appInit();
+            $scope.getHisoryEntrys();
 
 
             // Finishing: Console Info & Init = done.
@@ -5598,865 +5521,351 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
 
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
+    $scope.loadTARMEDSheet = function() {
+        // Load TARMED Tarifpositionen and save them to $scope
+        var url = 'https://spreadsheets.google.com/feeds/list/1sHarXye8LLwM6u0sRWwiHdBIp9uKc9jMxvkbbBxyf5w/od6/public/values?alt=json'
 
-    var sql_string = "SELECT 
-  patient.id 
-  ";
+        var parse = function(entry) {
+            //console.log('parse - loadTarmedSheet - entry: ', entry);
+            var leistungsgruppe_code = entry['gsx$leistungsgruppecode']['$t'];
+            var leistungsgruppe_beschreibung = entry['gsx$leistungsgruppebeschreibung']['$t'];
+            var kapitel_code = entry['gsx$kapitelcode']['$t'];
+            var kapitel_beschreibung = entry['gsx$kapitelbeschreibung']['$t'];
+            var tarifpos_code = entry['gsx$tarifpositioncode']['$t'];
+            var tarifpos_beschreibung = entry['gsx$tarifpositionbeschreibung']['$t'];
+            var tarifpos_info = entry['gsx$tarifpositionzusatz']['$t'];
 
-    console.log('sql_string - somevar - somevar - somevar', sql_string);
+            return {
+                leistungsgruppe_code: leistungsgruppe_code,
+                leistungsgruppe_beschreibung: leistungsgruppe_beschreibung,
+                kapitel_code: kapitel_code,
+                kapitel_beschreibung: kapitel_beschreibung,
+                tarifpos_code: tarifpos_code,
+                tarifpos_beschreibung: tarifpos_beschreibung,
+                tarifpos_info: tarifpos_info
+            };
+        }
 
-    // ToDO: M4 - Import - remove new lines.
+        $http.get(url)
+            .success(function(response) {
+                //console.log('(!) loadTARMEDSheet - success: ', response);
 
-    //var sql_import_string = "in_clude(templates/export.sql)";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
+                var entries = response['feed']['entry'];
 
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
+                $scope.d.TARMEDall = [];
+                entries.forEach(function(content, myindex) {
+                    $scope.d.TARMEDall.push(parse(content));
+                    //console.log('(-) loadTARMEDSheet - content: ', myindex, content);
+                });
+                //console.log('(!) TARMEDall', $scope.d.TARMEDall);
 
-    $scope.export = function() {
+                $scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
+                    return [item.kapitel_code];
+                });
+                //console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
 
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
 
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
+                // Set 'haveData' because we do not have a survey here!
 
+            });
     };
 
+    $scope.storeSelectedTARMED = function() {
+        // If user selects a TARMED Tarifposition save the entry.
+        var entries = $scope.d.TARMEDkapitel[$scope.d.historyNewEntry.tarmed.kapitel_id]
+            //console.log('storeSelectedTARMED', entries);
 
+        entries.forEach(function(content, myindex) {
+            //console.log('-- storeSelectedTARMED', content);
 
-
-
-
-    // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
-
-
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Tägliche Stimmung (∑)',
-            'focusField': 'score',
-            'dateField': 'filled',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function() {
-        var score_answer = [{
-            "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setTscoreChart = function() {
-
-        // Options
-        $scope.options_plot = {
-            'show_scores': true
-        };
-
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
-    };
-
-
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
-
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-    };
-
-
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
-
-        // If we have multiple surveys - make sure to take the right 'responses'.
-        var currentResultGroup = 0;
-        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
-            if (current_group_def.survey === 'Second example survey') {
-                currentResultGroup = current_group_def.id;
+            if (content.tarifpos_code === $scope.d.historyNewEntry.tarmed.selected_tarifpos_code) {
+                $scope.d.historyNewEntry.tarmed.selected = content;
             };
         });
+    };
 
-        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
-        $scope.d.dataMain.survey_responses_array = [];
-        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
-            var my_response = current_result.entity.data.response;
+    $scope.appInit = function() {
+        $scope.d.nodeTree = 'verlaufseintrag';
 
-            // If ng-survey survey @ some more info to 'response'.
-            my_response.filled = current_result.entity.data.filled;
-            my_response.survey_name = current_result.event.survey_name;
+        $scope.d.appInit = {
+            filter: '',
+            predicate: 'datum_sort',
+            reverse: true,
+            debug: false
+        };
 
-            $scope.d.dataMain.survey_responses_array.push(my_response);
-        });
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-        // columnDefsManually: If you want to create columnDefs manually:
-        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
-        var columnDefsManually = [{
-            headerTooltip: "Datum",
-            headerName: "Datum",
-            editable: true,
-            suppressSizeToFit: true,
-            width: 145,
-            field: "datestamp",
-            cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck (Int)",
-            cellClass: 'md-body-2',
-            suppressSizeToFit: true,
-            width: 110,
-            valueGetter: 'parseInt(data.Suchtdruck_1)',
-            filter: 'number'
-        }, {
-            headerName: "Bemerkungen",
-            editable: true,
-            cellClass: 'md-body-1',
-            field: "diary",
-            filter: 'text'
-        }, {
-            headerTooltip: "PID",
-            headerName: "Patient-ID",
-            editable: false,
-            field: "PID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }, {
-            headerTooltip: "FID",
-            headerName: "Fall-ID",
-            editable: false,
-            field: "FID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }];
-
-
-        // DataView - Options
-        $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
-        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
+        $scope.d.haveData = true;
+        $scope.getUserSettings();
+        $scope.loadTARMEDSheet();
     };
 
 
-    // Testdata
-    $scope.d.craving = [{
-        'Suchtdruck_1': '52',
-        'datestamp': '2014-10-17 12:21:57',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '4284fe621ec08b05',
-        'submitdate': '2014-10-17 12:21:57',
-        'survey_name': 'craving',
-        'startdate': '2014-10-17 12:20:51',
-        'diary': 'Created by [Do it now craving] - Button',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '97',
-        'something': 1052,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '88',
-        'datestamp': '2014-10-19 19:04:04',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14137380042493700000001',
-        'submitdate': '2014-10-19 19:04:04',
-        'survey_name': 'craving',
-        'startdate': '2014-10-19 19:03:44',
-        'diary': 'Ich wünsche Dir einen wunderschönen Tag \n',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '103',
-        'something': null,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '7',
-        'datestamp': '2014-10-20 20:43:08',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14138244019509190000001',
-        'submitdate': '2014-10-20 20:43:08',
-        'survey_name': 'craving',
-        'startdate': '2014-10-20 20:42:51',
-        'diary': 'Another - 21h - entry.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '107',
-        'something': 1007,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '1',
-        'datestamp': '2014-10-20 21:06:22',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14136516032177690000001',
-        'submitdate': '2014-10-20 21:06:22',
-        'survey_name': 'craving',
-        'startdate': '2014-10-20 21:06:07',
-        'diary': 'Another - 21:06',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '108',
-        'something': 1001,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '74',
-        'datestamp': '2014-10-21 19:00:41',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14139108024947040000001',
-        'submitdate': '2014-10-21 19:00:41',
-        'survey_name': 'craving',
-        'startdate': '2014-10-21 19:00:30',
-        'diary': '19h done',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '110',
-        'something': 1074,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '65',
-        'datestamp': '2014-10-22 19:00:35',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14139972021894060000001',
-        'submitdate': '2014-10-22 19:00:35',
-        'survey_name': 'craving',
-        'startdate': '2014-10-22 19:00:26',
-        'diary': '19h ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '114',
-        'something': 1065,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '76',
-        'datestamp': '2014-10-23 19:01:08',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14140836022057210000001',
-        'submitdate': '2014-10-23 19:01:08',
-        'survey_name': 'craving',
-        'startdate': '2014-10-23 19:00:59',
-        'diary': '19h - done',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '115',
-        'something': 1076,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '63',
-        'datestamp': '2014-11-03 08:44:43',
-        'refurl': 'http://demo.optinomic.org/patient/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14149513586844010000001',
-        'submitdate': '2014-11-03 08:44:43',
-        'survey_name': 'craving',
-        'startdate': '2014-11-03 08:44:14',
-        'diary': 'Clicked the button at patient - page.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '117',
-        'something': null,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-03 23:58:11',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14150377811281420000001',
-        'submitdate': '2014-11-03 23:58:11',
-        'survey_name': 'craving',
-        'startdate': '2014-11-03 23:57:40',
-        'diary': 'Mail from 21h - filled out @ 24h',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '118',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '73',
-        'datestamp': '2014-11-05 07:21:19',
-        'refurl': '',
-        'ipaddr': '213.55.184.232',
-        'optinomixHASH': '14151241706791780000001',
-        'submitdate': '2014-11-05 07:21:19',
-        'survey_name': 'craving',
-        'startdate': '2014-11-05 07:20:59',
-        'diary': 'Done ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '119',
-        'something': 1073,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '85',
-        'datestamp': '2014-11-05 22:39:44',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14152105862270580000001',
-        'submitdate': '2014-11-05 22:39:44',
-        'survey_name': 'craving',
-        'startdate': '2014-11-05 22:38:47',
-        'diary': 'First Mail - received @ 22:39',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '120',
-        'something': 1085,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '69',
-        'datestamp': '2014-11-06 19:40:49',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '2e5c3412deda4289',
-        'submitdate': '2014-11-06 19:40:49',
-        'survey_name': 'craving',
-        'startdate': '2014-11-06 19:40:31',
-        'diary': '19:34 Mail',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '122',
-        'something': 1069,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '83',
-        'datestamp': '2014-11-07 22:16:57',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14153845888512990000001',
-        'submitdate': '2014-11-07 22:16:57',
-        'survey_name': 'craving',
-        'startdate': '2014-11-07 22:15:33',
-        'diary': 'First reminder mail - initial mail ignored. If no more mail is coming = perfect! :) ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '123',
-        'something': 1083,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '69',
-        'datestamp': '2014-11-09 08:08:20',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14154702512222380000001',
-        'submitdate': '2014-11-09 08:08:20',
-        'survey_name': 'craving',
-        'startdate': '2014-11-09 08:07:55',
-        'diary': '7h mail. Working fine ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '124',
-        'something': 1069,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-09 19:18:06',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14155569998988060000001',
-        'submitdate': '2014-11-09 19:18:06',
-        'survey_name': 'craving',
-        'startdate': '2014-11-09 19:17:56',
-        'diary': '19:17',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '129',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-10 19:32:51',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14156431713785170000001',
-        'submitdate': '2014-11-10 19:32:51',
-        'survey_name': 'craving',
-        'startdate': '2014-11-10 19:32:36',
-        'diary': 'It works ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '130',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '21',
-        'datestamp': '2014-11-11 22:02:35',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14157295822147370000001',
-        'submitdate': '2014-11-11 22:02:35',
-        'survey_name': 'craving',
-        'startdate': '2014-11-11 22:02:28',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '134',
-        'something': 1021,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-12 19:13:38',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14158159705041450000001',
-        'submitdate': '2014-11-12 19:13:38',
-        'survey_name': 'craving',
-        'startdate': '2014-11-12 19:13:31',
-        'diary': '19:13',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '136',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-13 21:13:37',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14159023711522110000001',
-        'submitdate': '2014-11-13 21:13:37',
-        'survey_name': 'craving',
-        'startdate': '2014-11-13 21:13:32',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '140',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-11-14 19:21:50',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14159887748010720000001',
-        'submitdate': '2014-11-14 19:21:50',
-        'survey_name': 'craving',
-        'startdate': '2014-11-14 19:21:37',
-        'diary': '19:13',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '141',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '11',
-        'datestamp': '2014-11-15 23:14:36',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14160751712906030000001',
-        'submitdate': '2014-11-15 23:14:36',
-        'survey_name': 'craving',
-        'startdate': '2014-11-15 23:14:16',
-        'diary': '23:13 Reminder ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '146',
-        'something': 1011,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '9',
-        'datestamp': '2014-11-16 19:34:06',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14161615695617110000001',
-        'submitdate': '2014-11-16 19:34:06',
-        'survey_name': 'craving',
-        'startdate': '2014-11-16 19:33:46',
-        'diary': 'Just done ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '147',
-        'something': 1009,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-17 19:14:37',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14162479738556080000001',
-        'submitdate': '2014-11-17 19:14:37',
-        'survey_name': 'craving',
-        'startdate': '2014-11-17 19:14:26',
-        'diary': 'Soon! :-)',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '150',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '27',
-        'datestamp': '2014-11-18 19:16:39',
-        'refurl': '',
-        'ipaddr': '10.176.233.247',
-        'optinomixHASH': '14163343771849490000001',
-        'submitdate': '2014-11-18 19:16:39',
-        'survey_name': 'craving',
-        'startdate': '2014-11-18 19:16:11',
-        'diary': 'Not deactivated already? ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '155',
-        'something': 1027,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '61',
-        'datestamp': '2014-11-24 11:08:24',
-        'refurl': 'http://demo.optinomic.org/patient/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '54567848a61d38f',
-        'submitdate': '2014-11-24 11:08:24',
-        'survey_name': 'craving',
-        'startdate': '2014-11-24 11:08:05',
-        'diary': 'On activation - now every 2 days @ 19h',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '166',
-        'something': 1061,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '100',
-        'datestamp': '2014-11-24 19:11:18',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14168521788955520000001',
-        'submitdate': '2014-11-24 19:11:18',
-        'survey_name': 'craving',
-        'startdate': '2014-11-24 19:10:34',
-        'diary': 'Already today? Next should be Wednesday. ',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '167',
-        'something': 1100,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '75',
-        'datestamp': '2014-11-26 19:04:50',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14170249737049020000001',
-        'submitdate': '2014-11-26 19:04:50',
-        'survey_name': 'craving',
-        'startdate': '2014-11-26 19:04:31',
-        'diary': 'Mittwoch -> Freitag should be next.',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '171',
-        'something': 1075,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-11-28 19:04:48',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14171977715331030000001',
-        'submitdate': '2014-11-28 19:04:48',
-        'survey_name': 'craving',
-        'startdate': '2014-11-28 19:04:35',
-        'diary': 'Firday - it works! :-)',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '174',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-06-30 19:10:00',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14173705778560900000001',
-        'submitdate': '2014-11-30 19:10:00',
-        'survey_name': 'craving',
-        'startdate': '2014-11-30 19:09:55',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '182',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '12',
-        'datestamp': '2014-12-02 19:03:56',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14175433891820340000001',
-        'submitdate': '2014-12-02 19:03:56',
-        'survey_name': 'craving',
-        'startdate': '2014-12-02 19:03:49',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '184',
-        'something': 1012,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '71',
-        'datestamp': '2014-07-04 20:03:39',
-        'refurl': '',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '14177161619822780000001',
-        'submitdate': '2014-12-04 20:03:39',
-        'survey_name': 'craving',
-        'startdate': '2014-12-04 20:03:35',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '187',
-        'something': 1071,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '66',
-        'datestamp': '2014-12-05 11:35:07',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '55455ed9e59a09d2',
-        'submitdate': '2014-12-05 11:35:07',
-        'survey_name': 'craving',
-        'startdate': '2014-12-05 11:35:04',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '188',
-        'something': 1066,
-        'FID': '654321',
-        'lastpage': '5'
-    }, {
-        'Suchtdruck_1': '50',
-        'datestamp': '2014-12-05 11:42:47',
-        'refurl': 'http://demo.optinomic.org/runaction/Suchtdruck%20%28Craving%29/do%20craving%20now/25',
-        'ipaddr': '178.82.213.88',
-        'optinomixHASH': '7aa71f9c78f78e59',
-        'submitdate': '2014-12-05 11:42:47',
-        'survey_name': 'craving',
-        'startdate': '2014-12-05 11:42:43',
-        'diary': '',
-        'startlanguage': 'de',
-        'PID': '12',
-        'id': '191',
-        'something': 1050,
-        'FID': '654321',
-        'lastpage': '5'
-    }];
+    $scope.getUserSettings = function() {
+
+        var userSettingsDefault = {
+            kapitel_id: 3,
+            selected_tarifpos_code: "02.0210",
+            dauer: 14,
+            week_filter: true,
+            sort_reverse: false
+        };
+
+        var tree = $scope.d.nodeTree;
+        var api_call = dataService.getAnnotationsData('user', tree);
+        api_call.then(function(data) {
+            if (dataService.isEmpty(data)) {
+                $scope.d.userSettings = userSettingsDefault;
+                console.log('DEFAULT - getUserSettings', $scope.d.userSettings);
+            } else {
+                $scope.d.userSettings = data;
+
+                //Apply loaded appInit
+                $scope.d.appInit.reverse = $scope.d.userSettings.sort_reverse;
+
+                if ($scope.d.userSettings.week_filter) {
+                    $scope.d.appInit.filter = '2016, 03';
+                };
+
+                console.log('LOADED - getUserSettings', $scope.d.userSettings);
+            };
+
+        });
+
+    };
+
+
+    $scope.saveUserSettings = function() {
+
+        var tree = $scope.d.nodeTree;
+        var json_value = $scope.d.userSettings;
+        var api_call = dataService.saveAnnotationsData('user', tree, json_value);
+        api_call.then(function(data) {
+            console.log('(+) saveUserSettings - saved: ', json_value);
+            $scope.getUserSettings();
+            $scope.d.appState = 'show';
+        });
+
+    };
+
+
+
+    $scope.getHisoryEntrys = function() {
+        // Get Data
+
+        $scope.d.historyEntrys = [];
+        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
+        api_call.then(function(data) {
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.historyEntrys = [];
+            } else {
+                $scope.d.historyEntrys = angular.copy(data);
+            };
+
+            // Group Resuls by Calendar-Week
+            $scope.d.historyEntrysWeek = dataService.groupBy($scope.d.historyEntrys, function(item) {
+                return [item.datum_week];
+            });
+
+
+            ////Group Resuls by TARMED Code
+            //$scope.d.historyEntrysTARMED = dataService.groupBy($scope.d.historyEntrys, function(item) {
+            //    return [item.tarmed.selected_tarifpos_code];
+            //});
+            //
+            //// Create SeriesArray Data for Chart
+            //var data_series = [];
+            //$scope.d.historyEntrysTARMED.forEach(function(serie, myindex) {
+            //
+            //    var serie_to_push = {
+            //        name: serie[0].tarmed.selected.tarifpos_beschreibung + ' (' + serie[0].tarmed.selected_tarifpos_code + ')',
+            //        data: []
+            //    };
+            //
+            //    serie.forEach(function(entry, myindex) {
+            //        var inner_array = []
+            //        inner_array.push(entry.datum.substring(0, 16));
+            //        inner_array.push(entry.dauer);
+            //
+            //        serie_to_push.data.push(inner_array);
+            //    });
+            //
+            //    data_series.push(serie_to_push);
+            //
+            //});
+            //
+            //
+            //$scope.d.chartData = data_series;
+            //console.log('$scope.d.chartData', $scope.d.chartData);
+            //
+            //console.log(JSON.stringify($scope.d.chartData));
+
+            $scope.d.mySeriesData = [];
+            var entrys = dataService.sortByKey($scope.d.historyEntrys, 'datum');
+            console.log('===> entrys', entrys);
+            entrys.forEach(function(entry, myindex) {
+                var inner_array = []
+                inner_array.push(entry.datum.substring(0, 16));
+                inner_array.push(entry.dauer * 5);
+                $scope.d.mySeriesData.push(inner_array);
+            });
+
+
+            $scope.d.appState = 'show';
+
+            //console.log('(+) getHisoryEntrys ', $scope.d.historyEntrys, $scope.d.historyEntrysWeek);
+        });
+    };
+
+    // -----------------------------------
+    // Dialogs
+    // -----------------------------------
+
+    $scope.showConfirm = function(ev, currentUID) {
+
+        var my_index = dataService.findIndex($scope.d.historyEntrys, 'uniqueid', currentUID);
+
+        console.log('showConfirm ', currentUID, $scope.d.historyEntrys[my_index]);
+
+        var anz_characters_to_show = 20;
+        var dispay_text = $scope.d.historyEntrys[my_index].datum_day + ' | ' + $scope.d.historyEntrys[my_index].verlauf.substring(0, anz_characters_to_show);
+        if ($scope.d.historyEntrys[my_index].verlauf.length > anz_characters_to_show) {
+            dispay_text = dispay_text + '...';
+        };
+
+        console.log('showConfirm: ', ev, my_index);
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Verlaufseintrag löschen?')
+            .textContent('Sind Sie sicher, dass Sie den Eintrag (' + dispay_text + ') löschen möchten?')
+            .ariaLabel('Eintrag löschen')
+            .targetEvent(ev)
+            .ok('Löschen')
+            .cancel('Abbrechen');
+        $mdDialog.show(confirm).then(function() {
+
+            console.log('You selected: Delete!');
+            $scope.entryDelete(my_index);
+
+        }, function() {
+
+            console.log('You selected: Cancel!');
+            $scope.entryCancel();
+
+        });
+    };
+
+    $scope.saveHistory = function() {
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.historyEntrys);
+        api_call.then(function(data) {
+            console.log('(+) saveHistory - success: ', $scope.d.historyNewEntry);
+
+            // Update Entrys
+            $scope.getHisoryEntrys();
+            $scope.d.appState = 'show';
+
+        });
+    };
+
+
+    // -----------------------------------
+    // Actions
+    // -----------------------------------
+
+
+    $scope.entryCancel = function() {
+        // Cancel
+        $scope.d.appState = 'show';
+    };
+
+
+    $scope.entryNew = function() {
+        // New
+        $scope.d.appState = 'new';
+
+        // Init New Entry
+        $scope.d.historyNewEntry = {
+            datum: new Date(),
+            user: $scope.d.dataMain.users.current.id,
+            tarmed: {},
+            verlauf: ""
+        };
+
+        // Set UserDefaultSettings
+        $scope.d.historyNewEntry.dauer = $scope.d.userSettings.dauer;
+        $scope.d.historyNewEntry.tarmed.kapitel_id = $scope.d.userSettings.kapitel_id;
+        $scope.d.historyNewEntry.tarmed.selected_tarifpos_code = $scope.d.userSettings.selected_tarifpos_code;
+        $scope.storeSelectedTARMED();
+
+    };
+
+    $scope.entryEdit = function(currentUID) {
+        // EDIT
+        // Store current entry - just for, do not save if 'cancel'.
+        var currentIndex = dataService.findIndex($scope.d.historyEntrys, 'uniqueid', currentUID);
+
+        $scope.d.historyNewEntry = angular.copy($scope.d.historyEntrys[currentIndex]);
+        $scope.d.historyNewEntry.datum = new Date($scope.d.historyNewEntry.datum);
+
+        $scope.d.historyNewEntryID = currentIndex;
+        $scope.d.appState = 'edit';
+
+
+        console.log('entryEdit: ', currentIndex, $scope.d.historyNewEntry);
+    };
+
+
+    $scope.entrySettings = function() {
+        // Cancel
+        $scope.d.appState = 'settings';
+    };
+
+
+    $scope.entryDelete = function(my_index) {
+        $scope.d.historyEntrys.splice(my_index, 1);
+        console.log('Deleted - Index', my_index);
+        $scope.saveHistory();
+    };
+
+
+    $scope.entrySave = function() {
+        // Save
+
+        // Datum erweitern.
+        var date = $scope.d.historyNewEntry.datum;
+        $scope.d.historyNewEntry.datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+        $scope.d.historyNewEntry.datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+        $scope.d.historyNewEntry.datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+        $scope.d.historyNewEntry.datum_full_day = $filter("amDateFormat")(date, 'dddd, Do MMMM YYYY');
+        $scope.d.historyNewEntry.datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        $scope.d.historyNewEntry.uniqueid = dataService.uniqueid();
+
+
+        // Push new Entry if 'new'
+        if ($scope.d.appState === 'new') {
+            $scope.d.historyEntrys.push($scope.d.historyNewEntry);
+        };
+
+        // Save edited entry.
+        if ($scope.d.appState === 'edit') {
+            $scope.d.historyEntrys[$scope.d.historyNewEntryID] = $scope.d.historyNewEntry;
+        };
+
+
+        console.log('Try to save @ putHisoryPost: ', $scope.d.historyEntrys);
+        $scope.saveHistory();
+
+
+    };
+
+
+    $scope.d.supplyData = [35, 28, 45, 60, 80, 74];
+    $scope.d.demandData = [29, 11, 50, 63, 65, 61];
+
+    $scope.supplyData = [35, 28, 45, 60, 80, 74];
+    $scope.demandData = [29, 11, 50, 63, 65, 61];
 
 
 
@@ -28482,130 +27891,8 @@ md-tooltip.md-show {
 }
  
 
-.craving {
-    color: red !important;
-    font-size: 8px;
+.indigo {
+    color: #3F51B5 !important;
 }
-
-
-[survey]
-id = daily_mood
-type = lime
-responsibility = lead_therapist
-name = Tägliche Stimmung
-host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
-min_questions =
-min_lastpage = 2
-
-
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-<div>
-    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
-        <div flex="50" layout="column">
-            <md-card ng-hide="thankyou">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Wie ist ihre aktuelle Stimmung?</span>
-                        <span class="md-subhead">Bitte beantworten Sie spontan.</span>
-                        <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
-                        </md-slider>
-                        <span class="md-caption">Legende: 0 = sehr schlecht | 10 = sehr gut</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-actions layout="row" layout-align="end center">
-                    <md-button ng-click="saveresult()">Speichern</md-button>
-                </md-card-actions>
-            </md-card>
-            <div ng-show="thankyou">
-                <h1 class="md-display-4">Herzlichen Dank</h1>
-                <span class="md-subhead" style="margin-top:-48px;">
-                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
-                </span>
-            </div>
-        </div>
-    </md-content>
-</div>
-
-
-
-[event]
-type = daily
-time = 19:00
-due_after = 86400
-overdue = ignore
-description = Track your daily craving.
-survey = daily_mood
-
-
-[email new_event html]
-$patient$, bitte beurteilen Sie ihr aktuelles Suchtverlangen <a href="$survey_link$">here</a> Besten Dank.
-
-
-[email overdue html]
-Hello $patient$,
-
-A task is overdue <a href="$survey_link$">here</a>.
-
-Thank you
-
-
-
-[calculation another_calculation javascript]
-function main(responses) {
-    var calc = {};
-
-    // ------------------------------------------
-    // H e l p e r   -   F U N C T I O N S
-    // ------------------------------------------
-
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
-    };
-
-
-    // ------------------------------------------
-    // F U N C T I O N  -  Main
-    // ------------------------------------------
-    calc.getResults = function(myResponses) {
-
-        var responses_array = myResponses.survey_responses;
-        var allResults = [];
-
-        responses_array.forEach(function(response, myindex) {
-            var myResults = {};
-            var result = response.data.response;
-
-            // Something
-            myResults.something = calc.doSomething();
-
-
-            // Write Results for the Return
-            // Do not modify stuff here
-            myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            allResults.push(myResults);
-        });
-
-        return allResults;
-    };
-
-
-    // Return
-    return calc.getResults(responses);
-}
-
 
 
