@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 
 
 [template title_verordnung 6 1]
-<div class="grid-border-bottom" style="margin-top: 24px;">
+<div class="grid-border-bottom" style="margin-top: 20px;">
     <p class="flow-text grid-h2">
         Verordnung
     </p>
@@ -671,7 +671,7 @@ website = http://www.optinomic.com/
 
 
 [template title_reserve 6 1]
-<div class="grid-border-bottom" style="margin-top: 24px;">
+<div class="grid-border-bottom" style="margin-top: 20px;">
     <p class="flow-text grid-h2">
         Reserve (ToDo)
     </p>
@@ -679,7 +679,7 @@ website = http://www.optinomic.com/
 
 
 [template title_reserveanwendung 6 1]
-<div class="grid-border-bottom" style="margin-top: 24px;">
+<div class="grid-border-bottom" style="margin-top: 20px;">
     <p class="flow-text grid-h2">
         Reserveandwendung (ToDo)
     </p>
