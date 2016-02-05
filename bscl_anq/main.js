@@ -222,70 +222,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
 
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-        // columnDefsManually: If you want to create columnDefs manually:
-        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
-        var columnDefsManually = [{
-            headerTooltip: "Datum",
-            headerName: "Datum",
-            editable: true,
-            suppressSizeToFit: true,
-            width: 145,
-            field: "datestamp",
-            cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck (Int)",
-            cellClass: 'md-body-2',
-            suppressSizeToFit: true,
-            width: 110,
-            valueGetter: 'parseInt(data.Suchtdruck_1)',
-            filter: 'number'
-        }, {
-            headerName: "Bemerkungen",
-            editable: true,
-            cellClass: 'md-body-1',
-            field: "diary",
-            filter: 'text'
-        }, {
-            headerTooltip: "PID",
-            headerName: "Patient-ID",
-            editable: false,
-            field: "PID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }, {
-            headerTooltip: "FID",
-            headerName: "Fall-ID",
-            editable: false,
-            field: "FID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }];
-
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 50,
-            rowHeight: 50,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true, true);
+        $scope.d.grid.options.rowData = resultsArray;
 
 
         //console.log('dataGRID: ', $scope.d.grid);
