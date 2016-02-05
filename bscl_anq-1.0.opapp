@@ -5299,9 +5299,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.export_obj = {};
 
+	$scope.d.export_obj.sql = "";
         $scope.d.export_obj.sql = "SELECT 
-  patient.id 
-  ";
+  patient.id";
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
