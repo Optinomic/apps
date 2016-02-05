@@ -81,11 +81,12 @@ website = http://www.optinomic.com/
             </md-tooltip>
         </md-button>
         <md-button ng-if="d.appState === 'show'" ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
-            <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
-            <md-tooltip md-direction="left">
-                Neu erfassen | hinzufügen
-            </md-tooltip>
-        </md-button>
+    <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
+    <md-tooltip md-direction="left">
+        Neu erfassen | hinzufügen
+    </md-tooltip>
+</md-button>
+
     </div>
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
