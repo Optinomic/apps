@@ -757,8 +757,10 @@ angular.module('optinomicDataModule')
 
 
         d.grid = {};
-        d.grid.export_details = false;
-        d.grid.export_allColumns = false;
+        d.grid.export_settings = {};
+        d.grid.export_settings.details = false;
+        d.grid.export_settings.allColumns = false;
+        d.grid.export_settings.columnSeparator = ';';
 
         d.grid.default_options = {
             headerHeight: 50,

@@ -38,7 +38,7 @@ website = http://www.optinomic.com/
 
 <div ng-if="d.appState === 'show'">
     <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-    <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_details)">
+    <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_settings.details)">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
@@ -72,17 +72,21 @@ website = http://www.optinomic.com/
             </md-button>
         </div>
     </div>
-    <div flex ng-if="d.grid.export_details" style="height:84px; padding:5px; margin:5px;">
+    <div flex ng-if="d.grid.export_settings.details" style="height:84px; padding:5px; margin:5px;">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding>
             <div flex>
-                <md-switch ng-model="d.grid.export_allColumns" aria-label="allColumns">
+                <md-switch ng-model="d.grid.export_settings.allColumns" aria-label="allColumns">
                     Alle Daten-Reihen
                 </md-switch>
+                <md-input-container>
+                    <label>Trennzeichen</label>
+                    <input ng-model="d.grid.export_settings.columnSeparator">
+                </md-input-container>
             </div>
             <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
                 <i class="mdi mdi-file"></i> Daten exportieren
             </md-button>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Close">
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid.export_settings.details = !d.grid.export_settings.details" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>
                 <md-tooltip md-direction="bottom">
                     Schliessen
@@ -91,7 +95,7 @@ website = http://www.optinomic.com/
         </div>
     </div>
     <div>
-        <md-button ng-if="(!d.grid.export_details) && (!d.grid.export_details)" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
+        <md-button ng-if="(!d.grid.export_settings.details) && (!d.grid.export_settings.details)" style="font-size: 18px;" ng-click="d.grid.export_settings.details = !d.grid.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">
                 Daten Exportieren
@@ -1297,8 +1301,10 @@ angular.module('optinomicDataModule')
 
 
         d.grid = {};
-        d.grid.export_details = false;
-        d.grid.export_allColumns = false;
+        d.grid.export_settings = {};
+        d.grid.export_settings.details = false;
+        d.grid.export_settings.allColumns = false;
+        d.grid.export_settings.columnSeparator = ';';
 
         d.grid.default_options = {
             headerHeight: 50,
