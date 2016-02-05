@@ -487,7 +487,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             skipHeader: false,
             skipFooters: false,
             skipGroups: false,
-            allColumns: $scope.d.grid.export_allColumns,
+            //allColumns: $scope.d.grid.export_allColumns,
             fileName: fileName,
             columnSeparator: ';'
         };
