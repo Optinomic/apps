@@ -106,39 +106,70 @@ website = http://www.optinomic.com/
         </div>
         <div ng-if="d.init">
             <div ng-if="d.haveData">
-
-<div layout="row" layout-align="start center">
-    <div hide-sm>
-        <h3 class="md-headline">Rohdaten</h3>
-    </div>
-    <div flex>
-        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
-            <i class="mdi mdi-auto-fix"></i>
-            <md-tooltip md-direction="top">
-                Grösse anpassen
-            </md-tooltip>
-        </md-button>
-        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
-            <i class="mdi mdi-table-edit"></i>
-            <md-tooltip md-direction="top">
-                Toolpanel ein-/ausblenden
-            </md-tooltip>
-        </md-button>
-    </div>
-    <div>
-        <md-input-container class="md-primary">
+ <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_details)">
+        <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
+    <div flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+            <div flex style="padding: 12px;">
+    <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.survey_name}}: {{d.grid.selected_row.datestamp_day}}, {{d.grid.selected_row.datestamp_time}}</p>
+</div>
+
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div flex ng-if="d.grid.export_details" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding>
+            <div flex>
+                <md-switch ng-model="d.grid.export_allColumns" aria-label="allColumns">
+                    Alle Daten-Reihen
+                </md-switch>
+            </div>
+            <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
+                <i class="mdi mdi-file"></i> Daten exportieren
+            </md-button>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div>
+        <md-button ng-if="(!d.grid.export_details) && (!d.grid.export_details)" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
+            <i class="mdi mdi-file"></i>
+            <md-tooltip md-direction="bottom">
+                Daten Exportieren
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="bottom">
+                Grösse automatisch anpassen
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="bottom">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+        
+
+    </div>
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
-<p class="small md-caption">
-    <span class="small md-caption" ng-repeat="selecteRow in d.grid.options.selectedNodesById">
-        :: {{selecteRow.data.datestamp}} | <b>{{selecteRow.data.Suchtdruck_1}}</b> ({{selecteRow.id}})
-    </span>
-</p>
-            </div>
+             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
     <div>
