@@ -755,6 +755,4498 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
 });
 
+angular.module('optinomicDataModule').factory('apiService', function($http) {
+    var ongoing_requests = [];
+
+    var request = function(method, path, query, body) {
+        ongoing_requests.push(method + " " + path);
+
+        var headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        };
+
+        var token = helpers.getToken();
+        var apiUrl = helpers.getApiURL();
+        headers["X-API-Token"] = token;
+
+        var reqConf = {
+            url: apiUrl + path,
+            method: method,
+            params: query,
+            data: body,
+            headers: headers,
+            transformRequest: function(obj) {
+                var str = [];
+                for (var p in obj) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+                return str.join("&");
+            }
+        };
+
+        var promise = $http(reqConf);
+
+        var remove_ongoing = function() {
+            var i = ongoing_requests.indexOf(method + " " + path);
+            ongoing_requests.splice(i, 1);
+        };
+
+        promise.success(remove_ongoing);
+        promise.error(function(data, status) {
+            remove_ongoing();
+            if (status === 401) {
+                token = 'Error';
+            }
+        });
+
+        return promise;
+    };
+
+    var get = function(path, query) {
+        return request("GET", path, query, "");
+    };
+
+    var post = function(path, body) {
+        return request("POST", path, {}, body);
+    };
+
+    var put = function(path, query) {
+        return request("PUT", path, query, {});
+    };
+
+    var del = function(path, query) {
+        return request("DELETE", path, query, "");
+    };
+
+    var patch = function(path, body) {
+        return request("PATCH", path, {}, body);
+    };
+
+    var isBusy = function() {
+        return ongoing_requests.length > 0;
+    };
+
+    var getConfig = function() {
+        var Config = {
+            url: apiUrl
+        };
+
+        //console.log('getConfig = ', Config);
+        return Config;
+    };
+
+
+    return {
+        request: request,
+        getConfig: getConfig,
+        get: get,
+        post: post,
+        put: put,
+        del: del,
+        patch: patch,
+        isBusy: isBusy
+    };
+});
+
+'use strict';
+
+/**
+ * Service for storing/sharing Data
+ */
+angular.module('optinomicDataModule')
+    .service('scopeDService', function() {
+
+        var d = {};
+
+
+        // -----------------------------------------------------------
+        // Angular-Grid - https://www.ag-grid.com/
+        // -----------------------------------------------------------
+
+        d._init = {};
+        d._init.grid = {
+            grid_ready: false,
+            data_loader: 0
+        };
+
+
+        d.grid = {};
+        d.grid.export_details = false;
+        d.grid.export_allColumns = false;
+
+        d.grid.default_options = {
+            headerHeight: 50,
+            rowHeight: 28,
+            rowData: [],
+            columnDefs: [],
+            //pinnedColumnCount: 1,
+            dontUseScrolls: false,
+            enableFilter: true,
+            rowSelection: 'single',
+            enableColResize: true,
+            enableCellExpressions: true,
+            enableSorting: true,
+            showToolPanel: false,
+            rowHeight: 50,
+            angularCompileRows: true,
+
+
+            // EVENTS
+            onReady: function(event) {
+                console.log('the grid is now ready - updating');
+                d._init.grid.grid_ready = true;
+            },
+
+
+            onRowSelected: function(event) {
+                console.log('Row - Selected: ', event.node.data);
+
+                if (event.node.data === d.grid.selected_row) {
+                    d.grid.selected_row = null;
+                    d.grid.is_row_selected = false;
+                    d.grid.options.api.deselectAll();
+                } else {
+                    d.grid.selected_row = event.node.data;
+                    d.grid.is_row_selected = true;
+                };
+
+
+            }
+        };
+
+
+
+        return d;
+
+    });
+
+'use strict';
+
+/**
+ * Service for getting Data from API
+ */
+angular.module('optinomicDataModule')
+    .service('dataService', function($q, $filter, apiService) {
+
+
+        var dataService = {};
+
+        // -------------------------------------------------------------------------
+        // API - Functions
+        // -------------------------------------------------------------------------
+
+        dataService.getUsers = function() {
+            return apiService.get("/users", {});
+        };
+
+        dataService.getSurveyResponses = function() {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/survey_responses/" + helpers.getAppID(), {});
+        };
+
+        dataService.getAppCalculations = function(calculation_identifier) {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/calculations/" + helpers.getAppID() + "/" + calculation_identifier, {});
+        };
+
+        dataService.getAppCalculationsUser = function(my_module_identifier, my_calculation_identifier) {
+            return apiService.get("/calculations/" + my_module_identifier + "/" + my_calculation_identifier, {});
+        };
+
+        dataService.getConfig = function() {
+            return apiService.get("/extra_config", {});
+        };
+
+        dataService.runSQL = function(my_query, my_delimiter, my_including_headers, my_format, my_direct) {
+            //my_query = my_query === undefined ? 'select * from information_schema.tables' : my_query;
+            my_delimiter = my_delimiter === undefined ? ';' : my_delimiter;
+            my_including_headers = my_including_headers === undefined ? 'True' : my_including_headers;
+            my_format = my_format === undefined ? 'csv' : my_format;
+            my_direct = my_direct === undefined ? 'False' : my_direct;
+
+
+            if (my_format === 'csv') {
+                var body = {
+                    "query": my_query,
+                    "delimiter": my_delimiter,
+                    "including_headers": my_including_headers,
+                    "direct": my_direct,
+                    "format": my_format
+                };
+            } else {
+                var body = {
+                    "query": my_query,
+                    "delimiter": my_delimiter,
+                    "direct": my_direct,
+                    "format": my_format
+                };
+            };
+
+            //console.log('(!) runSQL: ', body);
+            return apiService.post("/run_sql", body);
+        };
+
+        dataService.getAllApps = function() {
+            return apiService.get("/modules", {});
+        };
+
+        dataService.getCurrentPatient = function() {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/full", {});
+        };
+
+        dataService.getPatientEvents = function() {
+            return apiService.get("/patients/" + helpers.getPatientID() + "/events", {});
+        };
+
+        dataService.getPatientGroups = function() {
+            return apiService.get("/patient_groups", {});
+        };
+
+        dataService.getPatientsFromPatientGroup = function(currentGroup) {
+            var apiStr = "/patient_groups/" + currentGroup + "/patients";
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.getPatientAnnotations = function() {
+            var patient_id = dataService.getPatientID();
+            var apiStr = '/patients/' + patient_id + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putPatientAnnotations = function(json_value) {
+            var patient_id = dataService.getPatientID();
+            var apiStr = '/patients/' + patient_id + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
+
+        dataService.getUserAnnotations = function() {
+            var user_id = dataService.getUserID();
+            var apiStr = '/users/' + user_id + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putUserAnnotations = function(json_value) {
+
+            var user_id = dataService.getUserID();
+            //console.log('(!!) API - CALL: putUserAnnotations', user_id, json_value);
+            var apiStr = '/users/' + user_id + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
+
+
+        dataService.getPatientModuleAnnotations = function() {
+            // GET annotations on a module and a patient in particular
+
+            var patient_id = dataService.getPatientID();
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.getAllPatientsModuleAnnotations = function() {
+            // to get the annotations of the above endpoint for ALL patients.
+
+            var module_identifier = dataService.getAppID();
+
+            var apiStr = '/modules/' + module_identifier + '/patient_annotations';
+            return apiService.get(apiStr, {});
+        };
+
+
+        dataService.putPatientModuleAnnotations = function(json_value) {
+            // PUT annotations on a module and a patient in particular
+
+            var patient_id = dataService.getPatientID();
+            var module_identifier = dataService.getAppID();
+            var apiStr = '/patients/' + patient_id + '/modules/' + module_identifier + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
+
+
+        dataService.getModuleAnnotations = function() {
+            // GET annotations on modules, nothing to do with patients here
+
+            var module_identifier = dataService.getAppID();
+            var apiStr = '/modules/' + module_identifier + '/annotations';
+            return apiService.get(apiStr, {});
+        };
+
+        dataService.putModuleAnnotations = function(json_value) {
+            // PUT annotations on modules, nothing to do with patients here
+
+            var module_identifier = dataService.getAppID();
+            var apiStr = '/modules/' + module_identifier + '/annotations';
+            var body = {
+                "value": json_value
+            };
+            return apiService.put(apiStr, body);
+        };
+
+
+        // -------------------------------------------------------------------------
+        // Helper - Functions
+        // -------------------------------------------------------------------------
+
+        dataService.getPatientID = function() {
+            return parseInt(helpers.getPatientID());
+        };
+
+        dataService.getToken = function() {
+            return helpers.getToken();
+        };
+
+        dataService.getAppName = function() {
+            return helpers.getAppName();
+        };
+
+        dataService.getAppID = function() {
+            return helpers.getAppID();
+        };
+
+        dataService.getApiURL = function() {
+            return helpers.getApiURL();
+        };
+
+        dataService.getUserID = function() {
+            return parseInt(helpers.getUserID());
+        };
+
+        dataService.getData = function(api_call) {
+            var deferred = $q.defer();
+
+            api_call.success(function(data) {
+                deferred.resolve(data);
+                //console.log('===> Success - getData   ', data, deferred);
+            });
+            api_call.error(function(data) {
+                deferred.reject(data);
+                console.log('===> ERROR! getData   ', data, deferred);
+            });
+            return deferred.promise;
+        };
+
+
+        dataService.getClinicData = function(clinic_key) {
+
+            // This function is a 'clone' from 
+            // /client/app/modules/optinomic-module/service/clinics-service.js
+            // Update here and there!   
+
+            var data = {};
+
+
+            switch (clinic_key) {
+                case '1':
+                    {
+                        data = {
+
+                            firebaseRoot: 'https://optinomic.firebaseio.com/',
+
+                            customer: {
+                                id: 1,
+                                contact: {
+                                    name: 'Klinik Südhang',
+                                    slogan: 'Kompetenzzentrum für Mensch und Sucht',
+                                    address: 'Südhang 1, 3038 Kirchlindach',
+                                    phone: '+41 (0)31 828 14 14',
+                                    email: 'info@suedhang.ch',
+                                    logo: 'http://suedhang.ch/images/content/Logo_Suedhang_Retina.png',
+                                    www: 'http://suedhang.ch/de/'
+                                },
+                                admin: {
+                                    name: 'Katrin Schläfli',
+                                    phone: '+41 (0)31 828 14 15',
+                                    email: 'katrin.schlaefli@suedhang.ch'
+                                }
+                            },
+
+                            talksRooms: [{
+                                id: 0,
+                                name: 'GeneralInformation',
+                                icon: 'mdi-duck',
+                                journal: {
+                                    integrate_in_timeline: true
+                                }
+                            }, {
+                                id: 1,
+                                name: 'QuestionsAndAnswers',
+                                icon: 'mdi-help',
+                                journal: {
+                                    integrate_in_timeline: false
+                                }
+                            }]
+
+                        };
+                        break;
+                    }
+
+                default:
+                    {
+                        data = {
+
+                            firebaseRoot: 'https://optinomic.firebaseio.com/',
+
+                            customer: {
+                                id: 1,
+                                contact: {
+                                    name: 'Optinomic',
+                                    slogan: 'Testumgebung',
+                                    address: 'Haldenstr.7, 8942 Oberrieden',
+                                    phone: '+41 (0)44 508 26 76',
+                                    email: 'info@optinomic.com',
+                                    logo: 'http://www.optinomic.com/wp-content/uploads/2014/09/optinomic_logo_medium.png',
+                                    www: 'http://www.optinomic.com'
+                                },
+                                admin: {
+                                    name: 'Beat Ottiger',
+                                    phone: '+41(0)79 635 85 84',
+                                    email: 'beat@optinomic.com'
+                                }
+                            },
+
+                            talksRooms: [{
+                                id: 0,
+                                name: 'GeneralInformation',
+                                icon: 'mdi-duck',
+                                journal: {
+                                    integrate_in_timeline: true
+                                }
+                            }, {
+                                id: 1,
+                                name: 'QuestionsAndAnswers',
+                                icon: 'mdi-help',
+                                journal: {
+                                    integrate_in_timeline: false
+                                }
+                            }]
+
+                        };
+                    }
+            }
+
+
+            data.all = {
+                client_version: '20150717'
+            };
+
+            return data;
+        };
+
+
+        dataService.createPatientExtras = function(patient) {
+            //console.log('createPatientExtras ', patient);
+            patient.age = $filter('dateToAge')(patient.birthdate);
+            patient.birthday = $filter('date')(patient.birthdate);
+
+            patient.extras = {};
+            patient.extras.age = patient.age;
+            patient.extras.birthday = patient.birthday;
+            patient.extras.birthday_age = patient.birthday + ' | ' + patient.age;
+            patient.extras.name = patient.last_name + ' ' + patient.first_name;
+
+            if (patient.gender === 'male') {
+                patient.ansprache = 'Herr'
+            } else {
+                patient.ansprache = 'Frau'
+            };
+
+            patient.extras.full_name = patient.last_name + ' ' + patient.first_name;
+            if (patient.title) {
+                patient.extras.full_name = patient.title + ' ' + patient.extras.full_name;
+            };
+            patient.extras.full_name = patient.ansprache + ' ' + patient.extras.full_name;
+
+            patient.extras.fulladdress = patient.address1 + ', ' + patient.zip_code + ' ' + patient.city;
+
+            var myPhone = '';
+            if (patient.phone_home) {
+                myPhone = patient.phone_home;
+            }
+            if (patient.phone_mobile) {
+                if (myPhone != '') {
+                    myPhone = myPhone + ', ' + patient.phone_mobile;
+                } else {
+                    myPhone = patient.phone_mobile;
+                }
+            }
+            patient.extras.phone = myPhone;
+
+
+            patient.extras.infoline = patient.extras.fulladdress + ' | ' + patient.extras.phone;
+
+
+            // -----------------------------------
+            // Female = Pink | Male = Blue
+            // -----------------------------------
+            var myColor = "md-accent";
+            var myColorAccent = "md-warn";
+            if (patient.gender === "female") {
+                myColor = "md-warn";
+                myColorAccent = "md-accent";
+            }
+            patient.color = {};
+            patient.color.color = myColor;
+            patient.color.accent = myColorAccent;
+
+
+
+            return patient;
+        };
+
+        // -------------------------------------------------------------------------
+        // Array - Functions
+        // -------------------------------------------------------------------------
+
+
+        dataService.groupBy = function(array, f) {
+            var groups = {};
+            array.forEach(function(o) {
+                var group = JSON.stringify(f(o));
+                groups[group] = groups[group] || [];
+                groups[group].push(o);
+            });
+            return Object.keys(groups).map(function(group) {
+                return groups[group];
+            })
+        }
+
+        dataService.isEmpty = function(obj) {
+            for (var prop in obj) {
+                if (obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        };
+
+        dataService.sortByKey = function(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key];
+                var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        };
+
+        dataService.checkSuccess = function(max, count) {
+
+            var allPromised = false;
+            if (max === count) {
+                allPromised = true;
+            }
+            //console.log('checkSuccess:', allPromised, max, count);
+            return allPromised;
+        };
+
+        dataService.findIndex = function(array, attr, value) {
+            for (var i = 0; i < array.length; i += 1) {
+                if (array[i][attr] === value) {
+                    return i;
+                }
+            }
+        };
+
+        // --------------------------------------------------
+        // Create uniqueID
+        // --------------------------------------------------
+        dataService.uniqueid = function() {
+            // always start with a letter (for DOM friendlyness)
+            var idstr = String.fromCharCode(Math.floor((Math.random() * 25) + 65));
+            do {
+                // between numbers and characters (48 is 0 and 90 is Z (42-48 = 90)
+                var ascicode = Math.floor((Math.random() * 42) + 48);
+                if (ascicode < 58 || ascicode > 64) {
+                    // exclude all chars between : (58) and @ (64)
+                    idstr += String.fromCharCode(ascicode);
+                }
+            } while (idstr.length < 32);
+
+            return (idstr);
+        };
+
+
+
+        // -------------------------------------------------------------------------
+        // Main - Functions
+        // -------------------------------------------------------------------------
+
+        dataService.getMainAppData = function() {
+
+            // Actions
+            var actions = 7;
+            var actions_count = 0;
+
+            // Init
+            var deferred = $q.defer();
+            var api = '';
+            var return_data = {};
+
+
+            // ------------------------------------------------
+            // Get Params from Helper Functions
+            // ------------------------------------------------
+            var app_identifier = dataService.getAppID();
+            return_data.identifier = app_identifier;
+
+            return_data.params = {};
+            return_data.params.PID = dataService.getPatientID();
+            return_data.params.userID = dataService.getUserID();
+            return_data.params.token = dataService.getToken();
+            return_data.params.app_name = dataService.getAppName();
+            return_data.params.app_id = app_identifier;
+            return_data.params.api_url = dataService.getApiURL();
+            //console.log('Parameters', return_data.params);
+
+
+
+            // ------------------------------------------------
+            // Action 1:  Survey Responses
+            // ------------------------------------------------
+
+            api = dataService.getSurveyResponses(app_identifier);
+            var aSurveyResponses = dataService.getData(api);
+
+            aSurveyResponses.then(function(data) {
+
+                //console.log('(!) - getSurveyResponses: ', data);
+
+                // All Responses
+                var responses = data.survey_responses;
+                return_data.survey_responses = responses;
+
+
+                // Group Responses by survey_name
+                return_data.survey_responses_group = dataService.groupBy(responses, function(item) {
+                    return [item.event.survey_name];
+                });
+
+                // Store Group Definitions with survey_name
+                return_data.survey_responses_group_definitions = [];
+                return_data.survey_responses_group.forEach(function(current_group, myindex) {
+
+                    var myObject = {
+                        'id': myindex,
+                        'survey': current_group[0].event.survey_name,
+                        'count': return_data.survey_responses_group[myindex].length,
+                        'description': current_group[0].event.description,
+                        'module': current_group[0].event.module
+                    };
+
+                    return_data.survey_responses_group_definitions.push(myObject);
+                });
+
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(return_data);
+                };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+            // ------------------------------------------------
+            // Action 2:  Get Config
+            // ------------------------------------------------
+
+            api = dataService.getConfig();
+            var aConfig = dataService.getData(api);
+
+            aConfig.then(function(data) {
+                var configData = data.extra_config;
+                return_data.config = configData;
+
+                // Get Clini-Data
+                // ToDo - Move Entries from getClinicData!
+                return_data.config.data = dataService.getClinicData(configData.key);
+                return_data.config.api = {};
+                return_data.config.api.url = dataService.getApiURL();
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(return_data);
+                };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+            // ------------------------------------------------
+            // Action 3:  Get current App Info
+            // ------------------------------------------------
+            api = dataService.getAllApps();
+            var aApps = dataService.getData(api);
+
+            aApps.then(function(data) {
+                var myApp = {};
+
+                if (parseInt(helpers.getPatientID()) === 0) {
+                    myApp.all = data.user_modules;
+                } else {
+                    myApp.all = data.patient_modules;
+                };
+
+
+                // Save current app details
+                myApp.all.forEach(function(current_app, myindex) {
+                    if (current_app.identifier === app_identifier) {
+                        myApp.current = current_app;
+
+
+                        return_data.calculations = [];
+                        // ------------------------------------------------
+                        // Action 3a:  App - Calculations
+                        // ------------------------------------------------
+                        actions = actions + current_app.calculations.length;
+
+
+                        current_app.calculations.forEach(function(calculatons, myindex) {
+
+                            if (parseInt(helpers.getPatientID()) === 0) {
+                                console.log('User App - Calculation: ', current_app.identifier, calculatons)
+                                api = dataService.getAppCalculationsUser(current_app.identifier, calculatons);
+                            } else {
+                                console.log('Patient App - Calculation: ', current_app.identifier, calculatons)
+                                api = dataService.getAppCalculations(calculatons);
+                            };
+                            var aCalculation = dataService.getData(api);
+
+                            aCalculation.then(function(data) {
+
+                                var date = new Date();
+                                var objectToPush = {
+                                    'calculation_name': calculatons,
+                                    'calculation_results': data.calculation_result,
+                                    'calculated_datestamp': date,
+                                    'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                    'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                };
+
+                                return_data.calculations.push(objectToPush);
+                                // console.log('(+) LOOP - calculations: ', data.calculation_result);
+
+
+                                if (parseInt(helpers.getPatientID()) !== 0) {
+
+                                    // Assign Calculation Result to survey_response
+                                    var all_results = data.calculation_result;
+
+                                    return_data.survey_responses.forEach(function(response, myindex) {
+                                        // console.log('(+) LOOP - survey_responses: ', response, all_results);
+                                        var inner_calculations = [];
+
+                                        if (all_results) {
+                                            all_results.forEach(function(current_result, myindex) {
+                                                // console.log('(+) Compare: ', current_result.response.data.response, response.entity.data.response);
+
+                                                if (JSON.stringify(current_result.response.data.response) === JSON.stringify(response.entity.data.response)) {
+                                                    var myResult = current_result;
+                                                    //console.log('(+) EQUAL: ', current_result);
+
+                                                    var objectToPush = {
+                                                        'calculation_name': calculatons,
+                                                        'calculation_result': myResult,
+                                                        'calculated_datestamp': date,
+                                                        'calculated_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                                                        'calculated_time': $filter("amDateFormat")(date, 'HH:mm')
+                                                    };
+                                                    inner_calculations.push(objectToPush);
+                                                };
+                                            });
+                                            response.calculations = inner_calculations;
+                                        };
+
+                                    });
+                                };
+
+
+                                // Deferred when done.
+                                actions_count = actions_count + 1;
+                                if (dataService.checkSuccess(actions, actions_count)) {
+                                    deferred.resolve(return_data);
+                                };
+                            }, function(error) {
+                                // Error
+                                deferred.reject(return_data);
+                                console.log('-- Error:', error);
+                            });
+
+                        });
+
+                    };
+                });
+
+                return_data.apps = myApp;
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(return_data);
+                };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+            // ------------------------------------------------
+            // Action 4:  Patient - Details
+            // ------------------------------------------------
+
+            if (parseInt(helpers.getPatientID()) === 0) {
+                actions_count = actions_count + 1;
+            } else {
+                api = dataService.getCurrentPatient();
+                var aPatient = dataService.getData(api);
+
+                aPatient.then(function(data) {
+                    return_data.patient = data;
+                    //console.log('createPatientExtras', data);
+                    return_data.patient.data = dataService.createPatientExtras(data.patient.data);
+
+                    // Deferred when done.
+                    actions_count = actions_count + 1;
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(return_data);
+                    };
+                }, function(error) {
+                    // Error
+                    deferred.reject(return_data);
+                    console.log('-- Error:', error);
+                });
+            };
+
+
+            // ------------------------------------------------
+            // Action 5:  Patient Events
+            // ------------------------------------------------
+
+            if (parseInt(helpers.getPatientID()) === 0) {
+                actions_count = actions_count + 1;
+            } else {
+                api = dataService.getPatientEvents(app_identifier);
+                var aEvents = dataService.getData(api);
+
+                aEvents.then(function(data) {
+
+                    return_data.events = data.events;
+
+                    return_data.events.forEach(function(current_event, myindex) {
+
+                        var date = current_event.data.created_at;
+
+                        current_event.data.extras = {};
+                        current_event.data.extras.created_year = $filter("amDateFormat")(date, 'YYYY');
+                        current_event.data.extras.created_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                        current_event.data.extras.created_date = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                        current_event.data.extras.created_time = $filter("amDateFormat")(date, 'HH:mm');
+
+                    });
+
+
+
+
+                    // Deferred when done.
+                    actions_count = actions_count + 1;
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(return_data);
+                    };
+                }, function(error) {
+                    // Error
+                    deferred.reject(return_data);
+                    console.log('-- Error:', error);
+                });
+
+            };
+
+
+            // ------------------------------------------------
+            // Action 6:  Patient-Groups
+            // ------------------------------------------------
+            api = dataService.getPatientGroups();
+            var aPatientGroups = dataService.getData(api);
+            aPatientGroups.then(function(dataPatientGroups) {
+                //console.log('dataPatientGroups dataPatientGroups', dataPatientGroups);
+
+                var patient_groups = dataPatientGroups.patient_groups;
+                return_data.patient_groups = patient_groups;
+
+
+                // GET Patients from the Groups
+                actions = actions + patient_groups.length;
+                patient_groups.forEach(function(current_pg, myindex) {
+
+                    api = dataService.getPatientsFromPatientGroup(current_pg.id);
+                    var aPatients = dataService.getData(api);
+                    aPatients.then(function(dataPatients) {
+                        var patients = dataPatients.patients;
+                        current_pg.patients = patients;
+
+                        patients.forEach(function(patient, myindex) {
+                            patient.data.pid = patient.id;
+                            patient.data = dataService.createPatientExtras(patient.data);
+                        });
+
+                        // Deferred when done.
+                        actions_count = actions_count + 1;
+                        if (dataService.checkSuccess(actions, actions_count)) {
+                            //console.log('==> deferred', return_data);
+                            deferred.resolve(return_data);
+                        };
+
+
+                    }, function(error) {
+                        // Error
+                        deferred.reject(return_data);
+                        console.log('-- Error:', error);
+                    });
+                });
+
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    //console.log('==> deferred', return_data);
+                    deferred.resolve(return_data);
+                };
+
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+            // ------------------------------------------------
+            // Action 7:  All Users
+            // ------------------------------------------------
+
+            api = dataService.getUsers();
+            var aUsers = dataService.getData(api);
+
+            aUsers.then(function(data) {
+
+                // All Users
+                var users = data.users;
+                return_data.users = {};
+                return_data.users.all = users;
+
+                users.forEach(function(user, myindex) {
+                    user.data.uid = user.id;
+                    user.data = dataService.createUserExtras(user.data);
+
+                    // Store Current User
+                    if (user.id === dataService.getUserID()) {
+                        return_data.users.current = user;
+                    };
+                });
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(return_data);
+                };
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('-- Error:', error);
+            });
+
+
+            return deferred.promise;
+        };
+
+
+        dataService.getResponsesExtras = function(response) {
+            var resp = response.entity.data;
+
+            var date = resp.filled;
+            resp.filled_year = $filter("amDateFormat")(date, 'YYYY');
+            resp.filled_week = $filter("amDateFormat")(date, 'YYYY, ww');
+            resp.filled_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            resp.filled_weekday = $filter("amDateFormat")(date, 'dddd');
+            resp.filled_time = $filter("amDateFormat")(date, 'HH:mm');
+
+            return response;
+        };
+
+
+        dataService.createUserExtras = function(user) {
+            user.age = $filter('dateToAge')(user.birthday);
+            user.birthdate = user.birthday;
+            //user.birthdate = $filter('date')(user.birthday);
+            //user.birthdate = $filter("amDateFormat")(date, 'YYYY-MM-DD');
+            //user.birthday_date = moment(user.birthday).toDate();
+
+            user.extras = {};
+            user.extras.age = user.age;
+            user.extras.birthdate = $filter("amDateFormat")(user.birthday, 'YYYY-MM-DD');
+            user.extras.birthday_date = moment(user.extras.birthdate).toDate();
+            user.extras.birthday_age = $filter("amDateFormat")(user.birthday, 'DD.MM.YYYY') + ' | ' + user.age;
+            user.extras.name = user.last_name + ' ' + user.first_name;
+
+
+            if (user.gender === 'female') {
+                user.extras.ansprache = 'Frau'
+            } else {
+                user.extras.ansprache = 'Herr'
+            };
+
+            user.extras.full_name = user.last_name + ' ' + user.first_name;
+            if (user.initials) {
+                user.extras.full_name = user.extras.full_name + ' (' + user.initials + ')'
+            };
+
+            // -----------------------------------
+            // Female = Pink | Male = Blue
+            // -----------------------------------
+            var myColor = "md-accent";
+            var myColorAccent = "md-warn";
+            if (user.gender === "female") {
+                myColor = "md-warn";
+                myColorAccent = "md-accent";
+            }
+            user.color = {};
+            user.color.color = myColor;
+            user.color.accent = myColorAccent;
+
+            return user;
+        };
+
+
+
+        //------------------------------------------
+        // Patient / User - Annotations
+        //------------------------------------------
+
+        dataService.getAnnotationsData = function(api_direction, node_tree) {
+            var deferred = $q.defer();
+            var return_data = {};
+            var app_id = dataService.getAppID();
+
+            if (api_direction === 'user') {
+                var api = dataService.getUserAnnotations();
+            } else {
+                var api = dataService.getPatientModuleAnnotations();
+            };
+
+            var aPromise = dataService.getData(api);
+            aPromise.then(function(data) {
+
+                return_data = data[node_tree] === undefined ? {} : data[node_tree];
+                return_data = JSON.parse(JSON.stringify(return_data));
+                // console.log('(!) getAnnotationsData - Success', node_tree, return_data);
+                deferred.resolve(return_data);
+
+            }, function(error) {
+                // Error
+                deferred.reject(return_data);
+                console.log('ERROR: getAnnotationsData', error);
+            });
+
+            return deferred.promise;
+        };
+
+        dataService.saveAnnotationsData = function(api_direction, node_tree, json_value) {
+
+            console.log('(START) saveAnnotationsData', api_direction, node_tree, json_value);
+
+
+            var deferred = $q.defer();
+            var return_data = {};
+            var full_data = {};
+            var app_id = dataService.getAppID();
+
+
+            if (api_direction === 'user') {
+                var api_read = dataService.getUserAnnotations();
+            } else {
+                var api_read = dataService.getPatientModuleAnnotations();
+            };
+
+            var aPromise = dataService.getData(api_read);
+            aPromise.then(function(current_data) {
+
+                full_data = current_data;
+                if (node_tree === 'clear') {
+                    // Overwrite Settings with given json_value
+                    full_data = {};
+                };
+
+                // console.log('(1) saveAnnotationsData', full_data);
+
+
+                // Add App tree with app_id to prevent overwriting duplicate 'node_tree' variables
+                //full_data.app = full_data.app === undefined ? {} : full_data.app;
+                //full_data.app[app_id] = full_data.app[app_id] === undefined ? {} : full_data.app[app_id];
+                //full_data.app[app_id][node_tree] = json_value;
+                full_data[node_tree] = full_data[node_tree] === undefined ? {} : full_data[node_tree];
+                full_data[node_tree] = json_value;
+
+                // console.log('(!) saveAnnotationsData', api_direction, full_data);
+
+                // Save and proceed.
+                if (api_direction === 'user') {
+                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
+                } else {
+                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
+                };
+
+                var aPromise = dataService.getData(api_write);
+                aPromise.then(function(data) {
+
+                    console.log('(!) saveAnnotationsData.then =', data, return_data);
+                    deferred.resolve(return_data);
+
+                }, function(error) {
+                    // Error
+                    deferred.reject(error);
+                    console.log('ERROR: saveAnnotationsData', error);
+                });
+
+            });
+
+            return deferred.promise;
+        };
+
+
+        return dataService;
+
+
+    });
+
+/**
+ * @ngdoc service
+ * @name optinomicDataModule.simpleStatistics
+ * @description
+ * # simpleStatistics (ss) :: A simple, literate statistics system.
+ * Service in the optinomicAppLibraryApp taken from http://www.macwright.org/simple-statistics/
+ */
+angular.module('optinomicDataModule')
+    .service('simpleStatistics', function() {
+        // AngularJS will instantiate a singleton by calling 'new' on this function
+
+        var ss = {};
+
+        /* istanbul ignore else */
+        if (typeof module !== 'undefined') {
+            // Assign the 'ss' object to exports, so that you can require
+            // it in [node.js](http://nodejs.org/)
+            module.exports = ss;
+        } else {
+            // Otherwise, in a browser, we assign 'ss' to the window object,
+            // so you can simply refer to it as 'ss'.
+            // Coverage testing will always skip this line, so we exclude
+            // it from istanbul's vision.
+            this.ss = ss;
+        };
+
+        // # [Linear Regression](http://en.wikipedia.org/wiki/Linear_regression)
+        //
+        // [Simple linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression)
+        // is a simple way to find a fitted line
+        // between a set of coordinates.
+        function linear_regression() {
+            var linreg = {},
+                data = [];
+
+            // Assign data to the model. Data is assumed to be an array.
+            linreg.data = function(x) {
+                if (!arguments.length) return data;
+                data = x.slice();
+                return linreg;
+            };
+
+            // Calculate the slope and y-intercept of the regression line
+            // by calculating the least sum of squares
+            linreg.mb = function() {
+                var m, b;
+
+                // Store data length in a local variable to reduce
+                // repeated object property lookups
+                var data_length = data.length;
+
+                //if there's only one point, arbitrarily choose a slope of 0
+                //and a y-intercept of whatever the y of the initial point is
+                if (data_length === 1) {
+                    m = 0;
+                    b = data[0][1];
+                } else {
+                    // Initialize our sums and scope the 'm' and 'b'
+                    // variables that define the line.
+                    var sum_x = 0,
+                        sum_y = 0,
+                        sum_xx = 0,
+                        sum_xy = 0;
+
+                    // Use local variables to grab point values
+                    // with minimal object property lookups
+                    var point, x, y;
+
+                    // Gather the sum of all x values, the sum of all
+                    // y values, and the sum of x^2 and (x*y) for each
+                    // value.
+                    //
+                    // In math notation, these would be SS_x, SS_y, SS_xx, and SS_xy
+                    for (var i = 0; i < data_length; i++) {
+                        point = data[i];
+                        x = point[0];
+                        y = point[1];
+
+                        sum_x += x;
+                        sum_y += y;
+
+                        sum_xx += x * x;
+                        sum_xy += x * y;
+                    }
+
+                    // 'm' is the slope of the regression line
+                    m = ((data_length * sum_xy) - (sum_x * sum_y)) /
+                        ((data_length * sum_xx) - (sum_x * sum_x));
+
+                    // 'b' is the y-intercept of the line.
+                    b = (sum_y / data_length) - ((m * sum_x) / data_length);
+                }
+
+                // Return both values as an object.
+                return {
+                    m: m,
+                    b: b
+                };
+            };
+
+            // a shortcut for simply getting the slope of the regression line
+            linreg.m = function() {
+                return linreg.mb().m;
+            };
+
+            // a shortcut for simply getting the y-intercept of the regression
+            // line.
+            linreg.b = function() {
+                return linreg.mb().b;
+            };
+
+            // ## Fitting The Regression Line
+            //
+            // This is called after '.data()' and returns the
+            // equation 'y = f(x)' which gives the position
+            // of the regression line at each point in 'x'.
+            linreg.line = function() {
+
+                // Get the slope, 'm', and y-intercept, 'b', of the line.
+                var mb = linreg.mb(),
+                    m = mb.m,
+                    b = mb.b;
+
+                // Return a function that computes a 'y' value for each
+                // x value it is given, based on the values of 'b' and 'a'
+                // that we just computed.
+                return function(x) {
+                    return b + (m * x);
+                };
+            };
+
+            return linreg;
+        }
+
+        // # [R Squared](http://en.wikipedia.org/wiki/Coefficient_of_determination)
+        //
+        // The r-squared value of data compared with a function 'f'
+        // is the sum of the squared differences between the prediction
+        // and the actual value.
+        function r_squared(data, f) {
+            if (data.length < 2) return 1;
+
+            // Compute the average y value for the actual
+            // data set in order to compute the
+            // _total sum of squares_
+            var sum = 0,
+                average;
+            for (var i = 0; i < data.length; i++) {
+                sum += data[i][1];
+            }
+            average = sum / data.length;
+
+            // Compute the total sum of squares - the
+            // squared difference between each point
+            // and the average of all points.
+            var sum_of_squares = 0;
+            for (var j = 0; j < data.length; j++) {
+                sum_of_squares += Math.pow(average - data[j][1], 2);
+            }
+
+            // Finally estimate the error: the squared
+            // difference between the estimate and the actual data
+            // value at each point.
+            var err = 0;
+            for (var k = 0; k < data.length; k++) {
+                err += Math.pow(data[k][1] - f(data[k][0]), 2);
+            }
+
+            // As the error grows larger, its ratio to the
+            // sum of squares increases and the r squared
+            // value grows lower.
+            return 1 - (err / sum_of_squares);
+        }
+
+
+        // # [Bayesian Classifier](http://en.wikipedia.org/wiki/Naive_Bayes_classifier)
+        //
+        // This is a naïve bayesian classifier that takes
+        // singly-nested objects.
+        function bayesian() {
+            // The 'bayes_model' object is what will be exposed
+            // by this closure, with all of its extended methods, and will
+            // have access to all scope variables, like 'total_count'.
+            var bayes_model = {},
+                // The number of items that are currently
+                // classified in the model
+                total_count = 0,
+                // Every item classified in the model
+                data = {};
+
+            // ## Train
+            // Train the classifier with a new item, which has a single
+            // dimension of Javascript literal keys and values.
+            bayes_model.train = function(item, category) {
+                // If the data object doesn't have any values
+                // for this category, create a new object for it.
+                if (!data[category]) data[category] = {};
+
+                // Iterate through each key in the item.
+                for (var k in item) {
+                    var v = item[k];
+                    // Initialize the nested object 'data[category][k][item[k]]'
+                    // with an object of keys that equal 0.
+                    if (data[category][k] === undefined) data[category][k] = {};
+                    if (data[category][k][v] === undefined) data[category][k][v] = 0;
+
+                    // And increment the key for this key/value combination.
+                    data[category][k][item[k]]++;
+                }
+                // Increment the number of items classified
+                total_count++;
+            };
+
+            // ## Score
+            // Generate a score of how well this item matches all
+            // possible categories based on its attributes
+            bayes_model.score = function(item) {
+                // Initialize an empty array of odds per category.
+                var odds = {},
+                    category;
+                // Iterate through each key in the item,
+                // then iterate through each category that has been used
+                // in previous calls to '.train()'
+                for (var k in item) {
+                    var v = item[k];
+                    for (category in data) {
+                        // Create an empty object for storing key - value combinations
+                        // for this category.
+                        if (odds[category] === undefined) odds[category] = {};
+
+                        // If this item doesn't even have a property, it counts for nothing,
+                        // but if it does have the property that we're looking for from
+                        // the item to categorize, it counts based on how popular it is
+                        // versus the whole population.
+                        if (data[category][k]) {
+                            odds[category][k + '_' + v] = (data[category][k][v] || 0) / total_count;
+                        } else {
+                            odds[category][k + '_' + v] = 0;
+                        }
+                    }
+                }
+
+                // Set up a new object that will contain sums of these odds by category
+                var odds_sums = {};
+
+                for (category in odds) {
+                    // Tally all of the odds for each category-combination pair -
+                    // the non-existence of a category does not add anything to the
+                    // score.
+                    for (var combination in odds[category]) {
+                        if (odds_sums[category] === undefined) odds_sums[category] = 0;
+                        odds_sums[category] += odds[category][combination];
+                    }
+                }
+
+                return odds_sums;
+            };
+
+            // Return the completed model.
+            return bayes_model;
+        }
+
+        // # sum
+        //
+        // is simply the result of adding all numbers
+        // together, starting from zero.
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function sum(x) {
+            var value = 0;
+            for (var i = 0; i < x.length; i++) {
+                value += x[i];
+            }
+            return value;
+        }
+
+        // # mean
+        //
+        // is the sum over the number of values
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function mean(x) {
+            // The mean of no numbers is null
+            if (x.length === 0) return null;
+
+            return sum(x) / x.length;
+        }
+
+        // # geometric mean
+        //
+        // a mean function that is more useful for numbers in different
+        // ranges.
+        //
+        // this is the nth root of the input numbers multiplied by each other
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function geometric_mean(x) {
+            // The mean of no numbers is null
+            if (x.length === 0) return null;
+
+            // the starting value.
+            var value = 1;
+
+            for (var i = 0; i < x.length; i++) {
+                // the geometric mean is only valid for positive numbers
+                if (x[i] <= 0) return null;
+
+                // repeatedly multiply the value by each number
+                value *= x[i];
+            }
+
+            return Math.pow(value, 1 / x.length);
+        }
+
+
+        // # harmonic mean
+        //
+        // a mean function typically used to find the average of rates
+        //
+        // this is the reciprocal of the arithmetic mean of the reciprocals
+        // of the input numbers
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function harmonic_mean(x) {
+            // The mean of no numbers is null
+            if (x.length === 0) return null;
+
+            var reciprocal_sum = 0;
+
+            for (var i = 0; i < x.length; i++) {
+                // the harmonic mean is only valid for positive numbers
+                if (x[i] <= 0) return null;
+
+                reciprocal_sum += 1 / x[i];
+            }
+
+            // divide n by the the reciprocal sum
+            return x.length / reciprocal_sum;
+        }
+
+        // root mean square (RMS)
+        //
+        // a mean function used as a measure of the magnitude of a set
+        // of numbers, regardless of their sign
+        //
+        // this is the square root of the mean of the squares of the
+        // input numbers
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function root_mean_square(x) {
+            if (x.length === 0) return null;
+
+            var sum_of_squares = 0;
+            for (var i = 0; i < x.length; i++) {
+                sum_of_squares += Math.pow(x[i], 2);
+            }
+
+            return Math.sqrt(sum_of_squares / x.length);
+        }
+
+        // # min
+        //
+        // This is simply the minimum number in the set.
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function min(x) {
+            var value;
+            for (var i = 0; i < x.length; i++) {
+                // On the first iteration of this loop, min is
+                // undefined and is thus made the minimum element in the array
+                if (x[i] < value || value === undefined) value = x[i];
+            }
+            return value;
+        }
+
+        // # max
+        //
+        // This is simply the maximum number in the set.
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function max(x) {
+            var value;
+            for (var i = 0; i < x.length; i++) {
+                // On the first iteration of this loop, max is
+                // undefined and is thus made the maximum element in the array
+                if (x[i] > value || value === undefined) value = x[i];
+            }
+            return value;
+        }
+
+        // # [variance](http://en.wikipedia.org/wiki/Variance)
+        //
+        // is the sum of squared deviations from the mean
+        //
+        // depends on 'mean()'
+        function variance(x) {
+            // The variance of no numbers is null
+            if (x.length === 0) return null;
+
+            var mean_value = mean(x),
+                deviations = [];
+
+            // Make a list of squared deviations from the mean.
+            for (var i = 0; i < x.length; i++) {
+                deviations.push(Math.pow(x[i] - mean_value, 2));
+            }
+
+            // Find the mean value of that list
+            return mean(deviations);
+        }
+
+        // # [standard deviation](http://en.wikipedia.org/wiki/Standard_deviation)
+        //
+        // is just the square root of the variance.
+        //
+        // depends on 'variance()'
+        function standard_deviation(x) {
+            // The standard deviation of no numbers is null
+            if (x.length === 0) return null;
+
+            return Math.sqrt(variance(x));
+        }
+
+        // The sum of deviations to the Nth power.
+        // When n=2 it's the sum of squared deviations.
+        // When n=3 it's the sum of cubed deviations.
+        //
+        // depends on 'mean()'
+        function sum_nth_power_deviations(x, n) {
+            var mean_value = mean(x),
+                sum = 0;
+
+            for (var i = 0; i < x.length; i++) {
+                sum += Math.pow(x[i] - mean_value, n);
+            }
+
+            return sum;
+        }
+
+        // # [variance](http://en.wikipedia.org/wiki/Variance)
+        //
+        // is the sum of squared deviations from the mean
+        //
+        // depends on 'sum_nth_power_deviations'
+        function sample_variance(x) {
+            // The variance of no numbers is null
+            if (x.length <= 1) return null;
+
+            var sum_squared_deviations_value = sum_nth_power_deviations(x, 2);
+
+            // Find the mean value of that list
+            return sum_squared_deviations_value / (x.length - 1);
+        }
+
+        // # [standard deviation](http://en.wikipedia.org/wiki/Standard_deviation)
+        //
+        // is just the square root of the variance.
+        //
+        // depends on 'sample_variance()'
+        function sample_standard_deviation(x) {
+            // The standard deviation of no numbers is null
+            if (x.length <= 1) return null;
+
+            return Math.sqrt(sample_variance(x));
+        }
+
+        // # [covariance](http://en.wikipedia.org/wiki/Covariance)
+        //
+        // sample covariance of two datasets:
+        // how much do the two datasets move together?
+        // x and y are two datasets, represented as arrays of numbers.
+        //
+        // depends on 'mean()'
+        function sample_covariance(x, y) {
+
+            // The two datasets must have the same length which must be more than 1
+            if (x.length <= 1 || x.length !== y.length) {
+                return null;
+            }
+
+            // determine the mean of each dataset so that we can judge each
+            // value of the dataset fairly as the difference from the mean. this
+            // way, if one dataset is [1, 2, 3] and [2, 3, 4], their covariance
+            // does not suffer because of the difference in absolute values
+            var xmean = mean(x),
+                ymean = mean(y),
+                sum = 0;
+
+            // for each pair of values, the covariance increases when their
+            // difference from the mean is associated - if both are well above
+            // or if both are well below
+            // the mean, the covariance increases significantly.
+            for (var i = 0; i < x.length; i++) {
+                sum += (x[i] - xmean) * (y[i] - ymean);
+            }
+
+            // the covariance is weighted by the length of the datasets.
+            return sum / (x.length - 1);
+        }
+
+        // # [correlation](http://en.wikipedia.org/wiki/Correlation_and_dependence)
+        //
+        // Gets a measure of how correlated two datasets are, between -1 and 1
+        //
+        // depends on 'sample_standard_deviation()' and 'sample_covariance()'
+        function sample_correlation(x, y) {
+            var cov = sample_covariance(x, y),
+                xstd = sample_standard_deviation(x),
+                ystd = sample_standard_deviation(y);
+
+            if (cov === null || xstd === null || ystd === null) {
+                return null;
+            }
+
+            return cov / xstd / ystd;
+        }
+
+        // # [median](http://en.wikipedia.org/wiki/Median)
+        //
+        // The middle number of a list. This is often a good indicator of 'the middle'
+        // when there are outliers that skew the 'mean()' value.
+        function median(x) {
+            // The median of an empty list is null
+            if (x.length === 0) return null;
+
+            // Sorting the array makes it easy to find the center, but
+            // use '.slice()' to ensure the original array 'x' is not modified
+            var sorted = x.slice().sort(function(a, b) {
+                return a - b;
+            });
+
+            // If the length of the list is odd, it's the central number
+            if (sorted.length % 2 === 1) {
+                return sorted[(sorted.length - 1) / 2];
+                // Otherwise, the median is the average of the two numbers
+                // at the center of the list
+            } else {
+                var a = sorted[(sorted.length / 2) - 1];
+                var b = sorted[(sorted.length / 2)];
+                return (a + b) / 2;
+            }
+        }
+
+        // # [mode](http://bit.ly/W5K4Yt)
+        //
+        // The mode is the number that appears in a list the highest number of times.
+        // There can be multiple modes in a list: in the event of a tie, this
+        // algorithm will return the most recently seen mode.
+        //
+        // This implementation is inspired by [science.js](https://github.com/jasondavies/science.js/blob/master/src/stats/mode.js)
+        //
+        // This runs on 'O(n)', linear time in respect to the array
+        function mode(x) {
+
+            // Handle edge cases:
+            // The median of an empty list is null
+            if (x.length === 0) return null;
+            else if (x.length === 1) return x[0];
+
+            // Sorting the array lets us iterate through it below and be sure
+            // that every time we see a new number it's new and we'll never
+            // see the same number twice
+            var sorted = x.slice().sort(function(a, b) {
+                return a - b;
+            });
+
+            // This assumes it is dealing with an array of size > 1, since size
+            // 0 and 1 are handled immediately. Hence it starts at index 1 in the
+            // array.
+            var last = sorted[0],
+                // store the mode as we find new modes
+                value,
+                // store how many times we've seen the mode
+                max_seen = 0,
+                // how many times the current candidate for the mode
+                // has been seen
+                seen_this = 1;
+
+            // end at sorted.length + 1 to fix the case in which the mode is
+            // the highest number that occurs in the sequence. the last iteration
+            // compares sorted[i], which is undefined, to the highest number
+            // in the series
+            for (var i = 1; i < sorted.length + 1; i++) {
+                // we're seeing a new number pass by
+                if (sorted[i] !== last) {
+                    // the last number is the new mode since we saw it more
+                    // often than the old one
+                    if (seen_this > max_seen) {
+                        max_seen = seen_this;
+                        value = last;
+                    }
+                    seen_this = 1;
+                    last = sorted[i];
+                    // if this isn't a new number, it's one more occurrence of
+                    // the potential mode
+                } else {
+                    seen_this++;
+                }
+            }
+            return value;
+        }
+
+        // # [t-test](http://en.wikipedia.org/wiki/Student's_t-test)
+        //
+        // This is to compute a one-sample t-test, comparing the mean
+        // of a sample to a known value, x.
+        //
+        // in this case, we're trying to determine whether the
+        // population mean is equal to the value that we know, which is 'x'
+        // here. usually the results here are used to look up a
+        // [p-value](http://en.wikipedia.org/wiki/P-value), which, for
+        // a certain level of significance, will let you determine that the
+        // null hypothesis can or cannot be rejected.
+        //
+        // Depends on 'standard_deviation()' and 'mean()'
+        function t_test(sample, x) {
+            // The mean of the sample
+            var sample_mean = mean(sample);
+
+            // The standard deviation of the sample
+            var sd = standard_deviation(sample);
+
+            // Square root the length of the sample
+            var rootN = Math.sqrt(sample.length);
+
+            // Compute the known value against the sample,
+            // returning the t value
+            return (sample_mean - x) / (sd / rootN);
+        }
+
+        // # [2-sample t-test](http://en.wikipedia.org/wiki/Student's_t-test)
+        //
+        // This is to compute two sample t-test.
+        // Tests whether 'mean(X)-mean(Y) = difference', (
+        // in the most common case, we often have 'difference == 0' to test if two samples
+        // are likely to be taken from populations with the same mean value) with
+        // no prior knowledge on standard deviations of both samples
+        // other than the fact that they have the same standard deviation.
+        //
+        // Usually the results here are used to look up a
+        // [p-value](http://en.wikipedia.org/wiki/P-value), which, for
+        // a certain level of significance, will let you determine that the
+        // null hypothesis can or cannot be rejected.
+        //
+        // 'diff' can be omitted if it equals 0.
+        //
+        // [This is used to confirm or deny](http://www.monarchlab.org/Lab/Research/Stats/2SampleT.aspx)
+        // a null hypothesis that the two populations that have been sampled into
+        // 'sample_x' and 'sample_y' are equal to each other.
+        //
+        // Depends on 'sample_variance()' and 'mean()'
+        function t_test_two_sample(sample_x, sample_y, difference) {
+            var n = sample_x.length,
+                m = sample_y.length;
+
+            // If either sample doesn't actually have any values, we can't
+            // compute this at all, so we return 'null'.
+            if (!n || !m) return null;
+
+            // default difference (mu) is zero
+            if (!difference) difference = 0;
+
+            var meanX = mean(sample_x),
+                meanY = mean(sample_y);
+
+            var weightedVariance = ((n - 1) * sample_variance(sample_x) +
+                (m - 1) * sample_variance(sample_y)) / (n + m - 2);
+
+            return (meanX - meanY - difference) /
+                Math.sqrt(weightedVariance * (1 / n + 1 / m));
+        }
+
+        // # chunk
+        //
+        // Split an array into chunks of a specified size. This function
+        // has the same behavior as [PHP's array_chunk](http://php.net/manual/en/function.array-chunk.php)
+        // function, and thus will insert smaller-sized chunks at the end if
+        // the input size is not divisible by the chunk size.
+        //
+        // 'sample' is expected to be an array, and 'chunkSize' a number.
+        // The 'sample' array can contain any kind of data.
+        function chunk(sample, chunkSize) {
+
+            // a list of result chunks, as arrays in an array
+            var output = [];
+
+            // 'chunkSize' must be zero or higher - otherwise the loop below,
+            // in which we call 'start += chunkSize', will loop infinitely.
+            // So, we'll detect and return null in that case to indicate
+            // invalid input.
+            if (chunkSize <= 0) {
+                return null;
+            }
+
+            // 'start' is the index at which '.slice' will start selecting
+            // new array elements
+            for (var start = 0; start < sample.length; start += chunkSize) {
+
+                // for each chunk, slice that part of the array and add it
+                // to the output. The '.slice' function does not change
+                // the original array.
+                output.push(sample.slice(start, start + chunkSize));
+            }
+            return output;
+        }
+
+        // # shuffle_in_place
+        //
+        // A [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+        // in-place - which means that it will change the order of the original
+        // array by reference.
+        function shuffle_in_place(sample, randomSource) {
+
+            // a custom random number source can be provided if you want to use
+            // a fixed seed or another random number generator, like
+            // [random-js](https://www.npmjs.org/package/random-js)
+            randomSource = randomSource || Math.random;
+
+            // store the current length of the sample to determine
+            // when no elements remain to shuffle.
+            var length = sample.length;
+
+            // temporary is used to hold an item when it is being
+            // swapped between indices.
+            var temporary;
+
+            // The index to swap at each stage.
+            var index;
+
+            // While there are still items to shuffle
+            while (length > 0) {
+                // chose a random index within the subset of the array
+                // that is not yet shuffled
+                index = Math.floor(randomSource() * length--);
+
+                // store the value that we'll move temporarily
+                temporary = sample[length];
+
+                // swap the value at 'sample[length]' with 'sample[index]'
+                sample[length] = sample[index];
+                sample[index] = temporary;
+            }
+
+            return sample;
+        }
+
+        // # shuffle
+        //
+        // A [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+        // is a fast way to create a random permutation of a finite set.
+        function shuffle(sample, randomSource) {
+            // slice the original array so that it is not modified
+            sample = sample.slice();
+
+            // and then shuffle that shallow-copied array, in place
+            return shuffle_in_place(sample.slice(), randomSource);
+        }
+
+        // # sample
+        //
+        // Create a [simple random sample](http://en.wikipedia.org/wiki/Simple_random_sample)
+        // from a given array of 'n' elements.
+        function sample(array, n, randomSource) {
+            // shuffle the original array using a fisher-yates shuffle
+            var shuffled = shuffle(array, randomSource);
+
+            // and then return a subset of it - the first 'n' elements.
+            return shuffled.slice(0, n);
+        }
+
+        // # quantile
+        //
+        // This is the internal implementation of quantiles: when you know
+        // that the order is sorted, you don't need to re-sort it, and the computations
+        // are much faster.
+        function quantile_sorted(sample, p) {
+            var idx = (sample.length) * p;
+            if (p < 0 || p > 1) {
+                return null;
+            } else if (p === 1) {
+                // If p is 1, directly return the last element
+                return sample[sample.length - 1];
+            } else if (p === 0) {
+                // If p is 0, directly return the first element
+                return sample[0];
+            } else if (idx % 1 !== 0) {
+                // If p is not integer, return the next element in array
+                return sample[Math.ceil(idx) - 1];
+            } else if (sample.length % 2 === 0) {
+                // If the list has even-length, we'll take the average of this number
+                // and the next value, if there is one
+                return (sample[idx - 1] + sample[idx]) / 2;
+            } else {
+                // Finally, in the simple case of an integer value
+                // with an odd-length list, return the sample value at the index.
+                return sample[idx];
+            }
+        }
+
+        // # quantile
+        //
+        // This is a population quantile, since we assume to know the entire
+        // dataset in this library. Thus I'm trying to follow the
+        // [Quantiles of a Population](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population)
+        // algorithm from wikipedia.
+        //
+        // Sample is a one-dimensional array of numbers,
+        // and p is either a decimal number from 0 to 1 or an array of decimal
+        // numbers from 0 to 1.
+        // In terms of a k/q quantile, p = k/q - it's just dealing with fractions or dealing
+        // with decimal values.
+        // When p is an array, the result of the function is also an array containing the appropriate
+        // quantiles in input order
+        function quantile(sample, p) {
+
+            // We can't derive quantiles from an empty list
+            if (sample.length === 0) return null;
+
+            // Sort a copy of the array. We'll need a sorted array to index
+            // the values in sorted order.
+            var sorted = sample.slice().sort(function(a, b) {
+                return a - b;
+            });
+
+            if (p.length) {
+                // Initialize the result array
+                var results = [];
+                // For each requested quantile
+                for (var i = 0; i < p.length; i++) {
+                    results[i] = quantile_sorted(sorted, p[i]);
+                }
+                return results;
+            } else {
+                return quantile_sorted(sorted, p);
+            }
+        }
+
+        // # [Interquartile range](http://en.wikipedia.org/wiki/Interquartile_range)
+        //
+        // A measure of statistical dispersion, or how scattered, spread, or
+        // concentrated a distribution is. It's computed as the difference between
+        // the third quartile and first quartile.
+        function iqr(sample) {
+            // We can't derive quantiles from an empty list
+            if (sample.length === 0) return null;
+
+            // Interquartile range is the span between the upper quartile,
+            // at '0.75', and lower quartile, '0.25'
+            return quantile(sample, 0.75) - quantile(sample, 0.25);
+        }
+
+        // # [Median Absolute Deviation](http://en.wikipedia.org/wiki/Median_absolute_deviation)
+        //
+        // The Median Absolute Deviation (MAD) is a robust measure of statistical
+        // dispersion. It is more resilient to outliers than the standard deviation.
+        function mad(x) {
+            // The mad of nothing is null
+            if (!x || x.length === 0) return null;
+
+            var median_value = median(x),
+                median_absolute_deviations = [];
+
+            // Make a list of absolute deviations from the median
+            for (var i = 0; i < x.length; i++) {
+                median_absolute_deviations.push(Math.abs(x[i] - median_value));
+            }
+
+            // Find the median value of that list
+            return median(median_absolute_deviations);
+        }
+
+        // ## Compute Matrices for Jenks
+        //
+        // Compute the matrices required for Jenks breaks. These matrices
+        // can be used for any classing of data with 'classes <= n_classes'
+        function jenksMatrices(data, n_classes) {
+
+            // in the original implementation, these matrices are referred to
+            // as 'LC' and 'OP'
+            //
+            // * lower_class_limits (LC): optimal lower class limits
+            // * variance_combinations (OP): optimal variance combinations for all classes
+            var lower_class_limits = [],
+                variance_combinations = [],
+                // loop counters
+                i, j,
+                // the variance, as computed at each step in the calculation
+                variance = 0;
+
+            // Initialize and fill each matrix with zeroes
+            for (i = 0; i < data.length + 1; i++) {
+                var tmp1 = [],
+                    tmp2 = [];
+                // despite these arrays having the same values, we need
+                // to keep them separate so that changing one does not change
+                // the other
+                for (j = 0; j < n_classes + 1; j++) {
+                    tmp1.push(0);
+                    tmp2.push(0);
+                }
+                lower_class_limits.push(tmp1);
+                variance_combinations.push(tmp2);
+            }
+
+            for (i = 1; i < n_classes + 1; i++) {
+                lower_class_limits[1][i] = 1;
+                variance_combinations[1][i] = 0;
+                // in the original implementation, 9999999 is used but
+                // since Javascript has 'Infinity', we use that.
+                for (j = 2; j < data.length + 1; j++) {
+                    variance_combinations[j][i] = Infinity;
+                }
+            }
+
+            for (var l = 2; l < data.length + 1; l++) {
+
+                // 'SZ' originally. this is the sum of the values seen thus
+                // far when calculating variance.
+                var sum = 0,
+                    // 'ZSQ' originally. the sum of squares of values seen
+                    // thus far
+                    sum_squares = 0,
+                    // 'WT' originally. This is the number of
+                    w = 0,
+                    // 'IV' originally
+                    i4 = 0;
+
+                // in several instances, you could say 'Math.pow(x, 2)'
+                // instead of 'x * x', but this is slower in some browsers
+                // introduces an unnecessary concept.
+                for (var m = 1; m < l + 1; m++) {
+
+                    // 'III' originally
+                    var lower_class_limit = l - m + 1,
+                        val = data[lower_class_limit - 1];
+
+                    // here we're estimating variance for each potential classing
+                    // of the data, for each potential number of classes. 'w'
+                    // is the number of data points considered so far.
+                    w++;
+
+                    // increase the current sum and sum-of-squares
+                    sum += val;
+                    sum_squares += val * val;
+
+                    // the variance at this point in the sequence is the difference
+                    // between the sum of squares and the total x 2, over the number
+                    // of samples.
+                    variance = sum_squares - (sum * sum) / w;
+
+                    i4 = lower_class_limit - 1;
+
+                    if (i4 !== 0) {
+                        for (j = 2; j < n_classes + 1; j++) {
+                            // if adding this element to an existing class
+                            // will increase its variance beyond the limit, break
+                            // the class at this point, setting the 'lower_class_limit'
+                            // at this point.
+                            if (variance_combinations[l][j] >=
+                                (variance + variance_combinations[i4][j - 1])) {
+                                lower_class_limits[l][j] = lower_class_limit;
+                                variance_combinations[l][j] = variance +
+                                    variance_combinations[i4][j - 1];
+                            }
+                        }
+                    }
+                }
+
+                lower_class_limits[l][1] = 1;
+                variance_combinations[l][1] = variance;
+            }
+
+            // return the two matrices. for just providing breaks, only
+            // 'lower_class_limits' is needed, but variances can be useful to
+            // evaluate goodness of fit.
+            return {
+                lower_class_limits: lower_class_limits,
+                variance_combinations: variance_combinations
+            };
+        }
+
+        // ## Pull Breaks Values for Jenks
+        //
+        // the second part of the jenks recipe: take the calculated matrices
+        // and derive an array of n breaks.
+        function jenksBreaks(data, lower_class_limits, n_classes) {
+
+            var k = data.length,
+                kclass = [],
+                countNum = n_classes;
+
+            // the calculation of classes will never include the upper
+            // bound, so we need to explicitly set it
+            kclass[n_classes] = data[data.length - 1];
+
+            // the lower_class_limits matrix is used as indices into itself
+            // here: the 'k' variable is reused in each iteration.
+            while (countNum > 0) {
+                kclass[countNum - 1] = data[lower_class_limits[k][countNum] - 1];
+                k = lower_class_limits[k][countNum] - 1;
+                countNum--;
+            }
+
+            return kclass;
+        }
+
+        // # [Jenks natural breaks optimization](http://en.wikipedia.org/wiki/Jenks_natural_breaks_optimization)
+        //
+        // Implementations: [1](http://danieljlewis.org/files/2010/06/Jenks.pdf) (python),
+        // [2](https://github.com/vvoovv/djeo-jenks/blob/master/main.js) (buggy),
+        // [3](https://github.com/simogeo/geostats/blob/master/lib/geostats.js#L407) (works)
+        //
+        // Depends on 'jenksBreaks()' and 'jenksMatrices()'
+        function jenks(data, n_classes) {
+
+            if (n_classes > data.length) return null;
+
+            // sort data in numerical order, since this is expected
+            // by the matrices function
+            data = data.slice().sort(function(a, b) {
+                return a - b;
+            });
+
+            // get our basic matrices
+            var matrices = jenksMatrices(data, n_classes),
+                // we only need lower class limits here
+                lower_class_limits = matrices.lower_class_limits;
+
+            // extract n_classes out of the computed matrices
+            return jenksBreaks(data, lower_class_limits, n_classes);
+
+        }
+
+        // # [Skewness](http://en.wikipedia.org/wiki/Skewness)
+        //
+        // A measure of the extent to which a probability distribution of a
+        // real-valued random variable 'leans' to one side of the mean.
+        // The skewness value can be positive or negative, or even undefined.
+        //
+        // Implementation is based on the adjusted Fisher-Pearson standardized
+        // moment coefficient, which is the version found in Excel and several
+        // statistical packages including Minitab, SAS and SPSS.
+        //
+        // Depends on 'sum_nth_power_deviations()' and 'sample_standard_deviation'
+        function sample_skewness(x) {
+            // The skewness of less than three arguments is null
+            if (x.length < 3) return null;
+
+            var n = x.length,
+                cubed_s = Math.pow(sample_standard_deviation(x), 3),
+                sum_cubed_deviations = sum_nth_power_deviations(x, 3);
+
+            return n * sum_cubed_deviations / ((n - 1) * (n - 2) * cubed_s);
+        }
+
+        // # Standard Normal Table
+        // A standard normal table, also called the unit normal table or Z table,
+        // is a mathematical table for the values of Φ (phi), which are the values of
+        // the cumulative distribution function of the normal distribution.
+        // It is used to find the probability that a statistic is observed below,
+        // above, or between values on the standard normal distribution, and by
+        // extension, any normal distribution.
+        //
+        // The probabilities are taken from http://en.wikipedia.org/wiki/Standard_normal_table
+        // The table used is the cumulative, and not cumulative from 0 to mean
+        // (even though the latter has 5 digits precision, instead of 4).
+        var standard_normal_table = [
+            /*  z      0.00    0.01    0.02    0.03    0.04    0.05    0.06    0.07    0.08    0.09 */
+            /* 0.0 */
+            0.5000, 0.5040, 0.5080, 0.5120, 0.5160, 0.5199, 0.5239, 0.5279, 0.5319, 0.5359,
+            /* 0.1 */
+            0.5398, 0.5438, 0.5478, 0.5517, 0.5557, 0.5596, 0.5636, 0.5675, 0.5714, 0.5753,
+            /* 0.2 */
+            0.5793, 0.5832, 0.5871, 0.5910, 0.5948, 0.5987, 0.6026, 0.6064, 0.6103, 0.6141,
+            /* 0.3 */
+            0.6179, 0.6217, 0.6255, 0.6293, 0.6331, 0.6368, 0.6406, 0.6443, 0.6480, 0.6517,
+            /* 0.4 */
+            0.6554, 0.6591, 0.6628, 0.6664, 0.6700, 0.6736, 0.6772, 0.6808, 0.6844, 0.6879,
+            /* 0.5 */
+            0.6915, 0.6950, 0.6985, 0.7019, 0.7054, 0.7088, 0.7123, 0.7157, 0.7190, 0.7224,
+            /* 0.6 */
+            0.7257, 0.7291, 0.7324, 0.7357, 0.7389, 0.7422, 0.7454, 0.7486, 0.7517, 0.7549,
+            /* 0.7 */
+            0.7580, 0.7611, 0.7642, 0.7673, 0.7704, 0.7734, 0.7764, 0.7794, 0.7823, 0.7852,
+            /* 0.8 */
+            0.7881, 0.7910, 0.7939, 0.7967, 0.7995, 0.8023, 0.8051, 0.8078, 0.8106, 0.8133,
+            /* 0.9 */
+            0.8159, 0.8186, 0.8212, 0.8238, 0.8264, 0.8289, 0.8315, 0.8340, 0.8365, 0.8389,
+            /* 1.0 */
+            0.8413, 0.8438, 0.8461, 0.8485, 0.8508, 0.8531, 0.8554, 0.8577, 0.8599, 0.8621,
+            /* 1.1 */
+            0.8643, 0.8665, 0.8686, 0.8708, 0.8729, 0.8749, 0.8770, 0.8790, 0.8810, 0.8830,
+            /* 1.2 */
+            0.8849, 0.8869, 0.8888, 0.8907, 0.8925, 0.8944, 0.8962, 0.8980, 0.8997, 0.9015,
+            /* 1.3 */
+            0.9032, 0.9049, 0.9066, 0.9082, 0.9099, 0.9115, 0.9131, 0.9147, 0.9162, 0.9177,
+            /* 1.4 */
+            0.9192, 0.9207, 0.9222, 0.9236, 0.9251, 0.9265, 0.9279, 0.9292, 0.9306, 0.9319,
+            /* 1.5 */
+            0.9332, 0.9345, 0.9357, 0.9370, 0.9382, 0.9394, 0.9406, 0.9418, 0.9429, 0.9441,
+            /* 1.6 */
+            0.9452, 0.9463, 0.9474, 0.9484, 0.9495, 0.9505, 0.9515, 0.9525, 0.9535, 0.9545,
+            /* 1.7 */
+            0.9554, 0.9564, 0.9573, 0.9582, 0.9591, 0.9599, 0.9608, 0.9616, 0.9625, 0.9633,
+            /* 1.8 */
+            0.9641, 0.9649, 0.9656, 0.9664, 0.9671, 0.9678, 0.9686, 0.9693, 0.9699, 0.9706,
+            /* 1.9 */
+            0.9713, 0.9719, 0.9726, 0.9732, 0.9738, 0.9744, 0.9750, 0.9756, 0.9761, 0.9767,
+            /* 2.0 */
+            0.9772, 0.9778, 0.9783, 0.9788, 0.9793, 0.9798, 0.9803, 0.9808, 0.9812, 0.9817,
+            /* 2.1 */
+            0.9821, 0.9826, 0.9830, 0.9834, 0.9838, 0.9842, 0.9846, 0.9850, 0.9854, 0.9857,
+            /* 2.2 */
+            0.9861, 0.9864, 0.9868, 0.9871, 0.9875, 0.9878, 0.9881, 0.9884, 0.9887, 0.9890,
+            /* 2.3 */
+            0.9893, 0.9896, 0.9898, 0.9901, 0.9904, 0.9906, 0.9909, 0.9911, 0.9913, 0.9916,
+            /* 2.4 */
+            0.9918, 0.9920, 0.9922, 0.9925, 0.9927, 0.9929, 0.9931, 0.9932, 0.9934, 0.9936,
+            /* 2.5 */
+            0.9938, 0.9940, 0.9941, 0.9943, 0.9945, 0.9946, 0.9948, 0.9949, 0.9951, 0.9952,
+            /* 2.6 */
+            0.9953, 0.9955, 0.9956, 0.9957, 0.9959, 0.9960, 0.9961, 0.9962, 0.9963, 0.9964,
+            /* 2.7 */
+            0.9965, 0.9966, 0.9967, 0.9968, 0.9969, 0.9970, 0.9971, 0.9972, 0.9973, 0.9974,
+            /* 2.8 */
+            0.9974, 0.9975, 0.9976, 0.9977, 0.9977, 0.9978, 0.9979, 0.9979, 0.9980, 0.9981,
+            /* 2.9 */
+            0.9981, 0.9982, 0.9982, 0.9983, 0.9984, 0.9984, 0.9985, 0.9985, 0.9986, 0.9986,
+            /* 3.0 */
+            0.9987, 0.9987, 0.9987, 0.9988, 0.9988, 0.9989, 0.9989, 0.9989, 0.9990, 0.9990
+        ];
+
+        // # [Gaussian error function](http://en.wikipedia.org/wiki/Error_function)
+        //
+        // The error_function(x/(sd * Math.sqrt(2))) is the probability that a value in a
+        // normal distribution with standard deviation sd is within x of the mean.
+        //
+        // This function returns a numerical approximation to the exact value.
+        function error_function(x) {
+            var t = 1 / (1 + 0.5 * Math.abs(x));
+            var tau = t * Math.exp(-Math.pow(x, 2) -
+                1.26551223 +
+                1.00002368 * t +
+                0.37409196 * Math.pow(t, 2) +
+                0.09678418 * Math.pow(t, 3) -
+                0.18628806 * Math.pow(t, 4) +
+                0.27886807 * Math.pow(t, 5) -
+                1.13520398 * Math.pow(t, 6) +
+                1.48851587 * Math.pow(t, 7) -
+                0.82215223 * Math.pow(t, 8) +
+                0.17087277 * Math.pow(t, 9));
+            if (x >= 0) {
+                return 1 - tau;
+            } else {
+                return tau - 1;
+            }
+        }
+
+        // # [Cumulative Standard Normal Probability](http://en.wikipedia.org/wiki/Standard_normal_table)
+        //
+        // Since probability tables cannot be
+        // printed for every normal distribution, as there are an infinite variety
+        // of normal distributions, it is common practice to convert a normal to a
+        // standard normal and then use the standard normal table to find probabilities.
+        //
+        // You can use .5 + .5 * error_function(x / Math.sqrt(2)) to calculate the probability
+        // instead of looking it up in a table.
+        function cumulative_std_normal_probability(z) {
+
+            // Calculate the position of this value.
+            var absZ = Math.abs(z),
+                // Each row begins with a different
+                // significant digit: 0.5, 0.6, 0.7, and so on. Each value in the table
+                // corresponds to a range of 0.01 in the input values, so the value is
+                // multiplied by 100.
+                index = Math.min(Math.round(absZ * 100), standard_normal_table.length - 1);
+
+            // The index we calculate must be in the table as a positive value,
+            // but we still pay attention to whether the input is positive
+            // or negative, and flip the output value as a last step.
+            if (z >= 0) {
+                return standard_normal_table[index];
+            } else {
+                // due to floating-point arithmetic, values in the table with
+                // 4 significant figures can nevertheless end up as repeating
+                // fractions when they're computed here.
+                return +(1 - standard_normal_table[index]).toFixed(4);
+            }
+        }
+
+        // # [Z-Score, or Standard Score](http://en.wikipedia.org/wiki/Standard_score)
+        //
+        // The standard score is the number of standard deviations an observation
+        // or datum is above or below the mean. Thus, a positive standard score
+        // represents a datum above the mean, while a negative standard score
+        // represents a datum below the mean. It is a dimensionless quantity
+        // obtained by subtracting the population mean from an individual raw
+        // score and then dividing the difference by the population standard
+        // deviation.
+        //
+        // The z-score is only defined if one knows the population parameters;
+        // if one only has a sample set, then the analogous computation with
+        // sample mean and sample standard deviation yields the
+        // Student's t-statistic.
+        function z_score(x, mean, standard_deviation) {
+            return (x - mean) / standard_deviation;
+        }
+
+        // We use 'ε', epsilon, as a stopping criterion when we want to iterate
+        // until we're 'close enough'.
+        var epsilon = 0.0001;
+
+        // # [Factorial](https://en.wikipedia.org/wiki/Factorial)
+        //
+        // A factorial, usually written n!, is the product of all positive
+        // integers less than or equal to n. Often factorial is implemented
+        // recursively, but this iterative approach is significantly faster
+        // and simpler.
+        function factorial(n) {
+
+            // factorial is mathematically undefined for negative numbers
+            if (n < 0) {
+                return null;
+            }
+
+            // typically you'll expand the factorial function going down, like
+            // 5! = 5 * 4 * 3 * 2 * 1. This is going in the opposite direction,
+            // counting from 2 up to the number in question, and since anything
+            // multiplied by 1 is itself, the loop only needs to start at 2.
+            var accumulator = 1;
+            for (var i = 2; i <= n; i++) {
+                // for each number up to and including the number 'n', multiply
+                // the accumulator my that number.
+                accumulator *= i;
+            }
+            return accumulator;
+        }
+
+        // # Binomial Distribution
+        //
+        // The [Binomial Distribution](http://en.wikipedia.org/wiki/Binomial_distribution) is the discrete probability
+        // distribution of the number of successes in a sequence of n independent yes/no experiments, each of which yields
+        // success with probability 'probability'. Such a success/failure experiment is also called a Bernoulli experiment or
+        // Bernoulli trial; when trials = 1, the Binomial Distribution is a Bernoulli Distribution.
+        function binomial_distribution(trials, probability) {
+            // Check that 'p' is a valid probability (0 ≤ p ≤ 1),
+            // that 'n' is an integer, strictly positive.
+            if (probability < 0 || probability > 1 ||
+                trials <= 0 || trials % 1 !== 0) {
+                return null;
+            }
+
+            // a [probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function)
+            function probability_mass(x, trials, probability) {
+                return factorial(trials) /
+                    (factorial(x) * factorial(trials - x)) *
+                    (Math.pow(probability, x) * Math.pow(1 - probability, trials - x));
+            }
+
+            // We initialize 'x', the random variable, and 'accumulator', an accumulator
+            // for the cumulative distribution function to 0. 'distribution_functions'
+            // is the object we'll return with the 'probability_of_x' and the
+            // 'cumulative_probability_of_x', as well as the calculated mean &
+            // variance. We iterate until the 'cumulative_probability_of_x' is
+            // within 'epsilon' of 1.0.
+            var x = 0,
+                cumulative_probability = 0,
+                cells = {};
+
+            // This algorithm iterates through each potential outcome,
+            // until the 'cumulative_probability' is very close to 1, at
+            // which point we've defined the vast majority of outcomes
+            do {
+                cells[x] = probability_mass(x, trials, probability);
+                cumulative_probability += cells[x];
+                x++;
+                // when the cumulative_probability is nearly 1, we've calculated
+                // the useful range of this distribution
+            } while (cumulative_probability < 1 - epsilon);
+
+            return cells;
+        }
+
+        // # Bernoulli Distribution
+        //
+        // The [Bernoulli distribution](http://en.wikipedia.org/wiki/Bernoulli_distribution)
+        // is the probability discrete
+        // distribution of a random variable which takes value 1 with success
+        // probability 'p' and value 0 with failure
+        // probability 'q' = 1 - 'p'. It can be used, for example, to represent the
+        // toss of a coin, where '1' is defined to mean 'heads' and '0' is defined
+        // to mean 'tails' (or vice versa). It is
+        // a special case of a Binomial Distribution
+        // where 'n' = 1.
+        function bernoulli_distribution(p) {
+            // Check that 'p' is a valid probability (0 ≤ p ≤ 1)
+            if (p < 0 || p > 1) {
+                return null;
+            }
+
+            return binomial_distribution(1, p);
+        }
+
+        // # Poisson Distribution
+        //
+        // The [Poisson Distribution](http://en.wikipedia.org/wiki/Poisson_distribution)
+        // is a discrete probability distribution that expresses the probability
+        // of a given number of events occurring in a fixed interval of time
+        // and/or space if these events occur with a known average rate and
+        // independently of the time since the last event.
+        //
+        // The Poisson Distribution is characterized by the strictly positive
+        // mean arrival or occurrence rate, 'λ'.
+        function poisson_distribution(lambda) {
+            // Check that lambda is strictly positive
+            if (lambda <= 0) {
+                return null;
+            }
+
+            // our current place in the distribution
+            var x = 0,
+                // and we keep track of the current cumulative probability, in
+                // order to know when to stop calculating chances.
+                cumulative_probability = 0,
+                // the calculated cells to be returned
+                cells = {};
+
+            // a [probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function)
+            function probability_mass(x, lambda) {
+                return (Math.pow(Math.E, -lambda) * Math.pow(lambda, x)) /
+                    factorial(x);
+            }
+
+            // This algorithm iterates through each potential outcome,
+            // until the 'cumulative_probability' is very close to 1, at
+            // which point we've defined the vast majority of outcomes
+            do {
+                cells[x] = probability_mass(x, lambda);
+                cumulative_probability += cells[x];
+                x++;
+                // when the cumulative_probability is nearly 1, we've calculated
+                // the useful range of this distribution
+            } while (cumulative_probability < 1 - epsilon);
+
+            return cells;
+        }
+
+        // # Percentage Points of the χ2 (Chi-Squared) Distribution
+        // The [χ2 (Chi-Squared) Distribution](http://en.wikipedia.org/wiki/Chi-squared_distribution) is used in the common
+        // chi-squared tests for goodness of fit of an observed distribution to a theoretical one, the independence of two
+        // criteria of classification of qualitative data, and in confidence interval estimation for a population standard
+        // deviation of a normal distribution from a sample standard deviation.
+        //
+        // Values from Appendix 1, Table III of William W. Hines & Douglas C. Montgomery, 'Probability and Statistics in
+        // Engineering and Management Science', Wiley (1980).
+        var chi_squared_distribution_table = {
+            1: {
+                0.995: 0.00,
+                0.99: 0.00,
+                0.975: 0.00,
+                0.95: 0.00,
+                0.9: 0.02,
+                0.5: 0.45,
+                0.1: 2.71,
+                0.05: 3.84,
+                0.025: 5.02,
+                0.01: 6.63,
+                0.005: 7.88
+            },
+            2: {
+                0.995: 0.01,
+                0.99: 0.02,
+                0.975: 0.05,
+                0.95: 0.10,
+                0.9: 0.21,
+                0.5: 1.39,
+                0.1: 4.61,
+                0.05: 5.99,
+                0.025: 7.38,
+                0.01: 9.21,
+                0.005: 10.60
+            },
+            3: {
+                0.995: 0.07,
+                0.99: 0.11,
+                0.975: 0.22,
+                0.95: 0.35,
+                0.9: 0.58,
+                0.5: 2.37,
+                0.1: 6.25,
+                0.05: 7.81,
+                0.025: 9.35,
+                0.01: 11.34,
+                0.005: 12.84
+            },
+            4: {
+                0.995: 0.21,
+                0.99: 0.30,
+                0.975: 0.48,
+                0.95: 0.71,
+                0.9: 1.06,
+                0.5: 3.36,
+                0.1: 7.78,
+                0.05: 9.49,
+                0.025: 11.14,
+                0.01: 13.28,
+                0.005: 14.86
+            },
+            5: {
+                0.995: 0.41,
+                0.99: 0.55,
+                0.975: 0.83,
+                0.95: 1.15,
+                0.9: 1.61,
+                0.5: 4.35,
+                0.1: 9.24,
+                0.05: 11.07,
+                0.025: 12.83,
+                0.01: 15.09,
+                0.005: 16.75
+            },
+            6: {
+                0.995: 0.68,
+                0.99: 0.87,
+                0.975: 1.24,
+                0.95: 1.64,
+                0.9: 2.20,
+                0.5: 5.35,
+                0.1: 10.65,
+                0.05: 12.59,
+                0.025: 14.45,
+                0.01: 16.81,
+                0.005: 18.55
+            },
+            7: {
+                0.995: 0.99,
+                0.99: 1.25,
+                0.975: 1.69,
+                0.95: 2.17,
+                0.9: 2.83,
+                0.5: 6.35,
+                0.1: 12.02,
+                0.05: 14.07,
+                0.025: 16.01,
+                0.01: 18.48,
+                0.005: 20.28
+            },
+            8: {
+                0.995: 1.34,
+                0.99: 1.65,
+                0.975: 2.18,
+                0.95: 2.73,
+                0.9: 3.49,
+                0.5: 7.34,
+                0.1: 13.36,
+                0.05: 15.51,
+                0.025: 17.53,
+                0.01: 20.09,
+                0.005: 21.96
+            },
+            9: {
+                0.995: 1.73,
+                0.99: 2.09,
+                0.975: 2.70,
+                0.95: 3.33,
+                0.9: 4.17,
+                0.5: 8.34,
+                0.1: 14.68,
+                0.05: 16.92,
+                0.025: 19.02,
+                0.01: 21.67,
+                0.005: 23.59
+            },
+            10: {
+                0.995: 2.16,
+                0.99: 2.56,
+                0.975: 3.25,
+                0.95: 3.94,
+                0.9: 4.87,
+                0.5: 9.34,
+                0.1: 15.99,
+                0.05: 18.31,
+                0.025: 20.48,
+                0.01: 23.21,
+                0.005: 25.19
+            },
+            11: {
+                0.995: 2.60,
+                0.99: 3.05,
+                0.975: 3.82,
+                0.95: 4.57,
+                0.9: 5.58,
+                0.5: 10.34,
+                0.1: 17.28,
+                0.05: 19.68,
+                0.025: 21.92,
+                0.01: 24.72,
+                0.005: 26.76
+            },
+            12: {
+                0.995: 3.07,
+                0.99: 3.57,
+                0.975: 4.40,
+                0.95: 5.23,
+                0.9: 6.30,
+                0.5: 11.34,
+                0.1: 18.55,
+                0.05: 21.03,
+                0.025: 23.34,
+                0.01: 26.22,
+                0.005: 28.30
+            },
+            13: {
+                0.995: 3.57,
+                0.99: 4.11,
+                0.975: 5.01,
+                0.95: 5.89,
+                0.9: 7.04,
+                0.5: 12.34,
+                0.1: 19.81,
+                0.05: 22.36,
+                0.025: 24.74,
+                0.01: 27.69,
+                0.005: 29.82
+            },
+            14: {
+                0.995: 4.07,
+                0.99: 4.66,
+                0.975: 5.63,
+                0.95: 6.57,
+                0.9: 7.79,
+                0.5: 13.34,
+                0.1: 21.06,
+                0.05: 23.68,
+                0.025: 26.12,
+                0.01: 29.14,
+                0.005: 31.32
+            },
+            15: {
+                0.995: 4.60,
+                0.99: 5.23,
+                0.975: 6.27,
+                0.95: 7.26,
+                0.9: 8.55,
+                0.5: 14.34,
+                0.1: 22.31,
+                0.05: 25.00,
+                0.025: 27.49,
+                0.01: 30.58,
+                0.005: 32.80
+            },
+            16: {
+                0.995: 5.14,
+                0.99: 5.81,
+                0.975: 6.91,
+                0.95: 7.96,
+                0.9: 9.31,
+                0.5: 15.34,
+                0.1: 23.54,
+                0.05: 26.30,
+                0.025: 28.85,
+                0.01: 32.00,
+                0.005: 34.27
+            },
+            17: {
+                0.995: 5.70,
+                0.99: 6.41,
+                0.975: 7.56,
+                0.95: 8.67,
+                0.9: 10.09,
+                0.5: 16.34,
+                0.1: 24.77,
+                0.05: 27.59,
+                0.025: 30.19,
+                0.01: 33.41,
+                0.005: 35.72
+            },
+            18: {
+                0.995: 6.26,
+                0.99: 7.01,
+                0.975: 8.23,
+                0.95: 9.39,
+                0.9: 10.87,
+                0.5: 17.34,
+                0.1: 25.99,
+                0.05: 28.87,
+                0.025: 31.53,
+                0.01: 34.81,
+                0.005: 37.16
+            },
+            19: {
+                0.995: 6.84,
+                0.99: 7.63,
+                0.975: 8.91,
+                0.95: 10.12,
+                0.9: 11.65,
+                0.5: 18.34,
+                0.1: 27.20,
+                0.05: 30.14,
+                0.025: 32.85,
+                0.01: 36.19,
+                0.005: 38.58
+            },
+            20: {
+                0.995: 7.43,
+                0.99: 8.26,
+                0.975: 9.59,
+                0.95: 10.85,
+                0.9: 12.44,
+                0.5: 19.34,
+                0.1: 28.41,
+                0.05: 31.41,
+                0.025: 34.17,
+                0.01: 37.57,
+                0.005: 40.00
+            },
+            21: {
+                0.995: 8.03,
+                0.99: 8.90,
+                0.975: 10.28,
+                0.95: 11.59,
+                0.9: 13.24,
+                0.5: 20.34,
+                0.1: 29.62,
+                0.05: 32.67,
+                0.025: 35.48,
+                0.01: 38.93,
+                0.005: 41.40
+            },
+            22: {
+                0.995: 8.64,
+                0.99: 9.54,
+                0.975: 10.98,
+                0.95: 12.34,
+                0.9: 14.04,
+                0.5: 21.34,
+                0.1: 30.81,
+                0.05: 33.92,
+                0.025: 36.78,
+                0.01: 40.29,
+                0.005: 42.80
+            },
+            23: {
+                0.995: 9.26,
+                0.99: 10.20,
+                0.975: 11.69,
+                0.95: 13.09,
+                0.9: 14.85,
+                0.5: 22.34,
+                0.1: 32.01,
+                0.05: 35.17,
+                0.025: 38.08,
+                0.01: 41.64,
+                0.005: 44.18
+            },
+            24: {
+                0.995: 9.89,
+                0.99: 10.86,
+                0.975: 12.40,
+                0.95: 13.85,
+                0.9: 15.66,
+                0.5: 23.34,
+                0.1: 33.20,
+                0.05: 36.42,
+                0.025: 39.36,
+                0.01: 42.98,
+                0.005: 45.56
+            },
+            25: {
+                0.995: 10.52,
+                0.99: 11.52,
+                0.975: 13.12,
+                0.95: 14.61,
+                0.9: 16.47,
+                0.5: 24.34,
+                0.1: 34.28,
+                0.05: 37.65,
+                0.025: 40.65,
+                0.01: 44.31,
+                0.005: 46.93
+            },
+            26: {
+                0.995: 11.16,
+                0.99: 12.20,
+                0.975: 13.84,
+                0.95: 15.38,
+                0.9: 17.29,
+                0.5: 25.34,
+                0.1: 35.56,
+                0.05: 38.89,
+                0.025: 41.92,
+                0.01: 45.64,
+                0.005: 48.29
+            },
+            27: {
+                0.995: 11.81,
+                0.99: 12.88,
+                0.975: 14.57,
+                0.95: 16.15,
+                0.9: 18.11,
+                0.5: 26.34,
+                0.1: 36.74,
+                0.05: 40.11,
+                0.025: 43.19,
+                0.01: 46.96,
+                0.005: 49.65
+            },
+            28: {
+                0.995: 12.46,
+                0.99: 13.57,
+                0.975: 15.31,
+                0.95: 16.93,
+                0.9: 18.94,
+                0.5: 27.34,
+                0.1: 37.92,
+                0.05: 41.34,
+                0.025: 44.46,
+                0.01: 48.28,
+                0.005: 50.99
+            },
+            29: {
+                0.995: 13.12,
+                0.99: 14.26,
+                0.975: 16.05,
+                0.95: 17.71,
+                0.9: 19.77,
+                0.5: 28.34,
+                0.1: 39.09,
+                0.05: 42.56,
+                0.025: 45.72,
+                0.01: 49.59,
+                0.005: 52.34
+            },
+            30: {
+                0.995: 13.79,
+                0.99: 14.95,
+                0.975: 16.79,
+                0.95: 18.49,
+                0.9: 20.60,
+                0.5: 29.34,
+                0.1: 40.26,
+                0.05: 43.77,
+                0.025: 46.98,
+                0.01: 50.89,
+                0.005: 53.67
+            },
+            40: {
+                0.995: 20.71,
+                0.99: 22.16,
+                0.975: 24.43,
+                0.95: 26.51,
+                0.9: 29.05,
+                0.5: 39.34,
+                0.1: 51.81,
+                0.05: 55.76,
+                0.025: 59.34,
+                0.01: 63.69,
+                0.005: 66.77
+            },
+            50: {
+                0.995: 27.99,
+                0.99: 29.71,
+                0.975: 32.36,
+                0.95: 34.76,
+                0.9: 37.69,
+                0.5: 49.33,
+                0.1: 63.17,
+                0.05: 67.50,
+                0.025: 71.42,
+                0.01: 76.15,
+                0.005: 79.49
+            },
+            60: {
+                0.995: 35.53,
+                0.99: 37.48,
+                0.975: 40.48,
+                0.95: 43.19,
+                0.9: 46.46,
+                0.5: 59.33,
+                0.1: 74.40,
+                0.05: 79.08,
+                0.025: 83.30,
+                0.01: 88.38,
+                0.005: 91.95
+            },
+            70: {
+                0.995: 43.28,
+                0.99: 45.44,
+                0.975: 48.76,
+                0.95: 51.74,
+                0.9: 55.33,
+                0.5: 69.33,
+                0.1: 85.53,
+                0.05: 90.53,
+                0.025: 95.02,
+                0.01: 100.42,
+                0.005: 104.22
+            },
+            80: {
+                0.995: 51.17,
+                0.99: 53.54,
+                0.975: 57.15,
+                0.95: 60.39,
+                0.9: 64.28,
+                0.5: 79.33,
+                0.1: 96.58,
+                0.05: 101.88,
+                0.025: 106.63,
+                0.01: 112.33,
+                0.005: 116.32
+            },
+            90: {
+                0.995: 59.20,
+                0.99: 61.75,
+                0.975: 65.65,
+                0.95: 69.13,
+                0.9: 73.29,
+                0.5: 89.33,
+                0.1: 107.57,
+                0.05: 113.14,
+                0.025: 118.14,
+                0.01: 124.12,
+                0.005: 128.30
+            },
+            100: {
+                0.995: 67.33,
+                0.99: 70.06,
+                0.975: 74.22,
+                0.95: 77.93,
+                0.9: 82.36,
+                0.5: 99.33,
+                0.1: 118.50,
+                0.05: 124.34,
+                0.025: 129.56,
+                0.01: 135.81,
+                0.005: 140.17
+            }
+        };
+
+        // # χ2 (Chi-Squared) Goodness-of-Fit Test
+        //
+        // The [χ2 (Chi-Squared) Goodness-of-Fit Test](http://en.wikipedia.org/wiki/Goodness_of_fit#Pearson.27s_chi-squared_test)
+        // uses a measure of goodness of fit which is the sum of differences between observed and expected outcome frequencies
+        // (that is, counts of observations), each squared and divided by the number of observations expected given the
+        // hypothesized distribution. The resulting χ2 statistic, 'chi_squared', can be compared to the chi-squared distribution
+        // to determine the goodness of fit. In order to determine the degrees of freedom of the chi-squared distribution, one
+        // takes the total number of observed frequencies and subtracts the number of estimated parameters. The test statistic
+        // follows, approximately, a chi-square distribution with (k − c) degrees of freedom where 'k' is the number of non-empty
+        // cells and 'c' is the number of estimated parameters for the distribution.
+        function chi_squared_goodness_of_fit(data, distribution_type, significance) {
+            // Estimate from the sample data, a weighted mean.
+            var input_mean = mean(data),
+                // Calculated value of the χ2 statistic.
+                chi_squared = 0,
+                // Degrees of freedom, calculated as (number of class intervals -
+                // number of hypothesized distribution parameters estimated - 1)
+                degrees_of_freedom,
+                // Number of hypothesized distribution parameters estimated, expected to be supplied in the distribution test.
+                // Lose one degree of freedom for estimating 'lambda' from the sample data.
+                c = 1,
+                // The hypothesized distribution.
+                // Generate the hypothesized distribution.
+                hypothesized_distribution = distribution_type(input_mean),
+                observed_frequencies = [],
+                expected_frequencies = [],
+                k;
+
+            // Create an array holding a histogram from the sample data, of
+            // the form '{ value: numberOfOcurrences }'
+            for (var i = 0; i < data.length; i++) {
+                if (observed_frequencies[data[i]] === undefined) {
+                    observed_frequencies[data[i]] = 0;
+                }
+                observed_frequencies[data[i]]++;
+            }
+
+            // The histogram we created might be sparse - there might be gaps
+            // between values. So we iterate through the histogram, making
+            // sure that instead of undefined, gaps have 0 values.
+            for (i = 0; i < observed_frequencies.length; i++) {
+                if (observed_frequencies[i] === undefined) {
+                    observed_frequencies[i] = 0;
+                }
+            }
+
+            // Create an array holding a histogram of expected data given the
+            // sample size and hypothesized distribution.
+            for (k in hypothesized_distribution) {
+                if (k in observed_frequencies) {
+                    expected_frequencies[k] = hypothesized_distribution[k] * data.length;
+                }
+            }
+
+            // Working backward through the expected frequencies, collapse classes
+            // if less than three observations are expected for a class.
+            // This transformation is applied to the observed frequencies as well.
+            for (k = expected_frequencies.length - 1; k >= 0; k--) {
+                if (expected_frequencies[k] < 3) {
+                    expected_frequencies[k - 1] += expected_frequencies[k];
+                    expected_frequencies.pop();
+
+                    observed_frequencies[k - 1] += observed_frequencies[k];
+                    observed_frequencies.pop();
+                }
+            }
+
+            // Iterate through the squared differences between observed & expected
+            // frequencies, accumulating the 'chi_squared' statistic.
+            for (k = 0; k < observed_frequencies.length; k++) {
+                chi_squared += Math.pow(
+                        observed_frequencies[k] - expected_frequencies[k], 2) /
+                    expected_frequencies[k];
+            }
+
+            // Calculate degrees of freedom for this test and look it up in the
+            // 'chi_squared_distribution_table' in order to
+            // accept or reject the goodness-of-fit of the hypothesized distribution.
+            degrees_of_freedom = observed_frequencies.length - c - 1;
+            return chi_squared_distribution_table[degrees_of_freedom][significance] < chi_squared;
+        }
+
+        // # Mixin
+        //
+        // Mixin simple_statistics to a single Array instance if provided
+        // or the Array native object if not. This is an optional
+        // feature that lets you treat simple_statistics as a native feature
+        // of Javascript.
+        function mixin(array) {
+            var support = !!(Object.defineProperty && Object.defineProperties);
+            // Coverage testing will never test this error.
+            /* istanbul ignore next */
+            if (!support) throw new Error('without defineProperty, simple-statistics cannot be mixed in');
+
+            // only methods which work on basic arrays in a single step
+            // are supported
+            var arrayMethods = ['median', 'standard_deviation', 'sum',
+                'sample_skewness',
+                'mean', 'min', 'max', 'quantile', 'geometric_mean',
+                'harmonic_mean', 'root_mean_square'
+            ];
+
+            // create a closure with a method name so that a reference
+            // like 'arrayMethods[i]' doesn't follow the loop increment
+            function wrap(method) {
+                return function() {
+                    // cast any arguments into an array, since they're
+                    // natively objects
+                    var args = Array.prototype.slice.apply(arguments);
+                    // make the first argument the array itself
+                    args.unshift(this);
+                    // return the result of the ss method
+                    return ss[method].apply(ss, args);
+                };
+            }
+
+            // select object to extend
+            var extending;
+            if (array) {
+                // create a shallow copy of the array so that our internal
+                // operations do not change it by reference
+                extending = array.slice();
+            } else {
+                extending = Array.prototype;
+            }
+
+            // for each array function, define a function that gets
+            // the array as the first argument.
+            // We use [defineProperty](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/defineProperty)
+            // because it allows these properties to be non-enumerable:
+            // 'for (var in x)' loops will not run into problems with this
+            // implementation.
+            for (var i = 0; i < arrayMethods.length; i++) {
+                Object.defineProperty(extending, arrayMethods[i], {
+                    value: wrap(arrayMethods[i]),
+                    configurable: true,
+                    enumerable: false,
+                    writable: true
+                });
+            }
+
+            return extending;
+        }
+
+        ss.linear_regression = linear_regression;
+        ss.standard_deviation = standard_deviation;
+        ss.r_squared = r_squared;
+        ss.median = median;
+        ss.mean = mean;
+        ss.mode = mode;
+        ss.min = min;
+        ss.max = max;
+        ss.sum = sum;
+        ss.quantile = quantile;
+        ss.quantile_sorted = quantile_sorted;
+        ss.iqr = iqr;
+        ss.mad = mad;
+
+        ss.chunk = chunk;
+        ss.shuffle = shuffle;
+        ss.shuffle_in_place = shuffle_in_place;
+
+        ss.sample = sample;
+
+        ss.sample_covariance = sample_covariance;
+        ss.sample_correlation = sample_correlation;
+        ss.sample_variance = sample_variance;
+        ss.sample_standard_deviation = sample_standard_deviation;
+        ss.sample_skewness = sample_skewness;
+
+        ss.geometric_mean = geometric_mean;
+        ss.harmonic_mean = harmonic_mean;
+        ss.root_mean_square = root_mean_square;
+        ss.variance = variance;
+        ss.t_test = t_test;
+        ss.t_test_two_sample = t_test_two_sample;
+
+        // jenks
+        ss.jenksMatrices = jenksMatrices;
+        ss.jenksBreaks = jenksBreaks;
+        ss.jenks = jenks;
+
+        ss.bayesian = bayesian;
+
+        // Distribution-related methods
+        ss.epsilon = epsilon; // We make ε available to the test suite.
+        ss.factorial = factorial;
+        ss.bernoulli_distribution = bernoulli_distribution;
+        ss.binomial_distribution = binomial_distribution;
+        ss.poisson_distribution = poisson_distribution;
+        ss.chi_squared_goodness_of_fit = chi_squared_goodness_of_fit;
+
+        // Normal distribution
+        ss.z_score = z_score;
+        ss.cumulative_std_normal_probability = cumulative_std_normal_probability;
+        ss.standard_normal_table = standard_normal_table;
+        ss.error_function = error_function;
+
+        // Alias this into its common name
+        ss.average = mean;
+        ss.interquartile_range = iqr;
+        ss.mixin = mixin;
+        ss.median_absolute_deviation = mad;
+        ss.rms = root_mean_square;
+        ss.erf = error_function;
+
+
+        return ss;
+
+
+    });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name optinomicDataModule.directive:chartTimeline
+ * @description
+ * # chartTimeline
+ */
+angular.module('optinomicDataModule')
+    .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
+        return {
+            //templateUrl: 'scripts/directives/charttimeline.html',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            //templateUrl: 'http://apps.optinomic.org/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+
+            restrict: 'E',
+            //replace: true,
+            //transclude: true,
+            scope: {
+                data: '=data',
+                vg: '=vg',
+                myOptions: '=options'
+            },
+            link: function postLink(scope, element, attrs) {
+
+                // -----------------------------------------------
+                // INIT
+                // -----------------------------------------------
+
+                Chart.defaults.global.colours = [
+                    '#3F51B5', // blue
+                    '#F44336', // red
+                    '#4CAF50', // green
+                    '#FFEB3B', // yellow
+                    '#9C27B0', // purple
+                    '#E91E63', // pink
+                    '#FF5722' // orange
+                ];
+
+                scope.chartOptions = {
+                    scaleShowGridLines: true,
+                    datasetFill: true,
+                    scaleShowLabels: true
+                };
+
+
+                function updateStuff() {
+
+                    //console.log('============= chartTimeline (START): ', scope, scope.data.length, scope.myOptions);
+
+                    scope.myOptions = initOptions(scope.myOptions);
+
+                    sortByKey(scope.data, scope.myOptions.dateField);
+                    setfocusField(scope.data);
+
+
+                    if (scope.myOptions.fillDates) {
+                        scope.result_data = fillDate(scope.data);
+                        setDateInfo(scope.result_data, scope.myOptions.firstWeekDay, scope.myOptions.language);
+                        scope.result_data = saveDataToFilled(scope.data, scope.result_data);
+                    } else {
+                        scope.result_data = scope.data;
+                        setDateInfo(scope.result_data, scope.myOptions.firstWeekDay, scope.myOptions.language);
+
+                    }
+                    //console.log('chartTimeline: ', scope, scope.result_data.length);
+
+                    scope.results_grouped = GroupResults(scope.result_data);
+                    scope.dateCharts = CreateChartObjects(scope.results_grouped)
+                    scope.showChart(scope.myOptions.defaultChart);
+
+                    //console.log('chartTimeline: results_grouped, dateCharts', scope.results_grouped, scope.dateCharts);
+                }
+
+
+                // -----------------------------------------------
+                // FUNCTIONS
+                // -----------------------------------------------
+
+                // Init Options
+                function initOptions(Options) {
+
+                    Options = Options === undefined ? {} : Options;
+                    var myWidth = window.innerWidth / 100 * 95;
+                    var myHeight = window.innerHeight - 160;
+
+
+                    // Set Given Options or Defaults
+                    var dateField = Options.dateField === undefined ? 'datestamp' : Options.dateField;
+                    var firstWeekDay = Options.firstWeekDay === undefined ? 'Mo' : Options.firstWeekDay;
+                    var language = Options.language === undefined ? 'De' : Options.language;
+                    var focusField = Options.focusField === undefined ? 'value' : Options.focusField;
+                    var fillDates = Options.fillDates === undefined ? true : Options.fillDates;
+                    var patient = Options.patient === undefined ? 'Patient' : Options.patient;
+                    var screenWidth = Options.screenWidth === undefined ? myWidth : Options.screenWidth;
+                    var screenHeight = Options.screenHeight === undefined ? myHeight : Options.screenHeight;
+                    var defaultChart = Options.defaultChart === undefined ? 'week' : Options.defaultChart;
+                    var title = Options.title === undefined ? focusField : Options.title;
+
+
+                    var ReturnedOptions = {
+                        'defaultChart': defaultChart,
+                        'dateField': dateField,
+                        'firstWeekDay': firstWeekDay,
+                        'language': language,
+                        'focusField': focusField,
+                        'fillDates': fillDates,
+                        'patient': patient,
+                        'screenWidth': screenWidth,
+                        'screenHeight': screenHeight,
+                        'title': title
+                    };
+
+                    // Some Translations
+                    scope.translations = {};
+                    if (language === 'De') {
+                        scope.translations.fill = 'Alle Kalendertage';
+                        scope.translations.day = 'Tag';
+                        scope.translations.week = 'Woche';
+                        scope.translations.month = 'Monat';
+                        scope.translations.quarter = 'Quartal';
+                        scope.translations.year = 'Jahr';
+                        scope.translations.weekday = 'Wochentag';
+                        scope.translations.hour = 'Stunde';
+                        scope.translations.settings = 'Einstellungen';
+                    } else {
+                        scope.translations.fill = 'All calendar days';
+                        scope.translations.day = 'Day';
+                        scope.translations.week = 'Week';
+                        scope.translations.month = 'Month';
+                        scope.translations.quarter = 'Quarter';
+                        scope.translations.year = 'Year';
+                        scope.translations.weekday = 'Weekday';
+                        scope.translations.hour = 'Hour';
+                        scope.translations.settings = 'Settings';
+                    };
+
+                    scope.chartTypes = [{
+                        name: 'day',
+                        title: scope.translations.day
+
+                    }, {
+                        name: 'week',
+                        title: scope.translations.week
+
+                    }, {
+                        name: 'month',
+                        title: scope.translations.month
+
+                    }, {
+                        name: 'quarter',
+                        title: scope.translations.quarter
+
+                    }, {
+                        name: 'year',
+                        title: scope.translations.year
+
+                    }, {
+                        name: 'weekday',
+                        title: scope.translations.weekday
+
+                    }, {
+                        name: 'hour',
+                        title: scope.translations.hour
+
+                    }, {
+                        name: 'am_pm',
+                        title: 'am | pm'
+                    }];
+
+                    //console.log('Options Return', ReturnedOptions);
+                    return ReturnedOptions;
+                };
+
+
+                scope.showChart = function(name) {
+                    scope.myOptions.defaultChart = name;
+                    //console.log('Show Chart: ', scope.myOptions.defaultChart);
+
+                    // Save selected Chart as dateChart 
+                    scope.dateChart = scope.dateCharts[name];
+                };
+
+                // Array Gruppieren
+                function groupBy(array, f) {
+                    var groups = {};
+                    array.forEach(function(o) {
+                        var group = JSON.stringify(f(o));
+                        groups[group] = groups[group] || [];
+                        groups[group].push(o);
+                    });
+                    return Object.keys(groups).map(function(group) {
+                        return groups[group];
+                    });
+                };
+
+                // Array sortieren
+                function sortByKey(array, key) {
+                    return array.sort(function(a, b) {
+                        var x = a[key];
+                        var y = b[key];
+                        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                    });
+                };
+
+
+                //  DateInfo für jede Messung hinzufügen
+                function getBasicStatistics(x) {
+
+                    var basicStatistics = {};
+                    return basicStatistics = {
+                        count: x.length,
+                        min: simpleStatistics.min(x),
+                        max: simpleStatistics.max(x),
+                        sum: simpleStatistics.sum(x),
+                        mean: simpleStatistics.mean(x),
+                        variance: simpleStatistics.variance(x),
+                        standard_deviation: simpleStatistics.standard_deviation(x),
+                        sample_variance: simpleStatistics.sample_variance(x),
+                        sample_standard_deviation: simpleStatistics.sample_standard_deviation(x),
+                        mode: simpleStatistics.mode(x),
+                        mad: simpleStatistics.mad(x),
+                        median: simpleStatistics.median(x),
+                        geometric_mean: simpleStatistics.geometric_mean(x),
+                        harmonic_mean: simpleStatistics.harmonic_mean(x),
+                        iqr: simpleStatistics.iqr(x),
+                        sample_skewness: simpleStatistics.sample_skewness(x),
+                        t_test: simpleStatistics.harmonic_mean(x, simpleStatistics.mean(x)),
+                        quantile_00: simpleStatistics.quantile(x, 0),
+                        quantile_01: simpleStatistics.quantile(x, 0.1),
+                        quantile_02: simpleStatistics.quantile(x, 0.2),
+                        quantile_03: simpleStatistics.quantile(x, 0.3),
+                        quantile_04: simpleStatistics.quantile(x, 0.4),
+                        quantile_05: simpleStatistics.quantile(x, 0.5),
+                        quantile_06: simpleStatistics.quantile(x, 0.6),
+                        quantile_07: simpleStatistics.quantile(x, 0.7),
+                        quantile_08: simpleStatistics.quantile(x, 0.8),
+                        quantile_09: simpleStatistics.quantile(x, 0.9),
+                        quantile_10: simpleStatistics.quantile(x, 1),
+                        sample_variance: simpleStatistics.sample_variance(x)
+                    };
+                };
+
+                // Resultate gruppieren
+                function GroupResults(array) {
+                    // Array gruppieren
+                    var resultsGrouped = {};
+
+                    var array_sort_time = sortByKey(array, scope.myOptions.dateField);
+
+                    resultsGrouped.day = groupBy(array_sort_time, function(item) {
+                        return [item.date_info.date_lime];
+                    });
+                    resultsGrouped.week = groupBy(array_sort_time, function(item) {
+                        return [item.date_info.date_year_week];
+                    });
+                    resultsGrouped.month = groupBy(array_sort_time, function(item) {
+                        return [item.date_info.date_year_month];
+                    });
+
+                    resultsGrouped.year = groupBy(array_sort_time, function(item) {
+                        return [item.date_info.date_year];
+                    });
+
+
+                    var array_sort_weekday = sortByKey(scope.data, 'date_weekday');
+
+                    resultsGrouped.weekday = groupBy(array_sort_weekday, function(item) {
+                        return [item.date_info.date_weekday];
+                    });
+
+                    var array_sort_quarter = sortByKey(scope.data, 'date_quarter');
+
+                    resultsGrouped.quarter = groupBy(array_sort_quarter, function(item) {
+                        return [item.date_info.date_quarter];
+                    });
+
+
+                    var array_sort_hour = sortByKey(scope.data, 'date_time');
+
+                    resultsGrouped.hour = groupBy(array_sort_hour, function(item) {
+                        return [item.date_info.date_time.substring(0, 2)];
+                    });
+
+                    resultsGrouped.am_pm = groupBy(array_sort_hour, function(item) {
+                        return [item.date_info.date_am_pm];
+                    });
+
+                    //resultsGrouped.weekday = sortByKey(resultsGrouped.weekday, date_info.date_weekday);
+
+                    return resultsGrouped;
+                };
+
+
+                function getResultsArray(myObject, myField, isNumber) {
+
+                    var result = [];
+                    for (var x in myObject) {
+                        var currentResult = myObject[x];
+
+                        var dot = myField.indexOf(".");
+                        var result_to_push;
+
+                        if (dot === -1) {
+                            result_to_push = currentResult[myField];
+
+                        } else {
+                            //if we have a dot in myField - create Folder/File logic
+                            var folder = myField.substring(0, dot);
+                            var file = myField.substring(dot + 1, myField.length);
+
+                            var currentSubResult = currentResult[folder]
+                            result_to_push = currentSubResult[file];
+                        }
+
+                        if (isNumber) {
+                            result.push(parseFloat(result_to_push));
+                        } else {
+                            result.push(result_to_push);
+                        }
+                    };
+
+                    //console.log('getResultsArray', result);
+                    return result;
+                };
+
+                // Remove 'falsy' entries
+                function cleanArray(actual) {
+                    var newArray = new Array();
+                    for (var i = 0; i < actual.length; i++) {
+                        if (actual[i]) {
+                            newArray.push(actual[i]);
+                        }
+                    }
+                    return newArray;
+                }
+
+                // Resultate gruppieren
+                function CreateChartObjects(array) {
+
+
+                    var results = {};
+                    for (var i in array) {
+
+
+                        results[i] = {};
+                        var all_result_groups = results[i];
+
+                        //$scope.results[i].weekday = $scope.resultsGrouped.weekday[0].date_info.date_weekday;
+
+                        for (var x in array[i]) {
+                            var myCurrent = array[i];
+                            var myRawResults = myCurrent[x];
+
+                            all_result_groups[x] = {};
+                            var current_result_group = all_result_groups[x];
+
+
+                            // Store stuff in Results
+                            current_result_group.value = [];
+
+                            var resultsArray = getResultsArray(myRawResults, 'value', true);
+                            current_result_group.value.push(resultsArray);
+
+                            resultsArray = cleanArray(resultsArray);
+
+                            current_result_group.basicStatistics = getBasicStatistics(resultsArray)
+
+
+                            if (i === 'day') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_lime', false);
+                            }
+                            if (i === 'weekday') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_weekday_full', false);
+                            }
+                            if (i === 'week') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_year_week', false);
+                            }
+                            if (i === 'month') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_year_month', false);
+                            }
+                            if (i === 'quarter') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_quarter', false);
+                            }
+                            if (i === 'year') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_year', true);
+                            }
+                            if (i === 'am_pm') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_am_pm', false);
+                            }
+                            if (i === 'hour') {
+                                current_result_group.labels = getResultsArray(myRawResults, 'date_info.date_time', false);
+                                var formatLabel = [];
+                                for (var x in current_result_group.labels) {
+                                    var current = current_result_group.labels[x];
+                                    current = current.substring(0, 2);
+                                    formatLabel.push(current);
+                                }
+                                current_result_group.labels = formatLabel;
+                            }
+
+
+                        }
+                    };
+
+
+
+
+
+                    var dateCharts = {
+                        "month": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+                            "data": [
+                                []
+                            ]
+                        },
+                        "day": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+                            "data": [
+                                []
+                            ]
+                        },
+                        "quarter": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+
+                            "data": [
+                                []
+                            ]
+                        },
+                        "am_pm": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+
+                            "data": [
+                                []
+                            ]
+                        },
+                        "hour": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+
+                            "data": [
+                                []
+                            ]
+                        },
+                        "week": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+                            "data": [
+                                []
+                            ]
+                        },
+                        "year": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+                            "data": [
+                                []
+                            ]
+                        },
+                        "weekday": {
+                            "labels": [],
+                            "series": [
+                                scope.myOptions.patient
+                            ],
+                            "data": [
+                                []
+                            ]
+                        }
+                    };
+
+
+
+                    // Save Labels & Data
+
+                    for (var i in results) {
+
+                        var currentGroup = results[i];
+
+
+
+                        var current_result = dateCharts[i];
+                        //console.log('currentGroup: ', i, currentGroup, current_result);
+
+                        for (var x in currentGroup) {
+                            //console.log('currentGroup loop: ', i, currentGroup[x]);
+                            //var diff = currentGroup[x].basicStatistics.sample_standard_deviation / 2;
+
+
+                            // Clean Results
+                            //for (var y in currentGroup[x].value) {
+                            //    var current = currentGroup[x].value[y];
+                            //    current = cleanArray(current);
+                            //}
+
+
+                            //var calc_results = arr.filter(function(n){ return n != undefined }); 
+
+                            //console.log('calc_results', calc_results);
+
+
+                            //current_result.data[0].push(currentGroup[x].basicStatistics.median + diff);
+
+                            var myMedian = currentGroup[x].basicStatistics.median;
+
+                            if (myMedian) {
+                                current_result.data[0].push(myMedian);
+                            } else {
+                                //console.log('myMedian - pushed null', myMedian);
+                                current_result.data[0].push(null);
+                            };
+                            //current_result.data[2].push(currentGroup[x].basicStatistics.median - diff);
+                            current_result.labels.push(currentGroup[x].labels[0]);
+                        }
+
+                    }
+
+                    return dateCharts;
+                };
+
+                //  DateInfo für jede Messung hinzufügen
+                function setDateInfo(array, firstWeekDay, language) {
+                    for (var i in array) {
+                        var current = array[i];
+                        var date = current[scope.myOptions.dateField];
+                        current.date_info = getDateInfo(date, firstWeekDay, language);
+                        current.date_lime = current.date_info.date_lime;
+                        current.date_weekday = current.date_info.date_weekday;
+                        current.date_quarter = current.date_info.date_quarter;
+                        current.date_time = current.date_info.date_time;
+                        current.value = current[scope.myOptions.focusField];
+                    }
+                };
+
+                //  Value (focusField) für jede Messung hinzufügen
+                function setfocusField(array) {
+                    for (var i in array) {
+                        var current = array[i];
+                        current.value = current[scope.myOptions.focusField]
+                        current.focusField = current[scope.myOptions.focusField]
+                    }
+                };
+                //  Fill 'missings' with empty dates.
+                function fillDate(array) {
+                    var last = array.length - 1;
+                    var firstDate = array[0].datestamp;
+                    var lastDate = array[last].datestamp;
+
+                    var fullarray = betweenDate(firstDate, lastDate);
+
+                    return fullarray;
+                };
+
+
+                //  Fill 'missings' with empty dates.
+                function saveDataToFilled(data_array, result_array) {
+
+                    setDateInfo(data_array, scope.myOptions.firstWeekDay, scope.myOptions.language);
+
+                    // Group per day and save mean of 'focusField'
+                    var days = groupBy(data_array, function(item) {
+                        return [item.date_info.date_lime];
+                    });
+
+                    //console.log('DAYS: ', days, days.length);
+
+                    for (var i in days) {
+                        var current = days[i];
+                        var count_values = current.length
+
+                        var focusFieldSum = 0;
+                        for (var x in current) {
+                            var inner = current[x];
+                            if (inner[scope.myOptions.focusField]) {
+                                focusFieldSum = focusFieldSum + parseFloat(inner[scope.myOptions.focusField]);
+                                current.date = inner.date_info.date_lime;
+                            } else {
+                                count_values = count_values - 1;
+                            }
+                        }
+                        current.value = focusFieldSum / count_values;
+                        //console.log('current', current.value);
+
+
+                        // Generate fields.
+                        for (var y in result_array) {
+                            var currentResult = result_array[y];
+                            currentResult.date = currentResult.date_info.date_lime;
+                            //currentResult.value = null;
+                            //currentResult.focusField = null;
+
+
+                            // Save 'value'
+                            if (currentResult.date === current.date) {
+                                currentResult.value = current.value;
+                                currentResult.focusField = current.value;
+                                //console.log('==========================>', current.date, currentResult.date, currentResult.value);
+                            };
+                        };
+
+                    };
+
+                    return result_array;
+                };
+
+                function isDate(dateArg) {
+                    var t = (dateArg instanceof Date) ? dateArg : (new Date(dateArg));
+                    return !isNaN(t.valueOf());
+                };
+
+                function isValidRange(minDate, maxDate) {
+                    return (new Date(minDate) <= new Date(maxDate));
+                };
+
+                function betweenDate(startDt, endDt) {
+                    var error = ((isDate(endDt)) && (isDate(startDt)) && isValidRange(startDt, endDt)) ? false : true;
+                    var between = [];
+                    if (error) console.log('error occured!!!... Please Enter Valid Dates');
+                    else {
+                        var currentDate = new Date(startDt),
+                            end = new Date(endDt);
+                        while (currentDate <= end) {
+
+                            var newDateToPush = {
+                                'datestamp': new Date(currentDate)
+                            };
+                            between.push(newDateToPush);
+                            currentDate.setDate(currentDate.getDate() + 1);
+                        }
+                    }
+                    return between;
+                };
+
+
+                //  DateInfo hinzufügen
+                function getDateInfo(myDate, firstWeekDay, language) {
+
+                    var myWeekday = '';
+                    if (firstWeekDay === 'Mo') {
+                        myWeekday = $filter('amDateFormat')(myDate, 'e')
+                        myWeekday = myWeekday - 1;
+
+                        if (myWeekday === -1) {
+                            myWeekday = 6;
+                        };
+
+                    } else {
+                        myWeekday = $filter('amDateFormat')(myDate, 'e')
+                    };
+
+                    var myWeekdayFull = $filter('amDateFormat')(myDate, 'dddd');
+                    if (language === 'De') {
+                        if (myWeekdayFull === 'Sunday') {
+                            myWeekdayFull = 'Sonntag';
+                        };
+                        if (myWeekdayFull === 'Monday') {
+                            myWeekdayFull = 'Montag';
+                        };
+                        if (myWeekdayFull === 'Tuesday') {
+                            myWeekdayFull = 'Dienstag';
+                        };
+                        if (myWeekdayFull === 'Wednesday') {
+                            myWeekdayFull = 'Mittwoch';
+                        };
+                        if (myWeekdayFull === 'Thursday') {
+                            myWeekdayFull = 'Donnerstag';
+                        };
+                        if (myWeekdayFull === 'Friday') {
+                            myWeekdayFull = 'Freitag';
+                        };
+                        if (myWeekdayFull === 'Saturday') {
+                            myWeekdayFull = 'Samstag';
+                        };
+                    };
+
+                    var dateInfo = {};
+                    return dateInfo = {
+                        date: myDate,
+                        date_compare: $filter('amDateFormat')(myDate, 'YYYYMMDD'),
+                        date_lime: $filter('amDateFormat')(myDate, 'YYYY-MM-DD'),
+                        date_sort: $filter('amDateFormat')(myDate, 'YYYYMMDDHHmm'),
+                        date_year: $filter('amDateFormat')(myDate, 'YYYY'),
+                        date_year_week: $filter('amDateFormat')(myDate, 'YYYY, ww'),
+                        date_year_month: $filter('amDateFormat')(myDate, 'YYYY, MM'),
+                        date_week: $filter('amDateFormat')(myDate, 'ww'),
+                        date_time: $filter('amDateFormat')(myDate, 'HH:mm'),
+                        date_month: $filter('amDateFormat')(myDate, 'MM'),
+                        date_quarter: $filter('amDateFormat')(myDate, 'Q'),
+                        date_weekday: myWeekday,
+                        date_weekday_full: myWeekdayFull,
+                        date_am_pm: $filter('amDateFormat')(myDate, 'a')
+                    };
+                };
+
+                // -----------------------------------------------
+                // Watch for changes.
+                // -----------------------------------------------
+                scope.$watch('data', function() {
+                    if (scope.data === undefined) {
+                        scope.data = {};
+                    } else {
+                        updateStuff();
+                    }
+                }, true);
+                scope.$watch('vg', function() {
+                    if (scope.vg === undefined) {
+                        scope.vg = {};
+                    } else {
+                        updateStuff();
+                    }
+                }, true);
+
+                scope.$watch('myOptions', function() {
+                    updateStuff();
+                }, true);
+
+
+            }
+        };
+
+    });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name optinomicDataModule.directive:chartTscore
+ * @description
+ * # chartTscore
+ */
+angular.module('optinomicDataModule')
+    .directive('chartTscore', function(simpleStatistics) {
+
+        return {
+            //templateUrl: 'scripts/directives/chart_tscore.html',
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?V20160115',
+
+            restrict: 'E',
+            //replace: true,
+            //transclude: true,
+            scope: {
+                data: '=data',
+                myOptions: '=options'
+            },
+            link: function postLink(scope, element, attrs) {
+
+                // -----------------------------------------------
+                // INIT
+                // -----------------------------------------------
+
+
+                function updateStuff() {
+
+                    //console.log('============= chartTScore (START): ', scope, scope.data.length, scope.myOptions);
+
+                    scope.plot_done = false;
+                    scope.myOptions = initOptions(scope.myOptions);
+                    scope.plot = preparePlot(scope.data);
+                    scope.plot = scope.getShowAnswers();
+
+                }
+
+                // -----------------------------------------------
+                // FUNCTIONS
+                // -----------------------------------------------
+
+                // Init Options
+                function initOptions(Options) {
+
+                    Options = Options === undefined ? {} : Options;
+                    //var myWidth = window.innerWidth / 100 * 95 + 280;
+                    var myWidth = window.innerWidth + 280;
+                    //var myHeight = window.innerHeight - 150;
+                    var myHeight = 60 * scope.data[0].scores.length;
+
+                    var default_colours = [
+                        '#3F51B5', // blue
+                        '#F44336', // red
+                        '#4CAF50', // green
+                        '#FFEB3B', // yellow
+                        '#9C27B0', // purple
+                        '#E91E63', // pink
+                        '#FF5722' // orange
+                    ];
+
+                    // Set Given Options or Defaults
+                    var screenWidth = Options.screenWidth === undefined ? myWidth : Options.screenWidth;
+                    var screenHeight = Options.screenHeight === undefined ? myHeight : Options.screenHeight;
+                    var language = Options.language === undefined ? 'De' : Options.language;
+                    var colours = Options.colours === undefined ? default_colours : Options.colours;
+                    var show_responses = Options.show_responses === undefined ? true : Options.show_responses;
+                    var show_scores = Options.show_scores === undefined ? true : Options.show_scores;
+                    var show_mean = Options.show_mean === undefined ? false : Options.show_mean;
+                    var axis_label = Options.axis_label === undefined ? 'T-Wert' : Options.axis_label;
+
+
+                    var ReturnedOptions = {
+                        'screenWidth': screenWidth,
+                        'screenHeight': screenHeight,
+                        'language': language,
+                        'colours': colours,
+                        'show_responses': show_responses,
+                        'show_scores': show_scores,
+                        'show_mean': show_mean,
+                        'axis_label': axis_label
+                    };
+
+                    // Some Translations
+                    scope.translations = {};
+                    if (language === 'De') {
+                        scope.translations.showScores = 'Werte anzeigen';
+                        scope.translations.mean = 'Mittelwert';
+                    } else {
+                        scope.translations.showScores = 'Show Scores';
+                        scope.translations.mean = 'Mean';
+                    };
+
+                    //console.log('Options Return', ReturnedOptions);
+                    return ReturnedOptions;
+                };
+
+
+                // Init Options
+                function getColor(count) {
+
+                    if (count > scope.myOptions.colours.length) {
+                        // RANDOM
+                        var letters = '0123456789ABCDEF'.split('');
+                        var color = '#';
+                        for (var i = 0; i < 6; i++) {
+                            color += letters[Math.floor(Math.random() * 16)];
+                        }
+                    } else {
+                        // GET default_colours
+                        var color = scope.myOptions.colours[count];
+                    };
+
+
+                    return color;
+
+                }
+
+                // Init Options
+                function preparePlot(data) {
+
+
+                    var my_answers = [];
+                    var maxHeight = 10 / data[0].scores.length;
+                    //var maxHeight = 1.25;
+
+
+                    var allScores = [];
+                    for (var y in data[0].scores) {
+                        allScores[y] = [];
+                    };
+
+
+                    for (var x in data) {
+                        var current = data[x];
+                        //console.log('current = ', current)
+
+                        var my_titles = [];
+                        var my_xs = [];
+                        var my_xs_max = [];
+                        var my_ys = [];
+                        var my_ys_label = [];
+                        var trenner = [];
+
+
+
+                        var answer = {
+                            "label": current.label,
+                            "label_datestamp": current.label_datestamp,
+                            "t_scores": [],
+                            "colour": getColor(x),
+                            "show": scope.myOptions.show_scores
+                        };
+
+                        // scope.myOptions.default_colours[x]
+
+                        for (var y in current.scores) {
+                            var score = current.scores[y];
+
+
+                            var myCount = parseInt(y) + 1;
+                            var myHeight = maxHeight * myCount;
+
+
+                            my_xs.push(0);
+                            my_xs_max.push(100);
+                            my_ys.push(myHeight);
+                            my_ys_label.push(myHeight - 0.2);
+                            trenner.push([myHeight, myHeight]);
+
+
+
+                            //console.log('score = ', score)
+
+                            my_titles.push(score.question);
+                            answer.t_scores.push(score.t_score);
+
+
+                            allScores[y].push(score.t_score);
+
+                        };
+
+                        my_answers.push(answer);
+
+                    };
+
+
+                    if (scope.data.length > 1) {
+                        // Calculate MEAN and save it
+                        var meanAnswer = {
+                            "label": scope.translations.mean,
+                            "label_datestamp": 'mean',
+                            "t_scores": [],
+                            "colour": getColor(data.length),
+                            "show": scope.myOptions.show_mean
+                        };
+
+                        for (var x in allScores) {
+                            var currentScore = allScores[x];
+                            var calcMean = simpleStatistics.mean(currentScore);
+
+                            var mw = Math.round(calcMean * 10) / 10 //Round to 1 Decimal-place
+                            meanAnswer.t_scores.push(mw);
+                        };
+
+                        my_answers.push(meanAnswer);
+                    };
+
+
+                    // Prepare RETURN
+
+                    var plot = {
+
+                        "answers": my_answers,
+                        "meanAnswer": meanAnswer,
+
+                        "titles": my_titles,
+
+                        "xs": my_xs,
+                        "xs_max": my_xs_max,
+                        "ys": my_ys,
+                        "ys_label": my_ys_label,
+
+                        "trenner": trenner,
+
+                        "area_1": [20, 80],
+                        "area_2": [30, 70],
+                        "area_3": [40, 60],
+                        "area_sc_min": [1, 1],
+                        "area_sc_max": [10, 10],
+
+                        "line_x": [0, 100],
+
+                        "line_mw_x": [50, 50],
+                        "line_mw_y": [1, 10]
+
+                    };
+
+                    return plot;
+                };
+
+
+                // Show - Selected  Answers
+                scope.getShowAnswers = function() {
+
+                    var plot_answers = scope.plot;
+                    plot_answers.answersShow = [];
+
+                    for (var x in plot_answers.answers) {
+                        var current = plot_answers.answers[x];
+                        if (current.show) {
+                            plot_answers.answersShow.push(current);
+                        }
+                    };
+
+                    //console.log('plot_answers -> ', plot_answers)
+                    scope.plot_done = true;
+                    return plot_answers;
+                };
+
+
+                // -----------------------------------------------
+                // Watch for changes.
+                // -----------------------------------------------
+                scope.$watch('data', function() {
+                    if (scope.data === undefined) {
+                        scope.data = {};
+                    } else {
+                        updateStuff();
+                    }
+                }, true);
+
+
+                scope.$watch('myOptions', function() {
+                    scope.getShowAnswers();
+                }, true);
+
+
+            }
+        };
+
+    });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name optinomicAppLibraryApp.directive:chartTimeline
+ * @description
+ * # chartTimeline
+ */
+
+
+
+angular.module('optinomicDataModule')
+    .directive('chartStanine', function() {
+
+
+
+
+        return {
+            //templateUrl: 'scripts/directives/chart_stanine.html',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-stanine/stanine.html?V20151007',
+
+            restrict: 'E',
+            //replace: true,
+            //transclude: true,
+            scope: {
+                data: '=data',
+                myOptions: '=options'
+            },
+
+            link: function postLink(scope, element, attrs) {
+
+                // -----------------------------------------------
+                // INIT
+                // -----------------------------------------------
+
+
+                function updateStuff() {
+                    // console.log('============= chartStanine (START): ', scope, scope.data.length, scope.myOptions);
+
+                    scope.plot_done = false;
+                    scope.myOptions = initOptions(scope.myOptions);
+
+                    scope.multiple = false;
+                    if (scope.data.length > 1) {
+                        scope.multiple = true;
+                    }
+                    scope.plot_done = true;
+                }
+
+
+                // -----------------------------------------------
+                // FUNCTIONS
+                // -----------------------------------------------
+
+                // Init Options
+                function initOptions(Options) {
+
+                    Options = Options === undefined ? {} : Options;
+                    //var myWidth = window.innerWidth / 100 * 95 + 280;
+                    var myWidth = window.innerWidth + 280;
+                    //var myHeight = window.innerHeight - 150;
+                    var myHeight = 60 * scope.data[0].scores.length;
+
+
+                    // Set Given Options or Defaults
+                    var screenWidth = Options.screenWidth === undefined ? myWidth : Options.screenWidth;
+                    var screenHeight = Options.screenHeight === undefined ? myHeight : Options.screenHeight;
+                    var population_name = Options.population_name === undefined ? 'Population' : Options.population_name;
+                    var norm_name = Options.norm_name === undefined ? 'Normalbereich' : Options.norm_name;
+                    var start_result = Options.start_result === undefined ? 0 : Options.start_result;
+
+
+                    var ReturnedOptions = {
+                        'screenWidth': screenWidth,
+                        'screenHeight': screenHeight,
+                        'population_name': population_name,
+                        'start_result': start_result,
+                        'norm_name': norm_name
+                    };
+
+                    //console.log('Options Return', ReturnedOptions);
+                    return ReturnedOptions;
+                };
+
+
+                // Init Options
+                scope.nextResult = function(direction) {
+
+                    direction = direction === undefined ? 'next' : direction;
+
+                    var jetzt = scope.myOptions.start_result;
+                    var laenge = scope.data.length - 1;
+
+
+
+                    if (direction === 'next') {
+                        if ((jetzt + 1) > laenge) {
+                            jetzt = 0;
+                        } else {
+                            jetzt = jetzt + 1;
+                        }
+                    } else {
+                        if ((jetzt - 1) < 0) {
+                            jetzt = laenge;
+                        } else {
+                            jetzt = jetzt - 1;
+                        }
+                    };
+
+
+                    scope.myOptions.start_result = jetzt;
+                    //console.log('nextResult', direction);
+                    updateStuff();
+
+                }
+
+
+                // -----------------------------------------------
+                // Watch for changes.
+                // -----------------------------------------------
+                scope.$watch('data', function() {
+                    if (scope.data === undefined) {
+                        scope.data = {};
+                    } else {
+                        updateStuff();
+                    }
+                }, true);
+
+
+                scope.$watch('myOptions', function() {
+                    updateStuff();
+                }, true);
+
+
+            }
+        };
+
+    });
+
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name optinomicDataModule.directive:scoreThreshold
+ * @description
+ * # scoreThreshold: Displays a simple score - with ranges if needed.
+ */
+angular.module('optinomicDataModule')
+    .directive('scoreThreshold', function() {
+        return {
+            restrict: 'E',
+            //replace: true,
+            //transclude: true,
+            scope: {
+                myscore: '=score',
+                mymax: '=max',
+                mymin: '=min',
+                myshow_min_max: '=showMinMax',
+                myshow_percent_scale: '=showPercentScale',
+                myshow_scale_ranges: '=scaleRanges'
+            },
+
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/score-threshold/score-threshold.html?V201510081723',
+
+
+            link: function(scope, element, attrs) {
+
+                function get_position(my_value) {
+                    var my_corrected_value = my_value - scope.min;
+                    my_value = (100 / (scope.max - scope.min) * my_corrected_value) / 100;
+                    my_value = my_value * 85 + 7;
+                    return my_value;
+                }
+
+
+                function just_do_it() {
+                    //Variablen initialisieren
+                    scope.score = scope.myscore;
+                    scope.max = scope.mymax;
+                    scope.min = scope.mymin;
+
+
+                    if (scope.myshow_min_max === false) {
+                        scope.show_min_max = false;
+                    } else {
+                        scope.show_min_max = true;
+                    }
+
+                    if (scope.myshow_percent_scale === false) {
+                        scope.show_percent_scale = false;
+                    } else {
+                        scope.show_percent_scale = true;
+                    }
+
+                    if (scope.myshow_scale_ranges === undefined) {
+                        scope.show_scale_ranges = false;
+                    } else {
+                        scope.show_scale_ranges = true;
+
+                        //Loop durch alle Scales
+                        for (var i = 0; i < scope.myshow_scale_ranges.ranges.length; i++) {
+                            //console.log('Loop - score = ', scope.myscore);
+                            scope.myshow_scale_ranges.ranges[i].from_position = get_position(scope.myshow_scale_ranges.ranges[i].from);
+                            scope.myshow_scale_ranges.ranges[i].to_position = get_position(scope.myshow_scale_ranges.ranges[i].to);
+                            scope.myshow_scale_ranges.ranges[i].width_position = scope.myshow_scale_ranges.ranges[i].to_position - scope.myshow_scale_ranges.ranges[i].from_position;
+
+                            if ((scope.myscore >= scope.myshow_scale_ranges.ranges[i].from) && (scope.myscore <= scope.myshow_scale_ranges.ranges[i].to)) {
+                                scope.my_current_scale = i;
+                            }
+                            //console.log('LOOP = ', scope.myshow_scale_ranges.ranges[i]);
+                        }
+                        //console.log('Scale Ranges = ', scope.myshow_scale_ranges);
+                    }
+
+                    scope.postition = get_position(scope.score);
+
+                    scope.polygon_1 = scope.postition + ',19 ' + (scope.postition - 1) + ',0 ' + (scope.postition + 1) + ',0';
+                    scope.polygon_2 = scope.postition + ',81 ' + (scope.postition - 1) + ',100 ' + (scope.postition + 1) + ',100';
+
+
+                    if (scope.postition >= 50) {
+                        scope.postition_score = scope.postition - 1.5;
+                        scope.postition_align = 'end';
+                    } else {
+                        scope.postition_score = scope.postition + 1.5;
+                        scope.postition_align = 'start';
+                    }
+                }
+
+                just_do_it();
+
+                // Watch for changes.
+                scope.$watch('myscore', function() {
+                    just_do_it();
+                }, true);
+                scope.$watch('mymax', function() {
+                    just_do_it();
+                }, true);
+                scope.$watch('mymin', function() {
+                    just_do_it();
+                }, true);
+            }
+        };
+    });
 
 
 /**
