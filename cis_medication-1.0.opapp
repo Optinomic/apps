@@ -77,7 +77,7 @@ website = http://www.optinomic.com/
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding>
             <div flex style="padding: 12px;">
                 <md-switch ng-model="d.grid.export_allColumns" aria-label="allColumns">
-                    Alle Reihen expoertieren: {{ d.grid.export_allColumns }}
+                    Alle Reihen expoertieren
                 </md-switch>
             </div>
             <md-button style="font-size: 18px;" ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
@@ -92,7 +92,7 @@ website = http://www.optinomic.com/
         </div>
     </div>
     <div>
-        <md-button ng-if="d.grid.export_details" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
+        <md-button ng-if="(!d.grid.export_details) && (!d.grid.export_details)" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">
                 Daten Exportieren
