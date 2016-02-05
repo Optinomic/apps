@@ -90,7 +90,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -102,7 +102,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -164,7 +164,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -176,7 +176,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -241,7 +241,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -253,7 +253,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -327,7 +327,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -339,7 +339,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -404,7 +404,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -416,7 +416,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -481,7 +481,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -493,7 +493,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
@@ -596,7 +596,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -608,7 +608,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
 </script>
-<script src="https://cdn.rawgit.com/ceolter/ag-grid/master/dist/ag-grid.min.js?version=3_2_0">
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
 </script>
