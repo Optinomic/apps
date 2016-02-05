@@ -65,6 +65,12 @@ website = http://www.optinomic.com/
     </md-button>
 </div>
 
+            <md-button style="font-size: 18px;" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
         </div>
     </div>
     <div>
@@ -1043,6 +1049,16 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
+
+    $scope.d.functions.unselectRow = function() {
+        $scope.d.grid.selected_row = null;
+        $scope.d.grid.is_row_selected = false;
+        $scope.d.grid.options.api.deselectAll();
+    };
+
+
+
+
 
 
     // -----------------------------------

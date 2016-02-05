@@ -151,6 +151,12 @@ website = http://www.optinomic.com/
     <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
 </div>
 
+            <md-button style="font-size: 18px;" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
         </div>
     </div>
     <div>
@@ -588,6 +594,16 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
+
+    $scope.d.functions.unselectRow = function() {
+        $scope.d.grid.selected_row = null;
+        $scope.d.grid.is_row_selected = false;
+        $scope.d.grid.options.api.deselectAll();
+    };
+
+
+
+
 
 
     // -----------------------------------
@@ -5285,7 +5301,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
             my_response.survey_name = current_result.event.survey_name;
-            my_response.display = 'AUS: ' + my_response.filled.substring(0, 16); + ' = ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
+            my_response.display = 'AUS: ' + my_response.filled.substring(0, 10) + ' = ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
 
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
