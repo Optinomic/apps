@@ -22,11 +22,11 @@
                 <md-switch ng-model="d.grid.export_settings.allColumns" aria-label="allColumns">
                     Alle Daten-Reihen
                 </md-switch>
-                <md-input-container>
-                    <label>Trennzeichen</label>
-                    <input ng-model="d.grid.export_settings.columnSeparator">
-                </md-input-container>
             </div>
+            <md-input-container>
+                <label>Trennzeichen</label>
+                <input ng-model="d.grid.export_settings.columnSeparator">
+            </md-input-container>
             <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
                 <i class="mdi mdi-file"></i> Daten exportieren
             </md-button>
