@@ -5,6 +5,9 @@
         </div>
     </div>
 </div>
+<div>
+    &nbsp;
+</div>
 <head>
 	include(../lib/js/set/angular_material_grid_chart.html)
 </head>

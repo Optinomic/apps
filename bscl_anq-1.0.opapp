@@ -56,6 +56,9 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
+<div>
+    &nbsp;
+</div>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
@@ -199,6 +202,9 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
+<div>
+    &nbsp;
+</div>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
@@ -255,7 +261,7 @@ website = http://www.optinomic.com/
     <pre>{{d.export_obj}}</pre>
 </div>
 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch">
+<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
     <div flex>
         <md-select ng-model="d.export_obj.format" ng-init="csv">
             <md-option value="csv">CSV</md-option>
@@ -317,6 +323,9 @@ website = http://www.optinomic.com/
             </div>
         </div>
     </div>
+</div>
+<div>
+    &nbsp;
 </div>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">

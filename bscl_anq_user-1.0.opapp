@@ -59,6 +59,9 @@ ch.suedhang.apps.bscl.anq >= 1.0
         </div>
     </div>
 </div>
+<div>
+    &nbsp;
+</div>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 </script>
@@ -135,6 +138,9 @@ ch.suedhang.apps.bscl.anq >= 1.0
             </div>
         </div>
     </div>
+</div>
+<div>
+    &nbsp;
 </div>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">

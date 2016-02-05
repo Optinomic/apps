@@ -4,7 +4,7 @@ include(../lib/html/optinomic/page/start.m4)
     <pre>{{d.export_obj}}</pre>
 </div>
 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch">
+<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
     <div flex>
         <md-select ng-model="d.export_obj.format" ng-init="csv">
             <md-option value="csv">CSV</md-option>
