@@ -996,12 +996,14 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
     $scope.d.functions.onBtExport = function() {
 
+        var fileName = $scope.d.dataMain.apps.current.name + '.csv';
+
         var params = {
             skipHeader: false,
             skipFooters: false,
             skipGroups: false,
             //allColumns: false,
-            fileName: 'export.csv',
+            fileName: fileName,
             columnSeparator: ';'
         };
 

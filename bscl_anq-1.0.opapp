@@ -645,12 +645,14 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
     $scope.d.functions.onBtExport = function() {
 
+        var fileName = $scope.d.dataMain.apps.current.name + '.csv';
+
         var params = {
             skipHeader: false,
             skipFooters: false,
             skipGroups: false,
             //allColumns: false,
-            fileName: 'export.csv',
+            fileName: fileName,
             columnSeparator: ';'
         };
 
@@ -5295,9 +5297,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.export_obj = {};
 
-        $scope.d.export_obj.sql = ""SELECT 
+        $scope.d.export_obj.sql = "SELECT 
   patient.id 
-  "";
+  ";
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
