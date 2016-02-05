@@ -93,7 +93,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
+<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
@@ -229,7 +229,7 @@ website = http://www.optinomic.com/
 </script>
 <script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
+<script src="https://rawgit.com/Optinomic/apps/master/lib/js/vendor/angular.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
 </script>
