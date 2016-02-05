@@ -5290,29 +5290,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
 
-        // Init Responses
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
-
-        // automatic
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 50,
-            rowHeight: 50,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true, true);
+        $scope.d.grid.options.rowData = resultsArray;
 
 
         //console.log('dataGRID: ', $scope.d.grid);
