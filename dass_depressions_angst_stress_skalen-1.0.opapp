@@ -180,7 +180,7 @@ website = http://www.optinomic.com/
     <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
 </div>
 
-            <md-button style="font-size: 18px;" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>
                 <md-tooltip md-direction="bottom">
                     Schliessen
