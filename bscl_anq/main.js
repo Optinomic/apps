@@ -58,8 +58,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.export_obj = {};
 
-	$scope.d.export_obj.sql = include_as_js_string(/tmp/blah);
-        $scope.d.export_obj.sql = include_as_js_string(includes/export.sql);
+        //$scope.d.export_obj.sql = include _as_js_string(includes/export.sql);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
