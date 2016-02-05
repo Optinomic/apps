@@ -58,7 +58,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.export_obj = {};
 
-        //$scope.d.export_obj.sql = include _as_js_string(includes/export.sql);
+        $scope.d.export_obj.sql = include _as_js_string(includes/export.sql);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
@@ -220,7 +220,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
         var resultsArray = $scope.d.dataMain.survey_responses_array;
-
 
 
         // DataView - Options
