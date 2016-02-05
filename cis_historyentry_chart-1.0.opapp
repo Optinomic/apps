@@ -818,6 +818,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
 
             surveyResults = $scope.d.functions.enrichResults(surveyResults);
 
+            var do_we_have_to_pinn = {
+                a_date: true,
+                a_time: true
+            };
 
             // Iterate through object properties
             var result = surveyResults[0]
@@ -835,10 +839,7 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                         field: property
                     };
 
-                    var do_we_have_to_pinn = {
-                        a_date: true,
-                        a_time: true
-                    };
+
 
                     // Set newValueHandler if editable
                     if (editable) {
