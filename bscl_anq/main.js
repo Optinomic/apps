@@ -56,9 +56,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setExport = function() {
 
+
+        // -----------------------------------
+        // Download
+        // -----------------------------------
+        $scope.d.export_obj = {};
+        $scope.d.export_obj.data = {};
+        $scope.d.export_obj.have_data = false;
+        $scope.d.export_obj.header = 'True';
+        $scope.d.export_obj.direct = 'False';
+        $scope.d.export_obj.format = 'csv';
+        $scope.d.export_obj.file = 1;
+        $scope.d.export_obj.delimitter = ';';
+
+
+
+
         $scope.d.export_obj = {};
 
-        $scope.d.export_obj.sql = include_as_js_string(includes/export.sql);
+        $scope.d.export_obj.sql = include_as_js_string(includes /
+            export.sql);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
