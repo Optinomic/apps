@@ -21,7 +21,6 @@ website = http://www.optinomic.com/
 [template dass_result 6 9]
 include(templates/dass.html)
 
-
 [template data_survey_responses 6 7]
 include(templates/data.html)
 

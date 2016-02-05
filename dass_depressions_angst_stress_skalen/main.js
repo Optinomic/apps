@@ -264,20 +264,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 50,
-            rowHeight: 50,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
+        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
 
 
         //console.log('dataGRID: ', $scope.d.grid);

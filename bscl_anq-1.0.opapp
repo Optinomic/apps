@@ -432,11 +432,12 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         return surveyResults;
     };
 
-    $scope.d.functions.createColumnDefs = function(surveyResults, editable) {
+    $scope.d.functions.createColumnDefs = function(surveyResults, editable, sort) {
 
         var DataView = [];
         surveyResults = surveyResults === undefined ? {} : surveyResults;
         editable = editable === undefined ? false : editable;
+        sort = sort === undefined ? true : sort;
 
         surveyResults = $scope.d.functions.enrichResults(surveyResults);
 
@@ -465,6 +466,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     cellClass: 'md-body-1',
                     field: property
                 };
+
+                var is_already_pinned = false;
 
                 // Set newValueHandler if editable
                 if (editable) {
@@ -500,7 +503,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     line.hide = false;
                     line.width = 88;
                     line.suppressSizeToFit = true;
-                    line.pinned = 'left';
+
+                    if (!is_already_pinned) {
+                        line.pinned = 'left';
+                    };
                 };
 
                 if ((property === 'filled_weekday') || (property === 'datestamp_weekday') || (property === 'startdate_weekday') || (property === 'submitdate_weekday')) {
@@ -530,8 +536,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             }
         };
 
-        // Sort by 'headerName'
-        DataView = sortByKey(DataView, 'headerName');
+        if (sort) {
+            // Sort by 'headerName'
+            DataView = sortByKey(DataView, 'headerName');
+        };
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
