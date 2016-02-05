@@ -159,16 +159,18 @@ website = http://www.optinomic.com/
         </div>
     </div>
     <div flex ng-if="d.grid.export_settings.details" style="height:84px; padding:5px; margin:5px;">
-        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding>
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start start" layout-padding>
+            <div>
+                <md-input-container>
+                    <label>Trennzeichen</label>
+                    <input ng-model="d.grid.export_settings.columnSeparator">
+                </md-input-container>
+            </div>
             <div flex>
                 <md-switch ng-model="d.grid.export_settings.allColumns" aria-label="allColumns">
                     Alle Daten-Reihen
                 </md-switch>
             </div>
-            <md-input-container>
-                <label>Trennzeichen</label>
-                <input ng-model="d.grid.export_settings.columnSeparator">
-            </md-input-container>
             <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
                 <i class="mdi mdi-file"></i> Daten exportieren
             </md-button>
