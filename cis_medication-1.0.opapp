@@ -91,6 +91,7 @@ website = http://www.optinomic.com/
 </div>
 <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
 
+
 </div>
 <div ng-if="d.appState === 'show_detail'">
     <md-content class="md-padding">

@@ -207,7 +207,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
             my_response.survey_name = current_result.event.survey_name;
-            my_response.display = 'DASS: ' + my_response.filled_day;
+            my_response.display = 'DASS: ' + my_response.filled.substring(0, 16);
 
 
             $scope.d.dataMain.survey_responses_array.push(my_response);

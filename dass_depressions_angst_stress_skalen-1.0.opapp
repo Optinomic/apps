@@ -177,8 +177,9 @@ website = http://www.optinomic.com/
     <div flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
             <div flex style="padding: 12px;">
-                <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
-            </div>
+    <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
+</div>
+
         </div>
     </div>
     <div>
@@ -5402,7 +5403,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
             my_response.survey_name = current_result.event.survey_name;
-            my_response.display = 'DASS: ' + my_response.filled_day;
+            my_response.display = 'DASS: ' + my_response.filled.substring(0, 16);
 
 
             $scope.d.dataMain.survey_responses_array.push(my_response);

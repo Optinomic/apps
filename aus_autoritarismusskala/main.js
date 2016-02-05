@@ -118,7 +118,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
             my_response.survey_name = current_result.event.survey_name;
-            my_response.display = 'AUS: ' + my_response.filled_day + ' = ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
+            my_response.display = 'AUS: ' + my_response.filled.substring(0, 16); + ' = ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
 
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
