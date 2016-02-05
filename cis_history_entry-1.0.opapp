@@ -740,14 +740,12 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         return surveyResults;
     };
 
-    $scope.d.functions.createColumnDefs = function(surveyResults, editable) {
+    $scope.d.functions.createColumnDefs = function(surveyResults, editable, sort) {
 
         var DataView = [];
-        surveyResults = surveyResults === undefined ? {} : surveyResults;
+        surveyResults = surveyResults === undefined ? [] : surveyResults;
         editable = editable === undefined ? false : editable;
-
-        surveyResults = $scope.d.functions.enrichResults(surveyResults);
-
+        sort = sort === undefined ? true : sort;
 
         var sortByKey = function(array, key) {
             return array.sort(function(a, b) {
@@ -758,91 +756,140 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         };
 
 
-        // Iterate through object properties
-        var result = surveyResults[0]
-        for (var property in result) {
-            if (result.hasOwnProperty(property)) {
-                // do stuff
-                //console.log('createColumnDefs :: ', property);
+        // When we have Results
+        if (surveyResults.length > 0) {
 
-                // Set Default
-                var line = {
-                    headerTooltip: property,
-                    headerName: property,
-                    editable: editable,
-                    cellClass: 'md-body-1',
-                    field: property
-                };
+            surveyResults = $scope.d.functions.enrichResults(surveyResults);
 
-                // Set newValueHandler if editable
-                if (editable) {
-                    line.newValueHandler = $scope.d.functions.editValueHandler;
-                };
+            var do_we_have_to_pinn = {
+                a_date: true,
+                a_time: true
+            };
 
-                // Handle some known special properties
-                if ((property === 'PID') || (property === 'FID')) {
-                    line.hide = true;
-                    line.width = 110;
-                    line.suppressSizeToFit = true;
-                };
+            // Iterate through object properties
+            var result = surveyResults[0]
+            for (var property in result) {
+                if (result.hasOwnProperty(property)) {
+                    // do stuff
+                    //console.log('createColumnDefs :: ', property);
 
-                if ((property === 'filled') || (property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
-                    line.width = 145;
-                    line.suppressSizeToFit = true;
-                    line.hide = true;
-                };
+                    // Set Default
+                    var line = {
+                        headerTooltip: property,
+                        headerName: property,
+                        editable: editable,
+                        cellClass: 'md-body-1',
+                        field: property
+                    };
 
-                if ((property === 'filled_year') || (property === 'datestamp_year') || (property === 'startdate_year') || (property === 'submitdate_year')) {
-                    line.width = 145;
-                    line.hide = true;
-                    line.sort = 'asc';
-                    line.filter = 'number';
-                };
 
-                if ((property === 'filled_week') || (property === 'datestamp_week') || (property === 'startdate_week') || (property === 'submitdate_week')) {
-                    line.width = 78;
-                    line.hide = true;
-                };
 
-                if ((property === 'filled_day') || (property === 'datestamp_day') || (property === 'startdate_day') || (property === 'submitdate_day')) {
-                    line.hide = false;
-                    line.width = 88;
-                    line.suppressSizeToFit = true;
-                    line.pinned = 'left';
-                };
+                    // Set newValueHandler if editable
+                    if (editable) {
+                        line.newValueHandler = $scope.d.functions.editValueHandler;
+                    };
 
-                if ((property === 'filled_weekday') || (property === 'datestamp_weekday') || (property === 'startdate_weekday') || (property === 'submitdate_weekday')) {
-                    line.width = 145;
-                    line.hide = true;
-                };
+                    // Handle some known special properties
+                    if ((property === 'PID') || (property === 'FID')) {
+                        line.hide = true;
+                        line.width = 110;
+                        line.suppressSizeToFit = true;
+                    };
 
-                if ((property === 'filled_time') || (property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
-                    line.hide = false;
-                    line.width = 62;
-                    line.suppressSizeToFit = true;
-                    line.pinned = 'left';
-                };
+                    if ((property === 'filled') || (property === 'datestamp') || (property === 'startdate') || (property === 'submitdate')) {
+                        line.width = 145;
+                        line.suppressSizeToFit = true;
+                        line.hide = true;
+                    };
 
-                if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
-                    line.width = 110;
-                    line.hide = true;
-                };
+                    if ((property === 'filled_year') || (property === 'datestamp_year') || (property === 'startdate_year') || (property === 'submitdate_year')) {
+                        line.width = 145;
+                        line.hide = true;
+                        line.sort = 'asc';
+                        line.filter = 'number';
+                    };
 
-                if ((property === 'startlanguage') || (property === 'survey_name') || (property === 'lastpage') || (property === 'datestamp') || (property === 'submitdate')) {
-                    line.hide = true;
-                };
+                    if ((property === 'filled_week') || (property === 'datestamp_week') || (property === 'startdate_week') || (property === 'submitdate_week')) {
+                        line.width = 78;
+                        line.hide = true;
+                    };
 
-                // Push Line to Return-Array
-                DataView.push(line);
+                    if ((property === 'filled_day') || (property === 'datestamp_day') || (property === 'startdate_day') || (property === 'submitdate_day')) {
+                        line.hide = false;
+                        line.width = 88;
+                        line.suppressSizeToFit = true;
 
-            }
+                        if (do_we_have_to_pinn.a_date) {
+                            line.pinned = 'left';
+                            do_we_have_to_pinn.a_date = false;
+                        };
+                    };
+
+                    if ((property === 'filled_weekday') || (property === 'datestamp_weekday') || (property === 'startdate_weekday') || (property === 'submitdate_weekday')) {
+                        line.width = 145;
+                        line.hide = true;
+                    };
+
+                    if ((property === 'filled_time') || (property === 'datestamp_time') || (property === 'startdate_time') || (property === 'submitdate_time')) {
+                        line.hide = false;
+                        line.width = 62;
+                        line.suppressSizeToFit = true;
+                        if (do_we_have_to_pinn.a_time) {
+                            line.pinned = 'left';
+                            do_we_have_to_pinn.a_time = false;
+                        };
+                    };
+
+                    if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
+                        line.width = 110;
+                        line.hide = true;
+                    };
+
+                    if ((property === 'startlanguage') || (property === 'survey_name') || (property === 'lastpage') || (property === 'datestamp') || (property === 'submitdate')) {
+                        line.hide = true;
+                    };
+
+                    // Push Line to Return-Array
+                    DataView.push(line);
+
+                }
+            };
+
+            if (sort) {
+                // Sort by 'headerName'
+                DataView = sortByKey(DataView, 'headerName');
+            };
+
+
         };
 
-        // Sort by 'headerName'
-        DataView = sortByKey(DataView, 'headerName');
         //console.log('createColumnDefs :: ', DataView);
         return DataView;
     };
+
+    $scope.d.functions.unselectRow = function() {
+        $scope.d.grid.selected_row = null;
+        $scope.d.grid.is_row_selected = false;
+        $scope.d.grid.options.api.deselectAll();
+    };
+
+    $scope.d.functions.onBtExport = function() {
+
+        var fileName = $scope.d.dataMain.apps.current.name + '.csv';
+
+        var params = {
+            skipHeader: false,
+            skipFooters: false,
+            skipGroups: false,
+            allColumns: $scope.d.grid.export_allColumns,
+            fileName: fileName,
+            columnSeparator: ';'
+        };
+
+        $scope.d.grid.options.api.exportDataAsCsv(params);
+    };
+
+
 
 
     // -----------------------------------
