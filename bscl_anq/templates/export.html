@@ -3,4 +3,46 @@ include(../lib/html/optinomic/page/start.m4)
     <p>EXPORT</p>
     <pre>{{d.export_obj}}</pre>
 </div>
+<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div>
+    <md-input-container class="md-block">
+        <label>SQL</label>
+        <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+    </md-input-container>
+</div>
+<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch">
+    <div flex>
+        <md-select ng-model="d.export_obj.format" ng-init="csv">
+            <md-option value="csv">CSV</md-option>
+            <md-option value="json">JSON</md-option>
+        </md-select>
+    </div>
+    <div flex>
+        <md-select ng-model="d.export_obj.direct" ng-init="True">
+            <md-option value="False">File-Download</md-option>
+            <md-option value="True">Screen</md-option>
+        </md-select>
+    </div>
+    <div flex ng-if="d.export_obj.format === 'csv'">
+        <md-select ng-model="d.export_obj.header" ng-init="True">
+            <md-option value="True">With header</md-option>
+            <md-option value="False">No header</md-option>
+        </md-select>
+    </div>
+    <div flex ng-if="d.export_obj.format === 'csv'">
+        <md-select ng-model="d.export_obj.delimitter" ng-init=";">
+            <md-option value=";">Semicolon (;)</md-option>
+            <md-option value=",">Comma (,)</md-option>
+            <md-option value="|">Pipe (|)</md-option>
+        </md-select>
+    </div>
+</div>
+<div>
+    <md-button ng-click="export()" class="md-primary" aria-label="Export">
+        Run SQL
+    </md-button>
+</div>
+<div ng-if="d.export_obj.have_data">
+    <pre>{{d.export_obj.data}}</pre>
+</div>
 include(../lib/html/optinomic/page/end.m4)

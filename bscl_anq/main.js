@@ -60,21 +60,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
         // Download
         // -----------------------------------
-        $scope.d.export_obj = {};
-        $scope.d.export_obj.data = {};
-        $scope.d.export_obj.have_data = false;
-        $scope.d.export_obj.header = 'True';
-        $scope.d.export_obj.direct = 'False';
-        $scope.d.export_obj.format = 'csv';
-        $scope.d.export_obj.file = 1;
-        $scope.d.export_obj.delimitter = ';';
 
 
 
+        $scope.d.export_obj = $scope.d.default_export_obj;
 
-        $scope.d.export_obj = {};
-
-        $scope.d.export_obj.sql = include_as_js_string(
+        $scope.d.export_obj.sql_field = include_as_js_string(
             export.sql);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 

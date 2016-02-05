@@ -254,6 +254,48 @@ website = http://www.optinomic.com/
     <p>EXPORT</p>
     <pre>{{d.export_obj}}</pre>
 </div>
+<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
+<div>
+    <md-input-container class="md-block">
+        <label>SQL</label>
+        <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+    </md-input-container>
+</div>
+<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch">
+    <div flex>
+        <md-select ng-model="d.export_obj.format" ng-init="csv">
+            <md-option value="csv">CSV</md-option>
+            <md-option value="json">JSON</md-option>
+        </md-select>
+    </div>
+    <div flex>
+        <md-select ng-model="d.export_obj.direct" ng-init="True">
+            <md-option value="False">File-Download</md-option>
+            <md-option value="True">Screen</md-option>
+        </md-select>
+    </div>
+    <div flex ng-if="d.export_obj.format === 'csv'">
+        <md-select ng-model="d.export_obj.header" ng-init="True">
+            <md-option value="True">With header</md-option>
+            <md-option value="False">No header</md-option>
+        </md-select>
+    </div>
+    <div flex ng-if="d.export_obj.format === 'csv'">
+        <md-select ng-model="d.export_obj.delimitter" ng-init=";">
+            <md-option value=";">Semicolon (;)</md-option>
+            <md-option value=",">Comma (,)</md-option>
+            <md-option value="|">Pipe (|)</md-option>
+        </md-select>
+    </div>
+</div>
+<div>
+    <md-button ng-click="export()" class="md-primary" aria-label="Export">
+        Run SQL
+    </md-button>
+</div>
+<div ng-if="d.export_obj.have_data">
+    <pre>{{d.export_obj.data}}</pre>
+</div>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -944,6 +986,19 @@ angular.module('optinomicDataModule')
             }
         };
 
+
+        // -----------------------------------------------------------
+        // Export
+        // -----------------------------------------------------------
+
+        d.default_export_obj = {};
+        d.default_export_obj.data = {};
+        d.default_export_obj.have_data = false;
+        d.default_export_obj.header = 'True';
+        d.default_export_obj.direct = 'False';
+        d.default_export_obj.format = 'csv';
+        d.default_export_obj.file = 1;
+        d.default_export_obj.delimitter = d.grid.export_settings.columnSeparator;
 
 
         return d;
@@ -5340,21 +5395,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
         // Download
         // -----------------------------------
-        $scope.d.export_obj = {};
-        $scope.d.export_obj.data = {};
-        $scope.d.export_obj.have_data = false;
-        $scope.d.export_obj.header = 'True';
-        $scope.d.export_obj.direct = 'False';
-        $scope.d.export_obj.format = 'csv';
-        $scope.d.export_obj.file = 1;
-        $scope.d.export_obj.delimitter = ';';
 
 
 
+        $scope.d.export_obj = $scope.d.default_export_obj;
 
-        $scope.d.export_obj = {};
-
-        $scope.d.export_obj.sql = "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1);
+        $scope.d.export_obj.sql_field = "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
 
     };
