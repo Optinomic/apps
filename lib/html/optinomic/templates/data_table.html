@@ -1,0 +1,31 @@
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div flex ng-if="!d.grid.is_row_selected">
+        <md-input-container class="md-primary md-block">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
+            <input ng-model="d.grid.options.quickFilterText">
+        </md-input-container>
+    </div>
+    <div flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+            <div flex style="padding: 12px;">
+                <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="bottom">
+                Grösse automatisch anpassen
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="bottom">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+        include(templates/partial/template_add_button.html)
+    </div>
+</div>
+<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>

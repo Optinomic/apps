@@ -151,20 +151,6 @@ website = http://www.optinomic.com/
             <div flex style="padding: 12px;">
     <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
 </div>
-<div>
-    <md-button class="md-icon-button" ng-click="entryEdit(d.grid.selected_row.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
-        <i class="md-title mdi mdi-pencil"></i>
-        <md-tooltip md-direction="bottom">
-            Medikament bearbeiten
-        </md-tooltip>
-    </md-button>
-    <md-button class="md-icon-button " ng-click="showConfirm($event, d.grid.selected_row.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
-        <i class="md-title mdi mdi-delete "></i>
-        <md-tooltip md-direction="bottom">
-            Medikament löschen
-        </md-tooltip>
-    </md-button>
-</div>
 
         </div>
     </div>
@@ -5298,7 +5284,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // If ng-survey survey @ some more info to 'response'.
             my_response.filled = current_result.entity.data.filled;
             my_response.survey_name = current_result.event.survey_name;
-            my_response.display = 'AUS: ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
+            my_response.display = 'AUS: ' + my_response.filled_day + ' = ' + my_response.aus_item_01 + ', ' + my_response.aus_item_02 + ', ' + my_response.aus_item_03 + ', ' + my_response.aus_item_04 + ', ' + my_response.aus_item_05 + ', ' + my_response.aus_item_06 + ', ' + my_response.aus_item_07
 
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
