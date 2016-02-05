@@ -26,7 +26,7 @@
             <md-button style="font-size: 18px;" ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
                 <i class="mdi mdi-file"></i> Daten Exportieren
             </md-button>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>
                 <md-tooltip md-direction="bottom">
                     Schliessen
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div>
-        <md-button ng-if="!d.grid.is_row_selected" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
+        <md-button ng-if="d.grid.export_details" style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">
                 Daten Exportieren
