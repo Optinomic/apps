@@ -35,6 +35,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 // Run App-Functions:
                 $scope.setDataView();
                 $scope.setTscoreChart();
+                $scope.setExport();
 
                 // Display Results
                 $scope.d.haveData = true;
@@ -47,6 +48,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
     };
     $scope.loadMainData();
+
+
+    // -----------------------------------
+    // Export: Include SQL
+    // -----------------------------------
+
+    $scope.setExport = function() {
+
+        $scope.d.export_obj = {};
+
+        $scope.d.export_obj.sql = include_as_js_string(export.sql);
+        console.log('$scope.d.export_obj', $scope.d.export_obj);
+
+    };
 
 
     // -----------------------------------

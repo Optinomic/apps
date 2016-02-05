@@ -1,4 +1,3 @@
-
 [module]
 id = ch.suedhang.apps.bscl.anq_user
 name = BSCL (ANQ)
@@ -546,15 +545,13 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
             skipHeader: false,
             skipFooters: false,
             skipGroups: false,
-            allColumns: false,
+            //allColumns: false,
             fileName: 'export.csv',
             columnSeparator: ';'
         };
 
         $scope.d.grid.options.api.exportDataAsCsv(params);
     };
-
-
 
 
 

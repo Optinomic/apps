@@ -26,6 +26,10 @@ include(templates/tscore.html)
 [template data_survey_responses 6 7]
 include(templates/data.html)
 
+[template data_export 6 7]
+include(templates/export.html)
+
+
 
 [dependencies]
 
