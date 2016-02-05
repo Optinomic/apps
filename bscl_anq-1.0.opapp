@@ -255,12 +255,6 @@ website = http://www.optinomic.com/
     <pre>{{d.export_obj}}</pre>
 </div>
 <h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div>
-    <md-input-container class="md-block">
-        <label>SQL</label>
-        <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
-    </md-input-container>
-</div>
 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch">
     <div flex>
         <md-select ng-model="d.export_obj.format" ng-init="csv">
@@ -289,9 +283,15 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div>
-    <md-button ng-click="export()" class="md-primary" aria-label="Export">
+    <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
         Run SQL
     </md-button>
+</div>
+<div>
+    <md-input-container class="md-block">
+        <label>SQL</label>
+        <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+    </md-input-container>
 </div>
 <div ng-if="d.export_obj.have_data">
     <pre>{{d.export_obj.data}}</pre>
@@ -738,6 +738,19 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
         $scope.d.grid.options.api.exportDataAsCsv(params);
     };
 
+
+    $scope.d.functions.doExport = function() {
+
+        var api = dataService.runSQL($scope.d.export_opj.sql_field, $scope.d.export_opj.delimitter, $scope.d.export_opj.header, $scope.d.export_opj.format, $scope.d.export_opj.direct);
+        var aSQL = dataService.getData(api);
+
+        aSQL.then(function(data) {
+            $scope.d.export_opj.have_data = true;
+            $scope.d.export_opj.data = data;
+            console.log('export - Done: ', $scope.d.export_opj.data);
+        });
+
+    };
 
 
 

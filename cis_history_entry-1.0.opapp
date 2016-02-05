@@ -889,6 +889,19 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     };
 
 
+    $scope.d.functions.doExport = function() {
+
+        var api = dataService.runSQL($scope.d.export_opj.sql_field, $scope.d.export_opj.delimitter, $scope.d.export_opj.header, $scope.d.export_opj.format, $scope.d.export_opj.direct);
+        var aSQL = dataService.getData(api);
+
+        aSQL.then(function(data) {
+            $scope.d.export_opj.have_data = true;
+            $scope.d.export_opj.data = data;
+            console.log('export - Done: ', $scope.d.export_opj.data);
+        });
+
+    };
+
 
 
     // -----------------------------------
