@@ -188,11 +188,32 @@ website = http://www.optinomic.com/
             </md-button>
         </div>
     </div>
+    <div flex ng-if="d.grid.export_details" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+            <div flex style="padding: 12px;">
+                <md-switch ng-model="d.grid.export_allColumns" aria-label="allColumns">
+                    Alle Reihen: {{ d.grid.export_allColumns }}
+                </md-switch>
+            </div>
+            <md-button style="font-size: 18px;" ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
+                <i class="mdi mdi-file"></i>
+                <md-tooltip md-direction="bottom">
+                    Daten Exportieren
+                </md-tooltip>
+            </md-button>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
     <div>
-        <md-button style="font-size: 18px;" ng-click="d.functions.onBtExport()" class="md-primary md-icon-button" aria-label="Resize">
+        <md-button style="font-size: 18px;" ng-click="d.grid.export_details = !d.grid.export_details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">
-                Export
+                Daten Exportieren
             </md-tooltip>
         </md-button>
         <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
@@ -855,6 +876,8 @@ angular.module('optinomicDataModule')
 
 
         d.grid = {};
+        d.grid.export_details = false;
+        d.grid.export_allColumns = false;
 
         d.grid.default_options = {
             headerHeight: 50,
