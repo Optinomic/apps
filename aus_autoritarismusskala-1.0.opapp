@@ -500,8 +500,8 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     };
 
                     var do_we_have_to_pinn = {
-                        a_date: false,
-                        a_time: false
+                        a_date: true,
+                        a_time: true
                     };
 
                     // Set newValueHandler if editable

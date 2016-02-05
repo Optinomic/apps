@@ -217,7 +217,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true, true);
+
+        $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true, true);
 
 
 
