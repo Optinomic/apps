@@ -496,7 +496,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     field: property
                 };
 
-                var is_already_pinned = false;
+                var do_we_have_to_pinn = {
+                    a_date: false,
+                    a_time: false
+                };
 
                 // Set newValueHandler if editable
                 if (editable) {
@@ -533,9 +536,9 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     line.width = 88;
                     line.suppressSizeToFit = true;
 
-                    if (!is_already_pinned) {
+                    if (do_we_have_to_pinn.a_date) {
                         line.pinned = 'left';
-                        is_already_pinned = true;
+                        do_we_have_to_pinn.a_date = false;
                     };
                 };
 
@@ -548,7 +551,10 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
                     line.hide = false;
                     line.width = 62;
                     line.suppressSizeToFit = true;
-                    line.pinned = 'left';
+                    if (do_we_have_to_pinn.a_time) {
+                        line.pinned = 'left';
+                        do_we_have_to_pinn.a_time = false;
+                    };
                 };
 
                 if ((property === 'optinomixHASH') || (property === 'ipaddr') || (property === 'refurl') || (property === 'id')) {
