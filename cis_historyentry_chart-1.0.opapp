@@ -584,6 +584,7 @@ var app = angular
         'ngAria',
         'ngRoute',
         'ngMaterial',
+        'agGrid',
         'chart.js',
         'angularMoment',
         'radian'
@@ -624,7 +625,6 @@ angular.module('optinomicDataModule', [
     'ngAria',
     'ngRoute',
     'ngMaterial',
-    'agGrid',
     'chart.js',
     'angularMoment',
     'radian'
