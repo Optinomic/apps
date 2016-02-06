@@ -1207,7 +1207,7 @@ angular.module('optinomicDataModule')
         // -----------------------------------------------------------
 
         d.default_export_obj = {};
-        d.default_export_obj.abfragen = [];
+        d.default_export_obj.packages = [];
         d.default_export_obj.data = {};
         d.default_export_obj.have_data = false;
         d.default_export_obj.header = 'True';
@@ -5615,7 +5615,20 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
         $scope.d.export_obj = $scope.d.default_export_obj;
 
-        $scope.d.export_obj.
+
+        var data_package = {};
+        data_package = {
+            name: 'Forschung',
+            sql: "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
+        };
+        $scope.d.export_obj.packages.push(data_package);
+
+        data_package = {
+            name: 'TARPSY',
+            sql: "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
+        };
+        $scope.d.export_obj.packages.push(data_package);
+
 
         $scope.d.export_obj.sql_field = "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1);
         console.log('$scope.d.export_obj', $scope.d.export_obj);
