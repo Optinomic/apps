@@ -2,6 +2,26 @@ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">Datenexport: {{d.dataMain.apps.current.name}}</h3>
 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
     <div flex>
+        <md-select ng-model="d.export_obj.sql_field" ng-init="0">
+            <md-option ng-repeat="item in d.export_obj.packages" value="{{item.sql}}">{{item.name}}</md-option>
+        </md-select>
+    </div>
+    <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
+        <i class="mdi mdi-close"></i>
+        <md-tooltip md-direction="bottom">
+            Bearbeiten
+        </md-tooltip>
+    </md-button>
+    <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
+        <i class="mdi mdi-close"></i>
+        <md-tooltip md-direction="bottom">
+            Einstellungen
+        </md-tooltip>
+    </md-button>
+</div>
+<div ng-if="d.export_obj.state === 'settings'" layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
+    <p class="md-subhead">Einstellungen</p>
+    <div flex>
         <md-select ng-model="d.export_obj.format" ng-init="csv">
             <md-option value="csv">CSV</md-option>
             <md-option value="json">JSON</md-option>
@@ -27,134 +47,22 @@ include(../lib/html/optinomic/page/start.m4)
         </md-select>
     </div>
 </div>
-<div>
-    <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
-        Run SQL
-    </md-button>
-</div>
-<md-toolbar class="md-menu-toolbar">
-    <div layout="row">
-        <md-toolbar-filler layout layout-align="center center">
-            <md-icon md-svg-icon="call:chat"></md-icon>
-        </md-toolbar-filler>
-        <div>
-            <h2 class="md-toolbar-tools">Untitled document</h2>
-            <md-menu-bar>
-                <md-menu>
-                    <button ng-click="$mdOpenMenu()">
-                        File
-                    </button>
-                    <md-menu-content>
-                        <md-menu-item>
-                            <md-button ng-click="ctrl.sampleAction('share', $event)">
-                                Share...
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
-                            <md-menu>
-                                <md-button ng-click="$mdOpenMenu()">New</md-button>
-                                <md-menu-content>
-                                    <md-menu-item>
-                                        <md-button ng-click="ctrl.sampleAction('New Document', $event)">Document</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ctrl.sampleAction('New Spreadsheet', $event)">Spreadsheet</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ctrl.sampleAction('New Presentation', $event)">Presentation</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ctrl.sampleAction('New Form', $event)">Form</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="ctrl.sampleAction('New Drawing', $event)">Drawing</md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button ng-click="ctrl.sampleAction('Open', $event)">
-                                Open...
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button disabled="disabled" ng-click="ctrl.sampleAction('Rename', $event)">
-                                Rename
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
-                            <md-button ng-click="ctrl.sampleAction('Print', $event)">
-                                Print
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-                <md-menu>
-                    <button ng-click="$mdOpenMenu()">
-                        Edit
-                    </button>
-                    <md-menu-content>
-                        <md-menu-item class="md-indent">
-                            <md-icon md-svg-icon="undo"></md-icon>
-                            <md-button ng-click="ctrl.sampleAction('undo', $event)">
-                                Undo
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item class="md-indent">
-                            <md-icon md-svg-icon="redo"></md-icon>
-                            <md-button ng-click="ctrl.sampleAction('redo', $event)">
-                                Redo
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item class="md-indent">
-                            <md-icon md-svg-icon="content-cut"></md-icon>
-                            <md-button ng-click="ctrl.sampleAction('cut', $event)">
-                                Cut
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item class="md-indent">
-                            <md-icon md-svg-icon="content-copy"></md-icon>
-                            <md-button ng-click="ctrl.sampleAction('copy', $event)">
-                                Copy
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item class="md-indent">
-                            <md-icon md-svg-icon="content-paste"></md-icon>
-                            <md-button ng-click="ctrl.sampleAction('paste', $event)">
-                                Paste
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item class="md-indent">
-                            <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
-                                Find and replace...
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-            </md-menu-bar>
-        </div>
-    </div>
-</md-toolbar>
-<div class="page-container">
-    <div class="page">
-        <h1>Exportstring</h1>
-        <div>
-            <p>EXPORT</p>
-            <pre>{{d.export_obj}}</pre>
-        </div>
-    </div>
-</div>
-<div>
+<div ng-if="d.export_obj.state === 'edit'">
+    <p class="md-subhead">Abfrage bearbeiten</p>
     <md-input-container class="md-block">
         <label>SQL</label>
         <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
     </md-input-container>
 </div>
+<div>
+    <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
+        Jetzt ausführen
+    </md-button>
+</div>
 <div ng-if="d.export_obj.have_data">
+    <p class="md-subhead">Daten</p>
     <pre>{{d.export_obj.data}}</pre>
+    <p class="md-subhead">Debug</p>
+    <pre>{{d.export_obj}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
