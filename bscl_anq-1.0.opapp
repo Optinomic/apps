@@ -277,7 +277,7 @@ website = http://www.optinomic.com/
         </md-tooltip>
     </md-button>
 </div>
-<div ng-if="d.export_obj.state === 'settings'">
+<div ng-if="d.export_obj.state === 'settings' && !d.export_obj.have_data">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Einstellungen</p>
@@ -316,7 +316,7 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
-<div ng-if="d.export_obj.state === 'edit'">
+<div ng-if="d.export_obj.state === 'edit' && !d.export_obj.have_data">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Abfrage bearbeiten</p>
@@ -341,8 +341,30 @@ website = http://www.optinomic.com/
     </md-button>
 </div>
 <div ng-if="d.export_obj.have_data">
-    <p class="md-subhead">Daten</p>
-    <pre>{{d.export_obj.data}}</pre>
+    <div ng-if="d.export_obj.direct === 'True'">
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Daten</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+        <pre>{{d.export_obj.data.download_url}}</pre>
+    </div>
+    <div ng-if="d.export_obj.direct === 'False'">
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Download File</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+            <pre>{{d.export_obj.data}}</pre>
+        </div>
+    </div>
     <p class="md-subhead">Debug</p>
     <pre>{{d.export_obj}}</pre>
 </div>
@@ -1064,7 +1086,6 @@ angular.module('optinomicDataModule')
         d.default_export_obj.header = 'True';
         d.default_export_obj.direct = 'False';
         d.default_export_obj.format = 'csv';
-        d.default_export_obj.file = 1;
         d.default_export_obj.sql_field = '';
         d.default_export_obj.state = 'start';
         d.default_export_obj.delimitter = d.grid.export_settings.columnSeparator;
@@ -5478,7 +5499,7 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
         data_package = {
             name: 'TARPSY',
-            sql: "(SELECT \n  patient.id\n  , patient.last_name\n  , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga\n  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40\n  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as Count\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
+            sql: "(SELECT \n  patient.id\n  patient.last_name,\n  patient.first_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as Count\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
         };
         $scope.d.export_obj.packages.push(data_package);
 

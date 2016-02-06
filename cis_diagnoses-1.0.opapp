@@ -1171,7 +1171,6 @@ angular.module('optinomicDataModule')
         d.default_export_obj.header = 'True';
         d.default_export_obj.direct = 'False';
         d.default_export_obj.format = 'csv';
-        d.default_export_obj.file = 1;
         d.default_export_obj.sql_field = '';
         d.default_export_obj.state = 'start';
         d.default_export_obj.delimitter = d.grid.export_settings.columnSeparator;

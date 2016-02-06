@@ -19,7 +19,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-tooltip>
     </md-button>
 </div>
-<div ng-if="d.export_obj.state === 'settings'">
+<div ng-if="d.export_obj.state === 'settings' && !d.export_obj.have_data">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Einstellungen</p>
@@ -58,7 +58,7 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
 </div>
-<div ng-if="d.export_obj.state === 'edit'">
+<div ng-if="d.export_obj.state === 'edit' && !d.export_obj.have_data">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Abfrage bearbeiten</p>
@@ -83,8 +83,30 @@ include(../lib/html/optinomic/page/start.m4)
     </md-button>
 </div>
 <div ng-if="d.export_obj.have_data">
-    <p class="md-subhead">Daten</p>
-    <pre>{{d.export_obj.data}}</pre>
+    <div ng-if="d.export_obj.direct === 'True'">
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Daten</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+        <pre>{{d.export_obj.data.download_url}}</pre>
+    </div>
+    <div ng-if="d.export_obj.direct === 'False'">
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Download File</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+            <pre>{{d.export_obj.data}}</pre>
+        </div>
+    </div>
     <p class="md-subhead">Debug</p>
     <pre>{{d.export_obj}}</pre>
 </div>
