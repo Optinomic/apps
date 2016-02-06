@@ -4171,8 +4171,7 @@ angular.module('optinomicDataModule')
     .directive('chartTimeline', function($filter, $sce, simpleStatistics) {
         return {
             //templateUrl: 'scripts/directives/charttimeline.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
-            //templateUrl: 'http://apps.optinomic.org/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-timeline/timeline.html?V20160206',
 
             restrict: 'E',
             //replace: true,
@@ -4910,7 +4909,7 @@ angular.module('optinomicDataModule')
 
         return {
             //templateUrl: 'scripts/directives/chart_tscore.html',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?V20160115',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-tscore/tscore.html?V20160206',
 
             restrict: 'E',
             //replace: true,
