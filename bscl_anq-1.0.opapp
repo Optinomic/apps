@@ -258,9 +258,9 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <h3 class="md-headline">Datenexport: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
+<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-padding>
     <div flex>
-        <md-select md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
+        <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
             <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
         </md-select>
     </div>
@@ -277,67 +277,69 @@ website = http://www.optinomic.com/
         </md-tooltip>
     </md-button>
 </div>
-<div ng-if="d.export_obj.state === 'settings'">
-    <md-divider></md-divider>
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-        <p class="md-subhead">Einstellungen</p>
-        <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
-            <i class="mdi mdi-close"></i>
-            <md-tooltip md-direction="bottom">
-                Schliessen
-            </md-tooltip>
+<div ng-if="!d.export_obj.have_data">
+    <div ng-if="d.export_obj.state === 'settings'">
+        <md-divider></md-divider>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Einstellungen</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
+            <div flex>
+                <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
+                    <md-option value="csv">CSV</md-option>
+                    <md-option value="json">JSON</md-option>
+                </md-select>
+            </div>
+            <div flex>
+                <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
+                    <md-option value="False">File-Download</md-option>
+                    <md-option value="True">Screen</md-option>
+                </md-select>
+            </div>
+            <div flex ng-if="d.export_obj.format === 'csv'">
+                <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
+                    <md-option value="True">With header</md-option>
+                    <md-option value="False">No header</md-option>
+                </md-select>
+            </div>
+            <div flex ng-if="d.export_obj.format === 'csv'">
+                <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
+                    <md-option value=";">Semicolon (;)</md-option>
+                    <md-option value=",">Comma (,)</md-option>
+                    <md-option value="|">Pipe (|)</md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+    <div ng-if="d.export_obj.state === 'edit'">
+        <md-divider></md-divider>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <p class="md-subhead">Abfrage bearbeiten</p>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+            <md-input-container flex class="md-block">
+                <label>Abfrage (SQL)</label>
+                <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="end center" layout-padding>
+        <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
+            Jetzt ausführen
         </md-button>
     </div>
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
-        <div flex>
-            <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
-                <md-option value="csv">CSV</md-option>
-                <md-option value="json">JSON</md-option>
-            </md-select>
-        </div>
-        <div flex>
-            <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
-                <md-option value="False">File-Download</md-option>
-                <md-option value="True">Screen</md-option>
-            </md-select>
-        </div>
-        <div flex ng-if="d.export_obj.format === 'csv'">
-            <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
-                <md-option value="True">With header</md-option>
-                <md-option value="False">No header</md-option>
-            </md-select>
-        </div>
-        <div flex ng-if="d.export_obj.format === 'csv'">
-            <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
-                <md-option value=";">Semicolon (;)</md-option>
-                <md-option value=",">Comma (,)</md-option>
-                <md-option value="|">Pipe (|)</md-option>
-            </md-select>
-        </div>
-    </div>
-</div>
-<div ng-if="d.export_obj.state === 'edit'">
-    <md-divider></md-divider>
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-        <p class="md-subhead">Abfrage bearbeiten</p>
-        <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
-            <i class="mdi mdi-close"></i>
-            <md-tooltip md-direction="bottom">
-                Schliessen
-            </md-tooltip>
-        </md-button>
-    </div>
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
-        <md-input-container flex class="md-block">
-            <label>Abfrage (SQL)</label>
-            <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
-        </md-input-container>
-    </div>
-</div>
-<div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="end center" layout-padding>
-    <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
-        Jetzt ausführen
-    </md-button>
 </div>
 <div ng-if="d.export_obj.have_data">
     <md-divider></md-divider>
@@ -1080,7 +1082,7 @@ angular.module('optinomicDataModule')
         d.default_export_obj.direct = 'False';
         d.default_export_obj.format = 'csv';
         d.default_export_obj.sql_field = '';
-        d.default_export_obj.state = 'start';
+        d.default_export_obj.state = 'settings';
         d.default_export_obj.delimitter = d.grid.export_settings.columnSeparator;
 
 
