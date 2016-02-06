@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -62,8 +62,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // -----------------------------------
 
 
-
         $scope.d.export_obj = $scope.d.default_export_obj;
+
+        $scope.d.export_obj.
 
         $scope.d.export_obj.sql_field = include_as_js_string(
             export.sql);

@@ -764,6 +764,7 @@ angular.module('optinomicDataModule')
         // -----------------------------------------------------------
 
         d.default_export_obj = {};
+        d.default_export_obj.abfragen = [];
         d.default_export_obj.data = {};
         d.default_export_obj.have_data = false;
         d.default_export_obj.header = 'True';
