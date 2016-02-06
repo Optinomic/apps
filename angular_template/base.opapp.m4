@@ -31,7 +31,7 @@ include(templates/score.html)
 [template score_range 2 4]
 include(templates/range.html)
 
-[template chart_tscore 6 9]
+[template chart_tscore 6 10]
 include(templates/tscore.html)
 
 [template chart_stanine 6 7]
