@@ -65,17 +65,17 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
         $scope.d.export_obj = $scope.d.default_export_obj;
 
 
-        var data_package = {};
-        data_package = {
-            name: 'Forschung',
-            sql: include_as_js_string(
-                export.sql)
-        };
-        $scope.d.export_obj.packages.push(data_package);
+        //var data_package = {};
+        //data_package = {
+        //    name: 'Forschung',
+        //    sql: include _as_js_string(
+        //        export.sql)
+        //};
+        //$scope.d.export_obj.packages.push(data_package);
 
         //data_package = {
         //    name: 'TARPSY',
-        //    sql: include_as_js_string(
+        //    sql: include _as_js_string(
         //        tarpsy.sql)
         //};
         //$scope.d.export_obj.packages.push(data_package);
