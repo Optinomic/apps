@@ -58,32 +58,31 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
 
         // -----------------------------------
-        // Download
+        // Export - Pakete definieren
         // -----------------------------------
-
 
         $scope.d.export_obj = $scope.d.default_export_obj;
 
 
-        //var data_package = {};
-        //data_package = {
-        //    name: 'Forschung',
-        //    sql: include _as_js_string(
-        //        export.sql)
-        //};
-        //$scope.d.export_obj.packages.push(data_package);
+        var data_package = {};
+        data_package = {
+            name: 'Forschung',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        $scope.d.export_obj.packages.push(data_package);
 
-        //data_package = {
-        //    name: 'TARPSY',
-        //    sql: include _as_js_string(
-        //        tarpsy.sql)
-        //};
-        //$scope.d.export_obj.packages.push(data_package);
+        data_package = {
+            name: 'TARPSY',
+            sql: include_as_js_string(
+                tarpsy.sql)
+        };
+        $scope.d.export_obj.packages.push(data_package);
 
 
-        $scope.d.export_obj.sql_field = include_as_js_string(
-            export.sql);
-        console.log('$scope.d.export_obj', $scope.d.export_obj);
+        // Default setzen.
+        $scope.d.export_obj.sql_field = $scope.d.export_obj.packages[0].sql;
+        console.log('setExport: ', $scope.d.export_obj);
 
     };
 
