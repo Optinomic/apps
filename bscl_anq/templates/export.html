@@ -106,12 +106,10 @@ include(../lib/html/optinomic/page/start.m4)
                     Schliessen
                 </md-tooltip>
             </md-button>
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-                <md-button class="md-raised md-warn" ng-href="{{d.export_obj.data.download_url}}" target="_blank">Download</md-button>
-            </div>
+        </div>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}" target="_blank">Download</md-button>
         </div>
     </div>
-    <p class="md-subhead">Debug</p>
-    <pre>{{d.export_obj}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
