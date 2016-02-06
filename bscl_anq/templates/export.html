@@ -6,13 +6,13 @@ include(../lib/html/optinomic/page/start.m4)
             <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
         </md-select>
     </div>
-    <md-button ng-if="d.export_obj.state !== 'edit'" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
+    <md-button ng-if="d.export_obj.state !== 'edit' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
         <i class="mdi mdi-pencil"></i>
         <md-tooltip md-direction="bottom">
             Bearbeiten
         </md-tooltip>
     </md-button>
-    <md-button ng-if="d.export_obj.state !== 'settings'" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
+    <md-button ng-if="d.export_obj.state !== 'settings' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
         <i class="mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
@@ -99,13 +99,13 @@ include(../lib/html/optinomic/page/start.m4)
     <div ng-if="d.export_obj.direct === 'False'">
         <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
             <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}">Download ({{d.export_obj.format}})</md-button>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
         </div>
-        <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
-            <i class="mdi mdi-close"></i>
-            <md-tooltip md-direction="bottom">
-                Schliessen
-            </md-tooltip>
-        </md-button>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
