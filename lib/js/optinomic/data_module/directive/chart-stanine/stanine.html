@@ -285,12 +285,12 @@
     </table>
     <div class="text-center" style="margin-top: -15px; margin-bottom: 5px;">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-fill layout-align="center start">
-            <div flex ng-if="multiple">
+            <div ng-if="multiple">
                 <md-button class="md-icon-button md-primary no-print" aria-label="Settings" ng-click="nextResult('prev')" style="font-size: 32px;">
                     <i class="mdi mdi-chevron-left"></i>
                 </md-button>
             </div>
-            <div flex="70" ng-click="nextResult('next')">
+            <div flex ng-click="nextResult('next')">
                 <p class="md-caption small">
                     <span class="small" style="color:#3F51B5;">{{myOptions.start_result + 1}} / {{data.length}}</span>
                 </p>
@@ -298,7 +298,7 @@
                     {{data[myOptions.start_result].label}}
                 </p>
             </div>
-            <div flex ng-if="multiple">
+            <div ng-if="multiple">
                 <md-button class="md-icon-button md-primary no-print" aria-label="Settings" ng-click="nextResult('next')" style="font-size: 32px;">
                     <i class="mdi mdi-chevron-right"></i>
                 </md-button>

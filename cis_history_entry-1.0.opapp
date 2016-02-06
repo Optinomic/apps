@@ -5276,7 +5276,7 @@ angular.module('optinomicDataModule')
 
         return {
             //templateUrl: 'scripts/directives/chart_stanine.html',
-            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-stanine/stanine.html?V20151007',
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/lib/js/optinomic/data_module/directive/chart-stanine/stanine.html?V20160208',
 
             restrict: 'E',
             //replace: true,
