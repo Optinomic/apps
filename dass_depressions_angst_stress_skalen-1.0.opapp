@@ -160,7 +160,7 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
+[template data_survey_responses 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
