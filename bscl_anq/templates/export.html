@@ -19,7 +19,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-tooltip>
     </md-button>
 </div>
-<div ng-if="d.export_obj.state === 'settings' && !d.export_obj.have_data">
+<div ng-if="d.export_obj.state === 'settings'">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Einstellungen</p>
@@ -58,7 +58,7 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
 </div>
-<div ng-if="d.export_obj.state === 'edit' && !d.export_obj.have_data">
+<div ng-if="d.export_obj.state === 'edit'">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Abfrage bearbeiten</p>
@@ -93,7 +93,9 @@ include(../lib/html/optinomic/page/start.m4)
                 </md-tooltip>
             </md-button>
         </div>
-        <pre>{{d.export_obj.data.download_url}}</pre>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <pre>{{d.export_obj.data}}</pre>
+        </div>
     </div>
     <div ng-if="d.export_obj.direct === 'False'">
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
@@ -104,7 +106,9 @@ include(../lib/html/optinomic/page/start.m4)
                     Schliessen
                 </md-tooltip>
             </md-button>
-            <pre>{{d.export_obj.data}}</pre>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <pre>{{d.export_obj.data.download_url}}</pre>
+            </div>
         </div>
     </div>
     <p class="md-subhead">Debug</p>

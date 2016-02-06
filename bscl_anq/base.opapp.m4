@@ -23,7 +23,7 @@ website = http://www.optinomic.com/
 [template chart_tscore 6 10]
 include(templates/tscore.html)
 
-[template data_survey_responses 6 7]
+[template data_survey_responses 6 8]
 include(templates/data.html)
 
 [template data_export 6 7]

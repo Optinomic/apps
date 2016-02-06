@@ -100,7 +100,7 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
+[template data_survey_responses 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
@@ -277,7 +277,7 @@ website = http://www.optinomic.com/
         </md-tooltip>
     </md-button>
 </div>
-<div ng-if="d.export_obj.state === 'settings' && !d.export_obj.have_data">
+<div ng-if="d.export_obj.state === 'settings'">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Einstellungen</p>
@@ -316,7 +316,7 @@ website = http://www.optinomic.com/
         </div>
     </div>
 </div>
-<div ng-if="d.export_obj.state === 'edit' && !d.export_obj.have_data">
+<div ng-if="d.export_obj.state === 'edit'">
     <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Abfrage bearbeiten</p>
@@ -351,7 +351,9 @@ website = http://www.optinomic.com/
                 </md-tooltip>
             </md-button>
         </div>
-        <pre>{{d.export_obj.data.download_url}}</pre>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <pre>{{d.export_obj.data}}</pre>
+        </div>
     </div>
     <div ng-if="d.export_obj.direct === 'False'">
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
@@ -362,7 +364,9 @@ website = http://www.optinomic.com/
                     Schliessen
                 </md-tooltip>
             </md-button>
-            <pre>{{d.export_obj.data}}</pre>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <pre>{{d.export_obj.data.download_url}}</pre>
+            </div>
         </div>
     </div>
     <p class="md-subhead">Debug</p>
