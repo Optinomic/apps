@@ -258,115 +258,117 @@ website = http://www.optinomic.com/
             <div ng-if="d.haveData">
 
 <h3 class="md-headline">Datenexport: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-padding>
-    <div flex ng-if="d.export_obj.packages.length === 0">
-        <p>No Export-Package was set.</p>
-    </div>
-    <div flex ng-if="d.export_obj.packages.length >= 1">
-        <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
-            <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
-        </md-select>
-    </div>
-    <md-button ng-if="d.export_obj.state !== 'edit' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
-        <i class="mdi mdi-pencil"></i>
-        <md-tooltip md-direction="bottom">
-            Bearbeiten
-        </md-tooltip>
-    </md-button>
-    <md-button ng-if="d.export_obj.state !== 'settings' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
-        <i class="mdi mdi-dots-vertical"></i>
-        <md-tooltip md-direction="bottom">
-            Einstellungen
-        </md-tooltip>
-    </md-button>
+<div ng-if="d.export_obj.packages.length === 0">
+    <p>Hinweis: Es steht kein Export-Packet zur Verfügung.</p>
 </div>
-<div ng-if="!d.export_obj.have_data">
-    <div ng-if="d.export_obj.state === 'settings'">
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-            <p class="md-subhead">Einstellungen</p>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
-                <i class="mdi mdi-close"></i>
-                <md-tooltip md-direction="bottom">
-                    Schliessen
-                </md-tooltip>
-            </md-button>
+<div ng-if="d.export_obj.packages.length >= 1">
+    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-padding>
+        <div flex>
+            <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
+                <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
+            </md-select>
         </div>
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
-            <div flex>
-                <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
-                    <md-option value="csv">CSV</md-option>
-                    <md-option value="json">JSON</md-option>
-                </md-select>
-            </div>
-            <div flex>
-                <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
-                    <md-option value="False">File-Download</md-option>
-                    <md-option value="True">Screen</md-option>
-                </md-select>
-            </div>
-            <div flex ng-if="d.export_obj.format === 'csv'">
-                <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
-                    <md-option value="True">With header</md-option>
-                    <md-option value="False">No header</md-option>
-                </md-select>
-            </div>
-            <div flex ng-if="d.export_obj.format === 'csv'">
-                <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
-                    <md-option value=";">Semicolon (;)</md-option>
-                    <md-option value=",">Comma (,)</md-option>
-                    <md-option value="|">Pipe (|)</md-option>
-                </md-select>
-            </div>
-        </div>
-    </div>
-    <div ng-if="d.export_obj.state === 'edit'">
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-            <p class="md-subhead">Abfrage bearbeiten</p>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
-                <i class="mdi mdi-close"></i>
-                <md-tooltip md-direction="bottom">
-                    Schliessen
-                </md-tooltip>
-            </md-button>
-        </div>
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
-            <md-input-container flex class="md-block">
-                <label>Abfrage (SQL)</label>
-                <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
-            </md-input-container>
-        </div>
-    </div>
-    <div ng-if="d.export_obj.packages.length >= 1" layout="row" layout-gt-xs="row" layout-xs="row" layout-align="end center" layout-padding>
-        <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
-            Jetzt ausführen
+        <md-button ng-if="d.export_obj.state !== 'edit' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
+            <i class="mdi mdi-pencil"></i>
+            <md-tooltip md-direction="bottom">
+                Bearbeiten
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="d.export_obj.state !== 'settings' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
+            <i class="mdi mdi-dots-vertical"></i>
+            <md-tooltip md-direction="bottom">
+                Einstellungen
+            </md-tooltip>
         </md-button>
     </div>
-</div>
-<div ng-if="d.export_obj.have_data">
-    <div ng-if="d.export_obj.direct === 'True'">
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-            <p class="md-subhead">Daten</p>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
-                <i class="mdi mdi-close"></i>
-                <md-tooltip md-direction="bottom">
-                    Schliessen
-                </md-tooltip>
-            </md-button>
+    <div ng-if="!d.export_obj.have_data">
+        <div ng-if="d.export_obj.state === 'settings'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Einstellungen</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
+                <div flex>
+                    <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
+                        <md-option value="csv">CSV</md-option>
+                        <md-option value="json">JSON</md-option>
+                    </md-select>
+                </div>
+                <div flex>
+                    <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
+                        <md-option value="False">File-Download</md-option>
+                        <md-option value="True">Screen</md-option>
+                    </md-select>
+                </div>
+                <div flex ng-if="d.export_obj.format === 'csv'">
+                    <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
+                        <md-option value="True">With header</md-option>
+                        <md-option value="False">No header</md-option>
+                    </md-select>
+                </div>
+                <div flex ng-if="d.export_obj.format === 'csv'">
+                    <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
+                        <md-option value=";">Semicolon (;)</md-option>
+                        <md-option value=",">Comma (,)</md-option>
+                        <md-option value="|">Pipe (|)</md-option>
+                    </md-select>
+                </div>
+            </div>
         </div>
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
-            <pre ng-if="d.export_obj.format !== 'json'">{{d.export_obj.data}}</pre>
-            <pre ng-if="d.export_obj.format === 'json'">{{d.export_obj.data | json}}</pre>
+        <div ng-if="d.export_obj.state === 'edit'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Abfrage bearbeiten</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+                <md-input-container flex class="md-block">
+                    <label>Abfrage (SQL)</label>
+                    <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+                </md-input-container>
+            </div>
+        </div>
+        <div ng-if="d.export_obj.packages.length >= 1" layout="row" layout-gt-xs="row" layout-xs="row" layout-align="end center" layout-padding>
+            <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
+                Jetzt ausführen
+            </md-button>
         </div>
     </div>
-    <div ng-if=" d.export_obj.direct==='False' ">
-        <div layout="row " layout-gt-xs="row " layout-xs="row " layout-align="space-between center " layout-padding>
-            <md-button class="md-raised md-accent " ng-href="{{d.export_obj.data.download_url}} ">Download ({{d.export_obj.format}})</md-button>
-            <md-button style="font-size: 18px; color:#9E9E9E " ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button " aria-label="Close ">
-                <i class="mdi mdi-close "></i>
-                <md-tooltip md-direction="bottom ">
-                    Schliessen
-                </md-tooltip>
-            </md-button>
+    <div ng-if="d.export_obj.have_data">
+        <div ng-if="d.export_obj.direct === 'True'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Daten</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+                <pre ng-if="d.export_obj.format !== 'json'">{{d.export_obj.data}}</pre>
+                <pre ng-if="d.export_obj.format === 'json'">{{d.export_obj.data | json}}</pre>
+            </div>
+        </div>
+        <div ng-if=" d.export_obj.direct==='False' ">
+            <div layout="row " layout-gt-xs="row " layout-xs="row " layout-align="space-between center " layout-padding>
+                <md-button class="md-raised md-accent " ng-href="{{d.export_obj.data.download_url}} ">Download ({{d.export_obj.format}})</md-button>
+                <md-button style="font-size: 18px; color:#9E9E9E " ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button " aria-label="Close ">
+                    <i class="mdi mdi-close "></i>
+                    <md-tooltip md-direction="bottom ">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
         </div>
     </div>
 </div>
