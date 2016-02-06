@@ -76,7 +76,7 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
         data_package = {
             name: 'TARPSY',
             sql: include_as_js_string(
-                export.sql)
+                tarpsy.sql)
         };
         $scope.d.export_obj.packages.push(data_package);
 

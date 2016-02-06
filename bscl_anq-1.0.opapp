@@ -264,13 +264,13 @@ website = http://www.optinomic.com/
             <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
         </md-select>
     </div>
-    <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
+    <md-button ng-if="d.export_obj.state !== 'edit'" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
         <i class="mdi mdi-pencil"></i>
         <md-tooltip md-direction="bottom">
             Bearbeiten
         </md-tooltip>
     </md-button>
-    <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
+    <md-button ng-if="d.export_obj.state !== 'settings'" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
         <i class="mdi mdi-dots-vertical"></i>
         <md-tooltip md-direction="bottom">
             Einstellungen
@@ -278,7 +278,7 @@ website = http://www.optinomic.com/
     </md-button>
 </div>
 <div ng-if="d.export_obj.state === 'settings'">
-    <md-divider md-inset></md-divider>
+    <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Einstellungen</p>
         <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
@@ -317,7 +317,7 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div ng-if="d.export_obj.state === 'edit'">
-    <md-divider md-inset></md-divider>
+    <md-divider></md-divider>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
         <p class="md-subhead">Abfrage bearbeiten</p>
         <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
@@ -328,14 +328,14 @@ website = http://www.optinomic.com/
         </md-button>
     </div>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-        <md-input-container class="md-block">
+        <md-input-container flex class="md-block">
             <label>SQL</label>
             <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
         </md-input-container>
     </div>
 </div>
 <div>
-    <md-divider md-inset></md-divider>
+    <md-divider></md-divider>
     <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
         Jetzt ausführen
     </md-button>
@@ -5478,7 +5478,7 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
         data_package = {
             name: 'TARPSY',
-            sql: "(SELECT \n  patient.id,\n  patient.last_name,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as gaga,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40,\n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as something\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
+            sql: "(SELECT \n  patient.id\n  , patient.last_name\n  , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga\n  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40\n  , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as Count\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n)".slice(1,-1)
         };
         $scope.d.export_obj.packages.push(data_package);
 
