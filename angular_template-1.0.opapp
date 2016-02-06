@@ -543,47 +543,120 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
-<h3 class="md-headline">Download: {{d.dataMain.apps.current.name}}</h3>
-<div>
-    <md-input-container class="md-block">
-        <label>SQL</label>
-        <textarea ng-model="d.export.sql_field" columns="1000"></textarea>
-    </md-input-container>
+<h3 class="md-headline">Datenexport: {{d.dataMain.apps.current.name}}</h3>
+<div ng-if="d.export_obj.packages.length === 0">
+    <p>Hinweis: Es steht kein Export-Packet zur Verfügung.</p>
 </div>
-<div layout="row" layout-sm="column" layout-align="start end">
-    <div flex>
-        <md-select ng-model="d.export.format" ng-init="csv">
-            <md-option value="csv">CSV</md-option>
-            <md-option value="json">JSON</md-option>
-        </md-select>
+<div ng-if="d.export_obj.packages.length >= 1">
+    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-padding>
+        <div flex>
+            <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
+                <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
+            </md-select>
+        </div>
+        <md-button ng-if="d.export_obj.state !== 'edit' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='edit'" class="md-primary md-icon-button" aria-label="Close">
+            <i class="mdi mdi-pencil"></i>
+            <md-tooltip md-direction="bottom">
+                Bearbeiten
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="d.export_obj.state !== 'settings' && !d.export_obj.have_data" style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='settings'" class="md-primary md-icon-button" aria-label="Close">
+            <i class="mdi mdi-dots-vertical"></i>
+            <md-tooltip md-direction="bottom">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
     </div>
-    <div flex>
-        <md-select ng-model="d.export.direct" ng-init="True">
-            <md-option value="False">File-Download</md-option>
-            <md-option value="True">Screen</md-option>
-        </md-select>
+    <div ng-if="!d.export_obj.have_data">
+        <div ng-if="d.export_obj.state === 'settings'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Einstellungen</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
+                <div flex>
+                    <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
+                        <md-option value="csv">CSV</md-option>
+                        <md-option value="json">JSON</md-option>
+                    </md-select>
+                </div>
+                <div flex>
+                    <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
+                        <md-option value="False">File-Download</md-option>
+                        <md-option value="True">Screen</md-option>
+                    </md-select>
+                </div>
+                <div flex ng-if="d.export_obj.format === 'csv'">
+                    <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
+                        <md-option value="True">With header</md-option>
+                        <md-option value="False">No header</md-option>
+                    </md-select>
+                </div>
+                <div flex ng-if="d.export_obj.format === 'csv'">
+                    <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
+                        <md-option value=";">Semicolon (;)</md-option>
+                        <md-option value=",">Comma (,)</md-option>
+                        <md-option value="|">Pipe (|)</md-option>
+                    </md-select>
+                </div>
+            </div>
+        </div>
+        <div ng-if="d.export_obj.state === 'edit'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Abfrage bearbeiten</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+                <md-input-container flex class="md-block">
+                    <label>Abfrage (SQL)</label>
+                    <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
+                </md-input-container>
+            </div>
+        </div>
+        <div ng-if="d.export_obj.packages.length >= 1" layout="row" layout-gt-xs="row" layout-xs="row" layout-align="end center" layout-padding>
+            <md-button ng-click="d.functions.doExport()" class="md-primary" aria-label="Export">
+                Jetzt ausführen
+            </md-button>
+        </div>
     </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.header" ng-init="True">
-            <md-option value="True">With header</md-option>
-            <md-option value="False">No header</md-option>
-        </md-select>
+    <div ng-if="d.export_obj.have_data">
+        <div ng-if="d.export_obj.direct === 'True'">
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+                <p class="md-subhead">Daten</p>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
+                    <i class="mdi mdi-close"></i>
+                    <md-tooltip md-direction="bottom">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+                <pre ng-if="d.export_obj.format !== 'json'">{{d.export_obj.data}}</pre>
+                <pre ng-if="d.export_obj.format === 'json'">{{d.export_obj.data | json}}</pre>
+            </div>
+        </div>
+        <div ng-if=" d.export_obj.direct==='False' ">
+            <div layout="row " layout-gt-xs="row " layout-xs="row " layout-align="space-between center " layout-padding>
+                <md-button class="md-raised md-accent " ng-href="{{d.export_obj.data.download_url}} ">Download ({{d.export_obj.format}})</md-button>
+                <md-button style="font-size: 18px; color:#9E9E9E " ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button " aria-label="Close ">
+                    <i class="mdi mdi-close "></i>
+                    <md-tooltip md-direction="bottom ">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+        </div>
     </div>
-    <div flex ng-if="d.export.format === 'csv'">
-        <md-select ng-model="d.export.delimitter" ng-init=";">
-            <md-option value=";">Semicolon (;)</md-option>
-            <md-option value=",">Comma (,)</md-option>
-            <md-option value="|">Pipe (|)</md-option>
-        </md-select>
-    </div>
-</div>
-<div>
-    <md-button ng-click="export()" class="md-primary" aria-label="Export">
-        Run SQL
-    </md-button>
-</div>
-<div ng-if="d.export.have_data">
-    <pre>{{d.export.data}}</pre>
 </div>
             </div>
             <div ng-if="!d.haveData">
@@ -648,6 +721,7 @@ website = http://www.optinomic.com/
 </script>
 
 </head>
+
 
 
 
@@ -5676,6 +5750,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
+                $scope.setExport();
                 $scope.setDataView();
                 $scope.setTimelineChartOptions();
                 $scope.setTscoreChart();
@@ -5696,51 +5771,34 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
-
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
 
 
-    //var sql_string = in  clude_as_js_string(export.sql);
-    //console.log('===================> sql_string - somevar - somevar - Included? ', sql_string);
+
+    $scope.setExport = function() {
 
 
-    // ToDO: M4 - Import - remove new lines.
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
 
-    //var sql_import_string = "in_clude(templates/export.sql)";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
+        $scope.d.export_obj = $scope.d.default_export_obj;
 
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
 
-    $scope.export = function() {
+        var data_package = {};
+        data_package = {
+            name: 'Name der Abfrage',
+            sql: "(SELECT \n  patient.id,\n  patient.last_name, \n  patient.first_name, \n  patient.four_letter_code,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as recode_sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as recode_2_sq504V40, \nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq')".slice(1,-1)
+        };
+        $scope.d.export_obj.packages.push(data_package);
 
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
 
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
+        // Default setzen.
+        $scope.d.export_obj.sql_field = $scope.d.export_obj.packages[0].sql;
+        console.log('setExport: ', $scope.d.export_obj);
 
     };
-
-
 
 
 
