@@ -279,7 +279,6 @@ website = http://www.optinomic.com/
 </div>
 <div ng-if="!d.export_obj.have_data">
     <div ng-if="d.export_obj.state === 'settings'">
-        <md-divider></md-divider>
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
             <p class="md-subhead">Einstellungen</p>
             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
@@ -318,7 +317,6 @@ website = http://www.optinomic.com/
         </div>
     </div>
     <div ng-if="d.export_obj.state === 'edit'">
-        <md-divider></md-divider>
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
             <p class="md-subhead">Abfrage bearbeiten</p>
             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
@@ -342,7 +340,6 @@ website = http://www.optinomic.com/
     </div>
 </div>
 <div ng-if="d.export_obj.have_data">
-    <md-divider></md-divider>
     <div ng-if="d.export_obj.direct === 'True'">
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
             <p class="md-subhead">Daten</p>
@@ -353,14 +350,20 @@ website = http://www.optinomic.com/
                 </md-tooltip>
             </md-button>
         </div>
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
             <pre>{{d.export_obj.data}}</pre>
         </div>
     </div>
     <div ng-if="d.export_obj.direct === 'False'">
-        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
             <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}">Download ({{d.export_obj.format}})</md-button>
         </div>
+        <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
+            <i class="mdi mdi-close"></i>
+            <md-tooltip md-direction="bottom">
+                Schliessen
+            </md-tooltip>
+        </md-button>
     </div>
 </div>
             </div>
