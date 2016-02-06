@@ -73,12 +73,12 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
         };
         $scope.d.export_obj.packages.push(data_package);
 
-        data_package = {
-            name: 'TARPSY',
-            sql: include_as_js_string(
-                tarpsy.sql)
-        };
-        $scope.d.export_obj.packages.push(data_package);
+        //data_package = {
+        //    name: 'TARPSY',
+        //    sql: include_as_js_string(
+        //        tarpsy.sql)
+        //};
+        //$scope.d.export_obj.packages.push(data_package);
 
 
         $scope.d.export_obj.sql_field = include_as_js_string(
