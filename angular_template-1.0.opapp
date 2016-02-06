@@ -5789,7 +5789,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var data_package = {};
         data_package = {
             name: 'Name der Abfrage',
-            sql: "(SELECT \n  patient.id,\n  patient.last_name, \n  patient.first_name, \n  patient.four_letter_code,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as recode_sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2  as recode_2_sq504V40, \nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq')".slice(1,-1)
+            sql: "(SELECT \n  patient.id,\n  patient.last_name, \n  patient.first_name, \n  patient.four_letter_code,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as recode_sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 10  as recode_2_sq504V40 \nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq')".slice(1,-1)
         };
         $scope.d.export_obj.packages.push(data_package);
 
