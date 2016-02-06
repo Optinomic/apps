@@ -260,7 +260,7 @@ website = http://www.optinomic.com/
 <h3 class="md-headline">Datenexport: {{d.dataMain.apps.current.name}}</h3>
 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
     <div flex>
-        <md-select ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
+        <md-select md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
             <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
         </md-select>
     </div>
@@ -290,25 +290,25 @@ website = http://www.optinomic.com/
     </div>
     <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
         <div flex>
-            <md-select ng-model="d.export_obj.format" ng-init="csv" aria-label="Format">
+            <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
                 <md-option value="csv">CSV</md-option>
                 <md-option value="json">JSON</md-option>
             </md-select>
         </div>
         <div flex>
-            <md-select ng-model="d.export_obj.direct" ng-init="True" aria-label="Typ">
+            <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
                 <md-option value="False">File-Download</md-option>
                 <md-option value="True">Screen</md-option>
             </md-select>
         </div>
         <div flex ng-if="d.export_obj.format === 'csv'">
-            <md-select ng-model="d.export_obj.header" ng-init="True" aria-label="Header">
+            <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
                 <md-option value="True">With header</md-option>
                 <md-option value="False">No header</md-option>
             </md-select>
         </div>
         <div flex ng-if="d.export_obj.format === 'csv'">
-            <md-select ng-model="d.export_obj.delimitter" ng-init=";" aria-label="Trennzeichen">
+            <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
                 <md-option value=";">Semicolon (;)</md-option>
                 <md-option value=",">Comma (,)</md-option>
                 <md-option value="|">Pipe (|)</md-option>
@@ -344,7 +344,7 @@ website = http://www.optinomic.com/
     <div ng-if="d.export_obj.direct === 'True'">
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
             <p class="md-subhead">Daten</p>
-            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>
                 <md-tooltip md-direction="bottom">
                     Schliessen
@@ -357,7 +357,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="d.export_obj.direct === 'False'">
         <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
-            <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}" target="_blank">Download ({{d.export_obj.format}})</md-button>
+            <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}">Download ({{d.export_obj.format}})</md-button>
         </div>
     </div>
 </div>
