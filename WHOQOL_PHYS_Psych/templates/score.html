@@ -10,7 +10,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </md-card-title-text>
             </md-card-title>
-            <md-card-actions layout="row" layout-align="start center">
+            <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
                 <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
                     <i class="mdi mdi-chevron-left"></i>
                 </md-button>

@@ -140,8 +140,8 @@ website = http://www.optinomic.com/
         </div>
         <div ng-if="d.init">
             <div ng-if="d.haveData">
- <h3 class="md-headline">Rohdaten: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+
+<h3 class="md-headline">Rohdaten: {{d.dataMain.apps.current.name}}</h3> <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
     <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_settings.details)">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>

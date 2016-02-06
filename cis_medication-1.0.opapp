@@ -18,13 +18,6 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template title_verordnung 6 1]
-<div class="grid-border-bottom" style="margin-top: 12px;">
-    <p class="flow-text grid-h2">
-        Verordnung
-    </p>
-</div>
-
 
 [template medication_table 6 8]
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
@@ -36,9 +29,9 @@ website = http://www.optinomic.com/
         <div ng-if="d.init">
             <div ng-if="d.haveData">
 
+<h3 class="md-headline">Verordnung</h3>
 <div ng-if="d.appState === 'show'">
-    <h3 class="md-headline">Rohdaten: {{d.dataMain.apps.current.name}}</h3>
-<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
     <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_settings.details)">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
@@ -712,21 +705,6 @@ website = http://www.optinomic.com/
 </head>
 
 
-
-[template title_reserve 6 1]
-<div class="grid-border-bottom" style="margin-top: 12px;">
-    <p class="flow-text grid-h2">
-        Reserve (ToDo)
-    </p>
-</div>
-
-
-[template title_reserveanwendung 6 1]
-<div class="grid-border-bottom" style="margin-top: 12px;">
-    <p class="flow-text grid-h2">
-        Reserveandwendung (ToDo)
-    </p>
-</div>
 
 
 
