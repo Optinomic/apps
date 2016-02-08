@@ -399,6 +399,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.updateDataView();
         $scope.getEntrys();
 
+        // Set Optimal Size
+        $scope.d.functions.resizeGrid();
     };
 
 
@@ -572,13 +574,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var columnDefs = [{
             headerName: null,
-            headerTooltip: "In Compedium nachschlagen",
-            width: 30,
-            suppressSizeToFit: true,
-            pinned: 'left',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
-        }, {
-            headerName: null,
             headerTooltip: "Medikament bearbeiten",
             width: 30,
             suppressSizeToFit: true,
@@ -591,6 +586,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             suppressSizeToFit: true,
             pinned: 'right',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -605,7 +606,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mo",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 52,
+            width: 42,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -614,7 +615,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mi",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 52,
+            width: 42,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -623,7 +624,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Ab",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 52,
+            width: 42,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -632,7 +633,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Na",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 52,
+            width: 42,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -656,7 +657,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Status",
             headerTooltip: "Status Bezeichnung",
             width: 52,
-            hide: false
+            hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -672,6 +673,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
             width: 52,
+            suppressSizeToFit: true,
             hide: false
         }, {
             cellClass: 'md-body-1',
@@ -693,8 +695,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Start",
-            width: 28,
-            hide: false
+            width: 24,
+            suppressSizeToFit: true,
+            hide: true
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -702,7 +705,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Stop",
             headerTooltip: "Verordnung - Stop",
             width: 52,
-            hide: true
+            suppressSizeToFit: true,
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -723,7 +727,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
-            width: 28,
+            width: 24,
+            suppressSizeToFit: true,
             hide: true
         }, {
             cellClass: 'md-body-1',
@@ -833,6 +838,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // -----------------------------------
             //console.log('FIRE: updateDataView');
             $scope.updateDataView();
+
 
         };
     }, true);
