@@ -396,11 +396,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entryCancel = function() {
         // Cancel
-        $scope.updateDataView();
         $scope.getEntrys();
-
-        // Set Optimal Size
-        $scope.d.functions.resizeGrid();
     };
 
 
@@ -587,12 +583,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             pinned: 'right',
             templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
         }, {
-            headerName: null,
-            headerTooltip: "In Compedium nachschlagen",
-            width: 30,
-            suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
-        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -606,7 +596,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mo",
             headerTooltip: "Dosierung - Morgen",
             hide: false,
-            width: 42,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -615,7 +605,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Mi",
             headerTooltip: "Dosierung - Mittag",
             hide: false,
-            width: 42,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -624,7 +614,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Ab",
             headerTooltip: "Dosierung - Abend",
             hide: false,
-            width: 42,
+            width: 48,
             suppressSizeToFit: true
         }, {
             cellClass: 'md-body-1',
@@ -633,8 +623,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Na",
             headerTooltip: "Dosierung - Nacht",
             hide: false,
-            width: 42,
+            width: 48,
             suppressSizeToFit: true
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -672,7 +668,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            width: 52,
+            width: 82,
             suppressSizeToFit: true,
             hide: false
         }, {
@@ -704,7 +700,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_datum_day",
             headerName: "Stop",
             headerTooltip: "Verordnung - Stop",
-            width: 52,
+            width: 82,
             suppressSizeToFit: true,
             hide: false
         }, {
@@ -836,9 +832,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
         if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
-            //console.log('FIRE: updateDataView');
+            console.log('FIRE: watch - run: updateDataView');
             $scope.updateDataView();
-
 
         };
     }, true);
