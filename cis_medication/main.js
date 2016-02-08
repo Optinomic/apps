@@ -429,6 +429,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.datestamp_edit = new Date();
         $scope.d.newEntryID = myIndex;
 
+        // Make sure - value is a 'date instance' and not a string.
+        $scope.d.newEntry.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_start_verordnung_datum);
+        $scope.d.newEntry.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_stop_verordnung_datum);
+        $scope.d.newEntry.datestamp = $scope.d.functions.sureDateInstance($scope.d.newEntry.datestamp);
+        $scope.d.newEntry.datestamp_edit = $scope.d.functions.sureDateInstance($scope.d.newEntry.datestamp_edit);
+
+
         $scope.loadMedis();
         $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
@@ -668,7 +675,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_start_verordnung_datum_day",
             headerName: "Start",
             headerTooltip: "Verordnung - Start",
-            width: 82,
+            width: 88,
             suppressSizeToFit: true,
             hide: false
         }, {
@@ -700,7 +707,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_stop_verordnung_datum_day",
             headerName: "Stop",
             headerTooltip: "Verordnung - Stop",
-            width: 82,
+            width: 88,
             suppressSizeToFit: true,
             hide: false
         }, {

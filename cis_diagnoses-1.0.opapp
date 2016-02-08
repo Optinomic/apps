@@ -664,6 +664,22 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     $scope.d.functions._InitData('calculations', false);
 
 
+
+    $scope.d.functions.sureDateInstance = function(value) {
+
+        // Make sure that the value is a 'date-instance'.
+        if (value && !(value instanceof Date)) {
+            if (typeof value === "string")
+                value = new Date(value);
+            if (Object.prototype.toString.call(value) !== "[object Date]")
+                throw Error('The ng-model for md-datepicker must be a Date instance. ' +
+                    'Currently the model is a: ' + (typeof value));
+        };
+
+        return value;
+
+    };
+
     // -----------------------------------------------------------
     // GRID
     // http://www.angulargrid.com/angular-grid-resizing/index.php
