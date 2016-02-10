@@ -912,6 +912,7 @@ angular.module('optinomicDataModule')
             onReady: function(event) {
                 console.log('the grid is now ready - updating');
                 d._init.grid.grid_ready = true;
+                d.grid.options.api.deselectAll();
             },
 
 
