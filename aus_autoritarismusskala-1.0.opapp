@@ -441,18 +441,18 @@ angular.module('optinomicDataModule').controller('MainCtrl', function($scope, $f
     // http://www.angulargrid.com/angular-grid-resizing/index.php
     // -----------------------------------------------------------
     $scope.d.functions.resizeGrid = function() {
-        console.log('resizeGrid:', $scope.d.grid.options)
+        //console.log('resizeGrid:', $scope.d.grid.options)
         $scope.d.grid.options.api.sizeColumnsToFit();
     };
 
     $scope.d.functions.refreshView = function() {
-        console.log('refreshView:', $scope.d.grid.options)
+        //console.log('refreshView:', $scope.d.grid.options)
         $scope.d.grid.options.api.refreshView();
     };
 
     $scope.d.functions.toggleToolPanel = function() {
         var visible = $scope.d.grid.options.api.isToolPanelShowing();
-        console.log('toggleToolPanel: Visible=', visible, $scope.d.grid.options)
+        //console.log('toggleToolPanel: Visible=', visible, $scope.d.grid.options)
 
         if (visible) {
             $scope.d.grid.options.api.showToolPanel(false);
