@@ -372,8 +372,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                     };
 
-
-
                 });
 
 
