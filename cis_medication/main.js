@@ -336,6 +336,35 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                         };
                     });
 
+                    // Convert to "Date Instance".
+
+                    row.datestamp = $scope.d.functions.sureDateInstance(row.datestamp);
+
+                    if (row.datestamp_edit) {
+                        row.datestamp_edit = $scope.d.functions.sureDateInstance(row.datestamp_edit);
+                    };
+                    row.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_start_verordnung_datum);
+
+                    if (row.medication_stop_verordnung_datum !== null) {
+                        row.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_stop_verordnung_datum);
+
+                        var date = row.medication_stop_verordnung_datum;
+                        var stop_d = $scope.d.functions.sureDateInstance($filter("amDateFormat")(date, 'DD.MM.YYYY'));
+                        var date = new Date();
+                        var heute_d = $scope.d.functions.sureDateInstance($filter("amDateFormat")(date, 'DD.MM.YYYY'));
+
+                        console.log(' STOP? ---------- ', heute_d.getTime() >= stop_d.getTime(), stop_d, heute_d);
+
+                        // Gestoppt automatisch setzen - falls nötig.
+
+                        if (heute_d.getTime() >= stop_d.getTime()) {
+                            row.medication_status = 1; //gestoppt.
+                        }
+
+                    };
+
+
+
                 });
             };
 
@@ -829,8 +858,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.api.setSortModel(sortModel);
 
         // Set Optimal Size
-        //$scope.d.functions.resizeGrid();
-
+        $scope.d.functions.resizeGrid();
 
     };
 
