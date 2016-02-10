@@ -307,6 +307,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             } else {
                 $scope.d.medication = angular.copy(data);
 
+                var shouldSave = false;
+
 
                 // Add special fields
                 $scope.d.medication.forEach(function(row, myindex) {
@@ -348,24 +350,37 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     if (row.medication_stop_verordnung_datum !== null) {
                         row.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_stop_verordnung_datum);
 
-                        var date = row.medication_stop_verordnung_datum;
-                        var stop_d = $scope.d.functions.sureDateInstance($filter("amDateFormat")(date, 'DD.MM.YYYY'));
-                        var date = new Date();
-                        var heute_d = $scope.d.functions.sureDateInstance($filter("amDateFormat")(date, 'DD.MM.YYYY'));
 
-                        console.log(' STOP? ---------- ', heute_d.getTime() >= stop_d.getTime(), stop_d, heute_d);
+                        if (row.medication_status === 0) {
+                            // Gestoppt automatisch setzen - falls nötig.
 
-                        // Gestoppt automatisch setzen - falls nötig.
+                            var stop_d = row.medication_stop_verordnung_datum;
+                            stop_d.setHours(0, 0, 0, 0, 0);
+                            var date = new Date();
+                            var heute_d = date;
+                            heute_d.setHours(0, 0, 0, 0, 0);
 
-                        if (heute_d.getTime() >= stop_d.getTime()) {
-                            row.medication_status = 1; //gestoppt.
-                        }
+                            console.log(' STOP? ---------- ', heute_d.getTime() >= stop_d.getTime(), stop_d, heute_d);
+
+
+                            if (heute_d.getTime() >= stop_d.getTime()) {
+                                row.medication_status = 1; //gestoppt.
+                                shouldSave = true;
+                            };
+                        };
+
 
                     };
 
 
 
                 });
+
+
+                if (shouldSave) {
+                    console.log('WE SHOULD SAVE NOW!');
+                };
+
             };
 
 
