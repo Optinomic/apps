@@ -416,6 +416,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
         $scope.loadMedis();
         $scope.d.appState = 'new';
+        $scope.d._init.grid.grid_ready = false;
+
     };
 
     $scope.entryEdit = function(currentUID) {
@@ -440,9 +442,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.autofocus = false;
         $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
         $scope.d.appState = 'edit';
+        $scope.d._init.grid.grid_ready = false;
 
 
-        console.log('entryEdit: ', myIndex, $scope.d.newEntry);
+        console.log('entryEdit: ', myIndex, $scope.d.newEntry, $scope.d._init.grid);
     };
 
 
@@ -471,7 +474,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.medication = not_default;
         $scope.d.newEntry.medi_name = new_medication_name;
     };
-
 
 
 
