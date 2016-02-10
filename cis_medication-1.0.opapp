@@ -5850,6 +5850,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.sortStr = '[medication_status, medication_name]';
 
         $scope.d.medication = [];
+        $scope.d.medication_reserve = [];
+        $scope.d.medication_reserve_abgabe = [];
 
         $scope.d.init = true;
         $scope.d.haveData = true;
@@ -6014,8 +6016,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getEntrys = function() {
         // Get Data
 
+        // -------------------------------------
+        // Medication
+        // -------------------------------------
+
         $scope.d.medication = [];
-        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTree);
+
+        var node = $scope.d.nodeTree;
+        var api_call = dataService.getAnnotationsData('patient', node);
         api_call.then(function(data) {
 
             // Create Array if not already exists.
@@ -6099,12 +6107,72 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
 
+            $scope.d.appState = 'show';
+            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+
+            console.log('(+) getEntrys: medication', $scope.d.medication);
+        });
+
+
+        // -------------------------------------
+        // Abgabe der Reserve
+        // -------------------------------------
+
+        $scope.d.medication_reserve = [];
+        var node = $scope.d.nodeTree + '_reserve';
+        var api_call = dataService.getAnnotationsData('patient', node);
+        api_call.then(function(data) {
+
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.medication_reserve = [];
+            } else {
+                $scope.d.medication_reserve = angular.copy(data);
+
+                var shouldSave = false;
+
+            };
+
 
             $scope.d.appState = 'show';
             $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
-            console.log('(+) getEntrys ', $scope.d.medication);
+            console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
+
         });
+
+
+        // -------------------------------------
+        // Abgabe der Reserve
+        // -------------------------------------
+
+        $scope.d.medication_reserve_abgabe = [];
+        var node = $scope.d.nodeTree + '_reserve_abgabe';
+        var api_call = dataService.getAnnotationsData('patient', node);
+        api_call.then(function(data) {
+
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.medication_reserve_abgabe = [];
+            } else {
+                $scope.d.medication_reserve_abgabe = angular.copy(data);
+
+                var shouldSave = false;
+
+            };
+
+
+            $scope.d.appState = 'show';
+            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+
+            console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
+
+        });
+
+
+
     };
 
     // -----------------------------------
