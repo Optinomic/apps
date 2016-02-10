@@ -28490,7 +28490,7 @@ function main(responses) {
 
             // Stress
             d.stress_scale_score = result.dass_item_01 + result.dass_item_06 + result.dass_item_08 + result.dass_item_11 + result.dass_item_12 + result.dass_item_14 + result.dass_item_18;
-            d.stress_cutoff = 6;
+            d.stress_cutoff = 10;
             d.stress_cutoff_reached = calc.checkCutOff(d.stress_scale_score, d.stress_cutoff);
 
             // Write Results for the Return
