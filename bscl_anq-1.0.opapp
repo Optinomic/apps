@@ -1081,7 +1081,6 @@ angular.module('optinomicDataModule')
                 d.grid.selected_row = null;
                 d.grid.is_row_selected = false;
                 d.grid.options.api.deselectAll();
-                d.grid.options.api.sizeColumnsToFit();
             },
 
 
