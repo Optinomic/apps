@@ -210,11 +210,11 @@ website = http://www.optinomic.com/
                 </md-autocomplete>
             </div>
         </md-card-content>
-        <md-card-content>
+        <md-card-content ng-if="d.appState === 'new'">
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
-        </md-card-content>
-        <div ng-if="d.loadedMedicationData">
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </md-card-content>
+        <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
                 <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
@@ -223,7 +223,7 @@ website = http://www.optinomic.com/
             </md-card-content>
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
         </div>
-        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
@@ -403,11 +403,11 @@ website = http://www.optinomic.com/
                 </md-autocomplete>
             </div>
         </md-card-content>
-        <md-card-content>
+        <md-card-content ng-if="d.appState === 'new'">
             <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
-        </md-card-content>
-        <div ng-if="d.loadedMedicationData">
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </md-card-content>
+        <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
             <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
                 <p class="md-subhead">Kein Standardmedikament</p>
                 <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
@@ -416,7 +416,7 @@ website = http://www.optinomic.com/
             </md-card-content>
             <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
         </div>
-        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <p class="md-caption">&nbsp;</p>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
