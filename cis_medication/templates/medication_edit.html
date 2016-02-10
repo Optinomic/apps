@@ -11,7 +11,7 @@
                 </span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content ng-if="d.loadedMedicationData">
+        <md-card-content ng-if="(d.loadedMedicationData) && (d.appState === 'new')">
             <div>
                 <p>&nbsp;</p>
                 <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
