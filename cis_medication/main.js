@@ -363,7 +363,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                             console.log(' STOP? ---------- ', heute_d.getTime() >= stop_d.getTime(), stop_d, heute_d);
 
 
-                            if (heute_d.getTime() >= stop_d.getTime()) {
+                            if (heute_d.getTime() > stop_d.getTime()) {
                                 row.medication_status = 1; //gestoppt.
                                 shouldSave = true;
                             };
@@ -376,7 +376,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
                 if (shouldSave) {
-                    console.log('WE SHOULD SAVE NOW!');
+                    console.log('Saved Medication because of changes in medication_status');
+                    $scope.saveMedication();
                 };
 
             };
