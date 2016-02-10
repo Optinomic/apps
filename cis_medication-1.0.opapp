@@ -6068,7 +6068,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                         row.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_stop_verordnung_datum);
 
 
-                        if (row.medication_status === 0) {
+                        if (parseInt(row.medication_status) === 0) {
                             // Gestoppt automatisch setzen - falls nötig.
 
                             var stop_d = row.medication_stop_verordnung_datum;
