@@ -548,7 +548,7 @@ website = http://www.optinomic.com/
     <p>Hinweis: Es steht kein Export-Packet zur Verfügung.</p>
 </div>
 <div ng-if="d.export_obj.packages.length >= 1">
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-padding>
+    <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start center" layout-padding>
         <div flex>
             <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.export_obj.sql_field" ng-init="" aria-label="Abfragen">
                 <md-option ng-repeat="item in d.export_obj.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
@@ -569,7 +569,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="!d.export_obj.have_data">
         <div ng-if="d.export_obj.state === 'settings'">
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
                 <p class="md-subhead">Einstellungen</p>
                 <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
                     <i class="mdi mdi-close"></i>
@@ -607,7 +607,7 @@ website = http://www.optinomic.com/
             </div>
         </div>
         <div ng-if="d.export_obj.state === 'edit'">
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
                 <p class="md-subhead">Abfrage bearbeiten</p>
                 <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
                     <i class="mdi mdi-close"></i>
@@ -631,7 +631,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="d.export_obj.have_data">
         <div ng-if="d.export_obj.direct === 'True'">
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
                 <p class="md-subhead">Daten</p>
                 <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
                     <i class="mdi mdi-close"></i>
@@ -646,9 +646,9 @@ website = http://www.optinomic.com/
             </div>
         </div>
         <div ng-if=" d.export_obj.direct==='False' ">
-            <div layout="row " layout-gt-xs="row " layout-xs="row " layout-align="space-between center " layout-padding>
-                <md-button class="md-raised md-accent " ng-href="{{d.export_obj.data.download_url}} ">Download ({{d.export_obj.format}})</md-button>
-                <md-button style="font-size: 18px; color:#9E9E9E " ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button " aria-label="Close ">
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
+                <md-button class="md-raised md-accent" ng-href="{{d.export_obj.data.download_url}}">Download ({{d.export_obj.format}})</md-button>
+                <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button " aria-label="Close ">
                     <i class="mdi mdi-close "></i>
                     <md-tooltip md-direction="bottom ">
                         Schliessen
