@@ -293,25 +293,25 @@ website = http://www.optinomic.com/
                 </md-button>
             </div>
             <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding style="margin-top:-48px;">
-                <div flex>
+                <div flex style="margin-top:-18px;">
                     <md-select ng-model="d.export_obj.format" ng-init="csv" md-on-close="d.export_obj.have_data = false" aria-label="Format">
                         <md-option value="csv">CSV</md-option>
                         <md-option value="json">JSON</md-option>
                     </md-select>
                 </div>
-                <div flex>
+                <div flex style="margin-top:-18px;">
                     <md-select ng-model="d.export_obj.direct" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Typ">
                         <md-option value="False">File-Download</md-option>
                         <md-option value="True">Screen</md-option>
                     </md-select>
                 </div>
-                <div flex ng-if="d.export_obj.format === 'csv'">
+                <div flex style="margin-top:-18px;" ng-if="d.export_obj.format === 'csv'">
                     <md-select ng-model="d.export_obj.header" ng-init="True" md-on-close="d.export_obj.have_data = false" aria-label="Header">
                         <md-option value="True">With header</md-option>
                         <md-option value="False">No header</md-option>
                     </md-select>
                 </div>
-                <div flex ng-if="d.export_obj.format === 'csv'">
+                <div flex style="margin-top:-18px;" ng-if="d.export_obj.format === 'csv'">
                     <md-select ng-model="d.export_obj.delimitter" ng-init=";" md-on-close="d.export_obj.have_data = false" aria-label="Trennzeichen">
                         <md-option value=";">Semicolon (;)</md-option>
                         <md-option value=",">Comma (,)</md-option>
@@ -330,7 +330,7 @@ website = http://www.optinomic.com/
                     </md-tooltip>
                 </md-button>
             </div>
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding style="margin-top:-24px;">
                 <md-input-container flex class="md-block">
                     <label>Abfrage (SQL)</label>
                     <textarea ng-model="d.export_obj.sql_field" columns="1000"></textarea>
@@ -345,7 +345,7 @@ website = http://www.optinomic.com/
     </div>
     <div ng-if="d.export_obj.have_data">
         <div ng-if="d.export_obj.direct === 'True'">
-            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between start" layout-padding>
                 <p class="md-subhead">Daten</p>
                 <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.have_data = false" class="md-primary md-icon-button" aria-label="Close">
                     <i class="mdi mdi-close"></i>
@@ -354,9 +354,9 @@ website = http://www.optinomic.com/
                     </md-tooltip>
                 </md-button>
             </div>
-            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between center" layout-padding style="margin-top:-24px;">
-                <pre ng-if="d.export_obj.format !== 'json'">{{d.export_obj.data}}</pre>
-                <pre ng-if="d.export_obj.format === 'json'">{{d.export_obj.data | json}}</pre>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between start" layout-padding style="margin-top:-24px;">
+                <pre flex ng-if="d.export_obj.format !== 'json'">{{d.export_obj.data}}</pre>
+                <pre flex ng-if="d.export_obj.format === 'json'">{{d.export_obj.data | json}}</pre>
             </div>
         </div>
         <div ng-if=" d.export_obj.direct==='False' ">
