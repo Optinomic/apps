@@ -24,7 +24,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-button>
     </div>
     <div ng-if="!d.export_obj.have_data">
-        <div ng-if="d.export_obj.state === 'settings'">
+        <div style="margin-top:-28px;" ng-if="d.export_obj.state === 'settings'">
             <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center" layout-padding>
                 <p class="md-subhead">Einstellungen</p>
                 <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.export_obj.state ='start'" class="md-primary md-icon-button" aria-label="Close">
