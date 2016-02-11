@@ -1,11 +1,11 @@
 <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
-    <div flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_settings.details)">
+    <div hide-xs show-gt-xs flex ng-if="(!d.grid.is_row_selected) && (!d.grid.export_settings.details)">
         <md-input-container class="md-primary md-block">
             <label><i class="mdi mdi-filter"></i> Filter</label>
             <input ng-model="d.grid.options.quickFilterText">
         </md-input-container>
     </div>
-    <div flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
+    <div hide-xs show-gt-xs flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
             include(templates/partial/template_selected_detail.html)
             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
@@ -16,8 +16,8 @@
             </md-button>
         </div>
     </div>
-    <div flex ng-if="d.grid.export_settings.details" style="height:84px; padding:5px; margin:5px;">
-        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start start" layout-padding>
+    <div hide-xs show-gt-xs flex ng-if="d.grid.export_settings.details" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start start" layout-padding>
             <div>
                 <md-input-container>
                     <label>Trennzeichen</label>
@@ -43,7 +43,7 @@
         </div>
     </div>
     <div>
-        <md-button ng-if="(!d.grid.export_settings.details) && (!d.grid.export_settings.details)" style="font-size: 18px;" ng-click="d.grid.export_settings.details = !d.grid.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
+        <md-button hide-xs show-gt-xs ng-if="(!d.grid.export_settings.details) && (!d.grid.export_settings.details)" style="font-size: 18px;" ng-click="d.grid.export_settings.details = !d.grid.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">
                 Daten Exportieren
