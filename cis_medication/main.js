@@ -688,20 +688,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.setDataView = function() {
 
         var columnDefs = [{
-            headerName: null,
-            headerTooltip: "Medikament bearbeiten",
-            width: 30,
-            suppressSizeToFit: true,
-            pinned: 'right',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
-        }, {
-            headerName: null,
-            headerTooltip: "Medikament löschen",
-            width: 30,
-            suppressSizeToFit: true,
-            pinned: 'right',
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
-        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_name",
@@ -845,6 +831,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 24,
             suppressSizeToFit: true,
             hide: true
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament bearbeiten",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament löschen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
