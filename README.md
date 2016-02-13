@@ -10,6 +10,8 @@ for you to install on your server.
 
 # For developers
 
+**WARNING:** Changes should be made in the branch `develop`.
+
 ## Generating the apps
 
 Apps are generated simply by typing:
