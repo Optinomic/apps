@@ -162,10 +162,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // ******************************
     // Internal methods
     // ******************************
-    /**
-     * Search for repos... use $timeout to simulate
-     * remote dataservice call.
-     */
+
+
     function querySearch(query) {
         var results = query ? $scope.d.appInit.repos.filter(createFilterFor(query)) : $scope.d.appInit.repos,
             deferred;
