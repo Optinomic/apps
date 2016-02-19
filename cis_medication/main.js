@@ -101,19 +101,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             });
     };
 
-    //$scope.storeSelectedTARMED = function() {
-    //    // If user selects a TARMED Tarifposition save the entry.
-    //    var entries = $scope.d.TARMEDkapitel[$scope.d.newEntry.tarmed.kapitel_id]
-    //        //console.log('storeSelectedTARMED', entries);
-    //
-    //    entries.forEach(function(content, myindex) {
-    //        //console.log('-- storeSelectedTARMED', content);
-    //
-    //        if (content.tarifpos_code === $scope.d.newEntry.tarmed.selected_tarifpos_code) {
-    //            $scope.d.newEntry.tarmed.selected = content;
-    //        };
-    //    });
-    //};
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'medication';
