@@ -158,9 +158,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-
-
-
     };
 
 
@@ -881,9 +878,172 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
+        var columnDefsReserve = [{
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_name",
+            headerName: "Medikament",
+            headerTooltip: "Reserve - Medikament",
+            pinned: 'left'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_dosierung",
+            headerName: "Dosierung (max/24h)",
+            headerTooltip: "Reserve - Dosierung (maximal innert 24h)",
+            hide: false
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_indikation",
+            headerName: "Indikation",
+            headerTooltip: "Reserve - Indikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status",
+            headerName: "Status ID",
+            headerTooltip: "Status Code",
+            width: 52,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status_bezeichnung",
+            headerName: "Status",
+            headerTooltip: "Status Bezeichnung",
+            width: 52,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_datum_day",
+            headerName: "Start",
+            headerTooltip: "Verordnung - Start",
+            width: 88,
+            suppressSizeToFit: true,
+            hide: false
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user",
+            headerName: "UID",
+            headerTooltip: "Verordnung durch Benutzer ID - Start",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_name",
+            headerName: "Name",
+            headerTooltip: "Name des Verordners - Start",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_initals",
+            headerName: "Kürzel",
+            headerTooltip: "Kürzel des Verordners - Start",
+            width: 24,
+            suppressSizeToFit: true,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_datum_day",
+            headerName: "Stop",
+            headerTooltip: "Verordnung - Stop",
+            width: 88,
+            suppressSizeToFit: true,
+            hide: false
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user",
+            headerName: "UID",
+            headerTooltip: "Verordnung durch Benutzer ID - Stop",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_name",
+            headerName: "Name",
+            headerTooltip: "Name des Verordners - Stop Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_initals",
+            headerName: "Kürzel",
+            headerTooltip: "Kürzel des Verordners - Stop Datum",
+            width: 24,
+            suppressSizeToFit: true,
+            hide: true
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament bearbeiten",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament löschen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_bemerkungen",
+            headerName: "Bemerkung",
+            headerTooltip: "Bemerkungen zur Medikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_day",
+            headerName: "Erstelldatum",
+            headerTooltip: "Erstellt - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_time",
+            headerName: "Erstellzeit",
+            headerTooltip: "Erstellt - Zeit",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_day",
+            headerName: "Bearbeitungsdatum",
+            headerTooltip: "Bearbeitet - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_time",
+            headerName: "Bearbeitungszeit",
+            headerTooltip: "Bearbeitet - Zeit",
+            hide: true
+        }];
+
+
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
         $scope.d.grid.options.columnDefs = columnDefs;
+
+        // DataView - Options
+        $scope.d.grid_reserve = {};
+        $scope.d.grid_reserve.options = $scope.d.grid.default_options;
+        $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
+
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
@@ -894,6 +1054,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.updateDataView = function() {
 
         console.log(' ===== updateDataView =====');
+
+
+        // Sorting
+
+        var sortModel = [{
+            colId: 'medication_status',
+            sort: 'asc'
+        }, {
+            colId: 'medication_name',
+            sort: 'asc'
+        }];
+
 
         // Enrich results
         var new_data = $scope.d.functions.enrichResults($scope.d.medication);
@@ -923,21 +1095,45 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Set Data
         $scope.d.grid.options.rowData = new_data;
         $scope.d.grid.options.api.setRowData(new_data);
-
-        // Sorting
-
-        var sortModel = [{
-            colId: 'medication_status',
-            sort: 'asc'
-        }, {
-            colId: 'medication_name',
-            sort: 'asc'
-        }];
-
         $scope.d.grid.options.api.setSortModel(sortModel);
+        $scope.d.grid.options.api.sizeColumnsToFit();
 
-        // Set Optimal Size
-        $scope.d.functions.resizeGrid();
+
+        // --------------------------
+        // RESERVE
+        // --------------------------
+
+        // Enrich results
+        var new_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+
+
+        // columnDefs - cellStyle or medication_status
+
+        $scope.d.grid_reserve.options.columnDefs.forEach(function(columnDef, myindex) {
+            columnDef.cellClass = function(params) {
+
+                var return_class = null
+                var status = parseInt(params.data.medication_status);
+
+                if (status === 1) {
+                    return_class = 'medication-stop';
+                };
+
+                if (status === 2) {
+                    return_class = 'medication-verweigert';
+                };
+
+                return return_class;
+            }
+        });
+
+
+        // Set Data
+        $scope.d.grid_reserve.options.rowData = new_data;
+        $scope.d.grid_reserve.options.api.setRowData(new_data);
+        $scope.d.grid_reserve.options.api.setSortModel(sortModel);
+        $scope.d.grid_reserve.options.api.sizeColumnsToFit();
+
 
     };
 

@@ -1,0 +1,67 @@
+<div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div hide-xs show-gt-xs flex ng-if="(!d.grid_reserve.is_row_selected) && (!d.grid_reserve.export_settings.details)">
+        <md-input-container class="md-primary md-block">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
+            <input ng-model="d.grid_reserve.options.quickFilterText">
+        </md-input-container>
+    </div>
+    <div hide-xs show-gt-xs flex ng-if="d.grid_reserve.is_row_selected" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+            include(templates/partial/template_selected_detail.html)
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div hide-xs show-gt-xs flex ng-if="d.grid_reserve.export_settings.details" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start start" layout-padding>
+            <div>
+                <md-input-container>
+                    <label>Trennzeichen</label>
+                    <input ng-model="d.grid_reserve.export_settings.columnSeparator">
+                </md-input-container>
+            </div>
+            <div>
+                <md-switch ng-model="d.grid_reserve.export_settings.allColumns" aria-label="allColumns">
+                    Alle Daten-Reihen
+                </md-switch>
+            </div>
+            <div flex>
+                <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
+                    <i class="mdi mdi-file"></i> exportieren
+                </md-button>
+            </div>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid_reserve.export_settings.details = !d.grid_reserve.export_settings.details" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div>
+        <md-button hide-xs show-gt-xs ng-if="(!d.grid_reserve.export_settings.details) && (!d.grid_reserve.export_settings.details)" style="font-size: 18px;" ng-click="d.grid_reserve.export_settings.details = !d.grid_reserve.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
+            <i class="mdi mdi-file"></i>
+            <md-tooltip md-direction="bottom">
+                Daten Exportieren
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="bottom">
+                Grösse automatisch anpassen
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="bottom">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+        include(templates/partial/template_add_button.html)
+    </div>
+</div>
+<div ag-grid="d.grid_reserve.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
