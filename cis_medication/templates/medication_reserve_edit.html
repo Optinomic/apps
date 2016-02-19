@@ -49,16 +49,6 @@
                         <input ng-model="d.newEntry.medication_name">
                     </md-input-container>
                 </div>
-                <div flex="15">
-                    <md-input-container>
-                        <label>Verabreichung</label>
-                        <md-select ng-model="d.newEntry.medication_verabreichung">
-                            <md-option ng-repeat="verabreichung in d.medication_verabreichung" value="{{verabreichung}}">
-                                {{verabreichung}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                 <md-input-container flex class="md-block">
@@ -109,27 +99,15 @@
                 <div>
                     <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                         <md-input-container class="md-block">
-                            <label>Morgen</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mo" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Mittag</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_mi" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Abend</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_ab" />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Nacht</label>
-                            <input required type="number" step="any" name="Mo" ng-model="d.newEntry.medication_dosierung_na" />
+                            <label>Dosierung</label>
+                            <input required type="number" step="any" name="Dosierung" ng-model="d.newEntry.medication_dosierung" />
                         </md-input-container>
                     </div>
                 </div>
                 <div flex="60">
                     <md-input-container flex class="md-block">
-                        <label>Interval</label>
-                        <input ng-model="d.newEntry.medication_dosierung_interval">
+                        <label>Indikation</label>
+                        <input ng-model="d.newEntry.medication_indikation">
                     </md-input-container>
                 </div>
             </div>

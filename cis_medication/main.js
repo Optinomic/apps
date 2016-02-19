@@ -200,7 +200,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 medication: item,
                 medication_selected: true,
-                medication_name: item.medi_name,
                 medication_verabreichung: 'oral',
                 medication_start_verordnung_datum: new Date(),
                 medication_start_verordnung_user: $scope.d.dataMain.users.current.id,
@@ -213,6 +212,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_stop_verordnung_user: null,
                 medication_bemerkungen: '',
                 medication_status: 0
+            };
+
+            // Wirte Medication-Name only if not 'Kein Standardmedikament'
+            if (parseInt(item.medi_order) !== 999999) {
+                $scope.d.newEntry.medication_name = item.medi_name;
             };
 
             $scope.createLinks();
