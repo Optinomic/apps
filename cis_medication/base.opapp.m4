@@ -18,7 +18,7 @@ website = http://www.optinomic.com/
 
 
 
-[template medication_table 6 8]
+[template medication_table 6 9]
 include(templates/medication_grid.html)
 
 
