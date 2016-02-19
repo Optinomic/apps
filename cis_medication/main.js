@@ -1036,7 +1036,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
 
 
-        //console.log('dataGRID: ', $scope.d.grid);
     };
 
 
