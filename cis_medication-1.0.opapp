@@ -124,63 +124,6 @@ website = http://www.optinomic.com/
 
 
 </div>
-<div ng-if="d.appState === 'show_detail'">
-    <md-content class="md-padding">
-    <md-card>
-        <md-card-title style="background-color: #424242; color: #FAFAFA">
-            <md-card-title-text>
-                <span class="md-headline ">
-                    {{d.medication_detail.medication_name}}
-                </span>
-                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
-                {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
-                </span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-divider></md-divider>
-        <md-card-content>
-            <p class="md-caption">&nbsp;</p>
-            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin layout-padding>
-                <div>
-                    <p class="md-caption">Medikament</p>
-                    <p class="flow-text">{{d.medication_detail.medication_name}}</p>
-                </div>
-                <div flex="25">
-                    <p class="md-caption">Dosierung</p>
-                    <div layout="row" layout-gt-xs="row" layout-align="start center">
-                        <p class="flow-text">{{d.medication_detail.medication_dosierung_mo}}</p>
-                        <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
-                        <p class="flow-text">{{d.medication_detail.medication_dosierung_mi}}</p>
-                        <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
-                        <p class="flow-text">{{d.medication_detail.medication_dosierung_ab}}</p>
-                        <p style="color:#9E9E9E"> &nbsp;&nbsp;-&nbsp;&nbsp; </p>
-                        <p class="flow-text">{{d.medication_detail.medication_dosierung_na}}</p>
-                    </div>
-                </div>
-                <div flex>
-                    <p class="md-caption">Informationen</p>
-                    <md-button class="md-primary" ng-href="{{d.medication_detail.url_compendium}}" target="_blank">compendium.ch</md-button>
-                    <md-button class="md-primary" ng-href="{{d.medication_detail.url_open_drug_db}}" target="_blank">oddb.org</md-button>
-                </div>
-            </div>
-        </md-card-content>
-        <md-divider></md-divider>
-        <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <md-button class="md-icon-button" ng-click="showConfirm($event, d.medication_detail.uniqueid) " aria-label="Löschen" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-delete"></i>
-            </md-button>
-            <md-button ng-click="entryEdit()" aria-label="Speichern" style="color: #3F51B5;">
-                <i class="md-title mdi mdi-content-save"></i> Bearbeiten
-            </md-button>
-            <span flex>&nbsp;</span>
-            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-                <i class="md-title mdi mdi-close-circle-outline"></i> Zurück
-            </md-button>
-        </md-card-actions>
-    </md-card>
-</md-content>
-
-</div>
 <div ng-if="d.appState === 'edit'">
     <md-content class="md-padding">
     <md-card>
@@ -567,79 +510,6 @@ website = http://www.optinomic.com/
 </md-content>
 
 </div>
-<div ng-if="d.appState === 'settings'">
-    <md-card>
-    <div style="background-color: #424242; color: #FAFAFA">
-        <md-card-title>
-            <md-card-title-text>
-                <span ng-if="d.appState === 'settings'" class="md-headline">Einstellungen</span>
-            </md-card-title-text>
-        </md-card-title>
-    </div>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <p class="md-body-1">Welche TARMED-Position soll bei Ihnen bei einem neuen Eintrag als Standard gesetzt werden?</p>
-        </div>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container>
-                <label>Leistungsgruppe</label>
-                <md-select ng-model="d.userSettings.kapitel_id" aria-label="TARMED Kapitel">
-                    <md-option ng-repeat="kapitel in d.TARMEDkapitel" value="{{$index}}">
-                        {{kapitel[0].kapitel_beschreibung}} ({{kapitel[0].kapitel_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container ng-if="d.userSettings.kapitel_id">
-                <label>Tarifposition</label>
-                <md-select ng-model="d.userSettings.selected_tarifpos_code" md-on-close="" aria-label="TARMED Tarifpositions">
-                    <md-option ng-repeat="tarifpos in d.TARMEDkapitel[d.userSettings.kapitel_id]" value="{{tarifpos.tarifpos_code}}">
-                        {{tarifpos.tarifpos_beschreibung}} ({{tarifpos.tarifpos_code}})
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <p class="md-body-1">Wie lange dauert normalerweise eine Behandlung? <span ng-if="d.userSettings.dauer"> {{d.userSettings.dauer * 5}} Minuten?</span></p>
-        </div>
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <md-input-container flex class="md-block">
-                <label>Dauer ( Anzahl 5 Minuten )</label>
-                <input ng-model="d.userSettings.dauer" type="number">
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <md-switch ng-model="d.userSettings.sort_reverse" aria-label="Sort" class="md-accent">
-                Neuste Einträge zuoberst anzeigen.
-            </md-switch>
-            <md-switch ng-model="d.userSettings.week_filter" aria-label="Weekfilter" class="md-accent">
-                Wochnfilter standardmässig aktivieren.
-            </md-switch>
-        </div>
-        <pre ng-if="d.appInit.debug">
-		{{d.userSettings | json}}
-		</pre>
-    </md-card-content>
-    <md-card-actions layout-gt-xs="row" layout-align="start center">
-        <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-bug"></i>
-        </md-button>
-        <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
-            <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
-        </md-button>
-        <span flex>&nbsp;</span>
-        <md-button ng-click="saveUserSettings()" aria-label="Speichern" style="color: #3F51B5;">
-            <i class="md-title mdi mdi-content-save"></i> Speichern
-        </md-button>
-    </md-card-actions>
-</md-card>
-
-</div>
             </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -705,6 +575,516 @@ website = http://www.optinomic.com/
 </head>
 
 
+
+[template medication_reserve_table 6 8]
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+    <div ng-controller="AppCtrl">
+        <div ng-if="!d.init">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+
+        </div>
+        <div ng-if="d.init">
+            <div ng-if="d.haveData">
+
+<h3 class="md-headline">Verordnung</h3>
+<div ng-if="d.appState === 'show'">
+    <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center">
+    <div hide-xs show-gt-xs flex ng-if="(!d.grid_reserve.is_row_selected) && (!d.grid_reserve.export_settings.details)">
+        <md-input-container class="md-primary md-block">
+            <label><i class="mdi mdi-filter"></i> Filter</label>
+            <input ng-model="d.grid_reserve.options.quickFilterText">
+        </md-input-container>
+    </div>
+    <div hide-xs show-gt-xs flex ng-if="d.grid_reserve.is_row_selected" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+            <div>
+    <md-button class="md-icon-button" ng-click="entryEdit(d.grid.selected_row.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
+        <i class="md-title mdi mdi-pencil"></i>
+        <md-tooltip md-direction="bottom">
+            Medikament bearbeiten
+        </md-tooltip>
+    </md-button>
+    <md-button class="md-icon-button " ng-click="showConfirm($event, d.grid.selected_row.uniqueid) " aria-label="Löschen " style="color: #9E9E9E; ">
+        <i class="md-title mdi mdi-delete "></i>
+        <md-tooltip md-direction="bottom">
+            Medikament löschen
+        </md-tooltip>
+    </md-button>
+</div>
+<div flex style="padding: 12px;">
+    <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.display}}</p>
+</div>
+
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div hide-xs show-gt-xs flex ng-if="d.grid_reserve.export_settings.details" style="height:84px; padding:5px; margin:5px;">
+        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start start" layout-padding>
+            <div>
+                <md-input-container>
+                    <label>Trennzeichen</label>
+                    <input ng-model="d.grid_reserve.export_settings.columnSeparator">
+                </md-input-container>
+            </div>
+            <div>
+                <md-switch ng-model="d.grid_reserve.export_settings.allColumns" aria-label="allColumns">
+                    Alle Daten-Reihen
+                </md-switch>
+            </div>
+            <div flex>
+                <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
+                    <i class="mdi mdi-file"></i> exportieren
+                </md-button>
+            </div>
+            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.grid_reserve.export_settings.details = !d.grid_reserve.export_settings.details" class="md-primary md-icon-button" aria-label="Close">
+                <i class="mdi mdi-close"></i>
+                <md-tooltip md-direction="bottom">
+                    Schliessen
+                </md-tooltip>
+            </md-button>
+        </div>
+    </div>
+    <div>
+        <md-button hide-xs show-gt-xs ng-if="(!d.grid_reserve.export_settings.details) && (!d.grid_reserve.export_settings.details)" style="font-size: 18px;" ng-click="d.grid_reserve.export_settings.details = !d.grid_reserve.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
+            <i class="mdi mdi-file"></i>
+            <md-tooltip md-direction="bottom">
+                Daten Exportieren
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.resizeGrid()" class="md-primary md-icon-button" aria-label="Resize">
+            <i class="mdi mdi-auto-fix"></i>
+            <md-tooltip md-direction="bottom">
+                Grösse automatisch anpassen
+            </md-tooltip>
+        </md-button>
+        <md-button style="font-size: 18px;" ng-click="d.functions.toggleToolPanel()" class="md-primary md-icon-button" aria-label="Tool">
+            <i class="mdi mdi-table-edit"></i>
+            <md-tooltip md-direction="bottom">
+                Toolpanel ein-/ausblenden
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="d.appState === 'show'" ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
+    <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
+    <md-tooltip md-direction="left">
+        Neu erfassen | hinzufügen
+    </md-tooltip>
+</md-button>
+
+    </div>
+</div>
+<div ag-grid="d.grid_reserve.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
+
+</div>
+<div ng-if="d.appState === 'edit'">
+    <md-content class="md-padding">
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                </span>
+                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Reserve Medikament bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Reserve Medikament hinzufügen</span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="(d.loadedMedicationData) && (d.appState === 'new')">
+            <div>
+                <p>&nbsp;</p>
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
+                    <md-item-template>
+                        <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
+                        - {{item.medi_name}} | {{item.medi_code}}
+                        </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    </md-not-found>
+                </md-autocomplete>
+            </div>
+        </md-card-content>
+        <md-card-content ng-if="d.appState === 'new'">
+            <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </md-card-content>
+        <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
+            <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
+                <p class="md-subhead">Kein Standardmedikament</p>
+                <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
+                </md-button>
+            </md-card-content>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </div>
+        <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex>
+                    <md-input-container class="md-block flow-text">
+                        <label>Medikament</label>
+                        <input ng-model="d.newEntry.medication_name">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <md-input-container flex class="md-block">
+                    <label>Bemerkungen</label>
+                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
+                </md-input-container>
+                <div flex="15">
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Start)</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div>
+                    <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
+                </div>
+                <md-input-container flex>
+                    <label>Arzt / Visum</label>
+                    <md-select ng-model="d.newEntry.medication_start_verordnung_user">
+                        <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                            {{user.data.extras.full_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="15">
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Dosierung</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                        <md-input-container class="md-block">
+                            <label>Dosierung</label>
+                            <input required type="number" step="any" name="Dosierung" ng-model="d.newEntry.medication_dosierung" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex="60">
+                    <md-input-container flex class="md-block">
+                        <label>Indikation</label>
+                        <input ng-model="d.newEntry.medication_indikation">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Stop)</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div>
+                    <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
+                </div>
+                <md-input-container flex>
+                    <label>Arzt / Visum</label>
+                    <md-select ng-model="d.newEntry.medication_stop_verordnung_user">
+                        <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                            {{user.data.extras.full_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="15">
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.appInit.debug"></md-divider>
+        <md-card-content ng-if="d.appInit.debug">
+            <h3 class="md-subhead">Debugging:</h3>
+            <pre>
+                {{d.newEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="!d.loadedMedicationData">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">Medikamenten-Katalog</p>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex>&nbsp;</span>
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Speichern
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+
+</div>
+<div ng-if="d.appState === 'new'">
+    <md-content class="md-padding">
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline ">
+                    {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}})
+                </span>
+                <span class="md-subhead " style="margin-top: -12px; color:#757575;">
+                <span ng-if="d.appState === 'edit'" class="md-subhead">Reserve Medikament bearbeiten</span>
+                <span ng-if="d.appState === 'new'" class="md-subhead">Reserve Medikament hinzufügen</span>
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="(d.loadedMedicationData) && (d.appState === 'new')">
+            <div>
+                <p>&nbsp;</p>
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
+                    <md-item-template>
+                        <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
+                        - {{item.medi_name}} | {{item.medi_code}}
+                        </span>
+                    </md-item-template>
+                    <md-not-found>
+                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    </md-not-found>
+                </md-autocomplete>
+            </div>
+        </md-card-content>
+        <md-card-content ng-if="d.appState === 'new'">
+            <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </md-card-content>
+        <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
+            <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
+                <p class="md-subhead">Kein Standardmedikament</p>
+                <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
+                </md-button>
+            </md-card-content>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </div>
+        <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <p class="md-caption">&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div flex>
+                    <md-input-container class="md-block flow-text">
+                        <label>Medikament</label>
+                        <input ng-model="d.newEntry.medication_name">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <md-input-container flex class="md-block">
+                    <label>Bemerkungen</label>
+                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
+                </md-input-container>
+                <div flex="15">
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Start)</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div>
+                    <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
+                </div>
+                <md-input-container flex>
+                    <label>Arzt / Visum</label>
+                    <md-select ng-model="d.newEntry.medication_start_verordnung_user">
+                        <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                            {{user.data.extras.full_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="15">
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Dosierung</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div>
+                    <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                        <md-input-container class="md-block">
+                            <label>Dosierung</label>
+                            <input required type="number" step="any" name="Dosierung" ng-model="d.newEntry.medication_dosierung" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex="60">
+                    <md-input-container flex class="md-block">
+                        <label>Indikation</label>
+                        <input ng-model="d.newEntry.medication_indikation">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
+                <p class="md-subhead">Verordnung (Stop)</p>
+                <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <div>
+                    <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
+                </div>
+                <md-input-container flex>
+                    <label>Arzt / Visum</label>
+                    <md-select ng-model="d.newEntry.medication_stop_verordnung_user">
+                        <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
+                            {{user.data.extras.full_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="15">
+                    <label>Status</label>
+                    <md-select ng-model="d.newEntry.medication_status">
+                        <md-option ng-repeat="status in d.medication_status" value="{{status.id}}">
+                            {{status.title}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-card-content>
+        <md-divider ng-if="d.appInit.debug"></md-divider>
+        <md-card-content ng-if="d.appInit.debug">
+            <h3 class="md-subhead">Debugging:</h3>
+            <pre>
+                {{d.newEntry | json}}
+            </pre>
+        </md-card-content>
+        <md-card-content ng-if="!d.loadedMedicationData">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p class="md-caption">Medikamenten-Katalog</p>
+        </md-card-content>
+        <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
+        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
+            <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
+            </md-button>
+            <span flex>&nbsp;</span>
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+                <i class="md-title mdi mdi-content-save"></i> Speichern
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+
+</div>
+            </div>
+            <div ng-if="!d.haveData">
+                <div ng-if="!d.haveData">
+    <div>
+        <h3 class="md-headline">{{d.dataMain.apps.current.name}}</h3>
+        <p class="flow-text">Keine Daten verfügbar | No data available.</p>
+        <p class="flow-text">&nbsp;</p>
+    </div>
+    <md-content>
+        <p class="md-body-2 text-muted">
+            Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
+        </p>
+        <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+            - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
+        </p>
+    </md-content>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    &nbsp;
+</div>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/escodegen.browser.js">
+</script>
+<script src="https://cdn.rawgit.com/openbrainsrc/Radian-tutorial/master/js/d3.v2.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-aria.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js">
+</script>
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/ag-grid/dist/ag-grid.min.js?version=3_2_2">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.7.6/angular-chart.min.js">
+</script>
+<!--
+	<script src="http://apps.optinomic.org/lib/js/vendor/radian/1_3/radian.js"></script>
+	<script src="http://demo.optinomic.org/static/js/radian.js?etag=FvITZ_Hg"></script>
+	<script src="hhttps://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian1.js"></script>
+	-->
+<script src="https://cdn.rawgit.com/Optinomic/apps/master/lib/js/vendor/radian/1_0/radian.js">
+</script>
+
+</head>
 
 
 
@@ -5817,19 +6197,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             });
     };
 
-    //$scope.storeSelectedTARMED = function() {
-    //    // If user selects a TARMED Tarifposition save the entry.
-    //    var entries = $scope.d.TARMEDkapitel[$scope.d.newEntry.tarmed.kapitel_id]
-    //        //console.log('storeSelectedTARMED', entries);
-    //
-    //    entries.forEach(function(content, myindex) {
-    //        //console.log('-- storeSelectedTARMED', content);
-    //
-    //        if (content.tarifpos_code === $scope.d.newEntry.tarmed.selected_tarifpos_code) {
-    //            $scope.d.newEntry.tarmed.selected = content;
-    //        };
-    //    });
-    //};
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'medication';
@@ -5874,9 +6241,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-
-
-
     };
 
 
@@ -5919,7 +6283,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 user: $scope.d.dataMain.users.current.id,
                 medication: item,
                 medication_selected: true,
-                medication_name: item.medi_name,
                 medication_verabreichung: 'oral',
                 medication_start_verordnung_datum: new Date(),
                 medication_start_verordnung_user: $scope.d.dataMain.users.current.id,
@@ -5932,6 +6295,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_stop_verordnung_user: null,
                 medication_bemerkungen: '',
                 medication_status: 0
+            };
+
+            // Wirte Medication-Name only if not 'Kein Standardmedikament'
+            if (parseInt(item.medi_order) !== 999999) {
+                $scope.d.newEntry.medication_name = item.medi_name;
             };
 
             $scope.createLinks();
@@ -6597,9 +6965,172 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
+        var columnDefsReserve = [{
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_name",
+            headerName: "Medikament",
+            headerTooltip: "Reserve - Medikament",
+            pinned: 'left'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_dosierung",
+            headerName: "Dosierung (max/24h)",
+            headerTooltip: "Reserve - Dosierung (maximal innert 24h)",
+            hide: false
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_indikation",
+            headerName: "Indikation",
+            headerTooltip: "Reserve - Indikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status",
+            headerName: "Status ID",
+            headerTooltip: "Status Code",
+            width: 52,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_status_bezeichnung",
+            headerName: "Status",
+            headerTooltip: "Status Bezeichnung",
+            width: 52,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_datum_day",
+            headerName: "Start",
+            headerTooltip: "Verordnung - Start",
+            width: 88,
+            suppressSizeToFit: true,
+            hide: false
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user",
+            headerName: "UID",
+            headerTooltip: "Verordnung durch Benutzer ID - Start",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_name",
+            headerName: "Name",
+            headerTooltip: "Name des Verordners - Start",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_user_initals",
+            headerName: "Kürzel",
+            headerTooltip: "Kürzel des Verordners - Start",
+            width: 24,
+            suppressSizeToFit: true,
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_datum_day",
+            headerName: "Stop",
+            headerTooltip: "Verordnung - Stop",
+            width: 88,
+            suppressSizeToFit: true,
+            hide: false
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user",
+            headerName: "UID",
+            headerTooltip: "Verordnung durch Benutzer ID - Stop",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_name",
+            headerName: "Name",
+            headerTooltip: "Name des Verordners - Stop Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_stop_verordnung_user_initals",
+            headerName: "Kürzel",
+            headerTooltip: "Kürzel des Verordners - Stop Datum",
+            width: 24,
+            suppressSizeToFit: true,
+            hide: true
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament bearbeiten",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament löschen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_bemerkungen",
+            headerName: "Bemerkung",
+            headerTooltip: "Bemerkungen zur Medikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_day",
+            headerName: "Erstelldatum",
+            headerTooltip: "Erstellt - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_time",
+            headerName: "Erstellzeit",
+            headerTooltip: "Erstellt - Zeit",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_day",
+            headerName: "Bearbeitungsdatum",
+            headerTooltip: "Bearbeitet - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_time",
+            headerName: "Bearbeitungszeit",
+            headerTooltip: "Bearbeitet - Zeit",
+            hide: true
+        }];
+
+
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
         $scope.d.grid.options.columnDefs = columnDefs;
+
+        // DataView - Options
+        $scope.d.grid_reserve = {};
+        $scope.d.grid_reserve.options = $scope.d.grid.default_options;
+        $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
+
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
@@ -6610,6 +7141,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.updateDataView = function() {
 
         console.log(' ===== updateDataView =====');
+
+
+        // Sorting
+
+        var sortModel = [{
+            colId: 'medication_status',
+            sort: 'asc'
+        }, {
+            colId: 'medication_name',
+            sort: 'asc'
+        }];
+
 
         // Enrich results
         var new_data = $scope.d.functions.enrichResults($scope.d.medication);
@@ -6639,21 +7182,45 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Set Data
         $scope.d.grid.options.rowData = new_data;
         $scope.d.grid.options.api.setRowData(new_data);
-
-        // Sorting
-
-        var sortModel = [{
-            colId: 'medication_status',
-            sort: 'asc'
-        }, {
-            colId: 'medication_name',
-            sort: 'asc'
-        }];
-
         $scope.d.grid.options.api.setSortModel(sortModel);
+        $scope.d.grid.options.api.sizeColumnsToFit();
 
-        // Set Optimal Size
-        $scope.d.functions.resizeGrid();
+
+        // --------------------------
+        // RESERVE
+        // --------------------------
+
+        // Enrich results
+        var new_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+
+
+        // columnDefs - cellStyle or medication_status
+
+        $scope.d.grid_reserve.options.columnDefs.forEach(function(columnDef, myindex) {
+            columnDef.cellClass = function(params) {
+
+                var return_class = null
+                var status = parseInt(params.data.medication_status);
+
+                if (status === 1) {
+                    return_class = 'medication-stop';
+                };
+
+                if (status === 2) {
+                    return_class = 'medication-verweigert';
+                };
+
+                return return_class;
+            }
+        });
+
+
+        // Set Data
+        $scope.d.grid_reserve.options.rowData = new_data;
+        $scope.d.grid_reserve.options.api.setRowData(new_data);
+        $scope.d.grid_reserve.options.api.setSortModel(sortModel);
+        $scope.d.grid_reserve.options.api.sizeColumnsToFit();
+
 
     };
 
