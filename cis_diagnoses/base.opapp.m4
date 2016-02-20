@@ -1,11 +1,12 @@
 [module]
 id = com.optinomic.cis.diagnoses
 name = Diagnosen
-short_description = Diagnosen nach ICD-10.
+short_description = Diagnosen nach ICD-10
 version = include(VERSION)
 type = patient
 
 [description]
+Diagnosen :: Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme (ICD-10)
 
 [developer]
 first_name = Beat
