@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Testblabla
+
 
 [developer]
 first_name = Beat
@@ -16,7 +16,6 @@ email = beat@optinomic.com
 company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
-
 
 
 [template medikamente 6 8]
