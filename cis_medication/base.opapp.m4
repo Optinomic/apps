@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Build 1
+Build 2
 
 [developer]
 first_name = Beat
