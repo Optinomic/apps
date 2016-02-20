@@ -18,10 +18,10 @@ website = http://www.optinomic.com/
 
 
 
-[template medication_table 6 8]
+[template medikamente 6 8]
 include(templates/medication_grid.html)
 
-[template medication_reserve_table 6 8]
+[template reserve_medikamente 6 8]
 include(templates/medication_reserve_grid.html)
 
 
