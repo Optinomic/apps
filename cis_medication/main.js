@@ -1043,7 +1043,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.updateDataView = function() {
 
-        console.log(' ===== updateDataView =====');
 
 
         // Sorting
@@ -1058,7 +1057,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Enrich results
-        var new_data = $scope.d.functions.enrichResults($scope.d.medication);
+        var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
 
 
         // columnDefs - cellStyle or medication_status
@@ -1083,8 +1082,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Set Data
-        $scope.d.grid.options.rowData = new_data;
-        $scope.d.grid.options.api.setRowData(new_data);
+        $scope.d.grid.options.rowData = medication_data;
+        $scope.d.grid.options.api.setRowData(medication_data);
         $scope.d.grid.options.api.setSortModel(sortModel);
         $scope.d.grid.options.api.sizeColumnsToFit();
 
@@ -1094,7 +1093,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // --------------------------
 
         // Enrich results
-        var new_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+        var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
 
 
         // columnDefs - cellStyle or medication_status
@@ -1119,11 +1118,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Set Data
-        $scope.d.grid_reserve.options.rowData = new_data;
-        $scope.d.grid_reserve.options.api.setRowData(new_data);
+        $scope.d.grid_reserve.options.rowData = medication_reserve_data;
+        $scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
         $scope.d.grid_reserve.options.api.setSortModel(sortModel);
         $scope.d.grid_reserve.options.api.sizeColumnsToFit();
 
+        console.log(' ===== updateDataView =====', $scope.d.grid, $scope.d.grid_reserve);
 
     };
 
