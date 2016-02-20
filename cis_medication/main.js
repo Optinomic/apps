@@ -1031,10 +1031,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.columnDefs = columnDefs;
 
         // DataView - Options
-        $scope.d.grid_reserve = {};
+        $scope.d.grid_reserve = $scope.d.grid.options;
         $scope.d.grid_reserve.options = $scope.d.grid.default_options;
         $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
-
 
     };
 
