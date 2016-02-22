@@ -287,6 +287,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.getEntrys = function() {
         // Get Data
 
+
+        // -------------------------------------
+        // Helper
+        // -------------------------------------
+        var count_data_loaded = 0;
+
+        function loadedPartial() {
+            count_data_loaded = count_data_loaded + 1;
+
+            if (count_data_loaded >= 3) {
+                $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+                count_data_loaded = 0;
+            };
+        }
+
         // -------------------------------------
         // Medication
         // -------------------------------------
@@ -380,7 +395,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             $scope.d.appState = 'show';
 
-            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            loadedPartial();
 
             console.log('(+) getEntrys: medication', $scope.d.medication);
         });
@@ -408,7 +423,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             $scope.d.appState = 'show';
-            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            loadedPartial();
 
             console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
 
@@ -437,7 +452,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             $scope.d.appState = 'show';
-            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            loadedPartial();
 
             console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
 
@@ -1110,15 +1125,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             // Enrich results
-
-            if ($scope.d.app === 'Verordnung') {
-                var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
-            } else {
-                var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
-            };
-
-
-            console.log('medication_data', $scope.d.app, medication_data);
+            var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
 
             // Set Data
             $scope.d.grid.options.rowData = medication_data;
