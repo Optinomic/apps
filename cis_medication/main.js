@@ -602,17 +602,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.saveMedication = function() {
-
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
-        api_call.then(function(data) {
-            console.log('(+) saveDiagnoses - success: ', $scope.d.medication);
-
-            // Update Entrys
-            $scope.d.appState = 'show';
-            $scope.getEntrys();
-        });
-    };
 
     $scope.createLinks = function() {
         // Create URL's for nice lookup
@@ -630,6 +619,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.newEntry.url_compendium = "https://compendium.ch/search/all/" + search_string + "/contains/de";
         $scope.d.newEntry.url_open_drug_db = "http://just-medical.oddb.org/de/just-medical/search/zone/drugs/search_query/" + search_string + "/search_type/st_oddb#best_result";
 
+    };
+
+
+
+    $scope.saveMedication = function() {
+
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
+        api_call.then(function(data) {
+            console.log('(+) saveMedication - success: ', $scope.d.medication);
+
+            // Update Entrys
+            $scope.d.appState = 'show';
+            $scope.getEntrys();
+        });
     };
 
 
@@ -680,7 +683,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
         };
 
-        console.log('Try to save: ', $scope.d.medication);
+        console.log('Try to save: ', $scope.d.appState, $scope.d.medication);
         $scope.saveMedication();
     };
 
