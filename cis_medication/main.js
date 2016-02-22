@@ -674,10 +674,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
-    $scope.setDataView = function(app) {
-
-        app = app === undefined ? 'Verordnung' : app;
-
+    $scope.setDataView = function() {
 
         var columnDefs = [{
             cellClass: 'md-body-1',
@@ -1031,13 +1028,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // DataView - Options
-        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
         $scope.d.grid.options.columnDefs = columnDefs;
 
 
 
         // DataView - Options
-        $scope.d.grid_reserve.options = $scope.d.grid.default_options;
+        $scope.d.grid_reserve.options = angular.copy($scope.d.grid.default_options);
         $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
 
     };
@@ -1135,10 +1132,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Set Data
-        //$scope.d.grid_reserve.options.rowData = medication_reserve_data;
-        //$scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
-        //$scope.d.grid_reserve.options.api.setSortModel(sortModel);
-        //$scope.d.grid_reserve.options.api.sizeColumnsToFit();
+        $scope.d.grid_reserve.options.rowData = medication_reserve_data;
+        $scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
+        $scope.d.grid_reserve.options.api.setSortModel(sortModel);
+        $scope.d.grid_reserve.options.api.sizeColumnsToFit();
 
         console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.grid_reserve);
 
