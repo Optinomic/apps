@@ -1080,14 +1080,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Enrich results
         var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
-        //console.log('medication_data', medication_data, $scope.d.medication);
+        // console.log('medication_data', medication_data, $scope.d.medication);
 
 
         // Set Data
         $scope.d.grid.options.rowData = medication_data;
-        //$scope.d.grid.options.api.setRowData(medication_data);
+        $scope.d.grid.options.api.setRowData(medication_data);
         $scope.d.grid.options.api.setSortModel(sortModel);
         $scope.d.grid.options.api.sizeColumnsToFit();
+
+        console.log('===>  SET? medication_data', medication_data, $scope.d.grid.options);
 
 
         // --------------------------
@@ -1120,7 +1122,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Set Data
-        //$scope.d.grid_reserve.options.rowData = medication_reserve_data;
+        $scope.d.grid_reserve.options.rowData = medication_reserve_data;
         $scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
         $scope.d.grid_reserve.options.api.setSortModel(sortModel);
         $scope.d.grid_reserve.options.api.sizeColumnsToFit();
