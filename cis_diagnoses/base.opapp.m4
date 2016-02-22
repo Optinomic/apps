@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Diagnosen :: Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme (ICD-10)
+Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme (ICD-10)
 
 [developer]
 first_name = Beat
