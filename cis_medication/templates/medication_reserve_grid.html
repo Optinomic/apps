@@ -1,7 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">Reserve {{d.app ='Reserve';""}}</h3>
+<h3 class="md-headline">Reserve</h3>
 <div ng-if="d.appState === 'show'">
-    include(templates/medication_reserve_table.html)
+    include(templates/medication_table.html)
 </div>
 <div ng-if="d.appState === 'edit'">
     include(templates/medication_reserve_edit.html)
