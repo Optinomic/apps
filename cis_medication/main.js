@@ -127,6 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.haveData = true;
         $scope.d.loadedMedicationData = false;
         $scope.d.appState = 'show';
+        $scope.d.app = 'Verordnung';
 
 
         $scope.d.medication_verabreichung = ['oral', 'parenteral', 'topisch']
@@ -1129,7 +1130,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         //$scope.d.grid_reserve.options.api.setSortModel(sortModel);
         //$scope.d.grid_reserve.options.api.sizeColumnsToFit();
 
-        //console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.grid_reserve);
+        console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.app);
 
     };
 
