@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.haveData = true;
         $scope.d.loadedMedicationData = false;
         $scope.d.appState = 'show';
-        $scope.d.app = 'not set';
+        $scope.d.app = 'Verordnung';
 
 
         $scope.d.medication_verabreichung = ['oral', 'parenteral', 'topisch']
@@ -674,7 +674,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
-    $scope.setDataView = function() {
+    $scope.setDataView = function(app) {
+
+        app = app === undefined ? 'Verordnung' : app;
+
 
         var columnDefs = [{
             cellClass: 'md-body-1',
@@ -1029,7 +1032,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.columnDefs = columnDefs;
+
+
+        if (app === 'Verordnung') {
+            $scope.d.grid.options.columnDefs = columnDefs;
+        } else {
+            $scope.d.grid.options.columnDefs = columnDefsReserve;
+        };
+
 
         // DataView - Options
         //$scope.d.grid_reserve = $scope.d.grid.options;
@@ -1080,9 +1090,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
         // Enrich results
-        var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
-        // console.log('medication_data', medication_data, $scope.d.medication);
 
+        if ($scope.d.app === 'Verordnung') {
+            var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
+        } else {
+            var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+        };
+
+
+        console.log('medication_data', $scope.d.app, medication_data);
 
         // Set Data
         $scope.d.grid.options.rowData = medication_data;
@@ -1150,7 +1166,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.$watch('d.app', function(newValue, oldValue) {
 
-        console.log('FIRE: App - Changed: ', newValue);
+        if (newValue !== undefined) {
+            $scope.setDataView(newValue);
+            console.log('FIRE: App - Changed: ', newValue);
+        }
 
     }, true);
 
