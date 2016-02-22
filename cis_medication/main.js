@@ -1148,5 +1148,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     }, true);
 
 
+    $scope.$watch('d.app', function(newValue, oldValue) {
+
+        console.log('FIRE: App - Changed: ', newValue);
+
+    }, true);
+
+
+
 
 });
