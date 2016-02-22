@@ -1031,9 +1031,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.columnDefs = columnDefs;
 
         // DataView - Options
-        $scope.d.grid_reserve = $scope.d.grid.options;
-        $scope.d.grid_reserve.options = $scope.d.grid.default_options;
-        $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
+        //$scope.d.grid_reserve = $scope.d.grid.options;
+        //$scope.d.grid_reserve.options = $scope.d.grid.default_options;
+        //$scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
 
     };
 
@@ -1100,27 +1100,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // columnDefs - cellStyle or medication_status
 
-        $scope.d.grid_reserve.options.columnDefs.forEach(function(columnDef, myindex) {
-            columnDef.cellClass = function(params) {
-
-                var return_class = null
-                var status = parseInt(params.data.medication_status);
-
-                if (status === 1) {
-                    return_class = 'medication-stop';
-                };
-
-                if (status === 2) {
-                    return_class = 'medication-verweigert';
-                };
-
-                return return_class;
-            }
-        });
+        //$scope.d.grid_reserve.options.columnDefs.forEach(function(columnDef, myindex) {
+        //    columnDef.cellClass = function(params) {
+        //
+        //        var return_class = null
+        //        var status = parseInt(params.data.medication_status);
+        //
+        //        if (status === 1) {
+        //            return_class = 'medication-stop';
+        //        };
+        //
+        //        if (status === 2) {
+        //            return_class = 'medication-verweigert';
+        //        };
+        //
+        //        return return_class;
+        //    }
+        //});
 
 
         // Enrich results
-        var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+        //var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
 
 
         // Set Data
@@ -1129,7 +1129,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         //$scope.d.grid_reserve.options.api.setSortModel(sortModel);
         //$scope.d.grid_reserve.options.api.sizeColumnsToFit();
 
-        console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.grid_reserve);
+        //console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.grid_reserve);
 
     };
 
