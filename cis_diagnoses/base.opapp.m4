@@ -21,7 +21,6 @@ website = http://www.optinomic.com/
 [template diagnoses_list 6 12]
 include(templates/diagnoses.html)
 
-
 [template diagnoses_report_only 6 6]
 include(templates/diagnoses_report.html)
 
