@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.haveData = true;
         $scope.d.loadedMedicationData = false;
         $scope.d.appState = 'show';
-        $scope.d.app = 'Verordnung';
+        $scope.d.app = 'not set';
 
 
         $scope.d.medication_verabreichung = ['oral', 'parenteral', 'topisch']
@@ -408,7 +408,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             $scope.d.appState = 'show';
-            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            //$scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
             console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
 
@@ -437,7 +437,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             $scope.d.appState = 'show';
-            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            //$scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
             console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
 
