@@ -1041,25 +1041,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // EVENTS
         $scope.d.grid_reserve.options.onReady = function(event) {
             console.log('the reserve_grid is now ready - updating');
-            d._init.grid.grid_reserve_ready = true;
+            $scope.d._init.grid.grid_reserve_ready = true;
 
             // Make Sure nothing is selected as 'default'
-            d.grid_reserve.selected_row = null;
-            d.grid_reserve.is_row_selected = false;
-            d.grid_reserve.options.api.deselectAll();
+            $scope.d.grid_reserve.selected_row = null;
+            $scope.d.grid_reserve.is_row_selected = false;
+            $scope.d.grid_reserve.options.api.deselectAll();
         };
 
 
         $scope.d.grid_reserve.options.onRowSelected = function(event) {
             console.log('Row - Selected: ', event.node.data);
 
-            if (event.node.data === d.grid.selected_row) {
-                d.grid_reserve.selected_row = null;
-                d.grid_reserve.is_row_selected = false;
-                d.grid_reserve.options.api.deselectAll();
+            if (event.node.data === $scope.d.grid.selected_row) {
+                $scope.d.grid_reserve.selected_row = null;
+                $scope.d.grid_reserve.is_row_selected = false;
+                $scope.d.grid_reserve.options.api.deselectAll();
             } else {
-                d.grid_reserve.selected_row = event.node.data;
-                d.grid_reserve.is_row_selected = true;
+                $scope.d.grid_reserve.selected_row = event.node.data;
+                $scope.d.grid_reserve.is_row_selected = true;
             };
 
         };
