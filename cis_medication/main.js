@@ -1096,8 +1096,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // RESERVE
         // --------------------------
 
-        // Enrich results
-        var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
 
 
         // columnDefs - cellStyle or medication_status
@@ -1121,11 +1119,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         });
 
 
+        // Enrich results
+        var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+
+
         // Set Data
-        $scope.d.grid_reserve.options.rowData = medication_reserve_data;
-        $scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
-        $scope.d.grid_reserve.options.api.setSortModel(sortModel);
-        $scope.d.grid_reserve.options.api.sizeColumnsToFit();
+        //$scope.d.grid_reserve.options.rowData = medication_reserve_data;
+        //$scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
+        //$scope.d.grid_reserve.options.api.setSortModel(sortModel);
+        //$scope.d.grid_reserve.options.api.sizeColumnsToFit();
 
         console.log(' =====> updateDataView: ', $scope.d.grid, $scope.d.grid_reserve);
 
