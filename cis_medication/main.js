@@ -1090,7 +1090,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.api.setSortModel(sortModel);
         $scope.d.grid.options.api.sizeColumnsToFit();
 
-        console.log('===>  SET? medication_data', medication_data, $scope.d.grid.options);
+        // console.log('===>  SET? medication_data', medication_data, $scope.d.grid.options);
 
 
         // --------------------------
