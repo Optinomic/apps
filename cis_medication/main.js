@@ -344,7 +344,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
-                $scope.changeSection(0);
                 $scope.updateDataView($scope.d.app.selected_section.id);
 
                 // Update Count Notifications
