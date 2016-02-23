@@ -1251,12 +1251,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.updateDataView('Verordnung');
 
         };
-        if (($scope.d._init.grid.grid_reserve_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
-            // -----------------------------------
-            console.log('FIRE: watch - run: updateDataView');
-            $scope.updateDataView('Reserve');
 
+    }, true);
+
+
+
+    $scope.$watch('d.app.selected_section', function(newValue, oldValue) {
+
+        if (newValue !== undefined) {
+            console.log('=====> CHANGED SECTION', newValue);
         };
+
     }, true);
 
 

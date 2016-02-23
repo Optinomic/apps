@@ -3,11 +3,9 @@ include(../lib/html/optinomic/page/start.m4)
     <md-tab label="{{d.app.sections[0].name}}">
         <md-content class="md-padding">
             {{d.app.selected_section = d.app.sections[0]; ""}}
-            <p>{{d.app.selected_section.id}}</p>
-            <p>{{d.app.selected_section.name}}</p>
-            <h3 class="md-headline">Verordnung</h3>
+            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
             <div ng-if="d.appState === 'show'">
-                include(templates/medication_table.html)
+                include(../lib/html/optinomic/templates/data_table.html)
             </div>
             <div ng-if="d.appState === 'edit'">
                 include(templates/medication_edit.html)
@@ -20,15 +18,19 @@ include(../lib/html/optinomic/page/start.m4)
     <md-tab label="{{d.app.sections[1].name}}">
         <md-content class="md-padding">
             {{d.app.selected_section = d.app.sections[1]; ""}}
-            <p>{{d.app.selected_section.id}}</p>
-            <p>{{d.app.selected_section.name}}</p>
+            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
+            <div ng-if="d.appState === 'show'">
+                include(../lib/html/optinomic/templates/data_table.html)
+            </div>
         </md-content>
     </md-tab>
     <md-tab label="{{d.app.sections[2].name}}">
         <md-content class="md-padding">
             {{d.app.selected_section = d.app.sections[2]; ""}}
-            <p>{{d.app.selected_section.id}}</p>
-            <p>{{d.app.selected_section.name}}</p>
+            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
+            <div ng-if="d.appState === 'show'">
+                include(../lib/html/optinomic/templates/data_table.html)
+            </div>
         </md-content>
     </md-tab>
 </md-tabs>
