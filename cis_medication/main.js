@@ -1219,6 +1219,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // Update Data-Grid when Data loaded & Grid is ready
     // -------------------------------------------------
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
+
         if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
             console.log('(FIRE) updateDataView', $scope.d.app.selected_section.id);
@@ -1227,7 +1228,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
     }, true);
-
 
 
 

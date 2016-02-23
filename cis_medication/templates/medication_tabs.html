@@ -8,10 +8,7 @@ include(../lib/html/optinomic/page/start.m4)
                     include(../lib/html/optinomic/templates/data_table.html)
                 </div>
             </div>
-            <div ng-if="d.appState === 'edit'">
-                include(templates/medication_edit.html)
-            </div>
-            <div ng-if="d.appState === 'new'">
+            <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
                 include(templates/medication_edit.html)
             </div>
         </md-content>
@@ -22,6 +19,9 @@ include(../lib/html/optinomic/page/start.m4)
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 1">
                     include(../lib/html/optinomic/templates/data_table.html)
+                </div>
+                <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
+                    include(templates/medication_reserve_edit.html)
                 </div>
             </div>
         </md-content>
