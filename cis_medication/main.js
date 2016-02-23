@@ -987,12 +987,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerTooltip: "Reserve - Medikament",
             pinned: 'left'
         }, {
-            headerName: null,
-            headerTooltip: "In Compedium nachschlagen",
-            width: 30,
-            suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
-        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung",
@@ -1008,6 +1002,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerName: "Indikation",
             headerTooltip: "Reserve - Indikation",
             hide: false
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
