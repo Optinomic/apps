@@ -107,14 +107,17 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.app.sections = [{
             id: 0,
             name: 'Verordnung',
+            count: 0,
             nodeTree: 'medication'
         }, {
             id: 1,
             name: 'Reserve',
+            count: 0,
             nodeTree: 'medication_reserve'
         }, {
             id: 2,
             name: 'Reserve Abgabe',
+            count: 0,
             nodeTree: 'medication_reserve_abgabe'
         }];
 
@@ -337,8 +340,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             count_data_loaded = count_data_loaded + 1;
 
             if (count_data_loaded >= 3) {
-                $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+                // When all 3 parts are completely loaded
                 count_data_loaded = 0;
+
+                // Set Init - Grid - Data
+                $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+                $scope.changeSection($scope.d.app.selected_section.id);
+
+                // Update Count Notifications
+                $scope.d.app.sections[0].count = $scope.d.medication.length;
+                $scope.d.app.sections[1].count = $scope.d.medication_reserve.length;
+                $scope.d.app.sections[2].count = $scope.d.medication_reserve_abgabe.length;
+
             };
         }
 
@@ -975,6 +988,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             headerTooltip: "Reserve - Medikament",
             pinned: 'left'
         }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+        }, {
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung",
@@ -983,12 +1002,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             width: 96,
             suppressSizeToFit: true,
             hide: false
-        }, {
-            headerName: null,
-            headerTooltip: "In Compedium nachschlagen",
-            width: 30,
-            suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
         }, {
             cellClass: 'md-body-1',
             editable: false,
