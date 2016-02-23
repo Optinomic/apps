@@ -107,13 +107,16 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.app = {};
         $scope.d.app.sections = [{
             id: 0,
-            name: 'Verordnung'
+            name: 'Verordnung',
+            nodeTree: 'medication'
         }, {
             id: 1,
-            name: 'Reserve'
+            name: 'Reserve',
+            nodeTree: 'medication_reserve'
         }, {
             id: 2,
-            name: 'Reserve Abgabe'
+            name: 'Reserve Abgabe',
+            nodeTree: 'medication_reserve_abgabe'
         }];
 
         // Set Default (0 = Verordnung)
@@ -1258,7 +1261,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.changeSection = function(currentSectionID) {
 
         $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
-        console.log('(!) changeSection', d.app.selected_section);
+        console.log('(!) changeSection', $scope.d.app.selected_section);
 
 
 
