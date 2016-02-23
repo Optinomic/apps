@@ -177,8 +177,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Init
         $scope.d.appState = 'show';
 
+        // Set Grid
+        $scope.d._init.grid.grid_ready = false;
         $scope.setDataView($scope.d.app.selected_section.id);
-
 
 
 
@@ -1149,11 +1150,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.updateDataView = function(app) {
 
-        app = app === undefined ? 'Verordnung' : app;
+        var app = app === undefined ? 0 : app;
 
 
         // Sorting
-
         var sortModel = [{
             colId: 'medication_status',
             sort: 'asc'
@@ -1163,83 +1163,51 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-        if (app === 'Verordnung') {
-            // columnDefs - cellStyle or medication_status
+        // columnDefs - cellStyle for medication_status
+        $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
+            columnDef.cellClass = function(params) {
 
-            $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
-                columnDef.cellClass = function(params) {
+                var return_class = null
+                var status = parseInt(params.data.medication_status);
 
-                    var return_class = null
-                    var status = parseInt(params.data.medication_status);
+                if (status === 1) {
+                    return_class = 'medication-stop';
+                };
 
-                    if (status === 1) {
-                        return_class = 'medication-stop';
-                    };
+                if (status === 2) {
+                    return_class = 'medication-verweigert';
+                };
 
-                    if (status === 2) {
-                        return_class = 'medication-verweigert';
-                    };
-
-                    return return_class;
-                }
-            });
+                return return_class;
+            }
+        });
 
 
 
-            // Enrich results
-            var medication_data = $scope.d.functions.enrichResults($scope.d.medication);
-
-            // Set Data
-            $scope.d.grid.options.rowData = medication_data;
-            $scope.d.grid.options.api.setRowData(medication_data);
-            $scope.d.grid.options.api.setSortModel(sortModel);
-            $scope.d.grid.options.api.sizeColumnsToFit();
-
-            console.log(' =====> updateDataView - Verordnung: ', $scope.d.grid);
-
-
-        } else {
-            // --------------------------
-            // RESERVE
-            // --------------------------
-
-
-
-            // columnDefs - cellStyle or medication_status
-
-            $scope.d.grid_reserve.options.columnDefs.forEach(function(columnDef, myindex) {
-                columnDef.cellClass = function(params) {
-
-                    var return_class = null
-                    var status = parseInt(params.data.medication_status);
-
-                    if (status === 1) {
-                        return_class = 'medication-stop';
-                    };
-
-                    if (status === 2) {
-                        return_class = 'medication-verweigert';
-                    };
-
-                    return return_class;
-                }
-            });
-
-
-            // Enrich results
-            var medication_reserve_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
-
-
-            // Set Data
-            $scope.d.grid_reserve.options.rowData = medication_reserve_data;
-            $scope.d.grid_reserve.options.api.setRowData(medication_reserve_data);
-            $scope.d.grid_reserve.options.api.setSortModel(sortModel);
-            $scope.d.grid_reserve.options.api.sizeColumnsToFit();
-
-
-            console.log(' =====> updateDataView - Reserve: ', $scope.d.grid_reserve);
-
+        // Select needed data & enrich results
+        var medication_data = [];
+        // 'Verordnung'
+        if (app === 0) {
+            medication_data = $scope.d.functions.enrichResults($scope.d.medication);
         };
+
+        // 'Reserve'
+        if (app === 1) {
+            medication_data = $scope.d.functions.enrichResults($scope.d.medication_reserve);
+        };
+
+        // 'Reserve Abgabe'
+        if (app === 2) {
+            medication_data = $scope.d.functions.enrichResults($scope.d.medication_reserve_abgabe);
+        };
+
+        // Set Data
+        $scope.d.grid.options.rowData = medication_data;
+        $scope.d.grid.options.api.setRowData(medication_data);
+        $scope.d.grid.options.api.setSortModel(sortModel);
+        $scope.d.grid.options.api.sizeColumnsToFit();
+
+        console.log(' =====> updateDataView: ', app, $scope.d.grid);
 
     };
 
@@ -1250,8 +1218,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
         if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
-            console.log('FIRE: watch - run: updateDataView');
-            $scope.updateDataView('Verordnung');
+            console.log('(FIRE) updateDataView', $scope.d.app.selected_section.id);
+            $scope.updateDataView($scope.d.app.selected_section.id);
 
         };
 
