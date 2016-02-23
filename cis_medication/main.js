@@ -127,6 +127,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.nodeTree = 'medication';
 
+        $scope.d._init.grid.data_loader = 0;
+
         $scope.d.appInit = {};
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
@@ -344,7 +346,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
-                $scope.updateDataView($scope.d.app.selected_section.id);
 
                 // Update Count Notifications
                 $scope.d.app.sections[0].count = $scope.d.medication.length;
@@ -1235,6 +1236,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
             console.log('(FIRE) updateDataView', $scope.d.app.selected_section.id);
+            $scope.changeSection($scope.d.app.selected_section.id);
             $scope.updateDataView($scope.d.app.selected_section.id);
 
         };
