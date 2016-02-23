@@ -1,8 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-tabs md-dynamic-height md-border-bottom>
     <md-tab label="{{d.app.sections[0].name}}">
-        <md-content class="md-padding" ng-init="d.app.selected_section = d.app.sections[0]">
-            <h1 class="md-display-2">{{d.app.sections[0].name}}</h1>
+        <md-content class="md-padding">
             <p>{{d.app.selected_section.id}}</p>
             <p>{{d.app.selected_section.name}}</p>
             <h3 class="md-headline">Verordnung</h3>
@@ -18,15 +17,15 @@ include(../lib/html/optinomic/page/start.m4)
         </md-content>
     </md-tab>
     <md-tab label="{{d.app.sections[1].name}}">
-        <md-content class="md-padding" ng-init="d.app.selected_section = d.app.sections[1]">
-            <h1 class="md-display-2">{{d.app.sections[1].name}}</h1>
+        <md-content class="md-padding">
+            {{d.app.selected_section = d.app.sections[1], ""}}
             <p>{{d.app.selected_section.id}}</p>
             <p>{{d.app.selected_section.name}}</p>
         </md-content>
     </md-tab>
     <md-tab label="{{d.app.sections[2].name}}">
-        <md-content class="md-padding" ng-init="d.app.selected_section = d.app.sections[2]">
-            <h1 class="md-display-2">{{d.app.sections[2].name}}</h1>
+        <md-content class="md-padding">
+            {{d.app.selected_section = d.app.sections[2], ""}}
             <p>{{d.app.selected_section.id}}</p>
             <p>{{d.app.selected_section.name}}</p>
         </md-content>
