@@ -1,8 +1,11 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-tabs md-dynamic-height md-border-bottom>
-    <md-tab label="{{d.app.sections[0].name}} {{d.app.sections[0].count}}" md-on-select="changeSection(0)">
+    <md-tab label="{{d.app.sections[0].name}} ({{d.app.sections[0].count}})" md-on-select="changeSection(0)">
         <md-content class="md-padding">
-            <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between end">
+                <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+                <p class="md-body-1">{{d.dataMain.patient.data.extras.full_name}} ({{d.dataMain.patient.data.extras.birthday_age}})</p>
+            </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 0">
                     include(../lib/html/optinomic/templates/data_table.html)
@@ -13,9 +16,12 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </md-content>
     </md-tab>
-    <md-tab label="{{d.app.sections[1].name}} {{d.app.sections[0].count}}" md-on-select="changeSection(1)">
+    <md-tab label="{{d.app.sections[1].name}} ({{d.app.sections[1].count}})" md-on-select="changeSection(1)">
         <md-content class="md-padding">
-            <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between end">
+                <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+                <p class="md-body-1">{{d.dataMain.patient.data.extras.full_name}} ({{d.dataMain.patient.data.extras.birthday_age}})</p>
+            </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 1">
                     include(../lib/html/optinomic/templates/data_table.html)
@@ -26,9 +32,12 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </md-content>
     </md-tab>
-    <md-tab label="{{d.app.sections[2].name}} {{d.app.sections[0].count}}" md-on-select="changeSection(2)">
+    <md-tab label="{{d.app.sections[2].name}} ({{d.app.sections[2].count}})" md-on-select="changeSection(2)">
         <md-content class="md-padding">
-            <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="space-between end">
+                <h1 class="md-display-1">Medikamente: {{d.app.selected_section.name}}</h1>
+                <p class="md-body-1">{{d.dataMain.patient.data.extras.full_name}} ({{d.dataMain.patient.data.extras.birthday_age}})</p>
+            </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 2">
                     include(../lib/html/optinomic/templates/data_table.html)
