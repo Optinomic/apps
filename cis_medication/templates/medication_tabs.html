@@ -2,7 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <md-tabs md-dynamic-height md-border-bottom>
     <md-tab label="{{d.app.sections[0].name}}" md-on-select="changeSection(0)">
         <md-content class="md-padding">
-            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
+            <h1 class="md-display-2">{{d.app.selected_section.name}}</h1>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 0">
                     include(../lib/html/optinomic/templates/data_table.html)
@@ -18,7 +18,7 @@ include(../lib/html/optinomic/page/start.m4)
     </md-tab>
     <md-tab label="{{d.app.sections[1].name}}" md-on-select="changeSection(1)">
         <md-content class="md-padding">
-            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
+            <h1 class="md-display-2">{{d.app.selected_section.name}}</h1>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 1">
                     include(../lib/html/optinomic/templates/data_table.html)
@@ -28,7 +28,7 @@ include(../lib/html/optinomic/page/start.m4)
     </md-tab>
     <md-tab label="{{d.app.sections[2].name}}" md-on-select="changeSection(2)">
         <md-content class="md-padding">
-            <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
+            <h1 class="md-display-2">{{d.app.selected_section.name}}</h1>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 2">
                     include(../lib/html/optinomic/templates/data_table.html)

@@ -181,7 +181,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d._init.grid.grid_ready = false;
         $scope.setDataView($scope.d.app.selected_section.id);
 
-
+        // If Data is loaded - Force the grid to 'pseudo update - data'
+        if ($scope.d._init.grid.data_loader > 0) {
+            $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+        };
 
     };
 
