@@ -103,6 +103,23 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
     $scope.appInit = function() {
+
+        $scope.d.app = {};
+        $scope.d.app.sections = [{
+            id: 0,
+            name: 'Verordnung'
+        }, {
+            id: 1,
+            name: 'Reserve'
+        }, {
+            id: 2,
+            name: 'Reserve Abgabe'
+        }];
+
+        $scope.d.app.selected_section = $scope.d.app.sections[0];
+
+
+
         $scope.d.nodeTree = 'medication';
 
         $scope.d.appInit = {};
@@ -935,8 +952,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_dosierung",
-            headerName: "Dosierung (max/24h)",
+            headerName: "Max/24h",
             headerTooltip: "Reserve - Dosierung (maximal innert 24h)",
+            width: 96,
+            suppressSizeToFit: true,
             hide: false
         }, {
             headerName: null,
@@ -950,7 +969,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_indikation",
             headerName: "Indikation",
             headerTooltip: "Reserve - Indikation",
-            hide: true
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,

@@ -18,6 +18,11 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
+
+[template medikamente 6 8]
+include(templates/medication_tabs.html)
+
+
 [template medikamente 6 8]
 include(templates/medication_grid.html)
 
