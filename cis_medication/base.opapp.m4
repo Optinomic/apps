@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Build #84
+Build #85
 
 [developer]
 first_name = Beat
@@ -19,7 +19,7 @@ website = http://www.optinomic.com/
 
 
 
-[template medikamente 6 14]
+[template medikamente 6 12]
 include(templates/medication_tabs.html)
 
 

@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Run App-Functions
             $scope.appInit();
-            $scope.setDataView();
             $scope.getEntrys();
 
 
@@ -177,6 +176,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init
         $scope.d.appState = 'show';
+
+        $scope.setDataView($scope.d.app.selected_section.id);
+
 
 
 
@@ -764,7 +766,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     $scope.setDataView = function(app) {
 
-        var app = app === undefined ? 'Verordnung' : app;
+        var app = app === undefined ? 0 : app;
 
 
         var columnDefs = [{
@@ -1123,11 +1125,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // DataView - Options
         $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
 
-        if (app === 'Verordnung') {
+        // 'Verordnung'
+        if (app === 0) {
             $scope.d.grid.options.columnDefs = columnDefs;
         };
 
-        if (app === 'Reserve') {
+        // 'Reserve'
+        if (app === 1) {
+            $scope.d.grid.options.columnDefs = columnDefsReserve;
+        };
+
+        // 'Reserve Abgabe'
+        if (app === 2) {
             $scope.d.grid.options.columnDefs = columnDefsReserve;
         };
 
