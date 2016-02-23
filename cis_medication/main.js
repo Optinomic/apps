@@ -116,8 +116,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             name: 'Reserve Abgabe'
         }];
 
-        $scope.d.app.selected_section = $scope.d.app.sections[0];
-
+        // Set Default (0 = Verordnung)
+        $scope.changeSection(0);
 
 
         $scope.d.nodeTree = 'medication';
@@ -1255,15 +1255,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     }, true);
 
 
+    $scope.changeSection = function(currentSectionID) {
 
-    $scope.$watch('d.app.selected_section', function(newValue, oldValue) {
+        $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
+        console.log('(!) changeSection', d.app.selected_section);
 
-        if (newValue !== undefined) {
-            console.log('=====> CHANGED SECTION', newValue);
-        };
 
-    }, true);
 
+    };
 
 
 
