@@ -169,6 +169,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
+    $scope.changeSection = function(currentSectionID) {
+
+        // Set current State
+        $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
+        console.log('(!) changeSection', $scope.d.app.selected_section);
+
+        // Init
+        $scope.d.appState = 'show';
+
+
+
+    };
+
+
 
 
     // ******************************
@@ -748,7 +762,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
-    $scope.setDataView = function() {
+    $scope.setDataView = function(app) {
+
+        var app = app === undefined ? 'Verordnung' : app;
+
 
         var columnDefs = [{
             cellClass: 'md-body-1',
@@ -1105,41 +1122,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // DataView - Options
         $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
-        $scope.d.grid.options.columnDefs = columnDefs;
 
-
-        // DataView - Options
-        $scope.d.grid_reserve = {};
-        $scope.d.grid_reserve.export_settings = angular.copy($scope.d.grid.export_settings);
-        $scope.d.grid_reserve.options = angular.copy($scope.d.grid.default_options);
-        $scope.d.grid_reserve.options.columnDefs = columnDefsReserve;
-
-
-        // EVENTS
-        $scope.d.grid_reserve.options.onReady = function(event) {
-            console.log('the reserve_grid is now ready - updating');
-            $scope.d._init.grid.grid_reserve_ready = true;
-
-            // Make Sure nothing is selected as 'default'
-            $scope.d.grid_reserve.selected_row = null;
-            $scope.d.grid_reserve.is_row_selected = false;
-            $scope.d.grid_reserve.options.api.deselectAll();
+        if (app === 'Verordnung') {
+            $scope.d.grid.options.columnDefs = columnDefs;
         };
 
-
-        $scope.d.grid_reserve.options.onRowSelected = function(event) {
-            console.log('Row - Selected: ', event.node.data);
-
-            if (event.node.data === $scope.d.grid.selected_row) {
-                $scope.d.grid_reserve.selected_row = null;
-                $scope.d.grid_reserve.is_row_selected = false;
-                $scope.d.grid_reserve.options.api.deselectAll();
-            } else {
-                $scope.d.grid_reserve.selected_row = event.node.data;
-                $scope.d.grid_reserve.is_row_selected = true;
-            };
-
+        if (app === 'Reserve') {
+            $scope.d.grid.options.columnDefs = columnDefsReserve;
         };
+
 
 
     };
@@ -1258,14 +1249,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     }, true);
 
 
-    $scope.changeSection = function(currentSectionID) {
 
-        $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
-        console.log('(!) changeSection', $scope.d.app.selected_section);
-
-
-
-    };
 
 
 

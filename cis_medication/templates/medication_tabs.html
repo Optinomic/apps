@@ -4,7 +4,9 @@ include(../lib/html/optinomic/page/start.m4)
         <md-content class="md-padding">
             <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
             <div ng-if="d.appState === 'show'">
-                include(../lib/html/optinomic/templates/data_table.html)
+                <div ng-if="d.app.selected_section.id === 0">
+                    include(../lib/html/optinomic/templates/data_table.html)
+                </div>
             </div>
             <div ng-if="d.appState === 'edit'">
                 include(templates/medication_edit.html)
@@ -18,7 +20,9 @@ include(../lib/html/optinomic/page/start.m4)
         <md-content class="md-padding">
             <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
             <div ng-if="d.appState === 'show'">
-                include(../lib/html/optinomic/templates/data_table.html)
+                <div ng-if="d.app.selected_section.id === 1">
+                    include(../lib/html/optinomic/templates/data_table.html)
+                </div>
             </div>
         </md-content>
     </md-tab>
@@ -26,7 +30,9 @@ include(../lib/html/optinomic/page/start.m4)
         <md-content class="md-padding">
             <h3 class="md-headline">{{d.app.selected_section.name}}</h3>
             <div ng-if="d.appState === 'show'">
-                include(../lib/html/optinomic/templates/data_table.html)
+                <div ng-if="d.app.selected_section.id === 2">
+                    include(../lib/html/optinomic/templates/data_table.html)
+                </div>
             </div>
         </md-content>
     </md-tab>
