@@ -635,13 +635,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         if (app === 'Reserve') {
             var current_nodeTree = $scope.d.nodeTree + '_reserve';
-            var current_array_to_save = $scope.d.medication;
+            var current_array_to_save = $scope.d.medication_reserve;
         };
 
+        console.log('(!) saveMedication (', current_nodeTree, ') try: ', angular.toJson(current_array_to_save, true));
 
         var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
         api_call.then(function(data) {
-            console.log('(+) saveMedication (', current_nodeTree, ') success: ', current_array_to_save);
+            console.log('(+) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
 
             // Update Entrys
             $scope.d.appState = 'show';
@@ -720,7 +721,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         };
 
-        console.log('Try to save: ', $scope.d.appState, $scope.d.medication);
         $scope.saveMedication(app);
     };
 
