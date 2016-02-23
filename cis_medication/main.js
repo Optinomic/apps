@@ -630,7 +630,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         if (app === 'Verordnung') {
             var current_nodeTree = $scope.d.nodeTree;
-            var current_Array_to_save = $scope.d.medication;
+            var current_array_to_save = $scope.d.medication;
         };
 
         if (app === 'Reserve') {
