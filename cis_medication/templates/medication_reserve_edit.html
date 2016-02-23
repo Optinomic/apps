@@ -50,16 +50,6 @@
                     </md-input-container>
                 </div>
             </div>
-            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-                <md-input-container flex class="md-block">
-                    <label>Bemerkungen</label>
-                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
-                </md-input-container>
-                <div flex="15">
-                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
-                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
-                </div>
-            </div>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
@@ -109,6 +99,16 @@
                         <label>Indikation</label>
                         <input ng-model="d.newEntry.medication_indikation">
                     </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+                <md-input-container flex class="md-block">
+                    <label>Bemerkungen</label>
+                    <textarea ng-model="d.newEntry.medication_bemerkungen" columns="1" rows="10"></textarea>
+                </md-input-container>
+                <div flex="20">
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_compendium}}" target="_blank">compendium.ch</md-button>
+                    <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
                 </div>
             </div>
         </md-card-content>
