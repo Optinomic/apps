@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.d.nodeTree = 'medication';
 
-        $scope.d._init.grid.data_loader = 0;
+
 
         $scope.d.appInit = {};
         $scope.d.appInit.noCache = false;
@@ -168,7 +168,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-
+        $scope.changeSection(0);
     };
 
 
