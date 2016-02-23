@@ -181,7 +181,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'show';
 
         // Set Grid
-        $scope.d._init.grid.grid_ready = false;
         $scope.setDataView($scope.d.app.selected_section.id);
 
         // If Data is loaded - Force the grid to 'pseudo update - data'
