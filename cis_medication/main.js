@@ -344,6 +344,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+                $scope.changeSection(0);
                 $scope.updateDataView($scope.d.app.selected_section.id);
 
                 // Update Count Notifications
@@ -992,7 +993,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             field: "medication_dosierung",
             headerName: "Max/24h",
             headerTooltip: "Reserve - Dosierung (maximal innert 24h)",
-            width: 96,
+            width: 72,
             suppressSizeToFit: true,
             hide: false
         }, {
