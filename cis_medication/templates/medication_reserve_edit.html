@@ -92,7 +92,7 @@
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
         <md-card-content ng-if="d.newEntry.medication_selected">
             <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
-                <p class="md-subhead">Dosierung</p>
+                <p class="md-subhead">Dosierung (max./24h)</p>
                 <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
@@ -160,7 +160,7 @@
                 <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave()" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave('Reserve')" aria-label="Speichern" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> Speichern
             </md-button>
         </md-card-actions>

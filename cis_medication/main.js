@@ -623,11 +623,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-    $scope.saveMedication = function() {
+    $scope.saveMedication = function(app) {
 
-        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTree, $scope.d.medication);
+        var app = app === undefined ? 'Verordnung' : app;
+
+
+        if (app === 'Verordnung') {
+            var current_nodeTree = $scope.d.nodeTree;
+            var current_Array_to_save = $scope.d.medication;
+        };
+
+        if (app === 'Reserve') {
+            var current_nodeTree = $scope.d.nodeTree + '_reserve';
+            var current_array_to_save = $scope.d.medication;
+        };
+
+
+        var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
         api_call.then(function(data) {
-            console.log('(+) saveMedication - success: ', $scope.d.medication);
+            console.log('(+) saveMedication (', current_nodeTree, ') success: ', current_array_to_save);
 
             // Update Entrys
             $scope.d.appState = 'show';
@@ -636,8 +650,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.entrySave = function() {
+    $scope.entrySave = function(app) {
         // Save
+
+
+        var app = app === undefined ? 'Verordnung' : app;
+
+
 
         $scope.d.newEntry.uniqueid = dataService.uniqueid();
         $scope.createLinks();
@@ -661,7 +680,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Push new Entry if 'new'
         if ($scope.d.appState === 'new') {
-            $scope.d.medication.push($scope.d.newEntry);
 
             // Datum erweitern.
             var date = $scope.d.newEntry.datestamp;
@@ -669,11 +687,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
             $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
+
+
+            if (app === 'Verordnung') {
+                $scope.d.medication.push($scope.d.newEntry);
+            };
+
+            if (app === 'Reserve') {
+                $scope.d.medication_reserve.push($scope.d.newEntry);
+            };
+
+
         };
 
         // Save edited entry.
         if ($scope.d.appState === 'edit') {
-            $scope.d.medication[$scope.d.newEntryID] = $scope.d.newEntry;
 
             // Datum erweitern.
             var date = $scope.d.newEntry.datestamp_edit;
@@ -681,10 +709,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.datestamp_edit_week = $filter("amDateFormat")(date, 'YYYY, ww');
             $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
+
+            if (app === 'Verordnung') {
+                $scope.d.medication[$scope.d.newEntryID] = $scope.d.newEntry;
+            };
+
+            if (app === 'Reserve') {
+                $scope.d.medication_reserve[$scope.d.newEntryID] = $scope.d.newEntry;
+            };
+
         };
 
         console.log('Try to save: ', $scope.d.appState, $scope.d.medication);
-        $scope.saveMedication();
+        $scope.saveMedication(app);
     };
 
 
