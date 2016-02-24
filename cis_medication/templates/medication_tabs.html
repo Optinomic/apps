@@ -52,6 +52,9 @@ include(../lib/html/optinomic/page/start.m4)
                     include(../lib/html/optinomic/templates/data_table.html)
                 </div>
             </div>
+            <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
+                include(templates/medication_reserve_abgabe_edit.html)
+            </div>
         </md-content>
     </md-tab>
 </md-tabs>

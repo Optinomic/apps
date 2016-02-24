@@ -353,40 +353,41 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.app.sections[1].count = $scope.d.medication_reserve.length;
                 $scope.d.app.sections[2].count = $scope.d.medication_reserve_abgabe.length;
 
+                $scope.d.appState = 'show';
             };
         }
 
-        // -------------------------------------
-        // Medication
-        // -------------------------------------
 
-        $scope.d.medication = [];
+        function enhance_check(medi_array, app) {
 
-        var node = $scope.d.nodeTree;
-        var api_call = dataService.getAnnotationsData('patient', node);
-        api_call.then(function(data) {
-
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.medication = [];
-            } else {
-                $scope.d.medication = angular.copy(data);
-
-                var shouldSave = false;
+            var app = app === undefined ? 'Verordnung' : app;
+            var shouldSave = false;
 
 
-                // Add special fields
-                $scope.d.medication.forEach(function(row, myindex) {
+            // Add special fields
+            medi_array.forEach(function(row, myindex) {
 
-                    row.display = row.medication_name + ' ';
+                row.display = row.medication_name + ' ';
+
+                if (app === 'Verordnung') {
                     row.display = row.display + ' ( ' + row.medication_dosierung_mo;
                     row.display = row.display + ' - ' + row.medication_dosierung_mi;
                     row.display = row.display + ' - ' + row.medication_dosierung_ab;
                     row.display = row.display + ' - ' + row.medication_dosierung_na + ' ) ';
+                };
+
+                if (app === 'Reserve') {
+                    row.display = row.display + ' ( max ' + row.medication_dosierung + 'x bei' + row.medication_indikation + ' ) ';
+                };
+
+                if (app === 'Abgabe') {
+                    row.display = row.display + ' aufgrund ' + row.medication_beschwerden + '.';
+                };
+
+                row.medication_status_bezeichnung = $scope.d.medication_status[parseInt(row.medication_status)].title;
 
 
-                    row.medication_status_bezeichnung = $scope.d.medication_status[parseInt(row.medication_status)].title;
-
+                if ((app === 'Verordnung') || (app === 'Reserve')) {
                     row.medication_start_verordnung_user_initals = '?';
                     row.medication_start_verordnung_user_name = '?';
                     row.medication_stop_verordnung_user_initals = '?';
@@ -403,13 +404,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                         };
                     });
 
-                    // Convert to "Date Instance".
 
-                    row.datestamp = $scope.d.functions.sureDateInstance(row.datestamp);
-
-                    if (row.datestamp_edit) {
-                        row.datestamp_edit = $scope.d.functions.sureDateInstance(row.datestamp_edit);
-                    };
                     row.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_start_verordnung_datum);
 
                     if (row.medication_stop_verordnung_datum !== null) {
@@ -433,24 +428,47 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                                 shouldSave = true;
                             };
                         };
-
                     };
-
-                });
-
-
-                if (shouldSave) {
-                    console.log('Saved Medication because of changes in medication_status');
-                    $scope.saveMedication();
                 };
 
+                // Convert to "Date Instance".
+                row.datestamp = $scope.d.functions.sureDateInstance(row.datestamp);
+
+                if (row.datestamp_edit) {
+                    row.datestamp_edit = $scope.d.functions.sureDateInstance(row.datestamp_edit);
+                };
+
+            });
+
+
+            if (shouldSave) {
+                console.log('Save ' + app + '-Medication because of changes in medication_status');
+                $scope.saveMedication(app);
             };
 
+            return medi_array;
+        }
 
-            $scope.d.appState = 'show';
+
+        // -------------------------------------
+        // Medication
+        // -------------------------------------
+
+        $scope.d.medication = [];
+
+        var node = $scope.d.nodeTree;
+        var api_call = dataService.getAnnotationsData('patient', node);
+        api_call.then(function(data) {
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.medication = [];
+            } else {
+                $scope.d.medication = angular.copy(data);
+                $scope.d.medication = enhance_check($scope.d.medication, 'Verordnung');
+            };
 
             loadedPartial();
-
             console.log('(+) getEntrys: medication', $scope.d.medication);
         });
 
@@ -470,15 +488,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication_reserve = [];
             } else {
                 $scope.d.medication_reserve = angular.copy(data);
-
-                var shouldSave = false;
-
+                $scope.d.medication_reserve = enhance_check($scope.d.medication_reserve, 'Reserve');
             };
 
 
-            $scope.d.appState = 'show';
             loadedPartial();
-
             console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
 
         });
@@ -499,15 +513,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication_reserve_abgabe = [];
             } else {
                 $scope.d.medication_reserve_abgabe = angular.copy(data);
-
-                var shouldSave = false;
-
+                $scope.d.medication_reserve_abgabe = enhance_check($scope.d.medication_reserve_abgabe, 'Abgabe');
             };
 
 
-            $scope.d.appState = 'show';
             loadedPartial();
-
             console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
 
         });
@@ -591,23 +601,37 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // EDIT
         // Store current entry - just for, do not save if 'cancel'.
 
-        var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
+
+        var current_section = $scope.d.app.selected_section.id;
+        if (current_section === 0) {
+            var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', currentUID);
+            $scope.d.newEntry = angular.copy($scope.d.medication[myIndex]);
+        };
+        if (current_section === 1) {
+            var myIndex = dataService.findIndex($scope.d.medication_reserve, 'uniqueid', currentUID);
+            $scope.d.newEntry = angular.copy($scope.d.medication_reserve[myIndex]);
+        };
+        if (current_section === 2) {
+            var myIndex = dataService.findIndex($scope.d.medication_reserve_abgabe, 'uniqueid', currentUID);
+            $scope.d.newEntry = angular.copy($scope.d.medication_reserve_abgabe[myIndex]);
+        };
 
 
-        $scope.d.newEntry = angular.copy($scope.d.medication[myIndex]);
         $scope.d.newEntry.datestamp_edit = new Date();
         $scope.d.newEntryID = myIndex;
 
         // Make sure - value is a 'date instance' and not a string.
-        $scope.d.newEntry.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_start_verordnung_datum);
-        $scope.d.newEntry.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_stop_verordnung_datum);
         $scope.d.newEntry.datestamp = $scope.d.functions.sureDateInstance($scope.d.newEntry.datestamp);
         $scope.d.newEntry.datestamp_edit = $scope.d.functions.sureDateInstance($scope.d.newEntry.datestamp_edit);
+        if ((current_section === 0) || (current_section === 1)) {
+            $scope.d.newEntry.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_start_verordnung_datum);
+            $scope.d.newEntry.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance($scope.d.newEntry.medication_stop_verordnung_datum);
+        };
 
 
         $scope.loadMedis();
         $scope.d.appInit.autofocus = false;
-        $scope.d.appInit.selectedItem = $scope.d.newEntry.diagn;
+        $scope.d.appInit.selectedItem = $scope.d.newEntry.medication;
         $scope.d.appState = 'edit';
         $scope.d._init.grid.grid_ready = false;
 
@@ -692,6 +716,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             var current_array_to_save = $scope.d.medication_reserve;
         };
 
+        if (app === 'Abgabe') {
+            var current_nodeTree = $scope.d.nodeTree + '_reserve_abgabe';
+            var current_array_to_save = $scope.d.medication_reserve_abgabe;
+        };
+
+
         console.log('(!) saveMedication (', current_nodeTree, ') try: ', angular.toJson(current_array_to_save, true));
 
         var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
@@ -752,6 +782,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.medication_reserve.push($scope.d.newEntry);
             };
 
+            if (app === 'Abgabe') {
+                $scope.d.medication_reserve_abgabe.push($scope.d.newEntry);
+            };
 
         };
 
@@ -771,6 +804,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             if (app === 'Reserve') {
                 $scope.d.medication_reserve[$scope.d.newEntryID] = $scope.d.newEntry;
+            };
+
+            if (app === 'Abgabe') {
+                $scope.d.medication_reserve_abgabe[$scope.d.newEntryID] = $scope.d.newEntry;
             };
 
         };
