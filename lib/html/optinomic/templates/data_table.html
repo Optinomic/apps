@@ -6,7 +6,7 @@
         </md-input-container>
     </div>
     <div hide-xs show-gt-xs flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
-        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
+        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start center">
             include(templates/partial/template_selected_detail.html)
             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>

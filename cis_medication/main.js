@@ -377,7 +377,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
 
                 if (app === 'Reserve') {
-                    row.display = row.display + ' ( max ' + row.medication_dosierung + 'x bei' + row.medication_indikation + ' ) ';
+                    row.display = row.display + ' | max ' + row.medication_dosierung + 'x bei' + row.medication_indikation;
                 };
 
                 if (app === 'Abgabe') {
@@ -532,11 +532,26 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.showConfirm = function(ev, my_uid) {
         console.log('showConfirm: ', ev, my_uid);
 
-        var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', my_uid);
+
+        var current_section = $scope.d.app.selected_section.id;
+        var medi_title = '';
+        if (current_section === 0) {
+            var myIndex = dataService.findIndex($scope.d.medication, 'uniqueid', my_uid);
+            medi_title = $scope.d.medication[myIndex].display;
+        };
+        if (current_section === 1) {
+            var myIndex = dataService.findIndex($scope.d.medication_reserve, 'uniqueid', my_uid);
+            medi_title = $scope.d.medication_reserve[myIndex].display;
+        };
+        if (current_section === 2) {
+            var myIndex = dataService.findIndex($scope.d.medication_reserve_abgabe, 'uniqueid', my_uid);
+            medi_title = $scope.d.medication_reserve_abgabe[myIndex].display;
+        };
+
 
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.confirm()
-            .title($scope.d.medication[myIndex].display)
+            .title(medi_title)
             .textContent('Sind Sie sicher, dass Sie das Medikament löschen möchten?')
             .ariaLabel('Medikament löschen')
             .targetEvent(ev)
