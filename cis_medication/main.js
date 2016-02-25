@@ -228,8 +228,44 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_selected: false
             };
         } else {
+
+            var current_section = $scope.d.app.selected_section.id;
+            var current_section_name = 'Not set';
+
+
+            // Set GLOBAL Defaults
+            $scope.d.newEntry.datestamp = new Date();
+            $scope.d.newEntry.user = $scope.d.dataMain.users.current.id;
             $scope.d.newEntry.medication = item;
             $scope.d.newEntry.medication_selected = true;
+
+            $scope.d.newEntry.medication_bemerkungen: '';
+            $scope.d.newEntry.medication_status: 0;
+
+            // Set Specific - Defaults
+            if (current_section === 0) {
+                $scope.d.newEntry.medication_dosierung_mo = 0;
+                $scope.d.newEntry.medication_dosierung_mi = 0;
+                $scope.d.newEntry.medication_dosierung_ab = 0;
+                $scope.d.newEntry.medication_dosierung_na = 0;
+
+                $scope.d.newEntry.medication_start_verordnung_datum = new Date();
+                $scope.d.newEntry.medication_start_verordnung_user = null;
+                $scope.d.newEntry.medication_stop_verordnung_datum = null;
+                $scope.d.newEntry.medication_stop_verordnung_user = null;
+            };
+
+            if (current_section === 1) {
+                $scope.d.newEntry.medication_start_verordnung_datum = new Date();
+                $scope.d.newEntry.medication_start_verordnung_user = null;
+                $scope.d.newEntry.medication_stop_verordnung_datum = null;
+                $scope.d.newEntry.medication_stop_verordnung_user = null;
+            };
+
+            if (current_section === 2) {
+                $scope.d.newEntry.medication_verordnet = false;
+            };
+
 
             // Wirte Medication-Name only if not 'Kein Standardmedikament'
             if (parseInt(item.medi_order) !== 999999) {
