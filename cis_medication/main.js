@@ -263,6 +263,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             if (current_section === 2) {
+                $scope.d.newEntry.medication_start_verordnung_datum = new Date();
                 $scope.d.newEntry.medication_verordnet = false;
             };
 
@@ -1409,6 +1410,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             // -----------------------------------
             console.log('(FIRE) updateDataView', $scope.d.app.selected_section.id);
             $scope.updateDataView($scope.d.app.selected_section.id);
+
+            // Make sure no row is selected
+            $scope.d.functions.unselectRow()
 
         };
 
