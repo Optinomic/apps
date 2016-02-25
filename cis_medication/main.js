@@ -365,6 +365,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // When all 3 parts are completely loaded
                 count_data_loaded = 0;
 
+                $scope.d.appState = 'show';
+
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader === undefined ? 1 : $scope.d._init.grid.data_loader;
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
@@ -375,7 +377,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.app.sections[1].count = $scope.d.medication_reserve.length;
                 $scope.d.app.sections[2].count = $scope.d.medication_reserve_abgabe.length;
 
-                $scope.d.appState = 'show';
 
                 console.log('(DATA) getEntrys: medication ', $scope.d.medication, $scope.d.medication_reserve, $scope.d.medication_reserve_abgabe);
 
@@ -772,7 +773,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
-        console.log('(!) saveMedication (', current_nodeTree, ') try: ', angular.toJson(current_array_to_save, true));
+        // console.log('(!) saveMedication (', current_nodeTree, ') try: ', angular.toJson(current_array_to_save, true));
 
         var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
         api_call.then(function(data) {
@@ -780,6 +781,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Update Entrys
             $scope.d.appState = 'show';
+            $scope.d._init.grid.data_datestamp = new Date();
             $scope.getEntrys();
         });
     };
