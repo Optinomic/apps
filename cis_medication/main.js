@@ -127,10 +127,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Set Default (0 = Verordnung)
         $scope.d.app.selected_section = $scope.d.app.sections[0];
-        $scope.setDataView(0);
 
         // DataView - Options
         $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
+        $scope.setDataView(0);
 
 
         $scope.d.appInit = {};
