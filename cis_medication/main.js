@@ -687,22 +687,27 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.entryDelete = function(my_index) {
 
         var current_section = $scope.d.app.selected_section.id;
+        var current_section_name = 'Verordnung';
+
 
         if (current_section === 0) {
             $scope.d.medication = $scope.d.medication.splice(my_index, 1);
+            current_section_name = 'Verordnung';
         };
 
         if (current_section === 1) {
             $scope.d.medication_reserve = $scope.d.medication_reserve.splice(my_index, 1);
+            current_section_name = 'Reserve';
         };
 
         if (current_section === 2) {
             $scope.d.medication_reserve_abgabe = $scope.d.medication_reserve_abgabe.splice(my_index, 1);
+            current_section_name = 'Abgabe';
         };
 
 
         console.log('(!) entryDelete', my_index, current_section);
-        $scope.saveMedication();
+        $scope.saveMedication(current_section_name);
     };
 
 
