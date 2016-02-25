@@ -330,6 +330,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader === undefined ? 1 : $scope.d._init.grid.data_loader;
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+                $scope.d._init.grid.data_datestamp = new Date();
 
                 // Update Count Notifications
                 $scope.d.app.sections[0].count = $scope.d.medication.length;
@@ -1370,7 +1371,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
     }, true);
-
 
 
 
