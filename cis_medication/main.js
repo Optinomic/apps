@@ -670,19 +670,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var not_default = {
             "medi_order": "999999",
-            "medi_code": "",
             "medi_name": "Kein Standardmedikament (bitte spezifizieren)",
-            "medi_info": "",
-            "medi_activated": true,
-            "_lowerCode": "",
-            "_lowerName": "kein standardmedikament (bitte spezifizieren)"
+            "medi_activated": true
         };
 
         // $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
         $scope.d.appInit.selectedItem = not_default;
         $scope.d.newEntry.medication_selected = true;
         $scope.d.newEntry.medication = not_default;
-        $scope.d.newEntry.medi_name = new_medication_name;
+        $scope.d.newEntry.medication_name = new_medication_name;
     };
 
 
