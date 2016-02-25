@@ -122,7 +122,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         // Set Default (0 = Verordnung)
-        $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
+        $scope.d.app.selected_section = $scope.d.app.sections[0];
 
 
 
@@ -1214,7 +1214,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             cellClass: 'md-body-1',
             editable: false,
             field: "medication_start_verordnung_datum_day",
-            headerName: "Anw.",
+            headerName: "Anwendung",
             headerTooltip: "Anwendung der Reserve",
             width: 88,
             suppressSizeToFit: true,
