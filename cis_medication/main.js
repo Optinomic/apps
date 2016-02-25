@@ -378,6 +378,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.app.sections[2].count = $scope.d.medication_reserve_abgabe.length;
 
 
+                $scope.updateDataView($scope.d.app.selected_section.id);
                 console.log('(DATA) getEntrys: medication ', $scope.d.medication, $scope.d.medication_reserve, $scope.d.medication_reserve_abgabe);
 
             };
