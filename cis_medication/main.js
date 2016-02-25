@@ -689,12 +689,23 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
     $scope.entryDelete = function(my_index) {
-        $scope.d.medication.splice(my_index, 1);
 
-        // Medikamente nach 'rank' sortieren
-        $scope.d.medication = dataService.sortByKey($scope.d.medication, 'medi_name');
+        var current_section = $scope.d.app.selected_section.id;
 
-        console.log('Deleted - Index', my_index);
+        if (current_section === 0) {
+            $scope.d.medication = $scope.d.medication.splice(my_index, 1);
+        };
+
+        if (current_section === 1) {
+            $scope.d.medication_reserve = $scope.d.medication_reserve.splice(my_index, 1);
+        };
+
+        if (current_section === 2) {
+            $scope.d.medication_reserve_abgabe = $scope.d.medication_reserve_abgabe.splice(my_index, 1);
+        };
+
+
+        console.log('(!) entryDelete', my_index, current_section);
         $scope.saveMedication();
     };
 
@@ -745,7 +756,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
         api_call.then(function(data) {
-            console.log('(+) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
+            console.log('(✓) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
 
             // Update Entrys
             $scope.d.appState = 'show';
@@ -1360,7 +1371,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         $scope.changeSection(app);
 
-        console.log(' =====> updateDataView: ', app, $scope.d.grid);
+        //console.log(' =====> updateDataView: ', app, $scope.d.grid);
 
     };
 
