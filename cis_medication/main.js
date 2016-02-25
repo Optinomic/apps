@@ -349,6 +349,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 count_data_loaded = 0;
 
                 // Set Init - Grid - Data
+                $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader === undefined ? 1 : $scope.d._init.grid.data_loader;
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
 
                 // Update Count Notifications
@@ -357,6 +358,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.app.sections[2].count = $scope.d.medication_reserve_abgabe.length;
 
                 $scope.d.appState = 'show';
+
+                console.log('(DATA) getEntrys: medication ', $scope.d.medication, $scope.d.medication_reserve, $scope.d.medication_reserve_abgabe);
+
             };
         }
 
@@ -472,7 +476,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             loadedPartial();
-            console.log('(+) getEntrys: medication', $scope.d.medication);
         });
 
 
@@ -496,7 +499,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             loadedPartial();
-            console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
 
         });
 
@@ -521,7 +523,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             loadedPartial();
-            console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
 
         });
 
