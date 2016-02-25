@@ -1386,11 +1386,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
         // Set Data
-        $scope.d.grid.options.rowData = medication_data;
-        $scope.d.grid.options.api.setRowData(medication_data);
-        $scope.d.grid.options.api.setSortModel(sortModel);
-        $scope.d.grid.options.api.sizeColumnsToFit();
-
+        if ($scope.d._init.grid.grid_ready === true) {
+            $scope.d.grid.options.rowData = medication_data;
+            $scope.d.grid.options.api.setRowData(medication_data);
+            $scope.d.grid.options.api.setSortModel(sortModel);
+            $scope.d.grid.options.api.sizeColumnsToFit();
+        };
 
         $scope.changeSection(app);
 
