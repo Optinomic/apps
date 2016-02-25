@@ -228,19 +228,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_selected: false
             };
         } else {
-            // Create JSON to save
-
-            $scope.d.newEntry = {
-                datestamp: new Date(),
-                user: $scope.d.dataMain.users.current.id,
-                medication: item,
-                medication_selected: true,
-                medication_verabreichung: 'oral',
-                medication_start_verordnung_datum: new Date(),
-                medication_start_verordnung_user: $scope.d.dataMain.users.current.id,
-                medication_bemerkungen: '',
-                medication_status: 0
-            };
 
             // Wirte Medication-Name only if not 'Kein Standardmedikament'
             if (parseInt(item.medi_order) !== 999999) {
@@ -663,6 +650,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             "medi_name": "Kein Standardmedikament (bitte spezifizieren)",
             "medi_activated": true
         };
+
 
         // $scope.d.appInit.searchText = 'Kein Standardmedikament (bitte spezifizieren)';
         $scope.d.appInit.selectedItem = not_default;
