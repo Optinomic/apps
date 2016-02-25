@@ -238,13 +238,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_verabreichung: 'oral',
                 medication_start_verordnung_datum: new Date(),
                 medication_start_verordnung_user: $scope.d.dataMain.users.current.id,
-                medication_dosierung_mo: 0,
-                medication_dosierung_mi: 0,
-                medication_dosierung_ab: 0,
-                medication_dosierung_na: 0,
-                medication_dosierung_interval: '',
-                medication_stop_verordnung_datum: null,
-                medication_stop_verordnung_user: null,
                 medication_bemerkungen: '',
                 medication_status: 0
             };
@@ -254,7 +247,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.newEntry.medication_name = item.medi_name;
             };
 
-            $scope.createLinks();
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
     }
@@ -604,11 +596,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appInit.selectedItem = null;
         $scope.d.newEntry = {
             datestamp: new Date(),
-            user: $scope.d.dataMain.users.current.id,
-            diagn: {},
-            diagn_selected: false,
-            diagn_rank: null,
-            custom_text: ""
+            user: $scope.d.dataMain.users.current.id
         };
         $scope.loadMedis();
         $scope.d.appState = 'new';
