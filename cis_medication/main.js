@@ -1354,6 +1354,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.api.setSortModel(sortModel);
         $scope.d.grid.options.api.sizeColumnsToFit();
 
+
+        $scope.changeSection(app);
+
         console.log(' =====> updateDataView: ', app, $scope.d.grid);
 
     };
@@ -1367,7 +1370,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
             // -----------------------------------
             console.log('(FIRE) updateDataView', $scope.d.app.selected_section.id);
-            //$scope.changeSection($scope.d.app.selected_section.id);
             $scope.updateDataView($scope.d.app.selected_section.id);
 
         };
