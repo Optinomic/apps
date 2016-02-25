@@ -1336,7 +1336,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.updateDataView = function(app) {
 
         var app = app === undefined ? 0 : app;
-
+        $scope.changeSection(app);
 
         // Sorting
         var sortModel = [{
@@ -1387,14 +1387,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
         // Set Data
-        if ($scope.d._init.grid.grid_ready === true) {
-            $scope.d.grid.options.rowData = medication_data;
-            $scope.d.grid.options.api.setRowData(medication_data);
-            $scope.d.grid.options.api.setSortModel(sortModel);
-            $scope.d.grid.options.api.sizeColumnsToFit();
-        };
+        $scope.d.grid.options.rowData = medication_data;
+        $scope.d.grid.options.api.setRowData(medication_data);
+        $scope.d.grid.options.api.setSortModel(sortModel);
+        $scope.d.grid.options.api.sizeColumnsToFit();
 
-        $scope.changeSection(app);
 
         //console.log(' =====> updateDataView: ', app, $scope.d.grid);
 
