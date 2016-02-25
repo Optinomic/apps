@@ -125,6 +125,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.app.selected_section = $scope.d.app.sections[0];
 
 
+        // DataView - Options
+        $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
+
 
         $scope.d.nodeTree = 'medication';
 
@@ -380,7 +383,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
 
                 if (app === 'Abgabe') {
-                    row.display = row.display + ' aufgrund ' + row.medication_beschwerden + '.';
+                    row.display = row.display + ' | ' + row.medication_beschwerden + '.';
                 };
 
                 row.medication_status_bezeichnung = $scope.d.medication_status[parseInt(row.medication_status)].title;
@@ -596,7 +599,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Init New Entry
         $scope.d.appInit.searchText = '';
-        $scope.d.appInit.selectedItem = {};
+        $scope.d.appInit.selectedItem = null;
         $scope.d.newEntry = {
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id,
@@ -1270,8 +1273,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-        // DataView - Options
-        $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
 
         // 'Verordnung'
         if (app === 0) {
