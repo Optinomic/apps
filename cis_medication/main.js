@@ -103,6 +103,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.appInit = function() {
 
+
+        $scope.d.nodeTree = 'medication';
+
+
         $scope.d.app = {};
         $scope.d.app.sections = [{
             id: 0,
@@ -123,13 +127,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // Set Default (0 = Verordnung)
         $scope.d.app.selected_section = $scope.d.app.sections[0];
-
+        $scope.setDataView(0);
 
         // DataView - Options
         $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
-
-
-        $scope.d.nodeTree = 'medication';
 
 
         $scope.d.appInit = {};
