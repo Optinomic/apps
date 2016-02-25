@@ -239,8 +239,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             $scope.d.newEntry.medication = item;
             $scope.d.newEntry.medication_selected = true;
 
-            $scope.d.newEntry.medication_bemerkungen: '';
-            $scope.d.newEntry.medication_status: 0;
+            $scope.d.newEntry.medication_bemerkungen = '';
+            $scope.d.newEntry.medication_status = 0;
 
             // Set Specific - Defaults
             if (current_section === 0) {
