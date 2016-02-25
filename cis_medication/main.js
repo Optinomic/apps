@@ -228,6 +228,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 medication_selected: false
             };
         } else {
+            $scope.d.newEntry.medication = item;
+            $scope.d.newEntry.medication_selected = true;
 
             // Wirte Medication-Name only if not 'Kein Standardmedikament'
             if (parseInt(item.medi_order) !== 999999) {
