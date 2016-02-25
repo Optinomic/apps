@@ -186,7 +186,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.appState = 'show';
 
         // Set Grid
-        $scope.d._init.grid.grid_ready = false;
+        //$scope.d._init.grid.grid_ready = false;
         $scope.setDataView($scope.d.app.selected_section.id);
 
         // If Data is loaded - Force the grid to 'pseudo update - data'
@@ -340,6 +340,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         // Helper
         // -------------------------------------
         var count_data_loaded = 0;
+        $scope.d._init.grid.data_loader = 0;
 
         function loadedPartial() {
             count_data_loaded = count_data_loaded + 1;
@@ -350,6 +351,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 // Set Init - Grid - Data
                 $scope.d._init.grid.data_loader = $scope.d._init.grid.data_loader + 1;
+            console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
+
 
                 // Update Count Notifications
                 $scope.d.app.sections[0].count = $scope.d.medication.length;
@@ -472,7 +475,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             loadedPartial();
-            console.log('(+) getEntrys: medication', $scope.d.medication);
         });
 
 
@@ -496,7 +498,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             loadedPartial();
-            console.log('(+) getEntrys: medication_reserve', $scope.d.medication_reserve);
 
         });
 
@@ -521,7 +522,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
             loadedPartial();
-            console.log('(+) getEntrys: medication_reserve_abgabe', $scope.d.medication_reserve_abgabe);
 
         });
 
