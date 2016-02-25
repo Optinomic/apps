@@ -1191,6 +1191,85 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             hide: true
         }];
 
+        var columnDefsReserveAbgabe = [{
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_name",
+            headerName: "Medikament",
+            headerTooltip: "Reserve - Medikament",
+            pinned: 'left'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_beschwerden",
+            headerName: "Beschwerden",
+            headerTooltip: "Beschwerden",
+            hide: false
+        }, {
+            headerName: null,
+            headerTooltip: "In Compedium nachschlagen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_start_verordnung_datum_day",
+            headerName: "Anw.",
+            headerTooltip: "Anwendung der Reserve",
+            width: 88,
+            suppressSizeToFit: true,
+            hide: false
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament bearbeiten",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+        }, {
+            headerName: null,
+            headerTooltip: "Medikament löschen",
+            width: 30,
+            suppressSizeToFit: true,
+            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "medication_bemerkungen",
+            headerName: "Bemerkung",
+            headerTooltip: "Bemerkungen zur Medikation",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_day",
+            headerName: "Erstelldatum",
+            headerTooltip: "Erstellt - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_time",
+            headerName: "Erstellzeit",
+            headerTooltip: "Erstellt - Zeit",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_day",
+            headerName: "Bearbeitungsdatum",
+            headerTooltip: "Bearbeitet - Datum",
+            hide: true
+        }, {
+            cellClass: 'md-body-1',
+            editable: false,
+            field: "datestamp_edit_time",
+            headerName: "Bearbeitungszeit",
+            headerTooltip: "Bearbeitet - Zeit",
+            hide: true
+        }];
+
+
 
         // DataView - Options
         $scope.d.grid.options = angular.copy($scope.d.grid.default_options);
@@ -1207,7 +1286,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         // 'Reserve Abgabe'
         if (app === 2) {
-            $scope.d.grid.options.columnDefs = columnDefsReserve;
+            $scope.d.grid.options.columnDefs = columnDefsReserveAbgabe;
         };
 
 

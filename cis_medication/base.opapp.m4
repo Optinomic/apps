@@ -19,9 +19,8 @@ website = http://www.optinomic.com/
 
 
 
-[template medikamente 6 14]
+[template medikamente 6 15]
 include(templates/medication_tabs.html)
-
 
 
 [javascript]

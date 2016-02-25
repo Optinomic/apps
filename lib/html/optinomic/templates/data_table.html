@@ -24,12 +24,12 @@
                     <input ng-model="d.grid.export_settings.columnSeparator">
                 </md-input-container>
             </div>
-            <div>
+            <div flex>
                 <md-switch ng-model="d.grid.export_settings.allColumns" aria-label="allColumns">
-                    Alle Daten-Reihen
+                    Alle Daten
                 </md-switch>
             </div>
-            <div flex>
+            <div>
                 <md-button ng-click="d.functions.onBtExport()" class="md-primary" aria-label="Export">
                     <i class="mdi mdi-file"></i> exportieren
                 </md-button>
