@@ -122,11 +122,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
         // Set Default (0 = Verordnung)
-        $scope.changeSection(0);
+        $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
+
 
 
         $scope.d.nodeTree = 'medication';
-
 
 
         $scope.d.appInit = {};
@@ -168,7 +168,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             color: '#EF9A9A'
         }];
 
-        $scope.changeSection(0);
     };
 
 
