@@ -377,7 +377,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 };
 
                 if (app === 'Reserve') {
-                    row.display = row.display + ' | max ' + row.medication_dosierung + 'x bei' + row.medication_indikation;
+                    row.display = row.display + ' | max ' + row.medication_dosierung + 'x | ' + row.medication_indikation;
                 };
 
                 if (app === 'Abgabe') {
