@@ -25,6 +25,16 @@ include '../documentation_header.php';
     </p>
 
     <h4>
+        <img src="/images/react.png" height="20px"/>
+        React
+    </h4>
+    <p>
+        The API is provided to you in the onGridReady callback of the React component.
+        Or if you are providing gridOptions object, you can use the API attached
+        to this after the grid has initialised.
+    </p>
+
+    <h4>
         <img src="/images/angular2.png" height="20px"/>
         AngularJS 2
     </h4>
@@ -233,8 +243,8 @@ include '../documentation_header.php';
             <td>Ensures the index is visible, scrolling the table if needed.</td>
         </tr>
         <tr>
-            <th>ensureColIndexVisible(index)</th>
-            <td>Ensures the column index is visible, scrolling the table if needed.</td>
+            <th>ensureColumnVisible(colId)</th>
+            <td>Ensures the column is visible, scrolling the table if needed.</td>
         </tr>
         <tr>
             <th>ensureNodeVisible(comparator)</th>

@@ -80,10 +80,10 @@
                             <a class="top-button-selected" href="/"> <i class="fa fa-home"></i> Home</a>
                         </span>
                         <span class="top-button-wrapper">
-                            <a class="top-button" href="/example.php"> <i class="fa fa-bicycle"></i> Test Drive</a>
+                            <a class="top-button" href="/example.php"> <i class="fa fa-bicycle"></i> Test</a>
                         </span>
                         <span class="top-button-wrapper">
-                            <a class="top-button" href="/documentation.php">  <i class="fa fa-book"></i> Documentation</a>
+                            <a class="top-button" href="/documentation.php">  <i class="fa fa-book"></i> Docs</a>
                         </span>
                         <span class="top-button-wrapper">
                             <a class="top-button" href="/media.php"> <i class="fa fa-road"></i> Media</a>
@@ -200,7 +200,7 @@
         <div class="container">
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-12" style="text-align: center;">
-                    <h4>'ag' stads for <b>Ag</b>nostic - choose your framework</h4>
+                    <h4>'ag' stands for <b>Ag</b>nostic - choose your framework</h4>
                 </div>
             </div>
 
@@ -213,9 +213,9 @@
                 <div class="col-md-1" style="text-align: center;">
                 </div>
                 <div class="col-md-2" style="text-align: center;">
-                    <a href="/best-javascript-grid/index.php">
+                    <a href="/best-javascript-data-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/javascript_large.png"/>
+                            <img style="height: 100px;" src="images/javascript_large.png" alt="Best Javascript Data Grid" title="Best Javascript Data Grid"/>
                         </div>
                         <div class="usage-footer">
                             <h4>Pure Javascipt</h4>
@@ -223,9 +223,9 @@
                     </a>
                 </div>
                 <div class="col-md-2" style="text-align: center;">
-                    <a href="/best-react-grid/index.php">
+                    <a href="/best-react-data-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/react_large.png"/>
+                            <img style="height: 100px;" src="images/react_large.png" alt="Best React Data Grid" title="Best React Data Grid"/>
                         </div>
                         <div class="usage-footer">
                             <h4>React</h4>
@@ -233,9 +233,9 @@
                     </a>
                 </div>
                 <div class="col-md-2" style="text-align: center;">
-                    <a href="/best-angularjs-grid/index.php">
+                    <a href="/best-angularjs-data-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/angularjs_large.png"/>
+                            <img style="height: 100px;" src="images/angularjs_large.png" alt="Best AngularJS Data Grid" title="Best AngularJS Data Grid"/>
                         </div>
                         <div class="usage-footer">
                             <h4>AngularJS 1.x</h4>
@@ -243,9 +243,9 @@
                     </a>
                 </div>
                 <div class="col-md-2" style="text-align: center;">
-                    <a href="/best-angularjs-2-grid/index.php">
+                    <a href="/best-angular-2-data-grid/index.php">
                         <div>
-                            <img style="height: 100px;" src="images/angular2_large.png"/>
+                            <img style="height: 100px;" src="images/angular2_large.png" alt="Best Angular 2 Data Grid" title="Best Angular 2 Data Grid"/>
                         </div>
                         <div class="usage-footer">
                             <h4>AngularJS 2</h4>
@@ -253,7 +253,7 @@
                     </a>
                 </div>
                 <div class="col-md-2" style="text-align: center;">
-                    <a href="/best-web-component-grid/index.php">
+                    <a href="/best-web-component-data-grid/index.php" alt="Best Web Component Data Grid" title="Best Web Component Data Grid">
                         <div>
                             <img style="height: 100px;" src="images/webComponents_large.png"/>
                         </div>
@@ -475,18 +475,15 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
 
-<script src="dist/ag-grid.min.js?ignore=notused17"></script>
-<link rel="stylesheet" type="text/css" href="./dist/ag-grid.min.css?ignore=notused17">
-<link rel="stylesheet" type="text/css" href="./dist/theme-fresh.min.css?ignore=notused17">
-<link rel="stylesheet" type="text/css" href="./dist/theme-dark.min.css?ignore=notused17">
+<script src="dist/ag-grid.min.js?ignore=notused18"></script>
 
-<link href="example-file-browser/fileBrowser.css?ignore=notused17" rel="stylesheet">
-<link href="best-angularjs-grid/basic.css?ignore=notused17" rel="stylesheet">
-<link href="example-account-report/account.css?ignore=notused17" rel="stylesheet">
+<link href="example-file-browser/fileBrowser.css?ignore=notused18" rel="stylesheet">
+<link href="best-angularjs-data-grid/basic.css?ignore=notused18" rel="stylesheet">
+<link href="example-account-report/account.css?ignore=notused18" rel="stylesheet">
 
-<script src="minimised/basic.js?ignore=notused17"></script>
-<script src="minimised/account.js?ignore=notused17"></script>
-<script src="minimised/fileBrowser.js?ignore=notused17"></script>
+<script src="minimised/basic.js?ignore=notused18"></script>
+<script src="minimised/account.js?ignore=notused18"></script>
+<script src="minimised/fileBrowser.js?ignore=notused18"></script>
 <script src="minimised/index-script.js"></script>
 
 <?php include_once("analytics.php"); ?>
