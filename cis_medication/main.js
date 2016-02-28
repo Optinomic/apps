@@ -448,7 +448,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                             var heute_d = date;
                             heute_d.setHours(0, 0, 0, 0, 0);
 
-                            console.log(' STOP? ---------- ', heute_d.getTime() >= stop_d.getTime(), stop_d, heute_d);
+                            console.log(' STOP? ---------- ', heute_d.getTime() > stop_d.getTime(), stop_d, heute_d);
 
 
                             if (heute_d.getTime() > stop_d.getTime()) {
