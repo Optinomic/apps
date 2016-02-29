@@ -103,7 +103,7 @@
                         </md-input-container>
                     </div>
                     <div flex="60">
-                        <md-input-container flex class="md-block" md-is-error="true">
+                        <md-input-container flex class="md-block" md-is-error="myForm.mIndikation.$untouched">
                             <label>Indikation</label>
                             <input required name="mIndikation" ng-model="d.newEntry.medication_indikation">
                             <div ng-messages="myForm.mIndikation.$error" style="color:#E91E63" role="alert">

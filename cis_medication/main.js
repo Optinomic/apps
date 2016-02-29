@@ -760,15 +760,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var password = 'o_tiger54';
 
         var correct = $scope.d.functions.visa(email, password);
-
         console.log('checkVisa 1', correct);
 
+        var correct2 = $scope.d.functions.visa(email, 'WrongPW');
 
-        var password = 'wrongPW';
-
-        correct = $scope.d.functions.visa(email, password);
-
-        console.log('checkVisa 2', correct);
+        if (correct2.error) {
+            console.log('ERROR: checkVisa 2', correct2);
+        };
 
 
     };
