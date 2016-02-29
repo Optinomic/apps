@@ -783,7 +783,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             console.log('(✓) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
 
             // Update Entrys
-            $scope.d.functions.scrollTop();
             $scope.d._init.grid.data_datestamp = new Date();
             $scope.d.appState = 'show';
             $scope.getEntrys();
@@ -793,6 +792,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.entrySave = function(app) {
         // Save
+
+        $scope.d.functions.scrollTop();
 
 
         var app = app === undefined ? 'Verordnung' : app;
