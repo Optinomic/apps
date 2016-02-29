@@ -98,9 +98,6 @@
                                 <div ng-messages="myForm.mDosierung.$error" style="color:#E91E63" role="alert">
                                     <div ng-message="required">Eine Dosierung muss angegeben werden.</div>
                                 </div>
-                                <div ng-messages="myForm.mDosierung.$untouched">
-                                    <p style="color:#E91E63">Mussfeld</p>
-                                </div>
                             </md-input-container>
                         </div>
                     </div>
@@ -177,7 +174,7 @@
                 <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button type="submit" ng-if="d.newEntry.medication_selected" ng-click="entrySave('Reserve')" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button type="submit" ng-if="d.newEntry.medication_selected" ng-click="entrySave('Reserve', myForm.$error)" aria-label="Speichern" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> Speichern
             </md-button>
         </md-card-actions>
