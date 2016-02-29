@@ -756,21 +756,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     };
 
 
-    $scope.checkVisa = function(email, password) {
-        // Create URL's for nice lookup
-
-        var aPromise = $scope.d.functions.visa(email, password);
-        aPromise.then(function(data) {
-            // Correct Credentials
-            console.log('(✓) checkVisa =', data);
-
-        }, function(error) {
-            // Wrong Credentials
-            console.log('(!) checkVisa Error =', error);
-
-        });
-
-    };
 
     function DialogController($scope, $mdDialog, scopeDService) {
 
@@ -796,7 +781,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             current: {}
         };
 
-        console.log('$scope.d.visa_user', $scope.d.visa_user);
 
         $scope.d.dataMain.users.all.forEach(function(user, myindex) {
 
@@ -807,7 +791,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
         });
 
-        console.log('$scope.d.visa_user', $scope.d.visa_user);
+        //console.log('$scope.d.visa_user', $scope.d.visa_user);
 
         $mdDialog.show({
                 controller: DialogController,
@@ -819,8 +803,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             })
             .then(function(answer) {
 
-                console.log('DIALOG: ', answer.user_mail, answer.user_pass);
-                $scope.checkVisa(answer.user_mail, answer.user_pass);
+                console.log('DIALOG: ', answer, answer.data.email, answer.data.password);
+
+                var aPromise = $scope.d.functions.visa(answer.data.email, answer.data.password);
+                aPromise.then(function(data) {
+                    // Correct Credentials
+                    console.log('(✓) checkVisa =', data);
+
+                }, function(error) {
+                    // Wrong Credentials
+                    console.log('(!) checkVisa Error =', error);
+
+                });
+
 
             }, function() {
 
