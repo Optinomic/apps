@@ -754,6 +754,21 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
+    $scope.checkVisa = function() {
+        // Create URL's for nice lookup
+        var email = 'psychotherapie@ottiger.org';
+        var password = 'o_tiger54';
+
+        var correct = $scope.d.functions.visa(email, password);
+
+        console.log('checkVisa', correct);
+
+    };
+
+
+
+
+
 
     $scope.saveMedication = function(app) {
 
