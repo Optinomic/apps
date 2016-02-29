@@ -103,10 +103,10 @@
                         </md-input-container>
                     </div>
                     <div flex="60">
-                        <md-input-container flex class="md-block" md-is-error="myForm.mIndikation.$untouched">
+                        <md-input-container flex class="md-block">
                             <label>Indikation</label>
                             <input required name="mIndikation" ng-model="d.newEntry.medication_indikation">
-                            <div ng-messages="myForm.mIndikation.$error" style="color:#E91E63" role="alert">
+                            <div ng-messages="myForm.mIndikation.$error" ng-show="(myForm.mIndikation.$untouched) || (myForm.mIndikation.$touched)" style="color:#E91E63" role="alert">
                                 <div ng-message="required">Bei welcher Indikation soll auf die Reserve zurückgegriffen werden?</div>
                             </div>
                         </md-input-container>
