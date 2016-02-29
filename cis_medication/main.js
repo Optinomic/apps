@@ -780,9 +780,12 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var api_call = dataService.saveAnnotationsData('patient', current_nodeTree, current_array_to_save);
         api_call.then(function(data) {
-            console.log('(✓) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
+
+            var text = '(✓)' + current_nodeTree + ': Erfolgreich gespeichert.';
+            console.log(text, angular.toJson(current_array_to_save, true));
 
             // Update Entrys
+            $scope.d.functions.showSimpleToast(text);
             $scope.d._init.grid.data_datestamp = new Date();
             $scope.d.appState = 'show';
             $scope.getEntrys();
