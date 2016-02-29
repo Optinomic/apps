@@ -611,7 +611,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     $scope.showVisaDialog = function(ev) {
         $mdDialog.show({
                 controller: DialogController,
-                templateUrl: 'template/visa_dialog.html',
+                templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/html/optinomic/dialogs/visa_dialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
