@@ -67,14 +67,14 @@
                     </div>
                     <md-input-container flex>
                         <label>Arzt / Visum</label>
-                        <md-select ng-model="d.newEntry.medication_start_verordnung_user">
+                        <md-select ng-model="d.newEntry.medication_start_verordnung_user_unsigned">
                             <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
                                 {{user.data.extras.full_name}}
                             </md-option>
                         </md-select>
                     </md-input-container>
-                    <md-button class="md-icon-button" ng-click="checkVisa()" aria-label="Visa" style="color: #9E9E9E;">
-                        <i class="md-title mdi mdi-bug"></i>
+                    <md-button class="md-icon-button" ng-click="showVisaDialog(d.newEntry.medication_start_verordnung_user_unsigned)" aria-label="Visa" style="color: #4CAF50;">
+                        <i class="md-title mdi mdi-lock-open-outline"></i>
                     </md-button>
                     <md-input-container flex="15">
                         <label>Status</label>

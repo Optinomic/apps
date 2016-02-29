@@ -777,11 +777,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
         // Data-Sharing (do not remove)
         $scope.d = scopeDService;
 
-        $scope.d.visa_obj = {
-            user_mail: '',
-            user_pass: ''
-        };
-
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -794,7 +789,24 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     }
 
 
-    $scope.showVisaDialog = function(ev) {
+    $scope.showVisaDialog = function(user_id, ev) {
+        $scope.d.visa_user = {
+            search_uID: user_id,
+            event: ev
+        };
+
+        var users = $scope.d.dataMain.users;
+
+        users.forEach(function(user, myindex) {
+
+            // Store Current User
+            if (user.id === user_id) {
+                $scope.d.visa_user.current = user;
+            };
+        });
+
+        console.log('$scope.visa_user', $scope.visa_user);
+
         $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/html/optinomic/dialogs/visa_dialog.html',
