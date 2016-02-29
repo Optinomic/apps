@@ -783,9 +783,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             console.log('(✓) saveMedication (', current_nodeTree, ') success: ', angular.toJson(current_array_to_save, true));
 
             // Update Entrys
-            $scope.d.appState = 'show';
             $scope.d.functions.scrollTop();
             $scope.d._init.grid.data_datestamp = new Date();
+            $scope.d.appState = 'show';
             $scope.getEntrys();
         });
     };
