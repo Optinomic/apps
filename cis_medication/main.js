@@ -759,14 +759,30 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var email = 'psychotherapie@ottiger.org';
         var password = 'o_tiger54';
 
-        var correct = $scope.d.functions.visa(email, password);
-        console.log('checkVisa 1', correct);
 
-        var correct2 = $scope.d.functions.visa(email, 'WrongPW');
+        var aPromise = $scope.d.functions.visa(email, password);
+        aPromise.then(function(data) {
 
-        if (correct2.error) {
-            console.log('ERROR: checkVisa 2', correct2);
-        };
+            console.log('(✓) checkVisa =', data);
+
+        }, function(error) {
+            // Error
+            console.log('(!) checkVisa Error =', error);
+
+        });
+
+
+        var aPromise2 = $scope.d.functions.visa(email, 'WrongPW');
+        aPromise2.then(function(data) {
+
+            console.log('(✓) checkVisa 2 =', data);
+
+        }, function(error) {
+            // Error
+            console.log('(!) checkVisa 2 Error =', error);
+
+        });
+
 
 
     };
