@@ -11,37 +11,37 @@
                 </span>
             </md-card-title-text>
         </md-card-title>
-        <form name="myForm">
-            <md-card-content ng-if="(d.loadedMedicationData) && (d.appState === 'new')">
-                <div>
-                    <p>&nbsp;</p>
-                    <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
-                        <md-item-template>
-                            <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
+        <md-card-content ng-if="(d.loadedMedicationData) && (d.appState === 'new')">
+            <div>
+                <p>&nbsp;</p>
+                <md-autocomplete ng-disabled="d.appInit.isDisabled" md-no-cache="d.appInit.noCache" md-selected-item="d.appInit.selectedItem" md-search-text-change="d.appInit.searchTextChange(d.appInit.searchText)" md-search-text="d.appInit.searchText" md-selected-item-change="d.appInit.selectedItemChange(item)" md-items="item in d.appInit.querySearch(d.appInit.searchText)" md-autofocus="d.appInit.autofocus" md-item-text="item.medi_name" md-min-length="2" md-delay="800" placeholder="Selektieren Sie ein Medikament">
+                    <md-item-template>
+                        <span md-highlight-text="d.appInit.searchText" md-highlight-flags="^i">
                         - {{item.medi_name}} | {{item.medi_code}}
                         </span>
-                        </md-item-template>
-                        <md-not-found>
-                            Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
-                        </md-not-found>
-                    </md-autocomplete>
-                </div>
-            </md-card-content>
-            <md-card-content ng-if="d.appState === 'new'">
-                <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
-                <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
-            </md-card-content>
-            <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
-                <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
-                    <p class="md-subhead">Kein Standardmedikament</p>
-                    <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
-                        <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
-                    </md-button>
-                </md-card-content>
-                <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+                    </md-item-template>
+                    <md-not-found>
+                        Das Medikament "{{d.appInit.searchText}}" ist nicht im Standardkatalog vorhanden.
+                    </md-not-found>
+                </md-autocomplete>
             </div>
-            <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
-            <md-card-content ng-if="d.newEntry.medication_selected">
+        </md-card-content>
+        <md-card-content ng-if="d.appState === 'new'">
+            <p style="text-align:right; height:10px !important; color:#F5F5F5;">{{d.appInit.selectedItem.medi_code}}</p>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </md-card-content>
+        <div ng-if="d.loadedMedicationData && (d.appState === 'new')">
+            <md-card-content ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0">
+                <p class="md-subhead">Kein Standardmedikament</p>
+                <md-button ng-click="entryNotDefaultMedication(d.appInit.searchText)" aria-label="Kein Standardmedikament" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i> »{{d.appInit.searchText}}« erfassen
+                </md-button>
+            </md-card-content>
+            <md-divider ng-if="d.appInit.querySearch(d.appInit.searchText).length === 0"></md-divider>
+        </div>
+        <md-divider ng-if="d.newEntry.medication_selected && (d.appState === 'new')"></md-divider>
+        <md-card-content ng-if="d.newEntry.medication_selected">
+            <form name="myForm">
                 <p class="md-caption">&nbsp;</p>
                 <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
                     <div flex>
@@ -54,9 +54,7 @@
                         </md-input-container>
                     </div>
                 </div>
-            </md-card-content>
-            <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
-            <md-card-content ng-if="d.newEntry.medication_selected">
+                <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
                 <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                     <p class="md-subhead">Verordnung (Start)</p>
                     <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
@@ -82,9 +80,7 @@
                         </md-select>
                     </md-input-container>
                 </div>
-            </md-card-content>
-            <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
-            <md-card-content ng-if="d.newEntry.medication_selected">
+                <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
                 <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                     <p class="md-subhead">Dosierung (max./24h)</p>
                     <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
@@ -121,9 +117,7 @@
                         <md-button class="md-primary" ng-href="{{d.newEntry.url_open_drug_db}}" target="_blank">oddb.org</md-button>
                     </div>
                 </div>
-            </md-card-content>
-            <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
-            <md-card-content ng-if="d.newEntry.medication_selected">
+                <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
                 <div layout="row" layout-gt-xs="row" layout-align="space-between center" layout-margin>
                     <p class="md-subhead">Verordnung (Stop)</p>
                     <p class="md-caption" style="color:#9E9E9E">{{d.newEntry.medication_name}}</p>
@@ -149,8 +143,8 @@
                         </md-select>
                     </md-input-container>
                 </div>
-            </md-card-content>
-        </form>
+            </form>
+        </md-card-content>
         <md-divider ng-if="d.appInit.debug"></md-divider>
         <md-card-content ng-if="d.appInit.debug">
             <h3 class="md-subhead">Debugging:</h3>
