@@ -762,28 +762,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var aPromise = $scope.d.functions.visa(email, password);
         aPromise.then(function(data) {
-
+            // Correct Credentials
             console.log('(✓) checkVisa =', data);
 
         }, function(error) {
-            // Error
+            // Wrong Credentials
             console.log('(!) checkVisa Error =', error);
 
         });
-
-
-        var aPromise2 = $scope.d.functions.visa(email, 'WrongPW');
-        aPromise2.then(function(data) {
-
-            console.log('(✓) checkVisa 2 =', data);
-
-        }, function(error) {
-            // Error
-            console.log('(!) checkVisa 2 Error =', error);
-
-        });
-
-
 
     };
 
