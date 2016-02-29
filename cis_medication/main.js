@@ -801,16 +801,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var app = app === undefined ? 'Verordnung' : app;
 
         myFormErrors = myFormErrors === undefined ? {} : myFormErrors;
-        var have_error = dataService.isEmpty(myFormErrors);
+        var have_no_error = dataService.isEmpty(myFormErrors);
 
         console.log('entrySave', myFormErrors, have_error);
 
-        if (have_error) {
-
-            $scope.d.functions.showSimpleToast('Ihre Eingabe weist noch Fehler auf.');
-
-        } else {
-
+        if (have_no_error) {
 
             $scope.d.newEntry.uniqueid = dataService.uniqueid();
             $scope.createLinks();
@@ -882,6 +877,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             };
 
             $scope.saveMedication(app);
+
+        } else {
+
+            $scope.d.functions.showSimpleToast('Ihre Eingabe weist noch Fehler auf.');
+
         };
     };
 
