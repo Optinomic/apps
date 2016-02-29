@@ -47,7 +47,10 @@
                     <div flex>
                         <md-input-container class="md-block flow-text">
                             <label>Medikament</label>
-                            <input ng-model="d.newEntry.medication_name">
+                            <input required name="mMedikament" ng-model="d.newEntry.medication_name">
+                            <div ng-messages="myForm.mMedikament.$error" style="color:#E91E63" role="alert">
+                                <div ng-message="required">Der Name des Medikaments muss angegeben werden.</div>
+                            </div>
                         </md-input-container>
                     </div>
                 </div>
@@ -91,17 +94,20 @@
                         <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                             <md-input-container class="md-block">
                                 <label>Dosierung</label>
-                                <input required type="number" step="any" name="Dosierung" ng-model="d.newEntry.medication_dosierung" />
+                                <input required type="number" step="any" name="mDosierung" ng-model="d.newEntry.medication_dosierung" />
+                                <div ng-messages="myForm.mDosierung.$error" style="color:#E91E63" role="alert">
+                                    <div ng-message="required">Eine Dosierung muss angegeben werden.</div>
+                                </div>
                             </md-input-container>
-                        </div>
-                        <div ng-messages="myForm.Dosierung.$error" style="color:#E91E63" role="alert">
-                            <div ng-message="required">Eine Dosierung muss angegeben werden.</div>
                         </div>
                     </div>
                     <div flex="60">
                         <md-input-container flex class="md-block">
                             <label>Indikation</label>
-                            <input ng-model="d.newEntry.medication_indikation">
+                            <input required name="mIndikation" ng-model="d.newEntry.medication_indikation">
+                            <div ng-messages="myForm.mIndikation.$error" style="color:#E91E63" role="alert">
+                                <div ng-message="required">Bei welcher Indikation soll auf die Reserve zurückgegriffen werden?</div>
+                            </div>
                         </md-input-container>
                     </div>
                 </div>
