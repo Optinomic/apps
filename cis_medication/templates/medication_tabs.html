@@ -13,6 +13,9 @@ include(../lib/html/optinomic/page/start.m4)
                 <div ng-if="d.app.selected_section.id === 0">
                     include(../lib/html/optinomic/templates/data_table.html)
                 </div>
+                <md-button ng-click="d.functions.scrollTop()" aria-label="top" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-playlist-plus"></i>
+                </md-button>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
                 include(templates/medication_edit.html)
