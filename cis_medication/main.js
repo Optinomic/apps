@@ -775,10 +775,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.visa_obj = {
+    function DialogController($scope, $mdDialog, scopeDService) {
+
+        // Data-Sharing (do not remove)
+        $scope.d = scopeDService;
+
+        $scope.d.visa_obj = {
             user_mail: '',
-            user_pass: ''
+            user_pass: 'set'
         };
 
         $scope.hide = function() {
