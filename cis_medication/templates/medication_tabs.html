@@ -16,6 +16,9 @@ include(../lib/html/optinomic/page/start.m4)
                 <md-button ng-click="d.functions.scrollTop()" aria-label="top" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-chevron-up"></i>
                 </md-button>
+                <md-button ng-click="showVisaDialog()" aria-label="top" style="color: #3F51B5;">
+                    <i class="md-title mdi mdi-lock-open-outline"></i>
+                </md-button>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
                 include(templates/medication_edit.html)
