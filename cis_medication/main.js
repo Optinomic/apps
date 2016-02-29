@@ -761,7 +761,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
         var correct = $scope.d.functions.visa(email, password);
 
-        console.log('checkVisa', correct);
+        console.log('checkVisa 1', correct);
+
+
+        var password = 'wrongPW';
+
+        correct = $scope.d.functions.visa(email, password);
+
+        console.log('checkVisa 2', correct);
+
 
     };
 
