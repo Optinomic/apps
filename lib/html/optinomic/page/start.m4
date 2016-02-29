@@ -4,4 +4,4 @@
             include(../lib/html/optinomic/templates/loading.html)
         </div>
         <div ng-if="d.init">
-            <div ng-if="d.haveData" id="top" class="anchor">
+            <div ng-if="d.haveData" id="top">
