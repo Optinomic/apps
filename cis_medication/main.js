@@ -615,12 +615,18 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
-                fullscreen: true
+                fullscreen: false
             })
             .then(function(answer) {
+
                 $scope.status = 'You said the information was "' + answer + '".';
+                console.log('DIALOG: ', $scope.status);
+
             }, function() {
+
                 $scope.status = 'You cancelled the dialog.';
+                console.log('DIALOG: ', $scope.status);
+
             });
 
     };
