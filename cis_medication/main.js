@@ -792,20 +792,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     $scope.showVisaDialog = function(user_id, ev) {
         $scope.d.visa_user = {
             search_uID: user_id,
-            event: ev
+            event: ev,
+            current: {}
         };
 
-        var users = $scope.d.dataMain.users;
+        console.log('$scope.d.visa_user', $scope.d.visa_user);
 
-        users.forEach(function(user, myindex) {
+        $scope.d.dataMain.users.forEach(function(user, myindex) {
 
             // Store Current User
             if (user.id === user_id) {
                 $scope.d.visa_user.current = user;
             };
+
         });
 
-        console.log('$scope.visa_user', $scope.visa_user);
+        console.log('$scope.d.visa_user', $scope.d.visa_user);
 
         $mdDialog.show({
                 controller: DialogController,
