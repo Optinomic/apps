@@ -793,86 +793,95 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     };
 
 
-    $scope.entrySave = function(app) {
+    $scope.entrySave = function(app, myFormErrors) {
         // Save
 
         $scope.d.functions.scrollTop();
 
-
         var app = app === undefined ? 'Verordnung' : app;
+        myFormErrors = myFormErrors === undefined ? {} : myFormErrors;
+
+        var have_error = dataService.isEmpty(myFormErrors);
 
 
+        if (have_error) {
 
-        $scope.d.newEntry.uniqueid = dataService.uniqueid();
-        $scope.createLinks();
+            $scope.d.functions.showSimpleToast('Ihre Eingabe weist noch Fehler auf.');
 
-        if ($scope.d.newEntry.medication_start_verordnung_datum) {
-            var date = $scope.d.newEntry.medication_start_verordnung_datum;
-            $scope.d.newEntry.medication_start_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-            $scope.d.newEntry.medication_start_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
-            $scope.d.newEntry.medication_start_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.medication_start_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
+        } else {
+
+
+            $scope.d.newEntry.uniqueid = dataService.uniqueid();
+            $scope.createLinks();
+
+            if ($scope.d.newEntry.medication_start_verordnung_datum) {
+                var date = $scope.d.newEntry.medication_start_verordnung_datum;
+                $scope.d.newEntry.medication_start_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+                $scope.d.newEntry.medication_start_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                $scope.d.newEntry.medication_start_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                $scope.d.newEntry.medication_start_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
+            };
+
+            if ($scope.d.newEntry.medication_stop_verordnung_datum) {
+                var date = $scope.d.newEntry.medication_stop_verordnung_datum;
+                $scope.d.newEntry.medication_stop_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+                $scope.d.newEntry.medication_stop_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                $scope.d.newEntry.medication_stop_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                $scope.d.newEntry.medication_stop_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
+            };
+
+
+            // Push new Entry if 'new'
+            if ($scope.d.appState === 'new') {
+
+                // Datum erweitern.
+                var date = $scope.d.newEntry.datestamp;
+                $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+                $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
+
+
+                if (app === 'Verordnung') {
+                    $scope.d.medication.push($scope.d.newEntry);
+                };
+
+                if (app === 'Reserve') {
+                    $scope.d.medication_reserve.push($scope.d.newEntry);
+                };
+
+                if (app === 'Abgabe') {
+                    $scope.d.medication_reserve_abgabe.push($scope.d.newEntry);
+                };
+
+            };
+
+            // Save edited entry.
+            if ($scope.d.appState === 'edit') {
+
+                // Datum erweitern.
+                var date = $scope.d.newEntry.datestamp_edit;
+                $scope.d.newEntry.datestamp_edit_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
+                $scope.d.newEntry.datestamp_edit_week = $filter("amDateFormat")(date, 'YYYY, ww');
+                $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+                $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
+
+                if (app === 'Verordnung') {
+                    $scope.d.medication[$scope.d.newEntryID] = $scope.d.newEntry;
+                };
+
+                if (app === 'Reserve') {
+                    $scope.d.medication_reserve[$scope.d.newEntryID] = $scope.d.newEntry;
+                };
+
+                if (app === 'Abgabe') {
+                    $scope.d.medication_reserve_abgabe[$scope.d.newEntryID] = $scope.d.newEntry;
+                };
+
+            };
+
+            $scope.saveMedication(app);
         };
-
-        if ($scope.d.newEntry.medication_stop_verordnung_datum) {
-            var date = $scope.d.newEntry.medication_stop_verordnung_datum;
-            $scope.d.newEntry.medication_stop_verordnung_datum_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-            $scope.d.newEntry.medication_stop_verordnung_datum_week = $filter("amDateFormat")(date, 'YYYY, ww');
-            $scope.d.newEntry.medication_stop_verordnung_datum_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.medication_stop_verordnung_datum_time = $filter("amDateFormat")(date, 'HH:mm');
-        };
-
-
-        // Push new Entry if 'new'
-        if ($scope.d.appState === 'new') {
-
-            // Datum erweitern.
-            var date = $scope.d.newEntry.datestamp;
-            $scope.d.newEntry.datestamp_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-            $scope.d.newEntry.datestamp_week = $filter("amDateFormat")(date, 'YYYY, ww');
-            $scope.d.newEntry.datestamp_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.datestamp_time = $filter("amDateFormat")(date, 'HH:mm');
-
-
-            if (app === 'Verordnung') {
-                $scope.d.medication.push($scope.d.newEntry);
-            };
-
-            if (app === 'Reserve') {
-                $scope.d.medication_reserve.push($scope.d.newEntry);
-            };
-
-            if (app === 'Abgabe') {
-                $scope.d.medication_reserve_abgabe.push($scope.d.newEntry);
-            };
-
-        };
-
-        // Save edited entry.
-        if ($scope.d.appState === 'edit') {
-
-            // Datum erweitern.
-            var date = $scope.d.newEntry.datestamp_edit;
-            $scope.d.newEntry.datestamp_edit_sort = $filter("amDateFormat")(date, 'YYYYMMDDHHmmsssss');
-            $scope.d.newEntry.datestamp_edit_week = $filter("amDateFormat")(date, 'YYYY, ww');
-            $scope.d.newEntry.datestamp_edit_day = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            $scope.d.newEntry.datestamp_edit_time = $filter("amDateFormat")(date, 'HH:mm');
-
-            if (app === 'Verordnung') {
-                $scope.d.medication[$scope.d.newEntryID] = $scope.d.newEntry;
-            };
-
-            if (app === 'Reserve') {
-                $scope.d.medication_reserve[$scope.d.newEntryID] = $scope.d.newEntry;
-            };
-
-            if (app === 'Abgabe') {
-                $scope.d.medication_reserve_abgabe[$scope.d.newEntryID] = $scope.d.newEntry;
-            };
-
-        };
-
-        $scope.saveMedication(app);
     };
 
 
