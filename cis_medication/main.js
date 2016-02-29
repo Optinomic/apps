@@ -810,12 +810,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 aPromise.then(function(data) {
                     // Correct Credentials
                     console.log('(✓) checkVisa =', data, data.data.user_id);
+                    $scope.d.newEntry.medication_start_verordnung_user = data.data.user_id;
                     $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
                     $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
 
                 }, function(error) {
                     // Wrong Credentials
                     console.log('(!) checkVisa Error =', error);
+                    $scope.d.newEntry.medication_start_verordnung_user = null;
                     $scope.d.newEntry.medication_start_verordnung_user_signed = null;
                     $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
 
