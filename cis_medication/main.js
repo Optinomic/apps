@@ -803,7 +803,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         myFormErrors = myFormErrors === undefined ? {} : myFormErrors;
         var have_no_error = dataService.isEmpty(myFormErrors);
 
-        console.log('entrySave', myFormErrors, have_error);
+        console.log('entrySave', myFormErrors, have_no_error);
 
         if (have_no_error) {
 
