@@ -199,6 +199,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
+
     // ******************************
     // Internal methods
     // ******************************
@@ -783,6 +784,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
             // Update Entrys
             $scope.d.appState = 'show';
+            $scope.d.functions.scrollTop();
             $scope.d._init.grid.data_datestamp = new Date();
             $scope.getEntrys();
         });
