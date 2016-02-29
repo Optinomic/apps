@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -593,6 +593,40 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
             console.log('You selected: Cancel!');
             $scope.entryCancel();
 
+        });
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+    }
+
+    $scope.showVisaDialog = function(ev) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+        $mdDialog.show({
+                controller: DialogController,
+                template: '<md-dialog aria-label="Mango (Fruit)" ng-cloak> <form> <md-toolbar> <div class="md-toolbar-tools"> <h2>Mango (Fruit)</h2> <span flex></span> <md-button class="md-icon-button" ng-click="cancel()"> - </md-button> </div></md-toolbar> <md-dialog-content> <div class="md-dialog-content"> <h2>Username</h2> <md-input-container flex class="md-block"> <label>Passwort</label> <input name="password" ng-model="password"> </md-input-container> </div></md-dialog-content> <md-dialog-actions layout="row"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="answer(password)" style="margin-right:20px;"> Check </md-button> </md-dialog-actions> </form></md-dialog>',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen
+            })
+            .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        $scope.$watch(function() {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function(wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
         });
     };
 
