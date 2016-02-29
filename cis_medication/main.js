@@ -596,40 +596,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
         });
     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
-        };
-    }
 
-    $scope.showVisaDialog = function(ev) {
-        $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/html/optinomic/dialogs/visa_dialog.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true,
-                fullscreen: false
-            })
-            .then(function(answer) {
-
-                $scope.status = 'You said the information was "' + answer + '".';
-                console.log('DIALOG: ', $scope.status);
-
-            }, function() {
-
-                $scope.status = 'You cancelled the dialog.';
-                console.log('DIALOG: ', $scope.status);
-
-            });
-
-    };
 
 
     $scope.loadMedis = function() {
@@ -808,7 +775,44 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
     };
 
+    function DialogController($scope, $mdDialog) {
+        $scope.visa_obj = {
+            user_mail: '',
+            user_pass: ''
+        };
 
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+    }
+
+
+    $scope.showVisaDialog = function(ev) {
+        $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'https://rawgit.com/Optinomic/apps/master/lib/html/optinomic/dialogs/visa_dialog.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: false
+            })
+            .then(function(answer) {
+
+                console.log('DIALOG: ', answer);
+
+            }, function() {
+
+                console.log('DIALOG: Cancel');
+
+            });
+
+    };
 
 
 

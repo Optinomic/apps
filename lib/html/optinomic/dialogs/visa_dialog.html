@@ -4,7 +4,7 @@
             <div class="md-toolbar-tools">
                 <h2>Feld visieren</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
+                <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
                     <i class="md-title mdi mdi-close"></i>
                 </md-button>
             </div>
@@ -12,18 +12,30 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <h2>Username</h2>
+                <md-input-container flex>
+                    <label>Arzt / Visum</label>
+                    <md-select ng-model="visa_obj.user_mail">
+                        <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.data.email}}">
+                            {{user.data.extras.full_name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex class="md-block">
+                    <label>Email</label>
+                    <input name="visa_obj.user_mail" ng-model="password">
+                </md-input-container>
                 <md-input-container flex class="md-block">
                     <label>Passwort</label>
-                    <input name="password" ng-model="password">
+                    <input name="visa_obj.user_pass" ng-model="password">
                 </md-input-container>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button ng-click="cancel()">
+            <md-button aria-label="cancel" ng-click="cancel()">
                 Cancel
             </md-button>
-            <md-button ng-click="answer(password)" style="margin-right:20px;">
-                Check
+            <md-button aria-label="visieren" ng-click="answer(visa_obj)" style="margin-right:20px;">
+                <i class="md-title mdi mdi-lock-open-outline"></i>
             </md-button>
         </md-dialog-actions>
     </form>
