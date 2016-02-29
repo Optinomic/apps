@@ -66,9 +66,11 @@
                         <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                     </div>
                     <md-button ng-if="d.newEntry.medication_start_verordnung_user_unsigned" class="md-icon-button" ng-click="showVisaDialog(d.newEntry.medication_start_verordnung_user_unsigned)" aria-label="Visa">
-                        <i ng-if="d.newEntry.medication_start_verordnung_user_signed" style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
                         <i ng-if="!d.newEntry.medication_start_verordnung_user_signed" style="color: #E91E63;" class="md-title mdi mdi-lock-outline"></i>
                     </md-button>
+                    <div ng-if="d.newEntry.medication_start_verordnung_user_signed">
+                        <i style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
+                    </div>
                     <md-input-container flex>
                         <label>Arzt / Visum</label>
                         <md-select ng-model="d.newEntry.medication_start_verordnung_user_unsigned">

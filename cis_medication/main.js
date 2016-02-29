@@ -809,8 +809,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 var aPromise = $scope.d.functions.visa(answer.data.email, answer.data.password);
                 aPromise.then(function(data) {
                     // Correct Credentials
-                    console.log('(✓) checkVisa =', data);
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
+                    console.log('(✓) checkVisa =', data, data.data.user_id);
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
                     $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
 
                 }, function(error) {
