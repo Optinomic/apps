@@ -13,7 +13,7 @@
             <div class="md-dialog-content">
                 <h2>Username</h2>
                 <md-input-container flex>
-                    <label>Arzt / Visum</label>
+                    <label>Visum</label>
                     <md-select ng-model="d.visa_obj.user_mail">
                         <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.data.email}}">
                             {{user.data.extras.full_name}}
@@ -22,7 +22,7 @@
                 </md-input-container>
                 <md-input-container flex class="md-block">
                     <label>Email</label>
-                    <input name="d.visa_obj.user_mail" ng-model="password">
+                    <input ng-model="d.visa_obj.user_mail">
                 </md-input-container>
                 <md-input-container flex class="md-block">
                     <label>Passwort</label>
