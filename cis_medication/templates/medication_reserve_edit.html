@@ -73,7 +73,7 @@
                             </md-option>
                         </md-select>
                     </md-input-container>
-                    <md-button class="md-icon-button" ng-click="showVisaDialog(d.newEntry.medication_start_verordnung_user_unsigned)" aria-label="Visa" style="color: #4CAF50;">
+                    <md-button ng-if="d.newEntry.medication_start_verordnung_user_unsigned" class="md-icon-button" ng-click="showVisaDialog(d.newEntry.medication_start_verordnung_user_unsigned)" aria-label="Visa" style="color: #4CAF50;">
                         <i class="md-title mdi mdi-lock-open-outline"></i>
                     </md-button>
                     <md-input-container flex="15">

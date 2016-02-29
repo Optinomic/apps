@@ -791,7 +791,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
     $scope.showVisaDialog = function(user_id, ev) {
         $scope.d.visa_user = {
-            search_uID: user_id,
+            search_uID: parseInt(user_id),
             event: ev,
             current: {}
         };
@@ -801,7 +801,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
         $scope.d.dataMain.users.all.forEach(function(user, myindex) {
 
             // Store Current User
-            if (user.id === user_id) {
+            if (user.id === parseInt(user_id)) {
                 $scope.d.visa_user.current = user;
             };
 
