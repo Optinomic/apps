@@ -798,7 +798,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
         console.log('$scope.d.visa_user', $scope.d.visa_user);
 
-        $scope.d.dataMain.users.forEach(function(user, myindex) {
+        $scope.d.dataMain.users.all.forEach(function(user, myindex) {
 
             // Store Current User
             if (user.id === user_id) {
