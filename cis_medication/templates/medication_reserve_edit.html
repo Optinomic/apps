@@ -95,7 +95,7 @@
                             <md-input-container class="md-block">
                                 <label>Dosierung</label>
                                 <input required type="number" step="any" name="mDosierung" ng-model="d.newEntry.medication_dosierung" />
-                                <div ng-messages="myForm.mDosierung.$error" style="color:#E91E63" role="alert">
+                                <div ng-messages="myForm.mDosierung.$error" ng-show="(myForm.mDosierung.$untouched) || (myForm.mDosierung.$touched)" style="color:#E91E63" role="alert">
                                     <div ng-message="required">Eine Dosierung muss angegeben werden.</div>
                                 </div>
                             </md-input-container>
