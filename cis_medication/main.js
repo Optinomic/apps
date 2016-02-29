@@ -779,7 +779,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
         $scope.d.visa_obj = {
             user_mail: '',
-            user_pass: 'set'
+            user_pass: ''
         };
 
         $scope.hide = function() {
