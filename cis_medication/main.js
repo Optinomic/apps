@@ -756,11 +756,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     };
 
 
-    $scope.checkVisa = function() {
+    $scope.checkVisa = function(email, password) {
         // Create URL's for nice lookup
-        var email = 'psychotherapie@ottiger.org';
-        var password = 'o_tiger54';
-
 
         var aPromise = $scope.d.functions.visa(email, password);
         aPromise.then(function(data) {
@@ -808,7 +805,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             })
             .then(function(answer) {
 
-                console.log('DIALOG: ', answer);
+                console.log('DIALOG: ', answer.user_mail, answer.user_pass);
+                $scope.checkVisa(answer.user_mail, answer.user_pass);
 
             }, function() {
 
