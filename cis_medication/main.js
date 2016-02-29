@@ -436,7 +436,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                     row.medication_start_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_start_verordnung_datum);
 
-                    if (row.medication_stop_verordnung_datum !== null) {
+                    if (row.medication_stop_verordnung_datum) {
                         row.medication_stop_verordnung_datum = $scope.d.functions.sureDateInstance(row.medication_stop_verordnung_datum);
 
 
@@ -782,7 +782,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         api_call.then(function(data) {
 
             var text = '(✓) ' + app + ': Erfolgreich gespeichert.';
-            console.log(text, angular.toJson(current_array_to_save, true));
+            //console.log(text, angular.toJson(current_array_to_save, true));
 
             // Update Entrys
             $scope.d.functions.showSimpleToast(text);
