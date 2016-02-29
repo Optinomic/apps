@@ -158,7 +158,7 @@
                 {{d.newEntry | json}}
             </pre>
             <pre>
-                {{myForm.$error.$valid}}
+                {{myForm.$error}}
             </pre>
         </md-card-content>
         <md-card-content ng-if="!d.loadedMedicationData">
@@ -174,7 +174,7 @@
                 <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button type="submit" ng-if="(d.newEntry.medication_selected) && (myForm.$error.$valid)" ng-click="entrySave('Reserve')" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button type="submit" ng-if="(d.newEntry.medication_selected) && (myForm.$error === {})" ng-click="entrySave('Reserve')" aria-label="Speichern" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> Speichern
             </md-button>
         </md-card-actions>
