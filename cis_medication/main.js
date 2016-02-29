@@ -805,14 +805,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
                 console.log('DIALOG: ', answer, answer.data.email, answer.data.password);
 
+                // Check if Login-Credentials are correct.
                 var aPromise = $scope.d.functions.visa(answer.data.email, answer.data.password);
                 aPromise.then(function(data) {
                     // Correct Credentials
                     console.log('(✓) checkVisa =', data);
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
 
                 }, function(error) {
                     // Wrong Credentials
                     console.log('(!) checkVisa Error =', error);
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
 
                 });
 
