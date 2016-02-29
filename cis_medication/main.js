@@ -1374,8 +1374,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
 
 
-
-
         // Select needed data & enrich results
         var medication_data = [];
         // 'Verordnung'
