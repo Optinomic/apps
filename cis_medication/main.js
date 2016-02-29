@@ -1333,6 +1333,24 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         };
 
 
+        // columnDefs - cellStyle for medication_status
+        $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
+            columnDef.cellClass = function(params) {
+
+                var return_class = null
+                var status = parseInt(params.data.medication_status);
+
+                if (status === 1) {
+                    return_class = 'medication-stop';
+                };
+
+                if (status === 2) {
+                    return_class = 'medication-verweigert';
+                };
+
+                return return_class;
+            }
+        });
 
     };
 
@@ -1354,24 +1372,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         }];
 
 
-        // columnDefs - cellStyle for medication_status
-        $scope.d.grid.options.columnDefs.forEach(function(columnDef, myindex) {
-            columnDef.cellClass = function(params) {
 
-                var return_class = null
-                var status = parseInt(params.data.medication_status);
-
-                if (status === 1) {
-                    return_class = 'medication-stop';
-                };
-
-                if (status === 2) {
-                    return_class = 'medication-verweigert';
-                };
-
-                return return_class;
-            }
-        });
 
 
 
@@ -1399,7 +1400,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.grid.options.api.sizeColumnsToFit();
 
 
-        //console.log(' =====> updateDataView: ', app, $scope.d.grid);
+        console.log(' =====> updateDataView: ', app, $scope.d.grid);
 
     };
 
