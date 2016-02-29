@@ -799,10 +799,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         $scope.d.functions.scrollTop();
 
         var app = app === undefined ? 'Verordnung' : app;
-        myFormErrors = myFormErrors === undefined ? {} : myFormErrors;
 
+        myFormErrors = myFormErrors === undefined ? {} : myFormErrors;
         var have_error = dataService.isEmpty(myFormErrors);
 
+        console.log('entrySave', myFormErrors, have_error);
 
         if (have_error) {
 
