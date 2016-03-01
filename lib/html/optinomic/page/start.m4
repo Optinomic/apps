@@ -1,4 +1,4 @@
-<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
+<div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak style="position: relative;">
     <div ng-controller="AppCtrl">
         <div ng-if="!d.init">
             include(../lib/html/optinomic/templates/loading.html)
