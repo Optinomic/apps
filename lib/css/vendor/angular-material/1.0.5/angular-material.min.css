@@ -7,10 +7,11 @@
 
 body,
 html {
-    height: 90%;
-    max-height: 90% !important;
+    height: 100%;
+    max-height: 100%;
     color: rgba(0, 0, 0, .87);
     background: #fff;
+    overflow: hidden;
     position: relative;
 }
 
