@@ -3,7 +3,15 @@ include(../lib/html/optinomic/page/start.m4)
 <md-card>
     <md-card-content>
         <md-tabs md-selected="d.sql_box.selectedIndex" md-dynamic-height md-border-bottom>
-            <md-tab label="SQL">
+            <md-tab label="Abfragen">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Abfragen</h1>
+                    <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.sql_box.query" ng-init="" aria-label="Abfragen">
+                        <md-option ng-repeat="item in d.sql_box.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
+                    </md-select>
+                </md-content>
+            </md-tab>
+            <md-tab label="SQL (Admin)">
                 <md-content class="md-padding">
                     <h1 class="md-display-2">SQL</h1>
                     <md-input-container class="md-block md-accent">
