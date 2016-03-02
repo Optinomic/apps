@@ -109,7 +109,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id);
 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var data_package = {};
+        //var data_package = {};
         //data_package = {
         //    name: 'Name der Abfrage',
         //    sql: in   clude_as_js_string(
@@ -120,7 +120,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Default setzen.
         //$scope.d.export_obj.sql_field = $scope.d.export_obj.packages[0].sql;
-        console.log('setExport: ', $scope.d.export_obj);
+        console.log('setExport: ', $scope.d.sql_box);
 
     };
 
