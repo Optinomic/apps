@@ -25,8 +25,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
-            // Init - Data Export
-            $scope.setExport();
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -40,9 +38,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.setCurrentResultDate();
             };
 
+            // Init - Data Export
+            $scope.setExport();
+
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
-
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
