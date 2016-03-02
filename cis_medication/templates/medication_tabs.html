@@ -12,6 +12,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 0">
                     include(../lib/html/optinomic/templates/data_table.html)
+                    <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
                 <md-button ng-click="d.functions.scrollTop()" aria-label="top" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-chevron-up"></i>
@@ -37,6 +38,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 1">
                     include(../lib/html/optinomic/templates/data_table.html)
+                    <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
@@ -56,6 +58,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 2">
                     include(../lib/html/optinomic/templates/data_table.html)
+                    <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
