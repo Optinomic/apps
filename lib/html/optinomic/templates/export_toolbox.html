@@ -26,13 +26,12 @@ include(../lib/html/optinomic/page/start.m4)
                         <div>
                             <h1 class="md-display-2" ng-if="d.sql_box.direct==='True'">Daten</h1>
                             <h1 class="md-display-2" ng-if="d.sql_box.direct==='False'">Download</h1>
-                            <p class="md-caption" style="color: #3F51B5">{{d.sql_box.query}}</p>
                         </div>
                         <div ng-if="(d.sql_box.format === 'json') && (d.sql_box.direct==='True')">
                             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="initSQL()" class="md-primary md-icon-button" aria-label="Close">
                                 <i class="mdi mdi-close"></i>
                                 <md-tooltip md-direction="left">
-                                    {{'Close' | translate}}
+                                    Schliessen
                                 </md-tooltip>
                             </md-button>
                             <p class="md-caption">Headers: {{d.sql_box.data.headers.length}}</p>
@@ -43,7 +42,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <pre flex ng-if="d.sql_box.format !== 'json'">{{d.sql_box.data}}</pre>
                         <pre flex ng-if="d.sql_box.format === 'json'">{{d.sql_box.data | json}}</pre>
                         <div layout="row" layout-align="end center">
-                            <md-button class="md-primary" ng-click="initSQL()">{{'Cancel' | translate}}</md-button>
+                            <md-button class="md-primary" ng-click="initSQL()">Abbrechen</md-button>
                         </div>
                     </div>
                     <div ng-if="d.sql_box.direct==='False'">
