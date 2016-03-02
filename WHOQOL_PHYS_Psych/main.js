@@ -25,6 +25,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
+            // Init - Data Export
+            $scope.setExport();
+
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
@@ -39,7 +42,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
-
 
 
             // Finishing: Console Info & Init = done.
@@ -104,10 +106,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
-        $scope.d.sql_box = $scope.d.default_sql_box;
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id);
 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
-        //var data_package = {};
+        var data_package = {};
         //data_package = {
         //    name: 'Name der Abfrage',
         //    sql: in   clude_as_js_string(
