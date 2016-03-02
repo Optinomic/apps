@@ -92,6 +92,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    // -------------------
+    // Data-Export
+    // -------------------
+    $scope.setExport = function() {
+
+
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
+
+        $scope.d.sql_box = $scope.d.default_sql_box;
+
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        //var data_package = {};
+        //data_package = {
+        //    name: 'Name der Abfrage',
+        //    sql: include_as_js_string(
+        //        export.sql)
+        //};
+        //$scope.d.sql_box.packages.push(data_package);
+
+
+        // Default setzen.
+        //$scope.d.export_obj.sql_field = $scope.d.export_obj.packages[0].sql;
+        console.log('setExport: ', $scope.d.export_obj);
+
+    };
 
 
 });
