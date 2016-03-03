@@ -4,8 +4,8 @@ include(../lib/html/optinomic/page/start.m4)
         <md-tabs md-selected="d.sql_box.selectedIndex" md-dynamic-height md-border-bottom>
             <md-tab label="Abfragen">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Datenexport</h1>
-                    <h3 class="md-headline" style="margin-top: -24px;">Abfragen: {{d.dataMain.apps.current.name}}</h3>
+                    <h1 class="md-display-2" style="margin-top: -12px;">Datenexport</h1>
+                    <h3 class="md-headline" style="margin-top: -30px; color:#3F51B5">Abfragen: {{d.dataMain.apps.current.name}}</h3>
                     <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.sql_box.query" ng-init="" aria-label="Abfragen">
                         <md-option ng-repeat="item in d.sql_box.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
                     </md-select>
@@ -13,9 +13,10 @@ include(../lib/html/optinomic/page/start.m4)
             </md-tab>
             <md-tab label="SQL (Admin)" ng-if="d.dataMain.users.current.data.role === 'Admin'">
                 <md-content class=" md-padding ">
-                    <h1 class="md-display-2 ">SQL</h1>
+                    <h1 class="md-display-2" style="margin-top: -12px;">SQL-Abfrage</h1>
+                    <h3 class="md-headline" style="margin-top: -30px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
                     <md-input-container class="md-block md-accent ">
-                        <label>SQL-Abfrage</label>
+                        <label>SQL</label>
                         <textarea ng-model="d.sql_box.query " md-select-on-focus></textarea>
                     </md-input-container>
                 </md-content>
@@ -24,8 +25,9 @@ include(../lib/html/optinomic/page/start.m4)
                 <md-content class="md-padding ">
                     <div layout="row " layout-xs=column lyout-gt-xs="row " layout-align="space-between end ">
                         <div>
-                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='True' ">Daten</h1>
-                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='False' ">Download</h1>
+                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='True'" style="margin-top: -12px;">Daten</h1>
+                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='False'" style="margin-top: -12px;">Download</h1>
+                            <h3 class="md-headline" style="margin-top: -30px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
                         </div>
                         <div ng-if="(d.sql_box.format==='json' ) && (d.sql_box.direct==='True' ) ">
                             <md-button style="font-size: 18px; color:#9E9E9E " ng-click="initSQL() " class="md-primary md-icon-button " aria-label="Close ">
@@ -60,7 +62,8 @@ include(../lib/html/optinomic/page/start.m4)
             </md-tab>
             <md-tab label="Einstellungen ">
                 <md-content class="md-padding ">
-                    <h1 class="md-display-2 ">Einstellungen</h1>
+                    <h1 class="md-display-2" style="margin-top: -12px;">Einstellungen</h1>
+                    <h3 class="md-headline" style="margin-top: -30px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
                     <div layout="row " layout-gt-xs="row " layout-xs="column " layout-align="start stretch " layout-padding>
                         <div flex>
                             <md-select ng-model="d.sql_box.format " ng-init="csv " md-on-close="d.sql_box.have_data=f alse " aria-label="Format ">
