@@ -11,44 +11,44 @@ include(../lib/html/optinomic/page/start.m4)
                     </md-select>
                 </md-content>
             </md-tab>
-            <md-tab label="SQL (Admin)">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2">SQL</h1>
-                    <md-input-container class="md-block md-accent">
+            <md-tab label="SQL (Admin)" ng-if="d.dataMain.users.current.data.role === 'Admin'">
+                <md-content class=" md-padding ">
+                    <h1 class="md-display-2 ">SQL</h1>
+                    <md-input-container class="md-block md-accent ">
                         <label>SQL-Abfrage</label>
-                        <textarea ng-model="d.sql_box.query" md-select-on-focus></textarea>
+                        <textarea ng-model="d.sql_box.query " md-select-on-focus></textarea>
                     </md-input-container>
                 </md-content>
             </md-tab>
-            <md-tab label="Data" ng-if="d.sql_box.have_data">
-                <md-content class="md-padding">
-                    <div layout="row" layout-xs=column lyout-gt-xs="row" layout-align="space-between end">
+            <md-tab label="Data " ng-if="d.sql_box.have_data ">
+                <md-content class="md-padding ">
+                    <div layout="row " layout-xs=column lyout-gt-xs="row " layout-align="space-between end ">
                         <div>
-                            <h1 class="md-display-2" ng-if="d.sql_box.direct==='True'">Daten</h1>
-                            <h1 class="md-display-2" ng-if="d.sql_box.direct==='False'">Download</h1>
+                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='True' ">Daten</h1>
+                            <h1 class="md-display-2 " ng-if="d.sql_box.direct==='False' ">Download</h1>
                         </div>
-                        <div ng-if="(d.sql_box.format === 'json') && (d.sql_box.direct==='True')">
-                            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="initSQL()" class="md-primary md-icon-button" aria-label="Close">
-                                <i class="mdi mdi-close"></i>
-                                <md-tooltip md-direction="left">
+                        <div ng-if="(d.sql_box.format==='json' ) && (d.sql_box.direct==='True' ) ">
+                            <md-button style="font-size: 18px; color:#9E9E9E " ng-click="initSQL() " class="md-primary md-icon-button " aria-label="Close ">
+                                <i class="mdi mdi-close "></i>
+                                <md-tooltip md-direction="left ">
                                     Schliessen
                                 </md-tooltip>
                             </md-button>
-                            <p class="md-caption">Headers: {{d.sql_box.data.headers.length}}</p>
-                            <p class="md-caption">Rows: {{d.sql_box.data.rows.length}}</p>
+                            <p class="md-caption ">Headers: {{d.sql_box.data.headers.length}}</p>
+                            <p class="md-caption ">Rows: {{d.sql_box.data.rows.length}}</p>
                         </div>
                     </div>
-                    <div ng-if="d.sql_box.direct==='True'">
-                        <pre flex ng-if="d.sql_box.format !== 'json'">{{d.sql_box.data}}</pre>
-                        <pre flex ng-if="d.sql_box.format === 'json'">{{d.sql_box.data | json}}</pre>
-                        <div layout="row" layout-align="end center">
-                            <md-button class="md-primary" ng-click="initSQL()">Abbrechen</md-button>
+                    <div ng-if="d.sql_box.direct==='True' ">
+                        <pre flex ng-if="d.sql_box.format !=='json' ">{{d.sql_box.data}}</pre>
+                        <pre flex ng-if="d.sql_box.format==='json' ">{{d.sql_box.data | json}}</pre>
+                        <div layout="row " layout-align="end center ">
+                            <md-button class="md-primary " ng-click="initSQL() ">Abbrechen</md-button>
                         </div>
                     </div>
-                    <div ng-if="d.sql_box.direct==='False'">
-                        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
-                            <md-button class="md-raised md-accent" ng-href="{{d.sql_box.data.download_url}}" target="_blank" style="color: #E8EAF6 !important;">Download ({{d.sql_box.format}})</md-button>
-                            <md-button style="font-size: 18px; color:#9E9E9E" ng-click="initSQL()" class="md-primary md-icon-button " aria-label="Close ">
+                    <div ng-if="d.sql_box.direct==='False' ">
+                        <div layout="row " layout-gt-xs="row " layout-xs="row " layout-align="space-between center ">
+                            <md-button class="md-raised md-accent " ng-href="{{d.sql_box.data.download_url}} " target="_blank " style="color: #E8EAF6 !important; ">Download ({{d.sql_box.format}})</md-button>
+                            <md-button style="font-size: 18px; color:#9E9E9E " ng-click="initSQL() " class="md-primary md-icon-button " aria-label="Close ">
                                 <i class="mdi mdi-close "></i>
                                 <md-tooltip md-direction="bottom ">
                                     Schliessen
@@ -58,33 +58,33 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                 </md-content>
             </md-tab>
-            <md-tab label="Einstellungen">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2">Einstellungen</h1>
-                    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start stretch" layout-padding>
+            <md-tab label="Einstellungen ">
+                <md-content class="md-padding ">
+                    <h1 class="md-display-2 ">Einstellungen</h1>
+                    <div layout="row " layout-gt-xs="row " layout-xs="column " layout-align="start stretch " layout-padding>
                         <div flex>
-                            <md-select ng-model="d.sql_box.format" ng-init="csv" md-on-close="d.sql_box.have_data = false" aria-label="Format">
-                                <md-option value="csv">CSV</md-option>
-                                <md-option value="json">JSON</md-option>
+                            <md-select ng-model="d.sql_box.format " ng-init="csv " md-on-close="d.sql_box.have_data=f alse " aria-label="Format ">
+                                <md-option value="csv ">CSV</md-option>
+                                <md-option value="json ">JSON</md-option>
                             </md-select>
                         </div>
                         <div flex>
-                            <md-select ng-model="d.sql_box.direct" ng-init="True" md-on-close="d.sql_box.have_data = false" aria-label="Typ">
-                                <md-option value="False">File-Download</md-option>
-                                <md-option value="True">Screen</md-option>
+                            <md-select ng-model="d.sql_box.direct " ng-init="True " md-on-close="d.sql_box.have_data=f alse " aria-label="Typ ">
+                                <md-option value="False ">File-Download</md-option>
+                                <md-option value="True ">Screen</md-option>
                             </md-select>
                         </div>
-                        <div flex ng-if="d.sql_box.format === 'csv'">
-                            <md-select ng-model="d.sql_box.including_headers" ng-init="True" md-on-close="d.sql_box.have_data = false" aria-label="Header">
-                                <md-option value="True">With header</md-option>
-                                <md-option value="False">No header</md-option>
+                        <div flex ng-if="d.sql_box.format==='csv' ">
+                            <md-select ng-model="d.sql_box.including_headers " ng-init="True " md-on-close="d.sql_box.have_data=f alse " aria-label="Header ">
+                                <md-option value="True ">With header</md-option>
+                                <md-option value="False ">No header</md-option>
                             </md-select>
                         </div>
-                        <div flex ng-if="d.sql_box.format === 'csv'">
-                            <md-select ng-model="d.sql_box.delimitter" ng-init=";" md-on-close="d.sql_box.have_data = false" aria-label="Trennzeichen">
-                                <md-option value=";">Semicolon (;)</md-option>
-                                <md-option value=",">Comma (,)</md-option>
-                                <md-option value="|">Pipe (|)</md-option>
+                        <div flex ng-if="d.sql_box.format==='csv' ">
+                            <md-select ng-model="d.sql_box.delimitter " ng-init="; " md-on-close="d.sql_box.have_data=f alse " aria-label="Trennzeichen ">
+                                <md-option value="; ">Semicolon (;)</md-option>
+                                <md-option value=", ">Comma (,)</md-option>
+                                <md-option value="| ">Pipe (|)</md-option>
                             </md-select>
                         </div>
                     </div>
@@ -92,8 +92,8 @@ include(../lib/html/optinomic/page/start.m4)
             </md-tab>
         </md-tabs>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-accent" ng-click="d.functions.runExportSQL()">Ausführen</md-button>
+    <md-card-actions layout="row " layout-align="end center ">
+        <md-button class="md-accent " ng-click="d.functions.runExportSQL() ">Ausführen</md-button>
     </md-card-actions>
 </md-card>
 include(../lib/html/optinomic/page/end.m4)
