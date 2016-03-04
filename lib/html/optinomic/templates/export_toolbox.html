@@ -46,7 +46,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <pre flex ng-if="d.sql_box.format !=='json' ">{{d.sql_box.data}}</pre>
                         <pre flex ng-if="d.sql_box.format==='json' ">{{d.sql_box.data | json}}</pre>
                         <div layout="row " layout-align="end center ">
-                            <md-button class="md-primary " ng-click="initSQL() ">Abbrechen</md-button>
+                            <md-button class="md-primary " ng-click="d.functions.getDefaultExportSettings(d.dataMain.apps.current.identifier)">Abbrechen</md-button>
                         </div>
                     </div>
                     <div ng-if="d.sql_box.direct==='False' ">
