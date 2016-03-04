@@ -29,6 +29,10 @@ include(../lib/html/optinomic/page/start.m4)
                             <h1 class="md-display-2" ng-if="d.sql_box.direct==='False'" style="color:#424242">Download</h1>
                             <h3 class="md-subhead" style="margin-top: -20px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
                         </div>
+                        <div>
+                            <p class="md-caption">Headers: {{d.sql_box.data.headers.length}}</p>
+                            <p class="md-caption">Rows: {{d.sql_box.data.rows.length}}</p>
+                        </div>
                         <div ng-if="(d.sql_box.format==='json' ) && (d.sql_box.direct==='True' ) ">
                             <md-button style="font-size: 18px; color:#9E9E9E " ng-click="d.functions.getDefaultExportSettings(d.dataMain.apps.current.identifier)" class="md-primary md-icon-button " aria-label="Close ">
                                 <i class="mdi mdi-close "></i>
@@ -36,8 +40,6 @@ include(../lib/html/optinomic/page/start.m4)
                                     Schliessen
                                 </md-tooltip>
                             </md-button>
-                            <p class="md-caption ">Headers: {{d.sql_box.data.headers.length}}</p>
-                            <p class="md-caption ">Rows: {{d.sql_box.data.rows.length}}</p>
                         </div>
                     </div>
                     <div ng-if="d.sql_box.direct==='True' ">
