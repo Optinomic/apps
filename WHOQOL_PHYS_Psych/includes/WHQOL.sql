@@ -72,4 +72,5 @@ LEFT JOIN stay ON(patient_view.stay_id = stay.id)
 
 WHERE module = 'com.optinomic.apps.whoqol'
 AND patient_view.id=1
-AND to_char(stay.start, 'YYYY') = 2015
+AND to_char(stay.start, 'YYYY') = '2014'
+
