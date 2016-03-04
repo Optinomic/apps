@@ -21,9 +21,11 @@ website = http://www.optinomic.com/
 [template aus_result 6 7]
 include(templates/aus.html)
 
-
 [template aus_survey_responses 6 8]
 include(templates/data.html)
+
+[template data_download 6 8]
+include(templates/export.html)
 
 
 [javascript]
