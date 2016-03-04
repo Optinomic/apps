@@ -29,7 +29,7 @@ include(../lib/html/optinomic/page/start.m4)
                             <h1 class="md-display-2" ng-if="d.sql_box.direct==='False'" style="color:#424242">Download</h1>
                             <h3 class="md-subhead" style="margin-top: -20px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
                         </div>
-                        <div>
+                        <div ng-if="d.sql_box.format==='json'">
                             <p class="md-caption">Headers: {{d.sql_box.data.headers.length}}</p>
                             <p class="md-caption">Rows: {{d.sql_box.data.rows.length}}</p>
                         </div>
