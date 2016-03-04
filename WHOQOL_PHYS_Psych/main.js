@@ -111,7 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var module_packages = [];
         var data_query = {};
         data_query = {
-            name: 'WHQOL',
+            name: 'WHQOL (with stay)',
             sql: include_as_js_string(
                 WHQOL.sql)
         };

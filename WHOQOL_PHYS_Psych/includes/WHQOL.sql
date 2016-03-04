@@ -1,15 +1,14 @@
 SELECT
-  patient.id AS pid,
-  patient,
-  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
-  patient.four_letter_code,
+  patient_view.id AS patient,
+  patient_view.cis_pid AS pid,
+  CASE WHEN patient_view.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient_view.last_name, '') || ' ' || COALESCE(patient_view.first_name, '') AS patient_name,
+  patient_view.four_letter_code,
     
   ((cast(response AS json))->>'Datum') as datum,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
   SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
   SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
-
   ((cast(response AS json))->>'EWHOQOL1') as ewhoqol1,
   ((cast(response AS json))->>'EWHOQOL1014_EWHOQOL10') as ewhoqol1014_ewhoqol10,
   ((cast(response AS json))->>'EWHOQOL1014_EWHOQOL11') as ewhoqol1014_ewhoqol11,
@@ -34,7 +33,6 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
   SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')) AS datestamp_week,
-
   ((cast(response AS json))->>'id') as id,
   ((cast(response AS json))->>'lastpage') as lastpage,
   ((cast(response AS json))->>'optinomixHASH') as optinomixhash,
@@ -43,17 +41,35 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'startdate'),12,5) AS startdate_time,
   SUBSTRING(((cast(response AS json))->>'startdate'),1,4)::integer AS startdate_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
-  
   ((cast(response AS json))->>'startlanguage') as startlanguage,
   ((cast(response AS json))->>'submitdate') as submitdate,
+  TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
   random_hash,
   scheduled,
   filled,
   module,
-  survey_response.id AS survey_response_id  
+  survey_response.id AS survey_response_id,  
+  stay.cis_fid AS fid,  
+  stay.id AS stay,  
+  stay.first_contact AS first_contact,  
+  stay.start AS start,  
+  to_char(stay.start, 'YYYY') AS start_year,
+  to_char(stay.start, 'WW') AS start_week,
+  to_char(stay.start, 'HH24:MI') AS start_time,
+  stay.stop AS stop,  
+  stay.stop_status AS stop_status,  
+  stay.lead_therapist AS lead_therapist,  
+  stay.deputy_lead_therapist AS deputy_lead_therapist,  
+  stay.cis_lead_doctor AS lead_doctor,  
+  stay.insurance_number AS insurance_number  
 
 FROM survey_response 
-INNER JOIN patient ON(survey_response.patient = patient.id) 
+LEFT JOIN patient_view ON(survey_response.patient = patient_view.id) 
+LEFT JOIN stay ON(patient_view.stay_id = stay.id) 
 
 WHERE module = 'com.optinomic.apps.whoqol'
-AND SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer=2015;
+AND patient_view.id=1
+AND to_char(stay.start, 'YYYY') = 2015
