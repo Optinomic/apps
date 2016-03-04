@@ -68,21 +68,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
-        $scope.d.export_obj = $scope.d.default_export_obj;
 
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        var module_packages = [];
+        var data_query = {};
 
-        var data_package = {};
-        data_package = {
-            name: 'Name der Abfrage',
+        data_query = {
+            name: 'WHQOL-Example (with stay)',
             sql: include_as_js_string(
                 export.sql)
         };
-        $scope.d.export_obj.packages.push(data_package);
+        module_packages.push(data_query);
 
-
-        // Default setzen.
-        $scope.d.export_obj.sql_field = $scope.d.export_obj.packages[0].sql;
-        console.log('setExport: ', $scope.d.export_obj);
+        // Init the given Export Settings
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
     };
 
