@@ -109,13 +109,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id);
 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
-        //var data_package = {};
-        //data_package = {
-        //    name: 'Name der Abfrage',
-        //    sql: in   clude_as_js_string(
-        //        export.sql)
-        //};
-        //$scope.d.sql_box.packages.push(data_package);
+        var data_package = {};
+        data_package = {
+            name: 'WHQOL',
+            sql: include_as_js_string(
+                WHQOL.sql)
+        };
+        $scope.d.sql_box.packages.push(data_package);
 
 
         // Default setzen.
