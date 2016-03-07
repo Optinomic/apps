@@ -51,7 +51,7 @@ id = tmt
 type = lime
 responsibility = patient_via_assessment / lead_therapist
 name = Trail Making Test (TMT)
-host = default
+host = http://xwp4105.cust.local/index.php?r=admin/remotecontrol
 survey_id = 581952
 hash = X39X1058
 pid = X39X1059
