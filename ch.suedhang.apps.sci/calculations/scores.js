@@ -764,7 +764,8 @@ function main(responses) {
         return current_population;
     };
 
-    calc.get_stanine = function(scale, score) {
+    calc.get_stanine = function(current_population, score) {
+
         // Variablen initialisieren
         var stanine = 0;
 
@@ -900,7 +901,12 @@ function main(responses) {
 
             var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             var gender = myResponses.patient.data.gender;
-            myResults.population = calc.get_population(age, gender);
+            var population = calc.get_population(age, gender);
+            myResults.population = population;
+
+
+            // TODO - Stanine
+            //myResults.stanines = calc.get_stanine(population, );
 
 
             myResults.full_data = myResponses;
