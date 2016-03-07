@@ -736,17 +736,19 @@ function main(responses) {
         //    };
         //};
         //
-        //if ((age >= 31) && (age <= 50)) {
-        //    if (gender === 'male') {
-        //        // Mann
-        //        //current_population.current = M_31_50;
-        //        current_population.name = "Männer, 31-50 Jahre";
-        //    } else {
-        //        // Frau
-        //        //current_population.current = F_31_50;
-        //        current_population.name = "Frauen, 31-50 Jahre";
-        //    };
-        //};
+        if ((age >= 31) && (age <= 50)) {
+            current_population.name = "Männer, 31-50 Jahre";
+
+            //if (gender === 'male') {
+            //    // Mann
+            //    //current_population.current = M_31_50;
+            //    current_population.name = "Männer, 31-50 Jahre";
+            //} else {
+            //    // Frau
+            //    //current_population.current = F_31_50;
+            //    current_population.name = "Frauen, 31-50 Jahre";
+            //};
+        };
         //
         //if (age >= 51) {
         //    if (gender === 'male') {
