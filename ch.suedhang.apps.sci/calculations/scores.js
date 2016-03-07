@@ -712,7 +712,7 @@ function main(responses) {
             patient_gender: gender
         };
 
-        current_population.name = "Undefiniert";
+        current_population.name = "Männer, Jünger als 20 Jahre";
 
         //if ((age >= 0) && (age <= 19)) {
         //    if (gender === 'male') {
