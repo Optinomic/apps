@@ -817,39 +817,39 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Stresssymptome",
-            "sub_left": "Wenige körperliche und psychische Symptome",
-            "sub_right": "Viele körperliche und psychische Symptome",
+            "sub_left": "Wenige koerperliche und psychische Symptome",
+            "sub_right": "Viele koerperliche und psychische Symptome",
             "stanine": 0,
             "sum_score": 0,
             "name": 'stress',
             "population": current_population
         }, {
             "question": "Positives Denken",
-            "sub_left": "Ungünstig: Selbstzweifel und Fokus auf Negatives",
-            "sub_right": "Gute Stressbewältigung durch positives Denken",
+            "sub_left": "Unguenstig: Selbstzweifel und Fokus auf Negatives",
+            "sub_right": "Gute Stressbewaeltigung durch positives Denken",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_pos',
             "population": current_population
         }, {
-            "question": "Aktive Stressbewältigung",
-            "sub_left": "Ungünstig: Stressoren werden nicht beseitigt",
-            "sub_right": "Gute aktive und vorbeugende Stressbewältigung",
+            "question": "Aktive Stressbewaeltigung",
+            "sub_left": "Unguenstig: Stressoren werden nicht beseitigt",
+            "sub_right": "Gute aktive und vorbeugende Stressbewaeltigung",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_ab',
             "population": current_population
         }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
+            "question": "Soziale Unterstuetzung",
+            "sub_left": "Unguenstig: Kaum Unterstuetzung durch andere",
+            "sub_right": "Gut: Viel Unterstuetzung durch Freunde und Bekannte",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_su',
             "population": current_population
         }, {
             "question": "Halt im Glauben",
-            "sub_left": "Ungünstig: Kaum religiöser / spiritueller Halt",
+            "sub_left": "Unguenstig: Kaum religioeser / spiritueller Halt",
             "sub_right": "Gut: Person findet Halt im Glauben",
             "stanine": 0,
             "sum_score": 0,
@@ -857,8 +857,8 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Alkohol- und Zigarettenkonsum",
-            "sub_left": "Gut: Kein erhöhter Alkohol - oder Zigarettenkonsum",
-            "sub_right": "Ungünstige Bewältigung durch Alkohol und Zigaretten",
+            "sub_left": "Gut: Kein erhoehter Alkohol - oder Zigarettenkonsum",
+            "sub_right": "Unguenstige Bewaeltigung durch Alkohol und Zigaretten",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_alk',
