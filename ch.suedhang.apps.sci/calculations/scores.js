@@ -708,11 +708,11 @@ function main(responses) {
         if ((age >= 0) && (age <= 19)) {
             if (gender === 'male') {
                 // Mann
-                current_population = populations.M_0_19;
+                current_population = populations[M_0_19];
                 current_population.name = "Männer, Jünger als 20 Jahre";
             } else {
                 // Frau
-                current_population = populations.F_0_19;
+                current_population = populations[F_0_19];
                 current_population.name = "Frauen, Jünger als 20 Jahre";
             }
         };
@@ -720,11 +720,11 @@ function main(responses) {
         if ((age >= 20) && (age <= 30)) {
             if (gender === 'male') {
                 // Mann
-                current_population = populations.M_20_30;
+                current_population = populations[M_20_30];
                 current_population.name = "Männer, 20-30 Jahre";
             } else {
                 // Frau
-                current_population = populations.M_20_30;
+                current_population = populations[M_20_30];
                 current_population.name = "Frauen, 20-30 Jahre";
             }
         };
@@ -732,11 +732,11 @@ function main(responses) {
         if ((age >= 31) && (age <= 50)) {
             if (gender === 'male') {
                 // Mann
-                current_population = populations.M_31_50;
+                current_population = populations[M_31_50];
                 current_population.name = "Männer, 31-50 Jahre";
             } else {
                 // Frau
-                current_population = populations.F_31_50;
+                current_population = populations[F_31_50];
                 current_population.name = "Frauen, 31-50 Jahre";
             }
         };
@@ -744,11 +744,11 @@ function main(responses) {
         if (age >= 51) {
             if (gender === 'male') {
                 // Mann
-                current_population = populations.M_51;
+                current_population = populations[M_51];
                 current_population.name = "Männer, Älter als 50 Jahre";
             } else {
                 // Frau
-                current_population = populations.F_51;
+                current_population = populations[F_51];
                 current_population.name = "Frauen, Älter als 50 Jahre";
             }
         };
