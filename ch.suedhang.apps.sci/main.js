@@ -43,8 +43,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             // FAKE - DATA
-            $scope.d.haveData = true;
-            $scope.setStanineView();
+            // $scope.d.haveData = true;
+            // $scope.setStanineView();
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
