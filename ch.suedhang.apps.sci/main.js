@@ -93,7 +93,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // Stanine - Chart  <chart-stanine>
     // -----------------------------------
 
-    $scope.getAnswerStanine = function() {
+    $scope.getRandomAnswerStanine = function() {
         var score_answer = [{
             "question": "Stress durch Verlust",
             "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
@@ -144,7 +144,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setStanineView = function() {
 
-
         $scope.stanine = {};
         $scope.stanine.data = [];
 
@@ -158,8 +157,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             var respone_to_push = {
                 "label": label,
-                "scores": $scope.getAnswerStanine(),
-                "scores_new": scores
+                "scores": scores
             }
             $scope.stanine.data.push(respone_to_push);
         });
