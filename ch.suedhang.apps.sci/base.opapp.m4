@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.sci
-name = Stress- & Coping-Inventar
+name = Stress- und Coping-Inventar
 short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
 version = include(VERSION)
 type = patient
@@ -42,15 +42,14 @@ responsibility = lead_therapist
 name = Stress- & Coping-Inventar
 host = default
 survey_id = 933257
-hash = X36X990
-pid = X36X991
-fid = X36X992
+hash = X20X257
+pid = X20X258
+fid = X20X259
 min_questions =
 min_lastpage = 2
 
 [event]
 type = on_activation
-time = 19:00
 due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
