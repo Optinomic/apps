@@ -170,6 +170,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "norm_name": "Normalbereich",
             "start_result": $scope.stanine.data.length - 1
         };
+
+        console.log('(!) setStanineView', $scope.stanine);
+
     };
 
 
