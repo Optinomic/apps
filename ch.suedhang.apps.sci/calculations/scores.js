@@ -889,12 +889,13 @@ function main(responses) {
             // Something
             myResults.scores = calc.getScores(result);
 
-            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            var age = 35;
             var gender = myResponses.patient.data.gender;
-            myResults.age = age;
             myResults.birthdate = myResponses.patient.data.birthdate;
+            myResults.age = age;
             myResults.gender = gender;
-            myResults.current_population = calc.get_population(age, gender);
+            myResults.current_population = calc.get_population(35, 'male');
 
 
             myResults.full_data = myResponses;
