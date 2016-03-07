@@ -31,12 +31,6 @@ include(templates/score.html)
 [template score_range 2 4]
 include(templates/range.html)
 
-[template chart_tscore 6 9]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
-
 [template data_download 6 14]
 include(templates/download.html)
 
