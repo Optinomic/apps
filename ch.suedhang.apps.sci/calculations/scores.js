@@ -804,49 +804,45 @@ function main(responses) {
         return stanine;
     };
 
-    calc.getScores = function(d) {
+    calc.getScores = function(d, my_population) {
         // INIT
-
-        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-        var gender = myResponses.patient.data.gender;
-        var current_population = calc.get_population(age, gender);
 
         // Data-Model
         var scores_array = [{
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }, {
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
-            "population": current_population
+            "population": my_population
         }];
 
         var score_id = 0;
@@ -971,14 +967,15 @@ function main(responses) {
             var result = response.data.response;
 
             // Calculate Stuff
-            myResults.scores = calc.getScores(result);
 
-            // Unneeded - Just for DEBUG
             var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             var gender = myResponses.patient.data.gender;
             var population = calc.get_population(age, gender);
             myResults.population = population;
 
+            myResults.scores = calc.getScores(result, population);
+
+            // Unneeded - Just for DEBUG
             myResults.full_data = myResponses;
 
             // Write Results for the Return
