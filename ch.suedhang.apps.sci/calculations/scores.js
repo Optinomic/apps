@@ -799,9 +799,6 @@ function main(responses) {
 
         // Scores berechnen
         scores_obj.belastung = 0;
-        result['BSCL[sq504V06]']
-
-
         scores_obj.belastung = scores_obj.belastung + parseInt(response['ESCIBelastung[ESCIB1]']);
         scores_obj.belastung = scores_obj.belastung + parseInt(response['ESCIBelastung[ESCIB2]']);
         scores_obj.belastung = scores_obj.belastung + parseInt(response['ESCIBelastung[ESCIB3]']);
