@@ -707,7 +707,7 @@ function main(responses) {
         // current_population festlegen
         current_population = {
             current: {},
-            name: 'Undefiniert',
+            name: "Undefiniert",
             patient_age: age,
             patient_gender: gender
         };
@@ -760,8 +760,8 @@ function main(responses) {
         //    };
         //};
 
-        if (age >= 31) {
-            current_population.name = "Männer, 31-50 Jahre";
+        if (age > 30) {
+            //current_population.name = "Männer, 31-50 Jahre";
         };
 
         return current_population;
