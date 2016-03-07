@@ -804,45 +804,45 @@ function main(responses) {
         return stanine;
     };
 
-    calc.getScores = function(d, my_population) {
+    calc.getScores = function(d, current_population) {
         // INIT
 
         // Data-Model
         var scores_array = [{
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'belastung',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'stress',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'coping_pos',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'coping_ab',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'coping_su',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'coping_rel',
+            "population": current_population
         }, {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined',
-            "population": my_population
+            "name": 'coping_alk',
+            "population": current_population
         }];
 
         var score_id = 0;
@@ -858,7 +858,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 1;
         scores_array[score_id].name = 'stress';
@@ -876,7 +876,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI11]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI12]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI13]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 2;
         scores_array[score_id].name = 'coping_pos';
@@ -885,7 +885,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC5]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC6]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC16]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 3;
         scores_array[score_id].name = 'coping_ab';
@@ -894,7 +894,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC7]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC12]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC17]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 4;
         scores_array[score_id].name = 'coping_su';
@@ -903,7 +903,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC13]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC15]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC19]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 5;
         scores_array[score_id].name = 'coping_rel';
@@ -912,7 +912,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC90]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC10]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC18]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
         score_id = 6;
         scores_array[score_id].name = 'coping_alk';
@@ -922,7 +922,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC11]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC14]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC20]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
 
 
         return scores_array;
