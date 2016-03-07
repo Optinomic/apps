@@ -54,7 +54,7 @@ time = 19:00
 due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
-survey = Stress Coping Inventar SCI
+survey = SCI
 
 
 [calculation scores javascript]
