@@ -886,16 +886,19 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // Something
+            // Calculate Stuff
+
             myResults.scores = calc.getScores(result);
 
-            //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-            var age = 35;
             var gender = myResponses.patient.data.gender;
             myResults.birthdate = myResponses.patient.data.birthdate;
-            myResults.age = age;
             myResults.gender = gender;
-            myResults.current_population = calc.get_population(35, 'male');
+            //myResults.current_population = calc.get_population(35, 'male');
+
+            //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            //var age = 35;
+            //myResults.age = age;
+
 
 
             myResults.full_data = myResponses;
