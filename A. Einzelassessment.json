@@ -1,0 +1,23 @@
+﻿{"surveys":
+[{"pidq":"X32X914",
+"fidq":"X32X915",
+"needlast":2,
+"hashq":"X32X913",
+"baseurl":"http://xwp4105.cust.local/index.php?r=admin/remotecontrol",
+"username":"admin",
+"survey_name":"assessment",
+"survey_id":123983,
+"responsibility":"leadtherapist",
+"password":"go4optinomic",
+"$$hashKey":"004",
+"type":"lime",
+"schedules":[]}],"schedule_body_template":"Hallo, bitte füllen Sie für das Einzelassessment (weitere Angaben) für $patient$ aus:  $survey_link$  \nHerzlichen Dank.","templates":[{"where":"dash","markup":"\u003ccard-title title=\"current_directive.title\" subtitle=\"current_directive.description\" info=\"current_directive.info\"\u003e\u003c/card-title\u003e
+\n
+\n
+\n\u003cdiv ng-hide=\"have_data\" class=\"row\"\u003e\n    \u003cdiv class=\"col-md-4 col-md-offset-4\"\u003e\n        \u003cdiv class=\"alert alert-info alert-dismissable\"\u003e\n            \u003cbutton type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\"\u003e&times;\u003c/button\u003e
+\n            \u003cstrong\u003eInfo! \u003c/strong\u003eKeine Daten vorhanden | No Data available.
+\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e\n\n\n\u003cdiv ng-show=\"have_data\"\u003e
+\n    \u003cdiv class=\"row m\" ng-repeat=\"current_result in assessment\"\u003e
+\n
+\n        \u003cdiv class=\"col-md-4 col-md-offset-4\"\u003e
+\n            \u003cdiv class=\"alert alert-success\"\u003e\n                Das {{current_result.messzeitpunkt_text}} wurde am \u003cbr\u003e\u003cstrong\u003e{{current_result.datestamp}}\u003c/strong\u003e durchgeführt.\n            \u003c/div\u003e\n        \u003c/div\u003e\n\n    \u003c/div\u003e\n\u003c/div\u003e","$$hashKey":"008"}],"schedule_subject_template":"Aufgabe: Einzelassessment (weitere Angaben) für $patient_secure$","ngctrl":"function($scope) {\n\n    // ------------------------------------\n    // Init\n    // ------------------------------------\n\n    var myscope = $scope.assessment;\n\n    set_nice_birthday();\n\n    $scope.current_directive = {\n        \"title\": \"Einzelassessment\",\n        \"description\": \"Südhang | Assessment\",\n        \"info\": $scope.patient.lastName + ' ' + $scope.patient.firstName + ' ( ' + $scope.patient.birthday + ' | ' + $scope.patient.age + ' ):'\n    };\n\n\n    // ------------------------------------\n    // Functions\n    // ------------------------------------\n\n    function set_nice_birthday() {\n        // Calculates and writes Age / Birthday into $sope.patient;\n        var today = new Date();\n        var birthDate = new Date($scope.patient.birthdate);\n        var age = today.getFullYear() - birthDate.getFullYear();\n        var m = today.getMonth() - birthDate.getMonth();\n        if (m \u003c 0 || (m === 0 && today.getDate() \u003c birthDate.getDate())) {\n            age--;\n        }\n\n        if ($scope.patient.birthdate !== null) {\n            $scope.patient.birthday = $scope.patient.birthdate.substring(0, 10);\n            $scope.patient.age = age;\n        } else {\n            $scope.patient.birthday = 'unknown';\n            $scope.patient.age = '?';\n        }\n    }\n\n    function roundToOne(num) {\n        // Round a Number to 0.X \n        return +(Math.round(num + \"e+1\") + \"e-1\");\n    }\n\n\n\n    // ------------------------------------\n    // Data available\n    // ------------------------------------\n    if (myscope !== undefined) {\n        $scope.have_data = true;\n\n        // Loop durch alle Ergebnisse (Messungen)\n        for (var i = 0; i \u003c myscope.length; i++) {\n\n            // Messzeitpunkt ausgeben\n            myscope[i].messzeitpunkt_text = '';\n            if (myscope[i].Erhebungszeitpunkt === '1') {\n                myscope[i].messzeitpunkt_text = 'Eintrittsassessment';\n            };\n            if (myscope[i].Erhebungszeitpunkt === '2') {\n                myscope[i].messzeitpunkt_text = 'Austrittsassessment';\n            };\n        }\n\n\n    } else {\n        // ------------------------------------\n        // No Data available\n        // ------------------------------------\n        $scope.have_data = false;\n    }\n    // Show $scope in Developer Tools - Console \n    console.log($scope.current_directive.title + ' $scope = ', $scope);\n}","overdue_action":"OverdueIgnore"}

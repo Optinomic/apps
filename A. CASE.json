@@ -1,0 +1,168 @@
+﻿{"surveys":
+[{"pidq":"X22X877",
+"calculations":
+[{"expr":"DauerAbh::real + 
+\nstatEnzug::real + 
+\nambEntzugMedi::real + 
+\nCraving::int4 + 
+\nstatEntwoehnung::real + 
+\nambEntwoehnung::real + 
+\nAbbrueche::real + 
+\nRueckfaelle::real + 
+\nLeber::int4 + 
+\nSomat::int4 + 
+\nNeurol::int4 + 
+\nPsych::int4 + 
+\nArbeitslos::int4 + 
+\nWohnen::int4 + 
+\nAllein::int4 + 
+\nAlter::int4 + 
+\nKontrollv::int4 + 
+\nMorgenTr::int4 + 
+\nposErw::int4 + 
+\nAbstMot::int4",
+"name":"CASE_score",
+"$$hashKey":"00D"}],
+
+"fidq":"X22X878",
+"needlast":2,
+"hashq":"X22X876",
+"baseurl":"http://xwp4105.cust.local/index.php?r=admin/remotecontrol",
+"username":"admin",
+"survey_name":"CASE",
+"survey_id":553966,
+"responsibility":"leadtherapist",
+"password":"go4optinomic",
+"pidfidq":"X114X2861",
+"$$hashKey":"004",
+"type":"lime",
+"schedules":[]}],
+"schedule_body_template":"Hallo, bitte füllen Sie den CASE für $patient$ aus:  $survey_link$  
+\nHerzlichen Dank.","disabled":false,"templates":
+[{"where":"dash","markup":"\u003ccard-title title=\"current_directive.title\" 
+subtitle=\"current_directive.description\" 
+info=\"current_directive.info\"\u003e\u003c/card-title\u003e
+\n
+\n
+\n\u003cdiv ng-hide=\"have_data\" class=\"row\"\u003e
+\n    \u003cdiv class=\"col-md-4 col-md-offset-4\"\u003e
+\n        \u003cdiv class=\"alert alert-info alert-dismissable\"\u003e
+\n            \u003cbutton type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\"\u003e&times;\u003c/button\u003e
+\n            \u003cstrong\u003eInfo!\u003c/strong\u003eNo Data available.
+\n        \u003c/div\u003e
+\n    \u003c/div\u003e
+\n\u003c/div\u003e
+\n
+\n
+\n\u003cdiv ng-show=\"have_data\" ng-repeat=\"current_result in CASE\"\u003e
+\n
+\n    \u003cdiv class=\"row\"\u003e
+\n        \u003cdiv class=\"col-md-8 col-md-offset-2\"\u003e
+\n
+\n            \u003cdiv class=\"card\" style=\"min-height: 10px;\"\u003e
+\n                \u003cdiv class=\"pull-left m\"\u003e
+\n                    \u003coptinomic-logo size=\"40\" background=\"none\" fill=\"{{current_result.CASE_result_color}}\" animation=\"{{current_result.CASE_result_speed}}\" stroke=\"white\" stroke-width=2\u003e\u003c/optinomic-logo\u003e
+\n                \u003c/div\u003e
+\n                \u003cdiv class=\"panel-body text-center\"\u003e
+\n                    \u003cdiv class=\"text-center m\"\u003e
+\n                        \u003cspan class=\"h4\"\u003e{{salutation}} {{patient.lastName}} weist einen Summenwert von \u003cb\u003e{{current_result.CASE_score}}\u003c/b\u003e auf.\u003c/span\u003e
+\n                        \u003cbr\u003e
+\n                        \u003csmall\u003e
+\n                            Erhebung: {{current_result.startdate.substring(0,10)}} 
+\n                        \u003c/small\u003e\u003c/br\u003e
+\n                        \u003cspan class=\"h5\"\u003e{{current_result.CASE_result_text}}\u003c/span\u003e
+\n                    \u003c/div\u003e
+\n                \u003c/div\u003e
+\n            \u003c/div\u003e
+\n        \u003c/div\u003e
+\n
+\n    \u003c/div\u003e
+\n\u003c/div\u003e","$$hashKey":"008"}],"schedule_subject_template":"Aufgabe: CASE für $patient_secure$","ngctrl":"function($scope) {
+\n 
+\n    // ------------------------------------
+\n    // Init
+\n    // ------------------------------------
+\n
+\n    set_nice_birthday();\n    //console.log('Patient', $scope.patient);\n\n    var myscope = $scope.CASE;
+\n
+\n    $scope.current_directive = {
+\n        \"title\": \"CASE\",
+\n        \"description\": \"Ab 15 Punkten ist eine stationäre Therapie indiziert.\",
+\n        \"info\": $scope.patient.lastName + ' ' + $scope.patient.firstName + ' ( ' + $scope.patient.birthday + ' | ' + $scope.patient.age + ' ):'\n    };
+\n
+\n
+\n    // Variablen initialisieren
+\n
+\n
+\n    // ------------------------------------
+\n    // Functions
+\n    // ------------------------------------
+\n
+\n    function set_nice_birthday() {
+\n        //console.log('set_nice_birthday', $scope.patient.birthdate);
+\n        var today = new Date();\n        var birthDate = new Date($scope.patient.birthdate);
+\n        var age = today.getFullYear() - birthDate.getFullYear();
+\n        var m = today.getMonth() - birthDate.getMonth();
+\n        if (m \u003c 0 || (m === 0 && today.getDate() \u003c birthDate.getDate())) {
+\n            age--;
+\n        }
+\n        //console.log('age', age);
+\n
+\n        if ($scope.patient.birthdate !== null) {
+\n            $scope.patient.birthday = $scope.patient.birthdate.substring(0, 10);
+\n            $scope.patient.age = age;
+\n        } else {
+\n            $scope.patient.birthday = 'unknown';
+\n            $scope.patient.age = '?';
+\n        }
+\n        //console.log('$scope.patient.birthday = ', $scope.patient.birthday);
+\n    }
+\n
+\n    function roundToOne(num) {
+\n        return +(Math.round(num + \"e+1\") + \"e-1\");
+\n    }
+\n
+\n        if ($scope.patient.gender === 'female') {
+\n            $scope.salutation = 'Frau';
+\n        } else {
+\n            $scope.salutation = 'Herr';
+\n        }
+\n
+\n
+\n    // ------------------------------------
+\n    // Data available
+\n    // ------------------------------------
+\n    if (myscope !== undefined) {
+\n        $scope.have_data = true;
+\n
+\n        // SORT (ARRAY of Objects) - datestamp ascending
+\n        myscope = myscope.sort(function(a, b) {
+\n            var dateA = new Date(a.datestamp),
+\n                dateB = new Date(b.datestamp)
+\n                return dateA - dateB //sort by date ascending
+\n        });
+\n
+\n        // ------------------------------------
+\n        // Loop durch alle Ergebnisse (Messungen)
+\n        // ------------------------------------
+\n        for (var i = 0; i \u003c myscope.length; i++) {
+\n
+\n            myscope[i].CASE_result_text = \"\";
+\n            myscope[i].CASE_result_color = \"green\";
+\n            myscope[i].CASE_result_speed = 55;
+\n            if (myscope[i].CASE_score \u003e 14) {
+\n                myscope[i].CASE_result_text = \"Eine stationäre Entwöhnungstherapie wird empfohlen.\";
+\n                myscope[i].CASE_result_color = \"red\";
+\n                myscope[i].CASE_result_speed = 15;
+\n            }
+\n
+\n        }
+\n
+\n    } else {
+\n        // ------------------------------------
+\n        // No Data available
+\n        // ------------------------------------
+\n        $scope.have_data = false;
+\n    }
+\n    console.log($scope.current_directive.title + ' $scope = ', $scope);
+\n}","overdue_action":"OverdueIgnore"}
