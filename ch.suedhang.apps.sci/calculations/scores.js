@@ -858,7 +858,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population.current, scores_array[score_id].sum_score)
 
         score_id = 1;
         scores_array[score_id].name = 'stress';
@@ -876,7 +876,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI11]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI12]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI13]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population.current, scores_array[score_id].sum_score)
 
         score_id = 2;
         scores_array[score_id].name = 'coping_pos';
