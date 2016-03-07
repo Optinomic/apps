@@ -855,15 +855,15 @@ function main(responses) {
         return scores_obj;
     };
 
-    calc.getPatientAge = function(birthdate) {
-        if (birthdate !== null) {
+    calc.getPatientAge = function(birth_date) {
+        if (birth_date !== null) {
             var today = new Date();
-            var birthDate = new Date(birthdate);
+            var birthDate = new Date(birth_date);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
-            }
+            };
         } else {
             age = 0;
         };
@@ -880,8 +880,7 @@ function main(responses) {
         var responses_array = myResponses.survey_responses;
         var allResults = [];
 
-        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-        var gender = myResponses.patient.data.gender;
+
 
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
@@ -890,7 +889,8 @@ function main(responses) {
             // Something
             myResults.scores = calc.getScores(result);
 
-
+            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            var gender = myResponses.patient.data.gender;
             myResults.age = age;
             myResults.gender = gender;
             myResults.current_population = calc.get_population(age, gender);
