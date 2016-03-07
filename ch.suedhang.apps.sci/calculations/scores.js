@@ -895,9 +895,9 @@ function main(responses) {
             myResults.gender = gender;
             //myResults.current_population = calc.get_population(35, 'male');
 
-            //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             //var age = 35;
-            //myResults.age = age;
+            myResults.age = age;
 
 
 
