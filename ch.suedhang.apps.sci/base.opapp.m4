@@ -6,15 +6,15 @@ version = include(VERSION)
 type = patient
 
 [description]
-Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
+Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping). Alle Skalen erreichen überzeugende psychometrische Kennwerte. Eine detaillierte Faktorenanalyse konnte zudem die Annahme von fünf unterschiedlichen Coping-Strategien bestätigen. Weitere Untersuchungen lieferten überzeugende Belege für die Aussagekraft der Skalen. So zeigte sich, dass Personen, die unter viel Stress leiden aber trotzdem nur wenige Folgesymptome aufweisen, mehr adaptive Coping-Strategien einsetzen.
 
 [developer]
-first_name = Nora
-last_name = Schönenberger
-github_user = schoenenb
-email = nora.schoenenberger@suedhang.ch
-company = Suedhang
-phone = +41 (0)31 828 14 51
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 

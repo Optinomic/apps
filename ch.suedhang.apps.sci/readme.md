@@ -4,8 +4,10 @@
 ## Optinomic-App 
 
 
-#### Ressources
-- [angular grid](http://www.angulargrid.com/index.html)  ::  Grid used for data-views.
+
+- Full Documentation [Stress- und Coping-Inventar (SCI)](http://www.drsatow.de/tests/stress-und-coping-inventar.html)  
+
+
 
 
 ###Contact
