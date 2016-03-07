@@ -830,7 +830,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -849,7 +849,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI11]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI12]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI13]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -859,7 +859,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC5]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC6]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC16]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -869,7 +869,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC7]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC12]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC17]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -879,7 +879,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC13]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC15]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC19]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -889,7 +889,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC90]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC10]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC18]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
         scores_obj = {};
@@ -900,7 +900,7 @@ function main(responses) {
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC11]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC14]']);
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC20]']);
-        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
 
@@ -939,23 +939,18 @@ function main(responses) {
             var result = response.data.response;
 
             // Calculate Stuff
-
             myResults.scores = calc.getScores(result);
 
+            // Unneeded - Just for DEBUG
             var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             var gender = myResponses.patient.data.gender;
             var population = calc.get_population(age, gender);
             myResults.population = population;
 
-
-            // TODO - Stanine
-            //myResults.stanines = calc.get_stanine(population, );
-
-
             myResults.full_data = myResponses;
 
             // Write Results for the Return
-            // Do not modify stuff here
+            // Do not modify stuff down here
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
             allResults.push(myResults);
