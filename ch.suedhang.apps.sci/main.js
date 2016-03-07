@@ -149,7 +149,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.stanine.data = [];
 
         // Loop Responses and push to Chart-Data
-        var survey_responses = $scope.d.survey_responses;
+        var survey_responses = $scope.d.dataMain.survey_responses;
         survey_responses.forEach(function(current_response, myindex) {
 
             var label = current_response.entity.data.filled.substring(0, 10);
