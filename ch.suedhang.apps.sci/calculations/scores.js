@@ -816,10 +816,10 @@ function main(responses) {
         scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS7]']);
         scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS8]']);
         scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS9]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS10]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS11]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS12]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS13]']);
+        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI10]']);
+        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI11]']);
+        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI12]']);
+        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI13]']);
 
         scores_obj.coping_pos = 0;
         scores_obj.coping_pos = scores_obj.coping_pos + parseInt(d['ESCICoping[ESCIC1]']);
@@ -853,11 +853,9 @@ function main(responses) {
         scores_obj.coping_alk = scores_obj.coping_alk + parseInt(d['ESCICoping[ESCIC20]']);
 
         return scores_obj;
-
     };
 
     calc.getPatientAge = function(birthdate) {
-
         if (birthdate !== null) {
             var today = new Date();
             var birthDate = new Date(birthdate);
@@ -869,6 +867,8 @@ function main(responses) {
         } else {
             age = 0;
         };
+
+        return age;
     };
 
 
@@ -880,6 +880,9 @@ function main(responses) {
         var responses_array = myResponses.survey_responses;
         var allResults = [];
 
+        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+        var gender = myResponses.patient.data.gender;
+
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
@@ -887,8 +890,7 @@ function main(responses) {
             // Something
             myResults.scores = calc.getScores(result);
 
-            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-            var gender = calc.getPatientAge(myResponses.patient.data.gender);
+
             myResults.age = age;
             myResults.gender = gender;
             myResults.current_population = calc.get_population(age, gender);
