@@ -760,7 +760,7 @@ function main(responses) {
         //    };
         //};
 
-        if ((age > 30) && (age < 51)) {
+        if (age >= 31) {
             current_population.name = "Männer, 31-50 Jahre";
         };
 
@@ -903,11 +903,7 @@ function main(responses) {
 
             var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             var gender = myResponses.patient.data.gender;
-            myResults.age = age;
-            myResults.gender = gender;
-
             myResults.population = calc.get_population(age, gender);
-
 
 
             myResults.full_data = myResponses;
