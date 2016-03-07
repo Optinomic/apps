@@ -12,12 +12,12 @@ function main(responses) {
         // Falls gender nicht gesetzt ist = Mann / 35LJ
         if (gender === null) {
             gender = 'male';
-        }
+        };
         if ((age === null) || (age === '?')) {
             age = 35;
-        }
+        };
 
-        var population = {
+        var populations = {
             "F_0_19": {
                 "0": {
                     "UG1": 7,
@@ -708,48 +708,48 @@ function main(responses) {
         if ((age >= 0) && (age <= 19)) {
             if (gender === 'male') {
                 // Mann
-                current_population = population.M_0_19;
-                current_population.population = "Männer, Jünger als 20 Jahre";
+                current_population = populations.M_0_19;
+                current_population.name = "Männer, Jünger als 20 Jahre";
             } else {
                 // Frau
-                current_population = population.F_0_19;
-                current_population.population = "Frauen, Jünger als 20 Jahre";
+                current_population = populations.F_0_19;
+                current_population.name = "Frauen, Jünger als 20 Jahre";
             }
         };
 
         if ((age >= 20) && (age <= 30)) {
             if (gender === 'male') {
                 // Mann
-                current_population = population.M_20_30;
-                current_population.population = "Männer, 20-30 Jahre";
+                current_population = populations.M_20_30;
+                current_population.name = "Männer, 20-30 Jahre";
             } else {
                 // Frau
-                current_population = population.M_20_30;
-                current_population.population = "Frauen, 20-30 Jahre";
+                current_population = populations.M_20_30;
+                current_population.name = "Frauen, 20-30 Jahre";
             }
         };
 
         if ((age >= 31) && (age <= 50)) {
             if (gender === 'male') {
                 // Mann
-                current_population = population.M_31_50;
-                current_population.population = "Männer, 31-50 Jahre";
+                current_population = populations.M_31_50;
+                current_population.name = "Männer, 31-50 Jahre";
             } else {
                 // Frau
-                current_population = population.F_31_50;
-                current_population.population = "Frauen, 31-50 Jahre";
+                current_population = populations.F_31_50;
+                current_population.name = "Frauen, 31-50 Jahre";
             }
         };
 
         if (age >= 51) {
             if (gender === 'male') {
                 // Mann
-                current_population = population.M_51;
-                current_population.population = "Männer, Älter als 50 Jahre";
+                current_population = populations.M_51;
+                current_population.name = "Männer, Älter als 50 Jahre";
             } else {
                 // Frau
-                current_population = population.F_51;
-                current_population.population = "Frauen, Älter als 50 Jahre";
+                current_population = populations.F_51;
+                current_population.name = "Frauen, Älter als 50 Jahre";
             }
         };
 
@@ -865,7 +865,7 @@ function main(responses) {
                 age--;
             };
         } else {
-            var age = 0;
+            var age = 1;
         };
 
         return age;
@@ -890,14 +890,12 @@ function main(responses) {
 
             myResults.scores = calc.getScores(result);
 
-            var gender = myResponses.patient.data.gender;
-            myResults.birthdate = myResponses.patient.data.birthdate;
-            myResults.gender = gender;
-            //myResults.current_population = calc.get_population(35, 'male');
-
             var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-            //var age = 35;
+            var gender = myResponses.patient.data.gender;
             myResults.age = age;
+            myResults.gender = gender;
+
+            myResults.current_population = calc.get_population(age, gender);
 
 
 
