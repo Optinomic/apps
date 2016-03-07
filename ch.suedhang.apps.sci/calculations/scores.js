@@ -808,19 +808,19 @@ function main(responses) {
         // INIT
         var scores_array = [];
 
-        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-        var gender = myResponses.patient.data.gender;
-        var current_population = calc.get_population(age, gender);
+        //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+        //var gender = myResponses.patient.data.gender;
+        //var current_population = calc.get_population(age, gender);
 
         // Data-Model
-        var scores_obj = {
+        var scores_obj_init = {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'Undefined'
+            "name": 'undefined'
         };
 
         // Scores berechnen
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'belastung';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
@@ -833,7 +833,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'stress';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
@@ -852,7 +852,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'coping_pos';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC1]']);
@@ -862,7 +862,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'coping_ab';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC3]']);
@@ -872,7 +872,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'coping_su';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC4]']);
@@ -882,7 +882,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'coping_rel';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
@@ -892,7 +892,7 @@ function main(responses) {
         //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = {};
+        scores_obj = scores_obj_init;
         scores_obj.name = 'coping_alk';
         scores_obj.sum_score = 0;
         scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
