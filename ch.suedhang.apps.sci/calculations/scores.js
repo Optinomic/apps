@@ -769,37 +769,35 @@ function main(responses) {
         // Variablen initialisieren
         var stanine = 0;
 
-        for (var scale = 0; scale < 7; scale++) {
 
-            if (score >= current_population[scale].UG1) {
-                stanine = 1;
-            }
-            if (score >= current_population[scale].UG2) {
-                stanine = 2;
-            }
-            if (score >= current_population[scale].UG3) {
-                stanine = 3;
-            }
-            if (score >= current_population[scale].UG4) {
-                stanine = 4;
-            }
-            if (score >= current_population[scale].UG5) {
-                stanine = 5;
-            }
-            if (score >= current_population[scale].UG6) {
-                stanine = 6;
-            }
-            if (score >= current_population[scale].UG7) {
-                stanine = 7;
-            }
-            if (score >= current_population[scale].UG8) {
-                stanine = 8;
-            }
-            if (score >= current_population[scale].UG9) {
-                stanine = 9;
-            }
+        if (score >= current_population.UG1) {
+            stanine = 1;
+        }
+        if (score >= current_population.UG2) {
+            stanine = 2;
+        }
+        if (score >= current_population.UG3) {
+            stanine = 3;
+        }
+        if (score >= current_population.UG4) {
+            stanine = 4;
+        }
+        if (score >= current_population.UG5) {
+            stanine = 5;
+        }
+        if (score >= current_population.UG6) {
+            stanine = 6;
+        }
+        if (score >= current_population.UG7) {
+            stanine = 7;
+        }
+        if (score >= current_population.UG8) {
+            stanine = 8;
+        }
+        if (score >= current_population.UG9) {
+            stanine = 9;
+        }
 
-        };
 
         return stanine;
     };
@@ -858,7 +856,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
-        //scores_array[score_id].stanine = calc.get_stanine = function(current_population.current, scores_array[score_id].sum_score)
+        scores_array[score_id].stanine = calc.get_stanine = function(current_population.current[score_id], scores_array[score_id].sum_score)
 
         score_id = 1;
         scores_array[score_id].name = 'stress';
