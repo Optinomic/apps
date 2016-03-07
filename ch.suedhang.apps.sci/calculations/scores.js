@@ -753,7 +753,6 @@ function main(responses) {
             }
         };
 
-        //console.log('get_population::  Age:' + age + ', Gender:' + gender + ', Current population:' + current_population);
         return current_population;
     };
 
@@ -857,6 +856,21 @@ function main(responses) {
 
     };
 
+    calc.getPatientAge = function(birthdate) {
+
+        if (birthdate !== null) {
+            var today = new Date();
+            var birthDate = new Date(birthdate);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+        } else {
+            age = 0;
+        };
+    };
+
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
@@ -872,6 +886,14 @@ function main(responses) {
 
             // Something
             myResults.scores = calc.getScores(result);
+
+            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            var gender = calc.getPatientAge(myResponses.patient.data.gender);
+            myResults.age = age;
+            myResults.gender = gender;
+            myResults.current_population = calc.get_population(age, gender);
+
+
             myResults.full_data = myResponses;
 
             // Write Results for the Return
