@@ -18,7 +18,7 @@ phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
 
-[template chart_stanine 6 14]
+[template chart_stanine 6 10]
 include(templates/stanine.html)
 
 

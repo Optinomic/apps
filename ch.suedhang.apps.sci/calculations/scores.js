@@ -5,24 +5,68 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
+    calc.getScores = function() {
+        var scores_obj = {};
+
+        // Scores berechnen
+        scores_obj.belastung = 0;
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB1]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB2]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB3]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB4]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB5]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB6]);
+        scores_obj.belastung = scores_obj.belastung + parseInt(ESCIBelastung[ESCIB7]);
+
+        scores_obj.stress = 0;
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS1]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS2]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS3]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS4]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS5]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS6]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS7]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS8]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS9]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS10]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS11]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS12]);
+        scores_obj.stress = scores_obj.stress + parseInt(ESCISymptome[ESCIS13]);
+
+        scores_obj.coping_pos = 0;
+        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(ESCICoping[ESCIC1]);
+        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(ESCICoping[ESCIC5]);
+        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(ESCICoping[ESCIC6]);
+        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(ESCICoping[ESCIC16]);
+
+        scores_obj.coping_ab = 0;
+        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(ESCICoping[ESCIC3]);
+        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(ESCICoping[ESCIC7]);
+        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(ESCICoping[ESCIC12]);
+        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(ESCICoping[ESCIC17]);
+
+        scores_obj.coping_su = 0;
+        scores_obj.coping_su = scores_obj.coping_su + parseInt(ESCICoping[ESCIC4]);
+        scores_obj.coping_su = scores_obj.coping_su + parseInt(ESCICoping[ESCIC13]);
+        scores_obj.coping_su = scores_obj.coping_su + parseInt(ESCICoping[ESCIC15]);
+        scores_obj.coping_su = scores_obj.coping_su + parseInt(ESCICoping[ESCIC19]);
+
+        scores_obj.coping_rel = 0;
+        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(ESCICoping[ESCIC8]);
+        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(ESCICoping[ESCIC90]);
+        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(ESCICoping[ESCIC10]);
+        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(ESCICoping[ESCIC18]);
+
+        scores_obj.coping_alk = 0;
+        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(ESCICoping[ESCIC8]);
+        scores_obj.coping_alk = scores_obj.coping_alk + (5 - parseInt(ESCICoping[ESCIC2]));
+        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(ESCICoping[ESCIC11]);
+        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(ESCICoping[ESCIC14]);
+        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(ESCICoping[ESCIC20]);
 
 
-        // Berechnung der SCI-Scores
+        return scores_obj;
 
-        //myResults.score.belastung = parseInt(result['ESCIBelastung_ESCIB1']) + parseInt(result['ESCIBelastung_ESCIB2']) + parseInt(result['ESCIBelastung_ESCIB3']) + parseInt(result['ESCIBelastung_ESCIB4']) 
-        //+ parseInt(result['ESCIBelastung_ESCIB5']) + parseInt(result['ESCIBelastung_ESCIB6']) + parseInt(result['ESCIBelastung_ESCIB7'])
-        //myResults.score.stress = parseInt(result['ESCISymptome_ESCIS1']) + parseInt(result['ESCISymptome_ESCIS2']) + parseInt(result['ESCISymptome_ESCIS3']) + parseInt(result['ESCISymptome_ESCIS4']) 
-        //+ parseInt(result['ESCISymptome_ESCIS5']) + parseInt(result['ESCISymptome_ESCIS6']) + parseInt(result['ESCISymptome_ESCIS7']) + parseInt(result['ESCISymptome_ESCIS8']) 
-        //+ parseInt(result['ESCISymptome_ESCIS9']) + parseInt(result['ESCISymptome_ESCI10']) + parseInt(result['ESCISymptome_ESCI11']) + parseInt(result['ESCISymptome_ESCI12']) 
-        //+ parseInt(result['ESCISymptome_ESCI13'])
-        //myResults.score.coping_pos = parseInt(result['ESCICoping_ESCIC1']) + parseInt(result['ESCICoping_ESCIC5']) + parseInt(result['ESCICoping_ESCIC6']) + parseInt(result['ESCICoping_ESCIC16'])
-        //myResults.score.coping_ab = parseInt(result['ESCICoping_ESCIC3']) + parseInt(result['ESCICoping_ESCIC7']) + parseInt(result['ESCICoping_ESCIC12']) + parseInt(result['ESCICoping_ESCIC17'])
-        //myResults.score.coping_su = parseInt(result['ESCICoping_ESCIC4']) + parseInt(result['ESCICoping_ESCIC13']) + parseInt(result['ESCICoping_ESCIC15']) + parseInt(result['ESCICoping_ESCIC19'])
-        //myResults.score.coping_rel = parseInt(result['ESCICoping_ESCIC8']) + parseInt(result['ESCICoping_ESCIC90']) + parseInt(result['ESCICoping_ESCIC10']) + parseInt(result['ESCICoping_ESCIC18'])
-        //myResults.score.coping_alk = parseInt(result(5-['ESCICoping_ESCIC2']) + parseInt(result['ESCICoping_ESCIC11']) + parseInt(result['ESCICoping_ESCIC14']) + parseInt(result['ESCICoping_ESCIC20'])
     };
 
 
@@ -39,7 +83,7 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
-            myResults.something = calc.doSomething();
+            myResults.scores = calc.getScores(result);
 
 
             // Write Results for the Return
