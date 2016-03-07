@@ -144,17 +144,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setStanineView = function() {
 
+
         $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
+        $scope.stanine.data = [];
+
+        // Loop Responses and push to Chart-Data
+        var survey_responses = $scope.d.survey_responses;
+        survey_responses.forEach(function(current_response, myindex) {
+
+            var label = current_response.entity.data.filled.substring(0, 10);
+
+            var scores = current_response.calculations[0].calculation_result.scores
+
+            var respone_to_push = {
+                "label": label,
+                "scores": $scope.getAnswerStanine(),
+                "scores_new": scores
+            }
+            $scope.stanine.data.push(respone_to_push);
+        });
+
 
         $scope.stanine.options = {
             "population_name": "Männer, 31-50 Jahre",
