@@ -806,102 +806,133 @@ function main(responses) {
 
     calc.getScores = function(d) {
         // INIT
-        var scores_array = [];
 
         var age = calc.getPatientAge(myResponses.patient.data.birthdate);
         var gender = myResponses.patient.data.gender;
         var current_population = calc.get_population(age, gender);
 
         // Data-Model
-        var scores_obj_init = {
+        var scores_array = [{
             "stanine": 0,
             "sum_score": 0,
             "name": 'undefined',
             "population": current_population
-        };
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }, {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'undefined',
+            "population": current_population
+        }];
+
+        var score_id = 0;
 
         // Scores berechnen
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'belastung';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB2]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB3]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB4]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 0;
+        scores_array[score_id].name = 'belastung';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB2]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB3]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB4]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'stress';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS2]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS3]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS4]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS5]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS6]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS7]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS8]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS9]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI10]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI11]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI12]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI13]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 1;
+        scores_array[score_id].name = 'stress';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS2]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS3]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS4]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS5]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS6]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS7]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS8]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS9]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI10]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI11]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI12]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI13]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'coping_pos';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC1]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC5]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC6]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC16]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 2;
+        scores_array[score_id].name = 'coping_pos';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC1]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC5]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC6]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC16]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'coping_ab';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC3]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC7]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC12]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC17]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 3;
+        scores_array[score_id].name = 'coping_ab';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC3]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC7]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC12]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC17]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'coping_su';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC4]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC13]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC15]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC19]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 4;
+        scores_array[score_id].name = 'coping_su';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC4]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC13]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC15]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC19]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'coping_rel';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC90]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC10]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC18]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 5;
+        scores_array[score_id].name = 'coping_rel';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC90]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC10]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC18]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
-        scores_obj = scores_obj_init;
-        scores_obj.name = 'coping_alk';
-        scores_obj.sum_score = 0;
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_obj.sum_score = scores_obj.sum_score + (5 - parseInt(d['ESCICoping[ESCIC2]']));
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC11]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC14]']);
-        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC20]']);
-        //scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        score_id = 6;
+        scores_array[score_id].name = 'coping_alk';
+        scores_array[score_id].sum_score = 0;
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + (5 - parseInt(d['ESCICoping[ESCIC2]']));
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC11]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC14]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC20]']);
+        //scores_array[score_id].stanine = calc.get_stanine = function(current_population, scores_array[score_id].sum_score)
         scores_array.push(scores_obj);
 
 
