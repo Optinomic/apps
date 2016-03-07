@@ -707,10 +707,12 @@ function main(responses) {
         // current_population festlegen
         current_population = {
             current: {},
-            name: "Undefiniert",
+            name: "",
             patient_age: age,
             patient_gender: gender
         };
+
+        current_population.name = "Undefiniert";
 
         //if ((age >= 0) && (age <= 19)) {
         //    if (gender === 'male') {
