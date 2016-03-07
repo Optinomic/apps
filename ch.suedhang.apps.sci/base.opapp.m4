@@ -18,11 +18,9 @@ phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
 
-[template chart_stanine 6 7]
+[template chart_stanine 6 14]
 include(templates/stanine.html)
 
-[template data_download 6 14]
-include(templates/download.html)
 
 
 [dependencies]
@@ -38,7 +36,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = Stress Coping Inventar SCI
+id = SCI
 type = lime
 responsibility = lead_therapist
 name = Stress- & Coping-Inventar
@@ -47,7 +45,6 @@ survey_id = 933257
 hash = X36X990
 pid = X36X991
 fid = X36X992
-pidfid = X87X2278
 min_questions =
 min_lastpage = 2
 
@@ -56,7 +53,7 @@ type = on_activation
 time = 19:00
 due_after = 259200
 overdue = ignore
-description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik-Ein- und -Austritt.
+description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
 survey = Stress Coping Inventar SCI
 
 
