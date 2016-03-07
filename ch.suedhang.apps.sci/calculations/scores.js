@@ -808,15 +808,16 @@ function main(responses) {
         // INIT
         var scores_array = [];
 
-        //var age = calc.getPatientAge(myResponses.patient.data.birthdate);
-        //var gender = myResponses.patient.data.gender;
-        //var current_population = calc.get_population(age, gender);
+        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+        var gender = myResponses.patient.data.gender;
+        var current_population = calc.get_population(age, gender);
 
         // Data-Model
         var scores_obj_init = {
             "stanine": 0,
             "sum_score": 0,
-            "name": 'undefined'
+            "name": 'undefined',
+            "population": current_population
         };
 
         // Scores berechnen
