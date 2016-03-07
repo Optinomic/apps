@@ -769,99 +769,142 @@ function main(responses) {
         // Variablen initialisieren
         var stanine = 0;
 
-        if (score >= current_population[scale].UG1) {
-            stanine = 1;
-        }
-        if (score >= current_population[scale].UG2) {
-            stanine = 2;
-        }
-        if (score >= current_population[scale].UG3) {
-            stanine = 3;
-        }
-        if (score >= current_population[scale].UG4) {
-            stanine = 4;
-        }
-        if (score >= current_population[scale].UG5) {
-            stanine = 5;
-        }
-        if (score >= current_population[scale].UG6) {
-            stanine = 6;
-        }
-        if (score >= current_population[scale].UG7) {
-            stanine = 7;
-        }
-        if (score >= current_population[scale].UG8) {
-            stanine = 8;
-        }
-        if (score >= current_population[scale].UG9) {
-            stanine = 9;
-        }
+        for (var scale = 0; scale < 7; scale++) {
 
-        //console.log('Current population = ', current_population[scale]);
-        //console.log('get_stanine::  Scale:' + scale + ', Score:' + score + ' = Stanine:' + stanine);
+            if (score >= current_population[scale].UG1) {
+                stanine = 1;
+            }
+            if (score >= current_population[scale].UG2) {
+                stanine = 2;
+            }
+            if (score >= current_population[scale].UG3) {
+                stanine = 3;
+            }
+            if (score >= current_population[scale].UG4) {
+                stanine = 4;
+            }
+            if (score >= current_population[scale].UG5) {
+                stanine = 5;
+            }
+            if (score >= current_population[scale].UG6) {
+                stanine = 6;
+            }
+            if (score >= current_population[scale].UG7) {
+                stanine = 7;
+            }
+            if (score >= current_population[scale].UG8) {
+                stanine = 8;
+            }
+            if (score >= current_population[scale].UG9) {
+                stanine = 9;
+            }
+
+        };
+
         return stanine;
     };
 
     calc.getScores = function(d) {
-        var scores_obj = {};
+        // INIT
+        var scores_array = [];
+
+        var age = calc.getPatientAge(myResponses.patient.data.birthdate);
+        var gender = myResponses.patient.data.gender;
+        var current_population = calc.get_population(age, gender);
+
+        // Data-Model
+        var scores_obj = {
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'Undefined'
+        };
 
         // Scores berechnen
-        scores_obj.belastung = 0;
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB1]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB2]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB3]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB4]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB5]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB6]']);
-        scores_obj.belastung = scores_obj.belastung + parseInt(d['ESCIBelastung[ESCIB7]']);
+        scores_obj = {};
+        scores_obj.name = 'belastung';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB2]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB3]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB4]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.stress = 0;
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS1]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS2]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS3]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS4]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS5]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS6]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS7]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS8]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCIS9]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI10]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI11]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI12]']);
-        scores_obj.stress = scores_obj.stress + parseInt(d['ESCISymptome[ESCI13]']);
+        scores_obj = {};
+        scores_obj.name = 'stress';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS2]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS3]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS4]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS5]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS6]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS7]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS8]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCIS9]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI10]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI11]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI12]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCISymptome[ESCI13]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.coping_pos = 0;
-        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(d['ESCICoping[ESCIC1]']);
-        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(d['ESCICoping[ESCIC5]']);
-        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(d['ESCICoping[ESCIC6]']);
-        scores_obj.coping_pos = scores_obj.coping_pos + parseInt(d['ESCICoping[ESCIC16]']);
+        scores_obj = {};
+        scores_obj.name = 'coping_pos';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC1]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC5]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC6]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC16]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.coping_ab = 0;
-        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(d['ESCICoping[ESCIC3]']);
-        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(d['ESCICoping[ESCIC7]']);
-        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(d['ESCICoping[ESCIC12]']);
-        scores_obj.coping_ab = scores_obj.coping_ab + parseInt(d['ESCICoping[ESCIC17]']);
+        scores_obj = {};
+        scores_obj.name = 'coping_ab';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC3]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC7]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC12]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC17]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.coping_su = 0;
-        scores_obj.coping_su = scores_obj.coping_su + parseInt(d['ESCICoping[ESCIC4]']);
-        scores_obj.coping_su = scores_obj.coping_su + parseInt(d['ESCICoping[ESCIC13]']);
-        scores_obj.coping_su = scores_obj.coping_su + parseInt(d['ESCICoping[ESCIC15]']);
-        scores_obj.coping_su = scores_obj.coping_su + parseInt(d['ESCICoping[ESCIC19]']);
+        scores_obj = {};
+        scores_obj.name = 'coping_su';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC4]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC13]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC15]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC19]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.coping_rel = 0;
-        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(d['ESCICoping[ESCIC90]']);
-        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(d['ESCICoping[ESCIC10]']);
-        scores_obj.coping_rel = scores_obj.coping_rel + parseInt(d['ESCICoping[ESCIC18]']);
+        scores_obj = {};
+        scores_obj.name = 'coping_rel';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC90]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC10]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC18]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        scores_obj.coping_alk = 0;
-        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_obj.coping_alk = scores_obj.coping_alk + (5 - parseInt(d['ESCICoping[ESCIC2]']));
-        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(d['ESCICoping[ESCIC11]']);
-        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(d['ESCICoping[ESCIC14]']);
-        scores_obj.coping_alk = scores_obj.coping_alk + parseInt(d['ESCICoping[ESCIC20]']);
+        scores_obj = {};
+        scores_obj.name = 'coping_alk';
+        scores_obj.sum_score = 0;
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+        scores_obj.sum_score = scores_obj.sum_score + (5 - parseInt(d['ESCICoping[ESCIC2]']));
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC11]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC14]']);
+        scores_obj.sum_score = scores_obj.sum_score + parseInt(d['ESCICoping[ESCIC20]']);
+        scores_obj.stanine = calc.get_stanine = function(current_population, scores_obj.sum_score)
+        scores_array.push(scores_obj);
 
-        return scores_obj;
+
+        return scores_array;
     };
 
     calc.getPatientAge = function(birth_date) {
