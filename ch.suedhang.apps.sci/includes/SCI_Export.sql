@@ -97,3 +97,5 @@ FROM survey_response
 INNER JOIN patient ON(survey_response.patient = patient.id) 
 
 WHERE module = 'ch.suedhang.apps.sci';
+
+
