@@ -811,13 +811,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                     // Correct Credentials
                     console.log('(✓) checkVisa =', start_stop, data, data.data.user_id);
                     $scope.d.newEntry.medication_start_verordnung_user = data.data.user_id;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = true;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
 
                 }, function(error) {
                     // Wrong Credentials
                     console.log('(!) checkVisa Error =', start_stop, error);
                     $scope.d.newEntry.medication_start_verordnung_user = null;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = false;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
 
                 });
 
@@ -825,6 +825,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             }, function() {
 
                 console.log('DIALOG: Cancel');
+
+                if ($scope.d.newEntry.medication_start_verordnung_user_signed) {
+                    $scope.d.newEntry.medication_start_verordnung_user = $scope.d.newEntry.medication_start_verordnung_user_signed;
+                } else {
+                    $scope.d.newEntry.medication_start_verordnung_user = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
+                };
 
             });
 
