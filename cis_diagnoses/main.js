@@ -296,6 +296,11 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.diagnoses = [];
             } else {
                 $scope.d.diagnoses = angular.copy(data);
+
+                //  Interpretiere Newlines
+                $scope.d.diagnoses.forEach(function(diagnose, myindex) {
+                    diagnose.custom_text_html = diagnose.custom_text.replace(/(\r\n|\n|\r)/gm, "<br>")
+                });
             };
 
 
