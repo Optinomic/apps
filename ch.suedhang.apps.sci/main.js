@@ -36,9 +36,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run App-Functions:
                 $scope.setExport();
-                $scope.setDataView();
                 $scope.setStanineView();
-
 
             };
 
@@ -63,7 +61,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setExport = function() {
 
-
         // ------------------------------------------------
         // Export - Pakete definieren
         // i n c l u d e _ a s _ j s _ s t r i n g 
@@ -74,13 +71,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
         var module_packages = [];
 
-        //var data_query = {};
-        //data_query = {
-        //    name: 'SCI',
-        //    sql: in clude_as_js_string(
-        //        export.sql)
-        //};
-        //module_packages.push(data_query);
+        var data_query = {};
+        data_query = {
+            name: 'SCI - Export',
+            sql: include_as_js_string(
+                SCI_Export.sql)
+        };
+        module_packages.push(data_query);
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
@@ -223,47 +220,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-
-
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
-
-        // If we have multiple surveys - make sure to take the right 'responses'.
-        var currentResultGroup = 0;
-        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
-            if (current_group_def.survey === 'Second example survey') {
-                currentResultGroup = current_group_def.id;
-            };
-        });
-
-        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
-        $scope.d.dataMain.survey_responses_array = [];
-        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
-            var my_response = current_result.entity.data.response;
-
-            // If ng-survey survey @ some more info to 'response'.
-            my_response.filled = current_result.entity.data.filled;
-            my_response.survey_name = current_result.event.survey_name;
-
-            $scope.d.dataMain.survey_responses_array.push(my_response);
-        });
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-
-        // DataView - Options
-        $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
-        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
-    };
 
 
 
