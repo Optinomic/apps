@@ -774,7 +774,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     }
 
 
-    $scope.showVisaDialog = function(user_id, ev) {
+    $scope.showVisaDialog = function(user_id, start_stop, ev) {
         $scope.d.visa_user = {
             search_uID: parseInt(user_id),
             event: ev,
@@ -809,17 +809,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 var aPromise = $scope.d.functions.visa(answer.data.email, answer.data.password);
                 aPromise.then(function(data) {
                     // Correct Credentials
-                    console.log('(✓) checkVisa =', data, data.data.user_id);
+                    console.log('(✓) checkVisa =', start_stop, data, data.data.user_id);
                     $scope.d.newEntry.medication_start_verordnung_user = data.data.user_id;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
-                    $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = true;
 
                 }, function(error) {
                     // Wrong Credentials
-                    console.log('(!) checkVisa Error =', error);
+                    console.log('(!) checkVisa Error =', start_stop, error);
                     $scope.d.newEntry.medication_start_verordnung_user = null;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
-                    $scope.d.newEntry.medication_start_verordnung_user_unsigned = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = false;
 
                 });
 
