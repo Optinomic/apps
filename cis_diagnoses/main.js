@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $sce, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -299,7 +299,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
                 //  Interpretiere Newlines
                 $scope.d.diagnoses.forEach(function(diagnose, myindex) {
-                    diagnose.custom_text_html = diagnose.custom_text.replace(/(\r\n|\n|\r)/gm, "<br>")
+                    diagnose.custom_text_html = $sce.trustAsHtml(diagnose.custom_text.replace(/(\r\n|\n|\r)/gm, "<br>"));
                 });
             };
 
