@@ -20,7 +20,8 @@
             </div>
             <div flex>
                 <a target="_blank" ng-href="{{entry.icd_url_info}}">
-                    <p class="flow-text">{{entry.custom_text}}</p>
+                    <p class="flow-text">{{entry.custom_text.replace('\n', '</p>
+                    <p class="md-body-1">')}}</p>
                 </a>
             </div>
             <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
