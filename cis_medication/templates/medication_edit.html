@@ -197,7 +197,7 @@
                 <i class="md-title mdi mdi-close-circle-outline"></i> Abbrechen
             </md-button>
             <span flex>&nbsp;</span>
-            <md-button ng-if="d.newEntry.medication_selected" ng-click="entrySave('Verordnung')" aria-label="Speichern" style="color: #3F51B5;">
+            <md-button type="submit" ng-if="d.newEntry.medication_selected" ng-click="entrySave('Verordnung', myForm.$error)" aria-label="Speichern" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-content-save"></i> Speichern
             </md-button>
         </md-card-actions>
