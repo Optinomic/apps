@@ -65,17 +65,12 @@
                     <div ng-if="d.newEntry.medication_start_verordnung_user_signed">
                         <md-datepicker ng-model="d.newEntry.medication_start_verordnung_datum" md-placeholder="Start-Datum"></md-datepicker>
                     </div>
-                    <div ng-if="!d.newEntry.medication_start_verordnung_user_signed">
-                        <i style="color: #E91E63;" class="md-title mdi mdi-lock-outline"></i>
-                    </div>
-                    <div ng-if="d.newEntry.medication_start_verordnung_user_signed">
-                        <i style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
-                    </div>
                     <md-input-container flex>
                         <label>Arzt / Visum</label>
                         <md-select required name="mStart" ng-change="showVisaDialog(d.newEntry.medication_start_verordnung_user, 'start')" ng-model="d.newEntry.medication_start_verordnung_user">
                             <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
-                                {{user.data.extras.full_name}}
+                                <i ng-if="d.newEntry.medication_start_verordnung_user_signed === user.id" style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
+                                <i ng-if="d.newEntry.medication_start_verordnung_user_signed !== user.id" style="color: #E91E63;" class="md-title mdi mdi-lock-outline"></i> {{user.data.extras.full_name}}
                             </md-option>
                         </md-select>
                         <div ng-messages="myForm.mStart.$error" ng-show="(myForm.mStart.$untouched) || (myForm.mStart.$touched)" style="color:#E91E63" role="alert">
@@ -139,17 +134,12 @@
                     <div ng-if="d.newEntry.medication_stop_verordnung_user_signed">
                         <md-datepicker ng-model="d.newEntry.medication_stop_verordnung_datum" md-placeholder="Stop-Datum"></md-datepicker>
                     </div>
-                    <div ng-if="!d.newEntry.medication_stop_verordnung_user_signed">
-                        <i style="color: #E91E63;" class="md-title mdi mdi-lock-outline"></i>
-                    </div>
-                    <div ng-if="d.newEntry.medication_stop_verordnung_user_signed">
-                        <i style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
-                    </div>
                     <md-input-container flex>
                         <label>Arzt / Visum</label>
                         <md-select ng-change="showVisaDialog(d.newEntry.medication_stop_verordnung_user, 'stop')" ng-model="d.newEntry.medication_stop_verordnung_user">
                             <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
-                                {{user.data.extras.full_name}}
+                                <i ng-if="d.newEntry.medication_stop_verordnung_user_signed === user.id" style="color: #4CAF50;" class="md-title mdi mdi-lock-open-outline"></i>
+                                <i ng-if="d.newEntry.medication_stop_verordnung_user_signed !== user.id" style="color: #E91E63;" class="md-title mdi mdi-lock-outline"></i> {{user.data.extras.full_name}}
                             </md-option>
                         </md-select>
                     </md-input-container>
