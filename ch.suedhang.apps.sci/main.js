@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -151,20 +151,19 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var survey_responses = $scope.d.dataMain.survey_responses;
         survey_responses.forEach(function(current_response, myindex) {
 
-            // TODo:  Label (Eintritt / Datum)
-            var label = current_response.entity.data.filled.substring(0, 10);
+
+            var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
+            var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
 
             if (current_response.entity.data.Erhebungszeitpunkt === '1') {
                 label = 'Eintritt: ' + label;
             };
             if (current_response.entity.data.Erhebungszeitpunkt === '2') {
-                label = 'Eintritt: ' + label;
+                label = 'Austritt: ' + label;
             };
-            if (current_response.entity.data.Erhebungszeitpunkt === '2') {
+            if (current_response.entity.data.Erhebungszeitpunkt === '3') {
                 label = 'Verlauf: ' + label;
             };
-
-
 
 
             var scores = current_response.calculations[0].calculation_result.scores
