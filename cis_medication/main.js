@@ -252,15 +252,20 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
                 $scope.d.newEntry.medication_start_verordnung_datum = new Date();
                 $scope.d.newEntry.medication_start_verordnung_user = null;
+                $scope.d.newEntry.medication_start_verordnung_user_signed = null;
                 $scope.d.newEntry.medication_stop_verordnung_datum = null;
                 $scope.d.newEntry.medication_stop_verordnung_user = null;
+                $scope.d.newEntry.medication_stop_verordnung_user_signed = null;
+                $scope.d.newEntry.medication_verabreichung = 'oral';
             };
 
             if (current_section === 1) {
                 $scope.d.newEntry.medication_start_verordnung_datum = new Date();
                 $scope.d.newEntry.medication_start_verordnung_user = null;
+                $scope.d.newEntry.medication_start_verordnung_user_signed = null;
                 $scope.d.newEntry.medication_stop_verordnung_datum = null;
                 $scope.d.newEntry.medication_stop_verordnung_user = null;
+                $scope.d.newEntry.medication_stop_verordnung_user_signed = null;
             };
 
             if (current_section === 2) {
@@ -272,6 +277,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             // Wirte Medication-Name only if not 'Kein Standardmedikament'
             if (parseInt(item.medi_order) !== 999999) {
                 $scope.d.newEntry.medication_name = item.medi_name;
+                $scope.createLinks();
             };
 
             console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
