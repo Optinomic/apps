@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.sci
-name = Stress- und Coping-Inventar
+name = Stress-Coping-Inventar (SCI)
 short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
 version = include(VERSION)
 type = patient
@@ -50,9 +50,9 @@ fid = X20X259
 min_questions =
 min_lastpage = 2
 
-
 [event]
 type = on_activation
+due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
 survey = SCI
