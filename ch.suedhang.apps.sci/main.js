@@ -151,7 +151,21 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var survey_responses = $scope.d.dataMain.survey_responses;
         survey_responses.forEach(function(current_response, myindex) {
 
+            // TODo:  Label (Eintritt / Datum)
             var label = current_response.entity.data.filled.substring(0, 10);
+
+            if (current_response.entity.data.Erhebungszeitpunkt === '1') {
+                label = 'Eintritt: ' + label;
+            };
+            if (current_response.entity.data.Erhebungszeitpunkt === '2') {
+                label = 'Eintritt: ' + label;
+            };
+            if (current_response.entity.data.Erhebungszeitpunkt === '2') {
+                label = 'Verlauf: ' + label;
+            };
+
+
+
 
             var scores = current_response.calculations[0].calculation_result.scores
 
@@ -162,9 +176,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.stanine.data.push(respone_to_push);
         });
 
-
+        // TODo:  REAL - Poulation Data
         $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
+            "population_name": $scope.stanine.data[0].scores[0].population.name,
             "norm_name": "Normalbereich",
             "start_result": $scope.stanine.data.length - 1
         };
