@@ -191,8 +191,8 @@
             <p class="md-caption">Medikamenten-Katalog</p>
         </md-card-content>
         <md-divider ng-if="d.newEntry.medication_selected"></md-divider>
-        <md-card-actions ng-if="d.loadedMedicationData" layout-gt-xs="row" layout-align="start center">
-            <md-button class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
+        <md-card-actions ng-if="d.loadedMedicationData" layout-xs="row" layout-gt-xs="row" layout-align="start center">
+            <md-button hide-xs hide-sm class="md-icon-button" ng-click="d.appInit.debug = !d.appInit.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
             <md-button ng-click="entryCancel()" aria-label="Cancel" style="color: #9E9E9E;">
