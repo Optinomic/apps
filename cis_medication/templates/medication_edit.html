@@ -162,7 +162,7 @@
                     </div>
                     <md-input-container flex>
                         <label>Arzt / Visum</label>
-                        <md-select ng-model="d.newEntry.medication_stop_verordnung_user">
+                        <md-select ng-change="showVisaDialog(d.newEntry.medication_stop_verordnung_user, 'stop')" ng-model="d.newEntry.medication_stop_verordnung_user">
                             <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">
                                 {{user.data.extras.full_name}}
                             </md-option>
