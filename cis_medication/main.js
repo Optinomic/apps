@@ -630,6 +630,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             datestamp: new Date(),
             user: $scope.d.dataMain.users.current.id
         };
+
         $scope.loadMedis();
         $scope.d.appState = 'new';
         $scope.d._init.grid.grid_ready = false;
@@ -797,7 +798,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                     $scope.d.newEntry.medication_stop_verordnung_user_signed = null;
                 };
             };
-            console.log('restore_cancel_error', $scope.d.newEntry);
+            console.log('restore_cancel_error', start_stop, $scope.d.newEntry);
         };
 
         $scope.d.dataMain.users.all.forEach(function(user, myindex) {
