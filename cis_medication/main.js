@@ -419,8 +419,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 if ((app === 'Verordnung') || (app === 'Reserve')) {
                     row.medication_start_verordnung_user_initals = '?';
                     row.medication_start_verordnung_user_name = '?';
-                    row.medication_stop_verordnung_user_initals = '?';
-                    row.medication_stop_verordnung_user_name = '?';
+
+                    if (row.medication_stop_verordnung_datum === null) {
+                        row.medication_stop_verordnung_user_initals = '';
+                        row.medication_stop_verordnung_user_name = '';
+                    } else {
+                        row.medication_stop_verordnung_user_initals = '?';
+                        row.medication_stop_verordnung_user_name = '?';
+                    };
+
                     $scope.d.dataMain.users.all.forEach(function(user, myindex) {
                         if (user.id === row.medication_start_verordnung_user) {
                             row.medication_start_verordnung_user_initals = user.data.initials;
@@ -1103,9 +1110,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             field: "medication_start_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Start",
-            width: 28,
+            width: 36,
             suppressSizeToFit: true,
-            hide: true
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1135,9 +1142,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             field: "medication_stop_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
-            width: 28,
+            width: 36,
             suppressSizeToFit: true,
-            hide: true
+            hide: false
         }, {
             headerName: null,
             headerTooltip: "Medikament bearbeiten",
@@ -1262,9 +1269,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             field: "medication_start_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Start",
-            width: 28,
+            width: 36,
             suppressSizeToFit: true,
-            hide: true
+            hide: false
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1294,9 +1301,9 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             field: "medication_stop_verordnung_user_initals",
             headerName: "Kürzel",
             headerTooltip: "Kürzel des Verordners - Stop Datum",
-            width: 28,
+            width: 36,
             suppressSizeToFit: true,
-            hide: true
+            hide: false
         }, {
             headerName: null,
             headerTooltip: "Medikament bearbeiten",
