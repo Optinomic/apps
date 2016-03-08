@@ -781,6 +781,24 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             current: {}
         };
 
+        function restore_cancel_error() {
+            if (start_stop === 'start') {
+                if ($scope.d.newEntry.medication_start_verordnung_user_signed) {
+                    $scope.d.newEntry.medication_start_verordnung_user = $scope.d.newEntry.medication_start_verordnung_user_signed;
+                } else {
+                    $scope.d.newEntry.medication_start_verordnung_user = null;
+                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
+                };
+            } else {
+                if ($scope.d.newEntry.medication_stop_verordnung_user_signed) {
+                    $scope.d.newEntry.medication_stop_verordnung_user = $scope.d.newEntry.medication_start_verordnung_user_signed;
+                } else {
+                    $scope.d.newEntry.medication_stop_verordnung_user = null;
+                    $scope.d.newEntry.medication_stop_verordnung_user_signed = null;
+                };
+            };
+            console.log('restore_cancel_error', $scope.d.newEntry);
+        };
 
         $scope.d.dataMain.users.all.forEach(function(user, myindex) {
 
@@ -810,29 +828,25 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 aPromise.then(function(data) {
                     // Correct Credentials
                     console.log('(✓) checkVisa =', start_stop, data, data.data.user_id);
-                    $scope.d.newEntry.medication_start_verordnung_user = data.data.user_id;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
+
+                    if (start_stop === 'start') {
+                        $scope.d.newEntry.medication_start_verordnung_user = data.data.user_id;
+                        $scope.d.newEntry.medication_start_verordnung_user_signed = data.data.user_id;
+                    } else {
+                        $scope.d.newEntry.medication_stop_verordnung_user = data.data.user_id;
+                        $scope.d.newEntry.medication_stop_verordnung_user_signed = data.data.user_id;
+                    };
 
                 }, function(error) {
                     // Wrong Credentials
                     console.log('(!) checkVisa Error =', start_stop, error);
-                    $scope.d.newEntry.medication_start_verordnung_user = null;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
-
+                    restore_cancel_error();
                 });
 
 
             }, function() {
-
                 console.log('DIALOG: Cancel');
-
-                if ($scope.d.newEntry.medication_start_verordnung_user_signed) {
-                    $scope.d.newEntry.medication_start_verordnung_user = $scope.d.newEntry.medication_start_verordnung_user_signed;
-                } else {
-                    $scope.d.newEntry.medication_start_verordnung_user = null;
-                    $scope.d.newEntry.medication_start_verordnung_user_signed = null;
-                };
-
+                restore_cancel_error();
             });
 
     };
