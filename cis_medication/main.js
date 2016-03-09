@@ -105,37 +105,28 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
 
         $scope.d.nodeTree = 'medication';
-
+        
+        // Entry per Stay - if available
+        if ($scope.d.dataMain.params.stay_id !== NaN) {
+            $scope.d.nodeTree = $scope.d.nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+        } else {
+            $scope.d.nodeTree = $scope.d.nodeTree + '_all_stays';
+        };
 
         $scope.d.app = {};
         $scope.d.app.sections = [{
             id: 0,
             name: 'Verordnung',
-            count: 0,
-            nodeTree: 'medication'
+            count: 0
         }, {
             id: 1,
             name: 'Reserve',
-            count: 0,
-            nodeTree: 'medication_reserve'
+            count: 0
         }, {
             id: 2,
             name: 'Reserve Abgabe',
-            count: 0,
-            nodeTree: 'medication_reserve_abgabe'
+            count: 0
         }];
-
-
-        // Entry per Stay - if available
-        if ($scope.d.dataMain.params.stay_id !== NaN) {
-            $scope.d.app.sections[0].nodeTree = $scope.d.app.sections[0].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
-            $scope.d.app.sections[1].nodeTree = $scope.d.app.sections[1].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
-            $scope.d.app.sections[2].nodeTree = $scope.d.app.sections[2].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
-        } else {
-            $scope.d.app.sections[0].nodeTree = $scope.d.app.sections[0].nodeTree + '_all_stays';
-            $scope.d.app.sections[1].nodeTree = $scope.d.app.sections[1].nodeTree + '_all_stays';
-            $scope.d.app.sections[2].nodeTree = $scope.d.app.sections[2].nodeTree + '_all_stays';
-        };
 
 
         // Set Default (0 = Verordnung)
