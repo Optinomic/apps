@@ -7,7 +7,7 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div flex>
                 <a target="_blank" ng-href="{{entry.icd_url_info}}">
-                    <p class="flow-text">{{entry.custom_text}}</p>
+                    <p class="flow-text" ng-bind-html="entry.custom_text_html"></p>
                 </a>
             </div>
         </div>
