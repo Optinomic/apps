@@ -112,6 +112,14 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
     $scope.appInit = function() {
         $scope.d.nodeTree = 'verlaufseintrag';
 
+        // Entry per Stay - if available
+        if ($scope.d.dataMain.params.stay_id !== NaN) {
+            $scope.d.nodeTree = $scope.d.nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+        } else {
+            $scope.d.nodeTree = $scope.d.nodeTree + '_all_stays';
+        };
+
+
         $scope.d.appInit = {
             filter: '',
             predicate: 'datum_sort',
