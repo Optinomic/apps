@@ -1,5 +1,10 @@
 <md-content class="md-padding">
-    <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+    <div ng-if="d.diagnoses.length === 0" class="md-padding">
+        <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> {{d.dataMain.apps.current.name}}</h1>
+        <p class="flow-text">Keine Diagnosen verfügbar | No data available.</p>
+        <p class="flow-text">&nbsp;</p>
+    </div>
+    <div ng-if="d.diagnoses.length !== 0" ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div flex="5" ng-if="!d.appInit.show_controls[$index].show_controls">
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
