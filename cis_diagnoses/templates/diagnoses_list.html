@@ -1,7 +1,7 @@
 <md-content class="md-padding">
     <div ng-init="d.appInit.show_controls[$index].show_controls = false" ng-mouseover="d.appInit.show_controls[$index].show_controls = true" ng-mouseleave="d.appInit.show_controls[$index].show_controls = false" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-            <div>
+            <div ng-if="!d.appInit.show_controls[$index].show_controls">
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
             </div>
             <div hide-xs show-gt-xs flex="5" ng-if="d.appInit.show_controls[$index].show_controls">
