@@ -125,6 +125,19 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             nodeTree: 'medication_reserve_abgabe'
         }];
 
+
+        // Entry per Stay - if available
+        if ($scope.d.dataMain.params.stay_id !== NaN) {
+            $scope.d.app.sections[0].nodeTree = $scope.d.app.sections[0].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+            $scope.d.app.sections[1].nodeTree = $scope.d.app.sections[1].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+            $scope.d.app.sections[2].nodeTree = $scope.d.app.sections[2].nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+        } else {
+            $scope.d.app.sections[0].nodeTree = $scope.d.app.sections[0].nodeTree + '_all_stays';
+            $scope.d.app.sections[1].nodeTree = $scope.d.app.sections[1].nodeTree + '_all_stays';
+            $scope.d.app.sections[2].nodeTree = $scope.d.app.sections[2].nodeTree + '_all_stays';
+        };
+
+
         // Set Default (0 = Verordnung)
         $scope.d.app.selected_section = $scope.d.app.sections[0];
 
