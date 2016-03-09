@@ -132,6 +132,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $sce, data
     $scope.appInit = function() {
         $scope.d.nodeTree = 'diagnoses';
 
+        // Entry per Stay - if available
+        if ($scope.d.dataMain.params.stay_id !== NaN) {
+            $scope.d.nodeTree = $scope.d.nodeTree + '/' + $scope.d.dataMain.params.stay_id;
+        } else {
+            $scope.d.nodeTree = $scope.d.nodeTree + '/all_stays';
+        };
+
         $scope.d.appInit = {};
         $scope.d.appInit.noCache = false;
         $scope.d.appInit.repos = [];
@@ -297,7 +304,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $sce, data
             } else {
                 $scope.d.diagnoses = angular.copy(data);
 
-                //  Interpretiere Newlines
+                //  Interpretiere Newlines  \n
                 $scope.d.diagnoses.forEach(function(diagnose, myindex) {
                     diagnose.custom_text_html = $sce.trustAsHtml(diagnose.custom_text.replace(/(\r\n|\n|\r)/gm, "<br>"));
                 });
