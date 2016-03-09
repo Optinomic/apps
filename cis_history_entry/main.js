@@ -111,12 +111,15 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.appInit = function() {
         $scope.d.nodeTree = 'verlaufseintrag';
+        $scope.d.nodeTreeNotes = 'notes';
 
         // Entry per Stay - if available
         if ($scope.d.dataMain.params.stay_id !== NaN) {
             $scope.d.nodeTree = $scope.d.nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
+            $scope.d.nodeTreeNotes = $scope.d.nodeTreeNotes + '_stay_' + $scope.d.dataMain.params.stay_id;
         } else {
             $scope.d.nodeTree = $scope.d.nodeTree + '_all_stays';
+            $scope.d.nodeTreeNotes = $scope.d.nodeTreeNotes + '_all_stays';
         };
 
 
@@ -182,7 +185,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.getNotes = function() {
 
-        var api_call = dataService.getAnnotationsData('patient', 'notes');
+        var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTreeNotes);
         api_call.then(function(data) {
 
             // Create Object if not already exists.
@@ -193,7 +196,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.historyEntrysNotes = angular.copy(data);
             };
 
-            console.log('(+) getNotes', $scope.d.historyEntrysNotes);
+            console.log('(+) getNotes', $scope.d.nodeTreeNotes, $scope.d.historyEntrysNotes);
         });
 
     };
@@ -213,22 +216,22 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         datestamp.datum_time = $filter("amDateFormat")(date, 'HH:mm');
         $scope.d.historyEntrysNotes.datestamp = datestamp;
 
-        var api_call = dataService.saveAnnotationsData('patient', 'notes', $scope.d.historyEntrysNotes);
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTreeNotes, $scope.d.historyEntrysNotes);
         api_call.then(function(data) {
             // Update Entrys
             $scope.getNotes();
-            console.log('(+) saveNotes - success: ', $scope.d.historyEntrysNotes);
+            console.log('(+) saveNotes - success: ', $scope.d.nodeTreeNotes, $scope.d.historyEntrysNotes);
 
             $scope.d.functions.showSimpleToast('Notitzen erfolgreich gespeichert');
         });
     };
 
     $scope.clearNotes = function() {
-        var api_call = dataService.saveAnnotationsData('patient', 'notes', {});
+        var api_call = dataService.saveAnnotationsData('patient', $scope.d.nodeTreeNotes, {});
         api_call.then(function(data) {
             // Update Entrys
             $scope.getNotes();
-            console.log('(+) clearNotes - success: ', $scope.d.historyEntrysNotes);
+            console.log('(+) clearNotes - success: ', $scope.d.nodeTreeNotes, $scope.d.historyEntrysNotes);
         });
     };
 
