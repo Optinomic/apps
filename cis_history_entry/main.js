@@ -178,6 +178,8 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTreeNotes);
         api_call.then(function(data) {
 
+            console.log('(->) getNotes', data);
+
             // Create Object if not already exists.
             if (dataService.isEmpty(data)) {
                 $scope.d.historyEntrysNotes = {};
