@@ -175,18 +175,39 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
 
     $scope.getNotes = function() {
 
+        function isArray(object) {
+            if (object.constructor === Array) return true;
+            else return false;
+        };
+
         var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTreeNotes);
         api_call.then(function(data) {
 
             console.log('(->) getNotes', data);
 
-            // Create Object if not already exists.
-            if (dataService.isEmpty(data)) {
+            if (isArray(data)) {
                 $scope.d.historyEntrysNotes = {};
                 $scope.d.historyEntrysNotes.notes = '';
+
+                var note = '';
+                data.forEach(function(inner_item, myindex) {
+                    //console.log('(Pushed) ---> ', inner_item, item, myindex);
+                    var current_stay = data.save_stamp.getStayID
+                    var note = note + data.notes + '(stay:' + current_stay + ')';
+                });
+                $scope.d.historyEntrysNotes.notes = note;
+
             } else {
-                $scope.d.historyEntrysNotes = angular.copy(data);
+                // Create Object if not already exists.
+                if (dataService.isEmpty(data)) {
+                    $scope.d.historyEntrysNotes = {};
+                    $scope.d.historyEntrysNotes.notes = '';
+                } else {
+                    $scope.d.historyEntrysNotes = angular.copy(data);
+                };
             };
+
+
 
             console.log('(+) getNotes', $scope.d.nodeTreeNotes, $scope.d.historyEntrysNotes);
         });
