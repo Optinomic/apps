@@ -190,10 +190,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 $scope.d.historyEntrysNotes.notes = '';
 
                 var note = '';
-                data.forEach(function(inner_item, myindex) {
+                data.forEach(function(item, myindex) {
                     //console.log('(Pushed) ---> ', inner_item, item, myindex);
-                    var current_stay = data.save_stamp.getStayID
-                    var note = note + data.notes + '(stay:' + current_stay + ')';
+                    var current_stay = item.save_stamp.getStayID
+                    var note = note + item.notes + '(stay:' + current_stay + ') \n\n';
                 });
                 $scope.d.historyEntrysNotes.notes = note;
 
