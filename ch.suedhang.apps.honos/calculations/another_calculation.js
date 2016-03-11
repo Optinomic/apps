@@ -26,6 +26,33 @@ function main(responses) {
     };
 
 
+    calc.getDropout = function(r) {
+        my_value = parseInt(r.q401V05);
+
+        var type = {
+            dropout: false,
+            dropout_raeson: '',
+            dropout_id: my_value
+        };
+
+        if (my_value === 1) {
+            type.dropout = true;
+            type.dropout_raeson = 'Patient ist innerhalb von 7 Tagen nach Eintritt ausgetreten.';
+        };
+
+        if (my_value === 2) {
+            type.dropout = false;
+            type.dropout_raeson = r.q401V06;
+        };
+
+        return dropout;
+    };
+
+
+
+
+
+
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
@@ -42,6 +69,7 @@ function main(responses) {
 
             // Calculation
             d.type = calc.getType(r.q401V04);
+            d.dropout = calc.getDropout(r);
 
             d.full_response = myResponses;
 
