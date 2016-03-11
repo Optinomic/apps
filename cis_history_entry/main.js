@@ -183,9 +183,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
         var api_call = dataService.getAnnotationsData('patient', $scope.d.nodeTreeNotes);
         api_call.then(function(data) {
 
-            console.log('(->) getNotes', data);
 
             if (isArray(data)) {
+                console.log('(->) getNotes - Array', data);
+
                 $scope.d.historyEntrysNotes = {};
                 $scope.d.historyEntrysNotes.notes = '';
 
@@ -194,8 +195,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                     //console.log('(Pushed) ---> ', inner_item, item, myindex);
                     var current_stay = item.save_stamp.getStayID
                     var note = note + item.notes + '(stay:' + current_stay + ') \n\n';
+                    console.log('---> note', note);
+                    $scope.d.historyEntrysNotes.notes = note;
+
                 });
-                $scope.d.historyEntrysNotes.notes = note;
 
             } else {
                 // Create Object if not already exists.
