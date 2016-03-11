@@ -105,13 +105,6 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
 
         $scope.d.nodeTree = 'medication';
-        
-        // Entry per Stay - if available
-        if ($scope.d.dataMain.params.stay_id !== NaN) {
-            $scope.d.nodeTree = $scope.d.nodeTree + '_stay_' + $scope.d.dataMain.params.stay_id;
-        } else {
-            $scope.d.nodeTree = $scope.d.nodeTree + '_all_stays';
-        };
 
         $scope.d.app = {};
         $scope.d.app.sections = [{
