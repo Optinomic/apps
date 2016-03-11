@@ -92,17 +92,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
+
+
         // set data - we only have one survey - so easy:
+        // Which survey - check: dataMain.survey_responses_group
+        var group_id = 0;
         $scope.d.grid.rowData = [];
 
-        $scope.d.dataMain.survey_responses.forEach(function(current_result, myindex) {
+        $scope.d.dataMain.survey_responses_group[group_id].forEach(function(current_result, myindex) {
             var my_response = current_result.entity.data.response;
             my_response.filled = current_result.entity.data.filled;
             $scope.d.grid.rowData.push(my_response);
         });
-
-
-        $scope.d.grid.rowData = $scope.d.dataMain.survey_responses[0].entity.data.response;
 
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
