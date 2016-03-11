@@ -91,7 +91,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setDataView = function() {
 
         // set data - we only have one survey - so easy:
-        $scope.d.grid.rowData = $scope.d.dataMain.survey_responses;
+        $scope.d.grid.rowData = $scope.d.dataMain.survey_responses[0].entity.data.response;
 
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
