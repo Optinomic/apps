@@ -25,7 +25,7 @@ function main(responses) {
 
             // Something
             myResults.something = calc.doSomething();
-
+            myResults.full_data = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff here
