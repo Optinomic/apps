@@ -75,51 +75,39 @@ function main(responses) {
 
 
             var scores = [{
-                "order": 1,
                 "var": "H1[402V01]",
                 "sum_score": 0
             }, {
-                "order": 2,
                 "var": "H1[402V02]",
                 "sum_score": 0
             }, {
-                "order": 3,
                 "var": "H1[402V03]",
                 "sum_score": 0
             }, {
-                "order": 4,
                 "var": "H1[402V04]",
                 "sum_score": 0
             }, {
-                "order": 5,
                 "var": "H1[402V05]",
                 "sum_score": 0
             }, {
-                "order": 6,
                 "var": "H1[402V06]",
                 "sum_score": 0
             }, {
-                "order": 7,
                 "var": "H1[402V07]",
                 "sum_score": 0
             }, {
-                "order": 8,
                 "var": "H1[402V08]",
                 "sum_score": 0
             }, {
-                "order": 9,
                 "var": "H1[402V11]",
                 "sum_score": 0
             }, {
-                "order": 10,
                 "var": "H1[402V12]",
                 "sum_score": 0
             }, {
-                "order": 11,
                 "var": "H1[402V13]",
                 "sum_score": 0
             }, {
-                "order": 12,
                 "var": "H1[402V14]",
                 "sum_score": 0
             }];
@@ -141,9 +129,13 @@ function main(responses) {
                     current_score.sum_score = 'k.A.';
                     sum_obj.count_kA = sum_obj.count_kA + 1;
                 } else {
-                    current_score.sum_score = current_value;
-                    sum_obj.sum_total = sum_obj.sum_total + current_value;
-                    sum_obj.count_value = sum_obj.count_value + 1;
+
+                    setTimeout(function() {
+                        current_score.sum_score = current_value;
+                        sum_obj.sum_total = sum_obj.sum_total + current_value;
+                        sum_obj.count_value = sum_obj.count_value + 1;
+                    }, 500);
+
                 };
 
             };
