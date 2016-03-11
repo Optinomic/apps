@@ -61,7 +61,8 @@
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
-        include(templates/partial/template_add_button.html)
+        <div ng-if="d.dataMain.params.have_stay">
+            include(templates/partial/template_add_button.html)
+        </div>
     </div>
 </div>
-
