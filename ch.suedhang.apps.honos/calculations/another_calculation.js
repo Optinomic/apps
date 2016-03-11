@@ -52,61 +52,61 @@ function main(responses) {
     calc.getSumScores = function(my_data) {
 
         var scores = [{
-            "order": 1,
-            "var": "H1[402V01]",
-            "sum_score": 0
+            'order': 1,
+            'var': 'H1[402V01]',
+            'sum_score': 0
         }, {
-            "order": 2,
-            "var": "H1[402V02]",
-            "sum_score": 0
+            'order': 2,
+            'var': 'H1[402V02]',
+            'sum_score': 0
         }, {
-            "order": 3,
-            "var": "H1[402V03]",
-            "sum_score": 0
+            'order': 3,
+            'var': 'H1[402V03]',
+            'sum_score': 0
         }, {
-            "order": 4,
-            "var": "H1[402V04]",
-            "sum_score": 0
+            'order': 4,
+            'var': 'H1[402V04]',
+            'sum_score': 0
         }, {
-            "order": 5,
-            "var": "H1[402V05]",
-            "sum_score": 0
+            'order': 5,
+            'var': 'H1[402V05]',
+            'sum_score': 0
         }, {
-            "order": 6,
-            "var": "H1[402V06]",
-            "sum_score": 0
+            'order': 6,
+            'var': 'H1[402V06]',
+            'sum_score': 0
         }, {
-            "order": 7,
-            "var": "H1[402V07]",
-            "sum_score": 0
+            'order': 7,
+            'var': 'H1[402V07]',
+            'sum_score': 0
         }, {
-            "order": 8,
-            "var": "H1[402V08]",
-            "sum_score": 0
+            'order': 8,
+            'var': 'H1[402V08]',
+            'sum_score': 0
         }, {
-            "order": 9,
-            "var": "H1[402V11]",
-            "sum_score": 0
+            'order': 9,
+            'var': 'H1[402V11]',
+            'sum_score': 0
         }, {
-            "order": 10,
-            "var": "H1[402V12]",
-            "sum_score": 0
+            'order': 10,
+            'var': 'H1[402V12]',
+            'sum_score': 0
         }, {
-            "order": 11,
-            "var": "H1[402V13]",
-            "sum_score": 0
+            'order': 11,
+            'var': 'H1[402V13]',
+            'sum_score': 0
         }, {
-            "order": 12,
-            "var": "H1[402V14]",
-            "sum_score": 0
+            'order': 12,
+            'var': 'H1[402V14]',
+            'sum_score': 0
         }];
 
 
         var sum_obj = {
-            "count_kA": 0,
-            "count_value": 0,
-            "sum_score": 0,
-            "sum_total": 0
+            'count_kA': 0,
+            'count_value': 0,
+            'sum_score': 0,
+            'sum_total': 0
         };
 
         //for (var x = 0; x < scores.length; x++) {
