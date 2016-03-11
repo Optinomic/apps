@@ -5,9 +5,24 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
+    calc.getType = function(my_value) {
+
+        my_value = parseInt(my_value);
+
+        var type = {
+            name: 'Verlauf (14-täglich)',
+            id: parseInt(my_value)
+        };
+
+        if (my_value === 1) {
+            type.name = 'Eintritt';
+        };
+
+        if (my_value === 2) {
+            type.name = 'Austritt';
+        };
+
+        return type;
     };
 
 
@@ -24,6 +39,9 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
+            myResults.type = calc.getType(result.q401V04);
+
+
             myResults.something = calc.doSomething();
             myResults.full_data = myResponses;
 
