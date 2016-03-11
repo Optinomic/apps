@@ -29,23 +29,23 @@ function main(responses) {
 
         my_value = parseInt(my_value);
 
-        var type = {
+        var obj = {
             dropout: false,
             dropout_raeson: '',
             dropout_id: my_value
         };
 
         if (my_value === 1) {
-            type.dropout = true;
-            type.dropout_raeson = 'Patient ist innerhalb von 7 Tagen nach Eintritt ausgetreten.';
+            obj.dropout = true;
+            obj.dropout_raeson = 'Patient ist innerhalb von 7 Tagen nach Eintritt ausgetreten.';
         };
 
         if (my_value === 2) {
-            type.dropout = false;
-            type.dropout_raeson = my_raeson;
+            obj.dropout = true;
+            obj.dropout_raeson = my_raeson;
         };
 
-        return dropout;
+        return obj;
     };
 
 
@@ -66,8 +66,9 @@ function main(responses) {
             var d = {};
             var r = response.data.response;
 
+            // --------------------------------
             // Calculation
-
+            // --------------------------------
             d.type = calc.getType(r.q401V04);
             d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
 
