@@ -194,11 +194,10 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, dataServic
                 data.forEach(function(item, myindex) {
                     //console.log('(Pushed) ---> ', inner_item, item, myindex);
                     var current_stay = item.save_stamp.getStayID
-                    var note = note + item.notes + '(stay:' + current_stay + ') \n\n';
-                    console.log('---> note', note);
-                    $scope.d.historyEntrysNotes.notes = note;
-
+                    note = note + item.notes + ' (stay:' + current_stay + ') \n\n';
+                    console.log('---> note: ', note, item);
                 });
+                $scope.d.historyEntrysNotes.notes = note;
 
             } else {
                 // Create Object if not already exists.
