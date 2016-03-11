@@ -43,6 +43,8 @@ function main(responses) {
             // Calculation
             //d.type = calc.getType(r['q401V04']);
 
+            d.type = r.q401V04;
+
             d.full_response = myResponses;
 
             // Write Results for the Return
