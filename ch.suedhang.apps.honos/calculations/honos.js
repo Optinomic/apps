@@ -129,13 +129,10 @@ function main(responses) {
                     current_score.sum_score = 'k.A.';
                     sum_obj.count_kA = sum_obj.count_kA + 1;
                 } else {
+                    sum_obj.sum_total = sum_obj.sum_total + current_value;
+                    sum_obj.count_value = sum_obj.count_value + 1;
 
-                    setTimeout(function() {
-                        current_score.sum_score = current_value;
-                        sum_obj.sum_total = sum_obj.sum_total + current_value;
-                        sum_obj.count_value = sum_obj.count_value + 1;
-                    }, 500);
-
+                    current_score.sum_score = current_value;
                 };
 
             };
