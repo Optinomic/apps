@@ -39,7 +39,7 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
-            myResults.type = calc.getType(result.q401V04);
+            myResults.type = calc.getType(result['q401V04']);
 
 
             myResults.something = calc.doSomething();
