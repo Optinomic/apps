@@ -5,6 +5,11 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+
+    calc.roundToOne = function(num) {
+        return +(Math.round(num + "e+1") + "e-1");
+    };
+
     calc.getType = function(my_value) {
 
         my_value = parseInt(my_value);
@@ -130,8 +135,7 @@ function main(responses) {
 
             for (var x = 0; x < scores.length; x++) {
                 var current_score = scores[x];
-                var current_value = 4;
-                //var current_value = parseInt(my_data[current_score.var]);
+                var current_value = parseInt(r[current_score.var]);
 
                 if (current_value === 9) {
                     current_score.sum_score = 'k.A.';
@@ -149,6 +153,7 @@ function main(responses) {
                 sum_obj.sum_score = 'k.A.';
             } else {
                 sum_obj.sum_score = sum_obj.sum_total / sum_obj.count_value * 12;
+                sum_obj.sum_score_rounded = calc.roundToOne(sum_obj.sum_score);
             }
 
             d.scores = scores;
