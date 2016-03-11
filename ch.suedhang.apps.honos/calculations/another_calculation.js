@@ -134,8 +134,8 @@ function main(responses) {
 
 
         var return_object {
-            total: sum_obj,
-            scores: scores
+            "total": sum_obj,
+            "scores": scores
         };
 
         return return_object;
@@ -159,13 +159,12 @@ function main(responses) {
             // Calculation
             // --------------------------------
             d.type = calc.getType(r.q401V04);
-            d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
+            //d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
             //d.sum_scores = getSumScores(r);
 
 
             // Write Results for the Return
             // Do not modify stuff here
-            d.r = r;
             d.hash = r['optinomixHASH'];
             d.response = response;
             allResults.push(d);
