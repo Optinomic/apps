@@ -52,13 +52,13 @@ min_lastpage = 2
 
 [event]
 type = on_activation
-due_after = 259200
+due_after = 129200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
 survey = SCI
 
 
 [calculation scores javascript]
-include(calculations/scores.js)
+include(../ch.suedhang.apps.sci/calculations/scores.js)
 
 
