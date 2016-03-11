@@ -37,9 +37,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 // Run App-Functions:
                 $scope.setExport();
                 $scope.setDataView();
-                $scope.setTimelineChartOptions();
-                $scope.setTscoreChart();
-                $scope.setStanineView();
 
 
             };
@@ -74,7 +71,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var data_query = {};
 
         data_query = {
-            name: 'WHQOL-Example (with stay)',
+            name: 'HoNOS',
             sql: include_as_js_string(
                 export.sql)
         };
@@ -89,202 +86,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
-
-
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Tägliche Stimmung (∑)',
-            'focusField': 'score',
-            'dateField': 'filled',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function() {
-        var score_answer = [{
-            "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setTscoreChart = function() {
-
-        // Options
-        $scope.options_plot = {
-            'show_scores': true
-        };
-
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
-    };
-
-
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
-
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-    };
-
-
-    // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
     $scope.setDataView = function() {
@@ -292,7 +93,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // If we have multiple surveys - make sure to take the right 'responses'.
         var currentResultGroup = 0;
         $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
-            if (current_group_def.survey === 'Second example survey') {
+            if (current_group_def.survey === 'HoNOS') {
                 currentResultGroup = current_group_def.id;
             };
         });
