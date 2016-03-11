@@ -51,14 +51,7 @@ function main(responses) {
     calc.getSumScores = function(my_data) {
 
         var scores = [];
-
-
-        var sum_obj = {
-            "count_kA": 0,
-            "count_value": 0,
-            "sum_score": 0,
-            "sum_total": 0
-        };
+        var sum_obj = {};
 
         //for (var x = 0; x < scores.length; x++) {
         //    var current_score = scores[x];
@@ -109,7 +102,7 @@ function main(responses) {
             // --------------------------
             d.type = calc.getType(r['q401V04']);
             d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
-            d.scores = calc.getSumScores(r);
+            d.scores = calc.getSumScores(response.data.response);
 
             // Write Results for the Return
             // Do not modify stuff here
