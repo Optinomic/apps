@@ -41,7 +41,7 @@ function main(responses) {
             d.r = r;
 
             // Calculation
-            d.type = calc.getType(r['q401V04']);
+            //d.type = calc.getType(r['q401V04']);
 
             d.full_response = myResponses;
 
