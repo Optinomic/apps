@@ -55,6 +55,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
+    // -----------------------------------
+    // Dataexport
+    // -----------------------------------
 
     $scope.setExport = function() {
 
@@ -79,7 +82,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
     };
 
 
@@ -91,6 +93,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setDataView = function() {
 
         // set data - we only have one survey - so easy:
+        $scope.d.grid.rowData = [];
+
+        $scope.d.dataMain.survey_responses[0].forEach(function(current_result, myindex) {
+            var my_response = current_result.entity.data.response;
+            my_response.filled = current_result.entity.data.filled;
+            $scope.d.grid.rowData.push(my_response);
+        });
+
+
         $scope.d.grid.rowData = $scope.d.dataMain.survey_responses[0].entity.data.response;
 
         // automatic or manually like (columnDefsManually)
