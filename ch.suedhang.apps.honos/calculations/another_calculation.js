@@ -35,21 +35,19 @@ function main(responses) {
         var allResults = [];
 
         responses_array.forEach(function(response, myindex) {
-            var myResults = {};
-            var result = response.data.response;
+            var d = {};
+            var r = response.data.response;
 
             // Something
-            myResults.type = result;
+            d.type = calc.getType(r['q401V04']);
 
-
-            myResults.something = calc.doSomething();
-            myResults.full_data = myResponses;
+            d.full_data = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff here
-            myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            allResults.push(myResults);
+            d.hash = r['optinomixHASH'];
+            d.response = response;
+            allResults.push(d.);
         });
 
         return allResults;
