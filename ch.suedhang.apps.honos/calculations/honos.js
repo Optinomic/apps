@@ -130,7 +130,8 @@ function main(responses) {
 
             for (var x = 0; x < scores.length; x++) {
                 var current_score = scores[x];
-                var current_value = parseInt(my_data[current_score.var]);
+                var current_value = 4;
+                //var current_value = parseInt(my_data[current_score.var]);
 
                 if (current_value === 9) {
                     current_score.sum_score = 'k.A.';
