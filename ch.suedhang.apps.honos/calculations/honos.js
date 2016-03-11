@@ -143,7 +143,7 @@ function main(responses) {
                 sum_obj.sum_score = 'k.A.';
             } else {
 
-                sum_obj.sum_score = sum_obj.sum_total / sum_obj.count_value * 12;
+                sum_obj.sum_score = summe / sum_obj.count_value * 12;
                 sum_obj.sum_score_rounded = calc.roundToOne(sum_obj.sum_score);
             }
 
