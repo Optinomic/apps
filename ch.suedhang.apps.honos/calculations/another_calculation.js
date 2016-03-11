@@ -38,16 +38,18 @@ function main(responses) {
             var d = {};
             var r = response.data.response;
 
-            // Something
+            d.r = r;
+
+            // Calculation
             d.type = calc.getType(r['q401V04']);
 
-            d.full_data = myResponses;
+            d.full_response = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff here
             d.hash = r['optinomixHASH'];
             d.response = response;
-            allResults.push(d.);
+            allResults.push(d);
         });
 
         return allResults;
