@@ -14,7 +14,7 @@ include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
 include(templates/toolbar.html)
 <div>&nbsp;</div>
 <div class="optinomic-page-fab" ng-if="d.appState === 'show'">
-    <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
+    <md-button ng-if="d.dataMain.params.have_stay" ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
         <i class="md-title mdi mdi-plus" style="font-size:41px; color:#FCE4EC; padding-top:7px;"></i>
         <md-tooltip md-direction="left">
             Neuer Verlaufseintrag
