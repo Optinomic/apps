@@ -108,7 +108,7 @@ function main(responses) {
                 "var": "H2[402V13]",
                 "sum_score": 0
             }, {
-                "var": "H1[402V14]",
+                "var": "H2[402V14]",
                 "sum_score": 0
             }];
 
