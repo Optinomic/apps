@@ -49,7 +49,8 @@ function main(responses) {
     };
 
 
-    calc.getSumScores = function(r) {
+    calc.getSumScores = function(my_data) {
+
         var scores = [{
             "order": 1,
             "var": "H1[402V01]",
@@ -110,7 +111,7 @@ function main(responses) {
 
         //for (var x = 0; x < scores.length; x++) {
         //    var current_score = scores[x];
-        //    var current_value = parseInt(r[current_score.var]);
+        //    var current_value = parseInt(my_data[current_score.var]);
         //
         //    if (current_value === 9) {
         //        current_score.sum_score = 'k.A.';
@@ -124,11 +125,11 @@ function main(responses) {
         //};
 
 
-        if (sum_obj.count_value === 0) {
-            sum_obj.sum_score = 'k.A.';
-        } else {
-            sum_obj.sum_score = sum_obj.sum_total / sum_obj.count_value * 12;
-        }
+        //if (sum_obj.count_value === 0) {
+        //    sum_obj.sum_score = 'k.A.';
+        //} else {
+        //    sum_obj.sum_score = sum_obj.sum_total / sum_obj.count_value * 12;
+        //}
 
 
 
