@@ -11,7 +11,7 @@ function main(responses) {
 
         var type = {
             name: 'Verlauf (14-täglich)',
-            id: parseInt(my_value)
+            id: my_value
         };
 
         if (my_value === 1) {
