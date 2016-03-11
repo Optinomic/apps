@@ -51,8 +51,6 @@ function main(responses) {
 
 
 
-
-
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
@@ -69,7 +67,7 @@ function main(responses) {
 
             // Calculation
             d.type = calc.getType(r.q401V04);
-            d.dropout = calc.getDropout(r);
+            //d.dropout = calc.getDropout(r);
 
             d.full_response = myResponses;
 
