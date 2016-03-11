@@ -18,7 +18,6 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-
 [template data_results 6 10]
 include(templates/data.html)
 
@@ -66,7 +65,7 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation honos_calculation javascript]
+include(calculations/honos.js)
 
 
