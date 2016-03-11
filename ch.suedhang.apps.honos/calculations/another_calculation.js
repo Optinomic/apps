@@ -25,9 +25,9 @@ function main(responses) {
         return type;
     };
 
+    calc.getDropout = function(my_value, my_raeson) {
 
-    calc.getDropout = function(r) {
-        my_value = parseInt(r.q401V05);
+        my_value = parseInt(my_value);
 
         var type = {
             dropout: false,
@@ -42,13 +42,16 @@ function main(responses) {
 
         if (my_value === 2) {
             type.dropout = false;
-            type.dropout_raeson = r.q401V06;
+            type.dropout_raeson = my_raeson;
         };
 
         return dropout;
     };
 
 
+    calc.getSumScores = function(r) {
+
+    };
 
 
     // ------------------------------------------
@@ -63,16 +66,16 @@ function main(responses) {
             var d = {};
             var r = response.data.response;
 
-            d.r = r;
-
             // Calculation
+
             d.type = calc.getType(r.q401V04);
-            //d.dropout = calc.getDropout(r);
+            d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
 
             d.full_response = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff here
+            d.r = r;
             d.hash = r['optinomixHASH'];
             d.response = response;
             allResults.push(d);
