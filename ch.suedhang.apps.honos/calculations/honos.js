@@ -121,6 +121,7 @@ function main(responses) {
             };
 
 
+            var summe = 0;
             for (var x = 0; x < scores.length; x++) {
                 var current_score = scores[x];
                 var current_value = parseInt(r[current_score.var]);
@@ -129,18 +130,19 @@ function main(responses) {
                     current_score.sum_score = 'k.A.';
                     sum_obj.count_kA = sum_obj.count_kA + 1;
                 } else {
-                    sum_obj.sum_total = sum_obj.sum_total + current_value;
+                    summe = summe + current_value;
                     sum_obj.count_value = sum_obj.count_value + 1;
 
                     current_score.sum_score = current_value;
                 };
-
             };
+            sum_obj.sum_total = summe;
 
 
             if (sum_obj.count_value === 0) {
                 sum_obj.sum_score = 'k.A.';
             } else {
+
                 sum_obj.sum_score = sum_obj.sum_total / sum_obj.count_value * 12;
                 sum_obj.sum_score_rounded = calc.roundToOne(sum_obj.sum_score);
             }
