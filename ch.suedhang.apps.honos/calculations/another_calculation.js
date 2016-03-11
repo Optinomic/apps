@@ -158,7 +158,7 @@ function main(responses) {
             // --------------------------------
             // Calculation
             // --------------------------------
-            d.type = calc.getType(r.q401V04);
+            //d.type = calc.getType(r.q401V04);
             //d.dropout = calc.getDropout(r['q401V05'], r['q401V06']);
             //d.sum_scores = getSumScores(r);
 
