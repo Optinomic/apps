@@ -35,9 +35,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
-                $scope.setExport();
                 $scope.setDataView();
-
+                $scope.setTimelineChartOptions();
+                $scope.setExport();
 
             };
 
@@ -69,8 +69,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.grid.rowData;
 
         $scope.d.timeline.options = {
-            'title': 'Summen-Score (∑)',
+            'title': 'HoNOS Summen-Score (∑)',
             'focusField': 'sum_score_rounded',
+            'defaultChart': 'day',
             'dateField': 'datestamp',
             'fillDates': false,
             'firstWeekDay': 'Mo',
@@ -141,9 +142,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             $scope.d.grid.rowData.push(my_response);
         });
-
-        // Set Timeline - Chart
-        $scope.setTimelineChartOptions();
 
         // automatic or manually like (columnDefsManually)
         // $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
