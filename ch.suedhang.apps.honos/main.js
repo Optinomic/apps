@@ -66,12 +66,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
         $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.calculations[0].calculation_results;
+        $scope.d.timeline.data = $scope.d.grid.rowData;
 
         $scope.d.timeline.options = {
             'title': 'Summen-Score (∑)',
-            'focusField': 'score',
-            'dateField': 'sum_score.sum_score_rounded',
+            'focusField': 'sum_score_rounded',
+            'dateField': 'datestamp',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
