@@ -17,44 +17,44 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template score_timeline 6 4]
-include(templates/score_timeline.html)
+[template score_timeline 6 5]
+include(templates/score_timeline_small.html)
 
 [template honos1_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos2_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos3_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos4_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos5_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos6_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos7_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos8_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos9_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos10_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos11_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 [template honos12_timeline 3 4]
-include(templates/score_timeline.html)
+include(templates/score_timeline_small.html)
 
 
 [template data_results 6 10]
