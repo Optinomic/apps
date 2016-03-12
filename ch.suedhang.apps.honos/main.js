@@ -69,8 +69,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.grid.rowData;
 
         $scope.d.timeline.options = {
-            'title': 'HoNOS Summen-Score (∑)',
-            'focusField': 'H1[402V01]',
+            'title': 'HoNOS',
+            'focusField': 'sum_score_rounded',
             'defaultChart': 'day',
             'dateField': 'q402V00',
             'fillDates': false,
@@ -78,12 +78,23 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'patient': patientFullName
         };
 
-
-        if ($scope.d.dataMain.params.viewname === 'honos1_timeline') {
-            $scope.d.timeline.options.title = 'Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten';
+        if ($scope.d.dataMain.params.viewname === 'score_timeline') {
+            console.log('imelineChart: score_timeline');
+            $scope.d.timeline.options.title = 'HoNOS Summen-Score (∑)';
             $scope.d.timeline.options.focusField = 'sum_score_rounded';
         };
 
+        if ($scope.d.dataMain.params.viewname === 'honos1_timeline') {
+            console.log('imelineChart: honos1_timeline');
+            $scope.d.timeline.options.title = 'Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten';
+            $scope.d.timeline.options.focusField = 'H1[402V01]';
+        };
+
+        if ($scope.d.dataMain.params.viewname === 'honos2_timeline') {
+            console.log('imelineChart: honos1_timeline');
+            $scope.d.timeline.options.title = 'Absichtliche Selbstverletzung';
+            $scope.d.timeline.options.focusField = 'H1[402V02]';
+        };
 
     };
 
