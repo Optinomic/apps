@@ -121,7 +121,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
 
-        console.log($scope.d.grid.columnDefs | json);
+        console.log(angular.toJson($scope.d.grid.columnDefs));
 
         // columnDefsManually: If you want to create columnDefs manually:
         // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
