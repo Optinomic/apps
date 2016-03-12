@@ -143,6 +143,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.grid.rowData.push(my_response);
         });
 
+        $scope.d.grid.rowData = $scope.d.functions.enrichResults($scope.d.grid.rowData);
+
         // automatic or manually like (columnDefsManually)
         // $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
         // console.log(angular.toJson($scope.d.grid.columnDefs));
