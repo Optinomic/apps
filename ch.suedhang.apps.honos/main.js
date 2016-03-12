@@ -72,7 +72,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'title': 'HoNOS Summen-Score (∑)',
             'focusField': 'sum_score_rounded',
             'defaultChart': 'day',
-            'dateField': 'datestamp',
+            'dateField': 'q402V00',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
