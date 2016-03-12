@@ -70,13 +70,21 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.timeline.options = {
             'title': 'HoNOS Summen-Score (∑)',
-            'focusField': 'sum_score_rounded',
+            'focusField': 'H1[402V01]',
             'defaultChart': 'day',
             'dateField': 'q402V00',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
+
+
+        if ($scope.d.dataMain.params.viewname === 'honos1_timeline') {
+            $scope.d.timeline.options.title = 'Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten';
+            $scope.d.timeline.options.focusField = 'sum_score_rounded';
+        };
+
+
     };
 
 
