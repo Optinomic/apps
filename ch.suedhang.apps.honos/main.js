@@ -73,7 +73,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'focusField': 'sum_score_rounded',
             'defaultChart': 'day',
             'dateField': 'q402V00',
-            'fillDates': false,
+            'fillDates': true,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
         };
