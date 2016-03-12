@@ -208,15 +208,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "field": "dropout_raeson"
         }, {
             "headerTooltip": "Σ - Summenscore",
-            "headerName": "sum_score",
+            "headerName": "Σ",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
             "hide": true,
             "field": "sum_score"
         }, {
-            "headerTooltip": "sum_score_rounded",
-            "headerName": "sum_score_rounded",
+            "headerTooltip": "Σ - Summenscore (gerundet)",
+            "headerName": "Σ (gerundet)",
             "cellClass": "md-body-1",
             "pinned": "left",
             "width": 52,
