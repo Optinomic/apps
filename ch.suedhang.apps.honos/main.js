@@ -142,11 +142,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.grid.rowData.push(my_response);
         });
 
+        // Set Timeline - Chart
         $scope.setTimelineChartOptions();
 
         // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-        console.log(angular.toJson($scope.d.grid.columnDefs));
+        // $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
+        // console.log(angular.toJson($scope.d.grid.columnDefs));
 
         // columnDefsManually: If you want to create columnDefs manually:
         // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
