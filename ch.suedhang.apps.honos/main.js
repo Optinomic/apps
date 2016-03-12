@@ -133,67 +133,114 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "width": 110,
             "suppressSizeToFit": true
         }, {
+            "headerTooltip": "sum_score",
+            "headerName": "sum_score",
+            "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
+            "hide": true,
+            "field": "sum_score"
+        }, {
+            "headerTooltip": "sum_score_rounded",
+            "headerName": "sum_score_rounded",
+            "cellClass": "md-body-1",
+            pinned: 'left',
+            "width": 60,
+            "suppressSizeToFit": true,
+            "hide": false,
+            "field": "sum_score_rounded"
+        }, {
+            "headerTooltip": "sum_total",
+            "headerName": "sum_total",
+            "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
+            "hide": true,
+            "field": "sum_total"
+        }, {
             "headerTooltip": "Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten",
             "headerName": "H1_01",
             "cellClass": "md-body-1",
             "width": 60,
-            "suppressSizeToFit": true
-            valueGetter: "parseInt(data['H1[402V01])",
+            "suppressSizeToFit": true,
+            valueGetter: "parseInt(data.H1[402V01])",
             filter: "number"
         }, {
             "headerTooltip": "H1[402V02]",
             "headerName": "H1[402V02]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V02]"
         }, {
             "headerTooltip": "H1[402V03]",
             "headerName": "H1[402V03]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V03]"
         }, {
             "headerTooltip": "H1[402V04]",
             "headerName": "H1[402V04]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V04]"
         }, {
             "headerTooltip": "H1[402V05]",
             "headerName": "H1[402V05]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V05]"
         }, {
             "headerTooltip": "H1[402V06]",
             "headerName": "H1[402V06]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V06]"
         }, {
             "headerTooltip": "H1[402V07]",
             "headerName": "H1[402V07]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V07]"
         }, {
             "headerTooltip": "H1[402V08]",
             "headerName": "H1[402V08]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H1[402V08]"
         }, {
             "headerTooltip": "H2[402V11]",
             "headerName": "H2[402V11]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H2[402V11]"
         }, {
             "headerTooltip": "H2[402V12]",
             "headerName": "H2[402V12]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H2[402V12]"
         }, {
             "headerTooltip": "H2[402V13]",
             "headerName": "H2[402V13]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H2[402V13]"
         }, {
             "headerTooltip": "H2[402V14]",
             "headerName": "H2[402V14]",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "H2[402V14]"
         }, {
             "headerTooltip": "PID",
@@ -202,26 +249,34 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "field": "PID",
             "hide": true,
             "width": 110,
-            "suppressSizeToFit": true
+            "suppressSizeToFit": true,
         }, {
             "headerTooltip": "cgiSG",
             "headerName": "cgiSG",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "cgiSG"
         }, {
             "headerTooltip": "cgiZA",
             "headerName": "cgiZA",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "cgiZA"
         }, {
             "headerTooltip": "count_kA",
             "headerName": "count_kA",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "count_kA"
         }, {
             "headerTooltip": "count_value",
             "headerName": "count_value",
             "cellClass": "md-body-1",
+            "width": 60,
+            "suppressSizeToFit": true,
             "field": "count_value"
         }, {
             "headerTooltip": "datestamp",
@@ -484,21 +539,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "hide": true,
             "sort": "asc",
             "filter": "number"
-        }, {
-            "headerTooltip": "sum_score",
-            "headerName": "sum_score",
-            "cellClass": "md-body-1",
-            "field": "sum_score"
-        }, {
-            "headerTooltip": "sum_score_rounded",
-            "headerName": "sum_score_rounded",
-            "cellClass": "md-body-1",
-            "field": "sum_score_rounded"
-        }, {
-            "headerTooltip": "sum_total",
-            "headerName": "sum_total",
-            "cellClass": "md-body-1",
-            "field": "sum_total"
         }];
 
         $scope.d.grid.columnDefs = columnDefsManually;
