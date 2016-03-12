@@ -125,6 +125,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // columnDefsManually: If you want to create columnDefs manually:
         // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
         var columnDefsManually = [{
+            "headerTooltip": "PID",
+            "headerName": "PID",
+            "cellClass": "md-body-1",
+            "field": "PID",
+            "hide": true,
+            "width": 110,
+            "suppressSizeToFit": true
+        }, {
             "headerTooltip": "FID",
             "headerName": "FID",
             "cellClass": "md-body-1",
@@ -132,152 +140,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "hide": true,
             "width": 110,
             "suppressSizeToFit": true
-        }, {
-            "headerTooltip": "sum_score",
-            "headerName": "sum_score",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "hide": true,
-            "field": "sum_score"
-        }, {
-            "headerTooltip": "sum_score_rounded",
-            "headerName": "sum_score_rounded",
-            "cellClass": "md-body-1",
-            pinned: 'left',
-            "width": 60,
-            "suppressSizeToFit": true,
-            "hide": false,
-            "field": "sum_score_rounded"
-        }, {
-            "headerTooltip": "sum_total",
-            "headerName": "sum_total",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "hide": true,
-            "field": "sum_total"
-        }, {
-            "headerTooltip": "Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten",
-            "headerName": "H1_01",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            valueGetter: "parseInt(data.H1[402V01])",
-            filter: "number"
-        }, {
-            "headerTooltip": "H1[402V02]",
-            "headerName": "H1[402V02]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V02]"
-        }, {
-            "headerTooltip": "H1[402V03]",
-            "headerName": "H1[402V03]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V03]"
-        }, {
-            "headerTooltip": "H1[402V04]",
-            "headerName": "H1[402V04]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V04]"
-        }, {
-            "headerTooltip": "H1[402V05]",
-            "headerName": "H1[402V05]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V05]"
-        }, {
-            "headerTooltip": "H1[402V06]",
-            "headerName": "H1[402V06]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V06]"
-        }, {
-            "headerTooltip": "H1[402V07]",
-            "headerName": "H1[402V07]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V07]"
-        }, {
-            "headerTooltip": "H1[402V08]",
-            "headerName": "H1[402V08]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H1[402V08]"
-        }, {
-            "headerTooltip": "H2[402V11]",
-            "headerName": "H2[402V11]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H2[402V11]"
-        }, {
-            "headerTooltip": "H2[402V12]",
-            "headerName": "H2[402V12]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H2[402V12]"
-        }, {
-            "headerTooltip": "H2[402V13]",
-            "headerName": "H2[402V13]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H2[402V13]"
-        }, {
-            "headerTooltip": "H2[402V14]",
-            "headerName": "H2[402V14]",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "H2[402V14]"
-        }, {
-            "headerTooltip": "PID",
-            "headerName": "PID",
-            "cellClass": "md-body-1",
-            "field": "PID",
-            "hide": true,
-            "width": 110,
-            "suppressSizeToFit": true,
-        }, {
-            "headerTooltip": "cgiSG",
-            "headerName": "cgiSG",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "cgiSG"
-        }, {
-            "headerTooltip": "cgiZA",
-            "headerName": "cgiZA",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "cgiZA"
-        }, {
-            "headerTooltip": "count_kA",
-            "headerName": "count_kA",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "count_kA"
-        }, {
-            "headerTooltip": "count_value",
-            "headerName": "count_value",
-            "cellClass": "md-body-1",
-            "width": 60,
-            "suppressSizeToFit": true,
-            "field": "count_value"
         }, {
             "headerTooltip": "datestamp",
             "headerName": "datestamp",
@@ -331,17 +193,199 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerTooltip": "dropout",
             "headerName": "dropout",
             "cellClass": "md-body-1",
+            "width": 80,
             "field": "dropout"
         }, {
             "headerTooltip": "dropout_id",
             "headerName": "dropout_id",
             "cellClass": "md-body-1",
+            "hide": true,
             "field": "dropout_id"
         }, {
             "headerTooltip": "dropout_raeson",
             "headerName": "dropout_raeson",
             "cellClass": "md-body-1",
             "field": "dropout_raeson"
+        }, {
+            "headerTooltip": "Σ - Summenscore",
+            "headerName": "sum_score",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "hide": true,
+            "field": "sum_score"
+        }, {
+            "headerTooltip": "sum_score_rounded",
+            "headerName": "sum_score_rounded",
+            "cellClass": "md-body-1",
+            "pinned": "left",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "hide": false,
+            "field": "sum_score_rounded"
+        }, {
+            "headerTooltip": "sum_total",
+            "headerName": "sum_total",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "hide": true,
+            "field": "sum_total"
+        }, {
+            "headerTooltip": "Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten",
+            "headerName": "H1[402V01]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V01]",
+            "filter": "number"
+        }, {
+            "headerTooltip": "Absichtliche Selbstverletzung",
+            "headerName": "H1[402V02]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V02]"
+        }, {
+            "headerTooltip": "Problematischer Alkohol- oder Drogenkonsum",
+            "headerName": "H1[402V03]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V03]"
+        }, {
+            "headerTooltip": "Kognitive Probleme",
+            "headerName": "H1[402V04]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V04]"
+        }, {
+            "headerTooltip": "Probleme in Zusammenhang mit körperlicher Erkrankung",
+            "headerName": "H1[402V05]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V05]"
+        }, {
+            "headerTooltip": "Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung",
+            "headerName": "H1[402V06]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V06]"
+        }, {
+            "headerTooltip": "Gedrückte Stimmung",
+            "headerName": "H1[402V07]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V07]"
+        }, {
+            "headerTooltip": "Andere psychische Probleme",
+            "headerName": "H1[402V08]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H1[402V08]"
+        }, {
+            "headerTooltip": "Probleme mit Beziehung",
+            "headerName": "H2[402V11]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H2[402V11]"
+        }, {
+            "headerTooltip": "Probleme mit alltäglichen Aktivitäten",
+            "headerName": "H2[402V12]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H2[402V12]"
+        }, {
+            "headerTooltip": "Probleme durch die Wohnbedingungen",
+            "headerName": "H2[402V13]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H2[402V13]"
+        }, {
+            "headerTooltip": "Probleme durch die Bedingungen in Beruf und Alltag",
+            "headerName": "H2[402V14]",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "H2[402V14]"
+        }, {
+            "headerTooltip": "cgiSG",
+            "headerName": "cgiSG",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "hide": true,
+            "field": "cgiSG"
+        }, {
+            "headerTooltip": "cgiZA",
+            "headerName": "cgiZA",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "hide": true,
+            "suppressSizeToFit": true,
+            "field": "cgiZA"
+        }, {
+            "headerTooltip": "q401V04",
+            "headerName": "q401V04",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "q401V04"
+        }, {
+            "headerTooltip": "q401V05",
+            "headerName": "q401V05",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "q401V05"
+        }, {
+            "headerTooltip": "q401V06",
+            "headerName": "q401V06",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "suppressSizeToFit": true,
+            "field": "q401V06"
+        }, {
+            "headerTooltip": "q402V00",
+            "headerName": "q402V00",
+            "cellClass": "md-body-1",
+            "field": "q402V00"
+        }, {
+            "headerTooltip": "q402V09",
+            "headerName": "q402V09",
+            "cellClass": "md-body-1",
+            "field": "q402V09",
+            "width": 10,
+            "suppressSizeToFit": true
+        }, {
+            "headerTooltip": "q402V10",
+            "headerName": "q402V10",
+            "cellClass": "md-body-1",
+            "field": "q402V10"
+        }, {
+            "headerTooltip": "count_kA",
+            "headerName": "count_kA",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "hide": true,
+            "suppressSizeToFit": true,
+            "field": "count_kA"
+        }, {
+            "headerTooltip": "count_value",
+            "headerName": "count_value",
+            "cellClass": "md-body-1",
+            "width": 58,
+            "hide": true,
+            "suppressSizeToFit": true,
+            "field": "count_value"
         }, {
             "headerTooltip": "filled",
             "headerName": "filled",
@@ -355,7 +399,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "filled_day",
             "cellClass": "md-body-1",
             "field": "filled_day",
-            "hide": false,
+            "hide": true,
             "width": 88,
             "suppressSizeToFit": true
         }, {
@@ -363,7 +407,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "filled_time",
             "cellClass": "md-body-1",
             "field": "filled_time",
-            "hide": false,
+            "hide": true,
             "width": 62,
             "suppressSizeToFit": true
         }, {
@@ -390,56 +434,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "sort": "asc",
             "filter": "number"
         }, {
-            "headerTooltip": "id",
-            "headerName": "id",
-            "cellClass": "md-body-1",
-            "field": "id",
-            "width": 110,
-            "hide": true
-        }, {
-            "headerTooltip": "lastpage",
-            "headerName": "lastpage",
-            "cellClass": "md-body-1",
-            "field": "lastpage",
-            "hide": true
-        }, {
-            "headerTooltip": "optinomixHASH",
-            "headerName": "optinomixHASH",
-            "cellClass": "md-body-1",
-            "field": "optinomixHASH",
-            "width": 110,
-            "hide": true
-        }, {
-            "headerTooltip": "q401V04",
-            "headerName": "q401V04",
-            "cellClass": "md-body-1",
-            "field": "q401V04"
-        }, {
-            "headerTooltip": "q401V05",
-            "headerName": "q401V05",
-            "cellClass": "md-body-1",
-            "field": "q401V05"
-        }, {
-            "headerTooltip": "q401V06",
-            "headerName": "q401V06",
-            "cellClass": "md-body-1",
-            "field": "q401V06"
-        }, {
-            "headerTooltip": "q402V00",
-            "headerName": "q402V00",
-            "cellClass": "md-body-1",
-            "field": "q402V00"
-        }, {
-            "headerTooltip": "q402V09",
-            "headerName": "q402V09",
-            "cellClass": "md-body-1",
-            "field": "q402V09"
-        }, {
-            "headerTooltip": "q402V10",
-            "headerName": "q402V10",
-            "cellClass": "md-body-1",
-            "field": "q402V10"
-        }, {
             "headerTooltip": "startdate",
             "headerName": "startdate",
             "cellClass": "md-body-1",
@@ -452,7 +446,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "startdate_day",
             "cellClass": "md-body-1",
             "field": "startdate_day",
-            "hide": false,
+            "hide": true,
             "width": 88,
             "suppressSizeToFit": true
         }, {
@@ -460,7 +454,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "startdate_time",
             "cellClass": "md-body-1",
             "field": "startdate_time",
-            "hide": false,
+            "hide": true,
             "width": 62,
             "suppressSizeToFit": true
         }, {
@@ -505,7 +499,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "submitdate_day",
             "cellClass": "md-body-1",
             "field": "submitdate_day",
-            "hide": false,
+            "hide": true,
             "width": 88,
             "suppressSizeToFit": true
         }, {
@@ -513,7 +507,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "headerName": "submitdate_time",
             "cellClass": "md-body-1",
             "field": "submitdate_time",
-            "hide": false,
+            "hide": true,
             "width": 62,
             "suppressSizeToFit": true
         }, {
@@ -539,6 +533,26 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "hide": true,
             "sort": "asc",
             "filter": "number"
+        }, {
+            "headerTooltip": "id",
+            "headerName": "id",
+            "cellClass": "md-body-1",
+            "field": "id",
+            "width": 110,
+            "hide": true
+        }, {
+            "headerTooltip": "lastpage",
+            "headerName": "lastpage",
+            "cellClass": "md-body-1",
+            "field": "lastpage",
+            "hide": true
+        }, {
+            "headerTooltip": "optinomixHASH",
+            "headerName": "optinomixHASH",
+            "cellClass": "md-body-1",
+            "field": "optinomixHASH",
+            "width": 110,
+            "hide": true
         }];
 
         $scope.d.grid.columnDefs = columnDefsManually;
