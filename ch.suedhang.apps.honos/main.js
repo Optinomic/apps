@@ -53,6 +53,30 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+    // -----------------------------------
+    // Chart: Timeline
+    // -----------------------------------
+
+    $scope.setTimelineChartOptions = function() {
+        // -----------------------------------
+        // Chart: Timeline Options
+        // - fillDates:  Still experimental
+        // -----------------------------------
+        var myPatient = $scope.d.dataMain.patient.patient.data;
+        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
+
+        $scope.d.timeline = {};
+        $scope.d.timeline.data = $scope.d.dataMain.calculations[0].calculation_results;
+
+        $scope.d.timeline.options = {
+            'title': 'Summen-Score (∑)',
+            'focusField': 'score',
+            'dateField': 'sum_score.sum_score_rounded',
+            'fillDates': false,
+            'firstWeekDay': 'Mo',
+            'patient': patientFullName
+        };
+    };
 
 
     // -----------------------------------
