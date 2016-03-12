@@ -100,13 +100,28 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.grid.rowData = [];
 
         $scope.d.dataMain.survey_responses_group[group_id].forEach(function(current_result, myindex) {
+            // Add response fields to grid
             var my_response = current_result.entity.data.response;
             my_response.filled = current_result.entity.data.filled;
+
+            // Add calculation fields to grid
+            var my_calculations = current_result.calculations[group_id].calculation_result;
+            my_response.dropout = my_calculations.dropout.dropout;
+            my_response.dropout_id = my_calculations.dropout.dropout_id;
+            my_response.dropout_raeson = my_calculations.dropout.dropout_raeson;
+            my_response.count_kA = my_calculations.sum_score.count_kA;
+            my_response.count_value = my_calculations.sum_score.count_value;
+            my_response.sum_score = my_calculations.sum_score.sum_score;
+            my_response.sum_score_rounded = my_calculations.sum_score.sum_score_rounded;
+            my_response.sum_total = my_calculations.sum_score.sum_total;
+
             $scope.d.grid.rowData.push(my_response);
         });
 
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
+
+        console.log($scope.d.grid.columnDefs | json);
 
         // columnDefsManually: If you want to create columnDefs manually:
         // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
