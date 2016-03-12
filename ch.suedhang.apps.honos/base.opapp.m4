@@ -26,6 +26,36 @@ include(templates/score_timeline.html)
 [template honos2_timeline 3 4]
 include(templates/score_timeline.html)
 
+[template honos3_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos4_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos5_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos6_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos7_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos8_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos9_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos10_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos11_timeline 3 4]
+include(templates/score_timeline.html)
+
+[template honos12_timeline 3 4]
+include(templates/score_timeline.html)
+
 
 [template data_results 6 10]
 include(templates/data.html)

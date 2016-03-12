@@ -78,23 +78,76 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             'patient': patientFullName
         };
 
+
+
         if ($scope.d.dataMain.params.location.viewname === 'score_timeline') {
             console.log('imelineChart: score_timeline');
             $scope.d.timeline.options.title = 'HoNOS Summen-Score (∑)';
             $scope.d.timeline.options.focusField = 'sum_score_rounded';
         };
-
         if ($scope.d.dataMain.params.location.viewname === 'honos1_timeline') {
             console.log('imelineChart: honos1_timeline');
             $scope.d.timeline.options.title = 'Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten';
             $scope.d.timeline.options.focusField = 'H1[402V01]';
         };
-
         if ($scope.d.dataMain.params.location.viewname === 'honos2_timeline') {
             console.log('imelineChart: honos1_timeline');
             $scope.d.timeline.options.title = 'Absichtliche Selbstverletzung';
             $scope.d.timeline.options.focusField = 'H1[402V02]';
         };
+        if ($scope.d.dataMain.params.location.viewname === 'honos3_timeline') {
+            console.log('imelineChart: honos3_timeline');
+            $scope.d.timeline.options.title = 'Problematischer Alkohol- oder Drogenkonsum';
+            $scope.d.timeline.options.focusField = 'H1[402V03]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos4_timeline') {
+            console.log('imelineChart: honos4_timeline');
+            $scope.d.timeline.options.title = 'Kognitive Probleme';
+            $scope.d.timeline.options.focusField = 'H1[402V04]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos5_timeline') {
+            console.log('imelineChart: honos5_timeline');
+            $scope.d.timeline.options.title = 'Probleme in Zusammenhang mit körperlicher Erkrankung';
+            $scope.d.timeline.options.focusField = 'H1[402V05]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos6_timeline') {
+            console.log('imelineChart: honos6_timeline');
+            $scope.d.timeline.options.title = 'Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung';
+            $scope.d.timeline.options.focusField = 'H1[402V06]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos7_timeline') {
+            console.log('imelineChart: honos7_timeline');
+            $scope.d.timeline.options.title = 'Gedrückte Stimmung';
+            $scope.d.timeline.options.focusField = 'H1[402V07]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos8_timeline') {
+            console.log('imelineChart: honos8_timeline');
+            $scope.d.timeline.options.title = 'Andere psychische Probleme';
+            $scope.d.timeline.options.focusField = 'H1[402V08]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos9_timeline') {
+            console.log('imelineChart: honos9_timeline');
+            $scope.d.timeline.options.title = 'Probleme mit Beziehung';
+            $scope.d.timeline.options.focusField = 'H2[402V11]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos10_timeline') {
+            console.log('imelineChart: honos10_timeline');
+            $scope.d.timeline.options.title = 'Probleme mit alltäglichen Aktivitäten';
+            $scope.d.timeline.options.focusField = 'H2[402V12]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos11_timeline') {
+            console.log('imelineChart: honos11_timeline');
+            $scope.d.timeline.options.title = 'Probleme durch die Wohnbedingungen';
+            $scope.d.timeline.options.focusField = 'H2[402V13]';
+        };
+        if ($scope.d.dataMain.params.location.viewname === 'honos12_timeline') {
+            console.log('imelineChart: honos12_timeline');
+            $scope.d.timeline.options.title = 'Probleme durch die Bedingungen in Beruf und Alltag';
+            $scope.d.timeline.options.focusField = 'H2[402V14]';
+        };
+
+
+
 
     };
 
