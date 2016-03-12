@@ -17,7 +17,7 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template score_timeline 6 5]
+[template score_timeline 6 6]
 include(templates/score_timeline_small.html)
 
 [template honos1_timeline 3 4]
@@ -57,7 +57,7 @@ include(templates/score_timeline_small.html)
 include(templates/score_timeline_small.html)
 
 
-[template data_results 6 10]
+[template data_results 6 8]
 include(templates/data.html)
 
 [template data_download 6 10]
