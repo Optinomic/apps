@@ -1,6 +1,4 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-if="d.timeline.name" style="max-height: 36px; height: 36px; overflow: hidden;">
-    <p class="md-subhead">{{d.timeline.name}}</p>
-</div>
 <chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
+<p class="md-subhead">{{d.timeline.name}}</p>
 include(../lib/html/optinomic/page/end.m4)
