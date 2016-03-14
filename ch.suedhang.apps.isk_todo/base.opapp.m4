@@ -19,18 +19,6 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
-
-[template simple_score 4 4]
-include(templates/score.html)
-
-[template score_range 2 4]
-include(templates/range.html)
-
 [template chart_tscore 6 9]
 include(templates/tscore.html)
 
@@ -38,7 +26,7 @@ include(templates/tscore.html)
 include(templates/stanine.html)
 
 [template data_download 6 14]
-include(templates/download.html)
+include(templates/export.html)
 
 
 [dependencies]
