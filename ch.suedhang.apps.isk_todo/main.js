@@ -42,6 +42,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.setTimelineChartOptions();
             $scope.setTscoreChart();
             $scope.setStanineView();
+            $scope.setExport();
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -52,46 +53,33 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // Download
+    // Dataexport
     // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
 
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
+    $scope.setExport = function() {
 
 
-    // ToDO: M4 - Import - remove new lines.
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
 
-    //var sql_import_string = "in_clude(`templates/export.sql')";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
 
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        var module_packages = [];
+        var data_query = {};
 
-    $scope.export = function() {
+        data_query = {
+            name: 'ISK - Export',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
 
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
-
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
-
+        // Init the given Export Settings
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
     };
-
-
 
 
 

@@ -25,6 +25,9 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
+[template data_export 6 7]
+include(templates/export.html)
+
 
 
 [dependencies]
