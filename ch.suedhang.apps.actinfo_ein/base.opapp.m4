@@ -1,6 +1,6 @@
 [module]
-id = com.optinomic.apps.template
-name = Optinomic-App (Template)
+id = ch.suedhang.apps.actinfo_ein
+name = actinfo Eintritt
 short_description = Use this as a starting-point for your apps.
 version = include(VERSION)
 type = patient
