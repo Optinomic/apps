@@ -25,8 +25,6 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
-[template data_download 6 14]
-include(templates/export.html)
 
 
 [dependencies]
@@ -81,7 +79,7 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation scores_calculation javascript]
+include(calculations/scores.js)
 
 
