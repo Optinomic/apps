@@ -753,7 +753,7 @@ angular.module('optinomicDataModule')
 
             // EVENTS
             onReady: function(event) {
-                console.log('the grid is now ready - updating');
+                console.log('(READY) d.grid', d.grid);
                 d._init.grid.grid_ready = true;
 
                 // Make Sure nothing is selected as 'default'
@@ -947,6 +947,8 @@ angular.module('optinomicDataModule')
             var body = {
                 "value": json_value
             };
+
+            console.log('putPatientModuleAnnotations', apiStr, body, json_value);
             return apiService.put(apiStr, body);
         };
 
@@ -1761,6 +1763,7 @@ angular.module('optinomicDataModule')
             aPromise.then(function(current_data) {
 
                 full_data = current_data;
+
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
                     full_data = {};
@@ -1780,9 +1783,14 @@ angular.module('optinomicDataModule')
 
                 // Save and proceed.
                 if (api_direction === 'user') {
-                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
+                    //var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
+                    var api_write = dataService.putUserAnnotations(angular.toJson(full_data));
+                    // var api_write = dataService.putUserAnnotations(full_data);
+
                 } else {
-                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
+                    //var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
+                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(full_data));
+                    //var api_write = dataService.putPatientModuleAnnotations(full_data);
                 };
 
                 var aPromise = dataService.getData(api_write);
