@@ -59,10 +59,9 @@ responsibility = lead_therapist
 name = Inventar Sozialer Kompetenzen
 host = default
 survey_id = 824558
-hash = X34X949
-pid = X34X950
-fid = X34X951
-pidfid = X79X2183
+hash = X28X343
+pid = X28X344
+fid = X28X345
 min_questions =
 min_lastpage = 2
 
