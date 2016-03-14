@@ -118,7 +118,7 @@ website = http://www.optinomic.com/
         </md-input-container>
     </div>
     <div hide-xs show-gt-xs flex ng-if="d.grid.is_row_selected" style="height:84px; padding:5px; margin:5px;">
-        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start center">
+        <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
             <div flex style="padding: 12px;">
     <p class="md-subhead" style="margin-top:8px;"><i class="mdi mdi-chevron-double-right"></i> {{d.grid.selected_row.survey_name}}: {{d.grid.selected_row.datestamp_day}}, {{d.grid.selected_row.datestamp_time}}</p>
 </div>
@@ -180,7 +180,7 @@ website = http://www.optinomic.com/
 
     </div>
 </div>
-<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
+<div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>
              </div>
             <div ng-if="!d.haveData">
                 <div ng-if="!d.haveData">
@@ -1074,7 +1074,7 @@ angular.module('optinomicDataModule')
 
             // EVENTS
             onReady: function(event) {
-                console.log('(READY) d.grid', d.grid);
+                console.log('the grid is now ready - updating');
                 d._init.grid.grid_ready = true;
 
                 // Make Sure nothing is selected as 'default'
@@ -1268,8 +1268,6 @@ angular.module('optinomicDataModule')
             var body = {
                 "value": json_value
             };
-
-            console.log('putPatientModuleAnnotations', apiStr, body, json_value);
             return apiService.put(apiStr, body);
         };
 
@@ -2084,7 +2082,6 @@ angular.module('optinomicDataModule')
             aPromise.then(function(current_data) {
 
                 full_data = current_data;
-
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
                     full_data = {};
@@ -2104,14 +2101,9 @@ angular.module('optinomicDataModule')
 
                 // Save and proceed.
                 if (api_direction === 'user') {
-                    //var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putUserAnnotations(angular.toJson(full_data));
-                    // var api_write = dataService.putUserAnnotations(full_data);
-
+                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
                 } else {
-                    //var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(full_data));
-                    //var api_write = dataService.putPatientModuleAnnotations(full_data);
+                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
                 };
 
                 var aPromise = dataService.getData(api_write);

@@ -1,13 +1,12 @@
 [module]
 id = com.optinomic.cis.diagnoses
 name = Diagnosen
-short_description = Diagnosen nach ICD-10
+short_description = Diagnosen nach ICD-10.
 version = 1.0
 
 type = patient
 
 [description]
-Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme (ICD-10)
 
 [developer]
 first_name = Beat
@@ -80,7 +79,7 @@ website = http://www.optinomic.com/
                 <md-button class="md-icon-button" ng-click="entryEdit(entry.uniqueid)" aria-label="Bearbeiten" style="color: #3F51B5;">
                     <i class="md-title mdi mdi-pencil"></i>
                     <md-tooltip md-direction="bottom">
-                        Diagnose bearbeiten.
+                        Diagnose bearbeiten
                     </md-tooltip>
                 </md-button>
             </div>
@@ -420,6 +419,7 @@ website = http://www.optinomic.com/
 </script>
 
 </head>
+
 
 
 
@@ -1154,7 +1154,7 @@ angular.module('optinomicDataModule')
 
             // EVENTS
             onReady: function(event) {
-                console.log('(READY) d.grid', d.grid);
+                console.log('the grid is now ready - updating');
                 d._init.grid.grid_ready = true;
 
                 // Make Sure nothing is selected as 'default'
@@ -1348,8 +1348,6 @@ angular.module('optinomicDataModule')
             var body = {
                 "value": json_value
             };
-
-            console.log('putPatientModuleAnnotations', apiStr, body, json_value);
             return apiService.put(apiStr, body);
         };
 
@@ -2164,7 +2162,6 @@ angular.module('optinomicDataModule')
             aPromise.then(function(current_data) {
 
                 full_data = current_data;
-
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
                     full_data = {};
@@ -2184,14 +2181,9 @@ angular.module('optinomicDataModule')
 
                 // Save and proceed.
                 if (api_direction === 'user') {
-                    //var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putUserAnnotations(angular.toJson(full_data));
-                    // var api_write = dataService.putUserAnnotations(full_data);
-
+                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
                 } else {
-                    //var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(full_data));
-                    //var api_write = dataService.putPatientModuleAnnotations(full_data);
+                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
                 };
 
                 var aPromise = dataService.getData(api_write);

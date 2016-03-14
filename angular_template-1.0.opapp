@@ -1359,7 +1359,7 @@ angular.module('optinomicDataModule')
 
             // EVENTS
             onReady: function(event) {
-                console.log('(READY) d.grid', d.grid);
+                console.log('the grid is now ready - updating');
                 d._init.grid.grid_ready = true;
 
                 // Make Sure nothing is selected as 'default'
@@ -1553,8 +1553,6 @@ angular.module('optinomicDataModule')
             var body = {
                 "value": json_value
             };
-
-            console.log('putPatientModuleAnnotations', apiStr, body, json_value);
             return apiService.put(apiStr, body);
         };
 
@@ -2369,7 +2367,6 @@ angular.module('optinomicDataModule')
             aPromise.then(function(current_data) {
 
                 full_data = current_data;
-
                 if (node_tree === 'clear') {
                     // Overwrite Settings with given json_value
                     full_data = {};
@@ -2389,14 +2386,9 @@ angular.module('optinomicDataModule')
 
                 // Save and proceed.
                 if (api_direction === 'user') {
-                    //var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putUserAnnotations(angular.toJson(full_data));
-                    // var api_write = dataService.putUserAnnotations(full_data);
-
+                    var api_write = dataService.putUserAnnotations(JSON.stringify(full_data));
                 } else {
-                    //var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
-                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(full_data));
-                    //var api_write = dataService.putPatientModuleAnnotations(full_data);
+                    var api_write = dataService.putPatientModuleAnnotations(JSON.stringify(full_data));
                 };
 
                 var aPromise = dataService.getData(api_write);
@@ -5817,7 +5809,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var data_package = {};
         data_package = {
             name: 'Name der Abfrage',
-            sql: "(SELECT \n  	patient.id as pid,\n  	COALESCE(CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END, '') || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') as patient_name,\n  	patient.four_letter_code,\n  	((cast(response AS json))->>'BSCL[sq504V40]') as sq504V40, \n  	recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as sq504V40_1\nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq'\n\n)".slice(1,-1)
+            sql: "(SELECT \n  patient.id,\n  patient.last_name, \n  patient.first_name, \n  patient.four_letter_code,\n  ((cast(response AS json))->>'BSCL[sq504V40]') as sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1')  as recode_sq504V40, \n  recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 10  as recode_2_sq504V40 \nFROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) \nWHERE module = 'ch.suedhang.apps.bscl.anq')".slice(1,-1)
         };
         $scope.d.export_obj.packages.push(data_package);
 
