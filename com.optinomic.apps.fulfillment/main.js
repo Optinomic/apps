@@ -41,7 +41,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Init - Data Export
-            $scope.setExport();
+            // $scope.setExport();
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
