@@ -25,7 +25,6 @@ website = http://www.optinomic.com/
 include(templates/show_token.html)
 
 
-
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
@@ -34,6 +33,3 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
-
-[calculation my_calculation javascript]
-include(calculations/another_calculation.js)
