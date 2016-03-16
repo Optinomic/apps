@@ -1,0 +1,9 @@
+{% in calculations.for_pdf_template %}
+Here is the list of items from the calculation for\_pdf\_template:
+
+\begin{itemize}
+{% forall .items %}
+\item {%= .name %} {% if .value %} ({%= .value %}){% end %}
+{% end %}
+\end{itemize}
+{% end %}
