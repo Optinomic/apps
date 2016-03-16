@@ -21,8 +21,8 @@ website = http://www.optinomic.com/
 
 [dependencies]
 
-[template show_token]
-include(templates/show_token.html)
+[template fulfillment]
+include(templates/fulfillment.html)
 
 
 [javascript]

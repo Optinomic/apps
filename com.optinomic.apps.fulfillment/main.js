@@ -22,9 +22,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
+        $scope.d.appInit = $scope.initApp();
+
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
-
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
@@ -32,8 +33,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // We always have data
             $scope.d.haveData = true;
 
+            // Run Functions:
 
-            $scope.getAppResponses('ch.suedhang.apps.honos');
+            $scope.getPatientList();
+            $scope.getAppResponses($scope.d.appInit.app_id);
 
             // Init - Data Export
             // $scope.setExport();
@@ -48,6 +51,100 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
     $scope.loadMainData();
 
+
+
+    // -------------------
+    // Init
+    // -------------------
+    $scope.initApp = function() {
+
+        var app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
+
+        var patientListFilter = {
+            gender: '',
+            city: null,
+            zip_code: null,
+            age_over: null,
+            age_under: null,
+            in_stay: '',
+            lead_therapist: null,
+            cis_lead_doctor: null,
+            stay_start_before: null,
+            stay_start_after: null,
+            stay_stop_before: null,
+            stay_stop_after: null
+        };
+
+        var init = {
+            "app_id": app_id,
+            "patientListFilter": patientListFilter
+        };
+
+    };
+
+
+    // ----------------------
+    // Get Patients to check
+    // ----------------------
+    $scope.getPatientList = function() {
+
+        api = dataService.getPatientList($scope.d.appInit.patientListFilter);
+        var aPatients = dataService.getData(api);
+
+        aPatients.then(function(data) {
+
+            console.log('(!) - getPatientList: ', data);
+
+
+        }, function(error) {
+            // Error
+            console.log('-- getPatientList Error:', error);
+        });
+
+    };
+
+
+    // -------------------
+    // Get Data
+    // -------------------
+    $scope.getAppResponses = function(app_id) {
+
+        // Init
+        app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
+
+        // Querys
+        var app_query = include_as_js_string(
+            responses.sql);
+
+        app_query = app_query.replace("%module_id%", app_id);
+
+        var sql = {};
+        sql.delimitter = ';';
+        sql.including_headers = 'True';
+        sql.format = 'json';
+        sql.direct = 'True';
+
+        console.log('(!) getSurveyResponses', sql);
+
+
+        // Get all 'response' fields
+        var api = dataService.runSQL(app_query, sql.delimitter, sql.including_headers, sql.format, sql.direct);
+
+        api.success(function(data) {
+            // var response_json = JSON.parse(data.rows[0].response);
+
+            console.log('(!!) getSurveyResponses', data);
+
+
+        });
+
+        api.error(function(data) {
+
+            var text = '(!) Error in SQL (getSurveyResponses)'
+            console.log(text, data);
+            // $scope.d.functions.showSimpleToast(text)
+        });
+    };
 
 
     // -------------------
@@ -75,62 +172,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
-
     };
 
-
-
-    // -------------------
-    // Get Data
-    // -------------------
-    $scope.getAppResponses = function(app_id) {
-
-        // Init
-        app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
-
-        // Querys
-        var app_query = include_as_js_string(
-            responses.sql);
-
-        app_query = app_query.replace("%module_id%", app_id);
-
-
-
-        var sql = {};
-        sql.delimitter = ';';
-        sql.including_headers = 'True';
-        sql.format = 'json';
-        sql.direct = 'True';
-        sql.have_data = false;
-        sql.data = null;
-        sql.packages = [];
-        sql.selectedIndex = 0;
-        sql.query = app_query;
-
-        console.log('(!) getSurveyResponses', sql);
-
-
-        // Get all 'response' fields
-        var api = dataService.runSQL(app_query, sql.delimitter, sql.including_headers, sql.format, sql.direct);
-
-        api.success(function(data) {
-            // var response_json = JSON.parse(data.rows[0].response);
-
-            console.log('(!!) getSurveyResponses', data);
-
-
-        });
-
-        api.error(function(data) {
-
-            var text = '(!) Error in SQL (getSurveyResponses)'
-            console.log(text, data);
-            // $scope.d.functions.showSimpleToast(text)
-        });
-
-
-    };
 
 
 });
