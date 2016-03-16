@@ -88,6 +88,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.getPatientList = function() {
 
+        console.log('(!) - getPatientList: START', $scope.d.appInit);
+
+
         api = dataService.getPatientList($scope.d.appInit.patientListFilter);
 
         api.success(function(data) {
