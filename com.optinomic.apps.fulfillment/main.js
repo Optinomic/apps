@@ -83,30 +83,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    // ----------------------
+    // ------------------------
     // Get Patients to check
-    // ----------------------
+    // ------------------------
     $scope.getPatientList = function() {
 
         api = dataService.getPatientList($scope.d.appInit.patientListFilter);
-        var aPatients = dataService.getData(api);
 
-        aPatients.then(function(data) {
+        api.success(function(data) {
 
             console.log('(!) - getPatientList: ', data);
 
-
-        }, function(error) {
-            // Error
-            console.log('-- getPatientList Error:', error);
         });
+
+        api.error(function(data) {
+
+            console.log('-- getPatientList Error:', error);
+
+        });
+
 
     };
 
 
-    // -------------------
-    // Get Data
-    // -------------------
+    // ------------------------
+    // Get App - ResponseData
+    // ------------------------
     $scope.getAppResponses = function(app_id) {
 
         // Init
@@ -147,9 +149,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    // -------------------
+    // ------------------------
     // Data-Export
-    // -------------------
+    // ------------------------
     $scope.setExport = function() {
 
 
