@@ -117,7 +117,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         api.success(function(data) {
             // var response_json = JSON.parse(data.rows[0].response);
 
-            console.log('(!!) getSurveyResponses', response_json);
+            console.log('(!!) getSurveyResponses', data);
 
 
         });
