@@ -1,13 +1,14 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Patienten">
+        <md-tab label="Patienten ({{$scope.d.appInit.patientList.data.length}})">
             <md-content class="md-padding">
                 include(templates/patient_list_selector.html)
             </md-content>
         </md-tab>
         <md-tab label="Patientenliste" ng-if="d.appInit.patientList.have_data">
             <md-content class="md-padding">
+                <h3 class="md-headline">Erfüllungsgrad</h3>
                 <div ng-repeat="patient in d.appInit.patientList.data">
                     <p>- {{patient.data.extras.name}} ({{patient.data.extras.birthday_age}})</p>
                 </div>

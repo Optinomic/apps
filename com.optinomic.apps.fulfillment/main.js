@@ -119,7 +119,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             };
 
-            console.log('(!) - getPatientList: ', data.patients);
+            console.log('(!) - getPatientList: ', $scope.d.appInit.patientList);
 
         });
 
