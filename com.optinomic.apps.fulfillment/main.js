@@ -95,7 +95,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         api.success(function(data) {
 
-            console.log('(!) - getPatientList: ', data);
+
+            data.patients.forEach(function(patient, myindex) {
+                patient.data.pid = patient.id;
+                patient.data = dataService.createPatientExtras(patient.data);
+            });
+
+            console.log('(!) - getPatientList: ', data.patients);
+
 
         });
 

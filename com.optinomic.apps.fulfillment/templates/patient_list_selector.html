@@ -1,0 +1,74 @@
+<div>
+    <h3 class="md-headline">{{"Settings" | translate}} - {{"PatientList" | translate}}</h3>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'stay' | translate}}</label>
+                <md-select ng-model="d.appInit.patientListFilter.in_stay">
+                    <md-option ng-repeat="stay in myStays" value="{{stay.value}}">{{stay.name | translate}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'leadTherapist' | translate}}</label>
+                <md-select ng-model="d.appInit.patientListFilter.lead_therapist">
+                    <md-option ng-repeat="user in d.dataMain.users" value="{{user.id}}">{{user.data.last_name}} {{user.data.first_name}} ({{user.data.initials}})</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'leadDoctor' | translate}}</label>
+                <md-select ng-model="d.appInit.patientListFilter.cis_lead_doctor">
+                    <md-option ng-repeat="user in d.dataMain.users" value="{{user.id}}">{{user.data.last_name}} {{user.data.first_name}} ({{user.data.initials}})</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'Gender' | translate}}</label>
+                <md-select ng-model="d.appInit.patientListFilter.gender">
+                    <md-option ng-repeat="gender in myGenders" value="{{gender.value}}">{{gender.name | translate}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'Zip' | translate}}</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.zip_code">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'City' | translate}}</label>
+                <input type="text" ng-model="d.appInit.patientListFilter.city">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'ageOver' | translate}}</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.age_over">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>{{'ageUnder' | translate}}</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.age_under">
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div>
+            <md-button ng-click="initApp()" class="md-warn">Zurücksetzen</md-button>
+        </div>
+        <div flex>
+            &nbsp;
+        </div>
+        <div>
+            <md-button ng-click="getPatientList()" class="md-accent">Ausführen</md-button>
+        </div>
+    </div>
+</div>
