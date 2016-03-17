@@ -37,6 +37,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "patientListFilter": patientListFilter
         };
 
+        return init;
+
     };
 
 
