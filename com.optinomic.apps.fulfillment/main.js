@@ -44,8 +44,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         var fulfillment = {
-            patients: [],
-            surveys: {},
+            results: [],
             have_data: false
         };
 
@@ -182,12 +181,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             console.log('(!!) getSurveyResponses', data);
 
+            // Loop Patients and enhance with 'Extras'
+            var returned_survey_responses = [];
+            data.rows.forEach(function(response, myindex) {
+                response.event_id = parseInt(response.event_id);
+                response.patient_id = parseInt(response.patient_id);
+                response.stay_id = parseInt(response.stay_id);
+                returned_survey_responses.push(response);
+            });
+
             $scope.d.appInit.survey_responses = {
-                data: data.rows,
+                data: returned_survey_responses,
                 headers: data.headers,
                 have_data: true
             };
 
+            // we have patients & surveys - get Fulfillment
+            $scope.getFulfillment();
 
         });
 
@@ -197,6 +207,46 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log(text, data);
             // $scope.d.functions.showSimpleToast(text)
         });
+    };
+
+
+    // ------------------------
+    // Merge Patients / Survey
+    // ------------------------
+    $scope.getFulfillment = function() {
+
+        var patients = $scope.d.appInit.patientList.data;
+        var surveys = $scope.d.appInit.survey_responses.data;
+
+
+        var returned_fulfillment = [];
+
+        patients.forEach(function(patient, my_patient_index) {
+
+            var merge_obj = {
+                patient: patient,
+                surveys: []
+            };
+
+            surveys.forEach(function(survey, my_survey_index) {
+                // Save Survey
+                if (survey.patient_id === patient.pid) {
+                    merge_obj.surveys.push(survey);
+                };
+
+            });
+
+            returned_fulfillment.push(merge_obj);
+
+        });
+
+
+        // Save Data to $scope
+        $scope.d.appInit.fulfillment = {
+            results: returned_fulfillment,
+            have_data: true
+        };
+
     };
 
 
