@@ -13,6 +13,33 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.d = scopeDService;
 
 
+    $scope.initApp = function() {
+
+        var app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
+
+        var patientListFilter = {
+            gender: '',
+            city: null,
+            zip_code: null,
+            age_over: null,
+            age_under: null,
+            in_stay: '',
+            lead_therapist: null,
+            cis_lead_doctor: null,
+            stay_start_before: null,
+            stay_start_after: null,
+            stay_stop_before: null,
+            stay_stop_after: null
+        };
+
+        var init = {
+            "app_id": app_id,
+            "patientListFilter": patientListFilter
+        };
+
+    };
+
+
     // -----------------------------------
     // Functions
     // -----------------------------------
@@ -53,34 +80,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    // -------------------
-    // Init
-    // -------------------
-    $scope.initApp = function() {
-
-        var app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
-
-        var patientListFilter = {
-            gender: '',
-            city: null,
-            zip_code: null,
-            age_over: null,
-            age_under: null,
-            in_stay: '',
-            lead_therapist: null,
-            cis_lead_doctor: null,
-            stay_start_before: null,
-            stay_start_after: null,
-            stay_stop_before: null,
-            stay_stop_after: null
-        };
-
-        var init = {
-            "app_id": app_id,
-            "patientListFilter": patientListFilter
-        };
-
-    };
 
 
     // ------------------------
