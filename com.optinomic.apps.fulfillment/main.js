@@ -32,9 +32,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             stay_stop_after: null
         };
 
+        var patientList = {
+            data: [],
+            have_data: false
+        };
+
         var init = {
             "app_id": app_id,
-            "patientListFilter": patientListFilter
+            "patientListFilter": patientListFilter,
+            "patientList": patientList
         };
 
         return init;
