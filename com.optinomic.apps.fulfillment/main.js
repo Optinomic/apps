@@ -37,10 +37,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             have_data: false
         };
 
+        var survey_responses = {
+            data: {},
+            headers: {},
+            have_data: false
+        };
+
+        var fulfillment = {
+            patients: [],
+            surveys: {},
+            have_data: false
+        };
+
+
         var init = {
             "app_id": app_id,
+            "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
-            "patientList": patientList
+            "patientList": patientList,
+            "survey_responses": survey_responses
         };
 
         return init;
@@ -71,7 +86,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Run Functions:
 
             $scope.getPatientList();
-            $scope.getAppResponses($scope.d.appInit.app_id);
 
             // Init - Data Export
             // $scope.setExport();
@@ -102,16 +116,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         api.success(function(data) {
 
             // Loop Patients and enhance with 'Extras'
+            var returned_patients = [];
             data.patients.forEach(function(patient, myindex) {
                 patient.data.pid = patient.id;
                 patient.data = dataService.createPatientExtras(patient.data);
+                returned_patients.push(patient.data);
             });
 
-            if (data.patients.length > 0) {
+            if (returned_patients.length > 0) {
                 $scope.d.appInit.patientList = {
-                    data: data.patients,
+                    data: returned_patients,
                     have_data: true
                 };
+
+                // Now we have patients - get survey responses
+                $scope.getAppResponses($scope.d.appInit.app_id);
+
             } else {
                 $scope.d.appInit.patientList = {
                     data: [],
@@ -161,6 +181,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // var response_json = JSON.parse(data.rows[0].response);
 
             console.log('(!!) getSurveyResponses', data);
+
+            $scope.d.appInit.survey_responses = {
+                data: data.rows,
+                headers: data.headers,
+                have_data: true
+            };
 
 
         });

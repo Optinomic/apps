@@ -11,15 +11,11 @@ include(../lib/html/optinomic/page/start.m4)
                 include(templates/selector_patient_list.html)
             </md-content>
         </md-tab>
-        <md-tab label="Patientenliste" ng-if="d.appInit.patientList.have_data">
+        <md-tab label="Ergebnis" ng-if="d.appInit.patientList.have_data">
             <md-content class="md-padding">
-                <h3 class="md-headline">Erfüllungsgrad</h3>
-                <div ng-repeat="patient in d.appInit.patientList.data">
-                    <p>- {{patient.data.extras.name}} ({{patient.data.extras.birthday_age}})</p>
-                </div>
+                include(templates/result.html)
             </md-content>
         </md-tab>
     </md-tabs>
 </md-content>
-<p class="flow-text">Text</p>
 include(../lib/html/optinomic/page/end.m4)
