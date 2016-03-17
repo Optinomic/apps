@@ -177,7 +177,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api = dataService.runSQL(app_query, sql.delimitter, sql.including_headers, sql.format, sql.direct);
 
         api.success(function(data) {
-            // var response_json = JSON.parse(data.rows[0].response);
 
             console.log('(!!) getSurveyResponses', data);
 
@@ -187,6 +186,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 response.event_id = parseInt(response.event_id);
                 response.patient_id = parseInt(response.patient_id);
                 response.stay_id = parseInt(response.stay_id);
+                response.response = JSON.parse(response.response);
+
                 returned_survey_responses.push(response);
             });
 
