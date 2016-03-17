@@ -23,7 +23,7 @@ website = http://www.optinomic.com/
 
 
 [template fulfillment 6 8]
-include(templates/download.html)
+include(templates/fulfillment.html)
 
 
 
