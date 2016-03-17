@@ -23,7 +23,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             zip_code: null,
             age_over: null,
             age_under: null,
-            in_stay: '',
+            in_stay: 'True',
             lead_therapist: null,
             cis_lead_doctor: null,
             stay_start_before: null,
@@ -95,7 +95,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         api.success(function(data) {
 
-
+            // Loop Patients and enhance with 'Extras'
             data.patients.forEach(function(patient, myindex) {
                 patient.data.pid = patient.id;
                 patient.data = dataService.createPatientExtras(patient.data);
@@ -107,9 +107,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         api.error(function(data) {
-
             console.log('-- getPatientList Error:', error);
-
         });
 
 
