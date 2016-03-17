@@ -107,8 +107,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 patient.data = dataService.createPatientExtras(patient.data);
             });
 
-            console.log('(!) - getPatientList: ', data.patients);
+            if (data.patients.length > 0) {
+                $scope.d.appInit.patientList = {
+                    data: data.patients,
+                    have_data: true
+                };
+            } else {
+                $scope.d.appInit.patientList = {
+                    data: [],
+                    have_data: false
+                };
+            };
 
+            console.log('(!) - getPatientList: ', data.patients);
 
         });
 
