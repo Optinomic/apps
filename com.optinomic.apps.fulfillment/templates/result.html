@@ -1,7 +1,7 @@
 <h3 class="md-headline">Erfüllungsgrad</h3>
 <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
     <h2 class="md-subhead">{{result.patient.extras.name}} ({{result.patient.extras.birthday_age}})</h2>
-    <div ng-if="!result.surveys.length === 0">
+    <div ng-if="result.surveys.length !== 0">
         <p><i class="mdi mdi-check" style="color:#4CAF50"></i>{{result.surveys.length}}</p>
         <div ng-repeat="survey in result.surveys">
             <p>{{survey.filled}} | {{survey.stay_id}} | {{survey.event_id}}</p>
