@@ -2,13 +2,13 @@
 <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
     <h2 class="md-subhead">{{result.patient.extras.name}} ({{result.patient.extras.birthday_age}})</h2>
     <div ng-if="result.surveys.length !== 0">
-        <p><i class="mdi mdi-check" style="color:#4CAF50"></i>{{result.surveys.length}}</p>
+        <p class="md-caption"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{result.surveys.length}}</p>
         <div ng-repeat="survey in result.surveys">
-            <p>{{survey.filled}} | {{survey.stay_id}} | {{survey.event_id}}</p>
+            <p class="md-body-1">{{survey.filled}} | {{survey.stay_id}} | {{survey.event_id}}</p>
             <pre>{{survey}}</pre>
         </div>
     </div>
     <div ng-if="result.surveys.length === 0">
-        <p><i class="mdi mdi-help" style="color:#F44336"></i> Es liegt keine Erfassung vor.</p>
+        <p class="md-caption" style="color:#9E9E9E"><i class="mdi mdi-help" style="color:#F44336"></i> Es liegt keine Erfassung vor.</p>
     </div>
 </div>
