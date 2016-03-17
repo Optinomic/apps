@@ -1,4 +1,10 @@
 <h3 class="md-headline">Erfüllungsgrad</h3>
-<div ng-repeat="patient in d.appInit.patientList.data">
-    <p>- {{patient.extras.name}} ({{patient.extras.birthday_age}})</p>
+<div ng-repeat="result in d.appInit.fulfillment.results">
+    <h2 class="md-subhead">{{result.patient.extras.name}} ({{result.patient.extras.birthday_age}})</h2>
+    <div ng-if="!result.surveys.length === 0">
+        <p ng-repeat="survey in result.surveys">{{survey.filled}} | {{survey.stay_id}} | {{survey.event_id}}</p>
+    </div>
+    <div ng-if="result.surveys.length === 0">
+        <p>Es liegt keine Erfassung vor.</p>
+    </div>
 </div>
