@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 [dependencies]
 
 
-[template fulfillment 6 8]
+[template show_token 6 8]
 include(templates/fulfillment.html)
 
 
