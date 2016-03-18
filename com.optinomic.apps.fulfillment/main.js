@@ -134,11 +134,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 });
 
                 // Get all events from patient
-                patient.data.stays = [];
+                patient.data.events = [];
                 var api_call = dataService.getPatientEvents(patient.id);
                 var aEvents = dataService.getData(api_call);
                 aEvents.then(function(events_data) {
-                    var my_events = events_data;
+                    var my_events = events_data.events;
                     patient.data.events = my_events;
                 });
 
@@ -244,9 +244,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         patients.forEach(function(patient, my_patient_index) {
 
+            var stays = patient.stays;
+            var events = patient.events;
+
+            stays.surveys = [];
+
+
             var merge_obj = {
                 patient: patient,
-                stays: patient.stays,
+                stays: stays,
+                events: events,
                 surveys: []
             };
 
@@ -257,7 +264,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if (survey.patient_id === patient.pid) {
                     merge_obj.surveys.push(survey);
 
-                    patient.stays.forEach(function(stay, my_stay_index) {
+                    stays.forEach(function(stay, my_stay_index) {
                         if (survey.stay_id === stay.id) {
                             merge_obj.stays.surveys.push(stay);
                         };
