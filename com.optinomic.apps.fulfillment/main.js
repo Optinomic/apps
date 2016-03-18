@@ -140,6 +140,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 aEvents.then(function(events_data) {
                     var my_events = events_data.events;
                     patient.data.events = my_events;
+
+                    var module_events = [];
+                    my_events.forEach(function(event, my_event_index) {
+                        // Save Survey
+                        if (event.data.module === $scope.d.appInit.app_id) {
+                            module_events.push(event);
+                        };
+
+                    });
+                    patient.data.module_events = module_events;
+
                 });
 
 
@@ -245,16 +256,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         patients.forEach(function(patient, my_patient_index) {
 
             var stays = patient.stays;
-
-            var events = patient.events;
-            var module_events = [];
-            events.forEach(function(event, my_event_index) {
-                // Save Survey
-                if (event.data.module === $scope.d.appInit.app_id) {
-                    module_events.push(event);
-                };
-
-            });
+            var module_events = patient.module_events;
 
             var merge_obj = {
                 patient: patient,
@@ -269,6 +271,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     merge_obj.surveys.push(survey);
                 };
 
+            });
+
+
+
+            stays.forEach(function(stay, my_stay_index) {
+                stay.surveys = [];
+                merge_obj.surveys.forEach(function(survey, my_survey_index) {
+                    // Save Survey
+                    if (survey.patient_id === patient.pid) {
+                        merge_obj.surveys.push(survey);
+                    };
+
+                });
             });
 
 
