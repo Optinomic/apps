@@ -57,6 +57,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "survey_responses": survey_responses
         };
 
+        $scope.d.appInit = init;
         return init;
     };
 
@@ -78,12 +79,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-
-            // Remove later
-            $scope.getAppResponses($scope.d.appInit.app_id);
-
             // Run Functions:
-
             var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
             dataPromiseFulfillment.then(function(data_fulfill) {
                 // When we have the data
@@ -91,9 +87,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 console.log('========== dataPromiseFulfillment ==========', data_fulfill);
 
                 $scope.d.data_fulfill = data_fulfill;
-
-
-
 
             });
 
