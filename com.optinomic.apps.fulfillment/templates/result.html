@@ -7,7 +7,7 @@
             <div ng-repeat="survey in stay.surveys">
                 <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}}</p>
                 <pre>{{survey.response | json}}</pre>
-                <div ng-repeat="event in result.patient.events">
+                <div ng-repeat="event in result.events">
                     <div ng-if="event.id === survey.event_id">
                         <p>Event: {{survey.event_id}}</p>
                         <pre>{{event.data | json}}</pre>
