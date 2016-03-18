@@ -108,7 +108,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.getPatientList = function() {
 
-        console.log('(!) - getPatientList: START', $scope.d.appInit);
+        //console.log('(!) - getPatientList: START', $scope.d.appInit);
 
         var api = dataService.getPatientList($scope.d.appInit.patientListFilter);
 
@@ -125,9 +125,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var api_call = dataService.getStays(patient.id);
                 var aStays = dataService.getData(api_call);
                 aStays.then(function(stays_data) {
-                    patient.data.stays = stays_data
+                    var my_stays = stays_data.stays;
+                    // Loop Stays and enhance with 'Extras'
+                    my_stays.forEach(function(my_stay, myindex) {
+                        my_stay = dataService.createStayExtras(patient.id, my_stay);
+                    });
+                    patient.data.stays = my_stays;
                 });
-
 
                 returned_patients.push(patient.data);
             });
@@ -148,15 +152,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             };
 
-            console.log('(!) - getPatientList: ', $scope.d.appInit.patientList);
+            // console.log('(!) - getPatientList: ', $scope.d.appInit.patientList);
 
         });
 
         api.error(function(data) {
             console.log('-- getPatientList Error:', error);
         });
-
-
     };
 
 
@@ -187,8 +189,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api = dataService.runSQL(app_query, sql.delimitter, sql.including_headers, sql.format, sql.direct);
 
         api.success(function(data) {
-
-            console.log('(!!) getSurveyResponses', data);
 
             // Loop Patients and enhance with 'Extras'
             var returned_survey_responses = [];
@@ -257,6 +257,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             results: returned_fulfillment,
             have_data: true
         };
+
+
+        console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
 
     };
 
