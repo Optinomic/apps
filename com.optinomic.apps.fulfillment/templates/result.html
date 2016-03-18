@@ -1,9 +1,12 @@
 <h3 class="md-headline">Erfüllungsgrad</h3>
 <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
-    <h2 class="md-subhead">{{result.patient.extras.name}} ({{result.patient.extras.birthday_age}})</h2>
+    <h2 class="md-subhead">{{result.patient.data.extras.name}} ({{result.patient.data.extras.birthday_age}})</h2>
     <div ng-if="result.surveys.length !== 0">
-        <div ng-repeat="survey in result.surveys">
-            <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i> {{survey.filled}} | {{survey.patient_id}} | {{survey.stay_id}} | {{survey.event_id}}</p>
+        <div ng-repeat="stay in result.stays">
+            <p class="md-body-1">{{stay.from_to}} ({{stay.id}})</p>
+            <div ng-repeat="survey in stay.surveys">
+                <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}} | {{survey.event_id}}</p>
+            </div>
             <pre>{{survey.response | json}}</pre>
         </div>
     </div>
