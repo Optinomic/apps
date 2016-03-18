@@ -119,6 +119,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             data.patients.forEach(function(patient, myindex) {
                 patient.data.pid = patient.id;
                 patient.data = dataService.createPatientExtras(patient.data);
+
+                // Get all stays from patient
+                patient.data.stays = [];
+                api_call = dataService.getStays(patient.id);
+                var aStays = dataService.getData(api_call);
+                aStays.then(function(stays_data) {
+                    patient.data.stays = stays_data
+                });
+
+
                 returned_patients.push(patient.data);
             });
 
