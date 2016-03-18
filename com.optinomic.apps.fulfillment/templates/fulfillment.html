@@ -6,12 +6,12 @@ include(../lib/html/optinomic/page/start.m4)
                 include(templates/selector_application.html)
             </md-content>
         </md-tab>
-        <md-tab label="Patienten ({{d.appInit.patientList.data.length}})">
+        <md-tab label="Patienten ({{d.appInit.promise.patients.length}})">
             <md-content class="md-padding">
                 include(templates/selector_patient_list.html)
             </md-content>
         </md-tab>
-        <md-tab label="Ergebnis" ng-if="d.appInit.patientList.have_data">
+        <md-tab label="Ergebnis">
             <md-content class="md-padding">
                 include(templates/result.html)
             </md-content>
