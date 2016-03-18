@@ -245,11 +245,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         patients.forEach(function(patient, my_patient_index) {
 
             var stays = patient.stays;
+
             var events = patient.events;
+            var module_events = [];
+            events.forEach(function(event, my_event_index) {
+                // Save Survey
+                if (event.data.module === $scope.d.appInit.app_id) {
+                    module_events.push(event);
+                };
+
+            });
 
             var merge_obj = {
                 patient: patient,
                 stays: stays,
+                events: module_events,
                 surveys: []
             };
 
