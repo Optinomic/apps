@@ -136,7 +136,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 merge_obj.surveys.forEach(function(survey, my_survey_index) {
                     //console.log('--> stay/survey', my_stay, survey);
                     if (my_stay.id === survey.stay_id) {
-                        merge_obj.surveys.push(survey);
+                        my_stay.surveys.push(survey);
                         console.log('==> survey pushed to stay', survey);
                     };
                 });
