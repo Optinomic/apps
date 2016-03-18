@@ -1,21 +1,23 @@
 include(../lib/html/optinomic/page/start.m4)
-<md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Applikation">
-            <md-content class="md-padding">
-                include(templates/selector_application.html)
-            </md-content>
-        </md-tab>
-        <md-tab label="Patienten ({{d.appInit.promise.patients.length}})">
-            <md-content class="md-padding">
-                include(templates/selector_patient_list.html)
-            </md-content>
-        </md-tab>
-        <md-tab label="Ergebnis">
-            <md-content class="md-padding">
-                include(templates/result.html)
-            </md-content>
-        </md-tab>
-    </md-tabs>
-</md-content>
+<div style="margin-top: 12px;">
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Applikation">
+                <md-content class="md-padding">
+                    include(templates/selector_application.html)
+                </md-content>
+            </md-tab>
+            <md-tab label="Patienten ({{d.appInit.promise.patients.length}})">
+                <md-content class="md-padding">
+                    include(templates/selector_patient_list.html)
+                </md-content>
+            </md-tab>
+            <md-tab label="Ergebnis">
+                <md-content class="md-padding">
+                    include(templates/result.html)
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
 include(../lib/html/optinomic/page/end.m4)
