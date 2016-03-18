@@ -121,29 +121,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 surveys: []
             };
 
+            // Save all Surveys per Patient
             surveys.forEach(function(my_survey, my_survey_index) {
-                // Save Survey 
                 //console.log('--> survey', patient.id, my_survey.patient_id);
                 if (my_survey.patient_id === patient.id) {
                     merge_obj.surveys.push(my_survey);
                     console.log('==> survey pushed', my_survey);
                 };
-
             });
 
+            // Save Survey per stay
             stays.forEach(function(my_stay, my_stay_index) {
-
                 my_stay.surveys = [];
                 merge_obj.surveys.forEach(function(survey, my_survey_index) {
-                    // Save Survey
                     //console.log('--> stay/survey', my_stay, survey);
-
                     if (my_stay.id === survey.stay_id) {
                         merge_obj.surveys.push(survey);
                         console.log('==> survey pushed to stay', survey);
-
                     };
-
                 });
             });
 
@@ -158,7 +153,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             results: returned_fulfillment,
             have_data: true
         };
-
 
         console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
     };
