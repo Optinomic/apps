@@ -18,5 +18,9 @@
     </div>
     <div ng-if="result.surveys.length === 0">
         <p class="md-caption" style="color:#9E9E9E"><i class="mdi mdi-help" style="color:#F44336"></i> Es liegt keine Erfassung für das selektierte Modul ({{d.appInit.app_id}}) vor.</p>
+        <div ng-if="result.events.length !== 0" ng-repeat="event in result.events" layout-margin>
+            <p class="md-body-1">Alle Tasks:</p>
+            <pre>{{event.data | json}}</pre>
+        </div>
     </div>
 </div>
