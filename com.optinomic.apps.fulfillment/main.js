@@ -71,13 +71,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Run Functions:
             $scope.getFulfillment();
 
-            // $scope.getPatientList();
-
             // Init - Data Export
             // $scope.setExport();
-
-            // Run Public-Functions:
-            // $scope.d.functions.getAllCalculations();
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -101,8 +96,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.haveData = true;
             console.log('(✓) PromiseFulfillment', data_fulfill);
             $scope.d.appInit.promise = data_fulfill;
-            $scope.getFulfillment();
-
 
 
             var patients = $scope.d.appInit.promise.patients;
@@ -128,7 +121,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     //console.log('--> survey', patient.id, my_survey.patient_id);
                     if (my_survey.patient_id === patient.id) {
                         merge_obj.surveys.push(my_survey);
-                        console.log('==> survey pushed', my_survey);
+                        //console.log('==> survey pushed', my_survey);
                     };
                 });
 
@@ -139,7 +132,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         //console.log('--> stay/survey', my_stay, survey);
                         if (my_stay.id === survey.stay_id) {
                             my_stay.surveys.push(survey);
-                            console.log('==> survey pushed to stay', survey);
+                            // console.log('==> survey pushed to stay', survey);
                         };
                     });
                 });
