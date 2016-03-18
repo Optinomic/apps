@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         sql.format = 'json';
         sql.direct = 'True';
 
-        console.log('(!) getSurveyResponses', sql);
+        //console.log('(!) getSurveyResponses', sql);
 
 
         // Get all 'response' fields
@@ -236,13 +236,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var merge_obj = {
                 patient: patient,
+                stays: patient.stays,
                 surveys: []
             };
+
+            merge_obj.stays.surveys = [];
 
             surveys.forEach(function(survey, my_survey_index) {
                 // Save Survey
                 if (survey.patient_id === patient.pid) {
                     merge_obj.surveys.push(survey);
+
+                    patient.stays.forEach(function(stay, my_stay_index) {
+                        if (survey.stay_id === stay.id) {
+                            merge_obj.stays.surveys.push(stay);
+                        };
+                    });
+
                 };
 
             });
