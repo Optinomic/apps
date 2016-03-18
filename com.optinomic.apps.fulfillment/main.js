@@ -84,9 +84,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             dataPromiseFulfillment.then(function(data_fulfill) {
                 // When we have the data
                 $scope.d.haveData = true;
-                console.log('========== dataPromiseFulfillment ==========', data_fulfill);
+                console.log('(✓) PromiseFulfillment', data_fulfill);
 
                 $scope.d.data_fulfill = data_fulfill;
+                $scope.getFulfillment();
 
             });
 
@@ -109,164 +110,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-    // ------------------------
-    // Get Patients to check
-    // ------------------------
-    $scope.getPatientList = function() {
-
-        //console.log('(!) - getPatientList: START', $scope.d.appInit);
-
-        var api = dataService.getPatientList($scope.d.appInit.patientListFilter);
-
-        api.success(function(data) {
-
-
-            // Loop Patients and enhance with 'Extras'
-            var returned_patients = [];
-            data.patients.forEach(function(patient, myindex) {
-                patient.data.pid = patient.id;
-                patient.data = dataService.createPatientExtras(patient.data);
-
-                // Get all stays from patient
-                patient.data.stays = [];
-                var api_call = dataService.getStays(patient.id);
-                var aStays = dataService.getData(api_call);
-                aStays.then(function(stays_data) {
-                    var my_stays = stays_data.stays;
-                    // Loop Stays and enhance with 'Extras'
-                    my_stays.forEach(function(my_stay, myindex) {
-                        my_stay = dataService.createStayExtras(patient.id, my_stay);
-                    });
-                    patient.data.stays = my_stays;
-                });
-
-                // Get all events from patient
-                patient.data.events = [];
-                var api_call = dataService.getPatientEvents(patient.id);
-                var aEvents = dataService.getData(api_call);
-                aEvents.then(function(events_data) {
-                    var my_events = events_data.events;
-                    patient.data.events = my_events;
-
-                    var module_events = [];
-                    my_events.forEach(function(event, my_event_index) {
-                        // Save Survey
-                        if (event.data.module === $scope.d.appInit.app_id) {
-                            module_events.push(event);
-                        };
-
-                    });
-                    patient.data.module_events = module_events;
-                });
-
-
-                returned_patients.push(patient.data);
-            });
-
-            if (returned_patients.length > 0) {
-                $scope.d.appInit.patientList = {
-                    data: returned_patients,
-                    have_data: true
-                };
-
-                // Now we have patients - get survey responses
-                $scope.getAppResponses($scope.d.appInit.app_id);
-
-            } else {
-                $scope.d.appInit.patientList = {
-                    data: [],
-                    have_data: false
-                };
-            };
-
-            // console.log('(!) - getPatientList: ', $scope.d.appInit.patientList);
-
-        });
-
-        api.error(function(data) {
-            console.log('-- getPatientList Error:', error);
-        });
-    };
-
-
-    // ------------------------
-    // Get App - ResponseData
-    // ------------------------
-    $scope.getAppResponses = function(app_id) {
-
-        // Init
-        app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
-
-        // Querys
-        var app_query = include_as_js_string(
-            responses.sql);
-
-
-        console.log('app_query', app_query);
-
-        app_query = app_query.replace("%module_id%", app_id);
-
-        var sql = {};
-        sql.delimitter = ';';
-        sql.including_headers = 'True';
-        sql.format = 'json';
-        sql.direct = 'True';
-
-        //console.log('(!) getSurveyResponses', sql);
-
-
-        // Get all 'response' fields
-        var api = dataService.runSQL(app_query, sql.delimitter, sql.including_headers, sql.format, sql.direct);
-
-        api.success(function(data) {
-
-            // Loop Patients and enhance with 'Extras'
-            var returned_survey_responses = [];
-            data.rows.forEach(function(response, myindex) {
-                response.event_id = parseInt(response.event_id);
-                response.patient_id = parseInt(response.patient_id);
-                response.stay_id = parseInt(response.stay_id);
-                response.response = JSON.parse(response.response);
-
-                returned_survey_responses.push(response);
-            });
-
-            $scope.d.appInit.survey_responses = {
-                data: returned_survey_responses,
-                headers: data.headers,
-                have_data: true
-            };
-
-            // we have patients & surveys - get Fulfillment
-            $scope.getFulfillment();
-
-        });
-
-        api.error(function(data) {
-
-            var text = '(!) Error in SQL (getSurveyResponses)'
-            console.log(text, data);
-            // $scope.d.functions.showSimpleToast(text)
-        });
-    };
-
-
     // ------------------------
     // Merge Patients / Survey
     // ------------------------
     $scope.getFulfillment = function() {
 
-        var patients = $scope.d.appInit.patientList.data;
-        var surveys = $scope.d.appInit.survey_responses.data;
+        var patients = $scope.d.data_fulfill.patients;
+        var surveys = $scope.d.data_fulfill.survey_responses;
 
 
         var returned_fulfillment = [];
 
         patients.forEach(function(patient, my_patient_index) {
 
-            var stays = patient.stays;
-            var module_events = patient.module_events;
+            var stays = patient.data.stays;
+            var module_events = patient.data.events.current_module;
 
             var merge_obj = {
                 patient: patient,
