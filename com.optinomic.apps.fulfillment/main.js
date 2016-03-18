@@ -121,11 +121,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 surveys: []
             };
 
-            surveys.forEach(function(survey, my_survey_index) {
+            surveys.forEach(function(my_survey, my_survey_index) {
                 // Save Survey
-                console.log('--> survey', patient.id, survey.patient_id);
-                if (survey.patient_id === patient.pid) {
-                    merge_obj.surveys.push(survey);
+                console.log('--> survey', patient.id, my_survey.patient_id);
+                if (my_survey.patient_id === patient.pid) {
+                    merge_obj.surveys.push(my_survey);
                 };
 
             });
