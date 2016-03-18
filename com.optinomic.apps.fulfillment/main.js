@@ -133,6 +133,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     patient.data.stays = my_stays;
                 });
 
+                // Get all events from patient
+                patient.data.stays = [];
+                var api_call = dataService.getPatientEvents(patient.id);
+                var aEvents = dataService.getData(api_call);
+                aEvents.then(function(events_data) {
+                    var my_events = events_data;
+                    patient.data.events = my_events;
+                });
+
+
                 returned_patients.push(patient.data);
             });
 
