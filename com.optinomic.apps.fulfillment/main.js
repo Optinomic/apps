@@ -69,16 +69,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
 
             // Run Functions:
-            var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
-            dataPromiseFulfillment.then(function(data_fulfill) {
-                // When we have the data
-                $scope.d.haveData = true;
-                console.log('(✓) PromiseFulfillment', data_fulfill);
-                $scope.d.appInit.promise = data_fulfill;
-                $scope.getFulfillment();
-
-            });
-
+            $scope.getFulfillment();
 
             // $scope.getPatientList();
 
@@ -103,58 +94,74 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.getFulfillment = function() {
 
-        var patients = $scope.d.appInit.promise.patients;
-        var surveys = $scope.d.appInit.promise.survey_responses;
+
+        var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
+        dataPromiseFulfillment.then(function(data_fulfill) {
+            // When we have the data
+            $scope.d.haveData = true;
+            console.log('(✓) PromiseFulfillment', data_fulfill);
+            $scope.d.appInit.promise = data_fulfill;
+            $scope.getFulfillment();
 
 
-        var returned_fulfillment = [];
 
-        patients.forEach(function(patient, my_patient_index) {
+            var patients = $scope.d.appInit.promise.patients;
+            var surveys = $scope.d.appInit.promise.survey_responses;
 
-            var stays = patient.data.stays;
-            var module_events = patient.data.events.current_module;
 
-            var merge_obj = {
-                patient: patient,
-                stays: stays,
-                events: module_events,
-                surveys: []
-            };
+            var returned_fulfillment = [];
 
-            // Save all Surveys per Patient
-            surveys.forEach(function(my_survey, my_survey_index) {
-                //console.log('--> survey', patient.id, my_survey.patient_id);
-                if (my_survey.patient_id === patient.id) {
-                    merge_obj.surveys.push(my_survey);
-                    console.log('==> survey pushed', my_survey);
+            patients.forEach(function(patient, my_patient_index) {
+
+                var stays = patient.data.stays;
+                var module_events = patient.data.events.current_module;
+
+                var merge_obj = {
+                    patient: patient,
+                    stays: stays,
+                    events: module_events,
+                    surveys: []
                 };
-            });
 
-            // Save Survey per stay
-            stays.forEach(function(my_stay, my_stay_index) {
-                my_stay.surveys = [];
-                merge_obj.surveys.forEach(function(survey, my_survey_index) {
-                    //console.log('--> stay/survey', my_stay, survey);
-                    if (my_stay.id === survey.stay_id) {
-                        my_stay.surveys.push(survey);
-                        console.log('==> survey pushed to stay', survey);
+                // Save all Surveys per Patient
+                surveys.forEach(function(my_survey, my_survey_index) {
+                    //console.log('--> survey', patient.id, my_survey.patient_id);
+                    if (my_survey.patient_id === patient.id) {
+                        merge_obj.surveys.push(my_survey);
+                        console.log('==> survey pushed', my_survey);
                     };
                 });
+
+                // Save Survey per stay
+                stays.forEach(function(my_stay, my_stay_index) {
+                    my_stay.surveys = [];
+                    merge_obj.surveys.forEach(function(survey, my_survey_index) {
+                        //console.log('--> stay/survey', my_stay, survey);
+                        if (my_stay.id === survey.stay_id) {
+                            my_stay.surveys.push(survey);
+                            console.log('==> survey pushed to stay', survey);
+                        };
+                    });
+                });
+
+
+                returned_fulfillment.push(merge_obj);
+
             });
 
 
-            returned_fulfillment.push(merge_obj);
+            // Save Data to $scope
+            $scope.d.appInit.fulfillment = {
+                results: returned_fulfillment,
+                have_data: true
+            };
+
+            console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
+
 
         });
 
 
-        // Save Data to $scope
-        $scope.d.appInit.fulfillment = {
-            results: returned_fulfillment,
-            have_data: true
-        };
-
-        console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
     };
 
 
