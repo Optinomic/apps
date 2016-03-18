@@ -58,7 +58,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         return init;
-
     };
 
 
@@ -79,10 +78,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-            // We always have data
-            $scope.d.haveData = true;
+
 
             // Run Functions:
+
+            var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
+            dataPromiseFulfillment.then(function(data_fulfill) {
+                // When we have the data
+                $scope.d.haveData = true;
+
+            });
+
 
             $scope.getPatientList();
 
@@ -113,6 +119,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api = dataService.getPatientList($scope.d.appInit.patientListFilter);
 
         api.success(function(data) {
+
 
             // Loop Patients and enhance with 'Extras'
             var returned_patients = [];
@@ -150,7 +157,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     });
                     patient.data.module_events = module_events;
-
                 });
 
 
@@ -272,8 +278,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
             });
-
-
 
             stays.forEach(function(stay, my_stay_index) {
                 stay.surveys = [];
