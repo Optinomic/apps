@@ -253,11 +253,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var merge_obj = {
                 patient: patient,
                 stays: stays,
-                events: events,
                 surveys: []
             };
-
-            merge_obj.stays.surveys = [];
 
             surveys.forEach(function(survey, my_survey_index) {
                 // Save Survey
@@ -265,8 +262,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     merge_obj.surveys.push(survey);
 
                     stays.forEach(function(stay, my_stay_index) {
+                        stay.surveys = [];
                         if (survey.stay_id === stay.id) {
-                            merge_obj.stays.surveys.push(stay);
+                            stay.surveys.push(stay);
                         };
                     });
 
@@ -287,7 +285,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
-
     };
 
 
