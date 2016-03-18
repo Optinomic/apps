@@ -88,6 +88,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.haveData = true;
                 console.log('========== dataPromiseFulfillment ==========', data_fulfill);
 
+                $scope.d.data_fulfill = data_fulfill;
+
             });
 
 
