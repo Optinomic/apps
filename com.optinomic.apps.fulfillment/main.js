@@ -247,9 +247,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var stays = patient.stays;
             var events = patient.events;
 
-            stays.surveys = [];
-
-
             var merge_obj = {
                 patient: patient,
                 stays: stays,
@@ -264,8 +261,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 stays.forEach(function(stay, my_stay_index) {
+
+                    console.log('-->', survey.stay_id, stay.id, survey, stay);
+
                     stay.surveys = [];
                     if (survey.stay_id === stay.id) {
+                        console.log('==> ', survey.stay_id, stay.id, survey, stay);
+
                         stay.surveys.push(survey);
                     };
                 });
