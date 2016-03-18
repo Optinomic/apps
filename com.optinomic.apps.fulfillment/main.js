@@ -91,7 +91,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             });
 
 
-            $scope.getPatientList();
+            // $scope.getPatientList();
 
             // Init - Data Export
             // $scope.setExport();
