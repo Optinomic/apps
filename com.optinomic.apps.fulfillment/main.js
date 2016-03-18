@@ -204,6 +204,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var app_query = include_as_js_string(
             responses.sql);
 
+
+        console.log('app_query', app_query);
+
         app_query = app_query.replace("%module_id%", app_id);
 
         var sql = {};
