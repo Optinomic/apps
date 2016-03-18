@@ -127,22 +127,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if (my_survey.patient_id === patient.pid) {
                     merge_obj.surveys.push(my_survey);
                     console.log('==> survey pushed', my_survey);
-
                 };
 
             });
 
-            stays.forEach(function(stay, my_stay_index) {
-                console.log('--> stay', patient.pid, survey.patient_id);
+            stays.forEach(function(my_stay, my_stay_index) {
 
                 stay.surveys = [];
-                //merge_obj.surveys.forEach(function(survey, my_survey_index) {
-                //    // Save Survey
-                //    if (survey.patient_id === patient.id) {
-                //        merge_obj.surveys.push(survey);
-                //    };
-                //
-                //});
+                merge_obj.surveys.forEach(function(survey, my_survey_index) {
+                    // Save Survey
+                    console.log('--> stay/survey', my_stay, survey);
+
+                    //if (survey.patient_id === patient.id) {
+                    //    merge_obj.surveys.push(survey);
+                    //    console.log('==> survey pushed to stay', my_survey);
+                    //
+                    //};
+
+                });
             });
 
 
