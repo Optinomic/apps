@@ -5,8 +5,14 @@
         <div ng-repeat="stay in result.stays">
             <p class="md-body-1">{{stay.from_to}} ({{stay.id}})</p>
             <div ng-repeat="survey in stay.surveys">
-                <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}} | {{survey.event_id}}</p>
+                <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}}</p>
                 <pre>{{survey.response | json}}</pre>
+                <div ng-repeat="event in result.patient.events">
+                    <div ng-if="event.id === survey.event_id">
+                        <p>Event: {{survey.event_id}}</p>
+                        <pre>{{event.data | json}}</pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
