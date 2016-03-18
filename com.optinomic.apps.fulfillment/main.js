@@ -250,30 +250,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var merge_obj = {
                 patient: patient,
                 stays: stays,
-                surveys: [],
-                events: events
+                surveys: []
             };
 
-
-            stays.forEach(function(stay, my_stay_index) {
-                stay.surveys = [];
-
-
-                surveys.forEach(function(survey, my_survey_index) {
-                    // Save Survey
-                    if (survey.patient_id === patient.pid) {
-                        merge_obj.surveys.push(survey);
-                    };
-
-                    console.log('-->', patient.pid, stay.id, survey.stay_id);
-
-                    if (survey.stay_id === stay.id) {
-                        console.log('==> ', survey.stay_id, stay.id, survey, stay);
-
-                        stay.surveys.push(survey);
-                    };
-
-                });
+            surveys.forEach(function(survey, my_survey_index) {
+                // Save Survey
+                if (survey.patient_id === patient.pid) {
+                    merge_obj.surveys.push(survey);
+                };
 
             });
 
