@@ -135,6 +135,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             surveys.forEach(function(survey, my_survey_index) {
                 // Save Survey
+                console.log('--> survey', patient.id, survey.patient_id);
                 if (survey.patient_id === patient.pid) {
                     merge_obj.surveys.push(survey);
                 };
@@ -142,10 +143,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             });
 
             stays.forEach(function(stay, my_stay_index) {
+                console.log('--> stay', patient.pid, survey.patient_id);
+
                 stay.surveys = [];
                 merge_obj.surveys.forEach(function(survey, my_survey_index) {
                     // Save Survey
-                    if (survey.patient_id === patient.pid) {
+                    if (survey.patient_id === patient.id) {
                         merge_obj.surveys.push(survey);
                     };
 
