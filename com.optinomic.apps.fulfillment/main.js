@@ -133,7 +133,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             stays.forEach(function(my_stay, my_stay_index) {
 
-                stay.surveys = [];
+                my_stay.surveys = [];
                 merge_obj.surveys.forEach(function(survey, my_survey_index) {
                     // Save Survey
                     console.log('--> stay/survey', my_stay, survey);
