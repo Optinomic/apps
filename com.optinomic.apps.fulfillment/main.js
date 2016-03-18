@@ -260,17 +260,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Save Survey
                 if (survey.patient_id === patient.pid) {
                     merge_obj.surveys.push(survey);
-
-                    stays.forEach(function(stay, my_stay_index) {
-                        stay.surveys = [];
-                        if (survey.stay_id === stay.id) {
-                            stay.surveys.push(stay);
-                        };
-                    });
-
                 };
 
+
+                stays.forEach(function(stay, my_stay_index) {
+                    stay.surveys = [];
+                    if (survey.stay_id === stay.id) {
+                        stay.surveys.push(survey);
+                    };
+                });
+
             });
+
 
             returned_fulfillment.push(merge_obj);
 
