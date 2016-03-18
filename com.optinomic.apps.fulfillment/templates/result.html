@@ -6,8 +6,8 @@
             <p class="md-body-1">{{stay.from_to}} ({{stay.id}})</p>
             <div ng-repeat="survey in stay.surveys">
                 <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}} | {{survey.event_id}}</p>
+                <pre>{{survey.response | json}}</pre>
             </div>
-            <pre>{{survey.response | json}}</pre>
         </div>
     </div>
     <div ng-if="result.surveys.length === 0">
