@@ -32,16 +32,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             stay_stop_after: null
         };
 
-        var patientList = {
-            data: [],
-            have_data: false
-        };
-
-        var survey_responses = {
-            data: {},
-            headers: {},
-            have_data: false
-        };
 
         var fulfillment = {
             results: [],
@@ -53,8 +43,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "app_id": app_id,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
-            "patientList": patientList,
-            "survey_responses": survey_responses
+            "promise": {}
         };
 
         $scope.d.appInit = init;
@@ -85,8 +74,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // When we have the data
                 $scope.d.haveData = true;
                 console.log('(✓) PromiseFulfillment', data_fulfill);
-
-                $scope.d.data_fulfill = data_fulfill;
+                $scope.d.appInit.promise = data_fulfill;
                 $scope.getFulfillment();
 
             });
@@ -115,8 +103,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.getFulfillment = function() {
 
-        var patients = $scope.d.data_fulfill.patients;
-        var surveys = $scope.d.data_fulfill.survey_responses;
+        var patients = $scope.d.appInit.promise.patients;
+        var surveys = $scope.d.appInit.promise.survey_responses;
 
 
         var returned_fulfillment = [];
