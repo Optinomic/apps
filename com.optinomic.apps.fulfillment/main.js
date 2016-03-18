@@ -79,6 +79,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
 
 
+            // Remove later
+            $scope.getAppResponses($scope.d.appInit.app_id);
 
             // Run Functions:
 
@@ -89,6 +91,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 console.log('========== dataPromiseFulfillment ==========', data_fulfill);
 
                 $scope.d.data_fulfill = data_fulfill;
+
+
+
 
             });
 
