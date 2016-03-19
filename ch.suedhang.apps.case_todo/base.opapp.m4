@@ -63,7 +63,7 @@ host = default
 include(survey_markups/my_ng_survey.html)
 
 
-[event]
+[event activation]
 type = on_activation
 due_after = 259200
 overdue = ignore
@@ -80,5 +80,3 @@ include(emails/overdue.html)
 
 [calculation case_score javascript]
 include(calculations/case_score.js)
-
-

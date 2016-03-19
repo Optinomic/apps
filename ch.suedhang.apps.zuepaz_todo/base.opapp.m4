@@ -44,7 +44,7 @@ fid = X45X1112
 min_questions =
 min_lastpage = 4
 
-[event]
+[event exit]
 type = before_exit
 days = 7
 time = 07:00
@@ -61,5 +61,3 @@ include(emails/overdue.html)
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
-
-

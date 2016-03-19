@@ -59,7 +59,7 @@ min_lastpage = 2
 [survey_markup my_ng_survey]
 include(survey_markups/my_ng_survey.html)
 
-[event]
+[event activation]
 type = on_activation
 time = 12:00
 due_after = 259200
@@ -67,7 +67,7 @@ overdue = ignore
 description = Einschätzung der aktuellen Abstinenzzuversicht
 survey = aase
 
-[event]
+[event exit]
 type = before_exit
 days = 3
 time = 12:00

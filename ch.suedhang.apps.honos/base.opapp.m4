@@ -90,7 +90,7 @@ min_lastpage = 2
 
 
 
-[event]
+[event activation]
 type = on_activation
 due_after = 259200
 overdue = ignore
@@ -106,5 +106,3 @@ include(emails/overdue.html)
 
 [calculation honos_calculation javascript]
 include(calculations/honos.js)
-
-

@@ -51,7 +51,7 @@ min_questions =
 min_lastpage = 2
 
 
-[event]
+[event activation]
 type = on_activation
 due_after = 86400
 overdue = ignore
@@ -69,5 +69,3 @@ include(emails/overdue.html)
 
 [calculation phys_psych_calculation javascript]
 include(calculations/phys_psych_calculation.js)
-
-

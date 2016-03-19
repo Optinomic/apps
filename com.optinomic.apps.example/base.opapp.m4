@@ -66,7 +66,7 @@ host = default
 
 include(survey_markups/my_ng_survey.html)
 
-[event]
+[event daily]
 
 type = daily
 time = 13:00

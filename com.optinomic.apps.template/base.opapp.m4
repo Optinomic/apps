@@ -78,7 +78,7 @@ host = default
 include(survey_markups/my_ng_survey.html)
 
 
-[event]
+[event daily]
 type = daily
 time = 19:00
 due_after = 86400
@@ -96,5 +96,3 @@ include(emails/overdue.html)
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
-
-

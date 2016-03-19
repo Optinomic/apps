@@ -50,7 +50,7 @@ fid = X20X259
 min_questions =
 min_lastpage = 2
 
-[event]
+[event activation]
 type = on_activation
 due_after = 259200
 overdue = ignore
@@ -60,5 +60,3 @@ survey = SCI
 
 [calculation scores javascript]
 include(calculations/scores.js)
-
-

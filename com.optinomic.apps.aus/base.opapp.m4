@@ -1,7 +1,7 @@
 [module]
 id = com.optinomic.apps.aus
 name = Autoritarismusskala (AUS)
-short_description = Den Glauben an Autoritäten und die Neigung zu autoritärer Unterordnung erfassen. 
+short_description = Den Glauben an Autoritäten und die Neigung zu autoritärer Unterordnung erfassen.
 version = include(VERSION)
 type = patient
 
@@ -49,7 +49,7 @@ host = default
 [survey_markup aus_survey]
 include(survey_markups/aus_survey.html)
 
-[event]
+[event activation]
 type = on_activation
 time = 08:00
 due_after = 86400
@@ -67,5 +67,3 @@ include(emails/overdue.html)
 
 [calculation aus_calculation javascript]
 include(calculations/aus.js)
-
-

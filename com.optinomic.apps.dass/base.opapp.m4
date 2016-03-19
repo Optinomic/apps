@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Im neuen Schmerzfragebogen der Deutschen Schmerzgesellschaft (früher: DGSS) ist der DASS als Depressionstest enthalten (Lovibond & Lovibond, 1995; Nilges, & Essau, 2015) Das Verfahren enthält 21 Fragen, mit jeweils 7 Items werden Depressivität sowie Angst und zusätzlich mit einer dritten, ebenfalls aus sieben Items bestehenden Skala Stressbelastung erfasst. Der Fragebogen ist in mehr als 25 Sprachen übersetzt und ist lizenzfrei verwendbar (public domain). 
+Im neuen Schmerzfragebogen der Deutschen Schmerzgesellschaft (früher: DGSS) ist der DASS als Depressionstest enthalten (Lovibond & Lovibond, 1995; Nilges, & Essau, 2015) Das Verfahren enthält 21 Fragen, mit jeweils 7 Items werden Depressivität sowie Angst und zusätzlich mit einer dritten, ebenfalls aus sieben Items bestehenden Skala Stressbelastung erfasst. Der Fragebogen ist in mehr als 25 Sprachen übersetzt und ist lizenzfrei verwendbar (public domain).
 
 [developer]
 first_name = Beat
@@ -50,7 +50,7 @@ host = default
 [survey_markup dass_survey]
 include(survey_markups/dass_survey.html)
 
-[event]
+[event activation]
 type = on_activation
 time = 08:00
 due_after = 86400
@@ -68,5 +68,3 @@ include(emails/overdue.html)
 
 [calculation dass_calculation javascript]
 include(calculations/dass.js)
-
-

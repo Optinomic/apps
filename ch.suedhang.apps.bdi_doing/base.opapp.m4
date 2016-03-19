@@ -50,12 +50,12 @@ min_questions =
 min_lastpage = 2
 
 
-[event]
+[event activation]
 type = on_activation
 time = 12:00
 due_after = 259200
 overdue = ignore
-description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen 
+description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
 survey = daily_mood
 
 
@@ -68,4 +68,3 @@ include(emails/overdue.html)
 
 [calculation BDI_score javascript]
 include(calculations/BDI_score.js)
-
