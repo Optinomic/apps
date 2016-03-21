@@ -1,5 +1,17 @@
-<h3 class="md-headline">Details</h3>
+<h3 class="md-headline">Erffassungs - Details</h3>
 <p class="md-subhead" style="color:#3F51B5">Patient</p>
 <pre>
-	{{d.details | json}}
+	{{d.details.patient | json}}
+</pre>
+<p class="md-subhead" style="color:#3F51B5">Fall</p>
+<pre>
+	{{d.details.stay | json}}
+</pre>
+<p class="md-subhead" style="color:#3F51B5">Event / Task</p>
+<pre>
+	{{d.details.event | json}}
+</pre>
+<p class="md-subhead" style="color:#3F51B5">Antworten / Survey-Response</p>
+<pre>
+	{{d.details.response | json}}
 </pre>

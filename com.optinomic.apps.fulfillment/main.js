@@ -213,6 +213,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
+
+        // API - GET Patien-Details
+        var patient_call = dataService.getPatient(patient_id);
+        patient_call.success(function(data) {
+            console.log('patient_call = ', data)
+            $scope.d.details.patient.data = data;
+        });
+        patient_call.error(function(data) {
+            console.log('Error: patient_call = ', data)
+        });
+
+
+
+
+
         console.log('showDetails:', $scope.d.details);
 
 
