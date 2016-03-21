@@ -184,6 +184,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.showDetails = function(result_obj, patient_id, stay_id, event_id, response_id) {
 
+        result_obj = result_obj === undefined ? {} : result_obj;
+        patient_id = patient_id === undefined ? 0 : patient_id;
+        stay_id = stay_id === undefined ? 0 : stay_id;
+        event_id = event_id === undefined ? 0 : event_id;
+        response_id = response_id === undefined ? 0 : response_id;
+
 
         var patient_object = {
             "patient_id": patient_id,
@@ -197,12 +203,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var event_object = {
             "event_id": event_id,
-            "event": {}
+            "data": {}
         }
 
         var response_object = {
             "response_id": response_id,
-            "event": {}
+            "data": {}
         }
 
         $scope.d.details = {
@@ -227,20 +233,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
 
-        // API - GET Stay-Details
-        var stays_call = dataService.getPatientStays(patient_id);
-        stays_call.success(function(data) {
-            //console.log('stays_call = ', data)
-            data.stays.forEach(function(stay, myindex) {
-                if (stay.id === stay_id) {
-                    $scope.d.details.stay.data = stay;
-                };
-            });
-        });
-        stays_call.error(function(data) {
-            console.log('Error: stays_call = ', data)
+        // Stay-Details
+        result_obj.stays.forEach(function(stay, myindex) {
+            if (stay.id === stay_id) {
+                $scope.d.details.stay.data = stay;
+            };
         });
 
+        // event-Details
+        result_obj.events.forEach(function(event, myindex) {
+            if (event.id === event_id) {
+                $scope.d.details.stay.data = event;
+            };
+        });
+
+        // surveys-Details
+        result_obj.surveys.forEach(function(survey, myindex) {
+            if (survey.survey_response_id === response_id) {
+                $scope.d.details.stay.data = survey;
+            };
+        });
 
 
         console.log('showDetails:', $scope.d.details);
