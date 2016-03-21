@@ -27,7 +27,7 @@
                         </p>
                     </div>
                     <md-grid-tile-footer>
-                        <md-button ng-click="showDetails(survey.patient_id, survey.stay_id, survey.event_id, survey.survey_response_id);" class="md-primary" style="color:#FAFAFA">{{survey.filled | date}}</md-button>
+                        <md-button ng-click="showDetails(result.$index, survey.patient_id, survey.stay_id, survey.event_id, survey.survey_response_id);" class="md-primary" style="color:#FAFAFA">{{survey.filled | date}}</md-button>
                     </md-grid-tile-footer>
                 </md-grid-tile>
             </md-grid-list>
@@ -40,11 +40,15 @@
                 <span class="md-subhead"><span class="md-headline" style="color:#4CAF50">{{result.events.length}}<span class="md-caption">x</span></span>&nbsp;&nbsp;| &nbsp;Aufgaben</span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content ng-repeat="event in result.events">
+        <md-card-content>
             <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
-                <md-grid-tile style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
+                <md-grid-tile ng-repeat="event in result.events" style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
                     <div style="color:white">
-                        <p class="md-caption">{{event.data.responsibility.type}}</p>
+                        <p class="md-caption">
+                            #Resp: {{event.data.responsibility.type}}
+                            <br/> #Status: {{event.data.status}}
+                        </p>
+                        <p class="md-caption"></p>
                     </div>
                     <md-grid-tile-footer>
                         <h3>{{event.data.created_at | date}}</h3>

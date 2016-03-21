@@ -182,7 +182,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     // showDetails
     // ------------------------
-    $scope.showDetails = function(patient_id, stay_id, event_id, response_id) {
+    $scope.showDetails = function(result_index, patient_id, stay_id, event_id, response_id) {
+
+        var results = $scope.d.appInit.fulfillment.results[result_index];
 
         var patient_object = {
             "patient_id": patient_id,
@@ -209,6 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "stay": stay_object,
             "event": event_object,
             "response": response_object,
+            "fulfillment_result": results,
             "have_data": true
         };
 
@@ -217,27 +220,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // API - GET Patien-Details
         var patient_call = dataService.getPatient(patient_id);
         patient_call.success(function(data) {
-            console.log('patient_call = ', data)
+            //console.log('patient_call = ', data)
             $scope.d.details.patient.data = data;
         });
         patient_call.error(function(data) {
             console.log('Error: patient_call = ', data)
         });
 
+
         // API - GET Stay-Details
-        var patient_call = dataService.getPatientStays(patient_id);
-        patient_call.success(function(data) {
-            console.log('patient_call = ', data)
-            $scope.d.details.stay.data = data;
+        var stays_call = dataService.getPatientStays(patient_id);
+        stays_call.success(function(data) {
+            //console.log('stays_call = ', data)
+            data.stays.forEach(function(stay, myindex) {
+                if (stay.id === stay_id) {
+                    $scope.d.details.stay.data = stay;
+                };
+            });
         });
-        patient_call.error(function(data) {
-            console.log('Error: patient_call = ', data)
+        stays_call.error(function(data) {
+            console.log('Error: stays_call = ', data)
         });
 
 
 
         console.log('showDetails:', $scope.d.details);
-
 
         // Switch - Tab
         $scope.d.appInit.selectedTabIndex = 3;
