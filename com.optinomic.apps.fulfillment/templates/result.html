@@ -4,7 +4,7 @@
 <div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
-<md-card ng-repeat="result in d.appInit.fulfillment.results">
+<md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">{{result.patient.data.extras.name}}<span class="md-subhead">({{result.patient.data.extras.birthday_age}})</span></span>
