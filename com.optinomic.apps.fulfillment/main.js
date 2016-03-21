@@ -179,6 +179,44 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    // ------------------------
+    // showDetails
+    // ------------------------
+    $scope.showDetails = function(patient_id, stay_id, event_id, response_id) {
+
+        var patient_object = {
+            "patient_id": patient_id,
+            "data": {}
+        }
+
+        var stay_object = {
+            "stay_id": stay_id,
+            "data": {}
+        }
+
+        var event_object = {
+            "event_id": event_id,
+            "event": {}
+        }
+
+        var response_object = {
+            "response_id": response_id,
+            "event": {}
+        }
+
+        $scope.d.details = {
+
+        };
+
+
+        // Switch - Tab
+        $scope.d.appInit.selectedTabIndex = 3;
+
+    };
+
+
+
+
 
     // ------------------------
     // Data-Export

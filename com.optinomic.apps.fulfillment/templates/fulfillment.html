@@ -17,6 +17,11 @@ include(../lib/html/optinomic/page/start.m4)
                     include(templates/result.html)
                 </md-content>
             </md-tab>
+            <md-tab label="Details" ng-if="d.details.have_data">
+                <md-content class="md-padding">
+                    include(templates/details.html)
+                </md-content>
+            </md-tab>
         </md-tabs>
     </md-content>
 </div>
