@@ -47,6 +47,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         $scope.d.appInit = init;
+        $scope.getFulfillment();
+
         return init;
     };
 
@@ -60,7 +62,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
-        $scope.d.appInit = $scope.initApp();
 
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
@@ -69,7 +70,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
 
             // Run Functions:
-            $scope.getFulfillment();
+            $scope.d.appInit = $scope.initApp();
+
 
             // Init - Data Export
             // $scope.setExport();
@@ -133,6 +135,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         if (my_stay.id === survey.stay_id) {
                             my_stay.surveys.push(survey);
                             // console.log('==> survey pushed to stay', survey);
+
+
+
+
                         };
                     });
                 });
@@ -156,6 +162,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     };
+
+
+    // ------------------------
+    // Data-Export
+    // ------------------------
+    $scope.setExport = function() {};
+
 
 
     // ------------------------
