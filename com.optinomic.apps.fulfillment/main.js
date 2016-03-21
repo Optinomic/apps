@@ -184,7 +184,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     $scope.showDetails = function(result_obj, patient_id, stay_id, event_id, response_id) {
 
-        var results = $scope.d.appInit.fulfillment.results[result_index];
 
         var patient_object = {
             "patient_id": patient_id,
