@@ -243,14 +243,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // event-Details
         result_obj.events.forEach(function(event, myindex) {
             if (event.id === event_id) {
-                $scope.d.details.stay.data = event;
+                $scope.d.details.event.data = event;
             };
         });
 
         // surveys-Details
         result_obj.surveys.forEach(function(survey, myindex) {
             if (survey.survey_response_id === response_id) {
-                $scope.d.details.stay.data = survey;
+                $scope.d.details.response.data = survey;
             };
         });
 
