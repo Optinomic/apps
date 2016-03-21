@@ -224,7 +224,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('Error: patient_call = ', data)
         });
 
-
+        // API - GET Stay-Details
+        var patient_call = dataService.getPatientStays(patient_id);
+        patient_call.success(function(data) {
+            console.log('patient_call = ', data)
+            $scope.d.details.stay.data = data;
+        });
+        patient_call.error(function(data) {
+            console.log('Error: patient_call = ', data)
+        });
 
 
 
