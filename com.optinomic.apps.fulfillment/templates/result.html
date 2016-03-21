@@ -5,19 +5,16 @@
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 <md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
-    <md-card-title>
+    <md-card-title style="background-color:#616161; color:#FAFAFA">
         <md-card-title-text>
-            <span class="md-headline">{{result.patient.data.extras.name}}<span class="md-subhead">({{result.patient.data.extras.birthday_age}})</span></span>
+            <span class="md-headline">{{result.patient.data.extras.name}} &nbsp;&nbsp;<span class="md-subhead">({{result.patient.data.extras.birthday_age}})</span></span>
         </md-card-title-text>
     </md-card-title>
     <md-card-content ng-repeat="stay in result.stays">
-        <md-divider></md-divider>
         <div layout="row" layout-gt-xs="row" layout-align="space-between start">
             <div>
-                <p class="md-headline" style="color:#4CAF50; margin-top:6px;">2<span class="md-subhead">x</span>&nbsp;</p>
-            </div>
-            <div>
-                <p class="md-subhead">{{stay.from_to}}</p>
+                <p ng-if="stay.surveys.length === 0" class="md-headline" style="color:#F44336; margin-top:6px;">{{stay.surveys.length}}<span class="md-subhead">x</span>&nbsp; <span class="md-subhead" style="color:#212121">{{stay.from_to}}</span></p>
+                <p ng-if="stay.surveys.length !== 0" class="md-headline" style="color:#4CAF50; margin-top:6px;">{{stay.surveys.length}}<span class="md-subhead">x</span>&nbsp; <span class="md-subhead" style="color:#212121">{{stay.from_to}}</span></p>
             </div>
             <div>
                 <md-button ng-click="open" class="md-primary md-icon-button" style="color:#9E9E9E">V</md-button>
@@ -37,28 +34,30 @@
         </div>
     </md-card-content>
 </md-card>
-<div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
-    <h2 class="md-title">{{result.patient.data.extras.name}} ({{result.patient.data.extras.birthday_age}})</h2>
-    <div ng-if="result.surveys.length !== 0">
-        <div ng-repeat="stay in result.stays" layout-margin>
-            <p class="md-subhead">{{stay.from_to}} ({{stay.id}})</p>
-            <div ng-repeat="survey in stay.surveys" layout-margin>
-                <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}}</p>
-                <pre>{{survey.response | json}}</pre>
-                <div ng-repeat="event in result.events" layout-margin>
-                    <div ng-if="event.id === survey.event_id">
-                        <p class="md-body-1">Event: {{survey.event_id}}</p>
-                        <pre>{{event.data | json}}</pre>
+<div ng-if="d.appInit.is_busy === false">
+    <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
+        <h2 class="md-title">{{result.patient.data.extras.name}} ({{result.patient.data.extras.birthday_age}})</h2>
+        <div ng-if="result.surveys.length !== 0">
+            <div ng-repeat="stay in result.stays" layout-margin>
+                <p class="md-subhead">{{stay.from_to}} ({{stay.id}})</p>
+                <div ng-repeat="survey in stay.surveys" layout-margin>
+                    <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}}</p>
+                    <pre>{{survey.response | json}}</pre>
+                    <div ng-repeat="event in result.events" layout-margin>
+                        <div ng-if="event.id === survey.event_id">
+                            <p class="md-body-1">Event: {{survey.event_id}}</p>
+                            <pre>{{event.data | json}}</pre>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div ng-if="result.surveys.length === 0">
-        <p class="md-caption" style="color:#9E9E9E"><i class="mdi mdi-help" style="color:#F44336"></i> Es liegt keine Erfassung für das selektierte Modul ({{d.appInit.app_id}}) vor.</p>
-        <div ng-if="result.events.length !== 0" ng-repeat="event in result.events" layout-margin>
-            <p class="md-body-1">Alle Tasks:</p>
-            <pre>{{event.data | json}}</pre>
+        <div ng-if="result.surveys.length === 0">
+            <p class="md-caption" style="color:#9E9E9E"><i class="mdi mdi-help" style="color:#F44336"></i> Es liegt keine Erfassung für das selektierte Modul ({{d.appInit.app_id}}) vor.</p>
+            <div ng-if="result.events.length !== 0" ng-repeat="event in result.events" layout-margin>
+                <p class="md-body-1">Alle Tasks:</p>
+                <pre>{{event.data | json}}</pre>
+            </div>
         </div>
     </div>
 </div>
