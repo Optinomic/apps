@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // ------------------------
     // showDetails
     // ------------------------
-    $scope.showDetails = function(result_index, patient_id, stay_id, event_id, response_id) {
+    $scope.showDetails = function(result_obj, patient_id, stay_id, event_id, response_id) {
 
         var results = $scope.d.appInit.fulfillment.results[result_index];
 
@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "stay": stay_object,
             "event": event_object,
             "response": response_object,
-            "fulfillment_result": results,
+            "fulfillment": result_obj,
             "have_data": true
         };
 
