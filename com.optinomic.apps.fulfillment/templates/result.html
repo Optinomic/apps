@@ -10,7 +10,7 @@
             <span class="md-headline">{{result.patient.data.extras.name}}<span class="md-subhead">({{result.patient.data.extras.birthday_age}})</span></span>
         </md-card-title-text>
     </md-card-title>
-    <md-card-content>
+    <md-card-content ng-repeat="stay in result.stays">
         <md-divider></md-divider>
         <div layout="row" layout-gt-xs="row" layout-align="space-between start">
             <div>
