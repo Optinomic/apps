@@ -5,7 +5,7 @@
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 <md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
-    <md-card-title>
+    <md-card-title style="background:#424242; color:#F5F5F5">
         <md-card-title-text>
             <span class="md-headline"><span style="color:#4CAF50">{{result.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;{{result.patient.data.extras.name}} <span class="md-subhead">&nbsp;({{result.patient.data.extras.birthday_age}})</span></span>
         </md-card-title-text>
@@ -37,12 +37,12 @@
         <md-divider></md-divider>
         <md-card-title>
             <md-card-title-text>
-                <span class="md-subhead"><span class="md-headline" style="color:#F44336">{{result.events.length}}<span class="md-caption">x</span></span>&nbsp;&nbsp;| &nbsp;Offene Aufgaben</span>
+                <span class="md-subhead"><span class="md-headline">{{result.events.length}}<span class="md-caption">x</span></span>&nbsp;&nbsp;| &nbsp;Aufgaben</span>
             </md-card-title-text>
         </md-card-title>
         <md-card-content>
             <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
-                <md-grid-tile ng-if="event.data.status === 'to_be_done'" ng-repeat="event in result.events" style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
+                <md-grid-tile ng-if="event.data.status === 'to_be_done'" ng-repeat="event in result.events" style="background:#F44336;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
                     <div style="color:white">
                         <p class="md-caption">
                             #Resp: {{event.data.responsibility.type}}
