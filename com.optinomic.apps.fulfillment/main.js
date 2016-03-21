@@ -43,11 +43,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "app_id": app_id,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
+            "selectedTabIndex": 0,
             "promise": {}
         };
 
+
         $scope.d.appInit = init;
-        $scope.getFulfillment();
 
         return init;
     };
@@ -82,8 +83,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
     $scope.loadMainData();
-
-
 
 
     // ------------------------
@@ -155,19 +154,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 have_data: true
             };
 
+            // Show Results
+            $scope.setTab(3);
+
             console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
 
 
         });
-
-
     };
 
 
     // ------------------------
     // Data-Export
     // ------------------------
-    $scope.setExport = function() {};
+    $scope.setTab = function(TabIndex) {
+
+        TabIndex = TabIndex === undefined ? 0 : TabIndex;
+
+
+        if (TabIndex === 3) {
+            $scope.getFulfillment();
+        };
+
+        // Switch - Tab
+        $scope.d.appInit.selectedTabIndex = TabIndex;
+
+    };
 
 
 
