@@ -134,10 +134,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         if (my_stay.id === survey.stay_id) {
                             my_stay.surveys.push(survey);
                             // console.log('==> survey pushed to stay', survey);
-
-
-
-
                         };
                     });
                 });
