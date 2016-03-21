@@ -18,7 +18,7 @@
             </md-card-title-text>
         </md-card-title>
         <md-card-content ng-if="stay.surveys.length !== 0">
-            <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-xs="1:1" md-row-height="1:1" md-gutter="8px" md-gutter-gt-xs="8px">
+            <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
                 <md-grid-tile ng-repeat="survey in stay.surveys" style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
                     <div style="color:white">
                         <p class="md-caption">
@@ -33,24 +33,26 @@
             </md-grid-list>
         </md-card-content>
     </div>
-    <md-divider></md-divider>
-    <md-card-title>
-        <md-card-title-text>
-            <span class="md-title"><span class="md-headline" style="color:#4CAF50">{{result.events.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;Aufgaben</span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-content ng-repeat="event in result.events">
-        <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-xs="1:1" md-row-height="1:1" md-gutter="8px" md-gutter-gt-xs="8px">
-            <md-grid-tile style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
-                <div style="color:white">
-                    <p class="md-caption">{{event.responsibility.type}}</p>
-                </div>
-                <md-grid-tile-footer>
-                    <h3>{{event.created_at | date}}</h3>
-                </md-grid-tile-footer>
-            </md-grid-tile>
-        </md-grid-list>
-    </md-card-content>
+    <div ng-if="result.events.length > 0">
+        <md-divider></md-divider>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-subhead"><span class="md-headline" style="color:#4CAF50">{{result.events.length}}<span class="md-caption">x</span></span>&nbsp;&nbsp;| &nbsp;Aufgaben</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-repeat="event in result.events">
+            <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
+                <md-grid-tile style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
+                    <div style="color:white">
+                        <p class="md-caption">{{event.data.responsibility.type}}</p>
+                    </div>
+                    <md-grid-tile-footer>
+                        <h3>{{event.data.created_at | date}}</h3>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-card-content>
+    </div>
 </md-card>
 <div>&nbsp;</div>
 <div layout="row" layout-gt-xs="row" layout-align="end center">

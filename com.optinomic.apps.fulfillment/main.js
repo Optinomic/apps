@@ -205,8 +205,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }
 
         $scope.d.details = {
-
+            "patient": patient_object,
+            "stay": stay_object,
+            "event": event_object,
+            "response": response_object,
+            "have_data": true
         };
+
+
+        console.log('showDetails:', $scope.d.details);
 
 
         // Switch - Tab
