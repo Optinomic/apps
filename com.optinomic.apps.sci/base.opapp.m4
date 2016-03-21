@@ -1,6 +1,7 @@
 [module]
 id = com.optinomic.apps.sci
-name = Stress-Coping-Inventar (SCI)
+name = Child: Stress-Coping-Inventar (SCI)
+parent = ch.suedhang.apps.sci
 short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
 version = include(VERSION)
 type = patient
@@ -18,24 +19,8 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template chart_stanine 6 10]
-include(../ch.suedhang.apps.sci/templates/stanine.html)
-
-[template data_export 6 8]
-include(../ch.suedhang.apps.sci/templates/export.html)
-
-
 [dependencies]
 
-
-[javascript]
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(../ch.suedhang.apps.sci/main.js)
-
-
-[css]
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(../ch.suedhang.apps.sci/style.css)
 
 [survey]
 id = SCI
@@ -57,6 +42,3 @@ overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
 survey = SCI
 
-
-[calculation scores javascript]
-include(../ch.suedhang.apps.sci/calculations/scores.js)
