@@ -1,5 +1,8 @@
 <h3 class="md-headline">Erfüllungsgrad</h3>
 <p class="md-body-1">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
+<div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
 <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
     <h2 class="md-title">{{result.patient.data.extras.name}} ({{result.patient.data.extras.birthday_age}})</h2>
     <div ng-if="result.surveys.length !== 0">

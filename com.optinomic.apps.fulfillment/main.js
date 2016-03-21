@@ -44,6 +44,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
             "selectedTabIndex": 0,
+            "is_busy": false,
             "promise": {}
         };
 
@@ -90,7 +91,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Merge Patients / Survey
     // ------------------------
     $scope.getFulfillment = function() {
-
+        $scope.d.appInit.is_busy = true;
 
         var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
         dataPromiseFulfillment.then(function(data_fulfill) {
@@ -150,6 +151,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 have_data: true
             };
 
+
+            $scope.d.appInit.is_busy = false;
+            $scope.d.appInit.selectedTabIndex = 2;
             console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
 
 
