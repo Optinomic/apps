@@ -4,6 +4,39 @@
 <div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
+<md-card ng-repeat="result in d.appInit.fulfillment.results">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{result.patient.data.extras.name}}<span class="md-subhead">({{result.patient.data.extras.birthday_age}})</span></span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <md-divider></md-divider>
+        <div layout="row" layout-gt-xs="row" layout-align="space-between start">
+            <div>
+                <p class="md-headline" style="color:#4CAF50; margin-top:6px;">2<span class="md-subhead">x</span>&nbsp;</p>
+            </div>
+            <div>
+                <p class="md-subhead">{{stay.from_to}}</p>
+            </div>
+            <div>
+                <md-button ng-click="open" class="md-primary md-icon-button" style="color:#9E9E9E">V</md-button>
+            </div>
+        </div>
+        <div class="md-padding">
+            <div ng-repeat="survey in stay.surveys" layout-margin>
+                <p class="md-body-1"><i class="mdi mdi-check" style="color:#4CAF50"></i>{{survey.filled}}</p>
+                <pre>{{survey.response | json}}</pre>
+                <div ng-repeat="event in result.events" layout-margin>
+                    <div ng-if="event.id === survey.event_id">
+                        <p class="md-body-1">Event: {{survey.event_id}}</p>
+                        <pre>{{event.data | json}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
 <div ng-repeat="result in d.appInit.fulfillment.results" class="grid-border-top md-padding md-margin">
     <h2 class="md-title">{{result.patient.data.extras.name}} ({{result.patient.data.extras.birthday_age}})</h2>
     <div ng-if="result.surveys.length !== 0">
@@ -32,3 +65,4 @@
 <div layout="row" layout-gt-xs="row" layout-align="end center">
     <md-button ng-click="initApp()" class="md-primary" style="color:#9E9E9E">Zurücksetzen</md-button>
 </div>
+<md-divider md-inset></md-divider>
