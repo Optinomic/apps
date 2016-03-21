@@ -72,6 +72,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run Functions:
             $scope.d.appInit = $scope.initApp();
+            $scope.d.haveData = true;
 
 
             // Init - Data Export
@@ -94,7 +95,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dataPromiseFulfillment = dataService.getFulfillmentData($scope.d.appInit.app_id, $scope.d.appInit.patientListFilter);
         dataPromiseFulfillment.then(function(data_fulfill) {
             // When we have the data
-            $scope.d.haveData = true;
             console.log('(✓) PromiseFulfillment', data_fulfill);
             $scope.d.appInit.promise = data_fulfill;
 
@@ -154,9 +154,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 have_data: true
             };
 
-            // Show Results
-            $scope.setTab(3);
-
             console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
 
 
@@ -171,8 +168,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         TabIndex = TabIndex === undefined ? 0 : TabIndex;
 
-
-        if (TabIndex === 3) {
+        // Ergebnis anfordern
+        if (TabIndex === 2) {
             $scope.getFulfillment();
         };
 
