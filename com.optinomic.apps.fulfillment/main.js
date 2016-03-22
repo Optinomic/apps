@@ -152,6 +152,44 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
+
+            // ----------------------------------
+            // Create Timeline Array:
+            // ----------------------------------
+            var timeline = [];
+
+            // Stays
+            returned_fulfillment.stays.forEach(function(stay, my_stay_index) {
+                var timeline_item = {};
+
+                // Eintritt
+                timeline_item.date = stay.data.start;
+                timeline_item.time = stay.data.start.substring(12, 4);
+                timeline_item.logo = 'ray-start-arrow';
+                timeline_item.type = 'stay-start';
+                timeline_item.line_1 = 'Eintritt';
+                timeline_item.line_2 = stay.from_to;
+                timeline_item.line_3 = stay.duration;
+                timeline_item.url = stay.url;
+                timeline.push(timeline_item);
+
+                // Austritt
+                if (stay.data.stop !== null) {
+                    timeline_item.date = stay.data.stop;
+                    timeline_item.time = stay.data.stop.substring(12, 4);
+                    timeline_item.logo = 'ray-end-arrow';
+                    timeline_item.type = 'stay-start';
+                    timeline_item.line_1 = 'Eintritt';
+                    timeline_item.line_2 = stay.from_to;
+                    timeline_item.line_3 = stay.duration;
+                    timeline_item.url = stay.url;
+                    timeline.push(timeline_item);
+                };
+
+            });
+
+            $scope.d.appInit.timeline = timeline;
+
             $scope.d.appInit.is_busy = false;
             $scope.d.appInit.selectedTabIndex = 2;
             console.log('(✓) Fulfillment-Data: ', $scope.d.appInit);
