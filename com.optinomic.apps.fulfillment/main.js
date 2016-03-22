@@ -145,48 +145,84 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             });
 
 
-            // Save Data to $scope
-            $scope.d.appInit.fulfillment = {
-                results: returned_fulfillment,
-                have_data: true
-            };
-
 
 
             // ----------------------------------
             // Create Timeline Array:
             // ----------------------------------
-            var timeline = [];
 
-            // Stays
-            returned_fulfillment.stays.forEach(function(stay, my_stay_index) {
-                var timeline_item = {};
+            returned_fulfillment.forEach(function(result, my_result_index) {
 
-                // Eintritt
-                timeline_item.date = stay.data.start;
-                timeline_item.time = stay.data.start.substring(12, 4);
-                timeline_item.logo = 'ray-start-arrow';
-                timeline_item.type = 'stay-start';
-                timeline_item.line_1 = 'Eintritt';
-                timeline_item.line_2 = stay.from_to;
-                timeline_item.line_3 = stay.duration;
-                timeline_item.url = stay.url;
-                timeline.push(timeline_item);
+                var timeline = [];
 
-                // Austritt
-                if (stay.data.stop !== null) {
-                    timeline_item.date = stay.data.stop;
-                    timeline_item.time = stay.data.stop.substring(12, 4);
-                    timeline_item.logo = 'ray-end-arrow';
+                // Stays
+                result.stays.forEach(function(stay, my_stay_index) {
+                    var timeline_item = {};
+
+                    // Eintritt
+                    timeline_item.date = stay.data.start;
+                    timeline_item.time = stay.data.start.substring(12, 4);
+                    timeline_item.logo = 'ray-start-arrow';
                     timeline_item.type = 'stay-start';
                     timeline_item.line_1 = 'Eintritt';
                     timeline_item.line_2 = stay.from_to;
                     timeline_item.line_3 = stay.duration;
                     timeline_item.url = stay.url;
                     timeline.push(timeline_item);
-                };
+
+                    // Austritt
+                    if (stay.data.stop !== null) {
+                        timeline_item.date = stay.data.stop;
+                        timeline_item.time = stay.data.stop.substring(12, 4);
+                        timeline_item.logo = 'ray-end-arrow';
+                        timeline_item.type = 'stay-start';
+                        timeline_item.line_1 = 'Eintritt';
+                        timeline_item.line_2 = stay.from_to;
+                        timeline_item.line_3 = stay.duration;
+                        timeline_item.url = stay.url;
+                        timeline.push(timeline_item);
+                    };
+
+                });
+
+                // Events
+                result.events.forEach(function(event, my_event_index) {
+                    var timeline_item = {};
+
+                    // Event
+                    timeline_item.date = event.data.created_at;
+                    timeline_item.time = event.data.created_at.substring(12, 4);
+                    timeline_item.logo = 'clock';
+                    timeline_item.type = 'event';
+                    timeline_item.line_1 = event.data.survey_name;
+                    timeline_item.line_2 = event.data.status;
+                    timeline_item.line_3 = event.data.description;
+                    timeline_item.url = event.data.url;
+
+
+                    // Find - Survey Response for this event
+                    timeline_item.survey = {};
+                    //result.surveys.forEach(function(survey, my_survey_index) {});
+
+
+                    timeline.push(timeline_item);
+
+                });
+
+
 
             });
+
+
+
+            // Save Data to $scope
+            $scope.d.appInit.fulfillment = {
+                results: returned_fulfillment,
+                timeline: timeline,
+                have_data: true
+            };
+
+
 
             $scope.d.appInit.timeline = timeline;
 
