@@ -151,15 +151,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Create Timeline Array:
             // ----------------------------------
 
+
             returned_fulfillment.forEach(function(result, my_result_index) {
 
                 var timeline = [];
+                var timeline_item = {};
+
 
                 // Stays
                 result.stays.forEach(function(stay, my_stay_index) {
-                    var timeline_item = {};
 
                     // Eintritt
+                    timeline_item = {};
                     timeline_item.date = stay.data.start;
                     timeline_item.time = stay.data.start.substring(12, 4);
                     timeline_item.logo = 'ray-start-arrow';
@@ -168,10 +171,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.line_2 = stay.from_to;
                     timeline_item.line_3 = stay.duration;
                     timeline_item.url = stay.url;
+                    timeline_item.data = stay;
                     timeline.push(timeline_item);
 
                     // Austritt
                     if (stay.data.stop !== null) {
+                        timeline_item = {};
                         timeline_item.date = stay.data.stop;
                         timeline_item.time = stay.data.stop.substring(12, 4);
                         timeline_item.logo = 'ray-end-arrow';
@@ -180,6 +185,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item.line_2 = stay.from_to;
                         timeline_item.line_3 = stay.duration;
                         timeline_item.url = stay.url;
+                        timeline_item.data = stay;
                         timeline.push(timeline_item);
                     };
 
@@ -198,7 +204,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.line_2 = event.data.status;
                     timeline_item.line_3 = event.data.description;
                     timeline_item.url = event.data.url;
-
+                    timeline_item.data = event;
 
                     // Find - Survey Response for this event
                     timeline_item.survey = {};
@@ -209,7 +215,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 });
 
-
+                // Save Timeline
+                result.timeline = timeline;
 
             });
 
@@ -217,9 +224,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope
             $scope.d.appInit.fulfillment = {
-                results: returned_fulfillment,
-                timeline: timeline,
-                have_data: true
+                "results": returned_fulfillment,
+                "have_data": true
             };
 
 
