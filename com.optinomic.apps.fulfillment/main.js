@@ -115,6 +115,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     patient: patient,
                     stays: stays,
                     events: module_events,
+                    timeline: []
                     surveys: []
                 };
 
@@ -228,9 +229,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "have_data": true
             };
 
-
-
-            $scope.d.appInit.timeline = timeline;
 
             $scope.d.appInit.is_busy = false;
             $scope.d.appInit.selectedTabIndex = 2;
