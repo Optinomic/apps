@@ -165,7 +165,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     // Eintritt
                     timeline_item = {};
                     timeline_item.date = stay.data.start;
-                    timeline_item.time = stay.data.start.substring(12, 16);
+                    timeline_item.time = stay.data.start.substring(11, 16);
                     timeline_item.logo = 'ray-start-arrow';
                     timeline_item.type = 'stay-start';
                     timeline_item.line_1 = 'Eintritt';
@@ -179,7 +179,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     if (stay.data.stop !== null) {
                         timeline_item = {};
                         timeline_item.date = stay.data.stop;
-                        timeline_item.time = stay.data.stop.substring(12, 16);
+                        timeline_item.time = stay.data.stop.substring(11, 16);
                         timeline_item.logo = 'ray-end-arrow';
                         timeline_item.type = 'stay-start';
                         timeline_item.line_1 = 'Austritt';
@@ -198,7 +198,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     // Event
                     timeline_item.date = event.data.created_at;
-                    timeline_item.time = event.data.created_at.substring(12, 16);
+                    timeline_item.time = event.data.created_at.substring(11, 16);
                     timeline_item.logo = 'clock';
                     timeline_item.type = 'event';
                     timeline_item.line_1 = event.data.survey_name;
@@ -212,7 +212,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     timeline_item.survey = {};
                     timeline_item.survey.logo = 'database-plus';
-                    timeline_item.survey.type = 'survey_default';
+                    timeline_item.survey.type = 'survey-none';
                     timeline_item.survey.line_1 = event.data.survey_name;
                     timeline_item.survey.line_2 = event.data.status;
                     timeline_item.survey.line_3 = event.data.description;
@@ -223,13 +223,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     result.surveys.forEach(function(survey, my_survey_index) {
 
                         if (event.id === survey.event_id) {
+
+                            var date1 = event.data.created_at;
+                            var date2 = survey.filled;
+                            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
                             timeline_item.survey.date = survey.filled;
-                            timeline_item.survey.time = survey.filled.substring(12, 16);
+                            timeline_item.survey.time = survey.filled.substring(11, 16);
                             timeline_item.survey.logo = 'database-plus';
                             timeline_item.survey.type = 'survey';
                             timeline_item.survey.line_1 = event.data.survey_name;
-                            timeline_item.survey.line_2 = '#Event:' + survey.event_id;
-                            timeline_item.survey.line_3 = '#Resp.:' + survey.survey_response_id;
+                            timeline_item.survey.line_2 = timeDiff;
+                            timeline_item.survey.line_3 = diffDays;
                             timeline_item.survey.url = event.data.url;
                             timeline_item.survey.data = survey;
                         };
