@@ -166,7 +166,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item = {};
                     timeline_item.date = stay.data.start;
                     timeline_item.time = stay.data.start.substring(11, 16);
-                    timeline_item.logo = 'ray-start-arrow';
+                    timeline_item.logo = 'mdi-ray-start-arrow';
                     timeline_item.type = 'stay-start';
                     timeline_item.line_1 = 'Eintritt';
                     timeline_item.line_2 = stay.from_to;
@@ -180,7 +180,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item = {};
                         timeline_item.date = stay.data.stop;
                         timeline_item.time = stay.data.stop.substring(11, 16);
-                        timeline_item.logo = 'ray-end-arrow';
+                        timeline_item.logo = 'mdi-ray-end-arrow';
                         timeline_item.type = 'stay-start';
                         timeline_item.line_1 = 'Austritt';
                         timeline_item.line_2 = stay.from_to;
@@ -199,7 +199,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     // Event
                     timeline_item.date = event.data.created_at;
                     timeline_item.time = event.data.created_at.substring(11, 16);
-                    timeline_item.logo = 'clock';
+                    timeline_item.logo = 'mdi-clock';
                     timeline_item.type = 'event';
                     timeline_item.line_1 = event.data.survey_name;
                     timeline_item.line_2 = event.data.status;
@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                     timeline_item.survey = {};
-                    timeline_item.survey.logo = 'database-plus';
+                    timeline_item.survey.logo = 'mdi-database-plus';
                     timeline_item.survey.type = 'survey-none';
                     timeline_item.survey.line_1 = event.data.survey_name;
                     timeline_item.survey.line_2 = event.data.status;
@@ -232,7 +232,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                             timeline_item.survey.date = survey.filled;
                             timeline_item.survey.time = survey.filled.substring(11, 16);
-                            timeline_item.survey.logo = 'database-plus';
+                            timeline_item.survey.logo = 'mdi-database-plus';
                             timeline_item.survey.type = 'survey';
                             timeline_item.survey.line_1 = event.data.survey_name;
                             timeline_item.survey.line_2 = 'Tage: ' + diffDays;
