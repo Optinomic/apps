@@ -115,7 +115,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     patient: patient,
                     stays: stays,
                     events: module_events,
-                    timeline: []
+                    timeline: [],
                     surveys: []
                 };
 
