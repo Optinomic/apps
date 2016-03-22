@@ -228,14 +228,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             var date2 = $scope.d.functions.sureDateInstance(survey.filled);
                             var timeDiff = Math.abs(date2.getTime() - date1.getTime());
                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            var diffHours = Math.ceil(timeDiff / (1000 * 3600));
 
                             timeline_item.survey.date = survey.filled;
                             timeline_item.survey.time = survey.filled.substring(11, 16);
                             timeline_item.survey.logo = 'database-plus';
                             timeline_item.survey.type = 'survey';
                             timeline_item.survey.line_1 = event.data.survey_name;
-                            timeline_item.survey.line_2 = timeDiff;
-                            timeline_item.survey.line_3 = diffDays;
+                            timeline_item.survey.line_2 = 'Tage: ' + diffDays;
+                            timeline_item.survey.line_3 = 'Stunden: ' + diffHours;
                             timeline_item.survey.url = event.data.url;
                             timeline_item.survey.data = survey;
                         };
