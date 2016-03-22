@@ -1,0 +1,46 @@
+<h3 class="md-headline">Erfüllungsgrad ({{d.appInit.app_id}})</h3>
+<p class="md-body-1" style="color:#3F51B5">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
+<div>&nbsp;</div>
+<div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
+    <md-card-title style="background:#424242; color:#F5F5F5">
+        <md-card-title-text>
+            <span class="md-headline"><span style="color:#4CAF50">{{result.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;{{result.patient.data.extras.name}} <span class="md-subhead">&nbsp;({{result.patient.data.extras.birthday_age}})</span></span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <div ng-if="result.surveys.length !== 0">
+        <md-card-content ng-if="stay.surveys.length !== 0">
+            <ul class="cbp_tmtimeline">
+                <li ng-repeat="item in result.timeline">
+                    <time class="cbp_tmtime" datetime="{{event.message.date_created_time}}">
+                        <span>{{item.date | date}}</span> <span>{{item.time}}</span>
+                    </time>
+                    <div class="cbp_tmicon">
+                        <i class="mdi" style="margin-top:8px !important;" ng-class="item.logo"></i>
+                    </div>
+                    <div class="cbp_tmlabel">
+                        <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin layout-padding>
+                            <div flex>
+                                <div>
+                                    <p class="md-caption">{{item.line_1}}
+                                        <br>{{item.line_2}}
+                                        <br>{{item.line_3}}</p>
+                                </div>
+                            </div>
+                            <div flex ng-if="item.type === 'event'">
+                                <div>
+                                    <p class="md-caption">{{item.survey.line_1}}
+                                        <br>{{item.survey.line_2}}
+                                        <br>{{item.survey.line_3}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </md-card-content>
+    </div>
+</md-card>
