@@ -166,7 +166,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item = {};
                     timeline_item.date = stay.data.start;
                     timeline_item.time = stay.data.start.substring(11, 16);
-                    timeline_item.logo = 'mdi-ray-start-arrow';
+                    timeline_item.logo = 'mdi-clock-start';
                     timeline_item.type = 'stay-start';
                     timeline_item.line_1 = 'Eintritt';
                     timeline_item.line_2 = stay.from_to;
@@ -180,7 +180,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item = {};
                         timeline_item.date = stay.data.stop;
                         timeline_item.time = stay.data.stop.substring(11, 16);
-                        timeline_item.logo = 'mdi-ray-end-arrow';
+                        timeline_item.logo = 'mdi-clock-stop';
                         timeline_item.type = 'stay-start';
                         timeline_item.line_1 = 'Austritt';
                         timeline_item.line_2 = stay.from_to;
@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                     timeline_item.survey = {};
-                    timeline_item.survey.logo = 'mdi-database-plus';
+                    timeline_item.survey.logo = 'mdi-database';
                     timeline_item.survey.type = 'survey-none';
                     timeline_item.survey.line_1 = event.data.survey_name;
                     timeline_item.survey.line_2 = event.data.status;
@@ -239,6 +239,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             timeline_item.survey.line_3 = 'Stunden: ' + diffHours;
                             timeline_item.survey.url = event.data.url;
                             timeline_item.survey.data = survey;
+
+                            timeline_item.logo = 'mdi-check';
                         };
 
                     });
