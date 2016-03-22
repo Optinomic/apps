@@ -173,7 +173,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.line_3 = stay.duration;
                     timeline_item.url = stay.url;
                     timeline_item.data = stay;
-                    timeline[my_stay_index].push(timeline_item);
+                    timeline.push(timeline_item);
 
                     // Austritt
                     if (stay.data.stop !== null) {
@@ -187,72 +187,68 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item.line_3 = stay.duration;
                         timeline_item.url = stay.url;
                         timeline_item.data = stay;
-                        timeline[my_stay_index].push(timeline_item);
+                        timeline.push(timeline_item);
                     };
 
+                });
 
-                    // Events
-                    result.events.forEach(function(event, my_event_index) {
-                        var timeline_item = {};
+                // Events
+                result.events.forEach(function(event, my_event_index) {
+                    var timeline_item = {};
 
-                        // Event
-                        timeline_item.date = event.data.created_at;
-                        timeline_item.time = event.data.created_at.substring(11, 16);
-                        timeline_item.logo = 'clock';
-                        timeline_item.type = 'event';
-                        timeline_item.line_1 = event.data.survey_name;
-                        timeline_item.line_2 = event.data.status;
-                        timeline_item.line_3 = event.data.description;
-                        timeline_item.url = event.data.url;
-                        timeline_item.data = event;
+                    // Event
+                    timeline_item.date = event.data.created_at;
+                    timeline_item.time = event.data.created_at.substring(11, 16);
+                    timeline_item.logo = 'clock';
+                    timeline_item.type = 'event';
+                    timeline_item.line_1 = event.data.survey_name;
+                    timeline_item.line_2 = event.data.status;
+                    timeline_item.line_3 = event.data.description;
+                    timeline_item.url = event.data.url;
+                    timeline_item.data = event;
 
-                        // Find - Survey Response for this event
-
-
-                        timeline_item.survey = {};
-                        timeline_item.survey.logo = 'database-plus';
-                        timeline_item.survey.type = 'survey-none';
-                        timeline_item.survey.line_1 = event.data.survey_name;
-                        timeline_item.survey.line_2 = event.data.status;
-                        timeline_item.survey.line_3 = event.data.description;
-                        timeline_item.survey.url = event.data.url;
-                        timeline_item.survey.data = {};
+                    // Find - Survey Response for this event
 
 
-                        result.surveys.forEach(function(survey, my_survey_index) {
-
-                            if (event.id === survey.event_id) {
-
-                                var date1 = $scope.d.functions.sureDateInstance(event.data.created_at);
-                                var date2 = $scope.d.functions.sureDateInstance(survey.filled);
-                                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-                                timeline_item.survey.date = survey.filled;
-                                timeline_item.survey.time = survey.filled.substring(11, 16);
-                                timeline_item.survey.logo = 'database-plus';
-                                timeline_item.survey.type = 'survey';
-                                timeline_item.survey.line_1 = event.data.survey_name;
-                                timeline_item.survey.line_2 = timeDiff;
-                                timeline_item.survey.line_3 = diffDays;
-                                timeline_item.survey.url = event.data.url;
-                                timeline_item.survey.data = survey;
-                            };
-
-                        });
+                    timeline_item.survey = {};
+                    timeline_item.survey.logo = 'database-plus';
+                    timeline_item.survey.type = 'survey-none';
+                    timeline_item.survey.line_1 = event.data.survey_name;
+                    timeline_item.survey.line_2 = event.data.status;
+                    timeline_item.survey.line_3 = event.data.description;
+                    timeline_item.survey.url = event.data.url;
+                    timeline_item.survey.data = {};
 
 
-                        timeline[my_stay_index].push(timeline_item);
+                    result.surveys.forEach(function(survey, my_survey_index) {
+
+                        if (event.id === survey.event_id) {
+
+                            var date1 = $scope.d.functions.sureDateInstance(event.data.created_at);
+                            var date2 = $scope.d.functions.sureDateInstance(survey.filled);
+                            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                            timeline_item.survey.date = survey.filled;
+                            timeline_item.survey.time = survey.filled.substring(11, 16);
+                            timeline_item.survey.logo = 'database-plus';
+                            timeline_item.survey.type = 'survey';
+                            timeline_item.survey.line_1 = event.data.survey_name;
+                            timeline_item.survey.line_2 = timeDiff;
+                            timeline_item.survey.line_3 = diffDays;
+                            timeline_item.survey.url = event.data.url;
+                            timeline_item.survey.data = survey;
+                        };
 
                     });
 
 
-                    timeline[my_stay_index] = dataService.sortByKey(timeline[my_stay_index], 'date');
+                    timeline.push(timeline_item);
 
                 });
 
-
                 // Sort & Save Timeline
+                timeline = dataService.sortByKey(timeline, 'date');
                 result.timeline = timeline;
 
             });
