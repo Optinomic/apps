@@ -165,7 +165,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     // Eintritt
                     timeline_item = {};
                     timeline_item.date = stay.data.start;
-                    timeline_item.time = stay.data.start.substring(12, 4);
+                    timeline_item.time = stay.data.start.substring(12, 16);
                     timeline_item.logo = 'ray-start-arrow';
                     timeline_item.type = 'stay-start';
                     timeline_item.line_1 = 'Eintritt';
@@ -179,7 +179,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     if (stay.data.stop !== null) {
                         timeline_item = {};
                         timeline_item.date = stay.data.stop;
-                        timeline_item.time = stay.data.stop.substring(12, 4);
+                        timeline_item.time = stay.data.stop.substring(12, 16);
                         timeline_item.logo = 'ray-end-arrow';
                         timeline_item.type = 'stay-start';
                         timeline_item.line_1 = 'Eintritt';
@@ -198,7 +198,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     // Event
                     timeline_item.date = event.data.created_at;
-                    timeline_item.time = event.data.created_at.substring(12, 4);
+                    timeline_item.time = event.data.created_at.substring(12, 16);
                     timeline_item.logo = 'clock';
                     timeline_item.type = 'event';
                     timeline_item.line_1 = event.data.survey_name;
