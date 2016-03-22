@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item.time = stay.data.stop.substring(12, 16);
                         timeline_item.logo = 'ray-end-arrow';
                         timeline_item.type = 'stay-start';
-                        timeline_item.line_1 = 'Eintritt';
+                        timeline_item.line_1 = 'Austritt';
                         timeline_item.line_2 = stay.from_to;
                         timeline_item.line_3 = stay.duration;
                         timeline_item.url = stay.url;
@@ -208,15 +208,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.data = event;
 
                     // Find - Survey Response for this event
-                    timeline_item.survey = {};
-                    //result.surveys.forEach(function(survey, my_survey_index) {});
+                    timeline_item.survey = [];
+                    result.surveys.forEach(function(survey, my_survey_index) {
+
+                        if (event.id === survey.event_id) {
+                            timeline_item.survey.push(survey);
+                        };
+
+                    });
 
 
                     timeline.push(timeline_item);
 
                 });
 
-                // Save Timeline
+                // Sort & Save Timeline
+                timeline = dataService.sortByKey(timeline, 'date');
                 result.timeline = timeline;
 
             });
