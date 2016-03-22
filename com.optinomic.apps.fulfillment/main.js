@@ -208,11 +208,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.data = event;
 
                     // Find - Survey Response for this event
-                    timeline_item.survey = [];
+
+
+                    timeline_item.survey = {};
+                    timeline_item.survey.logo = 'database-plus';
+                    timeline_item.survey.type = 'survey_default';
+                    timeline_item.survey.line_1 = event.data.survey_name;
+                    timeline_item.survey.line_2 = event.data.status;
+                    timeline_item.survey.line_3 = event.data.description;
+                    timeline_item.survey.url = event.data.url;
+                    timeline_item.survey.data = survey;
+
+
                     result.surveys.forEach(function(survey, my_survey_index) {
 
                         if (event.id === survey.event_id) {
-                            timeline_item.survey.push(survey);
+                            timeline_item.survey = {};
+                            timeline_item.survey.date = survey.filled;
+                            timeline_item.survey.time = survey.filled.substring(12, 16);
+                            timeline_item.survey.logo = 'database-plus';
+                            timeline_item.survey.type = 'survey';
+                            timeline_item.survey.line_1 = event.data.survey_name;
+                            timeline_item.survey.line_2 = '#Event:' + survey.event_id;
+                            timeline_item.survey.line_3 = '#Resp.:' + survey.survey_response_id;
+                            timeline_item.survey.url = event.data.url;
+                            timeline_item.survey.data = survey;
                         };
 
                     });
