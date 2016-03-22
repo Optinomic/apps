@@ -224,8 +224,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         if (event.id === survey.event_id) {
 
-                            var date1 = event.data.created_at;
-                            var date2 = survey.filled;
+                            var date1 = $scope.d.functions.sureDateInstance(event.data.created_at);
+                            var date2 = $scope.d.functions.sureDateInstance(survey.filled);
                             var timeDiff = Math.abs(date2.getTime() - date1.getTime());
                             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
