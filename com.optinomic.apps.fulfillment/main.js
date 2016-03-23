@@ -167,10 +167,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.date = stay.data.start;
                     timeline_item.time = stay.data.start.substring(11, 16);
                     timeline_item.logo = 'mdi-clock-start';
-                    timeline_item.type = 'stay-start';
+                    timeline_item.type = 'stay';
                     timeline_item.line_1 = 'Eintritt';
                     timeline_item.line_2 = stay.from_to;
-                    timeline_item.line_3 = stay.duration;
+                    timeline_item.line_3 = 'Aufenthaltsdauer: ' + stay.duration + ' Tage';
                     timeline_item.url = stay.url;
                     timeline_item.data = stay;
                     timeline.push(timeline_item);
@@ -181,10 +181,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         timeline_item.date = stay.data.stop;
                         timeline_item.time = stay.data.stop.substring(11, 16);
                         timeline_item.logo = 'mdi-clock-stop';
-                        timeline_item.type = 'stay-start';
+                        timeline_item.type = 'stay';
                         timeline_item.line_1 = 'Austritt';
                         timeline_item.line_2 = stay.from_to;
-                        timeline_item.line_3 = stay.duration;
+                        timeline_item.line_3 = 'Aufenthaltsdauer: ' + stay.duration + ' Tage';
                         timeline_item.url = stay.url;
                         timeline_item.data = stay;
                         timeline.push(timeline_item);

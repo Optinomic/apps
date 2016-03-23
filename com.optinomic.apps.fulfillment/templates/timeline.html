@@ -24,9 +24,16 @@
                     <div class="cbp_tmlabel">
                         <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin layout-padding>
                             <div flex ng-class="item.class">
-                                <p class="md-body-1">{{item.line_1}}
-                                    <br>{{item.line_2}}
-                                    <br>{{item.line_3}}</p>
+                                <div ng-if="item.type === 'stay'">
+                                    <p class="flow-text">{{item.line_1}}</p>
+                                    <p class="md-body-1">{{item.line_2}}
+                                        <br>{{item.line_3}}</p>
+                                </div>
+                                <div ng-if="item.type !== 'stay'">
+                                    <p class="md-body-1">{{item.line_1}}
+                                        <br>{{item.line_2}}
+                                        <br>{{item.line_3}}</p>
+                                </div>
                                 <div class="box-footer">
                                     {{item.date | date}} | {{item.time}}
                                 </div>
