@@ -34,7 +34,7 @@
                                         <br>{{item.line_2}}
                                         <br>{{item.line_3}}</p>
                                 </div>
-                                <div class="box-footer">
+                                <div class="box-footer" ng-if="item.type !== 'stay'">
                                     {{item.date | date}} | {{item.time}}
                                 </div>
                             </div>
