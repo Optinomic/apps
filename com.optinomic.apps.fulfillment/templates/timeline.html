@@ -11,7 +11,7 @@
         </md-card-title-text>
     </md-card-title>
     <md-divider></md-divider>
-    <div ng-if="(result.events.length !== 0) && (result.surveys.length !== 0)">
+    <div ng-if="(result.events.length !== 0)">
         <md-card-content>
             <ul class="cbp_tmtimeline">
                 <li ng-repeat="item in result.timeline">
@@ -59,9 +59,9 @@
             </ul>
         </md-card-content>
     </div>
-    <div ng-if="(result.events.length === 0) && (result.surveys.length === 0)">
+    <div ng-if="(result.events.length === 0)">
         <md-card-content>
-            <p class="md-caption">Es ist weder ein Task geplant noch liegt einer Erfassung vor.</p>
+            <p class="md-caption">Es ist keine Aufgabe/Erfassung geplant.</p>
         </md-card-content>
     </div>
 </md-card>
