@@ -27,11 +27,17 @@
                                 <p class="md-body-1">{{item.line_1}}
                                     <br>{{item.line_2}}
                                     <br>{{item.line_3}}</p>
+                                <div class="box-footer">
+                                    {{item.date | date}} | {{item.time}}
+                                </div>
                             </div>
                             <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
                                 <p class="md-body-1">{{item.survey.line_1}}
                                     <br>{{item.survey.line_2}}
                                     <br>{{item.survey.line_3}}</p>
+                                <div class="box-footer">
+                                    {{item.date | date}} | {{item.time}}
+                                </div>
                             </div>
                         </div>
                     </div>
