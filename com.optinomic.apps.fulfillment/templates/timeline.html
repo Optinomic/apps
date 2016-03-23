@@ -22,14 +22,14 @@
                         <i class="mdi" style="margin-top:8px !important;" ng-class="item.logo"></i>
                     </div>
                     <div class="cbp_tmlabel">
-                        <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin layout-padding>
+                        <div layout="row" layout-gt-xs="row" layout-align="center center">
                             <div flex ng-class="item.class">
-                                <div ng-if="item.type === 'stay'">
+                                <div ng-if="item.type === 'stay'" layout-margin layout-padding>
                                     <p class="flow-text">{{item.line_1}}</p>
                                     <p class="md-body-1">{{item.line_2}}
                                         <br>{{item.line_3}}</p>
                                 </div>
-                                <div ng-if="item.type !== 'stay'">
+                                <div ng-if="item.type !== 'stay'" layout-margin layout-padding>
                                     <p class="md-body-1">{{item.line_1}}
                                         <br>{{item.line_2}}
                                         <br>{{item.line_3}}</p>
@@ -39,9 +39,11 @@
                                 </div>
                             </div>
                             <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
-                                <p class="md-body-1">{{item.survey.line_1}}
-                                    <br>{{item.survey.line_2}}
-                                    <br>{{item.survey.line_3}}</p>
+                                <div layout-margin layout-padding>
+                                    <p class="md-body-1">{{item.survey.line_1}}
+                                        <br>{{item.survey.line_2}}
+                                        <br>{{item.survey.line_3}}</p>
+                                </div>
                                 <div class="box-footer">
                                     {{item.date | date}} | {{item.time}}
                                 </div>
