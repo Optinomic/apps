@@ -207,13 +207,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.url = event.data.url;
                     timeline_item.data = event;
 
-                    timeline_item.survey.class = 'grey';
+                    timeline_item.class = 'grey';
 
                     if (event.data.status === 'done') {
-                        timeline_item.survey.class = 'green';
+                        timeline_item.class = 'green';
                     }
                     if (event.data.status === 'to_be_done') {
-                        timeline_item.survey.class = 'red';
+                        timeline_item.class = 'red';
                     }
 
 
