@@ -19,13 +19,13 @@
                         <span>{{item.date | date}}</span> <span>{{item.time}}</span>
                     </time>
                     <div class="cbp_tmicon">
-                        <i class="mdi" style="margin-top:8px !important; margin-left:-3px !important;" ng-class="item.logo"></i>
+                        <i class="mdi" style="margin-top:8px !important; margin-left:-1px !important;" ng-class="item.logo"></i>
                     </div>
                     <div class="cbp_tmlabel">
-                        <div layout="row" layout-gt-xs="row" layout-align="center center">
+                        <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin>
                             <div flex ng-class="item.class">
                                 <div ng-if="item.type === 'stay'" layout-margin layout-padding>
-                                    <p class="flow-text">{{item.line_1}}</p>
+                                    <p class="md-headline">{{item.line_1}}</p>
                                     <p class="md-body-1">{{item.line_2}}
                                         <br>{{item.line_3}}</p>
                                 </div>
