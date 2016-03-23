@@ -44,7 +44,10 @@
                                         <br>{{item.survey.line_2}}
                                         <br>{{item.survey.line_3}}</p>
                                 </div>
-                                <div class="box-footer">
+                                <div class="box-footer" ng-if="item.survey.type === 'survey-none'">
+                                    <md-button ng-click="" href="item.survey.url" class="md-primary" style="color:#FAFAFA">Jetzt ausführen</md-button>
+                                </div>
+                                <div class="box-footer" ng-if="item.survey.type !== 'survey-none'">
                                     {{item.date | date}} | {{item.time}}
                                 </div>
                             </div>
