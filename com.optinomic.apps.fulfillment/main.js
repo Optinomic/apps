@@ -223,6 +223,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.survey = {};
                     timeline_item.survey.logo = 'mdi-database';
                     timeline_item.survey.type = 'survey-none';
+                    timeline_item.survey.date = new Date();
+                    timeline_item.survey.date = timeline_item.survey.date.toString();
+                    timeline_item.survey.time = timeline_item.survey.date.substring(11, 16);
                     timeline_item.survey.line_1 = event.data.survey_name;
                     timeline_item.survey.line_2 = event.data.status;
                     timeline_item.survey.line_3 = event.data.description;

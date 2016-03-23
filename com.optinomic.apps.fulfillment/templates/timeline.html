@@ -39,18 +39,18 @@
                                 </div>
                             </div>
                             <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
-                                <div class="box-footer" ng-if="item.survey.type !== 'survey-none'">
+                                <div class="box-footer">
                                     {{item.survey.date | date}} | {{item.survey.time}}
                                 </div>
                                 <div ng-if="item.survey.type === 'survey-none'" layout-margin layout-padding>
                                     <p class="md-body-1">{{item.survey.line_1}}</p>
-                                    <md-button ng-href="{{item.survey.url}}" class="md-accent" style="color:#FAFAFA">Jetzt ausführen</md-button>
+                                    <md-button ng-href="{{item.survey.url}}" class="md-accent" style="color:#616161">Jetzt ausführen</md-button>
                                 </div>
                                 <div ng-if="item.survey.type !== 'survey-none'" layout-margin layout-padding>
                                     <p class="md-body-1">{{item.survey.line_1}}
                                         <br>{{item.survey.line_2}}
                                         <br>{{item.survey.line_3}}</p>
-                                    <md-button ng-click="showDetails(result, item.survey.data.patient_id, item.survey.data.stay_id, item.survey.data.event_id, item.survey.data.survey_response_id);" class="md-primary" style="color:#FAFAFA">Details</md-button>
+                                    <md-button ng-click="showDetails(result, item.survey.data.patient_id, item.survey.data.stay_id, item.survey.data.event_id, item.survey.data.survey_response_id);" class="md-primary" style="color:#1B5E20">Details</md-button>
                                 </div>
                             </div>
                         </div>
