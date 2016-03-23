@@ -39,8 +39,8 @@
                                 </div>
                             </div>
                             <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
-                                <div ng-if="item.survey.type === 'survey-none'" layout-margin layout-padding>
-                                    <p class="md-headline">{{item.line_1}}</p>
+                                <div ng-if="item.survey.type === 'survey-none'" layout-margin>
+                                    <p class="md-body-1">{{item.line_1}}</p>
                                     <md-button ng-href="{{item.survey.url}}" class="md-accent" style="color:#FAFAFA">Jetzt ausführen</md-button>
                                 </div>
                                 <div ng-if="item.survey.type !== 'survey-none'" layout-margin layout-padding>
