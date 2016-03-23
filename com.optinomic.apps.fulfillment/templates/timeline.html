@@ -19,7 +19,7 @@
                         <span>{{item.date | date}}</span> <span>{{item.time}}</span>
                     </time>
                     <div class="cbp_tmicon">
-                        <i class="mdi" style="margin-top:8px !important; margin-left:-1px !important;" ng-class="item.logo"></i>
+                        <i class="mdi" style="margin-top:8px !important; margin-left:0px !important;" ng-class="item.logo"></i>
                     </div>
                     <div class="cbp_tmlabel">
                         <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin>
@@ -39,13 +39,14 @@
                                 </div>
                             </div>
                             <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
-                                <div layout-margin layout-padding>
+                                <div ng-if="item.type === 'survey-none'" layout-margin layout-padding>
+                                    <p class="md-headline">{{item.line_1}}</p>
+                                    <md-button ng-href="{{item.survey.url}}" class="md-primary" style="color:#FAFAFA">Jetzt ausführen</md-button>
+                                </div>
+                                <div ng-if="item.type !== 'survey-none'" layout-margin layout-padding>
                                     <p class="md-body-1">{{item.survey.line_1}}
                                         <br>{{item.survey.line_2}}
                                         <br>{{item.survey.line_3}}</p>
-                                </div>
-                                <div class="box-footer" ng-if="item.survey.type === 'survey-none'">
-                                    <md-button ng-click="" href="item.survey.url" class="md-primary" style="color:#FAFAFA">Jetzt ausführen</md-button>
                                 </div>
                                 <div class="box-footer" ng-if="item.survey.type !== 'survey-none'">
                                     {{item.date | date}} | {{item.time}}
