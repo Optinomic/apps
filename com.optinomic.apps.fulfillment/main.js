@@ -319,22 +319,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var patient_object = {
             "patient_id": patient_id,
             "data": {}
-        }
+        };
 
         var stay_object = {
             "stay_id": stay_id,
             "data": {}
-        }
+        };
 
         var event_object = {
             "event_id": event_id,
             "data": {}
-        }
+        };
 
         var response_object = {
             "response_id": response_id,
             "data": {}
-        }
+        };
 
         $scope.d.details = {
             "patient": patient_object,
