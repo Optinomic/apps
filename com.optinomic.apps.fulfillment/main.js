@@ -207,6 +207,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.url = event.data.url;
                     timeline_item.data = event;
 
+                    timeline_item.survey.class = 'grey';
+
+                    if (event.data.status === 'done') {
+                        timeline_item.survey.class = 'green';
+                    }
+                    if (event.data.status === 'to_be_done') {
+                        timeline_item.survey.class = 'red';
+                    }
+
+
                     // Find - Survey Response for this event
 
 
@@ -217,6 +227,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     timeline_item.survey.line_2 = event.data.status;
                     timeline_item.survey.line_3 = event.data.description;
                     timeline_item.survey.url = event.data.url;
+                    timeline_item.survey.class = 'grey';
                     timeline_item.survey.data = {};
 
 
@@ -238,6 +249,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             timeline_item.survey.line_2 = 'Tage: ' + diffDays;
                             timeline_item.survey.line_3 = 'Stunden: ' + diffHours;
                             timeline_item.survey.url = event.data.url;
+                            timeline_item.survey.class = 'green';
                             timeline_item.survey.data = survey;
 
                             timeline_item.logo = 'mdi-check';

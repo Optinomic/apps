@@ -3,6 +3,33 @@ body {
     background-color: #ffffff !important;
 }
 
+.grey {
+    height: 100%;
+    background-color: #9E9E9E;
+    color: #212121;
+    border-color: #E0E0E0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.green {
+    height: 100%;
+    background-color: #4CAF50;
+    color: #212121;
+    border-color: #E0E0E0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.red {
+    height: 100%;
+    background-color: #F44336;
+    color: #FFEBEE;
+    border-color: #E0E0E0;
+    border-style: solid;
+    border-width: 1px;
+}
+
 .journal_created {
     position: absolute;
     top: 7px;
