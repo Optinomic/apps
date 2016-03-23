@@ -1,7 +1,7 @@
-<h3 class="md-headline">Erffassungs - Details  {{d.show_patient}}</h3>
+<h3 class="md-headline">Erffassungs - Details</h3>
 <div md-margin md-padding>
     <div ng-init="d.show_patient = false" class="grid-border-top">
-        <p class="md-display-1" style="color:#3F51B5">Patient (Alle Angaben)</p>
+        <p class="md-title" style="color:#3F51B5">Patient (Alle Angaben)</p>
         <div ng-if="d.show_patient === false">
             <md-button ng-click="d.show_patient = !d.show_patient" class="md-accent">Anzeigen</md-button>
         </div>
@@ -13,8 +13,9 @@
             <md-button ng-click="d.show_patient = !d.show_patient;" class="md-accent">Schliessen</md-button>
         </div>
     </div>
+    <div>&nbsp;</div>
     <div ng-init="d.show_stay = false" class="grid-border-top">
-        <p class="md-display-1" style="color:#3F51B5">Fall</p>
+        <p class="md-title" style="color:#3F51B5">Fall</p>
         <div ng-if="d.show_stay === false">
             <md-button ng-click="d.show_stay = !d.show_stay" class="md-accent">Anzeigen</md-button>
         </div>
@@ -26,8 +27,9 @@
             <md-button ng-click="d.show_stay = !d.show_stay" class="md-accent">Schliessen</md-button>
         </div>
     </div>
+    <div>&nbsp;</div>
     <div ng-init="d.show_event = false" class="grid-border-top">
-        <p class="md-display-1" style="color:#3F51B5">Event / Task</p>
+        <p class="md-title" style="color:#3F51B5">Event / Task</p>
         <div ng-if="d.show_event === false">
             <md-button ng-click="d.show_event = !d.show_event" class="md-accent">Anzeigen</md-button>
         </div>
@@ -39,8 +41,9 @@
             <md-button ng-click="d.show_event = !d.show_event" class="md-accent">Schliessen</md-button>
         </div>
     </div>
+    <div>&nbsp;</div>
     <div ng-init="d.show_response = false" class="grid-border-top">
-        <p class="md-display-1" style="color:#3F51B5">Antworten / Survey-Response</p>
+        <p class="md-title" style="color:#3F51B5">Antworten / Survey-Response</p>
         <div ng-if="d.show_response === false">
             <md-button ng-click="d.show_response = !d.show_event" class="md-accent">Anzeigen</md-button>
         </div>
