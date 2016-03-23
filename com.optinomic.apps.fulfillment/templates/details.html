@@ -1,53 +1,53 @@
 <h3 class="md-headline">Erffassungs - Details</h3>
 <div ng-init="show_patient = false">
-    <p class="md-subhead" style="color:#3F51B5">Patient (Alle Angaben)</p>
+    <p class="md-display-1" style="color:#3F51B5">Patient (Alle Angaben)</p>
     <div ng-if="show_patient === false">
-        <md-button ng-click="show_patient = true;" class="md-accent">Anzeigen</md-button>
+        <md-button ng-click="show_patient = !show_patient" class="md-accent">Anzeigen</md-button>
     </div>
     <div ng-if="show_patient === true">
-        <md-button ng-click="show_patient = false;" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_patient = !show_patient;" class="md-accent">Schliessen</md-button>
         <pre>
 			{{d.details.patient | json}}
 		</pre>
-        <md-button ng-click="show_patient = false;" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_patient = !show_patient;" class="md-accent">Schliessen</md-button>
     </div>
 </div>
-<div ng-init="show_stay = true">
-    <p class="md-subhead" style="color:#3F51B5">Fall</p>
+<div ng-init="show_stay = false">
+    <p class="md-display-1" style="color:#3F51B5">Fall</p>
     <div ng-if="show_stay === false">
-        <md-button ng-click="show_stay = true" class="md-accent">Anzeigen</md-button>
+        <md-button ng-click="show_stay = !show_stay" class="md-accent">Anzeigen</md-button>
     </div>
     <div ng-if="show_stay === true">
-        <md-button ng-click="show_stay = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_stay = !show_stay" class="md-accent">Schliessen</md-button>
         <pre>
 			{{d.details.stay | json}}
 		</pre>
-        <md-button ng-click="show_stay = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_stay = !show_stay" class="md-accent">Schliessen</md-button>
     </div>
 </div>
 <div ng-init="show_event = false">
-    <p class="md-subhead" style="color:#3F51B5">Event / Task</p>
+    <p class="md-display-1" style="color:#3F51B5">Event / Task</p>
     <div ng-if="show_event === false">
-        <md-button ng-click="show_event = true" class="md-accent">Anzeigen</md-button>
+        <md-button ng-click="show_event = !show_event" class="md-accent">Anzeigen</md-button>
     </div>
     <div ng-if="show_event === true">
-        <md-button ng-click="show_event = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_event = !show_event" class="md-accent">Schliessen</md-button>
         <pre>
 			{{d.details.event | json}}
 		</pre>
-        <md-button ng-click="show_event = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_event = !show_event" class="md-accent">Schliessen</md-button>
     </div>
 </div>
 <div ng-init="show_response = false">
-    <p class="md-subhead" style="color:#3F51B5">Antworten / Survey-Response</p>
+    <p class="md-display-1" style="color:#3F51B5">Antworten / Survey-Response</p>
     <div ng-if="show_response === false">
-        <md-button ng-click="show_response = true" class="md-accent">Anzeigen</md-button>
+        <md-button ng-click="show_response = !show_event" class="md-accent">Anzeigen</md-button>
     </div>
     <div ng-if="show_response === true">
-        <md-button ng-click="show_response = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_response = !show_event" class="md-accent">Schliessen</md-button>
         <pre>
 			{{d.details.response | json}}
 		</pre>
-        <md-button ng-click="show_response = false" class="md-accent">Schliessen</md-button>
+        <md-button ng-click="show_response = !show_event" class="md-accent">Schliessen</md-button>
     </div>
 </div>
