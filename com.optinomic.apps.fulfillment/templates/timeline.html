@@ -1,4 +1,4 @@
-<h3 class="md-headline">Erfüllungsgrad ({{d.appInit.app_id}})</h3>
+<h3 class="md-headline">Erfüllungsgrad</h3>
 <p class="md-body-1" style="color:#3F51B5">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
 <div>&nbsp;</div>
 <div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
@@ -61,7 +61,7 @@
     </div>
     <div ng-if="(result.events.length === 0)">
         <md-card-content>
-            <p class="md-caption">Es ist keine Aufgabe/Erfassung geplant.</p>
+            <p class="md-caption">Das Modul ({{d.appInit.app_id}}) ist nicht aktiviert oder es ist keine Aufgabe/Erfassung geplant.</p>
         </md-card-content>
     </div>
 </md-card>

@@ -67,6 +67,20 @@
         </div>
     </div>
     <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_before" md-placeholder="Eintritt ab"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_after" md-placeholder="Eintritt bis"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_before" md-placeholder="Austritt ab"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_after" md-placeholder="Austritt bis"></md-datepicker>
+        </div>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
         <div>
             <md-button ng-click="initApp()" class="md-primary" style="color:#9E9E9E">Zurücksetzen</md-button>
         </div>
