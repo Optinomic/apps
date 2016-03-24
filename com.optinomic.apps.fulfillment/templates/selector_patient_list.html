@@ -66,18 +66,19 @@
             </md-input-container>
         </div>
     </div>
-    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-margin>
+    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-padding>
+        <p class="md-caption">Bitte selektieren Sie das Datum aussliesslich über den Picker - nicht von Hand überschreiben.</p>
         <div flex>
-            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_before" md-placeholder="Eintritt ab"></md-datepicker>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_after" md-placeholder="Eintritt nach"></md-datepicker>
         </div>
         <div flex>
-            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_after" md-placeholder="Eintritt bis"></md-datepicker>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_before" md-placeholder="Eintritt vor"></md-datepicker>
         </div>
         <div flex>
-            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_before" md-placeholder="Austritt ab"></md-datepicker>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_after" md-placeholder="Austritt nach"></md-datepicker>
         </div>
         <div flex>
-            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_after" md-placeholder="Austritt bis"></md-datepicker>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_before" md-placeholder="Austritt vor"></md-datepicker>
         </div>
     </div>
     <div layout="row" layout-gt-xs="row" layout-xs="column">
