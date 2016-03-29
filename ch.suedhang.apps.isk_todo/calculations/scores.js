@@ -437,16 +437,16 @@ function main(responses) {
         score_id = 0;
         scores_array[score_id].name = 'soz_orient';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK1]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK5]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK9]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK11]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK14]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK18]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK21]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK23]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK27]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK31]']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK1']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK5']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK9']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK11']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK14']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK18']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK21']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK23']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK27']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK31']);
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 1;
