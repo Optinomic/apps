@@ -1,12 +1,13 @@
 [module]
 id = ch.suedhang.apps.isk
 name = ISK Südhang
-short_description = Inventar Sozialer Kompetenzen
+short_description = Persönliche Verhaltensweisen und Gewohnheiten, 33 Aussagen.
 version = include(VERSION)
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen:
+soziale Orientierung, Offensivität, Sebststeuerung und Reflexibilität.
 
 [developer]
 first_name = Beat
@@ -55,23 +56,12 @@ min_questions =
 min_lastpage = 2
 
 
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
-
-
 [event activation]
 type = on_activation
 time = 19:00
 due_after = 86400
 overdue = ignore
-description = Track your daily craving.
+description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.
 survey = isk
 
 
