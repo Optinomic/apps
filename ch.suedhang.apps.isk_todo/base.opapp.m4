@@ -1,7 +1,7 @@
 [module]
 id = ch.suedhang.apps.isk
 name = ISK Südhang
-short_description = Persönliche Verhaltensweisen und Gewohnheiten, 33 Aussagen.
+short_description = Inventar Sozialer Kompetenzen - Kurzform.
 version = include(VERSION)
 type = patient
 
