@@ -1,4 +1,3 @@
-<script src="https://rawgit.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js"></script>
 include(../lib/js/angular/angular_app_init.js)
 include(../lib/js/optinomic/data_module/service/api-service.js)
 include(../lib/js/optinomic/data_module/service/scope-d-service.js)
