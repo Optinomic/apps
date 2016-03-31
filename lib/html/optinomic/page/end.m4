@@ -5,7 +5,7 @@
         </div>
     </div>
 </div>
-<div>
+<div data-iframe-height>
     &nbsp;
 </div>
 <head>
