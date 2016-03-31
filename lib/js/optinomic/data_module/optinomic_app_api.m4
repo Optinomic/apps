@@ -1,3 +1,4 @@
+include(../lib/js/vendor/iframe-resizer/iframeResizer.contentWindow.min.js)
 include(../lib/js/angular/angular_app_init.js)
 include(../lib/js/optinomic/data_module/service/api-service.js)
 include(../lib/js/optinomic/data_module/service/scope-d-service.js)
