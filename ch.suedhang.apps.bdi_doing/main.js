@@ -33,15 +33,16 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
                 $scope.setDataView();
+
+                // Run App-Functions:
+                $scope.setExport();
+                $scope.setDataView();
             };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            // Run App-Functions:
-            $scope.setTimelineChartOptions();
-            $scope.setTscoreChart();
-            $scope.setStanineView();
+
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
