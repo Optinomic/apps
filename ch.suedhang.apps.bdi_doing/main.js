@@ -64,8 +64,31 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.d.export.delimitter = ';';
     $scope.d.export.sql_field = "select * from information_schema.tables";
 
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
-
+    $scope.d.export.sql_field = "SELECT patient.id 
+    , patient.last_name 
+    , ((cast(response AS json))->>'BDI[BDI1]') as BDI1
+    , ((cast(response AS json))->>'BDI[BDI2]') as BDI2
+    , ((cast(response AS json))->>'BDI[BDI3]') as BDI3
+    , ((cast(response AS json))->>'BDI[BDI4]') as BDI4
+    , ((cast(response AS json))->>'BDI[BDI5]') as BDI5
+    , ((cast(response AS json))->>'BDI[BDI6]') as BDI6
+    , ((cast(response AS json))->>'BDI[BDI7]') as BDI7
+    , ((cast(response AS json))->>'BDI[BDI8]') as BDI8
+    , ((cast(response AS json))->>'BDI[BDI9]') as BDI9
+    , ((cast(response AS json))->>'BDI[BDI10]') as BDI10
+    , ((cast(response AS json))->>'BDI[BDI11]') as BDI11
+    , ((cast(response AS json))->>'BDI[BDI12]') as BDI12
+    , ((cast(response AS json))->>'BDI[BDI13]') as BDI13
+    , ((cast(response AS json))->>'BDI[BDI14]') as BDI14
+    , ((cast(response AS json))->>'BDI[BDI15]') as BDI15
+    , ((cast(response AS json))->>'BDI[BDI16]') as BDI16
+    , ((cast(response AS json))->>'BDI[BDI17]') as BDI17
+    , ((cast(response AS json))->>'BDI[BDI18]') as BDI18
+    , ((cast(response AS json))->>'BDI[BDI19]') as BDI19
+    , ((cast(response AS json))->>'BDI[BDI20]') as BDI20   
+    , ((cast(response AS json))->>'BDI[BDI21]') as BDI21
+    FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
+    WHERE module = 'ch.suedhang.apps.bdi_doing'";
 
     // ToDO: M4 - Import - remove new lines.
 
@@ -90,11 +113,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
 
     };
-
-
-
-
-
 
     // -----------------------------------
     // <score-threshold>
@@ -130,175 +148,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         }]
     };
 
-
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Suchtdruck (∑)',
-            'focusField': 'dailyMood[mood]',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function() {
-        var score_answer = [{
-            "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setTscoreChart = function() {
-
-        // Options
-        $scope.options_plot = {
-            'show_scores': true
-        };
-
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
-    };
-
-
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
-
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-    };
-
-
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
     $scope.setDataView = function() {
 
         var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
 
         $scope.d.grid = {};
         $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);

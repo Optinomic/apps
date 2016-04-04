@@ -6,7 +6,7 @@ function main(responses) {
     // ------------------------------------------
 
     calc.doSomething = function() {
-        var score = 73;
+        var score = BDI_score;
         return score;
     };
 
@@ -16,14 +16,7 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-        var responses_array = myResponses.survey_responses;
-        var allResults = [];
-
-        responses_array.forEach(function(response, myindex) {
-            var myResults = {};
-            var result = response.data.response;
-
-            // Berechnung BDI-Summenscore
+                    // Berechnung BDI-Summenscore
             var BDI_score = 0;
                 BDI_score = BDI_score + parseInt(BDI1);
                 BDI_score = BDI_score + parseInt(BDI2);
