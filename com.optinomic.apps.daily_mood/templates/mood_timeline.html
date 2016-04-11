@@ -1,9 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">Chart</h3>
 <chart-timeline data='d.timeline.data' options='d.timeline.options'></chart-timeline>
 <h3 class="md-headline">Data</h3>
 <div ng-repeat="item in d.dataMain.survey_responses_array">
-    <p class="md-body-1">{{item.filled_day}} | {{item.filled_time}}: <b>{{item.daily_mood}}</b></p>
-    <p ng-if="item.notes" class="md-caption">{{item.notes}}</p>
+    <p class="md-body-1">{{item.filled_day}} | {{item.filled_time}}: <b>{{item.daily_mood}}</b> <span ng-if="item.notes">| {{item.notes}}</span></p>
 </div>
 include(../lib/html/optinomic/page/end.m4)

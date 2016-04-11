@@ -139,7 +139,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
 
         $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.grid.rowData;
+        $scope.d.timeline.data = $scope.d.grid.options.rowData;
 
         $scope.d.timeline.options = {
             'title': 'Tägliche Stimmung',
