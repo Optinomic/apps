@@ -18,8 +18,13 @@
                         </p>
                     </md-card-content>
                     <md-divider></md-divider>
+                    <md-input-container class="md-block">
+                        <label>Bemerkungen</label>
+                        <textarea ng-model="result.notes" md-maxlength="350" rows="5"></textarea>
+                    </md-input-container>
+                    <md-divider></md-divider>
                     <md-card-actions layout="row" layout-align="end center">
-                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <p class="md-caption">1 von 1 &nbsp;&nbsp;</p>
                         <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
                         <md-button ng-click="saveresult()">Speichern</md-button>
                     </md-card-actions>
