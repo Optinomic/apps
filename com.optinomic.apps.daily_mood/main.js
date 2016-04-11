@@ -119,7 +119,37 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.grid.options.rowData = resultsArray;
 
 
+        $scope.setTimelineChartOptions();
+
         //console.log('dataGRID: ', $scope.d.grid);
+    };
+
+
+
+    // -----------------------------------
+    // Chart: Timeline
+    // -----------------------------------
+
+    $scope.setTimelineChartOptions = function() {
+        // -----------------------------------
+        // Chart: Timeline Options
+        // - fillDates:  Still experimental
+        // -----------------------------------
+        var myPatient = $scope.d.dataMain.patient.patient.data;
+        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
+
+        $scope.d.timeline = {};
+        $scope.d.timeline.data = $scope.d.grid.rowData;
+
+        $scope.d.timeline.options = {
+            'title': 'Tägliche Stimmung',
+            'focusField': 'daily_mood',
+            'defaultChart': 'day',
+            'dateField': 'filled',
+            'fillDates': false,
+            'firstWeekDay': 'Mo',
+            'patient': patientFullName
+        };
     };
 
 

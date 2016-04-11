@@ -18,8 +18,8 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template daily_mood_overview 6 7]
-include(templates/mood.html)
+[template daily_mood_timeline 6 7]
+include(templates/mood_timeline.html)
 
 [template survey_responses 6 8]
 include(templates/data.html)
