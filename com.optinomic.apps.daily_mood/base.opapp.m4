@@ -49,7 +49,7 @@ host = default
 [survey_markup daily_mood_survey]
 include(survey_markups/daily_mood_survey.html)
 
-[event morning]
+[event Morgen]
 type = daily
 time = 08:00
 due_after = 7200
@@ -57,7 +57,7 @@ overdue = send_reminder_once
 description = Morgen: Aktuelle Stimmung
 survey = daily_mood_survey
 
-[event morning]
+[event Mittag]
 type = daily
 time = 12:00
 due_after = 7200
@@ -65,7 +65,7 @@ overdue = send_reminder_once
 description = Mittag: Aktuelle Stimmung
 survey = daily_mood_survey
 
-[event morning]
+[event Abend]
 type = daily
 time = 19:00
 due_after = 7200
