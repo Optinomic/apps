@@ -1,6 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-repeat="item in d.survey_responses_array">
+<div ng-repeat="item in d.dataMain.survey_responses_array">
     <p class="md-body-1">{{item.filled_day}} | {{item.filled_time}}: <b>{{item.daily_mood}}</b></p>
-    <p ng-if="item.notes" class="md-caption">{{item.notes}} </p>
+    <p ng-if="item.notes" class="md-caption">{{item.notes}}</p>
 </div>
 include(../lib/html/optinomic/page/end.m4)
