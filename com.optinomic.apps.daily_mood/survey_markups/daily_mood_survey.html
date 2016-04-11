@@ -1,0 +1,36 @@
+<div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex="50" layout="column">
+            <div ng-hide="thankyou">
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">Wie geht es Ihnen?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Bitte beurteilen Sie Ihre aktuelle Stimmung</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.daily_mood = result.daily_mood === undefined ? 50 : result.daily_mood" ng-model="result.daily_mood" step="1" min="1" max="100" aria-label="Daily mood">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.daily_mood}}</p>
+                        <p class="md-body-1">
+                            0 = sehr schlecht | 50 = ausgeglichen | 100 = sehr gut
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 7 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="saveresult()">Speichern</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div ng-show="thankyou">
+                <h1 class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
