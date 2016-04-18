@@ -91,7 +91,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     // DataView : angulargrid.com
     // -----------------------------------
-<<<<<<< HEAD
 
     $scope.d.navigator = 0;
 
@@ -154,7 +153,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 export.sql)
         };
     };
-=======
+
+
     $scope.setDataView = function() {
 
         var resultsArray = $scope.d.dataMain.survey_responses_array;
@@ -222,9 +222,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             enableCellExpressions: true,
             enableSorting: true,
             showToolPanel: false
->>>>>>> parent of dcfe627... BDI
         };
 
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
+});
