@@ -5,9 +5,8 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = BDI_score;
-        return score;
+    calc.roundToOne = function(num) {
+        return +(Math.round(num + "e+1") + "e-1");
     };
 
 
@@ -16,7 +15,10 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-                    // Berechnung BDI-Summenscore
+        var responses_array = myResponses.survey_responses;
+        var allResults = [];
+
+                           // Berechnung BDI-Summenscore
             var BDI_score = 0;
                 BDI_score = BDI_score + parseInt(BDI1);
                 BDI_score = BDI_score + parseInt(BDI2);
@@ -40,9 +42,11 @@ function main(responses) {
                 BDI_score = BDI_score + parseInt(BDI20);
                 BDI_score = BDI_score + parseInt(BDI21);
 
+            myResults.BDI_score = BDI_score;
+
             
             // Something
-            myResults.something = calc.doSomething();
+            // myResults.something = calc.doSomething();
 
 
             // Write Results for the Return
