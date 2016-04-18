@@ -132,7 +132,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -------------------
     // Data-Export
     // -------------------
-    $scope.setExport = function() {
+    //$scope.setExport = function() {
 
 
         // ------------------------------------------------
@@ -143,20 +143,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var module_packages = [];
-        var data_query = {};
-        data_query = {
-            name: 'BDI-II',
-            sql: include_as_js_string(
-                bdi2.sql)
-        };
-        module_packages.push(data_query);
+        //var module_packages = [];
+        //var data_query = {};
+        //data_query = {
+        //    name: 'BDI-II',
+        //    sql: include_as_js_string(
+        //        bdi2.sql)
+        //};
+        //module_packages.push(data_query);
 
 
-        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
+        //$scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
 
-    };
+    //};
 
 
 });
