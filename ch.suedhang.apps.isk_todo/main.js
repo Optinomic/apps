@@ -32,15 +32,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
-                $scope.setDataView();
+
+                // Run App-Functions:
+                $scope.setStanineView();
+                $scope.setExport();
+
             };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            // Run App-Functions:
-            $scope.setStanineView();
-            $scope.setExport();
+            
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -80,71 +82,33 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-
-
-    // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
-
-
-
     // -----------------------------------
     // Stanine - Chart  <chart-stanine>
     // -----------------------------------
 
     $scope.getAnswerStanine = function() {
         var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
+            "question": "Soziale Orientierung",
+            "sub_left": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
+            "sub_right": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
             "stanine": $scope.d.functions.getRandomInt(1, 9),
             "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
+            "question": "Offensivität",
+            "sub_left": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
+            "sub_right": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
             "stanine": $scope.d.functions.getRandomInt(1, 9),
             "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
+            "question": "Selbststeuerung",
+            "sub_left": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
+            "sub_right": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
             "stanine": $scope.d.functions.getRandomInt(1, 9),
             "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
+            "question": "Reflexibilität",
+            "sub_left": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
+            "sub_right": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
             "stanine": $scope.d.functions.getRandomInt(1, 9),
             "sum_score": $scope.d.functions.getRandomInt(0, 100)
         }];
@@ -155,102 +119,60 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.setStanineView = function() {
 
         $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
+        $scope.stanine.data = [];
 
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
+        // Loop Responses and push to Chart-Data
+        var survey_responses = $scope.d.dataMain.survey_responses;
+        survey_responses.forEach(function(current_response, myindex) {
+
+
+            // Scores - Update Scores with correct labeling
+            var scores = current_response.calculations[0].calculation_result.scores
+
+            scores[0].question = "Soziale Orientierung";
+            scores[0].sub_left = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
+            scores[0].sub_right = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
+
+            scores[1].question = "Offensivität";
+            scores[1].sub_left = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
+            scores[1].sub_right = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
+
+            scores[2].question = "Selbststeuerung";
+            scores[2].sub_left = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
+            scores[2].sub_right = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
+
+            scores[3].question = "Reflexibilität";
+            scores[3].sub_left = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
+            scores[3].sub_right = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
+
+            // Create nice Labels
+            var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
+            var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
+            var label_type = 'Verlauf: ';
+
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
+                label_type = 'Eintritt: ';
+            };
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
+                label_type = 'Austritt: ';
+            };
+            label = label_type + label;
+
+
+            var respone_to_push = {
+                "label": label,
+                "scores": scores
+            }
+            $scope.stanine.data.push(respone_to_push);
+        });
+
+
+        console.log('(!) setStanineView', $scope.stanine);
+
     };
 
 
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
 
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
-
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-        // columnDefsManually: If you want to create columnDefs manually:
-        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
-        var columnDefsManually = [{
-            headerTooltip: "Datum",
-            headerName: "Datum",
-            editable: true,
-            suppressSizeToFit: true,
-            width: 145,
-            field: "datestamp",
-            cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck (Int)",
-            cellClass: 'md-body-2',
-            suppressSizeToFit: true,
-            width: 110,
-            valueGetter: 'parseInt(data.Suchtdruck_1)',
-            filter: 'number'
-        }, {
-            headerName: "Bemerkungen",
-            editable: true,
-            cellClass: 'md-body-1',
-            field: "diary",
-            filter: 'text'
-        }, {
-            headerTooltip: "PID",
-            headerName: "Patient-ID",
-            editable: false,
-            field: "PID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }, {
-            headerTooltip: "FID",
-            headerName: "Fall-ID",
-            editable: false,
-            field: "FID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }];
-
-
-        // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
-    };
 
 
 });
