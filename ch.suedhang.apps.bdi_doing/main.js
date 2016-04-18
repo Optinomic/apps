@@ -56,34 +56,34 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
 
     // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
+    //$scope.scale_ranges = {
+        //"ranges": [{
+        //    "from": 0,
+        //    "to": 8,
+        //    "result": "Keine Depression",
+        //    "result_color": "green"
+        //}, {
+        //    "from": 9,
+        //    "to": 13,
+        //    "result": "Minimale Depression",
+        //    "result_color": "green"
+        //}, {
+        //    "from": 14,
+        //    "to": 19,
+        //    "result": "Leichte Depression",
+        //    "result_color": "orange"
+        //}, {
+        //    "from": 20,
+        //    "to": 28,
+        //    "result": "Mittelschwere Depression",
+        //    "result_color": "orange"
+        //}, {
+        //    "from": 29,
+        //    "to": 63,
+        //    "result": "Schwere Depression",
+        //    "result_color": "red"
+        //}]
+    //};
 
 
     // -----------------------------------
@@ -132,7 +132,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -------------------
     // Data-Export
     // -------------------
-    //$scope.setExport = function() {
+    $scope.setExport = function() {
 
 
         // ------------------------------------------------
@@ -143,20 +143,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // Hinzufügen gespeicherter SQL-Dateien in /includes
-        //var module_packages = [];
-        //var data_query = {};
-        //data_query = {
-        //    name: 'BDI-II',
-        //    sql: include_as_js_string(
-        //        bdi2.sql)
-        //};
-        //module_packages.push(data_query);
+        var module_packages = [];
+        var data_query = {};
+        data_query = {
+            name: 'BDI-II',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
 
 
-        //$scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
 
-    //};
-
-
+    };
 });
