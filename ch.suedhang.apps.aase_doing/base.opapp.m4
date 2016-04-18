@@ -18,21 +18,12 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
+[template data_export 6 8]
+include(templates/export.html)
 
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template data_download 6 14]
-include(templates/download.html)
-
-
-[dependencies]
-\\ Abrechnung = S && Abteilung = 2
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
@@ -50,14 +41,11 @@ responsibility = lead_therapist
 name = Alcohol Abstinence Self-Efficacy Scale (AASE)
 host = default
 survey_id = 526942
-hash = X4X64
-pid = X4X65
-fid = X113X2858
+hash = X34X410
+pid = X34X411
+fid = X34X412
 min_questions =
 min_lastpage = 2
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
 
 [event activation]
 type = on_activation
@@ -81,7 +69,6 @@ include(emails/new_event.html)
 
 [email overdue html]
 include(emails/overdue.html)
-
 
 [calculation aase_score javascript]
 include(calculations/aase_score.js)

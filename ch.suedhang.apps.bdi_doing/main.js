@@ -37,6 +37,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 // Run App-Functions:
                 $scope.setExport();
                 $scope.setDataView();
+
             };
 
             // Run Public-Functions:
@@ -52,68 +53,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
-
-    $scope.d.export.sql_field = "SELECT patient.id 
-    , patient.last_name 
-    , ((cast(response AS json))->>'BDI[BDI1]') as BDI1
-    , ((cast(response AS json))->>'BDI[BDI2]') as BDI2
-    , ((cast(response AS json))->>'BDI[BDI3]') as BDI3
-    , ((cast(response AS json))->>'BDI[BDI4]') as BDI4
-    , ((cast(response AS json))->>'BDI[BDI5]') as BDI5
-    , ((cast(response AS json))->>'BDI[BDI6]') as BDI6
-    , ((cast(response AS json))->>'BDI[BDI7]') as BDI7
-    , ((cast(response AS json))->>'BDI[BDI8]') as BDI8
-    , ((cast(response AS json))->>'BDI[BDI9]') as BDI9
-    , ((cast(response AS json))->>'BDI[BDI10]') as BDI10
-    , ((cast(response AS json))->>'BDI[BDI11]') as BDI11
-    , ((cast(response AS json))->>'BDI[BDI12]') as BDI12
-    , ((cast(response AS json))->>'BDI[BDI13]') as BDI13
-    , ((cast(response AS json))->>'BDI[BDI14]') as BDI14
-    , ((cast(response AS json))->>'BDI[BDI15]') as BDI15
-    , ((cast(response AS json))->>'BDI[BDI16]') as BDI16
-    , ((cast(response AS json))->>'BDI[BDI17]') as BDI17
-    , ((cast(response AS json))->>'BDI[BDI18]') as BDI18
-    , ((cast(response AS json))->>'BDI[BDI19]') as BDI19
-    , ((cast(response AS json))->>'BDI[BDI20]') as BDI20   
-    , ((cast(response AS json))->>'BDI[BDI21]') as BDI21
-    FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
-    WHERE module = 'ch.suedhang.apps.bdi_doing'";
-
-    // ToDO: M4 - Import - remove new lines.
-
-    //var sql_import_string = "in_clude(`templates/export.sql')";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
-
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
-
-    $scope.export = function() {
-
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
-
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
-
-    };
 
     // -----------------------------------
     // <score-threshold>
@@ -213,6 +152,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             name: 'BDI-II',
             sql: include_as_js_string(
                 export.sql)
+        };
+    };
 =======
     $scope.setDataView = function() {
 
@@ -287,10 +228,3 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
-<<<<<<< HEAD
-});
-=======
-
-
-});
->>>>>>> parent of dcfe627... BDI
