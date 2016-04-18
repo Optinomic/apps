@@ -5,7 +5,7 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.get_stanine = function(gender, scale) {
+    calc.get_stanine = function(gender, scale, num) {
         // Variablen initialisieren
 
         // Falls gender nicht gesetzt ist = Mann
@@ -447,7 +447,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK23']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK27']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK31']);
-        scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 1;
         scores_array[score_id].name = 'offensiv';
@@ -460,7 +460,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK24']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK28']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK32']);
-        scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 2;
         scores_array[score_id].name = 'selbststeuerung';
@@ -473,7 +473,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK25']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK29']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK33']);
-        scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 3;
         scores_array[score_id].name = 'reflex';
@@ -485,25 +485,9 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK22']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK26']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK30']);
-        scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         return scores_array;
-    };
-
-    calc.getPatientAge = function(birth_date) {
-        if (birth_date !== null) {
-            var today = new Date();
-            var birthDate = new Date(birth_date);
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            };
-        } else {
-            var age = 1;
-        };
-
-        return age;
     };
 
 
@@ -516,17 +500,12 @@ function main(responses) {
         var allResults = [];
 
 
-
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
 
             // Calculate Stuff
-
-            var age = calc.getPatientAge(myResponses.patient.data.birthdate);
             var gender = myResponses.patient.data.gender;
-            var population = calc.get_population(age, gender);
-            myResults.population = population;
 
             myResults.scores = calc.getScores(result, population);
 
