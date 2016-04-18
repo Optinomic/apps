@@ -17,8 +17,7 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template simple_score 6 7]
-include(templates/score.html)
+
 
 [template data_download 6 14]
 include(templates/download.html)
@@ -42,9 +41,9 @@ responsibility = lead_therapist
 name = Beck-Depressions-Inventar (BDI-II)
 host = default
 survey_id = 786887
-hash = X31X392
-pid = X31X393
-fid = X31X394
+hash = X18X779
+pid = X18X780
+fid = X84X2211
 min_questions =
 min_lastpage = 2
 
