@@ -55,7 +55,7 @@ time = 12:00
 due_after = 259200
 overdue = ignore
 description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
-survey = daily_mood
+survey = bdi2
 
 
 [email new_event html]
