@@ -1052,7 +1052,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "In Compedium nachschlagen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_info.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1153,13 +1153,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "Medikament bearbeiten",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_edit.html?V20160421'
         }, {
             headerName: null,
             headerTooltip: "Medikament löschen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_delete.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1226,7 +1226,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "In Compedium nachschlagen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_info.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1312,13 +1312,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "Medikament bearbeiten",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_edit.html?V20160421'
         }, {
             headerName: null,
             headerTooltip: "Medikament löschen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_delete.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1375,7 +1375,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "In Compedium nachschlagen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_info.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_info.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
@@ -1390,13 +1390,13 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             headerTooltip: "Medikament bearbeiten",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_edit.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_edit.html?V20160421'
         }, {
             headerName: null,
             headerTooltip: "Medikament löschen",
             width: 30,
             suppressSizeToFit: true,
-            templateUrl: 'https://rawgit.com/Optinomic/apps/master/cis_medication/templates/partial/template_delete.html'
+            templateUrl: 'https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.cis.medication/templates/partial/template_delete.html?V20160421'
         }, {
             cellClass: 'md-body-1',
             editable: false,
