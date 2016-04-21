@@ -21,6 +21,67 @@ include(../lib/html/optinomic/page/start.m4)
                     </p>
                 </div>
             </div>
+            <p>&nbsp;</p>
+            <md-button ng-click="d.showSurvey = !d.showSurvey">Fragebogen anzeigen</md-button>
+        </md-card-content>
+        <md-divider ng-if="d.showSurvey"></md-divider>
+        <md-card-content ng-if="d.showSurvey" layout-margin>
+            <div layout="row">
+                <div flex="70">
+                    1.) Gehorsam und Achtung gegenüber Autoritäten sind die wichtigsten Tugenden, die Kinder lernen sollten.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    2.) Ein Mensch mit schlechten Umgangsformen kann nicht erwarten, mit anständigen Menschen gut auszukommen.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    3.) Wenn die Leute weniger reden und mehr arbeiten würden, ginge es jedem besser.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    4.) Kein anständiger Mensch käme jemals auf den Gedanken, einen Freund zu verletzen.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    5.) Irgendwann muss man die rebellischen Ideen der Jugendzeit überwinden.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    6.) Junge Leute haben ab und zu rebellische Ideen, aber wenn sie älter werden, sollten sie darüber hinwegkommen und ihren Platz im Leben finden.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06}}
+                </div>
+            </div>
+            <div layout="row">
+                <div flex="70">
+                    7.) Bücher und Filme sollten sich nicht so viel mit den Schattenseiten des Lebens befassen.
+                </div>
+                <div flex="30">
+                    {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07}}
+                </div>
+            </div>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
