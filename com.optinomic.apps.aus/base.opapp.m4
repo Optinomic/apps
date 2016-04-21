@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Selbstbeurteilungsskala mit sieben Items zur Erfassung des Autoritarismus. Die AUS kann bei Probanden ab 12 Jahre eingesetzt werden (Goch, 1997). Mit der sieben Items umfassenden Autoritarismusskala ist die Konstruktion eines homogenen und ökonomischen Forschungsinstrumentes gelungen, welches gleichermaßen in verschiedenen Kulturen (Westdeutschland, Ostdeutschland, Spanien, USA) zur Messung des Autoritarismus geeignet ist (Dalbert, 1996).
+Selbstbeurteilungsskala mit sieben Items zur Erfassung des Autoritarismus. Die AUS kann bei Probanden ab 12 Jahre eingesetzt werden (Goch, 1997). Mit der sieben Items umfassenden Autoritarismusskala ist die Konstruktion eines homogenen und ökonomischen Forschungsinstrumentes gelungen, welches gleichermassen in verschiedenen Kulturen (Westdeutschland,Ostdeutschland, Spanien, USA) zur Messung des Autoritarismus geeignet ist (Dalbert, 1996).
 
 [developer]
 first_name = Beat
