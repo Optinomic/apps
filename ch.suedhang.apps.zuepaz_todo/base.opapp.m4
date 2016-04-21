@@ -51,7 +51,7 @@ time = 07:00
 due_after = 604800
 overdue = ignore
 description = Erfassung der Patientenzufriedenheit
-survey = ZüPaz - Version Südhang
+survey = ZuePaZ_Suedhang
 
 [email new_event html]
 include(emails/new_event.html)
