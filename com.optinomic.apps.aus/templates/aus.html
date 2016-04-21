@@ -22,7 +22,10 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <p>&nbsp;</p>
-            <md-button ng-click="d.showSurvey = !d.showSurvey">Fragebogen anzeigen</md-button>
+            <md-button ng-click="d.showSurvey = !d.showSurvey">
+                <span ng-if="!d.showSurvey">Fragebogen anzeigen</span>
+                <span ng-if="d.showSurvey">Fragebogen ausblenden</span>
+            </md-button>
         </md-card-content>
         <md-divider ng-if="d.showSurvey"></md-divider>
         <md-card-content ng-if="d.showSurvey" layout-margin>
