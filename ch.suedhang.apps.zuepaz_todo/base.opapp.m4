@@ -32,10 +32,10 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = ZüPaZ - Version Südhang
+id = ZuePaZ_Suedhang
 type = lime
 responsibility = lead_therapist
-name = Züpaz
+name = Zuepaz
 host = default
 survey_id = 743827
 hash = X45X1110
