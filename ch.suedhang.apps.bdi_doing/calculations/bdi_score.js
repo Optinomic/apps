@@ -6,7 +6,28 @@ function main(responses) {
     // ------------------------------------------
 
     calc.doSomething = function() {
-        var score = 73;
+        var score = 0;
+            score = score + parseInt(BDI1);
+            score = score + parseInt(BDI2);
+            score = score + parseInt(BDI3);
+            score = score + parseInt(BDI4);
+            score = score + parseInt(BDI5);
+            score = score + parseInt(BDI6);
+            score = score + parseInt(BDI7);
+            score = score + parseInt(BDI8);
+            score = score + parseInt(BDI9);
+            score = score + parseInt(BDI10);
+            score = score + parseInt(BDI11);
+            score = score + parseInt(BDI12);
+            score = score + parseInt(BDI13);
+            score = score + parseInt(BDI14);
+            score = score + parseInt(BDI15);
+            score = score + parseInt(BDI16);
+            score = score + parseInt(BDI17);
+            score = score + parseInt(BDI18);
+            score = score + parseInt(BDI19);
+            score = score + parseInt(BDI20);
+            score = score + parseInt(BDI21);
         return score;
     };
 

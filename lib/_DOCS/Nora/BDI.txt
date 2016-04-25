@@ -1,0 +1,32 @@
+Object
+BDI1
+BDI2
+BDI3
+BDI4
+BDI5
+BDI6
+BDI7
+BDI8
+BDI9
+BDI10
+BDI11
+BDI12
+BDI13
+BDI14
+BDI15
+BDI16
+BDI17
+BDI18
+BDI19
+BDI20
+BDI21
+
+
+Ausgabe:
+1. Rohdaten (drinlassen)
+2. Timeline (drinlassen)
+3. Score (drinlassen - score & simple score)
+4. Range (drinlassen)
+5. T-Score (rausnehmen)
+6. Stanine (rausnehmen)
+7. Export (drinlassen)
