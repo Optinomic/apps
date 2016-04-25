@@ -43,9 +43,9 @@ responsibility = lead_therapist
 name = Beck-Depressions-Inventar (BDI-II)
 host = default
 survey_id = 786887
-hash = X18X779
-pid = X18X780
-fid = X84X2211
+hash = X31X392
+pid = X31X393
+fid = X31X394
 min_questions =
 min_lastpage = 2
 
