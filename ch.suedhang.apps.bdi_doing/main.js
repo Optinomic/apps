@@ -71,7 +71,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var data_query = {};
 
         data_query = {
-            name: 'WHQOL-Example (with stay)',
+            name: 'BDI-II',
             sql: include_as_js_string(
                 export.sql)
         };
