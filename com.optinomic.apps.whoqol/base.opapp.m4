@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Beurteilung der Phyisischen und Psychischen Lebensquälität.
+Beurteilung der Physischen und Psychischen Lebensqualität.
 
 [developer]
 first_name = Beat
