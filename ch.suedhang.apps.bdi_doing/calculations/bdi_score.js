@@ -7,27 +7,28 @@ function main(responses) {
 
     calc.doSomething = function() {
         var score = 0;
-            score = score + parseInt(BDI1);
-            score = score + parseInt(BDI2);
-            score = score + parseInt(BDI3);
-            score = score + parseInt(BDI4);
-            score = score + parseInt(BDI5);
-            score = score + parseInt(BDI6);
-            score = score + parseInt(BDI7);
-            score = score + parseInt(BDI8);
-            score = score + parseInt(BDI9);
-            score = score + parseInt(BDI10);
-            score = score + parseInt(BDI11);
-            score = score + parseInt(BDI12);
-            score = score + parseInt(BDI13);
-            score = score + parseInt(BDI14);
-            score = score + parseInt(BDI15);
-            score = score + parseInt(BDI16);
-            score = score + parseInt(BDI17);
-            score = score + parseInt(BDI18);
-            score = score + parseInt(BDI19);
-            score = score + parseInt(BDI20);
-            score = score + parseInt(BDI21);
+            score = score + parseInt(d['BDI1']);
+            score = score + parseInt(d['BDI2']);
+            score = score + parseInt(d['BDI3']);
+            score = score + parseInt(d['BDI4']);
+            score = score + parseInt(d['BDI5']);
+            score = score + parseInt(d['BDI6']);
+            score = score + parseInt(d['BDI7']);
+            score = score + parseInt(d['BDI8']);
+            score = score + parseInt(d['BDI9']);
+            score = score + parseInt(d['BDI10']);
+            score = score + parseInt(d['BDI11']);
+            score = score + parseInt(d['BDI12']);
+            score = score + parseInt(d['BDI13']);
+            score = score + parseInt(d['BDI14']);
+            score = score + parseInt(d['BDI15']);
+            score = score + parseInt(d['BDI16']);
+            score = score + parseInt(d['BDI17']);
+            score = score + parseInt(d['BDI18']);
+            score = score + parseInt(d['BDI19']);
+            score = score + parseInt(d['BDI20']);
+            score = score + parseInt(d['BDI21']);
+        
         return score;
     };
 
