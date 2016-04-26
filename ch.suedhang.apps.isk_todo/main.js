@@ -128,33 +128,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         survey_responses.forEach(function(current_response, myindex) {
 
 
-            // Scores - Update Scores with correct calculations!!!!!
-
+            // Scores
 
             var score_answer = [{
                 "question": "Soziale Orientierung",
                 "sub_left": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
                 "sub_right": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
-                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore,
+                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
                 "question": "Offensivität",
                 "sub_left": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
                 "sub_right": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
-                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore,
-                "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+                "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
+                "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
                 "question": "Selbststeuerung",
                 "sub_left": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
                 "sub_right": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
-                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore,
-                "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+                "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
+                "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
                 "question": "Reflexibilität",
                 "sub_left": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
                 "sub_right": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
-                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore,
-                "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+                "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
+                "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
 
 
@@ -163,14 +162,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             var label_type = 'Verlauf: ';
 
-
-            // Unsicher ob die hier noch stimmt - muss noch überprüft werden.
-            // if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
-            //     label_type = 'Eintritt: ';
-            // };
-            // if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-            //     label_type = 'Austritt: ';
-            // };
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
+                label_type = 'Eintritt: ';
+            };
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
+                label_type = 'Austritt: ';
+            };
             label = label_type + label;
 
 
