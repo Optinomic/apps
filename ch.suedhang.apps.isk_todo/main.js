@@ -131,27 +131,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Scores
 
             var score_answer = [{
-                "question": "Soziale Orientierung (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
+                "question": "Soziale Orientierung",
                 "sub_left": "Ausmass, in dem eine Person anderen Menschen offen ...",
-                "sub_right": "... und mit positiver Grundhaltung gegenüber tritt.",
+                "sub_right": "... und mit positiver Grundhaltung gegenüber tritt. (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
-                "question": "Offensivität (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
+                "question": "Offensivität",
                 "sub_left": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen ...",
-                "sub_right": "... eigene Interessen aktiv verwirklichen zu können.",
+                "sub_right": "... eigene Interessen aktiv verwirklichen zu können. (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
-                "question": "Selbststeuerung (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
+                "question": "Selbststeuerung",
                 "sub_left": "Fähigkeit eines Menschen, flexibel und rational zu handeln, ...",
-                "sub_right": "... wobei man sich selbst bewusst als Akteur begreift.",
+                "sub_right": "... wobei man sich selbst bewusst als Akteur begreift. (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
-                "question": "Reflexibilität (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
+                "question": "Reflexibilität",
                 "sub_left": "Fähigkeit einer Person, bei anderen Menschen einen positiven ...",
-                "sub_right": "... bzw. gewünschten Eindruck zu erzeugen.",
+                "sub_right": "... bzw. gewünschten Eindruck zu erzeugen. (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
