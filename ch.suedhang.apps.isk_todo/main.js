@@ -131,25 +131,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Scores
 
             var score_answer = [{
-                "question": "Soziale Orientierung (" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
+                "question": "Soziale Orientierung (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
                 "sub_left": "Ausmass, in dem eine Person anderen Menschen offen ...",
                 "sub_right": "... und mit positiver Grundhaltung gegenüber tritt.",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
-                "question": "Offensivität",
+                "question": "Offensivität (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
                 "sub_left": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen ...",
                 "sub_right": "... eigene Interessen aktiv verwirklichen zu können.",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
-                "question": "Selbststeuerung",
+                "question": "Selbststeuerung (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
                 "sub_left": "Fähigkeit eines Menschen, flexibel und rational zu handeln, ...",
                 "sub_right": "... wobei man sich selbst bewusst als Akteur begreift.",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
-                "question": "Reflexibilität",
+                "question": "Reflexibilität (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
                 "sub_left": "Fähigkeit einer Person, bei anderen Menschen einen positiven ...",
                 "sub_right": "... bzw. gewünschten Eindruck zu erzeugen.",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
