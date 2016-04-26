@@ -6,8 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen:
-soziale Orientierung, Offensivität, Sebststeuerung und Reflexibilität.
+Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Sebststeuerung und Reflexibilität.
 
 [developer]
 first_name = Beat
@@ -20,11 +19,6 @@ website = http://www.optinomic.com/
 
 
 
-[template chart_tscore 6 9]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
 
 [template data_export 6 7]
 include(templates/export.html)

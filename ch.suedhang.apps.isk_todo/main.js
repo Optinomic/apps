@@ -34,7 +34,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.haveData = true;
 
                 // Run App-Functions:
-                $scope.setStanineView();
+                // $scope.setStanineView();
                 $scope.setExport();
 
             };
@@ -42,7 +42,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            
+
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -168,7 +168,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         console.log('(!) setStanineView', $scope.stanine);
-
     };
 
 
