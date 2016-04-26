@@ -42,6 +42,10 @@ function main(responses) {
 
             myResults.result = result;
 
+            myResults.AISK10_1 = result["AISK[AIS10]"];
+            myResults.AISK10_2 = result['AISK[AIS10]'];
+
+
 
             var soz_orient = 0;
             soz_orient = soz_orient + parseInt(result['AISK[AIS1]']);
