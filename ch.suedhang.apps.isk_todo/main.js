@@ -118,6 +118,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setStanineView = function() {
 
+
+
         $scope.stanine = {};
         $scope.stanine.data = [];
 
@@ -182,6 +184,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
             $scope.stanine.data.push(respone_to_push);
         });
+
+
+        $scope.stanine.options = {
+            "population_name": "Inventar Sozialer Kompetenzen - Kurzform",
+            "norm_name": "Normalbereich",
+            "start_result": $scope.stanine.data.length - 1
+        };
+
 
 
         console.log('(!) setStanineView', $scope.stanine);
