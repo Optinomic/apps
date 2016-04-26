@@ -1,40 +1,79 @@
-SELECT 
-  patient.id
-, ((cast(response AS json))->>'FID') as FID
-, ((cast(response AS json))->>'Erhebungszeitpunkt') as Erhebungszeitpunkt
-, ((cast(response AS json))->>'Datum') as Datum
-, ((cast(response AS json))->>'AISK_AISK1') as ISK1
-, ((cast(response AS json))->>'AISK_AISK2') as ISK2
-, ((cast(response AS json))->>'AISK_AISK3') as ISK3
-, ((cast(response AS json))->>'AISK_AISK4') as ISK4
-, ((cast(response AS json))->>'AISK_AISK5') as ISK5
-, ((cast(response AS json))->>'AISK_AISK6') as ISK6
-, ((cast(response AS json))->>'AISK_AISK7') as ISK7
-, ((cast(response AS json))->>'AISK_AISK8') as ISK8
-, ((cast(response AS json))->>'AISK_AISK9') as ISK9
-, ((cast(response AS json))->>'AISK_AIS10') as ISK10
-, ((cast(response AS json))->>'AISK_AIS11') as ISK11
-, ((cast(response AS json))->>'AISK_AIS12') as ISK12
-, ((cast(response AS json))->>'AISK_AIS13') as ISK13
-, ((cast(response AS json))->>'AISK_AIS14') as ISK14
-, ((cast(response AS json))->>'AISK_AIS15') as ISK15
-, ((cast(response AS json))->>'AISK_AIS16') as ISK16
-, ((cast(response AS json))->>'AISK_AIS17') as ISK17
-, ((cast(response AS json))->>'AISK_AIS18') as ISK18
-, ((cast(response AS json))->>'AISK_AIS19') as ISK19
-, ((cast(response AS json))->>'AISK_AIS20') as ISK20
-, ((cast(response AS json))->>'AISK_AIS21') as ISK21
-, ((cast(response AS json))->>'AISK_AIS22') as ISK22
-, ((cast(response AS json))->>'AISK_AIS23') as ISK23
-, ((cast(response AS json))->>'AISK_AIS24') as ISK24
-, ((cast(response AS json))->>'AISK_AIS25') as ISK25
-, ((cast(response AS json))->>'AISK_AIS26') as ISK26
-, ((cast(response AS json))->>'AISK_AIS27') as ISK27
-, ((cast(response AS json))->>'AISK_AIS28') as ISK28
-, ((cast(response AS json))->>'AISK_AIS29') as ISK29
-, ((cast(response AS json))->>'AISK_AIS30') as ISK30
-, ((cast(response AS json))->>'AISK_AIS31') as ISK31
-, ((cast(response AS json))->>'AISK_AIS32') as ISK32
-, ((cast(response AS json))->>'AISK_AIS33') as ISK33
-FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
-WHERE module = 'ch.suedhang.apps.isk'
+SELECT
+  patient.id AS pid,
+  patient,
+  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
+  patient.four_letter_code,
+    
+  ((cast(response AS json))->>'AISK[AISK1]') as aisk_01,
+  ((cast(response AS json))->>'AISK[AISK2]') as aisk_02,
+  ((cast(response AS json))->>'AISK[AISK3]') as aisk_03,
+  ((cast(response AS json))->>'AISK[AISK4]') as aisk_04,
+  ((cast(response AS json))->>'AISK[AISK5]') as aisk_05,
+  ((cast(response AS json))->>'AISK[AISK6]') as aisk_06,
+  ((cast(response AS json))->>'AISK[AISK7]') as aisk_07,
+  ((cast(response AS json))->>'AISK[AISK8]') as aisk_08,
+  ((cast(response AS json))->>'AISK[AISK9]') as aisk_09,
+  ((cast(response AS json))->>'AISK[AIS10]') as aisk_10,
+  ((cast(response AS json))->>'AISK[AIS11]') as aisk_11,
+  ((cast(response AS json))->>'AISK[AIS12]') as aisk_12,
+  ((cast(response AS json))->>'AISK[AIS13]') as aisk_13,
+  ((cast(response AS json))->>'AISK[AIS14]') as aisk_14,
+  ((cast(response AS json))->>'AISK[AIS15]') as aisk_15,
+  ((cast(response AS json))->>'AISK[AIS16]') as aisk_16,
+  ((cast(response AS json))->>'AISK[AIS17]') as aisk_17,
+  ((cast(response AS json))->>'AISK[AIS18]') as aisk_18,
+  ((cast(response AS json))->>'AISK[AIS19]') as aisk_19,
+  ((cast(response AS json))->>'AISK[AIS20]') as aisk_20,
+  ((cast(response AS json))->>'AISK[AIS21]') as aisk_21,
+  ((cast(response AS json))->>'AISK[AIS22]') as aisk_22,
+  ((cast(response AS json))->>'AISK[AIS23]') as aisk_23,
+  ((cast(response AS json))->>'AISK[AIS24]') as aisk_24,
+  ((cast(response AS json))->>'AISK[AIS25]') as aisk_25,
+  ((cast(response AS json))->>'AISK[AIS26]') as aisk_26,
+  ((cast(response AS json))->>'AISK[AIS27]') as aisk_27,
+  ((cast(response AS json))->>'AISK[AIS28]') as aisk_28,
+  ((cast(response AS json))->>'AISK[AIS29]') as aisk_29,
+  ((cast(response AS json))->>'AISK[AIS30]') as aisk_30,
+  ((cast(response AS json))->>'AISK[AIS31]') as aisk_31,
+  ((cast(response AS json))->>'AISK[AIS32]') as aisk_32,
+  ((cast(response AS json))->>'AISK[AIS33]') as aisk_33,
+
+  ((cast(response AS json))->>'Datum') as datum,
+  TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
+  SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
+  SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
+  ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
+  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'PID') as pid,
+  ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
+  ((cast(response AS json))->>'datestamp') as datestamp,
+  TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
+  SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
+  SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')) AS datestamp_week,
+  ((cast(response AS json))->>'id') as id,
+  ((cast(response AS json))->>'lastpage') as lastpage,
+  ((cast(response AS json))->>'optinomixHASH') as optinomixhash,
+  ((cast(response AS json))->>'startdate') as startdate,
+  TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')  as startdate_date,
+  SUBSTRING(((cast(response AS json))->>'startdate'),12,5) AS startdate_time,
+  SUBSTRING(((cast(response AS json))->>'startdate'),1,4)::integer AS startdate_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
+  ((cast(response AS json))->>'startlanguage') as startlanguage,
+  ((cast(response AS json))->>'submitdate') as submitdate,
+  TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
+
+  random_hash,
+  scheduled,
+  filled,
+  module,
+  survey_response.id AS survey_response_id  
+
+FROM survey_response 
+INNER JOIN patient ON(survey_response.patient = patient.id) 
+
+WHERE module = 'ch.suedhang.apps.isk';
