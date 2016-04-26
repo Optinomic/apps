@@ -42,15 +42,13 @@ function main(responses) {
 
             myResults.result = result;
 
-            myResults.AISK10_1 = result["AISK[AIS10]"];
-            myResults.AISK10_2 = result['AISK[AIS10]'];
-
+            myResults.AISK10_1_int = parseInt(result["AISK[AIS10]"]);
 
 
             var soz_orient = 0;
-            soz_orient = soz_orient + parseInt(result['AISK[AIS1]']);
-            soz_orient = soz_orient + parseInt(result['AISK[AIS5]']);
-            soz_orient = soz_orient + parseInt(result['AISK[AIS9]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AISK1]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AISK5]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AISK9]']);
             soz_orient = soz_orient + parseInt(result['AISK[AIS11]']);
             soz_orient = soz_orient + parseInt(result['AISK[AIS14]']);
             soz_orient = soz_orient + parseInt(result['AISK[AIS18]']);
@@ -62,8 +60,8 @@ function main(responses) {
 
 
             var offensiv = 0;
-            offensiv = offensiv + parseInt(result['AISK[AIS2]']);
-            offensiv = offensiv + parseInt(result['AISK[AIS6]']);
+            offensiv = offensiv + parseInt(result['AISK[AISK2]']);
+            offensiv = offensiv + parseInt(result['AISK[AISK6]']);
             offensiv = offensiv + parseInt(5 - result['AISK[AIS10]']);
             offensiv = offensiv + parseInt(result['AISK[AIS15]']);
             offensiv = offensiv + parseInt(result['AISK[AIS19]']);
@@ -74,8 +72,8 @@ function main(responses) {
 
 
             var selbststeuerung = 0;
-            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS3]']);
-            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS7]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK3]']);
+            selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK7]']);
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS12]']);
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS16]']);
             selbststeuerung = selbststeuerung + parseInt(result['AISK[AIS20]']);
@@ -94,7 +92,6 @@ function main(responses) {
             reflex = reflex + parseInt(result['AISK[AIS26]']);
             reflex = reflex + parseInt(result['AISK[AIS30]']);
             myResults.sumscore_reflex = reflex;
-
 
 
 
