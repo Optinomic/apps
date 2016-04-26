@@ -41,6 +41,23 @@ function main(responses) {
             // Calculate Stuff
 
 
+            var soz_orient = 0;
+            soz_orient = soz_orient + parseInt(d['AISK[AIS1]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS5]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS9]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS11]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS14]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS18]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS21]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS23]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS27]']);
+            soz_orient = soz_orient + parseInt(d['AISK[AIS31]']);
+            myResults.sumscore_soz_orient = soz_orient;
+
+
+
+
+
 
             // Unneeded - Just for DEBUG
             myResults.full_data = myResponses;
