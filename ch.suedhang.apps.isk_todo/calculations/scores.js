@@ -435,6 +435,7 @@ function main(responses) {
             myResults.gender = gender;
 
 
+            // Soziale Orientierung
             var soz_orient = 0;
             soz_orient = soz_orient + parseInt(result['AISK[AISK1]']);
             soz_orient = soz_orient + parseInt(result['AISK[AISK5]']);
@@ -446,10 +447,11 @@ function main(responses) {
             soz_orient = soz_orient + parseInt(result['AISK[AIS23]']);
             soz_orient = soz_orient + parseInt(result['AISK[AIS27]']);
             soz_orient = soz_orient + parseInt(result['AISK[AIS31]']);
-            myResults.sumscore_soz_orient = soz_orient;
-            myResults.stanine_soz_orient = calc.get_stanine(gender, 0, soz_orient);
+            myResults.soziale_orientierung_sumscore = soz_orient;
+            myResults.soziale_orientierung_stanine = calc.get_stanine(gender, 0, soz_orient);
 
 
+            // Offensivitaet
             var offensiv = 0;
             offensiv = offensiv + parseInt(result['AISK[AISK2]']);
             offensiv = offensiv + parseInt(result['AISK[AISK6]']);
@@ -459,9 +461,11 @@ function main(responses) {
             offensiv = offensiv + parseInt(result['AISK[AIS24]']);
             offensiv = offensiv + parseInt(result['AISK[AIS28]']);
             offensiv = offensiv + parseInt(5 - result['AISK[AIS32]']);
-            myResults.sumscore_offensiv = offensiv;
+            myResults.offensivitaet_sumscore = offensiv;
+            myResults.offensivitaet_stanine = calc.get_stanine(gender, 1, offensiv);
 
 
+            // Selbststeuerung
             var selbststeuerung = 0;
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK3]']);
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AISK7]']);
@@ -471,18 +475,22 @@ function main(responses) {
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS25]']);
             selbststeuerung = selbststeuerung + parseInt(result['AISK[AIS29]']);
             selbststeuerung = selbststeuerung + parseInt(5 - result['AISK[AIS33]']);
-            myResults.sumscore_selbststeuerung = selbststeuerung;
+            myResults.selbststeuerung_sumscore = selbststeuerung;
+            myResults.selbststeuerung_stanine = calc.get_stanine(gender, 2, selbststeuerung);
 
 
+            // Reflexibilitaet
             var reflex = 0;
-            reflex = reflex + parseInt(result['AISK[AIS4]']);
-            reflex = reflex + parseInt(result['AISK[AIS8]']);
+            reflex = reflex + parseInt(result['AISK[AISK4]']);
+            reflex = reflex + parseInt(result['AISK[AISK8]']);
             reflex = reflex + parseInt(result['AISK[AIS13]']);
             reflex = reflex + parseInt(5 - result['AISK[AIS17]']);
             reflex = reflex + parseInt(result['AISK[AIS22]']);
             reflex = reflex + parseInt(result['AISK[AIS26]']);
             reflex = reflex + parseInt(result['AISK[AIS30]']);
-            myResults.sumscore_reflex = reflex;
+            myResults.reflexibilitaet_sumscore = reflex;
+            myResults.reflexibilitaet_stanine = calc.get_stanine(gender, 3, reflex);
+
 
 
 
