@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -165,12 +165,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
             var label_type = 'Verlauf: ';
 
-            if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
-                label_type = 'Eintritt: ';
-            };
-            if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-                label_type = 'Austritt: ';
-            };
+
+            // Unsicher ob die hier noch stimmt - muss noch überprüft werden.
+            // if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
+            //     label_type = 'Eintritt: ';
+            // };
+            // if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
+            //     label_type = 'Austritt: ';
+            // };
             label = label_type + label;
 
 
