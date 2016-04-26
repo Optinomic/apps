@@ -42,17 +42,32 @@ function main(responses) {
 
 
             var soz_orient = 0;
-            soz_orient = soz_orient + parseInt(d['AISK[AIS1]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS5]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS9]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS11]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS14]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS18]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS21]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS23]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS27]']);
-            soz_orient = soz_orient + parseInt(d['AISK[AIS31]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS1]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS5]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS9]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS11]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS14]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS18]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS21]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS23]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS27]']);
+            soz_orient = soz_orient + parseInt(result['AISK[AIS31]']);
             myResults.sumscore_soz_orient = soz_orient;
+
+
+            var offensiv = 0;
+            offensiv = offensiv + parseInt(result['AISK[AIS2]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS6]']);
+            offensiv = offensiv + parseInt(5 - result['AISK[AIS10]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS15]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS19]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS24]']);
+            offensiv = offensiv + parseInt(result['AISK[AIS28]']);
+            offensiv = offensiv + parseInt(5 - result['AISK[AIS32]']);
+            myResults.sumscore_offensiv = offensiv;
+
+
+
 
 
 
