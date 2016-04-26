@@ -127,23 +127,38 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
             // Scores - Update Scores with correct labeling
-            var scores = current_response.calculations[0].calculation_result.scores
+            var scores = [];
+            var score_obj = {};
 
-            scores[0].question = "Soziale Orientierung";
-            scores[0].sub_left = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
-            scores[0].sub_right = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
 
-            scores[1].question = "Offensivität";
-            scores[1].sub_left = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
-            scores[1].sub_right = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
+            score_obj.question = "Soziale Orientierung";
+            score_obj.sub_left = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
+            score_obj.sub_right = "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.";
+            score_obj.sum_score = current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+            score_obj.stanine = current_response.calculations[0].calculation_result.soziale_orientierung_stanine
+            scores.push(score_obj);
 
-            scores[2].question = "Selbststeuerung";
-            scores[2].sub_left = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
-            scores[2].sub_right = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
+            score_obj.question = "Offensivität";
+            score_obj.sub_left = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
+            score_obj.sub_right = "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.";
+            score_obj.sum_score = current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+            score_obj.stanine = current_response.calculations[0].calculation_result.soziale_orientierung_stanine
+            scores.push(score_obj);
 
-            scores[3].question = "Reflexibilität";
-            scores[3].sub_left = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
-            scores[3].sub_right = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
+            score_obj.question = "Selbststeuerung";
+            score_obj.sub_left = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
+            score_obj.sub_right = "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.";
+            score_obj.sum_score = current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+            score_obj.stanine = current_response.calculations[0].calculation_result.soziale_orientierung_stanine
+            scores.push(score_obj);
+
+            score_obj.question = "Reflexibilität";
+            score_obj.sub_left = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
+            score_obj.sub_right = "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.";
+            score_obj.sum_score = current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
+            score_obj.stanine = current_response.calculations[0].calculation_result.soziale_orientierung_stanine
+            scores.push(score_obj);
+
 
             // Create nice Labels
             var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
@@ -169,6 +184,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         console.log('(!) setStanineView', $scope.stanine);
     };
+
+
 
 
 
