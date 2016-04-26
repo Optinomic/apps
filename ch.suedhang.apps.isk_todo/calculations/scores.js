@@ -14,7 +14,7 @@ function main(responses) {
         }
 
         if (gender === 'male') {
-            myscope[i].label.population = 'Männer';
+            myscope[i].label.population = 'Maenner';
         } else {
             myscope[i].label.population = 'Frauen';
         }
@@ -72,7 +72,7 @@ function main(responses) {
             } else {
                 // F =  =IF(C37<=23; 1; IF(C37=24; 2; IF(C37=25; 2; IF(C37=26; 3; IF(C37=27; 3; IF(C37=28; 4; IF(C37=29; 4; IF(C37=30; 5; IF(C37=31; 5; IF(C37=32; 6; IF(C37=33; 7; IF(C37=34; 7; IF(C37=35; 8; IF(C37=36; 8; IF(C37>=37; 9)))))))))))))))
                 stanine = 1;
-                
+
                 if (num === 24) {
                     stanine = 2;
                 }
@@ -118,7 +118,7 @@ function main(responses) {
             }
         }
 
-        // Offensivität
+        // Offensivitaet
         if (scale === 1) {
             if (gender === 'male') {
                 // M =  =IF(C38<=15; 1; IF(C38=16; 2; IF(C38=17; 3; IF(C38=18; 3; IF(C38=19; 4; IF(C38=20; 4; IF(C38=21; 5; IF(C38=22; 5; IF(C38=23; 6; IF(C38=24; 7; IF(C38=25; 7; IF(C38=26; 8; IF(C38=27; 8; IF(C38>= 28; 9))))))))))))))
@@ -310,7 +310,7 @@ function main(responses) {
             }
         }
 
-        // Reflexibilität
+        // Reflexibilitaet
         if (scale === 3) {
             if (gender === 'male') {
                 // M =  =IF(C40<=15; 1; IF(C40=16; 2; IF(C40=17; 3; IF(C40=18; 3; IF(C40=19; 4; IF(C40=20; 5; IF(C40=21; 6; IF(C40=22; 6; IF(C40=23; 7; IF(C40=24; 8; IF(C40= 25; 8; IF(C40>= 26; 9))))))))))))
@@ -402,51 +402,51 @@ function main(responses) {
 
         // Variablen initialisieren
         var scores_array = [{
-                "question": "Soziale Orientierung",
-                "subquestion": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
-                "stanine": 0,
-                "sum_score": 0
-                "name": 'soz_orient',
-                "gender": gender
-            },{
-                "question": "Offensivität",
-                "subquestion": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
-                "stanine": 0,
-                "sum_score": 0
-                "name": 'offensiv',
-                "gender": gender
-            },{
-                "question": "Selbststeuerung",
-                "subquestion": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
-                "stanine": 0,
-                "sum_score": 0
-                "name": 'selbststeuerung',
-                "gender": gender
-            },{
-                "question": "Reflexibilität",
-                "subquestion": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
-                "stanine": 0,
-                "sum_score": 0
-                "name": 'reflex',
-                "gender": gender
+            "question": "Soziale Orientierung",
+            "subquestion": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenueber tritt.",
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'soz_orient',
+            "gender": gender
+        }, {
+            "question": "Offensivitaet",
+            "subquestion": "Faehigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu koennen.",
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'offensiv',
+            "gender": gender
+        }, {
+            "question": "Selbststeuerung",
+            "subquestion": "Faehigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'selbststeuerung',
+            "gender": gender
+        }, {
+            "question": "Reflexibilitaet",
+            "subquestion": "Faehigkeit einer Person, bei anderen Menschen einen positiven bzw. gewuenschten Eindruck zu erzeugen.",
+            "stanine": 0,
+            "sum_score": 0,
+            "name": 'reflex',
+            "gender": gender
         }];
 
         var score_id = 0;
 
-          // Scores berechnen
+        // Scores berechnen
         score_id = 0;
         scores_array[score_id].name = 'soz_orient';
         scores_array[score_id].sum_score = 0;
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK1']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK5']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK9']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK11']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK9']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK11']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK14']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK18']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK21']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK23']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK18']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK21']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK23']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK27']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK31']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK31']);
         scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 1;
@@ -454,25 +454,25 @@ function main(responses) {
         scores_array[score_id].sum_score = 0;
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK2']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK6']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK10']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK10']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK15']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK19']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK24']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK28']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK32']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK32']);
         scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 2;
         scores_array[score_id].name = 'selbststeuerung';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK3']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK7']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK12']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK16']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK3']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK7']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK12']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK16']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK20']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK25']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK25']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK29']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK33']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK33']);
         scores_array[score_id].stanine = calc.get_stanine(gender, score_id, scores_array[score_id].sum_score);
 
         score_id = 3;
@@ -481,7 +481,7 @@ function main(responses) {
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK4']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK8']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK13']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5-d['AISK_AISK17']);
+        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(5 - d['AISK_AISK17']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK22']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK26']);
         scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['AISK_AISK30']);
@@ -507,7 +507,7 @@ function main(responses) {
             // Calculate Stuff
             var gender = myResponses.patient.data.gender;
 
-            myResults.scores = calc.getScores(result, population);
+            myResults.scores = calc.getScores(result, gender);
 
             // Unneeded - Just for DEBUG
             myResults.full_data = myResponses;
