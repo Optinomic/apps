@@ -56,7 +56,7 @@ include(style.css)
 id = daily_mood
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = Täglicher Irgendwas
 host = default
 survey_id = 368847
 hash = X1X1
