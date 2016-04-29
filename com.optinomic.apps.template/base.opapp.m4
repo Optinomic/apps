@@ -79,11 +79,10 @@ include(survey_markups/my_ng_survey.html)
 
 
 [event daily]
-type = daily
-time = 19:00
-due_after = 86400
+type = on_activation
+due_after = 129200
 overdue = ignore
-description = Track your daily craving.
+description = Track your something.
 survey = daily_mood
 
 
