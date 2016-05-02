@@ -7,27 +7,27 @@ function main(responses) {
 
     calc.doSomething = function() {
         var score = 0;
-            score = score + parseInt(d['BDI1']);
-            score = score + parseInt(d['BDI2']);
-            score = score + parseInt(d['BDI3']);
-            score = score + parseInt(d['BDI4']);
-            score = score + parseInt(d['BDI5']);
-            score = score + parseInt(d['BDI6']);
-            score = score + parseInt(d['BDI7']);
-            score = score + parseInt(d['BDI8']);
-            score = score + parseInt(d['BDI9']);
-            score = score + parseInt(d['BDI10']);
-            score = score + parseInt(d['BDI11']);
-            score = score + parseInt(d['BDI12']);
-            score = score + parseInt(d['BDI13']);
-            score = score + parseInt(d['BDI14']);
-            score = score + parseInt(d['BDI15']);
-            score = score + parseInt(d['BDI16']);
-            score = score + parseInt(d['BDI17']);
-            score = score + parseInt(d['BDI18']);
-            score = score + parseInt(d['BDI19']);
-            score = score + parseInt(d['BDI20']);
-            score = score + parseInt(d['BDI21']);
+            score = score + parseInt(result['BDI1']);
+            score = score + parseInt(result['BDI2']);
+            score = score + parseInt(result['BDI3']);
+            score = score + parseInt(result['BDI4']);
+            score = score + parseInt(result['BDI5']);
+            score = score + parseInt(result['BDI6']);
+            score = score + parseInt(result['BDI7']);
+            score = score + parseInt(result['BDI8']);
+            score = score + parseInt(result['BDI9']);
+            score = score + parseInt(result['BDI10']);
+            score = score + parseInt(result['BDI11']);
+            score = score + parseInt(result['BDI12']);
+            score = score + parseInt(result['BDI13']);
+            score = score + parseInt(result['BDI14']);
+            score = score + parseInt(result['BDI15']);
+            score = score + parseInt(result['BDI16']);
+            score = score + parseInt(result['BDI17']);
+            score = score + parseInt(result['BDI18']);
+            score = score + parseInt(result['BDI19']);
+            score = score + parseInt(result['BDI20']);
+            score = score + parseInt(result['BDI21']);
         
         return score;
     };
@@ -46,8 +46,7 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
-            myResults.something = calc.doSomething();
-
+            myResults.score = calc.bdiScore();
 
             // Write Results for the Return
             // Do not modify stuff here
