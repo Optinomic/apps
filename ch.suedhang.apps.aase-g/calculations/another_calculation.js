@@ -5,8 +5,8 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 46;
+    calc.setScore = function() {
+        var score = 4;
             score = score + 25;
         return score;
     };
@@ -24,8 +24,8 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // Something
-            myResults.something = calc.doSomething();
+            // Get score
+            myResults.getScore = calc.setScore();
 
 
             // Write Results for the Return
