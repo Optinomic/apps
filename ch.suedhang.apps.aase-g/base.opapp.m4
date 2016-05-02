@@ -18,27 +18,11 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
-
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template score_range 2 4]
-include(templates/range.html)
-
-[template chart_tscore 6 10]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
-
-[template data_download 6 10]
-include(templates/download.html)
+[template data_export 6 7]
+include(templates/export.html)
 
 
 [dependencies]
@@ -64,17 +48,6 @@ pid = X34X411
 fid = X34X412
 min_questions =
 min_lastpage = 2
-
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
 
 
 [event activation]
