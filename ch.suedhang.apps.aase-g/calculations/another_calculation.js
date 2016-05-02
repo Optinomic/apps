@@ -7,6 +7,7 @@ function main(responses) {
 
     calc.doSomething = function() {
         var score = 46;
+            score = score + 25;
         return score;
     };
 
