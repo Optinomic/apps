@@ -51,52 +51,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
     $scope.loadMainData();
 
-    // -----------------------------------
-    // Navigation --> from com.optinomic.apps.whoqol
-    // -----------------------------------
-
-    $scope.d.navigator = 0;
-
-    $scope.setCurrentResultDate = function() {
-        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
-
-        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
-            'filled_datestamp': date,
-            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
-        };
-
-        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
-    };
 
 
-    $scope.prev = function() {
-        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
-
-        if ($scope.d.navigator === 0) {
-            $scope.d.navigator = count;
-        } else {
-            $scope.d.navigator = $scope.d.navigator - 1
-        };
-        $scope.setCurrentResultDate();
-    };
-
-    $scope.next = function() {
-        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
-
-        if (count === $scope.d.navigator) {
-            $scope.d.navigator = 0;
-        } else {
-            $scope.d.navigator = $scope.d.navigator + 1
-        };
-        $scope.setCurrentResultDate();
-
-    };
-
-
-    // -------------------
-    // Data-Export
-    // -------------------
     $scope.setExport = function() {
 
 
@@ -122,4 +78,90 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
     };
+
+
+
+
+    // -----------------------------------
+    // DataView : angulargrid.com
+    // -----------------------------------
+    $scope.setDataView = function() {
+
+        // If we have multiple surveys - make sure to take the right 'responses'.
+        var currentResultGroup = 0;
+        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
+            if (current_group_def.survey === 'Second example survey') {
+                currentResultGroup = current_group_def.id;
+            };
+        });
+
+        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
+        $scope.d.dataMain.survey_responses_array = [];
+        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
+            var my_response = current_result.entity.data.response;
+
+            // If ng-survey survey @ some more info to 'response'.
+            my_response.filled = current_result.entity.data.filled;
+            my_response.survey_name = current_result.event.survey_name;
+
+            $scope.d.dataMain.survey_responses_array.push(my_response);
+        });
+        var resultsArray = $scope.d.dataMain.survey_responses_array;
+
+
+        // automatic or manually like (columnDefsManually)
+        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
+
+        // columnDefsManually: If you want to create columnDefs manually:
+        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
+        var columnDefsManually = [{
+            headerTooltip: "Datum",
+            headerName: "Datum",
+            editable: true,
+            suppressSizeToFit: true,
+            width: 145,
+            field: "datestamp",
+            cellClass: 'md-body-1',
+        }, {
+            headerTooltip: "Suchtdruck_1",
+            headerName: "Suchtdruck (Int)",
+            cellClass: 'md-body-2',
+            suppressSizeToFit: true,
+            width: 110,
+            valueGetter: 'parseInt(data.Suchtdruck_1)',
+            filter: 'number'
+        }, {
+            headerName: "Bemerkungen",
+            editable: true,
+            cellClass: 'md-body-1',
+            field: "diary",
+            filter: 'text'
+        }, {
+            headerTooltip: "PID",
+            headerName: "Patient-ID",
+            editable: false,
+            field: "PID",
+            hide: true,
+            cellClass: 'md-body-1',
+            width: 90
+        }, {
+            headerTooltip: "FID",
+            headerName: "Fall-ID",
+            editable: false,
+            field: "FID",
+            hide: true,
+            cellClass: 'md-body-1',
+            width: 90
+        }];
+
+
+        // DataView - Options
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
+        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
+
+
+        //console.log('dataGRID: ', $scope.d.grid);
+    };
+
 });

@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Einschätzung von 20 Situationen auf ihre Versuchung bzw. der Zuversicht, der Hauptproblemsubstanz in dieser Situation widerstehen zu können.
+Einschätzung von 20 Situationen auf ihre Versuchung bzw. der Zuversicht, der Hauptproblemsubstanz widerstehen zu können.
 
 [developer]
 first_name = Beat
@@ -63,6 +63,7 @@ include(emails/new_event.html)
 
 [email overdue html]
 include(emails/overdue.html)
+
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
