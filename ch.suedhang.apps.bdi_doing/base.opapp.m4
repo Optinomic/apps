@@ -21,19 +21,13 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
 [template simple_score 4 4]
 include(templates/score.html)
 
 [template score_range 2 4]
 include(templates/range.html)
 
-[template data_download 6 10]
-include(templates/download.html)
-
-[template data_export 6 8]
+[template data_export 6 7]
 include(templates/export.html)
 
 
