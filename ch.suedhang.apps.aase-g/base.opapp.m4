@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.aase-g
-name = AASE-G
+name = AASE-G V2
 short_description = Abstinenzzuversicht - Schwierigkeit der Hauptproblemsubstanz zu widerstehen
 version = include(VERSION)
 type = patient
