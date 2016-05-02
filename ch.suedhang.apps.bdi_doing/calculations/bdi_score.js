@@ -5,7 +5,7 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
+    calc.bdiScore = function() {
         var score = 0;
             score = score + parseInt(result['BDI1']);
             score = score + parseInt(result['BDI2']);
