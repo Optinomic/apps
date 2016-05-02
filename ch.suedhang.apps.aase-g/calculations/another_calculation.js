@@ -6,7 +6,8 @@ function main(responses) {
     // ------------------------------------------
 
     calc.doSomething = function() {
-        var score = 73;
+        var score = 0;
+            score = score + parseInt(result['AASE[AASE1]']);
         return score;
     };
 
