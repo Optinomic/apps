@@ -58,7 +58,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setExport = function() {
 
-
         // ------------------------------------------------
         // Export - Pakete definieren
         // i n c l u d e _ a s _ j s _ s t r i n g 
@@ -86,41 +85,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Stanine - Chart  <chart-stanine>
     // -----------------------------------
 
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Soziale Orientierung",
-            "sub_left": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
-            "sub_right": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Offensivität",
-            "sub_left": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
-            "sub_right": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Selbststeuerung",
-            "sub_left": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
-            "sub_right": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Reflexibilität",
-            "sub_left": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
-            "sub_right": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-        return score_answer;
-    };
-
-
 
     $scope.setStanineView = function() {
-
-
 
         $scope.stanine = {};
         $scope.stanine.data = [];
