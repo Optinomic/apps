@@ -49,8 +49,7 @@ survey_id = 786887
 hash = X31X392
 pid = X31X393
 fid = X31X394
-min_questions =
-min_lastpage = 2
+min_lastpage = 3
 
 
 
