@@ -1,35 +1,39 @@
 SELECT
-  patient.id AS pid,
-  patient,
-  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
-  patient.four_letter_code,
-    
-  ((cast(response AS json))->>'BDI1') as bdi1,
-  ((cast(response AS json))->>'BDI2') as bdi2,
-  ((cast(response AS json))->>'BDI3') as bdi3,
-  ((cast(response AS json))->>'BDI4') as bdi4,
-  ((cast(response AS json))->>'BDI5') as bdi5,
-  ((cast(response AS json))->>'BDI6') as bdi6,
-  ((cast(response AS json))->>'BDI7') as bdi7,
-  ((cast(response AS json))->>'BDI8') as bdi8,
-  ((cast(response AS json))->>'BDI9') as bdi9,
-  ((cast(response AS json))->>'BDI10') as bdi10,
-  ((cast(response AS json))->>'BDI11') as bdi11,
-  ((cast(response AS json))->>'BDI12') as bdi12,
-  ((cast(response AS json))->>'BDI13') as bdi13,
-  ((cast(response AS json))->>'BDI14') as bdi14,
-  ((cast(response AS json))->>'BDI15') as bdi15,
-  ((cast(response AS json))->>'BDI16') as bdi16,
-  ((cast(response AS json))->>'BDI17') as bdi17,
-  ((cast(response AS json))->>'BDI18') as bdi18,
-  ((cast(response AS json))->>'BDI19') as bdi19,
-  ((cast(response AS json))->>'BDI20') as bdi20,
-  ((cast(response AS json))->>'BDI21') as bdi21,
+  sr.id as survey_response_id, 
+  sr.response, 
+  sr.event_id, 
+  sr.filled, 
+  ev.patient as patient_id,
+  first(s.id) as stay_id
+
+   
   ((cast(response AS json))->>'Datum') as datum,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
   SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
   SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
+  ((cast(response AS json))->>'BDI1') as BDI1,
+  ((cast(response AS json))->>'BDI2') as BDI2,
+  ((cast(response AS json))->>'BDI3') as BDI3,
+  ((cast(response AS json))->>'BDI4') as BDI4,
+  ((cast(response AS json))->>'BDI5') as BDI5,
+  ((cast(response AS json))->>'BDI6') as BDI6,
+  ((cast(response AS json))->>'BDI7') as BDI7,
+  ((cast(response AS json))->>'BDI8') as BDI8,
+  ((cast(response AS json))->>'BDI9') as BDI9,
+  ((cast(response AS json))->>'BDI10') as BDI10,
+  ((cast(response AS json))->>'BDI11') as BDI11,
+  ((cast(response AS json))->>'BDI12') as BDI12,
+  ((cast(response AS json))->>'BDI13') as BDI13,
+  ((cast(response AS json))->>'BDI14') as BDI14,
+  ((cast(response AS json))->>'BDI15') as BDI15,
+  ((cast(response AS json))->>'BDI16') as BDI16,
+  ((cast(response AS json))->>'BDI17') as BDI17,
+  ((cast(response AS json))->>'BDI18') as BDI18,
+  ((cast(response AS json))->>'BDI19') as BDI19,
+  ((cast(response AS json))->>'BDI20') as BDI20,
+  ((cast(response AS json))->>'BDI21') as BDI21,
+  ((cast(response AS json))->>'BDI_Score') as BDI_Summe,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
   ((cast(response AS json))->>'FID') as fid,
   ((cast(response AS json))->>'PID') as pid,
@@ -58,9 +62,8 @@ SELECT
   scheduled,
   filled,
   module,
-  survey_response.id AS survey_response_id  
 
-FROM survey_response 
-INNER JOIN patient ON(survey_response.patient = patient.id) 
-
-WHERE module = 'ch.suedhang.apps.bdi';
+FROM survey_responses as sr 
+LEFT JOIN event as ev on ev.id = sr.event_id 
+LEFT JOIN stay as s on s.patient = ev.patient and s.start <= ev.created_at and (s.stop >= ev.created_at or s.stop is null) 
+GROUP BY sr.id, sr.response, sr.event_id, sr.filled, ev.patient
