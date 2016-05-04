@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -72,6 +72,24 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.bdi_init = function() {
+
+
+        $scope.d.show_answers = false;
+        $scope.d.show_answers_filter = 2;
+
+        $scope.d.show_answers_filters = [{
+            "value": 0,
+            "name": 'Alle Antworten'
+        }, {
+            "value": 1,
+            "name": 'Antworten mit Score ( >=1 )'
+        }, {
+            "value": 2,
+            "name": 'Antworten mit Score ( >=2 )'
+        }, {
+            "value": 3,
+            "name": 'Antworten mit Score ( =3 )'
+        }];
 
         // Ranges initialisieren
         $scope.scale_ranges = {
