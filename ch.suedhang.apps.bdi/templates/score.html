@@ -48,11 +48,12 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider></md-divider>
         <md-card-content ng-if="d.show_answers" layout-margin>
             <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
-                <p>{{question.name}}</p>
-                <p>{{key}} : {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+key]}}</p>
-                <div ng-repeat="answer in question.answers">
-                    <p ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+key]"></p>
-                </div>
+                <p class="md-caption">
+                    <strong>{{question.name}}: </strong>
+                    <span ng-repeat="answer in question.answers">
+                    <span ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]">{{answer.item}}</span>
+                    </span>
+                </p>
             </div>
         </md-card-content>
         <md-divider ng-if="d.show_answers"></md-divider>
