@@ -32,13 +32,7 @@ function main(responses) {
 
 
 
-        var current_range = {
-            "from": 0,
-            "to": 8,
-            "interpretation_de": "Keine Depression",
-            "interpretation_en": "No Depression",
-            "result_color": "#4CAF50"
-        };
+        var current_range = {};
 
         var ranges = [{
             "from": 0,
@@ -71,6 +65,8 @@ function main(responses) {
             "interpretation_en": "Major Depression",
             "result_color": "#F44336"
         }];
+
+        current_range = ranges[0];
 
         if (score >= ranges[1].from) {
             current_range = ranges[1];
