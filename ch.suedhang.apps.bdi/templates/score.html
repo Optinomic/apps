@@ -59,7 +59,7 @@ include(../lib/html/optinomic/page/start.m4)
             </md-input-container>
             <div>&nbsp;</div>
             <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
-                <p>{{parseInt(d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)])}}</p>
+                <p> {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]}} --> {{parseInt(d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)])}}</p>
                 <p class="md-caption" ng-if="parseInt(d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]) >= d.show_answers_filter">
                     <strong>{{question.name}}: </strong>
                     <span ng-repeat="answer in question.answers">
