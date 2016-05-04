@@ -6,6 +6,7 @@ function main(responses) {
     // ------------------------------------------
 
     calc.bdiScore = function(result) {
+
         var score = 0;
         score = score + parseInt(result['BDI1']);
         score = score + parseInt(result['BDI2']);
@@ -29,7 +30,69 @@ function main(responses) {
         score = score + parseInt(result['BDI20']);
         score = score + parseInt(result['BDI21']);
 
-        return score;
+
+
+        var current_range = {
+            "from": 0,
+            "to": 8,
+            "interpretation_de": "Keine Depression",
+            "interpretation_en": "No Depression",
+            "result_color": "#4CAF50"
+        };
+
+        var ranges = [{
+            "from": 0,
+            "to": 8,
+            "interpretation_de": "Keine Depression",
+            "interpretation_en": "No Depression",
+            "result_color": "#4CAF50"
+        }, {
+            "from": 9,
+            "to": 13,
+            "interpretation_de": "Minimale Depression",
+            "interpretation_en": "Minimum Depression",
+            "result_color": "#4CAF50"
+        }, {
+            "from": 14,
+            "to": 19,
+            "interpretation_de": "Leichte Depression",
+            "interpretation_en": "Light Depression",
+            "result_color": "#FF5722"
+        }, {
+            "from": 20,
+            "to": 28,
+            "interpretation_de": "Mittelschwere Depression",
+            "interpretation_en": "Moderate Depression",
+            "result_color": "#FF5722"
+        }, {
+            "from": 29,
+            "to": 63,
+            "interpretation_de": "Schwere Depression",
+            "interpretation_en": "Major Depression",
+            "result_color": "#F44336"
+        }];
+
+        if (score >= ranges[1].from) {
+            current_range = ranges[1];
+        };
+        if (score >= ranges[2].from) {
+            current_range = ranges[2];
+        };
+        if (score >= ranges[3].from) {
+            current_range = ranges[3];
+        };
+        if (score >= ranges[4].from) {
+            current_range = ranges[4];
+        };
+
+
+        var return_obj = {
+            "score": score,
+            "current_range": current_range,
+            "ranges": ranges
+        };
+
+        return return_obj;
     };
 
 
