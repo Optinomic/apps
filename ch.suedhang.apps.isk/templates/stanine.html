@@ -2,7 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">Stanine-Chart</h3>
 <chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
 <h4 class="md-subhead">Legende</h4>
-<div ng-repeat="score in stanine.data[0].scores" class="md-margin">
+<div ng-repeat="score in stanine.data[0].scores" style="margin-top: 14px;">
     <p class="md-caption"><strong>{{score.question}}:</strong> {{score.full}}</p>
 </div>
 include(../lib/html/optinomic/page/end.m4)
