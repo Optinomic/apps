@@ -23,7 +23,8 @@ include(../lib/html/optinomic/page/start.m4)
                     <h5 class="md-subhead">Interpretation</h5>
                     <p class="md-display-1" ng-attr-style="color:{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.result_color}}">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_de}}</p>
                     <p class="md-caption" style="margin-top: -8px;">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_en}} (Σ{{d.dataMain.calculations[0].calculation_results[d.navigator].score.score}})</p>
-                    <md-button ng-if="!d.show_answers" class="md-accent" aria-label="Antworten anzeigen" ng-click="d.show_answers = true">
+                    <div>&nbsp;</div>
+                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="d.show_answers = true">
                         Antworten anzeigen
                     </md-button>
                     <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
@@ -47,11 +48,12 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content ng-if="d.show_answers" layout-margin>
+            <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
             <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
                 <p class="md-caption">
                     <strong>{{question.name}}: </strong>
                     <span ng-repeat="answer in question.answers">
-                    <span ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]">{{answer.item}}</span>
+                    <span ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]">{{answer.item}}. <small style="color:#9E9E9E"> ( answer.code )</small></span>
                     </span>
                 </p>
             </div>
