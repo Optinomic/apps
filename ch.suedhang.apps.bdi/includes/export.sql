@@ -49,11 +49,7 @@ SELECT
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
   ((cast(response AS json))->>'startlanguage') as startlanguage,
   ((cast(response AS json))->>'submitdate') as submitdate,
-  TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
-  SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
-  SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
-
+  
   random_hash,
   scheduled,
   filled,
