@@ -11,13 +11,13 @@ Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen.
 
 
 [developer]
-first_name = Beat
-last_name = Ottiger
-github_user = ottigerb
-email = beat@optinomic.com
-company = Optinomic Gmbh
-phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
+first_name = Nora
+last_name = Schoenenberger
+github_user = schoenenb
+email = Nora.Schoenenberger@suedhang.ch
+company = Klinik Südhang
+phone = +41 (0)31 828 14 14
+website = http://suedhang.ch/de/
 
 
 

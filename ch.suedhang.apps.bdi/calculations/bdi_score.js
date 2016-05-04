@@ -5,7 +5,7 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.bdiScore = function() {
+    calc.bdiScore = function(result) {
         var score = 0;
         score = score + parseInt(result['BDI1']);
         score = score + parseInt(result['BDI2']);
@@ -45,13 +45,14 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // Something
-            // myResults.score = calc.bdiScore();
+            // BDI-Score
+            myResults.score = calc.bdiScore(result);
 
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
+            myResults.full_responses = myResponses;
             allResults.push(myResults);
         });
 
