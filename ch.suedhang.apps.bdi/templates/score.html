@@ -49,7 +49,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider></md-divider>
         <md-card-content ng-if="d.show_answers" layout-margin>
             <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
-            <md-input-container>
+            <md-input-container ng-if="1===2">
                 <label>Filter</label>
                 <md-select ng-model="d.show_answers_filter">
                     <md-option ng-repeat="filter in d.show_answers_filters" value="{{filter.value}}">
@@ -59,7 +59,7 @@ include(../lib/html/optinomic/page/start.m4)
             </md-input-container>
             <div>&nbsp;</div>
             <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
-                <p class="md-caption" ng-if="(d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)] | num) >= d.show_answers_filter">
+                <p class="md-caption">
                     <strong>{{question.name}}: </strong>
                     <span ng-repeat="answer in question.answers">
                     <span ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]">{{answer.item}}. <small style="color:#9E9E9E"> ( {{answer.code}} )</small></span>
