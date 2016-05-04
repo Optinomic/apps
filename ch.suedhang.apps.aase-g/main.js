@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
