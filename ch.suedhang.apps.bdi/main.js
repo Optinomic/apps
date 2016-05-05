@@ -71,8 +71,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    // -------------------
+    // BDI Init
+    // -------------------
     $scope.bdi_init = function() {
-
 
         $scope.d.show_answers = false;
         $scope.d.show_answers_filter = 0;
@@ -459,7 +461,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-
+    // -------------------
+    // Navigation
+    // -------------------
     $scope.prev = function() {
         var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
 
@@ -488,7 +492,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Filter Answers
     // -------------------
-
     $scope.setAnswerFilter = function(show_true) {
 
 
@@ -513,14 +516,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('setAnswerFilter :::> Results ', results);
         $scope.d.show_answers = show_true;
-
     };
 
 
     // -------------------
     // Data-Export
     // -------------------
-
     $scope.setExport = function() {
 
 
@@ -544,7 +545,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
     };
 
 

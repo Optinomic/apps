@@ -29,9 +29,6 @@ include(../lib/html/optinomic/page/start.m4)
                     <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
                         Antworten anzeigen
                     </md-button>
-                    <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
-                        Antworten ausblenden
-                    </md-button>
                 </div>
                 <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
@@ -54,7 +51,16 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content ng-if="d.show_answers" layout-margin>
-            <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
+            <div layout="row" layout-align="space-between center">
+                <div>
+                    <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
+                </div>
+                <div>
+                    <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
+                        Antworten ausblenden
+                    </md-button>
+                </div>
+            </div>
             <md-input-container>
                 <label>Filter</label>
                 <md-select md-on-close="setAnswerFilter(true)" ng-model="d.show_answers_filter">
