@@ -495,29 +495,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setAnswerFilter = function() {
 
-        if ($scope.d.show_answers === true) {
 
-            var results = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.response;
+        var results = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.response;
 
-            for (var i = 1; i < 22; i++) {
+        for (var i = 1; i < 22; i++) {
 
-                var current_answer = results['BDI' + i];
-                var current_score = parseInt(results['BDI' + i]);
+            var current_answer = results['BDI' + i];
+            var current_score = parseInt(results['BDI' + i]);
 
 
-                results['BDI_filter_' + i] = false;
+            results['BDI_filter_' + i] = false;
 
-                //console.log(':::> ', i, current_answer, current_score);
+            //console.log(':::> ', i, current_answer, current_score);
 
-                if (current_score >= $scope.d.show_answers_filter) {
-                    results['BDI_filter_' + i] = true;
-                    //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
-                };
-
+            if (current_score >= $scope.d.show_answers_filter) {
+                results['BDI_filter_' + i] = true;
+                //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
             };
 
-            console.log('setAnswerFilter :::> Results ', results);
         };
+
+        console.log('setAnswerFilter :::> Results ', results);
+        $scope.d.show_answers = true;
 
     };
 
