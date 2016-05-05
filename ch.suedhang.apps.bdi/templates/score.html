@@ -26,7 +26,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-caption" style="margin-top: -8px;">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_en}} (Σ{{d.dataMain.calculations[0].calculation_results[d.navigator].score.score}})</p>
                     </div>
                     <div>&nbsp;</div>
-                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter()">
+                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
                         Antworten anzeigen
                     </md-button>
                     <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
@@ -57,7 +57,7 @@ include(../lib/html/optinomic/page/start.m4)
             <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
             <md-input-container>
                 <label>Filter</label>
-                <md-select md-on-close="setAnswerFilter()" ng-model="d.show_answers_filter">
+                <md-select md-on-close="setAnswerFilter(true)" ng-model="d.show_answers_filter">
                     <md-option ng-repeat="filter in d.show_answers_filters" value="{{filter.value}}">
                         {{filter.name}}
                     </md-option>

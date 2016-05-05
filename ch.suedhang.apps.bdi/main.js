@@ -456,11 +456,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "item": "Ich habe das Interesse an Sexualität völlig verloren"
             }]
         }];
-
-
-
-
-
     };
 
 
@@ -474,6 +469,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.navigator = $scope.d.navigator - 1
         };
         $scope.setCurrentResultDate();
+        $scope.setAnswerFilter($scope.d.show_answers);
     };
 
     $scope.next = function() {
@@ -485,7 +481,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.navigator = $scope.d.navigator + 1
         };
         $scope.setCurrentResultDate();
-
+        $scope.setAnswerFilter($scope.d.show_answers);
     };
 
 
@@ -493,7 +489,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Filter Answers
     // -------------------
 
-    $scope.setAnswerFilter = function() {
+    $scope.setAnswerFilter = function(show_true) {
 
 
         var results = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.response;
@@ -516,7 +512,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         console.log('setAnswerFilter :::> Results ', results);
-        $scope.d.show_answers = true;
+        $scope.d.show_answers = show_true;
 
     };
 
