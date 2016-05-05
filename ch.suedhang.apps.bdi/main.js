@@ -511,7 +511,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_answer = results['BDI' + i];
                 var current_score = parseInt(results['BDI' + i]);
 
-                var results['BDI_filter_' + i] = false;
+
+                results['BDI_filter_' + i] = false;
 
                 console.log(':::> ', i, current_answer, current_score);
 
