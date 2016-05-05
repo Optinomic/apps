@@ -75,7 +75,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.d.show_answers = false;
-        $scope.d.show_answers_filter = 2;
+        $scope.d.show_answers_filter = 0;
 
         $scope.d.show_answers_filters = [{
             "value": 0,
