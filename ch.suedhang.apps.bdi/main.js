@@ -498,7 +498,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Toggle
         $scope.d.show_answers = !$scope.d.show_answers;
 
-        console.log('setAnswerFilter :::> ', $scope.d.show_answers);
 
         if ($scope.d.show_answers === true) {
 
@@ -512,14 +511,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 results['BDI_filter_' + i] = false;
 
-                console.log(':::> ', i, current_answer, current_score);
+                //console.log(':::> ', i, current_answer, current_score);
 
                 if (current_score >= $scope.d.show_answers_filter) {
                     results['BDI_filter_' + i] = true;
-                    console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
+                    //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
                 };
 
             };
+
+            console.log('setAnswerFilter :::> Results ', results);
         };
 
     };
