@@ -495,10 +495,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setAnswerFilter = function() {
 
-        // Toggle
-        $scope.d.show_answers = !$scope.d.show_answers;
-
-
         if ($scope.d.show_answers === true) {
 
             var results = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.response;

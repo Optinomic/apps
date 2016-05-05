@@ -19,15 +19,11 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <div layout="row" layout-align="start start">
-                <div flex="60">
-                    <div ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score !== null">
+                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score !== null">
+                    <div>
                         <h5 class="md-subhead">Interpretation</h5>
                         <p class="md-display-1" ng-attr-style="color:{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.result_color}}">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_de}}</p>
                         <p class="md-caption" style="margin-top: -8px;">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_en}} (Σ{{d.dataMain.calculations[0].calculation_results[d.navigator].score.score}})</p>
-                    </div>
-                    <div ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
-                        <h5 class="md-subhead">Keine Interpretation möglich</h5>
-                        <p class="md-caption">Kein BDI-Score vorhanden.</p>
                     </div>
                     <div>&nbsp;</div>
                     <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter()">
@@ -36,6 +32,10 @@ include(../lib/html/optinomic/page/start.m4)
                     <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
                         Antworten ausblenden
                     </md-button>
+                </div>
+                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
+                    <h5 class="md-subhead">Keine Interpretation möglich</h5>
+                    <p class="md-caption">Kein BDI-Score vorhanden.</p>
                 </div>
                 <div flex="40">
                     <h5 class="md-subhead">BDI-II Summenwerte und Interpretation</h5>
@@ -65,6 +65,7 @@ include(../lib/html/optinomic/page/start.m4)
             </md-input-container>
             <div>&nbsp;</div>
             <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
+                <p>{{key}} = {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI_filter_' + i]}}</p>
                 <p class="md-caption" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI_filter_' + i]">
                     <strong>{{question.name}}: </strong>
                     <span ng-repeat="answer in question.answers">
