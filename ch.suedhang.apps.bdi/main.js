@@ -490,6 +490,43 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -------------------
+    // Filter Answers
+    // -------------------
+
+    $scope.setAnswerFilter = function() {
+
+
+
+        // Toggle
+        $scope.d.show_answers = !$scope.d.show_answers;
+
+        console.log('setAnswerFilter :::> ', $scope.d.show_answers);
+
+
+        if ($scope.d.show_answers === true) {
+            var results = $scope.d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response;
+
+            for (var i = 1; i < 22; i++) {
+
+                var current_answer = results['BDI' + i];
+                var current_score = parseInt(results['BDI' + i]);
+
+                var results['BDI_filter_' + i] = false;
+
+                console.log(':::> ', i, current_answer, current_score);
+
+                if (current_score >= $scope.d.show_answers_filter) {
+                    results['BDI_filter_' + i] = true;
+                    console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
+                };
+
+            };
+        };
+
+    };
+
+
+    // -------------------
     // Data-Export
     // -------------------
 
