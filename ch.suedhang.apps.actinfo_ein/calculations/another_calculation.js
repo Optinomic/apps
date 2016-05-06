@@ -89,7 +89,7 @@ function main(responses) {
             "AUDIT_Score": score,
             "gender": gender,
             "interpretation": selected_population,
-            "population": current_population
+            "ranges": current_population
         };
 
 
@@ -112,17 +112,55 @@ function main(responses) {
         score = score + parseInt(d.VZET070);
 
 
+        var scale_ranges_fagerstoem = [{
+            "from": 0,
+            "to": 2,
+            "result": "Geringe koerperliche Abhaengigkeit.",
+            "result_color": "green",
+            "logo_speed": 10
+        }, {
+            "from": 3,
+            "to": 4,
+            "result": "Mittlere koerperliche Abhaengigkeit.",
+            "result_color": "orange",
+            "logo_speed": 25
+        }, {
+            "from": 5,
+            "to": 6,
+            "result": "Starke koerperliche Abhaengigkeit.",
+            "result_color": "red",
+            "logo_speed": 50
+        }, {
+            "from": 7,
+            "to": 10,
+            "result": "Sehr starke koerperliche Abhaengigkeit.",
+            "result_color": "red",
+            "logo_speed": 55
+        }];
+
+
+        var selected_population = {};
+        selected_population = scale_ranges_fagerstoem[0];
+
+        if (score >= scale_ranges_fagerstoem[1].from) {
+            selected_population = scale_ranges_fagerstoem[1];
+        };
+        if (score >= scale_ranges_fagerstoem[2].from) {
+            selected_population = scale_ranges_fagerstoem[2];
+        };
+        if (score >= scale_ranges_fagerstoem[3].from) {
+            selected_population = scale_ranges_fagerstoem[3];
+        };
+
         var return_obj = {
-            "FAGERSTROEM_Score": score
+            "FAGERSTROEM_Score": score,
+            "interpretation": selected_population,
+            "ranges": scale_ranges_fagerstoem
         };
 
 
         return return_obj;
     };
-
-
-
-
 
 
 
