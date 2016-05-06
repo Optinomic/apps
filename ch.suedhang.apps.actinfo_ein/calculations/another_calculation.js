@@ -27,43 +27,39 @@ function main(responses) {
 
         // Populations (Men / Woman)
 
-        var scale_ranges_men = {
-            "ranges": [{
-                "from": 0,
-                "to": 7,
-                "result": "Risikoarmer Alkoholkonsum",
-                "result_color": "green"
-            }, {
-                "from": 8,
-                "to": 15,
-                "result": "Verdacht auf eine alkoholbezogene Stoerung",
-                "result_color": "orange"
-            }, {
-                "from": 16,
-                "to": 40,
-                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
-                "result_color": "red"
-            }]
-        };
+        var scale_ranges_men = [{
+            "from": 0,
+            "to": 7,
+            "result": "Risikoarmer Alkoholkonsum",
+            "result_color": "green"
+        }, {
+            "from": 8,
+            "to": 15,
+            "result": "Verdacht auf eine alkoholbezogene Stoerung",
+            "result_color": "orange"
+        }, {
+            "from": 16,
+            "to": 40,
+            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+            "result_color": "red"
+        }];
 
-        var scale_ranges_woman = {
-            "ranges": [{
-                "from": 0,
-                "to": 4,
-                "result": "Risikoarmer Alkoholkonsum",
-                "result_color": "green"
-            }, {
-                "from": 5,
-                "to": 14,
-                "result": "Verdacht auf eine alkoholbezogene Stoerung",
-                "result_color": "orange"
-            }, {
-                "from": 15,
-                "to": 40,
-                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
-                "result_color": "red"
-            }]
-        };
+        var scale_ranges_woman = [{
+            "from": 0,
+            "to": 4,
+            "result": "Risikoarmer Alkoholkonsum",
+            "result_color": "green"
+        }, {
+            "from": 5,
+            "to": 14,
+            "result": "Verdacht auf eine alkoholbezogene Stoerung",
+            "result_color": "orange"
+        }, {
+            "from": 15,
+            "to": 40,
+            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+            "result_color": "red"
+        }];
 
 
         // Current Population festlegen
