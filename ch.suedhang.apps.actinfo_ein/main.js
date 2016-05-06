@@ -116,267 +116,267 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.['QNED0702[VNED070bb]'] === 'Y') {
-                substanz = 'Methadon (Optiat)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073bb);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0702[VNED070bc]'] === 'Y') {
-                substanz = 'Buprenorphin (Optiat)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073bc);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0702[VNED070bd]'] === 'Y') {
-                substanz = 'Fentanyl (Optiat)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073bc);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0702[VNED070be]'] === 'Y') {
-                substanz = 'Andere Opioide' + response.VNED071be
-                answer_option = 0;
-                answer = parseInt(response.VNED073bd);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            // Kokain
-            if (response.['QNED0703[VNED070ca]'] === 'Y') {
-                substanz = 'Kokain-Pulver'
-                answer_option = 0;
-                answer = parseInt(response.VNED073ca);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0703[VNED070cb]'] === 'Y') {
-                substanz = 'Crack-Kokain'
-                answer_option = 0;
-                answer = parseInt(response.VNED073cb);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0703[VNED070cc]'] === 'Y') {
-                substanz = 'Anderer Kokain-Typ ' + response.VNED071cc
-                answer_option = 0;
-                answer = parseInt(response.VNED073cc);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            // Andere Stimulanzien
-            if (response.['QNED0704[VNED070da]'] === 'Y') {
-                substanz = 'Amphetamine'
-                answer_option = 0;
-                answer = parseInt(response.VNED073da);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0704[VNED070db]'] === 'Y') {
-                substanz = 'Methamphetamine (Crystal Meth, Ice, Thai-Pillen)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073db);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0704[VNED070dc]'] === 'Y') {
-                substanz = 'MDMA und verwandte Stoffe (Ecstasy)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073dc);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0704[VNED070dd]'] === 'Y') {
-                substanz = 'Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073dd);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0704[VNED070de]'] === 'Y') {
-                substanz = 'Andere Stimulanzien ' + response.VNED071de
-                answer_option = 0;
-                answer = parseInt(response.VNED073de);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            // Hypnotika/Sedativa
-
-            if (response.['QNED0705[VNED070ea]'] === 'Y') {
-                substanz = 'Barbiturate (missbräuchlich)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073ea);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0705[VNED070eb]'] === 'Y') {
-                substanz = 'Benzodiazepine (missbräuchlich)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073eb);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0705[VNED070ec]'] === 'Y') {
-                substanz = 'GHB/GBL (K.O.-Tropfen)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073ec);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0705[VNED070ed]'] === 'Y') {
-                substanz = 'Andere Schlaf-/Beruhigungsmittel ' + response.VNED071ed
-                answer_option = 0;
-                answer = parseInt(response.VNED073ed);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            // Halluzinogene
-
-            if (response.['QNED0706[VNED070fa]'] === 'Y') {
-                substanz = 'LSD'
-                answer_option = 0;
-                answer = parseInt(response.VNED073fa);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0706[VNED070fb]'] === 'Y') {
-                substanz = 'Ketamin'
-                answer_option = 0;
-                answer = parseInt(response.VNED073fb);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0706[VNED070fc]'] === 'Y') {
-                substanz = 'Andere Halluzinogene ' + response.VNED071fc
-                answer_option = 0;
-                answer = parseInt(response.VNED073fc);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            // Weitere Substanzen
-            if (response.['QNED0707[VNED070g]'] === 'Y') {
-                substanz = 'Flüchtige Stoffe'
-                answer_option = 0;
-                answer = parseInt(response.VNED073g);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0707[VNED070h]'] === 'Y') {
-                substanz = 'Cannabis'
-                answer_option = 0;
-                answer = parseInt(response.VNED073h);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0707[VNED070i]'] === 'Y') {
-                substanz = 'Tabak'
-                answer_option = 0;
-                answer = parseInt(response.VNED073i);
-                answer_tabak = parseInt(response.VZET020);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                var my_tabak_result = $scope.d.problemsubstanzen_label.answer_options[1];
-                text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
-            if (response.['QNED0707[VNED070j]'] === 'Y') {
-                substanz = response.VNED071j
-                answer_option = 0;
-                answer = parseInt(response.VNED073j);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
+            //if (response.['QNED0702[VNED070bb]'] === 'Y') {
+            //    substanz = 'Methadon (Optiat)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073bb);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0702[VNED070bc]'] === 'Y') {
+            //    substanz = 'Buprenorphin (Optiat)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073bc);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0702[VNED070bd]'] === 'Y') {
+            //    substanz = 'Fentanyl (Optiat)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073bc);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0702[VNED070be]'] === 'Y') {
+            //    substanz = 'Andere Opioide' + response.VNED071be
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073bd);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //// Kokain
+            //if (response.['QNED0703[VNED070ca]'] === 'Y') {
+            //    substanz = 'Kokain-Pulver'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073ca);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0703[VNED070cb]'] === 'Y') {
+            //    substanz = 'Crack-Kokain'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073cb);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0703[VNED070cc]'] === 'Y') {
+            //    substanz = 'Anderer Kokain-Typ ' + response.VNED071cc
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073cc);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //// Andere Stimulanzien
+            //if (response.['QNED0704[VNED070da]'] === 'Y') {
+            //    substanz = 'Amphetamine'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073da);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0704[VNED070db]'] === 'Y') {
+            //    substanz = 'Methamphetamine (Crystal Meth, Ice, Thai-Pillen)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073db);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0704[VNED070dc]'] === 'Y') {
+            //    substanz = 'MDMA und verwandte Stoffe (Ecstasy)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073dc);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0704[VNED070dd]'] === 'Y') {
+            //    substanz = 'Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073dd);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0704[VNED070de]'] === 'Y') {
+            //    substanz = 'Andere Stimulanzien ' + response.VNED071de
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073de);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //// Hypnotika/Sedativa
+            //
+            //if (response.['QNED0705[VNED070ea]'] === 'Y') {
+            //    substanz = 'Barbiturate (missbräuchlich)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073ea);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0705[VNED070eb]'] === 'Y') {
+            //    substanz = 'Benzodiazepine (missbräuchlich)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073eb);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0705[VNED070ec]'] === 'Y') {
+            //    substanz = 'GHB/GBL (K.O.-Tropfen)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073ec);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0705[VNED070ed]'] === 'Y') {
+            //    substanz = 'Andere Schlaf-/Beruhigungsmittel ' + response.VNED071ed
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073ed);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //// Halluzinogene
+            //
+            //if (response.['QNED0706[VNED070fa]'] === 'Y') {
+            //    substanz = 'LSD'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073fa);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0706[VNED070fb]'] === 'Y') {
+            //    substanz = 'Ketamin'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073fb);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0706[VNED070fc]'] === 'Y') {
+            //    substanz = 'Andere Halluzinogene ' + response.VNED071fc
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073fc);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //// Weitere Substanzen
+            //if (response.['QNED0707[VNED070g]'] === 'Y') {
+            //    substanz = 'Flüchtige Stoffe'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073g);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0707[VNED070h]'] === 'Y') {
+            //    substanz = 'Cannabis'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073h);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0707[VNED070i]'] === 'Y') {
+            //    substanz = 'Tabak'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073i);
+            //    answer_tabak = parseInt(response.VZET020);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    var my_tabak_result = $scope.d.problemsubstanzen_label.answer_options[1];
+            //    text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
+            //if (response.['QNED0707[VNED070j]'] === 'Y') {
+            //    substanz = response.VNED071j
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073j);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
 
 
             console.log('actInfoInit', $scope.d.problemsubstanzen);
