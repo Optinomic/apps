@@ -27,43 +27,39 @@ function main(responses) {
 
         // Populations (Men / Woman)
 
-        var scale_ranges_men = {
-            "ranges": [{
-                "from": 0,
-                "to": 7,
-                "result": "Risikoarmer Alkoholkonsum",
-                "result_color": "green"
-            }, {
-                "from": 8,
-                "to": 15,
-                "result": "Verdacht auf eine alkoholbezogene Stoerung",
-                "result_color": "orange"
-            }, {
-                "from": 16,
-                "to": 40,
-                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
-                "result_color": "red"
-            }]
-        };
+        var scale_ranges_men = [{
+            "from": 0,
+            "to": 7,
+            "result": "Risikoarmer Alkoholkonsum",
+            "result_color": "green"
+        }, {
+            "from": 8,
+            "to": 15,
+            "result": "Verdacht auf eine alkoholbezogene Stoerung",
+            "result_color": "orange"
+        }, {
+            "from": 16,
+            "to": 40,
+            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+            "result_color": "red"
+        }];
 
-        var scale_ranges_woman = {
-            "ranges": [{
-                "from": 0,
-                "to": 4,
-                "result": "Risikoarmer Alkoholkonsum",
-                "result_color": "green"
-            }, {
-                "from": 5,
-                "to": 14,
-                "result": "Verdacht auf eine alkoholbezogene Stoerung",
-                "result_color": "orange"
-            }, {
-                "from": 15,
-                "to": 40,
-                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
-                "result_color": "red"
-            }]
-        };
+        var scale_ranges_woman = [{
+            "from": 0,
+            "to": 4,
+            "result": "Risikoarmer Alkoholkonsum",
+            "result_color": "green"
+        }, {
+            "from": 5,
+            "to": 14,
+            "result": "Verdacht auf eine alkoholbezogene Stoerung",
+            "result_color": "orange"
+        }, {
+            "from": 15,
+            "to": 40,
+            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+            "result_color": "red"
+        }];
 
 
         // Current Population festlegen
@@ -79,13 +75,13 @@ function main(responses) {
 
 
         var selected_population = {};
-        selected_population = current_population.ranges[0];
+        selected_population = current_population[0];
 
-        if (score >= current_population.ranges[1].from) {
-            selected_population = current_population.ranges[1];
+        if (score >= current_population[1].from) {
+            selected_population = current_population[1];
         };
-        if (score >= current_population.ranges[2].from) {
-            selected_population = current_population.ranges[2];
+        if (score >= current_population[2].from) {
+            selected_population = current_population[2];
         };
 
 
@@ -93,7 +89,7 @@ function main(responses) {
             "AUDIT_Score": score,
             "gender": gender,
             "interpretation": selected_population,
-            "ranges": current_population
+            "ranges": { "ranges": current_population }
         };
 
 
@@ -116,52 +112,50 @@ function main(responses) {
         score = score + parseInt(d.VZET070);
 
 
-        var scale_ranges_fagerstoem = {
-            "ranges": [{
-                "from": 0,
-                "to": 2,
-                "result": "Geringe körperliche Abhängigkeit.",
-                "result_color": "green",
-                "logo_speed": 10
-            }, {
-                "from": 3,
-                "to": 4,
-                "result": "Mittlere körperliche Abhängigkeit.",
-                "result_color": "orange",
-                "logo_speed": 25
-            }, {
-                "from": 5,
-                "to": 6,
-                "result": "Starke körperliche Abhängigkeit.",
-                "result_color": "red",
-                "logo_speed": 50
-            }, {
-                "from": 7,
-                "to": 10,
-                "result": "Sehr starke körperliche Abhängigkeit.",
-                "result_color": "red",
-                "logo_speed": 55
-            }]
-        };
+        var scale_ranges_fagerstoem = [{
+            "from": 0,
+            "to": 2,
+            "result": "Geringe koerperliche Abhaengigkeit.",
+            "result_color": "green",
+            "logo_speed": 10
+        }, {
+            "from": 3,
+            "to": 4,
+            "result": "Mittlere koerperliche Abhaengigkeit.",
+            "result_color": "orange",
+            "logo_speed": 25
+        }, {
+            "from": 5,
+            "to": 6,
+            "result": "Starke koerperliche Abhaengigkeit.",
+            "result_color": "red",
+            "logo_speed": 50
+        }, {
+            "from": 7,
+            "to": 10,
+            "result": "Sehr starke koerperliche Abhaengigkeit.",
+            "result_color": "red",
+            "logo_speed": 55
+        }];
 
 
         var selected_population = {};
-        selected_population = scale_ranges_fagerstoem.ranges[0];
+        selected_population = scale_ranges_fagerstoem[0];
 
-        if (score >= scale_ranges_fagerstoem.ranges[1].from) {
-            selected_population = scale_ranges_fagerstoem.ranges[1];
+        if (score >= scale_ranges_fagerstoem[1].from) {
+            selected_population = scale_ranges_fagerstoem[1];
         };
-        if (score >= scale_ranges_fagerstoem.ranges[2].from) {
-            selected_population = scale_ranges_fagerstoem.ranges[2];
+        if (score >= scale_ranges_fagerstoem[2].from) {
+            selected_population = scale_ranges_fagerstoem[2];
         };
-        if (score >= scale_ranges_fagerstoem.ranges[3].from) {
-            selected_population = scale_ranges_fagerstoem.ranges[3];
+        if (score >= scale_ranges_fagerstoem[3].from) {
+            selected_population = scale_ranges_fagerstoem[3];
         };
 
         var return_obj = {
             "FAGERSTROEM_Score": score,
             "interpretation": selected_population,
-            "ranges": scale_ranges_fagerstoem
+            "ranges": { "ranges": scale_ranges_fagerstoem }
         };
 
 
