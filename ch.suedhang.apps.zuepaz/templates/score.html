@@ -1,11 +1,10 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">Daten: {{d.dataMain.apps.current.name}}</h3>
 <div ng-repeat="response in d.dataMain.survey_responses">
     <div>
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
-            <h4 class="md-headline">Gesamtscore</h4>
+            <h4 class="md-headline">Gesamtscore (ZüPaZ)</h4>
             <div>
-                <p class="small">Datum
+                <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
@@ -19,7 +18,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	Summenwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in d.scale_ranges">
+                    <tr ng-repeat="range in d.scale_ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -33,9 +32,9 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
-            <h4 class="md-headline">Eintritt</h4>
+            <h4 class="md-headline">Eintritt (ZüPaZ)</h4>
             <div>
-                <p class="small">Datum
+                <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
@@ -49,7 +48,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	Summenwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in d.scale_ranges">
+                    <tr ng-repeat="range in d.scale_ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -63,9 +62,9 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
-            <h4 class="md-headline">Aufenthalt</h4>
+            <h4 class="md-headline">Aufenthalt (ZüPaZ)</h4>
             <div>
-                <p class="small">Datum
+                <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
@@ -79,7 +78,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	Summenwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in d.scale_ranges">
+                    <tr ng-repeat="range in d.scale_ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -93,9 +92,9 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
-            <h4 class="md-headline">Behandlung</h4>
+            <h4 class="md-headline">Behandlung (ZüPaZ)</h4>
             <div>
-                <p class="small">Datum
+                <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
@@ -109,7 +108,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	Summenwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in d.scale_ranges">
+                    <tr ng-repeat="range in d.scale_ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -123,9 +122,9 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
-            <h4 class="md-headline">Austritt</h4>
+            <h4 class="md-headline">Austritt (ZüPaZ)</h4>
             <div>
-                <p class="small">Datum
+                <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
@@ -139,7 +138,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	Summenwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in d.scale_ranges">
+                    <tr ng-repeat="range in d.scale_ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -151,17 +150,5 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
     </div>
-    <p>Calculations</p>
-    <pre>
-        {{response.calculations | json}}
-    </pre>
-    <p>Response</p>
-    <pre>
-        {{response.entity.data.response | json}}
-    </pre>
-    <p>Event</p>
-    <pre>
-        {{response.event | json}}
-    </pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
