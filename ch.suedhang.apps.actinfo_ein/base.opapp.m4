@@ -1,12 +1,19 @@
 [module]
 id = ch.suedhang.apps.actinfo_ein
-name = actinfo Eintritt
-short_description = Use this as a starting-point for your apps.
+name = actInfo Eintritt
+short_description = Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe.
+
+Das nationale Dokumentationssystem umfasst Angebote der ambulanten und stationären Behandlung von Problemen mit legalen und illegalen Substanzen sowie von nicht-substanzgebundener Abhängigkeit. act-info ist das Resultat der Harmonisierung der bestehenden Suchthilfestatistiken.
+
+Die beteiligten Forschungsinstitute (Sucht Schweiz Lausanne, ISGF Zürich) sind für die Datenerhebung und die Auswertungen in den einzelnen Behandlungssektoren verantwortlich.
+
+act-info wird durch das Bundesamt für Gesundheit BAG finanziert und koordiniert. Die Verantwortung für das Gesamtprojekt act-info liegt beim BAG.
+
 
 [developer]
 first_name = Beat
@@ -19,23 +26,9 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
-
-[template simple_score 4 4]
+[template score 6 6]
 include(templates/score.html)
 
-[template score_range 2 4]
-include(templates/range.html)
-
-[template chart_tscore 6 10]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
 
 [template data_download 6 10]
 include(templates/download.html)
@@ -53,38 +46,26 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = daily_mood
+id = actinfo_eintritt
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = actInfo - Eintritt
 host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
+survey_id = 275667
+hash = X48X652
+pid = X48X646
+fid = X48X645
 min_questions =
-min_lastpage = 2
+min_lastpage = 5
 
 
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
-
-
-[event daily]
-type = daily
-time = 19:00
-due_after = 86400
+[event activation]
+type = on_activation
+time = 8:00
+due_after = 259200
 overdue = ignore
-description = Track your daily craving.
-survey = daily_mood
+description = actInfo - Eintritt
+survey = actinfo_eintritt
 
 
 [email new_event html]
