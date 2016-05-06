@@ -5,14 +5,11 @@ include(../lib/html/optinomic/page/start.m4)
         <p class="md-body-1">Folgende Substanzen konsumierte der Patient/ die Patientin vor dem aktuellen Entzug in der angegebenen Häufigkeit:</p>
         <p>ToDo</p>
     </div>
-    <div>
-        <h4 class="md-headline">AUDIT: </h4>
-        <div layout="row" layout-align="start start">
+    <div style="margin-top: 48px;">
+        <h4 class="md-headline" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">AUDIT: {{response.calculations[0].calculation_result.AUDIT.interpretation.result}}</h4>
+        <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
                 <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
-                <div>
-                    <p class="md-subhead" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}} (Σ{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}})</p>
-                </div>
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score === null">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
@@ -25,7 +22,7 @@ include(../lib/html/optinomic/page/start.m4)
                 	<span ng-if="response.calculations[0].calculation_result.AUDIT.gender !== 'male'">Frauen</span>
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in response.calculations[0].calculation_result.AUDIT.ranges">
+                    <tr ng-repeat="range in response.calculations[0].calculation_result.AUDIT.ranges.ranges">
                         <td style="text-align:right !important;">
                             <small>{{range.from}}-{{range.to}}&nbsp;</small>
                         </td>
@@ -37,9 +34,32 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
     </div>
-    <div>
-        <h4 class="md-headline">Fagerström</h4> {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}
-        <pre>{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation | json}}</pre>
+    <div style="margin-top: 48px;">
+        <h4 class="md-headline" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">Fagerström: {{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+        <div layout="row" layout-align="start center">
+            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
+                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+            </div>
+            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
+                <h5 class="md-subhead">Keine Interpretation möglich</h5>
+                <p class="md-caption">Kein FAGERSTROEM-Score vorhanden.</p>
+            </div>
+            <div flex="45">
+                <h5 class="md-subhead">
+                	FAGERSTROEM Summenwerte  
+                </h5>
+                <table class="table table-condensed" style="width: 80%;">
+                    <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
+                        <td style="text-align:right !important;">
+                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                        </td>
+                        <td>
+                            <small>{{range.result}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
