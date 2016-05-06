@@ -86,6 +86,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var response = result.entity.data.response;
 
             var substanz = '';
+            var answer_option = 0;
+            var answer = 0;
+            var my_result = {};
+            var text = '';
 
 
             // Alkohol
@@ -106,7 +110,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073ba);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -117,7 +121,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073bb);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -128,7 +132,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073bc);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -139,7 +143,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073bc);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -150,7 +154,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073bd);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -162,7 +166,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073ca);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -173,7 +177,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073cb);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -184,7 +188,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073cc);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -196,7 +200,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073da);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -207,7 +211,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073db);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -218,7 +222,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073dc);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -229,7 +233,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073dd);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -240,7 +244,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073de);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -253,7 +257,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073ea);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -264,7 +268,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073eb);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -275,7 +279,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073ec);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -286,7 +290,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073ed);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -299,7 +303,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073fa);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -310,7 +314,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073fb);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -321,7 +325,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073fc);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -333,7 +337,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073g);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -344,7 +348,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073h);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
@@ -356,8 +360,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer = parseInt(response.VNED073i);
                 answer_tabak = parseInt(response.VZET020);
 
-                my_result = $scope.label.answer_options[answer_option];
-                var my_tabak_result = $scope.label.answer_options[1];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+                var my_tabak_result = $scope.d.problemsubstanzen_label.answer_options[1];
                 text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
 
                 $scope.d.problemsubstanzen.push(text);
@@ -368,7 +372,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 answer_option = 0;
                 answer = parseInt(response.VNED073j);
 
-                my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
