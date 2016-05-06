@@ -1,22 +1,22 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div>
-        <div layout="row" layout-align="space-between center">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
             <h4 class="md-headline">Problemsubstanzen</h4>
             <div>
-                <p class="small"><small>{{d.dataMain.apps.current.name}}</small>
-                    <br>{{response.entity.data.response.VMEB001 | date}}</p>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
-        <p class="md-body-1 grid-border-top" style="margin-top: 12px;">Folgende Substanzen konsumierte der Patient/ die Patientin vor dem aktuellen Entzug in der angegebenen Häufigkeit:</p>
+        <p class="md-body-1" style="margin-top: 12px;">Folgende Substanzen konsumierte der Patient/ die Patientin vor dem aktuellen Entzug in der angegebenen Häufigkeit:</p>
         <p class="md-body-2" ng-repeat="problemsubstanz in response.problemsubstanzen">- {{problemsubstanz}}</p>
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
             <h4 class="md-headline">Alkohol: AUDIT</h4>
             <div>
-                <p class="small"><small>{{d.dataMain.apps.current.name}}</small>
-                    <br>{{response.entity.data.response.VMEB001 | date}}</p>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
         <p class="md-body-1" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}} Punkten auf der AUDIT-Skala.</p>
@@ -54,8 +54,8 @@ include(../lib/html/optinomic/page/start.m4)
         <div class="grid-border-bottom" layout="row" layout-align="space-between center">
             <h4 class="md-headline">Nikotin: Fagerström</h4>
             <div>
-                <p class="small"><small>{{d.dataMain.apps.current.name}}</small>
-                    <br>{{response.entity.data.response.VMEB001 | date}}</p>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
         <p class="md-body-1" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala.</p>
