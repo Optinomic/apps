@@ -9,9 +9,11 @@ include(../lib/html/optinomic/page/start.m4)
         <h4 class="md-headline">Alkohol: AUDIT <small>{{response.entity.data.response.VMEB001 | date}}</small></h4>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
-                <h4 class="md-title" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}}</h4>
-                <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
-                <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}} Punkten auf der AUDIT-Skala.</p>
+                <div layout="column" layout-align="center center">
+                    <h4 class="md-title" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}}</h4>
+                    <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
+                    <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}} Punkten auf der AUDIT-Skala.</p>
+                </div>
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score === null">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
@@ -40,9 +42,11 @@ include(../lib/html/optinomic/page/start.m4)
         <h4 class="md-headline">Nikotin: Fagerström <small>{{response.entity.data.response.VMEB001 | date}}</small></h4>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
-                <h4 class="md-title" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
-                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
-                <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala.</p>
+                <div layout="column" layout-align="center center">
+                    <h4 class="md-title" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                    <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                    <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala.</p>
+                </div>
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
