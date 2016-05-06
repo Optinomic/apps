@@ -9,7 +9,7 @@ include(../lib/html/optinomic/page/start.m4)
         <h4 class="md-headline">AUDIT: </h4>
         <div layout="row" layout-align="start start">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
-                <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" show-min-max="true"></score-threshold>
+                <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
                 <div>
                     <p class="md-subhead" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}} (Σ{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}})</p>
                 </div>
