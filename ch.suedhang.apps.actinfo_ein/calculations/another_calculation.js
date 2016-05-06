@@ -5,24 +5,74 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+    // Runden
+    calc.roundToOne = function(num) {
+        return +(Math.round(num + "e+1") + "e-1");
+    }
+
+
     calc.AUDIT_Score = function(d, gender) {
 
 
         // Calculate AUDIT-Score
         var score = 0;
+        var count_valid_scores = 0;
 
-        score = score + parseInt(d.VZEA010);
-        score = score + parseInt(d.VZEA020);
-        score = score + parseInt(d.VZEA030);
-        score = score + parseInt(d.VZEA040);
-        score = score + parseInt(d.VZEA050);
-        score = score + parseInt(d.VZEA060);
-        score = score + parseInt(d.VZEA070);
-        score = score + parseInt(d.VZEA080);
-        score = score + parseInt(d.VZEA090);
-        score = score + parseInt(d.VZEA100);
-        score = score + 1;
+        if (d.VZEA010 != '999') {
+            score = score + parseInt(d.VZEA010);
+            count_valid_scores = count_valid_scores + 1;
+        };
 
+        if (d.VZEA020 != '999') {
+            score = score + parseInt(d.VZEA020);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA030 != '999') {
+            score = score + parseInt(d.VZEA030);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA040 != '999') {
+            score = score + parseInt(d.VZEA040);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA050 != '999') {
+            score = score + parseInt(d.VZEA050);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA060 != '999') {
+            score = score + parseInt(d.VZEA060);
+            count_valid_scores = count_valid_scores + 1;
+        }
+
+        if (d.VZEA070 != '999') {
+            score = score + parseInt(d.VZEA070);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA080 != '999') {
+            score = score + parseInt(d.VZEA080);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA090 != '999') {
+            score = score + parseInt(d.VZEA090);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+        if (d.VZEA100 != '999') {
+            score = score + parseInt(d.VZEA100);
+            count_valid_scores = count_valid_scores + 1;
+        };
+
+
+        var anz_mw_to_add = 10 - count_valid_scores;
+        var AUDIT_Score_Mean = calc.roundToOne(score / count_valid_scores);
+
+        score = score + (anz_mw_to_add * AUDIT_Score_Mean);
 
 
         // Populations (Men / Woman)
@@ -87,6 +137,8 @@ function main(responses) {
 
         var return_obj = {
             "AUDIT_Score": score,
+            "AUDIT_Score_Mean": AUDIT_Score_Mean,
+            "valid_scores": count_valid_scores,
             "gender": gender,
             "interpretation": selected_population,
             "ranges": { "ranges": current_population }

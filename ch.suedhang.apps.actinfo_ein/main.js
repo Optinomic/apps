@@ -377,7 +377,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
 
-            console.log('actInfoInit', $scope.d.problemsubstanzen);
         });
     };
 
