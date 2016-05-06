@@ -85,161 +85,163 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         results.forEach(function(result, myindex) {
             var response = result.entity.data.response;
 
+            var substanz = '';
+
 
             // Alkohol
             if (response['QNED0701[VNED070a]'] === 'Y') {
-                var substanz = 'Alkohol'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073a);
+                substanz = 'Alkohol'
+                answer_option = 0;
+                answer = parseInt(response.VNED073a);
 
-                var my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             // Optiate
             if (response.['QNED0702[VNED070ba]'] === 'Y') {
-                var substanz = 'Heroin (Optiat)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073ba);
+                substanz = 'Heroin (Optiat)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073ba);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0702[VNED070bb]'] === 'Y') {
-                var substanz = 'Methadon (Optiat)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073bb);
+                substanz = 'Methadon (Optiat)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073bb);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0702[VNED070bc]'] === 'Y') {
-                var substanz = 'Buprenorphin (Optiat)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073bc);
+                substanz = 'Buprenorphin (Optiat)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073bc);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0702[VNED070bd]'] === 'Y') {
-                var substanz = 'Fentanyl (Optiat)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073bc);
+                substanz = 'Fentanyl (Optiat)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073bc);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0702[VNED070be]'] === 'Y') {
-                var substanz = 'Andere Opioide' + response.VNED071be
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073bd);
+                substanz = 'Andere Opioide' + response.VNED071be
+                answer_option = 0;
+                answer = parseInt(response.VNED073bd);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             // Kokain
             if (response.['QNED0703[VNED070ca]'] === 'Y') {
-                var substanz = 'Kokain-Pulver'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073ca);
+                substanz = 'Kokain-Pulver'
+                answer_option = 0;
+                answer = parseInt(response.VNED073ca);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0703[VNED070cb]'] === 'Y') {
-                var substanz = 'Crack-Kokain'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073cb);
+                substanz = 'Crack-Kokain'
+                answer_option = 0;
+                answer = parseInt(response.VNED073cb);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0703[VNED070cc]'] === 'Y') {
-                var substanz = 'Anderer Kokain-Typ ' + response.VNED071cc
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073cc);
+                substanz = 'Anderer Kokain-Typ ' + response.VNED071cc
+                answer_option = 0;
+                answer = parseInt(response.VNED073cc);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             // Andere Stimulanzien
             if (response.['QNED0704[VNED070da]'] === 'Y') {
-                var substanz = 'Amphetamine'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073da);
+                substanz = 'Amphetamine'
+                answer_option = 0;
+                answer = parseInt(response.VNED073da);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0704[VNED070db]'] === 'Y') {
-                var substanz = 'Methamphetamine (Crystal Meth, Ice, Thai-Pillen)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073db);
+                substanz = 'Methamphetamine (Crystal Meth, Ice, Thai-Pillen)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073db);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0704[VNED070dc]'] === 'Y') {
-                var substanz = 'MDMA und verwandte Stoffe (Ecstasy)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073dc);
+                substanz = 'MDMA und verwandte Stoffe (Ecstasy)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073dc);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0704[VNED070dd]'] === 'Y') {
-                var substanz = 'Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073dd);
+                substanz = 'Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073dd);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0704[VNED070de]'] === 'Y') {
-                var substanz = 'Andere Stimulanzien ' + response.VNED071de
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073de);
+                substanz = 'Andere Stimulanzien ' + response.VNED071de
+                answer_option = 0;
+                answer = parseInt(response.VNED073de);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
@@ -247,45 +249,45 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Hypnotika/Sedativa
 
             if (response.['QNED0705[VNED070ea]'] === 'Y') {
-                var substanz = 'Barbiturate (missbräuchlich)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073ea);
+                substanz = 'Barbiturate (missbräuchlich)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073ea);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0705[VNED070eb]'] === 'Y') {
-                var substanz = 'Benzodiazepine (missbräuchlich)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073eb);
+                substanz = 'Benzodiazepine (missbräuchlich)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073eb);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0705[VNED070ec]'] === 'Y') {
-                var substanz = 'GHB/GBL (K.O.-Tropfen)'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073ec);
+                substanz = 'GHB/GBL (K.O.-Tropfen)'
+                answer_option = 0;
+                answer = parseInt(response.VNED073ec);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0705[VNED070ed]'] === 'Y') {
-                var substanz = 'Andere Schlaf-/Beruhigungsmittel ' + response.VNED071ed
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073ed);
+                substanz = 'Andere Schlaf-/Beruhigungsmittel ' + response.VNED071ed
+                answer_option = 0;
+                answer = parseInt(response.VNED073ed);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
@@ -293,88 +295,87 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             // Halluzinogene
 
             if (response.['QNED0706[VNED070fa]'] === 'Y') {
-                var substanz = 'LSD'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073fa);
+                substanz = 'LSD'
+                answer_option = 0;
+                answer = parseInt(response.VNED073fa);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0706[VNED070fb]'] === 'Y') {
-                var substanz = 'Ketamin'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073fb);
+                substanz = 'Ketamin'
+                answer_option = 0;
+                answer = parseInt(response.VNED073fb);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0706[VNED070fc]'] === 'Y') {
-                var substanz = 'Andere Halluzinogene ' + response.VNED071fc
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073fc);
+                substanz = 'Andere Halluzinogene ' + response.VNED071fc
+                answer_option = 0;
+                answer = parseInt(response.VNED073fc);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             // Weitere Substanzen
             if (response.['QNED0707[VNED070g]'] === 'Y') {
-                var substanz = 'Flüchtige Stoffe'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073g);
+                substanz = 'Flüchtige Stoffe'
+                answer_option = 0;
+                answer = parseInt(response.VNED073g);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0707[VNED070h]'] === 'Y') {
-                var substanz = 'Cannabis'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073h);
+                substanz = 'Cannabis'
+                answer_option = 0;
+                answer = parseInt(response.VNED073h);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0707[VNED070i]'] === 'Y') {
-                var substanz = 'Tabak'
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073i);
-                var answer_tabak = parseInt(response.VZET020);
+                substanz = 'Tabak'
+                answer_option = 0;
+                answer = parseInt(response.VNED073i);
+                answer_tabak = parseInt(response.VZET020);
 
-                var my_result = $scope.label.answer_options[answer_option];
+                my_result = $scope.label.answer_options[answer_option];
                 var my_tabak_result = $scope.label.answer_options[1];
-                var text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
+                text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
             if (response.['QNED0707[VNED070j]'] === 'Y') {
-                var substanz = response.VNED071j
-                var answer_option = 0;
-                var answer = parseInt(response.VNED073j);
+                substanz = response.VNED071j
+                answer_option = 0;
+                answer = parseInt(response.VNED073j);
 
-                var my_result = $scope.label.answer_options[answer_option];
-                var text = substanz + ': ' + my_result[answer];
+                my_result = $scope.label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
 
                 $scope.d.problemsubstanzen.push(text);
             };
 
 
             console.log('actInfoInit', $scope.d.problemsubstanzen);
-
         });
     };
 
