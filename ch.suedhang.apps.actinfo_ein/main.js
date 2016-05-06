@@ -57,8 +57,52 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.actInfoInit = function() {
 
-    };
 
+        $scope.d.problemsubstanzen_label = {
+            "answer_options": [{
+                "1": "täglich",
+                "2": "4-6 Tage pro Woche",
+                "3": "2-3 Tage pro Woche",
+                "4": "1 Tag pro Woche oder weniger",
+                "5": "kein Konsum",
+                "999": "nicht bekannt"
+            }, {
+                "0": "0 bis 10 Zigaretten pro Tag",
+                "1": "11-20 Zigaretten pro Tag",
+                "2": "21-30 Zigaretten pro Tag",
+                "3": "31 und mehr Zigaretten pro Tag",
+                "999": "nicht bekannt"
+            }]
+        };
+
+
+        // Problemsubstanzen ermitteln
+
+        $scope.d.problemsubstanzen = [];
+
+        var results = $scope.d.dataMain.survey_responses_group[0];
+
+        results.forEach(function(result, myindex) {
+            var response = result.entity.data.response;
+
+
+            // Alkohol
+            if (response['QNED0701[VNED070a]'] === 'Y') {
+                var substanz = 'Alkohol'
+                var answer_option = 0;
+                var answer = parseInt(response.VNED073a);
+
+                var my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+                var text = substanz + ': ' + my_result[answer];
+
+                $scope.d.problemsubstanzen.push(text);
+            };
+
+
+            console.log('actInfoInit', $scope.d.problemsubstanzen);
+
+        });
+    };
 
     $scope.setExport = function() {
 
