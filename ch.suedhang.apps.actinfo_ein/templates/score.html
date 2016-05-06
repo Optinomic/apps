@@ -12,14 +12,14 @@ include(../lib/html/optinomic/page/start.m4)
         <p class="md-body-2" ng-repeat="problemsubstanz in response.problemsubstanzen">- {{problemsubstanz}}</p>
     </div>
     <div style="margin-top: 48px;">
-        <div layout="row" layout-align="space-between center">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
             <h4 class="md-headline">Alkohol: AUDIT</h4>
             <div>
                 <p class="small"><small>{{d.dataMain.apps.current.name}}</small>
                     <br>{{response.entity.data.response.VMEB001 | date}}</p>
             </div>
         </div>
-        <p class="md-body-1 grid-border-top" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}} Punkten auf der AUDIT-Skala.</p>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}} Punkten auf der AUDIT-Skala.</p>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
                 <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
@@ -51,14 +51,14 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
     <div style="margin-top: 48px;">
-        <div layout="row" layout-align="space-between center">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
             <h4 class="md-headline">Nikotin: Fagerström</h4>
             <div>
                 <p class="small"><small>{{d.dataMain.apps.current.name}}</small>
                     <br>{{response.entity.data.response.VMEB001 | date}}</p>
             </div>
         </div>
-        <p class="md-body-1 grid-border-top" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala.</p>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala.</p>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
                 <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
