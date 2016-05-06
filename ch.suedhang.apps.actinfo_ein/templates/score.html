@@ -19,7 +19,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score_Mean}} bei {{response.calculations[0].calculation_result.AUDIT.valid_scores}} von 10 gültigen Scores) auf der AUDIT-Skala.</p>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score_Mean}} bei {{response.calculations[0].calculation_result.AUDIT.valid_scores}}/10 gültigen Scores) auf der AUDIT-Skala.</p>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
                 <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
