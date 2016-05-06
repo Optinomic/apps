@@ -57,7 +57,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.actInfoInit = function() {
 
-
         $scope.d.problemsubstanzen_label = {
             "answer_options": [{
                 "1": "täglich",
@@ -104,18 +103,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            // Optiate
-            if (response.['QNED0702[VNED070ba]'] === 'Y') {
-                substanz = 'Heroin (Optiat)'
-                answer_option = 0;
-                answer = parseInt(response.VNED073ba);
-
-                my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
-                $scope.d.problemsubstanzen.push(text);
-            };
-
+            //// Optiate
+            //if (response.['QNED0702[VNED070ba]'] === 'Y') {
+            //    substanz = 'Heroin (Optiat)'
+            //    answer_option = 0;
+            //    answer = parseInt(response.VNED073ba);
+            //
+            //    my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
+            //    text = substanz + ': ' + my_result[answer];
+            //
+            //    $scope.d.problemsubstanzen.push(text);
+            //};
+            //
             //if (response.['QNED0702[VNED070bb]'] === 'Y') {
             //    substanz = 'Methadon (Optiat)'
             //    answer_option = 0;
@@ -383,6 +382,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
     };
 
+
+
     $scope.setExport = function() {
 
 
@@ -406,43 +407,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-    };
-
-
-
-
-    // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
     };
 
 
