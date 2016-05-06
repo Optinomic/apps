@@ -57,7 +57,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.initZuePaZ = function() {
         // Variablen initialisieren
-        $scope.scale_ranges = {
+        $scope.d.scale_ranges = {
             "ranges": [{
                 "from": 0,
                 "to": 1,
