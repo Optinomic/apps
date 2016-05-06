@@ -81,7 +81,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         results.forEach(function(result, myindex) {
             var response = result.entity.data.response;
-            var result.problemsubstanzen = [];
+            result.problemsubstanzen = [];
 
             var substanz = '';
             var answer_option = 0;
@@ -99,8 +99,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
-
+                result.problemsubstanzen.push(text);
             };
 
             // Optiate
@@ -112,7 +111,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0702[VNED070bb]'] === 'Y') {
@@ -123,7 +122,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0702[VNED070bc]'] === 'Y') {
@@ -134,7 +133,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0702[VNED070bd]'] === 'Y') {
@@ -145,7 +144,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0702[VNED070be]'] === 'Y') {
@@ -156,7 +155,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             // Kokain
@@ -168,7 +167,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0703[VNED070cb]'] === 'Y') {
@@ -179,7 +178,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0703[VNED070cc]'] === 'Y') {
@@ -190,7 +189,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             // Andere Stimulanzien
@@ -202,7 +201,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0704[VNED070db]'] === 'Y') {
@@ -213,7 +212,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0704[VNED070dc]'] === 'Y') {
@@ -224,7 +223,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0704[VNED070dd]'] === 'Y') {
@@ -235,7 +234,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0704[VNED070de]'] === 'Y') {
@@ -246,7 +245,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             // Hypnotika/Sedativa
@@ -259,7 +258,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0705[VNED070eb]'] === 'Y') {
@@ -270,7 +269,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0705[VNED070ec]'] === 'Y') {
@@ -281,7 +280,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0705[VNED070ed]'] === 'Y') {
@@ -292,7 +291,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             // Halluzinogene
@@ -305,7 +304,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0706[VNED070fb]'] === 'Y') {
@@ -316,7 +315,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0706[VNED070fc]'] === 'Y') {
@@ -327,7 +326,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             // Weitere Substanzen
@@ -339,7 +338,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0707[VNED070h]'] === 'Y') {
@@ -350,7 +349,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0707[VNED070i]'] === 'Y') {
@@ -363,7 +362,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 var my_tabak_result = $scope.d.problemsubstanzen_label.answer_options[1];
                 text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
             if (response['QNED0707[VNED070j]'] === 'Y') {
@@ -374,7 +373,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 text = substanz + ': ' + my_result[answer];
 
-                response.problemsubstanzen.push(text);
+                result.problemsubstanzen.push(text);
             };
 
 
