@@ -99,7 +99,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             // Optiate
-            if (response.QNED0702[VNED070ba] === 'Y') {
+            if (response.['QNED0702[VNED070ba]'] === 'Y') {
                 var substanz = 'Heroin (Optiat)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073ba);
@@ -110,7 +110,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0702[VNED070bb] === 'Y') {
+            if (response.['QNED0702[VNED070bb]'] === 'Y') {
                 var substanz = 'Methadon (Optiat)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073bb);
@@ -121,7 +121,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0702[VNED070bc] === 'Y') {
+            if (response.['QNED0702[VNED070bc]'] === 'Y') {
                 var substanz = 'Buprenorphin (Optiat)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073bc);
@@ -132,7 +132,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0702[VNED070bd] === 'Y') {
+            if (response.['QNED0702[VNED070bd]'] === 'Y') {
                 var substanz = 'Fentanyl (Optiat)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073bc);
@@ -143,7 +143,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0702[VNED070be] === 'Y') {
+            if (response.['QNED0702[VNED070be]'] === 'Y') {
                 var substanz = 'Andere Opioide' + response.VNED071be
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073bd);
@@ -155,7 +155,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             // Kokain
-            if (response.QNED0703[VNED070ca] === 'Y') {
+            if (response.['QNED0703[VNED070ca]'] === 'Y') {
                 var substanz = 'Kokain-Pulver'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073ca);
@@ -166,7 +166,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0703[VNED070cb] === 'Y') {
+            if (response.['QNED0703[VNED070cb]'] === 'Y') {
                 var substanz = 'Crack-Kokain'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073cb);
@@ -177,7 +177,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0703[VNED070cc] === 'Y') {
+            if (response.['QNED0703[VNED070cc]'] === 'Y') {
                 var substanz = 'Anderer Kokain-Typ ' + response.VNED071cc
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073cc);
@@ -189,7 +189,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             // Andere Stimulanzien
-            if (response.QNED0704[VNED070da] === 'Y') {
+            if (response.['QNED0704[VNED070da]'] === 'Y') {
                 var substanz = 'Amphetamine'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073da);
@@ -200,7 +200,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0704[VNED070db] === 'Y') {
+            if (response.['QNED0704[VNED070db]'] === 'Y') {
                 var substanz = 'Methamphetamine (Crystal Meth, Ice, Thai-Pillen)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073db);
@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0704[VNED070dc] === 'Y') {
+            if (response.['QNED0704[VNED070dc]'] === 'Y') {
                 var substanz = 'MDMA und verwandte Stoffe (Ecstasy)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073dc);
@@ -222,7 +222,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0704[VNED070dd] === 'Y') {
+            if (response.['QNED0704[VNED070dd]'] === 'Y') {
                 var substanz = 'Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073dd);
@@ -233,7 +233,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0704[VNED070de] === 'Y') {
+            if (response.['QNED0704[VNED070de]'] === 'Y') {
                 var substanz = 'Andere Stimulanzien ' + response.VNED071de
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073de);
@@ -246,7 +246,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Hypnotika/Sedativa
 
-            if (response.QNED0705[VNED070ea] === 'Y') {
+            if (response.['QNED0705[VNED070ea]'] === 'Y') {
                 var substanz = 'Barbiturate (missbräuchlich)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073ea);
@@ -257,7 +257,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0705[VNED070eb] === 'Y') {
+            if (response.['QNED0705[VNED070eb]'] === 'Y') {
                 var substanz = 'Benzodiazepine (missbräuchlich)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073eb);
@@ -268,7 +268,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0705[VNED070ec] === 'Y') {
+            if (response.['QNED0705[VNED070ec]'] === 'Y') {
                 var substanz = 'GHB/GBL (K.O.-Tropfen)'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073ec);
@@ -279,7 +279,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0705[VNED070ed] === 'Y') {
+            if (response.['QNED0705[VNED070ed]'] === 'Y') {
                 var substanz = 'Andere Schlaf-/Beruhigungsmittel ' + response.VNED071ed
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073ed);
@@ -292,7 +292,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Halluzinogene
 
-            if (response.QNED0706[VNED070fa] === 'Y') {
+            if (response.['QNED0706[VNED070fa]'] === 'Y') {
                 var substanz = 'LSD'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073fa);
@@ -303,7 +303,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0706[VNED070fb] === 'Y') {
+            if (response.['QNED0706[VNED070fb]'] === 'Y') {
                 var substanz = 'Ketamin'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073fb);
@@ -314,7 +314,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0706[VNED070fc] === 'Y') {
+            if (response.['QNED0706[VNED070fc]'] === 'Y') {
                 var substanz = 'Andere Halluzinogene ' + response.VNED071fc
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073fc);
@@ -326,7 +326,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             // Weitere Substanzen
-            if (response.QNED0707[VNED070g] === 'Y') {
+            if (response.['QNED0707[VNED070g]'] === 'Y') {
                 var substanz = 'Flüchtige Stoffe'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073g);
@@ -337,7 +337,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0707[VNED070h] === 'Y') {
+            if (response.['QNED0707[VNED070h]'] === 'Y') {
                 var substanz = 'Cannabis'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073h);
@@ -348,7 +348,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0707[VNED070i] === 'Y') {
+            if (response.['QNED0707[VNED070i]'] === 'Y') {
                 var substanz = 'Tabak'
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073i);
@@ -361,7 +361,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.problemsubstanzen.push(text);
             };
 
-            if (response.QNED0707[VNED070j] === 'Y') {
+            if (response.['QNED0707[VNED070j]'] === 'Y') {
                 var substanz = response.VNED071j
                 var answer_option = 0;
                 var answer = parseInt(response.VNED073j);
@@ -371,7 +371,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 $scope.d.problemsubstanzen.push(text);
             };
-
 
 
             console.log('actInfoInit', $scope.d.problemsubstanzen);
