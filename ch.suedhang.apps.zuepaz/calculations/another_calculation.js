@@ -8,7 +8,7 @@ function main(responses) {
     // Runden
     calc.roundToOne = function(num) {
         return +(Math.round(num + "e+1") + "e-1");
-    }
+    };
 
 
     calc.doZuepaz = function(d) {
@@ -26,7 +26,7 @@ function main(responses) {
         full_score = full_score + parseInt(d.Q00004);
         full_score = full_score + parseInt(d.Q00005);
         var zupaz_aufenthalt_score = full_score - zupaz_eintritt_score;
-        var zupaz_aufenthalt_mean = calc.roundToOne($scope.zupaz[i].results.zupaz_aufenthalt_score / anz_anworten_aufenthalt);
+        var zupaz_aufenthalt_mean = calc.roundToOne(zupaz_aufenthalt_score / anz_anworten_aufenthalt);
 
         var anz_anworten_behandlung = 19;
         full_score = full_score + parseInt(d.Q00006);
@@ -78,7 +78,7 @@ function main(responses) {
         full_score = full_score + parseInt(d.Q00023);
         full_score = full_score + parseInt(d.Q00024);
         var zupaz_behandlung_score = full_score - zupaz_eintritt_score - zupaz_aufenthalt_score;
-        var zupaz_behandlung_mean = calc.roundToOne($scope.zupaz[i].results.zupaz_behandlung_score / anz_anworten_behandlung);
+        var zupaz_behandlung_mean = calc.roundToOne(zupaz_behandlung_score / anz_anworten_behandlung);
 
 
         var anz_anworten_austritt = 6;
@@ -108,7 +108,7 @@ function main(responses) {
         full_score = full_score + parseInt(d.Q00029);
         full_score = full_score + parseInt(d.Q00030);
         var zupaz_austritt_score = full_score - zupaz_eintritt_score - zupaz_aufenthalt_score - zupaz_behandlung_score;
-        var zupaz_austritt_mean = calc.roundToOne($scope.zupaz[i].results.zupaz_austritt_score / anz_anworten_austritt);
+        var zupaz_austritt_mean = calc.roundToOne(zupaz_austritt_score / anz_anworten_austritt);
 
         var zupaz_full_score = full_score;
         var zupaz_full_mean = calc.roundToOne(full_score / (anz_anworten_eintritt + anz_anworten_aufenthalt + anz_anworten_behandlung + anz_anworten_austritt));
