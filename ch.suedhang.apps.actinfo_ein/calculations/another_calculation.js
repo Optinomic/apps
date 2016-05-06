@@ -5,10 +5,61 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
+    calc.AUDIT_Score = function(d, gender) {
+
+        // Calculate AUDIT-Score
+        var score = 0;
+
+        score = score + parseInt(d.VZEA010);
+        score = score + parseInt(d.VZEA020);
+        score = score + parseInt(d.VZEA030);
+        score = score + parseInt(d.VZEA040);
+        score = score + parseInt(d.VZEA050);
+        score = score + parseInt(d.VZEA060);
+        score = score + parseInt(d.VZEA070);
+        score = score + parseInt(d.VZEA080);
+        score = score + parseInt(d.VZEA090);
+        score = score + parseInt(d.VZEA100);
+        score = score + 1;
+
+
+        var return_obj = {
+            "AUDIT_Score": score,
+            "gender": gender
+        };
+
+
         return score;
     };
+
+
+
+    calc.FAGERSTROEM_Score = function(d) {
+
+        // Calculate AUDIT-Score
+        var score = 0;
+
+        score = score + parseInt(d.VZET020);
+        score = score + parseInt(d.VZET030);
+        score = score + parseInt(d.VZET040);
+        score = score + parseInt(d.VZET050);
+        score = score + parseInt(d.VZEA050);
+        score = score + parseInt(d.VZET060);
+        score = score + parseInt(d.VZET070);
+
+
+        var return_obj = {
+            "FAGERSTROEM_Score": score
+        };
+
+
+        return score;
+    };
+
+
+
+
+
 
 
     // ------------------------------------------
@@ -23,9 +74,11 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // Something
-            myResults.something = calc.doSomething();
+            var gender = myResponses.patient.data.gender;
 
+            // Something
+            myResults.AUDIT = calc.AUDIT_Score(result, gender);
+            myResults.FAGERSTROEM = calc.FAGERSTROEM_Score(result);
 
             // Write Results for the Return
             // Do not modify stuff here
