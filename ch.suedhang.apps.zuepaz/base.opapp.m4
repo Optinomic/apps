@@ -18,8 +18,8 @@ phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
 
-[template data_download 6 14]
-include(templates/download.html)
+[template ZuePaZ 6 14]
+include(templates/score.html)
 
 [dependencies]
 

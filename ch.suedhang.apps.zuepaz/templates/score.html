@@ -1,6 +1,47 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">BDI-II: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-<score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
-<h3 class="md-headline">Hallo - Simple Score: {{d.dataMain.apps.current.name}}</h3>
-<score-threshold score="15" min="10" max="20" show-percent-scale="true" show-min-max="true"></score-threshold>
+<h3 class="md-headline">Daten: {{d.dataMain.apps.current.name}}</h3>
+<div ng-repeat="response in d.dataMain.survey_responses">
+    <div style="margin-top: 48px;">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
+            <h4 class="md-headline">Gesamtscore</h4>
+            <div>
+                <p class="small">Datum
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.ZuePaZ.full_mean}} von {{response.calculations[0].calculation_result.ZuePaZ.full_count}} Scores) auf der ZuePaZ-Skala.</p>
+        <div layout="row" layout-align="start center">
+            <div flex="55">
+                <score-threshold score="response.calculations[0].calculation_result.ZuePaZ.full_score" min="0" max="3" show-percent-scale="true" scale-ranges="scale_ranges" show-min-max="true"></score-threshold>
+            </div>
+            <div flex="45">
+                <h5 class="md-subhead">
+                	Summenwerte und Interpretation 
+                </h5>
+                <table class="table table-condensed" style="width: 80%;">
+                    <tr ng-repeat="range in scale_ranges">
+                        <td style="text-align:right !important;">
+                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                        </td>
+                        <td>
+                            <small>{{range.result}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <p>Calculations</p>
+    <pre>
+        {{response.calculations | json}}
+    </pre>
+    <p>Response</p>
+    <pre>
+        {{response.entity.data.response | json}}
+    </pre>
+    <p>Event</p>
+    <pre>
+        {{response.event | json}}
+    </pre>
+</div>
 include(../lib/html/optinomic/page/end.m4)
