@@ -6,13 +6,12 @@ include(../lib/html/optinomic/page/start.m4)
         <p>ToDo</p>
     </div>
     <div>
-        <h4 class="md-headline">AUDIT</h4> {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}}
+        <h4 class="md-headline">AUDIT: </h4>
         <div layout="row" layout-align="start start">
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
                 <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" show-min-max="true"></score-threshold>
                 <div>
-                    <h5 class="md-subhead">Interpretation</h5>
-                    <p class="md-display-1" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}} (Σ{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}})</p>
+                    <p class="md-subhead" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}} (Σ{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}})</p>
                 </div>
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score === null">
