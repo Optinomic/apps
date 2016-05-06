@@ -7,6 +7,7 @@ function main(responses) {
 
     calc.AUDIT_Score = function(d, gender) {
 
+
         // Calculate AUDIT-Score
         var score = 0;
 
@@ -23,13 +24,80 @@ function main(responses) {
         score = score + 1;
 
 
-        var return_obj = {
-            "AUDIT_Score": score,
-            "gender": gender
+
+        // Populations (Men / Woman)
+
+        var scale_ranges_men = {
+            "ranges": [{
+                "from": 0,
+                "to": 7,
+                "result": "Risikoarmer Alkoholkonsum",
+                "result_color": "green"
+            }, {
+                "from": 8,
+                "to": 15,
+                "result": "Verdacht auf eine alkoholbezogene Stoerung",
+                "result_color": "orange"
+            }, {
+                "from": 16,
+                "to": 40,
+                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+                "result_color": "red"
+            }]
+        };
+
+        var scale_ranges_woman = {
+            "ranges": [{
+                "from": 0,
+                "to": 4,
+                "result": "Risikoarmer Alkoholkonsum",
+                "result_color": "green"
+            }, {
+                "from": 5,
+                "to": 14,
+                "result": "Verdacht auf eine alkoholbezogene Stoerung",
+                "result_color": "orange"
+            }, {
+                "from": 15,
+                "to": 40,
+                "result": "Hohe Wahrscheinlichkeit einer Alkoholabhaengigkeit",
+                "result_color": "red"
+            }]
         };
 
 
-        return score;
+        // Current Population festlegen
+        var current_population = {};
+
+        if (gender === 'male') {
+            // Mann
+            current_population = scale_ranges_men;
+        } else {
+            // Frau
+            current_population = scale_ranges_woman;
+        };
+
+
+        var selected_population = {};
+        selected_population = current_population[0];
+
+        if (score >= current_population[1].from) {
+            selected_population = current_population[1];
+        };
+        if (score >= current_population[2].from) {
+            selected_population = current_population[2];
+        };
+
+
+        var return_obj = {
+            "AUDIT_Score": score,
+            "gender": gender,
+            "interpretation": selected_population,
+            "population": current_population
+        };
+
+
+        return return_obj;
     };
 
 
@@ -53,7 +121,7 @@ function main(responses) {
         };
 
 
-        return score;
+        return return_obj;
     };
 
 
