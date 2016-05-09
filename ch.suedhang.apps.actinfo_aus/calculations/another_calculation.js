@@ -22,25 +22,25 @@ function main(responses) {
             "from": 0,
             "to": 2,
             "result": "Geringe koerperliche Abhaengigkeit.",
-            "result_color": "green",
+            "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
             "result": "Mittlere koerperliche Abhaengigkeit.",
-            "result_color": "orange",
+            "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
             "result": "Starke koerperliche Abhaengigkeit.",
-            "result_color": "red",
+            "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
             "result": "Sehr starke koerperliche Abhaengigkeit.",
-            "result_color": "red",
+            "result_color": "#F44336",
             "logo_speed": 55
         }];
 
