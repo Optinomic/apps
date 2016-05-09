@@ -2,14 +2,20 @@ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">actInfo | Austritt</h3>
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div style="margin-top: 48px;">
-        <h4 class="md-headline">Nikotin: Fagerström</h4>
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
+            <h4 class="md-headline">Nikotin: Fagerström</h4>
+            <div>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten auf der Fagerström-Skala.</p>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
-                <div layout="column" layout-align="center center">
-                    <h4 class="md-title" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
-                    <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala. | {{response.entity.data.response.VMAB001 | date}}</p>
-                </div>
-               <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>                
+                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
+                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                </div>               
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
