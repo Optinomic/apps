@@ -2,18 +2,22 @@ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">actInfo | Austritt</h3>
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div style="margin-top: 48px;">
-        <h4 class="md-headline" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">Fagerström: {{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+        <h4 class="md-headline">Nikotin: Fagerström</h4>
         <div layout="row" layout-align="start center">
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
-                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                <div layout="column" layout-align="center center">
+                    <h4 class="md-title" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                    <p class="md-caption">Summenwert von {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}} Punkten auf der Fagerström-Skala. | {{response.entity.data.response.VMEB001 | date}}</p>
+                </div>
+               <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>                
             </div>
             <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
-                <p class="md-caption">Kein FAGERSTROEM-Score vorhanden.</p>
+                <p class="md-caption">Kein Fagerström-Score vorhanden.</p>
             </div>
             <div flex="45">
                 <h5 class="md-subhead">
-                	FAGERSTROEM Summenwerte  
+                	Fagerström Summenwerte  
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
                     <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
