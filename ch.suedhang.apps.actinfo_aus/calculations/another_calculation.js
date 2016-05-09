@@ -18,50 +18,50 @@ function main(responses) {
         score = score + parseInt(d.VZAT070);
 
 
-                var scale_ranges_fagerstoem = [{
+                var scale_ranges_fagerstroem = [{
             "from": 0,
             "to": 2,
-            "result": "Geringe koerperliche Abhaengigkeit.",
-            "result_color": "green",
+            "result": "Geringe körperliche Abhängigkeit.",
+            "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
-            "result": "Mittlere koerperliche Abhaengigkeit.",
-            "result_color": "orange",
+            "result": "Mittlere körperliche Abhängigkeit.",
+            "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
-            "result": "Starke koerperliche Abhaengigkeit.",
-            "result_color": "red",
+            "result": "Starke körperliche Abhängigkeit.",
+            "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
-            "result": "Sehr starke koerperliche Abhaengigkeit.",
-            "result_color": "red",
+            "result": "Sehr starke körperliche Abhängigkeit.",
+            "result_color": "#F44336",
             "logo_speed": 55
         }];
 
 
         var selected_population = {};
-        selected_population = scale_ranges_fagerstoem[0];
+        selected_population = scale_ranges_fagerstroem[0];
 
-        if (score >= scale_ranges_fagerstoem[1].from) {
-            selected_population = scale_ranges_fagerstoem[1];
+        if (score >= scale_ranges_fagerstroem[1].from) {
+            selected_population = scale_ranges_fagerstroem[1];
         };
-        if (score >= scale_ranges_fagerstoem[2].from) {
-            selected_population = scale_ranges_fagerstoem[2];
+        if (score >= scale_ranges_fagerstroem[2].from) {
+            selected_population = scale_ranges_fagerstroem[2];
         };
-        if (score >= scale_ranges_fagerstoem[3].from) {
-            selected_population = scale_ranges_fagerstoem[3];
+        if (score >= scale_ranges_fagerstroem[3].from) {
+            selected_population = scale_ranges_fagerstroem[3];
         };
 
         var return_obj = {
             "FAGERSTROEM_Score": score,
             "interpretation": selected_population,
-            "ranges": { "ranges": scale_ranges_fagerstoem }
+            "ranges": { "ranges": scale_ranges_fagerstroem }
         };
 
 
