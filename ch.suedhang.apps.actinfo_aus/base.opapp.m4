@@ -8,7 +8,7 @@ type = patient
 [description]
 act-info (addiction, care and therapy information) Austrittsversion
 
-<br>Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
+Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
 
 [developer]
 first_name = Beat

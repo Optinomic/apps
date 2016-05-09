@@ -5,8 +5,24 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
+    calc.FAGERSTROEM_Score = function(d) {
+
+        // Calculate AUDIT-Score
+        var score = 0;
+
+        score = score + parseInt(d.VZAT020);
+        score = score + parseInt(d.VZAT030);
+        score = score + parseInt(d.VZAT040);
+        score = score + parseInt(d.VZAT050);
+        score = score + parseInt(d.VZAT060);
+        score = score + parseInt(d.VZAT070);
+
+
+        var return_obj = {
+            "FAGERSTROEM_Score": score
+        };
+
+
         return score;
     };
 
@@ -24,7 +40,7 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
-            myResults.something = calc.doSomething();
+            myResults.FAGERSTROEM = calc.FAGERSTROEM_Score(result);
 
 
             // Write Results for the Return
