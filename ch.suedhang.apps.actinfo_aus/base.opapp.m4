@@ -52,6 +52,7 @@ min_lastpage = 5
 
 [event activation]
 type = before_exit
+time = 08:00
 days = 8
 due_after = 259200
 overdue = ignore
