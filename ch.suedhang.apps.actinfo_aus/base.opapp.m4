@@ -53,7 +53,6 @@ min_lastpage = 5
 [event activation]
 type = before_exit
 days = 8
-time = 8:00
 due_after = 259200
 overdue = ignore
 description = actInfo - Austritt
