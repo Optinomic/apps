@@ -70,7 +70,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         var data_query = {};
 
         data_query = {
-            name: 'WHQOL-Example (with stay)',
+            name: 'actInfo - Austritt',
             sql: include_as_js_string(
                 export.sql)
         };
@@ -80,44 +80,5 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
     };
-
-    $scope.actInfoInit = function() {
-
-    };
-
-    // -----------------------------------
-    // <score-threshold>
-    // -----------------------------------
-
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
-
 
 });
