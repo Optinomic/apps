@@ -18,7 +18,7 @@ function main(responses) {
         score = score + parseInt(d.VZAT070);
 
 
-        var scale_ranges_fagerstoem = [{
+                var scale_ranges_fagerstoem = [{
             "from": 0,
             "to": 2,
             "result": "Geringe koerperliche Abhaengigkeit.",
@@ -61,7 +61,7 @@ function main(responses) {
         var return_obj = {
             "FAGERSTROEM_Score": score,
             "interpretation": selected_population,
-            "ranges": scale_ranges_fagerstoem
+            "ranges": { "ranges": scale_ranges_fagerstoem }
         };
 
 

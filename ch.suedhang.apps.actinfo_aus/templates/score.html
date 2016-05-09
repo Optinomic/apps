@@ -1,6 +1,8 @@
 include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">actInfo | Austritt</h3>
-<div>
-    <h4 class="md-subhead">Fagerström</h4>
-</div>
+<div ng-repeat="response in d.dataMain.survey_responses_group[0]">
+    <div>
+        <h4 class="md-headline">Fagerström</h4> {{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}
+        <pre>{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation | json}}</pre>
+    </div>
 include(../lib/html/optinomic/page/end.m4)
