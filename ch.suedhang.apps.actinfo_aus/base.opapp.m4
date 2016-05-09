@@ -1,12 +1,14 @@
 [module]
 id = ch.suedhang.apps.actinfo_aus
-name = actinfo aus
-short_description = Use this as a starting-point for your apps.
+name = ActInfo | Austritt
+short_description = actInfo Austrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+act-info (addiction, care and therapy information) Austrittsversion
+Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
+
 
 [developer]
 first_name = Beat
@@ -18,28 +20,11 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-
-[template data_survey_responses 6 7]
-include(templates/data.html)
-
-[template chart_timeline 6 7]
-include(templates/chart_timeline.html)
-
-[template simple_score 4 4]
+[template score 6 6]
 include(templates/score.html)
-
-[template score_range 2 4]
-include(templates/range.html)
-
-[template chart_tscore 6 10]
-include(templates/tscore.html)
-
-[template chart_stanine 6 7]
-include(templates/stanine.html)
 
 [template data_download 6 10]
 include(templates/download.html)
-
 
 [dependencies]
 
@@ -47,52 +32,38 @@ include(templates/download.html)
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
 
-
 [css]
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = daily_mood
+id = actinfo_austritt
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = actInfo - Austritt
 host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
+survey_id = 116413
+hash = X53X1030
+pid = X53X972
+fid = X53X971
 min_questions =
-min_lastpage = 2
+min_lastpage = 5
 
 
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
-
-
-[event daily]
-type = daily
-time = 19:00
-due_after = 86400
+[event activation]
+type = before_exit
+days = 8
+time = 8:00
+due_after = 259200
 overdue = ignore
-description = Track your daily craving.
-survey = daily_mood
-
+description = actInfo - Eintritt
+survey = actinfo_eintritt
 
 [email new_event html]
 include(emails/new_event.html)
 
 [email overdue html]
 include(emails/overdue.html)
-
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
