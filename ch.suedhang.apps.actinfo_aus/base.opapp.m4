@@ -56,8 +56,8 @@ days = 8
 time = 8:00
 due_after = 259200
 overdue = ignore
-description = actInfo - Eintritt
-survey = actinfo_eintritt
+description = actInfo - Austritt
+survey = actinfo_austritt
 
 [email new_event html]
 include(emails/new_event.html)
