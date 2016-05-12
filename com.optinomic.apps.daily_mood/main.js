@@ -161,7 +161,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------------------------------------
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
 
-            if ($scope.d._init.grid.grid_ready === true)) {
+        if ($scope.d._init.grid.grid_ready === true) {
             // -----------------------------------
 
             // Sorting
