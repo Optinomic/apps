@@ -115,6 +115,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Sort
         resultsArray = dataService.sortByKey(resultsArray, 'filled');
+        console.log('sorted resultsArray: ', resultsArray);
 
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
