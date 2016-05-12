@@ -155,4 +155,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+
+    // -------------------------------------------------
+    // Update Data-Grid when Data loaded & Grid is ready
+    // -------------------------------------------------
+    $scope.$watch('d._init.grid', function(newValue, oldValue) {
+
+        if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
+            // -----------------------------------
+
+            // Sorting
+            var sortModel = [{
+                colId: 'filled',
+                sort: 'asc'
+            }];
+
+            $scope.d.grid.options.api.setSortModel(sortModel);
+
+
+            console.log('(FIRE) updateDataView', $scope.d.grid.options);
+
+
+        };
+
+    }, true);
+
+
+
+
 });
