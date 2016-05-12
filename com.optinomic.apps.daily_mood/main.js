@@ -161,13 +161,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------------------------------------
     $scope.$watch('d._init.grid', function(newValue, oldValue) {
 
-        if (($scope.d._init.grid.grid_ready === true) && ($scope.d._init.grid.data_loader > 0)) {
+            if ($scope.d._init.grid.grid_ready === true)) {
             // -----------------------------------
 
             // Sorting
             var sortModel = [{
                 colId: 'filled',
-                sort: 'asc'
+                sort: 'desc'
             }];
 
             $scope.d.grid.options.api.setSortModel(sortModel);
