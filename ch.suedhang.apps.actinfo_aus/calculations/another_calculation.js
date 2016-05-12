@@ -18,28 +18,28 @@ function main(responses) {
         score = score + parseInt(d.VZAT070);
 
 
-                var scale_ranges_fagerstoem = [{
+        var scale_ranges_fagerstoem = [{
             "from": 0,
             "to": 2,
-            "result": "Geringe koerperliche Abhaengigkeit.",
+            "result": "Geringe körperliche Abhängigkeit.",
             "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
-            "result": "Mittlere koerperliche Abhaengigkeit.",
+            "result": "Mittlere körperliche Abhängigkeit.",
             "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
-            "result": "Starke koerperliche Abhaengigkeit.",
+            "result": "Starke körperliche Abhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
-            "result": "Sehr starke koerperliche Abhaengigkeit.",
+            "result": "Sehr starke körperliche Abhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 55
         }];
@@ -87,7 +87,7 @@ function main(responses) {
 
             // Write Results for the Return
             // Do not modify stuff here
-            myResults.full = myResponses;            
+            myResults.full = myResponses;
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
             allResults.push(myResults);
