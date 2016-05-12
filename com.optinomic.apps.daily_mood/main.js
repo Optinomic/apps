@@ -113,6 +113,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
 
+        // Sort
+        resultsArray = dataService.sortByKey(resultsArray, 'filled');
+
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
         $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true, true);
