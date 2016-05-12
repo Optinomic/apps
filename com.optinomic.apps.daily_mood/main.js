@@ -110,12 +110,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.dataMain.survey_responses_array.push(my_response);
         });
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
 
+        var resultsArray = dataService.sortByKey($scope.d.dataMain.survey_responses_array, 'filled');
+        console.log('===>  sorted resultsArray: ', resultsArray);
 
-        // Sort
-        resultsArray = dataService.sortByKey(resultsArray, 'filled');
-        console.log('sorted resultsArray: ', resultsArray);
 
         // DataView - Options
         $scope.d.grid.options = $scope.d.grid.default_options;
