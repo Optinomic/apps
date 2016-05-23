@@ -26,7 +26,7 @@ include(templates/tscore.html)
 [template data_survey_responses 6 8]
 include(templates/data.html)
 
-[template data_export 6 8]
+[template data_export_admin 6 8]
 include(templates/export.html)
 
 

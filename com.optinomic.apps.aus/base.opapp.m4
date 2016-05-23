@@ -24,7 +24,7 @@ include(templates/aus.html)
 [template aus_survey_responses 6 8]
 include(templates/data.html)
 
-[template data_download 6 8]
+[template data_download_admin 6 8]
 include(templates/export.html)
 
 

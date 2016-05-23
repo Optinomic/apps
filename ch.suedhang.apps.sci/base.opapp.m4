@@ -21,7 +21,7 @@ website = http://www.optinomic.com/
 [template chart_stanine 6 10]
 include(templates/stanine.html)
 
-[template data_export 6 8]
+[template data_export_admin 6 8]
 include(templates/export.html)
 
 

@@ -28,7 +28,7 @@ include(templates/chart_timeline.html)
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template data_export 6 7]
+[template data_export_admin 6 7]
 include(templates/export.html)
 
 
@@ -55,17 +55,6 @@ pid = X34X411
 fid = X34X412
 min_questions =
 min_lastpage = 2
-
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
 
 
 [event activation]

@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 [template data_survey_responses 6 7]
 include(templates/data.html)
 
-[template data_download 6 14]
+[template data_download_admin 6 14]
 include(templates/download.html)
 
 

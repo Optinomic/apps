@@ -37,7 +37,7 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
-[template data_download 6 10]
+[template export_toolbox_admin 6 10]
 include(templates/download.html)
 
 

@@ -23,7 +23,7 @@ website = http://www.optinomic.com/
 include(templates/stanine.html)
 
 
-[template data_export 6 7]
+[template data_export_admin 6 7]
 include(templates/export.html)
 
 

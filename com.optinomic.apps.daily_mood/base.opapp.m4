@@ -24,7 +24,7 @@ include(templates/mood_timeline.html)
 [template survey_responses 6 8]
 include(templates/data.html)
 
-[template download 6 8]
+[template download_admin 6 8]
 include(templates/export.html)
 
 

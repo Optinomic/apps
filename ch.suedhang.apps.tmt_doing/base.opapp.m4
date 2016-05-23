@@ -31,7 +31,7 @@ include(templates/score.html)
 [template score_range 2 4]
 include(templates/range.html)
 
-[template data_download 6 14]
+[template data_download_admin 6 14]
 include(templates/download.html)
 
 

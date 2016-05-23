@@ -60,7 +60,7 @@ include(templates/score_timeline_small.html)
 [template data_results 6 8]
 include(templates/data.html)
 
-[template data_download 6 10]
+[template data_download_admin 6 10]
 include(templates/download.html)
 
 

@@ -31,7 +31,7 @@ include(templates/score.html)
 
 
 [template data_download 6 10]
-include(templates/download.html)
+include(templates/download_admin.html)
 
 
 [dependencies]
