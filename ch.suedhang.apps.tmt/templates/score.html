@@ -3,4 +3,17 @@ include(../lib/html/optinomic/page/start.m4)
 <score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
 <h3 class="md-headline">Hallo - Simple Score: {{d.dataMain.apps.current.name}}</h3>
 <score-threshold score="15" min="10" max="20" show-percent-scale="true" show-min-max="true"></score-threshold>
+<div>
+    <h5 class="md-subhead">BDI-II Summenwerte und Interpretation</h5>
+    <table class="table table-condensed" style="width: 80%;">
+        <tr ng-repeat="range in scale_ranges.ranges">
+            <td style="text-align:right !important;">
+                <small>{{range.from}}-{{range.to}}&nbsp;</small>
+            </td>
+            <td>
+                <small>{{range.result}}</small>
+            </td>
+        </tr>
+    </table>
+</div>
 include(../lib/html/optinomic/page/end.m4)
