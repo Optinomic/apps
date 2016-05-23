@@ -78,18 +78,10 @@ include(survey_markups/my_ng_survey.html)
 
 [event daily]
 type = on_activation
-due_after = 129200
+due_after = 259200
 overdue = ignore
-description = Track your something.
-survey = daily_mood
-
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
-
+description = TMT-Erfassung
+survey = tmt
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
