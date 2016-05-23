@@ -30,8 +30,8 @@ website = http://www.optinomic.com/
 include(templates/score.html)
 
 
-[template data_download 6 10]
-include(templates/download_admin.html)
+[template data_download_admin 6 10]
+include(templates/download.html)
 
 
 [dependencies]
