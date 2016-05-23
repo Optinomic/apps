@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.apps.tmt
+id = ch.suedhang.apps.tmt_new
 name = TMT Südhang
 short_description = Trail Making Test (TMT)
 version = include(VERSION)
@@ -18,10 +18,25 @@ phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
 
-[template score 4 4]
+[template data_survey_responses 6 7]
+include(templates/data.html)
+
+[template chart_timeline 6 7]
+include(templates/chart_timeline.html)
+
+[template simple_score 4 4]
 include(templates/score.html)
 
-[template data_download_admin 6 14]
+[template score_range 2 4]
+include(templates/range.html)
+
+[template chart_tscore 6 10]
+include(templates/tscore.html)
+
+[template chart_stanine 6 7]
+include(templates/stanine.html)
+
+[template export_toolbox_admin 6 10]
 include(templates/download.html)
 
 
@@ -49,12 +64,31 @@ fid = X43X484
 min_questions =
 min_lastpage = 3
 
-[event activation]
+
+[survey]
+id = my_ng_survey
+type = ng
+responsibility = patient_via_email
+name = Second example survey
+host = default
+
+[survey_markup my_ng_survey]
+include(survey_markups/my_ng_survey.html)
+
+
+[event daily]
 type = on_activation
-due_after = 259200
+due_after = 129200
 overdue = ignore
-description = TMT-Erfassung
-survey = tmt
+description = Track your something.
+survey = daily_mood
+
+
+[email new_event html]
+include(emails/new_event.html)
+
+[email overdue html]
+include(emails/overdue.html)
 
 
 [calculation another_calculation javascript]
