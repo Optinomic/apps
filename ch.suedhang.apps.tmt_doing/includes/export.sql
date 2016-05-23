@@ -1,3 +1,8 @@
+SELECT
+  patient.id AS pid,
+  patient,
+  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
+  patient.four_letter_code,
 SELECT 
   patient.id 
 , ((cast(response AS json))->>'FID') as FID
@@ -13,3 +18,4 @@ SELECT
 
 FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
 WHERE module = 'ch.suedhang.apps.tmt'
+
