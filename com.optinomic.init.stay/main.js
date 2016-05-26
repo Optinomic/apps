@@ -140,8 +140,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeTreatment = function() {
         var treatment_id = parseInt($scope.d.init_stay.selected.treatment_id);
+        console.log('1 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
+
         $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
-        console.log('changeTreatment: ', $scope.d.init_stay.selected);
+        console.log('2 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
     };
 
 
@@ -224,8 +226,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
                 // Check if 'current'?  Y:Save
                 if (item.current) {
-                    $scope.setCurrentTreatment
-(item.data);
+                    $scope.setCurrentTreatment(item.data);
                     console.log('(✓) setCurrentTreatment: ', item.data);
                 };
             });
