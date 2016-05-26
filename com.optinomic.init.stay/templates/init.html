@@ -12,8 +12,8 @@ include(../lib/html/optinomic/page/start.m4)
             <div>&nbsp;</div>
             <md-input-container class="md-block">
                 <label>Behandlungsart</label>
-                <md-select class="md-title" ng-model="d.stay_init.selected.treatment_id" md-on-close="changeTreatment()">
-                    <md-option ng-repeat="treatment in d.stay_init.treatment" value="{{treatment.id}}">
+                <md-select class="md-title" ng-model="d.init_stay.selected.treatment_id" md-on-close="changeTreatment()">
+                    <md-option ng-repeat="treatment in d.init_stay.treatment" value="{{treatment.id}}">
                         {{treatment.name}}
                     </md-option>
                 </md-select>
@@ -22,9 +22,9 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider></md-divider>
         <md-card-content layout-margin>
             <div>
-                <h1 class="md-title">Behandlungen: {{d.stay_init.selected.treatment.description}}</h1>
+                <h1 class="md-title">Behandlungen: {{d.init_stay.selected.treatment.description}}</h1>
                 <md-list>
-                    <md-list-item class="md-2-line" ng-repeat="department in d.stay_init.selected.treatment.departments">
+                    <md-list-item class="md-2-line" ng-repeat="department in d.init_stay.selected.treatment.departments">
                         <md-checkbox ng-model="department.current_patient.used" aria-label="{{department.current_patient.name}}">
                         </md-checkbox>
                         <div class="md-list-item-text">
@@ -38,12 +38,12 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider></md-divider>
         <md-card-content layout-margin>
             <p class="md-caption">Selktiert</p>
-            <pre>{{d.stay_init.selected | json}}</pre>
+            <pre>{{d.init_stay.selected | json}}</pre>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content layout-margin>
-            <p class="md-caption">d.stay_init</p>
-            <pre>{{d.stay_init | json}}</pre>
+            <p class="md-caption">d.init_stay</p>
+            <pre>{{d.init_stay | json}}</pre>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">

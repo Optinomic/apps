@@ -49,13 +49,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.appInit = function() {
 
         // Data
+        $scope.d.nodeTree = 'init_stay';
 
         var current_pid = $scope.d.dataMain.params.PID;
         var current_sid = $scope.d.dataMain.params.stay_id;
 
         // Data-Model
 
-        $scope.d.stay_init = {
+        $scope.d.init_stay = {
             "treatment": [{
                 "id": 0,
                 "name": "Stationär",
@@ -69,8 +70,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     }
                 }, {
                     "id": 2,
-                    "name": "EAS",
-                    "description": "Entzugs- und Abklärungsstation",
+                    "name": "EP",
+                    "description": "Entwöhnungsprogramm",
                     "current_patient": {
                         "used": false
                     }
@@ -103,12 +104,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         // Set Default: treatment_id = Array Position
-        $scope.d.stay_init.selected = {
+        $scope.d.init_stay.selected = {
             "pid": current_pid,
             "sid": current_sid,
             "treatment_id": 0,
             "treatment": {}
         };
+
+        // Save the history
+        $scope.d.init_stay.history_states = [];
+
         $scope.changeTreatment();
     };
 
@@ -119,14 +124,47 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.changeTreatment = function() {
-        var treatment_id = $scope.d.stay_init.selected.treatment_id;
-        $scope.d.stay_init.selected.treatment = $scope.d.stay_init.treatment[treatment_id];
-        console.log('changeTreatment: ', $scope.d.stay_init.selected);
+        var treatment_id = $scope.d.init_stay.selected.treatment_id;
+        $scope.d.init_stay.selected.treatment = $scope.d.init_stay.treatment[treatment_id];
+        console.log('changeTreatment: ', $scope.d.init_stay.selected);
     };
 
     $scope.saveInit = function() {
 
-        console.log('saveInit', $scope.d.stay_init);
+        var nodeTree = $scope.d.nodeTree;
+        var history = $scope.d.init_stay.history_states;
+        var data = $scope.d.init_stay.selected;
+
+
+        // Build History - Array
+        var date = new Date();
+        var history_obj = {
+            'data': data,
+            'nodeTree': nodeTree,
+            'datestamp': date,
+            'sort': $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
+            'date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'time': $filter("amDateFormat")(date, 'HH:mm')
+        };
+
+        history.push(history_obj);
+
+
+        console.log('(?) saveInit', nodeTree, history, data);
+        // Save History - Array
+        var api_call = dataService.saveAnnotationsData('patient', nodeTree, current_array_to_save);
+        api_call.then(function(data) {
+
+            var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
+            //console.log(text, angular.toJson(current_array_to_save, true));
+
+            // Update Entrys
+            $scope.d.functions.showSimpleToast(text);
+
+            //$scope.getEntrys();
+        });
+
+
     };
 
 
