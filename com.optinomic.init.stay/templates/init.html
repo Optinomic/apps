@@ -1,0 +1,21 @@
+include(../lib/html/optinomic/page/start.m4)
+<md-content class="md-padding" ng-init="d.navigator = 0">
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    {{d.dataMain.params.app_name}}
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout-margin>
+            <p class="md-caption">d.stay_init</p>
+            <pre>{{d.stay_init | json}}</pre>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button ng-click="saveInit();" class="md-warn">{{'Save' | translate}}</md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+include(../lib/html/optinomic/page/end.m4)
