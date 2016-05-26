@@ -9,15 +9,19 @@ include(../lib/html/optinomic/page/start.m4)
             </md-card-title-text>
         </md-card-title>
         <md-card-content layout-margin>
-            <h1 class="md-title">Behandlungsart</h1>
             <md-input-container>
-                <label>Art</label>
-                <md-select class="ng-block" ng-model="d.stay_init.selected.treatment_id" md-on-close="changeTreatment()">
+                <label>Behandlungsart</label>
+                <md-select class="md-title ng-block" ng-model="d.stay_init.selected.treatment_id" md-on-close="changeTreatment()">
                     <md-option ng-repeat="treatment in d.stay_init.treatment" value="{{treatment.id}}">
                         {{treatment.name}}
                     </md-option>
                 </md-select>
             </md-input-container>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-content layout-margin>
+            <p class="md-caption">Selktiert</p>
+            <pre>{{d.stay_init.selected | json}}</pre>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content layout-margin>
