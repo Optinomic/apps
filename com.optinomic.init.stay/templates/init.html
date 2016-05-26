@@ -14,7 +14,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider ng-if="d.init_stay.history_states.length === 0"></md-divider>
         <md-card-content layout-margin>
             <div>
-                <h1 class="md-title"><span ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</span><span ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlungsart</span>: {{d.init_stay.selected.treatment.description}}</h1>
+                <h1 class="md-title"><span ng-if="d.init_stay.history_states.length === 0">Behandlung spezifizieren:</span><span ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlung: {{d.init_stay.selected.treatment.description}}</span></h1>
                 <div>&nbsp;</div>
                 <md-input-container class="md-block">
                     <label ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</label>
@@ -26,7 +26,7 @@ include(../lib/html/optinomic/page/start.m4)
                     </md-select>
                 </md-input-container>
             </div>
-            <div style="margin-top: 12px;">
+            <div style="margin-top: 24px;">
                 <p class="md-subhead">Abteilungen | Behnaldungen</p>
                 <md-list>
                     <md-list-item class="md-2-line" ng-repeat="department in d.init_stay.selected.treatment.departments">
@@ -43,7 +43,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider></md-divider>
         <md-card-content layout-margin ng-if="d.init_stay.history_states.length > 0">
             <div>
-                <h1 class="md-title">Behandlungsgeschichte:</h1>
+                <h1 class="md-title">Behandlungsgeschichte</h1>
                 <md-list>
                     <md-list-item class="md-2-line" ng-click="showDetails(item)" ng-repeat="item in d.init_stay.history_states">
                         <md-checkbox ng-disabled="true" ng-model="item.current" aria-label="Current">
@@ -54,6 +54,7 @@ include(../lib/html/optinomic/page/start.m4)
                         </div>
                     </md-list-item>
                 </md-list>
+                <p class="md-caption">Legende: [✓] = Aktuelle Behandlung</p>
             </div>
             <div ng-if="d.init_stay.show_details.show">
                 <div layout="row" layout-align="space-between center">
@@ -73,7 +74,7 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content ng-if="d.init_stay.debug" layout-margin>
             <div layout="row" layout-align="space-between center">
                 <div>
-                    <h1 class="md-title">Debugging:</h1>
+                    <h1 class="md-title">Debugging</h1>
                 </div>
                 <div>
                     <md-button class="md-icon-button" ng-click="d.init_stay.debug = false" aria-label="Schliessen" style="color: #9E9E9E;">
