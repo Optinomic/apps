@@ -137,10 +137,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Build History - Array
+
+        history.forEach(function(item, myindex) {
+            item.current = false;
+        });
+
         var date = new Date();
         var history_obj = {
             'data': data,
             'nodeTree': nodeTree,
+            'current': true,
             'datestamp': date,
             'sort': $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
             'date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
@@ -152,7 +158,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('(?) saveInit', nodeTree, history, data);
         // Save History - Array
-        var api_call = dataService.saveAnnotationsData('patient', nodeTree, current_array_to_save);
+        var api_call = dataService.saveAnnotationsData('patient', nodeTree, history);
         api_call.then(function(data) {
 
             var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
