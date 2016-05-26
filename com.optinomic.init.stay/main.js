@@ -164,7 +164,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var nodeTree = $scope.d.nodeTree;
         var history = $scope.d.init_stay.history_states;
-        var data = $scope.d.init_stay.selected;
+        var data = angular.copy($scope.d.init_stay.selected);
 
 
         // -------------------------------------
@@ -181,6 +181,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             'nodeTree': nodeTree,
             'current': true,
             'datestamp': date,
+            'name': '...'
             'sort': $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
             'date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
             'time': $filter("amDateFormat")(date, 'HH:mm')
