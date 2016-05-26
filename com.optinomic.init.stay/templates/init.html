@@ -1,5 +1,5 @@
 include(../lib/html/optinomic/page/start.m4)
-<md-content class="md-padding" ng-init="d.navigator = 0">
+<md-content class="md-padding">
     <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">
             <md-card-title-text>
@@ -8,6 +8,18 @@ include(../lib/html/optinomic/page/start.m4)
                 </span>
             </md-card-title-text>
         </md-card-title>
+        <md-card-content layout-margin>
+            <h1 class="md-title">Behandlungsart</h1>
+            <md-input-container>
+                <label>Art</label>
+                <md-select class="ng-block" ng-model="d.stay_init.selected.treatment_id" md-on-close="changeTreatment()">
+                    <md-option ng-repeat="treatment in d.stay_init.treatment" value="{{treatment.id}}">
+                        {{treatment.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </md-card-content>
+        <md-divider></md-divider>
         <md-card-content layout-margin>
             <p class="md-caption">d.stay_init</p>
             <pre>{{d.stay_init | json}}</pre>

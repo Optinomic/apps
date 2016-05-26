@@ -1,12 +1,12 @@
 [module]
 id = com.optinomic.init.stay
 name = Stammdaten (Fall)
-short_description = Zusätzliche Stammdaten zum Fall.
+short_description = Zusätzliche Fall-Stammdaten.
 version = include(VERSION)
 type = patient
 
 [description]
-Diese App dient zur Sammlung zusätzlich benötigter Stammdaten. Diese können wiederum als 'Kriterien' für Patientengruppen dienen.
+Diese Applikation dient zur Sammlung zusätzlich benötigter Stammdaten zum aktuellen Fall. Aufgrund dieser Kriterien wird der Patient in Patientengruppen eingeteilt.
 
 [developer]
 first_name = Beat
