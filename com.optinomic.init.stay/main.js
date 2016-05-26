@@ -181,7 +181,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             'nodeTree': nodeTree,
             'current': true,
             'datestamp': date,
-            'name': '...'
             'sort': $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
             'date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
             'time': $filter("amDateFormat")(date, 'HH:mm')
