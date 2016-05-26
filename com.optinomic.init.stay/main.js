@@ -123,8 +123,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Show Debugging - Info
         $scope.d.init_stay.debug = false;
 
-        // Set Default
-        $scope.changeTreatment();
+
 
         // Get Stored Data
         $scope.getInit();
@@ -242,6 +241,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     console.log('(✓) setCurrentTreatment: ', item.data);
                 };
             });
+
+
+            // Set Default
+            $scope.changeTreatment();
 
             console.log('(✓) getInit: ', $scope.d.init_stay.history_states);
 
