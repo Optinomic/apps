@@ -191,7 +191,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getInit = function() {
 
         var nodeTree = $scope.d.nodeTree;
-        var history = $scope.d.init_stay.history_states;
 
         // -------------------------------------
         // Get History - Array
@@ -200,10 +199,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api_call = dataService.getAnnotationsData('patient', nodeTree);
         api_call.then(function(data) {
 
+            console.log('(✓) getInit - data: ', data);
+
+
             $scope.d.init_stay.history_states = angular.copy(data);
 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
-                item.data.name = (myindex + 1) + '.) ' + item.data.data.treatment.name;
+                item.data.name = (myindex + 1) + '.) '; // + item.data.data.treatment.name;
 
                 // Check if 'current'?  Y:Save
                 if (item.data.current) {
