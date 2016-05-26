@@ -222,8 +222,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.init_stay.history_states = angular.copy(data);
 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
-                item.data.name = item.data.treatment.name;
-
                 // Check if 'current'?  Y:Save
                 if (item.current) {
                     $scope.setCurrentTreatment(item.data);
