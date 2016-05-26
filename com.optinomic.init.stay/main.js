@@ -111,10 +111,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "treatment": {}
         };
 
-        // Save the history
+        // For saving the history
         $scope.d.init_stay.history_states = [];
 
+        // Set Default
         $scope.changeTreatment();
+
+        // Get Stored Data
+        $scope.getInit();
     };
 
 
@@ -123,12 +127,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Button - Functions
     // -----------------------------------
 
+    $scope.setCurrentTreatment = function(item) {
+        $scope.d.init_stay.selected = item;
+    };
+
+
     $scope.changeTreatment = function() {
         var treatment_id = $scope.d.init_stay.selected.treatment_id;
         $scope.d.init_stay.selected.treatment = $scope.d.init_stay.treatment[treatment_id];
         console.log('changeTreatment: ', $scope.d.init_stay.selected);
     };
 
+
+    // -----------------------------------
+    // Data - Functions
+    // -----------------------------------
 
     $scope.saveInit = function() {
 
@@ -174,9 +187,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    // -----------------------------------
-    // Data
-    // -----------------------------------
 
     $scope.getInit = function() {
 
@@ -194,7 +204,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
                 item.data.name = (myindex + 1) + '.) ' + item.data.data.treatment.name;
+
+                // Check if 'current'?  Y:Save
+                if (item.data.current) {
+                    $scope.setCurrentTreatment(item.data.data);
+                    console.log('(✓) setCurrentTreatment: ', item.data.data);
+                };
             });
+
+            console.log('(✓) getInit: ', $scope.d.init_stay.history_states);
+
 
         });
     };
