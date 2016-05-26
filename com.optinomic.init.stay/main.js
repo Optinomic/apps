@@ -112,7 +112,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Set Default: treatment_id = Array Position
         $scope.d.stay_init.selected = {
-            "treatment_id": 0;
+            "treatment_id": 0,
+            "treatment": {}
         };
         $scope.changeTreatment();
     };
