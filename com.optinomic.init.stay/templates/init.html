@@ -37,6 +37,27 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content layout-margin>
+            <div>
+                <h1 class="md-title">Behandlungsgeschichte:</h1>
+                <md-list>
+                    <div ng-repeat="item in d.init_stay.history_states" ng-init="item.showDetails=false">
+                        <div ng-if="item.showDetails">
+                            <pre>{{item | json}}</pre>
+                        </div>
+                        <md-list-item class="md-2-line">
+                            <i ng-if="department.data.current" class="mdi mdi-check"></i>
+                            <i ng-if="!department.data.current" class="mdi mdi-chevron-left"></i>
+                            <div class="md-list-item-text">
+                                <h3>{{item.data.date}} | {{item.data.time}}</h3>
+                                <p>{{item.data.name}}</p>
+                            </div>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-content layout-margin>
             <p class="md-caption">Selktiert</p>
             <pre>{{d.init_stay.selected | json}}</pre>
         </md-card-content>

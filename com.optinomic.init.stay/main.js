@@ -129,6 +129,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('changeTreatment: ', $scope.d.init_stay.selected);
     };
 
+
     $scope.saveInit = function() {
 
         var nodeTree = $scope.d.nodeTree;
@@ -136,7 +137,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data = $scope.d.init_stay.selected;
 
 
+        // -------------------------------------
         // Build History - Array
+        // -------------------------------------
 
         history.forEach(function(item, myindex) {
             item.current = false;
@@ -166,14 +169,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Update Entrys
             $scope.d.functions.showSimpleToast(text);
-
-            //$scope.getEntrys();
+            $scope.getInit();
         });
-
-
     };
 
 
+    // -----------------------------------
+    // Data
+    // -----------------------------------
+
+    $scope.getInit = function() {
+
+        var nodeTree = $scope.d.nodeTree;
+        var history = $scope.d.init_stay.history_states;
+
+        // -------------------------------------
+        // Get History - Array
+        // -------------------------------------
+
+        var api_call = dataService.getAnnotationsData('patient', nodeTree);
+        api_call.then(function(data) {
+
+            $scope.d.init_stay.history_states = angular.copy(data);
+
+            $scope.d.init_stay.history_states.forEach(function(item, myindex) {
+                item.data.name = (myindex + 1) + '.) ' + item.data.data.treatment.name;
+            });
+
+        });
+    };
 
 
 });
