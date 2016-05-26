@@ -14,20 +14,20 @@ include(../lib/html/optinomic/page/start.m4)
         <md-divider ng-if="d.init_stay.history_states.length === 0"></md-divider>
         <md-card-content layout-margin>
             <div>
-                <div>&nbsp;</div>
                 <h1 class="md-title"><span ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</span><span ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlungsart</span>: {{d.init_stay.selected.treatment.description}}</h1>
+                <div>&nbsp;</div>
                 <md-input-container class="md-block">
                     <label ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</label>
                     <label ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlungsart</label>
-                    <md-select class="md-title" ng-model="d.init_stay.selected.treatment_id" md-on-close="changeTreatment()">
+                    <md-select class="md-subhead" ng-model="d.init_stay.selected.treatment_id" md-on-close="changeTreatment()">
                         <md-option ng-repeat="treatment in d.init_stay.treatment" value="{{treatment.id}}">
                             {{treatment.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>
             </div>
-            <div>
-                <p class="md-subtitle">Abteilungen | Behnaldungen</p>
+            <div style="margin-top: 12px;">
+                <p class="md-subhead">Abteilungen | Behnaldungen</p>
                 <md-list>
                     <md-list-item class="md-2-line" ng-repeat="department in d.init_stay.selected.treatment.departments">
                         <md-checkbox ng-model="department.current_patient.used" aria-label="{{department.current_patient.name}}">
