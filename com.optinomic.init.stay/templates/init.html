@@ -15,8 +15,10 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content layout-margin>
             <div>
                 <div>&nbsp;</div>
+                <h1 class="md-title"><span ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</span><span ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlungsart</span>: {{d.init_stay.selected.treatment.description}}</h1>
                 <md-input-container class="md-block">
-                    <label>Behandlungsart</label>
+                    <label ng-if="d.init_stay.history_states.length === 0">Behandlungsart spezifizieren:</label>
+                    <label ng-if="d.init_stay.history_states.length > 0">Aktuelle Behandlungsart</label>
                     <md-select class="md-title" ng-model="d.init_stay.selected.treatment_id" md-on-close="changeTreatment()">
                         <md-option ng-repeat="treatment in d.init_stay.treatment" value="{{treatment.id}}">
                             {{treatment.name}}
@@ -24,11 +26,8 @@ include(../lib/html/optinomic/page/start.m4)
                     </md-select>
                 </md-input-container>
             </div>
-        </md-card-content>
-        <md-divider></md-divider>
-        <md-card-content layout-margin>
             <div>
-                <h1 class="md-title">Behandlungen: {{d.init_stay.selected.treatment.description}}</h1>
+                <p class="md-subtitle">Abteilungen | Behnaldungen</p>
                 <md-list>
                     <md-list-item class="md-2-line" ng-repeat="department in d.init_stay.selected.treatment.departments">
                         <md-checkbox ng-model="department.current_patient.used" aria-label="{{department.current_patient.name}}">
@@ -88,7 +87,7 @@ include(../lib/html/optinomic/page/start.m4)
             <pre>{{d.init_stay | json}}</pre>
         </md-card-content>
         <md-divider></md-divider>
-        <md-card-actions layout-gt-xs="row" layout-align="start center">
+        <md-card-actions layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
             <md-button class="md-icon-button" ng-click="d.init_stay.debug = true" aria-label="Schliessen" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
