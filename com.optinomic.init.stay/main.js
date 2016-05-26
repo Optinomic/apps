@@ -65,8 +65,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "name": "EAS",
                     "description": "Entzugs- und Abklärungsstation",
                     "current_patient": {
-                        "pid": current_pid,
-                        "sid": current_sid,
                         "used": false
                     }
                 }, {
@@ -74,8 +72,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "name": "EAS",
                     "description": "Entzugs- und Abklärungsstation",
                     "current_patient": {
-                        "pid": current_pid,
-                        "sid": current_sid,
                         "used": false
                     }
                 }]
@@ -88,8 +84,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "name": "Tagesklinik",
                     "description": "Tagesklinik",
                     "current_patient": {
-                        "pid": current_pid,
-                        "sid": current_sid,
                         "used": false
                     }
                 }]
@@ -102,8 +96,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "name": "Tagesklinik",
                     "description": "Tagesklinik",
                     "current_patient": {
-                        "pid": current_pid,
-                        "sid": current_sid,
                         "used": false
                     }
                 }]
@@ -112,6 +104,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Set Default: treatment_id = Array Position
         $scope.d.stay_init.selected = {
+            "pid": current_pid,
+            "sid": current_sid,
             "treatment_id": 0,
             "treatment": {}
         };
