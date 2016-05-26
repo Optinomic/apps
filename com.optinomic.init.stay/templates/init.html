@@ -46,18 +46,18 @@ include(../lib/html/optinomic/page/start.m4)
             <div>
                 <h1 class="md-title">Behandlungsgeschichte:</h1>
                 <md-list>
-                    <md-list-item class="md-2-line" ng-repeat="item in d.init_stay.history_states" ng-click="showDetails(item)">
+                    <md-list-item class="md-2-line" ng-click="showDetails(item)" ng-repeat="item in d.init_stay.history_states">
                         <md-checkbox ng-disabled="true" ng-model="item.current" aria-label="Current">
                         </md-checkbox>
                         <div class="md-list-item-text">
                             <h3>{{item.data.treatment.name}} </h3>
-                            <p>{{item.date}} {{item.time}}</p>
+                            <p>{{item.data.treatment.description}} | {{item.date}}, {{item.time}}</p>
                         </div>
                     </md-list-item>
                 </md-list>
             </div>
             <div ng-if="d.init_stay.show_details.show">
-                <h1 class="md-title">Details: {{d.init_stay.show_details.data.data.name}} | {{d.init_stay.show_details.data.data.date}} {{d.init_stay.show_details.data.data.time}}</h1>
+                <h1 class="md-title">Details: {{d.init_stay.show_details.data.data.treatment.name}} | {{d.init_stay.show_details.data.date}} {{d.init_stay.show_details.data.time}}</h1>
                 <pre>{{d.init_stay.show_details.data.data | json}}</pre>
             </div>
         </md-card-content>

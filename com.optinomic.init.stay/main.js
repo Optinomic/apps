@@ -148,8 +148,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.showDetails = function(item) {
-        // Toggle Visibility
-        $scope.d.init_stay.show_details.show = !$scope.d.init_stay.show_details.show;
+        // Show always
+        $scope.d.init_stay.show_details.show = true;
 
         // Set Data
         $scope.d.init_stay.show_details.data = item;
