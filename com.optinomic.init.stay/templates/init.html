@@ -8,6 +8,10 @@ include(../lib/html/optinomic/page/start.m4)
                 </span>
             </md-card-title-text>
         </md-card-title>
+        <md-card-content layout-margin ng-if="d.init_stay.history_states.length === 0">
+            <h1 class="md-title">Bitte spezifizieren Sie die aktuelle Behandlung. Danke!</h1>
+        </md-card-content>
+        <md-divider ng-if="d.init_stay.history_states.length === 0"></md-divider>
         <md-card-content layout-margin>
             <div>
                 <div>&nbsp;</div>
@@ -56,9 +60,6 @@ include(../lib/html/optinomic/page/start.m4)
                 <h1 class="md-title">Details: {{item.data.name}} | {{item.date}} {{item.time}}</h1>
                 <pre>{{d.init_stay.show_details.data.data | json}}</pre>
             </div>
-        </md-card-content>
-        <md-card-content layout-margin ng-if="d.init_stay.history_states.length === 0">
-            <h1 class="md-title">Bitte Erfassen: Keine Behandlungsgeschichte vorhanden.</h1>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content layout-margin>

@@ -164,7 +164,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var nodeTree = $scope.d.nodeTree;
         var history = $scope.d.init_stay.history_states;
-        var data = angular.copy($scope.d.init_stay.selected);
 
 
         // -------------------------------------
@@ -175,9 +174,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             item.current = false;
         });
 
+        console.log('(?) 0 - saveInit', nodeTree, history);
+
+
+
         var date = new Date();
         var history_obj = {
-            'data': data,
+            'data': angular.copy($scope.d.init_stay.selected),
             'nodeTree': nodeTree,
             'current': true,
             'datestamp': date,
@@ -189,7 +192,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         history.push(history_obj);
 
 
-        console.log('(?) saveInit', nodeTree, history, data);
+        console.log('(?) 1 - saveInit', nodeTree, history);
         // Save History - Array
         var api_call = dataService.saveAnnotationsData('patient', nodeTree, history);
         api_call.then(function(data) {
@@ -224,7 +227,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Check if 'current'?  Y:Save
                 if (item.current) {
                     $scope.setCurrentTreatment(item.data);
-                    console.log('(✓) setCurrentTreatment: ', item.data.data);
+                    console.log('(✓) setCurrentTreatment: ', item.data);
                 };
             });
 
