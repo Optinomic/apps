@@ -111,6 +111,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "treatment": {}
         };
 
+        // Show the Details of a History
+        $scope.d.init_stay.show_details = {
+            "show": false,
+            "data": {}
+        };
+
         // For saving the history
         $scope.d.init_stay.history_states = [];
 
@@ -137,6 +143,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.init_stay.selected.treatment = $scope.d.init_stay.treatment[treatment_id];
         console.log('changeTreatment: ', $scope.d.init_stay.selected);
     };
+
+
+    $scope.showDetails = function(item) {
+        // Toggle Visibility
+        $scope.d.init_stay.show_details.show = !$scope.d.init_stay.show_details.show;
+
+        // Set Data
+        $scope.d.init_stay.show_details.data = item;
+    };
+
+
 
 
     // -----------------------------------
@@ -199,16 +216,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api_call = dataService.getAnnotationsData('patient', nodeTree);
         api_call.then(function(data) {
 
-            console.log('(✓) getInit - data: ', data);
-
-
             $scope.d.init_stay.history_states = angular.copy(data);
 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
                 item.data.name = (myindex + 1) + '.) ' + item.data.treatment.name;
 
                 // Check if 'current'?  Y:Save
-                if (item.data.current) {
+                if (item.current) {
                     $scope.setCurrentTreatment(item.data);
                     console.log('(✓) setCurrentTreatment: ', item.data.data);
                 };
