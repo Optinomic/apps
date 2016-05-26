@@ -143,8 +143,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('1 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
 
         $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
-        $scope.getInit();
-
         console.log('2 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
     };
 
