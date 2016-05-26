@@ -143,10 +143,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeTreatment = function() {
         var treatment_id = parseInt($scope.d.init_stay.selected.treatment_id);
-        console.log('1 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
+        var current_treatment_id = parseInt($scope.d.init_stay.current.treatment_id);
 
-        $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
-        console.log('2 - changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
+        if (treatment_id === current_treatment_id) {
+            $scope.d.init_stay.selected = angular.copy($scope.d.init_stay.current);
+        } else {
+            $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
+        };
+
+        console.log('changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
     };
 
 
@@ -232,7 +237,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Check if 'current'?  Y:Save
                 if (item.current) {
-                    $scope.setCurrentTreatment(angular.copy(item.data));
+                    $scope.d.init_stay.current = angular.copy(item.data);
+                    $scope.d.init_stay.selected = angular.copy(item.data);
                     console.log('(✓) setCurrentTreatment: ', item.data);
                 };
             });
