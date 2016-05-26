@@ -42,19 +42,17 @@ include(../lib/html/optinomic/page/start.m4)
             <div>
                 <h1 class="md-title">Behandlungsgeschichte:</h1>
                 <md-list>
-                    <div ng-repeat="item in d.init_stay.history_states" ng-init="item.showDetails=false">
-                        <div ng-if="item.showDetails">
-                            <pre>{{item | json}}</pre>
-                        </div>
-                        <md-list-item class="md-2-line">
-                            <i ng-if="department.data.current" class="mdi mdi-check"></i>
-                            <i ng-if="!department.data.current" class="mdi mdi-chevron-left"></i>
-                            <div class="md-list-item-text">
-                                <h3>{{item.date}} | {{item.time}}</h3>
-                                <p>{{item.data.name}}</p>
+                    <md-list-item class="md-2-line" ng-repeat="item in d.init_stay.history_states" ng-init="item.showDetails=false">
+                        <i ng-if="department.data.current" class="mdi mdi-check"></i>
+                        <i ng-if="!department.data.current" class="mdi mdi-chevron-left"></i>
+                        <div class="md-list-item-text">
+                            <h3>{{item.date}} | {{item.time}}</h3>
+                            <p>{{item.data.name}}</p>
+                            <div ng-if="item.showDetails">
+                                <pre>{{item | json}}</pre>
                             </div>
-                        </md-list-item>
-                    </div>
+                        </div>
+                    </md-list-item>
                 </md-list>
             </div>
         </md-card-content>
