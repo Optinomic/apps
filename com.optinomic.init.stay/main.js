@@ -94,8 +94,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "description": "Ambulanter Aufenthalt",
                 "departments": [{
                     "id": 1,
-                    "name": "Tagesklinik",
-                    "description": "Tagesklinik",
+                    "name": "Amulant",
+                    "description": "Ambulante Behnadlung am Eigerplatz",
                     "current_patient": {
                         "used": false
                     }
@@ -140,7 +140,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeTreatment = function() {
         var treatment_id = $scope.d.init_stay.selected.treatment_id;
-        $scope.d.init_stay.selected.treatment = $scope.d.init_stay.treatment[treatment_id];
+        $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
         console.log('changeTreatment: ', $scope.d.init_stay.selected);
     };
 
