@@ -38,28 +38,27 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </md-card-content>
         <md-divider></md-divider>
-        <md-card-content layout-margin>
-            <div layout="row" layout-align="start start">
-                <div flex>
-                    <h1 class="md-title">Behandlungsgeschichte:</h1>
-                    <md-list>
-                        <md-list-item class="md-2-line" ng-repeat="item in d.init_stay.history_states" ng-click="showDetails(item)">
-                            <md-checkbox ng-disabled="true" ng-model="item.current" aria-label="Current">
-                            </md-checkbox>
-                            <i ng-if="item.current" class="mdi mdi-check"></i>
-                            <i ng-if="!item.current" class="mdi mdi-chevron-left"></i>
-                            <div class="md-list-item-text">
-                                <h3>{{item.data.name}} </h3>
-                                <p>{{item.date}} {{item.time}}</p>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </div>
-                <div flex ng-if="d.init_stay.show_details.show">
-                    <h1 class="md-title">Details: {{item.data.name}} | {{item.date}} {{item.time}}</h1>
-                    <pre>{{d.init_stay.show_details.data.data | json}}</pre>
-                </div>
+        <md-card-content layout-margin ng-if="d.init_stay.history_states.length > 0">
+            <div>
+                <h1 class="md-title">Behandlungsgeschichte:</h1>
+                <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="item in d.init_stay.history_states" ng-click="showDetails(item)">
+                        <md-checkbox ng-disabled="true" ng-model="item.current" aria-label="Current">
+                        </md-checkbox>
+                        <div class="md-list-item-text">
+                            <h3>{{item.data.name}} </h3>
+                            <p>{{item.date}} {{item.time}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
             </div>
+            <div ng-if="d.init_stay.show_details.show">
+                <h1 class="md-title">Details: {{item.data.name}} | {{item.date}} {{item.time}}</h1>
+                <pre>{{d.init_stay.show_details.data.data | json}}</pre>
+            </div>
+        </md-card-content>
+        <md-card-content layout-margin ng-if="d.init_stay.history_states.length === 0">
+            <h1 class="md-title">Bitte Erfassen: Keine Behandlungsgeschichte vorhanden.</h1>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-content layout-margin>
