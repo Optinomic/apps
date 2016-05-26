@@ -120,6 +120,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // For saving the history
         $scope.d.init_stay.history_states = [];
 
+        // Show Debugging - Info
+        $scope.d.init_stay.debug = false;
+
         // Set Default
         $scope.changeTreatment();
 

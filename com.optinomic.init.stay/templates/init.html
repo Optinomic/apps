@@ -57,12 +57,31 @@ include(../lib/html/optinomic/page/start.m4)
                 </md-list>
             </div>
             <div ng-if="d.init_stay.show_details.show">
-                <h1 class="md-title">Details: {{d.init_stay.show_details.data.data.treatment.name}} | {{d.init_stay.show_details.data.date}} {{d.init_stay.show_details.data.time}}</h1>
+                <div layout="row" layout-align="space-between center">
+                    <div>
+                        <h1 class="md-title">Details: {{d.init_stay.show_details.data.data.treatment.name}} | {{d.init_stay.show_details.data.date}} {{d.init_stay.show_details.data.time}}</h1>
+                    </div>
+                    <div>
+                        <md-button class="md-icon-button" ng-click="d.init_stay.show_details.show = false" aria-label="Schliessen" style="color: #9E9E9E;">
+                            <i class="md-title mdi mdi-close"></i>
+                        </md-button>
+                    </div>
+                </div>
                 <pre>{{d.init_stay.show_details.data.data | json}}</pre>
             </div>
         </md-card-content>
-        <md-divider></md-divider>
-        <md-card-content layout-margin>
+        <md-divider ng-if="d.init_stay.debug"></md-divider>
+        <md-card-content ng-if="d.init_stay.debug" layout-margin>
+            <div layout="row" layout-align="space-between center">
+                <div>
+                    <h1 class="md-title">Debugging:</h1>
+                </div>
+                <div>
+                    <md-button class="md-icon-button" ng-click="d.init_stay.debug = false" aria-label="Schliessen" style="color: #9E9E9E;">
+                        <i class="md-title mdi mdi-close"></i>
+                    </md-button>
+                </div>
+            </div>
             <p class="md-titel">Selktiert</p>
             <pre>{{d.init_stay.selected | json}}</pre>
             <p class="md-titel">Full</p>
@@ -70,6 +89,9 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button" ng-click="d.init_stay.debug = false" aria-label="Schliessen" style="color: #9E9E9E;">
+                <i class="md-title mdi mdi-bug"></i>
+            </md-button>
             <md-button ng-click="saveInit();" class="md-warn">Speichern</md-button>
         </md-card-actions>
     </md-card>
