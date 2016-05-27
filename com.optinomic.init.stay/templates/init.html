@@ -89,7 +89,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
-            <md-button class="md-icon-button" ng-click="d.init_stay.debug = true" aria-label="Schliessen" style="color: #9E9E9E;">
+            <md-button ng-if="d.dataMain.users.current.data.role === 'Admin'" class="md-icon-button" ng-click="d.init_stay.debug = true" aria-label="Schliessen" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
             <md-button ng-click="saveInit();" class="md-accent">Speichern</md-button>

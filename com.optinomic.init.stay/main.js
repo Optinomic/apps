@@ -5,16 +5,12 @@
  */
 app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
-    // -----------------------------------
-    // Init
-    // -----------------------------------
-
     // Data-Sharing (do not remove)
     $scope.d = scopeDService;
 
 
     // -----------------------------------
-    // Functions
+    // Main - Functions
     // -----------------------------------
 
     $scope.loadMainData = function() {
@@ -44,7 +40,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -----------------------------------
-    // Init
+    // Application - Init
     // -----------------------------------
     $scope.appInit = function() {
 
@@ -138,6 +134,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
+
     // -----------------------------------
     // Button - Functions
     // -----------------------------------
@@ -157,7 +154,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.init_stay.selected.treatment = angular.copy($scope.d.init_stay.treatment[treatment_id]);
         };
 
-        console.log('changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
+        //console.log('changeTreatment: ', treatment_id, $scope.d.init_stay.selected, $scope.d.init_stay);
     };
 
 
@@ -173,7 +170,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -----------------------------------
-    // Data - Functions
+    // Data - Functions (save / load)
     // -----------------------------------
 
     $scope.saveInit = function() {
@@ -190,10 +187,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             item.current = false;
         });
 
-        console.log('(?) 0 - saveInit', nodeTree, history);
-
-
-
         var date = new Date();
         var history_obj = {
             'data': angular.copy($scope.d.init_stay.selected),
@@ -208,7 +201,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         history.push(history_obj);
 
 
-        console.log('(?) 1 - saveInit', nodeTree, history);
         // Save History - Array
         var api_call = dataService.saveAnnotationsData('patient', nodeTree, history);
         api_call.then(function(data) {
@@ -221,7 +213,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.getInit();
         });
     };
-
 
 
     $scope.getInit = function() {
@@ -245,7 +236,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if (item.current) {
                     $scope.d.init_stay.current = angular.copy(item.data);
                     $scope.d.init_stay.selected = angular.copy(item.data);
-                    console.log('(✓) setCurrentTreatment: ', item.data);
+                    //console.log('(✓) setCurrentTreatment: ', item.data);
                 };
             });
 
@@ -253,8 +244,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Set Default
             $scope.changeTreatment();
 
-            console.log('(✓) getInit: ', $scope.d.init_stay.history_states);
-
+            //console.log('(✓) getInit: ', $scope.d.init_stay.history_states);
 
         });
     };
