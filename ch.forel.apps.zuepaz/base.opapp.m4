@@ -1,20 +1,20 @@
 [module]
 id = ch.forel.apps.zuepaz
 name = ZüPaZ - Version Forel
-short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Klinik Forel
+short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Forel-Klinik 
 version = include(VERSION)
 type = patient
 
 [description]
-Es wird die allgemeine Zufriedenheit der Patienten mit der Klinik Forel erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
+Hier wird die Zufriedenheit der Patienten mit der Behandlung in der Forel-Klinik erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
 
 [developer]
 first_name = Hans
 last_name = Menning
 github_user = HansaYohaku
-email = nora.schoenenberger@suedhang.ch
-company = Suedhang
-phone = +41 (0)31 828 14 51
+email = hans.menning@forel-klinik.ch
+company = Forel-Klinik
+phone = +41 (0)52 369 14 12
 website = http://www.optinomic.com/
 
 
