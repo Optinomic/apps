@@ -44,7 +44,16 @@ include(../lib/html/optinomic/page/start.m4)
             <md-divider></md-divider>
             <md-card-content layout-margin ng-if="d.init_stay.history_states.length > 0">
                 <div>
-                    <h1 class="md-title">Behandlungsgeschichte</h1>
+                    <div layout="row" layout-align="space-between center">
+                        <div>
+                            <h1 class="md-title">Behandlungsgeschichte</h1>
+                        </div>
+                        <div>
+                            <md-button class="md-icon-button" ng-click="d.init_stay.show_history = !d.init_stay.show_history" aria-label="Behandlungsgeschichte schliessen" style="color: #3F51B5;">
+                                <i class="md-title mdi mdi-close"></i>
+                            </md-button>
+                        </div>
+                    </div>
                     <md-list>
                         <md-list-item class="md-2-line" ng-click="showDetails(item)" ng-repeat="item in d.init_stay.history_states">
                             <md-checkbox ng-disabled="true" ng-model="item.current" aria-label="Current">
@@ -91,10 +100,10 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
-            <md-button ng-if="d.dataMain.users.current.data.role === 'Admin'" class="md-icon-button" ng-click="d.init_stay.debug = true" aria-label="Debugging" style="color: #9E9E9E;">
+            <md-button ng-if="d.dataMain.users.current.data.role === 'Admin'" class="md-icon-button" ng-click="d.init_stay.debug = !d.init_stay.debug" aria-label="Debugging" style="color: #9E9E9E;">
                 <i class="md-title mdi mdi-bug"></i>
             </md-button>
-            <md-button class="md-icon-button" ng-click="d.init_stay.show_history = true" aria-label="Behandlungsgeschichte" style="color: #9E9E9E;">
+            <md-button class="md-icon-button" ng-click="d.init_stay.show_history = !d.init_stay.show_history" aria-label="Behandlungsgeschichte" style="color: #3F51B5;">
                 <i class="md-title mdi mdi-history"></i>
             </md-button>
             <md-button ng-click="saveInit();" class="md-accent">Speichern</md-button>
