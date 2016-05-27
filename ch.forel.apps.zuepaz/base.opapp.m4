@@ -9,9 +9,9 @@ type = patient
 Es wird die allgemeine Zufriedenheit der Patienten mit der Klinik Forel erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
 
 [developer]
-first_name = Nora
-last_name = Schönenberger
-github_user = schoenenb
+first_name = Hans
+last_name = Menning
+github_user = HansaYohaku
 email = nora.schoenenberger@suedhang.ch
 company = Suedhang
 phone = +41 (0)31 828 14 51
