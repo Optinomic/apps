@@ -123,8 +123,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // For saving the history
         $scope.d.init_stay.history_states = [];
 
-        // Show Debugging - Info
+        // Toggle Visibility
         $scope.d.init_stay.debug = false;
+        $scope.d.init_stay.show_history = false;
 
 
 
