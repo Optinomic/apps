@@ -1,11 +1,13 @@
 
 
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Optinomic-App 
+
+#Dokumentation für den Benutzer.
+
+Wie wird ZüPaZ innerhalb der Klinik verwendet?
+
+User Anleitungen.... etc... 
 
 
-#### Ressources
-- [angular grid](http://www.angulargrid.com/index.html)  ::  Grid used for data-views.
 
 
 ###Contact
