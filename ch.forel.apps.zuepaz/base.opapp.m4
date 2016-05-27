@@ -1,12 +1,12 @@
 [module]
-id = ch.suedhang.apps.zuepaz
-name = ZüPaZ - Version Südhang
-short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Klinik Südhang
+id = ch.forel.apps.zuepaz
+name = ZüPaZ - Version Forel
+short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Klinik Forel
 version = include(VERSION)
 type = patient
 
 [description]
-Es wird die allgemeine Zufriedenheit der Patienten mit der Klinik Südhang erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
+Es wird die allgemeine Zufriedenheit der Patienten mit der Klinik Forel erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
 
 [developer]
 first_name = Nora
@@ -32,7 +32,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [survey]
-id = ZuePaZ_Suedhang
+id = ZuePaZ_Forel
 type = lime
 responsibility = lead_therapist
 name = Zuepaz
@@ -52,7 +52,7 @@ time = 07:00
 due_after = 604800
 overdue = ignore
 description = Erfassung der Patientenzufriedenheit
-survey = ZuePaZ_Suedhang
+survey = ZuePaZ_Forel
 
 [email new_event html]
 include(emails/new_event.html)
