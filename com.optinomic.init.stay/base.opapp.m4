@@ -5,8 +5,10 @@ short_description = Zusätzliche Fall-Stammdaten.
 version = include(VERSION)
 type = patient
 
+
 [description]
-Diese Applikation dient zur Sammlung zusätzlich benötigter Stammdaten zum aktuellen Fall. Aufgrund dieser Kriterien wird der Patient in Patientengruppen eingeteilt.
+Diese Applikation dient zur Spezifizierung zusätzlich benötigter Fall-Stammdaten. Aufgrund dieser Kriterien wird der Patient automatisch in Patientengruppen eingeteilt. Diese Funktionalität wird bewusst nicht über eine Schnittstelle gelöst. Flexibilität sowie die Reduktion von Komplexität vs. einmaliger "Doppelbefragung".
+
 
 [developer]
 first_name = Beat
