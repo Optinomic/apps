@@ -111,6 +111,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "treatment": {}
         };
 
+        $scope.d.init_stay.current = {
+            "pid": current_pid,
+            "sid": current_sid,
+            "treatment_id": 99999,
+            "treatment": {}
+        };
+
         // Show the Details of a History
         $scope.d.init_stay.show_details = {
             "show": false,
