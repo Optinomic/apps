@@ -191,11 +191,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.functions.showSimpleToast(text);
 
             console.log(text, my_json);
-            deferred.resolve(return_data);
 
         }, function(error) {
             // Error
-            deferred.reject(error);
             console.log('ERROR: savePatientGroupObject', error);
         });
     };
@@ -300,6 +298,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if (dataService.isEmpty(data)) {
                 console.log('getInit = Empty');
+                $scope.changeTreatment();
             } else {
                 console.log('getInit = ', data);
 
@@ -321,7 +320,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         }, function(error) {
             // Error
-            deferred.reject(error);
             console.log('ERROR: savePatientGroupObject', error);
         });
 
