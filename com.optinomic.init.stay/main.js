@@ -267,7 +267,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get History - Array
         // -------------------------------------
 
-        var api_call = dataService.getAnnotationsData('patient', nodeTree);
+        var api_call = dataService.getAnnotationsData('patient', '');
         api_call.then(function(data) {
 
 
