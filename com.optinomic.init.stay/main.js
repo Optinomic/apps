@@ -294,8 +294,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 });
             };
 
-            deferred.resolve(return_data);
-
         }, function(error) {
             // Error
             deferred.reject(error);
