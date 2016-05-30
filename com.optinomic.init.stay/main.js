@@ -225,9 +225,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             item.data.treatment.departments.forEach(function(department, myDepIndex) {
                 var_name = var_name + department.name.toLowerCase();
-                value = department.current_patient.used;
 
-                return_obj[var_name] = value;
+                return_obj[var_name] = department.current_patient.used;
             });
 
         });
