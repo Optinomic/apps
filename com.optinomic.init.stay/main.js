@@ -123,6 +123,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // For saving the history
         $scope.d.init_stay.history_states = [];
 
+        // For saving the history
+        $scope.d.init_stay.patient_group_selector = {};
+
         // Toggle Visibility
         $scope.d.init_stay.debug = false;
         $scope.d.init_stay.show_history = false;
@@ -245,7 +248,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Update Entrys
             $scope.d.functions.showSimpleToast(text);
-            $scope.savePatientGroupObject(patientGroupObj);
+            //$scope.savePatientGroupObject(patientGroupObj);
             $scope.getInit();
         });
     };
@@ -262,7 +265,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api_call = dataService.getAnnotationsData('patient', nodeTree);
         api_call.then(function(data) {
 
-            $scope.d.init_stay.history_states = angular.copy(data);
+            $scope.d.init_stay.history_states = angular.copy(data.history);
+            $scope.d.init_stay.patient_group_selector = angular.copy(data.patient_group_selector);
 
             $scope.d.init_stay.history_states.forEach(function(item, myindex) {
 
