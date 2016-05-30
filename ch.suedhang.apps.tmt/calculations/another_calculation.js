@@ -5,12 +5,7 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
-    };
-
-
+    
     calc.quotient = function(A, B){
         var quotient = 2; //{{TMTBTime}} /{{TMTATime}};
         return quotient;
@@ -129,12 +124,66 @@ function main(responses) {
         return result;
     }
 
+/*
+    // ------------------------------------
+    // Data available
+    // ------------------------------------
+    if (myscope !== undefined) {
+        $scope.have_data = true;
+
+        // Loop durch alle Ergebnisse (Messungen)
+        for (var i = 0; i < myscope.length; i++) {
+
+            // Messzeitpunkt ausgeben
+            myscope[i].messzeitpunkt_text = '';
+            if (myscope[i].Messzeitpunkt === '1') {
+                myscope[i].messzeitpunkt_text = 'Eintrittsassessment';
+            };
+            if (myscope[i].Messzeitpunkt === '2') {
+                myscope[i].messzeitpunkt_text = 'Austrittsassessment';
+            };
+            if (myscope[i].Messzeitpunkt === '3') {
+                myscope[i].messzeitpunkt_text = 'Verlaufsassessment';
+            };
+            myscope[i].messzeitpunkt_text = myscope[i].messzeitpunkt_text + ': ' + myscope[i].Date.substring(0, 10);
+            myscope[i].alter_ausbildung = 'Alter: ' + parseInt(myscope[i].Alter) + ' | Ausbildungsjahre: ' + parseInt(myscope[i].Ausbildungsjahre);
+
+            // Quotient
+            myscope[i].quotient_B_A_time = roundToTwo(myscope[i].quotient);
+
+            // Zeit & Fehler in Integer
+            myscope[i].TMTAError = parseInt(myscope[i].TMTAError);
+            myscope[i].TMTBError = parseInt(myscope[i].TMTBError);
+            myscope[i].TMTATime = parseInt(myscope[i].TMTATime);
+            myscope[i].TMTBTime = parseInt(myscope[i].TMTBTime);
+
+            // Perzentile oder eingegebener Z-Wert?
+            if (parseInt(myscope[i].Alter) >= 50) {
+                myscope[i].show_z = true;
+
+                myscope[i].AzWert = parseFloat(myscope[i].AzWert);
+                myscope[i].BzWert = parseFloat(myscope[i].BzWert);
+                myscope[i].BAzWert = parseFloat(myscope[i].BAzWert);
+                myscope[i].BAzWert = myscope[i].BAzWert.toFixed(2);
+
+            } else {
+                myscope[i].show_z = false;
+
+                myscope[i].TMTAPerzentile = getPerzentile('A', parseInt(myscope[i].Alter), myscope[i].TMTATime, myscope[i].TMTAError);
+                myscope[i].TMTBPerzentile = getPerzentile('B', parseInt(myscope[i].Alter), myscope[i].TMTBTime, myscope[i].TMTBError);
+            }
+        }
 
 
-     {
- 
-
-
+    } else {
+        // ------------------------------------
+        // No Data available
+        // ------------------------------------
+        $scope.have_data = false;
+    }
+    // Show $scope in Developer Tools - Console 
+    console.log($scope.current_directive.title + ' $scope = ', $scope);
+*/
 
 
 
@@ -151,8 +200,13 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
+
             myResults.something = calc.doSomething();
 
+/* --> Hier kommt die Anpassung "Wenn Alter > 50 nimm die eingegebenen z-Werte, else calc.get_percentile({A/B-Platzhalter}, age, time, error)"
+            myResults.result = calc.get_percentile(scale, set_age, time, error)
+
+*/
 
             // Write Results for the Return
             // Do not modify stuff here
