@@ -223,16 +223,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         history.push(history_obj);
 
-        var patientGroupObj = {
-            "EAS": true
 
+        var patientGroupSelectorObj = {
+            "EAS": true
         };
+
 
         var saveJSON = {
-            "data": history,
-            "patient_group_selector": patientGroupObj
+            "history": history,
+            "patient_group_selector": patientGroupSelectorObj
         };
 
+        console.log('saveInit ->  TRY TO SAVE: ', saveJSON);
 
         // Save History - Array
         var api_call = dataService.saveAnnotationsData('patient', nodeTree, saveJSON);
