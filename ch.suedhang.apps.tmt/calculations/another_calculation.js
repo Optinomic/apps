@@ -5,8 +5,56 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+    calc.doSomething = function() {
+        var score = 73;
+        return score;
+    };
+
+
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
+    calc.getResults = function(myResponses) {
+
+        var responses_array = myResponses.survey_responses;
+        var allResults = [];
+
+        responses_array.forEach(function(response, myindex) {
+            var myResults = {};
+            var result = response.data.response;
+
+            // Something
+            myResults.something = calc.doSomething();
+
+
+            // Write Results for the Return
+            // Do not modify stuff here
+            myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
+            myResults.responses = responses;
+            allResults.push(myResults);
+        });
+
+        return allResults;
+    };
+
+
+    // Return
+    return calc.getResults(responses);
+}
+
+
+
+
+/* function main(responses) {
+    var calc = {};
+
+    // ------------------------------------------
+    // H e l p e r   -   F U N C T I O N S
+    // ------------------------------------------
+
     
-    calc.quotient = function(/*A, B*/){
+   calc.quotient = function(A, B){
         var quotient = 2; //{{TMTBTime}} /{{TMTATime}};
         return quotient;
     };
@@ -124,7 +172,6 @@ function main(responses) {
         return result;
     }
 
-/*
     // ------------------------------------
     // Data available
     // ------------------------------------
@@ -187,7 +234,7 @@ function main(responses) {
 
 
 
-    // ------------------------------------------
+/*    // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
     calc.getResults = function(myResponses) {
@@ -201,12 +248,13 @@ function main(responses) {
 
             // Something
 
+            myResults.something = calc.doSomething;
+
+ --> Hier kommt die Anpassung "Wenn Alter > 50 nimm die eingegebenen z-Werte, else calc.get_percentile({A/B-Platzhalter}, age, time, error)"
+            myResults.result = calc.get_percentile(scale, set_age, time, error)
             myResults.something = calc.get_percentile("A", age, "120", "0");
 
-/* --> Hier kommt die Anpassung "Wenn Alter > 50 nimm die eingegebenen z-Werte, else calc.get_percentile({A/B-Platzhalter}, age, time, error)"
-            myResults.result = calc.get_percentile(scale, set_age, time, error)
 
-*/
 
             // Write Results for the Return
             // Do not modify stuff here
@@ -223,3 +271,4 @@ function main(responses) {
     // Return
     return calc.getResults(responses);
 }
+*/
