@@ -187,7 +187,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var aPromise = dataService.getData(api_write);
         aPromise.then(function(data) {
 
-            console.log('(✓) savePatientGroupObject =', my_json);
+            var text = '(✓) ' + $scope.d.nodeTree + ': Erfolgreich gespeichert.';
+            $scope.d.functions.showSimpleToast(text);
+
+            console.log(text, my_json);
             deferred.resolve(return_data);
 
         }, function(error) {
