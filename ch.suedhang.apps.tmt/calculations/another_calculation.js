@@ -7,7 +7,7 @@ function main(responses) {
     // ------------------------------------------
 
     calc.doSomething = function() {
-        var score = 73;
+        var score = 25;
         return score;
     };
 
@@ -24,7 +24,7 @@ function main(responses) {
             var result = response.data.response;
 
             // Something
-            myResults.something = calc.doSomething(result);
+            myResults.something = calc.doSomething();
 
 /*  --> Hier kommt die Anpassung "Wenn Alter > 50 nimm die eingegebenen z-Werte, else calc.get_percentile({A/B-Platzhalter}, age, time, error)"
             myResults.result = calc.get_percentile(scale, set_age, time, error)
