@@ -174,6 +174,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Data - Functions (save / load)
     // -----------------------------------
 
+    $scope.savePatientGroupObject = function(my_json) {
+
+        // --------------------------------------------
+        // Save and proceed.
+        // --------------------------------------------
+        var api_write = dataService.putPatientModuleAnnotations(angular.toJson(my_json));
+
+        var aPromise = dataService.getData(api_write);
+        aPromise.then(function(data) {
+
+            console.log('(✓) savePatientGroupObject =', full_data);
+            deferred.resolve(return_data);
+
+        }, function(error) {
+            // Error
+            deferred.reject(error);
+            console.log('ERROR: savePatientGroupObject', error);
+        });
+    };
+
+
+
     $scope.saveInit = function() {
 
         var nodeTree = $scope.d.nodeTree;
@@ -202,6 +224,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         history.push(history_obj);
 
 
+        var patientGroupObj = {
+            "gaga": true
+        };
+
+
+
         // Save History - Array
         var api_call = dataService.saveAnnotationsData('patient', nodeTree, history);
         api_call.then(function(data) {
@@ -211,6 +239,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Update Entrys
             $scope.d.functions.showSimpleToast(text);
+            $scope.savePatientGroupObject(patientGroupObj);
             $scope.getInit();
         });
     };
