@@ -224,7 +224,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         history.push(history_obj);
 
         var patientGroupObj = {
-            "gaga": true
+            "EAS": true
 
         };
 
