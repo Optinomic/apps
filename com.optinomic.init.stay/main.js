@@ -266,19 +266,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         api_call.then(function(data) {
 
             $scope.d.init_stay.history_states = angular.copy(data.history);
-            $scope.d.init_stay.patient_group_selector = angular.copy(data.patient_group_selector);
 
-            $scope.d.init_stay.history_states.forEach(function(item, myindex) {
+            if ($scope.d.init_stay.history_states.length > 0) {
+                $scope.d.init_stay.patient_group_selector = angular.copy(data.patient_group_selector);
 
-                item.data.treatment_id = parseInt(item.data.treatment_id);
+                $scope.d.init_stay.history_states.forEach(function(item, myindex) {
 
-                // Check if 'current'?  Y:Save
-                if (item.current) {
-                    $scope.d.init_stay.current = angular.copy(item.data);
-                    $scope.d.init_stay.selected = angular.copy(item.data);
-                    //console.log('(✓) setCurrentTreatment: ', item.data);
-                };
-            });
+                    item.data.treatment_id = parseInt(item.data.treatment_id);
+
+                    // Check if 'current'?  Y:Save
+                    if (item.current) {
+                        $scope.d.init_stay.current = angular.copy(item.data);
+                        $scope.d.init_stay.selected = angular.copy(item.data);
+                        //console.log('(✓) setCurrentTreatment: ', item.data);
+                    };
+                });
+            };
 
 
             // Set Default
