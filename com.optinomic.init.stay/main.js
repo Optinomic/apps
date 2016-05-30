@@ -267,7 +267,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get History - Array
         // -------------------------------------
 
-        var api_call = dataService.getAnnotationsData('patient', '');
+        var api_call = dataService.getAnnotationsData('patient', 'history');
         api_call.then(function(data) {
 
 
@@ -276,8 +276,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             } else {
                 console.log('getInit = ', data);
 
-                $scope.d.init_stay.history_states = angular.copy(data.history);
-                $scope.d.init_stay.patient_group_selector = angular.copy(data.patient_group_selector);
+                $scope.d.init_stay.history_states = angular.copy(data);
 
                 $scope.d.init_stay.history_states.forEach(function(item, myindex) {
 
