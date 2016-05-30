@@ -265,9 +265,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var api_call = dataService.getAnnotationsData('patient', nodeTree);
         api_call.then(function(data) {
 
-            $scope.d.init_stay.history_states = angular.copy(data.history);
 
-            if ($scope.d.init_stay.history_states.length > 0) {
+            if (dataService.isEmpty(data)) {
+                console.log('getInit = Empty');
+            } else {
+                console.log('getInit = ', data);
+
+                $scope.d.init_stay.history_states = angular.copy(data.history);
                 $scope.d.init_stay.patient_group_selector = angular.copy(data.patient_group_selector);
 
                 $scope.d.init_stay.history_states.forEach(function(item, myindex) {
