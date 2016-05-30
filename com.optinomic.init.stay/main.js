@@ -240,17 +240,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('saveInit ->  TRY TO SAVE: ', saveJSON);
 
         // Save History - Array
-        var api_call = dataService.saveAnnotationsData('patient', nodeTree, saveJSON);
-        api_call.then(function(data) {
+        //var api_call = dataService.saveAnnotationsData('patient', nodeTree, saveJSON);
+        //api_call.then(function(data) {
+        //
+        //    var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
+        //    //console.log(text, angular.toJson(current_array_to_save, true));
+        //
+        //    // Update Entrys
+        //    $scope.d.functions.showSimpleToast(text);
+        //    $scope.getInit();
+        //});
 
-            var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
-            //console.log(text, angular.toJson(current_array_to_save, true));
+        $scope.savePatientGroupObject(saveJSON);
 
-            // Update Entrys
-            $scope.d.functions.showSimpleToast(text);
-            //$scope.savePatientGroupObject(patientGroupObj);
-            $scope.getInit();
-        });
     };
 
 
