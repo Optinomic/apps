@@ -201,6 +201,41 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.createPatientGroupObject = function(dataArray) {
+
+        // INIT
+        var date = new Date();
+        var return_obj = {
+            'nodeTree': $scope.d.nodeTree,
+            'saved_datestamp': date,
+            'saved_sort': $filter("amDateFormat")(date, 'YYYYMMDDHHmm'),
+            'saved_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'saved_time': $filter("amDateFormat")(date, 'HH:mm')
+        };
+
+        dataArray.forEach(function(item, myindex) {
+
+            var var_name = '';
+
+            if (item.current) {
+                var_name = 'current_';
+            } else {
+                var_name = 'past_';
+            };
+
+            item.data.treatment.departments.forEach(function(department, myDepIndex) {
+                var_name = var_name + department.name.toLowerCase();
+                value = department.current_patient.used;
+
+                return_obj[var_name] = value;
+            });
+
+        });
+
+        return return_obj;
+
+    };
+
 
     $scope.saveInit = function() {
 
@@ -230,29 +265,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         history.push(history_obj);
 
 
-        var patientGroupSelectorObj = {
-            "EAS": true
-        };
-
+        var patientGroupSelectorObj = $scope.createPatientGroupObject(history);
 
         var saveJSON = {
             "history": history,
             "patient_group_selector": patientGroupSelectorObj
         };
-
-        console.log('saveInit ->  TRY TO SAVE: ', saveJSON);
-
-        // Save History - Array
-        //var api_call = dataService.saveAnnotationsData('patient', nodeTree, saveJSON);
-        //api_call.then(function(data) {
-        //
-        //    var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
-        //    //console.log(text, angular.toJson(current_array_to_save, true));
-        //
-        //    // Update Entrys
-        //    $scope.d.functions.showSimpleToast(text);
-        //    $scope.getInit();
-        //});
 
         $scope.savePatientGroupObject(saveJSON);
 

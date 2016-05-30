@@ -39,4 +39,24 @@ FROM annotations r
 WHERE module = 'com.optinomic.init.stay'
 
 
+5.)  Working - Nested Object
+
+SELECT 
+
+((cast(value AS json))->'patient_group_selector'->>'EAS') as EAS
+
+FROM annotations
+WHERE module = 'com.optinomic.init.stay' 
+
+
+
+
+
+SELECT 
+*
+FROM annotations
+WHERE module = 'com.optinomic.init.stay' 
+AND ((cast(value AS json))->'patient_group_selector'->>'EAS') = 'true'
+
+
 
