@@ -6,7 +6,7 @@ function main(responses) {
     // ------------------------------------------
 
     
-    calc.quotient = function(A, B){
+    calc.quotient = function(/*A, B*/){
         var quotient = 2; //{{TMTBTime}} /{{TMTATime}};
         return quotient;
     };
@@ -201,7 +201,7 @@ function main(responses) {
 
             // Something
 
-            myResults.something = calc.doSomething();
+            myResults.something = calc.get_percentile("A", age, "120", "0");
 
 /* --> Hier kommt die Anpassung "Wenn Alter > 50 nimm die eingegebenen z-Werte, else calc.get_percentile({A/B-Platzhalter}, age, time, error)"
             myResults.result = calc.get_percentile(scale, set_age, time, error)
@@ -210,6 +210,7 @@ function main(responses) {
 
             // Write Results for the Return
             // Do not modify stuff here
+            myResults.full = myResponses;
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
             allResults.push(myResults);
