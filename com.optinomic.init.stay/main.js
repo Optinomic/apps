@@ -223,17 +223,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         history.push(history_obj);
 
-
         var patientGroupObj = {
-            "patient_group": {
-                "gaga": true
-            }
+            "gaga": true
+
+        };
+
+        var saveJSON = {
+            "data": history,
+            "patient_group_selector": patientGroupObj
         };
 
 
-
         // Save History - Array
-        var api_call = dataService.saveAnnotationsData('patient', nodeTree, history);
+        var api_call = dataService.saveAnnotationsData('patient', nodeTree, saveJSON);
         api_call.then(function(data) {
 
             var text = '(✓) ' + nodeTree + ': Erfolgreich gespeichert.';
