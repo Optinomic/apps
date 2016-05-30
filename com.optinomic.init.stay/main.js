@@ -216,6 +216,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         dataArray.forEach(function(item, myindex) {
 
             var var_name = '';
+            var var_value = null;
 
             if (item.current) {
                 var_name = 'current_';
@@ -225,8 +226,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             item.data.treatment.departments.forEach(function(department, myDepIndex) {
                 var_name = var_name + department.name.toLowerCase();
+                var_value = department.current_patient.used;
 
-                return_obj[var_name] = department.current_patient.used;
+
+                if (return_obj[var_name] === undefined) {
+                    return_obj[var_name] = var_value;
+                } else {
+                    if (return_obj[var_name] === false) {
+                        return_obj[var_name] = var_value;
+                    };
+                };
+
+
+                return_obj[var_name] = var_value;
             });
 
         });
