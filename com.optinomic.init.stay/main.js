@@ -225,7 +225,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         var patientGroupObj = {
-            "gaga": true
+            "patient_group": {
+                "gaga": true
+            }
         };
 
 
