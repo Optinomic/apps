@@ -25,7 +25,7 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                 </md-content>
             </md-tab>
-            <md-tab label="SQL (Admin)" ng-if="d.dataMain.users.current.data.role === 'Admin'">
+            <md-tab label="SQL" ng-if="d.dataMain.users.current.data.role === 'Admin'">
                 <md-content class="md-padding">
                     <h1 class="md-display-2" style="color:#424242">SQL-Abfrage</h1>
                     <h3 class="md-subhead" style="margin-top: -20px; color:#3F51B5">Datenexport: {{d.dataMain.apps.current.name}}</h3>
@@ -111,6 +111,7 @@ include(../lib/html/optinomic/page/start.m4)
             </md-tab>
         </md-tabs>
     </md-card-content>
+    <md-divider></md-divider>
     <md-card-actions layout="row " layout-align="end center">
         <md-button class="md-accent " ng-click="d.functions.runExportSQL()">Ausführen</md-button>
     </md-card-actions>
