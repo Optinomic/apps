@@ -45,8 +45,28 @@ host = default
 include(survey_markups/protokoll_abend.html)
 
 
+[survey]
+id = protokoll_morgen
+type = ng
+responsibility = patient_via_email
+name = Schlaftagebuch: Morgenprotokoll
+host = default
 
-[event activation]
+[survey_markup protokoll_morgen]
+include(survey_markups/protokoll_morgen.html)
+
+
+
+[event morgen]
+type = daily
+time = 07:00
+due_after = 86400
+overdue = ignore
+description = Schlaftagebuch: Morgenprotokoll
+survey = protokoll_morgen
+
+
+[event abend]
 type = daily
 time = 22:00
 due_after = 86400
