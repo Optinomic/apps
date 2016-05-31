@@ -1,0 +1,282 @@
+<div ng-init="result.current_item = 0">
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex-gt-sm="66" layout="column">
+            <div ng-hide="thankyou">
+                <md-card ng-if="result.current_item === 0">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-display-1" style="color:#3F51B5">Schlaftagebuch</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Morgenprotokoll: Nach dem Aufstehen.</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p class="md-body-1">Das Schlafprotokoll stellt eine wichtige Informationsquelle dar, um Ihre Schlafstörung genau diagnostizieren und behandeln zu können. Wir möchten Sie daher bitten diese Protokollbögen regelmäßig, vollständig und sorgfältig zu bearbeiten. Dafür brauchen Sie nur wenige Minuten am Abend und am darauffolgenden Morgen.</p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="result.current_item = result.current_item + 1">Start</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 1">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wie frisch/müde fühlen Sie sich jetzt?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Beurteilen Sie</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.schlaf_morgen_01 = result.schlaf_morgen_01 === undefined ? 3 : result.schlaf_morgen_01" ng-model="result.schlaf_morgen_01" step="1" min="1" max="6" aria-label="schlaf_morgen_{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.schlaf_morgen_01}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Sehr frisch
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: frisch
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: befriedigend erfrischt
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: ziemlich müde
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: müde
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_01 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_01 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: sehr müde
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 2">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wie ist Ihre aktuelle Stimmung?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Beurteilen Sie ihre jetzige Stimmung.</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-slider flex class="md-primary" md-discrete ng-init="result.schlaf_morgen_02 = result.schlaf_morgen_02 === undefined ? 3 : result.schlaf_morgen_02" ng-model="result.schlaf_morgen_02" step="1" min="1" max="6" aria-label="schlaf_morgen_{{result.current_item}}">
+                        </md-slider>
+                        <p class="md-caption" style="color:#9E9E9E">Legende: {{result.schlaf_morgen_02}}</p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 1" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 1" style="color:#4CAF50; font-size:24px;">✓</span> 1: Sehr gut
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 2" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 2" style="color:#4CAF50; font-size:24px;">✓</span> 2: gut
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 3" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 3" style="color:#4CAF50; font-size:24px;">✓</span> 3: befriedigend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 4" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 4" style="color:#4CAF50; font-size:24px;">✓</span> 4: ausreichend
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 5" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 5" style="color:#4CAF50; font-size:24px;">✓</span> 5: schlecht
+                            </a>
+                        </p>
+                        <p class="md-body-1">
+                            <a ng-click="result.schlaf_morgen_02 = 6" href="" style="color:#212121; text-decoration: none;">
+                                <span ng-if="result.schlaf_morgen_02 === 6" style="color:#4CAF50; font-size:24px;">✓</span> 6: sehr schlecht
+                            </a>
+                        </p>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 3">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wann haben Sie gestern das Licht ausgemacht?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Falls ja: Wann und wie lange.</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div layout-margin>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Lichter löschen um (HH:MM)</label>
+                                <input name="schlaf_tag_start" ng-model="result.schlaf_morgen_03" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/" />
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 4">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Waren Sie nachts wach? </span>
+                            <span class="md-subhead" style="color:#9E9E9E">Falls ja: Wie oft? Wie lange insgesamt?</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div>
+                            <md-switch ng-model="result.schlaf_morgen_04_01" aria-label="Date Filter">
+                                <span ng-if="result.schlaf_morgen_04_01">Ich bin aufgewacht.</span>
+                                <span ng-if="!result.schlaf_morgen_04_01">Ich habe durchgeschlafen.</span>
+                            </md-switch>
+                        </div>
+                        <div ng-if="result.schlaf_morgen_04_01">
+                            <md-input-container ng-if="result.schlaf_morgen_04_01" class="md-block" flex-gt-sm>
+                                <label>Wie oft? (Anzahl)</label>
+                                <input name="wach_anzahl" ng-model="result.schlaf_morgen_04_02" ng-pattern="/^[0-9]{1,2}$/" />
+                            </md-input-container>
+                            <md-input-container ng-if="result.schlaf_morgen_04_02" class="md-block" flex-gt-sm>
+                                <label>Wie lange insgesamt? (Min) </label>
+                                <input name="wach_zeit" ng-model="result.schlaf_morgen_04_03" />
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 5">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wann sind Sie endgültig aufgewacht?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Zeit</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div layout-margin>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Aufgewacht um (HH:MM)</label>
+                                <input name="schlaf_tag_start" ng-model="result.schlaf_morgen_05" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/" />
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 6">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wie lange haben Sie insgesamt geschlafen?</span>
+                            <span class="md-subhead" style="color:#9E9E9E"> Schlafdauer.</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Schlafdauer (Angabe in Stunden:Minuten | HH:MM)</label>
+                            <input name="schlaf_tag_start" ng-model="result.schlaf_morgen_06" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/" />
+                        </md-input-container>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 7">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Wann sind Sie endgültig aufgestanden? </span>
+                            <span class="md-subhead" style="color:#9E9E9E">Zeit</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div layout-margin>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Aufgewacht um (HH:MM)</label>
+                                <input name="schlaf_tag_start" ng-model="result.schlaf_morgen_07" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/" />
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="result.current_item = result.current_item + 1">Weiter</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card ng-if="result.current_item === 8">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline" style="color:#3F51B5">{{result.current_item}}.) Haben Sie seit gestern Abend Medikamente zum Schlafen genommen?</span>
+                            <span class="md-subhead" style="color:#9E9E9E">Schlafmedikation</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <div>
+                            <md-switch ng-model="result.schlaf_morgen_08_01" aria-label="Medikation">
+                                <span ng-if="result.schlaf_morgen_08_01">Ich habe folgende Medikation eingenommen:</span>
+                                <span ng-if="!result.schlaf_morgen_08_01">Ich habe keine Medikation eingenommen.</span>
+                            </md-switch>
+                        </div>
+                        <div ng-if="result.schlaf_morgen_08_01" layout-margin style="margin-top:24px;">
+                            <md-input-container ng-if="result.schlaf_morgen_08_01" class="md-block" flex-gt-sm>
+                                <label>Präperat</label>
+                                <input name="medikation_name" ng-model="result.schlaf_morgen_08_02" />
+                            </md-input-container>
+                            <md-input-container ng-if="result.schlaf_morgen_08_01" class="md-block" flex-gt-sm>
+                                <label>Dosis</label>
+                                <input name="medikation_dosis" ng-model="result.schlaf_morgen_08_03" />
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Uhrzeit (HH:MM)</label>
+                                <input name="medikation_einnahme" ng-model="result.schlaf_morgen_08_04" ng-pattern="/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/" />
+                            </md-input-container>
+                        </div>
+                    </md-card-content>
+                    <md-divider></md-divider>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <p class="md-caption">{{result.current_item}} von 8 &nbsp;&nbsp;</p>
+                        <md-button ng-click="result.current_item = result.current_item - 1">Zurück</md-button>
+                        <md-button ng-click="saveresult()">Speichern</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div ng-show="thankyou">
+                <h1 show-xs show-sm class="md-display-2">Herzlichen Dank</h1>
+                <h1 show-gt-sm class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Gute Nacht.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
