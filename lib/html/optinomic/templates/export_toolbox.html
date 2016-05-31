@@ -9,7 +9,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.sql_box.query" ng-init="" aria-label="Abfragen">
                         <md-option ng-repeat="item in d.sql_box.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
                     </md-select>
-                    <div layout="row" layout-align="space-between center">
+                    <div layout="row" layout-align="space-between center" layout-margin>
                         <div>
                             <md-switch ng-model="d.sql_box.DateFilter" aria-label="Date Filter">
                                 <span ng-if="d.sql_box.DateFilter">Datumsfilter</span>
