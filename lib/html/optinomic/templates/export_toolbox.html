@@ -9,6 +9,20 @@ include(../lib/html/optinomic/page/start.m4)
                     <md-select class="flow-text" md-on-close="d.export_obj.have_data = false" ng-model="d.sql_box.query" ng-init="" aria-label="Abfragen">
                         <md-option ng-repeat="item in d.sql_box.packages track by $index" value="{{item.sql}}">{{item.name}}</md-option>
                     </md-select>
+                    <div layout="row" layout-align="space-between center">
+                        <div>
+                            <md-switch ng-model="d.sql_box.DateFilter" aria-label="Date Filter">
+                                <span ng-if="d.sql_box.DateFilter">Datumsfilter</span>
+                                <span ng-if="!d.sql_box.DateFilter">Alle Einträge</span>
+                            </md-switch>
+                        </div>
+                        <div ng-if="d.sql_box.DateFilter">
+                            <md-datepicker ng-model="d.sql_box.DateFilterFromDate" md-placeholder="Von | From"></md-datepicker>
+                        </div>
+                        <div ng-if="d.sql_box.DateFilter">
+                            <md-datepicker ng-model="d.sql_box.DateFilterToDate" md-placeholder="Bis | To"></md-datepicker>
+                        </div>
+                    </div>
                 </md-content>
             </md-tab>
             <md-tab label="SQL (Admin)" ng-if="d.dataMain.users.current.data.role === 'Admin'">
