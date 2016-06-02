@@ -59,7 +59,7 @@ include(survey_markups/protokoll_morgen.html)
 
 [event morgen]
 type = daily
-time = 07:00
+time = 06:00
 due_after = 86400
 overdue = ignore
 description = Schlaftagebuch: Morgenprotokoll
@@ -68,7 +68,7 @@ survey = protokoll_morgen
 
 [event abend]
 type = daily
-time = 22:00
+time = 21:30
 due_after = 86400
 overdue = ignore
 description = Schlaftagebuch: Abendprotokoll
@@ -81,6 +81,3 @@ include(emails/new_event.html)
 [email overdue html]
 include(emails/overdue.html)
 
-
-[calculation aus_calculation javascript]
-include(calculations/aus.js)

@@ -26,10 +26,7 @@ function main(responses) {
             var d = {};
             var result = response.data.response;
 
-            // Depression
-            d.autoritarismuss_scale_score_sum = result.aus_item_01 + result.aus_item_03 + result.aus_item_03 + result.aus_item_04 + result.aus_item_05 + result.aus_item_06 + result.aus_item_07;
-            d.autoritarismuss_scale_score = calc.round(d.autoritarismuss_scale_score_sum / 7);
-
+            d.full = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff here
