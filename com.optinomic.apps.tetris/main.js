@@ -191,6 +191,8 @@
 
     function keydown(ev) {
         var handled = false;
+        console.log('keydown', ev.keyCode);
+
         if (playing) {
             switch (ev.keyCode) {
                 case KEY.LEFT:
@@ -305,10 +307,10 @@
                 setVisualScore(vscore + 1);
             }
 
-            console.log('update - 1', actions);
-            actions = actions.splice(0, 1);
-            handle(actions);
-            console.log('update - 2', actions);
+            //console.log('update - 1', actions);
+            // actions = actions.splice(0, 1);
+            handle(actions.splice(0, 1));
+            //console.log('update - 2', actions);
 
 
             dt = dt + idt;
