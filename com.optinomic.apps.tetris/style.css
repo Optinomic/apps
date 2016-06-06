@@ -7,9 +7,7 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-#tetris {
-    min-height: 800px !important;
-}
+#tetris {}
 
 #stats {
     display: inline-block;
@@ -43,7 +41,7 @@ body {
 #upcoming {
     display: block;
     margin: 0 auto;
-    background-color: #E0E0E0;
+    background-color: #F5F5F5;
 }
 
 #score {
