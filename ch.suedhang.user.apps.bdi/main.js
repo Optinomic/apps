@@ -21,24 +21,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
-        $scope.d.haveData = false;
+        $scope.d.haveData = true;
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-            // Check if we have survey_responses @ data.
-            if (data.survey_responses.length !== 0) {
-                console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
-                $scope.d.haveData = true;
 
+            // Run App-Functions:
+            $scope.bdi_init();
+            $scope.setExport();
 
-                // Run App-Functions:
-                $scope.bdi_init();
-                $scope.setExport();
-
-            };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
