@@ -119,5 +119,5 @@ function main(responses) {
 
 
     // Return
-    return calc.getResults(responses);
+    return responses;
 }
