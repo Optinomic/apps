@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions:
             $scope.bdi_init();
-            $scope.setExport();
 
 
             // Run Public-Functions:
@@ -452,35 +451,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-
-    // -------------------
-    // Data-Export
-    // -------------------
-    $scope.setExport = function() {
-
-
-        // ------------------------------------------------
-        // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
-        // => (export.sql) muss sich in /includes befinden
-        // ------------------------------------------------
-
-
-        // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var module_packages = [];
-        var data_query = {};
-
-        data_query = {
-            name: 'BDI-II',
-            sql: include_as_js_string(
-                export.sql)
-        };
-        module_packages.push(data_query);
-
-        // Init the given Export Settings
-        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-    };
 
 
 });
