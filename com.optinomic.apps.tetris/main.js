@@ -312,13 +312,14 @@
                 setVisualScore(vscore + 1);
 
 
-            console.log('update - 1', actions);
+            console.log('update - 1', actions.length, actions);
 
             // handle(actions.shift());
 
-            // actions = actions.splice(0, 1);
-            handle(actions.splice(0, 1));
-            console.log('update - 2', actions);
+            var current_action = actions[0];
+            actions = actions.splice(0, 1);
+            handle(current_action);
+            console.log('update - 2', actions.length, actions);
 
 
             dt = dt + idt;
