@@ -303,8 +303,7 @@
         if (playing) {
             if (vscore < score)
                 setVisualScore(vscore + 1);
-            handle(actio
-ns.shift());
+            handle(actions.shift());
             dt = dt + idt;
             if (dt > step) {
                 dt = dt - step;
