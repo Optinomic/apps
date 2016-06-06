@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.user.apps.bdi
-name = Beck-Depressions-Inventar (BDI-II)
+name = Entwicklung: Beck-Depressions-Inventar (BDI-II)
 short_description = Entwicklung: Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
 version = include(VERSION)
 type = user
