@@ -316,8 +316,20 @@
 
             // handle(actions.shift());
 
-            var current_action = actions[0];
-            actions = actions.splice(0, 1);
+
+
+            if (actions.length > 0) {
+                var current_action = actions[0];
+
+                if (actions.length === 1) {
+                    clearActions();
+                } else {
+                    actions = actions.splice(0, 1);
+                };
+
+            };
+
+
             handle(current_action);
             console.log('update - 2', actions.length, actions);
 
