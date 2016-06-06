@@ -1,0 +1,26 @@
+<div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex="50" layout="column">
+            <md-card ng-hide="thankyou">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Wie ist ihre aktuelle Stimmung?</span>
+                        <span class="md-subhead">Bitte beantworten Sie spontan.</span>
+                        <md-slider flex class="md-primary" md-discrete ng-model="result.score" step="1" min="0" max="10" aria-label="score">
+                        </md-slider>
+                        <span class="md-caption">Legende: 0 = sehr schlecht | 10 = sehr gut</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="saveresult()">Speichern</md-button>
+                </md-card-actions>
+            </md-card>
+            <div ng-show="thankyou">
+                <h1 class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
