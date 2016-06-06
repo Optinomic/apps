@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Tetris ist ein puzzleartiges Computerspiel des russischen Programmierers Alexei Paschitnow, der die erste spielbare Version am 6. Juni 1984 auf einem Elektronika-60-Rechner fertigstellte.
+Tetris ist ein puzzleartiges Computerspiel des russischen Programmierers Alexei Paschitnow, der die erste spielbare Version am 6. Juni 1984 auf einem Elektronika-60-Rechner fertigstellte. Ziel dieser Optinomic-App ist die Kognition des Patienten zu erfassen. Anzahl Versuche im Vergleich zum Score.  Aktuell lediglich eine 'spielbare' Tetris-Version.
 
 [developer]
 first_name = Beat
