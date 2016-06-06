@@ -17,9 +17,8 @@ body {
 #canvas {
     display: inline-block;
     vertical-align: top;
-    background-color: #F3E5F5;
-    box-shadow: 3px 3px 3px #4A148C;
-    border: 1px solid #4A148C;
+    background-color: #673AB7;
+    border: 1px solid #5E35B1;
 }
 
 #menu {
