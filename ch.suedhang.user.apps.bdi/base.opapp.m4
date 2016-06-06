@@ -42,36 +42,6 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
-[survey]
-id = bdi2
-type = lime
-responsibility = lead_therapist
-name = Beck-Depressions-Inventar (BDI-II)
-host = default
-survey_id = 786887
-hash = X31X392
-pid = X31X393
-fid = X31X394
-min_lastpage = 3
-min_questions =
 
-
-
-[event activation]
-type = on_activation
-time = 12:00
-due_after = 259200
-overdue = ignore
-description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
-survey = bdi2
-
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
-
-
-[calculation bdi_score javascript]
+[calculation bdi_score javascript ch.suedhang.user.apps.bdi]
 include(calculations/bdi_score.js)
