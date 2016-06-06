@@ -191,29 +191,34 @@
 
     function keydown(ev) {
         var handled = false;
-        console.log('keydown', ev.keyCode);
+        //console.log('keydown', ev.keyCode);
 
         if (playing) {
             switch (ev.keyCode) {
                 case KEY.LEFT:
                     actions.push(DIR.LEFT);
                     handled = true;
+                    console.log('keydown: LEFT');
                     break;
                 case KEY.RIGHT:
                     actions.push(DIR.RIGHT);
                     handled = true;
+                    console.log('keydown: RIGHT');
                     break;
                 case KEY.UP:
                     actions.push(DIR.UP);
                     handled = true;
+                    console.log('keydown: UP');
                     break;
                 case KEY.DOWN:
                     actions.push(DIR.DOWN);
                     handled = true;
+                    console.log('keydown: DOWN');
                     break;
                 case KEY.ESC:
                     lose();
                     handled = true;
+                    console.log('keydown: ESC');
                     break;
             }
         } else if (ev.keyCode == KEY.SPACE) {
