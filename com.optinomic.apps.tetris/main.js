@@ -304,7 +304,9 @@
             if (vscore < score) {
                 setVisualScore(vscore + 1);
             }
-            //handle(actions.shift());
+
+            var current_action = actions.shift();
+            handle(current_action);
             dt = dt + idt;
             if (dt > step) {
                 dt = dt - step;
