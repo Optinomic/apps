@@ -1,96 +1,32 @@
 [module]
-
-id = com.optinomic.apps.example
-name = Example with Makefile
-short_description = An example app
+id = com.optinomic.apps.tetris
+name = Tetris
+short_description = Puzzleartiges Computerspiel.
 version = include(VERSION)
 type = patient
 
 [description]
-
-Just a silly module doing nothing. This is just an example - to show how Optinomic-Apps can be built.
+Tetris ist ein puzzleartiges Computerspiel des russischen Programmierers Alexei Paschitnow, der die erste spielbare Version am 6. Juni 1984 auf einem Elektronika-60-Rechner fertigstellte.
 
 [developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
 
-first_name = Tom
-last_name = Feron
-github_user = thoferon
-email = tho.feron@gmail.com
-company = Optinomic
-phone = +44 207 568789
-website = http://www.optinomic.com
 
 [dependencies]
 
-[template show_token]
+[template tetris]
+include(templates/tetris.html)
 
-include(templates/show_token.html)
-
-[pdf_template show_items for_pdf_template]
-
-include(pdf_templates/show_items.tex)
 
 [javascript]
-
 include(main.js)
 
 [css]
-
 include(style.css)
 
-
-[survey]
-
-id = my_survey
-type = lime
-responsibility = lead_therapist
-name = Craving - Test
-host = default
-survey_id = 368847
-hash = X1X1
-pid = X1X2
-fid = X1X3
-min_questions =
-min_lastpage = 2
-
-
-[survey]
-
-id = my_ng_survey
-type = ng
-responsibility = lead_therapist
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-
-include(survey_markups/my_ng_survey.html)
-
-[event daily]
-
-type = daily
-time = 13:00
-due_after = 86400
-overdue = ignore
-description = A daily reminder to disable this example module
-survey = my_survey
-
-[email new_event plain]
-
-include(emails/new_event.plain)
-
-[email overdue html]
-
-include(emails/overdue.html)
-
-[calculation for_pdf_template javascript]
-
-include(calculations/for_pdf_template.js)
-
-[calculation my_calculation lua]
-
-include(calculations/my_calculation.lua)
-
-[calculation another_calculation javascript]
-
-include(calculations/another_calculation.js)
