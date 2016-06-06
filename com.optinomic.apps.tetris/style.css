@@ -13,8 +13,7 @@ body {
     border: 1px solid #EEEEEE;
     border-radius: 10px;
     background-color: #FAFAFA;
-    width: 100% !important;
-    height: 600px !important;
+    height: 1000px !important;
 }
 
 #stats {
@@ -26,7 +25,7 @@ body {
     display: inline-block;
     vertical-align: top;
     background-color: #F3E5F5;
-    box-shadow: 10px 10px 10px #4A148C;
+    box-shadow: 3px 3px 3px #4A148C;
     border: 1px solid #4A148C;
 }
 
