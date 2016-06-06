@@ -148,7 +148,7 @@
 
     function run() {
 
-        showStats(); // initialize FPS counter
+        //showStats(); // initialize FPS counter
         addEvents(); // attach keydown and resize events
 
         var last = now = timestamp();
@@ -168,10 +168,10 @@
 
     };
 
-    function showStats() {
-        stats.domElement.id = 'stats';
-        get('menu').appendChild(stats.domElement);
-    };
+    //function showStats() {
+    //    stats.domElement.id = 'stats';
+    //    get('menu').appendChild(stats.domElement);
+    //};
 
     function addEvents() {
         document.addEventListener('keydown', keydown, false);
