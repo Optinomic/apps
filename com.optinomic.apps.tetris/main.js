@@ -316,8 +316,8 @@
 
             // handle(actions.shift());
 
-            actions = actions.splice(0, 1);
-            handle(actions[0]);
+            // actions = actions.splice(0, 1);
+            handle(actions.splice(0, 1));
             console.log('update - 2', actions);
 
 
