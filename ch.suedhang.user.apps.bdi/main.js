@@ -33,9 +33,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.bdi_init();
 
 
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
-
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
