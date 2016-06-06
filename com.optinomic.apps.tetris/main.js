@@ -348,19 +348,19 @@
         switch (action) {
             case DIR.LEFT:
                 move(DIR.LEFT);
-                console.log('handle: LEFT');
+                //console.log('handle: LEFT');
                 break;
             case DIR.RIGHT:
                 move(DIR.RIGHT);
-                console.log('handle: RIGHT');
+                //console.log('handle: RIGHT');
                 break;
             case DIR.UP:
                 rotate();
-                console.log('handle: UP');
+                //console.log('handle: UP');
                 break;
             case DIR.DOWN:
                 drop();
-                console.log('handle: DOWN');
+                //console.log('handle: DOWN');
                 break;
         }
     };
