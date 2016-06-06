@@ -198,27 +198,27 @@
                 case KEY.LEFT:
                     actions.push(DIR.LEFT);
                     handled = true;
-                    console.log('keydown: LEFT');
+                    //console.log('keydown: LEFT');
                     break;
                 case KEY.RIGHT:
                     actions.push(DIR.RIGHT);
                     handled = true;
-                    console.log('keydown: RIGHT');
+                    //console.log('keydown: RIGHT');
                     break;
                 case KEY.UP:
                     actions.push(DIR.UP);
                     handled = true;
-                    console.log('keydown: UP');
+                    //console.log('keydown: UP');
                     break;
                 case KEY.DOWN:
                     actions.push(DIR.DOWN);
                     handled = true;
-                    console.log('keydown: DOWN');
+                    //console.log('keydown: DOWN');
                     break;
                 case KEY.ESC:
                     lose();
                     handled = true;
-                    console.log('keydown: ESC');
+                    //console.log('keydown: ESC');
                     break;
             }
         } else if (ev.keyCode == KEY.SPACE) {
@@ -308,13 +308,14 @@
 
     function update(idt) {
         if (playing) {
-            if (vscore < score) {
+            if (vscore < score)
                 setVisualScore(vscore + 1);
-            }
+
 
             //console.log('update - 1', actions);
             // actions = actions.splice(0, 1);
-            handle(actions.splice(0, 1));
+            handle(actions[0])
+            actions = actions.splice(0, 1);
             //console.log('update - 2', actions);
 
 
@@ -327,18 +328,24 @@
     };
 
     function handle(action) {
+        console.log('handle: ', action);
+
         switch (action) {
             case DIR.LEFT:
                 move(DIR.LEFT);
+                console.log('handle: LEFT');
                 break;
             case DIR.RIGHT:
                 move(DIR.RIGHT);
+                console.log('handle: RIGHT');
                 break;
             case DIR.UP:
                 rotate();
+                console.log('handle: UP');
                 break;
             case DIR.DOWN:
                 drop();
+                console.log('handle: DOWN');
                 break;
         }
     };
