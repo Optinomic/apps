@@ -157,7 +157,7 @@
             now = timestamp();
             update(Math.min(1, (now - last) / 1000.0)); // using requestAnimationFrame have to be able to handle large delta's caused when it 'hibernates' in a background or non-visible tab
             draw();
-            stats.update();
+            //stats.update();
             last = now;
             requestAnimationFrame(frame, canvas);
         }
