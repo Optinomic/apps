@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 
 [dependencies]
 
-[template tetris  6 12]
+[template tetris  6 10]
 include(templates/tetris.html)
 
 
