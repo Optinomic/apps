@@ -305,8 +305,12 @@
                 setVisualScore(vscore + 1);
             }
 
-            var current_action = actions.splice(0, 1);
-            handle(current_action);
+            console.log('update - 1', actions);
+            actions = actions.splice(0, 1);
+            handle(actions);
+            console.log('update - 2', actions);
+
+
             dt = dt + idt;
             if (dt > step) {
                 dt = dt - step;
