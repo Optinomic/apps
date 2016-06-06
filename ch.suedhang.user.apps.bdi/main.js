@@ -31,7 +31,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions:
             $scope.bdi_init();
-
+            $scope.getCalculation();
 
 
             // Finishing: Console Info & Init = done.
@@ -40,6 +40,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
     $scope.loadMainData();
+
+
+    // -----------------------------------
+    // Calculations
+    // -----------------------------------
+
+    $scope.getCalculation = function() {
+        // Get specific calculation
+        var call = dataService.getAppCalculationsUser('ch.suedhang.apps.bdi', 'bdi_score');
+
+        call.success(function(data) {
+            // Save Data to $scope.d
+            $scope.d.calculations = data;
+            console.log('(DATA): getCalculation: ', data);
+        });
+        call.error(function(data) {
+            console.log('(ERROR): getCalculation:', data);
+        });
+    };
+
 
 
     // -----------------------------------

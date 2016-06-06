@@ -41,5 +41,5 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation bdi_score javascript ch.suedhang.apps.bdi]
+[calculation bdi_scores javascript ch.suedhang.apps.bdi ch.suedhang.apps.bdi:bdi_score]
 include(calculations/bdi_score.js)
