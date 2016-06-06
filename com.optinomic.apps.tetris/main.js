@@ -301,8 +301,9 @@
 
     function update(idt) {
         if (playing) {
-            if (vscore < score)
+            if (vscore < score) {
                 setVisualScore(vscore + 1);
+            }
             handle(actions.shift());
             dt = dt + idt;
             if (dt > step) {
