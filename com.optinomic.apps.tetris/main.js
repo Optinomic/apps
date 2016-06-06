@@ -4,27 +4,29 @@
     //-------------------------------------------------------------------------
     // base helper methods
     //-------------------------------------------------------------------------
+
     function get(id) {
         return document.getElementById(id);
-    }
+    };
 
-    function hide(id) { get(id).style.visibility = 'hidden'; }
+    function hide(id) { get(id).style.visibility = 'hidden'; };
 
-    function show(id) { get(id).style.visibility = null; }
+    function show(id) { get(id).style.visibility = null; };
 
-    function html(id, html) { get(id).innerHTML = html; }
+    function html(id, html) { get(id).innerHTML = html; };
 
     function timestamp() {
         return new Date().getTime();
-    }
+    };
 
     function random(min, max) {
         return (min + (Math.random() * (max - min)));
-    }
+    };
 
     function randomChoice(choices) {
         return choices[Math.round(random(0, choices.length - 1))];
-    }
+    };
+
     if (!window.requestAnimationFrame) { // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
         window.requestAnimationFrame = window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame ||
@@ -34,9 +36,11 @@
                 window.setTimeout(callback, 1000 / 60);
             }
     }
+
     //-------------------------------------------------------------------------
     // game constants
     //-------------------------------------------------------------------------
+
     var KEY = { ESC: 27, SPACE: 32, LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40 },
         DIR = { UP: 0, RIGHT: 1, DOWN: 2, LEFT: 3, MIN: 0, MAX: 3 },
         stats = new Stats(),
@@ -48,9 +52,11 @@
         nx = 10, // width of tetris court (in blocks)
         ny = 20, // height of tetris court (in blocks)
         nu = 5; // width/height of upcoming preview (in blocks)
+
     //-------------------------------------------------------------------------
     // game variables (initialized during reset)
     //-------------------------------------------------------------------------
+
     var dx, dy, // pixel size of a single tetris block
         blocks, // 2 dimensional array (nx*ny) representing tetris court - either empty block or occupied by a 'piece'
         actions, // queue of user actions (inputs)
@@ -62,6 +68,7 @@
         vscore, // the currently displayed score (it catches up to score in small chunks - like a spinning slot machine)
         rows, // number of completed rows in the current game
         step; // how long before current piece drops by 1 row
+
     //-------------------------------------------------------------------------
     // tetris pieces
     //
@@ -77,6 +84,7 @@
     //                               0x44C0
     //
     //-------------------------------------------------------------------------
+
     var i = { size: 4, blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: '#00BCD4' };
     var j = { size: 3, blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: '#3F51B5' };
     var l = { size: 3, blocks: [0x4460, 0x0E80, 0xC440, 0x2E00], color: '#FF9800' };
@@ -84,6 +92,7 @@
     var s = { size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: '#4CAF50' };
     var t = { size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: '#9C27B0' };
     var z = { size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: '#F44336' };
+
     //------------------------------------------------
     // do the bit manipulation and iterate through each
     // occupied block (x,y) for a given piece
@@ -101,7 +110,8 @@
                 ++row;
             }
         }
-    }
+    };
+
     //-----------------------------------------------------
     // check if a piece can fit into a position in the grid
     //-----------------------------------------------------
@@ -112,11 +122,12 @@
                 result = true;
         });
         return result;
-    }
+    };
 
     function unoccupied(type, x, y, dir) {
         return !occupied(type, x, y, dir);
-    }
+    };
+
     //-----------------------------------------
     // start with 4 instances of each piece and
     // pick randomly until the 'bag is empty'
@@ -128,13 +139,18 @@
             pieces = [i, i, i, i, j, j, j, j, l, l, l, l, o, o, o, o, s, s, s, s, t, t, t, t, z, z, z, z];
         var type = pieces.splice(random(0, pieces.length - 1), 1)[0];
         return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 };
-    }
+    };
+
+
     //-------------------------------------------------------------------------
     // GAME LOOP
     //-------------------------------------------------------------------------
+
     function run() {
+
         showStats(); // initialize FPS counter
         addEvents(); // attach keydown and resize events
+
         var last = now = timestamp();
 
         function frame() {
@@ -145,20 +161,22 @@
             last = now;
             requestAnimationFrame(frame, canvas);
         }
+
         resize(); // setup all our sizing information
         reset(); // reset the per-game variables
         frame(); // start the first frame
-    }
+
+    };
 
     function showStats() {
         stats.domElement.id = 'stats';
         get('menu').appendChild(stats.domElement);
-    }
+    };
 
     function addEvents() {
         document.addEventListener('keydown', keydown, false);
         window.addEventListener('resize', resize, false);
-    }
+    };
 
     function resize(event) {
         canvas.width = canvas.clientWidth; // set canvas logical size equal to its physical size
@@ -169,7 +187,7 @@
         dy = canvas.height / ny; // (ditto)
         invalidate();
         invalidateNext();
-    }
+    };
 
     function keydown(ev) {
         var handled = false;
@@ -202,72 +220,74 @@
         }
         if (handled)
             ev.preventDefault(); // prevent arrow keys from scrolling the page (supported in IE9+ and all other browsers)
-    }
+    };
+
     //-------------------------------------------------------------------------
     // GAME LOGIC
     //-------------------------------------------------------------------------
+
     function play() {
         hide('start');
         reset();
         playing = true;
-    }
+    };
 
     function lose() {
         show('start');
         setVisualScore();
         playing = false;
-    }
+    };
 
     function setVisualScore(n) {
         vscore = n || score;
         invalidateScore();
-    }
+    };
 
     function setScore(n) {
         score = n;
         setVisualScore(n);
-    }
+    };
 
-    function addScore(n) { score = score + n; }
+    function addScore(n) { score = score + n; };
 
-    function clearScore() { setScore(0); }
+    function clearScore() { setScore(0); };
 
-    function clearRows() { setRows(0); }
+    function clearRows() { setRows(0); };
 
     function setRows(n) {
         rows = n;
         step = Math.max(speed.min, speed.start - (speed.decrement * rows));
         invalidateRows();
-    }
+    };
 
-    function addRows(n) { setRows(rows + n); }
+    function addRows(n) { setRows(rows + n); };
 
     function getBlock(x, y) {
         return (blocks && blocks[x] ? blocks[x][y] : null);
-    }
+    };
 
     function setBlock(x, y, type) {
         blocks[x] = blocks[x] || [];
         blocks[x][y] = type;
         invalidate();
-    }
+    };
 
     function clearBlocks() {
         blocks = [];
         invalidate();
     }
 
-    function clearActions() { actions = []; }
+    function clearActions() { actions = []; };
 
     function setCurrentPiece(piece) {
         current = piece || randomPiece();
         invalidate();
-    }
+    };
 
     function setNextPiece(piece) {
         next = piece || randomPiece();
         invalidateNext();
-    }
+    };
 
     function reset() {
         dt = 0;
@@ -277,20 +297,21 @@
         clearScore();
         setCurrentPiece(next);
         setNextPiece();
-    }
+    };
 
     function update(idt) {
         if (playing) {
             if (vscore < score)
                 setVisualScore(vscore + 1);
-            handle(actions.shift());
+            handle(actio
+ns.shift());
             dt = dt + idt;
             if (dt > step) {
                 dt = dt - step;
                 drop();
             }
         }
-    }
+    };
 
     function handle(action) {
         switch (action) {
@@ -307,7 +328,7 @@
                 drop();
                 break;
         }
-    }
+    };
 
     function move(dir) {
         var x = current.x,
@@ -331,15 +352,15 @@
         } else {
             return false;
         }
-    }
+    };
 
-    function rotate() {
+    function rotate(dir) {
         var newdir = (current.dir == DIR.MAX ? DIR.MIN : current.dir + 1);
         if (unoccupied(current.type, current.x, current.y, newdir)) {
             current.dir = newdir;
             invalidate();
         }
-    }
+    };
 
     function drop() {
         if (!move(DIR.DOWN)) {
@@ -353,13 +374,13 @@
                 lose();
             }
         }
-    }
+    };
 
     function dropPiece() {
         eachblock(current.type, current.x, current.y, current.dir, function(x, y) {
             setBlock(x, y, current.type);
         });
-    }
+    };
 
     function removeLines() {
         var x, y, complete, n = 0;
@@ -379,7 +400,7 @@
             addRows(n);
             addScore(100 * Math.pow(2, n - 1)); // 1: 100, 2: 200, 3: 400, 4: 800
         }
-    }
+    };
 
     function removeLine(n) {
         var x, y;
@@ -387,10 +408,12 @@
             for (x = 0; x < nx; ++x)
                 setBlock(x, y, (y == 0) ? null : getBlock(x, y - 1));
         }
-    }
+    };
+
     //-------------------------------------------------------------------------
     // RENDERING
     //-------------------------------------------------------------------------
+
     var invalid = {};
 
     function invalidate() { invalid.court = true; }
@@ -410,7 +433,7 @@
         drawScore();
         drawRows();
         ctx.restore();
-    }
+    };
 
     function drawCourt() {
         if (invalid.court) {
@@ -427,7 +450,7 @@
             ctx.strokeRect(0, 0, nx * dx - 1, ny * dy - 1); // court boundary
             invalid.court = false;
         }
-    }
+    };
 
     function drawNext() {
         if (invalid.next) {
@@ -441,39 +464,39 @@
             uctx.restore();
             invalid.next = false;
         }
-    }
+    };
 
     function drawScore() {
         if (invalid.score) {
             html('score', ("00000" + Math.floor(vscore)).slice(-5));
             invalid.score = false;
         }
-    }
+    };
 
     function drawRows() {
         if (invalid.rows) {
             html('rows', rows);
             invalid.rows = false;
         }
-    }
+    };
 
     function drawPiece(ctx, type, x, y, dir) {
         eachblock(type, x, y, dir, function(x, y) {
             drawBlock(ctx, x, y, type.color);
         });
-    }
+    };
 
     function drawBlock(ctx, x, y, color) {
         ctx.fillStyle = color;
         ctx.fillRect(x * dx, y * dy, dx, dy);
         ctx.strokeRect(x * dx, y * dy, dx, dy)
-    }
+    };
+
     //-------------------------------------------------------------------------
     // FINALLY, lets run the game
     //-------------------------------------------------------------------------
+
     run();
-
-
 
 
 })();
