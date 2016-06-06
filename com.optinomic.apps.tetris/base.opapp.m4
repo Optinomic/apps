@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 
 [dependencies]
 
-[template tetris]
+[template tetris  6 12]
 include(templates/tetris.html)
 
 
@@ -28,5 +28,6 @@ include(templates/tetris.html)
 include(main.js)
 
 [css]
+include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
