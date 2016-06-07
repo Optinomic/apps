@@ -469,7 +469,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var event_id = current_response.response.data.event_id;
                 var pid = current_response.full_responses.patient.id;
 
-                console.log('score: ', score);
+                //console.log('score: ', score);
                 if (score !== null) {
 
                     var details_obj = {
@@ -515,13 +515,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var isPIDinGroup = false;
 
         patients_array.forEach(function(current_patient, Index) {
-            if (current_patient.pid === search_pid) {
+            if (current_patient.id === search_pid) {
                 isPIDinGroup = true;
+                console.log('(YES) isPIDinGroup', search_pid);
             };
         });
 
         return isPIDinGroup;
     };
+
 
     $scope.getPatientGroupScores = function() {
 
@@ -563,7 +565,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save to $scope
         $scope.d.bdi_scores.patient_groups = pg;
-
     };
 
 
