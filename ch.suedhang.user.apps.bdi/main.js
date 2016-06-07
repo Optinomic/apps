@@ -517,7 +517,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         patients_array.forEach(function(current_patient, Index) {
             if (current_patient.id === search_pid) {
                 isPIDinGroup = true;
-                console.log('(YES) isPIDinGroup', search_pid);
+                //console.log('(YES) isPIDinGroup', search_pid);
             };
         });
 
