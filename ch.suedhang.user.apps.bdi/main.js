@@ -475,10 +475,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         "score": parseInt(score),
                         "event_id": event_id,
                         "filled_datestamp": filled,
-                        "filled_date": $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-                        "filled_time": $filter("amDateFormat")(date, 'HH:mm'),
-                        "filled_year": $filter("amDateFormat")(date, 'YYYY'),
-                        "filled_week": $filter("amDateFormat")(date, 'YYYY, ww')
+                        "filled_date": $filter("amDateFormat")(filled, 'DD.MM.YYYY'),
+                        "filled_time": $filter("amDateFormat")(filled, 'HH:mm'),
+                        "filled_year": $filter("amDateFormat")(filled, 'YYYY'),
+                        "filled_week": $filter("amDateFormat")(filled, 'YYYY, ww')
                     };
 
                     scores.push(parseInt(score));
