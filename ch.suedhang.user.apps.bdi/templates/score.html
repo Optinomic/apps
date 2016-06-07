@@ -10,7 +10,10 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
-            <h3 class="md-subhead">In Entwicklung</h3>
+            <h3 class="md-title">In Entwicklung</h3>
+            <h3 class="md-subhead">Scores</h3>
+            <pre>{{d.bdi_scores | json}}</pre>
+            <h3 class="md-subhead">Calculation Data</h3>
             <pre>{{d.dataMain.calculations[0].calculation_results | json}}</pre>
         </md-card-content>
         <md-divider></md-divider>

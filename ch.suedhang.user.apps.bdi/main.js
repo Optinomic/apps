@@ -454,32 +454,54 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var patients = []
         var all_scores = []
+        var all_scores_details = []
         var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
 
         all_results.forEach(function(current_result, myResultIndex) {
 
             var scores = [];
+            var scores_details = [];
             var all_responses = current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
 
             all_responses.forEach(function(current_response, myResponseIndex) {
                 var score = current_response.score.score;
+                var filled = current_response.response.data.filled;
+                var event_id = current_response.response.data.event_id;
+
                 console.log('score: ', score);
                 if (score !== null) {
+
+                    var details_obj = {
+                        "score": parseInt(score),
+                        "event_id": event_id,
+                        "filled_datestamp": filled,
+                        "filled_date": $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+                        "filled_time": $filter("amDateFormat")(date, 'HH:mm'),
+                        "filled_year": $filter("amDateFormat")(date, 'YYYY'),
+                        "filled_week": $filter("amDateFormat")(date, 'YYYY, ww')
+                    };
+
                     scores.push(parseInt(score));
+                    scores_details.push(details_obj);
                     all_scores.push(parseInt(score));
+                    all_scores_details.push(details_obj);
                 };
             });
 
             var data_model = {
                 "patient": current_result.patient,
-                "scores": scores
+                "scores": scores,
+                "scores_details": scores
             };
 
             patients.push(data_model);
         });
 
         $scope.d.bdi_scores.patients = patients;
-        $scope.d.bdi_scores.all_scores = all_scores;
+        $scope.d.bdi_scores.all_scores = {
+            "scores": all_scores,
+            "scores_details": all_scores_details
+        };
     };
 
 
