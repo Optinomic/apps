@@ -509,6 +509,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.getPatientGroupScores();
     };
 
+
+    $scope.isPIDinGroup = function(patients_array, search_pid) {
+
+        var isPIDinGroup = false;
+
+        patients_array.forEach(function(current_patient, Index) {
+            if (current_patient.pid === search_pid) {
+                isPIDinGroup = true;
+            };
+        });
+
+        return isPIDinGroup;
+    };
+
     $scope.getPatientGroupScores = function() {
 
         var pg = [];
@@ -523,13 +537,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
 
                 var response_pid = current_patient_response.patient.id;
-
-                // I guess I have to loop here!
-                //var inside_group = current_pg.patients.id.indexOf(response_pid);
-                var inside_group = 0;
+                var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
 
                 // If YES:  concat()  Arrays.
-                if (inside_group !== -1) {
+                if (inside_group) {
                     scores = scores.concat(current_patient_response.scores);
                     scores_details = scores_details.concat(current_patient_response.scores_details);
                 };
