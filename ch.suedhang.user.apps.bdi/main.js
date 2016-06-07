@@ -462,7 +462,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var data_model = {
                 "patient": current_result.patient,
-                "scores": current_result.other_calculations.ch['suedhang.apps.bdi:bdi_score']
+                "scores": current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
             };
 
             patients.push(data_model);
