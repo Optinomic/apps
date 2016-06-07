@@ -443,9 +443,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "item": "Ich habe das Interesse an Sexualität völlig verloren"
             }]
         }];
-
-
-
     };
 
 
@@ -456,6 +453,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get all BDI-Scores from a Patient and arrange it in a Array
 
         var patients = []
+        var all_scores = []
         var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
 
         all_results.forEach(function(current_result, myResultIndex) {
@@ -468,6 +466,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 console.log('score: ', score);
                 if (score !== null) {
                     scores.push(parseInt(score));
+                    all_scores.push(parseInt(score));
                 };
             });
 
@@ -480,7 +479,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         $scope.d.bdi_scores.patients = patients;
+        $scope.d.bdi_scores.all_scores = all_scores;
     };
+
+
 
     // -------------------
     // Navigation
