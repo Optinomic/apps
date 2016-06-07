@@ -491,7 +491,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var data_model = {
                 "patient": current_result.patient,
                 "scores": scores,
-                "scores_details": scores
+                "scores_details": scores_details
             };
 
             patients.push(data_model);
