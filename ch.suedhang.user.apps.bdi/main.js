@@ -467,6 +467,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var score = current_response.score.score;
                 var filled = current_response.response.data.filled;
                 var event_id = current_response.response.data.event_id;
+                var pid = current_response.full_responses.patient.id;
 
                 console.log('score: ', score);
                 if (score !== null) {
@@ -474,6 +475,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var details_obj = {
                         "score": parseInt(score),
                         "event_id": event_id,
+                        "patient_id": pid,
                         "filled_datestamp": filled,
                         "filled_date": $filter("amDateFormat")(filled, 'DD.MM.YYYY'),
                         "filled_time": $filter("amDateFormat")(filled, 'HH:mm'),
