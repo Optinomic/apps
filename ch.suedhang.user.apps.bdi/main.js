@@ -464,9 +464,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
 
             all_responses.forEach(function(current_response, myResponseIndex) {
-                var score = parseInt(current_response.score.score);
-                if ((score !== null) || (score !== NaN)) {
-                    scores.push(score)
+                var score = current_response.score.score;
+                if ((score !== null) || (score !== NaN) || (score !== undefined)) {
+                    scores.push(parseInt(score));
                 };
             });
 
