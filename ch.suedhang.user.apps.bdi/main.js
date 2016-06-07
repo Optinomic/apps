@@ -465,7 +465,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             all_responses.forEach(function(current_response, myResponseIndex) {
                 var score = current_response.score.score;
-                if ((score !== null) || (score !== NaN) || (score !== undefined)) {
+                console.log('score: ', score);
+                if (score !== null) {
                     scores.push(parseInt(score));
                 };
             });
