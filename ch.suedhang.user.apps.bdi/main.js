@@ -523,7 +523,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
 
                 var response_pid = current_patient_response.patient.id;
-                var inside_group = current_pg.patients.id.indexOf(response_pid);
+
+                // I guess I have to loop here!
+                //var inside_group = current_pg.patients.id.indexOf(response_pid);
+                var inside_group = 0;
 
                 // If YES:  concat()  Arrays.
                 if (inside_group !== -1) {
