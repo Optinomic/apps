@@ -519,19 +519,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var scores = [];
             var scores_details = [];
 
-
             // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
             $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
+
+                var response_pid = current_patient_response.patient.id;
+                var inside_group = current_pg.patients.id.indexOf(response_pid);
+
                 // If YES:  concat()  Arrays.
+                if (inside_group !== -1) {
+                    scores = scores.concat(current_patient_response.scores);
+                    scores_details = scores_details.concat(current_patient_response.scores_details);
+                };
 
             });
-
 
             var data_model = {
                 "group": {
                     "id": current_pg.id,
-                    "data": current_pg.data,
-                    "patients": current_pg.patients
+                    "data": current_pg.data
+                        //,
+                        //"patients": current_pg.patients
                 },
                 "scores": scores,
                 "scores_details": scores_details
