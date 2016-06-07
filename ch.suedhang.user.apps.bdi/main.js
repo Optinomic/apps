@@ -465,7 +465,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             all_responses.forEach(function(current_response, myResponseIndex) {
                 var score = parseInt(current_response.score.score);
-                if (score !== null) {
+                if (score) {
                     scores.push(score)
                 };
             });
