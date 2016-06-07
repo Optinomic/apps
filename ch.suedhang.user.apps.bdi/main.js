@@ -48,7 +48,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getCalculation = function() {
         // Get specific calculation
-        var call = dataService.getAppCalculationsUser('ch.suedhang.apps.bdi', 'bdi_score');
+        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.bdi', 'bdi_score');
 
         call.success(function(data) {
             // Save Data to $scope.d
