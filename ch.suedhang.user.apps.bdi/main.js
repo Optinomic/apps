@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions:
             $scope.bdi_init();
+            $scope.getPatientScores();
             $scope.getCalculation();
 
 
@@ -47,13 +48,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.getCalculation = function() {
-        // Get specific calculation
+        // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
         var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.bdi', 'bdi_scores');
 
         call.success(function(data) {
             // Save Data to $scope.d
             $scope.d.calculations = data;
-            console.log('(DATA): getCalculation: ', data);
+            //console.log('(DATA): getCalculation: ', data);
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
@@ -62,23 +63,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    // -----------------------------------
-    // Navigation
-    // -----------------------------------
 
-    $scope.d.navigator = 0;
-
-    $scope.setCurrentResultDate = function() {
-        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
-
-        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
-            'filled_datestamp': date,
-            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
-        };
-
-        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
-    };
 
 
     // -------------------
@@ -87,8 +72,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.bdi_init = function() {
 
 
+        $scope.d.bdi_scores = {};
+
+
+        $scope.d.bdi = {};
+
+
         // Ranges initialisieren
-        $scope.scale_ranges = {
+        $scope.d.bdi.scale_ranges = {
             "ranges": [{
                 "from": 0,
                 "to": 8,
@@ -118,7 +109,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        $scope.d.bdi_fragen = [{
+        $scope.d.bdi.bdi_fragen = [{
             "name": "1. Traurigkeit",
             "answers": [{
                 "code": "0",
@@ -452,8 +443,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "item": "Ich habe das Interesse an Sexualität völlig verloren"
             }]
         }];
+
+
+
     };
 
+
+    // -------------------
+    // Data
+    // -------------------
+    $scope.getPatientScores = function() {
+        // Get all BDI-Scores from a Patient and arrange it in a Array
+
+        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
+        var patients = []
+
+        all_results.forEach(function(current_result, myResultIndex) {
+
+            var data_model = {
+                "patient": current_result.patient,
+                "scores": current_result.other_calculations.ch['suedhang.apps.bdi:bdi_score']
+            };
+
+            patients.push(data_model);
+        });
+
+
+        $scope.d.bdi_scores.patients = patients;
+
+    };
 
     // -------------------
     // Navigation
@@ -467,6 +485,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.setCurrentResultDate = function() {
+        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
+
+        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
+            'filled_datestamp': date,
+            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
+        };
+
+        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
+    };
 
 
 
