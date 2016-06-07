@@ -455,22 +455,30 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getPatientScores = function() {
         // Get all BDI-Scores from a Patient and arrange it in a Array
 
-        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
         var patients = []
+        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
 
         all_results.forEach(function(current_result, myResultIndex) {
 
+            var scores = [];
+            var all_responses = current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
+
+            all_responses.forEach(function(current_response, myResponseIndex) {
+                var score = parseInt(current_response.score.score);
+                if (score !== null) {
+                    scores.push(score)
+                };
+            });
+
             var data_model = {
                 "patient": current_result.patient,
-                "scores": current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
+                "scores": scores
             };
 
             patients.push(data_model);
         });
 
-
         $scope.d.bdi_scores.patients = patients;
-
     };
 
     // -------------------
