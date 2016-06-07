@@ -499,39 +499,51 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             patients.push(data_model);
         });
 
+        // Save to $scope
         $scope.d.bdi_scores.patients = patients;
         $scope.d.bdi_scores.all_scores = {
             "scores": all_scores,
             "scores_details": all_scores_details
         };
+
+        $scope.getPatientGroupScores();
     };
 
+    $scope.getPatientGroupScores = function() {
+
+        var pg = [];
+        var all_pg = $scope.d.dataMain.patient_groups;
+
+        all_pg.forEach(function(current_pg, myPGIndex) {
+
+            var scores = [];
+            var scores_details = [];
 
 
-    // -------------------
-    // Navigation
-    // -------------------
-    $scope.prev = function() {
+            // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
+            $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
+                // If YES:  concat()  Arrays.
+
+            });
+
+
+            var data_model = {
+                "group": {
+                    "id": current_pg.id,
+                    "data": current_pg.data,
+                    "patients": current_pg.patients
+                },
+                "scores": scores,
+                "scores_details": scores_details
+            };
+            pg.push(data_model);
+
+        });
+
+        // Save to $scope
+        $scope.d.bdi_scores.patient_groups = pg;
 
     };
-
-    $scope.next = function() {
-
-    };
-
-
-    $scope.setCurrentResultDate = function() {
-        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
-
-        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
-            'filled_datestamp': date,
-            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
-        };
-
-        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
-    };
-
 
 
 });
