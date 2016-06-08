@@ -31,6 +31,56 @@ function main(responses) {
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
+            myResults.responses = responses;
+            allResults.push(myResults);
+        });
+
+        return allResults;
+    };
+
+
+    // Return
+    return calc.getResults(responses);
+}
+
+
+
+
+
+
+/*function main(responses) {
+    var calc = {};
+
+    // ------------------------------------------
+    // H e l p e r   -   F U N C T I O N S
+    // ------------------------------------------
+
+    calc.doSomething = function() {
+        var score = 73;
+        return score;
+    };
+
+
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
+    calc.getResults = function(myResponses) {
+
+        var responses_array = myResponses.survey_responses;
+        var allResults = [];
+
+        responses_array.forEach(function(response, myindex) {
+            var myResults = {};
+            var result = response.data.response;
+
+            // Something
+            myResults.something = calc.doSomething();
+
+
+            // Write Results for the Return
+            // Do not modify stuff here
+            myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
             allResults.push(myResults);
         });
 
@@ -48,3 +98,4 @@ function main(responses) {
 //myResults.CASE_score = real(['DauerAbh']) + real(['statEnzug']) + real(['ambEntzugMedi']) + parseInt(result['Craving']) + real(['statEntwoehnung']) + real(['ambEntwoehnung']) + real(['Abbrueche'])
 // + real(['Rueckfaelle']) + parseInt(result['Leber']) + parseInt(result['Somat']) + parseInt(result['Neurol']) + parseInt(result['Psych']) + parseInt(result['Arbeitslos']) + parseInt(result['Wohnen'])
 // + parseInt(result['Allein']) + parseInt(result['Alter']) + parseInt(result['Kontrollv']) + parseInt(result['MorgenTr']) + parseInt(result['posErw']) + parseInt(result['AbstMot'])
+*/
