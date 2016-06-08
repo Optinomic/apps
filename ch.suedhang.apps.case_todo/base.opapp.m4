@@ -80,7 +80,7 @@ type = on_activation
 due_after = 129200
 overdue = ignore
 description = Track your something.
-survey = daily_mood
+survey = CASE
 
 
 [email new_event html]
