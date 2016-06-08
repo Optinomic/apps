@@ -552,9 +552,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var data_model = {
                 "group": {
                     "id": current_pg.id,
-                    "data": current_pg.data
-                        //,
-                        //"patients": current_pg.patients
+                    "data": current_pg.data,
+                    "patients": current_pg.patients
                 },
                 "scores": scores,
                 "scores_details": scores_details
