@@ -18,12 +18,26 @@ phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
 
+[template data_survey_responses 6 7]
+include(templates/data.html)
+
+[template chart_timeline 6 7]
+include(templates/chart_timeline.html)
 
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template data_export_admin 6 7]
-include(templates/export.html)
+[template score_range 2 4]
+include(templates/range.html)
+
+[template chart_tscore 6 10]
+include(templates/tscore.html)
+
+[template chart_stanine 6 7]
+include(templates/stanine.html)
+
+[template export_toolbox_admin 6 10]
+include(templates/download.html)
 
 
 [dependencies]
@@ -50,6 +64,29 @@ fid = X62X1247
 min_questions =
 min_lastpage = 2
 
+[survey]
+id = my_ng_survey
+type = ng
+responsibility = patient_via_email
+name = Second example survey
+host = default
 
-[calculation case_score javascript]
-include(calculations/case_score.js)
+[survey_markup my_ng_survey]
+include(survey_markups/my_ng_survey.html)
+
+[event daily]
+type = on_activation
+due_after = 129200
+overdue = ignore
+description = Track your something.
+survey = daily_mood
+
+
+[email new_event html]
+include(emails/new_event.html)
+
+[email overdue html]
+include(emails/overdue.html)
+
+[calculation another_calculation javascript]
+include(calculations/another_calculation.js)
