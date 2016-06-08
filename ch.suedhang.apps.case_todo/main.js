@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -32,16 +32,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
-                $scope.setDataView();
+
+
+                // Run App-Functions:
+                $scope.bdi_init();
+                $scope.setExport();
+
             };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            // Run App-Functions:
-            $scope.setTimelineChartOptions();
-            $scope.setTscoreChart();
-            $scope.setStanineView();
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -52,321 +53,498 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
-
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
-
-
-    // ToDO: M4 - Import - remove new lines.
-
-    //var sql_import_string = "in_clude(`templates/export.sql')";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
-
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
-
-    $scope.export = function() {
-
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
-
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
-
-    };
-
-
-
-
-
-
-    // -----------------------------------
-    // <score-threshold>
+    // Navigation
     // -----------------------------------
 
-    // Ranges initialisieren
-    $scope.scale_ranges = {
-        "ranges": [{
-            "from": 0,
-            "to": 8,
-            "result": "Keine Depression",
-            "result_color": "green"
-        }, {
-            "from": 9,
-            "to": 13,
-            "result": "Minimale Depression",
-            "result_color": "green"
-        }, {
-            "from": 14,
-            "to": 19,
-            "result": "Leichte Depression",
-            "result_color": "orange"
-        }, {
-            "from": 20,
-            "to": 28,
-            "result": "Mittelschwere Depression",
-            "result_color": "orange"
-        }, {
-            "from": 29,
-            "to": 63,
-            "result": "Schwere Depression",
-            "result_color": "red"
-        }]
-    };
+    $scope.d.navigator = 0;
 
+    $scope.setCurrentResultDate = function() {
+        var date = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled;
 
-
-    // -----------------------------------
-    // Chart: Timeline
-    // -----------------------------------
-
-    $scope.setTimelineChartOptions = function() {
-        // -----------------------------------
-        // Chart: Timeline Options
-        // - fillDates:  Still experimental
-        // -----------------------------------
-        var myPatient = $scope.d.dataMain.patient.patient.data;
-        var patientFullName = myPatient.last_name + ' ' + myPatient.first_name;
-
-        $scope.d.timeline = {};
-        $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
-
-        $scope.d.timeline.options = {
-            'title': 'Suchtdruck (∑)',
-            'focusField': 'dailyMood[mood]',
-            'fillDates': false,
-            'firstWeekDay': 'Mo',
-            'patient': patientFullName
-        };
-    };
-
-
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function() {
-        var score_answer = [{
-            "question": "GSI (Global Severity Index)",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Psychotizismus",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Paranoides Denken",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Phobische Angst",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Ängstlichkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Depressivität",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Zwanghaftigkeit",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }, {
-            "question": "Somatisierung",
-            "t_score": $scope.d.functions.getRandomInt(0, 100),
-            "stanine": 0,
-            "sum_score": 0
-        }];
-
-        return score_answer;
-    };
-
-    $scope.setTscoreChart = function() {
-
-        // Options
-        $scope.options_plot = {
-            'show_scores': true
+        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
+            'filled_datestamp': date,
+            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
+            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
         };
 
-        // Results
-        $scope.plotdata = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswer()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswer()
-        }];
+        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
     };
 
 
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
+    // -------------------
+    // BDI Init
+    // -------------------
+    $scope.bdi_init = function() {
 
-    $scope.getAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Unsicherheit",
-            "sub_left": "Stabiles Umfeld. Keine Belastung.",
-            "sub_right": "Unsicherheit in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
+        $scope.d.show_answers = false;
+        $scope.d.show_answers_filter = 0;
+
+        $scope.d.show_answers_filters = [{
+            "value": 0,
+            "name": 'Alle Antworten'
         }, {
-            "question": "Stress durch Überforderung",
-            "sub_left": "Keine Belastung durch Überforderung",
-            "sub_right": "Überforderung in wichtigen Lebensbereichen",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
+            "value": 1,
+            "name": 'Antworten mit Score ( >=1 )'
         }, {
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
+            "value": 2,
+            "name": 'Antworten mit Score ( >=2 )'
         }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
+            "value": 3,
+            "name": 'Antworten mit Score ( =3 )'
         }];
 
-        return score_answer;
-    };
-
-    $scope.setStanineView = function() {
-
-        $scope.stanine = {};
-        $scope.stanine.data = [{
-            "label": "Eintritt",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Verlauf 12.12.1996",
-            "scores": $scope.getAnswerStanine()
-        }, {
-            "label": "Austritt",
-            "scores": $scope.getAnswerStanine()
-        }];
-
-        $scope.stanine.options = {
-            "population_name": "Männer, 31-50 Jahre",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-    };
-
-
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
-
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
-
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
-
-        // automatic or manually like (columnDefsManually)
-        $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
-
-        // columnDefsManually: If you want to create columnDefs manually:
-        // Ref: http://www.angulargrid.com/angular-grid-column-definitions/index.php
-        var columnDefsManually = [{
-            headerTooltip: "Datum",
-            headerName: "Datum",
-            editable: true,
-            suppressSizeToFit: true,
-            width: 145,
-            field: "datestamp",
-            cellClass: 'md-body-1',
-        }, {
-            headerTooltip: "Suchtdruck_1",
-            headerName: "Suchtdruck (Int)",
-            cellClass: 'md-body-2',
-            suppressSizeToFit: true,
-            width: 110,
-            valueGetter: 'parseInt(data.Suchtdruck_1)',
-            filter: 'number'
-        }, {
-            headerName: "Bemerkungen",
-            editable: true,
-            cellClass: 'md-body-1',
-            field: "diary",
-            filter: 'text'
-        }, {
-            headerTooltip: "PID",
-            headerName: "Patient-ID",
-            editable: false,
-            field: "PID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }, {
-            headerTooltip: "FID",
-            headerName: "Fall-ID",
-            editable: false,
-            field: "FID",
-            hide: true,
-            cellClass: 'md-body-1',
-            width: 90
-        }];
-
-
-        // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
+        // Ranges initialisieren
+        $scope.scale_ranges = {
+            "ranges": [{
+                "from": 0,
+                "to": 8,
+                "result": "Keine Depression",
+                "result_color": "green"
+            }, {
+                "from": 9,
+                "to": 13,
+                "result": "Minimale Depression",
+                "result_color": "green"
+            }, {
+                "from": 14,
+                "to": 19,
+                "result": "Leichte Depression",
+                "result_color": "orange"
+            }, {
+                "from": 20,
+                "to": 28,
+                "result": "Mittelschwere Depression",
+                "result_color": "orange"
+            }, {
+                "from": 29,
+                "to": 63,
+                "result": "Schwere Depression",
+                "result_color": "red"
+            }]
         };
 
 
-        //console.log('dataGRID: ', $scope.d.grid);
+        $scope.d.bdi_fragen = [{
+            "name": "1. Traurigkeit",
+            "answers": [{
+                "code": "0",
+                "item": "Ich bin nicht traurig"
+            }, {
+                "code": "1",
+                "item": "Ich bin oft traurig"
+            }, {
+                "code": "2",
+                "item": "Ich bin ständig traurig"
+            }, {
+                "code": "3",
+                "item": "Ich bin so traurig oder unglücklich, dass ich es nicht aushalte"
+            }]
+        }, {
+            "name": "2. Pessimismus",
+            "answers": [{
+                "code": "0",
+                "item": "Ich sehe nicht mutlos in die Zukunft"
+            }, {
+                "code": "1",
+                "item": "Ich sehe mutloser in die Zukunft als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich bin mutlos und erwarte nicht, dass meine Situation besser wird"
+            }, {
+                "code": "3",
+                "item": "Ich glaube, dass meine Zukunft hoffnungslos ist und nur noch schlechter wird"
+            }]
+        }, {
+            "name": "3. Versagensgefühle",
+            "answers": [{
+                "code": "0",
+                "item": "Ich fühle mich nicht als Versager"
+            }, {
+                "code": "1",
+                "item": "Ich habe häufiger Versagensgefühle"
+            }, {
+                "code": "2",
+                "item": "Wenn ich zurückblicke, sehe ich eine Menge Fehlschläge"
+            }, {
+                "code": "3",
+                "item": "Ich habe das Gefühl, als Mensch ein völliger Versager zu sein"
+            }]
+        }, {
+            "name": "4. Verlust von Freude",
+            "answers": [{
+                "code": "0",
+                "item": "Ich kann Dinge genauso gut geniessen wie früher"
+            }, {
+                "code": "1",
+                "item": "Ich kann Dinge nicht mehr so geniessen wie früher"
+            }, {
+                "code": "2",
+                "item": "Dinge, die mir früher Freude gemacht haben, kann ich kaum mehr geniessen"
+            }, {
+                "code": "3",
+                "item": "Dinge, die mir früher Freude gemacht haben, kann ich überhaupt nicht mehr geniessen"
+            }]
+        }, {
+            "name": "5. Schuldgefühle",
+            "answers": [{
+                "code": "0",
+                "item": "Ich habe keine besonderen Schuldgefühle"
+            }, {
+                "code": "1",
+                "item": "Ich habe oft Schuldgefühle wegen Dingen, die ich getan habe oder hätte tun sollen"
+            }, {
+                "code": "2",
+                "item": "Ich habe die meiste Zeit Schuldgefühle"
+            }, {
+                "code": "3",
+                "item": "Ich habe ständig Schuldgefühle"
+            }]
+        }, {
+            "name": "6. Bestrafungsgefühle",
+            "answers": [{
+                "code": "0",
+                "item": "Ich habe nicht das Gefühl, für etwas bestraft zu sein"
+            }, {
+                "code": "1",
+                "item": "Ich habe das Gefühl, vielleicht bestraft zu werden"
+            }, {
+                "code": "2",
+                "item": "Ich erwarte, bestraft zu werden"
+            }, {
+                "code": "3",
+                "item": "Ich habe das Gefühl, bestraft zu sein"
+            }]
+        }, {
+            "name": "7. Selbstablehnung",
+            "answers": [{
+                "code": "0",
+                "item": "Ich halte von mir genauso viel wie immer"
+            }, {
+                "code": "1",
+                "item": "Ich habe Vertrauen in mich verloren"
+            }, {
+                "code": "2",
+                "item": "Ich bin von mir enttäuscht"
+            }, {
+                "code": "3",
+                "item": "Ich lehne mich völlig ab"
+            }]
+        }, {
+            "name": "8. Selbstvorwürfe",
+            "answers": [{
+                "code": "0",
+                "item": "Ich kritisiere oder tadle mich nicht mehr als sonst"
+            }, {
+                "code": "1",
+                "item": "Ich bin mir gegenüber kritischer als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich kritisiere mich für all meine Mängel"
+            }, {
+                "code": "3",
+                "item": "Ich gebe mir die Schuld für alles Schlimme, was passiert"
+            }]
+        }, {
+            "name": "9. Selbstmordgedanken",
+            "answers": [{
+                "code": "0",
+                "item": "Ich denke nicht daran, mir etwas anzutun"
+            }, {
+                "code": "1",
+                "item": "Ich denke manchmal an Selbstmord, aber ich würde es nicht tun"
+            }, {
+                "code": "2",
+                "item": "Ich möchte mich am liebsten umbringen"
+            }, {
+                "code": "3",
+                "item": "Ich würde mich umbringen, wenn ich die Gelegenheit dazu hätte"
+            }]
+        }, {
+            "name": "10. Weinen",
+            "answers": [{
+                "code": "0",
+                "item": "Ich weine nicht öfter als früher"
+            }, {
+                "code": "1",
+                "item": "Ich weine jetzt mehr als früher"
+            }, {
+                "code": "2",
+                "item": "Ich weine beim geringsten Anlass"
+            }, {
+                "code": "3",
+                "item": "Ich möchte gern weinen, aber ich kann nicht"
+            }]
+        }, {
+            "name": "11. Unruhe",
+            "answers": [{
+                "code": "0",
+                "item": "Ich bin nicht unruhiger als sonst"
+            }, {
+                "code": "1",
+                "item": "Ich bin unruhiger als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich bin so unruhig, dass es mir schwerfällt, stillzusitzen"
+            }, {
+                "code": "3",
+                "item": "Ich bin so unruhig, dass ich mich ständig bewege oder etwas tun muss"
+            }]
+        }, {
+            "name": "12. Interessenverlust",
+            "answers": [{
+                "code": "0",
+                "item": "Ich habe das Interesse an anderen Menschen oder Tätigkeiten nicht verloren"
+            }, {
+                "code": "1",
+                "item": "Ich habe weniger Interesse an anderen Menschen oder Dingen als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich habe Interesse an anderen Menschen oder Dingen grössten Teils verloren"
+            }, {
+                "code": "3",
+                "item": "Es fällt mir schwer, mich überhaupt für etwas zu interessieren"
+            }]
+        }, {
+            "name": "13. Entschlussunfähigkeit",
+            "answers": [{
+                "code": "0",
+                "item": "Ich bin so entschlussfreudig wie immer"
+            }, {
+                "code": "1",
+                "item": "Es fällt mir schwerer als sonst, Entscheidungen zu treffen"
+            }, {
+                "code": "2",
+                "item": "Es fällt mir sehr viel schwerer als sonst, Entscheidungen zu treffen"
+            }, {
+                "code": "3",
+                "item": "Ich habe Mühe, überhaupt Entscheidungen zu treffen"
+            }]
+        }, {
+            "name": "14. Wertlosigkeit",
+            "answers": [{
+                "code": "0",
+                "item": "Ich fühle mich nicht wertlos"
+            }, {
+                "code": "1",
+                "item": "Ich halte mich für weniger wertvoll und nützlich als sonst"
+            }, {
+                "code": "2",
+                "item": "Verglichen mit anderen Menschen fühle ich mich viel weniger wert"
+            }, {
+                "code": "3",
+                "item": "Ich fühle mich völlig wertlos"
+            }]
+        }, {
+            "name": "15. Energieverlust",
+            "answers": [{
+                "code": "0",
+                "item": "Ich habe so viel Energie wie immer"
+            }, {
+                "code": "1",
+                "item": "Ich habe weniger Energie als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich habe so wenig Energie, dass ich kaum noch etwas schaffe"
+            }, {
+                "code": "3",
+                "item": "Ich habe keine Energie, um überhaupt noch etwas schaffen"
+            }]
+        }, {
+            "name": "16. Veränderungen der Schlafgewohnheiten",
+            "answers": [{
+                "code": "0",
+                "item": "Meine Schlafgewohnheiten haben sich nicht geändert"
+            }, {
+                "code": "1a",
+                "item": "Ich schlafe etwas mehr als sonst"
+            }, {
+                "code": "1b",
+                "item": "Ich schlafe etwas weniger als sonst"
+            }, {
+                "code": "2a",
+                "item": "Ich schlafe viel mehr als sonst"
+            }, {
+                "code": "2b",
+                "item": "Ich schlafe viel weniger als sonst"
+            }, {
+                "code": "3a",
+                "item": "Ich schlafe fast den ganzen Tag"
+            }, {
+                "code": "3b",
+                "item": "Ich wache 1 - 2 Stunden früher auf als gewöhnlich und kann nicht mehr einschlafen"
+            }]
+        }, {
+            "name": "17. Reizbarkeit",
+            "answers": [{
+                "code": "0",
+                "item": "Ich bin nicht reizbarer als sonst"
+            }, {
+                "code": "1",
+                "item": "Ich bin reizbarer als sonst"
+            }, {
+                "code": "2",
+                "item": "Ich bin viel reizbarer als sonst"
+            }, {
+                "code": "3",
+                "item": "Ich fühle mich dauernd gereizt"
+            }]
+        }, {
+            "name": "18. Veränderungen des Appetits",
+            "answers": [{
+                "code": "0",
+                "item": "Mein Appetit hat sich nicht verändert"
+            }, {
+                "code": "1a",
+                "item": "Mein Appetit ist etwas schlechter als sonst"
+            }, {
+                "code": "1b",
+                "item": "Mein Appetit ist etwas grösser als sonst"
+            }, {
+                "code": "2a",
+                "item": "Mein Appetit ist viel schlechter als sonst"
+            }, {
+                "code": "2b",
+                "item": "Mein Appetit ist viel grösser als sonst"
+            }, {
+                "code": "3a",
+                "item": "Ich habe überhaupt keinen Appetit"
+            }, {
+                "code": "3b",
+                "item": "Ich habe ständig Hunger"
+            }]
+        }, {
+            "name": "19. Konzentrationsschwierigkeiten",
+            "answers": [{
+                "code": "0",
+                "item": "Ich kann mich so gut konzentrieren wie immer"
+            }, {
+                "code": "1",
+                "item": "Ich kann mich nicht mehr so gut konzentrieren wie sonst"
+            }, {
+                "code": "2",
+                "item": "Es fällt mir schwer, mich längere Zeit auf irgend etwas zu konzentrieren"
+            }, {
+                "code": "3",
+                "item": "Ich kann mich überhaupt nicht mehr konzentrieren"
+            }]
+        }, {
+            "name": "20. Ermüdung und Erschöpfung",
+            "answers": [{
+                "code": "0",
+                "item": "Ich fühle mich nicht müder oder erschöpfter als sonst"
+            }, {
+                "code": "1",
+                "item": "Ich werde schneller müde oder erschöpft als sonst"
+            }, {
+                "code": "2",
+                "item": "Für viele Dinge, die ich üblicherweise tue, bin ich zu müde oder erschöpft"
+            }, {
+                "code": "3",
+                "item": "Ich bin so müde oder erschöpft, dass ich fast nichts mehr tun kann"
+            }]
+        }, {
+            "name": "21. Verlust an sexuellem Interesse",
+            "answers": [{
+                "code": "0",
+                "item": "Mein Interesse an Sexualität hat sich in letzter Zeit nicht verändert"
+            }, {
+                "code": "1",
+                "item": "Ich interessiere mich weniger für Sexualität als früher"
+            }, {
+                "code": "2",
+                "item": "Ich interessiere mich jetzt viel weniger für Sexualität als früher"
+            }, {
+                "code": "3",
+                "item": "Ich habe das Interesse an Sexualität völlig verloren"
+            }]
+        }];
+    };
+
+
+    // -------------------
+    // Navigation
+    // -------------------
+    $scope.prev = function() {
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
+
+        if ($scope.d.navigator === 0) {
+            $scope.d.navigator = count;
+        } else {
+            $scope.d.navigator = $scope.d.navigator - 1
+        };
+        $scope.setCurrentResultDate();
+        $scope.setAnswerFilter($scope.d.show_answers);
+    };
+
+    $scope.next = function() {
+        var count = $scope.d.dataMain.calculations[0].calculation_results.length - 1;
+
+        if (count === $scope.d.navigator) {
+            $scope.d.navigator = 0;
+        } else {
+            $scope.d.navigator = $scope.d.navigator + 1
+        };
+        $scope.setCurrentResultDate();
+        $scope.setAnswerFilter($scope.d.show_answers);
+    };
+
+
+    // -------------------
+    // Filter Answers
+    // -------------------
+    $scope.setAnswerFilter = function(show_true) {
+
+
+        var results = $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.response;
+
+        for (var i = 1; i < 22; i++) {
+
+            var current_answer = results['BDI' + i];
+            var current_score = parseInt(results['BDI' + i]);
+
+
+            results['BDI_filter_' + i] = false;
+
+            //console.log(':::> ', i, current_answer, current_score);
+
+            if (current_score >= $scope.d.show_answers_filter) {
+                results['BDI_filter_' + i] = true;
+                //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
+            };
+
+        };
+
+        console.log('setAnswerFilter :::> Results ', results);
+        $scope.d.show_answers = show_true;
+    };
+
+
+    // -------------------
+    // Data-Export
+    // -------------------
+    $scope.setExport = function() {
+
+
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
+
+
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        var module_packages = [];
+        var data_query = {};
+
+        data_query = {
+            name: 'BDI-II',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
+
+        // Init the given Export Settings
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
     };
 
 
