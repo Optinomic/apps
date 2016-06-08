@@ -159,7 +159,6 @@ function main(responses) {
         score = score + parseInt(d.VZET030);
         score = score + parseInt(d.VZET040);
         score = score + parseInt(d.VZET050);
-        score = score + parseInt(d.VZEA050);
         score = score + parseInt(d.VZET060);
         score = score + parseInt(d.VZET070);
 
