@@ -4,7 +4,7 @@ SELECT
   CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
   patient.four_letter_code,
     
-  ((cast(response AS json))->>'BDI1') as bdi1,
+/*  ((cast(response AS json))->>'BDI1') as bdi1,
   ((cast(response AS json))->>'BDI2') as bdi2,
   ((cast(response AS json))->>'BDI3') as bdi3,
   ((cast(response AS json))->>'BDI4') as bdi4,
@@ -49,7 +49,7 @@ SELECT
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
   ((cast(response AS json))->>'startlanguage') as startlanguage,
   ((cast(response AS json))->>'submitdate') as submitdate,
-  
+*/  
   random_hash,
   scheduled,
   filled,
@@ -59,4 +59,4 @@ SELECT
 FROM survey_response 
 INNER JOIN patient ON(survey_response.patient = patient.id) 
 
-WHERE module = 'ch.suedhang.apps.bdi';
+WHERE module = 'ch.suedhang.apps.case_todo';
