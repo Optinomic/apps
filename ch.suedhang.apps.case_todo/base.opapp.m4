@@ -48,7 +48,7 @@ hash = X62X1245
 pid = X62X1246
 fid = X62X1247
 min_questions =
-min_lastpage = 1
+min_lastpage = 2
 
 
 [calculation case_score javascript]
