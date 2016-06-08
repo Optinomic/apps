@@ -1,6 +1,25 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">BDI-II: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-<score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
-<h3 class="md-headline">Hallo - Simple Score: {{d.dataMain.apps.current.name}}</h3>
-<score-threshold score="15" min="10" max="20" show-percent-scale="true" show-min-max="true"></score-threshold>
+<div>
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    {{d.dataMain.apps.current.name}}
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+<!--        <md-card-content layout-margin>
+            <p>&nbsp;</p>
+            <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].score" show-percent-scale="true"></score-threshold>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
+        </md-card-actions>
+-->    </md-card>
+</div>
 include(../lib/html/optinomic/page/end.m4)
