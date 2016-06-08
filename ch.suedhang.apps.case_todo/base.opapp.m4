@@ -19,11 +19,11 @@ website = http://www.optinomic.com/
 
 
 
-[template data_survey_responses 6 7]
-include(templates/data.html)
+[template simple_score 4 4]
+include(templates/score.html)
 
-[template data_download_admin 6 14]
-include(templates/download.html)
+[template data_export_admin 6 7]
+include(templates/export.html)
 
 
 [dependencies]
@@ -44,38 +44,11 @@ responsibility = lead_therapist
 name = CASE
 host = default
 survey_id = 553966
-hash = X22X876
-pid = X22X877
-fid = X22X878
-pidfid = X114X2861
+hash = X62X1245
+pid = X62X1246
+fid = X62X1247
 min_questions =
-min_lastpage = 2
-
-
-[survey]
-id = my_ng_survey
-type = ng
-responsibility = patient_via_email
-name = Second example survey
-host = default
-
-[survey_markup my_ng_survey]
-include(survey_markups/my_ng_survey.html)
-
-
-[event activation]
-type = on_activation
-due_after = 259200
-overdue = ignore
-description = CASE-Erhebung
-survey = CASE
-
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
+min_lastpage = 1
 
 
 [calculation case_score javascript]
