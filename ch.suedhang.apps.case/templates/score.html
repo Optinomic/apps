@@ -14,8 +14,8 @@ include(../lib/html/optinomic/page/start.m4)
                 <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
                     <div>
                         <h5 class="md-subhead">Summenwert CASE</h5>
-<!--                        <p class="md-caption" style="margin-top: -8px;">Σ = {{d.dataMain.calculations[0].calculation_results[0].score.score}})</p>
--->                    
+                        <!--                        <p class="md-caption" style="margin-top: -8px;">Σ = {{d.dataMain.calculations[0].calculation_results[0].score.score}})</p>
+                        -->
                         <p class="md-caption" style="margin-top: -8px;">Σ = 73)</p>
                     </div>
                     <div>&nbsp;</div>
@@ -34,10 +34,13 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-<!--            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
--->            <p flex class="md-subhead" style="text-align:center;">Datumswert</p>
+            <!--            
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
+            -->
+            <p flex class="md-subhead" style="text-align:center;">Datumswert</p>
         </md-card-actions>
-<!--        <md-card-content ng-if="d.show_answers" layout-margin>
+        <!--        
+            <md-card-content ng-if="d.show_answers" layout-margin>
             <div layout="row" layout-align="space-between center">
                 <div>
                     <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
@@ -58,6 +61,7 @@ include(../lib/html/optinomic/page/start.m4)
                 </p>
             </div>
         </md-card-content>
--->    </md-card>
+        -->
+    </md-card>
 </div>
 include(../lib/html/optinomic/page/end.m4)
