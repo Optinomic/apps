@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.apps.case
+id = ch.suedhang.apps.case.new
 name = CASE
 short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation
 version = include(VERSION)
