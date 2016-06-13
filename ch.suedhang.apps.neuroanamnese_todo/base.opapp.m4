@@ -62,7 +62,7 @@ hash = X59X1182
 pid = X59X1183
 fid = X59X1184
 min_questions =
-min_lastpage = 2
+min_lastpage = 7
 
 
 [survey]
