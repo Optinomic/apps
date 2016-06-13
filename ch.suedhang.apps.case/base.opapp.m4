@@ -1,20 +1,20 @@
 [module]
 id = ch.suedhang.apps.caseV2
-name = Optinomic-App (Template)
-short_description = Use this as a starting-point for your apps.
+name = CASE V2
+short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation
 version = include(VERSION)
 type = patient
 
 [description]
-Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
+Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert.
 
 [developer]
-first_name = Beat
-last_name = Ottiger
-github_user = ottigerb
-email = beat@optinomic.com
-company = Optinomic Gmbh
-phone = +41 (0)44 508 26 76
+first_name = Nora
+last_name = Schönenberger
+github_user = schoenenb
+email = nora.schoenenberger@suedhang.ch
+company = Suedhang
+phone = +41 (0)31 828 14 92
 website = http://www.optinomic.com/
 
 
@@ -52,7 +52,7 @@ min_lastpage = 2
 
 [event daily]
 type = on_activation
-due_after = 129200
+due_after = 345600
 overdue = ignore
 description = Track your something.
 survey = CASE
