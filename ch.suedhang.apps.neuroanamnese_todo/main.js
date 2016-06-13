@@ -32,16 +32,21 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
+
+
+                // Run App-Functions:
+                $scope.setExport();
                 $scope.setDataView();
+                $scope.setTimelineChartOptions();
+                $scope.setTscoreChart();
+                $scope.setStanineView();
+
+
             };
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-            // Run App-Functions:
-            $scope.setTimelineChartOptions();
-            $scope.setTscoreChart();
-            $scope.setStanineView();
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
@@ -51,47 +56,34 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Download
-    // -----------------------------------
-    $scope.d.export = {};
-    $scope.d.export.data = {};
-    $scope.d.export.have_data = false;
-    $scope.d.export.header = 'True';
-    $scope.d.export.direct = 'False';
-    $scope.d.export.format = 'csv';
-    $scope.d.export.file = 1;
-    $scope.d.export.delimitter = ';';
-    $scope.d.export.sql_field = "select * from information_schema.tables";
-
-    $scope.d.export.sql_field = "SELECT patient.id , patient.last_name , ((cast(response AS json))->>'BSCL[sq504V40]') as gaga , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '-1') as sq504V40 , recode_into(((cast(response AS json))->>'BSCL[sq504V40]'), '', '0') + 2 as gaga FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) WHERE module = 'ch.suedhang.apps.bscl.anq'";
 
 
-    // ToDO: M4 - Import - remove new lines.
 
-    //var sql_import_string = "in_clude(`templates/export.sql')";
-    //$scope.d.export.sql_field = sql_import_string.join(' *\n *');
+    $scope.setExport = function() {
 
-    //$scope.d.export.sql_field = "SELECT 
-    //patient.id, patient.last_name, ((cast(response AS json)) - >> 'BSCL[sq504V40]') as gaga, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '-1') as sq504V40, recode_into(((cast(response AS json)) - >> 'BSCL[sq504V40]'), '', '0') + 2 as gaga
-    //FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-    //WHERE module = 'ch.suedhang.apps.bscl.anq'
-    //";
 
-    $scope.export = function() {
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
 
-        var api = dataService.runSQL($scope.d.export.sql_field, $scope.d.export.delimitter, $scope.d.export.header, $scope.d.export.format, $scope.d.export.direct);
-        var aSQL = dataService.getData(api);
 
-        aSQL.then(function(data) {
-            $scope.d.export.have_data = true;
-            $scope.d.export.data = data;
-            console.log('export - Done: ', $scope.d.export.data);
-        });
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        var module_packages = [];
+        var data_query = {};
+
+        data_query = {
+            name: 'WHQOL-Example (with stay)',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
+
+        // Init the given Export Settings
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
     };
-
-
 
 
 
@@ -148,8 +140,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.timeline.data = $scope.d.dataMain.survey_responses_array;
 
         $scope.d.timeline.options = {
-            'title': 'Suchtdruck (∑)',
-            'focusField': 'dailyMood[mood]',
+            'title': 'Tägliche Stimmung (∑)',
+            'focusField': 'score',
+            'dateField': 'filled',
             'fillDates': false,
             'firstWeekDay': 'Mo',
             'patient': patientFullName
@@ -296,12 +289,27 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     // -----------------------------------
     $scope.setDataView = function() {
 
+        // If we have multiple surveys - make sure to take the right 'responses'.
+        var currentResultGroup = 0;
+        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
+            if (current_group_def.survey === 'Second example survey') {
+                currentResultGroup = current_group_def.id;
+            };
+        });
+
+        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
+        $scope.d.dataMain.survey_responses_array = [];
+        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
+            var my_response = current_result.entity.data.response;
+
+            // If ng-survey survey @ some more info to 'response'.
+            my_response.filled = current_result.entity.data.filled;
+            my_response.survey_name = current_result.event.survey_name;
+
+            $scope.d.dataMain.survey_responses_array.push(my_response);
+        });
         var resultsArray = $scope.d.dataMain.survey_responses_array;
 
-
-
-        $scope.d.grid = {};
-        $scope.d.grid.rowData = $scope.d.functions.enrichResults(resultsArray);
 
         // automatic or manually like (columnDefsManually)
         $scope.d.grid.columnDefs = $scope.d.functions.createColumnDefs($scope.d.grid.rowData, true);
@@ -350,24 +358,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // DataView - Options
-        $scope.d.grid.options = {
-            headerHeight: 45,
-            rowHeight: 28,
-            rowData: $scope.d.grid.rowData,
-            columnDefs: $scope.d.grid.columnDefs,
-            //pinnedColumnCount: 1,
-            dontUseScrolls: false,
-            enableFilter: true,
-            rowSelection: 'single',
-            enableColResize: true,
-            enableCellExpressions: true,
-            enableSorting: true,
-            showToolPanel: false
-        };
+        $scope.d.grid.options = $scope.d.grid.default_options;
+        $scope.d.grid.options.rowData = $scope.d.grid.rowData;
+        $scope.d.grid.options.columnDefs = $scope.d.grid.columnDefs;
 
 
         //console.log('dataGRID: ', $scope.d.grid);
     };
-
-
 });

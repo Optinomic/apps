@@ -14,7 +14,7 @@ last_name = Schönenberger
 github_user = schoenenb
 email = nora.schoenenberger@suedhang.ch
 company = Suedhang
-phone = +41 (0)31 828 14 51
+phone = +41 (0)31 828 14 92
 website = http://www.optinomic.com/
 
 
@@ -37,9 +37,8 @@ include(templates/tscore.html)
 [template chart_stanine 6 7]
 include(templates/stanine.html)
 
-[template data_download_admin 6 14]
-include(templates/download.html)
-
+[template data_export_admin 6 7]
+include(templates/export.html)
 
 [dependencies]
 
@@ -56,12 +55,12 @@ include(style.css)
 id = assessment
 type = lime
 responsibility = lead_therapist
-name = Tägliche Stimmung
+name = Neuroanamnese
 host = default
 survey_id = 123983
-hash = X32X913
-pid = X32X914
-fid = X32X915
+hash = X59X1182
+pid = X59X1183
+fid = X59X1184
 min_questions =
 min_lastpage = 2
 
@@ -79,9 +78,9 @@ include(survey_markups/my_ng_survey.html)
 
 [event activation]
 type = on_activation
-due_after = 86400
+due_after = 345600
 overdue = ignore
-description = Track your daily craving.
+description = Neuroanamnese zum TMT
 survey = assessment
 
 
