@@ -15,7 +15,7 @@ github_user = HansaYohaku
 email = hans.menning@forel-klinik.ch
 company = Forel-Klinik
 phone = +41 (0)52 369 14 12
-website = http://www.optinomic.com/
+website = https://www.forel-klinik.ch/
 
 
 [template ZuePaZ 6 14]
