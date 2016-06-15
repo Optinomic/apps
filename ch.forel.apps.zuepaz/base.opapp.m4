@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Hier wird die Zufriedenheit der Patienten mit der Behandlung in der Forel-Klinik erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal.
+Hier wird die Zufriedenheit der Patienten mit der Behandlung in der Forel-Klinik erfragt - vom Eintritt bis zum Austritt, in den Bereichen Hotellerie, Informationsfluss, Therapieangebote und Behandlung durch das (therapeutische) Personal. neu
 
 [developer]
 first_name = Hans
