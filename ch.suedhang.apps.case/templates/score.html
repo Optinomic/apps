@@ -13,7 +13,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div layout="row" layout-align="start start">
                 <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
                     <div>
-                        <h5 class="md-subhead">Summenwert CASE</h5>
+                        <h5 class="md-subhead">Der Patient / die Patientin weist einen Summenwert von 73 auf.</h5>
                         <!--                        <p class="md-caption" style="margin-top: -8px;">Σ = {{d.dataMain.calculations[0].calculation_results[0].score.score}})</p>
                         -->
                         <p class="md-caption" style="margin-top: -8px;">Σ = 73)</p>
@@ -23,13 +23,15 @@ include(../lib/html/optinomic/page/start.m4)
                         Antworten anzeigen
                     </md-button>
                 </div>
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
+                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
                     <p class="md-caption">Kein CASE-Summenwert vorhanden.</p>
                 </div>
+<!--
                 <div flex>
                     <score-threshold score="d.dataMain.calculations[0].calculation_results[0].score" show-percent-scale="true"></score-threshold>
                 </div>
+-->
             </div>
         </md-card-content>
         <md-divider></md-divider>
