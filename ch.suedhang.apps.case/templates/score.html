@@ -11,9 +11,9 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content layout-margin>
             <p>&nbsp;</p>
             <div layout="row" layout-align="start start">
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
+                <div ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
                     <div>
-                        <h5 class="md-subhead">Der Patient / die Patientin weist einen Summenwert von 73 auf.</h5>
+                        <h5 class="md-subhead">Der Patient / die Patientin weist einen Summenwert von <b>73</b> auf.</h5>
                         <!--                        <p class="md-caption" style="margin-top: -8px;">Σ = {{d.dataMain.calculations[0].calculation_results[0].score.score}})</p>
                         -->
                     </div>
