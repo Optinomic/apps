@@ -277,7 +277,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Skala 7
-            if ($scope.d.text_sci.data.austritt.scores[7].stanine - $scope.d.text_sci.data.eintritt.scores[7].stanine > 0) {
+            if ($scope.d.text_sci.data.austritt.scores[6].stanine - $scope.d.text_sci.data.eintritt.scores[6].stanine > 0) {
                 text = text + " Die ungünstige Strategie des Konsums konnte reduziert werden. ";
             };
 
