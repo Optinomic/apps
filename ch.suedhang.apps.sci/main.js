@@ -144,6 +144,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.buildTextSCI = function() {
 
+        var concat_aufzaehlung = function(source, item) {
+            if ((source === null) || (source === '')) {
+                source = item;
+            } else {
+                source = source + ", " + item;
+            };
+
+            return source;
+        };
+
         var text = "";
         var patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
         var patient_in = "Der Patient";
@@ -175,30 +185,34 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if ($scope.d.text_sci.data.eintritt.scores[2].stanine >= 5) {
                 hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[2].question;
+                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
             } else {
-                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[2].question;
+                geringe_ausp_vorhanden = true;
+                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[3].stanine >= 5) {
                 hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[3].question;
+                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
             } else {
-                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[3].question;
+                geringe_ausp_vorhanden = true;
+                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[4].stanine >= 5) {
                 hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[4].question;
+                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
             } else {
-                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[4].question;
+                geringe_ausp_vorhanden = true;
+                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[5].stanine >= 5) {
                 hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[5].question;
+                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
             } else {
-                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[5].question;
+                geringe_ausp_vorhanden = true;
+                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
             };
 
             if (hohe_ausp_vorhanden) {
