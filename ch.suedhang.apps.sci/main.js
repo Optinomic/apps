@@ -240,7 +240,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('buildTextSCI: Eintritts- & Austrittsmessung vorhanden: ', $scope.d.text_sci);
         }
 
-
+        // Merge Full - Text
+        $scope.d.text_sci.text.full = $scope.d.text_sci.text.eintritt + "\n" + $scope.d.text_sci.text.austritt;
     };
 
 

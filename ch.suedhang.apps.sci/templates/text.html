@@ -3,8 +3,8 @@ include(../lib/html/optinomic/page/start.m4)
     Interpretation: {{d.dataMain.apps.current.name}}
 </h3>
 <p class="flow-text">{{d.text_sci.text.eintritt}}</p>
-<p class="flow-text">{{d.text_sci.text.austritt}}</p>
-<div style="margin-top: 48px;">
+<p class="flow-text" ng-if="d.text_sci.data.austritt.available">{{d.text_sci.text.austritt}}</p>
+<div style="margin-top: 90px;">
     <pre>{{d.text_sci | json}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
