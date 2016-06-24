@@ -258,17 +258,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if ($scope.d.text_sci.data.austritt.scores[3].stanine - $scope.d.text_sci.data.eintritt.scores[3].stanine > 0) {
                 verbesserung_vorhanden = true;
-                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
             };
 
             if ($scope.d.text_sci.data.austritt.scores[4].stanine - $scope.d.text_sci.data.eintritt.scores[4].stanine > 0) {
                 verbesserung_vorhanden = true;
-                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
             };
 
             if ($scope.d.text_sci.data.austritt.scores[5].stanine - $scope.d.text_sci.data.eintritt.scores[5].stanine > 0) {
                 verbesserung_vorhanden = true;
-                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
             };
 
             if (verbesserung_vorhanden) {
