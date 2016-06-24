@@ -127,7 +127,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "scores": scores
             }
 
-            console.log('============> ', current_response.entity.data.response.Erhebungszeitpunkt, response_to_set);
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
@@ -162,7 +161,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             patient_in = "Die Patientin";
         };
 
+        // ---------------------------------------
         // Eintrittsmessung vorhanden
+        // ---------------------------------------
         if ($scope.d.text_sci.data.eintritt.available === true) {
             console.log('buildTextSCI: Eintrittsmessung vorhanden: ', $scope.d.text_sci);
 
@@ -236,9 +237,53 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.text_sci.text.eintritt = text;
         }
 
+        // ---------------------------------------
         // Eintritts- & Austrittsmessung vorhanden
+        // ---------------------------------------
         if (($scope.d.text_sci.data.eintritt.available === true) && ($scope.d.text_sci.data.austritt.available === true)) {
             console.log('buildTextSCI: Eintritts- & Austrittsmessung vorhanden: ', $scope.d.text_sci);
+
+            text = "";
+
+
+            // Skala 3-6
+
+            var verbesserung_vorhanden = false;
+            var verbesserung_aufzaehlung = '';
+
+            if ($scope.d.text_sci.data.austritt.scores[2].stanine - $scope.d.text_sci.data.eintritt.scores[2].stanine > 0) {
+                verbesserung_vorhanden = true;
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            };
+
+            if ($scope.d.text_sci.data.austritt.scores[3].stanine - $scope.d.text_sci.data.eintritt.scores[3].stanine > 0) {
+                verbesserung_vorhanden = true;
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            };
+
+            if ($scope.d.text_sci.data.austritt.scores[4].stanine - $scope.d.text_sci.data.eintritt.scores[4].stanine > 0) {
+                verbesserung_vorhanden = true;
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            };
+
+            if ($scope.d.text_sci.data.austritt.scores[5].stanine - $scope.d.text_sci.data.eintritt.scores[5].stanine > 0) {
+                verbesserung_vorhanden = true;
+                verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            };
+
+            if (verbesserung_vorhanden) {
+                text = text + patient_in + " konnte im Verlauf der Therapie seine Stressbewältigung durch die Strategie(n) " + verbesserung_aufzaehlung + "verbessern. ";
+            };
+
+
+            // Skala 7
+            if ($scope.d.text_sci.data.austritt.scores[7].stanine - $scope.d.text_sci.data.eintritt.scores[7].stanine > 0) {
+                text = text + " Die ungünstige Strategie des Konsums konnte reduziert werden. ";
+            };
+
+            // Save text to $scope
+            $scope.d.text_sci.text.austritt = text;
+
         }
 
         // Merge Full - Text
