@@ -35,8 +35,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 // Run App-Functions:
-                $scope.setExport();
                 $scope.setStanineView();
+                $scope.setTextSCI();
+                $scope.setExport();
 
             };
 

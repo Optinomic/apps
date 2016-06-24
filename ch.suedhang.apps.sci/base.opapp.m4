@@ -21,11 +21,12 @@ website = http://www.optinomic.com/
 [template chart_stanine 6 10]
 include(templates/stanine.html)
 
+[template text_sci 6 8]
+include(templates/text.html)
+
 [template data_export_admin 6 4]
 include(templates/export.html)
 
-[template text_sci 6 8]
-include(templates/text.html)
 
 
 [dependencies]

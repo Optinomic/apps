@@ -2,7 +2,8 @@ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">
     Interpretation: {{d.dataMain.apps.current.name}}
 </h3>
-<p class="flow-text">Hier steht dann der Textblock</p>
+<p class="flow-text">{{d.text_sci.text.eintritt}}</p>
+<p class="flow-text">{{d.text_sci.text.austritt}}</p>
 <div style="margin-top: 48px;">
     <pre>{{d.text_sci | json}}</pre>
 </div>
