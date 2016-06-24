@@ -86,58 +86,72 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
+    $scope.setTextSCI = function() {
+
+        $scope.d.text_sci = {
+            "data": {
+                "eintritt": {
+                    "available": false,
+                    "scores": {}
+                },
+                "austritt": {
+                    "available": false,
+                    "scores": {}
+                }
+            },
+            "text": {
+                "eintritt": "Eintritt: Undefiniert / Keine Messung erkannt.",
+                "austritt": "Austritt: Undefiniert / Keine Messung erkannt."
+            }
+        };
+
+
+        // Loop Responses and push to Chart-Data
+        var survey_responses = $scope.d.dataMain.survey_responses;
+        survey_responses.forEach(function(current_response, myindex) {
+
+            // Check if we have 'Eintritt' & 'Austritt'
+            var scores = current_response.calculations[0].calculation_result.scores
+
+            scores[0].question = "Stress durch Verlust";
+            scores[1].question = "Stresssymptome";
+            scores[2].question = "Positives Denken";
+            scores[3].question = "Aktive Stressbewältigung";
+            scores[4].question = "Soziale Unterstützung";
+            scores[5].question = "Halt im Glauben";
+            scores[6].question = "Alkohol- und Zigarettenkonsum";
+
+            var response_to_set = {
+                "available": true,
+                "scores": scores
+            }
+
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
+                $scope.d.text_sci.data.eintritt = response_to_set;
+            };
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
+                $scope.d.text_sci.data.eintritt = response_to_set;
+            };
+
+
+
+
+
+
+
+        });
+
+
+    };
+
+
+
+
+
     // -----------------------------------
     // Stanine - Chart  <chart-stanine>
     // -----------------------------------
 
-    $scope.getRandomAnswerStanine = function() {
-        var score_answer = [{
-            "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Stresssymptome",
-            "sub_left": "Wenige körperliche und psychische Symptome",
-            "sub_right": "Viele körperliche und psychische Symptome",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Positives Denken",
-            "sub_left": "Ungünstig: Selbstzweifel und Fokus auf Negatives",
-            "sub_right": "Gute Stressbewältigung durch positives Denken",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Aktive Stressbewältigung",
-            "sub_left": "Ungünstig: Stressoren werden nicht beseitigt",
-            "sub_right": "Gute aktive und vorbeugende Stressbewältigung",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Soziale Unterstützung",
-            "sub_left": "Ungünstig: Kaum Unterstützung durch andere",
-            "sub_right": "Gut: Viel Unterstützung durch Freunde und Bekannte",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Halt im Glauben",
-            "sub_left": "Ungünstig: Kaum religiöser / spiritueller Halt",
-            "sub_right": "Gut: Person findet Halt im Glauben",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }, {
-            "question": "Alkohol- und Zigarettenkonsum",
-            "sub_left": "Gut: Kein erhöhter Alkohol - oder Zigarettenkonsum",
-            "sub_right": "Ungünstige Bewältigung durch Alkohol und Zigaretten",
-            "stanine": $scope.d.functions.getRandomInt(1, 9),
-            "sum_score": $scope.d.functions.getRandomInt(0, 100)
-        }];
-
-
-        return score_answer;
-    };
 
     $scope.setStanineView = function() {
 
