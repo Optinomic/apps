@@ -145,6 +145,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.buildTextSCI = function() {
 
         var concat_aufzaehlung = function(source, item) {
+
+            item = "«" + item + "»";
+
             if ((source === null) || (source === '')) {
                 source = item;
             } else {
