@@ -131,7 +131,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-                $scope.d.text_sci.data.eintritt = response_to_set;
+                $scope.d.text_sci.data.austritt = response_to_set;
             };
 
         });
