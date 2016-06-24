@@ -217,12 +217,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if (hohe_ausp_vorhanden) {
                 text = text + patient_in + " verfügt über folgende hilfreiche Stressbewältigungsstrategien: "
-                text = text + hohe_ausp_aufzaehlung;
+                text = text + hohe_ausp_aufzaehlung + ". ";
             };
 
             if (geringe_ausp_vorhanden) {
-                text = text + patient_in + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
-                text = text + hohe_ausp_aufzaehlung;
+                text = text + patient_anrede + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
+                text = text + geringe_ausp_aufzaehlung + ". ";
             };
 
             // Skala 7
