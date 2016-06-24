@@ -164,7 +164,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if ($scope.d.text_sci.data.eintritt.scores[1].stanine >= 5) {
                     text = text + " und zeigt vermehrt körperliche und psychische Stressymptome"
                 };
-                text = text + ".";
+                text = text + ". ";
             };
 
             // Skala 3-6
@@ -218,7 +218,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Save text to $scope
-            $scope.d.text_sci.data.eintritt = text;
+            $scope.d.text_sci.text.eintritt = text;
         }
 
         // Eintritts- & Austrittsmessung vorhanden
