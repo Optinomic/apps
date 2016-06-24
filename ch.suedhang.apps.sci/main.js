@@ -127,6 +127,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "scores": scores
             }
 
+            console.log('============> ', current_response.entity.data.response.Erhebungszeitpunkt, response_to_set);
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
