@@ -134,13 +134,97 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
 
-
-
-
-
-
-
         });
+
+        $scope.buildTextSCI();
+
+    };
+
+
+
+    $scope.buildTextSCI = function() {
+
+        var text = "";
+        var patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
+        var patient_in = "Der Patient";
+        if ($scope.d.dataMain.patient.data.gender !== "male") {
+            patient_in = "Die Patientin";
+        };
+
+        // Eintrittsmessung vorhanden
+        if ($scope.d.text_sci.data.eintritt.available === true) {
+            console.log('buildTextSCI: Eintrittsmessung vorhanden: ', $scope.d.text_sci);
+
+            text = "";
+
+            // Skala 1-2
+            if ($scope.d.text_sci.data.eintritt.scores[0].stanine >= 6) {
+                text = text + patient_anrede + " ist durch negative Ereignisse der letzten Monate deutlich belastet"
+
+                if ($scope.d.text_sci.data.eintritt.scores[1].stanine >= 5) {
+                    text = text + " und zeigt vermehrt körperliche und psychische Stressymptome"
+                };
+                text = text + ".";
+            };
+
+            // Skala 3-6
+            var geringe_ausp_aufzaehlung = "";
+            var geringe_ausp_vorhanden = false;
+            var hohe_ausp_aufzaehlung = "";
+            var hohe_ausp_vorhanden = false;
+
+            if ($scope.d.text_sci.data.eintritt.scores[2].stanine >= 5) {
+                hohe_ausp_vorhanden = true;
+                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[2].question;
+            } else {
+                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[2].question;
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[3].stanine >= 5) {
+                hohe_ausp_vorhanden = true;
+                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[3].question;
+            } else {
+                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[3].question;
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[4].stanine >= 5) {
+                hohe_ausp_vorhanden = true;
+                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[4].question;
+            } else {
+                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[4].question;
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[5].stanine >= 5) {
+                hohe_ausp_vorhanden = true;
+                hohe_ausp_aufzaehlung = hohe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[5].question;
+            } else {
+                geringe_ausp_aufzaehlung = geringe_ausp_aufzaehlung + $scope.d.text_sci.data.eintritt.scores[5].question;
+            };
+
+            if (hohe_ausp_vorhanden) {
+                text = text + patient_in + " verfügt über folgende hilfreiche Stressbewältigungsstrategien: "
+                text = text + hohe_ausp_aufzaehlung;
+            };
+
+            if (geringe_ausp_vorhanden) {
+                text = text + patient_in + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
+                text = text + hohe_ausp_aufzaehlung;
+            };
+
+            // Skala 7
+            if ($scope.d.text_sci.data.eintritt.scores[6].stanine >= 6) {
+                text = text + " Als ungünstige Strategie im Umgang mit Stress weist " + patient_anrede
+                text = text + " den vermehrten Konsum von Alkohol und/oder Zigaretten auf."
+            };
+
+            // Save text to $scope
+            $scope.d.text_sci.data.eintritt = text;
+        }
+
+        // Eintritts- & Austrittsmessung vorhanden
+        if (($scope.d.text_sci.data.eintritt.available === true) && ($scope.d.text_sci.data.austritt.available === true)) {
+            console.log('buildTextSCI: Eintritts- & Austrittsmessung vorhanden: ', $scope.d.text_sci);
+        }
 
 
     };
