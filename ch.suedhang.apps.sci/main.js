@@ -251,22 +251,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var verbesserung_vorhanden = false;
             var verbesserung_aufzaehlung = '';
 
-            if ($scope.d.text_sci.data.austritt.scores[2].stanine - $scope.d.text_sci.data.eintritt.scores[2].stanine > 0) {
+            if (($scope.d.text_sci.data.austritt.scores[2].stanine - $scope.d.text_sci.data.eintritt.scores[2].stanine) > 0) {
                 verbesserung_vorhanden = true;
                 verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
             };
 
-            if ($scope.d.text_sci.data.austritt.scores[3].stanine - $scope.d.text_sci.data.eintritt.scores[3].stanine > 0) {
+            if (($scope.d.text_sci.data.austritt.scores[3].stanine - $scope.d.text_sci.data.eintritt.scores[3].stanine) > 0) {
                 verbesserung_vorhanden = true;
                 verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
             };
 
-            if ($scope.d.text_sci.data.austritt.scores[4].stanine - $scope.d.text_sci.data.eintritt.scores[4].stanine > 0) {
+            if (($scope.d.text_sci.data.austritt.scores[4].stanine - $scope.d.text_sci.data.eintritt.scores[4].stanine) > 0) {
                 verbesserung_vorhanden = true;
                 verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
             };
 
-            if ($scope.d.text_sci.data.austritt.scores[5].stanine - $scope.d.text_sci.data.eintritt.scores[5].stanine > 0) {
+            if (($scope.d.text_sci.data.austritt.scores[5].stanine - $scope.d.text_sci.data.eintritt.scores[5].stanine) > 0) {
                 verbesserung_vorhanden = true;
                 verbesserung_aufzaehlung = concat_aufzaehlung(verbesserung_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
             };
@@ -277,7 +277,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Skala 7
-            if ($scope.d.text_sci.data.austritt.scores[6].stanine - $scope.d.text_sci.data.eintritt.scores[6].stanine > 0) {
+            if (($scope.d.text_sci.data.austritt.scores[6].stanine - $scope.d.text_sci.data.eintritt.scores[6].stanine) > 0) {
                 text = text + " Die ungünstige Strategie des Konsums konnte reduziert werden. ";
             };
 
