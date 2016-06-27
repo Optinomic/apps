@@ -1,49 +1,17 @@
 function main(responses) {
-    var calc = {};
+    var calc = {}; 
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.doSomething = function() {
-        var score = 73;
-        return score;
-    };
+    //calc.setScore = function() {
+    //    var score = 4;
+    //        score = score + 25;
+    //    return score;
+    //};
 
-
-    // ------------------------------------------
-    // F U N C T I O N  -  Main
-    // ------------------------------------------
-    calc.getResults = function(myResponses) {
-
-        var responses_array = myResponses.survey_responses;
-        var allResults = [];
-
-        responses_array.forEach(function(response, myindex) {
-            var myResults = {};
-            var result = response.data.response;
-
-            // Something
-            myResults.something = calc.doSomething();
-
-
-            // Write Results for the Return
-            // Do not modify stuff here
-            myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            myResults.responses = responses;
-            allResults.push(myResults);
-        });
-
-        return allResults;
-    };
-
-
-    // Return
-    return calc.getResults(responses);
-}
-
-/*     calc.roundToOne = function(num) {
+    calc.roundToOne = function(num) {
         return +(Math.round(num + "e+1") + "e-1");
     };
 
@@ -81,18 +49,26 @@ function main(responses) {
             score = score + parseInt(result['Kontrollv']);
             score = score + parseInt(result['MorgenTr']);
             score = score + parseInt(result['posErw']);
-            score = score + parseInt(result['AbstMot']);
+            score = score + parseInt(result['AbstMot']);            
 
-       
+            
             myResults.score = calc.roundToOne(score)
 
+            // Get score
+            //myResults.getScore = calc.setScore();
+
+
+            // Write Results for the Return
+            // Do not modify stuff here
+            myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
+            //myResults.responses = responses;
+            allResults.push(myResults);
         });
 
         return allResults;
     };
 
-
     // Return
     return calc.getResults(responses);
 }
-*/

@@ -13,8 +13,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div layout="row" layout-align="start start">
                 <div ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
                     <div>
-                        <h5 class="md-subhead">{{$scope.d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>73</b> auf.</h5>
-                            <h4 class="md-subhead">Ab einem Wert von 15 wird eine stationäre Entwöhnungstherapie empfohlen.</h4>
+                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>73</b> auf.</h5>
                         <!--                        <p class="md-caption" style="margin-top: -8px;">Σ = {{d.dataMain.calculations[0].calculation_results[0].score.score}})</p>
                         -->
                     </div>
