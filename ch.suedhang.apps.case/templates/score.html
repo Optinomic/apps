@@ -11,16 +11,16 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content layout-margin>
             <p>&nbsp;</p>
             <div layout="row" layout-align="start start">
-                <div ng-if="d.dataMain.calculations[0].calculation_result[0].score !== null">
+                <div ng-if="d.dataMain.calculations[0].calculation_results[0].score.score !== null">
                     <div>
-                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.calculations[0].calculation_result[0].score}}</b> auf.</h5>
+                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.calculations[0].calculation_results[0].score.score}}</b> auf.</h5>
                     </div>
                     <div>&nbsp;</div>
                     <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
                         Antworten anzeigen
                     </md-button>
                 </div>
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_result[0].score === null">
+                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
                     <p class="md-caption">Kein CASE-Summenwert vorhanden.</p>
                 </div>
