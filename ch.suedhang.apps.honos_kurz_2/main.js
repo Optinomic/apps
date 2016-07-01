@@ -364,81 +364,81 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "filter": "number"
         }, {
             "headerTooltip": "Absichtliche Selbstverletzung",
-            "headerName": "H1[402V02]",
+            "headerName": "H2[402V02]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V02]"
+            "field": "H2[402V02]"
         }, {
             "headerTooltip": "Problematischer Alkohol- oder Drogenkonsum",
-            "headerName": "H1[402V03]",
+            "headerName": "H3[402V03]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V03]"
+            "field": "H3[402V03]"
         }, {
             "headerTooltip": "Kognitive Probleme",
-            "headerName": "H1[402V04]",
+            "headerName": "H4[402V04]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V04]"
+            "field": "H4[402V04]"
         }, {
             "headerTooltip": "Probleme in Zusammenhang mit körperlicher Erkrankung",
-            "headerName": "H1[402V05]",
+            "headerName": "H5[402V05]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V05]"
+            "field": "H5[402V05]"
         }, {
             "headerTooltip": "Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung",
-            "headerName": "H1[402V06]",
+            "headerName": "H6[402V06]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V06]"
+            "field": "H6[402V06]"
         }, {
             "headerTooltip": "Gedrückte Stimmung",
-            "headerName": "H1[402V07]",
+            "headerName": "H7[402V07]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V07]"
+            "field": "H7[402V07]"
         }, {
             "headerTooltip": "Andere psychische Probleme",
-            "headerName": "H1[402V08]",
+            "headerName": "H8[402V08]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H1[402V08]"
+            "field": "H8[402V08]"
         }, {
             "headerTooltip": "Probleme mit Beziehung",
-            "headerName": "H2[402V11]",
+            "headerName": "H9[402V11]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H2[402V11]"
+            "field": "H9[402V11]"
         }, {
             "headerTooltip": "Probleme mit alltäglichen Aktivitäten",
-            "headerName": "H2[402V12]",
+            "headerName": "H10[402V12]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H2[402V12]"
+            "field": "H10[402V12]"
         }, {
             "headerTooltip": "Probleme durch die Wohnbedingungen",
-            "headerName": "H2[402V13]",
+            "headerName": "H11[402V13]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H2[402V13]"
+            "field": "H11[402V13]"
         }, {
             "headerTooltip": "Probleme durch die Bedingungen in Beruf und Alltag",
-            "headerName": "H2[402V14]",
+            "headerName": "H12[402V14]",
             "cellClass": "md-body-1",
             "width": 52,
             "suppressSizeToFit": true,
-            "field": "H2[402V14]"
+            "field": "H12[402V14]"
         }, {
             "headerTooltip": "cgiSG",
             "headerName": "cgiSG",
