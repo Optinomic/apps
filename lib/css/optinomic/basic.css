@@ -15,6 +15,7 @@ body {
     .no-print * {
         display: none !important;
     }
+    -webkit-print-color-adjust: exact;
 }
 
 *:focus {
