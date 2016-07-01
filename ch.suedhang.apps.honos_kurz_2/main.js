@@ -483,17 +483,17 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "hide": true,
             "field": "q402V00"
         }, {
-            "headerTooltip": "q402V09",
-            "headerName": "q402V09",
+            "headerTooltip": "H8a",
+            "headerName": "H8a",
             "cellClass": "md-body-1",
-            "field": "q402V09",
+            "field": "H8a",
             "width": 10,
             "suppressSizeToFit": true
         }, {
-            "headerTooltip": "q402V10",
-            "headerName": "q402V10",
+            "headerTooltip": "H8b",
+            "headerName": "H8b",
             "cellClass": "md-body-1",
-            "field": "q402V10"
+            "field": "H8b"
         }, {
             "headerTooltip": "count_kA",
             "headerName": "count_kA",
