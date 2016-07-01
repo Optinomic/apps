@@ -95,7 +95,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('imelineChart: honos1_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Absichtliche Selbstverletzung';
-            $scope.d.timeline.options.focusField = 'H1[402V02]';
+            $scope.d.timeline.options.focusField = 'H2[402V02]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
  /*
@@ -103,14 +103,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('imelineChart: honos3_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Problematischer Alkohol- oder Drogenkonsum';
-            $scope.d.timeline.options.focusField = 'H1[402V03]';
+            $scope.d.timeline.options.focusField = 'H3[402V03]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos4_timeline') {
             console.log('imelineChart: honos4_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Kognitive Probleme';
-            $scope.d.timeline.options.focusField = 'H1[402V04]';
+            $scope.d.timeline.options.focusField = 'H4[402V04]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
 */
@@ -118,7 +118,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('imelineChart: honos5_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme in Zusammenhang mit körperlicher Erkrankung';
-            $scope.d.timeline.options.focusField = 'H1[402V05]';
+            $scope.d.timeline.options.focusField = 'H5[402V05]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
 /*
@@ -126,49 +126,49 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             console.log('imelineChart: honos6_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung';
-            $scope.d.timeline.options.focusField = 'H1[402V06]';
+            $scope.d.timeline.options.focusField = 'H6[402V06]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos7_timeline') {
             console.log('imelineChart: honos7_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Gedrückte Stimmung';
-            $scope.d.timeline.options.focusField = 'H1[402V07]';
+            $scope.d.timeline.options.focusField = 'H7[402V07]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos8_timeline') {
             console.log('imelineChart: honos8_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Andere psychische Probleme';
-            $scope.d.timeline.options.focusField = 'H1[402V08]';
+            $scope.d.timeline.options.focusField = 'H8[402V08]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos9_timeline') {
             console.log('imelineChart: honos9_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme mit Beziehung';
-            $scope.d.timeline.options.focusField = 'H2[402V11]';
+            $scope.d.timeline.options.focusField = 'H9[402V11]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos10_timeline') {
             console.log('imelineChart: honos10_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme mit alltäglichen Aktivitäten';
-            $scope.d.timeline.options.focusField = 'H2[402V12]';
+            $scope.d.timeline.options.focusField = 'H10[402V12]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos11_timeline') {
             console.log('imelineChart: honos11_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme durch die Wohnbedingungen';
-            $scope.d.timeline.options.focusField = 'H2[402V13]';
+            $scope.d.timeline.options.focusField = 'H11[402V13]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
         if ($scope.d.dataMain.params.location.viewname === 'honos12_timeline') {
             console.log('imelineChart: honos12_timeline');
             $scope.d.timeline.options.title = '';
             $scope.d.timeline.name = 'Probleme durch die Bedingungen in Beruf und Alltag';
-            $scope.d.timeline.options.focusField = 'H2[402V14]';
+            $scope.d.timeline.options.focusField = 'H12[402V14]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
 */
