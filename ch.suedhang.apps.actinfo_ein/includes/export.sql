@@ -35,7 +35,7 @@ SELECT
   ((cast(response AS json))->>'QNEC050[VNEC050fi]') as qnec050_vnec050fi,
   ((cast(response AS json))->>'QNEC050[VNEC050fr]') as qnec050_vnec050fr,
   ((cast(response AS json))->>'QNEC050[VNEC050gb]') as qnec050_vnec050gb,
-  ((cast(response AS json))->>'QNEC050[VNEC050ge]') as qnec050_vnec050ge,
+  ((cast(response AS json))->>'QNEC050[VNEC050ge]') as qnec050_vnec050ge,  
   ((cast(response AS json))->>'QNEC050[VNEC050gr]') as qnec050_vnec050gr,
   ((cast(response AS json))->>'QNEC050[VNEC050hr]') as qnec050_vnec050hr,
   ((cast(response AS json))->>'QNEC050[VNEC050hu]') as qnec050_vnec050hu,
@@ -43,7 +43,7 @@ SELECT
   ((cast(response AS json))->>'QNEC050[VNEC050in]') as qnec050_vnec050in,
   ((cast(response AS json))->>'QNEC050[VNEC050iq]') as qnec050_vnec050iq,
   ((cast(response AS json))->>'QNEC050[VNEC050ir]') as qnec050_vnec050ir,
-  ((cast(response AS json))->>'QNEC050[VNEC050is]') as qnec050_vnec050is,
+  ((cast(response AS json))->>'QNEC050[VNEC050is]') as qnec050_vnec050is,  
   ((cast(response AS json))->>'QNEC050[VNEC050it]') as qnec050_vnec050it,
   ((cast(response AS json))->>'QNEC050[VNEC050ke]') as qnec050_vnec050ke,
   ((cast(response AS json))->>'QNEC050[VNEC050li]') as qnec050_vnec050li,
@@ -217,6 +217,7 @@ SELECT
   ((cast(response AS json))->>'QZEK010[VZEK010v]') as qzek010_vzek010v,
   ((cast(response AS json))->>'QZEK010[VZEK010x]') as qzek010_vzek010x,
   ((cast(response AS json))->>'QZEK010[VZEK010y]') as qzek010_vzek010y,
+
   ((cast(response AS json))->>'QZES060QZES070[VZES060]') as qzes060qzes070_vzes060,
   ((cast(response AS json))->>'QZES060QZES070[VZES070]') as qzes060qzes070_vzes070,
   ((cast(response AS json))->>'QZES080[VZES080a]') as qzes080_vzes080a,
@@ -225,7 +226,7 @@ SELECT
   ((cast(response AS json))->>'QZES080[VZES080d]') as qzes080_vzes080d,
   ((cast(response AS json))->>'QZES080[VZES080x]') as qzes080_vzes080x,
   ((cast(response AS json))->>'QZES080[VZES080y]') as qzes080_vzes080y,
-  ((cast(response AS json))->>'QZEU011') as qzeu011,
+
   ((cast(response AS json))->>'QZEU025[VZEU025a]') as qzeu025_vzeu025a,
   ((cast(response AS json))->>'QZEU025[VZEU025b]') as qzeu025_vzeu025b,
   ((cast(response AS json))->>'QZEU025[VZEU025c]') as qzeu025_vzeu025c,
@@ -240,34 +241,27 @@ SELECT
   ((cast(response AS json))->>'QZEU070[VZEU070g]') as qzeu070_vzeu070g,
   ((cast(response AS json))->>'QZEU070[VZEU070x]') as qzeu070_vzeu070x,
   ((cast(response AS json))->>'QZEU070[VZEU070y]') as qzeu070_vzeu070y,
-  ((cast(response AS json))->>'VMEB001') as vmeb001,
-  ((cast(response AS json))->>'VMEB005') as vmeb005,
-  ((cast(response AS json))->>'VMEB010') as vmeb010,
-  ((cast(response AS json))->>'VMEB040a') as vmeb040a,
-  ((cast(response AS json))->>'VMEB040d') as vmeb040d,
+
+
   ((cast(response AS json))->>'VMEB061') as vmeb061,
-  ((cast(response AS json))->>'VMEB081') as vmeb081,
+
   ((cast(response AS json))->>'VMEC010') as vmec010,
   ((cast(response AS json))->>'VMEC020') as vmec020,
-  ((cast(response AS json))->>'VMEC030a') as vmec030a,
+
   ((cast(response AS json))->>'VMEC040') as vmec040,
-  ((cast(response AS json))->>'VMEC061') as vmec061,
-  ((cast(response AS json))->>'VMEC066') as vmec066,
-  ((cast(response AS json))->>'VMEC081') as vmec081,
-  ((cast(response AS json))->>'VMEC091') as vmec091,
-  ((cast(response AS json))->>'VMEC101') as vmec101,
-  ((cast(response AS json))->>'VMEC111') as vmec111,
+
   ((cast(response AS json))->>'VMED040') as vmed040,
-  ((cast(response AS json))->>'VMED045') as vmed045,
+
   ((cast(response AS json))->>'VMED046') as vmed046,
   ((cast(response AS json))->>'VMED050') as vmed050,
-  ((cast(response AS json))->>'VMED055') as vmed055,
+
   ((cast(response AS json))->>'VMED056') as vmed056,
   ((cast(response AS json))->>'VMED060') as vmed060,
-  ((cast(response AS json))->>'VMED065') as vmed065,
+
   ((cast(response AS json))->>'VMED066') as vmed066,
-  ((cast(response AS json))->>'VMED096') as vmed096,
+
   ((cast(response AS json))->>'VMED097') as vmed097,
+
   ((cast(response AS json))->>'VNEB050[VNEB050a]') as vneb050_vneb050a,
   ((cast(response AS json))->>'VNEB050[VNEB050b]') as vneb050_vneb050b,
   ((cast(response AS json))->>'VNEB050[VNEB050c]') as vneb050_vneb050c,
@@ -275,6 +269,7 @@ SELECT
   ((cast(response AS json))->>'VNEB050[VNEB050e]') as vneb050_vneb050e,
   ((cast(response AS json))->>'VNEB050[VNEB050x]') as vneb050_vneb050x,
   ((cast(response AS json))->>'VNEB050[VNEB050y]') as vneb050_vneb050y,
+
   ((cast(response AS json))->>'VNEB060[VNEB060a]') as vneb060_vneb060a,
   ((cast(response AS json))->>'VNEB060[VNEB060b]') as vneb060_vneb060b,
   ((cast(response AS json))->>'VNEB060[VNEB060c]') as vneb060_vneb060c,
@@ -287,25 +282,21 @@ SELECT
   ((cast(response AS json))->>'VNEB060[VNEB060x]') as vneb060_vneb060x,
   ((cast(response AS json))->>'VNEB065') as vneb065,
   ((cast(response AS json))->>'VNEB066') as vneb066,
-  ((cast(response AS json))->>'VNEB067') as vneb067,
+
   ((cast(response AS json))->>'VNEB080') as vneb080,
+
   ((cast(response AS json))->>'VNEC050x') as vnec050x,
   ((cast(response AS json))->>'VNEC067') as vnec067,
   ((cast(response AS json))->>'VNEC068') as vnec068,
+
   ((cast(response AS json))->>'VNED010') as vned010,
   ((cast(response AS json))->>'VNED015') as vned015,
   ((cast(response AS json))->>'VNED025') as vned025,
   ((cast(response AS json))->>'VNED026') as vned026,
   ((cast(response AS json))->>'VNED030') as vned030,
-  ((cast(response AS json))->>'VNED031') as vned031,
+
   ((cast(response AS json))->>'VNED070x') as vned070x,
-  ((cast(response AS json))->>'VNED071be') as vned071be,
-  ((cast(response AS json))->>'VNED071cc') as vned071cc,
-  ((cast(response AS json))->>'VNED071de') as vned071de,
-  ((cast(response AS json))->>'VNED071ed') as vned071ed,
-  ((cast(response AS json))->>'VNED071fc') as vned071fc,
-  ((cast(response AS json))->>'VNED071j') as vned071j,
-  ((cast(response AS json))->>'VNED071kd') as vned071kd,
+
   ((cast(response AS json))->>'VNED073a') as vned073a,
   ((cast(response AS json))->>'VNED073ba') as vned073ba,
   ((cast(response AS json))->>'VNED073bb') as vned073bb,
@@ -334,13 +325,16 @@ SELECT
   ((cast(response AS json))->>'VNED073kb') as vned073kb,
   ((cast(response AS json))->>'VNED073kc') as vned073kc,
   ((cast(response AS json))->>'VNED073kd') as vned073kd,
+
   ((cast(response AS json))->>'VNED090') as vned090,
   ((cast(response AS json))->>'VNED092') as vned092,
   ((cast(response AS json))->>'VNED093') as vned093,
   ((cast(response AS json))->>'VNED094') as vned094,
   ((cast(response AS json))->>'VNED095') as vned095,
   ((cast(response AS json))->>'VNED098') as vned098,
-  ((cast(response AS json))->>'VNeD073bc') as vned073bc,
+
+  ((cast(response AS json))->>'VNED073bc') as vned073bc,
+
   ((cast(response AS json))->>'VYEE010') as vyee010,
   ((cast(response AS json))->>'VYEE040') as vyee040,
   ((cast(response AS json))->>'VYEF010') as vyef010,
@@ -351,6 +345,7 @@ SELECT
   ((cast(response AS json))->>'VYEK061') as vyek061,
   ((cast(response AS json))->>'VYEP011') as vyep011,
   ((cast(response AS json))->>'VYEP013') as vyep013,
+
   ((cast(response AS json))->>'VZEA010') as vzea010,
   ((cast(response AS json))->>'VZEA020') as vzea020,
   ((cast(response AS json))->>'VZEA030') as vzea030,
@@ -362,21 +357,21 @@ SELECT
   ((cast(response AS json))->>'VZEA090') as vzea090,
   ((cast(response AS json))->>'VZEA100') as vzea100,
   ((cast(response AS json))->>'VZEA130') as vzea130,
-  ((cast(response AS json))->>'VZEA135') as vzea135,
+
   ((cast(response AS json))->>'VZEA136') as vzea136,
   ((cast(response AS json))->>'VZEA140') as vzea140,
-  ((cast(response AS json))->>'VZEE041') as vzee041,
+
   ((cast(response AS json))->>'VZEE050') as vzee050,
-  ((cast(response AS json))->>'VZEF011') as vzef011,
+
   ((cast(response AS json))->>'VZEF030') as vzef030,
-  ((cast(response AS json))->>'VZEK011') as vzek011,
+
   ((cast(response AS json))->>'VZEO010') as vzeo010,
-  ((cast(response AS json))->>'VZEO011') as vzeo011,
+
   ((cast(response AS json))->>'VZES010') as vzes010,
   ((cast(response AS json))->>'VZES015') as vzes015,
   ((cast(response AS json))->>'VZES020') as vzes020,
   ((cast(response AS json))->>'VZES050') as vzes050,
-  ((cast(response AS json))->>'VZES081') as vzes081,
+
   ((cast(response AS json))->>'VZET010') as vzet010,
   ((cast(response AS json))->>'VZET020') as vzet020,
   ((cast(response AS json))->>'VZET030') as vzet030,
@@ -386,12 +381,12 @@ SELECT
   ((cast(response AS json))->>'VZET070') as vzet070,
   ((cast(response AS json))->>'VZEU010') as vzeu010,
   ((cast(response AS json))->>'VZEU020') as vzeu020,
-  ((cast(response AS json))->>'VZEU030') as vzeu030,
+
   ((cast(response AS json))->>'VZEU031') as vzeu031,
-  ((cast(response AS json))->>'VZEU040') as vzeu040,
+
   ((cast(response AS json))->>'VZEU041') as vzeu041,
-  ((cast(response AS json))->>'VZEU071') as vzeu071,
-  ((cast(response AS json))->>'VZEX005') as vzex005,
+
+
   ((cast(response AS json))->>'cgiSG') as cgisg,
   ((cast(response AS json))->>'datestamp') as datestamp,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
