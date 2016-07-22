@@ -183,7 +183,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt, zeigte aber mehr körperliche und psychische Stresssymptome als von der Belastung her zu erwarten wäre. Dies könnte ein Hinweis auf eine chronische Stressreaktion oder unzureichende Stressbewältigungsstrategien sein. Ein Ausbau der Stressbewältigungsfähigkeiten wird empfohlen.";
             };
 
-            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine > 6)) {
                 text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt. Dennoch zeigte er viele körperliche und psychische Stresssymptome. Dies ist ein Hinweis auf unzureichende Stressbewältigungsstrategien. Ein Ausbau der Stressbewältigungsfähigkeiten ist empfohlen.";
             };
 
@@ -209,7 +209,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet. Er zeigte allerdings weniger körperliche oder psychische Stresssymptome als zu erwarten. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
             };
 
-            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine > 6)) {
                 text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet und zeigte dementsprechende viele körperliche und psychische Stresssymptome. Ein Ausbau der Stressbewältigungsfähigkeiten könnte hilfreich sein.";
             };
 
