@@ -171,16 +171,48 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('buildTextSCI: Eintrittsmessung vorhanden: ', $scope.d.text_sci);
 
             text = "";
+            text = text + patient_anrede + "  ";
 
             // Skala 1-2
-            if ($scope.d.text_sci.data.eintritt.scores[0].stanine >= 6) {
-                text = text + patient_anrede + " ist durch negative Ereignisse der letzten Monate deutlich belastet"
-
-                if ($scope.d.text_sci.data.eintritt.scores[1].stanine >= 5) {
-                    text = text + " und zeigt vermehrt körperliche und psychische Stressymptome"
-                };
-                text = text + ". ";
+            // Belastung niedrig
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt. Dem entsprechend zeigte er auch wenig psychische oder körperliche Stresssymptome.";
             };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt, zeigte aber mehr körperliche und psychische Stresssymptome als von der Belastung her zu erwarten wäre. Dies könnte ein Hinweis auf eine chronische Stressreaktion oder unzureichende Stressbewältigungsstrategien sein. Ein Ausbau der Stressbewältigungsfähigkeiten wird empfohlen.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt. Dennoch zeigte er viele körperliche und psychische Stresssymptome. Dies ist ein Hinweis auf unzureichende Stressbewältigungsstrategien. Ein Ausbau der Stressbewältigungsfähigkeiten ist empfohlen.";
+            };
+
+            // Belastung normal
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte weniger körperliche oder psychische Stresssymptome als zu erwarten. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte dementsprechende körperliche und psychische Stresssymptome.";
+            };
+
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet, zeigte aber mehr körperliche und psychische Stresssymptome als von der Belastung her zu erwarten wäre. Dies könnte ein Hinweis auf eine chronische Stressreaktion oder unzureichende Stressbewältigungsstrategien sein. Ein Ausbau der Stressbewältigungsfähigkeiten ist empfohlen.";
+            };
+
+            // Belastung hoch
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet, zeigte aber sehr wenig Stresssymptome. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet. Er zeigte allerdings weniger körperliche oder psychische Stresssymptome als zu erwarten. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet und zeigte dementsprechende viele körperliche und psychische Stresssymptome. Ein Ausbau der Stressbewältigungsfähigkeiten könnte hilfreich sein.";
+            };
+
 
             // Skala 3-6
             var geringe_ausp_aufzaehlung = "";
