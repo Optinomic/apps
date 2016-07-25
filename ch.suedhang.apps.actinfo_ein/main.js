@@ -398,7 +398,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         data_query = {
             name: 'actInfo - Eintritt (Start)',
             sql: include_as_js_string(
-                export_Nora.sql)
+                export.sql)
         };
         module_packages.push(data_query);
 
