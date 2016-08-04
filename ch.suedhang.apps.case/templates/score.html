@@ -15,10 +15,12 @@ include(../lib/html/optinomic/page/start.m4)
                     <div>
                         <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.calculations[0].calculation_results[0].score}}</b> auf.</h5>
                     </div>
+<!--
                     <div>&nbsp;</div>
                     <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
                         Antworten anzeigen
                     </md-button>
+-->
                 </div>
                 <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
@@ -36,7 +38,7 @@ include(../lib/html/optinomic/page/start.m4)
             <!--            
             <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
             -->
-            <p flex class="md-subhead" style="text-align:center;">Datumswert</p>
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculated_date}}</p>
         </md-card-actions>
         <!--        
             <md-card-content ng-if="d.show_answers" layout-margin>
