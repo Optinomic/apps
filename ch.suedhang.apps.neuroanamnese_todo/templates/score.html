@@ -2,7 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.dataMain.survey_responses.length > 0">
     <h3 class="md-headline">Daten vorhanden</h3>
     <pre>
-    	{{d.dataMain.survey_responses}}
+    	{{d.dataMain.survey_responses | json}}
     </pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
