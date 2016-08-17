@@ -10,6 +10,10 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
+            <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
+            <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
+            </p>
+            <div>&nbsp;</div>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '1'" class="md-subhead">Eintritt</h3>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '2'" class="md-subhead">Austritt</h3>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '3'" class="md-subhead">Verlauf</h3>
@@ -43,10 +47,6 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <p>&nbsp;</p>
-            <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
-            <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
-            </p>
-            <div>&nbsp;</div>
         </md-card-content>
     </md-card>
 </div>
