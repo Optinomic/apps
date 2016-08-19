@@ -44,7 +44,7 @@ include(style.css)
 id = dass_survey
 type = ng
 responsibility = lead_therapist_and_deputy
-name = Fragebogen: Die Depressions-AngstStress-Skalen (DASS)
+name = Die Depressions-AngstStress-Skalen (DASS)
 host = default
 
 [survey_markup dass_survey]

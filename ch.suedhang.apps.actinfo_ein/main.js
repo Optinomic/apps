@@ -104,7 +104,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Optiate
             if (response['QNED0702[VNED070ba]'] === 'Y') {
-                substanz = 'Heroin (Optiat)'
+                substanz = 'Heroin (Opiat)'
                 answer_option = 0;
                 answer = parseInt(response.VNED073ba);
 
@@ -115,7 +115,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             if (response['QNED0702[VNED070bb]'] === 'Y') {
-                substanz = 'Methadon (Optiat)'
+                substanz = 'Methadon (Opiat)'
                 answer_option = 0;
                 answer = parseInt(response.VNED073bb);
 
@@ -126,7 +126,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             if (response['QNED0702[VNED070bc]'] === 'Y') {
-                substanz = 'Buprenorphin (Optiat)'
+                substanz = 'Buprenorphin (Opiat)'
                 answer_option = 0;
                 answer = parseInt(response.VNED073bc);
 
@@ -137,7 +137,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             };
 
             if (response['QNED0702[VNED070bd]'] === 'Y') {
-                substanz = 'Fentanyl (Optiat)'
+                substanz = 'Fentanyl (Opiat)'
                 answer_option = 0;
                 answer = parseInt(response.VNED073bc);
 
