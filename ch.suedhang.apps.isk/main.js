@@ -101,6 +101,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var score_answer = [{
                 "question": "Soziale Orientierung",
                 "full": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
+                "auspraegung": "Undefined",
+                "interpretation": "Undefined",
                 "sub_left": "Ausmass, in dem eine Person anderen Menschen offen ...",
                 "sub_right": "... und mit positiver Grundhaltung gegenüber tritt. (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
@@ -108,6 +110,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }, {
                 "question": "Offensivität",
                 "full": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
+                "auspraegung": "Undefined",
+                "interpretation": "Undefined",
                 "sub_left": "Fähigkeit, aus sich herauszugehen...",
                 "sub_right": "... um eigene Interessen aktiv zu verwirklichen. (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
@@ -115,6 +119,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }, {
                 "question": "Selbststeuerung",
                 "full": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
+                "auspraegung": "Undefined",
+                "interpretation": "Undefined",
                 "sub_left": "Fähigkeit, flexibel und rational zu handeln, ...",
                 "sub_right": "... und sich selbst als Akteur begreift. (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
@@ -122,11 +128,79 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }, {
                 "question": "Reflexibilität",
                 "full": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
+                "auspraegung": "Undefined",
+                "interpretation": "Undefined",
                 "sub_left": "Fähigkeit, bei anderen Menschen einen positiven ...",
                 "sub_right": "... Eindruck zu erzeugen. (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
+
+
+            // Interpretation hinzufügen
+
+            var soziale_orientierung_auspraegung = 'gering';
+            var soziale_orientierung_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+
+            if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 3) {
+                soziale_orientierung_auspraegung = 'mittel';
+                soziale_orientierung_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+            };
+
+            if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 6) {
+                soziale_orientierung_auspraegung = 'hoch';
+                soziale_orientierung_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+            };
+            score_answer[0].auspraegung = soziale_orientierung_auspraegung;
+            score_answer[0].interpretation = soziale_orientierung_interpretation;
+
+
+            var offenisvitaet_auspraegung = 'gering';
+            var offenisvitaet_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+
+            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
+                offenisvitaet_auspraegung = 'mittel';
+                offenisvitaet_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+            };
+
+            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
+                offenisvitaet_auspraegung = 'hoch';
+                offenisvitaet_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+            };
+            score_answer[1].auspraegung = offenisvitaet_auspraegung;
+            score_answer[1].interpretation = offenisvitaet_interpretation;
+
+
+            var selbststeuerung_auspraegung = 'gering';
+            var selbststeuerung_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+
+            if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 3) {
+                selbststeuerung_auspraegung = 'mittel';
+                selbststeuerung_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+            };
+
+            if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 6) {
+                selbststeuerung_auspraegung = 'hoch';
+                selbststeuerung_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+            };
+            score_answer[2].auspraegung = selbststeuerung_auspraegung;
+            score_answer[2].interpretation = selbststeuerung_interpretation;
+
+
+            var reflexibilitaet_auspraegung = 'gering';
+            var reflexibilitaet_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+
+            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
+                reflexibilitaet_auspraegung = 'mittel';
+                reflexibilitaet_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+            };
+
+            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
+                reflexibilitaet_auspraegung = 'hoch';
+                reflexibilitaet_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+            };
+            score_answer[3].auspraegung = reflexibilitaet_auspraegung;
+            score_answer[3].interpretation = reflexibilitaet_interpretation;
 
 
             // Create nice Labels
