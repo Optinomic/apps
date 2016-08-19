@@ -10,45 +10,44 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
+            <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
+            <p>&nbsp;</p>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '1'" class="md-subhead">Eintritt</h3>
-            <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '2'" class="md-subhead">Austritt</h3>            
+            <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '2'" class="md-subhead">Austritt</h3>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '3'" class="md-subhead">Verlauf</h3>
-           <p>&nbsp;</p>
-       		<h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
-            <div layout="row" layout-align="start start">
-                    <h5 class="md-subhead">TMT-Werte</h5>
-                    <p>&nbsp;</p>
-                    <table class="table table-condensed" style="width: 80%; text-align: center;">
-                            <th style="text-align:center !important;">
-                    		    	<th style="width: 33%">TMT A: Zeit</th>
-                            		<th style="width: 33%">TMT A: Fehler</th>
-                            		<th style="width: 33%">TMT A: Perzentile</th>
-                            </th>
-                            <p>&nbsp;</p>
-                            <tr style="text-align: center">
-                            		<td>{{d.dataMain.survey_responses[0].entity.data.response.TMTATime}}</td>
-                            		<td>{{d.dataMain.survey_responses[0].entity.data.response.TMTAError}}</td>
-                            		<td>-0.92</td>
-                            </tr>
-                    </table>
-                    <p>&nbsp;</p>
-                    <table class="table table-condensed" style="width: 80%; text-align: center;">
-                            <th style="text-align:center !important;">
-                    		    	<th style="width: 33%">TMT B: Zeit</th>
-                            		<th style="width: 33%">TMT B: Fehler</th>
-                            		<th style="width: 33%">TMT B: Perzentile</th>
-                            </th>
-                            <p>&nbsp;</p>
-                            <tr style="text-align: center">
-                            		<td>{{d.dataMain.survey_responses[0].entity.data.response.TMTBTime}}</td>
-                            		<td>{{d.dataMain.survey_responses[0].entity.data.response.TMTBError}}</td>
-                            		<td>-0.45</td>
-                            </tr>
-                    </table>
+            <p>&nbsp;</p>
+            <div layout="row" layout-align="space-between start" layout-margin>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT A: Zeit</p>
+                    <p class="md-subhead" style="margin-top:-18px;">60.0</p>
+                </div>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT A: Fehler</p>
+                    <p class="md-subhead" style="margin-top:-18px;">3</p>
+                </div>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT A: Perzentile</p>
+                    <p class="md-subhead" style="margin-top:-18px;">-0.92</p>
+                </div>
             </div>
-        <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
-        </p>
-        <div>&nbsp;</div>
+            <div layout="row" layout-align="space-between start" layout-margin>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT B: Zeit</p>
+                    <p class="md-subhead" style="margin-top:-18px;">62.0</p>
+                </div>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT B: Fehler</p>
+                    <p class="md-subhead" style="margin-top:-18px;">5</p>
+                </div>
+                <div layout="column" layout-align="start center">
+                    <p class="md-caption">TMT B: Perzentile</p>
+                    <p class="md-subhead" style="margin-top:-18px;">-0.45</p>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+                        <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
+            </p>
+            <div>&nbsp;</div>
         </md-card-content>
     </md-card>
 </div>

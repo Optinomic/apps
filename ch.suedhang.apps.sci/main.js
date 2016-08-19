@@ -160,8 +160,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var text = "";
         var patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
         var patient_in = "Der Patient";
+        var patient_in_klein = "der Patient";
         if ($scope.d.dataMain.patient.data.gender !== "male") {
             patient_in = "Die Patientin";
+            patient_in_klein = "die Patientin";
         };
 
         // ---------------------------------------
@@ -171,74 +173,186 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('buildTextSCI: Eintrittsmessung vorhanden: ', $scope.d.text_sci);
 
             text = "";
+            text = text + patient_anrede + "  ";
 
             // Skala 1-2
-            if ($scope.d.text_sci.data.eintritt.scores[0].stanine >= 6) {
-                text = text + patient_anrede + " ist durch negative Ereignisse der letzten Monate deutlich belastet"
-
-                if ($scope.d.text_sci.data.eintritt.scores[1].stanine >= 5) {
-                    text = text + " und zeigt vermehrt körperliche und psychische Stressymptome"
-                };
-                text = text + ". ";
+            // Belastung niedrig
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt. Dem entsprechend zeigte er auch wenig psychische oder körperliche Stresssymptome.";
             };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt, zeigte aber mehr körperliche und psychische Stresssymptome als von der Belastung her zu erwarten wäre. Dies könnte ein Hinweis auf eine chronische Stressreaktion oder unzureichende Stressbewältigungsstrategien sein. Ein Ausbau der Stressbewältigungsfähigkeiten wird empfohlen.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine < 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine > 6)) {
+                text = text + "war in den letzten Monaten unterdurchschnittlich wenig Belastungen ausgesetzt. Dennoch zeigte er viele körperliche und psychische Stresssymptome. Dies ist ein Hinweis auf unzureichende Stressbewältigungsstrategien. Ein Ausbau der Stressbewältigungsfähigkeiten ist empfohlen.";
+            };
+
+            // Belastung normal
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte weniger körperliche oder psychische Stresssymptome als zu erwarten. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte dementsprechende körperliche und psychische Stresssymptome.";
+            };
+
+            if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet, zeigte aber mehr körperliche und psychische Stresssymptome als von der Belastung her zu erwarten wäre. Dies könnte ein Hinweis auf eine chronische Stressreaktion oder unzureichende Stressbewältigungsstrategien sein. Ein Ausbau der Stressbewältigungsfähigkeiten ist empfohlen.";
+            };
+
+            // Belastung hoch
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 4)) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet, zeigte aber sehr wenig Stresssymptome. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet. Er zeigte allerdings weniger körperliche oder psychische Stresssymptome als zu erwarten. Dies ist ein Hinweis auf gut funktionierende Stressbewältigungsstrategien.";
+            };
+
+            if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine > 6)) {
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet und zeigte dementsprechende viele körperliche und psychische Stresssymptome. Ein Ausbau der Stressbewältigungsfähigkeiten könnte hilfreich sein.";
+            };
+
+            // Skala 3-6 | gemäss SCI-Text2.doc
+
+            var negative_strategie_ausgepraegt = false;
+            if ($scope.d.text_sci.data.eintritt.scores[6].stanine > 6) {
+                negative_strategie_ausgepraegt = true;
+            };
+
+            var anz_hiflreiche_stressbewaeltigung = 0;
+            var hiflreiche_stressbewaeltigung = '';
+
+            if ($scope.d.text_sci.data.eintritt.scores[2].stanine > 5) {
+                anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[3].stanine > 5) {
+                anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[3].question);
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[4].stanine > 5) {
+                anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[4].question);
+            };
+
+            if ($scope.d.text_sci.data.eintritt.scores[5].stanine > 5) {
+                anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[5].question);
+            };
+
+            $scope.d.text_sci.text.negative_strategie_ausgepraegt = negative_strategie_ausgepraegt;
+            $scope.d.text_sci.text.anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung;
+            $scope.d.text_sci.text.hiflreiche_stressbewaeltigung = hiflreiche_stressbewaeltigung;
+
+
+            // Texte 'schreiben'
+            text = text + " " + patient_anrede + " ";
+
+            if (anz_hiflreiche_stressbewaeltigung === 0) {
+
+                text = text + "hat keine der bekannten hilfreichen Bewältigungsstrategien zur Verfügung.";
+
+                if (negative_strategie_ausgepraegt) {
+                    text = text + " Es ist allein die ungünstige Strategie des Konsum zur Stressbewältigung vorhanden.";
+                };
+            };
+
+            if (anz_hiflreiche_stressbewaeltigung === 1) {
+                text = text + "hat lediglich die hilfreiche Bewältigungsstrategie " + hiflreiche_stressbewaeltigung + " zur Verfügung. Die anderen bekannten hilfreichen Bewältigungsstrategien werden nicht genutzt.";
+
+                if (negative_strategie_ausgepraegt) {
+                    text = text + " Zudem ist die ungünstige Strategie des Konsum zur Stressbewältigung vorhanden. Es sollten weitere hilfreiche Strategien erlernt werden um Alternativen zur Konsumstrategie zu schaffen.";
+                };
+            };
+
+            if (anz_hiflreiche_stressbewaeltigung === 2) {
+                text = text + "hat die hilfreiche Bewältigungsstrategien " + hiflreiche_stressbewaeltigung + " zur Verfügung.";
+
+                if (negative_strategie_ausgepraegt) {
+                    text = text + " Zudem ist die ungünstige Strategie des Konsum zur Stressbewältigung vorhanden. Es sollte geschaut werden, wie diese ungünstige Strategie besser ersetzt werden könnte.";
+                };
+            };
+
+            if (anz_hiflreiche_stressbewaeltigung === 3) {
+                text = text + "hat viele hilfreiche Bewältigungsstrategien ausgebildet. Durch  " + hiflreiche_stressbewaeltigung + " kann " + patient_in_klein + " Stress gut bewältigen.";
+
+                if (negative_strategie_ausgepraegt) {
+                    text = text + " Allerdings ist auch die ungünstige Stressbewältigungstrategie des Konsum vorhanden.";
+                };
+            };
+
+            if (anz_hiflreiche_stressbewaeltigung >= 4) {
+                text = text + "hat sehr viele hilfreiche Bewältigungsstrategien ausgebildet. Durch  " + hiflreiche_stressbewaeltigung + " kann " + patient_in_klein + " Stress gut bewältigen.";
+
+                if (negative_strategie_ausgepraegt) {
+                    text = text + " Allerdings ist auch die ungünstige Stressbewältigungstrategie des Konsum vorhanden. Es sollte geschaut werden, was notwendig ist, damit die günstigen Strategien mehr genutzt werden.";
+                };
+            };
+
 
             // Skala 3-6
-            var geringe_ausp_aufzaehlung = "";
-            var geringe_ausp_vorhanden = false;
-            var hohe_ausp_aufzaehlung = "";
-            var hohe_ausp_vorhanden = false;
-
-            if ($scope.d.text_sci.data.eintritt.scores[2].stanine >= 5) {
-                hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
-            } else {
-                geringe_ausp_vorhanden = true;
-                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
-            };
-
-            if ($scope.d.text_sci.data.eintritt.scores[3].stanine >= 5) {
-                hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
-            } else {
-                geringe_ausp_vorhanden = true;
-                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
-            };
-
-            if ($scope.d.text_sci.data.eintritt.scores[4].stanine >= 5) {
-                hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
-            } else {
-                geringe_ausp_vorhanden = true;
-                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
-            };
-
-            if ($scope.d.text_sci.data.eintritt.scores[5].stanine >= 5) {
-                hohe_ausp_vorhanden = true;
-                hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
-            } else {
-                geringe_ausp_vorhanden = true;
-                geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
-            };
-
-            if (hohe_ausp_vorhanden) {
-                text = text + patient_in + " verfügt über folgende hilfreiche Stressbewältigungsstrategien: "
-                text = text + hohe_ausp_aufzaehlung + ". ";
-            };
-
-            if (geringe_ausp_vorhanden) {
-                text = text + patient_anrede + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
-                text = text + geringe_ausp_aufzaehlung + ". ";
-            };
-
-            // Skala 7
-            if ($scope.d.text_sci.data.eintritt.scores[6].stanine >= 6) {
-                text = text + " Als ungünstige Strategie im Umgang mit Stress weist " + patient_anrede
-                text = text + " den vermehrten Konsum von Alkohol und/oder Zigaretten auf."
-            };
+            // var geringe_ausp_aufzaehlung = "";
+            // var geringe_ausp_vorhanden = false;
+            // var hohe_ausp_aufzaehlung = "";
+            // var hohe_ausp_vorhanden = false;
+            // 
+            // if ($scope.d.text_sci.data.eintritt.scores[2].stanine >= 5) {
+            //     hohe_ausp_vorhanden = true;
+            //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            // } else {
+            //     geringe_ausp_vorhanden = true;
+            //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
+            // };
+            // 
+            // if ($scope.d.text_sci.data.eintritt.scores[3].stanine >= 5) {
+            //     hohe_ausp_vorhanden = true;
+            //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
+            // } else {
+            //     geringe_ausp_vorhanden = true;
+            //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
+            // };
+            // 
+            // if ($scope.d.text_sci.data.eintritt.scores[4].stanine >= 5) {
+            //     hohe_ausp_vorhanden = true;
+            //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
+            // } else {
+            //     geringe_ausp_vorhanden = true;
+            //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
+            // };
+            // 
+            // if ($scope.d.text_sci.data.eintritt.scores[5].stanine >= 5) {
+            //     hohe_ausp_vorhanden = true;
+            //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
+            // } else {
+            //     geringe_ausp_vorhanden = true;
+            //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
+            // };
+            // 
+            // if (hohe_ausp_vorhanden) {
+            //     text = text + patient_in + " verfügt über folgende hilfreiche Stressbewältigungsstrategien: "
+            //     text = text + hohe_ausp_aufzaehlung + ". ";
+            // };
+            // 
+            // if (geringe_ausp_vorhanden) {
+            //     text = text + patient_anrede + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
+            //     text = text + geringe_ausp_aufzaehlung + ". ";
+            // };
+            // 
+            // // Skala 7
+            // if ($scope.d.text_sci.data.eintritt.scores[6].stanine >= 6) {
+            //     text = text + " Als ungünstige Strategie im Umgang mit Stress weist " + patient_anrede
+            //     text = text + " den vermehrten Konsum von Alkohol und/oder Zigaretten auf."
+            // };
 
             // Save text to $scope
             $scope.d.text_sci.text.eintritt = text;
         }
+
 
         // ---------------------------------------
         // Eintritts- & Austrittsmessung vorhanden

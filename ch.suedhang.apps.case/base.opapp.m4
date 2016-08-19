@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Neu?  Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert. 
+Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert. 
 
 [developer]
 first_name = Nora
