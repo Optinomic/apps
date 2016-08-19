@@ -227,22 +227,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if ($scope.d.text_sci.data.eintritt.scores[2].stanine > 5) {
                 anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
-                concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[2].question);
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[2].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[3].stanine > 5) {
                 anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
-                concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[3].question);
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[3].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[4].stanine > 5) {
                 anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
-                concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[4].question);
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[4].question);
             };
 
             if ($scope.d.text_sci.data.eintritt.scores[5].stanine > 5) {
                 anz_hiflreiche_stressbewaeltigung = anz_hiflreiche_stressbewaeltigung + 1;
-                concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[5].question);
+                hiflreiche_stressbewaeltigung = concat_aufzaehlung(hiflreiche_stressbewaeltigung, $scope.d.text_sci.data.eintritt.scores[5].question);
             };
 
             $scope.d.text_sci.text.negative_strategie_ausgepraegt = negative_strategie_ausgepraegt;
@@ -251,7 +251,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Texte 'schreiben'
-            text = text + patient_anrede + " ";
+            text = text + " " + patient_anrede + " ";
 
             if (anz_hiflreiche_stressbewaeltigung === 0) {
 
@@ -265,7 +265,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (anz_hiflreiche_stressbewaeltigung === 1) {
                 text = text + "hat lediglich die hilfreiche Bewältigungsstrategie " + hiflreiche_stressbewaeltigung + " zur Verfügung. Die anderen bekannten hilfreichen Bewältigungsstrategien werden nicht genutzt.";
 
-                if (negative_strategie_ausgepraegt) {} else {
+                if (negative_strategie_ausgepraegt) {
                     text = text + " Zudem ist die ungünstige Strategie des Konsum zur Stressbewältigung vorhanden. Es sollten weitere hilfreiche Strategien erlernt werden um Alternativen zur Konsumstrategie zu schaffen.";
                 };
             };
@@ -273,7 +273,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (anz_hiflreiche_stressbewaeltigung === 2) {
                 text = text + "hat die hilfreiche Bewältigungsstrategien " + hiflreiche_stressbewaeltigung + " zur Verfügung.";
 
-                if (negative_strategie_ausgepraegt) {} else {
+                if (negative_strategie_ausgepraegt) {
                     text = text + " Zudem ist die ungünstige Strategie des Konsum zur Stressbewältigung vorhanden. Es sollte geschaut werden, wie diese ungünstige Strategie besser ersetzt werden könnte.";
                 };
             };
@@ -281,7 +281,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (anz_hiflreiche_stressbewaeltigung === 3) {
                 text = text + "hat viele hilfreiche Bewältigungsstrategien ausgebildet. Durch  " + hiflreiche_stressbewaeltigung + " kann " + patient_in_klein + " Stress gut bewältigen.";
 
-                if (negative_strategie_ausgepraegt) {} else {
+                if (negative_strategie_ausgepraegt) {
                     text = text + " Allerdings ist auch die ungünstige Stressbewältigungstrategie des Konsum vorhanden.";
                 };
             };
@@ -289,7 +289,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (anz_hiflreiche_stressbewaeltigung >= 4) {
                 text = text + "hat sehr viele hilfreiche Bewältigungsstrategien ausgebildet. Durch  " + hiflreiche_stressbewaeltigung + " kann " + patient_in_klein + " Stress gut bewältigen.";
 
-                if (negative_strategie_ausgepraegt) {} else {
+                if (negative_strategie_ausgepraegt) {
                     text = text + " Allerdings ist auch die ungünstige Stressbewältigungstrategie des Konsum vorhanden. Es sollte geschaut werden, was notwendig ist, damit die günstigen Strategien mehr genutzt werden.";
                 };
             };
