@@ -3,7 +3,7 @@ include(../lib/html/optinomic/page/start.m4)
 <chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
 <h3 class="md-headline">Legende und Interpretation</h3>
 <div ng-repeat="score in stanine.data[0].scores" style="margin-top: 21px;">
-    <h4 class="md-subhead">{{score.question}}</h4>
+    <h4 class="md-subhead">{{score.question}} <small style="color:#BDBDBD">( {{score.stanine}} | Σ{{score.sum_score}} )</small></h4>
     <p class="md-caption" style="color:#3F51B5">Ausprägung: <strong>{{score.auspraegung}}</strong>: {{score.full}}</p>
     <p class="flow-text">{{score.interpretation}}</p>
 </div>
