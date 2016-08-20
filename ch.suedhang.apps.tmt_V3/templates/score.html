@@ -16,7 +16,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <md-checkbox ng-model="d.zScore.toggles.show_clinicsample" aria-label="show_clinicsample">
                     show_clinicsample
                 </md-checkbox>
-                <md-checkbox ng-model="d.zScore.toggles.show_numbers" aria-label="show_text">
+                <md-checkbox ng-model="d.zScore.toggles.show_text" aria-label="show_text">
                     show_text
                 </md-checkbox>
             </div>
@@ -25,6 +25,9 @@ include(../lib/html/optinomic/page/start.m4)
                 <z-score data="d.zScore.data_austritt"></z-score>
             </div>
             <p>&nbsp;</p>
+            <pre>
+                {{d.zScore | json}}
+            </pre>
             <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
             <p>&nbsp;</p>
             <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '1'" class="md-subhead">Eintritt</h3>
