@@ -90,13 +90,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "show_text": true
         };
 
-
+        // FAB
         $scope.d.fab = {};
         $scope.d.fab.isOpen = false;
-        $scope.demo = {
+        $scope.d.fab.tmt = {
             isOpen: false,
-            count: 0,
-            selectedDirection: 'left'
+            count: 0
         };
 
         // ToDo: 'Echte Daten setzen'
@@ -180,7 +179,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-    $scope.setZScore = function() {
+    $scope.setZScore = function(action) {
+
+        // Toggle
+        if (action === 'show_clinicsample') {
+            $scope.d.zScore.toggles.show_clinicsample = !$scope.d.zScore.toggles.show_clinicsample;
+        };
+        if (action === 'show_text') {
+            $scope.d.zScore.toggles.show_text = !$scope.d.zScore.toggles.show_text;
+        };
 
         // Grafiken anpassen gemäss | Toggles
         $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
