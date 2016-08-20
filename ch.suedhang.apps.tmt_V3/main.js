@@ -191,18 +191,29 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Grafiken anpassen gemäss | Toggles
         $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
-        $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_b_a_quotient.show_text = $scope.d.zScore.toggles.show_text;
+        $scope.d.zScore.tmt_b_a_quotient.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_b_a_quotient.show_numbers = true;
 
         // ToDo: Auf 'echte Daten prüfen'
         var austritt_vorhanden = true;
         if (austritt_vorhanden) {
             $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
             $scope.d.zScore.tmt_a.austritt.show_numbers = true;
+            $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
+            $scope.d.zScore.tmt_b.austritt.show_numbers = true;
         } else {
             $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
             $scope.d.zScore.tmt_a.austritt.show_numbers = false;
+            $scope.d.zScore.tmt_b.eintritt.show_numbers = true;
+            $scope.d.zScore.tmt_b.austritt.show_numbers = false;
         };
 
         console.log('setZScore', action, $scope.d.zScore);
