@@ -195,7 +195,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && (($scope.d.text_sci.data.eintritt.scores[1].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[1].stanine <= 6))) {
-                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte dementsprechen körperliche und psychische Stresssymptome.";
+                text = text + "war in den letzten Monaten nicht übermässig durch negative Ereignisse belastet und zeigte dementsprechend körperliche und psychische Stresssymptome.";
             };
 
             if ((($scope.d.text_sci.data.eintritt.scores[0].stanine >= 4) && ($scope.d.text_sci.data.eintritt.scores[0].stanine <= 6)) && ($scope.d.text_sci.data.eintritt.scores[1].stanine < 6)) {
@@ -212,7 +212,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             if (($scope.d.text_sci.data.eintritt.scores[0].stanine > 6) && ($scope.d.text_sci.data.eintritt.scores[1].stanine > 6)) {
-                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet und zeigte dementsprechen viele körperliche und psychische Stresssymptome. Ein Ausbau der Stressbewältigungsfähigkeiten könnte hilfreich sein.";
+                text = text + "ist durch negative Ereignisse der letzten Monate deutlich belastet und zeigte dementsprechend viele körperliche und psychische Stresssymptome. Ein Ausbau der Stressbewältigungsfähigkeiten könnte hilfreich sein.";
             };
 
             // Skala 3-6 | gemäss SCI-Text2.doc
