@@ -1,22 +1,23 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">Trail Making Test (TMT) - A</h3>
 <md-fab-toolbar md-open="d.fab.isOpen" count="d.fab.tmt.count" md-direction="left">
     <md-fab-trigger class="align-with-text">
-        <md-button aria-label="menu" class="md-fab" style="color:#FFF">
-            <i class="mdi mdi-menu" style="color:#000"></i>
+        <md-button aria-label="menu" class="md-fab md-primary">
+            <i class="mdi mdi-menu" style="color:#E8EAF6 !important; font-size:24px;"></i>
         </md-button>
     </md-fab-trigger>
     <md-toolbar>
+        <p class="md-headline">Trail Making Test (TMT)</p>
         <md-fab-actions class="md-toolbar-tools">
             <md-button aria-label="Zeige klinische Stichprobe" ng-click="setZScore('show_clinicsample')" class="md-icon-button">
-                <i class="mdi mdi-ruler"></i>
+                <i class="mdi mdi-ruler" style="color:#E8EAF6 !important; font-size:24px;"></i>
             </md-button>
             <md-button aria-label="Zeige Beschriftungstext" ng-click="setZScore('show_text')" class="md-icon-button">
-                <i class="mdi mdi-format-text"></i>
+                <i class="mdi mdi-format-text" style="color:#E8EAF6 !important; font-size:24px;"></i>
             </md-button>
         </md-fab-actions>
     </md-toolbar>
 </md-fab-toolbar>
+<h3 class="md-headline">Trail Making Test (TMT) - A</h3>
 <h3 class="md-subhead">Assessment | Messungen</h3>
 <z-score data="d.zScore.tmt_a.eintritt"></z-score>
 <z-score data="d.zScore.tmt_a.austritt"></z-score>
