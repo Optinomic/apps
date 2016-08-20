@@ -35,6 +35,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
+                $scope.setZScore();
                 $scope.setExport();
 
             };
@@ -79,4 +80,51 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
 
     };
+
+
+    $scope.setZScore = function() {
+
+        $scope.d.zScore = {};
+        $scope.d.zScore.toggles = {
+            "show_numbers": false,
+            "show_clinicsample": true,
+            "show_text": true
+        };
+
+        $scope.d.zScore.data_eintritt = {
+            "zscore": 1.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Ungünstige Somatisierung",
+            "text_left_caption": "Dies ist eine sehr lange Beschreibung, welche so nicht vorkommen darf.",
+            "text_right": "Text rechts",
+            "text_right_caption": "Text rechts",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8,
+            "marker_1_score": null,
+            "marker_1_text": "Zeitabbruch",
+            "show_numbers": $scope.d.zScore.toggles.show_numbers,
+            "show_clinicsample": $scope.d.zScore.toggles.show_clinicsample,
+            "show_text": $scope.d.zScore.toggles.show_text,
+        };
+        $scope.d.zScore.data_austritt = {
+            "zscore": 3.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Ungünstige Somatisierung",
+            "text_left_caption": "Dies ist eine sehr lange Beschreibung, welche so nicht vorkommen darf.",
+            "text_right": "Text rechts",
+            "text_right_caption": "Text rechts",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8,
+            "marker_1_score": null,
+            "marker_1_text": "Zeitabbruch",
+            "show_numbers": $scope.d.zScore.toggles.show_numbers,
+            "show_clinicsample": $scope.d.zScore.toggles.show_clinicsample,
+            "show_text": $scope.d.zScore.toggles.show_text,
+        };
+    };
+
+
+
 });

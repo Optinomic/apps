@@ -9,6 +9,21 @@ include(../lib/html/optinomic/page/start.m4)
             </md-card-title-text>
         </md-card-title>
         <md-card-content layout-margin>
+            <div layout="row" layout-align="space-between center">
+                <md-checkbox ng-model="d.zScore.toggles.show_numbers" aria-label="show_numbers">
+                    show_numbers
+                </md-checkbox>
+                <md-checkbox ng-model="d.zScore.toggles.show_clinicsample" aria-label="show_clinicsample">
+                    show_clinicsample
+                </md-checkbox>
+                <md-checkbox ng-model="d.zScore.toggles.show_numbers" aria-label="show_text">
+                    show_text
+                </md-checkbox>
+            </div>
+            <div>
+                <z-score data="d.zScore.data_eintritt"></z-score>
+                <z-score data="d.zScore.data_austritt"></z-score>
+            </div>
             <p>&nbsp;</p>
             <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
             <p>&nbsp;</p>
@@ -45,7 +60,7 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <p>&nbsp;</p>
-                        <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
+            <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
             </p>
             <div>&nbsp;</div>
         </md-card-content>
