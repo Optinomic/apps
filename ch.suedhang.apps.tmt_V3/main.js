@@ -35,7 +35,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
-                $scope.setZScore();
+                $scope.initZScore();
                 $scope.setExport();
 
             };
@@ -82,14 +82,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-    $scope.setZScore = function() {
 
+    $scope.initZScore = function() {
         $scope.d.zScore = {};
         $scope.d.zScore.toggles = {
-            "show_numbers": false,
+            "show_numbers": true,
             "show_clinicsample": true,
             "show_text": true
         };
+
+        $scope.setZScore();
+    };
+
+
+    $scope.setZScore = function() {
 
         $scope.d.zScore.data_eintritt = {
             "zscore": 1.2,
@@ -118,7 +124,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "text_right_caption": "21.5.2016",
             "clinicsample_start": -2,
             "clinicsample_end": 1.8,
-            "marker_1_score": null,
+            "marker_1_score": -3.4,
             "marker_1_text": "Zeitabbruch",
             "show_numbers": $scope.d.zScore.toggles.show_numbers,
             "show_clinicsample": $scope.d.zScore.toggles.show_clinicsample,

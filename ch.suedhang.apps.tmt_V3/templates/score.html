@@ -10,13 +10,13 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <div layout="row" layout-align="space-between center">
-                <md-checkbox ng-model="d.zScore.toggles.show_numbers" aria-label="show_numbers">
+                <md-checkbox ng-model="d.zScore.toggles.show_numbers" ng-click="setZScore()" aria-label="show_numbers">
                     show_numbers
                 </md-checkbox>
-                <md-checkbox ng-model="d.zScore.toggles.show_clinicsample" aria-label="show_clinicsample">
+                <md-checkbox ng-model="d.zScore.toggles.show_clinicsample" ng-click="setZScore()" aria-label="show_clinicsample">
                     show_clinicsample
                 </md-checkbox>
-                <md-checkbox ng-model="d.zScore.toggles.show_text" aria-label="show_text">
+                <md-checkbox ng-model="d.zScore.toggles.show_text" ng-click="setZScore()" aria-label="show_text">
                     show_text
                 </md-checkbox>
             </div>
