@@ -86,10 +86,95 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.initZScore = function() {
         $scope.d.zScore = {};
         $scope.d.zScore.toggles = {
-            "show_numbers": true,
             "show_clinicsample": true,
             "show_text": true
         };
+
+
+        $scope.d.fab = {};
+        $scope.d.fab.isOpen = false;
+        $scope.demo = {
+            isOpen: false,
+            count: 0,
+            selectedDirection: 'left'
+        };
+
+        // ToDo: 'Echte Daten setzen'
+
+
+        // TMT - A
+
+        $scope.d.zScore.tmt_a = {};
+
+        $scope.d.zScore.tmt_a.eintritt = {
+            "zscore": 1.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Eintritt",
+            "text_left_caption": "21.4.2016",
+            "text_right": "TMT A",
+            "text_right_caption": "",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8
+        };
+
+        $scope.d.zScore.tmt_a.austritt = {
+            "zscore": 3.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Austritt",
+            "text_left_caption": "21.5.2016",
+            "text_right": "TMT A",
+            "text_right_caption": "",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8,
+            "marker_1_score": -3.4,
+            "marker_1_text": "Zeitabbruch"
+        };
+
+
+        // TMT - B
+
+        $scope.d.zScore.tmt_b = {};
+
+        $scope.d.zScore.tmt_b.eintritt = {
+            "zscore": 1.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Eintritt",
+            "text_left_caption": "21.4.2016",
+            "text_right": "TMT A",
+            "text_right_caption": "",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8
+        };
+
+        $scope.d.zScore.tmt_b.austritt = {
+            "zscore": 3.2,
+            "zscore_min": -5.2,
+            "zscore_max": 3.1,
+            "text_left": "Austritt",
+            "text_left_caption": "21.5.2016",
+            "text_right": "TMT A",
+            "text_right_caption": "",
+            "clinicsample_start": -2,
+            "clinicsample_end": 1.8,
+            "marker_1_score": -3.4,
+            "marker_1_text": "Zeitabbruch"
+        };
+
+        $scope.d.zScore.tmt_b_a_quotient = {
+            "zscore": 0.44,
+            "zscore_min": -3,
+            "zscore_max": 3,
+            "text_left": "Quotient B/A",
+            "text_left_caption": "Zeit",
+            "text_right": "2.07",
+            "text_right_caption": "Quotient",
+            "clinicsample_start": -0.5,
+            "clinicsample_end": 0.5
+        };
+
 
         $scope.setZScore();
     };
@@ -97,39 +182,23 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setZScore = function() {
 
-        $scope.d.zScore.data_eintritt = {
-            "zscore": 1.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "text_left": "Günstige Somatisierung",
-            "text_left_caption": "Dies ist eine sehr lange Beschreibung.",
-            "text_right": "Eintritt",
-            "text_right_caption": "21.4.2016",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8,
-            "marker_1_score": null,
-            "marker_1_text": "Zeitabbruch",
-            "show_numbers": $scope.d.zScore.toggles.show_numbers,
-            "show_clinicsample": $scope.d.zScore.toggles.show_clinicsample,
-            "show_text": $scope.d.zScore.toggles.show_text,
+        // Grafiken anpassen gemäss | Toggles
+        $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+
+        // ToDo: Auf 'echte Daten prüfen'
+        var austritt_vorhanden = true;
+        if (austritt_vorhanden) {
+            $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
+            $scope.d.zScore.tmt_a.austritt.show_numbers = true;
+        } else {
+            $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
+            $scope.d.zScore.tmt_a.austritt.show_numbers = false;
         };
 
-        $scope.d.zScore.data_austritt = {
-            "zscore": 3.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "text_left": "Ungünstige Somatisierung",
-            "text_left_caption": "Schmerzgeschehen.",
-            "text_right": "Austritt",
-            "text_right_caption": "21.5.2016",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8,
-            "marker_1_score": -3.4,
-            "marker_1_text": "Zeitabbruch",
-            "show_numbers": $scope.d.zScore.toggles.show_numbers,
-            "show_clinicsample": $scope.d.zScore.toggles.show_clinicsample,
-            "show_text": $scope.d.zScore.toggles.show_text,
-        };
+
     };
 
 

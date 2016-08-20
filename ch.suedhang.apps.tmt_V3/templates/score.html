@@ -1,72 +1,109 @@
 include(../lib/html/optinomic/page/start.m4)
-<div>
-    <md-card>
-        <md-card-title style="background-color: #424242; color: #FAFAFA">
-            <md-card-title-text>
-                <span class="md-headline">
-                    {{d.dataMain.apps.current.name}}
-                </span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content layout-margin>
-            <div layout="row" layout-align="space-between center">
-                <md-checkbox ng-model="d.zScore.toggles.show_numbers" ng-click="setZScore()" aria-label="show_numbers">
-                    show_numbers
-                </md-checkbox>
-                <md-checkbox ng-model="d.zScore.toggles.show_clinicsample" ng-click="setZScore()" aria-label="show_clinicsample">
-                    show_clinicsample
-                </md-checkbox>
-                <md-checkbox ng-model="d.zScore.toggles.show_text" ng-click="setZScore()" aria-label="show_text">
-                    show_text
-                </md-checkbox>
-            </div>
-            <div>
-                <z-score data="d.zScore.data_eintritt"></z-score>
-                <z-score data="d.zScore.data_austritt"></z-score>
-            </div>
-            <p>&nbsp;</p>
-            <pre>
-                {{d.zScore | json}}
-            </pre>
-            <h5 class="md-subhead">Alter: 100 | Ausbildungsjahre: 15</h5>
-            <p>&nbsp;</p>
-            <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '1'" class="md-subhead">Eintritt</h3>
-            <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '2'" class="md-subhead">Austritt</h3>
-            <h3 ng-if="d.dataMain.survey_responses[0].entity.data.response.Messzeitpunkt === '3'" class="md-subhead">Verlauf</h3>
-            <p>&nbsp;</p>
-            <div layout="row" layout-align="space-between start" layout-margin>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT A: Zeit</p>
-                    <p class="md-subhead" style="margin-top:-18px;">60.0</p>
-                </div>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT A: Fehler</p>
-                    <p class="md-subhead" style="margin-top:-18px;">3</p>
-                </div>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT A: Perzentile</p>
-                    <p class="md-subhead" style="margin-top:-18px;">-0.92</p>
-                </div>
-            </div>
-            <div layout="row" layout-align="space-between start" layout-margin>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT B: Zeit</p>
-                    <p class="md-subhead" style="margin-top:-18px;">62.0</p>
-                </div>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT B: Fehler</p>
-                    <p class="md-subhead" style="margin-top:-18px;">5</p>
-                </div>
-                <div layout="column" layout-align="start center">
-                    <p class="md-caption">TMT B: Perzentile</p>
-                    <p class="md-subhead" style="margin-top:-18px;">-0.45</p>
-                </div>
-            </div>
-            <p>&nbsp;</p>
-            <p class="md-display-1" style="width: 50%; text-align:center"> Quotient B/A (Zeit) = <strong>2.07</strong> | z-Wert = <strong>0.44</strong>
-            </p>
-            <div>&nbsp;</div>
-        </md-card-content>
-    </md-card>
+<md-fab-toolbar md-open="d.fab.isOpen" count="d.fab.tmt.count" md-direction="{{d.fab.tmt.selectedDirection}}">
+    <md-fab-trigger class="align-with-text">
+        <md-button aria-label="menu" class="md-fab md-primary">
+            <i class="mdi mdi-menu"></i>
+        </md-button>
+    </md-fab-trigger>
+    <md-toolbar>
+        <md-fab-actions class="md-toolbar-tools">
+            <md-button aria-label="Zeige klinische Stichprobe" class="md-icon-button">
+                <i class="mdi mdi-ruler"></i>
+            </md-button>
+            <md-button aria-label="Zeige Beschriftungstext" class="md-icon-button">
+                <i class="mdi mdi-text-shadow"></i>
+            </md-button>
+        </md-fab-actions>
+    </md-toolbar>
+</md-fab-toolbar>
+<h3 class="md-headline">Trail Making Test (TMT) - A</h3>
+<h3 class="md-subhead">Assessment | Messungen</h3>
+<z-score data="d.zScore.tmt_a.eintritt"></z-score>
+<z-score data="d.zScore.tmt_a.austritt"></z-score>
+<div layout="row" layout-align="space-between start" layout-margin>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Eintritt</p>
+        <p class="md-subhead" style="margin-top:-12px;">21.4.2016</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">60.0</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">3</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">-0.92</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Austritt</p>
+        <p class="md-subhead" style="margin-top:-12px;">21.5.2016</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">45.0</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">5.03</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">-0.42</p>
+    </div>
+</div>
+<h3 class="md-subhead">Quotient B/A (Zeit)</h3>
+<z-score data="d.zScore.tmt_b_a_quotient"></z-score>
+<div layout="row" layout-align="space-between start" layout-margin>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Quotient B/A (Zeit)</p>
+        <p class="md-subhead" style="margin-top:-12px;">2.07</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Quotient B/A (Z-Wert)</p>
+        <p class="md-subhead" style="margin-top:-12px;">0.44</p>
+    </div>
+</div>
+<h3 class="md-headline">Trail Making Test (TMT) - B</h3>
+<h3 class="md-subhead">Assessment | Messungen</h3>
+<z-score data="d.zScore.tmt_b.eintritt"></z-score>
+<z-score data="d.zScore.tmt_b.austritt"></z-score>
+<div layout="row" layout-align="space-between start" layout-margin>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Eintritt</p>
+        <p class="md-subhead" style="margin-top:-12px;">21.4.2016</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">60.0</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">3</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">-0.92</p>
+    </div>
+</div>
+<div layout="row" layout-align="space-between start" layout-margin>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">Austritt</p>
+        <p class="md-subhead" style="margin-top:-12px;">21.5.2016</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">67.0</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">2.3</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">0.42</p>
+    </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
