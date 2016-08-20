@@ -137,7 +137,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.zScore.tmt_b = {};
 
         $scope.d.zScore.tmt_b.eintritt = {
-            "zscore": 1.2,
+            "zscore": -1.2,
             "zscore_min": -5.2,
             "zscore_max": 3.1,
             "text_left": "Eintritt",
@@ -149,7 +149,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
         $scope.d.zScore.tmt_b.austritt = {
-            "zscore": 3.2,
+            "zscore": -5.2,
             "zscore_min": -5.2,
             "zscore_max": 3.1,
             "text_left": "Austritt",
