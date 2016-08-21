@@ -538,13 +538,38 @@ function main(responses) {
             myResults.TMTBTime = parseInt(result.TMTBTime);
 
 
+
+
+
+
             // Calculate Stuff
             myResults.quotient = calc.quotient(result);
             myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
-
-
             myResults.percentile = calc.get_percentile(result, set_age, edu_years);
 
+            // Messzeitpunkt
+
+
+            var Messzeitpunkt = parseInt(result.Messzeitpunkt);
+            var Messzeitpunkt_Text = 'Undefined';
+
+            if (Messzeitpunkt === 1) {
+                Messzeitpunkt_Text = 'Eintritt';
+            };
+            if (Messzeitpunkt === 2) {
+                Messzeitpunkt_Text = 'Austritt';
+            };
+            if (Messzeitpunkt === 3) {
+                Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
+            };
+
+            var Messzeitpunkt = {
+                "Messzeitpunkt": Messzeitpunkt,
+                "Messzeitpunkt_Text": Messzeitpunkt_Text
+            };
+
+
+            myResults.messungen_info = messungen_info;
 
             // Write Results for the Return
             // Do not modify stuff here
