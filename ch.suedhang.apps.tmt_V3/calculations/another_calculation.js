@@ -48,33 +48,33 @@ function main(responses) {
         }
 
         // Perzentile bestimmen
-        var result = 90;
-        if (time >= age_perz.perz80[perz_pos]) {
-            result = 80;
-        }
-        if (time >= age_perz.perz70[perz_pos]) {
-            result = 70;
-        }
-        if (time >= age_perz.perz60[perz_pos]) {
-            result = 60;
-        }
-        if (time >= age_perz.perz50[perz_pos]) {
-            result = 50;
-        }
-        if (time >= age_perz.perz40[perz_pos]) {
-            result = 40;
-        }
-        if (time >= age_perz.perz30[perz_pos]) {
-            result = 30;
-        }
-        if (time >= age_perz.perz20[perz_pos]) {
-            result = 20;
-        }
-        if (time >= age_perz.perz10[perz_pos]) {
-            result = 10;
-        }
+        // var result = 90;
+        // if (time >= age_perz.perz80[perz_pos]) {
+        //     result = 80;
+        // }
+        // if (time >= age_perz.perz70[perz_pos]) {
+        //     result = 70;
+        // }
+        // if (time >= age_perz.perz60[perz_pos]) {
+        //     result = 60;
+        // }
+        // if (time >= age_perz.perz50[perz_pos]) {
+        //     result = 50;
+        // }
+        // if (time >= age_perz.perz40[perz_pos]) {
+        //     result = 40;
+        // }
+        // if (time >= age_perz.perz30[perz_pos]) {
+        //     result = 30;
+        // }
+        // if (time >= age_perz.perz20[perz_pos]) {
+        //     result = 20;
+        // }
+        // if (time >= age_perz.perz10[perz_pos]) {
+        //     result = 10;
+        // }
 
-        return resultObj;
+        return age_perz;
     };
 
     calc.get_percentile = function(d, set_age, edu_years) {
