@@ -344,14 +344,18 @@ function main(responses) {
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
-    calc.getResults = function(myResponses) {
+    calc.getResults = function(d) {
 
-        var responses_array = myResponses.survey_responses;
+        var responses_array = d.survey_responses;
         var allResults = [];
 
         responses_array.forEach(function(response, myindex) {
             var myResults = {};
             var result = response.data.response;
+
+            // Age
+            myResults.birthdate = d.patient.data.birthdate
+            myResults.set_age = calc.getPatientAge(d.patient.data.birthdate);
 
             // Zeit & Fehler in Integer
 
@@ -362,7 +366,7 @@ function main(responses) {
             //
             //
             //// calculate stuff
-            //myResults.set_age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            //
             //myResults.edu_years = calc.roundToTwo(response.data.response.Ausbildungsjahre);
             //myResults.quotient = calc.quotient(result);
             //myResults.results = calc.get_percentile(result, scale, set_age, edu_years, time, error);
@@ -372,7 +376,8 @@ function main(responses) {
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
-            myResults.responses = responses;
+            myResults.d = d;
+
             allResults.push(myResults);
         });
 
