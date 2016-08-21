@@ -34,7 +34,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.survey_responses">
         <div layout="column" layout-align="start center">
             <p class="md-caption">{{response.calculations[0].calculation_result.Messzeitpunkt.Messzeitpunkt_Text}}</p>
-            <p class="md-subhead" style="margin-top:-12px;">{{response.entity.data.filled | date}}</p>
+            <p class="md-subhead" style="margin-top:-12px;">{{response.entity.data.response.Date | date}}</p>
         </div>
         <div layout="column" layout-align="start center">
             <p class="md-caption">TMT A: Zeit</p>
@@ -70,7 +70,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div ng-repeat="response in d.dataMain.survey_responses" layout="row" layout-align="space-between start" layout-margin>
         <div layout="column" layout-align="start center">
             <p class="md-caption">{{response.calculations[0].calculation_result.Messzeitpunkt.Messzeitpunkt_Text}}</p>
-            <p class="md-subhead" style="margin-top:-12px;">{{response.entity.data.filled | date}}</p>
+            <p class="md-subhead" style="margin-top:-12px;">{{response.entity.data.response.Date | date}}</p>
         </div>
         <div layout="column" layout-align="start center">
             <p class="md-caption">TMT B: Zeit</p>
