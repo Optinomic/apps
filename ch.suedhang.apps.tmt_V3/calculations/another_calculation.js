@@ -503,7 +503,7 @@ function main(responses) {
             };
         };
 
-        resultObj.perzentile = perzObj;
+        resultObj.result = perzObj;
 
 
         return resultObj;
