@@ -234,9 +234,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
-
-
-        if (austritt_vorhanden) {
+        if ($scope.d.zScore.messungen_info.ein_und_austritt) {
             $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
             $scope.d.zScore.tmt_a.austritt.show_numbers = true;
             $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
