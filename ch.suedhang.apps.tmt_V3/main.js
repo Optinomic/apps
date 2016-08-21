@@ -187,16 +187,15 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
         all_calculations.forEach(function(current_calc, myCalcIndex) {
-            if (current_calc.Messzeitpunkt === 1) {
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 1) {
                 messungen_info.eintritt = true;
             };
-            if (current_calc.Messzeitpunkt === 2) {
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 2) {
                 messungen_info.austritt = true;
             };
-            if (current_calc.Messzeitpunkt === 2) {
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 2) {
                 messungen_info.anderer = true;
             };
-            console.log('=-= ', current_calc.Messzeitpunkt, messungen_info, myCalcIndex)
         });
 
         if ((messungen_info.eintritt) && (messungen_info.austritt)) {
