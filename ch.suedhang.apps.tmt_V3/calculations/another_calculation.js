@@ -74,7 +74,7 @@ function main(responses) {
         //     result = 10;
         // }
 
-        return age_perz;
+        return age_perz.perz80[perz_pos];
     };
 
     calc.get_percentile = function(d, set_age, edu_years) {
