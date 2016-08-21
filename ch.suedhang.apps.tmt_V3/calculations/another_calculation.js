@@ -48,7 +48,7 @@ function main(responses) {
         }
 
         // Perzentile bestimmen
-        // var result = 90;
+        var result = 90;
         // if (time >= age_perz.perz80[perz_pos]) {
         //     result = 80;
         // }
@@ -74,7 +74,7 @@ function main(responses) {
         //     result = 10;
         // }
 
-        return age_perz.perz80[perz_pos];
+        return time;
     };
 
     calc.get_percentile = function(d, set_age, edu_years) {
@@ -495,6 +495,7 @@ function main(responses) {
         if (altersgruppe_found) {
             var A_Perz = calc.get_current_percentile('A', TMTATime, resultObj.age_perz);
             var B_Perz = calc.get_current_percentile('B', TMTBTime, resultObj.age_perz);
+
             perzObj = {
                 "calculated": true,
                 "A": A_Perz,
