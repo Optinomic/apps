@@ -383,7 +383,8 @@ function main(responses) {
                 var perz30 = [63, 194];
                 var perz20 = [72, 214];
                 var perz10 = [94, 317];
-            } else {}
+            };
+        } else {
             if (set_age >= 85) {
                 // Altersgruppe 85 – 89 | n = 13
                 altersgruppe = 10;
