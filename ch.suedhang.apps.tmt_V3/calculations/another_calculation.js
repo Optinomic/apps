@@ -12,8 +12,8 @@ function main(responses) {
     };
 
     calc.quotient = function(d) {
-        var TMTBTime = parseInt(d.TMTATime);
-        var TMTATime = parseInt(d.TMTBTime);
+        var TMTBTime = parseInt(d.TMTBTime);
+        var TMTATime = parseInt(d.TMTATime);
         var result = TMTBTime / TMTATime;
 
         return result;
