@@ -12,8 +12,8 @@ function main(responses) {
     };
 
     calc.quotient = function(d) {
-        var TMTBTime = parseInt(d['TMTATime']);
-        var TMTATime = parseInt(d['TMTBTime']);
+        var TMTBTime = parseInt(d.TMTATime);
+        var TMTATime = parseInt(d.TMTBTime);
         var result = TMTBTime / TMTATime;
 
         return result;
@@ -353,9 +353,10 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // Age
+            // Age & Edu
             myResults.birthdate = d.patient.data.birthdate
             myResults.set_age = calc.getPatientAge(d.patient.data.birthdate);
+            myResults.edu_years = calc.roundToTwo(result.Ausbildungsjahre);
 
 
             // Zeit & Fehler in Integer
@@ -363,12 +364,11 @@ function main(responses) {
             myResults.TMTBError = parseInt(result.TMTBError);
             myResults.TMTATime = parseInt(result.TMTATime);
             myResults.TMTBTime = parseInt(result.TMTBTime);
-            //
-            //
-            //// calculate stuff
-            //
-            //myResults.edu_years = calc.roundToTwo(response.data.response.Ausbildungsjahre);
-            //myResults.quotient = calc.quotient(result);
+
+
+            // Calculate Stuff
+            myResults.quotient = calc.quotient(result);
+            myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
             //myResults.results = calc.get_percentile(result, scale, set_age, edu_years, time, error);
 
 
