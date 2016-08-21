@@ -36,46 +36,46 @@ function main(responses) {
     };
 
 
-    calc.get_current_percentile = function(scale, time, age_perz) {
-
-        A oder B
-        if (scale === 'A') {
-            // TMT - A
-            var perz_pos = 0;
-        } else {
-            // TMT - B
-            var perz_pos = 1;
-        }
-
-        // Perzentile bestimmen
-        var result = 90;
-        if (time >= age_perz.perz80[perz_pos]) {
-            result = 80;
-        }
-        if (time >= age_perz.perz70[perz_pos]) {
-            result = 70;
-        }
-        if (time >= age_perz.perz60[perz_pos]) {
-            result = 60;
-        }
-        if (time >= age_perz.perz50[perz_pos]) {
-            result = 50;
-        }
-        if (time >= age_perz.perz40[perz_pos]) {
-            result = 40;
-        }
-        if (time >= age_perz.perz30[perz_pos]) {
-            result = 30;
-        }
-        if (time >= age_perz.perz20[perz_pos]) {
-            result = 20;
-        }
-        if (time >= age_perz.perz10[perz_pos]) {
-            result = 10;
-        }
-
-        return resultObj;
-    };
+    //calc.get_current_percentile = function(scale, time, age_perz) {
+    //
+    //    A oder B
+    //    if (scale === 'A') {
+    //        // TMT - A
+    //        var perz_pos = 0;
+    //    } else {
+    //        // TMT - B
+    //        var perz_pos = 1;
+    //    }
+    //
+    //    // Perzentile bestimmen
+    //    var result = 90;
+    //    if (time >= age_perz.perz80[perz_pos]) {
+    //        result = 80;
+    //    }
+    //    if (time >= age_perz.perz70[perz_pos]) {
+    //        result = 70;
+    //    }
+    //    if (time >= age_perz.perz60[perz_pos]) {
+    //        result = 60;
+    //    }
+    //    if (time >= age_perz.perz50[perz_pos]) {
+    //        result = 50;
+    //    }
+    //    if (time >= age_perz.perz40[perz_pos]) {
+    //        result = 40;
+    //    }
+    //    if (time >= age_perz.perz30[perz_pos]) {
+    //        result = 30;
+    //    }
+    //    if (time >= age_perz.perz20[perz_pos]) {
+    //        result = 20;
+    //    }
+    //    if (time >= age_perz.perz10[perz_pos]) {
+    //        result = 10;
+    //    }
+    //
+    //    return resultObj;
+    //};
 
     calc.get_percentile = function(d, set_age, edu_years) {
 
@@ -134,7 +134,8 @@ function main(responses) {
             var perz30 = [25, 54];
             var perz20 = [27, 61];
             var perz10 = [31, 66];
-        }
+        };
+
         if ((set_age >= 25) && (set_age <= 34)) {
             // Altersgruppe 25 – 34 | n = 33
             altersgruppe = 1;
@@ -151,7 +152,8 @@ function main(responses) {
             var perz30 = [27, 58];
             var perz20 = [33, 63];
             var perz10 = [40, 67];
-        }
+        };
+
         if ((set_age >= 35) && (set_age <= 44)) {
             // Altersgruppe 35 – 44 | n = 39
             altersgruppe = 2;
@@ -168,7 +170,8 @@ function main(responses) {
             var perz30 = [32, 62];
             var perz20 = [36, 70];
             var perz10 = [46, 87];
-        }
+        };
+
         if ((set_age >= 45) && (set_age <= 54)) {
             // Altersgruppe 45 – 54 | n = 41
             altersgruppe = 3;
@@ -185,7 +188,7 @@ function main(responses) {
             var perz30 = [34, 72];
             var perz20 = [38, 75];
             var perz10 = [50, 84];
-        }
+        };
 
         if (!education_high) {
             if ((set_age >= 55) && (set_age <= 59)) {
@@ -204,7 +207,7 @@ function main(responses) {
                 var perz30 = [38, 87];
                 var perz20 = [40, 98];
                 var perz10 = [50, 105];
-            }
+            };
         } else {
             if ((set_age >= 55) && (set_age <= 59)) {
                 // Altersgruppe 55 – 59 | n = 37
@@ -222,7 +225,7 @@ function main(responses) {
                 var perz30 = [33, 74];
                 var perz20 = [37, 81];
                 var perz10 = [53, 102];
-            }
+            };
         };
 
         if (!education_high) {
@@ -281,7 +284,7 @@ function main(responses) {
                 var perz30 = [44, 103];
                 var perz20 = [47, 110];
                 var perz10 = [56, 137];
-            }
+            };
         } else {
             if ((set_age >= 65) && (set_age <= 69)) {
                 // Altersgruppe 65 – 69 | n = 32
