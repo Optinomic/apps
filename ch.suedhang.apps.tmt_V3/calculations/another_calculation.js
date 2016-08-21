@@ -357,12 +357,12 @@ function main(responses) {
             myResults.birthdate = d.patient.data.birthdate
             myResults.set_age = calc.getPatientAge(d.patient.data.birthdate);
 
-            // Zeit & Fehler in Integer
 
-            //myResults.TMTAError = parseInt(result.entity.data.response.TMTAError);
-            //myResults.TMTBError = parseInt(result.entity.data.response.TMTBError);
-            //myResults.TMTATime = parseInt(result.entity.data.response.TMTATime);
-            //myResults.TMTBTime = parseInt(result.entity.data.response.TMTBTime);
+            // Zeit & Fehler in Integer
+            myResults.TMTAError = parseInt(result.TMTAError);
+            myResults.TMTBError = parseInt(result.TMTBError);
+            myResults.TMTATime = parseInt(result.TMTATime);
+            myResults.TMTBTime = parseInt(result.TMTBTime);
             //
             //
             //// calculate stuff
