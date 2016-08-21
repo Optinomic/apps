@@ -483,10 +483,10 @@ function main(responses) {
 
         // PERZENTILE - Ausgeben
 
-        resultObj.perzentile = {
-            "A": calc.get_current_percentile('A', TMTATime, resultObj.age_perz),
-            "A": calc.get_current_percentile('B', TMTBTime, resultObj.age_perz)
-        };
+        //resultObj.perzentile = {
+        //    "A": calc.get_current_percentile('A', TMTATime, resultObj.age_perz),
+        //    "B": calc.get_current_percentile('B', TMTBTime, resultObj.age_perz)
+        //};
 
 
         return resultObj;
