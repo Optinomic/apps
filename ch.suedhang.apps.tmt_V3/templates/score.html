@@ -44,7 +44,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-caption">TMT A: Fehler</p>
             <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.TMTAError}}</p>
         </div>
-        <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.calculated">
+        <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.result.calculated">
             <p class="md-caption">TMT A: Perzentile</p>
             <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.percentile.result.A}}</p>
         </div>
@@ -80,7 +80,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-caption">TMT B: Fehler</p>
             <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.TMTBError}}</p>
         </div>
-        <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.calculated">
+        <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.result.calculated">
             <p class="md-caption">TMT B: Perzentile</p>
             <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.percentile.result.B}}</p>
         </div>
