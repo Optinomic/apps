@@ -568,8 +568,7 @@ function main(responses) {
                 "Messzeitpunkt_Text": Messzeitpunkt_Text
             };
 
-
-            myResults.messungen_info = messungen_info;
+            myResults.Messzeitpunkt = Messzeitpunkt;
 
             // Write Results for the Return
             // Do not modify stuff here
