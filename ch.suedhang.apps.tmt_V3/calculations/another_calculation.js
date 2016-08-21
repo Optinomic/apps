@@ -36,22 +36,35 @@ function main(responses) {
     };
 
 
-    calc.get_percentile = function(d, scale, set_age, edu_years, time, error) {
+    calc.get_percentile = function(d, set_age, edu_years) {
+
+        var resultObj = {};
+        resultObj.vars = {};
+        resultObj.vars.d = d;
+        resultObj.vars.set_age = set_age;
+        resultObj.vars.edu_years = edu_years;
+
         var altersgruppe = 0;
+        var altersgruppe_text = 'Undefined';
         var education = 0;
+        var n = 0;
 
         // Kategorienbildung Education: <= 12 Jahre: 0; > 12 Jahre: 1
         if (edu_years > 12) {
             education = 1;
         } else {
             education = 0;
-        }
+        };
+        resultObj.education = education;
+
 
         // Altersgruppe & Normwerte Trail Making Test  A und B
         if (set_age < 25) {
             // Altersgruppe 18 - 24 | n = 155
             altersgruppe = 0;
+            altersgruppe_text = "Altersgruppe 18 - 24";
             education = 0;
+            n = 155;
             var perz90 = [16, 35];
             var perz80 = [17, 38];
             var perz70 = [19, 41];
@@ -65,7 +78,9 @@ function main(responses) {
         if ((set_age >= 25) && (set_age <= 34)) {
             // Altersgruppe 25 – 34 | n = 33
             altersgruppe = 1;
+            altersgruppe_text = "Altersgruppe 25 – 34";
             education = 0;
+            n = 33;
             var perz90 = [14, 33];
             var perz80 = [17, 38];
             var perz70 = [19, 45];
@@ -79,7 +94,9 @@ function main(responses) {
         if ((set_age >= 35) && (set_age <= 44)) {
             // Altersgruppe 35 – 44 | n = 39
             altersgruppe = 2;
+            altersgruppe_text = "Altersgruppe 35 – 44";
             education = 0;
+            n = 39;
             var perz90 = [16, 40];
             var perz80 = [20, 45];
             var perz70 = [23, 50];
@@ -93,7 +110,9 @@ function main(responses) {
         if ((set_age >= 45) && (set_age <= 54)) {
             // Altersgruppe 45 – 54 | n = 41
             altersgruppe = 3;
+            altersgruppe_text = "Altersgruppe 45 – 54";
             education = 0;
+            n = 41;
             var perz90 = [19, 42];
             var perz80 = [23, 50];
             var perz70 = [27, 59];
@@ -107,7 +126,9 @@ function main(responses) {
         if ((set_age >= 55) && (set_age <= 59)) {
             // Altersgruppe 55 – 59 | n = 58
             altersgruppe = 4;
-            education = 0
+            altersgruppe_text = "Altersgruppe 55 – 59";
+            education = 0;
+            n = 58;
             var perz90 = [25, 56];
             var perz80 = [27, 64];
             var perz70 = [29, 66];
@@ -121,7 +142,9 @@ function main(responses) {
         if ((set_age >= 55) && (set_age <= 59)) {
             // Altersgruppe 55 – 59 | n = 37
             altersgruppe = 4;
-            education = 1
+            altersgruppe_text = "Altersgruppe 55 – 59";
+            education = 1;
+            n = 37;
             var perz90 = [22, 42];
             var perz80 = [24, 56];
             var perz70 = [25, 57];
@@ -135,7 +158,9 @@ function main(responses) {
         if ((set_age >= 60) && (set_age <= 64)) {
             // Altersgruppe 60 – 64 | n = 55
             altersgruppe = 5;
-            education = 0
+            altersgruppe_text = "Altersgruppe 60 – 64";
+            education = 0;
+            n = 55;
             var perz90 = [21, 56];
             var perz80 = [24, 58];
             var perz70 = [26, 62];
@@ -149,7 +174,9 @@ function main(responses) {
         if ((set_age >= 60) && (set_age <= 64)) {
             // Altersgruppe 60 – 64 | n = 31
             altersgruppe = 5;
-            education = 1
+            altersgruppe_text = "Altersgruppe 60 – 64";
+            education = 1;
+            n = 31;
             var perz90 = [22, 45];
             var perz80 = [25, 48];
             var perz70 = [26, 53];
@@ -163,7 +190,9 @@ function main(responses) {
         if ((set_age >= 65) && (set_age <= 69)) {
             // Altersgruppe 65 – 69 | n = 65
             altersgruppe = 6;
+            altersgruppe_text = "Altersgruppe 65 – 69";
             education = 0
+            n = 65;
             var perz90 = [24, 60];
             var perz80 = [30, 71];
             var perz70 = [32, 74];
@@ -177,7 +206,9 @@ function main(responses) {
         if ((set_age >= 65) && (set_age <= 69)) {
             // Altersgruppe 65 – 69 | n = 32
             altersgruppe = 6;
-            education = 1
+            altersgruppe_text = "Altersgruppe 65 – 69";
+            education = 1;
+            n = 32;
             var perz90 = [26, 52];
             var perz80 = [28, 57];
             var perz70 = [30, 63];
@@ -191,7 +222,9 @@ function main(responses) {
         if ((set_age >= 70) && (set_age <= 74)) {
             // Altersgruppe 70 – 74 | n = 76
             altersgruppe = 7;
-            education = 0
+            altersgruppe_text = "Altersgruppe 70 – 74";
+            education = 0;
+            n = 76
             var perz90 = [25, 70];
             var perz80 = [30, 79];
             var perz70 = [35, 83];
@@ -205,7 +238,9 @@ function main(responses) {
         if ((set_age >= 70) && (set_age <= 74)) {
             // Altersgruppe 70 – 74 | n = 30
             altersgruppe = 7;
-            education = 1
+            altersgruppe_text = "Altersgruppe 70 – 74";
+            education = 1;
+            n = 30;
             var perz90 = [26, 59];
             var perz80 = [29, 63];
             var perz70 = [31, 68];
@@ -219,7 +254,9 @@ function main(responses) {
         if ((set_age >= 75) && (set_age <= 79)) {
             // Altersgruppe 75 – 79 | n = 74
             altersgruppe = 8;
-            education = 0
+            altersgruppe_text = "Altersgruppe 75 – 79";
+            education = 0;
+            n = 74;
             var perz90 = [30, 78];
             var perz80 = [37, 92];
             var perz70 = [39, 96];
@@ -233,7 +270,9 @@ function main(responses) {
         if ((set_age >= 75) && (set_age <= 79)) {
             // Altersgruppe 75 – 79 | n = 34
             altersgruppe = 8;
-            education = 1
+            altersgruppe_text = "Altersgruppe 75 – 79";
+            education = 1;
+            n = 34;
             var perz90 = [22, 57];
             var perz80 = [27, 59];
             var perz70 = [34, 66];
@@ -247,7 +286,9 @@ function main(responses) {
         if ((set_age >= 80) && (set_age <= 84)) {
             // Altersgruppe 80 – 84 | n = 84
             altersgruppe = 9;
-            education = 0
+            altersgruppe_text = "Altersgruppe 80 – 84";
+            education = 0;
+            n = 84;
             var perz90 = [31, 72];
             var perz80 = [39, 101];
             var perz70 = [43, 112];
@@ -261,7 +302,9 @@ function main(responses) {
         if ((set_age >= 80) && (set_age <= 84)) {
             // Altersgruppe 80 – 84 | n = 34
             altersgruppe = 9;
-            education = 1
+            altersgruppe_text = "Altersgruppe 80 – 84";
+            education = 1;
+            n = 34;
             var perz90 = [37, 89];
             var perz80 = [38, 100];
             var perz70 = [41, 111];
@@ -274,8 +317,10 @@ function main(responses) {
         }
         if ((set_age >= 85) && (set_age <= 89)) {
             // Altersgruppe 85 – 89 | n = 16
+            altersgruppe_text = "Altersgruppe 85 – 89";
             altersgruppe = 10;
-            education = 0
+            education = 0;
+            n = 16;
             var perz90 = [37, 89];
             var perz80 = [39, 95];
             var perz70 = [43, 112];
@@ -289,7 +334,9 @@ function main(responses) {
         if ((set_age >= 85) && (set_age <= 89)) {
             // Altersgruppe 85 – 89 | n = 13
             altersgruppe = 10;
-            education = 1
+            altersgruppe_text = "Altersgruppe 85 – 89";
+            education = 1;
+            n = 13;
             var perz90 = [35, 70];
             var perz80 = [42, 81];
             var perz70 = [49, 87];
@@ -301,44 +348,60 @@ function main(responses) {
             var perz10 = [125, 290];
         }
 
+        resultObj.age_perz = {
+            "perz90": perz90,
+            "perz80": perz80,
+            "perz70": perz70,
+            "perz60": perz60,
+            "perz50": perz50,
+            "perz40": perz40,
+            "perz30": perz30,
+            "perz20": perz20,
+            "perz10": perz10,
+            "education": education,
+            "altersgruppe": altersgruppe,
+            "altersgruppe_text": altersgruppe_text,
+            "n": n
+        };
+
         // A oder B
-        if (scale === 'A') {
-            // TMT - A
-            var perz_pos = 0;
-        } else {
-            // TMT - B
-            var perz_pos = 1;
-        }
+        // if (scale === 'A') {
+        //     // TMT - A
+        //     var perz_pos = 0;
+        // } else {
+        //     // TMT - B
+        //     var perz_pos = 1;
+        // }
+        // 
+        // // Perzentile bestimmen
+        // var result = 90;
+        // if (time >= perz80[perz_pos]) {
+        //     result = 80;
+        // }
+        // if (time >= perz70[perz_pos]) {
+        //     result = 70;
+        // }
+        // if (time >= perz60[perz_pos]) {
+        //     result = 60;
+        // }
+        // if (time >= perz50[perz_pos]) {
+        //     result = 50;
+        // }
+        // if (time >= perz40[perz_pos]) {
+        //     result = 40;
+        // }
+        // if (time >= perz30[perz_pos]) {
+        //     result = 30;
+        // }
+        // if (time >= perz20[perz_pos]) {
+        //     result = 20;
+        // }
+        // if (time >= perz10[perz_pos]) {
+        //     result = 10;
+        // }
 
-        // Perzentile bestimmen
-        var result = 90;
-        if (time >= perz80[perz_pos]) {
-            result = 80;
-        }
-        if (time >= perz70[perz_pos]) {
-            result = 70;
-        }
-        if (time >= perz60[perz_pos]) {
-            result = 60;
-        }
-        if (time >= perz50[perz_pos]) {
-            result = 50;
-        }
-        if (time >= perz40[perz_pos]) {
-            result = 40;
-        }
-        if (time >= perz30[perz_pos]) {
-            result = 30;
-        }
-        if (time >= perz20[perz_pos]) {
-            result = 20;
-        }
-        if (time >= perz10[perz_pos]) {
-            result = 10;
-        }
 
-
-        return result;
+        return resultObj;
     }
 
     // ------------------------------------------
@@ -355,8 +418,12 @@ function main(responses) {
 
             // Age & Edu
             myResults.birthdate = d.patient.data.birthdate
-            myResults.set_age = calc.getPatientAge(d.patient.data.birthdate);
-            myResults.edu_years = calc.roundToTwo(result.Ausbildungsjahre);
+
+            var set_age = calc.getPatientAge(d.patient.data.birthdate);
+            myResults.set_age = set_age;
+
+            var edu_years = calc.roundToTwo(result.Ausbildungsjahre);
+            myResults.edu_years = edu_years;
 
 
             // Zeit & Fehler in Integer
@@ -369,7 +436,9 @@ function main(responses) {
             // Calculate Stuff
             myResults.quotient = calc.quotient(result);
             myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
-            //myResults.results = calc.get_percentile(result, scale, set_age, edu_years, time, error);
+
+
+            myResults.percentile = calc.get_percentile(result, set_age, edu_years);
 
 
             // Write Results for the Return
