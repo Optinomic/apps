@@ -36,6 +36,47 @@ function main(responses) {
     };
 
 
+    calc.get_current_percentile = function(scale, time, age_perz) {
+
+        A oder B
+        if (scale === 'A') {
+            // TMT - A
+            var perz_pos = 0;
+        } else {
+            // TMT - B
+            var perz_pos = 1;
+        }
+
+        // Perzentile bestimmen
+        var result = 90;
+        if (time >= age_perz.perz80[perz_pos]) {
+            result = 80;
+        }
+        if (time >= age_perz.perz70[perz_pos]) {
+            result = 70;
+        }
+        if (time >= age_perz.perz60[perz_pos]) {
+            result = 60;
+        }
+        if (time >= age_perz.perz50[perz_pos]) {
+            result = 50;
+        }
+        if (time >= age_perz.perz40[perz_pos]) {
+            result = 40;
+        }
+        if (time >= age_perz.perz30[perz_pos]) {
+            result = 30;
+        }
+        if (time >= age_perz.perz20[perz_pos]) {
+            result = 20;
+        }
+        if (time >= age_perz.perz10[perz_pos]) {
+            result = 10;
+        }
+
+        return resultObj;
+    };
+
     calc.get_percentile = function(d, set_age, edu_years) {
 
         var resultObj = {};
@@ -45,7 +86,8 @@ function main(responses) {
         resultObj.vars.edu_years = edu_years;
 
         var altersgruppe = 0;
-        var altersgruppe_text = 'Undefined';
+        var altersgruppe_text = 'Keine Altergruppe bestimmt';
+        var altersgruppe_found = false;
         var education = 0;
         var education_high = false;
         var n = 0;
@@ -82,6 +124,7 @@ function main(responses) {
             altersgruppe_text = "Altersgruppe 18 - 24";
             education = 0;
             n = 155;
+            altersgruppe_found = true;
             var perz90 = [16, 35];
             var perz80 = [17, 38];
             var perz70 = [19, 41];
@@ -98,6 +141,7 @@ function main(responses) {
             altersgruppe_text = "Altersgruppe 25 – 34";
             education = 0;
             n = 33;
+            altersgruppe_found = true;
             var perz90 = [14, 33];
             var perz80 = [17, 38];
             var perz70 = [19, 45];
@@ -114,6 +158,7 @@ function main(responses) {
             altersgruppe_text = "Altersgruppe 35 – 44";
             education = 0;
             n = 39;
+            altersgruppe_found = true;
             var perz90 = [16, 40];
             var perz80 = [20, 45];
             var perz70 = [23, 50];
@@ -130,6 +175,7 @@ function main(responses) {
             altersgruppe_text = "Altersgruppe 45 – 54";
             education = 0;
             n = 41;
+            altersgruppe_found = true;
             var perz90 = [19, 42];
             var perz80 = [23, 50];
             var perz70 = [27, 59];
@@ -148,6 +194,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 55 – 59";
                 education = 0;
                 n = 58;
+                altersgruppe_found = true;
                 var perz90 = [25, 56];
                 var perz80 = [27, 64];
                 var perz70 = [29, 66];
@@ -165,6 +212,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 55 – 59";
                 education = 1;
                 n = 37;
+                altersgruppe_found = true;
                 var perz90 = [22, 42];
                 var perz80 = [24, 56];
                 var perz70 = [25, 57];
@@ -184,6 +232,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 60 – 64";
                 education = 0;
                 n = 55;
+                altersgruppe_found = true;
                 var perz90 = [21, 56];
                 var perz80 = [24, 58];
                 var perz70 = [26, 62];
@@ -201,6 +250,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 60 – 64";
                 education = 1;
                 n = 31;
+                altersgruppe_found = true;
                 var perz90 = [22, 45];
                 var perz80 = [25, 48];
                 var perz70 = [26, 53];
@@ -221,6 +271,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 65 – 69";
                 education = 0
                 n = 65;
+                altersgruppe_found = true;
                 var perz90 = [24, 60];
                 var perz80 = [30, 71];
                 var perz70 = [32, 74];
@@ -238,6 +289,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 65 – 69";
                 education = 1;
                 n = 32;
+                altersgruppe_found = true;
                 var perz90 = [26, 52];
                 var perz80 = [28, 57];
                 var perz70 = [30, 63];
@@ -259,6 +311,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 70 – 74";
                 education = 0;
                 n = 76
+                altersgruppe_found = true;
                 var perz90 = [25, 70];
                 var perz80 = [30, 79];
                 var perz70 = [35, 83];
@@ -276,6 +329,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 70 – 74";
                 education = 1;
                 n = 30;
+                altersgruppe_found = true;
                 var perz90 = [26, 59];
                 var perz80 = [29, 63];
                 var perz70 = [31, 68];
@@ -297,6 +351,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 75 – 79";
                 education = 0;
                 n = 74;
+                altersgruppe_found = true;
                 var perz90 = [30, 78];
                 var perz80 = [37, 92];
                 var perz70 = [39, 96];
@@ -315,6 +370,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 75 – 79";
                 education = 1;
                 n = 34;
+                altersgruppe_found = true;
                 var perz90 = [22, 57];
                 var perz80 = [27, 59];
                 var perz70 = [34, 66];
@@ -335,6 +391,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 80 – 84";
                 education = 0;
                 n = 84;
+                altersgruppe_found = true;
                 var perz90 = [31, 72];
                 var perz80 = [39, 101];
                 var perz70 = [43, 112];
@@ -353,6 +410,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 80 – 84";
                 education = 1;
                 n = 34;
+                altersgruppe_found = true;
                 var perz90 = [37, 89];
                 var perz80 = [38, 100];
                 var perz70 = [41, 111];
@@ -374,6 +432,7 @@ function main(responses) {
                 altersgruppe = 10;
                 education = 0;
                 n = 16;
+                altersgruppe_found = true;
                 var perz90 = [37, 89];
                 var perz80 = [39, 95];
                 var perz70 = [43, 112];
@@ -391,6 +450,7 @@ function main(responses) {
                 altersgruppe_text = "Altersgruppe 85 – 89";
                 education = 1;
                 n = 13;
+                altersgruppe_found = true;
                 var perz90 = [35, 70];
                 var perz80 = [42, 81];
                 var perz70 = [49, 87];
@@ -417,48 +477,20 @@ function main(responses) {
             "education_high": education_high,
             "altersgruppe": altersgruppe,
             "altersgruppe_text": altersgruppe_text,
+            "altersgruppe_found": altersgruppe_found,
             "n": n
         };
 
-        // A oder B
-        // if (scale === 'A') {
-        //     // TMT - A
-        //     var perz_pos = 0;
-        // } else {
-        //     // TMT - B
-        //     var perz_pos = 1;
-        // }
-        // 
-        // // Perzentile bestimmen
-        // var result = 90;
-        // if (time >= perz80[perz_pos]) {
-        //     result = 80;
-        // }
-        // if (time >= perz70[perz_pos]) {
-        //     result = 70;
-        // }
-        // if (time >= perz60[perz_pos]) {
-        //     result = 60;
-        // }
-        // if (time >= perz50[perz_pos]) {
-        //     result = 50;
-        // }
-        // if (time >= perz40[perz_pos]) {
-        //     result = 40;
-        // }
-        // if (time >= perz30[perz_pos]) {
-        //     result = 30;
-        // }
-        // if (time >= perz20[perz_pos]) {
-        //     result = 20;
-        // }
-        // if (time >= perz10[perz_pos]) {
-        //     result = 10;
-        // }
+        // PERZENTILE - Ausgeben
+
+        resultObj.perzentile = {
+            "A": calc.get_current_percentile('A', TMTATime, resultObj.age_perz),
+            "A": calc.get_current_percentile('B', TMTBTime, resultObj.age_perz)
+        };
 
 
         return resultObj;
-    }
+    };
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
