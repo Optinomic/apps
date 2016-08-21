@@ -177,7 +177,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // Check if Eintritt & Austrittsmessung vorhanden
-        var all_calculations = $cope.d.dataMain.calculations[0].calculation_results;
+        var all_calculations = $scope.d.dataMain.calculations[0].calculation_results;
         var messungen_info = {
             "eintritt": false,
             "austritt": false,
