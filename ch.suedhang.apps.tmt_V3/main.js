@@ -196,9 +196,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (current_calc.Messzeitpunkt === 2) {
                 messungen_info.anderer = true;
             };
+            console.log('=-= ', current_calc.Messzeitpunkt, messungen_info, myCalcIndex)
         });
 
-        if ((messungen_info.eintritt) && messungen_info.austritt) {
+        if ((messungen_info.eintritt) && (messungen_info.austritt)) {
             messungen_info.ein_und_austritt = true;
         };
 
