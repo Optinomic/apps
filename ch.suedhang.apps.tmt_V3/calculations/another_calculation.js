@@ -355,17 +355,17 @@ function main(responses) {
 
             // Zeit & Fehler in Integer
 
-            myResults.TMTAError = parseInt(result.entity.data.response.TMTAError);
-            myResults.TMTBError = parseInt(result.entity.data.response.TMTBError);
-            myResults.TMTATime = parseInt(result.entity.data.response.TMTATime);
-            myResults.TMTBTime = parseInt(result.entity.data.response.TMTBTime);
-
-
-            // calculate stuff
-            myResults.set_age = calc.getPatientAge(myResponses.patient.data.birthdate);
-            myResults.edu_years = calc.roundToTwo(response.data.response.Ausbildungsjahre);
-            myResults.quotient = calc.quotient(result);
-            myResults.results = calc.get_percentile(result, scale, set_age, edu_years, time, error);
+            //myResults.TMTAError = parseInt(result.entity.data.response.TMTAError);
+            //myResults.TMTBError = parseInt(result.entity.data.response.TMTBError);
+            //myResults.TMTATime = parseInt(result.entity.data.response.TMTATime);
+            //myResults.TMTBTime = parseInt(result.entity.data.response.TMTBTime);
+            //
+            //
+            //// calculate stuff
+            //myResults.set_age = calc.getPatientAge(myResponses.patient.data.birthdate);
+            //myResults.edu_years = calc.roundToTwo(response.data.response.Ausbildungsjahre);
+            //myResults.quotient = calc.quotient(result);
+            //myResults.results = calc.get_percentile(result, scale, set_age, edu_years, time, error);
 
 
             // Write Results for the Return
