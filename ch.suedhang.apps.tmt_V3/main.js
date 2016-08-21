@@ -175,6 +175,36 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
 
+
+        // Check if Eintritt & Austrittsmessung vorhanden
+        var all_calculations = $cope.d.dataMain.calculations[0].calculation_results;
+        var messungen_info = {
+            "eintritt": false,
+            "austritt": false,
+            "anderer": false,
+            "ein_und_austritt": false,
+            "count": all_calculations.length
+        };
+
+        all_calculations.forEach(function(current_calc, myCalcIndex) {
+            if (current_calc.Messzeitpunkt === 1) {
+                messungen_info.eintritt = true;
+            };
+            if (current_calc.Messzeitpunkt === 2) {
+                messungen_info.austritt = true;
+            };
+            if (current_calc.Messzeitpunkt === 2) {
+                messungen_info.anderer = true;
+            };
+        });
+
+        if ((messungen_info.eintritt) && messungen_info.austritt) {
+            messungen_info.ein_und_austritt = true;
+        };
+
+        $scope.d.zScore.messungen_info = messungen_info;
+
+
         $scope.setZScore();
     };
 
@@ -202,8 +232,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
         $scope.d.zScore.tmt_b_a_quotient.show_numbers = true;
 
-        // ToDo: Auf 'echte Daten prüfen'
-        var austritt_vorhanden = true;
+
+
+
+
         if (austritt_vorhanden) {
             $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
             $scope.d.zScore.tmt_a.austritt.show_numbers = true;
