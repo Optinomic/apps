@@ -15,9 +15,9 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div flex>
             <p class="md-title">{{d.dataMain.config.data.customer.contact.name}} | Klinische Normierung</p>
-            <p class="md-subhead"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> Die klinische Stichproben sind nach Alter und Bildung normiert: n=?
-                <br>
+            <p class="md-subhead"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> Die klinische Stichproben sind nach Alter und Bildung normiert.
             </p>
+            <p>&nbsp;</p>
             <md-input-container class="md-block">
                 <label>Patientengruppe</label>
                 <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id" ng-change="setZScore()">
