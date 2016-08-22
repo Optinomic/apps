@@ -19,7 +19,6 @@ function main(responses) {
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var myReturnObj = {};
         var all_scores = [];
-        var all_resps = [];
 
 
         for (var i = 0; i < d.length; i++) {
@@ -53,12 +52,6 @@ function main(responses) {
                 "patient": current_result.patient
             };
 
-            var details_responses = {
-                "mz_alle_details": [],
-                "mz_eintritt_details": [],
-                "mz_austritt_details": [],
-                "mz_anderer_details": []
-            };
 
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
@@ -161,9 +154,8 @@ function main(responses) {
         };
 
         myReturnObj.vars = all_scores;
-        myReturnObj.details = all_resps;
 
-        return myReturnObj;
+        return all_scores;
     };
 
 
