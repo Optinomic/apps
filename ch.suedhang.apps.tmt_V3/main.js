@@ -203,7 +203,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "selected_pg_id": 0
         };
 
-
+        $scope.d.zScore.init = true;
         // Bei Änderunge ausführen.
         $scope.setZScore('Init');
     };
