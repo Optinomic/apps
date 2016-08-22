@@ -39,23 +39,7 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "messzeitpunkt": {
-                    "eintritt": JSON.parse(JSON.stringify(variables)),
-                    "austritt": JSON.parse(JSON.stringify(variables)),
-                    "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": {
-                        "variables": {
-                            "TMTAError": [],
-                            "TMTATime": [],
-                            "TMTBError": [],
-                            "TMTBTime": [],
-                            "Perz_A": [],
-                            "Perz_B": [],
-                            "BA_Quotient": []
-                        },
-                        "details": []
-                    }
-                },
+                "messzeitpunkt": {},
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
@@ -64,6 +48,27 @@ function main(responses) {
                 "patient": current_result.patient,
                 "all_responses": []
             };
+            scores.messzeitpunkt.alle = {};
+            scores.messzeitpunkt.alle.details = [];
+
+
+            //  "messzeitpunkt": {
+            //      "eintritt": JSON.parse(JSON.stringify(variables)),
+            //      "austritt": JSON.parse(JSON.stringify(variables)),
+            //      "anderer": JSON.parse(JSON.stringify(variables)),
+            //      "alle": {
+            //          "variables": {
+            //              "TMTAError": [],
+            //              "TMTATime": [],
+            //              "TMTBError": [],
+            //              "TMTBTime": [],
+            //              "Perz_A": [],
+            //              "Perz_B": [],
+            //              "BA_Quotient": []
+            //          },
+            //          "details": []
+            //      }
+            //  },
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
