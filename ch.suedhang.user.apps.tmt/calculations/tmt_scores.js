@@ -42,11 +42,11 @@ function main(responses) {
                     "age": null
                 },
                 "mz_alle_details": [],
-                "mz_alle_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
                 "mz_eintritt_details": [],
-                "mz_eintritt_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
                 "mz_austritt_details": [],
-                "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
                 "patient": current_result.patient
             };
 
@@ -56,7 +56,6 @@ function main(responses) {
 
             for (var x = 0; x < all_responses.length; x++) {
                 var current_response = all_responses[x];
-
 
                 var TMTAError = current_response.TMTAError;
                 var TMTATime = current_response.TMTATime;
@@ -96,23 +95,23 @@ function main(responses) {
 
                 // Interessante Variablen & Details Obj. speichern.
                 scores.mz_alle_details.push(details_obj);
-                scores.mz_alle_variables.TMTAError.push(TMTAError);
-                scores.mz_alle_variables.TMTBError.push(TMTBError);
-                scores.mz_alle_variables.TMTBTime.push(TMTBTime);
-                scores.mz_alle_variables.Perz_A.push(Perz_A);
-                scores.mz_alle_variables.Perz_B.push(Perz_B);
-                scores.mz_alle_variables.BA_Quotient.push(BA_Quotient);
+                scores.mz_alle_vars.TMTAError.push(TMTAError);
+                scores.mz_alle_vars.TMTBError.push(TMTBError);
+                scores.mz_alle_vars.TMTBTime.push(TMTBTime);
+                scores.mz_alle_vars.Perz_A.push(Perz_A);
+                scores.mz_alle_vars.Perz_B.push(Perz_B);
+                scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
-                if (mz === 1) {
-                    // Eintritt
-                    scores.mz_eintritt_details.push(details_obj);
-                    //    scores.mz_eintritt_variables.TMTAError.push(TMTAError);
-                    //    scores.mz_eintritt_variables.TMTBError.push(TMTBError);
-                    //    scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
-                    //    scores.mz_eintritt_variables.Perz_A.push(Perz_A);
-                    //    scores.mz_eintritt_variables.Perz_B.push(Perz_B);
-                    //    scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
-                };
+                //  if (mz === 1) {
+                //      // Eintritt
+                //      scores.mz_eintritt_details.push(details_obj);
+                //      scores.mz_eintritt_variables.TMTAError.push(TMTAError);
+                //      scores.mz_eintritt_variables.TMTBError.push(TMTBError);
+                //      scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
+                //      scores.mz_eintritt_variables.Perz_A.push(Perz_A);
+                //      scores.mz_eintritt_variables.Perz_B.push(Perz_B);
+                //      scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
+                //  };
 
 
                 //  
