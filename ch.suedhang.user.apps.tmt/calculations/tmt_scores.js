@@ -46,7 +46,6 @@ function main(responses) {
                 "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
                 "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
                 "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_anderer_vars": JSON.parse(JSON.stringify(variables)),
                 "patient": current_result.patient
             };
 
