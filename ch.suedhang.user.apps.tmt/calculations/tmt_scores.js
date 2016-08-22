@@ -136,34 +136,35 @@ function main(responses) {
             //    });
 
             all_scores.push(scores);
-        });
+        };
 
 
-    return all_scores;
-};
+        return all_scores;
+    };
 
-// ------------------------------------------
-// F U N C T I O N  -  Main
-// ------------------------------------------
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
 
-calc.getResults = function(d) {
-    // Calculate stuff first.
+    calc.getResults = function(d) {
+        // Calculate stuff first.
 
-    var patient_scores = [];
-    // var patient_scores = calc.getPatientScores(d);
+        // var patient_scores = [];
+        var patient_scores = calc.getPatientScores(d);
 
-    // Build & add stuff to returnObj.
-    var returnObj = {};
-    returnObj.patient_scores = patient_scores;
+        // Build & add stuff to returnObj.
+        var returnObj = {};
+        returnObj.patient_scores = patient_scores;
+        returnObj.my_length = d.length;
 
 
-    returnObj.full = d;
+        returnObj.full = d;
+
+        // Return
+        return returnObj;
+    };
+
 
     // Return
-    return returnObj;
-};
-
-
-// Return
-return calc.getResults(responses);
+    return calc.getResults(responses);
 }
