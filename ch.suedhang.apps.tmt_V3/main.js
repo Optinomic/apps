@@ -95,7 +95,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
-        $scope.d.zScore.normgruppe_klinik.selected_pg_id = 0;
+        $scope.d.zScore.normgruppe_klinik.selected_pg_id = null;
 
 
 
