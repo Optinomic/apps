@@ -99,7 +99,7 @@ function main(responses) {
 
 
                 // Interessante Variablen & Details Obj. speichern.
-                details_responses.mz_alle_details.push(details_obj);
+                details_responses.mz_alle_details.push(JSON.parse(JSON.stringify(details_obj)));
                 scores.mz_alle_vars.TMTAError.push(TMTAError);
                 scores.mz_alle_vars.TMTBError.push(TMTBError);
                 scores.mz_alle_vars.TMTBTime.push(TMTBTime);
@@ -108,7 +108,8 @@ function main(responses) {
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
 
-                details_responses.mz_eintritt_details.push(details_obj);
+                details_responses.mz_eintritt_details.push(JSON.parse(JSON.stringify(details_obj)));
+
 
                 //  if (mz === 1) {
                 //      // Eintritt
