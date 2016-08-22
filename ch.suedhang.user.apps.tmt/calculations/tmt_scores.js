@@ -112,7 +112,7 @@ function main(responses) {
                 scores.all_responses.push(details_obj);
 
                 mz.alle.details.push(details_obj);
-                // scores.messzeitpunkt = messzeitpunkt;
+                scores.mz = mz;
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
