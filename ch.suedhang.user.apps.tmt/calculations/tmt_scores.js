@@ -25,14 +25,16 @@ function main(responses) {
 
             // Interessante Variablen
             var variables = {
-                "TMTAError": [],
-                "TMTATime": [],
-                "TMTBError": [],
-                "TMTBTime": [],
-                "Perz_A": [],
-                "Perz_B": [],
-                "BA_Quotient": [],
-                "Details": []
+                "variables": {
+                    "TMTAError": [],
+                    "TMTATime": [],
+                    "TMTBError": [],
+                    "TMTBTime": [],
+                    "Perz_A": [],
+                    "Perz_B": [],
+                    "BA_Quotient": []
+                },
+                "details": []
             };
 
             // Scores Obj. erstellen.
@@ -47,7 +49,8 @@ function main(responses) {
                     "edu_years": null,
                     "edu_group": {},
                     "age": null
-                }
+                },
+                "patient": current_result.patient
             };
 
             //
@@ -95,7 +98,7 @@ function main(responses) {
             //        scores.messzeitpunkt.alle.Perz_A.push(Perz_A);
             //        scores.messzeitpunkt.alle.Perz_B.push(Perz_B);
             //        scores.messzeitpunkt.alle.BA_Quotient.push(BA_Quotient);
-            //        scores.messzeitpunkt.alle.Details.push(details_obj);
+            //        scores.messzeitpunkt.alle.details.push(details_obj);
             //
             //        if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
             //            // Eintritt
@@ -106,7 +109,7 @@ function main(responses) {
             //            scores.messzeitpunkt.eintritt.Perz_A.push(Perz_A);
             //            scores.messzeitpunkt.eintritt.Perz_B.push(Perz_B);
             //            scores.messzeitpunkt.eintritt.BA_Quotient.push(BA_Quotient);
-            //            scores.messzeitpunkt.eintritt.Details.push(details_obj);
+            //            scores.messzeitpunkt.eintritt.details.push(details_obj);
             //        };
             //
             //        if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
@@ -118,7 +121,7 @@ function main(responses) {
             //            scores.messzeitpunkt.austritt.Perz_A.push(Perz_A);
             //            scores.messzeitpunkt.austritt.Perz_B.push(Perz_B);
             //            scores.messzeitpunkt.austritt.BA_Quotient.push(BA_Quotient);
-            //            scores.messzeitpunkt.austritt.Details.push(details_obj);
+            //            scores.messzeitpunkt.austritt.details.push(details_obj);
             //        };
             //
             //        if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
@@ -130,7 +133,7 @@ function main(responses) {
             //            scores.messzeitpunkt.anderer.Perz_A.push(Perz_A);
             //            scores.messzeitpunkt.anderer.Perz_B.push(Perz_B);
             //            scores.messzeitpunkt.anderer.BA_Quotient.push(BA_Quotient);
-            //            scores.messzeitpunkt.anderer.Details.push(details_obj);
+            //            scores.messzeitpunkt.anderer.details.push(details_obj);
             //        };
             //    });
 
