@@ -1,18 +1,18 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.haveData">
+    <h3 class="md-headline">Normgruppen | Einstellungen</h3>
     <div layout="row" layout-align="space-between start" layout-margin>
-        <h3 class="md-headline">Normgruppen</h3>
         <div layout="column" layout-align="start center">
             <p class="md-headline">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
-            <p class="md-subhead" style="margin-top:-12px;">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert: <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre) | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
+            <p class="md-subhead" style="margin-top:-12px;">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert: <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (>= 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (< 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
         </div>
         <div layout="column" layout-align="start center">
             <p class="md-headline">{{d.dataMain.config.data.customer.name}} | Klinische Normierung</p>
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label>Patientengruppe</label>
                 <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id">
                     <md-option ng-repeat="pg in d.dataMain.patient_groups" ng-value="pg.id">
-                        {{d.data.name}}
+                        {{pg.data.name}}
                     </md-option>
                 </md-select>
             </md-input-container>
