@@ -145,7 +145,7 @@ function main(responses) {
 
     calc.getResults = function(d) {
         // Calculate stuff first.
-        var patient_scores = calc.getPatientScores(d);
+        // var patient_scores = calc.getPatientScores(d);
 
         // Build & add stuff to returnObj.
         var returnObj = {};
