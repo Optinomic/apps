@@ -72,7 +72,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt = {};
 
         // Simulate responses from 'calculation'
-        var d = $scope.d.calculations[0].calculation_results.full;
+        var d = $scope.d.dataMain.calculations[0].calculation_results.full;
 
         $scope.d.tmt.patient_scores = $scope.getPatientScores(d);
 
