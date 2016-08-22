@@ -125,7 +125,7 @@ function main(responses) {
 
                 if (messzeitpunkt === 2) {
                     // Austritt
-                    //scores.mz_austritt_details.push(details_obj);
+                    scores.mz_austritt_details.push(details_obj);
                     scores.mz_austritt_vars.TMTAError.push(TMTAError);
                     scores.mz_austritt_vars.TMTATime.push(TMTATime);
                     scores.mz_austritt_vars.TMTBError.push(TMTBError);
@@ -136,17 +136,19 @@ function main(responses) {
                 };
 
 
-                // 
-                // if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
-                //     // Anderer Messzeitpunkt
-                //     scores.mz_anderer_details.push(details_obj);
-                //     scores.mz_anderer_variables.TMTAError.push(TMTAError);
-                //     scores.mz_anderer_variables.TMTBError.push(TMTBError);
-                //     scores.mz_anderer_variables.TMTBTime.push(TMTBTime);
-                //     scores.mz_anderer_variables.Perz_A.push(Perz_A);
-                //     scores.mz_anderer_variables.Perz_B.push(Perz_B);
-                //     scores.mz_anderer_variables.BA_Quotient.push(BA_Quotient);
-                // };
+                if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
+                    // Austritt
+                    scores.mz_austritt_details.push(details_obj);
+                    scores.mz_anderer_vars.TMTAError.push(TMTAError);
+                    scores.mz_anderer_vars.TMTATime.push(TMTATime);
+                    scores.mz_anderer_vars.TMTBError.push(TMTBError);
+                    scores.mz_anderer_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_anderer_vars.Perz_A.push(Perz_A);
+                    scores.mz_anderer_vars.Perz_B.push(Perz_B);
+                    scores.mz_anderer_vars.BA_Quotient.push(BA_Quotient);
+                };
+
+
             };
 
             // scores.messzeitpunkt = mz_alle;
