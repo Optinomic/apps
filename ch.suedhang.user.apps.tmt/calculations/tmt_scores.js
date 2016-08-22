@@ -22,24 +22,49 @@ function main(responses) {
         d.forEach(function(current_result, myResultIndex) {
 
             // Interessante Variablen
-            var variables = {
-                "TMTAError": [],
-                "TMTATime": [],
-                "TMTBError": [],
-                "TMTBTime": [],
-                "Perz_A": [],
-                "Perz_B": [],
-                "BA_Quotient": [],
-                "Details": []
-            };
-
             // Scores Obj. erstellen.
             var scores = {
                 "messzeitpunkt": {
-                    "eintritt": JSON.parse(JSON.stringify(variables)),
-                    "austritt": JSON.parse(JSON.stringify(variables)),
-                    "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": JSON.parse(JSON.stringify(variables)),
+                    "eintritt": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "austritt": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "anderer": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "alle": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
                 },
                 "patient_details": {
                     "edu_years": null,
@@ -147,7 +172,7 @@ function main(responses) {
         // Calculate stuff first.
 
         var patient_scores = [];
-        // var patient_scores = calc.getPatientScores(d);
+        patient_scores = calc.getPatientScores(d);
 
         // Build & add stuff to returnObj.
         var returnObj = {};
