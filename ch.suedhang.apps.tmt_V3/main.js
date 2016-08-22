@@ -222,6 +222,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Wenn Stichprobe gewählt automatisch anzeigen:
         if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
             $scope.d.zScore.toggles.show_clinicsample = true;
+        } else {
+            $scope.d.zScore.toggles.show_clinicsample = false;
         };
 
         // Grafiken anpassen gemäss | Toggles
