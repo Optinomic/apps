@@ -25,32 +25,26 @@ function main(responses) {
 
             // Interessante Variablen
             var variables = {
-                "variables": {
-                    "TMTAError": [],
-                    "TMTATime": [],
-                    "TMTBError": [],
-                    "TMTBTime": [],
-                    "Perz_A": [],
-                    "Perz_B": [],
-                    "BA_Quotient": []
-                },
-                "details": []
+                "TMTAError": [],
+                "TMTATime": [],
+                "TMTBError": [],
+                "TMTBTime": [],
+                "Perz_A": [],
+                "Perz_B": [],
+                "BA_Quotient": []
             };
 
             // Scores Obj. erstellen.
             var scores = {
-                "messzeitpunkt": {},
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
                     "age": null
                 },
                 "patient": current_result.patient,
-                "all_responses": []
+                "mz_alle_details": [],
+                "mz_alle_variables": JSON.parse(JSON.stringify(variables))
             };
-
-            var mz_alle = {};
-            var mz_alle_details = [];
 
 
             //  "messzeitpunkt": {
@@ -109,10 +103,9 @@ function main(responses) {
                     "filled_datestamp": filled
                 };
 
-                scores.all_responses.push(details_obj);
+                scores.mz_alle_details.push(details_obj);
                 //scores.mz.all_responses.push(details_obj);
 
-                mz_alle_details.push(details_obj);
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
