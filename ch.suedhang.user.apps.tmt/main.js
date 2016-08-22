@@ -135,7 +135,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var filled = current_response.response.data.filled;
                 var event_id = current_response.response.data.event_id;
-                var pid = current_response.full_responses.patient.id;
+                var pid = current_response.patient.id;
 
 
                 // Details Obj. erstellen.
