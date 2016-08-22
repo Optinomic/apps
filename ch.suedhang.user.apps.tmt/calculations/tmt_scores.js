@@ -103,11 +103,13 @@ function main(responses) {
                     "filled_datestamp": filled
                 };
 
+
+
+                // Interessante Variablen & Details Obj. speichern.
                 scores.mz_alle_details.push(details_obj);
-                //scores.mz.all_responses.push(details_obj);
+                scores.mz_alle_variables.TMTAError.push(TMTAError);
 
 
-                //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
                 //  scores.messzeitpunkt.alle.variables.TMTATime.push(TMTATime);
                 //  scores.messzeitpunkt.alle.variables.TMTBError.push(TMTBError);
@@ -153,8 +155,6 @@ function main(responses) {
                 //      scores.messzeitpunkt.anderer.details.push(details_obj);
                 //  };
             };
-
-            scores.mz_alle_details = "mz_alle_details";
 
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
