@@ -109,7 +109,7 @@ function main(responses) {
 
                 //details_responses.mz_eintritt_details.push(details_obj_clone_2);
 
-                if (messzeitpunkt == 1) {
+                if (messzeitpunkt === 1) {
                     // Eintritt
                     //scores.mz_eintritt_details.push(details_obj);
                     scores.mz_eintritt_vars.TMTAError.push(TMTAError);
@@ -123,18 +123,17 @@ function main(responses) {
                 };
 
 
-
-                //  
-                //  if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
-                //      // Austritt
-                //      scores.mz_austritt_details.push(details_obj);
-                //      scores.mz_austritt_variables.TMTAError.push(TMTAError);
-                //      scores.mz_austritt_variables.TMTBError.push(TMTBError);
-                //      scores.mz_austritt_variables.TMTBTime.push(TMTBTime);
-                //      scores.mz_austritt_variables.Perz_A.push(Perz_A);
-                //      scores.mz_austritt_variables.Perz_B.push(Perz_B);
-                //      scores.mz_austritt_variables.BA_Quotient.push(BA_Quotient);
-                //  };
+                if (messzeitpunkt === 2) {
+                    // Austritt
+                    //scores.mz_austritt_details.push(details_obj);
+                    scores.mz_austritt_vars.TMTAError.push(TMTAError);
+                    scores.mz_austritt_vars.TMTATime.push(TMTATime);
+                    scores.mz_austritt_vars.TMTBError.push(TMTBError);
+                    scores.mz_austritt_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_austritt_vars.Perz_A.push(Perz_A);
+                    scores.mz_austritt_vars.Perz_B.push(Perz_B);
+                    scores.mz_austritt_vars.BA_Quotient.push(BA_Quotient);
+                };
 
 
                 // 
