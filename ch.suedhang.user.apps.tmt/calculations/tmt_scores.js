@@ -47,9 +47,10 @@ function main(responses) {
                 "patient": current_result.patient,
                 "all_responses": []
             };
-            scores.messzeitpunkt = {};
-            scores.messzeitpunkt.alle = {};
-            scores.messzeitpunkt.alle.details = [];
+
+            var messzeitpunkt = {};
+            messzeitpunkt.alle = {};
+            messzeitpunkt.alle.details = [];
 
 
             //  "messzeitpunkt": {
@@ -109,6 +110,8 @@ function main(responses) {
                 };
 
                 scores.all_responses.push(details_obj);
+                messzeitpunkt.alle.details.push(details_obj);
+                scores.messzeitpunkt = messzeitpunkt;
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
