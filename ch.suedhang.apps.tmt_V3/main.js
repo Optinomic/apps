@@ -89,7 +89,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Toggles | Grafiken
         $scope.d.zScore.toggles = {
-            "show_clinicsample": false,
+            "show_text": true,
             "show_clinicsample": false,
             "show_clinicsample_scores": true
         };
