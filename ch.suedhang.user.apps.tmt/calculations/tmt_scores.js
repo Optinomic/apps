@@ -39,9 +39,7 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "mz": {
-                    "all_responses": []
-                },
+                "messzeitpunkt": {},
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
@@ -51,9 +49,8 @@ function main(responses) {
                 "all_responses": []
             };
 
-            var mz = {};
-            mz.alle = {};
-            mz.alle.details = [];
+            var mz_alle = {};
+            mz_alle.details = [];
 
 
             //  "messzeitpunkt": {
@@ -113,9 +110,9 @@ function main(responses) {
                 };
 
                 scores.all_responses.push(details_obj);
-                scores.mz.all_responses.push(details_obj);
+                //scores.mz.all_responses.push(details_obj);
 
-                mz.alle.details.push(details_obj);
+                mz_alle.details.push(details_obj);
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
@@ -164,6 +161,7 @@ function main(responses) {
                 //  };
             };
 
+            scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
         };
 
