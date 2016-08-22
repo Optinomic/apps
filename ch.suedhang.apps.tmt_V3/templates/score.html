@@ -2,14 +2,19 @@ include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
     <h3 class="md-headline">Normgruppen | Einstellungen</h3>
     <p class="md-subhead">{{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}) | Alter: {{d.dataMain.patient.data.extras.age}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre)</p>
-    <div ng-if="d.zScore.init" layout="row" layout-align="space-between start" layout-margin>
-        <div flex layout="column" layout-align="start start">
-            <p class="md-headline">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
+    <div ng-if="d.zScore.init" layout="row" layout-align="space-between start">
+        <div flex style="margin-right:12px;">
+            <p class="md-title">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
             <p class="md-subhead">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
                 <br> <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (>= 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (< 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
+            <div>
+                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Zeige Beschriftungstext">
+                    Zeige Beschriftungstext
+                </md-switch>
+            </div>
         </div>
-        <div flex layout="column" layout-align="start start">
-            <p class="md-headline">{{d.dataMain.config.data.customer.contact.name}} | Klinische Normierung</p>
+        <div flex>
+            <p class="md-title">{{d.dataMain.config.data.customer.contact.name}} | Klinische Normierung</p>
             <p class="md-subhead">Die klinische Stichproben sind nach Alter und Bildung normiert: n=?</p>
             <md-input-container class="md-block">
                 <label>Patientengruppe</label>
@@ -22,9 +27,6 @@ include(../lib/html/optinomic/page/start.m4)
             <div>
                 <md-switch ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige klinische Stichprobe">
                     Zeige klinische Stichprobe
-                </md-switch>
-                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Zeige Beschriftungstext">
-                    Zeige Beschriftungstext
                 </md-switch>
             </div>
         </div>
