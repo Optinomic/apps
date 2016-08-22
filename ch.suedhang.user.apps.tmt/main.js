@@ -73,7 +73,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt = {};
 
 
-        $scope.d.tmt.scores = $scope.getPatientScores();
+        $scope.d.tmt.patient_scores = $scope.getPatientScores();
 
     };
 
@@ -147,7 +147,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "Perz_A": Perz_A,
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
-                    "Details": current_response,
+                    "full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
                     "filled_datestamp": filled,
