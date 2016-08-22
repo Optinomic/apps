@@ -110,20 +110,18 @@ function main(responses) {
                 //details_responses.mz_eintritt_details.push(details_obj_clone_2);
 
                 if (messzeitpunkt == 1) {
+                    // Eintritt
+                    //scores.mz_eintritt_details.push(details_obj);
+                    scores.mz_eintritt_vars.TMTAError.push(TMTAError);
+                    scores.mz_eintritt_vars.TMTATime.push(TMTATime);
+                    scores.mz_eintritt_vars.TMTBError.push(TMTBError);
+                    scores.mz_eintritt_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_eintritt_vars.Perz_A.push(Perz_A);
+                    scores.mz_eintritt_vars.Perz_B.push(Perz_B);
+                    scores.mz_eintritt_vars.BA_Quotient.push(BA_Quotient);
 
                 };
 
-                //  if (mz = 1) {
-                //      // Eintritt
-                //      //scores.mz_eintritt_details.push(details_obj);
-                //      scores.mz_eintritt_variables.TMTAError.push(TMTAError);
-                //      scores.mz_eintritt_variables.TMTATime.push(TMTATime);
-                //      scores.mz_eintritt_variables.TMTBError.push(TMTBError);
-                //      scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
-                //      scores.mz_eintritt_variables.Perz_A.push(Perz_A);
-                //      scores.mz_eintritt_variables.Perz_B.push(Perz_B);
-                //      scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
-                //  };
 
 
                 //  
