@@ -17,9 +17,7 @@ function main(responses) {
     calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
-        var myReturnObj = {};
         var all_scores = [];
-
 
         for (var i = 0; i < d.length; i++) {
             var current_result = d[i];
@@ -150,10 +148,7 @@ function main(responses) {
 
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
-            all_resps.push(details_responses);
         };
-
-        myReturnObj.vars = all_scores;
 
         return all_scores;
     };
