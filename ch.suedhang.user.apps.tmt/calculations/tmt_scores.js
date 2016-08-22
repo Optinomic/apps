@@ -61,23 +61,23 @@ function main(responses) {
 
                 scores.gaga.push(current_response);
 
-                //  var TMTAError = current_response.TMTAError;
-                //  var TMTATime = current_response.TMTATime;
-                //  var TMTBError = current_response.TMTBError;
-                //  var TMTBTime = current_response.TMTBTime;
-                //  var Perz_A = current_response.percentile.result.A;
-                //  var Perz_B = current_response.percentile.result.B;
-                //  var BA_Quotient = current_response.quotient;
-                //  
-                //  scores.patient_details.edu_years = current_response.edu_years;
-                //  scores.patient_details.edu_group = current_response.percentile.age_perz;
-                //  scores.patient_details.age = current_response.set_age;
-                //  
-                //  var filled = current_response.response.data.filled;
-                //  var event_id = current_response.response.data.event_id;
-                //  var pid = current_result.patient.id;
-                //  
-                //  
+                var TMTAError = current_response.TMTAError;
+                var TMTATime = current_response.TMTATime;
+                var TMTBError = current_response.TMTBError;
+                var TMTBTime = current_response.TMTBTime;
+                var Perz_A = current_response.percentile.result.A;
+                var Perz_B = current_response.percentile.result.B;
+                var BA_Quotient = current_response.quotient;
+
+                scores.patient_details.edu_years = current_response.edu_years;
+                scores.patient_details.edu_group = current_response.percentile.age_perz;
+                scores.patient_details.age = current_response.set_age;
+
+                var filled = current_response.response.data.filled;
+                var event_id = current_response.response.data.event_id;
+                var pid = current_result.patient.id;
+
+
                 //  // Details Obj. erstellen.
                 //  var details_obj = {
                 //      "TMTAError": TMTAError,
