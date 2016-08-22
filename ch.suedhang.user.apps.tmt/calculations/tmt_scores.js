@@ -161,7 +161,7 @@ function main(responses) {
                 //  };
             };
 
-            scores.mz_alle_details = mz_alle_details;
+            scores.mz_alle_details = "mz_alle_details";
 
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
