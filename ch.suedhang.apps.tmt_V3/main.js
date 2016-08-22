@@ -84,14 +84,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
     $scope.initZScore = function() {
+        $scope.d.zScore = {};
         $scope.d.zScore.init = false;
 
-        $scope.d.zScore = {};
         $scope.d.zScore.toggles = {
-            "show_clinicsample": true,
+            "show_clinicsample": false,
             "show_text": true
         };
-
 
 
         // ToDo: 'Echte Daten setzen'
@@ -206,20 +205,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
         $scope.d.zScore.init = true;
+
         // Bei Änderunge ausführen.
-        $scope.setZScore('Init');
+        $scope.setZScore();
     };
 
 
-    $scope.setZScore = function(action) {
+    $scope.setZScore = function() {
 
-        // Toggle
-        // if (action === 'show_clinicsample') {
-        //     $scope.d.zScore.toggles.show_clinicsample = !$scope.d.zScore.toggles.show_clinicsample;
-        // };
-        // if (action === 'show_text') {
-        //     $scope.d.zScore.toggles.show_text = !$scope.d.zScore.toggles.show_text;
-        // };
 
         // Grafiken anpassen gemäss | Toggles
         $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;

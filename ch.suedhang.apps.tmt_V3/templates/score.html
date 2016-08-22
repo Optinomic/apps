@@ -11,7 +11,7 @@ include(../lib/html/optinomic/page/start.m4)
         <div flex layout="column" layout-align="start start">
             <p class="md-headline">{{d.dataMain.config.data.customer.contact.name}} | Klinische Normierung</p>
             <p class="md-subhead">Die klinische Stichproben sind nach Alter und Bildung normiert: n=?</p>
-            <md-input-container flex class="md-block">
+            <md-input-container class="md-block">
                 <label>Patientengruppe</label>
                 <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id">
                     <md-option ng-repeat="pg in d.dataMain.patient_groups" ng-value="pg.id">
@@ -20,10 +20,10 @@ include(../lib/html/optinomic/page/start.m4)
                 </md-select>
             </md-input-container>
             <div>
-                <md-switch ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore('show_clinicsample')" aria-label="Zeige klinische Stichprobe">
+                <md-switch ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige klinische Stichprobe">
                     Zeige klinische Stichprobe
                 </md-switch>
-                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore('show_text')" aria-label="Zeige Beschriftungstext">
+                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Zeige Beschriftungstext">
                     Zeige Beschriftungstext
                 </md-switch>
             </div>
