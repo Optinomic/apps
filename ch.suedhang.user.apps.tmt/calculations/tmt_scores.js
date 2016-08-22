@@ -51,7 +51,7 @@ function main(responses) {
                     "age": null
                 },
                 "patient": current_result.patient,
-                "gaga": []
+                "all_responses": []
             };
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
@@ -59,7 +59,6 @@ function main(responses) {
             for (var x = 0; x < all_responses.length; x++) {
                 var current_response = all_responses[x];
 
-                scores.gaga.push(current_response);
 
                 var TMTAError = current_response.TMTAError;
                 var TMTATime = current_response.TMTATime;
@@ -78,21 +77,23 @@ function main(responses) {
                 var pid = current_result.patient.id;
 
 
-                //  // Details Obj. erstellen.
-                //  var details_obj = {
-                //      "TMTAError": TMTAError,
-                //      "TMTATime": TMTATime,
-                //      "TMTBError": TMTBError,
-                //      "TMTBTime": TMTBTime,
-                //      "Perz_A": Perz_A,
-                //      "Perz_B": Perz_B,
-                //      "BA_Quotient": BA_Quotient,
-                //      "full_response": current_response,
-                //      "event_id": event_id,
-                //      "patient_id": pid,
-                //      "filled_datestamp": filled
-                //  };
-                //  
+                // Details Obj. erstellen.
+                var details_obj = {
+                    "TMTAError": TMTAError,
+                    "TMTATime": TMTATime,
+                    "TMTBError": TMTBError,
+                    "TMTBTime": TMTBTime,
+                    "Perz_A": Perz_A,
+                    "Perz_B": Perz_B,
+                    "BA_Quotient": BA_Quotient,
+                    "full_response": current_response,
+                    "event_id": event_id,
+                    "patient_id": pid,
+                    "filled_datestamp": filled
+                };
+
+                scores.all_responses.push(current_response);
+
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
                 //  scores.messzeitpunkt.alle.variables.TMTATime.push(TMTATime);
@@ -101,7 +102,7 @@ function main(responses) {
                 //  scores.messzeitpunkt.alle.variables.Perz_A.push(Perz_A);
                 //  scores.messzeitpunkt.alle.variables.Perz_B.push(Perz_B);
                 //  scores.messzeitpunkt.alle.variables.BA_Quotient.push(BA_Quotient);
-                //  scores.messzeitpunkt.alle.details.push(details_obj);
+                scores.messzeitpunkt.alle.details.push(details_obj);
                 //  
                 //  if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
                 //      // Eintritt
