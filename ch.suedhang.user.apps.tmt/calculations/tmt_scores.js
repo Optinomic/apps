@@ -48,9 +48,9 @@ function main(responses) {
                 "all_responses": []
             };
 
-            var messzeitpunkt = {};
-            messzeitpunkt.alle = {};
-            messzeitpunkt.alle.details = [];
+            var mz = {};
+            mz.alle = {};
+            mz.alle.details = [];
 
 
             //  "messzeitpunkt": {
@@ -110,8 +110,9 @@ function main(responses) {
                 };
 
                 scores.all_responses.push(details_obj);
-                messzeitpunkt.alle.details.push(details_obj);
-                scores.messzeitpunkt = messzeitpunkt;
+
+                mz.alle.details.push(details_obj);
+                // scores.messzeitpunkt = messzeitpunkt;
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
