@@ -73,7 +73,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt = {};
 
 
-        //$scope.d.tmt.patient_scores = $scope.getPatientScores();
+        $scope.d.tmt.patient_scores = $scope.getPatientScores();
 
     };
 
