@@ -33,7 +33,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div flex>
                 <h3 class="md-headline">TMT A</h3>
                 <div ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-                    <p class="md-caption">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
+                    <p class="md-subhead">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
                 </div>
             </div>
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
@@ -43,15 +43,15 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div layout="row" layout-align="space-between end">
             <div flex>
-                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
                     Beschriftung
                 </md-switch>
             </div>
-            <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
-                <md-switch ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
+            <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-align="space-between end">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
                     Klinische Stichprobe
                 </md-switch>
-                <md-switch ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
+                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
                     Werte
                 </md-switch>
             </div>
