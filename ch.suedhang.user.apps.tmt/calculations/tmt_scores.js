@@ -20,7 +20,7 @@ function main(responses) {
 
 
         for (var i = 0; i < d.length; i++) {
-            var current_result = d.[i];
+            var current_result = d[i];
 
             // Interessante Variablen
             var variables = {
