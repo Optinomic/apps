@@ -18,6 +18,7 @@ function main(responses) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var all_scores = []
+        var all_resps = []
 
 
         for (var i = 0; i < d.length; i++) {
@@ -41,12 +42,16 @@ function main(responses) {
                     "edu_group": {},
                     "age": null
                 },
-                "mz_alle_details": [],
                 "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_eintritt_details": [],
                 "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_austritt_details": [],
                 "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
+                "patient": current_result.patient
+            };
+
+            var details_responses = {
+                "mz_alle_details": [],
+                "mz_eintritt_details": [],
+                "mz_austritt_details": [],
                 "patient": current_result.patient
             };
 
@@ -94,7 +99,7 @@ function main(responses) {
 
 
                 // Interessante Variablen & Details Obj. speichern.
-                scores.mz_alle_details.push(details_obj);
+                details_responses.mz_alle_details.push(details_obj);
                 scores.mz_alle_vars.TMTAError.push(TMTAError);
                 scores.mz_alle_vars.TMTBError.push(TMTBError);
                 scores.mz_alle_vars.TMTBTime.push(TMTBTime);
@@ -103,7 +108,7 @@ function main(responses) {
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
 
-                scores.mz_eintritt_details.push(details_obj);
+                details_responses.mz_eintritt_details.push(details_obj);
 
                 //  if (mz === 1) {
                 //      // Eintritt
@@ -145,10 +150,14 @@ function main(responses) {
 
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
+            all_resps.push(details_responses);
         };
 
-
-        return all_scores;
+        var myReturnObj = {
+            "vars" = all_scores,
+            "details" = all_resps
+        }
+        return myReturnObj;
     };
 
     // ------------------------------------------
