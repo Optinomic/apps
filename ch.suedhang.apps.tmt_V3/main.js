@@ -240,7 +240,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.zScore.tmt_b_a_quotient.show_numbers = true;
 
 
-
         if ($scope.d.zScore.messungen_info.ein_und_austritt) {
             $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
             $scope.d.zScore.tmt_a.austritt.show_numbers = true;
