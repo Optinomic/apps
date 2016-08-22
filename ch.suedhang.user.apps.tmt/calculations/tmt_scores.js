@@ -43,7 +43,7 @@ function main(responses) {
                     "eintritt": JSON.parse(JSON.stringify(variables)),
                     "austritt": JSON.parse(JSON.stringify(variables)),
                     "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": JSON.parse(JSON.stringify(variables)),
+                    "alle": JSON.parse(JSON.stringify(variables))
                 },
                 "patient_details": {
                     "edu_years": null,
@@ -102,7 +102,7 @@ function main(responses) {
                 //  scores.messzeitpunkt.alle.variables.Perz_A.push(Perz_A);
                 //  scores.messzeitpunkt.alle.variables.Perz_B.push(Perz_B);
                 //  scores.messzeitpunkt.alle.variables.BA_Quotient.push(BA_Quotient);
-                //scores.messzeitpunkt.alle.details.push(details_obj);
+                scores.messzeitpunkt.alle.details.push(details_obj);
                 //  
                 //  if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
                 //      // Eintritt
