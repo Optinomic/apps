@@ -50,7 +50,7 @@ function main(responses) {
             };
 
             var mz_alle = {};
-            mz_alle.details = [];
+            var mz_alle_details = [];
 
 
             //  "messzeitpunkt": {
@@ -112,7 +112,7 @@ function main(responses) {
                 scores.all_responses.push(details_obj);
                 //scores.mz.all_responses.push(details_obj);
 
-                mz_alle.details.push(details_obj);
+                mz_alle_details.push(details_obj);
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
@@ -161,7 +161,7 @@ function main(responses) {
                 //  };
             };
 
-            scores.mz = mz_alle;
+            scores.mz_alle_details = mz_alle_details;
 
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
