@@ -39,7 +39,6 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "messzeitpunkt": {},
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
@@ -48,6 +47,7 @@ function main(responses) {
                 "patient": current_result.patient,
                 "all_responses": []
             };
+            scores.messzeitpunkt = {};
             scores.messzeitpunkt.alle = {};
             scores.messzeitpunkt.alle.details = [];
 
