@@ -241,12 +241,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
         $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_a.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
         $scope.d.zScore.tmt_b_a_quotient.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_b_a_quotient.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
         $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
         $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
         $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        $scope.d.zScore.tmt_b.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
         $scope.d.zScore.tmt_b_a_quotient.show_numbers = true;
 
 

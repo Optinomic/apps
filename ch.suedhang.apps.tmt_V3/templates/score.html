@@ -9,9 +9,6 @@ include(../lib/html/optinomic/page/start.m4)
                 <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
             </p>
             <p class="md-subhead">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.</p>
-            <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Zeige Beschriftungstext">
-                Zeige Beschriftungstext
-            </md-switch>
         </div>
         <div flex>
             <p class="md-title">{{d.dataMain.config.data.customer.contact.name}}</p>
@@ -42,6 +39,21 @@ include(../lib/html/optinomic/page/start.m4)
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
                 <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
                 <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
+            </div>
+        </div>
+        <div layout="row" layout-align="space-between end">
+            <div flex>
+                <md-switch ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
+                    Beschriftung
+                </md-switch>
+            </div>
+            <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
+                <md-switch ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
+                    Klinische Stichprobe
+                </md-switch>
+                <md-switch ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
+                    Werte
+                </md-switch>
             </div>
         </div>
     </div>
