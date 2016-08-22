@@ -71,7 +71,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.tmt_init = function() {
         $scope.d.tmt = {};
 
-        $scope.d.tmt.patient_scores = $scope.getPatientScores();
+        // var d = 
+
+        // $scope.d.tmt.patient_scores = $scope.getPatientScores();
 
     };
 
@@ -79,7 +81,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Data
     // -------------------
-    $scope.getPatientScores = function() {
+    $scope.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var all_scores = [];
