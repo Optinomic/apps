@@ -108,7 +108,7 @@ function main(responses) {
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
 
-                // details_responses.mz_eintritt_details.push(details_obj);
+                details_responses.mz_eintritt_details.push(details_obj);
 
                 //  if (mz === 1) {
                 //      // Eintritt
