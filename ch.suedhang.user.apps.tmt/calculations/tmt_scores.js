@@ -73,7 +73,7 @@ function main(responses) {
                 var event_id = current_response.response.data.event_id;
                 var pid = current_result.patient.id;
 
-                var mz = current_response.mz;
+                var messzeitpunkt = current_response.mz;
 
 
                 // Details Obj. erstellen.
@@ -85,7 +85,7 @@ function main(responses) {
                     "Perz_A": Perz_A,
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
-                    "mz": mz,
+                    "messzeitpunkt": messzeitpunkt,
                     "full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
@@ -108,6 +108,10 @@ function main(responses) {
 
 
                 //details_responses.mz_eintritt_details.push(details_obj_clone_2);
+
+                if (messzeitpunkt == 1) {
+
+                };
 
                 //  if (mz = 1) {
                 //      // Eintritt
