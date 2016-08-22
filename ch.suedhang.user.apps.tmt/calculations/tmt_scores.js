@@ -86,7 +86,7 @@ function main(responses) {
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
                     "messzeitpunkt": messzeitpunkt,
-                    "full_response": current_response,
+                    //"full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
                     "filled_datestamp": filled
@@ -111,7 +111,7 @@ function main(responses) {
 
                 if (messzeitpunkt === 1) {
                     // Eintritt
-                    scores.mz_eintritt_details.push(details_obj_clone);
+                    scores.mz_eintritt_details.push(details_obj);
                     scores.mz_eintritt_vars.TMTAError.push(TMTAError);
                     scores.mz_eintritt_vars.TMTATime.push(TMTATime);
                     scores.mz_eintritt_vars.TMTBError.push(TMTBError);
