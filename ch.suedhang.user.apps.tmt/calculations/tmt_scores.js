@@ -111,7 +111,7 @@ function main(responses) {
 
                 if (messzeitpunkt === 1) {
                     // Eintritt
-                    //scores.mz_eintritt_details.push(details_obj);
+                    scores.mz_eintritt_details.push(details_obj_clone);
                     scores.mz_eintritt_vars.TMTAError.push(TMTAError);
                     scores.mz_eintritt_vars.TMTATime.push(TMTATime);
                     scores.mz_eintritt_vars.TMTBError.push(TMTBError);
@@ -119,7 +119,6 @@ function main(responses) {
                     scores.mz_eintritt_vars.Perz_A.push(Perz_A);
                     scores.mz_eintritt_vars.Perz_B.push(Perz_B);
                     scores.mz_eintritt_vars.BA_Quotient.push(BA_Quotient);
-
                 };
 
 
