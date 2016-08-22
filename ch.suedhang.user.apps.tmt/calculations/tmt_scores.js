@@ -23,25 +23,61 @@ function main(responses) {
         for (var i = 0; i < d.length; i++) {
             var current_result = d[i];
 
-            // Interessante Variablen
-            var variables = {
-                "TMTAError": [],
-                "TMTATime": [],
-                "TMTBError": [],
-                "TMTBTime": [],
-                "Perz_A": [],
-                "Perz_B": [],
-                "BA_Quotient": [],
-                "Details": []
-            };
+            //  // Interessante Variablen
+            //  var variables = {
+            //      "TMTAError": [],
+            //      "TMTATime": [],
+            //      "TMTBError": [],
+            //      "TMTBTime": [],
+            //      "Perz_A": [],
+            //      "Perz_B": [],
+            //      "BA_Quotient": [],
+            //      "Details": []
+            //  };
 
             // Scores Obj. erstellen.
             var scores = {
                 "messzeitpunkt": {
-                    "eintritt": variables,
-                    "austritt": variables,
-                    "anderer": variables,
-                    "alle": variables,
+                    "eintritt": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "austritt": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "anderer": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    },
+                    "alle": {
+                        "TMTAError": [],
+                        "TMTATime": [],
+                        "TMTBError": [],
+                        "TMTBTime": [],
+                        "Perz_A": [],
+                        "Perz_B": [],
+                        "BA_Quotient": [],
+                        "Details": []
+                    }
                 },
                 "patient_details": {
                     "edu_years": null,
