@@ -83,9 +83,7 @@ function main(responses) {
                     "edu_years": null,
                     "edu_group": {},
                     "age": null
-                },
-                "patient": current_result.patient,
-                "full": current_result
+                }
             };
 
             //
