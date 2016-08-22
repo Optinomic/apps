@@ -241,7 +241,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.zScore.tmt_b.austritt.show_numbers = false;
         };
 
-        console.log('setZScore', action, $scope.d.zScore);
+        console.log('setZScore', $scope.d.zScore);
     };
 
 
