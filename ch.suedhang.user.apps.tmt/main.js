@@ -129,13 +129,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var Perz_B = current_response.percentile.result.B;
                 var BA_Quotient = current_response.quotient;
 
-                scores.patient.edu_years = current_response.edu_years;
-                scores.patient.edu_group = current_response.percentile.age_perz;
-                scores.patient.age = current_response.set_age;
+                scores.patient_details.edu_years = current_response.edu_years;
+                scores.patient_details.edu_group = current_response.percentile.age_perz;
+                scores.patient_details.age = current_response.set_age;
 
                 var filled = current_response.response.data.filled;
                 var event_id = current_response.response.data.event_id;
-                var pid = null;
+                var pid = current_result.patient.id;
 
 
                 // Details Obj. erstellen.
