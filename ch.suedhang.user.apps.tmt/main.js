@@ -73,7 +73,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt = {};
 
 
-        $scope.d.tmt.patient_scores = $scope.getPatientScores();
+        //$scope.d.tmt.patient_scores = $scope.getPatientScores();
 
     };
 
@@ -150,11 +150,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
-                    "filled_datestamp": filled,
-                    "filled_date": $filter("amDateFormat")(filled, 'DD.MM.YYYY'),
-                    "filled_time": $filter("amDateFormat")(filled, 'HH:mm'),
-                    "filled_year": $filter("amDateFormat")(filled, 'YYYY'),
-                    "filled_week": $filter("amDateFormat")(filled, 'YYYY, ww')
+                    "filled_datestamp": filled
                 };
 
                 // Interessante Variablen & Details Obj. speichern.
@@ -228,46 +224,46 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.getPatientGroupScores = function() {
-
-        var pg = [];
-        var all_pg = $scope.d.dataMain.patient_groups;
-
-        all_pg.forEach(function(current_pg, myPGIndex) {
-
-            var scores = [];
-            var scores_details = [];
-
-            // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
-            $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
-
-                var response_pid = current_patient_response.patient.id;
-                var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
-
-                // If YES:  concat()  Arrays.
-                if (inside_group) {
-                    scores = scores.concat(current_patient_response.scores);
-                    scores_details = scores_details.concat(current_patient_response.scores_details);
-                };
-
-            });
-
-            var data_model = {
-                "group": {
-                    "id": current_pg.id,
-                    "data": current_pg.data,
-                    "patients": current_pg.patients
-                },
-                "scores": scores,
-                "scores_details": scores_details
-            };
-            pg.push(data_model);
-
-        });
-
-        // Save to $scope
-        $scope.d.bdi_scores.patient_groups = pg;
-    };
+    // $scope.getPatientGroupScores = function() {
+    // 
+    //     var pg = [];
+    //     var all_pg = $scope.d.dataMain.patient_groups;
+    // 
+    //     all_pg.forEach(function(current_pg, myPGIndex) {
+    // 
+    //         var scores = [];
+    //         var scores_details = [];
+    // 
+    //         // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
+    //         $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
+    // 
+    //             var response_pid = current_patient_response.patient.id;
+    //             var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
+    // 
+    //             // If YES:  concat()  Arrays.
+    //             if (inside_group) {
+    //                 scores = scores.concat(current_patient_response.scores);
+    //                 scores_details = scores_details.concat(current_patient_response.scores_details);
+    //             };
+    // 
+    //         });
+    // 
+    //         var data_model = {
+    //             "group": {
+    //                 "id": current_pg.id,
+    //                 "data": current_pg.data,
+    //                 "patients": current_pg.patients
+    //             },
+    //             "scores": scores,
+    //             "scores_details": scores_details
+    //         };
+    //         pg.push(data_model);
+    // 
+    //     });
+    // 
+    //     // Save to $scope
+    //     $scope.d.bdi_scores.patient_groups = pg;
+    // };
 
 
 });

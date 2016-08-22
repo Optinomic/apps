@@ -32,7 +32,7 @@ function main(responses) {
         returnObj.test = test;
 
 
-        returnObj.d = d;
+        returnObj.full = d;
 
         // Return
         return returnObj;
