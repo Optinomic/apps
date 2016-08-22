@@ -44,11 +44,11 @@ function main(responses) {
                 "mz_alle_details": [],
                 "mz_alle_variables": JSON.parse(JSON.stringify(variables)),
                 "mz_eintritt_details": [],
-                "mz_eintritt_variables": JSON.parse(JSON.stringify(variables)),
-                "mz_austritt_details": [],
-                "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
-                "mz_anderer_details": [],
-                "mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
+                // "mz_eintritt_variables": JSON.parse(JSON.stringify(variables)),
+                // "mz_austritt_details": [],
+                // "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
+                // "mz_anderer_details": [],
+                // "mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
                 "patient": current_result.patient
             };
 
