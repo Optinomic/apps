@@ -50,7 +50,8 @@ function main(responses) {
                     "edu_group": {},
                     "age": null
                 },
-                "patient": current_result.patient
+                "patient": current_result.patient,
+                "other": current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
             };
 
             //
