@@ -138,7 +138,7 @@ function main(responses) {
 
                 if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
                     // Austritt
-                    scores.mz_austritt_details.push(details_obj);
+                    scores.mz_anderer_details.push(details_obj);
                     scores.mz_anderer_vars.TMTAError.push(TMTAError);
                     scores.mz_anderer_vars.TMTATime.push(TMTATime);
                     scores.mz_anderer_vars.TMTBError.push(TMTBError);
@@ -172,7 +172,6 @@ function main(responses) {
         // Build & add stuff to returnObj.
         var returnObj = {};
         returnObj.patient_scores = patient_scores;
-        returnObj.my_length = d.length;
 
 
         returnObj.full = d;
