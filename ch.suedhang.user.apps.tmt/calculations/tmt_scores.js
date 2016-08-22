@@ -18,6 +18,7 @@ function main(responses) {
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var all_scores = []
 
+
         d.forEach(function(current_result, myResultIndex) {
 
             // Interessante Variablen
