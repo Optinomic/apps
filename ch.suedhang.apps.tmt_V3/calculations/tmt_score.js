@@ -551,6 +551,8 @@ function main(responses) {
 
 
             var Messzeitpunkt = parseInt(result.Messzeitpunkt);
+            myResults.mz = Messzeitpunkt;
+
             var Messzeitpunkt_Text = 'Undefined';
 
             if (Messzeitpunkt === 1) {
@@ -568,7 +570,6 @@ function main(responses) {
                 "Messzeitpunkt_Text": Messzeitpunkt_Text
             };
 
-            myResults.mz = Messzeitpunkt;
             myResults.Messzeitpunkt = Messzeitpunkt;
 
             // Write Results for the Return

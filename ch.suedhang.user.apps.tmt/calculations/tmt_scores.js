@@ -74,9 +74,6 @@ function main(responses) {
                 var event_id = current_response.response.data.event_id;
                 var pid = current_result.patient.id;
 
-                // var mz = current_response.mz;
-
-
                 // Details Obj. erstellen.
                 var details_obj = {
                     "TMTAError": TMTAError,
@@ -86,7 +83,6 @@ function main(responses) {
                     "Perz_A": Perz_A,
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
-                    //"Messzeitpunkt": mz,
                     "full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
