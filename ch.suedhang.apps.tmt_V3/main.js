@@ -100,6 +100,12 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
         // ToDo: 'Echte Daten setzen'
+        $scope.d.zScore.global = {
+            "clinicsample_color": '#3F51B5'
+        };
+
+
+
         // TMT - A
 
         $scope.d.zScore.tmt_a = {};
@@ -213,6 +219,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
     $scope.setZScore = function() {
 
+        // Wenn Stichprobe gewählt automatisch anzeigen:
+        if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
+            $scope.d.zScore.toggles.show_clinicsample = true;
+        };
 
         // Grafiken anpassen gemäss | Toggles
         $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
