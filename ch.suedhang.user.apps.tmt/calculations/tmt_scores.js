@@ -41,7 +41,6 @@ function main(responses) {
                     "edu_group": {},
                     "age": null
                 },
-                "patient": current_result.patient,
                 "mz_alle_details": [],
                 "mz_alle_variables": JSON.parse(JSON.stringify(variables)),
                 "mz_eintritt_details": [],
@@ -50,6 +49,7 @@ function main(responses) {
                 "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
                 "mz_anderer_details": [],
                 "mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
+                "patient": current_result.patient
             };
 
 
@@ -102,38 +102,38 @@ function main(responses) {
                 scores.mz_alle_variables.Perz_B.push(Perz_B);
                 scores.mz_alle_variables.BA_Quotient.push(BA_Quotient);
 
-                if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
-                    // Eintritt
-                    scores.mz_eintritt_details.push(details_obj);
-                    scores.mz_eintritt_variables.TMTAError.push(TMTAError);
-                    scores.mz_eintritt_variables.TMTBError.push(TMTBError);
-                    scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
-                    scores.mz_eintritt_variables.Perz_A.push(Perz_A);
-                    scores.mz_eintritt_variables.Perz_B.push(Perz_B);
-                    scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
-                };
-
-                if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
-                    // Austritt
-                    scores.mz_austritt_details.push(details_obj);
-                    scores.mz_austritt_variables.TMTAError.push(TMTAError);
-                    scores.mz_austritt_variables.TMTBError.push(TMTBError);
-                    scores.mz_austritt_variables.TMTBTime.push(TMTBTime);
-                    scores.mz_austritt_variables.Perz_A.push(Perz_A);
-                    scores.mz_austritt_variables.Perz_B.push(Perz_B);
-                    scores.mz_austritt_variables.BA_Quotient.push(BA_Quotient);
-                };
-
-                if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
-                    // Anderer Messzeitpunkt
-                    scores.mz_anderer_details.push(details_obj);
-                    scores.mz_anderer_variables.TMTAError.push(TMTAError);
-                    scores.mz_anderer_variables.TMTBError.push(TMTBError);
-                    scores.mz_anderer_variables.TMTBTime.push(TMTBTime);
-                    scores.mz_anderer_variables.Perz_A.push(Perz_A);
-                    scores.mz_anderer_variables.Perz_B.push(Perz_B);
-                    scores.mz_anderer_variables.BA_Quotient.push(BA_Quotient);
-                };
+                // if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
+                //     // Eintritt
+                //     scores.mz_eintritt_details.push(details_obj);
+                //     scores.mz_eintritt_variables.TMTAError.push(TMTAError);
+                //     scores.mz_eintritt_variables.TMTBError.push(TMTBError);
+                //     scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
+                //     scores.mz_eintritt_variables.Perz_A.push(Perz_A);
+                //     scores.mz_eintritt_variables.Perz_B.push(Perz_B);
+                //     scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
+                // };
+                // 
+                // if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
+                //     // Austritt
+                //     scores.mz_austritt_details.push(details_obj);
+                //     scores.mz_austritt_variables.TMTAError.push(TMTAError);
+                //     scores.mz_austritt_variables.TMTBError.push(TMTBError);
+                //     scores.mz_austritt_variables.TMTBTime.push(TMTBTime);
+                //     scores.mz_austritt_variables.Perz_A.push(Perz_A);
+                //     scores.mz_austritt_variables.Perz_B.push(Perz_B);
+                //     scores.mz_austritt_variables.BA_Quotient.push(BA_Quotient);
+                // };
+                // 
+                // if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
+                //     // Anderer Messzeitpunkt
+                //     scores.mz_anderer_details.push(details_obj);
+                //     scores.mz_anderer_variables.TMTAError.push(TMTAError);
+                //     scores.mz_anderer_variables.TMTBError.push(TMTBError);
+                //     scores.mz_anderer_variables.TMTBTime.push(TMTBTime);
+                //     scores.mz_anderer_variables.Perz_A.push(Perz_A);
+                //     scores.mz_anderer_variables.Perz_B.push(Perz_B);
+                //     scores.mz_anderer_variables.BA_Quotient.push(BA_Quotient);
+                // };
             };
 
             // scores.messzeitpunkt = mz_alle;
