@@ -70,6 +70,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // TMT Init
     // -------------------
     $scope.tmt_init = function() {
+        $scope.d.tmt = {};
+
+
+        $scope.d.tmt.scores = $scope.getPatientScores();
 
     };
 
@@ -78,63 +82,134 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Data
     // -------------------
     $scope.getPatientScores = function() {
+
         // Get all TMT-Scores from a Patient and arrange it in a Array
-
-        var patients = []
         var all_scores = []
-        var all_scores_details = []
-        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
 
+        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
         all_results.forEach(function(current_result, myResultIndex) {
 
-            var scores = [];
-            var scores_details = [];
-            var all_responses = current_result.other_calculations['ch.suedhang.apps.bdi:bdi_score']
+            // Interessante Variablen
+            var variables = {
+                "TMTAError": [],
+                "TMTATime": [],
+                "TMTBError": [],
+                "TMTBTime": [],
+                "Perz_A": [],
+                "Perz_B": [],
+                "BA_Quotient": [],
+                "Details": []
+            };
+
+            // Scores Obj. erstellen.
+            var scores = {
+                "messzeitpunkt": {
+                    "eintritt": JSON.parse(JSON.stringify(variables)),
+                    "austritt": JSON.parse(JSON.stringify(variables)),
+                    "anderer": JSON.parse(JSON.stringify(variables)),
+                    "alle": JSON.parse(JSON.stringify(variables)),
+                },
+                "patient_details" {
+                    "edu_years": null,
+                    "edu_group": {},
+                    "age": null
+                },
+                "patient": current_result.patient
+            };
+
+            var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
             all_responses.forEach(function(current_response, myResponseIndex) {
-                var score = current_response.score.score;
+
+                var TMTAError = current_response.TMTAError;
+                var TMTATime = current_response.TMTATime;
+                var TMTBError = current_response.TMTBError;
+                var TMTBTime = current_response.TMTBTime;
+                var Perz_A = current_response.percentile.result.A;
+                var Perz_B = current_response.percentile.result.B;
+                var BA_Quotient = current_response.quotient;
+
+                scores.patient.edu_years = current_response.edu_years;
+                scores.patient.edu_group = current_response.percentile.age_perz;
+                scores.patient.age = current_response.set_age;
+
                 var filled = current_response.response.data.filled;
                 var event_id = current_response.response.data.event_id;
                 var pid = current_response.full_responses.patient.id;
 
-                //console.log('score: ', score);
-                if (score !== null) {
 
-                    var details_obj = {
-                        "score": parseInt(score),
-                        "event_id": event_id,
-                        "patient_id": pid,
-                        "filled_datestamp": filled,
-                        "filled_date": $filter("amDateFormat")(filled, 'DD.MM.YYYY'),
-                        "filled_time": $filter("amDateFormat")(filled, 'HH:mm'),
-                        "filled_year": $filter("amDateFormat")(filled, 'YYYY'),
-                        "filled_week": $filter("amDateFormat")(filled, 'YYYY, ww')
-                    };
+                // Details Obj. erstellen.
+                var details_obj = {
+                    "TMTAError": TMTAError,
+                    "TMTATime": TMTATime,
+                    "TMTBError": TMTBError,
+                    "TMTBTime": TMTBTime,
+                    "Perz_A": Perz_A,
+                    "Perz_B": Perz_B,
+                    "BA_Quotient": BA_Quotient,
+                    "Details": current_response,
+                    "event_id": event_id,
+                    "patient_id": pid,
+                    "filled_datestamp": filled,
+                    "filled_date": $filter("amDateFormat")(filled, 'DD.MM.YYYY'),
+                    "filled_time": $filter("amDateFormat")(filled, 'HH:mm'),
+                    "filled_year": $filter("amDateFormat")(filled, 'YYYY'),
+                    "filled_week": $filter("amDateFormat")(filled, 'YYYY, ww')
+                };
 
-                    scores.push(parseInt(score));
-                    scores_details.push(details_obj);
-                    all_scores.push(parseInt(score));
-                    all_scores_details.push(details_obj);
+                // Interessante Variablen & Details Obj. speichern.
+                scores.messzeitpunkt.alle.TMTAError.push(TMTAError);
+                scores.messzeitpunkt.alle.TMTATime.push(TMTATime);
+                scores.messzeitpunkt.alle.TMTBError.push(TMTBError);
+                scores.messzeitpunkt.alle.TMTBTime.push(TMTBTime);
+                scores.messzeitpunkt.alle.Perz_A.push(Perz_A);
+                scores.messzeitpunkt.alle.Perz_B.push(Perz_B);
+                scores.messzeitpunkt.alle.BA_Quotient.push(BA_Quotient);
+                scores.messzeitpunkt.alle.Details.push(details_obj);
+
+                if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
+                    // Eintritt
+                    scores.messzeitpunkt.eintritt.TMTAError.push(TMTAError);
+                    scores.messzeitpunkt.eintritt.TMTATime.push(TMTATime);
+                    scores.messzeitpunkt.eintritt.TMTBError.push(TMTBError);
+                    scores.messzeitpunkt.eintritt.TMTBTime.push(TMTBTime);
+                    scores.messzeitpunkt.eintritt.Perz_A.push(Perz_A);
+                    scores.messzeitpunkt.eintritt.Perz_B.push(Perz_B);
+                    scores.messzeitpunkt.eintritt.BA_Quotient.push(BA_Quotient);
+                    scores.messzeitpunkt.eintritt.Details.push(details_obj);
+                };
+
+                if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
+                    // Austritt
+                    scores.messzeitpunkt.austritt.TMTAError.push(TMTAError);
+                    scores.messzeitpunkt.austritt.TMTATime.push(TMTATime);
+                    scores.messzeitpunkt.austritt.TMTBError.push(TMTBError);
+                    scores.messzeitpunkt.austritt.TMTBTime.push(TMTBTime);
+                    scores.messzeitpunkt.austritt.Perz_A.push(Perz_A);
+                    scores.messzeitpunkt.austritt.Perz_B.push(Perz_B);
+                    scores.messzeitpunkt.austritt.BA_Quotient.push(BA_Quotient);
+                    scores.messzeitpunkt.austritt.Details.push(details_obj);
+                };
+
+                if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
+                    // Anderer Messzeitpunkt
+                    scores.messzeitpunkt.anderer.TMTAError.push(TMTAError);
+                    scores.messzeitpunkt.anderer.TMTATime.push(TMTATime);
+                    scores.messzeitpunkt.anderer.TMTBError.push(TMTBError);
+                    scores.messzeitpunkt.anderer.TMTBTime.push(TMTBTime);
+                    scores.messzeitpunkt.anderer.Perz_A.push(Perz_A);
+                    scores.messzeitpunkt.anderer.Perz_B.push(Perz_B);
+                    scores.messzeitpunkt.anderer.BA_Quotient.push(BA_Quotient);
+                    scores.messzeitpunkt.anderer.Details.push(details_obj);
                 };
             });
 
-            var data_model = {
-                "patient": current_result.patient,
-                "scores": scores,
-                "scores_details": scores_details
-            };
-
-            patients.push(data_model);
+            all_scores.push(scores);
         });
 
-        // Save to $scope
-        $scope.d.bdi_scores.patients = patients;
-        $scope.d.bdi_scores.all_scores = {
-            "scores": all_scores,
-            "scores_details": all_scores_details
-        };
 
-        $scope.getPatientGroupScores();
+        console.log('getPatientScores', all_scores);
+        return all_scores;
     };
 
 
