@@ -161,6 +161,8 @@ function main(responses) {
                 //  };
             };
 
+            scores.gaga = "gaga";
+
             // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
         };
