@@ -96,7 +96,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
         $scope.d.zScore.normgruppe_klinik.selected_pg_id = null;
-
+        $scope.d.zScore.normgruppe_klinik.selected_pg = 'Keine klinische Stichprobe gewählt';
 
 
         // ToDo: 'Echte Daten setzen'
@@ -217,14 +217,21 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     };
 
 
-    $scope.setZScore = function() {
-
+    $scope.changeClinicSample = function() {
         // Wenn Stichprobe gewählt automatisch anzeigen:
         if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
             $scope.d.zScore.toggles.show_clinicsample = true;
         } else {
             $scope.d.zScore.toggles.show_clinicsample = false;
         };
+
+        // Name setzen
+        $scope.d.zScore.normgruppe_klinik.selected_pg = $scope.d.dataMain.patient_groups[$scope.d.zScore.normgruppe_klinik.selected_pg_id].data.name;
+
+    };
+
+
+    $scope.setZScore = function() {
 
         // Grafiken anpassen gemäss | Toggles
         $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
