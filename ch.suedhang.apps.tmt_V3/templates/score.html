@@ -1,19 +1,16 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-if="d.haveData">
+<md-content ng-if="d.haveData">
     <h3 class="md-headline">Normgruppen | Einstellungen</h3>
+    <p class="md-subhead">{{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}) | Alter: {{d.dataMain.patient.data.extras.age}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre)</p>
     <div ng-if="d.zScore.init" layout="row" layout-align="space-between start" layout-margin>
         <div flex layout="column" layout-align="start start">
-            <p class="md-headline">{{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})</p>
-            <p class="md-subhead" style="margin-top:-12px;">Alter: {{d.dataMain.patient.data.extras.age}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre)</p>
-        </div>
-        <div flex layout="column" layout-align="start start">
             <p class="md-headline">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
-            <p class="md-subhead" style="margin-top:-12px;">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+            <p class="md-subhead">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
                 <br> <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (>= 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (< 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
         </div>
         <div flex layout="column" layout-align="start start">
-            <p class="md-headline">{{d.dataMain.config.data.customer.name}} | Klinische Normierung</p>
-            <p class="md-subhead" style="margin-top:-12px;">Die klinische Stichproben sind nach Alter und Bildung normiert: n=?</p>
+            <p class="md-headline">{{d.dataMain.config.data.customer.contact.name}} | Klinische Normierung</p>
+            <p class="md-subhead">Die klinische Stichproben sind nach Alter und Bildung normiert: n=?</p>
             <md-input-container flex class="md-block">
                 <label>Patientengruppe</label>
                 <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id">
@@ -104,7 +101,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.quotient_rounded}}</p>
         </div>
     </div>
-</div>
+</md-content>
 <div ng-if="!d.haveData">
     <h3 class="md-headline">Keine Daten</h3>
     <h3 class="md-subhead">Kein Assessment | Messungen vorhanden.</h3>
