@@ -53,7 +53,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         call.success(function(data) {
             // Save Data to $scope.d
-            $scope.d.calculations = data;
+            $scope.d.calculations = data.calculation_result;
             console.log('(DATA): getCalculation: ', data);
         });
         call.error(function(data) {
