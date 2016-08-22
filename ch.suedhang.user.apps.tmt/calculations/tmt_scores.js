@@ -97,12 +97,12 @@ function main(responses) {
                     "filled_datestamp": filled
                 };
 
-                var details_obj_clone_1 = JSON.parse(JSON.stringify(details_obj));
-                var details_obj_clone_2 = JSON.parse(JSON.stringify(details_obj_clone_1));
+                var details_obj_clone = JSON.parse(JSON.stringify(details_obj));
+                //var details_obj_clone_2 = JSON.parse(JSON.stringify(details_obj_clone_1));
 
 
                 // Interessante Variablen & Details Obj. speichern.
-                details_responses.mz_alle_details.push(details_obj_clone_1);
+                details_responses.mz_alle_details.push(details_obj_clone);
                 scores.mz_alle_vars.TMTAError.push(TMTAError);
                 scores.mz_alle_vars.TMTBError.push(TMTBError);
                 scores.mz_alle_vars.TMTBTime.push(TMTBTime);
