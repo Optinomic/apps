@@ -109,7 +109,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "anderer": JSON.parse(JSON.stringify(variables)),
                     "alle": JSON.parse(JSON.stringify(variables)),
                 },
-                "patient_details" {
+                "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
                     "age": null
