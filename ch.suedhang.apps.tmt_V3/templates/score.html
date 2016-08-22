@@ -1,22 +1,36 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.haveData">
-    <md-fab-toolbar md-open="d.fab.isOpen" count="d.fab.tmt.count" md-direction="left">
-        <md-fab-trigger class="align-with-text">
-            <md-button aria-label="menu" class="md-fab md-primary">
-                <i class="mdi mdi-menu mdi-fab" style="z-index:20"></i>
-            </md-button>
-        </md-fab-trigger>
-        <md-toolbar>
-            <md-fab-actions class="md-toolbar-tools">
+    <div layout="row" layout-align="space-between start" layout-margin>
+        <h3 class="md-headline">Normgruppen</h3>
+        <div layout="column" layout-align="start center">
+            <p class="md-headline">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
+            <p class="md-subhead" style="margin-top:-12px;">Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert: <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre) | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
+        </div>
+        <div layout="column" layout-align="start center">
+            <p class="md-headline">{{d.dataMain.config.data.customer.name}} | Klinische Normierung</p>
+            <md-input-container flex>
+                <label>Patientengruppe</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id">
+                    <md-option ng-repeat="pg in d.dataMain.patient_groups" ng-value="pg.id">
+                        {{d.data.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <p class="md-subhead" style="margin-top:-12px;">Die klinische Stichproben sind nach Alter und Bildung normiert: n=?</p>
+            <div>
                 <md-button aria-label="Zeige klinische Stichprobe" ng-click="setZScore('show_clinicsample')" class="md-icon-button">
                     <i class="mdi mdi-ruler" style="color:#E8EAF6 !important; font-size:24px;"></i>
                 </md-button>
                 <md-button aria-label="Zeige Beschriftungstext" ng-click="setZScore('show_text')" class="md-icon-button">
                     <i class="mdi mdi-format-text" style="color:#E8EAF6 !important; font-size:24px;"></i>
                 </md-button>
-            </md-fab-actions>
-        </md-toolbar>
-    </md-fab-toolbar>
+            </div>
+        </div>
+        <div layout="column" layout-align="start center">
+            <p class="md-headline">{{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})</p>
+            <p class="md-subhead" style="margin-top:-12px;">Alter: {{d.dataMain.patient.data.extras.age}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre)</p>
+        </div>
+    </div>
     <div ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
         <h3 class="md-headline">TMT A | {{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}}</h3>
         <h3 class="md-subhead">

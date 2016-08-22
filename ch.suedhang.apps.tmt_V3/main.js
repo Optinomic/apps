@@ -90,16 +90,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "show_text": true
         };
 
-        // FAB
-        $scope.d.fab = {};
-        $scope.d.fab.isOpen = false;
-        $scope.d.fab.tmt = {
-            isOpen: false,
-            count: 0
-        };
+
 
         // ToDo: 'Echte Daten setzen'
-
 
         // TMT - A
 
@@ -205,7 +198,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         $scope.d.zScore.messungen_info = messungen_info;
 
 
-        $scope.setZScore();
+        // Klinische Stichprobe
+        $scope.d.zScore.normgruppe_klinik = {
+            "selected_pg_id": 0
+        };
+
+
+        // Bei Änderunge ausführen.
+        $scope.setZScore('Init');
     };
 
 
@@ -247,7 +247,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         };
 
         console.log('setZScore', action, $scope.d.zScore);
-
     };
 
 
