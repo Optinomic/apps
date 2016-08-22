@@ -43,27 +43,16 @@ function main(responses) {
                 },
                 "patient": current_result.patient,
                 "mz_alle_details": [],
-                "mz_alle_variables": JSON.parse(JSON.stringify(variables))
+                "mz_alle_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_eintritt_details": [],
+                "mz_eintritt_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_austritt_details": [],
+                "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_anderer_details": [],
+                "mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
             };
 
 
-            //  "messzeitpunkt": {
-            //      "eintritt": JSON.parse(JSON.stringify(variables)),
-            //      "austritt": JSON.parse(JSON.stringify(variables)),
-            //      "anderer": JSON.parse(JSON.stringify(variables)),
-            //      "alle": {
-            //          "variables": {
-            //              "TMTAError": [],
-            //              "TMTATime": [],
-            //              "TMTBError": [],
-            //              "TMTBTime": [],
-            //              "Perz_A": [],
-            //              "Perz_B": [],
-            //              "BA_Quotient": []
-            //          },
-            //          "details": []
-            //      }
-            //  },
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
@@ -104,7 +93,6 @@ function main(responses) {
                 };
 
 
-
                 // Interessante Variablen & Details Obj. speichern.
                 scores.mz_alle_details.push(details_obj);
                 scores.mz_alle_variables.TMTAError.push(TMTAError);
@@ -114,41 +102,38 @@ function main(responses) {
                 scores.mz_alle_variables.Perz_B.push(Perz_B);
                 scores.mz_alle_variables.BA_Quotient.push(BA_Quotient);
 
-                //  if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
-                //      // Eintritt
-                //      scores.messzeitpunkt.eintritt.variables.TMTAError.push(TMTAError);
-                //      scores.messzeitpunkt.eintritt.variables.TMTATime.push(TMTATime);
-                //      scores.messzeitpunkt.eintritt.variables.TMTBError.push(TMTBError);
-                //      scores.messzeitpunkt.eintritt.variables.TMTBTime.push(TMTBTime);
-                //      scores.messzeitpunkt.eintritt.variables.Perz_A.push(Perz_A);
-                //      scores.messzeitpunkt.eintritt.variables.Perz_B.push(Perz_B);
-                //      scores.messzeitpunkt.eintritt.variables.BA_Quotient.push(BA_Quotient);
-                //      scores.messzeitpunkt.eintritt.details.push(details_obj);
-                //  };
-                //  
-                //  if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
-                //      // Austritt
-                //      scores.messzeitpunkt.austritt.variables.TMTAError.push(TMTAError);
-                //      scores.messzeitpunkt.austritt.variables.TMTATime.push(TMTATime);
-                //      scores.messzeitpunkt.austritt.variables.TMTBError.push(TMTBError);
-                //      scores.messzeitpunkt.austritt.variables.TMTBTime.push(TMTBTime);
-                //      scores.messzeitpunkt.austritt.variables.Perz_A.push(Perz_A);
-                //      scores.messzeitpunkt.austritt.variables.Perz_B.push(Perz_B);
-                //      scores.messzeitpunkt.austritt.variables.BA_Quotient.push(BA_Quotient);
-                //      scores.messzeitpunkt.austritt.details.push(details_obj);
-                //  };
-                //  
-                //  if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
-                //      // Anderer Messzeitpunkt
-                //      scores.messzeitpunkt.anderer.variables.TMTAError.push(TMTAError);
-                //      scores.messzeitpunkt.anderer.variables.TMTATime.push(TMTATime);
-                //      scores.messzeitpunkt.anderer.variables.TMTBError.push(TMTBError);
-                //      scores.messzeitpunkt.anderer.variables.TMTBTime.push(TMTBTime);
-                //      scores.messzeitpunkt.anderer.variables.Perz_A.push(Perz_A);
-                //      scores.messzeitpunkt.anderer.variables.Perz_B.push(Perz_B);
-                //      scores.messzeitpunkt.anderer.variables.BA_Quotient.push(BA_Quotient);
-                //      scores.messzeitpunkt.anderer.details.push(details_obj);
-                //  };
+                if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
+                    // Eintritt
+                    scores.mz_eintritt_details.push(details_obj);
+                    scores.mz_eintritt_variables.TMTAError.push(TMTAError);
+                    scores.mz_eintritt_variables.TMTBError.push(TMTBError);
+                    scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
+                    scores.mz_eintritt_variables.Perz_A.push(Perz_A);
+                    scores.mz_eintritt_variables.Perz_B.push(Perz_B);
+                    scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
+                };
+
+                if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
+                    // Austritt
+                    scores.mz_austritt_details.push(details_obj);
+                    scores.mz_austritt_variables.TMTAError.push(TMTAError);
+                    scores.mz_austritt_variables.TMTBError.push(TMTBError);
+                    scores.mz_austritt_variables.TMTBTime.push(TMTBTime);
+                    scores.mz_austritt_variables.Perz_A.push(Perz_A);
+                    scores.mz_austritt_variables.Perz_B.push(Perz_B);
+                    scores.mz_austritt_variables.BA_Quotient.push(BA_Quotient);
+                };
+
+                if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
+                    // Anderer Messzeitpunkt
+                    scores.mz_anderer_details.push(details_obj);
+                    scores.mz_anderer_variables.TMTAError.push(TMTAError);
+                    scores.mz_anderer_variables.TMTBError.push(TMTBError);
+                    scores.mz_anderer_variables.TMTBTime.push(TMTBTime);
+                    scores.mz_anderer_variables.Perz_A.push(Perz_A);
+                    scores.mz_anderer_variables.Perz_B.push(Perz_B);
+                    scores.mz_anderer_variables.BA_Quotient.push(BA_Quotient);
+                };
             };
 
             // scores.messzeitpunkt = mz_alle;
