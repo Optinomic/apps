@@ -39,6 +39,9 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
+                "mz": {
+                    "all_responses": []
+                },
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
@@ -110,9 +113,9 @@ function main(responses) {
                 };
 
                 scores.all_responses.push(details_obj);
+                scores.mz.all_responses.push(details_obj);
 
                 mz.alle.details.push(details_obj);
-                scores.mz = mz;
 
                 //  // Interessante Variablen & Details Obj. speichern.
                 //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
