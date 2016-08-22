@@ -13,6 +13,20 @@ function main(responses) {
         return +(Math.round(num + "e+2") + "e-2");
     };
 
+    calc.isPIDinGroup = function(patients_array, search_pid) {
+
+        var isPIDinGroup = false;
+
+        for (var id = 0; id < patients_array.length; id++) {
+            var current_patient = patients_array[id];
+
+            if (current_patient.id === search_pid) {
+                isPIDinGroup = true;
+            };
+        };
+
+        return isPIDinGroup;
+    };
 
     calc.getPatientScores = function(d) {
 
@@ -147,7 +161,6 @@ function main(responses) {
                     scores.mz_anderer_vars.Perz_B.push(Perz_B);
                     scores.mz_anderer_vars.BA_Quotient.push(BA_Quotient);
                 };
-
 
             };
 

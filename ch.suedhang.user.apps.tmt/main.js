@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions:
             $scope.tmt_init();
-            //$scope.getPatientScores();
             $scope.getCalculation();
 
 
@@ -72,7 +71,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.tmt_init = function() {
         $scope.d.tmt = {};
 
-
         $scope.d.tmt.patient_scores = $scope.getPatientScores();
 
     };
@@ -84,10 +82,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getPatientScores = function() {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
-        var all_scores = []
+        var all_scores = [];
 
-        var all_results = $scope.d.dataMain.calculations[0].calculation_results.full;
-        all_results.forEach(function(current_result, myResultIndex) {
+        for (var i = 0; i < d.length; i++) {
+            var current_result = d[i];
 
             // Interessante Variablen
             var variables = {
@@ -97,29 +95,33 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "TMTBTime": [],
                 "Perz_A": [],
                 "Perz_B": [],
-                "BA_Quotient": [],
-                "Details": []
+                "BA_Quotient": []
             };
 
             // Scores Obj. erstellen.
             var scores = {
-                "messzeitpunkt": {
-                    "eintritt": JSON.parse(JSON.stringify(variables)),
-                    "austritt": JSON.parse(JSON.stringify(variables)),
-                    "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": JSON.parse(JSON.stringify(variables)),
-                },
                 "patient_details": {
                     "edu_years": null,
                     "edu_group": {},
                     "age": null
                 },
+                "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_anderer_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_alle_details": [],
+                "mz_eintritt_details": [],
+                "mz_austritt_details": [],
+                "mz_anderer_details": [],
                 "patient": current_result.patient
             };
 
+
+
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
-            all_responses.forEach(function(current_response, myResponseIndex) {
+            for (var x = 0; x < all_responses.length; x++) {
+                var current_response = all_responses[x];
 
                 var TMTAError = current_response.TMTAError;
                 var TMTATime = current_response.TMTATime;
@@ -137,6 +139,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var event_id = current_response.response.data.event_id;
                 var pid = current_result.patient.id;
 
+                var messzeitpunkt = current_response.mz;
+
 
                 // Details Obj. erstellen.
                 var details_obj = {
@@ -147,123 +151,133 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "Perz_A": Perz_A,
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
-                    "full_response": current_response,
+                    "messzeitpunkt": messzeitpunkt,
+                    //"full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
                     "filled_datestamp": filled
                 };
 
+                var details_obj_clone = JSON.parse(JSON.stringify(details_obj));
+                //var details_obj_clone_2 = JSON.parse(JSON.stringify(details_obj_clone_1));
+
+
                 // Interessante Variablen & Details Obj. speichern.
-                scores.messzeitpunkt.alle.TMTAError.push(TMTAError);
-                scores.messzeitpunkt.alle.TMTATime.push(TMTATime);
-                scores.messzeitpunkt.alle.TMTBError.push(TMTBError);
-                scores.messzeitpunkt.alle.TMTBTime.push(TMTBTime);
-                scores.messzeitpunkt.alle.Perz_A.push(Perz_A);
-                scores.messzeitpunkt.alle.Perz_B.push(Perz_B);
-                scores.messzeitpunkt.alle.BA_Quotient.push(BA_Quotient);
-                scores.messzeitpunkt.alle.Details.push(details_obj);
+                scores.mz_alle_details.push(details_obj_clone);
+                scores.mz_alle_vars.TMTAError.push(TMTAError);
+                scores.mz_alle_vars.TMTATime.push(TMTATime);
+                scores.mz_alle_vars.TMTBError.push(TMTBError);
+                scores.mz_alle_vars.TMTBTime.push(TMTBTime);
+                scores.mz_alle_vars.Perz_A.push(Perz_A);
+                scores.mz_alle_vars.Perz_B.push(Perz_B);
+                scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
-                if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
+
+                //details_responses.mz_eintritt_details.push(details_obj_clone_2);
+
+                if (messzeitpunkt === 1) {
                     // Eintritt
-                    scores.messzeitpunkt.eintritt.TMTAError.push(TMTAError);
-                    scores.messzeitpunkt.eintritt.TMTATime.push(TMTATime);
-                    scores.messzeitpunkt.eintritt.TMTBError.push(TMTBError);
-                    scores.messzeitpunkt.eintritt.TMTBTime.push(TMTBTime);
-                    scores.messzeitpunkt.eintritt.Perz_A.push(Perz_A);
-                    scores.messzeitpunkt.eintritt.Perz_B.push(Perz_B);
-                    scores.messzeitpunkt.eintritt.BA_Quotient.push(BA_Quotient);
-                    scores.messzeitpunkt.eintritt.Details.push(details_obj);
+                    scores.mz_eintritt_details.push(details_obj);
+                    scores.mz_eintritt_vars.TMTAError.push(TMTAError);
+                    scores.mz_eintritt_vars.TMTATime.push(TMTATime);
+                    scores.mz_eintritt_vars.TMTBError.push(TMTBError);
+                    scores.mz_eintritt_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_eintritt_vars.Perz_A.push(Perz_A);
+                    scores.mz_eintritt_vars.Perz_B.push(Perz_B);
+                    scores.mz_eintritt_vars.BA_Quotient.push(BA_Quotient);
                 };
 
-                if (current_response.Messzeitpunkt.Messzeitpunkt === 2) {
+
+                if (messzeitpunkt === 2) {
                     // Austritt
-                    scores.messzeitpunkt.austritt.TMTAError.push(TMTAError);
-                    scores.messzeitpunkt.austritt.TMTATime.push(TMTATime);
-                    scores.messzeitpunkt.austritt.TMTBError.push(TMTBError);
-                    scores.messzeitpunkt.austritt.TMTBTime.push(TMTBTime);
-                    scores.messzeitpunkt.austritt.Perz_A.push(Perz_A);
-                    scores.messzeitpunkt.austritt.Perz_B.push(Perz_B);
-                    scores.messzeitpunkt.austritt.BA_Quotient.push(BA_Quotient);
-                    scores.messzeitpunkt.austritt.Details.push(details_obj);
+                    scores.mz_austritt_details.push(details_obj);
+                    scores.mz_austritt_vars.TMTAError.push(TMTAError);
+                    scores.mz_austritt_vars.TMTATime.push(TMTATime);
+                    scores.mz_austritt_vars.TMTBError.push(TMTBError);
+                    scores.mz_austritt_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_austritt_vars.Perz_A.push(Perz_A);
+                    scores.mz_austritt_vars.Perz_B.push(Perz_B);
+                    scores.mz_austritt_vars.BA_Quotient.push(BA_Quotient);
                 };
 
-                if ((current_response.Messzeitpunkt.Messzeitpunkt !== 1) && (current_response.Messzeitpunkt.Messzeitpunkt !== 2)) {
-                    // Anderer Messzeitpunkt
-                    scores.messzeitpunkt.anderer.TMTAError.push(TMTAError);
-                    scores.messzeitpunkt.anderer.TMTATime.push(TMTATime);
-                    scores.messzeitpunkt.anderer.TMTBError.push(TMTBError);
-                    scores.messzeitpunkt.anderer.TMTBTime.push(TMTBTime);
-                    scores.messzeitpunkt.anderer.Perz_A.push(Perz_A);
-                    scores.messzeitpunkt.anderer.Perz_B.push(Perz_B);
-                    scores.messzeitpunkt.anderer.BA_Quotient.push(BA_Quotient);
-                    scores.messzeitpunkt.anderer.Details.push(details_obj);
-                };
-            });
 
+                if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
+                    // Austritt
+                    scores.mz_anderer_details.push(details_obj);
+                    scores.mz_anderer_vars.TMTAError.push(TMTAError);
+                    scores.mz_anderer_vars.TMTATime.push(TMTATime);
+                    scores.mz_anderer_vars.TMTBError.push(TMTBError);
+                    scores.mz_anderer_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_anderer_vars.Perz_A.push(Perz_A);
+                    scores.mz_anderer_vars.Perz_B.push(Perz_B);
+                    scores.mz_anderer_vars.BA_Quotient.push(BA_Quotient);
+                };
+
+            };
+
+            // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
-        });
+        };
 
-
-        console.log('getPatientScores', all_scores);
         return all_scores;
     };
 
 
     $scope.isPIDinGroup = function(patients_array, search_pid) {
-
         var isPIDinGroup = false;
 
-        patients_array.forEach(function(current_patient, Index) {
+        for (var id = 0; id < patients_array.length; id++) {
+            var current_patient = patients_array[id];
+
             if (current_patient.id === search_pid) {
                 isPIDinGroup = true;
-                //console.log('(YES) isPIDinGroup', search_pid);
             };
-        });
+        };
 
         return isPIDinGroup;
     };
 
 
-    // $scope.getPatientGroupScores = function() {
-    // 
-    //     var pg = [];
-    //     var all_pg = $scope.d.dataMain.patient_groups;
-    // 
-    //     all_pg.forEach(function(current_pg, myPGIndex) {
-    // 
-    //         var scores = [];
-    //         var scores_details = [];
-    // 
-    //         // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
-    //         $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
-    // 
-    //             var response_pid = current_patient_response.patient.id;
-    //             var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
-    // 
-    //             // If YES:  concat()  Arrays.
-    //             if (inside_group) {
-    //                 scores = scores.concat(current_patient_response.scores);
-    //                 scores_details = scores_details.concat(current_patient_response.scores_details);
-    //             };
-    // 
-    //         });
-    // 
-    //         var data_model = {
-    //             "group": {
-    //                 "id": current_pg.id,
-    //                 "data": current_pg.data,
-    //                 "patients": current_pg.patients
-    //             },
-    //             "scores": scores,
-    //             "scores_details": scores_details
-    //         };
-    //         pg.push(data_model);
-    // 
-    //     });
-    // 
-    //     // Save to $scope
-    //     $scope.d.bdi_scores.patient_groups = pg;
-    // };
+    $scope.getPatientGroupScores = function() {
+
+        var pg = [];
+        var all_pg = $scope.d.dataMain.patient_groups;
+
+        all_pg.forEach(function(current_pg, myPGIndex) {
+
+            var scores = [];
+            var scores_details = [];
+
+            // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
+            $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
+
+                var response_pid = current_patient_response.patient.id;
+                var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
+
+                // If YES:  concat()  Arrays.
+                if (inside_group) {
+                    scores = scores.concat(current_patient_response.scores);
+                    scores_details = scores_details.concat(current_patient_response.scores_details);
+                };
+
+            });
+
+            var data_model = {
+                "group": {
+                    "id": current_pg.id,
+                    "data": current_pg.data,
+                    "patients": current_pg.patients
+                },
+                "scores": scores,
+                "scores_details": scores_details
+            };
+            pg.push(data_model);
+
+        });
+
+        // Save to $scope
+        $scope.d.bdi_scores.patient_groups = pg;
+    };
 
 
 });
