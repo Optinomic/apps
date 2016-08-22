@@ -74,7 +74,7 @@ function main(responses) {
                 var event_id = current_response.response.data.event_id;
                 var pid = current_result.patient.id;
 
-                var mz = current_response.Messzeitpunkt.Messzeitpunkt;
+                var mz = current_response.mz;
 
 
                 // Details Obj. erstellen.
@@ -86,6 +86,7 @@ function main(responses) {
                     "Perz_A": Perz_A,
                     "Perz_B": Perz_B,
                     "BA_Quotient": BA_Quotient,
+                    "Messzeitpunkt": mz,
                     "full_response": current_response,
                     "event_id": event_id,
                     "patient_id": pid,
@@ -102,16 +103,16 @@ function main(responses) {
                 scores.mz_alle_variables.Perz_B.push(Perz_B);
                 scores.mz_alle_variables.BA_Quotient.push(BA_Quotient);
 
-                if (mz === 1) {
-                    // Eintritt
-                    scores.mz_eintritt_details.push(details_obj);
-                    scores.mz_eintritt_variables.TMTAError.push(TMTAError);
-                    scores.mz_eintritt_variables.TMTBError.push(TMTBError);
-                    scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
-                    scores.mz_eintritt_variables.Perz_A.push(Perz_A);
-                    scores.mz_eintritt_variables.Perz_B.push(Perz_B);
-                    scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
-                };
+                //if (mz === 1) {
+                //    // Eintritt
+                //    scores.mz_eintritt_details.push(details_obj);
+                //    scores.mz_eintritt_variables.TMTAError.push(TMTAError);
+                //    scores.mz_eintritt_variables.TMTBError.push(TMTBError);
+                //    scores.mz_eintritt_variables.TMTBTime.push(TMTBTime);
+                //    scores.mz_eintritt_variables.Perz_A.push(Perz_A);
+                //    scores.mz_eintritt_variables.Perz_B.push(Perz_B);
+                //    scores.mz_eintritt_variables.BA_Quotient.push(BA_Quotient);
+                //};
 
 
                 //  
