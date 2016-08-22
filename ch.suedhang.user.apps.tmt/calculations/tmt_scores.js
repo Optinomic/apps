@@ -108,17 +108,12 @@ function main(responses) {
                 // Interessante Variablen & Details Obj. speichern.
                 scores.mz_alle_details.push(details_obj);
                 scores.mz_alle_variables.TMTAError.push(TMTAError);
+                scores.mz_alle_variables.TMTBError.push(TMTBError);
+                scores.mz_alle_variables.TMTBTime.push(TMTBTime);
+                scores.mz_alle_variables.Perz_A.push(Perz_A);
+                scores.mz_alle_variables.Perz_B.push(Perz_B);
+                scores.mz_alle_variables.BA_Quotient.push(BA_Quotient);
 
-
-                //  scores.messzeitpunkt.alle.variables.TMTAError.push(TMTAError);
-                //  scores.messzeitpunkt.alle.variables.TMTATime.push(TMTATime);
-                //  scores.messzeitpunkt.alle.variables.TMTBError.push(TMTBError);
-                //  scores.messzeitpunkt.alle.variables.TMTBTime.push(TMTBTime);
-                //  scores.messzeitpunkt.alle.variables.Perz_A.push(Perz_A);
-                //  scores.messzeitpunkt.alle.variables.Perz_B.push(Perz_B);
-                //  scores.messzeitpunkt.alle.variables.BA_Quotient.push(BA_Quotient);
-                // scores.messzeitpunkt.alle.details.push(details_obj);
-                //  
                 //  if (current_response.Messzeitpunkt.Messzeitpunkt === 1) {
                 //      // Eintritt
                 //      scores.messzeitpunkt.eintritt.variables.TMTAError.push(TMTAError);
