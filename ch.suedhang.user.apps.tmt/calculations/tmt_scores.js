@@ -43,7 +43,18 @@ function main(responses) {
                     "eintritt": JSON.parse(JSON.stringify(variables)),
                     "austritt": JSON.parse(JSON.stringify(variables)),
                     "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": JSON.parse(JSON.stringify(variables))
+                    "alle": {
+                        "variables": {
+                            "TMTAError": [],
+                            "TMTATime": [],
+                            "TMTBError": [],
+                            "TMTBTime": [],
+                            "Perz_A": [],
+                            "Perz_B": [],
+                            "BA_Quotient": []
+                        },
+                        "details": []
+                    }
                 },
                 "patient_details": {
                     "edu_years": null,
