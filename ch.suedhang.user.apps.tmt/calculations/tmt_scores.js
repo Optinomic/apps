@@ -17,8 +17,8 @@ function main(responses) {
     calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
-        var all_scores = []
-        var all_resps = []
+        var all_scores = [];
+        var all_resps = [];
 
 
         for (var i = 0; i < d.length; i++) {
