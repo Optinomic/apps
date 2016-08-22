@@ -161,7 +161,7 @@ function main(responses) {
                 //  };
             };
 
-            scores.messzeitpunkt = mz_alle;
+            // scores.messzeitpunkt = mz_alle;
             all_scores.push(scores);
         };
 
