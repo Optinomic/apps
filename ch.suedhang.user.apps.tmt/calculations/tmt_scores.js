@@ -109,7 +109,7 @@ function main(responses) {
 
                 //details_responses.mz_eintritt_details.push(details_obj_clone_2);
 
-                if (mz === 1) {
+                if (mz = 1) {
                     // Eintritt
                     //scores.mz_eintritt_details.push(details_obj);
                     scores.mz_eintritt_variables.TMTAError.push(TMTAError);
