@@ -102,6 +102,9 @@ function main(responses) {
                 scores.mz_alle_vars.Perz_B.push(Perz_B);
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
+
+                scores.mz_eintritt_details.push(details_obj);
+
                 //  if (mz === 1) {
                 //      // Eintritt
                 //      scores.mz_eintritt_details.push(details_obj);
