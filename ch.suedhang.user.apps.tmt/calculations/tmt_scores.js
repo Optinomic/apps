@@ -17,6 +17,7 @@ function main(responses) {
     calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
+        var myReturnObj = {};
         var all_scores = [];
         var all_resps = [];
 
@@ -51,10 +52,8 @@ function main(responses) {
             var details_responses = {
                 "mz_alle_details": [],
                 "mz_eintritt_details": [],
-                "mz_austritt_details": [],
-                "patient": current_result.patient
+                "mz_austritt_details": []
             };
-
 
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
@@ -108,7 +107,7 @@ function main(responses) {
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
 
-                details_responses.mz_eintritt_details.push(details_obj);
+                // details_responses.mz_eintritt_details.push(details_obj);
 
                 //  if (mz === 1) {
                 //      // Eintritt
@@ -153,12 +152,12 @@ function main(responses) {
             all_resps.push(details_responses);
         };
 
-        var myReturnObj = {
-            "vars" = all_scores,
-            "details" = all_resps
-        }
+        myReturnObj.vars = all_scores;
+        myReturnObj.details = all_resps;
+
         return myReturnObj;
     };
+
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
