@@ -20,7 +20,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p>&nbsp;</p>
             <md-input-container class="md-block">
                 <label>Klinische Normierung | Patientengruppe</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id" ng-change="setZScore()">
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id" ng-change="changeClinicSample()">
                     <md-option ng-value="null">
                         Keine klinische Stichprobe gewählt
                     </md-option>
@@ -32,18 +32,16 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
     <div style="margin-top: 24px;">
-        <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.survey_responses">
+        <div layout="row" layout-align="space-between end">
             <div flex>
                 <h3 class="md-headline">TMT A</h3>
                 <div ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
                     <p class="md-caption">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} | <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
                 </div>
             </div>
-            <div flex>
+            <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
                 <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
-                <div ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
-                    <p class="md-caption"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
-                </div>
+                <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
             </div>
         </div>
     </div>

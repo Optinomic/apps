@@ -90,7 +90,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Toggles | Grafiken
         $scope.d.zScore.toggles = {
             "show_clinicsample": false,
-            "show_text": true
+            "show_clinicsample": false,
+            "show_clinicsample_scores": true
         };
 
         // Klinische Stichprobe
@@ -212,7 +213,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         $scope.d.zScore.init = true;
 
-        // Bei Änderunge ausführen.
+        // Bei Änderungen ausführen.
         $scope.setZScore();
     };
 
@@ -228,6 +229,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         // Name setzen
         $scope.d.zScore.normgruppe_klinik.selected_pg = $scope.d.dataMain.patient_groups[$scope.d.zScore.normgruppe_klinik.selected_pg_id].data.name;
 
+        // Bei Änderungen ausführen.
+        $scope.setZScore();
     };
 
 
