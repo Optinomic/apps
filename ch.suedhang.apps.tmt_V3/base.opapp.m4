@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.tmt_V3
-name = TMT Südhang V3
+name = TMT Südhang | V3
 short_description = Trail Making Test (TMT)
 version = include(VERSION)
 type = patient
@@ -66,5 +66,5 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation tmt_score javascript]
+include(calculations/tmt_score.js)
