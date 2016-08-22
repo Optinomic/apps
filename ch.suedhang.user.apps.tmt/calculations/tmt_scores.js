@@ -15,6 +15,7 @@ function main(responses) {
 
 
     calc.getPatientScores = function(d) {
+
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var all_scores = []
 
@@ -34,22 +35,22 @@ function main(responses) {
                 "Details": []
             };
 
-            // Scores Obj. erstellen.
-            var scores = {
-                "messzeitpunkt": {
-                    "eintritt": JSON.parse(JSON.stringify(variables)),
-                    "austritt": JSON.parse(JSON.stringify(variables)),
-                    "anderer": JSON.parse(JSON.stringify(variables)),
-                    "alle": JSON.parse(JSON.stringify(variables)),
-                },
-                "patient_details": {
-                    "edu_years": null,
-                    "edu_group": {},
-                    "age": null
-                },
-                "patient": current_result.patient,
-                "full": current_result
-            };
+            //   // Scores Obj. erstellen.
+            //   var scores = {
+            //       "messzeitpunkt": {
+            //           "eintritt": JSON.parse(JSON.stringify(variables)),
+            //           "austritt": JSON.parse(JSON.stringify(variables)),
+            //           "anderer": JSON.parse(JSON.stringify(variables)),
+            //           "alle": JSON.parse(JSON.stringify(variables)),
+            //       },
+            //       "patient_details": {
+            //           "edu_years": null,
+            //           "edu_group": {},
+            //           "age": null
+            //       },
+            //       "patient": current_result.patient,
+            //       "full": current_result
+            //   };
 
             //
             //    var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
@@ -135,7 +136,7 @@ function main(responses) {
             //        };
             //    });
 
-            all_scores.push(scores);
+            all_scores.push(variables);
         };
 
 
@@ -149,8 +150,8 @@ function main(responses) {
     calc.getResults = function(d) {
         // Calculate stuff first.
 
-        var patient_scores = [];
-        //var patient_scores = calc.getPatientScores(d);
+        // var patient_scores = [];
+        var patient_scores = calc.getPatientScores(d);
 
         // Build & add stuff to returnObj.
         var returnObj = {};
