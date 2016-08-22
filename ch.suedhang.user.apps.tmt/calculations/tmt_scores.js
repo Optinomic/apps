@@ -53,7 +53,7 @@ function main(responses) {
                 "mz_alle_details": [],
                 "mz_eintritt_details": [],
                 "mz_austritt_details": [],
-                "patient": current_result.patient
+                "mz_anderer_details": []
             };
 
 
