@@ -48,7 +48,7 @@ function main(responses) {
                 "mz_austritt_details": [],
                 "mz_austritt_variables": JSON.parse(JSON.stringify(variables)),
                 "mz_anderer_details": [],
-                //"mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
+                "mz_anderer_variables": JSON.parse(JSON.stringify(variables)),
                 "patient": current_result.patient
             };
 
