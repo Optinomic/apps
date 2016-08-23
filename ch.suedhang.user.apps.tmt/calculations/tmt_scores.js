@@ -22,8 +22,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             "Perz_B": [],
             "BA_Quotient": [],
             // do not modify the below:
-            "n": 0,
-            "statistics": {}
+            "n": 0
         };
 
         // Clone Obj. and Return
@@ -44,7 +43,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             s.variance = calc.variance(data_array);
             s.standard_deviation = calc.standard_deviation(data_array);
             s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
-            s.z_score_amx = calc.z_score(s.max, s.mean, s.standard_deviation);
+            s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
 		};
 
         // Return
