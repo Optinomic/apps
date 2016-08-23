@@ -70,6 +70,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
+            var ss_current_property = 'ss_' + current_property;
             var ArrayFromObjectToConcat = objectToConcat[current_property];
             var isThisArray = calc.isArray(ArrayFromObjectToConcat);
 
@@ -78,7 +79,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.statistics[current_property] = calc.getStatistics(objectFull[current_property]);
+                objectFull.ss_current_property = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
