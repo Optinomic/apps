@@ -118,11 +118,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var allFullPropertys = [];
 
         for (var property in objectFull) {
-            if (safe_here.mz_eintritt.hasOwnProperty(property)) {
+            if (objectFull.hasOwnProperty(property)) {
                 // Create 'all propertys array'
                 allFullPropertys.push(property);
                 console.log('XXXX | *** > ', property)
-
             }
         }
 
