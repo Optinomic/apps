@@ -452,9 +452,22 @@ function main(responses) {
             };
 
 
-            // var safe_here = age_edu_groups[age_group].[edu_id];
-            // safe_here.TMTAError = 99;
+            // Safe in given 'edu_id'
+            var safe_here = age_edu_groups[age_group].[edu_id];
 
+            safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
+            safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
+            safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
+            safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
+
+
+            // Safe also in edu_all
+            safe_here = age_edu_groups[age_group].edu_all;
+
+            safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
+            safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
+            safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
+            safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
 
         };
 
