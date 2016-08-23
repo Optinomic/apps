@@ -12,43 +12,26 @@ include(../lib/html/optinomic/page/start.m4)
             <md-card-content layout-margin>
                 <p>&nbsp;</p>
                 <div layout="row" layout-align="space-between center">
-                    <h3 class="md-title">{{age_group.info.age_group_text}} | all_n={{age_group.edu_all.mz_alle.n}}</h3>
+                    <h3 class="md-title">{{age_group.info.age_group_text}}</h3>
+                    <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}}</p>
                     <p class="md-caption"><small>id:{{age_group.info.age_group}}</small></p>
-                </div>
-                <div ng-init="age_group.info.show_edu_all = false" class="grid-border-top">
-                    <div ng-if="age_group.info.show_edu_all">
-                        <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels</p>
-                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                        </div>
-                        <pre>{{age_group.edu_all | json}}</pre>
-                        <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels</p>
-                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                        </div>
-                    </div>
-                    <div ng-if="!age_group.info.show_edu_all">
-                        <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels</p>
-                            <md-button ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
-                        </div>
-                    </div>
                 </div>
                 <div ng-init="age_group.info.show_edu_high = false" class="grid-border-top">
                     <div ng-if="age_group.info.show_edu_high">
                         <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Education: > 12</p>
+                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Ausbildung: > 12</p>
                             <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
                         </div>
                         <pre>{{age_group.edu_high | json}}</pre>
                         <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Education: > 12</p>
+                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Ausbildung: > 12</p>
                             <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
                         </div>
                     </div>
                     <div ng-if="!age_group.info.show_edu_high">
                         <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Education: > 12</p>
+                            <p class="md-subhead">Ausbildung: > 12</p>
+                            <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}}</p>
                             <md-button ng-click="age_group.info.show_edu_high = true">Anzeigen</md-button>
                         </div>
                     </div>
@@ -69,9 +52,31 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                     <div ng-if="!age_group.info.show_edu_small">
                         <div layout="row" layout-align="space-between center">
-                            <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}} | Education:
+                            <p class="md-subhead">Ausbildung:
                                 <=12</p>
+                                    <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}}</p>
                                     <md-button ng-click="age_group.info.show_edu_small = true">Anzeigen</md-button>
+                        </div>
+                    </div>
+                </div>
+                <div ng-init="age_group.info.show_edu_all = false" class="grid-border-top">
+                    <div ng-if="age_group.info.show_edu_all">
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Ausbildung: Alle Levels</p>
+                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{age_group.edu_all | json}}</pre>
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Ausbildung: Alle Levels</p>
+                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                        </div>
+                    </div>
+                    <div ng-if="!age_group.info.show_edu_all">
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">Ausbildung: Alle Levels</p>
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}}</p>
+                            <md-button ng-if="age_group.edu_all.mz_alle.n === 0" ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
+                            <md-button ng-if="age_group.edu_all.mz_alle.n > 0" ng-click="age_group.info.show_edu_all = true" class="md-primary">Anzeigen</md-button>
                         </div>
                     </div>
                 </div>
