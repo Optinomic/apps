@@ -147,15 +147,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (isThisArray) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
-            };
 
-            // set n;
-            if (objectFull.n !== objectFull[current_property].length) {
+                // set n;
                 objectFull.n = objectFull[current_property].length;
             };
-
         };
-
 
 
         // Return
