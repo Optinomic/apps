@@ -1,7 +1,10 @@
 function main(responses) {
 
-
     var calc = {};
+
+
+include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+    
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
@@ -25,10 +28,8 @@ function main(responses) {
     };
 
 
-    calc.isArray = function(obj) {
-        return (typeof obj !== 'undefined' &&
-            obj && obj.constructor === Array);
-    };
+
+
 
     calc.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
@@ -81,10 +82,6 @@ function main(responses) {
         return isPIDinGroup;
     };
 
-    calc.roundToTwo = function(num) {
-        // Round a Number to 0.X 
-        return +(Math.round(num + "e+2") + "e-2");
-    };
 
     calc.getPatientScores = function(d) {
 
@@ -501,15 +498,13 @@ function main(responses) {
             if (something_to_save) {
                 var safe_here = age_edu_groups[age_group][edu_id];
 
-                //SUGUS
-
-                // Concat | all Variables
+                // Concat | all Variables...
                 safe_here.mz_eintritt = calc.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
                 safe_here.mz_austritt = calc.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
                 safe_here.mz_anderer = calc.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
                 safe_here.mz_alle = calc.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
 
-                // Also in 'edu_all'
+                // ...also in 'edu_all'
                 edu_id = 'edu_all';
                 safe_here = age_edu_groups[age_group][edu_id];
                 safe_here.mz_eintritt = calc.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
