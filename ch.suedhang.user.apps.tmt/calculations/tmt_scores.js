@@ -8,10 +8,22 @@ function main(responses) {
     // ------------------------------------------
 
 
-    calc.roundToTwo = function(num) {
-        // Round a Number to 0.X 
-        return +(Math.round(num + "e+2") + "e-2");
+    calc.getVariables = function(num) {
+        // Interessante Variablen
+        var variables = {
+            "TMTAError": [],
+            "TMTATime": [],
+            "TMTBError": [],
+            "TMTBTime": [],
+            "Perz_A": [],
+            "Perz_B": [],
+            "BA_Quotient": []
+        };
+
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(variables));
     };
+
 
     calc.isPIDinGroup = function(patients_array, search_pid) {
 
@@ -28,6 +40,11 @@ function main(responses) {
         return isPIDinGroup;
     };
 
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
     calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
@@ -36,16 +53,6 @@ function main(responses) {
         for (var i = 0; i < d.length; i++) {
             var current_result = d[i];
 
-            // Interessante Variablen
-            var variables = {
-                "TMTAError": [],
-                "TMTATime": [],
-                "TMTBError": [],
-                "TMTBTime": [],
-                "Perz_A": [],
-                "Perz_B": [],
-                "BA_Quotient": []
-            };
 
             // Scores Obj. erstellen.
             var scores = {
@@ -54,10 +61,10 @@ function main(responses) {
                     "edu_group": {},
                     "age": null
                 },
-                "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_anderer_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_alle_vars": calc.getVariables(),
+                "mz_eintritt_vars": calc.getVariables(),
+                "mz_austritt_vars": calc.getVariables(),
+                "mz_anderer_vars": calc.getVariables(),
                 "mz_alle_details": [],
                 "mz_eintritt_details": [],
                 "mz_austritt_details": [],
