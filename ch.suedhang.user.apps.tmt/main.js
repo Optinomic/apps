@@ -117,8 +117,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
-        // Create 'all propertys array'
+        // Iterate n if there or start Counting;
+        if (objectFull.n) {
+            //Comes inside only if the data is not empty and not null 
+            objectFull.n = parseInt(objectFull.n + 1);
+        } else {
+            objectFull.n = 1;
+        };
 
+        // Create 'all propertys array'
         var allFullPropertys = [];
 
         var isArray =
@@ -594,21 +601,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-
-
-            // safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-            // safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-            // safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-            // safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
-            // 
-            // 
-            // // Safe also in edu_all
-            // safe_here = age_edu_groups[age_group].edu_all;
-            // 
-            // safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-            // safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-            // safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-            // safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
 
         };
 
