@@ -79,7 +79,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull[x] = calc.getStatistics(objectFull[current_property]);
+                if (current_property === 'TMTATime') {
+                    objectFull.ss_TMTATime = calc.getStatistics(objectFull[current_property]);
+                };
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
