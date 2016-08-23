@@ -113,8 +113,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
-        console.log('concatAllArraysInObject ------ ', objectFull, objectToConcat);
-
         var allFullPropertys = [];
 
         for (var property in objectFull) {
@@ -126,6 +124,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }
 
         objectFull.propertys = allFullPropertys;
+
+
+        console.log('concatAllArraysInObject ------ ', objectFull, objectToConcat);
 
         // Return
         return objectFull;
@@ -553,6 +554,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 //SUGUS
 
                 safe_here.mz_eintritt = $scope.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
+                console.log('XXXX safe_here.mz_eintritt | after > ', age_group, edu_id, safe_here.mz_eintritt)
+
             };
 
 
