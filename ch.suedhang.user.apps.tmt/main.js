@@ -110,6 +110,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return JSON.parse(JSON.stringify(variables));
     };
 
+
+    $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
+
+        console.log('concatAllArraysInObject ------ ', objectFull, objectToConcat);
+
+        var allFullPropertys = [];
+
+        for (var property in objectFull) {
+            if (safe_here.mz_eintritt.hasOwnProperty(property)) {
+                // Create 'all propertys array'
+                allFullPropertys.push(property);
+                console.log('XXXX | *** > ', property)
+
+            }
+        }
+
+        objectFull.propertys = allFullPropertys;
+
+        // Return
+        return objectFull;
+    };
+
     $scope.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
@@ -527,7 +549,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var safe_here = age_edu_groups[age_group][edu_id];
                 console.log('XXXX | 1 > ', age_group, edu_id, safe_here)
                 console.log('XXXX | 2 > ', age_group, edu_id, safe_here.mz_eintritt)
-                console.log('XXXX | 3 > ', age_group, edu_id, age_edu_groups[age_group][edu_id].mz_eintritt)
+
+
+                //SUGUS
+
+                safe_here.mz_eintritt = $scope.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
             };
 
 
