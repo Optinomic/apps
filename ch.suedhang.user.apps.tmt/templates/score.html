@@ -11,7 +11,22 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content layout-margin>
             <p>&nbsp;</p>
             <h3 class="md-title">Age | Education - Scores</h3>
-            <h3 class="md-subhead">TMT - </h3>
+            <div class="grid-border-top" ng-repeat="age_group in d.tmt.age_edu_scores">
+                <h3 class="md-subhead">
+                    {{age_group.info.age_group_text}} 
+                    <small>(id: {{age_group.info.age_group}})</small>
+                </h3>
+                <div ng-init="age_group.info.show_edu_all = false">
+                    <p class="md-caption">Education: Alle Levels</p>
+                    <div ng-if="!age_group.info.show_edu_all">
+                        <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                    </div>
+                    <div ng-if="age_group.info.show_edu_all">
+                        <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                    </div>
+                </div>
+                <p></p>
+            </div>
             <pre>{{d.tmt.age_edu_scores | json}}</pre>
             <h3 class="md-subhead">Calculation Data</h3>
             <pre>{{d.dataMain.calculations[0].calculation_results | json}}</pre>
