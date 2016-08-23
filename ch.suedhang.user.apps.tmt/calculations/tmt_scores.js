@@ -38,11 +38,11 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
         if (calc.isArray(data_array)) {
 			ss.n = data_array.legth;
-			ss.min = calc.min(data_array);
-			ss.max = calc.max(data_array);
-			ss.mean = calc.mean(data_array);
-			ss.variance = calc.variance(data_array);
-			ss.standard_deviation = calc.standard_deviation(data_array);
+			// ss.min = calc.min(data_array);
+			// ss.max = calc.max(data_array);
+			// ss.mean = calc.mean(data_array);
+			// ss.variance = calc.variance(data_array);
+			// ss.standard_deviation = calc.standard_deviation(data_array);
 			// ss.z_score_min = calc.z_score(ss.min, ss.mean, ss.standard_deviation);
 			// ss.z_score_min = calc.z_score(ss.max, ss.mean, ss.standard_deviation);
 		};
