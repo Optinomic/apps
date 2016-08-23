@@ -3,7 +3,7 @@ function main(responses) {
     var calc = {};
 
 
-//in clude(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------
@@ -11,7 +11,7 @@ function main(responses) {
     // ------------------------------------------
 
 
-    calc.getVariables = function(num) {
+    calc.getVariables = function() {
         // Interessante Variablen
         var variables = {
             "TMTAError": [],
@@ -31,19 +31,15 @@ function main(responses) {
     };
 
 
-    calc.getStatistics = function(data_array) {
+    calc.getStatistics = function(ss_array) {
         
-        // Interessante Berechnungen ausführen | ss = Simple Statistics
-        var ss = {};
+        // Interessante Berechnungen
+        var statistics = {};
 
-		ss.n = data_array.legth;
-		// ss.min = calc.min(data_array);
-		// ss.max = calc.max(data_array);
-		// ss.mean = calc.mean(data_array);
-		// ss.variance = calc.variance(data_array);
-		// ss.standard_deviation = calc.standard_deviation(data_array);
-		// ss.z_score_min = calc.z_score(ss.min, ss.mean, ss.standard_deviation);
-		// ss.z_score_min = calc.z_score(ss.max, ss.mean, ss.standard_deviation);
+        if (calc.isArray(ss_array)) {
+			statistics.n = ss_array.legth;
+			statistics.min = calc.min(ss_array);
+		};
 
         // Return
         return statistics;
@@ -70,16 +66,17 @@ function main(responses) {
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
+            var ss_current_property = 'ss_' + current_property;
 
             var ArrayFromObjectToConcat = objectToConcat[current_property];
-            var isThisArray = isArray(ArrayFromObjectToConcat);
+            var isThisArray = calc.isArray(ArrayFromObjectToConcat);
 
             if (isThisArray) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.gaga = calc.getStatistics(objectFull[current_property]);
+                objectFull.ss_current_property = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
