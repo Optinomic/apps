@@ -8,30 +8,34 @@ include(../lib/html/optinomic/page/start.m4)
                 </span>
             </md-card-title-text>
         </md-card-title>
-        <md-card-content layout-margin>
-            <p>&nbsp;</p>
-            <h3 class="md-title">Age | Education - Scores</h3>
-            <div class="grid-border-top" ng-repeat="age_group in d.tmt.age_edu_scores">
-                <h3 class="md-subhead">
-                    {{age_group.info.age_group_text}} 
-                    <small>(id: {{age_group.info.age_group}})</small>
-                </h3>
-                <div ng-init="age_group.info.show_edu_all = false">
-                    <p class="md-caption">Education: Alle Levels ( n={{age_group.edu_all.mz_alle.n}} )</p>
+        <div ng-repeat="age_group in d.tmt.age_edu_scores">
+            <md-card-content layout-margin>
+                <p>&nbsp;</p>
+                <div layout="row" layout-align="space-between center">
+                    <h3 class="md-title">{{age_group.info.age_group_text}}</h3>
+                    <p>age_group[id]: {{age_group.info.age_group}})</p>
+                </div>
+                <div ng-init="age_group.info.show_edu_all = false" class="grid-border-top">
                     <div ng-if="age_group.info.show_edu_all">
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels ( n={{age_group.edu_all.mz_alle.n}} )</p>
+                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                        </div>
                         <pre>{{age_group.edu_all | json}}</pre>
-                        <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels ( n={{age_group.edu_all.mz_alle.n}} )</p>
+                            <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                        </div>
                     </div>
                     <div ng-if="!age_group.info.show_edu_all">
-                        <md-button ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
+                        <div layout="row" layout-align="space-between center">
+                            <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Education: Alle Levels ( n={{age_group.edu_all.mz_alle.n}} )</p>
+                            <md-button ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
+                        </div>
                     </div>
                 </div>
-                <p></p>
-            </div>
-            <pre>{{d.tmt.age_edu_scores | json}}</pre>
-            <h3 class="md-subhead">Calculation Data</h3>
-            <pre>{{d.dataMain.calculations[0].calculation_results | json}}</pre>
-        </md-card-content>
+            </md-card-content>
+        </div>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
             <md-button class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
