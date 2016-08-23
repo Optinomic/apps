@@ -110,12 +110,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return JSON.parse(JSON.stringify(variables));
     };
 
+    $scope.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
         // Create 'all propertys array'
 
         var allFullPropertys = [];
+
+        var isArray =
+            function(obj) {
+                console.log('isArray: ', obj, (typeof obj !== 'undefined' &&
+                    obj && obj.constructor === Array));
+                return (typeof obj !== 'undefined' &&
+                    obj && obj.constructor === Array);
+            }
 
         for (var property in objectFull) {
             if (objectFull.hasOwnProperty(property)) {
@@ -128,11 +140,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
 
-            var ArrayFromObjectToConcat
+            var ArrayFromObjectToConcat = objectToConcat[current_property];
 
-            if (Object.prototype.toString.call(ArrayFromObjectToConcat) === '[object Array]') {
-                console.log('isArray ------ ', current_response);
-            };
+            var isThisArray = $scope.isArray(ArrayFromObjectToConcat);
+            console.log('isThisArray | Imput ------> ', isThisArray);
+
         };
 
 
