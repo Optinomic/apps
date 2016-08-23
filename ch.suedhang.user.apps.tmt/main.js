@@ -103,7 +103,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "TMTBTime": [],
             "Perz_A": [],
             "Perz_B": [],
-            "BA_Quotient": []
+            "BA_Quotient": [],
+            "n": 0
         };
 
         // Clone Obj. and Return
@@ -143,7 +144,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }
 
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
-
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
 
@@ -154,11 +154,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
             };
-
         };
 
-
-        console.log('concatAllArraysInObject | Return ------> ', objectFull, objectToConcat);
 
         // Return
         return objectFull;
@@ -587,7 +584,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 safe_here.mz_austritt = $scope.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
                 safe_here.mz_anderer = $scope.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
                 safe_here.mz_alle = $scope.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
-                console.log('XXXX safe_here.mz* : | 1 after > ', age_group, edu_id, safe_here.mz_eintritt)
+                // console.log('XXXX safe_here.mz* : | 1 after > ', age_group, edu_id, safe_here.mz_eintritt)
 
                 // Also in 'edu_all'
                 edu_id = 'edu_all';
@@ -596,7 +593,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 safe_here.mz_austritt = $scope.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
                 safe_here.mz_anderer = $scope.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
                 safe_here.mz_alle = $scope.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
-                console.log('XXXX safe_here.mz* : | 2 after > ', age_group, edu_id, safe_here.mz_eintritt)
+                // console.log('XXXX safe_here.mz* : | 2 after > ', age_group, edu_id, safe_here.mz_eintritt)
 
             };
 
