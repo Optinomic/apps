@@ -79,7 +79,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.ss_current_property = calc.getStatistics(objectFull[current_property]);
+                objectFull.[ss_current_property] = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
