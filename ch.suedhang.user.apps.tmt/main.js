@@ -118,13 +118,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
-        // Iterate n if there or start Counting;
-        if (objectFull.n) {
-            //Comes inside only if the data is not empty and not null 
-            objectFull.n = parseInt(objectFull.n + 1);
-        } else {
-            objectFull.n = 1;
-        };
+
 
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -154,7 +148,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
             };
+
+            // set n;
+            if (objectFull.n !== objectFull[current_property].length) {
+                objectFull.n = objectFull[current_property].length;
+            };
+
         };
+
 
 
         // Return
