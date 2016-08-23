@@ -178,6 +178,289 @@ function main(responses) {
         return all_scores;
     };
 
+    calc.arrangePatientScoresAgeEdu = function(patient_scores) {
+
+        // Get all TMT-Patient-Scores and arrange it in a Array | Age & Edu
+
+        // Data Model
+        var age_edu_groups = [{
+            "info": {
+                "age_group": 0,
+                "age_group_text": "Altersgruppe 18 - 24"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 1,
+                "altersgruppe_text": "Altersgruppe 25 – 34"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 2,
+                "altersgruppe_text": "Altersgruppe 35 – 44"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 3,
+                "altersgruppe_text": "Altersgruppe 45 – 54"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 4,
+                "altersgruppe_text": "Altersgruppe 55 – 59"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 5,
+                "altersgruppe_text": "Altersgruppe 60 – 64"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 6,
+                "altersgruppe_text": "Altersgruppe 65 – 69"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 7,
+                "altersgruppe_text": "Altersgruppe 70 – 74"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 8,
+                "altersgruppe_text": "Altersgruppe 75 – 79"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 9,
+                "altersgruppe_text": "Altersgruppe 80 – 84"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 10,
+                "altersgruppe_text": "Altersgruppe 85 – 89"
+            },
+            "edu_all": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": calc.getVariables(),
+                "mz_eintritt": calc.getVariables(),
+                "mz_austritt": calc.getVariables(),
+                "mz_anderer": calc.getVariables()
+            }
+        }];
+
+
+        for (var i = 0; i < patient_scores.length; i++) {
+            var current_result = patient_scores[i];
+
+            // Get Vars
+            var age_group = current_result.patient_details.edu_group.altersgruppe;
+            var education_high = current_result.patient_details.edu_group.education_high; //>12
+
+            var edu_id = 'edu_small';
+            if (education_high) {
+                edu_id = 'edu_high';
+            };
+
+
+            // var safe_here = age_edu_groups[age_group].[edu_id];
+            // safe_here.TMTAError = 99;
+
+
+        };
+
+        return age_edu_groups;
+    };
+
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
@@ -188,10 +471,13 @@ function main(responses) {
 
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
+        var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
+
 
         // Build & add stuff to returnObj.
         var returnObj = {};
         returnObj.patient_scores = patient_scores;
+        returnObj.age_edu_scores = age_edu_scores;
 
 
         returnObj.full = d;
