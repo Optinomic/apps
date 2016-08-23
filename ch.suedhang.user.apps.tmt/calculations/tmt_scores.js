@@ -36,16 +36,14 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Interessante Berechnungen ausführen | ss = Simple Statistics
         var ss = {};
 
-        if (calc.isArray(data_array)) {
-			ss.n = data_array.legth;
-			// ss.min = calc.min(data_array);
-			// ss.max = calc.max(data_array);
-			// ss.mean = calc.mean(data_array);
-			// ss.variance = calc.variance(data_array);
-			// ss.standard_deviation = calc.standard_deviation(data_array);
-			// ss.z_score_min = calc.z_score(ss.min, ss.mean, ss.standard_deviation);
-			// ss.z_score_min = calc.z_score(ss.max, ss.mean, ss.standard_deviation);
-		};
+		ss.n = data_array.legth;
+		// ss.min = calc.min(data_array);
+		// ss.max = calc.max(data_array);
+		// ss.mean = calc.mean(data_array);
+		// ss.variance = calc.variance(data_array);
+		// ss.standard_deviation = calc.standard_deviation(data_array);
+		// ss.z_score_min = calc.z_score(ss.min, ss.mean, ss.standard_deviation);
+		// ss.z_score_min = calc.z_score(ss.max, ss.mean, ss.standard_deviation);
 
         // Return
         return statistics;
@@ -72,7 +70,6 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
-            var ss_current_property = 'ss_' + current_property;
 
             var ArrayFromObjectToConcat = objectToConcat[current_property];
             var isThisArray = isArray(ArrayFromObjectToConcat);
@@ -82,7 +79,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull[ss_current_property] = calc.getStatistics(objectFull[current_property]);
+                objectFull.statistics[current_property] = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
