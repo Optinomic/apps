@@ -3,7 +3,7 @@ function main(responses) {
     var calc = {};
 
 
-include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+//in clude(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------
@@ -79,7 +79,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.statistics[current_property] = calc.getStatistics(objectFull[current_property]);
+                objectFull.gaga = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
