@@ -127,6 +127,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             "zscore": 3.2,
             "zscore_min": -5.2,
             "zscore_max": 3.1,
+            "zscore_color": "#F44336",
             "text_left": "Austritt",
             "text_left_caption": "21.5.2016",
             "text_right": "TMT A",
