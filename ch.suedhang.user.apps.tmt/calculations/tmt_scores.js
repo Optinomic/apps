@@ -33,18 +33,20 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
     calc.getStatistics = function(data_array) {
         
-        // Interessante Berechnungen
-        var statistics = {};
+        // Interessante Berechnungen | Statistics
+        var s = {};
 
         if (calc.isArray(data_array)) {
-			statistics.n = data_array.legth;
-            statistics.min = calc.min(data_array);
-            statistics.max = calc.max(data_array);
-			//statistics.mean = calc.mean(data_array);
+			s.n = data_array.legth;
+            s.min = calc.min(data_array);
+            s.max = calc.max(data_array);
+			s.mean = calc.mean(data_array);
+            s.mean = calc.variance(data_array);
+            s.mean = calc.standard_deviation(data_array);
 		};
 
         // Return
-        return statistics;
+        return s;
     };
 
 
