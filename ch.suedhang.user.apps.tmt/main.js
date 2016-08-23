@@ -525,9 +525,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //  // Safe in given 'edu_id'
             if (something_to_save) {
                 var safe_here = age_edu_groups[age_group];
-                console.log('XXXX | 1 > ', age_group, safe_here)
-                console.log('XXXX | 2 > ', age_group, safe_here[edu_all])
-                console.log('XXXX | 2 > ', age_group, age_edu_groups[age_group][edu_all])
+                console.log('XXXX | 1 > ', age_group, edu_id, safe_here)
+                console.log('XXXX | 2 > ', age_group, edu_id, safe_here[edu_id])
+                console.log('XXXX | 2 > ', age_group, edu_id, age_edu_groups[age_group][edu_id])
             };
 
 
