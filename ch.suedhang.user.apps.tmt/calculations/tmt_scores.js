@@ -41,8 +41,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             s.min = calc.min(data_array);
             s.max = calc.max(data_array);
 			s.mean = calc.mean(data_array);
-            s.mean = calc.variance(data_array);
-            s.mean = calc.standard_deviation(data_array);
+            s.variance = calc.variance(data_array);
+            s.standard_deviation = calc.standard_deviation(data_array);
 		};
 
         // Return
@@ -70,8 +70,6 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
-            var ss_current_property = 'ss_' + current_property;
-
             var ArrayFromObjectToConcat = objectToConcat[current_property];
             var isThisArray = calc.isArray(ArrayFromObjectToConcat);
 
@@ -80,7 +78,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.ss_current_property = calc.getStatistics(objectFull[current_property]);
+                objectFull.statistics[current_property] = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
