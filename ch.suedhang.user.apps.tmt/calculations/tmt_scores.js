@@ -4,7 +4,7 @@ function main(responses) {
 
 
 include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
-    
+
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
@@ -20,7 +20,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             "TMTBTime": [],
             "Perz_A": [],
             "Perz_B": [],
-            "BA_Quotient": []
+            "BA_Quotient": [],
+            // do not modify the below:
+            "n": 0,
+            "statistics": {}
         };
 
         // Clone Obj. and Return
@@ -28,6 +31,19 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
     };
 
 
+    calc.getStatistics = function(ss_array) {
+        
+        // Interessante Berechnungen
+        var statistics = {};
+
+        if (calc.isArray(ss_array)) {
+			statistics.n = ss_array.legth,
+			statistics.min = calc.min(ss_array)
+		};
+
+        // Return
+        return statistics;
+    };
 
 
 
@@ -57,6 +73,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             if (isThisArray) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
+
+                // Do Statistics!
+                objectFull.statistics[current_property] = calc.getStatistics(objectFull[current_property]);
+
                 // set n;
                 objectFull.n = objectFull[current_property].length;
             };
@@ -530,7 +550,6 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-
 
         // Build & add stuff to returnObj.
         var returnObj = {};

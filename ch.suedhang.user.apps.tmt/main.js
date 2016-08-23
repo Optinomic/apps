@@ -104,7 +104,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "Perz_A": [],
             "Perz_B": [],
             "BA_Quotient": [],
-            "n": 0
+            // do not modify the below:
+            "n": 0,
+            "statistics": {
+                "calulated": false
+            }
         };
 
         // Clone Obj. and Return
@@ -117,8 +121,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
-
-
 
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -590,10 +592,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // console.log('XXXX safe_here.mz* : | 2 after > ', age_group, edu_id, safe_here.mz_eintritt)
 
             };
-
-
-
         };
+
 
         return age_edu_groups;
     };
