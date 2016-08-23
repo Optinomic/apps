@@ -326,7 +326,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 1,
-                "altersgruppe_text": "Altersgruppe 25 – 34"
+                "age_group_text": "Altersgruppe 25 – 34"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -349,7 +349,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 2,
-                "altersgruppe_text": "Altersgruppe 35 – 44"
+                "age_group_text": "Altersgruppe 35 – 44"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -372,7 +372,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 3,
-                "altersgruppe_text": "Altersgruppe 45 – 54"
+                "age_group_text": "Altersgruppe 45 – 54"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -395,7 +395,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 4,
-                "altersgruppe_text": "Altersgruppe 55 – 59"
+                "age_group_text": "Altersgruppe 55 – 59"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -418,7 +418,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 5,
-                "altersgruppe_text": "Altersgruppe 60 – 64"
+                "age_group_text": "Altersgruppe 60 – 64"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -441,7 +441,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 6,
-                "altersgruppe_text": "Altersgruppe 65 – 69"
+                "age_group_text": "Altersgruppe 65 – 69"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -464,7 +464,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 7,
-                "altersgruppe_text": "Altersgruppe 70 – 74"
+                "age_group_text": "Altersgruppe 70 – 74"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -487,7 +487,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 8,
-                "altersgruppe_text": "Altersgruppe 75 – 79"
+                "age_group_text": "Altersgruppe 75 – 79"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -510,7 +510,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 9,
-                "altersgruppe_text": "Altersgruppe 80 – 84"
+                "age_group_text": "Altersgruppe 80 – 84"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
@@ -533,7 +533,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }, {
             "info": {
                 "age_group": 10,
-                "altersgruppe_text": "Altersgruppe 85 – 89"
+                "age_group_text": "Altersgruppe 85 – 89"
             },
             "edu_all": {
                 "mz_alle": $scope.getVariables(),
