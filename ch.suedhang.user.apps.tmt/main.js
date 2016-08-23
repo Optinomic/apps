@@ -141,9 +141,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var current_property = allFullPropertys[x];
 
             var ArrayFromObjectToConcat = objectToConcat[current_property];
-
             var isThisArray = $scope.isArray(ArrayFromObjectToConcat);
-            console.log('isThisArray | Imput ------> ', isThisArray);
+
+            if (isThisArray) {
+                // Array found Concat!
+                objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
+            };
 
         };
 
@@ -566,17 +569,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 something_to_save = true;
             };
 
-            //  // Safe in given 'edu_id' (edu_small / edu_high)
+            // Safe in given 'edu_id' (edu_small / edu_high)
             if (something_to_save) {
                 var safe_here = age_edu_groups[age_group][edu_id];
-                console.log('XXXX | 1 > ', age_group, edu_id, safe_here)
-                console.log('XXXX | 2 > ', age_group, edu_id, safe_here.mz_eintritt)
-
 
                 //SUGUS
 
+                // Concat | all Variables
                 safe_here.mz_eintritt = $scope.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
-                console.log('XXXX safe_here.mz_eintritt | after > ', age_group, edu_id, safe_here.mz_eintritt)
+                safe_here.mz_austritt = $scope.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
+                safe_here.mz_anderer = $scope.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
+                safe_here.mz_alle = $scope.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
+                console.log('XXXX safe_here.mz* : | 1 after > ', age_group, edu_id, safe_here.mz_eintritt)
+
+                // Also in 'edu_all'
+                edu_id = 'edu_all';
+                safe_here = age_edu_groups[age_group][edu_id];
+                safe_here.mz_eintritt = $scope.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
+                safe_here.mz_austritt = $scope.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
+                safe_here.mz_anderer = $scope.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
+                safe_here.mz_alle = $scope.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
+                console.log('XXXX safe_here.mz* : | 2 after > ', age_group, edu_id, safe_here.mz_eintritt)
 
             };
 
