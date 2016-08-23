@@ -107,13 +107,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // do not modify the below:
             "n": 0,
             "statistics": {
-                "calulated": false
+                "calulated": false,
+                "main.js": true
             }
         };
 
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(variables));
     };
+
+
 
     $scope.isArray = function(obj) {
         return (typeof obj !== 'undefined' &&

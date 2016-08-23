@@ -37,8 +37,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         var statistics = {};
 
         if (calc.isArray(ss_array)) {
-			statistics.n = ss_array.legth,
-			statistics.min = calc.min(ss_array)
+			statistics.n = ss_array.legth;
+			statistics.min = calc.min(ss_array);
 		};
 
         // Return
