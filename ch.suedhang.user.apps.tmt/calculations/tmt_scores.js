@@ -31,14 +31,19 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
     };
 
 
-    calc.getStatistics = function(ss_array) {
+    calc.getStatistics = function(data_array) {
         
-        // Interessante Berechnungen
-        var statistics = {};
+        // Interessante Berechnungen ausführen | ss = Simple Statistics
+        var ss = {};
 
-        if (calc.isArray(ss_array)) {
-			statistics.n = ss_array.legth;
-			statistics.min = calc.min(ss_array);
+        if (calc.isArray(data_array)) {
+			ss.n = data_array.legth;
+			ss.min = calc.min(data_array);
+			ss.min = calc.max(data_array);
+			ss.mean = calc.mean(data_array);
+			ss.variance = calc.variance(data_array);
+			ss.standard_deviation = calc.standard_deviation(data_array);
+			ss.z_score = calc.z_score(data_array, ss.mean, ss.standard_deviation);
 		};
 
         // Return
@@ -76,7 +81,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
                 // Do Statistics!
-                objectFull.ss_current_property = calc.getStatistics(objectFull[current_property]);
+                objectFull[ss_current_property] = calc.getStatistics(objectFull[current_property]);
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
