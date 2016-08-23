@@ -113,20 +113,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
+        // Create 'all propertys array'
+
         var allFullPropertys = [];
 
         for (var property in objectFull) {
             if (objectFull.hasOwnProperty(property)) {
-                // Create 'all propertys array'
                 allFullPropertys.push(property);
-                console.log('XXXX | *** > ', property)
             }
         }
 
-        objectFull.propertys = allFullPropertys;
+        // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
+
+        for (var x = 0; x < allFullPropertys.length; x++) {
+            var current_response = allFullPropertys[x];
+            if (Object.prototype.toString.call(someVar) === '[object Array]') {
+                console.log('isArray ------ ', current_response);
+            };
+        };
 
 
-        console.log('concatAllArraysInObject ------ ', objectFull, objectToConcat);
+
+
+
+
+        console.log('concatAllArraysInObject | Return ------> ', objectFull, objectToConcat);
 
         // Return
         return objectFull;
