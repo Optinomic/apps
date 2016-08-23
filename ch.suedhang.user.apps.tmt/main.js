@@ -522,29 +522,30 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 something_to_save = true;
             };
 
+            //  // Safe in given 'edu_id' (edu_small / edu_high)
             if (something_to_save) {
-                // Safe in given 'edu_id' (edu_small/edu_high)
                 var safe_here = age_edu_groups[age_group][edu_id];
-
-                safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-                safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-                safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-                safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
-
-
-                // Safe also in edu_all
-                safe_here = age_edu_groups[age_group].edu_all;
-
-                safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-                safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-                safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-                safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
+                console.log('XXXX | 1 > ', age_group, edu_id, safe_here)
+                console.log('XXXX | 2 > ', age_group, edu_id, safe_here.mz_eintritt)
+                console.log('XXXX | 3 > ', age_group, edu_id, age_edu_groups[age_group][edu_id].mz_eintritt)
             };
 
 
 
 
-
+            // safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
+            // safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
+            // safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
+            // safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
+            // 
+            // 
+            // // Safe also in edu_all
+            // safe_here = age_edu_groups[age_group].edu_all;
+            // 
+            // safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
+            // safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
+            // safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
+            // safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
 
         };
 
