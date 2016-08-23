@@ -43,7 +43,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 			ss.mean = calc.mean(data_array);
 			ss.variance = calc.variance(data_array);
 			ss.standard_deviation = calc.standard_deviation(data_array);
-			ss.z_score = calc.z_score(data_array, ss.mean, ss.standard_deviation);
+			ss.z_score_min = calc.z_score(ss.min, ss.mean, ss.standard_deviation);
+			ss.z_score_min = calc.z_score(ss.max, ss.mean, ss.standard_deviation);
+			ss.z_score_mean = calc.z_score(ss.mean, ss.mean, ss.standard_deviation);
 		};
 
         // Return
