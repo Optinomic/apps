@@ -25,6 +25,47 @@ function main(responses) {
     };
 
 
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.concatAllArraysInObject = function(objectFull, objectToConcat) {
+
+        // Create 'all propertys array'
+        var allFullPropertys = [];
+
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        for (var property in objectFull) {
+            if (objectFull.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        }
+
+        // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
+        for (var x = 0; x < allFullPropertys.length; x++) {
+            var current_property = allFullPropertys[x];
+
+            var ArrayFromObjectToConcat = objectToConcat[current_property];
+            var isThisArray = calc.isArray(ArrayFromObjectToConcat);
+
+            if (isThisArray) {
+                // Array found Concat!
+                objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
+                // set n;
+                objectFull.n = objectFull[current_property].length;
+            };
+        };
+
+
+        // Return
+        return objectFull;
+    };
+
     calc.isPIDinGroup = function(patients_array, search_pid) {
 
         var isPIDinGroup = false;
@@ -209,7 +250,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 1,
-                "altersgruppe_text": "Altersgruppe 25 – 34"
+                "age_group_text": "Altersgruppe 25 – 34"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -232,7 +273,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 2,
-                "altersgruppe_text": "Altersgruppe 35 – 44"
+                "age_group_text": "Altersgruppe 35 – 44"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -255,7 +296,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 3,
-                "altersgruppe_text": "Altersgruppe 45 – 54"
+                "age_group_text": "Altersgruppe 45 – 54"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -278,7 +319,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 4,
-                "altersgruppe_text": "Altersgruppe 55 – 59"
+                "age_group_text": "Altersgruppe 55 – 59"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -301,7 +342,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 5,
-                "altersgruppe_text": "Altersgruppe 60 – 64"
+                "age_group_text": "Altersgruppe 60 – 64"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -324,7 +365,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 6,
-                "altersgruppe_text": "Altersgruppe 65 – 69"
+                "age_group_text": "Altersgruppe 65 – 69"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -347,7 +388,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 7,
-                "altersgruppe_text": "Altersgruppe 70 – 74"
+                "age_group_text": "Altersgruppe 70 – 74"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -370,7 +411,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 8,
-                "altersgruppe_text": "Altersgruppe 75 – 79"
+                "age_group_text": "Altersgruppe 75 – 79"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -393,7 +434,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 9,
-                "altersgruppe_text": "Altersgruppe 80 – 84"
+                "age_group_text": "Altersgruppe 80 – 84"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -416,7 +457,7 @@ function main(responses) {
         }, {
             "info": {
                 "age_group": 10,
-                "altersgruppe_text": "Altersgruppe 85 – 89"
+                "age_group_text": "Altersgruppe 85 – 89"
             },
             "edu_all": {
                 "mz_alle": calc.getVariables(),
@@ -451,25 +492,34 @@ function main(responses) {
                 edu_id = 'edu_high';
             };
 
+            var something_to_save = false;
+            if (current_result.patient_details.edu_group.altersgruppe_found === true) {
+                something_to_save = true;
+            };
 
-            //  // Safe in given 'edu_id'
-            //  var safe_here = age_edu_groups[age_group].[edu_id];
-            //  
-            //  safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-            //  safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-            //  safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-            //  safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
-            //  
-            //  
-            //  // Safe also in edu_all
-            //  safe_here = age_edu_groups[age_group].edu_all;
-            //  
-            //  safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
-            //  safe_here.mz_austritt = safe_here.mz_austritt.concat(current_result.mz_austritt_vars);
-            //  safe_here.mz_anderer = safe_here.mz_anderer.concat(current_result.mz_anderer_vars);
-            //  safe_here.mz_alle = safe_here.mz_alle.concat(current_result.mz_alle_vars);
+            // Safe in given 'edu_id' (edu_small / edu_high)
+            if (something_to_save) {
+                var safe_here = age_edu_groups[age_group][edu_id];
 
+                //SUGUS
+
+                // Concat | all Variables
+                safe_here.mz_eintritt = calc.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
+                safe_here.mz_austritt = calc.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
+                safe_here.mz_anderer = calc.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
+                safe_here.mz_alle = calc.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
+
+                // Also in 'edu_all'
+                edu_id = 'edu_all';
+                safe_here = age_edu_groups[age_group][edu_id];
+                safe_here.mz_eintritt = calc.concatAllArraysInObject(safe_here.mz_eintritt, current_result.mz_eintritt_vars);
+                safe_here.mz_austritt = calc.concatAllArraysInObject(safe_here.mz_austritt, current_result.mz_austritt_vars);
+                safe_here.mz_anderer = calc.concatAllArraysInObject(safe_here.mz_anderer, current_result.mz_anderer_vars);
+                safe_here.mz_alle = calc.concatAllArraysInObject(safe_here.mz_alle, current_result.mz_alle_vars);
+
+            };
         };
+
 
         return age_edu_groups;
     };
