@@ -40,7 +40,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 			statistics.n = data_array.legth;
             statistics.min = calc.min(data_array);
             statistics.max = calc.max(data_array);
-			statistics.mean = calc.mean(data_array);
+			//statistics.mean = calc.mean(data_array);
 		};
 
         // Return
