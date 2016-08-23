@@ -126,8 +126,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
 
         for (var x = 0; x < allFullPropertys.length; x++) {
-            var current_response = allFullPropertys[x];
-            if (Object.prototype.toString.call(current_response) === '[object Array]') {
+            var current_property = allFullPropertys[x];
+
+            var ArrayFromObjectToConcat
+
+            if (Object.prototype.toString.call(ArrayFromObjectToConcat) === '[object Array]') {
                 console.log('isArray ------ ', current_response);
             };
         };
