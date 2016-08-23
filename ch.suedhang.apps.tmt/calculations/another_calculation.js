@@ -565,12 +565,12 @@ function main(responses) {
                 Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
             };
 
-            var Messzeitpunkt = {
+            var mz_obj = {
                 "Messzeitpunkt": Messzeitpunkt,
                 "Messzeitpunkt_Text": Messzeitpunkt_Text
             };
 
-            myResults.Messzeitpunkt = Messzeitpunkt;
+            myResults.Messzeitpunkt = mz_obj;
 
             // Write Results for the Return
             // Do not modify stuff here
