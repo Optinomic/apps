@@ -75,7 +75,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             var ss_current_property = 'ss_' + current_property;
 
             var ArrayFromObjectToConcat = objectToConcat[current_property];
-            var isThisArray = calc.isArray(ArrayFromObjectToConcat);
+            var isThisArray = isArray(ArrayFromObjectToConcat);
 
             if (isThisArray) {
                 // Array found Concat!
