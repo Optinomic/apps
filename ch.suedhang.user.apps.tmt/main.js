@@ -123,13 +123,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Create 'all propertys array'
         var allFullPropertys = [];
 
-        var isArray =
-            function(obj) {
-                console.log('isArray: ', obj, (typeof obj !== 'undefined' &&
-                    obj && obj.constructor === Array));
-                return (typeof obj !== 'undefined' &&
-                    obj && obj.constructor === Array);
-            }
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
 
         for (var property in objectFull) {
             if (objectFull.hasOwnProperty(property)) {
@@ -147,7 +144,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (isThisArray) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
-
+                console.log('N=', objectFull[current_property].length, objectFull[current_property]);
                 // set n;
                 objectFull.n = objectFull[current_property].length;
             };
