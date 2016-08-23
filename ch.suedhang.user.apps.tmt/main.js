@@ -69,12 +69,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // TMT Init
     // -------------------
     $scope.tmt_init = function() {
-        $scope.d.tmt = {};
 
         // Simulate responses from 'calculation'
         var d = $scope.d.dataMain.calculations[0].calculation_results.full;
+        var pg = $scope.d.dataMain.patient_groups;
 
-        $scope.d.tmt.patient_scores = $scope.getPatientScores(d);
+        // Calculate stuff
+        var patient_scores = $scope.getPatientScores(d);
+        var age_edu_scores = $scope.arrangePatientScoresAgeEdu(patient_scores);
+        // var group_scores = $scope.getPatientGroupScores(patient_scores, pg);
+
+        // Safe
+        $scope.d.tmt = {};
+        $scope.d.tmt.patient_scores = patient_scores;
+        $scope.d.tmt.age_edu_scores = age_edu_scores;
+
+        // $scope.d.tmt.group_scores = group_scores;
 
     };
 
@@ -82,6 +92,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Data
     // -------------------
+
+    $scope.getVariables = function() {
+
+        // Interessante Variablen
+        var variables = {
+            "TMTAError": [],
+            "TMTATime": [],
+            "TMTBError": [],
+            "TMTBTime": [],
+            "Perz_A": [],
+            "Perz_B": [],
+            "BA_Quotient": []
+        };
+
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(variables));
+    };
+
     $scope.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
@@ -90,16 +118,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         for (var i = 0; i < d.length; i++) {
             var current_result = d[i];
 
-            // Interessante Variablen
-            var variables = {
-                "TMTAError": [],
-                "TMTATime": [],
-                "TMTBError": [],
-                "TMTBTime": [],
-                "Perz_A": [],
-                "Perz_B": [],
-                "BA_Quotient": []
-            };
+
 
             // Scores Obj. erstellen.
             var scores = {
@@ -108,10 +127,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "edu_group": {},
                     "age": null
                 },
-                "mz_alle_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_eintritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_austritt_vars": JSON.parse(JSON.stringify(variables)),
-                "mz_anderer_vars": JSON.parse(JSON.stringify(variables)),
+                "mz_alle_vars": $scope.getVariables(),
+                "mz_eintritt_vars": $scope.getVariables(),
+                "mz_austritt_vars": $scope.getVariables(),
+                "mz_anderer_vars": $scope.getVariables(),
                 "mz_alle_details": [],
                 "mz_eintritt_details": [],
                 "mz_austritt_details": [],
@@ -225,6 +244,290 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return all_scores;
     };
 
+    $scope.arrangePatientScoresAgeEdu = function(patient_scores) {
+
+        // Get all TMT-Patient-Scores and arrange it in a Array | Age & Edu
+
+        // Data Model
+        var age_edu_groups = [{
+            "info": {
+                "age_group": 0,
+                "age_group_text": "Altersgruppe 18 - 24"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 1,
+                "altersgruppe_text": "Altersgruppe 25 – 34"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 2,
+                "altersgruppe_text": "Altersgruppe 35 – 44"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 3,
+                "altersgruppe_text": "Altersgruppe 45 – 54"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 4,
+                "altersgruppe_text": "Altersgruppe 55 – 59"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 5,
+                "altersgruppe_text": "Altersgruppe 60 – 64"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 6,
+                "altersgruppe_text": "Altersgruppe 65 – 69"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 7,
+                "altersgruppe_text": "Altersgruppe 70 – 74"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 8,
+                "altersgruppe_text": "Altersgruppe 75 – 79"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 9,
+                "altersgruppe_text": "Altersgruppe 80 – 84"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }, {
+            "info": {
+                "age_group": 10,
+                "altersgruppe_text": "Altersgruppe 85 – 89"
+            },
+            "edu_all": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_high": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            },
+            "edu_small": {
+                "mz_alle": $scope.getVariables(),
+                "mz_eintritt": $scope.getVariables(),
+                "mz_austritt": $scope.getVariables(),
+                "mz_anderer": $scope.getVariables()
+            }
+        }];
+
+
+        for (var i = 0; i < patient_scores.length; i++) {
+            var current_result = patient_scores[i];
+
+            // Get Vars
+            var age_group = current_result.patient_details.edu_group.altersgruppe;
+            var education_high = current_result.patient_details.edu_group.education_high; //>12
+
+            var edu_id = 'edu_small';
+            if (education_high) {
+                edu_id = 'edu_high';
+            };
+
+
+            // var safe_here = age_edu_groups[age_group].[edu_id];
+            // safe_here.TMTAError = 99;
+
+
+        };
+
+        return age_edu_groups;
+
+    };
+
 
     $scope.isPIDinGroup = function(patients_array, search_pid) {
         var isPIDinGroup = false;
@@ -241,26 +544,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.getPatientGroupScores = function() {
+    $scope.getPatientGroupScores = function(patient_scores, patient_groups) {
 
         var pg = [];
-        var all_pg = $scope.d.dataMain.patient_groups;
 
-        all_pg.forEach(function(current_pg, myPGIndex) {
+        patient_groups.forEach(function(current_pg, myPGIndex) {
 
             var scores = [];
             var scores_details = [];
 
             // Loop '$scope.d.bdi_scores.patients' and check if patient is in current_pg
-            $scope.d.bdi_scores.patients.forEach(function(current_patient_response, myPatientResponseIndex) {
+            patient_scores.forEach(function(current_patient_score, myPatientResponseIndex) {
 
-                var response_pid = current_patient_response.patient.id;
+                var response_pid = current_patient_score.patient.id;
                 var inside_group = $scope.isPIDinGroup(current_pg.patients, response_pid);
 
                 // If YES:  concat()  Arrays.
                 if (inside_group) {
-                    scores = scores.concat(current_patient_response.scores);
-                    scores_details = scores_details.concat(current_patient_response.scores_details);
+                    scores = scores.concat(current_patient_score.scores);
+                    scores_details = scores_details.concat(current_patient_score.scores_details);
                 };
 
             });
