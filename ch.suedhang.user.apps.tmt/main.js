@@ -517,10 +517,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 edu_id = 'edu_high';
             };
 
+            var something_to_save = false;
+            if (current_result.patient_details.edu_group.altersgruppe_found === true) {
+                something_to_save = true;
+            };
 
             //  // Safe in given 'edu_id'
-            var safe_here = age_edu_groups[age_group];
-            console.log('XXXX> ', safe_here)
+            if (something_to_save) {
+                var safe_here = age_edu_groups[age_group];
+                console.log('XXXX | 1 > ', age_group, safe_here)
+                console.log('XXXX | 2 > ', age_group, safe_here[edu_all])
+                console.log('XXXX | 2 > ', age_group, age_edu_groups[age_group][edu_all])
+            };
+
+
 
 
             // safe_here.mz_eintritt = safe_here.mz_eintritt.concat(current_result.mz_eintritt_vars);
