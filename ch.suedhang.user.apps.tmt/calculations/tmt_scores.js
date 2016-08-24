@@ -395,6 +395,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
 
         for (var group_id = 0; group_id < 11; group_id++) {
+
+            //var stat = 
             
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 var edu_prop = edu_props[edu_prop_id];
@@ -403,7 +405,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var mz_prop = mz_props[mz_prop_id];
 
                     //Writing
-                    statistics_age_edu_groups[group_id][edu_prop][mz_prop].statistics = 73;
+                    //statistics_age_edu_groups[group_id][edu_prop][mz_prop].statistics = 73;
                 };
 
             };
