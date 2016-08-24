@@ -11,20 +11,13 @@ act-info (addiction, care and therapy information) Austrittsversion
 Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
 
 [developer]
-first_name = Beat
-last_name = Ottiger
-github_user = ottigerb
-email = beat@optinomic.com
-company = Optinomic Gmbh
-phone = +41 (0)44 508 26 76
-website = http://www.optinomic.com/
-[Forel-Version]
 first_name = Hans
 last_name = Menning
 github_user = HansaYohaku
 email = hans.menning@psychologie.ch
 company = Optinomic Gmbh
 phone = +41 (0)78 636 64 64
+website = https://www.forel-klinik.ch/
 
 [template score 6 6]
 include(templates/score.html)
