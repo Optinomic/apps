@@ -431,7 +431,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
                             if (calc.isArray(dataArray)) {
                                 // Do Statistics
-                                ziel_mz[current_property] = 73;
+                                var dataStatistics = ziel_mz[current_property];
+                                dataStatistics = 73;
 
 
                             };
