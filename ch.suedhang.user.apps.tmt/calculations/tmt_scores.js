@@ -299,7 +299,7 @@ function main(responses) {
 
 
         // Clone Obj. and Return
-        return JSON.parse(JSON.stringify(variables));
+        return JSON.parse(JSON.stringify(age_edu_groups));
 
     };
 
