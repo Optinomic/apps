@@ -444,7 +444,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                         ziel_mz.n = 0;
                     };
 
-                    ziel_edu[mz_prop] = ziel_mz;
+                    //ziel_edu[mz_prop] = ziel_mz;
                     
                 };
             };
