@@ -411,12 +411,16 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
-                    //Writing
+                    //Writing back?
                     ziel_mz.test = 73;
 
                 };
 
             };
+
+            //Writing back?
+            statistics_age_edu_groups[group_id] = ziel;
+
         };
 
         return statistics_age_edu_groups;
