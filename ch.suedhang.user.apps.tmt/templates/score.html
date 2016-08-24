@@ -17,99 +17,66 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
                 <div ng-if="age_group.edu_all.mz_alle.n > 0">
                     <div ng-init="age_group.info.show_edu_high = false" class="grid-border-top">
-                        <div>
+                        <div ng-if="age_group.info.show_edu_high">
+                            <div layout="row" layout-align="space-between end">
+                                <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Ausbildung: > 12</p>
+                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
+                            </div>
+                            <pre>{{age_group.edu_high | json}}</pre>
+                            <div layout="row" layout-align="space-between end">
+                                <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}} | Ausbildung: > 12</p>
+                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
+                            </div>
+                        </div>
+                        <div ng-if="!age_group.info.show_edu_high">
                             <div layout="row" layout-align="space-between end">
                                 <p flex class="md-subhead">Ausbildung: > 12</p>
                                 <p class="md-subhead">n={{age_group.edu_high.mz_alle.n}}</p>
-                                <md-button ng-if="!age_group.info.show_edu_high" ng-click="age_group.info.show_edu_high = true">Anzeigen</md-button>
-                                <md-button ng-if="age_group.info.show_edu_high" ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
+                                <md-button ng-click="age_group.info.show_edu_high = true">Anzeigen</md-button>
                             </div>
-                        </div>
-                        <div ng-if="age_group.info.show_edu_high">
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Eintritt | n={{age_group.edu_high.mz_eintritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_high.mz_eintritt | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Austritt | n={{age_group.edu_high.mz_austritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_high.mz_austritt | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Anderer | n={{age_group.edu_high.mz_anderer.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_high.mz_anderer | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Alle | n={{age_group.edu_high.mz_alle.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_high = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_high.mz_alle | json}}</pre>
                         </div>
                     </div>
                     <div ng-init="age_group.info.show_edu_small = false" class="grid-border-top">
-                        <div>
-                            <div layout="row" layout-align="space-between end">
-                                <p flex class="md-subhead">Ausbildung: <= 12</p>
-                                <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}}</p>
-                                <md-button ng-if="!age_group.info.show_edu_small" ng-click="age_group.info.show_edu_small = true">Anzeigen</md-button>
-                                <md-button ng-if="age_group.info.show_edu_small" ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
-                            </div>
-                        </div>
                         <div ng-if="age_group.info.show_edu_small">
                             <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Eintritt | n={{age_group.edu_small.mz_eintritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
+                                <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}} | Education:
+                                    <=12</p>
+                                        <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
                             </div>
-                            <pre>{{age_group.edu_small.mz_eintritt | json}}</pre>
+                            <pre>{{age_group.edu_small | json}}</pre>
                             <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Austritt | n={{age_group.edu_small.mz_austritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
+                                <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}} | Education:
+                                    <=12</p>
+                                        <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
                             </div>
-                            <pre>{{age_group.edu_small.mz_austritt | json}}</pre>
+                        </div>
+                        <div ng-if="!age_group.info.show_edu_small">
                             <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Anderer | n={{age_group.edu_small.mz_anderer.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
+                                <p flex class="md-subhead">Ausbildung:
+                                    <=12</p>
+                                        <p class="md-subhead">n={{age_group.edu_small.mz_alle.n}}</p>
+                                        <md-button ng-click="age_group.info.show_edu_small = true">Anzeigen</md-button>
                             </div>
-                            <pre>{{age_group.edu_small.mz_anderer | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Alle | n={{age_group.edu_small.mz_alle.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_small = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_small.mz_alle | json}}</pre>
                         </div>
                     </div>
                     <div ng-init="age_group.info.show_edu_all = false" class="grid-border-top">
-                        <div>
+                        <div ng-if="age_group.info.show_edu_all">
+                            <div layout="row" layout-align="space-between end">
+                                <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Ausbildung: Alle Levels</p>
+                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                            </div>
+                            <pre>{{age_group.edu_all | json}}</pre>
+                            <div layout="row" layout-align="space-between end">
+                                <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}} | Ausbildung: Alle Levels</p>
+                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                            </div>
+                        </div>
+                        <div ng-if="!age_group.info.show_edu_all">
                             <div layout="row" layout-align="space-between end">
                                 <p flex class="md-subhead">Ausbildung: Alle Levels</p>
                                 <p class="md-subhead">n={{age_group.edu_all.mz_alle.n}}</p>
-                                <md-button ng-if="!age_group.info.show_edu_all" ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
-                                <md-button ng-if="age_group.info.show_edu_all" ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
+                                <md-button ng-click="age_group.info.show_edu_all = true">Anzeigen</md-button>
                             </div>
-                        </div>
-                        <div ng-if="age_group.info.show_edu_all">
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Eintritt | n={{age_group.edu_all.mz_eintritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_all.mz_eintritt | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Austritt | n={{age_group.edu_all.mz_austritt.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_all.mz_austritt | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Anderer | n={{age_group.edu_all.mz_anderer.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_all.mz_anderer | json}}</pre>
-                            <div layout="row" layout-align="space-between end">
-                                <p class="md-md-body-2">Messzeitpunkt: Alle | n={{age_group.edu_all.mz_alle.n}}</p>
-                                <md-button ng-click="age_group.info.show_edu_all = false">Schliessen</md-button>
-                            </div>
-                            <pre>{{age_group.edu_all.mz_alle | json}}</pre>
                         </div>
                     </div>
                 </div>
