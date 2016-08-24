@@ -390,6 +390,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Data Model
         var statistics_age_edu_groups = calc.getAgeEduGroup('empty');
 
+        // Propertys from Data Model
+        var edu_props = ['edu_all', 'edu_high', 'edu_small'];
+        var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
 
 
         return statistics_age_edu_groups;
