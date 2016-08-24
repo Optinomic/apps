@@ -418,9 +418,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
+
                     if (quelle_mz.n > 0) {
 
-                        ziel_mz.n = quelle_mz.n;
+                        // ziel_mz.n = quelle_mz.n;
 
                         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
                         for (var x = 0; x < allFullPropertys.length; x++) {
@@ -431,9 +432,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             if (calc.isArray(dataArray)) {
 
                                 // Do Statistics
-                                ziel_mz.ts2 = 73;
-                                
-
+                                ziel_mz = calc.getVariables('variables');
 
                             };
                         };
