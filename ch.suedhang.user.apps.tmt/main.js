@@ -86,6 +86,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt = {};
         $scope.d.tmt.patient_scores = patient_scores;
         $scope.d.tmt.age_edu_scores = age_edu_scores;
+        $scope.d.tmt.age_edu_statistics = age_edu_statistics;
+        
 
         // $scope.d.tmt.group_scores = group_scores;
 
