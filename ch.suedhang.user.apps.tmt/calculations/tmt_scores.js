@@ -418,9 +418,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
+
                     if (quelle_mz.n > 0) {
 
-                        ziel_mz.n = quelle_mz.n;
+                        // ziel_mz.n = quelle_mz.n;
 
                         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
                         for (var x = 0; x < allFullPropertys.length; x++) {
@@ -429,17 +430,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             var dataArray = quelle_mz[current_property];
 
                             if (calc.isArray(dataArray)) {
-                                // Do Statistics
-                                ziel_mz.dataStatistics = calc.getVariables('variables');
-                                ziel_mz.dataStatistics2 = 73;
-                                ziel_mz.dataStatistics3 = 73;
-                                ziel_mz.dataStatistics4 = 73;
-                                ziel_mz.dataStatistidddcs = 73;
-                                ziel_mz.dataStatistiadfacs = 73;
-                                ziel_mz.dataStatistiasdfghcs = 73;
-                                ziel_mz.dataStatistiasdfcs = 73;
-                                ziel_mz.dataStatiasdfstics = 73;
 
+                                // Do Statistics
+                                ziel_mz.statistics = objectFull;
 
                             };
                         };
