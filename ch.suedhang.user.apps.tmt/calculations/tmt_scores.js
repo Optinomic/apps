@@ -438,7 +438,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                         };
 
                         //Writing back?
-                        quelle_edu[mz_prop] = ziel;
+                        //quelle_edu[mz_prop] = ziel;
 
                     } else {
                         ziel_mz.n = 0;
