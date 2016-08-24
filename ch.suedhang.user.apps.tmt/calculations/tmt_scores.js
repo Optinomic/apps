@@ -328,13 +328,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
     calc.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
+
         // Create 'all propertys array'
         var allFullPropertys = [];
-
-        var isArray = function(obj) {
-            return (typeof obj !== 'undefined' &&
-                obj && obj.constructor === Array);
-        };
 
         for (var property in objectFull) {
             if (objectFull.hasOwnProperty(property)) {
@@ -411,8 +407,18 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
-                    //Writing back?
-                    ziel_mz.test = 73;
+
+                    var isThisArray = calc.isArray(quelle_mz);
+                    if (isThisArray) {
+                        if (quelle_mz.length !== 0) {
+                        // Do Statistics
+                           ziel_mz = calc.getStatistics(quelle_mz);
+                        } else {
+                            ziel_mz.n = 0;
+                        };
+                    };
+
+                    
 
                 };
 
