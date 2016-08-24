@@ -429,15 +429,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             var dataArray = quelle_mz[current_property];
 
                             if (calc.isArray(dataArray)) {
+
                                 // Do Statistics
-                                ziel_mz.dataStatistics2 = 73;
-                                ziel_mz.dataStatistics3 = 73;
-                                ziel_mz.dataStatistics4 = 73;
-                                ziel_mz.dataStatistidddcs = 73;
-                                ziel_mz.dataStatistiadfacs = 73;
-                                ziel_mz.dataStatistiasdfghcs = 73;
-                                ziel_mz.dataStatistiasdfcs = 73;
-                                ziel_mz.dataStatiasdfstics = 73;
+                                ziel_mz.ts2 = 73;
+                                
 
 
                             };
