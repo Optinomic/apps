@@ -12,10 +12,14 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     calc.getVariables = function(mode) {
 
         // mode = mode === undefined ? 'variables' : mode;
 
+=======
+    calc.getVariables = function() {
+>>>>>>> parent of 2d3346e... Statistics Obj
 =======
     calc.getVariables = function() {
 >>>>>>> parent of 2d3346e... Statistics Obj
@@ -32,6 +36,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             "n": 0
         };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         if (mode === 'empty') {
             variables = {};
@@ -308,6 +313,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(variables));
 >>>>>>> parent of 2d3346e... Statistics Obj
+=======
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(variables));
+>>>>>>> parent of 2d3346e... Statistics Obj
     };
 
 
@@ -525,6 +534,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
     };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     calc.getStatisticsPatientScoresAgeEdu = function(age_edu_scores) {
 
         // Calculate Statistics from all Age & Edu Groups
@@ -553,6 +563,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
     };
 
+=======
+>>>>>>> parent of 2d3346e... Statistics Obj
 =======
 >>>>>>> parent of 2d3346e... Statistics Obj
     calc.arrangePatientScoresAgeEdu = function(patient_scores) {
@@ -870,7 +882,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         var patient_scores = calc.getPatientScores(d);
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
 <<<<<<< HEAD
+<<<<<<< HEAD
         //var age_edu_statistics = calc.getStatisticsPatientScoresAgeEdu(age_edu_scores);
+=======
+>>>>>>> parent of 2d3346e... Statistics Obj
 =======
 >>>>>>> parent of 2d3346e... Statistics Obj
 
@@ -879,7 +894,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         returnObj.patient_scores = patient_scores;
         returnObj.age_edu_scores = age_edu_scores;
 <<<<<<< HEAD
+<<<<<<< HEAD
         //returnObj.age_edu_statistics = age_edu_statistics;
+=======
+>>>>>>> parent of 2d3346e... Statistics Obj
 =======
 >>>>>>> parent of 2d3346e... Statistics Obj
 
