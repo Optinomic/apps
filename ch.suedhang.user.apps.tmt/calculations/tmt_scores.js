@@ -430,7 +430,6 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
                             if (calc.isArray(dataArray)) {
                                 // Do Statistics
-                                ziel_mz.dataStatistics = calc.getVariables('variables');
                                 ziel_mz.dataStatistics2 = 73;
                                 ziel_mz.dataStatistics3 = 73;
                                 ziel_mz.dataStatistics4 = 73;
