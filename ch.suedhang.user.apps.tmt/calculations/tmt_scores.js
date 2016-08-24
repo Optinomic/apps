@@ -379,7 +379,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         return isPIDinGroup;
     };
 
-    calc.setAgeEduStatistics = function(age_edu_scores)  {
+    calc.setAgeEduStatistics = function(age_edu_scores) {
 
         // Calculate Statistics for all | Age & Edu Groups
 
@@ -390,16 +390,27 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         var edu_props = ['edu_all', 'edu_high', 'edu_small'];
         var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
 
+        // Create 'all propertys array'
+        var allFullPropertys = [];
+        var objectFull = calc.getVariables('variables');
+        for (var property in objectFull) {
+            if (objectFull.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        }
+
         for (var group_id = 0; group_id < 11; group_id++) {
 
             var ziel = statistics_age_edu_groups[group_id];
             var quelle = age_edu_scores[group_id];
-            
+
+
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 var edu_prop = edu_props[edu_prop_id];
 
                 var ziel_edu = ziel[edu_prop];
                 var quelle_edu = quelle[edu_prop];
+
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     var mz_prop = mz_props[mz_prop_id];
@@ -407,31 +418,41 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
+                    if (quelle_mz.n > 0) {
+
+                        ziel_mz.n = quelle_mz.n;
 
 
-                    if (quelle_mz.length > 0) {
-                        // Do Statistics
-                        
-                        //ziel_mz = calc.getStatistics(quelle_mz);
-                        ziel_mz.n = 73;
+                        // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
+                        for (var x = 0; x < allFullPropertys.length; x++) {
+                            var current_property = allFullPropertys[x];
+
+                            var dataArray = quelle_mz[current_property];
+
+                            if (calc.isArray(dataArray)) {
+                                // Do Statistics
+                                ziel_mz[current_property] = 73;
+
+
+                            };
+                        };
+
+
                     } else {
                         ziel_mz.n = 0;
                     };
 
 
                 };
-
             };
 
 
             //Writing back?
             statistics_age_edu_groups[group_id] = ziel;
-
         };
 
         return statistics_age_edu_groups;
     };
-
 
     calc.getPatientScores = function(d) {
 
