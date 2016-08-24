@@ -526,20 +526,20 @@ function main(responses) {
         var age_edu_statistics = calc.getAgeEduGroup('empty');
 
         // Create 'all propertys array'
-        var edu_scores_propertys = ['edu_all', 'edu_small', 'edu_high'];
-        var mz_scores_propertys = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
-
-        for (var i = 0; i < edu_scores_propertys.length; i++) {
-            var current_edu_prop = edu_scores_propertys[i];
-
-            for (var x = 0; x < mz_scores_propertys.length; x++) {
-                var current_mz_prop = mz_scores_propertys[i];
-
-                age_edu_statistics[current_edu_prop][current_mz_prop].i = i;
-            };
-
-
-        };
+        //  var edu_scores_propertys = ['edu_all', 'edu_small', 'edu_high'];
+        //  var mz_scores_propertys = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
+//  
+        //  for (var i = 0; i < edu_scores_propertys.length; i++) {
+        //      var current_edu_prop = edu_scores_propertys[i];
+//  
+        //      for (var x = 0; x < mz_scores_propertys.length; x++) {
+        //          var current_mz_prop = mz_scores_propertys[i];
+//  
+        //          age_edu_statistics[current_edu_prop][current_mz_prop].i = i;
+        //      };
+//  
+//  
+        //  };
 
         return age_edu_statistics;
 
