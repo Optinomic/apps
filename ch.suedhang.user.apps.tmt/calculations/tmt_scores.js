@@ -411,10 +411,11 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
                     if (quelle_mz.length > 0) {
                         // Do Statistics
+                        
                         //ziel_mz = calc.getStatistics(quelle_mz);
                         ziel_mz.n = 73;
                     } else {
-                        ziel_mz.n = quelle_mz;
+                        ziel_mz.n = 0;
                     };
 
 
