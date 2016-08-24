@@ -432,7 +432,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             if (calc.isArray(dataArray)) {
 
                                 // Do Statistics
-                                ziel_mz.statistics = { "test" : 73} ;
+                                ziel_mz.statistics = objectFull;
 
                             };
                         };
