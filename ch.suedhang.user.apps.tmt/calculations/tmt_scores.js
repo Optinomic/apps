@@ -408,23 +408,20 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                     var quelle_mz = quelle_edu[mz_prop];
 
 
-                    var isThisArray = calc.isArray(quelle_mz);
-                    if (isThisArray) {
-                        if (quelle_mz.n > 0) {
+
+                    if (quelle_mz.length > 0) {
                         // Do Statistics
-                           ziel_mz = calc.getStatistics(quelle_mz);
-                        } else {
-                            ziel_mz.n = 0;
-                        };
+                        //ziel_mz = calc.getStatistics(quelle_mz);
+                        ziel_mz.n = 73;
                     } else {
-                        ziel_mz.info = 'quelle_mz = not array'.
+                        ziel_mz.n = 0;
                     };
 
-                    
 
                 };
 
             };
+
 
             //Writing back?
             statistics_age_edu_groups[group_id] = ziel;
