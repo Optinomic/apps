@@ -99,7 +99,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Calculate Statistics for all | Age & Edu Groups
 
         // Data Model
-        var statistics_age_edu_groups = calc.getAgeEduGroup('empty');
+        var statistics_age_edu_groups = $scope.getAgeEduGroup('empty');
 
         // Propertys from Data Model
         var edu_props = ['edu_all', 'edu_high', 'edu_small'];
@@ -127,7 +127,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     if (quelle_mz.length > 0) {
                         // Do Statistics
                         
-                        //ziel_mz = calc.getStatistics(quelle_mz);
+                        //ziel_mz = $scope.getStatistics(quelle_mz);
                         ziel_mz.n = 73;
                     } else {
                         ziel_mz.n = 0;
@@ -189,22 +189,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 18 - 24"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -212,22 +212,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 25 – 34"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -235,22 +235,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 35 – 44"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -258,22 +258,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 45 – 54"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -281,22 +281,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 55 – 59"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -304,22 +304,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 60 – 64"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -327,22 +327,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 65 – 69"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -350,22 +350,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 70 – 74"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -373,22 +373,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 75 – 79"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -396,22 +396,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 80 – 84"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }, {
             "info": {
@@ -419,22 +419,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "age_group_text": "Altersgruppe 85 – 89"
             },
             "edu_all": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_high": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             },
             "edu_small": {
-                "mz_alle": calc.getVariables(mode),
-                "mz_eintritt": calc.getVariables(mode),
-                "mz_austritt": calc.getVariables(mode),
-                "mz_anderer": calc.getVariables(mode)
+                "mz_alle": $scope.getVariables(mode),
+                "mz_eintritt": $scope.getVariables(mode),
+                "mz_austritt": $scope.getVariables(mode),
+                "mz_anderer": $scope.getVariables(mode)
             }
         }];
 
