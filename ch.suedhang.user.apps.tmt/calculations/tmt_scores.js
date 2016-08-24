@@ -13,7 +13,7 @@ function main(responses) {
 
     calc.getVariables = function(mode) {
 
-        mode = mode === undefined ? 'variables' : mode;
+        // mode = mode === undefined ? 'variables' : mode;
 
         // Interessante Variablen
         var variables = {
@@ -38,8 +38,6 @@ function main(responses) {
 
 
     calc.getAgeEduGroup = function(mode) {
-
-        mode = mode === undefined ? 'variables' : mode;
 
         // Data Model
         var age_edu_groups = [{
@@ -353,10 +351,10 @@ function main(responses) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
 
-                // Do Statistics!
-                if (current_property === 'TMTATime') {
-                    objectFull.ss_TMTATime = calc.getStatistics(objectFull[current_property]);
-                };
+                // Do Statistics - LATER!
+                // if (current_property === 'TMTATime') {
+                //     objectFull.ss_TMTATime = calc.getStatistics(objectFull[current_property]);
+                // };
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
