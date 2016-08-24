@@ -134,7 +134,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         //console.log('ziel_edu', ziel_edu, quelle_edu);
 
-
                         for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                             var mz_prop = mz_props[mz_prop_id];
 
@@ -156,28 +155,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                     if ($scope.isArray(dataArray)) {
                                         // Do Statistics
-                                        
+
                                     };
-
-
-                                } else {
-                                    ziel_mz.n = 0;
                                 };
 
-                                console.log('quelle_mz 2', quelle_mz);
 
+                            } else {
+                                ziel_mz.n = 0;
                             };
+
+                            console.log('quelle_mz 2', quelle_mz);
 
                         };
 
-
-                        //Writing back?
-                        statistics_age_edu_groups[group_id] = ziel;
-
                     };
 
-                    return statistics_age_edu_groups;
+
+                    //Writing back?
+                    statistics_age_edu_groups[group_id] = ziel;
                 };
+
+                return statistics_age_edu_groups;
+            };
 
                 // -------------------
                 // Data
