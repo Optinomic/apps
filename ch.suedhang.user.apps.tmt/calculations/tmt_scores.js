@@ -396,10 +396,14 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
         for (var group_id = 0; group_id < 11; group_id++) {
 
-            //var stat = 
+            var ziel = statistics_age_edu_groups[group_id];
+            var quelle = age_edu_scores[group_id];
             
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 var edu_prop = edu_props[edu_prop_id];
+
+                var ziel_edu = ziel[edu_prop];
+                var quelle_edu = quelle[edu_prop];
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     var mz_prop = mz_props[mz_prop_id];
