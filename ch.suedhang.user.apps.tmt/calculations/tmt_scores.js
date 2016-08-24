@@ -298,8 +298,8 @@ function main(responses) {
         }];
 
 
-        // Clone Obj. and Return
-        return JSON.parse(JSON.stringify(age_edu_groups));
+        // Return Array
+        return age_edu_groups;
 
     };
 
