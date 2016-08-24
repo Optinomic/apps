@@ -383,6 +383,18 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         return isPIDinGroup;
     };
 
+    calc.setAgeEduStatistics = function(age_edu_scores)  {
+
+        // Calculate Statistics for all | Age & Edu Groups
+
+        // Data Model
+        var statistics_age_edu_groups = calc.getAgeEduGroup('empty');
+
+
+
+        return statistics_age_edu_groups;
+    };
+
 
     calc.getPatientScores = function(d) {
 
@@ -578,13 +590,13 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-        var test = calc.getAgeEduGroup('empty');
+        var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
         // Build & add stuff to returnObj.
         var returnObj = {};
         returnObj.patient_scores = patient_scores;
         returnObj.age_edu_scores = age_edu_scores;
-        returnObj.test = test;
+        returnObj.age_edu_statistics = age_edu_statistics;
 
 
         returnObj.full = d;
