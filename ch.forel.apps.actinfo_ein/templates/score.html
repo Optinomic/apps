@@ -1,0 +1,91 @@
+include(../lib/html/optinomic/page/start.m4)
+<div ng-repeat="response in d.dataMain.survey_responses_group[0]">
+    <div>
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
+            <h4 class="md-headline">Problemsubstanzen</h4>
+            <div>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;">Folgende Substanzen konsumierte der Patient/ die Patientin vor dem aktuellen Entzug in der angegebenen Häufigkeit:</p>
+        <p class="md-body-2" ng-repeat="problemsubstanz in response.problemsubstanzen">- {{problemsubstanz}}</p>
+    </div>
+    <div style="margin-top: 48px;">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
+            <h4 class="md-headline">Alkohol: AUDIT</h4>
+            <div>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.AUDIT.AUDIT_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.AUDIT.AUDIT_Score_Mean}} bei {{response.calculations[0].calculation_result.AUDIT.valid_scores}}/10 gültigen Scores) auf der AUDIT-Skala.</p>
+        <div layout="row" layout-align="start center">
+            <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score !== null">
+                <score-threshold score="response.calculations[0].calculation_result.AUDIT.AUDIT_Score" min="0" max="40" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.AUDIT.ranges" show-min-max="true"></score-threshold>
+                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
+                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.AUDIT.interpretation.result_color}}">{{response.calculations[0].calculation_result.AUDIT.interpretation.result}}</h4>
+                </div>
+            </div>
+            <div flex="55" ng-if="response.calculations[0].calculation_result.AUDIT.AUDIT_Score === null">
+                <h5 class="md-subhead">Keine Interpretation möglich</h5>
+                <p class="md-caption">Kein AUDIT-Score vorhanden.</p>
+            </div>
+            <div flex="45">
+                <h5 class="md-subhead">
+                	AUDIT Summenwerte | 
+                	<span ng-if="response.calculations[0].calculation_result.AUDIT.gender === 'male'">Männer</span>
+                	<span ng-if="response.calculations[0].calculation_result.AUDIT.gender !== 'male'">Frauen</span>
+                </h5>
+                <table class="table table-condensed" style="width: 80%;">
+                    <tr ng-repeat="range in response.calculations[0].calculation_result.AUDIT.ranges.ranges">
+                        <td style="text-align:right !important;">
+                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                        </td>
+                        <td>
+                            <small>{{range.result}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 48px;">
+        <div class="grid-border-bottom" layout="row" layout-align="space-between center">
+            <h4 class="md-headline">Nikotin: Fagerström</h4>
+            <div>
+                <p class="small">{{response.entity.data.response.VMEB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten auf der Fagerström-Skala.</p>
+        <div layout="row" layout-align="start center">
+            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
+                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
+                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                </div>
+            </div>
+            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
+                <h5 class="md-subhead">Keine Interpretation möglich</h5>
+                <p class="md-caption">Kein FAGERSTROEM-Score vorhanden.</p>
+            </div>
+            <div flex="45">
+                <h5 class="md-subhead">
+                	Fagerström Summenwerte  
+                </h5>
+                <table class="table table-condensed" style="width: 80%;">
+                    <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
+                        <td style="text-align:right !important;">
+                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                        </td>
+                        <td>
+                            <small>{{range.result}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)

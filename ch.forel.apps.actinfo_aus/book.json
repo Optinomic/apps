@@ -1,0 +1,11 @@
+{
+    "plugins": [
+        "-anchors",
+        "insert-md"
+    ],
+    "pluginsConfig": {
+        "insert-md": {
+            "md": "#####Optinomic GmbH | [optinomic.com](http://www.optinomic.com/)\n"
+        }
+    }
+}
