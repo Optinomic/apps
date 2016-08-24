@@ -422,7 +422,6 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
                         ziel_mz.n = quelle_mz.n;
 
-
                         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
                         for (var x = 0; x < allFullPropertys.length; x++) {
                             var current_property = allFullPropertys[x];
@@ -438,12 +437,15 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             };
                         };
 
+                        //Writing back?
+                        quelle_edu[mz_prop] = ziel;
 
                     } else {
                         ziel_mz.n = 0;
                     };
 
-
+                    ziel_edu[mz_prop] = ziel_mz;
+                    
                 };
             };
 
