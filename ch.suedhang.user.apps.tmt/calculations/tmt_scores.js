@@ -395,6 +395,17 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
         var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
 
 
+        for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
+            var edu_prop = edu_props[edu_prop_id];
+
+            for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
+                var mz_prop = mz_props[mz_prop_id];
+    
+    
+            };
+
+        };
+
         return statistics_age_edu_groups;
     };
 
