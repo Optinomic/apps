@@ -52,11 +52,11 @@ responsibility = lead_therapist
 name = actInfo - Austritt
 host = default
 survey_id = 116413
-hash = X53X1030
-pid = X53X972
-fid = X53X971
+hash = X98X2558
+pid = X98X2500
+fid = X98X2433
 min_questions =
-min_lastpage = 5
+min_lastpage = 3
 
 
 [event exit]
