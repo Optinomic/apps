@@ -112,7 +112,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var ziel = statistics_age_edu_groups[group_id];
             var quelle = age_edu_scores[group_id];
 
-            console.log('ziel_edu', ziel, quelle);
+            console.log('ziel', ziel, quelle);
 
             
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
