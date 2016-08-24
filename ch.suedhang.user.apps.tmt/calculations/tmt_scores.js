@@ -408,6 +408,9 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     var mz_prop = mz_props[mz_prop_id];
 
+                    var ziel_mz = ziel_edu[mz_prop];
+                    var quelle_mz = quelle_edu[mz_prop];
+
                     //Writing
                     //statistics_age_edu_groups[group_id][edu_prop][mz_prop].statistics = 73;
                 };
