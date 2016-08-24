@@ -426,6 +426,8 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                         for (var x = 0; x < allFullPropertys.length; x++) {
                             var current_property = allFullPropertys[x];
 
+                            var dataArray = quelle_mz[current_property];
+
                             if (calc.isArray(dataArray)) {
                                 // Do Statistics
                                 ziel_mz.dataStatistics = 73;
