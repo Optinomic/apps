@@ -410,12 +410,14 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
                     var isThisArray = calc.isArray(quelle_mz);
                     if (isThisArray) {
-                        if (quelle_mz.length !== 0) {
+                        if (quelle_mz.n > 0) {
                         // Do Statistics
                            ziel_mz = calc.getStatistics(quelle_mz);
                         } else {
                             ziel_mz.n = 0;
                         };
+                    } else {
+                        ziel_mz.info = 'quelle_mz = not array'.
                     };
 
                     
