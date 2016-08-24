@@ -606,13 +606,13 @@ function main(responses) {
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-        var age_edu_statistics = calc.getStatisticsPatientScoresAgeEdu(age_edu_scores);
+        //var age_edu_statistics = calc.getStatisticsPatientScoresAgeEdu(age_edu_scores);
 
         // Build & add stuff to returnObj.
         var returnObj = {};
         returnObj.patient_scores = patient_scores;
         returnObj.age_edu_scores = age_edu_scores;
-        returnObj.age_edu_statistics = age_edu_statistics;
+        //returnObj.age_edu_statistics = age_edu_statistics;
 
 
         returnObj.full = d;
