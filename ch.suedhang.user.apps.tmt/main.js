@@ -87,7 +87,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.tmt.patient_scores = patient_scores;
         $scope.d.tmt.age_edu_scores = age_edu_scores;
         $scope.d.tmt.age_edu_statistics = age_edu_statistics;
-        
+
 
         // $scope.d.tmt.group_scores = group_scores;
 
@@ -111,12 +111,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var ziel = statistics_age_edu_groups[group_id];
             var quelle = age_edu_scores[group_id];
+
+            console.log('ziel_edu', ziel, quelle);
+
             
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 var edu_prop = edu_props[edu_prop_id];
 
                 var ziel_edu = ziel[edu_prop];
                 var quelle_edu = quelle[edu_prop];
+                
+                console.log('ziel_edu', ziel_edu, quelle_edu);
+
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     var mz_prop = mz_props[mz_prop_id];
@@ -124,7 +130,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var ziel_mz = ziel_edu[mz_prop];
                     var quelle_mz = quelle_edu[mz_prop];
 
-
+                    console.log('ziel_mz', ziel_mz, quelle_mz);
 
                     if (quelle_mz.length > 0) {
                         // Do Statistics
