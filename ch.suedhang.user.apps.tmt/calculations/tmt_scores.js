@@ -432,7 +432,7 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
                             if (calc.isArray(dataArray)) {
 
                                 // Do Statistics
-                                ziel_mz = calc.getVariables('variables');
+                                ziel_mz.statistics = calc.getVariables('variables');
 
                             };
                         };
