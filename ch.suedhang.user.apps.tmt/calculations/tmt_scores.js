@@ -11,7 +11,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
     // ------------------------------------------
 
 
-    calc.getVariables = function() {
+    calc.getVariables = function(mode) {
+        // Variablen oder 'Empty'?
+        mode = mode === undefined ? 'variables' : mode;
+
         // Interessante Variablen
         var variables = {
             "TMTAError": [],
@@ -23,6 +26,10 @@ include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
             "BA_Quotient": [],
             // do not modify the below:
             "n": 0
+        };
+
+        if (mode === 'empty') {
+            variables = {};
         };
 
         // Clone Obj. and Return
