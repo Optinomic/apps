@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.apps.actinfo_ein
+id = ch.forel.apps.actinfo_ein
 name = ActInfo | Eintritt
 short_description = actInfo Eintrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
