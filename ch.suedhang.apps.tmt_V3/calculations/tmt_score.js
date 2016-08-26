@@ -13,11 +13,32 @@ function main(responses) {
     };
 
     calc.quotient = function(d) {
-        var TMTBTime = parseInt(d.TMTBTime);
         var TMTATime = parseInt(d.TMTATime);
+        var TMTBTime = parseInt(d.TMTBTime);
         var result = TMTBTime / TMTATime;
 
         return result;
+    };
+
+    calc.z_scores = function(TMTATime, TMTBTime, m_norm, sd_norm) {
+        
+        // Calculate stuff
+        var tmtA_z = (TMTATime - m_norm[0]) / sd_norm[0] * -1;
+        var tmtA_z_abbruch = (180 - m_norm[0]) / sd_norm[0] * -1;
+        var tmtB_z = (TMTBTime - m_norm[1]) / sd_norm[1] * -1;
+        var tmtB_z_abbruch = (300 - m_norm[1]) / sd_norm[1] * -1;
+        var quotient = TMTBTime / TMTATime;
+
+        var return_obj = {
+            "tmtA_z": tmtA_z,
+            "tmtB_z": tmtB_z,
+            "tmtA_z_zeitabbruch": tmtA_z_abbruch,
+            "tmtB_z_zeitabbruch": tmtB_z_abbruch,
+            "quotient": quotient,
+            "calculated": true
+        };
+
+        return return_obj;
     };
 
     calc.getPatientAge = function(birth_date) {
@@ -533,7 +554,13 @@ function main(responses) {
             "B": null
         };
 
+        var zScoreObj = {
+            "calculated": false
+        };
+
         if (altersgruppe_found) {
+
+            // Perzentile berechnen;
             var A_Perz = calc.get_current_percentile('A', TMTATime, resultObj.age_perz);
             var B_Perz = calc.get_current_percentile('B', TMTBTime, resultObj.age_perz);
 
@@ -542,8 +569,12 @@ function main(responses) {
                 "A": A_Perz,
                 "B": B_Perz
             };
+
+            // zScores berechnen;
+            zScoreObj = calc.z_scores(TMTATime, TMTBTime, M_Norm, SD_Norm);
         };
 
+        resultObj.z_scores = zScoreObj;
         resultObj.result = perzObj;
 
 
