@@ -31,7 +31,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
 
-
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
@@ -229,7 +228,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setZScore = function() {
 
-        $scope.initZScore();
 
         // Grafiken anpassen gemäss | Toggles
 
@@ -262,7 +260,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //      $scope.d.zScore.tmt_b.austritt.show_numbers = false;
         //  };
         //  
-        //  console.log('setZScore', $scope.d.zScore);
+        console.log('setZScore', $scope.d.zScore);
     };
 
 

@@ -30,8 +30,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Run App-Functions:
-            // $scope.tmt_init();
-            // $scope.getCalculation();
+            $scope.tmt_init();
+            $scope.getCalculation();
 
 
             // Finishing: Console Info & Init = done.
