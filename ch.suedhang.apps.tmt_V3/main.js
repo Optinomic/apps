@@ -224,14 +224,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         // Sort Arrays
+        var id_last_a = parseInt($scope.d.zScore.tmt_a.legth) - 1;
+        var id_last_b = parseInt($scope.d.zScore.tmt_a.legth) - 1;
         $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
         $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
 
-
         // Skala nur bei 'letzer' Messung anzeigen
-        var id_last_a = $scope.d.zScore.tmt_a.legth - 1;
-        var id_last_b = $scope.d.zScore.tmt_b.legth - 1;
-        console.log('LAST:', id_last_a, id_last_b, $scope.d.zScore.tmt_a[id_last_a]);
+
+        console.log('LAST:', id_last_a, id_last_b, $scope.d.zScore.tmt_a);
         //$scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
         //$scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
 
