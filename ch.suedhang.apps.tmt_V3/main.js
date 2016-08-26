@@ -223,10 +223,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         });
 
-        // Sort Arrays
-
-        $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
-        $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
+        // Sort Arrays  |  Do not sort:  Same order as results.
+        // $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
+        // $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
 
         // Skala nur bei 'letzer' Messung anzeigen
         var id_last_a = parseInt($scope.d.zScore.tmt_a.length) - 1;
