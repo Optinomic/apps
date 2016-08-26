@@ -44,22 +44,23 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div layout="row" layout-align="space-between end">
             <div flex>
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="initZScore()" aria-label="Beschriftung">
                     Beschriftung
                 </md-switch>
             </div>
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-align="space-between end">
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="initZScore()" aria-label="Zeige Klinische Stichprobe">
                     Klinische Stichprobe
                 </md-switch>
-                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
+                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="initZScore()" aria-label="Zeige Werte der Stichprobe">
                     Werte
                 </md-switch>
             </div>
         </div>
     </div>
-    <z-score data="d.zScore.tmt_a.eintritt"></z-score>
-    <z-score data="d.zScore.tmt_a.austritt"></z-score>
+    <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.zScore.tmt_a">
+        <z-score data="response"></z-score>
+    </div>
     <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.survey_responses">
         <div layout="column" layout-align="start center">
             <p class="md-caption">{{response.calculations[0].calculation_result.Messzeitpunkt.Messzeitpunkt_Text}}</p>
@@ -98,22 +99,23 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div layout="row" layout-align="space-between end">
             <div flex>
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="initZScore()" aria-label="Beschriftung">
                     Beschriftung
                 </md-switch>
             </div>
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-align="space-between end">
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="initZScore()" aria-label="Zeige Klinische Stichprobe">
                     Klinische Stichprobe
                 </md-switch>
-                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
+                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="initZScore()" aria-label="Zeige Werte der Stichprobe">
                     Werte
                 </md-switch>
             </div>
         </div>
     </div>
-    <z-score data="d.zScore.tmt_b.eintritt"></z-score>
-    <z-score data="d.zScore.tmt_b.austritt"></z-score>
+    <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.zScore.tmt_b">
+        <z-score data="response"></z-score>
+    </div>
     <div ng-repeat="response in d.dataMain.survey_responses" layout="row" layout-align="space-between start" layout-margin>
         <div layout="column" layout-align="start center">
             <p class="md-caption">{{response.calculations[0].calculation_result.Messzeitpunkt.Messzeitpunkt_Text}}</p>

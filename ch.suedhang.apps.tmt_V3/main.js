@@ -99,11 +99,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.addDefault = function(obj) {
 
+        // Add Defaults for all Scores
         obj.zscore_min = -3;
         obj.zscore_max = 3;
         obj.clinicsample_start = -1;
         obj.clinicsample_end = -1;
         obj.clinicsample_color = '#3F51B5';
+
+
+        // Add Toggle Settings
+        obj.show_text = $scope.d.zScore.toggles.show_text;
+        obj.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        obj.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+
 
         return obj;
     };
@@ -205,8 +213,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Abgeschlossen
         $scope.d.zScore.init = true;
 
-        // Bei Änderungen ausführen.
-        $scope.setZScore();
     };
 
 
@@ -225,43 +231,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.setZScore();
     };
 
-
-    $scope.setZScore = function() {
-
-
-        // Grafiken anpassen gemäss | Toggles
-
-        //  $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
-        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-        //  
-        //  $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
-        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-        //  
-        //  $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
-        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-        //  
-        //  $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
-        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-        //  
-        //  
-        //  if ($scope.d.zScore.messungen_info.ein_und_austritt) {
-        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
-        //      $scope.d.zScore.tmt_a.austritt.show_numbers = true;
-        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
-        //      $scope.d.zScore.tmt_b.austritt.show_numbers = true;
-        //  } else {
-        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
-        //      $scope.d.zScore.tmt_a.austritt.show_numbers = false;
-        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = true;
-        //      $scope.d.zScore.tmt_b.austritt.show_numbers = false;
-        //  };
-        //  
-        console.log('setZScore', $scope.d.zScore);
-    };
 
 
 
