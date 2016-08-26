@@ -103,7 +103,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         obj.zscore_min = -3;
         obj.zscore_max = 3;
         obj.clinicsample_start = -1;
-        obj.clinicsample_end = -1;
+        obj.clinicsample_end = 1;
         obj.clinicsample_color = '#3F51B5';
 
 
