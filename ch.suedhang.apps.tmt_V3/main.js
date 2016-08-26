@@ -106,6 +106,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         obj.clinicsample_end = 1;
         obj.clinicsample_color = '#3F51B5';
 
+        // Remember to Show them later - if needed.
+        obj.show_numbers = false;
+
 
         // Add Toggle Settings
         obj.show_text = $scope.d.zScore.toggles.show_text;
@@ -206,8 +209,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung.text_right_caption = '';
             $scope.d.zScore.tmt_b.push(B_messung);
 
-            // Messzeitpunkt Info setzen
 
+            // Messzeitpunkt Info setzen
             if (current_messung.Messzeitpunkt.Messzeitpunkt === 1) {
                 messungen_info.eintritt = true;
             };
@@ -223,6 +226,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Sort Arrays
         $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
         $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
+
+
+        // Skala nur bei 'letzer' Messung anzeigen
+        $scope.d.zScore.tmt_a[$scope.d.zScore.tmt_a.legth - 1].show_numbers = true;
+        $scope.d.zScore.tmt_b[$scope.d.zScore.tmt_b.legth - 1].show_numbers = true;
 
 
         // Check if Eintritt & Austrittsmessung vorhanden

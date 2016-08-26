@@ -58,7 +58,7 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
     </div>
-    <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.zScore.tmt_a">
+    <div ng-repeat="response in d.zScore.tmt_a">
         <z-score data="response"></z-score>
     </div>
     <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.survey_responses">
@@ -113,7 +113,7 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
     </div>
-    <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.zScore.tmt_b">
+    <div ng-repeat="response in d.zScore.tmt_b">
         <z-score data="response"></z-score>
     </div>
     <div ng-repeat="response in d.dataMain.survey_responses" layout="row" layout-align="space-between start" layout-margin>
