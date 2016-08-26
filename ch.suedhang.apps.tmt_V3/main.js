@@ -229,8 +229,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Skala nur bei 'letzer' Messung anzeigen
-        $scope.d.zScore.tmt_a[$scope.d.zScore.tmt_a.legth - 1].show_numbers = true;
-        $scope.d.zScore.tmt_b[$scope.d.zScore.tmt_b.legth - 1].show_numbers = true;
+        var id_last_a = $scope.d.zScore.tmt_a.legth - 1;
+        var id_last_b = $scope.d.zScore.tmt_b.legth - 1;
+        $scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
+        $scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
 
 
         // Check if Eintritt & Austrittsmessung vorhanden
