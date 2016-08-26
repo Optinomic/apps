@@ -139,7 +139,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "austritt": false,
             "anderer": false,
             "ein_und_austritt": false,
-            "count": messungen.length
+            "count": '?'
         };
 
 
