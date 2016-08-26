@@ -28,6 +28,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
+            // Run Public-Functions:
+            $scope.d.functions.getAllCalculations();
+
+
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
@@ -40,8 +44,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             };
 
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
 
 
             // Finishing: Console Info & Init = done.
@@ -131,7 +133,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.tmt_a = [];
         $scope.d.zScore.tmt_b = [];
 
-        var messungen = $scope.d.calculations[0].calculation_result;
+        var messungen = $scope.d.dataMain.calculations[0].calculation_results;
 
         // Check if Eintritt & Austrittsmessung vorhanden
         var messungen_info = {
