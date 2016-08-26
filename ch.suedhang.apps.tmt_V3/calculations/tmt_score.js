@@ -610,7 +610,7 @@ function main(responses) {
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
-            // myResults.response = response;
+            myResults.response = response;
             // myResults.d = d;
 
             allResults.push(myResults);
