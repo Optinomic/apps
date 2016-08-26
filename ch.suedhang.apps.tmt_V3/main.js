@@ -104,7 +104,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         obj.zscore_max = 3;
         obj.clinicsample_start = -1;
         obj.clinicsample_end = 1;
-        obj.clinicsample_color = '#3F51B5';
+        obj.clinicsample_color = '#C5CAE9';
 
         // Remember to Show them later - if needed.
         obj.show_numbers = false;
