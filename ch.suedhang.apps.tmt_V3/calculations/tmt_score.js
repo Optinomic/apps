@@ -126,6 +126,8 @@ function main(responses) {
             education = 0;
             n = 155;
             altersgruppe_found = true;
+            var M_Norm = [22.93 48.97];
+            var SD_Norm = [6.87 12.69];
             var perz90 = [16, 35];
             var perz80 = [17, 38];
             var perz70 = [19, 41];
@@ -144,6 +146,8 @@ function main(responses) {
             education = 0;
             n = 33;
             altersgruppe_found = true;
+            var M_Norm = [24.40 50.68];
+            var SD_Norm = [8.71 12.36];
             var perz90 = [14, 33];
             var perz80 = [17, 38];
             var perz70 = [19, 45];
@@ -162,6 +166,8 @@ function main(responses) {
             education = 0;
             n = 39;
             altersgruppe_found = true;
+            var M_Norm = [28.54 58.46];
+            var SD_Norm = [10.09 16.41];
             var perz90 = [16, 40];
             var perz80 = [20, 45];
             var perz70 = [23, 50];
@@ -180,6 +186,8 @@ function main(responses) {
             education = 0;
             n = 41;
             altersgruppe_found = true;
+            var M_Norm = [31.78 63.76];
+            var SD_Norm = [9.93 14.42];
             var perz90 = [19, 42];
             var perz80 = [23, 50];
             var perz70 = [27, 59];
@@ -199,6 +207,8 @@ function main(responses) {
                 education = 0;
                 n = 58;
                 altersgruppe_found = true;
+                var M_Norm = [35.10 78.84];
+                var SD_Norm = [10.94 19.09];
                 var perz90 = [25, 56];
                 var perz80 = [27, 64];
                 var perz70 = [29, 66];
@@ -217,6 +227,8 @@ function main(responses) {
                 education = 1;
                 n = 37;
                 altersgruppe_found = true;
+                var M_Norm = [31.72 68.74];
+                var SD_Norm = [10.14 21.02];
                 var perz90 = [22, 42];
                 var perz80 = [24, 56];
                 var perz70 = [25, 57];
@@ -237,6 +249,8 @@ function main(responses) {
                 education = 0;
                 n = 55;
                 altersgruppe_found = true;
+                var M_Norm = [33.22 74.55];
+                var SD_Norm = [9.10 19.55];
                 var perz90 = [21, 56];
                 var perz80 = [24, 58];
                 var perz70 = [26, 62];
@@ -255,6 +269,8 @@ function main(responses) {
                 education = 1;
                 n = 31;
                 altersgruppe_found = true;
+                var M_Norm = [31.32 64.58];
+                var SD_Norm = [6.96 18.59];
                 var perz90 = [22, 45];
                 var perz80 = [25, 48];
                 var perz70 = [26, 53];
@@ -276,6 +292,8 @@ function main(responses) {
                 education = 0
                 n = 65;
                 altersgruppe_found = true;
+                var M_Norm = [39.14 91.32];
+                var SD_Norm = [11.84 28.89];
                 var perz90 = [24, 60];
                 var perz80 = [30, 71];
                 var perz70 = [32, 74];
@@ -294,6 +312,8 @@ function main(responses) {
                 education = 1;
                 n = 32;
                 altersgruppe_found = true;
+                var M_Norm = [33.84 67.12];
+                var SD_Norm = [6.69 9.31];
                 var perz90 = [26, 52];
                 var perz80 = [28, 57];
                 var perz70 = [30, 63];
@@ -316,6 +336,8 @@ function main(responses) {
                 education = 0;
                 n = 76
                 altersgruppe_found = true;
+                var M_Norm = [42.47 109.95];
+                var SD_Norm = [15.15 35.15];
                 var perz90 = [25, 70];
                 var perz80 = [30, 79];
                 var perz70 = [35, 83];
@@ -334,6 +356,8 @@ function main(responses) {
                 education = 1;
                 n = 30;
                 altersgruppe_found = true;
+                var M_Norm = [40.13 86.27];
+                var SD_Norm = [14.48 24.07];
                 var perz90 = [26, 59];
                 var perz80 = [29, 63];
                 var perz70 = [31, 68];
@@ -356,6 +380,8 @@ function main(responses) {
                 education = 0;
                 n = 74;
                 altersgruppe_found = true;
+                var M_Norm = [50.81 130.61];
+                var SD_Norm = [17.44 45.74];
                 var perz90 = [30, 78];
                 var perz80 = [37, 92];
                 var perz70 = [39, 96];
@@ -375,6 +401,8 @@ function main(responses) {
                 education = 1;
                 n = 34;
                 altersgruppe_found = true;
+                var M_Norm = [41.74 100.68];
+                var SD_Norm = [15.32 44.16];
                 var perz90 = [22, 57];
                 var perz80 = [27, 59];
                 var perz70 = [34, 66];
@@ -396,6 +424,8 @@ function main(responses) {
                 education = 0;
                 n = 84;
                 altersgruppe_found = true;
+                var M_Norm = [58.19 152.74];
+                var SD_Norm = [23.31 65.68];
                 var perz90 = [31, 72];
                 var perz80 = [39, 101];
                 var perz70 = [43, 112];
@@ -415,6 +445,8 @@ function main(responses) {
                 education = 1;
                 n = 34;
                 altersgruppe_found = true;
+                var M_Norm = [55.32 132.15];
+                var SD_Norm = [21.28 42.95];
                 var perz90 = [37, 89];
                 var perz80 = [38, 100];
                 var perz70 = [41, 111];
@@ -437,6 +469,8 @@ function main(responses) {
                 education = 0;
                 n = 16;
                 altersgruppe_found = true;
+                var M_Norm = [57.56 167.69];
+                var SD_Norm = [21.54 78.50];
                 var perz90 = [37, 89];
                 var perz80 = [39, 95];
                 var perz70 = [43, 112];
@@ -455,6 +489,8 @@ function main(responses) {
                 education = 1;
                 n = 13;
                 altersgruppe_found = true;
+                var M_Norm = [63.46 140.54];
+                var SD_Norm = [29.22 75.38];
                 var perz90 = [35, 70];
                 var perz80 = [42, 81];
                 var perz70 = [49, 87];
@@ -468,6 +504,10 @@ function main(responses) {
         };
 
         resultObj.age_perz = {
+            "tmtA_norm_m": M_Norm[0],
+            "tmtA_norm_sd": SD_Norm[0],
+            "tmtB_norm_m": M_Norm[1],
+            "tmtB_norm_sd": SD_Norm[1],
             "perz90": perz90,
             "perz80": perz80,
             "perz70": perz70,
@@ -539,18 +579,12 @@ function main(responses) {
             myResults.TMTBTime = parseInt(result.TMTBTime);
 
 
-
-
-
-
             // Calculate Stuff
             myResults.quotient = calc.quotient(result);
             myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
             myResults.percentile = calc.get_percentile(result, set_age, edu_years);
 
             // Messzeitpunkt
-
-
             var Messzeitpunkt = parseInt(result.Messzeitpunkt);
             myResults.mz = Messzeitpunkt;
 
@@ -576,8 +610,8 @@ function main(responses) {
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            myResults.d = d;
+            // myResults.response = response;
+            // myResults.d = d;
 
             allResults.push(myResults);
         });
