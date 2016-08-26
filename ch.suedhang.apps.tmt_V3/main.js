@@ -131,7 +131,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.tmt_a = [];
         $scope.d.zScore.tmt_b = [];
 
-        var messungen = $scope.d.dataMain.calculations[0].calculation_result;
+        var messungen = $scope.d.calculations[0].calculation_result;
 
         // Check if Eintritt & Austrittsmessung vorhanden
         var messungen_info = {
@@ -139,7 +139,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "austritt": false,
             "anderer": false,
             "ein_und_austritt": false,
-            "count": '?'
+            "count": messungen.length
         };
 
 
