@@ -198,6 +198,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
             A_messung.text_right_caption = '';
+            if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
+                // Auffällige Testleistung
+                A_messung.zscore_color = '#F44336';
+            };
             $scope.d.zScore.tmt_a.push(A_messung);
 
 
@@ -207,6 +211,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
             B_messung.text_right_caption = '';
+            if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
+                // Auffällige Testleistung
+                B_messung.zscore_color = '#F44336';
+            };
             $scope.d.zScore.tmt_b.push(B_messung);
 
 
