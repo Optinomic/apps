@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -83,6 +83,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
 
+    // -------------------------------------------
+    // Array - Functions
+    // -------------------------------------------
+
+    $scope.sortByKey = function(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    };
+
     $scope.initZScore = function() {
         $scope.d.zScore = {};
         $scope.d.zScore.init = false;
@@ -102,85 +114,58 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // ToDo: 'Echte Daten setzen'
         $scope.d.zScore.global = {
+            "zscore_min": -3,
+            "zscore_max": 3,
+            "clinicsample_start": -1,
+            "clinicsample_end": 1,
             "clinicsample_color": '#3F51B5'
         };
 
 
 
-        // TMT - A
 
-        $scope.d.zScore.tmt_a = {};
+        // INIT
+        var messung = {};
+        $scope.d.zScore.tmt_a = [];
+        $scope.d.zScore.tmt_b = [];
 
-        $scope.d.zScore.tmt_a.eintritt = {
-            "zscore": 1.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "text_left": "Eintritt",
-            "text_left_caption": "21.4.2016",
-            "text_right": "TMT A",
-            "text_right_caption": "",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8
-        };
+        var messungen = $scope.d.calculations[0].calculation_result;
+        messungen.forEach(function(current_messung, myMessungIndex) {
 
-        $scope.d.zScore.tmt_a.austritt = {
-            "zscore": 3.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "zscore_color": "#F44336",
-            "text_left": "Austritt",
-            "text_left_caption": "21.5.2016",
-            "text_right": "TMT A",
-            "text_right_caption": "",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8,
-            "marker_1_score": -3.4,
-            "marker_1_text": "Zeitabbruch"
-        };
+            var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
+            var mz_datestamp = current_messung.response.data.response.Date;
+            var mz_datum = $filter('date')(mz_datestamp);
+
+            var messung = {
+                "zscore": 0,
+                "text_left": mz_text,
+                "text_left_caption": mz_datum,
+                "datum": mz_datum,
+                "datestamp": mz_datestamp
+            };
+
+            // TMT - A
+            var A_messung = angular.copy(messung);
+            A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
+            A_messung.text_right = 'TMT A';
+            A_messung.text_right_caption = '';
+            $scope.d.zScore.tmt_a.push(A_messung);
 
 
-        // TMT - B
+            // TMT - B
+            var B_messung = angular.copy(messung);
+            B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
+            B_messung.text_right = 'TMT B';
+            B_messung.text_right_caption = '';
+            $scope.d.zScore.tmt_b.push(B_messung);
 
-        $scope.d.zScore.tmt_b = {};
 
-        $scope.d.zScore.tmt_b.eintritt = {
-            "zscore": -1.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "text_left": "Eintritt",
-            "text_left_caption": "21.4.2016",
-            "text_right": "TMT A",
-            "text_right_caption": "",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8
-        };
 
-        $scope.d.zScore.tmt_b.austritt = {
-            "zscore": -5.2,
-            "zscore_min": -5.2,
-            "zscore_max": 3.1,
-            "text_left": "Austritt",
-            "text_left_caption": "21.5.2016",
-            "text_right": "TMT A",
-            "text_right_caption": "",
-            "clinicsample_start": -2,
-            "clinicsample_end": 1.8,
-            "marker_1_score": -3.4,
-            "marker_1_text": "Zeitabbruch"
-        };
+        });
 
-        $scope.d.zScore.tmt_b_a_quotient = {
-            "zscore": 0.44,
-            "zscore_min": -3,
-            "zscore_max": 3,
-            "text_left": "Quotient B/A",
-            "text_left_caption": "Zeit",
-            "text_right": "2.07",
-            "text_right_caption": "Quotient",
-            "clinicsample_start": -0.5,
-            "clinicsample_end": 0.5
-        };
-
+        // Sort Arrays
+        $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
+        $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
 
 
         // Check if Eintritt & Austrittsmessung vorhanden
