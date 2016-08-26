@@ -135,6 +135,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.normgruppe_klinik.selected_pg = 'Keine klinische Stichprobe gewählt';
 
 
+        $scope.setZScore();
+
+    };
+
+
+    $scope.changeClinicSample = function() {
+        // Wenn Stichprobe gewählt automatisch anzeigen:
+        if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
+            $scope.d.zScore.toggles.show_clinicsample = true;
+        } else {
+            $scope.d.zScore.toggles.show_clinicsample = false;
+        };
+
+        // Name setzen
+        $scope.d.zScore.normgruppe_klinik.selected_pg = $scope.d.dataMain.patient_groups[$scope.d.zScore.normgruppe_klinik.selected_pg_id].data.name;
+
+        // Bei Änderungen ausführen.
+        $scope.setZScore();
+    };
+
+
+    $scope.setZScore = function() {
+
         // INIT
         var messung = {};
         $scope.d.zScore.tmt_a = [];
@@ -213,24 +236,40 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Abgeschlossen
         $scope.d.zScore.init = true;
 
+
+        // Grafiken anpassen gemäss | Toggles
+
+        //  $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  
+        //  if ($scope.d.zScore.messungen_info.ein_und_austritt) {
+        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_a.austritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_b.austritt.show_numbers = true;
+        //  } else {
+        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_a.austritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_b.austritt.show_numbers = false;
+        //  };
+        //  
+        console.log('setZScore', $scope.d.zScore);
     };
-
-
-    $scope.changeClinicSample = function() {
-        // Wenn Stichprobe gewählt automatisch anzeigen:
-        if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
-            $scope.d.zScore.toggles.show_clinicsample = true;
-        } else {
-            $scope.d.zScore.toggles.show_clinicsample = false;
-        };
-
-        // Name setzen
-        $scope.d.zScore.normgruppe_klinik.selected_pg = $scope.d.dataMain.patient_groups[$scope.d.zScore.normgruppe_klinik.selected_pg_id].data.name;
-
-        // Bei Änderungen ausführen.
-        $scope.setZScore();
-    };
-
 
 
 

@@ -44,15 +44,15 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div layout="row" layout-align="space-between end">
             <div flex>
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="initZScore()" aria-label="Beschriftung">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
                     Beschriftung
                 </md-switch>
             </div>
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-align="space-between end">
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="initZScore()" aria-label="Zeige Klinische Stichprobe">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
                     Klinische Stichprobe
                 </md-switch>
-                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="initZScore()" aria-label="Zeige Werte der Stichprobe">
+                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
                     Werte
                 </md-switch>
             </div>
@@ -99,15 +99,15 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div layout="row" layout-align="space-between end">
             <div flex>
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="initZScore()" aria-label="Beschriftung">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
                     Beschriftung
                 </md-switch>
             </div>
             <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-align="space-between end">
-                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="initZScore()" aria-label="Zeige Klinische Stichprobe">
+                <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
                     Klinische Stichprobe
                 </md-switch>
-                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="initZScore()" aria-label="Zeige Werte der Stichprobe">
+                <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
                     Werte
                 </md-switch>
             </div>
