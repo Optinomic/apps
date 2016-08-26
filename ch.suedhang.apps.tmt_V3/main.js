@@ -95,6 +95,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
 
+
+    $scope.addDefault = function(obj) {
+
+        obj.zscore_min = -3;
+        obj.zscore_max = 3;
+        obj.clinicsample_start = -1;
+        obj.clinicsample_end = -1;
+        obj.clinicsample_color = '#3F51B5';
+
+        return obj;
+    };
+
+
+
     $scope.initZScore = function() {
         $scope.d.zScore = {};
         $scope.d.zScore.init = false;
@@ -112,24 +126,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.normgruppe_klinik.selected_pg = 'Keine klinische Stichprobe gewählt';
 
 
-        // ToDo: 'Echte Daten setzen'
-        $scope.d.zScore.global = {
-            "zscore_min": -3,
-            "zscore_max": 3,
-            "clinicsample_start": -1,
-            "clinicsample_end": 1,
-            "clinicsample_color": '#3F51B5'
-        };
-
-
-
-
         // INIT
         var messung = {};
         $scope.d.zScore.tmt_a = [];
         $scope.d.zScore.tmt_b = [];
 
-        var messungen = $scope.d.calculations[0].calculation_result;
+        // Check if Eintritt & Austrittsmessung vorhanden
+        var messungen_info = {
+            "eintritt": false,
+            "austritt": false,
+            "anderer": false,
+            "ein_und_austritt": false,
+            "count": all_calculations.length
+        };
+
+
+        var messungen = $scope.d.dataMain.calculations[0].calculation_result;
         messungen.forEach(function(current_messung, myMessungIndex) {
 
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
@@ -146,6 +158,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // TMT - A
             var A_messung = angular.copy(messung);
+            A_messung = $scope.addDefault(A_messung);
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
             A_messung.text_right_caption = '';
@@ -154,11 +167,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // TMT - B
             var B_messung = angular.copy(messung);
+            B_messung = $scope.addDefault(B_messung);
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
             B_messung.text_right_caption = '';
             $scope.d.zScore.tmt_b.push(B_messung);
 
+            // Messzeitpunkt Info setzen
+
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 1) {
+                messungen_info.eintritt = true;
+            };
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 2) {
+                messungen_info.austritt = true;
+            };
+            if (current_calc.Messzeitpunkt.Messzeitpunkt === 3) {
+                messungen_info.anderer = true;
+            };
 
 
         });
@@ -169,27 +194,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Check if Eintritt & Austrittsmessung vorhanden
-        var all_calculations = $scope.d.dataMain.calculations[0].calculation_results;
-        var messungen_info = {
-            "eintritt": false,
-            "austritt": false,
-            "anderer": false,
-            "ein_und_austritt": false,
-            "count": all_calculations.length
-        };
-
-        all_calculations.forEach(function(current_calc, myCalcIndex) {
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 1) {
-                messungen_info.eintritt = true;
-            };
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 2) {
-                messungen_info.austritt = true;
-            };
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 3) {
-                messungen_info.anderer = true;
-            };
-        });
-
         if ((messungen_info.eintritt) && (messungen_info.austritt)) {
             messungen_info.ein_und_austritt = true;
         };
@@ -197,6 +201,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.messungen_info = messungen_info;
 
 
+        // Abgeschlossen
         $scope.d.zScore.init = true;
 
         // Bei Änderungen ausführen.
@@ -222,38 +227,40 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.setZScore = function() {
 
+        $scope.initZScore();
+
         // Grafiken anpassen gemäss | Toggles
 
-        $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
-        $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        $scope.d.zScore.tmt_a.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-
-        $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
-        $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        $scope.d.zScore.tmt_a.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-
-        $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
-        $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        $scope.d.zScore.tmt_b.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-
-        $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
-        $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
-        $scope.d.zScore.tmt_b.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
-
-
-        if ($scope.d.zScore.messungen_info.ein_und_austritt) {
-            $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
-            $scope.d.zScore.tmt_a.austritt.show_numbers = true;
-            $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
-            $scope.d.zScore.tmt_b.austritt.show_numbers = true;
-        } else {
-            $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
-            $scope.d.zScore.tmt_a.austritt.show_numbers = false;
-            $scope.d.zScore.tmt_b.eintritt.show_numbers = true;
-            $scope.d.zScore.tmt_b.austritt.show_numbers = false;
-        };
-
-        console.log('setZScore', $scope.d.zScore);
+        //  $scope.d.zScore.tmt_a.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_a.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_a.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_a.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_b.eintritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_b.eintritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  $scope.d.zScore.tmt_b.austritt.show_text = $scope.d.zScore.toggles.show_text;
+        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample = $scope.d.zScore.toggles.show_clinicsample;
+        //  $scope.d.zScore.tmt_b.austritt.show_clinicsample_scores = $scope.d.zScore.toggles.show_clinicsample_scores;
+        //  
+        //  
+        //  if ($scope.d.zScore.messungen_info.ein_und_austritt) {
+        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_a.austritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_b.austritt.show_numbers = true;
+        //  } else {
+        //      $scope.d.zScore.tmt_a.eintritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_a.austritt.show_numbers = false;
+        //      $scope.d.zScore.tmt_b.eintritt.show_numbers = true;
+        //      $scope.d.zScore.tmt_b.austritt.show_numbers = false;
+        //  };
+        //  
+        //  console.log('setZScore', $scope.d.zScore);
     };
 
 
