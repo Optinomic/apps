@@ -131,17 +131,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.tmt_a = [];
         $scope.d.zScore.tmt_b = [];
 
+        var messungen = $scope.d.dataMain.calculations[0].calculation_result;
+
         // Check if Eintritt & Austrittsmessung vorhanden
         var messungen_info = {
             "eintritt": false,
             "austritt": false,
             "anderer": false,
             "ein_und_austritt": false,
-            "count": all_calculations.length
+            "count": messungen.length
         };
 
 
-        var messungen = $scope.d.dataMain.calculations[0].calculation_result;
         messungen.forEach(function(current_messung, myMessungIndex) {
 
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
@@ -175,16 +176,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Messzeitpunkt Info setzen
 
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 1) {
+            if (current_messung.Messzeitpunkt.Messzeitpunkt === 1) {
                 messungen_info.eintritt = true;
             };
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 2) {
+            if (current_messung.Messzeitpunkt.Messzeitpunkt === 2) {
                 messungen_info.austritt = true;
             };
-            if (current_calc.Messzeitpunkt.Messzeitpunkt === 3) {
+            if (current_messung.Messzeitpunkt.Messzeitpunkt === 3) {
                 messungen_info.anderer = true;
             };
-
 
         });
 
