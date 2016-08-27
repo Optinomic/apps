@@ -186,12 +186,10 @@ function main(responses) {
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
-        var fullVariables = calc.getFullVariables();
-
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             // Init:
-            var inner_obj = fullVariables;
+            var inner_obj = {};
             var obj_to_merge_age = age_props[group_id];
 
             // Add stuff:
@@ -209,8 +207,6 @@ function main(responses) {
                 inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
 
                 inner_obj.edu_group_array_id = edu_prop_id;
-
-
 
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
