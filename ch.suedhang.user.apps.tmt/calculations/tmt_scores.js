@@ -127,8 +127,8 @@ function main(responses) {
             var name_scores = 'scores_____' + current_prop;
             var name_statis = 'statistics_' + current_prop;
 
-            returnObj[name_scores] = calc.variables.current_prop;
-            returnObj[name_statis] = calc.variables.current_prop;
+            returnObj[name_scores] = variables.current_prop;
+            returnObj[name_statis] = {};
         };
 
         // Clone Obj. and Return
@@ -223,8 +223,9 @@ function main(responses) {
                     inner_obj.mz_group_array_id = mz_prop_id;
 
                     // Merge Statistics & Scores
-                    // inner_obj = calc.merge_obj(inner_obj, fullVariables);
+                    inner_obj = calc.merge_obj(inner_obj, fullVariables);
 
+                    // Build ObjectName
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
 
