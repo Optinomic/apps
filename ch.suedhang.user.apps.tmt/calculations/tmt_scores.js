@@ -176,19 +176,15 @@ function main(responses) {
 
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
-            var inner_obj = {
-                "info": {},
-                //"scores": {},
-                "statistics": {}
-            };            
-            inner_obj.info = age_props[group_id];
+            var inner_obj = {};            
+            inner_obj.group_id = group_id;
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
-                inner_obj.info.education = edu_prop_id;
+                inner_obj.edu_prop_id = edu_prop_id;
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
-                    inner_obj.info.mz = mz_prop_id;
+                    inner_obj.mz_prop_id = mz_prop_id;
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
