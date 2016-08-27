@@ -162,12 +162,13 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             var inner_obj = {}; 
-            //inner_obj.info = age_props[group_id];
-            inner_obj.age_group_array_id = group_id;
-            inner_obj.age_group_id = 73;
 
             var obj_to_merge = age_props[group_id];
-            //inner_obj = merge_obj(inner_obj, obj_to_merge);          
+
+            //Add stuff;
+            inner_obj.age_group_array_id = group_id;
+            inner_obj.age_group_id = obj_to_merge.age_group_id;
+            inner_obj.age_group_text = obj_to_merge.age_group_text;
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
