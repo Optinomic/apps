@@ -107,9 +107,7 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             var inner_obj = {
-                "info": {},
-                //"scores": {},
-                "statistics": {}
+                "info": {}
             };
             inner_obj.info = age_props[group_id];
 
@@ -739,14 +737,14 @@ function main(responses) {
     // ------------------------------------------
 
 
-    // var patient_scores = [];
+    // Do the needed 'calculations'
     var patient_scores = calc.getPatientScores(responses);
     var age_edu_obj = calc.getAgeEduObj();
     var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
     var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
-    // Build & add stuff to returnObj.
+    // Returning | Results in returnObj.
     calc.age_edu_obj = age_edu_obj;
     calc.patient_scores = patient_scores;
     calc.age_edu_scores = age_edu_scores;
