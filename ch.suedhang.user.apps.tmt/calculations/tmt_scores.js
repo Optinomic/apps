@@ -127,8 +127,8 @@ function main(responses) {
             var name_scores = 'scores_____' + current_prop;
             var name_statis = 'statistics_' + current_prop;
 
-            returnObj[name_scores] = variables;
-            returnObj[name_statis] = variables;
+            returnObj[name_scores] = calc.variables.current_prop;
+            returnObj[name_statis] = calc.variables.current_prop;
         };
 
         // Clone Obj. and Return
