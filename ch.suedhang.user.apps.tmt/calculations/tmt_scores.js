@@ -89,9 +89,32 @@ function main(responses) {
 
 
 
+    calc.getVariables = function(mode) {
+        // Variablen oder 'Empty'?
+        mode = mode === undefined ? 'variables' : mode;
 
+        // Interessante Variablen
+        var variables = {
+            "TMTAError": [],
+            "TMTATime": [],
+            "TMTBError": [],
+            "TMTBTime": [],
+            "Perz_A": [],
+            "Perz_B": [],
+            "BA_Quotient": [],
+            // do not modify the below:
+            "n": 0
+        };
 
-    calc.getVariables = function() {
+        if (mode === 'empty') {
+            variables = {};
+        };
+
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(variables));
+    };
+
+    calc.getFullVariables = function() {
 
         // Init: Interessante Variablen
         var returnObj = {};
