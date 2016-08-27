@@ -8,69 +8,6 @@ function main(responses) {
     // Definitions
     // ------------------------------------------
 
-    calc.group_age_props = [{
-        "age_group_id": 0,
-        "age_group_text": "Altersgruppe 18 - 24"
-    }, {
-        "age_group_id": 1,
-        "age_group_text": "Altersgruppe 25 – 34"
-    }, {
-        "age_group_id": 2,
-        "age_group_text": "Altersgruppe 35 – 44"
-    }, {
-        "age_group_id": 3,
-        "age_group_text": "Altersgruppe 45 – 54"
-    }, {
-        "age_group_id": 4,
-        "age_group_text": "Altersgruppe 55 – 59"
-    }, {
-        "age_group_id": 5,
-        "age_group_text": "Altersgruppe 60 – 64"
-    }, {
-        "age_group_id": 6,
-        "age_group_text": "Altersgruppe 65 – 69"
-    }, {
-        "age_group_id": 7,
-        "age_group_text": "Altersgruppe 70 – 74"
-    }, {
-        "age_group_id": 8,
-        "age_group_text": "Altersgruppe 75 – 79"
-    }, {
-        "age_group_id": 9,
-        "age_group_text": "Altersgruppe 80 – 84"
-    }, {
-        "age_group_id": 10,
-        "age_group_text": "Altersgruppe 85 – 89"
-    }];
-
-    calc.group_edu_props = [{
-        "edu_group_id": 0,
-        "edu_high": false,
-        "edu_group_text": "Ausbildung: <= 12 Jahre"
-    }, {
-        "edu_group_id": 1,
-        "edu_high": true,
-        "edu_group_text": "Ausbildung: > 12 Jahre"
-    }, {
-        "edu_group_id": 99,
-        "edu_high": null,
-        "edu_group_text": "Ausbildung: Alle Levels"
-    }];
-
-    calc.group_mz_props = [{
-        "mz_group_id": 0,
-        "mz_group_text": "Messzeitpunkt: Eintritt"
-    }, {
-        "mz_group_id": 1,
-        "mz_group_text": "Messzeitpunkt: Austritt"
-    }, {
-        "mz_group_id": 3,
-        "mz_group_text": "Messzeitpunkt: Anderer"
-    }, {
-        "mz_group_id": 99,
-        "mz_group_text": "All Messzeitpunkte"
-    }];
-
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
@@ -89,7 +26,6 @@ function main(responses) {
         }
         return ret;
     };
-
 
     calc.getVariables = function(mode) {
         // Variablen oder 'Empty'?
