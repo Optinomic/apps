@@ -103,11 +103,12 @@ function main(responses) {
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
-        var inner_obj = {
-            "info": {}
-        };
+
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
+            var inner_obj = {
+                "info": {}
+            };            
             inner_obj.info = age_props[group_id];
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
