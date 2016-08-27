@@ -107,7 +107,9 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             var inner_obj = {
-                "info": {}
+                "info": {},
+                "scores": {},
+                "statistics": {}
             };            
             inner_obj.info = age_props[group_id];
 
