@@ -3,12 +3,92 @@ function main(responses) {
     var calc = {};
 
 
-    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+
+    // ------------------------------------------
+    // Definitions
+    // ------------------------------------------
+
+    var calc.group_age_props = [{
+        "age_group_id": 0,
+        "age_group_text": "Altersgruppe 18 - 24"
+    }, {
+        "age_group_id": 1,
+        "age_group_text": "Altersgruppe 25 – 34"
+    }, {
+        "age_group_id": 2,
+        "age_group_text": "Altersgruppe 35 – 44"
+    }, {
+        "age_group_id": 3,
+        "age_group_text": "Altersgruppe 45 – 54"
+    }, {
+        "age_group_id": 4,
+        "age_group_text": "Altersgruppe 55 – 59"
+    }, {
+        "age_group_id": 5,
+        "age_group_text": "Altersgruppe 60 – 64"
+    }, {
+        "age_group_id": 6,
+        "age_group_text": "Altersgruppe 65 – 69"
+    }, {
+        "age_group_id": 7,
+        "age_group_text": "Altersgruppe 70 – 74"
+    }, {
+        "age_group_id": 8,
+        "age_group_text": "Altersgruppe 75 – 79"
+    }, {
+        "age_group_id": 9,
+        "age_group_text": "Altersgruppe 80 – 84"
+    }, {
+        "age_group_id": 10,
+        "age_group_text": "Altersgruppe 85 – 89"
+    }];
+
+    var calc.group_edu_props = [{
+        "edu_group_id": 0,
+        "edu_high": false,
+        "edu_group_text": "Ausbildung: <= 12 Jahre"
+    }, {
+        "edu_group_id": 1,
+        "edu_high": true,
+        "edu_group_text": "Ausbildung: > 12 Jahre"
+    }, {
+        "edu_group_id": 99,
+        "edu_high": null,
+        "edu_group_text": "Ausbildung: Alle Levels"
+    }];
+
+    var calc.group_mz_props = [{
+        "mz_group_id": 0,
+        "mz_group_text": "Messzeitpunkt: Eintritt"
+    }, {
+        "mz_group_id": 1,
+        "mz_group_text": "Messzeitpunkt: Austritt"
+    }, {
+        "mz_group_id": 3,
+        "mz_group_text": "Messzeitpunkt: Anderer"
+    }, {
+        "mz_group_id": 99,
+        "mz_group_text": "All Messzeitpunkte"
+    }];
 
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
+
+
+    calc.collect = function() {
+        var ret = {};
+        var len = arguments.length;
+        for (var i = 0; i < len; i++) {
+            for (p in arguments[i]) {
+                if (arguments[i].hasOwnProperty(p)) {
+                    ret[p] = arguments[i][p];
+                }
+            }
+        }
+        return ret;
+    };
 
 
     calc.getVariables = function(mode) {
@@ -40,43 +120,7 @@ function main(responses) {
 
         var retrun_obj = {};
 
-        // Propertys from Data Model
-        var age_props = [{
-            "age_group": 0,
-            "age_group_text": "Altersgruppe 18 - 24"
-        }, {
-            "age_group": 1,
-            "age_group_text": "Altersgruppe 25 – 34"
-        }, {
-            "age_group": 2,
-            "age_group_text": "Altersgruppe 35 – 44"
-        }, {
-            "age_group": 3,
-            "age_group_text": "Altersgruppe 45 – 54"
-        }, {
-            "age_group": 4,
-            "age_group_text": "Altersgruppe 55 – 59"
-        }, {
-            "age_group": 5,
-            "age_group_text": "Altersgruppe 60 – 64"
-        }, {
-            "age_group": 6,
-            "age_group_text": "Altersgruppe 65 – 69"
-        }, {
-            "age_group": 7,
-            "age_group_text": "Altersgruppe 70 – 74"
-        }, {
-            "age_group": 8,
-            "age_group_text": "Altersgruppe 75 – 79"
-        }, {
-            "age_group": 9,
-            "age_group_text": "Altersgruppe 80 – 84"
-        }, {
-            "age_group": 10,
-            "age_group_text": "Altersgruppe 85 – 89"
-        }];
-        var edu_props = ['edu_all', 'edu_high', 'edu_small'];
-        var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
+
 
         // Create 'all propertys array' from Array
         var allVarsPropertys = [];
@@ -104,12 +148,16 @@ function main(responses) {
 
         var obj_name = '';
 
+        // Propertys from Data Model
+        // var age_props = calc.group_age_props;
+        // var edu_props = calc.group_edu_props;
+        // var mz_props = calc.group_mz_props;
+
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
-            var inner_obj = {
-                "info": {}
-            };
-            inner_obj.info = age_props[group_id];
+
+            var inner_obj = {};
+            inner_obj = calc.collect(calc.group_age_props[group_id]);
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 inner_obj.info.education = edu_prop_id;
@@ -117,7 +165,9 @@ function main(responses) {
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
                     inner_obj.info.mz = mz_prop_id;
-                    obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
+
+
+                    obj_name = 'age_' + twoDigits(age_props[group_id].age_group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
                     retrun_obj[obj_name] = inner_obj;
