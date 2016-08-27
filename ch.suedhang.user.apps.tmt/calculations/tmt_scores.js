@@ -191,12 +191,11 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             // Init:
-            var inner_obj = {};
+            var inner_obj = fullVariables;
             var obj_to_merge_age = age_props[group_id];
 
             // Add stuff:
             inner_obj.age_group_array_id = group_id;
-            inner_obj = calc.merge_obj(inner_obj, fullVariables);
             inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
 
             // inner_obj.age_group_id = obj_to_merge.age_group_id;
