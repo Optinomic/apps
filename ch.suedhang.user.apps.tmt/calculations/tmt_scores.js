@@ -740,7 +740,7 @@ function main(responses) {
 
 
     // var patient_scores = [];
-    var patient_scores = calc.getPatientScores(d);
+    var patient_scores = calc.getPatientScores(responses);
     var age_edu_obj = calc.getAgeEduObj();
     var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
     var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
@@ -753,7 +753,8 @@ function main(responses) {
     calc.age_edu_statistics = age_edu_statistics;
 
 
-    calc.full = d;
+    // Returning full (complete) responses is often used/helpful.
+    calc.full = responses;
 
 
     // Return
