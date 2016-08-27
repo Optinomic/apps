@@ -121,8 +121,8 @@ function main(responses) {
 
         // Propertys from Data Model
         var age_props = calc.group_age_props;
-        var edu_props = ['edu_all', 'edu_high', 'edu_small'];
-        var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
+        var edu_props = calc.group_edu_props;
+        var mz_props = calc.group_mz_props;
 
         // Create 'all propertys array' from Array
         var allVarsPropertys = [];
@@ -167,8 +167,8 @@ function main(responses) {
 
             //Add stuff;
             inner_obj.age_group_array_id = group_id;
-            inner_obj.age_group_id = obj_to_merge.age_group_id;
-            inner_obj.age_group_text = obj_to_merge.age_group_text;
+            inner_obj.age_group_id = 73;
+            inner_obj.age_group_text = '73';
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
