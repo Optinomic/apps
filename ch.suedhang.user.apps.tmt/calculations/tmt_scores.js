@@ -3,7 +3,7 @@ function main(responses) {
     var calc = {};
 
 
-    include(.. / lib / js / optinomic / statistics / calculation_simplestatistics.js)
+    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------
