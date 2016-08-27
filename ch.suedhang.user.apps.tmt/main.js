@@ -62,9 +62,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-
-
     // -------------------
     // TMT Init
     // -------------------
@@ -76,6 +73,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Calculate stuff
         var patient_scores = $scope.getPatientScores(d);
+        var age_edu_obj = $scope.getAgeEduObj()
         var age_edu_scores = $scope.arrangePatientScoresAgeEdu(patient_scores);
         var age_edu_statistics = $scope.setAgeEduStatistics(age_edu_scores);
 
@@ -85,6 +83,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Safe
         $scope.d.tmt = {};
         $scope.d.tmt.patient_scores = patient_scores;
+        $scope.d.tmt.age_edu_obj = age_edu_obj;
         $scope.d.tmt.age_edu_scores = age_edu_scores;
         $scope.d.tmt.age_edu_statistics = age_edu_statistics;
 
@@ -467,7 +466,106 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return age_edu_groups;
     };
 
+    $scope.getAgeEduObj = function() {
 
+        var retrun_obj = {};
+
+
+        // Propertys from Data Model
+        var age_props = [{
+            "age_group": 0,
+            "age_group_text": "Altersgruppe 18 - 24"
+        }, {
+            "age_group": 1,
+            "age_group_text": "Altersgruppe 25 – 34"
+        }, {
+            "age_group": 2,
+            "age_group_text": "Altersgruppe 35 – 44"
+        }, {
+            "age_group": 3,
+            "age_group_text": "Altersgruppe 45 – 54"
+        }, {
+            "age_group": 4,
+            "age_group_text": "Altersgruppe 55 – 59"
+        }, {
+            "age_group": 5,
+            "age_group_text": "Altersgruppe 60 – 64"
+        }, {
+            "age_group": 6,
+            "age_group_text": "Altersgruppe 65 – 69"
+        }, {
+            "age_group": 7,
+            "age_group_text": "Altersgruppe 70 – 74"
+        }, {
+            "age_group": 8,
+            "age_group_text": "Altersgruppe 75 – 79"
+        }, {
+            "age_group": 9,
+            "age_group_text": "Altersgruppe 80 – 84"
+        }, {
+            "age_group": 10,
+            "age_group_text": "Altersgruppe 85 – 89"
+        }];
+        var edu_props = ['edu_all', 'edu_high', 'edu_small'];
+        var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
+
+        // Create 'all propertys array' from Array
+        var allVarsPropertys = [];
+        var allVars = $scope.getVariables('variables');
+        for (var property in allVars) {
+            if (allVars.hasOwnProperty(property)) {
+                allVarsPropertys.push(property);
+            }
+        };
+
+        // var
+        var twoDigits = function(id) {
+            var return_text = '';
+            id = parseInt(id);
+            if (id < 10) {
+                return_text = '0' + id.toString();
+            } else {
+                return_text = id.toString();
+            };
+            return return_text;
+        };
+
+
+        // Create 'multidimensional Array in a Object.
+
+        var obj_name = '';
+        var inner_obj = {
+            "info": {},
+            "scores": {},
+            "statistics": {}
+        };
+
+        for (var group_id = 0; group_id < age_props.length; group_id++) {
+
+            inner_obj.info = age_props[group_id];
+            obj_name = 'age_' + twoDigits(group_id);
+
+            for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
+
+                inner_obj.info.education = edu_prop_id;
+                obj_name = obj_name + 'edu_' + twoDigits(edu_prop_id);
+
+
+                for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
+
+                    inner_obj.info.mz = mz_prop_id;
+                    obj_name = obj_name + 'mz_' + twoDigits(mz_prop_id);
+
+                    // Write to Object
+                    retrun_obj[obj_name] = allVars;
+                };
+            };
+        };
+
+
+        return retrun_obj;
+
+    };
 
 
     $scope.isArray = function(obj) {
@@ -646,6 +744,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         return all_scores;
     };
+
+
 
     $scope.arrangePatientScoresAgeEdu = function(patient_scores) {
 
