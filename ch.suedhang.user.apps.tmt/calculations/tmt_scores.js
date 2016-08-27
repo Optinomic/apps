@@ -167,7 +167,7 @@ function main(responses) {
 
             // Add stuff:
             inner_obj.age_group_array_id = group_id;
-            inner_obj = merge_obj(inner_obj, obj_to_merge_age);
+            inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
             // inner_obj.age_group_id = obj_to_merge.age_group_id;
             // inner_obj.age_group_text = obj_to_merge.age_group_text;
             //inner_obj.age_group_text = '73';
@@ -176,7 +176,7 @@ function main(responses) {
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
 
                 var obj_to_merge_edu = edu_props[edu_prop_id];
-                inner_obj = merge_obj(inner_obj, obj_to_merge_edu);
+                inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
 
                 inner_obj.edu_group_array_id = edu_prop_id;
 
@@ -186,7 +186,7 @@ function main(responses) {
                     // inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
 
                     var obj_to_merge_mz = mz_props[mz_prop_id];
-                    inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
+                    inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
 
                     inner_obj.mz_group_array_id = mz_prop_id;
 
