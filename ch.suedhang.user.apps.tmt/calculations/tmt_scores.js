@@ -81,6 +81,7 @@ function main(responses) {
     // ------------------------------------------
 
 
+
     calc.getVariables = function(mode) {
         // Variablen oder 'Empty'?
         mode = mode === undefined ? 'variables' : mode;
@@ -104,6 +105,20 @@ function main(responses) {
 
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(variables));
+    };
+
+
+    calc.collect = function() {
+        var ret = {};
+        var len = arguments.length;
+        for (var i = 0; i < len; i++) {
+            for (p in arguments[i]) {
+                if (arguments[i].hasOwnProperty(p)) {
+                    ret[p] = arguments[i][p];
+                }
+            }
+        }
+        return ret;
     };
 
     calc.getAgeEduObj = function() {
@@ -176,7 +191,8 @@ function main(responses) {
 
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
-            var inner_obj = {};            
+            var inner_obj = {}; 
+            inner_obj = cal.collect(age_props[group_id]);          
             inner_obj.group_id = group_id;
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
