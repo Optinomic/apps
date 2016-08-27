@@ -168,6 +168,7 @@ function main(responses) {
             // Add stuff:
             inner_obj.age_group_array_id = group_id;
             inner_obj.age_group_id = obj_to_merge.age_group_id;
+            inner_obj.age_group_text = obj_to_merge.age_group_text;
             //inner_obj.age_group_text = '73';
 
 
