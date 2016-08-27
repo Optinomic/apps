@@ -3,7 +3,7 @@ function main(responses) {
     var calc = {};
 
 
-    include(.. / lib / js / optinomic / statistics / calculation_simplestatistics.js)
+    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------
@@ -110,7 +110,7 @@ function main(responses) {
                 "info": {},
                 //"scores": {},
                 "statistics": {}
-            };
+            };            
             inner_obj.info = age_props[group_id];
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
@@ -417,6 +417,7 @@ function main(responses) {
         // Return
         return s;
     };
+
 
 
     calc.concatAllArraysInObject = function(objectFull, objectToConcat) {
@@ -738,24 +739,31 @@ function main(responses) {
     // F U N C T I O N  -  Main
     // ------------------------------------------
 
+    calc.getResults = function(d) {
+        // Calculate stuff first.
 
-    // var patient_scores = [];
-    var patient_scores = calc.getPatientScores(d);
-    var age_edu_obj = calc.getAgeEduObj();
-    var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-    var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
-
-
-    // Build & add stuff to returnObj.
-    calc.age_edu_obj = age_edu_obj;
-    calc.patient_scores = patient_scores;
-    calc.age_edu_scores = age_edu_scores;
-    calc.age_edu_statistics = age_edu_statistics;
+        // var patient_scores = [];
+        var patient_scores = calc.getPatientScores(d);
+        var age_edu_obj = calc.getAgeEduObj();
+        var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
+        var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
-    calc.full = d;
+        // Build & add stuff to returnObj.
+        var returnObj = {};
+        returnObj.age_edu_obj = age_edu_obj;
+        returnObj.patient_scores = patient_scores;
+        returnObj.age_edu_scores = age_edu_scores;
+        returnObj.age_edu_statistics = age_edu_statistics;
+
+
+        returnObj.full = d;
+
+        // Return
+        return returnObj;
+    };
 
 
     // Return
-    return calc;
+    return calc.getResults(responses);
 }
