@@ -163,22 +163,27 @@ function main(responses) {
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             // Init:
             var inner_obj = {}; 
-            var obj_to_merge = age_props[group_id];
+            var obj_to_merge_age = age_props[group_id];
 
             // Add stuff:
             inner_obj.age_group_array_id = group_id;
-            inner_obj = merge_obj(inner_obj, obj_to_merge);
+            inner_obj = merge_obj(inner_obj, obj_to_merge_age);
             // inner_obj.age_group_id = obj_to_merge.age_group_id;
             // inner_obj.age_group_text = obj_to_merge.age_group_text;
             //inner_obj.age_group_text = '73';
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
+
+                var obj_to_merge_edu = edu_props[edu_prop_id];
+                inner_obj = merge_obj(inner_obj, obj_to_merge_edu);
+
                 inner_obj.edu_group_array_id = edu_prop_id;
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
                     inner_obj.mz_group_array_id = mz_prop_id;
+
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
