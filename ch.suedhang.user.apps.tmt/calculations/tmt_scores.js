@@ -207,10 +207,11 @@ function main(responses) {
         return retrun_obj;
     };
 
-    calc.getAgeEduObj = function(age_edu_obj, patient_scores) {
+    calc.getAgeEduObjScores = function(age_edu_obj, patient_scores) {
         var returnObj = {};
 
-        //returnObj = calc.getVariables();
+        // gugus
+        returnObj = calc.getVariables();
 
         return returnObj;
     };
@@ -827,7 +828,7 @@ function main(responses) {
     // Do the needed 'calculations'
     var age_edu_obj = calc.getAgeEduObj();
     var patient_scores = calc.getPatientScores(responses);
-    var age_edu_obj_scores = calc.getAgeEduObj(age_edu_obj, patient_scores);
+    var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
     // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
     // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
