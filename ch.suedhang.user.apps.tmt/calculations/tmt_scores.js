@@ -210,7 +210,7 @@ function main(responses) {
     calc.getAgeEduObj = function(age_edu_obj, patient_scores) {
         var returnObj = {};
 
-        returnObj = calc.getVariables();
+        //returnObj = calc.getVariables();
 
         return returnObj;
     };
