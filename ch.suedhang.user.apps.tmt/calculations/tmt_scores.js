@@ -157,7 +157,8 @@ function main(responses) {
         for (var group_id = 0; group_id < age_props.length; group_id++) {
 
             var inner_obj = {};
-            inner_obj = calc.collect(calc.group_age_props[group_id]);
+            edu_group_array_id = group_id;
+            //inner_obj = calc.collect(calc.group_age_props[group_id]);
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 inner_obj.info.education = edu_prop_id;
@@ -167,7 +168,7 @@ function main(responses) {
                     inner_obj.info.mz = mz_prop_id;
 
 
-                    obj_name = 'age_' + twoDigits(age_props[group_id].age_group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
+                    obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
                     retrun_obj[obj_name] = inner_obj;
