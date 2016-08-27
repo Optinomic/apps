@@ -161,13 +161,13 @@ function main(responses) {
 
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
+            // Init:
             var inner_obj = {}; 
-
             var obj_to_merge = age_props[group_id];
 
-            //Add stuff;
+            // Add stuff:
             inner_obj.age_group_array_id = group_id;
-            inner_obj.age_group_id = 73;
+            inner_obj.age_group_id = obj_to_merge.age_group_id;
             //inner_obj.age_group_text = '73';
 
 
@@ -808,8 +808,8 @@ function main(responses) {
     // Returning | Results in returnObj.
     calc.age_edu_obj = age_edu_obj;
     calc.patient_scores = patient_scores;
-    calc.age_edu_scores = age_edu_scores;
-    calc.age_edu_statistics = age_edu_statistics;
+    // calc.age_edu_scores = age_edu_scores;
+    // calc.age_edu_statistics = age_edu_statistics;
 
 
     // Returning full (complete) responses is often used/helpful.
