@@ -743,7 +743,7 @@ function main(responses) {
 
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
-        var age_edu_obj = calc.getAgeEduObj();
+        //var age_edu_obj = calc.getAgeEduObj();
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
         var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
