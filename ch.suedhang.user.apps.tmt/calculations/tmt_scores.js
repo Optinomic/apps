@@ -186,7 +186,7 @@ function main(responses) {
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
-        var fullVariables = calc.getFullVariables();
+        // var fullVariables = calc.getFullVariables();
 
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
@@ -223,7 +223,7 @@ function main(responses) {
                     inner_obj.mz_group_array_id = mz_prop_id;
 
                     // Merge Statistics & Scores
-                    inner_obj = calc.merge_obj(inner_obj, fullVariables);
+                    //inner_obj = calc.merge_obj(inner_obj, fullVariables);
 
                     // Build ObjectName
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
