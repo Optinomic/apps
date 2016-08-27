@@ -536,35 +536,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var obj_name = '';
         var inner_obj = {
             "info": {},
-            "scores": {},
-            "statistics": {}
+            "scores": allVars,
+            "statistics": allVars
         };
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
-
             inner_obj.info = age_props[group_id];
-            obj_name = 'age_' + twoDigits(group_id);
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
-
                 inner_obj.info.education = edu_prop_id;
-                obj_name = obj_name + 'edu_' + twoDigits(edu_prop_id);
-
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
                     inner_obj.info.mz = mz_prop_id;
-                    obj_name = obj_name + 'mz_' + twoDigits(mz_prop_id);
+                    obj_name = 'age_' + twoDigits(group_id) obj_name + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
-                    retrun_obj[obj_name] = allVars;
+                    retrun_obj[obj_name] = inner_obj;
                 };
             };
         };
 
 
         return retrun_obj;
-
     };
 
 
