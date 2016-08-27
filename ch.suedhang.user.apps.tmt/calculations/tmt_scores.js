@@ -750,7 +750,7 @@ function main(responses) {
 
         // Build & add stuff to returnObj.
         var returnObj = {};
-        returnObj.age_edu_obj = age_edu_obj;
+        //returnObj.age_edu_obj = age_edu_obj;
         returnObj.patient_scores = patient_scores;
         returnObj.age_edu_scores = age_edu_scores;
         returnObj.age_edu_statistics = age_edu_statistics;
