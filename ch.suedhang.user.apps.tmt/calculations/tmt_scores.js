@@ -8,7 +8,7 @@ function main(responses) {
     // Definitions
     // ------------------------------------------
 
-    var calc.group_age_props = [{
+    calc.group_age_props = [{
         "age_group_id": 0,
         "age_group_text": "Altersgruppe 18 - 24"
     }, {
@@ -43,7 +43,7 @@ function main(responses) {
         "age_group_text": "Altersgruppe 85 – 89"
     }];
 
-    var calc.group_edu_props = [{
+    calc.group_edu_props = [{
         "edu_group_id": 0,
         "edu_high": false,
         "edu_group_text": "Ausbildung: <= 12 Jahre"
@@ -57,7 +57,7 @@ function main(responses) {
         "edu_group_text": "Ausbildung: Alle Levels"
     }];
 
-    var calc.group_mz_props = [{
+    calc.group_mz_props = [{
         "mz_group_id": 0,
         "mz_group_text": "Messzeitpunkt: Eintritt"
     }, {
