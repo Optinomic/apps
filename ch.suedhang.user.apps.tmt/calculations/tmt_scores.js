@@ -107,19 +107,13 @@ function main(responses) {
         return JSON.parse(JSON.stringify(variables));
     };
 
+    calc.merge_obj = function(obj1,obj2){
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
 
-    calc.collect = function() {
-        var ret = {};
-        var len = arguments.length;
-        for (var i = 0; i < len; i++) {
-            for (p in arguments[i]) {
-                if (arguments[i].hasOwnProperty(p)) {
-                    ret[p] = arguments[i][p];
-                }
-            }
-        }
-        return ret;
-    };
 
     calc.getAgeEduObj = function() {
 
@@ -192,7 +186,7 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             var inner_obj = {}; 
-            inner_obj = cal.collect(age_props[group_id]);          
+            inner_obj = cal.merge_obj(inner_obj, age_props[group_id]);          
             inner_obj.group_id = group_id;
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
