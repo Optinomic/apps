@@ -186,9 +186,12 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             var inner_obj = {}; 
-            inner_obj.info = age_props[group_id];
-            //inner_obj = cal.merge_obj(inner_obj, age_props[group_id]);          
-            inner_obj.group_id = group_id;
+            //inner_obj.info = age_props[group_id];
+            inner_obj.age_group_array_id = group_id;
+
+            var obj_to_merge = age_props[group_id];
+            inner_obj = cal.merge_obj(obj_to_merge, inner_obj);          
+
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 inner_obj.edu_prop_id = edu_prop_id;
