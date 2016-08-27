@@ -182,8 +182,8 @@ function main(responses) {
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
-                    var obj_to_merge_mz = mz_props[mz_prop_id];
-                    inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
+                    // var obj_to_merge_mz = mz_props[mz_prop_id];
+                    // inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
 
                     inner_obj.mz_group_array_id = mz_prop_id;
 
