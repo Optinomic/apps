@@ -121,19 +121,15 @@ function main(responses) {
 
 
         // Create 'container' for Scores & Statistics
-        var scores_obj = {};
-        var statistics_obj = {};
 
         for (var vars_id = 0; vars_id < allPropertysArray.length; vars_id++) {
             var current_prop = allPropertysArray[vars_id];
             var name_scores = 'scores_____' + current_prop;
             var name_statis = 'statistics_' + current_prop;
 
-            returnObj[name_scores] = [];
-            returnObj[name_statis] = [];
+            returnObj[name_scores] = variables;
+            returnObj[name_statis] = variables;
         };
-
-
 
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(returnObj));
@@ -190,6 +186,7 @@ function main(responses) {
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
+        var fullVariables = calc.getFullVariables();
 
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
@@ -212,6 +209,9 @@ function main(responses) {
 
                 inner_obj.edu_group_array_id = edu_prop_id;
 
+
+
+
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
                     // var obj_to_merge_mz = mz_props[mz_prop_id];
@@ -222,7 +222,11 @@ function main(responses) {
 
                     inner_obj.mz_group_array_id = mz_prop_id;
 
+                    // Merge Statistics & Scores
+                    inner_obj = calc.merge_obj(inner_obj, fullVariables);
+
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
+
 
                     // Write to Object
                     retrun_obj[obj_name] = inner_obj;
