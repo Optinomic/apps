@@ -94,17 +94,7 @@ function main(responses) {
         mode = mode === undefined ? 'variables' : mode;
 
         // Interessante Variablen
-        var variables = {
-            "TMTAError": [],
-            "TMTATime": [],
-            "TMTBError": [],
-            "TMTBTime": [],
-            "Perz_A": [],
-            "Perz_B": [],
-            "BA_Quotient": [],
-            // do not modify the below:
-            "n": 0
-        };
+        var variables = calc.variables;
 
         if (mode === 'empty') {
             variables = {};
@@ -127,8 +117,22 @@ function main(responses) {
                 allPropertysArray.push(property);
             };
         };
+        returnObj.variables_prop_array = allPropertysArray;
 
-        returnObj.prop_variables_array = allPropertysArray;
+
+        // Create 'container' for Scores & Statistics
+        var scores_obj = {};
+        var statistics_obj = {};
+
+        for (var vars_id = 0; vars_id < allPropertysArray.length; vars_id++) {
+            var current_prop = allPropertysArray[vars_id];
+            var name_scores = 'scores_____' + current_prop;
+            var name_statis = 'statistics_' + current_prop;
+
+            returnObj[name_scores] = [];
+            returnObj[name_statis] = [];
+        };
+
 
 
         // Clone Obj. and Return
