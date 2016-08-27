@@ -199,7 +199,7 @@ function main(responses) {
             inner_obj.age_group_array_id = group_id;
 
             var obj_to_merge = age_props[group_id];
-            inner_obj = merge_obj(inner_obj, obj_to_merge);          
+            //inner_obj = merge_obj(inner_obj, obj_to_merge);          
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
