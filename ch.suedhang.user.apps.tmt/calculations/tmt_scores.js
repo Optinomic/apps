@@ -3,14 +3,21 @@ function main(responses) {
     var calc = {};
 
 
-    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
-
-
-
-
     // ------------------------------------------
     // Definitions
     // ------------------------------------------
+
+    calc.variables = {
+        "TMTAError": [],
+        "TMTATime": [],
+        "TMTBError": [],
+        "TMTBTime": [],
+        "Perz_A": [],
+        "Perz_B": [],
+        "BA_Quotient": [],
+        // do not modify the below:
+        "n": 0
+    };
 
     calc.group_age_props = [{
         "age_group_id": 0,
@@ -82,32 +89,30 @@ function main(responses) {
 
 
 
-    calc.getVariables = function(mode) {
-        // Variablen oder 'Empty'?
-        mode = mode === undefined ? 'variables' : mode;
 
-        // Interessante Variablen
-        var variables = {
-            "TMTAError": [],
-            "TMTATime": [],
-            "TMTBError": [],
-            "TMTBTime": [],
-            "Perz_A": [],
-            "Perz_B": [],
-            "BA_Quotient": [],
-            // do not modify the below:
-            "n": 0
+
+    calc.getVariables = function() {
+
+        // Init: Interessante Variablen
+        var returnObj = {};
+        var variables = calc.variables;
+
+        // Create 'all propertys array'
+        var allPropertysArray = [];
+        for (var property in variables) {
+            if (variables.hasOwnProperty(property)) {
+                allPropertysArray.push(property);
+            };
         };
 
-        if (mode === 'empty') {
-            variables = {};
-        };
+        returnObj.prop_variables_array = allPropertysArray;
+
 
         // Clone Obj. and Return
-        return JSON.parse(JSON.stringify(variables));
+        return JSON.parse(JSON.stringify(returnObj));
     };
 
-    calc.merge_obj = function(obj1,obj2){
+    calc.merge_obj = function(obj1, obj2) {
         var obj3 = {};
         for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
         for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
@@ -147,14 +152,14 @@ function main(responses) {
 
 
 
-        var merge_obj = function(obj1,obj2) {
+        var merge_obj = function(obj1, obj2) {
             var obj3 = {};
             for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
             for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
             return obj3;
         };
 
- 
+
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
@@ -162,7 +167,7 @@ function main(responses) {
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             // Init:
-            var inner_obj = {}; 
+            var inner_obj = {};
             var obj_to_merge_age = age_props[group_id];
 
             // Add stuff:
@@ -200,6 +205,14 @@ function main(responses) {
 
 
         return retrun_obj;
+    };
+
+    calc.getAgeEduObj = function(age_edu_obj, patient_scores) {
+        var returnObj = {};
+
+        returnObj = calc.getVariables();
+
+        return returnObj;
     };
 
     calc.getAgeEduGroup = function(mode) {
@@ -812,8 +825,9 @@ function main(responses) {
 
 
     // Do the needed 'calculations'
-    var patient_scores = calc.getPatientScores(responses);
     var age_edu_obj = calc.getAgeEduObj();
+    var patient_scores = calc.getPatientScores(responses);
+    var age_edu_obj_scores = calc.getAgeEduObj(age_edu_obj, patient_scores);
     // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
     // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
