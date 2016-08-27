@@ -127,7 +127,7 @@ function main(responses) {
             var name_scores = 'scores_____' + current_prop;
             var name_statis = 'statistics_' + current_prop;
 
-            returnObj[name_scores] = variables.current_prop;
+            returnObj[name_scores] = variables[current_prop];
             returnObj[name_statis] = {};
         };
 
