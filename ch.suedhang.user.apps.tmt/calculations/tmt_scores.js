@@ -167,7 +167,7 @@ function main(responses) {
 
             //Add stuff;
             inner_obj.age_group_array_id = group_id;
-            //inner_obj.age_group_id = 73;
+            inner_obj.age_group_id = 73;
             //inner_obj.age_group_text = '73';
 
 
