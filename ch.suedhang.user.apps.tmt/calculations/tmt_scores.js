@@ -6,6 +6,76 @@ function main(responses) {
     include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
+
+
+    // ------------------------------------------
+    // Definitions
+    // ------------------------------------------
+
+    calc.group_age_props = [{
+        "age_group_id": 0,
+        "age_group_text": "Altersgruppe 18 - 24"
+    }, {
+        "age_group_id": 1,
+        "age_group_text": "Altersgruppe 25 – 34"
+    }, {
+        "age_group_id": 2,
+        "age_group_text": "Altersgruppe 35 – 44"
+    }, {
+        "age_group_id": 3,
+        "age_group_text": "Altersgruppe 45 – 54"
+    }, {
+        "age_group_id": 4,
+        "age_group_text": "Altersgruppe 55 – 59"
+    }, {
+        "age_group_id": 5,
+        "age_group_text": "Altersgruppe 60 – 64"
+    }, {
+        "age_group_id": 6,
+        "age_group_text": "Altersgruppe 65 – 69"
+    }, {
+        "age_group_id": 7,
+        "age_group_text": "Altersgruppe 70 – 74"
+    }, {
+        "age_group_id": 8,
+        "age_group_text": "Altersgruppe 75 – 79"
+    }, {
+        "age_group_id": 9,
+        "age_group_text": "Altersgruppe 80 – 84"
+    }, {
+        "age_group_id": 10,
+        "age_group_text": "Altersgruppe 85 – 89"
+    }];
+
+    calc.group_edu_props = [{
+        "edu_group_id": 0,
+        "edu_high": false,
+        "edu_group_text": "Ausbildung: <= 12 Jahre"
+    }, {
+        "edu_group_id": 1,
+        "edu_high": true,
+        "edu_group_text": "Ausbildung: > 12 Jahre"
+    }, {
+        "edu_group_id": 99,
+        "edu_high": null,
+        "edu_group_text": "Ausbildung: Alle Levels"
+    }];
+
+    calc.group_mz_props = [{
+        "mz_group_id": 0,
+        "mz_group_text": "Messzeitpunkt: Eintritt"
+    }, {
+        "mz_group_id": 1,
+        "mz_group_text": "Messzeitpunkt: Austritt"
+    }, {
+        "mz_group_id": 3,
+        "mz_group_text": "Messzeitpunkt: Anderer"
+    }, {
+        "mz_group_id": 99,
+        "mz_group_text": "All Messzeitpunkte"
+    }];
+
+
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
@@ -739,31 +809,25 @@ function main(responses) {
     // F U N C T I O N  -  Main
     // ------------------------------------------
 
-    calc.getResults = function(d) {
-        // Calculate stuff first.
 
-        // var patient_scores = [];
-        var patient_scores = calc.getPatientScores(d);
-        var age_edu_obj = calc.getAgeEduObj();
-        var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-        var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
+    // Do the needed 'calculations'
+    var patient_scores = calc.getPatientScores(responses);
+    var age_edu_obj = calc.getAgeEduObj();
+    var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
+    var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
-        // Build & add stuff to returnObj.
-        var returnObj = {};
-        returnObj.age_edu_obj = age_edu_obj;
-        returnObj.patient_scores = patient_scores;
-        returnObj.age_edu_scores = age_edu_scores;
-        returnObj.age_edu_statistics = age_edu_statistics;
+    // Returning | Results in returnObj.
+    calc.age_edu_obj = age_edu_obj;
+    calc.patient_scores = patient_scores;
+    calc.age_edu_scores = age_edu_scores;
+    calc.age_edu_statistics = age_edu_statistics;
 
 
-        returnObj.full = d;
-
-        // Return
-        return returnObj;
-    };
+    // Returning full (complete) responses is often used/helpful.
+    calc.full = responses;
 
 
     // Return
-    return calc.getResults(responses);
+    return calc;
 }
