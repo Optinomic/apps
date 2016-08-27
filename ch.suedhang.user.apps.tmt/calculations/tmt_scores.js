@@ -121,7 +121,7 @@ function main(responses) {
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
-                    retrun_obj[obj_name] = inner_obj;
+                    retrun_obj[obj_name] = {};
                 };
             };
         };
@@ -743,14 +743,14 @@ function main(responses) {
 
         // var patient_scores = [];
         var patient_scores = calc.getPatientScores(d);
-        //var age_edu_obj = calc.getAgeEduObj();
+        var age_edu_obj = calc.getAgeEduObj();
         var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
         var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
         // Build & add stuff to returnObj.
         var returnObj = {};
-        //returnObj.age_edu_obj = age_edu_obj;
+        returnObj.age_edu_obj = age_edu_obj;
         returnObj.patient_scores = patient_scores;
         returnObj.age_edu_scores = age_edu_scores;
         returnObj.age_edu_statistics = age_edu_statistics;
