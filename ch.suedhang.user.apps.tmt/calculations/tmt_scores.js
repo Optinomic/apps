@@ -185,6 +185,9 @@ function main(responses) {
                     // var obj_to_merge_mz = mz_props[mz_prop_id];
                     // inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
 
+                    var obj_to_merge_mz = mz_props[mz_prop_id];
+                    inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
+
                     inner_obj.mz_group_array_id = mz_prop_id;
 
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
@@ -823,7 +826,7 @@ function main(responses) {
 
 
     // Returning full (complete) responses is often used/helpful.
-    calc.full = responses;
+    // calc.full = responses;
 
 
     // Return
