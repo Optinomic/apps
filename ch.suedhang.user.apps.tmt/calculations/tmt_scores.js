@@ -234,8 +234,8 @@ function main(responses) {
     calc.getAgeEduObjScores = function(age_edu_obj, patient_scores) {
         var returnObj = {};
 
-        // gugus
-        // returnObj = calc.getVariables();
+        // SUGUS - Bookmark
+        returnObj = calc.getFullVariables();
 
         return returnObj;
     };
