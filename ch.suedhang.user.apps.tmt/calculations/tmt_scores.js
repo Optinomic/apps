@@ -120,40 +120,7 @@ function main(responses) {
         var retrun_obj = {};
 
         // Propertys from Data Model
-        var age_props = [{
-            "age_group": 0,
-            "age_group_text": "Altersgruppe 18 - 24"
-        }, {
-            "age_group": 1,
-            "age_group_text": "Altersgruppe 25 – 34"
-        }, {
-            "age_group": 2,
-            "age_group_text": "Altersgruppe 35 – 44"
-        }, {
-            "age_group": 3,
-            "age_group_text": "Altersgruppe 45 – 54"
-        }, {
-            "age_group": 4,
-            "age_group_text": "Altersgruppe 55 – 59"
-        }, {
-            "age_group": 5,
-            "age_group_text": "Altersgruppe 60 – 64"
-        }, {
-            "age_group": 6,
-            "age_group_text": "Altersgruppe 65 – 69"
-        }, {
-            "age_group": 7,
-            "age_group_text": "Altersgruppe 70 – 74"
-        }, {
-            "age_group": 8,
-            "age_group_text": "Altersgruppe 75 – 79"
-        }, {
-            "age_group": 9,
-            "age_group_text": "Altersgruppe 80 – 84"
-        }, {
-            "age_group": 10,
-            "age_group_text": "Altersgruppe 85 – 89"
-        }];
+        var age_props = calc.group_age_props;
         var edu_props = ['edu_all', 'edu_high', 'edu_small'];
         var mz_props = ['mz_eintritt', 'mz_austritt', 'mz_anderer', 'mz_alle'];
 
@@ -197,17 +164,18 @@ function main(responses) {
             var inner_obj = {}; 
             //inner_obj.info = age_props[group_id];
             inner_obj.age_group_array_id = group_id;
+            inner_obj.age_group_id = 73;
 
             var obj_to_merge = age_props[group_id];
             //inner_obj = merge_obj(inner_obj, obj_to_merge);          
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
-                inner_obj.edu_prop_id = edu_prop_id;
+                inner_obj.edu_group_array_id = edu_prop_id;
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
-                    inner_obj.mz_prop_id = mz_prop_id;
+                    inner_obj.edu_group_array_id = mz_prop_id;
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
