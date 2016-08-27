@@ -549,7 +549,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
 
                     inner_obj.info.mz = mz_prop_id;
-                    obj_name = 'age_' + twoDigits(group_id) obj_name + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
+                    obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
                     retrun_obj[obj_name] = inner_obj;
