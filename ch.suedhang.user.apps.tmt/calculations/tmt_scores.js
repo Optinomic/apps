@@ -120,7 +120,10 @@ function main(responses) {
 
         var retrun_obj = {};
 
-
+        // Propertys from Data Model
+        var age_props = calc.group_age_props;
+        var edu_props = calc.group_edu_props;
+        var mz_props = calc.group_mz_props;
 
         // Create 'all propertys array' from Array
         var allVarsPropertys = [];
@@ -148,26 +151,17 @@ function main(responses) {
 
         var obj_name = '';
 
-        // Propertys from Data Model
-        // var age_props = calc.group_age_props;
-        // var edu_props = calc.group_edu_props;
-        // var mz_props = calc.group_mz_props;
 
-
-        for (var group_id = 0; group_id < calc.group_age_props.length; group_id++) {
-
-            var inner_obj = {};
+        for (var group_id = 0; group_id < age_props.length; group_id++) {
+            var inner_obj = {};            
             inner_obj.age_group_array_id = group_id;
-            //inner_obj = calc.collect(calc.group_age_props[group_id]);
 
-            for (var edu_prop_id = 0; edu_prop_id < calc.group_edu_props.length; edu_prop_id++) {
-
+            for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 inner_obj.edu_group_array_id = edu_prop_id;
 
-                for (var mz_prop_id = 0; mz_prop_id < calc.group_mz_props.length; mz_prop_id++) {
-
+                for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     inner_obj.mz_group_array_id = mz_prop_id;
-                    
+
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
