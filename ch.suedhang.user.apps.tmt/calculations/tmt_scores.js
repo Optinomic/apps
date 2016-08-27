@@ -104,9 +104,7 @@ function main(responses) {
 
         var obj_name = '';
         var inner_obj = {
-            "info": {},
-            "scores": allVars,
-            "statistics": allVars
+            "info": {}
         };
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
@@ -121,7 +119,7 @@ function main(responses) {
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
 
                     // Write to Object
-                    retrun_obj[obj_name] = {};
+                    retrun_obj[obj_name] = inner_obj;
                 };
             };
         };
