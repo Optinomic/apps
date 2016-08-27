@@ -179,6 +179,15 @@ function main(responses) {
         };
 
 
+
+        var merge_obj = function(obj1,obj2) {
+            var obj3 = {};
+            for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+            for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+            return obj3;
+        };
+
+ 
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
@@ -190,7 +199,7 @@ function main(responses) {
             inner_obj.age_group_array_id = group_id;
 
             var obj_to_merge = age_props[group_id];
-            inner_obj = cal.merge_obj(obj_to_merge, inner_obj);          
+            inner_obj = merge_obj(inner_obj, obj_to_merge);          
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
