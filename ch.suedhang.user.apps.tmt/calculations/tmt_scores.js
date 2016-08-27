@@ -167,8 +167,8 @@ function main(responses) {
 
             //Add stuff;
             inner_obj.age_group_array_id = group_id;
-            inner_obj.age_group_id = 73;
-            inner_obj.age_group_text = '73';
+            //inner_obj.age_group_id = 73;
+            //inner_obj.age_group_text = '73';
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
