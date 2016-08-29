@@ -265,10 +265,10 @@ function main(responses) {
         for (var patient_score_id = 0; patient_score_id < patient_scores.length; patient_score_id++) {
             var current_patient_score = patient_scores[patient_score_id];
 
-            // var age_group = current_patient_score.patient_details.age_edu_group.altersgruppe;
+            var age_group = current_patient_score.patient_details.age_edu_group.altersgruppe;
             // var age_group_name = twoDigits(age_group);
             // 
-            // var edu_group = current_patient_score.patient_details.age_edu_group.education;
+            var edu_group = current_patient_score.patient_details.age_edu_group.education;
             // var edu_group_name = twoDigits(edu_group);
             // 
             // 
@@ -286,7 +286,6 @@ function main(responses) {
             // 
             //     // returnObj[age_edu_obj_name].n = 73;
             // };
-
 
         };
 
