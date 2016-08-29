@@ -134,7 +134,6 @@ function main(responses) {
         return obj3;
     }
 
-
     calc.getAgeEduObj = function() {
 
         var retrun_obj = {};
@@ -243,10 +242,14 @@ function main(responses) {
 
 
     calc.getAgeEduObjScores = function(age_edu_obj, patient_scores) {
-        var returnObj = {};
+        var returnObj = age_edu_obj;
+
+
+        // Test Write
+        returnObj.age_00_edu_00_mz_00.patients.push(73);
+        returnObj.age_00_edu_00_mz_00.scores.BA_Quotient.push(73);
 
         // SUGUS - Bookmark
-        returnObj = calc.getFullVariables();
 
         return returnObj;
     };
@@ -853,16 +856,16 @@ function main(responses) {
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
         var patient_scores = calc.getPatientScores(d);
-        // var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
+        var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
         // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
         // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
         // Returning | Results in Obj.
         results.groups_definitions = groups_definitions;
-        results.age_edu_obj = age_edu_mz_obj;
+        //results.age_edu_obj = age_edu_mz_obj;
         results.patient_scores = patient_scores;
-        // results.age_edu_obj_scores = age_edu_obj_scores;
+        results.age_edu_obj_scores = age_edu_obj_scores;
         // results.age_edu_scores = age_edu_scores;
         // results.age_edu_statistics = age_edu_statistics;
 
