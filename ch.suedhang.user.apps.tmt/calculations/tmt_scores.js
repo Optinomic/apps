@@ -56,15 +56,12 @@ function main(responses) {
 
     calc.group_edu_props = [{
         "edu_group_id": 0,
-        "edu_high": false,
         "edu_group_text": "Ausbildung: <= 12 Jahre"
     }, {
         "edu_group_id": 1,
-        "edu_high": true,
         "edu_group_text": "Ausbildung: > 12 Jahre"
     }, {
         "edu_group_id": 99,
-        "edu_high": null,
         "edu_group_text": "Ausbildung: Alle Levels"
     }];
 
@@ -187,8 +184,15 @@ function main(responses) {
             var inner_obj = {};
             var obj_to_merge_age = age_props[group_id];
             var name_age = obj_to_merge_age.age_group_id;
-            inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
-            inner_obj.age_group_array_id = group_id;
+
+            var age_group_array = [];
+            age_group_array.push(obj_to_merge_age.age_group_id);
+            age_group_array.push(obj_to_merge_age.age_group_text);
+            age_group_array.push(group_id);
+            inner_obj.age_group = age_group_array;
+
+            //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
+            //inner_obj.age_group_array_id = group_id;
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
                 // Init & Add stuff:
