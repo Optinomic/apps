@@ -283,12 +283,13 @@ function main(responses) {
                 var mz_group_name = twoDigits(mz_group);
 
                 // Build Obj - Name
-                age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name + 'mz_' + mz_group_name;
+                age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
 
                 var ziel_obj = returnObj[age_edu_obj_name];
 
-                returnObj.age_00_edu_00_mz_00 = {};
-                returnObj.age_00_edu_00_mz_00.age_edu_obj_name = age_edu_obj_name;
+                // returnObj.age_00_edu_00_mz_00 = {};
+                // returnObj.age_00_edu_00_mz_00.age_edu_obj_name = age_edu_obj_name;
+                ziel_obj.n = 'age_edu_obj_name';
 
             };
 
