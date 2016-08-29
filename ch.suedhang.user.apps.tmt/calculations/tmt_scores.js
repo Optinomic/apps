@@ -339,6 +339,15 @@ function main(responses) {
             // Do we have Data?
             if (update_n > 0) {
 
+                var vars_array = calc.getPropertyArrayFromOject(current_age_edu_mz.scores);
+
+                for (var vars_id = 0; vars_id < vars_array.length; vars_id++) {
+                    var current_var_name = vars_array[vars_id];
+
+                    current_age_edu_mz.statistics[current_var_name] = 73;
+
+                };
+
                 // Mark as 'Calculated'
                 current_age_edu_mz.statistics.calculated = true;
             };
