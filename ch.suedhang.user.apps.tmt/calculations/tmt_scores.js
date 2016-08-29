@@ -66,10 +66,10 @@ function main(responses) {
     }];
 
     calc.group_mz_props = [{
-        "mz_group_id": 0,
+        "mz_group_id": 1,
         "mz_group_text": "Messzeitpunkt: Eintritt"
     }, {
-        "mz_group_id": 1,
+        "mz_group_id": 2,
         "mz_group_text": "Messzeitpunkt: Austritt"
     }, {
         "mz_group_id": 3,
@@ -243,11 +243,51 @@ function main(responses) {
 
     calc.getAgeEduObjScores = function(age_edu_mz_obj, patient_scores) {
         var returnObj = age_edu_mz_obj;
+        var age_edu_obj_name = '';
 
 
-        // Test Write
-        returnObj.age_00_edu_00_mz_00.patients.push(73);
-        returnObj.age_00_edu_00_mz_00.scores.BA_Quotient.push(73);
+        var twoDigits = function(id) {
+            var return_text = '';
+            id = parseInt(id);
+            if (id < 10) {
+                return_text = '0' + id.toString();
+            } else {
+                return_text = id.toString();
+            };
+            return return_text;
+        };
+
+
+        // Test Write:  Works
+        // returnObj.age_00_edu_00_mz_00.patients.push(73);
+        // returnObj.age_00_edu_00_mz_00.scores.BA_Quotient.push(73);
+
+        for (var patient_score_id = 0; patient_score_id < patient_scores.length; patient_score_id++) {
+            var current_patient_score = patient_scores[patient_score_id];
+
+            var age_group = current_patient_score.patient_details.age_edu_group.altersgruppe;
+            var age_group_name = twoDigits(age_group);
+
+            var edu_group = current_patient_score.patient_details.age_edu_group.education;
+            var edu_group_name = twoDigits(edu_group);
+
+
+            // Loop alle Messzeitpunkte
+            for (var mz_array_id = 0; mz_array_id < calc.group_mz_props.length; mz_array_id++) {
+                var current_mz = calc.group_mz_props[mz_array_id];
+
+                var mz_group = current_mz.mz_group_id;
+                var mz_group_name = twoDigits(mz_group);
+
+                // Build Obj - Name
+                age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name + 'mz_' + mz_group_name;
+
+                returnObj[age_edu_obj_name].n = 73;
+            };
+
+
+
+        };
 
         // SUGUS - Bookmark
 
