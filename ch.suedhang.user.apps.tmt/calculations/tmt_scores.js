@@ -335,6 +335,13 @@ function main(responses) {
             var update_n = current_age_edu_mz.scores.BA_Quotient.length;
             current_age_edu_mz.n = update_n;
             current_age_edu_mz.scores.n = update_n;
+
+            // Do we have Data?
+            if (update_n > 0) {
+
+                // Mark as 'Calculated'
+                current_age_edu_mz.statistics.calculated = true;
+            };
         };
 
 
