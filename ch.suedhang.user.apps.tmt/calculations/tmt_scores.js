@@ -849,32 +849,42 @@ function main(responses) {
         return age_edu_groups;
     };
 
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
+    calc.getResults = function(d) {
+
+        var results = {};
+
+        // Do the needed 'calculations'
+        var age_edu_obj = calc.getAgeEduObj();
+        // var patient_scores = calc.getPatientScores(d);
+        // var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
+        // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
+        // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
+
+
+        // Returning | Results in returnObj.
+        results.age_edu_obj = age_edu_obj;
+        // results.patient_scores = patient_scores;
+        // results.age_edu_obj_scores = age_edu_obj_scores;
+        // results.age_edu_scores = age_edu_scores;
+        // results.age_edu_statistics = age_edu_statistics;
+
+
+        // Returning full (complete) responses is often used/helpful.
+        // calc.full = responses;
+
+        return results;
+    };
 
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
 
 
-    // Do the needed 'calculations'
-    var age_edu_obj = calc.getAgeEduObj();
-    var patient_scores = calc.getPatientScores(responses);
-    var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
-    // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-    // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
-
-
-    // Returning | Results in returnObj.
-    calc.age_edu_obj = age_edu_obj;
-    calc.patient_scores = patient_scores;
-    calc.age_edu_obj_scores = age_edu_obj_scores;
-    // calc.age_edu_scores = age_edu_scores;
-    // calc.age_edu_statistics = age_edu_statistics;
-
-
-    // Returning full (complete) responses is often used/helpful.
-    // calc.full = responses;
 
 
     // Return
-    return calc;
+    return calc.getResults(responses);
 }
