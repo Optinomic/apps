@@ -212,8 +212,8 @@ function main(responses) {
                     var name_mz = obj_to_merge_mz.mz_group_id;
 
                     var mz_group_array = [];
-                    mz_group_array.push(obj_to_merge_edu.edu_group_id);
-                    mz_group_array.push(obj_to_merge_edu.edu_group_text);
+                    mz_group_array.push(obj_to_merge_mz.mz_group_id);
+                    mz_group_array.push(obj_to_merge_mz.mz_group_text);
                     mz_group_array.push(mz_prop_id);
                     inner_obj.mz_group = mz_group_array;
 
@@ -1172,7 +1172,7 @@ function main(responses) {
         // results.age_edu_obj = age_edu_mz_obj;
         results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
-        results.age_edu_obj_statistics = age_edu_obj_statistics;
+        results.age_edu_mz_obj = age_edu_obj_statistics;
 
 
         // Return Useful Definitions
