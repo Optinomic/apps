@@ -10,18 +10,17 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <div ng-repeat="age_edu_mz_group_name in d.calculations.definitions.age_edu_mz_obj_prop_array">
             <md-card-content layout-margin ng-init="current_age_edu_mz = d.calculations.age_edu_mz_obj[age_edu_mz_group_name]">
-                <p>&nbsp;</p>
+                <p ng-init="toggle[age_edu_mz_group_name] = false">&nbsp;</p>
                 <div layout="row" layout-align="space-between end">
                     <div flex>
-                        <p class="md-title">{{current_age_edu_mz.age_group[1]}}</p>
+                        <p class="md-title">{{current_age_edu_mz.age_group[1]}} <small style="color:#3F51B5;">(n={{current_age_edu_mz.n}})</small></p>
                         <p class="md-caption" style="color:#3F51B5;">{{current_age_edu_mz.edu_group[1]}} | {{current_age_edu_mz.mz_group[1]}}</p>
                     </div>
-                    <h3 class="md-display-1">n={{current_age_edu_mz.n}}</h3>
+                    <div ng-if="current_age_edu_mz.statistics.calculated">
+                        <md-button class="md-primary" ng-if="!toggle[age_edu_mz_group_name]" ng-click="toggle[age_edu_mz_group_name] = true">Anzeigen</md-button>
+                    </div>
                 </div>
                 <div ng-if="current_age_edu_mz.statistics.calculated">
-                    <div ng-init="toggle[age_edu_mz_group_name] = false">
-                        <md-button ng-click="toggle[age_edu_mz_group_name] = true">Anzeigen</md-button>
-                    </div>
                     <div ng-if="toggle[age_edu_mz_group_name]">
                         <div layout="row" layout-align="space-between end">
                             <h3 class="md-subhead">Scores</h3>
