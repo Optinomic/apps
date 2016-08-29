@@ -258,6 +258,14 @@ function main(responses) {
         };
 
 
+        var wait = function(ms) {
+            var start = new Date().getTime();
+            var end = start;
+            while (end < start + ms) {
+                end = new Date().getTime();
+            }
+        };
+
         // Test Write:  Works
         // returnObj.age_00_edu_00_mz_00.patients.push(73);
         // returnObj.age_00_edu_00_mz_00.scores.BA_Quotient.push(73);
@@ -275,7 +283,6 @@ function main(responses) {
 
             // Loop alle Messzeitpunkte
             var mz = calc.group_mz_props;
-            var did_it_once = false;
 
             for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
                 var current_mz = mz[mz_array_id];
@@ -291,19 +298,14 @@ function main(responses) {
                 var ziel_obj = returnObj[age_edu_obj_name];
                 var pid = current_patient_score.pid;
 
+                wait(2000);
+
                 // N aufzählen von Ziel.
                 ziel_obj.n = quell_obj.n;
-
                 ziel_obj.scores = quell_obj;
 
-                // Nur einmal ausführen:
-                if (did_it_once === false) {
-
-                    // Patients setzen
-                    ziel_obj.patients.push(pid);
-
-                    did_it_once = true;
-                };
+                // Patients setzen
+                ziel_obj.patients.push(pid);
             };
 
         };
