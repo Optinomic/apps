@@ -19,12 +19,26 @@ include(../lib/html/optinomic/page/start.m4)
                     <h3 class="md-display-1">n={{current_age_edu_mz.n}}</h3>
                 </div>
                 <div ng-if="current_age_edu_mz.statistics.calculated">
-                    <h3 class="md-subhead">Scores</h3>
-                    <pre>{{current_age_edu_mz.scores | json}}</pre>
-                    <h3 class="md-subhead">Patients</h3>
-                    <pre>{{current_age_edu_mz.patients | json}}</pre>
-                    <h3 class="md-subhead">Statistics</h3>
-                    <pre>{{current_age_edu_mz.statistics | json}}</pre>
+                    <div ng-init="toggle[age_edu_mz_group_name] = false">
+                        <md-button ng-click="toggle[age_edu_mz_group_name] = true">Anzeigen</md-button>
+                    </div>
+                    <div ng-if="toggle[age_edu_mz_group_name]">
+                        <div layout="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Scores</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.scores | json}}</pre>
+                        <div layout="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Patients</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.patients | json}}</pre>
+                        <div layout="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Statistics</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.statistics | json}}</pre>
+                    </div>
                 </div>
             </md-card-content>
             <md-divider></md-divider>
