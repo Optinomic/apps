@@ -790,6 +790,7 @@ function main(responses) {
                 scores.mz_99_vars.Perz_A.push(Perz_A);
                 scores.mz_99_vars.Perz_B.push(Perz_B);
                 scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
+                scores.mz_99_vars.n = scores.mz_99_vars.BA_Quotient.length;
 
 
                 if (messzeitpunkt === 1) {
@@ -801,6 +802,7 @@ function main(responses) {
                     scores.mz_01_vars.Perz_A.push(Perz_A);
                     scores.mz_01_vars.Perz_B.push(Perz_B);
                     scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_01_vars.n = scores.mz_01_vars.BA_Quotient.length;
                 };
 
 
@@ -813,6 +815,7 @@ function main(responses) {
                     scores.mz_02_vars.Perz_A.push(Perz_A);
                     scores.mz_02_vars.Perz_B.push(Perz_B);
                     scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_02_vars.n = scores.mz_02_vars.BA_Quotient.length;
                 };
 
 
@@ -825,9 +828,9 @@ function main(responses) {
                     scores.mz_03_vars.Perz_A.push(Perz_A);
                     scores.mz_03_vars.Perz_B.push(Perz_B);
                     scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_03_vars.n = scores.mz_03_vars.BA_Quotient.length;
+
                 };
-
-
             };
 
             // Push only if Data available
