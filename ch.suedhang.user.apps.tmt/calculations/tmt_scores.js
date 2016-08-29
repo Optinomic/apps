@@ -271,21 +271,22 @@ function main(responses) {
             var edu_group = current_patient_score.patient_details.age_edu_group.education;
             var edu_group_name = twoDigits(edu_group);
 
-            age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name;
             //returnObj.age_00_edu_00_mz_00.patients.push(age_edu_obj_name);
 
             // Loop alle Messzeitpunkte
-            // for (var mz_array_id = 0; mz_array_id < calc.group_mz_props.length; mz_array_id++) {
-            //     var current_mz = calc.group_mz_props[mz_array_id];
-            // 
-            //     var mz_group = current_mz.mz_group_id;
-            //     var mz_group_name = twoDigits(mz_group);
-            // 
-            //     // Build Obj - Name
-            //     age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name + 'mz_' + mz_group_name;
-            // 
-            //     // returnObj[age_edu_obj_name].n = 73;
-            // };
+            var mz = calc.group_mz_props;
+
+            for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
+                var current_mz = mz[mz_array_id];
+
+                var mz_group = current_mz.mz_group_id;
+                var mz_group_name = twoDigits(mz_group);
+
+                // Build Obj - Name
+                age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name + 'mz_' + mz_group_name;
+
+                // returnObj[age_edu_obj_name].n = 73;
+            };
 
         };
 
