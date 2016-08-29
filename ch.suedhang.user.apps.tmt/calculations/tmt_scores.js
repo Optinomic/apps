@@ -345,10 +345,13 @@ function main(responses) {
                     var current_var_name = vars_array[vars_id];
 
                     var current_score = current_age_edu_mz.scores[current_var_name];
-                    //var current_statisics = current_age_edu_mz.scores[current_var_name];
 
-                    current_age_edu_mz.statistics[current_var_name] = calc.getStatistics(current_score);
-
+                    // Run Statistics;
+                    if (calc.isArray(current_score)) {
+                        current_age_edu_mz.statistics[current_var_name] = calc.getStatistics(current_score);
+                    } else {
+                        current_age_edu_mz.statistics[current_var_name] = current_score;
+                    };
                 };
 
                 // Mark as 'Calculated'
