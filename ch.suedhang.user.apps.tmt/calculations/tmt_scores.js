@@ -294,6 +294,8 @@ function main(responses) {
                 // N aufzählen von Ziel.
                 ziel_obj.n = quell_obj.n;
 
+                ziel_obj.scores = quell_obj;
+
                 // Nur einmal ausführen:
                 if (did_it_once === false) {
 
