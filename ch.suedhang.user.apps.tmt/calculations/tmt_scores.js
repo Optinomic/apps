@@ -279,31 +279,40 @@ function main(responses) {
 
             //returnObj.age_00_edu_00_mz_00.patients.push(age_edu_obj_name);
 
+
+            var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_01';
+            var quell_obj = current_patient_score.mz_01_vars;
+            var ziel_obj = returnObj[age_edu_obj_name];
+
+            ziel_obj.n = age_edu_obj_name;
+            ziel_obj.scores = quell_obj;
+
+
             // Loop alle Messzeitpunkte
-            var mz = calc.group_mz_props;
+            // var mz = calc.group_mz_props;
 
-            for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
-                var current_mz = mz[mz_array_id];
-                var mz_group_name = twoDigits(current_mz.mz_group_id);
-
-                // Build Obj - Names
-                var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
-                var mz_vars_name = 'mz_' + mz_group_name + '_vars';
-
-                // Get Vars to operate
-                var ziel_obj = returnObj[age_edu_obj_name];
-                var quell_obj = current_patient_score[mz_vars_name];
-
-                //wait(250);
-
-                // N aufzählen von Ziel.
-                ziel_obj.n = age_edu_obj_name;
-                ziel_obj.scores = quell_obj;
-
-                // Patients setzen
-                var pid = current_patient_score.pid;
-                ziel_obj.patients.push(pid);
-            };
+            //   for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
+            //       var current_mz = mz[mz_array_id];
+            //       var mz_group_name = twoDigits(current_mz.mz_group_id);
+            //   
+            //       // Build Obj - Names
+            //       var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
+            //       var mz_vars_name = 'mz_' + mz_group_name + '_vars';
+            //   
+            //       // Get Vars to operate
+            //       var ziel_obj = returnObj[age_edu_obj_name];
+            //       var quell_obj = current_patient_score[mz_vars_name];
+            //   
+            //       //wait(250);
+            //   
+            //       // N aufzählen von Ziel.
+            //       ziel_obj.n = age_edu_obj_name;
+            //       ziel_obj.scores = quell_obj;
+            //   
+            //       // Patients setzen
+            //       var pid = current_patient_score.pid;
+            //       ziel_obj.patients.push(pid);
+            //   };
 
         };
 
