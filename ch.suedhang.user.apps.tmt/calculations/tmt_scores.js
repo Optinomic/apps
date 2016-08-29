@@ -291,15 +291,11 @@ function main(responses) {
                 var ziel_obj = returnObj[age_edu_obj_name];
                 var pid = current_patient_score.pid;
 
+                // N aufzählen von Ziel.
+                ziel_obj.n = quell_obj.n;
+
                 // Nur einmal ausführen:
                 if (did_it_once === false) {
-
-                    // N aufzählen von Ziel.
-                    if (ziel_obj.n === null) {
-                        ziel_obj.n = quell_obj.n;
-                    } else {
-                        ziel_obj.n = ziel_obj.n + quell_obj.n;
-                    };
 
                     // Patients setzen
                     ziel_obj.patients.push(pid);
