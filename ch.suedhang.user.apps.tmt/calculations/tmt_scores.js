@@ -327,8 +327,17 @@ function main(responses) {
 
         var returnObj = age_edu_obj_scores;
 
+        for (var prop_id = 0; prop_id < age_edu_mz_obj_prop_array.length; prop_id++) {
+            var current_age_edu_mz_name = age_edu_mz_obj_prop_array[prop_id];
+            var current_age_edu_mz = age_edu_obj_scores[current_age_edu_mz_name];
+
+            current_age_edu_mz.n = 73;
+        };
+
 
         return returnObj;
+
+        // Hallo
 
     };
 
