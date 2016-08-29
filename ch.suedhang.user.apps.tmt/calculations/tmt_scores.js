@@ -287,7 +287,7 @@ function main(responses) {
 
                 var ziel_obj = returnObj[age_edu_obj_name];
 
-                returnObj.age_00_edu_00_mz_00.n = age_edu_obj_name;
+                returnObj.age_00_edu_00_mz_00 = age_edu_obj_name;
 
             };
 
