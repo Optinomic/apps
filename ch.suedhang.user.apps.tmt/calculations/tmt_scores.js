@@ -305,7 +305,12 @@ function main(responses) {
 
                     // Patients setzen
                     var pid = current_patient_score.pid;
-                    ziel_obj.patients.push(pid);
+
+                    // Für jede Messung dieses Patienten - PID ablegen.
+                    for (var anz_pid = 0; anz_pid < quell_obj.n; anz_pid++) {
+                        ziel_obj.patients.push(pid);
+                    };
+
                 };
             };
 
