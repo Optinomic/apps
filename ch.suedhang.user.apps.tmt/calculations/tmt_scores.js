@@ -263,14 +263,6 @@ function main(responses) {
             return return_text;
         };
 
-        var wait = function(ms) {
-            var start = new Date().getTime();
-            var end = start;
-            while (end < start + ms) {
-                end = new Date().getTime();
-            }
-        };
-
         // Test Write:  Works
         // returnObj.age_00_edu_00_mz_00.patients.push(73);
         // returnObj.age_00_edu_00_mz_00.scores.BA_Quotient.push(73);
@@ -284,34 +276,37 @@ function main(responses) {
             var edu_group = current_patient_score.patient_details.age_edu_group.education;
             var edu_group_name = twoDigits(edu_group);
 
-            //returnObj.age_00_edu_00_mz_00.patients.push(age_edu_obj_name);
+            var edu_relevant_groups = [];
+            edu_relevant_groups.push(edu_group_name);
+            edu_relevant_groups.push('99');
+
+            for (var edu_relevant_group_id = 0; edu_relevant_group_id < edu_relevant_groups.length; edu_relevant_group_id++) {
+                edu_group_name = edu_relevant_groups[edu_relevant_group_id];
+
+                // Loop alle Messzeitpunkte
+                var mz = calc.group_mz_props;
+
+                for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
+                    var current_mz = mz[mz_array_id];
+                    var mz_group_name = twoDigits(current_mz.mz_group_id);
+
+                    // Build Obj - Names
+                    var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
+                    var mz_vars_name = 'mz_' + mz_group_name + '_vars';
+
+                    // Get Vars to operate
+                    var ziel_obj = returnObj[age_edu_obj_name];
+                    var quell_obj = current_patient_score[mz_vars_name];
 
 
+                    // N aufzählen von Ziel.
+                    ziel_obj.n = quell_obj.n;
+                    ziel_obj.scores = calc.concatAllArraysInObject(ziel_obj.scores, quell_obj);
 
-            // Loop alle Messzeitpunkte
-            var mz = calc.group_mz_props;
-
-            for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
-                var current_mz = mz[mz_array_id];
-                var mz_group_name = twoDigits(current_mz.mz_group_id);
-
-                // Build Obj - Names
-                var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
-                var mz_vars_name = 'mz_' + mz_group_name + '_vars';
-
-                // Get Vars to operate
-                var ziel_obj = returnObj[age_edu_obj_name];
-                var quell_obj = current_patient_score[mz_vars_name];
-
-                //wait(250);
-
-                // N aufzählen von Ziel.
-                ziel_obj.n = quell_obj.n;
-                ziel_obj.scores = calc.concatAllArraysInObject(ziel_obj.scores, quell_obj);
-
-                // Patients setzen
-                var pid = current_patient_score.pid;
-                ziel_obj.patients.push(pid);
+                    // Patients setzen
+                    var pid = current_patient_score.pid;
+                    ziel_obj.patients.push(pid);
+                };
             };
 
         };
