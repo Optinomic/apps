@@ -217,6 +217,8 @@ function main(responses) {
                     // Merge Statistics & Scores
                     // inner_obj = calc.merge_obj(inner_obj, fullVariables);
                     inner_obj.scores = calc.variables;
+                    inner_obj.statistics = calc.variables;
+                    inner_obj.patients = [];
 
                     // Build ObjectName
                     obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
