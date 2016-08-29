@@ -860,6 +860,13 @@ function main(responses) {
 
         var results = {};
 
+        // Group-Definitions
+        var groups_definitions = {
+            age: calc.group_age_props,
+            edu: calc.group_edu_props,
+            mz: calc.group_mz_props
+        };
+
         // Do the needed 'calculations'
         var age_edu_obj = calc.getAgeEduObj();
         // var patient_scores = calc.getPatientScores(d);
@@ -868,7 +875,8 @@ function main(responses) {
         // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
 
-        // Returning | Results in returnObj.
+        // Returning | Results in Obj.
+        results.groups_definitions = groups_definitions;
         results.age_edu_obj = age_edu_obj;
         // results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
