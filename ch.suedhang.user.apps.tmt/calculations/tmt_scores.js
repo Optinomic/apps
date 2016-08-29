@@ -270,9 +270,9 @@ function main(responses) {
 
             var edu_group = current_patient_score.patient_details.age_edu_group.education;
             var edu_group_name = twoDigits(edu_group);
-            // 
-            // 
-            // age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name;
+
+            age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name;
+            returnObj.age_00_edu_00_mz_00.patients.push(age_edu_obj_name);
 
             // Loop alle Messzeitpunkte
             // for (var mz_array_id = 0; mz_array_id < calc.group_mz_props.length; mz_array_id++) {
