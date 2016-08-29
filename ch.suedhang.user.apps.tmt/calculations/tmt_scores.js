@@ -266,10 +266,10 @@ function main(responses) {
             var current_patient_score = patient_scores[patient_score_id];
 
             var age_group = current_patient_score.patient_details.age_edu_group.altersgruppe;
-            // var age_group_name = twoDigits(age_group);
-            // 
+            var age_group_name = twoDigits(age_group);
+
             var edu_group = current_patient_score.patient_details.age_edu_group.education;
-            // var edu_group_name = twoDigits(edu_group);
+            var edu_group_name = twoDigits(edu_group);
             // 
             // 
             // age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name;
