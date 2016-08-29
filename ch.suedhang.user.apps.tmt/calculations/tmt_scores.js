@@ -683,17 +683,13 @@ function main(responses) {
             var scores = {
                 "patient_details": {
                     "edu_years": null,
-                    "edu_group": {},
+                    "age_edu_group": {},
                     "age": null
                 },
                 "mz_alle_vars": calc.getVariables(),
                 "mz_eintritt_vars": calc.getVariables(),
                 "mz_austritt_vars": calc.getVariables(),
                 "mz_anderer_vars": calc.getVariables(),
-                "mz_alle_details": [],
-                "mz_eintritt_details": [],
-                "mz_austritt_details": [],
-                "mz_anderer_details": [],
                 "patient": current_result.patient
             };
 
@@ -713,7 +709,7 @@ function main(responses) {
                 var BA_Quotient = current_response.quotient;
 
                 scores.patient_details.edu_years = current_response.edu_years;
-                scores.patient_details.edu_group = current_response.percentile.age_perz;
+                scores.patient_details.age_edu_group = current_response.percentile.age_perz;
                 scores.patient_details.age = current_response.set_age;
 
                 var filled = current_response.response.data.filled;
@@ -723,28 +719,7 @@ function main(responses) {
                 var messzeitpunkt = current_response.mz;
 
 
-                // Details Obj. erstellen.
-                var details_obj = {
-                    "TMTAError": TMTAError,
-                    "TMTATime": TMTATime,
-                    "TMTBError": TMTBError,
-                    "TMTBTime": TMTBTime,
-                    "Perz_A": Perz_A,
-                    "Perz_B": Perz_B,
-                    "BA_Quotient": BA_Quotient,
-                    "messzeitpunkt": messzeitpunkt,
-                    //"full_response": current_response,
-                    "event_id": event_id,
-                    "patient_id": pid,
-                    "filled_datestamp": filled
-                };
-
-                var details_obj_clone = JSON.parse(JSON.stringify(details_obj));
-                //var details_obj_clone_2 = JSON.parse(JSON.stringify(details_obj_clone_1));
-
-
                 // Interessante Variablen & Details Obj. speichern.
-                // scores.mz_alle_details.push(details_obj_clone);
                 scores.mz_alle_vars.TMTAError.push(TMTAError);
                 scores.mz_alle_vars.TMTATime.push(TMTATime);
                 scores.mz_alle_vars.TMTBError.push(TMTBError);
@@ -754,11 +729,8 @@ function main(responses) {
                 scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
 
 
-                //details_responses.mz_eintritt_details.push(details_obj_clone_2);
-
                 if (messzeitpunkt === 1) {
                     // Eintritt
-                    // scores.mz_eintritt_details.push(details_obj);
                     scores.mz_eintritt_vars.TMTAError.push(TMTAError);
                     scores.mz_eintritt_vars.TMTATime.push(TMTATime);
                     scores.mz_eintritt_vars.TMTBError.push(TMTBError);
@@ -771,7 +743,6 @@ function main(responses) {
 
                 if (messzeitpunkt === 2) {
                     // Austritt
-                    // scores.mz_austritt_details.push(details_obj);
                     scores.mz_austritt_vars.TMTAError.push(TMTAError);
                     scores.mz_austritt_vars.TMTATime.push(TMTATime);
                     scores.mz_austritt_vars.TMTBError.push(TMTBError);
@@ -783,8 +754,7 @@ function main(responses) {
 
 
                 if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
-                    // Austritt
-                    // scores.mz_anderer_details.push(details_obj);
+                    // Anderer
                     scores.mz_anderer_vars.TMTAError.push(TMTAError);
                     scores.mz_anderer_vars.TMTATime.push(TMTATime);
                     scores.mz_anderer_vars.TMTBError.push(TMTBError);
