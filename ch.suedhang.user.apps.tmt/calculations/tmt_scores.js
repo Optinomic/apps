@@ -718,50 +718,53 @@ function main(responses) {
 
                 var messzeitpunkt = current_response.mz;
 
+                // Push only if Data available
+                if (current_response.percentile.age_perz.altersgruppe_found) {
 
-                // Interessante Variablen & Details Obj. speichern.
-                scores.mz_99_vars.TMTAError.push(TMTAError);
-                scores.mz_99_vars.TMTATime.push(TMTATime);
-                scores.mz_99_vars.TMTBError.push(TMTBError);
-                scores.mz_99_vars.TMTBTime.push(TMTBTime);
-                scores.mz_99_vars.Perz_A.push(Perz_A);
-                scores.mz_99_vars.Perz_B.push(Perz_B);
-                scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
-
-
-                if (messzeitpunkt === 1) {
-                    // Eintritt
-                    scores.mz_01_vars.TMTAError.push(TMTAError);
-                    scores.mz_01_vars.TMTATime.push(TMTATime);
-                    scores.mz_01_vars.TMTBError.push(TMTBError);
-                    scores.mz_01_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_01_vars.Perz_A.push(Perz_A);
-                    scores.mz_01_vars.Perz_B.push(Perz_B);
-                    scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
-                };
+                    // Interessante Variablen & Details Obj. speichern.
+                    scores.mz_99_vars.TMTAError.push(TMTAError);
+                    scores.mz_99_vars.TMTATime.push(TMTATime);
+                    scores.mz_99_vars.TMTBError.push(TMTBError);
+                    scores.mz_99_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_99_vars.Perz_A.push(Perz_A);
+                    scores.mz_99_vars.Perz_B.push(Perz_B);
+                    scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
 
 
-                if (messzeitpunkt === 2) {
-                    // Austritt
-                    scores.mz_02_vars.TMTAError.push(TMTAError);
-                    scores.mz_02_vars.TMTATime.push(TMTATime);
-                    scores.mz_02_vars.TMTBError.push(TMTBError);
-                    scores.mz_02_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_02_vars.Perz_A.push(Perz_A);
-                    scores.mz_02_vars.Perz_B.push(Perz_B);
-                    scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
-                };
+                    if (messzeitpunkt === 1) {
+                        // Eintritt
+                        scores.mz_01_vars.TMTAError.push(TMTAError);
+                        scores.mz_01_vars.TMTATime.push(TMTATime);
+                        scores.mz_01_vars.TMTBError.push(TMTBError);
+                        scores.mz_01_vars.TMTBTime.push(TMTBTime);
+                        scores.mz_01_vars.Perz_A.push(Perz_A);
+                        scores.mz_01_vars.Perz_B.push(Perz_B);
+                        scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
+                    };
 
 
-                if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
-                    // Anderer
-                    scores.mz_03_vars.TMTAError.push(TMTAError);
-                    scores.mz_03_vars.TMTATime.push(TMTATime);
-                    scores.mz_03_vars.TMTBError.push(TMTBError);
-                    scores.mz_03_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_03_vars.Perz_A.push(Perz_A);
-                    scores.mz_03_vars.Perz_B.push(Perz_B);
-                    scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
+                    if (messzeitpunkt === 2) {
+                        // Austritt
+                        scores.mz_02_vars.TMTAError.push(TMTAError);
+                        scores.mz_02_vars.TMTATime.push(TMTATime);
+                        scores.mz_02_vars.TMTBError.push(TMTBError);
+                        scores.mz_02_vars.TMTBTime.push(TMTBTime);
+                        scores.mz_02_vars.Perz_A.push(Perz_A);
+                        scores.mz_02_vars.Perz_B.push(Perz_B);
+                        scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
+                    };
+
+
+                    if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
+                        // Anderer
+                        scores.mz_03_vars.TMTAError.push(TMTAError);
+                        scores.mz_03_vars.TMTATime.push(TMTATime);
+                        scores.mz_03_vars.TMTBError.push(TMTBError);
+                        scores.mz_03_vars.TMTBTime.push(TMTBTime);
+                        scores.mz_03_vars.Perz_A.push(Perz_A);
+                        scores.mz_03_vars.Perz_B.push(Perz_B);
+                        scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
+                    };
                 };
 
             };
