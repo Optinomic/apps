@@ -686,11 +686,11 @@ function main(responses) {
                     "age_edu_group": {},
                     "age": null
                 },
-                "mz_alle_vars": calc.getVariables(),
-                "mz_eintritt_vars": calc.getVariables(),
-                "mz_austritt_vars": calc.getVariables(),
-                "mz_anderer_vars": calc.getVariables(),
-                "patient": current_result.patient
+                "mz_01_vars": calc.getVariables(),
+                "mz_02_vars": calc.getVariables(),
+                "mz_03_vars": calc.getVariables(),
+                "mz_99_vars": calc.getVariables(),
+                "pid": current_result.patient.id
             };
 
 
@@ -720,48 +720,48 @@ function main(responses) {
 
 
                 // Interessante Variablen & Details Obj. speichern.
-                scores.mz_alle_vars.TMTAError.push(TMTAError);
-                scores.mz_alle_vars.TMTATime.push(TMTATime);
-                scores.mz_alle_vars.TMTBError.push(TMTBError);
-                scores.mz_alle_vars.TMTBTime.push(TMTBTime);
-                scores.mz_alle_vars.Perz_A.push(Perz_A);
-                scores.mz_alle_vars.Perz_B.push(Perz_B);
-                scores.mz_alle_vars.BA_Quotient.push(BA_Quotient);
+                scores.mz_99_vars.TMTAError.push(TMTAError);
+                scores.mz_99_vars.TMTATime.push(TMTATime);
+                scores.mz_99_vars.TMTBError.push(TMTBError);
+                scores.mz_99_vars.TMTBTime.push(TMTBTime);
+                scores.mz_99_vars.Perz_A.push(Perz_A);
+                scores.mz_99_vars.Perz_B.push(Perz_B);
+                scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
 
 
                 if (messzeitpunkt === 1) {
                     // Eintritt
-                    scores.mz_eintritt_vars.TMTAError.push(TMTAError);
-                    scores.mz_eintritt_vars.TMTATime.push(TMTATime);
-                    scores.mz_eintritt_vars.TMTBError.push(TMTBError);
-                    scores.mz_eintritt_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_eintritt_vars.Perz_A.push(Perz_A);
-                    scores.mz_eintritt_vars.Perz_B.push(Perz_B);
-                    scores.mz_eintritt_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_01_vars.TMTAError.push(TMTAError);
+                    scores.mz_01_vars.TMTATime.push(TMTATime);
+                    scores.mz_01_vars.TMTBError.push(TMTBError);
+                    scores.mz_01_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_01_vars.Perz_A.push(Perz_A);
+                    scores.mz_01_vars.Perz_B.push(Perz_B);
+                    scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
                 };
 
 
                 if (messzeitpunkt === 2) {
                     // Austritt
-                    scores.mz_austritt_vars.TMTAError.push(TMTAError);
-                    scores.mz_austritt_vars.TMTATime.push(TMTATime);
-                    scores.mz_austritt_vars.TMTBError.push(TMTBError);
-                    scores.mz_austritt_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_austritt_vars.Perz_A.push(Perz_A);
-                    scores.mz_austritt_vars.Perz_B.push(Perz_B);
-                    scores.mz_austritt_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_02_vars.TMTAError.push(TMTAError);
+                    scores.mz_02_vars.TMTATime.push(TMTATime);
+                    scores.mz_02_vars.TMTBError.push(TMTBError);
+                    scores.mz_02_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_02_vars.Perz_A.push(Perz_A);
+                    scores.mz_02_vars.Perz_B.push(Perz_B);
+                    scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
                 };
 
 
                 if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
                     // Anderer
-                    scores.mz_anderer_vars.TMTAError.push(TMTAError);
-                    scores.mz_anderer_vars.TMTATime.push(TMTATime);
-                    scores.mz_anderer_vars.TMTBError.push(TMTBError);
-                    scores.mz_anderer_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_anderer_vars.Perz_A.push(Perz_A);
-                    scores.mz_anderer_vars.Perz_B.push(Perz_B);
-                    scores.mz_anderer_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_03_vars.TMTAError.push(TMTAError);
+                    scores.mz_03_vars.TMTATime.push(TMTATime);
+                    scores.mz_03_vars.TMTBError.push(TMTBError);
+                    scores.mz_03_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_03_vars.Perz_A.push(Perz_A);
+                    scores.mz_03_vars.Perz_B.push(Perz_B);
+                    scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
                 };
 
             };
