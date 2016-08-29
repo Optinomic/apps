@@ -76,7 +76,7 @@ function main(responses) {
         "mz_group_text": "Messzeitpunkt: Anderer"
     }, {
         "mz_group_id": 99,
-        "mz_group_text": "All Messzeitpunkte"
+        "mz_group_text": "Alle Messzeitpunkte"
     }];
 
 
