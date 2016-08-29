@@ -17,6 +17,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-caption" style="color:#3F51B5;">{{current_age_edu_mz.edu_group[1]}} | {{current_age_edu_mz.mz_group[1]}}</p>
                     </div>
                     <div ng-if="current_age_edu_mz.statistics.calculated">
+                        <p class="md-caption" style="color:#C5CAE9;"><small>{{age_edu_mz_group_name}}</small></p>
                         <md-button class="md-primary" ng-if="!toggle[age_edu_mz_group_name]" ng-click="toggle[age_edu_mz_group_name] = true">Anzeigen</md-button>
                     </div>
                 </div>
