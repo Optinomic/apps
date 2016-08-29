@@ -285,6 +285,8 @@ function main(responses) {
                 // Build Obj - Name
                 age_edu_obj_name = 'age_' + age_group_name + 'edu_' + edu_group_name + 'mz_' + mz_group_name;
 
+                var ziel_obj = returnObj[age_edu_obj_name];
+
                 // returnObj[age_edu_obj_name].n = 73;
             };
 
