@@ -284,18 +284,17 @@ function main(responses) {
 
             for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
                 var current_mz = mz[mz_array_id];
-                var mz_group = current_mz.mz_group_id;
-                var mz_group_name = twoDigits(mz_group);
+                var mz_group_name = twoDigits(current_mz.mz_group_id);
 
                 // Build Obj - Names
-                var mz_vars_name = 'mz_' + mz_group_name + '_vars';
                 var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
+                var mz_vars_name = 'mz_' + mz_group_name + '_vars';
 
                 // Get Vars to operate
-                var quell_obj = current_patient_score[mz_vars_name];
                 var ziel_obj = returnObj[age_edu_obj_name];
+                var quell_obj = current_patient_score[mz_vars_name];
 
-                wait(250);
+                //wait(250);
 
                 // N aufzählen von Ziel.
                 ziel_obj.n = mz_vars_name;
