@@ -325,6 +325,11 @@ function main(responses) {
 
     calc.getAgeEduObjStatistics = function(age_edu_obj_scores, age_edu_mz_obj_prop_array) {
 
+        var returnObj = age_edu_obj_scores;
+
+
+        return returnObj;
+
     };
 
     calc.getAgeEduGroup = function(mode) {
