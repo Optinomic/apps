@@ -239,6 +239,15 @@ function main(responses) {
         return retrun_obj;
     };
 
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
 
     calc.getAgeEduObjScores = function(age_edu_mz_obj, patient_scores) {
         var returnObj = age_edu_mz_obj;
@@ -616,7 +625,6 @@ function main(responses) {
         // Loop "allFullPropertys" and check if objectToConcat has them: if yes: Concat.
         for (var x = 0; x < allFullPropertys.length; x++) {
             var current_property = allFullPropertys[x];
-            var ss_current_property = 'ss_' + current_property;
             var ArrayFromObjectToConcat = objectToConcat[current_property];
             var isThisArray = calc.isArray(ArrayFromObjectToConcat);
 
