@@ -198,16 +198,28 @@ function main(responses) {
                 // Init & Add stuff:
                 var obj_to_merge_edu = edu_props[edu_prop_id];
                 var name_edu = obj_to_merge_edu.edu_group_id;
-                inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
-                inner_obj.edu_group_array_id = edu_prop_id;
+                //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
+                //inner_obj.edu_group_array_id = edu_prop_id;
+                var edu_group_array = [];
+                edu_group_array.push(obj_to_merge_edu.edu_group_id);
+                edu_group_array.push(obj_to_merge_edu.edu_group_text);
+                edu_group_array.push(edu_prop_id);
+                inner_obj.edu_group = edu_group_array;
 
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
                     // Init & Add stuff:
                     var obj_to_merge_mz = mz_props[mz_prop_id];
                     var name_mz = obj_to_merge_mz.mz_group_id;
-                    inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
-                    inner_obj.mz_group_array_id = mz_prop_id;
+
+                    var mz_group_array = [];
+                    mz_group_array.push(obj_to_merge_edu.edu_group_id);
+                    mz_group_array.push(obj_to_merge_edu.edu_group_text);
+                    mz_group_array.push(mz_prop_id);
+                    inner_obj.mz_group = mz_group_array;
+
+                    //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
+                    //inner_obj.mz_group_array_id = mz_prop_id;
 
                     // Place for Statistics & Scores & Patients
                     inner_obj.scores = calc.variables;
