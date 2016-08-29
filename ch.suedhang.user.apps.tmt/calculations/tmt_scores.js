@@ -183,47 +183,35 @@ function main(responses) {
         var fullVariables = calc.getFullVariables();
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
-            // Init:
+            // Init & Add stuff:
             var inner_obj = {};
             var obj_to_merge_age = age_props[group_id];
-
-            // Add stuff:
-            // inner_obj.age_group_array_id = group_id;
+            var name_age = obj_to_merge_age.age_group_id;
             inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
-
-            // inner_obj.age_group_id = obj_to_merge.age_group_id;
-            // inner_obj.age_group_text = obj_to_merge.age_group_text;
-            //inner_obj.age_group_text = '73';
 
 
             for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
-
+                // Init & Add stuff:
                 var obj_to_merge_edu = edu_props[edu_prop_id];
+                var name_edu = obj_to_merge_edu.edu_group_id;
                 inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
-
-                //inner_obj.edu_group_array_id = edu_prop_id;
 
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
-
-                    // var obj_to_merge_mz = mz_props[mz_prop_id];
-                    // inner_obj = merge_obj(inner_obj, obj_to_merge_mz);
-
+                    // Init & Add stuff:
                     var obj_to_merge_mz = mz_props[mz_prop_id];
+                    var name_mz = obj_to_merge_mz.mz_group_id;
                     inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
 
-                    //inner_obj.mz_group_array_id = mz_prop_id;
 
-                    // Merge Statistics & Scores
-                    // inner_obj = calc.merge_obj(inner_obj, fullVariables);
+                    // Place for Statistics & Scores & Patients
                     inner_obj.scores = calc.variables;
                     inner_obj.statistics = calc.variables;
-                    // inner_obj.statistics = calc.variables;
                     inner_obj.patients = [];
+                    inner_obj.n = null;
 
                     // Build ObjectName
-                    obj_name = 'age_' + twoDigits(group_id) + '_edu_' + twoDigits(edu_prop_id) + '_mz_' + twoDigits(mz_prop_id);
-
+                    obj_name = 'age_' + twoDigits(name_age) + '_edu_' + twoDigits(name_edu) + '_mz_' + twoDigits(name_mz);
 
                     // Write to Object
                     retrun_obj[obj_name] = inner_obj;
