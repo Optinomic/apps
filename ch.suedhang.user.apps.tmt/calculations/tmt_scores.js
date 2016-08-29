@@ -323,7 +323,7 @@ function main(responses) {
         return returnObj;
     };
 
-    calc.getAgeEduObjStatistics = function(age_edu_obj_scores) {
+    calc.getAgeEduObjStatistics = function(age_edu_obj_scores, age_edu_mz_obj_prop_array) {
 
     };
 
@@ -930,30 +930,31 @@ function main(responses) {
 
         var results = {};
 
-        // Group-Definitions
-        var groups_definitions = {
-            age: calc.group_age_props,
-            edu: calc.group_edu_props,
-            mz: calc.group_mz_props
-        };
+
 
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
-        var age_edu_mz_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
+        var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
         var patient_scores = calc.getPatientScores(d);
         var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_mz_obj, patient_scores);
-        // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
-        // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
+        var age_edu_obj_statistics = calc.getAgeEduObjStatistics(age_edu_obj_scores, age_edu_mz_obj_prop_array);
 
 
         // Returning | Results in Obj.
-        results.groups_definitions = groups_definitions;
         //results.age_edu_obj = age_edu_mz_obj;
-        results.age_edu_mz_prop_array = age_edu_mz_prop_array;
         results.patient_scores = patient_scores;
         results.age_edu_obj_scores = age_edu_obj_scores;
-        // results.age_edu_scores = age_edu_scores;
-        // results.age_edu_statistics = age_edu_statistics;
+        results.age_edu_obj_statistics = age_edu_obj_statistics;
+
+
+        // Return Useful Definitions
+        var definitions = {
+            "age": calc.group_age_props,
+            "edu": calc.group_edu_props,
+            "mz": calc.group_mz_props,
+            "age_edu_mz_obj_prop_array": age_edu_mz_obj_prop_array
+        };
+        results.definitions = definitions;
 
 
         // Returning full (complete) responses is often used/helpful.
