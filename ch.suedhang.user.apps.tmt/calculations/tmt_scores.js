@@ -297,7 +297,7 @@ function main(responses) {
                 //wait(250);
 
                 // N aufzählen von Ziel.
-                ziel_obj.n = mz_vars_name;
+                ziel_obj.n = age_edu_obj_name;
                 ziel_obj.scores = quell_obj;
 
                 // Patients setzen
