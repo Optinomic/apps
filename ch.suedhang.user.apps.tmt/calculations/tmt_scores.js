@@ -180,7 +180,7 @@ function main(responses) {
         // Create 'multidimensional Array in a Object.
 
         var obj_name = '';
-        // var fullVariables = calc.getFullVariables();
+        var fullVariables = calc.getFullVariables();
 
         for (var group_id = 0; group_id < age_props.length; group_id++) {
             // Init:
@@ -216,8 +216,8 @@ function main(responses) {
 
                     // Merge Statistics & Scores
                     // inner_obj = calc.merge_obj(inner_obj, fullVariables);
-                    inner_obj.scores = calc.variables;
-                    inner_obj.statistics = calc.variables;
+                    inner_obj.variables = fullVariables;
+                    // inner_obj.statistics = calc.variables;
                     inner_obj.patients = [];
 
                     // Build ObjectName
