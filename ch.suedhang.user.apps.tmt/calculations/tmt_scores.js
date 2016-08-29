@@ -293,7 +293,14 @@ function main(responses) {
 
                 // returnObj.age_00_edu_00_mz_00 = {};
                 // returnObj.age_00_edu_00_mz_00.age_edu_obj_name = age_edu_obj_name;
-                ziel_obj.n = age_edu_obj_name;
+
+                // N aufzählen von Ziel.
+                if (ziel_obj.n === null) {
+                    ziel_obj.n = quell_obj.n;
+                } else {
+                    ziel_obj.n = ziel_obj.n + quell_obj.n;
+                };
+
                 ziel_obj.patients.push(pid);
 
             };
