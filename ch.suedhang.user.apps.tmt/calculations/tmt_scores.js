@@ -165,7 +165,6 @@ function main(responses) {
         };
 
 
-
         var merge_obj = function(obj1, obj2) {
             var obj3 = {};
             for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
@@ -231,7 +230,7 @@ function main(responses) {
                     obj_name = 'age_' + twoDigits(name_age) + '_edu_' + twoDigits(name_edu) + '_mz_' + twoDigits(name_mz);
 
                     // Write to Object
-                    retrun_obj[obj_name] = inner_obj;
+                    retrun_obj[obj_name] = JSON.parse(JSON.stringify(inner_obj));
                 };
             };
         };
@@ -254,7 +253,6 @@ function main(responses) {
             };
             return return_text;
         };
-
 
         var wait = function(ms) {
             var start = new Date().getTime();
