@@ -8,10 +8,12 @@ include(../lib/html/optinomic/page/start.m4)
                 </span>
             </md-card-title-text>
         </md-card-title>
-        <div ng-repeat="age_edu_mz_group_name in d.calculations.age_edu_mz_obj_prop_array">
-            <md-card-content layout-margin>
+        <div ng-repeat="age_edu_mz_group_name in d.calculations.definitions.age_edu_mz_obj_prop_array">
+            <md-card-content layout-margin ng-init="current_age_edu_mz = d.calculations.age_edu_mz_obj[age_edu_mz_group_name]">
                 <p>&nbsp;</p>
-                <h1>{{d.calculations.age_edu_mz_obj[age_edu_mz_group_name]}}</h1>
+                <h1>{{d.calculations.age_edu_mz_obj[age_edu_mz_group_name].age_group[1]}}</h1>
+                <pre>{{current_age_edu_mz | json}}</pre>
+                <h1>{{current_age_edu_mz.age_group[1]}}</h1>
             </md-card-content>
             <md-divider></md-divider>
         </div>
