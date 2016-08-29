@@ -939,7 +939,7 @@ function main(responses) {
 
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
-        age_edu_mz_prop_array = calc.getPropertyArrayFromOject();
+        var age_edu_mz_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
         var patient_scores = calc.getPatientScores(d);
         var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_mz_obj, patient_scores);
         // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
