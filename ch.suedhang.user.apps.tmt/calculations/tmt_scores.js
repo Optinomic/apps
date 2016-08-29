@@ -241,8 +241,8 @@ function main(responses) {
     };
 
 
-    calc.getAgeEduObjScores = function(age_edu_obj, patient_scores) {
-        var returnObj = age_edu_obj;
+    calc.getAgeEduObjScores = function(age_edu_mz_obj, patient_scores) {
+        var returnObj = age_edu_mz_obj;
 
 
         // Test Write
@@ -856,7 +856,7 @@ function main(responses) {
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
         var patient_scores = calc.getPatientScores(d);
-        var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
+        var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_mz_obj, patient_scores);
         // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
         // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
 
