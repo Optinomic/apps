@@ -275,6 +275,7 @@ function main(responses) {
 
             // Loop alle Messzeitpunkte
             var mz = calc.group_mz_props;
+            var did_it_once = false;
 
             for (var mz_array_id = 0; mz_array_id < mz.length; mz_array_id++) {
                 var current_mz = mz[mz_array_id];
@@ -290,19 +291,21 @@ function main(responses) {
                 var ziel_obj = returnObj[age_edu_obj_name];
                 var pid = current_patient_score.pid;
 
+                // Nur einmal ausführen:
+                if (did_it_once === false) {
 
-                // returnObj.age_00_edu_00_mz_00 = {};
-                // returnObj.age_00_edu_00_mz_00.age_edu_obj_name = age_edu_obj_name;
+                    // N aufzählen von Ziel.
+                    if (ziel_obj.n === null) {
+                        ziel_obj.n = quell_obj.n;
+                    } else {
+                        ziel_obj.n = ziel_obj.n + quell_obj.n;
+                    };
 
-                // N aufzählen von Ziel.
-                if (ziel_obj.n === null) {
-                    ziel_obj.n = quell_obj.n;
-                } else {
-                    ziel_obj.n = ziel_obj.n + quell_obj.n;
+                    // Patients setzen
+                    ziel_obj.patients.push(pid);
+
+                    did_it_once = true;
                 };
-
-                ziel_obj.patients.push(pid);
-
             };
 
         };
