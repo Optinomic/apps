@@ -188,7 +188,7 @@ function main(responses) {
             var obj_to_merge_age = age_props[group_id];
 
             // Add stuff:
-            inner_obj.age_group_array_id = group_id;
+            // inner_obj.age_group_array_id = group_id;
             inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
 
             // inner_obj.age_group_id = obj_to_merge.age_group_id;
@@ -201,7 +201,7 @@ function main(responses) {
                 var obj_to_merge_edu = edu_props[edu_prop_id];
                 inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
 
-                inner_obj.edu_group_array_id = edu_prop_id;
+                //inner_obj.edu_group_array_id = edu_prop_id;
 
 
                 for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
@@ -212,7 +212,7 @@ function main(responses) {
                     var obj_to_merge_mz = mz_props[mz_prop_id];
                     inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
 
-                    inner_obj.mz_group_array_id = mz_prop_id;
+                    //inner_obj.mz_group_array_id = mz_prop_id;
 
                     // Merge Statistics & Scores
                     // inner_obj = calc.merge_obj(inner_obj, fullVariables);
