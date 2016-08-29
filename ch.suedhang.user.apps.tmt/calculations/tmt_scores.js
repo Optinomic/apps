@@ -243,8 +243,6 @@ function main(responses) {
 
     calc.getAgeEduObjScores = function(age_edu_mz_obj, patient_scores) {
         var returnObj = age_edu_mz_obj;
-        var age_edu_obj_name = '';
-
 
         var twoDigits = function(id) {
             var return_text = '';
@@ -289,22 +287,22 @@ function main(responses) {
                 var mz_group = current_mz.mz_group_id;
                 var mz_group_name = twoDigits(mz_group);
 
-                // Build Obj - Name
+                // Build Obj - Names
                 var mz_vars_name = 'mz_' + mz_group_name + '_vars';
-                age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
+                var age_edu_obj_name = 'age_' + age_group_name + '_edu_' + edu_group_name + '_mz_' + mz_group_name;
 
                 // Get Vars to operate
                 var quell_obj = current_patient_score[mz_vars_name];
                 var ziel_obj = returnObj[age_edu_obj_name];
-                var pid = current_patient_score.pid;
 
-                wait(2000);
+                wait(250);
 
                 // N aufzählen von Ziel.
-                ziel_obj.n = quell_obj.n;
+                ziel_obj.n = mz_vars_name;
                 ziel_obj.scores = quell_obj;
 
                 // Patients setzen
+                var pid = current_patient_score.pid;
                 ziel_obj.patients.push(pid);
             };
 
