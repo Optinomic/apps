@@ -87,7 +87,6 @@ function main(responses) {
 
 
     calc.getVariables = function() {
-
         // Interessante Variablen
         var variables = calc.variables;
 
@@ -96,6 +95,8 @@ function main(responses) {
     };
 
     calc.getFullVariables = function() {
+
+        // UNNEEDED !!!
 
         // Init: Interessante Variablen
         var returnObj = {};
@@ -697,6 +698,8 @@ function main(responses) {
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
+            var data_here = false;
+
             for (var x = 0; x < all_responses.length; x++) {
                 var current_response = all_responses[x];
 
@@ -717,6 +720,11 @@ function main(responses) {
                 var pid = current_result.patient.id;
 
                 var messzeitpunkt = current_response.mz;
+
+
+                if (current_response.edu_years !== null) {
+                    data_here = true;
+                };
 
 
 
@@ -769,9 +777,10 @@ function main(responses) {
             };
 
             // Push only if Data available
-            if (current_response.edu_years !== null) {
+            if (data_here) {
                 all_scores.push(scores);
             };
+
         };
 
         return all_scores;
