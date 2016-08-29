@@ -744,7 +744,7 @@ function main(responses) {
 
 
                 // Interessante Variablen & Details Obj. speichern.
-                scores.mz_alle_details.push(details_obj_clone);
+                // scores.mz_alle_details.push(details_obj_clone);
                 scores.mz_alle_vars.TMTAError.push(TMTAError);
                 scores.mz_alle_vars.TMTATime.push(TMTATime);
                 scores.mz_alle_vars.TMTBError.push(TMTBError);
@@ -758,7 +758,7 @@ function main(responses) {
 
                 if (messzeitpunkt === 1) {
                     // Eintritt
-                    scores.mz_eintritt_details.push(details_obj);
+                    // scores.mz_eintritt_details.push(details_obj);
                     scores.mz_eintritt_vars.TMTAError.push(TMTAError);
                     scores.mz_eintritt_vars.TMTATime.push(TMTATime);
                     scores.mz_eintritt_vars.TMTBError.push(TMTBError);
@@ -771,7 +771,7 @@ function main(responses) {
 
                 if (messzeitpunkt === 2) {
                     // Austritt
-                    scores.mz_austritt_details.push(details_obj);
+                    // scores.mz_austritt_details.push(details_obj);
                     scores.mz_austritt_vars.TMTAError.push(TMTAError);
                     scores.mz_austritt_vars.TMTATime.push(TMTATime);
                     scores.mz_austritt_vars.TMTBError.push(TMTBError);
@@ -784,7 +784,7 @@ function main(responses) {
 
                 if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
                     // Austritt
-                    scores.mz_anderer_details.push(details_obj);
+                    // scores.mz_anderer_details.push(details_obj);
                     scores.mz_anderer_vars.TMTAError.push(TMTAError);
                     scores.mz_anderer_vars.TMTATime.push(TMTATime);
                     scores.mz_anderer_vars.TMTBError.push(TMTBError);
@@ -868,8 +868,8 @@ function main(responses) {
         };
 
         // Do the needed 'calculations'
-        var age_edu_obj = calc.getAgeEduObj();
-        // var patient_scores = calc.getPatientScores(d);
+        var age_edu_mz_obj = calc.getAgeEduObj();
+        var patient_scores = calc.getPatientScores(d);
         // var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_obj, patient_scores);
         // var age_edu_scores = calc.arrangePatientScoresAgeEdu(patient_scores);
         // var age_edu_statistics = calc.setAgeEduStatistics(age_edu_scores);
@@ -877,8 +877,8 @@ function main(responses) {
 
         // Returning | Results in Obj.
         results.groups_definitions = groups_definitions;
-        results.age_edu_obj = age_edu_obj;
-        // results.patient_scores = patient_scores;
+        results.age_edu_obj = age_edu_mz_obj;
+        results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
         // results.age_edu_scores = age_edu_scores;
         // results.age_edu_statistics = age_edu_statistics;
