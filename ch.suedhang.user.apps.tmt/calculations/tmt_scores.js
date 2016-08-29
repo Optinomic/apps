@@ -297,8 +297,8 @@ function main(responses) {
                 //wait(250);
 
                 // N aufzählen von Ziel.
-                ziel_obj.n = age_edu_obj_name;
-                ziel_obj.scores = quell_obj;
+                ziel_obj.n = quell_obj.n;
+                ziel_obj.scores = calc.concatAllArraysInObject(ziel_obj.scores, quell_obj);
 
                 // Patients setzen
                 var pid = current_patient_score.pid;
@@ -623,11 +623,6 @@ function main(responses) {
             if (isThisArray) {
                 // Array found Concat!
                 objectFull[current_property] = objectFull[current_property].concat(ArrayFromObjectToConcat);
-
-                // Do Statistics!
-                if (current_property === 'TMTATime') {
-                    objectFull.ss_TMTATime = calc.getStatistics(objectFull[current_property]);
-                };
 
                 // set n;
                 objectFull.n = objectFull[current_property].length;
