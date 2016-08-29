@@ -11,9 +11,22 @@ include(../lib/html/optinomic/page/start.m4)
         <div ng-repeat="age_edu_mz_group_name in d.calculations.definitions.age_edu_mz_obj_prop_array">
             <md-card-content layout-margin ng-init="current_age_edu_mz = d.calculations.age_edu_mz_obj[age_edu_mz_group_name]">
                 <p>&nbsp;</p>
-                <h1>{{d.calculations.age_edu_mz_obj[age_edu_mz_group_name].age_group[1]}}</h1>
-                <pre>{{current_age_edu_mz | json}}</pre>
-                <h1>{{current_age_edu_mz.age_group[1]}}</h1>
+                <div layout="row" layout-align="space-between end">
+                    <div flex>
+                        <p class="md-subhead">{{current_age_edu_mz.age_group[1]}}</p>
+                        <p class="md-caption">{{current_age_edu_mz.edu_group[1]}}</p>
+                        <p class="md-caption">{{current_age_edu_mz.mz_group[1]}}</p>
+                    </div>
+                    <h3 class="md-display-1">n={{current_age_edu_mz.n}}</h3>
+                </div>
+                <div ng-if="current_age_edu_mz.statistics.calculated">
+                    <h3 class="md-title">Scores</h3>
+                    <pre>{{current_age_edu_mz.scores | json}}</pre>
+                    <h3 class="md-title">Patients</h3>
+                    <pre>{{current_age_edu_mz.patients | json}}</pre>
+                    <h3 class="md-title">Statistics</h3>
+                    <pre>{{current_age_edu_mz.statistics | json}}</pre>
+                </div>
             </md-card-content>
             <md-divider></md-divider>
         </div>
