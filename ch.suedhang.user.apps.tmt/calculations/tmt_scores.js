@@ -768,9 +768,8 @@ function main(responses) {
 
             };
 
-            // scores.messzeitpunkt = mz_alle;
             // Push only if Data available
-            if (current_response.percentile.age_perz.altersgruppe_found) {
+            if (current_response.edu_years !== null) {
                 all_scores.push(scores);
             };
         };
