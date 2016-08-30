@@ -38,7 +38,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 // Run App-Functions:
-                $scope.initZScore();
+                $scope.getCalculation();
+
                 $scope.setExport();
 
             };
@@ -120,6 +121,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "show_clinicsample_scores": false
         };
 
+
+        // var erste_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
+
+        $scope.d.zScore.normgruppe_tmt = {};
+        // $scope.d.zScore.normgruppe_tmt.age_group = {};
+        // $scope.d.zScore.normgruppe_tmt.edu_group = {};
+
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
         $scope.d.zScore.normgruppe_klinik.selected_pg_id = null;
@@ -127,7 +135,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.setZScore();
-        $scope.getCalculation();
+
     };
 
 
@@ -167,6 +175,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         messungen.forEach(function(current_messung, myMessungIndex) {
+
+            $scope.d.zScore.normgruppe_tmt.age_group = current_messung.percentile.age_perz.altersgruppe;
+            $scope.d.zScore.normgruppe_tmt.edu_group = current_messung.percentile.age_perz.education;
 
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
             var mz_datestamp = current_messung.response.data.response.Date;
@@ -288,7 +299,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('(DATA): getUserAppCalculation (tmt_scores): ', $scope.d.zScore.user_app_calc);
 
             // Set Stuff
-            $scope.setZScore();
+            $scope.initZScore();
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
