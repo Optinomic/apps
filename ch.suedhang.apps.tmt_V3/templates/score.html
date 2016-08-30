@@ -12,18 +12,18 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div flex>
             <p class="md-title">{{d.dataMain.config.data.customer.contact.name}}</p>
-            <p>&nbsp;</p>
             <div md-padding>
                 <md-input-container class="md-block">
-                    <label>Altersgruppe</label>
+                    <label>Alter</label>
                     <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group_id" ng-change="changeClinicSample()">
                         <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age.age_group_id">
                             {{age.age_group_text}}
                         </md-option>
                     </md-select>
                 </md-input-container>
+                <p>&nbsp;</p>
                 <md-input-container class="md-block">
-                    <label>Ausbildung</label>
+                    <label>Bildung</label>
                     <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group_id" ng-change="changeClinicSample()">
                         <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu.edu_group_id">
                             {{edu.edu_group_text}}
