@@ -312,10 +312,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var edu_group_id = $scope.d.zScore.normgruppe_klinik.selected_edu_group_id;
         var mz_group_id = $scope.d.zScore.normgruppe_klinik.selected_mz_group_id;
 
-
-        $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + twoDigits(age_group_id) + '_edu_' + twoDigits(edu_group_id) + '_mz_';
-        $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + twoDigits(age_group_id) + '_edu_' + twoDigits(edu_group_id) + '_mz_99';
-
+        $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_';
+        $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_99';
 
         // Bei Änderungen ausführen.
         $scope.setZScore();
