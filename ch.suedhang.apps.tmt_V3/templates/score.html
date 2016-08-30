@@ -12,7 +12,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <p class="md-subhead">
                     {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
                 </p>
-                <div layout="row" layout-align="space-between start">
+                <div layout="row" layout-align="space-between end">
                     <p flex="5" class="md-title" style="font-size:36px; color:#3F51B5!important;">■</p>
                     <p flex class="md-caption"> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
                 </div>
@@ -36,8 +36,16 @@ include(../lib/html/optinomic/page/start.m4)
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    <md-input-container class="md-block" style="margin-top:24px;">
+                        <label>Messzeitpunkt</label>
+                        <md-select ng-model="d.zScore.normgruppe_klinik.selected_mz_array" ng-change="changeClinicSample()">
+                            <md-option ng-repeat="mz in d.zScore.normgruppe_klinik.select_mz_array" ng-value="mz.id">
+                                {{mz.text}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                 </div>
-                <div layout="row" layout-align="space-between start">
+                <div layout="row" layout-align="space-between end">
                     <p flex="5" class="md-title" style="font-size:36px; color:#C5CAE9!important;">■</p>
                     <p flex class="md-caption"> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.</p>
                 </div>
