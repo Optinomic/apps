@@ -244,6 +244,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
 
+            if (age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) {
+                A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_min);
+                A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_max);
+                A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
+            };
+
+            // ToDo: set zscore_min | zscore_max  if >= +/-3 
+
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
@@ -262,6 +270,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_max);
                 B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
+
+            // ToDo: set zscore_min | zscore_max  if >= +/-3 
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
