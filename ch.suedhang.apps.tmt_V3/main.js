@@ -240,12 +240,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var A_messung = angular.copy(messung);
             A_messung = $scope.addDefault(A_messung);
 
-            A_messung.clinicsample_start = 0;
-            A_messung.clinicsample_end = 0;
+            if (current_messung.statistics.TMTATime.z_score_max !== null) {
+                A_messung.clinicsample_start = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_min;
+                A_messung.clinicsample_end = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_max;
+            };
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
-            A_messung.text_right_caption = '';
+            A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
@@ -256,9 +258,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // TMT - B
             var B_messung = angular.copy(messung);
             B_messung = $scope.addDefault(B_messung);
+
+            if (current_messung.statistics.TMTATime.z_score_max !== null) {
+                B_messung.clinicsample_start = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_min;
+                B_messung.clinicsample_end = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_max;
+            };
+
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
-            B_messung.text_right_caption = '';
+            B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 B_messung.zscore_color = '#F44336';
