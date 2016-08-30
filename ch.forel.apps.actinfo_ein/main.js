@@ -85,6 +85,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             var substanz = '';
             var answer_option = 0;
+            var answer_tabak = null;
             var answer = 0;
             var my_result = {};
             var text = '';
