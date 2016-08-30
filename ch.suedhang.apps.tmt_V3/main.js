@@ -91,8 +91,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Add Defaults for all Scores
         obj.zscore_min = -3;
         obj.zscore_max = 3;
-        obj.clinicsample_start = -1;
-        obj.clinicsample_end = 1;
+        obj.clinicsample_start = 0;
+        obj.clinicsample_end = 0;
         obj.clinicsample_color = '#C5CAE9';
 
         // Remember to Show them later - if needed.
@@ -108,6 +108,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return obj;
     };
 
+
+
+    $scope.twoDigits = function(id) {
+        var return_text = '';
+        id = parseInt(id);
+        if (id < 10) {
+            return_text = '0' + id.toString();
+        } else {
+            return_text = id.toString();
+        };
+        return return_text;
+    };
 
 
     $scope.initZScore = function() {
@@ -169,16 +181,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.twoDigits = function(id) {
-        var return_text = '';
-        id = parseInt(id);
-        if (id < 10) {
-            return_text = '0' + id.toString();
-        } else {
-            return_text = id.toString();
-        };
-        return return_text;
-    };
 
 
     $scope.setZScore = function() {
@@ -206,11 +208,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             //  Messungen mit Variablen befüllen.
 
+            var clinicsample_source_obj = {};
+
+            var mz_id = current_messung.Messzeitpunkt.Messzeitpunkt;
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
             var mz_datestamp = current_messung.response.data.response.Date;
             var mz_datum = $filter('date')(mz_datestamp);
 
+            $scope.d.zScore.normgruppe_klinik.age_edu_mz = $scope.d.zScore.normgruppe_klinik.age_edu_mz + $scope.twoDigits(mz_id);
+
+            // Aktuelle Quelle für die Klinikstichprobe
+            var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
+
+            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === '99') {
+                var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_99];
+            } else {
+                var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
+            };
+
+
             var messung = {
+                "clinic_sample_age_edu_mz_obj": age_edu_mz_obj,
                 "zscore": 0,
                 "text_left": mz_text,
                 "text_left_caption": mz_datum,
@@ -221,6 +239,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // TMT - A
             var A_messung = angular.copy(messung);
             A_messung = $scope.addDefault(A_messung);
+
+            A_messung.clinicsample_start = 0;
+            A_messung.clinicsample_end = 0;
+
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
             A_messung.text_right_caption = '';
