@@ -150,7 +150,7 @@ function main(responses) {
             // Altersgruppe 18 - 24 | n = 155
             altersgruppe = 0;
             altersgruppe_text = "Altersgruppe 18 - 24";
-            education = 0;
+            education = 99;  //Alle Levels
             n = 155;
             altersgruppe_found = true;
             var M_Norm = [22.93, 48.97];
@@ -170,7 +170,7 @@ function main(responses) {
             // Altersgruppe 25 – 34 | n = 33
             altersgruppe = 1;
             altersgruppe_text = "Altersgruppe 25 – 34";
-            education = 0;
+            education = 99;  //Alle Levels
             n = 33;
             altersgruppe_found = true;
             var M_Norm = [24.40, 50.68];
@@ -190,7 +190,7 @@ function main(responses) {
             // Altersgruppe 35 – 44 | n = 39
             altersgruppe = 2;
             altersgruppe_text = "Altersgruppe 35 – 44";
-            education = 0;
+            education = 99;  //Alle Levels
             n = 39;
             altersgruppe_found = true;
             var M_Norm = [28.54, 58.46];
@@ -210,7 +210,7 @@ function main(responses) {
             // Altersgruppe 45 – 54 | n = 41
             altersgruppe = 3;
             altersgruppe_text = "Altersgruppe 45 – 54";
-            education = 0;
+            education = 99;  //Alle Levels
             n = 41;
             altersgruppe_found = true;
             var M_Norm = [31.78, 63.76];

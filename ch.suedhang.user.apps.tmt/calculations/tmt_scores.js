@@ -348,7 +348,10 @@ function main(responses) {
 
             var edu_relevant_groups = [];
             edu_relevant_groups.push(edu_group_name);
-            edu_relevant_groups.push('99');
+
+            if (edu_group_name !== '99') {
+                edu_relevant_groups.push('99');
+            };
 
             for (var edu_relevant_group_id = 0; edu_relevant_group_id < edu_relevant_groups.length; edu_relevant_group_id++) {
                 edu_group_name = edu_relevant_groups[edu_relevant_group_id];
