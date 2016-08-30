@@ -239,8 +239,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung = $scope.addDefault(A_messung);
 
             if (age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) {
-                A_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTATime.z_score_min;
-                A_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTATime.z_score_max;
+                A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_min);
+                A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_max);
                 A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
 
@@ -258,8 +258,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung = $scope.addDefault(B_messung);
 
             if (age_edu_mz_obj.statistics.TMTBTime.z_score_min !== null) {
-                B_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTBTime.z_score_min;
-                B_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTBTime.z_score_max;
+                B_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_min);
+                B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_max);
                 B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
 
@@ -352,6 +352,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------------------------------
     // Helper - Functions
     // -------------------------------------------
+
+    $scope.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
 
     $scope.sortByKey = function(array, key) {
         return array.sort(function(a, b) {
