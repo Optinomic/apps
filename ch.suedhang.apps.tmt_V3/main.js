@@ -129,28 +129,55 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
-        $scope.d.zScore.normgruppe_klinik.selected_age_group_id = null;
-        $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = null;
+        $scope.d.zScore.normgruppe_klinik.selected_age_group_id = 0;
+        $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = 99;
+        $scope.d.zScore.normgruppe_klinik.selected_mz_group_id = 99;
+
+        $scope.d.zScore.normgruppe_klinik.select_mz_array = [{
+            "id": 0,
+            "text": "Jeweilige Messzeitpunkte vergleichen."
+        }, {
+            "id": 99,
+            "text": "Alle Messzeitpunkte verwenden."
+        }];
+        $scope.d.zScore.normgruppe_klinik.selected_mz_array = 0;
 
 
-        $scope.setZScore();
+
+        // Store Current Age & Edu Group from Normgruppe TMT
+
+        if ($scope.d.dataMain.calculations[0].calculation_results.length !== 0) {
+
+            var current_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
+
+            $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
+            $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
+
+            $scope.d.zScore.normgruppe_tmt.edu_group = {};
+            $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
+                if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
+                    $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
+                };
+            });
+            $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
+
+
+        };
+
+        $scope.changeClinicSample();
 
     };
 
 
-    $scope.changeClinicSample = function() {
-        // Wenn Stichprobe gewählt automatisch anzeigen:
-        if ($scope.d.zScore.normgruppe_klinik.selected_pg_id !== null) {
-            $scope.d.zScore.toggles.show_clinicsample = true;
+    $scope.twoDigits = function(id) {
+        var return_text = '';
+        id = parseInt(id);
+        if (id < 10) {
+            return_text = '0' + id.toString();
         } else {
-            $scope.d.zScore.toggles.show_clinicsample = false;
+            return_text = id.toString();
         };
-
-        // Name setzen
-        $scope.d.zScore.normgruppe_klinik.selected_pg = $scope.d.dataMain.patient_groups[$scope.d.zScore.normgruppe_klinik.selected_pg_id].data.name;
-
-        // Bei Änderungen ausführen.
-        $scope.setZScore();
+        return return_text;
     };
 
 
@@ -172,36 +199,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "count": messungen.length
         };
 
-        var twoDigits = function(id) {
-            var return_text = '';
-            id = parseInt(id);
-            if (id < 10) {
-                return_text = '0' + id.toString();
-            } else {
-                return_text = id.toString();
-            };
-            return return_text;
-        };
+
 
 
         messungen.forEach(function(current_messung, myMessungIndex) {
-
-            // Store Current Age & Edu Group from Normgruppe TMT
-
-            $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
-            $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
-
-            $scope.d.zScore.normgruppe_tmt.edu_group = {};
-            $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
-                if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
-                    $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
-                };
-            });
-            $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
-
-            $scope.d.zScore.normgruppe_klinik.prop_name_age_edu = 'age_' + twoDigits(current_messung.percentile.age_perz.altersgruppe);
-            $scope.d.zScore.normgruppe_klinik.prop_name_age_edu = '_edu_' + twoDigits(current_messung.percentile.age_perz.education) + '_';
-
 
             //  Messungen mit Variablen befüllen.
 
@@ -300,6 +301,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
         });
+    };
+
+
+
+    $scope.changeClinicSample = function() {
+
+
+        var age_group_id = $scope.d.zScore.normgruppe_klinik.selected_age_group_id;
+        var edu_group_id = $scope.d.zScore.normgruppe_klinik.selected_edu_group_id;
+        var mz_group_id = $scope.d.zScore.normgruppe_klinik.selected_mz_group_id;
+
+
+        $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + twoDigits(age_group_id) + '_edu_' + twoDigits(edu_group_id) + '_mz_';
+        $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + twoDigits(age_group_id) + '_edu_' + twoDigits(edu_group_id) + '_mz_99';
+
+
+        // Bei Änderungen ausführen.
+        $scope.setZScore();
     };
 
 
