@@ -139,7 +139,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.setZScore();
-
+        $scope.getCalculation();
     };
 
 
@@ -288,6 +288,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //  
         console.log('setZScore', $scope.d.zScore);
     };
+
+
+    $scope.getCalculation = function() {
+        // Get specific User calculation
+        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_scores');
+
+        call.success(function(data) {
+            // Save Data to $scope.d
+            $scope.d.zScore.user_app_calc = data.calculation_result;
+            console.log('(DATA): getUserAppCalculation (tmt_scores): ', $scope.d.zScore.user_app_calc);
+
+            // Set Stuff
+            $scope.setZScore();
+        });
+        call.error(function(data) {
+            console.log('(ERROR): getCalculation:', data);
+        });
+    };
+
 
 
 
