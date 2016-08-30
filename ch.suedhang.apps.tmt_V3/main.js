@@ -84,18 +84,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    // -------------------------------------------
-    // Array - Functions
-    // -------------------------------------------
-
-    $scope.sortByKey = function(array, key) {
-        return array.sort(function(a, b) {
-            var x = a[key];
-            var y = b[key];
-            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        });
-    };
-
 
     $scope.addDefault = function(obj) {
 
@@ -238,7 +226,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Skala nur bei 'letzer' Messung anzeigen
         var id_last_a = parseInt($scope.d.zScore.tmt_a.length) - 1;
         var id_last_b = parseInt($scope.d.zScore.tmt_a.length) - 1;
-        console.log('LAST:', id_last_a, id_last_b, $scope.d.zScore.tmt_a);
+        // console.log('LAST:', id_last_a, id_last_b, $scope.d.zScore.tmt_a);
         $scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
         $scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
 
@@ -307,6 +295,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
 
+
+    // -------------------------------------------
+    // Helper - Functions
+    // -------------------------------------------
+
+    $scope.sortByKey = function(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    };
 
 
 

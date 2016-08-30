@@ -518,7 +518,7 @@ function main(responses) {
 
         // Returning | Results in Obj.
         // results.age_edu_obj = age_edu_mz_obj;
-        // results.patient_scores = patient_scores;
+        results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
         results.age_edu_mz_obj = age_edu_obj_statistics;
 
