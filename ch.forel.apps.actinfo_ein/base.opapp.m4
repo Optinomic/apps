@@ -51,10 +51,10 @@ type = lime
 responsibility = lead_therapist
 name = actInfo - Eintritt
 host = default
-survey_id = 275667
-hash = X48X652
-pid = X48X646
-fid = X48X645
+survey_id = 451894
+hash = X104X2880
+pid = X104X2874
+fid = X104X2719
 min_questions =
 min_lastpage = 5
 

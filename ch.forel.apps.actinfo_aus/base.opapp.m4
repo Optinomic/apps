@@ -8,7 +8,7 @@ type = patient
 [description]
 act-info (addiction, care and therapy information) Austrittsversion
 
-Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
+act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe. Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
 
 [developer]
 first_name = Hans
