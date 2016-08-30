@@ -15,6 +15,8 @@ function main(responses) {
         "Perz_A": [],
         "Perz_B": [],
         "BA_Quotient": [],
+        "TMTAZ": [],
+        "TMTBZ": [],
         // do not modify the below:
         "n": 0
     };
@@ -123,7 +125,9 @@ function main(responses) {
                 var Perz_A = current_response.percentile.result.A;
                 var Perz_B = current_response.percentile.result.B;
                 var BA_Quotient = current_response.quotient;
-
+                var Z_A = current_response.percentile.z_scores.tmtA_z;
+                var Z_B = current_response.percentile.z_scores.tmtB_z;
+                
                 scores.patient_details.edu_years = current_response.edu_years;
                 scores.patient_details.age_edu_group = current_response.percentile.age_perz;
                 scores.patient_details.age = current_response.set_age;
@@ -149,6 +153,8 @@ function main(responses) {
                 scores.mz_99_vars.Perz_A.push(Perz_A);
                 scores.mz_99_vars.Perz_B.push(Perz_B);
                 scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
+                scores.mz_99_vars.TMTAZ.push(Z_A);
+                scores.mz_99_vars.TMTBZ.push(Z_B);
                 scores.mz_99_vars.n = scores.mz_99_vars.BA_Quotient.length;
 
 
@@ -161,6 +167,8 @@ function main(responses) {
                     scores.mz_01_vars.Perz_A.push(Perz_A);
                     scores.mz_01_vars.Perz_B.push(Perz_B);
                     scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_01_vars.TMTAZ.push(Z_A);
+                    scores.mz_01_vars.TMTBZ.push(Z_B);
                     scores.mz_01_vars.n = scores.mz_01_vars.BA_Quotient.length;
                 };
 
@@ -174,6 +182,8 @@ function main(responses) {
                     scores.mz_02_vars.Perz_A.push(Perz_A);
                     scores.mz_02_vars.Perz_B.push(Perz_B);
                     scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_02_vars.TMTAZ.push(Z_A);
+                    scores.mz_02_vars.TMTBZ.push(Z_B);
                     scores.mz_02_vars.n = scores.mz_02_vars.BA_Quotient.length;
                 };
 
@@ -187,8 +197,9 @@ function main(responses) {
                     scores.mz_03_vars.Perz_A.push(Perz_A);
                     scores.mz_03_vars.Perz_B.push(Perz_B);
                     scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_03_vars.TMTAZ.push(Z_A);
+                    scores.mz_03_vars.TMTBZ.push(Z_B);
                     scores.mz_03_vars.n = scores.mz_03_vars.BA_Quotient.length;
-
                 };
             };
 

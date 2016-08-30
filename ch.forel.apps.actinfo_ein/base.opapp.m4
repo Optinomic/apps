@@ -59,6 +59,7 @@ min_questions =
 min_lastpage = 5
 
 
+
 [event activation]
 type = on_activation
 time = 8:00
