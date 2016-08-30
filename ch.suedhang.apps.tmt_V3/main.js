@@ -225,7 +225,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             } else {
                 var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
             };
-
+            console.log('age_edu_mz_obj |setZScore: ', $scope.d.zScore.normgruppe_klinik.selected_mz_array, age_edu_mz_obj);
 
             var messung = {
                 "clinic_sample_age_edu_mz_obj": age_edu_mz_obj,
@@ -243,11 +243,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) {
                 A_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTATime.z_score_min;
                 A_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTATime.z_score_max;
+                A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
-            A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
@@ -262,11 +262,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (age_edu_mz_obj.statistics.TMTBTime.z_score_min !== null) {
                 B_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTBTime.z_score_min;
                 B_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTBTime.z_score_max;
+                B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             };
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
-            B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 B_messung.zscore_color = '#F44336';
