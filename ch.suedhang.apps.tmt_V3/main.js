@@ -225,7 +225,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             } else {
                 var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
             };
-            console.log('age_edu_mz_obj |setZScore: ', $scope.d.zScore.normgruppe_klinik.selected_mz_array, age_edu_mz_obj);
+            console.log('age_edu_mz_obj |setZScore: ', $scope.d.zScore.normgruppe_klinik.selected_mz_array, $scope.d.zScore.normgruppe_klinik.age_edu_mz, age_edu_mz_obj);
 
             var messung = {
                 "clinic_sample_age_edu_mz_obj": age_edu_mz_obj,
