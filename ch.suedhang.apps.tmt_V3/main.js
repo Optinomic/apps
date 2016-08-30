@@ -215,7 +215,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var mz_datestamp = current_messung.response.data.response.Date;
             var mz_datum = $filter('date')(mz_datestamp);
 
-            $scope.d.zScore.normgruppe_klinik.age_edu_mz = $scope.d.zScore.normgruppe_klinik.age_edu_mz + $scope.twoDigits(mz_id);
+            $scope.d.zScore.normgruppe_klinik.age_edu_mz = $scope.d.zScore.normgruppe_klinik.age_edu_mz_base + $scope.twoDigits(mz_id);
 
             // Aktuelle Quelle für die Klinikstichprobe
             var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
@@ -343,6 +343,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var mz_group_id = $scope.d.zScore.normgruppe_klinik.selected_mz_group_id;
 
         $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_';
+        $scope.d.zScore.normgruppe_klinik.age_edu_mz_base = angular.copy($scope.d.zScore.normgruppe_klinik.age_edu_mz);
         $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_99';
 
         // Bei Änderungen ausführen.
