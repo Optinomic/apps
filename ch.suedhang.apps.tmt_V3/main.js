@@ -129,8 +129,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
-        $scope.d.zScore.normgruppe_klinik.selected_pg_id = null;
-        $scope.d.zScore.normgruppe_klinik.selected_pg = 'Keine klinische Stichprobe gewählt';
+        $scope.d.zScore.normgruppe_klinik.selected_age_group_id = null;
+        $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = null;
 
 
         $scope.setZScore();
@@ -178,13 +178,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Store Current Age & Edu Group from Normgruppe TMT
 
             $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
-            $scope.d.zScore.normgruppe_tmt.edu_group = {};
+            $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
 
+            $scope.d.zScore.normgruppe_tmt.edu_group = {};
             $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
                 if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
                     $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
                 };
             });
+            $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
+
 
             //  Messungen mit Variablen befüllen.
 
