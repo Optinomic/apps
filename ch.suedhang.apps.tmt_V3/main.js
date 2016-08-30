@@ -111,7 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.initZScore = function() {
-        $scope.d.zScore = {};
+
         $scope.d.zScore.init = false;
 
         // Toggles | Grafiken
@@ -295,6 +295,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         call.success(function(data) {
             // Save Data to $scope.d
+            $scope.d.zScore = {};
+
             $scope.d.zScore.user_app_calc = data.calculation_result;
             console.log('(DATA): getUserAppCalculation (tmt_scores): ', $scope.d.zScore.user_app_calc);
 
