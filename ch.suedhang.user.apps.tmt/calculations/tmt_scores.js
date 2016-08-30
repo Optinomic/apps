@@ -84,14 +84,228 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+    calc.getPatientScores = function(d) {
+
+        // Get all TMT-Scores from a Patient and arrange it in a Array
+        var all_scores = [];
+
+        for (var i = 0; i < d.length; i++) {
+            var current_result = d[i];
 
 
-    calc.getVariables = function() {
-        // Interessante Variablen
-        var variables = calc.variables;
+            // Scores Obj. erstellen.
+            var scores = {
+                "patient_details": {
+                    "edu_years": null,
+                    "age_edu_group": {},
+                    "age": null
+                },
+                "mz_01_vars": calc.getVariables(),
+                "mz_02_vars": calc.getVariables(),
+                "mz_03_vars": calc.getVariables(),
+                "mz_99_vars": calc.getVariables(),
+                "pid": current_result.patient.id
+            };
 
-        // Clone Obj. and Return
-        return JSON.parse(JSON.stringify(variables));
+
+
+            var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
+
+            var data_here = false;
+
+            for (var x = 0; x < all_responses.length; x++) {
+                var current_response = all_responses[x];
+
+                var TMTAError = current_response.TMTAError;
+                var TMTATime = current_response.TMTATime;
+                var TMTBError = current_response.TMTBError;
+                var TMTBTime = current_response.TMTBTime;
+                var Perz_A = current_response.percentile.result.A;
+                var Perz_B = current_response.percentile.result.B;
+                var BA_Quotient = current_response.quotient;
+
+                scores.patient_details.edu_years = current_response.edu_years;
+                scores.patient_details.age_edu_group = current_response.percentile.age_perz;
+                scores.patient_details.age = current_response.set_age;
+
+                var filled = current_response.response.data.filled;
+                var event_id = current_response.response.data.event_id;
+                var pid = current_result.patient.id;
+
+                var messzeitpunkt = current_response.mz;
+
+
+                if (current_response.edu_years !== null) {
+                    data_here = true;
+                };
+
+
+
+                // Interessante Variablen & Details Obj. speichern.
+                scores.mz_99_vars.TMTAError.push(TMTAError);
+                scores.mz_99_vars.TMTATime.push(TMTATime);
+                scores.mz_99_vars.TMTBError.push(TMTBError);
+                scores.mz_99_vars.TMTBTime.push(TMTBTime);
+                scores.mz_99_vars.Perz_A.push(Perz_A);
+                scores.mz_99_vars.Perz_B.push(Perz_B);
+                scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
+                scores.mz_99_vars.n = scores.mz_99_vars.BA_Quotient.length;
+
+
+                if (messzeitpunkt === 1) {
+                    // Eintritt
+                    scores.mz_01_vars.TMTAError.push(TMTAError);
+                    scores.mz_01_vars.TMTATime.push(TMTATime);
+                    scores.mz_01_vars.TMTBError.push(TMTBError);
+                    scores.mz_01_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_01_vars.Perz_A.push(Perz_A);
+                    scores.mz_01_vars.Perz_B.push(Perz_B);
+                    scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_01_vars.n = scores.mz_01_vars.BA_Quotient.length;
+                };
+
+
+                if (messzeitpunkt === 2) {
+                    // Austritt
+                    scores.mz_02_vars.TMTAError.push(TMTAError);
+                    scores.mz_02_vars.TMTATime.push(TMTATime);
+                    scores.mz_02_vars.TMTBError.push(TMTBError);
+                    scores.mz_02_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_02_vars.Perz_A.push(Perz_A);
+                    scores.mz_02_vars.Perz_B.push(Perz_B);
+                    scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_02_vars.n = scores.mz_02_vars.BA_Quotient.length;
+                };
+
+
+                if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
+                    // Anderer
+                    scores.mz_03_vars.TMTAError.push(TMTAError);
+                    scores.mz_03_vars.TMTATime.push(TMTATime);
+                    scores.mz_03_vars.TMTBError.push(TMTBError);
+                    scores.mz_03_vars.TMTBTime.push(TMTBTime);
+                    scores.mz_03_vars.Perz_A.push(Perz_A);
+                    scores.mz_03_vars.Perz_B.push(Perz_B);
+                    scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
+                    scores.mz_03_vars.n = scores.mz_03_vars.BA_Quotient.length;
+
+                };
+            };
+
+            // Push only if Data available
+            if (data_here) {
+                all_scores.push(scores);
+            };
+
+        };
+
+        return all_scores;
+    };
+
+    calc.getAgeEduObj = function() {
+
+        var retrun_obj = {};
+
+        // Propertys from Data Model
+        var age_props = calc.group_age_props;
+        var edu_props = calc.group_edu_props;
+        var mz_props = calc.group_mz_props;
+
+        // Create 'all propertys array' from Array
+        var allVarsPropertys = [];
+        var allVars = calc.getVariables('variables');
+        for (var property in allVars) {
+            if (allVars.hasOwnProperty(property)) {
+                allVarsPropertys.push(property);
+            }
+        };
+
+        // var
+        var twoDigits = function(id) {
+            var return_text = '';
+            id = parseInt(id);
+            if (id < 10) {
+                return_text = '0' + id.toString();
+            } else {
+                return_text = id.toString();
+            };
+            return return_text;
+        };
+
+
+        var merge_obj = function(obj1, obj2) {
+            var obj3 = {};
+            for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+            for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+            return obj3;
+        };
+
+
+        // Create 'multidimensional Array in a Object.
+
+        var obj_name = '';
+
+        for (var group_id = 0; group_id < age_props.length; group_id++) {
+            // Init & Add stuff:
+            var inner_obj = {};
+            var obj_to_merge_age = age_props[group_id];
+            var name_age = obj_to_merge_age.age_group_id;
+
+            var age_group_array = [];
+            age_group_array.push(obj_to_merge_age.age_group_id);
+            age_group_array.push(obj_to_merge_age.age_group_text);
+            age_group_array.push(group_id);
+            inner_obj.age_group = age_group_array;
+
+            //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_age);
+            //inner_obj.age_group_array_id = group_id;
+
+            for (var edu_prop_id = 0; edu_prop_id < edu_props.length; edu_prop_id++) {
+                // Init & Add stuff:
+                var obj_to_merge_edu = edu_props[edu_prop_id];
+                var name_edu = obj_to_merge_edu.edu_group_id;
+                //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_edu);
+                //inner_obj.edu_group_array_id = edu_prop_id;
+                var edu_group_array = [];
+                edu_group_array.push(obj_to_merge_edu.edu_group_id);
+                edu_group_array.push(obj_to_merge_edu.edu_group_text);
+                edu_group_array.push(edu_prop_id);
+                inner_obj.edu_group = edu_group_array;
+
+
+                for (var mz_prop_id = 0; mz_prop_id < mz_props.length; mz_prop_id++) {
+                    // Init & Add stuff:
+                    var obj_to_merge_mz = mz_props[mz_prop_id];
+                    var name_mz = obj_to_merge_mz.mz_group_id;
+
+                    var mz_group_array = [];
+                    mz_group_array.push(obj_to_merge_mz.mz_group_id);
+                    mz_group_array.push(obj_to_merge_mz.mz_group_text);
+                    mz_group_array.push(mz_prop_id);
+                    inner_obj.mz_group = mz_group_array;
+
+                    //inner_obj = calc.merge_obj(inner_obj, obj_to_merge_mz);
+                    //inner_obj.mz_group_array_id = mz_prop_id;
+
+                    // Place for Statistics & Scores & Patients
+                    inner_obj.scores = calc.variables;
+                    inner_obj.statistics = {
+                        "calculated": false
+                    };
+                    inner_obj.patients = [];
+                    inner_obj.n = null;
+
+                    // Build ObjectName
+                    obj_name = 'age_' + twoDigits(name_age) + '_edu_' + twoDigits(name_edu) + '_mz_' + twoDigits(name_mz);
+
+                    // Write to Object
+                    retrun_obj[obj_name] = JSON.parse(JSON.stringify(inner_obj));
+                };
+            };
+        };
+
+
+        return retrun_obj;
     };
 
     calc.getAgeEduObjScores = function(age_edu_mz_obj, patient_scores) {
@@ -226,19 +440,6 @@ function main(responses) {
         return s;
     };
 
-    calc.getPropertyArrayFromOject = function(objectFull) {
-        // Create 'all propertys array' from Object
-        var allFullPropertys = [];
-
-        for (var property in objectFull) {
-            if (objectFull.hasOwnProperty(property)) {
-                allFullPropertys.push(property);
-            }
-        };
-
-        return allFullPropertys;
-    };
-
     calc.concatAllArraysInObject = function(objectFull, objectToConcat) {
 
 
@@ -271,130 +472,63 @@ function main(responses) {
         return objectFull;
     };
 
-    calc.getPatientScores = function(d) {
+    calc.getVariables = function() {
+        // Interessante Variablen
+        var variables = calc.variables;
 
-        // Get all TMT-Scores from a Patient and arrange it in a Array
-        var all_scores = [];
-
-        for (var i = 0; i < d.length; i++) {
-            var current_result = d[i];
-
-
-            // Scores Obj. erstellen.
-            var scores = {
-                "patient_details": {
-                    "edu_years": null,
-                    "age_edu_group": {},
-                    "age": null
-                },
-                "mz_01_vars": calc.getVariables(),
-                "mz_02_vars": calc.getVariables(),
-                "mz_03_vars": calc.getVariables(),
-                "mz_99_vars": calc.getVariables(),
-                "pid": current_result.patient.id
-            };
-
-
-
-            var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
-
-            var data_here = false;
-
-            for (var x = 0; x < all_responses.length; x++) {
-                var current_response = all_responses[x];
-
-                var TMTAError = current_response.TMTAError;
-                var TMTATime = current_response.TMTATime;
-                var TMTBError = current_response.TMTBError;
-                var TMTBTime = current_response.TMTBTime;
-                var Perz_A = current_response.percentile.result.A;
-                var Perz_B = current_response.percentile.result.B;
-                var BA_Quotient = current_response.quotient;
-
-                scores.patient_details.edu_years = current_response.edu_years;
-                scores.patient_details.age_edu_group = current_response.percentile.age_perz;
-                scores.patient_details.age = current_response.set_age;
-
-                var filled = current_response.response.data.filled;
-                var event_id = current_response.response.data.event_id;
-                var pid = current_result.patient.id;
-
-                var messzeitpunkt = current_response.mz;
-
-
-                if (current_response.edu_years !== null) {
-                    data_here = true;
-                };
-
-
-
-                // Interessante Variablen & Details Obj. speichern.
-                scores.mz_99_vars.TMTAError.push(TMTAError);
-                scores.mz_99_vars.TMTATime.push(TMTATime);
-                scores.mz_99_vars.TMTBError.push(TMTBError);
-                scores.mz_99_vars.TMTBTime.push(TMTBTime);
-                scores.mz_99_vars.Perz_A.push(Perz_A);
-                scores.mz_99_vars.Perz_B.push(Perz_B);
-                scores.mz_99_vars.BA_Quotient.push(BA_Quotient);
-                scores.mz_99_vars.n = scores.mz_99_vars.BA_Quotient.length;
-
-
-                if (messzeitpunkt === 1) {
-                    // Eintritt
-                    scores.mz_01_vars.TMTAError.push(TMTAError);
-                    scores.mz_01_vars.TMTATime.push(TMTATime);
-                    scores.mz_01_vars.TMTBError.push(TMTBError);
-                    scores.mz_01_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_01_vars.Perz_A.push(Perz_A);
-                    scores.mz_01_vars.Perz_B.push(Perz_B);
-                    scores.mz_01_vars.BA_Quotient.push(BA_Quotient);
-                    scores.mz_01_vars.n = scores.mz_01_vars.BA_Quotient.length;
-                };
-
-
-                if (messzeitpunkt === 2) {
-                    // Austritt
-                    scores.mz_02_vars.TMTAError.push(TMTAError);
-                    scores.mz_02_vars.TMTATime.push(TMTATime);
-                    scores.mz_02_vars.TMTBError.push(TMTBError);
-                    scores.mz_02_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_02_vars.Perz_A.push(Perz_A);
-                    scores.mz_02_vars.Perz_B.push(Perz_B);
-                    scores.mz_02_vars.BA_Quotient.push(BA_Quotient);
-                    scores.mz_02_vars.n = scores.mz_02_vars.BA_Quotient.length;
-                };
-
-
-                if ((messzeitpunkt !== 1) && (messzeitpunkt !== 2)) {
-                    // Anderer
-                    scores.mz_03_vars.TMTAError.push(TMTAError);
-                    scores.mz_03_vars.TMTATime.push(TMTATime);
-                    scores.mz_03_vars.TMTBError.push(TMTBError);
-                    scores.mz_03_vars.TMTBTime.push(TMTBTime);
-                    scores.mz_03_vars.Perz_A.push(Perz_A);
-                    scores.mz_03_vars.Perz_B.push(Perz_B);
-                    scores.mz_03_vars.BA_Quotient.push(BA_Quotient);
-                    scores.mz_03_vars.n = scores.mz_03_vars.BA_Quotient.length;
-
-                };
-            };
-
-            // Push only if Data available
-            if (data_here) {
-                all_scores.push(scores);
-            };
-
-        };
-
-        return all_scores;
+        // Clone Obj. and Return
+        return JSON.parse(JSON.stringify(variables));
     };
-
 
     // ------------------------------------------
     //  calculation_simplestatistics.js
     //  S T A T I S T I C S
     // ------------------------------------------
 
+    calc.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
+
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.getPropertyArrayFromOject = function(objectFull) {
+        // Create 'all propertys array' from Object
+        var allFullPropertys = [];
+
+        for (var property in objectFull) {
+            if (objectFull.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        };
+
+        return allFullPropertys;
+    };
+
+    calc.isPIDinGroup = function(patients_array, search_pid) {
+
+        var isPIDinGroup = false;
+
+        for (var id = 0; id < patients_array.length; id++) {
+            var current_patient = patients_array[id];
+
+            if (current_patient.id === search_pid) {
+                isPIDinGroup = true;
+            };
+        };
+
+        return isPIDinGroup;
+    };
 
     // # sum
     //
@@ -576,25 +710,6 @@ function main(responses) {
         return (x - mean) / standard_deviation;
     }
 
-    calc.roundToTwo = function(num) {
-        // Round a Number to 0.X 
-        return +(Math.round(num + "e+2") + "e-2");
-    };
-
-    calc.isArray = function(obj) {
-        return (typeof obj !== 'undefined' &&
-            obj && obj.constructor === Array);
-    };
-
-    calc.merge_obj = function(obj1, obj2) {
-        var obj3 = {};
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
-        return obj3;
-    }
-
-
-
 
 
     // ------------------------------------------
@@ -616,7 +731,7 @@ function main(responses) {
 
         // Returning | Results in Obj.
         // results.age_edu_obj = age_edu_mz_obj;
-        results.patient_scores = patient_scores;
+        // results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
         results.age_edu_mz_obj = age_edu_obj_statistics;
 
