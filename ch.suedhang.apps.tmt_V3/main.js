@@ -182,7 +182,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
                 if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
-                    scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
+                    $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
                 };
             });
 
