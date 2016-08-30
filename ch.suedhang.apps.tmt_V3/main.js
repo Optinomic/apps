@@ -125,8 +125,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // var erste_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
 
         $scope.d.zScore.normgruppe_tmt = {};
-        // $scope.d.zScore.normgruppe_tmt.age_group = {};
-        // $scope.d.zScore.normgruppe_tmt.edu_group = {};
+
 
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
@@ -176,8 +175,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         messungen.forEach(function(current_messung, myMessungIndex) {
 
-            $scope.d.zScore.normgruppe_tmt.age_group = current_messung.percentile.age_perz.altersgruppe;
-            $scope.d.zScore.normgruppe_tmt.edu_group = current_messung.percentile.age_perz.education;
+            // Store Current Age & Edu Group from Normgruppe TMT
+
+            $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
+            $scope.d.zScore.normgruppe_tmt.edu_group = {};
+
+            $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
+                if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
+                    scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
+                };
+            });
+
+            //  Messungen mit Variablen befüllen.
 
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
             var mz_datestamp = current_messung.response.data.response.Date;
