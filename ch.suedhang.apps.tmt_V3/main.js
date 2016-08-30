@@ -240,9 +240,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var A_messung = angular.copy(messung);
             A_messung = $scope.addDefault(A_messung);
 
-            if (current_messung.statistics.TMTATime.z_score_max !== null) {
-                A_messung.clinicsample_start = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_min;
-                A_messung.clinicsample_end = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_max;
+            if (age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) {
+                A_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTATime.z_score_min;
+                A_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTATime.z_score_max;
             };
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
@@ -259,9 +259,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var B_messung = angular.copy(messung);
             B_messung = $scope.addDefault(B_messung);
 
-            if (current_messung.statistics.TMTATime.z_score_max !== null) {
-                B_messung.clinicsample_start = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_min;
-                B_messung.clinicsample_end = age_edu_mz_obj.statistics.current_messung.statistics.TMTATime.z_score_max;
+            if (age_edu_mz_obj.statistics.TMTBTime.z_score_min !== null) {
+                B_messung.clinicsample_start = age_edu_mz_obj.statistics.TMTBTime.z_score_min;
+                B_messung.clinicsample_end = age_edu_mz_obj.statistics.TMTBTime.z_score_max;
             };
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
