@@ -218,9 +218,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.zScore.normgruppe_klinik.age_edu_mz = $scope.d.zScore.normgruppe_klinik.age_edu_mz_base + $scope.twoDigits(mz_id);
 
             // Aktuelle Quelle für die Klinikstichprobe
-            var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
-
-            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === '99') {
+            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 99) {
                 var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_99];
             } else {
                 var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
