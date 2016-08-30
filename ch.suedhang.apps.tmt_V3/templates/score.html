@@ -15,19 +15,22 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> Die klinische Stichproben sind nach Alter und Bildung normiert.
             </p>
             <p>&nbsp;</p>
-            <!--
             <md-input-container class="md-block">
-                <label>Klinische Normierung | Patientengruppe</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_pg_id" ng-change="changeClinicSample()">
-                    <md-option ng-value="null">
-                        Keine klinische Stichprobe gewählt
-                    </md-option>
-                    <md-option ng-repeat="pg in d.dataMain.patient_groups" ng-value="pg.id">
-                        {{pg.data.name}}
+                <label>Altersgruppe</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group_id" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age.age_group_id">
+                        {{age.age_group_text}}
                     </md-option>
                 </md-select>
             </md-input-container>
-            -->
+            <md-input-container class="md-block">
+                <label>Ausbildung</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group_id" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu.edu_group_id">
+                        {{edu.edu_group_text}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
         </div>
     </div>
     <div class="grid-border-top" style="margin-top: 24px;">
