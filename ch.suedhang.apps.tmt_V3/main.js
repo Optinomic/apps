@@ -91,8 +91,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Add Defaults for all Scores
         obj.zscore_min = -3;
         obj.zscore_max = 3;
-        obj.clinicsample_start = 0;
-        obj.clinicsample_end = 0;
+        obj.clinicsample_start = null;
+        obj.clinicsample_end = null;
         obj.clinicsample_color = '#C5CAE9';
 
         // Remember to Show them later - if needed.
@@ -267,7 +267,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_max);
                 B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
             } else {
-                A_messung.show_clinicsample_scores = false;
+                B_messung.show_clinicsample_scores = false;
             };
 
             // ToDo: set zscore_min | zscore_max  if >= +/-3 
