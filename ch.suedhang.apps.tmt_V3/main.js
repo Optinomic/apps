@@ -297,13 +297,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // $scope.d.zScore.tmt_a = $scope.sortByKey($scope.d.zScore.tmt_a, 'datestamp');
         // $scope.d.zScore.tmt_b = $scope.sortByKey($scope.d.zScore.tmt_b, 'datestamp');
 
-        // Skala nur bei 'letzer' Messung anzeigen
-        var id_last_a = parseInt($scope.d.zScore.tmt_a.length) - 1;
-        var id_last_b = parseInt($scope.d.zScore.tmt_a.length) - 1;
-        // console.log('LAST:', id_last_a, id_last_b, $scope.d.zScore.tmt_a);
-        $scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
-        $scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
-
+        if (messungen.length > 0) {
+            // Skala nur bei 'letzer' Messung anzeigen
+            var id_last_a = parseInt($scope.d.zScore.tmt_a.length) - 1;
+            var id_last_b = parseInt($scope.d.zScore.tmt_a.length) - 1;
+            $scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
+            $scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
+        };
 
         // Check if Eintritt & Austrittsmessung vorhanden
         if ((messungen_info.eintritt) && (messungen_info.austritt)) {
