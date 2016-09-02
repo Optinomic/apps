@@ -54,7 +54,7 @@ type = on_activation
 due_after = 259200
 overdue = ignore
 description = TMT-Erfassung
-survey = tmt
+survey = tmt_ng
 
 
 [email new_event html]
