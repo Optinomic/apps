@@ -139,26 +139,26 @@ include(../lib/html/optinomic/page/start.m4)
         <div ng-repeat="response in d.zScore.tmt_b">
             <z-score data="response"></z-score>
         </div>
-        <div ng-repeat="response in d.dataMain.survey_responses" layout="row" layout-align="space-between start" layout-margin>
+        <div layout="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.calculations[0].calculation_results">
             <div layout="column" layout-align="start center" flex="20">
-                <p class="md-caption">{{response.calculations[0].calculation_result.Messzeitpunkt.Messzeitpunkt_Text}}</p>
-                <p class="md-subhead" style="margin-top:-12px;">{{response.entity.data.response.Date | date}}</p>
+                <p class="md-caption">{{response.Messzeitpunkt.Messzeitpunkt_Text}}</p>
+                <p class="md-subhead" style="margin-top:-12px;">{{response.date | date}}</p>
             </div>
             <div layout="column" layout-align="start center">
                 <p class="md-caption">TMT B: Zeit</p>
-                <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.TMTBTime}}</p>
+                <p class="md-subhead" style="margin-top:-12px;">{{response.TMTBTime}}</p>
             </div>
             <div layout="column" layout-align="start center">
                 <p class="md-caption">TMT B: Fehler</p>
-                <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.TMTBError}}</p>
+                <p class="md-subhead" style="margin-top:-12px;">{{response.TMTBError}}</p>
             </div>
             <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.result.calculated">
                 <p class="md-caption">TMT B: Perzentile</p>
-                <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.percentile.result.B}}</p>
+                <p class="md-subhead" style="margin-top:-12px;">{{response.percentile.result.B}}</p>
             </div>
             <div layout="column" layout-align="start center">
                 <p class="md-caption">B/A: Quotient</p>
-                <p class="md-subhead" style="margin-top:-12px;">{{response.calculations[0].calculation_result.quotient_rounded}}</p>
+                <p class="md-subhead" style="margin-top:-12px;">{{response.quotient_rounded}}</p>
             </div>
         </div>
     </div>
