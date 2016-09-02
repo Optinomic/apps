@@ -39,13 +39,13 @@ include(style.css)
 
 
 [survey]
-id = tmt
+id = tmt_ng
 type = ng
 responsibility = lead_therapist
 name = Trail Making Test (TMT)
 host = default
 
-[survey_markup tmt]
+[survey_markup tmt_ng]
 include(survey_markups/tmt_survey.html)
 
 
