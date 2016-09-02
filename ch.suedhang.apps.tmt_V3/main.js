@@ -303,6 +303,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var id_last_b = parseInt($scope.d.zScore.tmt_a.length) - 1;
             $scope.d.zScore.tmt_a[id_last_a].show_numbers = true;
             $scope.d.zScore.tmt_b[id_last_b].show_numbers = true;
+        } else {
+            $scope.d.haveData = false;
         };
 
         // Check if Eintritt & Austrittsmessung vorhanden
