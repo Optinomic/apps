@@ -499,7 +499,7 @@ function main(responses) {
     //  S T A T I S T I C S   &   Helpers
     // ------------------------------------------
 
-    include(.. / lib / js / optinomic / statistics / calculation_simplestatistics.js)
+    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------
