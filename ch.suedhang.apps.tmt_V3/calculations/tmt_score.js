@@ -13,15 +13,15 @@ function main(responses) {
     };
 
     calc.quotient = function(d) {
-        var TMTATime = parseInt(d.TMTATime);
-        var TMTBTime = parseInt(d.TMTBTime);
+        var TMTATime = parseInt(d.tmt_a_time);
+        var TMTBTime = parseInt(d.tmt_b_time);
         var result = TMTBTime / TMTATime;
 
         return result;
     };
 
     calc.z_scores = function(TMTATime, TMTBTime, m_norm, sd_norm) {
-        
+
         // Calculate stuff
         var tmtA_z = (TMTATime - m_norm[0]) / sd_norm[0] * -1;
         var tmtB_z = (TMTBTime - m_norm[1]) / sd_norm[1] * -1;
@@ -50,6 +50,22 @@ function main(responses) {
     calc.getPatientAge = function(birth_date) {
         if (birth_date !== null) {
             var today = new Date();
+            var birthDate = new Date(birth_date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            };
+        } else {
+            var age = 1;
+        };
+
+        return age;
+    };
+
+    calc.getPatientAgeMz = function(birth_date, survey_filled_date) {
+        if (birth_date !== null) {
+            var today = new Date(survey_filled_date);
             var birthDate = new Date(birth_date);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
@@ -150,7 +166,7 @@ function main(responses) {
             // Altersgruppe 18 - 24 | n = 155
             altersgruppe = 0;
             altersgruppe_text = "Altersgruppe 18 - 24";
-            education = 99;  //Alle Levels
+            education = 99; //Alle Levels
             n = 155;
             altersgruppe_found = true;
             var M_Norm = [22.93, 48.97];
@@ -170,7 +186,7 @@ function main(responses) {
             // Altersgruppe 25 – 34 | n = 33
             altersgruppe = 1;
             altersgruppe_text = "Altersgruppe 25 – 34";
-            education = 99;  //Alle Levels
+            education = 99; //Alle Levels
             n = 33;
             altersgruppe_found = true;
             var M_Norm = [24.40, 50.68];
@@ -190,7 +206,7 @@ function main(responses) {
             // Altersgruppe 35 – 44 | n = 39
             altersgruppe = 2;
             altersgruppe_text = "Altersgruppe 35 – 44";
-            education = 99;  //Alle Levels
+            education = 99; //Alle Levels
             n = 39;
             altersgruppe_found = true;
             var M_Norm = [28.54, 58.46];
@@ -210,7 +226,7 @@ function main(responses) {
             // Altersgruppe 45 – 54 | n = 41
             altersgruppe = 3;
             altersgruppe_text = "Altersgruppe 45 – 54";
-            education = 99;  //Alle Levels
+            education = 99; //Alle Levels
             n = 41;
             altersgruppe_found = true;
             var M_Norm = [31.78, 63.76];
@@ -596,61 +612,70 @@ function main(responses) {
         var allResults = [];
 
         responses_array.forEach(function(response, myindex) {
+
+
+
+
             var myResults = {};
             var result = response.data.response;
 
-            // Age & Edu
-            myResults.birthdate = d.patient.data.birthdate
 
-            var set_age = calc.getPatientAge(d.patient.data.birthdate);
-            myResults.set_age = set_age;
+            if (result.survey_version === 'ng_survey_v1') {
 
-            var edu_years = calc.roundToTwo(result.Ausbildungsjahre);
-            myResults.edu_years = edu_years;
+                // Age & Edu
+                myResults.birthdate = d.patient.data.birthdate
 
+                var set_age = calc.getPatientAgeMz(d.patient.data.birthdate, response.data.filled);
+                myResults.set_age = set_age;
 
-            // Zeit & Fehler in Integer
-            myResults.TMTAError = parseInt(result.TMTAError);
-            myResults.TMTBError = parseInt(result.TMTBError);
-            myResults.TMTATime = parseInt(result.TMTATime);
-            myResults.TMTBTime = parseInt(result.TMTBTime);
+                var edu_years = calc.roundToTwo(result.edu_years);
+                myResults.edu_years = edu_years;
 
 
-            // Calculate Stuff
-            myResults.quotient = calc.quotient(result);
-            myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
-            myResults.percentile = calc.get_percentile(result, set_age, edu_years);
+                // Zeit & Fehler in Integer
+                myResults.TMTAError = parseInt(result.tmt_a_error);
+                myResults.TMTBError = parseInt(result.tmt_b_error);
+                myResults.TMTATime = parseInt(result.tmt_a_time);
+                myResults.TMTBTime = parseInt(result.tmt_b_time);
 
-            // Messzeitpunkt
-            var Messzeitpunkt = parseInt(result.Messzeitpunkt);
-            myResults.mz = Messzeitpunkt;
 
-            var Messzeitpunkt_Text = 'Undefined';
+                // Calculate Stuff
+                myResults.quotient = calc.quotient(result);
+                myResults.quotient_rounded = calc.roundToTwo(calc.quotient(result));
+                myResults.percentile = calc.get_percentile(result, set_age, edu_years);
 
-            if (Messzeitpunkt === 1) {
-                Messzeitpunkt_Text = 'Eintritt';
+                // Messzeitpunkt
+                var Messzeitpunkt = parseInt(result.mz);
+                myResults.mz = Messzeitpunkt;
+
+                var Messzeitpunkt_Text = 'Undefined';
+
+                if (Messzeitpunkt === 1) {
+                    Messzeitpunkt_Text = 'Eintritt';
+                };
+                if (Messzeitpunkt === 2) {
+                    Messzeitpunkt_Text = 'Austritt';
+                };
+                if (Messzeitpunkt === 3) {
+                    Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
+                };
+
+                var mz_obj = {
+                    "Messzeitpunkt": Messzeitpunkt,
+                    "Messzeitpunkt_Text": Messzeitpunkt_Text
+                };
+
+                myResults.Messzeitpunkt = mz_obj;
+
+                // Write Results for the Return
+                // Do not modify stuff here
+                myResults.hash = result['optinomixHASH'];
+                myResults.response = response;
+                // myResults.d = d;
+
+                allResults.push(myResults);
+
             };
-            if (Messzeitpunkt === 2) {
-                Messzeitpunkt_Text = 'Austritt';
-            };
-            if (Messzeitpunkt === 3) {
-                Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
-            };
-
-            var mz_obj = {
-                "Messzeitpunkt": Messzeitpunkt,
-                "Messzeitpunkt_Text": Messzeitpunkt_Text
-            };
-
-            myResults.Messzeitpunkt = mz_obj;
-
-            // Write Results for the Return
-            // Do not modify stuff here
-            myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            // myResults.d = d;
-
-            allResults.push(myResults);
         });
 
         return allResults;
