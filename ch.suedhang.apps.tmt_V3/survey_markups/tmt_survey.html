@@ -3,7 +3,7 @@
         <div flex-gt-sm="65" layout="column">
             <div ng-if="!thankyou">
                 <form name="surveyForm">
-                    <md-card>
+                    <md-card ng-init="result.survey_version = 'ng_survey_v1'">
                         <md-card-title>
                             <md-card-title-text>
                                 <span class="md-display-1" style="color:#3F51B5">Trail Making Test (TMT)</span>
