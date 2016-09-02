@@ -148,10 +148,10 @@ function main(responses) {
 
 
         // Zeit & Fehler in Integer
-        var TMTAError = parseInt(d.TMTAError);
-        var TMTBError = parseInt(d.TMTBError);
-        var TMTATime = parseInt(d.TMTATime);
-        var TMTBTime = parseInt(d.TMTBTime);
+        var TMTAError = parseInt(d.tmt_a_error);
+        var TMTBError = parseInt(d.tmt_b_error);
+        var TMTATime = parseInt(d.tmt_a_time);
+        var TMTBTime = parseInt(d.tmt_b_time);
 
         resultObj.time_error = {
             "TMTAError": TMTAError,
@@ -581,6 +581,7 @@ function main(responses) {
         };
 
         if (altersgruppe_found) {
+
 
             // Perzentile berechnen;
             var A_Perz = calc.get_current_percentile('A', TMTATime, resultObj.age_perz);
