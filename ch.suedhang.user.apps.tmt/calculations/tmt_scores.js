@@ -127,7 +127,7 @@ function main(responses) {
                 var BA_Quotient = current_response.quotient;
                 var Z_A = current_response.percentile.z_scores.tmtA_z;
                 var Z_B = current_response.percentile.z_scores.tmtB_z;
-                
+
                 scores.patient_details.edu_years = current_response.edu_years;
                 scores.patient_details.age_edu_group = current_response.percentile.age_perz;
                 scores.patient_details.age = current_response.set_age;
@@ -343,8 +343,13 @@ function main(responses) {
             var age_group = current_patient_score.patient_details.age_edu_group.altersgruppe;
             var age_group_name = twoDigits(age_group);
 
-            var edu_group = current_patient_score.patient_details.age_edu_group.education;
-            var edu_group_name = twoDigits(edu_group);
+            if (current_patient_score.patient_details.age_edu_group.education_high) {
+                var edu_group_name = '01';
+            } else {
+                var edu_group_name = '00';
+            };
+
+            //var edu_group = current_patient_score.patient_details.age_edu_group.education;
 
             var edu_relevant_groups = [];
             edu_relevant_groups.push(edu_group_name);
@@ -499,7 +504,7 @@ function main(responses) {
     //  S T A T I S T I C S   &   Helpers
     // ------------------------------------------
 
-    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+    include(.. / lib / js / optinomic / statistics / calculation_simplestatistics.js)
 
 
     // ------------------------------------------
