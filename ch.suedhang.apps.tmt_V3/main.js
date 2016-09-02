@@ -212,7 +212,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var mz_id = current_messung.Messzeitpunkt.Messzeitpunkt;
             var mz_text = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
-            var mz_datestamp = current_messung.response.data.response.Date;
+            var mz_datestamp = current_messung.response.data.response.date;
             var mz_datum = $filter('date')(mz_datestamp);
 
             $scope.d.zScore.normgruppe_klinik.age_edu_mz = $scope.d.zScore.normgruppe_klinik.age_edu_mz_base + $scope.twoDigits(mz_id);

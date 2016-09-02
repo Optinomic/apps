@@ -627,6 +627,7 @@ function main(responses) {
 
                 var set_age = calc.getPatientAgeMz(d.patient.data.birthdate, response.data.filled);
                 myResults.set_age = set_age;
+                myResults.date = response.data.filled;
 
                 var edu_years = calc.roundToTwo(result.edu_years);
                 myResults.edu_years = edu_years;
