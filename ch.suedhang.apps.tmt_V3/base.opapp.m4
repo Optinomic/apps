@@ -37,18 +37,16 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
+
 [survey]
 id = tmt
-type = lime
+type = ng
 responsibility = lead_therapist
 name = Trail Making Test (TMT)
 host = default
-survey_id = 581952
-hash = X43X482
-pid = X43X483
-fid = X43X484
-min_questions =
-min_lastpage = 3
+
+[survey_markup tmt]
+include(survey_markups/tmt_survey.html)
 
 
 [event activation]
