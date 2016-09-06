@@ -504,7 +504,7 @@ function main(responses) {
     //  S T A T I S T I C S   &   Helpers
     // ------------------------------------------
 
-    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+    include(.. / lib / js / optinomic / statistics / calculation_simplestatistics.js)
 
 
     // ------------------------------------------
@@ -526,7 +526,7 @@ function main(responses) {
 
         // Returning | Results in Obj.
         // results.age_edu_obj = age_edu_mz_obj;
-        // results.patient_scores = patient_scores;
+        results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
         results.age_edu_mz_obj = age_edu_obj_statistics;
 
