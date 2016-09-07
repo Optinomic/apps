@@ -399,3 +399,7 @@ p {
     border-right-style: solid;
     border-right-width: 1px;
 }
+
+md-content {
+    background-color: #FFFFFF !important;
+}
