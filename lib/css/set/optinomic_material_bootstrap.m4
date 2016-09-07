@@ -1,5 +1,5 @@
 include(../lib/css/vendor/bootstrap/3.3.5/css/bootstrap.min.css) 
-include(../lib/css/vendor/mdi/css/materialdesignicons.min.css) 
+include(../lib/css/vendor/mdi/1.7.22/css/materialdesignicons.min.css) 
 include(../lib/js/vendor/ag-grid/dist/styles/ag-grid.css) 
 include(../lib/js/vendor/ag-grid/dist/styles/theme-optinomic.css) 
 include(../lib/css/vendor/radian/radian.min.css) 
