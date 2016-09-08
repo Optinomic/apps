@@ -27,6 +27,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            var current_template = $scope.d.dataMain.params.location.viewname;
 
             // Run Public-Functions:
             $scope.d.functions.getAllCalculations();
@@ -38,7 +39,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 // Run Specific Functions only when needed.
-                var current_template = $scope.d.dataMain.params.location.viewname;
 
                 if (current_template === 'tmt_scores') {
                     $scope.getCalculation();
@@ -50,7 +50,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d), ' | ', current_template;
             $scope.d.init = true;
         });
     };
@@ -58,10 +58,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-
     $scope.setExport = function() {
-
 
         // ------------------------------------------------
         // Export - Pakete definieren
