@@ -19,7 +19,7 @@ website = http://www.optinomic.com/
 
 
 
-[template simple_score 4 4]
+[template tmt_scores 4 4]
 include(templates/score.html)
 
 [template export_toolbox_admin 6 10]
