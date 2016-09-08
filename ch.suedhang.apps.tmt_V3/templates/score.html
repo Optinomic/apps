@@ -9,9 +9,13 @@ include(../lib/html/optinomic/page/start.m4)
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" style="margin-top: 24px;">
             <div flex style="margin-right:12px;">
                 <p class="md-title">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
-                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start end">
-                    <p flex="10" class="md-title" style="font-size:36px; color:#3F51B5!important;">■</p>
-                    <p flex class="md-caption"> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start none">
+                    <div flex="5">
+                        <p class="md-title" style="font-size:36px; color:#3F51B5!important;">■</p>
+                    </div>
+                    <div flex>
+                        <p class="md-caption"> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
+                    </div>
                 </div>
                 <p class="md-subhead">
                     {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
@@ -19,9 +23,13 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div flex>
                 <p class="md-title">{{d.dataMain.config.data.customer.contact.name}}</p>
-                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start end">
-                    <p flex="10" class="md-title" style="font-size:36px; color:#C5CAE9!important;">■</p>
-                    <p flex class="md-caption"> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.</p>
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start none">
+                    <div flex="5">
+                        <p class="md-title" style="font-size:36px; color:#C5CAE9!important;">■</p>
+                    </div>
+                    <div flex>
+                        <p class="md-caption"> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.</p>
+                    </div>
                 </div>
                 <div md-padding>
                     <md-input-container class="md-block">
