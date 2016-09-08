@@ -50,7 +50,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d), ' | ', current_template;
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d, ' | ', current_template);
             $scope.d.init = true;
         });
     };
