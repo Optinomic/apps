@@ -37,14 +37,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.haveData = true;
 
 
-                // Run App-Functions:
-                $scope.getCalculation();
+                // Run Specific Functions only when needed.
+                var current_template = $scope.d.dataMain.params.location.viewname;
 
-                $scope.setExport();
+                if (current_template === 'tmt_scores') {
+                    $scope.getCalculation();
+                };
 
+                if (current_template === 'export_toolbox_admin') {
+                    $scope.setExport();
+                };
             };
-
-
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
