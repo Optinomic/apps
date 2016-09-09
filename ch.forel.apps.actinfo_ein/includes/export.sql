@@ -4,7 +4,6 @@ SELECT
   CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
   patient.four_letter_code,
     
-  ((cast(response AS json))->>'FNr') as fnr,
   ((cast(response AS json))->>'Institution') as institution,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'QNEC050[VNEC050al]') as qnec050_vnec050al,
@@ -192,7 +191,6 @@ SELECT
   ((cast(response AS json))->>'QZEA120[VZEA120h]') as qzea120_vzea120h,
   ((cast(response AS json))->>'QZEA120[VZEA120i]') as qzea120_vzea120i,
   ((cast(response AS json))->>'QZEA120[VZEA120j]') as qzea120_vzea120j,
-  ((cast(response AS json))->>'QZEE025') as qzee025,
   ((cast(response AS json))->>'QZEK010[VZEK010a]') as qzek010_vzek010a,
   ((cast(response AS json))->>'QZEK010[VZEK010b]') as qzek010_vzek010b,
   ((cast(response AS json))->>'QZEK010[VZEK010c]') as qzek010_vzek010c,
@@ -225,7 +223,6 @@ SELECT
   ((cast(response AS json))->>'QZES080[VZES080d]') as qzes080_vzes080d,
   ((cast(response AS json))->>'QZES080[VZES080x]') as qzes080_vzes080x,
   ((cast(response AS json))->>'QZES080[VZES080y]') as qzes080_vzes080y,
-  ((cast(response AS json))->>'QZEU011') as qzeu011,
   ((cast(response AS json))->>'QZEU025[VZEU025a]') as qzeu025_vzeu025a,
   ((cast(response AS json))->>'QZEU025[VZEU025b]') as qzeu025_vzeu025b,
   ((cast(response AS json))->>'QZEU025[VZEU025c]') as qzeu025_vzeu025c,
@@ -365,6 +362,7 @@ SELECT
   ((cast(response AS json))->>'VZEA135') as vzea135,
   ((cast(response AS json))->>'VZEA136') as vzea136,
   ((cast(response AS json))->>'VZEA140') as vzea140,
+  ((cast(response AS json))->>'VZEE025') as vzee025,
   ((cast(response AS json))->>'VZEE041') as vzee041,
   ((cast(response AS json))->>'VZEE050') as vzee050,
   ((cast(response AS json))->>'VZEF011') as vzef011,
@@ -385,6 +383,7 @@ SELECT
   ((cast(response AS json))->>'VZET060') as vzet060,
   ((cast(response AS json))->>'VZET070') as vzet070,
   ((cast(response AS json))->>'VZEU010') as vzeu010,
+  ((cast(response AS json))->>'VZEU011') as vzeu011,
   ((cast(response AS json))->>'VZEU020') as vzeu020,
   ((cast(response AS json))->>'VZEU030') as vzeu030,
   ((cast(response AS json))->>'VZEU031') as vzeu031,
@@ -392,7 +391,6 @@ SELECT
   ((cast(response AS json))->>'VZEU041') as vzeu041,
   ((cast(response AS json))->>'VZEU071') as vzeu071,
   ((cast(response AS json))->>'VZEX005') as vzex005,
-  ((cast(response AS json))->>'cgiSG') as cgisg,
   ((cast(response AS json))->>'datestamp') as datestamp,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
   SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
@@ -401,6 +399,17 @@ SELECT
   ((cast(response AS json))->>'id') as id,
   ((cast(response AS json))->>'lastpage') as lastpage,
   ((cast(response AS json))->>'optinomixHASH') as optinomixhash,
+  ((cast(response AS json))->>'startdate') as startdate,
+  TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')  as startdate_date,
+  SUBSTRING(((cast(response AS json))->>'startdate'),12,5) AS startdate_time,
+  SUBSTRING(((cast(response AS json))->>'startdate'),1,4)::integer AS startdate_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
+  ((cast(response AS json))->>'startlanguage') as startlanguage,
+  ((cast(response AS json))->>'submitdate') as submitdate,
+  TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
+  SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
 
   random_hash,
   scheduled,
@@ -411,4 +420,4 @@ SELECT
 FROM survey_response 
 INNER JOIN patient ON(survey_response.patient = patient.id) 
 
-WHERE module = 'ch.suedhang.apps.actinfo_ein';
+WHERE module = 'ch.forel.apps.actinfo_ein';
