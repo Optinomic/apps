@@ -586,7 +586,7 @@ function main(responses) {
 
 
         // Do the needed 'calculations'
-
+        var patient_groups = d[0].patient_groups;
         var md_props = calc.getMultiDimensionalContainer();
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
@@ -600,6 +600,7 @@ function main(responses) {
 
 
         results.md_props = md_props;
+        results.patient_groups = patient_groups;
         // results.age_edu_obj = age_edu_mz_obj;
         // results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
