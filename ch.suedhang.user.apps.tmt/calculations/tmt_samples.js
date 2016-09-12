@@ -108,15 +108,14 @@ function main(responses) {
         var want_patient_groups = true;
 
         // How do the 'Result' looks like?
-
-
-        // "data": calc.getVariables()
         var result_types = [{
             "id": 0,
-            "text": "Scores"
+            "text": "Scores",
+            "data": calc.getVariables()
         }, {
-            "id": 0,
-            "text": "Statistics"
+            "id": 1,
+            "text": "Statistics",
+            "data": calc.getVariables()
         }];
 
         // Description - Multidimensional Array
@@ -126,24 +125,22 @@ function main(responses) {
             "all_available": true, //is last entry a all groups?
             "result": false, //is this where the result types are?
             "n": calc.group_age_props.length,
-            "array": calc.cloneObj(calc.group_age_props);
+            "array": calc.cloneObj(calc.group_age_props)
         }, {
             "id": 1,
             "text": "Ausbildungsniveau",
             "all_available": true, //is last entry a all groups?
             "result": false, //is this where the result types are?
             "n": calc.group_edu_props.length,
-            "array": calc.cloneObj(calc.group_edu_props);
+            "array": calc.cloneObj(calc.group_edu_props)
         }, {
             "id": 2,
             "text": "Messzeitpunkt",
             "all_available": true, //is last entry a all groups?
             "result": false, //is this where the result types are?
             "n": calc.group_mz_props.length,
-            "array": calc.cloneObj(calc.group_mz_props);
+            "array": calc.cloneObj(calc.group_mz_props)
         }];
-
-
 
 
 
@@ -156,7 +153,7 @@ function main(responses) {
                 "all_available": false, //is last entry a all groups?
                 "result": false, //is this where the result types are?
                 "n": patient_groups.length,
-                "array": calc.cloneObj(patient_groups);
+                "array": calc.cloneObj(patient_groups)
             };
             md_info.push(pg_info);
         };
@@ -168,7 +165,7 @@ function main(responses) {
             "all_available": false, //is last entry a all groups?
             "result": true, //is this where the result types are?
             "n": result_types.length,
-            "array": calc.cloneObj(result_types);
+            "array": calc.cloneObj(result_types)
         };
         if (want_patient_groups) {
             result_types_info.id = 4;
