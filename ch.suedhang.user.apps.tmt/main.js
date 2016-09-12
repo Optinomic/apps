@@ -29,9 +29,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
 
 
+            console.log('(Calculation-Data): tmt_scores: ', $scope.d.dataMain.calculations[1].calculation_results);
+            console.log('(Calculation-Data): tmt_samples: ', $scope.d.dataMain.calculations[0].calculation_results);
+            $scope.d.calculations = $scope.d.dataMain.calculations[1].calculation_results
+
+
             // Run App-Functions:
             $scope.tmt_init();
-            $scope.getCalculation();
+            // $scope.getCalculation();
 
 
             // Finishing: Console Info & Init = done.
@@ -48,7 +53,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getCalculation = function() {
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
-        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_samples');
+        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_scores');
 
         call.success(function(data) {
             // Save Data to $scope.d
