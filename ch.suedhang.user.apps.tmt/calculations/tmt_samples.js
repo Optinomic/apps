@@ -95,11 +95,11 @@ function main(responses) {
     calc.result_types = [{
         "id": 0,
         "text": "Scores",
-        "data": calc.getVariables
+        "data": calc.getVariables();
     }, {
         "id": 0,
         "text": "Statistics",
-        "data": calc.getVariables
+        "data": calc.getVariables();
     }];
 
 
