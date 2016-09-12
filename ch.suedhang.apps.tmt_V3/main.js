@@ -223,6 +223,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             } else {
                 var age_edu_mz_obj = $scope.d.zScore.user_app_calc.age_edu_mz_obj[$scope.d.zScore.normgruppe_klinik.age_edu_mz];
             };
+
             console.log('age_edu_mz_obj |setZScore: ', $scope.d.zScore.normgruppe_klinik.selected_mz_array, $scope.d.zScore.normgruppe_klinik.age_edu_mz, age_edu_mz_obj);
 
             var messung = {
@@ -246,15 +247,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 A_messung.show_clinicsample_scores = false;
             };
 
-
-            // ToDo: set zscore_min | zscore_max  if >= +/-3 
-
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
             };
+
+            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            if (Math.abs(A_messung.zscore) > (A_messung.zscore_min - 0.5)) {
+                A_messung.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
+                A_messung.zscore_max = (Math.abs(A_messung.zscore) + 1);
+            };
+
+
             $scope.d.zScore.tmt_a.push(A_messung);
 
 
@@ -270,7 +276,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 B_messung.show_clinicsample_scores = false;
             };
 
-            // ToDo: set zscore_min | zscore_max  if >= +/-3 
+            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            if (Math.abs(B_messung.zscore) > (B_messung.zscore_min - 0.5)) {
+                B_messung.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
+                B_messung.zscore_max = (Math.abs(B_messung.zscore) + 1);
+            };
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
