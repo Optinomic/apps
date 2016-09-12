@@ -1,11 +1,11 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content>
-    <div ng-init="medi_count = 0">
+    <div>
         <p class="md-subhead">Verordnung</p>
         <div ng-if="d.medication.length > 0" ng-repeat="entry in d.medication">
-            <div ng-if="entry.medication_status === 0" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-padding ng-init="medi_count = medi_count + 1">
+            <div ng-if="entry.medication_status === 0" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start">
                 <div>
-                    <p class="flow-text">{{medi_count}}.&nbsp;&nbsp;&nbsp;</p>
+                    <p class="flow-text">{{$index + 1}}.&nbsp;&nbsp;&nbsp;</p>
                 </div>
                 <div flex>
                     <a target="_blank" ng-href="{{entry.icd_url_info}}">
@@ -17,16 +17,16 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
         </div>
-        <div ng-if="d.medication.length === 0">
+        <div ng-if="d.medication.length === 0" layout-padding>
             <p class="flow-text">Keine Medikamente.</p>
         </div>
     </div>
     <div style="margin-top: 24px;">
         <p class="md-subhead">Reserve</p>
         <div ng-if="d.medication_reserve.length > 0" ng-repeat="entry in d.medication_reserve">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-padding>
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start">
                 <div>
-                    <p class="flow-text">{{$index}}.&nbsp;&nbsp;&nbsp;</p>
+                    <p class="flow-text">{{$index + 1}}.&nbsp;&nbsp;&nbsp;</p>
                 </div>
                 <div flex>
                     <a target="_blank" ng-href="{{entry.icd_url_info}}">
@@ -38,7 +38,7 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
         </div>
-        <div ng-if="d.medication_reserve.length === 0">
+        <div ng-if="d.medication_reserve.length === 0" layout-padding>
             <p class="flow-text">Keine Reserve.</p>
         </div>
     </div>
