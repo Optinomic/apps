@@ -11,10 +11,10 @@
             <md-tab label="Tasks">
                 <md-content class="md-padding">
                     <h1 class="md-display-2">Tasks</h1>
-                    <p class="md-body-2">
-                        Relevant tasks (Total: {{d.dataMain.events.length}} ) for {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}:
+                    <p class="md-subhead">
+                        Relevant «{{d.dataMain.apps.current.name}}» tasks (Total: {{d.dataMain.events.length}}) for {{d.dataMain.patient.patient.data.extras.name}} ({{d.dataMain.patient.patient.data.extras.birthday_age}}):
                     </p>
-                    <p class="md-caption text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
+                    <p class="md-body-1 text-muted" ng-repeat="event in d.dataMain.events" ng-if="event.data.module === d.dataMain.apps.current.identifier">
                         - {{event.data.extras.created_date}}, {{event.data.extras.created_time}} :: <a ng-href="{{event.data.url}}" target="_blank">{{event.data.survey_name}}</a> ({{event.data.status}})
                     </p>
                 </md-content>
