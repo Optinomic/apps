@@ -212,10 +212,8 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "info": {
-                    "have_data": false
-                },
-                "scores": calc.getVariables()
+                "info": {},
+                "score": calc.getVariables()
             };
 
 
@@ -252,27 +250,22 @@ function main(responses) {
 
 
                 // Match 'Variables' to 'Calculation - Response'
-                scores.scores.TMTAError = current_response.TMTAError;
-                scores.scores.TMTATime = current_response.TMTATime;
-                scores.scores.TMTBError = current_response.TMTBError;
-                scores.scores.TMTBTime = current_response.TMTBTime;
-                scores.scores.Perz_A = current_response.percentile.result.A;
-                scores.scores.Perz_B = current_response.percentile.result.B;
-                scores.scores.BA_Quotient = current_response.quotient;
-                scores.scores.TMTAZ = current_response.percentile.z_scores.tmtA_z;
-                scores.scores.TMTBZ = current_response.percentile.z_scores.tmtB_z;
+                scores.score.TMTAError = current_response.TMTAError;
+                scores.score.TMTATime = current_response.TMTATime;
+                scores.score.TMTBError = current_response.TMTBError;
+                scores.score.TMTBTime = current_response.TMTBTime;
+                scores.score.Perz_A = current_response.percentile.result.A;
+                scores.score.Perz_B = current_response.percentile.result.B;
+                scores.score.BA_Quotient = current_response.quotient;
+                scores.score.TMTAZ = current_response.percentile.z_scores.tmtA_z;
+                scores.score.TMTBZ = current_response.percentile.z_scores.tmtB_z;
 
 
+                // Push only if Data available
                 // Check if we have response - check whaterver you like.
                 if (current_response.edu_years !== null) {
-                    scores.info.have_data = true;
+                    all_scores.push(scores);
                 };
-
-            };
-
-            // Push only if Data available
-            if (scores.info.have_data) {
-                all_scores.push(scores);
             };
 
         };
