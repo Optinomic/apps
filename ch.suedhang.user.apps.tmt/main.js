@@ -48,7 +48,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getCalculation = function() {
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
-        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_scores');
+        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_samples');
 
         call.success(function(data) {
             // Save Data to $scope.d
@@ -59,7 +59,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('(ERROR): getCalculation:', data);
         });
     };
-
 
 
     // -------------------

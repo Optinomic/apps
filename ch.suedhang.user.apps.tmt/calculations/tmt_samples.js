@@ -21,6 +21,13 @@ function main(responses) {
         "n": 0
     };
 
+
+
+
+    // ------------------------------------------
+    // What 'Groups' do we have?
+    // ------------------------------------------
+
     calc.group_age_props = [{
         "age_group_id": 0,
         "age_group_text": "Altersgruppe 18 - 24"
@@ -56,6 +63,7 @@ function main(responses) {
         "age_group_text": "Altersgruppe 85 – 89"
     }];
 
+
     calc.group_edu_props = [{
         "edu_group_id": 0,
         "edu_group_text": "Ausbildung: <= 12 Jahre"
@@ -66,6 +74,7 @@ function main(responses) {
         "edu_group_id": 99,
         "edu_group_text": "Ausbildung: Alle Levels"
     }];
+
 
     calc.group_mz_props = [{
         "mz_group_id": 0,
@@ -86,12 +95,61 @@ function main(responses) {
     }];
 
 
-    calc.md_props_array = [calc.group_age_props, calc.group_edu_props, calc.group_mz_props];
+    calc.result_types = [{
+        "result_types_id": 0,
+        "result_types_text": "Scores"
+    }, {
+        "result_types_id": 0,
+        "result_types_text": "Statistics"
+    }];
+
 
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
+
+    calc.getMultiDimensionalContainer = function() {
+
+        var return_obj = {};
+
+        // Description - Multidimensional Array
+        var md_info = [{
+            "id": 0,
+            "text": "Altersgruppe",
+            "all_available": true, //is last entry a all groups?
+            "n": calc.group_age_props.length,
+            "array": calc.group_age_props
+        }, {
+            "id": 1,
+            "text": "Ausbildungsniveau",
+            "all_available": true, //is last entry a all groups?
+            "n": calc.group_edu_props.length,
+            "array": calc.group_edu_props
+        }, {
+            "id": 2,
+            "text": "Messzeitpunkt",
+            "all_available": true, //is last entry a all groups?
+            "n": calc.group_mz_props.length,
+            "array": calc.group_mz_props
+        }];
+
+
+        // Create Multidimensional Array
+        var md_array = [];
+        for (var i = 0; i < md_props_info.length; i++) {
+            var currend_prop = md_props_info[i];
+            md_props_array.push(currend_prop.array);
+        };
+
+        // Write to return_obj
+        return_obj.md_info = md_info;
+        return_obj.md_array = md_array;
+
+
+        return return_obj;
+
+    };
 
 
     // ------------------------------------------
@@ -529,6 +587,8 @@ function main(responses) {
 
         // Do the needed 'calculations'
 
+        var md_props = calc.getMultiDimensionalContainer();
+
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
         // var patient_scores = calc.getPatientScores(d);
@@ -538,6 +598,8 @@ function main(responses) {
 
         // Returning | Results in Obj.
 
+
+        results.md_props = md_props;
         // results.age_edu_obj = age_edu_mz_obj;
         // results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
@@ -555,7 +617,7 @@ function main(responses) {
 
 
         // Returning full (complete) responses is often used/helpful.
-        calc.full = responses;
+        results.full = responses;
 
         return results;
     };
