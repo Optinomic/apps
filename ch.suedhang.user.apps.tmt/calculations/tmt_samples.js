@@ -274,8 +274,14 @@ function main(responses) {
     };
 
 
+    calc.mdFillPatientScores = function(md, patient_scores) {
+
+        var md_array = calc.cloneObj(md);
 
 
+        return md_array;
+
+    };
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
@@ -316,6 +322,7 @@ function main(responses) {
         var patient_groups = d[0].patient_groups;
         var md = calc.getMultiDimensionalContainer(patient_groups);
         var patient_scores = calc.getPatientScores(d);
+        var md_scores = calc.mdFillPatientScores(md, patient_scores);
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
@@ -329,6 +336,8 @@ function main(responses) {
 
         results.md = md;
         results.patient_scores = patient_scores;
+        results.md_scores = md_scores;
+
         // results.patient_groups = patient_groups;
         // results.age_edu_obj = age_edu_mz_obj;
         // results.age_edu_obj_scores = age_edu_obj_scores;
