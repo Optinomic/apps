@@ -261,8 +261,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-            $scope.d.zScore.tmt_a.push(A_messung);
-
 
             // TMT - B
             var B_messung = angular.copy(messung);
@@ -276,18 +274,34 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 B_messung.show_clinicsample_scores = false;
             };
 
-            // Set zscore_min | zscore_max  if zscore >= +/-3 
-            if (Math.abs(B_messung.zscore) > (B_messung.zscore_min - 0.5)) {
-                B_messung.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
-                B_messung.zscore_max = (Math.abs(B_messung.zscore) + 1);
-            };
-
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 B_messung.zscore_color = '#F44336';
             };
+
+            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            if (Math.abs(B_messung.zscore) > (B_messung.zscore_min - 0.5)) {
+                B_messung.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
+                B_messung.zscore_max = (Math.abs(B_messung.zscore) + 1);
+            };
+
+
+            // Make visible Range the same for all.
+            if (A_messung.zscore_max !== B_messung.zscore_max) {
+                if (A_messung.zscore_max > B_messung.zscore_max) {
+                    B_messung.zscore_max = A_messung.zscore_max;
+                    B_messung.zscore_min = A_messung.zscore_min;
+                } else {
+                    A_messung.zscore_max = B_messung.zscore_max;
+                    A_messung.zscore_min = B_messung.zscore_min;
+                };
+            };
+
+
+            // Push and Save
+            $scope.d.zScore.tmt_a.push(A_messung);
             $scope.d.zScore.tmt_b.push(B_messung);
 
 
