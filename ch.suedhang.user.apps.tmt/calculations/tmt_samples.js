@@ -227,12 +227,13 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "info": {},
+                "info": {
+                    "have_data": false
+                },
                 "scores": calc.getVariables()
             };
 
 
-            var have_data = true;
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
             for (var x = 0; x < all_responses.length; x++) {
@@ -246,7 +247,7 @@ function main(responses) {
                 } else {
                     var edu_group_array_id = 0;
                 };
-                var mz_group_array_id = current_response.percentile.mz - 1;
+                var mz_group_array_id = current_response.mz - 1;
 
                 var filled = current_response.response.data.filled;
                 var event_id = current_response.response.data.event_id;
@@ -277,13 +278,13 @@ function main(responses) {
 
 
                 if (current_response.edu_years !== null) {
-                    have_data = true;
+                    scores.info.have_data = true;
                 };
 
             };
 
             // Push only if Data available
-            if (have_data) {
+            if (scores.info.have_data) {
                 scores.md = md_array;
                 all_scores.push(scores);
             };
