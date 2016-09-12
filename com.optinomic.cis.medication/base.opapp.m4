@@ -22,6 +22,10 @@ website = http://www.optinomic.com/
 [template medikamente 6 15]
 include(templates/medication_tabs.html)
 
+[template medikamente_report_only 6 15]
+include(templates/medication_report.html)
+
+
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)

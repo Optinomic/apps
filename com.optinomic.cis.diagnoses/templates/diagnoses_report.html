@@ -1,7 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content class="md-padding">
     <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
-        <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div>
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
             </div>
@@ -15,7 +15,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div ng-if="d.diagnoses.length === 0">
         <div layout="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div flex>
-                <p class="flow-text">Keine Diagnosen erfasst</p>
+                <p class="flow-text">Keine Diagnosen.</p>
             </div>
         </div>
     </div>
