@@ -102,6 +102,9 @@ function main(responses) {
 
     calc.getMultiDimensionalContainer = function(patient_groups) {
 
+        // Note:  md = Multi Dimensional
+        // Change this for your current App
+
         var return_obj = {};
 
         // Do we want also to use Optinomic Patient-Groups?
@@ -182,7 +185,7 @@ function main(responses) {
         md_info.push(result_types_info);
 
 
-        // Create Multidimensional Array
+        // Create Multidimensional (md) Array
         var md_array = [];
         for (var i = 0; i < md_info.length; i++) {
             var currend_prop = md_info[i];
@@ -204,6 +207,8 @@ function main(responses) {
     calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
+        // Change this for your current App
+
         var all_scores = [];
 
         for (var i = 0; i < d.length; i++) {
@@ -276,10 +281,13 @@ function main(responses) {
 
     calc.mdFillPatientScores = function(md, patient_scores) {
 
-        var md_array = calc.cloneObj(md);
+        var md_obj = calc.cloneObj(md);
+        var md_array = md_obj.array;
+        var md_globals = md_obj.globals;
+        var md_info = md_obj.info;
 
 
-        return md_array;
+        return md_obj;
 
     };
 
