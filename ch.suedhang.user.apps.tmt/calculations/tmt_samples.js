@@ -183,7 +183,7 @@ function main(responses) {
 
         // Write to return_obj
         return_obj.globals = {
-            "result_types_id": result_array_id;
+            "result_types_id": result_array_id
         };
         return_obj.info = md_info;
         return_obj.array = md_array;
