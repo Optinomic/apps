@@ -201,25 +201,10 @@ function main(responses) {
     };
 
 
-    calc.getPatientScores = function(d, md) {
+    calc.getPatientScores = function(d) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
         var all_scores = [];
-
-        // Create Multidimensional Array
-        var md_array = [];
-        var md_globals = calc.cloneObj(md.globals);
-        var md_info = calc.cloneObj(md.info);
-        for (var i = 0; i < md_info.length; i++) {
-            var currend_prop = md_info[i];
-
-            if (currend_prop.generic === true) {
-                md_array.push(currend_prop.array);
-            } else {
-                md_array.push([]);
-            };
-        };
-
 
         for (var i = 0; i < d.length; i++) {
             var current_result = d[i];
@@ -254,11 +239,13 @@ function main(responses) {
                 var pid = current_result.patient.id;
 
 
-                // Write Stuff
-                scores.info.current_response = current_response;
-                scores.info.age_group_array_id = age_group_array_id;
-                scores.info.edu_group_array_id = edu_group_array_id;
-                scores.info.mz_group_array_id = mz_group_array_id;
+                // Write Groups
+                scores.info.group_age_array_id = age_group_array_id;
+                scores.info.group_edu_array_id = edu_group_array_id;
+                scores.info.group_mz_array_id = mz_group_array_id;
+
+                // Write General Stuff
+                scores.info.response = current_response;
                 scores.info.filled = filled;
                 scores.info.event_id = event_id;
                 scores.info.pid = pid;
@@ -276,7 +263,7 @@ function main(responses) {
                 scores.scores.TMTBZ = current_response.percentile.z_scores.tmtB_z;
 
 
-
+                // Check if we have response - check whaterver you like.
                 if (current_response.edu_years !== null) {
                     scores.info.have_data = true;
                 };
@@ -285,7 +272,6 @@ function main(responses) {
 
             // Push only if Data available
             if (scores.info.have_data) {
-                scores.md = md_array;
                 all_scores.push(scores);
             };
 
@@ -336,7 +322,7 @@ function main(responses) {
         // Do the needed 'calculations'
         var patient_groups = d[0].patient_groups;
         var md = calc.getMultiDimensionalContainer(patient_groups);
-        var patient_scores = calc.getPatientScores(d, md);
+        var patient_scores = calc.getPatientScores(d);
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
