@@ -3,7 +3,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div>
         <p class="md-subhead">Verordnung</p>
         <div ng-if="d.medication.length > 0" ng-repeat="entry in d.medication">
-            <div ng-if="entry.medication_status === 0" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" style="margin-top:-12px;">
+            <div ng-if="entry.medication_status === 0" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" style="margin-top:-24px;">
                 <div>
                     <p class="flow-text">{{$index + 1}}.&nbsp;&nbsp;&nbsp;</p>
                 </div>
@@ -24,7 +24,7 @@ include(../lib/html/optinomic/page/start.m4)
     <div style="margin-top: 24px;">
         <p class="md-subhead">Reserve</p>
         <div ng-if="d.medication_reserve.length > 0" ng-repeat="entry in d.medication_reserve">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" style="margin-top:-12px;">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" style="margin-top:-24px;">
                 <div>
                     <p class="flow-text">{{$index + 1}}.&nbsp;&nbsp;&nbsp;</p>
                 </div>
