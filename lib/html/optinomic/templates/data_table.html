@@ -42,7 +42,7 @@
             </md-button>
         </div>
     </div>
-    <div>
+    <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start start">
         <md-button hide-xs show-gt-xs ng-if="(!d.grid.export_settings.details) && (!d.grid.export_settings.details)" style="font-size: 18px;" ng-click="d.grid.export_settings.details = !d.grid.export_settings.details" class="md-primary md-icon-button" aria-label="Export">
             <i class="mdi mdi-file"></i>
             <md-tooltip md-direction="bottom">

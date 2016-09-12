@@ -72,32 +72,31 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
             };
         }
 
-        $http.get(url)
-            .success(function(response) {
-                //console.log('(!) loadTARMEDSheet - success: ', response);
+        $http.get(url).success(function(response) {
+            //console.log('(!) loadTARMEDSheet - success: ', response);
 
-                var entries = response['feed']['entry'];
+            var entries = response['feed']['entry'];
 
-                $scope.d.Medikamente_all = [];
-                entries.forEach(function(content, myindex) {
-                    $scope.d.Medikamente_all.push(parse(content));
-                });
-                console.log('(!) loadMediCatalog', $scope.d.Medikamente_all);
-
-                //$scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
-                $scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
-
-
-                //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
-                //    return [item.kapitel_code];
-                //});
-                //console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
-
-
-                // Set 'haveData' because we do not have a survey here!
-                $scope.d.loadedMedicationData = true;
-
+            $scope.d.Medikamente_all = [];
+            entries.forEach(function(content, myindex) {
+                $scope.d.Medikamente_all.push(parse(content));
             });
+            //console.log('(!) loadMediCatalog', $scope.d.Medikamente_all);
+
+            //$scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
+            $scope.d.appInit.repos = loadAll($scope.d.Medikamente_all);
+
+
+            //$scope.d.TARMEDkapitel = dataService.groupBy($scope.d.TARMEDall, function(item) {
+            //    return [item.kapitel_code];
+            //});
+            //console.log('(!) TARMEDkapitel', $scope.d.TARMEDkapitel);
+
+
+            // Set 'haveData' because we do not have a survey here!
+            $scope.d.loadedMedicationData = true;
+
+        });
     };
 
 
@@ -177,7 +176,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
         // Set current State
         $scope.d.app.selected_section = $scope.d.app.sections[currentSectionID];
-        console.log('(!) changeSection', $scope.d.app.selected_section);
+        //console.log('(!) changeSection', $scope.d.app.selected_section);
 
         // Init
         $scope.d.appState = 'show';
@@ -217,7 +216,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     }
 
     function selectedItemChange(item) {
-        console.log('Item changed to ', JSON.stringify(item));
+        //console.log('Item changed to ', JSON.stringify(item));
         $scope.d.appInit.selectedItem = item;
 
         if (item === undefined) {
@@ -277,7 +276,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 $scope.createLinks();
             };
 
-            console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
+            //console.log('Stored Selected in d.newEntry', $scope.d.newEntry);
         };
     }
 
@@ -459,7 +458,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                             var heute_d = date;
                             heute_d.setHours(0, 0, 0, 0, 0);
 
-                            console.log(' STOP? ---------- ', heute_d.getTime() > stop_d.getTime(), stop_d, heute_d);
+                            //console.log(' STOP? ---------- ', heute_d.getTime() > stop_d.getTime(), stop_d, heute_d);
 
 
                             if (heute_d.getTime() > stop_d.getTime()) {
@@ -481,7 +480,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
 
 
             if (shouldSave) {
-                console.log('Save ' + app + '-Medication because of changes in medication_status');
+                //console.log('Save ' + app + '-Medication because of changes in medication_status');
                 $scope.saveMedication(app);
             };
 
@@ -504,6 +503,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 $scope.d.medication = [];
             } else {
                 $scope.d.medication = angular.copy(data);
+                $scope.d.medication = dataService.sortByKey($scope.d.medication, 'medication_name');
                 $scope.d.medication = enhance_check($scope.d.medication, 'Verordnung');
             };
 
@@ -526,6 +526,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 $scope.d.medication_reserve = [];
             } else {
                 $scope.d.medication_reserve = angular.copy(data);
+                $scope.d.medication_reserve = dataService.sortByKey($scope.d.medication_reserve, 'medication_name');
                 $scope.d.medication_reserve = enhance_check($scope.d.medication_reserve, 'Reserve');
             };
 
@@ -550,6 +551,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
                 $scope.d.medication_reserve_abgabe = [];
             } else {
                 $scope.d.medication_reserve_abgabe = angular.copy(data);
+                $scope.d.medication_reserve_abgabe = dataService.sortByKey($scope.d.medication_reserve_abgabe, 'medication_name');
                 $scope.d.medication_reserve_abgabe = enhance_check($scope.d.medication_reserve_abgabe, 'Abgabe');
             };
 
@@ -566,7 +568,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
     // -----------------------------------
 
     $scope.showConfirm = function(ev, my_uid) {
-        console.log('showConfirm: ', ev, my_uid);
+        //console.log('showConfirm: ', ev, my_uid);
 
 
         var current_section = $scope.d.app.selected_section.id;
@@ -686,7 +688,7 @@ app.controller('AppCtrl', function($scope, $http, $filter, $mdDialog, $mdMedia, 
         $scope.d._init.grid.grid_ready = false;
 
 
-        console.log('entryEdit: ', myIndex, $scope.d.newEntry, $scope.d._init.grid);
+        //console.log('entryEdit: ', myIndex, $scope.d.newEntry, $scope.d._init.grid);
     };
 
 
