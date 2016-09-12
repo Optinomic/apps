@@ -118,12 +118,15 @@ function main(responses) {
             "data": calc.getVariables()
         }];
 
+
+
         // Description - Multidimensional Array
         var md_info = [{
             "id": 0,
             "text": "Altersgruppe",
-            "all_available": true, //is last entry a all groups?
+            "all_available": false, //is last entry a all groups?
             "result": false, //is this where the result types are?
+            "generic": false, //is this something generic?
             "n": calc.group_age_props.length,
             "array": calc.cloneObj(calc.group_age_props)
         }, {
@@ -131,6 +134,7 @@ function main(responses) {
             "text": "Ausbildungsniveau",
             "all_available": true, //is last entry a all groups?
             "result": false, //is this where the result types are?
+            "generic": false, //is this something generic?
             "n": calc.group_edu_props.length,
             "array": calc.cloneObj(calc.group_edu_props)
         }, {
@@ -138,6 +142,7 @@ function main(responses) {
             "text": "Messzeitpunkt",
             "all_available": true, //is last entry a all groups?
             "result": false, //is this where the result types are?
+            "generic": false, //is this something generic?
             "n": calc.group_mz_props.length,
             "array": calc.cloneObj(calc.group_mz_props)
         }];
@@ -152,6 +157,7 @@ function main(responses) {
                 "text": "Patientengruppen",
                 "all_available": false, //is last entry a all groups?
                 "result": false, //is this where the result types are?
+                "generic": true, //is this something generic?
                 "n": patient_groups.length,
                 "array": calc.cloneObj(patient_groups)
             };
@@ -164,6 +170,7 @@ function main(responses) {
             "text": "Ergebnis-Typen",
             "all_available": false, //is last entry a all groups?
             "result": true, //is this where the result types are?
+            "generic": true, //is this something generic?
             "n": result_types.length,
             "array": calc.cloneObj(result_types)
         };
@@ -193,7 +200,7 @@ function main(responses) {
     };
 
 
-    calc.getPatientScores = function(d) {
+    calc.getPatientScores = function(d, md) {
 
         // Get all TMT-Scores from a Patient and arrange it in a Array
         // 
@@ -203,18 +210,27 @@ function main(responses) {
             var current_result = d[i];
 
 
+            // Create Multidimensional Array
+            var md_array = [];
+            for (var i = 0; i < md.info.length; i++) {
+                var currend_prop = md.info[i];
+                md_array.push([]);
+            };
+
+
             // Scores Obj. erstellen.
             var scores = {
                 "patient_details": {
                     "edu_years": null,
                     "age_edu_group": {},
-                    "age": null
+                    "age": null,
+                    "pid": current_result.patient.id
                 },
+                "md": md_array,
                 "mz_01_vars": calc.getVariables(),
                 "mz_02_vars": calc.getVariables(),
                 "mz_03_vars": calc.getVariables(),
-                "mz_99_vars": calc.getVariables(),
-                "pid": current_result.patient.id
+                "mz_99_vars": calc.getVariables()
             };
 
 
@@ -360,7 +376,7 @@ function main(responses) {
         // Do the needed 'calculations'
         var patient_groups = d[0].patient_groups;
         var md = calc.getMultiDimensionalContainer(patient_groups);
-        var patient_scores = calc.getPatientScores(d);
+        var patient_scores = calc.getPatientScores(d, md);
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
