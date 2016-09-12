@@ -227,26 +227,64 @@ function main(responses) {
 
             // Scores Obj. erstellen.
             var scores = {
-                "patient_details": {
-                    "edu_years": null,
-                    "age_edu_group": {},
-                    "age": null,
-                    "pid": current_result.patient.id
-                },
-                "md": md_array
+                "info": {},
+                "scores": calc.getVariables()
             };
 
 
             var have_data = true;
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
-            //  for (var x = 0; x < all_responses.length; x++) {
-            //      var current_response = all_responses[x];
-            //  
-            //  };
+            for (var x = 0; x < all_responses.length; x++) {
+                var current_response = all_responses[x];
+
+                // Set Groups & Some generic Vars
+                var age_group_array_id = current_response.percentile.age_perz.altersgruppe;
+                var edu_group_level = current_response.percentile.age_perz.education_high;
+                if (edu_group_level === true) {
+                    var edu_group_array_id = 1;
+                } else {
+                    var edu_group_array_id = 0;
+                };
+                var mz_group_array_id = current_response.percentile.mz - 1;
+
+                var filled = current_response.response.data.filled;
+                var event_id = current_response.response.data.event_id;
+                var pid = current_result.patient.id;
+
+
+                // Write Stuff
+                scores.info.current_response = current_response;
+                scores.info.age_group_array_id = age_group_array_id;
+                scores.info.edu_group_array_id = edu_group_array_id;
+                scores.info.mz_group_array_id = mz_group_array_id;
+                scores.info.filled = filled;
+                scores.info.event_id = event_id;
+                scores.info.pid = pid;
+
+
+                // Match 'Variables' to 'Calculation - Response'
+                scores.scores.TMTAError = current_response.TMTAError;
+                scores.scores.TMTATime = current_response.TMTATime;
+                scores.scores.TMTBError = current_response.TMTBError;
+                scores.scores.TMTBTime = current_response.TMTBTime;
+                scores.scores.Perz_A = current_response.percentile.result.A;
+                scores.scores.Perz_B = current_response.percentile.result.B;
+                scores.scores.BA_Quotient = current_response.quotient;
+                scores.scores.TMTAZ = current_response.percentile.z_scores.tmtA_z;
+                scores.scores.TMTBZ = current_response.percentile.z_scores.tmtB_z;
+
+
+
+                if (current_response.edu_years !== null) {
+                    have_data = true;
+                };
+
+            };
 
             // Push only if Data available
             if (have_data) {
+                scores.md = md_array;
                 all_scores.push(scores);
             };
 
