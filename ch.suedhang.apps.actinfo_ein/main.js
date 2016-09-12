@@ -356,7 +356,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 substanz = 'Tabak'
                 answer_option = 0;
                 answer = parseInt(response.VNED073i);
-                answer_tabak = parseInt(response.VZET020);
+                var answer_tabak = parseInt(response.VZET020);
 
                 my_result = $scope.d.problemsubstanzen_label.answer_options[answer_option];
                 var my_tabak_result = $scope.d.problemsubstanzen_label.answer_options[1];
