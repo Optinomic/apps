@@ -137,9 +137,9 @@ function main(responses) {
 
         // Create Multidimensional Array
         var md_array = [];
-        for (var i = 0; i < md_props_info.length; i++) {
-            var currend_prop = md_props_info[i];
-            md_props_array.push(currend_prop.array);
+        for (var i = 0; i < md_info.length; i++) {
+            var currend_prop = md_info[i];
+            md_array.push(currend_prop.array);
         };
 
         // Write to return_obj
