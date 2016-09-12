@@ -92,15 +92,7 @@ function main(responses) {
     }];
 
 
-    calc.result_types = [{
-        "id": 0,
-        "text": "Scores",
-        "data": calc.getVariables();
-    }, {
-        "id": 0,
-        "text": "Statistics",
-        "data": calc.getVariables();
-    }];
+
 
 
 
@@ -114,6 +106,17 @@ function main(responses) {
 
         // Do we want also to use Optinomic Patient-Groups?
         var want_patient_groups = true;
+
+        // How do the 'Result' looks like?
+        var result_types = [{
+            "id": 0,
+            "text": "Scores",
+            "data": calc.getVariables()
+        }, {
+            "id": 0,
+            "text": "Statistics",
+            "data": calc.getVariables()
+        }];
 
         // Description - Multidimensional Array
         var md_info = [{
@@ -139,6 +142,10 @@ function main(responses) {
             "array": calc.cloneObj(calc.group_mz_props);
         }];
 
+
+
+
+
         // Should not to be modified below:
 
         if (want_patient_groups) {
@@ -153,13 +160,14 @@ function main(responses) {
             md_info.push(pg_info);
         };
 
+
         var result_types_info = {
             "id": 3,
             "text": "Ergebnis-Typen",
             "all_available": false, //is last entry a all groups?
             "result": true, //is this where the result types are?
-            "n": calc.result_types.length,
-            "array": calc.cloneObj(calc.result_types);
+            "n": result_types.length,
+            "array": calc.cloneObj(result_types);
         };
         if (want_patient_groups) {
             result_types_info.id = 4;
@@ -245,14 +253,13 @@ function main(responses) {
         var definitions = {
             "age": calc.group_age_props,
             "edu": calc.group_edu_props,
-            "mz": calc.group_mz_props,
-            "md_props_array": calc.md_props_array
+            "mz": calc.group_mz_props
         };
         results.definitions = definitions;
 
 
         // Returning full (complete) responses is often used/helpful.
-        results.full = responses;
+        // results.full = responses;
 
         return results;
     };
