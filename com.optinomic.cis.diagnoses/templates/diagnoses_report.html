@@ -1,22 +1,20 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content>
-    <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start">
-            <div>
-                <p class="flow-text">{{entry.diagn_rank}}.&nbsp;&nbsp;&nbsp;</p>
-            </div>
-            <div flex>
-                <a target="_blank" ng-href="{{entry.icd_url_info}}">
-                    <p class="flow-text" ng-bind-html="entry.custom_text_html"></p>
-                </a>
+    <div>
+        <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" style="margin-top:-24px;">
+                <div flex>
+                    <a target="_blank" ng-href="{{entry.icd_url_info}}">
+                        <p class="flow-text">{{entry.diagn_rank}}.&nbsp;&nbsp;&nbsp; {{entry.medication_name}}</p>
+                    </a>
+                </div>
+                <div flex="35">
+                    <p class="flow-text">{{entry.medication_dosierung_mo}} <span style="color:#9E9E9E">-</span> {{entry.medication_dosierung_mi}} <span style="color:#9E9E9E">-</span> {{entry.medication_dosierung_ab}} <span style="color:#9E9E9E">-</span> {{entry.medication_dosierung_na}}</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-if="d.diagnoses.length === 0">
-        <div layout="row" layout-gt-xs="row" layout-align="start start">
-            <div flex>
-                <p class="flow-text">Keine Diagnosen.</p>
-            </div>
+        <div ng-if="d.diagnoses.length === 0">
+            <p class="flow-text">Keine Diagnosen.</p>
         </div>
     </div>
 </md-content>
