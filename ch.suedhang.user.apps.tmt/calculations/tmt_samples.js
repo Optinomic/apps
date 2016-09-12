@@ -158,9 +158,9 @@ function main(responses) {
             md_info.push(pg_info);
         };
 
-
+        var result_array_id = 3
         var result_types_info = {
-            "id": 3,
+            "id": result_array_id,
             "text": "Ergebnis-Typen",
             "all_available": false, //is last entry a all groups?
             "result": true, //is this where the result types are?
@@ -169,6 +169,7 @@ function main(responses) {
         };
         if (want_patient_groups) {
             result_types_info.id = 4;
+            result_array_id = 4;
         };
         md_info.push(result_types_info);
 
@@ -177,10 +178,13 @@ function main(responses) {
         var md_array = [];
         for (var i = 0; i < md_info.length; i++) {
             var currend_prop = md_info[i];
-            md_array.push(currend_prop.array);
+            md_array.push(calc.cloneObj(currend_prop.array));
         };
 
         // Write to return_obj
+        return_obj.globals = {
+            "result_types_id": result_array_id;
+        };
         return_obj.info = md_info;
         return_obj.array = md_array;
 
