@@ -109,30 +109,63 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.getMultiDimensionalContainer = function() {
+    calc.getMultiDimensionalContainer = function(patient_groups) {
 
         var return_obj = {};
+
+        // Do we want also to use Optinomic Patient-Groups?
+        var want_patient_groups = true;
 
         // Description - Multidimensional Array
         var md_info = [{
             "id": 0,
             "text": "Altersgruppe",
             "all_available": true, //is last entry a all groups?
+            "result": false, //is this where the result types are?
             "n": calc.group_age_props.length,
             "array": calc.group_age_props
         }, {
             "id": 1,
             "text": "Ausbildungsniveau",
             "all_available": true, //is last entry a all groups?
+            "result": false, //is this where the result types are?
             "n": calc.group_edu_props.length,
             "array": calc.group_edu_props
         }, {
             "id": 2,
             "text": "Messzeitpunkt",
             "all_available": true, //is last entry a all groups?
+            "result": false, //is this where the result types are?
             "n": calc.group_mz_props.length,
             "array": calc.group_mz_props
         }];
+
+        // Should not to be modified below:
+
+        if (want_patient_groups) {
+            var pg_info = {
+                "id": 3,
+                "text": "Patientengruppen",
+                "all_available": false, //is last entry a all groups?
+                "result": false, //is this where the result types are?
+                "n": patient_groups.length,
+                "array": patient_groups
+            };
+            md_info.push(pg_info);
+        };
+
+        var result_types_info = {
+            "id": 3,
+            "text": "Ergebnis-Typen",
+            "all_available": false, //is last entry a all groups?
+            "result": true, //is this where the result types are?
+            "n": calc.result_types.length,
+            "array": calc.result_types
+        };
+        if (want_patient_groups) {
+            result_types_info.id = 4;
+        };
+        md_info.push(result_types_info);
 
 
         // Create Multidimensional Array
@@ -587,7 +620,7 @@ function main(responses) {
 
         // Do the needed 'calculations'
         var patient_groups = d[0].patient_groups;
-        var md_props = calc.getMultiDimensionalContainer();
+        var md = calc.getMultiDimensionalContainer(patient_groups);
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
@@ -599,7 +632,7 @@ function main(responses) {
         // Returning | Results in Obj.
 
 
-        results.md_props = md_props;
+        results.md = md;
         results.patient_groups = patient_groups;
         // results.age_edu_obj = age_edu_mz_obj;
         // results.patient_scores = patient_scores;
