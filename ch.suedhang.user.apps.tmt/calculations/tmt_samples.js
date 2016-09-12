@@ -108,14 +108,15 @@ function main(responses) {
         var want_patient_groups = true;
 
         // How do the 'Result' looks like?
+
+
+        // "data": calc.getVariables()
         var result_types = [{
             "id": 0,
-            "text": "Scores",
-            "data": calc.getVariables()
+            "text": "Scores"
         }, {
             "id": 0,
-            "text": "Statistics",
-            "data": calc.getVariables()
+            "text": "Statistics"
         }];
 
         // Description - Multidimensional Array
@@ -242,20 +243,12 @@ function main(responses) {
 
 
         results.md = md;
-        results.patient_groups = patient_groups;
+        // results.patient_groups = patient_groups;
         // results.age_edu_obj = age_edu_mz_obj;
         // results.patient_scores = patient_scores;
         // results.age_edu_obj_scores = age_edu_obj_scores;
         // results.age_edu_mz_obj = age_edu_obj_statistics;
 
-
-        // Return Useful Definitions
-        var definitions = {
-            "age": calc.group_age_props,
-            "edu": calc.group_edu_props,
-            "mz": calc.group_mz_props
-        };
-        results.definitions = definitions;
 
 
         // Returning full (complete) responses is often used/helpful.
