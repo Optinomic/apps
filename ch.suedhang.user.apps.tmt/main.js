@@ -28,19 +28,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-
-            console.log('(Calculation-Data): tmt_scores: ', $scope.d.dataMain.calculations[1].calculation_results);
-            console.log('(Calculation-Data): tmt_samples: ', $scope.d.dataMain.calculations[0].calculation_results);
+            // Save results from "tmt_scores" in $scope
             $scope.d.calculations = $scope.d.dataMain.calculations[1].calculation_results
 
 
             // Run App-Functions:
-            $scope.tmt_init();
+            // $scope.tmt_init();
             // $scope.getCalculation();
 
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log(' - (Calculation): tmt_scores: ', $scope.d.dataMain.calculations[1].calculation_results);
+            console.log(' - (Calculation): tmt_samples: ', $scope.d.dataMain.calculations[0].calculation_results);
+
             $scope.d.init = true;
         });
     };
