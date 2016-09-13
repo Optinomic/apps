@@ -323,29 +323,17 @@ function main(responses) {
 
 
         // Do the needed 'calculations'
-        //var patient_groups = d[0].patient_groups;
-        //var md = calc.getMultiDimensionalContainer(patient_groups);
-        //var patient_scores = calc.getPatientScores(d);
-        //var md_scores = calc.mdFillPatientScores(md, patient_scores);
-
-        // var age_edu_mz_obj = calc.getAgeEduObj();
-        // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
-        // var patient_scores = calc.getPatientScores(d);
-        // var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_mz_obj, patient_scores);
-        // var age_edu_obj_statistics = calc.getAgeEduObjStatistics(age_edu_obj_scores, age_edu_mz_obj_prop_array);
+        var patient_groups = d.patient_groups;
+        var md = calc.getMultiDimensionalContainer(patient_groups);
+        var patient_scores = calc.getPatientScores(d);
+        var md_scores = calc.mdFillPatientScores(md, patient_scores);
 
 
         // Returning | Results in Obj.
 
-
-        // results.md = md;
-        // results.patient_scores = patient_scores;
-        // results.md_scores = md_scores;
-
-        // results.patient_groups = patient_groups;
-        // results.age_edu_obj = age_edu_mz_obj;
-        // results.age_edu_obj_scores = age_edu_obj_scores;
-        // results.age_edu_mz_obj = age_edu_obj_statistics;
+        results.md = md;
+        results.patient_scores = patient_scores;
+        results.md_scores = md_scores;
 
 
 

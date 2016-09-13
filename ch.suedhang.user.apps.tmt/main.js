@@ -39,8 +39,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            console.log(' - (Calculation): tmt_scores: ', $scope.d.dataMain.calculations[1].calculation_results);
-            console.log(' - (Calculation): tmt_samples: ', $scope.d.dataMain.calculations[0].calculation_results);
+            console.log(' - (Calculation): tmt_scores: ', $scope.d.dataMain.calculations[0].calculation_results);
+            console.log(' - (Calculation): tmt_samples: ', $scope.d.dataMain.calculations[1].calculation_results);
 
             $scope.d.init = true;
         });
