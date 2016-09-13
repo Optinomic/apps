@@ -211,16 +211,20 @@ function main(responses) {
             var current_result = d[i];
 
 
-            // Scores Obj. erstellen.
-            var scores = {
-                "info": {},
-                "score": calc.getVariables()
-            };
+
 
 
             var all_responses = current_result.other_calculations['ch.suedhang.apps.tmt_V3:tmt_score']
 
             for (var x = 0; x < all_responses.length; x++) {
+
+                // Scores Obj. erstellen.
+                var scores = {
+                    "info": {},
+                    "score": calc.getVariables()
+                };
+
+
                 var current_response = all_responses[x];
 
                 // Set Groups & Some generic Vars
@@ -292,12 +296,14 @@ function main(responses) {
             var md_pos_1_id = current_patient_score.info.group_age_array_id;
             var md_pos_2_id = current_patient_score.info.group_edu_array_id;
             var md_pos_3_id = current_patient_score.info.group_mz_array_id;
-            // 
+
+
+            // JS - Error:
             // var md_pos_1_info = md_info[md_pos_1_id];
             // var md_pos_2_info = md_info[md_pos_3_id];
             // var md_pos_3_info = md_info[md_pos_4_id];
 
-            // Check ArrayPositions Infos
+            // Check ArrayPositions Infos what to do.
 
 
         };
