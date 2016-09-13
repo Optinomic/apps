@@ -338,9 +338,9 @@ function main(responses) {
         // Returning | Results in Obj.
 
 
-        results.md = md;
-        results.patient_scores = patient_scores;
-        results.md_scores = md_scores;
+        // results.md = md;
+        // results.patient_scores = patient_scores;
+        // results.md_scores = md_scores;
 
         // results.patient_groups = patient_groups;
         // results.age_edu_obj = age_edu_mz_obj;
