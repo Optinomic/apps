@@ -96,7 +96,7 @@ function main(responses) {
     // Calculation-Init   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.getMultiDimensionalContainer = function(patient_groups) {
+    calc.getMultiDimensionalContainer = function(pg) {
 
         // Note:  md = Multi Dimensional
         // Change this for your current App
@@ -104,7 +104,7 @@ function main(responses) {
         var return_obj = {};
 
         // Do we want also to use Optinomic Patient-Groups?
-        var want_patient_groups = false;
+        var want_patient_groups = true;
         //  ==> Find a way to find all patients from group
 
         // How do the 'Result' looks like?
@@ -117,7 +117,6 @@ function main(responses) {
             "text": "Statistics",
             "data": calc.getVariables()
         }];
-
 
 
         // Description - Multidimensional Array
@@ -152,6 +151,16 @@ function main(responses) {
         // Should not to be modified below:
 
         if (want_patient_groups) {
+
+            // Add 'data' to patient_groups
+            var patient_groups = calc.cloneObj(pg);
+            for (var pg_id = 0; pg_id < patient_groups.length; pg_id++) {
+                var currend_patient_group = patient_groups[pg_id];
+
+                currend_patient_group.data = calc.getVariables();
+            };
+
+
             var pg_info = {
                 "id": 3,
                 "text": "Patientengruppen",
@@ -159,7 +168,7 @@ function main(responses) {
                 "result": false, //is this where the result types are?
                 "generic": true, //is this something generic?
                 "n": patient_groups.length,
-                "array": calc.cloneObj(patient_groups)
+                "array": patient_groups
             };
             md_info.push(pg_info);
         };
