@@ -283,7 +283,7 @@ function main(responses) {
         var md_info = md_obj.info;
         var patient_scores = calc.cloneObj(ps);
 
-
+        md_obj.function = 'mdFillPatientScores';
         md_obj.vars = {};
 
         for (var x = 0; x < patient_scores.length; x++) {
@@ -294,9 +294,9 @@ function main(responses) {
             var md_pos_2_id = current_patient_score.info.group_edu_array_id;
             var md_pos_3_id = current_patient_score.info.group_mz_array_id;
 
-            var md_pos_1_info = md_info[md_pos_1_id]
-            var md_pos_2_info = md_info[md_pos_3_id]
-            var md_pos_3_info = md_info[md_pos_4_id]
+            var md_pos_1_info = md_info[md_pos_1_id];
+            var md_pos_2_info = md_info[md_pos_3_id];
+            var md_pos_3_info = md_info[md_pos_4_id];
 
             // Check ArrayPositions Infos
             md_obj.vars.md_pos_1_info = md_pos_1_info;
