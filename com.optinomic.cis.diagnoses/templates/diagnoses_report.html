@@ -1,6 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content>
-    <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate:d.appInit.reverse | filter:d.appInit.filter">
+    <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
             <div>
                 <p class="flow-text">{{entry.diagn_rank}}.</p>
