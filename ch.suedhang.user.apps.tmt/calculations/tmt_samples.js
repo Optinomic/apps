@@ -92,12 +92,8 @@ function main(responses) {
     }];
 
 
-
-
-
-
     // ------------------------------------------
-    // Calculation   -   F U N C T I O N S
+    // Calculation-Init   -   F U N C T I O N S
     // ------------------------------------------
 
     calc.getMultiDimensionalContainer = function(patient_groups) {
@@ -279,6 +275,12 @@ function main(responses) {
     };
 
 
+    // ------------------------------------------
+    // Generic   -   F U N C T I O N S
+    // Chnage only if you know what you are doing
+    // ------------------------------------------
+
+
     calc.mdFillPatientScores = function(md, patient_scores) {
 
         var md_obj = calc.cloneObj(md);
@@ -299,12 +301,6 @@ function main(responses) {
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(my_obj));
     };
-
-
-
-    // ------------------------------------------
-    // NOT IN USE   -   F U N C T I O N S
-    // ------------------------------------------
 
     calc.getVariables = function() {
         // Clone Obj. and Return
@@ -327,10 +323,10 @@ function main(responses) {
 
 
         // Do the needed 'calculations'
-        var patient_groups = d[0].patient_groups;
-        var md = calc.getMultiDimensionalContainer(patient_groups);
-        var patient_scores = calc.getPatientScores(d);
-        var md_scores = calc.mdFillPatientScores(md, patient_scores);
+        //var patient_groups = d[0].patient_groups;
+        //var md = calc.getMultiDimensionalContainer(patient_groups);
+        //var patient_scores = calc.getPatientScores(d);
+        //var md_scores = calc.mdFillPatientScores(md, patient_scores);
 
         // var age_edu_mz_obj = calc.getAgeEduObj();
         // var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
