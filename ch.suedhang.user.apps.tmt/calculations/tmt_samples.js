@@ -289,13 +289,13 @@ function main(responses) {
             var current_patient_score = patient_scores[x];
 
             // Read given ArrayPositions | Infos
-            var md_pos_1_id = current_patient_score.info.group_age_array_id;
-            var md_pos_2_id = current_patient_score.info.group_edu_array_id;
-            var md_pos_3_id = current_patient_score.info.group_mz_array_id;
-
-            var md_pos_1_info = md_info[md_pos_1_id];
-            var md_pos_2_info = md_info[md_pos_3_id];
-            var md_pos_3_info = md_info[md_pos_4_id];
+            // var md_pos_1_id = current_patient_score.info.group_age_array_id;
+            // var md_pos_2_id = current_patient_score.info.group_edu_array_id;
+            // var md_pos_3_id = current_patient_score.info.group_mz_array_id;
+            // 
+            // var md_pos_1_info = md_info[md_pos_1_id];
+            // var md_pos_2_info = md_info[md_pos_3_id];
+            // var md_pos_3_info = md_info[md_pos_4_id];
 
             // Check ArrayPositions Infos
 
