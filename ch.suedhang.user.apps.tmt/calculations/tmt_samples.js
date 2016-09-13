@@ -325,13 +325,14 @@ function main(responses) {
         // Do the needed 'calculations'
         var patient_groups = d.patient_groups;
         var md = calc.getMultiDimensionalContainer(patient_groups);
-        var patient_scores = calc.getPatientScores(d);
+        var patient_scores = calc.getPatientScores(d.patients);
         var md_scores = calc.mdFillPatientScores(md, patient_scores);
 
 
         // Returning | Results in Obj.
 
         results.md = md;
+        results.patient_groups = patient_groups;
         results.patient_scores = patient_scores;
         results.md_scores = md_scores;
 
