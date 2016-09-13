@@ -239,7 +239,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var A_messung = angular.copy(messung);
             A_messung = $scope.addDefault(A_messung);
 
-            if (age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) {
+            if ((age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) || (age_edu_mz_obj.statistics.TMTATime.z_score_min !== undefined)) {
                 A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_min);
                 A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTATime.z_score_max);
                 A_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
@@ -266,7 +266,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var B_messung = angular.copy(messung);
             B_messung = $scope.addDefault(B_messung);
 
-            if (age_edu_mz_obj.statistics.TMTBTime.z_score_min !== null) {
+            if ((age_edu_mz_obj.statistics.TMTATime.z_score_min !== null) || (age_edu_mz_obj.statistics.TMTATime.z_score_min !== undefined)) {
                 B_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_min);
                 B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTBTime.z_score_max);
                 B_messung.text_right_caption = 'N=' + age_edu_mz_obj.scores.n;
@@ -298,7 +298,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     A_messung.zscore_min = B_messung.zscore_min;
                 };
             };
-
 
             // Push and Save
             $scope.d.zScore.tmt_a.push(A_messung);
