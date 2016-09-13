@@ -275,19 +275,35 @@ function main(responses) {
     };
 
 
-    // ------------------------------------------
-    // Generic   -   F U N C T I O N S
-    // Chnage only if you know what you are doing
-    // ------------------------------------------
-
-
-    calc.mdFillPatientScores = function(md, patient_scores) {
+    calc.mdFillPatientScores = function(md, ps) {
 
         var md_obj = calc.cloneObj(md);
         var md_array = md_obj.array;
         var md_globals = md_obj.globals;
         var md_info = md_obj.info;
+        var patient_scores = calc.cloneObj(ps);
 
+
+        md_obj.vars = {};
+
+        for (var x = 0; x < patient_scores.length; x++) {
+            var current_patient_score = patient_scores[x];
+
+            // Read given ArrayPositions | Infos
+            var md_pos_1_id = current_patient_score.info.group_age_array_id;
+            var md_pos_2_id = current_patient_score.info.group_edu_array_id;
+            var md_pos_3_id = current_patient_score.info.group_mz_array_id;
+
+            var md_pos_1_info = md_info[md_pos_1_id]
+            var md_pos_2_info = md_info[md_pos_3_id]
+            var md_pos_3_info = md_info[md_pos_4_id]
+
+            // Check ArrayPositions Infos
+            md_obj.vars.md_pos_1_info = md_pos_1_info;
+            md_obj.vars.md_pos_2_info = md_pos_2_info;
+            md_obj.vars.md_pos_3_info = md_pos_3_info;
+
+        };
 
         return md_obj;
 
