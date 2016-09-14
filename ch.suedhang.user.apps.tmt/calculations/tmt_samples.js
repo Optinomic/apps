@@ -296,7 +296,6 @@ function main(responses) {
         var md_info = md_obj.info;
         var patient_scores = calc.cloneObj(ps);
 
-        md_obj.function = 'mdFillPatientScores';
 
         for (var x = 0; x < patient_scores.length; x++) {
             var current_patient_score = patient_scores[x];
@@ -306,8 +305,13 @@ function main(responses) {
             var md_pos_2_id = current_patient_score.info.group_edu_array_id;
             var md_pos_3_id = current_patient_score.info.group_mz_array_id;
 
+            // Test Write
+            md_array[4][0].function = 'mdFillPatientScores';
+
 
             // JS - Error:
+
+            // 'Connect' not generic md array positions
             // var md_pos_1_info = md_info[md_pos_1_id];
             // var md_pos_2_info = md_info[md_pos_3_id];
             // var md_pos_3_info = md_info[md_pos_4_id];
