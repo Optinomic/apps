@@ -29,5 +29,4 @@ include(main.js)
 
 [css]
 include(../lib/css/set/optinomic_material.m4)
-include(style.css)
 
