@@ -28,6 +28,6 @@ include(templates/tetris.html)
 include(main.js)
 
 [css]
-include(../lib/css/set/optinomic_material_bootstrap.m4)
+include(../lib/css/set/optinomic_material.m4)
 include(style.css)
 

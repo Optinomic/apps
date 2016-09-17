@@ -48,7 +48,7 @@
         ctx = canvas.getContext('2d'),
         ucanvas = get('upcoming'),
         uctx = ucanvas.getContext('2d'),
-        speed = { start: 1.8, decrement: 0.105, min: 1.1 }, // how long before piece drops by 1 row (seconds)
+        speed = { start: 0.4, decrement: 0.005, min: 0.1 }, // how long before piece drops by 1 row (seconds)
         nx = 10, // width of tetris court (in blocks)
         ny = 20, // height of tetris court (in blocks)
         nu = 5; // width/height of upcoming preview (in blocks)
