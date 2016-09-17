@@ -7,7 +7,10 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-#tetris {}
+#tetris {
+    height: 350px !important;
+    min-height: 350px !important;
+}
 
 #stats {
     display: inline-block;
