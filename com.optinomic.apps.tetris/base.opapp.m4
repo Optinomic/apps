@@ -25,7 +25,6 @@ include(templates/tetris.html)
 
 
 [javascript]
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
 
 [css]
