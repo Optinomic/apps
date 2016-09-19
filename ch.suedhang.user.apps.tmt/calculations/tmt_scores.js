@@ -519,7 +519,7 @@ function main(responses) {
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
         var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
-        var patient_scores = calc.getPatientScores(d);
+        var patient_scores = calc.getPatientScores(d.patients);
         var age_edu_obj_scores = calc.getAgeEduObjScores(age_edu_mz_obj, patient_scores);
         var age_edu_obj_statistics = calc.getAgeEduObjStatistics(age_edu_obj_scores, age_edu_mz_obj_prop_array);
 
