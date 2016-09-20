@@ -201,7 +201,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var module_packages = [];
         var data_query = {
             name: 'Fulfillment (enriched)',
-            sql: in clude_as_js_string(
+            sql: include_as_js_string(
                 responses.sql)
         };
         module_packages.push(data_query);
