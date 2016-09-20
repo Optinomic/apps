@@ -76,9 +76,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.haveData = true;
 
 
-            // Init - Data Export
-            $scope.setExport();
-
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
@@ -182,33 +179,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-
-    // ------------------------
-    // Data-Export
-    // ------------------------
-    $scope.setExport = function() {
-
-
-        // ------------------------------------------------
-        // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
-        // => (export.sql) muss sich in /includes befinden
-        // ------------------------------------------------
-
-
-        // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var module_packages = [];
-        var data_query = {
-            name: 'Fulfillment (enriched)',
-            sql: include_as_js_string(
-                responses.sql)
-        };
-        module_packages.push(data_query);
-
-
-        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-    };
 
 
 

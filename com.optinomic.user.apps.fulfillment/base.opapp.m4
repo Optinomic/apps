@@ -22,9 +22,6 @@ website = http://www.optinomic.com/
 [template fulfillment 6 8]
 include(templates/fulfillment.html)
 
-[template export_toolbox_admin 6 10]
-include(templates/download.html)
-
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
