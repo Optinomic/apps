@@ -2,6 +2,7 @@
 id = com.optinomic.user.apps.fulfillment
 name = Erfüllungsgrad
 short_description = Erfasste Fragebögen mit Angaben zu Patient, Aufenthalt und zugrundeliegendem Ereignis.
+version = include(VERSION)
 type = user
 
 [description]
