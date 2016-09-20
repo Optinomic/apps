@@ -1,0 +1,67 @@
+<h3 class="md-headline">Erfüllungsgrad</h3>
+<p class="md-body-1" style="color:#3F51B5">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
+<div>&nbsp;</div>
+<div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
+    <md-card-title style="background:#424242; color:#F5F5F5">
+        <md-card-title-text>
+            <span class="md-headline"><span style="color:#4CAF50">{{result.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;{{result.patient.data.extras.name}} <span class="md-subhead">&nbsp;({{result.patient.data.extras.birthday_age}})</span></span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <div ng-if="(result.events.length !== 0)">
+        <md-card-content>
+            <ul class="cbp_tmtimeline">
+                <li ng-repeat="item in result.timeline">
+                    <time class="cbp_tmtime" datetime="{{event.message.date_created_time}}">
+                        <span>{{item.date | date}}</span> <span>{{item.time}}</span>
+                    </time>
+                    <div class="cbp_tmicon">
+                        <i class="mdi" style="margin-top:8px !important; margin-left:0px !important;" ng-class="item.logo"></i>
+                    </div>
+                    <div class="cbp_tmlabel">
+                        <div layout="row" layout-gt-xs="row" layout-align="center center" layout-margin>
+                            <div flex ng-class="item.class">
+                                <div class="box-footer" ng-if="item.type !== 'stay'">
+                                    {{item.date | date}} | {{item.time}}
+                                </div>
+                                <div ng-if="item.type === 'stay'" layout-margin layout-padding>
+                                    <p class="md-display-1">{{item.line_1}}</p>
+                                    <p class="md-title">{{item.line_2}}</p>
+                                    <p class="md-body-1">{{item.line_3}}</p>
+                                </div>
+                                <div ng-if="item.type !== 'stay'" layout-margin layout-padding>
+                                    <p class="md-body-1">{{item.line_1}}
+                                        <br>{{item.line_2}}
+                                        <br>{{item.line_3}}</p>
+                                </div>
+                            </div>
+                            <div flex ng-if="item.type === 'event'" ng-class="item.survey.class">
+                                <div class="box-footer">
+                                    {{item.survey.date | date}} | {{item.survey.time}}
+                                </div>
+                                <div ng-if="item.survey.type === 'survey-none'" layout-margin layout-padding>
+                                    <p class="md-body-1">{{item.survey.line_1}}</p>
+                                    <md-button ng-href="{{item.survey.url}}" class="md-accent" style="color:#616161">Jetzt ausführen</md-button>
+                                </div>
+                                <div ng-if="item.survey.type !== 'survey-none'" layout-margin layout-padding>
+                                    <p class="md-body-1">{{item.survey.line_1}}
+                                        <br>{{item.survey.line_2}}
+                                        <br>{{item.survey.line_3}}</p>
+                                    <md-button ng-click="showDetails(result, item.survey.data.patient_id, item.survey.data.stay_id, item.survey.data.event_id, item.survey.data.survey_response_id);" class="md-primary" style="color:#1B5E20">Details</md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </md-card-content>
+    </div>
+    <div ng-if="(result.events.length === 0)">
+        <md-card-content>
+            <p class="md-caption">Das Modul ({{d.appInit.app_id}}) ist nicht aktiviert oder es ist keine Aufgabe/Erfassung geplant.</p>
+        </md-card-content>
+    </div>
+</md-card>

@@ -1,0 +1,64 @@
+<h3 class="md-headline">Erfüllungsgrad ({{d.appInit.app_id}})</h3>
+<p class="md-body-1" style="color:#3F51B5">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
+<div>&nbsp;</div>
+<div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
+    <md-card-title style="background:#424242; color:#F5F5F5">
+        <md-card-title-text>
+            <span class="md-headline"><span style="color:#4CAF50">{{result.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;{{result.patient.data.extras.name}} <span class="md-subhead">&nbsp;({{result.patient.data.extras.birthday_age}})</span></span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <div ng-if="result.surveys.length !== 0" ng-repeat="stay in result.stays">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-title"><span class="md-headline" style="color:#4CAF50">{{stay.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;26.8.2014 - Unbekannt</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content ng-if="stay.surveys.length !== 0">
+            <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
+                <md-grid-tile ng-repeat="survey in stay.surveys" style="background:#4CAF50;" md-rowspan="1" md-colspan="1" md-colspan-xs="1" ng-click="showDetails(result, survey.patient_id, survey.stay_id, survey.event_id, survey.survey_response_id);">
+                    <div style="color:white">
+                        <p class="md-caption">
+                            #Event: {{survey.event_id}}
+                            <br/> #Response: {{survey.survey_response_id}}
+                        </p>
+                    </div>
+                    <md-grid-tile-footer>
+                        <md-button ng-click="showDetails(result, survey.patient_id, survey.stay_id, survey.event_id, survey.survey_response_id);" class="md-primary" style="color:#FAFAFA">{{survey.filled | date}}</md-button>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-card-content>
+    </div>
+    <div ng-if="result.events.length > 0">
+        <md-divider></md-divider>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-subhead">Offene Aufgaben</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="6" md-cols-gt-md="8" md-row-height="120px" md-gutter="8px" md-gutter-gt-xs="8px">
+                <md-grid-tile ng-if="event.data.status === 'to_be_done'" ng-repeat="event in result.events" style="background:#F44336;" md-rowspan="1" md-colspan="1" md-colspan-xs="1">
+                    <div style="color:white">
+                        <p class="md-caption">
+                            #Resp: {{event.data.responsibility.type}}
+                            <br/> #Status: {{event.data.status}}
+                        </p>
+                        <p class="md-caption"></p>
+                    </div>
+                    <md-grid-tile-footer>
+                        <h3>{{event.data.created_at | date}}</h3>
+                    </md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </md-card-content>
+    </div>
+</md-card>
+<div>&nbsp;</div>
+<div layout="row" layout-gt-xs="row" layout-align="end center">
+    <md-button ng-click="initApp()" class="md-primary" style="color:#9E9E9E">Zurücksetzen</md-button>
+</div>

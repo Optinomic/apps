@@ -1,0 +1,96 @@
+<div>
+    <h3 class="md-headline">Patienten selektieren</h3>
+    <p class="md-body-1" style="color:#3F51B5">Bitte selektieren Sie die gewünschten Patienten:</p>
+    <div>&nbsp;</div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Geschlecht</label>
+                <md-select ng-model="d.appInit.patientListFilter.gender">
+                    <md-option value="">Alle Patienten</md-option>
+                    <md-option value="male">Herr</md-option>
+                    <md-option value="female">Frau</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>PLZ</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.zip_code">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Ort</label>
+                <input type="text" ng-model="d.appInit.patientListFilter.city">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Alter (über)</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.age_over">
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Alter (unter)</label>
+                <input type="number" ng-model="d.appInit.patientListFilter.age_under">
+            </md-input-container>
+        </div>
+    </div>
+    <div>&nbsp;</div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Aufenthalt</label>
+                <md-select ng-model="d.appInit.patientListFilter.in_stay">
+                    <md-option value="">Alle Patienten</md-option>
+                    <md-option value="True">In aktueller Behandlung</md-option>
+                    <md-option value="False">Aktuell nicht in Behandlung</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Therapeut</label>
+                <md-select ng-model="d.appInit.patientListFilter.lead_therapist">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">{{user.data.last_name}} {{user.data.first_name}} ({{user.data.initials}})</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex>
+            <md-input-container style="width:98%;">
+                <label>Arzt</label>
+                <md-select ng-model="d.appInit.patientListFilter.cis_lead_doctor">
+                    <md-option ng-repeat="user in d.dataMain.users.all" value="{{user.id}}">{{user.data.last_name}} {{user.data.first_name}} ({{user.data.initials}})</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <p class="md-caption">Bitte selektieren Sie das Datum aussliesslich über den Picker - nicht von Hand überschreiben.</p>
+    <div layout="row" layout-gt-xs="row" layout-xs="column" layout-padding>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_after" md-placeholder="Eintritt nach"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_start_before" md-placeholder="Eintritt vor"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_after" md-placeholder="Austritt nach"></md-datepicker>
+        </div>
+        <div flex>
+            <md-datepicker ng-model="d.appInit.patientListFilter.stay_stop_before" md-placeholder="Austritt vor"></md-datepicker>
+        </div>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-xs="column">
+        <div>
+            <md-button ng-click="initApp()" class="md-primary" style="color:#9E9E9E">Zurücksetzen</md-button>
+        </div>
+        <div flex>
+            &nbsp;
+        </div>
+        <div>
+            <md-button ng-click="setTab(2)" class="md-accent">Ausführen</md-button>
+        </div>
+    </div>
+</div>
