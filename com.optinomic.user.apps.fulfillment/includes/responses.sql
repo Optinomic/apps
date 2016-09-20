@@ -97,5 +97,5 @@ INNER JOIN patient_view ON(patient_view.id = survey_response_view.patient_id)
 INNER JOIN stay ON(stay.id = survey_response_view.stay_id) 
 INNER JOIN event ON(event.id = survey_response_view.event_id) 
 
-WHERE survey_response_view.module = 'ch.suedhang.apps.tmt_V3';
+WHERE survey_response_view.module IS NOT NULL;
 

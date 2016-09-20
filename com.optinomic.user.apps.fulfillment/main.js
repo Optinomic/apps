@@ -38,18 +38,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             have_data: false
         };
 
+        var sql_views = ['fulfillment_survey_response_view'];
 
+
+        // Create Return Obj;
         var init = {
             "app_id": app_id,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
+            "sql_views": sql_views,
             "selectedTabIndex": 0,
             "is_busy": false,
             "promise": {}
         };
 
-
-        $scope.d.appInit = init;
 
         return init;
     };
@@ -104,7 +106,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // ------------------------
-    // showDetails
+    // Unneeded
     // ------------------------
     $scope.showDetails = function(result_obj, patient_id, stay_id, event_id, response_id) {
 
@@ -174,7 +176,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Switch - Tab
         $scope.d.appInit.selectedTabIndex = 3;
-
     };
 
 
