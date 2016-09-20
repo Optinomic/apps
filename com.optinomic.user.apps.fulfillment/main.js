@@ -77,7 +77,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Init - Data Export
-            // $scope.setExport();
+            $scope.setExport();
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
