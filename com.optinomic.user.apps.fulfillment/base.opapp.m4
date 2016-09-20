@@ -23,7 +23,7 @@ website = http://www.optinomic.com/
 include(templates/fulfillment.html)
 
 [sql_init]
-CREATE VIEW survey_response_view AS 
+CREATE VIEW fulfillment_survey_response_view AS 
 
 SELECT 
 
