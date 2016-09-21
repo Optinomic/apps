@@ -49,7 +49,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.initApp = function() {
 
-        var app_id = app_id === undefined ? 'com.optinomic.user.apps.fulfillment' : app_id;
+        // var app_id = app_id === undefined ? 'com.optinomic.user.apps.fulfillment' : app_id;
 
         var patientListFilter = {
             gender: '',
@@ -77,7 +77,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Create Return Obj;
         var init = {
-            "app_id": app_id,
+            "app_id_selected": null,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
             "sql_views": sql_views,

@@ -4,8 +4,8 @@
     <div>&nbsp;</div>
     <md-input-container class="md-block">
         <label>Applikation</label>
-        <md-select ng-model="d.appInit.app_id">
-            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules" value="{{app.identifier}}">{{app.name}} ({{app.identifier}})</md-option>
+        <md-select ng-model="d.appInit.app_id_selected">
+            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules | orderBy : 'name'" value="{{app.identifier}}">{{app.name}} ({{app.identifier}})</md-option>
         </md-select>
     </md-input-container>
     <div layout="row" layout-gt-xs="row" layout-align="end center">
