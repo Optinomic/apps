@@ -111,6 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Ergebnis anfordern
         if (TabIndex === 2) {
             $scope.getPatientList();
+            $scope.d.app.selectedTabIndex = TabIndex;
         };
 
         // Switch - Tab
