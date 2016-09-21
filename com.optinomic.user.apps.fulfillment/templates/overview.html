@@ -1,2 +1,8 @@
+<md-list ng-controller="ListCtrl" ng-cloak>
+    <md-list-item class="secondary-button-padding">
+        <p>Clicking the button to the right will fire the secondary action</p>
+        <md-button class="md-secondary" ng-click="doSecondaryAction($event)">More Info</md-button>
+    </md-list-item>
+</md-list>
 <p>Overview</p>
 <pre>{{d.app.patients.data | json}}</pre>

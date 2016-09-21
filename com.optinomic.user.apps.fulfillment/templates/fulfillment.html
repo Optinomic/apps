@@ -7,7 +7,7 @@ include(../lib/html/optinomic/page/start.m4)
                     include(templates/selector_application.html)
                 </md-content>
             </md-tab>
-            <md-tab label="{{d.app.promise.patients.length}} Patienten">
+            <md-tab label="{{d.app.patients.data.length}} Patienten">
                 <md-content class="md-padding">
                     include(templates/selector_patient_list.html)
                 </md-content>

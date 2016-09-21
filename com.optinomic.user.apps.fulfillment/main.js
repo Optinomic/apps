@@ -144,6 +144,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.doSecondaryAction = function(event) {
+        console.log('(!): doSecondaryAction', event);
+    };
+
+
+
+
     // ------------------------
     // Unneeded
     // ------------------------
