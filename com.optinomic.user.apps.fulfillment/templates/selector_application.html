@@ -5,7 +5,7 @@
     <md-input-container class="md-block">
         <label>Applikation</label>
         <md-select ng-model="d.app.app_selected">
-            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules | orderBy : 'name'" value="{{d.dataMain.apps.all_patient_modules[$index]}}">{{app.name}} ({{app.identifier}})
+            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules | orderBy : 'name'" value="app">{{app.name}} ({{app.identifier}})
             </md-option>
         </md-select>
     </md-input-container>
