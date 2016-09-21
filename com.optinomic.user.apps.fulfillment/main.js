@@ -49,31 +49,36 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.initApp = function() {
 
-        // var app_id = app_id === undefined ? 'com.optinomic.user.apps.fulfillment' : app_id;
-
         var patientListFilter = {
-            gender: '',
-            city: null,
-            zip_code: null,
-            age_over: null,
-            age_under: null,
-            in_stay: 'True',
-            lead_therapist: null,
-            cis_lead_doctor: null,
-            stay_start_before: null,
-            stay_start_after: null,
-            stay_stop_before: null,
-            stay_stop_after: null
+            "gender": '',
+            "city": null,
+            "zip_code": null,
+            "age_over": null,
+            "age_under": null,
+            "in_stay": 'True',
+            "lead_therapist": null,
+            "cis_lead_doctor": null,
+            "stay_start_before": null,
+            "stay_start_after": null,
+            "stay_stop_before": null,
+            "stay_stop_after": null
         };
 
 
         var fulfillment = {
-            results: [],
-            have_data: false
+            "results": [],
+            "have_data": false
         };
 
-        var sql_views = ['fulfillment_survey_response_view'];
+        var get_view_name_format = {
+            "delimitter": ';',
+            "including_headers": 'True',
+            "format": 'json',
+            "direct": 'True'
+        };
 
+        // What views where created in [sql_init]
+        var sql_views = ['fulfillment_survey_response_view'];
 
         // Create Return Obj;
         var init = {
@@ -83,6 +88,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "sql_views": sql_views,
             "selectedTabIndex": 0,
             "is_busy": false,
+            "get_view_name_format": get_view_name_format,
             "patients": {
                 "data": [],
                 "loaded": false
@@ -135,7 +141,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.app.patients.data = data;
             $scope.d.app.patients.loaded = false;
         });
-
     };
 
 

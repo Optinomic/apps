@@ -18,24 +18,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var app_id = app_id === undefined ? 'ch.suedhang.apps.honos' : app_id;
 
         var patientListFilter = {
-            gender: '',
-            city: null,
-            zip_code: null,
-            age_over: null,
-            age_under: null,
-            in_stay: 'True',
-            lead_therapist: null,
-            cis_lead_doctor: null,
-            stay_start_before: null,
-            stay_start_after: null,
-            stay_stop_before: null,
-            stay_stop_after: null
+            "gender": '',
+            "city": null,
+            "zip_code": null,
+            "age_over": null,
+            "age_under": null,
+            "in_stay": 'True',
+            "lead_therapist": null,
+            "cis_lead_doctor": null,
+            "stay_start_before": null,
+            "stay_start_after": null,
+            "stay_stop_before": null,
+            "stay_stop_after": null
         };
 
 
         var fulfillment = {
-            results: [],
-            have_data: false
+            "results": [],
+            "have_data": false
         };
 
 
@@ -44,6 +44,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
             "selectedTabIndex": 0,
+            "get_view_name_format": get_view_name_format,
             "is_busy": false,
             "promise": {}
         };

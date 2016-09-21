@@ -12,9 +12,9 @@ include(../lib/html/optinomic/page/start.m4)
                     include(templates/selector_patient_list.html)
                 </md-content>
             </md-tab>
-            <md-tab label="Ergebnis" ng-if="d.app.fulfillment.have_data || d.app.is_busy">
+            <md-tab label="Ergebnis" ng-if="d.app.patients.loaded">
                 <md-content class="md-padding">
-                    include(templates/timeline.html)
+                    include(templates/overview.html)
                 </md-content>
             </md-tab>
             <md-tab label="Details" ng-if="d.details.have_data === true">
