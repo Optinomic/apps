@@ -147,12 +147,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.showPatientDetails = function(p_array_id) {
 
+        console.log('(!) showPatientDetails', p_array_id);
+
         var details = {
             "patient": $scope.d.app.patients.data[p_array_id],
             "patient_array_id": p_array_id
         };
 
-        console.log('(!): showPatientDetails', details);
+        console.log('=> showPatientDetails', details);
 
     };
 
