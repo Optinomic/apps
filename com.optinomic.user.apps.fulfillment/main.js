@@ -13,6 +13,40 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.d = scopeDService;
 
 
+    // -----------------------------------
+    // Functions
+    // -----------------------------------
+
+    $scope.loadMainData = function() {
+        // -----------------------------------
+        // Get Data: d.dataMain
+        // -----------------------------------
+        $scope.d.haveData = false;
+
+        var dataPromiseMain = dataService.getMainAppData();
+        dataPromiseMain.then(function(data) {
+
+            // Save Data to $scope.d
+            $scope.d.dataMain = data;
+
+            // Run Functions:
+            $scope.d.appInit = $scope.initApp();
+            $scope.d.haveData = true;
+
+
+            // Finishing: Console Info & Init = done.
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            $scope.d.init = true;
+        });
+    };
+    $scope.loadMainData();
+
+
+
+    // ------------------------
+    // Functions
+    // ------------------------
+
     $scope.initApp = function() {
 
         var app_id = app_id === undefined ? 'com.optinomic.user.apps.fulfillment' : app_id;
@@ -49,58 +83,58 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "sql_views": sql_views,
             "selectedTabIndex": 0,
             "is_busy": false,
-            "promise": {}
+            "patients": {
+                "data": [],
+                "loaded": false
+            },
+            "fulfillment": {
+                "data": [],
+                "loaded": false
+            },
         };
-
 
         return init;
     };
 
 
-    // -----------------------------------
-    // Functions
-    // -----------------------------------
 
-    $scope.loadMainData = function() {
-        // -----------------------------------
-        // Get Data: d.dataMain
-        // -----------------------------------
-        $scope.d.haveData = false;
-
-        var dataPromiseMain = dataService.getMainAppData();
-        dataPromiseMain.then(function(data) {
-
-            // Save Data to $scope.d
-            $scope.d.dataMain = data;
-
-            // Run Functions:
-            $scope.d.appInit = $scope.initApp();
-            $scope.d.haveData = true;
-
-
-            // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.d.init = true;
-        });
-    };
-    $scope.loadMainData();
-
-
-
-    // ------------------------
-    // Data-Export
-    // ------------------------
     $scope.setTab = function(TabIndex) {
 
         TabIndex = TabIndex === undefined ? 0 : TabIndex;
 
         // Ergebnis anfordern
         if (TabIndex === 2) {
-            //$scope.getFulfillment();
+            $scope.getPatientList();
         };
 
         // Switch - Tab
         $scope.d.appInit.selectedTabIndex = TabIndex;
+
+    };
+
+
+
+
+    $scope.getPatientList = function() {
+        // Init - Params
+        var patientListFilter = $scope.d.appInit.patientListFilter;
+
+
+        var myAPI = dataService.getPatientList(patientListFilter);
+
+        myAPI.success(function(data) {
+            console.log('success: getPatientList', data);
+
+            $scope.d.appInit.patients.data = data;
+            $scope.d.appInit.patients.loaded = true;
+        });
+
+        myAPI.error(function(data) {
+            console.log('ERROR: getPatientList', data);
+
+            $scope.d.appInit.patients.data = data;
+            $scope.d.appInit.patients.loaded = false;
+        });
 
     };
 
