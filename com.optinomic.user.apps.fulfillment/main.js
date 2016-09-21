@@ -131,16 +131,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         myAPI.success(function(data) {
             console.log('success: getPatientList', data);
 
-            $scope.d.app.patients.data = data.patients;
             $scope.d.app.patients.loaded = true;
-            $scope.d.app.selectedTabIndex(2);
+            $scope.d.app.patients.data = data.patients;
+            $$scope.d.app.selectedTabIndex = 2;
         });
 
         myAPI.error(function(data) {
             console.log('ERROR: getPatientList', data);
 
-            $scope.d.app.patients.data = data;
             $scope.d.app.patients.loaded = false;
+            $scope.d.app.patients.data = data;
         });
     };
 
