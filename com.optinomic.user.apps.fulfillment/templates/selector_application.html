@@ -4,11 +4,11 @@
     <div>&nbsp;</div>
     <md-input-container class="md-block">
         <label>Applikation</label>
-        <md-select ng-model="d.appInit.app_id_selected">
-            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules | orderBy : 'name'" value="{{app.identifier}}">{{app.name}} ({{app.identifier}})</md-option>
+        <md-select ng-model="d.app.app_selected">
+            <md-option ng-repeat="app in d.dataMain.apps.all_patient_modules | orderBy : 'name'" value="{{app}}">{{app.name}} ({{app.identifier}})</md-option>
         </md-select>
     </md-input-container>
-    <div layout="row" layout-gt-xs="row" layout-align="end center">
+    <div ng-if="d.app.app_selected !== null" layout="row" layout-gt-xs="row" layout-align="end center">
         <md-button ng-click="setTab(1)" class="md-accent">Weiter</md-button>
     </div>
 </div>

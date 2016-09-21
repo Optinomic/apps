@@ -1,10 +1,10 @@
 <h3 class="md-headline">Erfüllungsgrad</h3>
 <p class="md-body-1" style="color:#3F51B5">Anbei der Erfüllungsgrad der selektieren Patienten:</p>
 <div>&nbsp;</div>
-<div ng-if="d.appInit.is_busy" layout="row" layout-sm="column" layout-align="space-around">
+<div ng-if="d.app.is_busy" layout="row" layout-sm="column" layout-align="space-around">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
-<md-card ng-if="d.appInit.is_busy === false" ng-repeat="result in d.appInit.fulfillment.results">
+<md-card ng-if="d.app.is_busy === false" ng-repeat="result in d.app.fulfillment.results">
     <md-card-title style="background:#424242; color:#F5F5F5">
         <md-card-title-text>
             <span class="md-headline"><span style="color:#4CAF50">{{result.surveys.length}}<span class="md-subhead">x</span></span>&nbsp;&nbsp;| &nbsp;{{result.patient.data.extras.name}} <span class="md-subhead">&nbsp;({{result.patient.data.extras.birthday_age}})</span></span>
@@ -61,7 +61,7 @@
     </div>
     <div ng-if="(result.events.length === 0)">
         <md-card-content>
-            <p class="md-caption">Das Modul ({{d.appInit.app_id}}) ist nicht aktiviert oder es ist keine Aufgabe/Erfassung geplant.</p>
+            <p class="md-caption">Das Modul ({{d.app.app_id}}) ist nicht aktiviert oder es ist keine Aufgabe/Erfassung geplant.</p>
         </md-card-content>
     </div>
 </md-card>

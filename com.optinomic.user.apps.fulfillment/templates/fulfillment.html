@@ -1,18 +1,18 @@
 include(../lib/html/optinomic/page/start.m4)
 <div style="margin-top: 4px;">
     <md-content>
-        <md-tabs md-selected="d.appInit.selectedTabIndex" md-dynamic-height md-border-bottom>
+        <md-tabs md-selected="d.app.selectedTabIndex" md-dynamic-height md-border-bottom>
             <md-tab label="Applikation">
                 <md-content class="md-padding">
                     include(templates/selector_application.html)
                 </md-content>
             </md-tab>
-            <md-tab label="{{d.appInit.promise.patients.length}} Patienten">
+            <md-tab label="{{d.app.promise.patients.length}} Patienten">
                 <md-content class="md-padding">
                     include(templates/selector_patient_list.html)
                 </md-content>
             </md-tab>
-            <md-tab label="Ergebnis" ng-if="d.appInit.fulfillment.have_data || d.appInit.is_busy">
+            <md-tab label="Ergebnis" ng-if="d.app.fulfillment.have_data || d.app.is_busy">
                 <md-content class="md-padding">
                     include(templates/timeline.html)
                 </md-content>

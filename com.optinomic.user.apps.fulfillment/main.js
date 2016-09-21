@@ -30,7 +30,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
 
             // Run Functions:
-            $scope.d.appInit = $scope.initApp();
+            $scope.d.app = $scope.initApp();
             $scope.d.haveData = true;
 
 
@@ -77,7 +77,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Create Return Obj;
         var init = {
-            "app_id_selected": null,
+            "app_selected": null,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
             "sql_views": sql_views,
@@ -108,7 +108,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         // Switch - Tab
-        $scope.d.appInit.selectedTabIndex = TabIndex;
+        $scope.d.app.selectedTabIndex = TabIndex;
 
     };
 
@@ -117,7 +117,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getPatientList = function() {
         // Init - Params
-        var patientListFilter = $scope.d.appInit.patientListFilter;
+        var patientListFilter = $scope.d.app.patientListFilter;
 
 
         var myAPI = dataService.getPatientList(patientListFilter);
@@ -125,15 +125,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         myAPI.success(function(data) {
             console.log('success: getPatientList', data);
 
-            $scope.d.appInit.patients.data = data;
-            $scope.d.appInit.patients.loaded = true;
+            $scope.d.app.patients.data = data.patients;
+            $scope.d.app.patients.loaded = true;
         });
 
         myAPI.error(function(data) {
             console.log('ERROR: getPatientList', data);
 
-            $scope.d.appInit.patients.data = data;
-            $scope.d.appInit.patients.loaded = false;
+            $scope.d.app.patients.data = data;
+            $scope.d.app.patients.loaded = false;
         });
 
     };
@@ -209,7 +209,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('showDetails:', $scope.d.details);
 
         // Switch - Tab
-        $scope.d.appInit.selectedTabIndex = 3;
+        $scope.d.app.selectedTabIndex = 3;
     };
 
 
