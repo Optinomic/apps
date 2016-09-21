@@ -109,9 +109,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         TabIndex = TabIndex === undefined ? 0 : TabIndex;
 
         // Ergebnis anfordern
-        if (TabIndex === 2) {
+        if (TabIndex === 1) {
             $scope.getPatientList();
-            $scope.d.app.selectedTabIndex = TabIndex;
+            $scope.setTab(2);
         };
 
         // Switch - Tab
