@@ -109,9 +109,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         TabIndex = TabIndex === undefined ? 0 : TabIndex;
 
         // Ergebnis anfordern
-        if (TabIndex === 1) {
+        if (TabIndex === 2) {
             $scope.getPatientList();
-            $scope.setTab(2);
         };
 
         // Switch - Tab
@@ -134,6 +133,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.app.patients.data = data.patients;
             $scope.d.app.patients.loaded = true;
+            $scope.d.app.selectedTabIndex(2);
         });
 
         myAPI.error(function(data) {
@@ -145,8 +145,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.doSecondaryAction = function(event) {
-        console.log('(!): doSecondaryAction', event);
+    $scope.showPatientDetails = function(p_array_id) {
+
+        var details = {
+            "patient": $scope.d.app.patients.data[p_array_id],
+            "patient_array_id": p_array_id
+        };
+
+        console.log('(!): showPatientDetails', details);
+
     };
 
 
