@@ -133,7 +133,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.app.patients.loaded = true;
             $scope.d.app.patients.data = data.patients;
-            $$scope.d.app.selectedTabIndex = 2;
+            $scope.d.app.selectedTabIndex = 2;
         });
 
         myAPI.error(function(data) {
