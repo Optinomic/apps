@@ -199,7 +199,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             return [item.sr_stay_id];
                         });
 
-                        patient_fullfillment_obj = {
+                        patient_fulfillment_obj = {
                             "found": true,
                             "count": current_grouped_patient.length,
                             "data": selected_module_data_by_patient_stay
@@ -208,7 +208,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     };
 
                     // Write to 'Patient'
-                    current_patient.fullfillment = patient_fullfillment_obj;
+                    current_patient.fulfillment = patient_fulfillment_obj;
                 });
             });
 
@@ -232,15 +232,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.showPatientDetails = function(p_array_id) {
 
-        var details = {
-            "have_data": true,
-            "patient": $scope.d.app.patients.data[p_array_id],
-            "patient_array_id": p_array_id
-        };
+        $scope.d.app.details.have_data = true;
+        $scope.d.app.details.patient = $scope.d.app.patients.data[p_array_id];
+        $scope.d.app.details.patient_array_id = p_array_id;
 
-        $scope.d.app.details = details;
-
-        console.log('=> showPatientDetails', details);
+        console.log('=> showPatientDetails', $scope.d.app.details);
 
     };
 
