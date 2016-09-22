@@ -154,8 +154,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         myAPI.success(function(data) {
             console.log('success: getViewResults', data);
 
+            var selected_module_data = [];
+
+            data.rows.forEach(function(current_row, myRowIndex) {
+                if (current_row.sr_module === $scope.d.app.app_selected.identifier) {
+                    selected_module_data.push(current_row);
+                };
+            });
+
             $scope.d.app.fulfillment.loaded = true;
-            $scope.d.app.fulfillment.data = data;
+            $scope.d.app.fulfillment.data = selected_module_data;
         });
 
         myAPI.error(function(data) {
