@@ -79,13 +79,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var sql_views = ['fulfillment_survey_response_view'];
 
         // Create Return Obj;
-        var init = {
+        var app = {
             "app_selected": null,
             "fulfillment": fulfillment,
             "patientListFilter": patientListFilter,
             "sql_views": sql_views,
             "selectedTabIndex": 0,
             "is_busy": false,
+            "details": {
+                "have_data": false
+            },
             "view_name_format": view_name_format,
             "patients": {
                 "data": [],
@@ -100,7 +103,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             },
         };
 
-        return init;
+        return app;
     };
 
 
@@ -167,6 +170,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     current_row.sr_stay_id = parseInt(current_row.sr_stay_id);
                     current_row.sr_id = parseInt(current_row.sr_id);
 
+                    current_row.response = JSON.parse(current_row.response);
+
                     selected_module_data.push(current_row);
                 };
             });
@@ -195,7 +200,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
 
                         patient_fullfillment_obj = {
-                            "found": false,
+                            "found": true,
                             "count": current_grouped_patient.length,
                             "data": selected_module_data_by_patient_stay
                         };
@@ -227,12 +232,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.showPatientDetails = function(p_array_id) {
 
-        console.log('(!) showPatientDetails', p_array_id);
-
         var details = {
+            "have_data": true,
             "patient": $scope.d.app.patients.data[p_array_id],
             "patient_array_id": p_array_id
         };
+
+        $scope.d.app.details = details;
 
         console.log('=> showPatientDetails', details);
 
