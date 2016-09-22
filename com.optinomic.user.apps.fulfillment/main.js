@@ -92,7 +92,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "loaded": false
             },
             "fulfillment": {
-                "data": [],
+                "data": {
+                    "all": [],
+                    "grouped_by_patient": []
+                },
                 "loaded": false
             },
         };
@@ -152,18 +155,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var myAPI = dataService.runView(module_identifier, view_name, body_params);
 
         myAPI.success(function(data) {
-            console.log('success: getViewResults', data);
 
             var selected_module_data = [];
 
             data.rows.forEach(function(current_row, myRowIndex) {
                 if (current_row.sr_module === $scope.d.app.app_selected.identifier) {
+
+                    // ID's are Integer
+                    current_row.sr_patient_id = parseInt(current_row.sr_patient_id);
+                    current_row.sr_event_id = parseInt(current_row.sr_event_id);
+                    current_row.sr_stay_id = parseInt(current_row.sr_stay_id);
+                    current_row.sr_id = parseInt(current_row.sr_id);
+
                     selected_module_data.push(current_row);
                 };
             });
 
+            var selected_module_data_by_patient = dataService.groupBy(selected_module_data, 'sr_patient_id');
+
             $scope.d.app.fulfillment.loaded = true;
-            $scope.d.app.fulfillment.data = selected_module_data;
+            $scope.d.app.fulfillment.data.all = selected_module_data;
+            $scope.d.app.fulfillment.data.grouped_by_patient = selected_module_data_by_patient;
+
+            console.log('success: getViewResults', data, selected_module_data);
         });
 
         myAPI.error(function(data) {
