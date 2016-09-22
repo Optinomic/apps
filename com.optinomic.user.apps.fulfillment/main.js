@@ -176,7 +176,39 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 return [item.sr_patient_id];
             });
 
+            // Merge Patients with 'fullfillment' Data
+            var patients = $scope.d.app.patients.data;
 
+            patients.forEach(function(current_patient, myPatientIndex) {
+
+                var patient_fullfillment_obj = {
+                    "found": false,
+                    "count": 0,
+                    "data": []
+                }
+
+                selected_module_data_by_patient.forEach(function(current_grouped_patient, myGroupIndex) {
+                    if (current_patient.id === current_grouped_patient[0].sr_patient_id) {
+
+                        var selected_module_data_by_patient_stay = dataService.groupBy(current_grouped_patient, function(item) {
+                            return [item.sr_stay_id];
+                        });
+
+                        patient_fullfillment_obj = {
+                            "found": false,
+                            "count": current_grouped_patient.length,
+                            "data": selected_module_data_by_patient_stay
+                        };
+
+                    };
+
+                    // Write to 'Patient'
+                    current_patient.fullfillment = patient_fullfillment_obj;
+                });
+            });
+
+
+            // Save to $scope
             $scope.d.app.fulfillment.loaded = true;
             $scope.d.app.fulfillment.data.all = selected_module_data;
             $scope.d.app.fulfillment.data.grouped_by_patient = selected_module_data_by_patient;
