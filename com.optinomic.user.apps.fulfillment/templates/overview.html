@@ -1,18 +1,17 @@
 <div>
     <h3 class="md-headline">Patientenliste ({{d.app.patients.data.length}})</h3>
-    <md-list ng-cloak>
-        <md-list-item class="secondary-button-padding" ng-repeat="p in d.app.patients.data">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
-                <p ng-if="p.fulfillment.count === 0" flex="5" class="md-title" style="color:#F44336">
+    <div>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
+            <div class="grid-border-top" flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+                <p ng-if="p.fulfillment.count === 0" flex="10" class="md-title" style="color:#F44336">
                     ?
                 </p>
-                <p ng-if="p.fulfillment.count > 0" flex="5" class="md-title" style="color:#4CAF50">
+                <p ng-if="p.fulfillment.count > 0" flex="10" class="md-title" style="color:#4CAF50">
                     {{p.fulfillment.count}}
                 </p>
                 <p flex class="md-subhead">{{p.data.last_name}} {{p.data.first_name}} ({{p.data.birthdate | date}})</p>
             </div>
-            <md-button class="md-secondary" ng-click="showPatientDetails($index)">More Info</md-button>
-            <md-divider></md-divider>
-        </md-list-item>
-    </md-list>
+            <md-button ng-if="p.fulfillment.count > 0" class="md-secondary" ng-click="showPatientDetails($index)">Details</md-button>
+        </div>
+    </div>
 </div>
