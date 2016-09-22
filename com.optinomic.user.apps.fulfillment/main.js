@@ -71,9 +71,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         var view_name_format = {
-            "delimitter": ';',
-            "including_headers": 'False',
             "format": 'json',
+            "including_headers": 'False',
             "direct": 'True'
         };
 
