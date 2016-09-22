@@ -1,8 +1,8 @@
 <div>
     <h3 class="md-headline">Patientenliste ({{d.app.patients.data.length}})</h3>
     <div>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
-            <div class="grid-border-top" flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+        <div class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
+            <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
                 <p ng-if="p.fulfillment.count === 0" flex="10" class="md-title" style="color:#F44336">
                     ?
                 </p>

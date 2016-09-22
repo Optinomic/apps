@@ -7,23 +7,28 @@
                 <p flex="10" class="md-title" style="color:#4CAF50">
                     {{stay.length}}
                 </p>
-                <p flex class="md-subhead">Aufenthalt ({{stay[0].sr_stay_id}}): {{stay[0].s_start | date}} | {{stay[0].s_start_year_week}}</p>
+                <p flex class="md-subhead">{{stay[0].s_start | date}} - <span ng-if="stay[0].s_stop !== ''">{{stay[0].s_stop | date}}</span> <span ng-if="stay[0].s_stop === ''">Unbekannt</span> <small>{{stay[0].sr_stay_id}}</small></p>
             </div>
-            <md-button ng-if="!stay.show_stay" class="md-secondary" ng-click="stay.show_stay = true">Anzeigen</md-button>
-            <md-button ng-if="stay.show_stay" class="md-secondary" ng-click="stay.show_stay = false">Schliessen</md-button>
+            <md-button ng-if="!stay.show_stay" class="md-accent" ng-click="stay.show_stay = true">Anzeigen</md-button>
+            <md-button ng-if="stay.show_stay" class="md-accent" ng-click="stay.show_stay = false">Schliessen</md-button>
         </div>
-        <div ng-if="stay.show_stay">
+        <div ng-if="stay.show_stay" style="margin-left:60px;">
             <div ng-repeat="resp in stay" ng-init="resp.show_resp = false">
                 <md-divider></md-divider>
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                    <p class="md-capition">{{resp.e_created_at | date}} | {{resp.e_survey_name}} | {{resp.e_description}}</p>
-                    <md-button ng-if="!resp.show_resp" class="md-secondary" ng-click="resp.show_resp = true">Mehr Details</md-button>
+                    <div class="grid-border-top" flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+                        <p class="md-body-2" style="color:#4CAF50">
+                            {{resp.sr_filled | date}} {{resp.sr_filled.substring(11,5)}}
+                        </p>
+                        <p flex class="md-body-1">{{resp.e_survey_name}} | {{resp.e_description}}</p>
+                    </div>
+                    <md-button ng-if="!resp.show_resp" class="md-secondary" ng-click="resp.show_resp = true">Details</md-button>
                     <md-button ng-if="resp.show_resp" class="md-secondary" ng-click="resp.show_resp = false">Schliessen</md-button>
                 </div>
                 <div ng-if="resp.show_resp">
                     <pre>
                     {{resp.response | json}}
-                </pre>
+                    </pre>
                 </div>
             </div>
         </div>
