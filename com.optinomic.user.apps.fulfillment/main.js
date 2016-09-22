@@ -171,11 +171,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             });
 
-            var selected_module_data_by_patient = dataService.groupBy(selected_module_data, 'sr_patient_id');
+            // var selected_module_data_by_patient = dataService.groupBy(selected_module_data, 'sr_patient_id');
 
             $scope.d.app.fulfillment.loaded = true;
             $scope.d.app.fulfillment.data.all = selected_module_data;
-            $scope.d.app.fulfillment.data.grouped_by_patient = selected_module_data_by_patient;
+            //$scope.d.app.fulfillment.data.grouped_by_patient = selected_module_data_by_patient;
 
             console.log('success: getViewResults', data, selected_module_data);
         });
