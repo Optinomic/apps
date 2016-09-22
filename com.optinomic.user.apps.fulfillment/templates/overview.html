@@ -3,10 +3,10 @@
     <div>
         <div class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
             <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
-                <p ng-if="p.fulfillment.count === 0" flex="10" class="md-title" style="color:#F44336">
+                <p ng-if="p.fulfillment.count === 0" flex="5" class="md-title" style="color:#F44336">
                     ?
                 </p>
-                <p ng-if="p.fulfillment.count > 0" flex="10" class="md-title" style="color:#4CAF50">
+                <p ng-if="p.fulfillment.count > 0" flex="5" class="md-title" style="color:#4CAF50">
                     {{p.fulfillment.count}}
                 </p>
                 <p flex class="md-subhead">{{p.data.last_name}} {{p.data.first_name}} ({{p.data.birthdate | date}})</p>

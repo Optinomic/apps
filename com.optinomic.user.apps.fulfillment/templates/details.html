@@ -7,7 +7,7 @@
                 <p flex="10" class="md-title" style="color:#4CAF50">
                     {{stay.length}}
                 </p>
-                <p flex class="md-subhead">{{stay[0].s_start | date}} - <span ng-if="stay[0].s_stop !== ''">{{stay[0].s_stop | date}}</span> <span ng-if="stay[0].s_stop === ''">Unbekannt</span> <small>{{stay[0].sr_stay_id}}</small></p>
+                <p flex class="md-subhead">{{stay[0].s_start | date}} - <span ng-if="stay[0].s_stop !== ''">{{stay[0].s_stop | date}}</span> <span ng-if="stay[0].s_stop === ''">Unbekannt</span> <small style="color:#9E9E9E"> ID:{{stay[0].sr_stay_id}}</small></p>
             </div>
             <md-button ng-if="!stay.show_stay" class="md-accent" ng-click="stay.show_stay = true">Anzeigen</md-button>
             <md-button ng-if="stay.show_stay" class="md-accent" ng-click="stay.show_stay = false">Schliessen</md-button>
@@ -16,9 +16,9 @@
             <div ng-repeat="resp in stay" ng-init="resp.show_resp = false">
                 <md-divider></md-divider>
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                    <div class="grid-border-top" flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+                    <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
                         <p class="md-body-2" style="color:#4CAF50">
-                            {{resp.sr_filled | date}} {{resp.sr_filled.substring(11,5)}}
+                            {{resp.sr_filled | date}} @ {{resp.sr_filled.substring(18,5)}}
                         </p>
                         <p flex class="md-body-1">{{resp.e_survey_name}} | {{resp.e_description}}</p>
                     </div>
