@@ -1,7 +1,6 @@
 <div>
     <h3 class="md-headline">Patientenliste ({{d.app.patients.data.length}})</h3>
     <md-list ng-cloak>
-        <md-subheader class="md-no-sticky"></md-subheader>
         <md-list-item class="secondary-button-padding" ng-repeat="p in d.app.patients.data">
             <p>{{p.data.last_name}} {{p.data.first_name}} ({{p.data.birthdate | date}})</p>
             <md-button class="md-secondary" ng-click="showPatientDetails($index)">More Info</md-button>

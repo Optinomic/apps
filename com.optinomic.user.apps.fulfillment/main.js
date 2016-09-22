@@ -70,7 +70,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "have_data": false
         };
 
-        var get_view_name_format = {
+        var view_name_format = {
             "delimitter": ';',
             "including_headers": 'True',
             "format": 'json',
@@ -88,7 +88,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "sql_views": sql_views,
             "selectedTabIndex": 0,
             "is_busy": false,
-            "get_view_name_format": get_view_name_format,
+            "view_name_format": view_name_format,
             "patients": {
                 "data": [],
                 "loaded": false
@@ -111,6 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Ergebnis anfordern
         if (TabIndex === 2) {
             $scope.getPatientList();
+            $scope.getViewData();
         };
 
         // Switch - Tab
@@ -141,6 +142,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.app.patients.loaded = false;
             $scope.d.app.patients.data = data;
+        });
+    };
+
+
+    $scope.getViewData = function() {
+
+        var module_identifier = 'com.optinomic.user.apps.fulfillment';
+        var view_name = 'fulfillment_survey_response_view';
+        var body_params = $scope.d.app.view_name_format;
+        var myAPI = dataService.runView(module_identifier, view_name, body_params);
+
+        myAPI.success(function(data) {
+            console.log('success: getViewResults', data);
+
+            $scope.d.app.fulfillment.loaded = true;
+            $scope.d.app.fulfillment.data = data;
+        });
+
+        myAPI.error(function(data) {
+            console.log('ERROR: getViewResults', data);
+
+            $scope.d.app.fulfillment.loaded = false;
+            $scope.d.app.fulfillment.data = data;
         });
     };
 

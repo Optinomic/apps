@@ -7,7 +7,7 @@ include(../lib/html/optinomic/page/start.m4)
                     include(templates/selector_application.html)
                 </md-content>
             </md-tab>
-            <md-tab ng-if="d.app.app_selected" label="{{d.app.patients.data.length}} Patienten">
+            <md-tab ng-if="d.app.app_selected" label="Patienten">
                 <md-content class="md-padding">
                     include(templates/selector_patient_list.html)
                 </md-content>
