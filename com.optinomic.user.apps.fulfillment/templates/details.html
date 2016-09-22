@@ -3,8 +3,20 @@
     <h3 class="md-title">{{d.app.details.patient.data.last_name}} {{d.app.details.patient.data.first_name}} ({{d.app.details.patient.data.birthdate | date}})</h3>
     <div ng-repeat="stay in d.app.details.patient.fulfillment.data">
         <p class="md-subhead">Aufenthalt ({{stay[0].sr_stay_id}}): {{stay[0].s_start | date}} | {{stay[0].s_start_year_week}}</p>
-        <div ng-repeat="resp in stay">
-            <p class="md-capition">Event: {{resp.e_survey_name}} | {{resp.e_created_at | date}} | {{resp.e_description}} {{resp.e_done}}</p>
-        </div>
+        <md-list ng-cloak>
+            <md-list-item class="secondary-button-padding" ng-repeat="resp in stay" ng-init="resp.show_resp = false">
+                <p class="md-capition">{{resp.e_created_at | date}} | {{resp.e_survey_name}} | {{resp.e_description}}</p>
+                <md-button class="md-secondary" ng-click="resp.show_resp = true">More Info</md-button>
+                <div ng-if="resp.show_resp">
+                    <pre>
+                        {{resp.responses | json}}
+                    </pre>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div layout="row" layout-gt-xs="row" layout-align="end center">
+        <md-button ng-click="clearPatientDetails()" class="md-accent">Schliessen</md-button>
     </div>
 </div>

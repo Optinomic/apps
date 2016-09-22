@@ -235,11 +235,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.app.details.have_data = true;
         $scope.d.app.details.patient = $scope.d.app.patients.data[p_array_id];
         $scope.d.app.details.patient_array_id = p_array_id;
+        $scope.d.app.selectedTabIndex = 3;
 
         console.log('=> showPatientDetails', $scope.d.app.details);
 
     };
 
+    $scope.clearPatientDetails = function() {
+
+        $scope.d.app.details.have_data = false;
+        $scope.d.app.details.patient = [];
+        $scope.d.app.details.patient_array_id = null;
+        $scope.d.app.selectedTabIndex = 2;
+
+        console.log('=> clearPatientDetails', $scope.d.app.details);
+
+    };
 
 
 
