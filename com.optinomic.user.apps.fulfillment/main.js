@@ -171,7 +171,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             });
 
-            var selected_module_data_by_patient = dataService.groupBy(selected_module_data, sr_patient_id);
+            // Group by patient_id
+            var selected_module_data_by_patient = dataService.groupBy(selected_module_data, function(item) {
+                return [item.sr_patient_id];
+            });
+
 
             $scope.d.app.fulfillment.loaded = true;
             $scope.d.app.fulfillment.data.all = selected_module_data;
