@@ -186,7 +186,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             patients.forEach(function(current_patient, myPatientIndex) {
 
-                var patient_fullfillment_obj = {
+                var patient_fulfillment_obj = {
                     "found": false,
                     "count": 0,
                     "data": []
