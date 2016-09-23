@@ -1,49 +1,47 @@
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-    <h3 class="md-headline">Normgruppen</h3>
-    <md-button ng-click="d.zScore.settings = !d.zScore.settings">Einstellungen</md-button>
-</div>
-<div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" style="margin-top: 24px;">
-    <div flex style="margin-right:12px;">
-        <p class="md-title">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
-        <div>
-            <p class="md-caption"><span style="font-size:36px; color:#3F51B5!important;">■</span> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
-        </div>
-        <p class="md-subhead">
-            {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
-        </p>
-    </div>
-    <div flex>
-        <p class="md-title">{{d.dataMain.config.data.customer.contact.name}}</p>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-            <div flex="5">
-                <p style="font-size:36px; color:#C5CAE9!important;">■</p>
-            </div>
-            <div flex>
-                <p class="md-caption"> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.</p>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="grid-border-top" style="margin-top: 24px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex>
             <h3 class="md-headline">TMT A</h3>
-            <div ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-                <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
-                    <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
-                </p>
-            </div>
         </div>
-        <div flex>
-            <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
-            <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.
-                <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
-            </p>
-        </div>
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
+    </div>
+</div>
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
+    <div flex>
+        <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
+            <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+        </p>
+    </div>
+    <div flex>
+        <p class="md-subhead">
+            {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
+        </p>
+        <p class="md-caption">
+            Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+        </p>
     </div>
 </div>
 <div ng-repeat="response in d.zScore.tmt_a">
     <z-score data="response" options="d.zScore.options"></z-score>
+</div>
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+    <div flex="5">
+        <p style="font-size:36px; color:#3F51B5!important;">■</p>
+    </div>
+    <div flex>
+        Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+    </div>
+    <div flex="5">
+        <p style="font-size:36px; color:#3F51B5!important;">■</p>
+    </div>
+    <div flex>
+        Die Klinik-Stichprobe ist nach Alter und Bildung normiert. Eintritt N= | Austritt N=
+    </div>
 </div>
 <div class="grid-border-top" style="margin-top: 24px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
