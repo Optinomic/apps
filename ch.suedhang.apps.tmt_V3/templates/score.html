@@ -1,4 +1,7 @@
-<h3 class="md-headline">Normgruppen | Einstellungen</h3>
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+    <h3 class="md-headline">Normgruppen</h3>
+    <md-button ng-click="d.zScore.settings = !d.zScore.settings">Einstellungen</md-button>
+</div>
 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" style="margin-top: 24px;">
     <div flex style="margin-right:12px;">
         <p class="md-title">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
@@ -24,32 +27,6 @@
                 <p class="md-caption"> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.</p>
             </div>
         </div>
-        <div md-padding>
-            <md-input-container class="md-block">
-                <label>Alter</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group_id" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age.age_group_id">
-                        {{age.age_group_text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container class="md-block" style="margin-top:24px;">
-                <label>Bildung</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group_id" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu.edu_group_id">
-                        {{edu.edu_group_text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container class="md-block" style="margin-top:24px;">
-                <label>Messzeitpunkt</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_mz_array" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="mz in d.zScore.normgruppe_klinik.select_mz_array" ng-value="mz.id">
-                        {{mz.text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
     </div>
 </div>
 <div class="grid-border-top" style="margin-top: 24px;">
@@ -64,21 +41,6 @@
         <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
             <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
             <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
-        </div>
-    </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
-                Beschriftung
-            </md-switch>
-        </div>
-        <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-            <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
-                Klinische Stichprobe
-            </md-switch>
-            <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
-                Werte
-            </md-switch>
         </div>
     </div>
 </div>
@@ -119,21 +81,6 @@
         <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
             <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
             <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
-        </div>
-    </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <md-switch class="md-primary" ng-model="d.zScore.toggles.show_text" ng-change="setZScore()" aria-label="Beschriftung">
-                Beschriftung
-            </md-switch>
-        </div>
-        <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-            <md-switch class="md-primary" ng-model="d.zScore.toggles.show_clinicsample" ng-change="setZScore()" aria-label="Zeige Klinische Stichprobe">
-                Klinische Stichprobe
-            </md-switch>
-            <md-switch class="md-primary" ng-if="d.zScore.toggles.show_clinicsample" ng-model="d.zScore.toggles.show_clinicsample_scores" ng-change="setZScore()" aria-label="Zeige Werte der Stichprobe">
-                Werte
-            </md-switch>
         </div>
     </div>
 </div>
