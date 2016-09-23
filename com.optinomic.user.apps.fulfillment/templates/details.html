@@ -5,8 +5,8 @@
 <div md-margin md-padding>
     <h3 class="md-title">{{d.app.details.patient.data.last_name}} {{d.app.details.patient.data.first_name}} ({{d.app.details.patient.data.birthdate | date}})</h3>
     <div ng-repeat="stay in d.app.details.patient.fulfillment.data" ng-init="stay.show_stay = false">
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <div class="grid-border-top" flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+        <div class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
                 <p flex="10" class="md-title" style="color:#4CAF50">
                     {{stay.length}}
                 </p>
@@ -19,11 +19,13 @@
             <div ng-repeat="resp in stay" ng-init="resp.show_resp = false">
                 <md-divider></md-divider>
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                    <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+                    <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center" layout-margin>
                         <p class="md-body-2" style="color:#4CAF50">
                             {{resp.sr_filled | date}}, {{resp.sr_filled_time}}
                         </p>
-                        <p flex class="md-body-1">{{resp.e_survey_name}} | {{resp.e_description}}</p>
+                        <p flex class="md-body-1">{{resp.e_survey_name}}
+                            <small style="color:#9E9E9E">{{resp.e_description}}</small>
+                        </p>
                     </div>
                     <md-button ng-if="!resp.show_resp" class="md-secondary" ng-click="resp.show_resp = true">Details</md-button>
                     <md-button ng-if="resp.show_resp" class="md-secondary" ng-click="resp.show_resp = false">Schliessen</md-button>
