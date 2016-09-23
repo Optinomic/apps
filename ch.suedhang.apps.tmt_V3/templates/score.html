@@ -3,8 +3,8 @@
         <div flex>
             <h3 class="md-headline">TMT A</h3>
         </div>
-        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
-            <i class="mdi mdi-dots-vertical"></i>
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button md-primary">
+            <i class="mdi mdi-dots-vertical" style="font-size:36px;"></i>
             <md-tooltip md-direction="left">
                 Einstellungen
             </md-tooltip>
@@ -21,12 +21,12 @@
         <p class="md-subhead">
             {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
         </p>
-        <p class="md-caption">
+        <p class="md-caption" style="margin-top:-6px;">
             Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
         </p>
     </div>
 </div>
-<div ng-repeat="response in d.zScore.tmt_a">
+<div ng-repeat="response in d.zScore.tmt_a" style="margin-top: 12px;">
     <z-score data="response" options="d.zScore.options"></z-score>
 </div>
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
@@ -43,7 +43,7 @@
     </div>
     <div flex>
         <p style="color:#9E9E9E">
-            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}} ({{d.zScore.normgruppe_klinik.selected_age_group_id}}) {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}} ({{d.zScore.normgruppe_klinik.selected_age_group_id}}) {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
         </p>
     </div>
 </div>
@@ -62,7 +62,7 @@
         </div>
     </div>
 </div>
-<div ng-repeat="response in d.zScore.tmt_b">
+<div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
     <z-score data="response" options="d.zScore.options"></z-score>
 </div>
 <div class="grid-border-top" style="margin-top: 24px;">
@@ -80,6 +80,6 @@
         </div>
     </div>
 </div>
-<div ng-repeat="response in d.zScore.tmt_ba_quot">
+<div ng-repeat="response in d.zScore.tmt_ba_quot" style="margin-top: 12px;">
     <z-score data="response" options="d.zScore.options_ba"></z-score>
 </div>
