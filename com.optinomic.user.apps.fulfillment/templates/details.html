@@ -19,8 +19,8 @@
             <div ng-repeat="resp in stay" ng-init="resp.show_resp = false">
                 <md-divider></md-divider>
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center" layout-margin>
-                    <p flex="30" class="md-body-2" style="color:#4CAF50">
-                        {{resp.sr_filled | date}}, {{resp.sr_filled_time}}
+                    <p flex="20" class="md-body-2" style="color:#4CAF50">
+                        {{resp.sr_filled | date}}, {{resp.sr_filled_time}} <small style="color:#9E9E9E">{{resp.mins_created_to_filled}}</small>
                     </p>
                     <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                         <p class="md-body-1">{{resp.e_survey_name}}
