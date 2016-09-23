@@ -18,17 +18,17 @@
         <div ng-if="stay.show_stay" style="margin-left:68px;">
             <div ng-repeat="resp in stay" ng-init="resp.show_resp = false">
                 <md-divider></md-divider>
-                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center" layout-margin>
-                        <p flex="30" class="md-body-2" style="color:#4CAF50">
-                            {{resp.sr_filled | date}}, {{resp.sr_filled_time}}
-                        </p>
-                        <p flex class="md-body-1">{{resp.e_survey_name}}
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center" layout-margin>
+                    <p flex="30" class="md-body-2" style="color:#4CAF50">
+                        {{resp.sr_filled | date}}, {{resp.sr_filled_time}}
+                    </p>
+                    <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                        <p class="md-body-1">{{resp.e_survey_name}}
                             <small style="color:#9E9E9E">{{resp.e_description}}</small>
                         </p>
+                        <md-button ng-if="!resp.show_resp" class="md-secondary" ng-click="resp.show_resp = true">Details</md-button>
+                        <md-button ng-if="resp.show_resp" class="md-secondary" ng-click="resp.show_resp = false">Schliessen</md-button>
                     </div>
-                    <md-button ng-if="!resp.show_resp" class="md-secondary" ng-click="resp.show_resp = true">Details</md-button>
-                    <md-button ng-if="resp.show_resp" class="md-secondary" ng-click="resp.show_resp = false">Schliessen</md-button>
                 </div>
                 <div ng-if="resp.show_resp">
                     <pre>
