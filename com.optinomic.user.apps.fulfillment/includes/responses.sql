@@ -9,8 +9,11 @@ SELECT
    survey_response_view.response as response,
    to_char(survey_response_view.filled, 'YYYY' ) as sr_filled_year,
    to_char(survey_response_view.filled, 'WW' ) as sr_filled_week,
+   to_char(survey_response_view.filled, 'HH:MM' ) as sr_filled_time,
    to_char(survey_response_view.filled, 'YYYY' )  ||  ', '  ||  to_char(survey_response_view.filled, 'WW' ) as sr_filled_year_week,
-   
+   abs(DATE_PART('day', event.created_at::timestamp - survey_response_view.filled::timestamp) * 24 + 
+    DATE_PART('hour', event.created_at::timestamp - survey_response_view.filled::timestamp)) * 60 +
+    DATE_PART('minute', event.created_at::timestamp - survey_response_view.filled::timestamp) as mins_created_to_filled,
    
    COALESCE(patient_view.last_name, '') || ' ' || COALESCE(patient_view.first_name, '') AS p_name,
    COALESCE(patient_view.last_name, '') || ' ' || COALESCE(patient_view.first_name, '') || ' (' || to_char(patient_view.birthdate, 'DD.MM.YYYY' ) || ')' AS p_name_jg,
@@ -97,5 +100,7 @@ INNER JOIN patient_view ON(patient_view.id = survey_response_view.patient_id)
 INNER JOIN stay ON(stay.id = survey_response_view.stay_id) 
 INNER JOIN event ON(event.id = survey_response_view.event_id) 
 
-WHERE survey_response_view.module IS NOT NULL;
+WHERE survey_response_view.module IS NOT NULL
+
+ORDER BY survey_response_view.filled;
 

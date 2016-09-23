@@ -21,7 +21,7 @@
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
                         <p class="md-body-2" style="color:#4CAF50">
-                            {{resp.sr_filled | date}} @ {{resp.sr_filled.substring(5,11)}}
+                            {{resp.sr_filled | date}}, {{resp.sr_filled_time}}
                         </p>
                         <p flex class="md-body-1">{{resp.e_survey_name}} | {{resp.e_description}}</p>
                     </div>
