@@ -31,16 +31,20 @@
 </div>
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <div flex="5">
-        <p style="font-size:36px; color:#3F51B5!important;">■</p>
+        <p ng-attr-style="font-size:36px; color:{{d.zScore.tmt_a[0].zscore_color}}!important;">■</p>
     </div>
     <div flex>
-        Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+        <p style="color:#9E9E9E">
+            Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+        </p>
     </div>
     <div flex="5">
-        <p style="font-size:36px; color:#3F51B5!important;">■</p>
+        <p ng-attr-style="font-size:36px; color:{{d.zScore.options.clinicsample_color}}!important;">■</p>
     </div>
     <div flex>
-        Die Klinik-Stichprobe ist nach Alter und Bildung normiert. Eintritt N= | Austritt N=
+        <p style="color:#9E9E9E">
+            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}} ({{d.zScore.normgruppe_klinik.selected_age_group_id}}) {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+        </p>
     </div>
 </div>
 <div class="grid-border-top" style="margin-top: 24px;">

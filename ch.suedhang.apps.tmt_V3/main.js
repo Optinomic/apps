@@ -234,6 +234,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var messung = {
                 "clinic_sample_age_edu_mz_obj": age_edu_mz_obj,
                 "zscore": 0,
+                "zscore_color": '#C5CAE9',
                 "text_left": mz_text,
                 "text_left_caption": mz_datum,
                 "datum": mz_datum,
@@ -253,9 +254,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
+            A_messung.text_right = 'TMT A |  N=' + age_edu_mz_obj.n;
+            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
 
-            A_messung.text_right_caption = 'TMT A';
-            A_messung.text_right = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
@@ -284,8 +285,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
-            B_messung.text_right_caption = 'TMT B';
-            B_messung.text_right = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
+            B_messung.text_right = 'TMT B |  N=' + age_edu_mz_obj.n;
+            B_messung.text_right_caption = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
 
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
