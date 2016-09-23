@@ -130,6 +130,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "show_numbers": true
         };
 
+        $scope.d.zScore.options_ba = angular.copy($scope.d.zScore.options);
 
         $scope.d.zScore.toggles = {
             "show_text": true,
@@ -192,6 +193,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var messung = {};
         $scope.d.zScore.tmt_a = [];
         $scope.d.zScore.tmt_b = [];
+        $scope.d.zScore.tmt_ba_quot = [];
 
         var messungen = $scope.d.dataMain.calculations[0].calculation_results;
 
@@ -259,11 +261,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
-            if (Math.abs(A_messung.zscore) > ($scope.d.zScore.options.zscore_min - 0.5)) {
+            if (Math.abs(A_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
                 $scope.d.zScore.options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
-                $scope.d.zScore.options.zscore_max = (Math.abs(A_messung.zscore) + 1);
             };
 
+            if (Math.abs(A_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
+                $scope.d.zScore.options.zscore_max = (Math.abs(A_messung.zscore) + 1);
+            };
 
 
             // TMT - B
@@ -289,8 +293,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
-            if (Math.abs(B_messung.zscore) > ($scope.d.zScore.options.zscore_min - 0.5)) {
+            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
                 $scope.d.zScore.options.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
+            };
+
+            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
                 $scope.d.zScore.options.zscore_max = (Math.abs(B_messung.zscore) + 1);
             };
 
@@ -298,13 +305,44 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // TMT - B/A Quotient  
             // -  Nur bei Eintritt
             // -  Kritischer Wert:  2,5
-            var BA_quotient = angular.copy(messung);
-            BA_quotient = $scope.addDefault(BA_quotient);
+            if (current_messung.mz === 1) {
+                var BA_quotient = angular.copy(messung);
+                BA_quotient = $scope.addDefault(BA_quotient);
 
+                BA_quotient.zscore = current_messung.quotient_rounded;
+
+                BA_quotient.marker_1_score = 2.5;
+                BA_quotient.marker_1_text = 'Kritischer Wert';
+
+                if (age_edu_mz_obj.statistics.calculated) {
+                    if ((age_edu_mz_obj.statistics.BA_Quotient.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.BA_Quotient.mean_1sd_min !== undefined)) {
+                        BA_quotient.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.BA_Quotient.mean_1sd_min);
+                        BA_quotient.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.BA_Quotient.mean_1sd_plus);
+                    };
+                };
+
+                if (current_messung.quotient_rounded > 2.5) {
+                    // Auffällige Testleistung
+                    B_messung.zscore_color = '#F44336';
+                };
+
+
+                // Set zscore_min | zscore_max  if zscore >= +/-3 
+                if (Math.abs(BA_quotient.zscore) > (Math.abs($scope.d.zScore.options_ba.zscore_min) - 0.5)) {
+                    $scope.d.zScore.options_ba.zscore_min = (Math.abs(BA_quotient.zscore) + 1) * -1;
+                };
+
+                if (Math.abs(BA_quotient.zscore) > (Math.abs($scope.d.zScore.options_ba.zscore_max) - 0.5)) {
+                    $scope.d.zScore.options_ba.zscore_max = (Math.abs(BA_quotient.zscore) + 1);
+                };
+
+
+            };
 
             // Push and Save
             $scope.d.zScore.tmt_a.push(A_messung);
             $scope.d.zScore.tmt_b.push(B_messung);
+            $scope.d.zScore.tmt_ba_quot.push(BA_quotient);
 
 
             // Messzeitpunkt Info setzen
