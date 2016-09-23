@@ -47,6 +47,28 @@
 <div ng-repeat="response in d.zScore.tmt_a">
     <z-score data="response" options="d.zScore.options"></z-score>
 </div>
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.calculations[0].calculation_results">
+    <div layout="column" layout-align="start center" flex="20">
+        <p class="md-caption">{{response.Messzeitpunkt.Messzeitpunkt_Text}}</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.date | date}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.TMTATime}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT A: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.TMTAError}}</p>
+    </div>
+    <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.result.calculated">
+        <p class="md-caption">TMT A: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.percentile.result.A}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">B/A: Quotient</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.quotient_rounded}}</p>
+    </div>
+</div>
 <div class="grid-border-top" style="margin-top: 24px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex>
@@ -64,6 +86,28 @@
 </div>
 <div ng-repeat="response in d.zScore.tmt_b">
     <z-score data="response" options="d.zScore.options"></z-score>
+</div>
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" layout-margin ng-repeat="response in d.dataMain.calculations[0].calculation_results">
+    <div layout="column" layout-align="start center" flex="20">
+        <p class="md-caption">{{response.Messzeitpunkt.Messzeitpunkt_Text}}</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.date | date}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Zeit</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.TMTBTime}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">TMT B: Fehler</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.TMTBError}}</p>
+    </div>
+    <div layout="column" layout-align="start center" ng-if="response.calculations[0].calculation_result.percentile.result.calculated">
+        <p class="md-caption">TMT B: Perzentile</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.percentile.result.B}}</p>
+    </div>
+    <div layout="column" layout-align="start center">
+        <p class="md-caption">B/A: Quotient</p>
+        <p class="md-subhead" style="margin-top:-12px;">{{response.quotient_rounded}}</p>
+    </div>
 </div>
 <div class="grid-border-top" style="margin-top: 24px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">

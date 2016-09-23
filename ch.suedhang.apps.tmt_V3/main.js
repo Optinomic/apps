@@ -253,8 +253,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
-            A_messung.text_right = 'TMT A';
-            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
+
+            A_messung.text_right_caption = 'TMT A';
+            A_messung.text_right = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
@@ -283,8 +284,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
-            B_messung.text_right = 'TMT B';
-            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTBTime + ' Fehler:' + current_messung.TMTBError;
+            B_messung.text_right_caption = 'TMT B';
+            B_messung.text_right = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
 
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
@@ -300,6 +301,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
                 $scope.d.zScore.options.zscore_max = (Math.abs(B_messung.zscore) + 1);
             };
+
+            // Push and Save
+            $scope.d.zScore.tmt_a.push(A_messung);
+            $scope.d.zScore.tmt_b.push(B_messung);
+
 
 
             // TMT - B/A Quotient  
@@ -337,12 +343,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
+                // Push and Save
+                $scope.d.zScore.tmt_ba_quot.push(BA_quotient);
             };
 
-            // Push and Save
-            $scope.d.zScore.tmt_a.push(A_messung);
-            $scope.d.zScore.tmt_b.push(B_messung);
-            $scope.d.zScore.tmt_ba_quot.push(BA_quotient);
 
 
             // Messzeitpunkt Info setzen
