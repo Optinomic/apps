@@ -1,4 +1,27 @@
-<p>Settings</p>
-<pre>
-	{{d.zScore.options}}
-</pre>
+<h3 class="md-headline">Einstellungen | Grafik(en)</h3>
+<div>
+    <md-input-container class="md-block">
+        <label>Z-Score: Minimum</label>
+        <input ng-model="d.zScore.options.zscore_min" type="number" step="1">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Z-Score: Maximum</label>
+        <input ng-model="d.zScore.options.zscore_max" type="number" step="1">
+    </md-input-container>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <md-switch ng-model="d.zScore.options.show_text" aria-label="show_text">
+            Beschriftungen anzeigen
+        </md-switch>
+        <md-switch ng-model="d.zScore.options.centered_zero" aria-label="centered_zero">
+            0 Wert ist immer im Zentrum
+        </md-switch>
+    </div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <md-switch ng-model="d.zScore.options.show_clinicsample" aria-label="show_clinicsample">
+            Klinische Stichprobe anzeigen
+        </md-switch>
+        <md-switch ng-model="d.zScore.options.show_clinicsample_scores" aria-label="show_clinicsample_scores">
+            Werte der Stichprobe anzeigen
+        </md-switch>
+    </div>
+</div>
