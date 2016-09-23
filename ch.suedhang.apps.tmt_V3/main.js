@@ -126,13 +126,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.zScore.init = false;
 
+
         // Toggles | Grafiken
+        $scope.d.zScore.options = {
+            "zscore_min": -3,
+            "zscore_max": 3,
+            "clinicsample_color": "#C5CAE9",
+            "centered_zero": true,
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false,
+            "show_numbers": true
+        };
+
+
         $scope.d.zScore.toggles = {
             "show_text": true,
             "show_clinicsample": true,
             "show_clinicsample_scores": false
         };
-
 
         // var erste_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
 
