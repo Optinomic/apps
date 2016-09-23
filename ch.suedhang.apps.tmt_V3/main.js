@@ -123,7 +123,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "zscore_min": -3,
             "zscore_max": 3,
             "clinicsample_color": "#C5CAE9",
-            "centered_zero": true,
+            "centered_zero": false,
             "show_text": true,
             "show_clinicsample": true,
             "show_clinicsample_scores": false,
@@ -252,6 +252,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A';
+            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
             if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 A_messung.zscore_color = '#F44336';
@@ -279,6 +280,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_right = 'TMT B';
+            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTBTime + ' Fehler:' + current_messung.TMTBError;
+
             if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
                 // Auffällige Testleistung
                 B_messung.zscore_color = '#F44336';
@@ -291,6 +294,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.zScore.options.zscore_max = (Math.abs(B_messung.zscore) + 1);
             };
 
+
+            // TMT - B/A Quotient  
+            // -  Nur bei Eintritt
+            // -  Kritischer Wert:  2,5
+            var BA_quotient = angular.copy(messung);
+            BA_quotient = $scope.addDefault(BA_quotient);
 
 
             // Push and Save
