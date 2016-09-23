@@ -22,9 +22,6 @@ website = http://www.optinomic.com/
 [template tmt_scores 4 4]
 include(templates/score_page.html)
 
-[template export_toolbox_admin 6 10]
-include(templates/download.html)
-
 
 [dependencies]
 

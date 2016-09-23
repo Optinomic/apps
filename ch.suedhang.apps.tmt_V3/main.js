@@ -234,7 +234,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var messung = {
                 "clinic_sample_age_edu_mz_obj": age_edu_mz_obj,
                 "zscore": 0,
-                "zscore_color": '#3F51B5',
+                "zscore_color": '#1A237E',
                 "text_left": mz_text,
                 "text_left_caption": mz_datum,
                 "datum": mz_datum,
