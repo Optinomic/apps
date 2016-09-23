@@ -3,15 +3,19 @@
     <div>
         <div class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
             <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
-                <p ng-if="p.fulfillment.count === 0" flex="5" class="md-title" style="color:#F44336">
-                    ?
-                </p>
-                <p ng-if="p.fulfillment.count > 0" flex="5" class="md-title" style="color:#4CAF50">
-                    {{p.fulfillment.count}}
-                </p>
-                <p flex class="md-subhead">{{p.data.last_name}} {{p.data.first_name}} ({{p.data.birthdate | date}})</p>
+                <div flex="10">
+                    <p ng-if="p.fulfillment.count === 0" class="md-title" style="color:#F44336">
+                        0
+                    </p>
+                    <p ng-if="p.fulfillment.count > 0" class="md-headline" style="color:#4CAF50">
+                        {{p.fulfillment.count}}
+                    </p>
+                </div>
+                <div flex>
+                    <p class="md-subhead">{{p.data.last_name}} {{p.data.first_name}} ({{p.data.birthdate | date}})</p>
+                    <md-button ng-if="p.fulfillment.count > 0" class="md-secondary" ng-click="showPatientDetails($index)">Details</md-button>
+                </div>
             </div>
-            <md-button ng-if="p.fulfillment.count > 0" class="md-secondary" ng-click="showPatientDetails($index)">Details</md-button>
         </div>
     </div>
 </div>
