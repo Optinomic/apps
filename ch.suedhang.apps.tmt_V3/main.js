@@ -126,6 +126,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.zScore.init = false;
 
+        // A 'settings - view'
+        $scope.d.zScore.settings = false;
+
 
         // Toggles | Grafiken
         $scope.d.zScore.options = {
