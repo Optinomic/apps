@@ -1,8 +1,14 @@
-SELECT 
-  patient.id AS pid,
+SELECT
   patient,
   ((cast(response AS json))->>'id') as id_limesurvey,
-  id as id_
+  id as id_optinomic,
+  ((cast(response AS json))->>'Eintrittsort') as eintrittsort,
+  ((cast(response AS json))->>'Austrittsort') as austrittsort,
+  ((cast(response AS json))->>'PID') as pid,
+  ((cast(response AS json))->>'datestamp') as datestamp,
+  NULL as lieferung_ab_hier,
+  NULL as rekordart,
+  NULL as bur,
   ((cast(response AS json))->>'FID') as fid,
   ((cast(response AS json))->>'q501V04') as q501v04,
   ((cast(response AS json))->>'q501V05') as q501v05,
@@ -62,11 +68,6 @@ SELECT
   ((cast(response AS json))->>'BSCL[sq504V52]') as bscl_sq504v52,
   ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_sq504v53,
   TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
-
-  ((cast(response AS json))->>'Eintrittsort') as eintrittsort,
-  ((cast(response AS json))->>'Austrittsort') as austrittsort,
-  ((cast(response AS json))->>'PID') as pid,
-  ((cast(response AS json))->>'datestamp') as datestamp,
 
 FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
 WHERE module = 'ch.suedhang.apps.bscl.anq'
