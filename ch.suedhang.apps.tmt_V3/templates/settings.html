@@ -1,8 +1,5 @@
-<div class="grid-border-top" style="margin-top: 24px;">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <h3 class="md-headline">Einstellungen</h3>
-        </div>
+<div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
         <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
             <i class="mdi mdi-close" style="font-size:24px;"></i>
             <md-tooltip md-direction="left">
@@ -12,12 +9,12 @@
     </div>
 </div>
 <md-card>
-    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">Einstellungen | Grafik(en)</span>
         </md-card-title-text>
     </md-card-title>
+    <md-divider></md-divider>
     <md-card-content>
         <div layout-margin layout-padding>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
@@ -46,17 +43,17 @@
             </div>
         </div>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
+    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
         <md-button ng-click="d.zScore.settings = !d.zScore.settings">Schliessen</md-button>
     </md-card-actions>
 </md-card>
 <md-card style="margin-top: 30px;">
-    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
     <md-card-title>
         <md-card-title-text>
             <span class="md-headline">Einstellungen | Klinik-Stichprobe</span>
         </md-card-title-text>
     </md-card-title>
+    <md-divider></md-divider>
     <md-card-content>
         <div layout-margin layout-padding>
             <md-input-container class="md-block">
@@ -85,15 +82,12 @@
             </md-input-container>
         </div>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
+    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
         <md-button ng-click="d.zScore.settings = !d.zScore.settings">schliessen</md-button>
     </md-card-actions>
 </md-card>
-<div class="grid-border-top" style="margin-top: 24px;">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <h3 class="md-headline">Einstellungen</h3>
-        </div>
+<div style="margin-top: 24px;">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
         <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
             <i class="mdi mdi-close" style="font-size:24px;"></i>
             <md-tooltip md-direction="left">
