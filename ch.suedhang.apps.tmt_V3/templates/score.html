@@ -5,13 +5,8 @@
 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" style="margin-top: 24px;">
     <div flex style="margin-right:12px;">
         <p class="md-title">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}} </p>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-            <div flex="5">
-                <p style="font-size:36px; color:#3F51B5!important;">■</p>
-            </div>
-            <div flex>
-                <p class="md-caption"> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
-            </div>
+        <div>
+            <p class="md-caption"><span style="font-size:36px; color:#3F51B5!important;">■</span> Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert. {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}}); Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).</p>
         </div>
         <p class="md-subhead">
             {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
@@ -34,13 +29,16 @@
         <div flex>
             <h3 class="md-headline">TMT A</h3>
             <div ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-                <p class="md-subhead">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_text}}
-                    <br> <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}</p>
+                <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
+                    <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+                </p>
             </div>
         </div>
-        <div flex ng-if="d.zScore.normgruppe_klinik.selected_pg_id !==null">
+        <div flex>
             <h3 class="md-subhead">{{d.dataMain.config.data.customer.contact.name}}</h3>
-            <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.global.clinicsample_color}}!important;">■</span> {{d.zScore.normgruppe_klinik.selected_pg}}</p>
+            <p class="md-caption" style="margin-top:-12px;"><span ng-attr-style="font-size:24px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> Die klinische Stichproben ({{d.dataMain.config.data.customer.contact.name}}) sind nach Alter und Bildung normiert.
+                <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad (> 12 Jahre)</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad (<= 12 Jahre)</span> | n={{d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.n}}
+            </p>
         </div>
     </div>
 </div>
