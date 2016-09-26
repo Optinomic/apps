@@ -185,6 +185,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.sortByKey = function(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    };
 
 
     $scope.setZScore = function() {
@@ -196,6 +203,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.tmt_ba_quot = [];
 
         var messungen = $scope.d.dataMain.calculations[0].calculation_results;
+        messungen = $scope.sortByKey(messungen, 'date');
 
         // Check if Eintritt & Austrittsmessung vorhanden
         var messungen_info = {
@@ -271,9 +279,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
 
-                    if (!between(A_messung.zscore, A_messung.clinicsample_start, A_messung.clinicsample_end)) {
-                        // Auffällige Testleistung
+                    if (A_messung.zscore < A_messung.clinicsample_start) {
+                        // Auffällige Testleistung: Rot
                         A_messung.zscore_color = '#F44336';
+                    };
+
+                    if (A_messung.zscore > A_messung.clinicsample_end) {
+                        // Besser als Stichprobe: Grün 
+                        A_messung.zscore_color = '#4CAF50';
                     };
 
                 };
@@ -306,9 +319,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     B_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
 
-                    if (!between(B_messung.zscore, B_messung.clinicsample_start, B_messung.clinicsample_end)) {
-                        // Auffällige Testleistung
+                    if (B_messung.zscore < B_messung.clinicsample_start) {
+                        // Auffällige Testleistung: Rot
                         B_messung.zscore_color = '#F44336';
+                    };
+
+                    if (B_messung.zscore > B_messung.clinicsample_end) {
+                        // Besser als Stichprobe: Grün 
+                        B_messung.zscore_color = '#4CAF50';
                     };
                 };
             };
