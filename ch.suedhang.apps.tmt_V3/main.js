@@ -161,26 +161,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-        // Store Current Age & Edu Group from Normgruppe TMT
 
-        if ($scope.d.dataMain.calculations[0].calculation_results.length !== 0) {
-
-            var current_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
-
-            $scope.d.zScore.normgruppe_tmt.n = current_messung.percentile.age_perz.n;
-            $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
-            $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
-
-            $scope.d.zScore.normgruppe_tmt.edu_group = {};
-            $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
-                if (current_edu.edu_group_id === current_messung.percentile.age_perz.education) {
-                    $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
-                };
-            });
-            $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
-
-
-        };
 
         $scope.changeClinicSample();
 
@@ -468,6 +449,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_';
         $scope.d.zScore.normgruppe_klinik.age_edu_mz_base = angular.copy($scope.d.zScore.normgruppe_klinik.age_edu_mz);
         $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_99';
+
+
+        // Store Current Age & Edu Group from Normgruppe TMT
+
+        if ($scope.d.dataMain.calculations[0].calculation_results.length !== 0) {
+
+            var current_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
+
+            $scope.d.zScore.normgruppe_tmt.n = current_messung.percentile.age_perz.n;
+            $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
+            $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
+
+            $scope.d.zScore.normgruppe_tmt.edu_group = {};
+            $scope.d.zScore.user_app_calc.definitions.edu.forEach(function(current_edu, myEduIndex) {
+                if (current_edu.edu_group_id === parseInt(current_messung.percentile.age_perz.education)) {
+                    $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
+                };
+            });
+            $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
+
+
+        };
+
 
         // Bei Änderungen ausführen.
         $scope.setZScore();
