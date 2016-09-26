@@ -208,7 +208,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         var between = function(x, min, max) {
-            return x > min && x < max;
+            return x >= min && x <= max;
         };
 
 
@@ -271,7 +271,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
 
-                    if (between(A_messung.zscore, A_messung.clinicsample_start, A_messung.clinicsample_end)) {
+                    if (!between(A_messung.zscore, A_messung.clinicsample_start, A_messung.clinicsample_end)) {
                         // Auffällige Testleistung
                         A_messung.zscore_color = '#F44336';
                     };
@@ -306,7 +306,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     B_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
 
-                    if (between(B_messung.zscore, B_messung.clinicsample_start, B_messung.clinicsample_end)) {
+                    if (!between(B_messung.zscore, B_messung.clinicsample_start, B_messung.clinicsample_end)) {
                         // Auffällige Testleistung
                         B_messung.zscore_color = '#F44336';
                     };
