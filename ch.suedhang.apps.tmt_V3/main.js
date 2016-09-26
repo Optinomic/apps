@@ -249,19 +249,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var A_messung = angular.copy(messung);
             A_messung = $scope.addDefault(A_messung);
 
-            if (age_edu_mz_obj.statistics.calculated) {
-                if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
-                    A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
-                    A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
-
-                    if (between(A_messung.zscore, A_messung.clinicsample_start, A_messung.clinicsample_end)) {
-                        // Auffällige Testleistung
-                        A_messung.zscore_color = '#F44336';
-                    };
-
-                };
-            };
-
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_right = 'TMT A |  N=' + age_edu_mz_obj.n;
@@ -279,9 +266,40 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
+            if (age_edu_mz_obj.statistics.calculated) {
+                if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
+                    A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
+                    A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
+
+                    if (between(A_messung.zscore, A_messung.clinicsample_start, A_messung.clinicsample_end)) {
+                        // Auffällige Testleistung
+                        A_messung.zscore_color = '#F44336';
+                    };
+
+                };
+            };
+
+
+
             // TMT - B
             var B_messung = angular.copy(messung);
             B_messung = $scope.addDefault(B_messung);
+
+            B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
+            B_messung.text_right = 'TMT B |  N=' + age_edu_mz_obj.n;
+            B_messung.text_right_caption = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
+
+
+
+            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
+                $scope.d.zScore.options.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
+            };
+
+            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
+                $scope.d.zScore.options.zscore_max = (Math.abs(B_messung.zscore) + 1);
+            };
+
 
             if (age_edu_mz_obj.statistics.calculated) {
                 if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
@@ -295,25 +313,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             };
 
-
-            B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
-            B_messung.text_right = 'TMT B |  N=' + age_edu_mz_obj.n;
-            B_messung.text_right_caption = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
-
-            if (current_messung.percentile.z_scores.tmtB_z_rounded > 2.5) {
-                // Auffällige Testleistung
-                B_messung.zscore_color = '#F44336';
-            };
-
-
-            // Set zscore_min | zscore_max  if zscore >= +/-3 
-            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
-                $scope.d.zScore.options.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
-            };
-
-            if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
-                $scope.d.zScore.options.zscore_max = (Math.abs(B_messung.zscore) + 1);
-            };
 
             // Push and Save
             $scope.d.zScore.tmt_a.push(A_messung);
