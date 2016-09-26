@@ -28,13 +28,13 @@
 </div>
 <div ng-repeat="response in d.zScore.tmt_a" style="margin-top: 12px;">
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-        <div flex="75">
+        <div flex="85">
             <z-score data="response" options="d.zScore.options"></z-score>
         </div>
         <div flex style="margin-left: 24px;">
-            <p class="md-caption">Zeit: XX
-                <br>Fehler: **
-                <br>B/A Quotient: **
+            <p class="md-caption">Zeit: {{response.full.TMTATime}}
+                <br>Fehler: {{response.full.TMTAError}}
+                <br>B/A Quotient: {{response.full.quotient_rounded}}
             </p>
         </div>
     </div>
@@ -84,13 +84,13 @@
 </div>
 <div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="75">
+        <div flex="85">
             <z-score data="response" options="d.zScore.options"></z-score>
         </div>
         <div flex style="margin-left: 24px;">
-            <p class="md-caption">Zeit: XX
-                <br>Fehler: **
-                <br>B/A Quotient: **
+            <p class="md-caption">Zeit: {{response.full.TMTBTime}}
+                <br>Fehler: {{response.full.TMTBError}}
+                <br>B/A Quotient: {{response.full.quotient_rounded}}
             </p>
         </div>
     </div>
