@@ -27,8 +27,8 @@
     </div>
 </div>
 <div ng-repeat="response in d.zScore.tmt_a" style="margin-top: 12px;">
-    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-        <div flex="85">
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+        <div flex="90">
             <z-score data="response" options="d.zScore.options"></z-score>
         </div>
         <div flex style="margin-left: 24px;">
@@ -39,10 +39,10 @@
         </div>
     </div>
 </div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <div flex="50">
         <p style="color:#9E9E9E">
-            Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+            Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004), für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} normiert. (N={{d.zScore.normgruppe_tmt.n}})
         </p>
     </div>
     <div flex="5">
@@ -50,7 +50,7 @@
     </div>
     <div flex>
         <p style="color:#9E9E9E">
-            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}}, {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+            Klinikstichprobe für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
         </p>
     </div>
 </div>
@@ -84,7 +84,7 @@
 </div>
 <div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="85">
+        <div flex="90">
             <z-score data="response" options="d.zScore.options"></z-score>
         </div>
         <div flex style="margin-left: 24px;">
@@ -95,10 +95,10 @@
         </div>
     </div>
 </div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <div flex="50">
         <p style="color:#9E9E9E">
-            Die Z-Werte sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+            Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004), für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} normiert. (N={{d.zScore.normgruppe_tmt.n}})
         </p>
     </div>
     <div flex="5">
@@ -106,7 +106,7 @@
     </div>
     <div flex>
         <p style="color:#9E9E9E">
-            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}}, {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+            Klinikstichprobe für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
         </p>
     </div>
 </div>
@@ -142,10 +142,10 @@
     <div ng-repeat="response in d.zScore.tmt_ba_quot" style="margin-top: 12px;">
         <z-score data="response" options="d.zScore.options_ba"></z-score>
     </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex="50">
             <p style="color:#9E9E9E">
-                Die Z-Werte des B/A Quotienten sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004), für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}} normiert. (N={{d.zScore.normgruppe_tmt.n}})
             </p>
         </div>
         <div flex="5">
@@ -153,7 +153,7 @@
         </div>
         <div flex>
             <p style="color:#9E9E9E">
-                Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}}, {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+                Klinikstichprobe für die {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
             </p>
         </div>
     </div>
