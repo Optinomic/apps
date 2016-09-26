@@ -27,7 +27,7 @@
     </div>
 </div>
 <div ng-repeat="tmt in d.zScore.tmt_a" style="margin-top: 12px;">
-    <div ng-init="resp = angular.copy(tmt)" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+    <div ng-init="resp = tmt" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
         <div flex="90">
             <z-score data="resp" options="d.zScore.options"></z-score>
             <pre>{{tmt}}</pre>
