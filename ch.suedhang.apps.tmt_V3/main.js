@@ -453,6 +453,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Store Current Age & Edu Group from Normgruppe TMT
 
+        $scope.d.zScore.normgruppe_tmt.edu_group = {};
+        $scope.d.zScore.normgruppe_klinik.edu_group = {};
+
         if ($scope.d.dataMain.calculations[0].calculation_results.length !== 0) {
 
             var current_messung = $scope.d.dataMain.calculations[0].calculation_results[0];
@@ -466,9 +469,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if (current_edu.edu_group_id === parseInt(current_messung.percentile.age_perz.education)) {
                     $scope.d.zScore.normgruppe_tmt.edu_group = current_edu;
                 };
+                if (current_edu.edu_group_id === parseInt($scope.d.zScore.normgruppe_klinik.selected_edu_group_id)) {
+                    $scope.d.zScore.normgruppe_klinik.edu_group = current_edu;
+                };
             });
             $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = current_messung.percentile.age_perz.education;
-
 
         };
 
