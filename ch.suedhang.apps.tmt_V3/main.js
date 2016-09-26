@@ -137,7 +137,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Klinische Stichprobe
         $scope.d.zScore.normgruppe_klinik = {};
         $scope.d.zScore.normgruppe_klinik.selected_age_group = $scope.d.zScore.user_app_calc.definitions.age[0];
-        $scope.d.zScore.normgruppe_klinik.selected_edu_group_id = $scope.d.zScore.user_app_calc.definitions.edu[2];;
+        $scope.d.zScore.normgruppe_klinik.selected_edu_group = $scope.d.zScore.user_app_calc.definitions.edu[2];
         $scope.d.zScore.normgruppe_klinik.selected_mz_group_id = 99;
 
         $scope.d.zScore.normgruppe_klinik.select_mz_array = [{
