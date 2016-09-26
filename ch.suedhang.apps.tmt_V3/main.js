@@ -449,8 +449,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeClinicSample = function() {
 
-        d.zScore.normgruppe_klinik.selected_edu_group.edu_group_id
-
 
         var age_group_id = $scope.d.zScore.normgruppe_klinik.selected_age_group.age_group_id;
         var edu_group_id = $scope.d.zScore.normgruppe_klinik.selected_edu_group.edu_group_id;
