@@ -116,6 +116,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // A 'settings - view'
         $scope.d.zScore.settings = false;
+        $scope.d.zScore.show_ba_quotient = false;
 
 
         // Toggles | Grafiken
@@ -248,7 +249,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "zscore": 0,
                 "zscore_color": '#1A237E',
                 "text_left": mz_text,
-                "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 5),
+                "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 16),
                 "datum": mz_datum,
                 "datestamp": mz_datestamp
             };

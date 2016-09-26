@@ -27,7 +27,17 @@
     </div>
 </div>
 <div ng-repeat="response in d.zScore.tmt_a" style="margin-top: 12px;">
-    <z-score data="response" options="d.zScore.options"></z-score>
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+        <div flex="75">
+            <z-score data="response" options="d.zScore.options"></z-score>
+        </div>
+        <div flex>
+            <p class="md-caption">Zeit: XX
+                <br>Fehler: **
+                <br>B/A Quotient: **
+            </p>
+        </div>
+    </div>
 </div>
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
     <div flex="50">
@@ -73,7 +83,17 @@
     </div>
 </div>
 <div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
-    <z-score data="response" options="d.zScore.options"></z-score>
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+        <div flex="75">
+            <z-score data="response" options="d.zScore.options"></z-score>
+        </div>
+        <div flex>
+            <p class="md-caption">Zeit: XX
+                <br>Fehler: **
+                <br>B/A Quotient: **
+            </p>
+        </div>
+    </div>
 </div>
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
     <div flex="50">
@@ -90,49 +110,51 @@
         </p>
     </div>
 </div>
-<div class="grid-border-top" style="margin-top: 30px;">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <h3 class="md-headline">B/A Quotient | Eintritt</h3>
+<div ng-if="d.zScore.show_ba_quotient">
+    <div class="grid-border-top" style="margin-top: 30px;">
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+            <div flex>
+                <h3 class="md-headline">B/A Quotient | Eintritt</h3>
+            </div>
+            <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
+                <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+                <md-tooltip md-direction="left">
+                    Einstellungen
+                </md-tooltip>
+            </md-button>
         </div>
-        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
-            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
-            <md-tooltip md-direction="left">
-                Einstellungen
-            </md-tooltip>
-        </md-button>
     </div>
-</div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-    <div flex>
-        <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
-            <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
-        </p>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
+        <div flex>
+            <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
+                <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">
+                {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
+            </p>
+            <p class="md-caption" style="margin-top:-6px;">
+                Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+            </p>
+        </div>
     </div>
-    <div flex>
-        <p class="md-subhead">
-            {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
-        </p>
-        <p class="md-caption" style="margin-top:-6px;">
-            Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
-        </p>
+    <div ng-repeat="response in d.zScore.tmt_ba_quot" style="margin-top: 12px;">
+        <z-score data="response" options="d.zScore.options_ba"></z-score>
     </div>
-</div>
-<div ng-repeat="response in d.zScore.tmt_ba_quot" style="margin-top: 12px;">
-    <z-score data="response" options="d.zScore.options_ba"></z-score>
-</div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-    <div flex="50">
-        <p style="color:#9E9E9E">
-            Die Z-Werte des B/A Quotienten sind nach Alter und Bildung nach Tombaugh 2004 normiert.
-        </p>
-    </div>
-    <div flex="5">
-        <p ng-attr-style="font-size:36px; color:{{d.zScore.options.clinicsample_color}}!important;">■</p>
-    </div>
-    <div flex>
-        <p style="color:#9E9E9E">
-            Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}}, {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
-        </p>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+        <div flex="50">
+            <p style="color:#9E9E9E">
+                Die Z-Werte des B/A Quotienten sind nach Alter und Bildung nach Tombaugh 2004 normiert.
+            </p>
+        </div>
+        <div flex="5">
+            <p ng-attr-style="font-size:36px; color:{{d.zScore.options.clinicsample_color}}!important;">■</p>
+        </div>
+        <div flex>
+            <p style="color:#9E9E9E">
+                Die Klinik-Stichprobe ist nach Alter und Bildung normiert. {{d.zScore.user_app_calc.definitions.age[d.zScore.normgruppe_klinik.selected_age_group_id].age_group_text}}, {{d.zScore.normgruppe_klinik.select_mz_array[d.zScore.normgruppe_klinik.selected_mz_array].text}}
+            </p>
+        </div>
     </div>
 </div>
