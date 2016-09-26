@@ -449,16 +449,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeClinicSample = function() {
 
+        d.zScore.normgruppe_klinik.selected_edu_group.edu_group_id
 
-        var age_group_id = $scope.d.zScore.normgruppe_klinik.selected_age_group_id;
-        var edu_group_id = $scope.d.zScore.normgruppe_klinik.selected_edu_group_id;
+
+        var age_group_id = $scope.d.zScore.normgruppe_klinik.selected_age_group.age_group_id;
+        var edu_group_id = $scope.d.zScore.normgruppe_klinik.selected_edu_group.edu_group_id;
         var mz_group_id = $scope.d.zScore.normgruppe_klinik.selected_mz_group_id;
 
         $scope.d.zScore.normgruppe_klinik.age_edu_mz = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_';
         $scope.d.zScore.normgruppe_klinik.age_edu_mz_base = angular.copy($scope.d.zScore.normgruppe_klinik.age_edu_mz);
         $scope.d.zScore.normgruppe_klinik.age_edu_99 = 'age_' + $scope.twoDigits(age_group_id) + '_edu_' + $scope.twoDigits(edu_group_id) + '_mz_99';
-
-
 
 
 

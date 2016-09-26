@@ -63,16 +63,16 @@
         <div layout-margin layout-padding>
             <md-input-container class="md-block">
                 <label>Alter</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group_id" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age.age_group_id">
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age">
                         {{age.age_group_text}}
                     </md-option>
                 </md-select>
             </md-input-container>
             <md-input-container class="md-block" style="margin-top:24px;">
                 <label>Bildung</label>
-                <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group_id" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu.edu_group_id">
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu">
                         {{edu.edu_group_text}}
                     </md-option>
                 </md-select>
