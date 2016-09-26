@@ -162,6 +162,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.zScore.normgruppe_tmt.n = current_messung.percentile.age_perz.n;
             $scope.d.zScore.normgruppe_tmt.age_group = $scope.d.zScore.user_app_calc.definitions.age[current_messung.percentile.age_perz.altersgruppe];
+            $scope.d.zScore.normgruppe_klinik.selected_age_group = angular.copy($scope.d.zScore.normgruppe_tmt.age_group);
             $scope.d.zScore.normgruppe_klinik.selected_age_group_id = current_messung.percentile.age_perz.altersgruppe;
 
             $scope.d.zScore.normgruppe_tmt.edu_group = {};
