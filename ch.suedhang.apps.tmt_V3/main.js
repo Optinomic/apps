@@ -249,6 +249,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
                     A_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     A_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
+
+
+                    if ((A_messung.zscore > A_messung.clinicsample_end) || (A_messung.zscore < A_messung.clinicsample_start)) {
+                        // Auffällige Testleistung
+                        A_messung.zscore_color = '#F44336';
+                    };
+
                 };
             };
 
@@ -257,10 +264,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung.text_right = 'TMT A |  N=' + age_edu_mz_obj.n;
             A_messung.text_right_caption = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
 
-            if (current_messung.percentile.z_scores.tmtA_z_rounded > 2.5) {
-                // Auffällige Testleistung
-                A_messung.zscore_color = '#F44336';
-            };
+
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
             if (Math.abs(A_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
@@ -280,6 +284,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
                     B_messung.clinicsample_start = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min);
                     B_messung.clinicsample_end = $scope.roundToTwo(age_edu_mz_obj.statistics.TMTAZ.mean_1sd_plus);
+
+                    if ((B_messung.zscore > B_messung.clinicsample_end) || (B_messung.zscore < B_messung.clinicsample_start)) {
+                        // Auffällige Testleistung
+                        B_messung.zscore_color = '#F44336';
+                    };
                 };
             };
 
