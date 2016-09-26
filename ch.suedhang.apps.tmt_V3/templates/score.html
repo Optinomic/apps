@@ -11,18 +11,19 @@
         </md-button>
     </div>
 </div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-    <div flex>
-        <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
-            <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+    <div flex="50">
+        <p class="md-subhead">Normstichprobe</p>
+        <p class="md-caption" style="color:#757575;margin-top:-6px;">
+            <span style="font-size:22px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+            <br> {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.zScore.normgruppe_tmt.n}})
         </p>
     </div>
     <div flex>
-        <p class="md-subhead">
-            {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
-        </p>
-        <p class="md-caption" style="margin-top:-6px;">
-            Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+        <p class="md-subhead">Klinikstichprobe <span ng-attr-style="font-size:26px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span></p>
+        <p class="md-caption" style="color:#757575;margin-top:-6px;">
+            {{d.dataMain.patient.data.extras.name}} (Alter: {{d.dataMain.patient.data.extras.age}}, Ausbildung: {{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+            <br> {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
         </p>
     </div>
 </div>
@@ -66,18 +67,19 @@
         </md-button>
     </div>
 </div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-    <div flex>
-        <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
-            <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+    <div flex="50">
+        <p class="md-subhead">Normstichprobe</p>
+        <p class="md-caption" style="color:#757575;margin-top:-6px;">
+            <span style="font-size:22px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+            <br> {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.zScore.normgruppe_tmt.n}})
         </p>
     </div>
     <div flex>
-        <p class="md-subhead">
-            {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
-        </p>
-        <p class="md-caption" style="margin-top:-6px;">
-            Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+        <p class="md-subhead">Klinikstichprobe <span ng-attr-style="font-size:26px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span></p>
+        <p class="md-caption" style="color:#757575;margin-top:-6px;">
+            {{d.dataMain.patient.data.extras.name}} (Alter: {{d.dataMain.patient.data.extras.age}}, Ausbildung: {{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+            <br> {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
         </p>
     </div>
 </div>
@@ -94,20 +96,6 @@
         </div>
     </div>
 </div>
-<div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-    <div flex="50">
-        <p class="md-caption" style="color:#757575">
-            Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
-            <br> {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.zScore.normgruppe_tmt.n}})
-        </p>
-    </div>
-    <div flex>
-        <p class="md-caption" style="color:#757575">
-            <span ng-attr-style="font-size:18px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span>Klinikstichprobe:
-            <br>{{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
-        </p>
-    </div>
-</div>
 <div ng-if="d.zScore.show_ba_quotient">
     <div class="grid-border-top" style="margin-top: 30px;">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
@@ -122,36 +110,23 @@
             </md-button>
         </div>
     </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.altersgruppe_found">
-        <div flex>
-            <p class="md-subhead">{{d.zScore.normgruppe_tmt.age_group.age_group_text}}
-                <br> {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <div flex="50">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                <span style="font-size:22px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+                <br> {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.zScore.normgruppe_tmt.n}})
             </p>
         </div>
         <div flex>
-            <p class="md-subhead">
-                {{d.dataMain.patient.data.extras.name}} ({{d.dataMain.patient.data.extras.birthday}})
-            </p>
-            <p class="md-caption" style="margin-top:-6px;">
-                Alter bei Erfassung: {{d.dataMain.patient.data.extras.age}}; <span ng-if="d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Hoher Ausbildsgrad</span><span ng-if="!d.dataMain.survey_responses[0].calculations[0].calculation_result.percentile.age_perz.education_high">Nigriger Ausbildsgrad</span> ({{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+            <p class="md-subhead">Klinikstichprobe <span ng-attr-style="font-size:26px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span></p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                {{d.dataMain.patient.data.extras.name}} (Alter: {{d.dataMain.patient.data.extras.age}}, Ausbildung: {{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre).
+                <br> {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
             </p>
         </div>
     </div>
     <div ng-repeat="response in d.zScore.tmt_ba_quot" style="margin-top: 12px;">
         <z-score data="response" options="d.zScore.options_ba"></z-score>
-    </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex="50">
-            <p class="md-caption" style="color:#757575">
-                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
-                <br> {{d.zScore.normgruppe_tmt.age_group.age_group_text}}, {{d.zScore.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.zScore.normgruppe_tmt.n}})
-            </p>
-        </div>
-        <div flex>
-            <p class="md-caption" style="color:#757575">
-                <span ng-attr-style="font-size:18px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span>Klinikstichprobe:
-                <br>{{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
-            </p>
-        </div>
     </div>
 </div>
