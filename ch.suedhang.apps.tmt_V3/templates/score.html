@@ -30,7 +30,6 @@
     <div ng-init="resp = tmt" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
         <div flex="90">
             <z-score data="resp" options="d.zScore.options"></z-score>
-            <pre>{{tmt}}</pre>
         </div>
         <div flex style="margin-left: 24px;">
             <p class="md-caption">Zeit: {{tmt.full.TMTATime}}
@@ -84,9 +83,9 @@
     </div>
 </div>
 <div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
-    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+    <div ng-init="resp = response" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
         <div flex="90">
-            <z-score data="response" options="d.zScore.options"></z-score>
+            <z-score data="resp" options="d.zScore.options"></z-score>
         </div>
         <div flex style="margin-left: 24px;">
             <p class="md-caption">Zeit: {{response.full.TMTBTime}}
