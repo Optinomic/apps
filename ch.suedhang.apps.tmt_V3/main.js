@@ -248,7 +248,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "zscore": 0,
                 "zscore_color": '#1A237E',
                 "text_left": mz_text,
-                "text_left_caption": mz_datum,
+                "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 5),
                 "datum": mz_datum,
                 "datestamp": mz_datestamp
             };
@@ -258,9 +258,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung = $scope.addDefault(A_messung);
 
 
+
+
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
-            A_messung.text_right = 'TMT A |  N=' + age_edu_mz_obj.n;
-            A_messung.text_right_caption = 'Zeit:' + current_messung.TMTATime + ' Fehler:' + current_messung.TMTAError;
+            A_messung.text_left = A_messung.text_left + ' | TMT A'
+
+            A_messung.text_right = 'N=' + age_edu_mz_obj.n;
+            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
+                A_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
+            } else {
+                A_messung.text_right_caption = 'Klinikstichprobe | Alle Messzeitpunkte';
+            };
 
 
 
@@ -299,9 +307,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung = $scope.addDefault(B_messung);
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
-            B_messung.text_right = 'TMT B |  N=' + age_edu_mz_obj.n;
-            B_messung.text_right_caption = 'Zeit: ' + current_messung.TMTBTime + ' Fehler: ' + current_messung.TMTBError;
+            B_messung.text_left = A_messung.text_left + ' | TMT B'
 
+            B_messung.text_right = 'N=' + age_edu_mz_obj.n;
+            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
+                B_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
+            } else {
+                B_messung.text_right_caption = 'Klinikstichprobe | Alle Messzeitpunkte';
+            };
 
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
