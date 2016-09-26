@@ -67,3 +67,8 @@ include(emails/overdue.html)
 
 [calculation aus_calculation javascript]
 include(calculations/aus.js)
+
+[sql_init]
+include(includes/create_view.sql)
+
+
