@@ -251,7 +251,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text_left": mz_text,
                 "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 16),
                 "datum": mz_datum,
-                "datestamp": mz_datestamp
+                "datestamp": mz_datestamp,
+                "full": angular.copy(current_messung)
             };
 
             // TMT - A
