@@ -248,7 +248,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 16),
                 "datum": mz_datum,
                 "datestamp": mz_datestamp,
-                "options": angular.copy($scope.d.zScore.options);
+                "options": angular.copy($scope.d.zScore.options),
                 "full": full
             };
 
