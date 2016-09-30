@@ -248,13 +248,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 16),
                 "datum": mz_datum,
                 "datestamp": mz_datestamp,
+                "options": angular.copy($scope.d.zScore.options);
                 "full": full
             };
+
+
+            var cs_color = ['#C5CAE9', '#D1C4E9', '#BBDEFB'];
+            var current_cs_color = clinic_samples[current_messung.Messzeitpunkt.Messzeitpunkt];
+
 
             // TMT - A
             var A_messung = angular.copy(messung);
 
-
+            A_messung.options.clinicsample_color = current_cs_color;
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT A'
 
@@ -300,6 +306,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // TMT - B
             var B_messung = angular.copy(messung);
+
+            B_messung.options.clinicsample_color = current_cs_color;
+
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT B'
