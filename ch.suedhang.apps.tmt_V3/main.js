@@ -259,7 +259,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // TMT - A
             var A_messung = angular.copy(messung);
-            A_messung.current_cs_color = current_cs_color;
+            A_messung.clinicsample_color = current_cs_color;
 
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
@@ -307,7 +307,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // TMT - B
             var B_messung = angular.copy(messung);
-            B_messung.current_cs_color = current_cs_color;
+            B_messung.clinicsample_color = current_cs_color;
 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT B'
