@@ -254,7 +254,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             var cs_color = ['#C5CAE9', '#D1C4E9', '#BBDEFB'];
-            var current_cs_color = clinic_samples[current_messung.Messzeitpunkt.Messzeitpunkt];
+            var current_cs_color = cs_color[current_messung.Messzeitpunkt.Messzeitpunkt];
 
 
             // TMT - A
