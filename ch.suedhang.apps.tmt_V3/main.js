@@ -267,7 +267,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "zscore": 0,
                 "zscore_color": '#1A237E',
                 "text_left": mz_text,
-                "text_left_caption": mz_datum + ', ' + current_messung.date.substring(11, 16),
+                "text_left_caption": 'TMT',
                 "datum": mz_datum,
                 "datestamp": mz_datestamp,
                 "full": full
@@ -278,22 +278,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var current_cs_color = cs_color[current_messung.Messzeitpunkt.Messzeitpunkt];
 
 
+            // -----------------------------------------
             // TMT - A
+            // -----------------------------------------
             var A_messung = angular.copy(messung);
-            A_messung.clinicsample_color = current_cs_color;
 
+            A_messung.text_left_caption = 'TMT A';
+            A_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
+            A_messung.text_right = mz_datum;
+            A_messung.text_right_caption = current_messung.date.substring(11, 16);
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
-            A_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT A'
-
             A_messung.n = age_edu_mz_obj.n;
-            A_messung.text_right = 'N=' + age_edu_mz_obj.n;
-            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
-                A_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
-            } else {
-                A_messung.text_right_caption = 'Klinikstichprobe | Alle Messzeitpunkte';
-            };
-
+            A_messung.clinicsample_color = current_cs_color;
 
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
@@ -304,7 +301,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (Math.abs(A_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_max) - 0.5)) {
                 $scope.d.zScore.options.zscore_max = (Math.abs(A_messung.zscore) + 1);
             };
-
 
             if (age_edu_mz_obj.statistics.calculated) {
                 if ((age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== null) || (age_edu_mz_obj.statistics.TMTAZ.mean_1sd_min !== undefined)) {
@@ -326,20 +322,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
+            // -----------------------------------------
             // TMT - B
+            // -----------------------------------------
             var B_messung = angular.copy(messung);
-            B_messung.clinicsample_color = current_cs_color;
 
-            B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
-            B_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT B'
+            B_messung.text_left_caption = 'TMT B';
+            B_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
+            B_messung.text_right = mz_datum;
+            B_messung.text_right_caption = current_messung.date.substring(11, 16);
 
+            B_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             B_messung.n = age_edu_mz_obj.n;
-            B_messung.text_right = 'N=' + age_edu_mz_obj.n;
-            if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
-                B_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
-            } else {
-                B_messung.text_right_caption = 'Klinikstichprobe | Alle Messzeitpunkte';
-            };
+            B_messung.clinicsample_color = current_cs_color;
 
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 
@@ -370,6 +365,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
+            // -----------------------------------------
             // Push and Save
             $scope.d.zScore.tmt_a.push(A_messung);
             $scope.d.zScore.tmt_b.push(B_messung);
