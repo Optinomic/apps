@@ -48,7 +48,7 @@
         <div flex>
             <p class="md-subhead">Klinikstichprobe </p>
             <p ng-repeat="tmt in d.zScore.tmt_a" class="md-caption" style="margin-top:-24px;">
-                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> {{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}:
+                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{tmt.clinicsample_color}}!important;">■</span> {{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}:
                 <span style="color:#757575;">
                 {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}} (N={{tmt.n}})
             </span>
@@ -91,7 +91,7 @@
         <div flex>
             <p class="md-subhead">Klinikstichprobe </p>
             <p ng-repeat="tmt in d.zScore.tmt_b" class="md-caption" style="margin-top:-24px;">
-                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span>{{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}:
+                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{tmt.clinicsample_color}}!important;">■</span>{{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}:
                 <span style="color:#757575;">
                 {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}} (N={{tmt.n}})
             </span>
