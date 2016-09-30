@@ -1,10 +1,13 @@
 /* (C) by Nora Schönenberger, Klinik Südhang */
 
 SELECT
-  patient.id AS opti_id,
-    
-  ((cast(response AS json))->>'FNr') as fnr,
+  patient.id AS Opti_id,
+  survey_response.id AS opti_response_id,
+  ((cast(response AS json))->>'id') as limesurvey_id,
   ((cast(response AS json))->>'PID') as pid,
+  ((cast(response AS json))->>'FNr') as fallnr,
+
+  NULL as VZEX100,
   ((cast(response AS json))->>'Institution') as institution,
   ((cast(response AS json))->>'VZEX005') as vzex005,
   ((cast(response AS json))->>'VMEB001') as vmeb001,
