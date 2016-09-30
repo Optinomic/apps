@@ -1,12 +1,11 @@
-SELECT
- patient.id AS pid,
-  patient,
-  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
-  patient.four_letter_code,
+/* (C) by Nora Schönenberger, Klinik Südhang */
 
+SELECT
+  patient.id AS opti_id,
+    
   ((cast(response AS json))->>'FNr') as fnr,
   ((cast(response AS json))->>'PID') as pid,
-  ((cast(response AS json))->>'Institution'), CASE WHEN '333' THEN '31') as institution,
+  ((cast(response AS json))->>'Institution') as institution,
   ((cast(response AS json))->>'VZEX005') as vzex005,
   ((cast(response AS json))->>'VMEB001') as vmeb001,
   ((cast(response AS json))->>'VMEB005') as vmeb005,
@@ -16,51 +15,52 @@ SELECT
   ((cast(response AS json))->>'VMEB040d') as vmeb040d,
   NULL as VMEB040g,
 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050x'), CASE WHEN 'Y' THEN '1') as VNEB050x 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050y'), 'Y', '1') as vneb050y 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050a'), 'Y', '1') as vneb050a 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050b'), 'Y', '1') as vneb050b 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050c'), 'Y', '1') as vneb050c 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050d'), 'Y', '1') as vneb050d 
-, recode_into(((cast(response AS json))->>'VNEB050_VNEB050e'), 'Y', '1') as vneb050e 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060x'), 'Y', '1') as VNEB060x 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060a'), 'Y', '1') as vneb060a 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060b'), 'Y', '1') as vneb060b 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060c'), 'Y', '1') as vneb060c 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060d'), 'Y', '1') as vneb060d 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060e'), 'Y', '1') as vneb060e 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060f'), 'Y', '1') as vneb060f 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060g'), 'Y', '1') as vneb060g 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060h'), 'Y', '1') as vneb060h 
-, recode_into(((cast(response AS json))->>'VNEB060_VNEB060i'), 'Y', '1') as vneb060i 
 
-  NULL as VMEB061,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050x]') END as vneb050_vneb050x,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050y]') END as vneb050_vneb050y,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050a]') END as vneb050_vneb050a,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050b]') END as vneb050_vneb050b,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050c]') END as vneb050_vneb050c,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050d]') END as vneb050_vneb050d,
+  CASE WHEN ((cast(response AS json))->>'VNEB050[VNEB050e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB050[VNEB050e]') END as vneb050_vneb050e,
 
-, recode_into(((cast(response AS json))->>'VNEB065'), '999', '-1') as vneb065
-, recode_into(recode_into(((cast(response AS json))->>'VNEB066'), '999', '-1'), '1', 'SYSMIS') as vneb066
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060x]') END as vneb060_vneb060x,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060a]') END as vneb060_vneb060a,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060b]') END as vneb060_vneb060b,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060c]') END as vneb060_vneb060c,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060d]') END as vneb060_vneb060d,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060e]') END as vneb060_vneb060e,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060f]') END as vneb060_vneb060f,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060g]') END as vneb060_vneb060g,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060h]') END as vneb060_vneb060h,
+  CASE WHEN ((cast(response AS json))->>'VNEB060[VNEB060i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEB060[VNEB060i]') END as vneb060_vneb060i,
+
+  ((cast(response AS json))->>'VMEB061') as vmeb061,
+
+  CASE WHEN ((cast(response AS json))->>'VNEB065') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNEB065') END as vneb065,
+  CASE WHEN ((cast(response AS json))->>'VNEB066') = '999' THEN '-1' WHEN ((cast(response AS json))->>'VNEB066') = '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VNEB066') END as vneb066,
 
   ((cast(response AS json))->>'VNEB067') as vneb067,
 
-, recode_into(((cast(response AS json))->>'VYEE010'), '999', '-1') as vyee010
-, recode_into(((cast(response AS json))->>'QYEE020_VYEE020x'), 'Y', '1') as VYEE020x
-, recode_into(((cast(response AS json))->>'QYEE020_VYEE020a'), 'Y', '1') as vyee020a
-, recode_into(((cast(response AS json))->>'QYEE020_VYEE020b'), 'Y', '1') as vyee020b
-, recode_into(((cast(response AS json))->>'QYEE020_VYEE020c'), 'Y', '1') as vyee020c
-, recode_into(((cast(response AS json))->>'QYEE020_VYEE020d'), 'Y', '1') as vyee020d
+  CASE WHEN ((cast(response AS json))->>'VYEE010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEE010') END as vyee010,
+  CASE WHEN ((cast(response AS json))->>'QYEE020[VYEE020x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEE020[VYEE020x]') END as qyee020_vyee020x,
+  CASE WHEN ((cast(response AS json))->>'QYEE020[VYEE020a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEE020[VYEE020a]') END as qyee020_vyee020a,
+  CASE WHEN ((cast(response AS json))->>'QYEE020[VYEE020b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEE020[VYEE020b]') END as qyee020_vyee020b,
+  CASE WHEN ((cast(response AS json))->>'QYEE020[VYEE020c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEE020[VYEE020c]') END as qyee020_vyee020c,
+  CASE WHEN ((cast(response AS json))->>'QYEE020[VYEE020d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEE020[VYEE020d]') END as qyee020_vyee020d,
 
   ((cast(response AS json))->>'QZEE025') as vzee025,
 
-, recode_into(((cast(response AS json))->>'VYEE040'), '999', '-1') as vyee040
+CASE WHEN ((cast(response AS json))->>'VYEE040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEE040') END as vyee040,
 
   ((cast(response AS json))->>'VZEE041') as vzee041,
 
-, recode_into(((cast(response AS json))->>'VZEE050'), '999', '-1') as vzee050
-, recode_into(((cast(response AS json))->>'VNEB080'), '999', '-1') as vneb080
+CASE WHEN ((cast(response AS json))->>'VZEE050') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEE050') END as vzee050,
+CASE WHEN ((cast(response AS json))->>'VNEB080') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNEB080') END as vneb080,
 
   ((cast(response AS json))->>'VMEB081') as vmeb081,
 
-  CASE WHEN patient.gender='Male' THEN '1' ELSE '2' as VMEC010
-, recode_into(recode_into(patient.gender, 'Male', '1'), 'Female', '2') as VMEC010
+CASE WHEN patient.gender='Male' THEN '1' ELSE '2' END as VMEC010,
 
   patient.birthdate as VMEC020,
   NULL as VMEC021,
@@ -70,127 +70,126 @@ SELECT
   NULL as vmec030d,
   NULL as vmec030e,
 
-, recode_into(((cast(response AS json))->>'VMEC040'), '999', '-1') as vmec040
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050yy'), 'Y', '1') as VNEC050yy
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050ch'), 'Y', '1') as VNEC050ch
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050al'), 'Y', '1') as VNEC050al
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050dz'), 'Y', '1') as VNEC050dz
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050de'), 'Y', '1') as VNEC050de
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050at'), 'Y', '1') as VNEC050at
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050ba'), 'Y', '1') as VNEC050ba
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050br'), 'Y', '1') as VNEC050br
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050ca'), 'Y', '1') as VNEC050ca
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050hr'), 'Y', '1') as VNEC050hr
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050es'), 'Y', '1') as VNEC050es
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050us'), 'Y', '1') as VNEC050us
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050fr'), 'Y', '1') as VNEC050fr
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050gb'), 'Y', '1') as VNEC050gb
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050gr'), 'Y', '1') as VNEC050gr
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050hu'), 'Y', '1') as VNEC050hu
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050it'), 'Y', '1') as VNEC050it
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050xk'), 'Y', '1') as VNEC050xk
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050mk'), 'Y', '1') as VNEC050mk
+CASE WHEN ((cast(response AS json))->>'VMEC040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VMEC040') END as vmec040,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050yy]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050yy]') END as VNEC050yy,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050ch]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050ch]') END as VNEC050ch,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050al]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050al]') END as VNEC050al,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050dz]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050dz]') END as VNEC050dz,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050de]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050de]') END as VNEC050de,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050at]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050at]') END as VNEC050at,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050ba]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050ba]') END as VNEC050ba,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050br]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050br]') END as VNEC050br,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050ca]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050ca]') END as VNEC050ca,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050hr]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050hr]') END as VNEC050hr,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050es]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050es]') END as VNEC050es,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050us]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050us]') END as VNEC050us,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050fr]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050fr]') END as VNEC050fr,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050gb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050gb]') END as VNEC050gb,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050gr]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050gr]') END as VNEC050gr,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050hu]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050hu]') END as VNEC050hu,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050it]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050it]') END as VNEC050it,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050xk]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050xk]') END as VNEC050xk,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050mk]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050mk]') END as VNEC050mk,
 
   NULL as VNEC050ms,
 
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050me'), 'Y', '1') as VNEC050me
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050nl'), 'Y', '1') as VNEC050nl
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050pt'), 'Y', '1') as VNEC050pt
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050rs'), 'Y', '1') as VNEC050rs
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050lk'), 'Y', '1') as VNEC050lk
-, recode_into(((cast(response AS json))->>'QNEC050_VNEC050tr'), 'Y', '1') as VNEC050tr
-, recode_into(((cast(response AS json))->>'VNEC050x'), 'Y', '1') as VNEC050x
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050me]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050me]') END as VNEC050me,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050nl]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050nl]') END as VNEC050nl,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050pt]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050pt]') END as VNEC050pt,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050rs]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050rs]') END as VNEC050rs,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050lk]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050lk]') END as VNEC050lk,
+CASE WHEN ((cast(response AS json))->>'QNEC050[VNEC050tr]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC050[VNEC050tr]') END as VNEC050tr,
+CASE WHEN ((cast(response AS json))->>'VNEC050x') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'VNEC050x') END as VNEC050x,
 
-, recode_into(((cast(response AS json))->>'QNEC060QNEC065_VNEC060'), '999', '-1') as vnec060
+CASE WHEN ((cast(response AS json))->>'QNEC060QNEC065[VNEC060]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC060QNEC065[VNEC060]') END as vnec060,
 
   ((cast(response AS json))->>'VMEC061') as vmec061,
 
-, recode_into(((cast(response AS json))->>'QNEC060QNEC065_VNEC065'), '999', '-1') as vnec065
+CASE WHEN ((cast(response AS json))->>'QNEC060QNEC065[VNEC065]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC060QNEC065[VNEC065]') END as vnec065,
 
   ((cast(response AS json))->>'VMEC066') as vmec066,
 
-, recode_into(((cast(response AS json))->>'VNEC067'), '999', '-1') as vnec067
-, recode_into(((cast(response AS json))->>'VNEC068'), '999', '-1') as vnec068
-, recode_into(((cast(response AS json))->>'QNEC070QNEC075_VNEC070'), '999', '-1') as vnec070
-, recode_into(((cast(response AS json))->>'QNEC070QNEC075_VNEC075'), '999', '-1') as vnec075
-, recode_into(((cast(response AS json))->>'VZES010'), '999', '-1') as vzes010
-, recode_into(((cast(response AS json))->>'VZES015'), '999', '-1') as vzes015
-, recode_into(((cast(response AS json))->>'VZES020'), '999', '-1') as vzes020
-, recode_into(((cast(response AS json))->>'VZES050'), '999', '-1') as vzes050
-, recode_into(((cast(response AS json))->>'QZES060QZES070_VZES060'), '999', '-1') as vzes060
-, recode_into(((cast(response AS json))->>'QZES060QZES070_VZES070'), '999', '-1') as vzes070
-, recode_into(((cast(response AS json))->>'QZES080_VZES080x'), 'Y', '1') as VZES080x
-, recode_into(((cast(response AS json))->>'QZES080_VZES080y'), 'Y', '1') as vzes080y
-, recode_into(((cast(response AS json))->>'QZES080_VZES080a'), 'Y', '1') as vzes080a
-, recode_into(((cast(response AS json))->>'QZES080_VZES080b'), 'Y', '1') as vzes080b
-, recode_into(((cast(response AS json))->>'QZES080_VZES080c'), 'Y', '1') as vzes080c
-, recode_into(((cast(response AS json))->>'QZES080_VZES080d'), 'Y', '1') as vzes080d
+CASE WHEN ((cast(response AS json))->>'VNEC067') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNEC067') END as vnec067,
+CASE WHEN ((cast(response AS json))->>'VNEC068') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNEC068') END as vnec068,
+CASE WHEN ((cast(response AS json))->>'QNEC070QNEC075[VNEC070]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC070QNEC075[VNEC070]') END as vnec070,
+CASE WHEN ((cast(response AS json))->>'QNEC070QNEC075[VNEC075]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC070QNEC075[VNEC075]') END as vnec075,
+CASE WHEN ((cast(response AS json))->>'VZES010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZES010') END as vzes010,
+CASE WHEN ((cast(response AS json))->>'VZES015') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZES015') END as vzes015,
+CASE WHEN ((cast(response AS json))->>'VZES020') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZES020') END as vzes020,
+CASE WHEN ((cast(response AS json))->>'VZES050') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZES050') END as vzes050,
+CASE WHEN ((cast(response AS json))->>'QZES060QZES070[VZES060]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QZES060QZES070[VZES060]') END as vzes060,
+CASE WHEN ((cast(response AS json))->>'QZES060QZES070[VZES070]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QZES060QZES070[VZES070]') END as vzes070,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080x]') END as VZES080x,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080y]') END as vzes080y,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080a]') END as vzes080a,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080b]') END as vzes080b,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080c]') END as vzes080c,
+CASE WHEN ((cast(response AS json))->>'QZES080[VZES080d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZES080[VZES080d]') END as vzes080d,
 
   ((cast(response AS json))->>'VZES081') as vzes081,
 
-, recode_into(((cast(response AS json))->>'QNEC080QNEC090_VNEC080'), '999', '-1') as vnec080
+CASE WHEN ((cast(response AS json))->>'QNEC080QNEC090[VNEC080]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC080QNEC090[VNEC080]') END as vnec080,
 
   ((cast(response AS json))->>'VMEC081') as vmec081,
 
-, recode_into(((cast(response AS json))->>'QNEC080QNEC090_VNEC090'), '999', '-1') as vnec090
+CASE WHEN ((cast(response AS json))->>'QNEC080QNEC090[VNEC090]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC080QNEC090[VNEC090]') END as vnec090,
 
   ((cast(response AS json))->>'VMEC091') as vmec091,
 
-, recode_into(((cast(response AS json))->>'QNEC100QNEC110_VNEC100'), '999', '-1') as vnec100
+CASE WHEN ((cast(response AS json))->>'QNEC100QNEC110[VNEC100]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC100QNEC110[VNEC100]') END as vnec100,
 
   ((cast(response AS json))->>'VMEC101') as vmec101,
 
-, recode_into(((cast(response AS json))->>'QNEC100QNEC110_VNEC110'), '999', '-1') as vnec110
+CASE WHEN ((cast(response AS json))->>'QNEC100QNEC110[VNEC110]') = '999' THEN '-1' ELSE ((cast(response AS json))->>'QNEC100QNEC110[VNEC110]') END as vnec110,
 
   ((cast(response AS json))->>'VMEC111') as vmec111,
 
-, recode_into(((cast(response AS json))->>'VYEF010'), '999', '-1') as vyef010
+CASE WHEN ((cast(response AS json))->>'VYEF010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEF010') END as vyef010,
 
   ((cast(response AS json))->>'VZEF011') as vzef011,
 
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120x'), 'Y', '1') as VNEC120x
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120y'), 'Y', '1') as VNEC120y
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120a'), 'Y', '1') as VNEC120a
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120b'), 'Y', '1') as VNEC120b
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120c'), 'Y', '1') as VNEC120c
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120d'), 'Y', '1') as VNEC120d
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120e'), 'Y', '1') as VNEC120e
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120f'), 'Y', '1') as VNEC120f
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120g'), 'Y', '1') as VNEC120g
-, recode_into(((cast(response AS json))->>'QNEC120_VNEC120h'), 'Y', '1') as VNEC120h
-, recode_into(((cast(response AS json))->>'VZEF030'),'999', '-1') as vzef030
-, recode_into(((cast(response AS json))->>'VYEF040'), '999', '-1') as vyef040
-, recode_into(((cast(response AS json))->>'QNED0701_VNED070a'), 'Y', '1') as vneD070a
-, recode_into(((cast(response AS json))->>'QNED0702_VNED070ba'), 'Y', '1') as vneD070ba
-, recode_into(((cast(response AS json))->>'QNED0702_VNED070bb'), 'Y', '1') as vneD070bb
-, recode_into(((cast(response AS json))->>'QNED0702_VNeD070bc'), 'Y', '1') as vneD070bc
-, recode_into(((cast(response AS json))->>'QNED0702_VNED070bd'), 'Y', '1') as vneD070bd
-, recode_into(((cast(response AS json))->>'QNED0702_VNED070be'), 'Y', '1') as vneD070be
-, recode_into(((cast(response AS json))->>'QNED0703_VNED070ca'), 'Y', '1') as vneD070ca
-, recode_into(((cast(response AS json))->>'QNED0703_VNED070cb'), 'Y', '1') as vneD070cb
-, recode_into(((cast(response AS json))->>'QNED0703_VNED070cc'), 'Y', '1') as vneD070cc
-, recode_into(((cast(response AS json))->>'QNED0704_VNED070da'), 'Y', '1') as vneD070da
-, recode_into(((cast(response AS json))->>'QNED0704_VNED070db'), 'Y', '1') as vneD070db
-, recode_into(((cast(response AS json))->>'QNED0704_VNED070dc'), 'Y', '1') as vneD070dc
-, recode_into(((cast(response AS json))->>'QNED0704_VNED070dd'), 'Y', '1') as vneD070dd
-, recode_into(((cast(response AS json))->>'QNED0704_VNED070de'), 'Y', '1') as vneD070de
-, recode_into(((cast(response AS json))->>'QNED0705_VNED070ea'), 'Y', '1') as vneD070ea
-, recode_into(((cast(response AS json))->>'QNED0705_VNED070eb'), 'Y', '1') as vneD070eb
-, recode_into(((cast(response AS json))->>'QNED0705_VNED070ec'), 'Y', '1') as vneD070ec
-, recode_into(((cast(response AS json))->>'QNED0705_VNED070ed'), 'Y', '1') as vneD070ed
-, recode_into(((cast(response AS json))->>'QNED0706_VNED070fa'), 'Y', '1') as vneD070fa
-, recode_into(((cast(response AS json))->>'QNED0706_VNED070fb'), 'Y', '1') as vneD070fb
-, recode_into(((cast(response AS json))->>'QNED0706_VNED070fc'), 'Y', '1') as vneD070fc
-, recode_into(((cast(response AS json))->>'QNED0707_VNED070g'), 'Y', '1') as vneD070g
-, recode_into(((cast(response AS json))->>'QNED0707_VNED070h'), 'Y', '1') as vneD070h
-, recode_into(((cast(response AS json))->>'QNED0707_VNED070i'), 'Y', '1') as vneD070i
-, recode_into(((cast(response AS json))->>'QNED0707_VNED070j'), 'Y', '1') as vneD070j
-, recode_into(((cast(response AS json))->>'QNED0708_VNED070ka'), 'Y', '1') as vneD070ka
-, recode_into(((cast(response AS json))->>'QNED0708_VNED070kb'), 'Y', '1') as vneD070kb
-, recode_into(((cast(response AS json))->>'QNED0708_VNED070kc'), 'Y', '1') as vneD070kc
-, recode_into(((cast(response AS json))->>'QNED0708_VNED070kd'), 'Y', '1') as vneD070kd
-, recode_into(((cast(response AS json))->>'VNED070x'), '999', '-1') as VNED070x
-
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120x]') END as VNEC120x,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120y]') END as VNEC120y,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120a]') END as VNEC120a,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120b]') END as VNEC120b,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120c]') END as VNEC120c,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120d]') END as VNEC120d,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120e]') END as VNEC120e,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120f]') END as VNEC120f,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120g]') END as VNEC120g,
+CASE WHEN ((cast(response AS json))->>'QNEC120[VNEC120h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNEC120[VNEC120h]') END as VNEC120h,
+CASE WHEN ((cast(response AS json))->>'VZEF030') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEF030') END as vzef030,
+CASE WHEN ((cast(response AS json))->>'VYEF040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEF040') END as vyef040,
+CASE WHEN ((cast(response AS json))->>'QNED0701[VNED070a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0701[VNED070a]') END as vneD070a,
+CASE WHEN ((cast(response AS json))->>'QNED0702[VNED070ba]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0702[VNED070ba]') END as vneD070ba,
+CASE WHEN ((cast(response AS json))->>'QNED0702[VNED070bb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0702[VNED070bb]') END as vneD070bb,
+CASE WHEN ((cast(response AS json))->>'QNED0702[VNeD070bc]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0702[VNeD070bc]') END as vneD070bc,
+CASE WHEN ((cast(response AS json))->>'QNED0702[VNED070bd]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0702[VNED070bd]') END as vneD070bd,
+CASE WHEN ((cast(response AS json))->>'QNED0702[VNED070be]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0702[VNED070be]') END as vneD070be,
+CASE WHEN ((cast(response AS json))->>'QNED0703[VNED070ca]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0703[VNED070ca]') END as vneD070ca,
+CASE WHEN ((cast(response AS json))->>'QNED0703[VNED070cb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0703[VNED070cb]') END as vneD070cb,
+CASE WHEN ((cast(response AS json))->>'QNED0703[VNED070cc]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0703[VNED070cc]') END as vneD070cc,
+CASE WHEN ((cast(response AS json))->>'QNED0704[VNED070da]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0704[VNED070da]') END as vneD070da,
+CASE WHEN ((cast(response AS json))->>'QNED0704[VNED070db]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0704[VNED070db]') END as vneD070db,
+CASE WHEN ((cast(response AS json))->>'QNED0704[VNED070dc]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0704[VNED070dc]') END as vneD070dc,
+CASE WHEN ((cast(response AS json))->>'QNED0704[VNED070dd]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0704[VNED070dd]') END as vneD070dd,
+CASE WHEN ((cast(response AS json))->>'QNED0704[VNED070de]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0704[VNED070de]') END as vneD070de,
+CASE WHEN ((cast(response AS json))->>'QNED0705[VNED070ea]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0705[VNED070ea]') END as vneD070ea,
+CASE WHEN ((cast(response AS json))->>'QNED0705[VNED070eb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0705[VNED070eb]') END as vneD070eb,
+CASE WHEN ((cast(response AS json))->>'QNED0705[VNED070ec]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0705[VNED070ec]') END as vneD070ec,
+CASE WHEN ((cast(response AS json))->>'QNED0705[VNED070ed]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0705[VNED070ed]') END as vneD070ed,
+CASE WHEN ((cast(response AS json))->>'QNED0706[VNED070fa]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0706[VNED070fa]') END as vneD070fa,
+CASE WHEN ((cast(response AS json))->>'QNED0706[VNED070fb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0706[VNED070fb]') END as vneD070fb,
+CASE WHEN ((cast(response AS json))->>'QNED0706[VNED070fc]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0706[VNED070fc]') END as vneD070fc,
+CASE WHEN ((cast(response AS json))->>'QNED0707[VNED070g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0707[VNED070g]') END as vneD070g,
+CASE WHEN ((cast(response AS json))->>'QNED0707[VNED070h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0707[VNED070h]') END as vneD070h,
+CASE WHEN ((cast(response AS json))->>'QNED0707[VNED070i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0707[VNED070i]') END as vneD070i,
+CASE WHEN ((cast(response AS json))->>'QNED0707[VNED070j]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0707[VNED070j]') END as vneD070j,
+CASE WHEN ((cast(response AS json))->>'QNED0708[VNED070ka]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0708[VNED070ka]') END as vneD070ka,
+CASE WHEN ((cast(response AS json))->>'QNED0708[VNED070kb]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0708[VNED070kb]') END as vneD070kb,
+CASE WHEN ((cast(response AS json))->>'QNED0708[VNED070kc]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0708[VNED070kc]') END as vneD070kc,
+CASE WHEN ((cast(response AS json))->>'QNED0708[VNED070kd]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED0708[VNED070kd]') END as vneD070kd,
+CASE WHEN ((cast(response AS json))->>'VNED070x') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED070x') END as VNED070x,
 
   ((cast(response AS json))->>'VNED071be') as vned071be,
   ((cast(response AS json))->>'VNED071cc') as vned071cc,
@@ -200,104 +199,107 @@ SELECT
   ((cast(response AS json))->>'VNED071j') as vned071j,
   ((cast(response AS json))->>'VNED071kd') as vned071kd,
 
-, recode_into(((cast(response AS json))->>'VNED073a'), '999', '-1') as vned073a
-, recode_into(((cast(response AS json))->>'VNED073ba'), '999', '-1') as vned073ba
-, recode_into(((cast(response AS json))->>'VNED073bb'), '999', '-1') as vned073bb
-, recode_into(((cast(response AS json))->>'VNED073bc'), '999', '-1') as vned073bc
-, recode_into(((cast(response AS json))->>'VNED073bd'), '999', '-1') as vned073bd
-, recode_into(((cast(response AS json))->>'VNED073be'), '999', '-1') as vned073be
-, recode_into(((cast(response AS json))->>'VNED073ca'), '999', '-1') as vned073ca
-, recode_into(((cast(response AS json))->>'VNED073cb'), '999', '-1') as vned073cb
-, recode_into(((cast(response AS json))->>'VNED073cc'), '999', '-1') as vned073cc
-, recode_into(((cast(response AS json))->>'VNED073da'), '999', '-1') as vned073da
-, recode_into(((cast(response AS json))->>'VNED073db'), '999', '-1') as vned073db
-, recode_into(((cast(response AS json))->>'VNED073dc'), '999', '-1') as vned073dc
-, recode_into(((cast(response AS json))->>'VNED073dd'), '999', '-1') as vned073dd
-, recode_into(((cast(response AS json))->>'VNED073de'), '999', '-1') as vned073de
-, recode_into(((cast(response AS json))->>'VNED073ea'), '999', '-1') as vned073ea
-, recode_into(((cast(response AS json))->>'VNED073eb'), '999', '-1') as vned073eb
-, recode_into(((cast(response AS json))->>'VNED073ec'), '999', '-1') as vned073ec
-, recode_into(((cast(response AS json))->>'VNED073ed'), '999', '-1') as vned073ed
-, recode_into(((cast(response AS json))->>'VNED073fa'), '999', '-1') as vned073fa
-, recode_into(((cast(response AS json))->>'VNED073fb'), '999', '-1') as vned073fb
-, recode_into(((cast(response AS json))->>'VNED073fc'), '999', '-1') as vned073fc
-, recode_into(((cast(response AS json))->>'VNED073g'), '999', '-1') as vned073g
-, recode_into(((cast(response AS json))->>'VNED073h'), '999', '-1') as vned073h
-, recode_into(((cast(response AS json))->>'VNED073i'), '999', '-1') as vned073i
-, recode_into(((cast(response AS json))->>'VNED073j'), '999', '-1') as vned073j
-, recode_into(((cast(response AS json))->>'VNED073ka'), '999', '-1') as vned073ka
-, recode_into(((cast(response AS json))->>'VNED073kb'), '999', '-1') as vned073kb
-, recode_into(((cast(response AS json))->>'VNED073kc'), '999', '-1') as vned073kc
-, recode_into(((cast(response AS json))->>'VNED073kd'), '999', '-1') as vned073kd
-, recode_into(((cast(response AS json))->>'QYED075_VYED075a'), '999', 'SYSMIS') as VYED075a
-, recode_into(((cast(response AS json))->>'QYED075_VYED075b'), '999', 'SYSMIS') as VYED075b
-, recode_into(((cast(response AS json))->>'QYED075_VYED075c'), '999', 'SYSMIS') as VYED075c
-, recode_into(((cast(response AS json))->>'QYED075_VYED075d'), '999', 'SYSMIS') as VYED075d
-, recode_into(((cast(response AS json))->>'QYED075_VYED075e'), '999', 'SYSMIS') as VYED075e
-, recode_into(((cast(response AS json))->>'QYED075_VYED075f'), '999', 'SYSMIS') as VYED075f
-, recode_into(((cast(response AS json))->>'QYED075_VYED075g'), '999', 'SYSMIS') as VYED075g
-, recode_into(((cast(response AS json))->>'QYED075_VYED075h'), '999', 'SYSMIS') as VYED075h
-, recode_into(((cast(response AS json))->>'QYED075_VYED075i'), '999', 'SYSMIS') as VYED075i
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075a'), '999', '-1') as VYED076a
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075b'), '999', '-1') as VYED076b
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075c'), '999', '-1') as VYED076c
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075d'), '999', '-1') as VYED076d
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075e'), '999', '-1') as VYED076e
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075f'), '999', '-1') as VYED076f
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075g'), '999', '-1') as VYED076g
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075h'), '999', '-1') as VYED076h
-, recode_into_null(((cast(response AS json))->>'QYED075_VYED075i'), '999', '-1') as VYED076i
-, recode_into(((cast(response AS json))->>'VNED010'), '999', '-1') as vned010
-, recode_into(((cast(response AS json))->>'VNED015'), '999', '-1') as vned015
-, recode_into(((cast(response AS json))->>'QNED016_VNED016x'), 'Y', '1') as VNED016x
-, recode_into(((cast(response AS json))->>'QNED016_VNED016a'), 'Y', '1') as vned016a
-, recode_into(((cast(response AS json))->>'QNED016_VNED016b'), 'Y', '1') as vned016b
-, recode_into(((cast(response AS json))->>'QNED016_VNED016c'), 'Y', '1') as vned016c
-, recode_into(((cast(response AS json))->>'QNED016_VNED016d'), 'Y', '1') as vned016d
-, recode_into(((cast(response AS json))->>'QNED016_VNED016e'), 'Y', '1') as vned016e
-, recode_into(((cast(response AS json))->>'QNED016_VNED016f'), 'Y', '1') as vned016f
-, recode_into(((cast(response AS json))->>'QNED016_VNED016g'), 'Y', '1') as vned016g
-, recode_into(((cast(response AS json))->>'QNED016_VNED016h'), 'Y', '1') as vned016h
-, recode_into(((cast(response AS json))->>'QNED016_VNED016i'), 'Y', '1') as vned016i
-, recode_into(((cast(response AS json))->>'QNED016_VNED016j'), 'Y', '1') as vned016j
-, recode_into(((cast(response AS json))->>'VNED025'), '999', '-1') as vned025
-, recode_into(((cast(response AS json))->>'VNED030'), '999', '-1') as vned030
+CASE WHEN ((cast(response AS json))->>'VNED073a') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073a') END as vned073a,
+CASE WHEN ((cast(response AS json))->>'VNED073ba') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ba') END as vned073ba,
+CASE WHEN ((cast(response AS json))->>'VNED073bb') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073bb') END as vned073bb,
+CASE WHEN ((cast(response AS json))->>'VNED073bc') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073bc') END as vned073bc,
+CASE WHEN ((cast(response AS json))->>'VNED073bd') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073bd') END as vned073bd,
+CASE WHEN ((cast(response AS json))->>'VNED073be') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073be') END as vned073be,
+CASE WHEN ((cast(response AS json))->>'VNED073ca') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ca') END as vned073ca,
+CASE WHEN ((cast(response AS json))->>'VNED073cb') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073cb') END as vned073cb,
+CASE WHEN ((cast(response AS json))->>'VNED073cc') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073cc') END as vned073cc,
+CASE WHEN ((cast(response AS json))->>'VNED073da') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073da') END as vned073da,
+CASE WHEN ((cast(response AS json))->>'VNED073db') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073db') END as vned073db,
+CASE WHEN ((cast(response AS json))->>'VNED073dc') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073dc') END as vned073dc,
+CASE WHEN ((cast(response AS json))->>'VNED073dd') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073dd') END as vned073dd,
+CASE WHEN ((cast(response AS json))->>'VNED073de') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073de') END as vned073de,
+CASE WHEN ((cast(response AS json))->>'VNED073ea') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ea') END as vned073ea,
+CASE WHEN ((cast(response AS json))->>'VNED073eb') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073eb') END as vned073eb,
+CASE WHEN ((cast(response AS json))->>'VNED073ec') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ec') END as vned073ec,
+CASE WHEN ((cast(response AS json))->>'VNED073ed') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ed') END as vned073ed,
+CASE WHEN ((cast(response AS json))->>'VNED073fa') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073fa') END as vned073fa,
+CASE WHEN ((cast(response AS json))->>'VNED073fb') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073fb') END as vned073fb,
+CASE WHEN ((cast(response AS json))->>'VNED073fc') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073fc') END as vned073fc,
+CASE WHEN ((cast(response AS json))->>'VNED073g') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073g') END as vned073g,
+CASE WHEN ((cast(response AS json))->>'VNED073h') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073h') END as vned073h,
+CASE WHEN ((cast(response AS json))->>'VNED073i') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073i') END as vned073i,
+CASE WHEN ((cast(response AS json))->>'VNED073j') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073j') END as vned073j,
+CASE WHEN ((cast(response AS json))->>'VNED073ka') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073ka') END as vned073ka,
+CASE WHEN ((cast(response AS json))->>'VNED073kb') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073kb') END as vned073kb,
+CASE WHEN ((cast(response AS json))->>'VNED073kc') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073kc') END as vned073kc,
+CASE WHEN ((cast(response AS json))->>'VNED073kd') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED073kd') END as vned073kd,
+
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075a]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075a]') END as VYED075a,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075b]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075b]') END as VYED075b,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075c]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075c]') END as VYED075c,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075d]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075d]') END as VYED075d,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075e]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075e]') END as VYED075e,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075f]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075f]') END as VYED075f,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075g]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075g]') END as VYED075g,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075h]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075h]') END as VYED075h,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075i]') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'QYED075[VYED075i]') END as VYED075i,
+
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075a]') = '999' THEN '-1' ELSE NULL END as VYED076a,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075b]') = '999' THEN '-1' ELSE NULL END as VYED076b,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075c]') = '999' THEN '-1' ELSE NULL END as VYED076c,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075d]') = '999' THEN '-1' ELSE NULL END as VYED076d,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075e]') = '999' THEN '-1' ELSE NULL END as VYED076e,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075f]') = '999' THEN '-1' ELSE NULL END as VYED076f,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075g]') = '999' THEN '-1' ELSE NULL END as VYED076g,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075h]') = '999' THEN '-1' ELSE NULL END as VYED076h,
+CASE WHEN ((cast(response AS json))->>'QYED075[VYED075i]') = '999' THEN '-1' ELSE NULL END as VYED076i,
+
+CASE WHEN ((cast(response AS json))->>'VNED010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED010') END as vned010,
+CASE WHEN ((cast(response AS json))->>'VNED015') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED015') END as vned015,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016x]') END as VNED016x,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016a]') END as vned016a,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016b]') END as vned016b,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016c]') END as vned016c,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016d]') END as vned016d,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016e]') END as vned016e,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016f]') END as vned016f,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016g]') END as vned016g,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016h]') END as vned016h,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016i]') END as vned016i,
+CASE WHEN ((cast(response AS json))->>'QNED016[VNED016j]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QNED016[VNED016j]') END as vned016j,
+CASE WHEN ((cast(response AS json))->>'VNED025') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED025') END as vned025,
+CASE WHEN ((cast(response AS json))->>'VNED030') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED030') END as vned030,
 
   ((cast(response AS json))->>'VNED031') as vned031,
 
-, recode_into(((cast(response AS json))->>'VMED040'), '999', 'SYSMIS') as VMED040
-, recode_into_null(((cast(response AS json))->>'VMED040'), '999', '-1') as VMED041
-, recode_into(((cast(response AS json))->>'VMED050'), '999', 'SYSMIS') as VMED050
-, recode_into_null(((cast(response AS json))->>'VMED050'), '999', '-1') as VMED051
-, recode_into(((cast(response AS json))->>'VMED060'), '999', 'SYSMIS') as VMED060
-, recode_into_null(((cast(response AS json))->>'VMED060'), '999', '-1') as VMED061
-, recode_into(((cast(response AS json))->>'VZEO010'), '999', '-1') as vzeo010
+CASE WHEN ((cast(response AS json))->>'VMED040') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VMED040') END as VMED040,
+CASE WHEN ((cast(response AS json))->>'VMED040') = '999' THEN '-1' ELSE NULL END as VMED041,
+CASE WHEN ((cast(response AS json))->>'VMED050') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VMED050') END as VMED050,
+CASE WHEN ((cast(response AS json))->>'VMED050') = '999' THEN '-1' ELSE NULL END as VMED051,
+CASE WHEN ((cast(response AS json))->>'VMED060') = '999' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VMED060') END as VMED060,
+CASE WHEN ((cast(response AS json))->>'VMED060') = '999' THEN '-1' ELSE NULL END as VMED061,
+CASE WHEN ((cast(response AS json))->>'VZEO010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEO010') END as vzeo010,
 
   ((cast(response AS json))->>'VZEO011') as vzeo011,
 
-, recode_into(((cast(response AS json))->>'VNED026'), '999', '-1') as vned026
+CASE WHEN ((cast(response AS json))->>'VNED026') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED026') END as vned026,
 
   ((cast(response AS json))->>'VMED045') as vmed045,
 
-, recode_into(recode_into(((cast(response AS json))->>'VMED046'), '999', '-1'), '1', 'SYSMIS') as VMED046
+CASE WHEN ((cast(response AS json))->>'VMED046') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE NULL END as VMED046,
 
   ((cast(response AS json))->>'VMED055') as vmed055,
 
-, recode_into(recode_into(((cast(response AS json))->>'VMED056'), '999', '-1'), '1', 'SYSMIS') as VMED056
+CASE WHEN ((cast(response AS json))->>'VMED056') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE NULL END as VMED056,
 
   ((cast(response AS json))->>'VMED065') as vmed065,
 
-, recode_into(recode_into(((cast(response AS json))->>'VMED066'), '999', '-1'), '1', 'SYSMIS') as VMED066
-, recode_into(((cast(response AS json))->>'VZEA010'), '999', '-1') as vzea010
-, recode_into(((cast(response AS json))->>'VZEA020'), '999', '-1') as vzea020
-, recode_into(((cast(response AS json))->>'VZEA030'), '999', '-1') as vzea030
-, recode_into(((cast(response AS json))->>'VZEA040'), '999', '-1') as vzea040
-, recode_into(((cast(response AS json))->>'VZEA050'), '999', '-1') as vzea050
-, recode_into(((cast(response AS json))->>'VZEA060'), '999', '-1') as vzea060
-, recode_into(((cast(response AS json))->>'VZEA070'), '999', '-1') as vzea070
-, recode_into(((cast(response AS json))->>'VZEA080'), '999', '-1') as vzea080
-, recode_into(((cast(response AS json))->>'VZEA090'), '999', '-1') as vzea090
-, recode_into(((cast(response AS json))->>'VZEA100'), '999', '-1') as vzea100
+CASE WHEN ((cast(response AS json))->>'VMED066') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE NULL END as VMED066,
+CASE WHEN ((cast(response AS json))->>'VZEA010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA010') END as vzea010,
+CASE WHEN ((cast(response AS json))->>'VZEA020') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA020') END as vzea020,
+CASE WHEN ((cast(response AS json))->>'VZEA030') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA030') END as vzea030,
+CASE WHEN ((cast(response AS json))->>'VZEA040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA040') END as vzea040,
+CASE WHEN ((cast(response AS json))->>'VZEA050') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA050') END as vzea050,
+CASE WHEN ((cast(response AS json))->>'VZEA060') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA060') END as vzea060,
+CASE WHEN ((cast(response AS json))->>'VZEA070') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA070') END as vzea070,
+CASE WHEN ((cast(response AS json))->>'VZEA080') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA080') END as vzea080,
+CASE WHEN ((cast(response AS json))->>'VZEA090') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA090') END as vzea090,
+CASE WHEN ((cast(response AS json))->>'VZEA100') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA100') END as vzea100,
 
   NULL as vzea110,
   NULL as VZEA111,
@@ -313,146 +315,153 @@ SELECT
   ((cast(response AS json))->>'QZEA120[VZEA120i]') as qzea120_vzea120i,
   ((cast(response AS json))->>'QZEA120[VZEA120j]') as qzea120_vzea120j,
 
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120a'), '0', '1') as VZEA121a
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120b'), '0', '1') as VZEA121b
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120c'), '0', '1') as VZEA121c
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120d'), '0', '1') as VZEA121d
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120e'), '0', '1') as VZEA121e
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120f'), '0', '1') as VZEA121f
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120g'), '0', '1') as VZEA121g
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120h'), '0', '1') as VZEA121h
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120i'), '0', '1') as VZEA121i
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120j'), '0', '1') as VZEA121j
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120a'), 'SYSMIS', '-1') as VZEA122a
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120b'), 'SYSMIS', '-1') as VZEA122b
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120c'), 'SYSMIS', '-1') as VZEA122c
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120d'), 'SYSMIS', '-1') as VZEA122d
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120e'), 'SYSMIS', '-1') as VZEA122e
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120f'), 'SYSMIS', '-1') as VZEA122f
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120g'), 'SYSMIS', '-1') as VZEA122g
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120h'), 'SYSMIS', '-1') as VZEA122h
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120i'), 'SYSMIS', '-1') as VZEA122i
-, recode_into(((cast(response AS json))->>'QZEA120_VZEA120j'), 'SYSMIS', '-1') as VZEA122j
-, recode_into(((cast(response AS json))->>'VZEA130'), '999', '-1') as vzea130
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120a]') = '0' THEN '1' ELSE NULL END as VZEA121a,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120b]') = '0' THEN '1' ELSE NULL END as VZEA121b,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120c]') = '0' THEN '1' ELSE NULL END as VZEA121c,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120d]') = '0' THEN '1' ELSE NULL END as VZEA121d,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120e]') = '0' THEN '1' ELSE NULL END as VZEA121e,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120f]') = '0' THEN '1' ELSE NULL END as VZEA121f,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120g]') = '0' THEN '1' ELSE NULL END as VZEA121g,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120h]') = '0' THEN '1' ELSE NULL END as VZEA121h,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120i]') = '0' THEN '1' ELSE NULL END as VZEA121i,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120j]') = '0' THEN '1' ELSE NULL END as VZEA121j,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120a]') = '' THEN '-1' ELSE NULL END as VZEA122a,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120b]') = '' THEN '-1' ELSE NULL END as VZEA122b,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120c]') = '' THEN '-1' ELSE NULL END as VZEA122c,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120d]') = '' THEN '-1' ELSE NULL END as VZEA122d,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120e]') = '' THEN '-1' ELSE NULL END as VZEA122e,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120f]') = '' THEN '-1' ELSE NULL END as VZEA122f,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120g]') = '' THEN '-1' ELSE NULL END as VZEA122g,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120h]') = '' THEN '-1' ELSE NULL END as VZEA122h,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120i]') = '' THEN '-1' ELSE NULL END as VZEA122i,
+CASE WHEN ((cast(response AS json))->>'QZEA120[VZEA120j]') = '' THEN '-1' ELSE NULL END as VZEA122j,
+
+CASE WHEN ((cast(response AS json))->>'VZEA130') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA130') END as vzea130,
 
   ((cast(response AS json))->>'VZEA135') as vzea135,
 
-, recode_into(recode_into(((cast(response AS json))->>'VZEA136'), '999', '-1'), '1', 'SYSMIS') as VZEA136
-, recode_into(((cast(response AS json))->>'VZEA140'), '999', '-1') as vzea140
-, recode_into(((cast(response AS json))->>'VZET010'), '999', '-1') as vzet010
-, recode_into(((cast(response AS json))->>'VZET020'), '999', '-1') as vzet020
-, recode_into(((cast(response AS json))->>'VZET030'), '999', '-1') as vzet030
-, recode_into(((cast(response AS json))->>'VZET040'), '999', '-1') as vzet040
-, recode_into(((cast(response AS json))->>'VZET050'), '999', '-1') as vzet050
-, recode_into(((cast(response AS json))->>'VZET060'), '999', '-1') as vzet060
-, recode_into(((cast(response AS json))->>'VZET070'), '999', '-1') as vzet070
+CASE WHEN ((cast(response AS json))->>'VZEA136') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VZEA136') END as VZEA136,
+CASE WHEN ((cast(response AS json))->>'VZEA140') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEA140') END as vzea140,
+CASE WHEN ((cast(response AS json))->>'VZET010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET010') END as vzet010,
+CASE WHEN ((cast(response AS json))->>'VZET020') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET020') END as vzet020,
+CASE WHEN ((cast(response AS json))->>'VZET030') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET030') END as vzet030,
+CASE WHEN ((cast(response AS json))->>'VZET040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET040') END as vzet040,
+CASE WHEN ((cast(response AS json))->>'VZET050') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET050') END as vzet050,
+CASE WHEN ((cast(response AS json))->>'VZET060') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET060') END as vzet060,
+CASE WHEN ((cast(response AS json))->>'VZET070') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZET070') END as vzet070,
 
   NULL as vzet080,
   NULL as VZET081,
 
-, recode_into(((cast(response AS json))->>'VNED090'), '999', '-1') as vned090
-, recode_into(((cast(response AS json))->>'VNED093'), '999', '-1') as vned093
-, recode_into(((cast(response AS json))->>'VNED095'), '999', '-1') as vned095
+CASE WHEN ((cast(response AS json))->>'VNED090') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED090') END as vned090,
+CASE WHEN ((cast(response AS json))->>'VNED093') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED093') END as vned093,
+CASE WHEN ((cast(response AS json))->>'VNED095') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED095') END as vned095,
 
   ((cast(response AS json))->>'VMED096') as vmed096,
 
-, recode_into(recode_into(((cast(response AS json))->>'VMED097'), '999', '-1'), '1', 'SYSMIS')  as vmed097
-, recode_into(((cast(response AS json))->>'VNED092'), '999', '-1') as vned092
-, recode_into(((cast(response AS json))->>'VNED094'), '999', '-1') as vned094
-, recode_into(((cast(response AS json))->>'VNED098'), '999', '-1') as VNED098
-, recode_into(((cast(response AS json))->>'VZEU010'), '999', '-1') as vzeu010
+CASE WHEN ((cast(response AS json))->>'VMED097') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VMED097') END as vmed097,
+CASE WHEN ((cast(response AS json))->>'VNED092') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED092') END as vned092,
+CASE WHEN ((cast(response AS json))->>'VNED094') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED094') END as vned094,
+CASE WHEN ((cast(response AS json))->>'VNED098') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VNED098') END as VNED098,
+CASE WHEN ((cast(response AS json))->>'VZEU010') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEU010') END as vzeu010,
 
   ((cast(response AS json))->>'QZEU011') as vzeu011,
 
-, recode_into(((cast(response AS json))->>'VZEU020'), '999', '-1') as vzeu020
-, recode_into(((cast(response AS json))->>'QZEU025_VZEU025x'), 'Y', '1') as VZEU025x  
-, recode_into(((cast(response AS json))->>'QZEU025_VZEU025a'), 'Y', '1') as VZEU025a
-, recode_into(((cast(response AS json))->>'QZEU025_VZEU025b'), 'Y', '1') as VZEU025b
-, recode_into(((cast(response AS json))->>'QZEU025_VZEU025c'), 'Y', '1') as VZEU025c
-, recode_into(((cast(response AS json))->>'QZEU025_VZEU025d'), 'Y', '1') as VZEU025d
+CASE WHEN ((cast(response AS json))->>'VZEU020') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VZEU020') END as vzeu020,
+CASE WHEN ((cast(response AS json))->>'QZEU025[VZEU025x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU025[VZEU025x]') END as VZEU025x,
+CASE WHEN ((cast(response AS json))->>'QZEU025[VZEU025a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU025[VZEU025a]') END as VZEU025a,
+CASE WHEN ((cast(response AS json))->>'QZEU025[VZEU025b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU025[VZEU025b]') END as VZEU025b,
+CASE WHEN ((cast(response AS json))->>'QZEU025[VZEU025c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU025[VZEU025c]') END as VZEU025c,
+CASE WHEN ((cast(response AS json))->>'QZEU025[VZEU025d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU025[VZEU025d]') END as VZEU025d,
 
   ((cast(response AS json))->>'VZEU030') as vzeu030,
 
-, recode_into(recode_into(((cast(response AS json))->>'VZEU031'), '999', '-1'), '1', 'SYSMIS') as VZEU031
+CASE WHEN ((cast(response AS json))->>'VZEU031') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VZEU031') END as VZEU031,
 
   ((cast(response AS json))->>'VZEU040') as vzeu040,
 
-, recode_into(recode_into(((cast(response AS json))->>'VZEU041'), '999', '-1'), '1', 'SYSMIS') as VZEU041
+CASE WHEN ((cast(response AS json))->>'VZEU041') = '999' THEN '-1' WHEN '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VZEU041') END as VZEU041,
 
   NULL as vzeu050,
   NULL as VZEU051,
 
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070x'), 'Y', '1') as VZEU070x
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070y'), 'Y', '1') as VZEU070y
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070a'), 'Y', '1') as VZEU070a
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070b'), 'Y', '1') as VZEU070b
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070c'), 'Y', '1') as VZEU070c
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070d'), 'Y', '1') as VZEU070d
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070e'), 'Y', '1') as VZEU070e
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070f'), 'Y', '1') as VZEU070f
-, recode_into(((cast(response AS json))->>'QZEU070_VZEU070g'), 'Y', '1') as VZEU070g
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070x]') END as VZEU070x,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070y]') END as VZEU070y,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070a]') END as VZEU070a,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070b]') END as VZEU070b,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070c]') END as VZEU070c,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070d]') END as VZEU070d,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070e]') END as VZEU070e,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070f]') END as VZEU070f,
+CASE WHEN ((cast(response AS json))->>'QZEU070[VZEU070g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEU070[VZEU070g]') END as VZEU070g,
 
   ((cast(response AS json))->>'VZEU071') as vzeu071,
 
-, recode_into(((cast(response AS json))->>'VYEK040'), '999', '-1') as vyek040
-, recode_into(((cast(response AS json))->>'VYEK041'), '999', '-1') as vyek041
-, recode_into(((cast(response AS json))->>'VYEK060'), '999', '-1') as vyek060
-, recode_into(((cast(response AS json))->>'VYEK061'), '999', '-1') as vyek061
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010x'), 'Y', '1') as VZEK010x
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010y'), 'Y', '1') as vzek010y
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010a'), 'Y', '1') as vzek010a
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010b'), 'Y', '1') as vzek010b
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010c'), 'Y', '1') as vzek010c
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010d'), 'Y', '1') as vzek010d
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010e'), 'Y', '1') as vzek010e
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010f'), 'Y', '1') as vzek010f
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010g'), 'Y', '1') as vzek010g
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010h'), 'Y', '1') as vzek010h
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010i'), 'Y', '1') as vzek010i
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010j'), 'Y', '1') as vzek010j
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010k'), 'Y', '1') as vzek010k
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010l'), 'Y', '1') as vzek010l
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010m'), 'Y', '1') as vzek010m
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010n'), 'Y', '1') as vzek010n
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010o'), 'Y', '1') as vzek010o
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010p'), 'Y', '1') as vzek010p
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010q'), 'Y', '1') as vzek010q
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010r'), 'Y', '1') as vzek010r
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010s'), 'Y', '1') as vzek010s
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010t'), 'Y', '1') as vzek010t
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010u'), 'Y', '1') as vzek010u
-, recode_into(((cast(response AS json))->>'QZEK010_VZEK010v'), 'Y', '1') as vzek010v
+CASE WHEN ((cast(response AS json))->>'VYEK040') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEK040') END as vyek040,
+CASE WHEN ((cast(response AS json))->>'VYEK041') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEK041') END as vyek041,
+CASE WHEN ((cast(response AS json))->>'VYEK060') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEK060') END as vyek060,
+CASE WHEN ((cast(response AS json))->>'VYEK061') = '999' THEN '-1' ELSE ((cast(response AS json))->>'VYEK061') END as vyek061,
+
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010x]') END as VZEK010x,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010y]') END as vzek010y,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010a]') END as vzek010a,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010b]') END as vzek010b,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010c]') END as vzek010c,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010d]') END as vzek010d,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010e]') END as vzek010e,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010f]') END as vzek010f,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010g]') END as vzek010g,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010h]') END as vzek010h,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010i]') END as vzek010i,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010j]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010j]') END as vzek010j,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010k]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010k]') END as vzek010k,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010l]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010l]') END as vzek010l,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010m]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010m]') END as vzek010m,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010n]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010n]') END as vzek010n,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010o]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010o]') END as vzek010o,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010p]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010p]') END as vzek010p,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010q]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010q]') END as vzek010q,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010r]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010r]') END as vzek010r,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010s]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010s]') END as vzek010s,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010t]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010t]') END as vzek010t,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010u]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010u]') END as vzek010u,
+CASE WHEN ((cast(response AS json))->>'QZEK010[VZEK010v]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QZEK010[VZEK010v]') END as vzek010v,
 
   ((cast(response AS json))->>'VZEK011') as vzek011,
 
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010x'), 'Y', '1') as VYEP010x
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010y'), 'Y', '1') as vyep010y
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010a'), 'Y', '1') as vyep010a
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010b'), 'Y', '1') as vyep010b
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010c'), 'Y', '1') as vyep010c
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010d'), 'Y', '1') as vyep010d
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010e'), 'Y', '1') as vyep010e
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010f'), 'Y', '1') as vyep010f
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010g'), 'Y', '1') as vyep010g
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010h'), 'Y', '1') as vyep010h
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010i'), 'Y', '1') as vyep010i
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010j'), 'Y', '1') as vyep010j
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010k'), 'Y', '1') as vyep010k
-, recode_into(((cast(response AS json))->>'QYEP010_VYEP010l'), 'Y', '1') as vyep010l
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012x'), 'Y', '1') as vyep012x
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012y'), 'Y', '1') as vyep012y
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012a'), 'Y', '1') as vyep012a
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012b'), 'Y', '1') as vyep012b
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012c'), 'Y', '1') as vyep012c
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012d'), 'Y', '1') as vyep012d
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012e'), 'Y', '1') as vyep012e
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012f'), 'Y', '1') as vyep012f
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012g'), 'Y', '1') as vyep012g
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012h'), 'Y', '1') as vyep012h
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012i'), 'Y', '1') as vyep012i
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012j'), 'Y', '1') as vyep012j
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012k'), 'Y', '1') as vyep012k
-, recode_into(((cast(response AS json))->>'QYEP012_VYEP012l'), 'Y', '1') as vyep012l
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010x]') END as VYEP010x,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010y]') END as vyep010y,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010a]') END as vyep010a,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010b]') END as vyep010b,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010c]') END as vyep010c,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010d]') END as vyep010d,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010e]') END as vyep010e,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010f]') END as vyep010f,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010g]') END as vyep010g,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010h]') END as vyep010h,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010i]') END as vyep010i,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010j]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010j]') END as vyep010j,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010k]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010k]') END as vyep010k,
+CASE WHEN ((cast(response AS json))->>'QYEP010[VYEP010l]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP010[VYEP010l]') END as vyep010l,
+
+  ((cast(response AS json))->>'VYEP011') as vyep011,
+
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012x]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012x]') END as vyep012x,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012y]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012y]') END as vyep012y,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012a]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012a]') END as vyep012a,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012b]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012b]') END as vyep012b,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012c]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012c]') END as vyep012c,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012d]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012d]') END as vyep012d,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012e]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012e]') END as vyep012e,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012f]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012f]') END as vyep012f,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012g]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012g]') END as vyep012g,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012h]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012h]') END as vyep012h,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012i]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012i]') END as vyep012i,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012j]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012j]') END as vyep012j,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012k]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012k]') END as vyep012k,
+CASE WHEN ((cast(response AS json))->>'QYEP012[VYEP012l]') = 'Y' THEN '1' ELSE ((cast(response AS json))->>'QYEP012[VYEP012l]') END as vyep012l,
+
+  ((cast(response AS json))->>'VYEP013') as vyep013,
 
   ((cast(response AS json))->>'QNEC050[VNEC050ao]') as qnec050_vnec050ao,
   ((cast(response AS json))->>'QNEC050[VNEC050ar]') as qnec050_vnec050ar,
@@ -505,5 +514,8 @@ SELECT
   ((cast(response AS json))->>'QNEC050[VNEC050vn]') as qnec050_vnec050vn,
   ((cast(response AS json))->>'QNEC050[VNEC050za]') as qnec050_vnec050za
 
-FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id)
-WHERE module = '9'
+
+FROM survey_response 
+INNER JOIN patient ON(survey_response.patient = patient.id) 
+
+WHERE module = 'ch.suedhang.apps.actinfo_ein'
