@@ -253,7 +253,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-            var cs_color = ['#C5CAE9', '#C5CAE9', '#D1C4E9', '#BBDEFB'];
+            var cs_color = ['#C5CAE9', '#C5CAE9', '#F8BBD0', '#C8E6C9'];
             var current_cs_color = cs_color[current_messung.Messzeitpunkt.Messzeitpunkt];
 
 
