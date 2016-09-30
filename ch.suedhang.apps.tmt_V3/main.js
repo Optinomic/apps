@@ -195,7 +195,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var visibility = false;
         var checkArray = $scope.d.zScore.messungen_info.klinikstichproben[type];
 
-        // var a = fruits.indexOf("Eintritt");
+        var mz = tmt.full.Messzeitpunkt.Messzeitpunkt_Text
+        var pos = checkArray.indexOf(mz);
+
+        if (pos === -1) {
+            checkArray.push(mz);
+            visibility = true;
+        };
 
 
         console.log('checkKSvisible:', type, checkArray, tmt);
