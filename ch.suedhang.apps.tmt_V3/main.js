@@ -191,6 +191,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.checkKSvisible = function(type, tmt) {
+        var visibility = false;
+        var checkArray = $scope.d.zScore.messungen_info.klinikstichproben[type];
+
+        // var a = fruits.indexOf("Eintritt");
+
+
+        console.log('checkKSvisible:', type, checkArray, tmt);
+        return visibility;
+    };
+
     $scope.setZScore = function() {
 
         // INIT
@@ -209,7 +220,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "anderer": false,
             "ein_und_austritt": false,
             "count": messungen.length,
-            "klinikstichproben": []
+            "klinikstichproben": {
+                "tmtA": [],
+                "tmtB": []
+            }
         };
 
 
