@@ -258,6 +258,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT A'
 
+            A_messung.n = age_edu_mz_obj.n;
             A_messung.text_right = 'N=' + age_edu_mz_obj.n;
             if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
                 A_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
@@ -303,6 +304,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung.zscore = current_messung.percentile.z_scores.tmtB_z_rounded;
             B_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text + ' | TMT B'
 
+            B_messung.n = age_edu_mz_obj.n;
             B_messung.text_right = 'N=' + age_edu_mz_obj.n;
             if ($scope.d.zScore.normgruppe_klinik.selected_mz_array === 0) {
                 B_messung.text_right_caption = 'Klinikstichprobe | ' + current_messung.Messzeitpunkt.Messzeitpunkt_Text;
