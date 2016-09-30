@@ -38,7 +38,7 @@
         </md-button>
     </div>
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="50">
+        <div flex>
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
@@ -59,10 +59,10 @@
     </div>
     <div ng-repeat="tmt in d.zScore.tmt_a" style="margin-top: 12px;">
         <div ng-init="resp=tmt" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-            <div flex="85" flex-xs="100">
+            <div flex>
                 <z-score data="resp" options="d.zScore.options"></z-score>
             </div>
-            <div flex style="margin-left: 24px;">
+            <div flex="15" style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{tmt.full.TMTATime}}
                     <br>Fehler: {{tmt.full.TMTAError}}
                 </p>
@@ -83,7 +83,7 @@
         </md-button>
     </div>
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="50">
+        <div flex>
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
@@ -104,10 +104,10 @@
     </div>
     <div ng-repeat="response in d.zScore.tmt_b" style="margin-top: 12px;">
         <div ng-init="resp=response" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-            <div flex="85" flex-xs="100">
+            <div flex>
                 <z-score data="resp" options="d.zScore.options"></z-score>
             </div>
-            <div flex style="margin-left: 24px;">
+            <div flex="15" style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{response.full.TMTBTime}}
                     <br>Fehler: {{response.full.TMTBError}}
                 </p>
