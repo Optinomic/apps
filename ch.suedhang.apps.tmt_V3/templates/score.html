@@ -47,10 +47,10 @@
         </div>
         <div flex>
             <p class="md-subhead">Klinikstichprobe </p>
-            <p ng-repeat="tmt in d.zScore.tmt_a" class="md-caption" style="margin-top:-6px;">
-                <span ng-attr-style="font-size:26px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> {{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}
+            <p ng-repeat="tmt in d.zScore.tmt_a" class="md-caption" style="margin-top:-18px;">
+                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> {{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}
                 <span style="color:#757575;">
-                {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
+                {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}} (N={{tmt.n}})
             </span>
             </p>
         </div>
@@ -63,7 +63,6 @@
             <div flex style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{tmt.full.TMTATime}}
                     <br>Fehler: {{tmt.full.TMTAError}}
-                    <br>B/A Quotient: {{tmt.full.quotient_rounded}}
                 </p>
             </div>
         </div>
@@ -91,10 +90,10 @@
         </div>
         <div flex>
             <p class="md-subhead">Klinikstichprobe </p>
-            <p ng-repeat="tmt in d.zScore.tmt_b" class="md-caption" style="margin-top:-6px;">
-                <span ng-attr-style="font-size:26px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span> {{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}
+            <p ng-repeat="tmt in d.zScore.tmt_b" class="md-caption" style="margin-top:-18px;">
+                <span ng-attr-style="font-size:28px;margin-top:-3px; color:{{d.zScore.options.clinicsample_color}}!important;">■</span>{{tmt.full.Messzeitpunkt.Messzeitpunkt_Text}}
                 <span style="color:#757575;">
-                {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}}
+                {{d.zScore.normgruppe_klinik.selected_age_group.age_group_text}}, {{d.zScore.normgruppe_klinik.selected_edu_group.edu_group_text}} (N={{tmt.n}})
             </span>
             </p>
         </div>
@@ -107,7 +106,6 @@
             <div flex style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{response.full.TMTBTime}}
                     <br>Fehler: {{response.full.TMTBError}}
-                    <br>B/A Quotient: {{response.full.quotient_rounded}}
                 </p>
             </div>
         </div>
