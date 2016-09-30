@@ -204,7 +204,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        console.log('checkKSvisible:', type, checkArray, tmt);
+        console.log('checkKSvisible:', type, checkArray, tmt, visibility);
         return visibility;
     };
 
