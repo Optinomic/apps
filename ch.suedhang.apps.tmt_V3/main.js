@@ -208,7 +208,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "austritt": false,
             "anderer": false,
             "ein_und_austritt": false,
-            "count": messungen.length
+            "count": messungen.length,
+            "klinikstichproben": []
         };
 
 
@@ -253,7 +254,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-            var cs_color = ['#C5CAE9', '#C5CAE9', '#F8BBD0', '#C8E6C9'];
+            var cs_color = ['#C5CAE9', '#C5CAE9', '#C8E6C9', '#F8BBD0'];
             var current_cs_color = cs_color[current_messung.Messzeitpunkt.Messzeitpunkt];
 
 
@@ -426,10 +427,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             messungen_info.ein_und_austritt = true;
         };
 
-        $scope.d.zScore.messungen_info = messungen_info;
-
 
         // Abgeschlossen
+        $scope.d.zScore.messungen_info = messungen_info;
         $scope.d.zScore.init = true;
 
 
