@@ -203,7 +203,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             visibility = true;
         };
 
-
         // console.log('checkKSvisible:', type, checkArray, tmt, visibility);
         return visibility;
     };
@@ -291,6 +290,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
             A_messung.n = age_edu_mz_obj.n;
             A_messung.clinicsample_color = current_cs_color;
+
 
 
             // Set zscore_min | zscore_max  if zscore >= +/-3 

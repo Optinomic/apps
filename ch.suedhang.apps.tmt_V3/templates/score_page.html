@@ -2,6 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
     <div ng-if="!d.zScore.init">
         <h3 class="md-headline">TMT</h3>
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
         <h3 class="md-subhead">Berechnung wird ausgeführt.</h3>
     </div>
     <div ng-if="d.zScore.init">
