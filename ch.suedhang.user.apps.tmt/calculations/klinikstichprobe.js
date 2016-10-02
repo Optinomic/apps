@@ -9,13 +9,13 @@ function main(responses) {
     // ------------------------------------------
 
     calc.variables = {
-        "BA_Quotient": [],
-        "Perz_A": [],
-        "Perz_B": [],
         "TMTAError": [],
         "TMTATime": [],
         "TMTBError": [],
         "TMTBTime": [],
+        "BA_Quotient": [],
+        "TMTAPerz": [],
+        "TMTBPerz": [],
         "TMTAZ": [],
         "TMTBZ": []
     };
@@ -47,8 +47,8 @@ function main(responses) {
         current_vars.TMTATime = current_source.TMTATime;
         current_vars.TMTBError = current_source.TMTBError;
         current_vars.TMTBTime = current_source.TMTBTime;
-        current_vars.TMTAZ = current_source.percentile.tmtA_z;
-        current_vars.TMTBZ = current_source.percentile.tmtB_z;
+        current_vars.TMTAZ = current_source.percentile.z_scores.tmtA_z;
+        current_vars.TMTBZ = current_source.percentile.z_scores.tmtB_z;
 
         return current_vars;
     };
