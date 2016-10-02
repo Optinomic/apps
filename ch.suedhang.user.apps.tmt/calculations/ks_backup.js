@@ -20,7 +20,6 @@ function main(responses) {
         "TMTBZ": []
     };
 
-
     // ------------------------------------------
     // What 'Groups' do we have?
     // ------------------------------------------
@@ -100,17 +99,16 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": calc.group_age_props
+        "definitions": calc.cloneObj(calc.group_age_props)
     }, {
         "id": 1,
         "name": "Ausbildungsstand",
-        "definitions": calc.group_edu_props
+        "definitions": calc.cloneObj(calc.group_edu_props)
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": calc.group_mz_props
+        "definitions": calc.cloneObj(calc.group_mz_props)
     }];
-
 
     // ------------------------------------------
     // Info: com.optinomic.user.apps.klinikstichproben
@@ -204,6 +202,11 @@ function main(responses) {
         var info = calc.cloneObj(calc.info);
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
+        var group_age_props = calc.cloneObj(calc.group_age_props);
+        var group_edu_props = calc.cloneObj(calc.group_edu_props);
+        var group_mz_props = calc.cloneObj(calc.group_mz_props);
+        var dimensions_app = calc.cloneObj(calc.dimensions_app);
+
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
 
@@ -213,6 +216,7 @@ function main(responses) {
 
         results.info = info;
         results.variables = vars;
+        results.dimensions_app = dimensions_app;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
