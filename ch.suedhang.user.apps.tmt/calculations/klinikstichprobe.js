@@ -36,10 +36,10 @@ function main(responses) {
     // Arrange Results in Given Definitions
     // ------------------------------------------
 
-    calc.getScoresInVars = function(d, vars, info) {
+    calc.getScoresInVars = function(p, vars, info) {
 
         var calc_name = info.patient_app_id + ':' + info.patient_app_calculation;
-        var source_score = d.other_calculations[calc_name];
+        var source_score = p.other_calculations;
 
 
         return source_score;
