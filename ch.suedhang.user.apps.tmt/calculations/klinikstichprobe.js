@@ -100,15 +100,21 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": calc.group_age_props
+        "definitions": JSON.parse(JSON.stringify(calc.group_age_props)),
+        "scores": JSON.parse(JSON.stringify(calc.variables)),
+        "statistics": JSON.parse(JSON.stringify(calc.variables))
     }, {
         "id": 1,
         "name": "Ausbildungsstand",
-        "definitions": calc.group_edu_props
+        "definitions": JSON.parse(JSON.stringify(calc.group_edu_props)),
+        "scores": JSON.parse(JSON.stringify(calc.variables)),
+        "statistics": JSON.parse(JSON.stringify(calc.variables))
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": calc.group_mz_props
+        "definitions": JSON.parse(JSON.stringify(calc.group_mz_props)),
+        "scores": JSON.parse(JSON.stringify(calc.variables)),
+        "statistics": JSON.parse(JSON.stringify(calc.variables))
     }];
 
 
@@ -213,6 +219,8 @@ function main(responses) {
 
         results.info = info;
         results.variables = vars;
+
+        resultsdimensions_app = calc.cloneObj(calc.dimensions_app);
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
