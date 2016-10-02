@@ -36,39 +36,52 @@ function main(responses) {
     // Arrange Results in Given Definitions
     // ------------------------------------------
 
+    calc.arrangeScoresInVars = function(current_vars, current_source) {
+
+        // Vorhandene Ergebnisse in calc.variables einpflegen.
+        current_vars.TMTAError = current_source.TMTAError;
+        current_vars.TMTATime = current_source.TMTATime;
+        current_vars.TMTBError = current_source.TMTBError;
+        current_vars.TMTBTime = current_source.TMTBTime;
+
+        return current_vars;
+    };
+
+
+
+    // ------------------------------------------
+    // GENERIC -  should not be touched:
+    // ------------------------------------------
+
     calc.getScoresInVars = function(p, vars, info) {
 
         var return_array = [];
 
         for (var pIndex = 0; pIndex < p.length; pIndex++) {
-            var current_patient = p[pIndex];
-            var current_vars = calc.cloneObj(vars);
 
+            var current_patient = p[pIndex];
             var source = current_patient.other_calculations[info.other_calculation];
 
-            var return_obj = {
-                "patient": current_patient.patient,
-                "vars": current_vars,
-                "source": source
-            };
-            return_array.push(return_obj);
+            if (source.length) {
 
-            // if (source.length) {
-            // 
-            //     // Vorhandene Ergebnisse in calc.variables einpflegen.
-            //     current_vars.TMTAError = source.TMTAError;
-            //     current_vars.TMTATime = source.TMTATime;
-            //     current_vars.TMTBError = source.TMTBError;
-            //     current_vars.TMTBTime = source.TMTBTime;
-            // 
-            //     var return_obj = {
-            //         "patient": current_patient.patient,
-            //         "vars": current_vars,
-            //         "source": source
-            //     };
-            // 
-            //     return_array.push(return_obj);
-            // };
+                var return_obj = {
+                    "patient": current_patient.patient,
+                    "vars": current_vars,
+                    "scores": []
+                };
+
+                for (var sIndex = 0; sIndex < source.length; sIndex++) {
+
+                    var current_vars = calc.cloneObj(vars);
+                    var current_source = source[sIndex];
+
+                    current_vars = calc.arrangeScoresInVars(current_vars, current_source);
+
+                    return_obj.scores.push(current_vars);
+                };
+
+                return_array.push(return_obj);
+            };
         };
 
         return return_array;
