@@ -43,5 +43,5 @@ include(style.css)
 include(calculations/tmt_scores.js)
 
 [calculation tmt_klinikstichprobe javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
-include(calculations/full.js)
+include(calculations/klinikstichprobe.js)
 
