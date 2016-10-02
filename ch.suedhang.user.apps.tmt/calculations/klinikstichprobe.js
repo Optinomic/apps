@@ -38,7 +38,7 @@ function main(responses) {
 
     calc.getScoresInVars = function(p, vars, info) {
 
-        var source_score = p.other_calculations;
+        var source_score = p;
 
 
         return source_score;
