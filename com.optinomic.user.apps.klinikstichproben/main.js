@@ -59,7 +59,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Calculate stuff
-        var patient_calculations = $scope.getCalculation(app_id, app_claculation);
+        var patient_calculations = $scope.getUserAppCalculation(app_id, app_claculation);
 
 
         // Safe
@@ -78,20 +78,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Calculations
     // -----------------------------------
 
-    $scope.getPatientAppCalculation = function(app_id, calc_name) {
-        // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
-        var call = dataService.getAppCalculationsUser(app_id, calc_name);
-
-        call.success(function(data) {
-            // Save Data to $scope.d
-            console.log('(DATA): getCalculation: ', data.calculation_result);
-            return data.calculation_result;
-        });
-        call.error(function(data) {
-            console.log('(ERROR): getCalculation:', data);
-            return {};
-        });
-    };
 
     $scope.getUserAppCalculation = function(app_id, calc_name) {
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
