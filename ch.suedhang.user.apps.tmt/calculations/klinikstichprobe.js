@@ -40,15 +40,15 @@ function main(responses) {
 
         // Vorhandene Ergebnisse in calc.variables einpflegen.
 
-        current_vars.BA_Quotient = current_source.quotient;
-        current_vars.Perz_A = current_source.percentile.result.A;
-        current_vars.Perz_B = current_source.percentile.result.A;
-        current_vars.TMTAError = current_source.TMTAError;
-        current_vars.TMTATime = current_source.TMTATime;
-        current_vars.TMTBError = current_source.TMTBError;
-        current_vars.TMTBTime = current_source.TMTBTime;
-        current_vars.TMTAZ = current_source.percentile.z_scores.tmtA_z;
-        current_vars.TMTBZ = current_source.percentile.z_scores.tmtB_z;
+        current_vars.BA_Quotient.push(current_source.quotient);
+        current_vars.TMTAPerz.push(current_source.percentile.result.A);
+        current_vars.TMTBPerz.push(current_source.percentile.result.A);
+        current_vars.TMTAError.push(current_source.TMTAError);
+        current_vars.TMTATime.push(current_source.TMTATime);
+        current_vars.TMTBError.push(current_source.TMTBError);
+        current_vars.TMTBTime.push(current_source.TMTBTime);
+        current_vars.TMTAZ.push(current_source.percentile.z_scores.tmtA_z);
+        current_vars.TMTBZ.push(current_source.percentile.z_scores.tmtB_z);
 
         return current_vars;
     };
