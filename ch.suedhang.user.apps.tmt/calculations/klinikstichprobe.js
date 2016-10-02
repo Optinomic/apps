@@ -38,7 +38,6 @@ function main(responses) {
 
     calc.getScoresInVars = function(p, vars, info) {
 
-        var calc_name = info.patient_app_id + ':' + info.patient_app_calculation;
         var source_score = p.other_calculations;
 
 
@@ -64,17 +63,18 @@ function main(responses) {
         var results = {};
         var vars = calc.cloneObj(calc.variables);
         var info = calc.cloneObj(calc.info);
-
+        info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
 
 
         // Return Stuff
+        results.patients = d.patients;
         results.patient_scores = patient_scores;
 
-        results.info = calc.cloneObj(calc.info);
-        results.variables = calc.cloneObj(calc.variables);
+        results.info = info;
+        results.variables = vars;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;

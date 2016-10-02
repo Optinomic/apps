@@ -85,11 +85,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         call.success(function(data) {
             // Save Data to $scope.d
             console.log('(DATA): getCalculation: ', data.calculation_result);
-            $scope.ks.user_app_calc = data.calculation_result;
+            $scope.d.ks.user_app_calc = data.calculation_result;
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
-            $scope.ks.user_app_calc = {};
+            $scope.d.ks.user_app_calc = {};
         });
     };
 
