@@ -211,10 +211,13 @@ function main(responses) {
         // Return Stuff
         results.patient_scores = patient_scores;
 
-        results.info = info;
-        results.variables = vars;
+        var definitions = {
+            "info": info,
+            "variables": vars,
+            "dimensions_app": calc.cloneObj(calc.dimensions_app)
+        };
 
-        results.dimensions_app = calc.cloneObj(calc.dimensions_app);
+        results.definitions = definitions;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
