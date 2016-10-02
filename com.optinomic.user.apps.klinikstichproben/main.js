@@ -59,12 +59,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Calculate stuff
-        var patient_calculations = $scope.getUserAppCalculation(app_id, app_claculation);
+        $scope.getUserAppCalculation(app_id, app_claculation);
 
 
         // Safe
         ks.pg = pg;
-        ks.patient_calculations = patient_calculations;
 
         // Safe to $scope
         $scope.d.ks = ks;
@@ -86,11 +85,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         call.success(function(data) {
             // Save Data to $scope.d
             console.log('(DATA): getCalculation: ', data.calculation_result);
-            return data.calculation_result;
+            $scope.ks.user_app_calc = data.calculation_result;
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
-            return {};
+            $scope.ks.user_app_calc = {};
         });
     };
 

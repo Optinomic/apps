@@ -67,11 +67,11 @@ function main(responses) {
 
 
         // Arrange Stuff as 'variables'
-        var patientScores = calc.getScoresInVars(d.patients, vars, info);
+        var patient_scores = calc.getScoresInVars(d.patients, vars, info);
 
 
         // Return Stuff
-        results.patientScores = patientScores;
+        results.patient_scores = patient_scores;
 
         results.info = calc.cloneObj(calc.info);
         results.variables = calc.cloneObj(calc.variables);
