@@ -27,63 +27,63 @@ function main(responses) {
 
     calc.group_age_props = [{
         "id": 0,
-        "text": "Altersgruppe 18 - 24"
+        "text": "18 - 24"
     }, {
         "id": 1,
-        "text": "Altersgruppe 25 – 34"
+        "text": "25 – 34"
     }, {
         "id": 2,
-        "text": "Altersgruppe 35 – 44"
+        "text": "35 – 44"
     }, {
         "id": 3,
-        "text": "Altersgruppe 45 – 54"
+        "text": "45 – 54"
     }, {
         "id": 4,
-        "text": "Altersgruppe 55 – 59"
+        "text": "55 – 59"
     }, {
         "id": 5,
-        "text": "Altersgruppe 60 – 64"
+        "text": "60 – 64"
     }, {
         "id": 6,
-        "text": "Altersgruppe 65 – 69"
+        "text": "65 – 69"
     }, {
         "id": 7,
-        "text": "Altersgruppe 70 – 74"
+        "text": "70 – 74"
     }, {
         "id": 8,
-        "text": "Altersgruppe 75 – 79"
+        "text": "75 – 79"
     }, {
         "id": 9,
-        "text": "Altersgruppe 80 – 84"
+        "text": "80 – 84"
     }, {
         "id": 10,
-        "text": "Altersgruppe 85 – 89"
+        "text": "85 – 89"
     }];
 
 
     calc.group_edu_props = [{
         "id": 0,
-        "text": "Ausbildung: <= 12 Jahre"
+        "text": "<= 12 Jahre"
     }, {
         "id": 1,
-        "text": "Ausbildung: > 12 Jahre"
+        "text": "> 12 Jahre"
     }, {
         "id": 99,
-        "text": "Ausbildung: Alle Levels"
+        "text": "Jeder Ausbildungsgrad"
     }];
 
 
     calc.group_mz_props = [{
         "id": 0,
-        "text": "Messzeitpunkt: Eintritt",
+        "text": "Eintritt",
         "survey_id": 1
     }, {
         "id": 1,
-        "text": "Messzeitpunkt: Austritt",
+        "text": "Austritt",
         "survey_id": 2
     }, {
         "id": 2,
-        "text": "Messzeitpunkt: Anderer",
+        "text": "Anderer Messzeitpunkt",
         "survey_id": 3
     }, {
         "id": 3,
@@ -100,21 +100,15 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": JSON.parse(JSON.stringify(calc.group_age_props)),
-        "scores": JSON.parse(JSON.stringify(calc.variables)),
-        "statistics": JSON.parse(JSON.stringify(calc.variables))
+        "definitions": JSON.parse(JSON.stringify(calc.group_age_props))
     }, {
         "id": 1,
-        "name": "Ausbildungsstand",
-        "definitions": JSON.parse(JSON.stringify(calc.group_edu_props)),
-        "scores": JSON.parse(JSON.stringify(calc.variables)),
-        "statistics": JSON.parse(JSON.stringify(calc.variables))
+        "name": "Ausbildungsgrad",
+        "definitions": JSON.parse(JSON.stringify(calc.group_edu_props))
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": JSON.parse(JSON.stringify(calc.group_mz_props)),
-        "scores": JSON.parse(JSON.stringify(calc.variables)),
-        "statistics": JSON.parse(JSON.stringify(calc.variables))
+        "definitions": JSON.parse(JSON.stringify(calc.group_mz_props))
     }];
 
 
