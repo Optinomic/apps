@@ -71,9 +71,10 @@ function main(responses) {
 
 
         // Return Stuff
+        results.patientScores = patientScores;
+
         results.info = calc.cloneObj(calc.info);
         results.variables = calc.cloneObj(calc.variables);
-        results.patientScores = patientScores;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
