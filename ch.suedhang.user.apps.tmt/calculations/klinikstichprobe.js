@@ -38,10 +38,34 @@ function main(responses) {
 
     calc.getScoresInVars = function(p, vars, info) {
 
-        var source_score = p;
+        var return_array = [];
+
+        for (var pIndex = 0; pIndex < p.length; pIndex++) {
+            var current_patient = p[pIndex];
+            var current_vars = calc.cloneObj(vars);
+
+            var source = current_patient.other_calculations[info.other_calculation];
+
+            if (source.length) {
+
+                // Vorhandene Ergebnisse in calc.variables einpflegen.
+                current_vars.TMTAError = source.TMTAError;
+                current_vars.TMTATime = source.TMTATime;
+                current_vars.TMTBError = source.TMTBError;
+                current_vars.TMTBTime = source.TMTBTime;
+
+                var return_obj = {
+                    "patient": current_patient.patient,
+                    "vars": current_vars,
+                    "source": source
+                };
+
+                return_array.push(return_obj);
+            };
+        };
 
 
-        return source_score;
+        return return_array;
     };
 
 
