@@ -99,15 +99,15 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": calc.cloneObj(group_age_props)
+        "definitions": calc.cloneObj(calc.group_age_props)
     }, {
         "id": 1,
         "name": "Ausbildungsstand",
-        "definitions": calc.cloneObj(group_edu_props)
+        "definitions": calc.cloneObj(calc.group_edu_props)
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": calc.cloneObj(group_mz_props)
+        "definitions": calc.cloneObj(calc.group_mz_props)
     }];
 
     // ------------------------------------------
@@ -217,8 +217,6 @@ function main(responses) {
         results.info = info;
         results.variables = vars;
         results.dimensions_app = dimensions_app;
-
-
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
