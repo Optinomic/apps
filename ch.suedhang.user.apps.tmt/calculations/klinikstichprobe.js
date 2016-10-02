@@ -220,7 +220,7 @@ function main(responses) {
         results.info = info;
         results.variables = vars;
 
-        resultsdimensions_app = calc.cloneObj(calc.dimensions_app);
+        results.dimensions_app = calc.cloneObj(calc.dimensions_app);
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
