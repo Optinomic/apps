@@ -50,7 +50,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         //  Create GUI for THIS later:
         var app_id = 'ch.suedhang.user.apps.tmt';
-        var app_claculation = 'tmt_scores';
+        var app_claculation = 'tmt_klinikstichprobe';
 
 
         // Init
@@ -78,18 +78,33 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Calculations
     // -----------------------------------
 
-    $scope.getCalculation = function(app_id, calc_name) {
+    $scope.getPatientAppCalculation = function(app_id, calc_name) {
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
         var call = dataService.getAppCalculationsUser(app_id, calc_name);
 
         call.success(function(data) {
             // Save Data to $scope.d
             console.log('(DATA): getCalculation: ', data.calculation_result);
-            return null;
+            return data.calculation_result;
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
-            return [];
+            return {};
+        });
+    };
+
+    $scope.getUserAppCalculation = function(app_id, calc_name) {
+        // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
+        var call = dataService.getAppCalculationsUser(app_id, calc_name);
+
+        call.success(function(data) {
+            // Save Data to $scope.d
+            console.log('(DATA): getCalculation: ', data.calculation_result);
+            return data.calculation_result;
+        });
+        call.error(function(data) {
+            console.log('(ERROR): getCalculation:', data);
+            return {};
         });
     };
 
