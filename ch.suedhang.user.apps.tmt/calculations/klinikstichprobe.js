@@ -68,7 +68,6 @@ function main(responses) {
 
             if (source.length) {
 
-                var current_vars = calc.cloneObj(vars);
 
 
                 var return_obj = {
@@ -79,12 +78,12 @@ function main(responses) {
 
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
+                    var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
 
-                    var currect_vars = calc.arrangeScoresInVars(current_vars, current_source);
+                    current_vars = calc.arrangeScoresInVars(current_vars, current_source);
 
-
-                    return_obj.scores.push(currect_vars);
+                    return_obj.scores.push(current_vars);
                 };
 
 
