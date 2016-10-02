@@ -9,13 +9,13 @@ function main(responses) {
     // ------------------------------------------
 
     calc.variables = {
+        "BA_Quotient": [],
+        "Perz_A": [],
+        "Perz_B": [],
         "TMTAError": [],
         "TMTATime": [],
         "TMTBError": [],
         "TMTBTime": [],
-        "Perz_A": [],
-        "Perz_B": [],
-        "BA_Quotient": [],
         "TMTAZ": [],
         "TMTBZ": []
     };
@@ -39,10 +39,16 @@ function main(responses) {
     calc.arrangeScoresInVars = function(current_vars, current_source) {
 
         // Vorhandene Ergebnisse in calc.variables einpflegen.
+
+        current_vars.BA_Quotient = current_source.quotient;
+        current_vars.Perz_A = current_source.percentile.result.A;
+        current_vars.Perz_B = current_source.percentile.result.A;
         current_vars.TMTAError = current_source.TMTAError;
         current_vars.TMTATime = current_source.TMTATime;
         current_vars.TMTBError = current_source.TMTBError;
         current_vars.TMTBTime = current_source.TMTBTime;
+        current_vars.TMTAZ = current_source.percentile.tmtA_z;
+        current_vars.TMTBZ = current_source.percentile.tmtB_z;
 
         return current_vars;
     };
@@ -66,7 +72,6 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "vars": current_vars,
                     "scores": []
                 };
 
