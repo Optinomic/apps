@@ -14,8 +14,6 @@ function main(responses) {
         "TMTBError": [],
         "TMTBTime": [],
         "BA_Quotient": [],
-        "TMTAPerz": [],
-        "TMTBPerz": [],
         "TMTAZ": [],
         "TMTBZ": []
     };
@@ -41,8 +39,6 @@ function main(responses) {
         // Vorhandene Ergebnisse in calc.variables einpflegen.
 
         current_vars.BA_Quotient = current_source.quotient;
-        current_vars.Perz_A = current_source.percentile.result.A;
-        current_vars.Perz_B = current_source.percentile.result.A;
         current_vars.TMTAError = current_source.TMTAError;
         current_vars.TMTATime = current_source.TMTATime;
         current_vars.TMTBError = current_source.TMTBError;
@@ -63,6 +59,8 @@ function main(responses) {
 
         var return_array = [];
 
+        var vars_array = calc.getPropArray(vars);
+
         for (var pIndex = 0; pIndex < p.length; pIndex++) {
 
             var current_patient = p[pIndex];
@@ -70,20 +68,27 @@ function main(responses) {
 
             if (source.length) {
 
+                var current_vars = calc.cloneObj(vars);
+
+
                 var return_obj = {
                     "patient": current_patient.patient,
                     "scores": []
                 };
 
+
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
-                    var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
 
-                    current_vars = calc.arrangeScoresInVars(current_vars, current_source);
+                    var currect_vars = calc.arrangeScoresInVars(current_vars, current_source);
 
-                    return_obj.scores.push(current_vars);
+
+                    return_obj.scores.push(currect_vars);
                 };
+
+
+
 
                 return_array.push(return_obj);
             };
@@ -103,6 +108,21 @@ function main(responses) {
     };
 
 
+    calc.getPropArray = function(my_obj) {
+
+        // Create 'all propertys array' from Object
+        var propArray = [];
+
+        for (var property in objectFull) {
+            if (objectFull.hasOwnProperty(property)) {
+                propArray.push(property);
+            }
+        }
+
+        return propArray;
+    };
+
+
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
@@ -110,6 +130,7 @@ function main(responses) {
 
         var results = {};
         var vars = calc.cloneObj(calc.variables);
+        var vars_array = calc.getPropArray(vars);
         var info = calc.cloneObj(calc.info);
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
@@ -122,6 +143,7 @@ function main(responses) {
 
         results.info = info;
         results.variables = vars;
+        results.vars_array = vars_array;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
