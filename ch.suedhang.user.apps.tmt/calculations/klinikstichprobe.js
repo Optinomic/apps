@@ -46,24 +46,30 @@ function main(responses) {
 
             var source = current_patient.other_calculations[info.other_calculation];
 
-            if (source.length) {
-
-                // Vorhandene Ergebnisse in calc.variables einpflegen.
-                current_vars.TMTAError = source.TMTAError;
-                current_vars.TMTATime = source.TMTATime;
-                current_vars.TMTBError = source.TMTBError;
-                current_vars.TMTBTime = source.TMTBTime;
-
-                var return_obj = {
-                    "patient": current_patient.patient,
-                    "vars": current_vars,
-                    "source": source
-                };
-
-                return_array.push(return_obj);
+            var return_obj = {
+                "patient": current_patient.patient,
+                "vars": current_vars,
+                "source": source
             };
-        };
+            return_array.push(return_obj);
 
+            // if (source.length) {
+            // 
+            //     // Vorhandene Ergebnisse in calc.variables einpflegen.
+            //     current_vars.TMTAError = source.TMTAError;
+            //     current_vars.TMTATime = source.TMTATime;
+            //     current_vars.TMTBError = source.TMTBError;
+            //     current_vars.TMTBTime = source.TMTBTime;
+            // 
+            //     var return_obj = {
+            //         "patient": current_patient.patient,
+            //         "vars": current_vars,
+            //         "source": source
+            //     };
+            // 
+            //     return_array.push(return_obj);
+            // };
+        };
 
         return return_array;
     };
@@ -94,7 +100,6 @@ function main(responses) {
 
 
         // Return Stuff
-        results.patients = d.patients;
         results.patient_scores = patient_scores;
 
         results.info = info;
