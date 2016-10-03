@@ -305,18 +305,20 @@ function main(responses) {
                 "n": 0
             };
 
+            // Set Default if needed
             if (ziel === null) {
                 ziel = default_obj;
+            };
+
+            // Concat stuff
+            for (var vID = 0; vID < vars_array.length; vID++) {
+                var current_var = vars_array[vID];
+                ziel[current_var] = ziel.concat(quelle[current_var]);
             };
 
             ziel.patients.push(patient);
             ziel.n = ziel.scores.length;
 
-            // Concat stuff
-            // for (var vID = 0; vID < vars_array.length; vID++) {
-            //     var current_var = vars_array[vID];
-            //     ziel[current_var] = ziel.concat(quelle[current_var]);
-            // };
 
             return ziel;
         };
