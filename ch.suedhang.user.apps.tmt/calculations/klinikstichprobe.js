@@ -183,6 +183,29 @@ function main(responses) {
         return return_array;
     };
 
+    calc.getMDScoresArray = function(dimensions_app) {
+
+        var return_array = [];
+
+        // Create MD-App-Scores
+        return_array[0] = dimensions_app[0];
+
+        //  for (var dIndex = 0; dIndex < dimensions_app_scores.length; dIndex++) {
+        //      var cd = dimensions_app_scores[dIndex];
+        //  
+        //      // Loop Dimensions
+        //  
+        //      for (var cdIndex = 0; cdIndex < cd.array.length; cdIndex++) {
+        //          var csd = dimensions_app_scores[dIndex];
+        //      };
+        //  
+        //  };
+
+
+        return return_array;
+
+    };
+
 
     // ------------------------------------------
     // Helpers
@@ -206,6 +229,7 @@ function main(responses) {
 
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
+        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
 
 
         // Return Stuff
@@ -214,7 +238,8 @@ function main(responses) {
         var definitions = {
             "info": info,
             "variables": vars,
-            "dimensions_app": calc.cloneObj(calc.dimensions_app)
+            "dimensions_app": calc.cloneObj(calc.dimensions_app),
+            "md_app_scores": md_app_scores
         };
 
         results.definitions = definitions;
