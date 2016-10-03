@@ -337,6 +337,7 @@ function main(responses) {
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
                 ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
+                ziel.statistics[current_var] = calc.getStatistics(ziel.scores[current_var]);
             };
 
             ziel.patients.push(patient);
@@ -345,17 +346,17 @@ function main(responses) {
         };
 
 
-        function doStatistics(ziel, quelle, vars_array) {
-
-            // Concat stuff
-            for (var vID = 0; vID < vars_array.length; vID++) {
-                var current_var = vars_array[vID];
-
-                ziel.statistics[current_var] = calc.getStatistics(quelle[current_var]);
-            };
-
-            return ziel;
-        };
+        //   function doStatistics(ziel, quelle, vars_array) {
+        //   
+        //       // Concat stuff
+        //       for (var vID = 0; vID < vars_array.length; vID++) {
+        //           var current_var = vars_array[vID];
+        //   
+        //           ziel.statistics[current_var] = calc.getStatistics(quelle[current_var]);
+        //       };
+        //   
+        //       return ziel;
+        //   };
 
 
         var ps = calc.cloneObj(patient_scores);
@@ -402,7 +403,7 @@ function main(responses) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
 
                         md_data = concatArrays(md_data, current_score, pid, vars_array);
-                        md_data = doStatistics(md_data, current_score, vars_array);
+                        // md_data = doStatistics(md_data, current_score, vars_array);
 
                         data[current_list[0]][current_list[1]][current_list[2]] = md_data;
                     };
