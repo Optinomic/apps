@@ -198,10 +198,10 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "data": [
+                    "data": {
                         "dimensions": [],
                         "scores": []
-                    ]
+                    }
                 };
 
                 // Loop Messungen

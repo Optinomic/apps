@@ -159,7 +159,10 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "scores": [],
+                    "data": {
+                        "dimension": [],
+                        "score": []
+                    }
                 };
 
 
@@ -173,7 +176,7 @@ function main(responses) {
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
 
-                    return_obj.scores.push(current_vars);
+                    return_obj.data.score.push(current_vars);
                 };
 
                 return_array.push(return_obj);
