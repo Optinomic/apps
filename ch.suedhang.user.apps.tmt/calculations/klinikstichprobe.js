@@ -301,8 +301,7 @@ function main(responses) {
             var default_obj = {
                 "patients": [],
                 "scores": calc.cloneObj(calc.variables),
-                "statistics": calc.cloneObj(calc.variables),
-                "n": 0
+                "statistics": calc.cloneObj(calc.variables)
             };
 
             // Set Default if needed
@@ -317,8 +316,6 @@ function main(responses) {
             };
 
             ziel.patients.push(patient);
-            ziel.n = ziel.scores.length;
-
 
             return ziel;
         };
@@ -365,7 +362,8 @@ function main(responses) {
                     };
 
                     if (current_list.length === 3) {
-                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(data[current_list[0]][current_list[1]][current_list[2]], current_score, pid, vars_array);
+                        var md_data = data[current_list[0]][current_list[1]][current_list[2]];
+                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
                     };
 
                     if (current_list.length === 4) {
