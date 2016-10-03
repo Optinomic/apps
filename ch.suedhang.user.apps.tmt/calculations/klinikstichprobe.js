@@ -277,7 +277,7 @@ function main(responses) {
                 var current_score = source_scores[scoreID];
 
                 //Test Write
-                //data[0][0][0] = default_obj;
+                data[0][0][0] = default_obj;
 
             };
 
