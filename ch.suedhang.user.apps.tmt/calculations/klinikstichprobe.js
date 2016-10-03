@@ -273,7 +273,7 @@ function main(responses) {
                 var current_score = source_scores[scoreID];
 
                 //Test Write
-                md_app_scores[0][0][0] = default_obj;
+                // md_app_scores[0][0][0] = default_obj;
             };
 
         };
