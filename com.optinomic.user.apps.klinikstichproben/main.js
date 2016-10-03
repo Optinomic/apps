@@ -165,10 +165,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var ziel = data;
 
                     for (var clID = 0; clID < current_list.length; clID++) {
-                        ziel = ziel[clID];
-                        console.log('Ziel - ', clID, ziel);
+
+                        ziel = ziel[current_list[clID]];
+                        console.log('Ziel - ', clID, current_list[clID], ziel);
                     }
-                    console.log('Ziel - Final', ziel);
+                    console.log('Ziel - Final', ziel, current_list);
 
                 };
 
