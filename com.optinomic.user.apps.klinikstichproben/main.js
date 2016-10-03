@@ -30,7 +30,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Run App-Functions
-            $scope.ks_init();
+            $scope.d.ks = $scope.ks_init();
 
 
             // Finishing: Console Info & Init = done.
@@ -43,10 +43,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    // -------------------
-    // TMT Init
-    // -------------------
+    // --------------------------
+    // Klinikstichprobe (ks) Init
+    // --------------------------
     $scope.ks_init = function() {
+
+        var d = {};
 
         //  Create GUI for THIS later:
         var app_id = 'ch.suedhang.user.apps.tmt';
@@ -54,23 +56,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Init
-        var ks = {};
-        var pg = $scope.d.dataMain.patient_groups;
-
+        d.pg = $scope.d.dataMain.patient_groups;
+        d.md_patient_scores = null;
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
 
 
+        console.log('(!) Init, ', $scope.d.dataMain.apps.current.name, d);
 
-        // Safe
-        ks.pg = pg;
-
-
-        // Safe to $scope
-        $scope.d.ks = ks;
-
-        console.log('(!) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
+        return d;
     };
 
 
