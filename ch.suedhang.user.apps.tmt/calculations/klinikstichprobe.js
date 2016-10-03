@@ -306,7 +306,7 @@ function main(responses) {
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
-        var md_patient_scores = calc.getMDPatientScores(patient_scores, cmd_app_scores);
+        var md_patient_scores = calc.getMDPatientScores(patient_scores, md_app_scores);
 
 
         // Return Stuff
