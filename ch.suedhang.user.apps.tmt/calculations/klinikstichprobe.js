@@ -125,7 +125,7 @@ function main(responses) {
 
     calc.arrangeScoresInVars = function(current_vars, current_source) {
 
-        // Vorhandene Mess-Ergebnisse in calc.variables einpflegen.
+        // Vorhandene Ergebnisse in calc.variables einpflegen.
 
         current_vars.BA_Quotient.push(current_source.quotient);
         current_vars.TMTAPerz.push(current_source.percentile.result.A);
@@ -140,46 +140,7 @@ function main(responses) {
         return current_vars;
     };
 
-    calc.arrangeScoresInDimensions = function(current_source) {
-        var return_array = calc.cloneObj(calc.dimensions_app);
 
-        // Vorhandene Mess-Ergebnisse in calc.dimensions_app einpflegen.
-
-        //  var given_age_group = current_source.percentile.age_perz.altersgruppe;
-        //  
-        //  var given_edu_group = 0;
-        //  if (current_source.percentile.age_perz.education_high) {
-        //      given_edu_group = 1;
-        //  };
-        //  
-        //  var given_mz_group = current_source.mz;
-
-
-        // Existieren 99'er?  Ebenfalls hinzufügen.
-
-        //  for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
-        //      var cd = return_array[dIndex];
-        //      cd.dimensions = [];
-        //  
-        //      if (dIndex === 0) {
-        //          cd.dimensions.push(given_age_group);
-        //      };
-        //  
-        //      if (dIndex === 1) {
-        //          cd.dimensions.push(given_edu_group);
-        //          // Jeder Ausbildungsgrad
-        //          cd.dimensions.push(2);
-        //      };
-        //  
-        //      if (dIndex === 2) {
-        //          cd.dimensions.push(given_mz_group);
-        //          // Alle Messzeitpunkte
-        //          cd.dimensions.push(3);
-        //      };
-        //  };
-
-        return return_array;
-    };
 
     // ------------------------------------------
     // GENERIC -  should not be touched:
@@ -198,24 +159,21 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "data": [
-                        "dimensions": [],
-                        "scores": []
-                    ]
+                    "scores": [],
                 };
+
+
+
 
                 // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
                     var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
-                    var current_dimensions = [];
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
-                    // current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
-                    return_obj.data.scores.push(current_vars);
-                    //return_obj.data.dimensions.push(current_dimensions);
+                    return_obj.scores.push(current_vars);
                 };
 
                 return_array.push(return_obj);
@@ -272,8 +230,8 @@ function main(responses) {
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
-        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
+        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
 
 
         // Return Stuff

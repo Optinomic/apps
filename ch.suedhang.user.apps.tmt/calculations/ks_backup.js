@@ -20,74 +20,71 @@ function main(responses) {
         "TMTBZ": []
     };
 
+
     // ------------------------------------------
     // What 'Groups' do we have?
     // ------------------------------------------
 
     calc.group_age_props = [{
         "id": 0,
-        "text": "Altersgruppe 18 - 24"
+        "text": "18 - 24"
     }, {
         "id": 1,
-        "text": "Altersgruppe 25 – 34"
+        "text": "25 – 34"
     }, {
         "id": 2,
-        "text": "Altersgruppe 35 – 44"
+        "text": "35 – 44"
     }, {
         "id": 3,
-        "text": "Altersgruppe 45 – 54"
+        "text": "45 – 54"
     }, {
         "id": 4,
-        "text": "Altersgruppe 55 – 59"
+        "text": "55 – 59"
     }, {
         "id": 5,
-        "text": "Altersgruppe 60 – 64"
+        "text": "60 – 64"
     }, {
         "id": 6,
-        "text": "Altersgruppe 65 – 69"
+        "text": "65 – 69"
     }, {
         "id": 7,
-        "text": "Altersgruppe 70 – 74"
+        "text": "70 – 74"
     }, {
         "id": 8,
-        "text": "Altersgruppe 75 – 79"
+        "text": "75 – 79"
     }, {
         "id": 9,
-        "text": "Altersgruppe 80 – 84"
+        "text": "80 – 84"
     }, {
         "id": 10,
-        "text": "Altersgruppe 85 – 89"
+        "text": "85 – 89"
     }];
 
 
     calc.group_edu_props = [{
         "id": 0,
-        "text": "Ausbildung: <= 12 Jahre"
+        "text": "<= 12 Jahre"
     }, {
         "id": 1,
-        "text": "Ausbildung: > 12 Jahre"
+        "text": "> 12 Jahre"
     }, {
         "id": 99,
-        "text": "Ausbildung: Alle Levels"
+        "text": "Jeder Ausbildungsgrad"
     }];
 
 
     calc.group_mz_props = [{
-        "id": 0,
-        "text": "Messzeitpunkt: Eintritt",
-        "survey_id": 1
-    }, {
         "id": 1,
-        "text": "Messzeitpunkt: Austritt",
-        "survey_id": 2
+        "text": "Eintritt"
     }, {
         "id": 2,
-        "text": "Messzeitpunkt: Anderer",
-        "survey_id": 3
+        "text": "Austritt"
     }, {
         "id": 3,
-        "text": "Alle Messzeitpunkte",
-        "survey_id": null
+        "text": "Anderer Messzeitpunkt"
+    }, {
+        "id": 99,
+        "text": "Alle Messzeitpunkte"
     }];
 
 
@@ -99,16 +96,17 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": calc.cloneObj(calc.group_age_props)
+        "array": JSON.parse(JSON.stringify(calc.group_age_props))
     }, {
         "id": 1,
-        "name": "Ausbildungsstand",
-        "definitions": calc.cloneObj(calc.group_edu_props)
+        "name": "Ausbildungsgrad",
+        "array": JSON.parse(JSON.stringify(calc.group_edu_props))
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": calc.cloneObj(calc.group_mz_props)
+        "array": JSON.parse(JSON.stringify(calc.group_mz_props))
     }];
+
 
     // ------------------------------------------
     // Info: com.optinomic.user.apps.klinikstichproben
@@ -127,7 +125,7 @@ function main(responses) {
 
     calc.arrangeScoresInVars = function(current_vars, current_source) {
 
-        // Vorhandene Ergebnisse in calc.variables einpflegen.
+        // Vorhandene Mess-Ergebnisse in calc.variables einpflegen.
 
         current_vars.BA_Quotient.push(current_source.quotient);
         current_vars.TMTAPerz.push(current_source.percentile.result.A);
@@ -142,7 +140,46 @@ function main(responses) {
         return current_vars;
     };
 
+    calc.arrangeScoresInDimensions = function(current_source) {
+        var return_array = calc.cloneObj(calc.dimensions_app);
 
+        // Vorhandene Mess-Ergebnisse in calc.dimensions_app einpflegen.
+
+        //  var given_age_group = current_source.percentile.age_perz.altersgruppe;
+        //  
+        //  var given_edu_group = 0;
+        //  if (current_source.percentile.age_perz.education_high) {
+        //      given_edu_group = 1;
+        //  };
+        //  
+        //  var given_mz_group = current_source.mz;
+
+
+        // Existieren 99'er?  Ebenfalls hinzufügen.
+
+        //  for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
+        //      var cd = return_array[dIndex];
+        //      cd.dimensions = [];
+        //  
+        //      if (dIndex === 0) {
+        //          cd.dimensions.push(given_age_group);
+        //      };
+        //  
+        //      if (dIndex === 1) {
+        //          cd.dimensions.push(given_edu_group);
+        //          // Jeder Ausbildungsgrad
+        //          cd.dimensions.push(2);
+        //      };
+        //  
+        //      if (dIndex === 2) {
+        //          cd.dimensions.push(given_mz_group);
+        //          // Alle Messzeitpunkte
+        //          cd.dimensions.push(3);
+        //      };
+        //  };
+
+        return return_array;
+    };
 
     // ------------------------------------------
     // GENERIC -  should not be touched:
@@ -161,22 +198,54 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "scores": []
+                    "data": [
+                        "dimensions": [],
+                        "scores": []
+                    ]
                 };
 
+                // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
                     var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
+                    var current_dimensions = [];
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
+                    // current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
-                    return_obj.scores.push(current_vars);
+                    return_obj.data.scores.push(current_vars);
+                    //return_obj.data.dimensions.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
             };
         };
+
+        return return_array;
+    };
+
+    calc.getMDScoresArray = function(dimensions_app) {
+
+        function createNDimArray(dimensions) {
+            var t, i = 0,
+                s = dimensions[0],
+                arr = new Array(s);
+            if (dimensions.length < 3)
+                for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
+            else
+                for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
+            return arr;
+        }
+
+        var n_dimensions = [];
+
+        for (var dIndex = 0; dIndex < dimensions_app.length; dIndex++) {
+            var cd = dimensions_app[dIndex];
+            n_dimensions.push(cd.array.length)
+        };
+
+        var return_array = createNDimArray(n_dimensions);
 
         return return_array;
     };
@@ -202,21 +271,22 @@ function main(responses) {
         var info = calc.cloneObj(calc.info);
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
-        var group_age_props = calc.cloneObj(calc.group_age_props);
-        var group_edu_props = calc.cloneObj(calc.group_edu_props);
-        var group_mz_props = calc.cloneObj(calc.group_mz_props);
-        var dimensions_app = calc.cloneObj(calc.dimensions_app);
-
         // Arrange Stuff as 'variables'
+        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
 
 
         // Return Stuff
         results.patient_scores = patient_scores;
 
-        results.info = info;
-        results.variables = vars;
-        results.dimensions_app = dimensions_app;
+        var definitions = {
+            "info": info,
+            "variables": vars,
+            "dimensions_app": calc.cloneObj(calc.dimensions_app),
+            "md_app_scores": md_app_scores
+        };
+
+        results.definitions = definitions;
 
         // Returning full (complete) responses is often used/helpful.
         results.full = d;
