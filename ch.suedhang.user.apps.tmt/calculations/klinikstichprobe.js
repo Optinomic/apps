@@ -301,13 +301,13 @@ function main(responses) {
             };
 
             // Concat stuff
-            for (var vID = 0; vID < vars_array.length; vID++) {
-                var current_var = vars_array[vID];
-
-
-                //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
-                //ziel.statistics = current_var;
-            };
+            //  for (var vID = 0; vID < vars_array.length; vID++) {
+            //      var current_var = vars_array[vID];
+            //  
+            //  
+            //      //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
+            //      //ziel.statistics = current_var;
+            //  };
 
             ziel.patients.push(patient);
             ziel.n = ziel.scores.length;
