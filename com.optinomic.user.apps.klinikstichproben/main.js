@@ -107,7 +107,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
         var data = md_app_scores;
-        var ps = patient_scoresc;
+        var ps = patient_scores;
 
         var default_obj = {
             "patients": [],
