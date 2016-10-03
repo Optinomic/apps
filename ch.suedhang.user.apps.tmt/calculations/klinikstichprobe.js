@@ -340,7 +340,6 @@ function main(responses) {
                     }
 
                     ziel = concatArrays(ziel, current_score, pid);
-                    data = ziel;
 
                 };
 

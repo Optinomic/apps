@@ -134,8 +134,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 ziel = default_obj;
             };
 
-
             ziel.patients.push(patient);
+            ziel.n = ziel.scores.length;
 
             // Concat stuff
 
