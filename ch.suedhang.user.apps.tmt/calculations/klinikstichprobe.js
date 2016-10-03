@@ -152,7 +152,7 @@ function main(responses) {
             given_edu_group = 1;
         };
 
-        var given_mz_group = current_source.mz;
+        var given_mz_group = current_source.mz - 1;
 
 
         // Existieren 99'er?  Ebenfalls hinzufügen.
@@ -242,15 +242,12 @@ function main(responses) {
         }
 
         var n_dimensions = [];
-
         for (var dIndex = 0; dIndex < dimensions_app.length; dIndex++) {
             var cd = dimensions_app[dIndex];
             n_dimensions.push(cd.array.length)
         };
 
-        var return_array = createNDimArray(n_dimensions);
-
-        return return_array;
+        return createNDimArray(n_dimensions);
     };
 
 
@@ -276,8 +273,11 @@ function main(responses) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
+
+
+
                 //Test Write
-                data[0][0][0] = default_obj;
+                //data[0][0][0] = default_obj;
 
             };
 
