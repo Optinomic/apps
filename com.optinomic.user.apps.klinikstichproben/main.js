@@ -132,7 +132,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('data 3', data[all_positions[1][0]][all_positions[1][1]][all_positions[1][2]]);
 
 
-        var positions_variants = [];
 
 
         // createNDimArray([3, 2, 3]);
@@ -147,18 +146,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
-
+                var list = [];
                 // Alle Varianten für MD-Array erstellen
                 for (var pos = 0; pos < current_dimension.length; pos++) {
 
                     var dim_pos = current_dimension[pos].dimensions;
                     console.log('dim_pos', psID, scoreID, dim_pos);
 
-
-
+                    list[pos] = dim_pos;
                 };
-
-
+                console.log('list', list);
 
             };
 
