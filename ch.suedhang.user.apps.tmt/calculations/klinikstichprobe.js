@@ -118,6 +118,30 @@ function main(responses) {
         "patient_app_calculation": "tmt_score"
     };
 
+    // ------------------------------------------
+    // Do Statistics
+    // ------------------------------------------
+    calc.getStatistics = function(data_array) {
+
+        // Interessante Berechnungen | Statistics
+        var s = {};
+
+        if (calc.isArray(data_array)) {
+            s.n = data_array.legth;
+            s.min = calc.min(data_array);
+            s.max = calc.max(data_array);
+            s.mean = calc.mean(data_array);
+            s.variance = calc.variance(data_array);
+            s.standard_deviation = calc.standard_deviation(data_array);
+            s.mean_1sd_min = s.mean - s.standard_deviation;
+            s.mean_1sd_plus = s.mean + s.standard_deviation;
+            s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
+            s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
+        };
+
+        // Return
+        return s;
+    };
 
     // ------------------------------------------
     // Arrange Results in Given Definitions
@@ -363,7 +387,7 @@ function main(responses) {
 
                     if (current_list.length === 3) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
-                        md_data = concatArrays(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
                     };
 
                     if (current_list.length === 4) {
@@ -395,7 +419,6 @@ function main(responses) {
         return JSON.parse(JSON.stringify(my_obj));
     };
 
-
     calc.getObjProp = function(my_obj) {
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -408,6 +431,138 @@ function main(responses) {
 
         return allFullPropertys;
     };
+
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
+
+
+    // ------------------------------------------
+    //  calculation_simplestatistics.js
+    //  S T A T I S T I C S
+    // ------------------------------------------
+
+    calc.sum = function(x) {
+        var value = 0;
+        for (var i = 0; i < x.length; i++) {
+            value += x[i];
+        }
+        return value;
+    }
+
+    calc.mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        return calc.sum(x) / x.length;
+    }
+
+    calc.geometric_mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        // the starting value.
+        var value = 1;
+
+        for (var i = 0; i < x.length; i++) {
+            // the geometric mean is only valid for positive numbers
+            if (x[i] <= 0) return null;
+
+            // repeatedly multiply the value by each number
+            value *= x[i];
+        }
+
+        return Math.pow(value, 1 / x.length);
+    }
+
+    calc.harmonic_mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        var reciprocal_sum = 0;
+
+        for (var i = 0; i < x.length; i++) {
+            // the harmonic mean is only valid for positive numbers
+            if (x[i] <= 0) return null;
+
+            reciprocal_sum += 1 / x[i];
+        }
+
+        // divide n by the the reciprocal sum
+        return x.length / reciprocal_sum;
+    }
+
+    calc.root_mean_square = function(x) {
+        if (x.length === 0) return null;
+
+        var sum_of_squares = 0;
+        for (var i = 0; i < x.length; i++) {
+            sum_of_squares += Math.pow(x[i], 2);
+        }
+
+        return Math.sqrt(sum_of_squares / x.length);
+    }
+
+    calc.min = function(x) {
+        var value;
+        for (var i = 0; i < x.length; i++) {
+            // On the first iteration of this loop, min is
+            // undefined and is thus made the minimum element in the array
+            if (x[i] < value || value === undefined) value = x[i];
+        }
+        return value;
+    }
+
+    calc.max = function(x) {
+        var value;
+        for (var i = 0; i < x.length; i++) {
+            // On the first iteration of this loop, max is
+            // undefined and is thus made the maximum element in the array
+            if (x[i] > value || value === undefined) value = x[i];
+        }
+        return value;
+    }
+
+    calc.variance = function(x) {
+        // The variance of no numbers is null
+        if (x.length === 0) return null;
+
+        var mean_value = calc.mean(x),
+            deviations = [];
+
+        // Make a list of squared deviations from the mean.
+        for (var i = 0; i < x.length; i++) {
+            deviations.push(Math.pow(x[i] - mean_value, 2));
+        }
+
+        // Find the mean value of that list
+        return calc.mean(deviations);
+    }
+
+    calc.standard_deviation = function(x) {
+        // The standard deviation of no numbers is null
+        if (x.length === 0) return null;
+
+        return Math.sqrt(calc.variance(x));
+    }
+
+    calc.z_score = function(x, mean, standard_deviation) {
+        return (x - mean) / standard_deviation;
+    }
+
 
 
     // ------------------------------------------
