@@ -1258,7 +1258,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
-        return fake
+        return fake;
     };
 
 
