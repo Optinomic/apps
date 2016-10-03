@@ -152,10 +152,10 @@ function main(responses) {
             given_edu_group = 1;
         };
 
-        var given_mz_group = current_source.mz;
+        var given_mz_group = current_source.mz - 1;
 
 
-        // Existieren 99'er?  Ebenfalls hinzufügen.
+        // Existieren 99'er (Alle)?  Ebenfalls hinzufügen.
 
         for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
             var cd = return_array[dIndex];
@@ -189,6 +189,36 @@ function main(responses) {
 
         var return_array = [];
 
+        function getAllVariantsList(current_dimension) {
+
+            var list = [];
+
+            // Liste aller Varianten erstellen
+            for (var pos = 0; pos < current_dimension.length; pos++) {
+                var dim_pos = current_dimension[pos].dimensions;
+                list[pos] = dim_pos;
+            };
+
+            // Build all Variants List
+            var result = list[0].map(function(item) {
+                return [item];
+            });
+
+            for (var k = 1; k < list.length; k++) {
+                var next = [];
+                result.forEach(function(item) {
+                    list[k].forEach(function(word) {
+                        var line = item.slice(0);
+                        line.push(word);
+                        next.push(line);
+                    })
+                });
+                result = next;
+            };
+
+            return result;
+        };
+
         for (var pIndex = 0; pIndex < p.length; pIndex++) {
 
             var current_patient = p[pIndex];
@@ -199,24 +229,27 @@ function main(responses) {
                 var return_obj = {
                     "patient": current_patient.patient,
                     "data": {
-                        "dimensions": [],
+                        "dimensions": {
+                            "info": [],
+                            "variants": []
+                        },
                         "scores": []
                     }
                 };
-
 
                 // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
                     var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
-                    var current_dimensions = [];
+                    var current_dimensions = {};
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
                     current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
+
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions.push(current_dimensions);
+                    return_obj.data.dimensions.info.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
@@ -240,47 +273,117 @@ function main(responses) {
         }
 
         var n_dimensions = [];
-
         for (var dIndex = 0; dIndex < dimensions_app.length; dIndex++) {
             var cd = dimensions_app[dIndex];
             n_dimensions.push(cd.array.length)
         };
 
-        var return_array = createNDimArray(n_dimensions);
-
-        return return_array;
+        return createNDimArray(n_dimensions);
     };
 
-    calc.getMDPatientScores = function(patient_scores, md_app_scores) {
 
-        var d = md_app_scores;
+    calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
-        var default_obj = {
-            "patients": [],
-            "scores": []
-            "statistics": [],
-            "n": 0
+
+        function getObjProp(my_obj) {
+            var allFullPropertys = [];
+            for (var property in my_obj) {
+                if (my_obj.hasOwnProperty(property)) {
+                    allFullPropertys.push(property);
+                }
+            };
+            return allFullPropertys;
         };
 
-        // for (var psID = 0; psID < patient_scores.length; psID++) {
-        // 
-        //     var source_patient_scores = patient_scores[psID];
-        //     var source_dimensions = current_patient_scores.data.dimensions;
-        //     var source_scores = current_patient_scores.data.scores;
-        // 
-        //     for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
-        //         var current_dimension = source_dimensions[scoreID];
-        //         var current_score = source_scores[scoreID];
-        // 
-        //         //Test Write
-        //         // md_app_scores[0][0][0] = default_obj;
-        //     };
-        // 
-        // };
+        function concatArrays(ziel, quelle, patient, vars_array) {
+
+            var default_obj = {
+                "patients": [],
+                "scores": [],
+                "statistics": [],
+                "n": 0
+            };
+
+            if (ziel === null) {
+                ziel = default_obj;
+            };
+
+            ziel.patients.push(patient);
+            ziel.n = ziel.scores.length;
+
+            // Concat stuff
+            // for (var vID = 0; vID < vars_array.length; vID++) {
+            //     var current_var = vars_array[vID];
+            //     ziel[current_var] = ziel.concat(quelle[current_var]);
+            // };
+
+            return ziel;
+        };
 
 
-        return d;
+        var data = calc.cloneObj(md_app_scores);
+        var ps = calc.cloneObj(patient_scores);
+        var vars_array = getObjProp(calc.variables);
+
+
+        for (var psID = 0; psID < ps.length; psID++) {
+
+            var source_patient_scores = ps[psID];
+            var source_dimensions = source_patient_scores.data.dimensions;
+            var source_scores = source_patient_scores.data.scores;
+            var pid = source_patient_scores.patient.id;
+
+            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+                var current_dimension = source_dimensions[scoreID];
+                var current_score = source_scores[scoreID];
+
+                var list = [];
+
+                // Liste aller Varianten erstellen
+                for (var pos = 0; pos < current_dimension.length; pos++) {
+                    var dim_pos = current_dimension[pos].dimensions;
+                    list[pos] = dim_pos;
+                };
+
+                // Build all Variants
+                var result = list[0].map(function(item) {
+                    return [item];
+                });
+
+                for (var k = 1; k < list.length; k++) {
+                    var next = [];
+                    result.forEach(function(item) {
+                        list[k].forEach(function(word) {
+                            var line = item.slice(0);
+                            line.push(word);
+                            next.push(line);
+                        })
+                    });
+                    result = next;
+                };
+
+                // Write in all Variants
+                for (var listID = 0; listID < result.length; listID++) {
+
+                    var current_list = result[listID];
+                    var ziel = data;
+
+                    for (var clID = 0; clID < current_list.length; clID++) {
+                        ziel = ziel[current_list[clID]];
+                    }
+
+                    ziel = concatArrays(ziel, current_score, pid);
+
+                };
+
+            };
+
+        };
+
+
+        return data;
     };
+
 
 
     // ------------------------------------------
@@ -290,6 +393,20 @@ function main(responses) {
     calc.cloneObj = function(my_obj) {
         // Clone Obj. and Return
         return JSON.parse(JSON.stringify(my_obj));
+    };
+
+
+    calc.getObjProp = function(my_obj) {
+        // Create 'all propertys array'
+        var allFullPropertys = [];
+
+        for (var property in my_obj) {
+            if (my_obj.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        }
+
+        return allFullPropertys;
     };
 
 
@@ -306,19 +423,21 @@ function main(responses) {
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
-        //var md_patient_scores = calc.getMDPatientScores(patient_scores, md_app_scores);
+        var md_patient_scores = calc.writePatientScoresMD(patient_scores, md_app_scores);
 
 
         // Return Stuff
         results.patient_scores = patient_scores;
-        //results.md_patient_scores = md_patient_scores;
+        results.md_patient_scores = md_patient_scores;
 
         var definitions = {
             "info": info,
             "variables": vars,
+            "variables_array": calc.getObjProp(vars),
             "dimensions_app": calc.cloneObj(calc.dimensions_app),
-            "md_app_scores": md_app_scores
+            "md_app_data_empty": md_app_scores
         };
+
         results.definitions = definitions;
 
         // Returning full (complete) responses is often used/helpful.
