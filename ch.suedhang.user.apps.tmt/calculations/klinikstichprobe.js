@@ -147,10 +147,9 @@ function main(responses) {
 
         var given_age_group = current_source.percentile.age_perz.altersgruppe;
 
+        var given_edu_group = 0;
         if (current_source.percentile.age_perz.education_high) {
-            var given_edu_group = 1;
-        } else {
-            var given_edu_group = 0;
+            given_edu_group = 1;
         };
 
         var given_mz_group = current_source.mz;
@@ -158,26 +157,26 @@ function main(responses) {
 
         // Existieren 99'er?  Ebenfalls hinzufügen.
 
-        for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
-            var cd = return_array[dIndex];
-            cd.dimensions = [];
-
-            if (dIndex === 0) {
-                cd.dimensions.push(given_age_group);
-            };
-
-            if (dIndex === 1) {
-                cd.dimensions.push(given_edu_group);
-                // Jeder Ausbildungsgrad
-                cd.dimensions.push(2);
-            };
-
-            if (dIndex === 2) {
-                cd.dimensions.push(given_mz_group);
-                // Alle Messzeitpunkte
-                cd.dimensions.push(3);
-            };
-        };
+        //  for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
+        //      var cd = return_array[dIndex];
+        //      cd.dimensions = [];
+        //  
+        //      if (dIndex === 0) {
+        //          cd.dimensions.push(given_age_group);
+        //      };
+        //  
+        //      if (dIndex === 1) {
+        //          cd.dimensions.push(given_edu_group);
+        //          // Jeder Ausbildungsgrad
+        //          cd.dimensions.push(2);
+        //      };
+        //  
+        //      if (dIndex === 2) {
+        //          cd.dimensions.push(given_mz_group);
+        //          // Alle Messzeitpunkte
+        //          cd.dimensions.push(3);
+        //      };
+        //  };
 
         return return_array;
     };
