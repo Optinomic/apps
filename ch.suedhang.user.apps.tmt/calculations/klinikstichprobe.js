@@ -251,37 +251,97 @@ function main(responses) {
 
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
+
+        function getObjProp(my_obj) {
+            var allFullPropertys = [];
+            for (var property in my_obj) {
+                if (my_obj.hasOwnProperty(property)) {
+                    allFullPropertys.push(property);
+                }
+            };
+            return allFullPropertys;
+        };
+
+        function concatArrays(ziel, quelle, patient, vars_array) {
+
+            var default_obj = {
+                "patients": [],
+                "scores": [],
+                "statistics": [],
+                "n": 0
+            };
+
+            if (ziel === null) {
+                ziel = default_obj;
+            };
+
+            ziel.patients.push(patient);
+
+            // Concat stuff
+            for (var vID = 0; vID < vars_array.length; vID++) {
+                var current_var = vars_array[vID];
+                ziel[current_var] = ziel.concat(quelle[current_var]);
+            };
+
+            return ziel;
+        };
+
+
         var data = calc.cloneObj(md_app_scores);
         var ps = calc.cloneObj(patient_scores);
+        var vars_array = getObjProp(calc.variables);
 
-        var default_obj = {
-            "patients": [],
-            "scores": [],
-            "statistics": [],
-            "n": 0
-        };
 
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
             var source_dimensions = source_patient_scores.data.dimensions;
             var source_scores = source_patient_scores.data.scores;
+            var pid = source_patient_scores.patient.id;
 
             for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
+                var list = [];
 
-                // Alle Varianten für MD-Array erstellen
+                // Liste aller Varianten erstellen
                 for (var pos = 0; pos < current_dimension.length; pos++) {
-
                     var dim_pos = current_dimension[pos].dimensions;
-
-
+                    list[pos] = dim_pos;
                 };
 
-                //Test Write
-                //data[0][0][0] = default_obj;
+                // Build all Variants
+                var result = list[0].map(function(item) {
+                    return [item];
+                });
+
+                for (var k = 1; k < list.length; k++) {
+                    var next = [];
+                    result.forEach(function(item) {
+                        list[k].forEach(function(word) {
+                            var line = item.slice(0);
+                            line.push(word);
+                            next.push(line);
+                        })
+                    });
+                    result = next;
+                };
+
+                // Write in all Variants
+                for (var listID = 0; listID < result.length; listID++) {
+
+                    var current_list = result[listID];
+                    var ziel = data;
+
+                    for (var clID = 0; clID < current_list.length; clID++) {
+
+                        ziel = ziel[current_list[clID]];
+                    }
+
+                    ziel = concatArrays(ziel, current_score, pid);
+
+                };
 
             };
 
