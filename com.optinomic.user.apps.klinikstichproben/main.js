@@ -117,6 +117,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
+
+        //Test Write
+        //data[0][0][0] = default_obj;
+
+        var all_positions = [
+            [0, 0, 0],
+            [2, 1, 0]
+        ];
+
+
+        console.log('data 1', data[0][0][0]);
+        console.log('data 2', data[all_positions[0][0]][all_positions[0][1]][all_positions[0][2]]);
+        console.log('data 3', data[all_positions[1][0]][all_positions[1][1]][all_positions[1][2]]);
+
+
         // createNDimArray([3, 2, 3]);
 
         for (var psID = 0; psID < ps.length; psID++) {
@@ -138,14 +153,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 };
 
-                //Test Write
-                //data[0][0][0] = default_obj;
 
-                var link = '[0][0][0]';
-
-                console.log('data 1', data[0][0][0]);
-                console.log('data 2', data[[0, 0, 0]]);
-                console.log('data 3', data[link]);
 
             };
 
