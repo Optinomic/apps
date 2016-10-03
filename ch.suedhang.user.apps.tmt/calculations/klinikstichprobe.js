@@ -339,7 +339,7 @@ function main(responses) {
                         ziel = ziel[current_list[clID]];
                     }
 
-                    ziel = concatArrays(ziel, current_score, pid);
+                    data = concatArrays(ziel, current_score, pid);
 
                 };
 
