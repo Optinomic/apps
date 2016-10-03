@@ -185,25 +185,27 @@ function main(responses) {
 
     calc.getMDScoresArray = function(dimensions_app) {
 
-        var return_array = [];
+        function createNDimArray(dimensions) {
+            var t, i = 0,
+                s = dimensions[0],
+                arr = new Array(s);
+            if (dimensions.length < 3)
+                for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
+            else
+                for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
+            return arr;
+        }
 
-        // Create MD-App-Scores
-        return_array = dimensions_app[0];
+        var n_dimensions = [];
 
-        //  for (var dIndex = 0; dIndex < dimensions_app_scores.length; dIndex++) {
-        //      var cd = dimensions_app_scores[dIndex];
-        //  
-        //      // Loop Dimensions
-        //  
-        //      for (var cdIndex = 0; cdIndex < cd.array.length; cdIndex++) {
-        //          var csd = dimensions_app_scores[dIndex];
-        //      };
-        //  
-        //  };
+        for (var dIndex = 0; dIndex < dimensions_app.length; dIndex++) {
+            var cd = dimensions_app[dIndex];
+            n_dimensions.push(cd.array.length)
+        };
 
+        var return_array = createNDimArray(n_dimensions);
 
         return return_array;
-
     };
 
 
