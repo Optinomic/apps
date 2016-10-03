@@ -245,6 +245,8 @@ function main(responses) {
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
                     current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
+                    var list = getAllVariantsList(current_dimensions);
+                    return_obj.data.md_variants = list;
 
                     return_obj.data.scores.push(current_vars);
                     return_obj.data.dimensions.push(current_dimensions);
