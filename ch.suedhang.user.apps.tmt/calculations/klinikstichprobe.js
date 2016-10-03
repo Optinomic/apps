@@ -276,12 +276,13 @@ function main(responses) {
             };
 
             ziel.patients.push(patient);
+            ziel.n = ziel.scores.length;
 
             // Concat stuff
-            for (var vID = 0; vID < vars_array.length; vID++) {
-                var current_var = vars_array[vID];
-                ziel[current_var] = ziel.concat(quelle[current_var]);
-            };
+            // for (var vID = 0; vID < vars_array.length; vID++) {
+            //     var current_var = vars_array[vID];
+            //     ziel[current_var] = ziel.concat(quelle[current_var]);
+            // };
 
             return ziel;
         };
@@ -335,7 +336,6 @@ function main(responses) {
                     var ziel = data;
 
                     for (var clID = 0; clID < current_list.length; clID++) {
-
                         ziel = ziel[current_list[clID]];
                     }
 
