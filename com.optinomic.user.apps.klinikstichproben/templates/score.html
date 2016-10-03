@@ -1,9 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <div>
     <p class="md-caption">user_app_calc</p>
-    <md-input-container class="md-block">
-        <label>user_app_calc</label>
-        <textarea ng-model="d.ks.user_app_calc" rows="5" md-select-on-focus></textarea>
-    </md-input-container>
+    <pre>{{d.ks.user_app_calc | json}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
