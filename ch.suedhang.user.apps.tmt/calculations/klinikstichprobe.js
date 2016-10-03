@@ -353,7 +353,8 @@ function main(responses) {
 
                 var is_array = calc.isArray(ziel.statistics[current_var]);
                 if (is_array) {
-                    ziel.statistics[current_var] = calc.getStatistics(ziel.statistics[current_var]);
+                    // ziel.statistics[current_var] = calc.getStatistics(ziel.statistics[current_var]);
+                    ziel.statistics[current_var] = 73;
                 };
             };
 
