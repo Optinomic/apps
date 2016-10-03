@@ -271,7 +271,12 @@ function main(responses) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
-                for (var pos = 0; pos < current_dimension.length; pos++) {};
+                for (var pos = 0; pos < current_dimension.length; pos++) {
+
+                    var dim_pos = current_dimension[pos].dimensions;
+
+
+                };
 
                 //Test Write
                 //data[0][0][0] = default_obj;
@@ -320,7 +325,7 @@ function main(responses) {
             "info": info,
             "variables": vars,
             "dimensions_app": calc.cloneObj(calc.dimensions_app),
-            "md_app_scores": md_app_scores
+            "md_app_data_empty": md_app_scores
         };
 
         results.definitions = definitions;
