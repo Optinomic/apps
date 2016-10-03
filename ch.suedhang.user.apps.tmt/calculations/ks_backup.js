@@ -229,10 +229,7 @@ function main(responses) {
                 var return_obj = {
                     "patient": current_patient.patient,
                     "data": {
-                        "dimensions": {
-                            "info": [],
-                            "variants": []
-                        },
+                        "dimensions": [],
                         "scores": []
                     }
                 };
@@ -242,14 +239,18 @@ function main(responses) {
 
                     var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
-                    var current_dimensions = {};
+                    var current_dimensions = {
+                        "md_variants": [],
+                        "info": []
+                    };
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
-                    current_dimensions = calc.arrangeScoresInDimensions(current_source);
-
-
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions.info.push(current_dimensions);
+
+                    var dims = calc.arrangeScoresInDimensions(current_source);
+                    current_dimensions.info = dims;
+                    current_dimensions.md_variants = getAllVariantsList(dims);
+                    return_obj.data.dimensions.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
@@ -285,94 +286,87 @@ function main(responses) {
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
 
-        function getObjProp(my_obj) {
-            var allFullPropertys = [];
-            for (var property in my_obj) {
-                if (my_obj.hasOwnProperty(property)) {
-                    allFullPropertys.push(property);
-                }
-            };
-            return allFullPropertys;
-        };
-
         function concatArrays(ziel, quelle, patient, vars_array) {
 
             var default_obj = {
                 "patients": [],
-                "scores": [],
-                "statistics": [],
+                "scores": calc.cloneObj(calc.variables),
+                "statistics": calc.cloneObj(calc.variables),
                 "n": 0
             };
 
+            // Set Default if needed
             if (ziel === null) {
                 ziel = default_obj;
             };
 
+            // Concat stuff
+            //  for (var vID = 0; vID < vars_array.length; vID++) {
+            //      var current_var = vars_array[vID];
+            //  
+            //      //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
+            //      //ziel.statistics = current_var;
+            //  };
+
             ziel.patients.push(patient);
             ziel.n = ziel.scores.length;
 
-            // Concat stuff
-            // for (var vID = 0; vID < vars_array.length; vID++) {
-            //     var current_var = vars_array[vID];
-            //     ziel[current_var] = ziel.concat(quelle[current_var]);
-            // };
 
             return ziel;
         };
 
 
-        var data = calc.cloneObj(md_app_scores);
         var ps = calc.cloneObj(patient_scores);
+        var data = calc.cloneObj(md_app_scores);
         var vars_array = getObjProp(calc.variables);
 
 
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
-            var source_dimensions = source_patient_scores.data.dimensions;
-            var source_scores = source_patient_scores.data.scores;
+
             var pid = source_patient_scores.patient.id;
+            var source_scores = source_patient_scores.data.scores;
+            var source_dimensions = source_patient_scores.data.dimensions;
 
-            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
-                var current_dimension = source_dimensions[scoreID];
-                var current_score = source_scores[scoreID];
 
-                var list = [];
+            for (var sID = 0; sID < source_scores.length; sID++) {
+                var current_score = source_scores[sID];
+                var md_variants = source_dimensions[sID].md_variants;
 
-                // Liste aller Varianten erstellen
-                for (var pos = 0; pos < current_dimension.length; pos++) {
-                    var dim_pos = current_dimension[pos].dimensions;
-                    list[pos] = dim_pos;
-                };
-
-                // Build all Variants
-                var result = list[0].map(function(item) {
-                    return [item];
-                });
-
-                for (var k = 1; k < list.length; k++) {
-                    var next = [];
-                    result.forEach(function(item) {
-                        list[k].forEach(function(word) {
-                            var line = item.slice(0);
-                            line.push(word);
-                            next.push(line);
-                        })
-                    });
-                    result = next;
-                };
 
                 // Write in all Variants
-                for (var listID = 0; listID < result.length; listID++) {
+                for (var listID = 0; listID < md_variants.length; listID++) {
 
-                    var current_list = result[listID];
-                    var ziel = data;
+                    var current_list = md_variants[listID];
 
-                    for (var clID = 0; clID < current_list.length; clID++) {
-                        ziel = ziel[current_list[clID]];
-                    }
+                    // Testwrite | Works
+                    // data[2][1][0] = current_list;
 
-                    ziel = concatArrays(ziel, current_score, pid);
+
+                    // DIRTY - HACKING HERE!
+                    // TO DO: How do I do this better?
+
+                    var ziel = null;
+                    if (current_list.length === 1) {
+                        data[current_list[0]] = current_list;
+                    };
+
+                    if (current_list.length === 2) {
+                        data[current_list[0]][current_list[1]] = current_list;
+                    };
+
+                    if (current_list.length === 3) {
+                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(data[current_list[0]][current_list[1]][current_list[2]], current_score, pid, vars_array);
+                    };
+
+                    if (current_list.length === 4) {
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
+                    };
+
+                    if (current_list.length === 5) {
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = current_list;
+                    };
 
                 };
 
@@ -395,7 +389,6 @@ function main(responses) {
         return JSON.parse(JSON.stringify(my_obj));
     };
 
-
     calc.getObjProp = function(my_obj) {
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -408,6 +401,23 @@ function main(responses) {
 
         return allFullPropertys;
     };
+
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
 
 
     // ------------------------------------------

@@ -286,12 +286,22 @@ function main(responses) {
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
 
+        function getObjProp(my_obj) {
+            var allFullPropertys = [];
+            for (var property in my_obj) {
+                if (my_obj.hasOwnProperty(property)) {
+                    allFullPropertys.push(property);
+                }
+            };
+            return allFullPropertys;
+        };
+
         function concatArrays(ziel, quelle, patient, vars_array) {
 
             var default_obj = {
                 "patients": [],
-                "scores": calc.cloneObj(calc.variables),
-                "statistics": calc.cloneObj(calc.variables),
+                "scores": [],
+                "statistics": [],
                 "n": 0
             };
 
@@ -301,13 +311,10 @@ function main(responses) {
             };
 
             // Concat stuff
-            //  for (var vID = 0; vID < vars_array.length; vID++) {
-            //      var current_var = vars_array[vID];
-            //  
-            //  
-            //      //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
-            //      //ziel.statistics = current_var;
-            //  };
+            for (var vID = 0; vID < vars_array.length; vID++) {
+                var current_var = vars_array[vID];
+                ziel[current_var] = ziel.concat(quelle[current_var]);
+            };
 
             ziel.patients.push(patient);
             ziel.n = ziel.scores.length;
@@ -390,6 +397,7 @@ function main(responses) {
         return JSON.parse(JSON.stringify(my_obj));
     };
 
+
     calc.getObjProp = function(my_obj) {
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -402,23 +410,6 @@ function main(responses) {
 
         return allFullPropertys;
     };
-
-    calc.roundToTwo = function(num) {
-        // Round a Number to 0.X 
-        return +(Math.round(num + "e+2") + "e-2");
-    };
-
-    calc.isArray = function(obj) {
-        return (typeof obj !== 'undefined' &&
-            obj && obj.constructor === Array);
-    };
-
-    calc.merge_obj = function(obj1, obj2) {
-        var obj3 = {};
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
-        return obj3;
-    }
 
 
     // ------------------------------------------
