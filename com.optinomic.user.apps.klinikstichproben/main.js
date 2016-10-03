@@ -117,25 +117,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-
-        //Test Write
-        //data[0][0][0] = default_obj;
-
-        var all_positions = [
-            [0, 0, 0],
-            [2, 1, 0]
-        ];
-
-
-        console.log('data 1', data[0][0][0]);
-        console.log('data 2', data[all_positions[0][0]][all_positions[0][1]][all_positions[0][2]]);
-        console.log('data 3', data[all_positions[1][0]][all_positions[1][1]][all_positions[1][2]]);
-
-
-
-
-        // createNDimArray([3, 2, 3]);
-
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
@@ -147,7 +128,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_score = source_scores[scoreID];
 
                 var list = [];
-                // Alle Varianten für MD-Array erstellen
+
+                // Liste aller Varianten erstellen
                 for (var pos = 0; pos < current_dimension.length; pos++) {
 
                     var dim_pos = current_dimension[pos].dimensions;
@@ -158,7 +140,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 console.log('list', list);
 
                 // Build all Variants
-
                 var result = list[0].map(function(item) {
                     return [item];
                 });
@@ -173,9 +154,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         })
                     });
                     result = next;
-                }
-
+                };
                 console.log('result:', result);
+
+                // Write in all Variants
+                for (var listID = 0; listID < result.length; listID++) {
+
+                    var current_list = result[listID];
+
+                    var ziel = data;
+
+                    for (var clID = 0; clID < current_list.length; clID++) {
+                        ziel = ziel[clID];
+                        console.log('Ziel - ', clID, ziel);
+                    }
+                    console.log('Ziel - Final', ziel);
+
+                };
 
             };
 
