@@ -166,7 +166,7 @@ function main(responses) {
                 var md_app_scores = [];
                 var dimensions_app_scores = calc.cloneObj(calc.dimensions_app);
                 for (var dIndex = 0; dIndex < dimensions_app_scores.length; dIndex++) {
-                    var current_dimension = source[sIndex];
+                    var current_dimension = dimensions_app_scores[dIndex];
                     md_app_scores[dIndex] = current_dimension.array;
                 };
                 return_obj.md_app_scores = calc.cloneObj(md_app_scores);
