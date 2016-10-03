@@ -189,6 +189,37 @@ function main(responses) {
 
         var return_array = [];
 
+        function getAllVariantsList(current_dimension) {
+
+            var list = [];
+
+            // Liste aller Varianten erstellen
+            for (var pos = 0; pos < current_dimension.length; pos++) {
+                var dim_pos = current_dimension[pos].dimensions;
+                list[pos] = dim_pos;
+            };
+
+            // Build all Variants List
+            var result = list[0].map(function(item) {
+                return [item];
+            });
+
+            for (var k = 1; k < list.length; k++) {
+                var next = [];
+                result.forEach(function(item) {
+                    list[k].forEach(function(word) {
+                        var line = item.slice(0);
+                        line.push(word);
+                        next.push(line);
+                    })
+                });
+                result = next;
+            };
+
+            return result;
+
+        };
+
         for (var pIndex = 0; pIndex < p.length; pIndex++) {
 
             var current_patient = p[pIndex];
@@ -199,24 +230,27 @@ function main(responses) {
                 var return_obj = {
                     "patient": current_patient.patient,
                     "data": {
-                        "dimensions": [],
+                        "dimensions": {
+                            "info": [],
+                            "variants": []
+                        },
                         "scores": []
                     }
                 };
-
 
                 // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
                     var current_vars = calc.cloneObj(vars);
                     var current_source = source[sIndex];
-                    var current_dimensions = [];
+                    var current_dimensions = {};
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
                     current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
+
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions.push(current_dimensions);
+                    return_obj.data.dimensions.info.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
