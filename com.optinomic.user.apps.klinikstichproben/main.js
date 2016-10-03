@@ -152,7 +152,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 for (var pos = 0; pos < current_dimension.length; pos++) {
 
                     var dim_pos = current_dimension[pos].dimensions;
-                    console.log('dim_pos', dim_pos);
+                    console.log('dim_pos', psID, scoreID, dim_pos);
+
+                    pos_name = 'pos' + pos;
+                    for (var pos[pos_name] = 0; pos[pos_name] < current_dimension.length; pos[pos_name]++) {
+                        console.log('pos[pos_name]', pos[pos_name]);
+                    };
 
 
 
