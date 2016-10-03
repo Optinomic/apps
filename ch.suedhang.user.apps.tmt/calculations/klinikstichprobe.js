@@ -405,7 +405,7 @@ function main(responses) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
 
                         data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
-                        data[current_list[0]][current_list[1]][current_list[2]].statistics = doStatistics(md_data.statistics, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]] = doStatistics(md_data, vars_array);
                     };
 
                     if (current_list.length === 4) {
