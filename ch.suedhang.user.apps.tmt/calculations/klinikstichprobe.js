@@ -74,21 +74,17 @@ function main(responses) {
 
 
     calc.group_mz_props = [{
-        "id": 0,
-        "text": "Eintritt",
-        "survey_id": 1
-    }, {
         "id": 1,
-        "text": "Austritt",
-        "survey_id": 2
+        "text": "Eintritt"
     }, {
         "id": 2,
-        "text": "Anderer Messzeitpunkt",
-        "survey_id": 3
+        "text": "Austritt"
     }, {
         "id": 3,
-        "text": "Alle Messzeitpunkte",
-        "survey_id": null
+        "text": "Anderer Messzeitpunkt"
+    }, {
+        "id": 99,
+        "text": "Alle Messzeitpunkte"
     }];
 
 
@@ -100,15 +96,15 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
-        "definitions": JSON.parse(JSON.stringify(calc.group_age_props))
+        "array": JSON.parse(JSON.stringify(calc.group_age_props))
     }, {
         "id": 1,
         "name": "Ausbildungsgrad",
-        "definitions": JSON.parse(JSON.stringify(calc.group_edu_props))
+        "array": JSON.parse(JSON.stringify(calc.group_edu_props))
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
-        "definitions": JSON.parse(JSON.stringify(calc.group_mz_props))
+        "array": JSON.parse(JSON.stringify(calc.group_mz_props))
     }];
 
 
@@ -163,9 +159,20 @@ function main(responses) {
 
                 var return_obj = {
                     "patient": current_patient.patient,
-                    "scores": []
+                    "scores": [],
                 };
 
+                // Create MD-App-Scores
+                var md_app_scores = [];
+                var dimensions_app_scores = calc.cloneObj(calc.dimensions_app);
+                for (var dIndex = 0; dIndex < dimensions_app_scores.length; dIndex++) {
+                    var current_dimension = source[sIndex];
+                    md_app_scores[dIndex] = current_dimension.array;
+                };
+                return_obj.md_app_scores = calc.cloneObj(md_app_scores);
+
+
+                // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
                     var current_vars = calc.cloneObj(vars);
