@@ -241,14 +241,14 @@ function main(responses) {
                     var current_source = source[sIndex];
                     var current_dimensions = {
                         "md_variants": [],
-                        "score_info": []
+                        "info": []
                     };
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
                     return_obj.data.scores.push(current_vars);
 
                     var dims = calc.arrangeScoresInDimensions(current_source);
-                    current_dimensions.score_info = dims;
+                    current_dimensions.info = dims;
                     current_dimensions.md_variants = getAllVariantsList(dims);
                     return_obj.data.dimensions.push(current_dimensions);
                 };
@@ -330,47 +330,53 @@ function main(responses) {
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
-            // var md_variants = source_patient_scores.data.md_variants;
-            var source_scores = source_patient_scores.data.scores;
+
             var pid = source_patient_scores.patient.id;
+            var source_scores = source_patient_scores.data.scores;
+            var source_dimensions = source_patient_scores.data.dimensions;
 
 
-            // Write in all Variants
-            //  for (var listID = 0; listID < md_variants.length; listID++) {
-            //  
-            //      var current_list = md_variants[listID];
-            //  
-            //      // Testwrite | Works
-            //      // data[2][1][0] = current_list;
-            //  
-            //  
-            //      // DIRTY - HACKING HERE!
-            //      // TO DO: How do I do this better?
-            //  
-            //      var ziel = null;
-            //      if (current_list.length === 1) {
-            //          data[current_list[0]] = current_list;
-            //      };
-            //  
-            //      if (current_list.length === 2) {
-            //          data[current_list[0]][current_list[1]] = current_list;
-            //      };
-            //  
-            //      if (current_list.length === 3) {
-            //          data[current_list[0]][current_list[1]][current_list[2]] = current_list;
-            //      };
-            //  
-            //      if (current_list.length === 4) {
-            //          data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
-            //      };
-            //  
-            //      if (current_list.length === 5) {
-            //          data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = current_list;
-            //      };
-            //  
-            //  
-            //  };
-            //  
+            for (var sID = 0; sID < source_scores.length; sID++) {
+                var current_score = source_scores[sID];
+                var md_variants = source_dimensions[sID].md_variants;
+
+
+                // Write in all Variants
+                for (var listID = 0; listID < md_variants.length; listID++) {
+
+                    var current_list = md_variants[listID];
+
+                    // Testwrite | Works
+                    // data[2][1][0] = current_list;
+
+
+                    // DIRTY - HACKING HERE!
+                    // TO DO: How do I do this better?
+
+                    var ziel = null;
+                    if (current_list.length === 1) {
+                        data[current_list[0]] = current_list;
+                    };
+
+                    if (current_list.length === 2) {
+                        data[current_list[0]][current_list[1]] = current_list;
+                    };
+
+                    if (current_list.length === 3) {
+                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(data[current_list[0]][current_list[1]][current_list[2]], current_score, pid, vars_array);
+                    };
+
+                    if (current_list.length === 4) {
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
+                    };
+
+                    if (current_list.length === 5) {
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = current_list;
+                    };
+
+                };
+
+            };
 
         };
 
