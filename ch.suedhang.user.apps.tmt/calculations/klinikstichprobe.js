@@ -249,7 +249,7 @@ function main(responses) {
 
                     var dims = calc.arrangeScoresInDimensions(current_source);
                     current_dimensions.score_info = dims;
-                    current_dimensions.score_info = getAllVariantsList(dims);
+                    current_dimensions.md_variants = getAllVariantsList(dims);
                     return_obj.data.dimensions.push(current_dimensions);
                 };
 
