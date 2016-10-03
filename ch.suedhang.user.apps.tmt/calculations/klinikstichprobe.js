@@ -345,6 +345,22 @@ function main(responses) {
         };
 
 
+        function doStatistics(ziel, vars_array) {
+
+            // Concat stuff
+            for (var vID = 0; vID < vars_array.length; vID++) {
+                var current_var = vars_array[vID];
+
+                var is_array = calc.isArray(ziel.statistics[current_var]);
+                if (is_array) {
+                    ziel.statistics[current_var] = calc.getStatistics(ziel.statistics[current_var]);
+                };
+            };
+
+            return ziel;
+        };
+
+
         var ps = calc.cloneObj(patient_scores);
         var data = calc.cloneObj(md_app_scores);
         var vars_array = getObjProp(calc.variables);
@@ -387,7 +403,9 @@ function main(responses) {
 
                     if (current_list.length === 3) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
+
                         data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]].statistics = doStatistics(md_data.statistics, vars_array);
                     };
 
                     if (current_list.length === 4) {
