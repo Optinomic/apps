@@ -335,18 +335,23 @@ function main(responses) {
 
 
             // Write in all Variants
-            // for (var listID = 0; listID < md_variants.length; listID++) {
-            // 
-            //     var current_list = md_variants[listID];
-            //     var ziel = data;
-            // 
-            //     for (var clID = 0; clID < current_list.length; clID++) {
-            //         ziel = ziel[current_list[clID]];
-            //     }
-            // 
-            //     ziel = concatArrays(ziel, current_score, pid);
-            // 
-            // };
+            for (var listID = 0; listID < md_variants.length; listID++) {
+
+                var current_list = md_variants[listID];
+
+                // Testwrite
+                data[2][1][0] = "GAGA";
+
+
+                //  var ziel = data;
+                //  
+                //  for (var clID = 0; clID < current_list.length; clID++) {
+                //      ziel = ziel[current_list[clID]];
+                //  }
+                //  
+                //  ziel = concatArrays(ziel, current_score, pid);
+
+            };
 
 
         };
