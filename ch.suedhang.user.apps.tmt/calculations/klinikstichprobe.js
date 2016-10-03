@@ -262,21 +262,21 @@ function main(responses) {
             "n": 0
         };
 
-        for (var psID = 0; psID < patient_scores.length; psID++) {
-
-            var source_patient_scores = patient_scores[psID];
-            var source_dimensions = current_patient_scores.data.dimensions;
-            var source_scores = current_patient_scores.data.scores;
-
-            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
-                var current_dimension = source_dimensions[scoreID];
-                var current_score = source_scores[scoreID];
-
-                //Test Write
-                // md_app_scores[0][0][0] = default_obj;
-            };
-
-        };
+        // for (var psID = 0; psID < patient_scores.length; psID++) {
+        // 
+        //     var source_patient_scores = patient_scores[psID];
+        //     var source_dimensions = current_patient_scores.data.dimensions;
+        //     var source_scores = current_patient_scores.data.scores;
+        // 
+        //     for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+        //         var current_dimension = source_dimensions[scoreID];
+        //         var current_score = source_scores[scoreID];
+        // 
+        //         //Test Write
+        //         // md_app_scores[0][0][0] = default_obj;
+        //     };
+        // 
+        // };
 
 
         return d;
