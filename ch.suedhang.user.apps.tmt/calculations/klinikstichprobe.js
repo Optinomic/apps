@@ -273,7 +273,7 @@ function main(responses) {
 
                 var positons = [];
                 for (var pos = 0; pos < current_dimension.length; pos++) {
-                    var positons[pos].push(current_dimension.dimensions);
+                    positons[pos].push(current_dimension.dimensions);
                 };
 
                 //Test Write
