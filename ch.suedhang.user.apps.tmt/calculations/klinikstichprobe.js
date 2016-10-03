@@ -306,7 +306,7 @@ function main(responses) {
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
-        var md_patient_scores = calc.getMDPatientScores(calc.cloneObj(patient_scores), calc.cloneObj(md_app_scores));
+        var md_patient_scores = calc.getMDPatientScores(patient_scores, cmd_app_scores);
 
 
         // Return Stuff
@@ -319,7 +319,6 @@ function main(responses) {
             "dimensions_app": calc.cloneObj(calc.dimensions_app),
             "md_app_scores": md_app_scores
         };
-
         results.definitions = definitions;
 
         // Returning full (complete) responses is often used/helpful.
