@@ -256,7 +256,7 @@ function main(responses) {
 
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
-        // var data = calc.cloneObj(md_app_scores);
+        var data = calc.cloneObj(md_app_scores);
 
         var default_obj = {
             "patients": [],
