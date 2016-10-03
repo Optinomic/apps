@@ -306,7 +306,7 @@ function main(responses) {
 
 
                 //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
-                ziel.statistics = current_var;
+                //ziel.statistics = current_var;
             };
 
             ziel.patients.push(patient);
