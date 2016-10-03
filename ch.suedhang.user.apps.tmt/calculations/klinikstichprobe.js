@@ -205,8 +205,9 @@ function main(responses) {
         return return_array;
     };
 
+
     // ------------------------------------------
-    // GENERIC -  should not be touched:
+    // GENERIC -  Down below should be untouched:
     // ------------------------------------------
 
     calc.getScoresInVars = function(p, vars, info) {
@@ -306,7 +307,6 @@ function main(responses) {
         return createNDimArray(n_dimensions);
     };
 
-
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
 
@@ -320,7 +320,7 @@ function main(responses) {
             return allFullPropertys;
         };
 
-        function concatArrays(ziel, quelle, patient, vars_array) {
+        function concatAndStatistics(ziel, quelle, patient, vars_array) {
 
             var default_obj = {
                 "patients": [],
@@ -344,19 +344,6 @@ function main(responses) {
 
             return ziel;
         };
-
-
-        //   function doStatistics(ziel, quelle, vars_array) {
-        //   
-        //       // Concat stuff
-        //       for (var vID = 0; vID < vars_array.length; vID++) {
-        //           var current_var = vars_array[vID];
-        //   
-        //           ziel.statistics[current_var] = calc.getStatistics(quelle[current_var]);
-        //       };
-        //   
-        //       return ziel;
-        //   };
 
 
         var ps = calc.cloneObj(patient_scores);
@@ -402,7 +389,7 @@ function main(responses) {
                     if (current_list.length === 3) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
 
-                        md_data = concatArrays(md_data, current_score, pid, vars_array);
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
                         // md_data = doStatistics(md_data, current_score, vars_array);
 
                         data[current_list[0]][current_list[1]][current_list[2]] = md_data;
@@ -425,7 +412,6 @@ function main(responses) {
 
         return data;
     };
-
 
 
     // ------------------------------------------

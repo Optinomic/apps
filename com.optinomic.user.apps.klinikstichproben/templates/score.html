@@ -1,4 +1,15 @@
 include(../lib/html/optinomic/page/start.m4)
+<div ng-repeat="dim in d.ks.user_app_calc.definitions.dimensions_app">
+    <md-input-container ng-class="md-block">
+        <label ng-init="dim.selected[dim.name] = 0">dim.name</label>
+        <md-select ng-model="dim.selected[dim.name]">
+            <md-option><em>None</em></md-option>
+            <md-option ng-repeat="item in dim.array" ng-value="$index">
+                {{item.text}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+</div>
 <div>
     <p class="md-caption">user_app_calc</p>
     <pre>{{d.ks.user_app_calc | json}}</pre>
