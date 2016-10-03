@@ -351,8 +351,7 @@ function main(responses) {
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
 
-                // ziel.statistics[current_var] = calc.getStatistics(ziel.statistics[current_var]);
-                //ziel.statistics[current_var] = 73;
+                ziel.statistics[current_var] = calc.getStatistics(ziel.statistics[current_var]);
             };
 
             return ziel;
