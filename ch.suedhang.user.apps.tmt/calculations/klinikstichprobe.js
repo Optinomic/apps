@@ -269,19 +269,17 @@ function main(responses) {
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
-            var source_dimensions = current_patient_scores.data.dimensions;
-            var source_scores = current_patient_scores.data.scores;
+            var source_dimensions = source_patient_scores.data.dimensions;
+            var source_scores = source_patient_scores.data.scores;
 
-            //Test Write
-            //data[0][0][0] = default_obj;
+            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+                var current_dimension = source_dimensions[scoreID];
+                var current_score = source_scores[scoreID];
 
-            //  for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
-            //      var current_dimension = source_dimensions[scoreID];
-            //      var current_score = source_scores[scoreID];
-            //  
-            //      
-            //      
-            //  };
+                //Test Write
+                //data[0][0][0] = default_obj;
+
+            };
 
         };
 
