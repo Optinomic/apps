@@ -349,23 +349,22 @@ function main(responses) {
 
                 var ziel = null;
                 if (current_list.length === 1) {
-                    ziel = data[current_list[0]];
+                    data[current_list[0]] = current_list;
                 };
 
                 if (current_list.length === 2) {
-                    ziel = data[current_list[0]][current_list[1]];
+                    data[current_list[0]][current_list[1]] = current_list;
                 };
 
                 if (current_list.length === 3) {
-                    ziel = data[current_list[0]][current_list[1]][current_list[2]];
+                    data[current_list[0]][current_list[1]][current_list[2]] = current_list;
                 };
 
                 if (current_list.length === 4) {
-                    ziel = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]];
+                    data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
                 };
 
                 // ziel = concatArrays(ziel, current_score, pid);
-                ziel = current_list;
 
             };
 
