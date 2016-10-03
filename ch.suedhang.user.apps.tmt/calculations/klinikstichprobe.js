@@ -286,16 +286,6 @@ function main(responses) {
     calc.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
 
-        function getObjProp(my_obj) {
-            var allFullPropertys = [];
-            for (var property in my_obj) {
-                if (my_obj.hasOwnProperty(property)) {
-                    allFullPropertys.push(property);
-                }
-            };
-            return allFullPropertys;
-        };
-
         function concatArrays(ziel, quelle, patient, vars_array) {
 
             var default_obj = {
@@ -314,9 +304,8 @@ function main(responses) {
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
 
-                var my_ziel = ziel[current_var];
-                var my_quelle = quelle[current_var];
-                ziel[current_var] = my_ziel.concat(my_quelle);
+                //ziel[current_var] = ziel[current_var].concat(quelle[current_var]);
+                ziel[current_var].push(73);
             };
 
             ziel.patients.push(patient);
@@ -400,7 +389,6 @@ function main(responses) {
         return JSON.parse(JSON.stringify(my_obj));
     };
 
-
     calc.getObjProp = function(my_obj) {
         // Create 'all propertys array'
         var allFullPropertys = [];
@@ -413,6 +401,23 @@ function main(responses) {
 
         return allFullPropertys;
     };
+
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
+    };
+
+    calc.isArray = function(obj) {
+        return (typeof obj !== 'undefined' &&
+            obj && obj.constructor === Array);
+    };
+
+    calc.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
 
 
     // ------------------------------------------
