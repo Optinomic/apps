@@ -269,8 +269,8 @@ function main(responses) {
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
-            // var source_dimensions = current_patient_scores.data.dimensions;
-            // var source_scores = current_patient_scores.data.scores;
+            var source_dimensions = current_patient_scores.data.dimensions;
+            var source_scores = current_patient_scores.data.scores;
 
             //Test Write
             //data[0][0][0] = default_obj;
