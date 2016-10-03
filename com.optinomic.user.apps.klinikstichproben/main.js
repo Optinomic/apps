@@ -141,11 +141,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 //Test Write
                 //data[0][0][0] = default_obj;
 
-                console.log('data', data);
-                console.log('data', data[0]);
-                console.log('data', data[0][0]);
-                console.log('data', data[0][0][0]);
-                console.log('data', data[0, 0, 0]);
+                var link = '[0][0][0]';
+
+                console.log('data 1', data[0][0][0]);
+                console.log('data 2', data[[0, 0, 0]]);
+                console.log('data 3', data[link]);
 
             };
 
