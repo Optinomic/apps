@@ -343,7 +343,6 @@ function main(responses) {
                 // data[2][1][0] = "GAGA";
 
 
-
                 // DIRTY - HACKING HERE!
                 // TO DO: How do I do this better?
 
@@ -357,15 +356,17 @@ function main(responses) {
                 };
 
                 if (current_list.length === 3) {
-                    ziel = data[current_list[0]][current_list[1]][current_list[2]];
-                    ziel = current_list;
+                    data[current_list[0]][current_list[1]][current_list[2]] = current_list;
                 };
 
                 if (current_list.length === 4) {
                     data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
                 };
 
-                // ziel = concatArrays(ziel, current_score, pid);
+                if (current_list.length === 5) {
+                    data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = current_list;
+                };
+
 
             };
 
