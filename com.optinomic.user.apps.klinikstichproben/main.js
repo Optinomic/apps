@@ -117,7 +117,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        createNDimArray([3, 2, 3]);
+        // createNDimArray([3, 2, 3]);
 
         for (var psID = 0; psID < ps.length; psID++) {
 
