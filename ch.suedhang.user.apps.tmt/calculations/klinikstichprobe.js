@@ -402,8 +402,10 @@ function main(responses) {
                     if (current_list.length === 3) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
 
-                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
-                        data[current_list[0]][current_list[1]][current_list[2]] = doStatistics(md_data, vars_array);
+                        md_data = concatArrays(md_data, current_score, pid, vars_array);
+                        md_data = doStatistics(md_data, vars_array);
+
+                        data[current_list[0]][current_list[1]][current_list[2]] = md_data;
                     };
 
                     if (current_list.length === 4) {
