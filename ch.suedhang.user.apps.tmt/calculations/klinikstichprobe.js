@@ -357,7 +357,8 @@ function main(responses) {
                 };
 
                 if (current_list.length === 3) {
-                    data[current_list[0]][current_list[1]][current_list[2]] = current_list;
+                    ziel = data[current_list[0]][current_list[1]][current_list[2]];
+                    ziel = current_list;
                 };
 
                 if (current_list.length === 4) {
