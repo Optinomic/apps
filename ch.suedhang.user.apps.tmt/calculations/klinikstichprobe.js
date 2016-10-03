@@ -229,10 +229,8 @@ function main(responses) {
                 var return_obj = {
                     "patient": current_patient.patient,
                     "data": {
-                        "dimensions": {
-                            "info": [],
-                            "variants_list": []
-                        },
+                        "dimensions": [],
+                        "md_variants": [],
                         "scores": []
                     }
                 };
@@ -249,7 +247,7 @@ function main(responses) {
 
 
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions.info.push(current_dimensions);
+                    return_obj.data.dimensions.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
