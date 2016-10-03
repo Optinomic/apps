@@ -144,6 +144,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
+
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
@@ -165,7 +166,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     list[pos] = dim_pos;
                 };
-                // console.log('list', list);
+                console.log('list', list);
 
                 // Build all Variants
                 var result = list[0].map(function(item) {
@@ -183,7 +184,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     });
                     result = next;
                 };
-                // console.log('result:', result);
+                console.log('result:', result);
 
                 // Write in all Variants
                 for (var listID = 0; listID < result.length; listID++) {
@@ -197,7 +198,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     }
 
                     ziel = concatArrays(ziel, current_score, pid)
-                        // console.log('Ziel - Final', current_list, ziel);
+                    console.log('Ziel - Final', current_list, ziel);
 
                 };
 
