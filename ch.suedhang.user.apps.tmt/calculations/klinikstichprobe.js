@@ -321,62 +321,33 @@ function main(responses) {
         };
 
 
-        var data = calc.cloneObj(md_app_scores);
         var ps = calc.cloneObj(patient_scores);
+        var data = calc.cloneObj(md_app_scores);
         var vars_array = getObjProp(calc.variables);
 
 
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
-            var source_dimensions = source_patient_scores.data.dimensions;
+            var md_variants = source_patient_scores.data.md_variants;
             var source_scores = source_patient_scores.data.scores;
             var pid = source_patient_scores.patient.id;
 
-            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
-                var current_dimension = source_dimensions[scoreID];
-                var current_score = source_scores[scoreID];
 
-                var list = [];
+            // Write in all Variants
+            for (var listID = 0; listID < md_variants.length; listID++) {
 
-                // Liste aller Varianten erstellen
-                for (var pos = 0; pos < current_dimension.length; pos++) {
-                    var dim_pos = current_dimension[pos].dimensions;
-                    list[pos] = dim_pos;
-                };
+                var current_list = md_variants[listID];
+                var ziel = data;
 
-                // Build all Variants
-                var result = list[0].map(function(item) {
-                    return [item];
-                });
+                for (var clID = 0; clID < current_list.length; clID++) {
+                    ziel = ziel[current_list[clID]];
+                }
 
-                for (var k = 1; k < list.length; k++) {
-                    var next = [];
-                    result.forEach(function(item) {
-                        list[k].forEach(function(word) {
-                            var line = item.slice(0);
-                            line.push(word);
-                            next.push(line);
-                        })
-                    });
-                    result = next;
-                };
-
-                // Write in all Variants
-                for (var listID = 0; listID < result.length; listID++) {
-
-                    var current_list = result[listID];
-                    var ziel = data;
-
-                    for (var clID = 0; clID < current_list.length; clID++) {
-                        ziel = ziel[current_list[clID]];
-                    }
-
-                    ziel = concatArrays(ziel, current_score, pid);
-
-                };
+                ziel = concatArrays(ziel, current_score, pid);
 
             };
+
 
         };
 
