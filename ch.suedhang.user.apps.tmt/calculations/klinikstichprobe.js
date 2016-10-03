@@ -145,14 +145,14 @@ function main(responses) {
 
         // Vorhandene Mess-Ergebnisse in calc.dimensions_app einpflegen.
 
-        var given_age_group = current_source.percentile.age_perz.altersgruppe;
-
-        var given_edu_group = 0;
-        if (current_source.percentile.age_perz.education_high) {
-            given_edu_group = 1;
-        };
-
-        var given_mz_group = current_source.mz;
+        //  var given_age_group = current_source.percentile.age_perz.altersgruppe;
+        //  
+        //  var given_edu_group = 0;
+        //  if (current_source.percentile.age_perz.education_high) {
+        //      given_edu_group = 1;
+        //  };
+        //  
+        //  var given_mz_group = current_source.mz;
 
 
         // Existieren 99'er?  Ebenfalls hinzufügen.
@@ -215,7 +215,7 @@ function main(responses) {
                     current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions = current_dimensions;
+                    return_obj.data.dimensions.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
