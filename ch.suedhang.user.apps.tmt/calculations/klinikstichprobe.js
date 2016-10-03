@@ -155,7 +155,7 @@ function main(responses) {
         var given_mz_group = current_source.mz - 1;
 
 
-        // Existieren 99'er?  Ebenfalls hinzufügen.
+        // Existieren 99'er (Alle)?  Ebenfalls hinzufügen.
 
         for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
             var cd = return_array[dIndex];
@@ -203,8 +203,6 @@ function main(responses) {
                         "scores": []
                     }
                 };
-
-
 
 
                 // Loop Messungen
@@ -273,8 +271,10 @@ function main(responses) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
-
-
+                var positons = [];
+                for (var pos = 0; pos < current_dimension.length; pos++) {
+                    var positons[pos].push(current_dimension.dimensions);
+                };
 
                 //Test Write
                 //data[0][0][0] = default_obj;
@@ -284,7 +284,7 @@ function main(responses) {
         };
 
 
-        return data;
+        return positons;
     };
 
 
