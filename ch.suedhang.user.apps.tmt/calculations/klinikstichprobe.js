@@ -271,6 +271,8 @@ function main(responses) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
+
+                // Alle Varianten für MD-Array erstellen
                 for (var pos = 0; pos < current_dimension.length; pos++) {
 
                     var dim_pos = current_dimension[pos].dimensions;

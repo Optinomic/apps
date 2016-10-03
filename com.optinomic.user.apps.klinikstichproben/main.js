@@ -63,9 +63,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         ks.fake = $scope.getFakeData();
+        $scope.writePatientScoresMD($scope.ks.fake.patient_scores, $scope.ks.fake.definitions.md_app_data_empty);
 
         // Safe
         ks.pg = pg;
+
 
         // Safe to $scope
         $scope.d.ks = ks;
@@ -100,6 +102,51 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Unneeded
     // -------------------
+
+
+    $scope.writePatientScoresMD = function(patient_scores, md_app_scores) {
+
+        var data = calc.cloneObj(md_app_scores);
+        var ps = calc.cloneObj(patient_scores);
+
+        var default_obj = {
+            "patients": [],
+            "scores": [],
+            "statistics": [],
+            "n": 0
+        };
+
+        for (var psID = 0; psID < ps.length; psID++) {
+
+            var source_patient_scores = ps[psID];
+            var source_dimensions = source_patient_scores.data.dimensions;
+            var source_scores = source_patient_scores.data.scores;
+
+            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+                var current_dimension = source_dimensions[scoreID];
+                var current_score = source_scores[scoreID];
+
+
+                // Alle Varianten für MD-Array erstellen
+                for (var pos = 0; pos < current_dimension.length; pos++) {
+
+                    var dim_pos = current_dimension[pos].dimensions;
+
+
+                };
+
+                //Test Write
+                //data[0][0][0] = default_obj;
+
+            };
+
+        };
+
+
+        $scope.d.md_patient_scores = data;
+        console.log('writePatientScoresMD:', $scope.d.md_patient_scores);
+    };
+
 
 
 
