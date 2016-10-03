@@ -157,6 +157,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
                 console.log('list', list);
 
+                // Build all Variants
+
+                var result = list[0].map(function(item) {
+                    return [item];
+                });
+
+                for (var k = 1; k < list.length; k++) {
+                    var next = [];
+                    result.forEach(function(item) {
+                        list[k].forEach(function(word) {
+                            var line = item.slice(0);
+                            line.push(word);
+                            next.push(line);
+                        })
+                    });
+                    result = next;
+                }
+
+                console.log('result:', result);
+
             };
 
         };
