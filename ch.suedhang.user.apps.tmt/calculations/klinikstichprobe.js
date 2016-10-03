@@ -205,8 +205,6 @@ function main(responses) {
                 };
 
 
-
-
                 // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
@@ -253,6 +251,37 @@ function main(responses) {
         return return_array;
     };
 
+    calc.getMDPatientScores = function(patient_scores, md_app_scores) {
+
+        var d = md_app_scores;
+
+        var default_obj = {
+            "patients": [],
+            "scores": []
+            "statistics": [],
+            "n": 0
+        };
+
+        for (var psID = 0; psID < patient_scores.length; psID++) {
+
+            var source_patient_scores = patient_scores[psID];
+            var source_dimensions = current_patient_scores.data.dimensions;
+            var source_scores = current_patient_scores.data.scores;
+
+            for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+                var current_dimension = source_dimensions[scoreID];
+                var current_score = source_scores[scoreID];
+
+                //Test Write
+                md_app_scores[0][0][0] = default_obj;
+            };
+
+        };
+
+
+        return d;
+    }
+
 
     // ------------------------------------------
     // Helpers
@@ -277,10 +306,12 @@ function main(responses) {
         // Arrange Stuff as 'variables'
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
+        var md_patient_scores = calc.getMDPatientScores(calc.cloneObj(patient_scores), calc.cloneObj(md_app_scores));
 
 
         // Return Stuff
         results.patient_scores = patient_scores;
+        results.md_patient_scores = md_patient_scores;
 
         var definitions = {
             "info": info,
