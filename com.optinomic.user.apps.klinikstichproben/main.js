@@ -109,12 +109,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data = md_app_scores;
         var ps = patient_scores;
 
-        var default_obj = {
-            "patients": [],
-            "scores": [],
-            "statistics": [],
-            "n": 0
+
+
+        function concatArrays(ziel, quelle, patient) {
+
+            var default_obj = {
+                "patients": [],
+                "scores": [],
+                "statistics": [],
+                "n": 0
+            };
+
+            if (ziel === null) {
+                ziel = default_obj;
+            };
+
+            return ziel;
         };
+
+
 
 
         for (var psID = 0; psID < ps.length; psID++) {
@@ -122,6 +135,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var source_patient_scores = ps[psID];
             var source_dimensions = source_patient_scores.data.dimensions;
             var source_scores = source_patient_scores.data.scores;
+            var pid = source_patient_scores.patient.id;
 
             for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
                 var current_dimension = source_dimensions[scoreID];
@@ -161,15 +175,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 for (var listID = 0; listID < result.length; listID++) {
 
                     var current_list = result[listID];
-
                     var ziel = data;
 
                     for (var clID = 0; clID < current_list.length; clID++) {
 
                         ziel = ziel[current_list[clID]];
-                        console.log('Ziel - ', clID, current_list[clID], ziel);
                     }
-                    console.log('Ziel - Final', ziel, current_list);
+
+                    ziel = concatArrays(ziel, current_score, pid)
+                    console.log('Ziel - Final', current_list, ziel);
 
                 };
 

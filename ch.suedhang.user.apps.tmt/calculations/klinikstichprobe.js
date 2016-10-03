@@ -303,6 +303,20 @@ function main(responses) {
     };
 
 
+    calc.getObjProp = function(my_obj) {
+        // Create 'all propertys array'
+        var allFullPropertys = [];
+
+        for (var property in my_obj) {
+            if (my_obj.hasOwnProperty(property)) {
+                allFullPropertys.push(property);
+            }
+        }
+
+        return allFullPropertys;
+    };
+
+
     // ------------------------------------------
     // F U N C T I O N  -  Main
     // ------------------------------------------
@@ -326,6 +340,7 @@ function main(responses) {
         var definitions = {
             "info": info,
             "variables": vars,
+            "variables_array": calc.getObjProp(vars),
             "dimensions_app": calc.cloneObj(calc.dimensions_app),
             "md_app_data_empty": md_app_scores
         };
