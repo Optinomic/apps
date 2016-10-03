@@ -125,7 +125,7 @@ function main(responses) {
 
     calc.arrangeScoresInVars = function(current_vars, current_source) {
 
-        // Vorhandene Mess-Ergebnisse in calc.variables einpflegen.
+        // Vorhandene Ergebnisse in calc.variables einpflegen.
 
         current_vars.BA_Quotient.push(current_source.quotient);
         current_vars.TMTAPerz.push(current_source.percentile.result.A);
@@ -145,38 +145,38 @@ function main(responses) {
 
         // Vorhandene Mess-Ergebnisse in calc.dimensions_app einpflegen.
 
-        //  var given_age_group = current_source.percentile.age_perz.altersgruppe;
-        //  
-        //  var given_edu_group = 0;
-        //  if (current_source.percentile.age_perz.education_high) {
-        //      given_edu_group = 1;
-        //  };
-        //  
-        //  var given_mz_group = current_source.mz;
+        var given_age_group = current_source.percentile.age_perz.altersgruppe;
+
+        var given_edu_group = 0;
+        if (current_source.percentile.age_perz.education_high) {
+            given_edu_group = 1;
+        };
+
+        var given_mz_group = current_source.mz;
 
 
         // Existieren 99'er?  Ebenfalls hinzufügen.
 
-        //  for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
-        //      var cd = return_array[dIndex];
-        //      cd.dimensions = [];
-        //  
-        //      if (dIndex === 0) {
-        //          cd.dimensions.push(given_age_group);
-        //      };
-        //  
-        //      if (dIndex === 1) {
-        //          cd.dimensions.push(given_edu_group);
-        //          // Jeder Ausbildungsgrad
-        //          cd.dimensions.push(2);
-        //      };
-        //  
-        //      if (dIndex === 2) {
-        //          cd.dimensions.push(given_mz_group);
-        //          // Alle Messzeitpunkte
-        //          cd.dimensions.push(3);
-        //      };
-        //  };
+        for (var dIndex = 0; dIndex < return_array.length; dIndex++) {
+            var cd = return_array[dIndex];
+            cd.dimensions = [];
+
+            if (dIndex === 0) {
+                cd.dimensions.push(given_age_group);
+            };
+
+            if (dIndex === 1) {
+                cd.dimensions.push(given_edu_group);
+                // Jeder Ausbildungsgrad
+                cd.dimensions.push(2);
+            };
+
+            if (dIndex === 2) {
+                cd.dimensions.push(given_mz_group);
+                // Alle Messzeitpunkte
+                cd.dimensions.push(3);
+            };
+        };
 
         return return_array;
     };
@@ -204,6 +204,7 @@ function main(responses) {
                     }
                 };
 
+
                 // Loop Messungen
                 for (var sIndex = 0; sIndex < source.length; sIndex++) {
 
@@ -212,10 +213,10 @@ function main(responses) {
                     var current_dimensions = [];
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
-                    // current_dimensions = calc.arrangeScoresInDimensions(current_source);
+                    current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
                     return_obj.data.scores.push(current_vars);
-                    //return_obj.data.dimensions.push(current_dimensions);
+                    return_obj.data.dimensions.push(current_dimensions);
                 };
 
                 return_array.push(return_obj);
@@ -250,6 +251,37 @@ function main(responses) {
         return return_array;
     };
 
+    calc.getMDPatientScores = function(patient_scores, md_app_scores) {
+
+        var d = md_app_scores;
+
+        var default_obj = {
+            "patients": [],
+            "scores": []
+            "statistics": [],
+            "n": 0
+        };
+
+        // for (var psID = 0; psID < patient_scores.length; psID++) {
+        // 
+        //     var source_patient_scores = patient_scores[psID];
+        //     var source_dimensions = current_patient_scores.data.dimensions;
+        //     var source_scores = current_patient_scores.data.scores;
+        // 
+        //     for (var scoreID = 0; scoreID < source_scores.length; scoreID++) {
+        //         var current_dimension = source_dimensions[scoreID];
+        //         var current_score = source_scores[scoreID];
+        // 
+        //         //Test Write
+        //         // md_app_scores[0][0][0] = default_obj;
+        //     };
+        // 
+        // };
+
+
+        return d;
+    };
+
 
     // ------------------------------------------
     // Helpers
@@ -272,12 +304,14 @@ function main(responses) {
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
-        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var patient_scores = calc.getScoresInVars(d.patients, vars, info);
+        var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
+        //var md_patient_scores = calc.getMDPatientScores(patient_scores, md_app_scores);
 
 
         // Return Stuff
         results.patient_scores = patient_scores;
+        //results.md_patient_scores = md_patient_scores;
 
         var definitions = {
             "info": info,
@@ -285,7 +319,6 @@ function main(responses) {
             "dimensions_app": calc.cloneObj(calc.dimensions_app),
             "md_app_scores": md_app_scores
         };
-
         results.definitions = definitions;
 
         // Returning full (complete) responses is often used/helpful.
