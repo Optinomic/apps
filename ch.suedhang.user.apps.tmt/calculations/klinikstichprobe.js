@@ -363,7 +363,7 @@ function main(responses) {
 
                     if (current_list.length === 3) {
                         var md_data = data[current_list[0]][current_list[1]][current_list[2]];
-                        data[current_list[0]][current_list[1]][current_list[2]] = concatArrays(md_data, current_score, pid, vars_array);
+                        md_data = concatArrays(md_data, current_score, pid, vars_array);
                     };
 
                     if (current_list.length === 4) {
