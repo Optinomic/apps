@@ -216,7 +216,7 @@ function main(responses) {
                     current_dimensions = calc.arrangeScoresInDimensions();
 
                     return_obj.data.scores.push(current_vars);
-                    return_obj.data.dimensions.push(current_dimensions);
+                    return_obj.data.dimensions = current_dimensions;
                 };
 
                 return_array.push(return_obj);
