@@ -300,8 +300,8 @@ function main(responses) {
 
             var default_obj = {
                 "patients": [],
-                "scores": [],
-                "statistics": [],
+                "scores": calc.cloneObj(calc.variables),
+                "statistics": calc.cloneObj(calc.variables),
                 "n": 0
             };
 
