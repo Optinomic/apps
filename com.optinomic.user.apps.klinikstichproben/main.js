@@ -63,7 +63,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         ks.fake = $scope.getFakeData();
-        $scope.writePatientScoresMD($scope.ks.fake.patient_scores, $scope.ks.fake.definitions.md_app_data_empty);
+        $scope.writePatientScoresMD(ks.fake.patient_scores, ks.fake.definitions.md_app_data_empty);
 
         // Safe
         ks.pg = pg;
