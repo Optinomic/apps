@@ -9,14 +9,8 @@ include(../lib/html/optinomic/page/start.m4)
         </md-select>
     </md-input-container>
 </div>
-<div ng-init="result = d.ks.user_app_calc.md_patient_scores[d.ks.selected[0]][d.ks.selected[1]][d.ks.selected[2]]">
-    <p class="md-headline">Statistics</p>
-    <pre>{{result.statistics | json}}</pre>
-    <p class="md-headline">Scores</p>
-    <pre>{{result.scores | json}}</pre>
-    <p class="md-headline">Patients</p>
-    <pre>{{result.patients | json}}</pre>
-    <p class="md-headline">Full</p>
-    <pre>{{result | json}}</pre>
+<div>
+    <p class="md-headline">Results</p>
+    <pre>{{d.ks.user_app_calc.md_patient_scores[d.ks.selected[0]][d.ks.selected[1]][d.ks.selected[2]] | json}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
