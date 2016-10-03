@@ -271,10 +271,7 @@ function main(responses) {
                 var current_dimension = source_dimensions[scoreID];
                 var current_score = source_scores[scoreID];
 
-                var positons = [];
-                for (var pos = 0; pos < current_dimension.length; pos++) {
-                    positons[pos].push(current_dimension.dimensions);
-                };
+                for (var pos = 0; pos < current_dimension.length; pos++) {};
 
                 //Test Write
                 //data[0][0][0] = default_obj;
