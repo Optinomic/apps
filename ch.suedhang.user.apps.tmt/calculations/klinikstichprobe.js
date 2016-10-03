@@ -126,18 +126,16 @@ function main(responses) {
         // Interessante Berechnungen | Statistics
         var s = {};
 
-        if (calc.isArray(data_array)) {
-            s.n = data_array.legth;
-            s.min = calc.min(data_array);
-            s.max = calc.max(data_array);
-            s.mean = calc.mean(data_array);
-            s.variance = calc.variance(data_array);
-            s.standard_deviation = calc.standard_deviation(data_array);
-            s.mean_1sd_min = s.mean - s.standard_deviation;
-            s.mean_1sd_plus = s.mean + s.standard_deviation;
-            s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
-            s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
-        };
+        s.n = data_array.legth;
+        s.min = calc.min(data_array);
+        s.max = calc.max(data_array);
+        s.mean = calc.mean(data_array);
+        s.variance = calc.variance(data_array);
+        s.standard_deviation = calc.standard_deviation(data_array);
+        s.mean_1sd_min = s.mean - s.standard_deviation;
+        s.mean_1sd_plus = s.mean + s.standard_deviation;
+        s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
+        s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
 
         // Return
         return s;
