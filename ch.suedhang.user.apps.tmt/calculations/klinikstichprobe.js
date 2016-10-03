@@ -304,8 +304,9 @@ function main(responses) {
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
 
+
                 //ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
-                ziel.scores[current_var].push(73);
+                ziel.scores[current_var] = 73;
             };
 
             ziel.patients.push(patient);
