@@ -185,7 +185,7 @@ function main(responses) {
     // GENERIC -  should not be touched:
     // ------------------------------------------
 
-    calc.getScoresInVars = function(p, vars, info, md_app_scores) {
+    calc.getScoresInVars = function(p, vars, info) {
 
         var return_array = [];
 
@@ -273,7 +273,7 @@ function main(responses) {
 
         // Arrange Stuff as 'variables'
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
-        var patient_scores = calc.getScoresInVars(d.patients, vars, info, md_app_scores);
+        var patient_scores = calc.getScoresInVars(d.patients, vars, info);
 
 
         // Return Stuff
