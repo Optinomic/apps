@@ -57,16 +57,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var ks = {};
         var pg = $scope.d.dataMain.patient_groups;
 
-        var ks.result_types = {
-            "all": [{
-                "name": "statistics"
-            }, {
-                "name": "scores"
-            }, {
-                "name": "patients"
-            }],
-            "selected": "statistics"
-        };
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
