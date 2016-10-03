@@ -212,7 +212,7 @@ function main(responses) {
                     var current_dimensions = [];
 
                     current_vars = calc.arrangeScoresInVars(current_vars, current_source);
-                    current_dimensions = calc.arrangeScoresInDimensions(current_source);
+                    // current_dimensions = calc.arrangeScoresInDimensions(current_source);
 
                     return_obj.data.scores.push(current_vars);
                     return_obj.data.dimensions.push(current_dimensions);
