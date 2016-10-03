@@ -188,7 +188,7 @@ function main(responses) {
         var return_array = [];
 
         // Create MD-App-Scores
-        return_array[0] = dimensions_app[0];
+        return_array = dimensions_app[0];
 
         //  for (var dIndex = 0; dIndex < dimensions_app_scores.length; dIndex++) {
         //      var cd = dimensions_app_scores[dIndex];
