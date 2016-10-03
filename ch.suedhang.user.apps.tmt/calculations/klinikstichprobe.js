@@ -313,7 +313,10 @@ function main(responses) {
             // Concat stuff
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
-                ziel[current_var] = ziel[current_var].concat(quelle[current_var]);
+
+                var my_ziel = ziel[current_var];
+                var my_quelle = quelle[current_var];
+                ziel[current_var] = my_ziel.concat(my_quelle);
             };
 
             ziel.patients.push(patient);
