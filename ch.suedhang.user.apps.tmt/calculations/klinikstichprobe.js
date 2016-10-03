@@ -343,11 +343,26 @@ function main(responses) {
                 // data[2][1][0] = "GAGA";
 
 
-                var ziel = data;
 
-                for (var clID = 0; clID < current_list.length; clID++) {
-                    ziel = ziel[current_list[clID]];
-                }
+                // DIRTY - HACKING HERE!
+                // TO DO: How do I do this better?
+
+                var ziel = null;
+                if (current_list.length === 1) {
+                    ziel = data[current_list[0]];
+                };
+
+                if (current_list.length === 2) {
+                    ziel = data[current_list[0]][current_list[1]];
+                };
+
+                if (current_list.length === 3) {
+                    ziel = data[current_list[0]][current_list[1]][current_list[2]];
+                };
+
+                if (current_list.length === 4) {
+                    ziel = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]];
+                };
 
                 // ziel = concatArrays(ziel, current_score, pid);
                 ziel = current_list;
