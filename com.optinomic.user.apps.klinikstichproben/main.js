@@ -107,7 +107,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.writePatientScoresMD = function(patient_scores, md_app_scores) {
 
         var data = md_app_scores;
-        var ps = patient_scores;
+        var ps = patient_scoresc;
 
         var default_obj = {
             "patients": [],
@@ -115,6 +115,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "statistics": [],
             "n": 0
         };
+
+
+        createNDimArray([3, 2, 3]);
 
         for (var psID = 0; psID < ps.length; psID++) {
 
@@ -137,6 +140,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 //Test Write
                 //data[0][0][0] = default_obj;
+
+                console.log('data', data);
+                console.log('data', data[0]);
+                console.log('data', data[0][0]);
+                console.log('data', data[0][0][0]);
+                console.log('data', data[0, 0, 0]);
 
             };
 
@@ -1157,6 +1166,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return (typeof obj !== 'undefined' &&
             obj && obj.constructor === Array);
     };
+
+    $scope.createNDimArray = function(dimensions) {
+        var t, i = 0,
+            s = dimensions[0],
+            arr = new Array(s);
+        if (dimensions.length < 3)
+            for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
+        else
+            for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
+        return arr;
+    }
 
     $scope.getFakeData = function() {
         var fake = {
