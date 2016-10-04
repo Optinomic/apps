@@ -109,6 +109,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Clone some stuff for Using
             $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
             $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
+            $scope.d.ks.definitions.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
             // Init 'User-Selection' for Dimenstions | jeweils letzter Eintrag
             $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
@@ -193,7 +194,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Save
-        $scope.d.ks.dimensions_all = createNDimArray(n_dimensions);
+        $scope.d.ks.md.scores_all = createNDimArray(n_dimensions);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
 
 
