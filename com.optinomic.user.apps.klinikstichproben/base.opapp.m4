@@ -24,8 +24,8 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.tmt_V3 >= 1.0
 
 
-[template score_overview 4 4]
-include(templates/score.html)
+[template score_overview 6 12]
+include(templates/app.html)
 
 
 

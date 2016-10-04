@@ -7,7 +7,7 @@ type = user
 
 
 [description]
-Entwicklung verschiedener Patientengruppen bzgl. des Schweregrads depressiver Symptomatik im klinischen Bereich, 21 Aussagen.
+Under Development: Entwicklung verschiedener Patientengruppen bzgl. des Schweregrads depressiver Symptomatik im klinischen Bereich, 21 Aussagen.
 
 
 [developer]

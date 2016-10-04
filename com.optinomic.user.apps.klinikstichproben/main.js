@@ -51,8 +51,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var ks = {};
 
         //  Create GUI for THIS later:
-        var app_id = 'ch.suedhang.user.apps.tmt';
-        var app_claculation = 'tmt_klinikstichprobe';
+        ks.app_id = 'ch.suedhang.user.apps.tmt';
+        ks.app_claculation = 'tmt_klinikstichprobe';
 
 
         // Init
@@ -74,7 +74,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.result_explorer.selected_var = null;
 
         // Calculate stuff
-        $scope.getUserAppCalculation(app_id, app_claculation);
+        $scope.getUserAppCalculation(ks.app_id, ks.app_claculation);
 
 
         return ks;
