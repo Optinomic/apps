@@ -111,14 +111,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.changeDimenstions = function() {
 
         var data_dive = $scope.d.ks.md.scores;
-        var current_location = []
+        var current_location = [];
+        var current_location_text = ""
 
         $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
-            current_location.push(current_dim.selected.id)
-            data_dive = data_dive[current_dim.selected.id]
+            current_location.push(current_dim.selected.id);
+            if (current_location_text !== "") {
+                current_location_text = current_location_text + ' | '
+            };
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.selected.text
+            data_dive = data_dive[current_dim.selected.id];
         });
 
         $scope.d.ks.md.selected = data_dive;
+        $scope.d.ks.md.selected_info = {
+            "current_location_path": current_location,
+            "current_location_text": current_location_text
+        };
+
         console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
     };
 
