@@ -11,6 +11,8 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div>
     <p class="md-headline">Results</p>
-    <pre>{{d.ks.md.selected | json}}</pre>
+    <pre>{{d.ks.md.selected.statistics | json}}</pre>
+    <pre>{{d.ks.md.selected.scores | json}}</pre>
+    <pre>{{d.ks.md.selected.patients | json}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
