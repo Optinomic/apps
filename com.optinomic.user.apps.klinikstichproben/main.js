@@ -177,7 +177,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
-        $scope.d.ks.dimensions_all = createNDimArray(n_dimensions);
+        $scope.d.ks.dimensions_all = $scope.createNDimArray(n_dimensions);
 
     };
 
