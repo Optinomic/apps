@@ -30,7 +30,7 @@ include(../lib/html/optinomic/page/start.m4)
                 </md-select>
             </md-input-container>
         </div>
-        <div ng-if="d.ks.result_explorer.selected.id === 0">
+        <div ng-if="d.ks.result_explorer.selected.id === 0" class="grid-border-top">
             <p class="md-headline">Statistic</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
             <pre>{{d.ks.md.selected.statistics | json}}</pre>
@@ -41,22 +41,28 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
             <pre>{{d.ks.md.selected.patients | json}}</pre>
         </div>
-        <div ng-if="d.ks.result_explorer.selected.id !== 0">
-            <p class="md-headline">Statistic</p>
+        <div ng-if="d.ks.result_explorer.selected.id !== 0" class="grid-border-top">
+            <p class="md-headline">{{d.ks.result_explorer.selected_var}}</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <pre>{{d.ks.md.selected.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
-            <p class="md-headline">Scores</p>
-            <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <pre>{{d.ks.md.selected.scores[d.ks.result_explorer.selected_var] | json}}</pre>
-            <p class="md-headline">Patients</p>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+                <div flex>
+                    <p class="md-title">Statistic</p>
+                    <pre>{{d.ks.md.selected.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
+                </div>
+                <div>
+                    <p class="md-title">Scores</p>
+                    <pre>{{d.ks.md.selected.scores[d.ks.result_explorer.selected_var] | json}}</pre>
+                </div>
+            </div>
+            <p class="md-title">Patients</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
             <pre>{{d.ks.md.selected.patients | json}}</pre>
         </div>
     </div>
     <div ng-if="!d.ks.md.selected">
         <md-content class="md-padding">
-            <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> Keine Daten verfügbar</h1>
-            <p class="flow-text">{{d.ks.md.selected_info.current_location_text}}</p>
+            <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> Keine Daten</h1>
+            <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
             <p class="flow-text">&nbsp;</p>
         </md-content>
     </div>
