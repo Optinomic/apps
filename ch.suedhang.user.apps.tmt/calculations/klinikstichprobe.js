@@ -96,14 +96,17 @@ function main(responses) {
     calc.dimensions_app = [{
         "id": 0,
         "name": "Altersgruppe",
+        "source": "app",
         "array": JSON.parse(JSON.stringify(calc.group_age_props))
     }, {
         "id": 1,
         "name": "Ausbildungsgrad",
+        "source": "app",
         "array": JSON.parse(JSON.stringify(calc.group_edu_props))
     }, {
         "id": 2,
         "name": "Messzeitpunkt",
+        "source": "app",
         "array": JSON.parse(JSON.stringify(calc.group_mz_props))
     }];
 

@@ -51,8 +51,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var ks = {};
 
         //  Create GUI for THIS later:
-        ks.app_id = 'ch.suedhang.user.apps.tmt';
-        ks.app_claculation = 'tmt_klinikstichprobe';
+        //  Select all User-Apps with '*_klinikstichprobe' Calculations
+        ks.app = {
+            "selected": {
+                "identifier": "ch.suedhang.user.apps.tmt"
+            },
+            "calculations": {
+                "all": ["tmt_klinikstichprobe"],
+                "selected": "tmt_klinikstichprobe"
+            }
+        };
+
 
 
         // Init
@@ -74,7 +83,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.result_explorer.selected_var = null;
 
         // Calculate stuff
-        $scope.getUserAppCalculation(ks.app_id, ks.app_claculation);
+        $scope.getUserAppCalculation(ks.app.selected.identifier, ks.app.calculations.selected);
 
 
         return ks;
@@ -103,9 +112,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
                 current_dim.selected = current_dim.array[current_dim.array.length - 1];
             });
-            $scope.changeDimenstions();
-
             $scope.d.ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
+
+            // Some more Functions to Run because we have Data.
+            $scope.changeDimenstions();
+            $scope.enhanceDimensionsPG();
 
             $scope.d.ks.init = true;
             console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
@@ -119,9 +130,68 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
+
+    // -----------------------------------
+    // Functions
+    // -----------------------------------
+
+
+    // ------------------------------------------
+    // What Dimensions are given from Patien-Groups
+    // Enhancing | Dimenstions with PG's
+    // ------------------------------------------
+
+    $scope.enhanceDimensionsPG = function() {
+
+        var dimenstions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
+
+
+        // Build GUI for this later
+
+        // GUI:  Create as many of them as user wants
+        // Arrange them in dimensions_pg
+        // Every group_pg_props have a 'all patients'
+
+        var group_pg_props = [{
+            "id": 0,
+            "text": "Aktuell oder ehemalig auf EAS",
+            "pg": angular.copy($scope.d.dataMain.patient_groups[1])
+        }, {
+            "id": 1,
+            "text": "Alle Patienten",
+            "pg": null
+        }];
+
+        var dimensions_pg = [{
+            "id": 0,
+            "name": "EAS",
+            "source": "pg",
+            "array": angular.copy(group_pg_props)
+        }];
+
+        var dimensions_all = dimenstions_app.concat(dimensions_pg);
+
+        var n_dimensions = [];
+        for (var dIndex = 0; dIndex < dimensions_all.length; dIndex++) {
+            var cd = dimensions_all[dIndex];
+            n_dimensions.push(cd.array.length)
+        };
+
+        $scope.d.ks.dimensions_all = createNDimArray(n_dimensions);
+
+    };
+
+
+
+
     // -------------------
     // Change - Events
     // -------------------
+    $scope.changeAppCalculation = function() {
+        // Calculate stuff
+        $scope.getUserAppCalculation($scope.d.ks.app.selected.identifier, $scope.d.ks.app.calculations.selected);
+    };
+
     $scope.changeDimenstions = function() {
 
         var data_dive = $scope.d.ks.md.scores;
@@ -186,7 +256,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         else
             for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
         return arr;
-    }
+    };
 
 
 
