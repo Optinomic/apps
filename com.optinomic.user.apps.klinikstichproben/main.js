@@ -57,7 +57,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Init
         d.pg = $scope.d.dataMain.patient_groups;
-        d.md_patient_scores = null;
+        d.md = null;
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
@@ -109,7 +109,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Change - Events
     // -------------------
     $scope.changeDimenstions = function() {
-        $scope.d.ks.md.selected = $scope.d.ks.md.scores[2][2][2];
+
+        var data_dive = $scope.d.ks.md.scores;
+        var current_location = []
+
+        $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
+            current_location.push(current_dim.selected.id)
+            data_dive = data_dive[current_dim.selected.id]
+        });
+
+        $scope.d.ks.md.selected = data_dive;
+        console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
     };
 
 
