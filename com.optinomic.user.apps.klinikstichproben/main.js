@@ -121,6 +121,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.changeDimenstions();
             $scope.enhanceDimensionsPG();
 
+
+            $scope.d.ks.definitions = $scope.merge_obj($scope.d.ks.definitions, $scope.d.ks.user_app_calc.definitions);
+
             $scope.d.ks.init = true;
             console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
 
@@ -198,12 +201,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
-
         // Save
         $scope.d.ks.md.scores_all = createNDimArray(n_dimensions);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
         // console.log('dimensions_all', n_dimensions, scores_all);
-
 
     };
 
@@ -271,6 +272,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.isArray = function(obj) {
         return (typeof obj !== 'undefined' &&
             obj && obj.constructor === Array);
+    };
+
+    $scope.merge_obj = function(obj1, obj2) {
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
     };
 
 
