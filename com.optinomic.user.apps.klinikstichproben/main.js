@@ -48,7 +48,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // --------------------------
     $scope.ks_init = function() {
 
-        var d = {};
+        var ks = {};
 
         //  Create GUI for THIS later:
         var app_id = 'ch.suedhang.user.apps.tmt';
@@ -56,17 +56,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Init
-        d.init = false;
-        d.pg = $scope.d.dataMain.patient_groups;
-        d.md = {};
-        d.md.selected = {};
-        d.md.selected_info = {};
+        ks.init = false;
+        ks.pg = $scope.ks.dataMain.patient_groups;
+        ks.md = {};
+        ks.mks.selected = {};
+        ks.mks.selected_info = {};
+
+        ks.result_explorer = {};
+        ks.result_explorer.types = [{
+            "id": 0,
+            "name": 'Alle Variablen'
+        }, {
+            "id": 1,
+            "name": 'Einzelne Variablen'
+        }];
+        ks.result_explorer.selected = ks.result_explorer.types[1];
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
 
 
-        return d;
+        return ks;
     };
 
 
@@ -136,7 +146,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
         $scope.d.ks.md.selected_info.current_location_text = current_location_text;
         $scope.d.ks.md.selected_info.current_location_n = current_location_n;
-        $scope.d.ks.md.selected_info.current_location_n_text = current_location_n_text;
 
         console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
     };
