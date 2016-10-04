@@ -201,8 +201,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
-        // Save
-        $scope.d.ks.md.scores_all = createNDimArray(n_dimensions);
+        var md_all_data_empty = createNDimArray(n_dimensions);
+
+
+        // Save to $scope
+        $scope.d.ks.md.scores_all = angular.copy(md_all_data_empty);
+        $scope.d.ks.definitions.md_all_data_empty = angular.copy(md_all_data_empty);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
         // console.log('dimensions_all', n_dimensions, scores_all);
 
