@@ -26,7 +26,6 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
         </div>
-        <p class="md-headline">Einstellungen</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <md-input-container flex ng-class="md-block">
                 <label>Datenexplorer</label>
@@ -72,8 +71,8 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                 </div>
             </div>
-            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-                <div flex="50">
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-padding>
+                <div flex="60">
                     <p class="md-title">Statistic</p>
                     <pre>{{d.ks.md.selected.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
                 </div>
@@ -81,7 +80,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <p class="md-title">Scores</p>
                     <pre>{{d.ks.md.selected.scores[d.ks.result_explorer.selected_var] | json}}</pre>
                 </div>
-                <div flex="25">
+                <div flex="15">
                     <p class="md-title">Patients</p>
                     <pre>{{d.ks.md.selected.patients | json}}</pre>
                 </div>
