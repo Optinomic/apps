@@ -177,7 +177,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
-        $scope.d.ks.dimensions_all = $scope.createNDimArray(n_dimensions);
+
+        function createNDimArray(dimensions) {
+            var t, i = 0,
+                s = dimensions[0],
+                arr = new Array(s);
+            if (dimensions.length < 3)
+                for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
+            else
+                for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
+            return arr;
+        };
+
+        $scope.d.ks.dimensions_all = createNDimArray(n_dimensions);
 
     };
 
@@ -247,16 +259,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             obj && obj.constructor === Array);
     };
 
-    $scope.createNDimArray = function(dimensions) {
-        var t, i = 0,
-            s = dimensions[0],
-            arr = new Array(s);
-        if (dimensions.length < 3)
-            for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
-        else
-            for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
-        return arr;
-    };
 
 
 
