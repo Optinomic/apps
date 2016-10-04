@@ -124,12 +124,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             data_dive = data_dive[current_dim.selected.id];
         });
 
-        console.log('(Data) MD:', current_location, data_dive);
-
+        if (data_dive !== null) {
+            current_location_text = current_location_text + ' (N=' + data_dive.scores[0].length + ')';
+        };
 
         $scope.d.ks.md.selected = data_dive;
         $scope.d.ks.md.selected_info.current_location_path = current_location;
-        //current_location_text = current_location_text + ' (N=' + $scope.d.ks.md.selected.scores[0].length + ')';
         $scope.d.ks.md.selected_info.current_location_text = current_location_text;
 
         console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
