@@ -58,7 +58,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Init
         d.init = false;
         d.pg = $scope.d.dataMain.patient_groups;
-        d.md = null;
+        d.md = {};
         d.md.selected = null;
         d.md.selected_info = null;
 
@@ -86,9 +86,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.user_app_calc = data.calculation_result;
 
             // Clone some stuff for Using
-            $scope.d.ks.md = {};
-            $scope.d.ks.md.selected = null;
-            $scope.d.ks.md.selected_info = null;
             $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
             $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
