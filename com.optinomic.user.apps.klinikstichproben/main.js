@@ -146,6 +146,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.enhanceDimensionsPG = function() {
 
+        function createNDimArray(dimensions) {
+            var t, i = 0,
+                s = dimensions[0],
+                arr = new Array(s);
+            if (dimensions.length < 3)
+                for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
+            else
+                for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
+            return arr;
+        };
+
+
         var dimenstions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
 
@@ -181,22 +193,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-
-        function createNDimArray(dimensions) {
-            var t, i = 0,
-                s = dimensions[0],
-                arr = new Array(s);
-            if (dimensions.length < 3)
-                for (t = dimensions[1]; i < s;) arr[i++] = new Array(t);
-            else
-                for (t = dimensions.slice(1); i < s;) arr[i++] = createNDimArray(t);
-            return arr;
-        };
-
+        var scores_all = createNDimArray(n_dimensions);
 
         // Save
-        $scope.d.ks.md.scores_all = createNDimArray(n_dimensions);
-        console.log('dimensions_all', $scope.d.ks.md.scores_all[0][0][0], $scope.d.ks.md.scores_all);
+        $scope.d.ks.md.scores_all = scores_all;
+        console.log('dimensions_all', n_dimensions, scores_all);
 
 
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
