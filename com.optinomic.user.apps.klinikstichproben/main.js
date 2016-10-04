@@ -71,6 +71,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "name": 'Einzelne Variablen'
         }];
         ks.result_explorer.selected = ks.result_explorer.types[1];
+        ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
