@@ -59,8 +59,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.init = false;
         ks.pg = $scope.d.dataMain.patient_groups;
         ks.md = {};
-        ks.mks.selected = {};
-        ks.mks.selected_info = {};
+        ks.md.selected = {};
+        ks.md.selected_info = {};
 
         ks.result_explorer = {};
         ks.result_explorer.types = [{
