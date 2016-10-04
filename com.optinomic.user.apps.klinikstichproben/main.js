@@ -56,6 +56,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Init
+        d.init = false;
         d.pg = $scope.d.dataMain.patient_groups;
         d.md = null;
 
@@ -63,7 +64,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.getUserAppCalculation(app_id, app_claculation);
 
 
-        console.log('(!) Init, ', $scope.d.dataMain.apps.current.name, d);
 
         return d;
     };
@@ -81,20 +81,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         call.success(function(data) {
             // Save Data to $scope.d
-            console.log('(DATA): getCalculation: ', data.calculation_result);
             $scope.d.ks.user_app_calc = data.calculation_result;
 
             // Clone some stuff for Using
             $scope.d.ks.md = {};
             $scope.d.ks.md.selected = null;
+            $scope.d.ks.md.selected_info = null;
             $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
             $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
-            // Init 'User-Selection' for Dimenstions 
+            // Init 'User-Selection' for Dimenstions | jeweils letzter Eintrag
             $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
-                current_dim.selected = current_dim.array[0];
+                current_dim.selected = current_dim.array[current_dim.array.length - 1];
             });
             $scope.changeDimenstions();
+
+            $scope.d.ks.init = true;
+            console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
 
         });
         call.error(function(data) {
@@ -124,10 +127,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         $scope.d.ks.md.selected = data_dive;
-        $scope.d.ks.md.selected_info = {
-            "current_location_path": current_location,
-            "current_location_text": current_location_text
-        };
+        $scope.d.ks.md.selected_info.current_location_path = current_location;
+        $scope.d.ks.md.selected_info.current_location_text = current_location_text;
 
         console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
     };
