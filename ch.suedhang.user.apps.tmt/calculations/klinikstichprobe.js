@@ -68,7 +68,7 @@ function main(responses) {
         "id": 1,
         "text": "> 12 Jahre"
     }, {
-        "id": 99,
+        "id": 2,
         "text": "Jeder Ausbildungsgrad"
     }];
 
@@ -83,7 +83,7 @@ function main(responses) {
         "id": 3,
         "text": "Anderer Messzeitpunkt"
     }, {
-        "id": 99,
+        "id": 4,
         "text": "Alle Messzeitpunkte"
     }];
 

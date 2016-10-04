@@ -85,13 +85,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.user_app_calc = data.calculation_result;
 
             // Clone some stuff for Using
-            $scope.d.ks.md_patient_scores = angular.copy($scope.d.ks.user_app_calc);
+            $scope.d.ks.md = {};
+            $scope.d.ks.md.selected = null;
+            $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
             $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
             // Init 'User-Selection' for Dimenstions 
             $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
                 current_dim.selected = current_dim.array[0];
             });
+            $scope.changeDimenstions();
 
         });
         call.error(function(data) {
@@ -103,9 +106,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -------------------
-    // Unneeded
+    // Change - Events
     // -------------------
-
+    $scope.changeDimenstions = function() {
+        $scope.d.ks.md.selected = $scope.d.ks.md.scores[2][2][2];
+    };
 
 
     // -------------------
