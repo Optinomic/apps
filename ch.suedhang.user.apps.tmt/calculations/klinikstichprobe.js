@@ -74,16 +74,16 @@ function main(responses) {
 
 
     calc.group_mz_props = [{
-        "id": 0,
+        "id": 1,
         "text": "Eintritt"
     }, {
-        "id": 1,
+        "id": 2,
         "text": "Austritt"
     }, {
-        "id": 2,
+        "id": 3,
         "text": "Anderer Messzeitpunkt"
     }, {
-        "id": 3,
+        "id": 4,
         "text": "Alle Messzeitpunkte"
     }];
 
