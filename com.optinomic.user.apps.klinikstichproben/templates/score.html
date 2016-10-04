@@ -44,19 +44,20 @@ include(../lib/html/optinomic/page/start.m4)
         <div ng-if="d.ks.result_explorer.selected.id !== 0" class="grid-border-top">
             <p class="md-headline">{{d.ks.result_explorer.selected_var}}</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-                <div flex>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+                <div flex="50">
                     <p class="md-title">Statistic</p>
                     <pre>{{d.ks.md.selected.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
                 </div>
-                <div>
+                <div flex="25">
                     <p class="md-title">Scores</p>
                     <pre>{{d.ks.md.selected.scores[d.ks.result_explorer.selected_var] | json}}</pre>
                 </div>
+                <div flex="25">
+                    <p class="md-title">Patients</p>
+                    <pre>{{d.ks.md.selected.patients | json}}</pre>
+                </div>
             </div>
-            <p class="md-title">Patients</p>
-            <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <pre>{{d.ks.md.selected.patients | json}}</pre>
         </div>
     </div>
     <div ng-if="!d.ks.md.selected">
