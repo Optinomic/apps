@@ -84,10 +84,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('(DATA): getCalculation: ', data.calculation_result);
             $scope.d.ks.user_app_calc = data.calculation_result;
 
+            // Clone some stuff for Using
+            $scope.d.ks.md_patient_scores = angular.copy($scope.d.ks.user_app_calc);
+            $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
+
+            // Init 'User-Selection' for Dimenstions 
+            $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
+                current_dim.selected = current_dim.array[0];
+            });
+
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
-            $scope.d.ks.user_app_calc = {};
+            $scope.d.ks.user_app_calc = null;
         });
     };
 

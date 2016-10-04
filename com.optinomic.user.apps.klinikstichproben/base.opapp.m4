@@ -7,7 +7,7 @@ type = user
 
 
 [description]
-Under Development! Erstellen von klinischen Stichproben auf Basis von Patientengruppen - Dimensionen. 
+Under Development! Erstellen von klinischen Stichproben auf Basis von N-Dimensianalen Arrays aus Patient-Calculations sowie Patientengruppen - Dimensionen. Ziel dieser Applikation ist, klinische Stichproben einfach für jegliche Optinomic-App zur Verfügung zu stellen. 
 
 
 [developer]
