@@ -124,6 +124,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             data_dive = data_dive[current_dim.selected.id];
         });
 
+        current_location_text = current_location_text + ' (N=' + data_dive.scores[0].length + ')';
+
         $scope.d.ks.md.selected = data_dive;
         $scope.d.ks.md.selected_info.current_location_path = current_location;
         $scope.d.ks.md.selected_info.current_location_text = current_location_text;
