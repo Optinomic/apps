@@ -9,13 +9,13 @@ include(../lib/html/optinomic/page/start.m4)
         </md-select>
     </md-input-container>
 </div>
-<div>
+<div ng-if="d.ks.md.selected">
     <p class="md-headline">Results</p>
     <pre>{{d.ks.md.selected.statistics | json}}</pre>
     <pre>{{d.ks.md.selected.scores | json}}</pre>
     <pre>{{d.ks.md.selected.patients | json}}</pre>
 </div>
-<div ng-if="d.ks.md.selected === Null">
+<div ng-if="!d.ks.md.selected">
     <md-content class="md-padding">
         <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> {{d.ks.md.selected_info.current_location_text}}</h1>
         <p class="flow-text">Keine Daten verfügbar | No data available.</p>
