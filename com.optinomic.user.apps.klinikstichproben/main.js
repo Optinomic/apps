@@ -130,7 +130,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
 
         if (data_dive !== null) {
-            current_location_text = current_location_text + ' (N=' + $scope.d.ks.md.selected.scores[0].length + ')';
+            current_location_text = current_location_text + ' (N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
         };
         $scope.d.ks.md.selected_info.current_location_text = current_location_text;
 
