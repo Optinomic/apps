@@ -180,6 +180,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
+        console.log('dimensions_all', n_dimensions, dimensions_all);
+
 
         function createNDimArray(dimensions) {
             var t, i = 0,
