@@ -180,7 +180,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             n_dimensions.push(cd.array.length)
         };
 
-        console.log('dimensions_all', n_dimensions, dimensions_all);
 
 
         function createNDimArray(dimensions) {
@@ -197,6 +196,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save
         $scope.d.ks.md.scores_all = createNDimArray(n_dimensions);
+        console.log('dimensions_all', $scope.d.ks.md.scores_all[0][0][0], $scope.d.ks.md.scores_all);
+
+
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
 
 
