@@ -59,6 +59,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         d.init = false;
         d.pg = $scope.d.dataMain.patient_groups;
         d.md = null;
+        d.md.selected = null;
+        d.md.selected_info = null;
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
