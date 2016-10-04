@@ -1,9 +1,9 @@
 include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-    <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.user_app_calc.definitions.dimensions_app">
-        <label ng-init="d.ks.selected[$index] = 0">{{dim.name}}</label>
-        <md-select ng-model="d.ks.selected[$index]">
-            <md-option ng-repeat="item in dim.array" ng-value="$index">
+    <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions_app">
+        <label>{{dim.name}}</label>
+        <md-select ng-model="dim.selected">
+            <md-option ng-repeat="item in dim.array" ng-value="item.id">
                 {{item.text}}
             </md-option>
         </md-select>
@@ -11,6 +11,6 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div>
     <p class="md-headline">Results</p>
-    <pre>{{d.ks.user_app_calc.md_patient_scores[d.ks.selected[0]][d.ks.selected[1]][d.ks.selected[2]] | json}}</pre>
+    <pre>{{d.ks.md.selected | json}}</pre>
 </div>
 include(../lib/html/optinomic/page/end.m4)
