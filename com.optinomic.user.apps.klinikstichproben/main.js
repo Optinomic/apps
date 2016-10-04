@@ -67,6 +67,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Init
         ks.init = false;
         ks.pg = $scope.d.dataMain.patient_groups;
+        ks.definitions = {};
+
         ks.md = {};
         ks.md.selected = {};
         ks.md.selected_info = {};
@@ -189,7 +191,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             return arr;
         };
 
+
+        // Save
         $scope.d.ks.dimensions_all = createNDimArray(n_dimensions);
+        $scope.d.ks.definitions.dimensions_all = dimensions_all;
+
 
     };
 
