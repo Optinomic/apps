@@ -71,7 +71,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "name": 'Einzelne Variablen'
         }];
         ks.result_explorer.selected = ks.result_explorer.types[1];
-        ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
+        ks.result_explorer.selected_var = null;
 
         // Calculate stuff
         $scope.getUserAppCalculation(app_id, app_claculation);
@@ -104,6 +104,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 current_dim.selected = current_dim.array[current_dim.array.length - 1];
             });
             $scope.changeDimenstions();
+
+            $scope.d.ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
 
             $scope.d.ks.init = true;
             console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
