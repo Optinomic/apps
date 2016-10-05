@@ -280,7 +280,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
-                            data_dive = data_dive[myDimCheckID];
+                            ziel = data_dive[myDimCheckID];
 
                             var isLast = false;
                             if (check_dim_pg.pg !== null) {
@@ -290,14 +290,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
-                                    console.log('PG - YES:', pid, current_score, data_dive);
+                                    console.log('PG - YES:', pid, current_score, ziel);
 
                                 };
 
 
                             } else {
 
-                                console.log('PG - All => YES:', pid, current_score, data_dive);
+                                console.log('PG - All => YES:', pid, current_score, ziel);
 
                             };
 
