@@ -328,18 +328,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     //dimensions_pg
                     var ziel = data_dive;
                     var enhanced_list = angular.copy(current_list);
-                    dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
+                    var pg_list = [];
+                    //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
+                    //      pg_list.push(0);
+                    //  });
+
+
+                    dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
                         var last = false;
                         if (myDimID === dimensions_pg.length - 1) {
                             last = true;
                         };
 
+                        // Wrong!?
                         ziel = ziel[myDimID];
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
+                            pg_list[current_dim_pg] = myDimCheckID;
 
                             if (check_dim_pg.pg !== null) {
 
@@ -370,7 +378,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
 
-
+                    enhanced_list = enhanced_list.concat(pg_list);
+                    console.log('enhanced_list', enhanced_list);
                 };
             };
         };
