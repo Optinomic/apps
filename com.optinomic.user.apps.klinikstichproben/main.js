@@ -135,6 +135,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    // ------------------------------------------
+    // Do Statistics
+    // ------------------------------------------
+    $scope.getStatistics = function(data_array) {
+
+        // Interessante Berechnungen | Statistics
+        var s = {};
+
+        if (calc.isArray(data_array)) {
+            s.n = data_array.legth;
+            s.min = calc.min(data_array);
+            s.max = calc.max(data_array);
+            s.mean = calc.mean(data_array);
+            s.variance = calc.variance(data_array);
+            s.standard_deviation = calc.standard_deviation(data_array);
+            s.mean_1sd_min = s.mean - s.standard_deviation;
+            s.mean_1sd_plus = s.mean + s.standard_deviation;
+            s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
+            s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
+        };
+
+        // Return
+        return s;
+    };
+
 
 
     // -----------------------------------
@@ -246,6 +271,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dimensions_pg = $scope.d.ks.definitions.dimensions_pg;
 
 
+        function concatAndStatistics(ziel, quelle, patient, vars_array) {
+
+            var default_obj = {
+                "patients": [],
+                "scores": calc.cloneObj(calc.variables),
+                "statistics": calc.cloneObj(calc.variables)
+            };
+
+            // Set Default if needed
+            if (ziel === null) {
+                ziel = default_obj;
+            };
+
+            // Concat stuff
+            for (var vID = 0; vID < vars_array.length; vID++) {
+                var current_var = vars_array[vID];
+                ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
+                ziel.statistics[current_var] = $scope.getStatistics(ziel.scores[current_var]);
+            };
+
+            ziel.patients.push(patient);
+
+            return ziel;
+        };
+
+
         for (var psID = 0; psID < ps.length; psID++) {
 
             var source_patient_scores = ps[psID];
@@ -271,27 +322,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         data_dive = data_dive[pos_value];
                     };
 
-                    console.log('writePatientScoresMD', current_list, data_dive);
+                    // console.log('writePatientScoresMD', current_list, data_dive);
 
 
                     //dimensions_pg
                     var ziel = data_dive;
-
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
                         var last = false;
-
                         if (myDimID === dimensions_pg.length - 1) {
                             last = true;
                         };
 
                         ziel = ziel[myDimID];
 
-
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
 
-                            var isLast = false;
                             if (check_dim_pg.pg !== null) {
 
                                 var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
@@ -299,21 +346,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
-                                    console.log('PG - YES:', pid, last, current_score, ziel);
-
+                                    if (last) {
+                                        ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                                        console.log('WRITE:', ziel, current_score, pid, vars_array);
+                                    }
                                 };
 
 
                             } else {
-
-                                console.log('PG - All => YES:', pid, last, current_score, ziel);
-
+                                if (last) {
+                                    ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                                    console.log('WRITE:', ziel, current_score, pid, vars_array);
+                                }
                             };
-
-
-
                         });
-
                     });
 
 
