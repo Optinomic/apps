@@ -327,8 +327,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     //dimensions_pg
                     var ziel = data_dive;
-                    var enhanced_list
- = angular.copy(current_list);
+                    var enhanced_list = angular.copy(current_list);
 
                     var pg_list = [];
                     var md_variants_pg = [];
@@ -360,9 +359,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
+
+                                    md_variants_pg.push(angular.copy(current_list).concat(pg_list));
+
+
                                     if (last) {
 
-                                        md_variants_pg.push(angular.copy(current_list).concat(pg_list));
+                                        // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
