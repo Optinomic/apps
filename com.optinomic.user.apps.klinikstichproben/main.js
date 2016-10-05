@@ -345,7 +345,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         };
 
 
-
+                        var new_variant = true;
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
                             pg_list[myDimID] = myDimCheckID;
@@ -360,11 +360,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                 if (isPIDinGroup) {
 
-
-
                                     if (last) {
 
-                                        md_variants_pg.push(pg_list);
+                                        // md_variants_pg.push(pg_list);
 
 
                                         // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
@@ -373,14 +371,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                         // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
                                 } else {
-                                    break;
+                                    new_variant = false;
                                 };
 
 
                             } else {
 
                                 if (last) {
-                                    md_variants_pg.push(pg_list);
+
+                                    if (new_variant) {
+                                        md_variants_pg.push(pg_list);
+                                    };
 
                                     //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
