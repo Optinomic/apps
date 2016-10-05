@@ -360,23 +360,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                 if (isPIDinGroup) {
 
-                                    md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
 
                                     if (last) {
+
+                                        md_variants_pg.push(pg_list);
+
 
                                         // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
+                                } else {
+                                    console.log(pid, ' not in Group.');
                                 };
 
 
                             } else {
 
                                 if (last) {
-                                    md_variants_pg.push(angular.copy(current_list).concat(pg_list));
+                                    md_variants_pg.push(pg_list);
 
                                     //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
@@ -385,7 +389,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
 
-                    console.log('md_variants_pg, enhanced_list', md_variants_pg, pg_list);
+                    console.log('md_variants_pg, enhanced_list', md_variants_pg);
                 };
             };
         };
