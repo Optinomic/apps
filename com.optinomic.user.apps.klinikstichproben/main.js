@@ -456,7 +456,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // The mean of no numbers is null
         if (x.length === 0) return null;
 
-        return calc.sum(x) / x.length;
+        return $scope.sum(x) / x.length;
     }
 
     $scope.geometric_mean = function(x) {
@@ -529,7 +529,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // The variance of no numbers is null
         if (x.length === 0) return null;
 
-        var mean_value = calc.mean(x),
+        var mean_value = $scope.mean(x),
             deviations = [];
 
         // Make a list of squared deviations from the mean.
@@ -538,14 +538,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }
 
         // Find the mean value of that list
-        return calc.mean(deviations);
+        return $scope.mean(deviations);
     }
 
     $scope.standard_deviation = function(x) {
         // The standard deviation of no numbers is null
         if (x.length === 0) return null;
 
-        return Math.sqrt(calc.variance(x));
+        return Math.sqrt($scope.variance(x));
     }
 
     $scope.z_score = function(x, mean, standard_deviation) {
