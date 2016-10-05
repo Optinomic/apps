@@ -309,7 +309,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             for (var sID = 0; sID < source_scores.length; sID++) {
                 var current_score = source_scores[sID];
                 var md_variants = source_dimensions[sID].md_variants;
-
+                var md_variants_all = [];
 
                 for (var listID = 0; listID < md_variants.length; listID++) {
 
@@ -363,10 +363,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 if (isPIDinGroup) {
                                     should_write = true;
                                     if (last) {
-                                        enhanced_list = enhanced_list.concat(pg_list);
+
+                                        md_variants_all.push(angular.copy(current_list).concat(pg_list));
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                        console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
+                                        // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
                                 } else {
                                     should_write = false;
@@ -378,16 +379,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 if (last) {
                                     should_write = true;
                                     enhanced_list = enhanced_list.concat(pg_list);
+                                    md_variants_all.push(angular.copy(current_list).concat(pg_list));
+
 
 
                                     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                    console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
+                                    // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
                                 }
                             };
                         });
                     });
 
-                    console.log('enhanced_list | should_write', enhanced_list, pg_list, should_write);
+                    console.log('md_variants_all, enhanced_list', md_variants_all, pg_list);
                 };
             };
         };
