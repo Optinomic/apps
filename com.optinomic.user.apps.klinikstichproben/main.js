@@ -327,7 +327,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     //dimensions_pg
                     var ziel = data_dive;
-                    var enhanced_list = angular.copy(current_list);
+                    var enhanced_list
+ = angular.copy(current_list);
 
                     var pg_list = [];
                     var md_variants_pg = [];
@@ -372,12 +373,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             } else {
 
                                 if (last) {
-                                    enhanced_list = enhanced_list.concat(pg_list);
                                     md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
-
-
-                                    ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                                    //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
                                 }
                             };
