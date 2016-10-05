@@ -327,7 +327,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     //dimensions_pg
                     var ziel = data_dive;
+                    var enhanced_list = angular.copy(current_list);
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
+
+                        enhanced_list.push(myDimID);
 
                         var last = false;
                         if (myDimID === dimensions_pg.length - 1) {
@@ -348,7 +351,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 if (isPIDinGroup) {
                                     if (last) {
                                         ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                        console.log('WRITE:', ziel, current_score, pid, vars_array);
+                                        console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
                                 };
 
@@ -356,7 +359,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             } else {
                                 if (last) {
                                     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                    console.log('WRITE:', ziel, current_score, pid, vars_array);
+                                    console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
                                 }
                             };
                         });
