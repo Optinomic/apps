@@ -236,12 +236,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var md_variants = source_dimensions[sID].md_variants;
 
 
-                // Write in all Variants
                 for (var listID = 0; listID < md_variants.length; listID++) {
 
                     var current_list = md_variants[listID];
 
-                    console.log('writePatientScoresMD', current_list);
+                    // Data Dive
+                    var data_dive = data;
+                    for (var clistID = 0; clistID < current_list.length; clistID++) {
+                        var pos_value = current_list[clistID];
+                        data_dive = data_dive[pos_value];
+                    };
+
+                    console.log('writePatientScoresMD', current_list, data_dive);
                 };
             };
 
