@@ -280,7 +280,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
-                            ziel = data_dive[myDimCheckID];
+                            var ziel = data_dive[myDimCheckID];
 
                             var isLast = false;
                             if (check_dim_pg.pg !== null) {
