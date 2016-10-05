@@ -363,6 +363,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 if (isPIDinGroup) {
                                     should_write = true;
                                     if (last) {
+                                        enhanced_list = enhanced_list.concat(pg_list);
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
@@ -376,6 +377,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                 if (last) {
                                     should_write = true;
+                                    enhanced_list = enhanced_list.concat(pg_list);
+
 
                                     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
@@ -384,7 +387,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
 
-                    enhanced_list = enhanced_list.concat(pg_list);
                     console.log('enhanced_list | should_write', enhanced_list, pg_list, should_write);
                 };
             };
