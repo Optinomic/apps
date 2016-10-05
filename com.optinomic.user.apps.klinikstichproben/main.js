@@ -145,15 +145,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if ($scope.isArray(data_array)) {
             s.n = data_array.legth;
-            s.min = calc.min(data_array);
-            s.max = calc.max(data_array);
-            s.mean = calc.mean(data_array);
-            s.variance = calc.variance(data_array);
-            s.standard_deviation = calc.standard_deviation(data_array);
+            s.min = $scope.min(data_array);
+            s.max = $scope.max(data_array);
+            s.mean = $scope.mean(data_array);
+            s.variance = $scope.variance(data_array);
+            s.standard_deviation = $scope.standard_deviation(data_array);
             s.mean_1sd_min = s.mean - s.standard_deviation;
             s.mean_1sd_plus = s.mean + s.standard_deviation;
-            s.z_score_min = calc.z_score(s.min, s.mean, s.standard_deviation);
-            s.z_score_max = calc.z_score(s.max, s.mean, s.standard_deviation);
+            s.z_score_min = $scope.z_score(s.min, s.mean, s.standard_deviation);
+            s.z_score_max = $scope.z_score(s.max, s.mean, s.standard_deviation);
         };
 
         // Return
@@ -438,6 +438,119 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
         return obj3;
     };
+
+    // ------------------------------------------
+    //  calculation_simplestatistics.js
+    //  S T A T I S T I C S
+    // ------------------------------------------
+
+    $scope.sum = function(x) {
+        var value = 0;
+        for (var i = 0; i < x.length; i++) {
+            value += x[i];
+        }
+        return value;
+    }
+
+    $scope.mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        return calc.sum(x) / x.length;
+    }
+
+    $scope.geometric_mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        // the starting value.
+        var value = 1;
+
+        for (var i = 0; i < x.length; i++) {
+            // the geometric mean is only valid for positive numbers
+            if (x[i] <= 0) return null;
+
+            // repeatedly multiply the value by each number
+            value *= x[i];
+        }
+
+        return Math.pow(value, 1 / x.length);
+    }
+
+    $scope.harmonic_mean = function(x) {
+        // The mean of no numbers is null
+        if (x.length === 0) return null;
+
+        var reciprocal_sum = 0;
+
+        for (var i = 0; i < x.length; i++) {
+            // the harmonic mean is only valid for positive numbers
+            if (x[i] <= 0) return null;
+
+            reciprocal_sum += 1 / x[i];
+        }
+
+        // divide n by the the reciprocal sum
+        return x.length / reciprocal_sum;
+    }
+
+    $scope.root_mean_square = function(x) {
+        if (x.length === 0) return null;
+
+        var sum_of_squares = 0;
+        for (var i = 0; i < x.length; i++) {
+            sum_of_squares += Math.pow(x[i], 2);
+        }
+
+        return Math.sqrt(sum_of_squares / x.length);
+    }
+
+    $scope.min = function(x) {
+        var value;
+        for (var i = 0; i < x.length; i++) {
+            // On the first iteration of this loop, min is
+            // undefined and is thus made the minimum element in the array
+            if (x[i] < value || value === undefined) value = x[i];
+        }
+        return value;
+    }
+
+    $scope.max = function(x) {
+        var value;
+        for (var i = 0; i < x.length; i++) {
+            // On the first iteration of this loop, max is
+            // undefined and is thus made the maximum element in the array
+            if (x[i] > value || value === undefined) value = x[i];
+        }
+        return value;
+    }
+
+    $scope.variance = function(x) {
+        // The variance of no numbers is null
+        if (x.length === 0) return null;
+
+        var mean_value = calc.mean(x),
+            deviations = [];
+
+        // Make a list of squared deviations from the mean.
+        for (var i = 0; i < x.length; i++) {
+            deviations.push(Math.pow(x[i] - mean_value, 2));
+        }
+
+        // Find the mean value of that list
+        return calc.mean(deviations);
+    }
+
+    $scope.standard_deviation = function(x) {
+        // The standard deviation of no numbers is null
+        if (x.length === 0) return null;
+
+        return Math.sqrt(calc.variance(x));
+    }
+
+    $scope.z_score = function(x, mean, standard_deviation) {
+        return (x - mean) / standard_deviation;
+    }
 
 
 
