@@ -362,7 +362,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                     if (last) {
 
-                                        // md_variants_pg.push(pg_list);
+                                        md_variants_pg.push(pg_list);
 
 
                                         // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
