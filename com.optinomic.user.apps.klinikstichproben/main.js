@@ -273,11 +273,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     console.log('writePatientScoresMD', current_list, data_dive);
 
+
+
                     //dimensions_pg
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
+                            data_dive = data_dive[myDimCheckID];
 
                             var isLast = false;
                             if (check_dim_pg.pg !== null) {
@@ -287,17 +290,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
-                                    console.log('PG - YES:', pid, current_score);
-
-                                } else {
-                                    console.log('PG - NO:', pid, current_score);
+                                    console.log('PG - YES:', pid, current_score, data_dive);
 
                                 };
 
 
                             } else {
 
-                                console.log('PG - All => YES:', pid, current_score);
+                                console.log('PG - All => YES:', pid, current_score, data_dive);
 
                             };
 
