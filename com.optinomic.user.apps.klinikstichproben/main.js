@@ -373,7 +373,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                         // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
                                 } else {
-                                    console.log(pid, ' not in Group.');
+                                    break;
                                 };
 
 
