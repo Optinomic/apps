@@ -143,7 +143,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Interessante Berechnungen | Statistics
         var s = {};
 
-        if (calc.isArray(data_array)) {
+        if ($scope.isArray(data_array)) {
             s.n = data_array.legth;
             s.min = calc.min(data_array);
             s.max = calc.max(data_array);
@@ -275,8 +275,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var default_obj = {
                 "patients": [],
-                "scores": calc.cloneObj(calc.variables),
-                "statistics": calc.cloneObj(calc.variables)
+                "scores": angular.copy($scope.d.ks.user_app_calc.definitions.variables),
+                "statistics": angular.copy($scope.d.ks.user_app_calc.definitions.variables)
             };
 
             // Set Default if needed
