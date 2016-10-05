@@ -210,9 +210,43 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
         // console.log('dimensions_all', n_dimensions, scores_all);
 
+        $scope.writePatientScoresMD();
     };
 
 
+    $scope.writePatientScoresMD = function() {
+
+
+        var ps = angular.copy($scope.d.ks.user_app_calc.patient_scores);
+        var data = $scope.d.ks.md.scores_all;
+        var vars_array = $scope.d.ks.user_app_calc.definitions.variables_array;
+
+
+        for (var psID = 0; psID < ps.length; psID++) {
+
+            var source_patient_scores = ps[psID];
+
+            var pid = source_patient_scores.patient.id;
+            var source_scores = source_patient_scores.data.scores;
+            var source_dimensions = source_patient_scores.data.dimensions;
+
+
+            for (var sID = 0; sID < source_scores.length; sID++) {
+                var current_score = source_scores[sID];
+                var md_variants = source_dimensions[sID].md_variants;
+
+
+                // Write in all Variants
+                for (var listID = 0; listID < md_variants.length; listID++) {
+
+                    var current_list = md_variants[listID];
+
+                    console.log('writePatientScoresMD', current_list);
+                };
+            };
+
+        };
+    };
 
 
     // -------------------
