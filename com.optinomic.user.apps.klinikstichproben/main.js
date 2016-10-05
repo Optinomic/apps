@@ -208,6 +208,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.md.scores_all = angular.copy(md_all_data_empty);
         $scope.d.ks.definitions.md_all_data_empty = angular.copy(md_all_data_empty);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
+        $scope.d.ks.definitions.dimensions_pg = dimensions_pg;
         // console.log('dimensions_all', n_dimensions, scores_all);
 
         $scope.writePatientScoresMD();
@@ -220,6 +221,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var ps = angular.copy($scope.d.ks.user_app_calc.patient_scores);
         var data = $scope.d.ks.md.scores_all;
         var vars_array = $scope.d.ks.user_app_calc.definitions.variables_array;
+        var dimensions_pg = $scope.d.ks.definitions.dimensions_pg;
 
 
         for (var psID = 0; psID < ps.length; psID++) {
@@ -248,9 +250,44 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     };
 
                     console.log('writePatientScoresMD', current_list, data_dive);
+
+                    //dimensions_pg
+                    dimensions_pg.forEach(function(current_dim_pg, myDimID) {
+
+                        current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
+
+
+                            var isLast = false;
+                            if (check_dim_pg.pg !== null) {
+
+                                var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
+
+                                console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
+
+                                if (isPIDinGroup) {
+                                    console.log('PG - YES:', pid, current_score);
+
+                                } else {
+                                    console.log('PG - NO:', pid, current_score);
+
+                                };
+
+
+                            } else {
+
+                                console.log('PG - All => YES:', pid, current_score);
+
+                            };
+
+
+
+                        });
+
+                    });
+
+
                 };
             };
-
         };
     };
 
