@@ -309,12 +309,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             for (var sID = 0; sID < source_scores.length; sID++) {
                 var current_score = source_scores[sID];
                 var md_variants = source_dimensions[sID].md_variants;
-                var md_variants_all = [];
 
                 for (var listID = 0; listID < md_variants.length; listID++) {
 
                     var current_list = md_variants[listID];
-                    var should_write = false;
 
 
                     // Data Dive
@@ -332,6 +330,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var enhanced_list = angular.copy(current_list);
 
                     var pg_list = [];
+                    var md_variants_pg = [];
+
                     //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
                     //      pg_list.push(0);
                     //  });
@@ -344,8 +344,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             last = true;
                         };
 
-                        // Wrong!?
-                        ziel = ziel[myDimID];
 
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
@@ -361,25 +359,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
-                                    should_write = true;
                                     if (last) {
 
-                                        md_variants_all.push(angular.copy(current_list).concat(pg_list));
+                                        md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
-                                } else {
-                                    should_write = false;
                                 };
 
 
                             } else {
 
                                 if (last) {
-                                    should_write = true;
                                     enhanced_list = enhanced_list.concat(pg_list);
-                                    md_variants_all.push(angular.copy(current_list).concat(pg_list));
+                                    md_variants_pg.push(angular.copy(current_list).concat(pg_list));
 
 
 
@@ -390,7 +384,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
 
-                    console.log('md_variants_all, enhanced_list', md_variants_all, pg_list);
+                    console.log('md_variants_pg, enhanced_list', md_variants_pg, pg_list);
                 };
             };
         };
