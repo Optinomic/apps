@@ -176,6 +176,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Arrange them in dimensions_pg
         // Every group_pg_props have a 'all patients'
 
+        var group_pg_props_gender = [{
+            "id": 0,
+            "text": "Frauen",
+            "pg": angular.copy($scope.d.dataMain.patient_groups[2])
+        }, {
+            "id": 0,
+            "text": "Männer",
+            "pg": angular.copy($scope.d.dataMain.patient_groups[3])
+        }, {
+            "id": 1,
+            "text": "Alle Patienten",
+            "pg": null
+        }];
+
         var group_pg_props = [{
             "id": 0,
             "text": "Aktuell oder ehemalig auf EAS",
@@ -186,12 +200,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "pg": null
         }];
 
-        var dimensions_pg = [{
-            "id": 0,
-            "name": "EAS",
-            "source": "pg",
-            "array": angular.copy(group_pg_props)
-        }];
+        var dimensions_pg = [
+
+            {
+                "id": 0,
+                "name": "Geschlecht",
+                "source": "pg",
+                "array": angular.copy(group_pg_props_gender)
+            }, {
+                "id": 0,
+                "name": "EAS",
+                "source": "pg",
+                "array": angular.copy(group_pg_props)
+            }
+        ];
 
         var dimensions_all = dimenstions_app.concat(dimensions_pg);
 
