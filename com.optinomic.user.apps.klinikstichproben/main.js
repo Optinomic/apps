@@ -274,13 +274,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     console.log('writePatientScoresMD', current_list, data_dive);
 
 
-
+                    var ziel = data_dive;
                     //dimensions_pg
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
-                            var ziel = data_dive[myDimCheckID];
+                            ziel = ziel[myDimCheckID];
 
                             var isLast = false;
                             if (check_dim_pg.pg !== null) {
