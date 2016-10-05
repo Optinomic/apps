@@ -348,7 +348,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
-                            pg_list[current_dim_pg] = myDimCheckID;
+                            pg_list[myDimID] = myDimCheckID;
                             console.log('(?)', myDimID, myDimCheckID, pg_list);
 
 
