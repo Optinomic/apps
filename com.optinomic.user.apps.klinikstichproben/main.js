@@ -330,7 +330,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var enhanced_list = angular.copy(current_list);
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
-                        enhanced_list.push(myDimID);
 
                         var last = false;
                         if (myDimID === dimensions_pg.length - 1) {
@@ -341,6 +340,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
+                            enhanced_list.push(myDimID);
 
                             if (check_dim_pg.pg !== null) {
 
