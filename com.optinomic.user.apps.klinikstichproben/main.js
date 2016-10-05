@@ -314,6 +314,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 for (var listID = 0; listID < md_variants.length; listID++) {
 
                     var current_list = md_variants[listID];
+                    var should_write = false;
+
 
                     // Data Dive
                     var data_dive = data;
@@ -359,20 +361,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
 
                                 if (isPIDinGroup) {
-                                    enhanced_list.push(myDimCheckID);
-
+                                    should_write = true;
                                     if (last) {
 
                                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
                                     }
+                                } else {
+                                    should_write = false;
                                 };
 
 
                             } else {
 
                                 if (last) {
-                                    enhanced_list.push(myDimCheckID);
+                                    should_write = true;
 
                                     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
@@ -382,7 +385,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     });
 
                     enhanced_list = enhanced_list.concat(pg_list);
-                    console.log('enhanced_list', enhanced_list, pg_list);
+                    console.log('enhanced_list | should_write', enhanced_list, pg_list, should_write);
                 };
             };
         };
