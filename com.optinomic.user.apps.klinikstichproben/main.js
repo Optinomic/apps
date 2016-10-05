@@ -275,18 +275,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                     //dimensions_pg
+                    var ziel = data_dive;
+
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
-                        var ziel = data_dive;
                         var last = false;
 
                         if (myDimID === dimensions_pg.length - 1) {
                             last = true;
                         };
 
+                        ziel = ziel[myDimID];
+
+
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
-                            ziel = ziel[myDimCheckID];
 
                             var isLast = false;
                             if (check_dim_pg.pg !== null) {
