@@ -345,9 +345,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         // Wrong!?
                         ziel = ziel[myDimID];
 
+
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
 
                             pg_list[current_dim_pg] = myDimCheckID;
+                            console.log('(?)', myDimID, myDimCheckID, pg_list);
+
 
                             if (check_dim_pg.pg !== null) {
 
@@ -379,7 +382,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     });
 
                     enhanced_list = enhanced_list.concat(pg_list);
-                    console.log('enhanced_list', enhanced_list);
+                    console.log('enhanced_list', enhanced_list, pg_list);
                 };
             };
         };
