@@ -342,6 +342,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                             if (check_dim_pg.pg !== null) {
+                                enhanced_list.push(myDimCheckID);
 
                                 var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
 
@@ -350,7 +351,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 if (isPIDinGroup) {
 
                                     if (last) {
-                                        enhanced_list.push(myDimCheckID);
 
                                         ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                         console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
@@ -359,9 +359,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                             } else {
+                                enhanced_list.push(myDimCheckID);
 
                                 if (last) {
-                                    enhanced_list.push(myDimCheckID);
 
                                     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                                     console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
