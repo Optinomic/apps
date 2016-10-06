@@ -380,19 +380,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     //data[0][0][0][0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
 
                     // In allen Varianten schreiben.
-
                     md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                        var data_now = data_dive;
-                        current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
-                            data_now = ziel[current_pg_variant_pos];
-                        });
-                        console.log('-> (0) WRITE: Ziel', current_pg_variant, ziel);
-                        // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                        data_now = 73;
-                        data_dive[current_pg_variant] = 99;
-                        console.log('-> (1) WRITE: Ziel', current_pg_variant, ziel);
+                        data_dive[current_pg_variant[0]][current_pg_variant[1]] = concatAndStatistics(ziel, current_score, pid, vars_array);
                     });
 
+
+                    //  md_variants_pg.forEach(function(current_pg_variant, myVarID) {
+                    //      var data_now = data_dive;
+                    //      current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
+                    //          data_now = ziel[current_pg_variant_pos];
+                    //      });
+                    //      console.log('-> (0) WRITE: Ziel', current_pg_variant, ziel);
+                    //      // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    //      data_now = 73;
+                    //      data_dive[current_pg_variant] = 99;
+                    //      console.log('-> (1) WRITE: Ziel', current_pg_variant, ziel);
+                    //  });
 
 
                 };
