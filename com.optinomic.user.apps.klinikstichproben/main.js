@@ -374,8 +374,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     // In allen Varianten schreiben.
 
-                    var ziel = data_dive;
                     md_variants_pg.forEach(function(current_pg_variant, myVarID) {
+                        var ziel = data_dive;
                         current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
                             ziel = ziel[current_pg_variant_pos];
                         });
