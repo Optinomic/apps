@@ -383,63 +383,63 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         var md_data = null;
 
                         if (current_pg_list.length === 1) {
-                            md_data = data[current_pg_list[0]];
+                            md_data = data_dive[current_pg_list[0]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]] = md_data;
+                            data_dive[current_pg_list[0]] = md_data;
                         };
 
                         if (current_pg_list.length === 2) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]] = md_data;
                         };
 
                         if (current_pg_list.length === 3) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]] = md_data;
                         };
 
                         if (current_pg_list.length === 4) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]] = md_data;
                         };
 
                         if (current_pg_list.length === 5) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]] = md_data;
                         };
 
                         if (current_pg_list.length === 6) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]] = md_data;
                         };
 
                         if (current_pg_list.length === 7) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]] = md_data;
                         };
 
                         if (current_pg_list.length === 8) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]] = md_data;
                         };
 
                         if (current_pg_list.length === 9) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]] = md_data;
                         };
 
                         if (current_pg_list.length === 10) {
-                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]];
+                            md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]] = md_data;
+                            data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]] = md_data;
                         };
                     });
 
