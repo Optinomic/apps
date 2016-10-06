@@ -27,15 +27,27 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            var current_template = $scope.d.dataMain.params.location.viewname;
+
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
 
-                // Run App-Functions:
-                $scope.setDataView();
-                $scope.setTscoreChart();
-                $scope.setExport();
+                // Run Specific Functions only when needed.
+
+                if (current_template === 'chart_tscore') {
+                    $scope.setTscoreChart();
+                };
+
+                if (current_template === 'data_survey_responses') {
+                    $scope.setDataView();
+                };
+
+                if (current_template === 'data_export_admin') {
+                    $scope.setExport();
+                };
+
 
                 // Display Results
                 $scope.d.haveData = true;
