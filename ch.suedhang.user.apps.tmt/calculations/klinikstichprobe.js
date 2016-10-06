@@ -252,7 +252,7 @@ function main(responses) {
             var current_patient = p[pIndex];
             var source = current_patient.other_calculations[info.other_calculation];
 
-            if (source.length) {
+            if (source.length > 0) {
 
                 var return_obj = {
                     "patient": current_patient.patient,

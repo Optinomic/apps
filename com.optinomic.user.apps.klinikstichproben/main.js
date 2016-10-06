@@ -370,10 +370,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
                     md_variants_pg = getAllVariants(pg_list);
-
-
                     // console.log('-> Varianten: ', pid, md_variants_pg);
 
+
+
+
+                    // DIRTY - HACKING HERE!
+                    // TO DO: How do I do this better?
 
                     // In allen Varianten schreiben.
                     md_variants_pg.forEach(function(current_pg_list, myVarID) {
