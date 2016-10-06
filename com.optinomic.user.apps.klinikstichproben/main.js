@@ -145,7 +145,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         if ($scope.isArray(data_array)) {
-            s.n = data_array.legth;
+            s.n = data_array.length;
             s.min = $scope.min(data_array);
             s.max = $scope.max(data_array);
             s.mean = $scope.mean(data_array);
@@ -156,9 +156,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             s.z_score_min = $scope.z_score(s.min, s.mean, s.standard_deviation);
             s.z_score_max = $scope.z_score(s.max, s.mean, s.standard_deviation);
         };
-
-
-        console.log('getStatistics', data_array, s);
 
 
         // Return

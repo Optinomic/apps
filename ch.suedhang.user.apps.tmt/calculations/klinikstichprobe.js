@@ -130,7 +130,7 @@ function main(responses) {
         var s = {};
 
         if (calc.isArray(data_array)) {
-            s.n = data_array.legth;
+            s.n = data_array.length;
             s.min = calc.min(data_array);
             s.max = calc.max(data_array);
             s.mean = calc.mean(data_array);
