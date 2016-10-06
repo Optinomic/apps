@@ -372,73 +372,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     console.log('-> Varianten: ', pid, md_variants_pg);
 
+
+                    // Test Write
+                    data_dive[0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
+
                     // In allen Varianten schreiben.
 
-                    md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                        var ziel = data_dive;
-                        current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
-                            ziel = ziel[current_pg_variant_pos];
-                        });
-                        console.log('-> (0) WRITE: Ziel', ziel);
-                        ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                        console.log('-> (1) WRITE: Ziel', ziel);
-                    });
+                    // md_variants_pg.forEach(function(current_pg_variant, myVarID) {
+                    //     var ziel = data_dive;
+                    //     current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
+                    //         ziel = ziel[current_pg_variant_pos];
+                    //     });
+                    //     console.log('-> (0) WRITE: Ziel', ziel);
+                    //     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    //     console.log('-> (1) WRITE: Ziel', ziel);
+                    // });
 
 
-                    //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
-                    //  
-                    //      var last = false;
-                    //      if (myDimID === dimensions_pg.length - 1) {
-                    //          last = true;
-                    //      };
-                    //  
-                    //  
-                    //      var new_variant = true;
-                    //      current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
-                    //  
-                    //          pg_list[myDimID] = myDimCheckID;
-                    //          console.log('(?)', myDimID, myDimCheckID, pg_list);
-                    //  
-                    //  
-                    //          if (check_dim_pg.pg !== null) {
-                    //  
-                    //              var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
-                    //  
-                    //              // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
-                    //  
-                    //              if (isPIDinGroup) {
-                    //  
-                    //                  if (last) {
-                    //  
-                    //                      md_variants_pg.push(pg_list);
-                    //  
-                    //  
-                    //                      // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
-                    //  
-                    //                      // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                    //                      // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
-                    //                  }
-                    //              } else {
-                    //                  new_variant = false;
-                    //              };
-                    //  
-                    //  
-                    //          } else {
-                    //  
-                    //              if (last) {
-                    //  
-                    //                  if (new_variant) {
-                    //                      md_variants_pg.push(pg_list);
-                    //                  };
-                    //  
-                    //                  //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                    //                  // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
-                    //              }
-                    //          };
-                    //      });
-                    //  });
-                    //  
-                    //  console.log('md_variants_pg, enhanced_list', md_variants_pg);
+
                 };
             };
         };
