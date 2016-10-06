@@ -375,9 +375,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     });
 
-                    pg_list = getAllVariants(pg_list);
+                    md_variants_pg = getAllVariants(pg_list);
 
-                    console.log('-> Varianten: ', pid, pg_list, pg_list);
+                    console.log('-> Varianten: ', pid, md_variants_pg, pg_list);
 
 
 
