@@ -374,14 +374,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                     // Test Write
-                    var ziel = data_dive;
-                    data_dive[0][0] = "Direct";
-                    ziel[1][1] = "Direct | Ziel";
-                    //data[0][0][0][0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    // var ziel = data_dive;
+                    // data_dive[0][0] = "Direct";
+                    // ziel[1][1] = "Direct | Ziel";
+                    // data[0][0][0][0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
 
                     // In allen Varianten schreiben.
                     md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                        data_dive[current_pg_variant[0]][current_pg_variant[1]] = concatAndStatistics(ziel, current_score, pid, vars_array);
+                        data_dive[current_pg_variant[0]][current_pg_variant[1]] = concatAndStatistics(data_dive[current_pg_variant[0]][current_pg_variant[1]], current_score, pid, vars_array);
                     });
 
 
