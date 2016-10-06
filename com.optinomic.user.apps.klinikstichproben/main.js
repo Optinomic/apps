@@ -284,6 +284,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 ziel = default_obj;
             };
 
+
+            console.log('concatAndStatistics', ziel, quelle, patient, vars_array);
+
             // Concat stuff
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
@@ -473,8 +476,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks.md.selected = angular.copy(data_dive);
         $scope.d.ks.md.selected_info.current_location_path = current_location;
-
-        console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
 
         if (data_dive !== null) {
             var current_location_n = $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
