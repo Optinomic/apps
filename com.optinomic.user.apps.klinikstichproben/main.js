@@ -376,7 +376,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     var ziel = data_dive;
                     md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                        md_variants_pg_pos.forEach(function(current_pg_variant_pos, myVarPosID) {
+                        current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
                             ziel = ziel[current_pg_variant_pos];
                             console.log('-> (0) WRITE: Ziel', ziel);
                             ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
