@@ -332,11 +332,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var pg_list = [];
                     var md_variants_pg = [];
 
-                    //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
-                    //      pg_list.push(0);
-                    //  });
-
-
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
 
                         var last = false;
@@ -344,53 +339,84 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             last = true;
                         };
 
-
                         var new_variant = true;
+
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
-
                             pg_list[myDimID] = myDimCheckID;
-                            console.log('(?)', myDimID, myDimCheckID, pg_list);
-
 
                             if (check_dim_pg.pg !== null) {
 
                                 var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
-
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
-
-                                if (isPIDinGroup) {
-
-                                    if (last) {
-
-                                        md_variants_pg.push(pg_list);
-
-
-                                        // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
-
-                                        // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                        // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
-                                    }
-                                } else {
+                                if (!isPIDinGroup) {
                                     new_variant = false;
                                 };
-
-
-                            } else {
-
-                                if (last) {
-
-                                    if (new_variant) {
-                                        md_variants_pg.push(pg_list);
-                                    };
-
-                                    //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                                    // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
-                                }
                             };
+
+                            if (new_variant) {
+                                console.log('Neue Variante: ', pg_list, new_variant, last);
+                            } else {
+                                console.log('Keine Variante: ', pg_list, new_variant, last);
+                            };
+
                         });
                     });
 
-                    console.log('md_variants_pg, enhanced_list', md_variants_pg);
+
+                    //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
+                    //  
+                    //      var last = false;
+                    //      if (myDimID === dimensions_pg.length - 1) {
+                    //          last = true;
+                    //      };
+                    //  
+                    //  
+                    //      var new_variant = true;
+                    //      current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
+                    //  
+                    //          pg_list[myDimID] = myDimCheckID;
+                    //          console.log('(?)', myDimID, myDimCheckID, pg_list);
+                    //  
+                    //  
+                    //          if (check_dim_pg.pg !== null) {
+                    //  
+                    //              var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
+                    //  
+                    //              // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
+                    //  
+                    //              if (isPIDinGroup) {
+                    //  
+                    //                  if (last) {
+                    //  
+                    //                      md_variants_pg.push(pg_list);
+                    //  
+                    //  
+                    //                      // md_variants_pg.push(angular.copy(current_list).concat(pg_list));
+                    //  
+                    //                      // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    //                      // console.log('WRITE:', enhanced_list, ziel, current_score, pid, vars_array);
+                    //                  }
+                    //              } else {
+                    //                  new_variant = false;
+                    //              };
+                    //  
+                    //  
+                    //          } else {
+                    //  
+                    //              if (last) {
+                    //  
+                    //                  if (new_variant) {
+                    //                      md_variants_pg.push(pg_list);
+                    //                  };
+                    //  
+                    //                  //ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    //                  // console.log('WRITE (all):', enhanced_list, ziel, current_score, pid);
+                    //              }
+                    //          };
+                    //      });
+                    //  });
+                    //  
+                    //  console.log('md_variants_pg, enhanced_list', md_variants_pg);
                 };
             };
         };
