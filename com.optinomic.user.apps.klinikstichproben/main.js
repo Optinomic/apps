@@ -370,32 +370,76 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     md_variants_pg = getAllVariants(pg_list);
 
 
-                    console.log('-> Varianten: ', pid, md_variants_pg);
+                    // console.log('-> Varianten: ', pid, md_variants_pg);
 
-
-                    // Test Write
-                    // var ziel = data_dive;
-                    // data_dive[0][0] = "Direct";
-                    // ziel[1][1] = "Direct | Ziel";
-                    // data[0][0][0][0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
 
                     // In allen Varianten schreiben.
-                    md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                        data_dive[current_pg_variant[0]][current_pg_variant[1]] = concatAndStatistics(data_dive[current_pg_variant[0]][current_pg_variant[1]], current_score, pid, vars_array);
+                    md_variants_pg.forEach(function(current_pg_list, myVarID) {
+
+                        var ziel = null;
+                        var md_data = null;
+
+                        if (current_pg_list.length === 1) {
+                            md_data = data[current_pg_list[0]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 2) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 3) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 4) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 5) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 6) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 7) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 8) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 9) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]] = md_data;
+                        };
+
+                        if (current_pg_list.length === 10) {
+                            md_data = data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]];
+                            md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                            data[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]] = md_data;
+                        };
                     });
 
-
-                    //  md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                    //      var data_now = data_dive;
-                    //      current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
-                    //          data_now = ziel[current_pg_variant_pos];
-                    //      });
-                    //      console.log('-> (0) WRITE: Ziel', current_pg_variant, ziel);
-                    //      // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                    //      data_now = 73;
-                    //      data_dive[current_pg_variant] = 99;
-                    //      console.log('-> (1) WRITE: Ziel', current_pg_variant, ziel);
-                    //  });
 
 
                 };

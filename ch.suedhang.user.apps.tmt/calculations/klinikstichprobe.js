@@ -387,31 +387,67 @@ function main(responses) {
                     // TO DO: How do I do this better?
 
                     var ziel = null;
+                    var md_data = null;
+
                     if (current_list.length === 1) {
-                        data[current_list[0]] = current_list;
+                        md_data = data[current_list[0]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]] = md_data;
                     };
 
                     if (current_list.length === 2) {
-                        data[current_list[0]][current_list[1]] = current_list;
+                        md_data = data[current_list[0]][current_list[1]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]] = md_data;
                     };
 
                     if (current_list.length === 3) {
-                        var md_data = data[current_list[0]][current_list[1]][current_list[2]];
-
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]];
                         md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
-                        // md_data = doStatistics(md_data, current_score, vars_array);
-
                         data[current_list[0]][current_list[1]][current_list[2]] = md_data;
                     };
 
                     if (current_list.length === 4) {
-                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = current_list;
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]] = md_data;
                     };
 
                     if (current_list.length === 5) {
-                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = current_list;
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]] = md_data;
                     };
 
+                    if (current_list.length === 6) {
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]] = md_data;
+                    };
+
+                    if (current_list.length === 7) {
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]] = md_data;
+                    };
+
+                    if (current_list.length === 8) {
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]] = md_data;
+                    };
+
+                    if (current_list.length === 9) {
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]][current_list[8]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]][current_list[8]] = md_data;
+                    };
+
+                    if (current_list.length === 10) {
+                        md_data = data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]][current_list[8]][current_list[9]];
+                        md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
+                        data[current_list[0]][current_list[1]][current_list[2]][current_list[3]][current_list[4]][current_list[5]][current_list[6]][current_list[7]][current_list[8]][current_list[9]] = md_data;
+                    };
                 };
 
             };
