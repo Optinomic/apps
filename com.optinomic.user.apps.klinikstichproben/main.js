@@ -375,7 +375,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     // Test Write
                     var ziel = data_dive;
-                    data_dive[0][0] = 73;
+                    data_dive[0][0] = "Direct";
+                    ziel[1][1] = "Direct | Ziel";
                     //data[0][0][0][0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
 
                     // In allen Varianten schreiben.
@@ -385,10 +386,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
                             ziel = ziel[current_pg_variant_pos];
                         });
-                        console.log('-> (0) WRITE: Ziel', ziel);
+                        console.log('-> (0) WRITE: Ziel', current_pg_variant, ziel);
                         // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
                         ziel = 73;
-                        console.log('-> (1) WRITE: Ziel', ziel);
+                        console.log('-> (1) WRITE: Ziel', current_pg_variant, ziel);
                     });
 
 
