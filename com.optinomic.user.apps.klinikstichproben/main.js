@@ -206,11 +206,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "text": "Frauen",
             "pg": angular.copy($scope.d.dataMain.patient_groups[2])
         }, {
-            "id": 0,
+            "id": 1,
             "text": "Männer",
             "pg": angular.copy($scope.d.dataMain.patient_groups[3])
         }, {
-            "id": 1,
+            "id": 2,
             "text": "Alle Patienten",
             "pg": null
         }];
@@ -351,11 +351,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                         });
 
-                        console.log('---> Dimensions - Varianten erstellen: ', pg_list);
+                        console.log('---> Dimensions - Varianten erstellen: ', pid, pg_list);
 
                     });
 
-                    console.log('-> Varianten: ', pg_list);
+                    console.log('-> Varianten: ', pid, pg_list);
 
 
 
