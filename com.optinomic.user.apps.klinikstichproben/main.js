@@ -378,11 +378,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     md_variants_pg.forEach(function(current_pg_variant, myVarID) {
                         current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
                             ziel = ziel[current_pg_variant_pos];
-                            console.log('-> (0) WRITE: Ziel', ziel);
-                            ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                            console.log('-> (1) WRITE: Ziel', ziel);
-
                         });
+                        console.log('-> (0) WRITE: Ziel', ziel);
+                        ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                        console.log('-> (1) WRITE: Ziel', ziel);
                     });
 
 
