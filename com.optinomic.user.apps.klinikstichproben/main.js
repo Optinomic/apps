@@ -333,34 +333,30 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     var md_variants_pg = [];
 
                     dimensions_pg.forEach(function(current_dim_pg, myDimID) {
-
-                        var last = false;
-                        if (myDimID === dimensions_pg.length - 1) {
-                            last = true;
-                        };
-
-                        var new_variant = true;
+                        pg_list[myDimID] = [];
 
                         current_dim_pg.array.forEach(function(check_dim_pg, myDimCheckID) {
-                            pg_list[myDimID] = myDimCheckID;
 
                             if (check_dim_pg.pg !== null) {
 
                                 var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
                                 if (!isPIDinGroup) {
-                                    new_variant = false;
+                                    pg_list[myDimID].push(myDimCheckID)
                                 };
-                            };
-
-                            if (new_variant) {
-                                console.log('Neue Variante: ', pg_list, new_variant, last);
                             } else {
-                                console.log('Keine Variante: ', pg_list, new_variant, last);
+                                // Alle Patienten
+                                pg_list[myDimID].push(myDimCheckID)
                             };
 
                         });
+
+                        console.log('---> Dimensions - Varianten erstellen: ', pg_list);
+
                     });
+
+                    console.log('-> Varianten: ', pg_list);
+
 
 
                     //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
