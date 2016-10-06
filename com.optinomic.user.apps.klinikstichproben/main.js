@@ -380,15 +380,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     // In allen Varianten schreiben.
 
-                    // md_variants_pg.forEach(function(current_pg_variant, myVarID) {
-                    //     var ziel = data_dive;
-                    //     current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
-                    //         ziel = ziel[current_pg_variant_pos];
-                    //     });
-                    //     console.log('-> (0) WRITE: Ziel', ziel);
-                    //     ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
-                    //     console.log('-> (1) WRITE: Ziel', ziel);
-                    // });
+                    md_variants_pg.forEach(function(current_pg_variant, myVarID) {
+                        var ziel = data_dive;
+                        current_pg_variant.forEach(function(current_pg_variant_pos, myVarPosID) {
+                            ziel = ziel[current_pg_variant_pos];
+                        });
+                        console.log('-> (0) WRITE: Ziel', ziel);
+                        // ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                        ziel = 73;
+                        console.log('-> (1) WRITE: Ziel', ziel);
+                    });
 
 
 
