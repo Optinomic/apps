@@ -345,10 +345,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     // console.log('writePatientScoresMD', current_list, data_dive);
 
 
-                    //dimensions_pg
-                    var ziel = data_dive;
-                    var enhanced_list = angular.copy(current_list);
-
+                    // Alle Varianten erstellen.
                     var pg_list = [];
                     var md_variants_pg = [];
 
@@ -368,17 +365,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 // Alle Patienten
                                 pg_list[myDimID].push(myDimCheckID)
                             };
-
                         });
-
-                        console.log('---> Dimensions - Varianten erstellen: ', pid, pg_list);
-
                     });
-
                     md_variants_pg = getAllVariants(pg_list);
 
-                    console.log('-> Varianten: ', pid, md_variants_pg, pg_list);
 
+                    console.log('-> Varianten: ', pid, md_variants_pg);
+
+                    // In allen Varianten schreiben.
+
+                    var ziel = data_dive;
+                    md_variants_pg.forEach(function(current_pg_variant, myVarID) {
+                        md_variants_pg_pos.forEach(function(current_pg_variant_pos, myVarPosID) {
+                            ziel = ziel[current_pg_variant_pos];
+                            console.log('-> (0) WRITE: Ziel', ziel);
+                            ziel = concatAndStatistics(ziel, current_score, pid, vars_array);
+                            console.log('-> (1) WRITE: Ziel', ziel);
+
+                        });
+                    });
 
 
                     //  dimensions_pg.forEach(function(current_dim_pg, myDimID) {
