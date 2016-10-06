@@ -143,6 +143,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Interessante Berechnungen | Statistics
         var s = {};
 
+
         if ($scope.isArray(data_array)) {
             s.n = data_array.legth;
             s.min = $scope.min(data_array);
@@ -155,6 +156,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             s.z_score_min = $scope.z_score(s.min, s.mean, s.standard_deviation);
             s.z_score_max = $scope.z_score(s.max, s.mean, s.standard_deviation);
         };
+
+
+        console.log('getStatistics', data_array, s);
+
 
         // Return
         return s;
@@ -284,10 +289,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 ziel = default_obj;
             };
 
-
-            console.log('concatAndStatistics', ziel, quelle, patient, vars_array);
-
-            // Concat stuff
+            // Concat stuff  & do Statistics
             for (var vID = 0; vID < vars_array.length; vID++) {
                 var current_var = vars_array[vID];
                 ziel.scores[current_var] = ziel.scores[current_var].concat(quelle[current_var]);
