@@ -296,6 +296,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             return ziel;
         };
 
+        function getAllVariants(list) {
+            // Build all Variants List
+            var result = list[0].map(function(item) {
+                return [item];
+            });
+
+            for (var k = 1; k < list.length; k++) {
+                var next = [];
+                result.forEach(function(item) {
+                    list[k].forEach(function(word) {
+                        var line = item.slice(0);
+                        line.push(word);
+                        next.push(line);
+                    })
+                });
+                result = next;
+            };
+
+            return result;
+        };
 
         for (var psID = 0; psID < ps.length; psID++) {
 
@@ -355,7 +375,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     });
 
-                    console.log('-> Varianten: ', pid, pg_list);
+                    pg_list = getAllVariants(pg_list);
+
+                    console.log('-> Varianten: ', pid, pg_list, pg_list);
 
 
 
