@@ -374,7 +374,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                     // Test Write
-                    data_dive[0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
+                    var ziel = data_dive;
+                    ziel[0][0] = concatAndStatistics(ziel, current_score, pid, vars_array);
 
                     // In allen Varianten schreiben.
 
