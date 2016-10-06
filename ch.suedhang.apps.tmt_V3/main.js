@@ -30,7 +30,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var current_template = $scope.d.dataMain.params.location.viewname;
 
             // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
+            // $scope.d.functions.getAllCalculations();
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
