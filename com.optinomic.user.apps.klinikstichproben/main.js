@@ -341,7 +341,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                                 var isPIDinGroup = $scope.isPIDinGroup(check_dim_pg.pg.patients, pid);
                                 // console.log('PG:', current_dim_pg.name, check_dim_pg.text, current_dim_pg, check_dim_pg);
-                                if (!isPIDinGroup) {
+                                if (isPIDinGroup) {
                                     pg_list[myDimID].push(myDimCheckID)
                                 };
                             } else {
