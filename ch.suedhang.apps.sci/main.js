@@ -135,13 +135,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var response_to_set = {
                 "available": true,
                 "scores": scores
-            }
+            };
+
 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
                 $scope.d.text_sci.data.austritt = response_to_set;
+            };
+
+
+            // Alte Fragebogenversion hatte kein Erhebungszeitpunkt | Spekulation Eintritt
+            if (current_response.entity.data.response.Erhebungszeitpunkt === undefined) {
+                $scope.d.text_sci.data.eintritt = response_to_set;
             };
 
         });
