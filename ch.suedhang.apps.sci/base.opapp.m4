@@ -65,6 +65,7 @@ survey = SCI
 [event activation]
 type = before_exit
 days = 7
+time = 08:00
 due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.

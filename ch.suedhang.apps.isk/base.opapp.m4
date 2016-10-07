@@ -64,6 +64,7 @@ survey = isk
 [event activation]
 type = before_exit
 days = 7
+time = 08:00
 due_after = 86400
 overdue = ignore
 description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.

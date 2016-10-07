@@ -67,6 +67,7 @@ survey = bscl_anq
 [event activation]
 type = before_exit
 days = 7
+time = 08:00
 due_after = 86400
 overdue = ignore
 description = BSCL - ANQ
