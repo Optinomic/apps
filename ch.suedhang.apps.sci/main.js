@@ -147,7 +147,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Alte Fragebogenversion hatte kein Erhebungszeitpunkt | Spekulation Eintritt
-            if (current_response.entity.data.response.Erhebungszeitpunkt === undefined) {
+            if ((current_response.entity.data.response.Erhebungszeitpunkt !== '1') && (current_response.entity.data.response.Erhebungszeitpunkt !== '1')) {
                 $scope.d.text_sci.data.eintritt = response_to_set;
             };
 
