@@ -42,7 +42,7 @@ include(style.css)
 [survey]
 id = isk
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = Inventar Sozialer Kompetenzen
 host = default
 survey_id = 824558
@@ -55,18 +55,19 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
-time = 19:00
 due_after = 86400
 overdue = ignore
 description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.
 survey = isk
 
+[event activation]
+type = before_exit
+days = 7
+due_after = 86400
+overdue = ignore
+description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.
+survey = isk
 
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
 
 
 [calculation scores_calculation javascript]
