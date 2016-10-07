@@ -503,22 +503,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.stanine.data.push(respone_to_push);
 
             // Gruppiert nach Sonja
-            var respone_to_push_grouped = {};
             var respone_to_push_copy = {};
 
             respone_to_push_copy = angular.copy(respone_to_push);
-            respone_to_push_grouped = respone_to_push_copy.splice(2, 5);
-            $scope.d.stanine.data_stress.push(respone_to_push_grouped);
+            respone_to_push_copy.splice(2, 5);
+            $scope.d.stanine.data_stress.push(respone_to_push_copy);
 
             respone_to_push_copy = angular.copy(respone_to_push);
-            respone_to_push_grouped = respone_to_push_copy.splice(0, 2);
-            respone_to_push_grouped = respone_to_push_grouped.splice(4, 1);
-            $scope.d.stanine.data_hilfreich.push(respone_to_push_grouped);
+            respone_to_push_copy.splice(0, 2);
+            respone_to_push_grouped.splice(4, 1);
+            $scope.d.stanine.data_hilfreich.push(respone_to_push_copy);
 
             respone_to_push_copy = angular.copy(respone_to_push);
-            respone_to_push_grouped = respone_to_push_copy.splice(0, 6);
-            $scope.d.stanine.data_unguenstig.push(respone_to_push_grouped);
-
+            respone_to_push_copy.splice(0, 6);
+            $scope.d.stanine.data_unguenstig.push(respone_to_push_copy);
 
         });
 
