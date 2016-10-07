@@ -27,6 +27,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            var current_template = $scope.d.dataMain.params.location.viewname;
+
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
@@ -34,13 +36,20 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 $scope.d.haveData = true;
 
 
-                // Run App-Functions:
-                $scope.setExport();
+                // Run Specific Functions only when needed.
+
+                if (current_template === 'simple_score') {
+                    // Run Public-Functions:
+                    $scope.d.functions.getAllCalculations();
+                };
+
+                if (current_template === 'data_export_admin') {
+                    $scope.setExport();
+                };
 
             };
 
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
+
 
 
             // Finishing: Console Info & Init = done.
