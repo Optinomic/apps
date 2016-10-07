@@ -40,9 +40,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Run Specific Functions only when needed.
                 if (current_template === 'chart_stanine') {
                     $scope.setStanineView();
-
-                    // Run Public-Functions:
-                    $scope.d.functions.getAllCalculations();
                 };
 
                 if (current_template === 'text_sci') {
@@ -59,7 +56,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // $scope.d.haveData = true;
             // $scope.setStanineView();
 
-
+            // Run Public-Functions:
+            // $scope.d.functions.getAllCalculations();
 
 
             // Finishing: Console Info & Init = done.
@@ -149,7 +147,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         $scope.buildTextSCI();
-
     };
 
 
@@ -433,6 +430,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.stanine = {};
         $scope.stanine.data = [];
 
+        // Gruppiert nach Sonja
+        $scope.d.stanine = {};
+        $scope.d.stanine.data_stress = [];
+        $scope.d.stanine.data_hilfreich = [];
+        $scope.d.stanine.data_unguenstig = [];
+
         // Loop Responses and push to Chart-Data
         var survey_responses = $scope.d.dataMain.survey_responses;
         survey_responses.forEach(function(current_response, myindex) {
@@ -441,6 +444,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Scores - Update Scores with correct labeling
             var scores = current_response.calculations[0].calculation_result.scores
 
+            // Stress
             scores[0].question = "Stress durch Verlust";
             scores[0].sub_left = "Keine Belastung durch Verlust und negative Ereignisse";
             scores[0].sub_right = "Belastung durch Verlust und negative Ereignisse";
@@ -448,6 +452,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             scores[1].question = "Stresssymptome";
             scores[1].sub_left = "Wenige körperliche und psychische Symptome";
             scores[1].sub_right = "Viele körperliche und psychische Symptome";
+
+
+            // Hilfreiche Strategien
 
             scores[2].question = "Positives Denken";
             scores[2].sub_left = "Ungünstig: Selbstzweifel und Fokus auf Negatives";
@@ -457,6 +464,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             scores[3].sub_left = "Ungünstig: Stressoren werden nicht beseitigt";
             scores[3].sub_right = "Gute aktive und vorbeugende Stressbewältigung";
 
+
             scores[4].question = "Soziale Unterstützung";
             scores[4].sub_left = "Ungünstig: Kaum Unterstützung durch andere";
             scores[4].sub_right = "Gut: Viel Unterstützung durch Freunde und Bekannte";
@@ -464,6 +472,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             scores[5].question = "Halt im Glauben";
             scores[5].sub_left = "Ungünstig: Kaum religiöser / spiritueller Halt";
             scores[5].sub_right = "Gut: Person findet Halt im Glauben";
+
+
+            // Ungünstige Strategien
 
             scores[6].question = "Alkohol- und Zigarettenkonsum";
             scores[6].sub_left = "Gut: Kein erhöhter Alkohol - oder Zigarettenkonsum";
@@ -487,8 +498,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var respone_to_push = {
                 "label": label,
                 "scores": scores
-            }
+            };
+
             $scope.stanine.data.push(respone_to_push);
+
+            // Gruppiert nach Sonja
+            var respone_to_push_grouped = {};
+
+            respone_to_push_copy = angular.copy(respone_to_push);
+            respone_to_push_grouped = respone_to_push_copy.splice(2, 5);
+            $scope.d.stanine.data_stress.push(respone_to_push_grouped);
+
+            respone_to_push_copy = angular.copy(respone_to_push);
+            respone_to_push_grouped = respone_to_push_copy.splice(0, 2);
+            respone_to_push_grouped = respone_to_push_grouped.splice(4, 1);
+            $scope.d.stanine.data_hilfreich.push(respone_to_push_grouped);
+
+            respone_to_push_copy = angular.copy(respone_to_push);
+            respone_to_push_grouped = respone_to_push_copy.splice(0, 6);
+            $scope.d.stanine.data_unguenstig.push(respone_to_push_grouped);
+
+
         });
 
         // Poulation Data - Get back 'Umlaute'
@@ -504,7 +534,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "start_result": $scope.stanine.data.length - 1
         };
 
-        console.log('(!) setStanineView', $scope.stanine);
+        console.log('(!) setStanineView', $scope.stanine, $scope.d.stanine);
 
     };
 
