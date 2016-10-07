@@ -42,7 +42,7 @@ include(style.css)
 [survey]
 id = bdi2
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = Beck-Depressions-Inventar (BDI-II)
 host = default
 survey_id = 786887
@@ -56,18 +56,20 @@ min_questions =
 
 [event activation]
 type = on_activation
-time = 12:00
 due_after = 259200
 overdue = ignore
 description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
 survey = bdi2
 
 
-[email new_event html]
-include(emails/new_event.html)
+[event activation]
+type = before_exit
+days = 7
+due_after = 259200
+overdue = ignore
+description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
+survey = bdi2
 
-[email overdue html]
-include(emails/overdue.html)
 
 
 [calculation bdi_score javascript]
