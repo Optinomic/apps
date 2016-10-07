@@ -56,6 +56,7 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
+time = 08:00
 due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.

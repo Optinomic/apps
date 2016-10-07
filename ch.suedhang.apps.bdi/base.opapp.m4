@@ -56,6 +56,7 @@ min_questions =
 
 [event activation]
 type = on_activation
+time = 08:00
 due_after = 259200
 overdue = ignore
 description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen

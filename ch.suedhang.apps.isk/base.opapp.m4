@@ -55,6 +55,7 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
+time = 08:00
 due_after = 86400
 overdue = ignore
 description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten im Umgang mit anderen Personen ein.

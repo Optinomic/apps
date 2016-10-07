@@ -53,6 +53,7 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
+time = 08:00
 due_after = 86400
 overdue = ignore
 description = WHOQOL ausfüllen.
