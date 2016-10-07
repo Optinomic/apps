@@ -504,6 +504,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Gruppiert nach Sonja
             var respone_to_push_grouped = {};
+            var respone_to_push_copy = {};
 
             respone_to_push_copy = angular.copy(respone_to_push);
             respone_to_push_grouped = respone_to_push_copy.splice(2, 5);
