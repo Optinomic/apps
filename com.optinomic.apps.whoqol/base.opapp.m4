@@ -40,7 +40,7 @@ include(style.css)
 [survey]
 id = WHOQOL
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = WHOQOL
 host = default
 survey_id = 663948
@@ -58,13 +58,14 @@ overdue = ignore
 description = WHOQOL ausfüllen.
 survey = WHOQOL
 
+[event activation]
+type = before_exit
+days = 7
+due_after = 86400
+overdue = ignore
+description = WHOQOL ausfüllen.
+survey = WHOQOL
 
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
 
 
 [calculation phys_psych_calculation javascript]
