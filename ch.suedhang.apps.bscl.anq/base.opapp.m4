@@ -45,7 +45,7 @@ include(style.css)
 [survey]
 id = bscl_anq
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = BSCL - ANQ
 host = default
 survey_id = 693172
@@ -58,19 +58,19 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
-time = 08:00
 due_after = 86400
 overdue = ignore
 description = BSCL - ANQ
 survey = bscl_anq
 
+[event activation]
+type = before_exit
+days = 7
+due_after = 86400
+overdue = ignore
+description = BSCL - ANQ
+survey = bscl_anq
 
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
 
 
 [calculation get_results javascript]
