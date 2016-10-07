@@ -40,6 +40,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Run Specific Functions only when needed.
                 if (current_template === 'chart_stanine') {
                     $scope.setStanineView();
+
+                    // Run Public-Functions:
+                    $scope.d.functions.getAllCalculations();
                 };
 
                 if (current_template === 'text_sci') {
@@ -56,8 +59,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // $scope.d.haveData = true;
             // $scope.setStanineView();
 
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
+
 
 
             // Finishing: Console Info & Init = done.
@@ -93,7 +95,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
     };
 
 
