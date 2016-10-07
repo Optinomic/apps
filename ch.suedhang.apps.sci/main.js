@@ -511,7 +511,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             respone_to_push_copy = angular.copy(respone_to_push);
             respone_to_push_copy.scores.splice(0, 2);
-            respone_to_push_copy.splice(4, 1);
+            respone_to_push_copy.scores.splice(4, 1);
             $scope.d.stanine.data_hilfreich.push(respone_to_push_copy);
 
             respone_to_push_copy = angular.copy(respone_to_push);
