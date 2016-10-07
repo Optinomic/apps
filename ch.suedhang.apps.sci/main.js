@@ -28,16 +28,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
+            var current_template = $scope.d.dataMain.params.location.viewname;
+
+
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
 
 
-                // Run App-Functions:
-                $scope.setStanineView();
-                $scope.setTextSCI();
-                $scope.setExport();
+                // Run Specific Functions only when needed.
+                if (current_template === 'chart_stanine') {
+                    $scope.setStanineView();
+                };
+
+                if (current_template === 'text_sci') {
+                    $scope.setTextSCI();
+                };
+
+                if (current_template === 'data_export_admin') {
+                    $scope.setExport();
+                };
 
             };
 
