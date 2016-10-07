@@ -59,6 +59,7 @@ survey = aase
 
 [event activation]
 type = before_exit
+days = 7
 due_after = 86400
 overdue = ignore
 description = AASE-G ausfüllen.
