@@ -896,65 +896,124 @@ function main(responses) {
         score_id = 1;
         scores_array[score_id].name = 'stress';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS2]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS3]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS4]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS5]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS6]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS7]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS8]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS9]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI10]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI11]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI12]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI13]']);
+        if (d['ESCISymptome[ESCIS1]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS1]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS2]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS3]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS4]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS5]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS6]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS7]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS8]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCIS9]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI10]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI11]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI12]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCISymptome[ESCI13]']);
+        };
+        if (d.ESCISymptome_ESCIS1) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS1);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS2);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS3);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS4);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS5);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS6);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS7);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS8);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCIS9);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCI10);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCI11);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCI12);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCISymptome_ESCI13);
+        };
+
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 2;
         scores_array[score_id].name = 'coping_pos';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC1]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC5]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC6]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC16]']);
+        if (d['ESCICoping[ESCIC1]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC1]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC5]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC6]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC16]']);
+        };
+        if (d.ESCICoping_ESCIC1) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC1);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC5);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC6);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC16);
+        };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 3;
         scores_array[score_id].name = 'coping_ab';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC3]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC7]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC12]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC17]']);
+        if (d['ESCICoping[ESCIC3]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC3]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC7]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC12]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC17]']);
+        };
+        if (d.ESCICoping_ESCIC1) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC3);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC7);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC12);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC17);
+        };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 4;
         scores_array[score_id].name = 'coping_su';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC4]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC13]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC15]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC19]']);
+        if (d['ESCICoping[ESCIC4]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC4]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC13]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC15]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC19]']);
+        };
+        if (d.ESCICoping_ESCIC4) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC4);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC13);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC15);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC19);
+        };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 5;
         scores_array[score_id].name = 'coping_rel';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC90]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC10]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC18]']);
+        if (d['ESCICoping[ESCIC8]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC90]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC10]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC18]']);
+        };
+        if (d.ESCICoping_ESCIC8) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC8);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC90);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC10);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC18);
+        };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 6;
         scores_array[score_id].name = 'coping_alk';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + (5 - parseInt(d['ESCICoping[ESCIC2]']));
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC11]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC14]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC20]']);
+        if (d['ESCICoping[ESCIC8]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC8]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + (5 - parseInt(d['ESCICoping[ESCIC2]']));
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC11]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC14]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCICoping[ESCIC20]']);
+        };
+        if (d.ESCICoping_ESCIC4) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC8);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + (5 - parseInt(d.ESCICoping_ESCIC2));
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC11);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC14);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC20);
+        };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
 
