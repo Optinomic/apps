@@ -871,13 +871,26 @@ function main(responses) {
         score_id = 0;
         scores_array[score_id].name = 'belastung';
         scores_array[score_id].sum_score = 0;
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB2]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB3]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB4]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
-        scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
+        if (d['ESCIBelastung[ESCIB1]']) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB1]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB2]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB3]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB4]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB5]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB6]']);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d['ESCIBelastung[ESCIB7]']);
+        };
+
+        if (d.ESCIBelastung_ESCIB1) {
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB1);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB2);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB3);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB4);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB5);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB6);
+            scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCIBelastung_ESCIB7);
+        };
+
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
         score_id = 1;
