@@ -18,7 +18,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template chart_stanine 6 10]
+[template chart_stanine 6 12]
 include(templates/stanine.html)
 
 [template text_sci 6 8]

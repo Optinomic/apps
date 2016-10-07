@@ -1,6 +1,29 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">
-    Stanine-Chart: {{d.dataMain.apps.current.name}}
-</h3>
-<chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
+<div>
+    <h3 class="md-headline">Stressereignisse und Syptome</h3>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <p class="md-caption">Wenig</p>
+        <p flex>&nbsp;</p>
+        <p class="md-caption">Viel/Ausgeprägt</p>
+    </div>
+    <chart-stanine data="d.stanine.data_stress" options="stanine.options"> </chart-stanine>
+</div>
+<div class="grid-border-top" style="margin-top: 30px;">
+    <h3 class="md-headline">Hilfreiche Copingstrategien</h3>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <p class="md-caption">Wenig</p>
+        <p flex>&nbsp;</p>
+        <p class="md-caption">Viel/Ausgeprägt</p>
+    </div>
+    <chart-stanine data="d.stanine.data_hilfreich" options="stanine.options"> </chart-stanine>
+</div>
+<div class="grid-border-top" style="margin-top: 30px;">
+    <h3 class="md-headline">Ungünstige Copingstrategien</h3>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <p class="md-caption">Wenig</p>
+        <p flex>&nbsp;</p>
+        <p class="md-caption">Viel/Ausgeprägt</p>
+    </div>
+    <chart-stanine data="d.stanine.data_hilfreich" options="stanine.options"> </chart-stanine>
+</div>
 include(../lib/html/optinomic/page/end.m4)
