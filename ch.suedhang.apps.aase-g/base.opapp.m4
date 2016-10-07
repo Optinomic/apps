@@ -39,7 +39,7 @@ include(style.css)
 [survey]
 id = aase
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = Alcohol Abstinence Self-Efficacy Scale (AASE)
 host = default
 survey_id = 526942
@@ -57,12 +57,12 @@ overdue = ignore
 description = AASE-G ausfüllen.
 survey = aase
 
-
-[email new_event html]
-include(emails/new_event.html)
-
-[email overdue html]
-include(emails/overdue.html)
+[event activation]
+type = before_exit
+due_after = 86400
+overdue = ignore
+description = AASE-G ausfüllen.
+survey = aase
 
 
 [calculation another_calculation javascript]
