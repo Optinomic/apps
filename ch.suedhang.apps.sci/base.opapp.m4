@@ -44,7 +44,7 @@ include(style.css)
 [survey]
 id = SCI
 type = lime
-responsibility = lead_therapist
+responsibility = patient_via_assessment
 name = Stress- & Coping-Inventar
 host = default
 survey_id = 933257
@@ -56,6 +56,14 @@ min_lastpage = 2
 
 [event activation]
 type = on_activation
+due_after = 259200
+overdue = ignore
+description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
+survey = SCI
+
+[event activation]
+type = before_exit
+days = 7
 due_after = 259200
 overdue = ignore
 description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping) bei Klinik Ein- und Austritt.
