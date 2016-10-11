@@ -610,6 +610,8 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(d) {
 
+        var return_obj = {};
+
         var responses_array = d.survey_responses;
         var allResults = [];
 
@@ -679,9 +681,11 @@ function main(responses) {
             };
         });
 
-        allResults.full = d;
+        return_obj.responses_array = responses_array;
+        return_obj.allResults = allResults;
+        return_obj.full = d;
 
-        return allResults;
+        return return_obj;
     };
 
 
