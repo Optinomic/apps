@@ -601,6 +601,7 @@ function main(responses) {
         resultObj.result = perzObj;
 
 
+
         return resultObj;
     };
 
@@ -613,8 +614,6 @@ function main(responses) {
         var allResults = [];
 
         responses_array.forEach(function(response, myindex) {
-
-
 
 
             var myResults = {};
@@ -679,6 +678,8 @@ function main(responses) {
 
             };
         });
+
+        allResults.full = d;
 
         return allResults;
     };

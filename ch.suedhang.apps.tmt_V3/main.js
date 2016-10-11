@@ -80,23 +80,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
-    };
-
-
-
-
-
-
-    $scope.twoDigits = function(id) {
-        var return_text = '';
-        id = parseInt(id);
-        if (id < 10) {
-            return_text = '0' + id.toString();
-        } else {
-            return_text = id.toString();
-        };
-        return return_text;
     };
 
 
@@ -178,16 +161,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         $scope.changeClinicSample();
-
-    };
-
-
-    $scope.sortByKey = function(array, key) {
-        return array.sort(function(a, b) {
-            var x = a[key];
-            var y = b[key];
-            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        });
     };
 
 
@@ -508,6 +481,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
     };
+
+    $scope.twoDigits = function(id) {
+        var return_text = '';
+        id = parseInt(id);
+        if (id < 10) {
+            return_text = '0' + id.toString();
+        } else {
+            return_text = id.toString();
+        };
+        return return_text;
+    };
+
 
 
 
