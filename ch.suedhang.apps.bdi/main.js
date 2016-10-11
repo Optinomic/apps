@@ -523,7 +523,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         };
 
-        console.log('setAnswerFilter :::> Results ', results);
+        // console.log('setAnswerFilter :::> Results ', results);
         $scope.d.show_answers = show_true;
     };
 
