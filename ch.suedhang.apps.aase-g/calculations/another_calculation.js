@@ -28,6 +28,31 @@ function main(responses) {
             var result = response.data.response;
 
 
+            // Make V1 Compatible
+            if (result.hasOwnProperty("AASE_AASE1")) {
+                result['AASE[AASE1]'] = result.AASE_AASE1;
+                result['AASE[AASE1]'] = result.AASE_AASE2;
+                result['AASE[AASE3]'] = result.AASE_AASE3;
+                result['AASE[AASE4]'] = result.AASE_AASE4;
+                result['AASE[AASE5]'] = result.AASE_AASE5;
+                result['AASE[AASE6]'] = result.AASE_AASE6;
+                result['AASE[AASE7]'] = result.AASE_AASE7;
+                result['AASE[AASE8]'] = result.AASE_AASE8;
+                result['AASE[AASE9]'] = result.AASE_AASE9;
+                result['AASE[AASE10]'] = result.AASE_AASE10;
+                result['AASE[AASE11]'] = result.AASE_AASE11;
+                result['AASE[AASE12]'] = result.AASE_AASE12;
+                result['AASE[AASE13]'] = result.AASE_AASE13;
+                result['AASE[AASE14]'] = result.AASE_AASE14;
+                result['AASE[AASE15]'] = result.AASE_AASE15;
+                result['AASE[AASE16]'] = result.AASE_AASE16;
+                result['AASE[AASE17]'] = result.AASE_AASE17;
+                result['AASE[AASE18]'] = result.AASE_AASE18;
+                result['AASE[AASE19]'] = result.AASE_AASE19;
+                result['AASE[AASE20]'] = result.AASE_AASE20;
+            };
+
+
             //Score-Berechnung
             var score = 0;
             score = score + parseInt(result['AASE[AASE1]']);
@@ -50,7 +75,7 @@ function main(responses) {
             score = score + parseInt(result['AASE[AASE18]']);
             score = score + parseInt(result['AASE[AASE19]']);
             score = score + parseInt(result['AASE[AASE20]']);
-            
+
             myResults.score = calc.roundToOne(score)
 
             // Get score

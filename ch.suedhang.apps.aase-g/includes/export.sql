@@ -1,6 +1,5 @@
 SELECT
   patient.id AS pid,
-  patient,
   CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
   patient.four_letter_code,
     
