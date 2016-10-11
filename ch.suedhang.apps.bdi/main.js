@@ -27,6 +27,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            var current_template = $scope.d.dataMain.params.location.viewname;
+
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
@@ -34,9 +36,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.haveData = true;
 
 
+                // Run Specific Functions only when needed.
+                if (current_template === 'simple_score') {
+                    $scope.bdi_init();
+                };
+
+                if (current_template === 'data_export_admin') {
+                    $scope.setExport();
+                };
+
                 // Run App-Functions:
-                $scope.bdi_init();
-                $scope.setExport();
 
             };
 
@@ -45,7 +54,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, current_template, $scope.d);
             $scope.d.init = true;
         });
     };
