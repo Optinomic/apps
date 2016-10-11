@@ -622,7 +622,7 @@ function main(responses) {
             var result = response.data.response;
 
 
-            if (result.survey_version !== 'ng_survey_v1') {
+            if(myObj.hasOwnProperty("TMTATime")){
                 result.tmt_a_error = result.TMTAError;
                 result.tmt_a_time = result.TMTATime;
                 result.tmt_b_error = result.TMTBError;
