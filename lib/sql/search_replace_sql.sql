@@ -49,7 +49,6 @@ UPDATE "survey_response"
 SET response = regexp_replace(response, 'QNEC060QNEC065_(\w+)', 'QNEC060QNEC065[\1]', 'g') 
 WHERE module = 'ch.suedhang.apps.actinfo_ein'
 
-
 ---- QNEC070QNEC075_VNEC070 => QNEC070QNEC075[VNEC070]
 UPDATE "survey_response" 
 SET response = regexp_replace(response, 'QNEC070QNEC075_(\w+)', 'QNEC070QNEC075[\1]', 'g') 
@@ -181,14 +180,13 @@ WHERE module = 'ch.suedhang.apps.actinfo_ein'
 -- => ch.suedhang.apps.actinfo_aus
 
 
--- Trail Making Test (TMT)
--- ch.suedhang.apps.tmt_V3
-
-
-
 
 -- Inventar sozialer Kompetenz (ISK-K)
 -- ch.suedhang.apps.isk 
+---- AISK_AIS10 => AISK[AIS10]
+UPDATE "survey_response" 
+SET response = regexp_replace(response, 'AISK_(\w+)', 'AISK[\1]', 'g') 
+WHERE module = 'ch.suedhang.apps.isk'
 
 
 -- Stress- und Copinginventar (SCI)
@@ -200,7 +198,7 @@ WHERE module = 'ch.suedhang.apps.sci';
 
 -- A. Einzelassessment
 -- ch.suedhang.apps.neuroanamnese
-
+----  UNSURE! (To Do)
 
 
 -- Beck-Depressions-Inventar (BDI-II)
@@ -210,6 +208,11 @@ WHERE module = 'ch.suedhang.apps.sci';
 
 -- A. CASE
 -- ch.suedhang.apps.case.new
+---- Perfect!
+
+
+-- Trail Making Test (TMT)
+-- ch.suedhang.apps.tmt_V3
 ---- Perfect!
 
 

@@ -7,8 +7,8 @@ type = patient
 
 [description]
 act-info (addiction, care and therapy information) Austrittsversion
+Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden | Correct Survey
 
-Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden
 
 [developer]
 first_name = Beat
@@ -46,10 +46,10 @@ type = lime
 responsibility = lead_therapist
 name = actInfo - Austritt
 host = default
-survey_id = 116413
-hash = X53X1030
-pid = X53X972
-fid = X53X971
+survey_id = 469455
+hash = X110X3259
+pid = X110X3201
+fid = X110X3200
 min_questions =
 min_lastpage = 5
 
