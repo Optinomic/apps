@@ -77,3 +77,10 @@ include(emails/overdue.html)
 
 [calculation another_calculation javascript]
 include(calculations/another_calculation.js)
+
+
+[sql_init]
+include(includes/create_view.sql)
+
+
+
