@@ -544,7 +544,7 @@ function main(responses) {
 
 
         // Returning full (complete) responses is often used/helpful.
-        // calc.full = responses;
+        calc.full = responses;
 
         return results;
     };
