@@ -86,6 +86,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.initZScore = function() {
 
         $scope.d.zScore.init = false;
+        $scope.d.zScore.error = false;
 
         // A 'settings - view'
         $scope.d.zScore.settings = false;
@@ -442,6 +443,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
         call.error(function(data) {
             console.log('(ERROR): getCalculation:', data);
+            $scope.d.zScore.error = true;
+            $scope.d.zScore.error_msg = data.error;
         });
     };
 
