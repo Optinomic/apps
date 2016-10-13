@@ -517,7 +517,6 @@ function main(responses) {
         var results = {};
 
 
-
         // Do the needed 'calculations'
         var age_edu_mz_obj = calc.getAgeEduObj();
         var age_edu_mz_obj_prop_array = calc.getPropertyArrayFromOject(age_edu_mz_obj);
