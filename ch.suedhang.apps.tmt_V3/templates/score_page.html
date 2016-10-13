@@ -2,12 +2,12 @@ include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
     <div ng-if="!d.zScore.init">
         <h3 class="md-headline">TMT</h3>
-        <div ng-if="!d.zScore.error">
+        <div ng-if="!d.error">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
             <h3 class="md-subhead">Berechnung wird ausgeführt.</h3>
         </div>
-        <div ng-if="d.zScore.error">
-            <h3 class="md-subhead">Calculation Error: {{d.zScore.error_msg}}.</h3>
+        <div ng-if="d.error">
+            <h3 class="md-subhead">Calculation Error: {{d.error_msg}}.</h3>
         </div>
     </div>
     <div ng-if="d.zScore.init">
