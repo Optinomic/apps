@@ -622,7 +622,7 @@ function main(responses) {
             var result = response.data.response;
 
 
-            if(myObj.hasOwnProperty("TMTATime")){
+            if (result.hasOwnProperty("TMTATime")) {
                 result.tmt_a_error = result.TMTAError;
                 result.tmt_a_time = result.TMTATime;
                 result.tmt_b_error = result.TMTBError;
