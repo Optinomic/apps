@@ -108,8 +108,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Clone some stuff for Using
             $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
-            $scope.d.ks.dimensions_all = angular.copy($scope.d.ks.definitions.dimensions_all);
-
             $scope.d.ks.definitions.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
 
             // Init 'User-Selection' for Dimenstions | jeweils letzter Eintrag
@@ -231,19 +229,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "pg": null
         }];
 
-        var dimensions_pg = [
-            {
-                "id": 0,
-                "name": "Geschlecht",
-                "source": "pg",
-                "array": angular.copy(group_pg_props_gender)
-            }, {
-                "id": 0,
-                "name": "Behandlungsart",
-                "source": "pg",
-                "array": angular.copy(group_pg_props)
-            }
-        ];
+        var dimensions_pg = [{
+            "id": 0,
+            "name": "Geschlecht",
+            "source": "pg",
+            "array": angular.copy(group_pg_props_gender)
+        }, {
+            "id": 0,
+            "name": "Behandlungsart",
+            "source": "pg",
+            "array": angular.copy(group_pg_props)
+        }];
 
         var dimensions_all = dimenstions_app.concat(dimensions_pg);
 
@@ -261,7 +257,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.definitions.md_all_data_empty = angular.copy(md_all_data_empty);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
         $scope.d.ks.definitions.dimensions_pg = dimensions_pg;
-        $scope.d.ks.dimensions_app = angular.copy(dimensions_all);
+        $scope.d.ks.dimensions_all = angular.copy(dimensions_all);
+
+        // Init 'User-Selection' for Dimensions | jeweils letzter Eintrag
+        $scope.d.ks.dimensions_all.forEach(function(current_dim, myDimID) {
+            current_dim.selected = current_dim.array[current_dim.array.length - 1];
+        });
 
         // console.log('dimensions_all', n_dimensions, scores_all);
 
