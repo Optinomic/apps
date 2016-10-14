@@ -120,7 +120,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
 
             // Some more Functions to Run because we have Data.
-            $scope.changeDimenstions();
             $scope.enhanceDimensionsPG();
 
 
@@ -265,6 +264,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.definitions.dimensions_pg = dimensions_pg;
         // console.log('dimensions_all', n_dimensions, scores_all);
 
+        // Do some more stuff now.
+        $scope.changeDimenstions();
         $scope.writePatientScoresMD();
     };
 
