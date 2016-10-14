@@ -470,7 +470,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var current_location = [];
         var current_location_text = ""
 
-        $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
+        $scope.d.ks.dimensions_all.forEach(function(current_dim, myDimID) {
             current_location.push(current_dim.selected.id);
             if (current_location_text !== "") {
                 current_location_text = current_location_text + ' | '
