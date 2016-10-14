@@ -206,11 +206,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var group_pg_props_gender = [{
             "id": 0,
             "text": "Frauen",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[2])
+            "pg": angular.copy($scope.d.dataMain.patient_groups[9])
         }, {
             "id": 1,
             "text": "Männer",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[3])
+            "pg": angular.copy($scope.d.dataMain.patient_groups[10])
         }, {
             "id": 2,
             "text": "Alle Patienten",
@@ -219,16 +219,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var group_pg_props = [{
             "id": 0,
-            "text": "Aktuell oder ehemalig auf EAS",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[1])
+            "text": "Stationär",
+            "pg": angular.copy($scope.d.dataMain.patient_groups[4])
         }, {
             "id": 1,
+            "text": "Teilstationär",
+            "pg": angular.copy($scope.d.dataMain.patient_groups[5])
+        }, {
+            "id": 2,
             "text": "Alle Patienten",
             "pg": null
         }];
 
         var dimensions_pg = [
-
             {
                 "id": 0,
                 "name": "Geschlecht",
@@ -236,7 +239,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "array": angular.copy(group_pg_props_gender)
             }, {
                 "id": 0,
-                "name": "EAS",
+                "name": "Behandlungsart",
                 "source": "pg",
                 "array": angular.copy(group_pg_props)
             }
