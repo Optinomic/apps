@@ -4,7 +4,7 @@ include(../lib/html/optinomic/page/start.m4)
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>
                 <h3 class="md-headline">Klinikstichprobe</h3>
-                <p class="md-subhead">Daten-Explorer (N-Dimensionen)</p>
+                <p class="md-subhead">Daten-Explorer ({{d.ks.definitions.dimensions_all.length}}-Dimensionen | {{d.ks.app.calculations.selected}})</p>
             </div>
         </div>
     </div>
@@ -55,12 +55,18 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-headline">Statistic</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
             <pre>{{d.ks.md.selected.statistics | json}}</pre>
-            <p class="md-headline">Scores</p>
+            <p class="md-headline">Scores & Patients</p>
             <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <pre>{{d.ks.md.selected.scores | json}}</pre>
-            <p class="md-headline">Patients</p>
-            <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-            <pre>{{d.ks.md.selected.patients | json}}</pre>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
+                <div flex>
+                    <p class="md-subhead">Scores</p>
+                    <pre>{{d.ks.md.selected.scores | json}}</pre>
+                </div>
+                <div flex>
+                    <p class="md-subhead">Patients</p>
+                    <pre>{{d.ks.md.selected.patients | json}}</pre>
+                </div>
+            </div>
         </div>
         <div ng-if="d.ks.result_explorer.selected.id !== 0">
             <div class="grid-border-top" style="margin-top: 30px;">
