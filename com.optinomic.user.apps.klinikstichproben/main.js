@@ -108,7 +108,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Clone some stuff for Using
             $scope.d.ks.md.scores = angular.copy($scope.d.ks.user_app_calc.md_patient_scores);
-            $scope.d.ks.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
             $scope.d.ks.dimensions_all = angular.copy($scope.d.ks.definitions.dimensions_all);
 
             $scope.d.ks.definitions.dimensions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
@@ -262,6 +261,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.definitions.md_all_data_empty = angular.copy(md_all_data_empty);
         $scope.d.ks.definitions.dimensions_all = dimensions_all;
         $scope.d.ks.definitions.dimensions_pg = dimensions_pg;
+        $scope.d.ks.dimensions_app = angular.copy(dimensions_all);
+
         // console.log('dimensions_all', n_dimensions, scores_all);
 
         // Do some more stuff now.
