@@ -117,13 +117,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             });
             $scope.d.ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
 
+            $scope.d.ks.definitions = $scope.merge_obj($scope.d.ks.definitions, $scope.d.ks.user_app_calc.definitions);
+            $scope.d.ks.init = true;
+            
             // Some more Functions to Run because we have Data.
             $scope.enhanceDimensionsPG();
 
-
-            $scope.d.ks.definitions = $scope.merge_obj($scope.d.ks.definitions, $scope.d.ks.user_app_calc.definitions);
-
-            $scope.d.ks.init = true;
             console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
 
         });
@@ -472,7 +471,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeDimenstions = function() {
 
-        var data_dive = $scope.d.ks.md.scores;
+        var data_dive = $scope.d.ks.md.scores_all;
         var current_location = [];
         var current_location_text = ""
 
