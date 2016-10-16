@@ -84,13 +84,33 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.result_explorer.selected = ks.result_explorer.types[1];
         ks.result_explorer.selected_var = null;
 
+
+        // Patienten-Gruppen | Dimensionen
+        ks.pg_dimensions = {
+            "tabs": {
+                "selectedIndex": 0,
+                "all": [{
+                    "name": "Dimensionen",
+                    "disabled": false,
+                    "tab_index": 0
+                }, {
+                    "name": "",
+                    "disabled": false,
+                    "tab_index": 1
+                }]
+            },
+            "dimensions": {
+                "all": [],
+                "selected": {}
+            }
+        };
+
         // Calculate stuff
-        $scope.getUserAppCalculation(ks.app.selected.identifier, ks.app.calculations.selected);
+        // $scope.getUserAppCalculation(ks.app.selected.identifier, ks.app.calculations.selected);
 
 
         return ks;
     };
-
 
 
     // -----------------------------------
@@ -119,7 +139,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.d.ks.definitions = $scope.merge_obj($scope.d.ks.definitions, $scope.d.ks.user_app_calc.definitions);
             $scope.d.ks.init = true;
-            
+
             // Some more Functions to Run because we have Data.
             $scope.enhanceDimensionsPG();
 
@@ -235,7 +255,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "source": "pg",
             "array": angular.copy(group_pg_props_gender)
         }, {
-            "id": 0,
+            "id": 1,
             "name": "Behandlungsart",
             "source": "pg",
             "array": angular.copy(group_pg_props)
@@ -500,6 +520,131 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -------------------
+    // Patienten-Gruppen | Dimensionen
+    // -------------------
+
+    $scope.viewDimensions = function(selected_dimension) {
+
+        $scope.d.ks.pg_dimensions.dimensions.selected = selected_dimension;
+
+        // Tabs
+        $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
+        $scope.d.ks.pg_dimensions.tabs.all[1].name = $scope.d.ks.pg_dimensions.dimensions.selected.name;
+        $scope.d.ks.pg_dimensions.tabs.selectedIndex = 1;
+        console.log('(!) viewDimensionen', selected_dimension);
+    }
+
+    $scope.saveDimensions = function() {
+        var quelle = $scope.d.ks.pg_dimensions.dimensions.selected;
+
+        if (quelle.id === 9999) {
+            // Hinzufügen
+            $scope.d.ks.pg_dimensions.dimensions.all.push(quelle);
+        } else {
+            // Editieren
+            $scope.d.ks.pg_dimensions.dimensions.all[quelle.id] = quelle;
+        };
+
+        $scope.id_rearrange($scope.d.ks.pg_dimensions.dimensions.all);
+
+
+        //To Do:  Annotations - Save
+        //If all is OK then:
+
+        $scope.cancelDimensions();
+
+
+        console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+    };
+
+    $scope.createDimensions = function() {
+
+        var new_dim = {
+            "id": 9999,
+            "name": "Neu",
+            "source": "pg",
+            "array": [{
+                "id": 0,
+                "text": "Unbenannt",
+                "pg_id": 1,
+                "pg": []
+            }, {
+                "id": 0,
+                "text": "Alle Patienten",
+                "pg_id": null,
+                "pg": null
+            }]
+        };
+
+
+
+        $scope.d.ks.pg_dimensions.dimensions.selected = new_dim;
+
+        // Tabs
+        $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
+        $scope.d.ks.pg_dimensions.tabs.all[1].name = "erstellen";
+        $scope.d.ks.pg_dimensions.tabs.selectedIndex = 1;
+    };
+
+    $scope.cancelDimensions = function() {
+        $scope.d.ks.pg_dimensions.dimensions.selected = {};
+
+        // Tabs
+        $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
+        $scope.d.ks.pg_dimensions.tabs.all[1].name = "";
+        $scope.d.ks.pg_dimensions.tabs.selectedIndex = 0;
+        console.log('(!) cancelDimensions');
+    }
+
+    $scope.inner_dim_remove = function(remove_id) {
+        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
+        array.splice(remove_id, 1);
+        $scope.id_rearrange(array);
+
+        console.log('(!) inner_dim_remove', array);
+    };
+
+    $scope.inner_dim_add = function(splice_pos) {
+        var new_inner_dim = {
+            "id": 9999,
+            "text": "Unbenannt",
+            "pg_id": null,
+            "pg": []
+        };
+
+        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
+        array.splice(splice_pos + 1, 0, new_inner_dim);
+        $scope.id_rearrange(array);
+
+
+        console.log('(!) inner_dim_add', array);
+    };
+
+    $scope.inner_dim_up = function(inner_dimension_index) {
+
+        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
+
+        var array_pos_stored = array[inner_dimension_index - 1];
+        array[inner_dimension_index - 1] = array[inner_dimension_index];
+        array[inner_dimension_index] = array_pos_stored;
+        $scope.id_rearrange(array);
+
+        console.log('(!) inner_dim_up', inner_dimension_index);
+    };
+
+    $scope.inner_dim_down = function(inner_dimension_index) {
+
+        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
+
+        var array_pos_stored = array[inner_dimension_index + 1];
+        array[inner_dimension_index + 1] = array[inner_dimension_index];
+        array[inner_dimension_index] = array_pos_stored;
+        $scope.id_rearrange(array);
+
+        console.log('(!) inner_dim_down', inner_dimension_index);
+    };
+
+    // -------------------
     // Small Herlpers
     // -------------------
 
@@ -527,6 +672,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
         for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
         return obj3;
+    };
+
+    $scope.id_rearrange = function(array) {
+        for (var i = 0; i < array.length; i++) {
+            array[i].id = i;
+        };
     };
 
     // ------------------------------------------
