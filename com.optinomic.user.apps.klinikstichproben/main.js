@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions
             $scope.d.ks = $scope.ks_init();
+            $scope.getDimensions();
 
 
             // Finishing: Console Info & Init = done.
@@ -90,7 +91,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "tabs": {
                 "selectedIndex": 0,
                 "all": [{
-                    "name": "Dimensionen",
+                    "name": "Übersicht",
                     "disabled": false,
                     "tab_index": 0
                 }, {
@@ -534,6 +535,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) viewDimensionen', selected_dimension);
     }
 
+    $scope.getDimensions = function() {
+
+
+        var promiseSaveDimensions = dataService.getAppJSON('pg_dimensions');
+        promiseSaveDimensions.then(function(data) {
+
+            console.log('(✓) saveDimensions success: ', data);
+
+            // Clear Selected
+            $scope.d.ks.pg_dimensions.dimensions.all = data;
+            $scope.cancelDimensions();
+
+
+        });
+
+
+        console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+    };
+
     $scope.saveDimensions = function() {
         var quelle = $scope.d.ks.pg_dimensions.dimensions.selected;
 
@@ -548,10 +568,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.id_rearrange($scope.d.ks.pg_dimensions.dimensions.all);
 
 
-        //To Do:  Annotations - Save
-        //If all is OK then:
+        // dataService.putAppJSON
 
-        $scope.cancelDimensions();
+        var promiseSaveDimensions = dataService.putAppJSON('pg_dimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+        promiseSaveDimensions.then(function(data) {
+
+            console.log('(✓) saveDimensions success: ', data);
+
+            // Clear Selected
+            $scope.cancelDimensions();
+
+
+        });
 
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
@@ -596,19 +624,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) cancelDimensions');
     }
 
-    $scope.inner_dim_remove = function(remove_id) {
-        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
-        array.splice(remove_id, 1);
-        $scope.id_rearrange(array);
-
-        console.log('(!) inner_dim_remove', array);
-    };
-
     $scope.inner_dim_add = function(splice_pos) {
         var new_inner_dim = {
             "id": 9999,
             "text": "Unbenannt",
-            "pg_id": null,
+            "pg_id": 1,
             "pg": []
         };
 
@@ -618,6 +638,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('(!) inner_dim_add', array);
+    };
+
+    $scope.inner_dim_remove = function(remove_id) {
+        var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
+        array.splice(remove_id, 1);
+        $scope.id_rearrange(array);
+
+        console.log('(!) inner_dim_remove', array);
     };
 
     $scope.inner_dim_up = function(inner_dimension_index) {

@@ -1,6 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <div>
-    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <h3 flex class="md-headline">Dimensionen</h3>
         <p class="md-subhead">Patienten-Gruppen</p>
     </div>
@@ -15,7 +15,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <!-- Patienten-Gruppen | Dimensionen -->
                         <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===0">
                             <h3 class="md-headline">Dimensionen</h3>
-                            <p class="md-subhead">Folgende «Patienten-Gruppen | Dimensionen» stehen zur Verfügung:</p>
+                            <p class="md-subhead" ng-if="d.ks.pg_dimensions.dimensions.all.length > 0">Folgende «Patienten-Gruppen | Dimensionen» stehen zur Verfügung:</p>
                             <div>
                                 <md-list>
                                     <md-list-item layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.pg_dimensions.dimensions.all">
