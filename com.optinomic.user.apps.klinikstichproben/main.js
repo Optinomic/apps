@@ -541,12 +541,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var promiseSaveDimensions = dataService.getAppJSON('pg_dimensions');
         promiseSaveDimensions.then(function(data) {
 
-            console.log('(✓) saveDimensions success: ', data);
+            console.log('(✓) getDimensions success: ', data);
 
-            // Clear Selected
-            $scope.d.ks.pg_dimensions.dimensions.all = data;
-            $scope.cancelDimensions();
-
+            // Save Data
+            if (data !== null) {
+                $scope.d.ks.pg_dimensions.dimensions.all = data;
+            };
 
         });
 
