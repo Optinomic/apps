@@ -36,11 +36,11 @@ include(../lib/html/optinomic/page/start.m4)
                         </div>
                         <!-- Dimensionen bearbeiten -->
                         <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===1">
-                            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+                            <h3 class="md-subhead">Dimension</h3>
+                            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
                                 <div flex>
-                                    <h3 class="md-subhead">Dimension</h3>
                                     <md-input-container class="md-block">
-                                        <label>Title</label>
+                                        <label>Name</label>
                                         <input class="md-display-1" ng-model="d.ks.pg_dimensions.dimensions.selected.name">
                                     </md-input-container>
                                     <div class="grid-border-top md-padding md-margin" ng-repeat="inner_dim in d.ks.pg_dimensions.dimensions.selected.array" style="margin-left:48px;margin-right:48px;" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
@@ -48,21 +48,37 @@ include(../lib/html/optinomic/page/start.m4)
                                             <div ng-if="inner_dim.pg !== null">
                                                 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
                                                     <md-button ng-click="inner_dim_up($index)" class="md-icon-button" aria-label="Up" ng-if="$index !== 0">
-                                                        <span>↑</span>
+                                                        <i class="mdi mdi-chevron-up"></i>
+                                                        <md-tooltip md-direction="bottom">
+                                                            Reihenfolge: Up
+                                                        </md-tooltip>
                                                     </md-button>
                                                     <md-button ng-click="inner_dim_down($index)" class="md-icon-button" aria-label="Down" ng-if="($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 1)) && ($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 2))">
-                                                        <span>↓</span>
+                                                        <i class="mdi mdi-chevron-down"></i>
+                                                        <md-tooltip md-direction="bottom">
+                                                            Reihenfolge: Down
+                                                        </md-tooltip>
                                                     </md-button>
                                                 </div>
                                                 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-                                                    <md-button ng-click="inner_dim_add($index)" class="md-accent md-icon-button">+</md-button>
-                                                    <md-button ng-click="inner_dim_remove($index)" class="md-accent md-icon-button">-</md-button>
+                                                    <md-button ng-click="inner_dim_add($index)" class="md-accent md-icon-button">
+                                                        <i class="mdi mdi-plus"></i>
+                                                        <md-tooltip md-direction="bottom">
+                                                            Hinzufügen
+                                                        </md-tooltip>
+                                                    </md-button>
+                                                    <md-button ng-click="inner_dim_remove($index)" class="md-accent md-icon-button">
+                                                        <i class="mdi mdi-delete"></i>
+                                                        <md-tooltip md-direction="bottom">
+                                                            Löschen
+                                                        </md-tooltip>
+                                                    </md-button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div flex>
                                             <md-input-container class="md-block">
-                                                <label>Name</label>
+                                                <label>Text (so kurz wie möglich!)</label>
                                                 <input class="md-title" ng-model="inner_dim.text">
                                             </md-input-container>
                                             <md-input-container class="md-block" ng-if="inner_dim.pg !== null">
