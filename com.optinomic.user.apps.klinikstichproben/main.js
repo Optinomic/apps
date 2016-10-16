@@ -573,11 +573,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var promiseSaveDimensions = dataService.putAppJSON('pg_dimensions', $scope.d.ks.pg_dimensions.dimensions.all);
         promiseSaveDimensions.then(function(data) {
 
-            console.log('(✓) saveDimensions success: ', data);
+            var text = "(✓) Dimensionen erfolgreich gespeichert."
+            console.log(text, data);
+            $scope.d.functions.showSimpleToast(text);
 
             // Clear Selected
             $scope.cancelDimensions();
-
 
         });
 
@@ -621,7 +622,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
         $scope.d.ks.pg_dimensions.tabs.all[1].name = "";
         $scope.d.ks.pg_dimensions.tabs.selectedIndex = 0;
-        console.log('(!) cancelDimensions');
+        // console.log('(!) cancelDimensions');
     }
 
     $scope.inner_dim_add = function(splice_pos) {
