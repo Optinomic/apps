@@ -18,7 +18,7 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead" ng-if="d.ks.pg_dimensions.dimensions.all.length > 0">Folgende «Patienten-Gruppen | Dimensionen» stehen zur Verfügung:</p>
                             <div>
                                 <md-list>
-                                    <md-list-item layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.pg_dimensions.dimensions.all track by $index | orderBy: 'item.name' ">
+                                    <md-list-item layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.pg_dimensions.dimensions.all track by $index">
                                         <div flex class="md-list-item-text">
                                             <h3>{{item.name}}</h3>
                                             <p>
@@ -26,12 +26,17 @@ include(../lib/html/optinomic/page/start.m4)
                                                 <span ng-repeat="d in item.array">«{{d.text}}» </span>
                                             </p>
                                         </div>
-                                        <md-button class="md-secondary" ng-click="viewDimensions(item)">Anzeigen</md-button>
+                                        <md-button class="md-secondary" ng-click="viewDimensions(item)">
+                                            <i class="mdi mdi-lead-pencil"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                «{{item.name}}» anzeigen / bearbeiten
+                                            </md-tooltip>
+                                        </md-button>
                                     </md-list-item>
                                 </md-list>
                             </div>
                             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="start start">
-                                <md-button class="md-accent" ng-click="createDimensions()" ng-disabled="false" aria-label="Hinzufügen">Hinzufügen</md-button>
+                                <md-button class="md-accent " ng-click="createDimensions()" ng-disabled="false" aria-label="Hinzufügen">Hinzufügen</md-button>
                             </div>
                         </div>
                         <!-- Dimensionen bearbeiten -->
