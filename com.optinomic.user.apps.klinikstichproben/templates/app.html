@@ -1,103 +1,93 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-if="d.ks.init">
+<div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <h3 flex class="md-headline">Dimensionen</h3>
+        <p class="md-subhead">Patienten-Gruppen</p>
+    </div>
     <div>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-            <h3 flex class="md-headline">Dimensionen</h3>
-            <p class="md-subhead">Patienten-Gruppen</p>
-        </div>
-        <div>
-            <h3 class="md-headline">Patienten-Gruppen | Dimensionen</h3>
-            <md-tabs md-dynamic-height md-border-bottom md-autoselect md-selected="d.ks.pg_dimensions.tabs.selectedIndex">
-                <md-tab ng-repeat="tab in d.ks.pg_dimensions.tabs.all" ng-disabled="tab.disabled">
-                    <md-tab-label>
-                        {{tab.name}}
-                    </md-tab-label>
-                    <md-tab-body class="md-padding md-margin">
-                        <div class="md-padding md-margin">
-                            <!-- Patienten-Gruppen | Dimensionen -->
-                            <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===0">
-                                <h3 class="md-headline">Dimensionen</h3>
-                                <p class="md-subhead">Folgende «Patienten-Gruppen | Dimensionen» stehen zur Verfügung:</p>
-                                <div>
-                                    <md-list>
-                                        <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.pg_dimensions.dimensions.all">
-                                            <div flex class="md-list-item-text">
-                                                <h3>{{item.name}}</h3>
-                                                <p>
-                                                    {{item.array.length}} Dimensionen:
-                                                    <span ng-repeat="d in item.array">«{{d.text}}» </span>
-                                                </p>
-                                            </div>
-                                            <md-button class="md-secondary" ng-click="d.ks.functions.viewDimensions(item)">Anzeigen</md-button>
-                                        </md-list-item>
-                                    </md-list>
-                                </div>
-                                <div layout="row" layout-align="start start">
-                                    <md-button class="md-accent" ng-click="d.ks.functions.createDimensions()" ng-disabled="false" aria-label="Hinzufügen">Hinzufügen</md-button>
-                                </div>
+        <h3 class="md-headline">Patienten-Gruppen | Dimensionen</h3>
+        <md-tabs md-dynamic-height md-border-bottom md-autoselect md-selected="d.ks.pg_dimensions.tabs.selectedIndex">
+            <md-tab ng-repeat="tab in d.ks.pg_dimensions.tabs.all" ng-disabled="tab.disabled">
+                <md-tab-label>
+                    {{tab.name}}
+                </md-tab-label>
+                <md-tab-body class="md-padding md-margin">
+                    <div class="md-padding md-margin">
+                        <!-- Patienten-Gruppen | Dimensionen -->
+                        <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===0">
+                            <h3 class="md-headline">Dimensionen</h3>
+                            <p class="md-subhead">Folgende «Patienten-Gruppen | Dimensionen» stehen zur Verfügung:</p>
+                            <div>
+                                <md-list>
+                                    <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.pg_dimensions.dimensions.all">
+                                        <div flex class="md-list-item-text">
+                                            <h3>{{item.name}}</h3>
+                                            <p>
+                                                {{item.array.length}} Dimensionen:
+                                                <span ng-repeat="d in item.array">«{{d.text}}» </span>
+                                            </p>
+                                        </div>
+                                        <md-button class="md-secondary" ng-click="d.ks.functions.viewDimensions(item)">Anzeigen</md-button>
+                                    </md-list-item>
+                                </md-list>
                             </div>
-                            <!-- Dimensionen bearbeiten -->
-                            <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===1">
-                                <div layout="row" layout-align="space-between start">
-                                    <div flex>
-                                        <h3 class="md-subhead">Dimension</h3>
-                                        <md-input-container class="md-block">
-                                            <label>Title</label>
-                                            <input class="md-display-1" ng-model="d.ks.pg_dimensions.dimensions.selected.name">
-                                        </md-input-container>
-                                        <div class="grid-border-top md-padding md-margin" ng-repeat="inner_dim in d.ks.pg_dimensions.dimensions.selected.array" style="margin-left:48px;margin-right:48px;" layout="row" layout-align="space-between start">
-                                            <div>
-                                                <div ng-if="inner_dim.pg !== null">
-                                                    <div layout="row" layout-align="space-between start">
-                                                        <md-button ng-click="d.ks.functions.inner_dim_up($index)" class="md-icon-button" aria-label="Up" ng-if="$index !== 0">
-                                                            <span>↑</span>
-                                                        </md-button>
-                                                        <md-button ng-click="d.ks.functions.inner_dim_down($index)" class="md-icon-button" aria-label="Down" ng-if="($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 1)) && ($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 2))">
-                                                            <span>↓</span>
-                                                        </md-button>
-                                                    </div>
-                                                    <div layout="row" layout-align="space-between start">
-                                                        <md-button ng-click="d.ks.functions.inner_dim_add($index)" class="md-accent md-icon-button">+</md-button>
-                                                        <md-button ng-click="d.ks.functions.inner_dim_remove($index)" class="md-accent md-icon-button">-</md-button>
-                                                    </div>
+                            <div layout="row" layout-align="start start">
+                                <md-button class="md-accent" ng-click="d.ks.functions.createDimensions()" ng-disabled="false" aria-label="Hinzufügen">Hinzufügen</md-button>
+                            </div>
+                        </div>
+                        <!-- Dimensionen bearbeiten -->
+                        <div ng-if="d.ks.pg_dimensions.tabs.selectedIndex===1">
+                            <div layout="row" layout-align="space-between start">
+                                <div flex>
+                                    <h3 class="md-subhead">Dimension</h3>
+                                    <md-input-container class="md-block">
+                                        <label>Title</label>
+                                        <input class="md-display-1" ng-model="d.ks.pg_dimensions.dimensions.selected.name">
+                                    </md-input-container>
+                                    <div class="grid-border-top md-padding md-margin" ng-repeat="inner_dim in d.ks.pg_dimensions.dimensions.selected.array" style="margin-left:48px;margin-right:48px;" layout="row" layout-align="space-between start">
+                                        <div>
+                                            <div ng-if="inner_dim.pg !== null">
+                                                <div layout="row" layout-align="space-between start">
+                                                    <md-button ng-click="d.ks.functions.inner_dim_up($index)" class="md-icon-button" aria-label="Up" ng-if="$index !== 0">
+                                                        <span>↑</span>
+                                                    </md-button>
+                                                    <md-button ng-click="d.ks.functions.inner_dim_down($index)" class="md-icon-button" aria-label="Down" ng-if="($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 1)) && ($index !==  (d.ks.pg_dimensions.dimensions.selected.array.length - 2))">
+                                                        <span>↓</span>
+                                                    </md-button>
+                                                </div>
+                                                <div layout="row" layout-align="space-between start">
+                                                    <md-button ng-click="d.ks.functions.inner_dim_add($index)" class="md-accent md-icon-button">+</md-button>
+                                                    <md-button ng-click="d.ks.functions.inner_dim_remove($index)" class="md-accent md-icon-button">-</md-button>
                                                 </div>
                                             </div>
-                                            <div flex>
-                                                <md-input-container class="md-block">
-                                                    <label>Name</label>
-                                                    <input class="md-title" ng-model="inner_dim.text">
-                                                </md-input-container>
-                                                <md-input-container class="md-block" ng-if="inner_dim.pg !== null">
-                                                    <label>Patienten-Gruppe</label>
-                                                    <md-select ng-model="inner_dim.pg_id">
-                                                        <md-option ng-repeat="pg in d.ks.pg | orderBy : 'data.name'" ng-value="pg.id">{{pg.data.name}}</md-option>
-                                                    </md-select>
-                                                </md-input-container>
-                                            </div>
                                         </div>
-                                        <div layout="row" layout-align="space-between start">
-                                            <md-button ng-click="d.ks.functions.cancelDimensions()" ng-disabled="false" aria-label="Speichern">Abbrechen</md-button>
-                                            <md-button ng-click="d.ks.functions.saveDimensions()" ng-disabled="false" aria-label="Speichern">Speichern</md-button>
+                                        <div flex>
+                                            <md-input-container class="md-block">
+                                                <label>Name</label>
+                                                <input class="md-title" ng-model="inner_dim.text">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" ng-if="inner_dim.pg !== null">
+                                                <label>Patienten-Gruppe</label>
+                                                <md-select ng-model="inner_dim.pg_id">
+                                                    <md-option ng-repeat="pg in d.ks.pg | orderBy : 'data.name'" ng-value="pg.id">{{pg.data.name}}</md-option>
+                                                </md-select>
+                                            </md-input-container>
                                         </div>
                                     </div>
-                                    <div>
-                                        <pre>{{d.ks.pg_dimensions.dimensions.selected | json}}</pre>
+                                    <div layout="row" layout-align="space-between start">
+                                        <md-button ng-click="d.ks.functions.cancelDimensions()" ng-disabled="false" aria-label="Speichern">Abbrechen</md-button>
+                                        <md-button ng-click="d.ks.functions.saveDimensions()" ng-disabled="false" aria-label="Speichern">Speichern</md-button>
                                     </div>
+                                </div>
+                                <div>
+                                    <pre>{{d.ks.pg_dimensions.dimensions.selected | json}}</pre>
                                 </div>
                             </div>
                         </div>
-                    </md-tab-body>
-                </md-tab>
-            </md-tabs>
-        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
     </div>
-</div>
-<div ng-if="!d.ks.init">
-    <md-content class="md-padding">
-        <h1 class="md-display-2">Optinomic berechnet gerne für Sie!</h1>
-        <p class="md-subhead"><i class="mdi mdi-bell-outline"></i> Vergessen Sie allen über Statistik, was Sie bereits vergessen haben.</p>
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <p class="flow-text">&nbsp;</p>
-    </md-content>
 </div>
 include(../lib/html/optinomic/page/end.m4)
