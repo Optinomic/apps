@@ -524,6 +524,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Patienten-Gruppen | Dimensionen
     // -------------------
 
+    $scope.saveNow = function() {
+        var promiseSaveDimensions = dataService.putAppJSON('pg_dimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+        promiseSaveDimensions.then(function(data) {
+
+            var text = "(✓) Dimensionen erfolgreich gespeichert."
+            console.log(text, data);
+            $scope.d.functions.showSimpleToast(text);
+
+            // Clear Selected
+            $scope.cancelDimensions();
+
+        });
+    };
+
     $scope.viewDimensions = function(selected_dimension) {
 
         $scope.d.ks.pg_dimensions.dimensions.selected = selected_dimension;
@@ -569,19 +583,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // dataService.putAppJSON
-
-        var promiseSaveDimensions = dataService.putAppJSON('pg_dimensions', $scope.d.ks.pg_dimensions.dimensions.all);
-        promiseSaveDimensions.then(function(data) {
-
-            var text = "(✓) Dimensionen erfolgreich gespeichert."
-            console.log(text, data);
-            $scope.d.functions.showSimpleToast(text);
-
-            // Clear Selected
-            $scope.cancelDimensions();
-
-        });
-
+        $scope.saveNow();
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
     };
@@ -624,6 +626,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.pg_dimensions.tabs.selectedIndex = 0;
         // console.log('(!) cancelDimensions');
     }
+
+    $scope.deleteDimensions = function(remove_id) {
+        ar array = d.ks.pg_dimensions.dimensions.all;
+        array.splice(remove_id, 1);
+        $scope.id_rearrange(array);
+
+        $scope.saveNow();
+
+        console.log('(!) deleteDimensions', array);
+    };
 
     $scope.inner_dim_add = function(splice_pos) {
         var new_inner_dim = {

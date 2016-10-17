@@ -26,6 +26,12 @@ include(../lib/html/optinomic/page/start.m4)
                                                 <span ng-repeat="d in item.array">«{{d.text}}» </span>
                                             </p>
                                         </div>
+                                        <md-button class="md-secondary" ng-click="remove_id($index)">
+                                            <i class="mdi mdi-delete"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                «{{item.name}}» löschen
+                                            </md-tooltip>
+                                        </md-button>
                                         <md-button class="md-secondary" ng-click="viewDimensions(item)">
                                             <i class="mdi mdi-lead-pencil"></i>
                                             <md-tooltip md-direction="bottom">
