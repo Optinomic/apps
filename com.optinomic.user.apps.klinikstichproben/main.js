@@ -628,7 +628,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     }
 
     $scope.deleteDimensions = function(remove_id) {
-        var array = d.ks.pg_dimensions.dimensions.all;
+        var array = $scope.d.ks.pg_dimensions.dimensions.all;
         array.splice(remove_id, 1);
         $scope.id_rearrange(array);
 
