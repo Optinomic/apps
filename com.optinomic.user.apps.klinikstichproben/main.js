@@ -598,7 +598,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "id": 0,
                 "text": "Unbenannt",
                 "pg_id": 1,
-                "pg": []
+                "pg": {}
             }, {
                 "id": 0,
                 "text": "Alle Patienten",
@@ -642,7 +642,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "id": 9999,
             "text": "Unbenannt",
             "pg_id": 1,
-            "pg": []
+            "pg": {}
         };
 
         var array = $scope.d.ks.pg_dimensions.dimensions.selected.array;
