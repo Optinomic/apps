@@ -31,7 +31,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Run App-Functions
             $scope.d.ks = $scope.ks_init();
+
             $scope.getDimensions();
+            $scope.getAllKSApps();
 
 
             // Finishing: Console Info & Init = done.
@@ -63,7 +65,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
-
+        ks.apps = [];
 
         // Init
         ks.init = false;
@@ -192,6 +194,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // What Dimensions are given from Patien-Groups
     // Enhancing | Dimenstions with PG's
     // ------------------------------------------
+
+
 
     $scope.enhanceDimensionsPG = function() {
 
@@ -520,9 +524,52 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    // -------------------
+    // -------------------------------
+    // Klinikstichproben | Sets
+    // -------------------------------
+
+    $scope.getAllKSApps = function() {
+
+        // Looking for all User-Apps with "*_klinikstichprobe" Calculations.
+
+        var search_str = '_klinikstichprobe';
+        var all_apps = $scope.d.dataMain.apps.all_user_modules;
+        var all_ks_apps = [];
+        all_apps.forEach(function(current_app, myAppID) {
+            var current_calculations = current_app.calculations;
+            current_calculations.forEach(function(current_calc, myCalcID) {
+                var n = current_calc.indexOf(search_str);
+                if (n !== -1) {
+                    all_ks_apps.push(current_app);
+                };
+            });
+        });
+
+        $scope.d.ks.apps = all_ks_apps;
+    };
+
+    $scope.getKS = function() {
+
+
+        var promiseSaveDimensions = dataService.getAppJSON('ks_versions');
+        promiseSaveDimensions.then(function(data) {
+
+            console.log('(✓) getKS success: ', data);
+
+            // Save Data
+            if (data !== null) {
+                $scope.d.ks.pg_dimensions.dimensions.all = data;
+            };
+
+        });
+
+
+        console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+    };
+
+    // -------------------------------
     // Patienten-Gruppen | Dimensionen
-    // -------------------
+    // -------------------------------
 
     $scope.saveNow = function() {
         var promiseSaveDimensions = dataService.putAppJSON('pg_dimensions', $scope.d.ks.pg_dimensions.dimensions.all);
@@ -537,17 +584,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         });
     };
-
-    $scope.viewDimensions = function(selected_dimension) {
-
-        $scope.d.ks.pg_dimensions.dimensions.selected = selected_dimension;
-
-        // Tabs
-        $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
-        $scope.d.ks.pg_dimensions.tabs.all[1].name = $scope.d.ks.pg_dimensions.dimensions.selected.name;
-        $scope.d.ks.pg_dimensions.tabs.selectedIndex = 1;
-        console.log('(!) viewDimensionen', selected_dimension);
-    }
 
     $scope.getDimensions = function() {
 
@@ -567,6 +603,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
     };
+
+    $scope.viewDimensions = function(selected_dimension) {
+
+        $scope.d.ks.pg_dimensions.dimensions.selected = selected_dimension;
+
+        // Tabs
+        $scope.d.ks.pg_dimensions.tabs.all[1].disabled = false;
+        $scope.d.ks.pg_dimensions.tabs.all[1].name = $scope.d.ks.pg_dimensions.dimensions.selected.name;
+        $scope.d.ks.pg_dimensions.tabs.selectedIndex = 1;
+        console.log('(!) viewDimensionen', selected_dimension);
+    }
 
     $scope.saveDimensions = function() {
         var quelle = $scope.d.ks.pg_dimensions.dimensions.selected;
