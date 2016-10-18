@@ -635,7 +635,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "disabled": false
         };
 
-        if (d.ks.ks_versions.tabs.all.length > 2) {
+        if ($scope.d.ks.ks_versions.tabs.all.length > 2) {
             $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
         };
 
@@ -655,7 +655,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "tab_index": 2
         };
 
-        if (d.ks.ks_versions.tabs.all.length > 2) {
+        if ($scope.d.ks.ks_versions.tabs.all.length > 2) {
             $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
         };
 

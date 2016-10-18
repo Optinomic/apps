@@ -37,8 +37,8 @@ include(../lib/html/optinomic/page/start.m4)
                     <!-- Sets | Klinische Stichproben -->
                     <div ng-if="d.ks.ks_versions.tabs.selectedIndex===1">
                         <h3 class="md-headline">Sets</h3>
-                        <p class="md-subhead">Folgende Klinikstichproben-Sets stehen zur Verfügung:</p>
-                        <div>
+                        <p ng-if="d.ks.ks_versions.versions.all.length > 0" class="md-subhead">Folgende Klinikstichproben-Sets stehen zur Verfügung:</p>
+                        <div ng-if="d.ks.ks_versions.versions.all.length > 0">
                             <md-list>
                                 <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.ks_versions.versions.all">
                                     <div flex="10">
