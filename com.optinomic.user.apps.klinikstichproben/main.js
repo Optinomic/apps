@@ -22,11 +22,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = true;
+
         var dataPromiseMain = dataService.getMainAppData();
         dataPromiseMain.then(function(data) {
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            var current_template = $scope.d.dataMain.params.location.viewname;
 
 
             // Run App-Functions
@@ -37,7 +39,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, current_template, $scope.d);
 
             $scope.d.init = true;
         });
