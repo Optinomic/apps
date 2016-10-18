@@ -256,55 +256,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         var dimenstions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
-
-
-        // Build GUI for this later
-
-        // GUI:  Create as many of them as user wants
-        // Arrange them in dimensions_pg
-        // Every group_pg_props have a 'all patients'
-
-        var group_pg_props_gender = [{
-            "id": 0,
-            "text": "Frauen",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[9])
-        }, {
-            "id": 1,
-            "text": "Männer",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[10])
-        }, {
-            "id": 2,
-            "text": "Alle Patienten",
-            "pg": null
-        }];
-
-        var group_pg_props = [{
-            "id": 0,
-            "text": "Stationär",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[4])
-        }, {
-            "id": 1,
-            "text": "Teilstationär",
-            "pg": angular.copy($scope.d.dataMain.patient_groups[5])
-        }, {
-            "id": 2,
-            "text": "Alle Patienten",
-            "pg": null
-        }];
-
-        var dimensions_pg = [{
-            "id": 0,
-            "name": "Geschlecht",
-            "source": "pg",
-            "array": angular.copy(group_pg_props_gender)
-        }, {
-            "id": 1,
-            "name": "Behandlungsart",
-            "source": "pg",
-            "array": angular.copy(group_pg_props)
-        }];
-
+        var dimensions_pg = $scope.d.ks.create.pg_dimensions;
         var dimensions_all = dimenstions_app.concat(dimensions_pg);
+        $scope.d.ks.create.pg_dimensions = angular.copy(dimensions_all);
 
         var n_dimensions = [];
         for (var dIndex = 0; dIndex < dimensions_all.length; dIndex++) {
@@ -330,7 +284,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // console.log('dimensions_all', n_dimensions, scores_all);
 
         // Do some more stuff now.
-        $scope.changeDimenstions();
+        //$scope.changeDimenstions();
         $scope.writePatientScoresMD();
     };
 
@@ -741,7 +695,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
         // Do the:
-        // $scope.enhanceDimensionsPG 
+        $scope.enhanceDimensionsPG();
         // $scope.writePatientScoresMD
 
         $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
