@@ -35,7 +35,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks = $scope.ks_init();
 
             $scope.getDimensions();
-            $scope.getAllKSApps();
+
+            if (current_template === 'klinikstichproben') {
+                $scope.getAllKSApps();
+                $scope.loadKS();
+            };
 
 
             // Finishing: Console Info & Init = done.
@@ -549,11 +553,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.loadKS = function() {
 
         var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
 
-        var promiseSaveDimensions = dataService.getAppJSON('ks_versions');
+        var promiseSaveDimensions = dataService.getAppJSON(identifier_name);
         promiseSaveDimensions.then(function(data) {
 
-            console.log('(✓) loadKS success: ', data);
+            console.log('(✓) loadKS success: ', identifier_name, data);
 
             // Save Data
             if (data !== null) {
@@ -570,14 +575,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var sets = $scope.d.ks.ks_versions.versions.all;
 
-        // Cleanup - Don't need to save full PG's here!
         var dimensions_all_copy = angular.copy($scope.d.ks.definitions.dimensions_all);
         dimensions_all_copy.forEach(function(current_dim, dimID) {
+
+            // Cleanup - Don't need to save full PG's here!
             if (current_dim.source === 'pg') {
                 current_dim.array.forEach(function(inner_dim, innerDimID) {
                     delete inner_dim.pg;
                 });
             };
+
+            // Add Default-Selected | Last Entry
+            current_dim.selected = current_dim.array[current_dim.array.length - 1]
         });
 
         $scope.d.ks.create.version.dimensions = dimensions_all_copy;
