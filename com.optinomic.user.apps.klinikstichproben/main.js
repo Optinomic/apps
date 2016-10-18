@@ -103,6 +103,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
+        ks.create = {
+            "step": 0,
+            "pg_dimensions": [],
+            "version": {
+                "date": new Date(),
+                "n_scores": null,
+                "dimensions": [],
+                "variables": [],
+                "data": [],
+                "id": 9999
+            }
+        };
+
         // Patienten-Gruppen | Dimensionen
         ks.pg_dimensions = {
             "tabs": {
@@ -627,19 +640,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.createSet = function() {
 
-        $scope.d.ks.create = {
-            "step": 0,
-            "pg_dimensions": [],
-            "version": {
-                "date": new Date(),
-                "n_scores": null,
-                "dimensions": [],
-                "variables": [],
-                "data": [],
-                "id": 0
-            }
-        };
-
         var create_tab = {
             "name": "Erstellen",
             "disabled": false
@@ -779,7 +779,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data
             if (data !== null) {
-                $scope.d.ks.pg_dimensions.dimensions.all = data;
+                $scope.d.ks.pg_dimensions.dimensions.all = angular.copy(data);
+                $scope.d.ks.create.pg_dimensions = angular.copy(data);
             };
 
         });
