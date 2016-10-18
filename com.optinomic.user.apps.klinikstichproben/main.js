@@ -584,7 +584,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //  };
         //  
 
-        $scope.d.ks.create.version.dimensions = $scope.d.ks.definitions.dimensions_all;
+
+        // Cleanup - Don't need to save full PG's here!
+        var dimensions_all_copy = angular.copy($scope.d.ks.definitions.dimensions_all);
+        dimensions_all_copy.forEach(function(current_dim, dimID) {
+            if (current_dim.source === 'pg') {
+                current_dim.array.forEach(function(inner_dim, innerDimID) {
+                    delete inner_dim.pg;
+                });
+            };
+        });
+
+        $scope.d.ks.create.version.dimensions = dimensions_all_copy;
         $scope.d.ks.create.version.variables = $scope.d.ks.definitions.variables_array;
         $scope.d.ks.create.version.n_scores = $scope.d.ks.user_app_calc.patient_scores.length;
         $scope.d.ks.create.version.data = $scope.d.ks.md.scores_all;
