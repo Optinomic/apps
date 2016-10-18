@@ -123,8 +123,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
-        // Calculate stuff
-        // $scope.getUserAppCalculation(ks.app.selected.identifier, ks.app.calculations.selected);
 
 
         return ks;
@@ -137,6 +135,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.getUserAppCalculation = function(app_id, calc_name) {
+
+
+        $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
+
+
+
+
+
+
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
         var call = dataService.getAppCalculationsUser(app_id, calc_name);
 
@@ -159,7 +166,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.init = true;
 
             // Some more Functions to Run because we have Data.
-            $scope.enhanceDimensionsPG();
+            // $scope.enhanceDimensionsPG();
+
+            $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
+            $scope.d.ks.functions.initSetAddPG();
 
             console.log('(DATA) Init, ', $scope.d.dataMain.apps.current.name, $scope.d.ks);
 

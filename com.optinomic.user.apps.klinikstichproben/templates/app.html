@@ -69,7 +69,8 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-subhead">Erstellen einer N-Dimensionalen Klinikstichprobe. ({{d.ks.create.step}})</p>
                         <div ng-if="d.ks.create.step === 0">
                             <p class="md-subhead">1.) Berechnung ( {{d.ks.app.calculations.selected}} ) ausführen</p>
-                            <md-button class="md-primary" ng-click="getUserAppCalculation(d.ks.app.selected.identifier, d.ks.app.calculations.selected)">
+                            <md-button class="md-primary" aria-label="Berechnung starten" ng-click="getUserAppCalculation(d.ks.app.selected.identifier, d.ks.app.calculations.selected)">
+                                Berechnung ( {{d.ks.app.calculations.selected}} ) starten
                             </md-button>
                         </div>
                         <div ng-if="d.ks.create.step === 1">
