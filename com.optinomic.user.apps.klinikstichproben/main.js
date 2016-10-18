@@ -570,10 +570,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var sets = $scope.d.ks.ks_versions.versions.all;
 
-
-
-
-
         // Cleanup - Don't need to save full PG's here!
         var dimensions_all_copy = angular.copy($scope.d.ks.definitions.dimensions_all);
         dimensions_all_copy.forEach(function(current_dim, dimID) {
@@ -594,19 +590,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.id_rearrange(sets);
 
-
-        $scope.d.ks.create = {
-            "step": 0,
-            "pg_dimensions": [],
-            "version": {
-                "date": new Date(),
-                "n_scores": null,
-                "dimensions": [],
-                "variables": [],
-                "data": [],
-                "id": 9999
-            }
-        };
 
         console.log('(!) pushKSSet', sets);
     };
@@ -639,6 +622,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
     $scope.createSet = function() {
+
+        // Cleanup CREATE
+        $scope.d.ks.create = {
+            "step": 0,
+            "pg_dimensions": [],
+            "version": {
+                "date": new Date(),
+                "n_scores": null,
+                "dimensions": [],
+                "variables": [],
+                "data": [],
+                "id": 9999
+            }
+        };
 
         var create_tab = {
             "name": "Erstellen",
