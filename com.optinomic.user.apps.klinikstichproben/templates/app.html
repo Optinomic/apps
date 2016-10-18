@@ -13,7 +13,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <h3 class="md-headline">Applikation</h3>
                         <p class="md-subhead">Selektieren Sie die gewünschte Applikation:</p>
                         <div layout="row" layout-align="space-between center">
-                            <md-input-container flex ng-class="md-block">
+                            <md-input-container flex class="md-block">
                                 <label>App</label>
                                 <md-select ng-model="d.ks.app.selected" ng-change="setSelectedApp()">
                                     <md-option ng-repeat="app in d.ks.apps" ng-value="app">
@@ -21,7 +21,7 @@ include(../lib/html/optinomic/page/start.m4)
                                     </md-option>
                                 </md-select>
                             </md-input-container>
-                            <md-input-container flex>
+                            <md-input-container flex class="md-block">
                                 <label>Calculation</label>
                                 <md-select ng-model="d.ks.app.calculations.selected">
                                     <md-option ng-repeat="calc in d.ks.app.calculations.all" ng-value="calc">

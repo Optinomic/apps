@@ -57,7 +57,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //  Select all User-Apps with '*_klinikstichprobe' Calculations
         ks.app = {
             "selected": null,
-            "calculations": null
+            "calculations": {
+                "all": null,
+                "selected": null
+            }
         };
 
         ks.apps = [];
