@@ -568,8 +568,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.pushKSSet = function() {
 
-        var sets = d.ks.ks_versions.versions.all;
-
+        var sets = $scope.d.ks.ks_versions.versions.all;
 
         //  ks.create = {
         //      "step": 0,
@@ -584,7 +583,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //      }
         //  };
         //  
-
 
         $scope.d.ks.create.version.dimensions = $scope.d.ks.definitions.dimensions_all;
         $scope.d.ks.create.version.variables = $scope.d.ks.definitions.variables_array;
