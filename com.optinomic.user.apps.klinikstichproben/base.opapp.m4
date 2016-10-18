@@ -24,9 +24,11 @@ website = http://www.optinomic.com/
 ch.suedhang.apps.tmt_V3 >= 1.0
 
 
-[template score_overview 6 12]
+[template klinikstichproben 6 12]
 include(templates/app.html)
 
+[template pg_dimensions 6 10]
+include(templates/pg_dimensions.html)
 
 
 [javascript]

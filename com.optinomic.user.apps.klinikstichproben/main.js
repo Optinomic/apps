@@ -56,13 +56,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         //  Create GUI for THIS later:
         //  Select all User-Apps with '*_klinikstichprobe' Calculations
         ks.app = {
-            "selected": {
-                "identifier": "ch.suedhang.user.apps.tmt"
-            },
-            "calculations": {
-                "all": ["tmt_klinikstichprobe"],
-                "selected": "tmt_klinikstichprobe"
-            }
+            "selected": null,
+            "calculations": null
         };
 
         ks.apps = [];
@@ -87,6 +82,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.result_explorer.selected = ks.result_explorer.types[1];
         ks.result_explorer.selected_var = null;
 
+        // Klinikstichproben | Sets
+        ks.ks_versions = {
+            "tabs": {
+                "selectedIndex": 0,
+                "content": "SelectApp",
+                "all": [{
+                    "name": "App",
+                    "disabled": false,
+                    "tab_index": 0
+                }]
+            },
+            "versions": {
+                "all": [],
+                "selected": [],
+                "activated": []
+            }
+        };
 
         // Patienten-Gruppen | Dimensionen
         ks.pg_dimensions = {
@@ -548,8 +560,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.apps = all_ks_apps;
     };
 
+    $scope.setSelectedApp = function(app_index) {
+
+        $scope.d.ks.app.selected = $scope.d.ks.apps[app_index];
+        $scope.d.ks.app.calculations.all = $scope.d.ks.app.selected.calculations;
+        console.log('(✓) setSelectedApp: ', $scope.d.ks.app.selected);
+    };
+
+    $scope.setSelectedCalculation = function(calc_index) {
+
+        $scope.d.ks.app.calculations.selected = $scope.d.ks.app.calculations.all[calc_index];
+        console.log('(✓) setSelectedCalculation: ', $scope.d.ks.app.calculations.selected);
+    };
+
     $scope.getKS = function() {
 
+        var identifier = $scope.d.ks.app.selected.identifier;
 
         var promiseSaveDimensions = dataService.getAppJSON('ks_versions');
         promiseSaveDimensions.then(function(data) {
@@ -566,6 +592,159 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
     };
+
+    $scope.appSelected = function() {
+
+        // Load Sets from Annotations
+        // => save it to $scope.d.ks.versions.all
+
+        // on success - push:
+        var sets = {
+            "name": "Sets",
+            "disabled": false,
+            "tab_index": 1
+        };
+
+        $scope.d.ks.ks_versions.tabs.content = sets.name;
+        $scope.d.ks.ks_versions.tabs.all.push(sets);
+
+
+        console.log('(!) appSelected', $scope.d.ks.app);
+    };
+
+    $scope.activateSet = function(selected_set) {
+
+        // Save it
+        $scope.d.ks.ks_versions.versions.activated = selected_set;
+
+        console.log('(!) activateSet', d.ks);
+    };
+
+    $scope.createSet = function() {
+
+        $scope.d.ks.create = {
+            "step": 0,
+            "pg_dimensions": [],
+            "version": {
+                "date": new Date(),
+                "n_scores": null,
+                "dimensions": [],
+                "variables": [],
+                "data": [],
+                "id": 0
+            }
+        };
+
+        var create_tab = {
+            "name": "Erstellen",
+            "disabled": false
+        };
+
+        if (d.ks.ks_versions.tabs.all.length > 2) {
+            $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
+        };
+
+        $scope.d.ks.ks_versions.tabs.content = create_tab.name;
+        $scope.d.ks.ks_versions.tabs.all.push(create_tab);
+    };
+
+    $scope.viewSet = function(selected_set) {
+
+        // Save it
+        $scope.d.ks.ks_versions.versions.selected = selected_set;
+
+        // on success - push:
+        var explorer = {
+            "name": "Explorer",
+            "disabled": false,
+            "tab_index": 2
+        };
+
+        if (d.ks.ks_versions.tabs.all.length > 2) {
+            $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
+        };
+
+        $scope.d.ks.ks_versions.tabs.content = explorer.name;
+        $scope.d.ks.ks_versions.tabs.all.push(explorer);
+
+        console.log('(!) viewSet', d.ks);
+    };
+
+    $scope.initSetAddPG = function() {
+        $scope.d.ks.create.changed_all_pg_dimensions = false;
+        $scope.d.ks.create.pg_dimensions = angular.copy(d.ks.pg_dimensions.dimensions.all);
+    };
+
+    $scope.createSetRemovePG = function(remove_id) {
+        var array = $scope.d.ks.create.pg_dimensions;
+        array.splice(remove_id, 1);
+        $scope.id_rearrange(array);
+
+        $scope.d.ks.create.changed_all_pg_dimensions = true;
+
+        console.log('(!) createSetRemovePG', array);
+    };
+
+    $scope.createSetUpPG = function(inner_dimension_index) {
+
+        var array = $scope.d.ks.create.pg_dimensions;
+
+        var array_pos_stored = array[inner_dimension_index - 1];
+        array[inner_dimension_index - 1] = array[inner_dimension_index];
+        array[inner_dimension_index] = array_pos_stored;
+        $scope.id_rearrange(array);
+
+        $scope.d.ks.create.changed_all_pg_dimensions = true;
+
+        console.log('(!) inner_dim_up', inner_dimension_index);
+    };
+
+    $scope.createSetDownPG = function(inner_dimension_index) {
+
+        var array = $scope.d.ks.create.pg_dimensions;
+
+        var array_pos_stored = array[inner_dimension_index + 1];
+        array[inner_dimension_index + 1] = array[inner_dimension_index];
+        array[inner_dimension_index] = array_pos_stored;
+        $scope.id_rearrange(array);
+
+        $scope.d.ks.create.changed_all_pg_dimensions = true;
+
+        console.log('(!) inner_dim_down', inner_dimension_index);
+    };
+
+    $scope.inArray = function(array, my_id) {
+        var return_obj = {};
+        array.forEach(function(d, ID) {
+            if (d.id === my_id) {
+                return_obj = d;
+            };
+        });
+        return return_obj;
+    };
+
+    $scope.createSetPgDimensions = function() {
+
+        var dimensions_all = $scope.d.ks.create.pg_dimensions;
+        var pg = $scope.d.ks.pg;
+
+        dimensions_all.forEach(function(current_dim, dimID) {
+            current_dim.array.forEach(function(inner_dim, innerDimID) {
+                inner_dim.pg = $scope.inArray(pg, inner_dim.pg_id);
+            });
+        });
+
+        $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
+        // Do the:
+        // $scope.enhanceDimensionsPG 
+        // $scope.writePatientScoresMD
+
+        $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
+
+        console.log('(!) createSetSetPG', dimensions_all);
+    };
+
+
 
     // -------------------------------
     // Patienten-Gruppen | Dimensionen
