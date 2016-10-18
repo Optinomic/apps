@@ -570,19 +570,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var sets = $scope.d.ks.ks_versions.versions.all;
 
-        //  ks.create = {
-        //      "step": 0,
-        //      "pg_dimensions": [],
-        //      "version": {
-        //          "date": new Date(),
-        //          "n_scores": null,
-        //          "dimensions": [],
-        //          "variables": [],
-        //          "data": [],
-        //          "id": 9999
-        //      }
-        //  };
-        //  
+
+
 
 
         // Cleanup - Don't need to save full PG's here!
@@ -604,6 +593,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         sets.push($scope.d.ks.create.version);
 
         $scope.id_rearrange(sets);
+
+
+        $scope.d.ks.create = {
+            "step": 0,
+            "pg_dimensions": [],
+            "version": {
+                "date": new Date(),
+                "n_scores": null,
+                "dimensions": [],
+                "variables": [],
+                "data": [],
+                "id": 9999
+            }
+        };
 
         console.log('(!) pushKSSet', sets);
     };
