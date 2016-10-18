@@ -561,17 +561,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
     $scope.setSelectedApp = function(app_index) {
-
-        $scope.d.ks.app.selected = $scope.d.ks.apps[app_index];
         $scope.d.ks.app.calculations.all = $scope.d.ks.app.selected.calculations;
-        console.log('(✓) setSelectedApp: ', $scope.d.ks.app.selected);
     };
 
-    $scope.setSelectedCalculation = function(calc_index) {
-
-        $scope.d.ks.app.calculations.selected = $scope.d.ks.app.calculations.all[calc_index];
-        console.log('(✓) setSelectedCalculation: ', $scope.d.ks.app.calculations.selected);
-    };
 
     $scope.getKS = function() {
 

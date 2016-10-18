@@ -15,7 +15,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <div layout="row" layout-align="space-between center">
                             <md-input-container flex ng-class="md-block">
                                 <label>App</label>
-                                <md-select ng-model="d.ks.app.selected">
+                                <md-select ng-model="d.ks.app.selected" ng-change="setSelectedApp()">
                                     <md-option ng-repeat="app in d.ks.apps" ng-value="app">
                                         {{app.name}}
                                     </md-option>
