@@ -156,9 +156,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-
-
-
         // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
         var call = dataService.getAppCalculationsUser(app_id, calc_name);
 
@@ -260,7 +257,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dimenstions_app = angular.copy($scope.d.ks.user_app_calc.definitions.dimensions_app);
         var dimensions_pg = $scope.d.ks.create.pg_dimensions;
         var dimensions_all = dimenstions_app.concat(dimensions_pg);
-        $scope.d.ks.create.pg_dimensions = angular.copy(dimensions_all);
 
         var n_dimensions = [];
         for (var dIndex = 0; dIndex < dimensions_all.length; dIndex++) {
@@ -477,6 +473,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             };
         };
+
+        $scope.pushKSSet();
     };
 
 
@@ -542,19 +540,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.apps = all_ks_apps;
     };
 
+
     $scope.setSelectedApp = function(app_index) {
         $scope.d.ks.app.calculations.all = $scope.d.ks.app.selected.calculations;
     };
 
 
-    $scope.getKS = function() {
+    $scope.loadKS = function() {
 
         var identifier = $scope.d.ks.app.selected.identifier;
 
         var promiseSaveDimensions = dataService.getAppJSON('ks_versions');
         promiseSaveDimensions.then(function(data) {
 
-            console.log('(✓) getKS success: ', data);
+            console.log('(✓) loadKS success: ', data);
 
             // Save Data
             if (data !== null) {
@@ -565,6 +564,39 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
+    };
+
+    $scope.pushKSSet = function() {
+
+        var sets = d.ks.ks_versions.versions.all;
+
+
+        //  ks.create = {
+        //      "step": 0,
+        //      "pg_dimensions": [],
+        //      "version": {
+        //          "date": new Date(),
+        //          "n_scores": null,
+        //          "dimensions": [],
+        //          "variables": [],
+        //          "data": [],
+        //          "id": 9999
+        //      }
+        //  };
+        //  
+
+
+        $scope.d.ks.create.version.dimensions = $scope.d.ks.definitions.dimensions_all;
+        $scope.d.ks.create.version.variables = $scope.d.ks.definitions.variables_array;
+        $scope.d.ks.create.version.n_scores = $scope.d..ks.user_app_calc.patient_scores.length;
+        $scope.d.ks.create.version.data = $scope.d.ks.md.scores_all;
+
+
+        sets.push($scope.d.ks.create.version);
+
+        $scope.id_rearrange(sets);
+
+        console.log('(!) pushKSSet', sets);
     };
 
     $scope.appSelected = function() {
