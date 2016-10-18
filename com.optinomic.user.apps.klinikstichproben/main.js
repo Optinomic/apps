@@ -38,7 +38,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if (current_template === 'klinikstichproben') {
                 $scope.getAllKSApps();
-                $scope.loadKS();
             };
 
 
@@ -548,6 +547,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.setSelectedApp = function(app_index) {
         $scope.d.ks.app.calculations.all = $scope.d.ks.app.selected.calculations;
     };
+
+
+    $scope.setSelectedCalculation = function() {
+        $scope.loadKS();
+    };
+
 
 
     $scope.loadKS = function() {

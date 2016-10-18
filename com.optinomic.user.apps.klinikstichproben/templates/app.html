@@ -23,7 +23,7 @@ include(../lib/html/optinomic/page/start.m4)
                             </md-input-container>
                             <md-input-container flex class="md-block">
                                 <label>Calculation</label>
-                                <md-select ng-model="d.ks.app.calculations.selected">
+                                <md-select ng-model="d.ks.app.calculations.selected" ng-change="setSelectedCalculation()">
                                     <md-option ng-repeat="calc in d.ks.app.calculations.all" ng-value="calc">
                                         {{calc}}
                                     </md-option>
