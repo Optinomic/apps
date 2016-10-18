@@ -637,6 +637,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
+        if ($scope.d.ks.pg_dimensions.dimensions.all.length > 0) {
+            $scope.d.ks.create.pg_dimensions = angular.copy($scope.d.ks.pg_dimensions.dimensions.all);
+        };
+
         var create_tab = {
             "name": "Erstellen",
             "disabled": false
@@ -777,7 +781,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data
             if (data !== null) {
                 $scope.d.ks.pg_dimensions.dimensions.all = angular.copy(data);
-                $scope.d.ks.create.pg_dimensions = angular.copy(data);
+
             };
 
         });
