@@ -554,6 +554,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.saveKS = function() {
+
+        var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
+
+        var promiseSaveDimensions = dataService.putAppJSON(identifier_name, $scope.d.ks.ks_versions.versions.all);
+        promiseSaveDimensions.then(function(data) {
+
+            var text = "(✓) Klinikstichproben erfolgreich gespeichert."
+            console.log(text, data);
+            $scope.d.functions.showSimpleToast(text);
+
+        });
+    };
 
     $scope.loadKS = function() {
 
@@ -567,7 +581,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data
             if (data !== null) {
-                $scope.d.ks.pg_dimensions.dimensions.all = data;
+                $scope.d.ks.ks_versions.versions.all = data;
             };
 
         });
@@ -604,6 +618,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.id_rearrange(sets);
 
+        // Unter Annotations speichern.
+        $scope.saveKS();
 
         console.log('(!) pushKSSet', sets);
     };
