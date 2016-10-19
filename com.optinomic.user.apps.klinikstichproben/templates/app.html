@@ -113,7 +113,10 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">1.) Berechnung erfolgreich ausgeführt.</p>
                             <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
-                            <a href="data:text/json;charset=utf-8,{{d.ks.copy_str}}" download="tmt.json">Download</a>
+                            <div>
+                                <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str}}" download="tmt.json">Download</a>
+                                <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str_strip}}" download="tmt.json">Download Strip</a>
+                            </div>
                             <!--
                             <form name="Copyform">
                                 <textarea class="md-block" name="Klinikstichprobe" ng-model="d.ks.copy_str"></textarea>

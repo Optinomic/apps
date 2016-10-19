@@ -609,6 +609,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
     };
 
+    $scope.stripClone = function(obj) {
+        if (null == obj || "object" != typeof obj) return obj;
+        var copy = obj.constructor();
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr) && attr != '$$hashKey') {
+                var obj_attr = obj[attr];
+                if (typeof obj_attr == "object") {
+                    copy[attr] = this.stripClone(obj_attr);
+                } else if (typeof obj_attr == "array") {
+                    copy[attr] = [];
+                    for (var i = 0; i < obj_attr.length; i++) {
+                        copy[attr].push(this.stripClone(obj_attr));
+                    }
+                } else {
+                    copy[attr] = obj_attr;
+                }
+            }
+        }
+        return copy;
+    };
+
     $scope.pushKSSet = function() {
 
         var sets = $scope.d.ks.ks_versions.versions.all;
@@ -643,7 +664,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var copy_str = angular.copy($scope.d.ks.ks_versions.versions);
         copy_str.selected = [];
 
-        $scope.d.ks.copy_str = JSON.stringify(copy_str);
+        $scope.d.ks.copy_str = JSON.stringify($scope.copy_str);
+        $scope.d.ks.copy_str_strip = JSON.stringify(stripClone($scope.copy_str));
 
 
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
