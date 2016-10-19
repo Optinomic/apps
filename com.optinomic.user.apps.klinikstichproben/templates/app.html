@@ -114,7 +114,7 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
                             <form name="Copyform">
-                                <textarea name="Klinikstichprobe" ng-model="d.ks.create.version"></textarea>
+                                <textarea name="Klinikstichprobe" ng-model="JSON.stringify(d.ks.create.version)"></textarea>
                             </form>
                             <md-button ng-click="d.ks.ks_versions.tabs.all.splice(2, 1)">
                                 Schliessen
