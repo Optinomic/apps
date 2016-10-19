@@ -2,8 +2,9 @@
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex>
             <h3 class="md-headline">Klinikstichprobe</h3>
-            <p class="md-subhead">Daten-Explorer ({{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen | {{d.ks.app.calculations.selected}})</p>
+            <p class="md-subhead">Daten-Explorer: {{d.ks.result_explorer.ks.n_scores}} Messungen in {{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen</p>
         </div>
+        <p class="md-caption">{{d.ks.app.calculations.selected}}</p>
     </div>
 </div>
 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
@@ -58,11 +59,11 @@
         <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
             <div flex>
-                <p class="md-subhead">Scores</p>
+                <p class="md-subhead">Scores <span class="md-caption">({{d.ks.result_explorer.ks.location.data.scores.length}})</span></p>
                 <pre>{{d.ks.result_explorer.ks.location.data.scores | json}}</pre>
             </div>
             <div flex>
-                <p class="md-subhead">Patients</p>
+                <p class="md-subhead">Patients <span class="md-caption">({{d.ks.result_explorer.ks.location.data.patients.length}})</span></p>
                 <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
             </div>
         </div>
@@ -81,12 +82,12 @@
                 <p class="md-title">Statistic</p>
                 <pre>{{d.ks.result_explorer.ks.location.data.statistics[d.ks.result_explorer.types.selected_var] | json}}</pre>
             </div>
-            <div flex="25">
-                <p class="md-title">Scores</p>
+            <div flex="20">
+                <p class="md-title">Scores <span class="md-caption">({{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var].length}})</span></p>
                 <pre>{{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var] | json}}</pre>
             </div>
-            <div flex="15">
-                <p class="md-title">Patients</p>
+            <div flex="20">
+                <p class="md-title">Patients <span class="md-caption">({{d.ks.result_explorer.ks.location.data.patients.length}})</span></p>
                 <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
             </div>
         </div>
