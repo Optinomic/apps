@@ -1,11 +1,9 @@
 function main(responses) {
     var calc = {};
 
-
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
-
 
     calc.roundToTwo = function(num) {
         // Round a Number to 0.X 
