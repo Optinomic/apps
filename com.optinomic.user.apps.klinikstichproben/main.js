@@ -610,6 +610,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.getBlob = function() {
+        var json = $scope.d.ks.copy_str;
+        var my_blob = new Blob([json], { type: "application/json" });
+        console.log('(?) getBlob: ', my_blob);
+
+        return my_blob;
+    };
 
     $scope.pushKSSet = function() {
 
@@ -649,17 +656,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks.copy_str = JSON.stringify(copy_str);
 
-        $scope.d.ks.blob = new Blob([JSON.stringify(copy_str)], { type: "application/json" });
-        console.log('(?) blob: ', $scope.d.ks.blob);
-
-
 
         $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain);
 
 
 
 
-        console.log('(?) copy_str: ', $scope.d.ks.copy_str);
+        // console.log('(?) copy_str: ', $scope.d.ks.copy_str);
 
 
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
