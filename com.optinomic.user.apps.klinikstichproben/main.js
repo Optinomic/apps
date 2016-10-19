@@ -491,13 +491,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.getUserAppCalculation($scope.d.ks.app.selected.identifier, $scope.d.ks.app.calculations.selected);
     };
 
-    $scope.changeDimenstions = function() {
+    $scope.changeDimensions = function(current_ks) {
 
-        var data_dive = $scope.d.ks.md.scores_all;
+        // sugus
+
+        // var current_ks = $scope.d.ks.ks_versions.versions.selected;
+
+        var data_dive = current_ks.data;
         var current_location = [];
         var current_location_text = ""
 
-        $scope.d.ks.dimensions_all.forEach(function(current_dim, myDimID) {
+        current_ks.dimensions.forEach(function(current_dim, myDimID) {
             current_location.push(current_dim.selected.id);
             if (current_location_text !== "") {
                 current_location_text = current_location_text + ' | '
@@ -506,18 +510,36 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             data_dive = data_dive[current_dim.selected.id];
         });
 
-        $scope.d.ks.md.selected = angular.copy(data_dive);
-        $scope.d.ks.md.selected_info.current_location_path = current_location;
 
         if (data_dive !== null) {
-            var current_location_n = $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
-            var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
-            current_location_text = current_location_text + ' ' + current_location_n_text;
-        };
-        $scope.d.ks.md.selected_info.current_location_text = current_location_text;
-        $scope.d.ks.md.selected_info.current_location_n = current_location_n;
+            var data = angular.copy(data_dive);
 
-        console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
+            // var current_location_n = data.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
+            // var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
+            // current_location_text = current_location_text + ' ' + current_location_n_text;
+        } else {
+            var data = null;
+        };
+
+
+
+
+        current_ks.md_data = data;
+        current_ks.location_path = current_location;
+        current_ks.location_text = current_location_text;
+
+
+        console.log('(Data) changeDimensions:', current_ks);
+        return current_ks;
+
+
+        //$scope.d.ks.md.selected = angular.copy(data_dive);
+        //$scope.d.ks.md.selected_info.current_location_path = current_location;
+
+
+        //$scope.d.ks.md.selected_info.current_location_text = current_location_text;
+        //$scope.d.ks.md.selected_info.current_location_n = current_location_n;
+
     };
 
 
@@ -581,11 +603,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if (identifier === 'ch.suedhang.user.apps.tmt') {
             var ks_file = include_as_js_string(
-                ks20161018.js)
+                ch_suedhang_user_apps_tmt.json)
 
             ks_file = JSON.parse(ks_file);
 
-            $scope.d.ks.ks_versions.versions.all.push(ks_file);
+            $scope.d.ks.ks_versions.versions.all = ks_file;
             console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
 
         };
@@ -610,12 +632,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.getBlob = function() {
-        var json = $scope.d.ks.copy_str;
-        var my_blob = new Blob([json], { type: "application/json" });
-        console.log('(?) getBlob: ', my_blob);
+    $scope.downloadKSSet = function() {
 
-        return my_blob;
+        var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '.json';
+
+        var data = angular.copy($scope.d.ks.ks_versions.versions.all);
+
+        dataService.saveData(data, fileName);
+
     };
 
     $scope.pushKSSet = function() {
@@ -643,32 +669,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         sets.push($scope.d.ks.create.version);
-
         $scope.id_rearrange(sets);
 
-
-        // In Formular setzen
-
-        var copy_str = angular.copy($scope.d.ks.ks_versions.versions);
-        copy_str.selected = [];
-
-        $scope.d.ks.download_json = copy_str;
-
-        $scope.d.ks.copy_str = JSON.stringify(copy_str);
-
-
-        $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain);
-
-
-
-
-        // console.log('(?) copy_str: ', $scope.d.ks.copy_str);
-
-
-        // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
-
-        // Unter Annotations speichern.
-        // $scope.saveKS();
+        $scope.d.ks.ks_versions.versions.all = sets;
 
         $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
 
@@ -698,6 +701,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save it
         $scope.d.ks.ks_versions.versions.activated = selected_set;
+
+
+        var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '_activated.json';
+
+        var data = angular.copy(selected_set);
+
+        dataService.saveData(data, fileName);
+
 
         console.log('(!) activateSet', $scope.d.ks.ks_versions);
     };
@@ -738,7 +751,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.viewSet = function(selected_set) {
 
         // Save it
-        $scope.d.ks.ks_versions.versions.selected = selected_set;
+        $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
+        $scope.d.ks.ks_versions.versions.selected = $scope.changeDimensions(angular.copy(selected_set));
+        console.log('(!!) explorer', $scope.d.ks.ks_versions.explorer);
+
 
         // on success - push:
         var explorer = {
@@ -747,6 +763,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "tab_index": 2
         };
 
+
         if ($scope.d.ks.ks_versions.tabs.all.length > 2) {
             $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
         };
@@ -754,7 +771,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.ks_versions.tabs.content = explorer.name;
         $scope.d.ks.ks_versions.tabs.all.push(explorer);
 
-        console.log('(!) viewSet', d.ks);
+        console.log('(!) viewSet', $scope.d.ks.ks_versions.versions.selected);
     };
 
     $scope.initSetAddPG = function() {
