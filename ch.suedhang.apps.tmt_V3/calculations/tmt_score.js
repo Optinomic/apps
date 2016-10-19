@@ -682,13 +682,14 @@ function main(responses) {
             myResults.response = response;
             // myResults.d = d;
 
+            myResults.version = "19. Oktober 2016";
+
             allResults.push(myResults);
 
         });
 
         return_obj.responses_array = responses_array;
         return_obj.allResults = allResults;
-        return_obj.version = "19. Oktober 2016";
         return_obj.full = d;
 
         return allResults;
