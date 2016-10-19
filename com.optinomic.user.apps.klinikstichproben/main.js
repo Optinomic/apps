@@ -639,6 +639,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // In Formular setzen
+        $scope.d.ks.sets = JSON.stringify($scope.d.ks.ks_versions);
+
+
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
 
         // Unter Annotations speichern.
