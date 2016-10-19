@@ -688,6 +688,7 @@ function main(responses) {
 
         return_obj.responses_array = responses_array;
         return_obj.allResults = allResults;
+        return_obj.version = "19. Oktober 2016";
         return_obj.full = d;
 
         return allResults;
