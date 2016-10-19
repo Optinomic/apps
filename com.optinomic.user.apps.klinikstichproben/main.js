@@ -618,7 +618,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var data = angular.copy($scope.d.ks.ks_versions.versions.all);
 
-        dataService.saveData(sets, fileName);
+        dataService.saveData(data, fileName);
 
     };
 
