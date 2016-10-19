@@ -34,7 +34,7 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-input-container flex ng-class="md-block" ng-if="d.ks.result_explorer.selected.id !== 0">
+        <md-input-container flex ng-class="md-block" ng-if="d.ks.result_explorer.types.selected.id !== 0">
             <label>Datenexplorer</label>
             <md-select ng-model="d.ks.result_explorer.types.selected_var">
                 <md-option ng-repeat="item in d.ks.result_explorer.ks.variables" ng-value="item">
@@ -43,7 +43,7 @@
             </md-select>
         </md-input-container>
     </div>
-    <div ng-if="d.ks.result_explorer.selected.id === 0">
+    <div ng-if="d.ks.result_explorer.types.selected.id === 0">
         <div class="grid-border-top" style="margin-top: 30px;">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
                 <div flex>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div ng-if="d.ks.result_explorer.selected.id !== 0">
+    <div ng-if="d.ks.result_explorer.types.selected.id !== 0">
         <div class="grid-border-top" style="margin-top: 30px;">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
                 <div flex>
