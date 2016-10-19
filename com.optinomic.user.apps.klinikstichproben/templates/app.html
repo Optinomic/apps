@@ -42,20 +42,30 @@ include(../lib/html/optinomic/page/start.m4)
                             <md-list>
                                 <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.ks_versions.versions.all">
                                     <div flex="10">
-                                        <md-button ng-if="d.ks.ks_versions.versions.activated !== item" ng-click="activateSet(item)">Akt</md-button>
+                                        <md-button ng-if="d.ks.ks_versions.versions.activated !== item" class="md-secondary md-icon-button" ng-click="activateSet(item)">
+                                            <i class="mdi mdi-check-circle-outline"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                Aktivieren & Herunterladen
+                                            </md-tooltip>
+                                        </md-button>
+                                        <div ng-if="d.ks.ks_versions.versions.activated === item">
+                                            <i class="mdi mdi-check-circle"></i>
+                                        </div>
                                     </div>
                                     <div flex class="md-list-item-text">
-                                        <h3>{{item.date}}</h3>
+                                        <h3>{{item.date | date}}</h3>
                                         <p>{{item.n_scores}} Messungen in {{item.dimensions.length}} Dimensionen</p>
                                     </div>
                                     <md-button class="md-secondary" ng-click="viewSet(item)">Anzeigen</md-button>
                                 </md-list-item>
                             </md-list>
                         </div>
-                        <div layout="row" layout-align="start start">
-                            <md-button class="md-accent" ng-click="createSet()" ng-disabled="false" aria-label="Hinzufügen">Hinzufügen</md-button>
+                        <div layout="row" layout-align="space-between start">
+                            <md-button class="md-accent" ng-click="createSet()" ng-disabled="false" aria-label="Hinzufügen">
+                                Hinzufügen
+                            </md-button>
                             <md-button ng-click="downloadKSSet()" aria-label="Herunterladen">
-                                Herunterladen
+                                Alle Stichproben herunterladen
                             </md-button>
                         </div>
                     </div>
