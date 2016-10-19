@@ -1,8 +1,8 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-if="d.ks.loaded !== true">
+<div ng-if="d.loaded !== true">
     <h3 class="md-subhead">Berechne ({{d.ks.app.calculations.selected}})...</h3>
 </div>
-<div ng-if="d.ks.loaded">
+<div ng-if="d.loaded">
     <div>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>

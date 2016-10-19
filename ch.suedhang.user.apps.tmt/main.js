@@ -46,7 +46,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.getCalculation = function() {
-        // Get specific calculation - Unneded already in 'd.dataMain.calculations[0].calculation_results'
+        $scope.d.loaded = false;
+
+        // Get specific calculation
         var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_klinikstichprobe');
 
         call.success(function(data) {
@@ -55,7 +57,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.ks = {};
-            $scope.d.ks.loaded = false;
 
             $scope.d.ks.result_explorer = {
                 "types": {
@@ -93,7 +94,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "variables": data.calculation_result.definitions.variables_array
             };
 
-            $scope.d.ks.loaded = false;
+            $scope.d.loaded = true;
             console.log('(DATA): getCalculation | tmt_klinikstichprobe: ', $scope.d.calculations);
             console.log('(DATA): Data-Explorer: ', $scope.d.ks.result_explorer);
 
