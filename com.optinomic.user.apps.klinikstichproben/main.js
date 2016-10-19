@@ -516,7 +516,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             my_data = angular.copy(data_dive);
             current_location_n = my_data.patients.length;
             current_location_n_text = 'N=' + current_location_n;
-            current_location_full = current_location_text + ' | ' + current_location_n_text;
+            current_location_full = current_location_text + ' = ' + current_location_n_text;
         };
 
         var location = {
@@ -599,7 +599,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             ks_file = JSON.parse(ks_file);
 
-            $scope.d.ks.ks_versions.versions.all = ks_file;
+            $scope.d.ks.ks_versions.versions = ks_file;
             console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
 
         };
@@ -630,10 +630,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var identifier_name = identifier.split('.').join('_');
         var fileName = identifier_name + '.json';
 
-        var data = angular.copy($scope.d.ks.ks_versions.versions.all);
+        var data = angular.copy($scope.d.ks.ks_versions.versions);
+        data.selected = [];
 
         dataService.saveData(data, fileName);
-
     };
 
     $scope.pushKSSet = function() {
