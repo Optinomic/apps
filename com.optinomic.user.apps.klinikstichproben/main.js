@@ -639,7 +639,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // In Formular setzen
-        $scope.d.ks.sets = JSON.stringify($scope.d.ks.ks_versions);
+
+        var copy_str = angular.copy($scope.d.ks.ks_versions.versions);
+        copy_str.selected = [];
+
+        $scope.d.ks.copy_str = JSON.stringify(copy_str);
 
 
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
@@ -674,7 +678,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Save it
         $scope.d.ks.ks_versions.versions.activated = selected_set;
 
-        console.log('(!) activateSet', d.ks);
+        console.log('(!) activateSet', $scope.d.ks.ks_versions);
     };
 
     $scope.createSet = function() {
