@@ -287,7 +287,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // console.log('dimensions_all', n_dimensions, scores_all);
 
         // Do some more stuff now.
-        //$scope.changeDimenstions();
         $scope.writePatientScoresMD();
     };
 
@@ -495,8 +494,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var current_ks = $scope.d.ks.ks_versions.versions.selected;
 
-        console.log('(Start) changeDimensions:', current_ks);
-
         var data_dive = current_ks.data;
         var current_location = [];
         var current_location_text = "";
@@ -518,8 +515,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         if (data_dive !== null) {
             my_data = angular.copy(data_dive);
             current_location_n = my_data.patients.length;
-            current_location_n_text = '(N=' + current_location_n + ')';
-            current_location_full = current_location_text + ' ' + current_location_n_text;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' | ' + current_location_n_text;
         };
 
         var location = {
@@ -532,19 +529,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         current_ks.location = location;
-        $scope.d.ks.ks_versions.versions.selected = current_ks;
 
 
         console.log('(Data) changeDimensions:', current_ks);
-
-
-        //$scope.d.ks.md.selected = angular.copy(data_dive);
-        //$scope.d.ks.md.selected_info.current_location_path = current_location;
-
-
-        //$scope.d.ks.md.selected_info.current_location_text = current_location_text;
-        //$scope.d.ks.md.selected_info.current_location_n = current_location_n;
-
     };
 
 
