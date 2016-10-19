@@ -68,7 +68,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         ks_file = JSON.parse(ks_file);
 
-        $scope.d.ks.data = ks_file;
+        $scope.d.ks.source = ks_file;
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
     };
 
