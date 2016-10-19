@@ -579,15 +579,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Load from files
 
-        if ($scope.d.ks.app.calculations.selected === 'tmt_klinikstichprobe') {
+        if (identifier === 'ch.suedhang.user.apps.tmt') {
             var ks_file = include_as_js_string(
                 ks20161018.js)
 
-            console.log('(✓) loadKS 1: ', identifier, ks_file);
-
             ks_file = JSON.parse(ks_file);
-            console.log('(✓) loadKS 2: ', identifier, ks_file);
-
 
             $scope.d.ks.ks_versions.versions.all.push(ks_file);
             console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
