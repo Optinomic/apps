@@ -55,6 +55,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.ks = {};
+            $scope.d.ks.loaded = false;
+
             $scope.d.ks.result_explorer = {
                 "types": {
                     "all": [{
@@ -85,12 +87,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "id": 0,
                 "data": data.calculation_result.md_patient_scores,
                 "date": new Date(),
-                "dimensions": data.calculation_result.definitions.dimensions_app,
+                "dimensions": dimensions,
                 "location": {},
                 "n_scores": data.calculation_result.patient_scores.length,
                 "variables": data.calculation_result.definitions.variables_array
             };
 
+            $scope.d.ks.loaded = false;
             console.log('(DATA): getCalculation | tmt_klinikstichprobe: ', $scope.d.calculations);
             console.log('(DATA): Data-Explorer: ', $scope.d.ks.result_explorer);
 
