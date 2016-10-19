@@ -516,7 +516,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             my_data = angular.copy(data_dive);
             current_location_n = my_data.patients.length;
             current_location_n_text = 'N=' + current_location_n;
-            current_location_full = current_location_text + ' = ' + current_location_n_text;
+            current_location_full = current_location_text + '&nbsp;&nbsp;&nbsp; (' + current_location_n_text + ')';
         };
 
         var location = {
