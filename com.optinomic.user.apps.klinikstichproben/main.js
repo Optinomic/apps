@@ -496,7 +496,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeDimensions = function() {
 
-        var current_ks = $scope.d.ks.ks_versions.versions.selected;
+        var current_ks = $scope.d.ks.result_explorer.ks;
 
         var data_dive = current_ks.data;
         var current_location = [];
