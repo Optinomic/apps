@@ -127,7 +127,7 @@ include(../lib/html/optinomic/page/start.m4)
                                 </md-list>
                                 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                                     <md-button class="md-primary" ng-click="createSetPgDimensions()">
-                                        Berechnen
+                                        Weiter
                                     </md-button>
                                     <md-button ng-if="d.ks.create.changed_all_pg_dimensions" ng-click="initSetAddPG()">
                                         Alle vorhandenen Dimensionen wiederherstellen.
@@ -151,10 +151,10 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
                             <p class="md-subhead">4.) Download aller vorhanden Versionen erstellt:</p>
                             <div>
-                                <md-button ng-click="downloadKSSet()" aria-label="Herunterladen">
+                                <md-button class="md-primary" ng-click="downloadKSSet()" aria-label="Herunterladen">
                                     Alle Stichproben herunterladen
                                 </md-button>
-                                <p class="md-subhead">Speichern/Überschreiben Sie das File unter /includes.</p>
+                                <p class="md-caption" style="margin-left: 48px;">Speichern/Überschreiben Sie das File unter /includes.</p>
                             </div>
                             <div>
                                 &nbsp;
