@@ -654,9 +654,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
         });
 
+        var n_scores = 0;
+        $scope.d.ks.user_app_calc.patient_scores.forEach(function(d, psID) {
+            n_scores = n_scores + d.data.scores.length;
+        });
+
         $scope.d.ks.create.version.dimensions = dimensions_all_copy;
         $scope.d.ks.create.version.variables = $scope.d.ks.definitions.variables_array;
-        $scope.d.ks.create.version.n_scores = $scope.d.ks.user_app_calc.patient_scores.length;
+        $scope.d.ks.create.version.n_scores = n_scores;
         $scope.d.ks.create.version.data = $scope.d.ks.md.scores_all;
 
 

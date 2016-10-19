@@ -86,13 +86,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Fokus Variable
             $scope.d.ks.result_explorer.types.selected_var = data.calculation_result.definitions.variables_array[0];
 
+
+            // Anzahl Messungen bestimmen
+            var n_scores = 0;
+            data.calculation_result.patient_scores.forEach(function(d, psID) {
+                n_scores = n_scores + d.data.scores.length;
+            });
+
+
             $scope.d.ks.result_explorer.ks = {
                 "id": 0,
                 "data": data.calculation_result.md_patient_scores,
                 "date": new Date(),
                 "dimensions": dimensions,
                 "location": {},
-                "n_scores": data.calculation_result.patient_scores.length,
+                "n_scores": n_scores,
                 "variables": data.calculation_result.definitions.variables_array
             };
 
