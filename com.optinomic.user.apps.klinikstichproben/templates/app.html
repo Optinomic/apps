@@ -73,7 +73,7 @@ include(../lib/html/optinomic/page/start.m4)
                             <md-button class="md-accent" ng-click="createSet()" ng-disabled="false" aria-label="Hinzufügen">
                                 Hinzufügen
                             </md-button>
-                            <md-button ng-click="downloadKSSet()" aria-label="Herunterladen">
+                            <md-button ng-click="downloadKSSet()" aria-label="Herunterladen" ng-if="d.ks.ks_versions.versions.all.length > 0">
                                 Alle Stichproben herunterladen
                             </md-button>
                         </div>
