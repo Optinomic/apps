@@ -43,13 +43,13 @@ include(../lib/html/optinomic/page/start.m4)
                                 <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.ks_versions.versions.all">
                                     <div flex="10">
                                         <md-button ng-if="d.ks.ks_versions.versions.activated !== item" class="md-icon-button" ng-click="activateSet(item)">
-                                            <i class="mdi mdi-check-circle-outline"></i>
+                                            <i class="mdi mdi-check-circle-outline" style="font-size: 36px;"></i>
                                             <md-tooltip md-direction="bottom">
                                                 Aktivieren & Herunterladen
                                             </md-tooltip>
                                         </md-button>
                                         <md-button ng-if="d.ks.ks_versions.versions.activated === item" class="md-icon-button" ng-click="activateSet(item)">
-                                            <i class="mdi mdi-check-circle"></i>
+                                            <i class="mdi mdi-check-circle" style="font-size: 36px; color:#4CAF50"></i>
                                             <md-tooltip md-direction="bottom">
                                                 Herunterladen
                                             </md-tooltip>
