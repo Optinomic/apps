@@ -102,7 +102,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 }]
             },
             "versions": {
-                "all": [],
+                "all": [
+                    include_as_js_string(
+                        ks20161018.js)
+                ],
                 "selected": [],
                 "activated": []
             }
@@ -120,6 +123,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "id": 9999
             }
         };
+
+
 
         // Patienten-Gruppen | Dimensionen
         ks.pg_dimensions = {
