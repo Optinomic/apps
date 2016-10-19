@@ -651,6 +651,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.download.source = JSON.stringify(copy_str);
 
 
+        var saveData = (function() {
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            return function(data, fileName) {
+                var json = JSON.stringify(data),
+                    blob = new Blob([json], { type: "octet/stream" }),
+                    url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            };
+        }());
+
+
         var getBlob = function() {
             var json = $scope.d.ks.copy_str;
             var my_blob = new Blob([json], { type: "application/json" });
@@ -666,6 +682,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             theBlob.url = window.URL.createObjectURL(theBlob);
             return theBlob;
         };
+
+        saveData($scope.d.ks.copy_str, 'download.json');
 
 
         $scope.d.download.blob = getBlob();
