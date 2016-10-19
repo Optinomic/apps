@@ -73,11 +73,11 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
                 <div flex>
-                    <p class="md-subhead">Scores</p>
+                    <p class="md-subhead">Scores ({{d.ks.result_explorer.ks.location.data.scores.length}})</p>
                     <pre>{{d.ks.result_explorer.ks.location.data.scores | json}}</pre>
                 </div>
                 <div flex>
-                    <p class="md-subhead">Patients</p>
+                    <p class="md-subhead">Patients ({{d.ks.result_explorer.ks.location.data.patients.length}})</p>
                     <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
                 </div>
             </div>
@@ -97,11 +97,11 @@ include(../lib/html/optinomic/page/start.m4)
                     <pre>{{d.ks.result_explorer.ks.location.data.statistics[d.ks.result_explorer.types.selected_var] | json}}</pre>
                 </div>
                 <div flex="25">
-                    <p class="md-title">Scores</p>
+                    <p class="md-title">Scores ({{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var].length}})</p>
                     <pre>{{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var] | json}}</pre>
                 </div>
                 <div flex="15">
-                    <p class="md-title">Patients</p>
+                    <p class="md-title">Patients ({{d.ks.result_explorer.ks.location.data.patients.length}})</p>
                     <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
                 </div>
             </div>
