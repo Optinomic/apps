@@ -102,10 +102,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 }]
             },
             "versions": {
-                "all": [
-                    include_as_js_string(
-                        ks20161018.js)
-                ],
+                "all": [],
                 "selected": [],
                 "activated": []
             }
@@ -579,17 +576,34 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var identifier = $scope.d.ks.app.selected.identifier;
         var identifier_name = identifier.split('.').join('_');
 
-        var promiseSaveDimensions = dataService.getAppJSON(identifier_name);
-        promiseSaveDimensions.then(function(data) {
 
-            console.log('(✓) loadKS success: ', identifier_name, data);
+        // Load from files
 
-            // Save Data
-            if (data !== null) {
-                $scope.d.ks.ks_versions.versions.all = data;
-            };
+        if ($scope.d.ks.app.calculations.selected === 'tmt_klinikstichprobe') {
+            var ks_file = include_as_js_string(
+                ks20161018.js)
 
-        });
+            ks_file = JSON.parse(ks_file);
+
+            $scope.d.ks.ks_versions.versions.all.push(ks_file);
+            console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
+
+        };
+
+
+        // Do not load from Annotations
+
+        //  var promiseSaveDimensions = dataService.getAppJSON(identifier_name);
+        //  promiseSaveDimensions.then(function(data) {
+        //  
+        //      console.log('(✓) loadKS success: ', identifier_name, data);
+        //  
+        //      // Save Data
+        //      if (data !== null) {
+        //          $scope.d.ks.ks_versions.versions.all = data;
+        //      };
+        //  
+        //  });
 
 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
