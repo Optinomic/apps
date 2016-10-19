@@ -69,7 +69,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 },
                 "ks": {}
             };
-            $scope.d.ks.result_explorer.types.selected = ks.result_explorer.types.all[1];
+            $scope.d.ks.result_explorer.types.selected = $scope.d.ks.result_explorer.types.all[1];
 
 
             // Set 'last' as Default
