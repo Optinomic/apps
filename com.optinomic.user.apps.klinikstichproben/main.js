@@ -500,6 +500,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data_dive = current_ks.data;
         var current_location = [];
         var current_location_text = "";
+        var current_location_full = "";
+        var current_location_n_text = "";
         var current_location_n = 0;
 
         current_ks.dimensions.forEach(function(current_dim, myDimID) {
@@ -515,16 +517,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var my_data = null;
         if (data_dive !== null) {
             my_data = angular.copy(data_dive);
-
-            // var current_location_n = data.scores[current_ks.dimensions[0]].length;
-            // var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
-            // current_location_text = current_location_text + ' ' + current_location_n_text;
+            current_location_n = my_data.patients.length;
+            current_location_n_text = '(N=' + current_location_n + ')';
+            current_location_full = current_location_text + ' ' + current_location_n_text;
         };
 
         var location = {
             "data": my_data,
             "path": current_location,
             "text": current_location_text,
+            "n_text": current_location_n_text,
+            "text_full": current_location_full,
             "n": current_location_n
         };
 
@@ -659,9 +662,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     delete inner_dim.pg;
                 });
             };
-
-            // Add Default-Selected | Last Entry
-            current_dim.selected = current_dim.array[current_dim.array.length - 1]
         });
 
         $scope.d.ks.create.version.dimensions = dimensions_all_copy;
@@ -751,6 +751,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
     $scope.viewSet = function(selected_set) {
+
+        // Set 'last' as Default
+        selected_set.dimensions.forEach(function(current_dim, dimID) {
+            current_dim.selected = current_dim.array[current_dim.array.length - 1];
+        });
+
 
         // Save it
         $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
