@@ -491,11 +491,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.getUserAppCalculation($scope.d.ks.app.selected.identifier, $scope.d.ks.app.calculations.selected);
     };
 
-    $scope.changeDimensions = function(current_ks) {
+    $scope.changeDimensions = function() {
+
+        var current_ks = $scope.d.ks.ks_versions.versions.selected;
 
         console.log('(Start) changeDimensions:', current_ks);
-
-        // var current_ks = $scope.d.ks.ks_versions.versions.selected;
 
         var data_dive = current_ks.data;
         var current_location = [];
@@ -529,6 +529,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         current_ks.location = location;
+        $scope.d.ks.ks_versions.versions.selected = current_ks;
 
 
         console.log('(Data) changeDimensions:', current_ks);
@@ -754,7 +755,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save it
         $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
-        $scope.d.ks.ks_versions.versions.selected = $scope.changeDimensions(angular.copy(selected_set));
+        $scope.d.ks.ks_versions.versions.selected = $scope.changeDimensions();
         console.log('(!!) explorer', $scope.d.ks.ks_versions.explorer);
 
 
