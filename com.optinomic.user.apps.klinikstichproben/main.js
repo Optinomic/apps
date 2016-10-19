@@ -535,7 +535,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         current_ks.location = location;
 
 
-        console.log('(Data) changeDimensions:', current_ks);
+        console.log('(Data) changeDimensions:', $scope.d.ks.result_explorer);
     };
 
 

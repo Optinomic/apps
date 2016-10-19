@@ -28,8 +28,8 @@
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
         <md-input-container flex ng-class="md-block">
             <label>Datenexplorer</label>
-            <md-select ng-model="d.ks.result_explorer.selected">
-                <md-option ng-repeat="item in d.ks.result_explorer.types" ng-value="item">
+            <md-select ng-model="d.ks.result_explorer.types.selected">
+                <md-option ng-repeat="item in d.ks.result_explorer.types.all" ng-value="item">
                     {{item.name}}
                 </md-option>
             </md-select>
