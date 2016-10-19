@@ -79,16 +79,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks.md.selected = {};
         ks.md.selected_info = {};
 
-        ks.result_explorer = {};
-        ks.result_explorer.types = [{
-            "id": 0,
-            "name": 'Alle Variablen'
-        }, {
-            "id": 1,
-            "name": 'Einzelne Variablen'
-        }];
-        ks.result_explorer.selected = ks.result_explorer.types[1];
-        ks.result_explorer.selected_var = null;
+        ks.result_explorer = {
+            "types": {
+                "all": [{
+                    "id": 0,
+                    "name": 'Alle Variablen'
+                }, {
+                    "id": 1,
+                    "name": 'Einzelne Variablen'
+                }],
+                "selected": null,
+                "selected_var": null
+            },
+            "ks": {}
+        };
+        ks.result_explorer.types.selected = ks.result_explorer.types.all[1];
 
         // Klinikstichproben | Sets
         ks.ks_versions = {
@@ -103,7 +108,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             },
             "versions": {
                 "all": [],
-                "selected": [],
                 "activated": []
             }
         };
@@ -177,7 +181,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.ks.dimensions_app.forEach(function(current_dim, myDimID) {
                 current_dim.selected = current_dim.array[current_dim.array.length - 1];
             });
-            $scope.d.ks.result_explorer.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
+            $scope.d.ks.result_explorer.types.selected_var = $scope.d.ks.user_app_calc.definitions.variables_array[0];
 
             $scope.d.ks.definitions = $scope.merge_obj($scope.d.ks.definitions, $scope.d.ks.user_app_calc.definitions);
             $scope.d.ks.init = true;
@@ -631,7 +635,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var fileName = identifier_name + '.json';
 
         var data = angular.copy($scope.d.ks.ks_versions.versions);
-        data.selected = [];
 
         dataService.saveData(data, fileName);
     };
@@ -745,13 +748,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         // Fokus Variable
-        $scope.d.ks.result_explorer.selected_var = selected_set.variables[0];
+        $scope.d.ks.result_explorer.types.selected_var = selected_set.variables[0];
 
 
         // Save it
-        $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
+        $scope.d.ks.result_explorer.ks = angular.copy(selected_set);
         $scope.changeDimensions();
-        console.log('(!) explorer', $scope.d.ks.ks_versions.versions.selected);
+        console.log('(!) result_explorer', $scope.d.ks.result_explorer.ks);
 
 
         // on success - push:
@@ -769,7 +772,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.ks_versions.tabs.content = explorer.name;
         $scope.d.ks.ks_versions.tabs.all.push(explorer);
 
-        console.log('(!) viewSet', $scope.d.ks.ks_versions.versions.selected);
+        console.log('(!) viewSet', $scope.d.ks.result_explorer);
     };
 
 
