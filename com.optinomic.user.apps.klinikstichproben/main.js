@@ -665,7 +665,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         copy_str.selected = [];
 
         $scope.d.ks.copy_str = JSON.stringify($scope.copy_str);
-        $scope.d.ks.copy_str_strip = JSON.stringify(stripClone($scope.copy_str));
+        $scope.d.ks.copy_str_strip = JSON.stringify($scope.stripClone($scope.copy_str));
 
 
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
