@@ -581,11 +581,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if (identifier === 'ch.suedhang.user.apps.tmt') {
             var ks_file = include_as_js_string(
-                ks20161018.js)
+                ch_suedhang_user_apps_tmt.json)
 
             ks_file = JSON.parse(ks_file);
 
-            $scope.d.ks.ks_versions.versions.all.push(ks_file);
+            $scope.d.ks.ks_versions.versions.all = ks_file;
             console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
 
         };
@@ -737,6 +737,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "disabled": false,
             "tab_index": 2
         };
+
+
+        //  Sugus
+
 
         if ($scope.d.ks.ks_versions.tabs.all.length > 2) {
             $scope.d.ks.ks_versions.tabs.all.splice(2, 1);
