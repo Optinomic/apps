@@ -639,7 +639,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // In Formular setzen
-        document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
+        // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
 
         // Unter Annotations speichern.
         // $scope.saveKS();
