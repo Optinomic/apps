@@ -637,8 +637,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.id_rearrange(sets);
 
+
+        // In Formular setzen
+        document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
+
         // Unter Annotations speichern.
-        $scope.saveKS();
+        // $scope.saveKS();
 
         console.log('(!) pushKSSet', sets);
     };

@@ -113,6 +113,11 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">1.) Berechnung erfolgreich ausgeführt.</p>
                             <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich gespeichert und erstellt.</p>
+                            <form name="Testform">
+                                <textarea name="Textfeld"></textarea>
+                                <br>
+                                <input type="button" onclick="setzen()" value="Schreibe jetzt...">
+                            </form>
                             <md-button ng-click="d.ks.ks_versions.tabs.all.splice(2, 1)">
                                 Schliessen
                             </md-button>
