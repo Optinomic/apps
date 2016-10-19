@@ -757,6 +757,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             current_dim.selected = current_dim.array[current_dim.array.length - 1];
         });
 
+        // Fokus Variable
+        $scope.d.ks.result_explorer.selected_var = selected_set.variables[0];
+
 
         // Save it
         $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);

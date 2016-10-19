@@ -37,7 +37,7 @@
         <md-input-container flex ng-class="md-block" ng-if="d.ks.result_explorer.selected.id !== 0">
             <label>Datenexplorer</label>
             <md-select ng-model="d.ks.result_explorer.selected_var">
-                <md-option ng-repeat="item in d.ks.ks_versions.versions.selected.dimensions" ng-value="item">
+                <md-option ng-repeat="item in d.ks.ks_versions.versions.selected.variables" ng-value="item">
                     {{item}}
                 </md-option>
             </md-select>
