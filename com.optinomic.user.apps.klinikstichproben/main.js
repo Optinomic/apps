@@ -645,10 +645,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         copy_str.selected = [];
 
         $scope.d.ks.copy_str = JSON.stringify(copy_str);
-        $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain.apps.current);
+        $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain);
 
 
-        $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
 
 
         console.log('(?) copy_str: ', $scope.d.ks.copy_str);
@@ -658,6 +657,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Unter Annotations speichern.
         // $scope.saveKS();
+
+        $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
 
         console.log('(!) pushKSSet', sets);
     };
