@@ -645,6 +645,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         copy_str.selected = [];
 
         $scope.d.ks.copy_str = JSON.stringify(copy_str);
+        $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain.apps.current);
 
 
         $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
