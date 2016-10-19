@@ -670,6 +670,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.download.blob = getBlob();
         $scope.d.download.file = blobToFile(getBlob(), 'download.json');
+
+        $scope.d.download.new_file = new File(getBlob(), 'download2.json');
         console.log('(?) download: ', $scope.d.download);
 
 
