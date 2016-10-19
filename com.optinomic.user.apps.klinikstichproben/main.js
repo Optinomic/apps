@@ -526,7 +526,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         current_ks.md_data = data;
         current_ks.location_path = current_location;
-        current_ks.location_text = location_text;
+        current_ks.location_text = current_location_text;
 
 
         console.log('(Data) changeDimensions:', current_ks);
