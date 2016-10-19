@@ -610,7 +610,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.downloadKSSet = function() {
 
+        var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '.json';
+
+        var data = angular.copy($scope.d.ks.ks_versions.versions.all);
+
+        dataService.saveData(sets, fileName);
+
+    };
 
     $scope.pushKSSet = function() {
 
@@ -637,66 +647,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         sets.push($scope.d.ks.create.version);
-
         $scope.id_rearrange(sets);
 
-
-        // Download Stuff
-
-        $scope.d.download = {};
-
-        var copy_str = angular.copy($scope.d.ks.ks_versions.versions);
-        copy_str.selected = [];
-
-        $scope.d.download.source = JSON.stringify(copy_str);
-
-
-        var saveData = (function() {
-            var a = document.createElement("a");
-            document.body.appendChild(a);
-            a.style = "display: none";
-            return function(data, fileName) {
-                var json = JSON.stringify(data),
-                    blob = new Blob([json], { type: "octet/stream" }),
-                    url = window.URL.createObjectURL(blob);
-                a.href = url;
-                a.download = fileName;
-                a.click();
-                window.URL.revokeObjectURL(url);
-            };
-        }());
-
-
-        var getBlob = function() {
-            var json = $scope.d.ks.copy_str;
-            var my_blob = new Blob([json], { type: "application/json" });
-            console.log('(?) getBlob: ', my_blob);
-
-            return my_blob;
-        };
-
-        var blobToFile = function(theBlob, fileName) {
-            //A Blob() is almost a File() - it's just missing the two properties below which we will add
-            theBlob.lastModifiedDate = new Date();
-            theBlob.name = fileName;
-            theBlob.url = window.URL.createObjectURL(theBlob);
-            return theBlob;
-        };
-
-        dataService.saveData(sets, 'download.json');
-
-
-        $scope.d.download.blob = getBlob();
-        $scope.d.download.file = blobToFile(getBlob(), 'download.json');
-
-        // $scope.d.download.new_file = new File(getBlob(), 'download2.json');
-        console.log('(?) download: ', $scope.d.download);
-
-
-        // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
-
-        // Unter Annotations speichern.
-        // $scope.saveKS();
+        $scope.d.ks.ks_versions.versions.all = sets;
 
         $scope.d.ks.create.step = $scope.d.ks.create.step + 1;
 

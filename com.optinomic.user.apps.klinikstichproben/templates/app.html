@@ -118,17 +118,13 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">1.) Berechnung erfolgreich ausgeführt.</p>
                             <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
-                            <p class="md-subhead">4.) Download created:</p>
+                            <p class="md-subhead">4.) Download aller vorhanden Versionen erstellt:</p>
                             <div>
-                                <my-download id="content" get-data="getBlob()" />
-                                <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str}}" download="tmt.js">Download</a>
-                                <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_pg}}" download="app.js">Download Strip</a>
+                                <md-button ng-click="downloadKSSet()">
+                                    Herunterladen
+                                </md-button>
+                                Speichern/Überschreiben Sie das File unter <pre>/includes</pre>.
                             </div>
-                            <!--
-                            <form name="Copyform">
-                                <textarea class="md-block" name="Klinikstichprobe" ng-model="d.ks.copy_str"></textarea>
-                            </form>
-                            -->
                             <md-button ng-click="d.ks.ks_versions.tabs.all.splice(2, 1)">
                                 Schliessen
                             </md-button>
