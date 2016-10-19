@@ -41,6 +41,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Run Specific Functions only when needed.
 
                 if (current_template === 'tmt_scores') {
+                    $scope.loadKS();
                     $scope.getCalculation();
                 };
 
@@ -56,6 +57,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
     $scope.loadMainData();
 
+
+
+    $scope.loadKS = function() {
+
+        var $scope.d.ks = {};
+
+        var ks_file = include_as_js_string(
+            ch_suedhang_user_apps_tmt_activated.json)
+
+        ks_file = JSON.parse(ks_file);
+
+        $scope.d.ks.data = ks_file;
+        console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
+    };
 
 
     $scope.setExport = function() {
