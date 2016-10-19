@@ -54,6 +54,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.calculations = data.calculation_result;
 
 
+            $scope.d.ks = {};
             $scope.d.ks.result_explorer = {
                 "types": {
                     "all": [{
