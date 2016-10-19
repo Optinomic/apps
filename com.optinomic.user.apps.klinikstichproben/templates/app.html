@@ -113,6 +113,12 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">1.) Berechnung erfolgreich ausgeführt.</p>
                             <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
+                        </div>
+                        <div ng-if="d.ks.create.step === 5">
+                            <p class="md-subhead">1.) Berechnung erfolgreich ausgeführt.</p>
+                            <p class="md-subhead">2.) Berechnung erfolgreich mit «Patienten-Gruppen | Dimensionen» erweitert.</p>
+                            <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
+                            <p class="md-subhead">4.) Download created:</p>
                             <div>
                                 <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str}}" download="tmt.json">Download</a>
                                 <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str_strip}}" download="tmt.json">Download Strip</a>
