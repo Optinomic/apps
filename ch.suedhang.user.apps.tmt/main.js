@@ -47,9 +47,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getCalculation = function() {
         $scope.d.loaded = false;
+        $scope.d.app = 'ch.suedhang.user.apps.tmt';
+        $scope.d.calculation = 'tmt_klinikstichprobe';
+
 
         // Get specific calculation
-        var call = dataService.getAppCalculationsUser('ch.suedhang.user.apps.tmt', 'tmt_klinikstichprobe');
+        var call = dataService.getAppCalculationsUser($scope.d.app, $scope.d.calculation);
 
         call.success(function(data) {
             // Save Data to $scope.d
@@ -106,7 +109,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
 
-
     $scope.changeDimensions = function() {
 
         var current_ks = $scope.d.ks.result_explorer.ks;
@@ -149,6 +151,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('(Data) changeDimensions:', $scope.d.ks.result_explorer);
+    };
+
+    $scope.saveSet = function() {
+
+        // Export - Set as a JSON-File
+        var identifier = $scope.d.app;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '_activated.json';
+
+        var data = angular.copy($scope.d.ks.result_explorer.ks);
+
+        dataService.saveData(data, fileName);
+
+        console.log('(!) saveSet', data);
     };
 
     // -------------------

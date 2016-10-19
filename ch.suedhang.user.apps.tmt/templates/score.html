@@ -1,14 +1,12 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.loaded !== true">
-    <h3 class="md-subhead">Berechne ({{d.ks.app.calculations.selected}})...</h3>
+    <h3 class="md-subhead">Berechne...</h3>
 </div>
 <div ng-if="d.loaded">
     <div>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-            <div flex>
-                <h3 class="md-headline">Klinikstichprobe</h3>
-                <p class="md-subhead">Daten-Explorer ({{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen | {{d.ks.app.calculations.selected}})</p>
-            </div>
+            <h3 flex class="md-headline">Klinikstichprobe</h3>
+            <p class="md-subhead">Daten-Explorer | {{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen @ {{$scope.d.app}}, {{$scope.d.calculation}}</p>
         </div>
     </div>
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
@@ -103,6 +101,11 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead">{{d.ks.result_explorer.ks.location.text}}</p>
             <p class="flow-text">&nbsp;</p>
         </md-content>
+    </div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button class="md-accent" ng-click="saveSet()" aria-label="Herunterladen">
+            Stichprobe herunterladen
+        </md-button>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
