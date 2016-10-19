@@ -581,7 +581,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if ($scope.d.ks.app.calculations.selected === 'tmt_klinikstichprobe') {
             var ks_file = include_as_js_string(
-                ks20161018.js)
+                ks20161018.json)
 
             ks_file = JSON.parse(ks_file);
 
