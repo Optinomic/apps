@@ -16,11 +16,12 @@
         </md-select>
     </md-input-container>
 </div>
-<div ng-if="d.ks.ks_versions.versions.selected.location.data">
+<div ng-if="d.ks.ks_versions.versions.selected.location.data !== null">
     <div class="grid-border-top" style="margin-top: 30px;">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>
                 <h3 class="md-headline">Daten-Explorer</h3>
+                <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text}}</p>
             </div>
         </div>
     </div>
@@ -93,7 +94,7 @@
     </div>
     -->
 </div>
-<div ng-if="d.ks.ks_versions.versions.selected.location.data">
+<div ng-if="d.ks.ks_versions.versions.selected.location.data === null">
     <md-content class="md-padding">
         <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> Keine Daten</h1>
         <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text}}</p>

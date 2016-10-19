@@ -533,7 +533,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('(Data) changeDimensions:', current_ks);
-        return current_ks;
 
 
         //$scope.d.ks.md.selected = angular.copy(data_dive);
@@ -755,8 +754,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save it
         $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
-        $scope.d.ks.ks_versions.versions.selected = $scope.changeDimensions();
-        console.log('(!!) explorer', $scope.d.ks.ks_versions.explorer);
+        $scope.changeDimensions();
+        console.log('(!) explorer', $scope.d.ks.ks_versions.versions.selected);
 
 
         // on success - push:
