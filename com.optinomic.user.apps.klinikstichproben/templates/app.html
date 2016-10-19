@@ -43,21 +43,21 @@ include(../lib/html/optinomic/page/start.m4)
                                 <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.ks_versions.versions.all">
                                     <div flex="10">
                                         <md-button ng-if="d.ks.ks_versions.versions.activated !== item" class="md-icon-button" ng-click="activateSet(item)">
-                                            <i class="mdi mdi-check-circle-outline" style="font-size: 36px;"></i>
+                                            <i class="mdi mdi-check-circle-outline" style="font-size: 24px;"></i>
                                             <md-tooltip md-direction="bottom">
                                                 Aktivieren & Herunterladen
                                             </md-tooltip>
                                         </md-button>
                                         <md-button ng-if="d.ks.ks_versions.versions.activated === item" class="md-icon-button" ng-click="activateSet(item)">
-                                            <i class="mdi mdi-check-circle" style="font-size: 36px; color:#4CAF50"></i>
+                                            <i class="mdi mdi-check-circle" style="font-size: 24px; color:#4CAF50"></i>
                                             <md-tooltip md-direction="bottom">
                                                 Herunterladen
                                             </md-tooltip>
                                         </md-button>
                                     </div>
                                     <div flex class="md-list-item-text">
-                                        <h3>{{item.date | date}}</h3>
-                                        <p>{{item.n_scores}} Messungen in {{item.dimensions.length}} Dimensionen</p>
+                                        <h3>{{item.date | date}} | {{item.n_scores}} Messungen</h3>
+                                        <p>{{item.dimensions.length}} Dimensionen: <span ng-repeat="d in item.dimensions">«{{d.name}}» </span></p>
                                     </div>
                                     <md-button class="md-secondary" ng-click="viewSet(item)">Anzeigen</md-button>
                                 </md-list-item>
