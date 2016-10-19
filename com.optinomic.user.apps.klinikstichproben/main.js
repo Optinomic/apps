@@ -495,7 +495,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // sugus
 
-        // var current_ks = $scope.d.ks.ks_versions.versions.activated;
+        // var current_ks = $scope.d.ks.ks_versions.versions.selected;
 
         var data_dive = current_ks.data;
         var current_location = [];
@@ -522,16 +522,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        var return_obj = {
-            "md_data": data,
-            "location_path": current_location,
-            "location_text": current_location_text,
-
-        };
 
 
-        console.log('(Data) changeDimensions:', return_obj);
-        return return_obj;
+        current_ks.md_data = data;
+        current_ks.location_path = current_location;
+        current_ks.location_text = location_text;
+
+
+        console.log('(Data) changeDimensions:', current_ks);
+        return current_ks;
 
 
         //$scope.d.ks.md.selected = angular.copy(data_dive);
@@ -753,7 +752,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Save it
         $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
-        $scope.d.ks.ks_versions.explorer = $scope.changeDimensions(angular.copy(selected_set));
+        $scope.d.ks.ks_versions.versions.selected = $scope.changeDimensions(angular.copy(selected_set));
         console.log('(!!) explorer', $scope.d.ks.ks_versions.explorer);
 
 
@@ -772,7 +771,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.ks_versions.tabs.content = explorer.name;
         $scope.d.ks.ks_versions.tabs.all.push(explorer);
 
-        console.log('(!) viewSet', d.ks);
+        console.log('(!) viewSet', $scope.d.ks.ks_versions.versions.selected);
     };
 
     $scope.initSetAddPG = function() {
