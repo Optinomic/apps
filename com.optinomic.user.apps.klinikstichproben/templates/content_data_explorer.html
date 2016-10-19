@@ -21,11 +21,10 @@
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>
                 <h3 class="md-headline">Daten-Explorer</h3>
-                <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text}}</p>
+                <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text_full}}</p>
             </div>
         </div>
     </div>
-    <!---
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
         <md-input-container flex ng-class="md-block">
             <label>Datenexplorer</label>
@@ -38,7 +37,7 @@
         <md-input-container flex ng-class="md-block" ng-if="d.ks.result_explorer.selected.id !== 0">
             <label>Datenexplorer</label>
             <md-select ng-model="d.ks.result_explorer.selected_var">
-                <md-option ng-repeat="item in d.ks.user_app_calc.definitions.variables_array" ng-value="item">
+                <md-option ng-repeat="item in d.ks.ks_versions.versions.selected.dimensions" ng-value="item">
                     {{item}}
                 </md-option>
             </md-select>
@@ -53,18 +52,18 @@
             </div>
         </div>
         <p class="md-headline">Statistic</p>
-        <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
-        <pre>{{d.ks.md.selected.statistics | json}}</pre>
+        <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text_full}}</p>
+        <pre>{{d.ks.ks_versions.versions.selected.location.data.statistics | json}}</pre>
         <p class="md-headline">Scores & Patients</p>
-        <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
+        <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text_full}}</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
             <div flex>
                 <p class="md-subhead">Scores</p>
-                <pre>{{d.ks.md.selected.scores | json}}</pre>
+                <pre>{{d.ks.ks_versions.versions.selected.location.data.scores | json}}</pre>
             </div>
             <div flex>
                 <p class="md-subhead">Patients</p>
-                <pre>{{d.ks.md.selected.patients | json}}</pre>
+                <pre>{{d.ks.ks_versions.versions.selected.location.data.patients | json}}</pre>
             </div>
         </div>
     </div>
@@ -80,19 +79,18 @@
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
             <div flex="60">
                 <p class="md-title">Statistic</p>
-                <pre>{{d.ks.md.selected.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
+                <pre>{{d.ks.ks_versions.versions.selected.location.data.statistics[d.ks.result_explorer.selected_var] | json}}</pre>
             </div>
             <div flex="25">
                 <p class="md-title">Scores</p>
-                <pre>{{d.ks.md.selected.scores[d.ks.result_explorer.selected_var] | json}}</pre>
+                <pre>{{d.ks.ks_versions.versions.selected.location.data.scores[d.ks.result_explorer.selected_var] | json}}</pre>
             </div>
             <div flex="15">
                 <p class="md-title">Patients</p>
-                <pre>{{d.ks.md.selected.patients | json}}</pre>
+                <pre>{{d.ks.ks_versions.versions.selected.location.data.patients | json}}</pre>
             </div>
         </div>
     </div>
-    -->
 </div>
 <div ng-if="d.ks.ks_versions.versions.selected.location.data === null">
     <md-content class="md-padding">
