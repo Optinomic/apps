@@ -74,9 +74,8 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                     <!-- Explorer | Klinische Stichproben -->
                     <div ng-if="(d.ks.ks_versions.tabs.selectedIndex > 1) && (d.ks.ks_versions.tabs.content==='Explorer')">
-                        <h3 class="md-headline">Daten-Explorer</h3>
-                        <p class="md-subhead">Selektierte Stichprobe</p>
                         <div>
+                            include(templates/content_data_explorer.html.html)
                         </div>
                     </div>
                     <div ng-if="(d.ks.ks_versions.tabs.selectedIndex > 1) && (d.ks.ks_versions.tabs.content==='Erstellen')">
