@@ -610,13 +610,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.getBlob = function() {
-        var json = $scope.d.ks.copy_str;
-        var my_blob = new Blob([json], { type: "application/json" });
-        console.log('(?) getBlob: ', my_blob);
 
-        return my_blob;
-    };
 
     $scope.pushKSSet = function() {
 
@@ -647,22 +641,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.id_rearrange(sets);
 
 
-        // In Formular setzen
+        // Download Stuff
+
+        $scope.d.download = {};
 
         var copy_str = angular.copy($scope.d.ks.ks_versions.versions);
         copy_str.selected = [];
 
-        $scope.d.ks.download_json = copy_str;
-
-        $scope.d.ks.copy_str = JSON.stringify(copy_str);
+        $scope.d.download.source = JSON.stringify(copy_str);
 
 
-        $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain);
+        var getBlob = function() {
+            var json = $scope.d.ks.copy_str;
+            var my_blob = new Blob([json], { type: "application/json" });
+            console.log('(?) getBlob: ', my_blob);
+
+            return my_blob;
+        };
+
+        var blobToFile = function(theBlob, fileName) {
+            //A Blob() is almost a File() - it's just missing the two properties below which we will add
+            theBlob.lastModifiedDate = new Date();
+            theBlob.name = fileName;
+            return theBlob;
+        };
 
 
-
-
-        // console.log('(?) copy_str: ', $scope.d.ks.copy_str);
+        $scope.d.download.blob = getBlob();
+        $scope.d.download.file = blobToFile(getBlob(), 'download.json');
+        console.log('(?) download: ', $scope.d.download);
 
 
         // document.forms.Copyform.Textfeld.value = $scope.d.ks.create.version;
