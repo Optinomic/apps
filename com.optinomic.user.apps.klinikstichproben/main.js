@@ -680,6 +680,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Save it
         $scope.d.ks.ks_versions.versions.activated = selected_set;
 
+
+        var identifier = $scope.d.ks.app.selected.identifier;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '_activated.json';
+
+        var data = angular.copy(selected_set);
+
+        dataService.saveData(data, fileName);
+
+
         console.log('(!) activateSet', $scope.d.ks.ks_versions);
     };
 
