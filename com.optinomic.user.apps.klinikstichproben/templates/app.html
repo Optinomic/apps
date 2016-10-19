@@ -42,15 +42,18 @@ include(../lib/html/optinomic/page/start.m4)
                             <md-list>
                                 <md-list-item layout="row" layout-align="space-between end" class="md-2-line grid-border-top" ng-repeat="item in d.ks.ks_versions.versions.all">
                                     <div flex="10">
-                                        <md-button ng-if="d.ks.ks_versions.versions.activated !== item" class="md-secondary md-icon-button" ng-click="activateSet(item)">
+                                        <md-button ng-if="d.ks.ks_versions.versions.activated !== item" class="md-icon-button" ng-click="activateSet(item)">
                                             <i class="mdi mdi-check-circle-outline"></i>
                                             <md-tooltip md-direction="bottom">
                                                 Aktivieren & Herunterladen
                                             </md-tooltip>
                                         </md-button>
-                                        <div ng-if="d.ks.ks_versions.versions.activated === item">
+                                        <md-button ng-if="d.ks.ks_versions.versions.activated === item" class="md-icon-button" ng-click="activateSet(item)">
                                             <i class="mdi mdi-check-circle"></i>
-                                        </div>
+                                            <md-tooltip md-direction="bottom">
+                                                Herunterladen
+                                            </md-tooltip>
+                                        </md-button>
                                     </div>
                                     <div flex class="md-list-item-text">
                                         <h3>{{item.date | date}}</h3>
@@ -102,9 +105,24 @@ include(../lib/html/optinomic/page/start.m4)
                                                 <span ng-repeat="d in item.array">«{{d.text}}» </span>
                                             </p>
                                         </div>
-                                        <md-button class="md-secondary" ng-click="createSetDownPG($index)" ng-if="$index !== d.ks.create.pg_dimensions.length-1">Down</md-button>
-                                        <md-button class="md-secondary" ng-click="createSetUpPG($index)" ng-if="$index !== 0">Up</md-button>
-                                        <md-button class="md-secondary" ng-click="createSetRemovePG($index)">D</md-button>
+                                        <md-button class="md-icon-button" ng-click="createSetDownPG($index)" ng-if="$index !== d.ks.create.pg_dimensions.length-1">
+                                            <i class="mdi mdi-arrow-down"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                Reihenfolge: Down
+                                            </md-tooltip>
+                                        </md-button>
+                                        <md-button class="md-icon-button" ng-click="createSetUpPG($index)" ng-if="$index !== 0">
+                                            <i class="mdi mdi-arrow-up"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                Reihenfolge: Up
+                                            </md-tooltip>
+                                        </md-button>
+                                        <md-button class="md-secondary md-icon-button" ng-click="createSetRemovePG($index)">
+                                            <i class="mdi mdi-delete"></i>
+                                            <md-tooltip md-direction="bottom">
+                                                Löschen
+                                            </md-tooltip>
+                                        </md-button>
                                     </md-list-item>
                                 </md-list>
                                 <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
@@ -133,8 +151,8 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
                             <p class="md-subhead">4.) Download aller vorhanden Versionen erstellt:</p>
                             <div>
-                                <md-button ng-click="downloadKSSet()">
-                                    Herunterladen
+                                <md-button ng-click="downloadKSSet()" aria-label="Herunterladen">
+                                    Alle Stichproben herunterladen
                                 </md-button>
                                 <p class="md-subhead">Speichern/Überschreiben Sie das File unter /includes.</p>
                             </div>
