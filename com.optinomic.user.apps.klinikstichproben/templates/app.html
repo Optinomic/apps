@@ -59,6 +59,12 @@ include(../lib/html/optinomic/page/start.m4)
                                         <h3>{{item.date | date}} | {{item.n_scores}} Messungen</h3>
                                         <p>{{item.dimensions.length}} Dimensionen: <span ng-repeat="d in item.dimensions">«{{d.name}}» </span></p>
                                     </div>
+                                    <md-button class="md-secondary md-icon-button" ng-click="deleteSet($index)">
+                                        <i class="mdi mdi-delete"></i>
+                                        <md-tooltip md-direction="bottom">
+                                            Löschen
+                                        </md-tooltip>
+                                    </md-button>
                                     <md-button class="md-secondary" ng-click="viewSet(item)">Anzeigen</md-button>
                                 </md-list-item>
                             </md-list>

@@ -785,6 +785,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) viewSet', $scope.d.ks.ks_versions.versions.selected);
     };
 
+
+    $scope.deleteSet = function(remove_id) {
+        var array = $scope.d.ks.ks_versions.versions.all;
+        array.splice(remove_id, 1);
+        $scope.id_rearrange(array);
+
+        console.log('(!) deleteSet', array);
+    };
+
     $scope.initSetAddPG = function() {
         $scope.d.ks.create.changed_all_pg_dimensions = false;
         $scope.d.ks.create.pg_dimensions = angular.copy(d.ks.pg_dimensions.dimensions.all);
