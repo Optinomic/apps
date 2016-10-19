@@ -499,7 +499,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var data_dive = current_ks.data;
         var current_location = [];
-        var current_location_text = ""
+        var current_location_text = "";
+        var current_location_n = 0;
 
         current_ks.dimensions.forEach(function(current_dim, myDimID) {
             current_location.push(current_dim.selected.id);
@@ -521,12 +522,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var data = null;
         };
 
+        var location = {
+            "data": data,
+            "path": current_location,
+            "text": current_location_text,
+            "n": current_location_n
+        };
 
-
-
-        current_ks.md_data = data;
-        current_ks.location_path = current_location;
-        current_ks.location_text = current_location_text;
+        current_ks.location = location;
 
 
         console.log('(Data) changeDimensions:', current_ks);
