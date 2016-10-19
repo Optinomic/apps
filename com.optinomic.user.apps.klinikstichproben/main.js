@@ -609,15 +609,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) saveDimensions', $scope.d.ks.pg_dimensions.dimensions.all);
     };
 
-    $scope.saveJSON = function() {
-        var toJSON = '';
-        toJSON = JSON.stringify($scope.d.ks.download_json);
-        var blob = new Blob([toJSON], { type: "application/json;charset=utf-8;" });
-        var downloadLink = angular.element('<a></a>');
-        downloadLink.attr('href', window.URL.createObjectURL(blob));
-        downloadLink.attr('download', 'fileName.json');
-        downloadLink[0].click();
-    };
+
 
     $scope.pushKSSet = function() {
 
@@ -656,6 +648,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.download_json = copy_str;
 
         $scope.d.ks.copy_str = JSON.stringify(copy_str);
+
+        $scope.d.ks.blob = new Blob([JSON.stringify(copy_str)], { type: "application/json" });
+        console.log('(?) blob: ', $scope.d.ks.blob);
+
+
+
         $scope.d.ks.copy_pg = JSON.stringify($scope.d.dataMain);
 
 
