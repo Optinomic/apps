@@ -24,6 +24,7 @@
             </div>
         </div>
     </div>
+    <!---
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
         <md-input-container flex ng-class="md-block">
             <label>Datenexplorer</label>
@@ -90,11 +91,12 @@
             </div>
         </div>
     </div>
+    -->
 </div>
-<div ng-if="!d.ks.ks_versions.versions.selected.location.data">
+<div ng-if="d.ks.ks_versions.versions.selected.location.data">
     <md-content class="md-padding">
         <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> Keine Daten</h1>
-        <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
+        <p class="md-subhead">{{d.ks.ks_versions.versions.selected.location.text}}</p>
         <p class="flow-text">&nbsp;</p>
     </md-content>
 </div>

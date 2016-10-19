@@ -493,7 +493,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeDimensions = function(current_ks) {
 
-        // sugus
+        console.log('(Start) changeDimensions:', current_ks);
 
         // var current_ks = $scope.d.ks.ks_versions.versions.selected;
 
@@ -512,18 +512,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
 
+        var my_data = null;
         if (data_dive !== null) {
-            var data = angular.copy(data_dive);
+            my_data = angular.copy(data_dive);
 
-            // var current_location_n = data.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
+            // var current_location_n = data.scores[current_ks.dimensions[0]].length;
             // var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
             // current_location_text = current_location_text + ' ' + current_location_n_text;
-        } else {
-            var data = null;
         };
 
         var location = {
-            "data": data,
+            "data": my_data,
             "path": current_location,
             "text": current_location_text,
             "n": current_location_n
