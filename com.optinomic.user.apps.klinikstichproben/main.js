@@ -611,7 +611,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.saveJSON = function() {
         $scope.toJSON = '';
-        $scope.toJSON = angular.toJson($scope.d.ks.download_json);
+        $scope.toJSON = JSON.stringify($scope.d.ks.download_json);
         var blob = new Blob([$scope.toJSON], { type: "application/json;charset=utf-8;" });
         var downloadLink = angular.element('<a></a>');
         downloadLink.attr('href', window.URL.createObjectURL(blob));
