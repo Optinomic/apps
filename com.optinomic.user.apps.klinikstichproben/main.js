@@ -663,6 +663,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //A Blob() is almost a File() - it's just missing the two properties below which we will add
             theBlob.lastModifiedDate = new Date();
             theBlob.name = fileName;
+            theBlob.url = window.URL.createObjectURL(theBlob);
             return theBlob;
         };
 
