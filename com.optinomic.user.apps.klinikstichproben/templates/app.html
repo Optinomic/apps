@@ -120,6 +120,7 @@ include(../lib/html/optinomic/page/start.m4)
                             <p class="md-subhead">3.) Klinikstichprobe erfolgreich erstellt.</p>
                             <p class="md-subhead">4.) Download created:</p>
                             <div>
+                                <a class="btn" ng-click="saveJSON()" ng-href="{{ url }}">Export to JSON</a>
                                 <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_str}}" download="tmt.js">Download</a>
                                 <a ng-href="data:text/json;charset=utf-8,{{d.ks.copy_pg}}" download="app.js">Download Strip</a>
                             </div>
