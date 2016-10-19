@@ -683,7 +683,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             return theBlob;
         };
 
-        saveData($scope.d.ks.copy_str, 'download.json');
+        saveData(sets, 'download.json');
 
 
         $scope.d.download.blob = getBlob();
