@@ -491,13 +491,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.getUserAppCalculation($scope.d.ks.app.selected.identifier, $scope.d.ks.app.calculations.selected);
     };
 
-    $scope.changeDimenstions = function() {
+    $scope.changeDimensions = function(current_ks) {
 
-        var data_dive = $scope.d.ks.md.scores_all;
+        // sugus
+
+        // var current_ks = $scope.d.ks.ks_versions.versions.activated;
+
+        var data_dive = current_ks.data;
         var current_location = [];
         var current_location_text = ""
 
-        $scope.d.ks.dimensions_all.forEach(function(current_dim, myDimID) {
+        current_ks.dimensions.forEach(function(current_dim, myDimID) {
             current_location.push(current_dim.selected.id);
             if (current_location_text !== "") {
                 current_location_text = current_location_text + ' | '
@@ -506,18 +510,37 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             data_dive = data_dive[current_dim.selected.id];
         });
 
-        $scope.d.ks.md.selected = angular.copy(data_dive);
-        $scope.d.ks.md.selected_info.current_location_path = current_location;
 
         if (data_dive !== null) {
-            var current_location_n = $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
-            var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
-            current_location_text = current_location_text + ' ' + current_location_n_text;
-        };
-        $scope.d.ks.md.selected_info.current_location_text = current_location_text;
-        $scope.d.ks.md.selected_info.current_location_n = current_location_n;
+            var data = angular.copy(data_dive);
 
-        console.log('(Data) MD:', current_location, $scope.d.ks.md.selected);
+            // var current_location_n = data.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length;
+            // var current_location_n_text = '(N=' + $scope.d.ks.md.selected.scores[$scope.d.ks.user_app_calc.definitions.variables_array[0]].length + ')';
+            // current_location_text = current_location_text + ' ' + current_location_n_text;
+        } else {
+            var data = null;
+        };
+
+
+        var return_obj = {
+            "md_data": data,
+            "location_path": current_location,
+            "location_text": current_location_text,
+
+        };
+
+
+        console.log('(Data) changeDimensions:', return_obj);
+        return return_obj;
+
+
+        //$scope.d.ks.md.selected = angular.copy(data_dive);
+        //$scope.d.ks.md.selected_info.current_location_path = current_location;
+
+
+        //$scope.d.ks.md.selected_info.current_location_text = current_location_text;
+        //$scope.d.ks.md.selected_info.current_location_n = current_location_n;
+
     };
 
 
@@ -729,7 +752,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.viewSet = function(selected_set) {
 
         // Save it
-        $scope.d.ks.ks_versions.versions.selected = selected_set;
+        $scope.d.ks.ks_versions.versions.selected = angular.copy(selected_set);
+        $scope.d.ks.ks_versions.explorer = $scope.changeDimensions(angular.copy(selected_set));
+        console.log('(!!) explorer', $scope.d.ks.ks_versions.explorer);
+
 
         // on success - push:
         var explorer = {
@@ -737,9 +763,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "disabled": false,
             "tab_index": 2
         };
-
-
-        //  Sugus
 
 
         if ($scope.d.ks.ks_versions.tabs.all.length > 2) {
