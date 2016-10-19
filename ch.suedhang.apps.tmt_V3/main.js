@@ -61,7 +61,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.loadKS = function() {
 
-        var $scope.d.ks = {};
+        $scope.d.ks = {};
 
         var ks_file = include_as_js_string(
             ch_suedhang_user_apps_tmt_activated.json)
