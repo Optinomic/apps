@@ -4,13 +4,14 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div ng-if="d.loaded">
     <div>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-            <h3 flex class="md-headline">Daten-Explorer: Klinikstichprobe</h3>
+        <h3 flex class="md-headline">Klinikstichprobe</h3>
+    </div>
+    <div>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <h3 flex class="md-subhead">{{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen</h3>
             <div>
-                <p class="md-subhead">{{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen</p>
-                <p class="md-caption">{{d.app}}, {{d.calculation}}</p>
+                <p class="md-caption" style="color:#BDBDBD">{{d.app}}, {{d.calculation}}</p>
             </div>
-            <p>&nbsp;</p>
         </div>
     </div>
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
@@ -27,15 +28,17 @@ include(../lib/html/optinomic/page/start.m4)
         <div class="grid-border-top" style="margin-top: 30px;">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
                 <div flex>
-                    <h3 class="md-headline">Daten-Explorer</h3>
+                    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                        <h3 flex class="md-headline">Daten-Explorer</h3>
+                        <div>
+                            <md-button class="md-primary" ng-click="saveSet()" aria-label="Herunterladen">
+                                Stichprobe herunterladen
+                            </md-button>
+                        </div>
+                    </div>
                     <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
                 </div>
             </div>
-        </div>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
-            <md-button class="md-primary" ng-click="saveSet()" aria-label="Herunterladen">
-                Stichprobe herunterladen
-            </md-button>
         </div>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <md-input-container flex ng-class="md-block">
