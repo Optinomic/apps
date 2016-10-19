@@ -58,6 +58,9 @@ function main(responses) {
     }, {
         "id": 10,
         "text": "85 – 89"
+    }, {
+        "id": 11,
+        "text": "Jedes Alter"
     }];
 
 
@@ -190,6 +193,8 @@ function main(responses) {
 
             if (dIndex === 0) {
                 cd.dimensions.push(given_age_group);
+                // Jedes Alter
+                cd.dimensions.push(11);
             };
 
             if (dIndex === 1) {
