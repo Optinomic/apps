@@ -33,16 +33,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            // console.log(' - (Calculation): tmt_scores: ', $scope.d.dataMain.calculations[1].calculation_results);
 
-            $scope.d.init = true;
         });
     };
     $scope.loadMainData();
 
 
     // -----------------------------------
-    // Calculations
+    // Klinikstichprobe
     // -----------------------------------
 
     $scope.getCalculation = function() {
@@ -166,40 +164,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('(!) saveSet', data);
     };
-
-    // -------------------
-    // TMT Init
-    // -------------------
-    $scope.tmt_init = function() {
-
-        // Simulate responses from 'calculation'
-        // var d = $scope.d.dataMain.calculations[0].calculation_results.full;
-        var pg = $scope.d.dataMain.patient_groups;
-
-        // Calculate stuff
-        // var patient_scores = $scope.getPatientScores(d);
-        // var age_edu_obj = $scope.getAgeEduObj()
-        // var age_edu_scores = $scope.arrangePatientScoresAgeEdu(patient_scores);
-        // var age_edu_statistics = $scope.setAgeEduStatistics(age_edu_scores);
-
-
-        // var group_scores = $scope.getPatientGroupScores(patient_scores, pg);
-
-        // Safe
-        $scope.d.tmt = {};
-        // $scope.d.tmt.patient_scores = patient_scores;
-        // $scope.d.tmt.age_edu_obj = age_edu_obj;
-        // $scope.d.tmt.age_edu_scores = age_edu_scores;
-        // $scope.d.tmt.age_edu_statistics = age_edu_statistics;
-
-
-        // $scope.d.tmt.group_scores = group_scores;
-
-        console.log('TMT', $scope.d.tmt);
-
-    };
-
-
 
 
 });
