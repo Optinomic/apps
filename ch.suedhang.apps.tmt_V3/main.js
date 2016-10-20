@@ -232,8 +232,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_A;
                     messung_obj.zscore.marker_1_score = zeitabbruch_A;
-                    messung_obj.clinicsample_start = md_data.data.statistics['TMTAZ'].mean_1sd_min;
-                    messung_obj.clinicsample_end = md_data.data.statistics['TMTAZ'].mean_1sd_plus;
+                    messung_obj.zscore.clinicsample_start = md_data.data.statistics['TMTAZ'].mean_1sd_min;
+                    messung_obj.zscore.clinicsample_end = md_data.data.statistics['TMTAZ'].mean_1sd_plus;
 
                     group.data.push(messung_obj);
                 };
@@ -242,8 +242,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_B;
                     messung_obj.zscore.marker_1_score = zeitabbruch_B;
-                    messung_obj.clinicsample_start = md_data.data.statistics['TMTBZ'].mean_1sd_min;
-                    messung_obj.clinicsample_end = md_data.data.statistics['TMTBZ'].mean_1sd_plus;
+                    messung_obj.zscore.clinicsample_start = md_data.data.statistics['TMTBZ'].mean_1sd_min;
+                    messung_obj.zscore.clinicsample_end = md_data.data.statistics['TMTBZ'].mean_1sd_plus;
 
                     group.data.push(messung_obj);
                 };
