@@ -312,7 +312,7 @@
                 setVisualScore(vscore + 1);
 
 
-            console.log('update - 1', actions.length, actions);
+            // console.log('update - 1', actions.length, actions);
 
             // handle(actions.shift());
 
@@ -331,7 +331,7 @@
 
 
             handle(current_action);
-            console.log('update - 2', actions.length, actions);
+            // console.log('update - 2', actions.length, actions);
 
 
             dt = dt + idt;
@@ -343,7 +343,7 @@
     };
 
     function handle(action) {
-        console.log('handle: ', action);
+        // console.log('handle: ', action);
 
         switch (action) {
             case DIR.LEFT:
