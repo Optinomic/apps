@@ -106,7 +106,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var location = {
             "data": my_data,
-            "path": current_location,
+            "path": location_array,
             "text": current_location_text,
             "n_text": current_location_n_text,
             "text_full": current_location_full,
