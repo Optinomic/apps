@@ -111,7 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "n": current_location_n
         };
 
-        return location;
+        return angular.copy(location);
     };
 
 
