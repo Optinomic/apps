@@ -198,6 +198,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             });
             var md_data = $scope.getKSLocation(dimensions_path);
+            console.log('(!) md_data', dimensions_path, md_data);
 
 
             // Resultate in Gruppen schreiben
@@ -226,35 +227,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
                 if (group.name === 'TMT A') {
+                    messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_A;
                     messung_obj.zscore.marker_1_score = zeitabbruch_A;
-                    // mean_1sd_min
-                    // mean_1sd_plus
+                    messung_obj.clinicsample_start = md_data.data.statistics['TMTAZ'].mean_1sd_min;
+                    messung_obj.clinicsample_end = md_data.data.statistics['TMTAZ'].mean_1sd_plus;
 
                     group.data.push(messung_obj);
                 };
 
                 if (group.name === 'TMT B') {
+                    messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_B;
                     messung_obj.zscore.marker_1_score = zeitabbruch_B;
+                    messung_obj.clinicsample_start = md_data.data.statistics['TMTBZ'].mean_1sd_min;
+                    messung_obj.clinicsample_end = md_data.data.statistics['TMTBZ'].mean_1sd_plus;
 
                     group.data.push(messung_obj);
                 };
-
-
             });
-
-
-
-            console.log('(?) messung', messung);
-
-
-
         });
-
-
-
-
 
     };
 
