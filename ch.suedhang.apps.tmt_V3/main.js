@@ -29,9 +29,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
             var current_template = $scope.d.dataMain.params.location.viewname;
 
-            // Run Public-Functions:
-            // $scope.d.functions.getAllCalculations();
-
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
@@ -68,34 +65,198 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         ks_file = JSON.parse(ks_file);
 
-        $scope.d.ks.source = ks_file;
+        $scope.d.ks = ks_file;
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
+
+        // Follow the white rabbit
+        $scope.initTMT();
     };
 
 
-    $scope.setExport = function() {
+    $scope.getKSLocation = function(location_array) {
 
-        // ------------------------------------------------
-        // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
-        // => (export.sql) muss sich in /includes befinden
-        // ------------------------------------------------
+        var current_ks = angular.copy($scope.d.ks);
+
+        var data_dive = current_ks.data;
+        var current_location = [];
+        var current_location_text = "";
+        var current_location_full = "";
+        var current_location_n_text = "";
+        var current_location_n = 0;
+
+        current_ks.dimensions.forEach(function(current_dim, myDimID) {
+            current_location.push(current_dim.selected.id);
+            if (current_location_text !== "") {
+                current_location_text = current_location_text + ' | '
+            };
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.selected.text
+            data_dive = data_dive[current_dim.selected.id];
+        });
 
 
-        // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var module_packages = [];
-        var data_query = {};
-
-        data_query = {
-            name: 'WHQOL-Example (with stay)',
-            sql: include_as_js_string(
-                export.sql)
+        var my_data = null;
+        if (data_dive !== null) {
+            my_data = angular.copy(data_dive);
+            current_location_n = my_data.patients.length;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
         };
-        module_packages.push(data_query);
 
-        // Init the given Export Settings
-        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
+        var location = {
+            "data": my_data,
+            "path": current_location,
+            "text": current_location_text,
+            "n_text": current_location_n_text,
+            "text_full": current_location_full,
+            "n": current_location_n
+        };
+
+        return location;
     };
+
+
+    $scope.initTMT = function() {
+
+        $scope.d.TMT = {};
+        $scope.d.TMT.init = false;
+
+        // Default Z-Score Option
+        $scope.d.TMT.zscore_options = {
+            "zscore_min": -3,
+            "zscore_max": 3,
+            "clinicsample_color": "#C5CAE9",
+            "centered_zero": true,
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false,
+            "show_numbers": true
+        };
+
+
+        // Toggles | Grafiken
+        $scope.d.TMT.toggles = {
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false
+        };
+
+
+        // Gruppierung der Messungen
+        $scope.d.TMT.groups = [{
+            "name": "TMT A",
+            "data": []
+        }, {
+            "name": "TMT B",
+            "data": []
+        }];
+
+        // Build 
+
+        var alle_messungen = $scope.d.dataMain.calculations[0].calculation_results;
+
+        // Loop alle_messungen und messung in TMT A / TMT B pushen
+        alle_messungen.forEach(function(messung, messungID) {
+
+            // Variablen vorbereiten | verdrahten.
+            var mz_id = messung.Messzeitpunkt.Messzeitpunkt - 1;
+            var mz_text = messung.Messzeitpunkt.Messzeitpunkt_Text;
+            var datum_messung = $filter('date')(messung.date);
+            var zeit_messung = messung.date.substring(11, 16);
+
+            var zscore_A = messung.percentile.z_scores.tmtA_z_rounded;
+            var zscore_B = messung.percentile.z_scores.tmtB_z_rounded;
+
+            var zeitabbruch_A = messung.percentile.z_scores.tmtA_z_zeitabbruch_rounded;
+            var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
+
+            var cs_color = ['#C5CAE9', '#D1C4E9', '#BBDEFB'];
+            var current_cs_color = cs_color[mz_id];
+
+
+            // Pfad für MD-Array erstellen
+            var dimensions_path = [];
+            var current_ks = angular.copy($scope.d.ks);
+            current_ks.dimensions.forEach(function(current_dim, myDimID) {
+
+                var default_last = current_dim.array.length - 1;
+                dimensions_path[myDimID] = default_last;
+
+                if (current_dim.name === "Altersgruppe") {
+                    dimensions_path[myDimID] = messung.percentile.age_perz.altersgruppe;
+                };
+
+                if (current_dim.name === "Ausbildungsgrad") {
+                    if (messung.edu_years > 12) {
+                        dimensions_path[myDimID] = 1;
+                    } else {
+                        dimensions_path[myDimID] = 0;
+                    };
+                };
+
+                if (current_dim.name === "Messzeitpunkt") {
+                    dimensions_path[myDimID] = mz_id;
+                };
+            });
+            var md_data = $scope.getKSLocation(dimensions_path);
+
+
+            // Resultate in Gruppen schreiben
+            $scope.d.TMT.groups.forEach(function(group, groupID) {
+
+                var messung = {
+                    "calculation": messung,
+                    "ks": {
+                        "data": md_data,
+                        "dimensions_path": dimensions_path;
+                    },
+                    "zscore": {
+                        "zscore": null,
+                        "zscore_color": '#C5CAE9',
+                        "text_left": mz_text,
+                        "text_left_caption": "TMT",
+                        "text_right": datum_messung,
+                        "text_right_caption": zeit_messung,
+                        "clinicsample_start": 0,
+                        "clinicsample_end": 0,
+                        "clinicsample_color": current_cs_color,
+                        "marker_1_score": null,
+                        "marker_1_text": "Zeitabbruch",
+                        "marker_1_color": "#F44336",
+                    },
+                };
+
+                if (group.name === 'TMT A') {
+                    messung.zscore.zscore = zscore_A;
+                    messung.zscore.marker_1_score = zeitabbruch_A;
+                    // mean_1sd_min
+                    // mean_1sd_plus
+
+                };
+
+                if (group.name === 'TMT B') {
+                    messung.zscore.zscore = zscore_B;
+                    messung.zscore.marker_1_score = zeitabbruch_B;
+
+
+                };
+
+            });
+
+
+
+            console.log('(?) messung', messung);
+
+
+
+        });
+
+
+
+
+
+    };
+
+
 
 
     $scope.initZScore = function() {
@@ -109,11 +270,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Toggles | Grafiken
 
+
+
         $scope.d.zScore.options = {
             "zscore_min": -3,
             "zscore_max": 3,
             "clinicsample_color": "#C5CAE9",
-            "centered_zero": false,
+            "centered_zero": true,
             "show_text": true,
             "show_clinicsample": true,
             "show_clinicsample_scores": false,
@@ -272,7 +435,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             A_messung.text_left_caption = 'TMT A';
             A_messung.text_left = current_messung.Messzeitpunkt.Messzeitpunkt_Text;
-            A_messung.text_right = mz_datum;
+            A_messung.text_right = $filter('date')(mz_datestamp);
             A_messung.text_right_caption = current_messung.date.substring(11, 16);
 
             A_messung.zscore = current_messung.percentile.z_scores.tmtA_z_rounded;
@@ -483,6 +646,30 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.setZScore();
     };
 
+
+    $scope.setExport = function() {
+
+        // ------------------------------------------------
+        // Export - Pakete definieren
+        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // => (export.sql) muss sich in /includes befinden
+        // ------------------------------------------------
+
+
+        // Hinzufügen gespeicherter SQL-Dateien in /includes
+        var module_packages = [];
+        var data_query = {};
+
+        data_query = {
+            name: 'WHQOL-Example (with stay)',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
+
+        // Init the given Export Settings
+        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
+    };
 
     // -------------------------------------------
     // Helper - Functions
