@@ -1,4 +1,5 @@
-/* (C) by Nora Schönenberger, Klinik Südhang */
+-- © by Nora Schönenberger, Klinik Südhang --
+
 
 SELECT
   patient.id AS Opti_id,
