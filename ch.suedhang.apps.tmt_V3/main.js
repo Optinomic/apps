@@ -92,7 +92,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             var current_dim = current_ks.dimensions[posID];
-            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos];
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
         });
 
 
