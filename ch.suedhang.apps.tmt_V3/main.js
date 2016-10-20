@@ -203,7 +203,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Resultate in Gruppen schreiben
             $scope.d.TMT.groups.forEach(function(group, groupID) {
 
-                var messung = {
+                var messung_obj = {
                     "calculation": messung,
                     "ks": {
                         "data": md_data,
@@ -226,19 +226,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
                 if (group.name === 'TMT A') {
-                    messung.zscore.zscore = zscore_A;
-                    messung.zscore.marker_1_score = zeitabbruch_A;
+                    messung_obj.zscore.zscore = zscore_A;
+                    messung_obj.zscore.marker_1_score = zeitabbruch_A;
                     // mean_1sd_min
                     // mean_1sd_plus
 
+                    group.data.push(messung_obj);
                 };
 
                 if (group.name === 'TMT B') {
-                    messung.zscore.zscore = zscore_B;
-                    messung.zscore.marker_1_score = zeitabbruch_B;
+                    messung_obj.zscore.zscore = zscore_B;
+                    messung_obj.zscore.marker_1_score = zeitabbruch_B;
 
-
+                    group.data.push(messung_obj);
                 };
+
 
             });
 
