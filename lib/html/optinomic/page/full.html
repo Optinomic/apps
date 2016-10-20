@@ -1,6 +1,6 @@
 <div ng-app="optinomicApp" ng-controller="MainCtrl" ng-cloak>
     <div ng-controller="AppCtrl">
-        <div ng-if="!init">
+        <div ng-if="!d.init">
             include(../lib/html/optinomic/templates/loading.html)
         </div>
         <div ng-if="d.init">
@@ -9,9 +9,9 @@
 
                     Attention:
                     copy to start.m4 until here.
-					copy to end.m4 from here.
+                    copy to end.m4 from here.
 
-					Contend
+                    Contend
 
                 -->
             </div>
@@ -21,4 +21,10 @@
         </div>
     </div>
 </div>
-include(../lib/js/set/angular_material_grid_chart.html)
+<div data-iframe-height>
+    &nbsp;
+</div>
+
+<head>
+    include(../lib/js/set/angular_material_grid_chart.html)
+</head>
