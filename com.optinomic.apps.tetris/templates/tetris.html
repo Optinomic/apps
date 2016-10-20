@@ -1,33 +1,19 @@
 <div>
     <table style="width:100%">
         <tr>
-            <th>
-                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-                    <div flex="30" id="menu">
-                        <p class="md-title">Score</p>
-                    </div>
-                    <div flex="70">
-                        <p class="md-title">Rows</p>
-                    </div>
-                </div>
+            <th style="width:30%">
+                <p>
+                    <canvas id="upcoming"></canvas>
+                </p>
+                <p id="start"><a href="javascript:play();">Press «Space» to Play</a></p>
+                <p class="md-subhead">Score <span id="score">00000</span></p>
+                <p class="md-subhead">Rows <span id="rows">0</span></p>
             </th>
-            <th>
+            <th style="width:70%">
                 <div id="tetris">
-                    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
-                        <div flex="30" id="menu">
-                            <p>
-                                <canvas id="upcoming"></canvas>
-                            </p>
-                            <p id="start"><a href="javascript:play();">Press «Space» to Play</a></p>
-                            <p>Score <span id="score">00000</span></p>
-                            <p>Rows <span id="rows">0</span></p>
-                        </div>
-                        <div flex="70">
-                            <canvas id="canvas">
-                                Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
-                            </canvas>
-                        </div>
-                    </div>
+                    <canvas id="canvas">
+                        Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+                    </canvas>
                 </div>
             </th>
         </tr>
