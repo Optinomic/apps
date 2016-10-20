@@ -1,7 +1,7 @@
 [module]
 id = com.optinomic.user.game.tetris
 name = Tetris
-short_description = Puzzleartiges Computerspiel.
+short_description = «Kognitive Umstellfähigkeit» oder «Puzzleartiges Computerspiel»?
 version = include(VERSION)
 type = user
 
