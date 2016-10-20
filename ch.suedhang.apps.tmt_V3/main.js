@@ -78,25 +78,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var current_ks = angular.copy($scope.d.ks);
 
         var data_dive = current_ks.data;
-        var current_location = [];
         var current_location_text = "";
         var current_location_full = "";
         var current_location_n_text = "";
         var current_location_n = 0;
 
-        current_ks.dimensions.forEach(function(current_dim, myDimID) {
-            current_location.push(current_dim.selected.id);
+
+        location_array.forEach(function(pos, posID) {
+            data_dive = data_dive[pos];
+
             if (current_location_text !== "") {
                 current_location_text = current_location_text + ' | '
             };
-            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.selected.text
-            data_dive = data_dive[current_dim.selected.id];
+
+            var current_dim = current_ks.dimensions[posID];
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos];
         });
 
 
         var my_data = null;
         if (data_dive !== null) {
-            my_data = angular.copy(data_dive);
+            my_data = data_dive;
             current_location_n = my_data.patients.length;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
