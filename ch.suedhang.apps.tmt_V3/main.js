@@ -209,8 +209,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var messung_obj = {
                     "calculation": messung,
                     "ks": {
-                        "data": md_data,
-                        "dimensions_path": dimensions_path
+                        "path_data": md_data,
+                        "path_selected": dimensions_path
                     },
                     "zscore": {
                         "zscore": null,
