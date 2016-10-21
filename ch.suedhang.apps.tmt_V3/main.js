@@ -84,7 +84,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
 
         var age = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.altersgruppe_text;
-        var mz = $scope.d.dataMain.calculations["0"].calculation_results["0"].Messzeitpunkt.Messzeitpunkt_Text;
         var edu = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.education;
 
         if (edu === 99) {
@@ -96,7 +95,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         if (edu === 1) {
             edu = '> 12 Jahre'
         };
-        $scope.d.ks.normgurppe.text = age + ', ' + mz + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
+        $scope.d.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
 
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
 

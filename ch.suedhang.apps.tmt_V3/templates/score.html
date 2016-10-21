@@ -52,7 +52,7 @@
             </p>
         </div>
     </div>
-    <p>&nbsp;</p>
+    <p class="md-caption">&nbsp;</p>
     <div ng-repeat="data in tmt.data" style="margin-top: 4px;">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
@@ -81,8 +81,8 @@
                 </md-button>
             </div>
         </div>
-        <div style="margin-left:12px;margin-right:6px;margin-top:-6px;">
-            <p class="md-caption" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span> Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
+        <div style="margin-left:6px;margin-right:12px;margin-top:-12px;">
+            <p class="md-caption" style="color:#424242;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
         </div>
         <div ng-if="data.ks.show_controls">
             <div style="margin-top: 12px;">&nbsp;</div>
@@ -97,6 +97,8 @@
                 </md-input-container>
             </div>
         </div>
-        <div class="grid-border-top" style="height: 12px;">&nbsp;</div>
+        <div class="grid-border-top">
+            <p class="md-caption">&nbsp;</p>
+        </div>
     </div>
 </div>
