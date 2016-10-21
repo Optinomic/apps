@@ -66,16 +66,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks = ks_file;
 
+
+        $scope.d.ks.normgurppe = {};
+
         $scope.d.ks.text = '';
+        $scope.d.ks.normgurppe.text = '';
         $scope.d.ks.dimensions.forEach(function(dim, dimID) {
             if ($scope.d.ks.text !== '') {
                 $scope.d.ks.text = $scope.d.ks.text + ', '
             };
             $scope.d.ks.text = $scope.d.ks.text + dim.name
+
+            if (dim.source === 'app') {
+                if ($scope.d.ks.normgurppe.text !== '') {
+                    $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + ', '
+                };
+                $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + dim.name
+            };
         });
         $scope.d.ks.text = $scope.d.ks.n_scores + ' Messungen normiert nach ' + $scope.d.ks.text;
         var datum_ks = $filter('date')($scope.d.ks.date);
         $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
+
+        $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + ' (N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+
+
 
 
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);

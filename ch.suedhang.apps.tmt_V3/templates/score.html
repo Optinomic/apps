@@ -42,16 +42,17 @@
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
-                <br> {{d.TMT.normgruppe_tmt.age_group.age_group_text}}, {{d.TMT.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.TMT.normgruppe_tmt.n}})
+                <br> {{d.ks.normgurppe.text}})
             </p>
         </div>
         <div flex>
             <p class="md-subhead">Klinikstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                {{d.ks.text}})
+                {{d.ks.text}}
             </p>
         </div>
     </div>
+    <p>&nbsp;</p>
     <div ng-repeat="data in tmt.data">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
