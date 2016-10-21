@@ -42,7 +42,7 @@
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
-                <br> {{d.ks.normgurppe.text}})
+                <br> {{d.ks.normgurppe.text}}
             </p>
         </div>
         <div flex>
@@ -54,6 +54,7 @@
     </div>
     <p>&nbsp;</p>
     <div ng-repeat="data in tmt.data">
+        <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
