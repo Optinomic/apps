@@ -179,11 +179,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // $scope.d.TMT.zscore_options anpassen
             if (Math.abs(zscore_A) > (Math.abs($scope.d.TMT.zscore_options.zscore_min) - 0.5)) {
-                $scope.d.TMT.zscore_options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
+                $scope.d.TMT.zscore_options.zscore_min = (Math.abs(zscore_A) + 1) * -1;
             };
 
             if (Math.abs(zscore_B) > (Math.abs($scope.d.TMT.zscore_options.zscore_max) - 0.5)) {
-                $scope.d.TMT.zscore_options.zscore_max = (Math.abs(A_messung.zscore) + 1);
+                $scope.d.TMT.zscore_options.zscore_max = (Math.abs(zscore_B) + 1);
             };
 
 
