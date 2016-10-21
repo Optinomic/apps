@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeitabbruch_A = messung.percentile.z_scores.tmtA_z_zeitabbruch_rounded;
             var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
 
-            var cs_color = ['#C5CAE9', '#D1C4E9', '#BBDEFB'];
+            var cs_color = ['#7986CB', '#9575CD', '#64B5F6'];
             var current_cs_color = cs_color[mz_id];
 
 
@@ -302,6 +302,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     group.data.push(messung_obj);
                 };
+
+
+                // Auffällige Testleistung |  färben
+                if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
+                    // Auffällige Testleistung: Rot
+                    messung_obj.zscore.zscore_color = '#F44336';
+                };
+                if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
+                    // Auffällige Testleistung: Rot
+                    messung_obj.zscore.zscore_color = '#F44336';
+                };
             });
         });
 
@@ -319,11 +330,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (current_sample.zscore.text_left_caption === 'TMT A') {
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
+
+
+
             };
             if (current_sample.zscore.text_left_caption === 'TMT B') {
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_plus);
             };
+
+
+            // Auffällige Testleistung |  färben
+            if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+                // Auffällige Testleistung: Rot
+                current_sample.zscore_color = '#F44336';
+            };
+            if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+                // Auffällige Testleistung: Rot
+                current_sample.zscore_color = '#F44336';
+            };
+
+
+
         } else {
             current_sample.zscore.clinicsample_start = 0;
             current_sample.zscore.clinicsample_end = 0;
