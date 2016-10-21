@@ -75,7 +75,7 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
-[survey]
+[survey1]
 id = HoNOS
 type = lime
 responsibility = lead_therapist
@@ -88,8 +88,6 @@ fid = X24X327
 min_questions =
 min_lastpage = 2
 
-
-
 [event activation]
 type = on_activation
 due_after = 259200
@@ -97,12 +95,16 @@ overdue = ignore
 description = HoNOS Fragebogen
 survey = HoNOS
 
+
 [email new_event html]
 include(emails/new_event.html)
 
 [email overdue html]
 include(emails/overdue.html)
 
+
+[sql_init]
+include(includes/create_view.sql)
 
 [calculation honos_calculation javascript]
 include(calculations/honos.js)
