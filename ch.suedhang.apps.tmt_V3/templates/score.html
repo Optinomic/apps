@@ -49,16 +49,16 @@
             <p class="md-subhead">Klinikstichprobe </p>
         </div>
     </div>
-    <div ng-repeat="d in tmt.data" style="margin-top: 12px;">
+    <div ng-repeat="data in tmt.data">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
             <div flex>
-                <z-score data="d.zscore" options="d.TMT.zscore_options"></z-score>
+                <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
             <div flex="15" style="margin-left: 24px;">
-                <p class="md-caption">Zeit: {{d.calculation.TMTBTime}}
-                    <br>Fehler: {{d.calculation.TMTBError}}
-                    <span ng-if="d.calculation.Messzeitpunkt.Messzeitpunkt === 1">
-                    <br>B/A: {{d.calculation.quotient_rounded}}
+                <p class="md-caption">Zeit: {{data.calculation.TMTBTime}}
+                    <br>Fehler: {{data.calculation.TMTBError}}
+                    <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
+                    <br>B/A: {{data.calculation.quotient_rounded}}
                     </span>
                 </p>
             </div>

@@ -219,7 +219,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     },
                     "zscore": {
                         "zscore": null,
-                        "zscore_color": '#C5CAE9',
+                        "zscore_color": '#1A237E',
                         "text_left": mz_text,
                         "text_left_caption": "TMT",
                         "text_right": datum_messung,
