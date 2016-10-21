@@ -158,7 +158,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Build 
 
-        var alle_messungen = $scope.d.dataMain.calculations[0].calculation_results;
+        var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
