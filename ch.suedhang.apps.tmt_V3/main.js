@@ -65,6 +65,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         ks_file = JSON.parse(ks_file);
 
         $scope.d.ks = ks_file;
+
+        $scope.d.ks.text = '';
+        $scope.d.ks.dimensions.forEach(function(dim, dimID) {
+            if ($scope.d.ks.text !== '') {
+                $scope.d.ks.text = $scope.d.ks.text + ', '
+            };
+            $scope.d.ks.text = $scope.d.ks.text + dim.name
+        });
+        $scope.d.ks.text = $scope.d.ks.n_scores + ' Messungen normiert nach ' + $scope.d.ks.text;
+        var datum_ks = $filter('date')($scope.d.ks.date);
+        $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
+
+
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
 
         // Follow the white rabbit
@@ -275,9 +288,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.TMT.init = true;
     };
-
-
-
 
 
 
