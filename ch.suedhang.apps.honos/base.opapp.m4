@@ -75,7 +75,7 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
-[survey1]
+[survey]
 id = HoNOS
 type = lime
 responsibility = lead_therapist
