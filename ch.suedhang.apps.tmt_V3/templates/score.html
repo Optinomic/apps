@@ -64,7 +64,7 @@
             </div>
             <div>
                 <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
-                    <i class="mdi mdi-glasses" style="font-size:18px;color:#E0E0E0"></i>
+                    <i class="mdi mdi-glasses" style="font-size:18px;color:#7986CB"></i>
                     <md-tooltip md-direction="left">
                         Untersuchen & Vergleichen
                     </md-tooltip>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div ng-if="data.ks.show_controls">
-            <p class="md-caption" style="color:#757575;">Mit einer anderenKlinikstichprobe vergleichen:</p>
+            <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#3F51B5;">{{data.ks.path_data.text_full}}</span></p>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
@@ -89,7 +89,6 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <p class="md-caption" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
             <div class="grid-border-top" style="height: 48px;">&nbsp;</div>
         </div>
     </div>
