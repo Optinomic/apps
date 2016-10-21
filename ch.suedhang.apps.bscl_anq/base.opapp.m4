@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.apps.bscl.anq
+id = ch.suedhang.apps.bscl_anq
 name = BSCL (ANQ)
 short_description = Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
 version = include(VERSION)
@@ -73,7 +73,8 @@ overdue = ignore
 description = BSCL - ANQ
 survey = bscl_anq
 
-
+[sql_init]
+include(includes/create_view.sql)
 
 [calculation get_results javascript]
 include(calculations/scores.js)

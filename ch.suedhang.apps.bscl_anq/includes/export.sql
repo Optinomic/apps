@@ -1,4 +1,14 @@
 SELECT
+
+-- START:  Optinoimc Default |  Needed for Export-Toolbox
+  survey_response_view.patient_id as optinomic_patient_id,
+  survey_response_view.stay_id as optinomic_stay_id,
+  survey_response_view.event_id as optinomic_event_id,
+  survey_response_view.survey_response_id as optinomic_survey_response_id,
+  survey_response_view.filled as optinomic_survey_filled,
+  ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
+  -- END:  Optinoimc Default |  Needed for Export-Toolbox
+
   patient,
   ((cast(response AS json))->>'id') as id_limesurvey,
   ((cast(response AS json))->>'Eintrittsort') as eintrittsort,
@@ -12,7 +22,7 @@ SELECT
   ((cast(response AS json))->>'q501V04') as q501v04,
   ((cast(response AS json))->>'q501V05') as q501v05,
   ((cast(response AS json))->>'q501V06') as q501v06,
-  TO_CHAR(TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYYMMDD'), 'YYYYMMDD')  as q504V00,
+  TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')  as q504V00,
   ((cast(response AS json))->>'BSCL[sq504V01]') as bscl_sq504v01,
   ((cast(response AS json))->>'BSCL[sq504V02]') as bscl_sq504v02,
   ((cast(response AS json))->>'BSCL[sq504V03]') as bscl_sq504v03,
@@ -68,6 +78,7 @@ SELECT
   ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_sq504v53,
   TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date
 
-FROM survey_response INNER JOIN patient ON(survey_response.patient = patient.id) 
-WHERE module = 'ch.suedhang.apps.bscl.anq'
-ORDER BY q501V04 
+FROM "survey_response_view" 
+LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
+LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
+WHERE module = 'ch.suedhang.apps.bscl.anq';
