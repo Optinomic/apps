@@ -81,7 +81,7 @@
             <div style="margin-top: 12px;">
                 <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
             </div>
-            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center" style="position:fixed;">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
                     <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
