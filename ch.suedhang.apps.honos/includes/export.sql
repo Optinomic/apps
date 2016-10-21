@@ -10,7 +10,6 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-  patient.id AS pid,
   patient,
   survey_response.id AS survey_response_id,
   ((cast(response AS json))->>'PID') as PID_Limesurvey,
@@ -36,6 +35,7 @@ SELECT
   ((cast(response AS json))->>'H2[402V13]') as h2_402v13,
   ((cast(response AS json))->>'H2[402V14]') as h2_402v14,
   TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD HH24:MI:SS')  as Datum_Datumsformat
+
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
