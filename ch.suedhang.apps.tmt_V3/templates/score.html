@@ -78,8 +78,8 @@
             </div>
         </div>
         <div ng-if="data.ks.show_controls">
+            <p class="md-caption" style="color:#757575;">Klinikstichprobe:</p>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-                <p class="md-caption" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
                     <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
@@ -89,6 +89,7 @@
                     </md-select>
                 </md-input-container>
             </div>
+            <p class="md-caption" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
         </div>
     </div>
 </div>
