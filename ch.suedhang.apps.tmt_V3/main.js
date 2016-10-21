@@ -95,20 +95,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
 
-        var my_data = null;
+        var statistics = null;
         if (data_dive !== null) {
-            my_data = angular.copy(data_dive);
-            current_location_n = my_data.patients.length;
+            statistics = data_dive.statistics;
+            current_location_n = data_dive.patients.length;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
-
-            // Make it lighter.
-            delete my_data.patients;
-            delete my_data.scores;
         };
 
         var location = {
-            "statistics": my_data.statistics,
+            "statistics": statistics,
             "path": location_array,
             "text": current_location_text,
             "n_text": current_location_n_text,
