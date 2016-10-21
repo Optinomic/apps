@@ -62,25 +62,32 @@
                     </span>
                 </p>
             </div>
-            <div>
-                <md-button ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
-                    <i class="mdi mdi-glasses" style="font-size:24px;"></i>
+            <div flex="5">
+                <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                    <i class="mdi mdi-glasses" style="font-size:18px;"></i>
                     <md-tooltip md-direction="left">
-                        Klinikstichprobe
+                        Untersuchen & Vergleichen
+                    </md-tooltip>
+                </md-button>
+                <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                    <i class="mdi mdi-close" style="font-size:18px;"></i>
+                    <md-tooltip md-direction="left">
+                        Untersuchen & Vergleichen | Schliessen
                     </md-tooltip>
                 </md-button>
             </div>
         </div>
         <div ng-if="data.ks.show_controls">
-            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="end center">
-                <md-button ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
-                    <i class="mdi mdi-glasses" style="font-size:24px;"></i>
-                    <md-tooltip md-direction="left">
-                        Schliessen
-                    </md-tooltip>
-                </md-button>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+                <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
+                    <label>{{dim.name}}</label>
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
+                        <md-option ng-repeat="item in dim.array" ng-value="item.id">
+                            {{item.text}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
             </div>
-            <p>switcher</p>
         </div>
     </div>
 </div>

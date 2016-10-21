@@ -277,7 +277,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    $scope.changeClinicSample = function() {};
+    $scope.changeClinicSample = function(current_sample) {
+
+        console.log('changeClinicSample', current_sample);
+    };
 
 
     $scope.setExport = function() {
