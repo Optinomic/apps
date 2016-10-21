@@ -54,9 +54,12 @@
     </div>
     <p>&nbsp;</p>
     <div ng-repeat="data in tmt.data" class="grid-border-top">
-        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center" style="margin-top: 3px;">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
+                <div style="margin-left: 12px;">
+                    <p class="md-caption" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span> Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
+                </div>
             </div>
             <div style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{data.calculation.TMTBTime}}
@@ -81,7 +84,6 @@
                 </md-button>
             </div>
         </div>
-        <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
         <div ng-if="data.ks.show_controls">
             <div style="margin-top: 12px;">&nbsp;</div>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">

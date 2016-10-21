@@ -27,6 +27,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            $scope.d.init = true;
             var current_template = $scope.d.dataMain.params.location.viewname;
 
             // Check if we have survey_responses @ data.
@@ -48,7 +49,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, ' | ', current_template, $scope.d);
-            $scope.d.init = true;
         });
     };
     $scope.loadMainData();
