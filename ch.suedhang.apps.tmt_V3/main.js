@@ -178,12 +178,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // $scope.d.TMT.zscore_options anpassen
-            if (Math.abs(zscore_A) > (Math.abs($scope.d.zScore.zscore_options.zscore_min) - 0.5)) {
-                $scope.d.zScore.zscore_options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
+            if (Math.abs(zscore_A) > (Math.abs($scope.d.TMT.zscore_options.zscore_min) - 0.5)) {
+                $scope.d.TMT.zscore_options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
             };
 
-            if (Math.abs(zscore_B) > (Math.abs($scope.d.zScore.zscore_options.zscore_max) - 0.5)) {
-                $scope.d.zScore.zscore_options.zscore_max = (Math.abs(A_messung.zscore) + 1);
+            if (Math.abs(zscore_B) > (Math.abs($scope.d.TMT.zscore_options.zscore_max) - 0.5)) {
+                $scope.d.TMT.zscore_options.zscore_max = (Math.abs(A_messung.zscore) + 1);
             };
 
 
@@ -212,11 +212,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     dimensions_path[myDimID] = mz_id;
                 };
             });
-            console.log('(!) dimensions_path', dimensions_path);
+            // console.log('(!) dimensions_path', dimensions_path);
 
 
             var md_data = $scope.getKSLocation(dimensions_path);
-            console.log('(!) md_data', dimensions_path, md_data);
+            // console.log('(!) md_data', dimensions_path, md_data);
 
 
             // Resultate in Gruppen schreiben
