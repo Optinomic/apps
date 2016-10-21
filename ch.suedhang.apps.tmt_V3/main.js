@@ -101,6 +101,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             current_location_n = data_dive.patients.length;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+        } else {
+            statistics = null;
+            current_location_n = 0;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
         };
 
         var location = {
@@ -280,9 +285,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
 
-        if (current_sample.zscore.text_left_caption === 'TMT A') {
-            current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
-            current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
+        if (current_sample.ks.path_data.statistics !== null) {
+            if (current_sample.zscore.text_left_caption === 'TMT A') {
+                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
+                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
+            };
+            if (current_sample.zscore.text_left_caption === 'TMT B') {
+                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_min);
+                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_plus);
+            };
         };
 
         console.log('(Done) changeClinicSample', current_sample);
