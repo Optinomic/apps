@@ -177,6 +177,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var current_cs_color = cs_color[mz_id];
 
 
+            // $scope.d.TMT.zscore_options anpassen
+            if (Math.abs(zscore_A) > (Math.abs($scope.d.zScore.zscore_options.zscore_min) - 0.5)) {
+                $scope.d.zScore.zscore_options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
+            };
+
+            if (Math.abs(zscore_B) > (Math.abs($scope.d.zScore.zscore_options.zscore_max) - 0.5)) {
+                $scope.d.zScore.zscore_options.zscore_max = (Math.abs(A_messung.zscore) + 1);
+            };
+
+
+
             // Pfad für MD-Array erstellen
             var dimensions_path = [];
             var current_ks = angular.copy($scope.d.ks);
@@ -215,7 +226,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "calculation": messung,
                     "ks": {
                         "path_data": md_data,
-                        "path_selected": dimensions_path
+                        "path_selected": dimensions_path,
+                        "show_controls": false
                     },
                     "zscore": {
                         "zscore": null,

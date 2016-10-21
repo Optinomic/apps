@@ -50,7 +50,7 @@
         </div>
     </div>
     <div ng-repeat="data in tmt.data">
-        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
@@ -62,6 +62,25 @@
                     </span>
                 </p>
             </div>
+            <div>
+                <md-button ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                    <i class="mdi mdi-glasses" style="font-size:24px;"></i>
+                    <md-tooltip md-direction="left">
+                        Klinikstichprobe
+                    </md-tooltip>
+                </md-button>
+            </div>
+        </div>
+        <div ng-if="data.ks.show_controls">
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="end center">
+                <md-button ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                    <i class="mdi mdi-glasses" style="font-size:24px;"></i>
+                    <md-tooltip md-direction="left">
+                        Schliessen
+                    </md-tooltip>
+                </md-button>
+            </div>
+            <p>switcher</p>
         </div>
     </div>
 </div>
