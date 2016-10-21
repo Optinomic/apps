@@ -310,8 +310,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.zscore.zscore_color = '#F44336';
                 };
                 if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
-                    // Auffällige Testleistung: Rot
-                    messung_obj.zscore.zscore_color = '#F44336';
+                    // Auffällige Testleistung: Grün
+                    messung_obj.zscore.zscore_color = '#4CAF50';
                 };
             });
         });
@@ -330,10 +330,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (current_sample.zscore.text_left_caption === 'TMT A') {
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
-
-
-
             };
+
             if (current_sample.zscore.text_left_caption === 'TMT B') {
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_plus);
@@ -343,7 +341,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Auffällige Testleistung |  färben
             if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
                 // Auffällige Testleistung: Rot
-                current_sample.zscore.zscore_color = '#F44336';
+                current_sample.zscore.zscore_color = '#4CAF50';
             };
             if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
                 // Auffällige Testleistung: Rot
