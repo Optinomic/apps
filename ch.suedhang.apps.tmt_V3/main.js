@@ -69,7 +69,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.d.ks.text = '';
-        $scope.d.ks.normgurppe.text = '';
         $scope.d.ks.dimensions.forEach(function(dim, dimID) {
             if ($scope.d.ks.text !== '') {
                 $scope.d.ks.text = $scope.d.ks.text + ', '
