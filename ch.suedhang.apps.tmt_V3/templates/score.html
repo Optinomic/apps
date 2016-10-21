@@ -1,30 +1,3 @@
-<div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex>
-            <h3 class="md-headline">{{d.dataMain.patient.data.ansprache}} {{d.dataMain.patient.data.extras.name}}</h3>
-        </div>
-        <md-button ng-click="d.TMT.settings = !d.TMT.settings" class="md-icon-button">
-            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
-            <md-tooltip md-direction="left">
-                Einstellungen
-            </md-tooltip>
-        </md-button>
-    </div>
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="50">
-            <p class="md-caption" style="margin-top:-6px;">
-                Alter (bei Erfassung):
-                <span style="color:#757575">{{d.dataMain.patient.data.extras.age}} Jahre</span>
-            </p>
-        </div>
-        <div flex>
-            <p class="md-caption" style="margin-top:-6px;">
-                Ausbildung:
-                <span style="color:#757575">{{d.dataMain.survey_responses[0].calculations[0].calculation_result.edu_years}} Jahre</span>
-            </p>
-        </div>
-    </div>
-</div>
 <div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex>

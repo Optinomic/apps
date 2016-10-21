@@ -196,7 +196,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
 
-            console.log('(!) 1 - messung', messungID, messung);
+            console.log('(!) 1 - Messung', messungID, messung);
 
 
             // Variablen vorbereiten | verdrahten.
@@ -226,9 +226,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-            // Pfad für MD-Array erstellen
+            // Default Pfad für MD-Array erstellen
             var dimensions_path = [];
-            var current_ks = angular.copy($scope.d.ks);
+            var current_ks = $scope.d.ks;
             current_ks.dimensions.forEach(function(current_dim, myDimID) {
 
                 var default_last = current_dim.array.length - 1;
