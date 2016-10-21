@@ -250,7 +250,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
                 if (group.name === 'TMT A') {
-                    messung_obj.text_left_caption = group.name;
+                    messung_obj.zscore.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_A;
                     messung_obj.zscore.marker_1_score = zeitabbruch_A;
                     messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_min);
@@ -260,7 +260,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
                 if (group.name === 'TMT B') {
-                    messung_obj.text_left_caption = group.name;
+                    messung_obj.zscore.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_B;
                     messung_obj.zscore.marker_1_score = zeitabbruch_B;
                     messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_min);
@@ -273,7 +273,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         $scope.d.TMT.init = true;
-
     };
 
 
@@ -283,7 +282,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.changeClinicSample = function(current_sample) {
 
-        console.log('changeClinicSample', current_sample);
+        current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
+
+        if (current_sample.zscore.text_left_caption === 'TMT A') {
+            current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
+            current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
+        };
+
+        console.log('(Done) changeClinicSample', current_sample);
     };
 
 

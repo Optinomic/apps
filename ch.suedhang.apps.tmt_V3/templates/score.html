@@ -78,7 +78,7 @@
             </div>
         </div>
         <div ng-if="data.ks.show_controls">
-            <p class="md-caption" style="color:#757575;">Klinikstichprobe:</p>
+            <p class="md-caption" style="color:#757575;">Mit einer anderenKlinikstichprobe vergleichen:</p>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
@@ -90,6 +90,7 @@
                 </md-input-container>
             </div>
             <p class="md-caption" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
+            <div class="grid-border-top" style="height: 48px;">&nbsp;</div>
         </div>
     </div>
 </div>
