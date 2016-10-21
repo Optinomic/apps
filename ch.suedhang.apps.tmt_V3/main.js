@@ -161,8 +161,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Default Z-Score Option
         $scope.d.TMT.zscore_options = {
-            "zscore_min": -5,
-            "zscore_max": 5,
+            "zscore_min": -4,
+            "zscore_max": 4,
             "clinicsample_color": "#C5CAE9",
             "centered_zero": true,
             "show_text": true,
@@ -211,7 +211,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeitabbruch_A = messung.percentile.z_scores.tmtA_z_zeitabbruch_rounded;
             var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
 
-            var cs_color = ['#7986CB', '#9575CD', '#64B5F6'];
+            var cs_color = ['#9FA8DA', '#B39DDB', '#90CAF9'];
             var current_cs_color = cs_color[mz_id];
 
 
@@ -343,11 +343,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Auffällige Testleistung |  färben
             if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
                 // Auffällige Testleistung: Rot
-                current_sample.zscore_color = '#F44336';
+                current_sample.zscore.zscore_color = '#F44336';
             };
             if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
                 // Auffällige Testleistung: Rot
-                current_sample.zscore_color = '#F44336';
+                current_sample.zscore.zscore_color = '#F44336';
             };
 
 
