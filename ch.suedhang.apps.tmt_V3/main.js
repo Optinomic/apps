@@ -67,7 +67,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks = ks_file;
 
 
-        $scope.d.ks.normgurppe = {};
 
         $scope.d.ks.text = '';
         $scope.d.ks.normgurppe.text = '';
@@ -76,22 +75,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.ks.text = $scope.d.ks.text + ', '
             };
             $scope.d.ks.text = $scope.d.ks.text + dim.name
-
-            if (dim.source === 'app') {
-                if ($scope.d.ks.normgurppe.text !== '') {
-                    $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + ', '
-                };
-                $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + dim.name
-            };
         });
         $scope.d.ks.text = $scope.d.ks.n_scores + ' Messungen normiert nach ' + $scope.d.ks.text;
         var datum_ks = $filter('date')($scope.d.ks.date);
         $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
 
-        $scope.d.ks.normgurppe.text = $scope.d.ks.normgurppe.text + ' (N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
 
+        $scope.d.ks.normgurppe = {};
+        $scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
 
+        var age = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.altersgruppe_text;
+        var mz = $scope.d.dataMain.calculations["0"].calculation_results["0"].Messzeitpunkt.Messzeitpunkt_Text;
+        var edu = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.education;
 
+        if (edu === 99) {
+            edu = 'Jeder Ausbildungsgrad'
+        };
+        if (edu === 0) {
+            edu = '<= 12 Jahre'
+        };
+        if (edu === 1) {
+            edu = '> 12 Jahre'
+        };
+        $scope.d.ks.normgurppe.text = age + ', ' + mz + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
 
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
 
