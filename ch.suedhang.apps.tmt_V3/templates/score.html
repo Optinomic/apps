@@ -30,6 +30,18 @@
         <div flex>
             <h3 class="md-headline">{{tmt.name}}</h3>
         </div>
+        <md-button ng-if="d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye-off" style="font-size:24px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende ausblenden
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="!d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye" style="font-size:24px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende anzeigen
+            </md-tooltip>
+        </md-button>
         <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
             <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
             <md-tooltip md-direction="left">
@@ -37,7 +49,7 @@
             </md-tooltip>
         </md-button>
     </div>
-    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.TMT.show_legend">
         <div flex="30">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
@@ -45,13 +57,13 @@
                 <br> {{d.ks.normgurppe.text}}
             </p>
         </div>
-        <div flex ng-init="d.show_ks_text = true">
+        <div flex>
             <p class="md-subhead">Klinikstichprobe</p>
-            <p ng-click="d.show_ks_text = !d.show_ks_text" class="md-caption" style="color:#757575;margin-top:-6px;">
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 {{d.ks.text}}
             </p>
-            <div ng-if="d.show_ks_text" style="margin-top:-12px;">
-                <div ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
                     <p ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</p>
                     <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
