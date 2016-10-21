@@ -48,6 +48,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, ' | ', current_template, $scope.d);
+            $scope.d.init = true;
         });
     };
     $scope.loadMainData();
@@ -252,7 +253,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
 
-        $scope.d.init = true;
+        $scope.d.TMT.init = true;
+
     };
 
 

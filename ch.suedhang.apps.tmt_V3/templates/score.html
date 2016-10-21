@@ -3,7 +3,7 @@
         <div flex>
             <h3 class="md-headline">{{d.dataMain.patient.data.ansprache}} {{d.dataMain.patient.data.extras.name}}</h3>
         </div>
-        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
+        <md-button ng-click="d.TMT.settings = !d.TMT.settings" class="md-icon-button">
             <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
             <md-tooltip md-direction="left">
                 Einstellungen
@@ -25,5 +25,43 @@
         </div>
     </div>
 </div>
-<div class="grid-border-top" style="margin-top: 30px;">
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <div flex>
+            <h3 class="md-headline">{{tmt.name}}</h3>
+        </div>
+        <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+        <div flex>
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+                <br> {{d.TMT.normgruppe_tmt.age_group.age_group_text}}, {{d.TMT.normgruppe_tmt.edu_group.edu_group_text}}. (N={{d.TMT.normgruppe_tmt.n}})
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe </p>
+        </div>
+    </div>
+    <div ng-repeat="d in tmt.data" style="margin-top: 12px;">
+        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+            <div flex>
+                <z-score data="d.zscore" options="d.TMT.zscore_options"></z-score>
+            </div>
+            <div flex="15" style="margin-left: 24px;">
+                <p class="md-caption">Zeit: {{d.calculation.TMTBTime}}
+                    <br>Fehler: {{d.calculation.TMTBError}}
+                    <span ng-if="d.calculation.Messzeitpunkt.Messzeitpunkt === 1">
+                    <br>B/A: {{d.calculation.quotient_rounded}}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
