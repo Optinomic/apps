@@ -294,6 +294,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_plus);
             };
+        } else {
+            current_sample.zscore.clinicsample_start = 0;
+            current_sample.zscore.clinicsample_end = 0;
         };
 
         console.log('(Done) changeClinicSample', current_sample);
