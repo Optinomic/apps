@@ -157,6 +157,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.TMT = {};
         $scope.d.TMT.init = false;
+        $scope.d.TMT.show_legend = true;
 
         // Default Z-Score Option
         $scope.d.TMT.zscore_options = {
