@@ -38,7 +38,7 @@
         </md-button>
     </div>
     <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
-        <div flex>
+        <div flex="30">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
@@ -50,6 +50,11 @@
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
                 {{d.ks.text}}
             </p>
+            <div style="margin-left:3px;margin-right:12px;margin-top:-12px;">
+                <div ng-repeat="data in tmt.data" style="margin-top: 4px;">
+                    <p class="md-caption small" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
+                </div>
+            </div>
         </div>
     </div>
     <p class="md-caption">&nbsp;</p>
@@ -58,7 +63,7 @@
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
-            <div style="margin-left: 24px;">
+            <div style="margin-left: 18px;">
                 <p class="md-caption">Zeit: {{data.calculation.TMTBTime}}
                     <br>Fehler: {{data.calculation.TMTBError}}
                     <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
@@ -81,11 +86,10 @@
                 </md-button>
             </div>
         </div>
-        <div style="margin-left:3px;margin-right:12px;margin-top:-12px;">
-            <p class="md-caption small" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
-        </div>
         <div ng-if="data.ks.show_controls">
-            <div style="margin-top: 12px;">&nbsp;</div>
+            <div style="margin-top: 12px;">
+                <p class="md-caption small" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
+            </div>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
@@ -96,9 +100,9 @@
                     </md-select>
                 </md-input-container>
             </div>
-        </div>
-        <div class="grid-border-top">
-            <p class="md-caption">&nbsp;</p>
+            <div class="grid-border-top">
+                <p class="md-caption">&nbsp;</p>
+            </div>
         </div>
     </div>
 </div>
