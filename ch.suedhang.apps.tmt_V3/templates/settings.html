@@ -47,45 +47,6 @@
         <md-button ng-click="d.TMT.settings = !d.TMT.settings">anwenden</md-button>
     </md-card-actions>
 </md-card>
-<md-card style="margin-top: 30px;">
-    <md-card-title>
-        <md-card-title-text>
-            <span class="md-headline">Einstellungen | Klinik-Stichprobe</span>
-        </md-card-title-text>
-    </md-card-title>
-    <md-divider></md-divider>
-    <md-card-content>
-        <div layout-margin layout-padding>
-            <md-input-container class="md-block">
-                <label>Alter</label>
-                <md-select ng-model="d.TMT.normgruppe_klinik.selected_age_group" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="age in d.TMT.user_app_calc.definitions.age" ng-value="age">
-                        {{age.age_group_text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container class="md-block" style="margin-top:24px;">
-                <label>Bildung</label>
-                <md-select ng-model="d.TMT.normgruppe_klinik.selected_edu_group" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="edu in d.TMT.user_app_calc.definitions.edu" ng-value="edu">
-                        {{edu.edu_group_text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container class="md-block" style="margin-top:24px;">
-                <label>Messzeitpunkt</label>
-                <md-select ng-model="d.TMT.normgruppe_klinik.selected_mz_array" ng-change="changeClinicSample()">
-                    <md-option ng-repeat="mz in d.TMT.normgruppe_klinik.select_mz_array" ng-value="mz.id">
-                        {{mz.text}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-    </md-card-content>
-    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
-        <md-button ng-click="d.TMT.settings = !d.TMT.settings">anwenden</md-button>
-    </md-card-actions>
-</md-card>
 <div style="margin-top: 24px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
         <md-button ng-click="d.TMT.settings = !d.TMT.settings" class="md-icon-button">
