@@ -158,7 +158,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
 
-            console.log('(!) messung', messungID, messung);
+            console.log('(!) 1 - messung', messungID, messung);
 
 
             // Variablen vorbereiten | verdrahten.
@@ -212,11 +212,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     dimensions_path[myDimID] = mz_id;
                 };
             });
-            // console.log('(!) dimensions_path', dimensions_path);
+            console.log('(!) 2 - dimensions_path', dimensions_path);
 
 
             var md_data = $scope.getKSLocation(dimensions_path);
-            // console.log('(!) md_data', dimensions_path, md_data);
+            console.log('(!) 3 - md_data', dimensions_path, md_data);
 
 
             // Resultate in Gruppen schreiben
