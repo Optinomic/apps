@@ -344,7 +344,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 current_sample.zscore.zscore_color = '#4CAF50';
             };
             if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
-                // Auffällige Testleistung: Rot
+                // Auffällige Testleistung: Grün
                 current_sample.zscore.zscore_color = '#F44336';
             };
 
