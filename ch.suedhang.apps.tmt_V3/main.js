@@ -339,6 +339,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Auffällige Testleistung |  färben
+            current_sample.zscore.zscore_color = '#1A237E';
             if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
                 // Auffällige Testleistung: Rot
                 current_sample.zscore.zscore_color = '#4CAF50';
