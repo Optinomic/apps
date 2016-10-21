@@ -54,7 +54,7 @@
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
-            <div flex="15" style="margin-left: 24px;">
+            <div style="margin-left: 24px;">
                 <p class="md-caption">Zeit: {{data.calculation.TMTBTime}}
                     <br>Fehler: {{data.calculation.TMTBError}}
                     <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
@@ -62,14 +62,14 @@
                     </span>
                 </p>
             </div>
-            <div flex="5">
-                <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
-                    <i class="mdi mdi-glasses" style="font-size:18px;"></i>
+            <div>
+                <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                    <i class="mdi mdi-glasses" style="font-size:18px;color:#E0E0E0"></i>
                     <md-tooltip md-direction="left">
                         Untersuchen & Vergleichen
                     </md-tooltip>
                 </md-button>
-                <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
                     <i class="mdi mdi-close" style="font-size:18px;"></i>
                     <md-tooltip md-direction="left">
                         Untersuchen & Vergleichen | Schliessen
@@ -79,6 +79,7 @@
         </div>
         <div ng-if="data.ks.show_controls">
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+                <p class="md-caption" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
                     <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">

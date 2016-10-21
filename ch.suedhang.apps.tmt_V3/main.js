@@ -97,14 +97,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var my_data = null;
         if (data_dive !== null) {
-            my_data = data_dive;
+            my_data = angular.copy(data_dive);
             current_location_n = my_data.patients.length;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+
+            // Make it lighter.
+            delete my_data.patients;
+            delete my_data.scores;
         };
 
         var location = {
-            "data": my_data,
+            "statistics": my_data.statistics,
             "path": location_array,
             "text": current_location_text,
             "n_text": current_location_n_text,
@@ -249,8 +253,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_A;
                     messung_obj.zscore.marker_1_score = zeitabbruch_A;
-                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.data.statistics['TMTAZ'].mean_1sd_min);
-                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.data.statistics['TMTAZ'].mean_1sd_plus);
+                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_min);
+                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_plus);
 
                     group.data.push(messung_obj);
                 };
@@ -259,8 +263,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.text_left_caption = group.name;
                     messung_obj.zscore.zscore = zscore_B;
                     messung_obj.zscore.marker_1_score = zeitabbruch_B;
-                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.data.statistics['TMTBZ'].mean_1sd_min);
-                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.data.statistics['TMTBZ'].mean_1sd_plus);
+                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_min);
+                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_plus);
 
                     group.data.push(messung_obj);
                 };
