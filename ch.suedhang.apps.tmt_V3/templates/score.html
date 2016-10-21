@@ -53,8 +53,7 @@
         </div>
     </div>
     <p>&nbsp;</p>
-    <div ng-repeat="data in tmt.data">
-        <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
+    <div ng-repeat="data in tmt.data" class="grid-border-top">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
@@ -82,10 +81,9 @@
                 </md-button>
             </div>
         </div>
+        <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
         <div ng-if="data.ks.show_controls">
-            <div style="margin-top: 12px;">
-                <p class="md-caption" style="color:#757575;">Klinikstichprobe: <span style="color:#424242;">{{data.ks.path_data.text_full}}</span></p>
-            </div>
+            <div style="margin-top: 12px;">&nbsp;</div>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
@@ -96,7 +94,7 @@
                     </md-select>
                 </md-input-container>
             </div>
-            <div class="grid-border-top" style="height: 48px;">&nbsp;</div>
+            <div style="height: 48px;">&nbsp;</div>
         </div>
     </div>
 </div>
