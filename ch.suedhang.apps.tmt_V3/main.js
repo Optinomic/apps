@@ -318,8 +318,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.TMT.groups.forEach(function(group, groupID) {
-                group.data = $scope.getKSLocation(group.ks.path_selected);
-                console.log('(!) 3 - md_data', groupID, group.data);
+                group.data.forEach(function(groupInner, groupInnerID) {
+                    groupInner = $scope.getKSLocation(groupInner.ks.path_selected);
+                    console.log('(!) 3 - md_data', groupID, groupInnerID, groupInner);
+                });
             });
 
         });
