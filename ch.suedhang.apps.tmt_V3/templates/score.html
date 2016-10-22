@@ -48,11 +48,20 @@
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
+            <div style="margin-left: 16px;">
+                <p class="md-caption">
+                    Zeit: {{data.calculation.TMTBTime}}
+                    <br>Fehler: {{data.calculation.TMTBError}}
+                    <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
+                    <br>B/A: {{data.calculation.quotient_rounded}}
+                    </span>
+                </p>
+            </div>
             <div>
                 <p style="color:#424242;font-size:9px;margin-left: 10px;">
                     <span ng-attr-style="font-size:22px; color:{{data.zscore.clinicsample_color}}!important;">■</span> {{$index + 1}}
                 </p>
-                <div style="margin-top:-16px;">
+                <div style="margin-top:-20px;">
                     <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
                         <i class="mdi mdi-glasses" style="font-size:18px;"></i>
                         <md-tooltip md-direction="left">
@@ -66,15 +75,6 @@
                         </md-tooltip>
                     </md-button>
                 </div>
-            </div>
-            <div style="margin-left: 16px;">
-                <p class="md-caption">
-                    Zeit: {{data.calculation.TMTBTime}}
-                    <br>Fehler: {{data.calculation.TMTBError}}
-                    <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
-                    <br>B/A: {{data.calculation.quotient_rounded}}
-                    </span>
-                </p>
             </div>
         </div>
         <div ng-if="data.ks.show_controls">
