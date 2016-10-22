@@ -106,7 +106,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getKSLocation = function(location_array) {
 
-        var current_ks = angular.copy($scope.d.ks);
+        var current_ks = $scope.d.ks;
 
         var data_dive = current_ks.data;
         var current_location_text = "";
@@ -192,8 +192,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Build 
 
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-        var messungen_count = alle_messungen.length
-        var messungen_count_current = 0;
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
@@ -317,6 +315,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.zscore.zscore_color = '#4CAF50';
                 };
             });
+
         });
 
         // MD - Daten befüllen
