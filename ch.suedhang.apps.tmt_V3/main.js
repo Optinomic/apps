@@ -192,6 +192,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Build 
 
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
+        var messungen_count = alle_messungen.length
+        var messungen_count_current = 0;
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
@@ -315,21 +317,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     messung_obj.zscore.zscore_color = '#4CAF50';
                 };
             });
+        });
 
-
-            $scope.d.TMT.groups.forEach(function(group, groupID) {
-                group.data.forEach(function(groupInner, groupInnerID) {
-                    $scope.changeClinicSample(groupInner);
-                    console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
-                });
+        // MD - Daten befüllen
+        $scope.d.TMT.groups.forEach(function(group, groupID) {
+            group.data.forEach(function(groupInner, groupInnerID) {
+                $scope.changeClinicSample(groupInner);
+                console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
             });
-
         });
 
 
         $scope.d.TMT.init = true;
     };
-
 
 
     $scope.changeClinicSample = function(current_sample) {
