@@ -45,6 +45,9 @@
     <p class="md-caption">&nbsp;</p>
     <div ng-repeat="data in tmt.data" style="margin-top: 4px;">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
+            </div>
             <div>
                 <p style="color:#424242;font-size:9px;margin-left: 10px;">
                     <span ng-attr-style="font-size:22px; color:{{data.zscore.clinicsample_color}}!important;">■</span> {{$index + 1}}
@@ -63,9 +66,6 @@
                         </md-tooltip>
                     </md-button>
                 </div>
-            </div>
-            <div flex>
-                <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
             <div style="margin-left: 16px;">
                 <p class="md-caption">
