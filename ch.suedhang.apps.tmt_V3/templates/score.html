@@ -34,7 +34,10 @@
             <p class="md-subhead">Klinikstichprobe</p>
             <div style="margin-top:-12px;">
                 <div ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                    <p ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</p>
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;">■</p>
+                        <p class="md-caption">{{$index}}</p>
+                    </div>
                     <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
             </div>
@@ -52,6 +55,7 @@
                     <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
                     <br>B/A: {{data.calculation.quotient_rounded}}
                     </span>
+                    <br><span ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{$index}}
                 </p>
             </div>
             <div>
