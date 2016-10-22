@@ -253,8 +253,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('(!) 2 - dimensions_path', dimensions_path);
 
 
-            var md_data = $scope.getKSLocation(dimensions_path);
-            console.log('(!) 3 - md_data', dimensions_path, md_data);
+            // var md_data = $scope.getKSLocation(dimensions_path);
+            // console.log('(!) 3 - md_data', dimensions_path, md_data);
 
 
             // Resultate in Gruppen schreiben
@@ -263,7 +263,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var messung_obj = {
                     "calculation": messung,
                     "ks": {
-                        "path_data": md_data,
+                        //"path_data": md_data,
+                        "path_data": null,
                         "path_selected": dimensions_path,
                         "show_controls": false
                     },
@@ -283,36 +284,36 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     },
                 };
 
-                if (group.name === 'TMT A') {
-                    messung_obj.zscore.text_left_caption = group.name;
-                    messung_obj.zscore.zscore = zscore_A;
-                    messung_obj.zscore.marker_1_score = zeitabbruch_A;
-                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_min);
-                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_plus);
-
-                    group.data.push(messung_obj);
-                };
-
-                if (group.name === 'TMT B') {
-                    messung_obj.zscore.text_left_caption = group.name;
-                    messung_obj.zscore.zscore = zscore_B;
-                    messung_obj.zscore.marker_1_score = zeitabbruch_B;
-                    messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_min);
-                    messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_plus);
-
-                    group.data.push(messung_obj);
-                };
-
-
-                // Auffällige Testleistung |  färben
-                if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
-                    // Auffällige Testleistung: Rot
-                    messung_obj.zscore.zscore_color = '#F44336';
-                };
-                if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
-                    // Auffällige Testleistung: Grün
-                    messung_obj.zscore.zscore_color = '#4CAF50';
-                };
+                //   if (group.name === 'TMT A') {
+                //       messung_obj.zscore.text_left_caption = group.name;
+                //       messung_obj.zscore.zscore = zscore_A;
+                //       messung_obj.zscore.marker_1_score = zeitabbruch_A;
+                //       messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_min);
+                //       messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_plus);
+                //   
+                //       group.data.push(messung_obj);
+                //   };
+                //   
+                //   if (group.name === 'TMT B') {
+                //       messung_obj.zscore.text_left_caption = group.name;
+                //       messung_obj.zscore.zscore = zscore_B;
+                //       messung_obj.zscore.marker_1_score = zeitabbruch_B;
+                //       messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_min);
+                //       messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_plus);
+                //   
+                //       group.data.push(messung_obj);
+                //   };
+                //   
+                //   
+                //   // Auffällige Testleistung |  färben
+                //   if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
+                //       // Auffällige Testleistung: Rot
+                //       messung_obj.zscore.zscore_color = '#F44336';
+                //   };
+                //   if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
+                //       // Auffällige Testleistung: Grün
+                //       messung_obj.zscore.zscore_color = '#4CAF50';
+                //   };
             });
         });
 
