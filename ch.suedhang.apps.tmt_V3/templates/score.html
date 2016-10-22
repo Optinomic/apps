@@ -63,15 +63,15 @@
                 </p>
                 <div style="margin-top:-20px;">
                     <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
-                        <i class="mdi mdi-glasses" style="font-size:18px;"></i>
+                        <i class="mdi mdi-lightbulb-outline" style="font-size:18px;"></i>
                         <md-tooltip md-direction="left">
-                            Klinikstichprobe | Öffnen
+                            Detailanalyse | Öffnen
                         </md-tooltip>
                     </md-button>
                     <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
                         <i class="mdi mdi-close" style="font-size:18px;"></i>
                         <md-tooltip md-direction="left">
-                            Klinikstichprobe | Schliessen
+                            Detailanalyse | Schliessen
                         </md-tooltip>
                     </md-button>
                 </div>
@@ -79,7 +79,7 @@
         </div>
         <div ng-if="data.ks.show_controls">
             <div style="margin-top: 12px;">
-                <p class="md-caption small" style="color:#757575;"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
+                <p class="md-caption"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
             </div>
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
