@@ -35,7 +35,7 @@
             <div style="margin-top:-12px;">
                 <div ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div>
-                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;">■ <span style="color:#757575;font-size:9px;">{{$index}}</span></p>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index}}</span>■</p>
                     </div>
                     <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
@@ -48,8 +48,8 @@
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
-            <div style="margin-left: 18px;">
-                <p class="md-caption"><span ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{$index}}
+            <div style="margin-left: 16px;">
+                <p class="md-caption"><span ng-attr-style="font-size:22px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{$index}}
                     <br>Zeit: {{data.calculation.TMTBTime}}
                     <br>Fehler: {{data.calculation.TMTBError}}
                     <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
