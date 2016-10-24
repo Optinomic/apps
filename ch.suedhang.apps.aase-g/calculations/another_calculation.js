@@ -80,6 +80,13 @@ function main(responses) {
 
 
 
+            // Subscores - Info from:
+            // https://books.google.ch/books?id=r0niDAAAQBAJ&pg=PA19&lpg=PA19&dq=AASE-G+diagnostik&source=bl&ots=Cnrm0EsN_2&sig=Ho5o3-EX6Ck5BkvTN5wew2-WQ2U&hl=de&sa=X&ved=0ahUKEwix3ca7i_TPAhUJMBoKHZ5vAicQ6AEIHDAA#v=onepage&q=AASE-G%20diagnostik&f=false
+            // [Frage] Sollten es nicht je 5 Items sein?
+
+
+
+
             //  AASE3: Wenn ich mich traurig fühle
             //  AASE5: Wenn ich um jemanden besorgt bin
             //  AASE6: Wenn ich sehr beunruhigt bin und mir Sorgen mache
