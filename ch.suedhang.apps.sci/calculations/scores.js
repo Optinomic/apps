@@ -1061,7 +1061,7 @@ function main(responses) {
             myResults.scores = calc.getScores(result, population);
 
             // Unneeded - Just for DEBUG
-            myResults.full_data = myResponses;
+            // myResults.full_data = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff down here
