@@ -495,7 +495,7 @@ function main(responses) {
 
 
             // Unneeded - Just for DEBUG
-            myResults.full_data = myResponses;
+            // myResults.full_data = myResponses;
 
             // Write Results for the Return
             // Do not modify stuff down here
