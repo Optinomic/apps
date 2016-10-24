@@ -111,7 +111,7 @@ function main(responses) {
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
             myResults.response = response;
-            myResults.full_responses = myResponses;
+            // myResults.full_responses = myResponses;
             allResults.push(myResults);
         });
 
