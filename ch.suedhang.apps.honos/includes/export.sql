@@ -11,7 +11,7 @@ SELECT
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
   patient,
-  survey_response_view.id AS survey_response_id,
+  survey_response_view.survey_response_id AS survey_response_id,
   ((cast(response AS json))->>'PID') as PID_Limesurvey,
   'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
