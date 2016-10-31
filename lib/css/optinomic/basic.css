@@ -10,6 +10,12 @@ body {
     font-weight: normal !important;
 }
 
+@media all {
+    .page-break {
+        display: none;
+    }
+}
+
 @media print {
     a[href]:after {
         content: none !important;
@@ -19,6 +25,17 @@ body {
         display: none !important;
     }
     -webkit-print-color-adjust: exact;
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+    .no-page-break {
+        page-break-inside: avoid;
+    }
+}
+
+span.nobr {
+    white-space: nowrap;
 }
 
 *:focus {
