@@ -22,7 +22,7 @@
             </md-tooltip>
         </md-button>
     </div>
-    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.TMT.show_legend">
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.TMT.show_legend">
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
@@ -43,7 +43,7 @@
         </div>
     </div>
     <p class="md-caption">&nbsp;</p>
-    <div ng-repeat="data in tmt.data" style="margin-top: 4px;">
+    <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: 4px;">
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
