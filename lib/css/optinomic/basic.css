@@ -33,7 +33,6 @@ body {
         page-break-before: always;
     }
     .no-page-break {
-        display: block;
         page-break-inside: avoid !important;
     }
 }
