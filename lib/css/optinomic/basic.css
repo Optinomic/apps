@@ -25,11 +25,15 @@ body {
         display: none !important;
     }
     -webkit-print-color-adjust: exact;
+}
+
+@media print {
     .page-break {
         display: block;
         page-break-before: always;
     }
     .no-page-break {
+        display: block;
         page-break-inside: avoid !important;
     }
 }
