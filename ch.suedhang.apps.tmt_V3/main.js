@@ -275,7 +275,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         "text_left": mz_text,
                         "text_left_caption": "TMT",
                         "text_right": datum_messung,
-                        "text_right_caption": zeit_messung,
+                        "text_right_caption": "",
                         "clinicsample_start": 0,
                         "clinicsample_end": 0,
                         "clinicsample_color": current_cs_color,
