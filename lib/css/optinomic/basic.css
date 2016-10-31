@@ -30,7 +30,7 @@ body {
         page-break-before: always;
     }
     .no-page-break {
-        page-break-inside: avoid;
+        page-break-inside: avoid !important;
     }
 }
 
