@@ -1,4 +1,8 @@
-<div>
+<div ng-if="d.app.fulfillment.loaded" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <p class="md-caption">Prüfe alle Messungen der Patientenliste ({{d.app.patients.data.length}}).</p>
+</div>
+<div ng-if="d.app.fulfillment.loaded">
     <h3 class="md-headline">Patientenliste ({{d.app.patients.data.length}})</h3>
     <div class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="p in d.app.patients.data">
         <div flex layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">

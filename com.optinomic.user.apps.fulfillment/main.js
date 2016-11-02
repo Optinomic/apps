@@ -67,7 +67,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var fulfillment = {
             "results": [],
-            "have_data": false
+            "have_data": false,
+            "loaded": false
         };
 
         var view_name_format = {
