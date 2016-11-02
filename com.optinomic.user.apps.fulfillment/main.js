@@ -153,6 +153,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.getViewData = function() {
 
+        $scope.d.app.fulfillment.loaded = false;
+
         var module_identifier = 'com.optinomic.user.apps.fulfillment';
         var view_name = 'fulfillment_survey_response_view';
         var body_params = $scope.d.app.view_name_format;
