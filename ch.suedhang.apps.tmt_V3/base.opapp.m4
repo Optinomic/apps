@@ -64,3 +64,6 @@ include(emails/overdue.html)
 
 [calculation tmt_score javascript]
 include(calculations/tmt_score.js)
+
+[sql_init]
+include(includes/create_view.sql)
