@@ -330,6 +330,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 //console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
             });
         });
+        $scope.d.TMT.show_legend = false;
 
 
         $scope.d.TMT.init = true;
@@ -369,6 +370,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             current_sample.zscore.clinicsample_start = 0;
             current_sample.zscore.clinicsample_end = 0;
         };
+
+        $scope.d.TMT.show_legend = true;
 
         console.log('(Done) changeClinicSample', current_sample);
     };
