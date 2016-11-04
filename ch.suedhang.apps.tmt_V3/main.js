@@ -161,8 +161,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Default Z-Score Option
         $scope.d.TMT.zscore_options = {
-            "zscore_min": -4,
-            "zscore_max": 4,
+            "zscore_min": -5,
+            "zscore_max": 5,
             "clinicsample_color": "#C5CAE9",
             "centered_zero": true,
             "show_text": true,
