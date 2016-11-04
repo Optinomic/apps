@@ -192,11 +192,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Build 
 
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
+        console.log('(!) 0 - Messung', alle_messungen);
+
+        alle_messungen = dataService.sortByKey(alle_messungen, 'date');
+        console.log('(!) 1 - Messung', alle_messungen);
+
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
         alle_messungen.forEach(function(messung, messungID) {
 
-            console.log('(!) 1 - Messung', messungID, messung);
+            // console.log('(!) 1 - Messung', messungID, messung);
 
 
             // Variablen vorbereiten | verdrahten.
@@ -251,7 +256,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     dimensions_path[myDimID] = mz_id;
                 };
             });
-            console.log('(!) 2 - dimensions_path', dimensions_path);
+            // console.log('(!) 2 - dimensions_path', dimensions_path);
 
 
             // var md_data = $scope.getKSLocation(dimensions_path);
