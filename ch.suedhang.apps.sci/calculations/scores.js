@@ -809,56 +809,56 @@ function main(responses) {
         // Data-Model
         var scores_array = [{
             "question": "Stress durch Verlust",
-            "sub_left": "Keine Belastung durch Verlust und negative Ereignisse",
-            "sub_right": "Belastung durch Verlust und negative Ereignisse",
+            "sub_left": "Keine oder wenige Stressoren durch negative Ereignisse",
+            "sub_right": "Viele Stressoren durch negative Ereignisse",
             "stanine": 0,
             "sum_score": 0,
             "name": 'belastung',
             "population": current_population
         }, {
             "question": "Stresssymptome",
-            "sub_left": "Wenige koerperliche und psychische Symptome",
-            "sub_right": "Viele koerperliche und psychische Symptome",
+            "sub_left": "Wenig koerperliche und psychische Stressreaktionen",
+            "sub_right": "Viele koerperliche und psychische Stressreaktionen",
             "stanine": 0,
             "sum_score": 0,
             "name": 'stress',
             "population": current_population
         }, {
             "question": "Positives Denken",
-            "sub_left": "Unguenstig: Selbstzweifel und Fokus auf Negatives",
-            "sub_right": "Gute Stressbewaeltigung durch positives Denken",
+            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_pos',
             "population": current_population
         }, {
             "question": "Aktive Stressbewaeltigung",
-            "sub_left": "Unguenstig: Stressoren werden nicht beseitigt",
-            "sub_right": "Gute aktive und vorbeugende Stressbewaeltigung",
+            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_ab',
             "population": current_population
         }, {
             "question": "Soziale Unterstuetzung",
-            "sub_left": "Unguenstig: Kaum Unterstuetzung durch andere",
-            "sub_right": "Gut: Viel Unterstuetzung durch Freunde und Bekannte",
+            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_right": "Gut: Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_su',
             "population": current_population
         }, {
             "question": "Halt im Glauben",
-            "sub_left": "Unguenstig: Kaum religioeser / spiritueller Halt",
-            "sub_right": "Gut: Person findet Halt im Glauben",
+            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_rel',
             "population": current_population
         }, {
             "question": "Alkohol- und Zigarettenkonsum",
-            "sub_left": "Gut: Kein erhoehter Alkohol - oder Zigarettenkonsum",
-            "sub_right": "Unguenstige Bewaeltigung durch Alkohol und Zigaretten",
+            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_right": "Häufige Anwendung der ungünstigen Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_alk',
