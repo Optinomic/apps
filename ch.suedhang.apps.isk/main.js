@@ -103,8 +103,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "full": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
-                "sub_left": "Ausmass, in dem eine Person anderen Menschen offen ...",
-                "sub_right": "... und mit positiver Grundhaltung gegenüber tritt. (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
+                "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
+                "sub_right": "Überinvolviert, Kompromisslosigkeit (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
@@ -112,8 +112,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "full": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
-                "sub_left": "Fähigkeit, aus sich herauszugehen...",
-                "sub_right": "... um eigene Interessen aktiv zu verwirklichen. (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
+                "sub_left": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben",
+                "sub_right": "Streitlustig, unüberlegte Entscheidungen (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
@@ -121,8 +121,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "full": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
-                "sub_left": "Fähigkeit, flexibel und rational zu handeln, ...",
-                "sub_right": "... und sich selbst als Akteur begreift. (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
+                "sub_left": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln",
+                "sub_right": "Zwanghafte Selbstkontrolle (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
@@ -130,8 +130,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "full": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
-                "sub_left": "Fähigkeit, bei anderen Menschen einen positiven ...",
-                "sub_right": "... Eindruck zu erzeugen. (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
+                "sub_left": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen",
+                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
@@ -156,48 +156,48 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             var offenisvitaet_auspraegung = 'gering';
-            var offenisvitaet_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+            var offenisvitaet_interpretation = 'Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben';
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
                 offenisvitaet_auspraegung = 'mittel';
-                offenisvitaet_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+                offenisvitaet_interpretation = 'Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.';
             };
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
                 offenisvitaet_auspraegung = 'hoch';
-                offenisvitaet_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+                offenisvitaet_interpretation = 'Streitlustig, unüberlegte Entscheidungen';
             };
             score_answer[1].auspraegung = offenisvitaet_auspraegung;
             score_answer[1].interpretation = offenisvitaet_interpretation;
 
 
             var selbststeuerung_auspraegung = 'gering';
-            var selbststeuerung_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+            var selbststeuerung_interpretation = 'Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln';
 
             if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 3) {
                 selbststeuerung_auspraegung = 'mittel';
-                selbststeuerung_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+                selbststeuerung_interpretation = 'Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen';
             };
 
             if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 6) {
                 selbststeuerung_auspraegung = 'hoch';
-                selbststeuerung_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+                selbststeuerung_interpretation = 'Zwanghafte Selbstkontrolle';
             };
             score_answer[2].auspraegung = selbststeuerung_auspraegung;
             score_answer[2].interpretation = selbststeuerung_interpretation;
 
 
             var reflexibilitaet_auspraegung = 'gering';
-            var reflexibilitaet_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
+            var reflexibilitaet_interpretation = 'Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen';
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
                 reflexibilitaet_auspraegung = 'mittel';
-                reflexibilitaet_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
+                reflexibilitaet_interpretation = 'Das eigenen Verhalten und die Wirkung auf andere reflektieren und ggf. gezielt steuern, sich für andere Menschen interessieren';
             };
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
                 reflexibilitaet_auspraegung = 'hoch';
-                reflexibilitaet_interpretation = 'Überinvolviert, Kompromisslosigkeit';
+                reflexibilitaet_interpretation = 'Zwanghafte Selbstdarstellung, Rigidität';
             };
             score_answer[3].auspraegung = reflexibilitaet_auspraegung;
             score_answer[3].interpretation = reflexibilitaet_interpretation;
