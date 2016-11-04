@@ -9,6 +9,8 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+  stay.cis_fid as cis_fid,
+  stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Alter') as Alter,
   ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre
   ((cast(response AS json))->>'TMTATime') as ZeitA,
@@ -41,7 +43,7 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'startdate'),1,4)::integer AS startdate_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
   ((cast(response AS json))->>'startlanguage') as startlanguage,
-  ((cast(response AS json))->>'submitdate') as submitdate,
+  ((cast(response AS json))->>'submitdate') as submitdate
 
 
 FROM "survey_response_view" 

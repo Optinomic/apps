@@ -8,7 +8,9 @@ SELECT
   survey_response_view.filled as optinomic_survey_filled,
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
-    
+  stay.cis_fid as cis_fid,
+  stay.cis_fid/100 as FID,
+  
   ((cast(response AS json))->>'AISK[AISK1]') as isk_01,
   ((cast(response AS json))->>'AISK[AISK2]') as isk_02,
   ((cast(response AS json))->>'AISK[AISK3]') as isk_03,
@@ -70,7 +72,7 @@ SELECT
   TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
   SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
   SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
+  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 

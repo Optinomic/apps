@@ -9,7 +9,8 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-    
+  stay.cis_fid as cis_fid,
+  stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'AASE[AASE1]') as aase1,
   ((cast(response AS json))->>'AASE[AASE2]') as aase2,
   ((cast(response AS json))->>'AASE[AASE3]') as aase3,
@@ -31,11 +32,6 @@ SELECT
   ((cast(response AS json))->>'AASE[AASE19]') as aase19,
   ((cast(response AS json))->>'AASE[AASE20]') as aase20,
 
-  random_hash,
-  scheduled,
-  filled,
-  module,
-  survey_response.id AS survey_response_id  
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
