@@ -1,7 +1,30 @@
-<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+<div class="grid-border-top" style="margin-top: 30px;">
+    <h3 class="md-subhead">Legende</h3>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.TMT.show_legend">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+                <br> {{d.ks.normgurppe.text}}
+            </p>
+        </div>
         <div flex>
-            <h3 class="md-headline">{{tmt.name}}</h3>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in d.TMT.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
+                    </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-subhead">{{tmt.name}}</h3>
         </div>
         <md-button ng-if="d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
