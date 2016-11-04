@@ -1,7 +1,7 @@
 <div class="grid-border-top" style="margin-top: 30px;" ng-if="!d.TMT.show_legend">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <h3 class="md-title">Stichproben | Legende</h3>
+            <h3 class="md-headline">Stichproben | Legende</h3>
         </div>
         <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
             <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
@@ -34,7 +34,7 @@
 <div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.TMT.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <h3 class="md-title">{{tmt.name}}</h3>
+            <h3 class="md-headline">{{tmt.name}}</h3>
         </div>
         <md-button ng-if="d.TMT.show_legend" ng-click="d.TMT.show_legend = !d.TMT.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <p class="md-caption">&nbsp;</p>
-    <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: 4px;">
+    <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: 0px;">
         <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
