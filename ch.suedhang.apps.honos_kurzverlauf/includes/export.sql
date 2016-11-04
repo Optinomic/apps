@@ -1,62 +1,42 @@
 
 SELECT
-  patient.id AS pid,
+
+-- START:  Optinoimc Default |  Needed for Export-Toolbox
+  survey_response_view.patient_id as optinomic_patient_id,
+  survey_response_view.stay_id as optinomic_stay_id,
+  survey_response_view.event_id as optinomic_event_id,
+  survey_response_view.survey_response_id as optinomic_survey_response_id,
+  survey_response_view.filled as optinomic_survey_filled,
+  ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
+  -- END:  Optinoimc Default |  Needed for Export-Toolbox
+
   patient,
-  CASE WHEN patient.gender='Male' THEN 'Herr' ELSE 'Frau' END || ' ' || COALESCE(patient.last_name, '') || ' ' || COALESCE(patient.first_name, '') AS patient_name,
-  patient.four_letter_code,
-    
-  ((cast(response AS json))->>'FID') as fid,
-  ((cast(response AS json))->>'H1[402V01]') as h1_402v01,
-  ((cast(response AS json))->>'H1[402V02]') as h1_402v02,
-  ((cast(response AS json))->>'H1[402V03]') as h1_402v03,
-  ((cast(response AS json))->>'H1[402V04]') as h1_402v04,
-  ((cast(response AS json))->>'H1[402V05]') as h1_402v05,
-  ((cast(response AS json))->>'H1[402V06]') as h1_402v06,
-  ((cast(response AS json))->>'H1[402V07]') as h1_402v07,
-  ((cast(response AS json))->>'H1[402V08]') as h1_402v08,
-  ((cast(response AS json))->>'H2[402V11]') as h2_402v11,
-  ((cast(response AS json))->>'H2[402V12]') as h2_402v12,
-  ((cast(response AS json))->>'H2[402V13]') as h2_402v13,
-  ((cast(response AS json))->>'H2[402V14]') as h2_402v14,
-  ((cast(response AS json))->>'PID') as pid,
-  ((cast(response AS json))->>'cgiSG') as cgisg,
-  ((cast(response AS json))->>'cgiZA') as cgiza,
-  ((cast(response AS json))->>'datestamp') as datestamp,
-  TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
-  SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
-  SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')) AS datestamp_week,
-  ((cast(response AS json))->>'id') as id,
-  ((cast(response AS json))->>'lastpage') as lastpage,
-  ((cast(response AS json))->>'optinomixHASH') as optinomixhash,
-  ((cast(response AS json))->>'q401V04') as q401v04,
-  ((cast(response AS json))->>'q401V05') as q401v05,
-  ((cast(response AS json))->>'q401V06') as q401v06,
-  ((cast(response AS json))->>'q402V00') as q402v00,
-  ((cast(response AS json))->>'q402V09') as q402v09,
-  ((cast(response AS json))->>'q402V10') as q402v10,
-  ((cast(response AS json))->>'startdate') as startdate,
-  TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')  as startdate_date,
-  SUBSTRING(((cast(response AS json))->>'startdate'),12,5) AS startdate_time,
-  SUBSTRING(((cast(response AS json))->>'startdate'),1,4)::integer AS startdate_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
-  ((cast(response AS json))->>'startlanguage') as startlanguage,
-  ((cast(response AS json))->>'submitdate') as submitdate,
-  TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')  as submitdate_date,
-  SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
-  SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
+  survey_response_view.survey_response_id AS survey_response_id,
+  ((cast(response AS json))->>'PID') as PID_Limesurvey,
+  'PH' as Rekordart,
+  71286515 as betriebsnummer_bur,
+  ((cast(response AS json))->>'FID') as FID,
+  3 as zeitpunkt_honos,
+  null as dropoutcode_honos,
+  null as spezifikation_dropout_honos_andere,
+  ((cast(response AS json))->>'q402V00') as datum_erhebung_honos,
+  ((cast(response AS json))->>'H1[402V01]') as honos_h1,
+  ((cast(response AS json))->>'H1[402V02]') as honos_h2,
+  null as honos_h3,
+  null as honos_h4,
+  ((cast(response AS json))->>'H1[402V05]') as honos_h5,
+  null as honos_h6,
+  null as honos_h7,
+  null as honos_h8,
+  null as honos_h8a,
+  null as honos_h8b,  
+  null as honos_h9,
+  null as honos_h10,
+  null as honos_h11,
+  null as honos_h12,
+  TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD HH24:MI:SS')  as Datum_Datumsformat
 
-  random_hash,
-  scheduled,
-  filled,
-  module,
-  survey_response.id AS survey_response_id  
-
-FROM survey_response 
-INNER JOIN patient ON(survey_response.patient = patient.id) 
-
-WHERE module = 'ch.suedhang.apps.honos';
-
-
- 
+FROM "survey_response_view" 
+LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
+LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
+WHERE module = 'ch.suedhang.apps.honos_kurzverlauf';

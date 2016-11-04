@@ -106,3 +106,6 @@ include(emails/overdue.html)
 
 [calculation honos_calculation javascript]
 include(calculations/honos.js)
+
+[sql_init]
+include(includes/create_view.sql)
