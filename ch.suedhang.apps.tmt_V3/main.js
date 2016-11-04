@@ -195,7 +195,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) 0 - Messung', alle_messungen);
 
         // alle_messungen = dataService.sortByKey(alle_messungen, 'date', 'asc');
-        dataService.sortOn(alle_messungen, 'date', true, false);
+        dataService.sortOn(alle_messungen, 'date', false, false);
         console.log('(!) 1 - Messung', alle_messungen);
 
 
