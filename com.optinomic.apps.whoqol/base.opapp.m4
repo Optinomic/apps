@@ -72,3 +72,6 @@ survey = WHOQOL
 
 [calculation phys_psych_calculation javascript]
 include(calculations/phys_psych_calculation.js)
+
+[sql_init]
+include(includes/create_view.sql)
