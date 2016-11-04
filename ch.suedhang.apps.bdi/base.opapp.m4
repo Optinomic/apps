@@ -76,3 +76,6 @@ survey = bdi2
 
 [calculation bdi_score javascript]
 include(calculations/bdi_score.js)
+
+[sql_init]
+include(includes/create_view.sql)
