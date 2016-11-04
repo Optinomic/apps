@@ -453,39 +453,39 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Stress
             scores[0].question = "Stress durch Verlust";
-            scores[0].sub_left = "Keine Belastung durch Verlust und negative Ereignisse";
-            scores[0].sub_right = "Belastung durch Verlust und negative Ereignisse";
+            scores[0].sub_left = "Keine oder wenige Stressoren durch negative Ereignisse";
+            scores[0].sub_right = "Viele Stressoren durch negative Ereignisse";
 
             scores[1].question = "Stresssymptome";
-            scores[1].sub_left = "Wenige körperliche und psychische Symptome";
-            scores[1].sub_right = "Viele körperliche und psychische Symptome";
+            scores[1].sub_left = "Wenig körperliche und psychische Stressreaktionen";
+            scores[1].sub_right = "Viele körperliche und psychische Stressreaktionen";
 
 
             // Hilfreiche Strategien
 
             scores[2].question = "Positives Denken";
-            scores[2].sub_left = "Ungünstig: Selbstzweifel und Fokus auf Negatives";
-            scores[2].sub_right = "Gute Stressbewältigung durch positives Denken";
+            scores[2].sub_left = "Anwendung der Strategie wenig ausgeprägt";
+            scores[2].sub_right = "Hilfreiche Nutzung der Strategie";
 
             scores[3].question = "Aktive Stressbewältigung";
-            scores[3].sub_left = "Ungünstig: Stressoren werden nicht beseitigt";
-            scores[3].sub_right = "Gute aktive und vorbeugende Stressbewältigung";
+            scores[3].sub_left = "Anwendung der Strategie wenig ausgeprägt";
+            scores[3].sub_right = "Hilfreiche Nutzung der Strategie";
 
 
             scores[4].question = "Soziale Unterstützung";
-            scores[4].sub_left = "Ungünstig: Kaum Unterstützung durch andere";
-            scores[4].sub_right = "Gut: Viel Unterstützung durch Freunde und Bekannte";
+            scores[4].sub_left = "Anwendung der Strategie wenig ausgeprägt";
+            scores[4].sub_right = "Hilfreiche Nutzung der Strategie";
 
             scores[5].question = "Halt im Glauben";
-            scores[5].sub_left = "Ungünstig: Kaum religiöser / spiritueller Halt";
-            scores[5].sub_right = "Gut: Person findet Halt im Glauben";
+            scores[5].sub_left = "Anwendung der Strategie wenig ausgeprägt";
+            scores[5].sub_right = "Hilfreiche Nutzung der Strategie";
 
 
             // Ungünstige Strategien
 
             scores[6].question = "Alkohol- und Zigarettenkonsum";
-            scores[6].sub_left = "Gut: Kein erhöhter Alkohol - oder Zigarettenkonsum";
-            scores[6].sub_right = "Ungünstige Bewältigung durch Alkohol und Zigaretten";
+            scores[6].sub_left = "Anwendung der Strategie wenig ausgeprägt";
+            scores[6].sub_right = "Häufige Anwendung der ungünstigen Strategie";
 
 
             // Create nice Labels
