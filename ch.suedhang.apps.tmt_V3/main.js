@@ -157,7 +157,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.TMT = {};
         $scope.d.TMT.init = false;
-        $scope.d.TMT.show_legend = true;
+        $scope.d.TMT.show_legend = false;
 
         // Default Z-Score Option
         $scope.d.TMT.zscore_options = {
@@ -192,11 +192,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Build 
 
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-        console.log('(!) 0 - Messung', alle_messungen);
 
-        // alle_messungen = dataService.sortByKey(alle_messungen, 'date', 'asc');
+        // Sort | Neueste Messung als letzter Eintrag.
         dataService.sortOn(alle_messungen, 'date', false, false);
-        console.log('(!) 1 - Messung', alle_messungen);
 
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
