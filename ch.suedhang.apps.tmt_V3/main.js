@@ -194,7 +194,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
         console.log('(!) 0 - Messung', alle_messungen);
 
-        alle_messungen = dataService.sortByKey(alle_messungen, 'TMTBTime', 'desc');
+        alle_messungen = dataService.sortByKey(alle_messungen, 'date', 'desc');
         console.log('(!) 1 - Messung', alle_messungen);
 
 
