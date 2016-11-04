@@ -1,15 +1,21 @@
 SELECT
-  sr.id as survey_response_id, 
-  sr.response, 
-  sr.event_id, 
-  sr.filled, 
-  ev.patient as patient_id,
-  first(s.id) as stay_id
 
-FROM survey_responses as sr 
-LEFT JOIN event as ev on ev.id = sr.event_id 
-LEFT JOIN stay as s on s.patient = ev.patient and s.start <= ev.created_at and (s.stop >= ev.created_at or s.stop is null) 
-GROUP BY sr.id, sr.response, sr.event_id, sr.filled, ev.patient
+stay.cis_fid/100 as FID,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ001]') as Neuro_1,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ002]') as Neuro_2,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ003]') as Neuro_3,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ006]') as Neuro_6,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ007]') as Neuro_7,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ008]') as Neuro_8,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ009]') as Neuro_9,
+((cast(response AS JSON)) -> 'NeuroAnamAus[SQ010]') as Neuro_10
+
+
+FROM survey_response
+LEFT JOIN patient ON(survey_response.patient_id = patient.id) 
+LEFT JOIN stay ON(survey_response.stay_id = stay.id) 
+
+WHERE module = 'ch.suedhang.apps.neuroanamnese'
 
 /*
 Abstinenz
