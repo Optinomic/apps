@@ -29,11 +29,11 @@ id = SCI
 type = lime
 responsibility = patient_via_assessment
 name = Stress- & Coping-Inventar
-host = default
+host = limesurvey_v2
 survey_id = 933257
-hash = X36X990
-pid = X36X991
-fid = X36X992
+hash = X2X6
+pid = X2X7
+fid = X2X8
 min_questions =
 min_lastpage = 2
 
@@ -42,7 +42,7 @@ type = on_activation
 time = 08:00
 due_after = 259200
 overdue = ignore
-description = Eintritt: Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
+description = Eintritt: Stress-Coping-Inventar (SCI)
 survey = SCI
 
 [event activation]
@@ -51,7 +51,7 @@ days = 7
 time = 08:00
 due_after = 259200
 overdue = ignore
-description = Austritt: Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
+description = Austritt: Stress-Coping-Inventar (SCI)
 survey = SCI
 
 
