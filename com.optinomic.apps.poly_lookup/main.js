@@ -53,7 +53,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var odbc = {
             "data_packages": [],
-            "selected": {}
+            "current": {
+                "selected": false,
+                "package": {}
+            }
         };
 
         // ODBC - Datenquellen festlegen:
@@ -67,25 +70,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         odbc.data_packages.push(data_query);
 
 
-        // Default Selektiert setzen.
-        odbc.selected = odbc.data_packages[0];
-
-
         $scope.d.odbc = odbc;
         console.log('initODBC :: ', $scope.d.odbc);
     };
 
 
-    $scope.runODBCQuery = function(selected_odbc) {
+    $scope.runODBCQuery = function(selected_odbc_package) {
 
         // -----------------------------------
         // RUN: ODBC Objekt
         // -----------------------------------
 
-        // Selektiere Datenquelle setzen.
-        $scope.d.odbc.selected = selected_odbc;
+        var d = {
+            "selected": true,
+            "executed": false,
+            "package": selected_odbc_package,
+            "data": {}
+        };
 
-        console.log('runODBCQuery :: ', $scope.d.odbc.data_packages.selected);
+        // Selektiere Datenquelle setzen.
+        $scope.d.odbc.current = d;
+
+        console.log('runODBCQuery :: ', $scope.d.odbc.current);
     };
 
 
