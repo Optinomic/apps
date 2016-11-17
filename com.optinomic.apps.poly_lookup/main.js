@@ -31,7 +31,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Run App-Functions:
-            $scope.runODBC();
+            $scope.initODBC();
 
 
             // Finishing: Console Info & Init = done.
@@ -46,31 +46,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     // -----------------------------------
-    // Init: Export-Data
+    // Init: ODBC Objekt
     // -----------------------------------
-    $scope.runODBC = function() {
+    $scope.initODBC = function() {
+
+        var odbc = {
+            "data_packages": {
+                "all": [],
+                "selected": {}
+            }
+
+        };
+
+        // ODBC - Datenquellen festlegen:
+
+        var data_query = {};
+        data_query = {
+            "name": 'Patient | Falldaten',
+            "sql": include_as_js_string(
+                poly_odbc.sql)
+        };
+        odbc.data_packages.all.push(data_query);
 
 
-        // ------------------------------------------------
-        // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
-        // => (export.sql) muss sich in /includes befinden
-        // ------------------------------------------------
+        // Default Selektiert setzen.
+        odbc.data_packages.selected = odbc.data_packages.all[0];
 
 
-        // Hinzufügen gespeicherter SQL-Dateien in /includes
-        var module_packages = [];
 
-        // var data_query = {};
-        // data_query = {
-        //     name: 'WHQOL-Example (with stay)',
-        //     sql: in clude_as_js_string(
-        //         export.sql)
-        // };
-        // module_packages.push(data_query);
-
-        // Init the given Export Settings
-        $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
+        $scope.d.odbc = odbc;
 
     };
 
