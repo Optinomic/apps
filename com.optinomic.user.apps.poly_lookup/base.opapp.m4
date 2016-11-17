@@ -3,10 +3,10 @@ id = com.optinomic.apps.poly_lookup
 name = Polypoint - Connector
 short_description = ODBC :: POLY-Query 
 version = include(VERSION)
-type = patient
+type = user
 
 [description]
-Ziel dieser App ist eine ODBC Abfrage auszuführen im Sinne von Polypoint-Lookup.
+Ziel dieser App ist eine Sammlung von Polypoint ODBC-Abfragen zur Verfügung zu stellen und diese auszuführen. Dieses Polypoint-Lookup funktioniert nur in der Klinik Südhang.
 
 [developer]
 first_name = Beat
@@ -30,5 +30,4 @@ include(main.js)
 [css]
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
-
 
