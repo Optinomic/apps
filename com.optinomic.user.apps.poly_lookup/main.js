@@ -64,6 +64,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "name": 'Patient | Falldaten',
                 "sql": include_as_js_string(
                     pa_fa.sql)
+            }, {
+                "name": 'ELDAT_CUST_1001',
+                "sql": include_as_js_string(
+                    ELDAT_CUST_1001.sql)
             }],
             "current": {
                 "selected": false,
@@ -72,6 +76,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "data": {}
             }
         };
+
 
 
         $scope.d.odbc = odbc;
