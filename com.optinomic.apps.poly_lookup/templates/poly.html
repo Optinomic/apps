@@ -1,0 +1,150 @@
+include(../lib/html/optinomic/page/start.m4)
+<md-content class="md-padding" ng-init="d.navigator = 0">
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    {{d.dataMain.apps.current.name}}
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout-margin>
+            <p>&nbsp;</p>
+            <h3 class="md-subhead">Autoritarismus</h3>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex>
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score_sum" min="0" max="42" show-percent-scale="true" percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex>
+                    <p class="md-body-1">Autoritarismus ist gekennzeichnet durch Glauben an Autoritäten, autoritäre Unterordnung und Intoleranz gegenüber anderen Personen und zielt somit auf die sozial-bewertende Ebene.
+                        <span class="md-caption text-muted">&nbsp; ( Score: {{d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score}}, Summe: {{d.dataMain.calculations[0].calculation_results[d.navigator].autoritarismuss_scale_score_sum}} )</span>
+                    </p>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <md-button aria-label="Antworten anzeigen/ausblenden" ng-click="d.showSurvey = !d.showSurvey">
+                <span ng-if="!d.showSurvey">Antworten anzeigen</span>
+                <span ng-if="d.showSurvey">Antworten ausblenden</span>
+            </md-button>
+        </md-card-content>
+        <md-divider ng-if="d.showSurvey"></md-divider>
+        <md-card-content ng-if="d.showSurvey" layout-margin>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    1.) Gehorsam und Achtung gegenüber Autoritäten sind die wichtigsten Tugenden, die Kinder lernen sollten.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_01 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    2.) Ein Mensch mit schlechten Umgangsformen kann nicht erwarten, mit anständigen Menschen gut auszukommen.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_02 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    3.) Wenn die Leute weniger reden und mehr arbeiten würden, ginge es jedem besser.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_03 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    4.) Kein anständiger Mensch käme jemals auf den Gedanken, einen Freund zu verletzen.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_04 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    5.) Irgendwann muss man die rebellischen Ideen der Jugendzeit überwinden.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_05 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    6.) Junge Leute haben ab und zu rebellische Ideen, aber wenn sie älter werden, sollten sie darüber hinwegkommen und ihren Platz im Leben finden.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_06 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-margin>
+                <div flex="75">
+                    7.) Bücher und Filme sollten sich nicht so viel mit den Schattenseiten des Lebens befassen.
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 1">stimmt überhaupt nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 2">stimmt weitgehend nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 3">stimmt eher nicht</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 4">stimmt ein wenig</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 5">stimmt weitgehend</span>
+                        <span ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.aus_item_07 === 6">stimmt genau</span>
+                    </p>
+                </div>
+            </div>
+        </md-card-content>
+        <md-divider></md-divider>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
+                <i class="mdi mdi-chevron-left"></i>
+            </md-button>
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_date}}, {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_time}} ({{d.navigator + 1}}/{{d.dataMain.calculations[0].calculation_results.length}})</p>
+            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
+                <i class="mdi mdi-chevron-right"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</md-content>
+include(../lib/html/optinomic/page/end.m4)
