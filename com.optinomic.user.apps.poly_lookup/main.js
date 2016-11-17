@@ -52,7 +52,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // -----------------------------------
 
         var odbc = {
-            "data_packages": [],
+            "data_packages": [{
+                "name": 'Falldaten',
+                "sql": include_as_js_string(
+                    fa.sql)
+            }, {
+                "name": 'Falldaten DQY',
+                "sql": include_as_js_string(
+                    fa_dqy.sql)
+            }, {
+                "name": 'Patient | Falldaten',
+                "sql": include_as_js_string(
+                    pa_fa.sql)
+            }],
             "current": {
                 "selected": false,
                 "executed": false,
@@ -60,18 +72,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "data": {}
             }
         };
-
-        // ODBC - Datenquellen festlegen:
-
-        var data_query = {};
-
-        // (+) Abfrage Datenquelle
-        data_query = {
-            "name": 'Patient | Falldaten',
-            "sql": include_as_js_string(
-                pa_fa.sql)
-        };
-        odbc.data_packages.push(data_query);
 
 
         $scope.d.odbc = odbc;
