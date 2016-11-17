@@ -64,10 +64,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // ODBC - Datenquellen festlegen:
 
         var data_query = {};
+
+        // (+) Abfrage Datenquelle
         data_query = {
             "name": 'Patient | Falldaten',
             "sql": include_as_js_string(
-                poly_odbc.sql)
+                pa_fa.sql)
         };
         odbc.data_packages.push(data_query);
 
