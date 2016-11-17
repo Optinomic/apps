@@ -57,6 +57,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "sql": include_as_js_string(
                     fa.sql)
             }, {
+                "name": 'PUBLIC - Falldaten',
+                "sql": include_as_js_string(
+                    public_fa.sql)
+            }, {
                 "name": 'Falldaten DQY',
                 "sql": include_as_js_string(
                     fa_dqy.sql)
