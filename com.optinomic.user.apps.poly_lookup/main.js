@@ -93,6 +93,46 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Selektiere Datenquelle setzen.
         $scope.d.odbc.current = d;
 
+        // INIT
+        var query = selected_odbc_package.sql;
+        var format = 'json';
+        var delimitter = ';';
+        var including_headers = 'True';
+        var direct = 'True';
+
+        //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
+        var api = dataService.runDataSource(query, 'Polypoint', delimitter, including_headers, format, direct);
+
+        api.success(function(data) {
+
+            console.log('(DATA) runODBC  :: ', data);
+
+
+            // // JSON: Loop all rows and make Object from 'value' & 'response'.
+            // if ($scope.d.sql_box.format === 'json') {
+            //     if (data.rows.length > 0) {
+            //         data.rows.forEach(function(current_row, myRowIndex) {
+            //             if (current_row.value !== undefined) {
+            //                 var obj = JSON.parse(current_row.value);
+            //                 current_row.value = obj
+            //             };
+            //             if (current_row.response !== undefined) {
+            //                 var obj = JSON.parse(current_row.response);
+            //                 current_row.response = obj
+            //             };
+            //         });
+            //     };
+            // };
+
+        });
+
+
+        api.error(function(data) {
+            console.log('ERROR: runODBC: ', data);
+        });
+
+
+
         console.log('runODBC :: ', $scope.d.odbc.current);
     };
 
