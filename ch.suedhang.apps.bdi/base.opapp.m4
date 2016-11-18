@@ -24,7 +24,7 @@ website = http://suedhang.ch/de/
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template report_test 6 7]
+[template scores_reeeeeeeeport_oooonly 6 7]
 include(templates/score_report.html)
 
 

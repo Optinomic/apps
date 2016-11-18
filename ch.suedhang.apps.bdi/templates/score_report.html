@@ -3,6 +3,6 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="res in d.dataMain.calculations[0].calculation_results">
     <p>{{res.score.current_range.interpretation_de}} (Σ{{res.score.score}})</p>
     <p ng-if="res.response.data.response.Datum">Datum: {{res.response.data.response.Datum | date}}</p>
-    <p ng-if="!res.response.data.response.Datum">Datum Filled: {{res.response.data.filled | date}}</p>
+    <p ng-if="!res.response.data.response.Datum">Datum: {{res.response.data.filled | date}}</p>
 </div>
 include(../lib/html/optinomic/page/end.m4)

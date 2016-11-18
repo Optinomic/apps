@@ -5,4 +5,7 @@ include(../lib/html/optinomic/page/start.m4)
     	{{d.dataMain.survey_responses | json}}
     </pre>
 </div>
+<div ng-if="d.haveData">
+    <p>Habe Daten! :-)</p>
+</div>
 include(../lib/html/optinomic/page/end.m4)
