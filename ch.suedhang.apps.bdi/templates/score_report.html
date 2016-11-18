@@ -1,6 +1,8 @@
+include(../lib/html/optinomic/page/start.m4)
 <p>Anzahl: {{d.dataMain.calculations[0].calculation_results.length}}</p>
 <div ng-repeat="res in d.dataMain.calculations[0].calculation_results">
     <p>SCORE: {{res.score.score}}</p>
     <p>Interpretation: {{res.score.current_range.interpretation_de}}</p>
     <p>Datum: {{res.response.data.filled_date.filled_date}}</p>
 </div>
+include(../lib/html/optinomic/page/end.m4)
