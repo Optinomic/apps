@@ -16,11 +16,12 @@ include(../lib/html/optinomic/page/start.m4)
             <div flex>
                 <h3 class="md-headline">{{d.odbc.current.package.name}}</h3>
             </div>
+            <md-button ng-click="d.odbc.current.selected = false">Schliessen</md-button>
         </div>
         <div ng-if="d.odbc.current.executed">
             <p class="md-subtitle">Rows: {{d.odbc.current.data.rows.length}}</p>
             <md-button ng-click="downloadODBC()" class="md-raised">JSON File speichern</md-button>
-            <p class="md-subtitle">Headers:</p>
+            <p class="md-subtitle" style="margin-top: 24px;">Headers:</p>
             <pre>{{d.odbc.current.data.headers | json}}</pre>
         </div>
         <div ng-if="!d.odbc.current.executed">

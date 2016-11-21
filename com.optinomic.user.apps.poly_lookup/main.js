@@ -87,8 +87,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.downloadODBC = function() {
 
         var fileName = $scope.d.odbc.current.package.name;
-        filename = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        filename = fileName + '.json';
+        fileName = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        fileName = fileName + '.json';
 
         var data = $scope.d.odbc.current.data;
 
