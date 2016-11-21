@@ -1,13 +1,33 @@
 include(../lib/html/optinomic/page/start.m4)
 <div class="grid-border-top" style="margin-top: 30px;">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-        <div flex>
-            <h3 class="md-headline">Datenquellen</h3>
+    <div ng-if="!d.odbc.current.selected">
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <h3 class="md-headline">Datenquellen</h3>
+            </div>
+        </div>
+        <div ng-repeat="odbc in d.odbc.data_packages" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <p flex class="md-subtitle">{{odbc.name}}</p>
+            <md-button ng-click="runODBC(odbc)" class="md-primary">Ausführen</md-button>
         </div>
     </div>
-    <div ng-repeat="odbc in d.odbc.data_packages" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-        <p flex class="md-subtitle">{{odbc.name}}</p>
-        <md-button ng-click="runODBC(odbc)" class="md-primary">Ausführen</md-button>
+    <div ng-if="d.odbc.current.selected">
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <h3 class="md-headline">{{d.odbc.current.package.name}}</h3>
+            </div>
+        </div>
+        <div ng-if="d.odbc.current.executed">
+            <p class="md-subtitle">Rows: {{d.odbc.current.data.rows.length}}</p>
+            <md-button ng-click="downloadODBC()" class="md-raised">JSON File speichern</md-button>
+            <p class="md-subtitle">Headers:</p>
+            <pre>{{d.odbc.current.data.headers | json}}</pre>
+        </div>
+        <div ng-if="!d.odbc.current.executed">
+            <div layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+        </div>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)

@@ -61,10 +61,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "sql": include_as_js_string(
                     public_fa.sql)
             }, {
-                "name": 'Falldaten DQY',
-                "sql": include_as_js_string(
-                    fa_dqy.sql)
-            }, {
                 "name": 'Patient | Falldaten',
                 "sql": include_as_js_string(
                     pa_fa.sql)
@@ -85,6 +81,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.odbc = odbc;
         console.log('initODBC :: ', $scope.d.odbc);
+    };
+
+
+    $scope.downloadODBC = function() {
+
+        var fileName = $scope.d.odbc.current.package.name;
+        filename = fileName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        filename = fileName + '.json';
+
+        var data = $scope.d.odbc.current.data;
+
+        dataService.saveData(data, fileName);
     };
 
 
@@ -118,6 +126,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             console.log('(DATA) runODBC  :: ', data);
 
+            $scope.d.odbc.current.executed = true;
+            $scope.d.odbc.current.data = data;
+
 
             // // JSON: Loop all rows and make Object from 'value' & 'response'.
             // if ($scope.d.sql_box.format === 'json') {
@@ -139,6 +150,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         api.error(function(data) {
+            $scope.d.odbc.current.executed = true;
+            $scope.d.odbc.current.data = data;
+
             console.log('ERROR: runODBC: ', data);
         });
 
