@@ -65,9 +65,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "sql": include_as_js_string(
                     pa_fa.sql)
             }, {
-                "name": 'ELDAT_CUST_1001',
+                "name": 'Belegung - History',
                 "sql": include_as_js_string(
-                    ELDAT_CUST_1001.sql)
+                    belegung_history.sql)
+            }, {
+                "name": 'GET FAID',
+                "sql": include_as_js_string(
+                    get_faid.sql)
             }],
             "current": {
                 "selected": false,
