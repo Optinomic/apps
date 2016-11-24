@@ -1,19 +1,18 @@
 include(../lib/html/optinomic/page/start.m4)
-<h3 class="md-headline">Soziale Kompetenzen</h3>
-<div ng-repeat="score in d.group_scores" class="grid-border-top" style="margin-top: 30px;">
+<div ng-repeat="score in d.group_scores" class="grid-border-bottom" style="margin-bottom: 30px;">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">{{score.question}}</h3>
-            <p class="md-body-1">{{score.full}}</p>
+            <p class="md-subhead">{{score.full}}</p>
             <div class="no-page-break" style="margin-top: 16px;" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
                 <div flex>
-                    <p class="md-subhead">Geringe Ausprägung</p>
+                    <p class="md-body-1">Geringe Ausprägung</p>
                     <p class="md-caption" style="color:#757575;margin-top:-6px;">
                         {{score.sub_left}}
                     </p>
                 </div>
                 <div flex>
-                    <p class="md-subhead">Hohe Ausprägung</p>
+                    <p class="md-body-1">Hohe Ausprägung</p>
                     <p class="md-caption" style="color:#757575;margin-top:-6px;">
                         {{score.sub_right}}
                     </p>
@@ -25,7 +24,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-body-2">{{data.label}}</p>
                     </div>
                     <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" show-percent-scale="false" show-min-max="true"></score-threshold>
+                        <score-threshold score="data.stanine" min="1" max="9" show-percent-scale="false" show-min-max="false"></score-threshold>
                     </div>
                     <div flex>
                         <p class="md-body-1">{{data.interpretation}} (Σ{{data.sum_score}})</p>
