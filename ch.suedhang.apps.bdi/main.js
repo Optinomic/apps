@@ -45,6 +45,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     $scope.setExport();
                 };
 
+                if (current_template === 'scores_print') {
+                    $scope.setPrintText();
+                };
+
                 // Run App-Functions:
 
             };
@@ -556,5 +560,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
     };
 
+
+    // -------------------
+    // Data-Export
+    // -------------------
+    $scope.setPrintText = function() {
+        $scope.d.text = {};
+
+        $scope.d.text.patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
+        $scope.d.text.messungen = $scope.d.dataMain.calculations["0"].calculation_results;
+
+        $scope.d.text.messungen = dataService.sortOn($scope.d.text.messungen, 'response.data.filled', true, false);
+
+        $scope.d.text.text_start = patient_anrede + " wurde " + messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
+
+
+    };
 
 });
