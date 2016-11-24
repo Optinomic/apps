@@ -89,49 +89,49 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.setStanineView = function() {
 
         // Ranges initialisieren
-        $scope.scale_ranges = {
+        $scope.d.scale_ranges = {
             "ranges": [{
-                "from": 1,
+                "from": 0,
                 "to": 1,
                 "result": "Stanine 1",
                 "result_color": "green"
             }, {
-                "from": 2,
+                "from": 1,
                 "to": 2,
                 "result": "Stanine 2",
                 "result_color": "green"
             }, {
-                "from": 3,
+                "from": 2,
                 "to": 3,
                 "result": "Stanine 3",
                 "result_color": "green"
             }, {
-                "from": 4,
+                "from": 3,
                 "to": 4,
                 "result": "Stanine 4",
                 "result_color": "green"
             }, {
-                "from": 5,
+                "from": 4,
                 "to": 5,
                 "result": "Stanine 5",
                 "result_color": "green"
             }, {
-                "from": 6,
+                "from": 5,
                 "to": 6,
                 "result": "Stanine 6",
                 "result_color": "green"
             }, {
-                "from": 7,
+                "from": 6,
                 "to": 7,
                 "result": "Stanine 7",
                 "result_color": "green"
             }, {
-                "from": 8,
+                "from": 7,
                 "to": 8,
                 "result": "Stanine 8",
                 "result_color": "green"
             }, {
-                "from": 9,
+                "from": 8,
                 "to": 9,
                 "result": "Stanine 9",
                 "result_color": "green"
@@ -271,11 +271,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             var respone_to_push = {
+                "mz": current_response.entity.data.response.Erhebungszeitpunkt,
                 "label": label,
                 "scores": score_answer
             }
             $scope.stanine.data.push(respone_to_push);
         });
+
+
 
 
         $scope.stanine.options = {
@@ -290,6 +293,29 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.groupStanineView = function() {
+
+        var input_data = angular.copy($scope.stanine.data);
+
+        //prepare Array
+
+        var group_array = [];
+
+        var prp = input_data[0].scores;
+        prp.forEach(function(current_score, myID) {
+            var obj_to_push = {
+                "full": current_score.full,
+                "interpretation": current_score.interpretation,
+                "question": current_score.question,
+                "sub_left": current_score.sub_left,
+                "sub_right": current_score.sub_right,
+                "data": []
+            };
+
+        });
+
+
+    };
 
 
 });
