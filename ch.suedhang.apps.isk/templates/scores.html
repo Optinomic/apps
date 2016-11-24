@@ -5,19 +5,6 @@ include(../lib/html/optinomic/page/start.m4)
         <div flex>
             <h3 class="md-headline">{{score.question}}</h3>
             <p class="md-body-1">{{score.full}}</p>
-            <div ng-repeat="data in score.data" layout="column" layout-gt-xs="column" layout-xs="column" layout-align="center center">
-                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center">
-                    <div flex="5">
-                        <p class="md-title">{{data.label}}</p>
-                    </div>
-                    <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" show-percent-scale="true" show-min-max="false"></score-threshold>
-                    </div>
-                    <div flex>
-                        <p class="md-body-1">{{data.interpretation}} (Σ{{data.sum_score}})</p>
-                    </div>
-                </div>
-            </div>
             <div class="no-page-break" style="margin-top: 16px;" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
                 <div flex>
                     <p class="md-subhead">Geringe Ausprägung</p>
@@ -30,6 +17,19 @@ include(../lib/html/optinomic/page/start.m4)
                     <p class="md-caption" style="color:#757575;margin-top:-6px;">
                         {{score.sub_right}}
                     </p>
+                </div>
+            </div>
+            <div ng-repeat="data in score.data" layout="column" layout-gt-xs="column" layout-xs="column" layout-align="center center">
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center">
+                    <div flex="10">
+                        <p class="md-body-2">{{data.label}}</p>
+                    </div>
+                    <div flex="40">
+                        <score-threshold score="data.stanine" min="1" max="9" show-percent-scale="false" show-min-max="true"></score-threshold>
+                    </div>
+                    <div flex>
+                        <p class="md-body-1">{{data.interpretation}} (Σ{{data.sum_score}})</p>
+                    </div>
                 </div>
             </div>
         </div>
