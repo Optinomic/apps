@@ -321,23 +321,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.group_scores = group_array;
 
         // Fill Scores
-        var messungen = input_data[0].scores;
-        messungen.forEach(function(current_messung, myMessungID) {
-
-            current_messung.scores.forEach(function(current_score, myScoreID) {
-
-                var current_array = $scope.d.group_scores[myScoreID];
-
-                var obj_to_push = {
-                    "auspraegung": current_score.auspraegung,
-                    "stanine": current_score.stanine,
-                    "sum_score": current_score.sum_score,
-                    "label": current_messung.label
-                };
-            });
-
-        });
-
+        // var messungen = input_data[0].scores;
+        // messungen.forEach(function(current_messung, myMessungID) {
+        // 
+        //     current_messung.scores.forEach(function(current_score, myScoreID) {
+        // 
+        //         var current_array = $scope.d.group_scores[myScoreID];
+        // 
+        //         var obj_to_push = {
+        //             "auspraegung": current_score.auspraegung,
+        //             "stanine": current_score.stanine,
+        //             "sum_score": current_score.sum_score,
+        //             "label": current_messung.label
+        //         };
+        //     });
+        // 
+        // });
+        // 
         console.log('groupStanineView', $scope.d.group_scores);
 
 
