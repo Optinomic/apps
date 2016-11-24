@@ -569,7 +569,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         t.patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
 
-        t.messungen = $scope.d.dataMain.calculations["0"].calculation_results;
+        t.messungen = $scope.d.dataMain.calculations[0].calculation_results;
         console.log('t.messungen', t);
         t.messungen = dataService.sortOn(t.messungen, 'response.data.filled', true, false);
 
