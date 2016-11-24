@@ -242,12 +242,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var reflexibilitaet_auspraegung = 'Gering';
             var reflexibilitaet_interpretation = 'Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen';
 
-            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
+            if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 3) {
                 reflexibilitaet_auspraegung = 'Mittel';
                 reflexibilitaet_interpretation = 'Das eigenen Verhalten und die Wirkung auf andere reflektieren und ggf. gezielt steuern, sich für andere Menschen interessieren';
             };
 
-            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
+            if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 6) {
                 reflexibilitaet_auspraegung = 'Hoch';
                 reflexibilitaet_interpretation = 'Zwanghafte Selbstdarstellung, Rigidität';
             };
