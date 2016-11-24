@@ -35,6 +35,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run App-Functions:
                 $scope.setStanineView();
+                $scope.groupStanineView();
                 $scope.setExport();
 
             };
@@ -257,21 +258,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Create nice Labels
             var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
             var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            var label_type = 'Verlauf: ';
+            var label_type = 'Verlauf';
 
 
             // Unsicher ob die hier noch stimmt - muss noch überprüft werden.
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
-                label_type = 'Eintritt: ';
+                label_type = 'Eintritt';
             };
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-                label_type = 'Austritt: ';
+                label_type = 'Austritt';
             };
-            label = label_type + label;
+            label = label_type + ': ' + label;
 
 
             var respone_to_push = {
-                "mz": current_response.entity.data.response.Erhebungszeitpunkt,
+                "mz": label_type,
                 "label": label,
                 "scores": score_answer
             }
@@ -295,6 +296,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.groupStanineView = function() {
 
+
         var input_data = angular.copy($scope.stanine.data);
 
         //prepare Array
@@ -312,7 +314,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "data": []
             };
 
+            group_array.push(obj_to_push);
+
         });
+
+        $scope.d.group_scores = group_array;
+
+        // Fill Scores
+        var messungen = input_data[0].scores;
+        messungen.forEach(function(current_messung, myMessungID) {
+
+            current_messung.scores.forEach(function(current_score, myScoreID) {
+
+                var current_array = $scope.d.group_scores[myScoreID];
+
+                var obj_to_push = {
+                    "auspraegung": current_score.auspraegung,
+                    "stanine": current_score.stanine,
+                    "sum_score": current_score.sum_score,
+                    "label": current_messung.label
+                };
+            });
+
+        });
+
+        console.log('groupStanineView', $scope.d.group_scores);
 
 
     };
