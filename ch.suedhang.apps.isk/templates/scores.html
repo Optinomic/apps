@@ -1,5 +1,5 @@
 include(../lib/html/optinomic/page/start.m4)
-<div ng-repeat="score in d.group_scores" class="grid-border-bottom" style="margin-top: 30px;">
+<div ng-repeat="score in d.group_scores" class="grid-border-bottom">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">{{score.question}}</h3>
@@ -33,6 +33,6 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
     </div>
-    <div>&nbsp;</div>
+    <div style="margin-top: 30px;">&nbsp;</div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
