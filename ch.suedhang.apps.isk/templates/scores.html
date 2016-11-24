@@ -1,18 +1,25 @@
 include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">Stanine-Chart</h3>
-<div ng-repeat="data in stanine.data" style="margin-top: 21px;">
-    <div ng-repeat="score in data.scores" style="margin-top: 21px;">
-        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-            <div flex="25">
-                <p class="md-body-2">{{score.question}} </p>
-                <p class="md-body-1">{{score.sub_left}} </p>
-            </div>
-            <div flex>
-                <score-threshold score="score.stanine" min="0" max="10" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="false"></score-threshold>
-            </div>
-            <div flex="25">
-                <p class="md-body-2">{{score.question}}</p>
-                <p class="md-body-1">{{score.sub_right}} | {{score.auspraegung}}</p>
+<div ng-repeat="score in d.group_scores" class="grid-border-top" style="margin-top: 30px;">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-headline">{{score.question}}</h3>
+            <p class="md-body-1">{{score.full}}</p>
+            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start center" layout-margin>
+                <div flex="25">
+                    <p class="md-body-2">{{score.question}} </p>
+                    <p class="md-body-1">{{score.sub_left}} </p>
+                </div>
+                <div flex>
+                    <div ng-repeat="data in score.data">
+                        <score-threshold score="data.stanine" min="0" max="9" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="false"></score-threshold>
+                        <p class="md-body-1"><span class="md-body-2">{{data.label}}:</span> Σ{{data.sum_score}} => Ausprägung: {{data.auspraegung}}</p>
+                    </div>
+                </div>
+                <div flex="25">
+                    <p class="md-body-2">{{score.question}}</p>
+                    <p class="md-body-1">{{score.sub_right}} | {{score.auspraegung}}</p>
+                </div>
             </div>
         </div>
     </div>
