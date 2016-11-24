@@ -1,0 +1,22 @@
+include(../lib/html/optinomic/page/start.m4)
+<h3 class="md-headline">Stanine-Chart</h3>
+<chart-stanine data="stanine.data" options="stanine.options"> </chart-stanine>
+<h3 class="md-headline">Legende und Interpretation</h3>
+<div ng-repeat="data in stanine.data" style="margin-top: 21px;">
+    <div ng-repeat="score in data.scores" style="margin-top: 21px;">
+        <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+            <div>
+                <p class="md-body-2">{{score.question}} </p>
+                <p class="md-body-1">{{score.sub_left}} | {{score.auspraegung}}</p>
+            </div>
+            <div flex>
+                <score-threshold score="score.stanine" min="0" max="9" show-percent-scale="true" scale-ranges="scale_ranges" show-min-max="true"></score-threshold>
+            </div>
+            <div>
+                <p class="md-body-2">{{score.question}}</p>
+                <p class="md-body-1">{{score.sub_right}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)
