@@ -572,7 +572,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         t.messungen = $scope.d.dataMain.calculations["0"].calculation_results;
         t.messungen = dataService.sortOn(t.messungen, 'response.data.filled', true, false);
 
-        $scope.d.text.text_start = patient_anrede + " wurde " + t.messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
+        $scope.d.text.text_start = t.patient_anrede + " wurde " + t.messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
 
         $scope.d.text = t;
 
