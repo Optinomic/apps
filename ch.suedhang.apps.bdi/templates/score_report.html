@@ -4,7 +4,7 @@ include(../lib/html/optinomic/page/start.m4)
     <p class="flow-text">
         - Am
         <span ng-if="res.response.data.response.Datum">{{res.response.data.response.Datum | date}}</span>
-        <span ng-if="!res.response.data.response.Datum">{{res.response.data.filled | date}}</span> wurden {{res.score.score}} Punkte erreicht, was alse eine «{{res.score.current_range.interpretation_de}}» interpretiert werden kann.
+        <span ng-if="!res.response.data.response.Datum">{{res.response.data.filled | date}}</span> wurden {{res.score.score}} Punkte erreicht, was als eine «{{res.score.current_range.interpretation_de}}» interpretiert werden kann.
     </p>
 </div>
 include(../lib/html/optinomic/page/end.m4)
