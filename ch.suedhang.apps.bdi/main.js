@@ -574,7 +574,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         console.log('t.messungen', t);
 
-        t.text_start = t.patient_anrede + " wurde " + t.messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
+        t.text_start = t.patient_anrede + " wurde " + t.messungen.length + "x während des Aufenthaltes anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
 
         $scope.d.text = t;
 
