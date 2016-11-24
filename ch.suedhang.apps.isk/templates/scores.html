@@ -5,19 +5,25 @@ include(../lib/html/optinomic/page/start.m4)
         <div flex>
             <h3 class="md-headline">{{score.question}}</h3>
             <p class="md-body-1">{{score.full}}</p>
-            <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="start center" layout-margin>
-                <div flex="25">
-                    <p class="md-body-2">{{score.question}} </p>
+            <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-margin>
+                <div flex="10">
+                    <p class="md-body-2">{{score.question}} (Gering)</p>
                     <p class="md-body-1">{{score.sub_left}} </p>
                 </div>
                 <div flex>
-                    <div ng-repeat="data in score.data">
-                        <score-threshold score="data.stanine" min="0" max="9" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="false"></score-threshold>
-                        <p class="md-body-1"><span class="md-body-2">{{data.label}}:</span> Σ{{data.sum_score}} => Ausprägung: {{data.auspraegung}}</p>
+                    <div ng-repeat="data in score.data" layout="column" layout-gt-xs="column" layout-xs="column" layout-align="center center">
+                        <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" layout-margin>
+                            <div>
+                                <score-threshold score="data.stanine" min="0" max="10" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="false"></score-threshold>
+                            </div>
+                            <div>
+                                <p class="md-body-1"><span class="md-body-2">{{data.label}}</span> Σ{{data.sum_score}} => Ausprägung: {{data.auspraegung}} {{data.interpretation}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div flex="25">
-                    <p class="md-body-2">{{score.question}}</p>
+                <div flex="10">
+                    <p class="md-body-2">{{score.question}} (Hohe)</p>
                     <p class="md-body-1">{{score.sub_right}} | {{score.auspraegung}}</p>
                 </div>
             </div>

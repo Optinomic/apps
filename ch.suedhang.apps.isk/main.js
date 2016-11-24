@@ -156,7 +156,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
-                "sub_right": "Überinvolviert, Kompromisslosigkeit (Σ" + current_response.calculations[0].calculation_result.soziale_orientierung_sumscore + ")",
+                "sub_right": "Überinvolviert, Kompromisslosigkeit.",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
@@ -165,7 +165,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben",
-                "sub_right": "Streitlustig, unüberlegte Entscheidungen (Σ" + current_response.calculations[0].calculation_result.offensivitaet_sumscore + ")",
+                "sub_right": "Streitlustig, unüberlegte Entscheidungen.",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
@@ -174,7 +174,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln",
-                "sub_right": "Zwanghafte Selbstkontrolle (Σ" + current_response.calculations[0].calculation_result.selbststeuerung_sumscore + ")",
+                "sub_right": "Zwanghafte Selbstkontrolle.",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
@@ -183,7 +183,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen",
-                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität (Σ" + current_response.calculations[0].calculation_result.reflexibilitaet_sumscore + ")",
+                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität.",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
@@ -307,7 +307,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         prp.forEach(function(current_score, myID) {
             var obj_to_push = {
                 "full": current_score.full,
-                "interpretation": current_score.interpretation,
                 "question": current_score.question,
                 "sub_left": current_score.sub_left,
                 "sub_right": current_score.sub_right,
@@ -329,6 +328,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var obj_to_push = {
                     "auspraegung": current_score.auspraegung,
+                    "interpretation": current_score.interpretation,
                     "stanine": current_score.stanine,
                     "sum_score": current_score.sum_score,
                     "label": current_messung.label
