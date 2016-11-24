@@ -24,10 +24,10 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-body-2">{{data.label}}</p>
                     </div>
                     <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="false" show-min-max="false"></score-threshold>
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false"></score-threshold>
                     </div>
                     <div flex>
-                        <p class="md-body-1">{{data.auspraegung}}: {{data.interpretation}} (Σ{{data.sum_score}})</p>
+                        <p class="md-body-1"><span class="md-body-1">{{data.auspraegung}}: </span> {{data.interpretation}} (Σ{{data.sum_score}})</p>
                     </div>
                 </div>
             </div>
