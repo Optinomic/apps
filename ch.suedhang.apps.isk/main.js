@@ -133,7 +133,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "result_color": "green"
             }, {
                 "from": 9,
-                "to": 10,
+                "to": 9,
                 "result": "Stanine 9",
                 "result_color": "green"
             }]
