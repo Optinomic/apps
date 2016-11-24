@@ -565,15 +565,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Data-Export
     // -------------------
     $scope.setPrintText = function() {
-        $scope.d.text = {};
+        var t = {};
 
-        var patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
+        t.patient_anrede = $scope.d.dataMain.patient.data.extras.anrede;
 
-        $scope.d.text.messungen = $scope.d.dataMain.calculations["0"].calculation_results;
-        $scope.d.text.messungen = dataService.sortOn($scope.d.text.messungen, 'response.data.filled', true, false);
+        t.messungen = $scope.d.dataMain.calculations["0"].calculation_results;
+        t.messungen = dataService.sortOn(t.messungen, 'response.data.filled', true, false);
 
-        $scope.d.text.text_start = patient_anrede + " wurde " + messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
+        $scope.d.text.text_start = patient_anrede + " wurde " + t.messungen.length + "x während des Aufenthaltes auf die Schwere der Depression anhand des Selbstbeurteilungsinstruments «BDI-II» getestet: ";
 
+        $scope.d.text = t;
 
     };
 
