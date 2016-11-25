@@ -14,6 +14,9 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                     <div flex="40" style="text-align:center !important;padding-left:6px;padding-right:6px;">
                         <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
+                            <p class="md-caption" style="color:#3F51B5">
+                                {{score.population.name}}
+                            </p>
                             <div flex ng-repeat="r in d.stanine_ranges">
                                 <p class="md-caption" style="color:#3F51B5"><small style="color:#9E9E9E">{{r.procent}}</small>
                                     <br>{{r.stanine}}
