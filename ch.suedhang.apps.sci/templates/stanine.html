@@ -5,7 +5,7 @@ include(../lib/html/optinomic/page/start.m4)
         <div flex>
             <h3 class="md-title">{{score.question}}</h3>
             <div>
-                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start start">
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
                         <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
@@ -28,7 +28,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
-                        <p flex class="md-body-2" style="color:#F44336">Viel/Ausgeprägt</p>
+                        <p flex class="md-body-2" style="color:#F44336;text-align: right !important">Viel/Ausgeprägt</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
