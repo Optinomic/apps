@@ -552,6 +552,86 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.groupStanineView = function() {
 
+        // Ranges initialisieren
+        $scope.d.scale_ranges = {
+            "ranges": [{
+                "from": 1,
+                "to": 1.5,
+                "result": "Stanine 1",
+                "result_color": "green"
+            }, {
+                "from": 1.5,
+                "to": 2.5,
+                "result": "Stanine 2",
+                "result_color": "green"
+            }, {
+                "from": 2.5,
+                "to": 3.5,
+                "result": "Stanine 3",
+                "result_color": "green"
+            }, {
+                "from": 3.5,
+                "to": 4.5,
+                "result": "Stanine 4",
+                "result_color": "green"
+            }, {
+                "from": 4.5,
+                "to": 5.5,
+                "result": "Stanine 5",
+                "result_color": "green"
+            }, {
+                "from": 5.5,
+                "to": 6.5,
+                "result": "Stanine 6",
+                "result_color": "green"
+            }, {
+                "from": 6.5,
+                "to": 7.5,
+                "result": "Stanine 7",
+                "result_color": "green"
+            }, {
+                "from": 7.5,
+                "to": 8.5,
+                "result": "Stanine 8",
+                "result_color": "green"
+            }, {
+                "from": 8.5,
+                "to": 9,
+                "result": "Stanine 9",
+                "result_color": "green"
+            }]
+        };
+
+        $scope.d.stanine_ranges = [{
+            "stanine": 1,
+            "procent": 4
+        }, {
+            "stanine": 2,
+            "procent": 7
+        }, {
+            "stanine": 3,
+            "procent": 12
+        }, {
+            "stanine": 4,
+            "procent": 17
+        }, {
+            "stanine": 5,
+            "procent": 20
+        }, {
+            "stanine": 6,
+            "procent": 17
+        }, {
+            "stanine": 7,
+            "procent": 12
+        }, {
+            "stanine": 8,
+            "procent": 7
+        }, {
+            "stanine": 9,
+            "procent": 4
+        }];
+
+
         //prepare Array
 
         var input_data = angular.copy($scope.d.stanine.data_hilfreich);
