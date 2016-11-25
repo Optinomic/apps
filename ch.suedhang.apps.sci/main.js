@@ -545,6 +545,96 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.groupStanineView = function() {
+
+        //prepare Array
+
+        var input_data = angular.copy($scope.d.stanine.data_hilfreich);
+        var group_array_hilfreich = [];
+
+        var prp = input_data[0].scores;
+        prp.forEach(function(current_score, myID) {
+            var obj_to_push = {
+                "name": current_score.name,
+                "question": current_score.question,
+                "population": current_score.population,
+                "sub_left": current_score.sub_left,
+                "sub_right": current_score.sub_right,
+                "data": []
+            };
+
+            group_array_hilfreich.push(obj_to_push);
+
+        });
+
+        var input_data = angular.copy($scope.d.stanine.data_stress);
+        var group_array_stress = [];
+
+        var prp = input_data[0].scores;
+        prp.forEach(function(current_score, myID) {
+            var obj_to_push = {
+                "name": current_score.name,
+                "question": current_score.question,
+                "population": current_score.population,
+                "sub_left": current_score.sub_left,
+                "sub_right": current_score.sub_right,
+                "data": []
+            };
+
+            group_array_stress.push(obj_to_push);
+
+        });
+
+        var input_data = angular.copy($scope.d.stanine.data_unguenstig);
+        var group_array_unguenstig = [];
+
+        var prp = input_data[0].scores;
+        prp.forEach(function(current_score, myID) {
+            var obj_to_push = {
+                "name": current_score.name,
+                "question": current_score.question,
+                "population": current_score.population,
+                "sub_left": current_score.sub_left,
+                "sub_right": current_score.sub_right,
+                "data": []
+            };
+
+            group_array_unguenstig.push(obj_to_push);
+
+        });
+
+
+        $scope.d.group_scores = {
+            "hilfreich": group_array_hilfreich,
+            "stress": group_array_stress,
+            "unguenstig": group_array_unguenstig
+        };
+
+
+        // Fill Scores
+        // input_data.forEach(function(current_messung, myMessungID) {
+        // 
+        //     current_messung.scores.forEach(function(current_score, myScoreID) {
+        // 
+        //         var current_array = $scope.d.group_scores[myScoreID];
+        // 
+        //         var obj_to_push = {
+        //             "auspraegung": current_score.auspraegung,
+        //             "interpretation": current_score.interpretation,
+        //             "stanine": current_score.stanine,
+        //             "sum_score": current_score.sum_score,
+        //             "label": current_messung.label
+        //         };
+        //         current_array.data.push(obj_to_push);
+        // 
+        //     });
+        // 
+        // });
+
+        console.log('groupStanineView', $scope.d.group_scores);
+
+
+    };
 
 
 
