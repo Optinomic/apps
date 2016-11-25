@@ -42,6 +42,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     $scope.setStanineView();
                 };
 
+                if (current_template === 'print_stanine') {
+                    $scope.setStanineView();
+                    $scope.groupStanineView();
+                };
+
                 if (current_template === 'text_sci') {
                     $scope.setTextSCI();
                 };
