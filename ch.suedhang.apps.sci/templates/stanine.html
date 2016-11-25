@@ -9,8 +9,8 @@ include(../lib/html/optinomic/page/start.m4)
                     <div flex="30" style="text-align: right !important">
                         <p class="md-caption" style="color:#9E9E9E">%
                             <br>Stanine
+                            <span style="color:#4CAF50">Wenig></span>
                         </p>
-                        <p class="md-body-1">{{score.sub_left}}</p>
                     </div>
                     <div flex="40" style="text-align:center !important;padding-left:6px;padding-right:6px;">
                         <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
@@ -24,18 +24,20 @@ include(../lib/html/optinomic/page/start.m4)
                     <div flex="30">
                         <p class="md-caption" style="color:#9E9E9E">%
                             <br>Stanine | Interpretation der Ausprägung
+                            <span style="color:#F44336">Viel/Ausgeprägt</span>
                         </p>
-                        <p class="md-body-1">{{score.sub_right}}</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
                     <div flex="30">
+                        <p class="md-body-1">{{score.sub_left}}</p>
                         <p class="md-body-1">{{data.label}}</p>
                     </div>
                     <div flex="40">
                         <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
                     </div>
                     <div flex="30">
+                        <p class="md-body-1">{{score.sub_right}}</p>
                         <p class="md-body-1">Σ{{data.sum_score}}</p>
                     </div>
                 </div>
