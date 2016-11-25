@@ -220,64 +220,64 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Interpretation hinzufügen
 
-            var soziale_orientierung_auspraegung = 'Gering';
+            var soziale_orientierung_auspraegung = 'Gering (1-3)';
             var soziale_orientierung_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
 
             if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 3) {
-                soziale_orientierung_auspraegung = 'Mittel';
+                soziale_orientierung_auspraegung = 'Mittel (4-6)';
                 soziale_orientierung_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
             };
 
             if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 6) {
-                soziale_orientierung_auspraegung = 'Hoch';
+                soziale_orientierung_auspraegung = 'Hoch (7-9)';
                 soziale_orientierung_interpretation = 'Überinvolviert, Kompromisslosigkeit';
             };
             score_answer[0].auspraegung = soziale_orientierung_auspraegung;
             score_answer[0].interpretation = soziale_orientierung_interpretation;
 
 
-            var offenisvitaet_auspraegung = 'Gering';
+            var offenisvitaet_auspraegung = 'Gering (1-3)';
             var offenisvitaet_interpretation = 'Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben';
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
-                offenisvitaet_auspraegung = 'Mittel';
+                offenisvitaet_auspraegung = 'Mittel (4-6)';
                 offenisvitaet_interpretation = 'Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.';
             };
 
             if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
-                offenisvitaet_auspraegung = 'Hoch';
+                offenisvitaet_auspraegung = 'Hoch (7-9)';
                 offenisvitaet_interpretation = 'Streitlustig, unüberlegte Entscheidungen';
             };
             score_answer[1].auspraegung = offenisvitaet_auspraegung;
             score_answer[1].interpretation = offenisvitaet_interpretation;
 
 
-            var selbststeuerung_auspraegung = 'Gering';
+            var selbststeuerung_auspraegung = 'Gering (1-3)';
             var selbststeuerung_interpretation = 'Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln';
 
             if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 3) {
-                selbststeuerung_auspraegung = 'Mittel';
+                selbststeuerung_auspraegung = 'Mittel (4-6)';
                 selbststeuerung_interpretation = 'Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen';
             };
 
             if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 6) {
-                selbststeuerung_auspraegung = 'Hoch';
+                selbststeuerung_auspraegung = 'Hoch (7-9)';
                 selbststeuerung_interpretation = 'Zwanghafte Selbstkontrolle';
             };
             score_answer[2].auspraegung = selbststeuerung_auspraegung;
             score_answer[2].interpretation = selbststeuerung_interpretation;
 
 
-            var reflexibilitaet_auspraegung = 'Gering';
+            var reflexibilitaet_auspraegung = 'Gering (1-3)';
             var reflexibilitaet_interpretation = 'Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen';
 
             if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 3) {
-                reflexibilitaet_auspraegung = 'Mittel';
+                reflexibilitaet_auspraegung = 'Mittel (4-6)';
                 reflexibilitaet_interpretation = 'Das eigenen Verhalten und die Wirkung auf andere reflektieren und ggf. gezielt steuern, sich für andere Menschen interessieren';
             };
 
             if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 6) {
-                reflexibilitaet_auspraegung = 'Hoch';
+                reflexibilitaet_auspraegung = 'Hoch (7-9)';
                 reflexibilitaet_interpretation = 'Zwanghafte Selbstdarstellung, Rigidität';
             };
             score_answer[3].auspraegung = reflexibilitaet_auspraegung;
