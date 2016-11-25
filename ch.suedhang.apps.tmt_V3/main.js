@@ -216,7 +216,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
 
             // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#6E6E6E', '#bbbbbb', '#ebebeb'];
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#ebebeb'];
             var current_cs_color = cs_color[mz_id];
 
 
@@ -313,11 +313,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Auffällige Testleistung |  färben
                 if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
                     // Auffällige Testleistung: Rot
-                    messung_obj.zscore.zscore_color = '#F44336';
+                    messung_obj.zscore.zscore_color = '#C62828';
                 };
                 if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
                     // Auffällige Testleistung: Grün
-                    messung_obj.zscore.zscore_color = '#4CAF50';
+                    messung_obj.zscore.zscore_color = '#2E7D32';
                 };
             });
 
