@@ -139,6 +139,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }]
         };
 
+        $scope.d.stanine_ranges = [{
+            "stanine": 1,
+            "procent": 4
+        }, {
+            "stanine": 2,
+            "procent": 7
+        }, {
+            "stanine": 3,
+            "procent": 12
+        }, {
+            "stanine": 4,
+            "procent": 17
+        }, {
+            "stanine": 5,
+            "procent": 20
+        }, {
+            "stanine": 6,
+            "procent": 17
+        }, {
+            "stanine": 7,
+            "procent": 12
+        }, {
+            "stanine": 8,
+            "procent": 7
+        }, {
+            "stanine": 9,
+            "procent": 4
+        }];
+
 
         $scope.stanine = {};
         $scope.stanine.data = [];
