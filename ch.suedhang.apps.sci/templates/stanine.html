@@ -46,4 +46,102 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
 </div>
+<div class="grid-border-top" style="margin-top: 30px; position: relative;">
+    <h3 class="md-headline">Hilfreiche Copingstrategien</h3>
+    <h4 class="md-subhead">Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht
+gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="score in d.group_scores.hilfreich">
+        <div flex>
+            <h3 class="md-title">{{score.question}}</h3>
+            <div>
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
+                    <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
+                        <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
+                            <br>Stanine
+                        </p>
+                    </div>
+                    <div flex="40" style="text-align:center !important;padding-left:6px;padding-right:6px;">
+                        <p class="md-caption" style="color:#3F51B5">
+                            {{score.population.name}}
+                        </p>
+                        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
+                            <div flex ng-repeat="r in d.stanine_ranges">
+                                <p class="md-caption" style="color:#3F51B5"><small style="color:#9E9E9E">{{r.procent}}</small>
+                                    <br>{{r.stanine}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
+                            <br>Stanine
+                        </p>
+                        <p flex class="md-body-2" style="color:#F44336;text-align: right !important">Viel/Ausgeprägt</p>
+                    </div>
+                </div>
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
+                    <div flex="30">
+                        <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> {{score.sub_left}}</p>
+                    </div>
+                    <div flex="40">
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
+                    </div>
+                    <div flex="30">
+                        <p class="md-body-1">{{score.sub_right}} <span class="md-body-2"> Σ{{data.sum_score}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="grid-border-top" style="margin-top: 30px; position: relative;">
+    <h3 class="md-headline">Ungünstige Copingstrategie</h3>
+    <h4 class="md-subhead">Diese erhöht oder verlängert die möglichen körperlichen und psychischen Stressreaktionen,
+welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</h4>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="score in d.group_scores.hilfreich">
+        <div flex>
+            <h3 class="md-title">{{score.question}}</h3>
+            <div>
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
+                    <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
+                        <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
+                            <br>Stanine
+                        </p>
+                    </div>
+                    <div flex="40" style="text-align:center !important;padding-left:6px;padding-right:6px;">
+                        <p class="md-caption" style="color:#3F51B5">
+                            {{score.population.name}}
+                        </p>
+                        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
+                            <div flex ng-repeat="r in d.stanine_ranges">
+                                <p class="md-caption" style="color:#3F51B5"><small style="color:#9E9E9E">{{r.procent}}</small>
+                                    <br>{{r.stanine}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
+                            <br>Stanine
+                        </p>
+                        <p flex class="md-body-2" style="color:#F44336;text-align: right !important">Viel/Ausgeprägt</p>
+                    </div>
+                </div>
+                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
+                    <div flex="30">
+                        <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> {{score.sub_left}}</p>
+                    </div>
+                    <div flex="40">
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
+                    </div>
+                    <div flex="30">
+                        <p class="md-body-1">{{score.sub_right}} <span class="md-body-2"> Σ{{data.sum_score}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 include(../lib/html/optinomic/page/end.m4)
