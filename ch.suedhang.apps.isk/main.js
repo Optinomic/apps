@@ -93,46 +93,46 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.scale_ranges = {
             "ranges": [{
                 "from": 1,
-                "to": 2,
+                "to": 1.5,
                 "result": "Stanine 1",
                 "result_color": "green"
             }, {
-                "from": 2,
-                "to": 3,
+                "from": 1.5,
+                "to": 2.5,
                 "result": "Stanine 2",
                 "result_color": "green"
             }, {
-                "from": 3,
-                "to": 4,
+                "from": 2.5,
+                "to": 3.5,
                 "result": "Stanine 3",
                 "result_color": "green"
             }, {
-                "from": 4,
-                "to": 5,
+                "from": 3.5,
+                "to": 4.5,
                 "result": "Stanine 4",
                 "result_color": "green"
             }, {
-                "from": 5,
-                "to": 6,
+                "from": 4.5,
+                "to": 5.5,
                 "result": "Stanine 5",
                 "result_color": "green"
             }, {
-                "from": 6,
-                "to": 7,
+                "from": 5.5,
+                "to": 6.5,
                 "result": "Stanine 6",
                 "result_color": "green"
             }, {
-                "from": 7,
-                "to": 8,
+                "from": 6.5,
+                "to": 7.5,
                 "result": "Stanine 7",
                 "result_color": "green"
             }, {
-                "from": 8,
-                "to": 9,
+                "from": 7.5,
+                "to": 8.5,
                 "result": "Stanine 8",
                 "result_color": "green"
             }, {
-                "from": 9,
+                "from": 8.5,
                 "to": 9,
                 "result": "Stanine 9",
                 "result_color": "green"
