@@ -1,0 +1,64 @@
+<div>
+    <div id="svg_box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="70" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="grad_entry" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="grad_exit" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#E0E0E0;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="100" height="100" fill="white" />
+            <rect x="7" y="20" width="85" height="60" fill="#E0E0E0" />
+            <rect x="7" y="20" width="33" height="60" fill="url(#grad_entry)" />
+            <rect x="59" y="20" width="33" height="60" fill="url(#grad_exit)" />
+            <line x1="7" y1="20" x2="92" y2="20" style="stroke:#BDBDBD;stroke-width:1" />
+            <line x1="7" y1="50" x2="92" y2="50" style="stroke:#BDBDBD;stroke-width:1" />
+            <line x1="7" y1="80" x2="92" y2="80" style="stroke:#BDBDBD;stroke-width:1" />
+            <g ng-show="show_scale_ranges" fill="none">
+                <rect ng-repeat="range in myshow_scale_ranges.ranges" ng-hide="my_current_scale === $index" opacity="1" ng-attr-x="{{range.from_position}}" y="35" ng-attr-width="{{range.width_position}}" height="30" fill="#E8EAF6" />
+                <rect ng-repeat="range in myshow_scale_ranges.ranges" ng-show="my_current_scale === $index" opacity="1" ng-attr-x="{{range.from_position}}" y="30" ng-attr-width="{{range.width_position}}" height="40" fill="#5C6BC0" />
+            </g>
+            <g ng-show="show_percent_scale" fill="none">
+                <rect x="15.5" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="24" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="32.5" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="41" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="49.5" y="20" width="0.2" height="60" fill="#757575" />
+                <rect x="58" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="66.5" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="75" y="45" width="0.2" height="10" fill="#757575" />
+                <rect x="83.5" y="45" width="0.2" height="10" fill="#757575" />
+            </g>
+            <g fill="none" ng-if="show_bottom_bar">
+                <rect x="7" y="85" ng-attr-width="{{postition-7}}" height="15" fill="#3F51B5" opacity="0.5">
+                    <animate attributeName="width" attributeType="XML" from="7" to="{{postition-7}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                </rect>
+            </g>
+            <svg fill="none">
+                <rect ng-attr-x="{{postition-0.1}}" y="0" width="0.2" height="100" fill="black">
+                    <animate attributeName="x" attributeType="XML" from="7" to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                </rect>
+            </svg>
+            <svg fill="#3F51B5">
+                <polygon ng-attr-points="{{polygon_1}}" />
+                <polygon ng-attr-points="{{polygon_2}}" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <g ng-if="show_min_max" fill="none">
+                    <text x="6" text-anchor="end" y="4.8" font-family="Arial" font-size="2" fill="#9E9E9E">Min</text>
+                    <text x="6" text-anchor="end" y="7.25" font-family="Arial" font-size="2" fill="black">{{min}}</text>
+                    <text x="93" text-anchor="start" y="4.8" font-family="Arial" font-size="2" fill="#9E9E9E">Max</text>
+                    <text x="93" text-anchor="start" y="7.25" font-family="Arial" font-size="2" fill="black">{{max}}</text>
+                </g>
+                <text ng-attr-x="{{postition_score}}" text-anchor="{{postition_align}}" y="6.2" font-family="Arial" font-size="3" fill="black">
+                    {{score}}
+                    <animate attributeName="x" attributeType="XML" from="7" to="{{postition_score}}" begin="0s" dur="3s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                </text>
+            </svg>
+        </svg>
+    </div>
+</div>
