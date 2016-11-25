@@ -3,10 +3,9 @@ include(../lib/html/optinomic/page/start.m4)
     <div ng-repeat="resp in d.dataMain.survey_responses">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
-                <p class="md-headline" ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'">Eintritt</p>
-                <p class="md-headline" ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'">Austritt</p>
+            <md-button class="md-raised md-cornered" ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'">Das Eintrittsassessment wurde am {{resp.entity.data.filled | date}} durchgeführt.</md-button>
+            <md-button class="md-raised md-cornered" ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'">Das Austrittsassessment wurde am <b>{{resp.entity.data.filled | date}}</b>durchgeführt.</md-button>
             </div>
-            <p class="md-body-1">Datum: {{resp.entity.data.filled | date}}</p>
         </div>
     </div>
 </div>
