@@ -21,7 +21,7 @@ website = http://www.optinomic.com/
 [template chart_stanine 6 12]
 include(templates/stanine_karussell.html)
 
-[template print_stanine 6 12]
+[template print_sci_report_only 6 12]
 include(templates/stanine.html)
 
 
