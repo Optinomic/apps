@@ -707,6 +707,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_array = $scope.d.group_scores.hilfreich[myScoreID];
 
                 var obj_to_push = {
+                    "label": current_messung.label,
                     "stanine": current_score.stanine,
                     "sum_score": current_score.sum_score
                 };
@@ -725,6 +726,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_array = $scope.d.group_scores.stress[myScoreID];
 
                 var obj_to_push = {
+                    "label": current_messung.label,
                     "stanine": current_score.stanine,
                     "sum_score": current_score.sum_score
                 };
@@ -743,6 +745,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var current_array = $scope.d.group_scores.unguenstig[myScoreID];
 
                 var obj_to_push = {
+                    "label": current_messung.label,
                     "stanine": current_score.stanine,
                     "sum_score": current_score.sum_score
                 };
