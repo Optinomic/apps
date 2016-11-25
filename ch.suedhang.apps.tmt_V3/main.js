@@ -216,7 +216,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
 
             // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#9FA8DA', '#B39DDB', '#90CAF9'];
+            var cs_color = ['#9E9E9E', '#BDBDBD', '#E0E0E0'];
             var current_cs_color = cs_color[mz_id];
 
 
