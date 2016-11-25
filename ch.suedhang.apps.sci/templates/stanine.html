@@ -3,7 +3,7 @@ include(../lib/html/optinomic/page/start.m4)
     <h3 class="md-headline">Stressereignisse und Syptome</h3>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="score in d.group_scores.stress">
         <div flex>
-            <h3 class="md-title">{{score.question}}</h3>
+            <h3 class="md-title" style="margin-top:12px;">{{score.question}}</h3>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
@@ -52,11 +52,11 @@ include(../lib/html/optinomic/page/start.m4)
 gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="score in d.group_scores.hilfreich">
         <div flex>
-            <h3 class="md-title">{{score.question}}</h3>
+            <h3 class="md-title" style="margin-top:12px;">{{score.question}}</h3>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="color:#F44336">Wenig</p>
+                        <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
@@ -77,7 +77,7 @@ gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
-                        <p flex class="md-body-2" style="color:#4CAF50;text-align: right !important">Viel/Ausgeprägt</p>
+                        <p flex class="md-body-2" style="color:#F44336 ;text-align: right !important">Viel/Ausgeprägt</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
@@ -101,7 +101,7 @@ gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
 welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</h4>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-repeat="score in d.group_scores.hilfreich">
         <div flex>
-            <h3 class="md-title">{{score.question}}</h3>
+            <h3 class="md-title" style="margin-top:12px;">{{score.question}}</h3>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
