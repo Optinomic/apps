@@ -6,7 +6,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-subhead">{{score.full}}</p>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center">
-                    <div flex="10" style="text-align: right !important">
+                    <div flex="30" style="text-align: right !important">
                         <p class="md-caption" style="color:#9E9E9E">%
                             <br>Stanine
                         </p>
@@ -19,38 +19,20 @@ include(../lib/html/optinomic/page/start.m4)
                             </div>
                         </div>
                     </div>
-                    <div flex>
+                    <div flex="30">
                         <p class="md-caption" style="color:#9E9E9E">%
-                            <br>Stanine | Interpretation der Ausprägung</p>
+                            <br>Stanine</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
-                    <div flex="10">
-                        <p class="md-body-2">{{data.label}}</p>
+                    <div flex="30">
+                        <p class="md-body-1"><span class="md-body-1">{{data.label}}</span> | {{score.sub_left}}</p>
                     </div>
                     <div flex="40">
                         <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
                     </div>
-                    <div flex>
-                        <p class="md-body-1"><span class="md-body-2">{{data.auspraegung}}: </span> {{data.interpretation}} (Σ{{data.sum_score}})</p>
-                    </div>
-                </div>
-                <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center">
-                    <div flex="10" style="text-align: right !important">
-                        <p class="md-caption" style="color:#9E9E9E">Stanine
-                            <br>%</p>
-                    </div>
-                    <div flex="40" style="text-align: center !important;padding-left:6px;padding-right:6px;">
-                        <div layout="row" layout-gt-xs="row" layout-xs="row" layout-align="space-between center">
-                            <div flex ng-repeat="r in d.stanine_ranges">
-                                <p class="md-caption" style="color:#3F51B5">{{r.stanine}}
-                                    <br><small style="color:#9E9E9E">{{r.procent}}</small></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div flex>
-                        <p class="md-caption" style="color:#9E9E9E">Stanine | Interpretation der Ausprägung
-                            <br>%</p>
+                    <div flex="30">
+                        <p class="md-body-1"> {{score.sub_right}} | <span class="md-body-2">Σ{{data.sum_score}}</span></p>
                     </div>
                 </div>
             </div>
