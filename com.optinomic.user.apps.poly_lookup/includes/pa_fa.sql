@@ -3,7 +3,6 @@ SELECT
   PA.PID,
   FA.FAID,
   FA.FID,
-  RTRIM(GetDfByAnbindung(FA.FAID,'Fa','Abkuerzung','Org','Org')),
   PA.ANREDE,
   PA.VORNAME,
   PA.NAME,
