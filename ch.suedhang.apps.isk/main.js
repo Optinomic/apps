@@ -181,38 +181,38 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var score_answer = [{
                 "question": "Soziale Orientierung",
-                "full": "Ausmass, in dem eine Person anderen Menschen offen und mit positiver Grundhaltung gegenüber tritt.",
+                "full": "Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
-                "sub_right": "Überinvolviert, Kompromisslosigkeit.",
+                "sub_right": "Überinvolviert, Kompromisslosigkeit",
                 "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
             }, {
                 "question": "Offensivität",
-                "full": "Fähigkeit, aus sich herauszugehen und im Kontakt mit anderen Menschen eigene Interessen aktiv verwirklichen zu können.",
+                "full": "Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben",
-                "sub_right": "Streitlustig, unüberlegte Entscheidungen.",
+                "sub_right": "Streitlustig, unüberlegte Entscheidungen",
                 "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
             }, {
                 "question": "Selbststeuerung",
-                "full": "Fähigkeit eines Menschen, flexibel und rational zu handeln, wobei man sich selbst bewusst als Akteur begreift.",
+                "full": "Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln",
-                "sub_right": "Zwanghafte Selbstkontrolle.",
+                "sub_right": "Zwanghafte Selbstkontrolle",
                 "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
             }, {
                 "question": "Reflexibilität",
-                "full": "Fähigkeit einer Person, bei anderen Menschen einen positiven bzw. gewünschten Eindruck zu erzeugen.",
+                "full": "Das eigene Verhalten und die Wirkung auf andere reflektieren und gegebenenfalls gezielt steuern, sich für andere Menschen interessieren.",
                 "auspraegung": "Undefined",
                 "interpretation": "Undefined",
                 "sub_left": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen",
-                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität.",
+                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität",
                 "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
                 "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
             }];
