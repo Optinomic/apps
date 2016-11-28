@@ -75,7 +75,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }, {
                 "name": 'Patient | Falldaten (V2)',
                 "sql": include_as_js_string(
-                    patient_falldaten.sql)
+                    Patient_Falldaten.sql)
             }, {
                 "name": 'GET FAID',
                 "sql": include_as_js_string(
