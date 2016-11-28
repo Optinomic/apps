@@ -52,39 +52,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // -----------------------------------
 
         var odbc = {
-            "data_packages": [{
-                "name": 'Falldaten',
-                "sql": include_as_js_string(
-                    fa.sql)
-            }, {
-                "name": 'PUBLIC - Falldaten',
-                "sql": include_as_js_string(
-                    public_fa.sql)
-            }, {
-                "name": 'Patient | Falldaten',
-                "sql": include_as_js_string(
-                    pa_fa.sql)
-            }, {
-                "name": 'Dispens | Somatik',
-                "sql": include_as_js_string(
-                    dispens_somatik.sql)
-            }, {
-                "name": 'Belegung - History',
-                "sql": include_as_js_string(
-                    belegung_history.sql)
-            }, {
-                "name": 'Patient | Falldaten (V2)',
-                "sql": include_as_js_string(
-                    patient_falldaten.sql)
-            }, {
-                "name": 'GET FAID',
-                "sql": include_as_js_string(
-                    get_faid.sql)
-            }, {
-                "name": 'Listenfelder: Organisationseinheit',
-                "sql": include_as_js_string(
-                    listenfelder_orgeinheit.sql)
-            }],
+            "data_packages": [],
             "current": {
                 "selected": false,
                 "executed": false,
