@@ -69,6 +69,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "sql": include_as_js_string(
                     dispens_somatik.sql)
             }, {
+                "name": 'Medikamente',
+                "sql": include_as_js_string(
+                    medikamente.sql)
+            }, {
                 "name": 'Dispens | Somatik mit Patienten & Falldaten',
                 "sql": include_as_js_string(
                     dispens_somatik_pa_fa.sql)
