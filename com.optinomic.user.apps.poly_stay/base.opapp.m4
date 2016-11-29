@@ -1,12 +1,12 @@
 [module]
-id = com.optinomic.apps.poly_lookup
-name = Polypoint - Connector
-short_description = ODBC :: POLY-Query 
+id = com.optinomic.apps.poly_stay
+name = Stammdaten (Fälle)
+short_description = Zusätzliche Fall-Stammdaten aus Polypoint.
 version = include(VERSION)
 type = user
 
 [description]
-Ziel dieser App ist eine Sammlung von Polypoint ODBC-Abfragen zur Verfügung zu stellen und diese auszuführen. Dieses Polypoint-Lookup funktioniert nur in der Klinik Südhang.
+Diese Applikation dient zur Sammlung zusätzlich benötigter Fall-Stammdaten. Die Daten werden anhand einem Polypoint-Lookup via ODBC gewonnen. Die Daten werden in der Patienten-App gespeichert. Aufgrund dieser Kriterien wird der Patient automatisch in Patientengruppen eingeteilt.
 
 [developer]
 first_name = Beat
