@@ -75,21 +75,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        var myAPI = dataService.getPatientsStays(patientListFilter);
-
-        myAPI.success(function(data) {
-            console.log('success: getPatientList', data);
-
-            $scope.d.app.patients.loaded = true;
-            $scope.d.app.patients.data = data.patients;
-        });
-
-        myAPI.error(function(data) {
-            console.log('ERROR: getPatientList', data);
-
-            $scope.d.app.patients.loaded = false;
-            $scope.d.app.patients.data = data;
-        });
+        // var myAPI = dataService.getPatientsStays(patientListFilter);
+        // 
+        // myAPI.success(function(data) {
+        //     console.log('success: getPatientList', data);
+        // 
+        //     $scope.d.app.patients.loaded = true;
+        //     $scope.d.app.patients.data = data.patients;
+        // });
+        // 
+        // myAPI.error(function(data) {
+        //     console.log('ERROR: getPatientList', data);
+        // 
+        //     $scope.d.app.patients.loaded = false;
+        //     $scope.d.app.patients.data = data;
+        // });
     };
 
 
