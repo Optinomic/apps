@@ -81,6 +81,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "sql": include_as_js_string(
                     belegung_history.sql)
             }, {
+                "name": 'Belegung - History | from FID',
+                "sql": include_as_js_string(
+                    belegung_history_from_fid.sql)
+            }, {
                 "name": 'Patient | Falldaten (V2)',
                 "sql": include_as_js_string(
                     Patient_Falldaten.sql)
