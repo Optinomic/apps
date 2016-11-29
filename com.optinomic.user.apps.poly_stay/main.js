@@ -75,7 +75,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        var myAPI = dataService.getPatientList(patientListFilter);
+        var myAPI = dataService.getPatientsStays(patientListFilter);
 
         myAPI.success(function(data) {
             console.log('success: getPatientList', data);
