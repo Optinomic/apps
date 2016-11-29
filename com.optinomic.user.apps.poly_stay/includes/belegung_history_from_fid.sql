@@ -1,0 +1,44 @@
+SELECT
+  PA.PAID,
+  PA.PID,
+  FA.FAID,
+  FA.FID,
+
+  GetDisStationAtDate(TRUNC(BELEGUNG.BEGINN + 1), FA.FAID) STATION,
+  GetDisZimmerAtTime(BELEGUNG.BEGINN + 1, FA.FAID) ZIMMER,
+  CASE GetDisStationAtDate(TRUNC(BELEGUNG.BEGINN + 1), FA.FAID)
+    WHEN 'A2' THEN 'EAS' 
+    WHEN 'A3' THEN 'EAS' 
+    WHEN 'C0' THEN 'EAS' 
+    WHEN 'B0' THEN 'EP' 
+    WHEN 'B1' THEN 'EP' 
+    WHEN 'B2' THEN 'EP' 
+    WHEN 'C1' THEN 'EP' 
+    WHEN 'C2' THEN 'EP' 
+    WHEN 'D0' THEN 'EP' 
+    WHEN 'D1' THEN 'EP' 
+    WHEN 'TK' THEN 'TK' 
+    ELSE '?' 
+  END ORG, 
+  RTRIM(GetDfByAnbindung(FA.FAID, 'Fa', 'Abkuerzung', 'Org', 'Org')) ORG_CURRENT,
+  
+  TRUNC(BELEGUNG.DAUER/(24*60*60)) DAUER_TAGE,
+
+  BELEGUNG.*
+
+FROM DISDBA.FA FA,
+     DISDBA.PA PA,
+
+     (SELECT BEL.*
+      FROM DISDBA.BEL BEL
+      WHERE BEL.rstyp='B' AND BEL.FAID<>'-1'
+      ORDER BY BEL.FAID, BEL.BEGINN desc) BELEGUNG
+
+WHERE ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID))
+
+AND ((PA.PID='9987') AND (FA.FID='5'))
+
+ORDER BY PA.PAID
+
+
+
