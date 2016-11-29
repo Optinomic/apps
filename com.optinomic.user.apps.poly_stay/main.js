@@ -102,34 +102,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var odbc = {
             "data_packages": [{
-                "name": 'Falldaten',
-                "sql": include_as_js_string(
-                    fa.sql)
-            }, {
-                "name": 'PUBLIC - Falldaten',
-                "sql": include_as_js_string(
-                    public_fa.sql)
-            }, {
-                "name": 'Patient | Falldaten',
-                "sql": include_as_js_string(
-                    pa_fa.sql)
-            }, {
-                "name": 'Dispens | Somatik',
-                "sql": include_as_js_string(
-                    dispens_somatik.sql)
-            }, {
-                "name": 'Medikamente',
-                "sql": include_as_js_string(
-                    medikamente.sql)
-            }, {
-                "name": 'Dispens | Somatik mit Patienten & Falldaten',
-                "sql": include_as_js_string(
-                    dispens_somatik_pa_fa.sql)
-            }, {
-                "name": 'Belegung - History',
-                "sql": include_as_js_string(
-                    belegung_history.sql)
-            }, {
                 "name": 'Belegung - History | from FID',
                 "sql": include_as_js_string(
                     belegung_history_from_fid.sql)
@@ -137,14 +109,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "name": 'Patient | Falldaten (V2)',
                 "sql": include_as_js_string(
                     Patient_Falldaten.sql)
-            }, {
-                "name": 'GET FAID',
-                "sql": include_as_js_string(
-                    get_faid.sql)
-            }, {
-                "name": 'Listenfelder: Organisationseinheit',
-                "sql": include_as_js_string(
-                    listenfelder_orgeinheit.sql)
             }],
             "current": {
                 "selected": false,
