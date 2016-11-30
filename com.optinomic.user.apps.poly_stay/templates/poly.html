@@ -6,6 +6,16 @@ include(../lib/html/optinomic/page/start.m4)
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
             </div>
         </div>
+        <div ng-repeat="patient in d.app.patients.data">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                <div flex>
+                    <h3 class="md-subhead">{{patient.extras.name}}</h3>
+                </div>
+            </div>
+            <div>
+                <pre>{{patient.stays | json}}</pre>
+            </div>
+        </div>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)

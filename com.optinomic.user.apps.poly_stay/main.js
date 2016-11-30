@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -81,10 +81,38 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('success: getPatientList', data);
 
             $scope.d.app.patients.loaded = true;
-            $scope.d.app.patients.data = data.patients;
+            $scope.d.app.patients.data = $scope.getODBCData(data.patients);
         });
 
 
+    };
+
+
+    $scope.getODBCData = function(patients) {
+
+        // Init - Params
+
+
+        // Actions
+        var actions = 1;
+        var actions_count = 0;
+
+        // Init
+        // var deferred = $q.defer();
+        var api = '';
+        var return_data = {};
+
+
+        // Get poly_pid | poly_fid
+        patients.forEach(function(patient, my_patient_index) {
+            patient.stays.forEach(function(stay, my_stay_index) {
+                var cis_fid_str = stay.data.cis_fid.toString();
+                stay.poly_pid = parseInt(cis_fid_str.substring(0, 5));
+                stay.poly_fid = parseInt(cis_fid_str.substring(6, 2));
+            });
+        });
+
+        return patients;
     };
 
 
