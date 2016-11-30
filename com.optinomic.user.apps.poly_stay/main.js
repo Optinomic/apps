@@ -81,7 +81,16 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             console.log('success: getPatientList', data);
 
             $scope.d.app.patients.loaded = true;
-            $scope.d.app.patients.data = $scope.getODBCData(data.patients);
+            $scope.d.app.patients.data = {};
+
+
+            var dataPromiseODBC = $scope.getODBCData(data.patients);
+            dataPromiseODBC.then(function(data) {
+                console.log('(YES) dataPromiseODBC', data);
+                $scope.d.app.patients.data = data;
+            });
+
+
         });
 
 
@@ -94,11 +103,11 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
         // Actions
-        var actions = 1;
+        var actions = patients.length;
         var actions_count = 0;
 
         // Init
-        // var deferred = $q.defer();
+        var deferred = $q.defer();
         var api = '';
         var return_data = {};
 
@@ -106,6 +115,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         // Get poly_pid | poly_fid
         patients.forEach(function(patient, my_patient_index) {
+            actions = actions + patient.data.stays.length;
+            actions_count = actions_count + 1;
 
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
@@ -116,15 +127,49 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 sql = sql.replace("%poly_pid%", stay.poly_pid);
                 sql = sql.replace("%poly_fid%", stay.poly_fid);
 
-                console.log('STAY: ', my_patient_index, my_stay_index, sql);
 
-                stay.polypoint_belegung = {};
-                stay.polypoint_belegung = $scope.runODBC(sql);
+
+                // INIT
+                var format = 'json';
+                var delimitter = ';';
+                var including_headers = 'True';
+                var direct = 'True';
+
+                //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
+                var api = dataService.runDataSource(sql, 'Polypoint', delimitter, including_headers, format, direct);
+                var aODBC = dataService.getData(api);
+
+                aODBC.then(function(data) {
+
+                    stay.polypoint_belegung = data;
+
+                    // Deferred when done.
+                    actions_count = actions_count + 1;
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(patients);
+                    };
+
+                }, function(error) {
+
+                    stay.polypoint_belegung = error;
+
+                    // Error
+                    deferred.reject(return_data);
+                    console.log('-- Error:', error);
+                });
+
+
+                // console.log('STAY: ', my_patient_index, my_stay_index, sql);
+
+                // stay.polypoint_belegung = {};
+                // stay.polypoint_belegung = $scope.runODBC(sql);
+
 
             });
         });
 
-        return patients;
+        return deferred.promise;
+
     };
 
 
