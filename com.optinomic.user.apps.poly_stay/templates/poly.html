@@ -12,8 +12,25 @@ include(../lib/html/optinomic/page/start.m4)
                     <h3 class="md-subhead">{{patient.data.extras.name}}</h3>
                 </div>
             </div>
-            <div>
-                <pre>{{patient.data.stays | json}}</pre>
+            <div ng-repeat="stay in patient.data.stays" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                <div flex>
+                    <h3 class="md-caption">Optinomic PID: {{patient.pid}}</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">Optinomic FID: {{stay.id}}</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">Polypoint PID: {{stay.poly_pid}}</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">Polypoint FID: {{stay.poly_fid}}</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">Polypoint PAID: ?</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">Polypoint FAID: ?</h3>
+                </div>
             </div>
         </div>
     </div>
