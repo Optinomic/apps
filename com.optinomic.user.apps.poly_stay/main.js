@@ -45,6 +45,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
     $scope.initApp = function() {
         var app = {
             "patients": {
+                "odbc": false,
                 "loaded": false,
                 "data": []
             }
@@ -86,6 +87,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
             var dataPromiseODBC = $scope.getODBCData(data.patients);
             dataPromiseODBC.then(function(data) {
+                $scope.d.app.patients.loaded = true;
+
                 console.log('(YES) dataPromiseODBC', data);
                 $scope.d.app.patients.data = data;
             });

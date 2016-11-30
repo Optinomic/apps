@@ -1,6 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <div class="grid-border-top" style="margin-top: 30px;">
-    <div>
+    <div ng-if="d.app.patients.odbc">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
@@ -12,24 +12,47 @@ include(../lib/html/optinomic/page/start.m4)
                     <h3 class="md-subhead">{{patient.data.extras.name}}</h3>
                 </div>
             </div>
-            <div ng-repeat="stay in patient.data.stays" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                <div flex>
-                    <h3 class="md-caption">Optinomic PID: {{patient.data.pid}}</h3>
+            <div ng-repeat="stay in patient.data.stays">
+                <p class="md-body-2">ID's</p>
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div flex>
+                        <h3 class="md-caption">Optinomic PID: {{patient.data.pid}}</h3>
+                    </div>
+                    <div flex>
+                        <h3 class="md-caption">Optinomic FID: {{stay.id}}</h3>
+                    </div>
+                    <div flex>
+                        <h3 class="md-caption">CIS_FID: {{stay.data.cis_fid}}</h3>
+                    </div>
+                    <div flex>
+                        <h3 class="md-caption">Polypoint PID: {{stay.poly_pid}}</h3>
+                    </div>
+                    <div flex>
+                        <h3 class="md-caption">Polypoint FID: {{stay.poly_fid}}</h3>
+                    </div>
                 </div>
-                <div flex>
-                    <h3 class="md-caption">Optinomic FID: {{stay.id}}</h3>
-                </div>
-                <div flex>
-                    <h3 class="md-caption">CIS_FID: {{stay.data.cis_fid}}</h3>
-                </div>
-                <div flex>
-                    <h3 class="md-caption">Polypoint PID: {{stay.poly_pid}}</h3>
-                </div>
-                <div flex>
-                    <h3 class="md-caption">Polypoint FID: {{stay.poly_fid}}</h3>
+                <p class="md-body-2">Belegung | {{stay.polypoint_belegung.row.length}}</p>
+                <div ng-repeat="bel in stay.polypoint_belegung.row">
+                    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                        <div flex>
+                            <h3 class="md-caption">PAID: {{bel.PAID}}</h3>
+                        </div>
+                        <div flex>
+                            <h3 class="md-caption">FAID: {{bel.PAID}}</h3>
+                        </div>
+                        <div flex>
+                            <h3 class="md-caption">Org: {{bel.ORG}}</h3>
+                        </div>
+                        <div flex>
+                            <h3 class="md-caption">Station: {{bel.STATION}}</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div ng-if="!d.app.patients.odbc">
+        <p class="md-caption">Laden</p>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)
