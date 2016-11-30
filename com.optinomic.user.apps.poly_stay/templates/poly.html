@@ -9,7 +9,7 @@ include(../lib/html/optinomic/page/start.m4)
         <div ng-repeat="patient in d.app.patients.data" class="grid-border-top">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
-                    <h3 class="md-subhead">{{patient.data.extras.name}}</h3>
+                    <h3 class="md-subhead">{{patient.data.extras.name}} ({{patient.data.extras.birthday_age}})</h3>
                 </div>
             </div>
             <div ng-repeat="stay in patient.data.stays">
@@ -32,8 +32,8 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
                 <div ng-repeat="bel in stay.polypoint_belegung.rows">
                     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-                        <div flex>
-                            <h3 class="md-caption">PAID: {{bel.PAID}} | FAID: {{bel.PAID}}</h3>
+                        <div flex="5">
+                            &nbsp;
                         </div>
                         <div flex>
                             <h3 class="md-caption">{{bel.ORG}}</h3>
@@ -42,9 +42,15 @@ include(../lib/html/optinomic/page/start.m4)
                             <h3 class="md-caption">{{bel.STATION}} | {{bel.ZIMMER}}</h3>
                         </div>
                         <div flex>
-                            <h3 class="md-caption">{{bel.BEGINN | date}} - {{bel.ENDE | date}} ({{bel.DAUER_TAGE}})</h3>
+                            <h3 class="md-caption">{{bel.BEGINN | date}} - {{bel.ENDE | date}} | {{bel.DAUER_TAGE}} Tg.</h3>
+                        </div>
+                        <div flex>
+                            <h3 class="md-caption">PAID: {{bel.PAID}} | FAID: {{bel.PAID}}</h3>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <p>&nbsp;</p>
                 </div>
             </div>
         </div>
