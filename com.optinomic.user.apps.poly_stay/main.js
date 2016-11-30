@@ -102,9 +102,12 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         var api = '';
         var return_data = {};
 
+        console.log('(1) getODBCData', patients);
 
         // Get poly_pid | poly_fid
         patients.forEach(function(patient, my_patient_index) {
+            console.log('(2) getODBCData', my_patient_index, patient);
+
             patient.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, 5));
