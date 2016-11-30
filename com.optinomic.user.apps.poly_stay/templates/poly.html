@@ -32,7 +32,7 @@ include(../lib/html/optinomic/page/start.m4)
                     </div>
                 </div>
                 <p class="md-body-2">Belegung | {{stay.polypoint_belegung.row.length}}</p>
-                <div ng-repeat="bel in stay.polypoint_belegung.row">
+                <div ng-repeat="bel in stay.polypoint_belegung.rows">
                     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                         <div flex>
                             <h3 class="md-caption">PAID: {{bel.PAID}}</h3>
