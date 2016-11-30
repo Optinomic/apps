@@ -36,7 +36,7 @@ FROM DISDBA.FA FA,
 
 WHERE ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID))
 
-AND ((PA.PID='9987') AND (FA.FID='5'))
+AND ((PA.PID='%poly_pid%') AND (FA.FID='%poly_fid%'))
 
 ORDER BY PA.PAID
 

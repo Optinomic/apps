@@ -111,6 +111,16 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 var cis_fid_str = stay.data.cis_fid.toString();
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, 5));
                 stay.poly_fid = parseInt(cis_fid_str.substring(5, 7));
+
+                var sql = include_as_js_string(belegung_history_from_fid.sql);
+                sql = sql.replace("%poly_pid%", stay.poly_pid);
+                sql = sql.replace("%poly_fid%", stay.poly_fid);
+
+                console.log('STAY: ', my_patient_index, my_stay_index, sql);
+
+                stay.polypoint_belegung = {};
+                stay.polypoint_belegung = $scope.runODBC(sql);
+
             });
         });
 
@@ -158,24 +168,15 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
     };
 
 
-    $scope.runODBC = function(selected_odbc_package) {
+    $scope.runODBC = function(sql) {
 
         // -----------------------------------
         // RUN: ODBC Objekt
         // -----------------------------------
 
-        var d = {
-            "selected": true,
-            "executed": false,
-            "package": selected_odbc_package,
-            "data": {}
-        };
-
-        // Selektiere Datenquelle setzen.
-        $scope.d.odbc.current = d;
 
         // INIT
-        var query = selected_odbc_package.sql;
+        var query = sql;
         var format = 'json';
         var delimitter = ';';
         var including_headers = 'True';
@@ -188,24 +189,17 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
             console.log('(DATA) runODBC  :: ', data);
 
-            $scope.d.odbc.current.executed = true;
-            $scope.d.odbc.current.data = data;
-
-
+            return data;
 
         });
 
 
         api.error(function(data) {
-            $scope.d.odbc.current.executed = true;
-            $scope.d.odbc.current.data = data;
-
             console.log('ERROR: runODBC: ', data);
         });
 
 
-
-        console.log('runODBC :: ', $scope.d.odbc.current);
+        console.log('runODBC :: ', sql);
     };
 
 
