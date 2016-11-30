@@ -123,12 +123,12 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
-                cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 3));
+                cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
 
 
 
-                stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 3)));
-                stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 3), (cis_fid_str.length - 1)));
+                stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
+                stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 2), (cis_fid_str.length - 1)));
 
 
                 console.log('cis_fid_str', cis_fid_str, stay.poly_pid, stay.poly_fid);
