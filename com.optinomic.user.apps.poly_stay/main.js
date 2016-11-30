@@ -126,8 +126,12 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 3));
 
 
+
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 3)));
                 stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 3), (cis_fid_str.length - 1)));
+
+
+                console.log('cis_fid_str', cis_fid_str, stay.poly_pid, stay.poly_fid);
 
                 var sql = include_as_js_string(belegung_history_from_fid.sql);
                 sql = sql.replace("%poly_pid%", stay.poly_pid);
