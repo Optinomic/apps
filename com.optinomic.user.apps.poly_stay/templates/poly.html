@@ -14,7 +14,7 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div ng-repeat="stay in patient.data.stays" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
-                    <h3 class="md-caption">Optinomic PID: {{patient.pid}}</h3>
+                    <h3 class="md-caption">Optinomic PID: {{patient.data.pid}}</h3>
                 </div>
                 <div flex>
                     <h3 class="md-caption">Optinomic FID: {{stay.id}}</h3>
