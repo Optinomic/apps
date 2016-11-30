@@ -87,7 +87,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
             var dataPromiseODBC = $scope.getODBCData(data.patients);
             dataPromiseODBC.then(function(data) {
-                $scope.d.app.patients.loaded = true;
+                $scope.d.app.patients.odbc = true;
 
                 console.log('(YES) dataPromiseODBC', data);
                 $scope.d.app.patients.data = data;
@@ -123,8 +123,10 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
-                stay.poly_pid = parseInt(cis_fid_str.substring(0, 5));
-                stay.poly_fid = parseInt(cis_fid_str.substring(5, 7));
+                cis_fid_str = cis_fid_str.substring((cis_fid_str.length - 3), (cis_fid_str.length - 1));
+
+                stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 3)));
+                stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 3), (cis_fid_str.length - 1)));
 
                 var sql = include_as_js_string(belegung_history_from_fid.sql);
                 sql = sql.replace("%poly_pid%", stay.poly_pid);
