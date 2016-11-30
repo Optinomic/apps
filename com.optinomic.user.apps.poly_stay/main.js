@@ -110,7 +110,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, 5));
-                stay.poly_fid = parseInt(cis_fid_str.substring(5, 6));
+                stay.poly_fid = parseInt(cis_fid_str.substring(5, 7));
             });
         });
 
