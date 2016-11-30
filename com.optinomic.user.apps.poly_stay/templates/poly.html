@@ -1,19 +1,18 @@
 include(../lib/html/optinomic/page/start.m4)
-<div class="grid-border-top" style="margin-top: 30px;">
+<div style="margin-top: 30px;">
     <div>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
             </div>
         </div>
-        <div ng-repeat="patient in d.app.patients.data">
+        <div ng-repeat="patient in d.app.patients.data" class="grid-border-top">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
                     <h3 class="md-subhead">{{patient.data.extras.name}}</h3>
                 </div>
             </div>
             <div ng-repeat="stay in patient.data.stays">
-                <p class="md-body-2">ID's</p>
                 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div flex>
                         <h3 class="md-caption">Optinomic PID: {{patient.data.pid}}</h3>
@@ -31,20 +30,19 @@ include(../lib/html/optinomic/page/start.m4)
                         <h3 class="md-caption">Polypoint FID: {{stay.poly_fid}}</h3>
                     </div>
                 </div>
-                <p class="md-body-2">Belegung | {{stay.polypoint_belegung.rows.length}}</p>
                 <div ng-repeat="bel in stay.polypoint_belegung.rows">
                     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                         <div flex>
-                            <h3 class="md-caption">PAID: {{bel.PAID}}</h3>
+                            <h3 class="md-caption">PAID: {{bel.PAID}} | FAID: {{bel.PAID}}</h3>
                         </div>
                         <div flex>
-                            <h3 class="md-caption">FAID: {{bel.PAID}}</h3>
+                            <h3 class="md-caption">{{bel.ORG}}</h3>
                         </div>
                         <div flex>
-                            <h3 class="md-caption">Org: {{bel.ORG}}</h3>
+                            <h3 class="md-caption">{{bel.STATION}} | {{bel.ZIMMER}}</h3>
                         </div>
                         <div flex>
-                            <h3 class="md-caption">Station: {{bel.STATION}}</h3>
+                            <h3 class="md-caption">{{bel.BEGINN | date}} - {{bel.ENDE | date}} ({{bel.DAUER_TAGE}})</h3>
                         </div>
                     </div>
                 </div>
