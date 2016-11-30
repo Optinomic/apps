@@ -9,11 +9,11 @@ include(../lib/html/optinomic/page/start.m4)
         <div ng-repeat="patient in d.app.patients.data">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
-                    <h3 class="md-subhead">{{patient.extras.name}}</h3>
+                    <h3 class="md-subhead">{{patient.data.extras.name}}</h3>
                 </div>
             </div>
             <div>
-                <pre>{{patient.stays | json}}</pre>
+                <pre>{{patient.data.stays | json}}</pre>
             </div>
         </div>
     </div>
