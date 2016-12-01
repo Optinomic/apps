@@ -221,6 +221,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                         stay.belegung.current.austritt_zeit = data.rows[0].ZEITAUSTRITT;
                         stay.belegung.current.org_current = data.rows[0].ORG_CURRENT;
 
+                    } else {
+                        stay.polypoint_belegung = null;
                     };
 
 
@@ -230,14 +232,28 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                     };
 
                     // Status setzen.
-                    $scope.d.app.status.text = "[2/1] Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
+                    $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
 
+                    actions_count = actions_count + 1;
+
+
+                    actions = actions + 1;
                     var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
 
                     var aPromise = dataService.getData(api_write);
                     aPromise.then(function(data) {
-                        $scope.d.app.status.text = "[2/2] Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+
+
+
+                        // Deferred when done.
+                        actions_count = actions_count + 1;
+                        if (dataService.checkSuccess(actions, actions_count)) {
+                            deferred.resolve(patients);
+                        };
+
+
+                        $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
 
                         console.log('(✓) saveAnnotationsData =', annotation_obj);
                         deferred.resolve(return_data);
@@ -251,11 +267,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
 
-                    // Deferred when done.
-                    actions_count = actions_count + 1;
-                    if (dataService.checkSuccess(actions, actions_count)) {
-                        deferred.resolve(patients);
-                    };
+
 
                 }, function(error) {
 
