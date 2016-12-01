@@ -239,7 +239,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                     aPromise.then(function(data) {
                         $scope.d.app.status.text = "[2/2] Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
 
-                        console.log('(✓) saveAnnotationsData =', full_data);
+                        console.log('(✓) saveAnnotationsData =', annotation_obj);
                         deferred.resolve(return_data);
 
                     }, function(error) {
