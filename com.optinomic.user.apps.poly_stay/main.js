@@ -159,7 +159,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                 aODBC.then(function(data) {
 
-                    $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
                     stay.polypoint_belegung = data;
 
@@ -189,22 +188,24 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                     data.rows.forEach(function(bel, my_bel_index) {
                         if ((bel.ORG === "EAS") && (stay.belegung.current.id === 0)) {
-                            stay.belegung.current = = stay.belegung.art[1];
+                            stay.belegung.current = stay.belegung.art[1];
                         };
                         if ((bel.ORG === "EAS") && (stay.belegung.current.id === 2)) {
-                            stay.belegung.current = = stay.belegung.art[3];
+                            stay.belegung.current = stay.belegung.art[3];
                         };
                         if ((bel.ORG === "EP") && (stay.belegung.current.id === 0)) {
-                            stay.belegung.current = = stay.belegung.art[2];
+                            stay.belegung.current = stay.belegung.art[2];
                         };
                         if ((bel.ORG === "EP") && (stay.belegung.current.id === 1)) {
-                            stay.belegung.current = = stay.belegung.art[3];
+                            stay.belegung.current = stay.belegung.art[3];
                         };
                         if ((bel.ORG === "TK") && (stay.belegung.current.id === 0)) {
-                            stay.belegung.current = = stay.belegung.art[4];
+                            stay.belegung.current = stay.belegung.art[4];
                         };
-
                     });
+
+                    // Status setzen.
+                    $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
                     // Deferred when done.
                     actions_count = actions_count + 1;
