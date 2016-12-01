@@ -297,26 +297,35 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         // Get poly_pid | poly_fid
         patients.forEach(function(patient, my_patient_index) {
 
-            var annotation_array = [];
+            var bel_array = [];
             patient.data.stays.forEach(function(stay, my_stay_index) {
-                annotation_array.push(stay.annotation_obj);
+                bel_array.push(stay.annotation_obj);
             });
 
 
+            var annotation_obj = {
+                "selector": bel_array[0],
+                "stays": bel_array
+            };
+
+
             //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
-            var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_array), patient.data.pid, 'com.optinomic.init.poly_stay');
+            var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
 
             var aSavePromise = dataService.getData(api_write);
             aSavePromise.then(function(data) {
 
-                $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
-                console.log('(✓) saveAnnotationsData =', actions, actions_count);
+                $scope.d.app.status.text = "Belegung der Patienten (" + actions + "/" + actions_count + ") speichern.";
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
+                console.log('(✓) saveAnnotationsData =', annotation_obj);
+
                 if (dataService.checkSuccess(actions, actions_count)) {
                     deferred.resolve(patients);
                 };
+
+
 
 
             }, function(error) {
