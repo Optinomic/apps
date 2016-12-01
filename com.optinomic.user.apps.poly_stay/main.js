@@ -92,6 +92,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             $scope.d.app.patients.data = {};
 
 
+
             var dataPromiseODBC = $scope.getODBCData(data.patients);
             dataPromiseODBC.then(function(data) {
                 $scope.d.app.patients.odbc = true;
@@ -102,7 +103,17 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 $scope.d.app.patients.data = data;
 
 
-                // $scope.saveODBCData
+                var dataPromiseSaveAnnotation = $scope.saveODBCData(data);
+                dataPromiseSaveAnnotation.then(function(data) {
+                    $scope.d.app.patients.saved = true;
+                    $scope.d.app.status.text = "Belegung aller Patienten gespeichert.";
+
+
+                    console.log('(YES) dataPromiseSaveAnnotation', data);
+                    $scope.d.app.patients.data = data;
+
+                });
+
             });
 
 
@@ -230,7 +241,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                     var init_name = stay.id + "__bel_"
 
-                    var annotation_obj = {
+                    stay.annotation_obj = {
                         "bel_selector": stay.belegung.current,
                         "bel_all": stay.polypoint_belegung
                     };
@@ -271,29 +282,58 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
     $scope.saveODBCData = function(patients) {
 
-        actions = actions + 1;
-        var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
+        // Init - Params
 
-        var aPromise = dataService.getData(api_write);
-        aPromise.then(function(data) {
+        // Actions
+        var actions = patients.length;
+        var actions_count = 0;
 
-            // Deferred when done.
+        // Init
+        var deferred = $q.defer();
+        var api = '';
+        var return_data = {};
+
+
+        // Get poly_pid | poly_fid
+        patients.forEach(function(patient, my_patient_index) {
+            actions = actions + patient.data.stays.length;
             actions_count = actions_count + 1;
-            if (dataService.checkSuccess(actions, actions_count)) {
-                deferred.resolve(patients);
-            };
 
 
-            $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+            var annotation_array = [];
+            patient.data.stays.forEach(function(stay, my_stay_index) {
+                annotation_array.push(stay.annotation_obj);
+            });
 
-            console.log('(✓) saveAnnotationsData =', annotation_obj);
-            deferred.resolve(return_data);
 
-        }, function(error) {
-            // Error
-            deferred.reject(error);
-            console.log('ERROR: saveAnnotationsData', error);
+            //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
+            var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_array), patient.data.pid, 'com.optinomic.init.poly_stay');
+
+            var aPromise = dataService.getData(api_write);
+            aPromise.then(function(data) {
+
+                // Deferred when done.
+                actions_count = actions_count + 1;
+                if (dataService.checkSuccess(actions, actions_count)) {
+                    deferred.resolve(patients);
+                };
+
+
+                $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+
+                console.log('(✓) saveAnnotationsData =', annotation_obj);
+                deferred.resolve(return_data);
+
+            }, function(error) {
+                // Error
+                deferred.reject(error);
+                console.log('ERROR: saveAnnotationsData', error);
+            });
         });
+
+
+        return deferred.promise;
+
     };
 
     $scope.downloadODBC = function() {
