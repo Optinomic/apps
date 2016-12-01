@@ -48,6 +48,9 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 "odbc": false,
                 "loaded": false,
                 "data": []
+            },
+            "status": {
+                "text": "Applikation initialisieren."
             }
         };
 
@@ -59,6 +62,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
     $scope.getPatientList = function() {
         // Init - Params
+
+        $scope.d.app.status.text = "Patienten (in aktueller Behandlung) laden.";
 
         var patientListFilter = {
             "gender": '',
@@ -80,6 +85,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         myAPI.then(function(data) {
             console.log('success: getPatientList', data);
+            $scope.d.app.status.text = "Patienten (in aktueller Behandlung) geladen.";
+
 
             $scope.d.app.patients.loaded = true;
             $scope.d.app.patients.data = {};
@@ -88,6 +95,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             var dataPromiseODBC = $scope.getODBCData(data.patients);
             dataPromiseODBC.then(function(data) {
                 $scope.d.app.patients.odbc = true;
+                $scope.d.app.status.text = "Belegung aller Patienten ermittelt.";
+
 
                 console.log('(YES) dataPromiseODBC', data);
                 $scope.d.app.patients.data = data;
@@ -114,24 +123,24 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         var api = '';
         var return_data = {};
 
-        console.log('(1) getODBCData', patients);
 
         // Get poly_pid | poly_fid
         patients.forEach(function(patient, my_patient_index) {
             actions = actions + patient.data.stays.length;
             actions_count = actions_count + 1;
 
+
+            $scope.d.app.status.text = "Belegung für Patient ({{my_patient_index}}/{{patients.length}}) ermitteln.";
+
+
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 var cis_fid_str = stay.data.cis_fid.toString();
                 cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
-
-
 
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
                 stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 1), (cis_fid_str.length)));
 
 
-                console.log('cis_fid_str', cis_fid_str, stay.poly_pid, stay.poly_fid);
 
                 var sql = include_as_js_string(belegung_history_from_fid.sql);
                 sql = sql.replace("%poly_pid%", stay.poly_pid);

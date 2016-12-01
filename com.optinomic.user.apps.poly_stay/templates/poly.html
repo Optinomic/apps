@@ -5,6 +5,9 @@ include(../lib/html/optinomic/page/start.m4)
             <div flex>
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
             </div>
+            <div>
+                <p class="md-caption">{{d.app.status.text}}</p>
+            </div>
         </div>
         <div ng-repeat="patient in d.app.patients.data" class="grid-border-top">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
