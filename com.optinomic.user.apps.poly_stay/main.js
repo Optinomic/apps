@@ -159,10 +159,52 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                 aODBC.then(function(data) {
 
-                    $scope.d.app.status.text = "Belegung für Patient (" + my_patient_index + "/" + patients.length + ") ermitteln.";
-
+                    $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
                     stay.polypoint_belegung = data;
+
+
+                    // Belegungstyp festlegen
+                    stay.belegung = {
+                        "art": [{
+                            "id": 0,
+                            "name": "Unbekannt / Nicht festgelegt"
+                        }, {
+                            "id": 1,
+                            "name": "EAS"
+                        }, {
+                            "id": 2,
+                            "name": "EP"
+                        }, {
+                            "id": 3,
+                            "name": "EAS & EP"
+                        }, {
+                            "id": 4,
+                            "name": "TK"
+                        }],
+                        "current": {}
+                    };
+                    // Init - Undefined
+                    stay.belegung.current = stay.belegung.art[0];
+
+                    data.rows.forEach(function(bel, my_bel_index) {
+                        if ((bel.ORG === "EAS") && (stay.belegung.current.id === 0)) {
+                            stay.belegung.current = = stay.belegung.art[1];
+                        };
+                        if ((bel.ORG === "EAS") && (stay.belegung.current.id === 2)) {
+                            stay.belegung.current = = stay.belegung.art[3];
+                        };
+                        if ((bel.ORG === "EP") && (stay.belegung.current.id === 0)) {
+                            stay.belegung.current = = stay.belegung.art[2];
+                        };
+                        if ((bel.ORG === "EP") && (stay.belegung.current.id === 1)) {
+                            stay.belegung.current = = stay.belegung.art[3];
+                        };
+                        if ((bel.ORG === "TK") && (stay.belegung.current.id === 0)) {
+                            stay.belegung.current = = stay.belegung.art[4];
+                        };
+
+                    });
 
                     // Deferred when done.
                     actions_count = actions_count + 1;

@@ -32,6 +32,9 @@ include(../lib/html/optinomic/page/start.m4)
                     <div flex>
                         <h3 class="md-caption">Polypoint FID: {{stay.poly_fid}}</h3>
                     </div>
+                    <div flex>
+                        <h3 class="md-caption">{{stay.belegung.current.name}} ({{stay.belegung.current.id}})</h3>
+                    </div>
                 </div>
                 <div ng-repeat="bel in stay.polypoint_belegung.rows">
                     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
