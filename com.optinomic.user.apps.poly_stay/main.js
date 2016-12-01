@@ -224,20 +224,20 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                     };
 
 
-                    stay.annotation_obj = {
+                    var annotation_obj = {
                         "bel_selector": stay.belegung.current,
                         "bel_all": stay.polypoint_belegung
                     };
 
                     // Status setzen.
-                    $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
+                    $scope.d.app.status.text = "[2/1] Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
 
-                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(stay.annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
+                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
 
                     var aPromise = dataService.getData(api_write);
                     aPromise.then(function(data) {
-                        $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+                        $scope.d.app.status.text = "[2/2] Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
 
                         console.log('(✓) saveAnnotationsData =', full_data);
                         deferred.resolve(return_data);
