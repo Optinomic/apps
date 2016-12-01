@@ -211,8 +211,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                         stay.belegung.current.polypoint_paid = data.rows[0].PAID;
                         stay.belegung.current.polypoint_pid = data.rows[0].PID;
-                        stay.belegung.current.polypoint_paid = data.rows[0].FAID;
-                        stay.belegung.current.polypoint_pid = data.rows[0].FID;
+                        stay.belegung.current.polypoint_faid = data.rows[0].FAID;
+                        stay.belegung.current.polypoint_fid = data.rows[0].FID;
 
                         stay.belegung.current.versicherungsnummer = data.rows[0].VERSICHERUNGSNUMMER;
                         stay.belegung.current.eintritt = data.rows[0].EINTRITT;
@@ -231,6 +231,25 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                     // Status setzen.
                     $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
+
+
+                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(stay.annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
+
+                    var aPromise = dataService.getData(api_write);
+                    aPromise.then(function(data) {
+                        $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+
+                        console.log('(✓) saveAnnotationsData =', full_data);
+                        deferred.resolve(return_data);
+
+                    }, function(error) {
+                        // Error
+                        deferred.reject(error);
+                        console.log('ERROR: saveAnnotationsData', error);
+                    });
+
+
+
 
                     // Deferred when done.
                     actions_count = actions_count + 1;
