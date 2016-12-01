@@ -306,8 +306,11 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
             var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_array), patient.data.pid, 'com.optinomic.init.poly_stay');
 
-            var aPromise = dataService.getData(api_write);
-            aPromise.then(function(data) {
+            var aSavePromise = dataService.getData(api_write);
+            aSavePromise.then(function(data) {
+
+                $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+                console.log('(✓) saveAnnotationsData =', actions, actions_count);
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
@@ -316,22 +319,19 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 };
 
 
-                $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
-
-                console.log('(✓) saveAnnotationsData =', annotation_array);
-                deferred.resolve(return_data);
-
             }, function(error) {
                 // Error
                 deferred.reject(error);
                 console.log('ERROR: saveAnnotationsData', error);
             });
+
         });
 
 
         return deferred.promise;
 
     };
+
 
     $scope.downloadODBC = function() {
 
