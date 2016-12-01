@@ -225,10 +225,11 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                         stay.polypoint_belegung = null;
                     };
 
+                    var init_name = stay.id + "__bel_"
 
                     var annotation_obj = {
-                        "bel_selector": stay.belegung.current,
-                        "bel_all": stay.polypoint_belegung
+                        init_name + "selector": stay.belegung.current,
+                        init_name + "all": stay.polypoint_belegung
                     };
 
                     // Status setzen.
