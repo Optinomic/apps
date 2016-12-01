@@ -167,7 +167,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                     stay.belegung = {
                         "art": [{
                             "id": 0,
-                            "name": "Unbekannt / Nicht festgelegt"
+                            "name": "Unbekannt"
                         }, {
                             "id": 1,
                             "name": "EAS"
@@ -206,6 +206,17 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                                 stay.belegung.current = stay.belegung.art[4];
                             };
                         });
+
+                        stay.belegung.current.PAID = data.rows[0].PAID;
+                        stay.belegung.current.PID = data.rows[0].PID;
+                        stay.belegung.current.PAID = data.rows[0].FAID;
+                        stay.belegung.current.PID = data.rows[0].FID;
+                        stay.belegung.current.VERSICHERUNGSNUMMER = data.rows[0].VERSICHERUNGSNUMMER;
+                        stay.belegung.current.EINTRITT = data.rows[0].EINTRITT;
+                        stay.belegung.current.AUSTRITT = data.rows[0].AUSTRITT;
+                        stay.belegung.current.ZEITAUSTRITT = data.rows[0].ZEITAUSTRITT;
+                        stay.belegung.current.ORG_CURRENT = data.rows[0].ORG_CURRENT;
+
                     };
 
                     // Status setzen.
