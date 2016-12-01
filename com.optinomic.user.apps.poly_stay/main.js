@@ -100,6 +100,9 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                 console.log('(YES) dataPromiseODBC', data);
                 $scope.d.app.patients.data = data;
+
+
+                // $scope.saveODBCData
             });
 
 
@@ -228,46 +231,19 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                     var init_name = stay.id + "__bel_"
 
                     var annotation_obj = {
-                        init_name + "selector": stay.belegung.current,
-                        init_name + "all": stay.polypoint_belegung
+                        "bel_selector": stay.belegung.current,
+                        "bel_all": stay.polypoint_belegung
                     };
 
                     // Status setzen.
                     $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
 
+                    // Deferred when done.
                     actions_count = actions_count + 1;
-
-
-                    actions = actions + 1;
-                    var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
-
-                    var aPromise = dataService.getData(api_write);
-                    aPromise.then(function(data) {
-
-
-
-                        // Deferred when done.
-                        actions_count = actions_count + 1;
-                        if (dataService.checkSuccess(actions, actions_count)) {
-                            deferred.resolve(patients);
-                        };
-
-
-                        $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
-
-                        console.log('(✓) saveAnnotationsData =', annotation_obj);
-                        deferred.resolve(return_data);
-
-                    }, function(error) {
-                        // Error
-                        deferred.reject(error);
-                        console.log('ERROR: saveAnnotationsData', error);
-                    });
-
-
-
-
+                    if (dataService.checkSuccess(actions, actions_count)) {
+                        deferred.resolve(patients);
+                    };
 
 
                 }, function(error) {
@@ -293,6 +269,33 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
     };
 
 
+    $scope.saveODBCData = function(patients) {
+
+        actions = actions + 1;
+        var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
+
+        var aPromise = dataService.getData(api_write);
+        aPromise.then(function(data) {
+
+            // Deferred when done.
+            actions_count = actions_count + 1;
+            if (dataService.checkSuccess(actions, actions_count)) {
+                deferred.resolve(patients);
+            };
+
+
+            $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
+
+            console.log('(✓) saveAnnotationsData =', annotation_obj);
+            deferred.resolve(return_data);
+
+        }, function(error) {
+            // Error
+            deferred.reject(error);
+            console.log('ERROR: saveAnnotationsData', error);
+        });
+    };
+
     $scope.downloadODBC = function() {
 
         var fileName = $scope.d.odbc.current.package.name;
@@ -303,6 +306,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         dataService.saveData(data, fileName);
     };
+
 
 
 
