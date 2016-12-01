@@ -321,7 +321,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                 $scope.d.app.status.text = "Belegung der Patienten (" + my_patient_index + "/" + patients.length + ") gespeichert.";
 
-                console.log('(✓) saveAnnotationsData =', annotation_obj);
+                console.log('(✓) saveAnnotationsData =', annotation_array);
                 deferred.resolve(return_data);
 
             }, function(error) {
