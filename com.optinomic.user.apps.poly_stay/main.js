@@ -130,7 +130,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             actions_count = actions_count + 1;
 
 
-            $scope.d.app.status.text = "Belegung für Patient ({{my_patient_index}}/{{patients.length}}) ermitteln.";
+            $scope.d.app.status.text = "Belegung für Patient (" + my_patient_index + "/" + patients.length + ") ermitteln.";
 
 
             patient.data.stays.forEach(function(stay, my_stay_index) {
