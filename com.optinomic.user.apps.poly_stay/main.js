@@ -113,7 +113,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         // Init - Params
 
-
         // Actions
         var actions = patients.length;
         var actions_count = 0;
@@ -207,16 +206,27 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                             };
                         });
 
-                        stay.belegung.current.PAID = data.rows[0].PAID;
-                        stay.belegung.current.PID = data.rows[0].PID;
-                        stay.belegung.current.PAID = data.rows[0].FAID;
-                        stay.belegung.current.PID = data.rows[0].FID;
-                        stay.belegung.current.VERSICHERUNGSNUMMER = data.rows[0].VERSICHERUNGSNUMMER;
-                        stay.belegung.current.EINTRITT = data.rows[0].EINTRITT;
-                        stay.belegung.current.AUSTRITT = data.rows[0].AUSTRITT;
-                        stay.belegung.current.ZEITAUSTRITT = data.rows[0].ZEITAUSTRITT;
-                        stay.belegung.current.ORG_CURRENT = data.rows[0].ORG_CURRENT;
+                        stay.belegung.current.optinomic_pid = patient.data.pid;
+                        stay.belegung.current.optinomic_fid = stay.id;
 
+                        stay.belegung.current.polypoint_paid = data.rows[0].PAID;
+                        stay.belegung.current.polypoint_pid = data.rows[0].PID;
+                        stay.belegung.current.polypoint_paid = data.rows[0].FAID;
+                        stay.belegung.current.polypoint_pid = data.rows[0].FID;
+
+                        stay.belegung.current.versicherungsnummer = data.rows[0].VERSICHERUNGSNUMMER;
+                        stay.belegung.current.eintritt = data.rows[0].EINTRITT;
+                        stay.belegung.current.eintritt_zeit = data.rows[0].ZEITEINTRITT;
+                        stay.belegung.current.austritt = data.rows[0].AUSTRITT;
+                        stay.belegung.current.austritt_zeit = data.rows[0].ZEITAUSTRITT;
+                        stay.belegung.current.org_current = data.rows[0].ORG_CURRENT;
+
+                    };
+
+
+                    stay.annotation_obj = {
+                        "bel_selector": stay.belegung.current,
+                        "bel_all": stay.polypoint_belegung
                     };
 
                     // Status setzen.
@@ -248,35 +258,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         });
 
         return deferred.promise;
-
-    };
-
-
-
-    $scope.initODBC = function() {
-
-        // -----------------------------------
-        // Init: ODBC Objekt
-        // -----------------------------------
-
-        var odbc = {
-            "data_packages": [{
-                "name": 'Belegung - History | from FID',
-                "sql": include_as_js_string(
-                    belegung_history_from_fid.sql)
-            }],
-            "current": {
-                "selected": false,
-                "executed": false,
-                "package": {},
-                "data": {}
-            }
-        };
-
-
-
-        $scope.d.odbc = odbc;
-        console.log('initODBC :: ', $scope.d.odbc);
     };
 
 
@@ -291,40 +272,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         dataService.saveData(data, fileName);
     };
 
-
-    $scope.runODBC = function(sql) {
-
-        // -----------------------------------
-        // RUN: ODBC Objekt
-        // -----------------------------------
-
-
-        // INIT
-        var query = sql;
-        var format = 'json';
-        var delimitter = ';';
-        var including_headers = 'True';
-        var direct = 'True';
-
-        //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
-        var api = dataService.runDataSource(query, 'Polypoint', delimitter, including_headers, format, direct);
-
-        api.success(function(data) {
-
-            console.log('(DATA) runODBC  :: ', data);
-
-            return data;
-
-        });
-
-
-        api.error(function(data) {
-            console.log('ERROR: runODBC: ', data);
-        });
-
-
-        console.log('runODBC :: ', sql);
-    };
 
 
 
