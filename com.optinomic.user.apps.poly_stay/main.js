@@ -296,9 +296,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         // Get poly_pid | poly_fid
         patients.forEach(function(patient, my_patient_index) {
-            actions = actions + patient.data.stays.length;
-            actions_count = actions_count + 1;
-
 
             var annotation_array = [];
             patient.data.stays.forEach(function(stay, my_stay_index) {
