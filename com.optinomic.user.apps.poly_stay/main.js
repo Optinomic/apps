@@ -188,7 +188,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                     // console.log('DEBUG data', data);
 
-                    if ((data !== undefined) || (data !== null)) {
+                    if (data) {
                         data.rows.forEach(function(bel, my_bel_index) {
                             if ((bel.ORG === "EAS") && (stay.belegung.current.id === 0)) {
                                 stay.belegung.current = stay.belegung.art[1];
