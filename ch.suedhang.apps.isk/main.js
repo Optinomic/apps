@@ -34,9 +34,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.haveData = true;
 
                 // Run App-Functions:
-                $scope.setStanineView();
-                $scope.groupStanineView();
-                $scope.setExport();
+                // $scope.setStanineView();
+                // $scope.groupStanineView();
+                // $scope.setExport();
 
             };
 
