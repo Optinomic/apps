@@ -26,13 +26,13 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
                     <div flex="30">
-                        <p class="md-body-1"><span class="md-body-2">{{data.label}}</span> | {{score.sub_left}}</p>
+                        <p class="md-body-1"><span class="md-body-2">{{data.label}}</span> <br> {{score.sub_left}}</p>
                     </div>
                     <div flex="40">
                         <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
                     </div>
                     <div flex="30">
-                        <p class="md-body-1"> {{score.sub_right}} | <span class="md-body-2">Σ{{data.sum_score}}</span></p>
+                        <p class="md-body-1"> {{score.sub_right}}</p>
                     </div>
                 </div>
             </div>
