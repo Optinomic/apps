@@ -198,7 +198,25 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
                     // Belegungstyp festlegen
-                    stay.belegung = $scope.d.belegung;
+                    stay.belegung = {
+                        "art": [{
+                            "bel_id": 0,
+                            "name": "Unbekannt"
+                        }, {
+                            "bel_id": 1,
+                            "name": "EAS"
+                        }, {
+                            "bel_id": 2,
+                            "name": "EP"
+                        }, {
+                            "bel_id": 3,
+                            "name": "EAS & EP"
+                        }, {
+                            "bel_id": 4,
+                            "name": "TK"
+                        }],
+                        "current": {}
+                    };
 
                     // Init - Undefined
                     stay.belegung.current = stay.belegung.art[0];
