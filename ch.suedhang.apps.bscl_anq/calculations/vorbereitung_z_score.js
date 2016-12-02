@@ -22,6 +22,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         calc.result_array = [{
             "id": 0,
             "description": "GSI (Global Severity Index)",
+            "sub_left": "GSI (Global Severity Index)",
             "sub_right":"Durchschnittliche Belastung in allen Bereichen",
             "m_norm":[0.28, 0.35],
             "sd_norm":[0.23, 0.23],
@@ -29,6 +30,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 1,
             "description": "Psychotizismus",
+            "sub_left": "Psychotizismus",
             "sub_right":"Gefühl der Isolation und zwischenmenschlichen Entfremdung. Verzerrter, isolierter Lebensstil bis zu Halluzination und Gedankenzerfall.",
             "m_norm":[0.19, 0.19],
             "sd_norm":[0.28, 0.27],
@@ -36,6 +38,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 2,
             "description": "Paranoides Denken",
+            "sub_left": "Paranoides Denken",
             "sub_right":"Misstrauen, Minderwertigkeitsgefühle, paranoides Denken: Gedankenprojektion, Feindseligkeit, Argwohn, Grandiosität, Einengung, Angst vor Autonomieverlust und wahnhafte Täuschung.",
             "m_norm":[0.33, 0.34],
             "sd_norm":[0.40, 0.38],
@@ -43,13 +46,15 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 3,
             "description": "Phobische Angst",
+            "sub_left": "Phobische Angst",
             "sub_right":"Andauernde und unangemessene Furcht als Reaktion auf eine bestimmte Person, einen Platz, ein Objekt oder eine charakteristische Situation, die zu Vermeidungs- oder Fluchtverhalten führt.",
             "m_norm":[0.14, 0.16],
             "sd_norm":[0.23, 0.25],
             "items": 5
         }, {
             "id": 4,
-            "description": "Aggressivität/ Feindseligkeit",
+            "description": "Aggressivität / Feindseligkeit",
+            "sub_left": "Aggressivität / Feindseligkeit",
             "sub_right":"Reizbarkeit und Unausgeglichenheit bis hin zu starker Aggressivität. Ärger, Aggression, Irritierbarkeit, Zorn und Verstimmung.",
             "m_norm":[0.29, 0.37],
             "sd_norm":[0.35, 0.33],
@@ -57,6 +62,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 5,
             "description": "Ängstlichkeit",
+            "sub_left": "Ängstlichkeit",
             "sub_right":"Angst mit Nervosität, Spannungen und Zittern, Panikattacken und Schreckgefühlen, Gefühle von Besorgnis und Furcht.",
             "m_norm":[0.29, 0.39],
             "sd_norm":[0.31, 0.36],
@@ -64,6 +70,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 6,
             "description": "Depressivität",
+            "sub_left": "Depressivität",
             "sub_right":"Gedrückte Stimmung, Gesunkenes Interesse am Leben, Verringerte Motivation und Energie, Hoffnungslosigkeit, bis hin zu Suizidgedanken.",
             "m_norm":[0.24, 0.33],
             "sd_norm":[0.32, 0.40],
@@ -71,6 +78,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 7,
             "description": "Unsicherheit im Sozialkontakt",
+            "sub_left": "Unsicherheit im Sozialkontakt",
             "sub_right":"Unzulänglichkeits- und Minderwertigkeitsgefühle, Selbstabwertungen im sozialen Kontakt, Selbstzweifel, Selbstunsicherheit und negative Erwartungen bzgl. dem eigenen zwischenmenschlichen Verhalten.",
             "m_norm":[0.35, 0.49],
             "sd_norm":[0.40, 0.45],
@@ -78,6 +86,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 8,
             "description": "Zwanghaftigkeit",
+            "sub_left": "Zwanghaftigkeit",
             "sub_right": "Gedanken, Impulse und Handlungen, die konstant vorhanden und nicht änderbar und ich-fremd oder ungewollt erlebt werden, Kognitive Leistungsstörungen.",
             "m_norm":[0.50, 0.54],
             "sd_norm":[0.46, 0.43],
@@ -85,6 +94,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 9,
             "description": "Somatisierung",
+            "sub_left": "Somatisierung",
             "sub_right":"Kopfschmerzen, Herzbeschwerden, Atemprobleme, Magenbeschwerden, Muskelschmerzen, Schwächegefühl, Schweregefühl, Unwohlsein usw.",
             "m_norm":[0.23, 0.32],
             "sd_norm":[0.31, 0.33],
@@ -92,6 +102,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 10,
             "description": "Zusatzitems",
+            "sub_left": "Zusatzitems",
             "sub_right":"Zusatzitems",
             "m_norm":[null, null],
             "sd_norm":[null, null],
