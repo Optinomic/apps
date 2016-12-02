@@ -60,19 +60,24 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         $scope.d.belegung = {
             "art": [{
                 "bel_id": 0,
-                "name": "Unbekannt"
+                "name": "Unbekannt",
+                "description": "Unbekannt / Nicht festgelegt"
             }, {
                 "bel_id": 1,
-                "name": "EAS"
+                "name": "EAS",
+                "description": "Entzugs- und Abklärungsstation"
             }, {
                 "bel_id": 2,
-                "name": "EP"
+                "name": "EP",
+                "description": "Entwöhnungsprogramm"
             }, {
                 "bel_id": 3,
-                "name": "EAS & EP"
+                "name": "EAS & EP",
+                "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
             }, {
                 "bel_id": 4,
-                "name": "TK"
+                "name": "TK",
+                "description": "Tagesklinik"
             }],
             "current": {}
         };
