@@ -56,6 +56,27 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
         $scope.d.app = app;
 
+
+        $scope.d.belegung = {
+            "art": [{
+                "bel_id": 0,
+                "name": "Unbekannt"
+            }, {
+                "bel_id": 1,
+                "name": "EAS"
+            }, {
+                "bel_id": 2,
+                "name": "EP"
+            }, {
+                "bel_id": 3,
+                "name": "EAS & EP"
+            }, {
+                "bel_id": 4,
+                "name": "TK"
+            }],
+            "current": {}
+        };
+
         $scope.getPatientList();
     };
 
@@ -177,25 +198,8 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
                     // Belegungstyp festlegen
-                    stay.belegung = {
-                        "art": [{
-                            "id": 0,
-                            "name": "Unbekannt"
-                        }, {
-                            "id": 1,
-                            "name": "EAS"
-                        }, {
-                            "id": 2,
-                            "name": "EP"
-                        }, {
-                            "id": 3,
-                            "name": "EAS & EP"
-                        }, {
-                            "id": 4,
-                            "name": "TK"
-                        }],
-                        "current": {}
-                    };
+                    stay.belegung = angular.copy($scope.d.belegung);
+
                     // Init - Undefined
                     stay.belegung.current = stay.belegung.art[0];
 
@@ -239,7 +243,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                         stay.polypoint_belegung = null;
                     };
 
-                    var init_name = stay.id + "__bel_"
 
                     stay.annotation_obj = {
                         "bel_selector": stay.belegung.current,
@@ -298,19 +301,34 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         patients.forEach(function(patient, my_patient_index) {
 
             var bel_array = [];
-            patient.data.stays.forEach(function(stay, my_stay_index) {
-                bel_array.push(stay.annotation_obj);
+
+
+            var was_obj = {};
+            var belegung = angular.copy($scope.d.belegung);
+            belegung.art.forEach(function(bel, my_bel_index) {
+                was_obj[bel.bel_id] = false;
             });
 
 
+
+            patient.data.stays.forEach(function(stay, my_stay_index) {
+                bel_array.push(stay.annotation_obj);
+                was_obj[stay.annotation_obj.bel_selector.bel_id] = true;
+            });
+
+
+
             var annotation_obj = {
-                "selector": bel_array[0],
-                "stays": bel_array
+                "aktuell_letzter": bel_array[0],
+                "war_einmal": was_obj,
+                "alle": bel_array
             };
+
+            console.log('annotation_obj', my_patient_index, annotation_obj);
 
 
             //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
-            var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
+            var api_write = dataService.putPatientModuleAnnotations(angular.toJson({}), patient.data.pid, 'com.optinomic.init.poly_stay');
 
             var aSavePromise = dataService.getData(api_write);
             aSavePromise.then(function(data) {
