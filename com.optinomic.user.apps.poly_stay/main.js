@@ -198,7 +198,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
                     // Belegungstyp festlegen
-                    stay.belegung = angular.copy($scope.d.belegung);
+                    stay.belegung = $scope.d.belegung;
 
                     // Init - Undefined
                     stay.belegung.current = stay.belegung.art[0];
@@ -324,7 +324,6 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 "alle": bel_array
             };
 
-            console.log('annotation_obj', my_patient_index, annotation_obj);
 
 
             //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
@@ -337,7 +336,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
                 // Deferred when done.
                 actions_count = actions_count + 1;
-                console.log('(✓) saveAnnotationsData =', annotation_obj);
+                console.log('(✓) saveAnnotationsData =', my_patient_index, annotation_obj);
 
                 if (dataService.checkSuccess(actions, actions_count)) {
                     deferred.resolve(patients);
