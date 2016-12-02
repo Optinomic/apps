@@ -67,7 +67,7 @@ survey = isk
 
 
 [calculation scores_calculation javascript]
-include(calculations/scores.js)
+include(calculations/isk_patient_calc.js)
 
 [sql_init]
 include(includes/create_view.sql)
