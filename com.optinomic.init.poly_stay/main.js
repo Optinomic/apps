@@ -28,6 +28,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.haveData = true;
             // Run App-Functions:
             $scope.appInit();
+            $scope.getEntrys();
 
 
             // Finishing: Console Info & Init = done.
@@ -79,7 +80,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "departments": [{
                     "id": 1,
                     "name": "Tagesklinik",
-                    "description": "Tagesklinik",
+                    "description": "Tagesklinik (TK)",
                     "current_patient": {
                         "used": false
                     }
@@ -91,7 +92,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "departments": [{
                     "id": 1,
                     "name": "Amulant",
-                    "description": "Ambulante Behnadlung am Eigerplatz",
+                    "description": "Ambulante Behnadlung",
                     "current_patient": {
                         "used": false
                     }
@@ -132,15 +133,32 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-        // Get Stored Data
-        $scope.getInit();
+    };
+
+
+    $scope.getEntrys = function() {
+        // Get Data
+
+        $scope.d.belegung = [];
+        var api_call = dataService.getAnnotationsData('patient', '');
+        api_call.then(function(data) {
+
+            // Create Array if not already exists.
+            if (dataService.isEmpty(data)) {
+                $scope.d.belegung = {};
+            } else {
+                $scope.d.belegung = angular.copy(data);
+            };
+
+            console.log('(+) getEntrys ', $scope.d.belegung);
+        });
     };
 
 
 
 
     // -----------------------------------
-    // Button - Functions
+    // BELOW:   NOT USED
     // -----------------------------------
 
     $scope.setCurrentTreatment = function(item) {
