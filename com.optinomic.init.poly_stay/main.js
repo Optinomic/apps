@@ -140,18 +140,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get Data
 
         $scope.d.belegung = [];
-        var api_call = dataService.getAnnotationsData('patient', '');
-        api_call.then(function(data) {
+        var api_call = dataService.getPatientModuleAnnotations();
 
-            // Create Array if not already exists.
-            if (dataService.isEmpty(data)) {
-                $scope.d.belegung = {};
-            } else {
-                $scope.d.belegung = angular.copy(data);
-            };
-
+        api.success(function(data) {
+            $scope.d.belegung = data;
             console.log('(+) getEntrys ', $scope.d.belegung);
+
         });
+
+        api.error(function(data) {
+            console.log('(ERROR) getEntrys ', data);
+        });
+
+
     };
 
 
