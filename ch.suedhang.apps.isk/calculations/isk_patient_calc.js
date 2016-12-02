@@ -219,7 +219,7 @@ function main(responses) {
             d.all_results = all_results_obj.all_results;
 
             // -----------------------------------------------
-            // Store Definitions
+            // Store Definitions & write results back
             // -----------------------------------------------
 
             d.definitions = {};
@@ -227,9 +227,6 @@ function main(responses) {
             d.definitions.result_array = result_array;
             d.definitions.variables = all_results_obj.variables;
 
-            // -----------------------------------------------
-            // write results back
-            // -----------------------------------------------
             response.data.response_id = response.id;
             d.info = response.data;
             d.info.hash = result['optinomixHASH'];
