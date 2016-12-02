@@ -1,6 +1,44 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content class="md-padding">
-    <p class="md-body-1">Folgt.</p>
-    <pre>{{d.belegung | json}}</pre>
+    <div>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <h3 class="md-body-2">Eintritt: {{d.current_stay.bel_selector.name}}</h3>
+            </div>
+            <div flex>
+                <h3 class="md-body-1">{{d.current_stay.bel_selector.eintritt | date}} - {{d.current_stay.bel_selector.eintritt  | date}}</h3>
+            </div>
+        </div>
+        <div ng-repeat="bel in d.current_stay.bel_all.rows">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                <div flex="5">
+                    &nbsp;
+                </div>
+                <div flex>
+                    <h3 class="md-caption">{{bel.ORG}} | {{bel.STATION}} | {{bel.ZIMMER}}</h3>
+                </div>
+                <div flex>
+                    <h3 class="md-caption">{{bel.BEGINN | date}} - {{bel.ENDE | date}} | {{bel.DAUER_TAGE}} Tage</h3>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <h3 class="md-caption">Optinomic PID: {{d.current_stay.bel_selector.optinomic_pid}}</h3>
+            </div>
+            <div flex>
+                <h3 class="md-caption">Optinomic FID: {{d.current_stay.bel_selector.optinomic_fid}}</h3>
+            </div>
+            <div flex>
+                <h3 class="md-caption">Polypoint PID: {{d.current_stay.bel_selector.polypoint_pid}} | {{d.current_stay.bel_selector.polypoint_paid}}</h3>
+            </div>
+            <div flex>
+                <h3 class="md-caption">Polypoint FID: {{d.current_stay.bel_selector.polypoint_fid}} | {{d.current_stay.bel_selector.polypoint_faid}}</h3>
+            </div>
+        </div>
+        <div>
+            <p>&nbsp;</p>
+        </div>
+    </div>
 </md-content>
 include(../lib/html/optinomic/page/end.m4)
