@@ -144,7 +144,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         api_call.success(function(data) {
             $scope.d.belegung = data;
-            console.log('(+) getEntrys ', $scope.d.belegung);
+
+
+            $scope.d.current_stay = null;
+
+            data.alle.forEach(function(stay, my_stay_index) {
+                if (parseInt(stay.bel_selector.optinomic_fid) === parseInt($scope.d.dataMain.params.stay_id)) {
+                    $scope.d.current_stay = stay;
+                };
+            });
+
+            console.log('(✓) getEntrys ', $scope.d.belegung, $scope.d.current_stay);
+
 
         });
 
