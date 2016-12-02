@@ -1,0 +1,147 @@
+<div class="grid-border-top" style="margin-top: 30px;" ng-if="!d.TMT.show_legend">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-headline">Stichproben | Legende</h3>
+        </div>
+        <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
+<!--                <br> {{d.ks.normgurppe.text}}
+-->
+                    <br> N = 4.208
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in d.ISK.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
+                    </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="ISK in d.ISK.groups">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <h3 class="md-headline">{{isk.name}}</h3>
+        </div>
+        <md-button ng-if="d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende ausblenden
+            </md-tooltip>
+        </md-button>
+        <md-button ng-if="!d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
+            <i class="mdi mdi-eye" style="font-size:18px; color:#9E9E9E"></i>
+            <md-tooltip md-direction="left">
+                Legende anzeigen
+            </md-tooltip>
+        </md-button>
+        <md-button ng-click="d.ISK.settings=! d.ISK.settings" class="md-icon-button">
+            <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.ISK.show_legend">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der Normstichprobe nach Kanning (2009):
+                <br> {{d.ks.normgurppe.text}}
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:-12px;">
+                <div ng-repeat="data in ISK.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
+                    </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-repeat="score in d.group_scores" class="grid-border-bottom; no-page-break">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" class="no-page-break">
+        <div flex>
+            <h3 class="md-headline">{{score.question}}</h3>
+            <p class="md-subhead">{{score.full}}</p>
+            <div>
+                <div class="no-page-break" layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
+                    <div flex="30">
+                        <p class="md-body-1"><span class="md-body-2">{{data.label}}</span> <br> {{score.sub_left}}</p>
+                    </div>
+                    <div flex="40">
+                        <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
+                    </div>
+                    <div flex="30">
+                        <p class="md-body-1"> {{score.sub_right}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 30px;">&nbsp;</div>
+</div>
+
+    <div class="no-page-break" ng-repeat="data in ISK.data" style="margin-top: -6px;">
+        <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+            <div>
+                <div>
+                    <div>
+                        <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                            <i class="mdi mdi-lightbulb-outline" style="font-size:18px;color:#616161"></i>
+                            <md-tooltip md-direction="left">
+                                Detailanalyse | Öffnen
+                            </md-tooltip>
+                        </md-button>
+                        <md-button ng-if="data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
+                            <i class="mdi mdi-close" style="font-size:18px;"></i>
+                            <md-tooltip md-direction="left">
+                                Detailanalyse | Schliessen
+                            </md-tooltip>
+                        </md-button>
+                    </div>
+                    <p style="color:#424242;font-size:9px;margin-left: 10px; margin-top:-28px;">
+                        <span ng-attr-style="font-size:22px; color:{{data.zscore.clinicsample_color}}!important;">■</span> {{$index + 1}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.ks.show_controls">
+            <div style="margin-top: 12px;">
+                <p class="md-caption"><span ng-attr-style="font-size:28px;margin-top:4px; color:{{data.zscore.clinicsample_color}}!important;">■</span>{{data.ks.path_data.text_full}}</p>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+                <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
+                    <label>{{dim.name}}</label>
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
+                        <md-option ng-repeat="item in dim.array" ng-value="item.id">
+                            {{item.text}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="grid-border-top">
+                <p class="md-caption">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</div>
