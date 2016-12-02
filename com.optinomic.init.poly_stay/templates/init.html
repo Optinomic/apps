@@ -54,13 +54,13 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div>
         <h3 class="md-title">Übersicht | aller bekannten Behandlungen</h3>
-        <p class="md-body-1">Der Patient hatte folgende Behandlungs-Typen absolviert:</p>
-        <div ng-repeat="(key, b) in d.belegung.war_einmal_legende" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <div flex="10">
-                <p class="md-body-1">{{b.key}} = {{d.belegung.war_einmal[b.bel_id]}}</p>
-            </div>
+        <p class="md-body-1">Folgende Behandlungs-Typen sind bekannt:</p>
+        <div ng-repeat="(key, b) in d.belegung.war_einmal_legende" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" ng-if="d.belegung.war_einmal[b.bel_id]">
             <div flex>
                 <p class="md-body-1">{{b.description}} ({{b.name}}) <span class="md-caption">{{b.bel_id}}</span></p>
+            </div>
+            <div flex>
+                <p class="md-caption">{{b.bel_id}}</p>
             </div>
         </div>
     </div>
