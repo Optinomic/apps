@@ -29,7 +29,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 1,
             "description": "Psychotizismus",
-            "sub_right":"Gefühl der Isolation und zwischenmenschlicher Entfremdung. Verzerrter, isolierter Lebensstil bis zu Halluzination und Gedankenzerfall.",
+            "sub_right":"Gefühl der Isolation und zwischenmenschlichen Entfremdung. Verzerrter, isolierter Lebensstil bis zu Halluzination und Gedankenzerfall.",
             "m_norm":[0.19, 0.19],
             "sd_norm":[0.28, 0.27],
             "items": 5
@@ -43,7 +43,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 3,
             "description": "Phobische Angst",
-            "sub_right":"Andauernde und unangemessene Furcht als Reaktion auf eine bestimmte Person, einen Platz, ein Objekt oder eine charakteristische Situation, die zu Vermeidungs- oder Fluchtverhalten führen.",
+            "sub_right":"Andauernde und unangemessene Furcht als Reaktion auf eine bestimmte Person, einen Platz, ein Objekt oder eine charakteristische Situation, die zu Vermeidungs- oder Fluchtverhalten führt.",
             "m_norm":[0.14, 0.16],
             "sd_norm":[0.23, 0.25],
             "items": 5
@@ -64,7 +64,7 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 6,
             "description": "Depressivität",
-            "sub_right":"Gedrückte Stimmung, Gesunkenes Interesse am Leben, Verringerter Motivation und Energie, Hoffnungslosigkeit, bis hin zu Suizidgedanken.",
+            "sub_right":"Gedrückte Stimmung, Gesunkenes Interesse am Leben, Verringerte Motivation und Energie, Hoffnungslosigkeit, bis hin zu Suizidgedanken.",
             "m_norm":[0.24, 0.33],
             "sd_norm":[0.32, 0.40],
             "items": 6
@@ -85,10 +85,17 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         }, {
             "id": 9,
             "description": "Somatisierung",
-            "sub_right":"Kopfschmerzen, Herzbeschwerden, Atemprobleme, Magenbeschwerden, Muskelschmerzen, Schwächegefühl, Schweregefühl, Unwohl usw.",
+            "sub_right":"Kopfschmerzen, Herzbeschwerden, Atemprobleme, Magenbeschwerden, Muskelschmerzen, Schwächegefühl, Schweregefühl, Unwohlsein usw.",
             "m_norm":[0.23, 0.32],
             "sd_norm":[0.31, 0.33],
             "items": 7
+        }, {
+            "id": 10,
+            "description": "Zusatzitems",
+            "sub_right":"Zusatzitems",
+            "m_norm":[null, null],
+            "sd_norm":[null, null],
+            "items": 4
         }];
 
 
