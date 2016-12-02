@@ -1,7 +1,7 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content class="md-padding">
-    <div>
-        <md-input-container ng-class="md-block">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <md-input-container flex ng-class="md-block">
             <label>Fall | Behandlung</label>
             <md-select ng-model="d.belegung.selected">
                 <md-option ng-repeat="bel in d.belegung.alle" ng-value="bel">
@@ -56,11 +56,11 @@ include(../lib/html/optinomic/page/start.m4)
         <h3 class="md-title">Übersicht | aller bekannten Behandlungen</h3>
         <p class="md-body-1">Der Patient hatte folgende Behandlungs-Typen absolviert:</p>
         <div ng-repeat="(key, b) in d.belegung.war_einmal_legende" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <div>
-                <p class="md-body-1">{{b.description}} ({{b.name}}) <span class="md-caption">{{b.bel_id}}</span></p>
+            <div flex="10">
+                <p class="md-body-1">{{b.key}} = {{d.belegung.war_einmal[b.bel_id]}}</p>
             </div>
             <div flex>
-                <p class="md-body-1">{{b.key}} = {{d.belegung.war_einmal[b.key]}}</p>
+                <p class="md-body-1">{{b.description}} ({{b.name}}) <span class="md-caption">{{b.bel_id}}</span></p>
             </div>
         </div>
     </div>
