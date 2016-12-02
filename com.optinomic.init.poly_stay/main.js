@@ -56,7 +56,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             data.alle.forEach(function(stay, my_stay_index) {
                 if (parseInt(stay.bel_selector.optinomic_fid) === parseInt($scope.d.dataMain.params.stay_id)) {
-                    $scope.d.belegung.current_stay = stay;
+                    $scope.d.belegung.selected = stay;
                 };
             });
 
