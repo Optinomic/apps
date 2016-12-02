@@ -6,7 +6,7 @@ version = include(VERSION)
 type = user
 
 [description]
-Diese Applikation dient zur Sammlung zusätzlich benötigter Fall-Stammdaten. Die Daten werden anhand einem Polypoint-Lookup via ODBC gewonnen. Die Daten werden in der Patienten-App gespeichert. Aufgrund dieser Kriterien wird der Patient automatisch in Patientengruppen eingeteilt.
+Diese Applikation dient zur Sammlung zusätzlich benötigter Fall-Stammdaten resp. deren Belegungs-Daten. Die Daten werden anhand einem Polypoint-Lookup via ODBC gewonnen und in der Patienten-App gespeichert. Aufgrund dieser Kriterien wird der Patient automatisch in Patientengruppen eingeteilt.
 
 [developer]
 first_name = Beat
