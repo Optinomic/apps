@@ -171,7 +171,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                 cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
 
                 stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
-                stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 1), (cis_fid_str.length)));
+                stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 2), (cis_fid_str.length)));
 
 
 
