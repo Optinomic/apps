@@ -1,13 +1,13 @@
 [module]
 id = com.optinomic.init.poly_stay
-name = Stammdaten (Fall)
-short_description = Zusätzliche Fall-Stammdaten aus Polypoint.
+name = Belegung (Fall)
+short_description = Informationen zur aktuellen Belegung.
 version = include(VERSION)
 type = patient
 
 
 [description]
-Diese Applikation dient zur Sammlung zusätzlich benötigter Fall-Stammdaten. Die Daten werden anhand einem Polypoint-Lookup via ODBC gewonnen. Aufgrund dieser Kriterien wird der Patient automatisch in Patientengruppen eingeteilt.
+Belegungsdetails der Patientenfälle können hier angezeigt werden. 
 
 
 [developer]
