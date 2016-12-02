@@ -310,24 +310,21 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             });
 
 
-
             patient.data.stays.forEach(function(stay, my_stay_index) {
                 bel_array.push(stay.annotation_obj);
                 was_obj[stay.annotation_obj.bel_selector.bel_id] = true;
             });
 
 
-
             var annotation_obj = {
+                "alle": bel_array,
                 "aktuell_letzter": bel_array[0],
                 "war_einmal": was_obj,
-                "alle": bel_array
+                "war_einmal_legende": belegung.art
             };
 
-
-
             //dataService.runDataSource = function(my_query, my_source, my_delimiter, my_including_headers, my_format, my_direct)
-            var api_write = dataService.putPatientModuleAnnotations(angular.toJson({}), patient.data.pid, 'com.optinomic.init.poly_stay');
+            var api_write = dataService.putPatientModuleAnnotations(angular.toJson(annotation_obj), patient.data.pid, 'com.optinomic.init.poly_stay');
 
             var aSavePromise = dataService.getData(api_write);
             aSavePromise.then(function(data) {
