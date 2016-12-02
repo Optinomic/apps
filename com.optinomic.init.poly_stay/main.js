@@ -142,13 +142,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.belegung = [];
         var api_call = dataService.getPatientModuleAnnotations();
 
-        api.success(function(data) {
+        api_call.success(function(data) {
             $scope.d.belegung = data;
             console.log('(+) getEntrys ', $scope.d.belegung);
 
         });
 
-        api.error(function(data) {
+        api_call.error(function(data) {
             console.log('(ERROR) getEntrys ', data);
         });
 
