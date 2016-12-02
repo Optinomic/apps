@@ -18,8 +18,8 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template stanine_scores 6 7]
-include(templates/scores.html)
+[template z_scores 6 7]
+include(templates/score_page.html)
 
 
 [dependencies]
