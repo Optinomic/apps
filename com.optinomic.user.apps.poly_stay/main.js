@@ -251,6 +251,9 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
                         stay.belegung.current.austritt_zeit = data.rows[0].ZEITAUSTRITT;
                         stay.belegung.current.org_current = data.rows[0].ORG_CURRENT;
 
+                        stay.belegung.current.phase = stay.data.phase;
+
+
                     } else {
                         stay.polypoint_belegung = null;
                     };
