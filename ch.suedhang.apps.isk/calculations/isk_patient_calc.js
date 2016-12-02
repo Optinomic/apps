@@ -212,6 +212,35 @@ function main(responses) {
 
 
             // -----------------------------------------------
+            // Messzeitpunkt
+            // -----------------------------------------------
+            var mz = {
+                "mz_id": 99,
+                "mz_typ": 'Undefined',
+                "mz_text": 'Undefined'
+            };
+
+            if ("Erhebungszeitpunkt" in result) {
+                mz.mz_id = parseInt(result['Erhebungszeitpunkt']);
+
+                if (mz.mz_id === 1) {
+                    mz.mz_typ = 'Eintritt';
+                    mz.mz_text = 'Eintritt - Entwöhnungstherapie';
+                };
+
+                if (mz.mz_id === 2) {
+                    mz.mz_typ = 'Austritt';
+                    mz.mz_text = 'Austritt - Entwöhnungstherapie';
+                };
+
+                if (mz.mz_id === 3) {
+                    mz.mz_typ = 'Anderer';
+                    mz.mz_text = 'Anderer Messzeitpunkt: ' + result['andererZeitpunkt'];
+                };
+            };
+
+
+            // -----------------------------------------------
             // Create 'all_results' Object
             // -----------------------------------------------
 
@@ -229,6 +258,7 @@ function main(responses) {
 
             response.data.response_id = response.id;
             d.info = response.data;
+            d.info.mz = mz;
             d.info.hash = result['optinomixHASH'];
             allResults.push(d);
         });
@@ -279,5 +309,6 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
+
 
 }
