@@ -40,11 +40,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             };
 
-            // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
-
-
-
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
