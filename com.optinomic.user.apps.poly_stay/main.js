@@ -82,12 +82,15 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             "current": {}
         };
 
-        $scope.getPatientList();
+        $scope.getPatientList(false);
     };
 
 
-    $scope.getPatientList = function() {
+    $scope.getPatientList = function(full) {
         // Init - Params
+
+        full = full === undefined ? false : full;
+
 
         $scope.d.app.status.text = "Patienten (in aktueller Behandlung) laden.";
 
@@ -104,6 +107,10 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             "stay_start_after": null,
             "stay_stop_before": null,
             "stay_stop_after": null
+        };
+
+        if (full) {
+            patientListFilter.in_stay = null;
         };
 
 
