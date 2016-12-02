@@ -1,13 +1,10 @@
 
 
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Stammdaten (Fall)
-
-Zusätzliche Fall-Stammdaten: Diese App dient zur Sammlung zusätzlich benötigter Stammdaten. Diese können wiederum als 'Kriterien' für Patientengruppen dienen.
+## Polypoint Lookup
 
 
-
-
+8-ung!   Südhang only!
 
 
 ###Anschrift

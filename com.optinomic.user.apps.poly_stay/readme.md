@@ -4,6 +4,7 @@
 ## Polypoint Lookup
 
 
+8-ung!   Südhang only!
 
 
 ###Anschrift
