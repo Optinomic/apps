@@ -22,47 +22,93 @@ angular.module('optinomicCalculation').factory('calculation', function() {
         calc.result_array = [{
             "id": 0,
             "description": "GSI (Global Severity Index)",
+            "full":"Durchschnittliche Belastung in allen Bereichen",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.28, 0.35],
+            "sd_norm":[0.23, 0.23],
             "items": 53
         }, {
             "id": 1,
             "description": "Psychotizismus",
+            "full":"Gefühl der Isolation und zwischenmenschlicher Entfremdung. Verzerrter, isolierter Lebensstil bis zu Halluzination und Gedankenzerfall.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.19, 0.19],
+            "sd_norm":[0.28, 0.27],
             "items": 5
         }, {
             "id": 2,
             "description": "Paranoides Denken",
+            "full":"Misstrauen, Minderwertigkeitsgefühle, paranoides Denken: Gedankenprojektion, Feindseligkeit, Argwohn, Grandiosität, Einengung, Angst vor Autonomieverlust und wahnhafte Täuschung.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.33, 0.34],
+            "sd_norm":[0.40, 0.38],
             "items": 5
         }, {
             "id": 3,
             "description": "Phobische Angst",
+            "full":"Andauernde und unangemessene Furcht als Reaktion auf eine bestimmte Person, einen Platz, ein Objekt oder eine charakteristische Situation, die zu Vermeidungs- oder Fluchtverhalten führen.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.14, 0.16],
+            "sd_norm":[0.23, 0.25],
             "items": 5
         }, {
             "id": 4,
             "description": "Aggressivität/ Feindseligkeit",
+            "full":"Reizbarkeit und Unausgeglichenheit bis hin zu starker Aggressivität. Ärger, Aggression, Irritierbarkeit, Zorn und Verstimmung.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.29, 0.37],
+            "sd_norm":[0.35, 0.33],
             "items": 5
         }, {
             "id": 5,
             "description": "Ängstlichkeit",
+            "full":"Angst mit Nervosität, Spannungen und Zittern, Panikattacken und Schreckgefühlen, Gefühle von Besorgnis und Furcht.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.29, 0.39],
+            "sd_norm":[0.31, 0.36],
             "items": 6
         }, {
             "id": 6,
             "description": "Depressivität",
+            "full":"Gedrückte Stimmung, Gesunkenes Interesse am Leben, Verringerter Motivation und Energie, Hoffnungslosigkeit, bis hin zu Suizidgedanken.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.24, 0.33],
+            "sd_norm":[0.32, 0.40],
             "items": 6
         }, {
             "id": 7,
             "description": "Unsicherheit im Sozialkontakt",
+            "full":"Unzulänglichkeits- und Minderwertigkeitsgefühle, Selbstabwertungen im sozialen Kontakt, Selbstzweifel, Selbstunsicherheit und negative Erwartungen bzgl. dem eigenen zwischenmenschlichen Verhalten.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.35, 0.49],
+            "sd_norm":[0.40, 0.45],
             "items": 4
         }, {
             "id": 8,
             "description": "Zwanghaftigkeit",
+            "full": "Gedanken, Impulse und Handlungen, die konstant vorhanden und nicht änderbar und ich-fremd oder ungewollt erlebt werden, Kognitive Leistungsstörungen.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.50, 0.54],
+            "sd_norm":[0.46, 0.43],
             "items": 6
         }, {
             "id": 9,
             "description": "Somatisierung",
+            "full":"Kopfschmerzen, Herzbeschwerden, Atemprobleme, Magenbeschwerden, Muskelschmerzen, Schwächegefühl, Schweregefühl, Unwohl usw.",
+            "sub_left":,
+            "sub_right":,
+            "m_norm":[0.23, 0.32],
+            "sd_norm":[0.31, 0.33],
             "items": 7
-        }, {
-            "id": 10,
-            "description": "Zusatzitems",
-            "items": 4
         }];
 
 
