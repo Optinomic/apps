@@ -173,20 +173,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         // Gruppierung der Messungen
-        $scope.d.ISK.groups = [{
-            "name": "ISK A",
-            "data": []
-        }, {
-            "name": "ISK B",
-            "data": []
-        }];
+        $scope.d.ISK.groups = angular.copy($scope.d.dataMain.calculations["0"].calculation_results["0"].definitions.result_array);
 
-        // Build 
+        $scope.d.ISK.groups.forEach(function(group, groupID) {
+            delete group.result;
+            group.data = [];
+        });
+        console.log('(!) $scope.d.ISK', $scope.d.ISK);
 
+
+        // Build  & Sort | Neueste Messung als letzter Eintrag
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-
-        // Sort | Neueste Messung als letzter Eintrag.
         dataService.sortOn(alle_messungen, 'date', false, false);
+
 
 
         // Loop alle_messungen und messung in ISK A / ISK B pushen
@@ -244,69 +243,69 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //    
             //    // var md_data = $scope.getKSLocation(dimensions_path);
             //    // console.log('(!) 3 - md_data', dimensions_path, md_data);
-            //    
-            //    
-            //    // Resultate in Gruppen schreiben
-            //    $scope.d.ISK.groups.forEach(function(group, groupID) {
+            //
 
-            var messung_obj = {
-                "calculation": messung,
-                "ks": {
-                    //"path_data": md_data,
-                    "path_data": null,
-                    "path_selected": dimensions_path,
-                    "show_controls": false
-                },
-                "zscore": {
-                    "zscore": null,
-                    "zscore_color": '#1A237E',
-                    "text_left": mz_text,
-                    "text_left_caption": "ISK",
-                    "text_right": datum_messung,
-                    "text_right_caption": "",
-                    "clinicsample_start": 0,
-                    "clinicsample_end": 0,
-                    "clinicsample_color": current_cs_color,
-                    "marker_1_score": null,
-                    "marker_1_text": "",
-                    "marker_1_color": "#F44336",
-                },
-            };
+            // Resultate in Gruppen schreiben
+            $scope.d.ISK.groups.forEach(function(group, groupID) {
 
-            console.log('(DEBUG) messung_obj', messung_obj);
+                var messung_obj = {
+                    "calculation": messung,
+                    "ks": {
+                        //"path_data": md_data,
+                        "path_data": null,
+                        "path_selected": dimensions_path,
+                        "show_controls": false
+                    },
+                    "zscore": {
+                        "zscore": null,
+                        "zscore_color": '#1A237E',
+                        "text_left": mz_text,
+                        "text_left_caption": "ISK",
+                        "text_right": datum_messung,
+                        "text_right_caption": "",
+                        "clinicsample_start": 0,
+                        "clinicsample_end": 0,
+                        "clinicsample_color": current_cs_color,
+                        "marker_1_score": null,
+                        "marker_1_text": "",
+                        "marker_1_color": "#F44336",
+                    },
+                };
 
-            //    if (group.name === 'ISK A') {
-            //        messung_obj.zscore.text_left_caption = group.name;
-            //        messung_obj.zscore.zscore = zscore_A;
-            //        messung_obj.zscore.marker_1_score = zeitabbruch_A;
-            //        // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['ISKAZ'].mean_1sd_min);
-            //        // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['ISKAZ'].mean_1sd_plus);
-            //    
-            //        group.data.push(messung_obj);
-            //    };
-            //    
-            //    if (group.name === 'ISK B') {
-            //        messung_obj.zscore.text_left_caption = group.name;
-            //        messung_obj.zscore.zscore = zscore_B;
-            //        messung_obj.zscore.marker_1_score = zeitabbruch_B;
-            //        // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['ISKBZ'].mean_1sd_min);
-            //        // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['ISKBZ'].mean_1sd_plus);
-            //    
-            //        group.data.push(messung_obj);
-            //    };
-            //    
-            //    
-            //    // Auffällige Testleistung |  färben
-            //    if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
-            //        // Auffällige Testleistung: Rot
-            //        messung_obj.zscore.zscore_color = '#C62828';
-            //    };
-            //    if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
-            //        // Auffällige Testleistung: Grün
-            //        messung_obj.zscore.zscore_color = '#2E7D32';
-            //    };
-            //        
-            //    });
+                console.log('(DEBUG) messung_obj', messung_obj);
+
+                //    if (group.name === 'ISK A') {
+                //        messung_obj.zscore.text_left_caption = group.name;
+                //        messung_obj.zscore.zscore = zscore_A;
+                //        messung_obj.zscore.marker_1_score = zeitabbruch_A;
+                //        // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['ISKAZ'].mean_1sd_min);
+                //        // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['ISKAZ'].mean_1sd_plus);
+                //    
+                //        group.data.push(messung_obj);
+                //    };
+                //    
+                //    if (group.name === 'ISK B') {
+                //        messung_obj.zscore.text_left_caption = group.name;
+                //        messung_obj.zscore.zscore = zscore_B;
+                //        messung_obj.zscore.marker_1_score = zeitabbruch_B;
+                //        // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['ISKBZ'].mean_1sd_min);
+                //        // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['ISKBZ'].mean_1sd_plus);
+                //    
+                //        group.data.push(messung_obj);
+                //    };
+                //    
+                //    
+                //    // Auffällige Testleistung |  färben
+                //    if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
+                //        // Auffällige Testleistung: Rot
+                //        messung_obj.zscore.zscore_color = '#C62828';
+                //    };
+                //    if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
+                //        // Auffällige Testleistung: Grün
+                //        messung_obj.zscore.zscore_color = '#2E7D32';
+                //    };
+                //        
+            });
 
         });
 
@@ -314,7 +313,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ISK.groups.forEach(function(group, groupID) {
             group.data.forEach(function(groupInner, groupInnerID) {
                 // $scope.changeClinicSample(groupInner);
-                console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
+                console.log('(!) 3 - changeClinicSample', groupInner);
             });
         });
 
