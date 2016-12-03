@@ -27,30 +27,355 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            $scope.d.init = true;
+            var current_template = $scope.d.dataMain.params.location.viewname;
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
                 $scope.d.haveData = true;
 
-                // Run App-Functions:
-                // $scope.setStanineView();
-                // $scope.groupStanineView();
-                // $scope.setExport();
 
+                // Run Specific Functions only when needed.
+
+                if (current_template === 'z_scores') {
+                    $scope.loadKS();
+                };
+
+                if (current_template === 'export_toolbox_admin') {
+                    $scope.setExport();
+                };
             };
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.d.init = true;
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, ' | ', current_template, $scope.d);
         });
     };
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Dataexport
-    // -----------------------------------
+
+    $scope.loadKS = function() {
+
+        $scope.d.ks = {};
+
+        var ks_file = include_as_js_string(
+            ks_current.json)
+
+        ks_file = JSON.parse(ks_file);
+
+        $scope.d.ks = ks_file;
+
+
+
+        $scope.d.ks.text = '';
+        $scope.d.ks.dimensions.forEach(function(dim, dimID) {
+            if ($scope.d.ks.text !== '') {
+                $scope.d.ks.text = $scope.d.ks.text + ', '
+            };
+            $scope.d.ks.text = $scope.d.ks.text + dim.name
+        });
+        $scope.d.ks.text = $scope.d.ks.n_scores + ' Messungen normiert nach ' + $scope.d.ks.text;
+        var datum_ks = $filter('date')($scope.d.ks.date);
+        $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
+
+
+        $scope.d.ks.normgurppe = {};
+        $scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+
+        var age = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.altersgruppe_text;
+        var edu = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.education;
+
+        if (edu === 99) {
+            edu = 'Jeder Ausbildungsgrad'
+        };
+        if (edu === 0) {
+            edu = '<= 12 Jahre'
+        };
+        if (edu === 1) {
+            edu = '> 12 Jahre'
+        };
+        $scope.d.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
+
+        console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
+
+        // Follow the white rabbit
+        // $scope.initTMT();
+    };
+
+
+    $scope.getKSLocation = function(location_array) {
+
+        var current_ks = $scope.d.ks;
+
+        var data_dive = current_ks.data;
+        var current_location_text = "";
+        var current_location_full = "";
+        var current_location_n_text = "";
+        var current_location_n = 0;
+
+
+        location_array.forEach(function(pos, posID) {
+            data_dive = data_dive[pos];
+
+            if (current_location_text !== "") {
+                current_location_text = current_location_text + ' | '
+            };
+
+            var current_dim = current_ks.dimensions[posID];
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
+        });
+
+
+        var statistics = null;
+        if (data_dive !== null) {
+            statistics = data_dive.statistics;
+            current_location_n = data_dive.patients.length;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+        } else {
+            statistics = null;
+            current_location_n = 0;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+        };
+
+        var location = {
+            "statistics": statistics,
+            "path": location_array,
+            "text": current_location_text,
+            "n_text": current_location_n_text,
+            "text_full": current_location_full,
+            "n": current_location_n
+        };
+
+        return angular.copy(location);
+    };
+
+
+    $scope.initTMT = function() {
+
+        $scope.d.TMT = {};
+        $scope.d.TMT.init = false;
+        $scope.d.TMT.show_legend = false;
+
+        // Default Z-Score Option
+        $scope.d.TMT.zscore_options = {
+            "zscore_min": -6,
+            "zscore_max": 6,
+            "clinicsample_color": "#C5CAE9",
+            "centered_zero": true,
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false,
+            "show_numbers": true
+        };
+
+
+        // Toggles | Grafiken
+        $scope.d.TMT.toggles = {
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false
+        };
+
+
+        // Gruppierung der Messungen
+        $scope.d.TMT.groups = [{
+            "name": "TMT A",
+            "data": []
+        }, {
+            "name": "TMT B",
+            "data": []
+        }];
+
+        // Build 
+
+        var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
+
+        // Sort | Neueste Messung als letzter Eintrag.
+        dataService.sortOn(alle_messungen, 'date', false, false);
+
+
+        // Loop alle_messungen und messung in TMT A / TMT B pushen
+        alle_messungen.forEach(function(messung, messungID) {
+
+            // console.log('(!) 1 - Messung', messungID, messung);
+
+
+            // Variablen vorbereiten | verdrahten.
+            var mz_id = messung.Messzeitpunkt.Messzeitpunkt - 1;
+            var mz_text = messung.Messzeitpunkt.Messzeitpunkt_Text;
+            var datum_messung = $filter('date')(messung.date);
+            var zeit_messung = messung.date.substring(11, 16);
+
+            var zscore_A = messung.percentile.z_scores.tmtA_z_rounded;
+            var zscore_B = messung.percentile.z_scores.tmtB_z_rounded;
+
+            var zeitabbruch_A = messung.percentile.z_scores.tmtA_z_zeitabbruch_rounded;
+            var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
+
+            // Eintritt / Austritt / Anderer MZ
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#ebebeb'];
+            var current_cs_color = cs_color[mz_id];
+
+
+            // $scope.d.TMT.zscore_options anpassen
+            if (Math.abs(zscore_A) > (Math.abs($scope.d.TMT.zscore_options.zscore_min) - 0.5)) {
+                $scope.d.TMT.zscore_options.zscore_min = (Math.abs(zscore_A) + 1) * -1;
+            };
+
+            if (Math.abs(zscore_B) > (Math.abs($scope.d.TMT.zscore_options.zscore_max) - 0.5)) {
+                $scope.d.TMT.zscore_options.zscore_max = (Math.abs(zscore_B) + 1);
+            };
+
+
+
+            // Default Pfad für MD-Array erstellen
+            var dimensions_path = [];
+            var current_ks = $scope.d.ks;
+            current_ks.dimensions.forEach(function(current_dim, myDimID) {
+
+                var default_last = current_dim.array.length - 1;
+                dimensions_path[myDimID] = default_last;
+
+                if (current_dim.name === "Altersgruppe") {
+                    dimensions_path[myDimID] = messung.percentile.age_perz.altersgruppe;
+                };
+
+                if (current_dim.name === "Ausbildungsgrad") {
+                    if (messung.edu_years > 12) {
+                        dimensions_path[myDimID] = 1;
+                    } else {
+                        dimensions_path[myDimID] = 0;
+                    };
+                };
+
+                if (current_dim.name === "Messzeitpunkt") {
+                    dimensions_path[myDimID] = mz_id;
+                };
+            });
+            // console.log('(!) 2 - dimensions_path', dimensions_path);
+
+
+            // var md_data = $scope.getKSLocation(dimensions_path);
+            // console.log('(!) 3 - md_data', dimensions_path, md_data);
+
+
+            // Resultate in Gruppen schreiben
+            $scope.d.TMT.groups.forEach(function(group, groupID) {
+
+                var messung_obj = {
+                    "calculation": messung,
+                    "ks": {
+                        //"path_data": md_data,
+                        "path_data": null,
+                        "path_selected": dimensions_path,
+                        "show_controls": false
+                    },
+                    "zscore": {
+                        "zscore": null,
+                        "zscore_color": '#1A237E',
+                        "text_left": mz_text,
+                        "text_left_caption": "TMT",
+                        "text_right": datum_messung,
+                        "text_right_caption": "",
+                        "clinicsample_start": 0,
+                        "clinicsample_end": 0,
+                        "clinicsample_color": current_cs_color,
+                        "marker_1_score": null,
+                        "marker_1_text": "Zeitabbruch",
+                        "marker_1_color": "#F44336",
+                    },
+                };
+
+                if (group.name === 'TMT A') {
+                    messung_obj.zscore.text_left_caption = group.name;
+                    messung_obj.zscore.zscore = zscore_A;
+                    messung_obj.zscore.marker_1_score = zeitabbruch_A;
+                    // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_min);
+                    // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTAZ'].mean_1sd_plus);
+
+                    group.data.push(messung_obj);
+                };
+
+                if (group.name === 'TMT B') {
+                    messung_obj.zscore.text_left_caption = group.name;
+                    messung_obj.zscore.zscore = zscore_B;
+                    messung_obj.zscore.marker_1_score = zeitabbruch_B;
+                    // messung_obj.zscore.clinicsample_start = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_min);
+                    // messung_obj.zscore.clinicsample_end = $scope.roundToTwo(md_data.statistics['TMTBZ'].mean_1sd_plus);
+
+                    group.data.push(messung_obj);
+                };
+
+
+                // Auffällige Testleistung |  färben
+                if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
+                    // Auffällige Testleistung: Rot
+                    messung_obj.zscore.zscore_color = '#C62828';
+                };
+                if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
+                    // Auffällige Testleistung: Grün
+                    messung_obj.zscore.zscore_color = '#2E7D32';
+                };
+            });
+
+        });
+
+        // MD - Daten befüllen
+        $scope.d.TMT.groups.forEach(function(group, groupID) {
+            group.data.forEach(function(groupInner, groupInnerID) {
+                $scope.changeClinicSample(groupInner);
+                //console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
+            });
+        });
+        $scope.d.TMT.show_legend = false;
+
+
+        $scope.d.TMT.init = true;
+    };
+
+
+    $scope.changeClinicSample = function(current_sample) {
+
+        current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
+
+        if (current_sample.ks.path_data.statistics !== null) {
+            if (current_sample.zscore.text_left_caption === 'TMT A') {
+                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_min);
+                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTAZ'].mean_1sd_plus);
+            };
+
+            if (current_sample.zscore.text_left_caption === 'TMT B') {
+                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_min);
+                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['TMTBZ'].mean_1sd_plus);
+            };
+
+
+            // Auffällige Testleistung |  färben
+            current_sample.zscore.zscore_color = '#1A237E';
+            if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+                // Auffällige Testleistung: Rot
+                current_sample.zscore.zscore_color = '#F44336';
+            };
+            if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+                // Auffällige Testleistung: Grün
+                current_sample.zscore.zscore_color = '#4CAF50';
+            };
+
+
+
+        } else {
+            current_sample.zscore.clinicsample_start = 0;
+            current_sample.zscore.clinicsample_end = 0;
+        };
+
+        $scope.d.TMT.show_legend = true;
+
+        console.log('(Done) changeClinicSample', current_sample);
+    };
+
 
     $scope.setExport = function() {
 
@@ -66,7 +391,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data_query = {};
 
         data_query = {
-            name: 'ISK - Export',
+            name: 'WHQOL-Example (with stay)',
             sql: include_as_js_string(
                 export.sql)
         };
@@ -76,297 +401,34 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
     };
 
+    // -------------------------------------------
+    // Helper - Functions
+    // -------------------------------------------
 
-    // -----------------------------------
-    // Stanine - Chart  <chart-stanine>
-    // -----------------------------------
-
-
-    $scope.setStanineView = function() {
-
-        // Ranges initialisieren
-        $scope.d.scale_ranges = {
-            "ranges": [{
-                "from": 1,
-                "to": 1.5,
-                "result": "Stanine 1",
-                "result_color": "green"
-            }, {
-                "from": 1.5,
-                "to": 2.5,
-                "result": "Stanine 2",
-                "result_color": "green"
-            }, {
-                "from": 2.5,
-                "to": 3.5,
-                "result": "Stanine 3",
-                "result_color": "green"
-            }, {
-                "from": 3.5,
-                "to": 4.5,
-                "result": "Stanine 4",
-                "result_color": "green"
-            }, {
-                "from": 4.5,
-                "to": 5.5,
-                "result": "Stanine 5",
-                "result_color": "green"
-            }, {
-                "from": 5.5,
-                "to": 6.5,
-                "result": "Stanine 6",
-                "result_color": "green"
-            }, {
-                "from": 6.5,
-                "to": 7.5,
-                "result": "Stanine 7",
-                "result_color": "green"
-            }, {
-                "from": 7.5,
-                "to": 8.5,
-                "result": "Stanine 8",
-                "result_color": "green"
-            }, {
-                "from": 8.5,
-                "to": 9,
-                "result": "Stanine 9",
-                "result_color": "green"
-            }]
-        };
-
-        $scope.d.stanine_ranges = [{
-            "stanine": 1,
-            "procent": 4
-        }, {
-            "stanine": 2,
-            "procent": 7
-        }, {
-            "stanine": 3,
-            "procent": 12
-        }, {
-            "stanine": 4,
-            "procent": 17
-        }, {
-            "stanine": 5,
-            "procent": 20
-        }, {
-            "stanine": 6,
-            "procent": 17
-        }, {
-            "stanine": 7,
-            "procent": 12
-        }, {
-            "stanine": 8,
-            "procent": 7
-        }, {
-            "stanine": 9,
-            "procent": 4
-        }];
-
-
-        $scope.stanine = {};
-        $scope.stanine.data = [];
-
-        // Loop Responses and push to Chart-Data
-        var survey_responses = $scope.d.dataMain.survey_responses;
-        survey_responses.forEach(function(current_response, myindex) {
-
-
-            // Scores
-
-            var score_answer = [{
-                "question": "Soziale Orientierung",
-                "full": "Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.",
-                "auspraegung": "Undefined",
-                "interpretation": "Undefined",
-                "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
-                "sub_right": "Überinvolviert, Kompromisslosigkeit",
-                "stanine": current_response.calculations[0].calculation_result.soziale_orientierung_stanine,
-                "sum_score": current_response.calculations[0].calculation_result.soziale_orientierung_sumscore
-            }, {
-                "question": "Offensivität",
-                "full": "Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.",
-                "auspraegung": "Undefined",
-                "interpretation": "Undefined",
-                "sub_left": "Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben",
-                "sub_right": "Streitlustig, unüberlegte Entscheidungen",
-                "stanine": current_response.calculations[0].calculation_result.offensivitaet_stanine,
-                "sum_score": current_response.calculations[0].calculation_result.offensivitaet_sumscore
-            }, {
-                "question": "Selbststeuerung",
-                "full": "Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen.",
-                "auspraegung": "Undefined",
-                "interpretation": "Undefined",
-                "sub_left": "Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln",
-                "sub_right": "Zwanghafte Selbstkontrolle",
-                "stanine": current_response.calculations[0].calculation_result.selbststeuerung_stanine,
-                "sum_score": current_response.calculations[0].calculation_result.selbststeuerung_sumscore
-            }, {
-                "question": "Reflexibilität",
-                "full": "Das eigene Verhalten und die Wirkung auf andere reflektieren und gegebenenfalls gezielt steuern, sich für andere Menschen interessieren.",
-                "auspraegung": "Undefined",
-                "interpretation": "Undefined",
-                "sub_left": "Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen",
-                "sub_right": "Zwanghafte Selbstdarstellung, Rigidität",
-                "stanine": current_response.calculations[0].calculation_result.reflexibilitaet_stanine,
-                "sum_score": current_response.calculations[0].calculation_result.reflexibilitaet_sumscore
-            }];
-
-
-            // Interpretation hinzufügen
-
-            var soziale_orientierung_auspraegung = 'Gering (1-3)';
-            var soziale_orientierung_interpretation = 'Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen.';
-
-            if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 3) {
-                soziale_orientierung_auspraegung = 'Mittel (4-6)';
-                soziale_orientierung_interpretation = 'Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.';
-            };
-
-            if (current_response.calculations[0].calculation_result.soziale_orientierung_stanine > 6) {
-                soziale_orientierung_auspraegung = 'Hoch (7-9)';
-                soziale_orientierung_interpretation = 'Überinvolviert, Kompromisslosigkeit';
-            };
-            score_answer[0].auspraegung = soziale_orientierung_auspraegung;
-            score_answer[0].interpretation = soziale_orientierung_interpretation;
-
-
-            var offenisvitaet_auspraegung = 'Gering (1-3)';
-            var offenisvitaet_interpretation = 'Sich sozial isolieren, Konflikten aus dem Weg gehen, sich unterordnen, Entscheidungen vor sich her schieben';
-
-            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 3) {
-                offenisvitaet_auspraegung = 'Mittel (4-6)';
-                offenisvitaet_interpretation = 'Auf andere Menschen zugehen und dabei Konflikte nicht scheuen, Entscheidungen treffen, eigene Interessen tatkräftig verwirklichen.';
-            };
-
-            if (current_response.calculations[0].calculation_result.offensivitaet_stanine > 6) {
-                offenisvitaet_auspraegung = 'Hoch (7-9)';
-                offenisvitaet_interpretation = 'Streitlustig, unüberlegte Entscheidungen';
-            };
-            score_answer[1].auspraegung = offenisvitaet_auspraegung;
-            score_answer[1].interpretation = offenisvitaet_interpretation;
-
-
-            var selbststeuerung_auspraegung = 'Gering (1-3)';
-            var selbststeuerung_interpretation = 'Sich treiben lassen, in seinem Handeln von ggf. stark schwankenden Emotionen bestimmt sein und die Verantwortung für das eigene Leben in der Umwelt ansiedeln';
-
-            if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 3) {
-                selbststeuerung_auspraegung = 'Mittel (4-6)';
-                selbststeuerung_interpretation = 'Rational handeln, sich nicht von Emotionen bestimmen lassen, die Verantwortung für das Leben bei sich selbst sehen';
-            };
-
-            if (current_response.calculations[0].calculation_result.selbststeuerung_stanine > 6) {
-                selbststeuerung_auspraegung = 'Hoch (7-9)';
-                selbststeuerung_interpretation = 'Zwanghafte Selbstkontrolle';
-            };
-            score_answer[2].auspraegung = selbststeuerung_auspraegung;
-            score_answer[2].interpretation = selbststeuerung_interpretation;
-
-
-            var reflexibilitaet_auspraegung = 'Gering (1-3)';
-            var reflexibilitaet_interpretation = 'Sich nicht mit seinem Verhalten auseinandersetzten, gleichgültig gegenüber dem Verhalten und Erleben anderer Menschen';
-
-            if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 3) {
-                reflexibilitaet_auspraegung = 'Mittel (4-6)';
-                reflexibilitaet_interpretation = 'Das eigenen Verhalten und die Wirkung auf andere reflektieren und ggf. gezielt steuern, sich für andere Menschen interessieren';
-            };
-
-            if (current_response.calculations[0].calculation_result.reflexibilitaet_stanine > 6) {
-                reflexibilitaet_auspraegung = 'Hoch (7-9)';
-                reflexibilitaet_interpretation = 'Zwanghafte Selbstdarstellung, Rigidität';
-            };
-            score_answer[3].auspraegung = reflexibilitaet_auspraegung;
-            score_answer[3].interpretation = reflexibilitaet_interpretation;
-
-
-            // Create nice Labels
-            var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
-            var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            var label_type = 'Verlauf';
-
-
-            // Unsicher ob die hier noch stimmt - muss noch überprüft werden.
-            if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
-                label_type = 'Eintritt';
-            };
-            if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-                label_type = 'Austritt';
-            };
-            label = label_type + ': ' + label;
-
-
-            var respone_to_push = {
-                "mz": label_type,
-                "label": label,
-                "scores": score_answer
-            }
-            $scope.stanine.data.push(respone_to_push);
-        });
-
-
-
-
-        $scope.stanine.options = {
-            "population_name": "Inventar Sozialer Kompetenzen - Kurzform",
-            "norm_name": "Normalbereich",
-            "start_result": $scope.stanine.data.length - 1
-        };
-
-
-
-        console.log('(!) setStanineView', $scope.stanine);
+    $scope.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
     };
 
-
-    $scope.groupStanineView = function() {
-
-
-        var input_data = angular.copy($scope.stanine.data);
-
-        //prepare Array
-
-        var group_array = [];
-
-        var prp = input_data[0].scores;
-        prp.forEach(function(current_score, myID) {
-            var obj_to_push = {
-                "full": current_score.full,
-                "question": current_score.question,
-                "sub_left": current_score.sub_left,
-                "sub_right": current_score.sub_right,
-                "data": []
-            };
-
-            group_array.push(obj_to_push);
-
+    $scope.sortByKey = function(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
-
-        $scope.d.group_scores = group_array;
-
-        // Fill Scores
-        input_data.forEach(function(current_messung, myMessungID) {
-
-            current_messung.scores.forEach(function(current_score, myScoreID) {
-
-                var current_array = $scope.d.group_scores[myScoreID];
-
-                var obj_to_push = {
-                    "auspraegung": current_score.auspraegung,
-                    "interpretation": current_score.interpretation,
-                    "stanine": current_score.stanine,
-                    "sum_score": current_score.sum_score,
-                    "label": current_messung.label
-                };
-                current_array.data.push(obj_to_push);
-
-            });
-
-        });
-
-        console.log('groupStanineView', $scope.d.group_scores);
-
-
     };
+
+    $scope.twoDigits = function(id) {
+        var return_text = '';
+        id = parseInt(id);
+        if (id < 10) {
+            return_text = '0' + id.toString();
+        } else {
+            return_text = id.toString();
+        };
+        return return_text;
+    };
+
 
 
 });
