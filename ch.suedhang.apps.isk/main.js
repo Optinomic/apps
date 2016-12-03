@@ -196,6 +196,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Variablen vorbereiten | verdrahten.
             var mz_id = messung.info.mz.mz_id;
+            if (mz_id === 99) {
+                mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
+            };
+
+
             var mz_text = messung.info.mz.mz_typ;
             var datum_messung = $filter('date')(messung.info.filled);
 
@@ -219,6 +224,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     dimensions_path[myDimID] = mz_id;
                 };
             });
+
             console.log('(!) 2 - dimensions_path', dimensions_path);
 
 
