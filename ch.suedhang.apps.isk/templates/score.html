@@ -79,7 +79,7 @@
         </div>
     </div>
     <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-        <div flex="10">
+        <div flex="15">
             &nbsp;
         </div>
         <div flex="40">
@@ -88,13 +88,13 @@
         <div flex="40" style="text-align:right; color:#757575;margin-right:15px;">
             <p class="md-caption">{{tmt.sub_right}}</p>
         </div>
-        <div flex="10">
+        <div>
             &nbsp;
         </div>
     </div>
     <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
         <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <div flex="10">
+            <div flex="15">
                 <div style="padding-left: 12px;">
                     <p class="md-body-2">{{data.zscore.text_left}}</p>
                     <p class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.filled | date}}</p>
@@ -103,7 +103,7 @@
             <div flex="80">
                 <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
             </div>
-            <div flex="10">
+            <div>
                 <div>
                     <div>
                         <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
