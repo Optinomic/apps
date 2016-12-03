@@ -290,8 +290,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // MD - Daten befüllen
         $scope.d.ISK.groups.forEach(function(group, groupID) {
             group.data.forEach(function(groupInner, groupInnerID) {
-                // $scope.changeClinicSample(groupInner);
-                console.log('(!) -- changeClinicSample', groupInner);
+                $scope.changeClinicSample(groupInner, groupID);
+                // console.log('(!) -- changeClinicSample', groupInner);
             });
         });
 
@@ -301,11 +301,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
-    $scope.changeClinicSample = function(current_sample) {
+    $scope.changeClinicSample = function(current_sample, groupID) {
+
+
+        var current_group = current_sample.calculation.definitions.result_array[groupID];
+        console.log('groupID', groupID, current_group);
 
         current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
 
         if (current_sample.ks.path_data.statistics !== null) {
+
             if (current_sample.zscore.text_left_caption === 'ISK A') {
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKAZ'].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKAZ'].mean_1sd_plus);
