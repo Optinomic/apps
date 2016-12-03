@@ -242,8 +242,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var messung_obj = {
                     "calculation": messung,
                     "ks": {
-                        //"path_data": md_data,
-                        "path_data": null,
+                        "path_data": md_data,
                         "path_selected": dimensions_path,
                         "show_controls": false
                     },
@@ -292,7 +291,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ISK.groups.forEach(function(group, groupID) {
             group.data.forEach(function(groupInner, groupInnerID) {
                 // $scope.changeClinicSample(groupInner);
-                console.log('(!) 3 - changeClinicSample', groupInner);
+                console.log('(!) -- changeClinicSample', groupInner);
             });
         });
 
