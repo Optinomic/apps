@@ -1,9 +1,21 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
-    <p>Under Development!</p>
+    <div ng-if="!d.TMT.init">
+        <h3 class="md-headline">TMT</h3>
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        <h3 class="md-subhead">Berechnung wird ausgeführt.</h3>
+    </div>
+    <div ng-if="d.TMT.init">
+        <div ng-if="!d.TMT.settings">
+            include(templates/score.html)
+        </div>
+        <div ng-if="d.TMT.settings">
+            include(templates/settings.html)
+        </div>
+    </div>
 </md-content>
 <div ng-if="!d.haveData">
     <h3 class="md-headline">Keine Daten</h3>
-    <h3 class="md-subhead">Keine Messungen vorhanden.</h3>
+    <h3 class="md-subhead">Kein Assessment | Messungen vorhanden.</h3>
 </div>
 include(../lib/html/optinomic/page/end.m4)

@@ -1,0 +1,59 @@
+<div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button ng-click="d.ISK.settings = !d.ISK.settings" class="md-icon-button">
+            <i class="mdi mdi-close" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen anwenden
+            </md-tooltip>
+        </md-button>
+    </div>
+</div>
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Einstellungen | Z-Wert Grafik(en)</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout-margin layout-padding>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+                <md-input-container class="md-block">
+                    <label>Z-Score: Minimum</label>
+                    <input ng-model="d.ISK.zscore_options.zscore_min" type="number" step="1">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Z-Score: Maximum</label>
+                    <input ng-model="d.ISK.zscore_options.zscore_max" type="number" step="1">
+                </md-input-container>
+                <md-switch ng-model="d.ISK.zscore_options.centered_zero" aria-label="centered_zero">
+                    0 Wert ist immer im Zentrum
+                </md-switch>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+                <md-switch ng-model="d.ISK.zscore_options.show_text" aria-label="show_text">
+                    Beschriftungen anzeigen
+                </md-switch>
+                <md-switch ng-model="d.ISK.zscore_options.show_clinicsample" aria-label="show_clinicsample">
+                    Klinische Stichprobe anzeigen
+                </md-switch>
+                <md-switch ng-model="d.ISK.zscore_options.show_clinicsample_scores" aria-label="show_clinicsample_scores">
+                    Werte der Stichprobe anzeigen
+                </md-switch>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
+        <md-button ng-click="d.ISK.settings = !d.ISK.settings">anwenden</md-button>
+    </md-card-actions>
+</md-card>
+<div style="margin-top: 24px;">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button ng-click="d.ISK.settings = !d.ISK.settings" class="md-icon-button">
+            <i class="mdi mdi-close" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen anwenden
+            </md-tooltip>
+        </md-button>
+    </div>
+</div>

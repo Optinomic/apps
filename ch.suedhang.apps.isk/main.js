@@ -193,7 +193,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Loop alle_messungen und messung in ISK A / ISK B pushen
         alle_messungen.forEach(function(messung, messungID) {
 
-            console.log('(!) 1 - Messung', messungID, messung);
+            // console.log('(!) 1 - Messung', messungID, messung);
 
 
             // Variablen vorbereiten | verdrahten.
@@ -229,11 +229,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
             });
 
-            console.log('(!) 2 - dimensions_path', dimensions_path);
+            // console.log('(!) 2 - dimensions_path', dimensions_path);
 
 
             var md_data = $scope.getKSLocation(dimensions_path);
-            console.log('(!) 3 - md_data', dimensions_path, md_data);
+            // console.log('(!) 3 - md_data', dimensions_path, md_data);
 
 
             // Resultate in Gruppen schreiben
@@ -268,7 +268,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 messung_obj.zscore.zscore = messung.all_results[variable_name];
                 messung_obj.zscore.text_left_caption = group.description;
 
-                console.log('(!) 4 - messung_obj', messung_obj);
+                // console.log('(!) 4 - messung_obj', messung_obj);
 
                 group.data.push(messung_obj);
 
@@ -304,22 +304,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.changeClinicSample = function(current_sample, groupID) {
 
 
-        var current_group = current_sample.calculation.definitions.result_array[groupID];
-        console.log('groupID', groupID, current_group);
-
         current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
 
         if (current_sample.ks.path_data.statistics !== null) {
 
-            if (current_sample.zscore.text_left_caption === 'ISK A') {
-                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKAZ'].mean_1sd_min);
-                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKAZ'].mean_1sd_plus);
-            };
-
-            if (current_sample.zscore.text_left_caption === 'ISK B') {
-                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKBZ'].mean_1sd_min);
-                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics['ISKBZ'].mean_1sd_plus);
-            };
+            var current_group = current_sample.calculation.definitions.result_array[groupID];
+            var variable_name = current_group.short_description + "_" + "z_score";
+            current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
+            current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
 
 
             // Auffällige Testleistung |  färben
