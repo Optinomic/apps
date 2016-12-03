@@ -34,6 +34,7 @@
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">{{tmt.description}}</h3>
+            <p class="md-body-1">{{tmt.full}}</p>
         </div>
         <md-button ng-if="d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -53,6 +54,17 @@
                 Einstellungen
             </md-tooltip>
         </md-button>
+    </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+        <div flex="30">
+            <p class="md-caption">{{tmt.sub_left}}</p>
+        </div>
+        <div flex="30" style="text-align: right;">
+            <p class="md-caption">{{tmt.sub_right}}</p>
+        </div>
+        <div flex="20">
+            &nbsp;
+        </div>
     </div>
     <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.ISK.show_legend">
         <div flex="25">
@@ -75,20 +87,13 @@
     </div>
     <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
         <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <div flex="20">
-                <div>
-                    <p class="md-caption">
-                        {{tmt.sub_left}}
-                    </p>
-                </div>
-            </div>
             <div flex="60">
                 <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
             </div>
             <div flex="15">
                 <div style="padding-left: 12px;">
-                    <p class="md-caption">
-                        {{tmt.sub_right}} | {{data.calculation.info.filled | date}}
+                    <p class="md-body-2">
+                        {{data.calculation.info.filled | date}}
                     </p>
                 </div>
             </div>
