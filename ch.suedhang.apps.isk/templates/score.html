@@ -14,13 +14,13 @@
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                Z-Werte aufgrund der Normstichprobe
+                Z-Werte aufgrund der ? Normstichprobe.
             </p>
         </div>
         <div flex>
             <p class="md-subhead">Klinikstichprobe</p>
-            <div style="margin-top:-12px;">
-                <div ng-repeat="data in d.ISK.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div style="margin-top:12px;">
+                <div style="margin-top:-12px;" ng-repeat="data in d.ISK.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div>
                         <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
                     </div>
@@ -63,7 +63,7 @@
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                Z-Werte aufgrund der Normstichprobe
+                Z-Werte aufgrund der ? Normstichprobe.
             </p>
         </div>
         <div flex>
