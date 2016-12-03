@@ -191,7 +191,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Loop alle_messungen und messung in ISK A / ISK B pushen
         alle_messungen.forEach(function(messung, messungID) {
 
-            // console.log('(!) 1 - Messung', messungID, messung);
+            console.log('(!) 1 - Messung', messungID, messung);
 
 
             // Variablen vorbereiten | verdrahten.
@@ -205,45 +205,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var dimensions_path = [];
 
-            //    var zscore_A = messung.percentile.z_scores.tmtA_z_rounded;
-            //    var zscore_B = messung.percentile.z_scores.tmtB_z_rounded;
-            //    
-            //    var zeitabbruch_A = messung.percentile.z_scores.tmtA_z_zeitabbruch_rounded;
-            //    var zeitabbruch_B = messung.percentile.z_scores.tmtB_z_zeitabbruch_rounded;
-            //    
 
-            //    
-            //    
-            //    // $scope.d.ISK.zscore_options anpassen
-            //    if (Math.abs(zscore_A) > (Math.abs($scope.d.ISK.zscore_options.zscore_min) - 0.5)) {
-            //        $scope.d.ISK.zscore_options.zscore_min = (Math.abs(zscore_A) + 1) * -1;
-            //    };
-            //    
-            //    if (Math.abs(zscore_B) > (Math.abs($scope.d.ISK.zscore_options.zscore_max) - 0.5)) {
-            //        $scope.d.ISK.zscore_options.zscore_max = (Math.abs(zscore_B) + 1);
-            //    };
-            //    
-            //    
-            //    
-            //    // Default Pfad für MD-Array erstellen
-            //    
-            //    var current_ks = $scope.d.ks;
-            //    current_ks.dimensions.forEach(function(current_dim, myDimID) {
-            //    
-            //        var default_last = current_dim.array.length - 1;
-            //        dimensions_path[myDimID] = default_last;
-            //    
-            //    
-            //        if (current_dim.name === "Messzeitpunkt") {
-            //            dimensions_path[myDimID] = mz_id;
-            //        };
-            //    });
-            //    // console.log('(!) 2 - dimensions_path', dimensions_path);
-            //    
-            //    
-            //    // var md_data = $scope.getKSLocation(dimensions_path);
-            //    // console.log('(!) 3 - md_data', dimensions_path, md_data);
-            //
+            // Default Pfad für MD-Array erstellen
+
+            var current_ks = $scope.d.ks;
+            current_ks.dimensions.forEach(function(current_dim, myDimID) {
+
+                var default_last = current_dim.array.length - 1;
+                dimensions_path[myDimID] = default_last;
+
+
+                if (current_dim.name === "Messzeitpunkt") {
+                    dimensions_path[myDimID] = mz_id;
+                };
+            });
+            console.log('(!) 2 - dimensions_path', dimensions_path);
+
+
+            var md_data = $scope.getKSLocation(dimensions_path);
+            console.log('(!) 3 - md_data', dimensions_path, md_data);
+
 
             // Resultate in Gruppen schreiben
             $scope.d.ISK.groups.forEach(function(group, groupID) {
