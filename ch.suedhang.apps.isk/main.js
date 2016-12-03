@@ -199,7 +199,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var mz_id = messung.info.mz.mz_id;
             var mz_text = messung.info.mz.mz_typ;
             var datum_messung = $filter('date')(messung.info.filled);
-            var zeit_messung = messung.info.response.Datum.substring(11, 16);
 
             // Eintritt / Austritt / Anderer MZ
             var cs_color = ['#9E9E9E', '#EEEEEE', '#ebebeb'];
