@@ -56,10 +56,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         call.success(function(data) {
             // Save Data to $scope.d
             $scope.d.calculations = data.calculation_result;
+            console.log('(DATA): getCalculation | Klinikstichprobe: ', $scope.d.calculations);
+
 
 
             $scope.d.ks = {};
-
             $scope.d.ks.result_explorer = {
                 "types": {
                     "all": [{
@@ -106,7 +107,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.changeDimensions();
             $scope.d.loaded = true;
-            console.log('(DATA): getCalculation | Klinikstichprobe: ', $scope.d.calculations);
             console.log('(DATA): Data-Explorer: ', $scope.d.ks.result_explorer);
 
         });
