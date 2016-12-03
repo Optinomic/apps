@@ -200,6 +200,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var mz_id = messung.info.mz.mz_id;
             if (mz_id === 99) {
                 mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
+            } else {
+                mz_id = mz_id - 1;
             };
 
 
@@ -266,6 +268,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var variable_name = group.short_description + "_" + "z_score";
                 messung_obj.zscore.zscore = messung.all_results[variable_name];
                 messung_obj.zscore.text_left_caption = group.description;
+
+                console.log('(!) 4 - messung_obj', messung_obj);
+
                 group.data.push(messung_obj);
 
 
