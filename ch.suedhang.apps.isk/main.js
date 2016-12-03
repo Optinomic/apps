@@ -197,8 +197,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Variablen vorbereiten | verdrahten.
             var mz_id = messung.info.mz.mz_id;
-            var mz_text = messung.info.mz.mz_text;
-            var datum_messung = $filter('date')(messung.info.response.Datum);
+            var mz_text = messung.info.mz.mz_typ;
+            var datum_messung = $filter('date')(messung.info.filled);
             var zeit_messung = messung.info.response.Datum.substring(11, 16);
 
             // Eintritt / Austritt / Anderer MZ
