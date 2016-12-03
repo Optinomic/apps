@@ -1,15 +1,16 @@
 include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
-    <div ng-if="!d.TMT.init">
-        <h3 class="md-headline">TMT</h3>
+    <div ng-if="!d.ISK.init">
+        <h3 class="md-headline">ISK</h3>
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        <h3 class="md-subhead">Berechnung wird ausgeführt.</h3>
+        <h3 class="md-subhead">Optinomic berechnet für Sie!</h3>
+        <p class="md-caption"><small>Init: {{d.ISK.init}}</small></p>
     </div>
-    <div ng-if="d.TMT.init">
-        <div ng-if="!d.TMT.settings">
+    <div ng-if="d.ISK.init">
+        <div ng-if="!d.ISK.settings">
             include(templates/score.html)
         </div>
-        <div ng-if="d.TMT.settings">
+        <div ng-if="d.ISK.settings">
             include(templates/settings.html)
         </div>
     </div>

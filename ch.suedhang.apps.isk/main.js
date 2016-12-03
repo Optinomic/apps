@@ -284,7 +284,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 //    };
                 //        
             });
-
         });
 
         // MD - Daten befüllen
