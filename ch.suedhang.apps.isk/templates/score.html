@@ -34,7 +34,7 @@
 <div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.ISK.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <h3 class="md-headline">{{tmt.name}}</h3>
+            <h3 class="md-headline">{{tmt.description}}</h3>
         </div>
         <md-button ng-if="d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -120,7 +120,7 @@
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
-                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data, tmt.id)">
                         <md-option ng-repeat="item in dim.array" ng-value="item.id">
                             {{item.text}}
                         </md-option>
