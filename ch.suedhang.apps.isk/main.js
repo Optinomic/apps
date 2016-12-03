@@ -159,7 +159,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "zscore_max": 4,
             "clinicsample_color": "#C5CAE9",
             "centered_zero": true,
-            "show_text": true,
+            "show_text": false,
             "show_clinicsample": true,
             "show_clinicsample_scores": false,
             "show_numbers": true
