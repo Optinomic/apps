@@ -301,6 +301,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.changeClinicSample = function(current_sample, groupID) {
+        console.log('(START) changeClinicSample ', current_sample, groupID);
 
 
         current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
@@ -333,7 +334,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ISK.show_legend = true;
 
-        console.log('(Done) changeClinicSample', current_sample);
+        // console.log('(Done) changeClinicSample', current_sample);
     };
 
 
