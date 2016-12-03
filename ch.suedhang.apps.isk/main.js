@@ -66,6 +66,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks = ks_file;
 
+        console.log('DEBUG 1', $scope.d.ks);
 
 
         $scope.d.ks.text = '';
@@ -80,7 +81,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
 
 
-        console.log('DEBUG'.$scope.d.dataMain.calculations["0"].calculation_results["0"]);
+        console.log('DEBUG 2', $scope.d.dataMain.calculations["0"].calculation_results["0"]);
 
         $scope.d.ks.normgurppe = {};
         //$scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
