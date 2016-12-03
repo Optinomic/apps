@@ -1,5 +1,5 @@
 [module]
-id = com.optinomic.user.apps.ks_tmt
+id = com.optinomic.user.apps.ks_isk
 name = Klinische Stichprobe | ISK
 short_description = Klinische Stichproben | Inventar Sozialer Kompetenzen - Kurzform
 version = include(VERSION)
@@ -40,6 +40,6 @@ include(style.css)
 
 
 
-[calculation tmt_klinikstichprobe javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
+[calculation isk_klinikstichprobe javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
 include(calculations/klinikstichprobe.js)
 
