@@ -155,8 +155,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Default Z-Score Option
         $scope.d.ISK.zscore_options = {
-            "zscore_min": -6,
-            "zscore_max": 6,
+            "zscore_min": -4,
+            "zscore_max": 4,
             "clinicsample_color": "#C5CAE9",
             "centered_zero": true,
             "show_text": true,

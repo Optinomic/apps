@@ -14,8 +14,7 @@
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                Z-Werte aufgrund der Normstichprobe nach ??? (20??):
-                <br> {{d.ks.normgurppe.text}}
+                Z-Werte aufgrund der Normstichprobe
             </p>
         </div>
         <div flex>
@@ -59,8 +58,7 @@
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                Z-Werte aufgrund der Normstichprobe nach Tombaugh (2004):
-                <br> {{d.ks.normgurppe.text}}
+                Z-Werte aufgrund der Normstichprobe
             </p>
         </div>
         <div flex>
@@ -77,17 +75,24 @@
     </div>
     <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
         <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <div flex="80">
-                <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
-            </div>
-            <div flex="10">
-                <div style="padding-left: 12px;">
+            <div flex="20">
+                <div>
                     <p class="md-caption">
-                        Gruppe: {{tmt.id}}
+                        {{tmt.sub_left}}
                     </p>
                 </div>
             </div>
-            <div>
+            <div flex="60">
+                <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
+            </div>
+            <div flex="15">
+                <div style="padding-left: 12px;">
+                    <p class="md-caption">
+                        {{tmt.sub_right}} | {{data.calculation.info.filled | date}}
+                    </p>
+                </div>
+            </div>
+            <div flex="5">
                 <div>
                     <div>
                         <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
