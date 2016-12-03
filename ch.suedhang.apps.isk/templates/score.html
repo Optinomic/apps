@@ -34,7 +34,6 @@
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">{{tmt.description}}</h3>
-            <p class="md-body-1">{{tmt.full}}</p>
         </div>
         <md-button ng-if="d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -54,6 +53,11 @@
                 Einstellungen
             </md-tooltip>
         </md-button>
+    </div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <p class="md-body-1">{{tmt.full}}</p>
+        </div>
     </div>
     <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.ISK.show_legend">
         <div flex="25">
