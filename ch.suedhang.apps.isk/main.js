@@ -80,22 +80,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
 
 
+        console.log('DEBUG'.$scope.d.dataMain.calculations["0"].calculation_results["0"]);
+
         $scope.d.ks.normgurppe = {};
-        $scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+        //$scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
 
-        var age = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.altersgruppe_text;
-        var edu = $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.education;
 
-        if (edu === 99) {
-            edu = 'Jeder Ausbildungsgrad'
-        };
-        if (edu === 0) {
-            edu = '<= 12 Jahre'
-        };
-        if (edu === 1) {
-            edu = '> 12 Jahre'
-        };
-        $scope.d.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
+        //$scope.d.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
 
         console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
 
