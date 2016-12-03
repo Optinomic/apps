@@ -175,4 +175,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
 
+    $scope.saveCalculationInput = function() {
+
+        // Export - Set as a JSON-File
+        var identifier = $scope.d.app;
+        var identifier_name = identifier.split('.').join('_');
+        var fileName = identifier_name + '_calc_input.json';
+
+        var data = angular.copy($scope.d.calculations);
+
+        dataService.saveData(data, fileName);
+
+        console.log('(!) saveSet', data);
+    };
+
+
 });
