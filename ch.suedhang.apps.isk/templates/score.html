@@ -55,20 +55,6 @@
             </md-tooltip>
         </md-button>
     </div>
-    <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-        <div flex="10">
-            &nbsp;
-        </div>
-        <div flex="40">
-            <p class="md-caption" style="color:#757575;margin-left:10px;">{{tmt.sub_left}}</p>
-        </div>
-        <div flex="40" style="text-align:right; color:#757575;margin-right:10px;">
-            <p class="md-caption">{{tmt.sub_right}}</p>
-        </div>
-        <div flex="10">
-            &nbsp;
-        </div>
-    </div>
     <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.ISK.show_legend">
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
@@ -86,6 +72,20 @@
                     <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
             </div>
+        </div>
+    </div>
+    <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+        <div flex="10">
+            &nbsp;
+        </div>
+        <div flex="40">
+            <p class="md-caption" style="color:#757575;margin-left:15px;">{{tmt.sub_left}}</p>
+        </div>
+        <div flex="40" style="text-align:right; color:#757575;margin-right:15px;">
+            <p class="md-caption">{{tmt.sub_right}}</p>
+        </div>
+        <div flex="10">
+            &nbsp;
         </div>
     </div>
     <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
