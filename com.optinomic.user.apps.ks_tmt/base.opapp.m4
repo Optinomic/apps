@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.user.apps.tmt
-name = TMT |  Klinische Stichproben
+name = Klinische Stichprobe | TMT
 short_description = Klinische Stichproben des Trail Making Test (TMT)
 version = include(VERSION)
 type = user
