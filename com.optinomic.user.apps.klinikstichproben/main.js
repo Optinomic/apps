@@ -608,6 +608,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         };
 
+        if (identifier === 'com.optinomic.user.apps.ks_isk') {
+            var ks_file = include_as_js_string(
+                com_optinomic_user_apps_ks_isk.json)
+
+            ks_file = JSON.parse(ks_file);
+
+            $scope.d.ks.ks_versions.versions = ks_file;
+            console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
+
+        };
+
 
         // Do not load from Annotations
 
