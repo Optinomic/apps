@@ -186,7 +186,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Build  & Sort | Neueste Messung als letzter Eintrag
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-        dataService.sortOn(alle_messungen, 'info.filled', false, false);
+        alle_messungen.forEach(function(messung, messungID) {
+            messung.date = messung.info.filled;
+        });
+        dataService.sortOn(alle_messungen, 'date', false, false);
 
 
 
