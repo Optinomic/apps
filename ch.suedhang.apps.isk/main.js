@@ -197,6 +197,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Variablen vorbereiten | verdrahten.
+            var mz_text = messung.info.mz.mz_typ;
+            var datum_messung = $filter('date')(messung.info.filled);
+
+
+            // Messzeitpung
             var mz_id = messung.info.mz.mz_id;
             if (mz_id === 99) {
                 mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
@@ -204,28 +209,30 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 mz_id = mz_id - 1;
             };
 
-
-            var mz_text = messung.info.mz.mz_typ;
-            var datum_messung = $filter('date')(messung.info.filled);
-
             // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#9E9E9E', '#EEEEEE', '#ebebeb'];
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#424242'];
             var current_cs_color = cs_color[mz_id];
 
-            var dimensions_path = [];
-
+            // Gender
+            var gender_id = 0 // Frau
+            if ($scope.d.dataMain.patient.data.gender === 'male') {
+                gender_id = 1;
+            };
 
             // Default Pfad für MD-Array erstellen
-
             var current_ks = $scope.d.ks;
+            var dimensions_path = [];
             current_ks.dimensions.forEach(function(current_dim, myDimID) {
 
                 var default_last = current_dim.array.length - 1;
                 dimensions_path[myDimID] = default_last;
 
-
                 if (current_dim.name === "Messzeitpunkt") {
                     dimensions_path[myDimID] = mz_id;
+                };
+
+                if (current_dim.name === "Geschlecht") {
+                    dimensions_path[myDimID] = gender_id;
                 };
             });
 
@@ -255,7 +262,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         "text_right_caption": "",
                         "clinicsample_start": 0,
                         "clinicsample_end": 0,
-                        "clinicsample_color": current_cs_color,
+                        "clinicsample_color": '#9FA8DA',
                         "marker_1_score": null,
                         "marker_1_text": "",
                         "marker_1_color": "#F44336",
@@ -273,16 +280,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 group.data.push(messung_obj);
 
 
-                //    // Auffällige Testleistung |  färben
-                //    if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
-                //        // Auffällige Testleistung: Rot
-                //        messung_obj.zscore.zscore_color = '#C62828';
-                //    };
-                //    if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
-                //        // Auffällige Testleistung: Grün
-                //        messung_obj.zscore.zscore_color = '#2E7D32';
-                //    };
-                //        
             });
         });
 
@@ -308,10 +305,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if (current_sample.ks.path_data.statistics !== null) {
 
+
             var current_group = current_sample.calculation.definitions.result_array[groupID];
             var variable_name = current_group.short_description + "_" + "z_score";
             current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
             current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
+
+
+            // Kliniksample färben
+
+            var mz_id = current_sample.info.mz.mz_id;
+            if (mz_id === 99) {
+                mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
+            } else {
+                mz_id = mz_id - 1;
+            };
+
+            // Eintritt / Austritt / Anderer MZ
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#424242'];
+            current_sample.zscore.clinicsample_color = cs_color[mz_id];
 
 
             // Auffällige Testleistung |  färben
