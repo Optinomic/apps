@@ -181,8 +181,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             delete group.result;
             group.data = [];
         });
-        console.log('(!) $scope.d.ISK', $scope.d.ISK);
-
 
         // Build  & Sort | Neueste Messung als letzter Eintrag
         var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
@@ -298,8 +296,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.changeClinicSample = function(current_sample, groupID) {
-        console.log('(START) changeClinicSample ', current_sample, groupID);
-
 
         current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
 
