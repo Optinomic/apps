@@ -79,7 +79,7 @@
         </div>
     </div>
     <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
-        <div flex="15">
+        <div flex="15" hide-xs show-gt-xs>
             &nbsp;
         </div>
         <div flex="40">
@@ -88,7 +88,7 @@
         <div flex="40" style="text-align:right; color:#757575;padding-left:6px;padding-right:20px;">
             <p class="md-caption">{{item.sub_right}}</p>
         </div>
-        <div flex="5">
+        <div flex="5" hide-xs show-gt-xs>
             &nbsp;
         </div>
     </div>
@@ -103,7 +103,7 @@
             <div flex="80">
                 <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
             </div>
-            <div hide show-gt-xs>
+            <div hide-xs show-gt-xs>
                 <div>
                     <div>
                         <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
