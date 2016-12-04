@@ -30,10 +30,10 @@
         </div>
     </div>
 </div>
-<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="tmt in d.ISK.groups">
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="item in d.ISK.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <h3 class="md-headline">{{tmt.description}}</h3>
+            <h3 class="md-headline">{{item.description}}</h3>
         </div>
         <md-button ng-if="d.ISK.show_legend" ng-click="d.ISK.show_legend = !d.ISK.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -56,7 +56,7 @@
     </div>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <p class="md-body-1">{{tmt.full}}</p>
+            <p class="md-body-1">{{item.full}}</p>
         </div>
     </div>
     <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.ISK.show_legend">
@@ -69,7 +69,7 @@
         <div flex>
             <p class="md-subhead">Klinikstichprobe</p>
             <div style="margin-top:16px;">
-                <div style="margin-top:-16px;" ng-repeat="data in tmt.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                <div style="margin-top:-16px;" ng-repeat="data in item.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div>
                         <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
                     </div>
@@ -78,22 +78,22 @@
             </div>
         </div>
     </div>
-    <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+    <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex="15">
             &nbsp;
         </div>
         <div flex="40">
-            <p class="md-caption" style="color:#757575;padding-left:1px;">{{tmt.sub_left}}</p>
+            <p class="md-caption" style="color:#757575;padding-left:1px;">{{item.sub_left}}</p>
         </div>
         <div flex="40" style="text-align:right; color:#757575;padding-left:6px;padding-right:20px;">
-            <p class="md-caption">{{tmt.sub_right}}</p>
+            <p class="md-caption">{{item.sub_right}}</p>
         </div>
         <div flex="5">
             &nbsp;
         </div>
     </div>
-    <div class="no-page-break" ng-repeat="data in tmt.data" style="margin-top: -6px;">
-        <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+    <div class="no-page-break" ng-repeat="data in item.data" style="margin-top: -6px;">
+        <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>
                 <div style="padding-left: 12px;">
                     <p class="md-body-2">{{data.zscore.text_left}}</p>
@@ -103,7 +103,7 @@
             <div flex="80">
                 <z-score data="data.zscore" options="d.ISK.zscore_options"></z-score>
             </div>
-            <div>
+            <div hide show-gt-xs>
                 <div>
                     <div>
                         <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
@@ -132,7 +132,7 @@
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
-                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data, tmt.id)">
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data, item.id)">
                         <md-option ng-repeat="item in dim.array" ng-value="item.id">
                             {{item.text}}
                         </md-option>
