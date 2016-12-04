@@ -141,7 +141,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "n": current_location_n
         };
 
-        console.log('getKSLocation', location);
+        //console.log('getKSLocation', location);
 
         return angular.copy(location);
     };
@@ -209,9 +209,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 mz_id = mz_id - 1;
             };
 
-            // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#9E9E9E', '#EEEEEE', '#424242'];
-            var current_cs_color = cs_color[mz_id];
 
             // Gender
             var gender_id = 0 // Frau
@@ -312,18 +309,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
 
 
-            // Kliniksample färben
-
-            var mz_id = current_sample.calculation.info.mz.mz_id;
-            if (mz_id === 99) {
-                // Unbekannt => Anderer Messzeitpunkt
-                mz_id = 2;
-            } else {
-                mz_id = mz_id - 1;
-            };
+            // Kliniksample gemäss Messzeitpunkt färben
+            var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
 
             // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#9E9E9E', '#EEEEEE', '#424242'];
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6'];
             current_sample.zscore.clinicsample_color = cs_color[mz_id];
 
 
