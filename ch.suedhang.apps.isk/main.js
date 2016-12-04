@@ -314,9 +314,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Kliniksample färben
 
-            var mz_id = current_sample.info.mz.mz_id;
+            var mz_id = current_sample.calculation.info.mz.mz_id;
             if (mz_id === 99) {
-                mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
+                // Unbekannt => Anderer Messzeitpunkt
+                mz_id = 2;
             } else {
                 mz_id = mz_id - 1;
             };
