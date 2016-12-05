@@ -10,7 +10,10 @@ include(../lib/html/optinomic/page/start.m4)
             </md-select>
         </md-input-container>
     </div>
-    <div>
+    <div ng-if="d.belegung.aktuell_letzter.bel_all === null">
+        <h3 class="md-title">{{d.belegung.belegung.aktuell_letzter.bel_selector.description}}</h3>
+    </div>
+    <div ng-if="d.belegung.aktuell_letzter.bel_all !== null">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex="25">
                 <h3 class="md-title">{{d.belegung.selected.bel_selector.name}} <span class="md-caption">{{d.belegung.selected.bel_selector.bel_id}}</span></h3>
