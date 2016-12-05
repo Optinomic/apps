@@ -23,11 +23,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
 
-
-
             // Run App-Functions:
             $scope.getEntrys();
-
 
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
