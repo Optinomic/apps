@@ -100,7 +100,7 @@ function main(token) {
                 var stay_response = JSON.parse(resp_stay.responseText);
                 var stays = stay_response.stays;
 
-                console.log('(!) stays =', patient_id, stay_response.length);
+                console.log('(!) stays =', patient_id, stays.length);
 
                 resolve(stays);
             });
