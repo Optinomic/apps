@@ -88,12 +88,12 @@ function main(token) {
         console.log('(!)', patients);
 
 
-        for (var pID = 0; pID < patients.length; pID++) {
-
-            var current_patient = patients[pID];
-            console.log('(+)', pID, current_patient);
-
-        };
+        //  for (var pID = 0; pID < patients.length; pID++) {
+        //  
+        //      var current_patient = patients[pID];
+        //      console.log('(+)', pID, current_patient);
+        //  
+        //  };
 
 
     });
