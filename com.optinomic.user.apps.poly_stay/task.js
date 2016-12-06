@@ -80,11 +80,31 @@ function main(token) {
     }
 
 
+    function getStays(patient_id) {
+
+        // GET /patients/:patient_id/stays
+
+        return new Promise(function(resolve, reject) {
+
+            var api_call = "/patients/" + patient_id + " /stays";
+
+            helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
+                var stay_response = JSON.parse(resp_stay.responseText);
+                var stays = stay_response.stays;
+
+                console.log('(!) stays =', patient_id, stay_response.length);
+
+                resolve(stays);
+            });
+        });
+    }
+
+
+
 
     helpers.callAPI("GET", "/patients", null, null, function(resp) {
 
         var response = JSON.parse(resp.responseText);
-
         var patients = response.patients;
         console.log('(!) patients =', patients);
 
@@ -93,6 +113,15 @@ function main(token) {
 
             var current_patient = patients[pID];
             console.log('(+)', pID, current_patient.id, current_patient.data.last_name);
+
+
+            getStays(current_patient.id).then(function(json) {
+                var obj = JSON.parse(json);
+                console.log('(!) YES, ', obj);
+
+            }).then(null, function(error) {
+                console.log('(!) ERROR, ', error);
+            });
 
         };
 
