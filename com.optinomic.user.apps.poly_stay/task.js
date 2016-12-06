@@ -84,19 +84,17 @@ function main(token) {
     helpers.callAPI("GET", "/patients", null, null, function(resp) {
 
         var response = JSON.parse(resp.responseText);
-        console.log('(!) resp = ', resp);
-
 
         var patients = response.patients;
         console.log('(!) patients =', patients);
 
 
-        //  for (var pID = 0; pID < patients.length; pID++) {
-        //  
-        //      var current_patient = patients[pID];
-        //      console.log('(+)', pID, current_patient);
-        //  
-        //  };
+        for (var pID = 0; pID < patients.length; pID++) {
+
+            var current_patient = patients[pID];
+            console.log('(+)', pID, current_patient.id, current_patient.data.last_name);
+
+        };
 
 
     });
