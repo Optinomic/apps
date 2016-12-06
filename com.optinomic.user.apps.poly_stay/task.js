@@ -87,6 +87,7 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
             var api_call = "/patients/" + patient_id + " /stays";
+            console.log('(?) api_call, ', api_call);
 
             helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
                 var stay_response = JSON.parse(resp_stay.responseText);
@@ -106,7 +107,7 @@ function main(token) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
-        console.log('(!) patients =', patients);
+        // console.log('(!) patients =', patients);
 
 
         for (var pID = 0; pID < patients.length; pID++) {
@@ -117,7 +118,7 @@ function main(token) {
 
             getStays(current_patient.id).then(function(json) {
                 var obj = JSON.parse(json);
-                console.log('(!) YES, ', obj);
+                console.log('(!) DATA, ', obj);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
