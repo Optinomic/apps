@@ -1,5 +1,9 @@
 function main(token) {
 
+    //    Run this thing:
+    //    cd /var/therapyserver/
+    //    therapy-server-components task-runner /var/therapyserver/config/config.json com.optinomic.apps.poly_stay get_belegung
+
 
     function Promise(fn) {
         var state = 'pending';
@@ -89,7 +93,7 @@ function main(token) {
 
 
 
-            var api_call = "/patients/" + patient_id + " /stays";
+            var api_call = "/patients/" + patient_id + "/stays";
             console.log('(?) api_call, ', api_call);
 
             helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
