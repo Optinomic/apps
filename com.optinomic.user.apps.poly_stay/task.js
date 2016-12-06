@@ -95,7 +95,20 @@ function main(token) {
                 var stay_response = JSON.parse(resp_stay.responseText);
                 var stays = stay_response.stays;
 
-                console.log('(!) stays =', patient_id, stays.length);
+
+                for (var sID = 0; sID < stays.length; sID++) {
+                    var stay = stays[sID];
+
+                    var cis_fid_str = stay.data.cis_fid.toString();
+                    cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
+
+                    stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
+                    stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 2), (cis_fid_str.length)));
+
+                    console.log('(!) stay =', patient_id, stays.length, cis_fid_str, stay.poly_pid, stay.poly_fid);
+                };
+
+
 
                 resolve(JSON.stringify(stays));
             });
@@ -124,7 +137,6 @@ function main(token) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
-        console.log('(!) patients =', patients.length);
 
 
         for (var pID = 0; pID < patients.length; pID++) {
@@ -144,6 +156,9 @@ function main(token) {
             });
 
         };
+
+
+        console.log('(!) Total Patients =', patients.length);
 
 
     });
