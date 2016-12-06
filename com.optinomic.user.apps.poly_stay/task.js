@@ -1,5 +1,5 @@
 function main(token) {
-    helpers.callAPI("GET", "/users", null, null, function(resp) {
+    helpers.callAPI("GET", "/patients", null, null, function(resp) {
         console.log(resp.responseText);
     });
 }
