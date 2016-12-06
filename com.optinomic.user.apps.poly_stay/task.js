@@ -186,21 +186,29 @@ function main(token) {
             var current_patient = patients[pID];
             var patient_id = parseInt(current_patient.id);
 
-            console.log('(+)', pID, patient_id, current_patient.data.last_name);
+            // console.log('(+)', pID, patient_id, current_patient.data.last_name);
 
 
             getStays(current_patient.id).then(function(stay_json) {
-                var stay = JSON.parse(stay_json);
+                var stays = JSON.parse(stay_json);
 
-                getODBCBelegung(stay).then(function(bel_json) {
-                    var bel = JSON.parse(bel_json);
-                    console.log('(✓) BEL-DATA, ', stay.id, bel);
+                for (var sID = 0; sID < stays.length; sID++) {
 
-                }).then(null, function(error) {
-                    console.log('(!) BEL-ERROR, ', error);
-                });
+                    var current_stay = stays[sID];
+                    var stay_id = parseInt(current_stay.id);
 
-                console.log('(✓) STAY-DATA, ', patients.length, stay);
+
+                    getODBCBelegung(stay).then(function(bel_json) {
+                        var bel = JSON.parse(bel_json);
+                        console.log('(✓) BEL-DATA, ', patient_id, stay.id, bel);
+
+                    }).then(null, function(error) {
+                        console.log('(!) BEL-ERROR, ', error);
+                    });
+
+                };
+
+                // console.log('(✓) STAY-DATA, ', patients.length, stay);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
@@ -209,7 +217,7 @@ function main(token) {
         };
 
 
-        console.log('(!) Total Patients =', patients.length);
+        // console.log('(!) Total Patients =', patients.length);
 
 
     });
