@@ -140,7 +140,7 @@ function main(token) {
 
             stay.belegung = {
                 "body": body,
-                "api_str": api_str
+                "api_str": api_call
             };
 
 
