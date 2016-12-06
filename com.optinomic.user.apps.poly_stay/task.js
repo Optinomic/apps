@@ -105,6 +105,12 @@ function main(token) {
                     stay.poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
                     stay.poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 2), (cis_fid_str.length)));
 
+                    var sql = include_as_js_string(belegung_history_from_fid.sql);
+                    sql = sql.replace("%poly_pid%", stay.poly_pid);
+                    sql = sql.replace("%poly_fid%", stay.poly_fid);
+
+                    stay.sql = sql;
+
                     console.log('(!) stay =', patient_id, stays.length, cis_fid_str, stay.poly_pid, stay.poly_fid);
                 };
 
@@ -149,7 +155,7 @@ function main(token) {
 
             getStays(current_patient.id).then(function(json) {
                 var obj = JSON.parse(json);
-                console.log('(!) DATA, ', obj);
+                console.log('(✓) DATA, ', patients.length, obj);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
