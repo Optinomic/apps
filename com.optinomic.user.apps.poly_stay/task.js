@@ -123,6 +123,8 @@ function main(token) {
 
 
     function getODBCBelegung(stay) {
+
+        console.log('---getODBCBelegung, stay');
         // GET /patients/:patient_id/stays
         return new Promise(function(resolve, reject) {
 
