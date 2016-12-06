@@ -102,7 +102,7 @@ function main(token) {
 
                 console.log('(!) stays =', patient_id, stays.length);
 
-                resolve(stays);
+                resolve(JSON.stringify(stays));
             });
         });
     }
