@@ -81,17 +81,12 @@ function main(token) {
         };
 
         fn(resolve, reject);
-    }
+    };
 
 
     function getStays(patient_id) {
-
         // GET /patients/:patient_id/stays
-
-
         return new Promise(function(resolve, reject) {
-
-
 
             var api_call = "/patients/" + patient_id + "/stays";
             console.log('(?) api_call, ', api_call);
@@ -105,16 +100,31 @@ function main(token) {
                 resolve(JSON.stringify(stays));
             });
         });
-    }
+    };
 
 
+    // Currently on STAY.
+    var patientListFilter = {
+        "gender": '',
+        "city": null,
+        "zip_code": null,
+        "age_over": null,
+        "age_under": null,
+        "in_stay": 'True',
+        "lead_therapist": null,
+        "cis_lead_doctor": null,
+        "stay_start_before": null,
+        "stay_start_after": null,
+        "stay_stop_before": null,
+        "stay_stop_after": null
+    };
 
 
-    helpers.callAPI("GET", "/patients", null, null, function(resp) {
+    helpers.callAPI("GET", "/patients", null, patientListFilter, function(resp) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
-        // console.log('(!) patients =', patients);
+        console.log('(!) patients =', patients.length);
 
 
         for (var pID = 0; pID < patients.length; pID++) {
