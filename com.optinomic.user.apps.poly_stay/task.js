@@ -122,15 +122,15 @@ function main(token) {
     };
 
 
-    function getODBCBelegung(stay) {
+    function getODBCBelegung(my_stay) {
 
-        console.log('---getODBCBelegung', stay);
+        console.log('---getODBCBelegung', my_stay);
         // GET /patients/:patient_id/stays
         return new Promise(function(resolve, reject) {
 
 
             var body = {
-                "query": stay.sql,
+                "query": my_stay.sql,
                 "delimiter": ";",
                 "direct": "True",
                 "format": "json"
@@ -140,7 +140,7 @@ function main(token) {
             var api_call = "/data_sources/Polypoint/query";
 
 
-            stay.belegung = {
+            my_stay.belegung = {
                 "body": body,
                 "api_str": api_call
             };
@@ -153,7 +153,7 @@ function main(token) {
             //   });
 
 
-            resolve(JSON.stringify(stay));
+            resolve(JSON.stringify(my_stay));
 
         });
     };
@@ -199,17 +199,17 @@ function main(token) {
                     var current_stay = stays[sID];
                     var stay_id = parseInt(current_stay.id);
 
-                    console.log('---current_stay', current_stay);
-
-
+                    // console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
-                        console.log('(✓) BEL-DATA, ', patient_id, stay.id, bel);
+                        console.log('(✓) BEL-DATA, ', patient_id, stay_id, bel);
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
                     });
+
+
 
                 };
 
