@@ -122,6 +122,42 @@ function main(token) {
     };
 
 
+    function getODBCBelegung(stay) {
+        // GET /patients/:patient_id/stays
+        return new Promise(function(resolve, reject) {
+
+
+            var body = {
+                "query": stay.sql,
+                "delimiter": ";",
+                "direct": "True",
+                "format": "json"
+            };
+
+
+            var api_call = "/data_sources/Polypoint/query";
+
+
+            stay.belegung = {
+                "body": body,
+                "api_str": api_str
+            };
+
+
+            //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
+            //   
+            //   
+            //       
+            //   });
+
+
+            resolve(JSON.stringify(stay));
+
+        });
+    };
+
+
+
     // Currently on STAY.
     var patientListFilter = {
         "gender": '',
@@ -139,7 +175,7 @@ function main(token) {
     };
 
 
-    helpers.callAPI("GET", "/patients", patientListFilter, null, function(resp) {
+    helpers.callAPI("GET", "/patients", null, patientListFilter, function(resp) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
@@ -153,9 +189,18 @@ function main(token) {
             console.log('(+)', pID, patient_id, current_patient.data.last_name);
 
 
-            getStays(current_patient.id).then(function(json) {
-                var obj = JSON.parse(json);
-                console.log('(✓) DATA, ', patients.length, obj);
+            getStays(current_patient.id).then(function(stay_json) {
+                var stay = JSON.parse(stay_json);
+
+                getODBCBelegung(stay).then(function(bel_json) {
+                    var bel = JSON.parse(bel_json);
+                    console.log('(✓) BEL-DATA, ', stay.id, bel);
+
+                }).then(null, function(error) {
+                    console.log('(!) BEL-ERROR, ', error);
+                });
+
+                console.log('(✓) STAY-DATA, ', patients.length, obj);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
