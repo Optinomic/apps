@@ -139,7 +139,7 @@ function main(token) {
     };
 
 
-    helpers.callAPI("GET", "/patients", null, patientListFilter, function(resp) {
+    helpers.callAPI("GET", "/patients", patientListFilter, null, function(resp) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
