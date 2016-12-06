@@ -198,7 +198,7 @@ function main(token) {
                     var stay_id = parseInt(current_stay.id);
 
 
-                    getODBCBelegung(stay).then(function(bel_json) {
+                    getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
                         console.log('(✓) BEL-DATA, ', patient_id, stay.id, bel);
 
