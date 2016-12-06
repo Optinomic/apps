@@ -124,7 +124,7 @@ function main(token) {
 
     function getODBCBelegung(stay) {
 
-        console.log('---getODBCBelegung, stay');
+        console.log('---getODBCBelegung', stay);
         // GET /patients/:patient_id/stays
         return new Promise(function(resolve, reject) {
 
@@ -198,6 +198,9 @@ function main(token) {
 
                     var current_stay = stays[sID];
                     var stay_id = parseInt(current_stay.id);
+
+                    console.log('---current_stay', current_stay);
+
 
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
