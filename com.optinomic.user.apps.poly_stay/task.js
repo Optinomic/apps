@@ -200,7 +200,7 @@ function main(token) {
                     console.log('(!) BEL-ERROR, ', error);
                 });
 
-                console.log('(✓) STAY-DATA, ', patients.length, obj);
+                console.log('(✓) STAY-DATA, ', patients.length, stay);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
