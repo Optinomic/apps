@@ -83,11 +83,11 @@ function main(token) {
 
     helpers.callAPI("GET", "/patients", null, null, function(resp) {
 
-        resp = JSON.parse(resp);
+        var response = JSON.parse(resp.responseText);
         console.log('(!) resp = ', resp);
 
 
-        var patients = resp.responseText.patients;
+        var patients = response.patients;
         console.log('(!) patients =', patients);
 
 
