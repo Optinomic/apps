@@ -84,7 +84,10 @@ function main(token) {
 
         // GET /patients/:patient_id/stays
 
+
         return new Promise(function(resolve, reject) {
+
+
 
             var api_call = "/patients/" + patient_id + " /stays";
             console.log('(?) api_call, ', api_call);
@@ -113,7 +116,9 @@ function main(token) {
         for (var pID = 0; pID < patients.length; pID++) {
 
             var current_patient = patients[pID];
-            console.log('(+)', pID, current_patient.id, current_patient.data.last_name);
+            var patient_id = parseInt(current_patient.id);
+
+            console.log('(+)', pID, patient_id, current_patient.data.last_name);
 
 
             getStays(current_patient.id).then(function(json) {
