@@ -135,7 +135,7 @@ function main(token) {
 
                     stay.sql = sql;
 
-                    console.log('(!) stay =', patient_id, stays.length, cis_fid_str, stay.poly_pid, stay.poly_fid);
+                    // console.log('(!) stay =', patient_id, stays.length, cis_fid_str, stay.poly_pid, stay.poly_fid);
                 };
 
 
@@ -148,7 +148,6 @@ function main(token) {
 
     function getODBCBelegung(my_stay) {
 
-        console.log('---getODBCBelegung', my_stay);
         // GET /patients/:patient_id/stays
         return new Promise(function(resolve, reject) {
 
@@ -196,7 +195,7 @@ function main(token) {
             };
 
             var annotation_obj = {
-                "bel_selector": stay.belegung.current,
+                "bel_selector": belegung.current,
                 "bel_all": polypoint_belegung
             };
 
@@ -214,38 +213,14 @@ function main(token) {
     };
 
 
-    function writeBelegung(my_stay) {
+    function writeBelegung(annot_obj) {
 
-        console.log('---getODBCBelegung', my_stay);
-        // GET /patients/:patient_id/stays
+        console.log('---writeBelegung', annot_obj);
+
+
         return new Promise(function(resolve, reject) {
 
-
-            var body = {
-                "query": my_stay.sql,
-                "delimiter": ";",
-                "direct": "True",
-                "format": "json"
-            };
-
-
-            var api_call = "/data_sources/Polypoint/query";
-
-
-            my_stay.belegung = {
-                "body": body,
-                "api_str": api_call
-            };
-
-
-            //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
-            //   
-            //   
-            //       
-            //   });
-
-
-            resolve(JSON.stringify(my_stay));
+            resolve(JSON.stringify(annot_obj));
 
         });
     };
@@ -285,7 +260,7 @@ function main(token) {
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
-                        console.log('(✓) BEL-DATA, ', patients.length, bel, log);
+                        console.log('(✓) BEL-DATA, ', bel, log);
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
