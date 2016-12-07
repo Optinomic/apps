@@ -211,7 +211,7 @@ function main(token) {
 
                 };
 
-                // console.log('(✓) STAY-DATA, ', patients.length, stay);
+                console.log('(✓) STAY-DATA, ', patients.length, stay);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
