@@ -203,7 +203,7 @@ function main(token) {
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
-                        console.log('(✓) BEL-DATA, ', patient_id, stay_id, bel);
+                        console.log('(✓) BEL-DATA, ', patients.length, patient_id, stay_id, bel);
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
@@ -211,7 +211,7 @@ function main(token) {
 
                 };
 
-                console.log('(✓) STAY-DATA, ', patients.length, stay);
+                // console.log('(✓) STAY-DATA, ', patients.length, current_stay);
 
             }).then(null, function(error) {
                 console.log('(!) ERROR, ', error);
