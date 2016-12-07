@@ -191,7 +191,7 @@ function main(token) {
 
 
             var belegung = {
-                "body": body,
+                "body": polypoint_belegung,
                 "api_str": api_call
             };
 
