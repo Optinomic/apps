@@ -167,7 +167,7 @@ function main(token) {
         "zip_code": null,
         "age_over": null,
         "age_under": null,
-        "in_stay": 'True',
+        "in_stay": true,
         "lead_therapist": null,
         "cis_lead_doctor": null,
         "stay_start_before": null,
@@ -208,8 +208,6 @@ function main(token) {
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
                     });
-
-
 
                 };
 
