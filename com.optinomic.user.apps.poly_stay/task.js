@@ -167,7 +167,7 @@ function main(token) {
         "zip_code": null,
         "age_over": null,
         "age_under": null,
-        "in_stay": true,
+        "in_stay": 'True',
         "lead_therapist": null,
         "cis_lead_doctor": null,
         "stay_start_before": null,
