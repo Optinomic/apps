@@ -161,23 +161,13 @@ function main(token) {
 
 
     // Currently on STAY.
-    var patientListFilter = {
-        "gender": '',
-        "city": null,
-        "zip_code": null,
-        "age_over": null,
-        "age_under": null,
-        "in_stay": 'True',
-        "lead_therapist": null,
-        "cis_lead_doctor": null,
-        "stay_start_before": null,
-        "stay_start_after": null,
-        "stay_stop_before": null,
-        "stay_stop_after": null
+
+
+    var filters = {
+        in_stay: "True"
     };
 
-
-    helpers.callAPI("GET", "/patients", null, patientListFilter, function(resp) {
+    helpers.callAPI("GET", "/patients", filters, null, function(resp) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
@@ -203,7 +193,7 @@ function main(token) {
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
-                        console.log('(✓) BEL-DATA, ', patients.length, patient_id, stay_id, bel);
+                        console.log('(✓) BEL-DATA, ', patients.length, current_patient.id, stay_id, bel);
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
