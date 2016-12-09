@@ -825,7 +825,7 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Positives Denken",
-            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_left": "Anwendung der Strategie wenig ausgepraegt",
             "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
@@ -833,7 +833,7 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Aktive Stressbewaeltigung",
-            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_left": "Anwendung der Strategie wenig ausgepraegt",
             "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
@@ -841,7 +841,7 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Soziale Unterstuetzung",
-            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_left": "Anwendung der Strategie wenig ausgepraegt",
             "sub_right": "Gut: Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
@@ -849,7 +849,7 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Halt im Glauben",
-            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
+            "sub_left": "Anwendung der Strategie wenig ausgepraegt",
             "sub_right": "Hilfreiche Nutzung der Strategie",
             "stanine": 0,
             "sum_score": 0,
@@ -857,8 +857,8 @@ function main(responses) {
             "population": current_population
         }, {
             "question": "Alkohol- und Zigarettenkonsum",
-            "sub_left": "Anwendung der Strategie wenig ausgeprägt",
-            "sub_right": "Häufige Anwendung der ungünstigen Strategie",
+            "sub_left": "Anwendung der Strategie wenig ausgepraegt",
+            "sub_right": "Haeufige Anwendung der unguenstigen Strategie",
             "stanine": 0,
             "sum_score": 0,
             "name": 'coping_alk',
