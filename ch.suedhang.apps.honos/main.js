@@ -146,7 +146,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
 
         // Sort Full-Table
-        dataService.sortOn(honos, 'datum', false, false);
+        dataService.sortOn(honos.responses, 'datum', false, false);
         $scope.d.honos = honos;
 
     };
