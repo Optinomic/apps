@@ -17,51 +17,9 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
-[template score_timeline 6 6]
-include(templates/score_timeline_small.html)
+[template scores_table 6 6]
+include(templates/table.html)
 
-[template honos1_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos2_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos3_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos4_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos5_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos6_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos7_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos8_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos9_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos10_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos11_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-[template honos12_timeline 3 4]
-include(templates/score_timeline_small.html)
-
-
-[template data_results 6 8]
-include(templates/data.html)
-
-[template data_download_admin 6 10]
-include(templates/download.html)
 
 
 [dependencies]
@@ -88,12 +46,32 @@ fid = X24X327
 min_questions =
 min_lastpage = 2
 
+[survey]
+id = HoNOS_Verlauf
+type = lime
+responsibility = lead_therapist
+name = HoNOS Verlauf
+host = default
+survey_id = 912771
+hash = X120X3482
+pid = X120X3483
+fid = X120X3484
+min_questions =
+min_lastpage = 2
+
 [event activation]
 type = on_activation
 due_after = 259200
 overdue = ignore
 description = HoNOS Fragebogen
 survey = HoNOS
+
+[event activation]
+type = on_activation
+due_after = 259200
+overdue = ignore
+description = HoNOS - Verlauf Fragebogen
+survey = HoNOS_Verlauf
 
 
 [email new_event html]
@@ -108,3 +86,5 @@ include(includes/create_view.sql)
 
 [calculation honos_calculation javascript]
 include(calculations/honos.js)
+
+

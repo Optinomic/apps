@@ -35,14 +35,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
-                $scope.setDataView();
-                $scope.setTimelineChartOptions();
-                $scope.setExport();
+                // $scope.setDataView();
+                // $scope.setTimelineChartOptions();
+                // $scope.setExport();
 
             };
 
             // Run Public-Functions:
-            $scope.d.functions.getAllCalculations();
+            // $scope.d.functions.getAllCalculations();
 
 
             // Finishing: Console Info & Init = done.
