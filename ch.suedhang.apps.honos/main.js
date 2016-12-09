@@ -90,8 +90,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if (resp.event.survey_name === "HoNOS Verlauf") {
                 is_verlauf = true;
 
-                resp_obj.Zeitpunkt = "Verlauf";
-                resp_obj.Summe = null;
+                resp_obj.zeitpunkt = "Verlauf";
+                resp_obj.summe = null;
                 resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
                 resp_obj.H2 = parseInt(resp.entity.data.response['H1[402V02]']);
                 resp_obj.H3 = null;
