@@ -91,7 +91,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 is_verlauf = true;
 
                 resp_obj.Zeitpunkt = "Verlauf";
-                resp_obj.Summe = calc.sum_score.sum_total;
+                resp_obj.Summe = null;
                 resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
                 resp_obj.H2 = parseInt(resp.entity.data.response['H1[402V02]']);
                 resp_obj.H3 = null;
@@ -121,7 +121,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 };
 
                 resp_obj.Zeitpunkt = mz;
-                resp_obj.Summe = null;
+                resp_obj.Summe = calc.sum_score.sum_total;
+
 
                 resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
                 resp_obj.H2 = parseInt(resp.entity.data.response['H1[402V02]']);
