@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+ <LimeSurveyDocType>Survey</LimeSurveyDocType>
+ <DBVersion>177</DBVersion>
+ <languages>
+  <language>de</language>
+ </languages>
+ <answers>
+  <fields>
+   <fieldname>qid</fieldname>
+   <fieldname>code</fieldname>
+   <fieldname>answer</fieldname>
+   <fieldname>sortorder</fieldname>
+   <fieldname>assessment_value</fieldname>
+   <fieldname>language</fieldname>
+   <fieldname>scale_id</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <code><![CDATA[1]]></code>
+    <answer><![CDATA[trifft gar nicht zu]]></answer>
+    <sortorder><![CDATA[1]]></sortorder>
+    <assessment_value><![CDATA[0]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <code><![CDATA[2]]></code>
+    <answer><![CDATA[trifft eher nicht zu]]></answer>
+    <sortorder><![CDATA[2]]></sortorder>
+    <assessment_value><![CDATA[1]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <code><![CDATA[3]]></code>
+    <answer><![CDATA[trifft eher zu]]></answer>
+    <sortorder><![CDATA[3]]></sortorder>
+    <assessment_value><![CDATA[1]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <code><![CDATA[4]]></code>
+    <answer><![CDATA[trifft sehr zu]]></answer>
+    <sortorder><![CDATA[4]]></sortorder>
+    <assessment_value><![CDATA[1]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[1283]]></qid>
+    <code><![CDATA[1]]></code>
+    <answer><![CDATA[Eintritt Entwöhnungstherapie]]></answer>
+    <sortorder><![CDATA[1]]></sortorder>
+    <assessment_value><![CDATA[0]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[1283]]></qid>
+    <code><![CDATA[2]]></code>
+    <answer><![CDATA[Austritt Entwöhnungstherapie]]></answer>
+    <sortorder><![CDATA[2]]></sortorder>
+    <assessment_value><![CDATA[1]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+   <row>
+    <qid><![CDATA[1283]]></qid>
+    <code><![CDATA[3]]></code>
+    <answer><![CDATA[anderer]]></answer>
+    <sortorder><![CDATA[3]]></sortorder>
+    <assessment_value><![CDATA[1]]></assessment_value>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+   </row>
+  </rows>
+ </answers>
+ <conditions>
+  <fields>
+   <fieldname>cid</fieldname>
+   <fieldname>qid</fieldname>
+   <fieldname>cqid</fieldname>
+   <fieldname>cfieldname</fieldname>
+   <fieldname>method</fieldname>
+   <fieldname>value</fieldname>
+   <fieldname>scenario</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <cid><![CDATA[734]]></cid>
+    <qid><![CDATA[1284]]></qid>
+    <cqid><![CDATA[1283]]></cqid>
+    <cfieldname><![CDATA[824558X68X1283]]></cfieldname>
+    <method><![CDATA[==]]></method>
+    <value><![CDATA[3]]></value>
+    <scenario><![CDATA[1]]></scenario>
+   </row>
+  </rows>
+ </conditions>
+ <groups>
+  <fields>
+   <fieldname>gid</fieldname>
+   <fieldname>sid</fieldname>
+   <fieldname>group_name</fieldname>
+   <fieldname>group_order</fieldname>
+   <fieldname>description</fieldname>
+   <fieldname>language</fieldname>
+   <fieldname>randomization_group</fieldname>
+   <fieldname>grelevance</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <gid><![CDATA[33]]></gid>
+    <sid><![CDATA[824558]]></sid>
+    <group_name><![CDATA[ISK-K]]></group_name>
+    <group_order><![CDATA[1]]></group_order>
+    <description><![CDATA[<div>
+	 </div>
+<div>
+	<span style="font-size:16px;"><span style="font-size:24px;">Inventar sozialer Kompetenzen</span></span></div>
+<div>
+	 </div>
+]]></description>
+    <language><![CDATA[de]]></language>
+    <randomization_group/>
+    <grelevance/>
+   </row>
+   <row>
+    <gid><![CDATA[34]]></gid>
+    <sid><![CDATA[824558]]></sid>
+    <group_name><![CDATA[Optinomic]]></group_name>
+    <group_order><![CDATA[2]]></group_order>
+    <description><![CDATA[All needed fields/questions to implement this survey into <a href="http://www.optinomic.com/" target="_blank">optinomic.com</a> system.]]></description>
+    <language><![CDATA[de]]></language>
+    <randomization_group/>
+    <grelevance/>
+   </row>
+   <row>
+    <gid><![CDATA[68]]></gid>
+    <sid><![CDATA[824558]]></sid>
+    <group_name><![CDATA[Erhebungszeitpunkt]]></group_name>
+    <group_order><![CDATA[0]]></group_order>
+    <description/>
+    <language><![CDATA[de]]></language>
+    <randomization_group/>
+    <grelevance/>
+   </row>
+  </rows>
+ </groups>
+ <questions>
+  <fields>
+   <fieldname>qid</fieldname>
+   <fieldname>parent_qid</fieldname>
+   <fieldname>sid</fieldname>
+   <fieldname>gid</fieldname>
+   <fieldname>type</fieldname>
+   <fieldname>title</fieldname>
+   <fieldname>question</fieldname>
+   <fieldname>preg</fieldname>
+   <fieldname>help</fieldname>
+   <fieldname>other</fieldname>
+   <fieldname>mandatory</fieldname>
+   <fieldname>question_order</fieldname>
+   <fieldname>language</fieldname>
+   <fieldname>scale_id</fieldname>
+   <fieldname>same_default</fieldname>
+   <fieldname>relevance</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK]]></title>
+    <question><![CDATA[<div style="margin-left: 40px;">
+	<span style="font-family:arial,helvetica,sans-serif;"><span style="font-size:14px;">Im Folgenden finden Sie 33 Aussagen, die sich auf Ihre persönlichen Verhaltensweisen und Gewohnheiten beziehen. Ihre Aufgabe besteht darin, jeweils zu entscheiden, inwieweit die getroffene Aussage auf Ihre Person zutrifft.</span></span></div>
+<div style="margin-left: 40px;">
+	 </div>
+<div style="margin-left: 40px;">
+	<span style="font-family:arial,helvetica,sans-serif;"><span style="font-size:14px;">Bitte antworten Sie stets ehrlich, nach bestem Wissen und Gewissen und denken Sie nicht darüber nach, welche Antwort möglicherweise die vorteilhafteste wäre.</span></span></div>
+<div style="margin-left: 40px;">
+	 </div>
+<div style="margin-left: 40px;">
+	<span style="font-family:arial,helvetica,sans-serif;"><span style="font-size:14px;">Bearbeiten Sie den Fragebogen bitte zügig, aber sorgfältig. Halten Sie sich nicht zu lange an einzelnen Aussagen auf. Falls Situationen beschrieben werden, die Sie so noch nicht erlebt haben, schätzen Sie bitte ein, wie Sie sich wahrscheinlich verhalten würden.</span></span></div>
+]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[0]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[949]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[34]]></gid>
+    <type><![CDATA[S]]></type>
+    <title><![CDATA[optinomixHASH]]></title>
+    <question><![CDATA[Optinomix - secure Hashtag]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[0]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[950]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[34]]></gid>
+    <type><![CDATA[S]]></type>
+    <title><![CDATA[PID]]></title>
+    <question><![CDATA[Patient-ID (PID) from external Clinic Information System (CIS)]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[1]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[951]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[34]]></gid>
+    <type><![CDATA[S]]></type>
+    <title><![CDATA[FID]]></title>
+    <question><![CDATA[Fall-ID (FID) - Information about current stay - from external Clinic Information System (CIS).]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[2]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[1283]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[68]]></gid>
+    <type><![CDATA[L]]></type>
+    <title><![CDATA[Erhebungszeitpunkt]]></title>
+    <question/>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[0]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[1284]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[68]]></gid>
+    <type><![CDATA[T]]></type>
+    <title><![CDATA[andererZeitpunkt]]></title>
+    <question><![CDATA[Welcher?
+]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[1]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[((824558X68X1283.NAOK == "3"))]]></relevance>
+   </row>
+   <row>
+    <qid><![CDATA[1285]]></qid>
+    <parent_qid><![CDATA[0]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[68]]></gid>
+    <type><![CDATA[D]]></type>
+    <title><![CDATA[Datum]]></title>
+    <question><![CDATA[
+Datum der Erhebung]]></question>
+    <preg/>
+    <help/>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[Y]]></mandatory>
+    <question_order><![CDATA[2]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+    <relevance><![CDATA[1]]></relevance>
+   </row>
+  </rows>
+ </questions>
+ <subquestions>
+  <fields>
+   <fieldname>qid</fieldname>
+   <fieldname>parent_qid</fieldname>
+   <fieldname>sid</fieldname>
+   <fieldname>gid</fieldname>
+   <fieldname>type</fieldname>
+   <fieldname>title</fieldname>
+   <fieldname>question</fieldname>
+   <fieldname>preg</fieldname>
+   <fieldname>help</fieldname>
+   <fieldname>other</fieldname>
+   <fieldname>mandatory</fieldname>
+   <fieldname>question_order</fieldname>
+   <fieldname>language</fieldname>
+   <fieldname>scale_id</fieldname>
+   <fieldname>same_default</fieldname>
+   <fieldname>relevance</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <qid><![CDATA[952]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK1]]></title>
+    <question><![CDATA[<p style="text-align: left";>Auch wenn meine Zeit knapp bemessen ist, habe ich immer ein offenes Ohr für andere</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[1]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[953]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK2]]></title>
+    <question><![CDATA[<p style="text-align: left";>Für gewöhnlich bestimme ich, wo es lang geht</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[2]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[954]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK3]]></title>
+    <question><![CDATA[<p style="text-align: left";>Oft platzen Ärger und Freude einfach so aus mir heraus, ohne dass ich viel dagegen tun könnte</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[3]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[955]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK4]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich bemühe mich fast jederzeit, anderen ein positives Bild von mir zu vermitteln</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[4]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[956]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK5]]></title>
+    <question><![CDATA[<p style="text-align: left";>In den meisten Situationen versuche ich, die Welt auch mit den Augen meines Gesprächspartners zu sehen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[5]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[957]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK6]]></title>
+    <question><![CDATA[<p style="text-align: left";>Es fällt mir sehr leicht, in einer neuen Gruppe schnell Anschluss zu finden</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[6]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[958]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK7]]></title>
+    <question><![CDATA[<p style="text-align: left";>Es kommt häufig vor, dass sich meine Stimmung mehrmals am Tag ändert</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[7]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[959]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK8]]></title>
+    <question><![CDATA[<p style="text-align: left";>Fast immer, wenn ich mit anderen Menschen zusammenkomme, versuche ich herauszubekommen, ob mein Verhalten beim Gegenüber so ankommt, wie ich es gemeint habe</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[8]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[960]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AISK9]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich ärgere mich oft über Leute, weil sie irgendwie anders sind als ich selbst</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[9]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[961]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS10]]></title>
+    <question><![CDATA[<p style="text-align: left";>Wichtige Entscheidungen schiebe ich gerne vor mich her</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[10]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[962]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS11]]></title>
+    <question><![CDATA[<p style="text-align: left";>Wenn ich mich mit anderen Menschen unterhalte, dann schweifen meine Gedanken oft ab</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[11]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[963]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS12]]></title>
+    <question><![CDATA[<p style="text-align: left";>Es gab in meinem Leben schon viele Situationen, in denen ich nicht mehr weiter wusste</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[12]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[964]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS13]]></title>
+    <question><![CDATA[<p style="text-align: left";>Im Kontakt mit anderen Menschen bin ich ein viel genauerer Beobachter als die meisten anderen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[13]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[965]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS14]]></title>
+    <question><![CDATA[<p style="text-align: left";>Bei Meinungsverschiedenheiten versuche ich im Allgemeinen auch der Auffassung der Gegenseite zu ihrem Recht zu verhelfen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[14]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[966]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS15]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich liebe es, mit anderen Menschen kontrovers zu diskutieren</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[15]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[967]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS16]]></title>
+    <question><![CDATA[<p style="text-align: left";>Meist bin ich auf die Hilfe anderer angewiesen, um eigene Interessen verwirklichen zu können</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[16]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[968]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS17]]></title>
+    <question><![CDATA[<p style="text-align: left";>Über meine eigenen Gefühle mache ich mir nur wenige Gedanken</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[17]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[969]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS18]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich handle manchmal nach der Devise: "Jeder ist sich selbst der Nächste."</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[18]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[970]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS19]]></title>
+    <question><![CDATA[<p style="text-align: left";>Es kommt nur selten vor, dass ich in einem Streitgespräch unterliege</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[19]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[971]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS20]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich habe meine Gefühle immer gut unter Kontrolle</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[20]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[972]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS21]]></title>
+    <question><![CDATA[<p style="text-align: left";>Oft langweilen mich andere Menschen so, dass ich ihnen nicht längere Zeit konzentriert zuhören mag</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[21]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[973]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS22]]></title>
+    <question><![CDATA[<p style="text-align: left";>In fast allen Gesprächen bemühe ich mich darum, in der Gestik meiner Gesprächspartner Hinweise darauf zu finden, was sie über mich denken</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[22]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[974]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS23]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ehrlich gesagt, es fällt mir oft schwer, mich in andere Menschen hineinzuversetzen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[23]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[975]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS24]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich gehe immer auf Menschen zu, wenn ich sie kennen lernen möchte</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[24]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[976]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS25]]></title>
+    <question><![CDATA[<p style="text-align: left";>Es kommt häufig vor, dass sich meine Stimmung von Tag zu Tag ändert</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[25]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[977]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS26]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich habe ein ausgezeichnetes Gespür dafür, wenn Reden und Denken eines Menschen nicht übereinstimmen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[26]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[978]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS27]]></title>
+    <question><![CDATA[<p style="text-align: left";>In Diskussionen kann ich leichter als andere unterschiedliche Meinungen akzeptieren</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[27]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[979]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS28]]></title>
+    <question><![CDATA[<p style="text-align: left";>Im Allgemeinen fällt es mir leicht, Entscheidungen zu treffen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[28]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[980]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS29]]></title>
+    <question><![CDATA[<p style="text-align: left";>In meinem Leben kommt es sehr selten vor, dass ich mich hilflos fühle</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[29]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[981]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS30]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich denke sehr oft über mich nach</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[30]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[982]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS31]]></title>
+    <question><![CDATA[<p style="text-align: left";>In vielen Konfliktsituationen ist es mir egal, inwieweit auch die Gegenseite ihre Vorstellungen durchsetzen kann</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[31]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[983]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS32]]></title>
+    <question><![CDATA[<p style="text-align: left";>Kontroverse Diskussionen sind mir meist unangenehm</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[32]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+   <row>
+    <qid><![CDATA[984]]></qid>
+    <parent_qid><![CDATA[948]]></parent_qid>
+    <sid><![CDATA[824558]]></sid>
+    <gid><![CDATA[33]]></gid>
+    <type><![CDATA[F]]></type>
+    <title><![CDATA[AIS33]]></title>
+    <question><![CDATA[<p style="text-align: left";>Ich bin sehr oft auf andere Menschen angewiesen</p>]]></question>
+    <other><![CDATA[N]]></other>
+    <mandatory><![CDATA[N]]></mandatory>
+    <question_order><![CDATA[33]]></question_order>
+    <language><![CDATA[de]]></language>
+    <scale_id><![CDATA[0]]></scale_id>
+    <same_default><![CDATA[0]]></same_default>
+   </row>
+  </rows>
+ </subquestions>
+ <question_attributes>
+  <fields>
+   <fieldname>qid</fieldname>
+   <fieldname>attribute</fieldname>
+   <fieldname>value</fieldname>
+   <fieldname>language</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <attribute><![CDATA[answer_width]]></attribute>
+    <value><![CDATA[65]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <attribute><![CDATA[hide_tip]]></attribute>
+    <value><![CDATA[1]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[948]]></qid>
+    <attribute><![CDATA[repeat_headings]]></attribute>
+    <value><![CDATA[11]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[949]]></qid>
+    <attribute><![CDATA[hidden]]></attribute>
+    <value><![CDATA[1]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[949]]></qid>
+    <attribute><![CDATA[statistics_showgraph]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[949]]></qid>
+    <attribute><![CDATA[statistics_showmap]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[950]]></qid>
+    <attribute><![CDATA[hidden]]></attribute>
+    <value><![CDATA[1]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[950]]></qid>
+    <attribute><![CDATA[statistics_showgraph]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[950]]></qid>
+    <attribute><![CDATA[statistics_showmap]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[951]]></qid>
+    <attribute><![CDATA[hidden]]></attribute>
+    <value><![CDATA[1]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[951]]></qid>
+    <attribute><![CDATA[statistics_showgraph]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[951]]></qid>
+    <attribute><![CDATA[statistics_showmap]]></attribute>
+    <value><![CDATA[0]]></value>
+   </row>
+   <row>
+    <qid><![CDATA[1283]]></qid>
+    <attribute><![CDATA[hide_tip]]></attribute>
+    <value><![CDATA[1]]></value>
+   </row>
+  </rows>
+ </question_attributes>
+ <surveys>
+  <fields>
+   <fieldname>sid</fieldname>
+   <fieldname>admin</fieldname>
+   <fieldname>expires</fieldname>
+   <fieldname>startdate</fieldname>
+   <fieldname>adminemail</fieldname>
+   <fieldname>anonymized</fieldname>
+   <fieldname>faxto</fieldname>
+   <fieldname>format</fieldname>
+   <fieldname>savetimings</fieldname>
+   <fieldname>template</fieldname>
+   <fieldname>language</fieldname>
+   <fieldname>additional_languages</fieldname>
+   <fieldname>datestamp</fieldname>
+   <fieldname>usecookie</fieldname>
+   <fieldname>allowregister</fieldname>
+   <fieldname>allowsave</fieldname>
+   <fieldname>autonumber_start</fieldname>
+   <fieldname>autoredirect</fieldname>
+   <fieldname>allowprev</fieldname>
+   <fieldname>printanswers</fieldname>
+   <fieldname>ipaddr</fieldname>
+   <fieldname>refurl</fieldname>
+   <fieldname>publicstatistics</fieldname>
+   <fieldname>publicgraphs</fieldname>
+   <fieldname>listpublic</fieldname>
+   <fieldname>htmlemail</fieldname>
+   <fieldname>sendconfirmation</fieldname>
+   <fieldname>tokenanswerspersistence</fieldname>
+   <fieldname>assessments</fieldname>
+   <fieldname>usecaptcha</fieldname>
+   <fieldname>usetokens</fieldname>
+   <fieldname>bounce_email</fieldname>
+   <fieldname>attributedescriptions</fieldname>
+   <fieldname>emailresponseto</fieldname>
+   <fieldname>emailnotificationto</fieldname>
+   <fieldname>tokenlength</fieldname>
+   <fieldname>showxquestions</fieldname>
+   <fieldname>showgroupinfo</fieldname>
+   <fieldname>shownoanswer</fieldname>
+   <fieldname>showqnumcode</fieldname>
+   <fieldname>bouncetime</fieldname>
+   <fieldname>bounceprocessing</fieldname>
+   <fieldname>bounceaccounttype</fieldname>
+   <fieldname>bounceaccounthost</fieldname>
+   <fieldname>bounceaccountpass</fieldname>
+   <fieldname>bounceaccountencryption</fieldname>
+   <fieldname>bounceaccountuser</fieldname>
+   <fieldname>showwelcome</fieldname>
+   <fieldname>showprogress</fieldname>
+   <fieldname>questionindex</fieldname>
+   <fieldname>navigationdelay</fieldname>
+   <fieldname>nokeyboard</fieldname>
+   <fieldname>alloweditaftercompletion</fieldname>
+   <fieldname>googleanalyticsstyle</fieldname>
+   <fieldname>googleanalyticsapikey</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <sid><![CDATA[824558]]></sid>
+    <admin><![CDATA[Nora Schönenberger]]></admin>
+    <adminemail><![CDATA[nora.schoenenberger@suedhang.ch]]></adminemail>
+    <anonymized><![CDATA[N]]></anonymized>
+    <faxto/>
+    <format><![CDATA[G]]></format>
+    <savetimings><![CDATA[N]]></savetimings>
+    <template><![CDATA[optinomic_skeleton]]></template>
+    <language><![CDATA[de]]></language>
+    <additional_languages/>
+    <datestamp><![CDATA[Y]]></datestamp>
+    <usecookie><![CDATA[N]]></usecookie>
+    <allowregister><![CDATA[N]]></allowregister>
+    <allowsave><![CDATA[N]]></allowsave>
+    <autonumber_start><![CDATA[109]]></autonumber_start>
+    <autoredirect><![CDATA[N]]></autoredirect>
+    <allowprev><![CDATA[N]]></allowprev>
+    <printanswers><![CDATA[N]]></printanswers>
+    <ipaddr><![CDATA[N]]></ipaddr>
+    <refurl><![CDATA[N]]></refurl>
+    <publicstatistics><![CDATA[N]]></publicstatistics>
+    <publicgraphs><![CDATA[N]]></publicgraphs>
+    <listpublic><![CDATA[N]]></listpublic>
+    <htmlemail><![CDATA[Y]]></htmlemail>
+    <sendconfirmation><![CDATA[Y]]></sendconfirmation>
+    <tokenanswerspersistence><![CDATA[N]]></tokenanswerspersistence>
+    <assessments><![CDATA[N]]></assessments>
+    <usecaptcha><![CDATA[D]]></usecaptcha>
+    <usetokens><![CDATA[N]]></usetokens>
+    <bounce_email><![CDATA[nora.schoenenberger@suedhang.ch]]></bounce_email>
+    <attributedescriptions><![CDATA[[]]]></attributedescriptions>
+    <emailresponseto/>
+    <emailnotificationto/>
+    <tokenlength><![CDATA[15]]></tokenlength>
+    <showxquestions><![CDATA[N]]></showxquestions>
+    <showgroupinfo><![CDATA[B]]></showgroupinfo>
+    <shownoanswer><![CDATA[Y]]></shownoanswer>
+    <showqnumcode><![CDATA[X]]></showqnumcode>
+    <bounceprocessing><![CDATA[N]]></bounceprocessing>
+    <showwelcome><![CDATA[N]]></showwelcome>
+    <showprogress><![CDATA[N]]></showprogress>
+    <questionindex><![CDATA[0]]></questionindex>
+    <navigationdelay><![CDATA[0]]></navigationdelay>
+    <nokeyboard><![CDATA[N]]></nokeyboard>
+    <alloweditaftercompletion><![CDATA[N]]></alloweditaftercompletion>
+    <googleanalyticsstyle><![CDATA[0]]></googleanalyticsstyle>
+    <googleanalyticsapikey/>
+   </row>
+  </rows>
+ </surveys>
+ <surveys_languagesettings>
+  <fields>
+   <fieldname>surveyls_survey_id</fieldname>
+   <fieldname>surveyls_language</fieldname>
+   <fieldname>surveyls_title</fieldname>
+   <fieldname>surveyls_description</fieldname>
+   <fieldname>surveyls_welcometext</fieldname>
+   <fieldname>surveyls_endtext</fieldname>
+   <fieldname>surveyls_url</fieldname>
+   <fieldname>surveyls_urldescription</fieldname>
+   <fieldname>surveyls_email_invite_subj</fieldname>
+   <fieldname>surveyls_email_invite</fieldname>
+   <fieldname>surveyls_email_remind_subj</fieldname>
+   <fieldname>surveyls_email_remind</fieldname>
+   <fieldname>surveyls_email_register_subj</fieldname>
+   <fieldname>surveyls_email_register</fieldname>
+   <fieldname>surveyls_email_confirm_subj</fieldname>
+   <fieldname>surveyls_email_confirm</fieldname>
+   <fieldname>surveyls_dateformat</fieldname>
+   <fieldname>surveyls_attributecaptions</fieldname>
+   <fieldname>email_admin_notification_subj</fieldname>
+   <fieldname>email_admin_notification</fieldname>
+   <fieldname>email_admin_responses_subj</fieldname>
+   <fieldname>email_admin_responses</fieldname>
+   <fieldname>surveyls_numberformat</fieldname>
+   <fieldname>attachments</fieldname>
+  </fields>
+  <rows>
+   <row>
+    <surveyls_survey_id><![CDATA[824558]]></surveyls_survey_id>
+    <surveyls_language><![CDATA[de]]></surveyls_language>
+    <surveyls_title><![CDATA[ISK-K]]></surveyls_title>
+    <surveyls_description/>
+    <surveyls_welcometext><![CDATA[<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+]]></surveyls_welcometext>
+    <surveyls_endtext/>
+    <surveyls_url/>
+    <surveyls_urldescription/>
+    <surveyls_email_invite_subj><![CDATA[Einladung zur einer Umfrage]]></surveyls_email_invite_subj>
+    <surveyls_email_invite><![CDATA[Hallo {FIRSTNAME},
+
+Hiermit möchten wir Sie zu einer Umfrage einladen.
+
+Der Titel der Umfrage ist 
+'{SURVEYNAME}'
+
+'{SURVEYDESCRIPTION}'
+
+Um an dieser Umfrage teilzunehmen, klicken Sie bitte auf den unten stehenden Link.
+
+Mit freundlichen Grüßen,
+
+{ADMINNAME} ({ADMINEMAIL})
+
+----------------------------------------------
+Klicken Sie hier um die Umfrage zu starten:
+{SURVEYURL}
+
+Wenn Sie an diese Umfrage nicht teilnehmen und keine weiteren Erinnerungen erhalten möchten, klicken Sie bitte auf den folgenden Link:
+{OPTOUTURL}
+
+Wenn Sie geblockt sind, jedoch wieder teilnehmen und weitere Einladungen erhalten möchten, klicken Sie bitte auf den folgenden Link:
+{OPTINURL}]]></surveyls_email_invite>
+    <surveyls_email_remind_subj><![CDATA[Erinnerung an die Teilnahme an einer Umfrage]]></surveyls_email_remind_subj>
+    <surveyls_email_remind><![CDATA[Hallo {FIRSTNAME},
+
+Vor kurzem haben wir Sie zu einer Umfrage eingeladen.
+
+Zu unserem Bedauern haben wir bemerkt, dass Sie die Umfrage noch nicht ausgefüllt haben. Wir möchten Ihnen mitteilen, dass die Umfrage noch aktiv ist und würden uns freuen, wenn Sie teilnehmen könnten.
+
+Der Titel der Umfrage ist 
+'{SURVEYNAME}'
+
+'{SURVEYDESCRIPTION}'
+
+Um an dieser Umfrage teilzunehmen, klicken Sie bitte auf den unten stehenden Link.
+
+ Mit freundlichen Grüßen,
+
+{ADMINNAME} ({ADMINEMAIL})
+
+----------------------------------------------
+Klicken Sie hier um die Umfrage zu starten:
+{SURVEYURL}
+
+Wenn Sie an diese Umfrage nicht teilnehmen und keine weiteren Erinnerungen erhalten möchten, klicken Sie bitte auf den folgenden Link:
+{OPTOUTURL}]]></surveyls_email_remind>
+    <surveyls_email_register_subj><![CDATA[Registrierungsbestätigung für Teilnahmeumfrage]]></surveyls_email_register_subj>
+    <surveyls_email_register><![CDATA[Hallo {FIRSTNAME},
+
+Sie (oder jemand, der Ihre E-Mail benutzt hat) haben sich für eine Umfrage mit dem Titel {SURVEYNAME} angemeldet.
+
+Um an dieser Umfrage teilzunehmen, klicken Sie bitte auf den folgenden Link.
+
+{SURVEYURL}
+
+Wenn Sie irgendwelche Fragen zu dieser Umfrage haben oder wenn Sie sich _nicht_ für diese Umfrage angemeldet haben und sie glauben, dass Ihnen diese E-Mail irrtümlicherweise zugeschickt worden ist, kontaktieren Sie bitte {ADMINNAME} unter {ADMINEMAIL}.]]></surveyls_email_register>
+    <surveyls_email_confirm_subj><![CDATA[Bestätigung für die Teilnahme an unserer Umfrage]]></surveyls_email_confirm_subj>
+    <surveyls_email_confirm><![CDATA[Hallo {FIRSTNAME},
+
+Vielen Dank für die Teilnahme an der Umfrage mit dem Titel {SURVEYNAME}. Ihre Antworten wurden bei uns gespeichert.
+
+Wenn Sie irgendwelche Fragen zu dieser E-Mail haben, kontaktieren Sie bitte {ADMINNAME} unter {ADMINEMAIL}.
+
+Mit freundlichen Grüßen,
+
+{ADMINNAME}]]></surveyls_email_confirm>
+    <surveyls_dateformat><![CDATA[1]]></surveyls_dateformat>
+    <email_admin_notification_subj><![CDATA[Antwortabsendung für Umfrage {SURVEYNAME}]]></email_admin_notification_subj>
+    <email_admin_notification><![CDATA[Hallo,
+
+Eine neue Antwort wurde für die Umfrage '{SURVEYNAME}' abgegeben.
+
+Klicken Sie auf den folgenden Link um die Umfrage neu zu laden:
+{RELOADURL}
+
+Klicken Sie auf den folgenden Link um den Antwortdatensatz anzusehen:
+{VIEWRESPONSEURL}
+
+Klicken Sie auf den folgenden Link um den Antwortdatensatz zu bearbeiten:
+{EDITRESPONSEURL}
+
+Um die Statistik zu sehen, klicken Sie hier:
+{STATISTICSURL}]]></email_admin_notification>
+    <email_admin_responses_subj><![CDATA[Antwortabsendung für Umfrage {SURVEYNAME} mit Ergebnissen]]></email_admin_responses_subj>
+    <email_admin_responses><![CDATA[Hallo,
+
+Eine neue Antwort wurde für die Umfrage '{SURVEYNAME}' abgegeben.
+
+Klicken Sie auf den folgenden Link um die Umfrage neu zu laden:
+{RELOADURL}
+
+Klicken Sie auf den folgenden Link um den Antwortdatensatz anzusehen:
+{VIEWRESPONSEURL}
+
+Klicken Sie auf den folgenden Link um den Antwortdatensatz zu bearbeiten:
+{EDITRESPONSEURL}
+
+Um die Statistik zu sehen, klicken Sie hier:
+{STATISTICSURL}
+
+
+Die folgenden Antworten wurden vom Teilnehmer gegeben:
+{ANSWERTABLE}]]></email_admin_responses>
+    <surveyls_numberformat><![CDATA[0]]></surveyls_numberformat>
+   </row>
+  </rows>
+ </surveys_languagesettings>
+</document>
