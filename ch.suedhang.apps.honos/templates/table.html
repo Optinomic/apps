@@ -1,5 +1,56 @@
 include(../lib/html/optinomic/page/start.m4)
 <p>TABLE: IN Entwicklung</p>
+<div ng-repeat="r in d.honos.responses">
+    <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div>
+            <p class="md-caption">{{r.datum | date}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.Zeitpunkt}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.Summe}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H1}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H2}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H3}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H4}}</p>
+        </div>
+        <div>
+            <p class="md-caption"> {{r.H5}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H6}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H7}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H8}}
+                <br>{{r.H8_text}}
+        </div>
+        <div>
+            <p class="md-caption">{{r.H9}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H10}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H11}}</p>
+        </div>
+        <div>
+            <p class="md-caption">{{r.H12}}</p>
+        </div>
+    </div>
+</div>
+<hr>
 <div ng-init="d.navigator = 0">
     <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">

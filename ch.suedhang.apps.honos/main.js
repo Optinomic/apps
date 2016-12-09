@@ -120,8 +120,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                     mz = 'Verlauf';
                 };
 
-                resp_obj.Zeitpunkt = mz;
-                resp_obj.Summe = calc.sum_score.sum_total;
+                resp_obj.zeitpunkt = mz;
+                resp_obj.summe = calc.sum_score.sum_total;
 
 
                 resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
@@ -145,7 +145,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         });
 
-
+        // Sort Full-Table
+        dataService.sortOn(honos, 'datum', false, false);
         $scope.d.honos = honos;
 
     };
