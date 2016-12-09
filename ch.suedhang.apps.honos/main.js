@@ -91,11 +91,11 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 resp_obj.Zeitpunkt = "Verlauf";
                 resp_obj.Summe = calc.sum_score.sum_total;
-                resp_obj.H1 = resp.entity.data.response['H1[402V01]'];
-                resp_obj.H2 = resp.entity.data.response['H1[402V02]'];
+                resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
+                resp_obj.H2 = parseInt(resp.entity.data.response['H1[402V02]']);
                 resp_obj.H3 = null;
                 resp_obj.H4 = null;
-                resp_obj.H5 = resp.entity.data.response['H1[402V05]'];
+                resp_obj.H5 = parseInt(resp.entity.data.response['H1[402V05]']);
                 resp_obj.H6 = null;
                 resp_obj.H7 = null;
                 resp_obj.H8 = null;
@@ -109,32 +109,32 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             } else {
 
                 var mz = 'Unbekannt';
-                if (resp.entity.data.response.q401V04 === 1) {
+                if (resp.entity.data.response.q401V04 === '1') {
                     mz = 'Eintritt';
                 };
-                if (resp.entity.data.response.q401V04 === 2) {
+                if (resp.entity.data.response.q401V04 === '2') {
                     mz = 'Austritt';
                 };
-                if (resp.entity.data.response.q401V04 === 2) {
+                if (resp.entity.data.response.q401V04 === '3') {
                     mz = 'Verlauf';
                 };
 
                 resp_obj.Zeitpunkt = mz;
                 resp_obj.Summe = null;
 
-                resp_obj.H1 = resp.entity.data.response['H1[402V01]'];
-                resp_obj.H2 = resp.entity.data.response['H1[402V02]'];
-                resp_obj.H3 = resp.entity.data.response['H1[402V03]'];
-                resp_obj.H4 = resp.entity.data.response['H1[402V04]'];
-                resp_obj.H5 = resp.entity.data.response['H1[402V05]'];
-                resp_obj.H6 = resp.entity.data.response['H1[402V06]'];
-                resp_obj.H7 = resp.entity.data.response['H1[402V07]'];
-                resp_obj.H8 = resp.entity.data.response['H1[402V08]'];
+                resp_obj.H1 = parseInt(resp.entity.data.response['H1[402V01]']);
+                resp_obj.H2 = parseInt(resp.entity.data.response['H1[402V02]']);
+                resp_obj.H3 = parseInt(resp.entity.data.response['H1[402V03]']);
+                resp_obj.H4 = parseInt(resp.entity.data.response['H1[402V04]']);
+                resp_obj.H5 = parseInt(resp.entity.data.response['H1[402V05]']);
+                resp_obj.H6 = parseInt(resp.entity.data.response['H1[402V06]']);
+                resp_obj.H7 = parseInt(resp.entity.data.response['H1[402V07]']);
+                resp_obj.H8 = parseInt(resp.entity.data.response['H1[402V08]']);
                 resp_obj.H8_text = resp.entity.data.response['q402V09'];
-                resp_obj.H9 = resp.entity.data.response['H2[402V11]'];
-                resp_obj.H10 = resp.entity.data.response['H2[402V12]'];
-                resp_obj.H11 = resp.entity.data.response['H2[402V13]'];
-                resp_obj.H12 = resp.entity.data.response['H2[402V14]'];
+                resp_obj.H9 = parseInt(resp.entity.data.response['H2[402V11]']);
+                resp_obj.H10 = parseInt(resp.entity.data.response['H2[402V12]']);
+                resp_obj.H11 = parseInt(resp.entity.data.response['H2[402V13]']);
+                resp_obj.H12 = parseInt(resp.entity.data.response['H2[402V14]']);
 
             };
 
