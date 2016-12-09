@@ -2,7 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <p>TABLE: IN Entwicklung</p>
 <div ng-repeat="r in d.honos.responses">
     <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-        <div flex="5">
+        <div flex="10">
             <p class="md-caption">{{r.datum | date}}</p>
         </div>
         <div flex="10">
@@ -11,48 +11,50 @@ include(../lib/html/optinomic/page/start.m4)
         <div flex="5">
             <p class="md-caption">{{r.summe}}</p>
         </div>
-        <div flex="80" ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-            <div flex>
-                <p class="md-caption">{{r.H1}}</p>
+        <div flex="75">
+            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+                <div flex>
+                    <p class="md-caption">{{r.H1}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H2}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H3}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H4}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption"> {{r.H5}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H6}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H7}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H8}}
+                        <br>{{r.H8_text}}
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H9}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H10}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H11}}</p>
+                </div>
+                <div flex>
+                    <p class="md-caption">{{r.H12}}</p>
+                </div>
             </div>
-            <div flex>
-                <p class="md-caption">{{r.H2}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H3}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H4}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption"> {{r.H5}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H6}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H7}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H8}}
-                    <br>{{r.H8_text}}
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H9}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H10}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H11}}</p>
-            </div>
-            <div flex>
-                <p class="md-caption">{{r.H12}}</p>
-            </div>
-        </div>
-        <div flex="80" ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-            <div flex>
-                <p class="md-caption">{{r.dropout.dropout_raeson}}</p>
+            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+                <div flex>
+                    <p class="md-caption">{{r.dropout.dropout_raeson}}</p>
+                </div>
             </div>
         </div>
     </div>
