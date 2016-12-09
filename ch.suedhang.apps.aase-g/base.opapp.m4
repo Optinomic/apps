@@ -6,7 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Einschätzung von 20 Situationen auf ihre Versuchung bzw. der Zuversicht, der Hauptproblemsubstanz widerstehen zu können.
+Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren.
 
 [developer]
 first_name = Beat
@@ -20,6 +20,9 @@ website = http://www.optinomic.com/
 
 [template simple_score 4 4]
 include(templates/score.html)
+
+[template score 4 4]
+include(templates/score_scales.html)
 
 [template data_export_admin 6 7]
 include(templates/export.html)
