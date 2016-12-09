@@ -21,7 +21,7 @@ website = http://www.optinomic.com/
 
 
 [template chart_tscore 6 10]
-include(templates/tscore.html)
+include(templates/dev.html)
 
 [template data_survey_responses 6 8]
 include(templates/data.html)
@@ -73,8 +73,8 @@ overdue = ignore
 description = BSCL - ANQ
 survey = bscl_anq
 
-[calculation get_results javascript]
-include(calculations/scores.js)
+[calculation scores_calculation javascript]
+include(calculations/bscl_patient_calc.js)
 
 
 [sql_init]
