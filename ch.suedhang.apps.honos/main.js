@@ -35,6 +35,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
                 // Run App-Functions:
+                $scope.setTableView();
                 // $scope.setDataView();
                 // $scope.setTimelineChartOptions();
                 // $scope.setExport();
@@ -51,6 +52,100 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         });
     };
     $scope.loadMainData();
+
+
+
+
+    // -----------------------------------
+    // Table: View
+    // -----------------------------------
+
+    $scope.setTableView = function() {
+
+        var survey_responses = $scope.d.dataMain.survey_responses;
+
+        var honos = {
+            "responses": []
+        };
+
+
+
+        survey_responses.forEach(function(resp, myRespID) {
+
+            resp_obj = {};
+
+            resp_obj.datum = resp.entity.data.response.q402V00;
+
+            var calculation = null;
+            if ("calculations" in resp) {
+                var calc = resp.calculations["0"].calculation_result;
+            };
+
+            var is_verlauf = false;
+
+
+            if (resp.event.survey_name === "HoNOS Verlauf") {
+                is_verlauf = true;
+
+                resp_obj.Zeitpunkt = "Verlauf";
+                resp_obj.Summe = calc.sum_score.sum_total;
+                resp_obj.H1 = resp.entity.data.response['H1[402V01]'];
+                resp_obj.H2 = resp.entity.data.response['H1[402V02]'];
+                resp_obj.H3 = null;
+                resp_obj.H4 = null;
+                resp_obj.H5 = resp.entity.data.response['H1[402V05]'];
+                resp_obj.H6 = null;
+                resp_obj.H7 = null;
+                resp_obj.H8 = null;
+                resp_obj.H8_text = null;
+                resp_obj.H9 = null;
+                resp_obj.H10 = null;
+                resp_obj.H11 = null;
+                resp_obj.H12 = null;
+
+
+            } else {
+
+                var mz = 'Unbekannt';
+                if (resp.entity.data.response.q401V04 === 1) {
+                    mz = 'Eintritt';
+                };
+                if (resp.entity.data.response.q401V04 === 2) {
+                    mz = 'Austritt';
+                };
+                if (resp.entity.data.response.q401V04 === 2) {
+                    mz = 'Verlauf';
+                };
+
+                resp_obj.Zeitpunkt = mz;
+                resp_obj.Summe = null;
+
+                resp_obj.H1 = resp.entity.data.response['H1[402V01]'];
+                resp_obj.H2 = resp.entity.data.response['H1[402V02]'];
+                resp_obj.H3 = resp.entity.data.response['H1[402V03]'];
+                resp_obj.H4 = resp.entity.data.response['H1[402V04]'];
+                resp_obj.H5 = resp.entity.data.response['H1[402V05]'];
+                resp_obj.H6 = resp.entity.data.response['H1[402V06]'];
+                resp_obj.H7 = resp.entity.data.response['H1[402V07]'];
+                resp_obj.H8 = resp.entity.data.response['H1[402V08]'];
+                resp_obj.H8_text = resp.entity.data.response['q402V09'];
+                resp_obj.H9 = resp.entity.data.response['H2[402V11]'];
+                resp_obj.H10 = resp.entity.data.response['H2[402V12]'];
+                resp_obj.H11 = resp.entity.data.response['H2[402V13]'];
+                resp_obj.H12 = resp.entity.data.response['H2[402V14]'];
+
+            };
+
+
+            honos.responses.push(resp_obj);
+
+        });
+
+
+        $scope.d.honos = honos;
+
+    };
+
 
 
     // -----------------------------------
@@ -168,8 +263,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             $scope.d.timeline.options.focusField = 'H2[402V14]';
             $scope.d.timeline.options.title = $scope.d.timeline.options.focusField;
         };
-
-
     };
 
 
