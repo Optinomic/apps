@@ -72,7 +72,9 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         survey_responses.forEach(function(resp, myRespID) {
 
-            resp_obj = {};
+            console.log('resp', myRespID, resp);
+
+            var resp_obj = {};
 
             resp_obj.datum = resp.entity.data.response.q402V00;
 
