@@ -1,5 +1,98 @@
 include(../lib/html/optinomic/page/start.m4)
-<p>TABLE: IN Entwicklung</p>
+<div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+    <div flex="10">
+        <p class="md-caption">Datum</p>
+    </div>
+    <div flex="10">
+        <p class="md-caption">Zeitpunkt</p>
+    </div>
+    <div flex="5">
+        <p class="md-caption">Summe</p>
+    </div>
+    <div flex="75">
+        <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div flex>
+                <p class="md-caption">H1</p>
+                <md-tooltip md-direction="top">
+                    Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H2}}</p>
+                <md-tooltip md-direction="top">
+                    Absichtliche Selbstverletzung
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H3}}</p>
+                <md-tooltip md-direction="top">
+                    Problematischer Alkohol- oder Drogenkonsum
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H4}}</p>
+                <md-tooltip md-direction="top">
+                    Kognitive Probleme
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption"> {{r.H5}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme in Zusammenhang mit körperlicher Erkrankung
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H6}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H7}}</p>
+                <md-tooltip md-direction="top">
+                    Gedrückte Stimmung
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H8}}
+                    <br>{{r.H8_text}}
+                </p>
+                <md-tooltip md-direction="top">
+                    Andere psychische Probleme
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H9}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme mit Beziehung
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H10}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme mit alltäglichen Aktivitäten
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H11}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme durch die Wohnbedingungen
+                </md-tooltip>
+            </div>
+            <div flex>
+                <p class="md-caption">{{r.H12}}</p>
+                <md-tooltip md-direction="top">
+                    Probleme durch die Bedingungen in Beruf und Alltag
+                </md-tooltip>
+            </div>
+        </div>
+        <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div flex>
+                <p class="md-caption">{{r.dropout.dropout_raeson}}</p>
+            </div>
+        </div>
+    </div>
+</div>
 <div ng-repeat="r in d.honos.responses">
     <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
         <div flex="10">
