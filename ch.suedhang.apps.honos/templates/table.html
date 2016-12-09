@@ -1,5 +1,5 @@
 include(../lib/html/optinomic/page/start.m4)
-<div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+<div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
     <div flex="10">
         <p class="md-caption">Datum</p>
     </div>
@@ -10,7 +10,7 @@ include(../lib/html/optinomic/page/start.m4)
         <p class="md-caption">Summe</p>
     </div>
     <div flex="75">
-        <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
             <div flex>
                 <p class="md-caption">H1
                     <md-tooltip md-direction="top">
@@ -104,7 +104,7 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
 </div>
 <div ng-repeat="r in d.honos.responses" class="grid-border-top">
-    <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+    <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex="10">
             <p class="md-caption">{{r.datum | date}}</p>
         </div>
@@ -115,7 +115,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-caption">{{r.summe}}</p>
         </div>
         <div flex="75">
-            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
                     <p class="md-caption">{{r.H1}}</p>
                 </div>
@@ -154,167 +154,12 @@ include(../lib/html/optinomic/page/start.m4)
                     <p class="md-caption">{{r.H12}}</p>
                 </div>
             </div>
-            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div ng-if="!r.dropout.dropout" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
                     <p class="md-caption">{{r.dropout.dropout_raeson}}</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<hr>
-<div ng-init="d.navigator = 0">
-    <md-card>
-        <md-card-title style="background-color: #424242; color: #FAFAFA">
-            <md-card-title-text>
-                <span class="md-headline">
-                    {{d.dataMain.apps.current.name}}
-                </span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content layout-margin>
-            <div ng-show="have_data" class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="t_c">
-                        <p>Verlauf Summenscore (&sum;)</p>
-                    </div>
-                </div>
-                <div ng-hide="daten_anzeigen" class="m_t">
-                    <div class="col-md-4 col-md-offset-4">
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <strong ng-hide="messzeitpunkt_eintritt_vorhanden">Eintritt noch nicht erfasst!</strong>
-                            <strong ng-hide="messzeitpunkt_austritt_vorhanden">Austritt noch nicht erfasst!</strong> Details werden angezeigt, sobald die Eintritts- und Austrittsmessung vorhanden ist.
-                        </div>
-                    </div>
-                </div>
-                <div ng-show="daten_anzeigen" class="m_t">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="beschriftung_klein">
-                                        <th style="width:75px;">Datum</th>
-                                        <th>Zeitpunkt</th>
-                                        <th>Summe (<small>&sum;</small>)</th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Überaktives, aggressives, Unruhe stiftendes oder agitiertes Verhalten'">
-			                                    H1
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Absichtliche Selbstverletzung'">
-			                                    H2
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Problematischer Alkohol- oder Drogenkonsum'">
-			                                    H3
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Kognitive Probleme'">
-			                                    H4
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme in Zusammenhang mit körperlicher Erkrankung'">
-			                                    H5
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung'">
-			                                    H6
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Gedrückte Stimmung'">
-			                                    H7
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Andere psychische Probleme'">
-			                                    H8
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme mit Beziehung'">
-			                                    H9
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme mit alltäglichen Aktivitäten'">
-			                                    H10
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme durch die Wohnbedingungen'">
-			                                    H11
-			                                </a>
-                                        </th>
-                                        <th>
-                                            <a href data-animation="am-flip-x" bs-tooltip="'Probleme durch die Bedingungen in Beruf und Alltag'">
-			                                    H12
-			                                </a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="beschriftung_klein" ng-repeat="result in HoNOS | orderBy:variable.order" style="height:48px;">
-                                        <th class="t_l">{{result.label.results[0].datum}}</th>
-                                        <th class="t_l">{{result.label.results[0].messzeitpunkt}}</th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_c">
-                                            <strong>{{result.label.results[0].sum_score}}</strong>
-                                        </th>
-                                        <th ng-show="result.dropout_code_vorhanden" class="t_c">
-                                            <strong>Dropout</strong>
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][0].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][1].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][2].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][3].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][4].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][5].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][6].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][7].sum_score}}
-                                            <br> {{result.label.results[0][7].other}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][8].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][9].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][10].sum_score}}
-                                        </th>
-                                        <th ng-hide="result.dropout_code_vorhanden" class="t_l">
-                                            {{result.label.results[0][11].sum_score}}
-                                        </th>
-                                        <th colspan="12" ng-show="result.dropout_code_vorhanden" class="t_l">{{result.dropout_code}}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
 </div>
 include(../lib/html/optinomic/page/end.m4)
