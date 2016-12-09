@@ -72,7 +72,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         survey_responses.forEach(function(resp, myRespID) {
 
-            console.log('resp', myRespID, resp);
 
             var resp_obj = {};
 
@@ -82,6 +81,8 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             if ("calculations" in resp) {
                 var calc = resp.calculations["0"].calculation_result;
             };
+
+            console.log('resp', myRespID, calc);
 
             var is_verlauf = false;
 
