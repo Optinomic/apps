@@ -1,6 +1,5 @@
 function main(responses) {
 
-
     var calc = {};
 
 
@@ -11,7 +10,7 @@ function main(responses) {
 
     calc.result_types = ["sum_score", "scale_score", "z_score"];
 
-    calc.result_array = calc.result_array = [{
+    calc.result_array = [{
         "id": 0,
         "description": "GSI (Global Severity Index)",
         "sub_left": "GSI (Global Severity Index)",
@@ -114,7 +113,7 @@ function main(responses) {
             value = value.replace(/ö/g, 'oe');
             value = value.replace(/ü/g, 'ue');
             value = value.replace(/ß/g, 'ss');
-            value = value.replace(/ /g, '-');
+            value = value.replace(/ /g, '_');
             value = value.replace(/\./g, '');
             value = value.replace(/,/g, '');
             value = value.replace(/\(/g, '');
@@ -279,16 +278,11 @@ function main(responses) {
                     mz.mz_text = 'Eintritt - EP';
                 };
 
-                console.log('MZ:',
-                    my_messzeitpunkt, my_eintrittsort, mz);
-
-
             };
 
 
             // Create 'all_results' Object
             var all_results_obj = calc.create_all_results(d.result_array);
-            console.log('all_results_obj', all_results_obj);
             d.all_results = all_results_obj.all_results;
 
             // Store Definitions
@@ -351,6 +345,5 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
-
 
 };
