@@ -80,15 +80,13 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
             var calculation = null;
             if ("calculations" in resp) {
                 var calc = resp.calculations["0"].calculation_result;
+                resp_obj.dropout = calc.dropout;
             };
+
 
             console.log('resp', myRespID, calc);
 
-            var is_verlauf = false;
-
-
             if (resp.event.survey_name === "HoNOS Verlauf") {
-                is_verlauf = true;
 
                 resp_obj.zeitpunkt = "Verlauf";
                 resp_obj.summe = null;
