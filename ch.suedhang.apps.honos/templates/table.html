@@ -18,69 +18,67 @@ include(../lib/html/optinomic/page/start.m4)
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H2}}</p>
+                <p class="md-caption">H2</p>
                 <md-tooltip md-direction="top">
                     Absichtliche Selbstverletzung
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H3}}</p>
+                <p class="md-caption">H3</p>
                 <md-tooltip md-direction="top">
                     Problematischer Alkohol- oder Drogenkonsum
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H4}}</p>
+                <p class="md-caption">H4</p>
                 <md-tooltip md-direction="top">
                     Kognitive Probleme
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption"> {{r.H5}}</p>
+                <p class="md-caption">H5</p>
                 <md-tooltip md-direction="top">
                     Probleme in Zusammenhang mit körperlicher Erkrankung
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H6}}</p>
+                <p class="md-caption">H6</p>
                 <md-tooltip md-direction="top">
                     Probleme in Zusammenhang mit Halluzinationen und Wahnvorstellung
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H7}}</p>
+                <p class="md-caption">H7</p>
                 <md-tooltip md-direction="top">
                     Gedrückte Stimmung
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H8}}
-                    <br>{{r.H8_text}}
-                </p>
+                <p class="md-caption">H8</p>
                 <md-tooltip md-direction="top">
                     Andere psychische Probleme
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H9}}</p>
+                <p class="md-caption">H9</p>
                 <md-tooltip md-direction="top">
                     Probleme mit Beziehung
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H10}}</p>
+                <p class="md-caption">H10</p>
                 <md-tooltip md-direction="top">
                     Probleme mit alltäglichen Aktivitäten
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H11}}</p>
+                <p class="md-caption">H11</p>
                 <md-tooltip md-direction="top">
                     Probleme durch die Wohnbedingungen
                 </md-tooltip>
             </div>
             <div flex>
-                <p class="md-caption">{{r.H12}}</p>
+                <p class="md-caption">H12</p>
                 <md-tooltip md-direction="top">
                     Probleme durch die Bedingungen in Beruf und Alltag
                 </md-tooltip>
@@ -93,7 +91,7 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
 </div>
-<div ng-repeat="r in d.honos.responses">
+<div ng-repeat="r in d.honos.responses" class="grid-border-top">
     <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
         <div flex="10">
             <p class="md-caption">{{r.datum | date}}</p>
