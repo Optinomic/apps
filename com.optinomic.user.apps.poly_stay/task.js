@@ -310,8 +310,8 @@ function main(token) {
     };
 
 
-    function finish() {
-        console.log('---> Finish', log);
+    function finish(input) {
+        console.log('---> Finish', input);
     };
 
 
@@ -335,6 +335,8 @@ function main(token) {
             getStays(current_patient.id).then(function(stay_json) {
                 var stays = JSON.parse(stay_json);
                 log.count.stays = log.count.stays + stays.length;
+
+                var stays_anz = stays.length;
                 // actions.total = actions.total + stays.length;
 
                 for (var sID = 0; sID < stays.length; sID++) {
@@ -345,27 +347,32 @@ function main(token) {
 
                     // actions.count = actions.count + 1;
 
-
+                    var bel_array = []
+                    bel_array.push(stay.annotation_obj);
                     // console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
+                        bel_array.push(bel);
+                        if (checkDone(stays_anz, actions.count)) {
+                            finish(bel_array);
+                        };
 
-                        writeBelegung(bel).then(function(annotation_json) {
-                            var annotation = JSON.parse(annotation_json);
-
-                            console.log('(✓) annotation-DATA, ', annotation);
-
-                            // if (checkDone(actions.total, actions.count)) {
-                            //     finish();
-                            // };
-
-                            // console.log('(✓) BEL-DATA, ', bel, log);
-
-                        }).then(null, function(error) {
-                            console.log('(!) ANNOTATION-ERROR, ', error);
-                        });
+                        //    writeBelegung(bel).then(function(annotation_json) {
+                        //        var annotation = JSON.parse(annotation_json);
+                        //    
+                        //        console.log('(✓) annotation-DATA, ', annotation);
+                        //    
+                        //        // if (checkDone(stays_anz, actions.count)) {
+                        //        //     finish();
+                        //        // };
+                        //    
+                        //        // console.log('(✓) BEL-DATA, ', bel, log);
+                        //    
+                        //    }).then(null, function(error) {
+                        //        console.log('(!) ANNOTATION-ERROR, ', error);
+                        //    });
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
