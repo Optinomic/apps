@@ -2,7 +2,7 @@ include(tasks/task_start.js)
 
 // Currently on STAY.
 var patient_filters = {
-    "in_stay": "False"
+    "in_stay": null
 };
 
 include(tasks/task_all.js)
