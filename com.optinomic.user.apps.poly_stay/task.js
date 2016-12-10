@@ -17,7 +17,7 @@ function main(token) {
             "start": performance.now(),
             "end": null,
             "duration": null
-        }
+        },
         "count": {
             "patients": 0,
             "stays": 0,
