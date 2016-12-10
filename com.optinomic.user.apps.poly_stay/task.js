@@ -295,9 +295,15 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
-            // console.log('---writeBelegung', annot_obj);
+            var patient_id = 1;
+            patient_id = annot_obj.aktuell_letzter.bel_selector.optinomic_pid;
 
+            var apiStr = '/patients/' + patient_id + '/modules/com.optinomic.init.poly_stay/annotations';
+            var body = {
+                "value": json_value
+            };
 
+            console.log('-> writeBelegung', apiStr);
 
 
             resolve(JSON.stringify(annot_obj));
