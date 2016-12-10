@@ -267,7 +267,7 @@ function main(token) {
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
         log.count.patients = patients.length;
-        actions.total = actions.total + patients.length;
+        //actions.total = actions.total + patients.length;
 
 
         for (var pID = 0; pID < patients.length; pID++) {
@@ -275,21 +275,22 @@ function main(token) {
             var current_patient = patients[pID];
             var patient_id = parseInt(current_patient.id);
             log.done.patients.push(patient_id);
-            actions.count = actions.count + 1;
+            // actions.count = actions.count + 1;
 
             // console.log('(+)', pID, patient_id, current_patient.data.last_name);
 
             getStays(current_patient.id).then(function(stay_json) {
                 var stays = JSON.parse(stay_json);
                 log.count.stays = log.count.stays + stays.length;
-                actions.total = actions.total + stays.length;
+                // actions.total = actions.total + stays.length;
 
                 for (var sID = 0; sID < stays.length; sID++) {
 
                     var current_stay = stays[sID];
                     var stay_id = parseInt(current_stay.id);
                     log.done.stays.push(stay_id);
-                    actions.count = actions.count + 1;
+
+                    // actions.count = actions.count + 1;
 
 
                     // console.log('---current_stay', current_stay);
@@ -298,9 +299,9 @@ function main(token) {
                         var bel = JSON.parse(bel_json);
 
 
-                        if (checkDone(actions.total, actions.count)) {
-                            finish();
-                        };
+                        // if (checkDone(actions.total, actions.count)) {
+                        //     finish();
+                        // };
 
                         // console.log('(✓) BEL-DATA, ', bel, log);
 
