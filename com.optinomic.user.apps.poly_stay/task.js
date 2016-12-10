@@ -223,9 +223,13 @@ function main(token) {
 
             helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
-                var bel_response = JSON.parse(resp_bel.responseText);
+                console.log('resp_bel', resp_bel);
 
-
+                if (resp_bel) {
+                    var bel_response = JSON.parse(resp_bel.responseText);
+                } else {
+                    var bel_response = null;
+                };
 
                 annotation_obj = {
                     "bel_selector": belegung.current,
@@ -233,18 +237,12 @@ function main(token) {
                 };
 
 
-
                 process.stdout.write('\033[0G');
                 process.stdout.write(JSON.stringify(bel_response));
 
                 resolve(JSON.stringify(annotation_obj));
 
-
-
             });
-
-
-
 
         });
     };
