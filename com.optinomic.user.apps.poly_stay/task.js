@@ -313,7 +313,10 @@ function main(token) {
 
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
+        var patients_anz = patients.length;
+        var patients_count = 0;
         log.count.patients = patients.length;
+
         //actions.total = actions.total + patients.length;
 
 
@@ -342,8 +345,8 @@ function main(token) {
                     log.done.stays.push(stay_id);
 
 
-                    var bel_array = []
-
+                    var bel_array = [];
+                    var war_einmal = {};
 
 
                     // console.log('---current_stay', current_stay);
@@ -353,7 +356,9 @@ function main(token) {
                         var bel = JSON.parse(bel_json);
 
                         bel_array.push(bel);
-                        if (checkDone(stays_anz, stays_count)) {
+                        war_einmal.
+
+                        if(checkDone(stays_anz, stays_count)) {
 
 
                             var annotation_obj = {
@@ -363,13 +368,15 @@ function main(token) {
 
 
                             writeBelegung(annotation_obj).then(function(annotation_json) {
+                                patients_count = patients_count + 1;
+
                                 var annotation = JSON.parse(annotation_json);
 
                                 console.log('(✓) annotation-DATA, ', annotation);
 
-                                // if (checkDone(stays_anz, actions.count)) {
-                                //     finish();
-                                // };
+                                if (checkDone(patients_anz, patients_count)) {
+                                    console.log('(✓) FINISHED, ', log);
+                                };
 
                                 // console.log('(✓) BEL-DATA, ', bel, log);
 
