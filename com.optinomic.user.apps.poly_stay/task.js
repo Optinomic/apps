@@ -300,13 +300,13 @@ function main(token) {
 
                 var apiStr = '/patients/' + patient_id + '/modules/com.optinomic.init.poly_stay/annotations';
                 var body = {
-                    "value": annot_obj
+                    "value": JSON.stringify(annot_obj)
                 };
 
-                console.log('writeBelegung:', patient_id, body.value);
+                // console.log('writeBelegung:', patient_id, body.value);
 
                 helpers.callAPI("PUT", apiStr, null, body, function(resp_write) {
-                    console.log(' -> write ', patient_id, JSON.parse(resp_bel.resp_write));
+                    console.log(' -> write ', patient_id, JSON.parse(resp_write.responseText));
                     resolve(JSON.stringify(annot_obj));
                 });
 
