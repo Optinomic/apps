@@ -112,14 +112,16 @@ function main(token) {
         fn(resolve, reject);
     };
 
-    function checkDone(total, count) {
+    function checkDone(name, total, count) {
         var return_boolean = false;
-        var log_text = '(...) Processing: ' + count + ' / ' + total
+        var log_text = '( ' + count + ' / ' + total + ') ' + name + ' | ';
 
 
         if (count >= total) {
             return_boolean = true;
-            log_text = '( ✓ ) Done: ' + count + ' / ' + total
+            log_text = log_text + 'done (✓)';
+        } else {
+            log_text = log_text + 'running...';
         };
 
         process.stdout.write('\033[0G');
@@ -304,6 +306,23 @@ function main(token) {
     };
 
 
+    function writeLog(log) {
+
+        return new Promise(function(resolve, reject) {
+
+
+            // console.log('---writeBelegung', annot_obj);
+
+
+
+
+            resolve(JSON.stringify(log));
+
+        });
+    };
+
+
+
     function finish(input) {
         console.log('---> Finish', input);
     };
@@ -357,7 +376,7 @@ function main(token) {
 
                         bel_array.push(bel);
 
-                        if (checkDone(stays_anz, stays_count)) {
+                        if (checkDone('Stays', stays_anz, stays_count)) {
 
 
                             var annotation_obj = {
@@ -371,10 +390,21 @@ function main(token) {
 
                                 var annotation = JSON.parse(annotation_json);
 
-                                console.log('(✓) annotation-DATA, ', annotation);
+                                // console.log('(✓) annotation-DATA, ', annotation);
 
-                                if (checkDone(patients_anz, patients_count)) {
-                                    console.log('(✓) FINISHED, ', log);
+                                if (checkDone('Patients', patients_anz, patients_count)) {
+
+
+                                    writeLog(log).then(function(log_json) {
+
+                                        console.log('(✓) FINISHED! ');
+
+
+                                    }).then(null, function(error) {
+                                        console.log('(!) ANNOTATION-ERROR, ', error);
+                                    });
+
+
                                 };
 
                                 // console.log('(✓) BEL-DATA, ', bel, log);
