@@ -107,6 +107,11 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
     };
 
 
+    $scope.formatNumber = function(i) {
+        return Math.round(i * 100) / 100;
+    }
+
+
     $scope.getPatientList = function(full) {
         // Init - Params
 

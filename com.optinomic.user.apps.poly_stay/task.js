@@ -1,39 +1,5 @@
 function main(token) {
 
-    //    Run this thing:
-    //    cd /var/therapyserver/
-    //    therapy-server-components task-runner /var/therapyserver/config/config.json com.optinomic.apps.poly_stay get_belegung
-
-
-    // Currently on STAY.
-    var patient_filters = {
-        "in_stay": "True"
-    };
-
-
-    var log = {
-        "date": new Date(),
-        "timings": {
-            "start": new Date(),
-            "end": null
-        },
-        "count": {
-            "patients": 0,
-            "stays": 0
-        },
-        "done": {
-            "patients": [],
-            "stays": []
-        }
-    };
-    log.patient_filters = patient_filters;
-
-    var actions = {
-        "total": 0,
-        "count": 0
-    };
-
-
 
     function Promise(fn) {
         var state = 'pending';
@@ -130,6 +96,44 @@ function main(token) {
 
         return return_boolean;
     };
+
+
+    //    Run this thing:
+    //    cd /var/therapyserver/
+    //    therapy-server-components task-runner /var/therapyserver/config/config.json com.optinomic.apps.poly_stay get_belegung
+
+
+    // Currently on STAY.
+    var patient_filters = {
+        "in_stay": "True"
+    };
+
+
+    var log = {
+        "date": new Date(),
+        "timings": {
+            "start": new Date(),
+            "end": null
+        },
+        "count": {
+            "patients": 0,
+            "stays": 0
+        },
+        "done": {
+            "patients": [],
+            "stays": []
+        }
+    };
+    log.patient_filters = patient_filters;
+
+    var actions = {
+        "total": 0,
+        "count": 0
+    };
+
+
+
+
 
 
     function getStays(patient_id) {

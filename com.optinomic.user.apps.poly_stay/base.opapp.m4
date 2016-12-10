@@ -1,6 +1,6 @@
 [module]
 id = com.optinomic.apps.poly_stay
-name = Stammdaten (Fälle)
+name = Stammdaten (Belegung)
 short_description = Zusätzliche Fall-Stammdaten aus Polypoint.
 version = include(VERSION)
 type = user
@@ -31,5 +31,8 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
-[task get_belegung javascript]
-include(task.js)
+[task get_belegung_current javascript]
+include(/tasks/run_current_patients.m4)
+
+[task get_belegung_all javascript]
+include(/tasks/run_all_patients.m4)

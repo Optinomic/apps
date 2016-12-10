@@ -14,7 +14,11 @@ include(../lib/html/optinomic/page/start.m4)
                 <h3 class="md-caption">{{log.date | date}}</h3>
             </div>
             <div flex>
-                <p class="md-caption">{{Math.round(log.timings.duration_min * 100)/100}}</p>
+                <p ng-if="!logs.patient_filters.in_stay" class="md-caption">Alle Patienten</p>
+                <p ng-if="logs.patient_filters.in_stay" class="md-caption">Aktuelle Patienten</p>
+            </div>
+            <div flex>
+                <p class="md-caption">{{formatNumber(log.timings.duration_min)}}</p>
             </div>
             <div flex>
                 <p class="md-caption">{{log.done.patients.length}} / {{log.done.stays.length}}</p>
