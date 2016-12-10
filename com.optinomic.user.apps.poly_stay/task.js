@@ -303,10 +303,10 @@ function main(token) {
                     "value": annot_obj
                 };
 
-                console.log('writeBelegung:', patient_id, body);
+                console.log('writeBelegung:', patient_id, body.value);
 
                 helpers.callAPI("PUT", apiStr, null, body, function(resp_write) {
-                    console.log(' -> write ', patient_id, resp_write);
+                    console.log(' -> write ', patient_id, JSON.parse(resp_bel.resp_write));
                     resolve(JSON.stringify(annot_obj));
                 });
 
