@@ -176,7 +176,6 @@ function main(token) {
             var polypoint_belegung = {};
 
 
-
             var belegung = {
                 "art": [{
                     "bel_id": 0,
@@ -236,6 +235,7 @@ function main(token) {
                 "bel_selector": belegung.current,
                 "bel_all": polypoint_belegung
             };
+
             resolve(JSON.stringify(annotation_obj));
 
         });
@@ -290,7 +290,7 @@ function main(token) {
                     actions.count = actions.count + 1;
 
 
-                    // console.log('---current_stay', current_stay);
+                    console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
