@@ -7,7 +7,7 @@ function main(token) {
 
     // Currently on STAY.
     var patient_filters = {
-        in_stay: "True"
+        "in_stay": "True"
     };
 
 
@@ -30,6 +30,7 @@ function main(token) {
             "annotiations": []
         }
     };
+    log.patient_filters = patient_filters;
 
     var actions = {
         "total": 0,
