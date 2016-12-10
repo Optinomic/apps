@@ -14,9 +14,8 @@ function main(token) {
     var log = {
         "date": new Date(),
         "timings": {
-            "start": performance.now(),
-            "end": null,
-            "duration": null
+            "start": new Date(),
+            "end": null
         },
         "count": {
             "patients": 0,
@@ -334,7 +333,7 @@ function main(token) {
             //  }
 
 
-            log.timings.end = performance.now();
+            log.timings.end = new Date();
             log.timings.duration = log.timings.end - log.timings.start;
             log.timings.duration_min = log.timings.duration / 1000 / 60;
 
