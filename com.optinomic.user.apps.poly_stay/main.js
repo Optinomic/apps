@@ -95,15 +95,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         var api_call = dataService.getModuleAnnotations();
 
         api_call.success(function(data) {
-            $scope.d.logs = data;
-
-            // $scope.d.belegung.current_stay = null;
-
-            // data.alle.forEach(function(stay, my_stay_index) {
-            //     if (parseInt(stay.bel_selector.optinomic_fid) === parseInt($scope.d.dataMain.params.stay_id)) {
-            //         $scope.d.belegung.selected = stay;
-            //     };
-            // });
+            $scope.d.logs = data.logs;
 
             console.log('(✓) getEntrys ', $scope.d.logs);
         });
