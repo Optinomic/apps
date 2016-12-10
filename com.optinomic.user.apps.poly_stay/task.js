@@ -293,18 +293,12 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
-            console.log('---writeBelegung', annot_obj);
+            // console.log('---writeBelegung', annot_obj);
 
 
-            var annotation_obj = {
-                "alle": null,
-                "aktuell_letzter": null,
-                "war_einmal": null,
-                "war_einmal_legende": null,
-                "annot_obj": annot_obj
-            };
 
-            resolve(JSON.stringify(annotation_obj));
+
+            resolve(JSON.stringify(annot_obj));
 
         });
     };
@@ -350,6 +344,8 @@ function main(token) {
 
                     var bel_array = []
 
+
+
                     // console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
@@ -358,23 +354,33 @@ function main(token) {
 
                         bel_array.push(bel);
                         if (checkDone(stays_anz, stays_count)) {
-                            finish(bel_array);
+
+
+                            var annotation_obj = {
+                                "alle": bel_array,
+                                "aktuell_letzter": bel_array[0]
+                            };
+
+
+                            writeBelegung(annotation_obj).then(function(annotation_json) {
+                                var annotation = JSON.parse(annotation_json);
+
+                                console.log('(✓) annotation-DATA, ', annotation);
+
+                                // if (checkDone(stays_anz, actions.count)) {
+                                //     finish();
+                                // };
+
+                                // console.log('(✓) BEL-DATA, ', bel, log);
+
+                            }).then(null, function(error) {
+                                console.log('(!) ANNOTATION-ERROR, ', error);
+                            });
+
+
                         };
 
-                        //    writeBelegung(bel).then(function(annotation_json) {
-                        //        var annotation = JSON.parse(annotation_json);
-                        //    
-                        //        console.log('(✓) annotation-DATA, ', annotation);
-                        //    
-                        //        // if (checkDone(stays_anz, actions.count)) {
-                        //        //     finish();
-                        //        // };
-                        //    
-                        //        // console.log('(✓) BEL-DATA, ', bel, log);
-                        //    
-                        //    }).then(null, function(error) {
-                        //        console.log('(!) ANNOTATION-ERROR, ', error);
-                        //    });
+
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
