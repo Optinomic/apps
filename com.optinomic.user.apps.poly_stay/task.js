@@ -113,7 +113,7 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
             var api_call = "/patients/" + patient_id + "/stays";
-            console.log('(?) api_call, ', api_call);
+            // console.log('(?) api_call, ', api_call);
 
             helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
                 var stay_response = JSON.parse(resp_stay.responseText);
@@ -269,7 +269,7 @@ function main(token) {
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
-                        process.stdout.write('(✓) BEL-DATA, ', bel, log);
+                        process.stdout.write('(✓) BEL-DATA: ' + patient_id + ' | ' + stay_id);
                         // console.log('(✓) BEL-DATA, ', bel, log);
 
                     }).then(null, function(error) {
