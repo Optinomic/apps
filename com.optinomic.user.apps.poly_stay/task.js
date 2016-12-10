@@ -325,30 +325,17 @@ function main(token) {
 
         return new Promise(function(resolve, reject) {
 
-
-            //  "timings": {
-            //      "start": performance.now(),
-            //      "end": null,
-            //      "duration": null
-            //  }
-
-
             log.timings.end = new Date();
             log.timings.duration = log.timings.end - log.timings.start;
             log.timings.duration_min = log.timings.duration / 1000 / 60;
 
-
-            // Get current array
-            // GET 
+            // Get current logs - array
             var apiStr = '/modules/com.optinomic.apps.poly_stay/annotations';
-
-            // console.log('writeBelegung:', patient_id, body.value);
-
             helpers.callAPI("GET", apiStr, null, null, function(resp_get_logs) {
                 var all_logs = JSON.parse(resp_get_logs.responseText);
 
 
-                // Speed up calls to hasOwnProperty
+                // Check isEmpty
                 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
                 function isEmpty(obj) {
@@ -383,9 +370,19 @@ function main(token) {
 
                 all_logs.logs.push(log);
 
-                console.log(' -> GET:', all_logs.logs.length);
 
-                resolve(JSON.stringify(log));
+                var body = {
+                    "value": JSON.stringify(all_logs)
+                };
+
+                // console.log('writeBelegung:', patient_id, body.value);
+
+                helpers.callAPI("PUT", apiStr, null, body, function(resp_put_logs) {
+                    console.log(' -> Done:', all_logs.logs.length);
+                    resolve(JSON.stringify(all_logs));
+                });
+
+
             });
 
         });
