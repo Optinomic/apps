@@ -337,6 +337,8 @@ function main(token) {
                 log.count.stays = log.count.stays + stays.length;
 
                 var stays_anz = stays.length;
+                var stays_count = 0;
+
                 // actions.total = actions.total + stays.length;
 
                 for (var sID = 0; sID < stays.length; sID++) {
@@ -345,17 +347,17 @@ function main(token) {
                     var stay_id = parseInt(current_stay.id);
                     log.done.stays.push(stay_id);
 
-                    // actions.count = actions.count + 1;
 
                     var bel_array = []
-                    bel_array.push(stay.annotation_obj);
+
                     // console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
+                        stays_count = stays_count + 1;
                         var bel = JSON.parse(bel_json);
 
                         bel_array.push(bel);
-                        if (checkDone(stays_anz, actions.count)) {
+                        if (checkDone(stays_anz, stays_count)) {
                             finish(bel_array);
                         };
 
