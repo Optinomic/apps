@@ -221,7 +221,7 @@ function main(token) {
             var api_call = "/data_sources/Polypoint/query";
 
 
-            helpers.callAPI("GET", api_call, body, null, function(resp_bel) {
+            helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
                 var bel_response = JSON.parse(resp_bel.responseText);
 
