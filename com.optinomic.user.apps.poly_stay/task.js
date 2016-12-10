@@ -13,6 +13,11 @@ function main(token) {
 
     var log = {
         "date": new Date(),
+        "timings": {
+            "start": performance.now(),
+            "end": null,
+            "duration": null
+        }
         "count": {
             "patients": 0,
             "stays": 0,
@@ -322,6 +327,18 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
+            //  "timings": {
+            //      "start": performance.now(),
+            //      "end": null,
+            //      "duration": null
+            //  }
+
+
+            log.timings.end = performance.now();
+            log.timings.duration = log.timings.end - log.timings.start;
+            log.timings.duration_min = log.timings.duration / 1000 / 60;
+
+
             // console.log('---writeBelegung', annot_obj);
 
 
@@ -334,9 +351,6 @@ function main(token) {
 
 
 
-    function finish(input) {
-        console.log('---> Finish', input);
-    };
 
 
     helpers.callAPI("GET", "/patients", patient_filters, null, function(resp) {
@@ -408,7 +422,7 @@ function main(token) {
 
                                     writeLog(log).then(function(log_json) {
 
-                                        console.log('(✓) FINISHED! ');
+                                        console.log('(✓) FINISHED! ', log);
 
 
                                     }).then(null, function(error) {
