@@ -14,7 +14,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <h3 class="md-caption">{{log.date | date}}</h3>
             </div>
             <div flex>
-                <p class="md-caption">{{getTaskArt(logs.patient_filters)}}</p>
+                <p class="md-caption">{{getTaskArt(log.patient_filters)}}</p>
             </div>
             <div flex>
                 <p class="md-caption">{{formatNumber(log.timings.duration_min)}}</p>
@@ -35,7 +35,8 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div style="margin-top: 30px;">
     <div>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div layout="row" layout-xs="row" layout-g
+t-xs="row" layout-align="space-between center">
             <div flex>
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
             </div>
