@@ -144,6 +144,8 @@ function main(token) {
                 for (var sID = 0; sID < stays.length; sID++) {
                     var stay = stays[sID];
 
+                    stay.patient_id = patient_id;
+
                     var cis_fid_str = stay.data.cis_fid.toString();
                     cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
 
@@ -247,6 +249,24 @@ function main(token) {
                     });
 
 
+                    belegung.current.optinomic_pid = my_stay.patient_id;
+                    belegung.current.optinomic_fid = my_stay.id;
+
+                    belegung.current.polypoint_paid = bel_response.rows[0].PAID;
+                    belegung.current.polypoint_pid = bel_response.rows[0].PID;
+                    belegung.current.polypoint_faid = bel_response.rows[0].FAID;
+                    belegung.current.polypoint_fid = bel_response.rows[0].FID;
+
+                    belegung.current.versicherungsnummer = bel_response.rows[0].VERSICHERUNGSNUMMER;
+                    belegung.current.eintritt = bel_response.rows[0].EINTRITT;
+                    belegung.current.eintritt_zeit = bel_response.rows[0].ZEITEINTRITT;
+                    belegung.current.austritt = bel_response.rows[0].AUSTRITT;
+                    belegung.current.austritt_zeit = bel_response.rows[0].ZEITAUSTRITT;
+                    belegung.current.org_current = bel_response.rows[0].ORG_CURRENT;
+
+                    belegung.current.phase = my_stay.data.phase;
+
+
                 } else {
                     var bel_response = null;
                 };
@@ -257,8 +277,8 @@ function main(token) {
                 };
 
 
-                process.stdout.write('\033[0G');
-                process.stdout.write(JSON.stringify(bel_response));
+                // process.stdout.write('\033[0G');
+                // process.stdout.write(JSON.stringify(bel_response));
 
                 resolve(JSON.stringify(annotation_obj));
 
