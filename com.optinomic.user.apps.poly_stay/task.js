@@ -27,6 +27,11 @@ function main(token) {
         }
     };
 
+    var actions = {
+        "total": 0,
+        "count": 0
+    };
+
 
 
     function Promise(fn) {
@@ -105,6 +110,22 @@ function main(token) {
         };
 
         fn(resolve, reject);
+    };
+
+    function checkDone(total, count) {
+        var return_boolean = false;
+        var log_text = '(...) Processing: ' + count + ' / ' + total
+
+
+        if (count >= total) {
+            return_boolean = true;
+            log_text = '( ✓ ) Done: ' + count + ' / ' + total
+        };
+
+        process.stdout.write('\033[0G');
+        process.stdout.write();
+
+        return return_boolean;
     };
 
 
@@ -234,7 +255,9 @@ function main(token) {
     };
 
 
-
+    function finish() {
+        console.log('---> Finish', log);
+    };
 
 
     helpers.callAPI("GET", "/patients", patient_filters, null, function(resp) {
@@ -242,6 +265,7 @@ function main(token) {
         var response = JSON.parse(resp.responseText);
         var patients = response.patients;
         log.count.patients = patients.length;
+        actions.total = actions.total + patients.length;
 
 
         for (var pID = 0; pID < patients.length; pID++) {
@@ -249,19 +273,21 @@ function main(token) {
             var current_patient = patients[pID];
             var patient_id = parseInt(current_patient.id);
             log.done.patients.push(patient_id);
-
+            actions.count = actions.count + 1;
 
             // console.log('(+)', pID, patient_id, current_patient.data.last_name);
 
             getStays(current_patient.id).then(function(stay_json) {
                 var stays = JSON.parse(stay_json);
                 log.count.stays = log.count.stays + stays.length;
+                actions.total = actions.total + stays.length;
 
                 for (var sID = 0; sID < stays.length; sID++) {
 
                     var current_stay = stays[sID];
                     var stay_id = parseInt(current_stay.id);
                     log.done.stays.push(stay_id);
+                    actions.count = actions.count + 1;
 
 
                     // console.log('---current_stay', current_stay);
@@ -269,8 +295,11 @@ function main(token) {
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
-                        process.stdout.write('\033[0G');
-                        process.stdout.write('(✓) BEL-DATA: ' + patient_id + ' | ' + stay_id);
+
+                        if (checkDone(actions.total, actions.count)) {
+                            finish();
+                        };
+
                         // console.log('(✓) BEL-DATA, ', bel, log);
 
                     }).then(null, function(error) {
