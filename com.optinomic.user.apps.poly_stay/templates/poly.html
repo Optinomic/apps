@@ -1,6 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <div style="margin-top: 30px;">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <div flex>
             <h3 class="md-headline">Logs</h3>
         </div>
@@ -35,8 +35,7 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div style="margin-top: 30px;">
     <div>
-        <div layout="row" layout-xs="row" layout-g
-t-xs="row" layout-align="space-between center">
+        <div layout="row" layout-xs="row" layout-g t-xs="row" layout-align="space-between center">
             <div flex>
                 <h3 class="md-headline">{{d.app.patients.data.length}} Patienten</h3>
             </div>
@@ -94,7 +93,15 @@ t-xs="row" layout-align="space-between center">
         </div>
     </div>
     <div style="margin-top: 96px;">
-        <md-button class="md-raised" ng-click="getPatientList(true)">Ausführen für alle Patienten (8-ung: Dauert ca. 10 Minuten)</md-button>
+        <p class="md-body-2">Manuelles ausführen:</p>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div flex>
+                <md-button class="md-raised md-primary" ng-click="getPatientList(false)">Aktuelle Patienten</md-button>
+            </div>
+            <div>
+                <md-button class="md-raised" ng-click="getPatientList(true)">Alle Patienten (8-ung!)</md-button>
+            </div>
+        </div>
     </div>
 </div>
 include(../lib/html/optinomic/page/end.m4)

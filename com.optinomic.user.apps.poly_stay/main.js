@@ -114,18 +114,18 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
     $scope.getTaskArt = function(filter) {
 
-        console.log('filter', filter);
-
+        // console.log('filter', filter);
         var return_str = 'Unbekannt';
-
 
         if ("in_stay" in filter) {
             if (filter.in_stay === "True") {
                 return_str = 'Aktuelle Patienten';
             } else {
-                return_str = 'Aktuelle Patienten';
+                return_str = 'Alle Patienten';
             };
         };
+
+        return return_str;
     };
 
 
