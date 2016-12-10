@@ -304,7 +304,7 @@ function main(token) {
                     "value": annot_obj
                 };
 
-                helpers.callAPI("PUT", apiStr, null, body, function(resp_bel) {
+                helpers.callAPI("PUT", apiStr, body, null, function(resp_write) {
                     console.log(' -> write ', patient_id);
                     resolve(JSON.stringify(annot_obj));
                 });
