@@ -217,35 +217,33 @@ function main(token) {
                 "format": "json"
             };
 
-            process.stdout.write('\033[0G');
-            process.stdout.write(JSON.stringify(body));
 
-            //  var api_call = "/data_sources/Polypoint/query";
-            //  
-            //  
-            //  helpers.callAPI("GET", api_call, body, null, function(resp_bel) {
-            //  
-            //      var bel_response = JSON.parse(resp_bel.responseText);
-            //  
-            //  
-            //  
-            //      annotation_obj = {
-            //          "bel_selector": belegung.current,
-            //          "bel_all": bel_response
-            //      };
-            //  
-            //  
-            //  
-            //      process.stdout.write('\033[0G');
-            //      process.stdout.write(JSON.stringify(bel_response));
-            //  
-            //      
-            //  
-            //  
-            //  });
+            var api_call = "/data_sources/Polypoint/query";
 
 
-            resolve(JSON.stringify(annotation_obj));
+            helpers.callAPI("GET", api_call, body, null, function(resp_bel) {
+
+                var bel_response = JSON.parse(resp_bel.responseText);
+
+
+
+                annotation_obj = {
+                    "bel_selector": belegung.current,
+                    "bel_all": bel_response
+                };
+
+
+
+                process.stdout.write('\033[0G');
+                process.stdout.write(JSON.stringify(bel_response));
+
+                resolve(JSON.stringify(annotation_obj));
+
+
+
+            });
+
+
 
 
         });
