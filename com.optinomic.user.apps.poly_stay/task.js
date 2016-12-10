@@ -205,6 +205,10 @@ function main(token) {
             belegung.current = belegung.art[0];
 
 
+            var annotation_obj = {
+                "bel_selector": belegung.current,
+                "bel_all": polypoint_belegung
+            };
 
 
             var body = {
@@ -222,19 +226,25 @@ function main(token) {
                 var bel_response = JSON.parse(resp_bel.responseText);
 
 
+
+                annotation_obj = {
+                    "bel_selector": belegung.current,
+                    "bel_all": bel_response
+                };
+
+
+
                 process.stdout.write('\033[0G');
                 process.stdout.write(JSON.stringify(bel_response));
+
+                resolve(JSON.stringify(annotation_obj));
+
 
             });
 
 
 
-            var annotation_obj = {
-                "bel_selector": belegung.current,
-                "bel_all": polypoint_belegung
-            };
 
-            resolve(JSON.stringify(annotation_obj));
 
         });
     };
