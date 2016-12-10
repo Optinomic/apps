@@ -5,16 +5,19 @@ include(../lib/html/optinomic/page/start.m4)
             <h3 class="md-headline">Logs</h3>
         </div>
         <div>
-            <p class="md-caption">Anzahl {{d.logs.length}}</p>
+            <p class="md-caption">Anzahl: {{d.logs.length}}</p>
         </div>
     </div>
     <div ng-init="log.show_details = false" ng-repeat="log in d.logs" class="grid-border-top">
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
             <div flex>
                 <h3 class="md-caption">{{log.date | date}}</h3>
             </div>
             <div flex>
-                <p class="md-caption">{{log.timings.duration_min}}</p>
+                <p class="md-caption">{{Math.round(log.timings.duration_min * 100)/100}}</p>
+            </div>
+            <div flex>
+                <p class="md-caption">{{log.done.patients.length}} / {{log.done.stays.length}}</p>
             </div>
             <div flex>
                 <md-button ng-if="!log.show_details" ng-click="log.show_details = true">Anzeigen</md-button>

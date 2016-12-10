@@ -19,15 +19,11 @@ function main(token) {
         },
         "count": {
             "patients": 0,
-            "stays": 0,
-            "bel_odbc": 0,
-            "annotiations": 0
+            "stays": 0
         },
         "done": {
             "patients": [],
-            "stays": [],
-            "bel_odbc": [],
-            "annotiations": []
+            "stays": []
         }
     };
     log.patient_filters = patient_filters;
