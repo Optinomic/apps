@@ -202,7 +202,6 @@ function main(token) {
                 }],
                 "current": {}
             };
-            belegung.current = belegung.art[0];
 
 
             var annotation_obj = {
@@ -223,10 +222,31 @@ function main(token) {
 
             helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
-                console.log('resp_bel', resp_bel);
+                // Default: Unknown
+                belegung.current = belegung.art[0];
 
                 if ((resp_bel.responseText !== null) && (resp_bel.responseText !== '')) {
                     var bel_response = JSON.parse(resp_bel.responseText);
+
+                    bel_response.rows.forEach(function(bel, my_bel_index) {
+                        if ((bel.ORG === "EAS") && (belegung.current.bel_id === 0)) {
+                            belegung.current = belegung.art[1];
+                        };
+                        if ((bel.ORG === "EAS") && (belegung.current.bel_id === 2)) {
+                            belegung.current = belegung.art[3];
+                        };
+                        if ((bel.ORG === "EP") && (belegung.current.bel_id === 0)) {
+                            belegung.current = belegung.art[2];
+                        };
+                        if ((bel.ORG === "EP") && (belegung.current.bel_id === 1)) {
+                            belegung.current = belegung.art[3];
+                        };
+                        if ((bel.ORG === "TK") && (belegung.current.bel_id === 0)) {
+                            belegung.current = belegung.art[4];
+                        };
+                    });
+
+
                 } else {
                     var bel_response = null;
                 };
