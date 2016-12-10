@@ -269,6 +269,7 @@ function main(token) {
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
+                        process.stdout.write('\033[0G');
                         process.stdout.write('(✓) BEL-DATA: ' + patient_id + ' | ' + stay_id);
                         // console.log('(✓) BEL-DATA, ', bel, log);
 
