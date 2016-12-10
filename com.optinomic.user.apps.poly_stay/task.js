@@ -173,70 +173,72 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
-            var polypoint_belegung = {};
-
-
-            var belegung = {
-                "art": [{
-                    "bel_id": 0,
-                    "name": "Unbekannt",
-                    "description": "Unbekannt / Nicht festgelegt"
-                }, {
-                    "bel_id": 1,
-                    "name": "EAS",
-                    "description": "Entzugs- und Abklärungsstation"
-                }, {
-                    "bel_id": 2,
-                    "name": "EP",
-                    "description": "Entwöhnungsprogramm"
-                }, {
-                    "bel_id": 3,
-                    "name": "EAS & EP",
-                    "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
-                }, {
-                    "bel_id": 4,
-                    "name": "TK",
-                    "description": "Tagesklinik"
-                }],
-                "current": {}
-            };
-            belegung.current = belegung.art[0];
-
-
-            var belegung = {
-                "body": polypoint_belegung,
-                "api_str": api_call
-            };
-
-
-            var annotation_obj = {
-                "bel_selector": belegung.current,
-                "bel_all": polypoint_belegung
-            };
-
-
-            var query_stuff = {
-                "query": my_stay.sql,
-                "delimiter": ";",
-                "direct": "True",
-                "format": "json"
-            }
-
-            var api_call = "/data_sources/Polypoint/query";
-
-
-            //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
+            //   var polypoint_belegung = {};
             //   
             //   
-            //       
-            //   });
+            //   var belegung = {
+            //       "art": [{
+            //           "bel_id": 0,
+            //           "name": "Unbekannt",
+            //           "description": "Unbekannt / Nicht festgelegt"
+            //       }, {
+            //           "bel_id": 1,
+            //           "name": "EAS",
+            //           "description": "Entzugs- und Abklärungsstation"
+            //       }, {
+            //           "bel_id": 2,
+            //           "name": "EP",
+            //           "description": "Entwöhnungsprogramm"
+            //       }, {
+            //           "bel_id": 3,
+            //           "name": "EAS & EP",
+            //           "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
+            //       }, {
+            //           "bel_id": 4,
+            //           "name": "TK",
+            //           "description": "Tagesklinik"
+            //       }],
+            //       "current": {}
+            //   };
+            //   belegung.current = belegung.art[0];
+            //   
+            //   
+            //   var belegung = {
+            //       "body": polypoint_belegung,
+            //       "api_str": api_call
+            //   };
+            //   
+            //   
+            //   var annotation_obj = {
+            //       "bel_selector": belegung.current,
+            //       "bel_all": polypoint_belegung
+            //   };
+            //   
+            //   
+            //   var query_stuff = {
+            //       "query": my_stay.sql,
+            //       "delimiter": ";",
+            //       "direct": "True",
+            //       "format": "json"
+            //   }
+            //   
+            //   var api_call = "/data_sources/Polypoint/query";
+            //   
+            //   
+            //   //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
+            //   //   
+            //   //   
+            //   //       
+            //   //   });
+            //   
+            //   var annotation_obj = {
+            //       "bel_selector": belegung.current,
+            //       "bel_all": polypoint_belegung
+            //   };
 
-            var annotation_obj = {
-                "bel_selector": belegung.current,
-                "bel_all": polypoint_belegung
-            };
+            console.log('::', my_stay);
 
-            resolve(JSON.stringify(annotation_obj));
+            resolve(JSON.stringify(my_stay));
 
         });
     };
@@ -290,7 +292,7 @@ function main(token) {
                     actions.count = actions.count + 1;
 
 
-                    console.log('---current_stay', current_stay);
+                    // console.log('---current_stay', current_stay);
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
