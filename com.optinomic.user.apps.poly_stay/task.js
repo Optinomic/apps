@@ -211,13 +211,15 @@ function main(token) {
             };
 
 
-            //  var body = {
-            //      "query": my_stay.sql,
-            //      "delimiter": ";",
-            //      "direct": "True",
-            //      "format": "json"
-            //  }
-            //  
+            var body = {
+                "query": my_stay.sql,
+                "direct": "True",
+                "format": "json"
+            };
+
+            process.stdout.write('\033[0G');
+            process.stdout.write(JSON.stringify(body));
+
             //  var api_call = "/data_sources/Polypoint/query";
             //  
             //  
