@@ -123,7 +123,7 @@ function main(token) {
         };
 
         process.stdout.write('\033[0G');
-        process.stdout.write();
+        process.stdout.write(log_text);
 
         return return_boolean;
     };
@@ -173,72 +173,68 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
-            //   var polypoint_belegung = {};
-            //   
-            //   
-            //   var belegung = {
-            //       "art": [{
-            //           "bel_id": 0,
-            //           "name": "Unbekannt",
-            //           "description": "Unbekannt / Nicht festgelegt"
-            //       }, {
-            //           "bel_id": 1,
-            //           "name": "EAS",
-            //           "description": "Entzugs- und Abklärungsstation"
-            //       }, {
-            //           "bel_id": 2,
-            //           "name": "EP",
-            //           "description": "Entwöhnungsprogramm"
-            //       }, {
-            //           "bel_id": 3,
-            //           "name": "EAS & EP",
-            //           "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
-            //       }, {
-            //           "bel_id": 4,
-            //           "name": "TK",
-            //           "description": "Tagesklinik"
-            //       }],
-            //       "current": {}
-            //   };
-            //   belegung.current = belegung.art[0];
-            //   
-            //   
-            //   var belegung = {
-            //       "body": polypoint_belegung,
-            //       "api_str": api_call
-            //   };
-            //   
-            //   
-            //   var annotation_obj = {
-            //       "bel_selector": belegung.current,
-            //       "bel_all": polypoint_belegung
-            //   };
-            //   
-            //   
-            //   var query_stuff = {
-            //       "query": my_stay.sql,
-            //       "delimiter": ";",
-            //       "direct": "True",
-            //       "format": "json"
-            //   }
-            //   
-            //   var api_call = "/data_sources/Polypoint/query";
-            //   
-            //   
-            //   //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
-            //   //   
-            //   //   
-            //   //       
-            //   //   });
-            //   
-            //   var annotation_obj = {
-            //       "bel_selector": belegung.current,
-            //       "bel_all": polypoint_belegung
-            //   };
 
-            console.log('::', my_stay);
 
-            resolve(JSON.stringify(my_stay));
+            var polypoint_belegung = {};
+
+
+            var belegung = {
+                "art": [{
+                    "bel_id": 0,
+                    "name": "Unbekannt",
+                    "description": "Unbekannt / Nicht festgelegt"
+                }, {
+                    "bel_id": 1,
+                    "name": "EAS",
+                    "description": "Entzugs- und Abklärungsstation"
+                }, {
+                    "bel_id": 2,
+                    "name": "EP",
+                    "description": "Entwöhnungsprogramm"
+                }, {
+                    "bel_id": 3,
+                    "name": "EAS & EP",
+                    "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
+                }, {
+                    "bel_id": 4,
+                    "name": "TK",
+                    "description": "Tagesklinik"
+                }],
+                "current": {}
+            };
+            belegung.current = belegung.art[0];
+
+
+
+
+            var body = {
+                "query": my_stay.sql,
+                "delimiter": ";",
+                "direct": "True",
+                "format": "json"
+            }
+
+            var api_call = "/data_sources/Polypoint/query";
+
+
+            helpers.callAPI("GET", api_call, body, null, function(resp_bel) {
+
+                var bel_response = JSON.parse(resp_bel.responseText);
+
+
+                process.stdout.write('\033[0G');
+                process.stdout.write(JSON.stringify(bel_response));
+
+            });
+
+
+
+            var annotation_obj = {
+                "bel_selector": belegung.current,
+                "bel_all": polypoint_belegung
+            };
+
+            resolve(JSON.stringify(annotation_obj));
 
         });
     };
