@@ -338,12 +338,20 @@ function main(token) {
             log.timings.duration_min = log.timings.duration / 1000 / 60;
 
 
-            // console.log('---writeBelegung', annot_obj);
+            // Get current array
+            // GET 
+            var apiStr = '/modules/com.optinomic.apps.poly_stay/annotations';
+
+            // console.log('writeBelegung:', patient_id, body.value);
+
+            helpers.callAPI("GET", apiStr, null, null, function(resp_get_logs) {
+                var all_logs = JSON.parse(resp_get_logs.responseText);
+
+                console.log(' -> GET:', all_logs);
 
 
-
-
-            resolve(JSON.stringify(log));
+                resolve(JSON.stringify(log));
+            });
 
         });
     };
