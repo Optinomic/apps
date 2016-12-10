@@ -31,6 +31,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
 
 
             // Run App-Functions:
+            $scope.getEntrys();
             $scope.initApp();
 
 
@@ -82,7 +83,35 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
             "current": {}
         };
 
-        $scope.getPatientList(false);
+        // $scope.getPatientList(false);
+    };
+
+
+
+    $scope.getEntrys = function() {
+        // Get Data
+
+        $scope.d.logs = {};
+        var api_call = dataService.getPatientModuleAnnotations();
+
+        api_call.success(function(data) {
+            $scope.d.logs = data;
+
+            // $scope.d.belegung.current_stay = null;
+
+            // data.alle.forEach(function(stay, my_stay_index) {
+            //     if (parseInt(stay.bel_selector.optinomic_fid) === parseInt($scope.d.dataMain.params.stay_id)) {
+            //         $scope.d.belegung.selected = stay;
+            //     };
+            // });
+
+            console.log('(✓) getEntrys ', $scope.d.logs);
+        });
+
+        api_call.error(function(data) {
+            console.log('(ERROR) getEntrys ', data);
+        });
+
     };
 
 
