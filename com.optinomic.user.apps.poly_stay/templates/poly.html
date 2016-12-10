@@ -93,13 +93,13 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
     <div style="margin-top: 96px;">
-        <p class="md-body-2">Manuelles ausführen:</p>
+        <p class="md-headline">Manuelles ausführen:</p>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
-                <md-button class="md-raised md-primary" ng-click="getPatientList(false)">Aktuelle Patienten</md-button>
+                <md-button class="md-primary" ng-click="getPatientList(false)">Aktuelle Patienten</md-button>
             </div>
             <div>
-                <md-button class="md-raised" ng-click="getPatientList(true)">Alle Patienten (8-ung!)</md-button>
+                <md-button ng-click="getPatientList(true)">Alle Patienten (8-ung: Dauert ca. 10 Minuten)</md-button>
             </div>
         </div>
     </div>
