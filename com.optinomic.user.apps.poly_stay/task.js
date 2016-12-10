@@ -225,7 +225,7 @@ function main(token) {
 
                 console.log('resp_bel', resp_bel);
 
-                if (resp_bel.responseText !== null) {
+                if ((resp_bel.responseText !== null) && (resp_bel.responseText !== '')) {
                     var bel_response = JSON.parse(resp_bel.responseText);
                 } else {
                     var bel_response = null;
