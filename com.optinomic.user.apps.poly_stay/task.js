@@ -290,16 +290,18 @@ function main(token) {
 
     function writeBelegung(annot_obj) {
 
-        console.log('---writeBelegung', annot_obj);
-
-
         return new Promise(function(resolve, reject) {
+
+
+            console.log('---writeBelegung', annot_obj);
+
 
             var annotation_obj = {
                 "alle": null,
                 "aktuell_letzter": null,
                 "war_einmal": null,
-                "war_einmal_legende": belegung.art
+                "war_einmal_legende": null,
+                "annot_obj": annot_obj
             };
 
             resolve(JSON.stringify(annotation_obj));
@@ -349,21 +351,21 @@ function main(token) {
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
-                        console.log('(✓) BEL-DATA, ', bel);
 
-                        //  writeBelegung(bel).then(function(annotation_json) {
-                        //      var annotation = JSON.parse(annotation_json);
-                        //  
-                        //  
-                        //      // if (checkDone(actions.total, actions.count)) {
-                        //      //     finish();
-                        //      // };
-                        //  
-                        //      // console.log('(✓) BEL-DATA, ', bel, log);
-                        //  
-                        //  }).then(null, function(error) {
-                        //      console.log('(!) ANNOTATION-ERROR, ', error);
-                        //  });
+                        writeBelegung(bel).then(function(annotation_json) {
+                            var annotation = JSON.parse(annotation_json);
+
+                            console.log('(✓) annotation-DATA, ', annotation);
+
+                            // if (checkDone(actions.total, actions.count)) {
+                            //     finish();
+                            // };
+
+                            // console.log('(✓) BEL-DATA, ', bel, log);
+
+                        }).then(null, function(error) {
+                            console.log('(!) ANNOTATION-ERROR, ', error);
+                        });
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
