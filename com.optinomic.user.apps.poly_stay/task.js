@@ -388,8 +388,37 @@ function main(token) {
                     log.done.stays.push(stay_id);
 
 
+                    var belegung = {
+                        "art": [{
+                            "bel_id": 0,
+                            "name": "Unbekannt",
+                            "description": "Unbekannt / Nicht festgelegt"
+                        }, {
+                            "bel_id": 1,
+                            "name": "EAS",
+                            "description": "Entzugs- und Abklärungsstation"
+                        }, {
+                            "bel_id": 2,
+                            "name": "EP",
+                            "description": "Entwöhnungsprogramm"
+                        }, {
+                            "bel_id": 3,
+                            "name": "EAS & EP",
+                            "description": "Entzugs- & Abklärungsstation sowie Entwöhnungsprogramm"
+                        }, {
+                            "bel_id": 4,
+                            "name": "TK",
+                            "description": "Tagesklinik"
+                        }],
+                        "current": {}
+                    };
+
                     var bel_array = [];
-                    var war_einmal = {};
+                    var was_obj = {};
+
+                    belegung.art.forEach(function(bel, my_bel_index) {
+                        was_obj[bel.bel_id] = false;
+                    });
 
 
                     // console.log('---current_stay', current_stay);
@@ -399,13 +428,17 @@ function main(token) {
                         var bel = JSON.parse(bel_json);
 
                         bel_array.push(bel);
+                        was_obj[bel.bel_selector.bel_id] = true;
 
                         if (checkDone('Stays', stays_anz, stays_count)) {
 
 
+
                             var annotation_obj = {
                                 "alle": bel_array,
-                                "aktuell_letzter": bel_array[0]
+                                "aktuell_letzter": bel_array[0],
+                                "war_einmal": was_obj,
+                                "war_einmal_legende": belegung.art
                             };
 
 
