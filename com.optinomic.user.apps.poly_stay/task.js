@@ -152,14 +152,8 @@ function main(token) {
         return new Promise(function(resolve, reject) {
 
 
-            var polypoint_belegung = {
-                "query": my_stay.sql,
-                "delimiter": ";",
-                "direct": "True",
-                "format": "json"
-            };
+            var polypoint_belegung = {};
 
-            var api_call = "/data_sources/Polypoint/query";
 
 
             var belegung = {
@@ -194,10 +188,21 @@ function main(token) {
                 "api_str": api_call
             };
 
+
             var annotation_obj = {
                 "bel_selector": belegung.current,
                 "bel_all": polypoint_belegung
             };
+
+
+            var query_stuff = {
+                "query": my_stay.sql,
+                "delimiter": ";",
+                "direct": "True",
+                "format": "json"
+            }
+
+            var api_call = "/data_sources/Polypoint/query";
 
 
             //   helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
@@ -206,7 +211,10 @@ function main(token) {
             //       
             //   });
 
-
+            var annotation_obj = {
+                "bel_selector": belegung.current,
+                "bel_all": polypoint_belegung
+            };
             resolve(JSON.stringify(annotation_obj));
 
         });
@@ -260,7 +268,9 @@ function main(token) {
 
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
-                        console.log('(✓) BEL-DATA, ', bel, log);
+
+                        process.stdout.write('(✓) BEL-DATA, ', bel, log);
+                        // console.log('(✓) BEL-DATA, ', bel, log);
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
