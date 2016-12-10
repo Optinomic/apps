@@ -92,7 +92,7 @@ app.controller('AppCtrl', function($scope, $filter, $q, dataService, scopeDServi
         // Get Data
 
         $scope.d.logs = {};
-        var api_call = dataService.getPatientModuleAnnotations();
+        var api_call = dataService.getModuleAnnotations();
 
         api_call.success(function(data) {
             $scope.d.logs = data;
