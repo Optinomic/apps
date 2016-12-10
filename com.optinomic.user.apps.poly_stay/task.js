@@ -356,9 +356,8 @@ function main(token) {
                         var bel = JSON.parse(bel_json);
 
                         bel_array.push(bel);
-                        war_einmal.
 
-                        if(checkDone(stays_anz, stays_count)) {
+                        if (checkDone(stays_anz, stays_count)) {
 
 
                             var annotation_obj = {
