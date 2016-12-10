@@ -144,7 +144,7 @@ function main(token) {
                 for (var sID = 0; sID < stays.length; sID++) {
                     var stay = stays[sID];
 
-                    stay.patient_id = patient_id;
+                    // stay.patient_id = patient_id;
 
                     var cis_fid_str = stay.data.cis_fid.toString();
                     cis_fid_str = cis_fid_str.substring(0, (cis_fid_str.length - 2));
@@ -277,8 +277,8 @@ function main(token) {
                 };
 
 
-                // process.stdout.write('\033[0G');
-                // process.stdout.write(JSON.stringify(bel_response));
+                process.stdout.write('\033[0G');
+                process.stdout.write(JSON.stringify(annotation_obj));
 
                 resolve(JSON.stringify(annotation_obj));
 
