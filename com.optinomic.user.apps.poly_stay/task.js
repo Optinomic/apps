@@ -300,7 +300,7 @@ function main(token) {
 
             var apiStr = '/patients/' + patient_id + '/modules/com.optinomic.init.poly_stay/annotations';
             var body = {
-                "value": json_value
+                "value": annot_obj
             };
 
             console.log('-> writeBelegung', apiStr);
