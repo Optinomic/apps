@@ -349,20 +349,21 @@ function main(token) {
                     getODBCBelegung(current_stay).then(function(bel_json) {
                         var bel = JSON.parse(bel_json);
 
+                        console.log('(✓) BEL-DATA, ', bel);
 
-                        writeBelegung(bel).then(function(annotation_json) {
-                            var annotation = JSON.parse(annotation_json);
-
-
-                            // if (checkDone(actions.total, actions.count)) {
-                            //     finish();
-                            // };
-
-                            // console.log('(✓) BEL-DATA, ', bel, log);
-
-                        }).then(null, function(error) {
-                            console.log('(!) ANNOTATION-ERROR, ', error);
-                        });
+                        //  writeBelegung(bel).then(function(annotation_json) {
+                        //      var annotation = JSON.parse(annotation_json);
+                        //  
+                        //  
+                        //      // if (checkDone(actions.total, actions.count)) {
+                        //      //     finish();
+                        //      // };
+                        //  
+                        //      // console.log('(✓) BEL-DATA, ', bel, log);
+                        //  
+                        //  }).then(null, function(error) {
+                        //      console.log('(!) ANNOTATION-ERROR, ', error);
+                        //  });
 
                     }).then(null, function(error) {
                         console.log('(!) BEL-ERROR, ', error);
