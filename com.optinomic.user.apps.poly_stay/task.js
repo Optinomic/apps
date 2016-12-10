@@ -394,7 +394,9 @@ function main(token) {
 
                             var annotation_obj = {
                                 "alle": bel_array,
-                                "aktuell_letzter": bel_array[0]
+                                "aktuell_letzter": bel_array[0],
+                                patient_id: patient_id,
+                                stay_id: stay_id
                             };
 
 
