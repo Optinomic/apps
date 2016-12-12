@@ -1,12 +1,12 @@
 [module]
 id = com.optinomic.test.pdf_make
-name = PDF's erstellen
-short_description = PDF's erstellen via pdfmake.
+name = _PDF's
+short_description = PDF's erstellen
 version = include(VERSION)
 type = patient
 
 [description]
-Dies ist eine Testapp um die Funktionalität von https://github.com/bpampuch/pdfmake zu testen.
+Diese Applikation dient zur Erstellung von Patienten-PDF's.
 
 [developer]
 first_name = Beat
