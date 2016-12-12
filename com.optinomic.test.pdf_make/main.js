@@ -61,7 +61,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Populate Functions as API
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
-                $scope.d.appData[app_identifier].api = include_as_js_string(app_case.js);
+                $scope.d.appData[app_identifier].api = include(app_case.js);
             };
 
 
