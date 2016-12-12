@@ -46,6 +46,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.pdf_make_init = function() {
         $scope.d.docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+
+        const pdfDocGenerator = pdfMake.createPdf($scope.d.docDefinition);
+        pdfDocGenerator.getDataUrl((dataUrl) => {
+            const targetElement = document.querySelector('#iframeContainer');
+            const iframe = document.createElement('iframe');
+            iframe.src = dataUrl;
+            targetElement.appendChild(iframe);
+        });
     };
 
     $scope.pdf_open = function() {
@@ -55,8 +63,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.pdf_download = function() {
         console.log('(!) pdf_download');
-        var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-        pdfMake.createPdf(docDefinition).download();
+        pdfMake.createPdf($scope.d.docDefinition).download();
     };
 
 
