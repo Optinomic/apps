@@ -300,8 +300,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.haveData = true;
             console.log('Loaded, ', app_identifier, $scope.d.appData);
 
-
-
             // Save Data to $scope.d
             $scope.d.appData[app_identifier] = {
                 "data": data,
@@ -312,9 +310,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
+                console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
+
                 $scope.d.appData[app_identifier].pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
                 $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
                 $scope.d.appData[app_identifier].pdf.push($scope.d.templates.text('Interpretation: CASE > 15 = Stationäre Entwöhnungstherapie empfohlen.'));
+
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
 
