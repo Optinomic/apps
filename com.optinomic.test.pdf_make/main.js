@@ -355,8 +355,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var pdf = $scope.d.appData[app_identifier].pdf
 
                 pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
+                pdf.push($scope.d.templates.text('Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert.'));
                 pdf.push(run.getCaseList());
-                pdf.push($scope.d.templates.caption('Interpretation: Eine stationäre Entwöhnungstherapie ist bei CASE > 15 empfohlen.'));
 
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
