@@ -261,16 +261,28 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // All Doc's here
         $scope.d.docs = [];
+        var doc = {};
 
+        // ----------------------------
         // Doc: Notizen
-        var doc = {
+        // ----------------------------
+        doc = {
             "id": 0,
             "name": "Notizen",
             "content": []
         };
 
+        var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
+        doc.content.push($scope.d.templates.caption("Datum: " + date));
+
+        // Safe
+        $scope.d.docs.push(doc);
+
+
+        // ----------------------------
         // Doc: Eintritts-Assessment
-        var doc = {
+        // ----------------------------
+        doc = {
             "id": 0,
             "name": "Eintritts-Assessment",
             "content": []
@@ -282,7 +294,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
 
         doc.content.push($scope.d.templates.pageBreak());
-        doc.content.push($scope.d.templates.title('Seite 2', $scope.d.templates.patient));
 
         var bloc = {
             "alignment": 'left',
@@ -293,13 +304,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
                 "margin": [0, 0, 0, 6]
             }],
-            "columnGap": 12
+            "columnGap": 24
         };
 
         doc.content.push(bloc);
-        doc.content.push($scope.d.templates.spacer(10));
-        doc.content.push($scope.d.templates.patientAddress_clinicLogo);
-        doc.content.push($scope.d.templates.spacer(20));
+
 
         // Safe
         $scope.d.docs.push(doc);
@@ -357,15 +366,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
-                console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
-
                 var pdf = $scope.d.appData[app_identifier].pdf
 
                 pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
                 pdf.push($scope.d.templates.text('Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert.'));
                 pdf.push(run.getCaseList());
-
-                console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
