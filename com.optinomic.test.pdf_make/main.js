@@ -47,10 +47,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.pdf_make_init = function() {
 
         var patient_adress = '';
-        patient_adress = patient_adresse + $scope.d.dataMain.patient.data.ansprache + '\n';
-        patient_adress = patient_adresse + $scope.d.dataMain.patient.data.extras.name + ' (' + $scope.d.dataMain.patient.data.extras.birthday_age + ')\n';
-        patient_adress = patient_adresse + $scope.d.dataMain.patient.data.address1 + '\n';
-        patient_adress = patient_adresse + $scope.d.dataMain.patient.data.zip_code + ' ' + $scope.d.dataMain.patient.data.city;
+        patient_adress = patient_adress + $scope.d.dataMain.patient.data.ansprache + '\n';
+        patient_adress = patient_adress + $scope.d.dataMain.patient.data.extras.name + ' (' + $scope.d.dataMain.patient.data.extras.birthday_age + ')\n';
+        patient_adress = patient_adress + $scope.d.dataMain.patient.data.address1 + '\n';
+        patient_adress = patient_adress + $scope.d.dataMain.patient.data.zip_code + ' ' + $scope.d.dataMain.patient.data.city;
 
 
         $scope.d.docDefinition = {
