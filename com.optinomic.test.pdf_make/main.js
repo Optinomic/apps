@@ -136,7 +136,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Push Content to Doc's
         var content = [];
         content.push($scope.d.templates.spacer);
-        content.push(patientAdress_clinicLogo);
+        content.push($scope.d.templates.patientAdress_clinicLogo);
         content.push($scope.d.templates.spacer);
         $scope.d.docs[0].content = content;
 
