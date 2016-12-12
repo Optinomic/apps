@@ -48,6 +48,26 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var d = {};
 
+
+        // --------------------------------
+        // Variablen
+        // --------------------------------
+        d.klinik = $scope.d.dataMain.config.data.customer.contact.name + '\n' + $scope.d.dataMain.config.data.customer.contact.slogan;
+
+
+        d.patient = $scope.d.dataMain.patient.data.ansprache + ' ' + $scope.d.dataMain.patient.data.last_name + ' ' + $scope.d.dataMain.patient.data.first_name + ' (' + $scope.d.dataMain.patient.data.extras.birthday_age + ')';
+
+        d.patient_adress = '';
+        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.ansprache + '\n';
+        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.last_name + ' ' + $scope.d.dataMain.patient.data.first_name + '\n';
+        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.address1 + '\n';
+        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.zip_code + ' ' + $scope.d.dataMain.patient.data.city;
+
+
+        // --------------------------------
+        // Default Definition
+        // --------------------------------
+
         d.default_definition = {
             "header": {
                 "columns": [
@@ -81,21 +101,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }
         };
 
-        // --------------------------------
-        // Variablen
-        // --------------------------------
-        d.klinik = $scope.d.dataMain.config.data.customer.contact.name + '\n' + $scope.d.dataMain.config.data.customer.contact.slogan;
-
-
-        d.patient = $scope.d.dataMain.patient.data.ansprache + ' ' + $scope.d.dataMain.patient.data.last_name + ' ' + $scope.d.dataMain.patient.data.first_name + ' (' + $scope.d.dataMain.patient.data.extras.birthday_age + ')';
-
-        d.patient_adress = '';
-        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.ansprache + '\n';
-        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.last_name + ' ' + $scope.d.dataMain.patient.data.first_name + '\n';
-        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.address1 + '\n';
-        d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.zip_code + ' ' + $scope.d.dataMain.patient.data.city;
-
-
         return d;
     };
 
@@ -105,6 +110,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Get all Templates
         $scope.d.templates = $scope.getTemplates();
+        $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
 
         // All Doc's here
         $scope.d.docs = [{
@@ -135,8 +141,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.pdf_open = function(doc) {
         console.log('(!) pdf_open', doc);
         $scope.d.current_doc = doc
-
-        $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
         $scope.d.docDefinition.content = doc.content;
 
         pdfMake.createPdf($scope.d.docDefinition).open();
@@ -145,8 +149,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.pdf_download = function(doc) {
         console.log('(!) pdf_download', doc);
         $scope.d.current_doc = doc
-
-        $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
         $scope.d.docDefinition.content = doc.content;
 
         pdfMake.createPdf($scope.d.docDefinition).download();
