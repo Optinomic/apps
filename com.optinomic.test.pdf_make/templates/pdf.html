@@ -1,8 +1,9 @@
 include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <p class="md-headline">PDF</p>
-    <md-button ng-click="pdf_open()">Open</md-button>
-    <md-button ng-click="pdf_download()">Download</md-button>
+    <md-button ng-click="pdf_open()">öffnen</md-button>
+    <md-button ng-click="pdf_download()">speichern</md-button>
+    <md-button ng-click="pdf_create()">anzeigen</md-button>
 </div>
-<div id="iframeContainer" class="pdf_preview"></div>
+<div id="iframeContainer" style="position: absolute; width: 100%;"></div>
 include(../lib/html/optinomic/page/end.m4)

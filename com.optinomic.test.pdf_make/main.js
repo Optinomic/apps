@@ -48,7 +48,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.docDefinition = {
             content: [
                 // if you don't need styles, you can use a simple string to define a paragraph
-                'This is a standard paragraph, using default style',
+                $scope.d.dataMain.config.data.customer.contact.name,
 
                 // using a { text: '...' } object lets you set styling properties
                 { text: 'This paragraph will have a bigger font', fontSize: 15 },
@@ -65,7 +65,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             ]
         };
 
-        $scope.pdf_create();
     };
 
     $scope.pdf_create = function() {
@@ -87,6 +86,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         console.log('(!) pdf_download');
         pdfMake.createPdf($scope.d.docDefinition).download();
     };
+
 
 
 });
