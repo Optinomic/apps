@@ -66,13 +66,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     { text: klinik, alignment: 'right', style: 'header' }
                 ]
             },
-            "footer": {
-                "columns": [
-                    { text: 'Titel', alignment: 'left', style: 'footer' },
-                    function(currentPage, pageCount) {
-                        return { text: 'Seite ' + currentPage.toString() + ' / ' + pageCount, alignment: 'right', style: 'footer' };
-                    }
-                ]
+            "footer": function(currentPage, pageCount) {
+                var obj = {
+                    "columns": [
+                        { text: titel, alignment: 'left', style: 'footer' },
+                        { text: 'Seite ' + currentPage + '/' + pageCount, alignment: 'right', style: 'footer' }
+                    ]
+                };
+                return obj;
             },
             "content": [
 
