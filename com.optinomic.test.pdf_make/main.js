@@ -277,7 +277,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var pdf_array = $scope.d.appData[app_identifier].pdf;
 
-        console.log('Before', content, pdf_array);
+        console.log('Before', content, $scope.d.appData[app_identifier]);
         pdf_array.forEach(function(d, arrayID) {
             content.push(d);
         });
@@ -301,19 +301,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             console.log('Loaded, ', app_identifier, $scope.d.appData);
 
 
-            var run = $scope.getAppFunctionsAPI();
 
             // Save Data to $scope.d
-            $scope.d.appData.api = run;
             $scope.d.appData[app_identifier] = {
                 "data": data,
                 "pdf": []
             };
+            var run = $scope.getAppFunctionsAPI();
+            $scope.d.appData.api = run;
+
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
                 $scope.d.appData[app_identifier].pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
                 $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
                 $scope.d.appData[app_identifier].pdf.push($scope.d.templates.text('Interpretation: CASE > 15 = Stationäre Entwöhnungstherapie empfohlen.'));
+                console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
