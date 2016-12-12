@@ -5,6 +5,7 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="doc in d.docs" class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <div flex>
         <p class="md-title">{{doc.name}}</p>
+        <p class="md-caption">{{doc.description}}</p>
     </div>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <md-button ng-click="pdf_open(doc)">öffnen</md-button>

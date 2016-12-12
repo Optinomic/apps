@@ -269,11 +269,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc = {
             "id": 0,
             "name": "Notizen",
+            "description": "Ein leeres Blatt für Gesprächsnotizen."
             "content": []
         };
 
         var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
-        doc.content.push($scope.d.templates.caption("Datum: " + date));
+        doc.content.push($scope.d.templates.text("Datum: " + date));
 
         // Safe
         $scope.d.docs.push(doc);
@@ -285,6 +286,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc = {
             "id": 0,
             "name": "Eintritts-Assessment",
+            "description": "Eintritts-Assessment der Klinik Südhang."
             "content": []
         };
         doc.content.push($scope.d.templates.spacer(10));
