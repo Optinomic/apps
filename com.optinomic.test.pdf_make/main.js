@@ -68,7 +68,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "footer": {
                 "columns": [
                     { text: titel, alignment: 'left', margin: [5, 5, 10, 20] },
-                    { text: 'Seite ' + currentPage.toString() + ' / ' + pageCount, alignment: 'right', margin: [10, 5, 5, 20], fontSize: 10 }
+                    function(currentPage, pageCount) {
+                        return { text: 'Seite ' + currentPage.toString() + ' / ' + pageCount, alignment: 'right', margin: [5, 5, 10, 20] };
+                    }
                 ]
             },
             "content": [
