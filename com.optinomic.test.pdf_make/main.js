@@ -68,11 +68,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // PDF - Templates
         // --------------------------------
 
-        d.spacer = {
+        d.spacer_10 = {
             "text": '',
             "margin": [10, 10, 10, 10]
         };
 
+        d.spacer_80 = {
+            "text": '',
+            "margin": [80, 80, 80, 80]
+        };
 
         d.patientAddress_clinicLogo = {
             "alignment": 'justify',
@@ -84,6 +88,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }]
         };
 
+        var heading = function(style, text) {
+
+            if ((style !== 'h1') || (style !== 'h2')) {
+                style = '';
+            };
+
+            return {
+                "text": text,
+                "style": style
+            };
+
+        };
 
         // --------------------------------
         // Default Definition
@@ -118,6 +134,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "bold": false,
                     "color": '#9E9E9E',
                     "margin": [40, 0, 40, 40]
+                },
+                "h1": {
+                    "fontSize": 18,
+                    "bold": false,
+                    "color": '#424242',
+                    "margin": [0, 40, 0, 12]
+                },
+                "h2": {
+                    "fontSize": 14,
+                    "bold": false,
+                    "color": '#212121',
+                    "margin": [0, 20, 0, 6]
                 }
             }
         };
@@ -142,9 +170,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "name": "Test",
             "content": []
         };
-        doc.content.push($scope.d.templates.spacer);
+        doc.content.push($scope.d.templates.spacer_80);
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
-        doc.content.push($scope.d.templates.spacer);
+        doc.content.push($scope.d.templates.spacer_10);
+        doc.content.push($scope.d.templates.heading('h1', doc.name));
         $scope.d.docs.push(doc);
 
         var doc = {
@@ -152,9 +181,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "name": "Eintritts-Assessment",
             "content": []
         };
-        doc.content.push($scope.d.templates.spacer);
+        doc.content.push($scope.d.templates.spacer_80);
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
-        doc.content.push($scope.d.templates.spacer);
+        doc.content.push($scope.d.templates.spacer_10);
+        doc.content.push($scope.d.templates.heading('h1', doc.name));
         $scope.d.docs.push(doc);
 
 
