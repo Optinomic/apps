@@ -280,9 +280,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var bloc = {
             alignment: 'justify',
             columns: [{
-                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new');
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new')
             }, {
-                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new');
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new')
             }],
             "margin": [0, 0, 0, 24]
         };
