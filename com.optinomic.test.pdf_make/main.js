@@ -207,7 +207,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.heading('title', doc.name));
-        doc.content.push($scope.d.templates.heading('h1', 'Brief Symptom Checklist (BSCL)'));
+        doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
         doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
         $scope.d.docs.push(doc);
 
@@ -220,7 +220,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.heading('title', doc.name));
-        doc.content.push($scope.d.templates.heading('h1', 'Brief Symptom Checklist (BSCL)'));
+        doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
         doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
         $scope.d.docs.push(doc);
 
