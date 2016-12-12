@@ -59,9 +59,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "api": {}
             };
 
-            // Populate Functions as API
+            // Populate Functions as API  include(templates/pdf.html)
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
-                $scope.d.appData[app_identifier].api = include(app_case.js);
+                $scope.d.appData[app_identifier].api = include(api_functions_case.js);
             };
 
 
