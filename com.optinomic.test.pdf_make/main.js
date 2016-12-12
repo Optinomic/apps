@@ -166,11 +166,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
         };
 
+        d.pageBreak = function(when) {
+            when = when === undefined ? 'after' : when;
+            return { "fontSize": 0, "text": '', "pageOrientation": 'portrait', "pageBreak": when };
+        };
+
+
         // --------------------------------
         // Default Definition
         // --------------------------------
 
         d.default_definition = {
+            "pageSize": 'A4',
+            "pageOrientation": 'portrait',
             "header": {
                 "columns": [
                     { "text": d.patient, "alignment": 'left', "style": 'header' },
@@ -266,6 +274,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
+
+        doc.content.push($scope.d.templates.pageBreak());
+
+        var bloc = {
+            alignment: 'justify',
+            columns: [{
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new');
+            }, {
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new');
+            }],
+            "margin": [0, 0, 0, 24]
+        };
+        doc.content.push(bloc);
+
         $scope.d.docs.push(doc);
 
         console.log('(DONE) pdf_make_init', $scope.d.docs);
@@ -323,9 +345,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
 
-                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
-                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.caption('Interpretation: Eine stationäre Entwöhnungstherapie ist bei CASE > 15 empfohlen.'));
-                $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
+                var pdf = $scope.d.appData[app_identifier].pdf
+
+                pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
+                pdf.push(run.getCaseList());
+                pdf.push($scope.d.templates.caption('Interpretation: Eine stationäre Entwöhnungstherapie ist bei CASE > 15 empfohlen.'));
 
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
