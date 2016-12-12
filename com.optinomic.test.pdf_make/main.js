@@ -93,16 +93,35 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text": '',
                 "margin": [0, space, 0, space]
             };
-
         };
 
+        d.title = function(title, subtitle) {
+
+            title = title === undefined ? '' : title;
+            subtitle = subtitle === undefined ? '' : subtitle;
+
+            return {
+                stack: [
+                    // second column consists of paragraphs
+                    {
+                        text: title,
+                        style: 'title'
+                    }, {
+                        text: subtitle,
+                        style: 'caption'
+
+                    }
+                ],
+                "margin": [0, 0, 0, 24]
+            };
+        };
 
         d.heading = function(style, text) {
 
-            text = text === undefined ? 'Optinomic' : text;
+            text = text === undefined ? '' : text;
             style = style === undefined ? 'h1' : style;
 
-            if ((style !== 'h1') && (style !== 'h2') && (style !== 'title')) {
+            if ((style !== 'h1') && (style !== 'h2')) {
                 style = '';
             };
 
@@ -110,7 +129,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text": text,
                 "style": style
             };
-
         };
 
         d.text = function(text) {
@@ -121,7 +139,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "text": text,
                 "style": 'p'
             };
-
         };
 
         // --------------------------------
@@ -164,6 +181,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "color": '#616161',
                     "margin": [0, 40, 0, 12]
                 },
+                "caption": {
+                    "fontSize": 11,
+                    "bold": false,
+                    "color": '#9E9E9E',
+                    "margin": [3, 0, 0, 0]
+                },
                 "h1": {
                     "fontSize": 18,
                     "bold": false,
@@ -175,6 +198,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "bold": false,
                     "color": '#212121',
                     "margin": [0, 20, 0, 12]
+                },
+                "h3": {
+                    "bold": true,
+                    "color": '#212121',
+                    "margin": [0, 6, 0, 12]
                 },
                 "p": {
                     "color": '#212121',
@@ -200,15 +228,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Doc
         var doc = {
             "id": 0,
-            "name": "Test",
+            "name": "Notizen",
             "content": []
         };
         doc.content.push($scope.d.templates.spacer(10));
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
-        doc.content.push($scope.d.templates.spacer(20));
-        doc.content.push($scope.d.templates.heading('title', doc.name));
-        doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
-        doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
         $scope.d.docs.push(doc);
 
         var doc = {
@@ -219,7 +243,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.spacer(10));
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
-        doc.content.push($scope.d.templates.heading('title', doc.name));
+        doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
         doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
         doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
         $scope.d.docs.push(doc);
