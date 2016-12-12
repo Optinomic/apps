@@ -156,6 +156,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
         };
 
+        d.caption = function(text) {
+
+            text = text === undefined ? 'Optinomic' : text;
+
+            return {
+                "text": text,
+                "style": 'caption'
+            };
+        };
+
         // --------------------------------
         // Default Definition
         // --------------------------------
@@ -314,8 +324,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
 
                 $scope.d.appData[app_identifier].pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
+                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.caption('Interpretation: Eine stationäre Entwöhnungstherapie ist bei CASE > 15 empfohlen.'));
                 $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
-                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.text('Interpretation: CASE > 15 = Stationäre Entwöhnungstherapie empfohlen.'));
 
                 console.log('=> PDF, ', app_identifier, $scope.d.appData[app_identifier]);
             };
@@ -355,7 +365,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             });
 
             return {
-                "ul": list_array
+                "ul": list_array,
+                "margin": [0, 0, 0, 6]
             };
         };
 
