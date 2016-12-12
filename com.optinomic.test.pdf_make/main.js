@@ -248,8 +248,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
-        doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
-        doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
+        doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
         $scope.d.docs.push(doc);
     };
 
@@ -257,6 +256,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
     // App - Functions
     // -----------------------------------
+
+    $scope.loadAppPDF = function(content, app_identifier) {
+
+        var pdf_array = $scope.d.appData[app_identifier].pdf;
+
+        pdf_array.forEach(function(d, arrayID) {
+            content.push(d);
+        });
+
+        return content;
+    };
 
     $scope.loadAppData = function(app_identifier) {
         // -----------------------------------
@@ -281,13 +291,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
+                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
                 $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
+                $scope.d.appData[app_identifier].pdf.push($scope.d.templates.text('Interpretation: CASE > 15 = Stationäre Entwöhnungstherapie empfohlen.'));
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
                 run.hello();
             };
 
+
+            // doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
+            // doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
 
 
         });
@@ -306,7 +321,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var date = $filter("amDateFormat")(response.entity.data.filled, 'DD.MM.YYYY');
                 var score = response.calculations["0"].calculation_result.score;
-                var text = "Am " + date + " weist der Patient im Case " + score + "auf."
+                var text = "Am " + date + " wies der Patient im Case " + score + " Punkte auf."
                 list_array.push(text);
             });
 
