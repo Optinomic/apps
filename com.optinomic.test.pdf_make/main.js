@@ -65,8 +65,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     { text: klinik, alignment: 'right', style: 'header' }
                 ]
             },
-            "footer": function(currentPage, pageCount) {
-                return 'Seite ' + currentPage.toString() + ' / ' + pageCount;
+            "footer": {
+                "columns": [
+                    { text: 'Titel', alignment: 'left', style: 'footer' }, {
+                        text: function(currentPage, pageCount) {
+                            return 'Seite ' + currentPage.toString() + ' / ' + pageCount;
+                        },
+                        alignment: 'right',
+                        style: 'footer'
+                    }
+                ]
             },
             "content": [
                 // if you don't need styles, you can use a simple string to define a paragraph
@@ -88,14 +96,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "fontSize": 11,
                     "bold": false,
                     "color": '#9E9E9E',
-                    "margin": [30, 30, 30, 30]
+                    "margin": [40, 20, 40, 40]
                 },
                 "footer": {
                     "fontSize": 11,
                     "bold": false,
                     "color": '#9E9E9E',
-                    "margin": [30, 30, 30, 30],
-                    "alignment": 'center'
+                    "margin": [40, 0, 40, 40]
                 }
             }
         };
