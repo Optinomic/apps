@@ -27,8 +27,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
-
             $scope.d.haveData = true;
+
+            $scope.pdf_make_init();
 
 
             // Finishing: Console Info & Init = done.
@@ -38,6 +39,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
     $scope.loadMainData();
 
+
+    // -----------------------------------
+    // PDF-Make - Init
+    // -----------------------------------
+
+    $scope.pdf_make_init = function() {
+        $scope.d.docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+    };
+
+    $scope.pdf_open = function() {
+        console.log('(!) pdf_open');
+        pdfMake.createPdf($scope.d.docDefinition).open();
+    };
+
+    $scope.pdf_download = function() {
+        console.log('(!) pdf_download');
+        var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+        pdfMake.createPdf(docDefinition).download();
+    };
 
 
 });
