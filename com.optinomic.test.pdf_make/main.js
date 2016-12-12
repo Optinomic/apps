@@ -305,7 +305,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             survey_responses.forEach(function(response, responseID) {
 
                 var date = $filter("amDateFormat")(response.entity.data.filled, 'DD.MM.YYYY');
-                var score = response.calculation_result.score;
+                var score = response.calculations["0"].calculation_result.score;
                 var text = "Am " + date + " weist der Patient im Case " + score + "auf."
                 list_array.push(text);
             });
