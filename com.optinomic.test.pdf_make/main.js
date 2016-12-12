@@ -29,12 +29,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.dataMain = data;
             $scope.d.haveData = true;
 
-            $scope.pdf_make_init();
 
 
             $scope.d.appData = {};
             $scope.loadAppData('ch.suedhang.apps.case.new');
             $scope.loadAppData('ch.suedhang.apps.aase-g');
+
+
+            $scope.d.loader = {
+                "actions": 2,
+                "count": 0
+            };
 
 
             // Finishing: Console Info & Init = done.
@@ -224,6 +229,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.pdf_make_init = function() {
 
+
         // Get all Templates
         $scope.d.templates = $scope.getTemplates();
         $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
@@ -250,12 +256,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
         $scope.d.docs.push(doc);
+
+        console.log('(DONE) pdf_make_init', $scope.d.docs);
     };
 
 
     // -----------------------------------
     // App - Functions
     // -----------------------------------
+
+    $scope.checkDataLoaded = function(actions, count) {
+        var return_boolean = false;
+        if (count >= actions) {
+            return_boolean = true;
+        }
+        return return_boolean;
+    };
 
     $scope.loadAppPDF = function(content, app_identifier) {
 
@@ -304,6 +320,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
             // doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
 
+
+            // Run pdf_make_init when all Data loaded
+            $scope.d.loader.count = $scope.d.loader.count + 1;
+            if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
+                $scope.pdf_make_init();
+            };
 
         });
     };
