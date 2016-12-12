@@ -88,7 +88,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             }]
         };
 
-        var heading = function(style, text) {
+        d.heading = function(style, text) {
 
             if ((style !== 'h1') || (style !== 'h2')) {
                 style = '';
