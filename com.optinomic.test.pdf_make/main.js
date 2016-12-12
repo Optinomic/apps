@@ -32,12 +32,34 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.pdf_make_init();
 
 
+            $scope.d.appData = {};
+            $scope.loadAppData('ch.suedhang.apps.aase-g');
+
+
             // Finishing: Console Info & Init = done.
             console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
             $scope.d.init = true;
         });
     };
     $scope.loadMainData();
+
+
+
+    $scope.loadAppData = function(app_identifier) {
+        // -----------------------------------
+        // Get Data: d.dataMain
+        // -----------------------------------
+        $scope.d.haveData = false;
+        var dataPromiseMain = dataService.getMainAppData(app_identifier);
+        dataPromiseMain.then(function(data) {
+
+            // Save Data to $scope.d
+            $scope.d.appData[app_identifier] = data;
+
+            // Finishing: Console Info & Init = done.
+            console.log('Loaded, ', app_identifier, $scope.d.appData);
+        });
+    };
 
 
     // -----------------------------------
@@ -179,7 +201,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "fontSize": 36,
                     "bold": false,
                     "color": '#616161',
-                    "margin": [0, 40, 0, 12]
+                    "margin": [0, 40, 0, 0]
                 },
                 "caption": {
                     "fontSize": 11,
