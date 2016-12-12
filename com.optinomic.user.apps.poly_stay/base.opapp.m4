@@ -32,7 +32,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 [task get_belegung_current javascript]
-include(tasks/run_current_patients.m4)
+include(tasks/get_belegung_current.js)
 
 [task get_belegung_all javascript]
-include(tasks/run_all_patients.m4)
+include(tasks/get_belegung_all.js)
