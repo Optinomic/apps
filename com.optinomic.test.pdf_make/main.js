@@ -276,20 +276,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
 
         doc.content.push($scope.d.templates.pageBreak());
-        doc.content.push($scope.d.templates.spacer(20));
-        doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
+        doc.content.push($scope.d.templates.title('Seite 2', $scope.d.templates.patient));
 
         var bloc = {
             alignment: 'justify',
             columns: [{
-                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new')
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
+                "margin": [0, 0, 0, 6]
             }, {
-                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new')
-            }],
-            "margin": [0, 0, 0, 24]
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
+                "margin": [0, 0, 0, 6]
+            }]
         };
-        doc.content.push(bloc);
 
+        doc.content.push(bloc);
+        doc.content.push($scope.d.templates.spacer(10));
+        doc.content.push($scope.d.templates.patientAddress_clinicLogo);
+        doc.content.push($scope.d.templates.spacer(20));
+
+        // Safe
         $scope.d.docs.push(doc);
 
         console.log('(DONE) pdf_make_init', $scope.d.docs);
