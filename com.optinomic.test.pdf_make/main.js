@@ -50,6 +50,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // if you don't need styles, you can use a simple string to define a paragraph
                 $scope.d.dataMain.config.data.customer.contact.name,
 
+                {
+                    image: 'http://www.optinomic.com/wp-content/uploads/2014/09/optinomic_logo_medium.png'
+                },
+
                 // using a { text: '...' } object lets you set styling properties
                 { text: 'This paragraph will have a bigger font', fontSize: 15 },
 
