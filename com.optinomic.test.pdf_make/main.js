@@ -276,12 +276,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Save Data to $scope.d
             $scope.d.appData.api = run;
             $scope.d.appData[app_identifier] = {
-                "data": data.data,
+                "data": data,
                 "pdf": []
             };
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
-                $scope.d.appData[app_identifier].push(run.getCaseList());
+                $scope.d.appData[app_identifier].pdf.push(run.getCaseList());
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
