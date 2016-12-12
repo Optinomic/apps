@@ -276,6 +276,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
 
         doc.content.push($scope.d.templates.pageBreak());
+        doc.content.push($scope.d.templates.spacer(20));
+        doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
 
         var bloc = {
             alignment: 'justify',
