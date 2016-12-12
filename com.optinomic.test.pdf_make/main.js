@@ -269,7 +269,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc = {
             "id": 0,
             "name": "Notizen",
-            "description": "Ein leeres Blatt für Gesprächsnotizen."
+            "description": "Ein leeres Blatt für Gesprächsnotizen.",
             "content": []
         };
 
@@ -286,7 +286,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc = {
             "id": 0,
             "name": "Eintritts-Assessment",
-            "description": "Eintritts-Assessment der Klinik Südhang."
+            "description": "Eintritts-Assessment der Klinik Südhang.",
             "content": []
         };
         doc.content.push($scope.d.templates.spacer(10));
