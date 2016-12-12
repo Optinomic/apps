@@ -33,6 +33,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.appData = {};
+            $scope.loadAppData('ch.suedhang.apps.case.new');
             $scope.loadAppData('ch.suedhang.apps.aase-g');
 
 
@@ -266,10 +267,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         dataPromiseApp.then(function(data) {
 
             // Save Data to $scope.d
+            var run = $scope.getAppFunctionsAPI();
             $scope.d.appData[app_identifier] = {
                 "data": data,
-                "api": $scope.getAppFunctionsAPI()
+                "api": run
             };
+
+            if (app_identifier === 'ch.suedhang.apps.case.new') {
+                console.log('gaga: ch.suedhang.apps.case.new');
+            };
+
+            if (app_identifier === 'ch.suedhang.apps.aase-g') {
+                run.hello();
+            };
+
 
             // Finishing: Console Info & Init = done.
             $scope.d.haveData = true;
