@@ -85,7 +85,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         d.patientAddress_clinicLogo = {
-            "alignment": 'justify',
+            "alignment": 'left',
             "columns": [{
                 "text": d.patient_adress
             }, {
@@ -212,33 +212,39 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "fontSize": 36,
                     "bold": false,
                     "color": '#616161',
+                    "alignment": "left",
                     "margin": [0, 40, 0, 0]
                 },
                 "caption": {
                     "fontSize": 11,
                     "bold": false,
                     "color": '#9E9E9E',
+                    "alignment": "left",
                     "margin": [3, 0, 0, 0]
                 },
                 "h1": {
                     "fontSize": 18,
                     "bold": false,
                     "color": '#424242',
+                    "alignment": "left",
                     "margin": [0, 40, 0, 24]
                 },
                 "h2": {
                     "fontSize": 14,
                     "bold": false,
                     "color": '#212121',
+                    "alignment": "left",
                     "margin": [0, 20, 0, 12]
                 },
                 "h3": {
                     "bold": true,
                     "color": '#212121',
+                    "alignment": "left",
                     "margin": [0, 6, 0, 12]
                 },
                 "p": {
                     "color": '#212121',
+                    "alignment": "left",
                     "margin": [0, 0, 0, 12]
                 }
             }
@@ -279,14 +285,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.title('Seite 2', $scope.d.templates.patient));
 
         var bloc = {
-            alignment: 'justify',
-            columns: [{
+            "alignment": 'left',
+            "columns": [{
                 stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
                 "margin": [0, 0, 0, 6]
             }, {
                 stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
                 "margin": [0, 0, 0, 6]
-            }]
+            }],
+            "columnGap": 12
         };
 
         doc.content.push(bloc);
