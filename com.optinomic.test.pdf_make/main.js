@@ -369,8 +369,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var pdf = $scope.d.appData[app_identifier].pdf
 
                 pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
-                pdf.push($scope.d.templates.text('Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert.'));
                 pdf.push(run.getCaseList());
+                pdf.push($scope.d.templates.caption('Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert.'));
+
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
@@ -403,7 +404,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var date = $filter("amDateFormat")(response.entity.data.filled, 'DD.MM.YYYY');
                 var score = response.calculations["0"].calculation_result.score;
-                var text = "Am " + date + " wies der Patient im Case " + score + " Punkte auf."
+                var text = "Am " + date + " wies der Patient im CASE " + score + " Punkte auf."
                 list_array.push(text);
             });
 
