@@ -291,6 +291,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.haveData = false;
         var dataPromiseApp = dataService.getMainAppData(app_identifier);
         dataPromiseApp.then(function(data) {
+            $scope.d.loader.count = $scope.d.loader.count + 1;
+
 
             // Finishing: Console Info & Init = done.
             $scope.d.haveData = true;
@@ -322,9 +324,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Run pdf_make_init when all Data loaded
-            $scope.d.loader.count = $scope.d.loader.count + 1;
             if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
                 $scope.pdf_make_init();
+            } else {
+                console.log(app_identifier, ' loader: ', $scope.d.loader.actions, $scope.d.loader.count);
             };
 
         });
