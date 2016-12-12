@@ -315,7 +315,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.loadAppPDF = function(content, app_identifier) {
 
-        var pdf_array = $scope.d.appData[app_identifier].pdf;
+        var pdf_array = angular.copy($scope.d.appData[app_identifier].pdf);
 
         console.log('Before', content, $scope.d.appData[app_identifier]);
         pdf_array.forEach(function(d, arrayID) {
