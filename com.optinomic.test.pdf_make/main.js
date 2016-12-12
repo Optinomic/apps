@@ -57,6 +57,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.appData[app_identifier] = data;
 
             // Finishing: Console Info & Init = done.
+            $scope.d.haveData = true;
             console.log('Loaded, ', app_identifier, $scope.d.appData);
         });
     };
