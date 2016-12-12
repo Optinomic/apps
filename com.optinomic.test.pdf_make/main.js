@@ -45,31 +45,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-    $scope.loadAppData = function(app_identifier) {
-        // -----------------------------------
-        // Get Data: d.dataMain
-        // -----------------------------------
-        $scope.d.haveData = false;
-        var dataPromiseApp = dataService.getMainAppData(app_identifier);
-        dataPromiseApp.then(function(data) {
-
-            // Save Data to $scope.d
-            $scope.d.appData[app_identifier] = {
-                "data": data,
-                "api": {}
-            };
-
-            // Populate Functions as API  include(templates/pdf.html)
-            if (app_identifier === 'ch.suedhang.apps.aase-g') {
-                $scope.d.appData[app_identifier].api = include(api_functions_case.js);
-            };
-
-
-            // Finishing: Console Info & Init = done.
-            $scope.d.haveData = true;
-            console.log('Loaded, ', app_identifier, $scope.d.appData);
-        });
-    };
 
 
     // -----------------------------------
@@ -246,8 +221,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return d;
     };
 
-
-
     $scope.pdf_make_init = function() {
 
         // Get all Templates
@@ -279,6 +252,46 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.docs.push(doc);
     };
 
+
+    // -----------------------------------
+    // App - Functions
+    // -----------------------------------
+
+    $scope.loadAppData = function(app_identifier) {
+        // -----------------------------------
+        // Get Data: d.dataMain
+        // -----------------------------------
+        $scope.d.haveData = false;
+        var dataPromiseApp = dataService.getMainAppData(app_identifier);
+        dataPromiseApp.then(function(data) {
+
+            // Save Data to $scope.d
+            $scope.d.appData[app_identifier] = {
+                "data": data,
+                "api": $scope.getAppFunctionsAPI()
+            };
+
+            // Finishing: Console Info & Init = done.
+            $scope.d.haveData = true;
+            console.log('Loaded, ', app_identifier, $scope.d.appData);
+        });
+    };
+
+    $scope.getAppFunctionsAPI = function() {
+        var d = {};
+
+        // 'ch.suedhang.apps.aase-g'
+        d.hello = function() {
+            console.log('(HELLO) World!');
+        };
+
+        return d;
+    };
+
+
+    // -----------------------------------
+    // PDF-Make - Handles
+    // -----------------------------------
 
     $scope.pdf_open = function(doc) {
         console.log('(!) pdf_open', doc);
