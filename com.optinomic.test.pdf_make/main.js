@@ -266,15 +266,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var dataPromiseApp = dataService.getMainAppData(app_identifier);
         dataPromiseApp.then(function(data) {
 
-            // Save Data to $scope.d
+            // Finishing: Console Info & Init = done.
+            $scope.d.haveData = true;
+            console.log('Loaded, ', app_identifier, $scope.d.appData);
+
+
             var run = $scope.getAppFunctionsAPI();
+
+            // Save Data to $scope.d
+            $scope.d.appData.api = run;
             $scope.d.appData[app_identifier] = {
-                "data": data,
-                "api": run
+                "data": data.data,
+                "pdf": []
             };
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
-                console.log('gaga: ch.suedhang.apps.case.new');
+                $scope.d.appData[app_identifier].push(run.getCaseList());
             };
 
             if (app_identifier === 'ch.suedhang.apps.aase-g') {
@@ -282,19 +289,44 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-            // Finishing: Console Info & Init = done.
-            $scope.d.haveData = true;
-            console.log('Loaded, ', app_identifier, $scope.d.appData);
+
         });
     };
 
     $scope.getAppFunctionsAPI = function() {
         var d = {};
 
+        // 'ch.suedhang.apps.case.new'
+        d.getCaseList = function() {
+
+            var survey_responses = $scope.d.appData["ch.suedhang.apps.case.new"].data.survey_responses;
+
+            var list_array = [];
+            survey_responses.forEach(function(response, responseID) {
+
+                var date = $filter("amDateFormat")(response.entity.data.filled, 'DD.MM.YYYY');
+                var score = response.calculation_result.score;
+                var text = "Am " + date + " weist der Patient im Case " + score + "auf."
+                list_array.push(text);
+            });
+
+            return {
+                "ul": list_array
+            };
+        };
+
+
         // 'ch.suedhang.apps.aase-g'
         d.hello = function() {
             console.log('(HELLO) World!');
         };
+
+
+
+
+
+
+
 
         return d;
     };
