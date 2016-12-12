@@ -33,7 +33,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.appData = {};
-            //$scope.loadAppData('ch.suedhang.apps.aase-g');
+            $scope.loadAppData('ch.suedhang.apps.aase-g');
 
 
             // Finishing: Console Info & Init = done.
