@@ -30,6 +30,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.haveData = true;
 
 
+            // Get all Templates
+            $scope.d.templates = $scope.getTemplates();
 
             $scope.d.appData = {};
             $scope.loadAppData('ch.suedhang.apps.case.new');
@@ -230,8 +232,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.pdf_make_init = function() {
 
 
-        // Get all Templates
-        $scope.d.templates = $scope.getTemplates();
+
         $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
 
         // All Doc's here
