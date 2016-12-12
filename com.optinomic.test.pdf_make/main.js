@@ -33,7 +33,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.appData = {};
-            $scope.loadAppData('ch.suedhang.apps.aase-g');
+            //$scope.loadAppData('ch.suedhang.apps.aase-g');
 
 
             // Finishing: Console Info & Init = done.
@@ -50,8 +50,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Get Data: d.dataMain
         // -----------------------------------
         $scope.d.haveData = false;
-        var dataPromiseMain = dataService.getMainAppData(app_identifier);
-        dataPromiseMain.then(function(data) {
+        var dataPromiseApp = dataService.getMainAppData(app_identifier);
+        dataPromiseApp.then(function(data) {
 
             // Save Data to $scope.d
             $scope.d.appData[app_identifier] = data;
