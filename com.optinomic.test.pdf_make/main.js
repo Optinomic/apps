@@ -277,9 +277,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var pdf_array = $scope.d.appData[app_identifier].pdf;
 
+        console.log('Before', content, pdf_array);
         pdf_array.forEach(function(d, arrayID) {
             content.push(d);
         });
+        console.log('After', content);
 
         return content;
     };
@@ -326,8 +328,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Run pdf_make_init when all Data loaded
             if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
                 $scope.pdf_make_init();
-            } else {
-                console.log(app_identifier, ' loader: ', $scope.d.loader.actions, $scope.d.loader.count);
             };
 
         });
