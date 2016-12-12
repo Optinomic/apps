@@ -65,10 +65,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-
-            var sql = include_as_js_string(belegung_history_from_fid.sql);
-
-
             // Finishing: Console Info & Init = done.
             $scope.d.haveData = true;
             console.log('Loaded, ', app_identifier, $scope.d.appData);
