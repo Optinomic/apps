@@ -31,6 +31,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Get all Templates
+            $scope.d.current_doc = {
+                "id": 99,
+                "name": "Druckvorlage",
+                "description": "",
+                "content": []
+            }
             $scope.d.templates = $scope.getTemplates();
 
 
@@ -306,7 +312,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Safe
         $scope.d.docs.push(doc);
-        $scope.d.current_doc = doc;
 
 
         // ----------------------------
