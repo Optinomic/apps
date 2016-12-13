@@ -471,7 +471,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
                         var substanz = [{ text: ps.substanz, margin: [0, 6, 0, 6] }, { text: ps.label, margin: [0, 6, 0, 6] }];
-                        table.table.body.push(substanz);
+                        table_to_push.table.body.push(substanz);
                     });
                     pdf.push(table_to_push);
                 });
