@@ -62,7 +62,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.setAssessmentCredentials = function(patient) {
-        assessment = {};
+        var assessment = {};
         assessment.login_pid = patient.data.cis_pid + '';
 
         // Password = YYYYMMDD
