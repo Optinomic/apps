@@ -382,7 +382,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var bloc = {
             "alignment": 'left',
             "columns": [{
-                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
+                stack: $scope.loadAppPDF([], 'ch.suedhang.apps.actinfo_ein'),
                 "margin": [0, 0, 0, 6]
             }, {
                 stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
@@ -454,7 +454,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var pdf = $scope.d.appData[app_identifier].pdf
 
             if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
-                pdf.push($scope.d.templates.heading('h2', 'actInfo Eintritt'));
+                pdf.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
                 pdf.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
 
                 var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
@@ -466,11 +466,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                                 [{ text: 'Substanz', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }, { text: 'Häufigkeit', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }],
                             ]
                         },
-                        "layout": 'noBorders'
+                        "layout": 'lightHorizontalLines'
                     };
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
-                        var substanz = [{ text: ps.substanz, margin: [0, 6, 0, 6] }, { text: ps.label, margin: [0, 6, 0, 6] }];
+                        var substanz = [{ text: ps.substanz, margin: [0, 3, 0, 3] }, { text: ps.label, margin: [0, 3, 0, 3] }];
                         table_to_push.table.body.push(substanz);
                     });
                     pdf.push(table_to_push);
