@@ -2,10 +2,10 @@ include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <p class="md-headline">Dokumente (PDF)</p>
 </div>
-<div ng-if="d.loader.done" ng-repeat="doc in d.docs" class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+<div ng-if="d.loader.done" ng-repeat="doc in d.docs" class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" layout-padding>
     <div flex>
         <p class="md-title">{{doc.name}}</p>
-        <p class="md-caption">{{doc.description}}</p>
+        <p class="md-caption" style="margin-top:-6px;">{{doc.description}}</p>
     </div>
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
         <md-button ng-click="pdf_open(doc)">öffnen</md-button>

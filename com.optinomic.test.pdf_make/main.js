@@ -147,7 +147,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             text = text === undefined ? '' : text;
             style = style === undefined ? 'h1' : style;
 
-            if ((style !== 'h1') && (style !== 'h2')) {
+            if ((style !== 'h1') && (style !== 'h2') && (style !== 'h3')) {
                 style = '';
             };
 
@@ -257,12 +257,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "bold": true,
                     "color": '#212121',
                     "alignment": "left",
-                    "margin": [0, 6, 0, 12]
+                    "margin": [0, 6, 0, 6]
                 },
                 "p": {
                     "color": '#212121',
                     "alignment": "left",
-                    "margin": [0, 0, 0, 12]
+                    "margin": [0, 0, 0, 6]
                 }
             }
         };
@@ -478,14 +478,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         "table": {
                             "widths": ['*', '*'],
                             "body": [
-                                [{ text: 'Substanz', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }, { text: 'Häufigkeit', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }],
+                                [{ text: 'Substanz', color: 'grey', fontSize: 11, margin: [0, 6, 0, 0] }, { text: 'Häufigkeit', color: 'grey', fontSize: 11, margin: [0, 6, 0, 0] }],
                             ]
                         },
                         "layout": 'lightHorizontalLines'
                     };
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
-                        var substanz = [{ text: ps.substanz, margin: [0, 3, 0, 3] }, { text: ps.label, margin: [0, 3, 0, 3] }];
+                        var substanz = [{ text: ps.substanz, fontSize: 11, margin: [0, 3, 0, 3] }, { text: ps.label, fontSize: 11, margin: [0, 3, 0, 3] }];
                         table_to_push.table.body.push(substanz);
                     });
                     col_1.push(table_to_push);
