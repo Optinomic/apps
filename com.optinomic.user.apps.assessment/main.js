@@ -68,7 +68,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Password = YYYYMMDD
         var pw = 'Fehler';
 
-        if (patient.data.birthdate !== '') {
+        console.log('?', patient.data.birthdate);
+
+        if ((patient.data.birthdate !== '') && (patient.data.birthdate !== null) && (patient.data.birthdate !== undefined)) {
             pw = patient.data.birthdate;
             pw = pw.substring(0, 10);
             pw = pw.replace('-', '');
@@ -273,8 +275,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "footer": function(currentPage, pageCount) {
                 var obj = {
                     "columns": [
-                        { "text": "", "alignment": 'left', "style": 'footer' },
-                        { "text": 'Seite ' + currentPage.toString() + '/' + pageCount.toString(), "alignment": 'right', "style": 'footer' }
+                        { "text": "Zugangsdaten", "alignment": 'left', "style": 'footer' },
+                        { "text": "", "alignment": 'right', "style": 'footer' }
                     ]
                 };
                 return obj;
