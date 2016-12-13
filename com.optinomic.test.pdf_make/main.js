@@ -450,7 +450,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.appData.api = run;
 
 
-            if (app_identifier === 'ch.suedhang.apps.case.new') {
+            if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
                 run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group);
             };
 
