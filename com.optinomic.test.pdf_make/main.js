@@ -33,6 +33,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Get all Templates
             $scope.d.templates = $scope.getTemplates();
 
+
             $scope.d.appData = {};
             $scope.loadAppData('ch.suedhang.apps.case.new');
             $scope.loadAppData('ch.suedhang.apps.aase-g');
@@ -305,7 +306,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Safe
         $scope.d.docs.push(doc);
-
+        $scope.d.current_doc = doc;
 
 
         // ----------------------------
