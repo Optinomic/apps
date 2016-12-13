@@ -253,6 +253,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         return d;
     };
 
+    $scope.setAssessmentCredentials = function(patient) {
+        var assessment = {};
+        assessment.login_pid = patient.data.cis_pid + '';
+
+        // Password = YYYYMMDD
+        var pw = 'Fehler';
+
+        // console.log('?', patient.data.birthdate);
+
+        if ((patient.data.birthdate !== '') && (patient.data.birthdate !== null) && (patient.data.birthdate !== undefined)) {
+            pw = patient.data.birthdate;
+            pw = pw.substring(0, 10);
+            pw = pw.replace('-', '');
+            pw = pw.replace('-', '');
+        };
+
+        assessment.login_pw = pw;
+
+        return assessment;
+    };
+
     $scope.pdf_make_init = function() {
 
 
@@ -280,11 +301,55 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.docs.push(doc);
 
 
+
+        // ----------------------------
+        // Doc: Patienten-Assessment
+        // ----------------------------
+        doc = {
+            "id": 2,
+            "name": "Eintritts-Assessment",
+            "description": "Eintritts-Assessment der Klinik Südhang.",
+            "content": []
+        };
+
+        var zugangsdaten = $scope.setAssessmentCredentials($scope.d.dataMain.patient);
+
+        var text_1 = "Sie finden im Patienten-Assessment einige Fragebögen, in denen Sie Aussagen zu verschiedenen Themen und Zeiträumen einschätzen sollen. Am Anfang jedes Fragebogens finden Sie eine kurze Anleitung. Lesen Sie diese bitte sorgfältig durch. Achten Sie dabei auf die rot markierten Angaben zu den Zeiträumen, auf die sich die Fragen und Aussagen beziehen. Diese können von Fragebogen zu Fragebogen unterschiedlich sein.";
+        var text_2 = "Alle Fragebögen enthalten Aussagen. Ihre Aufgabe ist zu bewerten, inwieweit diese Aussagen auf Sie bzw. Ihre Situation zutreffen. Antworten Sie möglichst spontan – es gibt keine richtigen oder falschen Antworten. Wichtig ist, dass die jeweilige Antwort für Sie persönlich stimmt. Wir bitten Sie, die aufgeführten Fragebögen in der bestehenden Reihenfolge lückenlos zu bearbeiten. Zum starten JEDES EINZELNEN Fragebogens klicken Sie am rechten Rand des angegebenen Fragebogens auf „START“.";
+        var text_3 = "Falls Sie Fragen nicht verstehen oder etwas unklar ist, wenden Sie sich an die anwesende Betreuungsperson.";
+
+
+        doc.content.push($scope.d.templates.spacer(10));
+        doc.content.push($scope.d.templates.patientAddress_clinicLogo);
+        doc.content.push($scope.d.templates.spacer(20));
+        doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
+
+        doc.content.push($scope.d.templates.text(text_1));
+        doc.content.push($scope.d.templates.text(text_2));
+        doc.content.push($scope.d.templates.text(text_3));
+        doc.content.push($scope.d.templates.heading('h1', 'Persönliche Zugangsdaten'));
+
+        var credentials = {
+            table: {
+                widths: [60, '*'],
+                body: [
+                    [{ text: 'Login', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                    [{ text: 'Passwort', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
+                ]
+            },
+            layout: 'noBorders'
+        };
+        doc.content.push(credentials);
+
+        // Safe
+        $scope.d.docs.push(doc);
+
+
         // ----------------------------
         // Doc: Eintritts-Assessment
         // ----------------------------
         doc = {
-            "id": 0,
+            "id": 1,
             "name": "Eintritts-Assessment",
             "description": "Eintritts-Assessment der Klinik Südhang.",
             "content": []
@@ -314,6 +379,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Safe
         $scope.d.docs.push(doc);
+
+
+
 
         console.log('(DONE) pdf_make_init', $scope.d.docs);
     };
