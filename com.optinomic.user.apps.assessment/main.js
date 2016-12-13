@@ -66,10 +66,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         assessment.login_pid = patient.data.cis_pid + '';
 
         // Password = YYYYMMDD
-        var pw = patient.data.birthdate;
-        pw = pw.substring(0, 10);
-        pw = pw.replace('-', '');
-        pw = pw.replace('-', '');
+        var pw = 'Fehler';
+
+        if (patient.data.birthdate !== '') {
+            pw = patient.data.birthdate;
+            pw = pw.substring(0, 10);
+            pw = pw.replace('-', '');
+            pw = pw.replace('-', '');
+        };
+
         assessment.login_pw = pw;
 
         return assessment;
