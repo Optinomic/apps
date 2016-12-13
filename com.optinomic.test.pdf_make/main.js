@@ -966,7 +966,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 tables.push(table);
             });
 
-            console.log('actinfo_ein | tables', tables);
+            return tables;
         };
 
         // 'ch.suedhang.apps.case.new'
