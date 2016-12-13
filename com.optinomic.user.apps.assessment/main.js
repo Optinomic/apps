@@ -129,6 +129,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             content.push($scope.d.templates.pageBreak());
         });
 
+        content.push($scope.d.templates.heading('h1', 'Patienten- / Anwesenheitsliste'));
+        var anwesenheit {
+            table: {
+                widths: [40, '*'],
+                body: [
+                    [{ text: 'Anwesend', color: 'gray', fontSize: 9, margin: [0, 3, 0, 3] }, { text: 'Patient / Patientin', color: 'gray', margin: [0, 3, 0, 3] }]
+                ]
+            },
+            layout: 'lightHorizontalLines'
+        };
+
+        // Fill Content per Patient
+        $scope.d.app.selected_group.patients.forEach(function(p, patientID) {
+            var patient_text = ['', { text: 'Patient', margin: [0, 3, 0, 3] }]
+            anwesenheit.table.body.push(patient_text);
+        });
+        content.push(anwesenheit);
+
+
     };
 
     $scope.getTemplates = function() {
