@@ -307,8 +307,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // ----------------------------
         doc = {
             "id": 2,
-            "name": "Eintritts-Assessment",
-            "description": "Eintritts-Assessment der Klinik Südhang.",
+            "name": "Patienten-Assessment",
+            "description": "Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.",
             "content": []
         };
 
@@ -319,7 +319,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var text_3 = "Falls Sie Fragen nicht verstehen oder etwas unklar ist, wenden Sie sich an die anwesende Betreuungsperson.";
 
 
-        doc.content.push($scope.d.templates.spacer(10));
+        doc.content.push($scope.d.templates.spacer(30));
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
