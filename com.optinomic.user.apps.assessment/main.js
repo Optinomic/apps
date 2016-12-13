@@ -275,19 +275,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // PDF-Make - Handles
     // -----------------------------------
 
-    $scope.pdf_open = function(doc) {
-        console.log('(!) pdf_open', doc);
-        $scope.d.current_doc = doc
-        $scope.d.docDefinition.content = doc.content;
-
+    $scope.pdf_open = function() {
+        console.log('(!) pdf_open');
         pdfMake.createPdf($scope.d.docDefinition).open();
     };
 
-    $scope.pdf_download = function(doc) {
-        console.log('(!) pdf_download', doc);
-        $scope.d.current_doc = doc
-        $scope.d.docDefinition.content = doc.content;
-
+    $scope.pdf_download = function() {
+        console.log('(!) pdf_download');
         pdfMake.createPdf($scope.d.docDefinition).download();
     };
 
