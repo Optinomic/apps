@@ -32,10 +32,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Run App-Functions
-            $scope.d.ks = $scope.ks_init();
-
-            $scope.getDimensions();
-
             if (current_template === 'print_access') {
                 $scope.appInit();
             };
