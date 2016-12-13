@@ -374,6 +374,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push($scope.d.templates.patientAddress_clinicLogo);
         doc.content.push($scope.d.templates.spacer(20));
         doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
+        doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.actinfo_ein');
         doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
 
         doc.content.push($scope.d.templates.pageBreak());
@@ -451,7 +452,27 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
-                run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
+                pdf.push($scope.d.templates.heading('h2', 'actInfo Eintritt'));
+                pdf.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
+
+                var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
+                actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
+                    var table = {
+                        "table": {
+                            "widths": ['*', '*'],
+                            "body": [
+                                [{ text: 'Substanz', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }, { text: 'Häufigkeit', color: 'grey', fontSize: 10, margin: [0, 6, 0, 0] }],
+                            ]
+                        },
+                        "layout": 'noBorders'
+                    };
+
+                    table.problemsubstanzen.forEach(function(ps, myTableID) {
+                        var substanz = [{ text: ps.substanz, margin: [0, 6, 0, 6] }, { text: ps.label, margin: [0, 6, 0, 6] }];
+                        table.table.body.push(substanz);
+                    });
+                    pdf.push(table);
+                });
             };
 
 
@@ -938,7 +959,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var table = {
                     "problemsubstanzen": result.problemsubstanzen,
-                    "datum": result.entity.data.response.VMEB001
+                    "datum": $filter("amDateFormat")(result.entity.data.response.VMEB001, 'DD.MM.YYYY')
                 };
 
                 tables.push(table);
