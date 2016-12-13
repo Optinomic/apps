@@ -130,7 +130,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         content.push($scope.d.templates.heading('h1', 'Patienten- / Anwesenheitsliste'));
-        var anwesenheit {
+        var anwesenheit = {
             table: {
                 widths: [40, '*'],
                 body: [
