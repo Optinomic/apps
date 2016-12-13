@@ -68,7 +68,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Password = YYYYMMDD
         var pw = 'Fehler';
 
-        console.log('?', patient.data.birthdate);
+        // console.log('?', patient.data.birthdate);
 
         if ((patient.data.birthdate !== '') && (patient.data.birthdate !== null) && (patient.data.birthdate !== undefined)) {
             pw = patient.data.birthdate;
