@@ -451,7 +451,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
-                console.log('ch.suedhang.apps.actinfo_ein ==== ', data.survey_responses_group["0"]);
                 run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
             };
 
@@ -512,6 +511,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Problemsubstanzen ermitteln
             results.forEach(function(result, myindex) {
+                console.log('ch.suedhang.apps.actinfo_ein ==== ', result);
+
                 var response = result.entity.data.response;
                 result.problemsubstanzen = [];
 
@@ -937,7 +938,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var table = {
                     "problemsubstanzen": result.problemsubstanzen,
-                    "datum": response.entity.data.response.VMEB001
+                    "datum": result.entity.data.response.VMEB001
                 };
 
                 tables.push(table);
