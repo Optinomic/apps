@@ -35,13 +35,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             $scope.d.appData = {};
-            $scope.loadAppData('ch.suedhang.apps.case.new');
-            $scope.loadAppData('ch.suedhang.apps.aase-g');
+            $scope.loadAppData('ch.suedhang.apps.case.new', false);
+            $scope.loadAppData('ch.suedhang.apps.aase-g', false);
 
 
             $scope.d.loader = {
                 "actions": 2,
-                "count": 0
+                "count": 0,
+                "done": false
             };
 
 
@@ -409,21 +410,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         var pdf_array = angular.copy($scope.d.appData[app_identifier].pdf);
 
-        console.log('Before', content, $scope.d.appData[app_identifier]);
         pdf_array.forEach(function(d, arrayID) {
             content.push(d);
         });
-        console.log('After', content);
+        // console.log('After', content);
 
         return content;
     };
 
-    $scope.loadAppData = function(app_identifier) {
+    $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------
         // Get Data: d.dataMain
         // -----------------------------------
-        $scope.d.haveData = false;
-        var dataPromiseApp = dataService.getMainAppData(app_identifier);
+
+        var dataPromiseApp = dataService.getMainAppData(app_identifier, load_full);
         dataPromiseApp.then(function(data) {
             $scope.d.loader.count = $scope.d.loader.count + 1;
 
@@ -462,6 +462,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Run pdf_make_init when all Data loaded
             if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
                 $scope.pdf_make_init();
+                $scope.d.loader.done = true;
             };
 
         });

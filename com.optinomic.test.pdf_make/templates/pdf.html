@@ -2,7 +2,7 @@ include(../lib/html/optinomic/page/start.m4)
 <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <p class="md-headline">Dokumente (PDF)</p>
 </div>
-<div ng-repeat="doc in d.docs" class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+<div ng-if="d.loader.done" ng-repeat="doc in d.docs" class="grid-border-top" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
     <div flex>
         <p class="md-title">{{doc.name}}</p>
         <p class="md-caption">{{doc.description}}</p>
@@ -11,6 +11,10 @@ include(../lib/html/optinomic/page/start.m4)
         <md-button ng-click="pdf_open(doc)">öffnen</md-button>
         <md-button ng-click="pdf_download(doc)">speichern</md-button>
     </div>
+</div>
+<div ng-if="!d.loader.done" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <p class="md-caption">{{d.loader.count}}/{{d.loader.actions}}</p>
 </div>
 <div id="iframeContainer" style="position: absolute; width: 100%;"></div>
 include(../lib/html/optinomic/page/end.m4)
