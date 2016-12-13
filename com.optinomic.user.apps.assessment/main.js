@@ -117,14 +117,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             content.push($scope.d.templates.spacer(10));
             content.push(patientAddress_clinicLogo);
             content.push($scope.d.templates.spacer(20));
-            content.push($scope.d.templates.title('Patienten-Assessment', patient_full_name + ' ' + patient_birthday_age));
+            content.push($scope.d.templates.title('Patienten-Assessment', patient_full_name + ' (' + patient_birthday_age + ')'));
             content.push($scope.d.templates.text(text_1));
             content.push($scope.d.templates.text(text_2));
             content.push($scope.d.templates.text(text_3));
             content.push($scope.d.templates.heading('h1', 'Persönliche Zugangsdaten'));
-            content.push($scope.d.templates.text(zugangsdaten.login_pid));
-            content.push($scope.d.templates.text(zugangsdaten.login_pw));
 
+            var credentials = {
+                table: {
+                    widths: [60, '*'],
+                    body: [
+                        [{ text: 'Login', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                        [{ text: 'Passwort', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
+                    ]
+                },
+                layout: 'noBorders'
+            };
+            content.push(credentials);
 
             content.push($scope.d.templates.pageBreak());
         });
@@ -142,7 +151,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Fill Content per Patient
         $scope.d.app.selected_group.patients.forEach(function(p, patientID) {
-            var patient_text = ['', { text: 'Patient', margin: [0, 3, 0, 3] }]
+            var patient_full_name = p.data.extras.full_name;
+            var patient_birthday_age = p.data.extras.birthday_age;
+            var patient_text = ['', { text: patient_full_name + ' (' + patient_birthday_age + ')', margin: [0, 3, 0, 3] }]
             anwesenheit.table.body.push(patient_text);
         });
         content.push(anwesenheit);
