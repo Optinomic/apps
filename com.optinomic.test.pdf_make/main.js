@@ -451,6 +451,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
+                console.log('ch.suedhang.apps.actinfo_ein ==== ', data);
                 run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
             };
 
