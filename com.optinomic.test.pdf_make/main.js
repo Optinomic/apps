@@ -469,7 +469,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "columnGap": 24
                 };
 
-                var col_1 = act_info_ein_block.columns["0"];
+                var col_1 = act_info_ein_block.columns["0"].stack;
                 col_1.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
 
                 var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
@@ -491,7 +491,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     col_1.push(table_to_push);
                 });
 
-                var col_2 = act_info_ein_block.columns["1"];
+                var col_2 = act_info_ein_block.columns["1"].stack;
                 col_2.push($scope.d.templates.heading('h3', 'Alkoholabhängigkeit (AUDIT)'));
                 col_2.push($scope.d.templates.text('Grafik?'));
 
