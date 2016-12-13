@@ -533,7 +533,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -550,7 +550,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -566,7 +566,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -582,7 +582,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -598,7 +598,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -614,7 +614,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -631,7 +631,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -647,7 +647,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -663,7 +663,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -680,7 +680,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -696,7 +696,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -712,7 +712,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -728,7 +728,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -744,7 +744,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -762,7 +762,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -778,7 +778,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -794,7 +794,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -810,7 +810,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -828,7 +828,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -844,7 +844,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -860,7 +860,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -877,7 +877,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -893,7 +893,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -911,7 +911,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
+                        "label": my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')'
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
@@ -927,7 +927,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                     obj_to_push = {
                         "substanz": substanz,
-                        "label": my_result[answer];
+                        "label": my_result[answer]
                     };
 
                     result.problemsubstanzen.push(obj_to_push);
