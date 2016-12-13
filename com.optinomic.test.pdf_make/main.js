@@ -33,7 +33,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Get all Templates
             $scope.d.current_doc = {
                 "id": 99,
-                "name": "Druckvorlage",
+                "name": "Optinomic | Druckvorlage",
                 "description": "",
                 "content": []
             }
@@ -530,7 +530,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.current_doc = doc
         $scope.d.docDefinition.content = doc.content;
 
-        pdfMake.createPdf($scope.d.docDefinition).download();
+        var datestamp = $filter("amDateFormat")(new Date(), 'YYYY_MM_DD__')
+        var filename = datestamp + doc.name + '__' + $scope.d.dataMain.patient.data.last_name + '_' + $scope.d.dataMain.patient.data.first_name + '.pdf';
+        filename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+        pdfMake.createPdf($scope.d.docDefinition).download(filename);
     };
 
     // To Inline in Page |  No needed for now.
