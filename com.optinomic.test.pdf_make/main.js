@@ -179,6 +179,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         d.default_definition = {
             "pageSize": 'A4',
             "pageOrientation": 'portrait',
+            "info": {
+                "title": $scope.d.current_doc.name,
+                "author": 'john doe',
+                "subject": d.patient + ' | ' + $scope.d.current_doc.name,
+                "keywords": d.patient + ', ' + d.klinik + ', ' + $scope.d.current_doc.name
+            },
             "header": {
                 "columns": [
                     { "text": d.patient, "alignment": 'left', "style": 'header' },
