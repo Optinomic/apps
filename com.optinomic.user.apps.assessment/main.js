@@ -197,14 +197,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "pageOrientation": 'portrait',
             "header": {
                 "columns": [
-                    { "text": d.patient, "alignment": 'left', "style": 'header' },
+                    { "text": "Patienten-Assessment", "alignment": 'left', "style": 'header' },
                     { "text": d.klinik, "alignment": 'right', "style": 'header' }
                 ]
             },
             "footer": function(currentPage, pageCount) {
                 var obj = {
                     "columns": [
-                        { "text": $scope.d.current_doc.name, "alignment": 'left', "style": 'footer' },
+                        { "text": "", "alignment": 'left', "style": 'footer' },
                         { "text": 'Seite ' + currentPage.toString() + '/' + pageCount.toString(), "alignment": 'right', "style": 'footer' }
                     ]
                 };
@@ -276,12 +276,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.pdf_open = function() {
-        console.log('(!) pdf_open');
+        console.log('(!) pdf_open', $scope.d.docDefinition);
         pdfMake.createPdf($scope.d.docDefinition).open();
     };
 
     $scope.pdf_download = function() {
-        console.log('(!) pdf_download');
+        console.log('(!) pdf_download', $scope.d.docDefinition);
         pdfMake.createPdf($scope.d.docDefinition).download();
     };
 
