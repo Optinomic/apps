@@ -1,0 +1,21 @@
+include(../lib/html/optinomic/page/start.m4)
+<div>
+    <h3 class="md-headline">Patienten-Assessment</h3>
+    <div>
+        <p class="md-body-1"><span class="md-body-2">Patientengruppe wählen:</span> Bitte selektieren Sie die gewünschte Patientengruppe:</p>
+        <md-input-container>
+            <label>Patientengruppe</label>
+            <md-select ng-model="d.app.selected_group">
+                <md-option><em>None</em></md-option>
+                <md-option ng-repeat="gruppe in d.dataMain.patient_groups" ng-value="gruppe">
+                    {{gruppe.name}} ({{gruppe.patients.length}} Patienten)
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div>
+        <h3 class="md-headline">Einladungen für «{{d.app.selected_group.name}}»</h3>
+        <p class="md-body-1"><span class="md-body-2">Drucken:</span> Zugangsdaten und Beschreibung drucken.</p>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)
