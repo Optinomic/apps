@@ -72,19 +72,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         pw = pw.replace('-', '');
         assessment.login_pw = pw;
 
-        // URL
-
-        var api_url = $scope.d.dataMain.config.api.url;
-
-        // Make sure URL ends with '/'
-        var api_url_last = api_url.substr(api_url.length - 1);
-        if (api_url_last !== '/') {
-            api_url = api_url + '/';
-        };
-
-        var url = api_url + 'assessment/#/login';
-        assessment.url = url;
-
         return assessment;
     };
 
