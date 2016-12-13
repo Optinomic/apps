@@ -276,11 +276,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -----------------------------------
 
     $scope.pdf_open = function() {
+        $scope.createPDF();
         console.log('(!) pdf_open', $scope.d.docDefinition);
         pdfMake.createPdf($scope.d.docDefinition).open();
     };
 
     $scope.pdf_download = function() {
+        $scope.createPDF();
         console.log('(!) pdf_download', $scope.d.docDefinition);
         pdfMake.createPdf($scope.d.docDefinition).download();
     };
