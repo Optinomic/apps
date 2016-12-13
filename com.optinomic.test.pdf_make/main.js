@@ -451,6 +451,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             $scope.d.appData.api = run;
 
 
+            var pdf = $scope.d.appData[app_identifier].pdf
+
             if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
                 pdf.push($scope.d.templates.heading('h2', 'actInfo Eintritt'));
                 pdf.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
@@ -477,7 +479,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             if (app_identifier === 'ch.suedhang.apps.case.new') {
-                var pdf = $scope.d.appData[app_identifier].pdf
 
                 pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
                 pdf.push(run.getCaseList());
