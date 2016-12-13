@@ -31,12 +31,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Get all Templates
-            $scope.d.current_doc = {
-                "id": 99,
-                "name": "Optinomic | Druckvorlage",
-                "description": "",
-                "content": []
-            }
             $scope.d.templates = $scope.getTemplates();
 
 
@@ -187,10 +181,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "pageSize": 'A4',
             "pageOrientation": 'portrait',
             "info": {
-                "title": $scope.d.current_doc.name,
-                "author": 'john doe',
-                "subject": d.patient + ' | ' + $scope.d.current_doc.name,
-                "keywords": d.patient + ', ' + d.klinik + ', ' + $scope.d.current_doc.name
+                "title": "Optinomic | Druckvorlage",
+                "author": d.klinik,
+                "subject": d.patient,
+                "keywords": d.patient + ', ' + d.klinik + ', Optinomic'
             },
             "header": {
                 "columns": [
