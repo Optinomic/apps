@@ -459,7 +459,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
                 actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
-                    var table = {
+                    var table_to_push = {
                         "table": {
                             "widths": ['*', '*'],
                             "body": [
@@ -473,7 +473,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         var substanz = [{ text: ps.substanz, margin: [0, 6, 0, 6] }, { text: ps.label, margin: [0, 6, 0, 6] }];
                         table.table.body.push(substanz);
                     });
-                    pdf.push(table);
+                    pdf.push(table_to_push);
                 });
             };
 
@@ -958,12 +958,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
-                var table = {
+                var table_to_push = {
                     "problemsubstanzen": result.problemsubstanzen,
                     "datum": $filter("amDateFormat")(result.entity.data.response.VMEB001, 'DD.MM.YYYY')
                 };
 
-                tables.push(table);
+                tables.push(table_to_push);
             });
 
             return tables;
