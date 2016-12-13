@@ -531,8 +531,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.docDefinition.content = doc.content;
 
         var datestamp = $filter("amDateFormat")(new Date(), 'YYYY_MM_DD__')
-        var filename = datestamp + doc.name + '__' + $scope.d.dataMain.patient.data.last_name + '_' + $scope.d.dataMain.patient.data.first_name + '.pdf';
+        var filename = datestamp + doc.name + '__' + $scope.d.dataMain.patient.data.last_name + '_' + $scope.d.dataMain.patient.data.first_name;
         filename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        filename = filename + '.pdf';
 
         pdfMake.createPdf($scope.d.docDefinition).download(filename);
     };
