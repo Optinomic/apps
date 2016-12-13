@@ -1,12 +1,12 @@
 [module]
 id = com.optinomic.test.pdf_make
-name = _PDF's
-short_description = PDF's erstellen
+name = _Druckvorlagen (PDF)
+short_description = Druckvorlagen (PDF) öffnen und herunterladen.
 version = include(VERSION)
 type = patient
 
 [description]
-Diese Applikation dient zur Erstellung von Patienten-PDF's.
+Diese Applikation stellt gewünschte Patienten-Druckvorlagen (PDF) zur Verfügung.
 
 [developer]
 first_name = Beat
