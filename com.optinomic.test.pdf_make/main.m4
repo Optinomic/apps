@@ -13,6 +13,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     
         include(scripts/app_actinfo_ein.js)
         include(scripts/app_case.js)
+        include(scripts/app_tmt.js)
     
         return d;
     };
