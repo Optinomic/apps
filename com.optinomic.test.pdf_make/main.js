@@ -550,6 +550,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         doc.content.push(bloc);
 
 
+        doc.content.push($scope.d.templates.spacer(20));
+
         var z_score_block = {
             "stack": [{
                 "text": "Überschrift",

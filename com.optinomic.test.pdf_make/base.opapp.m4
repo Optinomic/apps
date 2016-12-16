@@ -23,14 +23,12 @@ website = http://www.optinomic.com/
 	<script src='https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.test.pdf_make/pdfmake/pdfmake.min.js'></script>
 	<script src='https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.test.pdf_make/pdfmake/vfs_fonts.js'></script>
 </head>
-
-
 include(templates/pdf.html)
 
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
+include(main.m4)
 
 
 [css]
