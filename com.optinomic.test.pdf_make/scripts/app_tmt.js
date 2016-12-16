@@ -191,7 +191,7 @@ d.tmt_create_pdf_stack = function() {
             z_scores_array.push(beschriftung);
 
             var z_score_grafik = {
-                "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options);
+                "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
             };
             z_scores_array.push(z_score_grafik);
 
