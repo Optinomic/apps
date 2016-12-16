@@ -155,11 +155,11 @@ d.tmt_create_pdf_stack = function() {
             if (group.name === "TMT A") {
                 var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
                 var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
-                var ba = { "text": "B/A: " + messung.calculation.quotient };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
             } else {
                 var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
                 var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
-                var ba = { "text": "B/A: " + messung.calculation.quotient };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
             };
             zeit_fehler_array.push(zeit);
             zeit_fehler_array.push(fehler);
