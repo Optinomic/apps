@@ -239,7 +239,7 @@ d.tmt_create_pdf_stack = function() {
             zahlen_to_push.columns.push(obj_to_push);
         };
 
-        console.log('(???) zahlen_to_push', count_steps, zahlen_to_push);
+        console.log(JSON.stringify(zahlen_to_push, null, 2));
         stack.push(zahlen_to_push);
 
 

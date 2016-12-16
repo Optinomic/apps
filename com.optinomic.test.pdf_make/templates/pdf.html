@@ -14,9 +14,9 @@ include(../lib/html/optinomic/page/start.m4)
 </div>
 <div ng-if="!d.loader.done" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    <div layout="column" layout-xs="column" layout-gt-xs="column" layout-align="center center">
-        <p class="md-caption">{{d.loader.count}}/{{d.loader.actions}}</p>
-    </div>
+</div>
+<div layout="column" layout-xs="column" layout-gt-xs="column" layout-align="center start">
+    <p class="md-caption">{{d.loader.count}}/{{d.loader.actions}}</p>
 </div>
 <div id="iframeContainer" style="position: absolute; width: 100%;"></div>
 include(../lib/html/optinomic/page/end.m4)
