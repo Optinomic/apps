@@ -551,13 +551,15 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         var z_score_block = {
+            {
                 "text": "Überschrift",
                 "style": "h3"
             },
             {
                 "text": "Dies ist ein Standardtext",
                 "style": "text"
-            }, {
+            },
+            {
                 "alignment": "left",
                 "columns": [{
                     "width": 110,
@@ -609,7 +611,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 }],
                 "columnGap": 12,
                 "margin": [0, 0, 0, 6]
-            };
+            }
+        };
 
         doc.content.push(z_score_block);
 
