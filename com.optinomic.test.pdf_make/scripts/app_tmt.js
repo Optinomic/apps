@@ -168,6 +168,50 @@ d.tmt_create_pdf_stack = function() {
                 zeit_fehler_array.push(ba);
             };
 
+
+
+            var count_steps = 0;
+            if (tmt.zscore_options.zscore_min <= 0) {
+                count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
+            } else {
+                count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
+            };
+
+
+            // Zahlen -3 | 0 | +3
+            var zahlen_to_push = {};
+            if (messungID === group.data.length - 1) {
+                zahlen_to_push = {
+                    "columns": [],
+                    "fontSize": 9,
+                    "color": "#757575",
+                    "margin": [0, 0, 0, 6]
+                };
+
+                for (var i = 0; i < count_steps + 1; i++) {
+                    var value = tmt.zscore_options.zscore_min + i;
+                    var alignment = "left";
+
+                    if (value === 0) {
+                        alignment = "center";
+                    };
+
+                    if (value > 0) {
+                        alignment = "right";
+                    };
+
+                    var obj_to_push = {
+                        "text": value.toString(),
+                        "alignment": alignment
+                    };
+                    zahlen_to_push.columns.push(obj_to_push);
+                };
+            };
+
+            console.log(JSON.stringify(zahlen_to_push, null, 2));
+            stack.push(zahlen_to_push);
+
+
             var z_score_grafik = {
                 "alignment": "left",
                 "columnGap": 12,
@@ -183,7 +227,7 @@ d.tmt_create_pdf_stack = function() {
                         "margin": [0, 3, 0, 1]
                     }, {
                         "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
-                    }, {}]
+                    }, zahlen_to_push]
                 }, {
                     "width": 62,
                     "fontSize": 10,
@@ -197,70 +241,9 @@ d.tmt_create_pdf_stack = function() {
 
         });
 
-
-        var gruppen_name = {
-            "text": group.name,
-            "style": "h3"
-        };
-        stack.push(gruppen_name);
-
-
-
-        var count_steps = 0;
-        if (tmt.zscore_options.zscore_min <= 0) {
-            count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
-        } else {
-            count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
-        };
-
-        var zahlen_to_push = {
-            "columns": [],
-            "fontSize": 9,
-            "color": "#757575",
-            "margin": [0, 0, 0, 6]
-        };
-
-        for (var i = 0; i < count_steps + 1; i++) {
-            var value = tmt.zscore_options.zscore_min + i;
-            var alignment = "left";
-
-            if (value === 0) {
-                alignment = "center";
-            };
-
-            if (value > 0) {
-                alignment = "right";
-            };
-
-            var obj_to_push = {
-                "text": value.toString(),
-                "alignment": alignment
-            };
-            zahlen_to_push.columns.push(obj_to_push);
-        };
-
-        console.log(JSON.stringify(zahlen_to_push, null, 2));
-        stack.push(zahlen_to_push);
-
-
-        ///   
-        ///   
-        ///   var z_score_block = {
-        ///       "stack": [{
-        ///           "text": group.name,
-        ///           "style": "h3"
-        ///       }, ]
-        ///   };
-        ///   
-        ///   
-        ///   // push
-        ///   stack.push(z_score_block);
-
     });
 
-
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = stack;
-
 };
 
 d.tmt_initTMT = function() {
