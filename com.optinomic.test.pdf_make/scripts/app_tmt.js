@@ -145,39 +145,7 @@ d.tmt_create_pdf_stack = function() {
         };
         stack.push(gruppen_name);
 
-        var gaga = [{
-            "columns": [
-                { "text": "Messzeitpunkt", "alignment": "left" },
-                { "text": "Datum", "alignment": "right" }
-            ],
-            "fontSize": 10,
-            "color": "#212121",
-            "margin": [0, 3, 0, 1]
-        }, {
-            "canvas": $scope.d.templates.z_score()
-        }, {
-            "columns": [
-                { "text": "Messzeitpunkt", "alignment": "left" },
-                { "text": "Datum", "alignment": "right" }
-            ],
-            "fontSize": 10,
-            "color": "#212121",
-            "margin": [0, 3, 0, 1]
-        }, {
-            "canvas": $scope.d.templates.z_score()
-        }, {
-            "columns": [
-                { "text": "-3", "alignment": "left" },
-                { "text": "-2", "alignment": "left" },
-                { "text": "-1", "alignment": "left" },
-                { "text": "0", "alignment": "center" },
-                { "text": "1", "alignment": "right" },
-                { "text": "2", "alignment": "right" },
-                { "text": "3", "alignment": "right" }
-            ],
-            "fontSize": 9,
-            "color": "#757575"
-        }];
+
 
         tmt.zscore_options.width = 440;
 
@@ -215,7 +183,7 @@ d.tmt_create_pdf_stack = function() {
                         "margin": [0, 3, 0, 1]
                     }, {
                         "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
-                    }]
+                    }, {}]
                 }, {
                     "width": 62,
                     "fontSize": 10,
@@ -228,6 +196,14 @@ d.tmt_create_pdf_stack = function() {
             stack.push(z_score_grafik);
 
         });
+
+
+        var gruppen_name = {
+            "text": group.name,
+            "style": "h3"
+        };
+        stack.push(gruppen_name);
+
 
 
         var count_steps = 0;
@@ -264,9 +240,7 @@ d.tmt_create_pdf_stack = function() {
         };
 
         console.log('(???) zahlen_to_push', count_steps, zahlen_to_push);
-
         stack.push(zahlen_to_push);
-
 
 
         ///   
