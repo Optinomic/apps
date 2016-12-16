@@ -140,13 +140,68 @@ d.tmt_create_pdf_stack = function() {
     tmt.groups.forEach(function(group, groupID) {
 
 
+        var gaga = [{
+            "columns": [
+                { "text": "Messzeitpunkt", "alignment": "left" },
+                { "text": "Datum", "alignment": "right" }
+            ],
+            "fontSize": 10,
+            "color": "#212121",
+            "margin": [0, 3, 0, 1]
+        }, {
+            "canvas": $scope.d.templates.z_score()
+        }, {
+            "columns": [
+                { "text": "Messzeitpunkt", "alignment": "left" },
+                { "text": "Datum", "alignment": "right" }
+            ],
+            "fontSize": 10,
+            "color": "#212121",
+            "margin": [0, 3, 0, 1]
+        }, {
+            "canvas": $scope.d.templates.z_score()
+        }, {
+            "columns": [
+                { "text": "-3", "alignment": "left" },
+                { "text": "-2", "alignment": "left" },
+                { "text": "-1", "alignment": "left" },
+                { "text": "0", "alignment": "center" },
+                { "text": "1", "alignment": "right" },
+                { "text": "2", "alignment": "right" },
+                { "text": "3", "alignment": "right" }
+            ],
+            "fontSize": 9,
+            "color": "#757575"
+        }];
+
+        var z_scores_array = [];
+        tmt.zscore_options.width = 270;
+
+        group.data.forEach(function(messung, messungID) {
+
+            var beschriftung = {
+                "columns": [
+                    { "text": messung.zscore.text_left, "alignment": "left" },
+                    { "text": messung.zscore.text_right, "alignment": "right" }
+                ],
+                "fontSize": 10,
+                "color": "#212121",
+                "margin": [0, 3, 0, 1]
+            };
+            z_scores_array.push(beschriftung);
+
+            var z_score_grafik = {
+                "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options);
+            };
+            z_scores_array.push(z_score_grafik);
+
+        });
+
+
         var z_score_block = {
             "stack": [{
                 "text": group.name,
                 "style": "h3"
-            }, {
-                "text": "Dies ist ein Standardtext",
-                "style": "text"
             }, {
                 "alignment": "left",
                 "columns": [{
@@ -157,39 +212,7 @@ d.tmt_create_pdf_stack = function() {
                     "margin": [0, 14, 0, 0]
                 }, {
                     "width": "*",
-                    "stack": [{
-                        "columns": [
-                            { "text": "Messzeitpunkt", "alignment": "left" },
-                            { "text": "Datum", "alignment": "right" }
-                        ],
-                        "fontSize": 10,
-                        "color": "#212121",
-                        "margin": [0, 3, 0, 1]
-                    }, {
-                        "canvas": $scope.d.templates.z_score()
-                    }, {
-                        "columns": [
-                            { "text": "Messzeitpunkt", "alignment": "left" },
-                            { "text": "Datum", "alignment": "right" }
-                        ],
-                        "fontSize": 10,
-                        "color": "#212121",
-                        "margin": [0, 3, 0, 1]
-                    }, {
-                        "canvas": $scope.d.templates.z_score()
-                    }, {
-                        "columns": [
-                            { "text": "-3", "alignment": "left" },
-                            { "text": "-2", "alignment": "left" },
-                            { "text": "-1", "alignment": "left" },
-                            { "text": "0", "alignment": "center" },
-                            { "text": "1", "alignment": "right" },
-                            { "text": "2", "alignment": "right" },
-                            { "text": "3", "alignment": "right" }
-                        ],
-                        "fontSize": 9,
-                        "color": "#757575"
-                    }]
+                    "stack": z_scores_array
                 }, {
                     "width": 110,
                     "fontSize": 10,
