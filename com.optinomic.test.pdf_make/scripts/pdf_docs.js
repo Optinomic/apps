@@ -1,7 +1,6 @@
 $scope.pdf_make_init = function() {
 
 
-
     $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
 
     // All Doc's here
@@ -99,6 +98,10 @@ $scope.pdf_make_init = function() {
     };
 
     doc.content.push(bloc);
+
+
+    doc.content.push($scope.d.templates.spacer(20));
+    doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.tmt_V3');
 
 
     doc.content.push($scope.d.templates.spacer(20));

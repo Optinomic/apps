@@ -132,7 +132,90 @@ d.tmt_changeClinicSample = function(current_sample) {
     console.log('(Done) changeClinicSample', current_sample);
 };
 
+d.tmt_create_pdf_stack = function() {
 
+    var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
+    var stack = [];
+
+    tmt.groups.forEach(function(group, groupID) {
+
+
+        var z_score_block = {
+            "stack": [{
+                "text": group.name,
+                "style": "h3"
+            }, {
+                "text": "Dies ist ein Standardtext",
+                "style": "text"
+            }, {
+                "alignment": "left",
+                "columns": [{
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "right",
+                    "text": "LINKS: Dies ist ein Standardtext",
+                    "margin": [0, 14, 0, 0]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "columns": [
+                            { "text": "Messzeitpunkt", "alignment": "left" },
+                            { "text": "Datum", "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score()
+                    }, {
+                        "columns": [
+                            { "text": "Messzeitpunkt", "alignment": "left" },
+                            { "text": "Datum", "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score()
+                    }, {
+                        "columns": [
+                            { "text": "-3", "alignment": "left" },
+                            { "text": "-2", "alignment": "left" },
+                            { "text": "-1", "alignment": "left" },
+                            { "text": "0", "alignment": "center" },
+                            { "text": "1", "alignment": "right" },
+                            { "text": "2", "alignment": "right" },
+                            { "text": "3", "alignment": "right" }
+                        ],
+                        "fontSize": 9,
+                        "color": "#757575"
+                    }]
+                }, {
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "text": "RECHTS: Dies ist ein Standardtext für die Beschreibung, diese kann auch sehr lange sein.",
+                    "margin": [0, 14, 0, 0]
+                }],
+                "columnGap": 12,
+                "margin": [0, 0, 0, 6]
+            }]
+        };
+
+
+        // push
+        stack.push(z_score_block);
+
+    });
+
+
+    pdf_obj = {
+        "stack": stack
+    };
+
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = pdf_obj;
+
+};
 
 d.tmt_initTMT = function() {
 
@@ -303,8 +386,9 @@ d.tmt_initTMT = function() {
             //console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
         });
     });
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.show_legend = false;
 
 
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.init = true;
+    d.tmt_create_pdf_stack();
+
+
 };
