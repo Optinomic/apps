@@ -256,7 +256,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
             canvas.push(obj_to_push);
 
-            for (i = 0; i < options.count_steps; i++) {
+            for (var i = 0; i < options.count_steps; i++) {
                 var my_x = get_x(options.zscore_min + i + 1);
                 obj_to_push = {
                     "type": "line",
