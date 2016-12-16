@@ -184,20 +184,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         d.z_score = function(data, options) {
-            var default_data = {
-                "zscore": 1.2,
-                "zscore_color": '#C5CAE9',
-                "clinicsample_start": -2,
-                "clinicsample_end": 1.8
-            };
-
-            var default_options = {
-                "width": 280,
-                "zscore_min": -3,
-                "zscore_max": 3,
-                "clinicsample_color": "#C5CAE9"
-            };
-
             var grey = {
                 "50": "#FAFAFA",
                 "100": "#F5F5F5",
@@ -209,6 +195,20 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "700": "#616161",
                 "800": "#424242",
                 "900": "#212121"
+            };
+
+            var default_data = {
+                "zscore": 1.2,
+                "zscore_color": grey["400"],
+                "clinicsample_start": -2,
+                "clinicsample_end": 1.8
+            };
+
+            var default_options = {
+                "width": 280,
+                "zscore_min": -3,
+                "zscore_max": 3,
+                "clinicsample_color": "#C5CAE9"
             };
 
             data = data === undefined ? default_data : data;
@@ -256,8 +256,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
             canvas.push(obj_to_push);
 
-            for (var i = 0; i < options.count_steps; i++) {
-                var my_x = get_x(options.zscore_min + i + 1);
+            for (var i = 0; i < options.count_steps + 1; i++) {
+                var my_x = get_x(options.zscore_min + i);
                 obj_to_push = {
                     "type": "line",
                     "x1": my_x,
