@@ -411,7 +411,7 @@ $scope.loadAppPDF = function(content, app_identifier) {
 $scope.pdf_open = function(doc) {
     console.log('(!) pdf_open', doc);
     $scope.d.current_doc = doc
-    $scope.d.docDefinition.content = doc.content;
+    $scope.d.docDefinition.content = angular.copy(doc.content);
 
     pdfMake.createPdf($scope.d.docDefinition).open();
 };
@@ -419,7 +419,7 @@ $scope.pdf_open = function(doc) {
 $scope.pdf_download = function(doc) {
     console.log('(!) pdf_download', doc);
     $scope.d.current_doc = doc
-    $scope.d.docDefinition.content = doc.content;
+    $scope.d.docDefinition.content = angular.copy(doc.content);
 
     var datestamp = $filter("amDateFormat")(new Date(), 'YYYY_MM_DD__')
     var filename = datestamp + doc.name + '__' + $scope.d.dataMain.patient.data.last_name + '_' + $scope.d.dataMain.patient.data.first_name;
