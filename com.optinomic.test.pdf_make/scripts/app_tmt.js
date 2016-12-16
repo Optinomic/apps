@@ -244,26 +244,23 @@ d.tmt_create_pdf_stack = function() {
             "margin": [0, 0, 0, 6]
         };
 
-        for (var i = 0; i < options.count_steps + 1; i++) {
-            if (options.zscore_min + i !== 0) {
+        for (var i = 0; i < count_steps + 1; i++) {
+            var value = tmt.zscore_options.zscore_min + i;
+            var alignment = "left";
 
-                var value = options.zscore_min + i;
-                var alignment = "left";
-
-                if (value === 0) {
-                    alignment = "center";
-                };
-
-                if (value > 0) {
-                    alignment = "right";
-                };
-
-                obj_to_push = {
-                    "text": value,
-                    "alignment": alignment
-                };
-                zahlen_to_push.columns.push(obj_to_push);
+            if (value === 0) {
+                alignment = "center";
             };
+
+            if (value > 0) {
+                alignment = "right";
+            };
+
+            obj_to_push = {
+                "text": value,
+                "alignment": alignment
+            };
+            zahlen_to_push.columns.push(obj_to_push);
         };
 
         stack.push(zahlen_to_push);
