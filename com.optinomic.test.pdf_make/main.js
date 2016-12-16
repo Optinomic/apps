@@ -182,7 +182,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             return { "fontSize": 0, "text": '', "pageOrientation": "portrait", "pageBreak": when };
         };
 
-
         d.z_score = function(data, options) {
             var grey = {
                 "50": "#FAFAFA",
@@ -205,7 +204,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             var default_options = {
-                "width": 280,
+                "width": 265,
                 "zscore_min": -3,
                 "zscore_max": 3,
                 "clinicsample_color": grey["300"]
@@ -372,12 +371,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "fontSize": 11,
                     "bold": false,
                     "color": '#9E9E9E',
+                    "alignment": "left",
                     "margin": [40, 20, 40, 40]
                 },
                 "footer": {
                     "fontSize": 11,
                     "bold": false,
                     "color": '#9E9E9E',
+                    "alignment": "left",
                     "margin": [40, 0, 40, 40]
                 },
                 "title": {
@@ -548,7 +549,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         doc.content.push(bloc);
 
-        doc.content.push($scope.d.templates.pageBreak());
         doc.content.push($scope.d.templates.z_score());
 
 
