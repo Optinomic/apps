@@ -353,6 +353,9 @@ $scope.getTemplates = function() {
                 "alignment": "left",
                 "margin": [0, 0, 0, 6]
             }
+        },
+        "defaultStyle": {
+            "alignment": "left"
         }
     };
 
