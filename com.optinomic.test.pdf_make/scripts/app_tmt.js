@@ -256,7 +256,7 @@ d.tmt_create_pdf_stack = function() {
                 alignment = "right";
             };
 
-            obj_to_push = {
+            var obj_to_push = {
                 "text": value,
                 "alignment": alignment
             };
