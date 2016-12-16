@@ -332,7 +332,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             console.log(JSON.stringify(canvas, null, 2));
 
-            return { "canvas": canvas };
+            return canvas;
         };
 
 
@@ -548,6 +548,68 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         doc.content.push(bloc);
+
+
+        var z_score_block = {
+                "text": "Überschrift",
+                "style": "h3"
+            },
+            {
+                "text": "Dies ist ein Standardtext",
+                "style": "text"
+            }, {
+                "alignment": "left",
+                "columns": [{
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "right",
+                    "text": "LINKS: Dies ist ein Standardtext",
+                    "margin": [0, 14, 0, 0]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "columns": [
+                            { "text": "Messzeitpunkt", "alignment": "left" },
+                            { "text": "Datum", "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score()
+                    }, {
+                        "columns": [
+                            { "text": "Messzeitpunkt", "alignment": "left" },
+                            { "text": "Datum", "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score()
+                    }, {
+                        "columns": [
+                            { "text": "-3", "alignment": "left" },
+                            { "text": "-2", "alignment": "left" },
+                            { "text": "-1", "alignment": "left" },
+                            { "text": "0", "alignment": "center" },
+                            { "text": "1", "alignment": "right" },
+                            { "text": "2", "alignment": "right" },
+                            { "text": "3", "alignment": "right" }
+                        ],
+                        "fontSize": 9,
+                        "color": "#757575"
+                    }]
+                }, {
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "text": "RECHTS: Dies ist ein Standardtext für die Beschreibung, diese kann auch sehr lange sein.",
+                    "margin": [0, 14, 0, 0]
+                }],
+                "columnGap": 12,
+                "margin": [0, 0, 0, 6]
+            }
 
         doc.content.push($scope.d.templates.z_score());
 
