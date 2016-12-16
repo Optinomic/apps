@@ -97,7 +97,7 @@ d.tmt_getKSLocation = function(location_array) {
 
 d.tmt_changeClinicSample = function(current_sample) {
 
-    current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
+    current_sample.ks.path_data = d.tmt_getKSLocation(current_sample.ks.path_selected);
 
     if (current_sample.ks.path_data.statistics !== null) {
         if (current_sample.zscore.text_left_caption === 'TMT A') {
