@@ -42,7 +42,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     $scope.setStanineView();
                 };
 
-                if (current_template === 'print_sci_report_only') {
+                if (current_template === 'sci_stanine') {
                     $scope.setStanineView();
                     $scope.groupStanineView();
                 };
