@@ -21,7 +21,16 @@ $scope.loadAppData = function(app_identifier, load_full) {
         $scope.d.appData.api = run;
 
 
-        var pdf = $scope.d.appData[app_identifier].pdf
+        $scope.d.appData[app_identifier].app_scope = {};
+        var pdf = $scope.d.appData[app_identifier].pdf;
+
+
+        //  BLOCKS pro Applikation erstellen
+
+
+        // -----------------------------------------------------------------
+        // actInfo - Eintritt
+        // -----------------------------------------------------------------
 
         if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
             pdf.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
@@ -74,6 +83,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
         };
 
 
+
+        // -----------------------------------------------------------------
+        // Case
+        // -----------------------------------------------------------------
+
         if (app_identifier === 'ch.suedhang.apps.case.new') {
 
             pdf.push($scope.d.templates.heading('h2', 'Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)'));
@@ -82,13 +96,29 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
         };
 
+
+        // -----------------------------------------------------------------
+        // AASE
+        // -----------------------------------------------------------------
+
         if (app_identifier === 'ch.suedhang.apps.aase-g') {
-            run.hello();
+
+        };
+
+        // -----------------------------------------------------------------
+        // TMT
+        // -----------------------------------------------------------------
+
+        if (app_identifier === 'ch.suedhang.apps.tmt_V3') {
+
+            var app_scope = $scope.d.appData[app_identifier].app_scope;
+
+            app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
+
         };
 
 
-        // doc.content.push($scope.d.templates.heading('h2', 'Brief Symptom Checklist (BSCL)'));
-        // doc.content.push($scope.d.templates.text('Der BSCL misst die subjektiv empfundenen Beeinträchtigung durch körperliche und psychische Symptome einer Person innerhalb der letzten 7 Tage.'));
+
 
 
         // Run pdf_make_init when all Data loaded
