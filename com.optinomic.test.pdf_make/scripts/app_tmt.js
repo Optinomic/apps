@@ -139,6 +139,11 @@ d.tmt_create_pdf_stack = function() {
 
     tmt.groups.forEach(function(group, groupID) {
 
+        var gruppen_name = {
+            "text": group.name,
+            "style": "h3"
+        };
+        stack.push(gruppen_name);
 
         var gaga = [{
             "columns": [
@@ -174,67 +179,56 @@ d.tmt_create_pdf_stack = function() {
             "color": "#757575"
         }];
 
-        var z_scores_array = [];
-        tmt.zscore_options.width = 270;
+        tmt.zscore_options.width = 392;
 
         group.data.forEach(function(messung, messungID) {
 
-            var beschriftung = {
-                "columns": [
-                    { "text": messung.zscore.text_left, "alignment": "left" },
-                    { "text": messung.zscore.text_right, "alignment": "right" }
-                ],
-                "fontSize": 10,
-                "color": "#212121",
-                "margin": [0, 3, 0, 1]
-            };
-            z_scores_array.push(beschriftung);
-
             var z_score_grafik = {
-                "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
-            };
-            z_scores_array.push(z_score_grafik);
-
-        });
-
-
-        var z_score_block = {
-            "stack": [{
-                "text": group.name,
-                "style": "h3"
-            }, {
                 "alignment": "left",
+                "columnGap": 12,
                 "columns": [{
-                    "width": 110,
-                    "fontSize": 10,
-                    "alignment": "right",
-                    "text": "LINKS: Dies ist ein Standardtext",
-                    "margin": [0, 14, 0, 0]
-                }, {
                     "width": "*",
-                    "stack": z_scores_array
+                    "stack": [{
+                        "columns": [
+                            { "text": messung.zscore.text_left, "alignment": "left" },
+                            { "text": messung.zscore.text_right, "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
+                    }]
                 }, {
                     "width": 110,
                     "fontSize": 10,
                     "alignment": "left",
-                    "text": "RECHTS: Dies ist ein Standardtext für die Beschreibung, diese kann auch sehr lange sein.",
-                    "margin": [0, 14, 0, 0]
-                }],
-                "columnGap": 12,
-                "margin": [0, 0, 0, 6]
-            }]
-        };
+                    "stack": [{ "text": "ZEIT" }, { "text": "FEHLER" }, { "text": "BA" }],
+                    "margin": [0, 12, 0, 0]
+                }]
+            };
 
+            stack.push(z_score_grafik);
 
-        // push
-        stack.push(z_score_block);
+        });
+
+        ///   
+        ///   
+        ///   var z_score_block = {
+        ///       "stack": [{
+        ///           "text": group.name,
+        ///           "style": "h3"
+        ///       }, ]
+        ///   };
+        ///   
+        ///   
+        ///   // push
+        ///   stack.push(z_score_block);
 
     });
 
 
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = {
-        "stack": stack
-    };
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = stack;
 
 };
 
