@@ -263,6 +263,8 @@ d.tmt_create_pdf_stack = function() {
             zahlen_to_push.columns.push(obj_to_push);
         };
 
+        console.log('(???) zahlen_to_push', count_steps, zahlen_to_push);
+
         stack.push(zahlen_to_push);
 
 
