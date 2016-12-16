@@ -294,7 +294,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
             canvas.push(obj_to_push);
 
-            console.log(JSON.stringify(canvas, null, 2););
+            console.log(JSON.stringify(canvas, null, 2));
 
             return { "canvas": canvas };
         };
