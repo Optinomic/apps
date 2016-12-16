@@ -198,10 +198,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             var default_data = {
-                "zscore": 1.2,
-                "zscore_color": grey["400"],
-                "clinicsample_start": -2,
-                "clinicsample_end": 1.8
+                "zscore": 2.2,
+                "zscore_color": grey["300"],
+                "clinicsample_start": -1,
+                "clinicsample_end": 1.5
             };
 
             var default_options = {
@@ -241,7 +241,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "y": 0,
                 "w": get_x(data.clinicsample_end),
                 "h": 30,
-                "lineColor": grey["400"],
+                "lineColor": grey["300"],
                 "color": data.zscore_color
             };
             canvas.push(obj_to_push);
@@ -252,7 +252,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "y": 0,
                 "w": options.width,
                 "h": 30,
-                "lineColor": grey["300"]
+                "lineColor": grey["400"]
             };
             canvas.push(obj_to_push);
 
@@ -265,7 +265,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "x2": my_x,
                     "y2": 30,
                     "lineWidth": 1,
-                    "lineColor": grey["300"]
+                    "lineColor": grey["200"]
                 };
                 canvas.push(obj_to_push);
 
