@@ -179,7 +179,7 @@ d.tmt_create_pdf_stack = function() {
             "color": "#757575"
         }];
 
-        tmt.zscore_options.width = 392;
+        tmt.zscore_options.width = 440;
 
         group.data.forEach(function(messung, messungID) {
 
@@ -217,7 +217,7 @@ d.tmt_create_pdf_stack = function() {
                         "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
                     }]
                 }, {
-                    "width": 110,
+                    "width": 62,
                     "fontSize": 10,
                     "alignment": "left",
                     "stack": zeit_fehler_array,
@@ -228,6 +228,47 @@ d.tmt_create_pdf_stack = function() {
             stack.push(z_score_grafik);
 
         });
+
+
+        var count_steps = 0;
+        if (tmt.zscore_options.zscore_min <= 0) {
+            count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
+        } else {
+            count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
+        };
+
+        var zahlen_to_push = {
+            "columns": [],
+            "fontSize": 9,
+            "color": "#757575",
+            "margin": [0, 0, 0, 6]
+        };
+
+        for (var i = 0; i < options.count_steps + 1; i++) {
+            if (options.zscore_min + i !== 0) {
+
+                var value = options.zscore_min + i;
+                var alignment = "left";
+
+                if (value === 0) {
+                    alignment = "center";
+                };
+
+                if (value > 0) {
+                    alignment = "right";
+                };
+
+                obj_to_push = {
+                    "text": value,
+                    "alignment": alignment
+                };
+                zahlen_to_push.columns.push(obj_to_push);
+            };
+        };
+
+        stack.push(zahlen_to_push);
+
+
 
         ///   
         ///   
