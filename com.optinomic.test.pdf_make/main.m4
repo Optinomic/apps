@@ -7,7 +7,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     include(scripts/init.js)
     include(scripts/definitions.js)
-    
+
     $scope.getAppFunctionsAPI = function() {
         var d = {};
     
@@ -18,6 +18,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
     
     
+    include(scripts/pdf_data.js)
     include(scripts/pdf_docs.js)
     
 });
