@@ -233,7 +233,7 @@ d.tmt_create_pdf_stack = function() {
             };
 
             var obj_to_push = {
-                "text": value,
+                "text": value.toString(),
                 "alignment": alignment
             };
             zahlen_to_push.columns.push(obj_to_push);
