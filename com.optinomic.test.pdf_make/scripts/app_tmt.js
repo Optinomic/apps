@@ -95,7 +95,7 @@ d.tmt_getKSLocation = function(location_array) {
 };
 
 
-d.changeClinicSample = function(current_sample) {
+d.tmt_changeClinicSample = function(current_sample) {
 
     current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
 
@@ -299,7 +299,7 @@ d.tmt_initTMT = function() {
     // MD - Daten befüllen
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.groups.forEach(function(group, groupID) {
         group.data.forEach(function(groupInner, groupInnerID) {
-            d.changeClinicSample(groupInner);
+            d.tmt_changeClinicSample(groupInner);
             //console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
         });
     });

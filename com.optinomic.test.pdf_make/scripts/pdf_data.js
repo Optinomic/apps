@@ -115,7 +115,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
             // Follow the white rabbit
-            run.initTMT();
+            run.tmt_initTMT();
 
         };
 
