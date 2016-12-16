@@ -204,7 +204,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             var default_options = {
-                "width": 265,
+                "width": 270,
                 "zscore_min": -3,
                 "zscore_max": 3,
                 "clinicsample_color": grey["300"]
