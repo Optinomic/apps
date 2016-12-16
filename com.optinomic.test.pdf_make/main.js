@@ -236,14 +236,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Basic Chart
             obj_to_push = {
-                "type": "rect",
-                "x": get_x(data.clinicsample_start),
-                "y": 0,
-                "w": get_x(data.clinicsample_end),
-                "h": 30,
-                "lineColor": grey["300"],
-                "color": data.zscore_color
+                "type": "line",
+                "x1": get_x(data.clinicsample_start),
+                "y1": 15,
+                "x2": get_x(data.clinicsample_stop),
+                "y2": 15,
+                "lineWidth": 30,
+                "color": data.clinicsample_color,
+                "lineColor": grey["700"]
             };
+
             canvas.push(obj_to_push);
 
             obj_to_push = {
