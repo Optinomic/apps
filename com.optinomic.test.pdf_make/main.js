@@ -200,7 +200,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var default_data = {
                 "zscore": 2.2,
                 "zscore_color": "#3F51B5",
-                "clinicsample_start": -1,
+                "clinicsample_start": -1.4,
                 "clinicsample_end": 1.5
             };
 
@@ -257,30 +257,66 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
             canvas.push(obj_to_push);
 
+
+            obj_to_push = {
+                "type": "line",
+                "x1": get_x(data.clinicsample_start),
+                "y1": 0,
+                "x2": get_x(data.clinicsample_start),
+                "y2": 30,
+                "lineWidth": 1,
+                "lineColor": grey["600"]
+            };
+            canvas.push(obj_to_push);
+
+            obj_to_push = {
+                "type": "line",
+                "x1": get_x(data.clinicsample_end),
+                "y1": 0,
+                "x2": get_x(data.clinicsample_end),
+                "y2": 30,
+                "lineWidth": 1,
+                "lineColor": grey["600"]
+            };
+            canvas.push(obj_to_push);
+
+            obj_to_push = {
+                "type": "line",
+                "x1": get_x(0),
+                "y1": 0,
+                "x2": get_x(0),
+                "y2": 35,
+                "lineWidth": 1,
+                "lineColor": grey["900"]
+            };
+            canvas.push(obj_to_push);
+
+
             for (var i = 0; i < options.count_steps + 1; i++) {
                 var my_x = get_x(options.zscore_min + i);
-                obj_to_push = {
-                    "type": "line",
-                    "x1": my_x,
-                    "y1": 0,
-                    "x2": my_x,
-                    "y2": 30,
-                    "lineWidth": 1,
-                    "lineColor": grey["200"]
-                };
-                canvas.push(obj_to_push);
+                if (my_x !== 0) {
+                    obj_to_push = {
+                        "type": "line",
+                        "x1": my_x,
+                        "y1": 0,
+                        "x2": my_x,
+                        "y2": 30,
+                        "lineWidth": 1,
+                        "lineColor": grey["200"]
+                    };
+                    canvas.push(obj_to_push);
 
-                obj_to_push = {
-                    "type": "line",
-                    "x1": my_x,
-                    "y1": 25,
-                    "x2": my_x,
-                    "y2": 35,
-                    "lineWidth": 1,
-                    "lineColor": grey["500"]
+                    obj_to_push = {
+                        "type": "line",
+                        "x1": my_x,
+                        "y1": 25,
+                        "x2": my_x,
+                        "y2": 35,
+                        "lineWidth": 1,
+                        "lineColor": grey["500"]
+                    };
+                    canvas.push(obj_to_push);
                 };
-                canvas.push(obj_to_push);
-
             };
 
 
