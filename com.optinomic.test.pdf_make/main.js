@@ -239,11 +239,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "type": "line",
                 "x1": get_x(data.clinicsample_start),
                 "y1": 15,
-                "x2": get_x(data.clinicsample_stop),
+                "x2": get_x(data.clinicsample_end),
                 "y2": 15,
                 "lineWidth": 30,
-                "color": data.clinicsample_color,
-                "lineColor": grey["700"]
+                "lineColor": data.clinicsample_color
             };
 
             canvas.push(obj_to_push);
