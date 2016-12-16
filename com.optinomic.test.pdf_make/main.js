@@ -609,9 +609,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 }],
                 "columnGap": 12,
                 "margin": [0, 0, 0, 6]
-            }
+            };
 
-        doc.content.push($scope.d.templates.z_score());
+        doc.content.push(z_score_block);
 
 
         // Safe
