@@ -179,8 +179,126 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         d.pageBreak = function(when) {
             when = when === undefined ? 'after' : when;
-            return { "fontSize": 0, "text": '', "pageOrientation": 'portrait', "pageBreak": when };
+            return { "fontSize": 0, "text": '', "pageOrientation": "portrait", "pageBreak": when };
         };
+
+
+        d.z_score = function(data, options) {
+            var default_data = {
+                "zscore": 1.2,
+                "zscore_color": '#C5CAE9',
+                "clinicsample_start": -2,
+                "clinicsample_end": 1.8
+            };
+
+            var default_options = {
+                "width": 280,
+                "zscore_min": -3,
+                "zscore_max": 3,
+                "clinicsample_color": "#C5CAE9"
+            };
+
+            var grey = {
+                "50": "#FAFAFA",
+                "100": "#F5F5F5",
+                "200": "#EEEEEE",
+                "300": "#E0E0E0",
+                "400": "#BDBDBD",
+                "500": "#9E9E9E",
+                "600": "#757575",
+                "700": "#616161",
+                "800": "#424242",
+                "900": "#212121"
+            };
+
+            data = data === undefined ? default_data : data;
+            options = options === undefined ? default_options : options;
+
+
+            // Calculate
+
+            options.count_steps = 0;
+            if (options.zscore_min <= 0) {
+                options.count_steps = Math.abs(options.zscore_min) + Math.abs(options.zscore_max);
+            } else {
+                options.count_steps = Math.abs(options.zscore_max) - Math.abs(options.zscore_min);
+            };
+
+            options.step_1 = options.width / options.count_steps;
+
+            var get_x = function(value) {
+                return Math.abs(options.zscore_min - value) * options.step_1
+            };
+
+
+            var canvas = [];
+            var obj_to_push = {};
+
+            // Basic Chart
+            obj_to_push = {
+                "type": "rect",
+                "x": get_x(data.clinicsample_start),
+                "y": 0,
+                "w": get_x(data.clinicsample_end),
+                "h": 30,
+                "lineColor": grey["400"],
+                "color": data.zscore_color
+            };
+            canvas.push(obj_to_push);
+
+            obj_to_push = {
+                "type": "rect",
+                "x": 0,
+                "y": 0,
+                "w": options.width,
+                "h": 30,
+                "lineColor": grey["300"]
+            };
+            canvas.push(obj_to_push);
+
+            for (i = 0; i < options.count_steps; i++) {
+                var my_x = get_x(options.zscore_min + i + 1);
+                obj_to_push = {
+                    "type": "line",
+                    "x1": my_x,
+                    "y1": 0,
+                    "x2": my_x,
+                    "y2": 30,
+                    "lineWidth": 1,
+                    "lineColor": grey["300"]
+                };
+                canvas.push(obj_to_push);
+
+                obj_to_push = {
+                    "type": "line",
+                    "x1": my_x,
+                    "y1": 25,
+                    "x2": my_x,
+                    "y2": 35,
+                    "lineWidth": 1,
+                    "lineColor": grey["500"]
+                };
+                canvas.push(obj_to_push);
+
+            };
+
+
+            obj_to_push = {
+                "type": "line",
+                "x1": get_x(data.zscore),
+                "y1": 15,
+                "x2": get_x(0),
+                "y2": 15,
+                "lineWidth": 15,
+                "lineColor": "#3F51B5"
+            };
+            canvas.push(obj_to_push);
+
+            console.log(JSON.stringify(canvas, null, 2););
+
+            return { "canvas": canvas };
+        };
+
 
 
         // --------------------------------
@@ -257,7 +375,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "bold": true,
                     "color": '#212121',
                     "alignment": "left",
-                    "margin": [0, 6, 0, 6]
+                    "margin": [0, 0, 0, 6]
                 },
                 "p": {
                     "color": '#212121',
@@ -393,6 +511,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         doc.content.push(bloc);
 
+        doc.content.push($scope.d.templates.pageBreak());
+        doc.content.push($scope.d.templates.z_score());
+
 
         // Safe
         $scope.d.docs.push(doc);
@@ -468,6 +589,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     }],
                     "columnGap": 24
                 };
+
+
 
                 var col_1 = act_info_ein_block.columns["0"].stack;
                 col_1.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
