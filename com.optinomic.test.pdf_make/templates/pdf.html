@@ -12,11 +12,10 @@ include(../lib/html/optinomic/page/start.m4)
         <md-button ng-click="pdf_download(doc)">speichern</md-button>
     </div>
 </div>
-<div ng-if="!d.loader.done">
-    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+<div ng-if="!d.loader.done" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="center center">
+    <div>
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
-    <div layout="column" layout-xs="column" layout-gt-xs="column" layout-align="center start">
+        <br>
         <p class="md-caption" style="text-align: center;">{{d.loader.count}}/{{d.loader.actions}}</p>
     </div>
 </div>
