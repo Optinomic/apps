@@ -146,6 +146,9 @@ $scope.getTemplates = function() {
         data = data === undefined ? default_data : data;
         options = options === undefined ? default_options : options;
 
+        // Always grey
+        options.clinicsample_color = grey["300"];
+
 
         // Calculate
 
