@@ -76,6 +76,8 @@ survey = bscl_anq
 [calculation get_results javascript]
 include(calculations/scores.js)
 
+[calculation scores_calculation javascript]
+include(calculations/bscl_patient_calc.js)
 
 [sql_init]
 include(includes/create_view.sql)
