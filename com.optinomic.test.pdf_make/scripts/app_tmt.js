@@ -221,7 +221,7 @@ d.tmt_create_pdf_stack = function() {
                     "fontSize": 10,
                     "alignment": "left",
                     "stack": zeit_fehler_array,
-                    "margin": [0, 12, 0, 0]
+                    "margin": [0, 13, 0, 0]
                 }]
             };
 
