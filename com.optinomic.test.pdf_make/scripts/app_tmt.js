@@ -209,11 +209,9 @@ d.tmt_create_pdf_stack = function() {
     });
 
 
-    pdf_obj = {
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = {
         "stack": stack
     };
-
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = pdf_obj;
 
 };
 
