@@ -199,7 +199,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var default_data = {
                 "zscore": 2.2,
-                "zscore_color": grey["300"],
+                "zscore_color": "#3F51B5",
                 "clinicsample_start": -1,
                 "clinicsample_end": 1.5
             };
@@ -208,7 +208,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "width": 280,
                 "zscore_min": -3,
                 "zscore_max": 3,
-                "clinicsample_color": "#C5CAE9"
+                "clinicsample_color": grey["300"]
             };
 
             data = data === undefined ? default_data : data;
@@ -242,7 +242,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "x2": get_x(data.clinicsample_end),
                 "y2": 15,
                 "lineWidth": 30,
-                "lineColor": data.clinicsample_color
+                "lineColor": options.clinicsample_color
             };
 
             canvas.push(obj_to_push);
@@ -291,7 +291,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "x2": get_x(0),
                 "y2": 15,
                 "lineWidth": 15,
-                "lineColor": "#3F51B5"
+                "lineColor": data.zscore_color
             };
             canvas.push(obj_to_push);
 
