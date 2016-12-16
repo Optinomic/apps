@@ -185,7 +185,7 @@ d.tmt_create_pdf_stack = function() {
                     "columns": [],
                     "fontSize": 9,
                     "color": "#757575",
-                    "margin": [0, 0, 0, 12]
+                    "margin": [0, 0, 0, 18]
                 };
 
                 for (var i = 0; i < count_steps + 1; i++) {
@@ -207,7 +207,7 @@ d.tmt_create_pdf_stack = function() {
                     zahlen_to_push.columns.push(obj_to_push);
                 };
 
-                console.log(JSON.stringify(zahlen_to_push, null, 2));
+                // console.log(JSON.stringify(zahlen_to_push, null, 2));
             };
 
             var z_score_grafik = {

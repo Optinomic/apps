@@ -279,14 +279,14 @@ $scope.getTemplates = function() {
         "pageOrientation": 'portrait',
         "info": {
             "title": "Optinomic | Druckvorlage",
-            "author": d.klinik,
+            "author": d.klinik + " | Optinomic GmbH",
             "subject": d.patient,
-            "keywords": d.patient + ', ' + d.klinik + ', Optinomic'
+            "keywords": d.patient + ", " + d.klinik + ", Optinomic"
         },
         "header": {
             "columns": [
-                { "text": d.patient, "alignment": 'left', "style": 'header' },
-                { "text": d.klinik, "alignment": 'right', "style": 'header' }
+                { "text": d.patient, "alignment": "left", "style": "header" },
+                { "text": d.klinik, "alignment": "right", "style": "header" }
             ]
         },
         "footer": function(currentPage, pageCount) {
@@ -411,6 +411,11 @@ $scope.loadAppPDF = function(content, app_identifier) {
 $scope.pdf_open = function(doc) {
     console.log('(!) pdf_open', doc);
     $scope.d.current_doc = doc
+
+    var datestamp = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY')
+    var filename = datestamp + ' - ' + doc.name + ' - ' + $scope.d.dataMain.patient.data.last_name + ' ' + $scope.d.dataMain.patient.data.first_name;
+
+    $scope.d.docDefinition.info.title = filename;
     $scope.d.docDefinition.content = angular.copy(doc.content);
 
     pdfMake.createPdf($scope.d.docDefinition).open();
