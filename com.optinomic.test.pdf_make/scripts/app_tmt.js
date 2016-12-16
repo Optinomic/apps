@@ -185,7 +185,7 @@ d.tmt_create_pdf_stack = function() {
                     "columns": [],
                     "fontSize": 9,
                     "color": "#757575",
-                    "margin": [0, 0, 0, 6]
+                    "margin": [0, 0, 0, 12]
                 };
 
                 for (var i = 0; i < count_steps + 1; i++) {
@@ -252,8 +252,8 @@ d.tmt_initTMT = function() {
 
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options = {
-        "zscore_min": -6,
-        "zscore_max": 6,
+        "zscore_min": -5,
+        "zscore_max": 5,
         "clinicsample_color": "#C5CAE9",
         "centered_zero": true,
         "show_text": true,
