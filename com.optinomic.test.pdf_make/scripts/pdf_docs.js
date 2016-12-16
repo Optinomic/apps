@@ -101,7 +101,7 @@ $scope.pdf_make_init = function() {
 
 
     doc.content.push($scope.d.templates.spacer(20));
-    doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.tmt_V3');
+    doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf);
 
 
     doc.content.push($scope.d.templates.spacer(20));
