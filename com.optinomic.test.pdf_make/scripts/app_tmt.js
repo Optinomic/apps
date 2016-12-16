@@ -183,6 +183,23 @@ d.tmt_create_pdf_stack = function() {
 
         group.data.forEach(function(messung, messungID) {
 
+            var zeit_fehler_array = [];
+            if (group.name === "TMT A") {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
+                var ba = { "text": "B/A: " + messung.calculation.quotient };
+            } else {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
+                var ba = { "text": "B/A: " + messung.calculation.quotient };
+            };
+            zeit_fehler_array.push(zeit);
+            zeit_fehler_array.push(fehler);
+
+            if (messung.zscore.text_left === "Eintritt") {
+                zeit_fehler_array.push(ba);
+            };
+
             var z_score_grafik = {
                 "alignment": "left",
                 "columnGap": 12,
@@ -203,7 +220,7 @@ d.tmt_create_pdf_stack = function() {
                     "width": 110,
                     "fontSize": 10,
                     "alignment": "left",
-                    "stack": [{ "text": "ZEIT" }, { "text": "FEHLER" }, { "text": "BA" }],
+                    "stack": zeit_fehler_array,
                     "margin": [0, 12, 0, 0]
                 }]
             };
