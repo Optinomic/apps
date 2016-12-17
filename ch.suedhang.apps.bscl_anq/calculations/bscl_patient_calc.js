@@ -188,9 +188,9 @@ function main(responses) {
         // 1 = Frauen
         var gender_pos = 0;
         if (currentPatient.gender === 'male') {
-            gender_pos = 1;
-        } else {
             gender_pos = 0;
+        } else {
+            gender_pos = 1;
         };
 
 
@@ -254,26 +254,31 @@ function main(responses) {
 
 
                 if ((my_messzeitpunkt === 1) && (my_eintrittsort === 1)) {
+                    mz.mz_id = 0;
                     mz.mz_typ = 'Eintritt EAS';
                     mz.mz_text = 'Eintritt - EAS';
                 };
 
                 if ((my_messzeitpunkt === 2) && (my_eintrittsort === 2)) {
+                    mz.mz_id = 1;
                     mz.mz_typ = 'Austritt EP';
                     mz.mz_text = 'Austritt - EP';
                 };
 
                 if (my_messzeitpunkt === 3) {
+                    mz.mz_id = 2;
                     mz.mz_typ = 'Austritt EAS / Eintritt EP';
                     mz.mz_text = 'Austritt EAS oder Eintritt EP';
                 };
 
                 if ((my_messzeitpunkt === 2) && (my_eintrittsort === 1)) {
+                    mz.mz_id = 3;
                     mz.mz_typ = 'Austritt EAS';
                     mz.mz_text = 'Austritt - EAS';
                 };
 
                 if ((my_messzeitpunkt === 1) && (my_eintrittsort === 2)) {
+                    mz.mz_id = 4;
                     mz.mz_typ = 'Eintritt EP';
                     mz.mz_text = 'Eintritt - EP';
                 };
