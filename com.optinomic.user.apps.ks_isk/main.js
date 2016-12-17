@@ -112,7 +112,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         call.error(function(error) {
-            console.log('(ERROR): getCalculation | tmt_klinikstichprobe:', error);
+            console.log('(ERROR): getCalculation | Klinikstichprobe:', error);
         });
     };
 

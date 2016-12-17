@@ -106,13 +106,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             $scope.changeDimensions();
             $scope.d.loaded = true;
-            console.log('(DATA): getCalculation | tmt_klinikstichprobe: ', $scope.d.calculations);
+            console.log('(DATA): getCalculation | Klinikstichprobe: ', $scope.d.calculations);
             console.log('(DATA): Data-Explorer: ', $scope.d.ks.result_explorer);
 
         });
 
         call.error(function(error) {
-            console.log('(ERROR): getCalculation | tmt_klinikstichprobe:', error);
+            console.log('(ERROR): getCalculation | Klinikstichprobe:', error);
         });
     };
 
