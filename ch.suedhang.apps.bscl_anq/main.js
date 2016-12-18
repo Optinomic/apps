@@ -303,29 +303,33 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var current_group = current_sample.calculation.definitions.result_array[groupID];
             var variable_name = current_group.short_description + "_" + "z_score";
 
-            console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
 
-            current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
-            current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
+            if (variable_name !== "zusatzitems_z_score") {
 
+                console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
 
-            // Kliniksample gemäss Messzeitpunkt färben
-            var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
-
-            // Eintritt / Austritt / Anderer MZ
-            var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6'];
-            current_sample.zscore.clinicsample_color = cs_color[mz_id];
+                current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
+                current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
 
 
-            // Auffällige Testleistung |  färben
-            current_sample.zscore.zscore_color = '#1A237E';
-            if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
-                // Auffällige Testleistung: Rot
-                current_sample.zscore.zscore_color = '#F44336';
-            };
-            if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
-                // Auffällige Testleistung: Grün
-                current_sample.zscore.zscore_color = '#4CAF50';
+                // Kliniksample gemäss Messzeitpunkt färben
+                var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
+
+                // Eintritt / Austritt / Anderer MZ
+                var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6'];
+                current_sample.zscore.clinicsample_color = cs_color[mz_id];
+
+
+                // Auffällige Testleistung |  färben
+                current_sample.zscore.zscore_color = '#1A237E';
+                if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+                    // Auffällige Testleistung: Rot
+                    current_sample.zscore.zscore_color = '#F44336';
+                };
+                if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+                    // Auffällige Testleistung: Grün
+                    current_sample.zscore.zscore_color = '#4CAF50';
+                };
             };
 
 
