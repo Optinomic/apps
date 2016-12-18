@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 
 
 [template z_scores 6 10]
-include(templates/z_scores.html)
+include(templates/empty.html)
 
 
 [dependencies]
