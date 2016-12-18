@@ -299,10 +299,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         if (current_sample.ks.path_data.statistics !== null) {
 
-            console.log('(?) current_sample.ks.path_data', current_sample.ks.path_data);
 
             var current_group = current_sample.calculation.definitions.result_array[groupID];
             var variable_name = current_group.short_description + "_" + "z_score";
+
+            console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
+
             current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
             current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
 
