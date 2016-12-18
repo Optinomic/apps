@@ -3,7 +3,7 @@
  * ---------------------------------------
  * Controller of the Optinomic-Application.
  */
-app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService) {
+app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) {
 
     // -----------------------------------
     // Init
@@ -27,46 +27,318 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
 
             // Save Data to $scope.d
             $scope.d.dataMain = data;
+            $scope.d.init = true;
             var current_template = $scope.d.dataMain.params.location.viewname;
-
 
             // Check if we have survey_responses @ data.
             if (data.survey_responses.length !== 0) {
                 console.log('(DATA): survey_responses:', data.survey_responses.length, data.survey_responses);
+                $scope.d.haveData = true;
+
 
                 // Run Specific Functions only when needed.
 
-                if (current_template === 'chart_tscore') {
-                    $scope.setTscoreChart();
+                if (current_template === 'z_scores') {
+                    $scope.loadKS();
                 };
 
-                if (current_template === 'data_survey_responses') {
-                    $scope.setDataView();
-                };
-
-                if (current_template === 'data_export_admin') {
+                if (current_template === 'export_toolbox_admin') {
                     $scope.setExport();
                 };
-
-
-                // Display Results
-                $scope.d.haveData = true;
             };
 
             // Finishing: Console Info & Init = done.
-            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, $scope.d);
-            $scope.d.init = true;
-            $scope.d.functions._InitData('dataMain', true);
+            console.log('Welcome, ', $scope.d.dataMain.apps.current.name, ' | ', current_template, $scope.d);
         });
     };
     $scope.loadMainData();
 
 
-    // -----------------------------------
-    // Init: Export-Data
-    // -----------------------------------
-    $scope.setExport = function() {
 
+    $scope.loadKS = function() {
+
+        $scope.d.ks = {};
+
+        var ks_file = include_as_js_string(
+            ks_current.json)
+
+        ks_file = JSON.parse(ks_file);
+
+        $scope.d.ks = ks_file;
+
+        console.log('DEBUG 1', $scope.d.ks);
+
+
+        $scope.d.ks.text = '';
+        $scope.d.ks.dimensions.forEach(function(dim, dimID) {
+            if ($scope.d.ks.text !== '') {
+                $scope.d.ks.text = $scope.d.ks.text + ', '
+            };
+            $scope.d.ks.text = $scope.d.ks.text + dim.name
+        });
+        $scope.d.ks.text = $scope.d.ks.n_scores + ' Messungen normiert nach ' + $scope.d.ks.text;
+        var datum_ks = $filter('date')($scope.d.ks.date);
+        $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
+
+
+        console.log('DEBUG 2', $scope.d.dataMain.calculations["0"].calculation_results["0"]);
+
+        $scope.d.ks.normgurppe = {};
+        //$scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+
+
+        //$scope.d.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.ks.normgurppe.n;
+
+        console.log('(✓) Klinikstichprobe geladen: ', $scope.d.ks);
+
+        // Follow the white rabbit
+        $scope.init();
+    };
+
+
+    $scope.getKSLocation = function(location_array) {
+
+        var current_ks = $scope.d.ks;
+
+        var data_dive = current_ks.data;
+        var current_location_text = "";
+        var current_location_full = "";
+        var current_location_n_text = "";
+        var current_location_n = 0;
+
+
+        location_array.forEach(function(pos, posID) {
+            data_dive = data_dive[pos];
+
+            if (current_location_text !== "") {
+                current_location_text = current_location_text + ' | '
+            };
+
+            var current_dim = current_ks.dimensions[posID];
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
+        });
+
+
+        var statistics = null;
+        if (data_dive !== null) {
+            statistics = data_dive.statistics;
+            current_location_n = data_dive.patients.length;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+        } else {
+            statistics = null;
+            current_location_n = 0;
+            current_location_n_text = 'N=' + current_location_n;
+            current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+        };
+
+        var location = {
+            "statistics": statistics,
+            "path": location_array,
+            "text": current_location_text,
+            "n_text": current_location_n_text,
+            "text_full": current_location_full,
+            "n": current_location_n
+        };
+
+        //console.log('getKSLocation', location);
+
+        return angular.copy(location);
+    };
+
+
+    $scope.init = function() {
+
+        $scope.d.bscl = {};
+        $scope.d.bscl.init = false;
+        $scope.d.bscl.show_legend = false;
+
+        // Default Z-Score Option
+        $scope.d.bscl.zscore_options = {
+            "zscore_min": -4,
+            "zscore_max": 4,
+            "clinicsample_color": "#C5CAE9",
+            "centered_zero": true,
+            "show_text": false,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false,
+            "show_numbers": true
+        };
+
+
+        // Toggles | Grafiken
+        $scope.d.bscl.toggles = {
+            "show_text": true,
+            "show_clinicsample": true,
+            "show_clinicsample_scores": false
+        };
+
+
+        // Gruppierung der Messungen
+        $scope.d.bscl.groups = angular.copy($scope.d.dataMain.calculations["0"].calculation_results["0"].definitions.result_array);
+
+        $scope.d.bscl.groups.forEach(function(group, groupID) {
+            delete group.result;
+            group.data = [];
+        });
+
+        // Build  & Sort | Neueste Messung als letzter Eintrag
+        var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
+        alle_messungen.forEach(function(messung, messungID) {
+            messung.date = messung.info.filled;
+        });
+        dataService.sortOn(alle_messungen, 'date', false, false);
+
+
+
+        // Loop alle_messungen und messung in ISK A / ISK B pushen
+        alle_messungen.forEach(function(messung, messungID) {
+
+            // console.log('(!) 1 - Messung', messungID, messung);
+
+
+            // Variablen vorbereiten | verdrahten.
+            var mz_text = messung.info.mz.mz_typ;
+            var datum_messung = $filter('date')(messung.info.filled);
+
+
+            // Messzeitpung
+            var mz_id = messung.info.mz.mz_id;
+            // if (mz_id === 99) {
+            //     mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
+            // };
+
+
+            // Gender
+            var gender_id = 0 // Frau
+            if ($scope.d.dataMain.patient.data.gender === 'male') {
+                gender_id = 1;
+            };
+
+            // Default Pfad für MD-Array erstellen
+            var current_ks = $scope.d.ks;
+            var dimensions_path = [];
+            current_ks.dimensions.forEach(function(current_dim, myDimID) {
+
+                var default_last = current_dim.array.length - 1;
+                dimensions_path[myDimID] = default_last;
+
+                if (current_dim.name === "Messzeitpunkt") {
+                    dimensions_path[myDimID] = mz_id;
+                };
+
+                if (current_dim.name === "Geschlecht") {
+                    dimensions_path[myDimID] = gender_id;
+                };
+            });
+
+            // console.log('(!) 2 - dimensions_path', dimensions_path);
+
+
+            var md_data = $scope.getKSLocation(dimensions_path);
+            // console.log('(!) 3 - md_data', dimensions_path, md_data);
+
+
+            // Resultate in Gruppen schreiben
+            $scope.d.bscl.groups.forEach(function(group, groupID) {
+
+                var messung_obj = {
+                    "calculation": messung,
+                    "ks": {
+                        "path_data": md_data,
+                        "path_selected": dimensions_path,
+                        "show_controls": false
+                    },
+                    "zscore": {
+                        "zscore": null,
+                        "zscore_color": '#1A237E',
+                        "text_left": mz_text,
+                        "text_left_caption": "BSCL",
+                        "text_right": datum_messung,
+                        "text_right_caption": "",
+                        "clinicsample_start": 0,
+                        "clinicsample_end": 0,
+                        "clinicsample_color": '#9FA8DA',
+                        "marker_1_score": null,
+                        "marker_1_text": "",
+                        "marker_1_color": "#F44336",
+                    },
+                };
+
+
+
+                var variable_name = group.short_description + "_" + "z_score";
+                messung_obj.zscore.zscore = messung.all_results[variable_name];
+                messung_obj.zscore.text_left_caption = group.description;
+
+                // console.log('(!) 4 - messung_obj', messung_obj);
+
+                group.data.push(messung_obj);
+
+
+            });
+        });
+
+        // MD - Daten befüllen
+        $scope.d.bscl.groups.forEach(function(group, groupID) {
+            group.data.forEach(function(groupInner, groupInnerID) {
+                $scope.changeClinicSample(groupInner, groupID);
+                // console.log('(!) -- changeClinicSample', groupInner);
+            });
+        });
+
+        $scope.d.bscl.show_legend = false;
+
+        $scope.d.bscl.init = true;
+    };
+
+
+    $scope.changeClinicSample = function(current_sample, groupID) {
+
+        current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
+
+        if (current_sample.ks.path_data.statistics !== null) {
+
+
+            var current_group = current_sample.calculation.definitions.result_array[groupID];
+            var variable_name = current_group.short_description + "_" + "z_score";
+            current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
+            current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
+
+
+            // Kliniksample gemäss Messzeitpunkt färben
+            var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
+
+            // Eintritt / Austritt / Anderer MZ
+            var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6'];
+            current_sample.zscore.clinicsample_color = cs_color[mz_id];
+
+
+            // Auffällige Testleistung |  färben
+            current_sample.zscore.zscore_color = '#1A237E';
+            if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+                // Auffällige Testleistung: Rot
+                current_sample.zscore.zscore_color = '#F44336';
+            };
+            if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+                // Auffällige Testleistung: Grün
+                current_sample.zscore.zscore_color = '#4CAF50';
+            };
+
+
+
+        } else {
+            current_sample.zscore.clinicsample_start = 0;
+            current_sample.zscore.clinicsample_end = 0;
+        };
+
+        $scope.d.bscl.show_legend = true;
+
+        // console.log('(Done) changeClinicSample', current_sample);
+    };
+
+
+    $scope.setExport = function() {
 
         // ------------------------------------------------
         // Export - Pakete definieren
@@ -74,189 +346,50 @@ app.controller('AppCtrl', function($scope, $mdDialog, dataService, scopeDService
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
+
         // Hinzufügen gespeicherter SQL-Dateien in /includes
         var module_packages = [];
+        var data_query = {};
 
-        // var data_query = {};
-        // data_query = {
-        //     name: 'WHQOL-Example (with stay)',
-        //     sql: in clude_as_js_string(
-        //         export.sql)
-        // };
-        // module_packages.push(data_query);
+        data_query = {
+            name: 'WHQOL-Example (with stay)',
+            sql: include_as_js_string(
+                export.sql)
+        };
+        module_packages.push(data_query);
 
         // Init the given Export Settings
         $scope.d.sql_box = $scope.d.functions.getDefaultExportSettings($scope.d.dataMain.params.app_id, module_packages);
-
     };
 
+    // -------------------------------------------
+    // Helper - Functions
+    // -------------------------------------------
 
-    // -----------------------------------
-    // Chart: T-Score <chart-tscore>
-    // -----------------------------------
-
-    $scope.getAnswer = function(calc) {
-
-        var myResults = calc;
-        //console.log('getAnswer', myResults);
-
-        var score_answer = [{
-            "scale": 0,
-            "question": "GSI (Global Severity Index)",
-            "stanine": myResults.stanine.gsi,
-            "t_score": myResults.t_scores.gsi,
-            "scale_score": myResults.scale_scores.gsi,
-            "sum_score": myResults.sum_scores.gsi
-        }, {
-            "scale": 1,
-            "question": "Psychotizismus",
-            "t_score": myResults.t_scores.psychot,
-            "scale_score": myResults.scale_scores.psychot,
-            "sum_score": myResults.sum_scores.psychot
-        }, {
-            "scale": 2,
-            "question": "Paranoides Denken",
-            "t_score": myResults.t_scores.paranoid,
-            "scale_score": myResults.scale_scores.paranoid,
-            "sum_score": myResults.sum_scores.paranoid
-        }, {
-            "scale": 3,
-            "question": "Phobische Angst",
-            "t_score": myResults.t_scores.phobisch,
-            "scale_score": myResults.scale_scores.phobisch,
-            "sum_score": myResults.sum_scores.phobisch
-        }, {
-            "scale": 4,
-            "question": "Aggressivität/ Feindseligkeit",
-            "t_score": myResults.t_scores.aggr,
-            "scale_score": myResults.scale_scores.aggr,
-            "sum_score": myResults.sum_scores.aggr
-        }, {
-            "scale": 5,
-            "question": "Ängstlichkeit",
-            "t_score": myResults.t_scores.angst,
-            "scale_score": myResults.scale_scores.angst,
-            "sum_score": myResults.sum_scores.angst
-        }, {
-            "scale": 6,
-            "question": "Depressivität",
-            "t_score": myResults.t_scores.depr,
-            "scale_score": myResults.scale_scores.depr,
-            "sum_score": myResults.sum_scores.depr
-        }, {
-            "scale": 7,
-            "question": "Unsicherheit im Sozialkontakt",
-            "t_score": myResults.t_scores.soz,
-            "scale_score": myResults.scale_scores.soz,
-            "sum_score": myResults.sum_scores.soz
-        }, {
-            "scale": 8,
-            "question": "Zwanghaftigkeit",
-            "t_score": myResults.t_scores.zwang,
-            "scale_score": myResults.scale_scores.zwang,
-            "sum_score": myResults.sum_scores.zwang
-        }, {
-            "scale": 9,
-            "question": "Somatisierung",
-            "t_score": myResults.t_scores.somat,
-            "scale_score": myResults.scale_scores.somat,
-            "sum_score": myResults.sum_scores.somat
-        }];
-
-        return score_answer;
+    $scope.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
     };
 
-    $scope.setTscoreChart = function() {
+    $scope.sortByKey = function(array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key];
+            var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    };
 
-        // Options
-        $scope.options_plot = {
-            'show_scores': true,
-            'language': 'De'
+    $scope.twoDigits = function(id) {
+        var return_text = '';
+        id = parseInt(id);
+        if (id < 10) {
+            return_text = '0' + id.toString();
+        } else {
+            return_text = id.toString();
         };
-
-
-        // Create - Plot-Data from Calculation Results
-        $scope.d.tscore_plot = [];
-
-        var mySurveyResponses = $scope.d.dataMain.survey_responses;
-        mySurveyResponses.forEach(function(survey_response, myindex) {
-
-            var mySurveyResponseCalculations = survey_response.calculations;
-            mySurveyResponseCalculations.forEach(function(calculation, myindex) {
-
-                if (calculation.calculation_name === "get_results") {
-
-                    var inner_calculation = calculation.calculation_result;
-                    if (inner_calculation) {
-
-                        if (survey_response.entity.data.response.q501V05 === '0') {
-                            // Only if: Ja, Patient/in wird nun den BSCL ausfüllen
-
-                            var myLabel = '';
-                            myLabel = survey_response.entity.data.filled_day;
-
-
-                            if (survey_response.entity.data.response.q501V04 === '1') {
-                                myLabel = 'Eintritt';
-                            };
-                            if (survey_response.entity.data.response.q501V04 === '2') {
-                                myLabel = 'Austritt';
-                            };
-                            if (survey_response.entity.data.response.q501V04 === '3') {
-                                myLabel = 'Übertritt';
-                            };
-
-                            console.log();
-
-                            var plot_item = {
-                                "label": myLabel,
-                                "label_datestamp": survey_response.entity.data.filled_day + ', ' + survey_response.entity.data.filled_time,
-                                "scores": $scope.getAnswer(inner_calculation)
-                            }
-                            $scope.d.tscore_plot.push(plot_item);
-                        };
-                    };
-                };
-            });
-        });
+        return return_text;
     };
 
-
-    // -----------------------------------
-    // DataView : angulargrid.com
-    // -----------------------------------
-    $scope.setDataView = function() {
-
-        // If we have multiple surveys - make sure to take the right 'responses'.
-        var currentResultGroup = 0;
-        $scope.d.dataMain.survey_responses_group_definitions.forEach(function(current_group_def, myindex) {
-            if (current_group_def.survey === 'BSCL - ANQ') {
-                currentResultGroup = current_group_def.id;
-            };
-        });
-
-        // Loop trough all responses from selected 'survey-group' above and save respnses in survey_responses_array
-        $scope.d.dataMain.survey_responses_array = [];
-        $scope.d.dataMain.survey_responses_group[currentResultGroup].forEach(function(current_result, myindex) {
-            var my_response = current_result.entity.data.response;
-
-            // If ng-survey survey @ some more info to 'response'.
-            my_response.filled = current_result.entity.data.filled;
-            my_response.survey_name = current_result.event.survey_name;
-
-            $scope.d.dataMain.survey_responses_array.push(my_response);
-        });
-        var resultsArray = $scope.d.dataMain.survey_responses_array;
-
-
-        // DataView - Options
-        $scope.d.grid.options = $scope.d.grid.default_options;
-        $scope.d.grid.options.columnDefs = $scope.d.functions.createColumnDefs(resultsArray, true, true);
-        $scope.d.grid.options.rowData = resultsArray;
-
-
-        //console.log('dataGRID: ', $scope.d.grid);
-    };
 
 
 });
