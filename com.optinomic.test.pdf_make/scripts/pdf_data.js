@@ -91,13 +91,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var date = $filter("amDateFormat")(calc.response.data.filled, 'DD.MM.YYYY');
 
                 var audit_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " Punkte auf."
-                audit_text = audit_text + " Was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
+                audit_text = audit_text + ", was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
                 audit_stack.stack.push(audit_text);
 
-                var fagerstroem_text = calc.AUDIT.interpretation.result;
+                var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                 fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
                 fagerstroem_text = "Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "»."
-                fagerstroem_stack.stack.push(audit_text);
+                fagerstroem_stack.stack.push(fagerstroem_text);
             });
 
             var col_2 = act_info_ein_block.columns["1"].stack;
