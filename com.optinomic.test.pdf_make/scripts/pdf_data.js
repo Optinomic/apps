@@ -79,7 +79,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             var audit_stack = {
                 "stack": [],
-                "margin": [0, 0, 0, 6]
+                "margin": [0, 0, 0, 12]
             };
 
             var fagerstroem_stack = {
@@ -104,7 +104,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             col_2.push($scope.d.templates.heading('h3', 'Alkoholabhängigkeit (AUDIT)'));
             col_2.push(audit_stack);
 
-            col_2.push($scope.d.templates.heading('h3', 'Nikotinabhängigkeit'));
+            col_2.push($scope.d.templates.heading('h3', 'Nikotinabhängigkeit (Fagerström)'));
             col_2.push(fagerstroem_stack);
 
             pdf.push(act_info_ein_block);
