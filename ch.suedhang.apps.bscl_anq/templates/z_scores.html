@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="item in d.bscl.groups">
+<div ng-if="item.description !== 'Zusatzitems'" class="grid-border-top" style="margin-top: 30px;" ng-repeat="item in d.bscl.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">{{item.description}}</h3>
