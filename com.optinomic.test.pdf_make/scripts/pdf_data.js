@@ -33,8 +33,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
 
         if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
-            pdf.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
 
+
+            pdf.push($scope.d.templates.horizontalLine(100));
+            pdf.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
 
             var act_info_ein_block = {
                 "alignment": 'left',
@@ -51,6 +53,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
             var col_1 = act_info_ein_block.columns["0"].stack;
+            col_1.push($scope.d.templates.heading('h3', 'Substanzkonsum'));
             col_1.push($scope.d.templates.text('Folgende Substanzen konsumierte ' + $scope.d.dataMain.patient.data.extras.anrede + ' vor dem aktuellen Entzug in der angegebenen Häufigkeit:'));
 
             var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);

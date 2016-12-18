@@ -84,10 +84,12 @@ $scope.getTemplates = function() {
             style = '';
         };
 
-        return {
+        var return_obj = {
             "text": text,
             "style": style
         };
+
+        return return_obj;
     };
 
     d.text = function(text) {
@@ -114,6 +116,31 @@ $scope.getTemplates = function() {
         when = when === undefined ? 'after' : when;
         return { "fontSize": 0, "text": '', "pageOrientation": "portrait", "pageBreak": when };
     };
+
+
+    d.horizontalLine = function(width) {
+        width = width === undefined ? 100 : width;
+
+        var length = 514 / 100 * width;
+
+        var return_obj = {
+            "margin": [0, 24, 0, 0],
+            "canvas": [{
+                "type": 'line',
+                "x1": 0,
+                "y1": 0,
+                "x2": length,
+                "y2": 0,
+                "lineWidth": 0.5,
+                "lineColor": "#BDBDBD"
+            }]
+        };
+
+        return return_obj;
+    };
+
+
+
 
     d.z_score = function(data, options) {
         var grey = {
