@@ -60,52 +60,52 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-            //   $scope.d.ks = {};
-            //   $scope.d.ks.result_explorer = {
-            //       "types": {
-            //           "all": [{
-            //               "id": 0,
-            //               "name": 'Alle Variablen'
-            //           }, {
-            //               "id": 1,
-            //               "name": 'Einzelne Variablen'
-            //           }],
-            //           "selected": null,
-            //           "selected_var": null
-            //       },
-            //       "ks": {}
-            //   };
-            //   $scope.d.ks.result_explorer.types.selected = $scope.d.ks.result_explorer.types.all[1];
-            //   
-            //   
-            //   // Set 'last' as Default
-            //   var dimensions = angular.copy(data.calculation_result.definitions.dimensions_app);
-            //   dimensions.forEach(function(current_dim, dimID) {
-            //       current_dim.selected = current_dim.array[current_dim.array.length - 1];
-            //   });
-            //   
-            //   // Fokus Variable
-            //   $scope.d.ks.result_explorer.types.selected_var = data.calculation_result.definitions.variables_array[0];
-            //   
-            //   
-            //   // Anzahl Messungen bestimmen
-            //   var n_scores = 0;
-            //   data.calculation_result.patient_scores.forEach(function(d, psID) {
-            //       n_scores = n_scores + d.data.scores.length;
-            //   });
-            //   
-            //   
-            //   $scope.d.ks.result_explorer.ks = {
-            //       "id": 0,
-            //       "data": data.calculation_result.md_patient_scores,
-            //       "date": new Date(),
-            //       "dimensions": dimensions,
-            //       "location": {},
-            //       "n_scores": n_scores,
-            //       "variables": data.calculation_result.definitions.variables_array
-            //   };
-            //   
-            //   $scope.changeDimensions();
+            $scope.d.ks = {};
+            $scope.d.ks.result_explorer = {
+                "types": {
+                    "all": [{
+                        "id": 0,
+                        "name": 'Alle Variablen'
+                    }, {
+                        "id": 1,
+                        "name": 'Einzelne Variablen'
+                    }],
+                    "selected": null,
+                    "selected_var": null
+                },
+                "ks": {}
+            };
+            $scope.d.ks.result_explorer.types.selected = $scope.d.ks.result_explorer.types.all[1];
+
+
+            // Set 'last' as Default
+            var dimensions = angular.copy(data.calculation_result.definitions.dimensions_app);
+            dimensions.forEach(function(current_dim, dimID) {
+                current_dim.selected = current_dim.array[current_dim.array.length - 1];
+            });
+
+            // Fokus Variable
+            $scope.d.ks.result_explorer.types.selected_var = data.calculation_result.definitions.variables_array[0];
+
+
+            // Anzahl Messungen bestimmen
+            var n_scores = 0;
+            data.calculation_result.patient_scores.forEach(function(d, psID) {
+                n_scores = n_scores + d.data.scores.length;
+            });
+
+
+            $scope.d.ks.result_explorer.ks = {
+                "id": 0,
+                "data": data.calculation_result.md_patient_scores,
+                "date": new Date(),
+                "dimensions": dimensions,
+                "location": {},
+                "n_scores": n_scores,
+                "variables": data.calculation_result.definitions.variables_array
+            };
+
+            $scope.changeDimensions();
 
             $scope.d.loaded = true;
             //   console.log('(DATA): Data-Explorer: ', $scope.d.ks.result_explorer);
