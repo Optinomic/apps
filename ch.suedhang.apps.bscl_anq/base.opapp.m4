@@ -22,10 +22,9 @@ website = http://www.optinomic.com/
 
 
 [template z_scores 6 10]
-include(templates/empty.html)
+include(templates/score_page.html)
 
 
-[dependencies]
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
@@ -35,6 +34,8 @@ include(main.js)
 [css]
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
+
+
 
 [survey]
 id = bscl_anq

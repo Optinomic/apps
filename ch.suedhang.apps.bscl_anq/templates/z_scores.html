@@ -1,9 +1,9 @@
-<div class="grid-border-top" style="margin-top: 30px;" ng-if="!d.TMT.show_legend">
+<div class="grid-border-top" style="margin-top: 30px;" ng-if="!d.bscl.show_legend">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">Stichproben | Legende</h3>
         </div>
-        <md-button ng-click="d.TMT.settings=! d.TMT.settings" class="md-icon-button">
+        <md-button ng-click="d.bscl.settings=! d.bscl.settings" class="md-icon-button">
             <i class="mdi mdi-dots-vertical" style="font-size:24px;"></i>
             <md-tooltip md-direction="left">
                 Einstellungen
@@ -14,14 +14,13 @@
         <div flex="25">
             <p class="md-subhead">Normstichprobe</p>
             <p class="md-caption" style="color:#757575;margin-top:-6px;">
-                Z-Werte aufgrund der Normstichprobe:
-                <br> {{d.ks.normgurppe.text}}
+                Z-Werte aufgrund der ? Normstichprobe.
             </p>
         </div>
         <div flex>
             <p class="md-subhead">Klinikstichprobe</p>
-            <div style="margin-top:-12px;">
-                <div ng-repeat="data in d.bscl.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div style="margin-top:16px;">
+                <div style="margin-top:-16px;" ng-repeat="data in d.bscl.groups[0].data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                     <div>
                         <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
                     </div>
@@ -31,10 +30,10 @@
         </div>
     </div>
 </div>
-<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="bscl in d.bscl.groups">
+<div class="grid-border-top" style="margin-top: 30px;" ng-repeat="item in d.bscl.groups">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
-            <h3 class="md-headline">{{bscl.name}}</h3>
+            <h3 class="md-headline">{{item.description}}</h3>
         </div>
         <md-button ng-if="d.bscl.show_legend" ng-click="d.bscl.show_legend = !d.bscl.show_legend" class="md-icon-button">
             <i class="mdi mdi-eye-off" style="font-size:18px; color:#9E9E9E"></i>
@@ -55,32 +54,56 @@
             </md-tooltip>
         </md-button>
     </div>
-    <div ng-repeat="score in d.group_scores" class="grid-border-bottom; no-page-break">
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" class="no-page-break">
-            <div flex>
-                <h3 class="md-headline">{{score.question}}</h3>
-                <p class="md-subhead">{{score.full}}</p>
-                <div>
-                    <div class="no-page-break" layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
-                        <div flex="30">
-                            <p class="md-body-1"><span class="md-body-2">{{data.label}}</span>
-                                <br> {{score.sub_left}}</p>
-                        </div>
-                        <div flex="40">
-                            <z-score data="data.zscore" options="d.bscl.zscore_options"></z-score>
-                        </div>
-                        <div flex="30">
-                            <p class="md-body-1"> {{score.sub_right}}</p>
-                        </div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+        <div flex>
+            <p class="md-body-1">{{item.full}}</p>
+        </div>
+    </div>
+    <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" ng-if="d.bscl.show_legend">
+        <div flex="25">
+            <p class="md-subhead">Normstichprobe</p>
+            <p class="md-caption" style="color:#757575;margin-top:-6px;">
+                Z-Werte aufgrund der ? Normstichprobe.
+            </p>
+        </div>
+        <div flex>
+            <p class="md-subhead">Klinikstichprobe</p>
+            <div style="margin-top:16px;">
+                <div style="margin-top:-16px;" ng-repeat="data in item.data" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                    <div>
+                        <p ng-attr-style="font-size:28px;margin-top:-4px; color:{{data.zscore.clinicsample_color}}!important;"><span style="color:#424242;font-size:9px;">{{$index + 1}}</span>■</p>
                     </div>
+                    <p flex class="md-caption small" style="color:#757575;">{{data.ks.path_data.text_full}}</p>
                 </div>
             </div>
         </div>
-        <div style="margin-top: 30px;">&nbsp;</div>
     </div>
-    <div class="no-page-break" ng-repeat="data in bscl.data" style="margin-top: -6px;">
-        <div class="no-page-break" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <div>
+    <div style="margin-bottom:6px;margin-top:6px;" class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+        <div flex="15" hide-xs show-gt-xs>
+            &nbsp;
+        </div>
+        <div flex="40">
+            <p class="md-caption" style="color:#757575;padding-left:1px;">{{item.sub_left}}</p>
+        </div>
+        <div flex="40" style="text-align:right; color:#757575;padding-left:6px;padding-right:20px;">
+            <p class="md-caption">{{item.sub_right}}</p>
+        </div>
+        <div flex="5" hide-xs show-gt-xs>
+            &nbsp;
+        </div>
+    </div>
+    <div class="no-page-break" ng-repeat="data in item.data" style="margin-top: -6px;">
+        <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div flex>
+                <div style="padding-left: 12px;">
+                    <p class="md-body-2">{{data.zscore.text_left}}</p>
+                    <p class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.filled | date}}</p>
+                </div>
+            </div>
+            <div flex="80">
+                <z-score data="data.zscore" options="d.bscl.zscore_options"></z-score>
+            </div>
+            <div hide-xs show-gt-xs>
                 <div>
                     <div>
                         <md-button ng-if="!data.ks.show_controls" ng-click="data.ks.show_controls = !data.ks.show_controls" class="md-icon-button">
@@ -109,7 +132,7 @@
             <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
                 <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.dimensions">
                     <label>{{dim.name}}</label>
-                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data)">
+                    <md-select ng-model="data.ks.path_selected[$index]" ng-change="changeClinicSample(data, item.id)">
                         <md-option ng-repeat="item in dim.array" ng-value="item.id">
                             {{item.text}}
                         </md-option>
