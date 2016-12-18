@@ -620,6 +620,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
+        if (identifier === 'com.optinomic.user.apps.ks_bscl') {
+            var ks_file = include_as_js_string(
+                com.optinomic.user.apps.ks_bscl.json)
+
+            ks_file = JSON.parse(ks_file);
+
+            $scope.d.ks.ks_versions.versions = ks_file;
+            console.log('(✓) loadKS success: ', identifier, $scope.d.ks.ks_versions.versions.all);
+
+        };
+
         // Do not load from Annotations
 
         //  var promiseSaveDimensions = dataService.getAppJSON(identifier_name);
