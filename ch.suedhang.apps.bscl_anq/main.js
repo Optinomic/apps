@@ -156,9 +156,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Default Z-Score Option
         $scope.d.bscl.zscore_options = {
             "zscore_min": -4,
-            "zscore_max": 4,
+            "zscore_max": 12,
             "clinicsample_color": "#C5CAE9",
-            "centered_zero": true,
+            "centered_zero": false,
             "show_text": false,
             "show_clinicsample": true,
             "show_clinicsample_scores": false,
