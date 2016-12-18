@@ -72,12 +72,40 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 col_1.push(table_to_push);
             });
 
+
+            // AUDIT | Fagerström
+
+            var act_info_ein_calculation = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
+
+            var audit_stack = {
+                "stack": [],
+                "margin": [0, 0, 0, 6]
+            };
+
+            var fagerstroem_stack = {
+                "stack": [],
+                "margin": [0, 0, 0, 6]
+            };
+
+            act_info_ein_calculation.forEach(function(calc, calcID) {
+                var date = $filter("amDateFormat")(calc.response.data.filled, 'DD.MM.YYYY');
+
+                var audit_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " Punkte auf."
+                audit_text = audit_text + " Was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
+                audit_stack.stack.push(audit_text);
+
+                var fagerstroem_text = calc.AUDIT.interpretation.result;
+                fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
+                fagerstroem_text = "Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "»."
+                fagerstroem_stack.stack.push(audit_text);
+            });
+
             var col_2 = act_info_ein_block.columns["1"].stack;
             col_2.push($scope.d.templates.heading('h3', 'Alkoholabhängigkeit (AUDIT)'));
-            col_2.push($scope.d.templates.text('Grafik?'));
+            col_2.push(audit_stack);
 
             col_2.push($scope.d.templates.heading('h3', 'Nikotinabhängigkeit'));
-            col_2.push($scope.d.templates.text('Bei Eintritt in die Entwöhnungsbehandlung bestand keine / eine Ausprägung Nikotinabhängigkeit.'));
+            col_2.push(fagerstroem_stack);
 
             pdf.push(act_info_ein_block);
         };
