@@ -266,8 +266,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 data.survey_responses.forEach(function(sr, srID) {
 
                     var calc = sr.calculations["0"].calculation_result;
-                    console.log('calc', calc);
-
 
                     // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
                     var mz = 3; // Default für 'Unbekannt'
@@ -297,9 +295,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var interpretation = {};
                     ranges.forEach(function(range, rangeID) {
                         if (parseInt(calc.score) >= range.from) {
-                            interpretation = range[rangeID];
+                            interpretation = range;
                         };
-                        console.log('interpretation', range, parseInt(calc.score), interpretation);
+                        //console.log('interpretation', range, parseInt(calc.score), interpretation);
                     });
 
 
