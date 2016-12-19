@@ -265,18 +265,23 @@ d.bscl_create_pdf_stack = function() {
 
         });
 
+        var my_colums = {
+            "columns": [{
+                "stack": stack_left
+            }, {
+                "stack": stack_right
+            }]
+        };
+
+        stack_eintritt.push(my_colums);
+        stack_all.push(my_colums);
+
     });
 
-    var my_colums = {
-        "columns": [{
-            "stack": stack_left
-        }, {
-            "stack": stack_right
-        }]
-    };
 
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push(my_colums);
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push(my_colums);
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push(stack_eintritt);
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push(stack_all);
 };
 
 d.bscl_init = function() {
