@@ -197,7 +197,8 @@ d.bscl_create_pdf_stack = function() {
             zahlen_to_push = {
                 "columns": [],
                 "width": item.zscore_options.width,
-                "fontSize": 9,
+                "columnGap": 0,
+                "fontSize": 7,
                 "color": "#757575",
                 "margin": [0, 0, 0, 12]
             };
@@ -279,7 +280,7 @@ d.bscl_create_pdf_stack = function() {
             "width": item.zscore_options.width,
             "stack": stack_right
         }],
-        "columnGap": 12,
+        "columnGap": 12
     };
 
     stack_eintritt.push(my_colums);
@@ -298,7 +299,7 @@ d.bscl_init = function() {
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.zscore_options = {
         "zscore_min": -4,
-        "zscore_max": 12,
+        "zscore_max": 8,
         "clinicsample_color": "#C5CAE9",
         "centered_zero": false,
         "show_text": false,
