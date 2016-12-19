@@ -116,7 +116,7 @@ $scope.pdf_make_init = function() {
     doc.content.push(bloc);
 
     doc.content.push($scope.d.templates.spacer(12));
-    doc.content.push($scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.aase-g"));
+    doc.content.push($scope.loadAppPDF("eintritt", doc.content, "ch.suedhang.apps.aase-g"));
 
 
     doc.content.push($scope.d.templates.pageBreak());
@@ -145,7 +145,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
-    doc.content.push($scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.aase-g"));
+    doc.content.push($scope.loadAppPDF("eintritt", doc.content, "ch.suedhang.apps.aase-g"));
 
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);
