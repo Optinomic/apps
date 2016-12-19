@@ -181,35 +181,35 @@ d.tmt_create_pdf_stack = function() {
 
             // Zahlen -3 | 0 | +3
             var zahlen_to_push = {};
-            if (messungID === group.data.length - 1) {
-                zahlen_to_push = {
-                    "columns": [],
-                    "fontSize": 9,
-                    "color": "#757575",
-                    "margin": [0, 0, 0, 18]
-                };
 
-                for (var i = 0; i < count_steps + 1; i++) {
-                    var value = tmt.zscore_options.zscore_min + i;
-                    var alignment = "left";
-
-                    if (value === 0) {
-                        alignment = "center";
-                    };
-
-                    if (value > 0) {
-                        alignment = "right";
-                    };
-
-                    var obj_to_push = {
-                        "text": value.toString(),
-                        "alignment": alignment
-                    };
-                    zahlen_to_push.columns.push(obj_to_push);
-                };
-
-                // console.log(JSON.stringify(zahlen_to_push, null, 2));
+            zahlen_to_push = {
+                "columns": [],
+                "fontSize": 9,
+                "color": "#757575",
+                "margin": [0, 0, 0, 18]
             };
+
+            for (var i = 0; i < count_steps + 1; i++) {
+                var value = tmt.zscore_options.zscore_min + i;
+                var alignment = "left";
+
+                if (value === 0) {
+                    alignment = "center";
+                };
+
+                if (value > 0) {
+                    alignment = "right";
+                };
+
+                var obj_to_push = {
+                    "text": value.toString(),
+                    "alignment": alignment
+                };
+                zahlen_to_push.columns.push(obj_to_push);
+            };
+
+            // console.log(JSON.stringify(zahlen_to_push, null, 2));
+
 
             var z_score_grafik = {
                 "alignment": "left",
@@ -238,9 +238,13 @@ d.tmt_create_pdf_stack = function() {
 
             // Nur gewünschte Messungen anzeigen
             if (messung.zscore.text_left === 'Eintritt') {
-                stack_all.push(z_score_grafik);
                 stack_eintritt.push(z_score_grafik);
             } else {
+
+                if (messungID === group.data.length - 1) {
+                    zahlen_to_push = {};
+                };
+
                 // Alle Messungen anzeigen
                 stack_all.push(z_score_grafik);
             };
