@@ -114,7 +114,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 current_location_text = current_location_text + ' | '
             };
 
+
             var current_dim = current_ks.dimensions[posID];
+            console.log('(???) ', pos, posID, current_dim);
+
             current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
         });
 
