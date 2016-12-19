@@ -60,33 +60,59 @@ $scope.getTemplates = function() {
         subtitle = subtitle === undefined ? "" : subtitle;
 
         return {
-            stack: [
+            "stack": [
                 // second column consists of paragraphs
                 {
-                    text: title,
-                    style: "title"
+                    "text": title,
+                    "style": "title",
+                    "alignment": "left"
                 }, {
-                    text: subtitle,
-                    style: "caption"
-
+                    "text": subtitle,
+                    "style": "caption",
+                    "alignment": "left"
                 }
             ],
             "margin": [0, 0, 0, 24]
         };
     };
 
-    d.heading = function(style, text) {
+    d.heading = function(style, text_left, text_right) {
 
-        text = text === undefined ? "" : text;
-        style = style === undefined ? "h1" : style;
+        text_left = text_left === undefined ? "" : text_left;
+        text_right = text_right === undefined ? null : text_right;
+        style = style === undefined ? "h2" : style;
 
         if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
             style = "";
         };
 
-        var return_obj = {
-            "text": text,
-            "style": style
+
+        var left = {
+            "text": text_left,
+            "style": style,
+            "alignment": "left"
+        };
+
+        var return_obj = left;
+
+        var right = {
+            "text": text_left,
+            "style": style,
+            "alignment": "right",
+            "fontSize": 11,
+            "bold": false,
+            "color": "#9E9E9E"
+        };
+
+
+        if (text_right !== null) {
+            var cols = {
+                "columns": []
+            };
+            cols.columns.push(left);
+            cols.columns.push(right);
+
+            return_obj = cols;
         };
 
         return return_obj;

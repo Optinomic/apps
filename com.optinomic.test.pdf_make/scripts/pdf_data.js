@@ -43,9 +43,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             var actinfo_ein_stack = [];
             actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
-            actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
 
             if (data.survey_responses.length > 0) {
+
+                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, 'DD.MM.YYYY');
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
 
                 var act_info_ein_block = {
                     "alignment": "left",
@@ -126,6 +128,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 actinfo_ein_stack.push(act_info_ein_block);
             } else {
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
                 actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 96));
             };
 
