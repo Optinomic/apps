@@ -96,7 +96,7 @@ $scope.getTemplates = function() {
         var return_obj = left;
 
         var right = {
-            "text": text_left,
+            "text": text_right,
             "style": style,
             "alignment": "right",
             "fontSize": 11,
