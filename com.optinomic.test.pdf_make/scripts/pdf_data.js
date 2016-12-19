@@ -303,6 +303,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var score_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
                     score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
+                    var score_text_obj = { "text": score_text, "style": "p" };
 
                     var scales = {
                         "alignment": 'center',
@@ -322,7 +323,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "margin": [0, 0, 0, 6]
                     };
 
-                    return_obj.stack.push(score_text);
+                    return_obj.stack.push(score_text_obj);
                     return_obj.stack.push(scales);
 
 
