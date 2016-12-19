@@ -295,20 +295,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         }]
                     };
 
-                    var return_obj = {
-                        "stack": [],
-                        "margin": [0, 0, 0, 6]
-                    };
-
-                    return_obj.stack.push(score_text_obj);
-                    return_obj.stack.push(scales);
-
-                    //console.log('(???) return_obj', return_obj);
-
-                    pdf.all.push(return_obj);
+                    pdf.all.push(score_text_obj);
+                    pdf.all.push(scales);
 
                     if (mz === 1) {
-                        pdf.eintritt.push(return_obj);
+                        pdf.eintritt.push(score_text_obj);
+                        pdf.eintritt.push(scales);
                     };
 
                 });
