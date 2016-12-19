@@ -328,7 +328,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     console.log('(???) return_obj', return_obj);
 
-                    pdf.all.push(return_obj);
+                    // pdf.all.push(return_obj);
 
                     if (mz === 1) {
                         pdf.eintritt.push(return_obj);
