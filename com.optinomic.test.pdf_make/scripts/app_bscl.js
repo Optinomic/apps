@@ -94,7 +94,7 @@ d.bscl_create_pdf_stack = function() {
     item.groups.forEach(function(group, groupID) {
 
         var gruppen_name = {
-            "text": group.name,
+            "text": group.description,
             "style": "h3"
         };
 
@@ -181,11 +181,11 @@ d.bscl_create_pdf_stack = function() {
             stack_all.push(z_score_grafik_all);
 
             // Nur gewünschte Messungen anzeigen
-            if (messung.zscore.text_left === 'Eintritt') {
-                var z_score_grafik_eintritt = angular.copy(z_score_grafik);
-                z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
-                stack_eintritt.push(z_score_grafik_eintritt);
-            };
+            // if (messung.zscore.text_left === 'Eintritt') {
+            //     var z_score_grafik_eintritt = angular.copy(z_score_grafik);
+            //     z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
+            //     stack_eintritt.push(z_score_grafik_eintritt);
+            // };
 
 
         });
