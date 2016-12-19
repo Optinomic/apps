@@ -270,7 +270,7 @@ d.bscl_init = function() {
 
         // Gender
         var gender_id = 0 // Frau
-        if ($scope.d.appData["ch.suedhang.apps.bscl_anq"].data.patient.data.gender === 'male') {
+        if ($scope.d.dataMain.patient.data.gender === 'male') {
             gender_id = 1;
         };
 
