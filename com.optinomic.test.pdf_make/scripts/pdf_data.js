@@ -191,9 +191,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
         if (app_identifier === "ch.suedhang.apps.tmt_V3") {
 
-            var app_title = "TMT"
+            var app_title = "Trail Making Test (TMT)"
             pdf.push($scope.d.templates.horizontalLine(100));
             pdf.push($scope.d.templates.heading("h2", app_title));
+            pdf.push($scope.d.templates.text("Mit dem TMT wird die Fähigkeit zum visuellen Scannen erfasst, sowie die psychomotorische Geschwindigkeit (Trail Making Test A) und Leistungen der exekutiven Funktionen (insbesondere kognitive Flexibilität und Switching, Trail Making Test B)."));
+
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
