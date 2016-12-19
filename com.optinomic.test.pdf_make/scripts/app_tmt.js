@@ -238,8 +238,8 @@ d.tmt_create_pdf_stack = function() {
 
 
             // Alle Messungen anzeigen
+            var z_score_grafik_all = angular.copy(z_score_grafik);
             if (messungID === group.data.length - 1) {
-                var z_score_grafik_all = angular.copy(z_score_grafik);
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
             stack_all.push(z_score_grafik_all);
