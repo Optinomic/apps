@@ -284,13 +284,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var scales = {
                         "alignment": 'center',
                         "columns": [{
-                            "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString();, "style": "h3" }]
+                            "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString();, "style": "h3" }]
+                            "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString();, "style": "h3" }]
+                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString();, "style": "h3" }]
+                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
                         }]
                     };
 
