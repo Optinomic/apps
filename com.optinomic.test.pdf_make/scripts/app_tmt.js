@@ -245,11 +245,11 @@ d.tmt_create_pdf_stack = function() {
             stack_all.push(z_score_grafik_all);
 
             // Nur gewünschte Messungen anzeigen
-            var z_score_grafik_eintritt = angular.copy(z_score_grafik);
             if (messung.zscore.text_left === 'Eintritt') {
+                var z_score_grafik_eintritt = angular.copy(z_score_grafik);
                 z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
                 stack_eintritt.push(z_score_grafik_eintritt);
-            }
+            };
 
 
         });
