@@ -309,7 +309,7 @@ $scope.getTemplates = function() {
             "y1": 0,
             "x2": get_x(0),
             "y2": 35,
-            "lineWidth": 1,
+            "lineWidth": 2,
             "lineColor": grey["900"]
         };
         canvas.push(obj_to_push);
