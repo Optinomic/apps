@@ -326,6 +326,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     return_obj.stack.push(score_text_obj);
                     return_obj.stack.push(scales);
 
+                    console.log('(???) return_obj', return_obj);
 
                     pdf.all.push(return_obj);
 
