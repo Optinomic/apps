@@ -266,6 +266,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 data.survey_responses.forEach(function(sr, srID) {
 
                     var calc = sr.calculations["0"].calculation_result;
+                    console.log('calc', calc);
+
 
                     // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
                     var mz = 3; // Default für 'Unbekannt'
@@ -297,9 +299,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         if (parseInt(calc.score) >= range.from) {
                             interpretation = range[rangeID];
                         };
+                        console.log('interpretation', range, parseInt(calc.score), interpretation);
                     });
 
-                    console.log('interpretation', interpretation);
 
                     var score_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
                     score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
