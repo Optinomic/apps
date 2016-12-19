@@ -184,8 +184,8 @@ $scope.getTemplates = function() {
                         [
                             { "text": "!", "color": "#BDBDBD", "fontSize": 36, "margin": [0, 0, 0, 0] }, {
                                 "stack": [
-                                    { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] },
-                                    { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] }
+                                    { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                                    { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
                                 ],
                                 "margin": [0, 0, 0, 12]
                             }

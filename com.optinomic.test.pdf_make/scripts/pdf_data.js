@@ -129,7 +129,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 actinfo_ein_stack.push(act_info_ein_block);
             } else {
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
-                actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 96));
+                actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 84));
             };
 
             var return_obj = {
@@ -156,7 +156,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 case_stack.push(run.getCaseList());
                 case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
             } else {
-                case_stack.push($scope.d.templates.noData(app_identifier, 96));
+                case_stack.push($scope.d.templates.noData(app_identifier, 84));
             };
 
             var return_obj = {
@@ -176,8 +176,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             var app_title = "Trail Making Test (TMT)";
             var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
-            var description_full = "Der Quotient B /A stellt das "
-            reine " Maß der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
+            var description_full = "Der Quotient B /A stellt das reine Mass der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
@@ -193,8 +192,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
                 run.tmt_initTMT();
             } else {
-                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
-                pdf.all.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
         };
 
@@ -220,8 +219,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
                 run.bscl_loadKS();
             } else {
-                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
-                pdf.all.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
         };
 
@@ -310,8 +309,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 });
 
             } else {
-                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
-                pdf.all.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
         };
 
