@@ -236,17 +236,20 @@ d.tmt_create_pdf_stack = function() {
                 }]
             };
 
-            // Nur gewünschte Messungen anzeigen
-            if (messung.zscore.text_left === 'Eintritt') {
-                z_score_grafik.columns["0"].stack.push(zahlen_to_push);
-                stack_eintritt.push(z_score_grafik);
-            }
 
             // Alle Messungen anzeigen
             if (messungID === group.data.length - 1) {
-                z_score_grafik.columns["0"].stack.push(zahlen_to_push);
+                var z_score_grafik_all = angular.copy(z_score_grafik);
+                z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
-            stack_all.push(z_score_grafik);
+            stack_all.push(z_score_grafik_all);
+
+            // Nur gewünschte Messungen anzeigen
+            var z_score_grafik_eintritt = angular.copy(z_score_grafik);
+            if (messung.zscore.text_left === 'Eintritt') {
+                z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
+                stack_eintritt.push(z_score_grafik_eintritt);
+            }
 
 
         });
