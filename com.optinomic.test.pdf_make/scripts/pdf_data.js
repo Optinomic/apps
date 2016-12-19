@@ -198,7 +198,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
                 app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
-                run.tmt_initTMT();
+                run.tmt_initTMT("Eintritt");
             } else {
                 pdf.push($scope.d.templates.noData(app_identifier, 96));
             };

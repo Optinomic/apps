@@ -132,7 +132,7 @@ d.tmt_changeClinicSample = function(current_sample) {
     console.log('(Done) changeClinicSample', current_sample);
 };
 
-d.tmt_create_pdf_stack = function() {
+d.tmt_create_pdf_stack = function(mz_only) {
 
     var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
     var stack = [];
@@ -157,8 +157,8 @@ d.tmt_create_pdf_stack = function() {
                 var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
                 var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
             } else {
-                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
-                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTBTime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTBError };
                 var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
             };
             zeit_fehler_array.push(zeit);
@@ -167,7 +167,6 @@ d.tmt_create_pdf_stack = function() {
             if (messung.zscore.text_left === "Eintritt") {
                 zeit_fehler_array.push(ba);
             };
-
 
 
             var count_steps = 0;
@@ -235,7 +234,16 @@ d.tmt_create_pdf_stack = function() {
                 }]
             };
 
-            stack.push(z_score_grafik);
+            if (mz_only !== null) {
+                // Nur gewünschte Messungen anzeigen
+                if (messung.zscore.text_left === mz_only) {
+                    stack.push(z_score_grafik);
+                };
+            } else {
+                // Alle Messungen anzeigen
+                stack.push(z_score_grafik);
+            };
+
 
         });
 
@@ -244,7 +252,9 @@ d.tmt_create_pdf_stack = function() {
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.push(stack);
 };
 
-d.tmt_initTMT = function() {
+d.tmt_initTMT = function(mz_only) {
+
+    mz_only = mz_only === undefined ? null : mz_only;
 
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt = {};
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.init = false;
@@ -415,7 +425,6 @@ d.tmt_initTMT = function() {
     });
 
 
-    d.tmt_create_pdf_stack();
-
+    d.tmt_create_pdf_stack(mz_only);
 
 };
