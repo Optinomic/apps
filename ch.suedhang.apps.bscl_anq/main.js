@@ -108,6 +108,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         location_array.forEach(function(pos, posID) {
+
             data_dive = data_dive[pos];
 
             if (current_location_text !== "") {
@@ -116,7 +117,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             var current_dim = current_ks.dimensions[posID];
-            console.log('(???) ', pos, posID, current_dim);
+            //console.log('(???) ', pos, posID, current_dim);
 
             current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
         });
@@ -207,9 +208,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Messzeitpung
             var mz_id = messung.info.mz.mz_id;
-            // if (mz_id === 99) {
-            //     mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
-            // };
+            if (mz_id === 99) {
+                mz_id = 5; // Unbekannt => Alle Messzeitpunkte
+            };
 
 
             // Gender

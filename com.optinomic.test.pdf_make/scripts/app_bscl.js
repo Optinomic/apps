@@ -297,9 +297,9 @@ d.bscl_init = function() {
 
         // Messzeitpung
         var mz_id = messung.info.mz.mz_id;
-        // if (mz_id === 99) {
-        //     mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
-        // };
+        if (mz_id === 99) {
+            mz_id = 5; // Unbekannt => Alle Messzeitpunkte
+        };
 
 
         // Gender
