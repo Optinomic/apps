@@ -234,7 +234,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
 
             // Nur für 'Alle Resultate'
@@ -257,16 +256,16 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var ranges = [{
                         "from": 20,
-                        "text": "sehr geringe Absinenzmotivation"
+                        "text": "sehr geringe Abstinenzzuversicht"
                     }, {
                         "from": 40,
-                        "text": "geringe Absinenzmotivation"
+                        "text": "geringe Abstinenzzuversicht"
                     }, {
                         "from": 60,
-                        "text": "hohe Absinenzmotivation"
+                        "text": "hohe Abstinenzzuversicht"
                     }, {
                         "from": 80,
-                        "text": "sehr hohe Absinenzmotivation"
+                        "text": "sehr hohe Abstinenzzuversicht"
                     }];
 
                     var interpretation = {};
@@ -285,23 +284,28 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var scales = {
                         "alignment": 'center',
                         "columns": [{
-                            "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt, "style": "h3" }]
+                            "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString();, "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen, "style": "h3" }]
+                            "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString();, "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein, "style": "h3" }]
+                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString();, "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen, "style": "h3" }]
+                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString();, "style": "h3" }]
                         }]
                     };
 
-                    pdf.all.push($scope.d.templates.text(score_text));
-                    pdf.all.push(scales);
+                    var return_obj = {
+                        "stack": [],
+                        "margin": [0, 0, 0, 6]
+                    }
+                    return_obj.stack.push($scope.d.templates.text(score_text));
+                    return_obj.stack.push(scales);
+
 
                     if (mz === 1) {
-                        pdf.eintritt.push($scope.d.templates.text(score_text));
-                        //pdf.eintritt.push(scales);
+                        pdf.eintritt.push(return_obj);
                     };
+                    pdf.all.push(return_obj);
 
                 });
 
