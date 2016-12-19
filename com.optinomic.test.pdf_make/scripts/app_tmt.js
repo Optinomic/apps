@@ -239,13 +239,13 @@ d.tmt_create_pdf_stack = function() {
             // Nur gewünschte Messungen anzeigen
             var z_score_grafik = {};
             if (messung.zscore.text_left === 'Eintritt') {
-                z_score_grafik.columns["0"].stack.push(zahlen_to_push);
+                z_score_grafik.columns.push(zahlen_to_push);
                 stack_eintritt.push(z_score_grafik);
             }
 
             // Alle Messungen anzeigen
             if (messungID === group.data.length - 1) {
-                z_score_grafik.columns["0"].stack.push(zahlen_to_push);
+                z_score_grafik.columns.push(zahlen_to_push);
             };
             stack_all.push(z_score_grafik);
 
