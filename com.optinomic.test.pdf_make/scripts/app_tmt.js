@@ -238,6 +238,7 @@ d.tmt_create_pdf_stack = function() {
 
             // Nur gewünschte Messungen anzeigen
             if (messung.zscore.text_left === 'Eintritt') {
+                stack_all.push(z_score_grafik);
                 stack_eintritt.push(z_score_grafik);
             } else {
                 // Alle Messungen anzeigen
