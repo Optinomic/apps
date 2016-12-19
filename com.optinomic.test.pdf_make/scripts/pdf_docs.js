@@ -18,7 +18,7 @@ $scope.pdf_make_init = function() {
     };
 
     var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
-    doc.content.push($scope.d.templates.text("Datum: " + date));
+    doc.content.push($scope.d.templates.text(date));
 
     var vertical_line = {
         "margin": [0, 0, 0, 0],
