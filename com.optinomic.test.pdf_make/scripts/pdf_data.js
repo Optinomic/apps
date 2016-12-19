@@ -140,7 +140,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)"
 
             var case_stack = [];
-            case_stack.push($scope.d.templates.horizontalLine(100));
+            case_stack.push($scope.d.templates.horizontalLine(48));
             case_stack.push($scope.d.templates.heading("h2", app_title));
 
             if (data.survey_responses.length > 0) {
@@ -169,7 +169,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "AASE"
 
             var aase_stack = [];
-            aase_stack.push($scope.d.templates.horizontalLine(100));
+            aase_stack.push($scope.d.templates.horizontalLine(48));
             aase_stack.push($scope.d.templates.heading("h2", app_title));
 
             if (data.survey_responses.length > 0) {} else {
