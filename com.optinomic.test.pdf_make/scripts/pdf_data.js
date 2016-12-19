@@ -245,7 +245,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
-                run.bscl_init();
+                run.bscl_loadKS();
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 96));

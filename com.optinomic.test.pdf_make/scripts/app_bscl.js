@@ -9,7 +9,6 @@ d.bscl_loadKS = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = ks_file;
 
-    console.log('DEBUG 1', $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks);
 
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = '';
@@ -24,10 +23,9 @@ d.bscl_loadKS = function() {
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + ' (' + datum_ks + ')'
 
 
-    console.log('DEBUG 2', $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.dataMain.calculations["0"].calculation_results["0"]);
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe = {};
-    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n = '(N=' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n = '(N=' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].data.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
 
 
     //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n;
@@ -220,8 +218,6 @@ d.bscl_create_pdf_stack = function() {
 d.bscl_init = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl = {};
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.init = false;
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.show_legend = false;
 
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.zscore_options = {
@@ -236,16 +232,9 @@ d.bscl_init = function() {
     };
 
 
-    // Toggles | Grafiken
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.toggles = {
-        "show_text": true,
-        "show_clinicsample": true,
-        "show_clinicsample_scores": false
-    };
-
 
     // Gruppierung der Messungen
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.groups = angular.copy($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.dataMain.calculations["0"].calculation_results["0"].definitions.result_array);
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.groups = angular.copy($scope.d.appData["ch.suedhang.apps.bscl_anq"].data.calculations["0"].calculation_results["0"].definitions.result_array);
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.groups.forEach(function(group, groupID) {
         delete group.result;
@@ -253,7 +242,7 @@ d.bscl_init = function() {
     });
 
     // Build  & Sort | Neueste Messung als letzter Eintrag
-    var alle_messungen = angular.copy($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.dataMain.calculations[0].calculation_results);
+    var alle_messungen = angular.copy($scope.d.appData["ch.suedhang.apps.bscl_anq"].data.calculations[0].calculation_results);
     alle_messungen.forEach(function(messung, messungID) {
         messung.date = messung.info.filled;
     });
@@ -281,7 +270,7 @@ d.bscl_init = function() {
 
         // Gender
         var gender_id = 0 // Frau
-        if ($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.dataMain.patient.data.gender === 'male') {
+        if ($scope.d.appData["ch.suedhang.apps.bscl_anq"].data.patient.data.gender === 'male') {
             gender_id = 1;
         };
 
@@ -357,9 +346,8 @@ d.bscl_init = function() {
         });
     });
 
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.show_legend = false;
 
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.init = true;
+    d.bscl_create_pdf_stack();
 };
 
 
@@ -409,7 +397,4 @@ d.bscl_changeClinicSample = function(current_sample, groupID) {
         current_sample.zscore.clinicsample_end = 0;
     };
 
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.show_legend = true;
-
-    // console.log('(Done) changeClinicSample', current_sample);
 };
