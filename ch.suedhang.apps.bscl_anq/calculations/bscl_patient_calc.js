@@ -251,6 +251,7 @@ function main(responses) {
 
                 var my_messzeitpunkt = parseInt(result['q501V04']);
                 var my_eintrittsort = parseInt(result['Eintrittsort']);
+                var my_austrittsort = parseInt(result['Austrittsort']);
 
 
                 if ((my_messzeitpunkt === 1) && (my_eintrittsort === 1)) {
@@ -259,11 +260,12 @@ function main(responses) {
                     mz.mz_text = 'Eintritt - EAS';
                 };
 
-                if ((my_messzeitpunkt === 2) && (my_eintrittsort === 2)) {
+                if ((my_messzeitpunkt === 2) && (my_austrittsort === 2)) {
                     mz.mz_id = 1;
                     mz.mz_typ = 'Austritt EP';
                     mz.mz_text = 'Austritt - EP';
                 };
+
 
                 if (my_messzeitpunkt === 3) {
                     mz.mz_id = 2;
@@ -271,16 +273,17 @@ function main(responses) {
                     mz.mz_text = 'Austritt EAS oder Eintritt EP';
                 };
 
-                if ((my_messzeitpunkt === 2) && (my_eintrittsort === 1)) {
-                    mz.mz_id = 3;
-                    mz.mz_typ = 'Austritt EAS';
-                    mz.mz_text = 'Austritt - EAS';
-                };
-
                 if ((my_messzeitpunkt === 1) && (my_eintrittsort === 2)) {
                     mz.mz_id = 4;
                     mz.mz_typ = 'Eintritt EP';
                     mz.mz_text = 'Eintritt - EP';
+                };
+
+
+                if ((my_messzeitpunkt === 2) && (my_austrittsort === 1)) {
+                    mz.mz_id = 3;
+                    mz.mz_typ = 'Austritt EAS';
+                    mz.mz_text = 'Austritt - EAS';
                 };
 
             };
