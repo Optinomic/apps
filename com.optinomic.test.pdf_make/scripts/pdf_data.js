@@ -280,7 +280,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var score_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
                     score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
-                    var score_text_obj = { "text": score_text, "style": "p" };
+
 
                     var scales = {
                         "alignment": 'center',
@@ -295,12 +295,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         }]
                     };
 
-                    pdf.all.push(score_text_obj);
+                    pdf.all.push($scope.d.templates.text(score_text));
                     pdf.all.push(scales);
 
                     if (mz === 1) {
-                        pdf.eintritt.push(score_text_obj);
-                        pdf.eintritt.push(scales);
+                        pdf.eintritt.push($scope.d.templates.text(score_text));
+                        //pdf.eintritt.push(scales);
                     };
 
                 });
