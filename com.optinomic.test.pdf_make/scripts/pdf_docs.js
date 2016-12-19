@@ -3,7 +3,7 @@ $scope.pdf_make_init = function() {
 
     $scope.d.docDefinition = angular.copy($scope.d.templates.default_definition);
 
-    // All Doc's here
+    // All Doc"s here
     $scope.d.docs = [];
     var doc = {};
 
@@ -17,7 +17,7 @@ $scope.pdf_make_init = function() {
         "content": []
     };
 
-    var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
+    var date = $filter("amDateFormat")(new Date(), "DD.MM.YYYY");
     doc.content.push($scope.d.templates.text(date));
 
     var vertical_line = {
@@ -64,17 +64,17 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.text(text_1));
     doc.content.push($scope.d.templates.text(text_2));
     doc.content.push($scope.d.templates.text(text_3));
-    doc.content.push($scope.d.templates.heading('h1', 'Persönliche Zugangsdaten'));
+    doc.content.push($scope.d.templates.heading("h1", "Persönliche Zugangsdaten"));
 
     var credentials = {
         table: {
-            widths: [60, '*'],
+            widths: [60, "*"],
             body: [
-                [{ text: 'Login', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
-                [{ text: 'Passwort', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
+                [{ text: "Login", color: "grey", margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                [{ text: "Passwort", color: "grey", margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
             ]
         },
-        layout: 'noBorders'
+        layout: "noBorders"
     };
     doc.content.push(credentials);
 
@@ -102,12 +102,12 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.pageBreak());
 
     var bloc = {
-        "alignment": 'left',
+        "alignment": "left",
         "columns": [{
-            stack: $scope.loadAppPDF('eintritt', [], 'ch.suedhang.apps.case.new'),
+            stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
             "margin": [0, 0, 0, 6]
         }, {
-            stack: $scope.loadAppPDF('eintritt', [], 'ch.suedhang.apps.case.new'),
+            stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
             "margin": [0, 0, 0, 6]
         }],
         "columnGap": 24
@@ -116,9 +116,7 @@ $scope.pdf_make_init = function() {
     doc.content.push(bloc);
 
     doc.content.push($scope.d.templates.spacer(12));
-
-    doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.eintritt);
-
+    doc.content.push($scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.aase-g"));
 
 
     doc.content.push($scope.d.templates.pageBreak());
@@ -147,7 +145,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
-    doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
+    doc.content.push($scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.aase-g"));
 
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);
@@ -161,5 +159,5 @@ $scope.pdf_make_init = function() {
 
 
 
-    console.log('(DONE) pdf_make_init', $scope.d.docs);
+    console.log("(DONE) pdf_make_init", $scope.d.docs);
 };
