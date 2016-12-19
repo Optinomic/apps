@@ -253,7 +253,7 @@ d.bscl_create_pdf_stack = function() {
             // Alle Messungen anzeigen
             var z_score_grafik_all = angular.copy(z_score_grafik);
             if (messungID === group.data.length - 1) {
-                //z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
+                z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
             current_stack.push(z_score_grafik_all);
 
@@ -278,7 +278,8 @@ d.bscl_create_pdf_stack = function() {
         }, {
             "width": item.zscore_options.width,
             "stack": stack_right
-        }]
+        }],
+        "columnGap": 12,
     };
 
     stack_eintritt.push(my_colums);
