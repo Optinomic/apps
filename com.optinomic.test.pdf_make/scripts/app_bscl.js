@@ -353,7 +353,7 @@ d.bscl_init = function() {
 
 d.bscl_changeClinicSample = function(current_sample, groupID) {
 
-    current_sample.ks.path_data = $scope.getKSLocation(current_sample.ks.path_selected);
+    current_sample.ks.path_data = d.bscl_getKSLocation(current_sample.ks.path_selected);
 
     if (current_sample.ks.path_data.statistics !== null) {
 
