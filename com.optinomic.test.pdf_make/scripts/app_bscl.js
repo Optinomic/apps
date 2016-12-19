@@ -35,8 +35,6 @@ d.bscl_loadKS = function() {
     d.bscl_init();
 };
 
-
-
 d.bscl_getKSLocation = function(location_array) {
 
     var current_ks = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks;
@@ -89,11 +87,11 @@ d.bscl_getKSLocation = function(location_array) {
 
 d.bscl_create_pdf_stack = function() {
 
-    var tmt = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.tmt;
+    var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
     var stack_all = [];
     var stack_eintritt = [];
 
-    tmt.groups.forEach(function(group, groupID) {
+    item.groups.forEach(function(group, groupID) {
 
         var gruppen_name = {
             "text": group.name,
@@ -104,37 +102,20 @@ d.bscl_create_pdf_stack = function() {
         stack_eintritt.push(gruppen_name);
 
 
-        tmt.zscore_options.width = 440;
+        item.zscore_options.width = 440;
 
         group.data.forEach(function(messung, messungID) {
 
-            var zeit_fehler_array = [];
-            if (group.name === "TMT A") {
-                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
-                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
-                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
-            } else {
-                var zeit = { "text": "Zeit: " + messung.calculation.TMTBTime };
-                var fehler = { "text": "Fehler: " + messung.calculation.TMTBError };
-                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
-            };
-            zeit_fehler_array.push(zeit);
-            zeit_fehler_array.push(fehler);
-
-            if (messung.zscore.text_left === "Eintritt") {
-                zeit_fehler_array.push(ba);
-            };
-
+            // Zahlen -3 | 0 | +3
 
             var count_steps = 0;
-            if (tmt.zscore_options.zscore_min <= 0) {
-                count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
+            if (item.zscore_options.zscore_min <= 0) {
+                count_steps = Math.abs(item.zscore_options.zscore_min) + Math.abs(item.zscore_options.zscore_max);
             } else {
-                count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
+                count_steps = Math.abs(item.zscore_options.zscore_max) - Math.abs(item.zscore_options.zscore_min);
             };
 
 
-            // Zahlen -3 | 0 | +3
             var zahlen_to_push = {};
 
             zahlen_to_push = {
@@ -145,7 +126,7 @@ d.bscl_create_pdf_stack = function() {
             };
 
             for (var i = 0; i < count_steps + 1; i++) {
-                var value = tmt.zscore_options.zscore_min + i;
+                var value = item.zscore_options.zscore_min + i;
                 var alignment = "left";
 
                 if (value === 0) {
@@ -180,13 +161,13 @@ d.bscl_create_pdf_stack = function() {
                         "color": "#212121",
                         "margin": [0, 3, 0, 1]
                     }, {
-                        "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
+                        "canvas": $scope.d.templates.z_score(messung.zscore, item.zscore_options)
                     }]
                 }, {
                     "width": 62,
                     "fontSize": 10,
                     "alignment": "left",
-                    "stack": zeit_fehler_array,
+                    "stack": [],
                     "margin": [0, 13, 0, 0]
                 }]
             };
@@ -350,7 +331,6 @@ d.bscl_init = function() {
     d.bscl_create_pdf_stack();
 };
 
-
 d.bscl_changeClinicSample = function(current_sample, groupID) {
 
     current_sample.ks.path_data = d.bscl_getKSLocation(current_sample.ks.path_selected);
@@ -396,5 +376,4 @@ d.bscl_changeClinicSample = function(current_sample, groupID) {
         current_sample.zscore.clinicsample_start = 0;
         current_sample.zscore.clinicsample_end = 0;
     };
-
 };
