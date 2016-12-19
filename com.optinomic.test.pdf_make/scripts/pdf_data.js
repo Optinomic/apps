@@ -199,10 +199,15 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             var app_title = "Trail Making Test (TMT)";
             var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
+            var description_full = "Der Quotient B /A stellt das 'reine' Maß der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
+
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
+
+            pdf.all.push($scope.d.templates.text(description + ' ' + description_full));
+            pdf.eintritt.push($scope.d.templates.text(description));
+
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
@@ -214,8 +219,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
 
         };
-
-
 
 
 
