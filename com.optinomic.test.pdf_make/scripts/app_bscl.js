@@ -267,8 +267,10 @@ d.bscl_create_pdf_stack = function() {
 
         var my_colums = {
             "columns": [{
+                "width": 251,
                 "stack": stack_left
             }, {
+                "width": 251,
                 "stack": stack_right
             }]
         };
