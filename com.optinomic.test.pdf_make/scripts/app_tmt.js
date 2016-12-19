@@ -211,7 +211,7 @@ d.tmt_create_pdf_stack = function() {
             // console.log(JSON.stringify(zahlen_to_push, null, 2));
 
 
-            var z_score_grafik = {
+            var z_score_grafik_default = {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
@@ -237,17 +237,19 @@ d.tmt_create_pdf_stack = function() {
             };
 
             // Nur gewünschte Messungen anzeigen
+            var z_score_grafik = {};
             if (messung.zscore.text_left === 'Eintritt') {
+                z_score_grafik = z_score_grafik_default;
                 stack_eintritt.push(z_score_grafik);
-            } else {
+            }
 
-                if (messungID === group.data.length - 1) {
-                    zahlen_to_push = {};
-                };
-
-                // Alle Messungen anzeigen
-                stack_all.push(z_score_grafik);
+            // Alle Messungen anzeigen
+            if (messungID === group.data.length - 1) {
+                zahlen_to_push = {};
             };
+            z_score_grafik = z_score_grafik_default;
+            stack_all.push(z_score_grafik);
+
 
 
         });
