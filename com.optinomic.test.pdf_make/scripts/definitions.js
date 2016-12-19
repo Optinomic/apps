@@ -124,7 +124,7 @@ $scope.getTemplates = function() {
         var length = 514 / 100 * width;
 
         var return_obj = {
-            "margin": [0, 24, 0, 0],
+            "margin": [0, 12, 0, 0],
             "canvas": [{
                 "type": 'line',
                 "x1": 0,

@@ -34,9 +34,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
         if (app_identifier === 'ch.suedhang.apps.actinfo_ein') {
 
+            var actinfo_ein_stack = [];
 
-            pdf.push($scope.d.templates.horizontalLine(100));
-            pdf.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
+            actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
+            actinfo_ein_stack.push($scope.d.templates.heading('h2', 'ActInfo | Eintrittsfragebogen'));
+
 
             var act_info_ein_block = {
                 "alignment": 'left',
@@ -49,7 +51,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 }],
                 "columnGap": 24
             };
-
 
 
             var col_1 = act_info_ein_block.columns["0"].stack;
@@ -110,7 +111,14 @@ $scope.loadAppData = function(app_identifier, load_full) {
             col_2.push($scope.d.templates.heading('h3', 'Nikotinabhängigkeit (Fagerström)'));
             col_2.push(fagerstroem_stack);
 
-            pdf.push(act_info_ein_block);
+            actinfo_ein_stack.push(act_info_ein_block);
+
+            var return_obj = {
+                "stack": actinfo_ein_stack,
+                "margin": [0, 0, 0, 6]
+            };
+
+            pdf.push(return_obj);
         };
 
 

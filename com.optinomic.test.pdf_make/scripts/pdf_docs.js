@@ -20,6 +20,21 @@ $scope.pdf_make_init = function() {
     var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
     doc.content.push($scope.d.templates.text("Datum: " + date));
 
+    var vertical_line = {
+        "margin": [0, 0, 0, 0],
+        "canvas": [{
+            "type": "line",
+            "x1": 85,
+            "y1": 0,
+            "x2": 85,
+            "y2": 720,
+            "lineWidth": 0.5,
+            "lineColor": "#BDBDBD"
+        }]
+    };
+    doc.content.push(vertical_line);
+
+
     // Safe
     $scope.d.docs.push(doc);
 
@@ -80,8 +95,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.patientAddress_clinicLogo);
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
-    doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.actinfo_ein');
-    doc.content = $scope.loadAppPDF(doc.content, 'ch.suedhang.apps.case.new');
+    doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf);
 
     doc.content.push($scope.d.templates.pageBreak());
 
