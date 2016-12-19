@@ -139,7 +139,7 @@ var dd = {
                 "color": "#212121",
                 "margin": [0, 3, 0, 1]
             }, {
-                canvas: [{
+                "canvas": [{
                     type: "rect",
                     x: 0,
                     y: 0,

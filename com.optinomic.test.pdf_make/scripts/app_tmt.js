@@ -42,9 +42,7 @@ d.tmt_loadKS = function(calculation_results) {
     console.log('(✓) Klinikstichprobe geladen: ', ks);
 
     return ks;
-
 };
-
 
 d.tmt_getKSLocation = function(location_array) {
 
@@ -94,7 +92,6 @@ d.tmt_getKSLocation = function(location_array) {
     return angular.copy(location);
 };
 
-
 d.tmt_changeClinicSample = function(current_sample) {
 
     current_sample.ks.path_data = d.tmt_getKSLocation(current_sample.ks.path_selected);
@@ -129,7 +126,7 @@ d.tmt_changeClinicSample = function(current_sample) {
         current_sample.zscore.clinicsample_end = 0;
     };
 
-    console.log('(Done) changeClinicSample', current_sample);
+    //console.log('(Done) changeClinicSample', current_sample);
 };
 
 d.tmt_create_pdf_stack = function() {
@@ -242,7 +239,10 @@ d.tmt_create_pdf_stack = function() {
             if (messungID === group.data.length - 1) {
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
-            stack_all.push(z_score_grafik_all);
+
+            if (group.name !== "Zusatzitems") {
+                stack_all.push(z_score_grafik_all);
+            };
 
             // Nur gewünschte Messungen anzeigen
             if (messung.zscore.text_left === 'Eintritt') {
@@ -433,5 +433,4 @@ d.tmt_initTMT = function() {
 
 
     d.tmt_create_pdf_stack();
-
 };

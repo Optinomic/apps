@@ -90,19 +90,94 @@ d.bscl_create_pdf_stack = function() {
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
     var stack_all = [];
     var stack_eintritt = [];
+    var left_colum = false;
 
     item.groups.forEach(function(group, groupID) {
 
-        var gruppen_name = {
-            "text": group.description,
-            "style": "h3"
+        var stack_left = [];
+        var stack_right = [];
+
+        left_colum = !left_colum;
+        if (left_colum) {
+            var current_stack = stack_left;
+        } else {
+            var current_stack = stack_right;
         };
 
-        stack_all.push(gruppen_name);
-        stack_eintritt.push(gruppen_name);
 
 
-        item.zscore_options.width = 440;
+
+        var gruppen_name = {
+            "text": group.description,
+            "style": "h3",
+            "margin": [0, 6, 0, 0]
+        };
+
+        current_stack.push(gruppen_name);
+
+
+        var gaga = {
+            "alignment": "left",
+            "columns": [{
+                "width": "auto",
+                "stack": [{
+                    "columns": [
+                        { "text": "Eintritt", "alignment": "left" },
+                        { "text": "Datum", "alignment": "right" }
+                    ],
+                    "fontSize": 10,
+                    "color": "#212121",
+                    "margin": [0, 3, 0, 1]
+                }, {
+                    "canvas": [{
+                        type: "rect",
+                        x: 0,
+                        y: 0,
+                        w: 250,
+                        h: 30,
+                        "lineColor": "#E0E0E0"
+                    }]
+                }, {
+                    "columns": [
+                        { "text": "Eintritt", "alignment": "left" },
+                        { "text": "Datum", "alignment": "right" }
+                    ],
+                    "fontSize": 10,
+                    "color": "#212121",
+                    "margin": [0, 3, 0, 1]
+                }, {
+                    "canvas": [{
+                        type: "rect",
+                        x: 0,
+                        y: 0,
+                        w: 251,
+                        h: 30,
+                        "lineColor": "#E0E0E0"
+                    }]
+                }, {
+                    "columns": [
+                        { "text": "-3", "alignment": "left" },
+                        { "text": "-2", "alignment": "left" },
+                        { "text": "-1", "alignment": "left" },
+                        { "text": "0", "alignment": "center" },
+                        { "text": "1", "alignment": "right" },
+                        { "text": "2", "alignment": "right" },
+                        { "text": "3", "alignment": "right" }
+                    ],
+                    "fontSize": 9,
+                    "color": "#757575"
+                }]
+            }],
+            "columnGap": 12,
+            "margin": [0, 0, 0, 6]
+        };
+
+
+        // stack_all.push(gruppen_name);
+        // stack_eintritt.push(gruppen_name);
+
+
+        item.zscore_options.width = 251;
 
         group.data.forEach(function(messung, messungID) {
 
@@ -178,7 +253,7 @@ d.bscl_create_pdf_stack = function() {
             if (messungID === group.data.length - 1) {
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
-            stack_all.push(z_score_grafik_all);
+            current_stack.push(z_score_grafik_all);
 
             // Nur gewünschte Messungen anzeigen
             // if (messung.zscore.text_left === 'Eintritt') {
@@ -192,8 +267,16 @@ d.bscl_create_pdf_stack = function() {
 
     });
 
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push(stack_eintritt);
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push(stack_all);
+    var my_colums = {
+        "columns": [{
+            "stack": stack_left
+        }, {
+            "stack": stack_right
+        }]
+    };
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push(my_colums);
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push(my_colums);
 };
 
 d.bscl_init = function() {
@@ -344,7 +427,7 @@ d.bscl_changeClinicSample = function(current_sample, groupID) {
 
         if (variable_name !== "zusatzitems_z_score") {
 
-            console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
+            // console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
 
             current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
             current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
