@@ -227,7 +227,7 @@ d.bscl_create_pdf_stack = function() {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
-                    "width": 251,
+                    "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
                             { "text": messung.zscore.text_left, "alignment": "left" },
@@ -252,7 +252,7 @@ d.bscl_create_pdf_stack = function() {
             // Alle Messungen anzeigen
             var z_score_grafik_all = angular.copy(z_score_grafik);
             if (messungID === group.data.length - 1) {
-                z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
+                //z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
             current_stack.push(z_score_grafik_all);
 
@@ -268,10 +268,10 @@ d.bscl_create_pdf_stack = function() {
 
         var my_colums = {
             "columns": [{
-                "width": 251,
+                "width": item.zscore_options.width,
                 "stack": stack_left
             }, {
-                "width": 251,
+                "width": item.zscore_options.width,
                 "stack": stack_right
             }]
         };
