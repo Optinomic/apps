@@ -145,7 +145,8 @@ d.tmt_create_pdf_stack = function() {
             "style": "h3"
         };
 
-        stack.push(gruppen_name);
+        stack_all.push(gruppen_name);
+        stack_eintritt.push(gruppen_name);
 
 
         tmt.zscore_options.width = 440;
