@@ -116,6 +116,7 @@ d.bscl_create_pdf_stack = function() {
 
         if (group.description !== "Zusatzitems") {
             current_stack.push(gruppen_name);
+            current_stack_eintritt.push(gruppen_name);
         };
 
 
@@ -206,10 +207,13 @@ d.bscl_create_pdf_stack = function() {
 
 
             // Nur gewünschte Messungen in Eintritt anzeigen
-            if ((messung.calculation.info.mz.mz_id === 0)) {
+            if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
                 var z_score_grafik_eintritt = angular.copy(z_score_grafik);
                 z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
-                current_stack_eintritt.push(z_score_grafik_eintritt);
+                if (group.description !== "Zusatzitems") {
+                    current_stack_eintritt.push(z_score_grafik_eintritt);
+                };
+
             };
 
 
