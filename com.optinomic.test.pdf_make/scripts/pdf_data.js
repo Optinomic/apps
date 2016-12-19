@@ -70,7 +70,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "table": {
                             "widths": ["*"],
                             "body": [
-                                [{ text: "Substanz / Häufigkeit", color: "grey", fontSize: 11, margin: [0, 6, 0, 0] }],
+                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
                             ]
                         },
                         "layout": "lightHorizontalLines"
@@ -81,7 +81,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                             "text": [
                                 { "text": ps.substanz + ": ", "bold": true, "fontSize": 11 },
                                 { "text": ps.label, "bold": false, "fontSize": 11 }
-                            ]
+                            ],
+                            "margin": [0, 3, 0, 3]
                         }];
                         table_to_push.table.body.push(substanz);
                     });
