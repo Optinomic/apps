@@ -37,7 +37,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // actInfo - Eintritt
         // -----------------------------------------------------------------
-
         if (app_identifier === "ch.suedhang.apps.actinfo_ein") {
 
             var app_title = "ActInfo | Eintrittsfragebogen";
@@ -69,16 +68,21 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
                     var table_to_push = {
                         "table": {
-                            "widths": ["*", "*"],
+                            "widths": ["*"],
                             "body": [
-                                [{ text: "Substanz", color: "grey", fontSize: 11, margin: [0, 6, 0, 0] }, { text: "Häufigkeit", color: "grey", fontSize: 11, margin: [0, 6, 0, 0] }],
+                                [{ text: "Substanz / Häufigkeit", color: "grey", fontSize: 11, margin: [0, 6, 0, 0] }],
                             ]
                         },
                         "layout": "lightHorizontalLines"
                     };
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
-                        var substanz = [{ text: ps.substanz, fontSize: 11, margin: [0, 3, 0, 3] }, { text: ps.label, fontSize: 11, margin: [0, 3, 0, 3] }];
+                        var substanz = [{
+                            "text": [
+                                { "text": ps.substanz + ": ", "bold": true, "fontSize": 11 },
+                                { "text": ps.label, "bold": false, "fontSize": 11 }
+                            ]
+                        }];
                         table_to_push.table.body.push(substanz);
                     });
                     col_1.push(table_to_push);
@@ -134,11 +138,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
         };
 
 
-
         // -----------------------------------------------------------------
         // Case
         // -----------------------------------------------------------------
-
         if (app_identifier === "ch.suedhang.apps.case.new") {
 
             var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)";
@@ -161,14 +163,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.eintritt.push(return_obj);
             pdf.all.push(return_obj);
-
         };
 
 
         // -----------------------------------------------------------------
         // AASE
         // -----------------------------------------------------------------
-
         if (app_identifier === "ch.suedhang.apps.aase-g") {
 
             var app_title = "AASE"
@@ -188,7 +188,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.eintritt.push(return_obj);
             pdf.all.push(return_obj);
-
         };
 
         // -----------------------------------------------------------------
