@@ -106,8 +106,6 @@ d.bscl_create_pdf_stack = function() {
         };
 
 
-
-
         var gruppen_name = {
             "text": group.description,
             "style": "h3",
@@ -256,7 +254,11 @@ d.bscl_create_pdf_stack = function() {
             if (messungID === group.data.length - 1) {
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
-            current_stack.push(z_score_grafik_all);
+
+            if (group.description !== "Zusatzitems") {
+                current_stack.push(z_score_grafik_all);
+            };
+
 
             // Nur gewünschte Messungen anzeigen
             // if (messung.zscore.text_left === 'Eintritt') {
@@ -298,7 +300,7 @@ d.bscl_init = function() {
 
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl.zscore_options = {
-        "zscore_min": -4,
+        "zscore_min": -3,
         "zscore_max": 8,
         "clinicsample_color": "#C5CAE9",
         "centered_zero": false,
@@ -324,6 +326,7 @@ d.bscl_init = function() {
         messung.date = messung.info.filled;
     });
     dataService.sortOn(alle_messungen, 'date', false, false);
+    console.log('(!!) alle_messungen', alle_messungen);
 
 
 
