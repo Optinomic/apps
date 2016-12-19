@@ -168,29 +168,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push(return_obj);
         };
 
-        // -----------------------------------------------------------------
-        // AASE
-        // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.aase-g") {
-
-            var app_title = "AASE"
-
-            var aase_stack = [];
-            aase_stack.push($scope.d.templates.horizontalLine(48));
-            aase_stack.push($scope.d.templates.heading("h2", app_title));
-
-            if (data.survey_responses.length > 0) {} else {
-                aase_stack.push($scope.d.templates.noData(app_identifier, 96));
-            };
-
-            var return_obj = {
-                "stack": aase_stack,
-                "margin": [0, 0, 0, 6]
-            };
-
-            pdf.eintritt.push(return_obj);
-            pdf.all.push(return_obj);
-        };
 
         // -----------------------------------------------------------------
         // TMT
@@ -326,9 +303,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     return_obj.stack.push(score_text_obj);
                     return_obj.stack.push(scales);
 
-                    console.log('(???) return_obj', return_obj);
+                    //console.log('(???) return_obj', return_obj);
 
-                    // pdf.all.push(return_obj);
+                    pdf.all.push(return_obj);
 
                     if (mz === 1) {
                         pdf.eintritt.push(return_obj);
