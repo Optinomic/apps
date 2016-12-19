@@ -457,9 +457,9 @@ $scope.checkDataLoaded = function(actions, count) {
     return return_boolean;
 };
 
-$scope.loadAppPDF = function(content, app_identifier) {
+$scope.loadAppPDF = function(mz, content, app_identifier) {
 
-    var pdf_array = angular.copy($scope.d.appData[app_identifier].pdf);
+    var pdf_array = angular.copy($scope.d.appData[app_identifier].pdf[mz]);
 
     pdf_array.forEach(function(d, arrayID) {
         content.push(d);

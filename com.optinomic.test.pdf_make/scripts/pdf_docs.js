@@ -104,10 +104,10 @@ $scope.pdf_make_init = function() {
     var bloc = {
         "alignment": 'left',
         "columns": [{
-            stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
+            stack: $scope.loadAppPDF('eintritt', [], 'ch.suedhang.apps.case.new'),
             "margin": [0, 0, 0, 6]
         }, {
-            stack: $scope.loadAppPDF([], 'ch.suedhang.apps.case.new'),
+            stack: $scope.loadAppPDF('eintritt', [], 'ch.suedhang.apps.case.new'),
             "margin": [0, 0, 0, 6]
         }],
         "columnGap": 24
