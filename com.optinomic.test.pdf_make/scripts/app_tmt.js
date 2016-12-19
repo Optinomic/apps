@@ -181,7 +181,7 @@ d.tmt_create_pdf_stack = function() {
 
             // Zahlen -3 | 0 | +3
             var zahlen_to_push = {};
-            if ((messungID === group.data.length - 1) || (messung.zscore.text_left === 'Eintritt')) {
+            if (messungID === group.data.length - 1) {
                 zahlen_to_push = {
                     "columns": [],
                     "fontSize": 9,
