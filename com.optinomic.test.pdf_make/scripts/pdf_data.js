@@ -147,11 +147,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 case_stack.push(run.getCaseList());
                 case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
             } else {
-                actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 96));
+                case_stack.push($scope.d.templates.noData(app_identifier, 96));
             };
 
             var return_obj = {
-                "stack": actinfo_ein_stack,
+                "stack": case_stack,
                 "margin": [0, 0, 0, 6]
             };
 
@@ -173,7 +173,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             aase_stack.push($scope.d.templates.heading("h2", app_title));
 
             if (data.survey_responses.length > 0) {} else {
-                actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 96));
+                aase_stack.push($scope.d.templates.noData(app_identifier, 96));
             };
 
             var return_obj = {
