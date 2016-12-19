@@ -46,7 +46,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
 
-                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, 'DD.MM.YYYY');
+                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
 
                 var act_info_ein_block = {
@@ -176,14 +176,15 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             var app_title = "Trail Making Test (TMT)";
             var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
-            var description_full = "Der Quotient B /A stellt das 'reine' Maß der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
+            var description_full = "Der Quotient B /A stellt das "
+            reine " Maß der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
             pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für 'Alle Resultate'
+            // Nur für "Alle Resultate"
             pdf.all.push($scope.d.templates.text(description_full));
             pdf.all.push($scope.d.templates.spacer(12));
 
@@ -211,7 +212,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für 'Alle Resultate'
+            // Nur für "Alle Resultate"
             // pdf.all.push($scope.d.templates.text(description_full));
             pdf.all.push($scope.d.templates.spacer(12));
 
@@ -236,7 +237,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push($scope.d.templates.heading("h2", app_title));
             pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für 'Alle Resultate'
+            // Nur für "Alle Resultate"
 
             if (data.survey_responses.length > 0) {
                 data.survey_responses.forEach(function(sr, srID) {
@@ -244,14 +245,14 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var calc = sr.calculations["0"].calculation_result;
 
                     // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
-                    var mz = 3; // Default für 'Unbekannt'
+                    var mz = 3; // Default für "Unbekannt"
                     if ("Erhebungszeitpunkt" in sr.entity.data.response) {
                         mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
                     };
 
-                    var date = $filter("amDateFormat")(sr.entity.data.filled, 'DD.MM.YYYY');
+                    var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
                     if ("Datum" in sr.entity.data.response) {
-                        date = $filter("amDateFormat")(sr.entity.data.response.Datum, 'DD.MM.YYYY');
+                        date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
                     };
 
                     var ranges = [{
@@ -273,7 +274,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         if (parseInt(calc.score) >= range.from) {
                             interpretation = range;
                         };
-                        //console.log('interpretation', range, parseInt(calc.score), interpretation);
                     });
 
 
@@ -282,21 +282,21 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
                     var scales = {
-                        "alignment": 'center',
+                        "alignment": "center",
                         "columns": [{
                             "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
                         }, {
                             "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
+                            "text": [{ "text": "Somatisches\nUnwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
                         }, {
-                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
+                            "text": [{ "text": "Entzugs-\nerscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
                         }]
                     };
 
                     var return_obj = {
                         "stack": [],
-                        "margin": [0, 0, 0, 6]
+                        "margin": [0, 0, 0, 0]
                     }
                     return_obj.stack.push($scope.d.templates.text(score_text));
                     return_obj.stack.push(scales);
