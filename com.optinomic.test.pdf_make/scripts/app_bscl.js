@@ -203,7 +203,7 @@ d.bscl_create_pdf_stack = function() {
                 current_stack.push(z_score_grafik_all);
             };
 
-            console.log('(!) messung', messung);
+            //console.log('(!) messung', messung);
 
 
             // Nur gewünschte Messungen in Eintritt anzeigen

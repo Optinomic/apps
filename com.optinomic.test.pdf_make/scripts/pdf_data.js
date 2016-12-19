@@ -141,7 +141,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push(return_obj);
         };
 
-
         // -----------------------------------------------------------------
         // Case
         // -----------------------------------------------------------------
@@ -168,7 +167,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.eintritt.push(return_obj);
             pdf.all.push(return_obj);
         };
-
 
         // -----------------------------------------------------------------
         // AASE
@@ -197,7 +195,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // TMT
         // -----------------------------------------------------------------
-
         if (app_identifier === "ch.suedhang.apps.tmt_V3") {
 
             var app_title = "Trail Making Test (TMT)";
@@ -223,11 +220,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
-
         // -----------------------------------------------------------------
         // BSCL
         // -----------------------------------------------------------------
-
         if (app_identifier === "ch.suedhang.apps.bscl_anq") {
 
             var app_title = "Brief Symptom Checklist (BSCL)";
@@ -250,7 +245,97 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 96));
             };
+        };
 
+        // -----------------------------------------------------------------
+        // AASE-G
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.aase-g") {
+
+            var app_title = "Abstinenzzuversicht (AASE-G)";
+            var description = "Schwierigkeit der Hauptproblemsubstanz zu widerstehen";
+
+            pdf.all.push($scope.d.templates.horizontalLine(100));
+            pdf.all.push($scope.d.templates.heading("h2", app_title));
+            pdf.all.push($scope.d.templates.text(description));
+            pdf.eintritt = angular.copy(pdf.all);
+
+            // Nur für 'Alle Resultate'
+
+            if (data.survey_responses.length > 0) {
+                data.survey_responses.forEach(function(sr, srID) {
+
+                    var calc = sr.calculations["0"].calculation_result;
+
+                    // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
+                    var mz = 3; // Default für 'Unbekannt'
+                    if ("Erhebungszeitpunkt" in sr.entity.data.response) {
+                        mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
+                    };
+
+                    var date = $filter("amDateFormat")(sr.entity.data.filled, 'DD.MM.YYYY');
+                    if ("Datum" in sr.entity.data.response) {
+                        date = $filter("amDateFormat")(sr.entity.data.response.Datum, 'DD.MM.YYYY');
+                    };
+
+                    var ranges = [{
+                        "from": 20,
+                        "text": "sehr geringe Absinenzmotivation"
+                    }, {
+                        "from": 40,
+                        "text": "geringe Absinenzmotivation"
+                    }, {
+                        "from": 60,
+                        "text": "hohe Absinenzmotivation"
+                    }, {
+                        "from": 80,
+                        "text": "sehr hohe Absinenzmotivation"
+                    }];
+
+                    var interpretation = {};
+                    ranges.forEach(function(range, rangeID) {
+                        if (calc.score >= range.from) {
+                            interpretation = range[rangeID];
+                        };
+                    });
+
+                    var score_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
+                    score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
+
+                    var scales = {
+                        "alignment": 'center',
+                        "columns": [{
+                            "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt, "style": "h3" }]
+                        }, {
+                            "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen, "style": "h3" }]
+                        }, {
+                            "text": [{ "text": "Somatisches Unwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein, "style": "h3" }]
+                        }, {
+                            "text": [{ "text": "Entzugs-erscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen, "style": "h3" }]
+                        }]
+                    };
+
+                    var return_obj = {
+                        "stack": [],
+                        "margin": [0, 0, 0, 6]
+                    };
+
+                    return_obj.stack.push(score_text);
+                    return_obj.stack.push(scales);
+
+
+                    pdf.all.push(return_obj);
+
+                    if (mz === 1) {
+                        pdf.eintritt.push(return_obj);
+                    };
+
+                });
+
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 96));
+            };
         };
 
 
