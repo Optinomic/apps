@@ -101,8 +101,10 @@ d.bscl_create_pdf_stack = function() {
         left_colum = !left_colum;
         if (left_colum) {
             var current_stack = stack_left;
+            var current_stack_eintritt = stack_left_eintritt;
         } else {
             var current_stack = stack_right;
+            var current_stack_eintritt = stack_right_eintritt;
         };
 
 
@@ -201,12 +203,14 @@ d.bscl_create_pdf_stack = function() {
             };
 
             console.log('(!) messung', messung);
-            // Nur gewünschte Messungen anzeigen
-            // if (messung.zscore.text_left === 'Eintritt') {
-            //     var z_score_grafik_eintritt = angular.copy(z_score_grafik);
-            //     z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
-            //     stack_eintritt.push(z_score_grafik_eintritt);
-            // };
+
+
+            // Nur gewünschte Messungen in Eintritt anzeigen
+            if ((messung.calculation.info.mz.mz_id === 0)) {
+                var z_score_grafik_eintritt = angular.copy(z_score_grafik);
+                z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
+                current_stack_eintritt.push(z_score_grafik_eintritt);
+            };
 
 
         });

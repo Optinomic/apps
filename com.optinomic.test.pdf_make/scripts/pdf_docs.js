@@ -118,72 +118,9 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.spacer(12));
 
 
-
     doc.content.push($scope.d.templates.pageBreak());
-    doc.content.push($scope.d.templates.spacer(20));
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
 
-    var z_score_block = {
-        "stack": [{
-            "text": "Überschrift",
-            "style": "h3"
-        }, {
-            "text": "Dies ist ein Standardtext",
-            "style": "text"
-        }, {
-            "alignment": "left",
-            "columns": [{
-                "width": 110,
-                "fontSize": 10,
-                "alignment": "right",
-                "text": "LINKS: Dies ist ein Standardtext",
-                "margin": [0, 14, 0, 0]
-            }, {
-                "width": "*",
-                "stack": [{
-                    "columns": [
-                        { "text": "Messzeitpunkt", "alignment": "left" },
-                        { "text": "Datum", "alignment": "right" }
-                    ],
-                    "fontSize": 10,
-                    "color": "#212121",
-                    "margin": [0, 3, 0, 1]
-                }, {
-                    "canvas": $scope.d.templates.z_score()
-                }, {
-                    "columns": [
-                        { "text": "Messzeitpunkt", "alignment": "left" },
-                        { "text": "Datum", "alignment": "right" }
-                    ],
-                    "fontSize": 10,
-                    "color": "#212121",
-                    "margin": [0, 3, 0, 1]
-                }, {
-                    "canvas": $scope.d.templates.z_score()
-                }, {
-                    "columns": [
-                        { "text": "-3", "alignment": "left" },
-                        { "text": "-2", "alignment": "left" },
-                        { "text": "-1", "alignment": "left" },
-                        { "text": "0", "alignment": "center" },
-                        { "text": "1", "alignment": "right" },
-                        { "text": "2", "alignment": "right" },
-                        { "text": "3", "alignment": "right" }
-                    ],
-                    "fontSize": 9,
-                    "color": "#757575"
-                }]
-            }, {
-                "width": 110,
-                "fontSize": 10,
-                "alignment": "left",
-                "text": "RECHTS: Dies ist ein Standardtext für die Beschreibung, diese kann auch sehr lange sein.",
-                "margin": [0, 14, 0, 0]
-            }],
-            "columnGap": 12,
-            "margin": [0, 0, 0, 6]
-        }]
-    };
-    doc.content.push(z_score_block);
 
 
     // Safe

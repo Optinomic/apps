@@ -240,7 +240,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.eintritt = angular.copy(pdf.all);
 
             // Nur für 'Alle Resultate'
-            pdf.all.push($scope.d.templates.text(description_full));
+            // pdf.all.push($scope.d.templates.text(description_full));
             pdf.all.push($scope.d.templates.spacer(12));
 
             if (data.survey_responses.length > 0) {
@@ -252,7 +252,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
 
         };
-
 
 
 
