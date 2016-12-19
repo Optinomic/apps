@@ -139,17 +139,9 @@ d.tmt_create_pdf_stack = function(mz_only) {
 
     tmt.groups.forEach(function(group, groupID) {
 
-        if (groupID === 0) {
-            var gruppen_name = {
-                "text": group.name,
-                "style": "h3"
-            };
-        } else {
-            var gruppen_name = {
-                "text": group.name,
-                "style": "h3",
-                "margin": [0, 6, 0, 0]
-            };
+        var gruppen_name = {
+            "text": group.name,
+            "style": "h3"
         };
 
         stack.push(gruppen_name);
