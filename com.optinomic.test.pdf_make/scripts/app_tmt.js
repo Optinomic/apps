@@ -186,7 +186,7 @@ d.tmt_create_pdf_stack = function() {
                 "columns": [],
                 "fontSize": 9,
                 "color": "#757575",
-                "margin": [0, 0, 0, 18]
+                "margin": [0, 0, 0, 12]
             };
 
             for (var i = 0; i < count_steps + 1; i++) {
@@ -211,7 +211,7 @@ d.tmt_create_pdf_stack = function() {
             // console.log(JSON.stringify(zahlen_to_push, null, 2));
 
 
-            var z_score_grafik_default = {
+            var z_score_grafik = {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
@@ -226,7 +226,7 @@ d.tmt_create_pdf_stack = function() {
                         "margin": [0, 3, 0, 1]
                     }, {
                         "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
-                    }, zahlen_to_push]
+                    }]
                 }, {
                     "width": 62,
                     "fontSize": 10,
@@ -239,15 +239,14 @@ d.tmt_create_pdf_stack = function() {
             // Nur gewünschte Messungen anzeigen
             var z_score_grafik = {};
             if (messung.zscore.text_left === 'Eintritt') {
-                z_score_grafik = z_score_grafik_default;
+                z_score_grafik.columns.stack.push(zahlen_to_push);
                 stack_eintritt.push(z_score_grafik);
             }
 
             // Alle Messungen anzeigen
             if (messungID === group.data.length - 1) {
-                zahlen_to_push = {};
+                z_score_grafik.columns.stack.push(zahlen_to_push);
             };
-            z_score_grafik = z_score_grafik_default;
             stack_all.push(z_score_grafik);
 
 
