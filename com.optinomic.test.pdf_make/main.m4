@@ -12,6 +12,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var d = {};
     
         include(scripts/app_actinfo_ein.js)
+        include(scripts/app_bscl.js)
         include(scripts/app_case.js)
         include(scripts/app_tmt.js)
     

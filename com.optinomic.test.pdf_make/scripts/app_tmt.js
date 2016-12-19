@@ -3,7 +3,7 @@ d.tmt_loadKS = function(calculation_results) {
     var ks = {};
 
     var ks_file = include_as_js_string(
-        ch_suedhang_user_apps_tmt_activated.json)
+        ks_tmt.json)
 
     ks_file = JSON.parse(ks_file);
     ks = ks_file;

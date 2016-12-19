@@ -99,7 +99,7 @@ $scope.getTemplates = function() {
             "text": text_right,
             "style": style,
             "alignment": "right",
-            "fontSize": 11,
+            "fontSize": 9,
             "bold": false,
             "color": "#9E9E9E"
         };
