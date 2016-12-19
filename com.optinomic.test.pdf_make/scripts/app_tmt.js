@@ -250,7 +250,7 @@ d.tmt_create_pdf_stack = function() {
     });
 
     $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push(stack_eintritt);
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push(stack_eintritt);
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push(stack_all);
 };
 
 d.tmt_initTMT = function() {
