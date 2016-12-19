@@ -305,25 +305,23 @@ $scope.getTemplates = function() {
 
         obj_to_push = {
             "type": "line",
-            "x1": get_x(0),
-            "y1": 0,
-            "x2": get_x(0),
-            "y2": 35,
-            "lineWidth": 2,
-            "lineColor": grey["900"]
-        };
-        canvas.push(obj_to_push);
-
-
-
-        obj_to_push = {
-            "type": "line",
             "x1": get_x(data.zscore),
             "y1": 15,
             "x2": get_x(0),
             "y2": 15,
             "lineWidth": 15,
             "lineColor": data.zscore_color
+        };
+        canvas.push(obj_to_push);
+
+        obj_to_push = {
+            "type": "line",
+            "x1": get_x(0),
+            "y1": 0,
+            "x2": get_x(0),
+            "y2": 35,
+            "lineWidth": 2,
+            "lineColor": grey["900"]
         };
         canvas.push(obj_to_push);
 

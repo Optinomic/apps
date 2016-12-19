@@ -16,7 +16,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
         var appData = {
             "app_scope": {},
             "data": data,
-            "pdf": []
+            "pdf": {
+                "all": [],
+                "eintritt": []
+            }
         };
         $scope.d.appData[app_identifier] = appData;
 
@@ -126,7 +129,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 "margin": [0, 0, 0, 6]
             };
 
-            pdf.push(return_obj);
+            pdf.eintritt.push(return_obj);
+            pdf.all.push(return_obj);
         };
 
 
@@ -155,7 +159,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 "margin": [0, 0, 0, 6]
             };
 
-            pdf.push(return_obj);
+            pdf.eintritt.push(return_obj);
+            pdf.all.push(return_obj);
 
         };
 
@@ -181,7 +186,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 "margin": [0, 0, 0, 6]
             };
 
-            pdf.push(return_obj);
+            pdf.eintritt.push(return_obj);
+            pdf.all.push(return_obj);
 
         };
 
@@ -199,9 +205,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
                 app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
-                run.tmt_initTMT("Eintritt");
+                run.tmt_initTMT();
             } else {
-                pdf.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 96));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 96));
             };
 
         };

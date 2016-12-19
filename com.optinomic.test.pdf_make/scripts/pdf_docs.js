@@ -96,8 +96,8 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
 
-    doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf);
-    doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf);
+    doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.eintritt);
+    doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt);
 
     doc.content.push($scope.d.templates.pageBreak());
 
@@ -184,6 +184,32 @@ $scope.pdf_make_init = function() {
         }]
     };
     doc.content.push(z_score_block);
+
+
+    // Safe
+    $scope.d.docs.push(doc);
+
+
+
+
+    // ----------------------------
+    // Doc: Austritts-Assessment
+    // ----------------------------
+    doc = {
+        "id": 1,
+        "name": "Austritts-Assessment",
+        "description": "Austritts-Assessment der Klinik Südhang.",
+        "content": []
+    };
+    doc.content.push($scope.d.templates.spacer(10));
+    doc.content.push($scope.d.templates.patientAddress_clinicLogo);
+    doc.content.push($scope.d.templates.spacer(20));
+    doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
+
+    doc.content.push($scope.d.templates.pageBreak());
+    doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);
 
 
     // Safe
