@@ -191,11 +191,18 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
         if (app_identifier === "ch.suedhang.apps.tmt_V3") {
 
-            var app_scope = $scope.d.appData[app_identifier].app_scope;
+            var app_title = "TMT"
+            pdf.push($scope.d.templates.horizontalLine(100));
+            pdf.push($scope.d.templates.heading("h2", app_title));
 
-            app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
-            // Follow the white rabbit
-            run.tmt_initTMT();
+            if (data.survey_responses.length > 0) {
+                var app_scope = $scope.d.appData[app_identifier].app_scope;
+                app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
+                run.tmt_initTMT();
+            } else {
+                pdf.push($scope.d.templates.noData(app_identifier, 96));
+            };
+
 
         };
 

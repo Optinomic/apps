@@ -241,7 +241,7 @@ d.tmt_create_pdf_stack = function() {
 
     });
 
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf = stack;
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.push(stack);
 };
 
 d.tmt_initTMT = function() {
