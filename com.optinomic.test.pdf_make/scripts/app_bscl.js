@@ -195,6 +195,7 @@ d.bscl_create_pdf_stack = function() {
 
             zahlen_to_push = {
                 "columns": [],
+                "width": 251,
                 "fontSize": 9,
                 "color": "#757575",
                 "margin": [0, 0, 0, 12]
@@ -226,7 +227,7 @@ d.bscl_create_pdf_stack = function() {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
-                    "width": "*",
+                    "width": 251,
                     "stack": [{
                         "columns": [
                             { "text": messung.zscore.text_left, "alignment": "left" },
