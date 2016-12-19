@@ -90,12 +90,13 @@ d.bscl_create_pdf_stack = function() {
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
     var stack_all = [];
     var stack_eintritt = [];
+
     var left_colum = false;
+    var stack_left = [];
+    var stack_right = [];
 
     item.groups.forEach(function(group, groupID) {
 
-        var stack_left = [];
-        var stack_right = [];
 
         left_colum = !left_colum;
         if (left_colum) {
@@ -177,7 +178,7 @@ d.bscl_create_pdf_stack = function() {
         // stack_eintritt.push(gruppen_name);
 
 
-        item.zscore_options.width = 220;
+        item.zscore_options.width = 251;
 
         group.data.forEach(function(messung, messungID) {
 
@@ -266,20 +267,22 @@ d.bscl_create_pdf_stack = function() {
 
         });
 
-        var my_colums = {
-            "columns": [{
-                "width": item.zscore_options.width,
-                "stack": stack_left
-            }, {
-                "width": item.zscore_options.width,
-                "stack": stack_right
-            }]
-        };
-
-        stack_eintritt.push(my_colums);
-        stack_all.push(my_colums);
 
     });
+
+
+    var my_colums = {
+        "columns": [{
+            "width": item.zscore_options.width,
+            "stack": stack_left
+        }, {
+            "width": item.zscore_options.width,
+            "stack": stack_right
+        }]
+    };
+
+    stack_eintritt.push(my_colums);
+    stack_all.push(my_colums);
 
 
 
