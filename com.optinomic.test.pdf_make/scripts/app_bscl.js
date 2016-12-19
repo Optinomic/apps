@@ -150,7 +150,7 @@ d.bscl_create_pdf_stack = function() {
                         type: "rect",
                         x: 0,
                         y: 0,
-                        w: 251,
+                        w: item.zscore_options.width,
                         h: 30,
                         "lineColor": "#E0E0E0"
                     }]
@@ -177,7 +177,7 @@ d.bscl_create_pdf_stack = function() {
         // stack_eintritt.push(gruppen_name);
 
 
-        item.zscore_options.width = 251;
+        item.zscore_options.width = 220;
 
         group.data.forEach(function(messung, messungID) {
 
@@ -195,7 +195,7 @@ d.bscl_create_pdf_stack = function() {
 
             zahlen_to_push = {
                 "columns": [],
-                "width": 251,
+                "width": item.zscore_options.width,
                 "fontSize": 9,
                 "color": "#757575",
                 "margin": [0, 0, 0, 12]
