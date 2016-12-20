@@ -333,6 +333,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 pdf.all.push($scope.d.templates.text(intro_text));
                 pdf.eintritt.push($scope.d.templates.text(intro_text));
 
+                var list_array = [];
+
                 data.survey_responses.forEach(function(sr, srID) {
 
                     var calc = sr.calculations["0"].calculation_result;
@@ -342,11 +344,20 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var score = calc.score.score;
                     var interpretation = calc.score.current_range.interpretation_de;
-                    var messung_text = "- Am " + date + " wurden " + score.toString() + " Punkte erreicht, was als eine «" + interpretation + "» interpretiert werden kann.";
-                    pdf.all.push($scope.d.templates.text(messung_text));
-                    pdf.eintritt.push($scope.d.templates.text(messung_text));
+                    var messung_text = "Am " + date + " wurden " + score.toString() + " Punkte erreicht, was als eine «" + interpretation + "» interpretiert werden kann.";
 
+                    list_array.push(messung_text);
                 });
+
+
+                var messungen_liste = {
+                    "ul": list_array,
+                    "margin": [0, 0, 0, 6]
+                };
+
+                pdf.all.push($scope.d.templates.text(messungen_liste));
+                pdf.eintritt.push($scope.d.templates.text(messungen_liste));
+
 
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
