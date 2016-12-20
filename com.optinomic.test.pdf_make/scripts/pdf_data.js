@@ -330,8 +330,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
             if (data.survey_responses.length > 0) {
 
                 var intro_text = $scope.d.dataMain.patient.data.extras.anrede + " wurde " + data.survey_responses.length + "x während des Aufenthaltes anhand des Selbstbeurteilungsinstruments «BDI-II» getestet:";
-                pdf.all.push($scope.d.templates.text(score_text));
-                pdf.eintritt.push($scope.d.templates.text(score_text));
+                pdf.all.push($scope.d.templates.text(intro_text));
+                pdf.eintritt.push($scope.d.templates.text(intro_text));
 
                 data.survey_responses.forEach(function(sr, srID) {
 
