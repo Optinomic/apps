@@ -105,6 +105,8 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.eintritt);
     doc.content.push($scope.d.templates.spacer(12));
 
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.eintritt);
+    doc.content.push($scope.d.templates.spacer(12));
 
     var bloc = {
         "alignment": "left",
@@ -149,6 +151,10 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.all);
+    doc.content.push($scope.d.templates.spacer(12));
+
 
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);

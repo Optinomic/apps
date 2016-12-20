@@ -314,6 +314,46 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
+        // -----------------------------------------------------------------
+        // BDI-II
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.bdi") {
+
+            var app_title = "Beck-Depressions-Inventar (BDI-II)";
+            var description = "Schweregrad depressiver Symptomatik im klinischen Bereich.";
+
+            pdf.all.push($scope.d.templates.horizontalLine(100));
+            pdf.all.push($scope.d.templates.heading("h2", app_title));
+            pdf.eintritt = angular.copy(pdf.all);
+
+
+            if (data.survey_responses.length > 0) {
+
+                var intro_text = $scope.d.dataMain.patient.data.extras.anrede + " wurde " + data.survey_responses.length + "x während des Aufenthaltes anhand des Selbstbeurteilungsinstruments «BDI-II» getestet:";
+                pdf.all.push($scope.d.templates.text(score_text));
+                pdf.eintritt.push($scope.d.templates.text(score_text));
+
+                data.survey_responses.forEach(function(sr, srID) {
+
+                    var calc = sr.calculations["0"].calculation_result;
+
+
+                    var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+
+                    var score = calc.score.score;
+                    var interpretation = calc.score.current_range.interpretation_de;
+                    var messung_text = "- Am " + date + " wurden " + score.toString() + " Punkte erreicht, was als eine «" + interpretation + "» interpretiert werden kann.";
+                    pdf.all.push($scope.d.templates.text(messung_text));
+                    pdf.eintritt.push($scope.d.templates.text(messung_text));
+
+                });
+
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
+
 
 
 
