@@ -26,8 +26,228 @@ var dd = {
         return obj;
     },
     "content": [{
+        "text": "Stanine",
+        "style": "h2"
+    }, {
+        "text": "Frauen, 31 - 50 Jahre",
+        "alignment": "center",
+        "margin": [0, 6, 0, 3],
+        "color": "#212121",
+        "style": "caption"
+    }, {
+        "alignment": "left",
+        "columnGap": 12,
+        "columns": [{
+            "width": "*",
+            "alignment": "left",
+            "columnGap": 0,
+            "columns": [{
+                "text": "Wenig",
+                "alignment": "left",
+                "margin": [0, 0, 0, 0],
+                "style": "h3"
+            }, {
+                "text": "%\nStanine",
+                "fontSize": 9,
+                "alignment": "right",
+                "style": "caption"
+            }]
+        }, {
+            "width": 240,
+            "alignment": "center",
+            "columns": [{
+                "text": [{
+                    "text": "4\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "1",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "7\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "2",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "12\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "3",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "17\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "4",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "20\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "5",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "alignment": "center",
+                "text": [{
+                    "text": "17\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "6",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "12\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "7",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "7\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "8",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }, {
+                "text": [{
+                    "text": "4\n",
+                    "alignment": "center",
+                    "fontSize": 9,
+                    "style": "caption"
+                }, {
+                    "text": "9",
+                    "alignment": "center",
+                    "style": "p"
+                }]
+            }]
+        }, {
+            "width": "*",
+            "alignment": "left",
+            "columnGap": 0,
+            "columns": [{
+                "text": "%\nStanine",
+                "fontSize": 9,
+                "alignment": "left",
+                "style": "caption"
+            }, {
+                "text": "Viel/Ausgeprägt",
+                "margin": [0, 0, 0, 0],
+                "alignment": "right",
+                "style": "h3"
+            }]
+        }]
+    }, {
+        "alignment": "left",
+        "columnGap": 12,
+        "columns": [{
+            "width": "*",
+            "alignment": "right",
+            "text": "Dies ist die Beschreibung: Selbstzweifel und Fokus auf Negatives",
+            "margin": [0, 0, 0, 0],
+            "color": "#212121",
+            "style": "caption"
+        }, {
+            "width": 240,
+            "alignment": "center",
+            "canvas": [{
+                "type": "rect",
+                "x": 0,
+                "y": 0,
+                "w": 240,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "polyline",
+                "lineWidth": 1,
+                "closePath": true,
+                "color": "#C5CAE9",
+                "lineColor": "#3F51B5",
+                "points": [{ x: 26.66, y: 0 }, { x: 53.33, y: 0 }, { x: 26.66, y: 30 }]
+            }, {
+                "type": "rect",
+                "x": 26.66,
+                "y": 0,
+                "w": 26.66,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "ellipse",
+                "x": 93.33,
+                "y": 15,
+                "color": "#3F51B5",
+                "fillOpacity": 0.5,
+                "r1": 12,
+                "r2": 12
+            }, {
+                "type": "rect",
+                "x": 80,
+                "y": 0,
+                "w": 26.66,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": 133.33,
+                "y": 0,
+                "w": 26.66,
+                "h": 30,
+                "color": "#3F51B5",
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": 186.66,
+                "y": 0,
+                "w": 26.66,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }]
+        }, {
+            "width": "*",
+            "alignment": "left",
+            "text": "Dies ist die Beschreibung: Stressbewältigung durch positives Denken",
+            "margin": [0, 0, 0, 0],
+            "color": "#212121",
+            "style": "caption"
+        }]
+    }, {
         "text": "Überschrift",
-        "style": "h3"
+        "style": "h2"
     }, {
         "text": "Dies ist ein Standardtext",
         "style": "text"
