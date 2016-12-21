@@ -408,13 +408,13 @@ $scope.getTemplates = function() {
             var value = zscore_min + i;
             var alignment = "left";
 
-            if (value >= (count_steps / 3)) {
-                alignment = "center";
-            };
-
-            if (value >= (count_steps / 3 * 2)) {
-                alignment = "right";
-            };
+            // if (value >= (count_steps / 3)) {
+            //     alignment = "center";
+            // };
+            // 
+            // if (value >= (count_steps / 3 * 2)) {
+            //     alignment = "right";
+            // };
 
             var obj_to_push = {
                 "text": value.toString(),
