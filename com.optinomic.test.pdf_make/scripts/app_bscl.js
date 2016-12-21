@@ -89,7 +89,7 @@ d.bscl_create_pdf_stack = function() {
 
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
 
-    var left_colum = true;
+    var left_colum = false;
     var stack_left = [];
     var stack_left_eintritt = [];
     var stack_right = [];
