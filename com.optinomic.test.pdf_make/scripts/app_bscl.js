@@ -113,7 +113,7 @@ d.bscl_create_pdf_stack = function() {
                     "fontSize": 10,
                     "alignment": "left",
                     "text": group.sub_right,
-                    "margin": [0, 14, 0, 0]
+                    "margin": [0, 12, 0, 0]
                 }],
                 "columnGap": 12,
                 "margin": [0, 0, 0, 6]
