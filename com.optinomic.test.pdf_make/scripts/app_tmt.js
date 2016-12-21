@@ -177,7 +177,7 @@ d.tmt_create_pdf_stack = function() {
 
 
             // Zahlen -3 | 0 | +3
-            var zahlen_to_push = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, item.zscore_options.width);
+            var zahlen_to_push = $scope.d.templates.z_score_zahlen(tmt.zscore_options.zscore_min, tmt.zscore_options.zscore_max, tmt.zscore_options.width);
 
             var z_score_grafik = {
                 "alignment": "left",
