@@ -111,7 +111,7 @@ d.bscl_create_pdf_stack = function() {
                 }, {
                     "width": 171,
                     "fontSize": 10,
-                    "alignment": "justify",
+                    "alignment": "left",
                     "text": group.sub_right,
                     "margin": [0, 14, 0, 0]
                 }],
