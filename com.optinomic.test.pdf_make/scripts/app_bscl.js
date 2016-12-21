@@ -100,10 +100,10 @@ d.bscl_create_pdf_stack = function() {
         };
 
 
-        var group_alle = angular.copy(group_data_model_all);
+        var group_alle = angular.copy(group_data_model);
         group_alle.stack[1].columns[0].stack = messungen_alle;
 
-        var group_eintritt = angular.copy(group_data_model_eintritt);
+        var group_eintritt = angular.copy(group_data_model);
         group_eintritt.stack[1].columns[1].width = 191;
         group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
 
