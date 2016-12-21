@@ -89,7 +89,7 @@ d.bscl_create_pdf_stack = function() {
 
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
 
-    var left_colum = false;
+    var left_colum = true;
     var stack_left = [];
     var stack_left_eintritt = [];
     var stack_right = [];
@@ -102,7 +102,6 @@ d.bscl_create_pdf_stack = function() {
     item.groups.forEach(function(group, groupID) {
 
 
-        left_colum = !left_colum;
         if (left_colum) {
             var current_stack = stack_left;
             var current_stack_eintritt = stack_left_eintritt;
@@ -223,6 +222,8 @@ d.bscl_create_pdf_stack = function() {
 
         });
 
+
+        left_colum = !left_colum;
 
     });
 
