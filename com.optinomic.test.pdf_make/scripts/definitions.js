@@ -401,7 +401,7 @@ $scope.getTemplates = function() {
             "columnGap": 1,
             "fontSize": 7,
             "color": "#757575",
-            "margin": [0, 0, 0, 12]
+            "margin": [0, 0, 0, 6]
         };
 
         for (var i = 0; i < count_steps + 1; i++) {
