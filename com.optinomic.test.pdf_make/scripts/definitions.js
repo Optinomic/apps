@@ -399,7 +399,7 @@ $scope.getTemplates = function() {
             "columns": [],
             "width": width,
             "columnGap": 0,
-            "fontSize": 7,
+            "fontSize": 8,
             "color": "#757575"
         };
 
@@ -407,9 +407,15 @@ $scope.getTemplates = function() {
             var value = zscore_min + i;
             var value_1 = zscore_min + i + 1;
 
+            var my_bold = false;
+            if (value === 0) {
+                my_bold = true;
+            };
+
             var obj_to_push = {
                 "width": "*",
                 "text": value.toString(),
+                "bold": my_bold,
                 "alignment": "left"
             };
 
