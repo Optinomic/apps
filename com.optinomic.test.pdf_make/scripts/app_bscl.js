@@ -49,18 +49,6 @@ d.bscl_create_pdf_stack = function() {
                     messungen_eintritt.push(z_score_grafik);
                 };
             };
-
-
-            // if (messungID === group.data.length - 1) {
-            //     z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
-            // };
-
-
-
-            //console.log('(!) messung', messung);
-
-
-            // Nur gewünschte Messungen in Eintritt anzeigen
         });
 
 
@@ -123,9 +111,9 @@ d.bscl_create_pdf_stack = function() {
                 }, {
                     "width": 171,
                     "fontSize": 10,
-                    "alignment": "left",
+                    "alignment": "justify",
                     "text": group.sub_right,
-                    "margin": [0, 6, 0, 0]
+                    "margin": [0, 14, 0, 0]
                 }],
                 "columnGap": 12,
                 "margin": [0, 0, 0, 6]
