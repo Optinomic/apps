@@ -177,36 +177,7 @@ d.tmt_create_pdf_stack = function() {
 
 
             // Zahlen -3 | 0 | +3
-            var zahlen_to_push = {};
-
-            zahlen_to_push = {
-                "columns": [],
-                "fontSize": 9,
-                "color": "#757575",
-                "margin": [0, 0, 0, 12]
-            };
-
-            for (var i = 0; i < count_steps + 1; i++) {
-                var value = tmt.zscore_options.zscore_min + i;
-                var alignment = "left";
-
-                if (value === 0) {
-                    alignment = "center";
-                };
-
-                if (value > 0) {
-                    alignment = "right";
-                };
-
-                var obj_to_push = {
-                    "text": value.toString(),
-                    "alignment": alignment
-                };
-                zahlen_to_push.columns.push(obj_to_push);
-            };
-
-            // console.log(JSON.stringify(zahlen_to_push, null, 2));
-
+            var zahlen_to_push = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, item.zscore_options.width);
 
             var z_score_grafik = {
                 "alignment": "left",
@@ -239,7 +210,6 @@ d.tmt_create_pdf_stack = function() {
             if (messungID === group.data.length - 1) {
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
-
             if (group.name !== "Zusatzitems") {
                 stack_all.push(z_score_grafik_all);
             };
