@@ -121,20 +121,14 @@ d.bscl_create_pdf_stack = function() {
             }, {
                 "alignment": "left",
                 "columns": [{
-                    "width": 110,
-                    "fontSize": 10,
-                    "alignment": "right",
-                    "text": group.sub_left,
-                    "margin": [0, 14, 0, 0]
-                }, {
                     "width": "auto",
                     "stack": []
                 }, {
-                    "width": 110,
+                    "width": 220,
                     "fontSize": 10,
                     "alignment": "left",
                     "text": group.sub_right,
-                    "margin": [0, 14, 0, 0]
+                    "margin": [0, 6, 0, 0]
                 }],
                 "columnGap": 12,
                 "margin": [0, 0, 0, 6]
@@ -143,10 +137,10 @@ d.bscl_create_pdf_stack = function() {
 
 
         var group_alle = angular.copy(group_data_model);
-        group_alle.stack[1].columns[1].stack = messungen_alle;
+        group_alle.stack[1].columns[0].stack = messungen_alle;
 
         var group_eintritt = angular.copy(group_data_model);
-        group_eintritt.stack[1].columns[1].stack = messungen_eintritt;
+        group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
 
 
         // Save
