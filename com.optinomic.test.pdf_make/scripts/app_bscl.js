@@ -2,14 +2,11 @@ d.bscl_create_pdf_stack = function() {
 
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
 
-
-
-
     // Reverse Group-Order
     item.groups.reverse();
 
-    item.groups.forEach(function(group, groupID) {
 
+    item.groups.forEach(function(group, groupID) {
 
         var messungen_alle = [];
         var messungen_eintritt = [];
@@ -17,7 +14,6 @@ d.bscl_create_pdf_stack = function() {
         item.zscore_options.width = 331;
 
         group.data.forEach(function(messung, messungID) {
-
 
             var z_score_grafik = {
                 "alignment": "left",
@@ -53,48 +49,9 @@ d.bscl_create_pdf_stack = function() {
 
 
         // Zahlen -3 | 0 | +3
-        var count_steps = 0;
-        if (item.zscore_options.zscore_min <= 0) {
-            count_steps = Math.abs(item.zscore_options.zscore_min) + Math.abs(item.zscore_options.zscore_max);
-        } else {
-            count_steps = Math.abs(item.zscore_options.zscore_max) - Math.abs(item.zscore_options.zscore_min);
-        };
-
-
-        var zahlen_to_push = {};
-
-        zahlen_to_push = {
-            "columns": [],
-            "width": item.zscore_options.width,
-            "columnGap": 0,
-            "fontSize": 7,
-            "color": "#757575",
-            "margin": [0, 0, 0, 12]
-        };
-
-        for (var i = 0; i < count_steps + 1; i++) {
-            var value = item.zscore_options.zscore_min + i;
-            var alignment = "left";
-
-            if (value === 0) {
-                alignment = "center";
-            };
-
-            if (value > 0) {
-                alignment = "right";
-            };
-
-            var obj_to_push = {
-                "text": value.toString(),
-                "alignment": alignment
-            };
-            zahlen_to_push.columns.push(obj_to_push);
-        };
-
-
-        messungen_alle.push(zahlen_to_push);
-        messungen_eintritt.push(zahlen_to_push);
-
+        var z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, item.zscore_options.width);
+        messungen_alle.push(z_score_zahlen);
+        messungen_eintritt.push(z_score_zahlen);
 
 
         var group_data_model = {
@@ -127,14 +84,12 @@ d.bscl_create_pdf_stack = function() {
         var group_eintritt = angular.copy(group_data_model);
         group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
 
-
         // Save
         if (group.description !== "Zusatzitems") {
             $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
             $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
         };
     });
-
 };
 
 d.bscl_create_pdf_stack_2_colums = function() {
@@ -315,7 +270,7 @@ d.bscl_create_pdf_stack_2_colums = function() {
 
 // "Copy" from App
 
-d.bscl_loadKS = function() {
+d.bscl = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = {};
 

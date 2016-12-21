@@ -168,7 +168,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push(return_obj);
         };
 
-
         // -----------------------------------------------------------------
         // TMT
         // -----------------------------------------------------------------
@@ -212,12 +211,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.eintritt = angular.copy(pdf.all);
 
             // Nur für "Alle Resultate"
-            // pdf.all.push($scope.d.templates.text(description_full));
-            pdf.all.push($scope.d.templates.spacer(12));
+            pdf.all.push($scope.d.templates.text(description_full));
+            pdf.all.push($scope.d.templates.spacer(6));
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
-                run.bscl_loadKS();
+                run.bscl();
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));

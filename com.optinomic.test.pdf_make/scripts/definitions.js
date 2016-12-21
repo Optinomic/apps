@@ -385,7 +385,46 @@ $scope.getTemplates = function() {
         return canvas;
     };
 
+    d.z_score_zahlen = function(zscore_min, zscore_max, width) {
 
+        // Zahlen -3 | 0 | +3
+        var count_steps = 0;
+        if (zscore_min <= 0) {
+            count_steps = Math.abs(zscore_min) + Math.abs(zscore_max);
+        } else {
+            count_steps = Math.abs(zscore_max) - Math.abs(zscore_min);
+        };
+
+        var zahlen_to_push = {
+            "columns": [],
+            "width": width,
+            "columnGap": 0,
+            "fontSize": 7,
+            "color": "#757575",
+            "margin": [0, 0, 0, 12]
+        };
+
+        for (var i = 0; i < count_steps + 1; i++) {
+            var value = zscore_min + i;
+            var alignment = "left";
+
+            if (value === 0) {
+                alignment = "center";
+            };
+
+            if (value > 0) {
+                alignment = "right";
+            };
+
+            var obj_to_push = {
+                "text": value.toString(),
+                "alignment": alignment
+            };
+            zahlen_to_push.columns.push(obj_to_push);
+        };
+
+        return zahlen_to_push;
+    };
 
     // --------------------------------
     // Default Definition
