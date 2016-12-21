@@ -406,21 +406,29 @@ $scope.getTemplates = function() {
 
         for (var i = 0; i < count_steps; i++) {
             var value = zscore_min + i;
-            var alignment = "left";
-
-            // if (value >= (count_steps / 3)) {
-            //     alignment = "center";
-            // };
-            // 
-            // if (value >= (count_steps / 3 * 2)) {
-            //     alignment = "right";
-            // };
+            var value_1 = zscore_min + i + 1;
 
             var obj_to_push = {
                 "width": "*",
                 "text": value.toString(),
-                "alignment": alignment
+                "alignment": "left"
             };
+
+            if (i === count_steps - 1) {
+                obj_to_push = {
+                    "width": "*",
+                    "stack": [{
+                        "width": "*",
+                        "text": value.toString(),
+                        "alignment": "left"
+                    }, {
+                        "width": "*",
+                        "text": value_1.toString(),
+                        "alignment": "right"
+                    }]
+                };
+            };
+
             zahlen_to_push.columns.push(obj_to_push);
         };
 
