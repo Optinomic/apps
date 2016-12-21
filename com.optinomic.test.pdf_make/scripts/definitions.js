@@ -43,6 +43,39 @@ $scope.getTemplates = function() {
     // PDF - Template-Functions
     // --------------------------------
 
+    d.keepTogether = function(given_stack_array) {
+
+        var isArray = function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        var stack_array = [];
+
+        if (isArray(given_stack_array)) {
+            // Array
+            stack_array = given_stack_array;
+        } else {
+            // Object
+            stack_array.push(given_stack_array);
+        };
+
+        var return_obj = {
+            "id": "keepTogetherTable",
+            "layout": "noBorders",
+            "table": {
+                "dontBreakRows": true,
+                "headerRows": 0,
+                "body": [
+                    [{
+                        "stack": stack_array
+                    }]
+                ]
+            }
+        };
+
+        return return_obj;
+    };
 
     d.spacer = function(space) {
 
@@ -143,7 +176,6 @@ $scope.getTemplates = function() {
         return { "fontSize": 0, "text": "", "pageOrientation": "portrait", "pageBreak": when };
     };
 
-
     d.horizontalLine = function(width) {
         width = width === undefined ? 100 : width;
 
@@ -164,7 +196,6 @@ $scope.getTemplates = function() {
 
         return return_obj;
     };
-
 
     d.noData = function(title, space_bottom) {
         title = title === undefined ? null : title;
@@ -199,8 +230,6 @@ $scope.getTemplates = function() {
 
         return return_obj;
     };
-
-
 
     d.z_score = function(data, options) {
         var grey = {

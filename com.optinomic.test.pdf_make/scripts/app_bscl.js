@@ -1,91 +1,162 @@
-d.bscl_loadKS = function() {
-
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = {};
-
-    var ks_file = include_as_js_string(
-        ks_bscl.json)
-
-    ks_file = JSON.parse(ks_file);
-
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = ks_file;
-
-
-
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = '';
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.dimensions.forEach(function(dim, dimID) {
-        if ($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text !== '') {
-            $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + ', '
-        };
-        $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + dim.name
-    });
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.n_scores + ' Messungen normiert nach ' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text;
-    var datum_ks = $filter('date')($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.date);
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + ' (' + datum_ks + ')'
-
-
-
-    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe = {};
-    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n = '(N=' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].data.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
-
-
-    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n;
-
-    console.log('(✓) Klinikstichprobe geladen: ', $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks);
-    // Follow the white rabbit
-    d.bscl_init();
-};
-
-d.bscl_getKSLocation = function(location_array) {
-
-    var current_ks = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks;
-
-    var data_dive = current_ks.data;
-    var current_location_text = "";
-    var current_location_full = "";
-    var current_location_n_text = "";
-    var current_location_n = 0;
-
-
-    location_array.forEach(function(pos, posID) {
-        data_dive = data_dive[pos];
-
-        if (current_location_text !== "") {
-            current_location_text = current_location_text + ' | '
-        };
-
-        var current_dim = current_ks.dimensions[posID];
-        current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
-    });
-
-
-    var statistics = null;
-    if (data_dive !== null) {
-        statistics = data_dive.statistics;
-        current_location_n = data_dive.patients.length;
-        current_location_n_text = 'N=' + current_location_n;
-        current_location_full = current_location_text + ' (' + current_location_n_text + ')';
-    } else {
-        statistics = null;
-        current_location_n = 0;
-        current_location_n_text = 'N=' + current_location_n;
-        current_location_full = current_location_text + ' (' + current_location_n_text + ')';
-    };
-
-    var location = {
-        "statistics": statistics,
-        "path": location_array,
-        "text": current_location_text,
-        "n_text": current_location_n_text,
-        "text_full": current_location_full,
-        "n": current_location_n
-    };
-
-    //console.log('getKSLocation', location);
-
-    return angular.copy(location);
-};
-
 d.bscl_create_pdf_stack = function() {
+
+    var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
+
+
+
+
+    // Reverse Group-Order
+    item.groups.reverse();
+
+    item.groups.forEach(function(group, groupID) {
+
+
+        var messungen_alle = [];
+        var messungen_eintritt = [];
+
+        item.zscore_options.width = 280;
+
+        group.data.forEach(function(messung, messungID) {
+
+
+            // console.log(JSON.stringify(zahlen_to_push, null, 2));
+
+
+            var z_score_grafik = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": item.zscore_options.width,
+                    "stack": [{
+                        "columns": [
+                            { "text": messung.zscore.text_left, "alignment": "left" },
+                            { "text": messung.zscore.text_right, "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score(messung.zscore, item.zscore_options)
+                    }]
+                }]
+            };
+
+
+            if (group.description !== "Zusatzitems") {
+
+                // Alle Messungen
+                messungen_alle.push(z_score_grafik);
+
+                // Eintritt
+                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
+                    messungen_eintritt.push(z_score_grafik);
+                };
+            };
+
+
+            // if (messungID === group.data.length - 1) {
+            //     z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
+            // };
+
+
+
+            //console.log('(!) messung', messung);
+
+
+            // Nur gewünschte Messungen in Eintritt anzeigen
+        });
+
+
+        // Zahlen -3 | 0 | +3
+        var count_steps = 0;
+        if (item.zscore_options.zscore_min <= 0) {
+            count_steps = Math.abs(item.zscore_options.zscore_min) + Math.abs(item.zscore_options.zscore_max);
+        } else {
+            count_steps = Math.abs(item.zscore_options.zscore_max) - Math.abs(item.zscore_options.zscore_min);
+        };
+
+
+        var zahlen_to_push = {};
+
+        zahlen_to_push = {
+            "columns": [],
+            "width": item.zscore_options.width,
+            "columnGap": 0,
+            "fontSize": 7,
+            "color": "#757575",
+            "margin": [0, 0, 0, 12]
+        };
+
+        for (var i = 0; i < count_steps + 1; i++) {
+            var value = item.zscore_options.zscore_min + i;
+            var alignment = "left";
+
+            if (value === 0) {
+                alignment = "center";
+            };
+
+            if (value > 0) {
+                alignment = "right";
+            };
+
+            var obj_to_push = {
+                "text": value.toString(),
+                "alignment": alignment
+            };
+            zahlen_to_push.columns.push(obj_to_push);
+        };
+
+
+        messungen_alle.push(zahlen_to_push);
+        messungen_eintritt.push(zahlen_to_push);
+
+
+
+        var group_data_model = {
+            "stack": [{
+                "text": group.description,
+                "margin": [0, 6, 0, 0],
+                "alignment": "left",
+                "style": "h3"
+            }, {
+                "alignment": "left",
+                "columns": [{
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "right",
+                    "text": group.sub_left,
+                    "margin": [0, 14, 0, 0]
+                }, {
+                    "width": "*",
+                    "stack": []
+                }, {
+                    "width": 110,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "text": group.sub_right,
+                    "margin": [0, 14, 0, 0]
+                }],
+                "columnGap": 12,
+                "margin": [0, 0, 0, 6]
+            }]
+        };
+
+        var group_alle = angular.copy(group_data_model);
+        group_alle.stack[1].colums[1].stack = messungen_alle;
+
+        var group_eintritt = angular.copy(group_data_model);
+        group_eintritt.stack[1].colums[1].stack = messungen_eintritt;
+
+
+        // Save
+        $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
+        $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
+
+    });
+
+};
+
+d.bscl_create_pdf_stack_2_colums = function() {
 
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
 
@@ -258,6 +329,96 @@ d.bscl_create_pdf_stack = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push(eintritt_colums);
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push(all_colums);
+};
+
+
+// "Copy" from App
+
+d.bscl_loadKS = function() {
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = {};
+
+    var ks_file = include_as_js_string(
+        ks_bscl.json)
+
+    ks_file = JSON.parse(ks_file);
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = ks_file;
+
+
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = '';
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.dimensions.forEach(function(dim, dimID) {
+        if ($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text !== '') {
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + ', '
+        };
+        $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + dim.name
+    });
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.n_scores + ' Messungen normiert nach ' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text;
+    var datum_ks = $filter('date')($scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.date);
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.text + ' (' + datum_ks + ')'
+
+
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe = {};
+    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n = '(N=' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].data.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
+
+
+    //$scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.text = age + ', ' + edu + ' ' + $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks.normgurppe.n;
+
+    console.log('(✓) Klinikstichprobe geladen: ', $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks);
+    // Follow the white rabbit
+    d.bscl_init();
+};
+
+d.bscl_getKSLocation = function(location_array) {
+
+    var current_ks = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks;
+
+    var data_dive = current_ks.data;
+    var current_location_text = "";
+    var current_location_full = "";
+    var current_location_n_text = "";
+    var current_location_n = 0;
+
+
+    location_array.forEach(function(pos, posID) {
+        data_dive = data_dive[pos];
+
+        if (current_location_text !== "") {
+            current_location_text = current_location_text + ' | '
+        };
+
+        var current_dim = current_ks.dimensions[posID];
+        current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
+    });
+
+
+    var statistics = null;
+    if (data_dive !== null) {
+        statistics = data_dive.statistics;
+        current_location_n = data_dive.patients.length;
+        current_location_n_text = 'N=' + current_location_n;
+        current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+    } else {
+        statistics = null;
+        current_location_n = 0;
+        current_location_n_text = 'N=' + current_location_n;
+        current_location_full = current_location_text + ' (' + current_location_n_text + ')';
+    };
+
+    var location = {
+        "statistics": statistics,
+        "path": location_array,
+        "text": current_location_text,
+        "n_text": current_location_n_text,
+        "text_full": current_location_full,
+        "n": current_location_n
+    };
+
+    //console.log('getKSLocation', location);
+
+    return angular.copy(location);
 };
 
 d.bscl_init = function() {
