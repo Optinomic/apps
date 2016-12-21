@@ -398,7 +398,7 @@ $scope.getTemplates = function() {
         var zahlen_to_push = {
             "columns": [],
             "width": width,
-            "columnGap": 2,
+            "columnGap": 0,
             "fontSize": 7,
             "color": "#757575",
             "margin": [0, 0, 0, 6]
@@ -417,6 +417,7 @@ $scope.getTemplates = function() {
             // };
 
             var obj_to_push = {
+                "width": "auto",
                 "text": value.toString(),
                 "alignment": alignment
             };
