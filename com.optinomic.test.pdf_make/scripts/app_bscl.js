@@ -127,7 +127,7 @@ d.bscl_create_pdf_stack = function() {
                     "text": group.sub_left,
                     "margin": [0, 14, 0, 0]
                 }, {
-                    "width": "*",
+                    "width": "auto",
                     "stack": []
                 }, {
                     "width": 110,
