@@ -111,6 +111,11 @@ d.bscl_create_pdf_stack = function() {
         };
 
 
+        var gruppen_stack = {
+            "stack": [],
+            "id": "keepTogether"
+        };
+
         var gruppen_name = {
             "text": group.description,
             "style": "h3",
@@ -118,8 +123,10 @@ d.bscl_create_pdf_stack = function() {
         };
 
         if (group.description !== "Zusatzitems") {
-            current_stack.push(gruppen_name);
-            current_stack_eintritt.push(gruppen_name);
+            //  current_stack.push(gruppen_name);
+            //  current_stack_eintritt.push(gruppen_name);
+
+            gruppen_stack.stack.push(gruppen_name);
         };
 
 
@@ -203,7 +210,8 @@ d.bscl_create_pdf_stack = function() {
             };
 
             if (group.description !== "Zusatzitems") {
-                current_stack.push(z_score_grafik_all);
+                gruppen_stack.stack.push(z_score_grafik_all);
+                current_stack.push(gruppen_stack);
             };
 
             //console.log('(!) messung', messung);
@@ -215,6 +223,9 @@ d.bscl_create_pdf_stack = function() {
                 z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
                 if (group.description !== "Zusatzitems") {
                     current_stack_eintritt.push(z_score_grafik_eintritt);
+
+                    gruppen_stack.stack.push(z_score_grafik_eintritt);
+                    current_stack_eintritt.push(gruppen_stack);
                 };
 
             };
