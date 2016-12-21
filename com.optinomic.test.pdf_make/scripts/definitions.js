@@ -417,7 +417,7 @@ $scope.getTemplates = function() {
             // };
 
             var obj_to_push = {
-                "width": "auto",
+                "width": "*",
                 "text": value.toString(),
                 "alignment": alignment
             };
