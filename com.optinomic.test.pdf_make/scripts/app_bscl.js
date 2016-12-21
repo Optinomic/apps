@@ -143,10 +143,11 @@ d.bscl_create_pdf_stack = function() {
 
 
         var group_alle = angular.copy(group_data_model);
-        group_alle.stack["1"].colums["1"].stack = messungen_alle;
+        console.log('(!!!) group_alle', group_alle);
+        // group_alle.stack["1"].colums["1"].stack = messungen_alle;
 
         var group_eintritt = angular.copy(group_data_model);
-        group_eintritt.stack["1"].colums["1"].stack = messungen_eintritt;
+        //group_eintritt.stack["1"].colums["1"].stack = messungen_eintritt;
 
 
         // Save
