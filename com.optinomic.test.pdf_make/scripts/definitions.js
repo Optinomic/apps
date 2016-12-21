@@ -408,11 +408,11 @@ $scope.getTemplates = function() {
             var value = zscore_min + i;
             var alignment = "left";
 
-            if (value === 0) {
+            if (value >= (count_steps / 3)) {
                 alignment = "center";
             };
 
-            if (value > 0) {
+            if (value >= (count_steps / 3 * 2)) {
                 alignment = "right";
             };
 
