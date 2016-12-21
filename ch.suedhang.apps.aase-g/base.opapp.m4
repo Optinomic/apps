@@ -7,6 +7,7 @@ type = patient
 
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren.
+0 bedeutet keine Versuchung, eine maximale Versuchung liegt beim allgemeinen Summenwert bei 80, bei den Subskalen bei 4.
 
 [developer]
 first_name = Beat
