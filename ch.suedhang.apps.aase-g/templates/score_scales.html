@@ -14,8 +14,14 @@ include(../lib/html/optinomic/page/start.m4)
             <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '2'" class="md-subhead">Austritt</h3>
             <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '3'" class="md-subhead">{{d.dataMain.calculations[0].calculation_results.response.data.response.andererZeitpunkt}}</h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
-                <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].score" min="20" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                <div flex="25" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p flex class="md-body-2">keine Versuchung</p>
+                </div>
+                <div flex = "50">
+                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].score" min="0" max="80" show-percent-scale="true" show-min-max="true"></score-threshold>
+                </div>
+                <div flex="25" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                        <p flex class="md-body-2">starke Versuchung</p>
                 </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
