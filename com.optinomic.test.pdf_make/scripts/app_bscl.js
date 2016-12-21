@@ -11,7 +11,7 @@ d.bscl_create_pdf_stack = function() {
         var messungen_alle = [];
         var messungen_eintritt = [];
 
-        item.zscore_options.width = 331;
+        item.zscore_options.width = 351;
 
         group.data.forEach(function(messung, messungID) {
 
@@ -66,7 +66,7 @@ d.bscl_create_pdf_stack = function() {
                     "width": "auto",
                     "stack": []
                 }, {
-                    "width": 171,
+                    "width": 151,
                     "fontSize": 10,
                     "alignment": "left",
                     "text": group.sub_right,
