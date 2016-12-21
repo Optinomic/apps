@@ -11,11 +11,31 @@ d.bscl_create_pdf_stack = function() {
         var messungen_alle = [];
         var messungen_eintritt = [];
 
-        item.zscore_options.width = 351;
 
         group.data.forEach(function(messung, messungID) {
 
-            var z_score_grafik = {
+            item.zscore_options.width = 351;
+            var z_score_grafik_b_all = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": item.zscore_options.width,
+                    "stack": [{
+                        "columns": [
+                            { "text": messung.zscore.text_left, "alignment": "left" },
+                            { "text": messung.zscore.text_right, "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score(messung.zscore, item.zscore_options)
+                    }]
+                }]
+            };
+
+            item.zscore_options.width = 301;
+            var z_score_grafik_b_eintritt = {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
@@ -38,19 +58,21 @@ d.bscl_create_pdf_stack = function() {
             if (group.description !== "Zusatzitems") {
 
                 // Alle Messungen
-                messungen_alle.push(z_score_grafik);
+                messungen_alle.push(z_score_grafik_b_all);
 
                 // Eintritt
                 if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
-                    messungen_eintritt.push(z_score_grafik);
+                    messungen_eintritt.push(z_score_grafik_b_eintritt);
                 };
             };
         });
 
 
         // Zahlen -3 | 0 | +3
-        var z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, item.zscore_options.width);
+        var z_score_zahlen = {};
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 351);
         messungen_alle.push(z_score_zahlen);
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 301);
         messungen_eintritt.push(z_score_zahlen);
 
 
@@ -78,10 +100,11 @@ d.bscl_create_pdf_stack = function() {
         };
 
 
-        var group_alle = angular.copy(group_data_model);
+        var group_alle = angular.copy(group_data_model_all);
         group_alle.stack[1].columns[0].stack = messungen_alle;
 
-        var group_eintritt = angular.copy(group_data_model);
+        var group_eintritt = angular.copy(group_data_model_eintritt);
+        group_eintritt.stack[1].columns[1].width = 191;
         group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
 
         // Save
