@@ -95,6 +95,10 @@ d.bscl_create_pdf_stack = function() {
     var stack_right = [];
     var stack_right_eintritt = [];
 
+
+    // Reverse Group-Order
+    item.groups.reverse();
+
     item.groups.forEach(function(group, groupID) {
 
 
