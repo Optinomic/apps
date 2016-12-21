@@ -81,7 +81,16 @@
                 <z-score data="data.zscore" options="d.TMT.zscore_options"></z-score>
             </div>
             <div flex="10">
-                <div style="padding-left: 12px;">
+                <div ng-if="tmt.name === 'TMT A'" style="padding-left: 12px;">
+                    <p class="md-caption">
+                        Zeit: {{data.calculation.TMTBTime}}
+                        <br>Fehler: {{data.calculation.TMTBError}}
+                        <span ng-if="data.calculation.Messzeitpunkt.Messzeitpunkt === 1">
+                    <br>B/A: {{data.calculation.quotient_rounded}}
+                    </span>
+                    </p>
+                </div>
+                <div ng-if="tmt.name === 'TMT B'" style="padding-left: 12px;">
                     <p class="md-caption">
                         Zeit: {{data.calculation.TMTBTime}}
                         <br>Fehler: {{data.calculation.TMTBError}}
