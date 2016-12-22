@@ -24,11 +24,6 @@ website = http://suedhang.ch/de/
 [template simple_score 4 4]
 include(templates/score.html)
 
-[template newscore 4 4]
-include(templates/score_neu.html)
-
-[template scores_print 6 7]
-include(templates/score_report.html)
 
 
 [dependencies]
