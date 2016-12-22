@@ -93,17 +93,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.show_answers_filter = 0;
 
         $scope.d.show_answers_filters = [{
-            "value": 3,
-            "name": 'Antworten mit Score ( =3 )'
-        }, {
-            "value": 2,
-            "name": 'Antworten mit Score ( >=2 )'
+            "value": 0,
+            "name": 'Alle Antworten'
         }, {
             "value": 1,
             "name": 'Antworten mit Score ( >=1 )'
         }, {
-            "value": 0,
-            "name": 'Alle Antworten'
+            "value": 2,
+            "name": 'Antworten mit Score ( >=2 )'
+        }, {
+            "value": 3,
+            "name": 'Antworten mit Score ( =3 )'
         }];
 
         // Ranges initialisieren
