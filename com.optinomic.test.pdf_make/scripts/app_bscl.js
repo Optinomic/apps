@@ -1,10 +1,37 @@
 d.bscl_create_pdf_stack = function() {
 
+    // Init
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
+
+    // Klinikstichproben
+
+    var ks = {
+        "alignment": 'left',
+        "columnGap": 12,
+        "columns": [{
+            "width": 192,
+            "stack": [{
+                "text": "Normstichprobe",
+                "style": "h3"
+            }, {
+                "text": "Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
+                "style": "caption"
+            }]
+        }, {
+            "width": "*",
+            "stack": [{
+                "text": "Klinikstichprobe",
+                "style": "h3"
+            }]
+        }]
+    };
+
+    var ks_alle = angular.copy(ks);
+    var ks_eintritt = angular.copy(ks);
+
 
     // Reverse Group-Order
     item.groups.reverse();
-
 
     item.groups.forEach(function(group, groupID) {
 
@@ -14,6 +41,51 @@ d.bscl_create_pdf_stack = function() {
 
         group.data.forEach(function(messung, messungID) {
 
+
+            var ks_nummer = messungID + 1;
+
+            var ks_item = {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 11,
+                            "style": "p"
+                        }, {
+                            "text": ks_nummer.toString(),
+                            "fontSize": 11,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "text": messung.ks.path_data.text_full,
+                        "style": "caption"
+                    }]
+                }]
+            };
+
+            // Klinikstichprobe nur einmalig befüllen
+            if (groupID === 0) {
+
+                // Alle KS-Einträge
+                console.log('Klinikstichprobe', ks_alle);
+                // messungen_alle.push(z_score_grafik_b_all);
+
+                // Eintritt KS-Einträge
+                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
+                    console.log('Klinikstichprobe', ks_eintritt);
+                };
+            };
+
+
             item.zscore_options.width = 351;
             var z_score_grafik_b_all = {
                 "alignment": "left",
@@ -22,8 +94,20 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" },
-                            { "text": messung.zscore.text_right, "alignment": "right" }
+                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                                "alignment": "center",
+                                "text": [{
+                                    "text": "*",
+                                    "color": "#7986CB",
+                                    "fontSize": 11,
+                                    "style": "p"
+                                }, {
+                                    "text": ks_nummer.toString(),
+                                    "fontSize": 11,
+                                    "color": "#3F51B5",
+                                    "style": "p"
+                                }]
+                            }, { "text": messung.zscore.text_right, "alignment": "right" }
                         ],
                         "fontSize": 10,
                         "color": "#212121",
@@ -106,6 +190,14 @@ d.bscl_create_pdf_stack = function() {
         var group_eintritt = angular.copy(group_data_model);
         group_eintritt.stack[1].columns[1].width = 191;
         group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
+
+
+        // Klinikstichprobe nur einmalig speichern
+        if (groupID === 0) {
+            console.log('Klinikstichproben', ks_alle, ks_eintritt);
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+        };
 
         // Save
         if (group.description !== "Zusatzitems") {
