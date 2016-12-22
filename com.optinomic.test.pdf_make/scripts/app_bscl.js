@@ -97,8 +97,8 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "right" }, {
-                                "alignment": "center",
+                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                                "alignment": "right",
                                 "text": [{
                                     "text": "*",
                                     "color": "#7986CB",
@@ -129,8 +129,8 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "right" }, {
-                                "alignment": "center",
+                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                                "alignment": "right",
                                 "text": [{
                                     "text": "*",
                                     "color": "#7986CB",
