@@ -6,6 +6,7 @@ d.bscl_create_pdf_stack = function() {
     // Klinikstichproben
 
     var ks = {
+        "margin": [0, 6, 0, 0],
         "alignment": 'left',
         "columnGap": 12,
         "columns": [{
