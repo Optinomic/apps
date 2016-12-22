@@ -90,7 +90,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.bdi_init = function() {
 
         $scope.d.show_answers = false;
-        $scope.d.show_answers_filter = 0;
+        $scope.d.show_answers_filter = 3;
 
         $scope.d.show_answers_filters = [{
             "value": 0,
