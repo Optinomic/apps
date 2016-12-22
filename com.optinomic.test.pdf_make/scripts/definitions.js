@@ -102,6 +102,7 @@ $scope.getTemplates = function() {
                 }, {
                     "text": subtitle,
                     "style": "caption",
+                    "margin": [3, 0, 0, 0],
                     "alignment": "left"
                 }
             ],
@@ -491,7 +492,7 @@ $scope.getTemplates = function() {
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [3, 0, 0, 0]
+                "margin": [0, 0, 0, 0]
             },
             "h1": {
                 "fontSize": 18,
@@ -516,6 +517,7 @@ $scope.getTemplates = function() {
             "p": {
                 "color": "#212121",
                 "alignment": "left",
+                "fontSize": 12,
                 "margin": [0, 0, 0, 6]
             }
         },

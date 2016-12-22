@@ -26,6 +26,75 @@ var dd = {
         return obj;
     },
     "content": [{
+        "alignment": 'left',
+        "columnGap": 12,
+        "columns": [{
+            "width": 192,
+            "stack": [{
+                "text": "Normstichprobe",
+                "style": "h3"
+            }, {
+                "text": "Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
+                "style": "caption"
+            }]
+        }, {
+            "stack": [{
+                "text": "Klinikstichprobe",
+                "style": "h3"
+            }, {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 11,
+                            "style": "p"
+                        }, {
+                            "text": "1",
+                            "fontSize": 11,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "text": "Beschreibung der Stichprobe der sehr lange ausfallen kann und somit auf mehreren Zeilen (N=234)",
+                        "style": "caption"
+                    }]
+                }]
+            }, {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 11,
+                            "style": "p"
+                        }, {
+                            "text": "2",
+                            "fontSize": 11,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "stack": [{
+                        "text": "Beschreibung der Stichprobe",
+                        "style": "caption"
+                    }]
+                }]
+            }]
+        }]
+    }, {
         "text": "keepTogether",
         "style": "h1"
     }, {
@@ -35,10 +104,7 @@ var dd = {
             "body": [
                 [{
                     "stack": [{
-                        "text": "1 keepTogether",
-                        "style": "h1"
-                    }, {
-                        "text": "p keepTogether",
+                        "text": "keepTogether - all Content here!",
                         "style": "p"
                     }]
                 }]
@@ -511,7 +577,7 @@ var dd = {
             "bold": false,
             "color": "#9E9E9E",
             "alignment": "left",
-            "margin": [3, 0, 0, 0]
+            "margin": [0, 0, 0, 0]
         },
         "h1": {
             "fontSize": 18,
@@ -536,6 +602,7 @@ var dd = {
         "p": {
             "color": "#212121",
             "alignment": "left",
+            "fontSize": 12,
             "margin": [0, 0, 0, 6]
         }
     }
