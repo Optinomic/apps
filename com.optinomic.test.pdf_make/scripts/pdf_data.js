@@ -212,7 +212,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             // Nur für "Alle Resultate"
             pdf.all.push($scope.d.templates.text(description_full));
-            pdf.all.push($scope.d.templates.spacer(6));
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
