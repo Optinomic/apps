@@ -76,12 +76,12 @@ d.bscl_create_pdf_stack = function() {
             if (groupID === 0) {
 
                 // Alle KS-Einträge
-                console.log('Klinikstichprobe', ks_alle);
-                // messungen_alle.push(z_score_grafik_b_all);
+                ks_alle.columns[1].stack.push(ks_item);
 
                 // Eintritt KS-Einträge
                 if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
-                    console.log('Klinikstichprobe', ks_eintritt);
+                    // console.log('Klinikstichprobe', ks_eintritt);
+                    ks_eintritt.columns[1].stack.push(ks_item);
                 };
             };
 
@@ -126,7 +126,20 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" },
+                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                                "alignment": "center",
+                                "text": [{
+                                    "text": "*",
+                                    "color": "#7986CB",
+                                    "fontSize": 11,
+                                    "style": "p"
+                                }, {
+                                    "text": ks_nummer.toString(),
+                                    "fontSize": 11,
+                                    "color": "#3F51B5",
+                                    "style": "p"
+                                }]
+                            },
                             { "text": messung.zscore.text_right, "alignment": "right" }
                         ],
                         "fontSize": 10,
