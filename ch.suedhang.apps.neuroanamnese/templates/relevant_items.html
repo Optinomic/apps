@@ -1,0 +1,64 @@
+include(../lib/html/optinomic/page/start.m4)
+<!--
+Anzeige von allen Faktoren, die mit ja (=2!; 1 = nein) beantwortet wurden:
+- Eintritt: d.dataMain.calculations[0].calculation_results.response.data.response.NeuroAnamEin_SQ001-SQ011 + SQ013 + Bemerkungen
+- Austritt: NeuroAnamAus_SQ001-3 +SQ006-12 + BemerkungenAus
+
+- Falls Daten vorhanden = true
+- Falls Wert = 2
+
+Folgende Hinweise sollten für die Beurteilung des TMT beachtet werden:
+
+NeuroAnamEin[SQ001] - Es bestehen zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.
+NeuroAnamEin[SQ002] - Es bestehen zum Zeitpunkt der Durchführung motorische Defizite, die zur Alltagsbehinderung führen (Parese, essentieller Tremor, Dyskinesie, etc.).
+NeuroAnamEin[SQ013] - Es bestehen zum Zeitpunkt der Durchführung andauernde leichte oder schwere Kopfschmerzen.
+NeuroAnamEin[SQ003] - Eine ZNS-Erkrankung (z.B. Enzephalitis, Meningitis, MS, Parkinson, etc.) liegt zum Zeitpunkt der Durchführung / kam in der Vergangenheit vor.
+NeuroAnamEin[SQ004] - Ein epileptischer Anfall kam mindestens einmal während eines Entzugs vor.
+NeuroAnamEin[SQ005] - Ein epileptischer Anfall kam mindestens einmal vor, jedoch nicht im Zusammenhang mit einem Entzug.
+NeuroAnamEin[SQ006] - Es bestand bereits eine Kopfverletzung mit Bewusstlosigkeit, die länger als 5 Minuten dauerte.
+NeuroAnamEin[SQ007] - Es wurde mindestens einmal ein chirurgischer Eingriff am Gehirn durchgeführt.
+NeuroAnamEin[SQ008] - In den letzten 3 Monaten vor der Erhebung wurde eine Totalanästhesie durchgeführt.
+NeuroAnamEin[SQ009] - Es liegt eine insulinpflichtige Diabetes vor.
+NeuroAnamEin[SQ010] - Es bestand bereits eine Vergiftung mit Substanzen, die toxisch auf das ZNS wirken (z.B. Butan, etc.).
+NeuroAnamEin[SQ011] - Es bestehen zerebro-vaskuläre Krankheiten (z.B. transiente ischämische Attacke („Streifung“); Hirnschlag) oder diese kamen früher vor.
+
+NeuroAnamAus[SQ001] - Es bestehen zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.
+NeuroAnamAus[SQ002] - Es bestehen zum Zeitpunkt der Durchführung motorische Defizite, die zur Alltagsbehinderung führen (Parese, essentieller Tremor, Dyskinesie, etc.).
+NeuroAnamAus[SQ003] - Es bestehen zum Zeitpunkt der Durchführung andauernde leichte oder starke Kopfschmerzen.
+NeuroAnamAus[SQ006] - Während des Aufenthaltes ereignete sich eine Kopfverletzung mit Bewusstlosigkeit, die länger als 5 Minuten dauerte.
+NeuroAnamAus[SQ007] - Während des Aufenthaltes wurde ein chirurgischer Eingriff am Gehirn durchgeführt.
+NeuroAnamAus[SQ008] - In den letzten 3 Monaten vor der Erhebung wurde eine Totalanästhesie durchgeführt.
+NeuroAnamAus[SQ009] - Eine insulinpflichtige Diabetes liegt vor.
+NeuroAnamAus[SQ010] - Es bestand bereits eine Vergiftung mit Substanzen, die toxisch auf das ZNS wirken (z.B. Butan, etc.).
+NeuroAnamAus[SQ011] - Es bestehen zerebro-vaskuläre Krankheiten (z.B. transiente ischämische Attacke („Streifung“); Hirnschlag) oder diese kamen früher vor.
+NeuroAnamAus[SQ012] - Es liegt eine schwere somatische oder psychische Erkrankungen vor oder während des Aufenthaltes geschah ein Unfall.
+
+
+
+-->
+<div>
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    {{d.dataMain.apps.current.name}}
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout-margin>
+            <p>&nbsp;</p>
+            <h3 ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">Eintritt</h3>
+            <h3 ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'" class="md-subhead">Austritt</h3>
+            <p>&nbsp;</p>
+            <h5 class="md-subhead"> Folgende Hinweise sollten für die Beurteilung des TMT vom {{Datum d. Erfassung}} beachtet werden: </h5>
+                <div ng-repeat="für alle Fragen vom Block NeuroAnamEin resp. NeuroAnamAus">
+                    <div ng-if="Wert = 2">
+                        <p>{{Anzeige des hinterlegten Texts }}</p>
+                    </div>                    
+                </div>
+                <div ng-if="falls keine Antwort > 1">
+                    <p> Es sind keine Auffälligkeiten vorhanden.
+                </div>
+
+
+include(../lib/html/optinomic/page/end.m4)
