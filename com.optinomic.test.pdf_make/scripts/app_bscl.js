@@ -15,6 +15,7 @@ d.bscl_create_pdf_stack = function() {
                 "style": "h3"
             }, {
                 "text": "Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
+                "fontSize": 10,
                 "style": "caption"
             }]
         }, {
@@ -54,11 +55,11 @@ d.bscl_create_pdf_stack = function() {
                         "text": [{
                             "text": "*",
                             "color": "#7986CB",
-                            "fontSize": 11,
+                            "fontSize": 10,
                             "style": "p"
                         }, {
                             "text": ks_nummer.toString(),
-                            "fontSize": 11,
+                            "fontSize": 10,
                             "color": "#3F51B5",
                             "style": "p"
                         }]
@@ -67,6 +68,7 @@ d.bscl_create_pdf_stack = function() {
                     "width": "*",
                     "stack": [{
                         "text": messung.ks.path_data.text_full,
+                        "fontSize": 10,
                         "style": "caption"
                     }]
                 }]
@@ -94,7 +96,7 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                            { "text": messung.zscore.text_left, "alignment": "right" }, {
                                 "alignment": "center",
                                 "text": [{
                                     "text": "*",
@@ -126,7 +128,7 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" }, {
+                            { "text": messung.zscore.text_left, "alignment": "right" }, {
                                 "alignment": "center",
                                 "text": [{
                                     "text": "*",
