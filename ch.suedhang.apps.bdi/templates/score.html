@@ -14,38 +14,20 @@ include(../lib/html/optinomic/page/start.m4)
             <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '2'" class="md-subhead">Austritt</h3>
             <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '3'" class="md-subhead">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.andererZeitpunkt}}</h3>
             <div ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score !== null" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
+                <div flex="20" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                            <p flex class="md-body-2" style="text-align: center">Kein Verdacht auf eine Depression</p>
+                </div>
                 <div flex>
                     <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].score.score" min="0" max="63" show-percent-scale="true" scale-ranges="scale_ranges" show-min-max="true"></score-threshold>
                 </div>
+                <div flex="20" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
+                            <p flex class="md-body-2" style="text-align: center">Verdacht auf eine schwere Depression</p>
+                </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start">
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score !== null">
-                    <div>
-                        <h5 class="md-subhead">Interpretation</h5>
-                        <p class="md-display-1" ng-attr-style="color:{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.result_color}}">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_de}}</p>
-                        <p class="md-caption" style="margin-top: -8px;">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_en}} (Σ{{d.dataMain.calculations[0].calculation_results[d.navigator].score.score}})</p>
-                    </div>
-                    <div>&nbsp;</div>
-                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
-                        Antworten anzeigen
-                    </md-button>
-                </div>
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
+                <div flex ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
                     <p class="md-caption">Kein BDI-Score vorhanden.</p>
-                </div>
-                <div flex="40">
-                    <h5 class="md-subhead">BDI-II Summenwerte und Interpretation</h5>
-                    <table class="table table-condensed" style="width: 80%;">
-                        <tr ng-repeat="range in scale_ranges.ranges">
-                            <td style="text-align:right !important;">
-                                <small>{{range.from}}-{{range.to}}&nbsp;</small>
-                            </td>
-                            <td>
-                                <small>{{range.result}}</small>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </md-card-content>
