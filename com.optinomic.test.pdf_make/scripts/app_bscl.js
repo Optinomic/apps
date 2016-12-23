@@ -97,22 +97,29 @@ d.bscl_create_pdf_stack = function() {
                 "columns": [{
                     "width": item.zscore_options.width,
                     "stack": [{
-                        "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" }, {
-                                "alignment": "right",
-                                "text": [{
-                                    "text": "*",
-                                    "color": "#7986CB",
-                                    "fontSize": 11,
-                                    "style": "p"
-                                }, {
-                                    "text": ks_nummer.toString(),
-                                    "fontSize": 11,
-                                    "color": "#3F51B5",
-                                    "style": "p"
-                                }]
-                            }, { "text": messung.zscore.text_right, "alignment": "right" }
-                        ],
+                        "columns": [{
+                            "width": "auto",
+                            "text": messung.zscore.text_left,
+                            "alignment": "left"
+                        }, {
+                            "width": "auto",
+                            "alignment": "center",
+                            "text": [{
+                                "text": "*",
+                                "color": "#7986CB",
+                                "fontSize": 9,
+                                "style": "p"
+                            }, {
+                                "text": ks_nummer.toString(),
+                                "fontSize": 9,
+                                "color": "#3F51B5",
+                                "style": "p"
+                            }]
+                        }, {
+                            "width": "auto",
+                            "text": messung.zscore.text_right,
+                            "alignment": "right"
+                        }],
                         "fontSize": 10,
                         "color": "#212121",
                         "margin": [0, 3, 0, 1]
