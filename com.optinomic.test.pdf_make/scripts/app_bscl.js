@@ -4,7 +4,6 @@ d.bscl_create_pdf_stack = function() {
     var item = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.bscl;
 
     // Klinikstichproben
-
     var ks = {
         "margin": [0, 6, 0, 0],
         "alignment": 'left',
@@ -43,9 +42,7 @@ d.bscl_create_pdf_stack = function() {
 
         group.data.forEach(function(messung, messungID) {
 
-
             var ks_nummer = messungID + 1;
-            ks_nummer = ks_nummer.toString();
 
             var ks_item = {
                 "alignment": 'left',
@@ -90,8 +87,7 @@ d.bscl_create_pdf_stack = function() {
             };
 
 
-            item.zscore_options.width = 351;
-            var z_score_grafik_b_all = {
+            var z_score_grafik_b = {
                 "alignment": "left",
                 "columnGap": 12,
                 "columns": [{
@@ -129,44 +125,14 @@ d.bscl_create_pdf_stack = function() {
                 }]
             };
 
-            console.log('(!?!) z_score_grafik_b_all', z_score_grafik_b_all);
+            item.zscore_options.width = 351;
+            var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
 
             item.zscore_options.width = 301;
-            var z_score_grafik_b_eintritt = {
-                "alignment": "left",
-                "columnGap": 12,
-                "columns": [{
-                    "width": item.zscore_options.width,
-                    "stack": [{
-                        "columns": [{
-                            "text": messung.zscore.text_left,
-                            "alignment": "left"
-                        }, {
-                            "width": 20,
-                            "alignment": "center",
-                            "text": [{
-                                "text": "*",
-                                "color": "#7986CB",
-                                "fontSize": 8,
-                                "style": "p"
-                            }, {
-                                "text": ks_nummer.toString(),
-                                "fontSize": 9,
-                                "color": "#3F51B5",
-                                "style": "p"
-                            }]
-                        }, {
-                            "text": messung.zscore.text_right,
-                            "alignment": "right"
-                        }],
-                        "fontSize": 10,
-                        "color": "#212121",
-                        "margin": [0, 3, 0, 1]
-                    }, {
-                        "canvas": $scope.d.templates.z_score(messung.zscore, item.zscore_options)
-                    }]
-                }]
-            };
+            var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_eintritt.columns["0"].width = item.zscore_options.width;
+
 
 
             if (group.description !== "Zusatzitems") {
