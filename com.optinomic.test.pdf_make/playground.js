@@ -352,7 +352,20 @@ var dd = {
                 "stack": [{
                     "columns": [
                         { "text": "Eintritt", "alignment": "left" },
-                        { "text": "Datum", "alignment": "right" }
+                        { "width": "auto", "text": "Datum", "alignment": "right" }, {
+                            "alignment": "right",
+                            "text": [{
+                                "text": "*",
+                                "color": "#7986CB",
+                                "fontSize": 11,
+                                "style": "p"
+                            }, {
+                                "text": "1",
+                                "fontSize": 11,
+                                "color": "#3F51B5",
+                                "style": "p"
+                            }]
+                        }
                     ],
                     "fontSize": 10,
                     "color": "#212121",
