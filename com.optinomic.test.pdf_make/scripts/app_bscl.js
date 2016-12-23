@@ -98,11 +98,11 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [{
-                            "width": "auto",
+                            "width": "*",
                             "text": messung.zscore.text_left,
                             "alignment": "left"
                         }, {
-                            "width": "auto",
+                            "width": "*",
                             "alignment": "center",
                             "text": [{
                                 "text": "*",
@@ -116,7 +116,7 @@ d.bscl_create_pdf_stack = function() {
                                 "style": "p"
                             }]
                         }, {
-                            "width": "auto",
+                            "width": "*",
                             "text": messung.zscore.text_right,
                             "alignment": "right"
                         }],
@@ -141,8 +141,8 @@ d.bscl_create_pdf_stack = function() {
                             "text": messung.zscore.text_left,
                             "alignment": "left"
                         }, {
-                            "alignment": "center",
                             "width": "*",
+                            "alignment": "center",
                             "text": [{
                                 "text": "*",
                                 "color": "#7986CB",
@@ -150,7 +150,7 @@ d.bscl_create_pdf_stack = function() {
                                 "style": "p"
                             }, {
                                 "text": ks_nummer.toString(),
-                                "fontSize": 0,
+                                "fontSize": 9,
                                 "color": "#3F51B5",
                                 "style": "p"
                             }]
