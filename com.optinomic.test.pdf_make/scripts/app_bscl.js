@@ -149,7 +149,7 @@ d.bscl_create_pdf_stack = function() {
                                 "fontSize": 9,
                                 "style": "p"
                             }, {
-                                "text": ks_nummer,
+                                "text": ks_nummer.toString(),
                                 "fontSize": 0,
                                 "color": "#3F51B5",
                                 "style": "p"
