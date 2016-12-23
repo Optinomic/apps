@@ -120,7 +120,7 @@ d.bscl_create_pdf_stack = function() {
                         "color": "#212121",
                         "margin": [0, 3, 0, 1]
                     }, {
-                        "canvas": $scope.d.templates.z_score(messung.zscore, item.zscore_options)
+                        "canvas": []
                     }]
                 }]
             };
@@ -128,6 +128,9 @@ d.bscl_create_pdf_stack = function() {
             item.zscore_options.width = 351;
             var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
             z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
+
+            console.log('z_score_grafik_b_all', z_score_grafik_b_all);
+            //$scope.d.templates.z_score(messung.zscore, item.zscore_options)
 
             item.zscore_options.width = 301;
             var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
