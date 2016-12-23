@@ -102,7 +102,7 @@ d.bscl_create_pdf_stack = function() {
                             "text": messung.zscore.text_left,
                             "alignment": "left"
                         }, {
-                            "width": "*",
+                            "width": 20,
                             "alignment": "center",
                             "text": [{
                                 "text": "*",
@@ -129,6 +129,8 @@ d.bscl_create_pdf_stack = function() {
                 }]
             };
 
+            console.log('(!?!) z_score_grafik_b_all', z_score_grafik_b_all);
+
             item.zscore_options.width = 301;
             var z_score_grafik_b_eintritt = {
                 "alignment": "left",
@@ -140,12 +142,12 @@ d.bscl_create_pdf_stack = function() {
                             "text": messung.zscore.text_left,
                             "alignment": "left"
                         }, {
-                            "width": "*",
+                            "width": 20,
                             "alignment": "center",
                             "text": [{
                                 "text": "*",
                                 "color": "#7986CB",
-                                "fontSize": 9,
+                                "fontSize": 8,
                                 "style": "p"
                             }, {
                                 "text": ks_nummer.toString(),
