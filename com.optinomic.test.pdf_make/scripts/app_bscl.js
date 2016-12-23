@@ -137,7 +137,6 @@ d.bscl_create_pdf_stack = function() {
                     "width": item.zscore_options.width,
                     "stack": [{
                         "columns": [{
-                            "width": "*",
                             "text": messung.zscore.text_left,
                             "alignment": "left"
                         }, {
@@ -155,7 +154,6 @@ d.bscl_create_pdf_stack = function() {
                                 "style": "p"
                             }]
                         }, {
-                            "width": "*",
                             "text": messung.zscore.text_right,
                             "alignment": "right"
                         }],
