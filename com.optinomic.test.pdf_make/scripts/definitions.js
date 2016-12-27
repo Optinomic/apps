@@ -90,7 +90,7 @@ $scope.getTemplates = function() {
     d.getCalculatedStamp = function(doc) {
 
         var calculated_stamp = {
-            "margin": [0, 24, 0, 24],
+            "margin": [0, 36, 0, 0],
             "alignment": "left",
             "columnGap": 12,
             "columns": [{
