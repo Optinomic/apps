@@ -42,7 +42,7 @@ $scope.getTemplates = function() {
             "width": 119,
             "image": d.images.optinomic_trademark
         }, {
-            "text": d.date + " | " + d.time;
+            "text": d.date + " | " + d.time
         }]
     };
 
