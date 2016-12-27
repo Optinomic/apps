@@ -164,6 +164,7 @@ d.isk_create_pdf_stack = function() {
                 "text": group.full,
                 "margin": [0, 3, 0, 3],
                 "alignment": "left",
+                "fontSize": 10,
                 "style": "caption"
             }, {
                 "alignment": "left",
