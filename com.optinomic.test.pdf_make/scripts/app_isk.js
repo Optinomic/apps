@@ -162,9 +162,9 @@ d.isk_create_pdf_stack = function() {
                 "style": "h3"
             }, {
                 "text": group.full,
-                "margin": [0, 6, 0, 0],
+                "margin": [0, 3, 0, 3],
                 "alignment": "left",
-                "style": "p"
+                "style": "caption"
             }, {
                 "alignment": "left",
                 "columns": [{
