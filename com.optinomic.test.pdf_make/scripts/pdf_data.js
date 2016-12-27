@@ -214,7 +214,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push($scope.d.templates.text(description_full));
 
             if (data.survey_responses.length > 0) {
-                var app_scope = $scope.d.appData[app_identifier].app_scope;
                 run.bscl();
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
@@ -381,14 +380,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push($scope.d.templates.text(description_full));
 
             if (data.survey_responses.length > 0) {
-                var app_scope = $scope.d.appData[app_identifier].app_scope;
                 run.isk();
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
         };
-
 
 
         // Run pdf_make_init when all Data loaded
