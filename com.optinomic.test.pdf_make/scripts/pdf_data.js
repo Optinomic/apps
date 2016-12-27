@@ -363,6 +363,31 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
+        // -----------------------------------------------------------------
+        // ISK
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.isk") {
+
+            var app_title = "Soziale Kompetenzen (ISK)";
+            var description = "Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.";
+            var description_full = "Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.";
+
+            pdf.all.push($scope.d.templates.horizontalLine(100));
+            pdf.all.push($scope.d.templates.heading("h2", app_title));
+            pdf.all.push($scope.d.templates.text(description));
+            pdf.eintritt = angular.copy(pdf.all);
+
+            // Nur für "Alle Resultate"
+            pdf.all.push($scope.d.templates.text(description_full));
+
+            if (data.survey_responses.length > 0) {
+                var app_scope = $scope.d.appData[app_identifier].app_scope;
+                run.isk();
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
 
 
 
