@@ -87,51 +87,6 @@ $scope.getTemplates = function() {
         return return_obj;
     };
 
-    d.getCalculatedStamp = function(doc) {
-
-        var calculated_stamp = {
-            "margin": [0, 36, 0, 0],
-            "alignment": "left",
-            "columnGap": 12,
-            "columns": [{
-                "width": 60,
-                "image": d.images.optinomic_trademark
-            }, {
-                "width": "*",
-                "stack": [{
-                    "fontSize": 12,
-                    "bold": false,
-                    "color": "#3F51B5",
-                    "alignment": "left",
-                    "margin": [0, 2, 0, 0],
-                    "text": "«" + doc.name + " | Version " + doc.version + "»"
-                }, {
-                    "fontSize": 10,
-                    "bold": false,
-                    "color": "#616161",
-                    "margin": [0, 4, 0, 0],
-                    "alignment": "left",
-                    "text": d.date + ", " + d.time + ": berechnet durch «Optinomic»"
-                }, {
-                    "fontSize": 10,
-                    "bold": false,
-                    "color": "#616161",
-                    "alignment": "left",
-                    "margin": [0, 6, 0, 0],
-                    "text": "Erkenntnisgewinn für den Behandlungsalltag:"
-                }, {
-                    "fontSize": 9,
-                    "bold": false,
-                    "color": "#3F51B5",
-                    "alignment": "left",
-                    "text": "www.optinomic.com"
-                }]
-            }]
-        };
-
-        return d.keepTogether(calculated_stamp);
-    };
-
     d.spacer = function(space) {
 
         space = space === undefined ? 10 : space;
@@ -245,7 +200,7 @@ $scope.getTemplates = function() {
                 "y1": 0,
                 "x2": length,
                 "y2": 0,
-                "lineWidth": 0.5,
+                "lineWidth": 1,
                 "lineColor": "#BDBDBD"
             }]
         };
@@ -490,6 +445,59 @@ $scope.getTemplates = function() {
 
         return zahlen_to_push;
     };
+
+
+    d.getCalculatedStamp = function(doc) {
+
+        var return_array = [];
+
+        var calculated_stamp = {
+            "margin": [0, 36, 0, 0],
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": 60,
+                "image": d.images.optinomic_trademark
+            }, {
+                "width": "*",
+                "stack": [{
+                    "fontSize": 12,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 2, 0, 0],
+                    "text": "«" + doc.name + " | Version " + doc.version + "»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
+                    "alignment": "left",
+                    "text": d.date + ", " + d.time + ": berechnet durch «Optinomic»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag:"
+                }, {
+                    "fontSize": 9,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "text": "www.optinomic.com"
+                }]
+            }]
+        };
+
+        return_array.push(d.horizontalLine(100));
+        return_array.push(calculated_stamp);
+
+        return d.keepTogether(return_array);
+    };
+
+
 
 
 
