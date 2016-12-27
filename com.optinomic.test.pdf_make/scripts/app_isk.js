@@ -1,3 +1,209 @@
+d.isk_create_pdf_stack = function() {
+
+    // Init
+    var item = $scope.d.appData["ch.suedhang.apps.isk"].app_scope.bscl;
+
+    // Klinikstichproben
+    var ks = {
+        "margin": [0, 6, 0, 0],
+        "alignment": 'left',
+        "columnGap": 12,
+        "columns": [{
+            "width": 192,
+            "stack": [{
+                "text": "Normstichprobe",
+                "style": "h3"
+            }, {
+                "text": "Die Z-Werte wurden aufgrund der Normstichprobe nach Kanning (2009) berechnet.",
+                "fontSize": 10,
+                "style": "caption"
+            }]
+        }, {
+            "width": "*",
+            "stack": [{
+                "text": "Klinikstichprobe",
+                "style": "h3"
+            }]
+        }]
+    };
+
+    var ks_alle = angular.copy(ks);
+    var ks_eintritt = angular.copy(ks);
+
+
+    // Reverse Group-Order
+    item.groups.reverse();
+
+    item.groups.forEach(function(group, groupID) {
+
+        var messungen_alle = [];
+        var messungen_eintritt = [];
+
+
+        group.data.forEach(function(messung, messungID) {
+
+            var ks_nummer = messungID + 1;
+
+            var ks_item = {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 10,
+                            "style": "p"
+                        }, {
+                            "text": ks_nummer.toString(),
+                            "fontSize": 10,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "text": messung.ks.path_data.text_full,
+                        "fontSize": 10,
+                        "style": "caption"
+                    }]
+                }]
+            };
+
+            // Klinikstichprobe nur einmalig befüllen
+            if (groupID === 0) {
+
+                // Alle KS-Einträge
+                ks_alle.columns[1].stack.push(ks_item);
+
+                // Eintritt KS-Einträge
+                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
+                    // console.log('Klinikstichprobe', ks_eintritt);
+                    ks_eintritt.columns[1].stack.push(ks_item);
+                };
+            };
+
+
+            var z_score_grafik_b = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": item.zscore_options.width,
+                    "stack": [{
+                        "columns": [{
+                            "width": "*",
+                            "text": messung.zscore.text_left,
+                            "alignment": "left"
+                        }, {
+                            "width": 20,
+                            "alignment": "center",
+                            "text": [{
+                                "text": "*",
+                                "color": "#7986CB",
+                                "fontSize": 9,
+                                "style": "p"
+                            }, {
+                                "text": ks_nummer.toString(),
+                                "fontSize": 9,
+                                "color": "#3F51B5",
+                                "style": "p"
+                            }]
+                        }, {
+                            "width": "*",
+                            "text": messung.zscore.text_right,
+                            "alignment": "right"
+                        }],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": []
+                    }]
+                }]
+            };
+
+            item.zscore_options.width = 351;
+            var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
+            z_score_grafik_b_all.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+            item.zscore_options.width = 301;
+            var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_eintritt.columns["0"].width = item.zscore_options.width;
+            z_score_grafik_b_eintritt.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+
+            if (group.description !== "Zusatzitems") {
+
+                // Alle Messungen
+                messungen_alle.push(z_score_grafik_b_all);
+
+                // Eintritt
+                if ((messung.calculation.info.mz.mz_id === 1) || (messung.calculation.info.mz.mz_id === 99)) {
+                    messungen_eintritt.push(z_score_grafik_b_eintritt);
+                };
+            };
+        });
+
+
+        // Zahlen -3 | 0 | +3
+        var z_score_zahlen = {};
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 351);
+        messungen_alle.push(z_score_zahlen);
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 301);
+        messungen_eintritt.push(z_score_zahlen);
+
+
+        var group_data_model = {
+            "stack": [{
+                "text": group.description,
+                "margin": [0, 6, 0, 0],
+                "alignment": "left",
+                "style": "h3"
+            }, {
+                "alignment": "left",
+                "columns": [{
+                    "width": "auto",
+                    "stack": []
+                }, {
+                    "width": 151,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "text": group.sub_right,
+                    "margin": [0, 12, 0, 0]
+                }],
+                "columnGap": 12,
+                "margin": [0, 0, 0, 6]
+            }]
+        };
+
+
+        var group_alle = angular.copy(group_data_model);
+        group_alle.stack[1].columns[0].stack = messungen_alle;
+
+        var group_eintritt = angular.copy(group_data_model);
+        group_eintritt.stack[1].columns[1].width = 191;
+        group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
+
+
+        // Klinikstichprobe nur einmalig speichern
+        if (groupID === 0) {
+            console.log('Klinikstichproben', ks_alle, ks_eintritt);
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+        };
+
+        // Save
+        if (group.description !== "Zusatzitems") {
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
+            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
+        };
+    });
+};
+
 d.isk = function() {
 
     $scope.d.appData["ch.suedhang.apps.isk"].app_scope.ks = {};
@@ -35,7 +241,6 @@ d.isk = function() {
     // Follow the white rabbit
     d.isk_init();
 };
-
 
 d.isk_getKSLocation = function(location_array) {
 
@@ -86,7 +291,6 @@ d.isk_getKSLocation = function(location_array) {
 
     return angular.copy(location);
 };
-
 
 d.isk_init = function() {
 
@@ -229,8 +433,9 @@ d.isk_init = function() {
         });
     });
 
-};
 
+    d.isk_create_pdf_stack();
+};
 
 d.isk_changeClinicSample = function(current_sample, groupID) {
 
