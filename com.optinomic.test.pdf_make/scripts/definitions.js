@@ -438,14 +438,28 @@ $scope.getTemplates = function() {
 
 
     d.getBase64Image = function(img) {
+
+        var fileToLoad = img;
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+            console.log("1) Converted Base64 version is ", srcData);
+            console.log("2) Converted Base64 version is ", newImage);
+        }
+        fileReader.readAsDataURL(fileToLoad);
+
         //img.setAttribute('crossOrigin', 'anonymous');
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        var dataURL = canvas.toDataURL("image/png");
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        //var canvas = document.createElement("canvas");
+        //canvas.width = img.width;
+        //canvas.height = img.height;
+        //var ctx = canvas.getContext("2d");
+        //ctx.drawImage(img, 0, 0);
+        //var dataURL = canvas.toDataURL("image/png");
+        //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     };
 
 
