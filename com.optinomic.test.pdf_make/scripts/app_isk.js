@@ -125,26 +125,23 @@ d.isk_create_pdf_stack = function() {
                 }]
             };
 
-            item.zscore_options.width = 351;
+            item.zscore_options.width = 280;
             var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
             z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
             z_score_grafik_b_all.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
 
-            item.zscore_options.width = 301;
+            item.zscore_options.width = 280;
             var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
             z_score_grafik_b_eintritt.columns["0"].width = item.zscore_options.width;
             z_score_grafik_b_eintritt.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
 
 
-            if (group.description !== "Zusatzitems") {
+            // Alle Messungen
+            messungen_alle.push(z_score_grafik_b_all);
 
-                // Alle Messungen
-                messungen_alle.push(z_score_grafik_b_all);
-
-                // Eintritt
-                if ((messung.calculation.info.mz.mz_id === 1) || (messung.calculation.info.mz.mz_id === 99)) {
-                    messungen_eintritt.push(z_score_grafik_b_eintritt);
-                };
+            // Eintritt
+            if ((messung.calculation.info.mz.mz_id === 1) || (messung.calculation.info.mz.mz_id === 99)) {
+                messungen_eintritt.push(z_score_grafik_b_eintritt);
             };
         });
 
@@ -166,7 +163,7 @@ d.isk_create_pdf_stack = function() {
             }, {
                 "alignment": "left",
                 "columns": [{
-                    "width": 75,
+                    "width": 110,
                     "fontSize": 10,
                     "alignment": "left",
                     "text": group.sub_left,
@@ -175,7 +172,7 @@ d.isk_create_pdf_stack = function() {
                     "width": "auto",
                     "stack": []
                 }, {
-                    "width": 75,
+                    "width": 110,
                     "fontSize": 10,
                     "alignment": "left",
                     "text": group.sub_right,
