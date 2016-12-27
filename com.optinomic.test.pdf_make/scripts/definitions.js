@@ -454,8 +454,8 @@ $scope.getTemplates = function() {
     };
 
     d.getFileObject = function(filePathOrUrl, cb) {
-        getFileBlob(filePathOrUrl, function(blob) {
-            cb(blobToFile(blob, 'test.jpg'));
+        d.getFileBlob(filePathOrUrl, function(blob) {
+            cb(d.blobToFile(blob, 'test.jpg'));
         });
     };
 
