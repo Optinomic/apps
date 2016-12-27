@@ -271,58 +271,231 @@ var dd = {
         }, {
             "width": 240,
             "alignment": "center",
-            "canvas": [{
-                "type": "rect",
-                "x": 0,
-                "y": 0,
-                "w": 240,
-                "h": 30,
-                "lineColor": "#E0E0E0"
+            "stack": [{
+                "width": 240,
+                "alignment": "center",
+                "canvas": [{
+                    "type": "rect",
+                    "x": 0,
+                    "y": 0,
+                    "w": 240,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 26.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 80,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 186.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 186.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 133.33,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "ellipse",
+                    "x": 93.33,
+                    "y": 15,
+                    "color": "#3F51B5",
+                    "fillOpacity": 0.5,
+                    "r1": 12,
+                    "r2": 12
+                }]
             }, {
-                "type": "polyline",
-                "lineWidth": 1,
-                "closePath": true,
-                "color": "#C5CAE9",
-                "lineColor": "#3F51B5",
-                "points": [{ x: 26.66, y: 0 }, { x: 53.33, y: 0 }, { x: 26.66, y: 30 }]
+                "width": 240,
+                "alignment": "center",
+                "canvas": [{
+                    "type": "rect",
+                    "x": 0,
+                    "y": 0,
+                    "w": 240,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 26.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 80,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 186.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 133.33,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "color": "#3F51B5",
+                    "lineColor": "#E0E0E0"
+                }]
             }, {
-                "type": "rect",
-                "x": 26.66,
-                "y": 0,
-                "w": 26.66,
-                "h": 30,
-                "lineColor": "#E0E0E0"
+                "width": 240,
+                "alignment": "center",
+                "canvas": [{
+                    "type": "rect",
+                    "x": 0,
+                    "y": 0,
+                    "w": 240,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 26.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 80,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 186.66,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 133.33,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "rect",
+                    "x": 133.33,
+                    "y": 0,
+                    "w": 26.66,
+                    "h": 30,
+                    "color": "#3F51B5",
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "ellipse",
+                    "x": 146.66,
+                    "y": 15,
+                    "color": "#FFFFFF",
+                    "fillOpacity": 0.5,
+                    "r1": 13,
+                    "r2": 13
+                }]
             }, {
-                "type": "ellipse",
-                "x": 93.33,
-                "y": 15,
-                "color": "#3F51B5",
-                "fillOpacity": 0.5,
-                "r1": 12,
-                "r2": 12
-            }, {
-                "type": "rect",
-                "x": 80,
-                "y": 0,
-                "w": 26.66,
-                "h": 30,
-                "lineColor": "#E0E0E0"
-            }, {
-                "type": "rect",
-                "x": 133.33,
-                "y": 0,
-                "w": 26.66,
-                "h": 30,
-                "color": "#3F51B5",
-                "lineColor": "#E0E0E0"
-            }, {
-                "type": "rect",
-                "x": 186.66,
-                "y": 0,
-                "w": 26.66,
-                "h": 30,
-                "lineColor": "#E0E0E0"
+                "width": 240,
+                "alignment": "center",
+                "stack": [{
+                    "alignment": "left",
+                    "columnGap": 6,
+                    "margin": [0, 3, 0, 0],
+                    "columns": [{
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "ellipse",
+                                "x": 9,
+                                "y": 7,
+                                "color": "#3F51B5",
+                                "fillOpacity": 0.5,
+                                "r1": 5,
+                                "r2": 5
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Eintritt\nDatum",
+                            "style": "caption"
+                        }]
+                    }, {
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 4,
+                                "y": 2,
+                                "w": 10,
+                                "h": 10,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "ellipse",
+                                "x": 9,
+                                "y": 7,
+                                "color": "#FFFFFF",
+                                "fillOpacity": 0.5,
+                                "r1": 4,
+                                "r2": 4
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Anderer\nDatum",
+                            "style": "caption"
+                        }]
+                    }, {
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 4,
+                                "y": 2,
+                                "w": 10,
+                                "h": 10,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Austritt\nDatum",
+                            "style": "caption"
+                        }]
+                    }]
+                }]
             }]
+
         }, {
             "width": "*",
             "alignment": "left",
@@ -331,6 +504,9 @@ var dd = {
             "color": "#212121",
             "style": "caption"
         }]
+    }, {
+        "text": "Z-Score",
+        "style": "h2"
     }, {
         "stack": [{
             "text": "Überschrift",
@@ -371,7 +547,9 @@ var dd = {
                     "color": "#212121",
                     "margin": [0, 3, 0, 1]
                 }, {
-                    canvas: [{
+                    "width": 240,
+                    "alignment": "center",
+                    "canvas": [{
                         type: "rect",
                         x: 0,
                         y: 0,
