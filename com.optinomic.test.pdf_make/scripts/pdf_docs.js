@@ -20,7 +20,7 @@ $scope.pdf_make_init = function() {
     var date = $filter("amDateFormat")(new Date(), "DD.MM.YYYY");
     doc.content.push($scope.d.templates.text(date));
 
-    var base64 = scope.d.templates.getBase64Image($scope.d.dataMain.config.data.customer.contact.logo);
+    var base64 = $scope.d.templates.getBase64Image($scope.d.dataMain.config.data.customer.contact.logo);
     consoele.log('(???) base64', base64);
 
     var img_obj = {
