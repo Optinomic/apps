@@ -161,11 +161,16 @@ d.isk_create_pdf_stack = function() {
                 "alignment": "left",
                 "style": "h3"
             }, {
+                "text": group.full,
+                "margin": [0, 6, 0, 0],
+                "alignment": "left",
+                "style": "p"
+            }, {
                 "alignment": "left",
                 "columns": [{
                     "width": 110,
                     "fontSize": 10,
-                    "alignment": "left",
+                    "alignment": "right",
                     "text": group.sub_left,
                     "margin": [0, 12, 0, 0]
                 }, {
@@ -185,10 +190,10 @@ d.isk_create_pdf_stack = function() {
 
 
         var group_alle = angular.copy(group_data_model);
-        group_alle.stack[1].columns[1].stack = messungen_alle;
+        group_alle.stack[2].columns[1].stack = messungen_alle;
 
         var group_eintritt = angular.copy(group_data_model);
-        group_eintritt.stack[1].columns[1].stack = messungen_eintritt;
+        group_eintritt.stack[2].columns[1].stack = messungen_eintritt;
 
 
         // Klinikstichprobe nur einmalig speichern
