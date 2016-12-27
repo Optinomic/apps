@@ -1,7 +1,7 @@
 d.isk_create_pdf_stack = function() {
 
     // Init
-    var item = $scope.d.appData["ch.suedhang.apps.isk"].app_scope.bscl;
+    var item = $scope.d.appData["ch.suedhang.apps.isk"].app_scope.ISK;
 
     // Klinikstichproben
     var ks = {
