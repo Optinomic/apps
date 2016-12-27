@@ -20,20 +20,6 @@ $scope.pdf_make_init = function() {
     var date = $filter("amDateFormat")(new Date(), "DD.MM.YYYY");
     doc.content.push($scope.d.templates.text(date));
 
-
-    $scope.d.templates.getFileObject($scope.d.dataMain.config.data.customer.contact.logo, function(fileObject) {
-        console.log(fileObject);
-    });
-
-    //  var base64 = $scope.d.templates.getBase64Image($scope.d.dataMain.config.data.customer.contact.logo);
-    //  consoele.log('(???) base64', base64);
-    //  
-    //  var img_obj = {
-    //      "image": base64,
-    //      "width": 200
-    //  };
-    //  doc.content.push(img_obj);
-
     var vertical_line = {
         "margin": [0, 0, 0, 0],
         "canvas": [{
@@ -142,6 +128,11 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
 
 
+    doc.content.push($scope.d.templates.calculated_stamp);
+
+
+
+
 
     // Safe
     $scope.d.docs.push(doc);
@@ -175,6 +166,8 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all);
+
+    doc.content.push($scope.d.templates.calculated_stamp);
 
     // Safe
     $scope.d.docs.push(doc);
