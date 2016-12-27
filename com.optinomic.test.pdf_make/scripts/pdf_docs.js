@@ -20,14 +20,19 @@ $scope.pdf_make_init = function() {
     var date = $filter("amDateFormat")(new Date(), "DD.MM.YYYY");
     doc.content.push($scope.d.templates.text(date));
 
-    var base64 = $scope.d.templates.getBase64Image($scope.d.dataMain.config.data.customer.contact.logo);
-    consoele.log('(???) base64', base64);
 
-    var img_obj = {
-        "image": base64,
-        "width": 200
-    };
-    doc.content.push(img_obj);
+    $scope.d.templates.getFileObject($scope.d.dataMain.config.data.customer.contact.logo, function(fileObject) {
+        console.log(fileObject);
+    });
+
+    //  var base64 = $scope.d.templates.getBase64Image($scope.d.dataMain.config.data.customer.contact.logo);
+    //  consoele.log('(???) base64', base64);
+    //  
+    //  var img_obj = {
+    //      "image": base64,
+    //      "width": 200
+    //  };
+    //  doc.content.push(img_obj);
 
     var vertical_line = {
         "margin": [0, 0, 0, 0],

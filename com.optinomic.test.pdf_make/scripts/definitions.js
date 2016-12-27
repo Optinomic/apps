@@ -437,6 +437,31 @@ $scope.getTemplates = function() {
     };
 
 
+    d.getFileBlob = function(url, cb) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.addEventListener('load', function() {
+            cb(xhr.response);
+        });
+        xhr.send();
+    };
+
+    d.blobToFile = function(blob, name) {
+        blob.lastModifiedDate = new Date();
+        blob.name = name;
+        return blob;
+    };
+
+    d.getFileObject = function(filePathOrUrl, cb) {
+        getFileBlob(filePathOrUrl, function(blob) {
+            cb(blobToFile(blob, 'test.jpg'));
+        });
+    };
+
+
+
+
     d.getBase64Image = function(img) {
 
         var fileToLoad = new File(img);
