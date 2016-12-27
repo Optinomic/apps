@@ -197,15 +197,13 @@ d.isk_create_pdf_stack = function() {
         // Klinikstichprobe nur einmalig speichern
         if (groupID === 0) {
             console.log('Klinikstichproben', ks_alle, ks_eintritt);
-            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
-            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+            $scope.d.appData["ch.suedhang.apps.isk"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
         };
 
         // Save
-        if (group.description !== "Zusatzitems") {
-            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
-            $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
-        };
+        $scope.d.appData["ch.suedhang.apps.isk"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
+        $scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
     });
 };
 
