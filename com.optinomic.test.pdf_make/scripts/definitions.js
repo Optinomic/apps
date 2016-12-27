@@ -99,23 +99,32 @@ $scope.getTemplates = function() {
             }, {
                 "width": "*",
                 "stack": [{
-                    "fontSize": 11,
+                    "fontSize": 12,
                     "bold": false,
                     "color": "#3F51B5",
                     "alignment": "left",
+                    "margin": [0, 2, 0, 0],
                     "text": "«" + doc.name + " | Version " + doc.version + "»"
                 }, {
-                    "fontSize": 11,
+                    "fontSize": 10,
                     "bold": false,
-                    "color": "#3F51B5",
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
                     "alignment": "left",
-                    "text": "Berechnet durch Optinomic @ " + d.date + ", " + d.time
+                    "text": "Berechnet durch «Optinomic» @ " + d.date + ", " + d.time
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag:"
                 }, {
                     "fontSize": 9,
                     "bold": false,
-                    "color": "#9E9E9E",
+                    "color": "#3F51B5",
                     "alignment": "left",
-                    "text": "www.optinomic.com | Echten Erkenntnisgewinn für den Behandlungsalltag"
+                    "text": "www.optinomic.com"
                 }]
             }]
         };
