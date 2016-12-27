@@ -13,6 +13,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 0,
         "name": "Notizen",
+        "version": "1.0",
         "description": "Ein leeres Blatt für Gesprächsnotizen.",
         "content": []
     };
@@ -45,6 +46,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 2,
         "name": "Patienten-Assessment",
+        "version": "1.0",
         "description": "Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.",
         "content": []
     };
@@ -88,6 +90,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 1,
         "name": "Eintritts-Assessment",
+        "version": "1.0",
         "description": "Eintritts-Assessment der Klinik Südhang.",
         "content": []
     };
@@ -128,7 +131,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
 
 
-    doc.content.push($scope.d.templates.getCalculatedStamp());
+    doc.content.push($scope.d.templates.getCalculatedStamp(doc));
 
 
 
@@ -167,7 +170,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all);
 
-    doc.content.push($scope.d.templates.getCalculatedStamp());
+    doc.content.push($scope.d.templates.getCalculatedStamp(doc));
 
     // Safe
     $scope.d.docs.push(doc);
