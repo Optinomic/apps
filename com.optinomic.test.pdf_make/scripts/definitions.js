@@ -439,7 +439,7 @@ $scope.getTemplates = function() {
 
     d.getBase64Image = function(img) {
 
-        var fileToLoad = img;
+        var fileToLoad = new File(img);
         var fileReader = new FileReader();
 
         fileReader.onload = function(fileLoadedEvent) {
