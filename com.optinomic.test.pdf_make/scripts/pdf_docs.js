@@ -128,7 +128,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
 
 
-    doc.content.push($scope.d.templates.calculated_stamp);
+    doc.content.push($scope.d.templates.getCalculatedStamp());
 
 
 
@@ -167,7 +167,7 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all);
 
-    doc.content.push($scope.d.templates.calculated_stamp);
+    doc.content.push($scope.d.templates.getCalculatedStamp());
 
     // Safe
     $scope.d.docs.push(doc);
