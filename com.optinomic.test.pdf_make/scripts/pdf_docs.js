@@ -149,6 +149,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 1,
         "name": "Austritts-Assessment",
+        "version": "1.0",
         "description": "Austritts-Assessment der Klinik Südhang.",
         "content": []
     };

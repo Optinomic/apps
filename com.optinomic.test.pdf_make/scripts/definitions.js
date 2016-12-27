@@ -111,7 +111,7 @@ $scope.getTemplates = function() {
                     "color": "#616161",
                     "margin": [0, 4, 0, 0],
                     "alignment": "left",
-                    "text": "Berechnet durch «Optinomic» @ " + d.date + ", " + d.time
+                    "text": d.date + ", " + d.time + ": berechnet durch «Optinomic»"
                 }, {
                     "fontSize": 10,
                     "bold": false,
@@ -547,7 +547,7 @@ $scope.getTemplates = function() {
             "caption": {
                 "fontSize": 11,
                 "bold": false,
-                "color": "#9E9E9E",
+                "color": "#757575",
                 "alignment": "left",
                 "margin": [0, 0, 0, 0]
             },
