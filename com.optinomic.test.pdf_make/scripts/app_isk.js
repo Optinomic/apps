@@ -80,7 +80,7 @@ d.isk_create_pdf_stack = function() {
                 ks_alle.columns[1].stack.push(ks_item);
 
                 // Eintritt KS-Einträge
-                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 4)) {
+                if ((messung.calculation.info.mz.mz_id === 1) || (messung.calculation.info.mz.mz_id === 99)) {
                     // console.log('Klinikstichprobe', ks_eintritt);
                     ks_eintritt.columns[1].stack.push(ks_item);
                 };
