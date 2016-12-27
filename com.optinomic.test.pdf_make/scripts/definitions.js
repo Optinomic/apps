@@ -438,7 +438,7 @@ $scope.getTemplates = function() {
 
 
     d.getBase64Image = function(img) {
-        img.setAttribute('crossOrigin', 'anonymous');
+        //img.setAttribute('crossOrigin', 'anonymous');
         var canvas = document.createElement("canvas");
         canvas.width = img.width;
         canvas.height = img.height;
