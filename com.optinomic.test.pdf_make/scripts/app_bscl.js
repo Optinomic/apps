@@ -267,7 +267,7 @@ d.bscl_create_pdf_stack = function() {
                 "style": "h3"
             }, {
                 "width": "*",
-                "text": "Schlechter Appetit",
+                "text": "Schlechter\nAppetit",
                 "alignment": "center",
                 "fontSize": 10,
                 "style": "caption"
