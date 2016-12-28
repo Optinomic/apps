@@ -106,13 +106,13 @@ $scope.getTemplates = function() {
             "stack": [
                 // second column consists of paragraphs
                 {
-                    "text": title,
+                    "text": " " + title,
                     "style": "title",
                     "alignment": "left"
                 }, {
                     "text": " " + subtitle,
                     "style": "caption",
-                    "margin": [0, 0, 0, 0],
+                    "margin": [3, 0, 0, 0],
                     "alignment": "left"
                 }
             ],

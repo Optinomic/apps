@@ -8,7 +8,7 @@ d.getCaseList = function() {
 
         var date = $filter("amDateFormat")(response.entity.data.filled, 'DD.MM.YYYY');
         var score = response.calculations["0"].calculation_result.score;
-        var text = "Am " + date + " wies der Patient im CASE " + score + " Punkte auf."
+        var text = " Am " + date + " wies der Patient im CASE " + score + " Punkte auf."
         list_array.push(text);
     });
 
