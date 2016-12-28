@@ -14,7 +14,7 @@ d.isk_create_pdf_stack = function() {
                 "text": "Normstichprobe",
                 "style": "h3"
             }, {
-                "text": "Die Z-Werte wurden aufgrund der Normstichprobe nach Kanning (2009) berechnet.",
+                "text": " Die Z-Werte wurden aufgrund der Normstichprobe nach Kanning (2009) berechnet.",
                 "fontSize": 10,
                 "style": "caption"
             }]
@@ -66,7 +66,7 @@ d.isk_create_pdf_stack = function() {
                 }, {
                     "width": "*",
                     "stack": [{
-                        "text": messung.ks.path_data.text_full,
+                        "text": " " + messung.ks.path_data.text_full,
                         "fontSize": 10,
                         "style": "caption"
                     }]
@@ -95,7 +95,7 @@ d.isk_create_pdf_stack = function() {
                     "stack": [{
                         "columns": [{
                             "width": "*",
-                            "text": messung.zscore.text_left,
+                            "text": " " + messung.zscore.text_left,
                             "alignment": "left"
                         }, {
                             "width": 20,
@@ -113,7 +113,7 @@ d.isk_create_pdf_stack = function() {
                             }]
                         }, {
                             "width": "*",
-                            "text": messung.zscore.text_right,
+                            "text": " " + messung.zscore.text_right,
                             "alignment": "right"
                         }],
                         "fontSize": 10,
@@ -161,7 +161,7 @@ d.isk_create_pdf_stack = function() {
                 "alignment": "left",
                 "style": "h3"
             }, {
-                "text": group.full,
+                "text": " " + group.full,
                 "margin": [0, 3, 0, 3],
                 "alignment": "left",
                 "fontSize": 10,
@@ -172,7 +172,7 @@ d.isk_create_pdf_stack = function() {
                     "width": 110,
                     "fontSize": 10,
                     "alignment": "right",
-                    "text": group.sub_left,
+                    "text": " " + group.sub_left,
                     "margin": [0, 12, 0, 0]
                 }, {
                     "width": "auto",
@@ -181,7 +181,7 @@ d.isk_create_pdf_stack = function() {
                     "width": 110,
                     "fontSize": 10,
                     "alignment": "left",
-                    "text": group.sub_right,
+                    "text": " " + group.sub_right,
                     "margin": [0, 12, 0, 0]
                 }],
                 "columnGap": 12,

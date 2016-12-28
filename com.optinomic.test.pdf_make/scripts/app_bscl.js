@@ -14,7 +14,7 @@ d.bscl_create_pdf_stack = function() {
                 "text": "Normstichprobe",
                 "style": "h3"
             }, {
-                "text": "Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
+                "text": " Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
                 "fontSize": 10,
                 "style": "caption"
             }]
@@ -66,7 +66,7 @@ d.bscl_create_pdf_stack = function() {
                 }, {
                     "width": "*",
                     "stack": [{
-                        "text": messung.ks.path_data.text_full,
+                        "text": " " + messung.ks.path_data.text_full,
                         "fontSize": 10,
                         "style": "caption"
                     }]
@@ -95,7 +95,7 @@ d.bscl_create_pdf_stack = function() {
                     "stack": [{
                         "columns": [{
                             "width": "*",
-                            "text": messung.zscore.text_left,
+                            "text": " " + messung.zscore.text_left,
                             "alignment": "left"
                         }, {
                             "width": 20,
@@ -113,7 +113,7 @@ d.bscl_create_pdf_stack = function() {
                             }]
                         }, {
                             "width": "*",
-                            "text": messung.zscore.text_right,
+                            "text": " " + messung.zscore.text_right,
                             "alignment": "right"
                         }],
                         "fontSize": 10,
@@ -172,7 +172,7 @@ d.bscl_create_pdf_stack = function() {
                     "width": 151,
                     "fontSize": 10,
                     "alignment": "left",
-                    "text": group.sub_right,
+                    "text": " " + group.sub_right,
                     "margin": [0, 12, 0, 0]
                 }],
                 "columnGap": 12,
