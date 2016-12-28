@@ -267,25 +267,25 @@ d.bscl_create_pdf_stack = function() {
                 "style": "h3"
             }, {
                 "width": "*",
-                "text": "Schlechter\nAppetit",
+                "text": " Schlechter\nAppetit ",
                 "alignment": "center",
                 "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
-                "text": "Einschlaf-schwierigkeiten",
+                "text": " Einschlaf-schwierigkeiten ",
                 "alignment": "center",
                 "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
-                "text": "Gedanken an den Tod und ans Sterben",
+                "text": " Gedanken an den Tod und ans Sterben ",
                 "alignment": "center",
                 "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
-                "text": "Schuldgefühle",
+                "text": " Schuldgefühle ",
                 "alignment": "center",
                 "fontSize": 10,
                 "style": "caption"

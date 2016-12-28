@@ -109,13 +109,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 act_info_ein_calculation.forEach(function(calc, calcID) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                    var audit_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " Punkte auf."
+                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " Punkte auf."
                     audit_text = audit_text + ", was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
                     audit_stack.stack.push(audit_text);
 
                     var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                     fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-                    fagerstroem_text = "Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "»."
+                    fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "»."
                     fagerstroem_stack.stack.push(fagerstroem_text);
                 });
 
@@ -273,12 +273,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     });
 
 
-                    var score_text = "Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
+                    var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
                     score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
 
 
                     var scales = {
                         "alignment": "center",
+                        "margin": [0, 0, 0, 6]
                         "columns": [{
                             "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
                         }, {
@@ -299,9 +300,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
                     if (mz === 1) {
-                        pdf.eintritt.push(return_obj);
+                        pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
                     };
-                    pdf.all.push(return_obj);
+                    pdf.all.push($scope.d.templates.keepTogether(return_obj));
 
                 });
 

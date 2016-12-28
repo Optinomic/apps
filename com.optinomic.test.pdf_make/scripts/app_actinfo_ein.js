@@ -4,18 +4,18 @@ d.actinfo_ein_get_problemsubstanzen_table = function(results) {
 
     var problemsubstanzen_label = {
         "answer_options": [{
-            "1": "täglich",
-            "2": "4-6 Tage pro Woche",
-            "3": "2-3 Tage pro Woche",
-            "4": "1 Tag pro Woche oder weniger",
-            "5": "kein Konsum",
-            "999": "nicht bekannt"
+            "1": " täglich",
+            "2": " 4-6 Tage pro Woche",
+            "3": " 2-3 Tage pro Woche",
+            "4": " 1 Tag pro Woche oder weniger",
+            "5": " kein Konsum",
+            "999": " nicht bekannt"
         }, {
-            "0": "0 bis 10 Zigaretten pro Tag",
-            "1": "11-20 Zigaretten pro Tag",
-            "2": "21-30 Zigaretten pro Tag",
-            "3": "31 und mehr Zigaretten pro Tag",
-            "999": "nicht bekannt"
+            "0": " 0 bis 10 Zigaretten pro Tag",
+            "1": " 11-20 Zigaretten pro Tag",
+            "2": " 21-30 Zigaretten pro Tag",
+            "3": " 31 und mehr Zigaretten pro Tag",
+            "999": " nicht bekannt"
         }]
     };
 
