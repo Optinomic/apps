@@ -317,7 +317,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         if (app_identifier === "ch.suedhang.apps.bdi") {
 
             var app_title = "Beck-Depressions-Inventar (BDI-II)";
-            var description = "Schweregrad depressiver Symptomatik im klinischen Bereich.";
+            var description = "Erfassung depressiver Symptome anhand von 21 Aussagen. Der Summenwert gibt einen Hinweis auf den möglichen Schweregrad.";
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
