@@ -222,25 +222,25 @@ d.bscl_create_pdf_stack = function() {
                 "style": "p"
             }, {
                 "width": "*",
-                "text": " " + zi.items["0"].result,
+                "text": " " + zi.items["0"].result + " ",
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": " " + zi.items["1"].result,
+                "text": " " + zi.items["1"].result + " ",
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": " " + zi.items["2"].result,
+                "text": " " + zi.items["2"].result + " ",
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": " " + zi.items["3"].result,
+                "text": " " + zi.items["3"].result + " ",
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
@@ -257,7 +257,7 @@ d.bscl_create_pdf_stack = function() {
     });
 
     var zi_data_model = {
-        "margin": [0, 6, 0, 0],
+        "margin": [0, 12, 0, 0],
         "stack": [{
             "alignment": "center",
             "columnGap": 6,
