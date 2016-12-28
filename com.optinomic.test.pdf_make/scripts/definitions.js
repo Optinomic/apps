@@ -110,9 +110,9 @@ $scope.getTemplates = function() {
                     "style": "title",
                     "alignment": "left"
                 }, {
-                    "text": subtitle,
+                    "text": " " + subtitle,
                     "style": "caption",
-                    "margin": [3, 0, 0, 0],
+                    "margin": [0, 0, 0, 0],
                     "alignment": "left"
                 }
             ],
@@ -132,7 +132,7 @@ $scope.getTemplates = function() {
 
 
         var left = {
-            "text": text_left,
+            "text": " " + text_left,
             "style": style,
             "alignment": "left"
         };
@@ -140,7 +140,7 @@ $scope.getTemplates = function() {
         var return_obj = left;
 
         var right = {
-            "text": text_right,
+            "text": " " + text_right,
             "style": style,
             "alignment": "right",
             "fontSize": 9,
@@ -167,7 +167,7 @@ $scope.getTemplates = function() {
         text = text === undefined ? "Optinomic" : text;
 
         return {
-            "text": text,
+            "text": " " + text,
             "style": "p"
         };
     };
@@ -446,7 +446,6 @@ $scope.getTemplates = function() {
         return zahlen_to_push;
     };
 
-
     d.getCalculatedStamp = function(doc) {
 
         var return_array = [];
@@ -516,15 +515,15 @@ $scope.getTemplates = function() {
         },
         "header": {
             "columns": [
-                { "text": d.patient, "alignment": "left", "style": "header" },
-                { "text": d.klinik, "alignment": "right", "style": "header" }
+                { "text": " " + d.patient, "alignment": "left", "style": "header" },
+                { "text": " " + d.klinik, "alignment": "right", "style": "header" }
             ]
         },
         "footer": function(currentPage, pageCount) {
             var obj = {
                 "columns": [
-                    { "text": $scope.d.current_doc.name, "alignment": "left", "style": "footer" },
-                    { "text": "Seite " + currentPage.toString() + "/" + pageCount.toString(), "alignment": "right", "style": "footer" }
+                    { "text": " " + $scope.d.current_doc.name, "alignment": "left", "style": "footer" },
+                    { "text": " Seite " + currentPage.toString() + "/" + pageCount.toString(), "alignment": "right", "style": "footer" }
                 ]
             };
             return obj;
@@ -536,14 +535,14 @@ $scope.getTemplates = function() {
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [40, 20, 40, 40]
+                "margin": [38, 20, 40, 40]
             },
             "footer": {
                 "fontSize": 11,
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [40, 0, 40, 40]
+                "margin": [38, 0, 40, 40]
             },
             "title": {
                 "fontSize": 36,

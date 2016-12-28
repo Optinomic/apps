@@ -306,7 +306,6 @@ d.bscl_create_pdf_stack = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(zi_data_model_all));
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(zi_data_model_eintritt));
-
 };
 
 d.bscl_create_pdf_stack_2_colums = function() {
