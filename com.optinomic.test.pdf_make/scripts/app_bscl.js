@@ -222,25 +222,25 @@ d.bscl_create_pdf_stack = function() {
                 "style": "p"
             }, {
                 "width": "*",
-                "text": zi.items["0"].result,
+                "text": " " + zi.items["0"].result,
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": zi.items["1"].result,
+                "text": " " + zi.items["1"].result,
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": zi.items["2"].result,
+                "text": " " + zi.items["2"].result,
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
-                "text": zi.items["3"].result,
+                "text": " " + zi.items["3"].result,
                 "margin": [0, 6, 0, 0],
                 "alignment": "center",
                 "style": "p"
@@ -269,21 +269,25 @@ d.bscl_create_pdf_stack = function() {
                 "width": "*",
                 "text": "Schlechter Appetit",
                 "alignment": "center",
+                "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
                 "text": "Einschlaf-schwierigkeiten",
                 "alignment": "center",
+                "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
                 "text": "Gedanken an den Tod und ans Sterben",
                 "alignment": "center",
+                "fontSize": 10,
                 "style": "caption"
             }, {
                 "width": "*",
                 "text": "Schuldgefühle",
                 "alignment": "center",
+                "fontSize": 10,
                 "style": "caption"
             }]
         }]
