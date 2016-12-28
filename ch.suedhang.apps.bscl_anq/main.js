@@ -54,6 +54,70 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.loadMainData();
 
 
+    $scope.buildZusatzitemsArray = function() {
+
+        var zusatzitems_array = [];
+        var survey_responses = $scope.d.dataMain.survey_responses;
+
+        survey_responses.forEach(function(sr, srID) {
+
+            var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
+
+            var zusatzitem = {
+                "id": srID,
+                "mz_id": sr.calculations["0"].calculation_result.info.mz.mz_id,
+                "mz_typ": sr.calculations["0"].calculation_result.info.mz.mz_typ,
+                "date": datum_messung,
+                "items": [{
+                    "id": 0,
+                    "name": "Schlechter Appetit",
+                    "result": null,
+                    "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V11]"])
+                }, {
+                    "id": 1,
+                    "name": "Einschlafschwierigkeiten",
+                    "result": null,
+                    "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V25]"])
+                }, {
+                    "id": 2,
+                    "name": "Gedanken an den Tod und ans Sterben",
+                    "result": null,
+                    "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V39]"])
+                }, {
+                    "id": 3,
+                    "name": "Schuldgefühle",
+                    "result": null,
+                    "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V52]"])
+                }]
+            };
+
+            // Interpretation
+            zusatzitem.items.forEach(function(item, itemID) {
+                item.result = "undefined";
+
+                if (item.field === 0) {
+                    item.result = "überhaupt nicht";
+                };
+                if (item.field === 1) {
+                    item.result = "ein wenig";
+                };
+                if (item.field === 2) {
+                    item.result = "ziemlich";
+                };
+                if (item.field === 3) {
+                    item.result = "stark";
+                };
+                if (item.field === 4) {
+                    item.result = "sehr stark";
+                };
+            });
+
+            zusatzitems_array.push(zusatzitem);
+        });
+
+        $scope.d.zusatzitems = zusatzitems_array;
+    };
+
 
     $scope.loadKS = function() {
 
@@ -93,6 +157,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Follow the white rabbit
         $scope.init();
+        $scope.buildZusatzitemsArray();
     };
 
 
