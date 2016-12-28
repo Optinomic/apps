@@ -45,14 +45,17 @@ var dd = {
             }, {
                 "width": "*",
                 "text": "Einschlaf-schwierigkeiten",
+                "alignment": "center",
                 "style": "caption"
             }, {
                 "width": "*",
                 "text": "Gedanken an den Tod und ans Sterben",
+                "alignment": "center",
                 "style": "caption"
             }, {
                 "width": "*",
                 "text": "Schuldgefühle",
+                "alignment": "center",
                 "style": "caption"
             }]
         }, {
@@ -67,21 +70,25 @@ var dd = {
                 "width": "*",
                 "text": "wenig",
                 "margin": [0, 6, 0, 0],
+                "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
                 "text": "stark",
                 "margin": [0, 6, 0, 0],
+                "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
                 "text": "wenig",
                 "margin": [0, 6, 0, 0],
+                "alignment": "center",
                 "style": "p"
             }, {
                 "width": "*",
                 "text": "sehr stark",
                 "margin": [0, 6, 0, 0],
+                "alignment": "center",
                 "style": "p"
             }]
         }]
@@ -178,394 +185,404 @@ var dd = {
         "text": "Stanine",
         "style": "h2"
     }, {
-        "text": "Frauen, 31 - 50 Jahre",
-        "alignment": "center",
-        "margin": [0, 6, 0, 3],
-        "color": "#212121",
-        "style": "caption"
-    }, {
-        "alignment": "left",
-        "columnGap": 12,
-        "columns": [{
-            "width": "*",
-            "alignment": "left",
-            "columnGap": 0,
-            "columns": [{
-                "text": "Wenig",
-                "alignment": "left",
-                "margin": [0, 0, 0, 0],
-                "style": "h3"
-            }, {
-                "text": "%\nStanine",
-                "fontSize": 9,
-                "alignment": "right",
-                "style": "caption"
-            }]
+        "stack": [{
+            "text": "Stress durch negative Ereignisse",
+            "style": "h3"
         }, {
-            "width": 240,
+            "text": "Frauen, 31 - 50 Jahre",
             "alignment": "center",
-            "columns": [{
-                "text": [{
-                    "text": "4\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "1",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "7\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "2",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "12\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "3",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "17\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "4",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "20\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "5",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "alignment": "center",
-                "text": [{
-                    "text": "17\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "6",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "12\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "7",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "7\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "8",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }, {
-                "text": [{
-                    "text": "4\n",
-                    "alignment": "center",
-                    "fontSize": 9,
-                    "style": "caption"
-                }, {
-                    "text": "9",
-                    "alignment": "center",
-                    "style": "p"
-                }]
-            }]
-        }, {
-            "width": "*",
-            "alignment": "left",
-            "columnGap": 0,
-            "columns": [{
-                "text": "%\nStanine",
-                "fontSize": 9,
-                "alignment": "left",
-                "style": "caption"
-            }, {
-                "text": "Viel/Ausgeprägt",
-                "margin": [0, 0, 0, 0],
-                "alignment": "right",
-                "style": "h3"
-            }]
-        }]
-    }, {
-        "alignment": "left",
-        "columnGap": 12,
-        "columns": [{
-            "width": "*",
-            "alignment": "right",
-            "text": "Dies ist die Beschreibung: Selbstzweifel und Fokus auf Negatives",
-            "margin": [0, 0, 0, 0],
+            "margin": [0, 6, 0, 3],
             "color": "#212121",
             "style": "caption"
         }, {
-            "width": 240,
-            "alignment": "center",
-            "stack": [{
-                "width": 240,
-                "alignment": "center",
-                "canvas": [{
-                    "type": "rect",
-                    "x": 0,
-                    "y": 0,
-                    "w": 240,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": "*",
+                "alignment": "left",
+                "columnGap": 0,
+                "columns": [{
+                    "width": "auto",
+                    "text": "Wenig",
+                    "alignment": "left",
+                    "margin": [0, 0, 0, 0],
+                    "fontSize": 11,
+                    "style": "h3"
                 }, {
-                    "type": "rect",
-                    "x": 26.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 80,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 133.33,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "ellipse",
-                    "x": 93.33,
-                    "y": 15,
-                    "color": "#3F51B5",
-                    "fillOpacity": 0.5,
-                    "r1": 12,
-                    "r2": 12
+                    "text": "%\nStanine",
+                    "fontSize": 9,
+                    "alignment": "right",
+                    "style": "caption"
                 }]
             }, {
                 "width": 240,
                 "alignment": "center",
-                "canvas": [{
-                    "type": "rect",
-                    "x": 0,
-                    "y": 0,
-                    "w": 240,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+                "margin": [0, 0, 0, 3],
+                "columns": [{
+                    "text": [{
+                        "text": "4\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "1",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
                 }, {
-                    "type": "rect",
-                    "x": 26.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+                    "text": [{
+                        "text": "7\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "2",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
                 }, {
-                    "type": "rect",
-                    "x": 80,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+                    "text": [{
+                        "text": "12\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "3",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
                 }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+                    "text": [{
+                        "text": "17\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "4",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
                 }, {
-                    "type": "rect",
-                    "x": 133.33,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "color": "#3F51B5",
-                    "lineColor": "#E0E0E0"
+                    "text": [{
+                        "text": "20\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "5",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
+                }, {
+                    "alignment": "center",
+                    "text": [{
+                        "text": "17\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "6",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
+                }, {
+                    "text": [{
+                        "text": "12\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "7",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
+                }, {
+                    "text": [{
+                        "text": "7\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "8",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
+                }, {
+                    "text": [{
+                        "text": "4\n",
+                        "alignment": "center",
+                        "fontSize": 9,
+                        "style": "caption"
+                    }, {
+                        "text": "9",
+                        "alignment": "center",
+                        "style": "p"
+                    }]
                 }]
             }, {
-                "width": 240,
-                "alignment": "center",
-                "canvas": [{
-                    "type": "rect",
-                    "x": 0,
-                    "y": 0,
-                    "w": 240,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
+                "width": "*",
+                "alignment": "left",
+                "columnGap": 0,
+                "columns": [{
+                    "text": "%\nStanine",
+                    "fontSize": 9,
+                    "alignment": "left",
+                    "style": "caption"
                 }, {
-                    "type": "rect",
-                    "x": 26.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 80,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 133.33,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 133.33,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "color": "#3F51B5",
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "ellipse",
-                    "x": 146.66,
-                    "y": 15,
-                    "color": "#FFFFFF",
-                    "fillOpacity": 0.5,
-                    "r1": 13,
-                    "r2": 13
+                    "width": "auto",
+                    "text": "Viel/Ausgeprägt",
+                    "margin": [0, 0, 0, 0],
+                    "alignment": "right",
+                    "fontSize": 11,
+                    "style": "h3"
                 }]
+            }]
+        }, {
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": "*",
+                "alignment": "right",
+                "text": "Dies ist die Beschreibung: Selbstzweifel und Fokus auf Negatives",
+                "margin": [0, 0, 0, 0],
+                "color": "#212121",
+                "style": "caption"
             }, {
                 "width": 240,
                 "alignment": "center",
                 "stack": [{
-                    "alignment": "left",
-                    "columnGap": 6,
-                    "margin": [0, 3, 0, 0],
-                    "columns": [{
-                        "width": "auto",
-                        "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "ellipse",
-                                "x": 9,
-                                "y": 7,
-                                "color": "#3F51B5",
-                                "fillOpacity": 0.5,
-                                "r1": 5,
-                                "r2": 5
-                            }]
-                        }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Eintritt\nDatum",
-                            "style": "caption"
-                        }]
+                    "width": 240,
+                    "alignment": "center",
+                    "canvas": [{
+                        "type": "rect",
+                        "x": 0,
+                        "y": 0,
+                        "w": 240,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
                     }, {
-                        "width": "auto",
+                        "type": "rect",
+                        "x": 26.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 80,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 186.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 186.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 133.33,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "ellipse",
+                        "x": 93.33,
+                        "y": 15,
+                        "color": "#3F51B5",
+                        "fillOpacity": 0.5,
+                        "r1": 12,
+                        "r2": 12
+                    }]
+                }, {
+                    "width": 240,
+                    "alignment": "center",
+                    "canvas": [{
+                        "type": "rect",
+                        "x": 0,
+                        "y": 0,
+                        "w": 240,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 26.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 80,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 186.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 133.33,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "color": "#3F51B5",
+                        "lineColor": "#E0E0E0"
+                    }]
+                }, {
+                    "width": 240,
+                    "alignment": "center",
+                    "canvas": [{
+                        "type": "rect",
+                        "x": 0,
+                        "y": 0,
+                        "w": 240,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 26.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 80,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 186.66,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 133.33,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "rect",
+                        "x": 133.33,
+                        "y": 0,
+                        "w": 26.66,
+                        "h": 30,
+                        "color": "#3F51B5",
+                        "lineColor": "#E0E0E0"
+                    }, {
+                        "type": "ellipse",
+                        "x": 146.66,
+                        "y": 15,
+                        "color": "#FFFFFF",
+                        "fillOpacity": 0.5,
+                        "r1": 13,
+                        "r2": 13
+                    }]
+                }, {
+                    "width": 240,
+                    "alignment": "center",
+                    "stack": [{
+                        "alignment": "left",
+                        "columnGap": 6,
+                        "margin": [0, 3, 0, 0],
                         "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 4,
-                                "y": 2,
-                                "w": 10,
-                                "h": 10,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
+                            "width": "auto",
+                            "columns": [{
+                                "width": 10,
+                                "canvas": [{
+                                    "type": "ellipse",
+                                    "x": 9,
+                                    "y": 7,
+                                    "color": "#3F51B5",
+                                    "fillOpacity": 0.5,
+                                    "r1": 5,
+                                    "r2": 5
+                                }]
                             }, {
-                                "type": "ellipse",
-                                "x": 9,
-                                "y": 7,
-                                "color": "#FFFFFF",
-                                "fillOpacity": 0.5,
-                                "r1": 4,
-                                "r2": 4
+                                "width": "*",
+                                "alignment": "left",
+                                "text": "Eintritt\nDatum",
+                                "style": "caption"
                             }]
                         }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Anderer\nDatum",
-                            "style": "caption"
-                        }]
-                    }, {
-                        "width": "auto",
-                        "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 4,
-                                "y": 2,
-                                "w": 10,
-                                "h": 10,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
+                            "width": "auto",
+                            "columns": [{
+                                "width": 10,
+                                "canvas": [{
+                                    "type": "rect",
+                                    "x": 4,
+                                    "y": 2,
+                                    "w": 10,
+                                    "h": 10,
+                                    "color": "#3F51B5",
+                                    "lineColor": "#E0E0E0"
+                                }, {
+                                    "type": "ellipse",
+                                    "x": 9,
+                                    "y": 7,
+                                    "color": "#FFFFFF",
+                                    "fillOpacity": 0.5,
+                                    "r1": 4,
+                                    "r2": 4
+                                }]
+                            }, {
+                                "width": "*",
+                                "alignment": "left",
+                                "text": "Anderer\nDatum",
+                                "style": "caption"
                             }]
                         }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Austritt\nDatum",
-                            "style": "caption"
+                            "width": "auto",
+                            "columns": [{
+                                "width": 10,
+                                "canvas": [{
+                                    "type": "rect",
+                                    "x": 4,
+                                    "y": 2,
+                                    "w": 10,
+                                    "h": 10,
+                                    "color": "#3F51B5",
+                                    "lineColor": "#E0E0E0"
+                                }]
+                            }, {
+                                "width": "*",
+                                "alignment": "left",
+                                "text": "Austritt\nDatum",
+                                "style": "caption"
+                            }]
                         }]
                     }]
                 }]
-            }]
 
-        }, {
-            "width": "*",
-            "alignment": "left",
-            "text": "Dies ist die Beschreibung: Stressbewältigung durch positives Denken",
-            "margin": [0, 0, 0, 0],
-            "color": "#212121",
-            "style": "caption"
+            }, {
+                "width": "*",
+                "alignment": "left",
+                "text": "Dies ist die Beschreibung: Stressbewältigung durch positives Denken",
+                "margin": [0, 0, 0, 0],
+                "color": "#212121",
+                "style": "caption"
+            }]
         }]
     }, {
         "text": "Z-Score",

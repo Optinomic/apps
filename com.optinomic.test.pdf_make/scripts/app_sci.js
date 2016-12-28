@@ -1,3 +1,494 @@
+d.sci_create_pdf_stack = function(group_scores) {
+
+    var group_sort = [{
+        "id": 0,
+        "title": "Stressereignisse und Syptome",
+        "description": "Hohe Ausprägungen sind nicht günstig.",
+        "name": "stress",
+        "left_text": "Wenig",
+        "left_color": "#4CAF50",
+        "right_text": "Viel/Ausgeprägt",
+        "right_color": "#F44336"
+    }, {
+        "id": 1,
+        "title": "Hilfreiche Copingstrategien",
+        "description": "Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.",
+        "name": "hilfreich",
+        "left_text": "Wenig",
+        "left_color": "#4CAF50",
+        "right_text": "Viel/Ausgeprägt",
+        "right_color": "#F44336"
+    }, {
+        "id": 2,
+        "title": "Ungünstige Copingstrategien",
+        "description": "Diese erhöhen oder verlängern die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.",
+        "name": "unguenstig",
+        "left_text": "Wenig",
+        "left_color": "#F44336",
+        "right_text": "Viel/Ausgeprägt",
+        "right_color": "#4CAF50"
+    }];
+
+    group_sort.forEach(function(group_s, groupID) {
+        var group = group_scores[group_s.name];
+
+        group.forEach(function(group_item, group_itemID) {
+
+            var group_stack = [];
+
+            group_stack.push($scope.d.templates.heading("h3", group_item.question, group_s.title));
+            group_stack.push($scope.d.templates.caption(group_s.description));
+
+            var population = {
+                "text": group_item.population.name,
+                "alignment": "center",
+                "margin": [0, 6, 0, 3],
+                "color": "#212121",
+                "style": "caption"
+            };
+            group_stack.push(population);
+
+            var top_line = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": "*",
+                    "alignment": "left",
+                    "columnGap": 0,
+                    "columns": [{
+                        "width": "auto",
+                        "text": group_s.left_text,
+                        "color": group_s.leftt_color,
+                        "alignment": "left",
+                        "margin": [0, 0, 0, 0],
+                        "fontSize": 11,
+                        "style": "h3"
+                    }, {
+                        "text": "%\nStanine",
+                        "fontSize": 9,
+                        "alignment": "right",
+                        "style": "caption"
+                    }]
+                }, {
+                    "width": 240,
+                    "alignment": "center",
+                    "margin": [0, 0, 0, 3],
+                    "columns": [{
+                        "text": [{
+                            "text": "4\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "1",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "7\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "2",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "12\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "3",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "17\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "4",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "20\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "5",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "alignment": "center",
+                        "text": [{
+                            "text": "17\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "6",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "12\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "7",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "7\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "8",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }, {
+                        "text": [{
+                            "text": "4\n",
+                            "alignment": "center",
+                            "fontSize": 9,
+                            "style": "caption"
+                        }, {
+                            "text": "9",
+                            "alignment": "center",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "alignment": "left",
+                    "columnGap": 0,
+                    "columns": [{
+                        "text": "%\nStanine",
+                        "fontSize": 9,
+                        "alignment": "left",
+                        "style": "caption"
+                    }, {
+                        "width": "auto",
+                        "text": group_s.right_text,
+                        "color": group_s.right_color,
+                        "margin": [0, 0, 0, 0],
+                        "alignment": "right",
+                        "fontSize": 11,
+                        "style": "h3"
+                    }]
+                }]
+            };
+            group_stack.push(top_line);
+
+
+            var group_messungen_container = {
+                "stack": [{
+                    "alignment": "left",
+                    "columnGap": 12,
+                    "columns": [{
+                        "width": "*",
+                        "alignment": "right",
+                        "text": group_item.sub_left,
+                        "margin": [0, 0, 0, 0],
+                        "color": "#212121",
+                        "style": "caption"
+                    }, {
+                        "width": 240,
+                        "alignment": "center",
+                        "stack": []
+                    }, {
+                        "width": "*",
+                        "alignment": "left",
+                        "text": group_item.sub_right,
+                        "margin": [0, 0, 0, 0],
+                        "color": "#212121",
+                        "style": "caption"
+                    }]
+                }]
+            };
+            group_stack.push(group_messungen_container);
+
+
+            var legende = {
+                "width": 240,
+                "alignment": "center",
+                "stack": [{
+                    "alignment": "left",
+                    "columnGap": 6,
+                    "margin": [0, 3, 0, 0],
+                    "columns": [{
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "ellipse",
+                                "x": 9,
+                                "y": 7,
+                                "color": "#3F51B5",
+                                "fillOpacity": 0.5,
+                                "r1": 5,
+                                "r2": 5
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Eintritt\nDatum",
+                            "style": "caption"
+                        }]
+                    }, {
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 4,
+                                "y": 2,
+                                "w": 10,
+                                "h": 10,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "ellipse",
+                                "x": 9,
+                                "y": 7,
+                                "color": "#FFFFFF",
+                                "fillOpacity": 0.5,
+                                "r1": 4,
+                                "r2": 4
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Anderer\nDatum",
+                            "style": "caption"
+                        }]
+                    }, {
+                        "width": "auto",
+                        "columns": [{
+                            "width": 10,
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 4,
+                                "y": 2,
+                                "w": 10,
+                                "h": 10,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }]
+                        }, {
+                            "width": "*",
+                            "alignment": "left",
+                            "text": "Austritt\nDatum",
+                            "style": "caption"
+                        }]
+                    }]
+                }]
+            };
+
+            var group_item_object = {
+                "stack": [{
+                    "alignment": "left",
+                    "columnGap": 12,
+                    "columns": [{
+                        "width": "*",
+                        "alignment": "right",
+                        "text": "Dies ist die Beschreibung: Selbstzweifel und Fokus auf Negatives",
+                        "margin": [0, 0, 0, 0],
+                        "color": "#212121",
+                        "style": "caption"
+                    }, {
+                        "width": 240,
+                        "alignment": "center",
+                        "stack": [{
+                            "width": 240,
+                            "alignment": "center",
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 0,
+                                "y": 0,
+                                "w": 240,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 26.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 80,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 186.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 186.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 133.33,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "ellipse",
+                                "x": 93.33,
+                                "y": 15,
+                                "color": "#3F51B5",
+                                "fillOpacity": 0.5,
+                                "r1": 12,
+                                "r2": 12
+                            }]
+                        }, {
+                            "width": 240,
+                            "alignment": "center",
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 0,
+                                "y": 0,
+                                "w": 240,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 26.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 80,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 186.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 133.33,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }]
+                        }, {
+                            "width": 240,
+                            "alignment": "center",
+                            "canvas": [{
+                                "type": "rect",
+                                "x": 0,
+                                "y": 0,
+                                "w": 240,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 26.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 80,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 186.66,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 133.33,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "rect",
+                                "x": 133.33,
+                                "y": 0,
+                                "w": 26.66,
+                                "h": 30,
+                                "color": "#3F51B5",
+                                "lineColor": "#E0E0E0"
+                            }, {
+                                "type": "ellipse",
+                                "x": 146.66,
+                                "y": 15,
+                                "color": "#FFFFFF",
+                                "fillOpacity": 0.5,
+                                "r1": 13,
+                                "r2": 13
+                            }]
+                        }]
+                    }, {
+                        "width": "*",
+                        "alignment": "left",
+                        "text": "Dies ist die Beschreibung: Stressbewältigung durch positives Denken",
+                        "margin": [0, 0, 0, 0],
+                        "color": "#212121",
+                        "style": "caption"
+                    }]
+                }]
+            };
+
+
+            $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(group_stack));
+
+
+        });
+
+    });
+
+
+
+};
+
+
 // -----------------------------------
 // Copy from SCI - App
 // -----------------------------------
@@ -214,7 +705,10 @@ d.groupStanineView = function() {
             var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.hilfreich[myScoreID];
 
             var obj_to_push = {
+                "date": current_messung.date,
                 "label": current_messung.label,
+                "mz_id": current_messung.mz_id,
+                "mz_typ": current_messung.mz_typ,
                 "stanine": current_score.stanine,
                 "sum_score": current_score.sum_score
             };
@@ -233,7 +727,10 @@ d.groupStanineView = function() {
             var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.stress[myScoreID];
 
             var obj_to_push = {
+                "date": current_messung.date,
                 "label": current_messung.label,
+                "mz_id": current_messung.mz_id,
+                "mz_typ": current_messung.mz_typ,
                 "stanine": current_score.stanine,
                 "sum_score": current_score.sum_score
             };
@@ -252,7 +749,10 @@ d.groupStanineView = function() {
             var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.unguenstig[myScoreID];
 
             var obj_to_push = {
+                "date": current_messung.date,
                 "label": current_messung.label,
+                "mz_id": current_messung.mz_id,
+                "mz_typ": current_messung.mz_typ,
                 "stanine": current_score.stanine,
                 "sum_score": current_score.sum_score
             };
@@ -263,6 +763,7 @@ d.groupStanineView = function() {
     });
 
 
+    d.sci_create_pdf_stack($scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores);
 
-    console.log('groupStanineView', $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores);
+    //console.log('groupStanineView', $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores);
 };
