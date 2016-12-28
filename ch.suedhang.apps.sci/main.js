@@ -436,7 +436,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // Stanine - Chart  <chart-stanine>
     // -----------------------------------
 
-
     $scope.setStanineView = function() {
 
         $scope.stanine = {};
@@ -494,21 +493,23 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Create nice Labels
-            var date = $scope.d.functions.sureDateInstance(current_response.entity.data.filled);
-            var label = $filter("amDateFormat")(date, 'DD.MM.YYYY');
-            var label_type = 'Verlauf: ';
+            var date = $filter("amDateFormat")($scope.d.functions.sureDateInstance(current_response.entity.data.filled), 'DD.MM.YYYY');
+            var label_type = 'Verlauf';
 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
-                label_type = 'Eintritt: ';
+                label_type = 'Eintritt';
             };
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
-                label_type = 'Austritt: ';
+                label_type = 'Austritt';
             };
-            label = label_type + label;
+            label = label_type + ": " + date;
 
 
             var respone_to_push = {
+                "date": date,
                 "label": label,
+                "mz_id": parseInt(current_response.entity.data.response.Erhebungszeitpunkt),
+                "mz_typ": label_type,
                 "scores": scores
             };
 
@@ -546,9 +547,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
         console.log('(!) setStanineView', $scope.stanine, $scope.d.stanine);
-
     };
-
 
     $scope.groupStanineView = function() {
 
@@ -758,8 +757,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
         console.log('groupStanineView', $scope.d.group_scores);
-
-
     };
 
 
