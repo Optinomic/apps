@@ -535,14 +535,14 @@ $scope.getTemplates = function() {
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [39, 20, 40, 40]
+                "margin": [40, 20, 40, 40]
             },
             "footer": {
                 "fontSize": 11,
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [39, 0, 40, 40]
+                "margin": [40, 0, 40, 40]
             },
             "title": {
                 "fontSize": 36,
