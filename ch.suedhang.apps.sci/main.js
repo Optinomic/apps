@@ -493,7 +493,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Create nice Labels
-            var date = $filter("amDateFormat")($scope.d.functions.sureDateInstance(current_response.entity.data.filled), 'DD.MM.YYYY');
+            var date = $filter("amDateFormat")(current_response.entity.data.filled, 'DD.MM.YYYY');
             var label_type = 'Verlauf';
 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
@@ -502,7 +502,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
                 label_type = 'Austritt';
             };
-            label = label_type + ": " + date;
+            var label = label_type + ": " + date;
 
 
             var respone_to_push = {
