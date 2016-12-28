@@ -382,6 +382,71 @@ d.bscl_create_pdf_stack_2_colums = function() {
 
 // "Copy" from App
 
+d.buildZusatzitemsArray = function() {
+
+    var zusatzitems_array = [];
+    var survey_responses = $scope.d.appData["ch.suedhang.apps.bscl_anq"].data.survey_responses;
+
+    survey_responses.forEach(function(sr, srID) {
+
+        var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
+
+        var zusatzitem = {
+            "id": srID,
+            "mz_id": sr.calculations["0"].calculation_result.info.mz.mz_id,
+            "mz_typ": sr.calculations["0"].calculation_result.info.mz.mz_typ,
+            "date": datum_messung,
+            "items": [{
+                "id": 0,
+                "name": "Schlechter Appetit",
+                "result": null,
+                "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V11]"])
+            }, {
+                "id": 1,
+                "name": "Einschlaf-schwierigkeiten",
+                "result": null,
+                "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V25]"])
+            }, {
+                "id": 2,
+                "name": "Gedanken an den Tod und ans Sterben",
+                "result": null,
+                "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V39]"])
+            }, {
+                "id": 3,
+                "name": "Schuldgefühle",
+                "result": null,
+                "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V52]"])
+            }]
+        };
+
+        // Interpretation
+        zusatzitem.items.forEach(function(item, itemID) {
+            item.result = "undefined";
+
+            if (item.field === 0) {
+                item.result = "überhaupt nicht";
+            };
+            if (item.field === 1) {
+                item.result = "ein wenig";
+            };
+            if (item.field === 2) {
+                item.result = "ziemlich";
+            };
+            if (item.field === 3) {
+                item.result = "stark";
+            };
+            if (item.field === 4) {
+                item.result = "sehr stark";
+            };
+        });
+
+        zusatzitems_array.push(zusatzitem);
+    });
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.zusatzitems = zusatzitems_array;
+};
+
+
 d.bscl = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = {};
@@ -416,6 +481,7 @@ d.bscl = function() {
 
     console.log('(✓) Klinikstichprobe geladen: ', $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks);
     // Follow the white rabbit
+    d.buildZusatzitemsArray();
     d.bscl_init();
 };
 
