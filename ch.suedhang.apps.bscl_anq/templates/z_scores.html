@@ -145,7 +145,7 @@
         </div>
     </div>
 </div>
-<div>
+<div style="margin-top: 30px;" class="grid-border-top">
     <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
         <div flex>
             <h3 class="md-headline">Zusatzitems</h3>
@@ -161,15 +161,12 @@
         <div flex="15" hide-xs show-gt-xs>
             &nbsp;
         </div>
-        <div flex="80">
+        <div flex="85">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
                 <div flex ng-repeat="beschr in d.zusatzitems['0'].items">
-                    <p class="md-body-2">{{beschr.name}}</p>
+                    <p class="md-body-1">{{beschr.name}}</p>
                 </div>
             </div>
-        </div>
-        <div flex="5" hide-xs show-gt-xs>
-            &nbsp;
         </div>
     </div>
     <div ng-repeat="zusatz in d.zusatzitems" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
@@ -177,15 +174,12 @@
             <p class="md-body-2">{{zusatz.mz_typ}}</p>
             <p class="md-body-1" style="margin-top: -12px;">{{zusatz.date}}</p>
         </div>
-        <div flex="80">
+        <div flex="85">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
                 <div flex ng-repeat="zi in zusatz.items">
                     <p class="md-body-2">{{zi.result}}</p>
                 </div>
             </div>
-        </div>
-        <div flex="5" hide-xs show-gt-xs>
-            &nbsp;
         </div>
     </div>
 </div>
