@@ -16,6 +16,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         include(scripts/app_case.js)
         include(scripts/app_tmt.js)
     	include(scripts/app_isk.js)
+    	include(scripts/app_sci.js)
     
         return d;
     };

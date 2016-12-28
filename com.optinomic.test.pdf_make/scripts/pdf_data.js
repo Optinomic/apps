@@ -388,6 +388,32 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
+        // -----------------------------------------------------------------
+        // SCI
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.sci") {
+
+            var app_title = "Soziale Kompetenzen (ISK)";
+            var description = "Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping).";
+            var description_full = "Alle Skalen erreichen überzeugende psychometrische Kennwerte. Eine detaillierte Faktorenanalyse konnte zudem die Annahme von fünf unterschiedlichen Coping-Strategien bestätigen. Weitere Untersuchungen lieferten überzeugende Belege für die Aussagekraft der Skalen. So zeigte sich, dass Personen, die unter viel Stress leiden aber trotzdem nur wenige Folgesymptome aufweisen, mehr adaptive Coping-Strategien einsetzen.";
+
+            pdf.all.push($scope.d.templates.horizontalLine(100));
+            pdf.all.push($scope.d.templates.heading("h2", app_title));
+            pdf.all.push($scope.d.templates.text(description));
+            pdf.eintritt = angular.copy(pdf.all);
+
+            // Nur für "Alle Resultate"
+            pdf.all.push($scope.d.templates.text(description_full));
+
+            if (data.survey_responses.length > 0) {
+                run.sci();
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
+
+
 
         // Run pdf_make_init when all Data loaded
         if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
