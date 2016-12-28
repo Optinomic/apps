@@ -75,7 +75,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V11]"])
                 }, {
                     "id": 1,
-                    "name": "Einschlafschwierigkeiten",
+                    "name": "Einschlaf-schwierigkeiten",
                     "result": null,
                     "field": parseInt(sr.calculations["0"].calculation_result.info.response["BSCL[sq504V25]"])
                 }, {

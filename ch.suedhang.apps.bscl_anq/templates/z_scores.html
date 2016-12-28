@@ -162,7 +162,7 @@
             &nbsp;
         </div>
         <div flex="85">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end" layout-margin>
                 <div flex ng-repeat="beschr in d.zusatzitems['0'].items">
                     <p class="md-body-1">{{beschr.name}}</p>
                 </div>
@@ -175,7 +175,7 @@
             <p class="md-body-1" style="margin-top: -12px;">{{zusatz.date}}</p>
         </div>
         <div flex="85">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start" layout-margin>
                 <div flex ng-repeat="zi in zusatz.items">
                     <p class="md-body-2">{{zi.result}}</p>
                 </div>
