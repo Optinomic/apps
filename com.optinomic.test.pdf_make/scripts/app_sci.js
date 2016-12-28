@@ -130,6 +130,10 @@ d.sci_setStanineView = function() {
 
 d.groupStanineView = function() {
 
+    var scope_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine;
+    var scope_d_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine;
+
+
     //prepare Array
 
     var input_data = angular.copy(scope_d_stanine.data_hilfreich);
