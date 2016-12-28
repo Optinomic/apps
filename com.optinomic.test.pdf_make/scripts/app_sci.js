@@ -37,12 +37,12 @@ d.sci_create_pdf_stack = function(group_scores) {
             var group_stack = [];
 
             group_stack.push($scope.d.templates.heading("h3", group_item.question, group_s.title));
-            group_stack.push($scope.d.templates.caption(group_s.description));
+            // group_stack.push($scope.d.templates.caption(group_s.description));
 
             var population = {
                 "text": group_item.population.name,
                 "alignment": "center",
-                "margin": [0, 6, 0, 3],
+                "margin": [0, 12, 0, 3],
                 "color": "#212121",
                 "style": "caption"
             };
@@ -57,8 +57,8 @@ d.sci_create_pdf_stack = function(group_scores) {
                     "columnGap": 0,
                     "columns": [{
                         "width": "auto",
-                        "text": group_s.left_text,
-                        "color": group_s.leftt_color,
+                        "text": " " + group_s.left_text,
+                        "color": group_s.left_color,
                         "alignment": "left",
                         "margin": [0, 0, 0, 0],
                         "fontSize": 11,
@@ -185,7 +185,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                         "style": "caption"
                     }, {
                         "width": "auto",
-                        "text": group_s.right_text,
+                        "text": " " + group_s.right_text,
                         "color": group_s.right_color,
                         "margin": [0, 0, 0, 0],
                         "alignment": "right",
@@ -204,7 +204,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                     "columns": [{
                         "width": "*",
                         "alignment": "right",
-                        "text": group_item.sub_left,
+                        "text": " " + group_item.sub_left,
                         "margin": [0, 0, 0, 0],
                         "color": "#212121",
                         "style": "caption"
@@ -215,7 +215,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }, {
                         "width": "*",
                         "alignment": "left",
-                        "text": group_item.sub_right,
+                        "text": " " + group_item.sub_right,
                         "margin": [0, 0, 0, 0],
                         "color": "#212121",
                         "style": "caption"
