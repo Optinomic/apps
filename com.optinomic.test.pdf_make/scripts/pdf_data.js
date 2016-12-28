@@ -279,7 +279,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var scales = {
                         "alignment": "center",
-                        "margin": [0, 0, 0, 6]
+                        "margin": [0, 0, 0, 6],
                         "columns": [{
                             "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
                         }, {
