@@ -26,7 +26,70 @@ var dd = {
         return obj;
     },
     "content": [{
-        "alignment": 'left',
+        "text": "BSCL Zusatzitems",
+        "style": "h1"
+    }, {
+        "margin": [0, 6, 0, 0],
+        "stack": [{
+            "alignment": "center",
+            "columnGap": 6,
+            "columns": [{
+                "width": 88,
+                "text": "Zusatzitems",
+                "style": "h3"
+            }, {
+                "width": "*",
+                "text": "Schlechter Appetit",
+                "alignment": "center",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Einschlaf-schwierigkeiten",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Gedanken an den Tod und ans Sterben",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Schuldgefühle",
+                "style": "caption"
+            }]
+        }, {
+            "alignment": "center",
+            "columnGap": 6,
+            "columns": [{
+                "width": 88,
+                "text": "Austritt EAS / Eintritt EP\n21.12.2016",
+                "fontSize": 11,
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": "wenig",
+                "margin": [0, 6, 0, 0],
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": "stark",
+                "margin": [0, 6, 0, 0],
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": "wenig",
+                "margin": [0, 6, 0, 0],
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": "sehr stark",
+                "margin": [0, 6, 0, 0],
+                "style": "p"
+            }]
+        }]
+    }, {
+        "text": "Stichprobe",
+        "style": "h1"
+    }, {
+        "alignment": "left",
         "columnGap": 12,
         "columns": [{
             "width": 192,
@@ -42,7 +105,7 @@ var dd = {
                 "text": "Klinikstichprobe",
                 "style": "h3"
             }, {
-                "alignment": 'left',
+                "alignment": "left",
                 "margin": [0, 0, 0, 3],
                 "columnGap": 6,
                 "columns": [{
@@ -68,7 +131,7 @@ var dd = {
                     }]
                 }]
             }, {
-                "alignment": 'left',
+                "alignment": "left",
                 "margin": [0, 0, 0, 3],
                 "columnGap": 6,
                 "columns": [{
@@ -110,7 +173,7 @@ var dd = {
                 }]
             ]
         },
-        layout: 'noBorders'
+        layout: "noBorders"
     }, {
         "text": "Stanine",
         "style": "h2"

@@ -191,7 +191,6 @@ d.bscl_create_pdf_stack = function() {
 
         // Klinikstichprobe nur einmalig speichern
         if (groupID === 0) {
-            console.log('Klinikstichproben', ks_alle, ks_eintritt);
             $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
             $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
         };
@@ -202,6 +201,108 @@ d.bscl_create_pdf_stack = function() {
             $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
         };
     });
+
+    // Zusatzitems
+
+    var zi_items = $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.zusatzitems;
+    var zi_all = [];
+    var zi_eintritt = [];
+
+    zi_items.forEach(function(zi, ziID) {
+
+        var mess_text = zi.mz_typ + "\n" + zi.date;
+
+        var zi_messung = {
+            "alignment": "center",
+            "columnGap": 6,
+            "columns": [{
+                "width": 88,
+                "text": mess_text,
+                "fontSize": 11,
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": zi.items["0"].result,
+                "margin": [0, 6, 0, 0],
+                "alignment": "center",
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": zi.items["1"].result,
+                "margin": [0, 6, 0, 0],
+                "alignment": "center",
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": zi.items["2"].result,
+                "margin": [0, 6, 0, 0],
+                "alignment": "center",
+                "style": "p"
+            }, {
+                "width": "*",
+                "text": zi.items["3"].result,
+                "margin": [0, 6, 0, 0],
+                "alignment": "center",
+                "style": "p"
+            }]
+        };
+
+        // Alle KS-Einträge
+        zi_all.push(zi_messung);
+
+        // Eintritt KS-Einträge
+        if ((zi.mz_id === 0) || (zi.mz_id === 2) || (zi.mz_id === 3) || (zi.mz_id === 4)) {
+            zi_eintritt.push(zi_messung);
+        };
+    });
+
+    var zi_data_model = {
+        "margin": [0, 6, 0, 0],
+        "stack": [{
+            "alignment": "center",
+            "columnGap": 6,
+            "columns": [{
+                "width": 88,
+                "text": "Zusatzitems",
+                "style": "h3"
+            }, {
+                "width": "*",
+                "text": "Schlechter Appetit",
+                "alignment": "center",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Einschlaf-schwierigkeiten",
+                "alignment": "center",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Gedanken an den Tod und ans Sterben",
+                "alignment": "center",
+                "style": "caption"
+            }, {
+                "width": "*",
+                "text": "Schuldgefühle",
+                "alignment": "center",
+                "style": "caption"
+            }]
+        }]
+    };
+
+    var zi_data_model_all = angular.copy(zi_data_model);
+    zi_all.forEach(function(zi, ziID) {
+        zi_data_model_all.stack.push(zi);
+    });
+
+    var zi_data_model_eintritt = angular.copy(zi_data_model);
+    zi_eintritt.forEach(function(zi, ziID) {
+        zi_data_model_eintritt.stack.push(zi);
+    });
+
+
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all.push($scope.d.templates.keepTogether(zi_data_model_all));
+    $scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt.push($scope.d.templates.keepTogether(zi_data_model_eintritt));
+
 };
 
 d.bscl_create_pdf_stack_2_colums = function() {
