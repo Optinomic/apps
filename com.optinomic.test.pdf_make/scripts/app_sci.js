@@ -123,6 +123,11 @@ d.sci_setStanineView = function() {
         "start_result": scope_stanine.data.length - 1
     };
 
+
+    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine = scope_stanine;
+    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine = scope_d_stanine;
+
+
     console.log('(!) setStanineView', scope_stanine, scope_d_stanine);
 
     d.groupStanineView();
