@@ -19,10 +19,10 @@ $scope.getTemplates = function() {
 
     d.patient = $scope.d.dataMain.patient.data.ansprache + " " + $scope.d.dataMain.patient.data.last_name + " " + $scope.d.dataMain.patient.data.first_name + " (" + $scope.d.dataMain.patient.data.extras.birthday_age + ")";
 
-    d.patient_adress = "";
-    d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.ansprache + "\n";
+    d.patient_adress = " ";
+    d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.ansprache + "\n ";
     d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.last_name + " " + $scope.d.dataMain.patient.data.first_name + "\n";
-    d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.address1 + "\n";
+    d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.address1 + "\n ";
     d.patient_adress = d.patient_adress + $scope.d.dataMain.patient.data.zip_code + " " + $scope.d.dataMain.patient.data.city;
 
 
@@ -41,7 +41,7 @@ $scope.getTemplates = function() {
     d.patientAddress_clinicLogo = {
         "alignment": "left",
         "columns": [{
-            "text": d.patient_adress
+            "text": " " + d.patient_adress
         }, {
             "width": 220,
             "image": d.images.suedhang
@@ -535,14 +535,14 @@ $scope.getTemplates = function() {
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [38, 20, 40, 40]
+                "margin": [39, 20, 40, 40]
             },
             "footer": {
                 "fontSize": 11,
                 "bold": false,
                 "color": "#9E9E9E",
                 "alignment": "left",
-                "margin": [38, 0, 40, 40]
+                "margin": [39, 0, 40, 40]
             },
             "title": {
                 "fontSize": 36,
