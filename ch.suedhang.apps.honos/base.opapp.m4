@@ -36,7 +36,7 @@ include(style.css)
 [survey]
 id = HoNOS
 type = lime
-responsibility = lead_therapist
+responsibility = Admin
 name = HoNOS
 host = default
 survey_id = 927351
@@ -49,7 +49,7 @@ min_lastpage = 2
 [survey]
 id = HoNOS_Verlauf
 type = lime
-responsibility = lead_therapist
+responsibility = Admin
 name = HoNOS Verlauf
 host = default
 survey_id = 912771
@@ -62,7 +62,16 @@ min_lastpage = 2
 [event activation]
 type = on_activation
 due_after = 259200
-overdue = ignore
+overdue = send_reminder_once
+description = HoNOS Fragebogen
+survey = HoNOS
+
+[event before_exit]
+type = before_exit
+days = 3
+time = 00:00
+due_after = 259200
+overdue = send_reminder_once
 description = HoNOS Fragebogen
 survey = HoNOS
 
@@ -70,7 +79,7 @@ survey = HoNOS
 type = on_activation
 due_after = 259200
 overdue = ignore
-description = HoNOS - Verlauf Fragebogen
+description = HoNOS - Verlaufsfragebogen
 survey = HoNOS_Verlauf
 
 
