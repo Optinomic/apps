@@ -112,7 +112,7 @@ $scope.getTemplates = function() {
                 }, {
                     "text": " " + subtitle,
                     "style": "caption",
-                    "margin": [3, 0, 0, 0],
+                    "margin": [1, 0, 0, 0],
                     "alignment": "left"
                 }
             ],

@@ -81,8 +81,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
                         var substanz = [{
                             "text": [
-                                { "text": ps.substanz + ": ", "bold": true, "fontSize": 11 },
-                                { "text": ps.label, "bold": false, "fontSize": 11 }
+                                { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
+                                { "text": " " + ps.label, "bold": false, "fontSize": 11 }
                             ],
                             "margin": [0, 3, 0, 3]
                         }];
