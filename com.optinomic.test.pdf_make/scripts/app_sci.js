@@ -40,7 +40,7 @@ d.sci_create_pdf_stack = function(group_scores) {
             // group_stack.push($scope.d.templates.caption(group_s.description));
 
             var population = {
-                "text": group_item.population.name,
+                "text": " " + group_item.population.name,
                 "alignment": "center",
                 "margin": [0, 0, 0, 3],
                 "color": "#212121",
@@ -259,6 +259,12 @@ d.sci_create_pdf_stack = function(group_scores) {
                 };
 
                 messungen_alle.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
+                legende_alle.push(legende_entry);
+
+                if (data.mz_typ === "Eintritt") {
+                    messungen_eintritt.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
+                    legende_eintritt.push(legende_entry);
+                };
 
             });
 
@@ -290,9 +296,11 @@ d.sci_create_pdf_stack = function(group_scores) {
 
             var alle_messungen_container = angular.copy(group_messungen_container);
             alle_messungen_container.stack["0"].columns[1].stack.push(messungen_alle);
+            alle_messungen_container.stack["0"].columns[1].stack.push(legende_alle);
 
             var eintritt_messungen_container = angular.copy(group_messungen_container);
             eintritt_messungen_container.stack["0"].columns[1].stack.push(messungen_eintritt);
+            eintritt_messungen_container.stack["0"].columns[1].stack.push(legende_eintritt);
 
 
             var alle_group_stack = angular.copy(group_stack);
@@ -300,259 +308,6 @@ d.sci_create_pdf_stack = function(group_scores) {
 
             var eintritt_group_stack = angular.copy(group_stack);
             eintritt_group_stack.push(eintritt_messungen_container);
-
-
-            var legende = {
-                "width": 240,
-                "alignment": "center",
-                "stack": [{
-                    "alignment": "left",
-                    "columnGap": 6,
-                    "margin": [0, 3, 0, 0],
-                    "columns": [{
-                        "width": "auto",
-                        "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "ellipse",
-                                "x": 9,
-                                "y": 7,
-                                "color": "#3F51B5",
-                                "fillOpacity": 0.5,
-                                "r1": 5,
-                                "r2": 5
-                            }]
-                        }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Eintritt\nDatum",
-                            "style": "caption"
-                        }]
-                    }, {
-                        "width": "auto",
-                        "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 4,
-                                "y": 2,
-                                "w": 10,
-                                "h": 10,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "ellipse",
-                                "x": 9,
-                                "y": 7,
-                                "color": "#FFFFFF",
-                                "fillOpacity": 0.5,
-                                "r1": 4,
-                                "r2": 4
-                            }]
-                        }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Anderer\nDatum",
-                            "style": "caption"
-                        }]
-                    }, {
-                        "width": "auto",
-                        "columns": [{
-                            "width": 10,
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 4,
-                                "y": 2,
-                                "w": 10,
-                                "h": 10,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
-                            }]
-                        }, {
-                            "width": "*",
-                            "alignment": "left",
-                            "text": "Austritt\nDatum",
-                            "style": "caption"
-                        }]
-                    }]
-                }]
-            };
-
-            var group_item_object = {
-                "stack": [{
-                    "alignment": "left",
-                    "columnGap": 12,
-                    "columns": [{
-                        "width": "*",
-                        "alignment": "right",
-                        "text": "Dies ist die Beschreibung: Selbstzweifel und Fokus auf Negatives",
-                        "margin": [0, 0, 0, 0],
-                        "color": "#212121",
-                        "style": "caption"
-                    }, {
-                        "width": 240,
-                        "alignment": "center",
-                        "stack": [{
-                            "width": 240,
-                            "alignment": "center",
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 0,
-                                "y": 0,
-                                "w": 240,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 26.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 80,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 186.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 186.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 133.33,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "ellipse",
-                                "x": 93.33,
-                                "y": 15,
-                                "color": "#3F51B5",
-                                "fillOpacity": 0.5,
-                                "r1": 12,
-                                "r2": 12
-                            }]
-                        }, {
-                            "width": 240,
-                            "alignment": "center",
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 0,
-                                "y": 0,
-                                "w": 240,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 26.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 80,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 186.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 133.33,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
-                            }]
-                        }, {
-                            "width": 240,
-                            "alignment": "center",
-                            "canvas": [{
-                                "type": "rect",
-                                "x": 0,
-                                "y": 0,
-                                "w": 240,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 26.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 80,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 186.66,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 133.33,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "rect",
-                                "x": 133.33,
-                                "y": 0,
-                                "w": 26.66,
-                                "h": 30,
-                                "color": "#3F51B5",
-                                "lineColor": "#E0E0E0"
-                            }, {
-                                "type": "ellipse",
-                                "x": 146.66,
-                                "y": 15,
-                                "color": "#FFFFFF",
-                                "fillOpacity": 0.5,
-                                "r1": 13,
-                                "r2": 13
-                            }]
-                        }]
-                    }, {
-                        "width": "*",
-                        "alignment": "left",
-                        "text": "Dies ist die Beschreibung: Stressbewältigung durch positives Denken",
-                        "margin": [0, 0, 0, 0],
-                        "color": "#212121",
-                        "style": "caption"
-                    }]
-                }]
-            };
-
 
 
             $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(alle_group_stack));
@@ -716,6 +471,13 @@ d.groupStanineView = function() {
 
     var prp = input_data[0].scores;
     prp.forEach(function(current_score, myID) {
+
+        var population = current_score.population.name;
+        population = population.replace("Maenner", "Männer");
+        population = population.replace("Aelter", "Älter");
+        population = population.replace("Juenger", "Jünger");
+
+
         var obj_to_push = {
             "name": current_score.name,
             "question": current_score.question,

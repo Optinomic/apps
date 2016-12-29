@@ -503,12 +503,55 @@ $scope.getTemplates = function() {
 
         var eintritt = {
             "type": "ellipse",
-            "x": 93.33,
+            "x": (step_1 * (stanine - 1)) + (step_1 / 2),
             "y": 15,
             "color": "#3F51B5",
             "fillOpacity": 0.5,
             "r1": 12,
             "r2": 12
+        };
+
+        var austritt = {
+            "type": "rect",
+            "x": step_1 * (stanine - 1),
+            "y": 0,
+            "w": step_1,
+            "h": 30,
+            "color": "#3F51B5",
+            "lineColor": "#E0E0E0"
+        };
+
+        var anderer_1 = {
+            "type": "rect",
+            "x": step_1 * (stanine - 1),
+            "y": 0,
+            "w": step_1,
+            "h": 30,
+            "color": "#3F51B5",
+            "lineColor": "#E0E0E0"
+        };
+
+        var anderer_2 = {
+            "type": "ellipse",
+            "x": (step_1 * (stanine - 1)) + (step_1 / 2),
+            "y": 15,
+            "color": "#FFFFFF",
+            "fillOpacity": 0.5,
+            "r1": 13,
+            "r2": 13
+        };
+
+        if (mz === "Eintritt") {
+            stanine.canvas.push(eintritt);
+        };
+
+        if (mz === "Austritt") {
+            stanine.canvas.push(austritt);
+        };
+
+        if ((mz !== "Eintritt") && (mz !== "Austritt")) {
+            stanine.canvas.push(anderer_1);
+            stanine.canvas.push(anderer_2);
         };
 
 
