@@ -295,13 +295,26 @@ d.sci_create_pdf_stack = function(group_scores) {
                 }]
             };
 
+            var legende_container = {
+                "width": 240,
+                "alignment": "center",
+                "stack": [{
+                    "alignment": "left",
+                    "columnGap": 3,
+                    "margin": [0, 3, 0, 0],
+                    "columns": []
+                }]
+            };
+
             var alle_messungen_container = angular.copy(group_messungen_container);
             alle_messungen_container.stack["0"].columns[1].stack.push(messungen_alle);
-            alle_messungen_container.stack["0"].columns[1].stack.push(legende_alle);
+            var alle_legende_container = angular.copy(legende_container);
+            alle_legende_container.stack["0"].columns = legende_alle;
 
             var eintritt_messungen_container = angular.copy(group_messungen_container);
             eintritt_messungen_container.stack["0"].columns[1].stack.push(messungen_eintritt);
-            eintritt_messungen_container.stack["0"].columns[1].stack.push(legende_eintritt);
+            var eintritt_legende_container = angular.copy(legende_container);
+            eintritt_legende_container.stack["0"].columns = legende_eintritt;
 
 
             var alle_group_stack = angular.copy(group_stack);
