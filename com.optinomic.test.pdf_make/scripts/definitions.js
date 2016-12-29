@@ -577,27 +577,27 @@ $scope.getTemplates = function() {
                     "color": "#3F51B5",
                     "alignment": "left",
                     "margin": [0, 2, 0, 0],
-                    "text": "«" + doc.name + " | Version " + doc.version + "»"
+                    "text": " «" + doc.name + " | Version " + doc.version + "»"
                 }, {
                     "fontSize": 10,
                     "bold": false,
                     "color": "#616161",
                     "margin": [0, 4, 0, 0],
                     "alignment": "left",
-                    "text": d.date + ", " + d.time + ": berechnet durch «Optinomic»"
-                }, {
-                    "fontSize": 10,
-                    "bold": false,
-                    "color": "#616161",
-                    "alignment": "left",
-                    "margin": [0, 6, 0, 0],
-                    "text": "Erkenntnisgewinn für den Behandlungsalltag:"
+                    "text": " Berechnet durch «Optinomic» am " + d.date + " um " + d.time + " Uhr."
                 }, {
                     "fontSize": 9,
                     "bold": false,
                     "color": "#3F51B5",
                     "alignment": "left",
-                    "text": "www.optinomic.com"
+                    "margin": [0, 6, 0, 0],
+                    "text": " " + "www.optinomic.com"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "text": " " + "Erkenntnisgewinn für den Behandlungsalltag:"
                 }]
             }]
         };
