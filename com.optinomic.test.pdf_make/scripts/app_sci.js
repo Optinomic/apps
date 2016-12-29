@@ -300,7 +300,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                 "alignment": "center",
                 "stack": [{
                     "alignment": "left",
-                    "columnGap": 3,
+                    "columnGap": 5,
                     "margin": [0, 3, 0, 0],
                     "columns": []
                 }]
