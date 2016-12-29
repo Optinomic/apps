@@ -253,6 +253,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }, {
                         "width": "*",
                         "alignment": "left",
+                        "fontSize": 9,
                         "text": data.mz_typ + "\n" + data.date,
                         "style": "caption"
                     }]

@@ -453,6 +453,7 @@ $scope.getTemplates = function() {
         width = width === undefined ? 240 : parseInt(width);
 
 
+
         var step_1 = width / 9;
 
 
@@ -503,10 +504,9 @@ $scope.getTemplates = function() {
 
         var eintritt = {
             "type": "ellipse",
-            "x": (step_1 * (stanine - 1)) + (step_1 / 2),
+            "x": step_1 * (stanine - 1) + step_1 / 2,
             "y": 15,
             "color": "#3F51B5",
-            "fillOpacity": 0.5,
             "r1": 12,
             "r2": 12
         };
@@ -533,25 +533,29 @@ $scope.getTemplates = function() {
 
         var anderer_2 = {
             "type": "ellipse",
-            "x": (step_1 * (stanine - 1)) + (step_1 / 2),
+            "x": step_1 * (stanine - 1) + step_1 / 2,
             "y": 15,
             "color": "#FFFFFF",
-            "fillOpacity": 0.5,
             "r1": 13,
             "r2": 13
         };
 
         if (mz === "Eintritt") {
             stanine.canvas.push(eintritt);
+            console.log('Eintritt', stanine, mz);
         };
 
         if (mz === "Austritt") {
             stanine.canvas.push(austritt);
+            console.log('Austritt', stanine, mz);
+
         };
 
         if ((mz !== "Eintritt") && (mz !== "Austritt")) {
             stanine.canvas.push(anderer_1);
             stanine.canvas.push(anderer_2);
+            console.log('Anderer', stanine, mz);
+
         };
 
 
