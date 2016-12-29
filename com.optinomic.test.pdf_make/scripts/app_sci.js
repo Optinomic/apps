@@ -310,11 +310,15 @@ d.sci_create_pdf_stack = function(group_scores) {
             alle_messungen_container.stack["0"].columns[1].stack.push(messungen_alle);
             var alle_legende_container = angular.copy(legende_container);
             alle_legende_container.stack["0"].columns = legende_alle;
+            alle_messungen_container.stack["0"].columns[1].stack.push(alle_legende_container);
+
 
             var eintritt_messungen_container = angular.copy(group_messungen_container);
             eintritt_messungen_container.stack["0"].columns[1].stack.push(messungen_eintritt);
             var eintritt_legende_container = angular.copy(legende_container);
             eintritt_legende_container.stack["0"].columns = legende_eintritt;
+            eintritt_messungen_container.stack["0"].columns[1].stack.push(eintritt_legende_container);
+
 
 
             var alle_group_stack = angular.copy(group_stack);
