@@ -196,6 +196,71 @@ d.sci_create_pdf_stack = function(group_scores) {
             };
             group_stack.push(top_line);
 
+            var messungen_alle = [];
+            var legende_alle = [];
+            var messungen_eintritt = [];
+            var legende_eintritt = [];
+
+            group_item.data.forEach(function(data, dataID) {
+
+                var legende_typ = [{
+                    "type": "rect",
+                    "x": 4,
+                    "y": 2,
+                    "w": 10,
+                    "h": 10,
+                    "color": "#3F51B5",
+                    "lineColor": "#E0E0E0"
+                }, {
+                    "type": "ellipse",
+                    "x": 9,
+                    "y": 7,
+                    "color": "#FFFFFF",
+                    "fillOpacity": 0.5,
+                    "r1": 4,
+                    "r2": 4
+                }];
+
+                if (data.mz_typ === "Eintritt") {
+                    legende_typ = [{
+                        "type": "ellipse",
+                        "x": 9,
+                        "y": 7,
+                        "color": "#3F51B5",
+                        "fillOpacity": 0.5,
+                        "r1": 5,
+                        "r2": 5
+                    }];
+                };
+
+                if (data.mz_typ === "Austritt") {
+                    legende_typ = [{
+                        "type": "rect",
+                        "x": 4,
+                        "y": 2,
+                        "w": 10,
+                        "h": 10,
+                        "color": "#3F51B5",
+                        "lineColor": "#E0E0E0"
+                    }];
+                };
+
+                var legende_entry = {
+                    "width": "auto",
+                    "columns": [{
+                        "width": 10,
+                        "canvas": legende_typ
+                    }, {
+                        "width": "*",
+                        "alignment": "left",
+                        "text": data.mz_typ + "\n" + data.date,
+                        "style": "caption"
+                    }]
+                };
+
+                messungen_alle.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
+
+            });
 
             var group_messungen_container = {
                 "stack": [{
@@ -222,10 +287,19 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }]
                 }]
             };
-            console.log('(???) group_messungen_container', group_item, group_messungen_container);
-            //$scope.d.templates.stanine(stanine, mz, width)
 
-            group_stack.push(group_messungen_container);
+            var alle_messungen_container = angular.copy(group_messungen_container);
+            alle_messungen_container.stack["0"].columns[1].stack.push(messungen_alle);
+
+            var eintritt_messungen_container = angular.copy(group_messungen_container);
+            eintritt_messungen_container.stack["0"].columns[1].stack.push(messungen_eintritt);
+
+
+            var alle_group_stack = angular.copy(group_stack);
+            alle_group_stack.push(alle_messungen_container);
+
+            var eintritt_group_stack = angular.copy(group_stack);
+            eintritt_group_stack.push(eintritt_messungen_container);
 
 
             var legende = {
@@ -481,7 +555,8 @@ d.sci_create_pdf_stack = function(group_scores) {
 
 
 
-            $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(group_stack));
+            $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(alle_group_stack));
+            $scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt.push($scope.d.templates.keepTogether(eintritt_group_stack));
 
 
         });
