@@ -131,6 +131,9 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt);
 
+    doc.content.push($scope.d.templates.spacer(12));
+    doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt);
+
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.getCalculatedStamp(doc));
 
