@@ -446,6 +446,76 @@ $scope.getTemplates = function() {
         return zahlen_to_push;
     };
 
+    d.stanine = function(stanine, mz, width) {
+
+        stanine = stanine === undefined ? null : stanine;
+        mz = mz === undefined ? null : mz;
+        width = width === undefined ? 240 : parseInt(width);
+
+
+        var step_1 = width / 9;
+
+
+        var canvas = [];
+
+
+        var stanine = {
+            "width": width,
+            "alignment": "center",
+            "canvas": [{
+                "type": "rect",
+                "x": 0,
+                "y": 0,
+                "w": width,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": step_1,
+                "y": 0,
+                "w": step_1,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": step_1 * 3,
+                "y": 0,
+                "w": step_1,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": step_1 * 5,
+                "y": 0,
+                "w": step_1,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }, {
+                "type": "rect",
+                "x": step_1 * 7,
+                "y": 0,
+                "w": step_1,
+                "h": 30,
+                "lineColor": "#E0E0E0"
+            }]
+        };
+
+
+        var eintritt = {
+            "type": "ellipse",
+            "x": 93.33,
+            "y": 15,
+            "color": "#3F51B5",
+            "fillOpacity": 0.5,
+            "r1": 12,
+            "r2": 12
+        };
+
+
+        return stanine;
+
+    };
+
     d.getCalculatedStamp = function(doc) {
 
         var return_array = [];

@@ -35,14 +35,14 @@ d.sci_create_pdf_stack = function(group_scores) {
         group.forEach(function(group_item, group_itemID) {
 
             var group_stack = [];
-            group_stack.push($scope.d.templates.spacer(6));
+            group_stack.push($scope.d.templates.spacer(12));
             group_stack.push($scope.d.templates.heading("h3", group_item.question, group_s.title));
             // group_stack.push($scope.d.templates.caption(group_s.description));
 
             var population = {
                 "text": group_item.population.name,
                 "alignment": "center",
-                "margin": [0, 6, 0, 3],
+                "margin": [0, 0, 0, 3],
                 "color": "#212121",
                 "style": "caption"
             };
@@ -196,62 +196,6 @@ d.sci_create_pdf_stack = function(group_scores) {
             };
             group_stack.push(top_line);
 
-            var stanine = {
-                "width": 240,
-                "alignment": "center",
-                "canvas": [{
-                    "type": "rect",
-                    "x": 0,
-                    "y": 0,
-                    "w": 240,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 26.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 80,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 186.66,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "rect",
-                    "x": 133.33,
-                    "y": 0,
-                    "w": 26.66,
-                    "h": 30,
-                    "lineColor": "#E0E0E0"
-                }, {
-                    "type": "ellipse",
-                    "x": 93.33,
-                    "y": 15,
-                    "color": "#3F51B5",
-                    "fillOpacity": 0.5,
-                    "r1": 12,
-                    "r2": 12
-                }]
-            };
-
 
             var group_messungen_container = {
                 "stack": [{
@@ -278,6 +222,9 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }]
                 }]
             };
+            console.log('(???) group_messungen_container', group_item, group_messungen_container);
+            //$scope.d.templates.stanine(stanine, mz, width)
+
             group_stack.push(group_messungen_container);
 
 
@@ -532,7 +479,6 @@ d.sci_create_pdf_stack = function(group_scores) {
                 }]
             };
 
-            console.log('(???) group_item_object', group_item_object);
 
 
             $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(group_stack));
