@@ -597,13 +597,15 @@ $scope.getTemplates = function() {
                     "bold": false,
                     "color": "#616161",
                     "alignment": "left",
-                    "text": " " + "Erkenntnisgewinn für den Behandlungsalltag:"
+                    "text": " " + "Erkenntnisgewinn für den Behandlungsalltag"
                 }]
             }]
         };
 
-        return_array.push(d.horizontalLine(100));
+        return_array.push(d.horizontalLine(61.8));
         return_array.push(calculated_stamp);
+        return_array.push(d.horizontalLine(61.8));
+
 
         return d.keepTogether(return_array);
     };
