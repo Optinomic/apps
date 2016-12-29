@@ -563,7 +563,7 @@ $scope.getTemplates = function() {
         var return_array = [];
 
         var calculated_stamp = {
-            "margin": [0, 36, 0, 0],
+            "margin": [0, 36, 0, 36],
             "alignment": "left",
             "columnGap": 12,
             "columns": [{
