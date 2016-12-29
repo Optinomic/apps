@@ -460,7 +460,7 @@ $scope.getTemplates = function() {
         var canvas = [];
 
 
-        var stanine = {
+        var return_stanine = {
             "width": width,
             "alignment": "center",
             "canvas": [{
@@ -541,25 +541,20 @@ $scope.getTemplates = function() {
         };
 
         if (mz === "Eintritt") {
-            stanine.canvas.push(eintritt);
-            console.log('Eintritt', stanine, mz);
+            return_stanine.canvas.push(eintritt);
         };
 
         if (mz === "Austritt") {
-            stanine.canvas.push(austritt);
-            console.log('Austritt', stanine, mz);
-
+            return_stanine.canvas.push(austritt);
         };
 
         if ((mz !== "Eintritt") && (mz !== "Austritt")) {
-            stanine.canvas.push(anderer_1);
-            stanine.canvas.push(anderer_2);
-            console.log('Anderer', stanine, mz);
-
+            return_stanine.canvas.push(anderer_1);
+            return_stanine.canvas.push(anderer_2);
         };
 
 
-        return stanine;
+        return return_stanine;
 
     };
 
