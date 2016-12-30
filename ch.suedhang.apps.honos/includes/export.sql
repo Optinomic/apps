@@ -20,7 +20,7 @@ SELECT
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
   ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
-  ((cast(response AS json))->>'q402V00') as datum_erhebung_honos,
+  TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD') as datum_erhebung_honos,
   ((cast(response AS json))->>'H1[402V01]') as honos_h1,
   ((cast(response AS json))->>'H1[402V02]') as honos_h2,
   ((cast(response AS json))->>'H1[402V03]') as honos_h3,
@@ -34,9 +34,7 @@ SELECT
   ((cast(response AS json))->>'H2[402V11]') as honos_h9,
   ((cast(response AS json))->>'H2[402V12]') as honos_h10,
   ((cast(response AS json))->>'H2[402V13]') as honos_h11,
-  ((cast(response AS json))->>'H2[402V14]') as honos_h12,
-  TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD HH24:MI:SS')  as Datum_Datumsformat
-
+  ((cast(response AS json))->>'H2[402V14]') as honos_h12
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
