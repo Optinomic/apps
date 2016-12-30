@@ -227,8 +227,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         if (app_identifier === "ch.suedhang.apps.aase-g") {
 
-            var app_title = "Abstinenzzuversicht (AASE-G)";
-            var description = "Schwierigkeit der Hauptproblemsubstanz zu widerstehen";
+            var app_title = "Versuchung (AASE-G)";
+            var description = "Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren";
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
@@ -253,17 +253,17 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     };
 
                     var ranges = [{
+                        "from": 0,
+                        "text": "sehr geringe Versuchung"
+                    }, {
                         "from": 20,
-                        "text": "sehr geringe Abstinenzzuversicht"
+                        "text": "geringe Versuchung"
                     }, {
                         "from": 40,
-                        "text": "geringe Abstinenzzuversicht"
+                        "text": "hohe Versuchung"
                     }, {
                         "from": 60,
-                        "text": "hohe Abstinenzzuversicht"
-                    }, {
-                        "from": 80,
-                        "text": "sehr hohe Abstinenzzuversicht"
+                        "text": "sehr hohe Versuchung"
                     }];
 
                     var interpretation = {};
