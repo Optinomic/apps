@@ -394,7 +394,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         if (app_identifier === "ch.suedhang.apps.sci") {
 
-            var app_title = "Soziale Kompetenzen (ISK)";
+            var app_title = "Stress-Coping-Inventar (SCI)";
             var description = "Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping).";
             var description_full = "Alle Skalen erreichen überzeugende psychometrische Kennwerte. Eine detaillierte Faktorenanalyse konnte zudem die Annahme von fünf unterschiedlichen Coping-Strategien bestätigen. Weitere Untersuchungen lieferten überzeugende Belege für die Aussagekraft der Skalen. So zeigte sich, dass Personen, die unter viel Stress leiden aber trotzdem nur wenige Folgesymptome aufweisen, mehr adaptive Coping-Strategien einsetzen.";
 
