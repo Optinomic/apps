@@ -84,7 +84,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                                 { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
                                 { "text": " " + ps.label, "bold": false, "fontSize": 11 }
                             ],
-                            "margin": [0, 3, 0, 3]
+                            "margin": [0, 0, 0, 0]
                         }];
                         table_to_push.table.body.push(substanz);
                     });
@@ -110,7 +110,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
                     var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf"
-                    audit_text = audit_text + ", was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
+                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "."
                     audit_stack.stack.push(audit_text);
 
                     var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
