@@ -413,6 +413,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
+/*
         // -----------------------------------------------------------------
         // WHOQOL-BREF
         // -----------------------------------------------------------------
@@ -441,9 +442,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var psych_avg = calc.PSYCH_avg;
                     var mzp = calc.
                     var interpretation = calc.score.current_range.interpretation_de;
-                    var messung_text = "Am " + date + " wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt. Die körperliche Lebensqualität wurde auf " + phys_avg.toString() + " von 100 eingeschätzt";
+                    var text_psych = "Am " + date + " wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt.";
+                    var text_phys = "Am " + date + " wurde die körperliche Lebensqualität auf " + phys_avg.toString() + " von 100 eingeschätzt";
 
-                    list_array.push($scope.d.templates.text(messung_text));
+                    list_array.push($scope.d.templates.text(text_psych));
+                    list_array.push($scope.d.templates.text(text_phys));
+
                 });
 
 
@@ -463,6 +467,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
         };
+*/
 
         // Run pdf_make_init when all Data loaded
         if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
