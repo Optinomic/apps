@@ -208,11 +208,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.all.push($scope.d.templates.horizontalLine(100));
             pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description, description_full));
+            pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
 
             // Nur für "Alle Resultate"
-            //pdf.all.push($scope.d.templates.text(description_full));
+            pdf.all.push($scope.d.templates.text(description_full));
 
             if (data.survey_responses.length > 0) {
                 run.bscl();
