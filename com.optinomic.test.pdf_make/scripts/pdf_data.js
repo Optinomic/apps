@@ -75,7 +75,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 //                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
                             ]
                         },
-                        "layout": "lightHorizontalLines"
+                        "layout": "noBorders"
                     };
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
