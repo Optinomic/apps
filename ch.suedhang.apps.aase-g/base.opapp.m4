@@ -1,13 +1,13 @@
 [module]
 id = ch.suedhang.apps.aase-g
 name = AASE-G V2
-short_description = Abstinenzzuversicht - Schwierigkeit der Hauptproblemsubstanz zu widerstehen
+short_description = Versuchung - Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren
 version = include(VERSION)
 type = patient
 
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren.
-0 bedeutet keine Versuchung, eine maximale Versuchung liegt beim allgemeinen Summenwert bei 80, bei den Subskalen bei 4.
+0 Punkte entsprechen keiner Versuchung, eine maximale Versuchung liegt bei 80 (allgemeiner Summenwert) respektive 4 (Subskalen) Punkten vor.
 
 [developer]
 first_name = Beat
