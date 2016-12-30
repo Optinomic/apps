@@ -413,7 +413,56 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
+        // -----------------------------------------------------------------
+        // WHOQOL-BREF
+        // -----------------------------------------------------------------
+        if (app_identifier === "com.optinomic.apps.whoqol") {
 
+            var app_title = "Lebensqualität (WHOQOL-BREF)";
+            var description = "Beurteilung der physischen und psychischen Lebensqualität.";
+
+            pdf.all.push($scope.d.templates.horizontalLine(100));
+            pdf.all.push($scope.d.templates.heading("h2", app_title));
+            pdf.all.push($scope.d.templates.text(description));
+            pdf.eintritt = angular.copy(pdf.all);
+
+            if (data.survey_responses.length > 0) {
+
+                var list_array = [];
+
+                data.survey_responses.forEach(function(sr, srID) {
+
+                    var calc = sr.calculations["0"].calculation_result;
+
+
+                    var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+
+                    var phys_avg = calc.PHYS_avg;
+                    var psych_avg = calc.PSYCH_avg;
+                    var mzp = calc.
+                    var interpretation = calc.score.current_range.interpretation_de;
+                    var messung_text = "Am " + date + " wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt. Die körperliche Lebensqualität wurde auf " + phys_avg.toString() + " von 100 eingeschätzt";
+
+                    list_array.push($scope.d.templates.text(messung_text));
+                });
+
+
+                var messungen_liste = {
+                    "ul": list_array,
+                    "margin": [0, 0, 0, 6]
+                };
+
+                pdf.all.push(messungen_liste);
+                pdf.eintritt.push(messungen_liste);
+
+
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };            
+
+
+        };
 
         // Run pdf_make_init when all Data loaded
         if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {
