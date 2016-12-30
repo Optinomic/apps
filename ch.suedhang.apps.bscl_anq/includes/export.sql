@@ -25,7 +25,7 @@ SELECT
   ((cast(response AS json))->>'q501V04') as zeitpunkt_bscl,
   ((cast(response AS json))->>'q501V05') as dropoutcode_bscl,
   ((cast(response AS json))->>'q501V06') as spezifikation_dropout_bscl_andere,
-  TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')  as datum_erhebung_bscl,
+  TO_CHAR(TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD'), 'YYYYMMDD')  as datum_erhebung_bscl,
   ((cast(response AS json))->>'BSCL[sq504V01]') as bscl_b1,
   ((cast(response AS json))->>'BSCL[sq504V02]') as bscl_b2,
   ((cast(response AS json))->>'BSCL[sq504V03]') as bscl_b3,
@@ -78,10 +78,9 @@ SELECT
   ((cast(response AS json))->>'BSCL[sq504V50]') as bscl_b50,
   ((cast(response AS json))->>'BSCL[sq504V51]') as bscl_b51,
   ((cast(response AS json))->>'BSCL[sq504V52]') as bscl_b52,
-  ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_b53,
-  TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD HH24:MI:SS')  as datumsformat
+  ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_b53
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
-WHERE module = 'ch.suedhang.apps.bscl.anq' AND ((cast(response AS json))->>'q501V04') != 3;
+WHERE module = 'ch.suedhang.apps.bscl.anq' AND ((cast(response AS json))->>'q501V04') != '3';
