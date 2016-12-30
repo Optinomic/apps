@@ -75,7 +75,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 //                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
                             ]
                         },
-//                        "layout": "lightHorizontalLines"
+                        "layout": "lightHorizontalLines"
                     };
 
                     table.problemsubstanzen.forEach(function(ps, myTableID) {
@@ -109,7 +109,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 act_info_ein_calculation.forEach(function(calc, calcID) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf."
+                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf"
                     audit_text = audit_text + ", was auf eine «" + calc.AUDIT.interpretation.result + "» schliesen lässt."
                     audit_stack.stack.push(audit_text);
 
