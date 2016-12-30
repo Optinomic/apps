@@ -14,7 +14,7 @@ d.bscl_create_pdf_stack = function() {
                 "text": "Normstichprobe",
                 "style": "h3"
             }, {
-                "text": " Die Z-Werte wurden aufgrund der voliegenden Normstichprobe berechnet.",
+                "text": " Die Z-Werte wurden aufgrund der Normstichprobe nach Franke (2000) berechnet (N = 300).",
                 "fontSize": 10,
                 "style": "caption"
             }]
