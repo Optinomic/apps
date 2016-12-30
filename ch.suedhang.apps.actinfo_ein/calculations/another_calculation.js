@@ -80,7 +80,7 @@ function main(responses) {
         var scale_ranges_men = [{
             "from": 0,
             "to": 7,
-            "result": "Risikoarmer Alkoholkonsum",
+            "result": "risikoarmer Alkoholkonsum",
             "result_color": "#4CAF50"
         }, {
             "from": 8,
@@ -90,14 +90,14 @@ function main(responses) {
         }, {
             "from": 16,
             "to": 40,
-            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+            "result": "hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
             "result_color": "#F44336"
         }];
 
         var scale_ranges_woman = [{
             "from": 0,
             "to": 4,
-            "result": "Risikoarmer Alkoholkonsum",
+            "result": "risikoarmer Alkoholkonsum",
             "result_color": "#4CAF50"
         }, {
             "from": 5,
@@ -107,7 +107,7 @@ function main(responses) {
         }, {
             "from": 15,
             "to": 40,
-            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+            "result": "hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
             "result_color": "#F44336"
         }];
 
@@ -166,25 +166,25 @@ function main(responses) {
         var scale_ranges_fagerstoem = [{
             "from": 0,
             "to": 2,
-            "result": "Geringe körperliche Abhängigkeit.",
+            "result": "gering ausgeprägte körperliche Abhängigkeit.",
             "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
-            "result": "Mittlere körperliche Abhängigkeit.",
+            "result": "mittelstark ausgeprägte körperliche Abhängigkeit.",
             "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
-            "result": "Starke körperliche Abhängigkeit.",
+            "result": "stark ausgeprägte körperliche Abhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
-            "result": "Sehr starke körperliche Abhängigkeit.",
+            "result": "sehr stark ausgeprägte körperliche Abhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 55
         }];
