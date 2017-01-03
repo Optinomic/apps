@@ -422,10 +422,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "Lebensqualität (WHOQOL-BREF)";
             var description = "Beurteilung der physischen und psychischen Lebensqualität.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
-            pdf.eintritt = angular.copy(pdf.all);
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(pdf.all);
 
             if (data.survey_responses.length > 0) {
 
@@ -472,21 +475,23 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     if (mzp === 1) {
                         list_array_eintritt.push($scope.d.templates.text(text));
                     };
-
                 });
 
                 var messungen_liste = {
                     "ul": list_array_all,
                     "margin": [0, 0, 0, 6]
                 };
-                pdf.all.push(messungen_liste);
+                my_all.push(messungen_liste);
 
                 messungen_liste = {
                     "ul": list_array_eintritt,
                     "margin": [0, 0, 0, 6]
                 };
-                pdf.eintritt.push(messungen_liste);
+                my_eintritt.push(messungen_liste);
 
+
+                pdf.all.push($scope.d.templates.keepTogether(my_all));
+                pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
 
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
