@@ -180,9 +180,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
                 var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
 
-                if (app_scope_ein.fagerstroem === true) {
-                    pdf.all.push($scope.d.templates.keepTogether(app_scope_ein.fagerstroem_stack));
-                };
+                pdf.all.push($scope.d.templates.keepTogether(app_scope_ein.fagerstroem_stack));
 
 
             } else {
