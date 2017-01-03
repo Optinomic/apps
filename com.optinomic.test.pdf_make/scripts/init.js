@@ -27,6 +27,19 @@ $scope.loadMainData = function() {
         $scope.d.templates = $scope.getTemplates();
 
 
+        // Get current Stay
+        var current_stay_id = $scope.d.dataMain.params.stay_id;
+        var current_pid = $scope.d.dataMain.params.PID;
+        $scope.d.current_stay = null;
+
+        $scope.d.dataMain.patient.stays.forEach(function(current_stay, myStayID) {
+            if (current_stay.id === current_stay_id) {
+                $scope.d.current_stay = dataService.createStayExtras(current_pid, current_stay);
+            };
+        });
+
+
+        // Load App-Data
         $scope.d.appData = {};
 
         $scope.loadAppData('ch.suedhang.apps.actinfo_ein', false);
@@ -47,6 +60,9 @@ $scope.loadMainData = function() {
             "count": 0,
             "done": false
         };
+
+
+
 
 
         // Finishing: Console Info & Init = done.

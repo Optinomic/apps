@@ -286,7 +286,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 pdf.all.push($scope.d.templates.heading("h2", app_title));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
-
         };
 
         // -----------------------------------------------------------------
