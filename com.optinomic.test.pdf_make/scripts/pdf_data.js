@@ -188,7 +188,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     };
 
                     my_all.push(fag_ein);
+                    my_all.push($scope.d.templates.heading("h3", "Test Nikotinabhängigkeit (Fagerström)"));
+
                 };
+
 
 
                 pdf.all.push($scope.d.templates.keepTogether(my_all));
