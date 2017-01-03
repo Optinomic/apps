@@ -212,11 +212,16 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
                 var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
 
+
+                var austritt_text = "";
+
                 // Eintritt | Nikotinabhängigkeit (Fagerström)
                 if (app_scope_ein.fagerstroem === true) {
                     my_all.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
-                    my_all.push(app_scope_ein.fagerstroem_stack["1"].stack["0"]);
+                    austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
                 };
+
+                austritt_text = austritt_text + " Bei Austritt (" + date + ") wurde folgende Abstenezmotivation angebeben: "
 
                 var motivation_rauchstopp = "";
                 var motivation_rauchstopp_angabe = false;
@@ -224,7 +229,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var anser_motivation_rauchstopp = parseInt(response.VZAT100);
                     if (anser_motivation_rauchstopp === 1) {
                         motivation_rauchstopp_angabe = true;
-                        motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                        if (app_scope_ein.smoker === true) {
+                            motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        } else {
+                            motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                        };
                     };
                     if (anser_motivation_rauchstopp === 2) {
                         motivation_rauchstopp_angabe = true;
@@ -244,7 +253,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     };
                 };
 
+                austritt_text = austritt_text + "«" + motivation_rauchstopp + "»";
 
+
+                my_all.push($scope.d.templates.text(austritt_text));
 
                 pdf.all.push($scope.d.templates.keepTogether(my_all));
 
