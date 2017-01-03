@@ -121,14 +121,18 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     fagerstroem_stack.stack.push(fagerstroem_text);
                 });
 
-                var col_2 = act_info_ein_block.columns["1"].stack;
 
+                app_scope.audit = true;
                 app_scope.audit_stack = [];
                 app_scope.audit_stack.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
+                app_scope.audit_stack.push(audit_stack);
 
+                app_scope.fagerstroem = true;
                 app_scope.fagerstroem_stack = [];
                 app_scope.fagerstroem_stack.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
+                app_scope.fagerstroem_stack.push(fagerstroem_stack);
 
+                var col_2 = act_info_ein_block.columns["1"].stack;
                 col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
                 col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
 
@@ -171,6 +175,15 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 my_all.push($scope.d.templates.heading("h2", app_title, date));
 
                 pdf.all.push($scope.d.templates.keepTogether(my_all));
+
+
+                var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
+                var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
+
+                if (app_scope_ein.fagerstroem === true) {
+                    pdf.all.push($scope.d.templates.keepTogether(app_scope_ein.fagerstroem_stack));
+                };
+
 
             } else {
                 pdf.all.push($scope.d.templates.heading("h2", app_title));
