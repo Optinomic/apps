@@ -440,8 +440,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var phys_avg = calc.PHYS_avg;
                     var psych_avg = calc.PSYCH_avg;
-                    var mzp = calc.
-                    var interpretation = calc.score.current_range.interpretation_de;
+                    //var mzp = calc.
+                    //var interpretation = calc.score.current_range.interpretation_de;
                     var text_psych = "Am " + date + " wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt.";
                     var text_phys = "Am " + date + " wurde die körperliche Lebensqualität auf " + phys_avg.toString() + " von 100 eingeschätzt";
 
