@@ -110,20 +110,19 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.eintritt);
 
-    doc.content.push($scope.d.templates.spacer(12));
-    var bloc = {
-        "alignment": "left",
-        "columns": [{
-            stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
-            "margin": [0, 0, 0, 6]
-        }, {
-            stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
-            "margin": [0, 0, 0, 6]
-        }],
-        "columnGap": 24
-    };
-    doc.content.push(bloc);
-
+    //  doc.content.push($scope.d.templates.spacer(12));
+    //  var bloc = {
+    //      "alignment": "left",
+    //      "columns": [{
+    //          stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
+    //          "margin": [0, 0, 0, 6]
+    //      }, {
+    //          stack: $scope.loadAppPDF("eintritt", [], "ch.suedhang.apps.case.new"),
+    //          "margin": [0, 0, 0, 6]
+    //      }],
+    //      "columnGap": 24
+    //  };
+    //  doc.content.push(bloc);
 
     doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
@@ -133,6 +132,9 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt);
+
+    doc.content.push($scope.d.templates.spacer(12));
+    doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.eintritt);
 
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.getCalculatedStamp(doc));
@@ -179,6 +181,9 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.all);
+
+    doc.content.push($scope.d.templates.spacer(12));
+    doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.all);
 
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.getCalculatedStamp(doc));

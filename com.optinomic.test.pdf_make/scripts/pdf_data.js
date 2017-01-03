@@ -72,7 +72,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "table": {
                             "widths": ["*"],
                             "body": [
-//                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
+                                //                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
                             ]
                         },
                         "layout": "noBorders"
@@ -110,7 +110,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
                     var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf"
-                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "."
+                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "»."
                     audit_stack.stack.push(audit_text);
 
                     var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
@@ -141,34 +141,36 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push(return_obj);
         };
 
-/*
-        // -----------------------------------------------------------------
-        // Case
-        // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.case.new") {
+        /*
+                // -----------------------------------------------------------------
+                // Case
+                // -----------------------------------------------------------------
+                if (app_identifier === "ch.suedhang.apps.case.new") {
 
-            var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)";
+                    var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)";
 
-            var case_stack = [];
-            case_stack.push($scope.d.templates.horizontalLine(48));
-            case_stack.push($scope.d.templates.heading("h2", app_title));
+                    var case_stack = [];
+                    case_stack.push($scope.d.templates.horizontalLine(48));
+                    case_stack.push($scope.d.templates.heading("h2", app_title));
 
-            if (data.survey_responses.length > 0) {
-                case_stack.push(run.getCaseList());
-                case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
-            } else {
-                case_stack.push($scope.d.templates.noData(app_identifier, 84));
-            };
+                    if (data.survey_responses.length > 0) {
+                        case_stack.push(run.getCaseList());
+                        case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
+                    } else {
+                        case_stack.push($scope.d.templates.noData(app_identifier, 84));
+                    };
 
-            var return_obj = {
-                "stack": case_stack,
-                "margin": [0, 0, 0, 6]
-            };
+                    var return_obj = {
+                        "stack": case_stack,
+                        "margin": [0, 0, 0, 6]
+                    };
 
-            pdf.eintritt.push(return_obj);
-            pdf.all.push(return_obj);
-        };
-*/
+                    pdf.eintritt.push(return_obj);
+                    pdf.all.push(return_obj);
+                };
+        */
+
+
         // -----------------------------------------------------------------
         // TMT
         // -----------------------------------------------------------------
@@ -182,7 +184,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             pdf.all.push($scope.d.templates.heading("h2", app_title));
             pdf.all.push($scope.d.templates.text(description));
             pdf.eintritt = angular.copy(pdf.all);
-
 
             // Nur für Eintritt
             pdf.eintritt.push($scope.d.templates.text(description_full));
@@ -413,7 +414,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
         };
 
-/*
         // -----------------------------------------------------------------
         // WHOQOL-BREF
         // -----------------------------------------------------------------
@@ -463,11 +463,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));
-            };            
-
-
+            };
         };
-*/
+
 
         // Run pdf_make_init when all Data loaded
         if ($scope.checkDataLoaded($scope.d.loader.actions, $scope.d.loader.count)) {

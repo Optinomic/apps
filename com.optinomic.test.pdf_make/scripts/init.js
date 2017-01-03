@@ -31,7 +31,6 @@ $scope.loadMainData = function() {
 
         $scope.loadAppData('ch.suedhang.apps.actinfo_ein', false);
         $scope.loadAppData('ch.suedhang.apps.actinfo_aus', false);
-        $scope.loadAppData('ch.suedhang.apps.case.new', false);
         $scope.loadAppData('ch.suedhang.apps.aase-g', false);
         $scope.loadAppData('ch.suedhang.apps.tmt_V3', false);
         $scope.loadAppData('ch.suedhang.apps.bscl_anq', false);
@@ -39,10 +38,11 @@ $scope.loadMainData = function() {
         $scope.loadAppData('ch.suedhang.apps.isk', false);
         $scope.loadAppData('ch.suedhang.apps.sci', false);
         $scope.loadAppData('com.optinomic.apps.whoqol', false);
+        // $scope.loadAppData('ch.suedhang.apps.case.new', false);
 
 
         $scope.d.loader = {
-            "actions": 10,
+            "actions": 9,
             "count": 0,
             "done": false
         };
