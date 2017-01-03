@@ -209,8 +209,8 @@ d.tmt_create_pdf_stack = function() {
         };
 
         // Save
-        $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
-        $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
+        // $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
+        // $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
     });
 
 };
