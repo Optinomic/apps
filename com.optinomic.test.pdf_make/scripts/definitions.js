@@ -42,7 +42,7 @@ $scope.getTemplates = function() {
         "alignment": "left",
         "columns": [{
             "stack": [{
-                "margin": [0, 84, 0, 0],
+                "margin": [0, 72, 0, 0],
                 "text": " " + d.patient_adress
             }]
         }, {
@@ -51,7 +51,7 @@ $scope.getTemplates = function() {
                 "width": 220,
                 "image": d.images.suedhang
             }, {
-                "margin": [0, 12, 0, 0],
+                "margin": [0, 10, 0, 0],
                 "fontSize": 10,
                 "color": "#69604d",
                 "alignment": "left",
