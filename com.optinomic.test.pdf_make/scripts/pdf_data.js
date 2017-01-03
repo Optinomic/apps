@@ -152,7 +152,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             my_all.push($scope.d.templates.spacer(12));
             my_all.push($scope.d.templates.horizontalLine(100));
-            my_all.push($scope.d.templates.heading("h2", app_title));
 
             if (data.survey_responses.length > 0) {
 
@@ -164,7 +163,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 };
 
 
-                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
+                my_all.push($scope.d.templates.heading("h2", app_title, date));
 
                 pdf.all.push($scope.d.templates.keepTogether(my_all));
 
