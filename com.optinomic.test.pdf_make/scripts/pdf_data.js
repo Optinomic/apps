@@ -138,7 +138,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 var col_2 = act_info_ein_block.columns["1"].stack;
                 col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
-                act_info_ein_block_all = angular.copy(act_info_ein_block);
+                var act_info_ein_block_all = angular.copy(act_info_ein_block);
                 col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
 
                 actinfo_ein_stack.push(act_info_ein_block);
