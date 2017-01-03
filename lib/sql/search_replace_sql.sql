@@ -8,6 +8,11 @@ SET response = regexp_replace(response, 'AASE_(\w+)', 'AASE[\1]', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 
+-- RECODE every AASE-Score with:  (5-Value)  
+---- => 5=0, 4=1, 3=2, 2=3, 1=4, 0=5 
+---- I don't know how to do that here!
+
+
 
 -- BSCL – ANQ (Brief Symptom Checklist)
 -- ch.suedhang.apps.bscl.anq
