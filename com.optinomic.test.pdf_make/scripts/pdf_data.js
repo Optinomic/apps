@@ -41,6 +41,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "ActInfo | Eintrittsfragebogen";
 
             var actinfo_ein_stack = [];
+
             actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
 
             if (data.survey_responses.length > 0) {
@@ -148,6 +149,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
             };
 
             pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+
+            console.log('(???) return_obj', return_obj);
             pdf.all.push($scope.d.templates.keepTogether(return_obj));
         };
 
