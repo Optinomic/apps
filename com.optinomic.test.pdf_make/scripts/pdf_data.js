@@ -158,7 +158,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             my_all.push($scope.d.templates.heading("h2", app_title));
             my_all.push($scope.d.templates.text(description));
             my_eintritt = angular.copy(my_all);
-            my_all.push($scope.d.templates.text(description_full));
+            my_eintritt.push($scope.d.templates.text(description_full));
 
 
             // Titel & Beschreibung zusammenhalten.
@@ -192,8 +192,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
             my_all.push($scope.d.templates.horizontalLine(100));
             my_all.push($scope.d.templates.heading("h2", app_title));
             my_all.push($scope.d.templates.text(description));
-            my_eintritt = angular.copy(my_all);
             my_all.push($scope.d.templates.text(description_full));
+            my_eintritt = angular.copy(my_all);
 
 
             // Titel & Beschreibung zusammenhalten.
