@@ -150,7 +150,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
 
-            console.log('(???) return_obj', return_obj);
+            // Remove Fagerstroem from Eintritt bei All
+            console.log('(???) return_obj', return_obj.stack[2].columns[1].stack[1]);
+            delete return_obj.stack[2].columns[1].stack[1];
             pdf.all.push($scope.d.templates.keepTogether(return_obj));
         };
 
