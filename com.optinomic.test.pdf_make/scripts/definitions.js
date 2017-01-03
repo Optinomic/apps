@@ -42,7 +42,7 @@ $scope.getTemplates = function() {
         "alignment": "left",
         "columns": [{
             "stack": [{
-                "margin": [0, 96, 0, 0],
+                "margin": [0, 84, 0, 0],
                 "text": " " + d.patient_adress
             }]
         }, {
@@ -51,26 +51,26 @@ $scope.getTemplates = function() {
                 "width": 220,
                 "image": d.images.suedhang
             }, {
-                "margin": [0, 6, 0, 0],
-                "fontSize": 9,
+                "margin": [0, 12, 0, 0],
+                "fontSize": 10,
                 "color": "#69604d",
                 "alignment": "left",
                 "text": " Kompetenzzentrum für Mensch und Sucht"
             }, {
                 "margin": [0, 3, 0, 0],
-                "fontSize": 9,
+                "fontSize": 10,
                 "color": "#69604d",
                 "alignment": "left",
                 "text": " Südhang 1"
             }, {
                 "margin": [0, 3, 0, 0],
-                "fontSize": 9,
+                "fontSize": 10,
                 "color": "#69604d",
                 "alignment": "left",
                 "text": " CH - 3038 Kirchlindach"
             }, {
                 "margin": [0, 6, 0, 0],
-                "fontSize": 9,
+                "fontSize": 10,
                 "color": "#69604d",
                 "alignment": "left",
                 "text": " Telefon + 41 31 828 14 14"
