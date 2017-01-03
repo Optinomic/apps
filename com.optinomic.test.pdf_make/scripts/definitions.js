@@ -255,9 +255,9 @@ $scope.getTemplates = function() {
         space_bottom = space_bottom === undefined ? 24 : space_bottom;
 
         var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
-        var text = "Keine Daten vorhanden.";
+        var text = " Keine Daten vorhanden.";
         if (title !== null) {
-            text = "Keine «" + title + "» Daten vorhanden.";
+            text = " Keine «" + title + "» Daten vorhanden.";
         };
 
         var return_obj = {
