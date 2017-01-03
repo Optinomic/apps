@@ -164,6 +164,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             content.push($scope.d.templates.text(text_1));
             content.push($scope.d.templates.text(text_2));
             content.push($scope.d.templates.text(text_3));
+            content.push($scope.d.templates.spacer(6));
             content.push($scope.d.templates.heading('h1', 'Persönliche Zugangsdaten'));
 
             var credentials = {
@@ -186,7 +187,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             table: {
                 widths: [40, '*'],
                 body: [
-                    [{ text: ' Anwesend', color: 'gray', fontSize: 9, margin: [0, 3, 0, 3] }, { text: ' Patient / Patientin', color: 'gray', margin: [0, 3, 0, 3] }]
+                    [{ text: ' Anwesend', color: 'gray', fontSize: 9, margin: [0, 0, 0, 3] }, { text: ' Patient / Patientin', color: 'gray', margin: [0, 3, 0, 3] }]
                 ]
             },
             layout: 'lightHorizontalLines'
