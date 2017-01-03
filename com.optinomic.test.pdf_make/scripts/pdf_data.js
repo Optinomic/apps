@@ -33,7 +33,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
         //  BLOCKS pro Applikation erstellen
 
-
         // -----------------------------------------------------------------
         // actInfo - Eintritt
         // -----------------------------------------------------------------
@@ -137,39 +136,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 "margin": [0, 0, 0, 6]
             };
 
-            pdf.eintritt.push(return_obj);
-            pdf.all.push(return_obj);
+            pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+            pdf.all.push($scope.d.templates.keepTogether(return_obj));
         };
-
-        /*
-                // -----------------------------------------------------------------
-                // Case
-                // -----------------------------------------------------------------
-                if (app_identifier === "ch.suedhang.apps.case.new") {
-
-                    var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)";
-
-                    var case_stack = [];
-                    case_stack.push($scope.d.templates.horizontalLine(48));
-                    case_stack.push($scope.d.templates.heading("h2", app_title));
-
-                    if (data.survey_responses.length > 0) {
-                        case_stack.push(run.getCaseList());
-                        case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
-                    } else {
-                        case_stack.push($scope.d.templates.noData(app_identifier, 84));
-                    };
-
-                    var return_obj = {
-                        "stack": case_stack,
-                        "margin": [0, 0, 0, 6]
-                    };
-
-                    pdf.eintritt.push(return_obj);
-                    pdf.all.push(return_obj);
-                };
-        */
-
 
         // -----------------------------------------------------------------
         // TMT
@@ -180,14 +149,22 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
             var description_full = "Der Quotient B /A stellt das reine Mass der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
-            pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für Eintritt
-            pdf.eintritt.push($scope.d.templates.text(description_full));
-            //df.all.push($scope.d.templates.spacer(12));
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+            my_all.push($scope.d.templates.text(description_full));
+
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
 
             if (data.survey_responses.length > 0) {
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
@@ -208,11 +185,21 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var description = "Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.";
             var description_full = "Es handelt sich bei den 53 Items der BSCL um die fünf bis sechs ladungsstärksten Items pro Skala aus der 90 Items umfassenden SCL-90. Die Urheber- und Markenrechte an der BSCL liegen beim Hogrefe Verlag.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
-            pdf.all.push($scope.d.templates.text(description_full));
-            pdf.eintritt = angular.copy(pdf.all);
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+            my_all.push($scope.d.templates.text(description_full));
+
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
 
             if (data.survey_responses.length > 0) {
                 run.bscl();
@@ -230,9 +217,20 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "Versuchung (AASE-G)";
             var description = "Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.eintritt = angular.copy(pdf.all);
+
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
 
             // Nur für "Alle Resultate"
 
@@ -321,9 +319,18 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "Beck-Depressions-Inventar (BDI-II)";
             var description = "Erfassung depressiver Symptome anhand von 21 Aussagen. Der Summenwert gibt einen Hinweis auf den möglichen Schweregrad.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.eintritt = angular.copy(pdf.all);
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
 
 
             if (data.survey_responses.length > 0) {
@@ -373,13 +380,20 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var description = "Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.";
             var description_full = "Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
-            pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für "Alle Resultate"
-            pdf.all.push($scope.d.templates.text(description_full));
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+            my_all.push($scope.d.templates.text(description_full));
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
 
             if (data.survey_responses.length > 0) {
                 run.isk();
@@ -398,13 +412,20 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var description = "Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping).";
             var description_full = "Alle Skalen erreichen überzeugende psychometrische Kennwerte. Eine detaillierte Faktorenanalyse konnte zudem die Annahme von fünf unterschiedlichen Coping-Strategien bestätigen. Weitere Untersuchungen lieferten überzeugende Belege für die Aussagekraft der Skalen. So zeigte sich, dass Personen, die unter viel Stress leiden aber trotzdem nur wenige Folgesymptome aufweisen, mehr adaptive Coping-Strategien einsetzen.";
 
-            pdf.all.push($scope.d.templates.horizontalLine(100));
-            pdf.all.push($scope.d.templates.heading("h2", app_title));
-            pdf.all.push($scope.d.templates.text(description));
-            pdf.eintritt = angular.copy(pdf.all);
 
-            // Nur für "Alle Resultate"
-            pdf.all.push($scope.d.templates.text(description_full));
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+            my_all.push($scope.d.templates.text(description_full));
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
 
             if (data.survey_responses.length > 0) {
                 run.sci();
@@ -425,10 +446,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var my_all = [];
             var my_eintritt = [];
 
+            my_all.push($scope.d.templates.spacer(12));
             my_all.push($scope.d.templates.horizontalLine(100));
             my_all.push($scope.d.templates.heading("h2", app_title));
             my_all.push($scope.d.templates.text(description));
-            my_eintritt = angular.copy(pdf.all);
+            my_eintritt = angular.copy(my_all);
 
             if (data.survey_responses.length > 0) {
 
@@ -498,6 +520,36 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));
             };
         };
+
+
+        /*
+                // -----------------------------------------------------------------
+                // Case
+                // -----------------------------------------------------------------
+                if (app_identifier === "ch.suedhang.apps.case.new") {
+
+                    var app_title = "Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)";
+
+                    var case_stack = [];
+                    case_stack.push($scope.d.templates.horizontalLine(48));
+                    case_stack.push($scope.d.templates.heading("h2", app_title));
+
+                    if (data.survey_responses.length > 0) {
+                        case_stack.push(run.getCaseList());
+                        case_stack.push($scope.d.templates.caption("Interpretation: Ab 15 Punkten ist eine stationäre Therapie indiziert."));
+                    } else {
+                        case_stack.push($scope.d.templates.noData(app_identifier, 84));
+                    };
+
+                    var return_obj = {
+                        "stack": case_stack,
+                        "margin": [0, 0, 0, 6]
+                    };
+
+                    pdf.eintritt.push(return_obj);
+                    pdf.all.push(return_obj);
+                };
+        */
 
 
         // Run pdf_make_init when all Data loaded

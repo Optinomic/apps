@@ -101,14 +101,23 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.eintritt);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.eintritt);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.eintritt);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt);
+
+    doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.eintritt);
+
+    doc.content.push($scope.d.templates.spacer(20));
+    doc.content.push($scope.d.templates.getCalculatedStamp(doc));
+
 
     //  doc.content.push($scope.d.templates.spacer(12));
     //  var bloc = {
@@ -123,21 +132,6 @@ $scope.pdf_make_init = function() {
     //      "columnGap": 24
     //  };
     //  doc.content.push(bloc);
-
-    doc.content.push($scope.d.templates.spacer(12));
-    doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
-
-    doc.content.push($scope.d.templates.spacer(12));
-    doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt);
-
-    doc.content.push($scope.d.templates.spacer(12));
-    doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt);
-
-    doc.content.push($scope.d.templates.spacer(12));
-    doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.eintritt);
-
-    doc.content.push($scope.d.templates.spacer(20));
-    doc.content.push($scope.d.templates.getCalculatedStamp(doc));
 
 
 
@@ -164,25 +158,18 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.all);
 
-    doc.content.push($scope.d.templates.spacer(12));
     doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.all);
 
     doc.content.push($scope.d.templates.spacer(20));
@@ -192,7 +179,8 @@ $scope.pdf_make_init = function() {
     $scope.d.docs.push(doc);
 
 
-
+    // Sort Docs by 'name'
+    $scope.d.docs = $scope.sortByKey($scope.d.docs, "name");
 
     console.log("(DONE) pdf_make_init", $scope.d.docs);
 };
