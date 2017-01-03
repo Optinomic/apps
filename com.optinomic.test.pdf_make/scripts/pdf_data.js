@@ -38,7 +38,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         if (app_identifier === "ch.suedhang.apps.actinfo_ein") {
 
-            var app_title = "ActInfo | Eintritt";
+            var app_title = "ActInfo";
 
             var actinfo_ein_stack = [];
             actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
@@ -52,8 +52,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var response = data.survey_responses["0"].entity.data.response;
 
                 var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
-                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
                 actinfo_ein_stack_all = angular.copy(actinfo_ein_stack);
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title + " | Eintritt", date));
+                actinfo_ein_stack_all.push($scope.d.templates.heading("h2", app_title));
 
                 var act_info_ein_block = {
                     "alignment": "left",
@@ -194,7 +195,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "ActInfo | Austritt";
 
             var my_all = [];
-            my_all.push($scope.d.templates.horizontalLine(100));
+            // my_all.push($scope.d.templates.horizontalLine(100));
 
             if (data.survey_responses.length > 0) {
 
@@ -207,7 +208,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 };
 
 
-                my_all.push($scope.d.templates.heading("h2", app_title, date));
+                // my_all.push($scope.d.templates.heading("h2", app_title, date));
 
 
                 var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
@@ -222,7 +223,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
                 };
 
-                austritt_text = austritt_text + " Bei Austritt (" + date + ") wurde folgende Abstenezmotivation angebeben: "
+                austritt_text = austritt_text + " Bei Austritt wurde folgende Abstenezmotivation angebeben: "
 
                 var motivation_rauchstopp = "";
                 var motivation_rauchstopp_angabe = false;
@@ -268,14 +269,14 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         if ($scope.d.dataMain.patient.data.gender === "male") {
                             nichtraucher = "Nichtraucher";
                         };
-                        austritt_text = austritt_text + " Bei Austritt in die Entwöhnungsbehandlung gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                        austritt_text = austritt_text + " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
                         break;
                     default:
                         var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                         var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
 
                         fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-                        austritt_text = austritt_text + " Bei Austritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                        austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
                 };
 
                 my_all.push($scope.d.templates.text(austritt_text));
