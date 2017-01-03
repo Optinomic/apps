@@ -38,7 +38,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         if (app_identifier === "ch.suedhang.apps.actinfo_ein") {
 
-            var app_title = "ActInfo | Eintrittsfragebogen";
+            var app_title = "ActInfo | Eintritt";
 
             var actinfo_ein_stack = [];
             actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
@@ -101,6 +101,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 // AUDIT | Fagerström
 
                 var act_info_ein_calculation = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
+                var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses["0"].entity.data.response;
 
                 var audit_stack = {
                     "stack": [],
@@ -115,13 +116,35 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 act_info_ein_calculation.forEach(function(calc, calcID) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf"
-                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "»."
+                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
+                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
                     audit_stack.stack.push(audit_text);
 
-                    var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
-                    fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-                    fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "»."
+
+
+                    var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
+                    var smoker = false;
+
+                    switch (nikotin_konsum) {
+                        case 999:
+                            var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                            break;
+                        case 1:
+                            var nichtraucher = "Nichtraucherin";
+                            if ($scope.d.dataMain.patient.data.gender === "male") {
+                                nichtraucher = "Nichtraucher";
+                                smoker = false;
+                            };
+                            var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher "» zu sein.";
+                            break;
+                        default:
+                            var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
+                            var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
+                            smoker = true;
+
+                            fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
+                            fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                    };
                     fagerstroem_stack.stack.push(fagerstroem_text);
                 });
 
@@ -131,6 +154,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 app_scope.audit_stack.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
                 app_scope.audit_stack.push(audit_stack);
 
+                app_scope.smoker = smoker;
                 app_scope.fagerstroem = true;
                 app_scope.fagerstroem_stack = [];
                 app_scope.fagerstroem_stack.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
@@ -160,18 +184,15 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 "margin": [0, 0, 0, 6]
             };
             pdf.all.push($scope.d.templates.keepTogether(return_obj_all));
-
         };
 
         // -----------------------------------------------------------------
         // actInfo - Austritt
         // -----------------------------------------------------------------
         if (app_identifier === "ch.suedhang.apps.actinfo_aus") {
-            var app_title = "ActInfo | Austrittsfragebogen";
+            var app_title = "ActInfo | Austritt";
 
             var my_all = [];
-
-            my_all.push($scope.d.templates.spacer(12));
             my_all.push($scope.d.templates.horizontalLine(100));
 
             if (data.survey_responses.length > 0) {
@@ -187,17 +208,39 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 my_all.push($scope.d.templates.heading("h2", app_title, date));
 
 
-
                 var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
                 var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
 
-
+                // Eintritt | Nikotinabhängigkeit (Fagerström)
                 if (app_scope_ein.fagerstroem === true) {
-                    console.log('(???) app_scope_ein', app_scope_ein.fagerstroem_stack["1"].stack["0"], app_scope_ein);
-
                     my_all.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
                     my_all.push(app_scope_ein.fagerstroem_stack["1"].stack["0"]);
+                };
 
+                var motivation_rauchstopp = "";
+                var motivation_rauchstopp_angabe = false;
+                if ("VZAT100" in response) {
+                    var anser_motivation_rauchstopp = parseInt(response.VZAT100);
+                    if (anser_motivation_rauchstopp === 1) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                    };
+                    if (anser_motivation_rauchstopp === 2) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
+                    };
+                    if (anser_motivation_rauchstopp === 3) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
+                    };
+                    if (anser_motivation_rauchstopp === 4) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
+                    };
+                    if (anser_motivation_rauchstopp === 5) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                    };
                 };
 
 
