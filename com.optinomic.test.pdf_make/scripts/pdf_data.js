@@ -181,14 +181,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
                 if (app_scope_ein.fagerstroem === true) {
-                    console.log('(???) app_scope_ein', app_scope_ein);
-                    var fag_ein = {
-                        "stack": app_scope_ein.fagerstroem_stack,
-                        "margin": [0, 0, 0, 6]
-                    };
+                    console.log('(???) app_scope_ein', app_scope_ein.fagerstroem_stack["1"].stack["0"], app_scope_ein);
 
-                    my_all.push(fag_ein);
-                    my_all.push($scope.d.templates.heading("h3", "Test Nikotinabhängigkeit (Fagerström)"));
+                    my_all.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
+                    my_all.push(app_scope_ein.fagerstroem_stack["1"].stack["0"]);
 
                 };
 
