@@ -41,8 +41,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
             var app_title = "ActInfo | Eintrittsfragebogen";
 
             var actinfo_ein_stack = [];
-
             actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
+
+            var actinfo_ein_stack_all = [];
+
 
             if (data.survey_responses.length > 0) {
 
@@ -51,6 +53,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
+                actinfo_ein_stack_all = angular.copy(actinfo_ein_stack);
 
                 var act_info_ein_block = {
                     "alignment": "left",
@@ -135,9 +138,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 var col_2 = act_info_ein_block.columns["1"].stack;
                 col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
+                act_info_ein_block_all = angular.copy(act_info_ein_block);
                 col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
 
                 actinfo_ein_stack.push(act_info_ein_block);
+                actinfo_ein_stack_all.push(act_info_ein_block_all);
             } else {
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
                 actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 84));
@@ -150,13 +155,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
 
-            // Remove Fagerstroem from Eintritt bei All
-            // delete return_obj.stack[2].columns[1].stack[1];
-            var return_obj_all = angular.copy(return_obj);
-            console.log('(??? 1) return_obj', return_obj_all);
-            delete return_obj_all.stack[2].columns[1].stack[1];
-            console.log('(??? 2) return_obj', return_obj_all);
+            var return_obj_all = {
+                "stack": actinfo_ein_stack_all,
+                "margin": [0, 0, 0, 6]
+            };
             pdf.all.push($scope.d.templates.keepTogether(return_obj_all));
+
         };
 
         // -----------------------------------------------------------------
