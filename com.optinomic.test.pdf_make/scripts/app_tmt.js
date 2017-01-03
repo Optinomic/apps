@@ -167,14 +167,14 @@ d.tmt_create_pdf_stack = function() {
                 z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
             };
             if (group.name !== "Zusatzitems") {
-                stack_all.push(z_score_grafik_all);
+                stack_all.push($scope.d.templates.keepTogether(z_score_grafik_all));
             };
 
             // Nur gewünschte Messungen anzeigen
             if (messung.zscore.text_left === 'Eintritt') {
                 var z_score_grafik_eintritt = angular.copy(z_score_grafik);
                 z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
-                stack_eintritt.push(z_score_grafik_eintritt);
+                stack_eintritt.push($scope.d.templates.keepTogether(z_score_grafik_eintritt));
             };
         });
 
