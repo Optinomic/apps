@@ -112,6 +112,7 @@ $scope.getTemplates = function() {
                 }, {
                     "text": " " + subtitle,
                     "style": "caption",
+                    "color": "#616161",
                     "margin": [1, 0, 0, 0],
                     "alignment": "left"
                 }
@@ -130,11 +131,14 @@ $scope.getTemplates = function() {
             style = "";
         };
 
-
         var left = {
             "text": " " + text_left,
             "style": style,
             "alignment": "left"
+        };
+
+        if ((style === "h1") || (style === "h2")) {
+            left.color = "#69604d";
         };
 
         var return_obj = left;
@@ -201,9 +205,10 @@ $scope.getTemplates = function() {
                 "x2": length,
                 "y2": 0,
                 "lineWidth": 1,
-                "lineColor": "#BDBDBD"
+                "lineColor": "#69604d"
             }]
         };
+
 
         return return_obj;
     };
