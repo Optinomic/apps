@@ -182,7 +182,12 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 if (app_scope_ein.fagerstroem === true) {
                     console.log('(???) app_scope_ein', app_scope_ein);
-                    my_all.push(app_scope_ein.fagerstroem_stack);
+                    var fag_ein = {
+                        "stack": app_scope_ein.fagerstroem_stack,
+                        "margin": [0, 0, 0, 6]
+                    };
+
+                    my_all.push(fag_ein);
                 };
 
 
