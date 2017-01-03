@@ -660,7 +660,7 @@ $scope.getTemplates = function() {
             "title": {
                 "fontSize": 36,
                 "bold": false,
-                "color": "#616161",
+                "color": "#69604d",
                 "alignment": "left",
                 "margin": [0, 40, 0, 0]
             },
