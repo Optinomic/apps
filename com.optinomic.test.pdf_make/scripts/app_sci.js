@@ -35,7 +35,7 @@ d.sci_create_pdf_stack = function(group_scores) {
         group.forEach(function(group_item, group_itemID) {
 
             var group_stack = [];
-            group_stack.push($scope.d.templates.spacer(12));
+            group_stack.push($scope.d.templates.spacer(6));
             group_stack.push($scope.d.templates.heading("h3", group_item.question, group_s.title));
             // group_stack.push($scope.d.templates.caption(group_s.description));
 
