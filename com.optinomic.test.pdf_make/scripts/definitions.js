@@ -41,10 +41,19 @@ $scope.getTemplates = function() {
     d.patientAddress_clinicLogo = {
         "alignment": "left",
         "columns": [{
-            "text": " " + d.patient_adress
+            "stack": [{
+                "margin": [0, 68, 0, 0],
+                "text": " " + d.patient_adress
+            }]
         }, {
             "width": 220,
-            "image": d.images.suedhang
+            "stack": [{
+                "width": 220,
+                "image": d.images.suedhang
+            }, {
+                "margin": [0, 6, 0, 0],
+                "text": " Kompetenzzentrum für Mensch und Sucht"
+            }]
         }]
     };
 
