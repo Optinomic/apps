@@ -45,6 +45,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
 
+                var response = data.survey_responses["0"].entity.data.response;
+
                 var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
 
@@ -138,6 +140,39 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
             pdf.all.push($scope.d.templates.keepTogether(return_obj));
+        };
+
+        // -----------------------------------------------------------------
+        // actInfo - Austritt
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.actinfo_aus") {
+            var app_title = "ActInfo | Austrittsfragebogen";
+
+            var my_all = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+
+            if (data.survey_responses.length > 0) {
+
+                var response = data.survey_responses["0"].entity.data.response;
+
+                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
+                if ("VMAB001" in response) {
+                    date = $filter("amDateFormat")(response.VMAB001, "DD.MM.YYYY");
+                };
+
+
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title, date));
+
+                pdf.all.push($scope.d.templates.keepTogether(my_all));
+
+            } else {
+                pdf.all.push($scope.d.templates.heading("h2", app_title));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+
         };
 
         // -----------------------------------------------------------------

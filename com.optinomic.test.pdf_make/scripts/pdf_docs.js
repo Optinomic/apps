@@ -158,6 +158,8 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
 
+    doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_aus"].pdf.all);
+
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.all);
