@@ -1,4 +1,4 @@
-d.tmt_create_pdf_stack = function() {
+d.tmt_create_pdf_stack__old = function() {
 
     // Init
     var item = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
@@ -212,14 +212,41 @@ d.tmt_create_pdf_stack = function() {
         // $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
         // $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
     });
-
 };
 
-d.tmt_create_pdf_stack_old = function() {
+d.tmt_create_pdf_stack = function() {
 
     var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
     var stack_all = [];
     var stack_eintritt = [];
+
+
+    // Klinikstichproben
+    var ks = {
+        "margin": [0, 6, 0, 0],
+        "alignment": 'left',
+        "columnGap": 12,
+        "columns": [{
+            "width": 192,
+            "stack": [{
+                "text": "Normstichprobe",
+                "style": "h3"
+            }, {
+                "text": " Die Z-Werte wurden aufgrund der Normstichprobe nach Tombaugh (2004) berechnet (N=39).",
+                "fontSize": 10,
+                "style": "caption"
+            }]
+        }, {
+            "width": "*",
+            "stack": [{
+                "text": "Klinikstichprobe",
+                "style": "h3"
+            }]
+        }]
+    };
+
+    var ks_alle = angular.copy(ks);
+    var ks_eintritt = angular.copy(ks);
 
     tmt.groups.forEach(function(group, groupID) {
 
@@ -235,6 +262,50 @@ d.tmt_create_pdf_stack_old = function() {
         tmt.zscore_options.width = 440;
 
         group.data.forEach(function(messung, messungID) {
+
+            var ks_nummer = messungID + 1;
+
+            var ks_item = {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 10,
+                            "style": "p"
+                        }, {
+                            "text": ks_nummer.toString(),
+                            "fontSize": 10,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "text": " " + messung.ks.path_data.text_full,
+                        "fontSize": 10,
+                        "style": "caption"
+                    }]
+                }]
+            };
+
+            // Klinikstichprobe nur einmalig befüllen
+            if (groupID === 0) {
+
+                // Alle KS-Einträge
+                ks_alle.columns[1].stack.push(ks_item);
+
+                // Eintritt KS-Einträge
+                if (messung.zscore.text_left === 'Eintritt') {
+                    // console.log('Klinikstichprobe', ks_eintritt);
+                    ks_eintritt.columns[1].stack.push(ks_item);
+                };
+            };
 
             var zeit_fehler_array = [];
             if (group.name === "TMT A") {
@@ -306,9 +377,13 @@ d.tmt_create_pdf_stack_old = function() {
                 z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
                 stack_eintritt.push(z_score_grafik_eintritt);
             };
-
-
         });
+
+        // Klinikstichprobe nur einmalig speichern
+        if (groupID === 0) {
+            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+        };
 
     });
 
