@@ -135,7 +135,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                                 nichtraucher = "Nichtraucher";
                                 smoker = false;
                             };
-                            var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher "» zu sein.";
+                            var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
                             break;
                         default:
                             var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
