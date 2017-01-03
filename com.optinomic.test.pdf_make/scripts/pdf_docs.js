@@ -99,6 +99,9 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
 
+    var stay_text = "Wir berichten über den Aufenthalt vom " + $scope.d.current_stay.from_to ".";
+    doc.content.push($scope.d.templates.text(stay_text));
+
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.eintritt);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt);
@@ -155,6 +158,9 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.patientAddress_clinicLogo);
     doc.content.push($scope.d.templates.spacer(20));
     doc.content.push($scope.d.templates.title(doc.name, $scope.d.templates.patient));
+
+    var stay_text = "Wir berichten über den Aufenthalt vom " + $scope.d.current_stay.from_to ".";
+    doc.content.push($scope.d.templates.text(stay_text));
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_ein"].pdf.all);
 
