@@ -154,7 +154,7 @@ $scope.getTemplates = function() {
                     "alignment": "left"
                 }
             ],
-            "margin": [0, 0, 0, 24]
+            "margin": [0, 24, 0, 36]
         };
     };
 
@@ -597,7 +597,6 @@ $scope.getTemplates = function() {
 
 
         return return_stanine;
-
     };
 
     d.getCalculatedStamp = function(doc) {
