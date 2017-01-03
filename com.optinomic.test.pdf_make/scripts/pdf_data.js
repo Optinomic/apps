@@ -113,6 +113,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     "margin": [0, 0, 0, 6]
                 };
 
+                var smoker = false;
+
                 act_info_ein_calculation.forEach(function(calc, calcID) {
                     var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
@@ -123,7 +125,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
                     var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
-                    var smoker = false;
 
                     switch (nikotin_konsum) {
                         case 999:
