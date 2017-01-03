@@ -429,34 +429,62 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
 
-                var list_array = [];
+                var list_array_all = [];
+                var list_array_eintritt = [];
 
                 data.survey_responses.forEach(function(sr, srID) {
 
                     var calc = sr.calculations["0"].calculation_result;
-
-
                     var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+                    if ("Datum" in sr.entity.data.response) {
+                        date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
+                    };
 
                     var phys_avg = calc.PHYS_avg;
                     var psych_avg = calc.PSYCH_avg;
-                    //var mzp = calc.
-                    //var interpretation = calc.score.current_range.interpretation_de;
-                    var text_psych = "Am " + date + " wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt.";
-                    var text_phys = "Am " + date + " wurde die körperliche Lebensqualität auf " + phys_avg.toString() + " von 100 eingeschätzt";
 
-                    list_array.push($scope.d.templates.text(text_psych));
-                    list_array.push($scope.d.templates.text(text_phys));
+
+                    var mzp = 3
+                    var mzp_text = "Messzeitpunkt";
+                    if ("Erhebungszeitpunkt" in sr.entity.data.response) {
+                        mzp = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
+                        if (mzp === 1) {
+                            mzp_text = "Eintritt";
+                        };
+
+                        if (mzp === 2) {
+                            mzp_text = "Austritt";
+                        };
+
+                        if (mzp === 3) {
+                            if ("andererZeitpunkt" in sr.entity.data.response) {
+                                mzp_text = "Messzeitpunkt - " + sr.entity.data.response.andererZeitpunkt;
+                            };
+                        };
+                    };
+
+                    var text_psych = "Bei " + mzp_text + " (" + date + ") wurde die psychische Lebensqualität auf " + psych_avg.toString() + " von 100 eingeschätzt.";
+                    var text_phys = "Die körperliche Lebensqualität wurde auf " + phys_avg.toString() + " von 100 eingeschätzt.";
+                    var text = text_psych + " " + text_phys;
+
+                    list_array_all.push($scope.d.templates.text(text));
+
+                    if (mzp === 1) {
+                        list_array_eintritt.push($scope.d.templates.text(text));
+                    };
 
                 });
 
-
                 var messungen_liste = {
-                    "ul": list_array,
+                    "ul": list_array_all,
                     "margin": [0, 0, 0, 6]
                 };
-
                 pdf.all.push(messungen_liste);
+
+                messungen_liste = {
+                    "ul": list_array_eintritt,
+                    "margin": [0, 0, 0, 6]
+                };
                 pdf.eintritt.push(messungen_liste);
 
 
