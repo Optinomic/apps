@@ -45,6 +45,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
 
+                var app_scope = $scope.d.appData[app_identifier].app_scope;
                 var response = data.survey_responses["0"].entity.data.response;
 
                 var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
@@ -121,11 +122,15 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 });
 
                 var col_2 = act_info_ein_block.columns["1"].stack;
-                col_2.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
-                col_2.push(audit_stack);
 
-                col_2.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
-                col_2.push(fagerstroem_stack);
+                app_scope.audit_stack = [];
+                app_scope.audit_stack.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
+
+                app_scope.fagerstroem_stack = [];
+                app_scope.fagerstroem_stack.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
+
+                col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
+                col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
 
                 actinfo_ein_stack.push(act_info_ein_block);
             } else {
