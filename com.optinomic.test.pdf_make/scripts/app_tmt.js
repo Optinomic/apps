@@ -1,3 +1,323 @@
+d.tmt_create_pdf_stack = function() {
+
+    // Init
+    var item = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
+
+    // Klinikstichproben
+    var ks = {
+        "margin": [0, 6, 0, 0],
+        "alignment": 'left',
+        "columnGap": 12,
+        "columns": [{
+            "width": 192,
+            "stack": [{
+                "text": "Normstichprobe",
+                "style": "h3"
+            }, {
+                "text": " Die Z-Werte wurden aufgrund der Normstichprobe nach Tombaugh (2004) berechnet (N=39).",
+                "fontSize": 10,
+                "style": "caption"
+            }]
+        }, {
+            "width": "*",
+            "stack": [{
+                "text": "Klinikstichprobe",
+                "style": "h3"
+            }]
+        }]
+    };
+
+    var ks_alle = angular.copy(ks);
+    var ks_eintritt = angular.copy(ks);
+
+
+    item.groups.forEach(function(group, groupID) {
+
+        var messungen_alle = [];
+        var messungen_eintritt = [];
+
+
+        group.data.forEach(function(messung, messungID) {
+
+            var zeit_fehler_array = [];
+            if (group.name === "TMT A") {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
+            } else {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTBTime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTBError };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
+            };
+            zeit_fehler_array.push(zeit);
+            zeit_fehler_array.push(fehler);
+
+            if (messung.zscore.text_left === "Eintritt") {
+                zeit_fehler_array.push(ba);
+            };
+
+
+            var ks_nummer = messungID + 1;
+
+            var ks_item = {
+                "alignment": 'left',
+                "margin": [0, 0, 0, 3],
+                "columnGap": 6,
+                "columns": [{
+                    "width": 18,
+                    "stack": [{
+                        "text": [{
+                            "text": "*",
+                            "color": "#7986CB",
+                            "fontSize": 10,
+                            "style": "p"
+                        }, {
+                            "text": ks_nummer.toString(),
+                            "fontSize": 10,
+                            "color": "#3F51B5",
+                            "style": "p"
+                        }]
+                    }]
+                }, {
+                    "width": "*",
+                    "stack": [{
+                        "text": " " + messung.ks.path_data.text_full,
+                        "fontSize": 10,
+                        "style": "caption"
+                    }]
+                }]
+            };
+
+            // Klinikstichprobe nur einmalig befüllen
+            if (groupID === 0) {
+
+                // Alle KS-Einträge
+                ks_alle.columns[1].stack.push(ks_item);
+
+                // Eintritt KS-Einträge
+                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 3) || (messung.calculation.info.mz.mz_id === 4)) {
+                    // console.log('Klinikstichprobe', ks_eintritt);
+                    ks_eintritt.columns[1].stack.push(ks_item);
+                };
+            };
+
+
+            var z_score_grafik_b = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": item.zscore_options.width,
+                    "stack": [{
+                        "columns": [{
+                            "width": "*",
+                            "text": " " + messung.zscore.text_left,
+                            "alignment": "left"
+                        }, {
+                            "width": 20,
+                            "alignment": "center",
+                            "text": [{
+                                "text": "*",
+                                "color": "#7986CB",
+                                "fontSize": 9,
+                                "style": "p"
+                            }, {
+                                "text": ks_nummer.toString(),
+                                "fontSize": 9,
+                                "color": "#3F51B5",
+                                "style": "p"
+                            }]
+                        }, {
+                            "width": "*",
+                            "text": " " + messung.zscore.text_right,
+                            "alignment": "right"
+                        }],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": []
+                    }]
+                }]
+            };
+
+            item.zscore_options.width = 351;
+            var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
+            z_score_grafik_b_all.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+            item.zscore_options.width = 301;
+            var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
+            z_score_grafik_b_eintritt.columns["0"].width = item.zscore_options.width;
+            z_score_grafik_b_eintritt.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+
+
+            // Alle Messungen
+            messungen_alle.push(z_score_grafik_b_all);
+
+            // Eintritt
+            if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 3) || (messung.calculation.info.mz.mz_id === 4)) {
+                messungen_eintritt.push(z_score_grafik_b_eintritt);
+            };
+        });
+
+
+        // Zahlen -3 | 0 | +3
+        var z_score_zahlen = {};
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 351);
+        messungen_alle.push(z_score_zahlen);
+        z_score_zahlen = $scope.d.templates.z_score_zahlen(item.zscore_options.zscore_min, item.zscore_options.zscore_max, 301);
+        messungen_eintritt.push(z_score_zahlen);
+
+
+        var group_data_model = {
+            "stack": [{
+                "text": group.description,
+                "margin": [0, 6, 0, 0],
+                "alignment": "left",
+                "style": "h3"
+            }, {
+                "alignment": "left",
+                "columns": [{
+                    "width": "auto",
+                    "stack": []
+                }, {
+                    "width": 151,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "text": " " + group.sub_right,
+                    "margin": [0, 12, 0, 0]
+                }],
+                "columnGap": 12,
+                "margin": [0, 0, 0, 6]
+            }]
+        };
+
+
+        var group_alle = angular.copy(group_data_model);
+        group_alle.stack[1].columns[0].stack = messungen_alle;
+
+        var group_eintritt = angular.copy(group_data_model);
+        group_eintritt.stack[1].columns[1].width = 191;
+        group_eintritt.stack[1].columns[0].stack = messungen_eintritt;
+
+
+        // Klinikstichprobe nur einmalig speichern
+        if (groupID === 0) {
+            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+        };
+
+        // Save
+        $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(group_alle));
+        $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(group_eintritt));
+    });
+
+};
+
+d.tmt_create_pdf_stack_old = function() {
+
+    var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
+    var stack_all = [];
+    var stack_eintritt = [];
+
+    tmt.groups.forEach(function(group, groupID) {
+
+        var gruppen_name = {
+            "text": group.name,
+            "style": "h3"
+        };
+
+        stack_all.push(gruppen_name);
+        stack_eintritt.push(gruppen_name);
+
+
+        tmt.zscore_options.width = 440;
+
+        group.data.forEach(function(messung, messungID) {
+
+            var zeit_fehler_array = [];
+            if (group.name === "TMT A") {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
+            } else {
+                var zeit = { "text": "Zeit: " + messung.calculation.TMTBTime };
+                var fehler = { "text": "Fehler: " + messung.calculation.TMTBError };
+                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
+            };
+            zeit_fehler_array.push(zeit);
+            zeit_fehler_array.push(fehler);
+
+            if (messung.zscore.text_left === "Eintritt") {
+                zeit_fehler_array.push(ba);
+            };
+
+
+            var count_steps = 0;
+            if (tmt.zscore_options.zscore_min <= 0) {
+                count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
+            } else {
+                count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
+            };
+
+
+            // Zahlen -3 | 0 | +3
+            var zahlen_to_push = $scope.d.templates.z_score_zahlen(tmt.zscore_options.zscore_min, tmt.zscore_options.zscore_max, tmt.zscore_options.width);
+
+            var z_score_grafik = {
+                "alignment": "left",
+                "columnGap": 12,
+                "columns": [{
+                    "width": "*",
+                    "stack": [{
+                        "columns": [
+                            { "text": messung.zscore.text_left, "alignment": "left" },
+                            { "text": messung.zscore.text_right, "alignment": "right" }
+                        ],
+                        "fontSize": 10,
+                        "color": "#212121",
+                        "margin": [0, 3, 0, 1]
+                    }, {
+                        "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
+                    }]
+                }, {
+                    "width": 62,
+                    "fontSize": 10,
+                    "alignment": "left",
+                    "stack": zeit_fehler_array,
+                    "margin": [0, 13, 0, 0]
+                }]
+            };
+
+
+            // Alle Messungen anzeigen
+            var z_score_grafik_all = angular.copy(z_score_grafik);
+            if (messungID === group.data.length - 1) {
+                z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
+            };
+            if (group.name !== "Zusatzitems") {
+                stack_all.push(z_score_grafik_all);
+            };
+
+            // Nur gewünschte Messungen anzeigen
+            if (messung.zscore.text_left === 'Eintritt') {
+                var z_score_grafik_eintritt = angular.copy(z_score_grafik);
+                z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
+                stack_eintritt.push(z_score_grafik_eintritt);
+            };
+
+
+        });
+
+    });
+
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push(stack_eintritt);
+    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push(stack_all);
+};
+
+// "Copy" from App
+
 d.tmt_loadKS = function(calculation_results) {
 
     var ks = {};
@@ -127,107 +447,6 @@ d.tmt_changeClinicSample = function(current_sample) {
     };
 
     //console.log('(Done) changeClinicSample', current_sample);
-};
-
-d.tmt_create_pdf_stack = function() {
-
-    var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
-    var stack_all = [];
-    var stack_eintritt = [];
-
-    tmt.groups.forEach(function(group, groupID) {
-
-        var gruppen_name = {
-            "text": group.name,
-            "style": "h3"
-        };
-
-        stack_all.push(gruppen_name);
-        stack_eintritt.push(gruppen_name);
-
-
-        tmt.zscore_options.width = 440;
-
-        group.data.forEach(function(messung, messungID) {
-
-            var zeit_fehler_array = [];
-            if (group.name === "TMT A") {
-                var zeit = { "text": "Zeit: " + messung.calculation.TMTATime };
-                var fehler = { "text": "Fehler: " + messung.calculation.TMTAError };
-                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
-            } else {
-                var zeit = { "text": "Zeit: " + messung.calculation.TMTBTime };
-                var fehler = { "text": "Fehler: " + messung.calculation.TMTBError };
-                var ba = { "text": "B/A: " + $scope.roundToTwo(messung.calculation.quotient) };
-            };
-            zeit_fehler_array.push(zeit);
-            zeit_fehler_array.push(fehler);
-
-            if (messung.zscore.text_left === "Eintritt") {
-                zeit_fehler_array.push(ba);
-            };
-
-
-            var count_steps = 0;
-            if (tmt.zscore_options.zscore_min <= 0) {
-                count_steps = Math.abs(tmt.zscore_options.zscore_min) + Math.abs(tmt.zscore_options.zscore_max);
-            } else {
-                count_steps = Math.abs(tmt.zscore_options.zscore_max) - Math.abs(tmt.zscore_options.zscore_min);
-            };
-
-
-            // Zahlen -3 | 0 | +3
-            var zahlen_to_push = $scope.d.templates.z_score_zahlen(tmt.zscore_options.zscore_min, tmt.zscore_options.zscore_max, tmt.zscore_options.width);
-
-            var z_score_grafik = {
-                "alignment": "left",
-                "columnGap": 12,
-                "columns": [{
-                    "width": "*",
-                    "stack": [{
-                        "columns": [
-                            { "text": messung.zscore.text_left, "alignment": "left" },
-                            { "text": messung.zscore.text_right, "alignment": "right" }
-                        ],
-                        "fontSize": 10,
-                        "color": "#212121",
-                        "margin": [0, 3, 0, 1]
-                    }, {
-                        "canvas": $scope.d.templates.z_score(messung.zscore, tmt.zscore_options)
-                    }]
-                }, {
-                    "width": 62,
-                    "fontSize": 10,
-                    "alignment": "left",
-                    "stack": zeit_fehler_array,
-                    "margin": [0, 13, 0, 0]
-                }]
-            };
-
-
-            // Alle Messungen anzeigen
-            var z_score_grafik_all = angular.copy(z_score_grafik);
-            if (messungID === group.data.length - 1) {
-                z_score_grafik_all.columns["0"].stack.push(zahlen_to_push);
-            };
-            if (group.name !== "Zusatzitems") {
-                stack_all.push(z_score_grafik_all);
-            };
-
-            // Nur gewünschte Messungen anzeigen
-            if (messung.zscore.text_left === 'Eintritt') {
-                var z_score_grafik_eintritt = angular.copy(z_score_grafik);
-                z_score_grafik_eintritt.columns["0"].stack.push(zahlen_to_push);
-                stack_eintritt.push(z_score_grafik_eintritt);
-            };
-
-
-        });
-
-    });
-
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push(stack_eintritt);
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push(stack_all);
 };
 
 d.tmt_initTMT = function() {

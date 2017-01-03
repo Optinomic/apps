@@ -205,7 +205,7 @@ $scope.getTemplates = function() {
                 "x2": length,
                 "y2": 0,
                 "lineWidth": 1,
-                "lineColor": "#69604d"
+                "lineColor": "#BDBDBD"
             }]
         };
 
