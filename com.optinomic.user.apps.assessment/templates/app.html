@@ -3,10 +3,9 @@ include(../lib/html/optinomic/page/start.m4)
     <h3 class="md-headline">Patienten-Assessment</h3>
     <div>
         <p class="md-body-1"><span class="md-body-2">Patientengruppe wählen:</span> Bitte selektieren Sie die gewünschte Patientengruppe:</p>
-        <md-input-container>
+        <md-input-container class="md-block" flex-gt-xs>
             <label>Patientengruppe</label>
             <md-select ng-model="d.app.selected_group">
-                <md-option><em>None</em></md-option>
                 <md-option ng-repeat="gruppe in d.dataMain.patient_groups" ng-value="gruppe">
                     {{gruppe.data.name}} ({{gruppe.patients.length}} Patienten)
                 </md-option>
