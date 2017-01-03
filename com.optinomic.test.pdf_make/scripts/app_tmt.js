@@ -95,7 +95,7 @@ d.tmt_create_pdf_stack = function() {
                 ks_alle.columns[1].stack.push(ks_item);
 
                 // Eintritt KS-Einträge
-                if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 3) || (messung.calculation.info.mz.mz_id === 4)) {
+                if (messung.zscore.text_left === 'Eintritt') {
                     // console.log('Klinikstichprobe', ks_eintritt);
                     ks_eintritt.columns[1].stack.push(ks_item);
                 };
@@ -156,7 +156,7 @@ d.tmt_create_pdf_stack = function() {
             messungen_alle.push(z_score_grafik_b_all);
 
             // Eintritt
-            if ((messung.calculation.info.mz.mz_id === 0) || (messung.calculation.info.mz.mz_id === 2) || (messung.calculation.info.mz.mz_id === 3) || (messung.calculation.info.mz.mz_id === 4)) {
+            if (messung.zscore.text_left === 'Eintritt') {
                 messungen_eintritt.push(z_score_grafik_b_eintritt);
             };
         });
