@@ -174,17 +174,20 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 my_all.push($scope.d.templates.heading("h2", app_title, date));
 
-                pdf.all.push($scope.d.templates.keepTogether(my_all));
 
 
                 var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
                 var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
 
-                console.log('(???) app_scope_ein', app_scope_ein);
 
                 if (app_scope_ein.fagerstroem === true) {
-                    pdf.all.push($scope.d.templates.keepTogether(app_scope_ein.fagerstroem_stack));
+                    console.log('(???) app_scope_ein', app_scope_ein);
+                    my_all.push(app_scope_ein.fagerstroem_stack);
                 };
+
+
+                pdf.all.push($scope.d.templates.keepTogether(my_all));
+
 
 
             } else {
