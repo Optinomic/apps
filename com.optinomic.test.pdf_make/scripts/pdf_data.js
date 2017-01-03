@@ -261,25 +261,24 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 switch (nikotin_konsum) {
                     case 999:
-                        var fagerstroem_text = " Das Rauchverhalten ist bei Austritt nicht bekannt.";
+                        austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
                         break;
                     case 1:
                         var nichtraucher = "Nichtraucherin";
                         if ($scope.d.dataMain.patient.data.gender === "male") {
                             nichtraucher = "Nichtraucher";
                         };
-                        var fagerstroem_text = " Bei Austritt in die Entwöhnungsbehandlung gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                        austritt_text = austritt_text + " Bei Austritt in die Entwöhnungsbehandlung gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
                         break;
                     default:
                         var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                         var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
 
                         fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-                        fagerstroem_text = " Bei Austritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                        austritt_text = austritt_text + " Bei Austritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
                 };
-                fagerstroem_stack.stack.push(fagerstroem_text);
-                my_all.push($scope.d.templates.text(austritt_text));
 
+                my_all.push($scope.d.templates.text(austritt_text));
                 pdf.all.push($scope.d.templates.keepTogether(my_all));
 
             } else {
