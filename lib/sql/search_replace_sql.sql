@@ -8,9 +8,32 @@ SET response = regexp_replace(response, 'AASE_(\w+)', 'AASE[\1]', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 
--- RECODE every AASE-Score with:  (5-Value)  
----- => 5=0, 4=1, 3=2, 2=3, 1=4, 0=5 
----- I don't know how to do that here!
+-- RECODE every AASE-Score with: 
+---- => => 4=0, 3=1, 2=2, 1=3, 0=4  
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"4"', '"AASE[\1]":"ZERO"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"3"', '"AASE[\1]":"ONE"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"1"', '"AASE[\1]":"3"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"0"', '"AASE[\1]":"4"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"ZERO"', '"AASE[\1]":"0"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"ONE"', '"AASE[\1]":"1"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
 
 
 
