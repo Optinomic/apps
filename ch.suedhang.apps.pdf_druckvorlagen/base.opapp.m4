@@ -1,12 +1,11 @@
 [module]
-id = com.optinomic.test.pdf_make
+id = ch.suedhang.apps.pdf_druckvorlagen
 name = _Druckvorlagen (PDF)
-short_description = Druckvorlagen (PDF) öffnen und herunterladen.
+short_description = Druckvorlagen als PDF-Files öffnen und herunterladen.
 version = include(VERSION)
 type = patient
 
 [description]
-Diese Applikation stellt gewünschte Patienten-Druckvorlagen (PDF) zur Verfügung.
 
 [developer]
 first_name = Beat
