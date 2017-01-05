@@ -14,7 +14,7 @@ $scope.getTemplates = function() {
     d.date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
     d.time = $filter("amDateFormat")(new Date(), 'HH:MM');
 
-    d.klinik = $scope.d.dataMain.clinic.data.clinic_name;
+    d.klinik = "Klinik Südhang";
 
     d.patient = $scope.d.dataMain.patient.data.ansprache + " " + $scope.d.dataMain.patient.data.last_name + " " + $scope.d.dataMain.patient.data.first_name + " (" + $scope.d.dataMain.patient.data.extras.birthday_age + ")";
 
