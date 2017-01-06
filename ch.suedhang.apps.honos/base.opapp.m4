@@ -63,7 +63,7 @@ min_lastpage = 2
 type = on_activation
 due_after = 259200
 overdue = send_reminder_once
-description = HoNOS Fragebogen
+description = HoNOS Eintritt
 survey = HoNOS
 
 [event before_exit]
@@ -72,15 +72,8 @@ days = 3
 time = 00:00
 due_after = 259200
 overdue = send_reminder_once
-description = HoNOS Fragebogen
+description = HoNOS Austritt
 survey = HoNOS
-
-[event activation]
-type = on_activation
-due_after = 259200
-overdue = ignore
-description = HoNOS - Verlaufsfragebogen
-survey = HoNOS_Verlauf
 
 
 [email new_event html]
