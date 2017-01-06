@@ -47,7 +47,7 @@ survey = bdi2
 
 [event activation]
 type = before_exit
-days = 7
+days = 8
 time = 08:00
 due_after = 259200
 overdue = ignore
