@@ -9,22 +9,26 @@ WHERE module = 'ch.suedhang.apps.aase-g';
 
 
 -- RECODE every AASE-Score with: 
----- => => 4=0, 3=1, 2=2, 1=3, 0=4  
+---- => 1 -> 4 | 2 -> 3 | 3 -> 2 | 4 -> 1 | 5 -> 0
 
 UPDATE "survey_response" 
-SET response = regexp_replace(response, '"AASE\[(\w+)\]":"4"', '"AASE[\1]":"ZERO"', 'g')
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"5"', '"AASE[\1]":"ZERO"', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 UPDATE "survey_response" 
-SET response = regexp_replace(response, '"AASE\[(\w+)\]":"3"', '"AASE[\1]":"ONE"', 'g')
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"4"', '"AASE[\1]":"ONE"', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 UPDATE "survey_response" 
-SET response = regexp_replace(response, '"AASE\[(\w+)\]":"1"', '"AASE[\1]":"3"', 'g')
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"3"', '"AASE[\1]":"TWO"', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 UPDATE "survey_response" 
-SET response = regexp_replace(response, '"AASE\[(\w+)\]":"0"', '"AASE[\1]":"4"', 'g')
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"2"', '"AASE[\1]":"THREE"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"1"', '"AASE[\1]":"FOUR"', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 UPDATE "survey_response" 
@@ -33,6 +37,18 @@ WHERE module = 'ch.suedhang.apps.aase-g';
 
 UPDATE "survey_response" 
 SET response = regexp_replace(response, '"AASE\[(\w+)\]":"ONE"', '"AASE[\1]":"1"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"TWO"', '"AASE[\1]":"2"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"THREE"', '"AASE[\1]":"3"', 'g')
+WHERE module = 'ch.suedhang.apps.aase-g';
+
+UPDATE "survey_response" 
+SET response = regexp_replace(response, '"AASE\[(\w+)\]":"FOUR"', '"AASE[\1]":"4"', 'g')
 WHERE module = 'ch.suedhang.apps.aase-g';
 
 
