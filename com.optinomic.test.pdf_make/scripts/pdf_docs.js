@@ -107,11 +107,11 @@ $scope.pdf_make_init = function() {
     doc.content.push($scope.d.templates.pageBreak());
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt);
 
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
+
     doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.eintritt);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.eintritt);
-
-    doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.eintritt);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt);
 
@@ -150,13 +150,13 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.actinfo_aus"].pdf.all);
 
-    doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
-
-    doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.all);
-
     doc.content.push($scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.bscl_anq"].pdf.all);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.aase-g"].pdf.all);
+
+    doc.content.push($scope.d.appData["ch.suedhang.apps.bdi"].pdf.all);
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.all);
 
