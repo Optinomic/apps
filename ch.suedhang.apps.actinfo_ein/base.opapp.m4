@@ -82,5 +82,9 @@ include(calculations/another_calculation.js)
 [sql_init]
 include(includes/create_view.sql)
 
+[sql_init]
+include(includes/create_view_production.sql)
+
+
 
 
