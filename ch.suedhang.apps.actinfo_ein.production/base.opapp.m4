@@ -29,7 +29,7 @@ website = http://suedhang.ch/
 
 
 [survey]
-id = actinfo_eintritt_production
+id = actinfo_eintritt
 type = lime
 responsibility = Admin
 name = actInfo - Eintritt
@@ -48,7 +48,7 @@ time = 8:00
 due_after = 259200
 overdue = ignore
 description = actInfo - Eintritt
-survey = actinfo_eintritt_production
+survey = actinfo_eintritt
 
 
 
