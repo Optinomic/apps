@@ -41,9 +41,9 @@ responsibility = patient_via_assessment
 name = Stress- & Coping-Inventar
 host = default
 survey_id = 933257
-hash = X20X257
-pid = X20X258
-fid = X20X259
+hash = X122X3529
+pid = X122X3530
+fid = X122X3531
 min_questions =
 min_lastpage = 2
 
