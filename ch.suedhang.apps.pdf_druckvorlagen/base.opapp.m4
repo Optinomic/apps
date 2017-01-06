@@ -21,6 +21,9 @@ website = http://www.optinomic.com/
 include(../lib/html/optinomic/templates/pdfmake.html)
 include(templates/pdf.html)
 
+[template assessment_report_only 6 9]
+include(../lib/html/optinomic/templates/pdfmake.html)
+include(templates/assessment.html)
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
