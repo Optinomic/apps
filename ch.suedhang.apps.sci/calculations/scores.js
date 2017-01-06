@@ -716,11 +716,11 @@ function main(responses) {
             if (gender === 'male') {
                 // Mann
                 current_population.current = M_0_19;
-                current_population.name = "Maenner, Juenger als 20 Jahre";
+                current_population.name = "Männer, Jünger als 20 Jahre";
             } else {
                 // Frau
                 current_population.current = F_0_19;
-                current_population.name = "Frauen, Juenger als 20 Jahre";
+                current_population.name = "Frauen, Jünger als 20 Jahre";
             };
         };
 
@@ -728,7 +728,7 @@ function main(responses) {
             if (gender === 'male') {
                 // Mann
                 current_population.current = M_20_30;
-                current_population.name = "Maenner, 20-30 Jahre";
+                current_population.name = "Männer, 20-30 Jahre";
             } else {
                 // Frau
                 current_population.current = M_20_30;
@@ -740,7 +740,7 @@ function main(responses) {
             if (gender === 'male') {
                 // Mann
                 current_population.current = M_31_50;
-                current_population.name = "Maenner, 31-50 Jahre";
+                current_population.name = "Männer, 31-50 Jahre";
             } else {
                 // Frau
                 current_population.current = F_31_50;
@@ -752,11 +752,11 @@ function main(responses) {
             if (gender === 'male') {
                 // Mann
                 current_population.current = M_51;
-                current_population.name = "Maenner, Aelter als 50 Jahre";
+                current_population.name = "Männer, Älter als 50 Jahre";
             } else {
                 // Frau
                 current_population.current = F_51;
-                current_population.name = "Frauen, Aelter als 50 Jahre";
+                current_population.name = "Frauen, Älter als 50 Jahre";
             };
         };
 
