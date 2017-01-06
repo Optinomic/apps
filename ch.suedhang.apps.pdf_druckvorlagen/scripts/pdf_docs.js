@@ -115,7 +115,7 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.eintritt);
 
-    doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt);
+    doc.content.push($scope.d.appData["ch.suedhang.apps.sci.production"].pdf.eintritt);
 
     doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.eintritt);
 
@@ -160,7 +160,7 @@ $scope.pdf_make_init = function() {
 
     doc.content.push($scope.d.appData["ch.suedhang.apps.isk"].pdf.all);
 
-    doc.content.push($scope.d.appData["ch.suedhang.apps.sci"].pdf.all);
+    doc.content.push($scope.d.appData["ch.suedhang.apps.sci.production"].pdf.all);
 
     doc.content.push($scope.d.appData["com.optinomic.apps.whoqol"].pdf.all);
 

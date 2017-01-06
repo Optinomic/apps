@@ -554,7 +554,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // SCI
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.sci") {
+        if (app_identifier === "ch.suedhang.apps.sci.production") {
 
             var app_title = "Stress-Coping-Inventar (SCI)";
             var description = "Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping).";
