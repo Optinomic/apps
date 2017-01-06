@@ -23,7 +23,7 @@ website = http://suedhang.ch/
 
 
 [survey]
-id = actinfo_austritt
+id = actinfo_austritt_production
 type = lime
 responsibility = Admin
 name = actInfo - Austritt
@@ -34,6 +34,16 @@ pid = X19X645
 fid = X19X578
 min_questions =
 min_lastpage = 5
+
+[event exit]
+type = before_exit
+time = 08:00
+days = 8
+due_after = 129200
+overdue = ignore
+description = actInfo - Austritt
+survey = actinfo_austritt_production
+
 
 [sql_init]
 include(includes/create_view_production.sql)
