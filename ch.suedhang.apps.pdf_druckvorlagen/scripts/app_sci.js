@@ -328,8 +328,8 @@ d.sci_create_pdf_stack = function(group_scores) {
             eintritt_group_stack.push(eintritt_messungen_container);
 
 
-            $scope.d.appData["ch.suedhang.apps.sci"].pdf.all.push($scope.d.templates.keepTogether(alle_group_stack));
-            $scope.d.appData["ch.suedhang.apps.sci"].pdf.eintritt.push($scope.d.templates.keepTogether(eintritt_group_stack));
+            $scope.d.appData["ch.suedhang.apps.sci.production"].pdf.all.push($scope.d.templates.keepTogether(alle_group_stack));
+            $scope.d.appData["ch.suedhang.apps.sci.production"].pdf.eintritt.push($scope.d.templates.keepTogether(eintritt_group_stack));
 
 
         });
@@ -351,12 +351,12 @@ d.sci = function() {
 
 d.sci_setStanineView = function() {
 
-    var data = $scope.d.appData["ch.suedhang.apps.sci"].data;
-    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine = {};
-    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine = {};
+    var data = $scope.d.appData["ch.suedhang.apps.sci.production"].data;
+    $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_stanine = {};
+    $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_d_stanine = {};
 
-    var scope_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine;
-    var scope_d_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine;
+    var scope_stanine = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_stanine;
+    var scope_d_stanine = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_d_stanine;
 
     scope_stanine = {};
     scope_stanine.data = [];
@@ -467,8 +467,8 @@ d.sci_setStanineView = function() {
     };
 
 
-    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine = scope_stanine;
-    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine = scope_d_stanine;
+    $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_stanine = scope_stanine;
+    $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_d_stanine = scope_d_stanine;
 
 
     console.log('(!) setStanineView', scope_stanine, scope_d_stanine);
@@ -478,8 +478,8 @@ d.sci_setStanineView = function() {
 
 d.groupStanineView = function() {
 
-    var scope_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_stanine;
-    var scope_d_stanine = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.scope_d_stanine;
+    var scope_stanine = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_stanine;
+    var scope_d_stanine = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.scope_d_stanine;
 
 
     //prepare Array
@@ -546,7 +546,7 @@ d.groupStanineView = function() {
     });
 
 
-    $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores = {
+    $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores = {
         "hilfreich": group_array_hilfreich,
         "stress": group_array_stress,
         "unguenstig": group_array_unguenstig
@@ -561,7 +561,7 @@ d.groupStanineView = function() {
 
         current_messung.scores.forEach(function(current_score, myScoreID) {
 
-            var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.hilfreich[myScoreID];
+            var current_array = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores.hilfreich[myScoreID];
 
             var obj_to_push = {
                 "date": current_messung.date,
@@ -583,7 +583,7 @@ d.groupStanineView = function() {
 
         current_messung.scores.forEach(function(current_score, myScoreID) {
 
-            var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.stress[myScoreID];
+            var current_array = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores.stress[myScoreID];
 
             var obj_to_push = {
                 "date": current_messung.date,
@@ -605,7 +605,7 @@ d.groupStanineView = function() {
 
         current_messung.scores.forEach(function(current_score, myScoreID) {
 
-            var current_array = $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores.unguenstig[myScoreID];
+            var current_array = $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores.unguenstig[myScoreID];
 
             var obj_to_push = {
                 "date": current_messung.date,
@@ -622,7 +622,7 @@ d.groupStanineView = function() {
     });
 
 
-    d.sci_create_pdf_stack($scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores);
+    d.sci_create_pdf_stack($scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores);
 
-    //console.log('groupStanineView', $scope.d.appData["ch.suedhang.apps.sci"].app_scope.group_scores);
+    //console.log('groupStanineView', $scope.d.appData["ch.suedhang.apps.sci.production"].app_scope.group_scores);
 };
