@@ -29,7 +29,7 @@ website = http://suedhang.ch/
 
 
 [survey]
-id = actinfo_eintritt
+id = actinfo_eintritt_production
 type = lime
 responsibility = Admin
 name = actInfo - Eintritt
@@ -40,6 +40,17 @@ pid = X74X1748
 fid = X74X1747
 min_questions =
 min_lastpage = 5
+
+
+[event activation]
+type = on_activation
+time = 8:00
+due_after = 259200
+overdue = ignore
+description = actInfo - Eintritt
+survey = actinfo_eintritt_production
+
+
 
 [sql_init]
 include(includes/create_view_production.sql)
