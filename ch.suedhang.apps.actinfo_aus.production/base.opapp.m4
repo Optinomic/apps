@@ -25,7 +25,7 @@ website = http://suedhang.ch/
 [survey]
 id = actinfo_austritt
 type = lime
-responsibility = lead_therapist
+responsibility = Admin
 name = actInfo - Austritt
 host = limesurvey_v2
 survey_id = 116413
