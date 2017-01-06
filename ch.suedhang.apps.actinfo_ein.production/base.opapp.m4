@@ -31,7 +31,7 @@ website = http://suedhang.ch/
 [survey]
 id = actinfo_eintritt
 type = lime
-responsibility = Admin
+responsibility = lead_therapist
 name = actInfo - Eintritt
 host = limesurvey_v2
 survey_id = 275667
