@@ -1,7 +1,7 @@
 [module]
-id = ch.suedhang.apps.actinfo_ein
+id = ch.suedhang.apps.actinfo_ein.production
 name = ActInfo | Eintritt
-parent = ch.suedhang.apps.aase-g
+parent = ch.suedhang.apps.actinfo_ein
 short_description = actInfo Eintrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
