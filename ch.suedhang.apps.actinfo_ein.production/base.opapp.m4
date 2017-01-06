@@ -40,3 +40,6 @@ pid = X74X1748
 fid = X74X1747
 min_questions =
 min_lastpage = 5
+
+[sql_init]
+include(includes/create_view_production.sql)
