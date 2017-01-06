@@ -1,5 +1,5 @@
 [module]
-id = com.optinomic.apps.sci.production
+id = ch.suedhang.apps.sci.production
 name = Stress-Coping-Inventar (SCI)
 parent = ch.suedhang.apps.sci
 short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
@@ -21,7 +21,6 @@ website = http://suedhang.ch/de/Forschung
 
 
 [dependencies]
-
 
 
 [survey]

@@ -48,7 +48,7 @@ $scope.loadMainData = function() {
         $scope.loadAppData('ch.suedhang.apps.bscl_anq', false);
         $scope.loadAppData('ch.suedhang.apps.bdi', false);
         $scope.loadAppData('ch.suedhang.apps.isk', false);
-        $scope.loadAppData('ch.suedhang.apps.sci', false);
+        $scope.loadAppData('ch.suedhang.apps.sci.production', false);
         $scope.loadAppData('com.optinomic.apps.whoqol', false);
         $scope.loadAppData('ch.suedhang.apps.actinfo_aus', false);
 
