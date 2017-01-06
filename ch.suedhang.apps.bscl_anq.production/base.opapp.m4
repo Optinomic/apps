@@ -52,3 +52,8 @@ due_after = 259200
 overdue = ignore
 description = BSCL - Austritt
 survey = bscl_anq
+
+[sql_init]
+include(includes/create_view_production.sql)
+
+

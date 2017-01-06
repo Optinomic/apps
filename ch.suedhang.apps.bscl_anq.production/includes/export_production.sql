@@ -83,4 +83,4 @@ SELECT
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
-WHERE module = 'ch.suedhang.apps.bscl_anq' AND ((cast(response AS json))->>'q501V04') != '3';
+WHERE module = 'ch.suedhang.apps.bscl_anq.production' AND ((cast(response AS json))->>'q501V04') != '3';
