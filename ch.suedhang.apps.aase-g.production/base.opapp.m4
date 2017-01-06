@@ -54,3 +54,8 @@ due_after = 259200
 overdue = ignore
 description = Austritt: Abstinenzselbstwirksamkeit - Versuchung durch Substanz
 survey = aase
+
+
+[sql_init]
+include(includes/create_view_production.sql)
+
