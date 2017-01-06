@@ -9,8 +9,9 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
+  ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
+  ((cast(response AS json))->>'Datum') as datum,
 
   ((cast(response AS json))->>'BDI1') as bdi1,
   ((cast(response AS json))->>'BDI2') as bdi2,
@@ -32,13 +33,13 @@ SELECT
   ((cast(response AS json))->>'BDI18') as bdi18,
   ((cast(response AS json))->>'BDI19') as bdi19,
   ((cast(response AS json))->>'BDI20') as bdi20,
-  ((cast(response AS json))->>'BDI21') as bdi21,
-  ((cast(response AS json))->>'Datum') as datum,
+  ((cast(response AS json))->>'BDI21') as bdi21
+
+/*
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
   SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
   SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
-  ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
   ((cast(response AS json))->>'FID') as fid,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
@@ -47,7 +48,6 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
   SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')) AS datestamp_week,
-  ((cast(response AS json))->>'id') as id,
   ((cast(response AS json))->>'lastpage') as lastpage,
   ((cast(response AS json))->>'optinomixHASH') as optinomixhash,
   ((cast(response AS json))->>'startdate') as startdate,
@@ -57,10 +57,10 @@ SELECT
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
   ((cast(response AS json))->>'startlanguage') as startlanguage,
   ((cast(response AS json))->>'submitdate') as submitdate
+*/
   
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
-
 WHERE module = 'ch.suedhang.apps.bdi';
