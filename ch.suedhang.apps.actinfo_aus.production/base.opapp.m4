@@ -23,7 +23,7 @@ website = http://suedhang.ch/
 
 
 [survey]
-id = actinfo_austritt_production
+id = actinfo_austritt
 type = lime
 responsibility = Admin
 name = actInfo - Austritt
@@ -42,7 +42,7 @@ days = 8
 due_after = 129200
 overdue = ignore
 description = actInfo - Austritt
-survey = actinfo_austritt_production
+survey = actinfo_austritt
 
 
 [sql_init]
