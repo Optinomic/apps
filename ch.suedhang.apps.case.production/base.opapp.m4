@@ -1,7 +1,7 @@
 [module]
 id = ch.suedhang.apps.case.production
 name = CASE
-parent = id = ch.suedhang.apps.case.new
+parent = ch.suedhang.apps.case.new
 short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation
 version = include(VERSION)
 type = patient
