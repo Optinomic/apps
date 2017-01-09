@@ -42,15 +42,15 @@ $scope.loadMainData = function() {
         // Load App-Data
         $scope.d.appData = {};
 
-        $scope.loadAppData('ch.suedhang.apps.actinfo_ein', false);
-        $scope.loadAppData('ch.suedhang.apps.aase-g', false);
-        $scope.loadAppData('ch.suedhang.apps.tmt_V3', false);
-        $scope.loadAppData('ch.suedhang.apps.bscl_anq', false);
-        $scope.loadAppData('ch.suedhang.apps.bdi', false);
-        $scope.loadAppData('ch.suedhang.apps.isk', false);
+        $scope.loadAppData('ch.suedhang.apps.actinfo_ein.production', false);
+        $scope.loadAppData('ch.suedhang.apps.aase-g.production', false);
+        $scope.loadAppData('ch.suedhang.apps.tmt.production', false);
+        $scope.loadAppData('ch.suedhang.apps.bscl_anq.production', false);
+        $scope.loadAppData('ch.suedhang.apps.bdi.production', false);
+        $scope.loadAppData('ch.suedhang.apps.isk.production', false);
         $scope.loadAppData('ch.suedhang.apps.sci.production', false);
-        $scope.loadAppData('com.optinomic.apps.whoqol', false);
-        $scope.loadAppData('ch.suedhang.apps.actinfo_aus', false);
+        $scope.loadAppData('ch.suedhang.apps.whoqol.production', false);
+        $scope.loadAppData('ch.suedhang.apps.actinfo_aus.production', false);
 
         // $scope.loadAppData('ch.suedhang.apps.case.new', false);
 
@@ -60,8 +60,6 @@ $scope.loadMainData = function() {
             "count": 0,
             "done": false
         };
-
-
 
 
 

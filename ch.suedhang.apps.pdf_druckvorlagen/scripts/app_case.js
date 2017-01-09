@@ -1,7 +1,7 @@
 // 'ch.suedhang.apps.case.new'
 d.getCaseList = function() {
 
-    var survey_responses = $scope.d.appData["ch.suedhang.apps.case.new"].data.survey_responses;
+    var survey_responses = $scope.d.appData["ch.suedhang.apps.case.production"].data.survey_responses;
 
     var list_array = [];
     survey_responses.forEach(function(response, responseID) {

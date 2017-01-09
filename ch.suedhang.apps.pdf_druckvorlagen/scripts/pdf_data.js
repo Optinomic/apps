@@ -36,7 +36,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // actInfo - Eintritt
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.actinfo_ein") {
+        if (app_identifier === "ch.suedhang.apps.actinfo_ein.production") {
 
             var app_title = "ActInfo";
 
@@ -191,7 +191,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // actInfo - Austritt
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.actinfo_aus") {
+        if (app_identifier === "ch.suedhang.apps.actinfo_aus.production") {
             var app_title = "ActInfo | Austritt";
 
             var my_all = [];
@@ -211,8 +211,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 // my_all.push($scope.d.templates.heading("h2", app_title, date));
 
 
-                var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein"].app_scope;
-                var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus"].app_scope;
+                var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein.production"].app_scope;
+                var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus.production"].app_scope;
 
 
                 var austritt_text = "";
@@ -291,7 +291,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // TMT
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.tmt_V3") {
+        if (app_identifier === "ch.suedhang.apps.tmt.production") {
 
             var app_title = "Trail Making Test (TMT)";
             var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
@@ -327,7 +327,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // BSCL
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.bscl_anq") {
+        if (app_identifier === "ch.suedhang.apps.bscl_anq.production") {
 
             var app_title = "Brief Symptom Checklist (BSCL)";
             var description = "Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.";
@@ -360,7 +360,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // AASE-G
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.aase-g") {
+        if (app_identifier === "ch.suedhang.apps.aase-g.production") {
 
             var app_title = "Versuchung (AASE-G)";
             var description = "Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren";
@@ -462,7 +462,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // BDI-II
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.bdi") {
+        if (app_identifier === "ch.suedhang.apps.bdi.production") {
 
             var app_title = "Beck-Depressions-Inventar (BDI-II)";
             var description = "Erfassung depressiver Symptome anhand von 21 Aussagen. Der Summenwert gibt einen Hinweis auf den möglichen Schweregrad.";
@@ -522,7 +522,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // ISK
         // -----------------------------------------------------------------
-        if (app_identifier === "ch.suedhang.apps.isk") {
+        if (app_identifier === "ch.suedhang.apps.isk.production") {
 
             var app_title = "Soziale Kompetenzen (ISK)";
             var description = "Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.";
@@ -586,7 +586,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         // -----------------------------------------------------------------
         // WHOQOL-BREF
         // -----------------------------------------------------------------
-        if (app_identifier === "com.optinomic.apps.whoqol") {
+        if (app_identifier === "ch.suedhang.apps.whoqol.production") {
 
             var app_title = "Lebensqualität (WHOQOL-BREF)";
             var description = "Beurteilung der physischen und psychischen Lebensqualität.";

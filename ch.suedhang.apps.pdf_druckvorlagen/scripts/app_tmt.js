@@ -1,6 +1,6 @@
 d.tmt_create_pdf_stack = function() {
 
-    var tmt = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt;
+    var tmt = $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt;
     var stack_all = [];
     var stack_eintritt = [];
 
@@ -180,14 +180,14 @@ d.tmt_create_pdf_stack = function() {
 
         // Klinikstichprobe nur einmalig speichern
         if (groupID === 0) {
-            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
-            $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
+            $scope.d.appData["ch.suedhang.apps.tmt.production"].pdf.all.push($scope.d.templates.keepTogether(ks_alle));
+            $scope.d.appData["ch.suedhang.apps.tmt.production"].pdf.eintritt.push($scope.d.templates.keepTogether(ks_eintritt));
         };
 
     });
 
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.eintritt.push(stack_eintritt);
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].pdf.all.push(stack_all);
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].pdf.eintritt.push(stack_eintritt);
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].pdf.all.push(stack_all);
 };
 
 // "Copy" from App
@@ -240,7 +240,7 @@ d.tmt_loadKS = function(calculation_results) {
 
 d.tmt_getKSLocation = function(location_array) {
 
-    var current_ks = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.ks;
+    var current_ks = $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.ks;
 
     var data_dive = current_ks.data;
     var current_location_text = "";
@@ -326,12 +326,12 @@ d.tmt_changeClinicSample = function(current_sample) {
 d.tmt_initTMT = function() {
 
 
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt = {};
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.init = false;
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.show_legend = false;
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt = {};
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.init = false;
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.show_legend = false;
 
     // Default Z-Score Option
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options = {
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options = {
         "zscore_min": -5,
         "zscore_max": 5,
         "clinicsample_color": "#C5CAE9",
@@ -344,7 +344,7 @@ d.tmt_initTMT = function() {
 
 
     // Gruppierung der Messungen
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.groups = [{
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.groups = [{
         "name": "TMT A",
         "data": []
     }, {
@@ -354,7 +354,7 @@ d.tmt_initTMT = function() {
 
     // Build 
 
-    var alle_messungen = angular.copy($scope.d.appData["ch.suedhang.apps.tmt_V3"].data.calculations[0].calculation_results);
+    var alle_messungen = angular.copy($scope.d.appData["ch.suedhang.apps.tmt.production"].data.calculations[0].calculation_results);
 
     // Sort | Neueste Messung als letzter Eintrag.
     dataService.sortOn(alle_messungen, 'date', false, false);
@@ -383,20 +383,20 @@ d.tmt_initTMT = function() {
         var current_cs_color = cs_color[mz_id];
 
 
-        // $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options anpassen
-        if (Math.abs(zscore_A) > (Math.abs($scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options.zscore_min) - 0.5)) {
-            $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options.zscore_min = (Math.abs(zscore_A) + 1) * -1;
+        // $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options anpassen
+        if (Math.abs(zscore_A) > (Math.abs($scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options.zscore_min) - 0.5)) {
+            $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options.zscore_min = (Math.abs(zscore_A) + 1) * -1;
         };
 
-        if (Math.abs(zscore_B) > (Math.abs($scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options.zscore_max) - 0.5)) {
-            $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.zscore_options.zscore_max = (Math.abs(zscore_B) + 1);
+        if (Math.abs(zscore_B) > (Math.abs($scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options.zscore_max) - 0.5)) {
+            $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options.zscore_max = (Math.abs(zscore_B) + 1);
         };
 
 
 
         // Default Pfad für MD-Array erstellen
         var dimensions_path = [];
-        var current_ks = $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.ks;
+        var current_ks = $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.ks;
         current_ks.dimensions.forEach(function(current_dim, myDimID) {
 
             var default_last = current_dim.array.length - 1;
@@ -426,7 +426,7 @@ d.tmt_initTMT = function() {
 
 
         // Resultate in Gruppen schreiben
-        $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.groups.forEach(function(group, groupID) {
+        $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.groups.forEach(function(group, groupID) {
 
             var messung_obj = {
                 "calculation": messung,
@@ -487,7 +487,7 @@ d.tmt_initTMT = function() {
     });
 
     // MD - Daten befüllen
-    $scope.d.appData["ch.suedhang.apps.tmt_V3"].app_scope.tmt.groups.forEach(function(group, groupID) {
+    $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.groups.forEach(function(group, groupID) {
         group.data.forEach(function(groupInner, groupInnerID) {
             d.tmt_changeClinicSample(groupInner);
             //console.log('(!) 3 - changeClinicSample', groupID, groupInnerID, groupInner);
