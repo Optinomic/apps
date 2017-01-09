@@ -31,6 +31,10 @@ name = Trail Making Test (TMT)
 host = default
 
 
+[survey_markup tmt_ng]
+include(survey_markups/tmt_survey.html)
+
+
 [event activation]
 type = on_activation
 due_after = 259200
