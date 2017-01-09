@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.tmt.production
-name = TMT (Trail Making Test)
+name = Trail Making Test (TMT)
 short_description = Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen.
 parent = ch.suedhang.apps.tmt_V3
 version = include(VERSION)
