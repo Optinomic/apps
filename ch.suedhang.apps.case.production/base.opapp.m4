@@ -34,3 +34,11 @@ min_questions =
 min_lastpage = 2
 
 
+[event daily]
+type = on_activation
+due_after = 345600
+overdue = ignore
+description = Track your something.
+survey = CASE
+
+
