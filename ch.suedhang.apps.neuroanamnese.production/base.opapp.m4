@@ -32,3 +32,11 @@ pid = X30X1110
 fid = X30X1111
 min_questions =
 min_lastpage = 7
+
+[event activation]
+type = on_activation
+due_after = 345600
+overdue = ignore
+description = Neuroanamnese zum TMT
+survey = assessment
+
