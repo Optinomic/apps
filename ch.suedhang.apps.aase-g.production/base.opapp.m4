@@ -1,5 +1,5 @@
 [module]
-id = com.optinomic.apps.aase-g.production
+id = ch.suedhang.apps.aase-g.production
 name = AASE-G
 parent = ch.suedhang.apps.aase-g
 short_description = Versuchung - Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren
