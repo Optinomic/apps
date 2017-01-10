@@ -71,7 +71,7 @@ SELECT
   ((cast(response AS json))->>'ESCIUnsicherheit[ESCIU6]') as sciunsicherheit_esciu6,
   ((cast(response AS json))->>'ESCIUnsicherheit[ESCIU7]') as sciunsicherheit_esciu7,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
   ((cast(response AS json))->>'datestamp') as datestamp,
