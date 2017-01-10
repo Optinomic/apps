@@ -55,7 +55,7 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
   ((cast(response AS json))->>'datestamp') as datestamp,
