@@ -8,7 +8,7 @@ SELECT
   survey_response_view.filled as optinomic_survey_filled,
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
-    
+
   ((cast(response AS json))->>'Datum') as datum,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
   SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
@@ -56,23 +56,24 @@ SELECT
   scheduled,
   filled,
   module,
-  survey_response.id AS survey_response_id,  
-  stay.cis_fid AS fid,  
-  stay.id AS stay,  
-  stay.first_contact AS first_contact,  
-  stay.start AS start,  
+  survey_response.id AS survey_response_id,
+  stay.cis_fid AS fid,
+  stay.id AS stay,
+  stay.first_contact AS first_contact,
+  stay.start AS start,
   to_char(stay.start, 'YYYY') AS start_year,
   to_char(stay.start, 'WW') AS start_week,
   to_char(stay.start, 'HH24:MI') AS start_time,
-  stay.stop AS stop,  
-  stay.stop_status AS stop_status,  
-  stay.lead_therapist AS lead_therapist,  
-  stay.deputy_lead_therapist AS deputy_lead_therapist,  
-  stay.cis_lead_doctor AS lead_doctor,  
-  stay.insurance_number AS insurance_number  
+  stay.stop AS stop,
+  stay.stop_status AS stop_status,
+  stay.lead_therapist AS lead_therapist,
+  stay.deputy_lead_therapist AS deputy_lead_therapist,
+  stay.cis_lead_doctor AS lead_doctor,
+  stay.insurance_number AS insurance_number
 
-FROM "survey_response_view" 
-LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
+FROM "survey_response_view"
+LEFT JOIN event ON event.id = survey_response_view.event_id
+LEFT JOIN patient ON(survey_response_view.patient_id = patient.id)
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 
 WHERE module = 'com.optinomic.apps.whoqol.production';
@@ -80,4 +81,3 @@ WHERE module = 'com.optinomic.apps.whoqol.production';
 AND patient_view.id=1
 AND to_char(stay.start, 'YYYY') = '2014'
 */
-
