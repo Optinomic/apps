@@ -21,7 +21,7 @@ SELECT
   NULL as lieferung_ab_hier,
   'PB' as rekordart,
   71286515 as betriebsnummer_bur,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'q501V04') as zeitpunkt_bscl,
   ((cast(response AS json))->>'q501V05') as dropoutcode_bscl,
   ((cast(response AS json))->>'q501V06') as spezifikation_dropout_bscl_andere,
