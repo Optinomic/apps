@@ -1,3 +1,4 @@
+
 SELECT
 
   -- START:  Optinoimc Default |  Needed for Export-Toolbox
@@ -11,18 +12,18 @@ SELECT
 
   stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,  
-  ((cast(response AS json))->>'DauerAbh') as Abhängigkeitsdauer,
+  ((cast(response AS json))->>'DauerAbh') as Abhaengigkeitsdauer,
   ((cast(response AS json))->>'statEnzug') as statEntgiftungen,
   ((cast(response AS json))->>'ambEntzugMedi') as ambEntgiftungen,
   ((cast(response AS json))->>'Craving') as Craving,
-  ((cast(response AS json))->>'statEntwoehnung') as statEntwöhnung,
-  ((cast(response AS json))->>'ambEntwoehnung') as ambEntwöhnung,
-  ((cast(response AS json))->>'Abbrueche') as Therapieabbrüche,
-  ((cast(response AS json))->>'Rueckfaelle') as Rückfälle,
-  ((cast(response AS json))->>'Leber') as Leberschäden,
-  ((cast(response AS json))->>'Somat') as SomatSchäden,
-  ((cast(response AS json))->>'Neurol') as NeurologSchäden,
-  ((cast(response AS json))->>'Psych') as PsychSchäden,
+  ((cast(response AS json))->>'statEntwoehnung') as statEntwoehnung,
+  ((cast(response AS json))->>'ambEntwoehnung') as ambEntwoehnung,
+  ((cast(response AS json))->>'Abbrueche') as Therapieabbrueche,
+  ((cast(response AS json))->>'Rueckfaelle') as Rueckfaelle,
+  ((cast(response AS json))->>'Leber') as Leberschaeden,
+  ((cast(response AS json))->>'Somat') as SomatSchaeden,
+  ((cast(response AS json))->>'Neurol') as NeurologSchaeden,
+  ((cast(response AS json))->>'Psych') as PsychSchaeden,
   ((cast(response AS json))->>'Arbeitslos') as Arbeitslos,
   ((cast(response AS json))->>'Wohnen') as Wohnungslos,
   ((cast(response AS json))->>'Allein') as Alleinstehend,
@@ -34,7 +35,7 @@ SELECT
   ((cast(response AS json))->>'AbstMot') as AbstMotFehlt,
 
   TO_DATE(((cast(response AS json))->>'filled'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
   ((cast(response AS json))->>'id') as id,
@@ -45,6 +46,7 @@ SELECT
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id) 
+
 
 WHERE module = 'ch.suedhang.apps.caseV2';
 
