@@ -52,3 +52,7 @@ due_after = 259200
 overdue = ignore
 description = Austritt: Inventar Sozialer Kompetenzen (ISK)
 survey = isk
+
+[sql_init]
+include(includes/create_view.sql)
+

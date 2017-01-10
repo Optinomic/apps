@@ -12,7 +12,7 @@ SELECT
   stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Alter') as Alter,
-  ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre
+  ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre,
   ((cast(response AS json))->>'TMTATime') as ZeitA,
   ((cast(response AS json))->>'TMTAError') as FehlerA,
   ((cast(response AS json))->>'AzWert') as zWertA,

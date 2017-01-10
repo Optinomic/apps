@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW actinfo_aus_view_production AS 
+CREATE OR REPLACE VIEW actinfo_aus_view AS 
 
 include(includes/export_production.sql)
