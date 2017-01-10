@@ -30,7 +30,7 @@ SELECT
   ((cast(response AS json))->>'AASE[AASE17]') as aase17,
   ((cast(response AS json))->>'AASE[AASE18]') as aase18,
   ((cast(response AS json))->>'AASE[AASE19]') as aase19,
-  ((cast(response AS json))->>'AASE[AASE20]') as aase20,
+  ((cast(response AS json))->>'AASE[AASE20]') as aase20
 
 
 FROM "survey_response_view" 
