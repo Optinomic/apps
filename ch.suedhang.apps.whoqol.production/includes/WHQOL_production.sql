@@ -52,7 +52,7 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
   SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week,
-  event.random_hash,
+  random_hash,
   scheduled,
   filled,
   module,
