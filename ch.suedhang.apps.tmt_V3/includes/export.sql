@@ -12,7 +12,7 @@ SELECT
   stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Alter') as Alter,
-  ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre
+  ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre,
   ((cast(response AS json))->>'TMTATime') as ZeitA,
   ((cast(response AS json))->>'TMTAError') as FehlerA,
   ((cast(response AS json))->>'AzWert') as zWertA,
@@ -27,7 +27,7 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'Date'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Date'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
   ((cast(response AS json))->>'Messzeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'datestamp') as datestamp,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
