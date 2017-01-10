@@ -16,7 +16,7 @@ SELECT
   ((cast(response AS json))->>'PID') as PID_Limesurvey,
   'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
-  ((cast(response AS json))->>'FID') as FID,
+  ((cast(response AS json))->>'FID') as FID_survey,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
   ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
