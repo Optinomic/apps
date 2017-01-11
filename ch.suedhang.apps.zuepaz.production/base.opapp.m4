@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.apps.zuepaz
-name = ZüPaZ - Version Südhang
+name = Patientenzufriedenheit (ZüPaZ)
 short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Klinik Südhang
 parent = ch.suedhang.apps.zuepaz
 version = include(VERSION)
