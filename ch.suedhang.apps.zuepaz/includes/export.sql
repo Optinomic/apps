@@ -38,7 +38,7 @@ SELECT
   ((cast(response AS json))->>'Q00028') as zuepaz_28,
   ((cast(response AS json))->>'Q00029') as zuepaz_29,
   ((cast(response AS json))->>'Q00030') as zuepaz_30,
-  ((cast(response AS json))->>'Q0031') as zuepaz_31,
+  ((cast(response AS json))->>'Q0031') as zuepaz_31
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
