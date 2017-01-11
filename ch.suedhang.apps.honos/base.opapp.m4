@@ -46,19 +46,6 @@ fid = X24X327
 min_questions =
 min_lastpage = 2
 
-[survey]
-id = HoNOS_Verlauf
-type = lime
-responsibility = Admin
-name = HoNOS Verlauf
-host = default
-survey_id = 912771
-hash = X120X3482
-pid = X120X3483
-fid = X120X3484
-min_questions =
-min_lastpage = 2
-
 [event activation]
 type = on_activation
 due_after = 259200
