@@ -223,7 +223,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
                 };
 
-                austritt_text = austritt_text + " Bei Austritt wurde folgende Abstenezmotivation angebeben: "
+                austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
 
                 var motivation_rauchstopp = "";
                 var motivation_rauchstopp_angabe = false;
