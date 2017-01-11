@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.apps.zuepaz
+id = ch.suedhang.apps.zuepaz.production
 name = Patientenzufriedenheit (ZüPaZ)
 short_description = Zürcher Patientenzufriedenheit Fragebogen mit spezifischen Anpassungen für die Klinik Südhang
 parent = ch.suedhang.apps.zuepaz
