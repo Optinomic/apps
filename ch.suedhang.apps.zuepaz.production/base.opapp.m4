@@ -29,9 +29,9 @@ responsibility = lead_therapist
 name = Zuepaz
 host = default
 survey_id = 743827
-hash = X39X464
-pid = X39X465
-fid = X39X466
+hash = X78X2054
+pid = X78X2055
+fid = X78X2056
 min_questions =
 min_lastpage = 4
 
