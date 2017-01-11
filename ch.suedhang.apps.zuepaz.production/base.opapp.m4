@@ -25,7 +25,7 @@ website = http://www.optinomic.com/
 [survey]
 id = ZuePaZ_Suedhang
 type = lime
-responsibility = lead_therapist
+responsibility = Admin
 name = Zuepaz
 host = default
 survey_id = 743827
