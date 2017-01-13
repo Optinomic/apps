@@ -56,7 +56,6 @@
                                     bel_array.push(belegung);
 
                                     //console.log('==> belegung', belegung);
-                                    next_stay();
 
                                     stays_current = stays_current + 1;
                                     if (stays_count === stays_current) {
@@ -69,6 +68,9 @@
                                         };
 
                                         console.log('===>  write_obj', write_obj);
+
+                                        next_stay();
+
 
                                     };
                                 });
