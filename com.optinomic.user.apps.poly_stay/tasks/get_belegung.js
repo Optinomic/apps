@@ -1,46 +1,72 @@
 function get_belegung_task(filters) {
     get_patients(filters, function(patients) {
-        sequentially(patients, function(patient, next) {
+        sequentially_patients(patients, function(patient, next_patient) {
             try {
                 console.log("Processing patient #" + patient.id + " ...");
 
 
                 get_patient_stays(patient.id, function(patient_stays) {
-                    sequentially(patient_stays, function(patient_stay, next_patient_stay) {
+                    sequentially_stays(patient_stays, function(patient_stay, next_stay) {
                         try {
                             console.log("Processing stay #" + patient_stay.id + " ...");
-                            save_belegung_for_patient(patient_stay, next_patient_stay);
+                            save_belegung_for_patient(patient_stay, next_stay);
 
                         } catch (e) {
                             console.error(e);
-                            next_patient_stay();
+                            next_stay();
                         }
                     });
 
-                    next();
+                    next_patient();
 
                 });
 
 
             } catch (e) {
                 console.error(e);
-                next();
+                next_patient();
             }
         });
     });
 }
 
-function sequentially(objs, f) {
+function sequentially_patients(objs, f) {
     var i = 0;
     var l = objs.length;
-    var next = function() {
+    var next_patient = function() {
         if (i < l) {
             var obj = objs[i];
             i++;
-            f(obj, next);
+            f(obj, next_patient);
         }
     };
-    next();
+    next_patient();
+}
+
+function sequentially_stays(objs, f) {
+    var i = 0;
+    var l = objs.length;
+    var next_stay = function() {
+        if (i < l) {
+            var obj = objs[i];
+            i++;
+            f(obj, next_stay);
+        }
+    };
+    next_stay();
+}
+
+function sequentially_odbc(objs, f) {
+    var i = 0;
+    var l = objs.length;
+    var next_odbc = function() {
+        if (i < l) {
+            var obj = objs[i];
+            i++;
+            f(obj, next_odbc);
+        }
+    };
+    next_odbc();
 }
 
 function get_patients(filters, callback) {
@@ -74,5 +100,5 @@ function save_belegung_for_patient(input, next) {
 
     console.log('(INPUT) save_belegung_for_patient', input);
     // Do something
-    next();
+    next_stay();
 }
