@@ -80,15 +80,18 @@ function get_belegung_task(filters) {
                                         "war_einmal_legende": belegung.art
                                     };
 
-                                    console.log('===>  write_obj', write_obj);
-
-                                    next_stay();
+                                    console.log('===>  write_obj', bel_array[0].pid);
 
 
                                     if (patients_count === patients_current) {
                                         finished();
                                     };
 
+                                    next_patient();
+
+
+                                } else {
+                                    next_stay();
                                 };
 
                             });
@@ -101,7 +104,6 @@ function get_belegung_task(filters) {
                     });
 
 
-                    next_patient();
                 });
 
             } catch (e) {
