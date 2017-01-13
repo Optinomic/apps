@@ -53,11 +53,24 @@
                                 process_stay(patient_stay, bel_array, was_obj, next_stay);
 
 
+
+
+
                             } catch (e) {
                                 console.error(e);
                                 next_stay();
                             }
                         });
+
+
+                        var write_obj = {
+                            "alle": bel_array,
+                            "aktuell_letzter": bel_array[0],
+                            "war_einmal": was_obj,
+                            "war_einmal_legende": belegung.art
+                        };
+
+                        console.log('===>  write_obj', write_obj);
 
                         next_patient();
 
@@ -213,7 +226,7 @@
                 annotation_obj.bel_selector = belegung.current;
                 annotation_obj.bel_all = bel_response;
 
-                console.log('annotation_obj', annotation_obj);
+                //console.log('annotation_obj', annotation_obj);
 
 
                 bel_array.push(annotation_obj);
