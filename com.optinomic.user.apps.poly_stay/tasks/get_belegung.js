@@ -30,10 +30,16 @@ function get_belegung() {
 
 function get_belegung_task(filters) {
     get_patients(filters, function(patients) {
+
+        var patients_count = patients.length;
+        var patients_current = 0;
+
         sequentially_patients(patients, function(patient, next_patient) {
             try {
-                console.log("Processing patient #" + patient.id + " ...");
 
+                patients_current = patients_current + 1;
+
+                console.log("Processing patient #" + patient.id + " ...");
 
                 get_patient_stays(patient, function(patient_stays) {
 
@@ -74,9 +80,14 @@ function get_belegung_task(filters) {
 
                                     console.log('===>  write_obj', write_obj);
 
-                                    //next_stay();
-                                    next_patient();
+                                    next_stay();
 
+
+                                };
+
+                                if (patients_count === patients_current) {
+
+                                    finished();
 
                                 };
                             });
@@ -89,9 +100,7 @@ function get_belegung_task(filters) {
                     });
 
 
-
-
-
+                    next_patient();
                 });
 
             } catch (e) {
