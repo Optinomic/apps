@@ -61,15 +61,15 @@
                             }
                         });
 
-
-                        var write_obj = {
-                            "alle": bel_array,
-                            "aktuell_letzter": bel_array[0],
-                            "war_einmal": was_obj,
-                            "war_einmal_legende": belegung.art
-                        };
-
-                        console.log('===>  write_obj', write_obj);
+                        //  
+                        //  var write_obj = {
+                        //      "alle": bel_array,
+                        //      "aktuell_letzter": bel_array[0],
+                        //      "war_einmal": was_obj,
+                        //      "war_einmal_legende": belegung.art
+                        //  };
+                        //  
+                        //  console.log('===>  write_obj', write_obj);
 
                         next_patient();
 
@@ -224,7 +224,7 @@
 
                     //console.log('annotation_obj', annotation_obj);
 
-                    resolve(JSON.stringify(annot_obj));
+                    resolve(JSON.stringify(annotation_obj));
 
                 }
             });
