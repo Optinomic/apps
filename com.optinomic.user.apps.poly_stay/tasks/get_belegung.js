@@ -5,7 +5,7 @@ function get_belegung_task(filters) {
                 console.log("Processing patient #" + patient.id + " ...");
 
 
-                get_patient_stays(patient.id, function(patient_stays) {
+                get_patient_stays(patient, function(patient_stays) {
                     sequentially_stays(patient_stays, function(patient_stay, next_stay) {
                         try {
                             console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
@@ -102,9 +102,9 @@ function get_patients(filters, callback) {
     });
 }
 
-function get_patient_stays(patient_id, callback) {
+function get_patient_stays(patient, callback) {
 
-    var api_call = "/patients/" + patient_id + "/stays";
+    var api_call = "/patients/" + patient.id + "/stays";
 
     helpers.callAPI("GET", api_call, null, null, function(stays_resp) {
         if (stays_resp.status != 200) {
@@ -137,8 +137,10 @@ function get_stays_odbc(stay, callback) {
         if (resp_bel.status != 200) {
             console.error(resp_bel.responseText);
         } else {
-            var stay_odbd = JSON.parse(resp_bel.responseText);
-            callback(stay_odbd);
+            var stay_odbc = JSON.parse(resp_bel.responseText);
+            console.log('stay_odbc', stay, stay_odbc);
+
+            callback(stay_odbc);
         }
     });
 }
