@@ -28,6 +28,35 @@ function get_belegung() {
     return belegung;
 };
 
+function job_finised() {
+    console.log('FINISHED');
+};
+
+
+function writeBelegung(annot_obj) {
+
+    return new Promise(function(resolve, reject) {
+
+
+        var patient_id = parseInt(annot_obj.aktuell_letzter.pid);
+
+        var apiStr = '/patients/' + patient_id + '/modules/com.optinomic.init.poly_stay/annotations';
+        var body = {
+            "value": JSON.stringify(annot_obj)
+        };
+
+        // console.log('writeBelegung:', patient_id, body.value);
+
+        helpers.callAPI("PUT", apiStr, null, body, function(resp_write) {
+            console.log(' -> write ', patient_id);
+            resolve(JSON.stringify(annot_obj));
+        });
+
+
+
+    });
+};
+
 function get_belegung_task(filters) {
     get_patients(filters, function(patients) {
 
@@ -80,14 +109,22 @@ function get_belegung_task(filters) {
                                         "war_einmal_legende": belegung.art
                                     };
 
-                                    console.log('===>  write_obj', bel_array[0].pid, patients_count, patients_current);
+                                    writeBelegung(write_obj).then(function(write_done) {
+
+                                        console.log('===>  write_obj', bel_array[0].pid, patients_count, patients_current);
 
 
-                                    if (patients_count === patients_current) {
-                                        finished();
-                                    } else {
-                                        next_patient();
-                                    };
+                                        if (patients_count === patients_current) {
+
+                                            console.log('DONE!!!');
+                                            job_finised();
+
+                                        } else {
+                                            next_patient();
+                                        };
+
+                                    });
+
 
                                 } else {
                                     next_stay();
@@ -112,6 +149,8 @@ function get_belegung_task(filters) {
         });
     });
 };
+
+
 
 function sequentially_patients(objs, f) {
     var i = 0;
@@ -164,9 +203,7 @@ function get_patient_stays(patient, callback) {
     });
 };
 
-function finised() {
-    console.log('FINISHED');
-};
+
 
 
 function process_stay(stay) {
