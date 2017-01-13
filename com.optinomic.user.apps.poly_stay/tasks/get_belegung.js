@@ -174,7 +174,7 @@
 
                 if (resp_bel.status != 200) {
                     console.error(resp_bel.responseText);
-                    next_stay();
+                    resolve(JSON.stringify(annotation_obj));
                 } else {
 
                     if ((resp_bel.responseText !== null) && (resp_bel.responseText !== '')) {
