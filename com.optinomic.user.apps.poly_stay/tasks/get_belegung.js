@@ -100,5 +100,5 @@ function save_belegung_for_patient(input, next) {
 
     // console.log('(INPUT) save_belegung_for_patient', input);
     // Do something
-    next_stay();
+    next();
 }
