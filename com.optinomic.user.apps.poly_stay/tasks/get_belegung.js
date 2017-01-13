@@ -40,18 +40,37 @@
                             was_obj[bel.bel_id] = false;
                         });
 
-                        sequentially_stays(patient_stays, function(patient_stay, next_stay) {
 
+                        var stays_count = patient_stays.length;
+                        var stays_current = 0;
+
+                        sequentially_stays(patient_stays, function(patient_stay, next_stay) {
 
                             try {
 
                                 console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
 
+                                process_stay(patient_stay).then(function(belegung) {
 
-                                process_stay(patient_stay).then(function(stay_json) {
+                                    was_obj[belegung.bel_selector.bil_id] = true;
+                                    bel_array.push(belegung);
 
-                                    console.log('==> stay_json', stay_json);
+                                    //console.log('==> belegung', belegung);
                                     next_stay();
+
+                                    stays_current = stays_current + 1;
+                                    if (stays_count === stays_current) {
+
+                                        var write_obj = {
+                                            "alle": bel_array,
+                                            "aktuell_letzter": bel_array[0],
+                                            "war_einmal": was_obj,
+                                            "war_einmal_legende": belegung.art
+                                        };
+
+                                        console.log('===>  write_obj', write_obj);
+
+                                    };
                                 });
 
 
@@ -61,15 +80,8 @@
                             }
                         });
 
-                        //  
-                        //  var write_obj = {
-                        //      "alle": bel_array,
-                        //      "aktuell_letzter": bel_array[0],
-                        //      "war_einmal": was_obj,
-                        //      "war_einmal_legende": belegung.art
-                        //  };
-                        //  
-                        //  console.log('===>  write_obj', write_obj);
+
+
 
                         next_patient();
 
@@ -174,7 +186,7 @@
 
                 if (resp_bel.status != 200) {
                     console.error(resp_bel.responseText);
-                    resolve(JSON.stringify(annotation_obj));
+                    resolve(annotation_obj);
                 } else {
 
                     if ((resp_bel.responseText !== null) && (resp_bel.responseText !== '')) {
@@ -224,7 +236,7 @@
 
                     //console.log('annotation_obj', annotation_obj);
 
-                    resolve(JSON.stringify(annotation_obj));
+                    resolve(annotation_obj);
 
                 }
             });
