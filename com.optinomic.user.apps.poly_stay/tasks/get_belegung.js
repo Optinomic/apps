@@ -5,10 +5,14 @@ var log = {
         "end": null
     },
     "count": {
-        "patients": 0
+        "patients": 0,
+        "stays": 0
+    },
+    "done": {
+        "patients": [],
+        "stays": []
     }
 };
-
 
 function get_belegung() {
     //INIT
@@ -109,12 +113,12 @@ function writeLog(log) {
 
 function job_finised() {
     writeLog(log).then(function(log_json) {
-
         console.log('(✓) FINISHED! ');
     }).then(null, function(error) {
         console.log('(!) ANNOTATION-ERROR, ', error);
     });
 };
+
 
 function writeBelegung(annot_obj) {
 
@@ -167,6 +171,7 @@ function get_belegung_task(filters) {
 
 
                     var stays_count = patient_stays.length;
+                    log.count.stays = log.count.stays + patient_stays.length;
                     var stays_current = 0;
 
                     sequentially_stays(patient_stays, function(patient_stay, next_stay) {
@@ -179,6 +184,7 @@ function get_belegung_task(filters) {
 
                                 was_obj[belegung.bel_selector.bel_id] = true;
                                 bel_array.push(belegung);
+
 
                                 //console.log('==> belegung', belegung);
 
@@ -214,6 +220,10 @@ function get_belegung_task(filters) {
                                 } else {
                                     next_stay();
                                 };
+
+                                // Fill logs
+                                log.done.patients.push(patient.id);
+                                log.done.stays.push(patient_stay.id);
 
                             });
 

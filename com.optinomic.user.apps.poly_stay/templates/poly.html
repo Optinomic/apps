@@ -20,7 +20,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <p class="md-caption">{{formatNumber(log.timings.duration_min)}}</p>
             </div>
             <div flex>
-                <p class="md-caption">{{log.done.patients.length}} / {{log.done.stays.length}}</p>
+                <p class="md-caption">{{log.count.patients.length}} | {{log.count.stays.length}}</p>
             </div>
             <div flex>
                 <md-button ng-if="!log.show_details" ng-click="log.show_details = true">Anzeigen</md-button>
