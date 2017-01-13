@@ -10,10 +10,10 @@ function get_belegung_task(filters) {
                         try {
 
 
-                            var odbc = get_stays_odbc(patient_stay);
+                            var odbc_return = get_stays_odbc(patient_stay);
 
                             console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
-                            console.log("   =>   ", odbc);
+                            console.log("   =>   ", odbc_return);
 
 
                         } catch (e) {
@@ -104,18 +104,21 @@ function get_stays_odbc(stay) {
 
     var return_obj = {};
 
-
     helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
         if (resp_bel.status != 200) {
-            return_obj = null;
             console.error(resp_bel.responseText);
+
+            return null;
+
         } else {
             return_obj = JSON.parse(resp_bel.responseText);
+            return return_obj;
+
         }
 
-        return return_obj;
     });
+
 }
 
 
