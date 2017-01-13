@@ -175,8 +175,8 @@ function process_stay(stay, next_stay) {
                 });
 
 
-                belegung.current.optinomic_pid = my_stay.patient_id;
-                belegung.current.optinomic_fid = my_stay.id;
+                belegung.current.optinomic_pid = stay.patient_id;
+                belegung.current.optinomic_fid = stay.id;
 
                 belegung.current.polypoint_paid = bel_response.rows[0].PAID;
                 belegung.current.polypoint_pid = bel_response.rows[0].PID;
@@ -190,7 +190,7 @@ function process_stay(stay, next_stay) {
                 belegung.current.austritt_zeit = bel_response.rows[0].ZEITAUSTRITT;
                 belegung.current.org_current = bel_response.rows[0].ORG_CURRENT;
 
-                belegung.current.phase = my_stay.data.phase;
+                belegung.current.phase = stay.data.phase;
             } else {
                 var bel_response = null;
             };
