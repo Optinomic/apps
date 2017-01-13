@@ -10,7 +10,7 @@ function get_belegung_task(filters) {
                 get_patient_stays(patient.id, function(patient_stays) {
                     sequentially(patient_stays, function(patient_stay, next_patient_stay) {
                         try {
-                            console.log("Processing stay #" + stay.id + " ...");
+                            console.log("Processing stay #" + patient_stay.id + " ...");
                             save_belegung_for_patient(patient_stay, next_patient_stay);
 
                         } catch (e) {
