@@ -8,29 +8,12 @@ function get_belegung_task(filters) {
                 get_patient_stays(patient, function(patient_stays) {
                     sequentially_stays(patient_stays, function(patient_stay, next_stay) {
                         try {
+
+
+                            var odbc = get_stays_odbc(patient_stay);
+
                             console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
-
-
-
-
-                            get_stays_odbc(patient_stay, function(patient_stays_odbc) {
-                                sequentially_odbc(patient_stays_odbc, function(patient_stay_odbc, next_odbc) {
-                                    try {
-                                        console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " | ODBC ...");
-                                        save_belegung_for_patient(patient_stay_odbc, next_odbc);
-
-                                    } catch (e) {
-                                        console.error(e);
-                                        next_odbc();
-                                    }
-                                });
-
-                                next_stay();
-
-                            });
-
-
-
+                            console.log("   =>   ", odbc);
 
 
                         } catch (e) {
@@ -78,18 +61,7 @@ function sequentially_stays(objs, f) {
     next_stay();
 }
 
-function sequentially_odbc(objs, f) {
-    var i = 0;
-    var l = objs.length;
-    var next_odbc = function() {
-        if (i < l) {
-            var obj = objs[i];
-            i++;
-            f(obj, next_odbc);
-        }
-    };
-    next_odbc();
-}
+
 
 function get_patients(filters, callback) {
     helpers.callAPI("GET", "/patients", filters, null, function(patients_resp) {
@@ -117,7 +89,7 @@ function get_patient_stays(patient, callback) {
 }
 
 
-function get_stays_odbc(stay, callback) {
+function get_stays_odbc(stay) {
 
     var sql = include_as_js_string(belegung_history_test.sql);
 
@@ -130,18 +102,19 @@ function get_stays_odbc(stay, callback) {
 
     var api_call = "/data_sources/Polypoint/query";
 
+    var return_obj = {};
+
 
     helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
-
         if (resp_bel.status != 200) {
+            return_obj = null;
             console.error(resp_bel.responseText);
         } else {
-            var stay_odbc = JSON.parse(resp_bel.responseText);
-            console.log('stay_odbc', stay, stay_odbc);
-
-            callback(stay_odbc);
+            return_obj = JSON.parse(resp_bel.responseText);
         }
+
+        return return_obj;
     });
 }
 
