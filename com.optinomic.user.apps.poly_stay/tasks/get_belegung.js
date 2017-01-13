@@ -3,7 +3,17 @@ function get_belegung_task(filters) {
         sequentially(patients, function(patient, next) {
             try {
                 console.log("Processing patient #" + patient.id + " ...");
-                save_belegung_for_patient(patient, next);
+                get_patient_stays(patient.id, function(patient_stays) {
+                    sequentially(patient_stays, function(patient_stay, next) {
+                        try {
+                            console.log("Processing patient #" + patient.id + " | " + patient_stay + " ...");
+                            save_belegung_for_patient(patient, next);
+                        } catch (e) {
+                            console.error(e);
+                            next();
+                        }
+                    });
+                });
             } catch (e) {
                 console.error(e);
                 next();
@@ -35,6 +45,21 @@ function get_patients(filters, callback) {
         }
     });
 }
+
+function get_patient_stays(patient_id, callback) {
+
+    var api_call = "/patients/" + patient_id + "/stays";
+
+    helpers.callAPI("GET", api_call, null, null, function(stays_resp) {
+        if (patients_resp.status != 200) {
+            console.error(stays_resp.responseText);
+        } else {
+            var patient_stays = JSON.parse(patients_resp.responseText).stays;
+            callback(patient_stays);
+        }
+    });
+}
+
 
 function save_belegung_for_patient(patient, next) {
     // Do something
