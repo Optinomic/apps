@@ -20,6 +20,7 @@ function get_belegung_task(filters) {
                     });
                 });
 
+                next();
 
 
             } catch (e) {
