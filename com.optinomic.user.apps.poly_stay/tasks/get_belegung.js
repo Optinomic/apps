@@ -5,8 +5,6 @@ function get_belegung_task(filters) {
                 console.log("Processing patient #" + patient.id + " ...");
 
 
-
-
                 get_patient_stays(patient.id, function(patient_stays) {
                     sequentially(patient_stays, function(patient_stay, next_patient_stay) {
                         try {
@@ -18,9 +16,10 @@ function get_belegung_task(filters) {
                             next_patient_stay();
                         }
                     });
-                });
 
-                next();
+                    next();
+
+                });
 
 
             } catch (e) {
