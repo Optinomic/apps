@@ -8,7 +8,7 @@ function get_belegung_task(filters) {
                 get_patient_stays(patient.id, function(patient_stays) {
                     sequentially_stays(patient_stays, function(patient_stay, next_stay) {
                         try {
-                            console.log("Processing stay #" + patient_stay.id + " ...");
+                            console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
                             save_belegung_for_patient(patient_stay, next_stay);
 
                         } catch (e) {
@@ -98,7 +98,7 @@ function get_patient_stays(patient_id, callback) {
 
 function save_belegung_for_patient(input, next) {
 
-    console.log('(INPUT) save_belegung_for_patient', input);
+    // console.log('(INPUT) save_belegung_for_patient', input);
     // Do something
     next_stay();
 }
