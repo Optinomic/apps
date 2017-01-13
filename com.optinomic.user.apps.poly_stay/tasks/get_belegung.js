@@ -57,7 +57,7 @@ function get_belegung_task(filters) {
 
                             process_stay(patient_stay).then(function(belegung) {
 
-                                was_obj[belegung.bel_selector.bil_id] = true;
+                                was_obj[belegung.bel_selector.bel_id] = true;
                                 bel_array.push(belegung);
 
                                 //console.log('==> belegung', belegung);
@@ -110,6 +110,10 @@ function sequentially_patients(objs, f) {
             i++;
             f(obj, next_patient);
         }
+
+        if (i === l) {
+            finised();
+        };
     };
     next_patient();
 };
@@ -152,9 +156,16 @@ function get_patient_stays(patient, callback) {
     });
 };
 
+function finised() {
+    console.log('FINISHED');
+};
+
+
 function process_stay(stay) {
 
     return new Promise(function(resolve, reject) {
+
+        console.log('STAY', stay);
 
         // Default
         var belegung = get_belegung();
