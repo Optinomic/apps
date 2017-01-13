@@ -11,9 +11,7 @@ function get_belegung_task(filters) {
 
                             console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
 
-                            get_stays_odbc(patient_stay).then(function(stay_odbc) {
-                                console.log("   =>   ", stay_odbc);
-                            });
+                            get_stays_odbc(patient_stay);
 
 
                         } catch (e) {
@@ -91,40 +89,34 @@ function get_patient_stays(patient, callback) {
 
 function get_stays_odbc(stay) {
 
-    return new Promise(function(resolve, reject) {
 
-        var sql = include_as_js_string(belegung_history_test.sql);
+    var sql = include_as_js_string(belegung_history_test.sql);
 
-        var body = {
-            "query": sql,
-            "direct": "True",
-            "format": "json"
-        };
-
-
-        var api_call = "/data_sources/Polypoint/query";
-
-        var return_obj = {};
-
-        helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
-
-            if (resp_bel.status != 200) {
-                console.error(resp_bel.responseText);
+    var body = {
+        "query": sql,
+        "direct": "True",
+        "format": "json"
+    };
 
 
-            } else {
-                return_obj = JSON.parse(resp_bel.responseText);
+    var api_call = "/data_sources/Polypoint/query";
 
-            }
+    var return_obj = {};
 
-            console.log('return_obj', return_obj);
-            return new return_obj;
+    helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
 
-            resolve(return_obj);
-        });
+        if (resp_bel.status != 200) {
+            console.error(resp_bel.responseText);
 
 
+        } else {
+            return_obj = JSON.parse(resp_bel.responseText);
+
+        }
+
+        console.log('return_obj', stay, return_obj);
     });
+
 
 }
 
@@ -135,82 +127,3 @@ function save_belegung_for_patient(input, next) {
     // Do something
     next();
 }
-
-
-function Promise(fn) {
-    var state = 'pending';
-    var value;
-    var deferred = null;
-
-    function resolve(newValue) {
-        try {
-            if (newValue && typeof newValue.then === 'function') {
-                newValue.then(resolve, reject);
-                return;
-            }
-            state = 'resolved';
-            value = newValue;
-
-            if (deferred) {
-                handle(deferred);
-            }
-        } catch (e) {
-            reject(e);
-        }
-    }
-
-    function reject(reason) {
-        state = 'rejected';
-        value = reason;
-
-        if (deferred) {
-            handle(deferred);
-        }
-    }
-
-    function handle(handler) {
-        if (state === 'pending') {
-            deferred = handler;
-            return;
-        }
-
-        var handlerCallback;
-
-        if (state === 'resolved') {
-            handlerCallback = handler.onResolved;
-        } else {
-            handlerCallback = handler.onRejected;
-        }
-
-        if (!handlerCallback) {
-            if (state === 'resolved') {
-                handler.resolve(value);
-            } else {
-                handler.reject(value);
-            }
-
-            return;
-        }
-
-        var ret;
-        try {
-            ret = handlerCallback(value);
-            handler.resolve(ret);
-        } catch (e) {
-            handler.reject(e);
-        }
-    }
-
-    this.then = function(onResolved, onRejected) {
-        return new Promise(function(resolve, reject) {
-            handle({
-                onResolved: onResolved,
-                onRejected: onRejected,
-                resolve: resolve,
-                reject: reject
-            });
-        });
-    };
-
-    fn(resolve, reject);
-};
