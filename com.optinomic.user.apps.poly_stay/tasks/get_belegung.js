@@ -71,6 +71,8 @@ function get_belegung_task(filters) {
                                 stays_current = stays_current + 1;
                                 if (stays_count === stays_current) {
 
+                                    var belegung = get_belegung();
+
                                     var write_obj = {
                                         "alle": bel_array,
                                         "aktuell_letzter": bel_array[0],
@@ -83,13 +85,12 @@ function get_belegung_task(filters) {
                                     next_stay();
 
 
-                                };
-
-                                if (patients_count === patients_current) {
-
-                                    finished();
+                                    if (patients_count === patients_current) {
+                                        finished();
+                                    };
 
                                 };
+
                             });
 
 
@@ -233,7 +234,7 @@ function process_stay(stay) {
                     });
 
 
-                    belegung.current.optinomic_pid = stay.patient_id;
+                    belegung.current.optinomic_pid = stay.data.patient_id;
                     belegung.current.optinomic_fid = stay.id;
 
                     belegung.current.polypoint_paid = bel_response.rows[0].PAID;
