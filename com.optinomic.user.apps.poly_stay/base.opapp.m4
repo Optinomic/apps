@@ -31,6 +31,9 @@ include(main.js)
 include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
+[task get_belegung_odbc javascript]
+include(tasks/get_belegung_current.js)
+
 [task get_belegung_current javascript]
 include(tasks/run_current_patients.m4)
 
