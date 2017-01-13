@@ -85,10 +85,9 @@ function get_belegung_task(filters) {
 
                                     if (patients_count === patients_current) {
                                         finished();
+                                    } else {
+                                        next_patient();
                                     };
-
-                                    next_patient();
-
 
                                 } else {
                                     next_stay();
