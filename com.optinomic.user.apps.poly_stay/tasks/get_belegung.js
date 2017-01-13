@@ -3,17 +3,25 @@ function get_belegung_task(filters) {
         sequentially(patients, function(patient, next) {
             try {
                 console.log("Processing patient #" + patient.id + " ...");
+
+
+
+
                 get_patient_stays(patient.id, function(patient_stays) {
-                    sequentially(patient_stays, function(patient_stay, next) {
+                    sequentially(patient_stays, function(patient_stay, next_patient_stay) {
                         try {
-                            console.log("Processing patient #" + patient.id + " | " + patient_stay + " ...");
-                            save_belegung_for_patient(patient, next);
+                            console.log("Processing stay #" + stay.id + " ...");
+                            save_belegung_for_patient(patient_stay, next_patient_stay);
+
                         } catch (e) {
                             console.error(e);
-                            next();
+                            next_patient_stay();
                         }
                     });
                 });
+
+
+
             } catch (e) {
                 console.error(e);
                 next();
@@ -61,7 +69,10 @@ function get_patient_stays(patient_id, callback) {
 }
 
 
-function save_belegung_for_patient(patient, next) {
+
+function save_belegung_for_patient(input, next) {
+
+    console.log('(INPUT) save_belegung_for_patient', patient_stay);
     // Do something
     next();
 }
