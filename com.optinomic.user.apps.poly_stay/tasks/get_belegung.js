@@ -85,15 +85,14 @@ function get_belegung_task(filters) {
                                         "war_einmal_legende": belegung.art
                                     };
 
-                                    console.log('===>  write_obj', bel_array[0].pid);
+                                    console.log('===>  write_obj', bel_array[0].pid, patients_count, patients_current);
 
 
                                     if (patients_count === patients_current) {
                                         finised();
-                                    } else {
-                                        next_ptient();
                                     };
 
+                                    next_ptient();
 
                                 } else {
                                     next_stay();
