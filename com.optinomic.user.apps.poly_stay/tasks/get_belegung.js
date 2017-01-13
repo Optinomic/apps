@@ -50,7 +50,7 @@
 
                                 console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
 
-                                process_stay(patient_stay, next_stay);
+                                process_stay(patient_stay, bel_array, was_obj, next_stay);
 
 
                             } catch (e) {
@@ -125,7 +125,7 @@
     }
 
 
-    function process_stay(stay, next_stay) {
+    function process_stay(stay, bel_array, was_obj, next_stay) {
 
 
 
