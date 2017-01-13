@@ -82,11 +82,6 @@ function get_belegung_task(filters) {
 
                                     console.log('===>  write_obj', bel_array[0].pid);
 
-
-                                    if (patients_count === patients_current) {
-                                        finished();
-                                    };
-
                                     next_patient();
 
 
@@ -111,6 +106,9 @@ function get_belegung_task(filters) {
                 next_patient();
             }
         });
+
+        finished();
+
     });
 };
 
