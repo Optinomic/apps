@@ -9,7 +9,29 @@ function get_belegung_task(filters) {
                     sequentially_stays(patient_stays, function(patient_stay, next_stay) {
                         try {
                             console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " ...");
-                            save_belegung_for_patient(patient_stay, next_stay);
+
+
+
+
+                            get_stays_odbc(patient_stay, function(patient_stays_odbc) {
+                                sequentially_odbc(patient_stays_odbc, function(patient_stay_odbc, next_odbc) {
+                                    try {
+                                        console.log("Processing patient #" + patient.id + " | stay #" + patient_stay.id + " | ODBC ...");
+                                        save_belegung_for_patient(patient_stay_odbc, next_odbc);
+
+                                    } catch (e) {
+                                        console.error(e);
+                                        next_odbc();
+                                    }
+                                });
+
+                                next_stay();
+
+                            });
+
+
+
+
 
                         } catch (e) {
                             console.error(e);
@@ -94,6 +116,32 @@ function get_patient_stays(patient_id, callback) {
     });
 }
 
+
+function get_stays_odbc(stay, callback) {
+
+    var sql = include_as_js_string(belegung_history_test.sql);
+
+    var body = {
+        "query": sql,
+        "direct": "True",
+        "format": "json"
+    };
+
+
+    var api_call = "/data_sources/Polypoint/query";
+
+
+    helpers.callAPI("POST", api_call, null, body, function(resp_bel) {
+
+
+        if (resp_bel.status != 200) {
+            console.error(resp_bel.responseText);
+        } else {
+            var stay_odbd = JSON.parse(resp_bel.responseText);
+            callback(stay_odbd);
+        }
+    });
+}
 
 
 function save_belegung_for_patient(input, next) {
