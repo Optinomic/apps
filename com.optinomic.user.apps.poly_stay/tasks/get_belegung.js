@@ -74,7 +74,9 @@ function get_belegung_task(filters) {
 
                                     console.log('===>  write_obj', write_obj);
 
-                                    next_stay();
+                                    //next_stay();
+                                    next_patient();
+
 
                                 };
                             });
@@ -89,7 +91,6 @@ function get_belegung_task(filters) {
 
 
 
-                    next_patient();
 
                 });
 
@@ -110,10 +111,6 @@ function sequentially_patients(objs, f) {
             i++;
             f(obj, next_patient);
         }
-
-        if (i === l) {
-            finised();
-        };
     };
     next_patient();
 };
@@ -165,8 +162,6 @@ function process_stay(stay) {
 
     return new Promise(function(resolve, reject) {
 
-        console.log('STAY', stay);
-
         // Default
         var belegung = get_belegung();
         belegung.current = belegung.art[0];
@@ -174,7 +169,7 @@ function process_stay(stay) {
         var annotation_obj = {
             "bel_selector": belegung.current,
             "bel_all": null,
-            "pid": stay.patient_id,
+            "pid": stay.data.patient_id,
             "fid": stay.id
         };
 
