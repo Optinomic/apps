@@ -72,7 +72,7 @@ function get_patient_stays(patient_id, callback) {
 
 function save_belegung_for_patient(input, next) {
 
-    console.log('(INPUT) save_belegung_for_patient', patient_stay);
+    console.log('(INPUT) save_belegung_for_patient', input);
     // Do something
     next();
 }
