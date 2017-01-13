@@ -109,16 +109,16 @@ function get_stays_odbc(stay) {
         if (resp_bel.status != 200) {
             console.error(resp_bel.responseText);
 
-            return null;
 
         } else {
             return_obj = JSON.parse(resp_bel.responseText);
-            return return_obj;
 
         }
 
-    });
+        console.log('return_obj', return_obj);
+        return return_obj;
 
+    });
 }
 
 
