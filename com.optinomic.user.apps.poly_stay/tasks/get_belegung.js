@@ -51,10 +51,10 @@ function get_patient_stays(patient_id, callback) {
     var api_call = "/patients/" + patient_id + "/stays";
 
     helpers.callAPI("GET", api_call, null, null, function(stays_resp) {
-        if (patients_resp.status != 200) {
+        if (stays_resp.status != 200) {
             console.error(stays_resp.responseText);
         } else {
-            var patient_stays = JSON.parse(patients_resp.responseText).stays;
+            var patient_stays = JSON.parse(stays_resp.responseText).stays;
             callback(patient_stays);
         }
     });
