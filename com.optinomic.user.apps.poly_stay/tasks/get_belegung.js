@@ -28,11 +28,6 @@ function get_belegung() {
     return belegung;
 };
 
-function finised() {
-    console.log('FINISHED');
-};
-
-
 function get_belegung_task(filters) {
     get_patients(filters, function(patients) {
 
@@ -89,10 +84,11 @@ function get_belegung_task(filters) {
 
 
                                     if (patients_count === patients_current) {
-                                        finised();
+                                        finished();
                                     };
 
-                                    next_ptient();
+                                    next_patient();
+
 
                                 } else {
                                     next_stay();
@@ -106,6 +102,8 @@ function get_belegung_task(filters) {
                             next_stay();
                         }
                     });
+
+
                 });
 
             } catch (e) {
@@ -113,9 +111,6 @@ function get_belegung_task(filters) {
                 next_patient();
             }
         });
-
-
-
     });
 };
 
@@ -170,6 +165,9 @@ function get_patient_stays(patient, callback) {
     });
 };
 
+function finised() {
+    console.log('FINISHED');
+};
 
 
 function process_stay(stay) {
