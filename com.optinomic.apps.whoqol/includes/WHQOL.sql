@@ -30,7 +30,7 @@ SELECT
   ((cast(response AS json))->>'EWHOQOL1625[EWHOQOL19]') as WHOQOL_19,
   ((cast(response AS json))->>'EWHOQOL26') as WHOQOL_26,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'FID') as fid,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
   ((cast(response AS json))->>'datestamp') as datestamp,
