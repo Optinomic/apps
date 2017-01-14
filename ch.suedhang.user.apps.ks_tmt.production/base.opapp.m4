@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 
 
 [dependencies]
-ch.suedhang.apps.tmt_V3 >= 1.0
+ch.suedhang.apps.tmt.production >= 1.0
 
 
 [calculation tmt_klinikstichprobe javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]

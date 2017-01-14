@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 
 
 [dependencies]
-ch.suedhang.apps.isk >= 1.0
+ch.suedhang.apps.isk.production >= 1.0
 
 
 
