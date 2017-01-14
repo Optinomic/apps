@@ -2,7 +2,7 @@
 id = ch.suedhang.user.apps.ks_bscl.production
 name = Klinische Stichprobe | BSCL
 short_description = Klinische Stichproben | BSCL (ANQ)
-parent = ch.suedhang.apps.bscl_anq.production
+parent = com.optinomic.user.apps.ks_bscl
 version = include(VERSION)
 type = user
 
