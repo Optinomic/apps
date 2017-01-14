@@ -14,13 +14,13 @@ include(../lib/html/optinomic/page/start.m4)
                 <h3 class="md-caption">{{log.date | date}}</h3>
             </div>
             <div flex>
-                <p class="md-caption">{{getTaskArt(log.patient_filters)}}</p>
+                <p class="md-caption">{{log.name}}</p>
             </div>
             <div flex>
                 <p class="md-caption">{{formatNumber(log.timings.duration_min)}}</p>
             </div>
             <div flex>
-                <p class="md-caption">{{log.count.patients.length}} | {{log.count.stays.length}}</p>
+                <p class="md-caption">{{log.count.patients}} | {{log.count.stays}}</p>
             </div>
             <div flex>
                 <md-button ng-if="!log.show_details" ng-click="log.show_details = true">Anzeigen</md-button>
