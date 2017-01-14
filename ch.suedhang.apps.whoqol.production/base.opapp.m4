@@ -10,6 +10,7 @@ type = patient
 Beurteilung der Physischen und Psychischen Lebensqualität.
 
 
+
 [developer]
 first_name = Nora
 last_name = Schönenberger
@@ -21,6 +22,7 @@ website = http://suedhang.ch/de/Forschung
 
 
 [dependencies]
+
 
 [survey]
 id = WHOQOL
@@ -41,7 +43,7 @@ type = on_activation
 time = 08:00
 due_after = 259200
 overdue = ignore
-description = Eintritt: Lebensqualität (WHOQOL)
+description = Eintritt - Lebensqualität (WHOQOL)
 survey = WHOQOL
 
 [event before_exit]
@@ -50,7 +52,6 @@ days = 8
 time = 08:00
 due_after = 259200
 overdue = ignore
-description = Austritt: Lebensqualität (WHOQOL)
+description = Austritt - Lebensqualität (WHOQOL)
 survey = WHOQOL
-
 
