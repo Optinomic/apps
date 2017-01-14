@@ -1,4 +1,5 @@
 var log = {
+    "name": task_name,
     "date": new Date(),
     "timings": {
         "start": new Date(),

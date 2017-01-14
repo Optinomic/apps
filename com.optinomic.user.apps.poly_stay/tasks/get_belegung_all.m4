@@ -1,3 +1,6 @@
+var task_name = "Alle Patienten";
+
+
 include(tasks/get_belegung.js)
 
 function main(token) {
