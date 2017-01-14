@@ -24,9 +24,6 @@ website = http://www.optinomic.com/
 [template score 6 6]
 include(templates/score.html)
 
-[template data_download_admin 6 10]
-include(templates/download.html)
-
 
 [dependencies]
 
