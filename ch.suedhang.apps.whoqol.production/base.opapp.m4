@@ -54,6 +54,3 @@ description = Austritt: Lebensqualität (WHOQOL)
 survey = WHOQOL
 
 
-[sql_init]
-include(includes/create_view.sql)
-
