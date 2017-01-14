@@ -2,7 +2,7 @@
 id = ch.suedhang.user.apps.ks_tmt.production
 name = Klinische Stichprobe | TMT
 short_description = Klinische Stichproben des Trail Making Test (TMT)
-parent = com.optinomic.user.apps.ks_tmt
+parent = ch.suedhang.user.apps.tmt
 version = include(VERSION)
 type = user
 
