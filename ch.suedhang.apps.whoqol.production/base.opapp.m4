@@ -1,8 +1,8 @@
 [module]
 id = ch.suedhang.apps.whoqol.production
 name = WHOQOL-BREF
-parent = com.optinomic.apps.whoqol
 short_description = The World Health Organization Quality of Life (WHOQOL)
+parent = com.optinomic.apps.whoqol
 version = include(VERSION)
 type = patient
 
