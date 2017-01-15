@@ -1,0 +1,123 @@
+include(../lib/html/optinomic/page/start.m4)
+<div ng-if="d.loaded !== true">
+    <h3 class="md-subhead">Berechne...</h3>
+</div>
+<div ng-if="d.loaded">
+    <div>
+        <h3 flex class="md-headline">Klinikstichprobe</h3>
+    </div>
+    <div>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <h3 flex class="md-subhead">{{d.ks.result_explorer.ks.dimensions.length}}-Dimensionen</h3>
+            <div>
+                <p class="md-caption" style="color:#BDBDBD">{{d.app}}, {{d.calculation}}</p>
+            </div>
+        </div>
+    </div>
+    <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+        <md-input-container flex ng-class="md-block" ng-repeat="dim in d.ks.result_explorer.ks.dimensions">
+            <label>{{dim.name}}</label>
+            <md-select ng-model="dim.selected" ng-change="changeDimensions()">
+                <md-option ng-repeat="item in dim.array" ng-value="item">
+                    {{item.text}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div ng-if="d.ks.result_explorer.ks.location.data !== null">
+        <div class="grid-border-top" style="margin-top: 30px;">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                <div flex>
+                    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                        <h3 flex class="md-headline">Daten-Explorer</h3>
+                        <div>
+                            <md-button class="md-primary" ng-click="saveSet()" aria-label="Herunterladen">
+                                Stichprobe herunterladen
+                            </md-button>
+                        </div>
+                    </div>
+                    <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
+            <md-input-container flex ng-class="md-block">
+                <label>Datenexplorer</label>
+                <md-select ng-model="d.ks.result_explorer.types.selected">
+                    <md-option ng-repeat="item in d.ks.result_explorer.types.all" ng-value="item">
+                        {{item.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex ng-class="md-block" ng-if="d.ks.result_explorer.types.selected.id !== 0">
+                <label>Datenexplorer</label>
+                <md-select ng-model="d.ks.result_explorer.types.selected_var">
+                    <md-option ng-repeat="item in d.ks.result_explorer.ks.variables" ng-value="item">
+                        {{item}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div ng-if="d.ks.result_explorer.types.selected.id === 0">
+            <div class="grid-border-top" style="margin-top: 30px;">
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                    <div flex>
+                        <h3 class="md-headline">Alle Daten</h3>
+                    </div>
+                </div>
+            </div>
+            <p class="md-headline">Statistic</p>
+            <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
+            <pre>{{d.ks.result_explorer.ks.location.data.statistics | json}}</pre>
+            <p class="md-headline">Scores & Patients</p>
+            <p class="md-subhead">{{d.ks.result_explorer.ks.location.text_full}}</p>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
+                <div flex>
+                    <p class="md-subhead">Scores <span class="md-caption">({{d.ks.result_explorer.ks.location.data.scores.length}})</span> </p>
+                    <pre>{{d.ks.result_explorer.ks.location.data.scores | json}}</pre>
+                </div>
+                <div flex>
+                    <p class="md-subhead">Patients <span class="md-caption">({{d.ks.result_explorer.ks.location.data.patients.length}})</span></p>
+                    <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
+                </div>
+            </div>
+        </div>
+        <div ng-if="d.ks.result_explorer.types.selected.id !== 0">
+            <div class="grid-border-top" style="margin-top: 30px;">
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                    <div flex>
+                        <h3 class="md-headline">{{d.ks.result_explorer.types.selected_var}}</h3>
+                        <p class="md-subhead">{{d.ks.md.selected_info.current_location_text}}</p>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start" layout-margin>
+                <div flex="60">
+                    <p class="md-title">Statistic</p>
+                    <pre>{{d.ks.result_explorer.ks.location.data.statistics[d.ks.result_explorer.types.selected_var] | json}}</pre>
+                </div>
+                <div flex="20">
+                    <p class="md-title">Scores <span class="md-caption">({{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var].length}})</span></p>
+                    <pre>{{d.ks.result_explorer.ks.location.data.scores[d.ks.result_explorer.types.selected_var] | json}}</pre>
+                </div>
+                <div flex="20">
+                    <p class="md-title">Patients <span class="md-caption">({{d.ks.result_explorer.ks.location.data.patients.length}})</span></p>
+                    <pre>{{d.ks.result_explorer.ks.location.data.patients | json}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="d.ks.result_explorer.ks.location.data === null">
+        <md-content class="md-padding">
+            <h1 class="md-display-2"><i class="mdi mdi-bell-outline"></i> Keine Daten</h1>
+            <p class="md-subhead">{{d.ks.result_explorer.ks.location.text}}</p>
+            <p class="flow-text">&nbsp;</p>
+        </md-content>
+    </div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button class="md-primary" ng-click="saveSet()" aria-label="Herunterladen">
+            Stichprobe herunterladen
+        </md-button>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)

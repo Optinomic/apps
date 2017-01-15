@@ -1,0 +1,57 @@
+include(../lib/html/optinomic/page/start.m4)
+<div>
+    <md-card>
+        <md-card-title style="background-color: #424242; color: #FAFAFA">
+            <md-card-title-text>
+                <span class="md-headline">
+                    {{d.dataMain.apps.current.name}}
+                </span>
+            </md-card-title-text>
+        </md-card-title>
+        <div ng-repeat="age_edu_mz_group_name in d.calculations.definitions.age_edu_mz_obj_prop_array">
+            <md-card-content layout-margin ng-init="current_age_edu_mz = d.calculations.age_edu_mz_obj[age_edu_mz_group_name]">
+                <p ng-init="toggle[age_edu_mz_group_name] = false">&nbsp;</p>
+                <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                    <div flex>
+                        <p class="md-title">{{current_age_edu_mz.age_group[1]}} &nbsp;&nbsp;<span style="color:#9E9E9E;">| &nbsp;&nbsp;n={{current_age_edu_mz.n}}</span></p>
+                        <p class="md-caption" style="color:#3F51B5;">{{current_age_edu_mz.edu_group[1]}} | {{current_age_edu_mz.mz_group[1]}}</p>
+                    </div>
+                    <div ng-if="current_age_edu_mz.statistics.calculated">
+                        <p class="md-caption" style="color:#C5CAE9;"><small>{{age_edu_mz_group_name}}</small></p>
+                        <md-button class="md-primary" ng-if="!toggle[age_edu_mz_group_name]" ng-click="toggle[age_edu_mz_group_name] = true">Anzeigen</md-button>
+                    </div>
+                </div>
+                <div ng-if="current_age_edu_mz.statistics.calculated">
+                    <div ng-if="toggle[age_edu_mz_group_name]">
+                        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Scores</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.scores | json}}</pre>
+                        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Patients</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.patients | json}}</pre>
+                        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
+                            <h3 class="md-subhead">Statistics</h3>
+                            <md-button ng-click="toggle[age_edu_mz_group_name] = false">Schliessen</md-button>
+                        </div>
+                        <pre>{{current_age_edu_mz.statistics | json}}</pre>
+                    </div>
+                </div>
+            </md-card-content>
+            <md-divider></md-divider>
+        </div>
+        <md-card-actions layout-gt-xs="row" layout-align="start center">
+            <md-button class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
+                <i class="mdi mdi-chevron-left"></i>
+            </md-button>
+            <p flex class="md-subhead" style="text-align:center;">Text</p>
+            <md-button class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
+                <i class="mdi mdi-chevron-right"></i>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+</div>
+include(../lib/html/optinomic/page/end.m4)
