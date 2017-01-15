@@ -168,7 +168,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 resp_obj.H6 = parseInt(resp.entity.data.response['H1[402V06]']);
                 resp_obj.H7 = parseInt(resp.entity.data.response['H1[402V07]']);
                 resp_obj.H8 = parseInt(resp.entity.data.response['H1[402V08]']);
-                resp_obj.H8_text = resp.entity.data.response['q402V09'];
                 resp_obj.H9 = parseInt(resp.entity.data.response['H2[402V11]']);
                 resp_obj.H10 = parseInt(resp.entity.data.response['H2[402V12]']);
                 resp_obj.H11 = parseInt(resp.entity.data.response['H2[402V13]']);
