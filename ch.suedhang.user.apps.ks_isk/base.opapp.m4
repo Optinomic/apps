@@ -1,5 +1,5 @@
 [module]
-id = com.optinomic.user.apps.ks_isk
+id = ch.suedhang.user.apps.ks_isk
 name = Klinische Stichprobe | ISK
 short_description = Klinische Stichproben | Inventar Sozialer Kompetenzen - Kurzform
 version = include(VERSION)

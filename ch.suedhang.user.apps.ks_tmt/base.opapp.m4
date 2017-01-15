@@ -1,5 +1,5 @@
 [module]
-id = ch.suedhang.user.apps.tmt
+id = ch.suedhang.user.apps.ks_tmt
 name = Klinische Stichprobe | TMT
 short_description = Klinische Stichproben des Trail Making Test (TMT)
 version = include(VERSION)
