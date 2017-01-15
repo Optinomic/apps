@@ -72,6 +72,32 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         survey_responses.forEach(function(resp, myRespID) {
 
+            var problem_art = [{
+                "code": "a"
+                "name": "Phobisch"
+            }, {
+                "code": "b"
+                "name": "Angst"
+            }, {
+                "code": "c"
+                "name": "Zwangsgedanken/ -handlungen"
+            }, {
+                "code": "e"
+                "name": "Dissoziativ"
+            }, {
+                "code": "f"
+                "name": "Somatoform"
+            }, {
+                "code": "g"
+                "name": "Essen"
+            }, {
+                "code": "h"
+                "name": "Schlaf"
+            }, {
+                "code": "i"
+                "name": "Sexuell"
+            }];
+
 
             var resp_obj = {};
 
@@ -106,6 +132,18 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
 
             } else {
+
+                // H8-Text setzen
+                resp_obj.H8_text = "Undefiniert";
+                if (resp.entity.data.response['q402V09'] === j) {
+                    resp_obj.H8_text = "Andere: " + resp.entity.data.response['q402V10'];
+                } else {
+                    problem_art.forEach(function(problem, myProblemindex) {
+                        if (problem.code === resp.entity.data.response['q402V09']) {
+                            resp_obj.H8_text = problem.name;
+                        };
+                    });
+                };
 
                 var mz = 'Unbekannt';
                 if (resp.entity.data.response.q401V04 === '1') {
