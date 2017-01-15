@@ -73,28 +73,28 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
         survey_responses.forEach(function(resp, myRespID) {
 
             var problem_art = [{
-                "code": "a"
+                "code": "a",
                 "name": "Phobisch"
             }, {
-                "code": "b"
+                "code": "b",
                 "name": "Angst"
             }, {
-                "code": "c"
+                "code": "c",
                 "name": "Zwangsgedanken/ -handlungen"
             }, {
-                "code": "e"
+                "code": "e",
                 "name": "Dissoziativ"
             }, {
-                "code": "f"
+                "code": "f",
                 "name": "Somatoform"
             }, {
-                "code": "g"
+                "code": "g",
                 "name": "Essen"
             }, {
-                "code": "h"
+                "code": "h",
                 "name": "Schlaf"
             }, {
-                "code": "i"
+                "code": "i",
                 "name": "Sexuell"
             }];
 
