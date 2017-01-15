@@ -92,7 +92,7 @@ function main(responses) {
     // ------------------------------------------
 
     calc.info = {
-        "patient_app_id": "ch.suedhang.apps.bscl_anq",
+        "patient_app_id": "ch.suedhang.apps.bscl_anq.production",
         "patient_app_calculation": "scores_calculation"
     };
 
