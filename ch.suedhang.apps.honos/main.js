@@ -135,7 +135,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 // H8-Text setzen
                 resp_obj.H8_text = "Undefiniert";
-                if (resp.entity.data.response['q402V09'] === j) {
+                if (resp.entity.data.response['q402V09'] === "j") {
                     resp_obj.H8_text = "Andere: " + resp.entity.data.response['q402V10'];
                 } else {
                     problem_art.forEach(function(problem, myProblemindex) {
