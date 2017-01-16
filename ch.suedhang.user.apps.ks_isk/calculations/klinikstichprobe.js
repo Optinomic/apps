@@ -60,6 +60,7 @@ function main(responses) {
     }];
 
 
+
     // ------------------------------------------
     // Info: com.optinomic.user.apps.klinikstichproben
     // What User App needs to know
