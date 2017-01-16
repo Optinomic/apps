@@ -626,18 +626,18 @@ $scope.getTemplates = function() {
                     "alignment": "left",
                     "text": " Berechnet durch «Optinomic» am " + d.date + " um " + d.time + " Uhr."
                 }, {
-                    "fontSize": 9,
+                    "fontSize": 10,
                     "bold": false,
                     "color": "#3F51B5",
                     "alignment": "left",
                     "margin": [0, 6, 0, 0],
                     "text": " " + "www.optinomic.com"
                 }, {
-                    "fontSize": 10,
+                    "fontSize": 9,
                     "bold": false,
                     "color": "#616161",
                     "alignment": "left",
-                    "text": " " + "Erkenntnis bringend"
+                    "text": " " + "Erkenntnisgewinn für den Behandlungsalltag"
                 }]
             }]
         };
