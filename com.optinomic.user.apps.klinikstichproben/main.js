@@ -597,7 +597,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // Load from files
 
-        if (identifier === 'ch.suedhang.user.apps.tmt') {
+        if ((identifier === 'ch.suedhang.user.apps.tmt') || (identifier === 'ch.suedhang.user.apps.ks_tmt')) {
             var ks_file = include_as_js_string(
                 ch_suedhang_user_apps_tmt.json)
 
@@ -608,7 +608,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         };
 
-        if (identifier === 'com.optinomic.user.apps.ks_isk') {
+        if ((identifier === 'com.optinomic.user.apps.ks_isk') || (identifier === 'ch.suedhang.user.apps.ks_isk')) {
             var ks_file = include_as_js_string(
                 com_optinomic_user_apps_ks_isk.json)
 
@@ -620,7 +620,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         };
 
 
-        if (identifier === 'com.optinomic.user.apps.ks_bscl') {
+        if ((identifier === 'com.optinomic.user.apps.ks_bscl') || (identifier === 'ch.suedhang.user.apps.ks_bscl')) {
             var ks_file = include_as_js_string(
                 com.optinomic.user.apps.ks_bscl.json)
 
