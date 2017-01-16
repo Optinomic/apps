@@ -646,7 +646,7 @@ d.bscl_init = function() {
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.bscl_anq.production"].app_scope.bscl.zscore_options = {
         "zscore_min": -3,
-        "zscore_max": 8,
+        "zscore_max": 12,
         "clinicsample_color": "#C5CAE9",
         "centered_zero": false,
         "show_text": false,
