@@ -1,0 +1,57 @@
+id;name;sql_filter;modules_to_activate;modules_to_deactivate;stay_sql_filter
+1;Männer;"WHERE gender='Male'";{};{};
+2;Frauen;"WHERE gender='Female'";{};{};
+4;"Behandlungsart: Teilstationär";"LEFT JOIN stay AS s ON s.patient = p.id WHERE s.class LIKE 'T%'";{};{};
+14;"Eintritte EP";;{};{};
+15;"Austritte EP";;{};{};
+5;"Alle Patienten";"WHERE 1=1";{ch.suedhang.apps.pdf_druckvorlagen,com.optinomic.init.poly_stay};{};
+17;"Behandlung: Aktuell in Behandlung";"LEFT JOIN stay ON(p.id = stay.patient) 
+WHERE  (stay.stop is null OR stay.stop >= now()) AND stay.start <= now()";{};{};
+18;"Behandlung: Aktuell Stationär";"LEFT JOIN stay ON(p.id = stay.patient) 
+WHERE 
+(stay.stop is null OR stay.stop >= now()) AND stay.start <= now()
+AND stay.class LIKE 'S%'";{};{};
+19;"Behandlung: Aktuell Teilstationär";"LEFT JOIN stay ON(p.id = stay.patient) 
+WHERE 
+(stay.stop is null OR stay.stop >= now()) AND stay.start <= now()
+AND stay.class LIKE 'T%'";{};{};
+10;"Belegung: EAS (aktuell)";"LEFT JOIN stay ON(p.id = stay.patient) 
+LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+
+WHERE 
+	(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EAS') 
+	AND (stay.stop is null OR stay.stop >= now())
+    AND stay.start <= now()";{};{};
+11;"Belegung: EP (aktuell)";"LEFT JOIN stay ON(p.id = stay.patient) 
+LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+
+WHERE 
+	(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EP') 
+	AND (stay.stop is null OR stay.stop >= now())
+    AND stay.start <= now()";{};{};
+13;"Belegung: TK (aktuell)";"LEFT JOIN stay ON(p.id = stay.patient) 
+LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+
+WHERE 
+	(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'TK') 
+	AND (stay.stop is null OR stay.stop >= now())
+    AND stay.start <= now()";{};{};
+16;"Belegung: Geplante Übertritte";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann 
+ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+WHERE 
+(ann.json#>>'{aktuell_letzter,bel_selector,bel_id}' = '3') AND 
+(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EAS') AND
+(ann.json#>>'{aktuell_letzter,bel_selector,phase}' = 'in_stay')";{};{};
+3;"Behandlungsart: Stationär";"LEFT JOIN stay AS s ON s.patient = p.id WHERE s.class LIKE 'S%'";{com.optinomic.init.poly_stay};{};
+8;"Belegung: EAS & EP (einst)";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+WHERE ann.json#>>'{war_einmal,3}' = 'true'";{};{};
+6;"Belegung: EAS (einst)";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+WHERE ann.json#>>'{war_einmal,1}' = 'true'";{};{};
+7;"Belegung: EP (einst)";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+WHERE ann.json#>>'{war_einmal,2}' = 'true'";{};{};
+9;"Belegung: TK (einst)";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+WHERE ann.json#>>'{war_einmal,4}' = 'true'";{};{};
+20;"Belegung: EAS & EP (aktuell)";"LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' 
+LEFT JOIN stay ON(p.id = stay.patient) 
+WHERE (stay.stop is null OR stay.stop >= now()) AND stay.start <= now()
+AND ann.json#>>'{war_einmal,3}' = 'true'";{};{};

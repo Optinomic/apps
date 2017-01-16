@@ -1,0 +1,144 @@
+{
+    "rows": [{
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "WHERE gender='Male'",
+        "name": "Männer",
+        "id": "1",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "WHERE gender='Female'",
+        "name": "Frauen",
+        "id": "2",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay AS s ON s.patient = p.id WHERE s.class LIKE 'T%'",
+        "name": "Behandlungsart: Teilstationär",
+        "id": "4",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "",
+        "name": "Eintritte EP",
+        "id": "14",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "",
+        "name": "Austritte EP",
+        "id": "15",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{ch.suedhang.apps.pdf_druckvorlagen,com.optinomic.init.poly_stay}",
+        "sql_filter": "WHERE 1=1",
+        "name": "Alle Patienten",
+        "id": "5",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nWHERE  (stay.stop is null OR stay.stop >= now()) AND stay.start <= now()",
+        "name": "Behandlung: Aktuell in Behandlung",
+        "id": "17",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nWHERE \n(stay.stop is null OR stay.stop >= now()) AND stay.start <= now()\nAND stay.class LIKE 'S%'",
+        "name": "Behandlung: Aktuell Stationär",
+        "id": "18",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nWHERE \n(stay.stop is null OR stay.stop >= now()) AND stay.start <= now()\nAND stay.class LIKE 'T%'",
+        "name": "Behandlung: Aktuell Teilstationär",
+        "id": "19",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nLEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \n\nWHERE \n\t(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EAS') \n\tAND (stay.stop is null OR stay.stop >= now())\n    AND stay.start <= now()",
+        "name": "Belegung: EAS (aktuell)",
+        "id": "10",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nLEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \n\nWHERE \n\t(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EP') \n\tAND (stay.stop is null OR stay.stop >= now())\n    AND stay.start <= now()",
+        "name": "Belegung: EP (aktuell)",
+        "id": "11",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN stay ON(p.id = stay.patient) \nLEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \n\nWHERE \n\t(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'TK') \n\tAND (stay.stop is null OR stay.stop >= now())\n    AND stay.start <= now()",
+        "name": "Belegung: TK (aktuell)",
+        "id": "13",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann \nON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nWHERE \n(ann.json#>>'{aktuell_letzter,bel_selector,bel_id}' = '3') AND \n(ann.json#>>'{aktuell_letzter,bel_selector,org_current}' = 'EAS') AND\n(ann.json#>>'{aktuell_letzter,bel_selector,phase}' = 'in_stay')",
+        "name": "Belegung: Geplante Übertritte",
+        "id": "16",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{com.optinomic.init.poly_stay}",
+        "sql_filter": "LEFT JOIN stay AS s ON s.patient = p.id WHERE s.class LIKE 'S%'",
+        "name": "Behandlungsart: Stationär",
+        "id": "3",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nWHERE ann.json#>>'{war_einmal,3}' = 'true'",
+        "name": "Belegung: EAS & EP (einst)",
+        "id": "8",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nWHERE ann.json#>>'{war_einmal,1}' = 'true'",
+        "name": "Belegung: EAS (einst)",
+        "id": "6",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nWHERE ann.json#>>'{war_einmal,2}' = 'true'",
+        "name": "Belegung: EP (einst)",
+        "id": "7",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nWHERE ann.json#>>'{war_einmal,4}' = 'true'",
+        "name": "Belegung: TK (einst)",
+        "id": "9",
+        "stay_sql_filter": ""
+    }, {
+        "modules_to_deactivate": "{}",
+        "modules_to_activate": "{}",
+        "sql_filter": "LEFT JOIN (SELECT *, cast(value as json) AS json FROM annotations) AS ann ON ann.patient_id = p.id AND ann.module = 'com.optinomic.init.poly_stay' \nLEFT JOIN stay ON(p.id = stay.patient) \nWHERE (stay.stop is null OR stay.stop >= now()) AND stay.start <= now()\nAND ann.json#>>'{war_einmal,3}' = 'true'",
+        "name": "Belegung: EAS & EP (aktuell)",
+        "id": "20",
+        "stay_sql_filter": ""
+    }],
+    "headers": [
+        "id",
+        "name",
+        "sql_filter",
+        "modules_to_activate",
+        "modules_to_deactivate",
+        "stay_sql_filter"
+    ]
+}
