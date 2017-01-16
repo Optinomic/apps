@@ -40,7 +40,7 @@ include(style.css)
 
 
 [calculation bscl_klinikstichprobe javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
-include(calculations/klinikstichprobe.js)
+include(calculations/return_responses.js)
 
 
 
