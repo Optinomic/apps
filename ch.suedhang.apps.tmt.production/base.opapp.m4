@@ -26,7 +26,7 @@ website = http://suedhang.ch/de/Forschung
 [survey]
 id = tmt_ng
 type = ng
-responsibility = lead_therapist
+responsibility = Admin
 name = Trail Making Test (TMT)
 host = default
 
