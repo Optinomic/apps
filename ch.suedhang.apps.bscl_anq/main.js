@@ -252,13 +252,22 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         // Build  & Sort | Neueste Messung als letzter Eintrag
-        var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-        alle_messungen.forEach(function(messung, messungID) {
-            messung.date = messung.info.filled;
+        // var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
+        // alle_messungen.forEach(function(messung, messungID) {
+        //     messung.date = messung.info.filled;
+        // });
+        // dataService.sortOn(alle_messungen, 'date', false, false);
+
+        var survey_responses = $scope.d.dataMain.survey_responses;
+        var alle_messungen = [];
+        survey_responses.forEach(function(sr, srID) {
+            if ("calculations" in sr) {
+                var current_calc = sr.calculations["0"].calculation_result;
+                current_calc.date = current_calc.info.filled;
+                alle_messungen.push(current_calc);
+            };
         });
         dataService.sortOn(alle_messungen, 'date', false, false);
-
-
 
         // Loop alle_messungen und messung in ISK A / ISK B pushen
         alle_messungen.forEach(function(messung, messungID) {
