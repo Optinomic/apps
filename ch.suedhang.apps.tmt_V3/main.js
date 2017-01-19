@@ -205,7 +205,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var all_calcs = $scope.d.dataMain.calculations["0"].calculation_results;
                 all_calcs.forEach(function(cc, ccID) {
                     if (sr.entity.data.event_id === cc.response.data.event_id) {
-                        cc.date = cc.info.filled;
+                        cc.date = cc.response.data.filled;
                         alle_messungen.push(cc);
                     }
                 });
