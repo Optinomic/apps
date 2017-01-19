@@ -39,9 +39,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run Specific Functions only when needed.
 
-                if (current_template === 'simple_score') {
-                    // $scope.setDataView();
-                };
+                // if (current_template === 'score') {
+                //     // $scope.setDataView();
+                // };
 
                 if (current_template === 'data_export_admin') {
                     $scope.setExport();
@@ -61,6 +61,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
     };
     $scope.loadMainData();
+
+
 
 
 
