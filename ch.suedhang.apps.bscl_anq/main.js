@@ -252,12 +252,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         });
 
         // Build  & Sort | Neueste Messung als letzter Eintrag
-        // var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
-        // alle_messungen.forEach(function(messung, messungID) {
-        //     messung.date = messung.info.filled;
-        // });
-        // dataService.sortOn(alle_messungen, 'date', false, false);
-
+        // Loop via survey_responses
         var survey_responses = $scope.d.dataMain.survey_responses;
         var alle_messungen = [];
         survey_responses.forEach(function(sr, srID) {
