@@ -10,42 +10,42 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-title>
         <md-card-content layout-margin>
             <p>&nbsp;</p>
-            <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">Eintritt</h3>
-            <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '2'" class="md-subhead">Austritt</h3>
-            <h3 ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Erhebungszeitpunkt === '3'" class="md-subhead">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.andererZeitpunkt}}</h3>
+            <h3 ng-if="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.response.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">Eintritt</h3>
+            <h3 ng-if="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.response.data.response.Erhebungszeitpunkt === '2'" class="md-subhead">Austritt</h3>
+            <h3 ng-if="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.response.data.response.Erhebungszeitpunkt === '3'" class="md-subhead">{{d.dataMain.survey_responses[d.navigator].calculations["0"].calculation_result.response.data.response.andererZeitpunkt}}</h3>
             <div>
-            <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Substanz === '1'"> Die Fragen wurden in Bezug auf Alkohol ausgefüllt. </p>
-            <p ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Substanz === '2'"> Die Fragen wurden in Bezug auf {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.SubstAndere}} ausgefüllt. </p>
+                <p ng-if="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.response.data.response.Substanz === '1'"> Die Fragen wurden in Bezug auf Alkohol ausgefüllt. </p>
+                <p ng-if="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.response.data.response.Substanz === '2'"> Die Fragen wurden in Bezug auf {{d.dataMain.survey_responses[d.navigator].calculations["0"].calculation_result.response.data.response.SubstAndere}} ausgefüllt. </p>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex="10" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="text-align: center">keine Versuchung</p>
+                    <p flex class="md-body-2" style="text-align: center">keine Versuchung</p>
                 </div>s
-                <div flex = "80">
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].score" min="0" max="80" show-percent-scale="true" show-min-max="true"></score-threshold>
+                <div flex="80">
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.score" min="0" max="80" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex="10" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="text-align: center">starke Versuchung</p>
+                    <p flex class="md-body-2" style="text-align: center">starke Versuchung</p>
                 </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
                     <p class="md-body-2" style="margin-top:12px;">Negativer Affekt</p>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].mean_negativer_affekt" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.mean_negativer_affekt" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex>
                     <p class="md-body-2" style="margin-top:12px;">Soziale Situationen</p>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].mean_soziale_situationen" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.mean_soziale_situationen" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
                     <p class="md-body-2" style="margin-top:12px;">Somatisches Unwohlsein</p>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].mean_somatisches_unwohlsein" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.mean_somatisches_unwohlsein" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
                 <div flex>
                     <p class="md-body-2" style="margin-top:12px;">Entzugserscheinungen</p>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].mean_entzugserscheinungen" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations[" 0 "].calculation_result.mean_entzugserscheinungen" min="0" max="4" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
             </div>
         </md-card-content>
@@ -54,7 +54,7 @@ include(../lib/html/optinomic/page/start.m4)
             <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
                 <i class="mdi mdi-chevron-left"></i>
             </md-button>
-            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response.Datum | date}} ({{d.navigator + 1}}/{{d.dataMain.calculations[0].calculation_results.length}})</p>
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.survey_responses[d.navigator].calculations["0"].calculation_result.response.data.response.Datum | date}} ({{d.navigator + 1}}/{{d.dataMain.calculations[0].calculation_results.length}})</p>
             <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
                 <i class="mdi mdi-chevron-right"></i>
             </md-button>
