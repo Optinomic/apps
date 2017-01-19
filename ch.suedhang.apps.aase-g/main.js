@@ -72,17 +72,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
     $scope.d.navigator = 0;
 
-    $scope.setCurrentResultDate = function() {
-        var date = $scope.d.dataMain.survey_responses[$scope.d.navigator].entity.data.filled
-
-        $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data.filled_date = {
-            'filled_datestamp': date,
-            'filled_date': $filter("amDateFormat")(date, 'DD.MM.YYYY'),
-            'filled_time': $filter("amDateFormat")(date, 'HH:mm')
-        };
-
-        //console.log('setCurrentResultDate', $scope.d.dataMain.calculations[0].calculation_results[$scope.d.navigator].response.data);
-    };
 
 
     $scope.prev = function() {
@@ -93,7 +82,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         } else {
             $scope.d.navigator = $scope.d.navigator - 1
         };
-        $scope.setCurrentResultDate();
     };
 
     $scope.next = function() {
@@ -104,8 +92,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         } else {
             $scope.d.navigator = $scope.d.navigator + 1
         };
-        $scope.setCurrentResultDate();
-
     };
 
 
