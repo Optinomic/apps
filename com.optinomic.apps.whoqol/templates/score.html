@@ -13,23 +13,23 @@ include(../lib/html/optinomic/page/start.m4)
             <h3 class="md-subhead">Physische Lebensqualität</h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.PHYS_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
             </div>
             <h3 class="md-subhead">Psychische Lebensqualität</h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[d.navigator].PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
+                    <score-threshold score="d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.PSYCH_avg" min="0" max="100" show-percent-scale="true" show-min-max="true"></score-threshold>
                 </div>
             </div>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
+            <md-button ng-if="d.dataMain.survey_responses.length > 1" class="md-icon-button md-accent" aria-label="Prev" ng-click="prev()">
                 <i class="mdi mdi-chevron-left"></i>
             </md-button>
-            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_date}}, {{d.dataMain.calculations[0].calculation_results[d.navigator].response.data.filled_date.filled_time}} ({{d.navigator + 1}}/{{d.dataMain.calculations[0].calculation_results.length}})</p>
-            <md-button ng-if="d.dataMain.calculations[0].calculation_results.length > 1" class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.survey_responses[d.navigator].entity.data.filled | date}} <span class="md-caption">({{d.navigator + 1}}/{{d.dataMain.survey_responses.length}})</span></p>
+            <md-button ng-if="d.dataMain.survey_responses.length > 1" class="md-icon-button md-accent" aria-label="Next" ng-click="next()">
                 <i class="mdi mdi-chevron-right"></i>
             </md-button>
         </md-card-actions>
