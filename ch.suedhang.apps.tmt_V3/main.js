@@ -189,12 +189,21 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "data": []
         }];
 
-        // Build 
 
-        var alle_messungen = angular.copy($scope.d.dataMain.calculations[0].calculation_results);
 
-        // Sort | Neueste Messung als letzter Eintrag.
+        // Build  & Sort | Neueste Messung als letzter Eintrag
+        // Loop via survey_responses
+        var survey_responses = $scope.d.dataMain.survey_responses;
+        var alle_messungen = [];
+        survey_responses.forEach(function(sr, srID) {
+            if ("calculations" in sr) {
+                var current_calc = sr.calculations["0"].calculation_result;
+                current_calc.date = current_calc.info.filled;
+                alle_messungen.push(current_calc);
+            };
+        });
         dataService.sortOn(alle_messungen, 'date', false, false);
+
 
 
         // Loop alle_messungen und messung in TMT A / TMT B pushen
