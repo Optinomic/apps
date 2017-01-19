@@ -358,14 +358,21 @@ d.tmt_initTMT = function() {
     var survey_responses = $scope.d.appData["ch.suedhang.apps.tmt.production"].data.survey_responses;
     var alle_messungen = [];
     survey_responses.forEach(function(sr, srID) {
-        var sr_event = sr.entity.data.event_id;
-        var all_calcs = $scope.d.dataMain.calculations["0"].calculation_results;
-        all_calcs.forEach(function(cc, ccID) {
-            if (sr.entity.data.event_id === cc.response.data.event_id) {
-                cc.date = cc.response.data.filled;
-                alle_messungen.push(cc);
-            }
-        });
+        if (("calculations" in sr) && (sr.calculations.length > 0)) {
+            var current_calc = sr.calculations["0"].calculation_result;
+            current_calc.date = current_calc.info.filled;
+            alle_messungen.push(current_calc);
+        } else {
+            var sr_event = sr.entity.data.event_id;
+            var all_calcs = $scope.d.appData["ch.suedhang.apps.tmt.production"].data.calculations["0"].calculation_results;
+            all_calcs.forEach(function(cc, ccID) {
+                if (sr.entity.data.event_id === cc.response.data.event_id) {
+                    cc.date = cc.response.data.filled;
+                    alle_messungen.push(cc);
+                }
+            });
+
+        };
     });
     dataService.sortOn(alle_messungen, 'date', false, false);
 
