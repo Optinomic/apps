@@ -339,7 +339,7 @@ d.isk_init = function() {
     var survey_responses = $scope.d.appData["ch.suedhang.apps.isk.production"].data.survey_responses;
     var alle_messungen = [];
     survey_responses.forEach(function(sr, srID) {
-        if ("calculations" in sr) {
+        if (("calculations" in sr) && (sr.calculations.length > 0)) {
             var current_calc = sr.calculations["0"].calculation_result;
             current_calc.date = current_calc.info.filled;
             alle_messungen.push(current_calc);
