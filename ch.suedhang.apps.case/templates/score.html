@@ -11,58 +11,21 @@ include(../lib/html/optinomic/page/start.m4)
         <md-card-content layout-margin>
             <p>&nbsp;</p>
             <div layout="row" layout-align="start start">
-                <div ng-if="d.dataMain.calculations[0].calculation_results[0].score !== null">
+                <div ng-if="d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score !== null">
                     <div>
-                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.calculations[0].calculation_results[0].score}}</b> auf.</h5>
+                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score}}</b> auf.</h5>
                     </div>
-<!--
-                    <div>&nbsp;</div>
-                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
-                        Antworten anzeigen
-                    </md-button>
--->
                 </div>
-                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[0].score === null">
+                <div flex="60" ng-if="d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
                     <p class="md-caption">Kein CASE-Summenwert vorhanden.</p>
                 </div>
-<!--
-                <div flex>
-                    <score-threshold score="d.dataMain.calculations[0].calculation_results[0].score" show-percent-scale="true"></score-threshold>
-                </div>
--->
             </div>
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <!--            
-            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
-            -->
-            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculated_date}}</p>
+            <p flex class="md-subhead" style="text-align:center;">{{.dataMain.survey_responses["0"].entity.data.filled | date}}</p>
         </md-card-actions>
-        <!--        
-            <md-card-content ng-if="d.show_answers" layout-margin>
-            <div layout="row" layout-align="space-between center">
-                <div>
-                    <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
-                </div>
-                <div>
-                    <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
-                        Antworten ausblenden
-                    </md-button>
-                </div>
-            </div>
-            <div>&nbsp;</div>
-            <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
-                <p class="md-caption" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI_filter_' + (key+1)]">
-                    <strong>{{question.name}}: </strong>
-                    <span ng-repeat="answer in question.answers">
-                    <span ng-if="answer.code === d.dataMain.calculations[0].calculation_results[d.navigator].response.data.response['BDI'+(key+1)]">{{answer.item}}. <small style="color:#9E9E9E"> ( {{answer.code}} )</small></span>
-                    </span>
-                </p>
-            </div>
-        </md-card-content>
-        -->
     </md-card>
 </div>
 include(../lib/html/optinomic/page/end.m4)
