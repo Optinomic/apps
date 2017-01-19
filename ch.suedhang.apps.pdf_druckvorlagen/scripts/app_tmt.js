@@ -362,9 +362,21 @@ d.tmt_initTMT = function() {
             var current_calc = sr.calculations["0"].calculation_result;
             current_calc.date = current_calc.info.filled;
             alle_messungen.push(current_calc);
+        } else {
+            sr_event = sr.entity.data.event_id;
+            var all_calcs = $scope.d.dataMain.calculations["0"].calculation_results;
+            all_calcs.forEach(function(cc, ccID) {
+                if (sr.entity.data.event_id === cc.response.data.event_id) {
+                    cc.date = cc.info.filled;
+                    alle_messungen.push(cc);
+                }
+            });
+
         };
     });
     dataService.sortOn(alle_messungen, 'date', false, false);
+
+
 
 
     // Loop alle_messungen und messung in TMT A / TMT B pushen
