@@ -59,7 +59,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
     $scope.prev = function() {
-        var count = $scope.d.survey_responses.length - 1;
+        var count = $scope.d.dataMain.survey_responses.length - 1;
 
         if ($scope.d.navigator === 0) {
             $scope.d.navigator = count;
@@ -69,7 +69,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     };
 
     $scope.next = function() {
-        var count = $scope.d.survey_responses.length - 1;
+        var count = $scope.d.dataMain.survey_responses.length - 1;
 
         if (count === $scope.d.navigator) {
             $scope.d.navigator = 0;
