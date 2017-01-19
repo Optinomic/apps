@@ -13,7 +13,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div layout="row" layout-align="start start">
                 <div ng-if="d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score !== null">
                     <div>
-                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score}}</b> auf.</h5>
+                        <h5 class="md-subhead">{{d.dataMain.patient.data.extras.anrede}} weist im CASE einen Summenwert von <b>{{d.dataMain.survey_responses["0"].calculations["0"].calculation_result.score}}</b> auf.</h5>
                     </div>
                 </div>
                 <div flex="60" ng-if="d.dataMain.survey_responses['0'].calculations['0'].calculation_result.score === null">
@@ -24,7 +24,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <p flex class="md-subhead" style="text-align:center;">{{.dataMain.survey_responses["0"].entity.data.filled | date}}</p>
+            <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.survey_responses["0"].entity.data.filled | date}}</p>
         </md-card-actions>
     </md-card>
 </div>
