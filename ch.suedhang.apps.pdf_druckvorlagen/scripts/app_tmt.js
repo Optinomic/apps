@@ -363,7 +363,7 @@ d.tmt_initTMT = function() {
             current_calc.date = current_calc.info.filled;
             alle_messungen.push(current_calc);
         } else {
-            sr_event = sr.entity.data.event_id;
+            var sr_event = sr.entity.data.event_id;
             var all_calcs = $scope.d.dataMain.calculations["0"].calculation_results;
             all_calcs.forEach(function(cc, ccID) {
                 if (sr.entity.data.event_id === cc.response.data.event_id) {
