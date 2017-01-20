@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 
 
 [template score 4 6]
-include(templates/score_scales_test.html)
+include(templates/score_scales.html)
 
 
 [dependencies]
