@@ -35,6 +35,20 @@ fid = X33X1164
 min_questions =
 min_lastpage = 3
 
+[survey]
+id = bdi_admin
+type = lime
+responsibility = Admin
+name = BDI - Admin
+host = limesurvey_v2
+survey_id = 264947
+hash = X81X2070
+pid = X81X2065
+fid = X81X2069
+min_questions =
+min_lastpage = 3
+
+
 
 [event activation]
 type = on_activation
