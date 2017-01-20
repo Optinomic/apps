@@ -25,6 +25,10 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start">
+                <div flex="60" ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].score.score !== null">
+                        <h5 class="md-subhead">Interpretation</h5>
+                        <p class="md-display-1" ng-attr-style="color:{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.result_color}}">{{d.dataMain.calculations[0].calculation_results[d.navigator].score.current_range.interpretation_de}}</p>
+                </div>
                 <div>&nbsp;</div>
                 <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
                     Antworten anzeigen
