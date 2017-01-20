@@ -269,8 +269,8 @@ function main(responses) {
 
                 if (my_messzeitpunkt === 3) {
                     mz.mz_id = 2;
-                    mz.mz_typ = 'Austritt EAS / Eintritt EP';
-                    mz.mz_text = 'Austritt EAS oder Eintritt EP';
+                    mz.mz_typ = 'Übertritt EP';
+                    mz.mz_text = 'Übertritt EP';
                 };
 
                 if ((my_messzeitpunkt === 1) && (my_eintrittsort === 2)) {

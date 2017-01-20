@@ -60,7 +60,7 @@ function main(responses) {
         "text": "Austritt EP"
     }, {
         "id": 2,
-        "text": "Austritt EAS oder Eintritt EP"
+        "text": "Übertritt EP"
     }, {
         "id": 3,
         "text": "Austritt EAS"
@@ -190,7 +190,7 @@ function main(responses) {
                     cd.dimensions.push(1);
                 };
 
-                if (given_mz_group.mz_typ === 'Austritt EAS / Eintritt EP') {
+                if (given_mz_group.mz_typ === 'Übertritt EP') {
                     cd.dimensions.push(2);
                 };
 
