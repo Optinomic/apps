@@ -107,7 +107,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 $scope.d.appData[app_identifier].data.survey_responses.forEach(function(sr, srID) {
                     if (("calculations" in sr) && (sr.calculations.length > 0)) {
                         var current_calc = sr.calculations["0"].calculation_result;
-                        current_calc.date = current_calc.entity.data.filled;
+                        current_calc.date = sr.entity.data.filled;
                         act_info_ein_calculation.push(current_calc);
                     } else {
                         var sr_event = sr.entity.data.event_id;
