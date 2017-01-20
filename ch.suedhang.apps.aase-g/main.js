@@ -13,6 +13,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.d = scopeDService;
 
 
+
+
+
     // -----------------------------------
     // Functions
     // -----------------------------------
@@ -38,6 +41,31 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 // Run Specific Functions only when needed.
+
+                $scope.d.zscore = {
+                    "zscore": 21,
+                    "zscore_color": '#C5CAE9',
+                    "text_left": "Eintritt",
+                    "text_left_caption": "21.4.2016",
+                    "text_right": "TMT A",
+                    "text_right_caption": "",
+                    "clinicsample_start": null,
+                    "clinicsample_end": null,
+                    "marker_1_score": null,
+                    "marker_1_text": null,
+                    "marker_1_color": null
+                };
+
+                $scope.d.zscore_options = {
+                    "zscore_min": 0,
+                    "zscore_max": 80,
+                    "clinicsample_color": "#C5CAE9",
+                    "centered_zero": false,
+                    "show_text": true,
+                    "show_clinicsample": false,
+                    "show_clinicsample_scores": false,
+                    "show_numbers": true
+                };
 
                 // if (current_template === 'score') {
                 //     // $scope.setDataView();
