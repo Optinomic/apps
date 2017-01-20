@@ -90,7 +90,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 1,
         "name": "Eintritts-Assessment",
-        "version": "1.0",
+        "version": "1.1",
         "description": "Eintritts-Assessment der Klinik Südhang.",
         "content": []
     };
@@ -134,7 +134,7 @@ $scope.pdf_make_init = function() {
     doc = {
         "id": 1,
         "name": "Austritts-Assessment",
-        "version": "1.0",
+        "version": "1.1",
         "description": "Austritts-Assessment der Klinik Südhang.",
         "content": []
     };
