@@ -45,9 +45,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 $scope.d.zscore = {
                     "zscore": 21,
                     "zscore_color": '#C5CAE9',
-                    "text_left": "Eintritt",
-                    "text_left_caption": "21.4.2016",
-                    "text_right": "TMT A",
+                    "text_left": "",
+                    "text_left_caption": "",
+                    "text_right": "",
                     "text_right_caption": "",
                     "clinicsample_start": null,
                     "clinicsample_end": null,
@@ -61,10 +61,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "zscore_max": 80,
                     "clinicsample_color": "#C5CAE9",
                     "centered_zero": false,
-                    "show_text": true,
+                    "show_text": false,
                     "show_clinicsample": false,
                     "show_clinicsample_scores": false,
-                    "show_numbers": false
+                    "show_numbers": true
                 };
 
                 // if (current_template === 'score') {
