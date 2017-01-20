@@ -298,10 +298,10 @@ $scope.getTemplates = function() {
         };
 
         var default_data = {
-            "zscore": 2.2,
+            "zscore": 0,
             "zscore_color": "#3F51B5",
-            "clinicsample_start": -1.4,
-            "clinicsample_end": 1.5
+            "clinicsample_start": 0,
+            "clinicsample_end": 0
         };
 
         var default_options = {
@@ -315,7 +315,7 @@ $scope.getTemplates = function() {
         options = options === undefined ? default_options : options;
 
         // Always grey
-        options.clinicsample_color = grey["300"];
+        // options.clinicsample_color = grey["300"];
 
 
         // Calculate
