@@ -37,31 +37,31 @@ function main(responses) {
         var ranges = [{
             "from": 0,
             "to": 8,
-            "interpretation_de": "Keine Depression",
+            "interpretation_de": "Kein Verdacht auf eine Depression",
             "interpretation_en": "No Depression",
             "result_color": "#4CAF50"
         }, {
             "from": 9,
             "to": 13,
-            "interpretation_de": "Minimale Depression",
+            "interpretation_de": "Verdacht auf eine minimale Depression",
             "interpretation_en": "Minimum Depression",
             "result_color": "#4CAF50"
         }, {
             "from": 14,
             "to": 19,
-            "interpretation_de": "Leichte Depression",
+            "interpretation_de": "Verdacht auf eine leichte Depression",
             "interpretation_en": "Light Depression",
             "result_color": "#FF5722"
         }, {
             "from": 20,
             "to": 28,
-            "interpretation_de": "Mittelschwere Depression",
+            "interpretation_de": "Verdacht auf eine mittelschwere Depression",
             "interpretation_en": "Moderate Depression",
             "result_color": "#FF5722"
         }, {
             "from": 29,
             "to": 63,
-            "interpretation_de": "Schwere Depression",
+            "interpretation_de": "Verdacht auf eine schwere Depression",
             "interpretation_en": "Major Depression",
             "result_color": "#F44336"
         }];
