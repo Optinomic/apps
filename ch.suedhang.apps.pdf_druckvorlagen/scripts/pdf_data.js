@@ -609,7 +609,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
         if (app_identifier === "ch.suedhang.apps.whoqol.production") {
 
             var app_title = "Lebensqualität (WHOQOL-BREF)";
-            var description = "Beurteilung der physischen und psychischen Lebensqualität.";
+            var description = "Beurteilung der physischen und psychischen Lebensqualität. Hohe Werte weisen auf ein hohes Wohlbefinden hin.";
 
             var my_all = [];
             var my_eintritt = [];
