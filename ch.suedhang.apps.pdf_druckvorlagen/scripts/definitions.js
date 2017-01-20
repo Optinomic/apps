@@ -315,7 +315,12 @@ $scope.getTemplates = function() {
         options = options === undefined ? default_options : options;
 
         // Always grey
-        options.clinicsample_color = grey["300"];
+        // options.clinicsample_color = grey["300"];
+
+        // Use Value from clinicsample_color from data if available. 
+        if ("clinicsample_color" in data) {
+            options.clinicsample_color = data.clinicsample_color;
+        };
 
 
         // Calculate
