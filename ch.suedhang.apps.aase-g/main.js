@@ -64,7 +64,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     "show_text": true,
                     "show_clinicsample": false,
                     "show_clinicsample_scores": false,
-                    "show_numbers": true
+                    "show_numbers": false
                 };
 
                 // if (current_template === 'score') {
