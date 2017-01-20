@@ -256,7 +256,7 @@ $scope.getTemplates = function() {
         var date = $filter("amDateFormat")(new Date(), 'DD.MM.YYYY');
         var text = " Keine Daten vorhanden.";
         if (title !== null) {
-            text = " Keine «" + title + "» Daten vorhanden.";
+            text = " Keine Daten vorhanden.";
         };
 
         var return_obj = {
