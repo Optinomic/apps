@@ -101,7 +101,28 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 // AUDIT | Fagerström
 
-                var act_info_ein_calculation = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
+                var act_info_ein_calculation_all = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
+
+                var act_info_ein_calculation = [];
+                $scope.d.appData[app_identifier].data.survey_responses.forEach(function(sr, srID) {
+                    if (("calculations" in sr) && (sr.calculations.length > 0)) {
+                        var current_calc = sr.calculations["0"].calculation_result;
+                        current_calc.date = current_calc.entity.data.filled;
+                        act_info_ein_calculation.push(current_calc);
+                    } else {
+                        var sr_event = sr.entity.data.event_id;
+                        act_info_ein_calculation_all.forEach(function(cc, ccID) {
+                            if (sr.entity.data.event_id === cc.response.data.event_id) {
+                                cc.date = cc.response.data.filled;
+                                act_info_ein_calculation.push(cc);
+                            }
+                        });
+
+                    };
+                });
+                dataService.sortOn(act_info_ein_calculation, 'date', false, false);
+
+
                 var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses["0"].entity.data.response;
 
                 var audit_stack = {
