@@ -384,7 +384,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if (variable_name !== "zusatzitems_z_score") {
 
-                console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
+                //console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
 
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
@@ -394,7 +394,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
 
                 // Eintritt / Austritt / Anderer MZ
-                var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6'];
+                var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6', '#BDBDBD'];
                 current_sample.zscore.clinicsample_color = cs_color[mz_id];
 
 
