@@ -393,9 +393,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 // Kliniksample gemäss Messzeitpunkt färben
                 var mz_id = parseInt(current_sample.ks.path_data.path["0"]);
 
-                // Eintritt / Austritt / Anderer MZ
-                var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6', '#BDBDBD'];
+                // Austritt EP / Übertritt EP / Austritt EAS / Austritt EP
+                var cs_color = ['#9E9E9E', '#EEEEEE', '#E8EAF6', '#BDBDBD', '#BDBDBD'];
                 current_sample.zscore.clinicsample_color = cs_color[mz_id];
+
+                if (current_sample.zscore.clinicsample_color === 'none') {
+                    current_sample.zscore.clinicsample_color = '#9E9E9E';
+                };
 
 
                 // Auffällige Testleistung |  färben
