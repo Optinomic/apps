@@ -312,6 +312,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // console.log('(!) 3 - md_data', dimensions_path, md_data);
 
 
+            // Reverse Group-Order
+            $scope.d.bscl.groups.reverse();
+
+
             // Resultate in Gruppen schreiben
             $scope.d.bscl.groups.forEach(function(group, groupID) {
 
