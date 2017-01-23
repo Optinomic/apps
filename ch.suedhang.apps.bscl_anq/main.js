@@ -315,7 +315,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // Reverse Group-Order
             $scope.d.bscl.groups.reverse();
 
-
             // Resultate in Gruppen schreiben
             $scope.d.bscl.groups.forEach(function(group, groupID) {
 
