@@ -384,7 +384,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             if (variable_name !== "zusatzitems_z_score") {
 
-                // console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
+                console.log('(?) current :: ', variable_name, current_group, current_sample.ks.path_data);
 
                 current_sample.zscore.clinicsample_start = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_min);
                 current_sample.zscore.clinicsample_end = $scope.roundToTwo(current_sample.ks.path_data.statistics[variable_name].mean_1sd_plus);
