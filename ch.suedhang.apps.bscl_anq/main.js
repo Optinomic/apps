@@ -246,6 +246,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Gruppierung der Messungen
         $scope.d.bscl.groups = angular.copy($scope.d.dataMain.calculations["0"].calculation_results["0"].definitions.result_array);
 
+        // Reverse Group-Order
+        $scope.d.bscl.groups.reverse();
+
         $scope.d.bscl.groups.forEach(function(group, groupID) {
             delete group.result;
             group.data = [];
@@ -312,8 +315,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // console.log('(!) 3 - md_data', dimensions_path, md_data);
 
 
-            // Reverse Group-Order
-            $scope.d.bscl.groups.reverse();
+
 
             // Resultate in Gruppen schreiben
             $scope.d.bscl.groups.forEach(function(group, groupID) {
