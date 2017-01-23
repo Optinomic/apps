@@ -25,18 +25,19 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <div layout="row" layout-gt-xs="row" layout-align="start start">
-                <div flex="60" ng-if="d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.score.score !== null">
-                        <h5 class="md-subhead">Interpretation</h5>
-                        <p class="md-display-1" ng-attr-style="color:{{d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.score.current_range.result_color}}">{{d.dataMain.survey_responses[d.navigator].calculations[0].calculation_result.score.current_range.interpretation_de}}</p>
+                <div flex ng-if="d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.score.score !== null">
+                    <h5 class="md-subhead">Interpretation</h5>
+                    <p class="md-display-1" ng-attr-style="color:{{d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.score.current_range.result_color}}">{{d.dataMain.survey_responses[d.navigator].calculations[0].calculation_result.score.current_range.interpretation_de}}</p>
                 </div>
-                <div>&nbsp;</div>
-                <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
-                    Antworten anzeigen
-                </md-button>
                 <div flex ng-if="d.dataMain.survey_responses[d.navigator].calculations['0'].calculation_result.score.score === null">
                     <h5 class="md-subhead">Keine Interpretation möglich</h5>
                     <p class="md-caption">Kein BDI-Score vorhanden.</p>
                 </div>
+            </div>
+            <div layout="row" layout-gt-xs="row" layout-align="start start">
+                <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
+                    Antworten anzeigen
+                </md-button>
             </div>
         </md-card-content>
         <md-divider></md-divider>
