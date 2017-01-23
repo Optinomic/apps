@@ -406,11 +406,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 current_sample.zscore.zscore_color = '#1A237E';
                 if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
                     // Auffällige Testleistung: Rot
-                    current_sample.zscore.zscore_color = '#F44336';
+                    current_sample.zscore.zscore_color = '#4CAF50';
                 };
                 if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
                     // Auffällige Testleistung: Grün
-                    current_sample.zscore.zscore_color = '#4CAF50';
+                    current_sample.zscore.zscore_color = '#F44336';
                 };
             };
 
