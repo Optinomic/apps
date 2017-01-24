@@ -45,9 +45,9 @@ description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Auss
 survey = bdi2
 
 
-[event activation]
+[event exit]
 type = before_exit
-days = 8
+days = 10
 time = 08:00
 due_after = 259200
 overdue = ignore

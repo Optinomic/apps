@@ -38,7 +38,7 @@ min_lastpage = 5
 [event exit]
 type = before_exit
 time = 08:00
-days = 8
+days = 10
 due_after = 129200
 overdue = ignore
 description = actInfo - Austritt

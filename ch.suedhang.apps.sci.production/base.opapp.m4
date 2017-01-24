@@ -44,9 +44,9 @@ overdue = ignore
 description = Eintritt: Stress-Coping-Inventar (SCI)
 survey = SCI
 
-[event activation]
+[event exit]
 type = before_exit
-days = 7
+days = 10
 time = 08:00
 due_after = 259200
 overdue = ignore
