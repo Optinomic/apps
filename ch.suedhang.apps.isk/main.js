@@ -220,6 +220,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             } else {
                 //mz_id = mz_id;
                 mz_id = mz_id - 1;
+
+                //Prevent Error
+                if (mz_id = -1) {
+                    mz_id = 0;
+                };
             };
 
 
