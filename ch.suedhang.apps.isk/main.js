@@ -216,8 +216,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (mz_id === 99) {
                 mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
             } else {
-                mz_id = mz_id;
-                //mz_id = mz_id - 1;
+                //mz_id = mz_id;
+                mz_id = mz_id - 1;
             };
 
 
