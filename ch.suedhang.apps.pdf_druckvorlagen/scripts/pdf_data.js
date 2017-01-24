@@ -165,7 +165,13 @@ $scope.loadAppData = function(app_identifier, load_full) {
                             smoker = true;
 
                             fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
+
                             fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+
+                            if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
+                                fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                            };
+
                     };
                     fagerstroem_stack.stack.push(fagerstroem_text);
                 });
@@ -297,6 +303,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                         fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
                         austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+
+                        if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
+                            austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
+                        };
                 };
 
                 my_all.push($scope.d.templates.text(austritt_text));
