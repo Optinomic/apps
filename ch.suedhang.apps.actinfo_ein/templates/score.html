@@ -33,9 +33,9 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div flex="45">
                 <h5 class="md-subhead">
-                	AUDIT Summenwerte | 
-                	<span ng-if="response.calculations[0].calculation_result.AUDIT.gender === 'male'">Männer</span>
-                	<span ng-if="response.calculations[0].calculation_result.AUDIT.gender !== 'male'">Frauen</span>
+                    AUDIT Summenwerte | 
+                    <span ng-if="response.calculations[0].calculation_result.AUDIT.gender === 'male'">Männer</span>
+                    <span ng-if="response.calculations[0].calculation_result.AUDIT.gender !== 'male'">Frauen</span>
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
                     <tr ng-repeat="range in response.calculations[0].calculation_result.AUDIT.ranges.ranges">
@@ -58,32 +58,36 @@ include(../lib/html/optinomic/page/start.m4)
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten auf der Fagerström-Skala.</p>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
-            <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
-                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
-                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
-                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+            <p class="md-body-1" style="margin-top: 12px;" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
+                Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten auf der Fagerström-Skala.
+            </p>
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
+                <div flex="55">
+                    <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                    <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
+                        <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                    </div>
+                </div>
+                <div flex="45">
+                    <h5 class="md-subhead">
+                    Fagerström Summenwerte  
+                </h5>
+                    <table class="table table-condensed" style="width: 80%;">
+                        <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
+                            <td style="text-align:right !important;">
+                                <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                            </td>
+                            <td>
+                                <small>{{range.result}}</small>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === 999)">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
                 <p class="md-caption">Kein FAGERSTROEM-Score vorhanden.</p>
-            </div>
-            <div flex="45">
-                <h5 class="md-subhead">
-                	Fagerström Summenwerte  
-                </h5>
-                <table class="table table-condensed" style="width: 80%;">
-                    <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
-                        <td style="text-align:right !important;">
-                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
-                        </td>
-                        <td>
-                            <small>{{range.result}}</small>
-                        </td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>
