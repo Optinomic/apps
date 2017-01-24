@@ -116,8 +116,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var current_dim = current_ks.dimensions[posID];
 
-            console.log('(?) current_dim', pos, current_dim);
-            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
+            console.log('(?) current_dim', pos, posID, current_dim);
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[posID].text;
         });
 
 
