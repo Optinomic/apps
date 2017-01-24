@@ -107,6 +107,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var current_location_n = 0;
 
 
+        console.log('(?) location_array', location_array);
+
         location_array.forEach(function(pos, posID) {
             data_dive = data_dive[pos];
 
@@ -116,7 +118,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var current_dim = current_ks.dimensions[posID];
 
-            //console.log('(?) current_dim', pos, posID, current_dim);
+            console.log('(?) current_dim', pos, posID, current_dim);
             current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
         });
 
