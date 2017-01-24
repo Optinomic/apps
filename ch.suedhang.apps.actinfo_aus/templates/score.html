@@ -10,34 +10,17 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <p class="md-body-1" style="margin-top: 12px;"> Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten auf der Fagerström-Skala.</p>
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
-            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null">
+            <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
                 <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
                 <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
                     <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
                 </div>
             </div>
-            <div flex="55" ng-if="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null">
-<!--
-Wenn VZAT010 = 1 NichtraucherIn
-Wenn VZAT020 = 999 Keine Angaben zum Zigarettenkonsum vorhanden.
-Wenn VZAT020 = 777 PatientIn raucht, aber keine Zigaretten.
-
-                <div ng-if="response.calculations[0].calculation_result.response.data.response.VZAT010 === 1">
-                   <h4 class="md-subhead">PatientIn raucht nicht</h4>
-                </div>
-                <div ng-if="response.calculations[0].calculation_result.response.data.response.VZAT020 === 999">
-                    <h5 class="md-subhead">Keine Interpretation möglich</h5>
-                    <p class="md-caption">Kein Fagerström-Score vorhanden.</p>
-                </div>
-                <div ng-if="response.calculations[0].calculation_result.response.data.response.VZAT020 === 777">
-                    <h5 class="md-subhead">Keine Interpretation möglich</h5>
-                    <p class="md-caption">PatientIn raucht ein anderes Tabakprodukt als Zigaretten.</p>
-                </div>
--->
+            <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === 999)">
                 <h5 class="md-subhead">Keine Interpretation möglich</h5>
                 <p class="md-caption">Kein Fagerström-Score vorhanden.</p>
             </div>
-            <div flex="45">
+            <div flex="45" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
                 <h5 class="md-subhead">
                     Fagerström Summenwerte  
                 </h5>
