@@ -1,0 +1,292 @@
+{
+  "optinomic_patient_reports
+": [
+    {
+      "title_str": "ein____austritts_assessment",
+      "activated": true,
+      "url": "/patient/2294/stay/1089/report/ein____austritts_assessment",
+      "show_patient_address": true,
+      "app_grid": [
+        {
+          "$$mdSelectId": 52,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 9
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "e88222d4-17e3-4fcf-a9e7-6f8b3c344bfa",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "assessment_report_only",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.pdf_druckvorlagen/view/assessment_report_only#app_name=_Druckvorlagen (PDF),patient_id=387,app_id=ch.suedhang.apps.pdf_druckvorlagen,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=43,token=e88222d4-17e3-4fcf-a9e7-6f8b3c344bfa",
+          "pid": 387,
+          "show_controls": false,
+          "title": "Eintritts-Assessment und Austritts-Assessment",
+          "sid": 43
+        }
+      ],
+      "version": "1.0",
+      "title": "Ein- & Austritts-Assessment",
+      "short_description": "PDF Druckvorlagen",
+      "description": "Druckvorlagen im PDF-Format für das Ein- & Austritts-Assessment der Klinik Südhang."
+    },
+    {
+      "title_str": "fallkonferenz__eas",
+      "activated": true,
+      "url": "/patient/2294/stay/1089/report/fallkonferenz__eas",
+      "show_patient_address": true,
+      "app_grid": [
+        {
+          "$$mdSelectId": 35,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 10
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "z_scores",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.bscl_anq.production/view/z_scores#app_name=BSCL (Symptom Checkliste),patient_id=2294,app_id=ch.suedhang.apps.bscl_anq.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "BSCL (Symptom Checkliste)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 61,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 6
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "scores_table",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.honos.production/view/scores_table#app_name=HoNOS (Gesundheit),patient_id=2294,app_id=ch.suedhang.apps.honos.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "HoNOS (Gesundheit)",
+          "sid": 1089
+        }
+      ],
+      "version": "1.0",
+      "title": "Fallkonferenz: EAS",
+      "short_description": "App-Sammlung für Fallkonferenz EAS",
+      "description": ""
+    },
+    {
+      "title_str": "report_titel",
+      "activated": true,
+      "show_patient_address": true,
+      "app_grid": [
+        {
+          "$$mdSelectId": 87,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 6
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "score",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.actinfo_ein.production/view/score#app_name=ActInfo (Eintritt),patient_id=2294,app_id=ch.suedhang.apps.actinfo_ein.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "ActInfo (Eintritt)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 113,
+          "hideScrollbars": true,
+          "size": {
+            "x": 4,
+            "y": 4
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "tmt_scores",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.tmt.production/view/tmt_scores#app_name=TMT (Trail Making Test),patient_id=2294,app_id=ch.suedhang.apps.tmt.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "TMT (Trail Making Test)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 139,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 10
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "z_scores",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.bscl_anq.production/view/z_scores#app_name=BSCL (Symptom Checkliste),patient_id=2294,app_id=ch.suedhang.apps.bscl_anq.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "BSCL (Symptom Checkliste)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 165,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 6
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "scores_table",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.honos.production/view/scores_table#app_name=HoNOS (Gesundheit),patient_id=2294,app_id=ch.suedhang.apps.honos.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "HoNOS (Gesundheit)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 191,
+          "hideScrollbars": true,
+          "size": {
+            "x": 4,
+            "y": 4
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "simple_score",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.bdi.production/view/simple_score#app_name=BDI-II (Depressions-Inventar),patient_id=2294,app_id=ch.suedhang.apps.bdi.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "BDI-II (Depressions-Inventar)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 217,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 20
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "z_scores",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.isk.production/view/z_scores#app_name=ISK (Soziale Kompetenzen),patient_id=2294,app_id=ch.suedhang.apps.isk.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "ISK (Soziale Kompetenzen)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 243,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 12
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "sci_stanine",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.sci.production/view/sci_stanine#app_name=SCI (Stress-Coping-Inventar),patient_id=2294,app_id=ch.suedhang.apps.sci.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "SCI (Stress-Coping-Inventar)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 269,
+          "hideScrollbars": true,
+          "size": {
+            "x": 4,
+            "y": 6
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "score",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.aase-g.production/view/score#app_name=AASE (Versuchung),patient_id=2294,app_id=ch.suedhang.apps.aase-g.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "AASE (Versuchung)",
+          "sid": 1089
+        },
+        {
+          "$$mdSelectId": 295,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 7
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "22e6615f-0660-4272-9805-e78b7038278f",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "simple_score",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.whoqol.production/view/simple_score#app_name=WHOQOL (Lebensqualität),patient_id=2294,app_id=ch.suedhang.apps.whoqol.production,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=1089,token=22e6615f-0660-4272-9805-e78b7038278f",
+          "pid": 2294,
+          "show_controls": false,
+          "title": "WHOQOL (Lebensqualität)",
+          "sid": 1089
+        }
+      ],
+      "version": "1.0",
+      "title": "Fallkonferenz: EP",
+      "short_description": "App-Sammlung für Fallkonferenz EP",
+      "description": ""
+    }
+  ]
+}

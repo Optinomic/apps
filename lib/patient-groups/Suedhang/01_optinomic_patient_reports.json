@@ -1,0 +1,38 @@
+{
+  "optinomic_patient_reports
+": [
+    {
+      "title_str": "ein____austritts_assessment",
+      "activated": true,
+      "url": "/patient/387/stay/43/report/ein____austritts_assessment",
+      "show_patient_address": true,
+      "app_grid": [
+        {
+          "$$mdSelectId": 52,
+          "hideScrollbars": true,
+          "size": {
+            "x": 6,
+            "y": 9
+          },
+          "data": {},
+          "node": "app",
+          "uid": 2,
+          "token": "e88222d4-17e3-4fcf-a9e7-6f8b3c344bfa",
+          "iframe": true,
+          "api_url": "http://optinomic.cust.local/api/",
+          "name": "assessment_report_only",
+          "sort": null,
+          "source": "http://optinomic.cust.local/api/modules/ch.suedhang.apps.pdf_druckvorlagen/view/assessment_report_only#app_name=_Druckvorlagen (PDF),patient_id=387,app_id=ch.suedhang.apps.pdf_druckvorlagen,api_url=http://optinomic.cust.local/api/,user_id=2,stay_id=43,token=e88222d4-17e3-4fcf-a9e7-6f8b3c344bfa",
+          "pid": 387,
+          "show_controls": false,
+          "title": "Eintritts-Assessment und Austritts-Assessment",
+          "sid": 43
+        }
+      ],
+      "version": "1.0",
+      "title": "Ein- & Austritts-Assessment",
+      "short_description": "PDF Druckvorlagen",
+      "description": "Druckvorlagen im PDF-Format für das Ein- & Austritts-Assessment der Klinik Südhang."
+    }
+  ]
+}
