@@ -215,7 +215,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             // Messzeitpung
             var mz_id = messung.info.mz.mz_id;
-            if (mz_id === 99) || (mz_id === null) {
+            if ((mz_id === 99) || (mz_id === null)) {
                 mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
             } else {
                 //mz_id = mz_id;
