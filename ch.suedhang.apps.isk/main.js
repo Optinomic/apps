@@ -116,8 +116,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
             var current_dim = current_ks.dimensions[posID];
 
-            console.log('(?) current_dim', pos, posID, current_dim);
-            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[posID].text;
+            //console.log('(?) current_dim', pos, posID, current_dim);
+            current_location_text = current_location_text + current_dim.name + ': ' + current_dim.array[pos].text;
         });
 
 
@@ -216,7 +216,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (mz_id === 99) {
                 mz_id = 2; // Unbekannt => Anderer Messzeitpunkt
             } else {
-                mz_id = mz_id - 1;
+                mz_id = mz_id;
+                //mz_id = mz_id - 1;
             };
 
 
