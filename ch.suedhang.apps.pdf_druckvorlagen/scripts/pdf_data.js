@@ -249,7 +249,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
                 };
 
-                austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
 
                 var motivation_rauchstopp = "";
                 var motivation_rauchstopp_angabe = false;
@@ -257,31 +256,38 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var anser_motivation_rauchstopp = parseInt(response.VZAT100);
                     if (anser_motivation_rauchstopp === 1) {
                         motivation_rauchstopp_angabe = true;
+
                         if (app_scope_ein.smoker === true) {
                             motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                         } else {
                             motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                         };
                     };
                     if (anser_motivation_rauchstopp === 2) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
                         austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
 
                     };
                     if (anser_motivation_rauchstopp === 3) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
                         austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                     };
                     if (anser_motivation_rauchstopp === 4) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
                         austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                     };
                     if (anser_motivation_rauchstopp === 5) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
                         austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                     };
                     if (anser_motivation_rauchstopp === 999) {
