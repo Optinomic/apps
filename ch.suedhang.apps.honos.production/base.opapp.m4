@@ -26,7 +26,7 @@ website = http://suedhang.ch/de/Forschung
 [survey]
 id = HoNOS
 type = lime
-responsibility = Admin
+responsibility = lead_therapist
 name = HoNOS
 host = limesurvey_v2
 survey_id = 927351
