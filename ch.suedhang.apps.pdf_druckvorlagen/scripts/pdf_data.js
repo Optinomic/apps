@@ -266,22 +266,31 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     if (anser_motivation_rauchstopp === 2) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+
                     };
                     if (anser_motivation_rauchstopp === 3) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                     };
                     if (anser_motivation_rauchstopp === 4) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
                     };
                     if (anser_motivation_rauchstopp === 5) {
                         motivation_rauchstopp_angabe = true;
                         motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                    };
+                    if (anser_motivation_rauchstopp === 999) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
                     };
                 };
 
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
 
 
                 var nikotin_konsum = parseInt(response.VZAT010);
@@ -302,10 +311,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
 
                         fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-                        austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
 
-                        if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
+                        if ((calc.FAGERSTROEM.FAGERSTROEM_Score === 999) || (calc.FAGERSTROEM.FAGERSTROEM_Score === null)) {
                             austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
+                        } else {
+                            austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
                         };
                 };
 
