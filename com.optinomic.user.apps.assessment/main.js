@@ -165,6 +165,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             content.push($scope.d.templates.text(text_1));
             content.push($scope.d.templates.text(text_2));
             content.push($scope.d.templates.text(text_3));
+            content.push($scope.d.templates.text(text_4));
             content.push($scope.d.templates.spacer(6));
             content.push($scope.d.templates.heading('h1', 'Persönliche Zugangsdaten'));
 
