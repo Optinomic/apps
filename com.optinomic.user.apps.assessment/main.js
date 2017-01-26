@@ -173,7 +173,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 table: {
                     widths: [60, '*'],
                     body: [
-                        [{ text: 'Login', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                        [{ text: 'Patienten-ID', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
                         [{ text: 'Passwort', color: 'grey', margin: [0, 6, 0, 6] }, { text: zugangsdaten.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
                     ]
                 },
