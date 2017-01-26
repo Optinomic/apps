@@ -125,15 +125,76 @@ d.bscl_create_pdf_stack = function() {
                 }]
             };
 
+            var dropout_text = "";
+
             item.zscore_options.width = 351;
             var z_score_grafik_b_all = angular.copy(z_score_grafik_b);
             z_score_grafik_b_all.columns["0"].width = item.zscore_options.width;
-            z_score_grafik_b_all.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+            // Kein Dropout
+            if (messung.calculation.info.response.q501V05 === '0') {
+                z_score_grafik_b_all.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+            } else {
+                z_score_grafik_b_all.columns["0"].stack[1] = [];
+            };
 
             item.zscore_options.width = 301;
             var z_score_grafik_b_eintritt = angular.copy(z_score_grafik_b);
             z_score_grafik_b_eintritt.columns["0"].width = item.zscore_options.width;
-            z_score_grafik_b_eintritt.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+
+            // Kein Dropout
+            if (messung.calculation.info.response.q501V05 === '0') {
+                z_score_grafik_b_eintritt.columns["0"].stack[1].canvas = $scope.d.templates.z_score(messung.zscore, item.zscore_options);
+            } else {
+                z_score_grafik_b_eintritt.columns["0"].stack[1] = [];
+            };
+
+            // Dropout-Codes
+            if (messung.calculation.info.response.q501V05 !== '0') {
+                dropout_text = "Dropout";
+                if (messung.calculation.info.response.q501V05 === '1') {
+                    dropout_text = "Ablehnung Patient/in.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '2') {
+                    dropout_text = "Aus sprachlichen Gründen nicht in der Lage.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '3') {
+                    dropout_text = "Patient/in ist zu krank.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '4') {
+                    dropout_text = "Patient/in ist verstorben.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '5') {
+                    dropout_text = "Patient/in ist jünger als 18-jährig.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '6') {
+                    dropout_text = "Patient/in ist 7 Tage nach Erhebung des Eintritts-BSCL wieder ausgetreten.";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '7') {
+                    dropout_text = "Patient/in ist unvorhergesehen ausgetreten  (Abbruch).";
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+                if (messung.calculation.info.response.q501V05 === '8') {
+                    dropout_text = "Anderer Grund: " + messung.calculation.info.response.q501V06;
+                    z_score_grafik_b_all.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                    z_score_grafik_b_eintritt.columns["0"].stack[1].push($scope.d.templates.text(dropout_text));
+                };
+            };
+
+
 
 
             if (group.description !== "Zusatzitems") {
