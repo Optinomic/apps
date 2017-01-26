@@ -103,30 +103,38 @@
             <div flex="80" ng-if="data.calculation.info.response.q501V05 === '0'">
                 <z-score data="data.zscore" options="d.bscl.zscore_options"></z-score>
             </div>
-            <div flex="80" ng-if="data.calculation.info.response.q501V05 !== '0'">
+            <div flex ng-if="data.calculation.info.response.q501V05 !== '0'">
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '1'">
-                    Dropout: Ablehnung Patient/in.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Ablehnung Patient/in.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '2'">
-                    Dropout: Aus sprachlichen Gründen nicht in der Lage.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Aus sprachlichen Gründen nicht in der Lage.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '3'">
-                    Dropout: Patient/in ist zu krank.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Patient/in ist zu krank.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '4'">
-                    Dropout: Patient/in ist verstorben.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Patient/in ist verstorben.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '5'">
-                    Dropout: Patient/in ist jünger als 18-jährig.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Patient/in ist jünger als 18-jährig.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '6'">
-                    Dropout: Patient/in ist 7 Tage nach Erhebung des Eintritts-BSCL wieder ausgetreten.
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Patient/in ist 7 Tage nach Erhebung des Eintritts-BSCL wieder ausgetreten.
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '7'">
-                    Dropout: Patient/in ist unvorhergesehen ausgetreten (Abbruch).
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Patient/in ist unvorhergesehen ausgetreten (Abbruch).
                 </p>
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '8'">
-                    Dropout: Anderer Grund: {{data.calculation.info.response.q501V06}}
+                    <span class="md-caption">Dropout:</span>
+                    <br/> Anderer Grund: {{data.calculation.info.response.q501V06}}
                 </p>
             </div>
             <div hide-xs show-gt-xs ng-if="data.calculation.info.response.q501V05 === '0'">
