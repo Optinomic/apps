@@ -103,7 +103,7 @@
             <div flex="80" ng-if="data.calculation.info.response.q501V05 === '0'">
                 <z-score data="data.zscore" options="d.bscl.zscore_options"></z-score>
             </div>
-            <div flex ng-if="data.calculation.info.response.q501V05 !== '0'">
+            <div flex="85" ng-if="data.calculation.info.response.q501V05 !== '0'">
                 <p class="md-body-1" ng-if="data.calculation.info.response.q501V05 === '1'">
                     <span class="md-caption">Dropout:</span>
                     <br/> Ablehnung Patient/in.
