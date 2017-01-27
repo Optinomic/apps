@@ -155,38 +155,47 @@ function main(responses) {
         // Calculate AUDIT-Score
         var score = 0;
         var valid_scores = 0;
+        var anwers = 0;
 
         if (d.VZET020 != '999') {
             score = score + parseInt(d.VZET020);
             count_valid_scores = count_valid_scores + 3;
+            anwers = anwers + 1;
         };
         
         if (d.VZET030 != '999') {
             score = score + parseInt(d.VZET030);
             count_valid_scores = count_valid_scores + 3;
+            anwers = anwers + 1;
         };
+
         if (d.VZET040 != '999') {
             score = score + parseInt(d.VZET040);
             count_valid_scores = count_valid_scores + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZET050 != '999') {
             score = score + parseInt(d.VZET050);
             count_valid_scores = count_valid_scores + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZET060 != '999') {
             score = score + parseInt(d.VZET060);
             count_valid_scores = count_valid_scores + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZET070 != '999') {
             score = score + parseInt(d.VZET070);
             count_valid_scores = count_valid_scores + 1;
+            anwers = anwers + 1;
         };
 
         var anz_mw_to_add = 10 - count_valid_scores;
         var Fagerstroem_Mean = calc.roundToOne(score / count_valid_scores);
+        var anwers = calc.roundToOne(anwers)
 
         score = score + (anz_mw_to_add * Fagerstroem_Mean)
 
@@ -233,6 +242,9 @@ function main(responses) {
 
         var return_obj = {
             "FAGERSTROEM_Score": score,
+            "Fagerstroem_Mean": Fagerstroem_Mean,
+            "valid_scores": count_valid_scores,
+            "anwers": anwers
             "interpretation": selected_population,
             "ranges": { "ranges": scale_ranges_fagerstoem }
         };
