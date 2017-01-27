@@ -205,13 +205,24 @@ d.sci_create_pdf_stack = function(group_scores) {
 
                 console.log('(?) group_item.data', group_item.data);
 
+                var my_color = "#3F51B5";
+
+                if (data.stanine <= 2) {
+                    my_color = group.left_color;
+                };
+
+                if (data.stanine >= 8) {
+                    my_color = group.right_color;
+                };
+
+
                 var legende_typ = [{
                     "type": "rect",
                     "x": 4,
                     "y": 2,
                     "w": 10,
                     "h": 10,
-                    "color": "#3F51B5",
+                    "color": my_color,
                     "lineColor": "#E0E0E0"
                 }, {
                     "type": "ellipse",
@@ -228,7 +239,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                         "type": "ellipse",
                         "x": 9,
                         "y": 7,
-                        "color": "#3F51B5",
+                        "color": my_color,
                         "fillOpacity": 0.5,
                         "r1": 5,
                         "r2": 5
@@ -242,7 +253,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                         "y": 2,
                         "w": 10,
                         "h": 10,
-                        "color": "#3F51B5",
+                        "color": my_color,
                         "lineColor": "#E0E0E0"
                     }];
                 };
