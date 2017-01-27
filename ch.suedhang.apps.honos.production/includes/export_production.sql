@@ -9,7 +9,7 @@ SELECT
   survey_response_view.filled as optinomic_survey_filled,
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
-  stay.cis_fid as cis_fid,
+  
   stay.cis_fid/100 as FID,
   patient,
   survey_response_view.survey_response_id AS survey_response_id,

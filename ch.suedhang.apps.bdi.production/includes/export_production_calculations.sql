@@ -9,7 +9,7 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  
+  stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
   ((cast(response AS json))->>'Datum') as datum,
 

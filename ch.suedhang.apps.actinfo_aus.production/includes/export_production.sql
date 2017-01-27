@@ -14,7 +14,7 @@ SELECT
 
   NULL as VZAX100,
   ((cast(response AS json))->>'Institution') as institution,
-  ((cast(response AS json))->>'VZAX005') as VZAX005,
+  stay.cis_fid/100 as VZAX005,
 
   ((cast(response AS json))->>'VMAB001') as VMAB001,
   ((cast(response AS json))->>'VMAB005') as VMAB005,

@@ -9,7 +9,6 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-  stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'AASE[AASE1]') as aase1,
   ((cast(response AS json))->>'AASE[AASE2]') as aase2,

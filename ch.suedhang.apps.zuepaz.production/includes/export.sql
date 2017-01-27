@@ -9,6 +9,7 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+  stay.cis_fid AS fid,
   ((cast(response AS json))->>'Q00001') as zuepaz_01,
   ((cast(response AS json))->>'Q00002') as zuepaz_02,
   ((cast(response AS json))->>'Q00003') as zuepaz_03,
