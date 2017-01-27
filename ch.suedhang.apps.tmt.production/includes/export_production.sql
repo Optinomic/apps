@@ -9,7 +9,6 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-  stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Alter') as Alter,
   ((cast(response AS json))->>'Ausbildungsjahre') as Ausbildungsjahre,
@@ -21,8 +20,9 @@ SELECT
   ((cast(response AS json))->>'BzWert') as zWertB,
   ((cast(response AS json))->>'BAzWert') as zWertQ,
   ((cast(response AS json))->>'filled') as filled,
-  ((cast(response AS json))->>'Date') as Datum,
-  TO_DATE(((cast(response AS json))->>'Date'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
+  ((cast(response AS json))->>'Date') as Datum
+  /*
+  ,TO_DATE(((cast(response AS json))->>'Date'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
   SUBSTRING(((cast(response AS json))->>'Date'),12,5) AS datum_time,
   SUBSTRING(((cast(response AS json))->>'Date'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Date'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
@@ -44,7 +44,7 @@ SELECT
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')) AS startdate_week,
   ((cast(response AS json))->>'startlanguage') as startlanguage,
   ((cast(response AS json))->>'submitdate') as submitdate
-
+*/
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
