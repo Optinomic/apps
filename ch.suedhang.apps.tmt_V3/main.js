@@ -329,15 +329,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
-                // Auffällige Testleistung |  färben
-                if (messung_obj.zscore.zscore < messung_obj.zscore.clinicsample_start) {
+                // Auffällige Testleistung |  Vergleich mit den Gesunden 
+                if (messung_obj.zscore.zscore >= 2) {
                     // Auffällige Testleistung: Rot
-                    messung_obj.zscore.zscore_color = '#C62828';
+                    messung_obj.zscore.zscore_color = '#F44336';
                 };
-                if (messung_obj.zscore.zscore > messung_obj.zscore.clinicsample_end) {
+
+                if (messung_obj.zscore.zscore <= -2) {
                     // Auffällige Testleistung: Grün
-                    messung_obj.zscore.zscore_color = '#2E7D32';
+                    messung_obj.zscore.zscore_color = '#4CAF50';
                 };
+
+
             });
 
         });
@@ -372,16 +375,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
 
-            // Auffällige Testleistung |  färben
-            current_sample.zscore.zscore_color = '#1A237E';
-            if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
-                // Auffällige Testleistung: Rot
-                current_sample.zscore.zscore_color = '#F44336';
-            };
-            if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
-                // Auffällige Testleistung: Grün
-                current_sample.zscore.zscore_color = '#4CAF50';
-            };
+            // Auffällige Testleistung | Vergleich KS färben
+            // current_sample.zscore.zscore_color = '#1A237E';
+            // if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+            //     // Auffällige Testleistung: Rot
+            //     current_sample.zscore.zscore_color = '#F44336';
+            // };
+            // if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+            //     // Auffällige Testleistung: Grün
+            //     current_sample.zscore.zscore_color = '#4CAF50';
+            // };
 
 
 
