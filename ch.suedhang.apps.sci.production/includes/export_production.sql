@@ -9,13 +9,9 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
-  stay.cis_fid as cis_fid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Datum') as datum,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
-  SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
-  SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
   ((cast(response AS json))->>'ESCIBelastung[ESCIB1]') as scibelastung_escib1,
   ((cast(response AS json))->>'ESCIBelastung[ESCIB2]') as scibelastung_escib2,
   ((cast(response AS json))->>'ESCIBelastung[ESCIB3]') as scibelastung_escib3,
@@ -71,10 +67,10 @@ SELECT
   ((cast(response AS json))->>'ESCIUnsicherheit[ESCIU6]') as sciunsicherheit_esciu6,
   ((cast(response AS json))->>'ESCIUnsicherheit[ESCIU7]') as sciunsicherheit_esciu7,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'FID') as fid_survey,
-  ((cast(response AS json))->>'PID') as pid,
-  ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
-  ((cast(response AS json))->>'datestamp') as datestamp,
+  ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt
+
+/*
+  ,((cast(response AS json))->>'datestamp') as datestamp,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
   SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
   SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
@@ -93,7 +89,7 @@ SELECT
   SUBSTRING(((cast(response AS json))->>'submitdate'),12,5) AS submitdate_time,
   SUBSTRING(((cast(response AS json))->>'submitdate'),1,4)::integer AS submitdate_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'submitdate'), 'YYYY-MM-DD HH24:MI:SS')) AS submitdate_week
-
+*/
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id) 
