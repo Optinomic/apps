@@ -557,49 +557,72 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "from": 1,
                 "to": 1.5,
                 "result": "Stanine 1",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 1.5,
                 "to": 2.5,
                 "result": "Stanine 2",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 2.5,
                 "to": 3.5,
                 "result": "Stanine 3",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 3.5,
                 "to": 4.5,
                 "result": "Stanine 4",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 4.5,
                 "to": 5.5,
                 "result": "Stanine 5",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 5.5,
                 "to": 6.5,
                 "result": "Stanine 6",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 6.5,
                 "to": 7.5,
                 "result": "Stanine 7",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 7.5,
                 "to": 8.5,
                 "result": "Stanine 8",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }, {
                 "from": 8.5,
                 "to": 9,
                 "result": "Stanine 9",
-                "result_color": "green"
+                "result_color": "#5C6BC0"
             }]
         };
+
+        $scope.d.scale_ranges_stress = angular.copy($scope.d.scale_ranges);
+        // 8-9 rot  |  1-2 grün
+        $scope.d.scale_ranges_stress.scale_ranges.ranges["0"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges["1"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges["7"].result_color = "#F44336";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges["8"].result_color = "#F44336";
+
+        $scope.d.scale_ranges_hilfreich = angular.copy($scope.d.scale_ranges);
+        // 8-9 grün  |  1-2 grün
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["0"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["1"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["7"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["8"].result_color = "#4CAF50";
+
+        $scope.d.scale_ranges_unguenstig = angular.copy($scope.d.scale_ranges);
+        // 8-9 rot  |  1-2 grün
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["0"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["1"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["7"].result_color = "#F44336";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["8"].result_color = "#F44336";
+
+
 
         $scope.d.stanine_ranges = [{
             "stanine": 1,

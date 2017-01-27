@@ -7,7 +7,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
+                        <p flex class="md-body-2" style="color:#424242">Wenig</p>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
@@ -28,7 +28,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-caption" style="color:#9E9E9E;text-align: left !important">%
                             <br>Stanine
                         </p>
-                        <p flex class="md-body-2" style="color:#F44336;text-align: right !important">Viel/Ausgeprägt</p>
+                        <p flex class="md-body-2" style="color:#424242;text-align: right !important">Viel/Ausgeprägt</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
@@ -36,7 +36,7 @@ include(../lib/html/optinomic/page/start.m4)
                         <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> | {{score.sub_left}}</p>
                     </div>
                     <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges_stress" show-percent-scale="true" show-min-max="false" show-bottom-bar="false" show-value-slider="false"></score-threshold>
                     </div>
                     <div flex="30">
                         <p class="md-body-1">{{score.sub_right}}</p>
@@ -56,7 +56,7 @@ gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="color:#F44336">Wenig</p>
+                        <p flex class="md-body-2" style="color:#424242">Wenig</p>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
@@ -77,7 +77,7 @@ gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
                         <p class="md-caption" style="color:#9E9E9E;text-align: left !important">%
                             <br>Stanine
                         </p>
-                        <p flex class="md-body-2" style="color:#4CAF50 ;text-align: right !important">Viel/Ausgeprägt</p>
+                        <p flex class="md-body-2" style="color:#424242 ;text-align: right !important">Viel/Ausgeprägt</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
@@ -85,7 +85,7 @@ gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</h4>
                         <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> | {{score.sub_left}}</p>
                     </div>
                     <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges_hilfreich" show-percent-scale="true" show-min-max="false" show-bottom-bar="false" show-value-slider="false"></score-threshold>
                     </div>
                     <div flex="30">
                         <p class="md-body-1">{{score.sub_right}}</p>
@@ -105,7 +105,7 @@ welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</h4>
             <div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start end">
                     <div flex="30" layout-gt-xs="row" layout-xs="column" layout-align="space-between start">
-                        <p flex class="md-body-2" style="color:#4CAF50">Wenig</p>
+                        <p flex class="md-body-2" style="color:#424242">Wenig</p>
                         <p class="md-caption" style="color:#9E9E9E;text-align: right !important">%
                             <br>Stanine
                         </p>
@@ -126,7 +126,7 @@ welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</h4>
                         <p class="md-caption" style="color:#9E9E9E;text-align: left !important">%
                             <br>Stanine
                         </p>
-                        <p flex class="md-body-2" style="color:#F44336 ;text-align: right !important">Viel/Ausgeprägt</p>
+                        <p flex class="md-body-2" style="color:#424242 ;text-align: right !important">Viel/Ausgeprägt</p>
                     </div>
                 </div>
                 <div layout="row" layout-gt-xs="row" layout-xs="column" layout-align="start center" ng-repeat="data in score.data">
@@ -134,7 +134,7 @@ welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</h4>
                         <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> | {{score.sub_left}}</p>
                     </div>
                     <div flex="40">
-                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges" show-percent-scale="true" show-min-max="false" show-bottom-bar="false"></score-threshold>
+                        <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges_unguenstig" show-percent-scale="true" show-min-max="false" show-bottom-bar="false" show-value-slider="false"></score-threshold>
                     </div>
                     <div flex="30">
                         <p class="md-body-1">{{score.sub_right}}</p>
