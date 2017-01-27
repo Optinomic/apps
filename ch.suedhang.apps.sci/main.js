@@ -603,24 +603,25 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.scale_ranges_stress = angular.copy($scope.d.scale_ranges);
         // 8-9 rot  |  1-2 grün
-        $scope.d.scale_ranges_stress.scale_ranges.ranges["0"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_stress.scale_ranges.ranges["1"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_stress.scale_ranges.ranges["7"].result_color = "#F44336";
-        $scope.d.scale_ranges_stress.scale_ranges.ranges["8"].result_color = "#F44336";
+        console.log("(?) scale_ranges_stress", $scope.d.scale_ranges_stress);
+        $scope.d.scale_ranges_stress.scale_ranges.ranges[0].result_color = "#4CAF50";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges[1].result_color = "#4CAF50";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges[7].result_color = "#F44336";
+        $scope.d.scale_ranges_stress.scale_ranges.ranges[8].result_color = "#F44336";
 
         $scope.d.scale_ranges_hilfreich = angular.copy($scope.d.scale_ranges);
         // 8-9 grün  |  1-2 grün
-        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["0"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["1"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["7"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges["8"].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges[0].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges[1].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges[7].result_color = "#4CAF50";
+        $scope.d.scale_ranges_hilfreich.scale_ranges.ranges[8].result_color = "#4CAF50";
 
         $scope.d.scale_ranges_unguenstig = angular.copy($scope.d.scale_ranges);
         // 8-9 rot  |  1-2 grün
-        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["0"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["1"].result_color = "#4CAF50";
-        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["7"].result_color = "#F44336";
-        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges["8"].result_color = "#F44336";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges[0].result_color = "#4CAF50";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges[1].result_color = "#4CAF50";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges[7].result_color = "#F44336";
+        $scope.d.scale_ranges_unguenstig.scale_ranges.ranges[8].result_color = "#F44336";
 
 
 
