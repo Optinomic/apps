@@ -824,7 +824,7 @@ d.bscl_init = function() {
             // Auffällige Testleistung |  Vergleich mit den Gesunden 
             if (messung_obj.zscore.zscore >= 2) {
                 // Auffällige Testleistung: Rot
-                current_sample.zscore.zscore_color = '#4CAF50';
+                messung_obj.zscore.zscore_color = '#4CAF50';
             };
 
 
