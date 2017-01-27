@@ -203,7 +203,7 @@ d.sci_create_pdf_stack = function(group_scores) {
 
             group_item.data.forEach(function(data, dataID) {
 
-                console.log('(?) group_item.data', group_s, group_item, data);
+                // console.log('(?) group_item.data', group_s, group_item, data);
 
                 var my_color = "#3F51B5";
 
