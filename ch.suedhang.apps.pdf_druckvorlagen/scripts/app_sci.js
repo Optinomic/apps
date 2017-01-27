@@ -272,11 +272,11 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }]
                 };
 
-                messungen_alle.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
+                messungen_alle.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240, my_color));
                 legende_alle.push(legende_entry);
 
                 if (data.mz_typ === "Eintritt") {
-                    messungen_eintritt.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
+                    messungen_eintritt.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240, my_color));
                     legende_eintritt.push(legende_entry);
                 };
             });

@@ -492,11 +492,12 @@ $scope.getTemplates = function() {
         return zahlen_to_push;
     };
 
-    d.stanine = function(stanine, mz, width) {
+    d.stanine = function(stanine, mz, width, color) {
 
         stanine = stanine === undefined ? null : stanine;
         mz = mz === undefined ? null : mz;
         width = width === undefined ? 240 : parseInt(width);
+        color = color === undefined ? "#3F51B5" : color;
 
 
 
@@ -552,7 +553,7 @@ $scope.getTemplates = function() {
             "type": "ellipse",
             "x": step_1 * (stanine - 1) + step_1 / 2,
             "y": 15,
-            "color": "#3F51B5",
+            "color": color,
             "r1": 12,
             "r2": 12
         };
@@ -563,7 +564,7 @@ $scope.getTemplates = function() {
             "y": 0,
             "w": step_1,
             "h": 30,
-            "color": "#3F51B5",
+            "color": color,
             "lineColor": "#E0E0E0"
         };
 
@@ -573,7 +574,7 @@ $scope.getTemplates = function() {
             "y": 0,
             "w": step_1,
             "h": 30,
-            "color": "#3F51B5",
+            "color": color,
             "lineColor": "#E0E0E0"
         };
 
