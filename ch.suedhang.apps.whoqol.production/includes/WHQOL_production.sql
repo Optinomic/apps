@@ -9,11 +9,12 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+  stay.cis_fid AS fid,  
   ((cast(response AS json))->>'Datum') as datum,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
-  SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
-  SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
-  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
+--  SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
+--  SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
+--  EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
   ((cast(response AS json))->>'EWHOQOL1') as WHOQOL_1,
   ((cast(response AS json))->>'EWHOQOL2') as WHOQOL_2,
   ((cast(response AS json))->>'EWHOQOL39[EWHOQOL3]') as WHOQOL_3,
@@ -34,6 +35,7 @@ SELECT
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
   ((cast(response AS json))->>'datestamp') as datestamp,
+/*
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
   SUBSTRING(((cast(response AS json))->>'datestamp'),12,5) AS datestamp_time,
   SUBSTRING(((cast(response AS json))->>'datestamp'),1,4)::integer AS datestamp_year,
@@ -57,26 +59,26 @@ SELECT
   filled,
   module,
   survey_response.id AS survey_response_id,
-  stay.cis_fid AS fid,
   stay.id AS stay,
   stay.first_contact AS first_contact,
+*/
   stay.start AS start,
-  to_char(stay.start, 'YYYY') AS start_year,
-  to_char(stay.start, 'WW') AS start_week,
-  to_char(stay.start, 'HH24:MI') AS start_time,
-  stay.stop AS stop,
-  stay.stop_status AS stop_status,
-  stay.lead_therapist AS lead_therapist,
-  stay.deputy_lead_therapist AS deputy_lead_therapist,
-  stay.cis_lead_doctor AS lead_doctor,
-  stay.insurance_number AS insurance_number
+--  to_char(stay.start, 'YYYY') AS start_year,
+--  to_char(stay.start, 'WW') AS start_week,
+--  to_char(stay.start, 'HH24:MI') AS start_time,
+  stay.stop AS stop
+--  stay.stop_status AS stop_status,
+--  stay.lead_therapist AS lead_therapist,
+--  stay.deputy_lead_therapist AS deputy_lead_therapist,
+--  stay.cis_lead_doctor AS lead_doctor,
+--  stay.insurance_number AS insurance_number
 
 FROM "survey_response_view"
 LEFT JOIN event ON event.id = survey_response_view.event_id
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id)
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 
-WHERE module = 'com.optinomic.apps.whoqol.production';
+WHERE module = 'ch.suedhang.apps.whoqol.production';
 /*
 AND patient_view.id=1
 AND to_char(stay.start, 'YYYY') = '2014'
