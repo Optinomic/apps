@@ -349,6 +349,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 messung_obj.zscore.zscore = messung.all_results[variable_name];
                 messung_obj.zscore.text_left_caption = group.description;
 
+                // Auffällige Testleistung |  Vergleich mit den Gesunden 
+                if (messung_obj.zscore.zscore >= 2) {
+                    // Auffällige Testleistung: Rot
+                    current_sample.zscore.zscore_color = '#4CAF50';
+                };
+
                 // console.log('(!) 4 - messung_obj', messung_obj);
 
                 group.data.push(messung_obj);
@@ -402,16 +408,16 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
-                // Auffällige Testleistung |  färben
-                current_sample.zscore.zscore_color = '#1A237E';
-                if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
-                    // Auffällige Testleistung: Rot
-                    current_sample.zscore.zscore_color = '#4CAF50';
-                };
-                if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
-                    // Auffällige Testleistung: Grün
-                    current_sample.zscore.zscore_color = '#F44336';
-                };
+                // Auffällige Testleistung | im Vergleich KS | färben
+                // current_sample.zscore.zscore_color = '#1A237E';
+                // if (current_sample.zscore.zscore < current_sample.zscore.clinicsample_start) {
+                //     // Auffällige Testleistung: Rot
+                //     current_sample.zscore.zscore_color = '#4CAF50';
+                // };
+                // if (current_sample.zscore.zscore > current_sample.zscore.clinicsample_end) {
+                //     // Auffällige Testleistung: Grün
+                //     current_sample.zscore.zscore_color = '#F44336';
+                // };
             };
 
 
