@@ -15,7 +15,7 @@ d.sci_create_pdf_stack = function(group_scores) {
         "description": "Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.",
         "name": "hilfreich",
         "left_text": "Wenig",
-        "left_color": "#F44336",
+        "left_color": "#4CAF50",
         "right_text": "Viel/Ausgeprägt",
         "right_color": "#4CAF50"
     }, {
@@ -203,6 +203,8 @@ d.sci_create_pdf_stack = function(group_scores) {
 
             group_item.data.forEach(function(data, dataID) {
 
+                console.log('(?) group_item.data', group_item.data);
+
                 var legende_typ = [{
                     "type": "rect",
                     "x": 4,
@@ -266,7 +268,6 @@ d.sci_create_pdf_stack = function(group_scores) {
                     messungen_eintritt.push($scope.d.templates.stanine(data.stanine, data.mz_typ, 240));
                     legende_eintritt.push(legende_entry);
                 };
-
             });
 
             var group_messungen_container = {
