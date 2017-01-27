@@ -203,16 +203,16 @@ d.sci_create_pdf_stack = function(group_scores) {
 
             group_item.data.forEach(function(data, dataID) {
 
-                console.log('(?) group_item.data', group_item, group_item.data);
+                console.log('(?) group_item.data', group_s, group_item, data);
 
                 var my_color = "#3F51B5";
 
                 if (data.stanine <= 2) {
-                    my_color = group_item.left_color;
+                    my_color = group_s.left_color;
                 };
 
                 if (data.stanine >= 8) {
-                    my_color = group_item.right_color;
+                    my_color = group_s.right_color;
                 };
 
 
