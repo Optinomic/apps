@@ -58,7 +58,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                     "columns": [{
                         "width": "auto",
                         "text": " " + group_s.left_text,
-                        "color": group_s.left_color,
+                        "color": "#616161",
                         "alignment": "left",
                         "margin": [0, 0, 0, 0],
                         "fontSize": 11,
@@ -186,7 +186,7 @@ d.sci_create_pdf_stack = function(group_scores) {
                     }, {
                         "width": "auto",
                         "text": " " + group_s.right_text,
-                        "color": group_s.right_color,
+                        "color": "#616161",
                         "margin": [0, 0, 0, 0],
                         "alignment": "right",
                         "fontSize": 11,
