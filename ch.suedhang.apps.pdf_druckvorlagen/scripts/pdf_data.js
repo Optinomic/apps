@@ -138,7 +138,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 act_info_ein_calculation.forEach(function(calc, calcID) {
 
-                    if (error in calc) {
+                    if ("error" in calc) {
                         audit_stack.stack.push("Berechnungsfehler.");
                     } else {
 
@@ -321,7 +321,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         austritt_text = austritt_text + " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
                         break;
                     default:
-                        if (error in calc) {
+                        if ("error" in calc) {
                             fagerstroem_text = "Das Rauchverhalten kann aufgrund eines Berechnungsfehlers nicht eruiert werden.";
                         } else {
                             var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
