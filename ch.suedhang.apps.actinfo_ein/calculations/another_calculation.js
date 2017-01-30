@@ -162,7 +162,7 @@ function main(responses) {
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
-        
+
         if (d.VZET030 != '999') {
             score = score + parseInt(d.VZET030);
             count_valid_scores = count_valid_scores + 3;
@@ -244,7 +244,7 @@ function main(responses) {
             "FAGERSTROEM_Score": score,
             "Fagerstroem_Mean": Fagerstroem_Mean,
             "valid_scores": count_valid_scores,
-            "anwers": anwers
+            "anwers": anwers,
             "interpretation": selected_population,
             "ranges": { "ranges": scale_ranges_fagerstoem }
         };
