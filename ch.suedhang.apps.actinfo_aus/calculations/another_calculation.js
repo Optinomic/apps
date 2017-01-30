@@ -10,41 +10,41 @@ function main(responses) {
         // Calculate AUDIT-Score
         var score = 0;
         var valid_scores = 0;
-        var answers = 0;
+        var anwers = 0;
 
         if (d.VZAT020 != '999') {
             score = score + parseInt(d.VZAT020);
             count_valid_scores = count_valid_scores + 3;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
         if (d.VZAT030 != '999') {
             score = score + parseInt(d.VZAT030);
             count_valid_scores = count_valid_scores + 3;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZAT040 != '999') {
             score = score + parseInt(d.VZAT040);
             count_valid_scores = count_valid_scores + 1;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZAT050 != '999') {
             score = score + parseInt(d.VZAT050);
             count_valid_scores = count_valid_scores + 1;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZAT060 != '999') {
             score = score + parseInt(d.VZAT060);
             count_valid_scores = count_valid_scores + 1;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
 
         if (d.VZAT070 != '999') {
             score = score + parseInt(d.VZAT070);
             count_valid_scores = count_valid_scores + 1;
-            answers = answers + 1;
+            anwers = anwers + 1;
         };
 
         var anz_mw_to_add = 10 - count_valid_scores;
@@ -97,7 +97,7 @@ function main(responses) {
             "FAGERSTROEM_Score": score,
             "Fagerstroem_Mean": Fagerstroem_Mean,
             "valid_scores": count_valid_scores,
-            "answers": answers
+            "anwers": anwers
             "interpretation": selected_population,
             "ranges": { "ranges": scale_ranges_fagerstoem }
         };
