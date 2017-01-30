@@ -137,33 +137,34 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 var smoker = false;
 
                 act_info_ein_calculation.forEach(function(calc, calcID) {
-                    var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
-                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
-                    audit_stack.stack.push(audit_text);
+                    if (error in calc) {
+                        audit_stack.stack.push("Berechnungsfehler.");
+                    } else {
+
+                        var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
+
+                        var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
+                        audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
+                        audit_stack.stack.push(audit_text);
 
 
 
-                    var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
+                        var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
 
-                    switch (nikotin_konsum) {
-                        case 999:
-                            var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
-                            break;
-                        case 1:
-                            var nichtraucher = "Nichtraucherin";
-                            if ($scope.d.dataMain.patient.data.gender === "male") {
-                                nichtraucher = "Nichtraucher";
-                                smoker = false;
-                            };
-                            var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
-                            break;
-                        default:
-
-                            if (error in calc) {
-                                fagerstroem_text = "Das Rauchverhalten kann aufgrund eines Berechnungsfehlers nicht eruiert werden.";
-                            } else {
+                        switch (nikotin_konsum) {
+                            case 999:
+                                var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                                break;
+                            case 1:
+                                var nichtraucher = "Nichtraucherin";
+                                if ($scope.d.dataMain.patient.data.gender === "male") {
+                                    nichtraucher = "Nichtraucher";
+                                    smoker = false;
+                                };
+                                var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                                break;
+                            default:
 
                                 var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                                 var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
@@ -176,8 +177,9 @@ $scope.loadAppData = function(app_identifier, load_full) {
                                 if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
                                     fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
                                 };
-                            };
 
+
+                        };
                     };
                     fagerstroem_stack.stack.push(fagerstroem_text);
                 });
