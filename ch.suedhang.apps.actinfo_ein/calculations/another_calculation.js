@@ -244,7 +244,8 @@ function main(responses) {
             "FAGERSTROEM_Score": score,
             "Fagerstroem_Mean": Fagerstroem_Mean,
             "valid_scores": count_valid_scores,
-            "anwers": anwers,
+            "answers
+": anwers,
             "interpretation": selected_population,
             "ranges": { "ranges": scale_ranges_fagerstoem }
         };
