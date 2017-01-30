@@ -56,7 +56,7 @@ overdue = ignore
 description = AASE-G ausfüllen.
 survey = aase
 
-[event activation]
+[event exit]
 type = before_exit
 days = 7
 time = 08:00
