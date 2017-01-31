@@ -1,4 +1,6 @@
 function main(responses) {
+
+
     var calc = {};
 
     // ------------------------------------------
@@ -157,37 +159,37 @@ function main(responses) {
         var count_valid_scores = 0;
         var anwers = 0;
 
-        if (d.VZET020 !== '999') {
+        if ((d.VZET020 !== '999') && (d.VZET020 !== '')) {
             score = score + parseInt(d.VZET020);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
 
-        if (d.VZET030 !== '999') {
+        if ((d.VZET030 !== '999') && (d.VZET030 !== '')) {
             score = score + parseInt(d.VZET030);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
 
-        if (d.VZET040 !== '999') {
+        if ((d.VZET040 !== '999') && (d.VZET040 !== '')) {
             score = score + parseInt(d.VZET040);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET050 !== '999') {
+        if ((d.VZET050 !== '999') && (d.VZET050 !== '')) {
             score = score + parseInt(d.VZET050);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET060 !== '999') {
+        if ((d.VZET060 !== '999') && (d.VZET060 !== '')) {
             score = score + parseInt(d.VZET060);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET070 !== '999') {
+        if ((d.VZET070 !== '999') && (d.VZET070 !== '')) {
             score = score + parseInt(d.VZET070);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
@@ -227,16 +229,28 @@ function main(responses) {
 
 
         var selected_population = {};
-        selected_population = scale_ranges_fagerstoem[0];
 
-        if (score >= scale_ranges_fagerstoem[1].from) {
-            selected_population = scale_ranges_fagerstoem[1];
-        };
-        if (score >= scale_ranges_fagerstoem[2].from) {
-            selected_population = scale_ranges_fagerstoem[2];
-        };
-        if (score >= scale_ranges_fagerstoem[3].from) {
-            selected_population = scale_ranges_fagerstoem[3];
+        if (score !== null) {
+
+            selected_population = scale_ranges_fagerstoem[0];
+
+            if (score >= scale_ranges_fagerstoem[1].from) {
+                selected_population = scale_ranges_fagerstoem[1];
+            };
+            if (score >= scale_ranges_fagerstoem[2].from) {
+                selected_population = scale_ranges_fagerstoem[2];
+            };
+            if (score >= scale_ranges_fagerstoem[3].from) {
+                selected_population = scale_ranges_fagerstoem[3];
+            };
+        } else {
+            selected_population = {
+                "from": 999,
+                "to": 999,
+                "result": "Keine Interpretation möglich.",
+                "result_color": "#F44336",
+                "logo_speed": 55
+            }
         };
 
         var return_obj = {
