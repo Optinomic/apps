@@ -1,15 +1,24 @@
 function main(responses) {
+
     var calc = {};
+
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+    // Runden
+    calc.roundToOne = function(num) {
+        return +(Math.round(num + "e+1") + "e-1");
+    }
+
+
+
     calc.FAGERSTROEM_Score = function(d) {
 
         // Calculate AUDIT-Score
         var score = 0;
-        var valid_scores = 0;
+        var count_valid_scores = 0;
         var anwers = 0;
 
         if (d.VZAT020 !== '999') {
@@ -137,4 +146,6 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
+
+
 }
