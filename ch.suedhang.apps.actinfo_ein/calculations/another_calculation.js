@@ -195,7 +195,6 @@ function main(responses) {
 
         var anz_mw_to_add = 10 - count_valid_scores;
         var Fagerstroem_Mean = calc.roundToOne(score / count_valid_scores);
-        var anwers = calc.roundToOne(anwers)
 
         score = score + (anz_mw_to_add * Fagerstroem_Mean)
 
