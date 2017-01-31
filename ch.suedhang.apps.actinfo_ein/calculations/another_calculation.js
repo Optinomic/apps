@@ -18,52 +18,52 @@ function main(responses) {
         var score = 0;
         var count_valid_scores = 0;
 
-        if (d.VZEA010 != '999') {
+        if (d.VZEA010 !== '999') {
             score = score + parseInt(d.VZEA010);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA020 != '999') {
+        if (d.VZEA020 !== '999') {
             score = score + parseInt(d.VZEA020);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA030 != '999') {
+        if (d.VZEA030 !== '999') {
             score = score + parseInt(d.VZEA030);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA040 != '999') {
+        if (d.VZEA040 !== '999') {
             score = score + parseInt(d.VZEA040);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA050 != '999') {
+        if (d.VZEA050 !== '999') {
             score = score + parseInt(d.VZEA050);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA060 != '999') {
+        if (d.VZEA060 !== '999') {
             score = score + parseInt(d.VZEA060);
             count_valid_scores = count_valid_scores + 1;
         }
 
-        if (d.VZEA070 != '999') {
+        if (d.VZEA070 !== '999') {
             score = score + parseInt(d.VZEA070);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA080 != '999') {
+        if (d.VZEA080 !== '999') {
             score = score + parseInt(d.VZEA080);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA090 != '999') {
+        if (d.VZEA090 !== '999') {
             score = score + parseInt(d.VZEA090);
             count_valid_scores = count_valid_scores + 1;
         };
 
-        if (d.VZEA100 != '999') {
+        if (d.VZEA100 !== '999') {
             score = score + parseInt(d.VZEA100);
             count_valid_scores = count_valid_scores + 1;
         };
@@ -157,37 +157,37 @@ function main(responses) {
         var valid_scores = 0;
         var anwers = 0;
 
-        if (d.VZET020 != '999') {
+        if (d.VZET020 !== '999') {
             score = score + parseInt(d.VZET020);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
 
-        if (d.VZET030 != '999') {
+        if (d.VZET030 !== '999') {
             score = score + parseInt(d.VZET030);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
 
-        if (d.VZET040 != '999') {
+        if (d.VZET040 !== '999') {
             score = score + parseInt(d.VZET040);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET050 != '999') {
+        if (d.VZET050 !== '999') {
             score = score + parseInt(d.VZET050);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET060 != '999') {
+        if (d.VZET060 !== '999') {
             score = score + parseInt(d.VZET060);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZET070 != '999') {
+        if (d.VZET070 !== '999') {
             score = score + parseInt(d.VZET070);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;

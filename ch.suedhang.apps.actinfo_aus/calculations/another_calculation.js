@@ -12,36 +12,36 @@ function main(responses) {
         var valid_scores = 0;
         var anwers = 0;
 
-        if (d.VZAT020 != '999') {
+        if (d.VZAT020 !== '999') {
             score = score + parseInt(d.VZAT020);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
-        if (d.VZAT030 != '999') {
+        if (d.VZAT030 !== '999') {
             score = score + parseInt(d.VZAT030);
             count_valid_scores = count_valid_scores + 3;
             anwers = anwers + 1;
         };
 
-        if (d.VZAT040 != '999') {
+        if (d.VZAT040 !== '999') {
             score = score + parseInt(d.VZAT040);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZAT050 != '999') {
+        if (d.VZAT050 !== '999') {
             score = score + parseInt(d.VZAT050);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZAT060 != '999') {
+        if (d.VZAT060 !== '999') {
             score = score + parseInt(d.VZAT060);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
         };
 
-        if (d.VZAT070 != '999') {
+        if (d.VZAT070 !== '999') {
             score = score + parseInt(d.VZAT070);
             count_valid_scores = count_valid_scores + 1;
             anwers = anwers + 1;
