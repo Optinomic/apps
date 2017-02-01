@@ -98,10 +98,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                             table_to_push.table.body.push(substanz);
                         });
                     } else {
-                        table.problemsubstanzen.forEach(function(ps, myTableID) {
-                            var substanz = [{ "text": "Keine Angaben zu Problemsubstanzen vorhanden.", "fontSize": 11, "margin": [0, 0, 0, 0] }];
-                            table_to_push.table.body.push(substanz);
-                        });
+                        var substanz = [{ "text": "Keine Angaben zu Problemsubstanzen vorhanden.", "fontSize": 11, "margin": [0, 0, 0, 0] }];
+                        table_to_push.table.body.push(substanz);
                     };
 
 
