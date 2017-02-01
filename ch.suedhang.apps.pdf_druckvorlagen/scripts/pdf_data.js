@@ -157,10 +157,10 @@ $scope.loadAppData = function(app_identifier, load_full) {
                                 var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
                                 break;
                             case 1:
+                                smoker = false;
                                 var nichtraucher = "Nichtraucherin";
                                 if ($scope.d.dataMain.patient.data.gender === "male") {
                                     nichtraucher = "Nichtraucher";
-                                    smoker = false;
                                 };
                                 var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
                                 break;
