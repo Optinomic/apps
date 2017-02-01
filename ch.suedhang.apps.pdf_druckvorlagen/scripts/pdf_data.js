@@ -79,7 +79,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "table": {
                             "widths": ["*"],
                             "body": [
-                                // [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
+                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 1, "margin": [0, 0, 0, 0] }],
                             ]
                         },
                         "layout": "noBorders"
