@@ -187,7 +187,6 @@ $scope.loadAppData = function(app_identifier, load_full) {
                                     fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
                                 };
 
-
                         };
                         fagerstroem_stack.stack.push(fagerstroem_text);
                     };
