@@ -79,7 +79,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "table": {
                             "widths": ["*"],
                             "body": [
-                                //                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
+                                // [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 9, "margin": [0, 6, 0, 3] }],
                             ]
                         },
                         "layout": "noBorders"
@@ -180,8 +180,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
 
                         };
+                        fagerstroem_stack.stack.push(fagerstroem_text);
                     };
-                    fagerstroem_stack.stack.push(fagerstroem_text);
                 });
 
 
