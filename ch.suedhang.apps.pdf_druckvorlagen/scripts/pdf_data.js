@@ -79,22 +79,32 @@ $scope.loadAppData = function(app_identifier, load_full) {
                         "table": {
                             "widths": ["*"],
                             "body": [
-                                [{ "text": "Substanz: Häufigkeit", "color": "grey", "fontSize": 1, "margin": [0, 0, 0, 0] }],
+                                //[{ "text": "Substanz: Häufigkeit", "color": "white", "fontSize": 1, "margin": [0, 0, 0, 0] }],
                             ]
                         },
                         "layout": "noBorders"
                     };
 
-                    table.problemsubstanzen.forEach(function(ps, myTableID) {
-                        var substanz = [{
-                            "text": [
-                                { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
-                                { "text": " " + ps.label, "bold": false, "fontSize": 11 }
-                            ],
-                            "margin": [0, 0, 0, 0]
-                        }];
-                        table_to_push.table.body.push(substanz);
-                    });
+
+                    if (table.problemsubstanzen.length) {
+                        table.problemsubstanzen.forEach(function(ps, myTableID) {
+                            var substanz = [{
+                                "text": [
+                                    { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
+                                    { "text": " " + ps.label, "bold": false, "fontSize": 11 }
+                                ],
+                                "margin": [0, 0, 0, 0]
+                            }];
+                            table_to_push.table.body.push(substanz);
+                        });
+                    } else {
+                        table.problemsubstanzen.forEach(function(ps, myTableID) {
+                            var substanz = [{ "text": "Keine Angaben zu Problemsubstanzen vorhanden.", "fontSize": 11, "margin": [0, 0, 0, 0] }];
+                            table_to_push.table.body.push(substanz);
+                        });
+                    };
+
+
                     col_1.push(table_to_push);
                 });
 
