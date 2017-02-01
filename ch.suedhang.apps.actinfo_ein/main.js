@@ -77,7 +77,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // Problemsubstanzen ermitteln
 
-        var results = $scope.d.dataMain.survey_responses_group[0];
+        var results = $scope.d.dataMain.survey_responses;
 
         results.forEach(function(result, myindex) {
             var response = result.entity.data.response;
@@ -375,9 +375,10 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 result.problemsubstanzen.push(text);
             };
-
-
         });
+
+        $scope.d.current_response = [];
+        $scope.d.current_response.push(results[results.length - 1]);
     };
 
 
