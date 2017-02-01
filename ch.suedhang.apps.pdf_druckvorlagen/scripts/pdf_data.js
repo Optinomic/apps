@@ -145,58 +145,53 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                 var smoker = false;
 
-                //act_info_ein_calculation.forEach(function(calc, calcID) {
-                //});
+                act_info_ein_calculation.forEach(function(calc, calcID) {
 
-                $scope.d.appData[app_identifier].data.survey_responses[last_response_id].calculations;
+                    if ("error" in calc) {
+                        audit_stack.stack.push("Berechnungsfehler.");
+                    } else {
 
-                var calc = adf;
+                        var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                if ("error" in calc) {
-                    audit_stack.stack.push("Berechnungsfehler.");
-                } else {
-
-                    var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
-
-                    var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
-                    audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
-                    audit_stack.stack.push(audit_text);
+                        var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
+                        audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
+                        audit_stack.stack.push(audit_text);
 
 
 
-                    var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
+                        var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
 
-                    switch (nikotin_konsum) {
-                        case 999:
-                            var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
-                            break;
-                        case 1:
-                            smoker = false;
-                            var nichtraucher = "Nichtraucherin";
-                            if ($scope.d.dataMain.patient.data.gender === "male") {
-                                nichtraucher = "Nichtraucher";
-                            };
-                            var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
-                            break;
-                        default:
+                        switch (nikotin_konsum) {
+                            case 999:
+                                var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                                break;
+                            case 1:
+                                smoker = false;
+                                var nichtraucher = "Nichtraucherin";
+                                if ($scope.d.dataMain.patient.data.gender === "male") {
+                                    nichtraucher = "Nichtraucher";
+                                };
+                                var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                                break;
+                            default:
 
-                            var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
-                            var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
-                            smoker = true;
+                                var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
+                                var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
+                                smoker = true;
 
-                            fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
+                                fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
 
-                            fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                                fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
 
-                            if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
-                                fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
-                            };
+                                if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
+                                    fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                                };
 
 
+                        };
+                        fagerstroem_stack.stack.push(fagerstroem_text);
                     };
-                    fagerstroem_stack.stack.push(fagerstroem_text);
-                };
-
+                });
 
 
                 app_scope.audit = true;
