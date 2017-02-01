@@ -22,8 +22,12 @@ d.actinfo_ein_get_problemsubstanzen_table = function(results) {
     var tables = [];
 
 
+    var current_results = [];
+    current_results.push(results[results.length - 1]);
+
+
     // Problemsubstanzen ermitteln
-    results.forEach(function(result, myindex) {
+    current_results.forEach(function(result, myindex) {
         console.log('ch.suedhang.apps.actinfo_ein ==== ', result);
 
         var response = result.entity.data.response;

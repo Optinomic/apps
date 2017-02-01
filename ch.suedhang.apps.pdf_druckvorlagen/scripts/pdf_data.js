@@ -48,10 +48,11 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
             if (data.survey_responses.length > 0) {
 
+                var last_response_id = data.survey_responses.length - 1;
                 var app_scope = $scope.d.appData[app_identifier].app_scope;
                 var response = data.survey_responses["0"].entity.data.response;
 
-                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
+                var date = $filter("amDateFormat")(data.survey_responses[last_response_id].entity.data.filled, "DD.MM.YYYY");
                 actinfo_ein_stack_all = angular.copy(actinfo_ein_stack);
                 actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title + " | Eintritt", date));
                 actinfo_ein_stack_all.push($scope.d.templates.heading("h2", app_title));
@@ -73,7 +74,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 col_1.push($scope.d.templates.heading("h3", "Substanzkonsum"));
                 col_1.push($scope.d.templates.text("Folgende Substanzen konsumierte " + $scope.d.dataMain.patient.data.extras.anrede + " vor dem aktuellen Entzug in der angegebenen Häufigkeit:"));
 
-                var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses_group["0"]);
+                var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses);
                 actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
                     var table_to_push = {
                         "table": {
@@ -130,7 +131,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
                 });
 
 
-                var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses["0"].entity.data.response;
+                var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses[last_response_id].entity.data.response;
 
                 var audit_stack = {
                     "stack": [],
