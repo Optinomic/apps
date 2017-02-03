@@ -42,6 +42,15 @@ overdue = ignore
 description = TMT-Erfassung
 survey = tmt_ng
 
+[event exit]
+type = before_exit
+days = 5
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = TMT-Erfassung
+survey = tmt_ng
+
 
 [sql_init]
 include(includes/create_view.sql)
