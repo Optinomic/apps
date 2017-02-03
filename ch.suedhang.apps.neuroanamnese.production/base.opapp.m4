@@ -43,7 +43,7 @@ survey = assessment
 [event exit]
 type = before_exit
 days = 5
-time: 08:00
+time = 08:00
 due_after = 345600
 overdue = ignore
 description = Neuroanamnese zum TMT
