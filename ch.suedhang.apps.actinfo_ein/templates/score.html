@@ -84,7 +84,9 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === 999)">
             <h5 class="md-subhead">Keine Interpretation möglich</h5>
-            <p class="md-caption">Kein FAGERSTROEM-Score vorhanden.</p>
+            <p class="md-caption" ng-if="response.calculations[0].calculation_result.response.data.response.VZET010 === '1'">Nichtraucher/in</p>
+            <p class="md-caption" ng-if="response.calculations[0].calculation_result.response.data.response.VZET020 === '777'">PatientIn raucht ein anderes Tabakprodukt als Zigaretten.</p>
+            <p class="md-caption" ng-if="response.calculations[0].calculation_result.response.data.response.VZET020 === '999'">Das Rauchverhalten ist nicht bekannt.</p>
         </div>
     </div>
 </div>
