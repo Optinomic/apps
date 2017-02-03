@@ -36,7 +36,7 @@ min_questions =
 min_lastpage = 4
 
 [event exit]
-responsibility = lead_therapist
+responsibility = Admin
 type = before_exit
 days = 7
 time = 07:00
