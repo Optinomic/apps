@@ -46,7 +46,7 @@ overdue = ignore
 description = Eintritt - Lebensqualität (WHOQOL)
 survey = WHOQOL
 
-[event before_exit]
+[event exit]
 type = before_exit
 days = 10
 time = 08:00

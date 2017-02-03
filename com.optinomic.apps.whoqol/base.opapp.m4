@@ -57,7 +57,7 @@ overdue = ignore
 description = WHOQOL ausfüllen.
 survey = WHOQOL
 
-[event activation]
+[event exit]
 type = before_exit
 days = 7
 time = 08:00
