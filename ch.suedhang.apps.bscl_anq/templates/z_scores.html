@@ -97,7 +97,8 @@
             <div flex>
                 <div style="padding-left: 12px;">
                     <p class="md-body-2">{{data.zscore.text_left}}</p>
-                    <p class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.filled | date}}</p>
+                    <p ng-if="!data.calculation.info.response.q504V00" class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.filled | date}}</p>
+                    <p ng-if="data.calculation.info.response.q504V00" class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.response.q504V00 | date}}</p>
                 </div>
             </div>
             <div flex="80" ng-if="data.calculation.info.response.q501V05 === '0'">
