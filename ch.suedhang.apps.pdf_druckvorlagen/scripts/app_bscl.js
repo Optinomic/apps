@@ -556,6 +556,10 @@ d.buildZusatzitemsArray = function() {
 
         var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
 
+        if ("q504V00" in sr.calculations["0"].calculation_result.info.response) {
+            datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.response.q504V00);
+        };
+
         var zusatzitem = {
             "id": srID,
             "mz_id": sr.calculations["0"].calculation_result.info.mz.mz_id,
@@ -750,6 +754,11 @@ d.bscl_init = function() {
         // Variablen vorbereiten | verdrahten.
         var mz_text = messung.info.mz.mz_typ;
         var datum_messung = $filter('date')(messung.info.filled);
+
+        if ("q504V00" in messung.info.response) {
+            datum_messung = $filter('date')(messung.info.response.q504V00);
+        };
+
 
 
         // Messzeitpung
