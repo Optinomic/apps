@@ -16,7 +16,7 @@ function main(responses) {
         "description": "Soziale Orientierung",
         "full": "Sich für andere Menschen einsetzen, aufmerksam und hilfsbereit sein, andere Meinungen tolerieren und Kompromisse anstreben.",
         "sub_left": "Auf den eigenen Vorteil bedacht sein, sich nicht für andere interessieren und deren Meinung ignorieren oder gering schätzen",
-        "sub_right": "Überinvolviert, Kompromisslosigkeit",
+        "sub_right": "Überinvolviert, zu schnelle Kompromissbereitschaft",
         "m_norm": 29.50,
         "sd_norm": 3.82,
         "items": 10
