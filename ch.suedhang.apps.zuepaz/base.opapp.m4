@@ -61,7 +61,7 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 [calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+include(calculations/zuepaz.js)
 
 [sql_init]
 include(includes/create_view.sql)
