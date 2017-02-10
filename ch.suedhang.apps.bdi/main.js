@@ -468,7 +468,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         survey_responses.forEach(function(sr, srID) {
 
 
-            var response = sr.calculations["0"].calculation_result.response;
+            var response = sr.calculations["0"].calculation_result.response.data.response;
             var score = sr.calculations["0"].calculation_result.score;
 
             var zeipunkt_text = "Nicht festgelegt";
