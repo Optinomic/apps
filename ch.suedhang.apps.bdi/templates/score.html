@@ -29,8 +29,8 @@ include(../lib/html/optinomic/page/start.m4)
                     <p class="md-display-1" ng-attr-style="color:{{sr.bdi.interpretation.result_color}}">{{sr.bdi.interpretation.interpretation_de}}</p>
                 </div>
                 <div>
-                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true, $index)">
-                        Antworten anzeigen
+                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="sr.bdi.show_answers = true">
+                        Antworten
                     </md-button>
                 </div>
             </div>
@@ -40,28 +40,28 @@ include(../lib/html/optinomic/page/start.m4)
             <p class="md-caption">Kein BDI-Score vorhanden.</p>
         </div>
     </div>
-    <div ng-if="d.show_answers" layout-margin>
+    <div ng-if="sr.bdi.show_answers">
         <div layout="row" layout-gt-xs="row" layout-align="space-between center">
             <div>
                 <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
             </div>
             <div>
-                <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="d.show_answers = false">
+                <md-button ng-if="d.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="sr.bdi.show_answers = true">
                     Antworten ausblenden
                 </md-button>
             </div>
         </div>
         <md-input-container>
             <label>Filter</label>
-            <md-select md-on-close="setAnswerFilter(true, $index)" ng-model="d.show_answers_filter">
+            <md-select md-on-close="setAnswerFilter($index)" ng-model="d.show_answers_filter">
                 <md-option ng-repeat="filter in d.show_answers_filters" value="{{filter.value}}">
                     {{filter.name}}
                 </md-option>
             </md-select>
         </md-input-container>
         <div>&nbsp;</div>
-        <div ng-repeat="(key, question) in d.bdi_fragen" ng-repeat=" in dataset">
-            <p class="md-caption" ng-if="sr.calculations['0'].calculation_result.response.data.response['BDI_filter_' + (key+1)]">
+        <div ng-repeat="frage in d.bdi_fragen">
+            <p class="md-caption" ng-if="sr.bdi.answers_filtered['BDI_filter_' + (key+1)]">
                 <strong>{{question.name}}: </strong>
                 <span ng-repeat="answer in question.answers">
                     <span ng-if="answer.code === sr.calculations['0'].calculation_result.response.data.response['BDI'+(key+1)]">{{answer.item}}. <small style="color:#9E9E9E"> ({{answer.code}})</small></span>

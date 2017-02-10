@@ -79,8 +79,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     $scope.bdi_init = function() {
 
-        $scope.d.show_answers = false;
-        $scope.d.show_answers_filter = 3;
+
 
         $scope.d.show_answers_filters = [{
             "value": 0,
@@ -488,12 +487,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 response.andererZeitpunkt = "Nicht festgelegt"
             };
 
+
+            $scope.d.show_answers = false;
+            $scope.d.show_answers_filter = 3;
+
             // Write
             sr.bdi = {
                 "zeipunkt_text": zeipunkt_text,
                 "zeipunkt_datum": zeipunkt_datum,
                 "score": score.score,
-                "interpretation": score.current_range
+                "interpretation": score.current_range,
+                "show_answers": false,
+                "show_answers_filter": 3
             };
 
 
@@ -531,10 +536,12 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Filter Answers
     // -------------------
-    $scope.setAnswerFilter = function(show_true, current_array_id) {
+    $scope.setAnswerFilter = function(current_array_id) {
 
-
+        var data = $scope.d.dataMain.survey_responses[current_array_id].bdi;
         var results = $scope.d.dataMain.survey_responses[current_array_id].calculations['0'].calculation_result.response.data.response;
+
+        data.answer_filtered = {};
 
         for (var i = 1; i < 22; i++) {
 
@@ -543,18 +550,18 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             results['BDI_filter_' + i] = false;
+            data.answers_filtered['BDI_filter_' + i] = false;
 
             //console.log(':::> ', i, current_answer, current_score);
 
             if (current_score >= $scope.d.show_answers_filter) {
                 results['BDI_filter_' + i] = true;
+                data.answers_filtered['BDI_filter_' + i] = true;
                 //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
             };
 
         };
 
-        // console.log('setAnswerFilter :::> Results ', results);
-        $scope.d.show_answers = show_true;
     };
 
 
