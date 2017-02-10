@@ -538,7 +538,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     $scope.setAnswerFilter = function(current_array_id) {
 
-        var data = $scope.d.dataMain.survey_responses[current_array_id].bdi;
         var results = $scope.d.dataMain.survey_responses[current_array_id].calculations['0'].calculation_result.response.data.response;
 
         data.answer_filtered = {};
@@ -550,13 +549,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             results['BDI_filter_' + i] = false;
-            data.answers_filtered['BDI_filter_' + i] = false;
 
             //console.log(':::> ', i, current_answer, current_score);
 
             if (current_score >= $scope.d.show_answers_filter) {
                 results['BDI_filter_' + i] = true;
-                data.answers_filtered['BDI_filter_' + i] = true;
                 //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
             };
 

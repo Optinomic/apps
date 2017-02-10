@@ -61,7 +61,7 @@ include(../lib/html/optinomic/page/start.m4)
         </md-input-container>
         <div>&nbsp;</div>
         <div ng-repeat="frage in d.bdi_fragen">
-            <p class="md-caption" ng-if="sr.bdi.answers_filtered['BDI_filter_' + (key+1)]">
+            <p class="md-caption" ng-if="answer.code === sr.calculations['0'].calculation_result.response.data.response['BDI_filter_' + (key+1)]">
                 <strong>{{question.name}}: </strong>
                 <span ng-repeat="answer in question.answers">
                     <span ng-if="answer.code === sr.calculations['0'].calculation_result.response.data.response['BDI'+(key+1)]">{{answer.item}}. <small style="color:#9E9E9E"> ({{answer.code}})</small></span>
