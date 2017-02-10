@@ -38,6 +38,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Run Specific Functions only when needed.
                 if (current_template === 'simple_score') {
+                    $scope.enhance_sr();
                     $scope.bdi_init();
                 };
 
@@ -462,6 +463,41 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         }];
     };
 
+    $scope.enhance_sr = function() {
+        var survey_responses = $scope.d.dataMain.survey_responses;
+        survey_responses.forEach(function(sr, srID) {
+
+
+            var response = sr.calculations["0"].calculation_result.response;
+            var score = sr.calculation_result.score;
+
+            var zeipunkt_text = "Nicht festgelegt";
+            var zeipunkt_datum = response.datestamp;
+            if ("Erhebungszeitpunkt" in response) {
+                if (parseInt(response.Erhebungszeitpunkt === 1)) {
+                    zeipunkt_text = "Eintritt";
+                };
+                if (parseInt(response.Erhebungszeitpunkt === 2)) {
+                    zeipunkt_text = "Austritt";
+                };
+                if (parseInt(response.Erhebungszeitpunkt === 3)) {
+                    zeipunkt_text = "Anderer: " + response.andererZeitpunkt;
+                };
+            } else {
+                response.Erhebungszeitpunkt = 3
+                response.andererZeitpunkt = "Nicht festgelegt"
+            };
+
+            // Write
+            sr.bdi = {
+                "zeipunkt_text": zeipunkt_text,
+                "zeipunkt_datum": zeipunkt_datum,
+                "score": score.score,
+                "interpretation": score.current_range
+            };
+
+        });
+    };
 
     // -------------------
     // Navigation
