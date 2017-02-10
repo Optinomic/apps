@@ -19,7 +19,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p flex class="md-body-1" style="text-align: left">Verdacht auf eine schwere Depression</p>
         </div>
     </div>
-    <div layout="row" layout-gt-xs="row" layout-align="start center">
+    <div layout="row" layout-gt-xs="row" layout-align="start end">
         <div flex ng-if="sr.bdi.score !== null">
             <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
                 <div flex>
@@ -29,7 +29,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <p class="md-display-1" ng-attr-style="color:{{sr.bdi.interpretation.result_color}}">{{sr.bdi.interpretation.interpretation_de}}</p>
                 </div>
                 <div>
-                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
+                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true, $index)">
                         Antworten anzeigen
                     </md-button>
                 </div>
@@ -53,7 +53,7 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
         <md-input-container>
             <label>Filter</label>
-            <md-select md-on-close="setAnswerFilter(true)" ng-model="d.show_answers_filter">
+            <md-select md-on-close="setAnswerFilter(true, $index)" ng-model="d.show_answers_filter">
                 <md-option ng-repeat="filter in d.show_answers_filters" value="{{filter.value}}">
                     {{filter.name}}
                 </md-option>

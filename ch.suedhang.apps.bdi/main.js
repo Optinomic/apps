@@ -474,13 +474,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeipunkt_text = "Nicht festgelegt";
             var zeipunkt_datum = response.datestamp;
             if ("Erhebungszeitpunkt" in response) {
-                if (parseInt(response.Erhebungszeitpunkt === 1)) {
+                if (parseInt(response.Erhebungszeitpunkt) === 1) {
                     zeipunkt_text = "Eintritt";
                 };
-                if (parseInt(response.Erhebungszeitpunkt === 2)) {
+                if (parseInt(response.Erhebungszeitpunkt) === 2) {
                     zeipunkt_text = "Austritt";
                 };
-                if (parseInt(response.Erhebungszeitpunkt === 3)) {
+                if (parseInt(response.Erhebungszeitpunkt) === 3) {
                     zeipunkt_text = "Anderer: " + response.andererZeitpunkt;
                 };
             } else {
