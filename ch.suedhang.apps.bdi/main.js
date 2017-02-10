@@ -469,7 +469,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             var response = sr.calculations["0"].calculation_result.response;
-            var score = sr.calculation_result.score;
+            var score = sr.calculations["0"].calculation_result.score;
 
             var zeipunkt_text = "Nicht festgelegt";
             var zeipunkt_datum = response.datestamp;
