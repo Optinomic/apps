@@ -19,9 +19,9 @@ include(../lib/html/optinomic/page/start.m4)
             <p flex class="md-body-1" style="text-align: left">Verdacht auf eine schwere Depression</p>
         </div>
     </div>
-    <div layout="row" layout-gt-xs="row" layout-align="start end">
+    <div layout="row" layout-gt-xs="row" layout-align="start center">
         <div flex ng-if="sr.bdi.score !== null">
-            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between end">
                 <div flex>
                     <h5 class="md-subhead">
                     Interpretation ({{sr.bdi.interpretation.from}} bis {{sr.bdi.interpretation.to}} Punkte):
