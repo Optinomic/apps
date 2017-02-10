@@ -496,6 +496,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "interpretation": score.current_range
             };
 
+
+            $scope.setAnswerFilter(false, srID);
+
         });
     };
 
@@ -528,10 +531,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Filter Answers
     // -------------------
-    $scope.setAnswerFilter = function(show_true) {
+    $scope.setAnswerFilter = function(show_true, current_array_id) {
 
 
-        var results = $scope.d.dataMain.survey_responses[$scope.d.navigator].calculations['0'].calculation_result.response.data.response;
+        var results = $scope.d.dataMain.survey_responses[current_array_id].calculations['0'].calculation_result.response.data.response;
 
         for (var i = 1; i < 22; i++) {
 

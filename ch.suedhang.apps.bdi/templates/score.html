@@ -5,7 +5,7 @@ include(../lib/html/optinomic/page/start.m4)
             <h3 class="md-headline">{{sr.bdi.zeipunkt_text}}</h3>
         </div>
         <div>
-            <h3 class="md-caption">{{sr.bdi.zeipunkt_datum}}</h3>
+            <h3 class="md-subhead">{{sr.bdi.zeipunkt_datum | date}}</h3>
         </div>
     </div>
     <div ng-if="sr.bdi.score !== null" layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
@@ -19,22 +19,26 @@ include(../lib/html/optinomic/page/start.m4)
             <p flex class="md-body-1" style="text-align: left">Verdacht auf eine schwere Depression</p>
         </div>
     </div>
-    <div layout="row" layout-gt-xs="row" layout-align="start start">
+    <div layout="row" layout-gt-xs="row" layout-align="start center">
         <div flex ng-if="sr.bdi.score !== null">
-            <h5 class="md-subhead">
-            Interpretation ({{sr.bdi.interpretation.from}} bis {{sr.bdi.interpretation.to}} Punkte):
-            </h5>
-            <p class="md-display-1" ng-attr-style="color:{{sr.bdi.interpretation.result_color}}">{{sr.bdi.interpretation.interpretation_de}}</p>
+            <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+                <div flex>
+                    <h5 class="md-subhead">
+                    Interpretation ({{sr.bdi.interpretation.from}} bis {{sr.bdi.interpretation.to}} Punkte):
+                    </h5>
+                    <p class="md-display-1" ng-attr-style="color:{{sr.bdi.interpretation.result_color}}">{{sr.bdi.interpretation.interpretation_de}}</p>
+                </div>
+                <div>
+                    <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
+                        Antworten anzeigen
+                    </md-button>
+                </div>
+            </div>
         </div>
         <div flex ng-if="sr.bdi.score === null">
             <h5 class="md-subhead">Keine Interpretation möglich</h5>
             <p class="md-caption">Kein BDI-Score vorhanden.</p>
         </div>
-    </div>
-    <div layout="row" layout-gt-xs="row" layout-align="start start">
-        <md-button ng-if="!d.show_answers" class="md-primary" aria-label="Antworten anzeigen" ng-click="setAnswerFilter(true)">
-            Antworten anzeigen
-        </md-button>
     </div>
     <div ng-if="d.show_answers" layout-margin>
         <div layout="row" layout-gt-xs="row" layout-align="space-between center">
