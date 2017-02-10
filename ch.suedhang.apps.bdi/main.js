@@ -502,7 +502,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             };
 
             // Filter
-            $scope.setAnswerFilter(srID);
+            $scope.setAnswerFilter(srID, 3);
 
         });
     };
@@ -536,7 +536,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------
     // Filter Answers
     // -------------------
-    $scope.setAnswerFilter = function(current_array_id) {
+    $scope.setAnswerFilter = function(current_array_id, answer_filter) {
 
         var results = $scope.d.dataMain.survey_responses[current_array_id].calculations['0'].calculation_result.response.data.response;
 
@@ -547,10 +547,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             results['BDI_filter_' + i] = false;
-
             //console.log(':::> ', i, current_answer, current_score);
 
-            if (current_score >= $scope.d.show_answers_filter) {
+            if (current_score >= answer_filter) {
                 results['BDI_filter_' + i] = true;
                 //console.log(':::::::::  TRUE  > ', i, current_answer, current_score, $scope.d.show_answers_filter);
             };

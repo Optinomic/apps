@@ -46,14 +46,14 @@ include(../lib/html/optinomic/page/start.m4)
                 <h5 class="md-subhead">Antworten: {{d.dataMain.apps.current.name}}</h5>
             </div>
             <div>
-                <md-button ng-if="sr.bdi.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="sr.bdi.show_answers = true">
+                <md-button ng-if="sr.bdi.show_answers" class="md-accent" aria-label="Antworten ausblenden" ng-click="sr.bdi.show_answers = false">
                     Antworten ausblenden
                 </md-button>
             </div>
         </div>
         <md-input-container>
             <label>Filter</label>
-            <md-select md-on-close="setAnswerFilter($index)" ng-model="sr.bdi.show_answers_filter">
+            <md-select md-on-close="setAnswerFilter($index, sr.bdi.show_answers_filter)" ng-model="sr.bdi.show_answers_filter">
                 <md-option ng-repeat="filter in d.show_answers_filters" value="{{filter.value}}">
                     {{filter.name}}
                 </md-option>
