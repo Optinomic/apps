@@ -2,12 +2,12 @@
 id = ch.suedhang.apps.case.production
 name = CASE
 parent = ch.suedhang.apps.case.new
-short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation
+short_description = Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation
 version = include(VERSION)
 type = patient
 
 [description]
-Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert. 
+Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE) und Behandlungsindikation. Ab 15 Punkten ist eine stationäre Therapie indiziert. 
 
 [developer]
 first_name = Nora
@@ -38,7 +38,9 @@ min_lastpage = 2
 type = on_activation
 due_after = 345600
 overdue = ignore
-description = Track your something.
+description = Alkoholabhängigkeit (CASE) und Behandlungsindikation.
 survey = CASE
 
 
+[sql_init]
+include(includes/create_view.sql)
