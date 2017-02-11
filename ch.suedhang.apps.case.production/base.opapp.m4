@@ -43,4 +43,4 @@ survey = CASE
 
 
 [sql_init]
-include(includes/create_view.sql)
+include(includes/create_view_production.sql)
