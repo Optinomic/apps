@@ -93,10 +93,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var substanz_text = "Alkohol";
             if ("Substanz" in response) {
                 if (parseInt(response.Substanz) === 1) {
-                    zeipunkt_text = "Alkohol";
+                    substanz_text = "Alkohol";
                 };
                 if (parseInt(response.Substanz) === 2) {
-                    zeipunkt_text = response.SubstAndere;
+                    substanz_text = response.SubstAndere;
                 };
             } else {
                 response.Substanz = "1"
