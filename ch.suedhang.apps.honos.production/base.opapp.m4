@@ -54,7 +54,4 @@ survey = HoNOS
 
 
 
-[sql_init]
-include(includes/create_view_pabs_interface.sql)
-
 
