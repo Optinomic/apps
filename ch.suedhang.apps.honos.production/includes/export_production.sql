@@ -13,10 +13,11 @@ SELECT
   stay.cis_fid as fid_cis,
   stay.cis_fid/100 as fid,
   survey_response_view.survey_response_id AS survey_response_id,
-  ((cast(response AS json))->>'PID') as pid_Limesurvey,
+  ((cast(response AS json))->>'PID') as pid_survey,
+  ((cast(response AS json))->>'FID') as fid_survey,
+
   'PH' as rekordart,
   71286515 as betriebsnummer_bur,
-  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
   ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
@@ -35,7 +36,7 @@ SELECT
   ((cast(response AS json))->>'H2[402V12]') as honos_h10,
   ((cast(response AS json))->>'H2[402V13]') as honos_h11,
   ((cast(response AS json))->>'H2[402V14]') as honos_h12
-FROM "survey_response_view" 
+FROM 'survey_response_view' 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 WHERE module = 'ch.suedhang.apps.honos.production' 
