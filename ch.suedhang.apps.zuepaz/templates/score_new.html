@@ -8,7 +8,6 @@ include(../lib/html/optinomic/page/start.m4)
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Summe: <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkte (bei {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 31 beantworteten Fragen)</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="start center">
             <div flex="45">
                 <h5 class="md-subhead">
@@ -29,6 +28,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <score-threshold score="response.calculations[0].calculation_result.ZuePaZ.full_mean" min="0" max="3" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="true"></score-threshold>
             </div>
         </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summe von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkte (bei {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 31 beantworteten Fragen)</p>
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
