@@ -11,7 +11,7 @@ SELECT
   
   patient.cis_pid as pid_cis,
   stay.cis_fid as fid_cis,
-  "PH" as Rekordart,
+  'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,

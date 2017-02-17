@@ -6,6 +6,7 @@ SELECT
   survey_response_view.stay_id as optinomic_stay_id,
   survey_response_view.event_id as optinomic_event_id,
   survey_response_view.survey_response_id as optinomic_survey_response_id,
+  survey_response_view.filled as optinomic_survey_filled,
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
@@ -16,7 +17,7 @@ SELECT
   ((cast(response AS json))->>'PID') as pid_survey,
   ((cast(response AS json))->>'FID') as fid_survey,
 
-  "PH" as rekordart,
+  'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
