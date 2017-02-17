@@ -6,12 +6,11 @@ SELECT
   survey_response_view.stay_id as optinomic_stay_id,
   survey_response_view.event_id as optinomic_event_id,
   survey_response_view.survey_response_id as optinomic_survey_response_id,
-  survey_response_view.filled as optinomic_survey_filled,
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  patient.cis_pid as cis_pid,
-  stay.cis_fid as cis_fid,
+  patient.cis_pid as pid_cis,
+  stay.cis_fid as fid_cis,
   stay.cis_fid/100 as fid,
   survey_response_view.survey_response_id AS survey_response_id,
   ((cast(response AS json))->>'PID') as pid_Limesurvey,

@@ -9,8 +9,8 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  patient.cis_pid as cis_pid,
-  stay.cis_fid as cis_fid,
+  patient.cis_pid as pid_cis,
+  stay.cis_fid as fid_cis,
   'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
