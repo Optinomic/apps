@@ -90,11 +90,24 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 response.andererZeitpunkt = "Nicht festgelegt"
             };
 
+            var substanz_text = "Alkohol";
+            if ("Substanz" in response) {
+                if (parseInt(response.Substanz) === 1) {
+                    zeipunkt_text = "Alkohol";
+                };
+                if (parseInt(response.Substanz) === 2) {
+                    zeipunkt_text = response.SubstAndere;
+                };
+            } else {
+                response.Substanz = "1"
+            };
+
 
             // Write
             sr.aase = {
                 "zeipunkt_text": zeipunkt_text,
                 "zeipunkt_datum": zeipunkt_datum,
+                "substanz_text": substanz_text,
                 "calculation": calculation,
                 "response": response
             };
