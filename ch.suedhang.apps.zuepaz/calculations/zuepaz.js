@@ -214,7 +214,7 @@ function main(responses) {
             "austritt_count": anz_anworten_austritt,
             "behandlung_score": zupaz_behandlung_score,
             "behandlung_mean": zupaz_behandlung_mean,
-            "behandlung_count": anz_anworten_aufenthalt,
+            "behandlung_count": anz_anworten_behandlung,
             "aufenthalt_score": zupaz_aufenthalt_score,
             "aufenthalt_mean": zupaz_aufenthalt_mean,
             "aufenthalt_count": anz_anworten_aufenthalt,
