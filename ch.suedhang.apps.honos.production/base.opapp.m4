@@ -52,5 +52,8 @@ overdue = send_reminder_once
 description = HoNOS Austritt
 survey = HoNOS
 
+[sql_init]
+include(includes/create_view_production.sql)
+
 
 

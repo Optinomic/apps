@@ -10,13 +10,14 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  stay.cis_fid/100 as FID,
-  patient,
+  patient.cis_pid as cis_pid,
+  stay.cis_fid as cis_fid,
+  stay.cis_fid/100 as fid,
   survey_response_view.survey_response_id AS survey_response_id,
-  ((cast(response AS json))->>'PID') as PID_Limesurvey,
+  ((cast(response AS json))->>'PID') as pid_Limesurvey,
   'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
-  ((cast(response AS json))->>'FID') as FID_survey,
+  ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
   ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
