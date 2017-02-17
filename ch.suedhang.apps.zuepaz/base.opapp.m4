@@ -19,7 +19,7 @@ website = http://www.optinomic.com/
 
 
 [template ZuePaZ 6 14]
-include(templates/score_new.html)
+include(templates/score.html)
 
 [dependencies]
 
