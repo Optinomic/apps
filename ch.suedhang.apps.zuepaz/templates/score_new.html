@@ -1,7 +1,6 @@
 include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses">
     <div>
-        <p class="md-body-1" style="margin-top: 12px;">Summe von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkte (bei {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 31 beantworteten Fragen)</p>
         <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <h4 class="md-headline">Gesamtzufriedenheit</h4>
             <div>
@@ -9,6 +8,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
+        <p class="md-body-1" style="margin-top: 12px;">Summe von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkte (bei {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 31 beantworteten Fragen)</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="start center">
             <div flex="45">
                 <h5 class="md-subhead">
