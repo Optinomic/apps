@@ -10,8 +10,8 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
-  patient.cis_pid,
-  stay.cis_fid,
+  patient.cis_pid as cis_pid,
+  stay.cis_fid as cis_fid,
   stay.cis_fid/100 as fid,
   survey_response_view.survey_response_id AS survey_response_id,
   ((cast(response AS json))->>'PID') as pid_Limesurvey,
