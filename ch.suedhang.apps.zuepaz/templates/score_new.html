@@ -2,20 +2,17 @@ include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses">
     <div>
         <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Gesamtscore (ZüPaZ)</h4>
+            <h4 class="md-headline">Gesamtscore</h4>
             <div>
                 <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
             </div>
         </div>
-        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.ZuePaZ.full_mean}} bei {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 25 beantworteten Fragen)</p>
+        <p class="md-body-1" style="margin-top: 12px;">Summenwert von <strong>{{response.calculations[0].calculation_result.ZuePaZ.full_score}}</strong> Punkten {{response.calculations[0].calculation_result.ZuePaZ.full_count}} von 31 Fragen beantwortet)</p>
         <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="start center">
-            <div flex="55">
-                <score-threshold score="response.calculations[0].calculation_result.ZuePaZ.full_mean" min="0" max="3" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="true"></score-threshold>
-            </div>
             <div flex="45">
                 <h5 class="md-subhead">
-                    Summenwerte und Interpretation 
+                    Mittelwerte und Interpretation 
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
                     <tr ng-repeat="range in d.scale_ranges.ranges">
@@ -28,11 +25,14 @@ include(../lib/html/optinomic/page/start.m4)
                     </tr>
                 </table>
             </div>
+            <div flex="55">
+                <score-threshold score="response.calculations[0].calculation_result.ZuePaZ.full_mean" min="0" max="3" show-percent-scale="true" scale-ranges="d.scale_ranges" show-min-max="true"></score-threshold>
+            </div>
         </div>
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Eintritt (ZüPaZ)</h4>
+            <h4 class="md-headline">Eintritt</h4>
             <div>
                 <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
@@ -62,7 +62,7 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Aufenthalt (ZüPaZ)</h4>
+            <h4 class="md-headline">Aufenthalt</h4>
             <div>
                 <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
@@ -92,7 +92,7 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Behandlung (ZüPaZ)</h4>
+            <h4 class="md-headline">Behandlung</h4>
             <div>
                 <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
@@ -122,7 +122,7 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between center">
-            <h4 class="md-headline">Austritt (ZüPaZ)</h4>
+            <h4 class="md-headline">Austritt</h4>
             <div>
                 <p class="small">{{response.calculations[0].calculation_result.response.data.response.datestamp | date}}
                     <br><small>{{d.dataMain.apps.current.name}}</small></p>
