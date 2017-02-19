@@ -19,7 +19,7 @@ website = http://www.optinomic.com/
 
 
 [template main 6 7]
-include(index.html)
+include(forward.html)
 
 
 [javascript]
