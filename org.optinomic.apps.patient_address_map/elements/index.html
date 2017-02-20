@@ -18,18 +18,16 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
-                <template is="dom-bind">
-                    <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
-                    </google-map-search>
-                    <google-map api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="37.779" longitude="-122.3892">
-                        <template is="dom-repeat" items="{{results}}" as="marker">
-                            <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
-                                <h2>{{marker.name}}</h2>
-                                <span>{{marker.formatted_address}}</span>
-                            </google-map-marker>
-                        </template>
-                    </google-map>
-                </template>
+                <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
+                </google-map-search>
+                <google-map api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="37.779" longitude="-122.3892">
+                    <template is="dom-repeat" items="{{results}}" as="marker">
+                        <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
+                            <h2>{{marker.name}}</h2>
+                            <span>{{marker.formatted_address}}</span>
+                        </google-map-marker>
+                    </template>
+                </google-map>
             </template>
         </div>
     </template>
