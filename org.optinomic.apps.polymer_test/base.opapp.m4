@@ -19,15 +19,13 @@ website = http://www.optinomic.com/
 
 
 [template main 6 7]
-include(../lib/polymer/head/main.html)
-include(../lib/polymer/styles/shared-styles.m4)
+include(../lib/polymer/elements/template_start.m4)
 include(elements/index.html)
-include(../lib/polymer/run.html)
+include(../lib/polymer/elements/template_end.m4)
 
 
 [javascript]
-include(../lib/polymer/elements/redux-store.js)
-include(../lib/polymer/elements/main.js)
+include(../lib/polymer/elements/main.m4)
 
 
 [css]
