@@ -3,6 +3,8 @@
     <link rel="import" href="paper-icon-button/paper-icon-button.html">
     <link rel="import" href="paper-button/paper-button.html">
     <link rel="import" href="paper-card/paper-card.html">
+    <link rel="import" href="paper-card/paper-card.html">
+    <link rel="import" href="paper-input-elements/paper-input.html">
     <link rel="import" href="google-map/google-map.html">
     <link rel="import" href="google-map/google-map-search.html">
     <link rel="import" href="google-map/google-map-marker.html">
@@ -38,6 +40,10 @@
             <template is="dom-if" if="[[currentPatient.data]] && [[clinic.data]]">
                 <div>
                     <h1>Patientenadresse</h1>
+                    <div>
+                        <paper-input always-float-label label="[[currentPatient.data.extras.full_name]]" value="{{currentPatient.data.extras.full_address}}">
+                        </paper-input>
+                    </div>
                     <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" globalSearch="true" global-search="true" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
                     </google-map-search>
                     <google-map fit-to-markers draggable="false" globalSearch="true" zoom="17" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
@@ -51,6 +57,12 @@
                 </div>
                 <div>
                     <h1>Navigation</h1>
+                    <div>
+                        <paper-input always-float-label label="[[clinic.data.clinic_name]]" value="{{clinic.data.clinic_address}}">
+                        </paper-input>
+                        <paper-input always-float-label label="[[currentPatient.data.extras.full_name]]" value="{{currentPatient.data.extras.full_address}}">
+                        </paper-input>
+                    </div>
                     <template is="dom-if" if="[[currentPatient.data]] && [[clinic.data]]">
                         <google-map-directions api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map_directions}}" start-address="[[clinic.data.clinic_address]]" end-address="[[currentPatient.data.extras.full_address]]" travel-mode="DRIVING"></google-map-directions>
                         <google-map fit-to-markers globalSearch="true" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map_directions}}" latitude="46.8095955" longitude="7.1032351">
