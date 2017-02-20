@@ -24,7 +24,7 @@
             <template is="dom-if" if="[[currentPatient.data]]">
                 <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
                 </google-map-search>
-                <google-map map="{{map}}" latitude="37.779" longitude="-122.3892">
+                <google-map api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="37.779" longitude="-122.3892">
                     <template is="dom-repeat" items="{{results}}" as="marker">
                         <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
                             <h2>{{marker.name}}</h2>
