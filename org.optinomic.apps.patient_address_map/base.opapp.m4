@@ -17,11 +17,15 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template main 6 7]
+[template address 6 7]
 include(../lib/polymer/elements/template_start.m4)
-include(elements/index.html)
+include(elements/address.html)
 include(../lib/polymer/elements/template_end.m4)
 
+[template address 6 7]
+include(../lib/polymer/elements/template_start.m4)
+include(elements/navigation.html)
+include(../lib/polymer/elements/template_end.m4)
 
 [javascript]
 include(../lib/polymer/elements/main.m4)
