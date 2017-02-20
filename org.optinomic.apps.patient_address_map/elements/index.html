@@ -42,7 +42,7 @@
                     </google-map-search>
                     <google-map fit-to-markers draggable="false" globalSearch="true" zoom="17" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
                         <template is="dom-repeat" items="{{results}}" as="marker">
-                            <google-map-marker animation="BOUNCE" open="true" draggable="false" latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
+                            <google-map-marker animation="DROP" open="true" draggable="false" latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
                                 <h2>[[currentPatient.data.extras.ansprache]] [[currentPatient.data.extras.name]]</h2>
                                 <span>{{marker.formatted_address}}</span>
                             </google-map-marker>
