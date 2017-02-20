@@ -1,12 +1,12 @@
 [module]
 id = org.optinomic.apps.polymer_test
 name = Optinomic | Polymer
-short_description = Optinomic Apps build with Polymer CLI.
+short_description = Optinomic Apps using Polymer.
 version = 1.0
 type = patient
 
 [description]
-Polymer CLI is a command-line interface for Polymer projects. It includes a build pipeline, a boilerplate generator for creating elements and apps, a linter, a development server, and a test runner.
+Optinomic-App using Polymer
 
 [developer]
 first_name = Beat
@@ -19,7 +19,9 @@ website = http://www.optinomic.com/
 
 
 [template main 6 7]
-include(index.html)
+include(../lib/polymer/head/main.html)
+include(../lib/polymer/styles/shared-styles.m4)
+include(/elements/index.html)
 
 
 [javascript]

@@ -1,0 +1,13 @@
+paper-icon-button {
+    color: var(--paper-pink-a200);
+    --paper-icon-button-ink-color: var(--paper-pink-a200);
+}
+
+paper-icon-button.indigo {
+    color: var(--paper-grey-400);
+    --paper-icon-button-ink-color: var(--paper-indigo-a200);
+}
+
+paper-icon-button.indigo:hover {
+    color: var(--paper-indigo-500);
+}

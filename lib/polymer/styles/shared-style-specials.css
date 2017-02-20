@@ -1,0 +1,13 @@
+.circle {
+    display: inline-block;
+    width: 58px;
+    height: 58px;
+    text-align: center;
+    color: #424242;
+    border-radius: 50%;
+    background: #E0E0E0;
+    font-size: 28px;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    line-height: 60px;
+}

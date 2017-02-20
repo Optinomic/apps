@@ -1,0 +1,37 @@
+<head>
+    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="iron-icons/iron-icons.html">
+    <link rel="import" href="paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="paper-button/paper-button.html">
+</head>
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            padding: 10px;
+        }
+        </style>
+        <div class="">
+            <div class="circle">12</div>
+            <h1>View One</h1>
+            <p>Now is labores minimum atomorum pro. Laudem tibique ut has.</p>
+        </div>
+        <div id="container">
+            <paper-button class="pink">link</paper-button>
+            <paper-button raised class="indigo">raised</paper-button>
+            <paper-button toggles raised class="green">toggles</paper-button>
+            <paper-button disabled class="disabled">disabled</paper-button>
+        </div>
+        <div id="container">
+            <paper-icon-button icon="favorite"></paper-icon-button>
+            <paper-icon-button icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button icon="star"></paper-icon-button>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app'
+    });
+    </script>
+</dom-module>
