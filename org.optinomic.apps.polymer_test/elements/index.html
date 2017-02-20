@@ -24,9 +24,9 @@
             <paper-button on-tap="helpersRun" disabled class="disabled">disabled</paper-button>
         </div>
         <div id="container">
-            <paper-icon-button on-tap="apiRun" icon="favorite"></paper-icon-button>
-            <paper-icon-button on-tap="apiRun" icon="menu" class="indigo"></paper-icon-button>
-            <paper-icon-button on-tap="apiRun" icon="star"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="star"></paper-icon-button>
         </div>
     </template>
     <script>
@@ -42,14 +42,14 @@
             console.log('getAppID() = ', helpers.getAppID());
             console.log('getApiURL() = ', helpers.getApiURL());
         },
-        apiRun: function() {
-            console.log('HELLO: apiRun!');
-            helpers.callAPI('GET', '/version', {}, {}, function(req) {
+        callAPI: function() {
+            console.log('HELLO: callAPI!');
+            helpers.callAPI('GET', '/clinic', {}, {}, function(req) {
                 if (req.status == 200) {
-                    console.log('The req is ', req);
-                    console.log('The current version is ', req.response.version);
+                    var response = JSON.parse(req.response);
+                    console.log('The response is ', response);
                 } else {
-                    console.err('GET /version failed with status code', req.status);
+                    console.err('Error: Failed with status code', req.status);
                 }
             });
         }
