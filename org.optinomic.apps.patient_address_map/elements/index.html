@@ -26,7 +26,7 @@
             <template is="dom-if" if="[[currentPatient.data]]">
                 <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" globalSearch="true" global-search="true" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
                 </google-map-search>
-                <google-map fit-to-markers globalSearch="true" global-search="true" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
+                <google-map fit-to-markers globalSearch="true" zoom="15" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
                     <template is="dom-repeat" items="{{results}}" as="marker">
                         <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
                             <h2>{{marker.name}}</h2>
@@ -34,23 +34,7 @@
                         </google-map-marker>
                     </template>
                 </google-map>
-                <pre>
-                    {{results}}
-                </pre>
             </template>
         </div>
-        <p>Pizza</p>
-        <template is="dom-bind">
-            <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="[[map]]" query="Pizza" results="{{results}}">
-            </google-map-search>
-            <google-map api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="37.779" longitude="-122.3892">
-                <template is="dom-repeat" items="{{results}}" as="marker">
-                    <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
-                        <h2>{{marker.name}}</h2>
-                        <span>{{marker.formatted_address}}</span>
-                    </google-map-marker>
-                </template>
-            </google-map>
-        </template>
     </template>
 </dom-module>

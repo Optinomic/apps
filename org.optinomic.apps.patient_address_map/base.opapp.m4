@@ -6,7 +6,7 @@ version = 1.0
 type = patient
 
 [description]
-Optinomic-App Template using Polymer and Redux to store data.
+Patientenadresse auf Google-Maps.
 
 [developer]
 first_name = Beat
