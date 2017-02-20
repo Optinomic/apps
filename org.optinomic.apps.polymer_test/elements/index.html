@@ -44,8 +44,9 @@
         },
         apiRun: function() {
             console.log('HELLO: apiRun!');
-            var callback = {};
-            console.log('GET /clinic', helpers.getApiURL('GET', '/clinic', {}, {}, callback));
+            var callback;
+            helpers.getApiURL('GET', '/clinic', {}, {}, callback);
+            console.log('GET /clinic', callback);
 
         }
     });
