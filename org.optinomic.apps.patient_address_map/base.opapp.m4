@@ -22,7 +22,7 @@ include(../lib/polymer/elements/template_start.m4)
 include(elements/address.html)
 include(../lib/polymer/elements/template_end.m4)
 
-[template address 6 7]
+[template navigation 6 7]
 include(../lib/polymer/elements/template_start.m4)
 include(elements/navigation.html)
 include(../lib/polymer/elements/template_end.m4)
