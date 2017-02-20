@@ -6,7 +6,7 @@ version = 1.0
 type = patient
 
 [description]
-Optinomic-App using Polymer and Redux to store data.
+Optinomic-App Template using Polymer and Redux to store data.
 
 [developer]
 first_name = Beat
