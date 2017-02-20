@@ -40,7 +40,7 @@
             </template>
             <template is="dom-if" if="[[currentPatient.data]] && [[clinic.data]]">
                 <div>
-                    <h1>Patientenadresse</h1>
+                    <h1 style="margin:0 !important">Patientenadresse</h1>
                     <div>
                         <paper-input always-float-label label="[[currentPatient.data.extras.full_name]]" value="{{currentPatient.data.extras.full_address}}">
                         </paper-input>

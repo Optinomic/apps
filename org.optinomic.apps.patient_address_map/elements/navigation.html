@@ -40,7 +40,7 @@
             </template>
             <template is="dom-if" if="[[currentPatient.data]] && [[clinic.data]]">
                 <div>
-                    <h1>Navigation</h1>
+                    <h1 style="margin:0 !important">Navigation</h1>
                     <div>
                         <paper-input always-float-label label="[[clinic.data.clinic_name]]" value="{{clinic.data.clinic_address}}">
                         </paper-input>
@@ -51,9 +51,9 @@
                     <google-map fit-to-markers globalSearch="true" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map_directions}}" latitude="46.8095955" longitude="7.1032351">
                     </google-map>
                     <paper-card elevation="2">
-                        <paper-input always-float-label label="[[clinic.data.clinic_name]]" value="{{clinic.data.clinic_address}}">
+                        <paper-input always-float-label label="Von: [[clinic.data.clinic_name]]" value="{{clinic.data.clinic_address}}">
                         </paper-input>
-                        <paper-input always-float-label label="[[currentPatient.data.extras.full_name]]" value="{{currentPatient.data.extras.full_address}}">
+                        <paper-input always-float-label label="Bis: [[currentPatient.data.extras.full_name]]" value="{{currentPatient.data.extras.full_address}}">
                         </paper-input>
                     </paper-card>
                 </div>
