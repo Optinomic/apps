@@ -13,12 +13,12 @@
         </style>
         <div class="">
             <h1>[[params.appName]]</h1>
-            <p>[[params.appName]]</p>
+            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]]</p>
             <div class="circle">[[params.patientID]]</div>
         </div>
         <div id="container">
             <paper-button on-tap="callAPI" class="pink">link</paper-button>
-            <paper-button on-tap="getClinic" raised class="indigo">getClinic [[clinic.length]]</paper-button>
+            <paper-button on-tap="getClinic" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
             <paper-button on-tap="signUp" toggles raised class="green">Sign Up</paper-button>
         </div>
         <div id="container">
