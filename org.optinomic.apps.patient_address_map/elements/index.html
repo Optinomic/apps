@@ -1,0 +1,37 @@
+<head>
+    <link rel="import" href="iron-icons/iron-icons.html">
+    <link rel="import" href="paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="google-map-search/google-map-search.html">
+    <link rel="import" href="google-map/google-map.html">
+</head>
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            margin-left: -5px;
+            padding-bottom: 12px;
+        }
+        </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <template is="dom-bind">
+                    <google-map-search map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
+                    </google-map-search>
+                    <google-map map="{{map}}" latitude="37.779" longitude="-122.3892">
+                        <template is="dom-repeat" items="{{results}}" as="marker">
+                            <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
+                                <h2>{{marker.name}}</h2>
+                                <span>{{marker.formatted_address}}</span>
+                            </google-map-marker>
+                        </template>
+                    </google-map>
+                </template>
+            </template>
+        </div>
+    </template>
+</dom-module>
