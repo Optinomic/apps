@@ -17,7 +17,7 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
-                <p style="color:[[patient.extras.color_main]]">Patient = [[currentPatient.data.extras.full_name]]</p>
+                <p style$="color:[[patient.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
             </template>
         </div>
         <div class="">
@@ -27,8 +27,8 @@
         </div>
         <div id="container">
             <paper-button on-tap="callAPI" class="pink">link</paper-button>
-            <paper-button on-tap="getClinic" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
-            <paper-button on-tap="signUp" toggles raised class="green">Sign Up</paper-button>
+            <paper-button on-tap="callAPI" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
+            <paper-button on-tap="callAPI" toggles raised class="green">Sign Up</paper-button>
         </div>
         <div id="container">
             <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
