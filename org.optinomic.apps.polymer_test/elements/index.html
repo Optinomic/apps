@@ -44,8 +44,13 @@
         },
         apiRun: function() {
             console.log('HELLO: apiRun!');
-            helpers.getApiURL('GET', '/clinic', {}, {}, function() {
-                console.log('GET /clinic', this);
+            helpers.callAPI('GET', '/version', {}, {}, function(req) {
+                if (req.status == 200) {
+                    console.log('The req is ', req);
+                    console.log('The current version is ', req.response.version);
+                } else {
+                    console.err('GET /version failed with status code', req.status);
+                }
             });
         }
     });
