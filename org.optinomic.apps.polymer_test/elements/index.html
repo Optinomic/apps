@@ -14,8 +14,8 @@
         </style>
         <div class="">
             <div class="circle">12</div>
-            <h1>View One</h1>
-            <p>{{userID}}. [[userID]]</p>
+            <h1>[[params.appName]]</h1>
+            <p>{{params.userID}}. [[params.appName]]</p>
         </div>
         <div id="container">
             <paper-button on-tap="helpersRun" class="pink">link</paper-button>
@@ -34,14 +34,15 @@
         is: 'optinomic-app',
         ready: function() {
             console.log(this.localName + '#' + this.id + ' has local DOM initialized');
-        },
-        properties: {
-            userID: {
-                observer: '_userIDChanged'
-            }
-        },
-        _userIDChanged: function(newValue, oldValue) {
-            this.userID = helpers.getUserID();
+            this.params = {
+                "userID": helpers.getUserID(),
+                "patientID": helpers.getPatientID(),
+                "stayID": helpers.getStayID(),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL(),
+            };
         },
         helpersRun: function() {
             console.log('HELLO: helpersRun!');
