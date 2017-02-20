@@ -2,6 +2,7 @@
     <link rel="import" href="iron-icons/iron-icons.html">
     <link rel="import" href="paper-icon-button/paper-icon-button.html">
     <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="paper-card/paper-card.html">
     <link rel="import" href="google-map/google-map.html">
     <link rel="import" href="google-map/google-map-search.html">
     <link rel="import" href="google-map/google-map-marker.html">
@@ -15,8 +16,17 @@
             padding-bottom: 12px;
         }
         
+        paper-card {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
         google-map {
-            height: 600px;
+            height: 560px;
         }
         </style>
         <div>
@@ -26,7 +36,7 @@
             <template is="dom-if" if="[[currentPatient.data]]">
                 <google-map-search api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" globalSearch="true" global-search="true" map="[[map]]" query="[[currentPatient.data.extras.full_address]]" results="{{results}}">
                 </google-map-search>
-                <google-map fit-to-markers globalSearch="true" zoom="15" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
+                <google-map fit-to-markers globalSearch="true" zoom="17" api-key="AIzaSyAdKyxsuBKVd6ERv29yjP2A6o4yYOqVjfk" map="{{map}}" latitude="46.8095955" longitude="7.1032351">
                     <template is="dom-repeat" items="{{results}}" as="marker">
                         <google-map-marker latitude="{{marker.latitude}}" longitude="{{marker.longitude}}">
                             <h2>{{marker.name}}</h2>
@@ -34,6 +44,9 @@
                         </google-map-marker>
                     </template>
                 </google-map>
+                <paper-card elevation="2" style="margin:48px;">
+                    <p>[[currentPatient.data.extras.full_address]]</p>
+                </paper-card>
             </template>
         </div>
     </template>

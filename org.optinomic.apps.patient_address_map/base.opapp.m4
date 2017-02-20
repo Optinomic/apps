@@ -1,12 +1,11 @@
 [module]
 id = org.optinomic.apps.patient_address_map
-name = Patient | Maps
-short_description = Anschrift des Patienten
+name = Patientenadresse | Maps
+short_description = Patientenadresse auf Google-Maps
 version = 1.0
 type = patient
 
 [description]
-Patientenadresse auf Google-Maps.
 
 [developer]
 first_name = Beat
