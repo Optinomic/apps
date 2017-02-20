@@ -24,9 +24,9 @@
             <paper-button on-tap="helpersRun" disabled class="disabled">disabled</paper-button>
         </div>
         <div id="container">
-            <paper-icon-button on-tap="helpersRun" icon="favorite"></paper-icon-button>
-            <paper-icon-button on-tap="helpersRun" icon="menu" class="indigo"></paper-icon-button>
-            <paper-icon-button on-tap="helpersRun" icon="star"></paper-icon-button>
+            <paper-icon-button on-tap="apiRun" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="apiRun" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="apiRun" icon="star"></paper-icon-button>
         </div>
     </template>
     <script>
@@ -35,9 +35,17 @@
         helpersRun: function() {
             console.log('HELLO: helpersRun!');
             console.log('getUserID() = ', helpers.getUserID());
+            console.log('getPatientID() = ', helpers.getPatientID());
             console.log('getStayID() = ', helpers.getStayID());
-            console.log('getApiUrl() = ', helpers.getApiUrl());
+            console.log('getToken() = ', helpers.getToken());
             console.log('getAppName() = ', helpers.getAppName());
+            console.log('getAppID() = ', helpers.getAppID());
+            console.log('getApiURL() = ', helpers.getApiURL());
+        },
+        apiRun: function() {
+            console.log('HELLO: apiRun!');
+            console.log('GET /clinic', helpers.getApiURL('GET', '/clinic', {}, {}, callback));
+
         }
     });
     </script>
