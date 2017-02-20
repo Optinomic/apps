@@ -17,7 +17,7 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
-                <p>Patient = [[currentPatient.data.last_name]] [[currentPatient.data.first_name]] ([[currentPatient.data.extras.age]])!</p>
+                <p style="color:[[patient.extras.color_main]]">Patient = [[currentPatient.data.extras.full_name]]</p>
             </template>
         </div>
         <div class="">
@@ -34,14 +34,6 @@
             <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
             <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
             <paper-icon-button on-tap="callAPI" icon="star"></paper-icon-button>
-        </div>
-        <div>
-            <template is="dom-if" if="[[loading]]">
-                <p>Loading...</p>
-            </template>
-            <template is="dom-if" if="[[username]]">
-                <p>Welcome [[username]]!</p>
-            </template>
         </div>
     </template>
 </dom-module>
