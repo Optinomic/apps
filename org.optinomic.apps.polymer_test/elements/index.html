@@ -18,27 +18,27 @@
             <p>Now is labores minimum atomorum pro. Laudem tibique ut has.</p>
         </div>
         <div id="container">
-            <paper-button on-tap="helpersRun" class="pink">link</paper-button>
-            <paper-button on-tap="helpersRun" raised class="indigo">raised</paper-button>
-            <paper-button on-tap="helpersRun" toggles raised class="green">toggles</paper-button>
-            <paper-button on-tap="helpersRun" disabled class="disabled">disabled</paper-button>
+            <paper-button on-tap="signUp" class="pink">link</paper-button>
+            <paper-button on-tap="signUp" raised class="indigo">raised</paper-button>
+            <paper-button on-tap="signUp" toggles raised class="green">toggles</paper-button>
+            <paper-button on-tap="signUp" disabled class="disabled">disabled</paper-button>
         </div>
         <div id="container">
-            <paper-icon-button on-tap="helpersRun" icon="favorite"></paper-icon-button>
-            <paper-icon-button on-tap="helpersRun" icon="menu" class="indigo"></paper-icon-button>
-            <paper-icon-button on-tap="helpersRun" icon="star"></paper-icon-button>
+            <paper-icon-button on-tap="signUp" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="signUp" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="signUp" icon="star"></paper-icon-button>
         </div>
     </template>
     <script>
     Polymer({
-            is: 'optinomic-app'
-        },
+        is: 'optinomic-app',
         helpersRun: function() {
             console.log('HELLO: helpersRun!');
             console.log('getUserID() = ', getUserID());
             console.log('getStayID() = ', getStayID());
             console.log('getApiUrl() = ', getApiUrl());
             console.log('getAppName() = ', getAppName());
-        });
+        }
+    });
     </script>
 </dom-module>
