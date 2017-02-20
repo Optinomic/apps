@@ -15,7 +15,7 @@
         <div class="">
             <div class="circle">12</div>
             <h1>View One</h1>
-            <p>Now is labores minimum atomorum pro. Laudem tibique ut has.</p>
+            <p>{{userID}}. [[userID]]</p>
         </div>
         <div id="container">
             <paper-button on-tap="helpersRun" class="pink">link</paper-button>
@@ -32,6 +32,18 @@
     <script>
     Polymer({
         is: 'optinomic-app',
+        ready: function() {
+            console.log(this.localName + '#' + this.id + ' has local DOM initialized');
+        },
+        properties: {
+            userID: {
+                type: integer,
+                observer: '_userIDChanged'
+            }
+        },
+        _userIDChanged: function(newValue, oldValue) {
+            this.userID = helpers.getUserID();
+        },
         helpersRun: function() {
             console.log('HELLO: helpersRun!');
             console.log('getUserID() = ', helpers.getUserID());
@@ -44,7 +56,7 @@
         },
         callAPI: function() {
             console.log('HELLO: callAPI!');
-            helpers.callAPI('GET', '/version', {}, {}, function(req) {
+            helpers.callAPI('GET', '/clinic', {}, {}, function(req) {
                 if (req.status == 200) {
                     var response = JSON.parse(req.response);
                     console.log('The response is ', response);
