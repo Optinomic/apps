@@ -16,7 +16,7 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
-                <p>Patient = [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]!</p>
+                <p>Patient = [[currentPatient.data.last_name]] [[currentPatient.data.first_name]] ([[currentPatient.data.extras.age]])!</p>
             </template>
         </div>
         <div class="">
