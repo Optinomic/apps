@@ -11,6 +11,14 @@
             padding: 10px;
         }
         </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <p>Patient = [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]!</p>
+            </template>
+        </div>
         <div class="">
             <h1>[[params.appName]]</h1>
             <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
