@@ -52,8 +52,9 @@ overdue = send_reminder_once
 description = HoNOS Austritt
 survey = HoNOS
 
-
 [sql_init]
 include(includes/create_view_pabs_interface.sql)
 
 
+[task hl7_export javascript]
+include(includes/hl7_export.js)
