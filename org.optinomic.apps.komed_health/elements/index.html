@@ -16,12 +16,11 @@
             <template is="dom-if" if="[[loading]]">
                 <p>Loading...</p>
             </template>
-            <template is="dom-if" if="[[current_patient.data]]">
-                <p style$="color:[[current_patient.data.extras.color_main]]">[[current_patient.data.extras.full_name]]</p>
-                <iframe src="https://demo.komed-health.com/" width="100%" frameborder="0">
-                    <p>Your browser does not support iframes.</p>
-                </iframe>
-            </template>
+            <p style$="color:[[current_patient.data.extras.color_main]]">[[current_patient.data.extras.full_name]]</p>
+            <p>iframe:</p>
+            <iframe src="https://demo.komed-health.com/" width="100%" frameborder="0">
+                <p>Your browser does not support iframes.</p>
+            </iframe>
         </div>
     </template>
 </dom-module>
