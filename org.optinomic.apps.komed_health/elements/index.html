@@ -2,6 +2,7 @@
     <link rel="import" href="iron-icons/iron-icons.html">
     <link rel="import" href="paper-icon-button/paper-icon-button.html">
     <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="iron-ajax/iron-ajax.html">
 </head>
 <dom-module id="optinomic-app">
     <template>
@@ -17,13 +18,15 @@
                 <p>Loading...</p>
             </template>
             <div>
+                <p>KOMED: [[komed]]</p>
                 <a href$="[[currentPatient.data.komed_url]]" target="_blank" tabindex="-1">
                     <paper-button class="indigo">Chat: [[currentPatient.data.extras.full_name]]</paper-button>
                 </a>
             </div>
-            <iframe src$="[[currentPatient.data.komed_url]]" width="639" height="580" frameborder="0">
+            <iframe src$="[[currentPatient.data.komed_url]]" width="639" height="520" frameborder="0">
                 <p>Your browser does not support iframes.</p>
             </iframe>
+            iron-ajax
         </div>
     </template>
 </dom-module>
