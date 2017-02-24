@@ -17,7 +17,11 @@
                 <p>Loading...</p>
             </template>
             <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
-            <iframe src="https://demo.komed-health.com/" width="639" height="580" frameborder="0">
+            <p>[[currentPatient.data.komed_url]]</p>
+            <paper-button>
+                <a href$="[[currentPatient.data.komed_url]]">Polymer website</a>
+            </paper-button>
+            <iframe src$="[[currentPatient.data.komed_url]]" width="639" height="580" frameborder="0">
                 <p>Your browser does not support iframes.</p>
             </iframe>
         </div>
