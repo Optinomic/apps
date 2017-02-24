@@ -23,26 +23,26 @@ Basically a extended &lt;h1&gt; inside a Optinomic-App.
     <script>
     Polymer({
 
-        is: "komed-iframe",
+        "is": "komed-iframe",
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        "behaviors": [ReduxBehavior, AsyncActionsBehavior],
 
-        properties: {
-            loading: {
-                type: Boolean,
-                statePath: "loading"
+        "properties": {
+            "loading": {
+                "type": Boolean,
+                "statePath": "loading"
             },
-            currentPatient: {
-                type: Object,
-                statePath: "currentPatient"
+            "currentPatient": {
+                "type": Object,
+                "statePath": "currentPatient"
             },
-            clinic: {
-                type: Object,
-                statePath: 'clinic'
+            "clinic": {
+                "type": Object,
+                "statePath": "clinic"
             },
-            komed: {
-                type: Object,
-                statePath: "komed"
+            "komed": {
+                "type": Object,
+                "statePath": "komed"
             }
         },
 
