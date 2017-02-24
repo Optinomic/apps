@@ -16,13 +16,13 @@
             <template is="dom-if" if="[[loading]]">
                 <p>Loading...</p>
             </template>
-            <template is="dom-if" if="[[current_patient.data]]">
-                <p style$="color:[[current_patient.data.extras.color_main]]">[[current_patient.data.extras.full_name]]</p>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
             </template>
         </div>
         <div class="">
             <h1>[[params.appName]]</h1>
-            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[current_patient.data.last_name]] [[current_patient.data.first_name]]</p>
+            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
             <div class="circle">[[params.patientID]]</div>
         </div>
         <div id="container">
