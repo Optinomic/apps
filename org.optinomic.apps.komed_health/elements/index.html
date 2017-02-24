@@ -17,9 +17,8 @@
                 <p>Loading...</p>
             </template>
             <div>
-                <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
                 <a href$="[[currentPatient.data.komed_url]]" target="_blank" tabindex="-1">
-                    <paper-button class="indigo">Öffnen</paper-button>
+                    <paper-button class="indigo">Chat: [[currentPatient.data.extras.full_name]]</paper-button>
                 </a>
             </div>
             <iframe src$="[[currentPatient.data.komed_url]]" width="639" height="580" frameborder="0">
