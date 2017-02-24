@@ -6,7 +6,7 @@ version = 1.0
 type = patient
 
 [description]
-Optinomic-Integration into Komed-Health => Intelligent communication in healthcare
+Intelligent communication in healthcare | Optinomic-Integration into Komed-Health
 
 [developer]
 first_name = Beat
