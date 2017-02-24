@@ -1,6 +1,6 @@
 [module]
 id = org.optinomic.apps.komed_health
-name = Optinomic <-> Komed-Health
+name = Komed-Health <-> Optinomic  
 short_description = Intelligent communication in healthcare
 version = 1.0
 type = patient
