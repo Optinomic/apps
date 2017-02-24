@@ -2,6 +2,7 @@ paper-button {
     font-family: 'Roboto', 'Noto', sans-serif;
     font-weight: normal;
     font-size: 14px;
+    text-decoration: none;
     -webkit-font-smoothing: antialiased;
 }
 
