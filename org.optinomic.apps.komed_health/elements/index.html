@@ -16,7 +16,8 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
-                <komed-iframe></komed-iframe>
+                <komed-iframe ></komed-iframe>
+                <h2>Index</h2>
                 <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
                 <div>
                     <a href$="[[currentPatient.data.komed_url]]" target="_blank" tabindex="-1">
