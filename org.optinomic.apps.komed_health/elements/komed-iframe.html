@@ -15,7 +15,7 @@ Basically a extended &lt;h1&gt; inside a Optinomic-App.
         </style>
         <p class="grid-border-top">&nbsp;</p>
         <div class="layout horizontal center top-bar">
-            <p>Test</p>
+            <p>Test: komed-iframe</p>
             <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
             <p>[[currentPatient.data.komed_url]]</p>
         </div>
@@ -23,14 +23,14 @@ Basically a extended &lt;h1&gt; inside a Optinomic-App.
     <script>
     Polymer({
 
-        is: "komed-iframe",
+        is: 'komed-iframe'',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior],
 
         properties: {
             loading: {
                 type: Boolean,
-                statePath: 'loading''
+                statePath: 'loading'
             },
             currentPatient: {
                 type: Object,
@@ -45,7 +45,6 @@ Basically a extended &lt;h1&gt; inside a Optinomic-App.
                 statePath: 'komed'
             }
         },
-
     });
     </script>
 </dom-module>
