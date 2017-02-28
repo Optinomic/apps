@@ -2,12 +2,6 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 
 
-<!--
-`optinomic-title`
-Basically a extended &lt;h1&gt; inside a Optinomic-App.
-
-@demo demo/index.html 
--->
 <dom-module id="komed-iframe">
     <template>
         <style include="shared-styles iron-flex iron-flex-alignment">
@@ -23,9 +17,14 @@ Basically a extended &lt;h1&gt; inside a Optinomic-App.
         <p class="grid-border-top">&nbsp;</p>
     </template>
     <script>
+
+    include(../lib/polymer/elements/redux-store.js)
+
     Polymer({
 
-        is: 'komed-iframe'',
+        is: 'komed-iframe',
+
+        behaviors: [ReduxBehavior],
 
         properties: {
             currentPatient: {
