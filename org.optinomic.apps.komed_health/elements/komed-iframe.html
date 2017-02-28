@@ -1,7 +1,5 @@
 <link rel="import" href="polymer/polymer.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
-
-
 <dom-module id="komed-iframe">
     <template>
         <style include="shared-styles iron-flex iron-flex-alignment">
@@ -31,6 +29,16 @@
                 type: Object,
                 statePath: 'currentPatient'
             }
+        },
+
+        ready: function() {
+            show();
+            console.log('HELLO: READY - properties!', properties);
+        };
+
+        show: function() {
+            console.log('HELLO: properties!', properties);
+            
         },
     });
     </script>
