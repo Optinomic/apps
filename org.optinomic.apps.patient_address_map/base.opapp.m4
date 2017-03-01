@@ -18,9 +18,9 @@ website = http://www.optinomic.com/
 
 
 [template address 6 7]
-include(../lib/polymer/elements/template_start.m4)
+include(../lib/polymer/templates/template_start.m4)
 include(elements/address.html)
-include(../lib/polymer/elements/template_end.m4)
+include(../lib/polymer/templates/template_end.m4)
 
 [template navigation 6 7]
 include(../lib/polymer/templates/template_start.m4)
