@@ -25,7 +25,7 @@ include(../lib/polymer/templates/template_end.m4)
 
 
 [javascript]
-
+include(../lib/polymer/js/helpers.js)
 
 
 [css]
