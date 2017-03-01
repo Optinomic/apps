@@ -1,6 +1,6 @@
 [module]
 id = org.optinomic.apps.ep62-redux-async
-name = Optinomic | Polymer
+name = ep62-redux-async
 short_description = Optinomic Apps using Polymer.
 version = 1.0
 type = patient
