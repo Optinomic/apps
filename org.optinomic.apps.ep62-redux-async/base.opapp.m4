@@ -19,7 +19,9 @@ website = http://www.optinomic.com/
 
 
 [template main 6 7]
+include(../lib/polymer/templates/template_start.m4)
 include(elements/index.html)
+include(../lib/polymer/templates/template_end.m4)
 
 
 [javascript]
