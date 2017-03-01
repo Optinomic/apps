@@ -1,26 +1,30 @@
-<link rel="import" href="https://polygit.org/components/polymer/polymer.html">
-<link rel="import" href="https://cdn.rawgit.com/Optinomic/apps/a6b28eab/org.optinomic.apps.ep62-redux-async/elements/redux-store.html">
+
+include(../lib/polymer/imports/polymer.m4)
+include(../lib/polymer/imports/redux-store.m4)
 
 <link rel="import" href="https://polygit.org/components/paper-progress/paper-progress.html">
-
 <dom-module id="optinomic-loading">
-  <template>
-    <template is="dom-if" if="[[loading]]">
-      <paper-progress indeterminate class="indigo"></paper-progress>
-      <p>[[loading]] :: LADEN...</p>
-    </template>
-  </template>
-
-  <script>
-    Polymer({
-      is: 'optinomic-loading',
-      behaviors: [ ReduxBehavior ],
-      properties: {
-        loading: {
-          type: Boolean,
-          statePath: 'loading'
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+        :host {
+            display: block;
         }
-      }
+        </style>
+        <template is="dom-if" if="[[loading]]">
+            <paper-progress indeterminate class="indigo"></paper-progress>
+            <p>[[loading]] :: LADEN...</p>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-loading',
+        behaviors: [ReduxBehavior],
+        properties: {
+            loading: {
+                type: Boolean,
+                statePath: 'loading'
+            }
+        }
     });
-  </script>
+    </script>
 </dom-module>
