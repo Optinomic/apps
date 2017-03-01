@@ -23,10 +23,6 @@ include(elements/index.html)
 
 
 [javascript]
-include(../lib/polymer/bower_components/webcomponentsjs/webcomponents-lite.min.js)
-include(../lib/polymer/node_modules/redux/3.6.0/redux.min.js)
-include(../lib/polymer/node_modules/redux-thunk/2.2.0/redux-thunk.min.js)
-include(../lib/polymer/bower_components/polymer-redux/polymer-redux.js)
 
 
 [css]
