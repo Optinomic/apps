@@ -5,14 +5,23 @@ include(../lib/polymer/imports/redux-store.m4)
 <link rel="import" href="https://polygit.org/components/paper-progress/paper-progress.html">
 <dom-module id="optinomic-loading">
     <template>
-        <style include="shared-styles iron-flex iron-flex-alignment">
+        <style include="shared-styles">
         :host {
             display: block;
         }
+        
+        .loading_box {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
         </style>
         <template is="dom-if" if="[[loading]]">
-            <paper-progress indeterminate class="indigo"></paper-progress>
-            <p>[[loading]] :: LADEN...</p>
+            <div>
+                <paper-progress indeterminate class="indigo"></paper-progress>
+            </div>
         </template>
     </template>
     <script>
