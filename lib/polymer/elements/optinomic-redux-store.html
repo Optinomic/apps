@@ -439,6 +439,20 @@ const AsyncActionsBehavior = {
                     });
                 });
             }
+        },
+        signUpWithTimeout: function(username) {
+            return function(dispatch) {
+                dispatch({
+                    type: 'SIGN_UP_STARTED'
+                });
+                // Do async task
+                setTimeout(function() {
+                    dispatch({
+                        type: 'SIGN_UP_COMPLETE',
+                        username: username
+                    });
+                }, 3000);
+            }
         }
     }
 };
