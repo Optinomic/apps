@@ -1,1 +1,1 @@
-<link rel="import" href="https://cdn.rawgit.com/Optinomic/apps/af76fafc/lib/polymer/elements/optinomic-loading.html">
+<link rel="import" href="https://cdn.rawgit.com/Optinomic/apps/ba274f58/lib/polymer/elements/optinomic-loading.html">
