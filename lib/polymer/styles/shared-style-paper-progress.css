@@ -1,0 +1,14 @@
+paper-progress {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+paper-progress.slow {
+    --paper-progress-indeterminate-cycle-duration: 5s;
+}
+
+paper-progress.indigo {
+    --paper-progress-active-color: var(--paper-indigo-500);
+    --paper-progress-secondary-color: var(--paper-indigo-100);
+}

@@ -6,6 +6,7 @@
 <dom-module id="optinomic-loading">
   <template>
     <template is="dom-if" if="[[loading]]">
+      <paper-progress indeterminate class="indigo"></paper-progress>
       <p>[[loading]] :: LADEN...</p>
     </template>
   </template>
