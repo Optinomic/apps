@@ -57,6 +57,12 @@ const reducer = (state, action) => {
                 loading: false,
                 surveyResponses: action.data
             });
+
+        case 'SIGN_UP_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                username: action.username
+            });
     }
 };
 
@@ -443,7 +449,7 @@ const AsyncActionsBehavior = {
         signUpWithTimeout: function(username) {
             return function(dispatch) {
                 dispatch({
-                    type: 'SIGN_UP_STARTED'
+                    type: 'GET_DATA_STARTED'
                 });
                 // Do async task
                 setTimeout(function() {
