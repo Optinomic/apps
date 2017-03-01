@@ -14,7 +14,7 @@
         }
         
         .loading_box {
-            position: fixed;
+            position: absolute;
             width: 100%;
             top: 0;
             left: 0;
@@ -22,7 +22,7 @@
         }
         </style>
         <template is="dom-if" if="[[loading]]">
-            <div class="loading_box">
+            <div>
                 <paper-progress indeterminate class="indigo"></paper-progress>
             </div>
         </template>
