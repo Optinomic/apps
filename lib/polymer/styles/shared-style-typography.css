@@ -1,19 +1,117 @@
-h1 {
-    margin: 24px 0 0;
-    color: #212121;
-    font-size: 32px;
-    font-weight: 100;
-    font-family: 'Roboto', sans-serif;
-}
-
-p {
-    margin: 3px 0 0;
-    color: #212121;
-    font-size: 16px;
-    font-weight: 400;
-    font-family: 'Roboto', sans-serif;
+html,
+body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
     text-decoration: none;
+}
+
+
+/************
+ * Headings
+ ************/
+
+.md-display-4 {
+    font-size: 117.6px;
+    font-weight: 100;
+    letter-spacing: -0.010em;
+    line-height: 117.6px;
+}
+
+.md-display-3 {
+    font-size: 58.8px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 58.8px;
+}
+
+.md-display-2 {
+    font-size: 47.25px;
+    font-weight: 400;
+    line-height: 67.2px;
+}
+
+h1,
+.md-display-1 {
+    font-size: 35.7px;
+    font-weight: 100;
+    line-height: 42px;
+}
+
+h2,
+.md-headline {
+    font-size: 25.2px;
+    font-weight: 400;
+    line-height: 33.6px;
+}
+
+h3,
+.md-title {
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+}
+
+h4,
+.md-subhead {
+    font-size: 16.8px;
+    font-weight: 400;
+    letter-spacing: 0.010em;
+    line-height: 25.2px;
+}
+
+
+/************
+ * Body Copy
+ ************/
+
+.md-body-1,
+p {
+    font-size: 14.7px;
+    font-weight: 400;
+    letter-spacing: 0.010em;
+    line-height: 21px;
+}
+
+.md-body-2 {
+    font-size: 14.7px;
+    font-weight: 500;
+    letter-spacing: 0.010em;
+    line-height: 25.2px;
+}
+
+.md-caption {
+    font-size: 12.6px;
+    letter-spacing: 0.020em;
+}
+
+.md-button {
+    letter-spacing: 0.010em;
+}
+
+
+/************
+ * Defaults
+ ************/
+
+button,
+select,
+html,
+textarea,
+input {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+select,
+button,
+textarea,
+input {
+    font-size: 100%;
 }
