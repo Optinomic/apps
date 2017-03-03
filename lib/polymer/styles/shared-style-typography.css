@@ -9,6 +9,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.large {
+    font-size: 125%;
+}
+
+.small {
+    font-size: 75%;
+}
+
 a {
     text-decoration: none;
 }
@@ -18,53 +26,60 @@ a {
  * Headings
  ************/
 
-.md-display-4 {
+.display-4 {
     font-size: 117.6px;
     font-weight: 100;
     letter-spacing: -0.010em;
     line-height: 117.6px;
+    color: #757575;
 }
 
-.md-display-3 {
+.display-3 {
     font-size: 58.8px;
     font-weight: 400;
     letter-spacing: -0.005em;
     line-height: 58.8px;
+    color: #757575;
 }
 
-.md-display-2 {
+.display-2 {
     font-size: 47.25px;
     font-weight: 400;
     line-height: 67.2px;
+    color: #757575;
 }
 
 h1,
-.md-display-1 {
+.display-1 {
     font-size: 35.7px;
     font-weight: 100;
     line-height: 42px;
+    color: #757575;
 }
 
 h2,
-.md-headline {
+.headline {
     font-size: 25.2px;
     font-weight: 400;
     line-height: 33.6px;
+    color: #616161;
 }
 
 h3,
-.md-title {
+.title {
     font-size: 21px;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.005em;
+    color: #424242;
 }
 
 h4,
-.md-subhead {
+.subhead {
     font-size: 16.8px;
     font-weight: 400;
     letter-spacing: 0.010em;
     line-height: 25.2px;
+    color: #212121;
 }
 
 
@@ -72,27 +87,31 @@ h4,
  * Body Copy
  ************/
 
-.md-body-1,
-p {
+p,
+.body-1 {
     font-size: 14.7px;
     font-weight: 400;
     letter-spacing: 0.010em;
     line-height: 21px;
+    color: #212121;
 }
 
-.md-body-2 {
+b,
+.body-2 {
     font-size: 14.7px;
     font-weight: 500;
     letter-spacing: 0.010em;
     line-height: 25.2px;
+    color: #212121;
 }
 
-.md-caption {
+.caption {
     font-size: 12.6px;
     letter-spacing: 0.020em;
+    color: #757575;
 }
 
-.md-button {
+.button {
     letter-spacing: 0.010em;
 }
 
