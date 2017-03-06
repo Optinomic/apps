@@ -2,7 +2,6 @@ paper-button {
     font-family: 'Roboto', 'Noto', sans-serif;
     font-weight: normal;
     font-size: 14px;
-    text-decoration: none;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -27,15 +26,6 @@ paper-button.indigo {
 
 paper-button.indigo:hover {
     background-color: var(--paper-indigo-400);
-}
-
-paper-button.green {
-    background-color: var(--paper-green-500);
-    color: white;
-}
-
-paper-button.green[active] {
-    background-color: var(--paper-red-500);
 }
 
 paper-button.disabled {
