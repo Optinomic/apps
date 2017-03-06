@@ -24,7 +24,7 @@
             <template is="dom-if" if="[[currentPatient.data]]">
                 <optinomic-avatar firstname="[[currentPatient.data.first_name]]" lastname="[[currentPatient.data.last_name]]" gender="[[currentPatient.data.gender]]" birthdate="[[currentPatient.data.birthdate]]"></optinomic-avatar>
                 <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
-                <optinomic-patient-details patient="[[currentPatient]]" language="de"></optinomic-patient-details>
+                <optinomic-patient-details patient="[[currentPatient.data]]" language="de"></optinomic-patient-details>
             </template>
         </div>
         <div class="">
