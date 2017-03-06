@@ -3,6 +3,7 @@
     <link rel="import" href="paper-icon-button/paper-icon-button.html">
     <link rel="import" href="paper-button/paper-button.html">
     include(../lib/polymer/imports/optinomic-avatar.m4)
+    <link rel="import" href="https://cdn.rawgit.com/Optinomic/optinomic-elements/3f81f51b/optinomic-patient-details/optinomic-patient-details.html">
 </head>
 <dom-module id="optinomic-app">
     <template>
@@ -18,9 +19,12 @@
             <template is="dom-if" if="[[loading]]">
                 <p>Loading...</p>
             </template>
+        </div>
+        <div>
             <template is="dom-if" if="[[currentPatient.data]]">
                 <optinomic-avatar firstname="[[currentPatient.data.first_name]]" lastname="[[currentPatient.data.last_name]]" gender="[[currentPatient.data.gender]]" birthdate="[[currentPatient.data.birthdate]]"></optinomic-avatar>
                 <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
+                <optinomic-patient-details patient="[[currentPatient]]" language="de"></optinomic-patient-details>
             </template>
         </div>
         <div class="">
