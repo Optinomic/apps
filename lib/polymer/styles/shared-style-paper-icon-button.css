@@ -11,3 +11,12 @@ paper-icon-button.indigo {
 paper-icon-button.indigo:hover {
     color: var(--paper-indigo-500);
 }
+
+paper-icon-button.grey {
+    color: var(--paper-grey-300);
+    --paper-icon-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-icon-button.grey:hover {
+    color: var(--paper-grey-500);
+}
