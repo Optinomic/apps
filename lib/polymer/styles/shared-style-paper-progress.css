@@ -11,11 +11,11 @@ paper-progress.slow {
 paper-progress.indigo {
     --paper-progress-active-color: var(--paper-indigo-500);
     --paper-progress-secondary-color: var(--paper-indigo-100);
-    --paper-progress-indeterminate-cycle-duration: 1s;
+    --paper-progress-indeterminate-cycle-duration: 3s;
 }
 
 paper-progress.pink {
     --paper-progress-active-color: var(--paper-pink-500);
     --paper-progress-secondary-color: var(--paper-pink-100);
-    --paper-progress-indeterminate-cycle-duration: 1s;
+    --paper-progress-indeterminate-cycle-duration: 3s;
 }
