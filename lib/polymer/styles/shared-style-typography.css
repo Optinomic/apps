@@ -1,6 +1,6 @@
 html,
 body {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     min-height: 100%;
@@ -56,6 +56,7 @@ h1,
     font-weight: 100;
     line-height: 42px;
     color: #757575;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 h2,
@@ -126,7 +127,7 @@ select,
 html,
 textarea,
 input {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 select,
