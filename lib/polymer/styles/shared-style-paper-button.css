@@ -5,6 +5,15 @@ paper-button {
     -webkit-font-smoothing: antialiased;
 }
 
+paper-button.grey {
+    color: var(--paper-grey-a200);
+    --paper-button-ink-color: var(--paper-grey-a200);
+}
+
+paper-button.grey:hover {
+    background-color: var(--paper-grey-100);
+}
+
 paper-button.pink {
     color: var(--paper-pink-a200);
     --paper-button-ink-color: var(--paper-pink-a200);
@@ -20,8 +29,7 @@ paper-button.indigo {
     --paper-button-raised-keyboard-focus: {
         background-color: var(--paper-pink-a200) !important;
         color: white !important;
-    }
-    ;
+    };
 }
 
 paper-button.indigo:hover {
