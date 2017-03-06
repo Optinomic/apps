@@ -2,6 +2,7 @@
     <link rel="import" href="iron-icons/iron-icons.html">
     <link rel="import" href="paper-icon-button/paper-icon-button.html">
     <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="https://cdn.rawgit.com/Optinomic/optinomic-avatar/89efceac/optinomic-avatar.vulcanized.html">
 </head>
 <dom-module id="optinomic-app">
     <template>
@@ -10,6 +11,7 @@
             display: block;
             margin-left: -5px;
             padding-bottom: 12px;
+            font-family: 'Roboto', sans-serif !important;
         }
         </style>
         <div>
@@ -17,6 +19,7 @@
                 <p>Loading...</p>
             </template>
             <template is="dom-if" if="[[currentPatient.data]]">
+                <optinomic-avatar firstname="[[currentPatient.data.first_name]]" lastname="[[currentPatient.data.last_name]]" gender="[[currentPatient.data.gender]]" size="small" birthdate="[[currentPatient.data.birthdate]]"></optinomic-avatar>
                 <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
             </template>
         </div>
