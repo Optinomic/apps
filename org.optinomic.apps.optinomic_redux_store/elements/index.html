@@ -1,0 +1,52 @@
+<head>
+    include(../lib/polymer/templates/head.html)
+    <link rel="import" href="iron-icons/iron-icons.html">
+    <link rel="import" href="paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+    include(../lib/polymer/imports/optinomic-avatar.m4)
+    <link rel="import" href="https://cdn.rawgit.com/Optinomic/optinomic-elements/1.0.2/optinomic-patient-details/optinomic-patient-details.html">
+</head>
+include(../lib/polymer/styles/shared-styles.m4)
+include(../lib/polymer/elements/optinomic-redux-store.html)
+
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            margin-left: -5px;
+            padding-bottom: 12px;
+            font-family: 'Roboto', sans-serif !important;
+        }
+        </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+        </div>
+        <div>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <optinomic-avatar firstname="[[currentPatient.data.first_name]]" lastname="[[currentPatient.data.last_name]]" gender="[[currentPatient.data.gender]]" birthdate="[[currentPatient.data.birthdate]]"></optinomic-avatar>
+                <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
+                <optinomic-patient-details patient="[[currentPatient.data]]" language="de"></optinomic-patient-details>
+            </template>
+        </div>
+        <div class="">
+            <h1>[[params.appName]]</h1>
+            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
+            <div class="circle">[[params.patientID]]</div>
+        </div>
+        <div id="container">
+            <paper-button on-tap="callAPI" class="pink">link</paper-button>
+            <paper-button on-tap="callAPI" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
+            <paper-button on-tap="callAPI" toggles raised class="green">Sign Up</paper-button>
+        </div>
+        <div id="container">
+            <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="star"></paper-icon-button>
+        </div>
+    </template>
+</dom-module>
