@@ -7,18 +7,25 @@ const initialState = {
     "loading": false,
     "username": null,
     "clinic": {
-        "error": false,
         "data": null
     },
+    "patients": {
+        "all": {
+            "data": null
+        },
+        "current": {
+            "data": null
+        },
+    }
     "currentPatient": {
-        "error": false,
         "data": null
     },
     "komed": {
-        "error": false,
         "data": null
     }
 };
+
+
 
 const reducer = (state, action) => {
     if (!state) return initialState;
@@ -37,7 +44,8 @@ const reducer = (state, action) => {
         case 'GET_CURRENT_PATIENT_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                currentPatient: action.data
+                currentPatient: action.data,
+                patients.current: action.data
             });
 
         case 'GET_currentPatient_STAYS_COMPLETE':
@@ -93,7 +101,7 @@ const AsyncActionsBehavior = {
                         });
 
                         var response = {
-                            "error": false,
+                            "date": new Date(),
                             "data": json_data
                         };
                         response.data.array = resp.clinic;
@@ -145,7 +153,7 @@ const AsyncActionsBehavior = {
                             if ((xhttp2.status == 200) && (xhttp2.readyState == 4)) {
 
                                 var response = {
-                                    "error": false,
+                                    "date": new Date(),
                                     "data": JSON.parse(xhttp2.responseText)
                                 };
 
@@ -187,7 +195,7 @@ const AsyncActionsBehavior = {
                         data_return.komed_url = data_return.komed_base_url + resp.patient.id;
 
                         var response = {
-                            "error": false,
+                            "date": new Date(),
                             "data": data_return
                         };
                         console.log('(✔) Data (' + api_url + '):', response);
@@ -236,7 +244,7 @@ const AsyncActionsBehavior = {
                         //  });
 
                         var response = {
-                            "error": false,
+                            "date": new Date(),
                             "data": resp
                         };
                         console.log('(✔) Data (' + api_url + '):', response);
@@ -425,7 +433,7 @@ const AsyncActionsBehavior = {
 
 
                         var response = {
-                            "error": false,
+                            "date": new Date(),
                             "data": return_array,
                             "request": data_request
                         };
