@@ -17,12 +17,6 @@ include(../lib/polymer/styles/shared-styles.m4) include(../lib/polymer/elements/
             font-family: 'Roboto', sans-serif !important;
         }
         </style>
-        <script>
-        function debugme() {
-            console.log('DEBUG ::');
-            console.dir(doc);
-        }
-        </script>
         <div>
             <template is="dom-if" if="[[loading]]">
                 <p>Loading...</p>
@@ -44,9 +38,9 @@ include(../lib/polymer/styles/shared-styles.m4) include(../lib/polymer/elements/
             <paper-button on-tap="debugdoc" toggles raised class="green">Sign Up</paper-button>
         </div>
         <div id="container">
-            <paper-icon-button on-tap="debugdoc()" icon="favorite"></paper-icon-button>
-            <paper-icon-button on-tap="debugme" icon="menu" class="indigo"></paper-icon-button>
-            <paper-icon-button on-tap="debugme()" icon="star"></paper-icon-button>
+            <paper-icon-button on-tap="debugdoc" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="debugdoc" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="debugdoc" icon="star"></paper-icon-button>
         </div>
     </template>
 </dom-module>
