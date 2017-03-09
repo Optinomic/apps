@@ -9,19 +9,13 @@ const initialState = {
     "clinic": {
         "data": null
     },
-    "patients": {
-        "all": {
-            "data": null
-        },
-        "current": {
-            "data": null
-        },
-    },
-    "patient": {
-        "loaded": false,
+    "user": {
         "data": null
     },
-    "currentPatient": {
+    "patient": {
+        "data": null
+    },
+    "stays": {
         "data": null
     },
     "komed": {
@@ -45,17 +39,22 @@ const reducer = (state, action) => {
                 komed: action.data
             });
 
+        case 'GET_CURRENT_USER_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                user: action.data
+            });
+
         case 'GET_CURRENT_PATIENT_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                currentPatient: action.data,
                 patient: action.data
             });
 
-        case 'GET_currentPatient_STAYS_COMPLETE':
+        case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                currentPatientStays: action.data
+                stays: action.data
             });
 
         case 'GET_CLINIC_COMPLETE':
@@ -177,6 +176,38 @@ const AsyncActionsBehavior = {
 
 
 
+            }
+        },
+        actionGetCurrentUser: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/users/' + helpers.getUserID();
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var data_return = resp.user;
+
+                        var response = {
+                            "date": new Date(),
+                            "data": data_return
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.err('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_CURRENT_USER_COMPLETE',
+                        data: response
+                    });
+                });
             }
         },
         actionGetCurrentPatient: function() {
