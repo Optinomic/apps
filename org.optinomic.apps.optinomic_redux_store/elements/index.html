@@ -31,6 +31,11 @@ include(../lib/polymer/styles/shared-styles.m4) include(../lib/polymer/elements/
             <h1>[[params.appName]]</h1>
             <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
             <div class="circle">[[params.patientID]]</div>
+            <h1>Patient</h1>
+            <p>[[patients.current.data.last_name]]</p>
+            <p>[[patient.data.last_name]]</p>
+            <p>[[patient.last_name]]</p>
+
         </div>
         <div id="container">
             <paper-button on-tap="debugdoc" class="pink">link</paper-button>
