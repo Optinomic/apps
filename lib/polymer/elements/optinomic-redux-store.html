@@ -22,12 +22,13 @@ const initialState = {
     },
     "apps": {
         "all": {
-          "data": null
+            "data": null
         },
         "current": {
             "id": helpers.getAppID(),
             "name": helpers.getAppName(),
-            "data": null
+            "data": null,
+            "found": false
         }
     },
     "komed": {
@@ -205,7 +206,13 @@ const AsyncActionsBehavior = {
                 helpers.callAPI('GET', api_url, {}, {}, function(req) {
                     if (req.status == 200) {
                         var resp = JSON.parse(req.response);
-                        var data_return = resp.user;
+                        var data_return = resp.user.data;
+                        data_return.id = resp.user.id;
+                        data_return.uid = resp.user.id;
+                        data_return.isAdmin = false;
+                        if (resp.user.data.role === "Admin") {
+                          data_return.isAdmin = true;
+                        };
 
                         var response = {
                             "date": new Date(),
@@ -328,13 +335,10 @@ const AsyncActionsBehavior = {
                         var patient_modules = resp.patient_modules;
                         var user_modules = resp.user_modules;
 
-                        patient_modules.forEach(function(pm, pmID) {
-                            console.log('pm', pm);
-                        });
 
                         var response = {
+                            "date": new Date(),
                             "all": {
-                                "date": new Date(),
                                 "data": {
                                     "patient_modules": patient_modules,
                                     "user_modules": user_modules
@@ -343,15 +347,27 @@ const AsyncActionsBehavior = {
                             "current": {
                                 "id": helpers.getAppID(),
                                 "name": helpers.getAppName(),
-                                "data": null
+                                "data": null,
+                                "found": false
                             }
                         };
 
-                        var response = {
-                            "date": new Date(),
-                            "patient_modules": patient_modules,
-                            "user_modules": user_modules
+                        patient_modules.forEach(function(pm, pmID) {
+                            if (pm.identifier === helpers.getAppID()) {
+                                response.current.data = pm;
+                                response.current.found = true;
+                            }
+                        });
+
+                        if (!response.current.found) {
+                            user_modules.forEach(function(pm, pmID) {
+                                if (pm.identifier === helpers.getAppID()) {
+                                    response.current.data = pm;
+                                    response.current.found = true;
+                                }
+                            });
                         };
+
                         console.log('(✔) Data (' + api_url + '):', response);
                     } else {
                         var response = {
