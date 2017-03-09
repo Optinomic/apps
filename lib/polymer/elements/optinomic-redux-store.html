@@ -291,10 +291,12 @@ const AsyncActionsBehavior = {
                         var resp = JSON.parse(req.response);
                         var stays = resp.stays;
 
+                        var current_stay_id = helpers.getStayID();
+
                         var response = {
                             "all": stays,
                             "current": {
-                                "id": helpers.getStayID(),
+                                "id": current_stay_id,
                                 "data": null,
                                 "found": false
                             }
