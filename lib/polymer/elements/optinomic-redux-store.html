@@ -10,19 +10,30 @@ const initialState = {
         "data": null
     },
     "user": {
+        "id": helpers.getUserID(),
         "data": null
     },
     "patient": {
+        "id": helpers.getPatientID(),
         "data": null
     },
     "stays": {
         "data": null
     },
+    "apps": {
+        "all": {
+          "data": null
+        },
+        "current": {
+            "id": helpers.getAppID(),
+            "name": helpers.getAppName(),
+            "data": null
+        }
+    },
     "komed": {
         "data": null
     }
 };
-
 
 
 const reducer = (state, action) => {
@@ -54,13 +65,19 @@ const reducer = (state, action) => {
         case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                stays: action.data
+                stays: action.data.stays
             });
 
         case 'GET_CLINIC_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
                 clinic: action.data
+            });
+
+        case 'GET_APPS_COMPLETE':
+            return Object.assign({}, state, {
+                loading: false,
+                apps: action.data
             });
 
         case 'GET_SURVEY_RESPONSES_COMPLETE':
@@ -293,6 +310,59 @@ const AsyncActionsBehavior = {
                     };
                     dispatch({
                         type: 'GET_CURRENT_PATIENT_STAYS_COMPLETE',
+                        data: response
+                    });
+                });
+            }
+        },
+        actionGetApps: function() {
+            return function(dispatch) {
+                dispatch({
+                    type: 'GET_DATA_STARTED'
+                });
+                const api_url = '/modules/';
+                // Do async task
+                helpers.callAPI('GET', api_url, {}, {}, function(req) {
+                    if (req.status == 200) {
+                        var resp = JSON.parse(req.response);
+                        var patient_modules = resp.patient_modules;
+                        var user_modules = resp.user_modules;
+
+                        patient_modules.forEach(function(pm, pmID) {
+                            console.log('pm', pm);
+                        });
+
+                        var response = {
+                            "all": {
+                                "date": new Date(),
+                                "data": {
+                                    "patient_modules": patient_modules,
+                                    "user_modules": user_modules
+                                }
+                            },
+                            "current": {
+                                "id": helpers.getAppID(),
+                                "name": helpers.getAppName(),
+                                "data": null
+                            }
+                        };
+
+                        var response = {
+                            "date": new Date(),
+                            "patient_modules": patient_modules,
+                            "user_modules": user_modules
+                        };
+                        console.log('(✔) Data (' + api_url + '):', response);
+                    } else {
+                        var response = {
+                            "error": true,
+                            "error_message": "Failed with status code: " + req.status,
+                            "status_code": req.status
+                        };
+                        console.err('(!) Error: ', response);
+                    };
+                    dispatch({
+                        type: 'GET_APPS_COMPLETE',
                         data: response
                     });
                 });
