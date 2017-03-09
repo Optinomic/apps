@@ -303,12 +303,12 @@ const AsyncActionsBehavior = {
                         }
 
                         stays.forEach(function(stay, stayID) {
-                            //console.log('stay', stay);
-                            stay.data = createPatientExtras(stay.data);
+                            stay.data = createStayExtras(stay.data);
                             stay.data.id = stay.id;
                             stay.data.fid = stay.id;
                             if (current_stay_id === stay.id) {
                                 response.current.data = stay.data;
+                                response.current.found = true;
                             };
                         });
 
