@@ -21,15 +21,16 @@ const initialState = {
         "data": null
     },
     "apps": {
-        "all": {
-            "data": null
-        },
+        "all": null,
         "current": {
             "id": helpers.getAppID(),
             "name": helpers.getAppName(),
             "data": null,
             "found": false
         }
+    },
+    "survey_responses": {
+        "data": null
     },
     "komed": {
         "data": null
@@ -66,7 +67,7 @@ const reducer = (state, action) => {
         case 'GET_CURRENT_PATIENT_STAYS_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                stays: action.data.stays
+                stays: action.data
             });
 
         case 'GET_CLINIC_COMPLETE':
@@ -84,7 +85,7 @@ const reducer = (state, action) => {
         case 'GET_SURVEY_RESPONSES_COMPLETE':
             return Object.assign({}, state, {
                 loading: false,
-                surveyResponses: action.data
+                survey_responses: action.data
             });
 
         case 'SIGN_UP_COMPLETE':
@@ -211,7 +212,7 @@ const AsyncActionsBehavior = {
                         data_return.uid = resp.user.id;
                         data_return.isAdmin = false;
                         if (resp.user.data.role === "Admin") {
-                          data_return.isAdmin = true;
+                            data_return.isAdmin = true;
                         };
 
                         var response = {
@@ -304,7 +305,7 @@ const AsyncActionsBehavior = {
 
                         var response = {
                             "date": new Date(),
-                            "data": resp
+                            "data": stays
                         };
                         console.log('(✔) Data (' + api_url + '):', response);
                     } else {
@@ -339,10 +340,8 @@ const AsyncActionsBehavior = {
                         var response = {
                             "date": new Date(),
                             "all": {
-                                "data": {
-                                    "patient_modules": patient_modules,
-                                    "user_modules": user_modules
-                                }
+                                "patient_modules": patient_modules,
+                                "user_modules": user_modules
                             },
                             "current": {
                                 "id": helpers.getAppID(),
