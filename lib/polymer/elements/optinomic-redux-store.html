@@ -45,7 +45,7 @@ const reducer = (state, action) => {
             return Object.assign({}, state, {
                 loading: false,
                 currentPatient: action.data,
-                'patients.current': action.data
+                patients['current']: action.data
             });
 
         case 'GET_currentPatient_STAYS_COMPLETE':
