@@ -6,6 +6,7 @@
 <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
 <script src="redux/dist/redux.min.js"></script>
 <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+<script src="iframe-resizer/src/iframeResizer.contentWindow.js"></script>
 
 <dom-module id="shared-styles">
   <template>
@@ -261,76 +262,44 @@
         }
 </style>
 
-<h3>Content | Start</h3>
-<div class="layout horizontal">
-  <div class="flex">
-    <img src="optinomic-images/apple-touch-icon.png" alt="Optinomic" width="57" height="57">
-  </div>
-  <div class="flex">
-    <optinomic-avatar small firstname="Max" lastname="Muster"></optinomic-avatar>
-  </div>
-</div>
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            margin-left: -5px;
+            padding-bottom: 12px;
+            font-family: 'Roboto', sans-serif !important;
+        }
+        </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+        </div>
+        <div>
+            <template is="dom-if" if="[[currentPatient.data]]">
+                <optinomic-avatar firstname="[[currentPatient.data.first_name]]" lastname="[[currentPatient.data.last_name]]" gender="[[currentPatient.data.gender]]" birthdate="[[currentPatient.data.birthdate]]"></optinomic-avatar>
+                <p style$="color:[[currentPatient.data.extras.color_main]]">[[currentPatient.data.extras.full_name]]</p>
+                <optinomic-patient-details patient="[[currentPatient.data]]" language="de"></optinomic-patient-details>
+            </template>
+        </div>
+        <div class="">
+            <h1>[[params.appName]]</h1>
+            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
+            <div class="circle">[[params.patientID]]</div>
+        </div>
+        <div id="container">
+            <paper-button on-tap="callAPI" class="pink">link</paper-button>
+            <paper-button on-tap="callAPI" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
+            <paper-button on-tap="callAPI" toggles raised class="green">Sign Up</paper-button>
+        </div>
+        <div id="container">
+            <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="callAPI" icon="star"></paper-icon-button>
+        </div>
+    </template>
+</dom-module>
 
-
-<optinomic-patient-details patient='{
-  "address1": "Haldenstrasse 7",
-  "address2": null,
-  "ahv": null,
-  "birth_name": "Musterpatient",
-  "birthdate": "1973-05-21T00:00:00.000000000000Z",
-  "cis_lead_doctor": null,
-  "cis_pid": 7,
-  "city": "Oberrieden",
-  "country": "CH",
-  "deceased": false,
-  "email": "ottigerb@gmail.com",
-  "first_name": "Beat",
-  "four_letter_code": "ATAE",
-  "gender": "male",
-  "id": 1,
-  "komed_base_url": "https://optinomic.komed-health.com/chat/",
-  "komed_url": "https://optinomic.komed-health.com/chat/1",
-  "language": "de",
-  "last_name": "Ottiger",
-  "lead_therapist": 2,
-  "notes": "Testpatient",
-  "phone_home": "+41796358584",
-  "phone_mobile": "+41796358584",
-  "pid": 1,
-  "stay_id": 144,
-  "title": null,
-  "extras": {
-    "age": 43,
-    "anrede": "Herr Ottiger",
-    "ansprache": "Herr",
-    "birthday": "21.5.1973",
-    "birthday_age": "21.5.1973 | 43",
-    "color_accent": "#E91E63",
-    "color_main": "#3F51B5",
-    "full_address": "Haldenstrasse 7, 8942 Oberrieden",
-    "full_name": "Herr Ottiger Beat (21.5.1973 | 43)",
-    "infoline": "Haldenstrasse 7, 8942 Oberrieden",
-    "name": "Ottiger Beat",
-    "phone": "+41796358584, +41796358584"
-  },
-  "zip_code": "8942"
-}'></optinomic-patient-details>
-
-<show-json json='[
-  "Polymer is awesome",
-  "So are web-components",
-  true,
-  1000000,
-  false
-  ]'></show-json>
-
-<h2>Layout</h2>
-
-<div class="layout horizontal">
-  <div class="flex">1</div>
-  <div class="flex">2</div>
-</div>
-
-<h3>Layout <span class="caption"><br>Subtext</span></h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis ducimus <b>voluptatum</b> assumenda atque facilis quod voluptatem laborum at, amet reiciendis corporis consequatur beatae eos optio, officiis, neque deleniti aliquid iste.</p>
-<h4>Layout</h4>
+<optinomic-app></optinomic-app>
