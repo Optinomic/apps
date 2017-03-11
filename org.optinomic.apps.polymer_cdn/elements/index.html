@@ -1,0 +1,336 @@
+<base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.11/lib/">
+
+<link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
+
+<script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+<script src="redux/dist/redux.min.js"></script>
+<script src="redux-thunk/dist/redux-thunk.min.js"></script>
+
+<dom-module id="shared-styles">
+  <template>
+        <style>
+        #container {
+            display: flex;
+        }
+
+        html,
+        body {
+            font-family: 'Roboto', sans-serif !important;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            min-height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .large {
+            font-size: 125%;
+        }
+
+        .small {
+            font-size: 75%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .display-4 {
+            font-size: 117.6px;
+            font-weight: 100;
+            letter-spacing: -0.010em;
+            line-height: 117.6px;
+            color: #757575;
+        }
+
+        .display-3 {
+            font-size: 58.8px;
+            font-weight: 400;
+            letter-spacing: -0.005em;
+            line-height: 58.8px;
+            color: #757575;
+        }
+
+        .display-2 {
+            font-size: 47.25px;
+            font-weight: 400;
+            line-height: 67.2px;
+            color: #757575;
+        }
+
+        h1,
+        .display-1 {
+            font-size: 35.7px;
+            font-weight: 100;
+            line-height: 42px;
+            color: #757575;
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        h2,
+        .headline {
+            font-size: 25.2px;
+            font-weight: 300;
+            line-height: 33.6px;
+            color: #616161;
+        }
+
+        h3,
+        .title {
+            font-size: 21px;
+            font-weight: 300;
+            letter-spacing: 0.005em;
+            color: #424242;
+        }
+
+        h4,
+        .subhead {
+            font-size: 16.8px;
+            font-weight: 300;
+            letter-spacing: 0.010em;
+            line-height: 25.2px;
+            color: #212121;
+        }
+
+        p,
+        .body-1 {
+            font-size: 14.7px;
+            font-weight: 400;
+            letter-spacing: 0.010em;
+            line-height: 21px;
+            color: #212121;
+        }
+
+        b,
+        .body-2 {
+            font-size: 14.7px;
+            font-weight: 500;
+            letter-spacing: 0.010em;
+            line-height: 25.2px;
+            color: #212121;
+        }
+
+        .caption {
+            font-size: 12.6px;
+            letter-spacing: 0.020em;
+            color: #757575;
+        }
+
+        .button {
+            letter-spacing: 0.010em;
+        }
+
+        button,
+        select,
+        html,
+        textarea,
+        input {
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        select,
+        button,
+        textarea,
+        input {
+            font-size: 100%;
+        }
+
+        paper-button {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-weight: normal;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        paper-button.pink {
+            color: var(--paper-pink-a200);
+            --paper-button-ink-color: var(--paper-pink-a200);
+        }
+
+        paper-button.pink:hover {
+            background-color: var(--paper-pink-100);
+        }
+
+        paper-button.indigo {
+            background-color: var(--paper-indigo-500);
+            color: white;
+            --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+            }
+            ;
+        }
+
+        paper-button.indigo:hover {
+            background-color: var(--paper-indigo-400);
+        }
+
+        paper-button.disabled {
+            color: white;
+        }
+
+        paper-icon-button {
+            color: var(--paper-pink-a200);
+            --paper-icon-button-ink-color: var(--paper-pink-a200);
+        }
+
+        paper-icon-button.indigo {
+            color: var(--paper-grey-400);
+            --paper-icon-button-ink-color: var(--paper-indigo-a200);
+        }
+
+        paper-icon-button.indigo:hover {
+            color: var(--paper-indigo-500);
+        }
+
+        paper-progress {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        paper-progress.slow {
+            --paper-progress-indeterminate-cycle-duration: 5s;
+        }
+
+        paper-progress.indigo {
+            --paper-progress-active-color: var(--paper-indigo-500);
+            --paper-progress-secondary-color: var(--paper-indigo-100);
+            --paper-progress-indeterminate-cycle-duration: 3s;
+        }
+
+        paper-progress.pink {
+            --paper-progress-active-color: var(--paper-pink-500);
+            --paper-progress-secondary-color: var(--paper-pink-100);
+            --paper-progress-indeterminate-cycle-duration: 3s;
+        }
+
+        .circle {
+            display: inline-block;
+            width: 58px;
+            height: 58px;
+            text-align: center;
+            color: #424242;
+            border-radius: 50%;
+            background: #E0E0E0;
+            font-size: 28px;
+            font-weight: 100;
+            font-family: 'Roboto', sans-serif;
+            line-height: 60px;
+        }
+
+        .grid-border-top {
+            border-top-color: #E0E0E0;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+        </style>
+    </template>
+</dom-module>
+
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="iron-icon/iron-icon.html">
+<link rel="import" href="iron-icons/iron-icons.html">
+
+<link rel="import" href="optinomic-redux-store/optinomic-redux-store.html">
+<link rel="import" href="optinomic-avatar/optinomic-avatar.html">
+<link rel="import" href="optinomic-patient-details/optinomic-patient-details.html">
+<link rel="import" href="show-json/show-json.html">
+
+
+
+<style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
+  :host {
+            display: block;
+        }
+  html,
+        body {
+            font-family: 'Roboto', sans-serif !important;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            min-height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+</style>
+
+<h3>Content | Start</h3>
+<div class="layout horizontal">
+  <div class="flex">
+    <img src="optinomic-images/apple-touch-icon.png" alt="Optinomic" width="57" height="57">
+  </div>
+  <div class="flex">
+    <optinomic-avatar small firstname="Max" lastname="Muster"></optinomic-avatar>
+  </div>
+</div>
+
+
+<optinomic-patient-details patient='{
+  "address1": "Haldenstrasse 7",
+  "address2": null,
+  "ahv": null,
+  "birth_name": "Musterpatient",
+  "birthdate": "1973-05-21T00:00:00.000000000000Z",
+  "cis_lead_doctor": null,
+  "cis_pid": 7,
+  "city": "Oberrieden",
+  "country": "CH",
+  "deceased": false,
+  "email": "ottigerb@gmail.com",
+  "first_name": "Beat",
+  "four_letter_code": "ATAE",
+  "gender": "male",
+  "id": 1,
+  "komed_base_url": "https://optinomic.komed-health.com/chat/",
+  "komed_url": "https://optinomic.komed-health.com/chat/1",
+  "language": "de",
+  "last_name": "Ottiger",
+  "lead_therapist": 2,
+  "notes": "Testpatient",
+  "phone_home": "+41796358584",
+  "phone_mobile": "+41796358584",
+  "pid": 1,
+  "stay_id": 144,
+  "title": null,
+  "extras": {
+    "age": 43,
+    "anrede": "Herr Ottiger",
+    "ansprache": "Herr",
+    "birthday": "21.5.1973",
+    "birthday_age": "21.5.1973 | 43",
+    "color_accent": "#E91E63",
+    "color_main": "#3F51B5",
+    "full_address": "Haldenstrasse 7, 8942 Oberrieden",
+    "full_name": "Herr Ottiger Beat (21.5.1973 | 43)",
+    "infoline": "Haldenstrasse 7, 8942 Oberrieden",
+    "name": "Ottiger Beat",
+    "phone": "+41796358584, +41796358584"
+  },
+  "zip_code": "8942"
+}'></optinomic-patient-details>
+
+<show-json json='[
+  "Polymer is awesome",
+  "So are web-components",
+  true,
+  1000000,
+  false
+  ]'></show-json>
+
+<h2>Layout</h2>
+
+<div class="layout horizontal">
+  <div class="flex">1</div>
+  <div class="flex">2</div>
+</div>
+
+<h3>Layout <span class="caption"><br>Subtext</span></h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis ducimus <b>voluptatum</b> assumenda atque facilis quod voluptatem laborum at, amet reiciendis corporis consequatur beatae eos optio, officiis, neque deleniti aliquid iste.</p>
+<h4>Layout</h4>
