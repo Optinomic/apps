@@ -546,15 +546,17 @@ const AsyncActionsBehavior = {
                                         };
                                     };
 
-                                    // Return all calculations if not found.
-                                    if (return_obj.calculation_found === false) {
-                                        return_obj.calculations = resp.calculations;
-                                    };
+
                                 });
                             });
 
                             if (return_obj.calculation_found && return_obj.event_found && return_obj.patient_found && return_obj.stay_found && return_obj.patient_uses_module_found) {
                                 return_obj.all_found = true;
+                            };
+
+                            // Return all calculations if not found.
+                            if (return_obj.calculation_found === false) {
+                                return_obj.calculations = resp.calculations;
                             };
 
                             return_array.push(return_obj);
