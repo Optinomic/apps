@@ -1,6 +1,7 @@
 // loadData
 
-setRequestGetSurveyResponses('ch.suedhang.apps.bdi');
+//setRequestGetSurveyResponses('ch.suedhang.apps.bdi');
+setRequestGetSurveyResponses('ch.suedhang.apps.bscl_anq');
 
 this.dispatch('actionGetCurrentPatient');
 this.dispatch('actionGetCurrentPatientStays');
