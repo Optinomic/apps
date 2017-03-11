@@ -238,7 +238,6 @@
 <link rel="import" href="iron-icon/iron-icon.html">
 <link rel="import" href="iron-icons/iron-icons.html">
 
-<link rel="import" href="optinomic-redux-store/optinomic-redux-store.html">
 <link rel="import" href="optinomic-avatar/optinomic-avatar.html">
 <link rel="import" href="optinomic-patient-details/optinomic-patient-details.html">
 <link rel="import" href="show-json/show-json.html">
@@ -289,17 +288,31 @@
             <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[currentPatient.data.last_name]] [[currentPatient.data.first_name]]</p>
             <div class="circle">[[params.patientID]]</div>
         </div>
-        <div id="container">
-            <paper-button on-tap="callAPI" class="pink">link</paper-button>
-            <paper-button on-tap="callAPI" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
-            <paper-button on-tap="callAPI" toggles raised class="green">Sign Up</paper-button>
+        <div class="Data">
+          <h3>survey_responses</h3>
+          <show-json json='this.survey_responses'></show-json>
+          <h3>stays</h3>
+          <show-json json='this.stays'></show-json>
+          <h3>patient</h3>
+          <show-json json='this.patient'></show-json>
+          <h3>apps</h3>
+          <show-json json='this.apps'></show-json>
         </div>
         <div id="container">
-            <paper-icon-button on-tap="callAPI" icon="favorite"></paper-icon-button>
-            <paper-icon-button on-tap="callAPI" icon="menu" class="indigo"></paper-icon-button>
-            <paper-icon-button on-tap="callAPI" icon="star"></paper-icon-button>
+            <paper-button on-tap="debugdoc" class="pink">Debug</paper-button>
+            <paper-button on-tap="debugdoc" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
+            <paper-button on-tap="debugdoc" toggles raised class="green">Debug</paper-button>
+        </div>
+        <div id="container">
+            <paper-icon-button on-tap="refresh_data" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="refresh_data" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="refresh_data" icon="star"></paper-icon-button>
         </div>
     </template>
 </dom-module>
 
-<optinomic-app></optinomic-app>
+
+<optinomic-app name="main"></optinomic-app>
+<div data-iframe-height>
+    &nbsp;
+</div>
