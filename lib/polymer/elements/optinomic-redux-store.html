@@ -392,18 +392,13 @@ const AsyncActionsBehavior = {
                 });
             }
         },
-        actionGetSurveyResponses: function() {
+        actionGetSurveyResponses: function(module_identifier) {
             return function(dispatch) {
                 dispatch({
                     type: 'GET_DATA_STARTED'
                 });
 
-
-                // GET /stays/:stay_id/survey_responses/:module_identifier/full
-                // GET /patients/:patient_id/survey_responses/:module_identifier/full
-
-                var module_identifier = 'ch.suedhang.apps.bscl_anq';
-                module_identifier = 'ch.suedhang.apps.bdi';
+                module_identifier = module_identifier === undefined ? helpers.getAppID() : module_identifier;
 
                 var current_stay_id = parseInt(helpers.getStayID());
 
