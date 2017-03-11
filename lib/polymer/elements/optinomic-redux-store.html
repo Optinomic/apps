@@ -392,13 +392,14 @@ const AsyncActionsBehavior = {
                 });
             }
         },
-        actionGetSurveyResponses: function(module_identifier) {
+        actionGetSurveyResponses: function() {
             return function(dispatch) {
                 dispatch({
                     type: 'GET_DATA_STARTED'
                 });
 
-                module_identifier = module_identifier === undefined ? helpers.getAppID() : module_identifier;
+                var module_identifier = requested_app_id === undefined ? helpers.getAppID() : requested_app_id;
+                console.log('APP: ', module_identifier, requested_app_id);
 
                 var current_stay_id = parseInt(helpers.getStayID());
 
@@ -601,6 +602,14 @@ const AsyncActionsBehavior = {
 // ----------------------------
 // Helpers
 // ----------------------------
+
+
+var requested_app_id = null;
+
+setRequestGetSurveyResponses = function(app_id) {
+    requested_app_id = app_id;
+    console.log('setRequestGetSurveyResponses: ', app_id);
+};
 
 formatDateCH = function(date_string) {
     if (date_string !== undefined) {
