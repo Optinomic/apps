@@ -1,20 +1,17 @@
-<base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.12/lib/">
-
+<base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.13/lib/">
 <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
-
 <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
 <script src="redux/dist/redux.min.js"></script>
 <script src="redux-thunk/dist/redux-thunk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
-
 <dom-module id="shared-styles">
-  <template>
+    <template>
         <style>
         #container {
             display: flex;
         }
-
+        
         html,
         body {
             font-family: 'Roboto', sans-serif !important;
@@ -26,19 +23,19 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-
+        
         .large {
             font-size: 125%;
         }
-
+        
         .small {
             font-size: 75%;
         }
-
+        
         a {
             text-decoration: none;
         }
-
+        
         .display-4 {
             font-size: 117.6px;
             font-weight: 100;
@@ -46,7 +43,7 @@
             line-height: 117.6px;
             color: #757575;
         }
-
+        
         .display-3 {
             font-size: 58.8px;
             font-weight: 400;
@@ -54,14 +51,14 @@
             line-height: 58.8px;
             color: #757575;
         }
-
+        
         .display-2 {
             font-size: 47.25px;
             font-weight: 400;
             line-height: 67.2px;
             color: #757575;
         }
-
+        
         h1,
         .display-1 {
             font-size: 35.7px;
@@ -70,7 +67,7 @@
             color: #757575;
             font-family: 'Roboto', sans-serif !important;
         }
-
+        
         h2,
         .headline {
             font-size: 25.2px;
@@ -78,7 +75,7 @@
             line-height: 33.6px;
             color: #616161;
         }
-
+        
         h3,
         .title {
             font-size: 21px;
@@ -86,7 +83,7 @@
             letter-spacing: 0.005em;
             color: #424242;
         }
-
+        
         h4,
         .subhead {
             font-size: 16.8px;
@@ -95,7 +92,7 @@
             line-height: 25.2px;
             color: #212121;
         }
-
+        
         p,
         .body-1 {
             font-size: 14.7px;
@@ -104,7 +101,7 @@
             line-height: 21px;
             color: #212121;
         }
-
+        
         b,
         .body-2 {
             font-size: 14.7px;
@@ -113,17 +110,17 @@
             line-height: 25.2px;
             color: #212121;
         }
-
+        
         .caption {
             font-size: 12.6px;
             letter-spacing: 0.020em;
             color: #757575;
         }
-
+        
         .button {
             letter-spacing: 0.010em;
         }
-
+        
         button,
         select,
         html,
@@ -131,30 +128,30 @@
         input {
             font-family: 'Roboto', sans-serif !important;
         }
-
+        
         select,
         button,
         textarea,
         input {
             font-size: 100%;
         }
-
+        
         paper-button {
             font-family: 'Roboto', 'Noto', sans-serif;
             font-weight: normal;
             font-size: 14px;
             -webkit-font-smoothing: antialiased;
         }
-
+        
         paper-button.pink {
             color: var(--paper-pink-a200);
             --paper-button-ink-color: var(--paper-pink-a200);
         }
-
+        
         paper-button.pink:hover {
             background-color: var(--paper-pink-100);
         }
-
+        
         paper-button.indigo {
             background-color: var(--paper-indigo-500);
             color: white;
@@ -164,51 +161,51 @@
             }
             ;
         }
-
+        
         paper-button.indigo:hover {
             background-color: var(--paper-indigo-400);
         }
-
+        
         paper-button.disabled {
             color: white;
         }
-
+        
         paper-icon-button {
             color: var(--paper-pink-a200);
             --paper-icon-button-ink-color: var(--paper-pink-a200);
         }
-
+        
         paper-icon-button.indigo {
             color: var(--paper-grey-400);
             --paper-icon-button-ink-color: var(--paper-indigo-a200);
         }
-
+        
         paper-icon-button.indigo:hover {
             color: var(--paper-indigo-500);
         }
-
+        
         paper-progress {
             display: block;
             width: 100%;
             margin: 10px 0;
         }
-
+        
         paper-progress.slow {
             --paper-progress-indeterminate-cycle-duration: 5s;
         }
-
+        
         paper-progress.indigo {
             --paper-progress-active-color: var(--paper-indigo-500);
             --paper-progress-secondary-color: var(--paper-indigo-100);
             --paper-progress-indeterminate-cycle-duration: 3s;
         }
-
+        
         paper-progress.pink {
             --paper-progress-active-color: var(--paper-pink-500);
             --paper-progress-secondary-color: var(--paper-pink-100);
             --paper-progress-indeterminate-cycle-duration: 3s;
         }
-
+        
         .circle {
             display: inline-block;
             width: 58px;
@@ -222,7 +219,7 @@
             font-family: 'Roboto', sans-serif;
             line-height: 60px;
         }
-
+        
         .grid-border-top {
             border-top-color: #E0E0E0;
             border-top-style: solid;
@@ -231,37 +228,33 @@
         </style>
     </template>
 </dom-module>
-
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="iron-icon/iron-icon.html">
 <link rel="import" href="iron-icons/iron-icons.html">
-
 <link rel="import" href="optinomic-redux-store/optinomic-redux-store.html">
 <link rel="import" href="optinomic-avatar/optinomic-avatar.html">
 <link rel="import" href="optinomic-patient-details/optinomic-patient-details.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
 <link rel="import" href="show-json/show-json.html">
-
-
-
 <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
-  :host {
-            display: block;
-        }
-  html,
-        body {
-            font-family: 'Roboto', sans-serif !important;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            min-height: 100%;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-</style>
+:host {
+    display: block;
+}
 
+html,
+body {
+    font-family: 'Roboto', sans-serif !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+</style>
 <dom-module id="optinomic-app">
     <template>
         <style include="shared-styles">
@@ -281,24 +274,158 @@
             <template is="dom-if" if="[[patient.data]]">
                 <optinomic-avatar firstname="[[patient.data.first_name]]" lastname="[[patient.data.last_name]]" gender="[[patient.data.gender]]" birthdate="[[patient.data.birthdate]]"></optinomic-avatar>
                 <p style$="color:[[patient.data.extras.color_main]]">[[patient.data.extras.full_name]]</p>
-                <optinomic-patient-details patient="[[patient.data]]" language="de"></optinomic-patient-details>
             </template>
+        </div>
+        <div>
+            <optinomic-chart-profile options='{
+                "min": -4,
+                "max": "auto",
+                "item_height": 50,
+                "item_text_width": 120,
+                "color_grid": "#9E9E9E",
+                "show_baseline": false,
+                "range_alpha": 0.1,
+                "vertical_grid_every_x": 1,
+                "response_title_path": "calculation.info.mz.mz_typ",
+                "response_date_path": "calculation.info.filled",
+                "all_profiles": true
+            }' start='{
+                  "left_title": "Geringe Ausprägung",
+                  "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
+                  "left_color": "#4CAF50",
+                  "right_title": "Starke Ausprägung",
+                  "right_text": "Eine längere Beschreibung bzgl. der starken Ausprägung.",
+                  "right_color": "#F44336"
+                }' scales='[{
+                    "id": 0,
+                    "left_title": "GSI (Global Severity Index)",
+                    "left_text": "GSI (Global Severity Index)",
+                    "right_title": "GSI (Global Severity Index)",
+                    "right_text": "Durchschnittliche Belastung in allen Bereichen",
+                    "m_norm": [0.28, 0.35],
+                    "sd_norm": [0.23, 0.23],
+                    "score_path": "calculation.all_results.gsi_global_severity_index_z_score",
+                    "items": 53
+                }, {
+                    "id": 1,
+                    "left_title": "Psychotizismus",
+                    "left_text": "Psychotizismus",
+                    "right_title": "Psychotizismus",
+                    "right_text": "Gefühl der Isolation und zwischenmenschlichen Entfremdung. Verzerrter, isolierter Lebensstil     bis zu Halluzination und Gedankenzerfall.",
+                    "m_norm": [0.19, 0.19],
+                    "sd_norm": [0.28, 0.27],
+                    "score_path": "calculation.all_results.psychotizismus_z_score",
+                    "items": 5
+                }, {
+                    "id": 2,
+                    "left_title": "Paranoides Denken",
+                    "left_text": "Paranoides Denken",
+                    "right_title": "Paranoides Denken",
+                    "right_text": "Misstrauen, Minderwertigkeitsgefühle, paranoides Denken: Gedankenprojektion, Feindseligkeit,     Argwohn, Grandiosität, Einengung, Angst vor Autonomieverlust und wahnhafte Täuschung.",
+                    "m_norm": [0.33, 0.34],
+                    "sd_norm": [0.40, 0.38],
+                    "score_path": "calculation.all_results.paranoides_denken_z_score",
+                    "items": 5
+                }, {
+                    "id": 3,
+                    "left_title": "Phobische Angst",
+                    "left_text": "Phobische Angst",
+                    "right_title": "Phobische Angst",
+                    "right_text": "Andauernde und unangemessene Furcht als Reaktion auf eine bestimmte Person, einen Platz, ein     Objekt oder eine charakteristische Situation, die zu Vermeidungs- oder Fluchtverhalten führt.",
+                    "m_norm": [0.14, 0.16],
+                    "sd_norm": [0.23, 0.25],
+                    "score_path": "calculation.all_results.phobische_angst_z_score",
+                    "items": 5
+                }, {
+                    "id": 4,
+                    "left_title": "Aggressivität / Feindseligkeit",
+                    "left_text": "Aggressivität / Feindseligkeit",
+                    "right_title": "Aggressivität / Feindseligkeit",
+                    "right_text": "Reizbarkeit und Unausgeglichenheit bis hin zu starker Aggressivität. Ärger, Aggression,    Irritierbarkeit, Zorn und Verstimmung.",
+                    "m_norm": [0.29, 0.37],
+                    "sd_norm": [0.35, 0.33],
+                    "score_path": "calculation.all_results.aggressivit__t___feindseligkeit_z_score",
+                    "items": 5
+                }, {
+                    "id": 5,
+                    "left_title": "Ängstlichkeit",
+                    "left_text": "Ängstlichkeit",
+                    "right_title": "GSI (Global Severity Index)",
+                    "right_text": "Angst mit Nervosität, Spannungen und Zittern, Panikattacken und Schreckgefühlen, Gefühle von     Besorgnis und Furcht.",
+                    "m_norm": [0.29, 0.39],
+                    "sd_norm": [0.31, 0.36],
+                    "score_path": "calculation.all_results.__ngstlichkeit_z_score",
+                    "items": 6
+                }, {
+                    "id": 6,
+                    "left_title": "Depressivität",
+                    "left_text": "Depressivität",
+                    "right_title": "Depressivität",
+                    "right_text": "Gedrückte Stimmung, Gesunkenes Interesse am Leben, Verringerte Motivation und Energie,     Hoffnungslosigkeit, bis hin zu Suizidgedanken.",
+                    "m_norm": [0.24, 0.33],
+                    "sd_norm": [0.32, 0.40],
+                    "score_path": "calculation.all_results.depressivit__t_z_score",
+                    "items": 6
+                }, {
+                    "id": 7,
+                    "left_title": "Unsicherheit im Sozialkontakt",
+                    "left_text": "Unsicherheit im Sozialkontakt",
+                    "right_title": "GSI (Global Severity Index)",
+                    "right_text": "Unzulänglichkeits- und Minderwertigkeitsgefühle, Selbstabwertungen im sozialen Kontakt,    Selbstzweifel, Selbstunsicherheit und negative Erwartungen bzgl. dem eigenen zwischenmenschlichen   Verhalten.",
+                    "m_norm": [0.35, 0.49],
+                    "sd_norm": [0.40, 0.45],
+                    "score_path": "calculation.all_results.unsicherheit_im_sozialkontakt_z_score",
+                    "items": 4
+                }, {
+                    "id": 8,
+                    "left_title": "Zwanghaftigkeit",
+                    "left_text": "Zwanghaftigkeit",
+                    "right_title": "GSI (Global Severity Index)",
+                    "right_text": "Gedanken, Impulse und Handlungen, die konstant vorhanden und nicht änderbar und ich-fremd    oder ungewollt erlebt werden, Kognitive Leistungsstörungen.",
+                    "m_norm": [0.50, 0.54],
+                    "sd_norm": [0.46, 0.43],
+                    "score_path": "calculation.all_results.zwanghaftigkeit_z_score",
+                    "items": 6
+                }, {
+                    "id": 9,
+                    "left_title": "Somatisierung",
+                    "left_text": "Somatisierung",
+                    "right_title": "Somatisierung",
+                    "right_text": "Kopfschmerzen, Herzbeschwerden, Atemprobleme, Magenbeschwerden, Muskelschmerzen,     Schwächegefühl, Schweregefühl, Unwohlsein usw.",
+                    "m_norm": [0.23, 0.32],
+                    "sd_norm": [0.31, 0.33],
+                    "score_path": "calculation.all_results.somatisierung_z_score",
+                    "items": 7
+                }]' ranges='[{
+  "range_start": -999,
+  "range_stop": -2,
+  "color": "#F44336"
+},{
+  "range_start": -1,
+  "range_stop": 1.5,
+  "color": "#4CAF50"
+},{
+  "range_start": 4.6,
+  "range_stop": 999,
+  "color": "#F44336"
+}]' scores="[[survey_responses]]">
+            </optinomic-chart-profile>
         </div>
         <div class="">
             <h1>[[params.appName]]</h1>
             <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[patient.data.last_name]] [[patient.data.first_name]]</p>
-            <div class="circle">[[params.patientID]]</div>
+            <optinomic-patient-details patient="[[patient.data]]" language="de"></optinomic-patient-details>
         </div>
         <div class="Data">
-          <h1>Data</h1>
-          <h3>survey_responses</h3>
-          <show-json json='[[survey_responses]]'></show-json>
-          <h3>stays</h3>
-          <show-json json='[[stays]]'></show-json>
-          <h3>patient</h3>
-          <show-json json='[[patient]]'></show-json>
-          <h3>apps</h3>
-          <show-json json='[[apps]]'></show-json>
+            <h1>Data</h1>
+            <h3>survey_responses</h3>
+            <show-json json='[[survey_responses]]'></show-json>
+            <h3>stays</h3>
+            <show-json json='[[stays]]'></show-json>
+            <h3>patient</h3>
+            <show-json json='[[patient]]'></show-json>
+            <h3>apps</h3>
+            <show-json json='[[apps]]'></show-json>
         </div>
         <div id="container">
             <paper-button on-tap="debugdoc" class="pink">Debug</paper-button>
