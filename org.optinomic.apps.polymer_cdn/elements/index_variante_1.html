@@ -272,8 +272,8 @@ body {
         </div>
         <div>
             <template is="dom-if" if="[[survey_responses.data]]">
-                <optinomic-chart-profile options='{
-                    "min": -5,
+                <optinomic-chart-profile language="en" options='{
+                    "min": "auto",
                     "max": "auto",
                     "item_height": 92,
                     "item_text_left": 100,
@@ -282,7 +282,7 @@ body {
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
@@ -291,10 +291,10 @@ body {
                     "response_date_path": "calculation.info.filled"
                 }' start='{
                   "left_title": "Geringe Ausprägung",
-                  "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
+                  "left_text": "Dies ist eine längere Beschreibung bzgl. der geringen Ausprägung.",
                   "left_color": "#4CAF50",
                   "right_title": "Starke Ausprägung",
-                  "right_text": "Eine längere Beschreibung bzgl. der starken Ausprägung.",
+                  "right_text": "Eine weitere längere Beschreibung bzgl. der starken Ausprägung.",
                   "right_color": "#F44336"
                 }' scales='[{
                     "left_title": "Somatisierung",
@@ -411,7 +411,7 @@ body {
   "range_start": 4,
   "range_stop": 999,
   "text": "Auffällig in Bezug auf Persönlichkeitsverändungen",
-  "color": "#FF5722"
+  "color": "#9C27B0"
 }]' scores="[[survey_responses]]" clinic_sample_dive='[5, 2, 4]' clinic_samples='include(includes/ks_current.json)'>
                 </optinomic-chart-profile>
             </template>
