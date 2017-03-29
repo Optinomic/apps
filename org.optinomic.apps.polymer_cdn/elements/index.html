@@ -1,4 +1,4 @@
-<base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.13/lib/">
+<base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.14/lib/">
 <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
 <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -278,18 +278,22 @@ body {
         </div>
         <div>
             <optinomic-chart-profile options='{
-                "min": -4,
-                "max": "auto",
-                "item_height": 50,
-                "item_text_width": 120,
-                "color_grid": "#9E9E9E",
-                "show_baseline": false,
-                "range_alpha": 0.1,
-                "vertical_grid_every_x": 1,
-                "response_title_path": "calculation.info.mz.mz_typ",
-                "response_date_path": "calculation.info.filled",
-                "all_profiles": true
-            }' start='{
+                    "min": "auto",
+                    "max": "auto",
+                    "item_height": 50,
+                    "item_text_width": 120,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": false,
+                    "show_scale_text": false,
+                    "show_score_vertical_line": false,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "calculation.info.mz.mz_typ",
+                    "response_date_path": "calculation.info.filled"
+                }' start='{
                   "left_title": "Geringe Ausprägung",
                   "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
                   "left_color": "#4CAF50",
@@ -302,20 +306,14 @@ body {
                     "left_text": "GSI (Global Severity Index)",
                     "right_title": "GSI (Global Severity Index)",
                     "right_text": "Durchschnittliche Belastung in allen Bereichen",
-                    "m_norm": [0.28, 0.35],
-                    "sd_norm": [0.23, 0.23],
-                    "score_path": "calculation.all_results.gsi_global_severity_index_z_score",
-                    "items": 53
+                    "score_path": "calculation.all_results.gsi_global_severity_index_z_score"
                 }, {
                     "id": 1,
                     "left_title": "Psychotizismus",
                     "left_text": "Psychotizismus",
                     "right_title": "Psychotizismus",
-                    "right_text": "Gefühl der Isolation und zwischenmenschlichen Entfremdung. Verzerrter, isolierter Lebensstil     bis zu Halluzination und Gedankenzerfall.",
-                    "m_norm": [0.19, 0.19],
-                    "sd_norm": [0.28, 0.27],
-                    "score_path": "calculation.all_results.psychotizismus_z_score",
-                    "items": 5
+                    "right_text": "Gefühl der Isolation und zwischenmenschlichen Entfremdung. Verzerrter, isolierter Lebensstil bis zu Halluzination und Gedankenzerfall.",
+                    "score_path": "calculation.all_results.psychotizismus_z_score"
                 }, {
                     "id": 2,
                     "left_title": "Paranoides Denken",
