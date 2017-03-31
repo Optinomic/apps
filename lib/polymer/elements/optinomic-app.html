@@ -91,8 +91,8 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 </div>
             </app-drawer>
             <!-- Main content -->
-            <app-header-layout fullbleed effects="waterfall">
-                <app-header condenses fixed effects="waterfall">
+            <app-header-layout fullbleed>
+                <app-header condenses fixed>
                     <app-toolbar>
                         <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
                         <div main-title>Optionmic App </div>
@@ -111,6 +111,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
+        <div data-iframe-height>&nbsp;</div>
     </template>
     <script>
     Polymer({
@@ -143,9 +144,11 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
         _pageChanged: function(page) {
             // Load page import on demand. Show 404 page if fails
-            var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '.html');
-            this.importHref(resolvedPageUrl, null, this._showPage404, true);
-            //console.log('_pageChanged', page);
+            if (page != 'template') {
+                var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            };
+            console.log('_pageChanged', page);
         },
 
         _showPage404: function() {
