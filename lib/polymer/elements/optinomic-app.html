@@ -85,7 +85,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                     <iron-selector selected="{{page}}" attr-for-selected="name" class="drawer-list" role="navigation">
                         <a name="readme">Readme</a>
                         <a name="template">App-Template</a>
-                        <a name="settings">Settings</a>
+                        <a name="avatar">Avatar</a>
                         <a name="admin">Admin</a>
                     </iron-selector>
                 </div>
@@ -101,15 +101,14 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <optinomic-readme name="readme"></optinomic-readme>
+                    <optinomic-avatar name="avatar" firstname="Max" lastname="Muster" gender="male" birthdate="1993-05-21T00:00:00.000000000000Z"></optinomic-avatar>
                     <optinomic-template name="template"></optinomic-template>
-                    <optinomic-settings name="settings"></optinomic-settings>
                     <optinomic-admin name="admin"></optinomic-admin>
                     <optinomic-404 name="404"></optinomic-404>
                 </iron-pages>
                 <div>
                     <p>Hallo! :-)</p>
                 </div>
-                <div data-iframe-height>&nbsp;</div>
             </app-header-layout>
         </app-drawer-layout>
     </template>
@@ -145,7 +144,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         _pageChanged: function(page) {
             // Load page import on demand. Show 404 page if fails
             if (page != 'template') {
-                var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '.html');
+                var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '/optinomic-' + page + '.html');
                 this.importHref(resolvedPageUrl, null, this._showPage404, true);
             };
             console.log('_pageChanged', page);
