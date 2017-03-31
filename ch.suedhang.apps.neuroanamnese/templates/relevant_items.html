@@ -42,7 +42,9 @@ item {
 },{
     etc.
 }
--->
+
+
+NORA: 
 <div>
     <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">
@@ -67,5 +69,20 @@ item {
                     <p> Es sind keine neurologischen Auffälligkeiten vorhanden.
                 </div>
 
-
+BEAT:
+-->
+<div ng-repeat="resp in d.dataMain.survey_responses">
+    <h3 ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">Eintritt</h3>
+    <h3 ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'" class="md-subhead">Austritt</h3>
+    <!--  NeuroAnamEin  -->
+    <div ng-if="resp.entity.data.response.NeuroAnamEin_SQ001 == '0'">
+        <p>Es sind keine neurologischen Auffälligkeiten vorhanden.</p>
+    </div>
+    <div ng-if="resp.entity.data.response.NeuroAnamEin_SQ001 == '1'">
+        <p>Aussage irgendwas.</p>
+    </div>
+    <div ng-if="(resp.entity.data.response.NeuroAnamEin_SQ001 == '0') && (resp.entity.data.response.NeuroAnamEin_SQ002 == '0') && (resp.entity.data.response.NeuroAnamEin_SQ003 == '0')">
+        <p>Alle sind 0</p>
+    </div>
+</div>
 include(../lib/html/optinomic/page/end.m4)
