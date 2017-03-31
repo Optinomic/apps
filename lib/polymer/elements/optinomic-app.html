@@ -1,0 +1,161 @@
+<!--
+@license
+Copyright (c) 2017 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../app-layout/app-header/app-header.html">
+<link rel="import" href="../app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+<link rel="import" href="my-icons.html">
+<dom-module id="optinomic-app">
+    <template>
+        <style is="custom-style">
+        :host {
+            --app-primary-color: #FAFAFA;
+            --app-secondary-color: #424242;
+            --drawer-primary-color: #424242;
+            --drawer-secondary-color: #EEEEEE;
+        }
+        
+        app-header {
+            @apply(--layout-fixed-top);
+            color: var(--app-secondary-color);
+            background-color: var(--app-primary-color);
+            --app-header-background-rear-layer: {
+                background-color: #F5F5F5;
+            }
+        }
+        
+        app-header paper-icon-button {
+            color: #757575;
+            --paper-icon-button-ink-color: var(--app-secondary-color);
+        }
+        
+        app-header paper-icon-button:hover {
+            color: var(--app-secondary-color);
+        }
+        
+        app-drawer {
+            --app-drawer-scrim-background: rgba(0, 0, 0, 0.6);
+            --app-drawer-width: 256px;
+            --app-drawer-content-container: {
+                background-color: var(--drawer-primary-color);
+                color: var(--drawer-secondary-color);
+            }
+        }
+        
+        paper-icon-button + [main-title] {
+            margin-left: 24px;
+        }
+        
+        paper-progress {
+            display: block;
+            width: 100%;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+        
+        .drawer-list {
+            margin: 0 20px;
+        }
+        
+        .drawer-list a {
+            display: block;
+            padding: 0 16px;
+            text-decoration: none;
+            color: var(--drawer-secondary-color);
+            line-height: 40px;
+        }
+        
+        .drawer-list a.iron-selected {
+            color: var(--drawer-secondary-color);
+            font-weight: bold;
+        }
+        </style>
+        <app-drawer-layout fullbleed force-narrow>
+            <!-- Drawer content -->
+            <app-drawer id="drawer" swipe-open>
+                <div style="height: 100%; overflow: auto;">
+                    <app-toolbar>Menu</app-toolbar>
+                    <iron-selector selected="{{page}}" attr-for-selected="name" class="drawer-list" role="navigation">
+                        <a name="readme">Readme</a>
+                        <a name="template">App-Template</a>
+                        <a name="settings">Settings</a>
+                        <a name="admin">Admin</a>
+                    </iron-selector>
+                </div>
+            </app-drawer>
+            <!-- Main content -->
+            <app-header-layout fullbleed effects="waterfall">
+                <app-header condenses fixed effects="waterfall">
+                    <app-toolbar>
+                        <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+                        <div main-title>Optionmic App </div>
+                        <paper-progress value="90" indeterminate bottom-item></paper-progress>
+                    </app-toolbar>
+                </app-header>
+                <div>
+                    <p>Hallo! :-)</p>
+                </div>
+                <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+                    <optinomic-readme name="readme"></optinomic-readme>
+                    <optinomic-template name="template"></optinomic-template>
+                    <optinomic-settings name="settings"></optinomic-settings>
+                    <optinomic-admin name="admin"></optinomic-admin>
+                    <optinomic-404 name="404"></optinomic-404>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app',
+
+        properties: {
+            page: {
+                type: String,
+                reflectToAttribute: true,
+                observer: '_pageChanged',
+            },
+        },
+
+        observers: [
+            '_viewPageChanged(page)',
+        ],
+
+        _init: function() {
+            this._viewPageChanged();
+        },
+
+        _viewPageChanged: function(page) {
+            this.page = page || 'template';
+
+            if (!this.$.drawer.persistent) {
+                this.$.drawer.close();
+            }
+            // console.log('_viewPageChanged', page);
+        },
+
+        _pageChanged: function(page) {
+            // Load page import on demand. Show 404 page if fails
+            var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '.html');
+            this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            //console.log('_pageChanged', page);
+        },
+
+        _showPage404: function() {
+            this.page = '404';
+        },
+
+        ready: function() {
+            this._init();
+        },
+    });
+    </script>
+</dom-module>
