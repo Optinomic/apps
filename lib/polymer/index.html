@@ -1,8 +1,3 @@
-<!--
-@license
-Copyright (c) 2017 Optinomic. All rights reserved.
--->
-
 <head>
     <meta charset="utf-8">
     <meta name="generator" content="Polymer Starter Kit">
@@ -12,10 +7,6 @@ Copyright (c) 2017 Optinomic. All rights reserved.
     <base href="include(definitions/basepath)">
     <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
-    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
-    <script src="redux/dist/redux.min.js"></script>
-    <script src="redux-thunk/dist/redux-thunk.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
     <script>
     // Setup Polymer options
     window.Polymer = {
@@ -44,6 +35,7 @@ Copyright (c) 2017 Optinomic. All rights reserved.
             'registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')
         );
 
+        console.log('Supported :: webComponents', webComponentsSupported);
         if (!webComponentsSupported) {
             var script = document.createElement('script');
             script.async = true;
@@ -72,4 +64,8 @@ Copyright (c) 2017 Optinomic. All rights reserved.
     }
     </style>
 </head>
+<script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+<script src="redux/dist/redux.min.js"></script>
+<script src="redux-thunk/dist/redux-thunk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
 include(../lib/polymer/elements/optinomic-app.html)
