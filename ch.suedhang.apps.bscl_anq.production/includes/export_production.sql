@@ -25,6 +25,10 @@ SELECT
   ((cast(response AS json))->>'q501V05') as dropoutcode_bscl,
   ((cast(response AS json))->>'q501V06') as spezifikation_dropout_bscl_andere,
   TO_CHAR(TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD'), 'YYYYMMDD')  as datum_erhebung_bscl,
+  TO_CHAR((stay.start), 'YYYYMMDD') as Eintritt,
+  TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date - stay.start::date as Differenz_Eintritt,
+  TO_CHAR((stay.stop), 'YYYYMMDD') as Austritt,
+  stay.stop::date - TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date as Differenz_Austritt,
   ((cast(response AS json))->>'BSCL[sq504V01]') as bscl_b1,
   ((cast(response AS json))->>'BSCL[sq504V02]') as bscl_b2,
   ((cast(response AS json))->>'BSCL[sq504V03]') as bscl_b3,
@@ -78,8 +82,6 @@ SELECT
   ((cast(response AS json))->>'BSCL[sq504V51]') as bscl_b51,
   ((cast(response AS json))->>'BSCL[sq504V52]') as bscl_b52,
   ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_b53
-
-
 
 
 FROM "survey_response_view" 
