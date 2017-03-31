@@ -79,7 +79,25 @@ SELECT
   ((cast(response AS json))->>'BSCL[sq504V52]') as bscl_b52,
   ((cast(response AS json))->>'BSCL[sq504V53]') as bscl_b53
 
+
+
+
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 WHERE module = 'ch.suedhang.apps.bscl_anq.production' AND ((cast(response AS json))->>'q501V04') != '3';
+
+/*
+CASE WHEN ((cast(response AS json))->>'VNEB066') = '999' THEN '-1' WHEN ((cast(response AS json))->>'VNEB066') = '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VNEB066') END as vneb066,
+ 
+, CASE  WHEN (((cast(response AS json))->>'q501V04') == '1') 
+          AND (TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date - stay.start::date) > 2 
+          AND (TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date - stay.start::date) < 0 
+        THEN TO_CHAR((stay.start), 'YYYYMMDD')  
+        WHEN (((cast(response AS json))->>'q501V04') == '2')
+          AND (stay.stop::date - TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date) > 2 
+          AND (stay.stop::date - TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD')::date) < 0 
+        THEN TO_CHAR((stay.stop), 'YYYYMMDD')
+        ELSE TO_CHAR(TO_DATE(((cast(response AS json))->>'q504V00'), 'YYYY-MM-DD'), 'YYYYMMDD')
+        END as Erhebung
+*/
