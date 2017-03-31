@@ -21,7 +21,53 @@ website = http://www.optinomic.com/
 [template main 6 7]
 include(../lib/polymer/index.html)
 include(elements/view.html)
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
+	<div><p>1</p></div>
 include(../lib/polymer/templates/template_end.m4)
+
 
 
 [javascript]
