@@ -99,9 +99,6 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                         <paper-progress value="90" indeterminate bottom-item></paper-progress>
                     </app-toolbar>
                 </app-header>
-                <div>
-                    <p>Hallo! :-)</p>
-                </div>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <optinomic-readme name="readme"></optinomic-readme>
                     <optinomic-template name="template"></optinomic-template>
@@ -109,6 +106,10 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                     <optinomic-admin name="admin"></optinomic-admin>
                     <optinomic-404 name="404"></optinomic-404>
                 </iron-pages>
+                <div>
+                    <p>Hallo! :-)</p>
+                </div>
+                <div data-iframe-height>&nbsp;</div>
             </app-header-layout>
         </app-drawer-layout>
     </template>

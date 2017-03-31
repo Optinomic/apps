@@ -11,6 +11,7 @@
     <script src="redux/dist/redux.min.js"></script>
     <script src="redux-thunk/dist/redux-thunk.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
+    include(../lib/polymer/styles/shared-styles.m4) include(../lib/polymer/elements/optinomic-app.html)
     <script>
     // Setup Polymer options
     window.Polymer = {
@@ -51,7 +52,5 @@
         }
     })();
     </script>
-    include(../lib/polymer/styles/shared-styles.m4)
 </head>
-include(../lib/polymer/elements/optinomic-app.html)
 <optinomic-app name="main"></optinomic-app>
