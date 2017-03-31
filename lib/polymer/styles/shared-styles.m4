@@ -5,7 +5,7 @@
         body {
             display: block;
             margin: 0;
-            min-height: 100vh;
+            min-height: 100%;
             background-color: #FFFFFF;
             font-family: 'Roboto', 'Noto', sans-serif;
             line-height: 1.5;
