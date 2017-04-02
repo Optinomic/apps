@@ -2,7 +2,7 @@
 @license
 Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 -->
-<link rel="import" href="polymer/polymer.html">
+<link rel="import" href="polymer/polymer.html"> include(../lib/polymer/elements/optinomic-redux-store.html)
 <link rel="import" href="app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="app-layout/app-header/app-header.html">
@@ -12,7 +12,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 <link rel="import" href="iron-pages/iron-pages.html">
 <link rel="import" href="iron-selector/iron-selector.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
-<link rel="import" href="paper-progress/paper-progress.html"> include(../lib/polymer/elements/optinomic-redux-store.html)
+<link rel="import" href="paper-progress/paper-progress.html">
 <dom-module id="optinomic-app" include="shared-styles">
     <template>
         <style is="custom-style">
@@ -109,6 +109,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 </iron-pages>
                 <div>
                     <paper-icon-button on-tap="logState" icon="favorite"></paper-icon-button>
+                    <paper-icon-button on-tap="refresh_data" icon="star"></paper-icon-button>
                 </div>
                 <div data-iframe-height>&nbsp;</div>
             </app-header-layout>
@@ -130,7 +131,8 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             '_viewPageChanged(page)',
         ],
 
-        behaviors: [ReduxBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
 
         _init: function() {
             this._viewPageChanged();
@@ -158,14 +160,29 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             this.page = '404';
         },
 
-        ready: function() {
-            this._init();
-        },
-
         logState: function() {
             var state = this.getState();
             console.log('(✔) state', state);
         },
+
+        refresh_data: function() {
+            // loadData
+
+            //setRequestGetSurveyResponses('ch.suedhang.apps.bdi');
+            setRequestGetSurveyResponses('ch.suedhang.apps.bscl_anq');
+
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+            this.dispatch('actionGetSurveyResponses');
+            this.dispatch('actionGetCurrentUser');
+            this.dispatch('actionGetClinic');
+            this.dispatch('actionGetApps');
+        },
+
+        ready: function() {
+            this._init();
+        },
+
     });
     </script>
 </dom-module>

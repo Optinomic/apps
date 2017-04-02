@@ -1,9 +1,13 @@
 <head>
     <base href="include(definitions/basepath)">
     <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500"> include(../lib/polymer/styles/shared-styles.m4)
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
     <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+    <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="redux/dist/redux.min.js"></script>
+    <script src="redux-thunk/dist/redux-thunk.min.js"></script>
+    include(../lib/polymer/styles/shared-styles.m4)
     <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
     :host {
         display: block;
@@ -24,7 +28,4 @@
 </head>
 include(../lib/polymer/elements/optinomic-app.html)
 <optinomic-app name="main"></optinomic-app>
-<script src="webcomponentsjs/webcomponents-lite.min.js"></script>
-<script src="redux/dist/redux.min.js"></script>
-<script src="redux-thunk/dist/redux-thunk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.contentWindow.min.js"></script>
