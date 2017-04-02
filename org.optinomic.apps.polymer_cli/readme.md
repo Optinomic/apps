@@ -1,6 +1,5 @@
 
 
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 ## Die Depressions-Angst-Stress-Skalen.
 
 Der DASS – ein Screeningverfahren nicht nur für Schmerzpatienten
@@ -82,9 +81,6 @@ Schmerz · Sensitivität · Spezifität
 - [German translation of the DASS21.](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Nilges%20Essau.htm)
 
 - [Article published in Schmerz 2015 describing development of the German translation of the DASS21.](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/Nilges%20Essau%20DASS%20Schmerz%202015.pdf)
-
-
-
 
 
 
