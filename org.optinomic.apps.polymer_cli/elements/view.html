@@ -12,6 +12,14 @@
             <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
             <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
         </div>
+        <template is="dom-if" if="[[_clinic]]">
+            <h1>[[clinic_name]]</h1>
+            <p>[[clinic_slogan]]</p>
+            <p>[[clinic_address]]</p>
+            <h2>[[admin_name]]</h2>
+            <p>[[admin_phone]]</p>
+            <p>[[admin_email]]</p>
+        </template>
         <div class="card">
             <div class="circle">1</div>
             <h1>View One</h1>
@@ -28,6 +36,15 @@
     <script>
     Polymer({
         is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior],
+
+        properties: {
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            }
+        }
     });
     </script>
 </dom-module>
