@@ -97,7 +97,9 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div main-title>Optionmic App </div>
-                        <paper-progress value="90" indeterminate bottom-item></paper-progress>
+                        <template is="dom-if" if="[[_loading]]">
+                            <paper-progress value="90" indeterminate bottom-item></paper-progress>
+                        </template>
                     </app-toolbar>
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
@@ -124,6 +126,10 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 type: String,
                 reflectToAttribute: true,
                 observer: '_pageChanged',
+            },
+            _loading: {
+                type: Boolean,
+                statePath: 'loading'
             },
         },
 
