@@ -13,12 +13,12 @@
             <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
         </div>
         <template is="dom-if" if="[[_clinic]]">
-            <h1>[[clinic_name]]</h1>
-            <p>[[clinic_slogan]]</p>
-            <p>[[clinic_address]]</p>
-            <h2>[[admin_name]]</h2>
-            <p>[[admin_phone]]</p>
-            <p>[[admin_email]]</p>
+            <h1>Clinic :: [[_clinic.clinic_name]]</h1>
+            <p>[[_clinic.clinic_slogan]]</p>
+            <p>[[_clinic.clinic_address]]</p>
+            <h2>[[_clinic.admin_name]]</h2>
+            <p>[[_clinic.admin_phone]]</p>
+            <p>[[_clinic.admin_email]]</p>
         </template>
         <div class="card">
             <div class="circle">1</div>
