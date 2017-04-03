@@ -60,7 +60,7 @@ Schmerz · Sensitivität · Spezifität
 
 ### Test
 
-Dies ist `Javascript - Code:
+Dies ist `Javascript` - Code:
 ```JS
     debugdoc: function() {
         console.log('___________________________________');
@@ -74,7 +74,7 @@ Dies ist `Javascript - Code:
     },
 ```
 
-Dies ist `HTML - Code:
+Dies ist `HTML` - Code:
 ```HTML
 <template is="dom-if" if="[[_clinic]]">
     <h1>[[_clinic.clinic_name]]</h1>
