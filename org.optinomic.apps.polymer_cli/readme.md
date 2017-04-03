@@ -58,14 +58,6 @@ nur wenig erforschter Aspekt erfasst.
 Fragebögen · Psychische Belastung ·
 Schmerz · Sensitivität · Spezifität
 
-### Test
-
-Dies ist `HTML` - Code:
-
-```html
-  <h1>Hallo</h1>
-  <p>Ich wünsche Dir einen wunderschönen Tag mit viel Sonne im Herzen.</p>
-```
 
 
 ### Auswertung / Interpretation
