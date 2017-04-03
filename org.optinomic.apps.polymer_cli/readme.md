@@ -1,11 +1,10 @@
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 
-## Die Depressions-Angst-Stress-Skalen.
+# Die Depressions-Angst-Stress-Skalen.
 
 Der DASS – ein Screeningverfahren nicht nur für Schmerzpatienten
 
-#### Zusammenfassung
-###### Hintergrund
+## Zusammenfassung
+### Hintergrund
 Die Erfassung psychischer Belastung hat einen zentralen Stellenwert in der Schmerzforschung und -behandlung. Für Depression als Komorbidität bei Schmerz bestehen dabei besondere methodische und konzeptionelle Schwierigkeiten. Überprüft wurden die psychometrischen Eigenschaften
 der deutschsprachigen Kurzfassung der
 Depressions-Angst-Stress-Skalen (DASS). Das
@@ -17,7 +16,7 @@ werden und sich die Fragen auf psychologische
 Kernaspekte von Depression,
 Angst und Stress konzentrieren.
 
-###### Methode
+### Methode
 Die psychometrischen Eigenschaften
 des Instrumentes wurden bei Patienten
 mit Schmerz und bei verschiedenen
@@ -32,7 +31,7 @@ wurden anhand eines strukturierten klinischen
 Interviews für DSM-IV (SKID) ermittelt
 und ebenfalls mit ADS und HADS verglichen.
 
-###### Ergebnisse
+### Ergebnisse
 Cronbachs α für die Depressionsskala
 war mindestens 0,91, die Werte
 der Angst- und Stressskala für die revidierte
@@ -43,7 +42,7 @@ mit 21 Items. Sensitivität und Spezifität bei
 der Klassifikation klinischer Fälle sind besser
 als beim HADS.
 
-###### Diskussion
+### Diskussion
 Der DASS ist eine zuverlässige
 und ökonomisch sowohl hinsichtlich Zeitaufwand
 als auch Kosten (das Verfahren ist lizenzfrei)
@@ -55,21 +54,49 @@ und therapeutisch gerade für Patienten
 mit Schmerzen interessanter und bisher
 nur wenig erforschter Aspekt erfasst.
 
-###### Schlüsselwörter
+### Schlüsselwörter
 Fragebögen · Psychische Belastung ·
 Schmerz · Sensitivität · Spezifität
 
+### Test
+
+Dies ist `Javascript - Code:
+```JS
+    debugdoc: function() {
+        console.log('___________________________________');
+        console.log('- clinic:', this.clinic);
+        console.log('- user:', this.user);
+        console.log('- patient:', this.patient);
+        console.log('- stays:', this.stays);
+        console.log('- apps:', this.apps);
+        console.log('- survey_responses:', this.survey_responses);
+        console.log("___________________________________");
+    },
+```
+
+Dies ist `HTML - Code:
+```HTML
+<template is="dom-if" if="[[_clinic]]">
+    <h1>[[_clinic.clinic_name]]</h1>
+    <p>[[_clinic.clinic_slogan]]</p>
+    <p>[[_clinic.clinic_address]]</p>
+    <h2>[[_clinic.admin_name]]</h2>
+    <p>[[_clinic.admin_phone]]</p>
+    <p>[[_clinic.admin_email]]</p>
+</template>
+```
 
 
-###### Auswertung / Interpretation
+
+### Auswertung / Interpretation
 - [Auswertung](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Auswertung.pdf)
 
 
-###### Fragebogen / Printversion
+### Fragebogen / Printversion
 - [DASS21-G Nilges, Essau, 2015](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21.pdf)
 
 
-###### Weiterführende Links
+### Weiterführende Links
 - [DASS Homepage](http://www.psy.unsw.edu.au/dass/)
 
 - [German translation of the DASS21.](http://www2.psy.unsw.edu.au/groups/dass/German/DASS21%20Nilges%20&%20Essau/German%20DASS21%20Nilges%20Essau.htm)
@@ -78,7 +105,10 @@ Schmerz · Sensitivität · Spezifität
 
 
 
-### Anschrift
+# Anschrift
+
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
+
 *Optinomic GmbH*   
 *Haldenstrasse 7*     
 *CH - 8942 Oberrieden*     
