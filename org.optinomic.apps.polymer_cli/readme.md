@@ -70,7 +70,7 @@ Dies ist `Javascript - Code:
         console.log('- stays:', this.stays);
         console.log('- apps:', this.apps);
         console.log('- survey_responses:', this.survey_responses);
-        console.log("___________________________________");
+        console.log('___________________________________');
     },
 ```
 
