@@ -62,8 +62,8 @@ Schmerz · Sensitivität · Spezifität
 
 Dies ist `HTML` - Code:
 
-```HTML
-<template is="dom-if" if="[[_clinic]]">
+```html
+<template is='dom-if' if='[[_clinic]]'>
     <h1>[[_clinic.clinic_name]]</h1>
     <p>[[_clinic.clinic_slogan]]</p>
     <p>[[_clinic.clinic_address]]</p>
