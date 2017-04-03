@@ -1,4 +1,4 @@
-
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 
 ## Die Depressions-Angst-Stress-Skalen.
 
@@ -6,13 +6,7 @@ Der DASS – ein Screeningverfahren nicht nur für Schmerzpatienten
 
 #### Zusammenfassung
 ###### Hintergrund
-Die Erfassung psychischer Belastung
-hat einen zentralen Stellenwert in der
-Schmerzforschung und -behandlung. Für Depression
-als Komorbidität bei Schmerz bestehen
-dabei besondere methodische und
-konzeptionelle Schwierigkeiten. Überprüft
-wurden die psychometrischen Eigenschaften
+Die Erfassung psychischer Belastung hat einen zentralen Stellenwert in der Schmerzforschung und -behandlung. Für Depression als Komorbidität bei Schmerz bestehen dabei besondere methodische und konzeptionelle Schwierigkeiten. Überprüft wurden die psychometrischen Eigenschaften
 der deutschsprachigen Kurzfassung der
 Depressions-Angst-Stress-Skalen (DASS). Das
 Verfahren wird in der Schmerzforschung und
@@ -84,7 +78,7 @@ Schmerz · Sensitivität · Spezifität
 
 
 
-###Anschrift
+### Anschrift
 *Optinomic GmbH*   
 *Haldenstrasse 7*     
 *CH - 8942 Oberrieden*     
