@@ -63,16 +63,9 @@ Schmerz · Sensitivität · Spezifität
 Dies ist `HTML` - Code:
 
 ```html
-<template is='dom-if' if='[[_clinic]]'>
-    <h1>[[_clinic.clinic_name]]</h1>
-    <p>[[_clinic.clinic_slogan]]</p>
-    <p>[[_clinic.clinic_address]]</p>
-    <h2>[[_clinic.admin_name]]</h2>
-    <p>[[_clinic.admin_phone]]</p>
-    <p>[[_clinic.admin_email]]</p>
-</template>
+  <h1>Hallo</h1>
+  <p>Ich wünsche Dir einen wunderschönen Tag mit viel Sonne im Herzen.</p>
 ```
-
 
 
 ### Auswertung / Interpretation
