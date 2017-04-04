@@ -12,10 +12,10 @@
             <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
         </div>
         <template is="dom-if" if="[[!_sr_bscl]]">
-            <p>Keine Survey-Response-Daten vorhanden.</p>
+            <h2>Keine BSCL-Daten vorhanden.  :-(</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <p>Survey-Response-Daten vorhanden.</p>
+            <h2>BSCL | Survey-Response-Daten sind vorhanden!  :-)</h2>
             <template is="dom-repeat" items="[[_sr_bscl.data]]" as="sr">
                 <p>sr:: [[sr.date]] | pid=[[sr.patient_id]] | fid=[[sr.stay_id]] | event_id=[[sr.event_id]] | response_id=[[sr.response_id]] | patient_uses_module_id=[[sr.patient_uses_module_id]]</p>
             </template>
