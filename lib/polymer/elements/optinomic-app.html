@@ -174,13 +174,12 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         refresh_data: function() {
             // loadData
 
-            //setRequestGetSurveyResponses('ch.suedhang.apps.bdi');
-            // setRequestGetSurveyResponses('ch.suedhang.apps.bscl_anq');
-
+            this.dispatch('actionGetCurrentUser');
             this.dispatch('actionGetCurrentPatient');
             this.dispatch('actionGetCurrentPatientStays');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
-            this.dispatch('actionGetCurrentUser');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
+            this.dispatch('actionGetSurveyResponses');
             this.dispatch('actionGetClinic');
             this.dispatch('actionGetApps');
         },
