@@ -11,18 +11,13 @@
             <h1>Dies ist das Template der APP!</h1>
             <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
         </div>
-        <template is="dom-if" if="[[!_sr]]">
+        <template is="dom-if" if="[[!_sr_bscl]]">
             <p>Keine Survey-Response-Daten vorhanden.</p>
         </template>
-        <template is="dom-if" if="[[_sr]]">
-            <p>Survey-Response-Daten vorhanden.</p>
-            <template is="dom-repeat" items="[[_sr['ch.suedhang.apps.bscl_anq'].data]]" as="sr">
-                <p>sr:: [[sr.date]] | pid=[[sr.patient_id]] | fid=[[sr.stay_id]] | event_id=[[sr.event_id]] | response_id=[[sr.response_id]] | patient_uses_module_id=[[sr.patient_uses_module_id]]</p>
-            </template>
-        </template>
         <template is="dom-if" if="[[_sr_bscl]]">
+            <p>Survey-Response-Daten vorhanden.</p>
             <template is="dom-repeat" items="[[_sr_bscl.data]]" as="sr">
-                <p>[[sr.date]] | pid=[[sr.patient_id]] | fid=[[sr.stay_id]] | event_id=[[sr.event_id]] | response_id=[[sr.response_id]] | patient_uses_module_id=[[sr.patient_uses_module_id]]</p>
+                <p>sr:: [[sr.date]] | pid=[[sr.patient_id]] | fid=[[sr.stay_id]] | event_id=[[sr.event_id]] | response_id=[[sr.response_id]] | patient_uses_module_id=[[sr.patient_uses_module_id]]</p>
             </template>
         </template>
         <template is="dom-if" if="[[_clinic]]">
@@ -47,11 +42,14 @@
             },
             _sr_bscl: {
                 type: Object,
-                statePath: 'survey_responses.data["ch.suedhang.apps.bscl_anq"]'
-            },
-            _sr: {
-                type: Object,
-                statePath: 'survey_responses.data'
+                statePath: function(state) {
+                    var app_id = 'ch.suedhang.apps.bscl_anq'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[app_id]
+                    } else {
+                        return null
+                    };
+                }
             }
         }
     });
