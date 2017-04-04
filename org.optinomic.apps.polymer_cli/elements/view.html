@@ -12,9 +12,11 @@
             <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
             <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
         </div>
+        <!--
         <template is="dom-repeat" items="[[_sr_bscl.data]]" as="sr">
             <p>[[sr.date]] | pid=[[sr.patient_id]] | fid=[[sr.stay_id]] | event_id=[[sr.event_id]] | response_id=[[sr.response_id]] | patient_uses_module_id=[[sr.patient_uses_module_id]]</p>
         </template>
+        -->
         <template is="dom-if" if="[[_clinic]]">
             <h1>[[_clinic.clinic_name]]</h1>
             <p>[[_clinic.clinic_slogan]]</p>
@@ -34,10 +36,6 @@
             _clinic: {
                 type: String,
                 statePath: 'clinic.data'
-            },
-            _sr_bscl: {
-                type: Object,
-                statePath: 'survey_responses.data["ch.suedhang.apps.bscl_anq"]'
             }
         }
     });
