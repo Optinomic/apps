@@ -13,14 +13,15 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 <link rel="import" href="iron-selector/iron-selector.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-progress/paper-progress.html">
-<dom-module id="optinomic-app" include="shared-styles">
+<dom-module id="optinomic-app">
     <template>
-        <style is="custom-style">
+        <style is="custom-style" include="shared-styles">
         :host {
             --app-primary-color: #FAFAFA;
             --app-secondary-color: #424242;
             --drawer-primary-color: #424242;
             --drawer-secondary-color: #EEEEEE;
+            padding: 6px;
         }
         
         app-header {
@@ -80,7 +81,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         </style>
         <app-drawer-layout fullbleed force-narrow>
             <!-- Drawer content -->
-            <app-drawer id="drawer" swipe-open>
+            <app-drawer id="drawer">
                 <div style="height: 100%; overflow: auto;">
                     <app-toolbar>Menu</app-toolbar>
                     <iron-selector selected="{{page}}" attr-for-selected="name" class="drawer-list" role="navigation">
