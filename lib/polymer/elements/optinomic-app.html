@@ -95,13 +95,20 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             <!-- Main content -->
             <app-header-layout fullbleed>
                 <app-header condenses fixed>
-                    <app-toolbar>
-                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <div main-title>Optionmic App </div>
+                    <template is="dom-if" if="[[_show_app_toolbar]]">
+                        <app-toolbar>
+                            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                            <div main-title>Optionmic App </div>
+                            <template is="dom-if" if="[[_loading]]">
+                                <paper-progress value="90" indeterminate bottom-item></paper-progress>
+                            </template>
+                        </app-toolbar>
+                    </template>
+                    <template is="dom-if" if="[[!_show_app_toolbar]]">
                         <template is="dom-if" if="[[_loading]]">
                             <paper-progress value="90" indeterminate bottom-item></paper-progress>
                         </template>
-                    </app-toolbar>
+                    </template>
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <optinomic-app-page-readme name="app-page-readme" markdown="include(readme.md)"></optinomic-app-page-readme>
@@ -132,6 +139,10 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             _loading: {
                 type: Boolean,
                 statePath: 'loading'
+            },
+            _show_app_toolbar: {
+                type: Boolean,
+                value: false
             },
         },
 
