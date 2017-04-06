@@ -13,7 +13,9 @@
             <h2>Keine BSCL-Daten vorhanden.  :-(</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_ohne_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            <h3>Optiions mit Scale-Text und horizontaler Linie</h3>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
             <h2>BSCL | Survey-Response-Daten sind vorhanden!  :-)</h2>
             <hr>
             <template is="dom-repeat" items="[[_sr_bscl.data]]" as="sr">
@@ -43,7 +45,7 @@
             var d = this.get('_d');
 
             d.bscl = {
-                "options": {
+                "options_text": {
                     "min": "auto",
                     "max": "auto",
                     "item_height": 75,
@@ -54,6 +56,24 @@
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": true,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "calculation.info.mz.mz_typ",
+                    "response_date_path": "calculation.info.filled"
+                },
+                "options_ohne_text": {
+                    "min": "auto",
+                    "max": "auto",
+                    "item_height": 50,
+                    "item_text_left": 150,
+                    "item_text_right": 150,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": false,
+                    "show_scale_text": false,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
