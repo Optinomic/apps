@@ -113,6 +113,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 <div>
                     <paper-icon-button on-tap="logState" icon="favorite"></paper-icon-button>
                     <paper-icon-button on-tap="refresh_data" icon="star"></paper-icon-button>
+                    <paper-icon-button on-tap="_drawerToggle" icon="menu"></paper-icon-button>
                 </div>
                 <div data-iframe-height>&nbsp;</div>
             </app-header-layout>
@@ -140,9 +141,17 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
+        listeners: {
+            'drawer-toggle': '_drawerToggle',
+        },
 
         _init: function() {
             this._viewPageChanged();
+        },
+
+        _drawerToggle: function() {
+            console.log('(FIRED) _drawerToggle');
+            this.$.drawer.togglePanel();
         },
 
         _viewPageChanged: function(page) {
