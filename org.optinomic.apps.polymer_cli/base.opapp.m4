@@ -22,6 +22,9 @@ website = http://www.optinomic.com/
 include(../lib/polymer/index_3.html)
 include(elements/view.html)
 
+[template profile_mit_text 6 7]
+include(../lib/polymer/index_3.html)
+include(elements/view_2.html)
 
 
 [javascript]
