@@ -13,7 +13,7 @@
             <h2>Keine BSCL-Daten vorhanden.  :-(</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <h3>Optiions mit Scale-Text und horizontaler Linie</h3>
+            <h3>Options mit Scale-Text und horizontaler Linie</h3>
             <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
             <h2>BSCL | Survey-Response-Daten sind vorhanden!  :-)</h2>
             <hr>
