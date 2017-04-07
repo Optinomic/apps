@@ -36,8 +36,14 @@
 
         behaviors: [ReduxBehavior],
 
+        __loadData: function() {
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
+        },
 
         __init: function() {
+
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
+
 
             this._d = this._d === undefined ? {} : this._d;
 
@@ -236,6 +242,7 @@
         },
 
         ready: function() {
+            this.__loadData();
             this.__init();
         }
     });
