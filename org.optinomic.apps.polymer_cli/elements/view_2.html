@@ -34,7 +34,7 @@
     Polymer({
         is: 'optinomic-template',
 
-        behaviors: [ReduxBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
         __loadData: function() {
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
