@@ -43,4 +43,5 @@ LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
 WHERE module = 'ch.suedhang.apps.honos.production' 
 AND ((cast(response AS json))->>'q401V04') != ''
 AND survey_response_view.patient_id != '1169'
-AND survey_response_view.patient_id != '387';
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1';
