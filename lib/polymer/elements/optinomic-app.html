@@ -174,8 +174,11 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         _pageChanged: function(page) {
             // Load page import on demand. Show 404 page if fails
             if (page != 'template') {
+                this.dispatch('actionShowAppToolbar', true);
                 var resolvedPageUrl = this.resolveUrl('optinomic-' + page + '/optinomic-' + page + '.html');
                 this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            } else {
+                this.dispatch('actionShowAppToolbar', false);
             };
             console.log('_pageChanged', page);
         },
