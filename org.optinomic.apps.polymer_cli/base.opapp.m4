@@ -19,11 +19,11 @@ website = http://www.optinomic.com/
 
 
 [template main 6 7]
-include(../lib/polymer/index_3.html)
+include(../lib/polymer/index.m4)
 include(elements/view.html)
 
 [template profile_mit_text 6 7]
-include(../lib/polymer/index_3.html)
+include(../lib/polymer/index.m4)
 include(elements/view_2.html)
 
 

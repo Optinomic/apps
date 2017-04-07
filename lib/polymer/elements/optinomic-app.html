@@ -87,8 +87,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                     <iron-selector selected="{{page}}" attr-for-selected="name" class="drawer-list" role="navigation">
                         <a name="template">Start</a>
                         <a name="app-page-readme">Readme</a>
-                        <a name="avatar">Avatar</a>
-                        <a name="admin">Admin</a>
+                        <a name="app-page-admin">Admin</a>
                     </iron-selector>
                 </div>
             </app-drawer>
@@ -111,17 +110,11 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                     </template>
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-                    <optinomic-app-page-readme name="app-page-readme" markdown="include(readme.md)"></optinomic-app-page-readme>
-                    <optinomic-avatar name="avatar" firstname="Max" lastname="Muster" gender="male" birthdate="1993-05-21T00:00:00.000000000000Z"></optinomic-avatar>
                     <optinomic-template name="template"></optinomic-template>
-                    <optinomic-admin name="admin"></optinomic-admin>
+                    <optinomic-app-page-readme language="de" name="app-page-readme" markdown="include(readme.md)"></optinomic-app-page-readme>
+                    <optinomic-app-page-admin language="de" name="admin"></optinomic-app-page-admin>
                     <optinomic-404 name="404"></optinomic-404>
                 </iron-pages>
-                <div>
-                    <paper-icon-button on-tap="logState" icon="favorite"></paper-icon-button>
-                    <paper-icon-button on-tap="refresh_data" icon="star"></paper-icon-button>
-                    <paper-icon-button on-tap="_drawerToggle" icon="menu"></paper-icon-button>
-                </div>
                 <div data-iframe-height>&nbsp;</div>
             </app-header-layout>
         </app-drawer-layout>
