@@ -8,7 +8,8 @@ type = patient
 
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
-0 Punkte entsprechen keiner Versuchung, eine maximale Versuchung liegt bei 80 (allgemeiner Summenwert) respektive 4 (Subskalen) Punkten vor.
+Die allgemeine Versuchung ergibt sich aus dem Summenwert aller Items (Wert 0-80), die Subskalen stellen den Mittelwert der dazugehörigen 5 Items dar (Wert 0-4).
+Tiefe Werte entprechen einer niedrigen Versuchung, hohe Werte einer hohen Versuchung.
 
 
 [developer]
