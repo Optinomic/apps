@@ -23,10 +23,12 @@ function main(token) {
     if(req.status == 200) {
       if(req.responseText.length > 1) {
         var now = new Date();
-        var filepath = "/tmp/" + format_date(now);
+        var filepath = "/media/cis_files/honos_interface/" + format_date(now);
         fs.writeFileSync(filepath, req.responseText);
         console.log("Exported in " + filepath);
       }
+    } else if (req.status == 204) {
+      console.log("204 No Content received => nothing to do.");
     } else {
       console.error(req.status, req.responseText);
       throw "";
