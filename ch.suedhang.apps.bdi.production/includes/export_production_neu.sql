@@ -9,9 +9,10 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
-  ((cast(response AS json))->>'Datum') as datum,
+  TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD') as datum,
 
   ((cast(response AS json))->>'BDI1') as bdi1,
   ((cast(response AS json))->>'BDI2') as bdi2,
@@ -63,4 +64,7 @@ SELECT
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
-WHERE module = 'ch.suedhang.apps.bdi.production';
+WHERE module = 'ch.suedhang.apps.bdi.production'
+AND survey_response_view.patient_id != '1169'
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1';
