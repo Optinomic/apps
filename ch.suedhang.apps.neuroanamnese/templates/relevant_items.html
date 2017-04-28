@@ -77,7 +77,7 @@ BEAT:
             <div ng-if="resp.calculations[0].calculation_result.items == '12'">
                 <h4>Bei <b>Eintritt</b> (Messung am {{resp.entity.data.filled | date}}) waren keine neurologischen Auffälligkeiten vorhanden.</h4>
             </div>
-            <div ng-if="resp.calculations[0].calculation_result.items > '12'">
+            <div ng-if="resp.calculations[0].calculation_result.items != '12'">
                 <h4>Für die <b>Eintrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: 
                     <div ng-if="resp.entity.data.response.NeuroAnamEin_SQ001 == '2' || resp.entity.data.response.NeuroAnamEin[SQ001] =='2'">
                         <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
@@ -121,7 +121,7 @@ BEAT:
             <div ng-if="resp.calculations[0].calculation_result.items == '10'">
                 <h4>Bei <b>Austritt</b> (Messung am {{resp.entity.data.filled | date}}) waren keine neurologischen Auffälligkeiten vorhanden.</h4>
             </div>
-            <div ng-if="resp.calculations[0].calculation_result.items > '10'">
+            <div ng-if="resp.calculations[0].calculation_result.items != '10'">
                 <h4>Für die <b>Austrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: 
                     <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 == '2' || resp.entity.data.response.NeuroAnamAus[SQ001] =='2'">
                         <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
