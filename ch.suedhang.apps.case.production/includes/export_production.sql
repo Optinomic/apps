@@ -9,6 +9,7 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as FID,  
   ((cast(response AS json))->>'PID') as pid,
   TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD')  as datum,
