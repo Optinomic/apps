@@ -69,5 +69,4 @@ survey = bscl_anq
 [sql_init]
 include(includes/create_view_production.sql)
 
-[sql_init]
-include(includes/create_view_intra.sql)
+
