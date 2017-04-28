@@ -12,8 +12,10 @@ SELECT
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
 
+  
   NULL as VZAX100,
   ((cast(response AS json))->>'Institution') as institution,
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as VZAX005,
 
   ((cast(response AS json))->>'VMAB001') as VMAB001,
@@ -265,4 +267,7 @@ FROM "survey_response_view"
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id) 
 
-WHERE module = 'ch.suedhang.apps.actinfo_aus.production';
+WHERE module = 'ch.suedhang.apps.actinfo_aus.production'
+AND survey_response_view.patient_id != '1169'
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1';
