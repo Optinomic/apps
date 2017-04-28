@@ -10,6 +10,7 @@ SELECT
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
 
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as FID,
   ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
   TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD') as datum,
