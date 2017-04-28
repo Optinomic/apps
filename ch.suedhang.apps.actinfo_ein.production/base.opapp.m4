@@ -54,3 +54,6 @@ survey = actinfo_eintritt
 
 [sql_init]
 include(includes/create_view_production.sql)
+
+[sql_init]
+include(includes/create_view_audit.sql)
