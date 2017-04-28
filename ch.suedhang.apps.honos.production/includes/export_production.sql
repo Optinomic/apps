@@ -11,10 +11,8 @@ SELECT
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
   
   patient.cis_pid as cis_pid,
-  stay.cis_fid as cis_fid,
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as fid,
-  survey_response_view.survey_response_id AS survey_response_id,
-  ((cast(response AS json))->>'PID') as pid_survey,
   ((cast(response AS json))->>'FID') as fid_survey,
 
   'PH' as Rekordart,
