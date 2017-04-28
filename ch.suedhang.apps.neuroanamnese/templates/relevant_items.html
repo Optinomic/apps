@@ -75,17 +75,17 @@ BEAT:
 <div ng-repeat="resp in d.dataMain.survey_responses">
     <div ng-if="resp.calculations[0].calculation_result.items == '10'">
         <div ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">
-            <h4>Bei <b>Eintritt</b> waren keine neurologischen Auffälligkeiten vorhanden.</h4>
+            <h4>Bei <b>Eintritt</b> (Messung am {{resp.entity.data.filled | date}}) waren keine neurologischen Auffälligkeiten vorhanden.</h4>
         </div>
         <div ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'" class="md-subhead">
-            <p>Bei <b>Austritt</b> waren keine neurologischen Auffälligkeiten vorhanden.</p>
+            <p>Bei <b>Austritt</b> (Messung am {{resp.entity.data.filled | date}}) waren keine neurologischen Auffälligkeiten vorhanden.</p>
         </div>
     </div>
     <!--  NeuroAnamEin  -->
     
-    <div ng-if="resp.calculations[0].calculation_result.items !== '10'">
+    <div ng-if="resp.calculations[0].calculation_result.items > '10'">
         <div ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'" class="md-subhead">
-        <h4>Für die <b>Eintrittsmessung</b> sollten folgende Hinweise beachtet werden: 
+        <h4>Für die <b>Eintrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: 
             <div ng-if="resp.entity.data.response.NeuroAnamEin_SQ001 == '2' || resp.entity.data.response.NeuroAnamEin[SQ001] =='2'">
                 <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
             </div>
@@ -124,7 +124,7 @@ BEAT:
             </div>
         </div>
         <div ng-if="resp.entity.data.response.Erhebungszeitpunkt === '2'" class="md-subhead">
-        <h4>Für die <b>Austrittsmessung</b> sollten folgende Hinweise beachtet werden: 
+        <h4>Für die <b>Austrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: 
             <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 == '2' || resp.entity.data.response.NeuroAnamAus[SQ001] =='2'">
                 <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
             </div>
