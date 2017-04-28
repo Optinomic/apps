@@ -1,4 +1,3 @@
-
 SELECT
 
 -- START:  Optinoimc Default |  Needed for Export-Toolbox
@@ -87,11 +86,7 @@ SELECT
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id)
-WHERE module = 'ch.suedhang.apps.bscl_anq.production' 
-AND ((cast(response AS json))->>'q501V04') != '3'
-AND survey_response_view.patient_id != '1169'
-AND survey_response_view.patient_id != '387'
-AND survey_response_view.patient_id != '1';
+WHERE module = 'ch.suedhang.apps.bscl_anq.production' AND ((cast(response AS json))->>'q501V04') != '3';
 
 /*
 CASE WHEN ((cast(response AS json))->>'VNEB066') = '999' THEN '-1' WHEN ((cast(response AS json))->>'VNEB066') = '1' THEN 'SYSMIS' ELSE ((cast(response AS json))->>'VNEB066') END as vneb066,

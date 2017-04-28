@@ -9,7 +9,10 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as FID,  
+  ((cast(response AS json))->>'PID') as pid,
+  TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD')  as datum,
   ((cast(response AS json))->>'DauerAbh') as Abhaengigkeitsdauer,
   ((cast(response AS json))->>'statEnzug') as statEntgiftungen,
   ((cast(response AS json))->>'ambEntzugMedi') as ambEntgiftungen,
@@ -30,19 +33,15 @@ SELECT
   ((cast(response AS json))->>'MorgenTr') as MorgenTrinken,
   ((cast(response AS json))->>'posErw') as posErwartungen,
   ((cast(response AS json))->>'AbstZuv') as ZuvDefAbstinenz,
-  ((cast(response AS json))->>'AbstMot') as AbstMotFehlt,
-
-  TO_DATE(((cast(response AS json))->>'filled'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
-  ((cast(response AS json))->>'FID') as fid_survey,
-  ((cast(response AS json))->>'PID') as pid,
-  TO_DATE(((cast(response AS json))->>'datestamp'), 'YYYY-MM-DD HH24:MI:SS')  as datestamp_date,
-  ((cast(response AS json))->>'id') as id,
-  TO_DATE(((cast(response AS json))->>'startdate'), 'YYYY-MM-DD HH24:MI:SS')  as startdate_date,
-  ((cast(response AS json))->>'submitdate') as submitdate
-  
+  ((cast(response AS json))->>'AbstMot') as AbstMotFehlt  
 
 FROM "survey_response_view" 
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id) 
 
-WHERE module = 'ch.suedhang.apps.case.production';
+WHERE module = 'ch.suedhang.apps.case.production'
+AND survey_response_view.patient_id != '1169'
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1';
+
+

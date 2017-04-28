@@ -10,7 +10,11 @@ SELECT
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
 
+  CONCAT(patient.cis_pid, '00', RIGHT((stay.cis_fid/100)::text,2)) as MedStatFid,
   stay.cis_fid/100 as FID,
+  ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
+  TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD') as datum,
+  
   ((cast(response AS json))->>'AISK[AISK1]') as isk_01,
   ((cast(response AS json))->>'AISK[AISK2]') as isk_02,
   ((cast(response AS json))->>'AISK[AISK3]') as isk_03,
@@ -43,14 +47,12 @@ SELECT
   ((cast(response AS json))->>'AISK[AIS30]') as isk_30,
   ((cast(response AS json))->>'AISK[AIS31]') as isk_31,
   ((cast(response AS json))->>'AISK[AIS32]') as isk_32,
-  ((cast(response AS json))->>'AISK[AIS33]') as isk_33,
+  ((cast(response AS json))->>'AISK[AIS33]') as isk_33
 
-  ((cast(response AS json))->>'Datum') as datum
-/*,  TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')  as datum_date,
+/*,
   SUBSTRING(((cast(response AS json))->>'Datum'),12,5) AS datum_time,
   SUBSTRING(((cast(response AS json))->>'Datum'),1,4)::integer AS datum_year,
   EXTRACT(WEEK FROM TO_DATE(((cast(response AS json))->>'Datum'), 'YYYY-MM-DD HH24:MI:SS')) AS datum_week,
-  ((cast(response AS json))->>'Erhebungszeitpunkt') as erhebungszeitpunkt,
   ((cast(response AS json))->>'FID') as fid_survey,
   ((cast(response AS json))->>'PID') as pid,
   ((cast(response AS json))->>'andererZeitpunkt') as andererzeitpunkt,
@@ -79,4 +81,7 @@ FROM "survey_response_view"
 LEFT JOIN patient ON(survey_response_view.patient_id = patient.id) 
 LEFT JOIN stay ON(survey_response_view.stay_id = stay.id) 
 
-WHERE module = 'ch.suedhang.apps.isk.production';
+WHERE module = 'ch.suedhang.apps.isk.production'
+AND survey_response_view.patient_id != '1169'
+AND survey_response_view.patient_id != '387'
+AND survey_response_view.patient_id != '1';
