@@ -46,5 +46,3 @@ description = Erfassung der Patientenzufriedenheit
 survey = ZuePaZ_Suedhang
 
 
-[sql_init]
-include(includes/create_view.sql)

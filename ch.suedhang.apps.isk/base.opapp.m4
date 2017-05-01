@@ -65,9 +65,7 @@ description = Schätzen Sie Ihre persönlichen Verhaltensweisen und Gewohnheiten
 survey = isk
 
 
-
 [calculation scores_calculation javascript]
 include(calculations/isk_patient_calc.js)
 
-[sql_init]
-include(includes/create_view.sql)
+

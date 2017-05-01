@@ -63,5 +63,3 @@ include(emails/overdue.html)
 [calculation another_calculation javascript]
 include(calculations/zuepaz.js)
 
-[sql_init]
-include(includes/create_view.sql)

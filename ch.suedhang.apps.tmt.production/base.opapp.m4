@@ -52,6 +52,5 @@ description = TMT-Erfassung Austritt
 survey = tmt_ng
 
 
-[sql_init]
-include(includes/create_view.sql)
+
 
