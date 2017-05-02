@@ -58,6 +58,6 @@ survey = bdi2
 include(includes/create_view_production.sql)
 
 [sql_init]
-include(includes/create_view_production_calculations.sql)
+include(includes/create_view_production.sql)
 
 
