@@ -54,10 +54,5 @@ overdue = ignore
 description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
 survey = bdi2
 
-[sql_init]
-include(includes/create_view_production.sql)
-
-[sql_init]
-include(includes/create_view_production.sql)
 
 
