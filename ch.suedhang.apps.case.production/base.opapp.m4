@@ -40,7 +40,3 @@ due_after = 345600
 overdue = ignore
 description = Alkoholabhängigkeit (CASE) und Behandlungsindikation.
 survey = CASE
-
-
-[sql_init]
-include(includes/create_view_production.sql)
