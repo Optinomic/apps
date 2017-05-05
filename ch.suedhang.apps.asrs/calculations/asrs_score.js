@@ -27,6 +27,7 @@ function main(responses) {
         if (ASRS_6 > 3) {
         	score = score + 1;
         };
+        score = score;
         
 
         var current_range = {};
@@ -75,7 +76,7 @@ function main(responses) {
             var myResults = {};
             var result = response.data.response;
 
-            // BDI-Score
+            // ASRS-Score
             myResults.score = calc.asrsScore(result);
 
             // Write Results for the Return
