@@ -1,10 +1,11 @@
  include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">Auswertung</h3>
 <div ng-repeat="response in d.dataMain.survey_responses">
-    <score-threshold score="response.calculations[0].calculation_result.score.score" min="0" max="6" scale-ranges="scale_ranges"></score-threshold>
     <h4>{{response.entity.data.filled}}</h4>
-    <h4>Bei {{response.calculations["0"].calculation_result.score.score}} der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich. Dies bei einer Summe von {{response.calculations["0"].calculation_result.score.sum}} von 24 möglichen Punkten.</h4>
+    <score-threshold score="response.calculations[0].calculation_result.score.score" min="0" max="6" scale-ranges="scale_ranges"></score-threshold>
+    <h4>Bei <b>{{response.calculations["0"].calculation_result.score.score}}</b> der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich ({{response.calculations["0"].calculation_result.score.sum}} von 24 Punkte):</h4>
     <h4>{{response.calculations["0"].calculation_result.score.current_range.interpretation}}</h4>
+    <p></p>
     <div style="padding: 48px;">
         <p>Filled: {{response.entity.data.filled}}</p>
         <p>ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
