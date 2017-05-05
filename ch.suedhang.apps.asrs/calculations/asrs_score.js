@@ -1,4 +1,5 @@
 function main(responses) {
+
     var calc = {};
 
     // ------------------------------------------
@@ -7,28 +8,36 @@ function main(responses) {
 
     calc.asrsScore = function(result) {
 
+
+        // ---------------------------
+        // Score berechnen
+        // --------------------------
+
         var score = 0;
 
         if (parseInt(result.ASRS_1) > 2) {
-        	score = score + 1;
+            score = score + 1;
         };
         if (parseInt(result.ASRS_2) > 2) {
-        	score = score + 1;
+            score = score + 1;
         };
         if (parseInt(result.ASRS_3) > 2) {
-        	score = score + 1;
+            score = score + 1;
         };
         if (parseInt(result.ASRS_4) > 3) {
-        	score = score + 1;
+            score = score + 1;
         };
         if (parseInt(result.ASRS_5) > 3) {
-        	score = score + 1;
+            score = score + 1;
         };
         if (parseInt(result.ASRS_6) > 3) {
-        	score = score + 1;
+            score = score + 1;
         };
-        score = score;
-        
+
+
+        // ---------------------------
+        // Aktuellen Range berechnen
+        // --------------------------
 
         var current_range = {};
 
@@ -66,35 +75,28 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-    var return_obj = {};
-    
-    var responses_array = result.survey_responses;
-    var allResults = [];
+        var responses_array = myResponses.survey_responses;
+        var allResults = [];
 
-    responses_array.forEach(function(response, myindex) {
-        var myResults = {};
-        var result = response.data.response;
+        responses_array.forEach(function(response, myindex) {
+            var myResults = {};
+            var result = response.data.response;
 
-        // ASRS-Score
-        myResults.score = calc.asrsScore(result);
+            // ASRS-Score
+            myResults.score = calc.asrsScore(result);
 
-        // Write Results for the Return
-        // Do not modify stuff here
-        myResults.hash = result['optinomixHASH'];
-        myResults.response = response;
-        // myResults.full_responses = myResponses;
-        allResults.push(myResults);
-    });
+            // Write Results for the Return
+            // Do not modify stuff here
+            myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
+            allResults.push(myResults);
+        });
 
-    return_obj.responses_array = responses_array;
-    return_obj.allResults = allResults;
-    return_obj.full = d;
-
-
-    return allResults;
+        return allResults;
     };
 
 
     // Return
     return calc.getResults(responses);
+
 }
