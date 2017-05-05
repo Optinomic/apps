@@ -9,22 +9,22 @@ function main(responses) {
 
         var score = 0;
 
-        if (ASRS_1 > 2) {
+        if (parseInt(result[ASRS_1]) > 2) {
         	score = score + 1;
         };
-        if (ASRS_2 > 2) {
+        if (parseInt(result[ASRS_2]) > 2) {
         	score = score + 1;
         };
-        if (ASRS_3 > 2) {
+        if (parseInt(result[ASRS_3]) > 2) {
         	score = score + 1;
         };
-        if (ASRS_4 > 3) {
+        if (parseInt(result[ASRS_4]) > 3) {
         	score = score + 1;
         };
-        if (ASRS_5 > 3) {
+        if (parseInt(result[ASRS_5]) > 3) {
         	score = score + 1;
         };
-        if (ASRS_6 > 3) {
+        if (parseInt(result[ASRS_6]) > 3) {
         	score = score + 1;
         };
         score = score;
