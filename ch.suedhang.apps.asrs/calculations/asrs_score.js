@@ -5,7 +5,7 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.bdiScore = function(result) {
+    calc.asrsScore = function(result) {
 
         var score = 0;
 
@@ -76,7 +76,7 @@ function main(responses) {
             var result = response.data.response;
 
             // BDI-Score
-            myResults.score = calc.bdiScore(result);
+            myResults.score = calc.asrsScore(result);
 
             // Write Results for the Return
             // Do not modify stuff here
