@@ -49,9 +49,6 @@ function main(responses) {
         if (score >= ranges[1].from) {
             current_range = ranges[1];
         };
-        if (score >= ranges[2].from) {
-            current_range = ranges[2];
-        };
 
 
         var return_obj = {
