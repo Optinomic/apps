@@ -5,26 +5,26 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.asrsScore = function(d, result) {
+    calc.asrsScore = function(result) {
 
         var score = 0;
 
-        if (parseInt(d.ASRS_1) > 2) {
+        if (parseInt(result.ASRS_1) > 2) {
         	score = score + 1;
         };
-        if (parseInt(d.ASRS_2) > 2) {
+        if (parseInt(result.ASRS_2) > 2) {
         	score = score + 1;
         };
-        if (parseInt(d.ASRS_3) > 2) {
+        if (parseInt(result.ASRS_3) > 2) {
         	score = score + 1;
         };
-        if (parseInt(d.ASRS_4) > 3) {
+        if (parseInt(result.ASRS_4) > 3) {
         	score = score + 1;
         };
-        if (parseInt(d.ASRS_5) > 3) {
+        if (parseInt(result.ASRS_5) > 3) {
         	score = score + 1;
         };
-        if (parseInt(d.ASRS_6) > 3) {
+        if (parseInt(result.ASRS_6) > 3) {
         	score = score + 1;
         };
         score = score;
@@ -35,7 +35,7 @@ function main(responses) {
         var ranges = [{
             "from": 0,
             "to": 2,
-            "interpretation": "Keine Hinweise auf ADHS",
+            "interpretation": "Keine Hinweise auf ADHS vorhanden",
             "result_color": "#4CAF50"
         }, {
             "from": 3,
@@ -66,29 +66,32 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
-        var return_obj = {};
-        
-        var responses_array = myResponses.survey_responses;
-        var allResults = [];
+    var return_obj = {};
+    
+    var responses_array = d.survey_responses;
+    var allResults = [];
 
-        responses_array.forEach(function(response, myindex) {
-            var myResults = {};
-            var result = response.data.response;
+    responses_array.forEach(function(response, myindex) {
+        var myResults = {};
+        var result = response.data.response;
 
-            // ASRS-Score
-            myResults.score = calc.asrsScore(result);
+        // ASRS-Score
+        myResults.score = calc.asrsScore(result);
 
-            // Write Results for the Return
-            // Do not modify stuff here
-            myResults.hash = result['optinomixHASH'];
-            myResults.response = response;
-            // myResults.full_responses = myResponses;
-            allResults.push(myResults);
-        });
+        // Write Results for the Return
+        // Do not modify stuff here
+        myResults.hash = result['optinomixHASH'];
+        myResults.response = response;
+        // myResults.full_responses = myResponses;
+        allResults.push(myResults);
+    });
 
-        return_obj.full = d;
+    return_obj.responses_array = responses_array;
+    return_obj.allResults = allResults;
+    return_obj.full = d;
 
-        return allResults;
+
+    return allResults;
     };
 
 
