@@ -7,21 +7,18 @@
         </div>
     </div>
     <score-threshold score="response.calculations[0].calculation_result.score.score" min="0" max="6" scale-ranges="scale_ranges"></score-threshold>
-    <h4>Bei <b>{{response.calculations["0"].calculation_result.score.score}}</b> der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich ({{response.calculations["0"].calculation_result.score.sum}} von 24 Punkte):</h4>
+    <p class="flow-text">Bei Score=<b>{{response.calculations["0"].calculation_result.score.score}}</b> der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} in folgendem Bereich ({{response.calculations["0"].calculation_result.score.sum}} von 24 Punkte):</p>
     <h4>{{response.calculations["0"].calculation_result.score.current_range.interpretation}}</h4>
     <div style="margin-top: 48px;">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <p>ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
-            <p>ASRS_2 = {{response.entity.data.response.ASRS_2}}</p>
-            <p>ASRS_3 = {{response.entity.data.response.ASRS_3}}</p>
-            <p>ASRS_4 = {{response.entity.data.response.ASRS_4}}</p>
-            <p>ASRS_5 = {{response.entity.data.response.ASRS_5}}</p>
-            <p>ASRS_6 = {{response.entity.data.response.ASRS_6}}</p>
-        </div>
-        <div>
-            <p>SCORE = {{response.calculations["0"].calculation_result.score.score}}</p>
-            <p>SUMME = {{response.calculations["0"].calculation_result.score.sum}}</p>
-            <p>Interpretation = {{response.calculations["0"].calculation_result.score.current_range.interpretation}}</p>
+            <p class="small">ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
+            <p class="small">ASRS_2 = {{response.entity.data.response.ASRS_2}}</p>
+            <p class="small">ASRS_3 = {{response.entity.data.response.ASRS_3}}</p>
+            <p class="small">ASRS_4 = {{response.entity.data.response.ASRS_4}}</p>
+            <p class="small">ASRS_5 = {{response.entity.data.response.ASRS_5}}</p>
+            <p class="small">ASRS_6 = {{response.entity.data.response.ASRS_6}}</p>
+            <p class="small">SCORE = {{response.calculations["0"].calculation_result.score.score}}</p>
+            <p class="small">SUMME = {{response.calculations["0"].calculation_result.score.sum}}</p>
         </div>
     </div>
 </div>
