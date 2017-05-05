@@ -1,10 +1,9 @@
  include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">ASRS: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-
 <div ng-repeat="response in d.dataMain.survey_responses">
-<p>Bei "score" der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich.</p>
-<p>ranges.interpretation</p>
-    <score-threshold score="10" min="0" max="15" scale-ranges="scale_ranges"></score-threshold>
+    <p>Bei "score" der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich.</p>
+    <p>ranges.interpretation</p>
+    <score-threshold score='{{response.calculations["0"].calculation_result.score.score}}' min="0" max="15" scale-ranges="scale_ranges"></score-threshold>
     <p>Filled: {{response.entity.data.filled}}</p>
     <p>ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
     <p>ASRS_2 = {{response.entity.data.response.ASRS_2}}</p>
@@ -12,5 +11,8 @@
     <p>ASRS_4 = {{response.entity.data.response.ASRS_4}}</p>
     <p>ASRS_5 = {{response.entity.data.response.ASRS_5}}</p>
     <p>ASRS_6 = {{response.entity.data.response.ASRS_6}}</p>
+    <p>SCORE = {{response.calculations["0"].calculation_result.score.score}}</p>
+    <p>SCORE = {{response.calculations["0"].calculation_result.score.current_range.interpretation}}</p>
+    <p>.dataMain.survey_responses["0"].calculations["0"].</p>
 </div>
 include(../lib/html/optinomic/page/end.m4)
