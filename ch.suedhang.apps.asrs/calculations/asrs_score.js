@@ -54,7 +54,7 @@ function main(responses) {
             "interpretation": "Keine Hinweise auf ADHS vorhanden",
             "result_color": "#4CAF50"
         }, {
-            "from": 3,
+            "from": 2,
             "to": 6,
             "interpretation": "Hinweise auf ADHS vorhanden",
             "result_color": "#FF5722"
