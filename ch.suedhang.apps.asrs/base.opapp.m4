@@ -2,6 +2,7 @@
 id = ch.suedhang.apps.asrs
 name = ADHS-Screening (ASRS)
 short_description = Screening-Test mit Selbstbeurteilungs-Skala für Erwachsene
+version = include(VERSION)
 type = patient
 
 [description]
