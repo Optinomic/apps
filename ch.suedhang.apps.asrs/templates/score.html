@@ -1,7 +1,10 @@
  include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">ASRS: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
+
 <div ng-repeat="response in d.dataMain.survey_responses">
-    <score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
+<p>Bei "score" der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} im auffälligen Bereich.</p>
+<p>ranges.interpretation</p>
+    <score-threshold score="10" min="0" max="15" scale-ranges="scale_ranges"></score-threshold>
     <p>Filled: {{response.entity.data.filled}}</p>
     <p>ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
     <p>ASRS_2 = {{response.entity.data.response.ASRS_2}}</p>

@@ -34,12 +34,12 @@ function main(responses) {
         var ranges = [{
             "from": 0,
             "to": 2,
-            "interpretation_de": "Keine Hinweise auf ADHS",
+            "interpretation": "Keine Hinweise auf ADHS",
             "result_color": "#4CAF50"
         }, {
-            "from": 20,
-            "to": 28,
-            "interpretation_de": "Hinweise auf ADHS vorhanden",
+            "from": 3,
+            "to": 6,
+            "interpretation": "Hinweise auf ADHS vorhanden",
             "result_color": "#FF5722"
         }];
 
