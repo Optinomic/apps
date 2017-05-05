@@ -1,5 +1,13 @@
-
-include(../lib/html/optinomic/page/start.m4)
+ include(../lib/html/optinomic/page/start.m4)
 <h3 class="md-headline">ASRS: {{d.dataMain.patient.patient.data.last_name}} {{d.dataMain.patient.patient.data.first_name}}</h3>
-<score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
+<div ng-repeat="response in d.dataMain.survey_responses">
+    <score-threshold score="10" min="0" max="63" scale-ranges="scale_ranges"></score-threshold>
+    <p>Filled: {{response.entity.data.filled}}</p>
+    <p>ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
+    <p>ASRS_2 = {{response.entity.data.response.ASRS_2}}</p>
+    <p>ASRS_3 = {{response.entity.data.response.ASRS_3}}</p>
+    <p>ASRS_4 = {{response.entity.data.response.ASRS_4}}</p>
+    <p>ASRS_5 = {{response.entity.data.response.ASRS_5}}</p>
+    <p>ASRS_6 = {{response.entity.data.response.ASRS_6}}</p>
+</div>
 include(../lib/html/optinomic/page/end.m4)
