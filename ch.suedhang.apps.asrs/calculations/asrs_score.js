@@ -68,7 +68,7 @@ function main(responses) {
 
     var return_obj = {};
     
-    var responses_array = d.survey_responses;
+    var responses_array = result.survey_responses;
     var allResults = [];
 
     responses_array.forEach(function(response, myindex) {
