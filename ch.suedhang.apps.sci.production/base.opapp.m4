@@ -54,9 +54,5 @@ description = Austritt: Stress-Coping-Inventar (SCI)
 survey = SCI
 
 
-[sql_init]
-include(includes/create_view.sql)
-
-
 
 
