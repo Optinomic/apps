@@ -8,7 +8,7 @@ type = patient
 Der ASRS-Fragebogen kann als Ausgangspunkt zur Erkennung der Anzeichen/Symptome der Erwachsenen-ADHS verwendet werden, soll jedoch nicht eine Beratung bei einer geschulten medizinischen Fachkraft ersetzen. 
 
 
-developer]
+[developer]
 first_name = Nora
 last_name = Schönenberger
 github_user = schoenenb
