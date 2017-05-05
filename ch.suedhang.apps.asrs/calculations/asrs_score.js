@@ -14,24 +14,31 @@ function main(responses) {
         // --------------------------
 
         var score = 0;
+        var sum = 0;
 
         if (parseInt(result.ASRS_1) > 2) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_1);
         };
         if (parseInt(result.ASRS_2) > 2) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_2);
         };
         if (parseInt(result.ASRS_3) > 2) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_3);
         };
         if (parseInt(result.ASRS_4) > 3) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_4);
         };
         if (parseInt(result.ASRS_5) > 3) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_5);
         };
         if (parseInt(result.ASRS_6) > 3) {
             score = score + 1;
+            sum = sum + parseInt(result.ASRS_6);
         };
 
 
@@ -62,6 +69,7 @@ function main(responses) {
 
         var return_obj = {
             "score": score,
+            "sum": sum,
             "current_range": current_range,
             "ranges": ranges
         };
