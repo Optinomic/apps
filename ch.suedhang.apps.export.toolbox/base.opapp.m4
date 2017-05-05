@@ -25,12 +25,10 @@ website = http://www.optinomic.com/
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
 
 
 [css]
 include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
 
 
 [sql_init]
