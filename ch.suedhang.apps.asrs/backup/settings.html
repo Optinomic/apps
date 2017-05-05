@@ -1,0 +1,103 @@
+<div>
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
+            <i class="mdi mdi-close" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen anwenden
+            </md-tooltip>
+        </md-button>
+    </div>
+</div>
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Einstellungen | Grafik(en)</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout-margin layout-padding>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between start">
+                <md-input-container class="md-block">
+                    <label>Z-Score: Minimum</label>
+                    <input ng-model="d.zScore.options.zscore_min" type="number" step="1">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Z-Score: Maximum</label>
+                    <input ng-model="d.zScore.options.zscore_max" type="number" step="1">
+                </md-input-container>
+                <md-switch ng-model="d.zScore.options.centered_zero" aria-label="centered_zero">
+                    0 Wert ist immer im Zentrum
+                </md-switch>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+                <md-switch ng-model="d.zScore.options.show_text" aria-label="show_text">
+                    Beschriftungen anzeigen
+                </md-switch>
+                <md-switch ng-model="d.zScore.options.show_clinicsample" aria-label="show_clinicsample">
+                    Klinische Stichprobe anzeigen
+                </md-switch>
+                <md-switch ng-model="d.zScore.options.show_clinicsample_scores" aria-label="show_clinicsample_scores">
+                    Werte der Stichprobe anzeigen
+                </md-switch>
+            </div>
+            <div layout="row" layout-xs="column" layout-gt-xs="row" layout-align="space-between end">
+                <md-switch ng-model="d.zScore.show_ba_quotient" aria-label="B/A Quotient darstellen">
+                    B/A Quotient darstellen
+                </md-switch>
+            </div>
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings">anwenden</md-button>
+    </md-card-actions>
+</md-card>
+<md-card style="margin-top: 30px;">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Einstellungen | Klinik-Stichprobe</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-divider></md-divider>
+    <md-card-content>
+        <div layout-margin layout-padding>
+            <md-input-container class="md-block">
+                <label>Alter</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_age_group" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="age in d.zScore.user_app_calc.definitions.age" ng-value="age">
+                        {{age.age_group_text}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" style="margin-top:24px;">
+                <label>Bildung</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_edu_group" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="edu in d.zScore.user_app_calc.definitions.edu" ng-value="edu">
+                        {{edu.edu_group_text}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" style="margin-top:24px;">
+                <label>Messzeitpunkt</label>
+                <md-select ng-model="d.zScore.normgruppe_klinik.selected_mz_array" ng-change="changeClinicSample()">
+                    <md-option ng-repeat="mz in d.zScore.normgruppe_klinik.select_mz_array" ng-value="mz.id">
+                        {{mz.text}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end center">
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings">anwenden</md-button>
+    </md-card-actions>
+</md-card>
+<div style="margin-top: 24px;">
+    <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="end end">
+        <md-button ng-click="d.zScore.settings = !d.zScore.settings" class="md-icon-button">
+            <i class="mdi mdi-close" style="font-size:24px;"></i>
+            <md-tooltip md-direction="left">
+                Einstellungen anwenden
+            </md-tooltip>
+        </md-button>
+    </div>
+</div>

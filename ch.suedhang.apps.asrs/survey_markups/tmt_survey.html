@@ -1,0 +1,125 @@
+<div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex-gt-sm="65" layout="column">
+            <div ng-if="!thankyou">
+                <form name="surveyForm">
+                    <md-card ng-init="result.survey_version = 'ng_survey_v1'">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-display-1" style="color:#3F51B5">Trail Making Test (TMT)</span>
+                                <span class="md-subhead" style="color:#9E9E9E">Mit dem TMT wird die Fähigkeit zum visuellen Scannen sowie die psychomotorische Geschwindigkeit und Leistungen der exekutiven Funktionen erfasst.</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-divider></md-divider>
+                        <md-card-content>
+                            <p class="md-headline">Messzeitpunkt</p>
+                            <md-input-container class="md-block">
+                                <label>Assessment (Erhebung)</label>
+                                <md-select name="mz" ng-model="result.Messzeitpunkt" required>
+                                    <md-option value="1">Eintritt</md-option>
+                                    <md-option value="2">Austritt</md-option>
+                                    <md-option value="3">Anderer Messzeitpunkt</md-option>
+                                </md-select>
+                                <div ng-messages="surveyForm.mz.$error" multiple md-auto-hide="false">
+                                    <div ng-message="required">
+                                        Bei welchem Messzeitpunkt wurde die Erhebung ausgeführt?
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <p class="md-headline">Ausbildung</p>
+                            <md-input-container class="md-block">
+                                <label>Ausbildungsjahre</label>
+                                <input required type="number" step="any" name="edu_years" ng-model="result.Ausbildungsjahre" min="6" max="40">
+                                <p class="md-caption">Ausbildungsjahre meint Schuljahre und Jahre der ersten Berufsausbildung (resp. bei Zweitausbildungen zählt die jeweils höher qualifizierende), z.B. 9 Jahre Schule + 3 Jahre Berufslehre gibt 12 Ausbildungsjahre, oder 12 Jahre Schule (z.B. Matur) + 5 Jahre Studium gibt 17 Ausbildungsjahre. Bei der Schule zählt die Anzahl Jahre, die man üblicherweise für den jeweiligen Schultyp benötigt, d.h. wenn jemand eine Klasse wiederholen muss, sollte dieses Jahr nicht gezählt werden. Das gleiche gilt für die Berufsausbildung, insbesondere bei Studiengängen: wenn jemand aus persönlichen Gründen 8 Jahre für einen Studienabschluss benötigt, den man eigentlich in 5 Jahren erreichen könnte, werden 5 Jahre gezählt, etc. Berufliche Weiterbildungen und Zusatzqualifikationen werden nicht mehr zur Ausbildung gezählt.</p>
+                                <div ng-messages="surveyForm.edu_years.$error" multiple md-auto-hide="false">
+                                    <div ng-message="required">
+                                        Hier fehlt die Angabe der Ausbildungsjahre.
+                                    </div>
+                                    <div ng-message="min">
+                                        Sind Sie sicher, dass der Patient keine obligatorische Schule abgeschlossen hat?
+                                    </div>
+                                    <div ng-message="max">
+                                        Mehr als 40 Ausbildungsjahre sind sehr unwarscheinlich.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <p class="md-headline">TMT A</p>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex>
+                                    <md-input-container class="md-block">
+                                        <label>TMT A (Zeit in Sekunden)</label>
+                                        <input required type="number" step="any" name="tmt_a_time" ng-model="result.TMTATime" min="0" max="180">
+                                        <div ng-messages="surveyForm.tmt_a_time.$error" multiple md-auto-hide="false">
+                                            <div ng-message="required">
+                                                Wie viele Sekunden wurde für die Ausführung des TMT A benötigt?
+                                            </div>
+                                            <div ng-message="max">
+                                                Das ist nicht möglich - die maximal zur Verfügung stehende Zeit beträgt 3 Minuten bzw. 180 Sekunden.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div flex>
+                                    <md-input-container class="md-block">
+                                        <label>TMT A (Fehler)</label>
+                                        <input required type="number" step="any" name="tmt_a_error" ng-model="result.TMTAError" min="0">
+                                        <div ng-messages="surveyForm.tmt_a_error.$error" multiple md-auto-hide="false">
+                                            <div ng-message="required">
+                                                Hier fehlt die Angabe zur Anzahl Fehler, die Patient X während der Ausführung des TMT A gebraucht hat.
+                                            </div>
+                                            <div ng-message="min">
+                                                Weniger als 0 Fehler gibt's nicht.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <p class="md-headline">TMT B</p>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex>
+                                    <md-input-container class="md-block">
+                                        <label>TMT B (Zeit in Sekunden)</label>
+                                        <input required type="number" step="any" name="tmt_b_time" ng-model="result.TMTBTime" min="0" max="300">
+                                        <div ng-messages="surveyForm.tmt_b_time.$error" multiple md-auto-hide="false">
+                                            <div ng-message="required">
+                                                Wie viele Sekunden wurde für die Ausführung des TMT B benötigt?
+                                            </div>
+                                            <div ng-message="max">
+                                                Das ist nicht möglich - die maximal zur Verfügung stehende Zeit beträgt 5 Minuten bzw. 300 Sekunden.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div flex>
+                                    <md-input-container class="md-block">
+                                        <label>TMT B (Fehler)</label>
+                                        <input required type="number" step="any" name="tmt_b_error" ng-model="result.TMTBError" min="0">
+                                        <div ng-messages="surveyForm.tmt_b_error.$error" multiple md-auto-hide="false">
+                                            <div ng-message="required">
+                                                Hier fehlt die Angabe zur Anzahl Fehler, die Patient X während der Ausführung des TMT B gebraucht hat.
+                                            </div>
+                                            <div ng-message="min">
+                                                Weniger als 0 Fehler gibt's nicht.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-card-content>
+                        <md-divider></md-divider>
+                        <md-card-actions ng-if="surveyForm.$valid" layout="row" layout-align="end center">
+                            <md-button ng-click="saveresult()">Speichern</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </form>
+            </div>
+            <div ng-if="thankyou">
+                <h1 show-xs show-sm hide-gt-sm class="md-display-2">Herzlichen Dank</h1>
+                <h1 show-gt-sm hide-sm hide-xs class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>

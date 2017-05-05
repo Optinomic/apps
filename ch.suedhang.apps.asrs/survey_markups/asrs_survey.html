@@ -1,0 +1,121 @@
+<div>
+    <md-content class="md-padding" layout="row" layout-wrap="" layout-align="center start">
+        <div flex-gt-sm="65" layout="column">
+            <div ng-if="!thankyou">
+                <form name="surveyForm">
+                    <md-card ng-init="result.survey_version = 'ng_survey_v1'">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-display-1" style="color:#3F51B5">Titel</span>
+                                <span class="md-subhead" style="color:#9E9E9E">Beschreibung.</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-divider></md-divider>
+                        <md-card-content>
+                            <p class="md-headline">Bitte beantworten Sie die untenstehenden Fragen, indem Sie die Skala auf der rechten Seite des Blattes benutzen. Kreuzen Sie das Kästchen an, welches am besten dazu passt, wie Sie sich in den letzten sechs Monaten gefühlt und verhalten haben.</p>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">1. Wie oft haben Sie Probleme damit, die letzten Details eines Projektes zum Abschluss zu bringen?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_1" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">2. Wie oft haben Sie Probleme damit, Dinge zu ordnen, wenn Sie eine Aufgabe erfüllen müssen, die Organisation erfordert?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_2" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">3. Wie oft haben Sie Probleme damit, sich an Termine oder Verpflichtungen zu erinnern?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_3" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">4. Wie oft meiden oder schieben Sie Aufgaben auf, die gedankliche Anstrengung erfordern?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_4" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">5. Wie oft zappeln Sie mit Ihren Händen und Füssen, wenn Sie länger sitzen müssen?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_5" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div layout="row" layout-align="space-between center">
+                                <div flex="30">
+                                    <p class="md-subhead" style="padding-top:12px;">6. Wie oft fühlen Sie sich übermässig aktiv und gezwungen, Dinge zu tun, als ob Sie von einem Motor angetrieben würden?</p>
+                                </div>
+                                <div>
+                                    <md-radio-group ng-model="result.ASRS_6" layout="row" layout-align="space-between center">
+                                        <md-radio-button value="0">niemals</md-radio-button>
+                                        <md-radio-button value="1">selten </md-radio-button>
+                                        <md-radio-button value="2">manchmal</md-radio-button>
+                                        <md-radio-button value="3">oft</md-radio-button>
+                                        <md-radio-button value="4">sehr oft</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>                            
+                        <md-card-actions ng-if="surveyForm.$valid" layout="row" layout-align="end center">
+                            <md-button ng-click="saveresult()">Speichern</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </form>
+            </div>
+            <div ng-if="thankyou">
+                <h1 show-xs show-sm hide-gt-sm class="md-display-2">Herzlichen Dank</h1>
+                <h1 show-gt-sm hide-sm hide-xs class="md-display-4">Herzlichen Dank</h1>
+                <span class="md-subhead" style="margin-top:-48px;">
+                Ihre Eingabe wurde erfolgreich gespeichert! Sie können nun dieses Fenster schliessen.
+                </span>
+            </div>
+        </div>
+    </md-content>
+</div>
