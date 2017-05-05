@@ -68,5 +68,6 @@ survey = SCI
 [calculation scores javascript]
 include(calculations/scores.js)
 
+
 [sql_init]
 include(includes/create_view.sql)
