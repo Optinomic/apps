@@ -18,10 +18,13 @@ function main(responses) {
         if (ASRS_3 > 2) {
         	score = score + 1;
         };
+        if (ASRS_4 > 3) {
         	score = score + 1;
         };
+        if (ASRS_5 > 3) {
         	score = score + 1;
         };
+        if (ASRS_6 > 3) {
         	score = score + 1;
         };
         
