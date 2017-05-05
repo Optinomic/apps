@@ -9,6 +9,14 @@ SELECT
   ((cast(response AS json))->>'id') as optinomic_limesurvey_id,
   -- END:  Optinoimc Default |  Needed for Export-Toolbox
 
+stay.cis_fid/100 as FID,
+TO_DATE(((cast(response AS json))->>'Date'), 'YYYY-MM-DD HH24:MI:SS')  as datum,
+((cast(response AS json))->>'ASRS_1') as ASRS_1,
+((cast(response AS json))->>'ASRS_2') as ASRS_2,
+((cast(response AS json))->>'ASRS_3') as ASRS_3,
+((cast(response AS json))->>'ASRS_4') as ASRS_4,
+((cast(response AS json))->>'ASRS_5') as ASRS_5,
+((cast(response AS json))->>'ASRS_6') as ASRS_6
 
 
 FROM "survey_response_view" 
