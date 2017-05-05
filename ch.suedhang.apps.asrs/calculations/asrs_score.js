@@ -66,6 +66,8 @@ function main(responses) {
     // ------------------------------------------
     calc.getResults = function(myResponses) {
 
+        var return_obj = {};
+        
         var responses_array = myResponses.survey_responses;
         var allResults = [];
 
