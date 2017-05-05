@@ -5,26 +5,26 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.asrsScore = function(result) {
+    calc.asrsScore = function(d, result) {
 
         var score = 0;
 
-        if (parseInt(result[ASRS_1]) > 2) {
+        if (parseInt(d.ASRS_1) > 2) {
         	score = score + 1;
         };
-        if (parseInt(result[ASRS_2]) > 2) {
+        if (parseInt(d.ASRS_2) > 2) {
         	score = score + 1;
         };
-        if (parseInt(result[ASRS_3]) > 2) {
+        if (parseInt(d.ASRS_3) > 2) {
         	score = score + 1;
         };
-        if (parseInt(result[ASRS_4]) > 3) {
+        if (parseInt(d.ASRS_4) > 3) {
         	score = score + 1;
         };
-        if (parseInt(result[ASRS_5]) > 3) {
+        if (parseInt(d.ASRS_5) > 3) {
         	score = score + 1;
         };
-        if (parseInt(result[ASRS_6]) > 3) {
+        if (parseInt(d.ASRS_6) > 3) {
         	score = score + 1;
         };
         score = score;
@@ -86,6 +86,8 @@ function main(responses) {
             // myResults.full_responses = myResponses;
             allResults.push(myResults);
         });
+
+        return_obj.full = d;
 
         return allResults;
     };
