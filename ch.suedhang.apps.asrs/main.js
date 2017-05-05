@@ -36,11 +36,6 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
                 // Run App-Functions:
                 $scope.setExport();
-                $scope.setDataView();
-                $scope.setTimelineChartOptions();
-                $scope.setTscoreChart();
-                $scope.setStanineView();
-
 
             };
 
