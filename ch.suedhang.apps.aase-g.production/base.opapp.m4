@@ -9,7 +9,7 @@ type = patient
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
 Die allgemeine Versuchung ergibt sich aus dem Summenwert aller Items (Wert 0-80), die Subskalen stellen den Mittelwert der dazugehörigen 5 Items dar (Wert 0-4).
-Tiefe Werte entprechen einer niedrigen Versuchung, hohe Werte einer hohen Versuchung.
+Tiefe Werte entsprechen einer niedrigen Versuchung, hohe Werte einer hohen Versuchung.
 
 
 [developer]
