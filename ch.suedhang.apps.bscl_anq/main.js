@@ -61,7 +61,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         survey_responses.forEach(function(sr, srID) {
 
-            var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
+            //var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
+            var datum_messung = $filter('date')(sr.entity.data.response.q504V00);
 
             var zusatzitem = {
                 "id": srID,
