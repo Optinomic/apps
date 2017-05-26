@@ -250,6 +250,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         // Reverse Group-Order
         $scope.d.bscl.groups.reverse();
 
+
         $scope.d.bscl.groups.forEach(function(group, groupID) {
             delete group.result;
             group.data = [];
@@ -262,7 +263,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         survey_responses.forEach(function(sr, srID) {
             if (("calculations" in sr) && (sr.calculations.length > 0)) {
                 var current_calc = sr.calculations["0"].calculation_result;
-                current_calc.date = current_calc.info.filled;
+                //current_calc.date = current_calc.info.filled;
+                current_calc.date = sr.entity.data.response.q504V00;
                 alle_messungen.push(current_calc);
             };
         });
