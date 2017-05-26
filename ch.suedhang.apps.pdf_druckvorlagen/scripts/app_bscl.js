@@ -554,11 +554,12 @@ d.buildZusatzitemsArray = function() {
 
     survey_responses.forEach(function(sr, srID) {
 
-        var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
+        var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.response.q504V00);
+        //var datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.filled);
 
-        if ("q504V00" in sr.calculations["0"].calculation_result.info.response) {
-            datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.response.q504V00);
-        };
+        //if ("q504V00" in sr.calculations["0"].calculation_result.info.response) {
+        //    datum_messung = $filter('date')(sr.calculations["0"].calculation_result.info.response.q504V00);
+        //};
 
         var zusatzitem = {
             "id": srID,
