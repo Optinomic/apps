@@ -493,7 +493,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Create nice Labels
-            var date = $filter("amDateFormat")(current_response.entity.data.filled, 'DD.MM.YYYY');
+            var date = $filter("amDateFormat")(current_response.entity.data.response.Datum, 'DD.MM.YYYY');
             var label_type = 'Verlauf';
 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '1') {
