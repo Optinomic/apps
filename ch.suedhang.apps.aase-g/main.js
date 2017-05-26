@@ -74,7 +74,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var calculation = sr.calculations["0"].calculation_result;
 
             var zeipunkt_text = "Nicht festgelegt";
-            var zeipunkt_datum = response.datestamp;
+            var zeipunkt_datum = response.Datum;
             if ("Erhebungszeitpunkt" in response) {
                 if (parseInt(response.Erhebungszeitpunkt) === 1) {
                     zeipunkt_text = "Eintritt";
