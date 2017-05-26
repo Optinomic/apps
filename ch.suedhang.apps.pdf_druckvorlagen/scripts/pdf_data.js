@@ -560,7 +560,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     var calc = sr.calculations["0"].calculation_result;
 
 
-                    var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+                    //var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+                    var date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
 
                     var score = calc.score.score;
                     var interpretation = calc.score.current_range.interpretation_de;
