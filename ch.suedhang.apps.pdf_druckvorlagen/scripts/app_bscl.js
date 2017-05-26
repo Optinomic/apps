@@ -754,11 +754,12 @@ d.bscl_init = function() {
 
         // Variablen vorbereiten | verdrahten.
         var mz_text = messung.info.mz.mz_typ;
-        var datum_messung = $filter('date')(messung.info.filled);
+        var datum_messung = $filter('date')(messung.info.response.q504V00);
+        //var datum_messung = $filter('date')(messung.info.filled);
 
-        if ("q504V00" in messung.info.response) {
-            datum_messung = $filter('date')(messung.info.response.q504V00);
-        };
+        //if ("q504V00" in messung.info.response) {
+        //    datum_messung = $filter('date')(messung.info.response.q504V00);
+        //};
 
 
 
