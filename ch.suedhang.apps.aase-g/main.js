@@ -76,7 +76,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeipunkt_text = "Nicht festgelegt";
 
             if ('Datum' in response) {
-                var zeipunkt_datum = response.Datum;
+                var mydate = new Date(response.Datum);
+                var zeipunkt_datum = mydate.toISOString();
             } else {
                 var zeipunkt_datum = sr.entity.data.filled;
             };
