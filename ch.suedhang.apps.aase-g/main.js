@@ -215,7 +215,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             editable: true,
             suppressSizeToFit: true,
             width: 145,
-            field: "datestamp",
+            field: "Datum",
             cellClass: 'md-body-1',
         }, {
             headerTooltip: "Suchtdruck_1",
