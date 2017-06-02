@@ -486,8 +486,8 @@ $scope.loadAppData = function(app_identifier, load_full) {
                     });
 
 
-                    var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte auf. ";
-                    score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor.";
+                    var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte (Max. = 80) auf. ";
+                    score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor. Die Mittelwerte der Subskalen weisen auf die Gewichtung der erfragten Risikosituationen hin.";
 
 
                     var scales = {
