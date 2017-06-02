@@ -76,8 +76,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var zeipunkt_text = "Nicht festgelegt";
 
             if ('Datum' in response) {
-                var mydate = new Date(response.Datum);
-                var zeipunkt_datum = mydate.toISOString();
+                var zeipunkt_datum = new Date(response.Datum).toISOString();
             } else {
                 var zeipunkt_datum = sr.entity.data.filled;
             };
@@ -119,7 +118,19 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 "calculation": calculation,
                 "response": response
             };
+        });
 
+        // Sort survey_responses 
+        survey_responses.sort(function(a, b) {
+            var nameA = a.date
+            var nameB = b.date
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
         });
     };
 
