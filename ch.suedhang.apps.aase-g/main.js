@@ -74,7 +74,14 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             var calculation = sr.calculations["0"].calculation_result;
 
             var zeipunkt_text = "Nicht festgelegt";
-            var zeipunkt_datum = response.Datum;
+
+            entity.data.response.Datum;
+            if ('Datum' in response) {
+                var zeipunkt_datum = response.Datum;
+            } else {
+                var zeipunkt_datum = sr.entity.data.filled;
+            };
+
             if ("Erhebungszeitpunkt" in response) {
                 if (parseInt(response.Erhebungszeitpunkt) === 1) {
                     zeipunkt_text = "Eintritt";
@@ -104,6 +111,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
             // Write
+            sr.date = zeipunkt_datum;
             sr.aase = {
                 "zeipunkt_text": zeipunkt_text,
                 "zeipunkt_datum": zeipunkt_datum,
