@@ -565,7 +565,7 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     var score = calc.score.score;
                     var interpretation = calc.score.current_range.interpretation_de;
-                    var messung_text = "Am " + date + " wurden " + score.toString() + " Punkte erreicht, was als eine «" + interpretation + "» interpretiert werden kann.";
+                    var messung_text = "Am " + date + " wurden " + score.toString() + " Punkte erreicht, was als «" + interpretation + "» interpretiert werden kann.";
 
                     list_array.push($scope.d.templates.text(messung_text));
                 });
