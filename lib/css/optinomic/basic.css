@@ -10,6 +10,13 @@ body {
     font-weight: normal !important;
 }
 
+@media only screen and (min-width: 641px) {
+    html,
+    body {
+        padding: 12px;
+    }
+}
+
 
 /* 
 @media all {
