@@ -8,19 +8,25 @@ body {
     font-size: 13px !important;
     font-family: "Roboto", sans-serif !important;
     font-weight: normal !important;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 @media only screen and (min-width: 641px) and (max-width: 1023px) {
     html,
     body {
-        padding: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }
 
 @media only screen and (min-width: 1024px) {
     html,
     body {
-        padding: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
