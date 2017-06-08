@@ -10,10 +10,17 @@ body {
     font-weight: normal !important;
 }
 
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 641px) and (max-width: 1023px) {
     html,
     body {
         padding: 12px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    html,
+    body {
+        padding: 24px;
     }
 }
 
