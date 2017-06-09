@@ -35,8 +35,11 @@ include(../lib/html/optinomic/page/start.m4)
                     <div flex="30">
                         <p class="md-body-1"><span class="md-body-2">{{data.label}} </span> | {{score.sub_left}}</p>
                     </div>
-                    <div flex="40">
+                    <div flex="40" ng-if="data.stanine !== 0">
                         <score-threshold score="data.stanine" min="1" max="9" scale-ranges="d.scale_ranges_stress" show-percent-scale="true" show-min-max="false" show-bottom-bar="false" show-value-slider="false"></score-threshold>
+                    </div>
+                    <div flex="40" ng-if="data.stanine === 0">
+                        <p>Keine Angaben</p>
                     </div>
                     <div flex="30">
                         <p class="md-body-1">{{score.sub_right}}</p>
