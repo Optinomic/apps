@@ -34,7 +34,7 @@ hash = X2X6
 pid = X2X7
 fid = X2X8
 min_questions =
-min_lastpage = 2
+min_lastpage = 13
 
 [event activation]
 type = on_activation
