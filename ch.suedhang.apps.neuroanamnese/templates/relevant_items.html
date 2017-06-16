@@ -124,34 +124,34 @@ BEAT:
                         </div>
                         <div ng-if="resp.calculations[0].calculation_result.items != '10'">
                             <h4>Für die <b>Austrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: </h4>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 == '2' || resp.entity.data.response.NeuroAnamAus[SQ001] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 === '2' || resp.entity.data.response.NeuroAnamAus[SQ001] ==='2'">
                                     <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ002 == '2' || resp.entity.data.response.NeuroAnamAus[SQ002] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ002 === '2' || resp.entity.data.response.NeuroAnamAus[SQ002] ==='2'">
                                     <p>Es bestanden zum Zeitpunkt der Durchführung motorische Defizite, die zur Alltagsbehinderung führen (Parese, essentieller Tremor, Dyskinesie, etc.).</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ003 == '2' || resp.entity.data.response.NeuroAnamAus[SQ003] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ003 === '2' || resp.entity.data.response.NeuroAnamAus[SQ003] ==='2'">
                                     <p>Es bestanden zum Zeitpunkt der Durchführung andauernde leichte oder starke Kopfschmerzen.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ006 == '2' || resp.entity.data.response.NeuroAnamAus[SQ007] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ006 === '2' || resp.entity.data.response.NeuroAnamAus[SQ007] ==='2'">
                                     <p>Während des Aufenthaltes ereignete sich eine Kopfverletzung mit Bewusstlosigkeit, die länger als 5 Minuten dauerte.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ007 == '2' || resp.entity.data.response.NeuroAnamAus[SQ008] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ007 === '2' || resp.entity.data.response.NeuroAnamAus[SQ008] ==='2'">
                                     <p>Während des Aufenthaltes wurde ein chirurgischer Eingriff am Gehirn durchgeführt.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ008 == '2' || resp.entity.data.response.NeuroAnamAus[SQ009] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ008 === '2' || resp.entity.data.response.NeuroAnamAus[SQ009] ==='2'">
                                     <p>In den letzten 3 Monaten vor der Erhebung wurde eine Totalanästhesie durchgeführt.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ009 == '2' || resp.entity.data.response.NeuroAnamAus[SQ010] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ009 === '2' || resp.entity.data.response.NeuroAnamAus[SQ010] ==='2'">
                                     <p>Eine insulinpflichtige Diabetes liegt vor.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ010 == '2' || resp.entity.data.response.NeuroAnamAus[SQ011] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ010 === '2' || resp.entity.data.response.NeuroAnamAus[SQ011] ==='2'">
                                     <p>Es bestand bereits eine Vergiftung mit Substanzen, die toxisch auf das ZNS wirken (z.B. Butan, etc.).</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ011 == '2' || resp.entity.data.response.NeuroAnamAus[SQ012] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ011 === '2' || resp.entity.data.response.NeuroAnamAus[SQ012] ==='2'">
                                     <p>Es bestanden zerebro-vaskuläre Krankheiten (z.B. transiente ischämische Attacke („Streifung“); Hirnschlag) zum Zeitpunkt der Durchführung oder diese kamen früher vor.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ012 == '2' || resp.entity.data.response.NeuroAnamAus[SQ013] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ012 === '2' || resp.entity.data.response.NeuroAnamAus[SQ013] ==='2'">
                                     <p>Es liegt eine schwere somatische oder psychische Erkrankungen vor oder während des Aufenthaltes geschah ein Unfall.</p>
                                     <p>Erkrankung / Unfallfolgen: {{resp.entity.data.response.Erkrankung}}</p>
                                 </div>
