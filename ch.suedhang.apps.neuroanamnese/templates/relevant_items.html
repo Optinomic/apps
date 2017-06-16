@@ -124,10 +124,10 @@ BEAT:
                         </div>
                         <div ng-if="resp.calculations[0].calculation_result.items != '10'">
                             <h4>Für die <b>Austrittsmessung</b> vom {{resp.entity.data.filled | date}} sollten folgende Hinweise beachtet werden: </h4>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 == '2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ001 === '2'">
                                     <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
                                 </div>
-                                <div ng-if="resp.entity.data.response.NeuroAnamAus[SQ001] =='2'">
+                                <div ng-if="resp.entity.data.response.NeuroAnamAus[SQ001] ==='2'">
                                     <p>Es bestanden zum Zeitpunkt der Durchführung schwere auditive, visuelle oder sprachliche Defizite, welche die Durchführung der Testung behindern.</p>
                                 </div>
 <!--                                <div ng-if="resp.entity.data.response.NeuroAnamAus_SQ002 === '2' || resp.entity.data.response.NeuroAnamAus[SQ002] ==='2'">
