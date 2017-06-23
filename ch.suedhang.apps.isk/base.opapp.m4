@@ -21,6 +21,8 @@ website = http://www.optinomic.com/
 [template z_scores 6 20]
 include(templates/score_page.html)
 
+[readme]
+include(readme.md)
 
 [dependencies]
 
