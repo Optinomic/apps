@@ -21,6 +21,9 @@ website = http://www.optinomic.com/
 [template ZuePaZ 6 14]
 include(templates/score_new.html)
 
+[readme]
+include(readme.md)
+
 [dependencies]
 
 [javascript]

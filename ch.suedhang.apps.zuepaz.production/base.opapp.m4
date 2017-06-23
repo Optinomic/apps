@@ -18,6 +18,8 @@ company = Suedhang
 phone = +41 (0)31 828 14 51
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [dependencies]
 
