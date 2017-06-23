@@ -30,6 +30,8 @@ include(templates/score.html)
 [template data_export_admin 6 7]
 include(templates/export.html)
 
+[readme]
+include(readme.md)
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)

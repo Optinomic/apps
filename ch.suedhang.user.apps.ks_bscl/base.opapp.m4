@@ -27,7 +27,8 @@ ch.suedhang.apps.bscl_anq.production >= 1.0
 [template score_overview 4 4]
 include(templates/score.html)
 
-
+[readme]
+include(readme.md)
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
