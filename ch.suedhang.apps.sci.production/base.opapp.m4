@@ -56,5 +56,6 @@ survey = SCI
 [sql_init]
 include(includes/create_view.sql)
 
-
+[readme]
+include(readme.md)
 
