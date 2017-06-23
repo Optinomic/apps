@@ -1,28 +1,28 @@
 
+![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
 
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 ## Optinomic-App 
 
 
-#### Zusammenfassung
-###### Vorgänger-/ Originalversion
+### Zusammenfassung
+#### Vorgänger-/ Originalversion
 
-###### Anwendungsbereich
+#### Anwendungsbereich
 
-###### Theoretischer Hintergrund
-
-
-###### Auswertung / Interpretation
+#### Theoretischer Hintergrund
 
 
-###### Quelle / Printversion
+#### Auswertung / Interpretation
 
 
-###### Weiterführende Links
+#### Quelle / Printversion
+
+
+#### Weiterführende Links
 
 
 
-###Contact
+### Contact
 *Optinomic GmbH*   
 *Haldenstrasse 7*     
 *CH - 8942 Oberrieden*     
