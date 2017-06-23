@@ -1,26 +1,32 @@
 
 
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Optinomic-App 
 
-#### Zusammenfassung
+## BDI-II - Beck's Depression Inventar
+
+### Zusammenfassung
 
 Einschätzung von 21 Fragebereichen zu depressiver Symptomatik - Einteilung in keinen Verdacht auf eine Depression, Verdacht auf eine minimale / leichte / mittelschwere / schwere Depression.
 
-###### Vorgänger-/ Originalversion
+### Vorgänger-/ Originalversion
 
-###### Anwendungsbereich
+### Anwendungsbereich
 
-###### Theoretischer Hintergrund
+### Theoretischer Hintergrund
 
 
-###### Auswertung / Interpretation
+### Auswertung / Interpretation
 Summenwert zwischen 0 und 63 Punkten
+ 0 -  8 Keine Depression
+ 9 - 13 Minimale Depression
+14 - 19 Leichte Depression
+20 - 28 Mittelschwere Depression
+29 - 63 Schwere Depression
 
-###### Quelle / Printversion
+### Quelle / Printversion
 
 
-###### Weiterführende Links
+### Weiterführende Links
 
 
 ###Contact
