@@ -19,6 +19,10 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
+
+
 [dependencies]
 ch.suedhang.apps.bscl.anq >= 1.0
 
