@@ -22,6 +22,8 @@ website = http://suedhang.ch/de/
 [template asrs_scores 4 4]
 include(templates/score.html)
 
+[readme]
+include(readme.md)
 
 [dependencies]
 
