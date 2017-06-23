@@ -5,524 +5,524 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
     var dataPromiseApp = dataService.getMainAppData(app_identifier, load_full);
     dataPromiseApp.then(function(data) {
-            $scope.d.loader.count = $scope.d.loader.count + 1;
+        $scope.d.loader.count = $scope.d.loader.count + 1;
 
 
-            // Finishing: Console Info & Init = done.
-            $scope.d.haveData = true;
-            console.log("Loaded, ", app_identifier, $scope.d.appData);
+        // Finishing: Console Info & Init = done.
+        $scope.d.haveData = true;
+        console.log("Loaded, ", app_identifier, $scope.d.appData);
 
-            // Save Data to $scope.d
-            var appData = {
-                "app_scope": {},
-                "data": data,
-                "pdf": {
-                    "all": [],
-                    "eintritt": []
-                }
-            };
-            $scope.d.appData[app_identifier] = appData;
+        // Save Data to $scope.d
+        var appData = {
+            "app_scope": {},
+            "data": data,
+            "pdf": {
+                "all": [],
+                "eintritt": []
+            }
+        };
+        $scope.d.appData[app_identifier] = appData;
 
-            var run = $scope.getAppFunctionsAPI();
-            $scope.d.appData.api = run;
-
-
-
-            var pdf = $scope.d.appData[app_identifier].pdf;
+        var run = $scope.getAppFunctionsAPI();
+        $scope.d.appData.api = run;
 
 
-            //  BLOCKS pro Applikation erstellen
 
-            // -----------------------------------------------------------------
-            // actInfo - Eintritt
-            // -----------------------------------------------------------------
-            if (app_identifier === "ch.suedhang.apps.actinfo_ein.production") {
-
-                var app_title = "ActInfo";
-
-                var actinfo_ein_stack = [];
-                actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
-
-                var actinfo_ein_stack_all = [];
+        var pdf = $scope.d.appData[app_identifier].pdf;
 
 
-                if (data.survey_responses.length > 0) {
+        //  BLOCKS pro Applikation erstellen
 
-                    var last_response_id = data.survey_responses.length - 1;
-                    var app_scope = $scope.d.appData[app_identifier].app_scope;
-                    var response = data.survey_responses["0"].entity.data.response;
+        // -----------------------------------------------------------------
+        // actInfo - Eintritt
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.actinfo_ein.production") {
 
-                    var date = $filter("amDateFormat")(data.survey_responses[last_response_id].entity.data.filled, "DD.MM.YYYY");
-                    actinfo_ein_stack_all = angular.copy(actinfo_ein_stack);
-                    actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title + " | Eintritt", date));
-                    actinfo_ein_stack_all.push($scope.d.templates.heading("h2", app_title));
+            var app_title = "ActInfo";
 
-                    var act_info_ein_block = {
-                        "alignment": "left",
-                        "columns": [{
-                            "stack": [],
-                            "margin": [0, 0, 0, 6]
-                        }, {
-                            "stack": [],
-                            "margin": [0, 0, 0, 6]
-                        }],
-                        "columnGap": 24
-                    };
+            var actinfo_ein_stack = [];
+            actinfo_ein_stack.push($scope.d.templates.horizontalLine(100));
+
+            var actinfo_ein_stack_all = [];
 
 
-                    var col_1 = act_info_ein_block.columns["0"].stack;
-                    col_1.push($scope.d.templates.heading("h3", "Substanzkonsum"));
-                    col_1.push($scope.d.templates.text("Folgende Substanzen konsumierte " + $scope.d.dataMain.patient.data.extras.anrede + " vor dem aktuellen Entzug in der angegebenen Häufigkeit:"));
+            if (data.survey_responses.length > 0) {
 
-                    var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses);
-                    actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
-                        var table_to_push = {
-                            "table": {
-                                "widths": ["*"],
-                                "body": [
-                                    //[{ "text": "Substanz: Häufigkeit", "color": "white", "fontSize": 1, "margin": [0, 0, 0, 0] }],
-                                ]
-                            },
-                            "layout": "noBorders"
-                        };
+                var last_response_id = data.survey_responses.length - 1;
+                var app_scope = $scope.d.appData[app_identifier].app_scope;
+                var response = data.survey_responses["0"].entity.data.response;
 
+                var date = $filter("amDateFormat")(data.survey_responses[last_response_id].entity.data.filled, "DD.MM.YYYY");
+                actinfo_ein_stack_all = angular.copy(actinfo_ein_stack);
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title + " | Eintritt", date));
+                actinfo_ein_stack_all.push($scope.d.templates.heading("h2", app_title));
 
-                        if (table.problemsubstanzen.length) {
-                            table.problemsubstanzen.forEach(function(ps, myTableID) {
-                                var substanz = [{
-                                    "text": [
-                                        { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
-                                        { "text": " " + ps.label, "bold": false, "fontSize": 11 }
-                                    ],
-                                    "margin": [0, 0, 0, 0]
-                                }];
-                                table_to_push.table.body.push(substanz);
-                            });
-                        } else {
-                            var substanz = [{ "text": "Keine Angaben zu Problemsubstanzen vorhanden.", "fontSize": 11, "margin": [0, 0, 0, 0] }];
-                            table_to_push.table.body.push(substanz);
-                        };
-
-
-                        col_1.push(table_to_push);
-                    });
-
-
-                    // AUDIT | Fagerström
-
-                    var act_info_ein_calculation_all = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
-
-                    var act_info_ein_calculation = [];
-                    $scope.d.appData[app_identifier].data.survey_responses.forEach(function(sr, srID) {
-                        if (("calculations" in sr) && (sr.calculations.length > 0)) {
-                            var current_calc = sr.calculations["0"].calculation_result;
-                            //current_calc.date = sr.entity.data.filled;
-                            act_info_ein_calculation.push(current_calc);
-                        } else {
-                            var sr_event = sr.entity.data.event_id;
-                            act_info_ein_calculation_all.forEach(function(cc, ccID) {
-                                if (sr.entity.data.event_id === cc.response.data.event_id) {
-                                    //cc.date = cc.response.data.filled;
-                                    act_info_ein_calculation.push(cc);
-                                }
-                            });
-
-                        };
-                    });
-
-
-                    var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses[last_response_id].entity.data.response;
-
-                    var audit_stack = {
-                        "stack": [],
-                        "margin": [0, 0, 0, 12]
-                    };
-
-                    var fagerstroem_stack = {
+                var act_info_ein_block = {
+                    "alignment": "left",
+                    "columns": [{
                         "stack": [],
                         "margin": [0, 0, 0, 6]
-                    };
-
-                    var smoker = false;
-
-                    act_info_ein_calculation.forEach(function(calc, calcID) {
-
-                        if ("error" in calc) {
-                            audit_stack.stack.push("Berechnungsfehler.");
-                        } else {
-
-                            var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
-
-                            var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
-                            audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
-                            audit_stack.stack.push(audit_text);
-
-
-
-                            var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
-
-                            switch (nikotin_konsum) {
-                                case 999:
-                                    var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
-                                    break;
-                                case 1:
-                                    smoker = false;
-                                    var nichtraucher = "Nichtraucherin";
-                                    if ($scope.d.dataMain.patient.data.gender === "male") {
-                                        nichtraucher = "Nichtraucher";
-                                    };
-                                    var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
-                                    break;
-                                default:
-
-                                    var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
-                                    var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
-                                    smoker = true;
-
-                                    fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
-
-                                    fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
-
-                                    if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
-                                        fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
-                                    };
-
-                            };
-                            fagerstroem_stack.stack.push(fagerstroem_text);
-                        };
-                    });
-
-
-                    app_scope.audit = true;
-                    app_scope.audit_stack = [];
-                    app_scope.audit_stack.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
-                    app_scope.audit_stack.push(audit_stack);
-
-                    app_scope.smoker = smoker;
-                    app_scope.fagerstroem = true;
-                    app_scope.fagerstroem_stack = [];
-                    app_scope.fagerstroem_stack.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
-                    app_scope.fagerstroem_stack.push(fagerstroem_stack);
-
-                    var col_2 = act_info_ein_block.columns["1"].stack;
-                    col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
-                    var act_info_ein_block_all = angular.copy(act_info_ein_block);
-                    col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
-
-                    actinfo_ein_stack.push(act_info_ein_block);
-                    actinfo_ein_stack_all.push(act_info_ein_block_all);
-                } else {
-                    actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
-                    actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 84));
+                    }, {
+                        "stack": [],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                    "columnGap": 24
                 };
 
-                var return_obj = {
-                    "stack": actinfo_ein_stack,
+
+                var col_1 = act_info_ein_block.columns["0"].stack;
+                col_1.push($scope.d.templates.heading("h3", "Substanzkonsum"));
+                col_1.push($scope.d.templates.text("Folgende Substanzen konsumierte " + $scope.d.dataMain.patient.data.extras.anrede + " vor dem aktuellen Entzug in der angegebenen Häufigkeit:"));
+
+                var actinfo_ein_problemsubstanzen_tables = run.actinfo_ein_get_problemsubstanzen_table(data.survey_responses);
+                actinfo_ein_problemsubstanzen_tables.forEach(function(table, myTableID) {
+                    var table_to_push = {
+                        "table": {
+                            "widths": ["*"],
+                            "body": [
+                                //[{ "text": "Substanz: Häufigkeit", "color": "white", "fontSize": 1, "margin": [0, 0, 0, 0] }],
+                            ]
+                        },
+                        "layout": "noBorders"
+                    };
+
+
+                    if (table.problemsubstanzen.length) {
+                        table.problemsubstanzen.forEach(function(ps, myTableID) {
+                            var substanz = [{
+                                "text": [
+                                    { "text": " " + ps.substanz + ": ", "bold": true, "fontSize": 11 },
+                                    { "text": " " + ps.label, "bold": false, "fontSize": 11 }
+                                ],
+                                "margin": [0, 0, 0, 0]
+                            }];
+                            table_to_push.table.body.push(substanz);
+                        });
+                    } else {
+                        var substanz = [{ "text": "Keine Angaben zu Problemsubstanzen vorhanden.", "fontSize": 11, "margin": [0, 0, 0, 0] }];
+                        table_to_push.table.body.push(substanz);
+                    };
+
+
+                    col_1.push(table_to_push);
+                });
+
+
+                // AUDIT | Fagerström
+
+                var act_info_ein_calculation_all = $scope.d.appData[app_identifier].data.calculations["0"].calculation_results;
+
+                var act_info_ein_calculation = [];
+                $scope.d.appData[app_identifier].data.survey_responses.forEach(function(sr, srID) {
+                    if (("calculations" in sr) && (sr.calculations.length > 0)) {
+                        var current_calc = sr.calculations["0"].calculation_result;
+                        //current_calc.date = sr.entity.data.filled;
+                        act_info_ein_calculation.push(current_calc);
+                    } else {
+                        var sr_event = sr.entity.data.event_id;
+                        act_info_ein_calculation_all.forEach(function(cc, ccID) {
+                            if (sr.entity.data.event_id === cc.response.data.event_id) {
+                                //cc.date = cc.response.data.filled;
+                                act_info_ein_calculation.push(cc);
+                            }
+                        });
+
+                    };
+                });
+
+
+                var act_info_ein_response = $scope.d.appData[app_identifier].data.survey_responses[last_response_id].entity.data.response;
+
+                var audit_stack = {
+                    "stack": [],
+                    "margin": [0, 0, 0, 12]
+                };
+
+                var fagerstroem_stack = {
+                    "stack": [],
                     "margin": [0, 0, 0, 6]
                 };
 
-                pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+                var smoker = false;
 
-                var return_obj_all = {
-                    "stack": actinfo_ein_stack_all,
-                    "margin": [0, 0, 0, 6]
-                };
-                pdf.all.push($scope.d.templates.keepTogether(return_obj_all));
-            };
+                act_info_ein_calculation.forEach(function(calc, calcID) {
 
-            // -----------------------------------------------------------------
-            // actInfo - Austritt
-            // -----------------------------------------------------------------
-            if (app_identifier === "ch.suedhang.apps.actinfo_aus.production") {
-                var app_title = "ActInfo | Austritt";
+                    if ("error" in calc) {
+                        audit_stack.stack.push("Berechnungsfehler.");
+                    } else {
 
-                var my_all = [];
-                // my_all.push($scope.d.templates.horizontalLine(100));
+                        var date = $filter("amDateFormat")(calc.response.data.filled, "DD.MM.YYYY");
 
-                if (data.survey_responses.length > 0) {
-
-                    var calc = data.calculations["0"].calculation_results["0"];
-                    var response = data.survey_responses["0"].entity.data.response;
-
-                    var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
-                    if ("VMAB001" in response) {
-                        date = $filter("amDateFormat")(response.VMAB001, "DD.MM.YYYY");
-                    };
-
-
-                    // my_all.push($scope.d.templates.heading("h2", app_title, date));
-
-
-                    var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein.production"].app_scope;
-                    var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus.production"].app_scope;
-
-
-                    var austritt_text = "";
-
-                    // Eintritt | Nikotinabhängigkeit (Fagerström)
-                    if (app_scope_ein.fagerstroem === true) {
-                        my_all.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
-                        austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
-                    };
-
-
-                    var motivation_rauchstopp = "";
-                    var motivation_rauchstopp_angabe = false;
-                    if ("VZAT100" in response) {
-                        var anser_motivation_rauchstopp = parseInt(response.VZAT100);
-                        if (anser_motivation_rauchstopp === 1) {
-                            motivation_rauchstopp_angabe = true;
-
-                            if (app_scope_ein.smoker === true) {
-                                motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                            } else {
-                                motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
-                                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                            };
-                        };
-                        if (anser_motivation_rauchstopp === 2) {
-                            motivation_rauchstopp_angabe = true;
-                            motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
-                            austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-
-                        };
-                        if (anser_motivation_rauchstopp === 3) {
-                            motivation_rauchstopp_angabe = true;
-                            motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
-                            austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                        };
-                        if (anser_motivation_rauchstopp === 4) {
-                            motivation_rauchstopp_angabe = true;
-                            motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
-                            austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                        };
-                        if (anser_motivation_rauchstopp === 5) {
-                            motivation_rauchstopp_angabe = true;
-                            motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                            austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                        };
-                        if (anser_motivation_rauchstopp === 999) {
-                            motivation_rauchstopp_angabe = true;
-                            motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                            austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
-                        };
-                    };
+                        var audit_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AUDIT " + calc.AUDIT.AUDIT_Score + " von 40 möglichen Punkten auf";
+                        audit_text = audit_text + ", was folgende Interpretation zulässt: «" + calc.AUDIT.interpretation.result + "».";
+                        audit_stack.stack.push(audit_text);
 
 
 
-                    var nikotin_konsum = parseInt(response.VZAT010);
+                        var nikotin_konsum = parseInt(act_info_ein_response.VZET010);
 
-                    switch (nikotin_konsum) {
-                        case 999:
-                            austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
-                            break;
-                        case 1:
-                            var nichtraucher = "Nichtraucherin";
-                            if ($scope.d.dataMain.patient.data.gender === "male") {
-                                nichtraucher = "Nichtraucher";
-                            };
-                            austritt_text = austritt_text + " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
-                            break;
-                        default:
-                            if ("error" in calc) {
-                                fagerstroem_text = "Das Rauchverhalten kann aufgrund eines Berechnungsfehlers nicht eruiert werden.";
-                            } else {
+                        switch (nikotin_konsum) {
+                            case 999:
+                                var fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
+                                break;
+                            case 1:
+                                smoker = false;
+                                var nichtraucher = "Nichtraucherin";
+                                if ($scope.d.dataMain.patient.data.gender === "male") {
+                                    nichtraucher = "Nichtraucher";
+                                };
+                                var fagerstroem_text = " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                                break;
+                            default:
+
                                 var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
                                 var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
+                                smoker = true;
 
                                 fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
 
-                                if ((calc.FAGERSTROEM.FAGERSTROEM_Score === 999) || (calc.FAGERSTROEM.FAGERSTROEM_Score === null)) {
-                                    austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
-                                } else {
-                                    austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                                fagerstroem_text = " Bei Eintritt in die Entwöhnungsbehandlung bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+
+                                if (calc.FAGERSTROEM.FAGERSTROEM_Score === 999) {
+                                    fagerstroem_text = " Das Rauchverhalten ist bei Eintritt nicht bekannt.";
                                 };
-                            };
-                    };
 
-                    my_all.push($scope.d.templates.text(austritt_text));
-                    pdf.all.push($scope.d.templates.keepTogether(my_all));
-
-                } else {
-                    pdf.all.push($scope.d.templates.heading("h2", app_title));
-                    pdf.all.push($scope.d.templates.noData(app_identifier, 84));
-                };
-            };
-
-            // -----------------------------------------------------------------
-            // TMT
-            // -----------------------------------------------------------------
-            if (app_identifier === "ch.suedhang.apps.tmt.production") {
-
-                var app_title = "Trail Making Test (TMT)";
-                var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
-                var description_full = "Der Quotient B /A stellt das reine Mass der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
-
-
-                var my_all = [];
-                var my_eintritt = [];
-
-                my_all.push($scope.d.templates.spacer(12));
-                my_all.push($scope.d.templates.horizontalLine(100));
-                my_all.push($scope.d.templates.heading("h2", app_title));
-                my_all.push($scope.d.templates.text(description));
-                my_eintritt = angular.copy(my_all);
-                my_eintritt.push($scope.d.templates.text(description_full));
-
-
-                // Titel & Beschreibung zusammenhalten.
-                pdf.all.push($scope.d.templates.keepTogether(my_all));
-                pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
-
-
-                if (data.survey_responses.length > 0) {
-                    var app_scope = $scope.d.appData[app_identifier].app_scope;
-                    app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
-                    run.tmt_initTMT();
-                } else {
-                    pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
-                    pdf.all.push($scope.d.templates.noData(app_identifier, 84));
-                };
-            };
-
-            // -----------------------------------------------------------------
-            // BSCL
-            // -----------------------------------------------------------------
-            if (app_identifier === "ch.suedhang.apps.bscl_anq.production") {
-
-                var app_title = "Brief Symptom Checklist (BSCL)";
-                var description = "Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.";
-                var description_full = "Es handelt sich bei den 53 Items der BSCL um die fünf bis sechs ladungsstärksten Items pro Skala aus der 90 Items umfassenden SCL-90. Die Urheber- und Markenrechte an der BSCL liegen beim Hogrefe Verlag.";
-
-                var my_all = [];
-                var my_eintritt = [];
-
-                my_all.push($scope.d.templates.spacer(12));
-                my_all.push($scope.d.templates.horizontalLine(100));
-                my_all.push($scope.d.templates.heading("h2", app_title));
-                my_all.push($scope.d.templates.text(description));
-                my_all.push($scope.d.templates.text(description_full));
-                my_eintritt = angular.copy(my_all);
-
-
-                // Titel & Beschreibung zusammenhalten.
-                pdf.all.push($scope.d.templates.keepTogether(my_all));
-                pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
-
-
-                if (data.survey_responses.length > 0) {
-                    run.bscl();
-                } else {
-                    pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
-                    pdf.all.push($scope.d.templates.noData(app_identifier, 84));
-                };
-            };
-
-            // -----------------------------------------------------------------
-            // AASE-G
-            // -----------------------------------------------------------------
-            if (app_identifier === "ch.suedhang.apps.aase-g.production") {
-
-                var app_title = "Versuchung (AASE-G)";
-                var description = "Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren";
-
-
-                var my_all = [];
-                var my_eintritt = [];
-
-                my_all.push($scope.d.templates.spacer(12));
-                my_all.push($scope.d.templates.horizontalLine(100));
-                my_all.push($scope.d.templates.heading("h2", app_title));
-                my_all.push($scope.d.templates.text(description));
-                my_eintritt = angular.copy(my_all);
-
-                // Titel & Beschreibung zusammenhalten.
-                pdf.all.push($scope.d.templates.keepTogether(my_all));
-                pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
-
-
-                // Nur für "Alle Resultate"
-
-
-                if (data.survey_responses.length > 0) {
-
-                    data.survey_responses.forEach(function(sr, srID) {
-
-                        if ("calculations" in sr) {
-
-                            var calc = sr.calculations["0"].calculation_result;
-
-                            // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
-                            var mz = 3; // Default für "Unbekannt"
-                            if ("Erhebungszeitpunkt" in sr.entity.data.response) {
-                                mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
-                            };
-
-                            var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
-                            if ("Datum" in sr.entity.data.response) {
-                                date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
-                            };
-
-                            var ranges = [{
-                                "from": 0,
-                                "text": "sehr geringe Versuchung"
-                            }, {
-                                "from": 20,
-                                "text": "geringe Versuchung"
-                            }, {
-                                "from": 40,
-                                "text": "hohe Versuchung"
-                            }, {
-                                "from": 60,
-                                "text": "sehr hohe Versuchung"
-                            }];
-
-                            var interpretation = {};
-                            ranges.forEach(function(range, rangeID) {
-                                if (parseInt(calc.score) >= range.from) {
-                                    interpretation = range;
-                                };
-                            });
-
-
-                            var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte (Range 0-80) auf. ";
-                            score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor. Die Subskalen (Mittelwert mit Range 0-4) beschreiben differenzierter die Versuchung in bestimmten Risikosituationen.";
-
-
-                            var scales = {
-                                "alignment": "center",
-                                "margin": [0, 0, 0, 6],
-                                "columns": [{
-                                    "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
-                                }, {
-                                    "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
-                                }, {
-                                    "text": [{ "text": "Somatisches\nUnwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
-                                }, {
-                                    "text": [{ "text": "Entzugs-\nerscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
-                                }]
-                            };
-
-                            var return_obj = {
-                                "stack": [],
-                                "margin": [0, 0, 0, 0]
-                            }
-                            return_obj.stack.push($scope.d.templates.text(score_text));
-                            return_obj.stack.push(scales);
-
-
-                            if (mz === 1) {
-                                pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
-                            };
-                            pdf.all.push($scope.d.templates.keepTogether(return_obj));
                         };
-                    });
+                        fagerstroem_stack.stack.push(fagerstroem_text);
+                    };
+                });
+
+
+                app_scope.audit = true;
+                app_scope.audit_stack = [];
+                app_scope.audit_stack.push($scope.d.templates.heading("h3", "Alkoholabhängigkeit (AUDIT)"));
+                app_scope.audit_stack.push(audit_stack);
+
+                app_scope.smoker = smoker;
+                app_scope.fagerstroem = true;
+                app_scope.fagerstroem_stack = [];
+                app_scope.fagerstroem_stack.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
+                app_scope.fagerstroem_stack.push(fagerstroem_stack);
+
+                var col_2 = act_info_ein_block.columns["1"].stack;
+                col_2.push($scope.d.templates.keepTogether(app_scope.audit_stack));
+                var act_info_ein_block_all = angular.copy(act_info_ein_block);
+                col_2.push($scope.d.templates.keepTogether(app_scope.fagerstroem_stack));
+
+                actinfo_ein_stack.push(act_info_ein_block);
+                actinfo_ein_stack_all.push(act_info_ein_block_all);
+            } else {
+                actinfo_ein_stack.push($scope.d.templates.heading("h2", app_title));
+                actinfo_ein_stack.push($scope.d.templates.noData(app_identifier, 84));
+            };
+
+            var return_obj = {
+                "stack": actinfo_ein_stack,
+                "margin": [0, 0, 0, 6]
+            };
+
+            pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+
+            var return_obj_all = {
+                "stack": actinfo_ein_stack_all,
+                "margin": [0, 0, 0, 6]
+            };
+            pdf.all.push($scope.d.templates.keepTogether(return_obj_all));
+        };
+
+        // -----------------------------------------------------------------
+        // actInfo - Austritt
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.actinfo_aus.production") {
+            var app_title = "ActInfo | Austritt";
+
+            var my_all = [];
+            // my_all.push($scope.d.templates.horizontalLine(100));
+
+            if (data.survey_responses.length > 0) {
+
+                var calc = data.calculations["0"].calculation_results["0"];
+                var response = data.survey_responses["0"].entity.data.response;
+
+                var date = $filter("amDateFormat")(data.survey_responses["0"].entity.data.filled, "DD.MM.YYYY");
+                if ("VMAB001" in response) {
+                    date = $filter("amDateFormat")(response.VMAB001, "DD.MM.YYYY");
                 };
+
+
+                // my_all.push($scope.d.templates.heading("h2", app_title, date));
+
+
+                var app_scope_ein = $scope.d.appData["ch.suedhang.apps.actinfo_ein.production"].app_scope;
+                var app_scope_aus = $scope.d.appData["ch.suedhang.apps.actinfo_aus.production"].app_scope;
+
+
+                var austritt_text = "";
+
+                // Eintritt | Nikotinabhängigkeit (Fagerström)
+                if (app_scope_ein.fagerstroem === true) {
+                    my_all.push($scope.d.templates.heading("h3", "Nikotinabhängigkeit (Fagerström)"));
+                    austritt_text = app_scope_ein.fagerstroem_stack["1"].stack["0"] + " ";
+                };
+
+
+                var motivation_rauchstopp = "";
+                var motivation_rauchstopp_angabe = false;
+                if ("VZAT100" in response) {
+                    var anser_motivation_rauchstopp = parseInt(response.VZAT100);
+                    if (anser_motivation_rauchstopp === 1) {
+                        motivation_rauchstopp_angabe = true;
+
+                        if (app_scope_ein.smoker === true) {
+                            motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                        } else {
+                            motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                            austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                        };
+                    };
+                    if (anser_motivation_rauchstopp === 2) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+
+                    };
+                    if (anser_motivation_rauchstopp === 3) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                    };
+                    if (anser_motivation_rauchstopp === 4) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                    };
+                    if (anser_motivation_rauchstopp === 5) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        austritt_text = austritt_text + " Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                        austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                    };
+                    if (anser_motivation_rauchstopp === 999) {
+                        motivation_rauchstopp_angabe = true;
+                        motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                        austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
+                    };
+                };
+
+
+
+                var nikotin_konsum = parseInt(response.VZAT010);
+
+                switch (nikotin_konsum) {
+                    case 999:
+                        austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
+                        break;
+                    case 1:
+                        var nichtraucher = "Nichtraucherin";
+                        if ($scope.d.dataMain.patient.data.gender === "male") {
+                            nichtraucher = "Nichtraucher";
+                        };
+                        austritt_text = austritt_text + " Am " + date + " gab " + $scope.d.dataMain.patient.data.extras.anrede + " an, «" + nichtraucher + "» zu sein.";
+                        break;
+                    default:
+                        if ("error" in calc) {
+                            fagerstroem_text = "Das Rauchverhalten kann aufgrund eines Berechnungsfehlers nicht eruiert werden.";
+                        } else {
+                            var fagerstroem_text = calc.FAGERSTROEM.interpretation.result;
+                            var fagerstroem_score = calc.FAGERSTROEM.FAGERSTROEM_Score;
+
+                            fagerstroem_text = fagerstroem_text.replace("Abhängigkeit.", "Nikotinabhängigkeit");
+
+                            if ((calc.FAGERSTROEM.FAGERSTROEM_Score === 999) || (calc.FAGERSTROEM.FAGERSTROEM_Score === null)) {
+                                austritt_text = austritt_text + " Das Rauchverhalten ist bei Austritt nicht bekannt.";
+                            } else {
+                                austritt_text = austritt_text + " Am " + date + " bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                            };
+                        };
+                };
+
+                my_all.push($scope.d.templates.text(austritt_text));
+                pdf.all.push($scope.d.templates.keepTogether(my_all));
+
+            } else {
+                pdf.all.push($scope.d.templates.heading("h2", app_title));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
+
+        // -----------------------------------------------------------------
+        // TMT
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.tmt.production") {
+
+            var app_title = "Trail Making Test (TMT)";
+            var description = "Mit dem TMT wird die Fähigkeit zum visuellen Scannen, sowie die psychomotorische Geschwindigkeit (TMT A) und Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.";
+            var description_full = "Der Quotient B /A stellt das reine Mass der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Faustregel: ein B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.";
+
+
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+            my_eintritt.push($scope.d.templates.text(description_full));
+
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
+
+            if (data.survey_responses.length > 0) {
+                var app_scope = $scope.d.appData[app_identifier].app_scope;
+                app_scope.ks = run.tmt_loadKS(data.calculations["0"].calculation_results["0"]);
+                run.tmt_initTMT();
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
+
+        // -----------------------------------------------------------------
+        // BSCL
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.bscl_anq.production") {
+
+            var app_title = "Brief Symptom Checklist (BSCL)";
+            var description = "Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90. Es handelt sich bei der BSCL um eine deutschsprachige Übersetzung von G.H. Franke, deren Ursprung in dem amerikanischen „Brief Symptom Inventory“ (BSI) von L.R. Derogatis (1975) zu finden ist.";
+            var description_full = "Es handelt sich bei den 53 Items der BSCL um die fünf bis sechs ladungsstärksten Items pro Skala aus der 90 Items umfassenden SCL-90. Die Urheber- und Markenrechte an der BSCL liegen beim Hogrefe Verlag.";
+
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_all.push($scope.d.templates.text(description_full));
+            my_eintritt = angular.copy(my_all);
+
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
+
+            if (data.survey_responses.length > 0) {
+                run.bscl();
+            } else {
+                pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
+                pdf.all.push($scope.d.templates.noData(app_identifier, 84));
+            };
+        };
+
+        // -----------------------------------------------------------------
+        // AASE-G
+        // -----------------------------------------------------------------
+        if (app_identifier === "ch.suedhang.apps.aase-g.production") {
+
+            var app_title = "Versuchung (AASE-G)";
+            var description = "Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren";
+
+
+            var my_all = [];
+            var my_eintritt = [];
+
+            my_all.push($scope.d.templates.spacer(12));
+            my_all.push($scope.d.templates.horizontalLine(100));
+            my_all.push($scope.d.templates.heading("h2", app_title));
+            my_all.push($scope.d.templates.text(description));
+            my_eintritt = angular.copy(my_all);
+
+            // Titel & Beschreibung zusammenhalten.
+            pdf.all.push($scope.d.templates.keepTogether(my_all));
+            pdf.eintritt.push($scope.d.templates.keepTogether(my_eintritt));
+
+
+            // Nur für "Alle Resultate"
+
+
+            if (data.survey_responses.length > 0) {
+
+                data.survey_responses.forEach(function(sr, srID) {
+
+                    if ("calculations" in sr) {
+
+                        var calc = sr.calculations["0"].calculation_result;
+
+                        // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
+                        var mz = 3; // Default für "Unbekannt"
+                        if ("Erhebungszeitpunkt" in sr.entity.data.response) {
+                            mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
+                        };
+
+                        var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+                        if ("Datum" in sr.entity.data.response) {
+                            date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
+                        };
+
+                        var ranges = [{
+                            "from": 0,
+                            "text": "sehr geringe Versuchung"
+                        }, {
+                            "from": 20,
+                            "text": "geringe Versuchung"
+                        }, {
+                            "from": 40,
+                            "text": "hohe Versuchung"
+                        }, {
+                            "from": 60,
+                            "text": "sehr hohe Versuchung"
+                        }];
+
+                        var interpretation = {};
+                        ranges.forEach(function(range, rangeID) {
+                            if (parseInt(calc.score) >= range.from) {
+                                interpretation = range;
+                            };
+                        });
+
+
+                        var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte (Range 0-80) auf. ";
+                        score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor. Die Subskalen (Mittelwert mit Range 0-4) beschreiben differenzierter die Versuchung in bestimmten Risikosituationen.";
+
+
+                        var scales = {
+                            "alignment": "center",
+                            "margin": [0, 0, 0, 6],
+                            "columns": [{
+                                "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
+                            }, {
+                                "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
+                            }, {
+                                "text": [{ "text": "Somatisches\nUnwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
+                            }, {
+                                "text": [{ "text": "Entzugs-\nerscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
+                            }]
+                        };
+
+                        var return_obj = {
+                            "stack": [],
+                            "margin": [0, 0, 0, 0]
+                        }
+                        return_obj.stack.push($scope.d.templates.text(score_text));
+                        return_obj.stack.push(scales);
+
+
+                        if (mz === 1) {
+                            pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+                        };
+                        pdf.all.push($scope.d.templates.keepTogether(return_obj));
+                    };
+                });
+
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
                 pdf.all.push($scope.d.templates.noData(app_identifier, 84));
