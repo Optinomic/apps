@@ -24,7 +24,8 @@ website = http://suedhang.ch/de/
 [template simple_score 4 4]
 include(templates/score.html)
 
-
+[readme]
+include(readme.md)
 
 [dependencies]
 
