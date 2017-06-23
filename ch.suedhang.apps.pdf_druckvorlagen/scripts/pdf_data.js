@@ -453,75 +453,75 @@ $scope.loadAppData = function(app_identifier, load_full) {
 
                     data.survey_responses.forEach(function(sr, srID) {
 
-                            if ("calculations" in sr) {
+                        if ("calculations" in sr) {
 
-                                var calc = sr.calculations["0"].calculation_result;
+                            var calc = sr.calculations["0"].calculation_result;
 
-                                // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
-                                var mz = 3; // Default für "Unbekannt"
-                                if ("Erhebungszeitpunkt" in sr.entity.data.response) {
-                                    mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
+                            // 1 = Eintritt | 2 = Austritt | 3=Anderer Messzeitpunkt
+                            var mz = 3; // Default für "Unbekannt"
+                            if ("Erhebungszeitpunkt" in sr.entity.data.response) {
+                                mz = parseInt(sr.entity.data.response.Erhebungszeitpunkt);
+                            };
+
+                            var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
+                            if ("Datum" in sr.entity.data.response) {
+                                date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
+                            };
+
+                            var ranges = [{
+                                "from": 0,
+                                "text": "sehr geringe Versuchung"
+                            }, {
+                                "from": 20,
+                                "text": "geringe Versuchung"
+                            }, {
+                                "from": 40,
+                                "text": "hohe Versuchung"
+                            }, {
+                                "from": 60,
+                                "text": "sehr hohe Versuchung"
+                            }];
+
+                            var interpretation = {};
+                            ranges.forEach(function(range, rangeID) {
+                                if (parseInt(calc.score) >= range.from) {
+                                    interpretation = range;
                                 };
-
-                                var date = $filter("amDateFormat")(sr.entity.data.filled, "DD.MM.YYYY");
-                                if ("Datum" in sr.entity.data.response) {
-                                    date = $filter("amDateFormat")(sr.entity.data.response.Datum, "DD.MM.YYYY");
-                                };
-
-                                var ranges = [{
-                                    "from": 0,
-                                    "text": "sehr geringe Versuchung"
-                                }, {
-                                    "from": 20,
-                                    "text": "geringe Versuchung"
-                                }, {
-                                    "from": 40,
-                                    "text": "hohe Versuchung"
-                                }, {
-                                    "from": 60,
-                                    "text": "sehr hohe Versuchung"
-                                }];
-
-                                var interpretation = {};
-                                ranges.forEach(function(range, rangeID) {
-                                    if (parseInt(calc.score) >= range.from) {
-                                        interpretation = range;
-                                    };
-                                });
-
-
-                                var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte (Range 0-80) auf. ";
-                                score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor. Die Subskalen (Mittelwert mit Range 0-4) beschreiben differenzierter die Versuchung in bestimmten Risikosituationen.";
-
-
-                                var scales = {
-                                    "alignment": "center",
-                                    "margin": [0, 0, 0, 6],
-                                    "columns": [{
-                                        "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
-                                    }, {
-                                        "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
-                                    }, {
-                                        "text": [{ "text": "Somatisches\nUnwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
-                                    }, {
-                                        "text": [{ "text": "Entzugs-\nerscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
-                                    }]
-                                };
-
-                                var return_obj = {
-                                    "stack": [],
-                                    "margin": [0, 0, 0, 0]
-                                }
-                                return_obj.stack.push($scope.d.templates.text(score_text));
-                                return_obj.stack.push(scales);
-
-
-                                if (mz === 1) {
-                                    pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
-                                };
-                                pdf.all.push($scope.d.templates.keepTogether(return_obj));
                             });
-                    };
+
+
+                            var score_text = " Am " + date + " wies " + $scope.d.dataMain.patient.data.extras.anrede + " im AASE-G " + calc.score + " Punkte (Range 0-80) auf. ";
+                            score_text = score_text + "Ensprechend liegt eine «" + interpretation.text + "» für die Hauptproblemsubstanz vor. Die Subskalen (Mittelwert mit Range 0-4) beschreiben differenzierter die Versuchung in bestimmten Risikosituationen.";
+
+
+                            var scales = {
+                                "alignment": "center",
+                                "margin": [0, 0, 0, 6],
+                                "columns": [{
+                                    "text": [{ "text": "Negativer\nAffekt\n", "style": "p" }, { "text": calc.mean_negativer_affekt.toString(), "style": "h3" }]
+                                }, {
+                                    "text": [{ "text": "Soziale\nSituationen\n", "style": "p" }, { "text": calc.mean_soziale_situationen.toString(), "style": "h3" }]
+                                }, {
+                                    "text": [{ "text": "Somatisches\nUnwohlsein\n", "style": "p" }, { "text": calc.mean_somatisches_unwohlsein.toString(), "style": "h3" }]
+                                }, {
+                                    "text": [{ "text": "Entzugs-\nerscheinungen\n", "style": "p" }, { "text": calc.mean_entzugserscheinungen.toString(), "style": "h3" }]
+                                }]
+                            };
+
+                            var return_obj = {
+                                "stack": [],
+                                "margin": [0, 0, 0, 0]
+                            }
+                            return_obj.stack.push($scope.d.templates.text(score_text));
+                            return_obj.stack.push(scales);
+
+
+                            if (mz === 1) {
+                                pdf.eintritt.push($scope.d.templates.keepTogether(return_obj));
+                            };
+                            pdf.all.push($scope.d.templates.keepTogether(return_obj));
+                        };
+                    });
                 };
             } else {
                 pdf.eintritt.push($scope.d.templates.noData(app_identifier, 84));
