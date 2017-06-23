@@ -21,7 +21,8 @@ phone = +44 207 568789
 website = http://www.optinomic.com
 
 [readme]
-include(readme.md)
+# Manual
+The app's "manual" in Markdown
 
 [dependencies]
 
