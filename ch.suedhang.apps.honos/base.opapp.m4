@@ -20,7 +20,8 @@ website = http://www.optinomic.com/
 [template scores_table 6 6]
 include(templates/table.html)
 
-
+[readme]
+include(readme.md)
 
 [dependencies]
 
