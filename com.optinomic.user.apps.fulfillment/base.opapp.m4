@@ -19,6 +19,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 [readme]
+Diese Userapp ermöglicht einem Datenverantwortlichen / Administrator den Erfüllungsgrad einelner Applikationen im Auge zu behalten. Dies Applikation listet sämtliche erfasste Fragebögen mit Angaben zu Patient, Aufenthalt und zugrundeliegendem Ereignis auf.
 
 [template fulfillment 6 8]
 include(templates/fulfillment.html)
