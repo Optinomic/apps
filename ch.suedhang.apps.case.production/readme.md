@@ -4,11 +4,24 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
 Checkliste zur Abschätzung der Schwere einer Alkoholabhängigkeit (CASE)  und Behandlungsindikation.
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 Gesamtscore - ab 15 Punkten ist eine stationäre Therapie indiziert.
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
+
 
 ###Contact
 *Optinomic GmbH*   

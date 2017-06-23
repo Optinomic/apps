@@ -4,12 +4,23 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
 Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität. Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.
 
+###### Vorgänger-/ Originalversion
 
-#### Auswertung / Ergebnisse
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 Ausgabe der Subskalen in z-Werten, auf Grundlage der Normstichprobe von Kanning (2009) berechnet. In Relation zu den erreichten Werten der bisherigen Patientengruppe gesetzt.
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 
 ###Contact

@@ -4,8 +4,24 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
 - Beurteilung der Dimensionen - Phyisischen und Psychischen Lebensquälität - gemäss "The World Health Organization Quality of Life (WHOQOL)".
+
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
+
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
+
 
 
 ###Contact

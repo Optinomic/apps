@@ -3,12 +3,23 @@
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 ## Optinomic-App 
 
-
-#### Beschreibung
+#### Zusammenfassung
 Gesundheit und soziale Funktionsfähigkeit, 12 Items.
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 Ausgabe der Einschätzung der einzelnen Items
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 
 ###Contact

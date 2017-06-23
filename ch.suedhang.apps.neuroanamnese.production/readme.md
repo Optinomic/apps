@@ -4,11 +4,24 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
 Angaben aus dem Einzelassessment - Substanzkonsum, Neuroanamnese, Konsumziel bei Austritt
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 Ausgabe der einzelnen Items aus dem Bereich Neuroanamnese, welche die Bearbeitung des TMT beeinflussen könnten.
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
+
 
 ###Contact
 *Optinomic GmbH*   

@@ -4,14 +4,26 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
 act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe
 Erfassung der vier Bereiche Behandlungsgrundlagen, soziodemografische Angaben, Substanzkonsum und Gesundheit (ausserhalb Substanzproblematik)
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 - Substanzkonsum vor Eintritt (Substanz + Häufigkeit)
 - AUDIT-Summenwert (Verdacht auf Alkoholabhängigkeit)
 - Fagerström-Summenwert (Ausprägung der Nikotinabhängigkeit)
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 
 ###Contact

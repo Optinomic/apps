@@ -4,8 +4,21 @@
 ## Optinomic-App 
 
 
-#### Ressources
-- [angular grid](http://www.angulargrid.com/index.html)  ::  Grid used for data-views.
+#### Zusammenfassung
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
+
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 
 ###Contact

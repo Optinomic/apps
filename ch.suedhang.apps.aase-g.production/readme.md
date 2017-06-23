@@ -4,11 +4,24 @@
 ## Optinomic-App 
 
 
-#### Beschreibung
+#### Zusammenfassung
+
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 0 Punkte entsprechen keiner Versuchung, eine maximale Versuchung liegt bei 80 (allgemeiner Summenwert) respektive 4 (Subskalen) Punkten vor.
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 
 ###Contact

@@ -3,12 +3,25 @@
 ![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 ## Optinomic-App 
 
+#### Zusammenfassung
 
-#### Beschreibung
 Einschätzung von 21 Fragebereichen zu depressiver Symptomatik - Einteilung in keinen Verdacht auf eine Depression, Verdacht auf eine minimale / leichte / mittelschwere / schwere Depression.
 
-#### Auswertung / Ergebnisse
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
 Summenwert zwischen 0 und 63 Punkten
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
+
 
 ###Contact
 *Optinomic GmbH*   
