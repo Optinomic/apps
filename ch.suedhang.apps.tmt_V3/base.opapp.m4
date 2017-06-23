@@ -23,6 +23,8 @@ website = http://www.optinomic.com/
 [template tmt_scores 4 4]
 include(templates/score_page.html)
 
+[readme]
+include(readme.md)
 
 [dependencies]
 
