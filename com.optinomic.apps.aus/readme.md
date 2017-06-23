@@ -21,7 +21,7 @@ gelungen, welches gleichermaßen in verschiedenen Kulturen
 (Westdeutschland, Ostdeutschland, Spanien, USA) zur Messung des
 Autoritarismus geeignet ist (Dalbert, 1996).
 
-###### Theoretischer Hintergrund
+### Theoretischer Hintergrund
 Autoritarismus ist gekennzeichnet durch Glauben an Autoritäten, autoritäre
 Unterordnung und Intoleranz gegenüber anderen Personen und
 zielt somit auf die sozial-bewertende Ebene.
@@ -45,6 +45,6 @@ zielt somit auf die sozial-bewertende Ebene.
 *Haldenstrasse 7*     
 *CH - 8942 Oberrieden*     
 *+41(0)44 508 26 76*    
-*[www.optinomic.com](mailto:info@optinomic.com)*   
+*[info@optinomic.com](mailto:info@optinomic.com)*   
 *[www.optinomic.com](http://www.optinomic.com)*   
 
