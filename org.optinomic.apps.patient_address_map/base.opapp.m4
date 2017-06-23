@@ -16,6 +16,7 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
 
 [template address 6 7]
 include(../lib/polymer/templates/template_start.m4)

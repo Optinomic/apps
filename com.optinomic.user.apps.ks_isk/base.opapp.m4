@@ -19,6 +19,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [dependencies]
 ch.suedhang.apps.isk >= 1.0
@@ -42,6 +44,5 @@ include(style.css)
 
 [calculation isk_klinikstichprobe javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
 include(calculations/klinikstichprobe.js)
-
 
 

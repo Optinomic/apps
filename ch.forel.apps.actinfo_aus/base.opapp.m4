@@ -19,6 +19,10 @@ company = Optinomic Gmbh
 phone = +41 (0)78 636 64 64
 website = https://www.forel-klinik.ch/
 
+[readme]
+include(readme.md)
+
+
 [template score 6 6]
 include(templates/score.html)
 

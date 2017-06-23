@@ -17,6 +17,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [template diagnoses_list 6 12]
 include(templates/diagnoses.html)

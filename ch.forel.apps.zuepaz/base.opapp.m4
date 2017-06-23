@@ -17,6 +17,9 @@ company = Forel-Klinik
 phone = +41 (0)52 369 14 12
 website = https://www.forel-klinik.ch/
 
+[readme]
+include(readme.md)
+
 
 [template ZuePaZ 6 14]
 include(templates/score.html)

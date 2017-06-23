@@ -16,6 +16,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [template hisoryentry_list 6 15]
 include(templates/history.html)

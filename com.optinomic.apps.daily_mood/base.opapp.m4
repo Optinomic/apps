@@ -17,6 +17,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [template daily_mood_timeline 6 4]
 include(templates/mood_timeline.html)

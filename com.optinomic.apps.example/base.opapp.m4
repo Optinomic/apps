@@ -20,6 +20,9 @@ company = Optinomic
 phone = +44 207 568789
 website = http://www.optinomic.com
 
+[readme]
+include(readme.md)
+
 [dependencies]
 
 [template show_token]

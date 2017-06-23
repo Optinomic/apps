@@ -17,6 +17,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [template pdf 6 9]
 include(../lib/html/optinomic/templates/pdfmake.html)

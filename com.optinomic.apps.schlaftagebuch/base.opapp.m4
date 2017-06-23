@@ -17,6 +17,8 @@ company = Optinomic Gmbh
 phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
+[readme]
+include(readme.md)
 
 [template schlaftagebuch 6 7]
 include(templates/schlaftagebuch.html)
