@@ -25,6 +25,9 @@ include(templates/pdf.html)
 include(../lib/html/optinomic/templates/pdfmake.html)
 include(templates/assessment.html)
 
+[readme]
+include(readme.md)
+
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.m4)
