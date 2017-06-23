@@ -19,6 +19,9 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/
 
+[readme]
+include(readme.md)
+
 [dependencies]
 
 
