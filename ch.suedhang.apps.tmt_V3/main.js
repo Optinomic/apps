@@ -198,8 +198,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         survey_responses.forEach(function(sr, srID) {
             if (("calculations" in sr) && (sr.calculations.length > 0)) {
                 var current_calc = sr.calculations["0"].calculation_result;
-                current_calc.date = current_calc.info.filled;
-                alle_messungen.push(current_calc);
+                if (current_calc.info !== undefined) {
+                    current_calc.date = current_calc.info.filled;
+                    alle_messungen.push(current_calc);
+                };
             } else {
                 var sr_event = sr.entity.data.event_id;
                 var all_calcs = $scope.d.dataMain.calculations["0"].calculation_results;
