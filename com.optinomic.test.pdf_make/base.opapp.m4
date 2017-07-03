@@ -24,10 +24,6 @@ include(readme.md)
 include(../lib/html/optinomic/templates/pdfmake.html)
 include(templates/pdf.html)
 
-[template pdf_other 6 9]
-include(../lib/html/optinomic/templates/pdfmake.html)
-include(templates/pdf.html)
-
 
 [javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
