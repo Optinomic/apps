@@ -332,7 +332,7 @@ d.tmt_initTMT = function() {
 
     // Default Z-Score Option
     $scope.d.appData["ch.suedhang.apps.tmt.production"].app_scope.tmt.zscore_options = {
-        "zscore_min": -5,
+        "zscore_min": -6,
         "zscore_max": 5,
         "clinicsample_color": "#C5CAE9",
         "centered_zero": true,
