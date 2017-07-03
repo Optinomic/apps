@@ -333,13 +333,13 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
                 // Auffällige Testleistung |  Vergleich mit den Gesunden 
                 if (messung_obj.zscore.zscore >= 2) {
-                    // Auffällige Testleistung: Rot
-                    messung_obj.zscore.zscore_color = '#F44336';
+                    // Auffällige Testleistung: Grün
+                    messung_obj.zscore.zscore_color = '#4CAF50';
                 };
 
                 if (messung_obj.zscore.zscore <= -2) {
-                    // Auffällige Testleistung: Grün
-                    messung_obj.zscore.zscore_color = '#4CAF50';
+                    // Auffällige Testleistung: Rot
+                    messung_obj.zscore.zscore_color = '#F44336';
                 };
 
 
