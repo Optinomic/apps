@@ -30,8 +30,8 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         <optinomic-template name="template"></optinomic-template>
         <template is="dom-if" if="[[_isAdmin]]">
             <div>
-                <paper-icon-button on-tap="logState" icon="bug-report"></paper-icon-button>
-                <paper-icon-button on-tap="refresh_data" icon="refresh"></paper-icon-button>
+                <paper-icon-button on-tap="_logState" icon="bug-report"></paper-icon-button>
+                <paper-icon-button on-tap="_loadData" icon="refresh"></paper-icon-button>
             </div>
         </template>
     </template>
@@ -63,7 +63,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
 
         _init: function() {
-            this._viewPageChanged();
+            // this._viewPageChanged();
         },
 
         _viewPageChanged: function(page) {
@@ -71,20 +71,19 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         },
 
         _pageChanged: function(page) {
-
-            console.log('_pageChanged', page);
+            //console.log('_pageChanged', page);
         },
 
         _showPage404: function() {
             this.page = '404';
         },
 
-        logState: function() {
+        _logState: function() {
             var state = this.getState();
             console.log('(✔) state', state);
         },
 
-        refresh_data: function() {
+        _loadData: function() {
             Polymer.RenderStatus.afterNextRender(this, function() {
 
                 // loadData
@@ -101,6 +100,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
         ready: function() {
             this._init();
+            this._loadData();
         },
 
     });

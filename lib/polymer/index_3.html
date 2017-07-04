@@ -1,5 +1,5 @@
 <head>
-    <base href="include(definitions/basepath)">
+    <base href="https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.0.36/lib/">
     <link rel="shortcut icon" href="optinomic-images/favicon-indigo/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500">
     <script src="webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -15,6 +15,13 @@
     
     html,
     body {
+        padding-top: 8px;
+        padding-bottom: 24px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
         font-family: 'Roboto', sans-serif !important;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
@@ -23,6 +30,24 @@
         -ms-text-size-adjust: 100%;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+    
+    @media only screen and (min-width: 641px) and (max-width: 1023px) {
+        html,
+        body {
+            padding-top: 12px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+    
+    @media only screen and (min-width: 1024px) {
+        html,
+        body {
+            padding-top: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
     }
     </style>
 </head>
