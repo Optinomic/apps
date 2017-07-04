@@ -1,4 +1,5 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -7,7 +8,14 @@
             padding: 6px;
         }
         </style>
-        <optinomic-title small h1="Optinomic-App-Template" h2="Optinomic-App-Template using Polymer & Redux." h3="Template"></optinomic-title>
+        <div class="horizontal wrap">
+            <div class="flex">
+                <optinomic-title small h1="Optinomic-App-Template" h2="Optinomic-App-Template using Polymer & Redux." h3="Template"></optinomic-title>
+            </div>
+            <div>
+                <paper-icon-button class="grey" on-tap="_logState" icon="bug-report"></paper-icon-button>
+            </div>
+        </div>
         <p>Something</p>
     </template>
     <script>
@@ -18,8 +26,11 @@
 
 
         __loadData: function() {
+
+            // loadData
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
+
         },
 
         __init: function() {
@@ -28,8 +39,8 @@
 
             var d = this.get('_d');
 
-            d.something = {
-                "Test": true
+            d.some_data = {
+                "test": true
             };
 
             this.set('_d', d);
@@ -49,8 +60,12 @@
         },
 
         ready: function() {
-            this.__loadData();
-            this.__init();
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                this.__loadData();
+                this.__init();
+
+            });
         }
     });
     </script>
