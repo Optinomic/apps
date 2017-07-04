@@ -24,11 +24,16 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             --paper-progress-container-color: #9E9E9E;
         }
         </style>
+        <template is="dom-if" if="[[_loading]]">
+            <paper-progress value="90" indeterminate bottom-item></paper-progress>
+        </template>
         <optinomic-template name="template"></optinomic-template>
-        <div>
-            <paper-icon-button on-tap="logState" icon="bug-report"></paper-icon-button>
-            <paper-icon-button on-tap="refresh_data" icon="refresh"></paper-icon-button>
-        </div>
+        <template is="dom-if" if="[[_isAdmin]]">
+            <div>
+                <paper-icon-button on-tap="logState" icon="bug-report"></paper-icon-button>
+                <paper-icon-button on-tap="refresh_data" icon="refresh"></paper-icon-button>
+            </div>
+        </template>
     </template>
     <script>
     Polymer({
@@ -44,9 +49,9 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 type: Boolean,
                 statePath: 'loading'
             },
-            _show_app_toolbar: {
+            _isAdmin: {
                 type: Boolean,
-                statePath: 'options.show_app_toolbar'
+                statePath: 'user.data.isAdmin'
             },
         },
 
@@ -80,16 +85,18 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         },
 
         refresh_data: function() {
-            // loadData
+            Polymer.RenderStatus.afterNextRender(this, function() {
 
-            this.dispatch('actionGetCurrentUser');
-            this.dispatch('actionGetCurrentPatient');
-            this.dispatch('actionGetCurrentPatientStays');
-            // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
-            // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
-            this.dispatch('actionGetSurveyResponses');
-            this.dispatch('actionGetClinic');
-            this.dispatch('actionGetApps');
+                // loadData
+                this.dispatch('actionGetCurrentUser');
+                this.dispatch('actionGetCurrentPatient');
+                this.dispatch('actionGetCurrentPatientStays');
+                // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
+                // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
+                this.dispatch('actionGetSurveyResponses');
+                this.dispatch('actionGetClinic');
+                this.dispatch('actionGetApps');
+            });
         },
 
         ready: function() {
