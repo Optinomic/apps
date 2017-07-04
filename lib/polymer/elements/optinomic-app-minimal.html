@@ -1,0 +1,97 @@
+<!--
+@license
+Copyright (c) 2017 Optionmic GmbH. All rights reserved.
+-->
+<link rel="import" href="polymer/polymer.html"> include(../lib/polymer/elements/optinomic-redux-store/optinomic-redux-store.html)
+<link rel="import" href="iron-icons/iron-icons.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-progress/paper-progress.html">
+<dom-module id="optinomic-app">
+    <template>
+        <style is="custom-style" include="shared-styles">
+        :host {
+            --app-primary-color: #FAFAFA;
+            --app-secondary-color: #424242;
+            --drawer-primary-color: #424242;
+            --drawer-secondary-color: #EEEEEE;
+            padding: 6px;
+        }
+        
+        paper-progress {
+            display: block;
+            width: 100%;
+            --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+            --paper-progress-container-color: #9E9E9E;
+        }
+        </style>
+        <optinomic-template name="template"></optinomic-template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-app',
+
+        properties: {
+            page: {
+                type: String,
+                reflectToAttribute: true,
+                observer: '_pageChanged',
+            },
+            _loading: {
+                type: Boolean,
+                statePath: 'loading'
+            },
+            _show_app_toolbar: {
+                type: Boolean,
+                statePath: 'options.show_app_toolbar'
+            },
+        },
+
+        observers: [
+            '_viewPageChanged(page)',
+        ],
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        _init: function() {
+            this._viewPageChanged();
+        },
+
+        _viewPageChanged: function(page) {
+            this.page = page || 'template';
+        },
+
+        _pageChanged: function(page) {
+
+            console.log('_pageChanged', page);
+        },
+
+        _showPage404: function() {
+            this.page = '404';
+        },
+
+        logState: function() {
+            var state = this.getState();
+            console.log('(✔) state', state);
+        },
+
+        refresh_data: function() {
+            // loadData
+
+            this.dispatch('actionGetCurrentUser');
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+            // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
+            // this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
+            // this.dispatch('actionGetSurveyResponses');
+            this.dispatch('actionGetClinic');
+            this.dispatch('actionGetApps');
+        },
+
+        ready: function() {
+            this._init();
+        },
+
+    });
+    </script>
+</dom-module>
