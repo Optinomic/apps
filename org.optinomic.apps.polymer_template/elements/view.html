@@ -1,0 +1,57 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            padding: 6px;
+        }
+        </style>
+        <optinomic-title small h1="Optinomic-App-Template" h2="Optinomic-App-Template using Polymer & Redux." h3="Template"></optinomic-title>
+        <p>Something</p>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        __loadData: function() {
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
+        },
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.something = {
+                "Test": true
+            };
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+
+        properties: {
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            },
+
+            _d: {
+                type: Object
+            }
+        },
+
+        ready: function() {
+            this.__loadData();
+            this.__init();
+        }
+    });
+    </script>
+</dom-module>
