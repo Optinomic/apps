@@ -17,28 +17,26 @@
                 <optinomic-title small h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
             </div>
             <div>
-                <div hidden$="[[!_d.show_help]]">
+                <div hidden$="[[_d.show_help]]">
                     <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
                 </div>
-                <div hidden$="[[_d.show_help]]">
+                <div hidden$="[[!_d.show_help]]">
                     <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
                 </div>
             </div>
         </div>
-        <div hidden$="[[!_d.show_help]]">
+        <div hidden$="[[_d.show_help]]">
             <h2 style="margin:0;color:#3F51B5">Template Content</h2>
             <p>Whatever we want here! :-)</p>
         </div>
-        <div hidden$="[[_d.show_help]]">
+        <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
                 <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
                 <p>[[_current_app.description]]</p>
             </div>
-            <div hidden$="[[!show_readme]]">
-                <div class="readme_container">
-                    <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
-                    <div id="readme"></div>
-                </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
             </div>
         </div>
     </template>
@@ -70,12 +68,14 @@
 
         _toggleHelp: function() {
             var d = this.get('_d');
+            this._d = {};
             d.show_help = !d.show_help;
 
             var readme_box = this.$.readme;
             readme_box.innerHTML = this._current_app.readme_html;
 
             this.set('_d', d);
+            console.log('INIT _d', d);
         },
 
         // --------------------------- Data --------------------------- 
