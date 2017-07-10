@@ -55,7 +55,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             },
             _isAdmin: {
                 type: Boolean,
-                statePath: 'user.data.isAdmin'
+                statePath: 'app_user.data.isAdmin'
             },
         },
 
@@ -91,7 +91,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             Polymer.RenderStatus.afterNextRender(this, function() {
 
                 // loadData
-                //  this.dispatch('actionGetCurrentUser');
+                this.dispatch('actionGetCurrentUser');
                 //  this.dispatch('actionGetCurrentPatient');
                 //  this.dispatch('actionGetCurrentPatientStays');
                 //  this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
