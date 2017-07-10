@@ -22,7 +22,8 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             width: 100%;
             position: fixed;
             top: 0;
-            left: 0;
+            left: 10;
+            right: 10;
             z-index: 10;
             --paper-progress-active-color: rgba(255, 255, 255, 0.5);
             --paper-progress-container-color: #9E9E9E;
@@ -33,7 +34,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         </template>
         <optinomic-template name="template"></optinomic-template>
         <template is="dom-if" if="[[_isAdmin]]">
-            <div>
+            <div style="margin-top: 64px;margin-bottom: 24px;">
                 <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
                 <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
             </div>
