@@ -1,0 +1,164 @@
+Rückfall-Angaben Actinfo Austritt
+
+VYAZ010 = Wie häufig haben Sie während der Behandlung, Beratung oder Betreuung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?
+999 = nicht bekannt   
+1 = keine   
+2 = einmal  
+3 = zweimal 
+4 = drei- oder viermal  
+5 = fünfmal oder mehr
+
+ng-if = {VYAZ010 == '999'} "Es ist nicht bekannt, ob und wie oft während der Behandlung Rückfälle erlebt wurden."
+ng-if = {VYAZ010 == '1'} "Während der Behandlung wurde kein Rückfall erlebt."
+ng-if = {VYAZ010 == '2'} "Während der Behandlung wurde 1 Rückfall erlebt."
+ng-if = {VYAZ010 == '3'} "Während der Behandlung wurden 2 Rückfälle erlebt."
+ng-if = {VYAZ010 == '4'} "Während der Behandlung wurden 3-4 Rückfälle erlebt."
+ng-if = {VYAZ010 == '5'} "Während der Behandlung wurden 5 oder mehr Rückfälle erlebt."
+
+
+QYAZ020 = Um welche Substanz(en) oder suchtähnliche(n) Verhaltensweise(n) handelte es sich bei dieser Rückfallperiode(n)?   
+
+QYAZ020_VYAZ020x = nicht bekannt   
+QYAZ020_VYAZ020a = Alkohol 
+QYAZ020_VYAZ020b = Opioide (Heroin, Methadon, Codein, usw.)    
+QYAZ020_VYAZ020c = Kokain oder Derivate    
+QYAZ020_VYAZ020d = andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)  
+QYAZ020_VYAZ020e = Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)    
+QYAZ020_VYAZ020f = Halluzinogene (LSD, Ketamin, usw.)  
+QYAZ020_VYAZ020g = flüchtige Stoffe    
+QYAZ020_VYAZ020h = Cannabis    
+QYAZ020_VYAZ020i = Tabak   
+QYAZ020_VYAZ020j = andere Substanze(n) 
+falls andere -> VYAZ021j = Welche andere(n) Substanz(en)
+QYAZ020_VYAZ020k = Glücksspielsucht    
+QYAZ020_VYAZ020l = Computer- bzw. Internetsucht    
+QYAZ020_VYAZ020m = Essstörungen    
+QYAZ020_VYAZ020n = andere suchtähnliche Verhaltensweise(n) 
+falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
+
+Wenn VYAZ010 != '999' und QYAZ020_VYAZ020x = Y -> Es ist nicht bekannt, welche Substanzen während der Behandlung konsumiert wurden.
+Folgende Substanzen wurden während der Behadlung konsumiert:
+ng-repeat relapsesubstanzen
+
+    $scope.actInfoInit = function() {
+
+
+        // Relapsesubstanzen ermitteln
+
+        var results = $scope.d.dataMain.survey_responses;
+
+        results.forEach(function(result, myindex) {
+            var response = result.entity.data.response;
+            result.relapsesubstanzen = [];
+
+            var substanz = '';
+            var my_result = {};
+            var text = '';
+
+
+            // Alkohol
+            if (response['QYAZ020[VYAZ020a]'] === 'Y') {
+                substanz = 'Alkohol'
+                
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Optiate
+            if (response['QYAZ020[VYAZ020b]'] === 'Y') {
+                substanz = 'Opioide (Heroin, Methadon, Codein, usw.)'
+                
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Kokain
+            if (response['QYAZ020[VYAZ020c]'] === 'Y') {
+                substanz = 'Kokain oder Derivate'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            
+            // Andere Stimulanzien
+            if (response['QYAZ020[VYAZ020d]'] === 'Y') {
+                substanz = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Hypnotika/Sedativa
+
+            if (response['QYAZ020[VYAZ020e]'] === 'Y') {
+                substanz = 'Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Halluzinogene
+
+            if (response['QYAZ020[VYAZ020f]'] === 'Y') {
+                substanz = 'Halluzinogene (LSD, Ketamin, usw.)'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Weitere Substanzen
+            if (response['QYAZ020[VYAZ020g]'] === 'Y') {
+                substanz = 'Flüchtige Stoffe'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020h]'] === 'Y') {
+                substanz = 'Cannabis'
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020i]'] === 'Y') {
+                substanz = 'Tabak'
+                answer_option = 0;
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                var my_tabak_result = $scope.d.relapsesubstanzen_label.answer_options[1];
+                text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
+
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020j]'] === 'Y') {
+                substanz = response.VYAZ021j
+
+                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
+                text = substanz + ': ' + my_result[answer];
+
+                result.relapsesubstanzen.push(text);
+            };
+        });
+
+        $scope.d.current_response = [];
+        $scope.d.current_response.push(results[results.length - 1]);
+    };
