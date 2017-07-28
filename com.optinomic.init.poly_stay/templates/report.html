@@ -6,7 +6,7 @@ include(../lib/html/optinomic/page/start.m4)
                 <h3 class="md-title">{{d.belegung.selected.bel_selector.name}}</h3>
             </div>
             <div flex>
-                <h3 class="md-body-1">Von - Bis | Anzahl Tage</h3>
+                <h3 class="md-caption">Polypoint PID/FID: {{d.belegung.selected.bel_selector.polypoint_pid}} / {{d.belegung.selected.bel_selector.polypoint_fid}}</h3>
             </div>
         </div>
         <md-divider></md-divider>
@@ -24,17 +24,6 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
         </div>
         <md-divider></md-divider>
-        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
-            <div flex>
-                <h3 class="md-caption">Polypoint PID: {{d.belegung.selected.bel_selector.polypoint_pid}}</h3>
-            </div>
-            <div flex>
-                <h3 class="md-caption">Polypoint FID: {{d.belegung.selected.bel_selector.polypoint_fid}}</h3>
-            </div>
-        </div>
-        <div>
-            <p>&nbsp;</p>
-        </div>
     </div>
 </md-content>
 include(../lib/html/optinomic/page/end.m4)
