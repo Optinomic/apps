@@ -14,7 +14,7 @@
             <h2>Keine BSCL-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <optinomic-chart-profile language="de" options="[[_d.bscl.options_ohne_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
@@ -532,8 +532,8 @@
                     "left_text": "tiefe Physische Lebensqualität",
                     "right_title": "Physische Lebensqualität",
                     "right_text": "hohe Physische Lebensqualität",
-                    "m_norm": M_Norm[0],
-                    "sd_norm": SD_Norm[0],
+                    "m_norm": "?",
+                    "sd_norm": "?",
                     "score_path": "calculation.all_results.somatisierung_z_score",
                     "clinic_sample_var": "somatisierung_z_score",
                     "items": 1
@@ -543,8 +543,8 @@
                     "left_text": "tiefe Psychische Lebensqualität",
                     "right_title": "Psychische Lebensqualität",
                     "right_text": "hohe Psychische Lebensqualität",
-                    "m_norm": M_Norm[1],
-                    "sd_norm": SD_Norm[1],
+                    "m_norm": "?",
+                    "sd_norm": "?",
                     "score_path": "calculation.all_results.psychotizismus_z_score",
                     "clinic_sample_var": "psychotizismus_z_score",
                     "items": 5
