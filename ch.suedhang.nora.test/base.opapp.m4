@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.nora.test
-name = Optinomic | Polymer
+name = Polymer - Test Nora
 short_description = Optinomic Apps using Polymer.
 version = 1.0
 type = patient
