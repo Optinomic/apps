@@ -26,7 +26,7 @@ include(readme.md)
 [template init 6 9]
 include(templates/init.html)
 
-[template Belegung_report_only 6 6]
+[template Belegung 6 6]
 include(templates/report.html)
 
 
