@@ -36,6 +36,13 @@
         <template is="dom-if" if="[[_sr_isk]]">
             <optinomic-chart-profile language="de" options="[[_d.isk.options]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]"> </optinomic-chart-profile>
         </template>
+        <optinomic-title show_toggle_button small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_whoqol]]">
+            <h2>Keine WHOQOL-BREF-Daten vorhanden.</h2>
+        </template>
+        <template is="dom-if" if="[[_sr_whoqol]]">
+            <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"> </optinomic-chart-profile>
+        </template>
     </template>
     <script>
     Polymer({
@@ -49,6 +56,7 @@
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt_V3');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk');
+            this.dispatch('actionGetSurveyResponses', 'com.optinomic.apps.whoqol');
         },
 
         __init: function() {
@@ -358,7 +366,7 @@
                 }, {
                     "range_start": 4,
                     "range_stop": 999,
-                    "text": "seh hohe Geschwindigkeit",
+                    "text": "sehr hohe Geschwindigkeit",
                     "color": "#4CAF50"
                 }]
             };
@@ -468,6 +476,91 @@
                 }]
             };
 
+            d.whoqol = {
+                "options_text": {
+                    "min": -4,
+                    "max": "auto",
+                    "item_height": 75,
+                    "item_text_left": 100,
+                    "item_text_right": 280,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": true,
+                    "show_scale_text": true,
+                    "show_score_vertical_line": true,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "calculation.info.mz.mz_typ",
+                    "response_date_path": "calculation.info.filled"
+                },
+                "options_ohne_text": {
+                    "min": -4,
+                    "max": "auto",
+                    "item_height": 50,
+                    "item_text_left": 150,
+                    "item_text_right": 150,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": false,
+                    "show_scale_text": false,
+                    "show_score_vertical_line": false,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "calculation.info.mz.mz_typ",
+                    "response_date_path": "calculation.info.filled"
+                },
+                "start": {
+                    "left_title": "Geringe Ausprägung",
+                    "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
+                    "left_color": "#4CAF50",
+                    "right_title": "Starke Ausprägung",
+                    "right_text": "Eine längere Beschreibung bzgl. der starken Ausprägung. Eine längere Beschreibung bzgl. der starken Ausprägung.",
+                    "right_color": "#F44336"
+                },
+                "scales": [{
+                    "left_title": "Physische Lebensqualität",
+                    "left_text": "tiefe Physische Lebensqualität",
+                    "right_title": "Physische Lebensqualität",
+                    "right_text": "hohe Physische Lebensqualität",
+                    "m_norm": M_Norm[0],
+                    "sd_norm": SD_Norm[0],
+                    "score_path": "calculation.all_results.somatisierung_z_score",
+                    "clinic_sample_var": "somatisierung_z_score",
+                    "items": 1
+                }, {
+                    "id": 1,
+                    "left_title": "Psychische Lebensqualität",
+                    "left_text": "tiefe Psychische Lebensqualität",
+                    "right_title": "Psychische Lebensqualität",
+                    "right_text": "hohe Psychische Lebensqualität",
+                    "m_norm": M_Norm[1],
+                    "sd_norm": SD_Norm[1],
+                    "score_path": "calculation.all_results.psychotizismus_z_score",
+                    "clinic_sample_var": "psychotizismus_z_score",
+                    "items": 5
+                }],
+                "ranges": [{
+                    "range_start": -999,
+                    "range_stop": -2,
+                    "text": "sehr tiefe Lebensqualität",
+                    "color": "#F44336"
+                }, {
+                    "range_start": -1,
+                    "range_stop": 2.5,
+                    "text": "mittelmässige Lebensqualität",
+                    "color": "##3F51B5"
+                }, {
+                    "range_start": 4,
+                    "range_stop": 999,
+                    "text": "sehr hohe Lebensqualität",
+                    "color": "#4CAF50"
+                }]
+            };
+
             this.set('_d', d);
             console.log('INIT _d', d);
         },
@@ -515,6 +608,17 @@
                 type: Object,
                 statePath: function(state) {
                     var app_id = 'ch.suedhang.apps.isk'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[app_id]
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _sr_whoqol: {
+                type: Object,
+                statePath: function(state) {
+                    var app_id = 'com.optinomic.apps.whoqol'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
