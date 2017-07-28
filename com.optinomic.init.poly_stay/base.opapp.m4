@@ -7,7 +7,7 @@ type = patient
 
 
 [description]
-Selektieren Sie den gewünschten Fall um die Belegungsdetails des Patienten anzuzeigen. 
+Aktuelle Belegungsdetails des Patienten anzuzeigen. 
 
 
 [developer]

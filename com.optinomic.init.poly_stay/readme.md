@@ -1,10 +1,8 @@
 
-
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
 ## Polypoint Lookup
 
-
-8-ung!   Südhang only!
+Liest die aktuellen Belegungsdaten aus Polypoint und zeigt diese an.
+(8-ung: Südhang only)
 
 
 ###Anschrift
