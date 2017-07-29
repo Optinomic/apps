@@ -82,7 +82,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
@@ -247,7 +247,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": false,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": false,
                     "show_score_circles": true,
                     "show_settings_block": true,
@@ -303,7 +303,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
@@ -388,7 +388,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
@@ -484,8 +484,8 @@
 
             d.whoqol = {
                 "options_text": {
-                    "min": -4,
-                    "max": "auto",
+                    "min": 0,
+                    "max": 100,
                     "item_height": 75,
                     "item_text_left": 100,
                     "item_text_right": 280,
@@ -493,13 +493,13 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
-                    "response_title_path": "calculation.info.mz.mz_typ",
-                    "response_date_path": "calculation.info.filled"
+                    "response_title_path": "calculation.response.data.filled",
+                    "response_date_path": "calculation.response.data.filled"
                 },
                 "options_ohne_text": {
                     "min": -4,
@@ -529,40 +529,40 @@
                 },
                 "scales": [{
                     "left_title": "Physische Lebensqualität",
-                    "left_text": "tiefe Physische Lebensqualität",
+                    "left_text": "Tief",
                     "right_title": "Physische Lebensqualität",
-                    "right_text": "hohe Physische Lebensqualität",
+                    "right_text": "Hoch",
                     "m_norm": "?",
                     "sd_norm": "?",
-                    "score_path": "calculation.all_results.somatisierung_z_score",
-                    "clinic_sample_var": "somatisierung_z_score",
+                    "score_path": "calculation.PHYS_sum",
+                    "clinic_sample_var": "?",
                     "items": 1
                 }, {
                     "id": 1,
                     "left_title": "Psychische Lebensqualität",
-                    "left_text": "tiefe Psychische Lebensqualität",
+                    "left_text": "Tief",
                     "right_title": "Psychische Lebensqualität",
-                    "right_text": "hohe Psychische Lebensqualität",
+                    "right_text": "Hoch",
                     "m_norm": "?",
                     "sd_norm": "?",
-                    "score_path": "calculation.all_results.psychotizismus_z_score",
-                    "clinic_sample_var": "psychotizismus_z_score",
+                    "score_path": "calculation.PSYCH_sum",
+                    "clinic_sample_var": "?",
                     "items": 5
                 }],
                 "ranges": [{
-                    "range_start": -999,
-                    "range_stop": -2,
-                    "text": "sehr tiefe Lebensqualität",
+                    "range_start": 0,
+                    "range_stop": 20,
+                    "text": "Sehr tiefe Lebensqualität",
                     "color": "#F44336"
                 }, {
-                    "range_start": -1,
-                    "range_stop": 2.5,
-                    "text": "mittelmässige Lebensqualität",
+                    "range_start": 21,
+                    "range_stop": 40,
+                    "text": "Mittelmässige Lebensqualität",
                     "color": "##3F51B5"
                 }, {
-                    "range_start": 4,
-                    "range_stop": 999,
-                    "text": "sehr hohe Lebensqualität",
+                    "range_start": 41,
+                    "range_stop": 100,
+                    "text": "Sehr hohe Lebensqualität",
                     "color": "#4CAF50"
                 }]
             };
