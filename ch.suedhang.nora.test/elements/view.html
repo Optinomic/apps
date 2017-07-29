@@ -30,7 +30,7 @@
             <h2>Keine TMT-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_tmt]]">
-            <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]"> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_sample_dive="[0, 0, 0, 0, 0]" clinic_samples='include(includes/ks_tmt.json)'> </optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
@@ -38,7 +38,7 @@
             <h2>Keine ISK-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_isk]]">
-            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]"></optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_sample_dive="[0, 0]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
@@ -540,12 +540,12 @@
                     "range_start": 25,
                     "range_stop": 50,
                     "text": "Mittelmässige Lebensqualität",
-                    "color": "#FFEBEE"
+                    "color": "#FFCDD2"
                 }, {
                     "range_start": 50,
                     "range_stop": 75,
                     "text": "Gute Lebensqualität",
-                    "color": "#E8F5E9"
+                    "color": "#C8E6C9"
                 }, {
                     "range_start": 75,
                     "range_stop": 100,
