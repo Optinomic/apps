@@ -1,6 +1,5 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
-<link rel="import" href="clinic-samples.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -15,7 +14,7 @@
             <h2>Keine BSCL-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples="_cs_bscl"> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
@@ -31,7 +30,7 @@
             <h2>Keine TMT-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_tmt]]">
-            <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_sample_dive="[0, 0, 0, 0]" clinic_samples="_cs_tmt"> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_sample_dive="[0, 0, 0, 0]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only.json)'> </optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
@@ -39,7 +38,7 @@
             <h2>Keine ISK-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_isk]]">
-            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_sample_dive="[0, 0]" clinic_samples="_cs_isk"></optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_sample_dive="[0, 0]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
         </template>
 
         <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
