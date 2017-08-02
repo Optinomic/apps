@@ -8,6 +8,15 @@
             padding: 6px;
         }
         </style>
+        <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_actinfo_ein]]">
+            <h2>Keine BSCL-Daten vorhanden.</h2>
+        </template>
+        <template is="dom-if" if="[[_sr_actinfo_ein]]">
+            <h2>AUDIT (Alcohol Use Disorders Identification)</h2>
+            <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
+        </template>
+        
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bscl]]">
             <h2>Keine BSCL-Daten vorhanden.</h2>
@@ -66,6 +75,53 @@
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
+
+            d.actinfo_audit = {
+                "options": {
+                    "min": 0,
+                    "max": 40,
+                    "item_height": 50,
+                    "item_text_left": 130,
+                    "item_text_right": 130,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": true,
+                    "show_scale_text": false,
+                    "show_score_vertical_line": true,
+                    "show_score_profile_line": false,
+                    "show_score_circles": true,
+                    "show_settings_block": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 3,
+                    "response_title_path": "app_name",
+                    "response_date_path": "date"
+                },
+                "scales": [{
+                    "left_title": "Risikoarmer Alkoholkonsum",
+                    "left_text": "",
+                    "right_title": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+                    "right_text": "",
+                    "score_path": "calculation.AUDIT.AUDIT_Score",
+                    "clinic_sample_var": null
+                }],
+                "ranges": [{
+                    "range_start": 0,
+                    "range_stop": 7,
+                    "text": "Risikoarmer Alkoholkonsum",
+                    "color": "#2E7D32"
+                }, {
+                    "range_start": 8,
+                    "range_stop": 15,
+                    "text": "Verdacht auf eine alkoholbezogene Störung",
+                    "color": "#FF9800"
+                }, {
+                    "range_start": 16,
+                    "range_stop": 40,
+                    "text": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+                    "color": "#C62828"
+                }]
+            };
+
 
             d.bscl = {
                 "options_text": {
