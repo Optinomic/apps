@@ -10,7 +10,7 @@
         </style>
         <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_actinfo_ein]]">
-            <h2>Keine BSCL-Daten vorhanden.</h2>
+            <h2>Keine ActInfo-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_actinfo_ein]]">
             <h2>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h2>
@@ -84,8 +84,8 @@
                     "min": 0,
                     "max": 40,
                     "item_height": 50,
-                    "item_text_left": 120,
-                    "item_text_right": 120,
+                    "item_text_left": 100,
+                    "item_text_right": 100,
                     "color_grid": "#9E9E9E",
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
@@ -95,7 +95,7 @@
                     "show_score_circles": true,
                     "show_settings_block": true,
                     "range_alpha": 0.1,
-                    "vertical_grid_every_x": 3,
+                    "vertical_grid_every_x": 10,
                     "response_title_path": "calculation.AUDIT.interpretation.result",
                     "response_date_path": "date"
                 },
@@ -130,8 +130,8 @@
                     "min": 0,
                     "max": 10,
                     "item_height": 50,
-                    "item_text_left": 120,
-                    "item_text_right": 120,
+                    "item_text_left": 100,
+                    "item_text_right": 100,
                     "color_grid": "#9E9E9E",
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
@@ -141,7 +141,7 @@
                     "show_score_circles": true,
                     "show_settings_block": true,
                     "range_alpha": 0.1,
-                    "vertical_grid_every_x": 3,
+                    "vertical_grid_every_x": 2,
                     "response_title_path": "calculation.FAGERSTROEM.interpretation.result",
                     "response_date_path": "date"
                 },
