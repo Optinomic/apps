@@ -756,8 +756,8 @@
                 observer: '_mergeActinfo'
             },
             _sr_actinfo: {
-                type: Array,
-                value: []
+                type: Object,
+                value: {}
             },
 
             _d: {
@@ -782,7 +782,11 @@
                         });
 
 
-                        this.set('_sr_actinfo', _sr_actinfo);
+                        var actinfo_obj = {
+                            "data": _sr_actinfo,
+                            "app_id" "actinfo - Ein & Austritt"
+                        }
+                        this.set('_sr_actinfo', actinfo_obj);
                         console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
 
                     };
