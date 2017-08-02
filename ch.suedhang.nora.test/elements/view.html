@@ -16,12 +16,10 @@
             <h2>Alohol (AUDIT - Alcohol Use Disorders Identification)</h2>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
         </template>
-        <template is="dom-if" if="[[_sr_actinfo]]">
+        <template is="dom-if" if="[[_sr_actinfo.merged]]">
             <h2>Nikotin (Fagerström)</h2>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
         </template>
-
-
 
 
 
@@ -757,7 +755,9 @@
             },
             _sr_actinfo: {
                 type: Object,
-                value: {}
+                value: {
+                    "merged": false
+                }
             },
 
             _d: {
@@ -783,6 +783,7 @@
 
 
                         var actinfo_obj = {
+                            "merged": true,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
                         }
