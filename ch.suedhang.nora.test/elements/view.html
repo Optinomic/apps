@@ -620,7 +620,7 @@
                 statePath: function(state) {
                     var actinfo_ein = 'ch.suedhang.apps.actinfo_ein'
                     var actinfo_aus = 'ch.suedhang.apps.actinfo_ein'
-                    if (app_id in state.survey_responses.data) {
+                    if (actinfo_ein in state.survey_responses.data) {
                         return state.survey_responses.data[actinfo_ein]
                     } else {
                         return null
