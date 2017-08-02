@@ -13,18 +13,13 @@
             <h2>Keine BSCL-Daten vorhanden.</h2>
         </template>
         <template is="dom-if" if="[[_sr_actinfo_ein]]">
-            <h2>Alohol (AUDIT - Alcohol Use Disorders Identification)</h2>
+            <h2>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h2>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
         </template>
         <template is="dom-if" if="[[_sr_actinfo.merged]]">
-            <h2>Nikotin (Fagerström)</h2>
+            <h2>Nikotin (Fagerström) bei Ein- & Austritt</h2>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
         </template>
-
-
-
-
-
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bscl]]">
             <h2>Keine BSCL-Daten vorhanden.</h2>
@@ -89,12 +84,12 @@
                     "min": 0,
                     "max": 40,
                     "item_height": 50,
-                    "item_text_left": 130,
-                    "item_text_right": 130,
+                    "item_text_left": 120,
+                    "item_text_right": 120,
                     "color_grid": "#9E9E9E",
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
-                    "show_scale_text": false,
+                    "show_scale_text": true,
                     "show_score_vertical_line": true,
                     "show_score_profile_line": false,
                     "show_score_circles": true,
@@ -105,10 +100,10 @@
                     "response_date_path": "date"
                 },
                 "scales": [{
-                    "left_title": "Risikoarmer Alkoholkonsum",
-                    "left_text": "",
-                    "right_title": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
-                    "right_text": "",
+                    "left_title": "Alkohol",
+                    "left_text": "Gering",
+                    "right_title": "Alkohol",
+                    "right_text": "Stark",
                     "score_path": "calculation.AUDIT.AUDIT_Score",
                     "clinic_sample_var": null
                 }],
@@ -135,12 +130,12 @@
                     "min": 0,
                     "max": 10,
                     "item_height": 50,
-                    "item_text_left": 130,
-                    "item_text_right": 130,
+                    "item_text_left": 120,
+                    "item_text_right": 120,
                     "color_grid": "#9E9E9E",
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
-                    "show_scale_text": false,
+                    "show_scale_text": true,
                     "show_score_vertical_line": true,
                     "show_score_profile_line": false,
                     "show_score_circles": true,
