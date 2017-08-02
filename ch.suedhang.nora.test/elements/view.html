@@ -615,11 +615,10 @@
                     };
                 }
             },
-            _sr_actinfo: {
+            _sr_actinfo_ein: {
                 type: Object,
                 statePath: function(state) {
                     var actinfo_ein = 'ch.suedhang.apps.actinfo_ein'
-                    var actinfo_aus = 'ch.suedhang.apps.actinfo_ein'
                     if (actinfo_ein in state.survey_responses.data) {
                         return state.survey_responses.data[actinfo_ein]
                     } else {
@@ -628,6 +627,23 @@
                 },
                 observer: '_mergeActinfo'
             },
+            _sr_actinfo_aus: {
+                type: Object,
+                statePath: function(state) {
+                    var actinfo_aus = 'ch.suedhang.apps.actinfo_aus'
+                    if (actinfo_aus in state.survey_responses.data) {
+                        return state.survey_responses.data[actinfo_aus]
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_mergeActinfo'
+            },
+            _sr_actinfo: {
+                type: Array,
+                value: []
+            },
+
             _d: {
                 type: Object
             }
@@ -635,8 +651,24 @@
 
 
         _mergeActinfo: function() {
-            this.debounce('_mergeActinfo', function () {
-                console.warn('_mergeActinfo', this._sr_actinfo);
+            this.debounce('_mergeActinfo', function() {
+
+                var _sr_actinfo = [];
+                if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== undefined)) {
+                    if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
+                        this._sr_actinfo_ein.data.forEach(function(current, ID) {
+                            current.app_name = 'Eintritt';
+                            _sr_actinfo.push(current);
+                        });
+                        this._sr_actinfo_aus.data.forEach(function(current, ID) {
+                            current.app_name = 'Austritt';
+                            _sr_actinfo.push(current);
+                        });
+
+                        console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, _sr_actinfo);
+                    };
+                };
+
             }, 250);
         },
 
