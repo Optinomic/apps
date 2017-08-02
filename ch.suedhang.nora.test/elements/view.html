@@ -3,12 +3,11 @@
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
-        :host {
+         :host {
             display: block;
             padding: 6px;
         }
         </style>
-
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bscl]]">
             <h2>Keine BSCL-Daten vorhanden.</h2>
@@ -16,7 +15,6 @@
         <template is="dom-if" if="[[_sr_bscl]]">
             <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bdi]]">
             <h2>Keine BDI-Daten vorhanden.</h2>
@@ -24,7 +22,6 @@
         <template is="dom-if" if="[[_sr_bdi]]">
             <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_tmt]]">
             <h2>Keine TMT-Daten vorhanden.</h2>
@@ -32,7 +29,6 @@
         <template is="dom-if" if="[[_sr_tmt]]">
             <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_sample_dive="[0, 0, 0, 0]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only.json)'> </optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_isk]]">
             <h2>Keine ISK-Daten vorhanden.</h2>
@@ -40,7 +36,6 @@
         <template is="dom-if" if="[[_sr_isk]]">
             <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_sample_dive="[0, 0]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_whoqol]]">
             <h2>Keine WHOQOL-BREF-Daten vorhanden.</h2>
@@ -48,7 +43,6 @@
         <template is="dom-if" if="[[_sr_whoqol]]">
             <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
         </template>
-
     </template>
     <script>
     Polymer({
@@ -63,6 +57,8 @@
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt_V3');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk');
             this.dispatch('actionGetSurveyResponses', 'com.optinomic.apps.whoqol');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus');
         },
 
         __init: function() {
@@ -619,9 +615,29 @@
                     };
                 }
             },
+            _sr_actinfo: {
+                type: Object,
+                statePath: function(state) {
+                    var actinfo_ein = 'ch.suedhang.apps.actinfo_ein'
+                    var actinfo_aus = 'ch.suedhang.apps.actinfo_ein'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[actinfo_ein]
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_mergeActinfo'
+            },
             _d: {
                 type: Object
             }
+        },
+
+
+        _mergeActinfo: function() {
+            this.debounce('_mergeActinfo', function () {
+                console.warn('_mergeActinfo', this._sr_actinfo);
+            }, 250);
         },
 
         ready: function() {
