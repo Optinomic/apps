@@ -20,13 +20,17 @@
             <h3>Nikotin (Fagerström) bei Ein- & Austritt</h3>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
         </template>
+
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bscl]]">
             <h3>Keine BSCL-Daten vorhanden.</h3>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]">
+                <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[[_d.bscl.clinic_sample_dive.array]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            </template>
         </template>
+
         <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bdi]]">
             <h3>Keine BDI-Daten vorhanden.</h3>
@@ -64,13 +68,13 @@
 
 
         __loadData: function() {
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt_V3');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk');
             this.dispatch('actionGetSurveyResponses', 'com.optinomic.apps.whoqol');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus');
         },
 
         __init: function() {
@@ -177,6 +181,7 @@
             };
 
             d.bscl = {
+                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -398,6 +403,7 @@
             };
 
             d.tmt = {
+                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -465,6 +471,7 @@
             };
 
             d.isk = {
+                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -678,7 +685,8 @@
                     } else {
                         return null
                     };
-                }
+                },
+                observer: '_sr_bsclChanged'
             },
             _sr_bdi: {
                 type: Object,
@@ -791,6 +799,41 @@
 
             }, 250);
         },
+
+        _sr_bsclChanged: function() {
+            this.debounce('_sr_bsclChanged', function() {
+
+                // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+
+
+                var clinic_sample_dive = {
+                    "defined": false,
+                    "dive_array": []
+                };
+                var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length-1];
+
+
+                // Messzeitpunkt
+                // if () {}
+                clinic_sample_dive.dive_array.push(5);
+
+                clinic_sample_dive.dive_array.push(2);
+
+                clinic_sample_dive.dive_array.push(4);
+
+                // Set
+                clinic_sample_dive.defined = true;
+                console.error('_sr_bsclChanged', latest_sr, clinic_sample_dive);
+
+                this.set('_d.bscl.clinic_sample_dive', clinic_sample_dive);
+
+                console.error('_sr_bsclChanged SET';
+
+
+            }, 250);
+        },
+
+        
 
         ready: function() {
             this.__loadData();
