@@ -13,11 +13,11 @@
             <h3>Keine ActInfo-Daten vorhanden.</h3>
         </template>
         <template is="dom-if" if="[[_sr_actinfo_ein]]">
-            <h2>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h2>
+            <h3>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h3>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
         </template>
         <template is="dom-if" if="[[_sr_actinfo.merged]]">
-            <h2>Nikotin (Fagerström) bei Ein- & Austritt</h2>
+            <h3>Nikotin (Fagerström) bei Ein- & Austritt</h3>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
         </template>
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
@@ -141,8 +141,8 @@
                     "show_score_circles": true,
                     "show_settings_block": true,
                     "range_alpha": 0.1,
-                    "vertical_grid_every_x": 2,
-                    "response_title_path": "calculation.FAGERSTROEM.interpretation.result",
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "info",
                     "response_date_path": "date"
                 },
                 "scales": [{
@@ -769,10 +769,12 @@
                     if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
                         this._sr_actinfo_ein.data.forEach(function(current, ID) {
                             current.app_name = 'Eintritt';
+                            current.info = current.app_name + ': ' + current.calculation.FAGERSTROEM.interpretation.result
                             _sr_actinfo.push(current);
                         });
                         this._sr_actinfo_aus.data.forEach(function(current, ID) {
                             current.app_name = 'Austritt';
+                            current.info = current.app_name + ': ' + current.calculation.FAGERSTROEM.interpretation.result
                             _sr_actinfo.push(current);
                         });
 
@@ -783,8 +785,7 @@
                             "app_id": "actinfo - Ein & Austritt"
                         }
                         this.set('_sr_actinfo', actinfo_obj);
-                        console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
-
+                        //console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
                     };
                 };
 
