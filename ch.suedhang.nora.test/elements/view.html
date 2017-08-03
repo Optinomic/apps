@@ -20,18 +20,13 @@
             <h3>Nikotin (Fagerström) bei Ein- & Austritt</h3>
             <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bscl]]">
             <h3>Keine BSCL-Daten vorhanden.</h3>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-
-            <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]" restamp="true">
-                <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
-            </template>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
         </template>
-
         <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bdi]]">
             <h3>Keine BDI-Daten vorhanden.</h3>
@@ -182,7 +177,6 @@
             };
 
             d.bscl = {
-                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -404,7 +398,6 @@
             };
 
             d.tmt = {
-                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -472,7 +465,6 @@
             };
 
             d.isk = {
-                "clinic_sample_dive": { "defined": false, "array": null },
                 "options_text": {
                     "min": -4,
                     "max": "auto",
@@ -811,7 +803,7 @@
                     "defined": false,
                     "dive_array": []
                 };
-                var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length-1];
+                var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
 
 
                 // Messzeitpunkt
@@ -839,7 +831,7 @@
             }, 250);
         },
 
-        
+
 
         ready: function() {
             this.__loadData();
