@@ -28,7 +28,7 @@
         <template is="dom-if" if="[[_sr_bscl]]">
 
             <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]" restamp="true">
-                <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive$="[[_d.bscl.clinic_sample_dive.array]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+                <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[[_d.bscl.clinic_sample_dive.array]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
             </template>
         </template>
 
