@@ -1,7 +1,7 @@
 [module]
-id = ch.suedhang.nora.test
-name = Polymer - Test Nora
-short_description = Übersicht Fallkonferenz
+id = ch.suedhang.apps.fallkonferenz
+name = Fallkonferenz
+short_description = Diese Applikation dient zur schnellen Übersicht z.B. für die Fallkonferenz.
 version = 1.0
 type = patient
 
