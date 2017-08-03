@@ -10,7 +10,7 @@
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
-                <optinomic-title nomargin h1="Fallkonferenz" h2="Übersicht" h3="[[_current_app.version]]"></optinomic-title>
+                <optinomic-title nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
             </div>
             <div>
                 <div hidden$="[[_d.show_help]]">
@@ -21,7 +21,18 @@
                 </div>
             </div>
         </div>
-        <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+
+        <div>
             <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_actinfo_ein]]">
                 <h3>Keine ActInfo-Daten vorhanden.</h3>
@@ -69,17 +80,8 @@
             <template is="dom-if" if="[[_sr_whoqol]]">
                 <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
             </template>
-        </template>
-        <div hidden$="[[!_d.show_help]]">
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
-                <p>[[_current_app.description]]</p>
-            </div>
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
-                <div id="readme"></div>
-            </div>
         </div>
+        
     </template>
     <script>
     Polymer({
