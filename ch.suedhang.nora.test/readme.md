@@ -5,16 +5,7 @@ Der DASS – ein Screeningverfahren nicht nur für Schmerzpatienten
 
 ## Zusammenfassung
 ### Hintergrund
-Die Erfassung psychischer Belastung hat einen zentralen Stellenwert in der Schmerzforschung und -behandlung. Für Depression als Komorbidität bei Schmerz bestehen dabei besondere methodische und konzeptionelle Schwierigkeiten. Überprüft wurden die psychometrischen Eigenschaften
-der deutschsprachigen Kurzfassung der
-Depressions-Angst-Stress-Skalen (DASS). Das
-Verfahren wird in der Schmerzforschung und
--behandlung verwendet und wurde entwickelt,
-um spezifische Konfundierungsprobleme
-zu lösen, indem somatische Items vermieden
-werden und sich die Fragen auf psychologische
-Kernaspekte von Depression,
-Angst und Stress konzentrieren.
+Die Erfassung psychischer Belastung hat einen zentralen Stellenwert in der Schmerzforschung und -behandlung. Für Depression als Komorbidität bei Schmerz bestehen dabei besondere methodische und konzeptionelle Schwierigkeiten. Überprüft wurden die psychometrischen Eigenschaften der deutschsprachigen Kurzfassung der Depressions-Angst-Stress-Skalen (DASS). Das Verfahren wird in der Schmerzforschung und -behandlung verwendet und wurde entwickelt, um spezifische Konfundierungsprobleme zu lösen, indem somatische Items vermieden werden und sich die Fragen auf psychologische Kernaspekte von Depression, Angst und Stress konzentrieren.
 
 ### Methode
 Die psychometrischen Eigenschaften
