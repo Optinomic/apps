@@ -9,12 +9,11 @@ Die Erfassung psychischer Belastung hat einen zentralen Stellenwert in der Schme
 
 
 ### Schlüsselwörter
-Fragebögen · Psychische Belastung · Schmerz · Sensitivität · Spezifität
-
+Fallkonferenz · ActInfo · BSCL · Depressions-Inventar · TMT · ISK · WHOQOL
 
 
 ### Weiterführende Links
-- [DASS Homepage](http://www.psy.unsw.edu.au/dass/)
+- [Optinomic](http://www.optinomic.com/)
 
 
 # Anschrift
