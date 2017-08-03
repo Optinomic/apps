@@ -8,78 +8,53 @@
             padding: 6px;
         }
         </style>
-        <div class="horizontal wrap">
-            <div class="flex app_title">
-                <optinomic-title nomargin h1="Fallkonferenz" h2="Übersicht" h3="[[_current_app.version]]"></optinomic-title>
-            </div>
-            <div>
-                <div hidden$="[[_d.show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
-                </div>
-                <div hidden$="[[!_d.show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
-                </div>
-            </div>
-        </div>
-        <div hidden$="[[_d.show_help]]">
-            <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_actinfo_ein]]">
-                <h3>Keine ActInfo-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_actinfo_ein]]">
-                <h3>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h3>
-                <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
-            </template>
-            <template is="dom-if" if="[[_sr_actinfo.merged]]">
-                <h3>Nikotin (Fagerström) bei Ein- & Austritt</h3>
-                <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
-            </template>
-            <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_bscl]]">
-                <h3>Keine BSCL-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_bscl]]">
-                <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
-            </template>
-            <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_bdi]]">
-                <h3>Keine BDI-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_bdi]]">
-                <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
-            </template>
-            <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_tmt]]">
-                <h3>Keine TMT-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_tmt]]">
-                <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only.json)'> </optinomic-chart-profile>
-            </template>
-            <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_isk]]">
-                <h3>Keine ISK-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_isk]]">
-                <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
-            </template>
-            <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_whoqol]]">
-                <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr_whoqol]]">
-                <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
-            </template>
-        </div>
-        <div hidden$="[[!_d.show_help]]">
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
-                <p>[[_current_app.description]]</p>
-            </div>
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
-                <div id="readme"></div>
-            </div>
-        </div>
+        <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_actinfo_ein]]">
+            <h3>Keine ActInfo-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_actinfo_ein]]">
+            <h3>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h3>
+            <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
+        </template>
+        <template is="dom-if" if="[[_sr_actinfo.merged]]">
+            <h3>Nikotin (Fagerström) bei Ein- & Austritt</h3>
+            <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
+        </template>
+        <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_bscl]]">
+            <h3>Keine BSCL-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_bscl]]">
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+        </template>
+        <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_bdi]]">
+            <h3>Keine BDI-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_bdi]]">
+            <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
+        </template>
+        <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_tmt]]">
+            <h3>Keine TMT-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_tmt]]">
+            <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only.json)'> </optinomic-chart-profile>
+        </template>
+        <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_isk]]">
+            <h3>Keine ISK-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_isk]]">
+            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
+        </template>
+        <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
+        <template is="dom-if" if="[[!_sr_whoqol]]">
+            <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
+        </template>
+        <template is="dom-if" if="[[_sr_whoqol]]">
+            <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
+        </template>
     </template>
     <script>
     Polymer({
@@ -103,8 +78,6 @@
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
-
-            d.show_help = false;
 
             d.actinfo_audit = {
                 "options": {
@@ -785,19 +758,6 @@
             _d: {
                 type: Object
             }
-        },
-
-
-        _toggleHelp: function() {
-            var d = this.get('_d');
-            this._d = {};
-            d.show_help = !d.show_help;
-
-            var readme_box = this.$.readme;
-            readme_box.innerHTML = this._current_app.readme_html;
-
-            this.set('_d', d);
-            console.log('INIT _d', d);
         },
 
 
