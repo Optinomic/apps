@@ -822,7 +822,13 @@
                 clinic_sample_dive.dive_array.push(4);
 
                 // Set
+                clinic_sample_dive.dive_array = "[" + clinic_sample_dive.dive_array.toString() + "]";
+
                 clinic_sample_dive.defined = true;
+
+
+
+
                 console.error('_sr_bsclChanged', latest_sr, clinic_sample_dive);
 
                 this.set('_d.bscl.clinic_sample_dive', clinic_sample_dive);
