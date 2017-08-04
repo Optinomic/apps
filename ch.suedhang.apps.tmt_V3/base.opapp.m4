@@ -53,9 +53,17 @@ include(survey_markups/tmt_survey.html)
 type = on_activation
 due_after = 259200
 overdue = ignore
-description = TMT-Erfassung
+description = TMT-Erfassung Eintritt
 survey = tmt_ng
 
+[event exit]
+type = before_exit
+days = 5
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = TMT-Erfassung Austritt
+survey = tmt_ng
 
 [email new_event html]
 include(emails/new_event.html)
