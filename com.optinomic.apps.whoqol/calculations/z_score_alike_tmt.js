@@ -5,16 +5,14 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    calc.roundToOne = function(num) {
-        return +(Math.round(num + "e+1") + "e-1");
+    calc.roundToTwo = function(num) {
+        // Round a Number to 0.X 
+        return +(Math.round(num + "e+2") + "e-2");
     };
 
+ 
 
-    // ------------------------------------------
-    // F U N C T I O N  -  Main
-    // ------------------------------------------
-    calc.getResults = function(myResponses) {
-
+    calc.subscales = function(result) {
         var responses_array = myResponses.survey_responses;
         var allResults = [];
 
@@ -80,11 +78,68 @@ function main(responses) {
         return allResults;
     };
 
+    calc.z_scores = function(PHYS_sum, PSYCH_sum, m_norm, sd_norm) {
 
-    // Return
-    return calc.getResults(responses);
-}
+        // Calculate stuff
+        var phys_z = (PHYS_sum - m_norm[0]) / sd_norm[0];
+        var psych_z = (PSYCH_sum - m_norm[1]) / sd_norm[1];
 
+
+        var return_obj = {
+            "phys_z": phys_z,
+            "phys_z_rounded": calc.roundToTwo(phys_z),
+            "psych_z": psych_z,
+            "psych_z_rounded": calc.roundToTwo(psych_z),
+            "calculated": true
+        };
+
+        return return_obj;
+    };
+
+    calc.getPatientAge = function(birth_date) {
+        if (birth_date !== null) {
+            var today = new Date();
+            var birthDate = new Date(birth_date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            };
+        } else {
+            var age = 1;
+        };
+
+        return age;
+    };
+
+    calc.getPatientAgeMz = function(birth_date, survey_filled_date) {
+        if (birth_date !== null) {
+            var today = new Date(survey_filled_date);
+            var birthDate = new Date(birth_date);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            };
+        } else {
+            var age = 1;
+        };
+
+        return age;
+    };
+
+
+    calc.age_norm = function (d, set_age, gender){
+
+        var resultObj = {};
+        resultObj.vars = {};
+        resultObj.vars.d = d;
+        resultObj.vars.set_age = set_age;
+ 
+        var altersgruppe = 0;
+        var altersgruppe_text = 'Keine Altergruppe bestimmt';
+        var altersgruppe_found = false;
+        var n = 0;
         // Altersgruppe & Normwerte WHOQOL [Phys., Psych.]
         if (set_age < 26) {
             if (gender === 'male') {
@@ -247,3 +302,111 @@ function main(responses) {
             };   
 
         };
+
+         resultObj.age_norm = {
+            "phys_norm_m": M_Norm[0],
+            "phys_norm_sd": SD_Norm[0],
+            "psych_norm_m": M_Norm[1],
+            "psych_norm_sd": SD_Norm[1],
+            "altersgruppe": altersgruppe,
+            "altersgruppe_text": altersgruppe_text,
+            "altersgruppe_found": altersgruppe_found,
+            "n": n
+        };
+
+        // Z-Werte - Ausgeben
+
+        var zScoreObj = {
+            "calculated": false
+        };
+
+        if (altersgruppe_found) {
+
+
+            // zScores berechnen;
+            zScoreObj = calc.z_scores(PHYS_sum, PSYCH_sum, M_Norm, SD_norm);
+           };
+
+        resultObj.z_scores = zScoreObj;
+        resultObj.result = perzObj;
+
+
+
+        return resultObj;
+    };
+
+    // ------------------------------------------
+    // F U N C T I O N  -  Main
+    // ------------------------------------------
+    calc.getResults = function(d) {
+
+        var return_obj = {};
+
+        var responses_array = d.survey_responses;
+        var allResults = [];
+
+        responses_array.forEach(function(response, myindex) {
+
+
+            var myResults = {};
+            var result = response.data.response;
+
+
+            // Age & Edu
+            myResults.birthdate = d.patient.data.birthdate
+
+            var set_age = calc.getPatientAgeMz(d.patient.data.birthdate, response.data.filled);
+            myResults.set_age = set_age;
+            myResults.date = response.data.filled;
+
+
+            // Calculate Stuff
+            myResults.subscales = calc.subscales(result);
+            myResults.z_scores= calc.age_norm(result, set_age, gender);
+
+            // Messzeitpunkt
+            var Messzeitpunkt = parseInt(result.mz);
+            myResults.mz = Messzeitpunkt;
+
+            var Messzeitpunkt_Text = 'Undefined';
+
+            if (Messzeitpunkt === 1) {
+                Messzeitpunkt_Text = 'Eintritt';
+            };
+            if (Messzeitpunkt === 2) {
+                Messzeitpunkt_Text = 'Austritt';
+            };
+            if (Messzeitpunkt === 3) {
+                Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
+            };
+
+            var mz_obj = {
+                "Messzeitpunkt": Messzeitpunkt,
+                "Messzeitpunkt_Text": Messzeitpunkt_Text
+            };
+
+            myResults.Messzeitpunkt = mz_obj;
+
+            // Write Results for the Return
+            // Do not modify stuff here
+            myResults.hash = result['optinomixHASH'];
+            myResults.response = response;
+            // myResults.d = d;
+
+            myResults.version = "19. Oktober 2016";
+
+            allResults.push(myResults);
+
+        });
+
+        return_obj.responses_array = responses_array;
+        return_obj.allResults = allResults;
+        return_obj.full = d;
+
+        return allResults;
+    };
+
+
+    // Return
+    return calc.getResults(responses);
+}
