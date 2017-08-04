@@ -33,7 +33,7 @@
         </div>
 
 
-<template is="dom-if" if="[[!_d.show_help]]" restamp="true">
+        <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_actinfo_ein]]">
                 <h3>Keine ActInfo-Daten vorhanden.</h3>
@@ -65,7 +65,7 @@
                 <h3>Keine TMT-Daten vorhanden.</h3>
             </template>
             <template is="dom-if" if="[[_sr_tmt]]">
-                <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only.json)'> </optinomic-chart-profile>
+                <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)'> </optinomic-chart-profile>
             </template>
             <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_isk]]">
