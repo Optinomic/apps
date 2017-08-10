@@ -2,7 +2,7 @@
 id = com.optinomic.cis.diagnoses
 name = Diagnosen
 short_description = Diagnosen nach ICD-10
-version = include(VERSION)
+version = 1.0
 type = patient
 
 [description]
