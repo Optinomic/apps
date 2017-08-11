@@ -31,8 +31,6 @@
                 <div id="readme"></div>
             </div>
         </div>
-
-
         <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_actinfo_ein]]">
@@ -82,7 +80,6 @@
                 <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
             </template>
         </template>
-        
     </template>
     <script>
     Polymer({
@@ -92,13 +89,17 @@
 
 
         __loadData: function() {
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.whoqol.production');
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk.production');
+                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.whoqol.production');
+            });
+
         },
 
         __init: function() {
@@ -708,7 +709,7 @@
             _sr_bscl: {
                 type: Object,
                 statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.bscl_anq'
+                    var app_id = 'ch.suedhang.apps.bscl_anq.production'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
@@ -719,7 +720,7 @@
             _sr_bdi: {
                 type: Object,
                 statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.bdi'
+                    var app_id = 'ch.suedhang.apps.bdi.production'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
@@ -730,7 +731,7 @@
             _sr_tmt: {
                 type: Object,
                 statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.tmt_V3'
+                    var app_id = 'ch.suedhang.apps.tmt.production'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
@@ -741,7 +742,7 @@
             _sr_isk: {
                 type: Object,
                 statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.isk'
+                    var app_id = 'ch.suedhang.apps.isk.production'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
@@ -752,7 +753,7 @@
             _sr_whoqol: {
                 type: Object,
                 statePath: function(state) {
-                    var app_id = 'com.optinomic.apps.whoqol'
+                    var app_id = 'ch.suedhang.apps.whoqol.production'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
@@ -763,7 +764,7 @@
             _sr_actinfo_ein: {
                 type: Object,
                 statePath: function(state) {
-                    var actinfo_ein = 'ch.suedhang.apps.actinfo_ein'
+                    var actinfo_ein = 'ch.suedhang.apps.actinfo_ein.production'
                     if (actinfo_ein in state.survey_responses.data) {
                         return state.survey_responses.data[actinfo_ein]
                     } else {
@@ -775,7 +776,7 @@
             _sr_actinfo_aus: {
                 type: Object,
                 statePath: function(state) {
-                    var actinfo_aus = 'ch.suedhang.apps.actinfo_aus'
+                    var actinfo_aus = 'ch.suedhang.apps.actinfo_aus.production'
                     if (actinfo_aus in state.survey_responses.data) {
                         return state.survey_responses.data[actinfo_aus]
                     } else {
