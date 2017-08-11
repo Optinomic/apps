@@ -72,6 +72,23 @@
             <template is="dom-if" if="[[_sr_isk]]">
                 <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
             </template>
+            <optinomic-title small h1="Stress-Coping-Inventar (SCI)" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="Chart"></optinomic-title>
+            <template is="dom-if" if="[[!_sr_sci.done]]">
+                <h3>Keine SCI-Daten vorhanden.</h3>
+            </template>
+            <template is="dom-if" if="[[_sr_sci.done]]">
+                <h3>Stressereignisse und Syptome</h3>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                <h3>Hilfreiche Copingstrategien</h3>
+                <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                <h3>Ungünstige Copingstrategie</h3>
+                <p>Diese erhöht oder verlängert die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</p>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                <optinomic-chart-profile language="de" options="[[_d.sci_nicht_hilfreich.options]]" scales="[[_d.sci_nicht_hilfreich.scales]]" ranges="[[_d.sci_nicht_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+            </template>
             <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_whoqol]]">
                 <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
