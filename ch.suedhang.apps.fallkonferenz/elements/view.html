@@ -31,8 +31,6 @@
                 <div id="readme"></div>
             </div>
         </div>
-
-
         <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_actinfo_ein]]">
@@ -82,7 +80,6 @@
                 <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
             </template>
         </template>
-        
     </template>
     <script>
     Polymer({
@@ -98,6 +95,7 @@
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt_V3');
             this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk');
+            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.sci');
             this.dispatch('actionGetSurveyResponses', 'com.optinomic.apps.whoqol');
         },
 
@@ -203,6 +201,82 @@
                     "range_stop": 10,
                     "text": "Sehr stark ausgeprägte körperliche Abhängigkeit.",
                     "color": "#C62828"
+                }]
+            };
+
+            d.sci_stress = {
+                "options": {
+                    "min": 1,
+                    "max": 9,
+                    "item_height": 50,
+                    "item_text_left": 100,
+                    "item_text_right": 100,
+                    "color_grid": "#9E9E9E",
+                    "color_clinic_sample": "#673AB7",
+                    "show_baseline": true,
+                    "show_scale_text": true,
+                    "show_score_vertical_line": true,
+                    "show_score_profile_line": true,
+                    "show_score_circles": true,
+                    "show_settings_block": true,
+                    "range_alpha": 0.1,
+                    "vertical_grid_every_x": 1,
+                    "response_title_path": "calculation.scores['0'].stanine",
+                    "response_date_path": "date"
+                },
+                "scales": [{
+                    "left_title": "Negative Ereignisse",
+                    "left_text": "Wenige Stressoren",
+                    "right_title": "Negative Ereignisse",
+                    "right_text": "Viele Stressoren",
+                    "score_path": "calculation.AUDIT.AUDIT_Score",
+                    "clinic_sample_var": null
+                }],
+                "ranges": [{
+                    "range_start": 1,
+                    "range_stop": 1,
+                    "text": "Stanine: 1 | 4%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 2,
+                    "range_stop": 2,
+                    "text": "Stanine: 2 | 7%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 3,
+                    "range_stop": 3,
+                    "text": "Stanine: 3 | 12%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 4,
+                    "range_stop": 4,
+                    "text": "Stanine: 4 | 17%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 5,
+                    "range_stop": 5,
+                    "text": "Stanine: 5 | 20%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 6,
+                    "range_stop": 6,
+                    "text": "Stanine: 6 | 17%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 7,
+                    "range_stop": 7,
+                    "text": "Stanine: 7 | 12%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 8,
+                    "range_stop": 8,
+                    "text": "Stanine: 8 | 7%",
+                    "color": "#F44336"
+                }, {
+                    "range_start": 9,
+                    "range_stop": 9,
+                    "text": "Stanine: 9 | 4%",
+                    "color": "#F44336"
                 }]
             };
 
