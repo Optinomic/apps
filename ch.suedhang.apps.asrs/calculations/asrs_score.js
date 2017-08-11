@@ -50,11 +50,11 @@ function main(responses) {
 
         var ranges = [{
             "from": 0,
-            "to": 2,
+            "to": 4,
             "interpretation": "Keine Hinweise auf ADHS vorhanden",
             "result_color": "#4CAF50"
         }, {
-            "from": 2,
+            "from": 4,
             "to": 6,
             "interpretation": "Hinweise auf ADHS vorhanden",
             "result_color": "#FF5722"
