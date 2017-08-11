@@ -78,12 +78,15 @@
             </template>
             <template is="dom-if" if="[[_sr_sci.done]]">
                 <h3>Stressereignisse und Syptome</h3>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.info.population]] (Stanine)</p>
                 <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                 <h3>Hilfreiche Copingstrategien</h3>
                 <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.info.population]] (Stanine)</p>
                 <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                 <h3>Ungünstige Copingstrategie</h3>
                 <p>Diese erhöht oder verlängert die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</p>
+                <p style="text-align: center; color:#3F51B5">[[_sr_sci.info.population]] (Stanine)</p>
                 <optinomic-chart-profile language="de" options="[[_d.sci_nicht_hilfreich.options]]" scales="[[_d.sci_nicht_hilfreich.scales]]" ranges="[[_d.sci_nicht_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
             </template>
             <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
@@ -229,7 +232,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "show_settings_block": true,
@@ -312,7 +315,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "show_settings_block": true,
@@ -409,7 +412,7 @@
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
                     "show_scale_text": true,
-                    "show_score_vertical_line": true,
+                    "show_score_vertical_line": false,
                     "show_score_profile_line": true,
                     "show_score_circles": true,
                     "show_settings_block": true,
@@ -1161,6 +1164,8 @@
                             current.info.score_4 = parseInt(current.calculation.scores["4"].stanine);
                             current.info.score_5 = parseInt(current.calculation.scores["5"].stanine);
                             current.info.score_6 = parseInt(current.calculation.scores["6"].stanine);
+
+                            current.info.population = current..calculation.population.name;
 
                             _sr_sci.push(current);
 
