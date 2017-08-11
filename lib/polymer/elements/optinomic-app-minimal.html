@@ -89,6 +89,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
         _loadData: function() {
             Polymer.RenderStatus.afterNextRender(this, function() {
+                console.warn('(START) _loadData');
 
                 // loadData
                 this.dispatch('actionGetCurrentUser');
@@ -99,6 +100,8 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 //  this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
                 //  this.dispatch('actionGetSurveyResponses');
                 //  this.dispatch('actionGetClinic');
+
+                this._logState();
             });
         },
 
