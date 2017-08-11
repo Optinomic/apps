@@ -7,8 +7,9 @@
         </div>
     </div>
     <score-threshold score="response.calculations[0].calculation_result.score.score" min="0" max="6" scale-ranges="scale_ranges"></score-threshold>
-    <p class="flow-text">Bei Score=<b>{{response.calculations["0"].calculation_result.score.score}}</b> der 6 Screeningfragen lag der Wert von {{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} in folgendem Bereich ({{response.calculations["0"].calculation_result.score.sum}} von 24 Punkte):</p>
-    <h4>{{response.calculations["0"].calculation_result.score.current_range.interpretation}}</h4>
+    <p class="flow-text"><b>{{response.calculations["0"].calculation_result.score.score}}</b> der 6 Screeningfragen lagen im auffälligen Bereich. ({{response.calculations["0"].calculation_result.score.sum}} von 24 Punkte) </p>
+    <!--{{d.dataMain.patient.patient.data.first_name}} {{d.dataMain.patient.patient.data.last_name}} -->
+    <p>{{response.calculations["0"].calculation_result.score.current_range.interpretation}}</p>
     <div style="margin-top: 48px;">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <p class="small">ASRS_1 = {{response.entity.data.response.ASRS_1}}</p>
