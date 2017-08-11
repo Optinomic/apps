@@ -73,10 +73,10 @@
                 <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
             </template>
             <optinomic-title small h1="Stress-Coping-Inventar (SCI)" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="Chart"></optinomic-title>
-            <template is="dom-if" if="[[!_sr_sci]]">
+            <template is="dom-if" if="[[!_sr_sci.done]]">
                 <h3>Keine SCI-Daten vorhanden.</h3>
             </template>
-            <template is="dom-if" if="[[_sr_sci]]">
+            <template is="dom-if" if="[[_sr_sci.done]]">
                 <h3>Stressereignisse und Syptome</h3>
                 <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                 <h3>Hilfreiche Copingstrategien</h3>
@@ -235,7 +235,7 @@
                     "show_settings_block": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
-                    "response_title_path": "app_zeitpunkt",
+                    "response_title_path": "info.app_zeitpunkt",
                     "response_date_path": "date"
                 },
                 "scales": [{
@@ -243,14 +243,14 @@
                     "left_text": "Keine oder wenige Stressoren durch negative Ereignisse",
                     "right_title": "Negative Ereignisse",
                     "right_text": "Viele Stressoren durch negative Ereignisse",
-                    "score_path": "score_0",
+                    "score_path": "info.score_0",
                     "clinic_sample_var": null
                 }, {
                     "left_title": "Stresssymptome",
                     "left_text": "Wenig körperliche und psychische Stressreaktionen",
                     "right_title": "Stresssymptome",
                     "right_text": "Viele körperliche und psychische Stressreaktionen",
-                    "score_path": "score_1",
+                    "score_path": "info.score_1",
                     "clinic_sample_var": null
                 }],
                 "ranges": [{
@@ -966,27 +966,28 @@
 
                             console.warn('_processSCI - Current', ID, current);
 
-                            current.app_zeitpunkt = 'Unbekannt';
+                            current.info = {};
+                            current.info.app_zeitpunkt = 'Unbekannt';
                             if ("Erhebungszeitpunkt" in current.calculation.response.data.response) {
 
                                 if (current.calculation.response.data.response.Erhebungszeitpunkt === "1") {
-                                    current.app_zeitpunkt = 'Eintritt';
+                                    current.info.app_zeitpunkt = 'Eintritt';
                                 } else {
                                     if (current.calculation.response.data.response.Erhebungszeitpunkt === "2") {
-                                        current.app_zeitpunkt = 'Austritt';
+                                        current.info.app_zeitpunkt = 'Austritt';
                                     } else {
-                                        current.app_zeitpunkt = 'Verlauf';
+                                        current.info.app_zeitpunkt = 'Verlauf';
                                     };
                                 };
                             };
 
-                            current.score_0 = parseInt(current.calculation.scores["0"].stanine);
-                            current.score_1 = parseInt(current.calculation.scores["1"].stanine);
-                            current.score_2 = parseInt(current.calculation.scores["2"].stanine);
-                            current.score_3 = parseInt(current.calculation.scores["3"].stanine);
-                            current.score_4 = parseInt(current.calculation.scores["4"].stanine);
-                            current.score_5 = parseInt(current.calculation.scores["5"].stanine);
-                            current.score_6 = parseInt(current.calculation.scores["6"].stanine);
+                            current.info.score_0 = parseInt(current.calculation.scores["0"].stanine);
+                            current.info.score_1 = parseInt(current.calculation.scores["1"].stanine);
+                            current.info.score_2 = parseInt(current.calculation.scores["2"].stanine);
+                            current.info.score_3 = parseInt(current.calculation.scores["3"].stanine);
+                            current.info.score_4 = parseInt(current.calculation.scores["4"].stanine);
+                            current.info.score_5 = parseInt(current.calculation.scores["5"].stanine);
+                            current.info.score_6 = parseInt(current.calculation.scores["6"].stanine);
 
                             _sr_sci.push(current);
 
