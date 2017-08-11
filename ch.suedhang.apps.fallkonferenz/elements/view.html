@@ -228,8 +228,8 @@
                     "min": 1,
                     "max": 9,
                     "item_height": 50,
-                    "item_text_left": 100,
-                    "item_text_right": 100,
+                    "item_text_left": 200,
+                    "item_text_right": 200,
                     "color_grid": "#9E9E9E",
                     "color_clinic_sample": "#673AB7",
                     "show_baseline": true,
@@ -240,7 +240,7 @@
                     "show_settings_block": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
-                    "response_title_path": "calculation.response.data.response.Erhebungszeitpunkt",
+                    "response_title_path": "event.description",
                     "response_date_path": "date"
                 },
                 "scales": [{
@@ -248,58 +248,58 @@
                     "left_text": "Keine oder wenige Stressoren durch negative Ereignisse",
                     "right_title": "Negative Ereignisse",
                     "right_text": "Viele Stressoren durch negative Ereignisse",
-                    "score_path": "calculation.scores['0'].stanine",
+                    "score_path": "calculation.scores[0].stanine",
                     "clinic_sample_var": null
                 },{
                     "left_title": "Stresssymptome",
                     "left_text": "Wenig körperliche und psychische Stressreaktionen",
                     "right_title": "Stresssymptome",
                     "right_text": "Viele körperliche und psychische Stressreaktionen",
-                    "score_path": "calculation.scores['1'].stanine",
+                    "score_path": "calculation.scores[1].stanine",
                     "clinic_sample_var": null
                 }],
                 "ranges": [{
                     "range_start": 1,
-                    "range_stop": 1,
+                    "range_stop": 1.5,
                     "text": "Stanine: 1 | 4%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 2,
-                    "range_stop": 2,
+                    "range_start": 1.6,
+                    "range_stop": 2.5,
                     "text": "Stanine: 2 | 7%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 3,
-                    "range_stop": 3,
+                    "range_start": 2.6,
+                    "range_stop": 3.5,
                     "text": "Stanine: 3 | 12%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 4,
-                    "range_stop": 4,
+                    "range_start": 3.6,
+                    "range_stop": 4.5,
                     "text": "Stanine: 4 | 17%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 5,
-                    "range_stop": 5,
+                    "range_start": 4.6,
+                    "range_stop": 5.5,
                     "text": "Stanine: 5 | 20%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 6,
-                    "range_stop": 6,
+                    "range_start": 5.6,
+                    "range_stop": 6.5,
                     "text": "Stanine: 6 | 17%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 7,
-                    "range_stop": 7,
+                    "range_start": 6.6,
+                    "range_stop": 7.5,
                     "text": "Stanine: 7 | 12%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 8,
-                    "range_stop": 8,
+                    "range_start": 7.6,
+                    "range_stop": 8.5,
                     "text": "Stanine: 8 | 7%",
                     "color": "#F44336"
                 }, {
-                    "range_start": 9,
+                    "range_start": 8.6,
                     "range_stop": 9,
                     "text": "Stanine: 9 | 4%",
                     "color": "#F44336"
