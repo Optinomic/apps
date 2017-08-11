@@ -65,6 +65,7 @@
             <template is="dom-if" if="[[_sr_tmt]]">
                 <optinomic-chart-profile language="de" options="[[_d.tmt.options_text]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)'> </optinomic-chart-profile>
             </template>
+
             <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_isk]]">
                 <h3>Keine ISK-Daten vorhanden.</h3>
@@ -72,6 +73,24 @@
             <template is="dom-if" if="[[_sr_isk]]">
                 <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
             </template>
+
+
+            <optinomic-title small h1="Stress-Coping-Inventar (SCI)" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="Chart"></optinomic-title>
+            <template is="dom-if" if="[[!_sr_sci]]">
+                <h3>Keine SCI-Daten vorhanden.</h3>
+            </template>
+            <template is="dom-if" if="[[_sr_sci]]">
+                <h3>Stressereignisse und Syptome</h3>
+                <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                <h3>Hilfreiche Copingstrategien</h3>
+                <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                <h3>Ungünstige Copingstrategie</h3>
+                <p>Diese erhöht oder verlängert die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</p>
+                <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+            </template>
+
+
             <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_whoqol]]">
                 <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
@@ -221,15 +240,22 @@
                     "show_settings_block": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
-                    "response_title_path": "calculation.scores['0'].stanine",
+                    "response_title_path": "calculation.response.data.response.Erhebungszeitpunkt",
                     "response_date_path": "date"
                 },
                 "scales": [{
-                    "left_title": "Negative Ereignisse",
-                    "left_text": "Wenige Stressoren",
+                    "left_title": "Belastung",
+                    "left_text": "Keine oder wenige Stressoren durch negative Ereignisse",
                     "right_title": "Negative Ereignisse",
-                    "right_text": "Viele Stressoren",
-                    "score_path": "calculation.AUDIT.AUDIT_Score",
+                    "right_text": "Viele Stressoren durch negative Ereignisse",
+                    "score_path": "calculation.scores['0'].stanine",
+                    "clinic_sample_var": null
+                },{
+                    "left_title": "Stresssymptome",
+                    "left_text": "Wenig körperliche und psychische Stressreaktionen",
+                    "right_title": "Stresssymptome",
+                    "right_text": "Viele körperliche und psychische Stressreaktionen",
+                    "score_path": "calculation.scores['1'].stanine",
                     "clinic_sample_var": null
                 }],
                 "ranges": [{
@@ -783,6 +809,17 @@
                 type: Object,
                 statePath: function(state) {
                     var app_id = 'ch.suedhang.apps.bscl_anq'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[app_id]
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _sr_sci: {
+                type: Object,
+                statePath: function(state) {
+                    var app_id = 'ch.suedhang.apps.sci'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
