@@ -84,10 +84,6 @@
                 <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
                 <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
                 <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                <h3>Ungünstige Copingstrategie</h3>
-                <p>Diese erhöht oder verlängert die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind. Hohe Ausprägungen sind nicht günstig.</p>
-                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                <optinomic-chart-profile language="de" options="[[_d.sci_nicht_hilfreich.options]]" scales="[[_d.sci_nicht_hilfreich.scales]]" ranges="[[_d.sci_nicht_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
             </template>
             <optinomic-title small h1="WHOQOL-BREF (WHO Quality of Life)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
             <template is="dom-if" if="[[!_sr_whoqol]]">
@@ -356,80 +352,11 @@
                     "right_text": "Person findet Halt im Glauben",
                     "score_path": "info.score_5",
                     "clinic_sample_var": null
-                }],
-                "ranges": [{
-                    "range_start": 0.5,
-                    "range_stop": 1.5,
-                    "text": "Stanine: 1 | 4%",
-                    "color": "#F44336"
-                }, {
-                    "range_start": 1.5,
-                    "range_stop": 2.5,
-                    "text": "Stanine: 2 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 2.5,
-                    "range_stop": 3.5,
-                    "text": "Stanine: 3 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 3.5,
-                    "range_stop": 4.5,
-                    "text": "Stanine: 4 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 4.5,
-                    "range_stop": 5.5,
-                    "text": "Stanine: 5 | 20%",
-                    "color": "#4CAF50"
-                }, {
-                    "range_start": 5.5,
-                    "range_stop": 6.5,
-                    "text": "Stanine: 6 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 6.5,
-                    "range_stop": 7.5,
-                    "text": "Stanine: 7 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 7.5,
-                    "range_stop": 8.5,
-                    "text": "Stanine: 8 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 8.5,
-                    "range_stop": 9.5,
-                    "text": "Stanine: 9 | 4%",
-                    "color": "#F44336"
-                }]
-            };
-
-            d.sci_nicht_hilfreich = {
-                "options": {
-                    "min": 0,
-                    "max": 10,
-                    "item_height": 50,
-                    "item_text_left": 200,
-                    "item_text_right": 200,
-                    "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#673AB7",
-                    "show_baseline": true,
-                    "show_scale_text": true,
-                    "show_score_vertical_line": true,
-                    "show_score_profile_line": true,
-                    "show_score_circles": true,
-                    "show_settings_block": true,
-                    "range_alpha": 0.1,
-                    "vertical_grid_every_x": 1,
-                    "response_title_path": "info.app_zeitpunkt",
-                    "response_date_path": "date"
-                },
-                "scales": [{
+                },{
                     "left_title": "Alkohol- und Zigarettenkonsum",
-                    "left_text": "Kein erhöhter Akohol- oder Zigarettenkonsum",
+                    "left_text": "Ungünstige Bewältigung durch Alkohol und Zigaretten",
                     "right_title": "Alkohol- und Zigarettenkonsum",
-                    "right_text": "Ungünstige Bewältigung durch Alkohol und Zigaretten",
+                    "right_text": "Kein erhöhter Akohol- oder Zigarettenkonsum",
                     "score_path": "info.score_6",
                     "clinic_sample_var": null
                 }],
@@ -1168,7 +1095,7 @@
                             current.info.score_3 = parseInt(current.calculation.scores["3"].stanine);
                             current.info.score_4 = parseInt(current.calculation.scores["4"].stanine);
                             current.info.score_5 = parseInt(current.calculation.scores["5"].stanine);
-                            current.info.score_6 = parseInt(current.calculation.scores["6"].stanine);
+                            current.info.score_6 = 10 - parseInt(current.calculation.scores["6"].stanine);
 
                             population = current.calculation.population.name;
 
