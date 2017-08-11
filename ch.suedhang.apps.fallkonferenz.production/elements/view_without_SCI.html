@@ -97,7 +97,6 @@
                 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi.production');
                 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt.production');
                 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk.production');
-                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.sci.production');
                 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.whoqol.production');
             });
 
@@ -208,261 +207,8 @@
                 }]
             };
 
-            d.sci_stress = {
-                "options": {
-                    "min": 0,
-                    "max": 10,
-                    "item_height": 50,
-                    "item_text_left": 200,
-                    "item_text_right": 200,
-                    "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#673AB7",
-                    "show_baseline": true,
-                    "show_scale_text": true,
-                    "show_score_vertical_line": false,
-                    "show_score_profile_line": true,
-                    "show_score_circles": true,
-                    "show_settings_block": true,
-                    "range_alpha": 0.1,
-                    "vertical_grid_every_x": 1,
-                    "response_title_path": "info.app_zeitpunkt",
-                    "response_date_path": "date"
-                },
-                "scales": [{
-                    "left_title": "Negative Ereignisse",
-                    "left_text": "Keine oder wenig Belastung durch negative Ereignisse",
-                    "right_title": "Negative Ereignisse",
-                    "right_text": "Viele Stressoren durch negative Ereignisse",
-                    "score_path": "info.score_0",
-                    "clinic_sample_var": null
-                }, {
-                    "left_title": "Stresssymptome",
-                    "left_text": "Wenig körperliche und psychische Stressreaktionen",
-                    "right_title": "Stresssymptome",
-                    "right_text": "Viele körperliche und psychische Stressreaktionen",
-                    "score_path": "info.score_1",
-                    "clinic_sample_var": null
-                }],
-                "ranges": [{
-                    "range_start": 0.5,
-                    "range_stop": 1.5,
-                    "text": "Stanine: 1 | 4%",
-                    "color": "#F44336"
-                }, {
-                    "range_start": 1.5,
-                    "range_stop": 2.5,
-                    "text": "Stanine: 2 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 2.5,
-                    "range_stop": 3.5,
-                    "text": "Stanine: 3 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 3.5,
-                    "range_stop": 4.5,
-                    "text": "Stanine: 4 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 4.5,
-                    "range_stop": 5.5,
-                    "text": "Stanine: 5 | 20%",
-                    "color": "#4CAF50"
-                }, {
-                    "range_start": 5.5,
-                    "range_stop": 6.5,
-                    "text": "Stanine: 6 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 6.5,
-                    "range_stop": 7.5,
-                    "text": "Stanine: 7 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 7.5,
-                    "range_stop": 8.5,
-                    "text": "Stanine: 8 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 8.5,
-                    "range_stop": 9.5,
-                    "text": "Stanine: 9 | 4%",
-                    "color": "#F44336"
-                }]
-            };
+            
 
-            d.sci_hilfreich = {
-                "options": {
-                    "min": 0,
-                    "max": 10,
-                    "item_height": 50,
-                    "item_text_left": 200,
-                    "item_text_right": 200,
-                    "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#673AB7",
-                    "show_baseline": true,
-                    "show_scale_text": true,
-                    "show_score_vertical_line": false,
-                    "show_score_profile_line": true,
-                    "show_score_circles": true,
-                    "show_settings_block": true,
-                    "range_alpha": 0.1,
-                    "vertical_grid_every_x": 1,
-                    "response_title_path": "info.app_zeitpunkt",
-                    "response_date_path": "date"
-                },
-                "scales": [{
-                    "left_title": "Positives Denken",
-                    "left_text": "Selbstzweifel und Fokus auf Negatives",
-                    "right_title": "Positives Denken",
-                    "right_text": "Stressbewältigung durch positives Denken",
-                    "score_path": "info.score_2",
-                    "clinic_sample_var": null
-                }, {
-                    "left_title": "Aktive Stressbewältigung",
-                    "left_text": "Stressoren werden nicht beseitigt",
-                    "right_title": "Aktive Stressbewältigung",
-                    "right_text": "Aktive und vorbeugende Stressbewältigung",
-                    "score_path": "info.score_3",
-                    "clinic_sample_var": null
-                }, {
-                    "left_title": "Soziale Unterstützung",
-                    "left_text": "Kaum Unterstützung durch andere",
-                    "right_title": "Soziale Unterstützung",
-                    "right_text": "Viel Unterstützung durch Freunde und Bekannte",
-                    "score_path": "info.score_4",
-                    "clinic_sample_var": null
-                }, {
-                    "left_title": "Halt im Glauben",
-                    "left_text": "Kaum religiöser / spiritueller Halt",
-                    "right_title": "Halt im Glauben",
-                    "right_text": "Person findet Halt im Glauben",
-                    "score_path": "info.score_5",
-                    "clinic_sample_var": null
-                }],
-                "ranges": [{
-                    "range_start": 0.5,
-                    "range_stop": 1.5,
-                    "text": "Stanine: 1 | 4%",
-                    "color": "#F44336"
-                }, {
-                    "range_start": 1.5,
-                    "range_stop": 2.5,
-                    "text": "Stanine: 2 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 2.5,
-                    "range_stop": 3.5,
-                    "text": "Stanine: 3 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 3.5,
-                    "range_stop": 4.5,
-                    "text": "Stanine: 4 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 4.5,
-                    "range_stop": 5.5,
-                    "text": "Stanine: 5 | 20%",
-                    "color": "#4CAF50"
-                }, {
-                    "range_start": 5.5,
-                    "range_stop": 6.5,
-                    "text": "Stanine: 6 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 6.5,
-                    "range_stop": 7.5,
-                    "text": "Stanine: 7 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 7.5,
-                    "range_stop": 8.5,
-                    "text": "Stanine: 8 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 8.5,
-                    "range_stop": 9.5,
-                    "text": "Stanine: 9 | 4%",
-                    "color": "#F44336"
-                }]
-            };
-
-            d.sci_nicht_hilfreich = {
-                "options": {
-                    "min": 0,
-                    "max": 10,
-                    "item_height": 50,
-                    "item_text_left": 200,
-                    "item_text_right": 200,
-                    "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#673AB7",
-                    "show_baseline": true,
-                    "show_scale_text": true,
-                    "show_score_vertical_line": true,
-                    "show_score_profile_line": true,
-                    "show_score_circles": true,
-                    "show_settings_block": true,
-                    "range_alpha": 0.1,
-                    "vertical_grid_every_x": 1,
-                    "response_title_path": "info.app_zeitpunkt",
-                    "response_date_path": "date"
-                },
-                "scales": [{
-                    "left_title": "Alkohol- und Zigarettenkonsum",
-                    "left_text": "Kein erhöhter Akohol- oder Zigarettenkonsum",
-                    "right_title": "Alkohol- und Zigarettenkonsum",
-                    "right_text": "Ungünstige Bewältigung durch Alkohol und Zigaretten",
-                    "score_path": "info.score_6",
-                    "clinic_sample_var": null
-                }],
-                "ranges": [{
-                    "range_start": 0.5,
-                    "range_stop": 1.5,
-                    "text": "Stanine: 1 | 4%",
-                    "color": "#F44336"
-                }, {
-                    "range_start": 1.5,
-                    "range_stop": 2.5,
-                    "text": "Stanine: 2 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 2.5,
-                    "range_stop": 3.5,
-                    "text": "Stanine: 3 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 3.5,
-                    "range_stop": 4.5,
-                    "text": "Stanine: 4 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 4.5,
-                    "range_stop": 5.5,
-                    "text": "Stanine: 5 | 20%",
-                    "color": "#4CAF50"
-                }, {
-                    "range_start": 5.5,
-                    "range_stop": 6.5,
-                    "text": "Stanine: 6 | 17%",
-                    "color": "#66BB6A"
-                }, {
-                    "range_start": 6.5,
-                    "range_stop": 7.5,
-                    "text": "Stanine: 7 | 12%",
-                    "color": "#A5D6A7"
-                }, {
-                    "range_start": 7.5,
-                    "range_stop": 8.5,
-                    "text": "Stanine: 8 | 7%",
-                    "color": "#E57373"
-                }, {
-                    "range_start": 8.5,
-                    "range_stop": 9.5,
-                    "text": "Stanine: 9 | 4%",
-                    "color": "#F44336"
-                }]
-            };
 
             d.bscl = {
                 "options_text": {
@@ -952,7 +698,6 @@
         },
 
 
-
         properties: {
             _clinic: {
                 type: String,
@@ -1050,25 +795,6 @@
                 }
             },
 
-            _sr_sci_response: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.sci.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_processSCI'
-            },
-            _sr_sci: {
-                type: Object,
-                value: {
-                    "done": false
-                }
-            },
-
             _d: {
                 type: Object
             }
@@ -1113,59 +839,6 @@
                         }
                         this.set('_sr_actinfo', actinfo_obj);
                         //console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
-                    };
-                };
-
-            }, 250);
-        },
-
-        _processSCI: function() {
-            this.debounce('_processSCI', function() {
-
-                var _sr_sci = [];
-                var population = ""
-                if (this._sr_sci_response !== undefined) {
-                    if (this._sr_sci_response.data !== undefined) {
-                        this._sr_sci_response.data.forEach(function(current, ID) {
-
-                            // console.warn('_processSCI - Current', ID, current);
-
-                            current.info = {};
-                            current.info.app_zeitpunkt = 'Unbekannt';
-                            if ("Erhebungszeitpunkt" in current.calculation.response.data.response) {
-
-                                if (current.calculation.response.data.response.Erhebungszeitpunkt === "1") {
-                                    current.info.app_zeitpunkt = 'Eintritt';
-                                } else {
-                                    if (current.calculation.response.data.response.Erhebungszeitpunkt === "2") {
-                                        current.info.app_zeitpunkt = 'Austritt';
-                                    } else {
-                                        current.info.app_zeitpunkt = 'Verlauf';
-                                    };
-                                };
-                            };
-
-                            current.info.score_0 = parseInt(current.calculation.scores["0"].stanine);
-                            current.info.score_1 = parseInt(current.calculation.scores["1"].stanine);
-                            current.info.score_2 = parseInt(current.calculation.scores["2"].stanine);
-                            current.info.score_3 = parseInt(current.calculation.scores["3"].stanine);
-                            current.info.score_4 = parseInt(current.calculation.scores["4"].stanine);
-                            current.info.score_5 = parseInt(current.calculation.scores["5"].stanine);
-                            current.info.score_6 = parseInt(current.calculation.scores["6"].stanine);
-
-                            population = current.calculation.population.name;
-
-                            _sr_sci.push(current);
-
-                        });
-
-                        var return_obj = {
-                            "done": true,
-                            "population": population,
-                            "data": _sr_sci
-                        }
-                        this.set('_sr_sci', return_obj);
-                        console.warn('_processSCI', this._sr_sci);
                     };
                 };
 
