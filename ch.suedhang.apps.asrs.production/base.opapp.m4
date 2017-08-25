@@ -20,9 +20,6 @@ phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/de/
 
 
-[template asrs_scores 4 4]
-include(templates/score.html)
-
 [readme]
 include(readme.md)
 
