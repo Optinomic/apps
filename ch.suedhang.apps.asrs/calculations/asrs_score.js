@@ -16,30 +16,26 @@ function main(responses) {
         var score = 0;
         var sum = 0;
 
-        if (parseInt(result.ASRS_1) > 2) {
+        if (parseInt(result.ASRS_1) > 1) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_1);
         };
-        if (parseInt(result.ASRS_2) > 2) {
+        if (parseInt(result.ASRS_2) > 1) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_2);
         };
-        if (parseInt(result.ASRS_3) > 2) {
+        if (parseInt(result.ASRS_3) > 1) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_3);
         };
-        if (parseInt(result.ASRS_4) > 3) {
+        if (parseInt(result.ASRS_4) > 2) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_4);
         };
-        if (parseInt(result.ASRS_5) > 3) {
+        if (parseInt(result.ASRS_5) > 2) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_5);
         };
-        if (parseInt(result.ASRS_6) > 3) {
+        if (parseInt(result.ASRS_6) > 2) {
             score = score + 1;
-            sum = sum + parseInt(result.ASRS_6);
         };
+
+        sum = sum + parseInt(result.ASRS_1) + parseInt(result.ASRS_2) + parseInt(result.ASRS_3) + parseInt(result.ASRS_4) + parseInt(result.ASRS_5) + parseInt(result.ASRS_6);
 
 
         // ---------------------------
@@ -50,7 +46,7 @@ function main(responses) {
 
         var ranges = [{
             "from": 0,
-            "to": 4,
+            "to": 3,
             "interpretation": "Keine Hinweise auf ADHS vorhanden",
             "result_color": "#4CAF50"
         }, {
