@@ -48,12 +48,12 @@ function main(responses) {
             "from": 0,
             "to": 3,
             "interpretation": "Keine Hinweise auf ADHS vorhanden",
-            "result_color": "#4CAF50"
+            "result_color": "#2E7D32"
         }, {
             "from": 4,
             "to": 6,
             "interpretation": "Hinweise auf ADHS vorhanden",
-            "result_color": "#FF5722"
+            "result_color": "#C62828"
         }];
 
         current_range = ranges[0];
