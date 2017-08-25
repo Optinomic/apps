@@ -73,7 +73,6 @@
                     <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
                 </template>
             </div>
-            
             <div>
                 <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_isk]]">
@@ -110,16 +109,15 @@
         </template>
     </template>
     <script>
+    //Farbpalette:
+    //color_grid - #9E9E9E
+    //color_clinic_sample - #D8D8D8
 
-//Farbpalette:
-//color_grid - #9E9E9E
-//color_clinic_sample - #D8D8D8
-
-//grün (0) : #2E7D32
-//gelb (1): #FFA000
-//hellorange (2): #FBB100
-//dunkelorange (3): #FB7200
-//rot (4): #C62828
+    //grün (0) : #2E7D32
+    //gelb (1): #FFA000
+    //hellorange (2): #FBB100
+    //dunkelorange (3): #FB7200
+    //rot (4): #C62828
 
     Polymer({
         is: 'optinomic-template',
@@ -578,7 +576,6 @@
                     "items": 53
                 }],
                 "ranges": [{
-                   {
                     "range_start": -2,
                     "range_stop": 1,
                     "text": "gesunde Ausprägung",
