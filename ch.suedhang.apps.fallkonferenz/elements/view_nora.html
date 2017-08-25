@@ -33,11 +33,13 @@
         </div>
         <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <div>
-                <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_actinfo_ein]]">
                     <h3>Keine ActInfo-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
+                    <h3>Substanzkonsum</h3>
+                    <p>
                     <h3>AUDIT - Alcohol Use Disorders Identification</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>
@@ -47,7 +49,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_tmt]]">
                     <h3>Keine TMT-Daten vorhanden.</h3>
                 </template>
@@ -56,7 +58,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_bscl]]">
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
@@ -65,7 +67,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="BDI (Beck Depressions-Inventar II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="BDI (Beck Depressions-Inventar II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_bdi]]">
                     <h3>Keine BDI-Daten vorhanden.</h3>
                 </template>
@@ -74,7 +76,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
+                <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_isk]]">
                     <h3>Keine ISK-Daten vorhanden.</h3>
                 </template>
@@ -83,7 +85,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="SCI (Stress-Coping-Inventar)" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="Chart"></optinomic-title>
+                <optinomic-title small h1="SCI (Stress-Coping-Inventar)" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_sci.done]]">
                     <h3>Keine SCI-Daten vorhanden.</h3>
                 </template>
@@ -98,7 +100,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="WHOQOL-BREF (WHO Lebensqualität)" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="Chart"></optinomic-title>
+                <optinomic-title small h1="WHOQOL-BREF (WHO Lebensqualität)" h2="Beurteilung der Physischen und Psychischen Lebensqualität"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_whoqol]]">
                     <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
                 </template>
@@ -152,7 +154,7 @@
                     "item_text_left": 100,
                     "item_text_right": 100,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#565656",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": true,
@@ -198,7 +200,7 @@
                     "item_text_left": 100,
                     "item_text_right": 100,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#565656",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": true,
@@ -249,7 +251,7 @@
                     "item_text_left": 200,
                     "item_text_right": 200,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#D8D8D8",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": false,
@@ -332,7 +334,7 @@
                     "item_text_left": 200,
                     "item_text_right": 200,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#D8D8D8",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": false,
@@ -436,7 +438,7 @@
                     "item_text_left": 100,
                     "item_text_right": 280,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#565656",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": true,
                     "show_scale_text": true,
                     "show_score_vertical_line": false,
@@ -454,7 +456,7 @@
                     "item_text_left": 150,
                     "item_text_right": 150,
                     "color_grid": "#9E9E9E",
-                    "color_clinic_sample": "#565656",
+                    "color_clinic_sample": "#888888",
                     "show_baseline": false,
                     "show_scale_text": false,
                     "show_score_vertical_line": false,
