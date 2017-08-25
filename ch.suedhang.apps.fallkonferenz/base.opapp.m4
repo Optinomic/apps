@@ -22,7 +22,7 @@ include(readme.md)
 
 [template Profile_Z_Score 6 7]
 include(../lib/polymer/index.m4)
-include(elements/view.html)
+include(elements/view_nora.html)
 
 
 
