@@ -1,3 +1,4 @@
+<!--
 Rückfall-Angaben Actinfo Austritt
 
 VYAZ010 = Wie häufig haben Sie während der Behandlung, Beratung oder Betreuung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?
@@ -35,7 +36,7 @@ QYAZ020_VYAZ020l = Computer- bzw. Internetsucht
 QYAZ020_VYAZ020m = Essstörungen    
 QYAZ020_VYAZ020n = andere suchtähnliche Verhaltensweise(n) 
 falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
-
+-->
 Wenn VYAZ010 != '999' und QYAZ020_VYAZ020x = Y -> Es ist nicht bekannt, welche Substanzen während der Behandlung konsumiert wurden.
 Folgende Substanzen wurden während der Behadlung konsumiert:
 ng-repeat relapsesubstanzen
@@ -58,103 +59,61 @@ ng-repeat relapsesubstanzen
 
             // Alkohol
             if (response['QYAZ020[VYAZ020a]'] === 'Y') {
-                substanz = 'Alkohol'
-                
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Alkohol';
                 result.relapsesubstanzen.push(text);
             };
 
             // Optiate
             if (response['QYAZ020[VYAZ020b]'] === 'Y') {
-                substanz = 'Opioide (Heroin, Methadon, Codein, usw.)'
-                
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Opioide (Heroin, Methadon, Codein, usw.)';
                 result.relapsesubstanzen.push(text);
             };
 
             // Kokain
             if (response['QYAZ020[VYAZ020c]'] === 'Y') {
-                substanz = 'Kokain oder Derivate'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = Kokain oder Derivate';
                 result.relapsesubstanzen.push(text);
             };
 
             
             // Andere Stimulanzien
             if (response['QYAZ020[VYAZ020d]'] === 'Y') {
-                substanz = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)';
                 result.relapsesubstanzen.push(text);
             };
 
             // Hypnotika/Sedativa
 
             if (response['QYAZ020[VYAZ020e]'] === 'Y') {
-                substanz = 'Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)';
                 result.relapsesubstanzen.push(text);
             };
 
             // Halluzinogene
 
             if (response['QYAZ020[VYAZ020f]'] === 'Y') {
-                substanz = 'Halluzinogene (LSD, Ketamin, usw.)'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Halluzinogene (LSD, Ketamin, usw.)';
                 result.relapsesubstanzen.push(text);
             };
 
             // Weitere Substanzen
             if (response['QYAZ020[VYAZ020g]'] === 'Y') {
-                substanz = 'Flüchtige Stoffe'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Flüchtige Stoffe';
                 result.relapsesubstanzen.push(text);
             };
 
             if (response['QYAZ020[VYAZ020h]'] === 'Y') {
-                substanz = 'Cannabis'
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = 'Cannabis';
                 result.relapsesubstanzen.push(text);
             };
 
             if (response['QYAZ020[VYAZ020i]'] === 'Y') {
-                substanz = 'Tabak'
-                answer_option = 0;
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                var my_tabak_result = $scope.d.relapsesubstanzen_label.answer_options[1];
-                text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
-
+                text = 'Tabak';
                 result.relapsesubstanzen.push(text);
             };
 
             if (response['QYAZ020[VYAZ020j]'] === 'Y') {
-                substanz = response.VYAZ021j
-
-                my_result = $scope.d.relapsesubstanzen_label.answer_options[answer_option];
-                text = substanz + ': ' + my_result[answer];
-
+                text = response.VYAZ021j;
                 result.relapsesubstanzen.push(text);
             };
         });
