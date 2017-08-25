@@ -29,7 +29,7 @@ include(readme.md)
 id = SCI
 type = lime
 responsibility = patient_via_assessment
-name = Stress- & Coping-Inventar
+name = SCI
 host = limesurvey_v2
 survey_id = 933257
 hash = X2X6

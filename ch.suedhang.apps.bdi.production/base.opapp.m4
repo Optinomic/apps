@@ -28,7 +28,7 @@ include(readme.md)
 id = bdi2
 type = lime
 responsibility = patient_via_assessment
-name = Beck-Depressions-Inventar (BDI-II)
+name = BDI II
 host = limesurvey_v2
 survey_id = 786887
 hash = X33X1162

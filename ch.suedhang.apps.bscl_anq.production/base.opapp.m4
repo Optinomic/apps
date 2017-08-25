@@ -29,7 +29,7 @@ include(readme.md)
 id = bscl_anq
 type = lime
 responsibility = patient_via_assessment
-name = BSCL (Brief Symptom Check List)
+name = BSCL
 host = limesurvey_v2
 survey_id = 366636
 hash = X36X1188

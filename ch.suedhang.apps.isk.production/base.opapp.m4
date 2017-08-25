@@ -28,7 +28,7 @@ include(readme.md)
 id = isk
 type = lime
 responsibility = patient_via_assessment
-name = Inventar Sozialer Kompetenzen
+name = ISK-K
 host = limesurvey_v2
 survey_id = 824558
 hash = X45X1292

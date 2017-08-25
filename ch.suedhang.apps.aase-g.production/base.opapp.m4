@@ -31,7 +31,7 @@ include(readme.md)
 id = aase
 type = lime
 responsibility = patient_via_assessment
-name = Alcohol Abstinence Self-Efficacy Scale (AASE)
+name = AASE-G
 host = limesurvey_v2
 survey_id = 526942
 hash = X68X1538
