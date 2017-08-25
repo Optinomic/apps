@@ -39,7 +39,188 @@
                 </template>
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
                     <h3>Substanzkonsum</h3>
-                    <p>
+<!--
+                    Aufzählung konsumierter Substanzen
+                    <div ng-if="[[d.['QNED0701[VNED070a]']] === 'Y'>
+                    <p> Alkohol: {{response.VNED073a}} ({{gramm}}g) </p>
+                    </div>
+                    <div ng-if="[[d.['QNED0702[VNED070ba]']] === 'Y'>
+                    <p> Heroin (Opiat): {{response.VNED073ba}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0702[VNED070bb]']] === 'Y'>
+                    <p> Methadon (Opiat): {{response.VNED073bb}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0702[VNED070bc]']] === 'Y'>
+                    <p> Buprenorphin (Opiat): {{response.VNED073bc}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0702[VNED070bd]']] === 'Y'>
+                    <p> Fentanyl (Opiat): {{response.VNED073bd}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0702[VNED070be]']] === 'Y'>
+                    <p> Andere Opioide ({{responseVNED071be}}): {{response.VNED073be}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0703[VNED070ca]']] === 'Y'>
+                    <p> Kokain-Pulver: {{response.VNED073ca}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0703[VNED070cb]']] === 'Y'>
+                    <p> Crack-Kokain: {{response.VNED073cb}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0703[VNED070cc]']] === 'Y'>
+                    <p> Anderer Kokain-Typ ({{response.VNED071cc}}): {{response.VNED073cc}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0704[VNED070da]']] === 'Y'>
+                    <p> Amphetamine: {{response.VNED073da}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0704[VNED070db]']] === 'Y'>
+                    <p> Methamphetamine (Crystal Meth, Ice, Thai-Pillen): {{response.VNED073db}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0704[VNED070dc]']] === 'Y'>
+                    <p> MDMA und verwandte Stoffe (Ecstasy): {{response.VNED073dc}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0704[VNED070dd]']] === 'Y'>
+                    <p> Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron): {{response.VNED073dd}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0704[VNED070de]']] === 'Y'>
+                    <p> Andere Stimulanzien ({{response.VNED071de}}): {{response.VNED073de}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0705[VNED070ea]']] === 'Y'>
+                    <p> Barbiturate (missbräuchlich): {{response.VNED073ea}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0705[VNED070eb]']] === 'Y'>
+                    <p> Benzodiazepine (missbräuchlich): {{response.VNED073eb}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0705[VNED070ec]']] === 'Y'>
+                    <p> GHB/GBL (K.O.-Tropfen): {{response.VNED073ec}}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0705[VNED070ed]']] === 'Y'>
+                    <p> Andere Schlaf-/Beruhigungsmittel ({{response.VNED071ed}}): {{response.VNED073ead}</p>
+                    </div>
+                    <div ng-if="[[d.['QNED0705[VNED070ea]']] === 'Y'>
+                    <p> Barbiturate (missbräuchlich): {{response.VNED073ea}}</p>
+                    </div>
+                    
+
+
+        // Halluzinogene
+
+        if (response['QNED0706[VNED070fa]'] === 'Y') {
+            substanz = 'LSD'
+            answer_option = 0;
+            answer = parseInt(response.VNED073fa);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        if (response['QNED0706[VNED070fb]'] === 'Y') {
+            substanz = 'Ketamin'
+            answer_option = 0;
+            answer = parseInt(response.VNED073fb);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        if (response['QNED0706[VNED070fc]'] === 'Y') {
+            substanz = 'Andere Halluzinogene ' + response.VNED071fc
+            answer_option = 0;
+            answer = parseInt(response.VNED073fc);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        // Weitere Substanzen
+        if (response['QNED0707[VNED070g]'] === 'Y') {
+            substanz = 'Flüchtige Stoffe'
+            answer_option = 0;
+            answer = parseInt(response.VNED073g);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        if (response['QNED0707[VNED070h]'] === 'Y') {
+            substanz = 'Cannabis'
+            answer_option = 0;
+            answer = parseInt(response.VNED073h);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        if (response['QNED0707[VNED070i]'] === 'Y') {
+            substanz = 'Tabak'
+            answer_option = 0;
+            answer = parseInt(response.VNED073i);
+            var answer_tabak = parseInt(response.VZET020);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            var my_tabak_result = problemsubstanzen_label.answer_options[1];
+            text = substanz + ': ' + my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')';
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer] + ' (' + my_tabak_result[answer_tabak] + ')'
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+        if (response['QNED0707[VNED070j]'] === 'Y') {
+            substanz = response.VNED071j
+            answer_option = 0;
+            answer = parseInt(response.VNED073j);
+
+            my_result = problemsubstanzen_label.answer_options[answer_option];
+            text = substanz + ': ' + my_result[answer];
+
+            obj_to_push = {
+                "substanz": substanz,
+                "label": my_result[answer]
+            };
+
+            result.problemsubstanzen.push(obj_to_push);
+        };
+
+
+-->
+                    
                     <h3>AUDIT - Alcohol Use Disorders Identification</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>
@@ -882,7 +1063,7 @@
                 }],
                 "ranges": [{
                     "range_start": 0,
-                    "range_stop": 55,
+                    "range_stop": 56,
                     "text": "verminderte Lebensqualität",
                     "color": "#C62828"
                 }, {
