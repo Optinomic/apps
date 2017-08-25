@@ -41,7 +41,7 @@ include(style.css)
 id = asrs_ng
 type = ng
 responsibility = patient_via_assessment
-name = ADHS-Screening (ASRS)
+name = ASRS
 host = default
 
 [survey_markup asrs_ng]
