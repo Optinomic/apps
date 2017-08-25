@@ -443,7 +443,7 @@
                     "show_scale_text": true,
                     "show_score_vertical_line": false,
                     "show_score_profile_line": true,
-                    "show_score_circles": false,
+                    "show_score_circles": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
                     "response_title_path": "calculation.info.mz.mz_typ",
@@ -461,7 +461,7 @@
                     "show_scale_text": false,
                     "show_score_vertical_line": false,
                     "show_score_profile_line": true,
-                    "show_score_circles": false,
+                    "show_score_circles": true,
                     "range_alpha": 0.1,
                     "vertical_grid_every_x": 1,
                     "response_title_path": "calculation.info.mz.mz_typ",
@@ -1042,12 +1042,12 @@
                     if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
                         this._sr_actinfo_ein.data.forEach(function(current, ID) {
                             current.app_name = 'Eintritt';
-                            current.info = current.app_name + ': ' + current.calculation.FAGERSTROEM.interpretation.result
+                            current.info = current.app_name
                             _sr_actinfo.push(current);
                         });
                         this._sr_actinfo_aus.data.forEach(function(current, ID) {
                             current.app_name = 'Austritt';
-                            current.info = current.app_name + ': ' + current.calculation.FAGERSTROEM.interpretation.result
+                            current.info = current.app_name
                             _sr_actinfo.push(current);
                         });
 
