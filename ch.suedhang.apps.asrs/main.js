@@ -90,14 +90,14 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.scale_ranges = {
         "ranges": [{
             "from": 0,
-            "to": 2,
-            "result": "Kein Verdacht auf ADHS",
-            "result_color": "green"
+            "to": 3,
+            "result": "Keine Hinweise auf ADHS vorhanden",
+            "result_color": "#2E7D32"
         }, {
-            "from": 3,
-            "to": 15,
-            "result": "Verdacht auf ADHS",
-            "result_color": "orange"
+            "from": 4,
+            "to": 6,
+            "result": "Hinweise auf ADHS vorhanden",
+            "result_color": "#C62828"
         }]
     };
 
