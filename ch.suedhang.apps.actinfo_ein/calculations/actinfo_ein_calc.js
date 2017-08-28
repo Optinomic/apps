@@ -360,7 +360,6 @@ function main(responses) {
                     "gramm": gramm,
                     "volumenprozent ": 5,
                 };
-
                 if (gramm > 0) {
                     return_obj.gramm_total = return_obj.gramm_total + gramm;
                     return_obj.drinks.push(drink_obj);
@@ -387,8 +386,10 @@ function main(responses) {
                     "gramm": gramm,
                     "volumenprozent": 5,
                 };
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
-                return_obj.drinks.push(drink_obj);
+                if (gramm > 0) {
+                    return_obj.gramm_total = return_obj.gramm_total + gramm;
+                    return_obj.drinks.push(drink_obj);
+                };
             };
 
             if (d['QZEA120[VZEA120d]'] !== "") {
@@ -450,8 +451,10 @@ function main(responses) {
                     "gramm": gramm,
                     "volumenprozent": 20,
                 };
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
-                return_obj.drinks.push(drink_obj);
+                if (gramm > 0) {
+                    return_obj.gramm_total = return_obj.gramm_total + gramm;
+                    return_obj.drinks.push(drink_obj);
+                };
             };
 
             if (d['QZEA120[VZEA120i]'] !== "") {
@@ -461,8 +464,10 @@ function main(responses) {
                     "gramm": gramm,
                     "volumenprozent": 40,
                 };
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
-                return_obj.drinks.push(drink_obj);
+                if (gramm > 0) {
+                    return_obj.gramm_total = return_obj.gramm_total + gramm;
+                    return_obj.drinks.push(drink_obj);
+                };
             };
 
             if (d['QZEA120[VZEA120j]'] !== "") {
