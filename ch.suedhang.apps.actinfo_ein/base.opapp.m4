@@ -73,8 +73,8 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+[calculation actinfo_ein_calc javascript]
+include(calculations/actinfo_ein_calc.js)
 
 
 [sql_init]

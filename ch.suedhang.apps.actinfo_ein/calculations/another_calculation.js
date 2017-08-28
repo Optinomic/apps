@@ -12,7 +12,6 @@ function main(responses) {
         return +(Math.round(num + "e+1") + "e-1");
     }
 
-
     calc.AUDIT_Score = function(d, gender) {
 
 
@@ -150,8 +149,6 @@ function main(responses) {
         return return_obj;
     };
 
-
-
     calc.FAGERSTROEM_Score = function(d) {
 
         // Calculate AUDIT-Score
@@ -283,6 +280,10 @@ function main(responses) {
             var gender = myResponses.patient.data.gender;
 
             // Something
+            myResults.MZ = {
+                "mz_id": 1,
+                "mz_text": "Eintritt"
+            };
             myResults.AUDIT = calc.AUDIT_Score(result, gender);
             myResults.FAGERSTROEM = calc.FAGERSTROEM_Score(result);
 
