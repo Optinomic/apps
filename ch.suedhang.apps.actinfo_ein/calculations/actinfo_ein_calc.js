@@ -356,11 +356,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120a]']) * 0.4;
             var drink_obj = {
                 "drink": "Bier",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent ": 5,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -369,11 +369,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120b]']) * 0.4;
             var drink_obj = {
                 "drink": "Suure Most",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 5,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -382,11 +382,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120c]']) * 0.4;
             var drink_obj = {
                 "drink": "Alcopop",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 5,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -395,11 +395,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120d]']) * 0.4;
             var drink_obj = {
                 "drink": "Andere 5%",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 5,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -408,11 +408,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120e]']) * 0.96;
             var drink_obj = {
                 "drink": "Wein/Champagner/Sekt",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 12,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -421,11 +421,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120f]']) * 0.96;
             var drink_obj = {
                 "drink": "Andere 12%",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 12,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -434,11 +434,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120g]']) * 1.6;
             var drink_obj = {
                 "drink": "Wermut/Portwein",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 20,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -447,11 +447,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120h]']) * 1.6;
             var drink_obj = {
                 "drink": "Andere 20%",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 20,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -460,11 +460,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120i]']) * 3.2;
             var drink_obj = {
                 "drink": "Schnäpse (ink. Café Schnaps)",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 40,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
@@ -473,11 +473,11 @@ function main(responses) {
             var gramm = parseInt(d['QZEA120[VZEA120j]']) * 3.2;
             var drink_obj = {
                 "drink": "Andere 40%",
-                "gramm": gramm,
+                "gramm": calc.roundToOne(gramm),
                 "volumenprozent": 40,
             };
             if (gramm > 0) {
-                return_obj.gramm_total = return_obj.gramm_total + gramm;
+                return_obj.gramm_total = calc.roundToOne(return_obj.gramm_total + gramm);
                 return_obj.drinks.push(drink_obj);
             };
         };
