@@ -20,10 +20,13 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template Profile_Z_Score 6 7]
+[template Beat 6 7]
+include(../lib/polymer/index.m4)
+include(elements/view.html)
+
+[template Nora 6 7]
 include(../lib/polymer/index.m4)
 include(elements/view_nora.html)
-
 
 
 [javascript]
