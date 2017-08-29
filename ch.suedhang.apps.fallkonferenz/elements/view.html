@@ -385,43 +385,36 @@
     
     
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                        var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
         
                         var clinic_sample_dive = {
                             "defined": false,
                             "array": []
                         };
 
+                        // ---- Gewünschte Klinikstichprobe schreiben ----
 
-                        var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-                        console.warn('_sr_bsclChanged', latest_sr, clinic_sample_dive);
-
-
-                        //  // Build Default
-                        //  this._d.bscl.ks_dimensions.forEach(function(dimension, ID) {
-                        //      clinic_sample_dive.array.push(dimension.array.length - 1);
-                        //  });
-//  
-                        //  console.error('_sr_bsclChanged', latest_sr, clinic_sample_dive);
-
-                        
         
-                        // Messzeitpunkt (Schwierig => Alle)
+                        // Messzeitpunkt (Genau prüfen => Alle)
                         clinic_sample_dive.array.push(5);
         
-                        // Geschlecht (Schwierig => Alle)
-                        clinic_sample_dive.array.push(2);
+                        // Geschlecht
+                        if (latest_sr.patient.gender === "female") {
+                            clinic_sample_dive.array.push(0);
+                        } else {
+                            clinic_sample_dive.array.push(1);
+                        };
         
-                        // Behandlung (Schwierig => Alle)
+                        // Behandlung (Genau prüfen => Alle)
                         clinic_sample_dive.array.push(4);
     
-        
-        
-                        // Set
+
+
+                        // ---- Set ----
                         clinic_sample_dive.defined = true;
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
         
-                        console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
-    
+                        console.warn('_sr_bscl - Klinikstichprobe gesetzt:', clinic_sample_dive, this._d);
                     };
                 };
 
