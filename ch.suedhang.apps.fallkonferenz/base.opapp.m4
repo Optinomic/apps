@@ -29,6 +29,11 @@ include(elements/view.html)
 include(../lib/polymer/index.m4)
 include(elements/view_nora.html)
 
+[template Experimental 6 7]
+include(../lib/polymer/index.m4)
+include(elements/actinfo-problemsubstanzen.html)
+include(elements/view_experiment.html)
+
 
 [javascript]
 
