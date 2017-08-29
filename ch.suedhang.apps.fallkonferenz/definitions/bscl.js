@@ -140,3 +140,88 @@ d.bscl = {
         "color": "#C62828"
     }]
 };
+
+
+d.bscl.ks_dimensions = [{
+        "array": [{
+                "text": "Eintritt EAS",
+                "id": 0
+            },
+            {
+                "text": "Austritt EP",
+                "id": 1
+            },
+            {
+                "text": "Übertritt EP",
+                "id": 2
+            },
+            {
+                "text": "Austritt EAS",
+                "id": 3
+            },
+            {
+                "text": "Eintritt EP",
+                "id": 4
+            },
+            {
+                "text": "Alle Messzeitpunkte",
+                "id": 5
+            }
+        ],
+        "name": "Messzeitpunkt",
+        "source": "app",
+        "id": 2
+    },
+    {
+        "array": [{
+                "text": "Frauen",
+                "pg_id": 2,
+                "id": 0
+            },
+            {
+                "text": "Männer",
+                "pg_id": 1,
+                "id": 1
+            },
+            {
+                "text": "Alle Patienten",
+                "pg_id": null,
+                "id": 2
+            }
+        ],
+        "name": "Geschlecht",
+        "source": "pg",
+        "id": 0
+    },
+    {
+        "array": [{
+                "text": "EAS",
+                "pg_id": 6,
+                "id": 0
+            },
+            {
+                "text": "EP",
+                "pg_id": 7,
+                "id": 1
+            },
+            {
+                "text": "EAS + EP",
+                "pg_id": 8,
+                "id": 2
+            },
+            {
+                "text": "TK",
+                "pg_id": 9,
+                "id": 3
+            },
+            {
+                "text": "Alle Patienten",
+                "pg_id": null,
+                "id": 4
+            }
+        ],
+        "name": "Behandlungen",
+        "source": "pg",
+        "id": 1
+    }
+];

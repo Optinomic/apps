@@ -66,7 +66,7 @@
                         <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                        <p>Erstelle Klinikstichprobe aus letzter Messung...</p>
+                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
             </div>
@@ -381,41 +381,48 @@
             this.debounce('_sr_bsclChanged', function() {
 
                 if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
-
-
-                    // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                    if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
     
-                    var clinic_sample_dive = {
-                        "defined": false,
-                        "array": []
+    
+                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+        
+                        var clinic_sample_dive = {
+                            "defined": false,
+                            "array": []
+                        };
+
+
+                        var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
+                        console.warn('_sr_bsclChanged', latest_sr, clinic_sample_dive);
+
+
+                        //  // Build Default
+                        //  this._d.bscl.ks_dimensions.forEach(function(dimension, ID) {
+                        //      clinic_sample_dive.array.push(dimension.array.length - 1);
+                        //  });
+//  
+                        //  console.error('_sr_bsclChanged', latest_sr, clinic_sample_dive);
+
+                        
+        
+                        // Messzeitpunkt (Schwierig => Alle)
+                        clinic_sample_dive.array.push(5);
+        
+                        // Geschlecht (Schwierig => Alle)
+                        clinic_sample_dive.array.push(2);
+        
+                        // Behandlung (Schwierig => Alle)
+                        clinic_sample_dive.array.push(4);
+    
+        
+        
+                        // Set
+                        clinic_sample_dive.defined = true;
+                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
+        
+                        console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
+    
                     };
-                    
-                    // var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-    
-    
-                    // Messzeitpunkt
-                    // if () {}
-                    clinic_sample_dive.array.push(0);
-    
-                    clinic_sample_dive.array.push(2);
-    
-                    clinic_sample_dive.array.push(4);
-
-                    // clinic_sample_dive.array = "[0, 2, 4]";
-    
-                    // Set
-                    // clinic_sample_dive.dive_array = "[" + clinic_sample_dive.dive_array.toString() + "]";
-    
-                    clinic_sample_dive.defined = true;
-    
-    
-                    console.error('_sr_bsclChanged', this._sr_bscl, clinic_sample_dive);
-    
-                    this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-                    this.set('_d.bscl_clinic_sample_dive_array', clinic_sample_dive.array);
-    
-                    console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
-
                 };
 
             }, 250);
