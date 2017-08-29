@@ -9,16 +9,16 @@
             <div class="horizontal wrap">
                 <div class="flex app_title">
                     <h3>Problemsubstanzen</h3>
-                    <p style="margin-top:-12px;">[[item.calculation.problemsubstanzen.description]]</p>
+                    <p style="margin-top:-12px;">[[item.calculation.actinfo_ein_calc.problemsubstanzen.description]]</p>
                 </div>
                 <div>
-                    <p class="caption">[[item.calculation.messzeitpunkt.mz_text]]
-                        <br>[[item.calculation.messzeitpunkt.mz_datum]]</p>
+                    <p class="caption">[[item.calculation.actinfo_ein_calc.messzeitpunkt.mz_text]]
+                        <br>[[item.calculation.actinfo_ein_calc.messzeitpunkt.mz_datum]]</p>
                 </div>
             </div>
             <div class="list_container">
                 <ol>
-                    <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
+                    <template is="dom-repeat" items="[[item.calculation.actinfo_ein_calc.problemsubstanzen.substanzen]]" as="ps">
                         <li>
                             <p>
                                 <b>[[ps.substanz]]: </b>&nbsp;[[ps.label]]
@@ -50,8 +50,9 @@
         },
 
         _dataChanged: function() {
-            var calculation = this.data.data["0"].calculation;
+            var calculation = this.data.data["0"].calculation.actinfo_ein_calc;
             console.warn('_dataChanged', calculation);
+            // Do whatever you like with your data here!
         },
 
         ready: function() {}
