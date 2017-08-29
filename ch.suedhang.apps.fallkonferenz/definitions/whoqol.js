@@ -15,8 +15,8 @@ d.whoqol = {
         "show_score_circles": true,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 10,
-        "response_title_path": "event.description",
-        "response_date_path": "calculation.phys_psych_calculation.response.data.filled"
+        "response_title_path": "event.survey_name",
+        "response_date_path": "date"
     },
     "options_ohne_text": {
         "min": -4,

@@ -16,7 +16,7 @@ d.tmt = {
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text",
-        "response_date_path": "calculation.tmt_score.date"
+        "response_date_path": "date"
     },
     "start": {
         "left_title": "langsam",

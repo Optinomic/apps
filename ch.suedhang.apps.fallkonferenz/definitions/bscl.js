@@ -16,7 +16,7 @@ d.bscl = {
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
-        "response_date_path": "calculation.scores_calculation.info.filled"
+        "response_date_path": "date"
     },
     "options_ohne_text": {
         "min": -4,

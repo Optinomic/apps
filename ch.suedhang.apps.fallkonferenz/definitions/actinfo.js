@@ -16,7 +16,7 @@ d.actinfo_audit = {
         "show_settings_block": true,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 5,
-        "response_title_path": "calculation.actinfo_ein_calc.AUDIT.interpretation.result",
+        "response_title_path": "calculation.actinfo_ein_calc.messzeitpunkt.mz_text",
         "response_date_path": "date"
     },
     "scales": [{
@@ -64,7 +64,7 @@ d.actinfo_fagerstroem = {
         "show_settings_block": true,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
-        "response_title_path": "info",
+        "response_title_path": "app_name",
         "response_date_path": "date"
     },
     "scales": [{

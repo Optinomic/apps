@@ -17,7 +17,7 @@ d.bdi = {
         "range_alpha": 0.1,
         "vertical_grid_every_x": 3,
         "response_title_path": "calculation.bdi_score.score.current_range.interpretation_de",
-        "response_date_path": "response.submitdate"
+        "response_date_path": "date"
     },
     "scales": [{
         "left_title": "Kein Verdacht auf eine Depression",
