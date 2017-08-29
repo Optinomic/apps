@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template Beat 6 7]
+[template overview 6 7]
 include(../lib/polymer/index.m4)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/view.html)
