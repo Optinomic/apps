@@ -62,10 +62,11 @@
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_bscl]]">
-                    <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]">
-                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" start="[[_d.bscl.start]]" scales=" [[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="   [[_d.bscl.clinic_sample_dive.dive_array]]" clinic_samples='include(includes/ks_bscl.json)'> </ optinomic-chart-profile>
+                    <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" start="[[_d.bscl.start]]" scales=" [[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="   [[_d.bscl.clinic_sample_dive.array]]" clinic_samples='include(includes/ks_bscl.json)'>
+                        </optinomic-chart-profile>
                     </template>
-                    <template is="dom-if" if="[[!_d.bscl.clinic_sample_dive.defined]]">
+                    <template is="dom-if" if="[[!_d.bscl.clinic_sample_dive.defined]]" restamp="true">
                         <p>Erstelle Klinikstichprobe der letzten Messung.</p>
                     </template>
                 </template>
@@ -386,7 +387,7 @@
 
                 var clinic_sample_dive = {
                     "defined": false,
-                    "dive_array": []
+                    "array": []
                 };
                 var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
 
