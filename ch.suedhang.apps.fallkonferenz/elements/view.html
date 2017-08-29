@@ -63,7 +63,7 @@
                 </template>
                 <template is="dom-if" if="[[_sr_bscl]]">
                     <template is="dom-if" if="[[_d.bscl.clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" start="[[_d.bscl.start]]" scales=" [[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl.clinic_sample_dive.array]]">
+                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" start="[[_d.bscl.start]]" scales=" [[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]">
                         </optinomic-chart-profile>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl.clinic_sample_dive.defined]]" restamp="true">
@@ -402,7 +402,7 @@
     
                     clinic_sample_dive.array.push(4);
 
-                    clinic_sample_dive.array = "[0, 2, 4]";
+                    // clinic_sample_dive.array = "[0, 2, 4]";
     
                     // Set
                     // clinic_sample_dive.dive_array = "[" + clinic_sample_dive.dive_array.toString() + "]";
@@ -413,7 +413,7 @@
     
                     console.error('_sr_bsclChanged', this._sr_bscl, clinic_sample_dive);
     
-                    this.set('_d.bscl.clinic_sample_dive', clinic_sample_dive);
+                    this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
     
                     console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
 
