@@ -5,8 +5,24 @@
             display: block;
 
             .list_container {
-                padding-left: 24px !important;
-                padding-right: 24px !important;
+                width: 80%;
+                margin-bottom: 24px !important;
+            }
+
+            ol {
+                list-style-type: none;
+            }
+
+            ol li {
+                position: relative;
+            }
+
+            li p {
+                padding-left: 48px;
+            }
+
+            span {
+                position: absolute;
             }
         }
         </style>
@@ -14,24 +30,29 @@
             <div class="horizontal wrap">
                 <div class="flex app_title">
                     <h3>Problemsubstanzen</h3>
-                    <p>[[item.calculation.problemsubstanzen.description]]</p>
+                    <p style="margin-top:-6px;">[[item.calculation.problemsubstanzen.description]]</p>
                 </div>
                 <div>
-                    <p class="caption">[[item.calculation.messzeitpunkt.mz_text]]<br>[[item.calculation.messzeitpunkt.mz_datum]]</p>
+                    <p class="caption">[[item.calculation.messzeitpunkt.mz_text]]
+                        <br>[[item.calculation.messzeitpunkt.mz_datum]]</p>
                 </div>
             </div>
             <div class="list_container">
-                <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
-                    <p>
-                        <b> ─ &nbsp;&nbsp; [[ps.substanz]]: </b>[[ps.label]]
-                        <template is="dom-if" if="[[ps.audit]]">
-                            <span> [[ps.audit]]</span>
-                        </template>
-                        <template is="dom-if" if="[[ps.fagerstroem]]">
-                            <span> [[ps.fagerstroem]]</span>
-                        </template>
-                    </p>
-                </template>
+                <ol>
+                    <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
+                        <li><span> ─ </span>
+                            <p>
+                                <b>[[ps.substanz]]: </b>[[ps.label]]
+                                <template is="dom-if" if="[[ps.audit]]">
+                                    <span> [[ps.audit]]</span>
+                                </template>
+                                <template is="dom-if" if="[[ps.fagerstroem]]">
+                                    <span> [[ps.fagerstroem]]</span>
+                                </template>
+                            </p>
+                        </li>
+                    </template>
+                </ol>
             </div>
         </template>
     </template>
