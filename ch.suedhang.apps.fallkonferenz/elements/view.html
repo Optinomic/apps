@@ -395,8 +395,12 @@
                         // ---- Gewünschte Klinikstichprobe schreiben ----
 
         
-                        // Messzeitpunkt (Genau prüfen => Alle)
-                        clinic_sample_dive.array.push(5);
+                        // Messzeitpunkt
+                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
+                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
+                        } else {
+                            clinic_sample_dive.array.push(5);
+                        };
         
                         // Geschlecht
                         if (latest_sr.patient.gender === "female") {
@@ -405,16 +409,15 @@
                             clinic_sample_dive.array.push(1);
                         };
         
-                        // Behandlung (Genau prüfen => Alle)
+                        // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
                         clinic_sample_dive.array.push(4);
-    
 
 
                         // ---- Set ----
                         clinic_sample_dive.defined = true;
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
         
-                        console.warn('_sr_bscl - Klinikstichprobe gesetzt:', clinic_sample_dive, this._d);
+                        console.warn('_sr_bscl - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 
