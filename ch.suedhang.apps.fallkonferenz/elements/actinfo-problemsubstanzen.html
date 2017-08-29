@@ -3,7 +3,6 @@
         <style include="shared-styles">
          :host {
             display: block;
-            padding: 6px;
         }
         </style>
         <div class="horizontal wrap">
@@ -23,14 +22,14 @@
         behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
         properties: {
-            calculation: {
+            data: {
                 type: Object,
-                observer: '_calculationChanged'
+                observer: '_dataChanged'
             }
         },
 
-        _calculationChanged: function() {
-            cosole.warn('_calculationChanged', this.calculation);
+        _dataChanged: function() {
+            cosole.warn('_dataChanged', this.data);
         },
 
         ready: function() {
