@@ -3,6 +3,11 @@
         <style include="shared-styles">
          :host {
             display: block;
+
+            .list_container {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
         }
         </style>
         <template is="dom-repeat" items="[[data.data]]" as="item">
@@ -12,20 +17,22 @@
                     <p>[[item.calculation.problemsubstanzen.description]]</p>
                 </div>
                 <div>
-                    <p>[[item.calculation.messzeitpunkt.mz_datum]]</p>
+                    <p class="caption">[[item.calculation.messzeitpunkt.mz_text]]<br>[[item.calculation.messzeitpunkt.mz_datum]]</p>
                 </div>
             </div>
-            <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
-                <p>
-                    <b>[[ps.substanz]]: </b>[[ps.label]]
-                    <template is="dom-if" if="[[ps.audit]]">
-                        <span>, [[ps.audit]]</span>
-                    </template>
-                    <template is="dom-if" if="[[ps.fagerstroem]]">
-                        <span>, [[ps.fagerstroem]]</span>
-                    </template>
-                </p>
-            </template>
+            <div class="list_container">
+                <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
+                    <p>
+                        <b> ─ &nbsp;&nbsp; [[ps.substanz]]: </b>[[ps.label]]
+                        <template is="dom-if" if="[[ps.audit]]">
+                            <span> [[ps.audit]]</span>
+                        </template>
+                        <template is="dom-if" if="[[ps.fagerstroem]]">
+                            <span> [[ps.fagerstroem]]</span>
+                        </template>
+                    </p>
+                </template>
+            </div>
         </template>
     </template>
     <script>
@@ -43,7 +50,7 @@
 
         _dataChanged: function() {
             var calculation = this.data.data["0"].calculation;
-            console.warn('_dataChanged', );
+            console.warn('_dataChanged', calculation);
         },
 
         ready: function() {}
