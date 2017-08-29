@@ -1,5 +1,6 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="actinfo-problemsubstanzen.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -38,6 +39,9 @@
                     <h3>Keine ActInfo-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
+                    <h3>Problemsubstanzen - hier</h3>
+                    <actinfo-problemsubstanzen calculation="[[_sr_actinfo_ein.calculation]]"></actinfo-problemsubstanzen>
+
                     <h3>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>

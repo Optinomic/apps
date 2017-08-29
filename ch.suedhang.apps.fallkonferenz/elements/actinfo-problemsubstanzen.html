@@ -1,0 +1,40 @@
+<dom-module id="actinfo-problemsubstanzen">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <h3>Problemsubstanzen</h3>
+            </div>
+            <div>
+                <p>Datum</p>
+            </div>
+        </div>
+        
+    </template>
+    <script>
+    Polymer({
+        is: 'actinfo-problemsubstanzen',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            calculation: {
+                type: Object,
+                observer: '_calculationChanged'
+            }
+        },
+
+        _calculationChanged: function() {
+            cosole.warn('_calculationChanged', this.calculation);
+        }
+
+        ready: function() {
+        }
+    });
+    </script>
+</dom-module>
