@@ -381,38 +381,41 @@
         _sr_bsclChanged: function() {
             this.debounce('_sr_bsclChanged', function() {
 
-                // WTF!  Seems not to work properly.  Unsure why we can direct input values but not via vars.
+                if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
 
-                // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
 
-                var clinic_sample_dive = {
-                    "defined": false,
-                    "array": []
+                    // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+    
+                    var clinic_sample_dive = {
+                        "defined": false,
+                        "array": []
+                    };
+                    
+                    // var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
+    
+    
+                    // Messzeitpunkt
+                    // if () {}
+                    clinic_sample_dive.dive_array.push(0);
+    
+                    clinic_sample_dive.dive_array.push(2);
+    
+                    clinic_sample_dive.dive_array.push(4);
+    
+                    // Set
+                    // clinic_sample_dive.dive_array = "[" + clinic_sample_dive.dive_array.toString() + "]";
+    
+                    clinic_sample_dive.defined = true;
+    
+    
+    
+                    console.error('_sr_bsclChanged', this._sr_bscl, clinic_sample_dive);
+    
+                    this.set('_d.bscl.clinic_sample_dive', clinic_sample_dive);
+    
+                    console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
+
                 };
-                var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-
-
-                // Messzeitpunkt
-                // if () {}
-                clinic_sample_dive.dive_array.push(0);
-
-                clinic_sample_dive.dive_array.push(2);
-
-                clinic_sample_dive.dive_array.push(4);
-
-                // Set
-                // clinic_sample_dive.dive_array = "[" + clinic_sample_dive.dive_array.toString() + "]";
-
-                clinic_sample_dive.defined = true;
-
-
-
-                console.error('_sr_bsclChanged', latest_sr, clinic_sample_dive);
-
-                this.set('_d.bscl.clinic_sample_dive', clinic_sample_dive);
-
-                console.error('_sr_bsclChanged SET', clinic_sample_dive, this._d);
-
 
             }, 250);
         },
