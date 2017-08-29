@@ -3,23 +3,6 @@
         <style include="shared-styles">
          :host {
             display: block;
-
-            .list_container {
-                margin-bottom: 64px !important;
-            }
-
-            ol {
-                list-style-type: none;
-            }
-
-            ol li {
-                position: relative;
-            }
-
-            li p {
-                padding-left: 48px;
-            }
-
         }
         </style>
         <template is="dom-repeat" items="[[data.data]]" as="item">
@@ -40,16 +23,17 @@
                             <p>
                                 <b>[[ps.substanz]]: </b>&nbsp;[[ps.label]]
                                 <template is="dom-if" if="[[ps.audit]]">
-                                    <span> [[ps.audit]]</span>
+                                    <span> AUDIT: [[ps.audit]]</span>
                                 </template>
                                 <template is="dom-if" if="[[ps.fagerstroem]]">
-                                    <span> [[ps.fagerstroem]]</span>
+                                    <span> Fagerström: [[ps.fagerstroem]]</span>
                                 </template>
                             </p>
                         </li>
                     </template>
                 </ol>
             </div>
+            <p>&nbsp;</p>
         </template>
     </template>
     <script>
