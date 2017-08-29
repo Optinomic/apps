@@ -5,15 +5,28 @@
             display: block;
         }
         </style>
-        <div class="horizontal wrap">
-            <div class="flex app_title">
-                <h3>Problemsubstanzen</h3>
+        <template is="dom-repeat" items="[[data.data]]" as="item">
+            <div class="horizontal wrap">
+                <div class="flex app_title">
+                    <h3>Problemsubstanzen</h3>
+                    <p>[[item.calculation.problemsubstanzen.description]]</p>
+                </div>
+                <div>
+                    <p>[[item.calculation.messzeitpunkt.mz_datum]]</p>
+                </div>
             </div>
-            <div>
-                <p>Datum</p>
-            </div>
-        </div>
-        
+            <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
+                <p>
+                    <b>[[ps.substanz]]: </b>[[ps.label]]
+                    <template is="dom-if" if="[[ps.audit]]">
+                        <span>, [[ps.audit]]</span>
+                    </template>
+                    <template is="dom-if" if="[[ps.fagerstroem]]">
+                        <span>, [[ps.fagerstroem]]</span>
+                    </template>
+                </p>
+            </template>
+        </template>
     </template>
     <script>
     Polymer({
@@ -29,11 +42,11 @@
         },
 
         _dataChanged: function() {
-            console.warn('_dataChanged', this.data);
+            var calculation = this.data.data["0"].calculation;
+            console.warn('_dataChanged', );
         },
 
-        ready: function() {
-        }
+        ready: function() {}
     });
     </script>
 </dom-module>
