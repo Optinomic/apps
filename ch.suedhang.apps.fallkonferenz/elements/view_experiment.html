@@ -294,12 +294,12 @@
                         this._sr_actinfo_ein.data.forEach(function(current, ID) {
                             current.app_name = 'Eintritt';
                             current.info = current.app_name + ': ' + current.calculation.actinfo_ein_calc.FAGERSTROEM.interpretation.result;
-                            current.info.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
+                            current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
                             _sr_actinfo.push(current);
                         });
                         this._sr_actinfo_aus.data.forEach(function(current, ID) {
                             current.app_name = 'Austritt';
-                            current.info.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
+                            current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
                             current.info = current.app_name + ': ' + current.another_calculation.calculation.FAGERSTROEM.interpretation.result;
                             _sr_actinfo.push(current);
                         });
