@@ -5,8 +5,7 @@
             display: block;
 
             .list_container {
-                width: 80%;
-                margin-bottom: 24px !important;
+                margin-bottom: 64px !important;
             }
 
             ol {
@@ -21,16 +20,13 @@
                 padding-left: 48px;
             }
 
-            span {
-                position: absolute;
-            }
         }
         </style>
         <template is="dom-repeat" items="[[data.data]]" as="item">
             <div class="horizontal wrap">
                 <div class="flex app_title">
                     <h3>Problemsubstanzen</h3>
-                    <p style="margin-top:-6px;">[[item.calculation.problemsubstanzen.description]]</p>
+                    <p style="margin-top:-12px;">[[item.calculation.problemsubstanzen.description]]</p>
                 </div>
                 <div>
                     <p class="caption">[[item.calculation.messzeitpunkt.mz_text]]
@@ -40,9 +36,9 @@
             <div class="list_container">
                 <ol>
                     <template is="dom-repeat" items="[[item.calculation.problemsubstanzen.substanzen]]" as="ps">
-                        <li><span> ─ </span>
+                        <li>
                             <p>
-                                <b>[[ps.substanz]]: </b>[[ps.label]]
+                                <b>[[ps.substanz]]: </b>&nbsp;[[ps.label]]
                                 <template is="dom-if" if="[[ps.audit]]">
                                     <span> [[ps.audit]]</span>
                                 </template>
