@@ -151,11 +151,11 @@ d.bscl = {
         "range_start": -999,
         "range_stop": 1,
         "text": "Gesunde Ausprägung",
-        "color": "#F44336"
+        "color": "#2E7D32"
     }, {
         "range_start": 2,
         "range_stop": 999,
         "text": "Starke Ausprägung",
-        "color": "#F44336"
+        "color": "#C62828"
     }]
 };
