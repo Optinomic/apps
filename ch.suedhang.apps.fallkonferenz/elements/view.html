@@ -85,7 +85,13 @@
                     <h3>Keine ISK-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_isk]]">
-                    <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)'></optinomic-chart-profile>
+                    <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                    </template>
+                    <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
+                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                    </template>
+                    
                 </template>
             </div>
             <div>
@@ -208,7 +214,8 @@
                     } else {
                         return null
                     };
-                }
+                },
+                observer: '_sr_iskChanged'
             },
             _sr_whoqol: {
                 type: Object,
@@ -424,6 +431,49 @@
             }, 250);
         },
 
+        _sr_iskChanged: function() {
+            this.debounce('_sr_iskChanged', function() {
+
+                if ((this._sr_isk !== undefined) && (this._sr_isk !== null)) {
+                    if ((this._sr_isk.data !== undefined) && (this._sr_isk.data !== null)) {
+    
+    
+                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                        var latest_sr = this._sr_isk.data[this._sr_isk.data.length - 1];
+        
+                        var clinic_sample_dive = {
+                            "defined": false,
+                            "array": []
+                        };
+
+                        // ---- Gewünschte Klinikstichprobe schreiben ----
+
+        
+                        // Messzeitpunkt
+                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
+                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
+                        } else {
+                            clinic_sample_dive.array.push(5);
+                        };
+        
+                        // Geschlecht
+                        if (latest_sr.patient.gender === "female") {
+                            clinic_sample_dive.array.push(0);
+                        } else {
+                            clinic_sample_dive.array.push(1);
+                        };
+        
+                        
+                        // ---- Set ----
+                        clinic_sample_dive.defined = true;
+                        this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
+        
+                        console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
+                    };
+                };
+
+            }, 250);
+        },
 
         ready: function() {
             this.__loadData();
