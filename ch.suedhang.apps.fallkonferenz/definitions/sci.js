@@ -2,7 +2,7 @@ d.sci_stress = {
     "options": {
         "min": 0,
         "max": 10,
-        "item_height": 60,
+        "item_height": 65,
         "item_text_left": 200,
         "item_text_right": 200,
         "color_grid": "#9E9E9E",
@@ -86,7 +86,7 @@ d.sci_hilfreich = {
     "options": {
         "min": 0,
         "max": 10,
-        "item_height": 60,
+        "item_height": 65,
         "item_text_left": 200,
         "item_text_right": 200,
         "color_grid": "#9E9E9E",
