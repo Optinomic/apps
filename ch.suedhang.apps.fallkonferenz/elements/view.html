@@ -456,10 +456,11 @@
 
         
                         // Messzeitpunkt
-                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
+                        var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
+                        if (mz !== 99) {
+                            clinic_sample_dive.array.push(mz);
                         } else {
-                            clinic_sample_dive.array.push(5);
+                            clinic_sample_dive.array.push(3);
                         };
         
                         // Geschlecht
