@@ -203,7 +203,8 @@
                     } else {
                         return null
                     };
-                }
+                },
+                observer: '_sr_tmtChanged'
             },
             _sr_isk: {
                 type: Object,
@@ -469,6 +470,66 @@
                         this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
         
                         console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
+                    };
+                };
+
+            }, 250);
+        },
+
+        _sr_tmtChanged: function() {
+            this.debounce('_sr_tmtChanged', function() {
+
+                if ((this._sr_tmt !== undefined) && (this._sr_tmt !== null)) {
+                    if ((this._sr_tmt.data !== undefined) && (this._sr_tmt.data !== null)) {
+    
+    
+                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                        var latest_sr = this._sr_tmt.data[this._sr_tmt.data.length - 1];
+        
+                        var clinic_sample_dive = {
+                            "defined": false,
+                            "array": []
+                        };
+
+                        // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                        // Altersgruppe
+                        if (latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe !== 99) {
+                            clinic_sample_dive.array.push(latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe);
+                        } else {
+                            clinic_sample_dive.array.push(11);
+                        };
+
+                        // Ausbildungsgrad
+                        var ausbildungsgrad = latest_sr.calculation.tmt_score.percentile.age_perz.education_high;
+                        if (ausbildungsgrad === true) {
+                            clinic_sample_dive.array.push(1);
+                        } else {
+                            clinic_sample_dive.array.push(0);
+                        };
+        
+                        // Messzeitpunkt
+                        var mz = latest_sr.calculation.tmt_score.mz - 1;
+                        if ((mz === 0) || (mz === 1) || (mz === 2)) {
+                            clinic_sample_dive.array.push(mz);
+                        } else {
+                            clinic_sample_dive.array.push(3);
+                        };
+        
+                        // Geschlecht
+                        if (latest_sr.patient.gender === "female") {
+                            clinic_sample_dive.array.push(0);
+                        } else {
+                            clinic_sample_dive.array.push(1);
+                        };
+        
+                        
+                        // ---- Set ----
+                        clinic_sample_dive.defined = true;
+                        this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
+        
+                        console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 
