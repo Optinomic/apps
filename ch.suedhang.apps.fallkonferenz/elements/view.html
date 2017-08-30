@@ -53,7 +53,12 @@
                     <h3>Keine TMT-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_tmt]]">
-                    <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)'> </optinomic-chart-profile>
+                    <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
+                    </template>
+                    <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
+                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                    </template>
                 </template>
             </div>
             <div>
@@ -85,10 +90,10 @@
                     <h3>Keine ISK-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_isk]]">
-                    <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
+                    <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     </template>
-                    <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
+                    <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                     
