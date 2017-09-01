@@ -68,9 +68,9 @@ d.actinfo_fagerstroem = {
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Nikotin",
+        "left_title": "",
         "left_text": "Gering",
-        "right_title": "Nikotin",
+        "right_title": "",
         "right_text": "Stark",
         "score_path": "FAGERSTROEM.FAGERSTROEM_Score",
         "clinic_sample_var": null
