@@ -76,6 +76,9 @@
                     </template>
                 </template>
             </div>
+            <div ng-if="_sr_asrs >= 4">
+                <optinomic-title small h1="ADHS-Screening" h2="[[_sr_asrs.score]] der 6 Screeningfragen lagen im auffälligen Bereich." h3="Hinweise auf ADHS vorhanden"></optinomic-title>
+            </div>
             <div>
                 <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_bscl]]">
@@ -202,7 +205,17 @@
                 },
                 observer: '_sr_bsclChanged'
             },
-
+            _sr_asrs: {
+                type: Object,
+                statePath: function(state) {
+                    var app_id = 'ch.suedhang.apps.asrs'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[app_id]
+                    } else {
+                        return null
+                    };
+                }
+            },
             _sr_bdi: {
                 type: Object,
                 statePath: function(state) {
