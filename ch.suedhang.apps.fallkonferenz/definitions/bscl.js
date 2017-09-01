@@ -9,7 +9,7 @@ d.bscl = {
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
         "show_baseline": true,
-        "show_scale_text": false,
+        "show_scale_text": true,
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
