@@ -39,7 +39,15 @@
                 </template>
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
                     <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
-                    <h3>Alkohol bei Eintritt (AUDIT - Alcohol Use Disorders Identification)</h3>
+                    <h3>Zusatzinformationen</h3>
+                    <p>
+                    <ul>
+                        <li>bisherige Entzugsbehandlungen: {{VYEE010}}</li>
+                        <li>regelmässiger Konsum ab {{VMED050}} Jahren</li>
+                        <li>problematischer Konsum ab {{VMED060}} Jahren</li>
+                    </ul>
+                    </p>
+                    <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>
                 <template is="dom-if" if="[[_sr_actinfo.merged]]">
