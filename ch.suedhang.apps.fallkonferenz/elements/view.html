@@ -33,7 +33,7 @@
         </div>
         <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <div>
-                <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_actinfo_ein]]">
                     <h3>Keine ActInfo-Daten vorhanden.</h3>
                 </template>
@@ -63,7 +63,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="TMT (Trail Making Test)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_tmt]]">
                     <h3>Keine TMT-Daten vorhanden.</h3>
                 </template>
@@ -80,7 +80,16 @@
                 <optinomic-title small h1="Hinweise auf ADHS vorhanden" h2="[[_sr_asrs.score]] der 6 Screeningfragen lagen im auffälligen Bereich." h3="ADHS-Screening"></optinomic-title>
             </div>
             <div>
-                <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren."></optinomic-title>
+                <template is="dom-if" if="[[!_sr_aase]]">
+                    <h3>Keine AASE-Daten vorhanden.</h3>
+                </template>
+                <template is="dom-if" if="[[_sr_aase]]">
+                    <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
+                </template>
+            </div>
+            <div>
+                <optinomic-title small h1="Brief Symptom Checklist (BSCL)" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_bscl]]">
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
@@ -94,7 +103,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
+                <optinomic-title small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_bdi]]">
                     <h3>Keine BDI-Daten vorhanden.</h3>
                 </template>
@@ -103,7 +112,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform" h3="Chart"></optinomic-title>
+                <optinomic-title small h1="ISK (Inventar Sozialer Kompetenzen)" h2="ISK Kurzform"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_isk]]">
                     <h3>Keine ISK-Daten vorhanden.</h3>
                 </template>
@@ -209,6 +218,17 @@
                 type: Object,
                 statePath: function(state) {
                     var app_id = 'ch.suedhang.apps.asrs'
+                    if (app_id in state.survey_responses.data) {
+                        return state.survey_responses.data[app_id]
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _sr_aase: {
+                type: Object,
+                statePath: function(state) {
+                    var app_id = 'ch.suedhang.apps.aase-g'
                     if (app_id in state.survey_responses.data) {
                         return state.survey_responses.data[app_id]
                     } else {
