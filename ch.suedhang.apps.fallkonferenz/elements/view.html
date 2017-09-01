@@ -42,9 +42,16 @@
                     <h3>Zusatzinformationen</h3>
                     <p>
                     <ul>
-                        <li>bisherige Entzugsbehandlungen: {{VYEE010}}</li>
-                        <li>regelmässiger Konsum ab {{VMED050}} Jahren</li>
-                        <li>problematischer Konsum ab {{VMED060}} Jahren</li>
+                        if (response.calculations[0].calculation_result.response.data.response.VYEE010 == '999') {
+                        <li> bisherige Entzugsbehandlungen: nicht bekannt</li>
+                        };
+                        if (response.calculations[0].calculation_result.response.data.response.VYEE010 == '6') {
+                        <li> bisherige Entzugsbehandlungen: 6 oder mehr</li>
+                        };
+                        else
+                        <li> bisherige Entzugsbehandlungen: {{response.calculations[0].calculation_result.response.data.response.VYEE010}}</li>
+                        <li>regelmässiger Konsum ab {{response.calculations[0].calculation_result.response.data.response.VMED050}} Jahren</li>
+                        <li>problematischer Konsum ab {{response.calculations[0].calculation_result.response.data.response.VMED060}} Jahren</li>
                     </ul>
                     </p>
                     <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
