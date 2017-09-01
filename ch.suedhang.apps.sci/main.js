@@ -502,6 +502,10 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '2') {
                 label_type = 'Austritt';
             };
+            if (current_response.entity.data.response.Erhebungszeitpunkt === '3') {
+                label_type = 'Verlauf';
+            };
+            
             var label = label_type + ": " + date;
 
 
