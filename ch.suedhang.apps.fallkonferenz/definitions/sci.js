@@ -1,7 +1,7 @@
 d.sci_stress = {
     "options": {
-        "min": 0.5,
-        "max": 9.5,
+        "min": 0,
+        "max": 10,
         "item_height": 65,
         "item_text_left": 200,
         "item_text_right": 200,
