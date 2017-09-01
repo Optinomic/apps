@@ -29,26 +29,26 @@ d.bdi = {
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 8,
+        "range_stop": 8.5,
         "text": "Kein Verdacht auf eine Depression",
         "color": "#2E7D32"
     }, {
-        "range_start": 8,
-        "range_stop": 13,
+        "range_start": 8.5,
+        "range_stop": 13.5,
         "text": "Verdacht auf eine minimale Depression",
         "color": "#FFA000"
     }, {
-        "range_start": 13,
-        "range_stop": 19,
+        "range_start": 13.5,
+        "range_stop": 19.5,
         "text": "Verdacht auf eine leichte Depression",
         "color": "#FBB100"
     }, {
-        "range_start": 19,
-        "range_stop": 28,
+        "range_start": 19.5,
+        "range_stop": 28.5,
         "text": "Verdacht auf eine mittelschwere Depression",
         "color": "#FB7200"
     }, {
-        "range_start": 28,
+        "range_start": 28.5,
         "range_stop": 63,
         "text": "Verdacht auf eine schwere Depression",
         "color": "#C62828"

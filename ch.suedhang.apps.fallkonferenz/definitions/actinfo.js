@@ -20,25 +20,25 @@ d.actinfo_audit = {
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Alkohol",
-        "left_text": "Gering",
-        "right_title": "Alkohol",
-        "right_text": "Stark",
+        "left_title": "",
+        "left_text": "",
+        "right_title": "",
+        "right_text": "",
         "score_path": "calculation.actinfo_ein_calc.AUDIT.AUDIT_Score",
         "clinic_sample_var": null
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 7,
+        "range_stop": 7.5,
         "text": "Risikoarmer Alkoholkonsum",
         "color": "#2E7D32"
     }, {
-        "range_start": 7,
-        "range_stop": 15,
+        "range_start": 7.5,
+        "range_stop": 15.5,
         "text": "Verdacht auf eine alkoholbezogene Störung",
         "color": "#FBB100"
     }, {
-        "range_start": 15,
+        "range_start": 15.5,
         "range_stop": 40,
         "text": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
         "color": "#C62828"
@@ -77,22 +77,22 @@ d.actinfo_fagerstroem = {
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 2,
+        "range_stop": 2.5,
         "text": "Gering ausgeprägte körperliche Abhängigkeit.",
         "color": "#2E7D32"
     }, {
-        "range_start": 2,
-        "range_stop": 4,
+        "range_start": 2.5,
+        "range_stop": 4.5,
         "text": "Mittelstark ausgeprägte körperliche Abhängigkeit.",
         "color": "#FFA000"
     }, {
-        "range_start": 4,
-        "range_stop": 6,
+        "range_start": 4.5,
+        "range_stop": 6.5,
         "text": "Stark ausgeprägte körperliche Abhängigkeit.",
         "color": "#FB7200"
     }, {
-        "range_start": 6,
-        "range_stop": 10,
+        "range_start": 6.5,
+        "range_stop": 10.5,
         "text": "Sehr stark ausgeprägte körperliche Abhängigkeit.",
         "color": "#C62828"
     }]

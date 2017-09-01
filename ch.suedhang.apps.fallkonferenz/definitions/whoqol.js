@@ -46,9 +46,9 @@ d.whoqol = {
         "right_color": "#F44336"
     },
     "scales": [{
-        "left_title": "Physische Lebensqualität",
+        "left_title": "körperliche Lebensqualität",
         "left_text": "Tief",
-        "right_title": "Physische Lebensqualität",
+        "right_title": "",
         "right_text": "Hoch",
         "m_norm": "?",
         "sd_norm": "?",
@@ -57,9 +57,9 @@ d.whoqol = {
         "items": 1
     }, {
         "id": 1,
-        "left_title": "Psychische Lebensqualität",
+        "left_title": "psychische Lebensqualität",
         "left_text": "Tief",
-        "right_title": "Psychische Lebensqualität",
+        "right_title": "",
         "right_text": "Hoch",
         "m_norm": "?",
         "sd_norm": "?",

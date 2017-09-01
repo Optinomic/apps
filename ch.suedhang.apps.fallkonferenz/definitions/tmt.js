@@ -1,7 +1,7 @@
 d.tmt = {
     "options": {
         "min": -4,
-        "max": "auto",
+        "max": 4,
         "item_height": 75,
         "item_text_left": 100,
         "item_text_right": 100,
@@ -28,9 +28,9 @@ d.tmt = {
     },
     "scales": [{
         "left_title": "TMT A",
-        "left_text": "Mental Speed",
+        "left_text": "langsam",
         "right_title": "TMT A",
-        "right_text": "Mental Speed",
+        "right_text": "schnell",
         "m_norm": "?",
         "sd_norm": "?",
         "score_path": "calculation.tmt_score.percentile.z_scores.tmtA_z_rounded",
@@ -39,9 +39,9 @@ d.tmt = {
     }, {
         "id": 1,
         "left_title": "TMT B",
-        "left_text": "Task Switching",
+        "left_text": "langsam",
         "right_title": "TMT B",
-        "right_text": "Task Switching",
+        "right_text": "schnell",
         "m_norm": "?",
         "sd_norm": "?",
         "score_path": "calculation.tmt_score.percentile.z_scores.tmtB_z_rounded",

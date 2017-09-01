@@ -1,6 +1,6 @@
 d.bscl = {
     "options": {
-        "min": -4,
+        "min": -2,
         "max": "auto",
         "item_height": 50,
         "item_text_left": 140,

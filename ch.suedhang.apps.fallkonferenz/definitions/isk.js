@@ -1,7 +1,7 @@
 d.isk = {
     "options_text": {
-        "min": -4,
-        "max": "auto",
+        "min": -8,
+        "max": 4,
         "item_height": 75,
         "item_text_left": 240,
         "item_text_right": 140,
@@ -90,17 +90,17 @@ d.isk = {
     "ranges": [{
         "range_start": -999,
         "range_stop": -2,
-        "text": "Geringe Ausprägung",
+        "text": "starke Ausprägung",
         "color": "#F44336"
     }, {
         "range_start": -1,
-        "range_stop": 2.5,
-        "text": "Normale Ausprägung",
+        "range_stop": 1,
+        "text": "normale Ausprägung",
         "color": "#4CAF50"
     }, {
-        "range_start": 4,
+        "range_start": 2,
         "range_stop": 999,
-        "text": "Hohe Ausprägung",
+        "text": "starke Ausprägung",
         "color": "#F44336"
     }]
 };
