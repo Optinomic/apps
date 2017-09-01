@@ -1,4 +1,4 @@
-d.bdi = {
+d.aase = {
     "options": {
         "min": 0,
         "max": 63,
@@ -20,37 +20,32 @@ d.bdi = {
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Kein Verdacht auf eine Depression",
+        "left_title": "keine Versuchung",
         "left_text": "",
-        "right_title": "Verdacht auf eine schwere Depression",
+        "right_title": "starke Versuchung",
         "right_text": "",
-        "score_path": "calculation.bdi_score.score.score",
+        "score_path": "calculations.calculation_result",
         "clinic_sample_var": null
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 8.5,
-        "text": "Kein Verdacht auf eine Depression",
+        "range_stop": 1.5,
+        "text": "",
         "color": "#2E7D32"
     }, {
-        "range_start": 8.5,
-        "range_stop": 13.5,
-        "text": "Verdacht auf eine minimale Depression",
+        "range_start": 1.5,
+        "range_stop": 2.5,
+        "text": "",
         "color": "#FFA000"
     }, {
-        "range_start": 13.5,
-        "range_stop": 19.5,
-        "text": "Verdacht auf eine leichte Depression",
-        "color": "#FBB100"
-    }, {
-        "range_start": 19.5,
-        "range_stop": 28.5,
-        "text": "Verdacht auf eine mittelschwere Depression",
+        "range_start": 2.5,
+        "range_stop": 3.5,
+        "text": "",
         "color": "#FB7200"
     }, {
-        "range_start": 28.5,
-        "range_stop": 63,
-        "text": "Verdacht auf eine schwere Depression",
+        "range_start": 3.5,
+        "range_stop": 4,
+        "text": "",
         "color": "#C62828"
     }]
 };
