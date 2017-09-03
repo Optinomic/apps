@@ -63,6 +63,32 @@ function main(responses) {
         };
 
 
+        var zahltext = "";
+        if (score === 0) {
+            zahltext = "Keine";
+        };
+        if (score === 1) {
+            zahltext = "Eine";
+        };
+        if (score === 2) {
+            zahltext = "Zwei";
+        };
+        if (score === 3) {
+            zahltext = "Drei";
+        };
+        if (score === 4) {
+            zahltext = "Vier";
+        };
+        if (score === 5) {
+            zahltext = "Fünf";
+        };
+        if (score === 6) {
+            zahltext = "Sechs";
+        };
+
+        current_range.text = zahltext + " der sechs Screeningfragen lagen im auffälligen Bereich. (" + sum + " von 24 Punkten)";
+
+
         var return_obj = {
             "score": score,
             "sum": sum,
@@ -89,6 +115,11 @@ function main(responses) {
             // ASRS-Score
             myResults.score = calc.asrsScore(result);
 
+            myResults.adhs_references = false;
+            if (myResults.score > 3) {
+                myResults.adhs_references = true;
+            };
+
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
@@ -102,5 +133,6 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
+
 
 }
