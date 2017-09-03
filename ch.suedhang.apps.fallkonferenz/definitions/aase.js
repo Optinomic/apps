@@ -1,7 +1,7 @@
 d.aase = {
     "options": {
         "min": 0,
-        "max": 4,
+        "max": 6,
         "item_height": 50,
         "item_text_left": 130,
         "item_text_right": 130,
@@ -10,8 +10,8 @@ d.aase = {
         "color_skin": "grey_dark_to_light",
         "show_baseline": true,
         "show_scale_text": false,
-        "show_score_vertical_line": true,
-        "show_score_profile_line": false,
+        "show_score_vertical_line": false,
+        "show_score_profile_line": true,
         "show_score_circles": true,
         "show_settings_block": true,
         "range_alpha": 0.1,
@@ -65,7 +65,7 @@ d.aase = {
         "color": "#FB7200"
     }, {
         "range_start": 3.5,
-        "range_stop": 4,
+        "range_stop": 999,
         "text": "",
         "color": "#C62828"
     }]
