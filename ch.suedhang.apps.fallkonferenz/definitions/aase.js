@@ -1,7 +1,7 @@
 d.aase = {
     "options": {
         "min": 0,
-        "max": 63,
+        "max": 4,
         "item_height": 50,
         "item_text_left": 130,
         "item_text_right": 130,
@@ -15,16 +15,37 @@ d.aase = {
         "show_score_circles": true,
         "show_settings_block": true,
         "range_alpha": 0.1,
-        "vertical_grid_every_x": 3,
-        "response_title_path": "calculation.bdi_score.score.current_range.interpretation_de",
+        "vertical_grid_every_x": 1,
+        "response_title_path": "calculation.another_calculation.score",
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "keine Versuchung",
-        "left_text": "",
-        "right_title": "starke Versuchung",
-        "right_text": "",
-        "score_path": "calculations.calculation_result",
+        "left_title": "Entzugserscheinungen",
+        "left_text": "Keine Versuchung",
+        "right_title": "Entzugserscheinungen",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.mean_entzugserscheinungen",
+        "clinic_sample_var": null
+    },{
+        "left_title": "Negativer Affekt",
+        "left_text": "Keine Versuchung",
+        "right_title": "Negativer Affekt",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.mean_negativer_affekt",
+        "clinic_sample_var": null
+    },{
+        "left_title": "Somatisches Unwohlsein",
+        "left_text": "Keine Versuchung",
+        "right_title": "Somatisches Unwohlsein",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.mean_somatisches_unwohlsein",
+        "clinic_sample_var": null
+    },{
+        "left_title": "Soziale Situationen",
+        "left_text": "Keine Versuchung",
+        "right_title": "Soziale Situationen",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.mean_soziale_situationen",
         "clinic_sample_var": null
     }],
     "ranges": [{
