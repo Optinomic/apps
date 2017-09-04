@@ -76,9 +76,22 @@
                     </template>
                 </template>
             </div>
-            <div ng-if="_sr_asrs >= 4">
-                <optinomic-title small h1="Hinweise auf ADHS vorhanden" h2="[[_sr_asrs.score]] der 6 Screeningfragen lagen im auffälligen Bereich." h3="ADHS-Screening"></optinomic-title>
+
+            
+            <div>
+                <template is="dom-if" if="[[_sr_asrs]]">
+                     <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
+
+                     <template is="dom-repeat" items="[[_sr_asrs.data]]" as="asrs">
+                        <template is="dom-if" if="[[asrs.calculation.asrs_score.adhs_references]]">
+                            <p><b>[[asrs.calculation.asrs_score.score.current_range.interpretation]]: </b>[[asrs.calculation.asrs_score.score.current_range.text]]</p>
+                        </template>
+                     </template>
+                     
+                </template>
             </div>
+
+            
             <div>
                 <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren."></optinomic-title>
                 <template is="dom-if" if="[[!_sr_aase]]">
