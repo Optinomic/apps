@@ -10,7 +10,7 @@ d.asrs = {
         "color_skin": "grey_dark_to_light",
         "show_baseline": false,
         "show_scale_text": true,
-        "show_score_vertical_line": false,
+        "show_score_vertical_line": true,
         "show_score_profile_line": true,
         "show_score_circles": true,
         "show_settings_block": true,
@@ -29,7 +29,7 @@ d.asrs = {
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 3,
+        "range_stop": 4,
         "text": "Keine Hinweise auf ADHS vorhanden",
         "color": "#4CAF50"
     }, {

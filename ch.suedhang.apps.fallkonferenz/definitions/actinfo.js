@@ -21,9 +21,9 @@ d.actinfo_audit = {
     },
     "scales": [{
         "left_title": "",
-        "left_text": "",
+        "left_text": "Risikoarmer Alkoholkonsum",
         "right_title": "",
-        "right_text": "",
+        "right_text": "Verdacht auf Alkoholabhängigkeit",
         "score_path": "calculation.actinfo_ein_calc.AUDIT.AUDIT_Score",
         "clinic_sample_var": null
     }],
