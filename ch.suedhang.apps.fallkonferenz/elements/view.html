@@ -40,7 +40,11 @@
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
                     <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
                     <h3>Zusatzinformationen</h3>
-                    <p>[[_sr_actinfo_ein.data["0"].calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[_sr_actinfo_ein.data["0"].calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
+                    <p>:: [[_sr_actinfo_ein.app_id]]</p>
+                    <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
+                        <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
+                     </template>
+
                     <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>
