@@ -1,7 +1,7 @@
-d.aase = {
+d.asrs = {
     "options": {
         "min": 0,
-        "max": 24,
+        "max": 6,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,
@@ -34,7 +34,7 @@ d.aase = {
         "color": "#4CAF50"
     }, {
         "range_start": 4,
-        "range_stop": 999,
+        "range_stop": 6,
         "text": "Hinweise auf ADHS vorhanden",
         "color": "#F44336"
     }]
