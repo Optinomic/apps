@@ -1,15 +1,28 @@
 function main(responses) {
+
+
     var calc = {};
 
     // ------------------------------------------
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
-    //calc.setScore = function() {
-    //    var score = 4;
-    //        score = score + 25;
-    //    return score;
-    //};
+    // CH Datumsformat
+    calc.formatDateCH = function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
 
     calc.roundToOne = function(num) {
         return +(Math.round(num + "e+1") + "e-1");
@@ -75,7 +88,7 @@ function main(responses) {
                 score = score + parseInt(result['AASEandere[AASE17]']);
                 score = score + parseInt(result['AASEandere[AASE18]']);
                 score = score + parseInt(result['AASEandere[AASE19]']);
-                score = score + parseInt(result['AASEandere[AASE20]']);            
+                score = score + parseInt(result['AASEandere[AASE20]']);
             } else {
                 score = score + parseInt(result['AASE[AASE1]']);
                 score = score + parseInt(result['AASE[AASE2]']);
@@ -101,6 +114,8 @@ function main(responses) {
 
             myResults.score = calc.roundToOne(score);
 
+            myResults.score_mean = calc.roundToOne(score / 20);
+
 
 
 
@@ -118,7 +133,7 @@ function main(responses) {
             //  AASE16: Wenn ich das Gefühl habe, dass bei mir alles schief läuft
             //  AASE18: Wenn ich ärgerlich bin
             var score_negativer_affekt = 0;
-            if (result.Substanz == 2) {            
+            if (result.Substanz == 2) {
                 score_negativer_affekt = score_negativer_affekt + parseInt(result['AASEandere[AASE3]']);
                 score_negativer_affekt = score_negativer_affekt + parseInt(result['AASEandere[AASE5]']);
                 score_negativer_affekt = score_negativer_affekt + parseInt(result['AASEandere[AASE6]']);
@@ -218,6 +233,32 @@ function main(responses) {
             //myResults.getScore = calc.setScore();
 
 
+            // Messzeitpunkt
+            myResults.messzeitpunkt = {
+                "mz_id": 4,
+                "mz_text": "Unbekannt"
+            };
+
+            if ('Erhebungszeitpunkt' in result) {
+                myResults.messzeitpunkt.mz_id = parseInt(result.Erhebungszeitpunkt);
+                myResults.messzeitpunkt.mz_date = result.Datum;
+
+                if (myResults.messzeitpunkt.mz_id === 1) {
+                    myResults.messzeitpunkt.mz_text = "Eintritt";
+                };
+                if (myResults.messzeitpunkt.mz_id === 2) {
+                    myResults.messzeitpunkt.mz_text = "Austritt";
+                };
+                if (myResults.messzeitpunkt.mz_id === 3) {
+                    myResults.messzeitpunkt.mz_text = "Anderer Messzeitpunkt";
+                };
+
+            } else {
+                myResults.messzeitpunkt.mz_date = result.datestamp;
+            };
+            myResults.messzeitpunkt.mz_datum = calc.formatDateCH(myResults.messzeitpunkt.mz_date);
+
+
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
@@ -231,4 +272,7 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
+
+
+
 }
