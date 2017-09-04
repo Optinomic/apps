@@ -8,7 +8,7 @@ d.bdi = {
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
-        "show_baseline": true,
+        "show_baseline": false,
         "show_scale_text": false,
         "show_score_vertical_line": true,
         "show_score_profile_line": false,
