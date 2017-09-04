@@ -16,22 +16,22 @@ d.aase = {
         "show_settings_block": true,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.another_calculation.score",
+        "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Entzugserscheinungen",
-        "left_text": "Keine Versuchung",
-        "right_title": "Entzugserscheinungen",
-        "right_text": "Starke Versuchung",
-        "score_path": "calculation.another_calculation.mean_entzugserscheinungen",
-        "clinic_sample_var": null
-    },{
         "left_title": "Negativer Affekt",
         "left_text": "Keine Versuchung",
         "right_title": "Negativer Affekt",
         "right_text": "Starke Versuchung",
         "score_path": "calculation.another_calculation.mean_negativer_affekt",
+        "clinic_sample_var": null
+    }, {
+        "left_title": "Soziale Situationen",
+        "left_text": "Keine Versuchung",
+        "right_title": "Soziale Situationen",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.mean_soziale_situationen",
         "clinic_sample_var": null
     },{
         "left_title": "Somatisches Unwohlsein",
@@ -40,33 +40,40 @@ d.aase = {
         "right_text": "Starke Versuchung",
         "score_path": "calculation.another_calculation.mean_somatisches_unwohlsein",
         "clinic_sample_var": null
-    },{
-        "left_title": "Soziale Situationen",
+    }, {
+        "left_title": "Entzugserscheinungen",
         "left_text": "Keine Versuchung",
-        "right_title": "Soziale Situationen",
+        "right_title": "Entzugserscheinungen",
         "right_text": "Starke Versuchung",
-        "score_path": "calculation.another_calculation.mean_soziale_situationen",
+        "score_path": "calculation.another_calculation.mean_entzugserscheinungen",
+        "clinic_sample_var": null
+    }, {
+        "left_title": "Gesamtscore",
+        "left_text": "Keine Versuchung",
+        "right_title": "Gesamtscore",
+        "right_text": "Starke Versuchung",
+        "score_path": "calculation.another_calculation.score_mean",
         "clinic_sample_var": null
     }],
     "ranges": [{
         "range_start": 0,
         "range_stop": 1.5,
-        "text": "",
+        "text": "?",
         "color": "#2E7D32"
     }, {
         "range_start": 1.5,
         "range_stop": 2.5,
-        "text": "",
+        "text": "?",
         "color": "#FFA000"
     }, {
         "range_start": 2.5,
         "range_stop": 3.5,
-        "text": "",
+        "text": "?",
         "color": "#FB7200"
     }, {
         "range_start": 3.5,
         "range_stop": 999,
-        "text": "",
+        "text": "?",
         "color": "#C62828"
     }]
 };
