@@ -15,7 +15,7 @@ d.tmt = {
         "show_score_circles": true,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text",
+        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text_Quotient",
         "response_date_path": "date"
     },
     "start": {

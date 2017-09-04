@@ -662,7 +662,7 @@ function main(responses) {
 
             if (Messzeitpunkt === 1) {
                 Messzeitpunkt_Text = 'Eintritt';
-                Messzeitpunkt_Text_Quotient = Messzeitpunkt_Text + ' (B/A: ' + myResults.quotient_rounded + ')';
+                Messzeitpunkt_Text_Quotient = Messzeitpunkt_Text + ' (B/A:' + myResults.quotient_rounded + ')';
             };
             if (Messzeitpunkt === 2) {
                 Messzeitpunkt_Text = 'Austritt';
