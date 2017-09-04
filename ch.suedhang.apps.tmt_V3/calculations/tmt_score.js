@@ -658,20 +658,25 @@ function main(responses) {
             myResults.mz = Messzeitpunkt;
 
             var Messzeitpunkt_Text = 'Undefined';
+            var Messzeitpunkt_Text_Quotient = 'Undefined';
 
             if (Messzeitpunkt === 1) {
                 Messzeitpunkt_Text = 'Eintritt';
+                Messzeitpunkt_Text_Quotient = Messzeitpunkt_Text + ' (B/A: ' + myResults.quotient_rounded + ')';
             };
             if (Messzeitpunkt === 2) {
                 Messzeitpunkt_Text = 'Austritt';
+                Messzeitpunkt_Text_Quotient = Messzeitpunkt_Text;
             };
             if (Messzeitpunkt === 3) {
                 Messzeitpunkt_Text = 'Anderer Messzeitpunkt';
+                Messzeitpunkt_Text_Quotient = Messzeitpunkt_Text;
             };
 
             var mz_obj = {
                 "Messzeitpunkt": Messzeitpunkt,
-                "Messzeitpunkt_Text": Messzeitpunkt_Text
+                "Messzeitpunkt_Text": Messzeitpunkt_Text,
+                "Messzeitpunkt_Text_Quotient": Messzeitpunkt_Text_Quotient
             };
 
             myResults.Messzeitpunkt = mz_obj;
