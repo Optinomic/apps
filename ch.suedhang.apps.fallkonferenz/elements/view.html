@@ -40,9 +40,9 @@
                 <template is="dom-if" if="[[_sr_actinfo_ein]]">
                     <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
                     <h3>Zusatzinformationen</h3>
-                    <p>:: [[_sr_actinfo_ein.app_id]]</p>
                     <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
                         <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
+                        <p class="caption">&nbsp;</p>
                      </template>
 
                     <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
@@ -135,7 +135,7 @@
                     <h3>Stressereignisse und Syptome</h3>
                     <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
                     <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                    <h3>Hilfreiche Copingstrategien</h3>
+                    <h3>Copingstrategien</h3>
                     <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
                     <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
                     <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
