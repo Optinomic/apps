@@ -81,14 +81,9 @@
             <div>
                 <template is="dom-if" if="[[_sr_asrs]]">
                      <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
-
                      <template is="dom-repeat" items="[[_sr_asrs.data]]" as="asrs">
-                        <p>Test:: [[asrs.date]]</p>
-                        <template is="dom-if" if="[[asrs.calculation.asrs_score.adhs_references]]">
-                            <p><b>[[asrs.calculation.asrs_score.score.current_range.interpretation]]: </b>[[asrs.calculation.asrs_score.score.current_range.text]]</p>
-                        </template>
+                        <p><b>[[asrs.calculation.asrs_score.score.current_range.interpretation]]: </b>[[asrs.calculation.asrs_score.score.current_range.text]]</p>
                      </template>
-                     
                 </template>
             </div>
 
@@ -237,7 +232,6 @@
                 statePath: function(state) {
                     var app_id = 'ch.suedhang.apps.asrs'
                     if (app_id in state.survey_responses.data) {
-                        console.warn('-->', state.survey_responses.data[app_id]);
                         return state.survey_responses.data[app_id]
                     } else {
                         return null
