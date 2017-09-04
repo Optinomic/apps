@@ -1043,7 +1043,7 @@ function main(responses) {
                 if (anz_entzuege === 3) {count_text = "drei"};
                 if (anz_entzuege === 4) {count_text = "vier"};
                 if (anz_entzuege === 5) {count_text = "fünf"};
-                entzuege.text = "Es liegen " + " professionell begleitete Entzugsbehandlungen vor."
+                entzuege.text = "Es liegen " + count_text + " professionell begleitete Entzugsbehandlungen vor."
             };
 
             if (anz_entzuege === 6) {
