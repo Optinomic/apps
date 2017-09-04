@@ -16,8 +16,8 @@ d.asrs = {
         "show_settings_block": true,
         "range_alpha": 0.05,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
-        "response_date_path": "calculation.asrs_score.score.current_range.interpretation"
+        "response_title_path": "calculation.asrs_score.score.current_range.interpretation",
+        "response_date_path": "calculation.asrs_score.messzeitpunkt.mz_date"
     },
     "scales": [{
         "left_title": "ADHS",
