@@ -76,7 +76,7 @@
                         <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <vaadin-grid-sorter path="item.date">Datum</vaadin-grid-sorter>
+                                    <vaadin-grid-sorter path="date">Datum</vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -86,7 +86,7 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <vaadin-grid-sorter path="item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
+                                    <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -96,7 +96,7 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <vaadin-grid-sorter path="item.calculation.tmt_score.TMTATime">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
                                         TMT A: Zeit
                                     </vaadin-grid-sorter>
                                 </template>
@@ -108,7 +108,7 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <vaadin-grid-sorter path="item.calculation.tmt_score.TMTAError">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
                                         TMT A: Fehler
                                     </vaadin-grid-sorter>
                                 </template>
@@ -120,9 +120,9 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
                                         TMT B: Zeit
-                                    </span>
+                                    </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -132,9 +132,9 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
                                         TMT B: Fehler
-                                    </span>
+                                    </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -144,9 +144,9 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
                                         B/A Quotient
-                                    </span>
+                                    </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
