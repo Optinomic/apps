@@ -80,8 +80,81 @@
                                       [[item.date]]
                                     </span>
                                 </template>
-                                <template class="footer">First Name</template>
                             </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        Messzeitpunkt
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        TMT A: Zeit
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.TMTATime]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        TMT A: Fehler
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.TMTAError]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        TMT B: Zeit
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.TMTBTime]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        TMT B: Fehler
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.TMTBError]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        B/A Quotient
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.calculation.tmt_score.quotient_rounded]]
+                                    </span>
+                                </template>
+                            </vaadin-grid-column>
+
+                            
                         </vaadin-grid>
                     </template>
                     <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
