@@ -25,6 +25,11 @@ include(../lib/polymer/index.m4)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/view.html)
 
+[template Entwicklung 6 7]
+include(../lib/polymer/index.m4)
+include(elements/actinfo-problemsubstanzen.html)
+include(elements/view_dev.html)
+
 
 [javascript]
 
