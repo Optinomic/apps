@@ -2,6 +2,7 @@
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -13,6 +14,7 @@
         vaadin-grid {
             height: auto;
         }
+
         .full_grid {
             height: 100%;
             border-left-style: none;
@@ -74,88 +76,98 @@
                         <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
                         <h3>Datenblatt: Trail Making Test (TMT)</h3>
                         <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="date">Datum</vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                            <vaadin-grid-column-group>
+                                <template class="header">Messung</template>
+                                <vaadin-grid-column frozen="true">
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="date">Datum</vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.date]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                                <vaadin-grid-column width="250px">
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
-                                        TMT A: Zeit
-                                    </vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid-column-group>
+                            <vaadin-grid-column-group>
+                                <template class="header">TMT A</template>
+                                <vaadin-grid-column resizable>
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
+                                            Zeit
+                                        </vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.TMTATime]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
-                                        TMT A: Fehler
-                                    </vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                                <vaadin-grid-column resizable>
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
+                                            Fehler
+                                        </vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.TMTAError]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
-                                        TMT B: Zeit
-                                    </vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid-column-group>
+                            <vaadin-grid-column-group>
+                                <template class="header">TMT B</template>
+                                <vaadin-grid-column resizable>
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
+                                            Zeit
+                                        </vaadin-grid-sorter>
+                                    </template>
+                                    <template resizable>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.TMTBTime]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
-                                        TMT B: Fehler
-                                    </vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                                <vaadin-grid-column resizable>
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
+                                            Fehler
+                                        </vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.TMTBError]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
-                                        B/A Quotient
-                                    </vaadin-grid-sorter>
-                                </template>
-                                <template>
-                                    <span draggable="true">
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid-column-group>
+                            <vaadin-grid-column-group>
+                                <template class="header">B/A</template>
+                                <vaadin-grid-column resizable>
+                                    <template class="header">
+                                        <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
+                                            Quotient
+                                        </vaadin-grid-sorter>
+                                    </template>
+                                    <template>
+                                        <span draggable="true">
                                       [[item.calculation.tmt_score.quotient_rounded]]
                                     </span>
-                                </template>
-                            </vaadin-grid-column>
-
-                            
+                                    </template>
+                                </vaadin-grid-column>
+                            </vaadin-grid-column-group>
                         </vaadin-grid>
                     </template>
                     <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
