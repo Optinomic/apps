@@ -78,12 +78,12 @@
                         <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
                             <vaadin-grid-column-group>
                                 <template class="header">Messung</template>
-                                <vaadin-grid-column>
+                                <vaadin-grid-column width="80px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="date">Datum</vaadin-grid-sorter>
                                     </template>
                                     <template>
-                                        <span draggable="true">
+                                        <span draggable="true" style="text-align: right">
                                         {{_computeNiceDate(item.date)}}
                                         </span>
                                     </template>
@@ -101,7 +101,7 @@
                             </vaadin-grid-column-group>
                             <vaadin-grid-column-group>
                                 <template class="header">TMT A</template>
-                                <vaadin-grid-column resizable>
+                                <vaadin-grid-column resizable width="60px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
                                             Zeit
@@ -113,7 +113,7 @@
                                     </span>
                                     </template>
                                 </vaadin-grid-column>
-                                <vaadin-grid-column resizable>
+                                <vaadin-grid-column resizable width="60px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
                                             Fehler
@@ -128,7 +128,7 @@
                             </vaadin-grid-column-group>
                             <vaadin-grid-column-group>
                                 <template class="header">TMT B</template>
-                                <vaadin-grid-column resizable>
+                                <vaadin-grid-column resizable width="60px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
                                             Zeit
@@ -140,7 +140,7 @@
                                     </span>
                                     </template>
                                 </vaadin-grid-column>
-                                <vaadin-grid-column resizable>
+                                <vaadin-grid-column resizable width="60px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
                                             Fehler
@@ -155,7 +155,7 @@
                             </vaadin-grid-column-group>
                             <vaadin-grid-column-group>
                                 <template class="header">Quotient</template>
-                                <vaadin-grid-column resizable>
+                                <vaadin-grid-column resizable width="60px">
                                     <template class="header">
                                         <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
                                             B/A
