@@ -1,5 +1,6 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -43,8 +44,7 @@
                     <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
                         <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
                         <p class="caption">&nbsp;</p>
-                     </template>
-
+                    </template>
                     <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
                     <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                 </template>
@@ -61,21 +61,40 @@
                 <template is="dom-if" if="[[_sr_tmt]]">
                     <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
+                        <h3>Datenblatt</h3>
+                        <vaadin-grid aria-label="Basic Binding Example" items="[[_sr_tmt.data]]">
+                            <vaadin-grid-column width="50px" flex-grow="0">
+                                <template class="header">#</template>
+                                <template>[[index]]</template>
+                                <!-- If necessary, the footer could be set using <template class="footer"> -->
+                                <template class="footer">#</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <span draggable="true">
+                                        Datum
+                                    </span>
+                                </template>
+                                <template>
+                                    <span draggable="true">
+                                      [[item.date]]
+                                    </span>
+                                </template>
+                                <template class="footer">First Name</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
                     </template>
                     <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
             </div>
-
-            
             <div>
                 <template is="dom-if" if="[[_sr_asrs]]">
-                     <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
-                     <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
+                    <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
+                    <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
                 </template>
             </div>
-
             <div>
                 <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_aase]]">
@@ -120,7 +139,6 @@
                     <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
-                    
                 </template>
             </div>
             <div>
@@ -444,11 +462,11 @@
 
                 if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
                     if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
-    
-    
+
+
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                         var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-        
+
                         var clinic_sample_dive = {
                             "defined": false,
                             "array": []
@@ -456,21 +474,21 @@
 
                         // ---- Gewünschte Klinikstichprobe schreiben ----
 
-        
+
                         // Messzeitpunkt
                         if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
                             clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
                         } else {
                             clinic_sample_dive.array.push(5);
                         };
-        
+
                         // Geschlecht
                         if (latest_sr.patient.gender === "female") {
                             clinic_sample_dive.array.push(0);
                         } else {
                             clinic_sample_dive.array.push(1);
                         };
-        
+
                         // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
                         clinic_sample_dive.array.push(4);
 
@@ -478,7 +496,7 @@
                         // ---- Set ----
                         clinic_sample_dive.defined = true;
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-        
+
                         console.warn('_sr_bscl - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
@@ -491,11 +509,11 @@
 
                 if ((this._sr_isk !== undefined) && (this._sr_isk !== null)) {
                     if ((this._sr_isk.data !== undefined) && (this._sr_isk.data !== null)) {
-    
-    
+
+
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                         var latest_sr = this._sr_isk.data[this._sr_isk.data.length - 1];
-        
+
                         var clinic_sample_dive = {
                             "defined": false,
                             "array": []
@@ -503,7 +521,7 @@
 
                         // ---- Gewünschte Klinikstichprobe schreiben ----
 
-        
+
                         // Messzeitpunkt
                         var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
                         if (mz !== 99) {
@@ -511,19 +529,19 @@
                         } else {
                             clinic_sample_dive.array.push(3);
                         };
-        
+
                         // Geschlecht
                         if (latest_sr.patient.gender === "female") {
                             clinic_sample_dive.array.push(0);
                         } else {
                             clinic_sample_dive.array.push(1);
                         };
-        
-                        
+
+
                         // ---- Set ----
                         clinic_sample_dive.defined = true;
                         this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
-        
+
                         console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
@@ -536,11 +554,11 @@
 
                 if ((this._sr_tmt !== undefined) && (this._sr_tmt !== null)) {
                     if ((this._sr_tmt.data !== undefined) && (this._sr_tmt.data !== null)) {
-    
-    
+
+
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                         var latest_sr = this._sr_tmt.data[this._sr_tmt.data.length - 1];
-        
+
                         var clinic_sample_dive = {
                             "defined": false,
                             "array": []
@@ -563,7 +581,7 @@
                         } else {
                             clinic_sample_dive.array.push(0);
                         };
-        
+
                         // Messzeitpunkt
                         var mz = latest_sr.calculation.tmt_score.mz - 1;
                         if ((mz === 0) || (mz === 1) || (mz === 2)) {
@@ -571,19 +589,19 @@
                         } else {
                             clinic_sample_dive.array.push(3);
                         };
-        
+
                         // Geschlecht
                         if (latest_sr.patient.gender === "female") {
                             clinic_sample_dive.array.push(0);
                         } else {
                             clinic_sample_dive.array.push(1);
                         };
-        
-                        
+
+
                         // ---- Set ----
                         clinic_sample_dive.defined = true;
                         this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
-        
+
                         console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
