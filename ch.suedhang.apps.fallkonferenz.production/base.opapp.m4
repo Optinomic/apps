@@ -7,7 +7,7 @@ version = 1.0
 type = patient
 
 [description]
-Optinomic-App Template using Polymer and Redux to store data.
+Hinweis: Diese App "vergrössert" nicht den Inhalt beim Betrachten im "alten" Client. Um den Inhalt zu sehen können Sie den Inhalt in einem neuen Browserfenster öffnen oder den client.new verwenden. Danke. 
 
 [developer]
 first_name = Beat
@@ -21,10 +21,10 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template Profile_Z_Score 6 7]
+[template overview 6 7]
 include(../lib/polymer/index.m4)
+include(elements/actinfo-problemsubstanzen.html)
 include(elements/view.html)
-
 
 
 [javascript]
