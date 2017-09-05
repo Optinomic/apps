@@ -13,6 +13,12 @@
         vaadin-grid {
             height: auto;
         }
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -66,13 +72,11 @@
                 <template is="dom-if" if="[[_sr_tmt]]">
                     <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
-                        <h3>Datenblatt</h3>
-                        <vaadin-grid aria-label="Basic Binding Example" items="[[_sr_tmt.data]]">
+                        <h3>Datenblatt: Trail Making Test (TMT)</h3>
+                        <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
-                                        <vaadin-grid-sorter path="item.date">Datum</vaadin-grid-sorter>
-                                    </span>
+                                    <vaadin-grid-sorter path="item.date">Datum</vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -82,9 +86,7 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
-                                        <vaadin-grid-sorter path="item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
-                                    </span>
+                                    <vaadin-grid-sorter path="item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">Messzeitpunkt</vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -94,9 +96,9 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
+                                    <vaadin-grid-sorter path="item.calculation.tmt_score.TMTATime">
                                         TMT A: Zeit
-                                    </span>
+                                    </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
@@ -106,9 +108,9 @@
                             </vaadin-grid-column>
                             <vaadin-grid-column>
                                 <template class="header">
-                                    <span draggable="true">
+                                    <vaadin-grid-sorter path="item.calculation.tmt_score.TMTAError">
                                         TMT A: Fehler
-                                    </span>
+                                    </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true">
