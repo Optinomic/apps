@@ -190,7 +190,7 @@
                 <template is="dom-if" if="[[!_sr_aase.have_data]]">
                     <h3>Keine AASE-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_aase]]">
+                <template is="dom-if" if="[[_sr_aase.have_data]]">
                     <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
                 </template>
             </div>
@@ -199,12 +199,11 @@
                 <template is="dom-if" if="[[!_sr_bscl.have_data]]">
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_bscl]]">
+                <template is="dom-if" if="[[_sr_bscl.have_data]]">
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'></optinomic-chart-profile>
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
@@ -234,17 +233,22 @@
             </div>
             <div>
                 <optinomic-title small h1="Stress-Coping-Inventar" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(SCI)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_sci.done]]">
+                <template is="dom-if" if="[[!_sr_sci.have_data]]">
                     <h3>Keine SCI-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_sci.done]]">
-                    <h3>Stressereignisse und Syptome</h3>
-                    <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                    <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                    <h3>Copingstrategien</h3>
-                    <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
-                    <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                    <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                <template is="dom-if" if="[[_sr_sci.have_data]]">
+                    <template is="dom-if" if="[[_sr_sci.done]]">
+                        <h3>Stressereignisse und Syptome</h3>
+                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                        <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                        <h3>Copingstrategien</h3>
+                        <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                        <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                    </template>
+                    <template is="dom-if" if="[[!_sr_sci.done]]">
+                        <p style="color:#3F51B5">Erweitere vorhandene Resultate...</p>
+                    </template>
                 </template>
             </div>
             <div>
@@ -294,7 +298,7 @@
 
 
         _computeNiceDate: function(date_string) {
-          date_string = date_string || null
+            date_string = date_string || null
             if (date_string !== null) {
 
                 // 1952-11-19T00:00:00.000000000000Z
@@ -309,7 +313,7 @@
             }
         },
 
-        
+
 
         _toggleHelp: function() {
             var d = this.get('_d');
@@ -417,8 +421,6 @@
                 if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
                     if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
 
-
-                        console.warn('_sr_bsclChanged DEBUG:::', this._sr_bscl);
 
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                         var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
