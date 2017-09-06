@@ -204,6 +204,7 @@
                         <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
+                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)'></optinomic-chart-profile>
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
@@ -416,6 +417,8 @@
                 if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
                     if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
 
+
+                        console.warn('_sr_bsclChanged DEBUG:::', this._sr_bscl);
 
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                         var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
