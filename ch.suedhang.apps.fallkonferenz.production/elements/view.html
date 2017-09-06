@@ -406,6 +406,12 @@
                             "population": population,
                             "data": _sr_sci
                         }
+
+                        if (_sr_sci.length > 0) {
+                           return_obj.have_data = true; 
+                        } else {
+                           return_obj.have_data = false; 
+                        };
                         this.set('_sr_sci', return_obj);
                         console.warn('_processSCI', this._sr_sci);
                     };
