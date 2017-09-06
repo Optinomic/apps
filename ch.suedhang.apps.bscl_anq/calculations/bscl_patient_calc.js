@@ -105,6 +105,23 @@ function main(responses) {
     // H e l p e r   -   F U N C T I O N S
     // ------------------------------------------
 
+    // CH Datumsformat
+    calc.formatDateCH = function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
+
     calc.set_result_array = function(result_array) {
 
         function deUmlaut(value) {
@@ -186,13 +203,14 @@ function main(responses) {
         // Gender:  Position
         // 0 = Männer
         // 1 = Frauen
-        var gender_pos = 0;
-        if (currentPatient.gender === 'male') {
+        var gender_pos = null;
+        if (currentPatient.data.gender === 'male') {
             gender_pos = 0;
+            patient_in = "Patient";
         } else {
             gender_pos = 1;
+            patient_in = "Patientin";
         };
-
 
         var responses_array = myResponses.survey_responses;
         responses_array.forEach(function(response, myindex) {
@@ -243,7 +261,10 @@ function main(responses) {
             var mz = {
                 "mz_id": 99,
                 "mz_typ": 'Undefined',
-                "mz_text": 'Undefined'
+                "mz_text": 'Undefined',
+                "dropout": null,
+                "dropout_code": null,
+                "dropout_reason": null
             };
 
 
@@ -286,6 +307,59 @@ function main(responses) {
                     mz.mz_text = 'Austritt - EAS';
                 };
 
+            };
+
+            // Messdatum
+            if ('q504V00' in result) {
+                mz.mz_date = result.q504V00;
+            } else {
+                mz.mz_date = result.datestamp;
+            };
+
+            mz.mz_datum = calc.formatDateCH(mz.mz_date);
+
+            // Dropout
+            if ("q501V05" in result) {
+                mz.dropout_code = parseInt(result.q501V05);
+
+                if (mz.dropout_code === 0) {
+                    mz.dropout = false;
+                } else {
+                    mz.dropout = true;
+
+                    if (mz.dropout_code === 1) {
+                        mz.dropout_reason = patient_in + " lehnt die Testaufnahme ab.";
+                    };
+
+                    if (mz.dropout_code === 2) {
+                        mz.dropout_reason = patient_in + " ist aus sprachlichen Gründen nicht in der Lage.";
+                    };
+
+                    if (mz.dropout_code === 3) {
+                        mz.dropout_reason = patient_in + " ist zu krank.";
+                    };
+
+                    if (mz.dropout_code === 4) {
+                        mz.dropout_reason = patient_in + " ist verstorben.";
+                    };
+
+                    if (mz.dropout_code === 5) {
+                        mz.dropout_reason = patient_in + " ist jünger als 18-jährig.";
+                    };
+
+                    if (mz.dropout_code === 6) {
+                        mz.dropout_reason = patient_in + " ist 7 Tage nach Erhebung des Eintritts-BSCL wieder ausgetreten.";
+                    };
+
+                    if (mz.dropout_code === 7) {
+                        mz.dropout_reason = patient_in + " ist unvorhergesehen ausgetreten (Abbruch).";
+                    };
+
+                    if (mz.dropout_code === 8) {
+                        mz.dropout_reason = "Anderer Grund: " + result.q501V06;
+                    };
+
+                };
             };
 
 
