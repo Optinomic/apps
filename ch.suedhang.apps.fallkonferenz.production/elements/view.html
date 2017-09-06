@@ -48,10 +48,10 @@
         <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
             <div>
                 <optinomic-title small h1="ActInfo" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich."></optinomic-title>
-                <template is="dom-if" if="[[!_sr_actinfo_ein]]">
+                <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
                     <h3>Keine ActInfo-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_actinfo_ein]]">
+                <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
                     <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
                     <h3>Zusatzinformationen</h3>
                     <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
@@ -68,10 +68,10 @@
             </div>
             <div>
                 <optinomic-title small h1="Trail Making Test (TMT)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="TMT"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_tmt]]">
+                <template is="dom-if" if="[[!_sr_tmt.have_data]]">
                     <h3>Keine TMT-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_tmt]]">
+                <template is="dom-if" if="[[_sr_tmt.have_data]]">
                     <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
                         <h3>Datenblatt: Trail Making Test (TMT)</h3>
@@ -180,14 +180,14 @@
                 </template>
             </div>
             <div>
-                <template is="dom-if" if="[[_sr_asrs]]">
+                <template is="dom-if" if="[[_sr_asrs.have_data]]">
                     <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
                     <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
                 </template>
             </div>
             <div>
                 <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_aase]]">
+                <template is="dom-if" if="[[!_sr_aase.have_data]]">
                     <h3>Keine AASE-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_aase]]">
@@ -196,7 +196,7 @@
             </div>
             <div>
                 <optinomic-title small h1="Symptomcheckliste" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="(BSCL)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bscl]]">
+                <template is="dom-if" if="[[!_sr_bscl.have_data]]">
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_bscl]]">
@@ -210,19 +210,19 @@
             </div>
             <div>
                 <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bdi]]">
+                <template is="dom-if" if="[[!_sr_bdi.have_data]]">
                     <h3>Keine BDI-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_bdi]]">
+                <template is="dom-if" if="[[_sr_bdi.have_data]]">
                     <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
                 </template>
             </div>
             <div>
                 <optinomic-title small h1="Inventar Sozialer Kompetenzen" h2="ISK Kurzform" h3="(ISK)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_isk]]">
+                <template is="dom-if" if="[[!_sr_isk.have_data]]">
                     <h3>Keine ISK-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_isk]]">
+                <template is="dom-if" if="[[_sr_isk.have_data]]">
                     <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     </template>
@@ -248,10 +248,10 @@
             </div>
             <div>
                 <optinomic-title small h1="Lebensqualität" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="WHOQOL-BREF (WHO Quality of Life)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_whoqol]]">
+                <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
                     <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
                 </template>
-                <template is="dom-if" if="[[_sr_whoqol]]">
+                <template is="dom-if" if="[[_sr_whoqol.have_data]]">
                     <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                 </template>
             </div>
@@ -263,18 +263,10 @@
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
+        include(_properties.js)
 
         __loadData: function() {
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_ein.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.asrs.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.aase-g.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.sci.production');
-            this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.whoqol.production');
+            include(_loadData.m4)
         },
 
         __init: function() {
@@ -316,152 +308,7 @@
             }
         },
 
-        properties: {
-            _clinic: {
-                type: String,
-                statePath: 'clinic.data'
-            },
-
-            _current_app: {
-                type: Object,
-                statePath: 'apps.current.data'
-            },
-
-            _sr_bscl: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.bscl_anq.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_sr_bsclChanged'
-            },
-            _sr_asrs: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.asrs.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                }
-            },
-            _sr_aase: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.aase-g.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                }
-            },
-            _sr_bdi: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.bdi.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                }
-            },
-            _sr_tmt: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.tmt.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_sr_tmtChanged'
-            },
-            _sr_isk: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.isk.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_sr_iskChanged'
-            },
-            _sr_whoqol: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.whoqol.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                }
-            },
-            _sr_actinfo_ein: {
-                type: Object,
-                statePath: function(state) {
-                    var actinfo_ein = 'ch.suedhang.apps.actinfo_ein.production'
-                    if (actinfo_ein in state.survey_responses.data) {
-                        return state.survey_responses.data[actinfo_ein]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_mergeActinfo'
-            },
-            _sr_actinfo_aus: {
-                type: Object,
-                statePath: function(state) {
-                    var actinfo_aus = 'ch.suedhang.apps.actinfo_aus.production'
-                    if (actinfo_aus in state.survey_responses.data) {
-                        return state.survey_responses.data[actinfo_aus]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_mergeActinfo'
-            },
-            _sr_actinfo: {
-                type: Object,
-                value: {
-                    "merged": false
-                }
-            },
-
-            _sr_sci_response: {
-                type: Object,
-                statePath: function(state) {
-                    var app_id = 'ch.suedhang.apps.sci.production'
-                    if (app_id in state.survey_responses.data) {
-                        return state.survey_responses.data[app_id]
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_processSCI'
-            },
-            _sr_sci: {
-                type: Object,
-                value: {
-                    "done": false
-                }
-            },
-
-            _d: {
-                type: Object
-            }
-        },
-
+        
 
         _toggleHelp: function() {
             var d = this.get('_d');
