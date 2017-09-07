@@ -394,7 +394,7 @@ function main(responses) {
             if (d['QZEA120[VZEA120d]'] !== "") {
                 var gramm = parseInt(d['QZEA120[VZEA120d]']) * 0.4;
                 var drink_obj = {
-                    "drink": "Andere 5%",
+                    "drink": "andere 5 Vol.-%",
                     "gramm": calc.roundToOne(gramm),
                     "volumenprozent": 5,
                 };
@@ -420,7 +420,7 @@ function main(responses) {
             if (d['QZEA120[VZEA120f]'] !== "") {
                 var gramm = parseInt(d['QZEA120[VZEA120f]']) * 0.96;
                 var drink_obj = {
-                    "drink": "Andere 12%",
+                    "drink": "andere 12 Vol.-%",
                     "gramm": calc.roundToOne(gramm),
                     "volumenprozent": 12,
                 };
@@ -446,7 +446,7 @@ function main(responses) {
             if (d['QZEA120[VZEA120h]'] !== "") {
                 var gramm = parseInt(d['QZEA120[VZEA120h]']) * 1.6;
                 var drink_obj = {
-                    "drink": "Andere 20%",
+                    "drink": "andere 20 Vol.-%",
                     "gramm": calc.roundToOne(gramm),
                     "volumenprozent": 20,
                 };
@@ -472,7 +472,7 @@ function main(responses) {
             if (d['QZEA120[VZEA120j]'] !== "") {
                 var gramm = parseInt(d['QZEA120[VZEA120j]']) * 3.2;
                 var drink_obj = {
-                    "drink": "Andere 40%",
+                    "drink": "andere 40 Vol.-%",
                     "gramm": calc.roundToOne(gramm),
                     "volumenprozent": 40,
                 };
@@ -499,9 +499,9 @@ function main(responses) {
             });
 
             if (return_obj.drinks.length > 1) {
-                return_obj.drinks_summary = 'Bestehend aus ' + return_obj.drinks_summary;
+                return_obj.drinks_summary = 'bestehend aus ' + return_obj.drinks_summary;
             } else {
-                return_obj.drinks_summary = 'Ausschliesslich ' + return_obj.drinks_summary;
+                return_obj.drinks_summary = 'ausschliesslich ' + return_obj.drinks_summary;
             };
 
             return return_obj;
@@ -572,6 +572,10 @@ function main(responses) {
                     "substanz": substanz,
                     "label": my_result[answer] + ', jeweils ' + g_alc.gramm_total + 'g (' + g_alc.drinks_summary + ').',
                     "drinks": g_alc
+                };
+
+                if (g_alc.gramm_total === 0) {
+                    obj_to_push.label = my_result[answer];
                 };
 
                 problemsubstanzen.push(obj_to_push);
@@ -1058,7 +1062,7 @@ function main(responses) {
             hauptproblemsubstanzen.push("Methadon (missbräuchlich)");
             hauptproblemsubstanzen.push("Buprenorphin (missbräuchlich)");
             hauptproblemsubstanzen.push("Fentanyl (missbräuchlich)");
-            hauptproblemsubstanzen.push("Andere Opioide");
+            hauptproblemsubstanzen.push("andere Opioide");
             hauptproblemsubstanzen.push("Kokain-Pulver");
             hauptproblemsubstanzen.push("Crack-Kokain");
             hauptproblemsubstanzen.push("Anderer Kokain-Typ");
@@ -1066,22 +1070,22 @@ function main(responses) {
             hauptproblemsubstanzen.push("Methamphetamine (Crystal Meth, Ice, Thai-Pillen)");
             hauptproblemsubstanzen.push("MDMA und verwandte Stoffe (Ecstasy)");
             hauptproblemsubstanzen.push("Synthetische Cathinone (Mephedron, Methylon, Methcathinon/Ephedron, MDPV, Methedron)");
-            hauptproblemsubstanzen.push("Andere Stimulanzien");
+            hauptproblemsubstanzen.push("andere Stimulanzien");
             hauptproblemsubstanzen.push("Barbiturate (missbräuchlich)");
             hauptproblemsubstanzen.push("Benzodiazepine (missbräuchlich)");
             hauptproblemsubstanzen.push("GHB/GBL");
-            hauptproblemsubstanzen.push("Andere Schlafmittel/Beruhigungsmittel");
+            hauptproblemsubstanzen.push("andere Schlafmittel/Beruhigungsmittel");
             hauptproblemsubstanzen.push("LSD");
             hauptproblemsubstanzen.push("Ketamin");
-            hauptproblemsubstanzen.push("Andere Halluzinogene");
+            hauptproblemsubstanzen.push("andere Halluzinogene");
             hauptproblemsubstanzen.push("Flüchtige Stoffe");
             hauptproblemsubstanzen.push("Cannabis");
             hauptproblemsubstanzen.push("Tabak");
-            hauptproblemsubstanzen.push("Andere Substanzen (alle Typen)");
+            hauptproblemsubstanzen.push("andere Substanzen (alle Typen)");
             hauptproblemsubstanzen.push("Glücksspielsucht");
             hauptproblemsubstanzen.push("Computer- bzw. Internetsucht");
             hauptproblemsubstanzen.push("Essstörungen");
-            hauptproblemsubstanzen.push("Andere suchtähnliche Verhaltensweisen (alle Typen)");
+            hauptproblemsubstanzen.push("andere suchtähnliche Verhaltensweisen (alle Typen)");
 
             var hauptproblem_substanz = parseInt(response['VNED010']);
             var konsumalter_regelmaessig = parseInt(response['VMED050']);
