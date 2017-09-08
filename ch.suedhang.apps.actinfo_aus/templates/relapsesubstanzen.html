@@ -41,6 +41,7 @@ falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
 include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div style="margin-top: 48px;">
+        <h4 class="md-headline">Haben Sie während der Behandlung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?</h4>
         <div ng-if="response.entity.data.response.VYAZ010 === '999'">
             <p>Es ist nicht bekannt, ob während der Behandlung Substanzen konsumiert wurden.</p>
         </div>
@@ -58,6 +59,7 @@ include(../lib/html/optinomic/page/start.m4)
             <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x != 'Y'">
                 <p class="md-body-1" style="margin-top: 12px;"> Dabei wurde(n) folgende Substanz(en) konsumiert:</p>
                 <p class="md-body-2" ng-repeat="relapsesubstanz in response.relapsesubstanzen">- {{relapsesubstanz}}</p>
+                <br>
             </div>
         </div>
         <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
