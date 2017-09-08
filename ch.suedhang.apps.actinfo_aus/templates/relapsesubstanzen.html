@@ -41,27 +41,6 @@ falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
 include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div style="margin-top: 48px;">
-        <h4>Haben Sie während der Behandlung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?</h4>
-        <div ng-if="response.entity.data.response.VYAZ010 === '999'">
-            <p>Es ist nicht bekannt, ob während der Behandlung Substanzen konsumiert wurden.</p>
-        </div>
-        <div ng-if="response.entity.data.response.VYAZ010 === '1'">
-            <p class="md-body-1" style="margin-top: 12px;">Während der Behandlung wurden keine Rückfallperioden erlebt.</p>
-        </div>
-        <div ng-if="(response.entity.data.response.VYAZ010 !== '999') && (response.entity.data.response.VYAZ010 !== '1')">
-            <p ng-if="response.entity.data.response.VYAZ010 === '2'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 1</p>
-            <p ng-if="response.entity.data.response.VYAZ010 === '3'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 2</p>
-            <p ng-if="response.entity.data.response.VYAZ010 === '4'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 3-4</p>
-            <p ng-if="response.entity.data.response.VYAZ010 === '5'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 5 und mehr</p>
-            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x = 'Y'">
-                <p class="md-body-1" style="margin-top: 12px;"> Es ist nicht bekannt, welche Substanzen dabei konsumiert wurden.</p>
-            </div>
-            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x != 'Y'">
-                <p class="md-body-1" style="margin-top: 12px;"> Dabei wurde(n) folgende Substanz(en) konsumiert:</p>
-                <p class="md-body-2" ng-repeat="relapsesubstanz in response.relapsesubstanzen">- {{relapsesubstanz}}</p>
-                <br>
-            </div>
-        </div>
         <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <h4 class="md-headline">Nikotin: Fagerström</h4>
             <div>
@@ -98,6 +77,27 @@ include(../lib/html/optinomic/page/start.m4)
                         </td>
                     </tr>
                 </table>
+            </div>
+        </div>
+        <br>
+        <h4>Haben Sie während der Behandlung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?</h4>
+        <div ng-if="response.entity.data.response.VYAZ010 === '999'">
+            <p>Es ist nicht bekannt, ob während der Behandlung Substanzen konsumiert wurden.</p>
+        </div>
+        <div ng-if="response.entity.data.response.VYAZ010 === '1'">
+            <p class="md-body-1" style="margin-top: 12px;">Während der Behandlung wurden keine Rückfallperioden erlebt.</p>
+        </div>
+        <div ng-if="(response.entity.data.response.VYAZ010 !== '999') && (response.entity.data.response.VYAZ010 !== '1')">
+            <p ng-if="response.entity.data.response.VYAZ010 === '2'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 1</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === '3'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 2</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === '4'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 3-4</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === '5'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 5 und mehr</p>
+            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x = 'Y'">
+                <p class="md-body-1" style="margin-top: 12px;"> Es ist nicht bekannt, welche Substanzen dabei konsumiert wurden.</p>
+            </div>
+            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x != 'Y'">
+                <p class="md-body-1" style="margin-top: 12px;"> Dabei wurde(n) folgende Substanz(en) konsumiert:</p>
+                <p class="md-body-2" ng-repeat="relapsesubstanz in response.relapsesubstanzen">- {{relapsesubstanz}}</p>
             </div>
         </div>
     </div>
