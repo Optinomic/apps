@@ -57,23 +57,28 @@ d.aase = {
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 1.5,
-        "text": "?",
+        "range_stop": 0.5,
+        "text": "keine Versuchung",
         "color": "#2E7D32"
+    }, {
+        "range_start": 0.5,
+        "range_stop": 1.5,
+        "text": "geringe Versuchung",
+        "color": "#FFA000"
     }, {
         "range_start": 1.5,
         "range_stop": 2.5,
-        "text": "?",
-        "color": "#FFA000"
+        "text": "mässige Versuchung",
+        "color": "#FBB100"
     }, {
         "range_start": 2.5,
         "range_stop": 3.5,
-        "text": "?",
+        "text": "starke Versuchung",
         "color": "#FB7200"
     }, {
         "range_start": 3.5,
         "range_stop": 999,
-        "text": "?",
+        "text": "äusserste Versuchung",
         "color": "#C62828"
     }]
 };
