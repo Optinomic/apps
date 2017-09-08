@@ -1,7 +1,7 @@
 d.aase = {
     "options": {
         "min": 0,
-        "max": 6,
+        "max": 4,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,
