@@ -51,7 +51,86 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
     $scope.loadMainData();
 
 
+    $scope.actInfoInit = function() {
 
+
+        // Relapsesubstanzen ermitteln
+
+        var results = $scope.d.dataMain.survey_responses;
+
+        results.forEach(function(result, myindex) {
+            var response = result.entity.data.response;
+            result.relapsesubstanzen = [];
+
+            //var substanz = '';
+            var my_result = {};
+            var text = '';
+
+
+            // Alkohol
+            if (response['QYAZ020[VYAZ020a]'] === 'Y') {
+                text = 'Alkohol';
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Opiate
+            if (response['QYAZ020[VYAZ020b]'] === 'Y') {
+                text = 'Opioide (Heroin, Methadon, Codein, usw.)';
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Kokain
+            if (response['QYAZ020[VYAZ020c]'] === 'Y') {
+                text = 'Kokain oder Derivate';
+                result.relapsesubstanzen.push(text);
+            };
+
+            
+            // Andere Stimulanzien
+            if (response['QYAZ020[VYAZ020d]'] === 'Y') {
+                text = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)';
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Hypnotika/Sedativa
+
+            if (response['QYAZ020[VYAZ020e]'] === 'Y') {
+                text = 'Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)';
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Halluzinogene
+
+            if (response['QYAZ020[VYAZ020f]'] === 'Y') {
+                text = 'Halluzinogene (LSD, Ketamin, usw.)';
+                result.relapsesubstanzen.push(text);
+            };
+
+            // Weitere Substanzen
+            if (response['QYAZ020[VYAZ020g]'] === 'Y') {
+                text = 'Flüchtige Stoffe';
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020h]'] === 'Y') {
+                text = 'Cannabis';
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020i]'] === 'Y') {
+                text = 'Tabak';
+                result.relapsesubstanzen.push(text);
+            };
+
+            if (response['QYAZ020[VYAZ020j]'] === 'Y') {
+                text = response.VYAZ021j;
+                result.relapsesubstanzen.push(text);
+            };
+        });
+
+        $scope.d.current_response = [];
+        $scope.d.current_response.push(results[results.length - 1]);
+    };
 
 
     $scope.setExport = function() {

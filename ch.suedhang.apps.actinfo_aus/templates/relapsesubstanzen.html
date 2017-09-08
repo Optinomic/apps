@@ -37,9 +37,75 @@ QYAZ020_VYAZ020m = Essstörungen
 QYAZ020_VYAZ020n = andere suchtähnliche Verhaltensweise(n) 
 falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
 -->
-Wenn VYAZ010 != '999' und QYAZ020_VYAZ020x = Y -> Es ist nicht bekannt, welche Substanzen während der Behandlung konsumiert wurden.
-Folgende Substanzen wurden während der Behadlung konsumiert:
-ng-repeat relapsesubstanzen
+
+include(../lib/html/optinomic/page/start.m4)
+<div ng-repeat="response in d.dataMain.survey_responses_group[0]">
+    <div style="margin-top: 48px;">
+        <div ng-if="response.entity.data.response.VYAZ010 === 999">
+            <p>Es ist nicht bekannt, ob während der Behandlung Substanzen konsumiert wurden.</p>
+        </div>
+        <div ng-if="response.entity.data.response.VYAZ010 === 1">
+            <p class="md-body-1" style="margin-top: 12px;">Während der Behandlung wurden keine Rückfallperioden erlebt.</p>
+        </div>
+        <div ng-if="(response.entity.data.response.VYAZ010 !== 999) && (response.entity.data.response.VYAZ010 !== 1)">
+            <p ng-if="response.entity.data.response.VYAZ010 === 2" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 1</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === 3" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 2</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === 4" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 3-4</p>
+            <p ng-if="response.entity.data.response.VYAZ010 === 5" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 5 und mehr</p>
+            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x = 'Y'">
+                <p class="md-body-1" style="margin-top: 12px;"> Es ist nicht bekannt, welche Substanzen dabei konsumiert wurden.</p>
+            </div>
+            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x != 'Y'">
+                <p class="md-body-1" style="margin-top: 12px;"> Dabei wurde(n) folgende Substanz(en) konsumiert:</p>
+                <p class="md-body-2" ng-repeat="relapsesubstanz in response.relapsesubstanzen">- {{relapsesubstanz}}</p>
+            </div>
+        </div>
+        <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
+            <h4 class="md-headline">Nikotin: Fagerström</h4>
+            <div>
+                <p class="small">{{response.entity.data.response.VMAB001 | date}}
+                    <br><small>{{d.dataMain.apps.current.name}}</small></p>
+            </div>
+        </div>
+        <p class="md-body-1" style="margin-top: 12px;" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">Summenwert von <strong>{{response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score}}</strong> Punkten (Mittelwert: {{response.calculations[0].calculation_result.FAGERSTROEM.Fagerstroem_Mean}} bei {{response.calculations[0].calculation_result.FAGERSTROEM.answers}} von 6 beantworteten Fragen) auf der Fagerström-Skala.</p>
+        <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start center">
+            <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
+                <score-threshold score="response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score" min="0" max="10" show-percent-scale="true" scale-ranges="response.calculations[0].calculation_result.FAGERSTROEM.ranges" show-min-max="true"></score-threshold>
+                <div layout="column" layout-align="center center" style="margin-top: -6px;" layout-margin>
+                    <h4 class="md-subhead" style="text-align: center !important;" ng-attr-style="color:{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result_color}}">{{response.calculations[0].calculation_result.FAGERSTROEM.interpretation.result}}</h4>
+                </div>
+            </div>
+            <div flex="55" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === null) || (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score === 999)">
+                <h5 class="md-subhead">Keine Interpretation möglich</h5>
+                <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZAT010 === '1'">Nichtraucher/in</p>
+                <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZAT010 === '999'">Das Rauchverhalten ist nicht bekannt.</p>
+                <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZAT020 === '777'">Patient/in raucht ein anderes Tabakprodukt als Zigaretten.</p>
+                <p class="md-title" ng-if="response.calculations[0].calculation_result.response.data.response.VZAT020 === '999'">Das Rauchverhalten ist nicht bekannt.</p>
+            </div>
+            <div flex="45" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
+                <h5 class="md-subhead">
+                    Fagerström Summenwerte  
+                </h5>
+                <table class="table table-condensed" style="width: 80%;">
+                    <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
+                        <td style="text-align:right !important;">
+                            <small>{{range.from}}-{{range.to}}&nbsp;</small>
+                        </td>
+                        <td>
+                            <small>{{range.result}}</small>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+include(../lib/html/optinomic/page/end.m4)
+
+
+
+
+<!-- AB HIER in ch.suedhang.apps.actinfo_aus/main.js
 
     $scope.actInfoInit = function() {
 
@@ -52,7 +118,7 @@ ng-repeat relapsesubstanzen
             var response = result.entity.data.response;
             result.relapsesubstanzen = [];
 
-            var substanz = '';
+            //var substanz = '';
             var my_result = {};
             var text = '';
 
@@ -63,7 +129,7 @@ ng-repeat relapsesubstanzen
                 result.relapsesubstanzen.push(text);
             };
 
-            // Optiate
+            // Opiate
             if (response['QYAZ020[VYAZ020b]'] === 'Y') {
                 text = 'Opioide (Heroin, Methadon, Codein, usw.)';
                 result.relapsesubstanzen.push(text);
@@ -121,3 +187,5 @@ ng-repeat relapsesubstanzen
         $scope.d.current_response = [];
         $scope.d.current_response.push(results[results.length - 1]);
     };
+
+    -->
