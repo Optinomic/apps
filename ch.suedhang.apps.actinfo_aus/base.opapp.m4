@@ -22,7 +22,7 @@ website = http://www.optinomic.com/
 
 
 [template score 6 6]
-include(templates/relapsesubstanzen.html)
+include(templates/score.html)
 
 [readme]
 include(readme.md)
