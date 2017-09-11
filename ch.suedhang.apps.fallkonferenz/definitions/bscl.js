@@ -18,14 +18,6 @@ d.bscl = {
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
         "response_date_path": "date"
     },
-    "start": {
-        "left_title": "Geringe Ausprägung",
-        "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
-        "left_color": "#4CAF50",
-        "right_title": "Starke Ausprägung",
-        "right_text": "Eine längere Beschreibung bzgl. der starken Ausprägung. Eine längere Beschreibung bzgl. der starken Ausprägung.",
-        "right_color": "#F44336"
-    },
     "scales": [{
         "left_title": "Somatisierung",
         "left_text": "",
