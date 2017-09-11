@@ -92,10 +92,10 @@ include(../lib/html/optinomic/page/start.m4)
             <p ng-if="response.entity.data.response.VYAZ010 === '3'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 2</p>
             <p ng-if="response.entity.data.response.VYAZ010 === '4'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 3-4</p>
             <p ng-if="response.entity.data.response.VYAZ010 === '5'" class="md-body-1" style="margin-top: 12px;">Anzahl Rückfallperioden hinsichtlich der Suchtprobleme während der Behandlung: 5 und mehr</p>
-            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x = 'Y'">
+            <div ng-if="response.entity.data.response.QYAZ020[VYAZ020x] = 'Y'">
                 <p class="md-body-1" style="margin-top: 12px;"> Es ist nicht bekannt, welche Substanzen dabei konsumiert wurden.</p>
             </div>
-            <div ng-if="response.entity.data.response.QYAZ020_VYAZ020x != 'Y'">
+            <div ng-if="response.entity.data.response.QYAZ020[VYAZ020x] != 'Y'">
                 <p class="md-body-1" style="margin-top: 12px;"> Dabei wurde(n) folgende Substanz(en) konsumiert:</p>
                 <p class="md-body-2" ng-repeat="relapsesubstanz in response.relapsesubstanzen">- {{relapsesubstanz}}</p>
             </div>
