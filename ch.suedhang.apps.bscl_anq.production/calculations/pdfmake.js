@@ -1391,7 +1391,7 @@ function main(responses) {
 
         // Info | Inhaltsverzeichnis
         return_obj._info = {
-            "version": 1.1.
+            "version": 1.1,
             "toc": [{
                 "name": "Chart :: BSCL Z-Score",
                 "id": "chart"
