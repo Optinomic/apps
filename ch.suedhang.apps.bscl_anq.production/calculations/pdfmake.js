@@ -3,6 +3,8 @@ function main(responses) {
 
     var calc = {};
 
+    var calc.master = 'ch.suedhang.apps.bscl_anq:scores_calculation';
+
 
     // ------------------------------------------
     // D e f i n i t i o n s
@@ -1380,7 +1382,7 @@ function main(responses) {
 
         // Init
         var patient = d.patient.data;
-        var scores = d.other_calculations['ch.suedhang.apps.bscl_anq:scores_calculation'];
+        var scores = d.other_calculations[calc.master];
         scores = calc.sort_scores(scores);
 
 
