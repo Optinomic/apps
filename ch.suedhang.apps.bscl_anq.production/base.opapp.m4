@@ -70,4 +70,9 @@ description = BSCL - Austritt
 survey = bscl_anq
 
 
+[calculation pdfmake javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
+include(calculations/pdfmake.js)
+
+
+
 
