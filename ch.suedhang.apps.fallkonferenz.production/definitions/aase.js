@@ -55,30 +55,29 @@ d.aase = {
         "score_path": "calculation.another_calculation.score_mean",
         "clinic_sample_var": null
     }],
+
+
+
+
     "ranges": [{
         "range_start": 0,
-        "range_stop": 0.5,
-        "text": "keine Versuchung",
+        "range_stop": 0.9,
+        "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
     }, {
-        "range_start": 0.5,
-        "range_stop": 1.5,
+        "range_start": 1,
+        "range_stop": 1.9,
         "text": "geringe Versuchung",
         "color": "#FFA000"
     }, {
-        "range_start": 1.5,
-        "range_stop": 2.5,
-        "text": "mässige Versuchung",
-        "color": "#FBB100"
-    }, {
-        "range_start": 2.5,
-        "range_stop": 3.5,
-        "text": "starke Versuchung",
+        "range_start": 2,
+        "range_stop": 2.9,
+        "text": "hohe Versuchung",
         "color": "#FB7200"
     }, {
-        "range_start": 3.5,
+        "range_start": 3,
         "range_stop": 999,
-        "text": "äusserste Versuchung",
+        "text": "sehr hohe Versuchung",
         "color": "#C62828"
     }]
 };
