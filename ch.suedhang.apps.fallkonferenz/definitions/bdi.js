@@ -20,9 +20,9 @@ d.bdi = {
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Kein Verdacht auf eine Depression",
+        "left_title": "Kein V.a. eine Depression",
         "left_text": "",
-        "right_title": "Verdacht auf eine schwere Depression",
+        "right_title": "V.a. eine schwere Depression",
         "right_text": "",
         "score_path": "calculation.bdi_score.score.score",
         "clinic_sample_var": null
