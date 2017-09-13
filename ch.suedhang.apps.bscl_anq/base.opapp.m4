@@ -73,6 +73,4 @@ survey = bscl_anq
 [calculation scores_calculation javascript]
 include(calculations/bscl_patient_calc.js)
 
-[calculation pdfmake javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
-include(calculations/pdfmake.js)
 
