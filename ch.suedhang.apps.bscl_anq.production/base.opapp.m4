@@ -74,5 +74,3 @@ survey = bscl_anq
 include(calculations/pdfmake.js)
 
 
-
-
