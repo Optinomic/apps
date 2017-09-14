@@ -1,7 +1,7 @@
 d.tmt = {
     "options": {
-        "min": -4,
-        "max": 4,
+        "min": -5,
+        "max": 5,
         "item_height": 75,
         "item_text_left": 100,
         "item_text_right": 100,
