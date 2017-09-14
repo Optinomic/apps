@@ -1,7 +1,7 @@
 d.bdi = {
     "options": {
-        "min": 0,
-        "max": 63,
+        "min": -0.5,
+        "max": 63.5,
         "item_height": 50,
         "item_text_left": 130,
         "item_text_right": 130,
