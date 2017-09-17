@@ -257,7 +257,7 @@
                     <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr_whoqol.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
+                    <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                 </template>
             </div>
         </template>
@@ -282,15 +282,15 @@
 
             d.show_help = false;
 
-            include(definitions / actinfo.js)
-            include(definitions / tmt.js)
-            include(definitions / aase.js)
-            include(definitions / asrs.js)
-            include(definitions / bscl.js)
-            include(definitions / bdi.js)
-            include(definitions / isk.js)
-            include(definitions / sci.js)
-            include(definitions / whoqol.js)
+            include(definitions/actinfo.js)
+            include(definitions/tmt.js)
+            include(definitions/aase.js)
+            include(definitions/asrs.js)
+            include(definitions/bscl.js)
+            include(definitions/bdi.js)
+            include(definitions/isk.js)
+            include(definitions/sci.js)
+            include(definitions/whoqol.js)
 
             this.set('_d', d);
             console.log('INIT _d', d);

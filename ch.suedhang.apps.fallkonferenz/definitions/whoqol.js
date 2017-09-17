@@ -1,5 +1,5 @@
 d.whoqol = {
-    "options_text": {
+    "options": {
         "min": 0,
         "max": 100,
         "item_height": 75,
@@ -19,25 +19,6 @@ d.whoqol = {
         "vertical_grid_every_x": 10,
         "response_title_path": "event.survey_name",
         "response_date_path": "date"
-    },
-    "options_ohne_text": {
-        "min": -4,
-        "max": "auto",
-        "item_height": 50,
-        "item_text_left": 150,
-        "item_text_right": 150,
-        "color_grid": "#9E9E9E",
-        "color_clinic_sample": "#888888",
-        "color_skin": "grey_dark_to_light",
-        "show_baseline": false,
-        "show_scale_text": false,
-        "show_score_vertical_line": false,
-        "show_score_profile_line": true,
-        "show_score_circles": true,
-        "range_alpha": 0.1,
-        "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.phys_psych_calculation.info.mz.mz_typ",
-        "response_date_path": "calculation.phys_psych_calculation.info.filled"
     },
     "start": {
         "left_title": "Geringe Ausprägung",
