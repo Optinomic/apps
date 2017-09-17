@@ -2,7 +2,7 @@ d.bscl = {
     "options": {
         "min": -2,
         "max": "auto",
-        "item_height": 60,
+        "item_height": 54,
         "item_text_left": 100,
         "item_text_right": 370,
         "color_grid": "#9E9E9E",
@@ -19,7 +19,7 @@ d.bscl = {
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
-        "response_date_path": "calculation.scores_calculation.info.mz.mz_datum",
+        "response_date_path": "calculation.scores_calculation.info.mz.mz_date",
         "norm_sample": "Z-Werte wurden aufgrund der Normstichprobe nach Franke (2000) berechnet (N=300).",
         "dropout": "calculation.scores_calculation.info.mz.dropout",
         "dropout_reason": "calculation.scores_calculation.info.mz.dropout_reason"
