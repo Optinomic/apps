@@ -4,7 +4,7 @@ d.bscl = {
         "max": "auto",
         "item_height": 60,
         "item_text_left": 100,
-        "item_text_right": 384,
+        "item_text_right": 370,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
