@@ -16,7 +16,7 @@ d.sci_stress = {
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
         "topnumber_hide_first_last": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "info.app_zeitpunkt",
         "response_date_path": "date"
@@ -102,7 +102,7 @@ d.sci_hilfreich = {
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
         "topnumber_hide_first_last": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "info.app_zeitpunkt",
         "response_date_path": "date"

@@ -15,7 +15,7 @@ d.aase = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
         "response_date_path": "date"

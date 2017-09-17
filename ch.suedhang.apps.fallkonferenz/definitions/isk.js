@@ -13,7 +13,7 @@ d.isk = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
         "response_date_path": "date"
@@ -32,7 +32,7 @@ d.isk = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
         "response_date_path": "calculation.scores_calculation.info.filled"

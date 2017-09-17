@@ -16,7 +16,7 @@ d.actinfo_audit = {
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
         "topnumber_hide_first_last": false,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 5,
         "response_title_path": "calculation.actinfo_ein_calc.messzeitpunkt.mz_text",
         "response_date_path": "date"
@@ -66,7 +66,7 @@ d.actinfo_fagerstroem = {
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
         "topnumber_hide_first_last": false,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "app_name",
         "response_date_path": "date"

@@ -13,7 +13,7 @@ d.tmt = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
         "vertical_grid_every_x": 1,
