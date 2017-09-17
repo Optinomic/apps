@@ -13,10 +13,15 @@ d.bscl = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
+        "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": false,
         "range_alpha": 0.1,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
-        "response_date_path": "date"
+        "response_date_path": "calculation.info.filled",
+        "norm_sample": "Z-Werte wurden aufgrund der Normstichprobe nach Franke (2000) berechnet (N=300).",
+        "dropout": "calculation.scores_calculation.info.mz.dropout",
+        "dropout_reason": "calculation.scores_calculation.info.mz.dropout_reason"
     },
     "scales": [{
         "left_title": "Somatisierung",
@@ -111,7 +116,7 @@ d.bscl = {
     }, {
         "left_title": "GSI",
         "left_text": "Global Severity Index",
-        "right_title": "",
+        "right_title": "GSI",
         "right_text": "Durchschnittliche Belastung in allen Bereichen",
         "m_norm": [0.28, 0.35],
         "sd_norm": [0.23, 0.23],
@@ -123,6 +128,11 @@ d.bscl = {
         "range_start": -999,
         "range_stop": 1,
         "text": "Gesunde Ausprägung",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 1,
+        "range_stop": 2,
+        "text": "Normale Ausprägung",
         "color": "#2E7D32"
     }, {
         "range_start": 2,
