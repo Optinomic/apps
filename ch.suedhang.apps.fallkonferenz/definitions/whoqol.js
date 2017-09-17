@@ -29,25 +29,19 @@ d.whoqol = {
         "right_color": "#F44336"
     },
     "scales": [{
-        "left_title": "körperliche Lebensqualität",
-        "left_text": "Tief",
-        "right_title": "",
+        "left_title": "Körperliche Lebensqualität",
+        "left_text": "Vermindert",
+        "right_title": "Körperliche Lebensqualität",
         "right_text": "Hoch",
-        "m_norm": "?",
-        "sd_norm": "?",
         "score_path": "calculation.phys_psych_calculation.PHYS_sum",
-        "clinic_sample_var": "?",
         "items": 1
     }, {
         "id": 1,
-        "left_title": "psychische Lebensqualität",
-        "left_text": "Tief",
-        "right_title": "",
+        "left_title": "Psychische Lebensqualität",
+        "left_text": "Vermindert",
+        "right_title": "Psychische Lebensqualität",
         "right_text": "Hoch",
-        "m_norm": "?",
-        "sd_norm": "?",
         "score_path": "calculation.phys_psych_calculation.PSYCH_sum",
-        "clinic_sample_var": "?",
         "items": 5
     }],
     "ranges": [{
