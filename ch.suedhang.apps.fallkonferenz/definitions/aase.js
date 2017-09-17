@@ -34,7 +34,7 @@ d.aase = {
         "right_text": "Starke Versuchung",
         "score_path": "calculation.another_calculation.mean_soziale_situationen",
         "clinic_sample_var": null
-    },{
+    }, {
         "left_title": "Somatisches Unwohlsein",
         "left_text": "Keine Versuchung",
         "right_title": "Somatisches Unwohlsein",
@@ -56,27 +56,23 @@ d.aase = {
         "score_path": "calculation.another_calculation.score_mean",
         "clinic_sample_var": null
     }],
-
-
-
-
     "ranges": [{
         "range_start": 0,
-        "range_stop": 0.5,
+        "range_stop": 1,
         "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
     }, {
-        "range_start": 0.5,
-        "range_stop": 1.5,
+        "range_start": 1,
+        "range_stop": 2,
         "text": "geringe Versuchung",
         "color": "#FFA000"
     }, {
-        "range_start": 1.5,
-        "range_stop": 2.5,
+        "range_start": 2,
+        "range_stop": 3,
         "text": "hohe Versuchung",
         "color": "#FB7200"
     }, {
-        "range_start": 2.5,
+        "range_start": 3,
         "range_stop": 999,
         "text": "sehr hohe Versuchung",
         "color": "#C62828"
