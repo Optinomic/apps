@@ -62,21 +62,21 @@ d.aase = {
 
     "ranges": [{
         "range_start": 0,
-        "range_stop": 0.9,
+        "range_stop": 0.5,
         "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
     }, {
-        "range_start": 1,
-        "range_stop": 1.9,
+        "range_start": 0.5,
+        "range_stop": 1.5,
         "text": "geringe Versuchung",
         "color": "#FFA000"
     }, {
-        "range_start": 2,
-        "range_stop": 2.9,
+        "range_start": 1.5,
+        "range_stop": 2.5,
         "text": "hohe Versuchung",
         "color": "#FB7200"
     }, {
-        "range_start": 3,
+        "range_start": 2.5,
         "range_stop": 999,
         "text": "sehr hohe Versuchung",
         "color": "#C62828"
