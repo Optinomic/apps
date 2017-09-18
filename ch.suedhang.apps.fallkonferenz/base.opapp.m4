@@ -1,12 +1,12 @@
 [module]
 id = ch.suedhang.apps.fallkonferenz
 name = Fallkonferenz
-short_description = Diese Applikation dient zur schnellen Übersicht z.B. für die Fallkonferenz.
+short_description = Diese Applikation dient zur schnellen Übersicht (z.B. für die Fallkonferenz).
 version = 1.0
 type = patient
 
 [description]
-Optinomic-App Template using Polymer and Redux to store data.
+Eine schnelle Übersicht über die wichtigsten Ergebnisse, bestehend aus Suchtmittelkonsum (actInfo); Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen (TMT); ADHS-Screening (ASRS); Suchtdruck (AASE-G); Symptomcheckliste (BSCL); Depressions-Inventar (BDI), Inventar Sozialer Kompetenzen (ISK), Stress-Coping-Inventar (SCI) und der Lebensqualität (WHQOL).
 
 [developer]
 first_name = Beat
