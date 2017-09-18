@@ -63,12 +63,6 @@
                 },
                 observer: '_srChanged'
             },
-            _d: {
-                type: Object
-            },
-            _pdf_content: {
-                type: Array
-            },
             _pdf_ready: {
                 type: Boolean,
                 value: false
@@ -88,9 +82,7 @@
 
         __init: function() {
 
-            this._d = this._d === undefined ? {} : this._d;
-
-            var d = this.get('_d');
+            var d = {};
 
             d.name = "BSCL";
             d.title = "Symptomcheckliste";
@@ -113,6 +105,7 @@
             d.init_done = true;
             console.log('(INIT) _d', d);
             this.set('_d', d);
+            this._d = d;
         },
 
         _srChanged: function() {
