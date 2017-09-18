@@ -162,6 +162,29 @@
                     };
                 }
             },
+            _current_app: {
+                type: Object,
+                statePath: function(state) {
+                    var return_obj = {
+                        "found": false,
+                        "app": {}
+                    };
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
+                            state.apps.all.patient_modules.forEach(function(app, appID) {
+                                if (app.identifier === this.appId) {
+                                    return_obj = return_obj = {
+                                        "found": true,
+                                        "app": app
+                                    };
+                                    console.error("FOUND", return_obj);    
+                                };
+                            });
+                        };
+                    };
+                    return return_obj;
+                }
+            },
             _sr: {
                 type: Object,
                 statePath: function(state) {
