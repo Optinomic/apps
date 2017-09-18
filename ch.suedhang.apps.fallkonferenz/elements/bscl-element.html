@@ -33,7 +33,7 @@
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
             <div class="grid-border-top">
-                <div class="layout horizontal flex">
+                <div is="title" class="layout horizontal flex">
                     <div class="flex">
                         <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
@@ -63,9 +63,6 @@
                             </div>
                         </div>
                     </iron-collapse>
-                </template>
-                <template is="dom-if" if="[[!_sr.have_data]]">
-                    <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr.have_data]]">
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
@@ -154,6 +151,9 @@
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
+                <template is="dom-if" if="[[!_sr.have_data]]">
+                    <h3>Keine BSCL-Daten vorhanden.</h3>
+                </template>
             </div>
         </template>
         <template is="dom-if" if="[[!_d.init_done]]">
@@ -171,6 +171,22 @@
                 type: String,
                 value: null,
                 observer: '_loadData'
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if (this.appId in state.survey_responses.data) {
+                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            return state.survey_responses.data[this.appId]
+                        } else {
+                            return null
+                        };
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_srChanged'
             },
             _patient: {
                 type: Object,
@@ -215,22 +231,6 @@
                     return return_obj;
                 }
             },
-            _sr: {
-                type: Object,
-                statePath: function(state) {
-                    if ((this.appId !== null) && (this.appId !== undefined)) {
-                        if (this.appId in state.survey_responses.data) {
-                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
-                            return state.survey_responses.data[this.appId]
-                        } else {
-                            return null
-                        };
-                    } else {
-                        return null
-                    };
-                },
-                observer: '_srChanged'
-            },
             _pdf_chart: {
                 type: Object,
                 value: null,
@@ -246,6 +246,12 @@
         __toggle_print: function() {
             var print_button = this.$$('#collapse_print');
             print_button.toggle();
+
+            // Hide Help when visible
+            var _show_help = this.get('_show_help');
+            if (_show_help) {
+                this.__toggleHelp();    
+            };
         },
 
         __toggleHelp: function() {
