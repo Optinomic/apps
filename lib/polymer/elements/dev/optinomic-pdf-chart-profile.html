@@ -661,7 +661,7 @@
                     var dive_data = d.ks.data;
                     console.warn("? - 1", dive_data, clinic_sample_dive.array);
                     
-                    clinic_sample_dive.array.forEach(function(dive, diveID) {
+                    d.ks_dive.array.forEach(function(dive, diveID) {
                         dive_data = JSON.parse(JSON.stringify(dive_data[dive]));
                     });
 
