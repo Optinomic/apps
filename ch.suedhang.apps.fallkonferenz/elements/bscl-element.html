@@ -169,14 +169,12 @@
                         "found": false,
                         "app": {}
                     };
-
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
-
+                            var appId = this.appId;
                             state.apps.all.patient_modules.forEach(function(pm, appID) {
-                                console.warn("TRY", pm.identifier, this.appId);    
-
-                                if (pm.identifier === this.appId) {
+                                console.warn("TRY", pm.identifier, appId);    
+                                if (pm.identifier === appId) {
                                     return_obj = return_obj = {
                                         "found": true,
                                         "app": pm
