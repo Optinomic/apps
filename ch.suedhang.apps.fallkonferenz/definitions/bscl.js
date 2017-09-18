@@ -134,7 +134,7 @@ d.bscl = {
         "range_start": 1,
         "range_stop": 2,
         "text": "Normale Ausprägung",
-        "color": "#2E7D32"
+        "color": "#FFFFFF"
     }, {
         "range_start": 2,
         "range_stop": 999,
