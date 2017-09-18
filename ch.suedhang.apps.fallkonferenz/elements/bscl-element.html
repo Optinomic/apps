@@ -38,12 +38,14 @@
                         <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
                     <div>
-                        <div hidden$="[[_show_help]]">
-                            <paper-icon-button class="grey" on-tap="__toggleHelp" icon="help-outline"></paper-icon-button>
-                        </div>
-                        <div hidden$="[[!_show_help]]">
-                            <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
-                        </div>
+                        <template is="dom-if" if="[[_current_app.found]]">
+                            <div hidden$="[[_show_help]]">
+                                <paper-icon-button class="grey" on-tap="__toggleHelp" icon="help-outline"></paper-icon-button>
+                            </div>
+                            <div hidden$="[[!_show_help]]">
+                                <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
+                            </div>
+                        </template>
                     </div>
                     <div>
                         <template is="dom-if" if="[[_pdf_ready]]">
