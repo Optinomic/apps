@@ -87,8 +87,11 @@
             include(definitions/bscl.js)
 
             d.clinic_samples = include_as_js_string(ks_bscl.json)
-            d.clinic_samples = JSON.parse(d.clinic_samples);
-            d.bscl_clinic_sample_dive = null;
+            // d.clinic_samples = JSON.parse(d.clinic_samples);
+            d.bscl_clinic_sample_dive = clinic_sample_dive = {
+                "defined": false,
+                "array": []
+            };
 
             this.set('_d', d);
             console.log('(INIT) _d', d);
