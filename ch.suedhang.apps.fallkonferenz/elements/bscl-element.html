@@ -16,9 +16,9 @@
             </template>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                     <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[d.name]]" content="{{_pdf_content}}" loading-string=""></optinomic-pdfmake>
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[d.name]]" content="{{_pdf_content}}" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
                 </template>
                 <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                     <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
@@ -43,7 +43,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
-                            console.log('_sr:', state.survey_responses.data[this.appId]);
+                            console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -88,6 +88,7 @@
 
             d.clinic_samples = include_as_js_string(ks_bscl.json)
             d.clinic_samples = JSON.parse(d.clinic_samples);
+            d.bscl_clinic_sample_dive = null;
 
             this.set('_d', d);
             console.log('(INIT) _d', d);
@@ -133,7 +134,7 @@
                         clinic_sample_dive.defined = true;
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
 
-                        console.warn('_sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
+                        console.warn('(bscl-element) _sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 
