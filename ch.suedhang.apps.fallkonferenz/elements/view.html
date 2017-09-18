@@ -23,12 +23,12 @@
         }
 
         .readme_container{
-            background-color: #F5F5F5;
+            background-color: #FAFAFA;
             border-style: solid;
-            border-color: #E0E0E0;
+            border-color: #EEEEEE;
             border-width: 1px;
             border-radius: 3px;
-            padding: 12px;
+            padding: 24px;
         }
         </style>
         <div class="horizontal wrap">
@@ -46,10 +46,10 @@
         </div>
         <div hidden$="[[!_show_help]]">
             <div class="readme_container">
-                <h2 style="margin:0;color:#757575">Beschreibung</h2>
+                <h4 style="margin:0;color:#757575">BESCHREIBUNG</h4>
                 <p>[[_current_app.description]]</p>
             
-                <h2 style="margin-top:12px;color:#757575">Hilfe (Readme)</h2>
+                <h4 style="margin-top:24px;color:#757575">HILFE (Readme)</h4>
                 <div id="readme"></div>
             </div>
         </div>
@@ -312,6 +312,7 @@
             _show_help = !_show_help;
 
             var readme_box = this.$$('#readme');
+            // var readme_box = this.$.readme;
             readme_box.innerHTML = this._current_app.readme_html;
 
             this.set('_show_help', _show_help);
