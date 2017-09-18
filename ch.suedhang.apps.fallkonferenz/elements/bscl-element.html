@@ -14,8 +14,8 @@
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
             <div class="grid-border-top">
+                <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                 <template is="dom-if" if="[[!_sr.have_data]]">
-                    <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
                 <template is="dom-if" if="[[_sr.have_data]]">
@@ -23,15 +23,12 @@
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                         <div class="layout horizontal flex">
                             <div class="flex">
-                                <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
+                                <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
                             </div>
                             <div>
-                                <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
-
-                                <iron-collapse id="collapse_print">
+                                <iron-collapse id="collapse_print" horizontal>
                                     <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
                                 </iron-collapse>
-                                
                             </div>
                         </div>
                         <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
