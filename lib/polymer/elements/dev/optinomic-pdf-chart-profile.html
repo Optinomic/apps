@@ -164,12 +164,16 @@
                     "array": []
                 };
 
-                if ((this.clinic_sample_dive !== null) && (this.clinic_sample_dive !== undefined)) {
-                    ks_dive.array = this.clinic_samples;
+
+                var clinic_sample_dive = this.get('clinic_sample_dive');
+                if ((clinic_sample_dive !== null) && (clinic_sample_dive !== undefined)) {
+                    ks_dive.array = clinic_samples;
                     if (ks_dive.array.length > 0) {
                         ks_dive.defined = true;    
                     };
                 };
+
+                console.warn("BECOME", clinic_sample_dive, ks_dive);
 
                 d.ks_dive = ks_dive;
 
@@ -636,14 +640,8 @@
                 };
 
                 // ---- Gewünschte Klinikstichprobe schreiben ----
-                var have_dive = this._hasValue(this.clinic_sample_dive);
-                if (have_dive.length > 0) {
-                    have_dive = true;
-                } else {
-                    have_dive = false;
-                };
-
-                if ((!have_dive) && (this._hasValue(this.clinic_samples))) {
+                
+                if ((!d.options.ks_dive.defined) && (this._hasValue(this.clinic_samples))) {
                     // Klinikstichprobe jedoch kein Dive vorhanden
 
                     // Default = last
@@ -651,6 +649,7 @@
                         clinic_sample_dive.array.push(dim.array.length - 1);
                     });
                     have_dive = true;
+                    console.log("Defaultstichprobe erstellt!");
                 };
 
                 if ((have_dive) && (this._hasValue(this.clinic_samples))) {
