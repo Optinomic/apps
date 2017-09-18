@@ -111,7 +111,8 @@
 
 
         __toggle_print: function() {
-          this.$.collapse_print.toggle();
+            var print_button = this.$$('#collapse_print');
+            print_button.toggle();
         },
 
         // -----------------------------
