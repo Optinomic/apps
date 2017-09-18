@@ -1,5 +1,6 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
 <link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
 
 <dom-module id="bscl-element">
@@ -16,12 +17,16 @@
             </template>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
+                    
                     <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                    
                     <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
 
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_content}}" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
 
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_chart}}" loading-string="DIRECT"></optinomic-pdfmake>
+                    <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
+                        <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_content}}"></optinomic-pdfmake>
+                    </template>
+                    
                 </template>
                 <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                     <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
@@ -63,6 +68,10 @@
             _pdf_content: {
                 type: Array,
                 value: []
+            },
+            _pdf_ready: {
+                type: Boolean,
+                value: false
             },
             _pdf_chart: {
                 type: Object,
@@ -158,6 +167,8 @@
                 // Store
                 console.log('_buildPDF', _pdf_content);
                 this.set('_pdf_content', _pdf_content);
+                this.set('_pdf_ready', true);
+
             };
         },
 
