@@ -45,7 +45,7 @@
                 <div id="readme"></div>
             </div>
         </div>
-        <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
+        <div hidden$="[[_d.show_help]]">
             <div>
                 <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
                 <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
@@ -249,7 +249,7 @@
                     <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                 </template>
             </div>
-        </template>
+        </div>
     </template>
     <script>
     Polymer({
