@@ -51,7 +51,7 @@
             this.debounce('_srChanged', function() {
                 if (this._hasValue(this.options) && this._hasValue(this.scales) && this._hasValue(this.scores) && this._hasValue(   this.ranges)) {
 
-                    console.error("DEBUG: " this.clinic_sample_dive, this.clinic_samples);
+                    console.error("DEBUG: ", this.clinic_sample_dive, this.clinic_samples);
     
                     this._pdfmake_chart_zscore(this.scores, this.options);
                 };
