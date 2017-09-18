@@ -260,6 +260,10 @@
                     <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                 </template>
             </div>
+            <div>
+                <h2>Elements | Entwicklung</h2>
+                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>
+            </div>
         </template>
     </template>
     <script>
@@ -296,7 +300,6 @@
             console.log('INIT _d', d);
         },
 
-
         _computeNiceDate: function(date_string) {
             date_string = date_string || null
             if (date_string !== null) {
@@ -313,8 +316,6 @@
             }
         },
 
-
-
         _toggleHelp: function() {
             var d = this.get('_d');
             this._d = {};
@@ -326,7 +327,6 @@
             this.set('_d', d);
             console.log('INIT _d', d);
         },
-
 
         _mergeActinfo: function() {
             this.debounce('_mergeActinfo', function() {
@@ -421,7 +421,6 @@
 
             }, 250);
         },
-
 
         _sr_bsclChanged: function() {
             this.debounce('_sr_bsclChanged', function() {

@@ -1,0 +1,145 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<dom-module id="bscl-element">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+        </style>
+        <div class="grid-border-top">
+            <optinomic-title small h1="Symptomcheckliste" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="(BSCL)"></optinomic-title>
+            <template is="dom-if" if="[[!_sr.have_data]]">
+                <h3>Keine BSCL-Daten vorhanden.</h3>
+            </template>
+            <template is="dom-if" if="[[_sr.have_data]]">
+                <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
+                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                </template>
+                <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
+                    <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                </template>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'bscl-element',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            appId: {
+                type: String,
+                value: null,
+                observer: '__loadData'
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if (this.appId in state.survey_responses.data) {
+                            return state.survey_responses.data[this.appId]
+                        } else {
+                            return null
+                        };
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_srChanged'
+            },
+            _d: {
+                type: Object
+            }
+        },
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _srChanged: function() {
+            this.debounce('_srChanged', function() {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+
+
+                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                        var latest_sr = this._sr.data[this._sr.data.length - 1];
+
+                        var clinic_sample_dive = {
+                            "defined": false,
+                            "array": []
+                        };
+
+                        // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                        // Messzeitpunkt
+                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
+                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
+                        } else {
+                            clinic_sample_dive.array.push(5);
+                        };
+
+                        // Geschlecht
+                        if (latest_sr.patient.gender === "female") {
+                            clinic_sample_dive.array.push(0);
+                        } else {
+                            clinic_sample_dive.array.push(1);
+                        };
+
+                        // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
+                        clinic_sample_dive.array.push(4);
+
+
+                        // ---- Set ----
+                        clinic_sample_dive.defined = true;
+                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
+
+                        console.warn('_sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
+                    };
+                };
+
+            }, 250);
+        },
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            include(definitions / bscl.js)
+
+            d.clinic_samples = include_as_js_string(ks_bscl.json)
+            d.clinic_samples = JSON.parse(d.clinic_samples);
+
+            this.set('_d', d);
+            console.log('(INIT) _d', d);
+        },
+
+        __loadData: function() {
+            if ((this.appId !== null) && (this.appId !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appId);
+            };
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {}
+    });
+    </script>
+</dom-module>
