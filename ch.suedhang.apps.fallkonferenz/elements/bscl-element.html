@@ -140,7 +140,7 @@
             appId: {
                 type: String,
                 value: null,
-                observer: '__loadData'
+                observer: '_loadData'
             },
             _patient: {
                 type: Object,
@@ -223,7 +223,7 @@
 
             // Set & Log
             d.init_done = true;
-            console.log('(INIT) _d', d);
+            console.log('(INIT) ' + d.name, d);
             this.set('_d', d);
             this._d = d;
         },
@@ -270,8 +270,6 @@
                         clinic_sample_dive.defined = true;
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
 
-                        console.warn('(bscl-element) _sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
-
 
                         // ---------------------------------------------------------------------
                         // Erstelle Zusatzitems - Array
@@ -298,7 +296,7 @@
                         });
 
                         this.set('_d.bscl_zusatzitems', zusatzitems);
-                        console.warn('(bscl-element) Zusatzitems:', zusatzitems);
+                        console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems);
 
                     };
                 };
