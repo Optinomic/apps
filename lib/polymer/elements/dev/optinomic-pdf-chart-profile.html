@@ -156,6 +156,23 @@
                 };
 
 
+
+                var ks_dive = {
+                    "defined": false,
+                    "text": "",
+                    "data": null,
+                    "array": []
+                };
+
+                if ((this.clinic_sample_dive !== null) && (this.clinic_sample_dive !== undefined)) {
+                    ks_dive.array = this.clinic_samples;
+                    if (ks_dive.array.length > 0) {
+                        ks_dive.defined = true;    
+                    };
+                };
+
+                d.ks_dive = ks_dive;
+
                 // Auto Min/Max
                 d.options.do_min = false;
                 if ((d.options.min === 'auto') || (d.options.min === undefined)) {
