@@ -25,7 +25,12 @@
                                 <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                             </div>
                             <div>
-                                <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="_d.loading_string"></optinomic-pdfmake>
+                                <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+
+                                <iron-collapse id="collapse_print">
+                                    <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="_d.loading_string"></optinomic-pdfmake>
+                                </iron-collapse>
+                                
                             </div>
                         </div>
                         <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
@@ -100,10 +105,19 @@
 
 
         // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+        __toggle_print: function() {
+          this.$.collapse_print.toggle();
+        }
+
+        // -----------------------------
         // Functions
         // -----------------------------
 
-        __init: function() {
+        _init: function() {
 
             var d = {};
 
@@ -221,7 +235,7 @@
         // Lifecycle
         // -----------------------------
 
-        __loadData: function() {
+        _loadData: function() {
             if ((this.appId !== null) && (this.appId !== undefined)) {
                 this.dispatch('actionGetSurveyResponses', this.appId);
             };
