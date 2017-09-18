@@ -1,6 +1,7 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
 <link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
 <dom-module id="bscl-element">
     <template>
         <style include="shared-styles">
@@ -9,13 +10,15 @@
         }
         </style>
         <div class="grid-border-top">
-            <optinomic-title small h1="Symptomcheckliste" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="(BSCL)"></optinomic-title>
+            <optinomic-title small h1="[[d.title]]" h2="[[d.subtitle]]" h3="[[d.name]]"></optinomic-title>
             <template is="dom-if" if="[[!_sr.have_data]]">
                 <h3>Keine BSCL-Daten vorhanden.</h3>
             </template>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                     <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                    <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[d.name]]" content="{{_pdf_content}}" loading-string=""></optinomic-pdfmake>
                 </template>
                 <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                     <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
@@ -40,6 +43,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
+                            console.log('_sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -52,7 +56,16 @@
             },
             _d: {
                 type: Object
-            }
+            },
+            _pdf_content: {
+                type: Array,
+                value: []
+            },
+            _pdf_chart: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
         },
 
 
@@ -60,6 +73,25 @@
         // -----------------------------
         // Functions
         // -----------------------------
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.name = "BSCL";
+            d.title = "Symptomcheckliste";
+            d.subtitle = "Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.";
+
+            include(definitions/bscl.js)
+
+            d.clinic_samples = include_as_js_string(ks_bscl.json)
+            d.clinic_samples = JSON.parse(d.clinic_samples);
+
+            this.set('_d', d);
+            console.log('(INIT) _d', d);
+        },
 
         _srChanged: function() {
             this.debounce('_srChanged', function() {
@@ -108,30 +140,18 @@
             }, 250);
         },
 
+        _buildPDF: function() {
+            this.set('_d.loading_string', '0/1');
+            var _pdf_chart = this.get('_pdf_chart');
+            if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
+                var _pdf_content = this.get('_pdf_content');
 
+                // Build PDF
+                _pdf_content.push(_pdf_chart);
 
-        // -----------------------------
-        // Lifecycle
-        // -----------------------------
-
-        __init: function() {
-
-            this._d = this._d === undefined ? {} : this._d;
-
-            var d = this.get('_d');
-
-            include(definitions/bscl.js)
-
-            d.clinic_samples = include_as_js_string(ks_bscl.json)
-            d.clinic_samples = JSON.parse(d.clinic_samples);
-
-            this.set('_d', d);
-            console.log('(INIT) _d', d);
-        },
-
-        __loadData: function() {
-            if ((this.appId !== null) && (this.appId !== undefined)) {
-                this.dispatch('actionGetSurveyResponses', this.appId);
+                // Store
+                console.log('_buildPDF', _pdf_content);
+                this.set('_pdf_content', _pdf_content);
             };
         },
 
@@ -139,7 +159,15 @@
         // Lifecycle
         // -----------------------------
 
-        ready: function() {}
+        __loadData: function() {
+            if ((this.appId !== null) && (this.appId !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appId);
+            };
+        },
+
+        ready: function() {
+            this.__init();
+        }
     });
     </script>
 </dom-module>
