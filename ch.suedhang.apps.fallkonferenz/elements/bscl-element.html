@@ -9,18 +9,18 @@
         }
         </style>
         <div class="grid-border-top">
-            <optinomic-title small h1="[[d.title]]" h2="[[d.subtitle]]" h3="[[d.name]]"></optinomic-title>
+            <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
             <template is="dom-if" if="[[!_sr.have_data]]">
                 <h3>Keine BSCL-Daten vorhanden.</h3>
             </template>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                    <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[d.name]]" content="{{_pdf_content}}" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                    <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
 
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[d.name]]" content="{{_pdf_chart}}" loading-string="DIRECT"></optinomic-pdfmake>
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_content}}" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_chart}}" loading-string="DIRECT"></optinomic-pdfmake>
                 </template>
                 <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                     <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
