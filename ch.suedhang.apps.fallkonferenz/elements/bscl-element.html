@@ -86,8 +86,7 @@
 
             include(definitions/bscl.js)
 
-            d.clinic_samples = include_as_js_string(ks_bscl.json)
-            // d.clinic_samples = JSON.parse(d.clinic_samples);
+            d.clinic_samples = JSON.parse(include(includes/ks_bscl.json));
             d.bscl_clinic_sample_dive = clinic_sample_dive = {
                 "defined": false,
                 "array": []
