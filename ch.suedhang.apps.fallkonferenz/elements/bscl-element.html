@@ -90,22 +90,22 @@
 
             this._d = this._d === undefined ? {} : this._d;
 
-            var d = this.get('_d');
+            var _d = this.get('_d');
 
-            d.name = "BSCL";
-            d.title = "Symptomcheckliste";
-            d.subtitle = "Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.";
+            _d.name = "BSCL";
+            _d.title = "Symptomcheckliste";
+            _d.subtitle = "Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.";
 
             include(definitions/bscl.js)
 
-            d.clinic_samples = JSON.parse(include_as_js_string(ks_bscl.json));
-            d.bscl_clinic_sample_dive = clinic_sample_dive = {
+            _d.clinic_samples = JSON.parse(include_as_js_string(ks_bscl.json));
+            _d.bscl_clinic_sample_dive = clinic_sample_dive = {
                 "defined": false,
                 "array": []
             };
 
-            this.set('_d', d);
-            console.log('(INIT) _d', d);
+            this.set('_d', _d);
+            console.log('(INIT) _d', _d);
         },
 
         _srChanged: function() {

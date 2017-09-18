@@ -694,14 +694,14 @@ var options = {
 
                     //  Get Statistics Data from clinic_sample_dive
                     var dive_data = d.ks.data;
-                    console.warn("? - 1", dive_data, clinic_sample_dive.array);
+                    // console.warn("? - 1", dive_data, clinic_sample_dive.array);
                     
                     clinic_sample_dive.array.forEach(function(dive, diveID) {
                         dive_data = JSON.parse(JSON.stringify(dive_data[dive]));
                     });
 
 
-                    console.warn("? - 2", dive_data);
+                    // console.warn("? - 2", dive_data);
                     clinic_sample_dive.data = JSON.parse(JSON.stringify(dive_data.statistics));
 
 
@@ -720,7 +720,7 @@ var options = {
                     clinic_sample_dive.defined = true;
                 };
 
-                console.warn("clinic_sample_dive", clinic_sample_dive);
+                // console.warn("clinic_sample_dive", clinic_sample_dive);
                 return clinic_sample_dive;
             }.bind(this);
 
@@ -1061,7 +1061,7 @@ var options = {
                 };
 
 
-                console.error("scores", scores);
+                // console.error("scores", scores);
 
                 init.scores.forEach(function(score, scoreID) {
 
@@ -1132,7 +1132,7 @@ var options = {
 
                 var start = this.get('start');
 
-                console.warn("_legende_start", start, init);
+                // console.warn("_legende_start", start, init);
 
                 var return_object = {};
 
@@ -1459,7 +1459,6 @@ var options = {
             // console.log(JSON.stringify(chart, null, 2));
             // chart.init = init;
 
-            console.log(chart);
             this.set('pdfContent', chart);
 
             return chart;
