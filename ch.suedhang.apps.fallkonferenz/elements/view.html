@@ -36,15 +36,15 @@
                 <optinomic-title nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
             </div>
             <div>
-                <div hidden$="[[_d.show_help]]">
+                <div hidden$="[[_show_help]]">
                     <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
                 </div>
-                <div hidden$="[[!_d.show_help]]">
+                <div hidden$="[[!_show_help]]">
                     <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
                 </div>
             </div>
         </div>
-        <template is="dom-if" if="[[_d.show_help]]">
+        <template is="dom-if" if="[[_show_help]]">
             <div class="readme_container">
                 <h2 style="margin:0;color:#757575">Beschreibung</h2>
                 <p>[[_current_app.description]]</p>
@@ -277,8 +277,6 @@
 
             var d = this.get('_d');
 
-            d.show_help = false;
-
             include(definitions/actinfo.js)
             include(definitions/tmt.js)
             include(definitions/aase.js)
@@ -289,6 +287,7 @@
             include(definitions/whoqol.js)
 
             this.set('_d', d);
+            this.set('_show_help', false);
             console.log('INIT _d', d);
         },
 
@@ -309,15 +308,14 @@
         },
 
         _toggleHelp: function() {
-            var d = this.get('_d');
-            this._d = {};
-            d.show_help = !d.show_help;
+            var _show_help = this.get('_show_help');
+            _show_help = !_show_help;
 
-            var readme_box = this.$.readme;
+            var readme_box = this.$$('#readme');
             readme_box.innerHTML = this._current_app.readme_html;
 
-            this.set('_d', d);
-            console.log('INIT _d', d);
+            this.set('_show_help', _show_help);
+            console.log('(toggle) Help', _show_help);
         },
 
         _mergeActinfo: function() {
