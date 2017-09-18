@@ -21,7 +21,6 @@
                         <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="Chart" content="{{_pdf_chart}}"></optinomic-pdfmake>
 
-                        <p>Patient :: [[_patient.extras.full_name]]</p>
                         <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
                             <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]"></optinomic-pdfmake>
                         </template>

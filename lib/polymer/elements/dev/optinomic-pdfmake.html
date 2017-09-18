@@ -236,6 +236,8 @@
 
                 // Set Content
                 var given_content = this.get('content');
+
+                console.log("---> given_content = ", given_content, this.content);
                 if (typeof given_content === 'string' || given_content instanceof String) {
                     given_content = JSON.parse(given_content);
                 };
@@ -244,7 +246,13 @@
                     console.log('PDF :: Content was not array - try to push:', given_content);
                     create_dd.content = [];
                     create_dd.content.push(given_content);
+                } else {
+                    if (Object.prototype.toString.call(given_content) === '[object Array]') {
+                        console.log('PDF :: Content was array:', given_content);
+                        create_dd.content = given_content;
+                    };    
                 };
+
 
                 if (Object.prototype.toString.call(create_dd.content) === '[object Array]') {
                     this.set('_dd', create_dd);
