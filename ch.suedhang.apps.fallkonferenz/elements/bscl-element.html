@@ -172,13 +172,14 @@
 
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
-                                    console.warn("TRY", state.apps.all.patient_modules, this.appId);    
 
-                            state.apps.all.patient_modules.forEach(function(app, appID) {
-                                if (app.identifier === this.appId) {
+                            state.apps.all.patient_modules.forEach(function(pm, appID) {
+                                console.warn("TRY", pm.identifier, this.appId);    
+
+                                if (pm.identifier === this.appId) {
                                     return_obj = return_obj = {
                                         "found": true,
-                                        "app": app
+                                        "app": pm
                                     };
                                     console.error("FOUND", return_obj);    
                                 };
