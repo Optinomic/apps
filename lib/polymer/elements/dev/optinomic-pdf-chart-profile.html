@@ -640,6 +640,9 @@
                 };
 
                 // ---- Gewünschte Klinikstichprobe schreiben ----
+                if (d.ks_dive.defined) {
+                    clinic_sample_dive = d.ks_dive;
+                };
                 
                 if ((!d.ks_dive.defined) && (this._hasValue(this.clinic_samples))) {
                     // Klinikstichprobe jedoch kein Dive vorhanden
@@ -659,7 +662,6 @@
 
                     //  Get Statistics Data from clinic_sample_dive
                     var dive_data = d.ks.data;
-                    console.warn("? - 1", dive_data, clinic_sample_dive.array);
                     
                     d.ks_dive.array.forEach(function(dive, diveID) {
                         dive_data = JSON.parse(JSON.stringify(dive_data[dive]));
@@ -673,7 +675,7 @@
                     // Build KS:  Text
                     clinic_sample_dive.text = "";
                     d.ks.dimensions.forEach(function(dim, dimID) {
-                        var pos = clinic_sample_dive.array[dimID];
+                        var pos = d.ks_dive.array[dimID];
                         var dim_text = dim.name + ": " + dim.array[pos].text;
                         if (dimID !== d.ks.dimensions.length - 1) {
                             dim_text = dim_text + ", "
