@@ -23,6 +23,8 @@
                     <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
 
 
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="Chart" content="{{_pdf_chart}}"></optinomic-pdfmake>
+
                     <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
                         <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_content}}"></optinomic-pdfmake>
                     </template>
@@ -67,7 +69,7 @@
             },
             _pdf_content: {
                 type: Array,
-                value: []
+                value: null
             },
             _pdf_ready: {
                 type: Boolean,
