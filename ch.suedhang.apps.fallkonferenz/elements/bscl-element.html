@@ -49,7 +49,7 @@
                             <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                             <template is="dom-if" if="[[_d.bscl_zusatzitems.defined]]" restamp="true">
                                 <h3>Zusatzangaben</h3>
-                                <vaadin-grid class="full_grid" aria-label="Zusatzangaben" items="[[_d.bscl_zusatzitems]]" column-reordering-allowed="true">
+                                <vaadin-grid class="full_grid" aria-label="Zusatzangaben" items="[[_d.bscl_zusatzitems.array]]" column-reordering-allowed="true">
                                     <vaadin-grid-column-group>
                                         <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
                                         <vaadin-grid-column width="100px" flex-grow="0">
