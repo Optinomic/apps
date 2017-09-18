@@ -155,7 +155,6 @@ function main(responses) {
         return result_array;
     };
 
-
     calc.create_all_results = function(result_array) {
 
         var variables = [];
@@ -186,6 +185,64 @@ function main(responses) {
 
 
         return return_obj;
+    };
+
+    calc.create_zusatzitems = function(response, mz) {
+
+        var zusatzitem = {
+            "id": parseInt(response.id),
+            "items": [{
+                "id": 0,
+                "name": "Schlechter Appetit",
+                "result": null,
+                "field": parseInt(response["BSCL[sq504V11]"])
+            }, {
+                "id": 1,
+                "name": "Einschlafschwierigkeiten",
+                "result": null,
+                "field": parseInt(response["BSCL[sq504V25]"])
+            }, {
+                "id": 2,
+                "name": "Gedanken an den Tod und ans Sterben",
+                "result": null,
+                "field": parseInt(response["BSCL[sq504V39]"])
+            }, {
+                "id": 3,
+                "name": "Schuldgefühle",
+                "result": null,
+                "field": parseInt(response["BSCL[sq504V52]"])
+            }]
+        };
+
+        zusatzitem = Object.assign(zusatzitem, mz);
+
+        // Interpretation
+        zusatzitem.items.forEach(function(item, itemID) {
+            item.result = "k.A.";
+
+            if (item.field === 0) {
+                item.result = "überhaupt nicht";
+            };
+            if (item.field === 1) {
+                item.result = "ein wenig";
+            };
+            if (item.field === 2) {
+                item.result = "ziemlich";
+            };
+            if (item.field === 3) {
+                item.result = "stark";
+            };
+            if (item.field === 4) {
+                item.result = "sehr stark";
+            };
+            if (isNaN(item.field)) {
+                item.result = "k.A.";
+                item.field = 99;
+            };
+        });
+
+
+        return zusatzitem;
     };
 
     // ------------------------------------------
@@ -255,6 +312,9 @@ function main(responses) {
 
 
 
+
+
+
             // -----------------------------------------------
             // Messzeitpunkt
             // -----------------------------------------------
@@ -306,7 +366,6 @@ function main(responses) {
                     mz.mz_typ = 'Austritt EAS';
                     mz.mz_text = 'Austritt - EAS';
                 };
-
             };
 
             // Messdatum
@@ -361,6 +420,12 @@ function main(responses) {
 
                 };
             };
+
+
+            // -----------------------------------------------
+            // Zusatzitems
+            // -----------------------------------------------
+            d.zusatzitem = calc.create_zusatzitems(result, mz);
 
 
             // Create 'all_results' Object
@@ -427,5 +492,6 @@ function main(responses) {
 
     // Return
     return calc.getResults(responses);
+
 
 };
