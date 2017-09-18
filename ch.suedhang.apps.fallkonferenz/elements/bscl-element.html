@@ -20,10 +20,11 @@
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                         <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                         <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                        <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="Chart" content="{{_pdf_chart}}"></optinomic-pdfmake>
+
+                        <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="_d.loading_string"></optinomic-pdfmake>
 
                         <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
-                            <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]"></optinomic-pdfmake>
+                            <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]"></optinomic-pdfmake>
                         </template>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
@@ -53,6 +54,16 @@
                 statePath: function(state) {
                     if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
                         return state.patient.data;                        
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _clinic: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.clinic.data !== null) && (state.clinic.data !== undefined)) {
+                        return state.clinic.data;                        
                     } else {
                         return null
                     };
