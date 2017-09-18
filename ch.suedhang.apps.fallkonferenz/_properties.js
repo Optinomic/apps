@@ -9,18 +9,6 @@ properties: {
         statePath: 'apps.current.data'
     },
 
-    _sr_bscl: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'ch.suedhang.apps.bscl_anq'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        },
-        observer: '_sr_bsclChanged'
-    },
     _sr_asrs: {
         type: Object,
         statePath: function(state) {

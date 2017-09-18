@@ -195,18 +195,7 @@
                 </template>
             </div>
             <div>
-                <optinomic-title small h1="Symptomcheckliste" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="(BSCL)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bscl.have_data]]">
-                    <h3>Keine BSCL-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_bscl.have_data]]">
-                    <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                    </template>
-                    <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                    </template>
-                </template>
+                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>    
             </div>
             <div>
                 <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
@@ -260,10 +249,6 @@
                     <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                 </template>
             </div>
-            <div>
-                <h2>Elements | Entwicklung</h2>
-                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>
-            </div>
         </template>
     </template>
     <script>
@@ -290,7 +275,6 @@
             include(definitions/tmt.js)
             include(definitions/aase.js)
             include(definitions/asrs.js)
-            include(definitions/bscl.js)
             include(definitions/bdi.js)
             include(definitions/isk.js)
             include(definitions/sci.js)
@@ -418,53 +402,6 @@
                         };
                         this.set('_sr_sci', return_obj);
                         console.warn('_processSCI', this._sr_sci);
-                    };
-                };
-
-            }, 250);
-        },
-
-        _sr_bsclChanged: function() {
-            this.debounce('_sr_bsclChanged', function() {
-
-                if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
-                    if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
-
-
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Messzeitpunkt
-                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
-                        } else {
-                            clinic_sample_dive.array.push(5);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-                        // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
-                        clinic_sample_dive.array.push(4);
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_bscl - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 

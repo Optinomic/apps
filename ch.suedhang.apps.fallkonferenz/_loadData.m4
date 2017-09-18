@@ -3,7 +3,6 @@ this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.actinfo_aus');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.tmt_V3');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.asrs');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.aase-g');
-this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.isk');
 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.sci');
