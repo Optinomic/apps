@@ -668,6 +668,11 @@ var options = {
 
                 // ---- Gewünschte Klinikstichprobe schreiben ----
                 var have_dive = this._hasValue(this.clinic_sample_dive);
+                if (have_dive.length > 0) {
+                    have_dive = true;
+                } else {
+                    have_dive = false;
+                };
 
                 if ((!have_dive) && (this._hasValue(this.clinic_samples))) {
                     // Klinikstichprobe jedoch kein Dive vorhanden
@@ -687,10 +692,10 @@ var options = {
 
                     //  Get Statistics Data from clinic_sample_dive
                     var dive_data = d.ks.data;
-                    console.warn("? - 1", dive_data);
+                    console.warn("? - 1", dive_data, clinic_sample_dive.array);
                     
                     clinic_sample_dive.array.forEach(function(dive, diveID) {
-                        dive_data = dive_data[dive]
+                        dive_data = JSON.parse(JSON.stringify(dive_data[dive]));
                     });
 
 
