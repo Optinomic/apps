@@ -51,8 +51,6 @@
             this.debounce('_srChanged', function() {
                 if (this._hasValue(this.options) && this._hasValue(this.scales) && this._hasValue(this.scores) && this._hasValue(   this.ranges)) {
 
-                    console.error("DEBUG: ", this.clinic_sample_dive, this.clinic_samples);
-    
                     this._pdfmake_chart_zscore(this.scores, this.options);
                 };
             }, 250);
@@ -173,7 +171,6 @@
                     };
                 };
 
-                console.warn("BECOME", clinic_sample_dive, ks_dive);
 
                 d.ks_dive = ks_dive;
 
@@ -668,7 +665,6 @@
                     });
 
 
-                    console.warn("? - 2", dive_data);
                     clinic_sample_dive.data = JSON.parse(JSON.stringify(dive_data.statistics));
 
 
