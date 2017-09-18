@@ -31,6 +31,9 @@
                 </template>
             </div>
         </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <p style="color:#3F51B5">Initialisiere...</p>
+        </template>
     </template>
     <script>
     Polymer({
@@ -107,8 +110,8 @@
 
 
             // Set & Log
-            console.log('(INIT) _d', d);
             d.init_done = true;
+            console.log('(INIT) _d', d);
             this.set('_d', d);
         },
 
