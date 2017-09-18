@@ -88,22 +88,24 @@ var options = {
                 reflectToAttribute: true
             },
             clinic_samples: {
-                type: Object
+                type: Object,
+                observer: '__init'
             },
             clinic_sample_dive: {
-                type: Array
+                type: Array,
+                observer: '__init'
             }
 
         },
 
         __init: function() {
 
-
-            if (this._hasValue(this.options) && this._hasValue(this.scales) && this._hasValue(this.scores) && this._hasValue(this.ranges)) {
-
-
-                this._pdfmake_chart_zscore(this.scores, this.options, this.scales);
-            };
+            this.debounce('_srChanged', function() {
+                if (this._hasValue(this.options) && this._hasValue(this.scales) && this._hasValue(this.scores) && this._hasValue(   this.ranges)) {
+    
+                    this._pdfmake_chart_zscore(this.scores, this.options);
+                };
+            }, 250);
 
         },
 
