@@ -1,5 +1,5 @@
 
-## Optinomic-App 
+## „Brief Symptom Checklist“ (BSCL)      
 
 
 #### Zusammenfassung
