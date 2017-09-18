@@ -687,7 +687,7 @@ var options = {
                     // ---- Set ----
                     clinic_sample_dive.defined = true;
 
-                    console.error('? - 1', clinic_sample_dive);
+                    console.warn("? - 1", clinic_sample_dive);
 
                     //  Get Statistics Data from clinic_sample_dive
                     var dive_data = d.ks.data;
@@ -696,7 +696,7 @@ var options = {
                     });
 
 
-                    console.error('? - 2', clinic_sample_dive);
+                    console.warn("? - 2", clinic_sample_dive);
                     clinic_sample_dive.data = JSON.parse(JSON.stringify(dive_data.statistics));
 
 
