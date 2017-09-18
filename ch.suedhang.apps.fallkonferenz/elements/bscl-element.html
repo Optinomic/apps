@@ -190,7 +190,7 @@
 
                 setTimeout(function(){ 
                     this.set('_pdf_ready', true);
-                }, 350);
+                }.bind(this), 350);
 
             };
         },
