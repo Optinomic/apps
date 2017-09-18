@@ -333,29 +333,31 @@
 
                 var _sr_actinfo = [];
                 if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== undefined)) {
-                    if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
+                    if ((this._sr_actinfo_ein !== null) && (this._sr_actinfo_aus !== null)) {
                         if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
-
-                            this._sr_actinfo_ein.data.forEach(function(current, ID) {
-                                current.app_name = 'Eintritt';
-                                current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
-                                current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                _sr_actinfo.push(current);
-                            });
-                            this._sr_actinfo_aus.data.forEach(function(current, ID) {
-                                current.app_name = 'Austritt';
-                                current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
-                                current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                _sr_actinfo.push(current);
-                            });
-
-                            var actinfo_obj = {
-                                "merged": true,
-                                "data": _sr_actinfo,
-                                "app_id": "actinfo - Ein & Austritt"
-                            }
-                            this.set('_sr_actinfo', actinfo_obj);
-                            console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
+                            if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
+    
+                                this._sr_actinfo_ein.data.forEach(function(current, ID) {
+                                    current.app_name = 'Eintritt';
+                                    current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
+                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
+                                    _sr_actinfo.push(current);
+                                });
+                                this._sr_actinfo_aus.data.forEach(function(current, ID) {
+                                    current.app_name = 'Austritt';
+                                    current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
+                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
+                                    _sr_actinfo.push(current);
+                                });
+    
+                                var actinfo_obj = {
+                                    "merged": true,
+                                    "data": _sr_actinfo,
+                                    "app_id": "actinfo - Ein & Austritt"
+                                }
+                                this.set('_sr_actinfo', actinfo_obj);
+                                console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
+                            };
                         };
                     };
                 };
