@@ -53,7 +53,7 @@
                 </div>
                 <template is="dom-if" if="[[_current_app.found]]">
                     <p>[[_current_app.app.description]]</p>
-                    <iron-collapse id="collapse_print">
+                    <iron-collapse id="collapse_help">
                         <div hidden$="[[!_show_help]]">
                             <div class="readme_container">
                                 <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
@@ -252,10 +252,14 @@
 
             var readme_box = this.$$('#readme');
             // var readme_box = this.$.readme;
-            readme_box.innerHTML = this._current_app.readme_html;
+            readme_box.innerHTML = this._current_app.app.readme_html;
+
+            var collapse_help = this.$$('#collapse_help');
+            collapse_help.toggle();
+
 
             this.set('_show_help', _show_help);
-            console.log('(toggle) Help', _show_help);
+            console.log('(Toggle) Help', _show_help);
         },
 
         // -----------------------------
