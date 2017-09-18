@@ -20,7 +20,6 @@
                 <template is="dom-if" if="[[_sr.have_data]]">
 
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                        
                         <div class="layout horizontal flex">
                             <div class="flex">
                                 <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
@@ -36,6 +35,7 @@
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
+
                 </template>
             </div>
         </template>
@@ -115,7 +115,7 @@
             d.clinic_samples = JSON.parse(include_as_js_string(ks_bscl.json));
             d.bscl_clinic_sample_dive = clinic_sample_dive = {
                 "defined": false,
-                "array": []
+                "array": null
             };
 
 
@@ -168,8 +168,8 @@
 
 
                         // ---- Set ----
-                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
                         clinic_sample_dive.defined = true;
+                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
 
                         console.warn('(bscl-element) _sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
