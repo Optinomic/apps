@@ -22,10 +22,7 @@
                         <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
 
                         <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="_d.loading_string"></optinomic-pdfmake>
-
-                        <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
-                            <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]"></optinomic-pdfmake>
-                        </template>
+                        
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
@@ -84,10 +81,6 @@
                     };
                 },
                 observer: '_srChanged'
-            },
-            _pdf_ready: {
-                type: Boolean,
-                value: false
             },
             _pdf_chart: {
                 type: Object,
@@ -211,11 +204,6 @@
                 // Store
                 // this.set('_pdf_content', _pdf_content);
                 this._pdf_content = _pdf_content;
-
-                setTimeout(function() {
-                    this.set('_pdf_ready', true);
-                    console.log('_buildPDF', this._pdf_content);
-                }.bind(this), 350);
 
             };
         },
