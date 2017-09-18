@@ -21,6 +21,15 @@
             border-right-style: none;
             border-bottom-style: none;
         }
+
+        .readme_container{
+            background-color: #F5F5F5;
+            border-style: solid;
+            border-color: #E0E0E0;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 12px;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -35,16 +44,15 @@
                 </div>
             </div>
         </div>
-        <div hidden$="[[!_d.show_help]]">
+        <template is="dom-if" if="[[_d.show_help]]">
             <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <h2 style="margin:0;color:#757575">Beschreibung</h2>
                 <p>[[_current_app.description]]</p>
-            </div>
-            <div class="readme_container">
-                <h2 style="margin-top:12px;color:#3F51B5">Hilfe (Readme)</h2>
+            
+                <h2 style="margin-top:12px;color:#757575">Hilfe (Readme)</h2>
                 <div id="readme"></div>
             </div>
-        </div>
+        </template>
         <div id="main_content">
             <div>
                 <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
