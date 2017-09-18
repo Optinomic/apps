@@ -21,6 +21,15 @@
             border-right-style: none;
             border-bottom-style: none;
         }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
             <div class="grid-border-top">
@@ -29,11 +38,30 @@
                         <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
                     <div>
+                        <div hidden$="[[_show_help]]">
+                            <paper-icon-button class="grey" on-tap="__toggleHelp" icon="help-outline"></paper-icon-button>
+                        </div>
+                        <div hidden$="[[!_show_help]]">
+                            <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
+                        </div>
+                    </div>
+                    <div>
                         <template is="dom-if" if="[[_pdf_ready]]">
                             <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
                         </template>
                     </div>
                 </div>
+                <template is="dom-if" if="[[_current_app.found]]">
+                    <p>[[_current_app.app.description]]</p>
+                    <iron-collapse id="collapse_print">
+                        <div hidden$="[[!_show_help]]">
+                            <div class="readme_container">
+                                <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
+                                <div id="readme"></div>
+                            </div>
+                        </div>
+                    </iron-collapse>
+                </template>
                 <template is="dom-if" if="[[!_sr.have_data]]">
                     <h3>Keine BSCL-Daten vorhanden.</h3>
                 </template>
@@ -173,13 +201,11 @@
                         if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
                             var appId = this.appId;
                             state.apps.all.patient_modules.forEach(function(pm, appID) {
-                                console.warn("TRY", pm.identifier, appId);    
                                 if (pm.identifier === appId) {
                                     return_obj = return_obj = {
                                         "found": true,
                                         "app": pm
                                     };
-                                    console.error("FOUND", return_obj);    
                                 };
                             });
                         };
@@ -220,6 +246,18 @@
             print_button.toggle();
         },
 
+        __toggleHelp: function() {
+            var _show_help = this.get('_show_help');
+            _show_help = !_show_help;
+
+            var readme_box = this.$$('#readme');
+            // var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme_html;
+
+            this.set('_show_help', _show_help);
+            console.log('(toggle) Help', _show_help);
+        },
+
         // -----------------------------
         // Functions
         // -----------------------------
@@ -240,7 +278,7 @@
             };
 
 
-            include(definitions/bscl.js)
+            include(definitions / bscl.js)
             // Clone options for pdf - nothing is overwritten
             d.bscl.options_pdf = JSON.parse(JSON.stringify(d.bscl.options));
 
@@ -378,6 +416,7 @@
         },
 
         ready: function() {
+            this.set('_show_help', false);
             this._init();
         }
     });
