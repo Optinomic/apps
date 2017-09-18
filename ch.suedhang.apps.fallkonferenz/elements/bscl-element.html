@@ -5,6 +5,9 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
 <dom-module id="bscl-element">
     <template>
         <style include="shared-styles">
@@ -37,6 +40,55 @@
                         </div>
                         <div id="content">
                             <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            <h3>Zusatzangaben</h3>
+                            <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr.data]]" column-reordering-allowed="true">
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="date">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1" style="text-align: right">[[item.calculation.scores_calculation.zusatzitem.mz_datum]]</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column width="180px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">[[item.calculation.scores_calculation.zusatzitem.mz_typ]]</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Zusatzangaben</span></template>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.scores_calculation.zusatzitem.items["0"].field">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">[[item.calculation.scores_calculation.zusatzitem.items["0"].name]]</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">[[item.calculation.scores_calculation.zusatzitem.items["0"].result]]</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">3</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                            </vaadin-grid>
                         </div>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
