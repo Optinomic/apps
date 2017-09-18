@@ -188,11 +188,12 @@
                 _pdf_content.push(_pdf_chart);
 
                 // Store
-                console.log('_buildPDF', _pdf_content);
-                this.set('_pdf_content', _pdf_content);
+                // this.set('_pdf_content', _pdf_content);
+                this._pdf_content = _pdf_content;
 
                 setTimeout(function() {
                     this.set('_pdf_ready', true);
+                    console.log('_buildPDF', this._pdf_content);
                 }.bind(this), 350);
 
             };
