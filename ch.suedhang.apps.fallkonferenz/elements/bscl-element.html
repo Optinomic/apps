@@ -9,25 +9,28 @@
             display: block;
         }
         </style>
-        <div class="grid-border-top">
-            <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
-            <template is="dom-if" if="[[!_sr.have_data]]">
-                <h3>Keine BSCL-Daten vorhanden.</h3>
-            </template>
-            <template is="dom-if" if="[[_sr.have_data]]">
-                <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                    <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="Chart" content="{{_pdf_chart}}"></optinomic-pdfmake>
-                    <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
-                        <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="{{_pdf_content}}"></optinomic-pdfmake>
+        <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+            <div class="grid-border-top">
+                <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
+                <template is="dom-if" if="[[!_sr.have_data]]">
+                    <h3>Keine BSCL-Daten vorhanden.</h3>
+                </template>
+                
+                <template is="dom-if" if="[[_sr.have_data]]">
+                    <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                        <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="Chart" content="{{_pdf_chart}}"></optinomic-pdfmake>
+                        <template is="dom-if" if="[[_pdf_ready]]" restamp="true">
+                            <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]"></optinomic-pdfmake>
+                        </template>
+                    </template>
+                    <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
+                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
-                <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                    <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                </template>
-            </template>
-        </div>
+            </div>
+        </template>
     </template>
     <script>
     Polymer({
@@ -46,7 +49,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
-                            console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -61,8 +64,7 @@
                 type: Object
             },
             _pdf_content: {
-                type: Array,
-                value: []
+                type: Array
             },
             _pdf_ready: {
                 type: Boolean,
@@ -99,14 +101,15 @@
             };
 
 
-            include(definitions/bscl.js)
+            include(definitions / bscl.js)
+            // Clone options for pdf - nothing is overwritten
+            d.bscl.options_pdf = JSON.parse(JSON.stringify(d.bscl.options));
 
-            // Clone Options - not overwriting stuff
-            d.bscl.options_pdf = JSON.parse(JSON.stringify(d.bscl.options)); 
 
-
-            this.set('_d', d);
+            // Set & Log
             console.log('(INIT) _d', d);
+            d.init_done = true;
+            this.set('_d', d);
         },
 
         _srChanged: function() {
@@ -192,7 +195,7 @@
                 console.log('_buildPDF', _pdf_content);
                 this.set('_pdf_content', _pdf_content);
 
-                setTimeout(function(){ 
+                setTimeout(function() {
                     this.set('_pdf_ready', true);
                 }.bind(this), 350);
 
