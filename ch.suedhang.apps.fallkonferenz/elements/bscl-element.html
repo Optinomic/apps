@@ -102,7 +102,7 @@
             include(definitions/bscl.js)
 
             // Clone Options - not overwriting stuff
-            d.bscl.options_pdf = JSON.parse(d.bscl.options);
+            d.bscl.options_pdf = JSON.parse(JSON.stringify(d.bscl.options)); 
 
 
             this.set('_d', d);
