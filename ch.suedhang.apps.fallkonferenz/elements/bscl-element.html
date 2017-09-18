@@ -14,6 +14,14 @@
          :host {
             display: block;
         }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
             <div class="grid-border-top">
@@ -206,7 +214,9 @@
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
 
 
+                        // ---------------------------------------------------------------------
                         // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                        // ---------------------------------------------------------------------
                         var latest_sr = this._sr.data[this._sr.data.length - 1];
 
                         var clinic_sample_dive = {
@@ -240,6 +250,35 @@
                         this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
 
                         console.warn('(bscl-element) _sr - Klinikstichprobe gesetzt:', latest_sr, this._d);
+
+
+                        // ---------------------------------------------------------------------
+                        // Erstelle Zusatzitems - Array
+                        // ---------------------------------------------------------------------
+                        var zusatzitems = {
+                            "defined": false,
+                            "array": []
+                        };
+
+                        this._sr.data.forEach(function(sr, srID) {
+                            if ("zusatzitem" in sr.calculation.scores_calculation) {
+                                var zusatzitem = sr.calculation.scores_calculation.zusatzitem;
+                                zusatzitem.items.forEach(function(item, itemID) {
+                                    var base_name = item.id + "__";
+                                    zusatzitem[base_name + "name"] = item.name;
+                                    zusatzitem[base_name + "result"] = item.result;
+                                    zusatzitem[base_name + "field"] = item.field;
+                                });
+                                zusatzitems.array.push(zusatzitem);
+                                if (zusatzitems.array.length > 0) {
+                                    zusatzitems.defined = true;    
+                                };
+                            };
+                        });
+
+                        this.set('_d.bscl_zusatzitems', zusatzitems);
+                        console.warn('(bscl-element) Zusatzitems:', zusatzitems);
+
                     };
                 };
 
