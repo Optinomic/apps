@@ -169,8 +169,11 @@
                         "found": false,
                         "app": {}
                     };
+
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
+                                    console.warn("TRY", state.apps.all.patient_modules, this.appId);    
+
                             state.apps.all.patient_modules.forEach(function(app, appID) {
                                 if (app.identifier === this.appId) {
                                     return_obj = return_obj = {
