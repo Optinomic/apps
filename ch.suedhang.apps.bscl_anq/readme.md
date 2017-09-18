@@ -4,9 +4,23 @@
 ## Optinomic-App 
 
 
-#### Ressources
-- [angular grid](http://www.angulargrid.com/index.html)  ::  Grid used for data-views.
+#### Zusammenfassung
+Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
 
+###### Vorgänger-/ Originalversion
+
+###### Anwendungsbereich
+
+###### Theoretischer Hintergrund
+
+
+###### Auswertung / Interpretation
+Gesamtscore (GSI) sowie Werte für die Subskalen Somatisierung, Zwanghaftigkeit, Unsicherheit im Sozialkontakt, Depressivität, Ängstlichkeit, Aggressivität/Feindseligkeit, Phobische Angst, Paranoides Denken und Psychotizismus, plus 4 Zusatzitems
+
+###### Quelle / Printversion
+
+
+###### Weiterführende Links
 
 ###Contact
 *Optinomic GmbH*   
