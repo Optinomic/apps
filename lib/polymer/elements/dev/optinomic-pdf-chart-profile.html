@@ -648,11 +648,10 @@
                     this.clinic_samples.dimensions.forEach(function(dim, dimID) {
                         clinic_sample_dive.array.push(dim.array.length - 1);
                     });
-                    have_dive = true;
                     console.log("Defaultstichprobe erstellt!");
                 };
 
-                if ((have_dive) && (this._hasValue(this.clinic_samples))) {
+                if ((d.ks_dive.defined) && (this._hasValue(this.clinic_samples))) {
                     // Klinikstichprobe & Dive vorhanden
 
                     // ---- Set ----
