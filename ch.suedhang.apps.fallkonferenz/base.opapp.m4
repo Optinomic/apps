@@ -23,6 +23,7 @@ include(readme.md)
 [template overview 6 7]
 include(../lib/polymer/index.m4)
 include(elements/bscl-element.html)
+include(../lib/polymer/elements/dev/optinomic-app-info.html)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/view.html)
 
