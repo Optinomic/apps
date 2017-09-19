@@ -361,7 +361,7 @@
                 if (jobs_count >= jobs_total) {
                     do_build();
                 };   
-            };
+            }.bind(this);
 
 
             var _pdf_chart = this.get('_pdf_chart');
@@ -377,7 +377,7 @@
 
 
             var do_build = function() {
-            
+
                 this._pdf_content = null;
                 var _pdf_content = [];
                 var d = this.get('_d');
@@ -414,7 +414,7 @@
                 // this.set('_pdf_content', _pdf_content);
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
-            };
+            }.bind(this);
         },
 
         // -----------------------------
