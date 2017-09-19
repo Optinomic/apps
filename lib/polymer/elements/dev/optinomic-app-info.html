@@ -8,7 +8,18 @@
 
         .button_top {
             float: right;
-            margin: 6px;
+            margin-top: -6px;
+        }
+
+        .read_more {
+            color: #9E9E9E;
+            cursor: help;
+        }
+
+
+        .title {
+            margin-top: 24px;
+            color: #212121;
         }
 
         .readme_container {
@@ -31,13 +42,22 @@
                         <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
                     </div>
                 </div>
-                <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]&nbsp;<span on-tap="__toggleHelp" style="color:#9E9E9E">[ Weiterlesen ]</span></p>
+                <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]&nbsp;<span on-tap="__toggleHelp" class="read_more">[ Weiterlesen ]</span></p>
                 <iron-collapse id="collapse_help" horizontal>
-                    <h4 style="margin-top:24px;color:#212121">Hile (Readme)</h4>
-                    <div hidden$="[[!_show_help]]">
-                        <div class="readme_container">
-                            <div id="readme"></div>
-                        </div>
+                    <h2>[[_current_app.app.name]]</h2>
+                    <p class="caption" style="margin-top:-6px;">Version:[[_current_app.app.version]] | ID:[[_current_app.app.identifier]]</p>
+                    <h4 class="title">Entwickler</h4>
+                    <div class="readme_container">
+                        <p>[[_current_app.app.developer.company]]
+                            <br>[[_current_app.app.developer.first_name]] [[_current_app.app.developer.last_name]]
+                            <br><a href$="mailto:[[_current_app.app.developer.email]]">[[_current_app.app.developer.email]]</a>
+                            <br>[[_current_app.app.developer.phone]]
+                            <br><a href$="[[_current_app.app.developer.website]]" target="_blank">[[_current_app.app.developer.website]]</a>
+                        </p>
+                    </div>
+                    <h4 class="title">Hile (Readme)</h4>
+                    <div class="readme_container">
+                        <div id="readme"></div>
                     </div>
                 </iron-collapse>
             </div>
