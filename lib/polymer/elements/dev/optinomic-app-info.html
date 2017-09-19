@@ -36,7 +36,6 @@
         }
         </style>
         <!-- START -->
-        <p>Haaalo</p>
         <template is="dom-if" if="[[_current_app.found]]">
             <div>
                 <div class="button_top">
@@ -171,11 +170,12 @@
                     ]
                 };
 
+                var copy_make_pdf = JSON.parse(JSON.stringify(make_pdf));
 
-                this.set('pdfContent', JSON.parse(JSON.stringify(make_pdf));
-                this.pdfContent = JSON.parse(JSON.stringify(make_pdf));
+                this.set('pdfContent', copy_make_pdf);
+                this.pdfContent = copy_make_pdf;
 
-                this.fire('pdf-app-info', JSON.parse(JSON.stringify(make_pdf));
+                this.fire('pdf-app-info', copy_make_pdf);
 
                 console.log('(PDF) App-Info', this.pdfContent);
             };
