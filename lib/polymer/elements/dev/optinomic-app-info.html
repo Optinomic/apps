@@ -1,0 +1,110 @@
+<dom-module id="optinomic-app-info">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+         :host {
+            display: block;
+            font-family: 'Roboto', 'Noto', sans-serif;
+        }
+        </style>
+        <!-- START -->
+        <template is="dom-if" if="[[_current_app.found]]">
+            <div on-tap="__toggleHelp">
+                <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]</p>
+                <iron-collapse id="collapse_help">
+                    <div hidden$="[[!_show_help]]">
+                        <div class="readme_container">
+                            <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
+                            <div id="readme"></div>
+                        </div>
+                    </div>
+                </iron-collapse>
+            </div>
+        </template>
+    </template>
+    <script>
+    Polymer({
+
+        is: 'optinomic-app-info',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            appID: {
+                type: String
+            },
+            _current_app: {
+                type: Object,
+                statePath: function(state) {
+                    var return_obj = {
+                        "found": false,
+                        "app": {}
+                    };
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
+                            var appId = this.appId;
+                            state.apps.all.patient_modules.forEach(function(pm, appID) {
+                                if (pm.identifier === appId) {
+                                    return_obj = return_obj = {
+                                        "found": true,
+                                        "app": pm
+                                    };
+                                };
+                            });
+                        };
+                    };
+                    return return_obj;
+                }
+            },
+        },
+
+
+        // -------------------------------------
+        // User - Click Functions
+        // -------------------------------------
+        
+        __toggleHelp: function() {
+            var _show_help = this.get('_show_help');
+            _show_help = !_show_help;
+
+            var readme_box = this.$$('#readme');
+            // var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.app.readme_html;
+
+            var collapse_help = this.$$('#collapse_help');
+            collapse_help.toggle();
+
+
+            this.set('_show_help', _show_help);
+            // console.log('(Toggle) Help', _show_help);
+        },
+
+
+
+        // -------------------------------------
+        // Functions
+        // -------------------------------------
+
+
+
+        _hasValue: function(value) {
+            if ((value === null) || (value === "null") || (value === undefined) || (value === "")) {
+                return false;
+            } else {
+                return true;
+            };
+        },
+
+
+        // -------------------------------------
+        // Lifetime
+        // -------------------------------------
+        ready: function() {
+            this.set('_show_help', false);
+        },
+
+        attached: function() {},
+
+
+    });
+    </script>
+</dom-module>

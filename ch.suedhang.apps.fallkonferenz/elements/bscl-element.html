@@ -64,6 +64,7 @@
                         </template>
                     </div>
                 </div>
+                <optinomic-app-info app-id="[[appId]]"></optinomic-app-info>
                 <template is="dom-if" if="[[_current_app.found]]">
                     <div on-tap="__toggleHelp">
                         <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]</p>
