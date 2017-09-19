@@ -347,11 +347,37 @@
         },
 
         _buildPDF: function() {
-            this.set('_d.loading_string', '0/1');
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var loading_string = jobs_count + "/" + jobs_total;
+            this.set('_d.loading_string', loading_string);
+
+            var check = function() {
+                jobs_count = jobs_count + 1;
+                loading_string = jobs_count + "/" + jobs_total;
+                this.set('_d.loading_string', loading_string);
+                console.log('(PDF) Building: ', loading_string); 
+
+                if (jobs_count >= jobs_total) {
+                    do_build();
+                };   
+            };
+
+
             var _pdf_chart = this.get('_pdf_chart');
             var _pdf_app_info = this.get('_pdf_app_info');
 
             if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
+                check();
+            };
+
+            if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
+                check();
+            };
+
+
+            var do_build = function() {
+            
                 this._pdf_content = null;
                 var _pdf_content = [];
                 var d = this.get('_d');
