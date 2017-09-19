@@ -8,7 +8,7 @@
 
         .button_top {
             float: right;
-            margin-top: -6px;
+            margin-top: -5px;
         }
 
         .read_more {
@@ -18,7 +18,8 @@
 
 
         .title {
-            margin-top: 24px;
+            margin-top: 24px !important;
+            margin-bottom: 6px !important;
             color: #212121;
         }
 
@@ -28,7 +29,10 @@
             border-color: #EEEEEE;
             border-width: 1px;
             border-radius: 3px;
-            padding: 24px;
+            padding-top: 18px;
+            padding-bottom: 18px;
+            padding-left: 36px;
+            padding-right: 36px;
         }
         </style>
         <!-- START -->
@@ -45,7 +49,7 @@
                 <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]&nbsp;<span on-tap="__toggleHelp" class="read_more">[ Weiterlesen ]</span></p>
                 <iron-collapse id="collapse_help" horizontal>
                     <h2>[[_current_app.app.name]]</h2>
-                    <p class="caption" style="margin-top:-6px;">Version:[[_current_app.app.version]] | ID:[[_current_app.app.identifier]]</p>
+                    <p class="caption" style="margin-top:-18px;">Version:[[_current_app.app.version]] | ID:[[_current_app.app.identifier]]</p>
                     <h4 class="title">Entwickler</h4>
                     <div class="readme_container">
                         <p>[[_current_app.app.developer.company]]
@@ -58,6 +62,7 @@
                     <h4 class="title">Hile (Readme)</h4>
                     <div class="readme_container">
                         <div id="readme"></div>
+                        <p><span on-tap="__toggleHelp" class="read_more">[ Schliessen ]</span></p>
                     </div>
                 </iron-collapse>
             </div>
