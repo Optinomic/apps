@@ -30,10 +30,19 @@
             border-radius: 3px;
             padding: 24px;
         }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #EEEEEE;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #EEEEEE;
+            border-bottom-width: 1px;
+        }
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
-            <div class="grid-border-top">
-                <div is="title" class="layout horizontal flex">
+            <div class="">
+                <div id="title" class="layout horizontal flex">
                     <div class="flex">
                         <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
@@ -73,7 +82,9 @@
                             <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="content">
-                            <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
                             <template is="dom-if" if="[[_d.bscl_zusatzitems.defined]]" restamp="true">
                                 <h3>Zusatzangaben</h3>
                                 <vaadin-grid class="full_grid" aria-label="Zusatzangaben" items="[[_d.bscl_zusatzitems.array]]" column-reordering-allowed="true">
@@ -267,7 +278,7 @@
 
 
             this.set('_show_help', _show_help);
-            console.log('(Toggle) Help', _show_help);
+            // console.log('(Toggle) Help', _show_help);
         },
 
         // -----------------------------
