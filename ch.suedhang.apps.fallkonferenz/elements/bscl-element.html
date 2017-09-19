@@ -33,18 +33,20 @@
 
         .chart {
             border-top-style: solid;
-            border-top-color: #EEEEEE;
+            border-top-color: #F5F5F5;
             border-top-width: 1px;
             border-bottom-style: solid;
-            border-bottom-color: #EEEEEE;
+            border-bottom-color: #F5F5F5;
             border-bottom-width: 1px;
+            padding-top: 12px;
+            padding-bottom: 12px;
         }
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
             <div class="">
                 <div id="title" class="layout horizontal flex">
                     <div class="flex">
-                        <optinomic-title small h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
+                        <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
                     <div>
                         <template is="dom-if" if="[[_current_app.found]]">
@@ -63,7 +65,7 @@
                     </div>
                 </div>
                 <template is="dom-if" if="[[_current_app.found]]">
-                    <p>[[_current_app.app.description]]</p>
+                    <p><b>[[_current_app.app.short_description]]:</b>&nbsp;[[_current_app.app.description]]</p>
                     <iron-collapse id="collapse_help">
                         <div hidden$="[[!_show_help]]">
                             <div class="readme_container">
