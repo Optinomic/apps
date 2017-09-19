@@ -376,7 +376,7 @@
             };
 
 
-            var do_build = function() {
+            var do_build = function(_pdf_chart, _pdf_app_info) {
 
                 this._pdf_content = null;
                 var _pdf_content = [];
@@ -405,9 +405,7 @@
 
                 // Build PDF
                 _pdf_content.push(title);
-                if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
-                    _pdf_content.push(_pdf_app_info);
-                };
+                _pdf_content.push(_pdf_app_info);
                 _pdf_content.push(_pdf_chart);
 
                 // Store
