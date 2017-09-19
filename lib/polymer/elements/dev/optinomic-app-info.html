@@ -148,7 +148,7 @@
         },
 
 
-        _buildPDF: function(value) {
+        _buildPDF: function() {
             var _current_app = this.get('_current_app');
             if (_current_app.found) {
 
@@ -170,9 +170,10 @@
                     ]
                 };
 
+                this.fire('pdf-app-info', make_pdf);
+
                 this.set('pdfContent', make_pdf);
                 this.pdfContent = make_pdf;
-                this.fire('pdf_app_info', make_pdf);
 
 
                 console.log('(PDF) App-Info', this.pdfContent);
