@@ -358,7 +358,8 @@
             var jobs_count = 0;
             var jobs_total = 1;
             var loading_string = jobs_count + "/" + jobs_total;
-            console.log('(PDF) Building: ', loading_string); 
+            console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info); 
+
             this.set('_d.loading_string', loading_string);
 
 
