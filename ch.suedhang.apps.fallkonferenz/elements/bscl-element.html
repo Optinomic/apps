@@ -54,7 +54,7 @@
                             <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="content">
-                            <optinomic-app-info app-id="[[appId]]"></optinomic-app-info>
+                            <optinomic-app-info app-id="[[appId]]" pdf-content="{{_pdf_app_info}}"></optinomic-app-info>
 
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
@@ -221,6 +221,11 @@
                 value: null,
                 observer: '_buildPDF'
             },
+            _pdf_app_info: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            }
         },
 
 
@@ -344,6 +349,8 @@
         _buildPDF: function() {
             this.set('_d.loading_string', '0/1');
             var _pdf_chart = this.get('_pdf_chart');
+            var _pdf_app_info = this.get('_pdf_app_info');
+
             if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
                 this._pdf_content = null;
                 var _pdf_content = [];
@@ -369,8 +376,12 @@
                     "margin": [0, 0, 0, 12]
                 };
 
+
                 // Build PDF
                 _pdf_content.push(title);
+                if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
+                    _pdf_content.push(_pdf_app_info);
+                };
                 _pdf_content.push(_pdf_chart);
 
                 // Store

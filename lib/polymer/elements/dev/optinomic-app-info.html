@@ -100,8 +100,14 @@
                         };
                     };
                     return return_obj;
-                }
+                },
+                observer: '_buildPDF'
             },
+            pdfContent: {
+                type: Object,
+                notify: true,
+                reflectToAttribute: true
+            }
         },
 
 
@@ -142,11 +148,40 @@
         },
 
 
+        _buildPDF: function(value) {
+            if (_current_app.found) {
+
+                var make_pdf = {
+                    "style": "p",
+                    "text": [{
+                            "text": _current_app.app.short_description,
+                            "bold": true
+                        },
+                        {
+                            "text": " ",
+                            "bold": true
+                        },
+                        {
+                            "text": _current_app.app.description,
+                            "bold": false
+                        }
+                    ]
+                };
+
+                this.set('pdfContent', make_pdf);
+
+                console.log('(PDF) App-Info', this.pdfContent);
+            };
+        },
+
+
         // -------------------------------------
         // Lifetime
         // -------------------------------------
         ready: function() {
             this.set('_show_help', false);
+            this.set('pdfContent', null);
+
         },
 
         attached: function() {},
