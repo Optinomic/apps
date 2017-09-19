@@ -38,8 +38,10 @@
             border-bottom-style: solid;
             border-bottom-color: #F5F5F5;
             border-bottom-width: 1px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-top: 12px;
+            margin-bottom: 12px;
         }
         </style>
         <template is="dom-if" if="[[_d.init_done]]" restamp="true">
@@ -65,15 +67,17 @@
                     </div>
                 </div>
                 <template is="dom-if" if="[[_current_app.found]]">
-                    <p><b>[[_current_app.app.short_description]]:</b>&nbsp;[[_current_app.app.description]]</p>
-                    <iron-collapse id="collapse_help">
-                        <div hidden$="[[!_show_help]]">
-                            <div class="readme_container">
-                                <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
-                                <div id="readme"></div>
+                    <div on-tap="__toggleHelp">
+                        <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]</p>
+                        <iron-collapse id="collapse_help">
+                            <div hidden$="[[!_show_help]]">
+                                <div class="readme_container">
+                                    <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
+                                    <div id="readme"></div>
+                                </div>
                             </div>
-                        </div>
-                    </iron-collapse>
+                        </iron-collapse>
+                    </div>
                 </template>
                 <template is="dom-if" if="[[_sr.have_data]]">
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
