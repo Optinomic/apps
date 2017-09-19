@@ -22,15 +22,6 @@
             border-bottom-style: none;
         }
 
-        .readme_container {
-            background-color: #FAFAFA;
-            border-style: solid;
-            border-color: #EEEEEE;
-            border-width: 1px;
-            border-radius: 3px;
-            padding: 24px;
-        }
-
         .chart {
             border-top-style: solid;
             border-top-color: #F5F5F5;
@@ -49,35 +40,11 @@
                         <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
                     </div>
                     <div>
-                        <template is="dom-if" if="[[_current_app.found]]">
-                            <div hidden$="[[_show_help]]">
-                                <paper-icon-button class="grey" on-tap="__toggleHelp" icon="help-outline"></paper-icon-button>
-                            </div>
-                            <div hidden$="[[!_show_help]]">
-                                <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
-                            </div>
-                        </template>
-                    </div>
-                    <div>
                         <template is="dom-if" if="[[_pdf_ready]]">
                             <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
                         </template>
                     </div>
                 </div>
-                <optinomic-app-info app-id="[[appId]]"></optinomic-app-info>
-                <template is="dom-if" if="[[_current_app.found]]">
-                    <div on-tap="__toggleHelp">
-                        <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]</p>
-                        <iron-collapse id="collapse_help">
-                            <div hidden$="[[!_show_help]]">
-                                <div class="readme_container">
-                                    <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
-                                    <div id="readme"></div>
-                                </div>
-                            </div>
-                        </iron-collapse>
-                    </div>
-                </template>
                 <template is="dom-if" if="[[_sr.have_data]]">
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                         <div id="pdf">
@@ -87,6 +54,8 @@
                             <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="content">
+                            <optinomic-app-info app-id="[[appId]]"></optinomic-app-info>
+
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                             </div>
@@ -262,28 +231,6 @@
         __toggle_print: function() {
             var print_button = this.$$('#collapse_print');
             print_button.toggle();
-
-            // Hide Help when visible
-            var _show_help = this.get('_show_help');
-            if (_show_help) {
-                this.__toggleHelp();    
-            };
-        },
-
-        __toggleHelp: function() {
-            var _show_help = this.get('_show_help');
-            _show_help = !_show_help;
-
-            var readme_box = this.$$('#readme');
-            // var readme_box = this.$.readme;
-            readme_box.innerHTML = this._current_app.app.readme_html;
-
-            var collapse_help = this.$$('#collapse_help');
-            collapse_help.toggle();
-
-
-            this.set('_show_help', _show_help);
-            // console.log('(Toggle) Help', _show_help);
         },
 
         // -----------------------------

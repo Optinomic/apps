@@ -5,15 +5,37 @@
             display: block;
             font-family: 'Roboto', 'Noto', sans-serif;
         }
+
+        .button_top {
+            float: right;
+            margin: 6px;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
         </style>
         <!-- START -->
         <template is="dom-if" if="[[_current_app.found]]">
-            <div on-tap="__toggleHelp">
-                <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]</p>
-                <iron-collapse id="collapse_help">
+            <div>
+                <div class="button_top">
+                    <div hidden$="[[_show_help]]">
+                        <paper-icon-button class="grey" on-tap="__toggleHelp" icon="help-outline"></paper-icon-button>
+                    </div>
+                    <div hidden$="[[!_show_help]]">
+                        <paper-icon-button class="grey" on-tap="__toggleHelp" icon="close"></paper-icon-button>
+                    </div>
+                </div>
+                <p><b>[[_current_app.app.short_description]]</b>&nbsp;[[_current_app.app.description]]&nbsp;<span on-tap="__toggleHelp" style="color:#9E9E9E">[ Weiterlesen ]</span></p>
+                <iron-collapse id="collapse_help" horizontal>
+                    <h4 style="margin-top:24px;color:#212121">Hile (Readme)</h4>
                     <div hidden$="[[!_show_help]]">
                         <div class="readme_container">
-                            <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
                             <div id="readme"></div>
                         </div>
                     </div>
@@ -61,7 +83,7 @@
         // -------------------------------------
         // User - Click Functions
         // -------------------------------------
-        
+
         __toggleHelp: function() {
             var _show_help = this.get('_show_help');
             _show_help = !_show_help;
