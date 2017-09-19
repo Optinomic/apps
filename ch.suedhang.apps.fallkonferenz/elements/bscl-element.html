@@ -54,7 +54,7 @@
                             <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="content">
-                            <optinomic-app-info app-id="[[appId]]" pdf-content="{{_pdf_app_info}}" on-pdf-app-info="_event_pdf_app_info"></optinomic-app-info>
+                            <optinomic-app-info app-id="[[appId]]" on-pdf-app-info="_event_pdf_app_info"></optinomic-app-info>
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                             </div>
@@ -350,7 +350,8 @@
         },
 
         _event_pdf_app_info: function(e) {
-            console.warn('_event_pdf_app_info ==> ', e);
+            this.set('_pdf_app_info', e.detail);
+            console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         _buildPDF: function() {
