@@ -105,8 +105,8 @@
             },
             pdfContent: {
                 type: Object,
-                notify: true,
-                reflectToAttribute: true
+                reflectToAttribute: true,
+                notify: true
             }
         },
 
@@ -171,8 +171,8 @@
                 };
 
 
-                // this.set('pdfContent', make_pdf);
-                this.pdfContent = make_pdf;
+                this.pdfContent = {};
+                this.set('pdfContent', make_pdf);
 
                 this.fire('pdf-app-info', make_pdf);
 
