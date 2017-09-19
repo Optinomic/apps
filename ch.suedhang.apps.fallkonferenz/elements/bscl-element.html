@@ -356,7 +356,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 1;
+            var jobs_total = 2;
             var loading_string = jobs_count + "/" + jobs_total;
             console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
 
@@ -374,7 +374,6 @@
                 // Definitions
                 var title = {
                     "stack": [
-                        // second column consists of paragraphs
                         {
                             "text": d.title + " (" + d.name + ")",
                             "style": "h1",
@@ -394,7 +393,7 @@
 
                 // Build PDF
                 _pdf_content.push(title);
-                // _pdf_content.push(_pdf_app_info);
+                _pdf_content.push(_pdf_app_info);
                 _pdf_content.push(_pdf_chart);
 
                 // Store
