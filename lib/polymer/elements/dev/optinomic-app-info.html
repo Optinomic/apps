@@ -171,10 +171,10 @@
                 };
 
 
-                this.set('pdfContent', {});
-                this.pdfContent = make_pdf;
+                this.set('pdfContent', JSON.parse(JSON.stringify(make_pdf));
+                this.pdfContent = JSON.parse(JSON.stringify(make_pdf));
 
-                this.fire('pdf-app-info', make_pdf);
+                this.fire('pdf-app-info', JSON.parse(JSON.stringify(make_pdf));
 
                 console.log('(PDF) App-Info', this.pdfContent);
             };
