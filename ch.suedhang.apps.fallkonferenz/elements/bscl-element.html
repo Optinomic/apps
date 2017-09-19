@@ -348,7 +348,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 2;
+            var jobs_total = 1;
             var loading_string = jobs_count + "/" + jobs_total;
             console.log('(PDF) Building: ', loading_string); 
             this.set('_d.loading_string', loading_string);
@@ -385,7 +385,7 @@
 
                 // Build PDF
                 _pdf_content.push(title);
-                _pdf_content.push(_pdf_app_info);
+                // _pdf_content.push(_pdf_app_info);
                 _pdf_content.push(_pdf_chart);
 
                 // Store
@@ -415,10 +415,10 @@
                 console.log('-> ', this._pdf_chart);
             };
 
-            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
-                check();
-                console.log('-> ', this._pdf_app_info);
-            };
+            //  if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+            //      check();
+            //      console.log('-> ', this._pdf_app_info);
+            //  };
 
 
         },
