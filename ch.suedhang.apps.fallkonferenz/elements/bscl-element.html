@@ -151,6 +151,10 @@
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
+        listeners: {
+            'pdf_app_info': 'event_pdf_app_info'
+        },
+
         properties: {
             appId: {
                 type: String,
@@ -344,6 +348,10 @@
                 };
 
             }, 250);
+        },
+
+        _event_pdf_app_info: function(e) {
+            console.warn('_event_pdf_app_info ==> ' , e);
         },
 
         _buildPDF: function() {
