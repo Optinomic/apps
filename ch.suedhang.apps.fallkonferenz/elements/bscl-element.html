@@ -151,10 +151,6 @@
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
-        listeners: {
-            'pdf-app-info': '_event_pdf_app_info'
-        },
-
         properties: {
             appId: {
                 type: String,
@@ -359,12 +355,14 @@
             var jobs_count = 0;
             var jobs_total = 2;
             var loading_string = jobs_count + "/" + jobs_total;
-            console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
+            //console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
 
             this.set('_d.loading_string', loading_string);
 
 
+            // ------------------------------
             // Create PDF
+            // ------------------------------
 
             var do_build = function(_pdf_chart, _pdf_app_info) {
 
@@ -400,17 +398,19 @@
                 // Store
                 // this.set('_pdf_content', _pdf_content);
                 this._pdf_content = _pdf_content;
+                this.fire('pdfready-bscl', _pdf_content);
                 this.set('_pdf_ready', true);
             }.bind(this);
 
 
-            // Check if Content is there
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
 
             var check = function() {
                 jobs_count = jobs_count + 1;
                 loading_string = jobs_count + "/" + jobs_total;
                 this.set('_d.loading_string', loading_string);
-                console.log('(PDF) Building: ', loading_string);
 
                 if (jobs_count >= jobs_total) {
                     do_build(this._pdf_chart, this._pdf_app_info);
@@ -420,12 +420,10 @@
 
 
             if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
-                console.log('-> ', this._pdf_chart);
                 check();
             };
 
             if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
-                console.log('-> ', this._pdf_app_info);
                 check();
             };
 
