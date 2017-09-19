@@ -352,29 +352,8 @@
             var loading_string = jobs_count + "/" + jobs_total;
             this.set('_d.loading_string', loading_string);
 
-            var check = function() {
-                jobs_count = jobs_count + 1;
-                loading_string = jobs_count + "/" + jobs_total;
-                this.set('_d.loading_string', loading_string);
-                console.log('(PDF) Building: ', loading_string); 
 
-                if (jobs_count >= jobs_total) {
-                    do_build();
-                };   
-            }.bind(this);
-
-
-            var _pdf_chart = this.get('_pdf_chart');
-            var _pdf_app_info = this.get('_pdf_app_info');
-
-            if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
-                check();
-            };
-
-            if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
-                check();
-            };
-
+            // Create PDF
 
             var do_build = function(_pdf_chart, _pdf_app_info) {
 
@@ -413,6 +392,34 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
             }.bind(this);
+
+
+            // Check if Content is there
+
+            var check = function() {
+                jobs_count = jobs_count + 1;
+                loading_string = jobs_count + "/" + jobs_total;
+                this.set('_d.loading_string', loading_string);
+                console.log('(PDF) Building: ', loading_string); 
+
+                if (jobs_count >= jobs_total) {
+                    do_build(this.get('_pdf_chart'), this.get('_pdf_app_info'));
+                };   
+            }.bind(this);
+
+
+            var _pdf_chart = this.get('_pdf_chart');
+            var _pdf_app_info = this.get('_pdf_app_info');
+
+            if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
+                check();
+            };
+
+            if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
+                check();
+            };
+
+
         },
 
         // -----------------------------
