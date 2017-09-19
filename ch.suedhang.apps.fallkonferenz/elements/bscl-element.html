@@ -54,8 +54,7 @@
                             <optinomic-pdf-chart-profile language="de" options="[[_d.bscl.options_pdf]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="content">
-                            <optinomic-app-info app-id="[[appId]]" pdf-content="{{_pdf_app_info}}"></optinomic-app-info>
-
+                            <optinomic-app-info app-id="[[appId]]" pdf-content="{{_pdf_app_info}}" on-pdf-app-info="_event_pdf_app_info"></optinomic-app-info>
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
                             </div>
@@ -351,14 +350,14 @@
         },
 
         _event_pdf_app_info: function(e) {
-            console.warn('_event_pdf_app_info ==> ' , e);
+            console.warn('_event_pdf_app_info ==> ', e);
         },
 
         _buildPDF: function() {
             var jobs_count = 0;
             var jobs_total = 1;
             var loading_string = jobs_count + "/" + jobs_total;
-            console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info); 
+            console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
 
             this.set('_d.loading_string', loading_string);
 
@@ -410,24 +409,24 @@
                 jobs_count = jobs_count + 1;
                 loading_string = jobs_count + "/" + jobs_total;
                 this.set('_d.loading_string', loading_string);
-                console.log('(PDF) Building: ', loading_string); 
+                console.log('(PDF) Building: ', loading_string);
 
                 if (jobs_count >= jobs_total) {
                     do_build(this._pdf_chart, this._pdf_app_info);
-                };   
+                };
             }.bind(this);
 
 
 
             if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
-                check();
                 console.log('-> ', this._pdf_chart);
+                check();
             };
 
-            //  if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
-            //      check();
-            //      console.log('-> ', this._pdf_app_info);
-            //  };
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                console.log('-> ', this._pdf_app_info);
+                check();
+            };
 
 
         },
@@ -444,7 +443,6 @@
 
         ready: function() {
             this.set('_show_help', false);
-            this.set('_pdf_app_info', null);
             this._init();
         }
     });
