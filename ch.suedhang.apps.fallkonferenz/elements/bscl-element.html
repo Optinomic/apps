@@ -350,6 +350,7 @@
             var jobs_count = 0;
             var jobs_total = 2;
             var loading_string = jobs_count + "/" + jobs_total;
+            console.log('(PDF) Building: ', loading_string); 
             this.set('_d.loading_string', loading_string);
 
 
@@ -403,20 +404,18 @@
                 console.log('(PDF) Building: ', loading_string); 
 
                 if (jobs_count >= jobs_total) {
-                    do_build(this.get('_pdf_chart'), this.get('_pdf_app_info'));
+                    do_build(this._pdf_chart, this._pdf_app_info);
                 };   
             }.bind(this);
 
 
-            var _pdf_chart = this.get('_pdf_chart');
-            var _pdf_app_info = this.get('_pdf_app_info');
 
-            if ((_pdf_chart !== undefined) && (_pdf_chart !== null)) {
+            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
                 check();
                 console.log('-> ', _pdf_chart);
             };
 
-            if ((_pdf_app_info !== undefined) && (_pdf_app_info !== null)) {
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
                 check();
                 console.log('-> ', _pdf_app_info);
             };
