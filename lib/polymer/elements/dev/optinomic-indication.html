@@ -1,4 +1,4 @@
-<dom-module id="optinomic-nodata">
+<dom-module id="optinomic-indication">
     <template>
         <style include="shared-styles iron-flex iron-flex-alignment">
          :host {
@@ -8,7 +8,6 @@
 
         .ausruf {
             font-size: 48px;
-            color: #F44336;
             width: 48px;
         }
 
@@ -23,7 +22,7 @@
             padding-left: 24px;
             padding-top: 12px;
             padding-bottom: 12px;
-            width: 90%;
+            width: 97%;
         }
         </style>
         <!-- START -->
@@ -31,7 +30,7 @@
         <div class="container">
             <div class="layout horizontal flex">
                 <div>
-                    <p class="ausruf">!</p>
+                    <p class="ausruf" style$="color:[[_color]]">!</p>
                 </div>
                 <div class="flex">
                     <div>
@@ -45,28 +44,49 @@
     <script>
     Polymer({
 
-        is: 'optinomic-nodata',
+        is: 'optinomic-indication',
 
         behaviors: [],
 
         properties: {
+            sign: {
+                type: String,
+                value: "!",
+                observer: "_signChanged"
+            },
             title: {
                 type: String,
                 value: "Keine Daten vorhanden.",
                 observer: "_titleChanged"
+            },
+            color: {
+                type: String,
+                value: "#F44336",
+                observer: "_colorChanged"
             }
+        },
+
+
+        // -------------------------------------
+        // Observer
+        // -------------------------------------
+
+        _signChanged: function() {
+            this._sign = this.sign;
+        },
+
+        _titleChanged: function() {
+            this._title = this.title;
+        },
+
+        _colorChanged: function() {
+            this._color = this.color;
         },
 
 
         // -------------------------------------
         // Functions
         // -------------------------------------
-
-
-        _titleChanged: function() {
-            this._title = this.title + ": Keine Daten vorhanden.";
-            console.error('_titleChanged', this.title);
-        },
 
         _formatDateCH: function(date_string) {
             date_string = date_string || null

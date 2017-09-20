@@ -135,7 +135,7 @@
                 </template>
             </template>
             <template is="dom-if" if="[[!_sr.have_data]]">
-                <optinomic-nodata title="[[_d.name]]"></optinomic-nodata>
+                <optinomic-indication sign="!" title="[[_d.name]] + ': Keine Daten vorhanden.'" color="#F44336"></optinomic-indication>
             </template>
         </div>
     </template>
