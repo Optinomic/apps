@@ -64,20 +64,20 @@
                                 <vaadin-grid class="full_grid" aria-label="Zusatzangaben" items="[[_d.bscl_zusatzitems.array]]" column-reordering-allowed="true">
                                     <vaadin-grid-column-group>
                                         <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
-                                        <vaadin-grid-column width="100px" flex-grow="0">
+                                        <vaadin-grid-column width="90px" flex-grow="0">
                                             <template class="header">
                                                 <vaadin-grid-sorter path="mz_date">
-                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Datum</span>
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
                                                 <span draggable="true" class="body-1" style="text-align: right">[[item.mz_datum]]</span>
                                             </template>
                                         </vaadin-grid-column>
-                                        <vaadin-grid-column width="180px" flex-grow="0">
+                                        <vaadin-grid-column width="170px" flex-grow="0">
                                             <template class="header">
                                                 <vaadin-grid-sorter path="mz_id">
-                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
