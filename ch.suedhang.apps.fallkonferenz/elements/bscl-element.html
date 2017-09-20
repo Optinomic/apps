@@ -498,36 +498,21 @@
                 var _pdf_content = [];
                 var d = this.get('_d');
 
-                // Definitions
-                var title = {
-                    "id": "app_title",
-                    "stack": [{
-                        "text": d.title + " (" + d.name + ")",
-                        "style": "h1",
-                        "margin": [0, 12, 0, 0],
-                        "alignment": "left"
-                    }, {
-                        "text": d.subtitle,
-                        "style": "caption",
-                        "color": "#616161",
-                        "margin": [1, 0, 0, 0],
-                        "alignment": "left"
-                    }],
-                    "margin": [0, 0, 0, 12]
-                };
 
-
+                // --------------------------
                 // Build PDF
-                _pdf_content.push(title);
+                // --------------------------
+                _pdf_content.push(this._title(d.title, d.subtitle));
                 _pdf_content.push(_pdf_chart);
-                _pdf_content.push(this._pdfmake_zusatzitems());
+                _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
                 _pdf_content.push(_pdf_app_info);
 
 
+                // --------------------------
                 // Store
-                // this.set('_pdf_content', _pdf_content);
-                this._pdf_content = _pdf_content;
+                // --------------------------
                 this.fire('pdfready-bscl', _pdf_content);
+                this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
             }.bind(this);
 
