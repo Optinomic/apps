@@ -19,7 +19,10 @@
             border-bottom-color: #F5F5F5;
             border-bottom-style: solid;
             border-bottom-width: 1px;
-            padding: 24px;
+            padding-left: 24px;
+            padding-left: 24px;
+            padding-top: 12px;
+            padding-bottom: 12px;
         }
         </style>
         <!-- START -->
@@ -48,7 +51,7 @@
         properties: {
             title: {
                 type: String,
-                value: null,
+                value: "Keine Daten vorhanden.",
                 observer: "_titleChanged"
             }
         },
@@ -87,7 +90,6 @@
             var date = new Date();
             date = this._formatDateCH(date.toISOString());
             this.set('_date', date);
-            this.set('_title', "Keine Daten vorhanden.");
         },
 
         attached: function() {},
