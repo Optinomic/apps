@@ -42,7 +42,7 @@
             </div>
             <div>
                 <template is="dom-if" if="[[_pdf_ready]]">
-                    <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    <paper-icon-button class="pink" on-tap="__toggle_print" icon="print"></paper-icon-button>
                 </template>
             </div>
         </div>
@@ -278,7 +278,7 @@
         // Functions
         // -----------------------------
 
-        __init: function() {
+        _init: function() {
 
             var d = {};
 
@@ -684,13 +684,13 @@
         // Lifecycle
         // -----------------------------
 
-        __loadData: function() {
+        _loadData: function() {
             include(_loadData.m4)
         },
 
         ready: function() {
-            this.__loadData();
-            this.__init();
+            this._loadData();
+            this._init();
         }
     });
     </script>
