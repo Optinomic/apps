@@ -96,12 +96,11 @@ makepdfBehavior = {
         };
     },
 
-    _heading: function(text_left, text_left_sub, text_right, style) {
+    _heading: function(text_left, text_left_sub, style) {
 
         // Init
         text_left = text_left === undefined ? "Optinomic" : text_left;
         text_left_sub = text_left_sub === undefined ? null : text_left_sub;
-        text_right = text_right === undefined ? null : text_right;
         style = style === undefined ? "h2" : style;
 
         if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
@@ -136,28 +135,6 @@ makepdfBehavior = {
 
 
         var return_obj = left;
-
-
-        if (text_right !== null) {
-
-            var right = {
-                "text": " " + text_right,
-                "style": style,
-                "alignment": "right",
-                "fontSize": 9,
-                "bold": false,
-                "color": "#9E9E9E"
-            };
-
-
-            var cols = {
-                "columns": []
-            };
-            cols.columns.push(left);
-            cols.columns.push(right);
-
-            return_obj = cols;
-        };
 
         return return_obj;
     },
