@@ -356,14 +356,14 @@
                 // --------------------------
                 // Store
                 // --------------------------
-                this.fire('pdfready', _pdf_content);
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
+                this.fire('pdfready', _pdf_content);
 
                 // Open "Collapse" when ready.
                 setTimeout(function() {
                     this.__toggle_print();
-                }.bind(this), 100);
+                }.bind(this), 150);
 
             }.bind(this);
 
