@@ -243,7 +243,6 @@
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
 
-
                         if (this._sr.have_data === true) {
                             // ---------------------------------------------------------------------
                             // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
@@ -307,7 +306,9 @@
 
                             this.set('_d.bscl_zusatzitems', zusatzitems);
                             console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems);
-
+                        } else {
+                            // Build PDF even with no Data.
+                            this._buildPDF();
                         };
                     };
                 };
@@ -455,8 +456,10 @@
             var jobs_count = 0;
             var jobs_total = 2;
             var jobs_done = {};
+            var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
-            //console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
+
+
 
             this.set('_d.loading_string', loading_string);
 
@@ -465,7 +468,7 @@
             // Create PDF
             // ------------------------------
 
-            var do_build = function(_pdf_chart, _pdf_app_info) {
+            var do_build = function() {
 
                 this._pdf_content = null;
                 var _pdf_content = [];
@@ -476,14 +479,20 @@
                 // Build PDF
                 // --------------------------
 
-                _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
-                _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                _pdf_content.push(_pdf_chart);
-                _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
-                _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
-                _pdf_content.push(_pdf_app_info);
-
+                if (build_full) {
+                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._pdf_chart);
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
+                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
+                    _pdf_content.push(this._pdf_app_info);
+                } else {
+                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._noData(d.name));
+                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
+                    _pdf_content.push(this._pdf_app_info);
+                };
 
                 // --------------------------
                 // Store
@@ -515,11 +524,13 @@
                 this.set('_d.loading_string', loading_string);
 
                 if (jobs_count >= jobs_total) {
-                    do_build(this._pdf_chart, this._pdf_app_info);
+                    do_build();
                 };
             }.bind(this);
 
 
+            //  Jobs Done?
+            //  Check incoming Data
 
             if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
                 jobs_done._pdf_chart = true;
@@ -530,6 +541,35 @@
                 jobs_done._pdf_app_info = true;
                 check();
             };
+
+            //  Check "No Data"
+
+            if (this._sr.have_data === false) {
+                // Confirm all "jobs" with "false"
+                jobs_done._pdf_chart = false;
+
+                build_full = false;
+                check();
+            };
+
+
+            // ------------------------------
+            // Debug
+            // ------------------------------
+            var debug_build_pdf = {
+                "document": "BSCL",
+                "jobs_count": jobs_count,
+                "jobs_total": jobs_total,
+                "jobs_done": jobs_done,
+                "build_full": build_full,
+                "loading_string": loading_string,
+                "input": {
+                    "_pdf_chart": this._pdf_chart,
+                    "_pdf_app_info": this._pdf_app_info
+                }
+            };
+            console.log('(PDF) Building: ', debug_build_pdf);
+
         },
 
         // -----------------------------
