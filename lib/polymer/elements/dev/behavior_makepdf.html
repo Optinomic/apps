@@ -201,26 +201,32 @@ makepdfBehavior = {
             text = title + ": Keine Daten vorhanden.";
         };
 
+        var no_data = {
+            "table": {
+                "widths": [12, "*"],
+                "body": [
+                    [
+                        { "text": "!", "color": "#BDBDBD", "fontSize": 36, "margin": [0, 0, 0, 0] }, {
+                            "stack": [
+                                { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                                { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                            ],
+                            "margin": [0, 0, 0, 12]
+                        }
+                    ],
+                ]
+            },
+            "layout": "noBorders"
+        };
+
         var return_obj = {
-            "stack": [{
-                "table": {
-                    "widths": [12, "*"],
-                    "body": [
-                        [
-                            { "text": "!", "color": "#BDBDBD", "fontSize": 36, "margin": [0, 0, 0, 0] }, {
-                                "stack": [
-                                    { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
-                                    { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
-                                ],
-                                "margin": [0, 0, 0, 12]
-                            }
-                        ],
-                    ]
-                },
-                "layout": "noBorders"
-            }],
+            "stack": [],
             "margin": [0, 12, 0, space_bottom]
         };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(no_data);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
 
         return return_obj;
     },

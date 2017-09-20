@@ -491,7 +491,7 @@
                     _pdf_content.push(this._pdf_app_info);
                 } else {
                     _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
-                    _pdf_content.push(this._noData(d.name));
+                    _pdf_content.push(this._noData(d.name, 12));
                     _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
                     _pdf_content.push(this._pdf_app_info);
                 };
@@ -499,7 +499,7 @@
                 // --------------------------
                 // Store
                 // --------------------------
-                this.fire('pdfready-bscl', _pdf_content);
+                this.fire('pdfready', _pdf_content);
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
             }.bind(this);
