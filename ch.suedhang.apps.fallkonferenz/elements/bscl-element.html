@@ -341,11 +341,9 @@
             console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
-
         _pdfmake_zusatzitems: function() {
 
             var d = this.get('_d');
-            console.log('bscl_zusatzitems');
             var allResults = d.bscl_zusatzitems.array;
 
             // -----------------------------------------------
@@ -474,7 +472,7 @@
 
 
             // Debug
-            console.log(JSON.stringify(return_stack, null, 2));
+            // console.log(JSON.stringify(return_stack, null, 2));
 
 
             return return_stack;
@@ -483,6 +481,7 @@
         _buildPDF: function() {
             var jobs_count = 0;
             var jobs_total = 2;
+            var jobs_done = {};
             var loading_string = jobs_count + "/" + jobs_total;
             //console.log('(PDF) Building: ', loading_string, this._pdf_chart, this._pdf_app_info);
 
@@ -537,8 +536,19 @@
             // Check if all content is ready
             // ------------------------------
 
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
             var check = function() {
-                jobs_count = jobs_count + 1;
+                jobs_count = countProperties(jobs_done);
                 loading_string = jobs_count + "/" + jobs_total;
                 this.set('_d.loading_string', loading_string);
 
@@ -550,14 +560,14 @@
 
 
             if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
+                jobs_done._pdf_chart = true;
                 check();
             };
 
             if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
                 check();
             };
-
-
         },
 
         // -----------------------------
