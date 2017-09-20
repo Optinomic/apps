@@ -248,7 +248,7 @@ makepdfBehavior = {
         var date = new Date();
         date = this._formatDateCH(date.toISOString());
 
-        var data = {
+        var indication = {
             "table": {
                 "widths": [24, "*"],
                 "body": [
@@ -275,7 +275,7 @@ makepdfBehavior = {
         };
 
         return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
-        return_obj.stack.push(no_data);
+        return_obj.stack.push(indication);
         return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
 
         return this._keepTogether(return_obj, sign + "_indication");
