@@ -34,19 +34,20 @@
             margin-bottom: 12px;
         }
         </style>
-        <template is="dom-if" if="[[_d.init_done]]" restamp="true">
-            <div class="">
-                <div id="title" class="layout horizontal flex">
-                    <div class="flex">
-                        <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
-                    </div>
-                    <div>
-                        <template is="dom-if" if="[[_pdf_ready]]">
-                            <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
-                        </template>
-                    </div>
+        <div id="bscl_element">
+            <h1>!!! BSCL !!!</h1>
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
                 </div>
-                <template is="dom-if" if="[[_sr.have_data]]">
+                <div>
+                    <template is="dom-if" if="[[_pdf_ready]]">
+                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    </template>
+                </div>
+            </div>
+            <template is="dom-if" if="[[_sr.have_data]]">
+                <template is="dom-if" if="[[_d.init_done]]">
                     <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
                         <div id="pdf">
                             <iron-collapse id="collapse_print" horizontal>
@@ -71,7 +72,7 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">[[item.mz_typ]]<span class="caption"><br>[[item.mz_datum]]</span>
+                                                <span draggable="true" class="body-1">[[item.mz_typ]]<span class="caption"><br>[[item.mz_datum]]</span></span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
@@ -126,14 +127,14 @@
                         <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
                     </template>
                 </template>
-                <template is="dom-if" if="[[!_sr.have_data]]">
-                    <h3>Keine BSCL-Daten vorhanden.</h3>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <p style="color:#3F51B5">Initialisiere...</p>
                 </template>
-            </div>
-        </template>
-        <template is="dom-if" if="[[!_d.init_done]]">
-            <p style="color:#3F51B5">Initialisiere...</p>
-        </template>
+            </template>
+            <template is="dom-if" if="[[!_sr.have_data]]">
+                <h3>Keine BSCL-Daten vorhanden.</h3>
+            </template>
+        </div>
     </template>
     <script>
     Polymer({
