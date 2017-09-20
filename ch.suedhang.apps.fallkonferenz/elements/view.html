@@ -1,5 +1,10 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
@@ -31,27 +36,27 @@
             padding: 24px;
         }
         </style>
-        <div class="horizontal wrap">
-            <div class="flex app_title">
-                <optinomic-title nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+        <div id="title" class="layout horizontal flex">
+            <div class="flex">
+                <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
             </div>
             <div>
-                <div hidden$="[[_show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
-                </div>
-                <div hidden$="[[!_show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
-                </div>
+                <template is="dom-if" if="[[_pdf_ready]]">
+                    <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                </template>
             </div>
         </div>
-        <div hidden$="[[!_show_help]]">
-            <div class="readme_container">
-                <h4 style="margin:0;color:#212121">BESCHREIBUNG</h4>
-                <p>[[_current_app.description]]</p>
-                <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
-                <div id="readme"></div>
-            </div>
+        <template is="dom-if" if="[[_pdf_ready]]">
+            <iron-collapse id="collapse_print" horizontal>
+                <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+            </iron-collapse>
+        </template>
+        <div id="app_info">
+            <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
         </div>
+
+
+
         <div id="main_content">
             <div>
                 <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
@@ -202,7 +207,7 @@
                 </template>
             </div>
             <div class="grid-border-top">
-                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>
+                <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
             </div>
             <div>
                 <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
@@ -262,19 +267,26 @@
     Polymer({
         is: 'optinomic-template',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
         include(_properties.js)
 
-        __loadData: function() {
-            include(_loadData.m4)
-        },
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
 
         __init: function() {
 
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
+
+
+            d.name = "Fallkonferenz";
+            d.title = "Ergebnis-Übersicht";
+            d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
+
 
             include(definitions/actinfo.js)
             include(definitions/tmt.js)
@@ -285,6 +297,8 @@
             include(definitions/sci.js)
             include(definitions/whoqol.js)
 
+
+            d.init_done = true;
             this.set('_d', d);
             this.set('_show_help', false);
             console.log('INIT _d', d);
@@ -304,18 +318,6 @@
             } else {
                 return null;
             }
-        },
-
-        _toggleHelp: function() {
-            var _show_help = this.get('_show_help');
-            _show_help = !_show_help;
-
-            var readme_box = this.$$('#readme');
-            // var readme_box = this.$.readme;
-            readme_box.innerHTML = this._current_app.readme_html;
-
-            this.set('_show_help', _show_help);
-            console.log('(toggle) Help', _show_help);
         },
 
         _mergeActinfo: function() {
@@ -522,6 +524,137 @@
                 };
 
             }, 250);
+        },
+
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
+
+
+
+            this.set('_d.loading_string', loading_string);
+
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+
+                if (build_full) {
+                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._pdf_full_bscl);
+                } else {
+                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._noData(d.name, 24));
+                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
+                    _pdf_content.push(this._pdf_app_info);
+                };
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this.fire('pdfready', _pdf_content);
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
+            var check = function() {
+                jobs_count = countProperties(jobs_done);
+                loading_string = jobs_count + "/" + jobs_total;
+                this.set('_d.loading_string', loading_string);
+
+                if (jobs_count >= jobs_total) {
+                    do_build();
+                };
+            }.bind(this);
+
+
+            //  Jobs Done?
+            //  Check incoming Data
+
+            if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
+                jobs_done._pdf_full_bscl = true;
+                check();
+            };
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
+
+
+            // ------------------------------
+            // Debug
+            // ------------------------------
+            var debug_build_pdf = {
+                "document": "Fallkonferenz",
+                "jobs_count": jobs_count,
+                "jobs_total": jobs_total,
+                "jobs_done": jobs_done,
+                "build_full": build_full,
+                "loading_string": loading_string,
+                "input": {
+                    "_pdf_chart": this._pdf_chart,
+                    "_pdf_app_info": this._pdf_app_info
+                }
+            };
+            console.log('(PDF) Building: ', debug_build_pdf);
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            print_button.toggle();
+        },
+
+        // -----------------------------
+        // Event Handler
+        // -----------------------------
+
+        _event_pdf_full_bscl: function(e) {
+            this.set('_pdf_full_bscl', e.detail);
+            console.log('(event) _event_pdf_full_bscl ==> ', this._pdf_full_bscl);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        __loadData: function() {
+            include(_loadData.m4)
         },
 
         ready: function() {

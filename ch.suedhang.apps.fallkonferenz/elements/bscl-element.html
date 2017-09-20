@@ -135,7 +135,7 @@
                 </template>
             </template>
             <template is="dom-if" if="[[!_sr.have_data]]">
-                <optinomic-indication sign="!" title="[[_d.name]] + ': Keine Daten vorhanden.'" color="#F44336"></optinomic-indication>
+                <optinomic-indication sign="!" title="Keine Daten vorhanden." color="#F44336"></optinomic-indication>
             </template>
         </div>
     </template>
@@ -208,6 +208,7 @@
             var print_button = this.$$('#collapse_print');
             print_button.toggle();
         },
+
 
         // -----------------------------
         // Functions
@@ -316,11 +317,6 @@
                 };
 
             }, 250);
-        },
-
-        _event_pdf_app_info: function(e) {
-            this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         _pdfmake_zusatzitems: function() {
@@ -575,7 +571,16 @@
                 }
             };
             console.log('(PDF) Building: ', debug_build_pdf);
+        },
 
+
+        // -----------------------------
+        // Event Handler
+        // -----------------------------
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+            console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         // -----------------------------

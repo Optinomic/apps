@@ -126,6 +126,11 @@ properties: {
             "done": false
         }
     },
+    _pdf_full_bscl: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
 
     _d: {
         type: Object
