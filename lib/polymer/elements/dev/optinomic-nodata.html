@@ -13,7 +13,6 @@
         }
 
         .container {
-            margin-top: 12px;
             border-top-color: #F5F5F5;
             border-top-style: solid;
             border-top-width: 1px;
@@ -32,7 +31,7 @@
                 <div class="flex">
                     <div>
                         <p class="caption">[[_date]]</p>
-                        <p style="margin-top:-18px;">[[_title]]</p>
+                        <p style="margin-top:-12px;">[[_title]]</p>
                     </div>
                 </div>
             </div>
@@ -61,6 +60,7 @@
 
         _titleChanged: function() {
             this.set('_title', this.title + ": Keine Daten vorhanden.");
+            console.error('_titleChanged', this.title);
         },
 
         _formatDateCH: function(date_string) {
