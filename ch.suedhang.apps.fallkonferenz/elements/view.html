@@ -36,22 +36,22 @@
             padding: 24px;
         }
         </style>
-        <template is="dom-if" if="[[_d.init_done]]">
-            <div id="title" class="layout horizontal flex">
-                <div class="flex">
-                    <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
-                </div>
-                <div>
-                    <template is="dom-if" if="[[_pdf_ready]]">
-                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
-                    </template>
-                </div>
+        <div id="title" class="layout horizontal flex">
+            <div class="flex">
+                <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
             </div>
-            <template is="dom-if" if="[[_pdf_ready]]">
-                <iron-collapse id="collapse_print" horizontal>
-                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
-                </iron-collapse>
-            </template>
+            <div>
+                <template is="dom-if" if="[[_pdf_ready]]">
+                    <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                </template>
+            </div>
+        </div>
+        <template is="dom-if" if="[[_pdf_ready]]">
+            <iron-collapse id="collapse_print" horizontal>
+                <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+            </iron-collapse>
+        </template>
+        <template is="dom-if" if="[[_d.init_done]]">
             <div id="app_info">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
@@ -645,7 +645,7 @@
             var print_button = this.$$('#collapse_print');
 
             if ((print_button === null) || (print_button === undefined)) {
-                setTimeout(function(){ 
+                setTimeout(function() {
 
                     console.log('(RETRY) Toggle: collapse_print');
                     this.__toggle_print();
