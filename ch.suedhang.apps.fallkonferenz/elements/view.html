@@ -22,7 +22,7 @@
             border-bottom-style: none;
         }
 
-        .readme_container{
+        .readme_container {
             background-color: #FAFAFA;
             border-style: solid;
             border-color: #EEEEEE;
@@ -48,7 +48,6 @@
             <div class="readme_container">
                 <h4 style="margin:0;color:#212121">BESCHREIBUNG</h4>
                 <p>[[_current_app.description]]</p>
-            
                 <h4 style="margin-top:24px;color:#212121">HILFE (Readme)</h4>
                 <div id="readme"></div>
             </div>
@@ -203,7 +202,7 @@
                 </template>
             </div>
             <div class="grid-border-top">
-                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>    
+                <bscl-element app-id="ch.suedhang.apps.bscl_anq"></bscl-element>
             </div>
             <div>
                 <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
@@ -327,7 +326,7 @@
                     if ((this._sr_actinfo_ein !== null) && (this._sr_actinfo_aus !== null)) {
                         if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
                             if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
-    
+
                                 this._sr_actinfo_ein.data.forEach(function(current, ID) {
                                     current.app_name = 'Eintritt';
                                     current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
@@ -340,7 +339,7 @@
                                     current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                     _sr_actinfo.push(current);
                                 });
-    
+
                                 var actinfo_obj = {
                                     "merged": true,
                                     "data": _sr_actinfo,
@@ -420,40 +419,43 @@
 
                 if ((this._sr_isk !== undefined) && (this._sr_isk !== null)) {
                     if ((this._sr_isk.data !== undefined) && (this._sr_isk.data !== null)) {
+                        if (this._sr_isk.have_data === true) {
 
 
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_isk.data[this._sr_isk.data.length - 1];
 
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            var latest_sr = this._sr_isk.data[this._sr_isk.data.length - 1];
+
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                            // Messzeitpunkt
+                            var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
+                            if (mz !== 99) {
+                                clinic_sample_dive.array.push(mz);
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
+
+                            console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
                         };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Messzeitpunkt
-                        var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
-                        if (mz !== 99) {
-                            clinic_sample_dive.array.push(mz);
-                        } else {
-                            clinic_sample_dive.array.push(3);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 
@@ -466,54 +468,56 @@
                 if ((this._sr_tmt !== undefined) && (this._sr_tmt !== null)) {
                     if ((this._sr_tmt.data !== undefined) && (this._sr_tmt.data !== null)) {
 
+                        if (this._sr_tmt.have_data === true) {
 
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_tmt.data[this._sr_tmt.data.length - 1];
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            var latest_sr = this._sr_tmt.data[this._sr_tmt.data.length - 1];
 
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                            // Altersgruppe
+                            if (latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe !== 99) {
+                                clinic_sample_dive.array.push(latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe);
+                            } else {
+                                clinic_sample_dive.array.push(11);
+                            };
+
+                            // Ausbildungsgrad
+                            var ausbildungsgrad = latest_sr.calculation.tmt_score.percentile.age_perz.education_high;
+                            if (ausbildungsgrad === true) {
+                                clinic_sample_dive.array.push(1);
+                            } else {
+                                clinic_sample_dive.array.push(0);
+                            };
+
+                            // Messzeitpunkt
+                            var mz = latest_sr.calculation.tmt_score.mz - 1;
+                            if ((mz === 0) || (mz === 1) || (mz === 2)) {
+                                clinic_sample_dive.array.push(mz);
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
+
+                            console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
                         };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Altersgruppe
-                        if (latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe);
-                        } else {
-                            clinic_sample_dive.array.push(11);
-                        };
-
-                        // Ausbildungsgrad
-                        var ausbildungsgrad = latest_sr.calculation.tmt_score.percentile.age_perz.education_high;
-                        if (ausbildungsgrad === true) {
-                            clinic_sample_dive.array.push(1);
-                        } else {
-                            clinic_sample_dive.array.push(0);
-                        };
-
-                        // Messzeitpunkt
-                        var mz = latest_sr.calculation.tmt_score.mz - 1;
-                        if ((mz === 0) || (mz === 1) || (mz === 2)) {
-                            clinic_sample_dive.array.push(mz);
-                        } else {
-                            clinic_sample_dive.array.push(3);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
                     };
                 };
 
