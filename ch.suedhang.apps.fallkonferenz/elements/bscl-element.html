@@ -460,14 +460,8 @@
                 "id": "bscl_zusatzangaben",
                 "stack": []
             };
-
-            var h2 = {
-                "text": "Zusatzangaben",
-                "style": "h2",
-                "alignment": "left"
-            };
-
-            return_stack.stack.push(h2);
+            
+            return_stack.stack.push(this._heading("Zusatzangaben" , null, 'h2'));
             return_stack.stack.push(table);
 
 
@@ -508,6 +502,7 @@
                 _pdf_content.push(_pdf_chart);
                 _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                 _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
+                _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
                 _pdf_content.push(_pdf_app_info);
 
 
