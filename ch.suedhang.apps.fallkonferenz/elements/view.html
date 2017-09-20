@@ -38,7 +38,7 @@
         </style>
         <div id="title" class="layout horizontal flex">
             <div class="flex">
-                <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
+                <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
             </div>
             <div>
                 <template is="dom-if" if="[[_pdf_ready]]">
@@ -334,18 +334,18 @@
                     _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
                     _pdf_content.push(this._pdf_app_info);
-                    
+
                     _pdf_content.push(this._pageBreak());
                     _pdf_content.push(this._pdf_full_bscl);
 
-                    _pdf_content.push(this._indication(":", "ToDo: actInfo", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: TMT", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: ASRS", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: AASE", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: BDI-II", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: ISK", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: SCI", "#3F51B5"));
-                    _pdf_content.push(this._indication(":", "ToDo: WHOQOL", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: actInfo", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: TMT", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: ASRS", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: AASE", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: BDI-II", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: ISK", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
+                    _pdf_content.push(this._indication(">", "ToDo: WHOQOL", "#3F51B5"));
                 } else {
                     _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
