@@ -364,10 +364,6 @@ function main(responses) {
         };
 
 
-        // debug
-        console.log(JSON.stringify(return_stack, null, 2));
-
-
         return return_obj;
     };
 
