@@ -341,6 +341,143 @@
             console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
+
+        _pdfmake_zusatzitems: function() {
+
+            var all_results = this.get('_d.bscl_zusatzitems.array');
+            console.log('all_results');
+
+            // -----------------------------------------------
+            // Sort Results
+            // -----------------------------------------------
+
+            function sortByKey(array, key) {
+                return array.sort(function(a, b) {
+                    var x = a[key];
+                    var y = b[key];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+            }
+
+            allResults = sortByKey(allResults, "mz_date");
+
+
+            // -----------------------------------------------
+            // Build pdfmake Table
+            // -----------------------------------------------
+
+            var table = {
+                "headerRows": 1,
+                "layout": "lightHorizontalLines",
+                "margin": [0, 6, 0, 12],
+                "table": {
+                    "widths": [95, "*", "*", "*", "*"],
+                    "body": []
+                }
+            };
+
+            var talbe_header = [
+                [
+                    { "text": "Messzeitpunkt", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "Datum", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                { "text": "Schlechter Appetit", "alignment": "center", "style": "p" },
+                { "text": "Einschlaf-schwierigkeiten", "alignment": "center", "style": "p" },
+                { "text": "Gedanken an Tod & Sterben", "alignment": "center", "style": "p" },
+                { "text": "Schuldgefühle", "alignment": "center", "style": "p" }
+            ];
+
+            table.table.body.push(talbe_header);
+
+
+
+
+
+            allResults.forEach(function(result, resultID) {
+
+                // console.log(resultID, result);
+
+                if (result.dropout) {
+                    // Dropout
+                    var messung = [
+                        [
+                            { "text": result.mz_typ, "style": "p", "margin": [0, 6, 0, 0] },
+                            { "text": result.mz_datum, "style": "chart_p", "margin": [0, 0, 0, 6] },
+                        ],
+                        {
+                            "colSpan": 4,
+                            "margin": [0, 6, 0, 0],
+                            "text": [
+                                { "text": result.dropout_reason + "\n", "style": "p" },
+                                { "text": "Dropout (" + result.dropout_code + ")", "style": "chart_p", "color": "#F44336" }
+                            ]
+                        }
+                    ];
+                } else {
+                    // Daten vorhanden
+
+                    var text_0 = "k.A.";
+                    var text_1 = "k.A.";
+                    var text_2 = "k.A.";
+                    var text_3 = "k.A.";
+
+                    result.items.forEach(function(item, itemID) {
+                        if (parseInt(item.id) === 0) {
+                            text_0 = item.result;
+                        };
+                        if (parseInt(item.id) === 1) {
+                            text_1 = item.result;
+                        };
+                        if (parseInt(item.id) === 2) {
+                            text_2 = item.result;
+                        };
+                        if (parseInt(item.id) === 3) {
+                            text_3 = item.result;
+                        };
+
+                    });
+                    var messung = [
+                        [
+                            { "text": result.mz_typ, "style": "p", "margin": [0, 6, 0, 0] },
+                            { "text": result.mz_datum, "style": "chart_p", "margin": [0, 0, 0, 6] },
+                        ],
+                        { "text": text_0, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                        { "text": text_1, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                        { "text": text_2, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                        { "text": text_3, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] }
+                    ];
+                };
+
+
+                table.table.body.push(messung);
+
+
+            });
+
+
+
+            var return_stack = {
+                "id": "bscl_zusatzangaben",
+                "stack": []
+            };
+
+            var h2 = {
+                "text": "Zusatzangaben",
+                "style": "h2",
+                "alignment": "left"
+            };
+
+            return_stack.stack.push(h2);
+            return_stack.stack.push(table);
+
+
+            // Debug
+            console.log(JSON.stringify(return_stack, null, 2));
+
+
+            return return_stack;
+        },
+
         _buildPDF: function() {
             var jobs_count = 0;
             var jobs_total = 2;
@@ -363,20 +500,18 @@
                 // Definitions
                 var title = {
                     "id": "app_title",
-                    "stack": [
-                        {
-                            "text": d.title + " (" + d.name + ")",
-                            "style": "h1",
-                            "margin": [0, 12, 0, 0],
-                            "alignment": "left"
-                        }, {
-                            "text": d.subtitle,
-                            "style": "caption",
-                            "color": "#616161",
-                            "margin": [1, 0, 0, 0],
-                            "alignment": "left"
-                        }
-                    ],
+                    "stack": [{
+                        "text": d.title + " (" + d.name + ")",
+                        "style": "h1",
+                        "margin": [0, 12, 0, 0],
+                        "alignment": "left"
+                    }, {
+                        "text": d.subtitle,
+                        "style": "caption",
+                        "color": "#616161",
+                        "margin": [1, 0, 0, 0],
+                        "alignment": "left"
+                    }],
                     "margin": [0, 0, 0, 12]
                 };
 
@@ -385,6 +520,8 @@
                 _pdf_content.push(title);
                 _pdf_content.push(_pdf_chart);
                 _pdf_content.push(_pdf_app_info);
+                _pdf_content.push(this._pdfmake_zusatzitems());
+
 
                 // Store
                 // this.set('_pdf_content', _pdf_content);
