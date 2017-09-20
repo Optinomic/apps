@@ -8,6 +8,9 @@ type = patient
 [description]
 Eine schnelle Übersicht über die wichtigsten Ergebnisse, bestehend aus Suchtmittelkonsum (actInfo); Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen (TMT); ADHS-Screening (ASRS); Suchtdruck (AASE-G); Symptomcheckliste (BSCL); Depressions-Inventar (BDI), Inventar Sozialer Kompetenzen (ISK), Stress-Coping-Inventar (SCI) und der Lebensqualität (WHQOL).
 
+Hinweis: Wenn Sie sich nicht im "client.new" befinden, öffnen Sie diese App über das Icon "öffnen".   
+
+
 [developer]
 first_name = Beat
 last_name = Ottiger
@@ -20,7 +23,7 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template overview 6 7]
+[template overview 6 35]
 include(../lib/polymer/index.m4)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/bscl-element.html)
