@@ -468,6 +468,8 @@
 
             var do_build = function() {
 
+                console.log('(PDF) BSCL Building: ', debug_build_pdf);
+
                 this._pdf_content = null;
                 var _pdf_content = [];
                 var d = this.get('_d');
@@ -517,12 +519,14 @@
             }
 
             var check = function() {
-                jobs_count = countProperties(jobs_done);
-                loading_string = jobs_count + "/" + jobs_total;
-                this.set('_d.loading_string', loading_string);
-
-                if (jobs_count >= jobs_total) {
-                    do_build();
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
+                    
+                    if (jobs_count >= jobs_total) {
+                        do_build();
+                    };
                 };
             }.bind(this);
 
@@ -570,7 +574,6 @@
                     "_pdf_app_info": this._pdf_app_info
                 }
             };
-            console.log('(PDF) Building: ', debug_build_pdf);
         },
 
 

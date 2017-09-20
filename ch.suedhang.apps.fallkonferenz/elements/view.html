@@ -321,6 +321,8 @@
 
             var do_build = function() {
 
+                console.log('(PDF) Fallkonferenz building: ', debug_build_pdf);
+
                 this._pdf_content = null;
                 var _pdf_content = [];
                 var d = this.get('_d');
@@ -360,11 +362,10 @@
                 this.set('_pdf_ready', true);
                 this.fire('pdfready', _pdf_content);
 
-                // Open "Collapse" when ready.
+                // Open "Collapse" when ready | Only in "Master-Document".
                 setTimeout(function() {
                     this.__toggle_print();
-                }.bind(this), 150);
-
+                }.bind(this), 50);
             }.bind(this);
 
 
@@ -384,12 +385,14 @@
             }
 
             var check = function() {
-                jobs_count = countProperties(jobs_done);
-                loading_string = jobs_count + "/" + jobs_total;
-                this.set('_d.loading_string', loading_string);
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
 
-                if (jobs_count >= jobs_total) {
-                    do_build();
+                    if (jobs_count >= jobs_total) {
+                        do_build();
+                    };
                 };
             }.bind(this);
 
@@ -423,7 +426,6 @@
                     "_pdf_app_info": this._pdf_app_info
                 }
             };
-            console.log('(PDF) Building: ', debug_build_pdf);
         },
 
         _computeNiceDate: function(date_string) {
