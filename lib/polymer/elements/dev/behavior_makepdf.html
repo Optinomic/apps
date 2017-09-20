@@ -21,7 +21,7 @@ makepdfBehavior = {
         } else {
             return null;
         }
-    };
+    },
 
 
     // --------------------------------
@@ -60,7 +60,7 @@ makepdfBehavior = {
         };
 
         return return_obj;
-    };
+    },
 
     _spacer: function(space) {
 
@@ -70,7 +70,7 @@ makepdfBehavior = {
             "text": "",
             "margin": [0, space, 0, space]
         };
-    };
+    },
 
     _title: function(title, subtitle) {
 
@@ -94,7 +94,7 @@ makepdfBehavior = {
             ],
             "margin": [0, 24, 0, 36]
         };
-    };
+    },
 
     _heading: function(style, text_left, text_right) {
 
@@ -139,7 +139,7 @@ makepdfBehavior = {
         };
 
         return return_obj;
-    };
+    },
 
     _text: function(text) {
 
@@ -149,7 +149,7 @@ makepdfBehavior = {
             "text": " " + text,
             "style": "p"
         };
-    };
+    },
 
     _caption: function(text) {
 
@@ -159,12 +159,12 @@ makepdfBehavior = {
             "text": text,
             "style": "caption"
         };
-    };
+    },
 
     _pageBreak: function(when) {
         when = when === undefined ? "after" : when;
         return { "fontSize": 0, "text": "", "pageOrientation": "portrait", "pageBreak": when };
-    };
+    },
 
     _horizontalLine: function(width) {
         width = width === undefined ? 100 : width;
@@ -186,7 +186,7 @@ makepdfBehavior = {
 
 
         return return_obj;
-    };
+    },
 
     _noData: function(title, space_bottom) {
         title = title === undefined ? null : title;
@@ -222,8 +222,12 @@ makepdfBehavior = {
         };
 
         return return_obj;
-    };
+    },
 
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
 
     created: function() {
         console.log('makepdfBehavior for ', this, 'enabled!');
