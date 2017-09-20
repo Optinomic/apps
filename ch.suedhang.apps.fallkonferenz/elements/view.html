@@ -643,7 +643,17 @@
 
         __toggle_print: function() {
             var print_button = this.$$('#collapse_print');
-            print_button.toggle();
+
+            if ((print_button === null) || (print_button === undefined)) {
+                setTimeout(function(){ 
+
+                    console.log('(RETRY) Toggle: collapse_print');
+                    this.__toggle_print();
+
+                }.bind(this.), 3000);
+            } else {
+                print_button.toggle();
+            };
         },
 
         // -----------------------------
