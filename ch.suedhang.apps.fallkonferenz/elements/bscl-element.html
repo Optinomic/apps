@@ -344,8 +344,9 @@
 
         _pdfmake_zusatzitems: function() {
 
-            var all_results = this.get('_d.bscl_zusatzitems.array');
-            console.log('all_results');
+            var d = this.get('_d');
+            console.log('bscl_zusatzitems');
+            var allResults = d.bscl.bscl_zusatzitems.array;
 
             // -----------------------------------------------
             // Sort Results
@@ -358,6 +359,7 @@
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 });
             }
+
 
             allResults = sortByKey(allResults, "mz_date");
 
