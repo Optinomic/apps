@@ -242,7 +242,6 @@
 
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
-
                         if (this._sr.have_data === true) {
                             // ---------------------------------------------------------------------
                             // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
@@ -255,7 +254,6 @@
                             };
 
                             // ---- Gewünschte Klinikstichprobe schreiben ----
-
 
                             // Messzeitpunkt
                             if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
@@ -544,12 +542,16 @@
 
             //  Check "No Data"
 
-            if (this._sr.have_data === false) {
-                // Confirm all "jobs" with "false"
-                jobs_done._pdf_chart = false;
+            if ((this._sr !== undefined) && (this._sr !== null)) {
+                if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                    if (this._sr.have_data === false) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart = false;
 
-                build_full = false;
-                check();
+                        build_full = false;
+                        check();
+                    };
+                };
             };
 
 
