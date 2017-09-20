@@ -36,232 +36,234 @@
             padding: 24px;
         }
         </style>
-        <div id="title" class="layout horizontal flex">
-            <div class="flex">
-                <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
-            </div>
-            <div>
-                <template is="dom-if" if="[[_pdf_ready]]">
-                    <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
-                </template>
-            </div>
-        </div>
-        <template is="dom-if" if="[[_pdf_ready]]">
-            <iron-collapse id="collapse_print" horizontal>
-                <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
-            </iron-collapse>
-        </template>
-        <div id="app_info">
-            <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
-        </div>
-
-
-
-        <div id="main_content">
-            <div>
-                <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
-                    <h3>Keine ActInfo-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
-                    <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
-                    <h3>Zusatzinformationen</h3>
-                    <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
-                        <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
-                        <p class="caption">&nbsp;</p>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
+                </div>
+                <div>
+                    <template is="dom-if" if="[[_pdf_ready]]">
+                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
                     </template>
-                    <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
-                    <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
-                </template>
-                <template is="dom-if" if="[[_sr_actinfo.merged]]">
-                    <h3>Nikotinabhängigkeit (Fagerström)</h3>
-                    <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
-                </template>
+                </div>
             </div>
-            <div>
-                <optinomic-title small h1="Trail Making Test (TMT)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="TMT"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_tmt.have_data]]">
-                    <h3>Keine TMT-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_tmt.have_data]]">
-                    <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
-                        <h3>Datenblatt: Trail Making Test (TMT)</h3>
-                        <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
-                                <vaadin-grid-column width="100px" flex-grow="0">
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="date">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1" style="text-align: right">
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                </iron-collapse>
+            </template>
+            <div id="app_info">
+                <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
+            </div>
+            <div id="main_content">
+                <div id="content_actinfo" class="grid-border-top">
+                    <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
+                        <h3>Keine ActInfo-Daten vorhanden.</h3>
+                    </template>
+                    <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
+                        <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
+                        <h3>Zusatzinformationen</h3>
+                        <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
+                            <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
+                            <p class="caption">&nbsp;</p>
+                        </template>
+                        <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
+                        <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
+                    </template>
+                    <template is="dom-if" if="[[_sr_actinfo.merged]]">
+                        <h3>Nikotinabhängigkeit (Fagerström)</h3>
+                        <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
+                    </template>
+                </div>
+                <div id="content_tmt" class="grid-border-top">
+                    <optinomic-title small h1="Trail Making Test (TMT)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="TMT"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_tmt.have_data]]">
+                        <h3>Keine TMT-Daten vorhanden.</h3>
+                    </template>
+                    <template is="dom-if" if="[[_sr_tmt.have_data]]">
+                        <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
+                            <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
+                            <h3>Datenblatt: Trail Making Test (TMT)</h3>
+                            <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="date">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1" style="text-align: right">
                                             {{_computeNiceDate(item.date)}}
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column width="180px" flex-grow="0">
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column width="180px" flex-grow="0">
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT A</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT A</span></template>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.TMTATime]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.TMTAError]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT B</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template resizable>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT B</span></template>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template resizable>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.TMTBTime]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.TMTBError]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Quotient</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">B/A</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                                <vaadin-grid-column-group>
+                                    <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Quotient</span></template>
+                                    <vaadin-grid-column>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
+                                                <span class="body-1" stlye="color:#424242;font-weight:400;">B/A</span>
+                                            </vaadin-grid-sorter>
+                                        </template>
+                                        <template>
+                                            <span draggable="true" class="body-1">
                                             [[item.calculation.tmt_score.quotient_rounded]]
                                         </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                        </vaadin-grid>
+                                        </template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid-column-group>
+                            </vaadin-grid>
+                        </template>
+                        <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
+                            <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                        </template>
                     </template>
-                    <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                </div>
+                <div id="content_asrs" class="grid-border-top">
+                    <template is="dom-if" if="[[_sr_asrs.have_data]]">
+                        <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
+                        <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
                     </template>
-                </template>
-            </div>
-            <div>
-                <template is="dom-if" if="[[_sr_asrs.have_data]]">
-                    <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
-                    <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_aase.have_data]]">
-                    <h3>Keine AASE-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_aase.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div class="grid-border-top">
-                <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
-            </div>
-            <div>
-                <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bdi.have_data]]">
-                    <h3>Keine BDI-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_bdi.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Inventar Sozialer Kompetenzen" h2="ISK Kurzform" h3="(ISK)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_isk.have_data]]">
-                    <h3>Keine ISK-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_isk.have_data]]">
-                    <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                </div>
+                <div id="content_aase" class="grid-border-top">
+                    <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_aase.have_data]]">
+                        <h3>Keine AASE-Daten vorhanden.</h3>
                     </template>
-                    <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                    <template is="dom-if" if="[[_sr_aase.have_data]]">
+                        <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
                     </template>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Stress-Coping-Inventar" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(SCI)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_sci.have_data]]">
-                    <h3>Keine SCI-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_sci.have_data]]">
-                    <template is="dom-if" if="[[_sr_sci.done]]">
-                        <h3>Stressereignisse und Syptome</h3>
-                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                        <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                        <h3>Copingstrategien</h3>
-                        <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
-                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                        <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                </div>
+                <div id="content_bscl" class="grid-border-top">
+                    <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
+                </div>
+                <div id="content_bdi" class="grid-border-top">
+                    <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_bdi.have_data]]">
+                        <h3>Keine BDI-Daten vorhanden.</h3>
                     </template>
-                    <template is="dom-if" if="[[!_sr_sci.done]]">
-                        <p style="color:#3F51B5">Erweitere vorhandene Resultate...</p>
+                    <template is="dom-if" if="[[_sr_bdi.have_data]]">
+                        <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
                     </template>
-                </template>
+                </div>
+                <div id="content_isk" class="grid-border-top">
+                    <optinomic-title small h1="Inventar Sozialer Kompetenzen" h2="ISK Kurzform" h3="(ISK)"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_isk.have_data]]">
+                        <h3>Keine ISK-Daten vorhanden.</h3>
+                    </template>
+                    <template is="dom-if" if="[[_sr_isk.have_data]]">
+                        <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
+                            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                        </template>
+                        <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
+                            <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                        </template>
+                    </template>
+                </div>
+                <div id="content_sci" class="grid-border-top">
+                    <optinomic-title small h1="Stress-Coping-Inventar" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(SCI)"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_sci.have_data]]">
+                        <h3>Keine SCI-Daten vorhanden.</h3>
+                    </template>
+                    <template is="dom-if" if="[[_sr_sci.have_data]]">
+                        <template is="dom-if" if="[[_sr_sci.done]]">
+                            <h3>Stressereignisse und Syptome</h3>
+                            <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                            <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                            <h3>Copingstrategien</h3>
+                            <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                            <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                            <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                        </template>
+                        <template is="dom-if" if="[[!_sr_sci.done]]">
+                            <p style="color:#3F51B5">Erweitere vorhandene Resultate...</p>
+                        </template>
+                    </template>
+                </div>
+                <div id="content_whoqol" class="grid-border-top">
+                    <optinomic-title small h1="Lebensqualität" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="WHOQOL-BREF (WHO Quality of Life)"></optinomic-title>
+                    <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
+                        <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
+                    </template>
+                    <template is="dom-if" if="[[_sr_whoqol.have_data]]">
+                        <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
+                    </template>
+                </div>
             </div>
-            <div>
-                <optinomic-title small h1="Lebensqualität" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="WHOQOL-BREF (WHO Quality of Life)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
-                    <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_whoqol.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
-                </template>
-            </div>
-        </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
     </template>
     <script>
     Polymer({
@@ -284,7 +286,7 @@
 
 
             d.name = "Fallkonferenz";
-            d.title = "Ergebnis-Übersicht";
+            d.title = "Assessment";
             d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
 
@@ -302,6 +304,115 @@
             this.set('_d', d);
             this.set('_show_help', false);
             console.log('INIT _d', d);
+        },
+
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
+
+
+
+            this.set('_d.loading_string', loading_string);
+
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+
+                if (build_full) {
+                    _pdf_content.push(this._spacer(100));
+                    _pdf_content.push(this._title(d.title, d.name + ": "
+                        d.subtitle));
+                    _pdf_content.push(this._pdf_app_info);
+                    _pdf_content.push(this._pageBreak());
+                    _pdf_content.push(this._pdf_full_bscl);
+                } else {
+                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._heading("Fehler", "Something went wrong.", 'h1'));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._text("Something went wrong."));
+                };
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this.fire('pdfready', _pdf_content);
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
+            var check = function() {
+                jobs_count = countProperties(jobs_done);
+                loading_string = jobs_count + "/" + jobs_total;
+                this.set('_d.loading_string', loading_string);
+
+                if (jobs_count >= jobs_total) {
+                    do_build();
+                };
+            }.bind(this);
+
+
+            //  Jobs Done?
+            //  Check incoming Data
+
+            if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
+                jobs_done._pdf_full_bscl = true;
+                check();
+            };
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
+
+
+            // ------------------------------
+            // Debug
+            // ------------------------------
+            var debug_build_pdf = {
+                "document": "Fallkonferenz",
+                "jobs_count": jobs_count,
+                "jobs_total": jobs_total,
+                "jobs_done": jobs_done,
+                "build_full": build_full,
+                "loading_string": loading_string,
+                "input": {
+                    "_pdf_chart": this._pdf_chart,
+                    "_pdf_app_info": this._pdf_app_info
+                }
+            };
+            console.log('(PDF) Building: ', debug_build_pdf);
         },
 
         _computeNiceDate: function(date_string) {
@@ -524,112 +635,6 @@
                 };
 
             }, 250);
-        },
-
-        _buildPDF: function() {
-            var jobs_count = 0;
-            var jobs_total = 2;
-            var jobs_done = {};
-            var build_full = true;
-            var loading_string = jobs_count + "/" + jobs_total;
-
-
-
-            this.set('_d.loading_string', loading_string);
-
-
-            // ------------------------------
-            // Create PDF
-            // ------------------------------
-
-            var do_build = function() {
-
-                this._pdf_content = null;
-                var _pdf_content = [];
-                var d = this.get('_d');
-
-
-                // --------------------------
-                // Build PDF
-                // --------------------------
-
-                if (build_full) {
-                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
-                    _pdf_content.push(this._pdf_app_info);
-                    _pdf_content.push(this._pdf_full_bscl);
-                } else {
-                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._heading("Fehler", "Something went wrong.", 'h1'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._text("Something went wrong."));
-                };
-
-                // --------------------------
-                // Store
-                // --------------------------
-                this.fire('pdfready', _pdf_content);
-                this._pdf_content = _pdf_content;
-                this.set('_pdf_ready', true);
-            }.bind(this);
-
-
-            // ------------------------------
-            // Check if all content is ready
-            // ------------------------------
-
-            var countProperties = function(obj) {
-                var count = 0;
-
-                for (var prop in obj) {
-                    if (obj.hasOwnProperty(prop))
-                        ++count;
-                }
-
-                return count;
-            }
-
-            var check = function() {
-                jobs_count = countProperties(jobs_done);
-                loading_string = jobs_count + "/" + jobs_total;
-                this.set('_d.loading_string', loading_string);
-
-                if (jobs_count >= jobs_total) {
-                    do_build();
-                };
-            }.bind(this);
-
-
-            //  Jobs Done?
-            //  Check incoming Data
-
-            if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
-                jobs_done._pdf_full_bscl = true;
-                check();
-            };
-
-            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
-                jobs_done._pdf_app_info = true;
-                check();
-            };
-
-
-            // ------------------------------
-            // Debug
-            // ------------------------------
-            var debug_build_pdf = {
-                "document": "Fallkonferenz",
-                "jobs_count": jobs_count,
-                "jobs_total": jobs_total,
-                "jobs_done": jobs_done,
-                "build_full": build_full,
-                "loading_string": loading_string,
-                "input": {
-                    "_pdf_chart": this._pdf_chart,
-                    "_pdf_app_info": this._pdf_app_info
-                }
-            };
-            console.log('(PDF) Building: ', debug_build_pdf);
         },
 
 

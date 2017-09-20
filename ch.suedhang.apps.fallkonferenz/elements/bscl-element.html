@@ -127,11 +127,11 @@
                         </div>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
+                        <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
                     </template>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
-                    <p style="color:#3F51B5">Initialisiere...</p>
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
                 </template>
             </template>
             <template is="dom-if" if="[[!_sr.have_data]]">
