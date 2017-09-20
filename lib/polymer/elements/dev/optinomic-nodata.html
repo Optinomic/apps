@@ -23,6 +23,7 @@
         }
         </style>
         <!-- START -->
+        <p class="caption">&nbsp;</p>
         <div class="container">
             <div class="layout horizontal flex">
                 <div>
@@ -59,7 +60,7 @@
 
 
         _titleChanged: function() {
-            this.set('_title', this.title + ": Keine Daten vorhanden.");
+            this._title = this.title + ": Keine Daten vorhanden.";
             console.error('_titleChanged', this.title);
         },
 
@@ -67,7 +68,6 @@
             date_string = date_string || null
             if (date_string !== null) {
 
-                // 1952-11-19T00:00:00.000000000000Z
                 var year = parseInt(date_string.substring(0, 4));
                 var month = parseInt(date_string.substring(5, 7));
                 var day = parseInt(date_string.substring(8, 10));
@@ -78,7 +78,6 @@
                 return null;
             }
         },
-
 
 
         // -------------------------------------
