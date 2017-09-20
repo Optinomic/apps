@@ -302,8 +302,7 @@
 
             d.init_done = true;
             this.set('_d', d);
-            this.set('_show_help', false);
-            console.log('INIT _d', d);
+            console.log('INIT _d', this._d);
         },
 
         _buildPDF: function() {
@@ -353,6 +352,9 @@
                 this.fire('pdfready', _pdf_content);
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
+
+                // Open "Collapse" when ready.
+                this.__toggle_print();
             }.bind(this);
 
 
