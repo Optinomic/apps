@@ -73,3 +73,7 @@ survey = bscl_anq
 [calculation scores_calculation javascript]
 include(calculations/bscl_patient_calc.js)
 
+[calculation pdfmake javascript]
+include(calculations/pdfmake.js)
+
+
