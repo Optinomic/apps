@@ -554,13 +554,15 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
+                    _pdf_content.push(this._pdf_app_info);
                     _pdf_content.push(this._pdf_full_bscl);
                 } else {
-                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
-                    _pdf_content.push(this._noData(d.name, 24));
-                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
-                    _pdf_content.push(this._pdf_app_info);
+                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._heading("Fehler", "Something went wrong.", 'h1'));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._text("Something went wrong.");
                 };
 
                 // --------------------------
@@ -646,8 +648,14 @@
 
         _event_pdf_full_bscl: function(e) {
             this.set('_pdf_full_bscl', e.detail);
-            console.log('(event) _event_pdf_full_bscl ==> ', this._pdf_full_bscl);
+            console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
         },
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+            console.log('(event) _pdf_app_info ==> ', this._pdf_app_info);
+        },
+
 
         // -----------------------------
         // Lifecycle
