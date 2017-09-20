@@ -35,7 +35,6 @@
         }
         </style>
         <div id="bscl_element">
-            <h1>!!! BSCL !!!</h1>
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
@@ -182,29 +181,6 @@
                     } else {
                         return null
                     };
-                }
-            },
-            _current_app: {
-                type: Object,
-                statePath: function(state) {
-                    var return_obj = {
-                        "found": false,
-                        "app": {}
-                    };
-                    if ((this.appId !== null) && (this.appId !== undefined)) {
-                        if ((state.apps.all.patient_modules !== null) && (state.apps.all.patient_modules !== undefined)) {
-                            var appId = this.appId;
-                            state.apps.all.patient_modules.forEach(function(pm, appID) {
-                                if (pm.identifier === appId) {
-                                    return_obj = return_obj = {
-                                        "found": true,
-                                        "app": pm
-                                    };
-                                };
-                            });
-                        };
-                    };
-                    return return_obj;
                 }
             },
             _pdf_chart: {
