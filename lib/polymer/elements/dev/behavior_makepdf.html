@@ -194,7 +194,7 @@ makepdfBehavior = {
         space_bottom = space_bottom === undefined ? 24 : space_bottom;
 
         var date = new Date();
-        date = this._formatDateCH(date);
+        date = this._formatDateCH(date.toISOString());
 
         var text = "Keine Daten vorhanden.";
         if (title !== null) {
