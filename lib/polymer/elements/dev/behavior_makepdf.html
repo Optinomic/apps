@@ -28,7 +28,10 @@ makepdfBehavior = {
     // PDF - Template-Functions
     // --------------------------------
 
-    _keepTogether: function(given_stack_array) {
+    _keepTogether: function(given_stack_array, id) {
+
+        id = id === undefined ? "keep_together" : id;
+
 
         var isArray = function(obj) {
             return (typeof obj !== 'undefined' &&
@@ -46,7 +49,7 @@ makepdfBehavior = {
         };
 
         var return_obj = {
-            "id": "keepTogetherTable",
+            "id": id,
             "layout": "noBorders",
             "table": {
                 "dontBreakRows": true,
@@ -233,6 +236,51 @@ makepdfBehavior = {
 
         return return_obj;
     },
+
+    _indication: function(sign, title, color) {
+
+        sign = sign === undefined ? "!" : sign;
+        title = title === undefined ? "Optinomic" : title;
+        color = title === undefined ? "#F44336" : title;
+
+        var space = 24;
+
+        var date = new Date();
+        date = this._formatDateCH(date.toISOString());
+
+        var data = {
+            "table": {
+                "widths": [24, "*"],
+                "body": [
+                    [{
+                        "text": sign,
+                        "color": color,
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": title, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
+                ]
+            },
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
+        };
+
+        var return_obj = {
+            "stack": [],
+        };
+
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+        return_obj.stack.push(no_data);
+        return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
+
+        return this._keepTogether(return_obj, sign + "_indication");
+    },
+
 
 
     // --------------------------------

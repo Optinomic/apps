@@ -331,17 +331,26 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._spacer(100));
+                    _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
                     _pdf_content.push(this._pdf_app_info);
+                    
                     _pdf_content.push(this._pageBreak());
                     _pdf_content.push(this._pdf_full_bscl);
+
+                    _pdf_content.push(this._indication(":", "ToDo: actInfo", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: TMT", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: ASRS", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: AASE", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: BDI-II", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: ISK", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: SCI", "#3F51B5"));
+                    _pdf_content.push(this._indication(":", "ToDo: WHOQOL", "#3F51B5"));
                 } else {
+                    _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._heading("Fehler", "Something went wrong.", 'h1'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._text("Something went wrong."));
+                    _pdf_content.push(this._spacer(12));
+                    _pdf_content.push(this._indication("!", "Uuups, hier ging etwas schief!", "#F44336"));
                 };
 
                 // --------------------------
