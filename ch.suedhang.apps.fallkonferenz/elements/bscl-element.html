@@ -267,69 +267,71 @@
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
 
 
-                        // ---------------------------------------------------------------------
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        // ---------------------------------------------------------------------
-                        var latest_sr = this._sr.data[this._sr.data.length - 1];
+                        if (this._sr.have_data === true) {
+                            // ---------------------------------------------------------------------
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            // ---------------------------------------------------------------------
+                            var latest_sr = this._sr.data[this._sr.data.length - 1];
 
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Messzeitpunkt
-                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
-                        } else {
-                            clinic_sample_dive.array.push(5);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-                        // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
-                        clinic_sample_dive.array.push(4);
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-
-
-                        // ---------------------------------------------------------------------
-                        // Erstelle Zusatzitems - Array
-                        // ---------------------------------------------------------------------
-                        var zusatzitems = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        this._sr.data.forEach(function(sr, srID) {
-                            if ("zusatzitem" in sr.calculation.scores_calculation) {
-                                var zusatzitem = sr.calculation.scores_calculation.zusatzitem;
-                                zusatzitem.items.forEach(function(item, itemID) {
-                                    var base_name = item.id + "__";
-                                    zusatzitem[base_name + "name"] = item.name;
-                                    zusatzitem[base_name + "result"] = item.result;
-                                    zusatzitem[base_name + "field"] = item.field;
-                                });
-                                zusatzitems.array.push(zusatzitem);
-                                if (zusatzitems.array.length > 0) {
-                                    zusatzitems.defined = true;
-                                };
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
                             };
-                        });
 
-                        this.set('_d.bscl_zusatzitems', zusatzitems);
-                        console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems);
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
 
+
+                            // Messzeitpunkt
+                            if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
+                                clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
+                            } else {
+                                clinic_sample_dive.array.push(5);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+                            // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
+                            clinic_sample_dive.array.push(4);
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
+
+
+                            // ---------------------------------------------------------------------
+                            // Erstelle Zusatzitems - Array
+                            // ---------------------------------------------------------------------
+                            var zusatzitems = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            this._sr.data.forEach(function(sr, srID) {
+                                if ("zusatzitem" in sr.calculation.scores_calculation) {
+                                    var zusatzitem = sr.calculation.scores_calculation.zusatzitem;
+                                    zusatzitem.items.forEach(function(item, itemID) {
+                                        var base_name = item.id + "__";
+                                        zusatzitem[base_name + "name"] = item.name;
+                                        zusatzitem[base_name + "result"] = item.result;
+                                        zusatzitem[base_name + "field"] = item.field;
+                                    });
+                                    zusatzitems.array.push(zusatzitem);
+                                    if (zusatzitems.array.length > 0) {
+                                        zusatzitems.defined = true;
+                                    };
+                                };
+                            });
+
+                            this.set('_d.bscl_zusatzitems', zusatzitems);
+                            console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems);
+
+                        };
                     };
                 };
 
@@ -460,8 +462,8 @@
                 "id": "bscl_zusatzangaben",
                 "stack": []
             };
-            
-            return_stack.stack.push(this._heading("Zusatzangaben" , null, 'h2'));
+
+            return_stack.stack.push(this._heading("Zusatzangaben", null, 'h2'));
             return_stack.stack.push(table);
 
 
