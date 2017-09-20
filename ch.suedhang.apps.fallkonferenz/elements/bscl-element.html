@@ -504,7 +504,9 @@
                 // --------------------------
 
                 _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                 _pdf_content.push(_pdf_chart);
+                _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                 _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
                 _pdf_content.push(_pdf_app_info);
 
