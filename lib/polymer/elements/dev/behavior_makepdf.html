@@ -96,39 +96,60 @@ makepdfBehavior = {
         };
     },
 
-    _heading: function(style, text_left, text_right) {
+    _heading: function(text_left, text_left_sub, text_right, style) {
 
-        text_left = text_left === undefined ? "" : text_left;
+        // Init
+        text_left = text_left === undefined ? "Optinomic" : text_left;
+        text_left_sub = text_left_sub === undefined ? null : text_left_sub;
         text_right = text_right === undefined ? null : text_right;
         style = style === undefined ? "h2" : style;
 
         if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
-            style = "";
+            style = "h2";
         };
+
+        var id = "heading_" + style;
+
 
         var left = {
-            "text": " " + text_left,
-            "style": style,
-            "alignment": "left"
+            "id": id,
+            "stack": [{
+                "text": text_left,
+                "style": "h1",
+                "margin": [0, 12, 0, 0],
+                "alignment": "left"
+            }],
+            "margin": [0, 0, 0, 12]
         };
 
-        if ((style === "h1") || (style === "h2")) {
-            left.color = "#69604d";
+
+        if (text_left_sub !== null) {
+            var sub = {
+                "text": text_left_sub,
+                "style": "caption",
+                "color": "#616161",
+                "margin": [1, 0, 0, 0],
+                "alignment": "left"
+            };
+            left.stack.push(sub);
         };
+
 
         var return_obj = left;
 
-        var right = {
-            "text": " " + text_right,
-            "style": style,
-            "alignment": "right",
-            "fontSize": 9,
-            "bold": false,
-            "color": "#9E9E9E"
-        };
-
 
         if (text_right !== null) {
+
+            var right = {
+                "text": " " + text_right,
+                "style": style,
+                "alignment": "right",
+                "fontSize": 9,
+                "bold": false,
+                "color": "#9E9E9E"
+            };
+
+
             var cols = {
                 "columns": []
             };
@@ -180,7 +201,7 @@ makepdfBehavior = {
                 "x2": length,
                 "y2": 0,
                 "lineWidth": 1,
-                "lineColor": "#BDBDBD"
+                "lineColor": "#E0E0E0"
             }]
         };
 

@@ -502,7 +502,8 @@
                 // --------------------------
                 // Build PDF
                 // --------------------------
-                _pdf_content.push(this._heading('h2', d.title, d.subtitle));
+
+                _pdf_content.push(this._heading(d.title, d.subtitle, d.name, 'h1'));
                 _pdf_content.push(_pdf_chart);
                 _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems()));
                 _pdf_content.push(_pdf_app_info);
