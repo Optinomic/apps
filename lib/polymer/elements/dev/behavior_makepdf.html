@@ -189,9 +189,9 @@ makepdfBehavior = {
         return return_obj;
     },
 
-    _noData: function(title, space_bottom) {
+    _noData: function(title, space) {
         title = title === undefined ? null : title;
-        space_bottom = space_bottom === undefined ? 24 : space_bottom;
+        space = space === undefined ? 24 : space;
 
         var date = new Date();
         date = this._formatDateCH(date.toISOString());
@@ -203,25 +203,28 @@ makepdfBehavior = {
 
         var no_data = {
             "table": {
-                "widths": [12, "*"],
+                "widths": [24, "*"],
                 "body": [
-                    [
-                        { "text": "!", "color": "#BDBDBD", "fontSize": 36, "margin": [0, 0, 0, 0] }, {
-                            "stack": [
-                                { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
-                                { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
-                            ],
-                            "margin": [0, 0, 0, 12]
-                        }
-                    ],
+                    [{
+                        "text": "!",
+                        "color": "#F44336",
+                        "fontSize": 36,
+                        "margin": [0, 0, 0, 0]
+                    }, {
+                        "stack": [
+                            { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                            { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                        ],
+                        "margin": [0, 0, 0, 6]
+                    }],
                 ]
             },
-            "layout": "noBorders"
+            "layout": "noBorders",
+            "margin": [space, space, space, space]
         };
 
         var return_obj = {
             "stack": [],
-            "margin": [0, 12, 0, space_bottom]
         };
 
         return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
