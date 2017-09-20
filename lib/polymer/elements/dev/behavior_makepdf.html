@@ -1,0 +1,232 @@
+<script>
+makepdfBehavior = {
+
+    properties: {},
+
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+    _formatDateCH: function(date_string) {
+        date_string = date_string || null
+        if (date_string !== null) {
+
+            // 1952-11-19T00:00:00.000000000000Z
+            var year = parseInt(date_string.substring(0, 4));
+            var month = parseInt(date_string.substring(5, 7));
+            var day = parseInt(date_string.substring(8, 10));
+            var date_string_return = day + "." + month + "." + year
+
+            return date_string_return;
+        } else {
+            return null;
+        }
+    };
+
+
+    // --------------------------------
+    // PDF - Template-Functions
+    // --------------------------------
+
+    _keepTogether: function(given_stack_array) {
+
+        var isArray: function(obj) {
+            return (typeof obj !== 'undefined' &&
+                obj && obj.constructor === Array);
+        };
+
+        var stack_array = [];
+
+        if (isArray(given_stack_array)) {
+            // Array
+            stack_array = given_stack_array;
+        } else {
+            // Object
+            stack_array.push(given_stack_array);
+        };
+
+        var return_obj = {
+            "id": "keepTogetherTable",
+            "layout": "noBorders",
+            "table": {
+                "dontBreakRows": true,
+                "headerRows": 0,
+                "body": [
+                    [{
+                        "stack": stack_array
+                    }]
+                ]
+            }
+        };
+
+        return return_obj;
+    };
+
+    _spacer: function(space) {
+
+        space = space === undefined ? 10 : space;
+
+        return {
+            "text": "",
+            "margin": [0, space, 0, space]
+        };
+    };
+
+    _title: function(title, subtitle) {
+
+        title = title === undefined ? "" : title;
+        subtitle = subtitle === undefined ? "" : subtitle;
+
+        return {
+            "stack": [
+                // second column consists of paragraphs
+                {
+                    "text": " " + title,
+                    "style": "title",
+                    "alignment": "left"
+                }, {
+                    "text": " " + subtitle,
+                    "style": "caption",
+                    "color": "#616161",
+                    "margin": [1, 0, 0, 0],
+                    "alignment": "left"
+                }
+            ],
+            "margin": [0, 24, 0, 36]
+        };
+    };
+
+    _heading: function(style, text_left, text_right) {
+
+        text_left = text_left === undefined ? "" : text_left;
+        text_right = text_right === undefined ? null : text_right;
+        style = style === undefined ? "h2" : style;
+
+        if ((style !== "h1") && (style !== "h2") && (style !== "h3")) {
+            style = "";
+        };
+
+        var left = {
+            "text": " " + text_left,
+            "style": style,
+            "alignment": "left"
+        };
+
+        if ((style === "h1") || (style === "h2")) {
+            left.color = "#69604d";
+        };
+
+        var return_obj = left;
+
+        var right = {
+            "text": " " + text_right,
+            "style": style,
+            "alignment": "right",
+            "fontSize": 9,
+            "bold": false,
+            "color": "#9E9E9E"
+        };
+
+
+        if (text_right !== null) {
+            var cols = {
+                "columns": []
+            };
+            cols.columns.push(left);
+            cols.columns.push(right);
+
+            return_obj = cols;
+        };
+
+        return return_obj;
+    };
+
+    _text: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "text": " " + text,
+            "style": "p"
+        };
+    };
+
+    _caption: function(text) {
+
+        text = text === undefined ? "Optinomic" : text;
+
+        return {
+            "text": text,
+            "style": "caption"
+        };
+    };
+
+    _pageBreak: function(when) {
+        when = when === undefined ? "after" : when;
+        return { "fontSize": 0, "text": "", "pageOrientation": "portrait", "pageBreak": when };
+    };
+
+    _horizontalLine: function(width) {
+        width = width === undefined ? 100 : width;
+
+        var length = 514 / 100 * width;
+
+        var return_obj = {
+            "margin": [0, 12, 0, 0],
+            "canvas": [{
+                "type": "line",
+                "x1": 0,
+                "y1": 0,
+                "x2": length,
+                "y2": 0,
+                "lineWidth": 1,
+                "lineColor": "#BDBDBD"
+            }]
+        };
+
+
+        return return_obj;
+    };
+
+    _noData: function(title, space_bottom) {
+        title = title === undefined ? null : title;
+        space_bottom = space_bottom === undefined ? 24 : space_bottom;
+
+        var date = new Date();
+        date = this._formatDateCH(date);
+
+        var text = "Keine Daten vorhanden.";
+        if (title !== null) {
+            text = title + ": Keine Daten vorhanden.";
+        };
+
+        var return_obj = {
+            "stack": [{
+                "table": {
+                    "widths": [12, "*"],
+                    "body": [
+                        [
+                            { "text": "!", "color": "#BDBDBD", "fontSize": 36, "margin": [0, 0, 0, 0] }, {
+                                "stack": [
+                                    { "text": date, "fontSize": 9, "color": "#BDBDBD", "margin": [0, 6, 0, 0] },
+                                    { "text": text, "color": "#424242", "margin": [0, 6, 0, 0] }
+                                ],
+                                "margin": [0, 0, 0, 12]
+                            }
+                        ],
+                    ]
+                },
+                "layout": "noBorders"
+            }],
+            "margin": [0, 12, 0, space_bottom]
+        };
+
+        return return_obj;
+    };
+
+
+    created: function() {
+        console.log('makepdfBehavior for ', this, 'enabled!');
+    }
+};
+</script>
