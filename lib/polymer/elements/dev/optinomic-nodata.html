@@ -1,0 +1,99 @@
+<dom-module id="optinomic-nodata">
+    <template>
+        <style include="shared-styles iron-flex iron-flex-alignment">
+         :host {
+            display: block;
+            font-family: 'Roboto', 'Noto', sans-serif;
+        }
+
+        .ausruf {
+            font-size: 24px;
+            color: #F44336;
+            width: 24px;
+        }
+
+        .container {
+            border-top-color: #F5F5F5;
+            border-top-style: solid;
+            border-top-width: 1px;
+            border-bottom-color: #F5F5F5;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            padding: 24px;
+        }
+        </style>
+        <!-- START -->
+        
+        <div class="container">
+            <div class="layout horizontal flex">
+                <div>
+                    <p class="ausruf">!</p>
+                </div>
+                <div class="flex">
+                    <div>
+                        <p class="caption">[[_date]]</p>
+                        <p>[[_title]]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+
+        is: 'optinomic-nodata',
+
+        behaviors: [],
+
+        properties: {
+            title: {
+                type: String,
+                value: null,
+                observer: "_titleChanged"
+            }
+        },
+
+
+        // -------------------------------------
+        // Functions
+        // -------------------------------------
+
+
+        _titleChanged: function() {
+            this.set('_title', this.title + ": Keine Daten vorhanden.");
+        },
+
+        _formatDateCH: function(date_string) {
+            date_string = date_string || null
+            if (date_string !== null) {
+
+                // 1952-11-19T00:00:00.000000000000Z
+                var year = parseInt(date_string.substring(0, 4));
+                var month = parseInt(date_string.substring(5, 7));
+                var day = parseInt(date_string.substring(8, 10));
+                var date_string_return = day + "." + month + "." + year
+
+                return date_string_return;
+            } else {
+                return null;
+            }
+        },
+
+
+
+        // -------------------------------------
+        // Lifetime
+        // -------------------------------------
+        ready: function() {
+            var date = new Date();
+            date = this._formatDateCH(date.toISOString());
+            this.set('_date', date);
+            this.set('_title', "Keine Daten vorhanden.");
+        },
+
+        attached: function() {},
+
+
+    });
+    </script>
+</dom-module>
