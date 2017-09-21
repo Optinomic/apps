@@ -3,6 +3,7 @@
 <link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
 <link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
 <link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
@@ -500,6 +501,9 @@
                 this.fire('pdfready', _pdf_content);
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
+
+                console.log('(PDF | Ready) BSCL: ', this._pdf_content);
+
             }.bind(this);
 
 
@@ -556,23 +560,6 @@
                         check();
                     };
                 };
-            };
-
-
-            // ------------------------------
-            // Debug
-            // ------------------------------
-            var debug_build_pdf = {
-                "document": "BSCL",
-                "jobs_count": jobs_count,
-                "jobs_total": jobs_total,
-                "jobs_done": jobs_done,
-                "build_full": build_full,
-                "loading_string": loading_string,
-                "input": {
-                    "_pdf_chart": this._pdf_chart,
-                    "_pdf_app_info": this._pdf_app_info
-                }
             };
         },
 

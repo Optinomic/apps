@@ -2,6 +2,7 @@
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
 <link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
 <link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
@@ -310,10 +311,7 @@
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
 
-
-
             this.set('_d.loading_string', loading_string);
-
 
             // ------------------------------
             // Create PDF
@@ -321,7 +319,6 @@
 
             var do_build = function() {
 
-                console.log('(PDF) Fallkonferenz building: ', debug_build_pdf);
 
                 this._pdf_content = null;
                 var _pdf_content = [];
@@ -361,6 +358,8 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
                 this.fire('pdfready', _pdf_content);
+
+                console.log('(PDF | Ready) Fallkonferenz: ', this._pdf_content);
 
                 // Open "Collapse" when ready | Only in "Master-Document".
                 setTimeout(function() {
@@ -411,21 +410,7 @@
             };
 
 
-            // ------------------------------
-            // Debug
-            // ------------------------------
-            var debug_build_pdf = {
-                "document": "Fallkonferenz",
-                "jobs_count": jobs_count,
-                "jobs_total": jobs_total,
-                "jobs_done": jobs_done,
-                "build_full": build_full,
-                "loading_string": loading_string,
-                "input": {
-                    "_pdf_chart": this._pdf_chart,
-                    "_pdf_app_info": this._pdf_app_info
-                }
-            };
+            
         },
 
         _computeNiceDate: function(date_string) {
