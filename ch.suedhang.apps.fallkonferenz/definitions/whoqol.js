@@ -15,6 +15,7 @@ d.whoqol = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 10,
         "response_title_path": "event.survey_name",

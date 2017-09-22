@@ -15,6 +15,7 @@ d.aase = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
@@ -73,7 +74,7 @@ d.aase = {
         "color": "#FB7200"
     }, {
         "range_start": 3,
-        "range_stop": 999,
+        "range_stop": 4,
         "text": "sehr hohe Versuchung",
         "color": "#C62828"
     }]

@@ -15,6 +15,7 @@ d.bdi = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 3,
         "response_title_path": "calculation.bdi_score.score.current_range.interpretation_de",

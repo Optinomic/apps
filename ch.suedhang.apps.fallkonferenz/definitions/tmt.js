@@ -16,6 +16,7 @@ d.tmt = {
         "range_alpha": 0.09,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": false,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text_Quotient",
         "response_date_path": "date"
