@@ -72,7 +72,7 @@
                         <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
                         <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
                     </template>
-                    <template is="dom-if" if="[[_sr_actinfo.merged]] && [[_sr_actinfo_ein.have_data]]">
+                    <template is="dom-if" if="[[_sr_actinfo.merged]]">
                         <h3>Nikotinabhängigkeit (Fagerström)</h3>
                         <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
                     </template>
