@@ -333,17 +333,23 @@
 
                     _pdf_content.push(this._indication(">", "ToDo: actInfo", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: TMT", "#3F51B5"));
+
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_asrs);
-                    _pdf_content.push(this._indication(">", "ToDo: ASRS", "#3F51B5"));
+                    
                     _pdf_content.push(this._indication(">", "ToDo: AASE", "#3F51B5"));
                     _pdf_content.push(this._pageBreak());
+                    
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_bscl);
+                    
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_bdi);
+                    
                     _pdf_content.push(this._indication(">", "ToDo: ISK", "#3F51B5"));
+                    
                     _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
+                    
                     _pdf_content.push(this._indication(">", "ToDo: WHOQOL", "#3F51B5"));
                 } else {
                     _pdf_content.push(this._spacer(120));
