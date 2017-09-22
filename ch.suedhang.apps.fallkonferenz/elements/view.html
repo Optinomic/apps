@@ -208,6 +208,10 @@
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
 
+                <div id="content_bdi" class="grid-border-top">
+                    <bdi-element app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></bdi-element>
+                </div>
+
                 <div id="content_isk" class="grid-border-top">
                     <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_isk.have_data]]">
@@ -296,7 +300,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 3;
+            var jobs_total = 4;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -329,6 +333,8 @@
 
                     _pdf_content.push(this._indication(">", "ToDo: actInfo", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: TMT", "#3F51B5"));
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_asrs);
                     _pdf_content.push(this._indication(">", "ToDo: ASRS", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: AASE", "#3F51B5"));
                     _pdf_content.push(this._pageBreak());
@@ -395,6 +401,11 @@
 
             if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
                 jobs_done._pdf_full_bscl = true;
+                check();
+            };
+
+            if ((this._pdf_full_asrs !== undefined) && (this._pdf_full_asrs !== null)) {
+                jobs_done._pdf_full_asrs = true;
                 check();
             };
 
