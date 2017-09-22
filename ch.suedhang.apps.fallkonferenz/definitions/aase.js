@@ -1,7 +1,7 @@
 d.aase = {
     "options": {
-        "min": 0,
-        "max": 4,
+        "min": -0.5,
+        "max": 4.5,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,
@@ -58,17 +58,17 @@ d.aase = {
     }],
     "ranges": [{
         "range_start": 0,
-        "range_stop": 1,
+        "range_stop": 0.999,
         "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
     }, {
         "range_start": 1,
-        "range_stop": 2,
+        "range_stop": 1.999,
         "text": "geringe Versuchung",
         "color": "#FFA000"
     }, {
         "range_start": 2,
-        "range_stop": 3,
+        "range_stop": 2.999,
         "text": "hohe Versuchung",
         "color": "#FB7200"
     }, {
