@@ -208,7 +208,7 @@
                 <div id="content_bscl" class="grid-border-top">
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
-                <div id="content_bdi" class="grid-border-top">
+                <div id="content_bdi_todelete" class="grid-border-top">
                     <optinomic-title small h1="BDI-II" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(Beck Depressions-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_bdi.have_data]]">
                         <h3>Keine BDI-Daten vorhanden.</h3>
@@ -216,6 +216,9 @@
                     <template is="dom-if" if="[[_sr_bdi.have_data]]">
                         <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
                     </template>
+                </div>
+                <div id="content_bid" class="grid-border-top">
+                    <bdi-element app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></bdi-element>
                 </div>
                 <div id="content_isk" class="grid-border-top">
                     <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
@@ -408,7 +411,6 @@
                 jobs_done._pdf_app_info = true;
                 check();
             };
-
 
             
         },
@@ -654,6 +656,11 @@
         _event_pdf_full_bscl: function(e) {
             this.set('_pdf_full_bscl', e.detail);
             console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
+        },
+
+        _event_pdf_full_bdi: function(e) {
+            this.set('_pdf_full_bdi', e.detail);
+            console.log('(event) _pdf_full_bdi ==> ', this._pdf_full_bdi);
         },
 
         _event_pdf_app_info: function(e) {
