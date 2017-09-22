@@ -1,6 +1,6 @@
 properties: {
     _clinic: {
-        type: String,
+        type: Object,
         statePath: 'clinic.data'
     },
 
@@ -128,6 +128,11 @@ properties: {
     },
 
     _pdf_full_bscl: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
+    _pdf_full_bdi: {
         type: Object,
         value: null,
         observer: '_buildPDF'
