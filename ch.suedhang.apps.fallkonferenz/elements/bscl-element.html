@@ -38,7 +38,7 @@
         <div id="bscl_element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
-                    <optinomic-title small h1="[[_d.title]]" h3="[[_d.name]]"></optinomic-title>
+                    <optinomic-title small h1="[[_d.name]]" h2="[[_d.subtitle]]" h3="[[_d.title]]"></optinomic-title>
                 </div>
                 <div>
                     <template is="dom-if" if="[[_pdf_ready]]">
@@ -220,7 +220,7 @@
             var d = {};
 
             d.name = "BSCL";
-            d.title = "Symptomcheckliste";
+            d.title = "Brief Symptom Checklist";
             d.subtitle = "Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.";
 
 
@@ -479,7 +479,7 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
@@ -487,7 +487,7 @@
                     _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
                     _pdf_content.push(this._pdf_app_info);
                 } else {
-                    _pdf_content.push(this._heading(d.title + " (" + d.name + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
                     _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
                     _pdf_content.push(this._pdf_app_info);

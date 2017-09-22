@@ -58,9 +58,9 @@
             </div>
             <div id="main_content">
                 <div id="content_actinfo" class="grid-border-top">
-                    <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
+                    <optinomic-title small h1="act-info" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich - Statistik der stationären Behandlung der Alkoholabhängigkeit in der Schweiz" h3="Information network on addiction care and therapy"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
-                        <h3>Keine ActInfo-Daten vorhanden.</h3>
+                        <h3>Keine act-info-Daten vorhanden.</h3>
                     </template>
                     <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
                         <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
@@ -78,7 +78,7 @@
                     </template>
                 </div>
                 <div id="content_tmt" class="grid-border-top">
-                    <optinomic-title small h1="Trail Making Test (TMT)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="TMT"></optinomic-title>
+                    <optinomic-title small h1="TMT" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="(Trail Making Test)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_tmt.have_data]]">
                         <h3>Keine TMT-Daten vorhanden.</h3>
                     </template>
@@ -192,12 +192,12 @@
                 </div>
                 <div id="content_asrs" class="grid-border-top">
                     <template is="dom-if" if="[[_sr_asrs.have_data]]">
-                        <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
+                        <optinomic-title small h1="ASRS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene"></optinomic-title>
                         <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
                     </template>
                 </div>
                 <div id="content_aase" class="grid-border-top">
-                    <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
+                    <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(Alcohol Abstinence Self-Efficacy - Skala Versuchung)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_aase.have_data]]">
                         <h3>Keine AASE-Daten vorhanden.</h3>
                     </template>
@@ -209,7 +209,7 @@
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
                 <div id="content_bdi" class="grid-border-top">
-                    <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
+                    <optinomic-title small h1="BDI-II" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(Beck Depressions-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_bdi.have_data]]">
                         <h3>Keine BDI-Daten vorhanden.</h3>
                     </template>
@@ -218,7 +218,7 @@
                     </template>
                 </div>
                 <div id="content_isk" class="grid-border-top">
-                    <optinomic-title small h1="Inventar Sozialer Kompetenzen" h2="ISK Kurzform" h3="(ISK)"></optinomic-title>
+                    <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_isk.have_data]]">
                         <h3>Keine ISK-Daten vorhanden.</h3>
                     </template>
@@ -232,7 +232,7 @@
                     </template>
                 </div>
                 <div id="content_sci" class="grid-border-top">
-                    <optinomic-title small h1="Stress-Coping-Inventar" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(SCI)"></optinomic-title>
+                    <optinomic-title small h1="SCI" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(Stress-Coping-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_sci.have_data]]">
                         <h3>Keine SCI-Daten vorhanden.</h3>
                     </template>
@@ -252,7 +252,7 @@
                     </template>
                 </div>
                 <div id="content_whoqol" class="grid-border-top">
-                    <optinomic-title small h1="Lebensqualität" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="WHOQOL-BREF (WHO Quality of Life)"></optinomic-title>
+                    <optinomic-title small h1="WHOQOL-BREF" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="(WHO Quality of Life - Kurzform)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
                         <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
                     </template>
