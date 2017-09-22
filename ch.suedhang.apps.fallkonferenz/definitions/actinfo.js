@@ -4,7 +4,7 @@ d.actinfo_audit = {
         "max": 41,
         "item_height": 50,
         "item_text_left": 100,
-        "item_text_right": 100,
+        "item_text_right": 150,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
