@@ -2,7 +2,7 @@ d.bscl = {
     "options": {
         "min": -2,
         "max": 16.5,
-        "item_height": 60,
+        "item_height": 58,
         "item_text_left": 100,
         "item_text_right": 370,
         "color_grid": "#9E9E9E",
