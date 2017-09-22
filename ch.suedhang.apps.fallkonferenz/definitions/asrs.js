@@ -1,7 +1,7 @@
 d.asrs = {
     "options": {
-        "min": -0.5,
-        "max": 6.5,
+        "min": -1,
+        "max": 7,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,

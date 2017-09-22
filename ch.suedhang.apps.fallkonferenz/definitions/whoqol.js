@@ -1,7 +1,7 @@
 d.whoqol = {
     "options": {
-        "min": -0.5,
-        "max": 100.5,
+        "min": -1,
+        "max": 101,
         "item_height": 75,
         "item_text_left": 120,
         "item_text_right": 120,
