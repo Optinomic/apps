@@ -1,31 +1,4 @@
+## ZüPaZ (Zürcher Fragebogen zur Patientenzufriedenheit in der Psychiatrie)
 
-
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Optinomic-App 
-
-
-#### Zusammenfassung
-###### Vorgänger-/ Originalversion
-
-###### Anwendungsbereich
-
-###### Theoretischer Hintergrund
-
-
-###### Auswertung / Interpretation
-
-
-###### Quelle / Printversion
-
-
-###### Weiterführende Links
-
-
-###Contact
-*Optinomic GmbH*   
-*Haldenstrasse 7*     
-*CH - 8942 Oberrieden*     
-*+41(0)44 508 26 76*    
-*info@optinomic.com*   
-*[www.optinomic.com](http://www.optinomic.com)*   
-
+### Zusammenfassung
+Südhang-Version: Erfassung der Patientenzufriedenheit in den Bereichen Behandlung, Hotellerie, Mitspracherecht.

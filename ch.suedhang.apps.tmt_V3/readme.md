@@ -1,25 +1,7 @@
+## TMT (Trail Making Test)
 
+### Zusammenfassung
+Mit dem TMT wird die Fähigkeit zum visuellen Scannen erfasst, sowie die psychomotorische Geschwindigkeit (Trail Making Test A) und Leistungen der exekutiven Funktionen (insbesondere kognitive Flexibilität und Switching, Trail Making Test B). Der Quotient B /A stellt das 'reine' Maß der im Trail Making Test B erhobenen exekutiven Funktionen dar und ist unabhängig von einer evtl. vorliegenden Verlangsamung. Normwerte sind für letzteren Kennwert nur für Personen ≥ 50-jährig verfügbar.  Faustregel: ein  B/A-Quotient > 2.5 gilt als Hinweis für eine auffällige Testleistung.
 
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)
-## Optinomic-App 
-
-
-
-#### Beschreibung
-- Beschreiben Sie die Funktionalität Ihrer Applikation hier. Mit Apps werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche oder gewünschte nicht systemtechnische Funktionalität zu bearbeiten oder zu unterstützen, das heißt sie dienen der „Lösung von Benutzerproblemen“.
-
-#### Auswertung / Ergebnisse
-- Beschreiben Sie die Auswertungen / Ergebnisse Ihrer Applikation hier.
-
-
-
-
-
-###Contact
-*Optinomic GmbH*   
-*Haldenstrasse 7*     
-*CH - 8942 Oberrieden*     
-*+41(0)44 508 26 76*    
-*info@optinomic.com*   
-*[www.optinomic.com](http://www.optinomic.com)*   
-
+#### Auswertung / Interpretation
+Ausgabe der Subskalen in z-Werten auf der Normstichprobe von Tombaugh (2004) beruhend. Als Vergleich dient die bisherige Patientengruppe mit den gleichen Merkmalen in Bezug auf das Alter und den Ausbildungsgrad (bis 12 Jahre vs. mehr als 12 Jahre).
