@@ -208,16 +208,7 @@
                 <div id="content_bscl" class="grid-border-top">
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
-                <div id="content_bdi_todelete" class="grid-border-top">
-                    <optinomic-title small h1="BDI-II" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(Beck Depressions-Inventar)"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_bdi.have_data]]">
-                        <h3>Keine BDI-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_bdi.have_data]]">
-                        <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
-                    </template>
-                </div>
-                <div id="content_bid" class="grid-border-top">
+                <div id="content_bdi" class="grid-border-top">
                     <bdi-element app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></bdi-element>
                 </div>
                 <div id="content_isk" class="grid-border-top">
@@ -295,7 +286,6 @@
             include(definitions/tmt.js)
             include(definitions/aase.js)
             include(definitions/asrs.js)
-            include(definitions/bdi.js)
             include(definitions/isk.js)
             include(definitions/sci.js)
             include(definitions/whoqol.js)
@@ -309,7 +299,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 2;
+            var jobs_total = 3;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -338,12 +328,14 @@
                     _pdf_content.push(this._pdf_app_info);
 
                     _pdf_content.push(this._pageBreak());
-                    _pdf_content.push(this._pdf_full_bscl);
+                    
 
                     _pdf_content.push(this._indication(">", "ToDo: actInfo", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: TMT", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: ASRS", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: AASE", "#3F51B5"));
+                    _pdf_content.push(this._pdf_full_bscl);
+                    _pdf_content.push(this._pdf_full_bdi);
                     _pdf_content.push(this._indication(">", "ToDo: BDI-II", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: ISK", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
@@ -404,6 +396,11 @@
 
             if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
                 jobs_done._pdf_full_bscl = true;
+                check();
+            };
+
+            if ((this._pdf_full_bdi !== undefined) && (this._pdf_full_bdi !== null)) {
+                jobs_done._pdf_full_bdi = true;
                 check();
             };
 
