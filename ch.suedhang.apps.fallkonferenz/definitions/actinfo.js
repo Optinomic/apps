@@ -65,7 +65,7 @@ d.actinfo_fagerstroem = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": false,
-        "topnumber_hide_first_last": false,
+        "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "app_name",
