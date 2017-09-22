@@ -190,12 +190,11 @@
                         </template>
                     </template>
                 </div>
+                
                 <div id="content_asrs" class="grid-border-top">
-                    <template is="dom-if" if="[[_sr_asrs.have_data]]">
-                        <optinomic-title small h1="ASRS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene"></optinomic-title>
-                        <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
-                    </template>
+                    <bdi-element app-id="ch.suedhang.apps.asrs" on-pdfready="_event_pdf_full_asrs"></bdi-element>
                 </div>
+
                 <div id="content_aase" class="grid-border-top">
                     <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(Alcohol Abstinence Self-Efficacy - Skala Versuchung)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_aase.have_data]]">
@@ -208,9 +207,7 @@
                 <div id="content_bscl" class="grid-border-top">
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
-                <div id="content_bdi" class="grid-border-top">
-                    <bdi-element app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></bdi-element>
-                </div>
+
                 <div id="content_isk" class="grid-border-top">
                     <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_isk.have_data]]">
@@ -339,7 +336,6 @@
                     _pdf_content.push(this._pdf_full_bscl);
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_bdi);
-                    _pdf_content.push(this._indication(">", "ToDo: BDI-II", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: ISK", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
                     _pdf_content.push(this._indication(">", "ToDo: WHOQOL", "#3F51B5"));
@@ -651,9 +647,15 @@
         // Event Handler
         // -----------------------------
 
+
         _event_pdf_full_bscl: function(e) {
             this.set('_pdf_full_bscl', e.detail);
             console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
+        },
+
+        _event_pdf_full_asrs: function(e) {
+            this.set('_pdf_full_asrs', e.detail);
+            console.log('(event) _pdf_full_asrs ==> ', this._pdf_full_asrs);
         },
 
         _event_pdf_full_bdi: function(e) {
