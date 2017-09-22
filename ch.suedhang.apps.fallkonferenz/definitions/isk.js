@@ -93,8 +93,8 @@ d.isk = {
         "text": "starke Ausprägung",
         "color": "#F44336"
     }, {
-        "range_start": -2,
-        "range_stop": 2,
+        "range_start": -1,
+        "range_stop": 1,
         "text": "normale Ausprägung",
         "color": "#4CAF50"
     }, {

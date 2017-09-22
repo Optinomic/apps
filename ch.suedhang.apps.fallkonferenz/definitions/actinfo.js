@@ -1,7 +1,7 @@
 d.actinfo_audit = {
     "options": {
-        "min": 0,
-        "max": 40,
+        "min": -0.5,
+        "max": 40.5,
         "item_height": 50,
         "item_text_left": 100,
         "item_text_right": 100,
@@ -50,8 +50,8 @@ d.actinfo_audit = {
 
 d.actinfo_fagerstroem = {
     "options": {
-        "min": 0,
-        "max": 10,
+        "min": -0.5,
+        "max": 10.5,
         "item_height": 50,
         "item_text_left": 100,
         "item_text_right": 100,
