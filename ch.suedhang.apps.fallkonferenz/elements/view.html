@@ -59,7 +59,7 @@
             <div id="main_content">
                 <div id="content_actinfo" class="grid-border-top">
                     <optinomic-title small h1="act-info" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich - Statistik der stationären Behandlung der Alkoholabhängigkeit in der Schweiz" h3="Information network on addiction care and therapy"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
+                    <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]] && [[!_sr_actinfo_aus.have_data]]">
                         <h3>Keine act-info-Daten vorhanden.</h3>
                     </template>
                     <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
