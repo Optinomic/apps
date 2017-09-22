@@ -28,6 +28,7 @@ include(../lib/polymer/index.m4)
 include(../lib/polymer/elements/dev/behavior_makepdf.html)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/bscl-element.html)
+include(elements/bdi-element.html)
 include(elements/view.html)
 
 
