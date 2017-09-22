@@ -38,7 +38,7 @@ d.sci_stress = {
         "clinic_sample_var": null
     }],
     "ranges": [{
-        "range_start": -999,
+        "range_start": 1,
         "range_stop": 1.5,
         "text": "Stanine: 1 | 4%",
         "color": "#2E7D32"
@@ -79,7 +79,7 @@ d.sci_stress = {
         "color": "#FB7200"
     }, {
         "range_start": 8.5,
-        "range_stop": 999,
+        "range_stop": 9,
         "text": "Stanine: 9 | 4%",
         "color": "#C62828"
     }]
@@ -146,7 +146,7 @@ d.sci_hilfreich = {
         "clinic_sample_var": null
     }],
     "ranges": [{
-        "range_start": -999,
+        "range_start": 1,
         "range_stop": 1.5,
         "text": "Stanine: 1 | 4%",
         "color": "#C62828"
@@ -187,7 +187,7 @@ d.sci_hilfreich = {
         "color": "#2E7D32"
     }, {
         "range_start": 8.5,
-        "range_stop": 999,
+        "range_stop": 9,
         "text": "Stanine: 9 | 4%",
         "color": "#2E7D32"
     }]
