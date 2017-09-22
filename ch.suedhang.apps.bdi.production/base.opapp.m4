@@ -2,7 +2,7 @@
 id = ch.suedhang.apps.bdi.production
 name = Beck-Depressions-Inventar (BDI-II)
 parent = ch.suedhang.apps.bdi
-short_description = Hinweis auf den Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
+short_description = Schweregrad depressiver Symptomatik im klinischen Bereich
 version = include(VERSION)
 type = patient
 

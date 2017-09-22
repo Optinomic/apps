@@ -1,13 +1,13 @@
 [module]
 id = ch.suedhang.apps.bdi
 name = Beck-Depressions-Inventar (BDI-II)
-short_description = Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen
+short_description = Schweregrad depressiver Symptomatik
 version = include(VERSION)
 type = patient
 
 
 [description]
-Schweregrad depressiver Symptomatik im klinischen Bereich, 21 Aussagen.
+Der Summenwert aus den 21 Fragebereichen des Beck Depressions-Inventar liefert einen Hinweis auf den Schweregrad einer möglichen depressiven Symptomatik.
 
 
 [developer]
