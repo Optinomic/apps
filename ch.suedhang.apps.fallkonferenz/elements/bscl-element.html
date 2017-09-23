@@ -148,11 +148,11 @@
                                         <vaadin-grid-column>
                                             <template class="header">
                                                 <vaadin-grid-sorter path="dropout_code">
-                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Begründung</span>
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Begründung<br>Code</span>
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">[[item.dropout_reason]] <span style="color:#F44336">(Code: [[item.dropout_code]])</span></span>
+                                                <span draggable="true" class="body-1">[[item.dropout_reason]]<br><span class="caption" style="color:#F44336 !important">[[item.dropout_code]]</span></span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
