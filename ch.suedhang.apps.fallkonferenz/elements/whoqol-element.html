@@ -156,7 +156,7 @@
 
             include(definitions/whoqol.js)
             // Clone options for pdf - nothing is overwritten
-            d.whoqol.options_pdf = JSON.parse(JSON.stringify(d.asrs.options));
+            d.whoqol.options_pdf = JSON.parse(JSON.stringify(d.whoqol.options));
 
 
             // Set & Log
@@ -231,7 +231,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BDI: ', this._pdf_content);
+                console.log('(PDF | Ready) WHOQOL-BREF: ', this._pdf_content);
 
             }.bind(this);
 
