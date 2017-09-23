@@ -36,6 +36,15 @@
             border-radius: 3px;
             padding: 24px;
         }
+
+        .content_block {
+            margin-bottom: 12px;
+            margin-bottom: 48px;
+            border-top-color: #E0E0E0;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
         </style>
         <div id="title" class="layout horizontal flex">
             <div class="flex">
@@ -57,7 +66,7 @@
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
             <div id="main_content">
-                <div id="content_actinfo" class="grid-border-top">
+                <div id="content_actinfo" class="content_block">
                     <optinomic-title small h1="act-info" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich - Statistik der stationären Behandlung der Alkoholabhängigkeit in der Schweiz" h3="Information network on addiction care and therapy"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
                         <h3>Keine act-info-Daten vorhanden.</h3>
@@ -77,7 +86,7 @@
                         <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
                     </template>
                 </div>
-                <div id="content_tmt" class="grid-border-top">
+                <div id="content_tmt" class="content_block">
                     <optinomic-title small h1="TMT" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="(Trail Making Test)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_tmt.have_data]]">
                         <h3>Keine TMT-Daten vorhanden.</h3>
@@ -191,11 +200,11 @@
                     </template>
                 </div>
                 
-                <div id="content_asrs" class="grid-border-top">
+                <div id="content_asrs" class="content_block">
                     <asrs-element app-id="ch.suedhang.apps.asrs" on-pdfready="_event_pdf_full_asrs"></asrs-element>
                 </div>
 
-                <div id="content_aase" class="grid-border-top">
+                <div id="content_aase" class="content_block">
                     <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(Alcohol Abstinence Self-Efficacy - Skala Versuchung)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_aase.have_data]]">
                         <h3>Keine AASE-Daten vorhanden.</h3>
@@ -204,15 +213,15 @@
                         <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
                     </template>
                 </div>
-                <div id="content_bscl" class="grid-border-top">
+                <div id="content_bscl" class="content_block">
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
 
-                <div id="content_bdi" class="grid-border-top">
+                <div id="content_bdi" class="content_block">
                     <bdi-element app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></bdi-element>
                 </div>
 
-                <div id="content_isk" class="grid-border-top">
+                <div id="content_isk" class="content_block">
                     <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_isk.have_data]]">
                         <h3>Keine ISK-Daten vorhanden.</h3>
@@ -226,7 +235,7 @@
                         </template>
                     </template>
                 </div>
-                <div id="content_sci" class="grid-border-top">
+                <div id="content_sci" class="content_block">
                     <optinomic-title small h1="SCI" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(Stress-Coping-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_sci.have_data]]">
                         <h3>Keine SCI-Daten vorhanden.</h3>
@@ -247,7 +256,7 @@
                     </template>
                 </div>
 
-                <div id="content_asrs" class="grid-border-top">
+                <div id="content_asrs" class="content_block">
                     <whoqol-element app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></whoqol-element>
                 </div>
 
