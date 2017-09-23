@@ -13,12 +13,12 @@ function main(responses) {
 
     calc.result_array = [{
         "id": 0,
-        "description": "Körperliche Lebensqualität",
+        "description": "Koerperliche Lebensqualitaet",
         "short": "PHYS",
         "items": 7
     }, {
         "id": 1,
-        "description": "Psychische Lebensqualität",
+        "description": "Psychische Lebensqualitaet",
         "short": "PSYCH",
         "items": 6
     }];
