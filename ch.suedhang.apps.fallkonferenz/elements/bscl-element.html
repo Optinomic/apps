@@ -125,6 +125,37 @@
                                     </vaadin-grid-column-group>
                                 </vaadin-grid>
                             </template>
+                            <template is="dom-if" if="[[_d.bscl_dropouts.defined]]" restamp="true">
+                                <h3>Dropouts</h3>
+                                <vaadin-grid class="full_grid" aria-label="Zusatzangaben" items="[[_d.bscl_dropouts.array]]" column-reordering-allowed="true">
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
+                                        <vaadin-grid-column width="160px" flex-grow="0">
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="mz_date">
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Datum<br>Zeitpunkt</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.mz_typ]]<span class="caption"><br>[[item.mz_datum]]</span></span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Dropout</span></template>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="dropout_code">
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Grund</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.dropout_reason]] ([[item.dropout_code]])</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                </vaadin-grid>
+                            </template>
                         </div>
                     </template>
                     <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
@@ -292,6 +323,11 @@
                                 "array": []
                             };
 
+                            var dopouts = {
+                                "defined": false,
+                                "array": []
+                            };
+
                             this._sr.data.forEach(function(sr, srID) {
                                 if ("zusatzitem" in sr.calculation.scores_calculation) {
                                     var zusatzitem = sr.calculation.scores_calculation.zusatzitem;
@@ -301,15 +337,27 @@
                                         zusatzitem[base_name + "result"] = item.result;
                                         zusatzitem[base_name + "field"] = item.field;
                                     });
-                                    zusatzitems.array.push(zusatzitem);
-                                    if (zusatzitems.array.length > 0) {
-                                        zusatzitems.defined = true;
+
+                                    if (zusatzitem.dropout === true) {
+                                        zusatzitems.array.push(zusatzitem);
+                                    } else {
+                                        dopouts.array.push(zusatzitem);
                                     };
+                                    
                                 };
                             });
 
+                            if (zusatzitems.array.length > 0) {
+                                zusatzitems.defined = true;
+                            };
+
+                            if (dopouts.array.length > 0) {
+                                dopouts.defined = true;
+                            };
+
                             this.set('_d.bscl_zusatzitems', zusatzitems);
-                            console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems);
+                            this.set('_d.bscl_dropouts', dopouts);
+                            console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems, dopouts);
                         } else {
                             // Build PDF even with no Data.
                             this._buildPDF();

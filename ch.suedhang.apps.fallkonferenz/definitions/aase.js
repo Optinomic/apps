@@ -58,7 +58,7 @@ d.aase = {
         "clinic_sample_var": null
     }],
     "ranges": [{
-        "range_start": 0,
+        "range_start": -999,
         "range_stop": 0.999,
         "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
@@ -74,7 +74,7 @@ d.aase = {
         "color": "#FB7200"
     }, {
         "range_start": 3,
-        "range_stop": 4,
+        "range_stop": 999,
         "text": "sehr hohe Versuchung",
         "color": "#C62828"
     }]

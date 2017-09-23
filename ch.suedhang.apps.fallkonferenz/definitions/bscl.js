@@ -1,7 +1,7 @@
 d.bscl = {
     "options": {
         "min": -2,
-        "max": 18,
+        "max": 16,
         "item_height": 58,
         "item_text_left": 100,
         "item_text_right": 370,
@@ -15,7 +15,7 @@ d.bscl = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
-        "topnumber_hide_first_last": false,
+        "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 2,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
