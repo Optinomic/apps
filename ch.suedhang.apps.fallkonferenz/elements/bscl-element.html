@@ -62,7 +62,9 @@
                         </div>
                         <div id="data_content">
                             <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                                <template is="dom-if" if="[[_d.bscl_zusatzitems.defined]]" restamp="true">
+                                    <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
+                                </template>
                             </div>
                             <template is="dom-if" if="[[_d.bscl_zusatzitems.defined]]" restamp="true">
                                 <h3>Zusatzangaben</h3>
@@ -146,11 +148,11 @@
                                         <vaadin-grid-column>
                                             <template class="header">
                                                 <vaadin-grid-sorter path="dropout_code">
-                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Grund</span>
+                                                    <span class="caption" stlye="color:#424242;font-weight:400;">Begründung</span>
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">[[item.dropout_reason]] ([[item.dropout_code]])</span>
+                                                <span draggable="true" class="body-1">[[item.dropout_reason]] <span style="color:#F44336">(Code: [[item.dropout_code]])</span></span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
