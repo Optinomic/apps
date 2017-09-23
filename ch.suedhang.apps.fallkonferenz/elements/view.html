@@ -246,15 +246,6 @@
                         </template>
                     </template>
                 </div>
-                <div id="content_whoqol" class="grid-border-top">
-                    <optinomic-title small h1="WHOQOL-BREF" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="(WHO Quality of Life - Kurzform)"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
-                        <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_whoqol.have_data]]">
-                        <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
-                    </template>
-                </div>
 
                 <div id="content_asrs" class="grid-border-top">
                     <whoqol-element app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></whoqol-element>
