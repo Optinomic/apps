@@ -70,5 +70,5 @@ survey = WHOQOL
 
 
 [calculation phys_psych_calculation javascript]
-include(calculations/phys_psych_calculation.js)
+include(calculations/whoqol_patient_calc.js)
 
