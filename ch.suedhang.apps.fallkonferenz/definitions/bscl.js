@@ -15,7 +15,7 @@ d.bscl = {
         "show_score_circles": true,
         "show_settings_block": false,
         "allow_toggle_settings_block": true,
-        "topnumber_hide_first_last": true,
+        "topnumber_hide_first_last": false,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 2,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
