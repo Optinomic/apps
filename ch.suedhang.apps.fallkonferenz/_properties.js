@@ -120,6 +120,11 @@ properties: {
         value: null,
         observer: '_buildPDF'
     },
+    _pdf_full_whoqol: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
     _pdf_app_info: {
         type: Object,
         value: null,

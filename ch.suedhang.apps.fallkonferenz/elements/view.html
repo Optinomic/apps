@@ -255,6 +255,11 @@
                         <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
                     </template>
                 </div>
+
+                <div id="content_asrs" class="grid-border-top">
+                    <asrs-element app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></asrs-element>
+                </div>
+
             </div>
         </template>
         <template is="dom-if" if="[[!_d.init_done]]">
@@ -289,8 +294,7 @@
             include(definitions/asrs.js)
             include(definitions/isk.js)
             include(definitions/sci.js)
-            include(definitions/whoqol.js)
-
+            
 
             d.init_done = true;
             this.set('_d', d);
@@ -350,7 +354,9 @@
                     
                     _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
                     
-                    _pdf_content.push(this._indication(">", "ToDo: WHOQOL", "#3F51B5"));
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_whoqol);
+                    
                 } else {
                     _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
@@ -679,6 +685,12 @@
             this.set('_pdf_full_bdi', e.detail);
             console.log('(event) _pdf_full_bdi ==> ', this._pdf_full_bdi);
         },
+
+        _event_pdf_full_whoqol: function(e) {
+            this.set('_pdf_full_whoqol', e.detail);
+            console.log('(event) _pdf_full_whoqol ==> ', this._pdf_full_whoqol);
+        },
+        
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
