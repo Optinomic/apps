@@ -226,18 +226,19 @@
                 </div>
 
                 <div id="content_sci" class="content_block">
+                    <sci-element app-id="ch.suedhang.apps.sci" on-pdfready="_event_pdf_full_sci"></sci-element>
+                </div>
+
+                <div id="" class="content_block">
                     <optinomic-title small h1="SCI" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(Stress-Coping-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_sci.have_data]]">
                         <h3>Keine SCI-Daten vorhanden.</h3>
                     </template>
                     <template is="dom-if" if="[[_sr_sci.have_data]]">
                         <template is="dom-if" if="[[_sr_sci.done]]">
-                            <h3>Stressereignisse und Syptome</h3>
-                            <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                            
                             <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                            <h3>Copingstrategien</h3>
-                            <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
-                            <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                            
                             <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                         </template>
                         <template is="dom-if" if="[[!_sr_sci.done]]">
@@ -293,7 +294,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 5;
+            var jobs_total = 6;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -341,8 +342,9 @@
                     
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_isk);
-                    
-                    _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
+
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_sci);
                     
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_whoqol);
@@ -416,8 +418,13 @@
                 check();
             };
 
-           if ((this._pdf_full_isk !== undefined) && (this._pdf_full_isk !== null)) {
+            if ((this._pdf_full_isk !== undefined) && (this._pdf_full_isk !== null)) {
                 jobs_done._pdf_full_isk = true;
+                check();
+            };
+
+            if ((this._pdf_full_sci !== undefined) && (this._pdf_full_sci !== null)) {
+                jobs_done._pdf_full_sci = true;
                 check();
             };
 
@@ -488,62 +495,6 @@
         },
 
         _processSCI: function() {
-            this.debounce('_processSCI', function() {
-
-                var _sr_sci = [];
-                var population = ""
-                if ((this._sr_sci_response !== undefined) && (this._sr_sci_response !== null)) {
-                    if (this._sr_sci_response.data !== undefined) {
-                        this._sr_sci_response.data.forEach(function(current, ID) {
-
-                            // console.warn('_processSCI - Current', ID, current);
-
-                            current.info = {};
-                            current.info.app_zeitpunkt = 'Unbekannt';
-                            if ("Erhebungszeitpunkt" in current.calculation.scores.response.data.response) {
-
-                                if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "1") {
-                                    current.info.app_zeitpunkt = 'Eintritt';
-                                } else {
-                                    if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "2") {
-                                        current.info.app_zeitpunkt = 'Austritt';
-                                    } else {
-                                        current.info.app_zeitpunkt = 'Verlauf';
-                                    };
-                                };
-                            };
-
-                            current.info.score_0 = parseInt(current.calculation.scores.scores["0"].stanine);
-                            current.info.score_1 = parseInt(current.calculation.scores.scores["1"].stanine);
-                            current.info.score_2 = parseInt(current.calculation.scores.scores["2"].stanine);
-                            current.info.score_3 = parseInt(current.calculation.scores.scores["3"].stanine);
-                            current.info.score_4 = parseInt(current.calculation.scores.scores["4"].stanine);
-                            current.info.score_5 = parseInt(current.calculation.scores.scores["5"].stanine);
-                            current.info.score_6 = 10 - parseInt(current.calculation.scores.scores["6"].stanine);
-
-                            population = current.calculation.scores.population.name;
-
-                            _sr_sci.push(current);
-
-                        });
-
-                        var return_obj = {
-                            "done": true,
-                            "population": population,
-                            "data": _sr_sci
-                        }
-
-                        if (_sr_sci.length > 0) {
-                            return_obj.have_data = true;
-                        } else {
-                            return_obj.have_data = false;
-                        };
-                        this.set('_sr_sci', return_obj);
-                        console.warn('_processSCI', this._sr_sci);
-                    };
-                };
-
-            }, 250);
         },
 
         _sr_iskChanged: function() {
@@ -696,6 +647,11 @@
         _event_pdf_full_isk: function(e) {
             this.set('_pdf_full_isk', e.detail);
             // console.log('(event) _pdf_full_isk ==> ', this._pdf_full_isk);
+        },
+        
+        _event_pdf_full_sci: function(e) {
+            this.set('_pdf_full_sci', e.detail);
+            // console.log('(event) _pdf_full_isk ==> ', this._pdf_full_sci);
         },
         
 

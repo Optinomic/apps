@@ -31,6 +31,7 @@ include(elements/asrs-element.html)
 include(elements/bscl-element.html)
 include(elements/bdi-element.html)
 include(elements/isk-element.html)
+include(elements/sci-element.html)
 include(elements/whoqol-element.html)
 include(elements/view.html)
 
