@@ -229,24 +229,6 @@
                     <sci-element app-id="ch.suedhang.apps.sci" on-pdfready="_event_pdf_full_sci"></sci-element>
                 </div>
 
-                <div id="" class="content_block">
-                    <optinomic-title small h1="SCI" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(Stress-Coping-Inventar)"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_sci.have_data]]">
-                        <h3>Keine SCI-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_sci.have_data]]">
-                        <template is="dom-if" if="[[_sr_sci.done]]">
-                            
-                            <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                            
-                            <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                        </template>
-                        <template is="dom-if" if="[[!_sr_sci.done]]">
-                            <p style="color:#3F51B5">Erweitere vorhandene Resultate...</p>
-                        </template>
-                    </template>
-                </div>
-
                 <div id="content_asrs" class="content_block">
                     <whoqol-element app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></whoqol-element>
                 </div>
@@ -492,9 +474,6 @@
                 };
 
             }, 350);
-        },
-
-        _processSCI: function() {
         },
 
         _sr_iskChanged: function() {
