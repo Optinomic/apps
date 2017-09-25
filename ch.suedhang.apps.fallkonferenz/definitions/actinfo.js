@@ -3,8 +3,8 @@ d.actinfo_audit = {
         "min": -1,
         "max": 41,
         "item_height": 50,
-        "item_text_left": 100,
-        "item_text_right": 150,
+        "item_text_left": 125,
+        "item_text_right": 125,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
@@ -53,8 +53,8 @@ d.actinfo_fagerstroem = {
         "min": -1,
         "max": 11,
         "item_height": 50,
-        "item_text_left": 100,
-        "item_text_right": 100,
+        "item_text_left": 125,
+        "item_text_right": 125,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
@@ -82,22 +82,22 @@ d.actinfo_fagerstroem = {
     "ranges": [{
         "range_start": 0,
         "range_stop": 2.5,
-        "text": "Gering ausgeprägte körperliche Abhängigkeit.",
+        "text": "Gering ausgeprägt",
         "color": "#2E7D32"
     }, {
         "range_start": 2.5,
         "range_stop": 4.5,
-        "text": "Mittelstark ausgeprägte körperliche Abhängigkeit.",
+        "text": "Mittelstark ausgeprägt",
         "color": "#FFA000"
     }, {
         "range_start": 4.5,
         "range_stop": 6.5,
-        "text": "Stark ausgeprägte körperliche Abhängigkeit.",
+        "text": "Stark ausgeprägt",
         "color": "#FB7200"
     }, {
         "range_start": 6.5,
         "range_stop": 10,
-        "text": "Sehr stark ausgeprägte körperliche Abhängigkeit.",
+        "text": "Sehr stark ausgeprägt",
         "color": "#C62828"
     }]
 };
