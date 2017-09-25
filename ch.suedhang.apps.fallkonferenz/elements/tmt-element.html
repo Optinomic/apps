@@ -383,27 +383,27 @@
             var talbe_header = [
                 [
                     { "text": "Messzeitpunkt", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "Datum", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "Datum", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ],
                 [
                     { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ],
                 [
                     { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ],
                 [
                     { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ],
                 [
                     { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ],
                 [
                     { "text": "Quotient", "style": "p", "margin": [0, 0, 0, 0] },
-                    { "text": "B/A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    { "text": "B/A", "style": "chart_p", "margin": [0, 0, 0, 6] }
                 ]
             ];
 
@@ -429,7 +429,7 @@
                 ];
 
                 if (this._show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)) {
-                    var ba = { "text": item.calculation.tmt_score.TMTBError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
+                    var ba = { "text": item.calculation.tmt_score.quotient_rounded, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
                 } else {
                     var ba = { "text": "-", "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
                 }
@@ -451,6 +451,8 @@
 
             return_stack.stack.push(this._heading("Datenblatt", null, 'h2'));
             return_stack.stack.push(table);
+
+            console.log('datenblatt', JSON.stringify(return_stack, null, 2));
 
             return return_stack;
         },
