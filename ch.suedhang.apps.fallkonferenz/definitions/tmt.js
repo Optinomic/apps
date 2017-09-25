@@ -2,7 +2,7 @@ d.tmt = {
     "options": {
         "min": -5,
         "max": 5,
-        "item_height": 75,
+        "item_height": 58,
         "item_text_left": 100,
         "item_text_right": 100,
         "color_grid": "#9E9E9E",
@@ -18,7 +18,7 @@ d.tmt = {
         "allow_toggle_settings_block": true,
         "topnumber_hide_first_last": false,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text_Quotient",
+        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text",
         "response_date_path": "date"
     },
     "start": {

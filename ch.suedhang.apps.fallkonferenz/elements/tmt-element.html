@@ -62,7 +62,7 @@
                         </div>
                         <div id="data_content">
                             <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" start="[[_d.tmt.start]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
                             </div>
                             <div id="datenblatt">
                                 <h3>Datenblatt</h3>
@@ -76,21 +76,17 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1" style="text-align: right">
-                                            {{_computeNiceDate(item.date)}}
-                                        </span>
+                                                <span draggable="true" class="body-1" style="text-align: right">{{_computeNiceDate(item.date)}}</span>
                                             </template>
                                         </vaadin-grid-column>
                                         <vaadin-grid-column width="180px" flex-grow="0">
                                             <template class="header">
-                                                <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt">
                                                     <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]
-                                        </span>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]</span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
@@ -103,9 +99,7 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTATime]]
-                                        </span>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTATime]]</span>
                                             </template>
                                         </vaadin-grid-column>
                                         <vaadin-grid-column>
@@ -115,9 +109,7 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTAError]]
-                                        </span>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTAError]]</span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
@@ -130,9 +122,7 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template resizable>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTBTime]]
-                                        </span>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTBTime]]</span>
                                             </template>
                                         </vaadin-grid-column>
                                         <vaadin-grid-column>
@@ -142,9 +132,7 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTBError]]
-                                        </span>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTBError]]</span>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
@@ -157,9 +145,12 @@
                                                 </vaadin-grid-sorter>
                                             </template>
                                             <template>
-                                                <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.quotient_rounded]]
-                                        </span>
+                                                <template is="dom-if" if="{{_show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)}}">
+                                                    <span draggable="true" class="body-1">[[item.calculation.tmt_score.quotient_rounded]]</span>
+                                                </template>
+                                                <template is="dom-if" if="{{!_show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)}}">
+                                                    <span draggable="true" class="body-1">-</span>
+                                                </template>
                                             </template>
                                         </vaadin-grid-column>
                                     </vaadin-grid-column-group>
@@ -467,7 +458,7 @@
         },
 
         // -----------------------------
-        // Lifecycle
+        // Computed Functions
         // -----------------------------
         
         _computeNiceDate: function(date_string) {
@@ -485,6 +476,19 @@
                 return null;
             }
         },
+
+        _show_BA: function(mz) {
+            mz = mz || 999
+            if (mz === 1) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
 
         _loadData: function() {
             if ((this.appId !== null) && (this.appId !== undefined)) {
