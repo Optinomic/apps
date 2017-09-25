@@ -9,40 +9,6 @@ properties: {
         statePath: 'apps.current.data'
     },
 
-    _sr_aase: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'ch.suedhang.apps.aase-g'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        }
-    },
-    _sr_tmt: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'ch.suedhang.apps.tmt_V3'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        },
-        observer: '_sr_tmtChanged'
-    },
-    _sr_whoqol: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'com.optinomic.apps.whoqol'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        }
-    },
     _sr_actinfo_ein: {
         type: Object,
         statePath: function(state) {
@@ -74,6 +40,16 @@ properties: {
         }
     },
 
+    _pdf_full_actinfo: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
+    _pdf_full_tmt: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
     _pdf_full_bscl: {
         type: Object,
         value: null,
