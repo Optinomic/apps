@@ -25,7 +25,6 @@ include(readme.md)
 
 [template overview 6 35]
 include(../lib/polymer/index.m4)
-include(../lib/polymer/elements/dev/behavior_makepdf.html)
 include(elements/actinfo-problemsubstanzen.html)
 include(elements/actinfo-element.html)
 include(elements/tmt-element.html)

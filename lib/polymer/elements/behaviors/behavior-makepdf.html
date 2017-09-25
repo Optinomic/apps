@@ -2,52 +2,10 @@
 makepdfBehavior = {
 
 
-    behaviors: [ReduxBehavior, AsyncActionsBehavior],
+    behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicAppBehavior],
 
 
-    properties: {
-        _current_patient: {
-            type: Object,
-            statePath: function(state) {
-                var return_obj = null;
-                if ((state.patient !== null) && (state.patient !== undefined)) {
-                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
-                        return_obj = state.patient.data;
-                        console.log('(B) Patient:', return_obj);
-                    };
-                };
-                return return_obj;
-            }
-        },
-        _current_stay: {
-            type: Object,
-            statePath: function(state) {
-                var return_obj = null;
-                if ((state.patient !== null) && (state.patient !== undefined)) {
-                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
-                        if ((state.patient.data.stay_id !== null) && (state.patient.data.stay_id !== undefined)) {
-                            var stay_id = state.patient.data.stay_id;
-
-                            if ((state.stays !== null) && (state.stays !== undefined)) {
-                                if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
-
-                                    state.stays.data.forEach(function(stay, stayID) {
-                                        if (stay.id === stay_id) {
-                                            return_obj = stay.data;
-                                            console.log('(B) Stay:', return_obj);
-                                        };
-                                    });
-
-                                };
-                            };
-
-                        };
-                    };
-                };
-                return return_obj;
-            }
-        }
-    },
+    properties: {},
 
 
     // --------------------------------
@@ -96,6 +54,7 @@ makepdfBehavior = {
         space = space === undefined ? 10 : space;
 
         return {
+            "id": "spacer_" + space,
             "text": "",
             "margin": [0, space, 0, space]
         };
@@ -107,6 +66,7 @@ makepdfBehavior = {
         subtitle = subtitle === undefined ? "" : subtitle;
 
         return {
+            "id": "title",
             "stack": [
                 // second column consists of paragraphs
                 {
@@ -173,6 +133,7 @@ makepdfBehavior = {
         text = text === undefined ? "Optinomic" : text;
 
         return {
+            "id": "text",
             "text": " " + text,
             "style": "p"
         };
@@ -183,6 +144,7 @@ makepdfBehavior = {
         text = text === undefined ? "Optinomic" : text;
 
         return {
+            "id": "caption",
             "text": text,
             "style": "caption"
         };
@@ -190,7 +152,13 @@ makepdfBehavior = {
 
     _pageBreak: function(when) {
         when = when === undefined ? "after" : when;
-        return { "fontSize": 0, "text": "", "pageOrientation": "portrait", "pageBreak": when };
+        return {
+            "id": "peagebreak_" + when,
+            "fontSize": 0,
+            "text": "",
+            "pageOrientation": "portrait",
+            "pageBreak": when
+        };
     },
 
     _horizontalLine: function(width, color) {
@@ -231,6 +199,7 @@ makepdfBehavior = {
         };
 
         var no_data = {
+            "id": "no_data",
             "table": {
                 "widths": [24, "*"],
                 "body": [
@@ -275,6 +244,7 @@ makepdfBehavior = {
         date = this._formatDateCH(date.toISOString());
 
         var indication = {
+            "id": "indication_" + sign,
             "table": {
                 "widths": [24, "*"],
                 "body": [
@@ -310,21 +280,6 @@ makepdfBehavior = {
     // --------------------------------
     // Helpers
     // --------------------------------
-    _formatDateCH: function(date_string) {
-        date_string = date_string || null
-        if (date_string !== null) {
-
-            // 1952-11-19T00:00:00.000000000000Z
-            var year = parseInt(date_string.substring(0, 4));
-            var month = parseInt(date_string.substring(5, 7));
-            var day = parseInt(date_string.substring(8, 10));
-            var date_string_return = day + "." + month + "." + year
-
-            return date_string_return;
-        } else {
-            return null;
-        }
-    },
 
     _getImage: function(image) {
 
