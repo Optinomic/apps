@@ -7,7 +7,7 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
-<dom-module id="bdi-element">
+<dom-module id="element-aase">
     <template>
         <style include="shared-styles">
          :host {
@@ -32,7 +32,7 @@
             margin-bottom: 12px;
         }
         </style>
-        <div id="bdi_element">
+        <div id="aase_element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
@@ -54,11 +54,11 @@
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.bdi.options_pdf]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        <optinomic-pdf-chart-profile language="de" options="[[_d.aase.options_pdf]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                     </div>
                     <div id="data_content">
                         <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                            <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
                         </div>
                     </div>
                 </template>
@@ -73,7 +73,7 @@
     </template>
     <script>
     Polymer({
-        is: 'bdi-element',
+        is: 'element-aase',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
@@ -150,15 +150,14 @@
 
             var d = {};
 
-            d.name = "BDI-II";
-            d.title = "Beck Depressions-Inventar";
-            d.subtitle = "Schweregrad depressiver Symptomatik im klinischen Bereich.";
+            d.name = "AASE-G";
+            d.title = "Alcohol Abstinence Self-Efficacy - Skala Versuchung";
 
 
-            include(definitions/bdi.js)
+            include(definitions/aase.js)
             // Clone options for pdf - nothing is overwritten
-            d.bdi.options_pdf = JSON.parse(JSON.stringify(d.bdi.options));
-            d.bdi.options_pdf.item_height = d.bdi.options_pdf.item_height - 12;
+            d.aase.options_pdf = JSON.parse(JSON.stringify(d.aase.options));
+            d.aase.options_pdf.item_height = d.aase.options_pdf.item_height - 12;
 
 
             // Set & Log
@@ -174,7 +173,7 @@
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
                         if (this._sr.have_data === true) {
-                            // Nothing ToDo
+                            // Nothing ToDo here.
                            } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
@@ -213,17 +212,17 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 } else {
-                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
                     
                     var app_beschreibung = [];
@@ -239,7 +238,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BDI: ', this._pdf_content);
+                console.log('(PDF | Ready) WHOQOL-BREF: ', this._pdf_content);
 
             }.bind(this);
 
@@ -307,7 +306,7 @@
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         // -----------------------------

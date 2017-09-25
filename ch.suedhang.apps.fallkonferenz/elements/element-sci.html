@@ -7,7 +7,7 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
-<dom-module id="asrs-element">
+<dom-module id="element-sci">
     <template>
         <style include="shared-styles">
          :host {
@@ -32,7 +32,7 @@
             margin-bottom: 12px;
         }
         </style>
-        <div id="asrs_element">
+        <div id="element-sci">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
@@ -53,14 +53,28 @@
             </div>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.asrs.options_pdf]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    </div>
-                    <div id="data_content">
-                        <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                    <template is="dom-if" if="[[_sr_sci.done]]">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_stress.options_pdf]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_stress}}"></optinomic-pdf-chart-profile>
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_hilfreich.options_pdf]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_hilfreich}}"></optinomic-pdf-chart-profile>
                         </div>
-                    </div>
+                        <div id="data_content">
+                            <h3>Stressereignisse und Syptome</h3>
+                            <div class="chart">
+                                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                                <optinomic-chart-profile style="margin-top:-36px;" language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                            </div>
+                            <h3>Copingstrategien</h3>
+                            <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
+                            <div class="chart">
+                                <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
+                                <optinomic-chart-profile style="margin-top:-36px;" language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                            </div>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[!_sr_sci.done]]">
+                        <optinomic-indication sign=":" title="Erstelle Stanine Scores..." color="#3F51B5"></optinomic-indication>
+                    </template>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -73,7 +87,7 @@
     </template>
     <script>
     Polymer({
-        is: 'asrs-element',
+        is: 'element-sci',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
@@ -88,7 +102,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
-                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            // console.log('(sci-element) _sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -98,6 +112,12 @@
                     };
                 },
                 observer: '_srChanged'
+            },
+            _sr_sci: {
+                type: Object,
+                value: {
+                    "done": false
+                }
             },
             _patient: {
                 type: Object,
@@ -119,7 +139,12 @@
                     };
                 }
             },
-            _pdf_chart: {
+            _pdf_chart_stress: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
+            _pdf_chart_hilfreich: {
                 type: Object,
                 value: null,
                 observer: '_buildPDF'
@@ -150,15 +175,16 @@
 
             var d = {};
 
-            d.name = "ASRS";
-            d.title = "ADHS-Screening";
+            d.name = "SCI";
+            d.title = "Stress-Coping-Inventar";
 
-
-            include(definitions/asrs.js)
+            include(definitions/sci.js)
             // Clone options for pdf - nothing is overwritten
-            d.asrs.options_pdf = JSON.parse(JSON.stringify(d.asrs.options));
-            d.asrs.options_pdf.item_height = d.asrs.options_pdf.item_height - 12;
+            d.sci_stress.options_pdf = JSON.parse(JSON.stringify(d.sci_stress.options));
+            d.sci_hilfreich.options_pdf = JSON.parse(JSON.stringify(d.sci_hilfreich.options));
 
+            d.sci_stress.options_pdf.item_height = d.sci_stress.options_pdf.item_height - 12;
+            d.sci_hilfreich.options_pdf.item_height = d.sci_hilfreich.options_pdf.item_height - 12;
 
             // Set & Log
             d.init_done = true;
@@ -173,8 +199,60 @@
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
                         if (this._sr.have_data === true) {
-                            // Nothing ToDo here.
-                           } else {
+
+
+                            var _sr_sci = [];
+                            var population = ""
+
+
+                            this._sr.data.forEach(function(current, ID) {
+
+                                // console.warn('_processSCI - Current', ID, current);
+
+                                current.info = {};
+                                current.info.app_zeitpunkt = 'Unbekannt';
+                                if ("Erhebungszeitpunkt" in current.calculation.scores.response.data.response) {
+
+                                    if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "1") {
+                                        current.info.app_zeitpunkt = 'Eintritt';
+                                    } else {
+                                        if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "2") {
+                                            current.info.app_zeitpunkt = 'Austritt';
+                                        } else {
+                                            current.info.app_zeitpunkt = 'Verlauf';
+                                        };
+                                    };
+                                };
+
+                                current.info.score_0 = parseInt(current.calculation.scores.scores["0"].stanine);
+                                current.info.score_1 = parseInt(current.calculation.scores.scores["1"].stanine);
+                                current.info.score_2 = parseInt(current.calculation.scores.scores["2"].stanine);
+                                current.info.score_3 = parseInt(current.calculation.scores.scores["3"].stanine);
+                                current.info.score_4 = parseInt(current.calculation.scores.scores["4"].stanine);
+                                current.info.score_5 = parseInt(current.calculation.scores.scores["5"].stanine);
+                                current.info.score_6 = 10 - parseInt(current.calculation.scores.scores["6"].stanine);
+
+                                population = current.calculation.scores.population.name;
+
+                                _sr_sci.push(current);
+
+                            });
+
+                            var return_obj = {
+                                "done": true,
+                                "population": population,
+                                "data": _sr_sci
+                            }
+
+                            if (_sr_sci.length > 0) {
+                                return_obj.have_data = true;
+                            } else {
+                                return_obj.have_data = false;
+                            };
+                            this.set('_sr_sci', return_obj);
+
+
+                        } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
@@ -186,7 +264,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 2;
+            var jobs_total = 3;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -205,6 +283,8 @@
                 this._pdf_content = null;
                 var _pdf_content = [];
                 var d = this.get('_d');
+                var _sr_sci = this.get('_sr_sci');
+                var population = _sr_sci.population;
 
 
                 // --------------------------
@@ -212,19 +292,45 @@
                 // --------------------------
 
                 if (build_full) {
+
+                    var stanine_beschriftung = {
+                        "id": "stanine_beschriftung",
+                        "stack": [
+                            {"text": population, "style": "chart_p", "alignment": "center", "margin": [0,12,0,0]},
+                            {"text": "Stanine", "style": "chart_p", "color": "#9E9E9E","alignment": "center", "margin": [0,0,0,0]},
+                        ]
+                    };
+
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._pdf_chart);
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    
+
+
+                    var chart_stress = [];
+                    chart_stress.push(this._heading("Stressereignisse und Syptome", "", 'h2'));
+                    chart_stress.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart_stress.push(stanine_beschriftung);
+                    chart_stress.push(this._pdf_chart_stress);
+                    chart_stress.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart_stress, "chart_stanine_stress"));
+
+
+                    var chart_hilfreich = [];
+                    chart_hilfreich.push(this._heading("Copingstrategien", "", 'h2'));
+                    chart_hilfreich.push(this._text("Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut."));
+                    chart_hilfreich.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart_hilfreich.push(stanine_beschriftung);
+                    chart_hilfreich.push(this._pdf_chart_hilfreich);
+                    chart_hilfreich.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart_hilfreich, "chart_stanine_hilfreich"));
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
+
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
@@ -238,7 +344,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BDI: ', this._pdf_content);
+                console.log('(PDF | Ready) SCI: ', this._pdf_content);
 
             }.bind(this);
 
@@ -274,8 +380,13 @@
             //  Jobs Done?
             //  Check incoming Data
 
-            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
-                jobs_done._pdf_chart = true;
+            if ((this._pdf_chart_stress !== undefined) && (this._pdf_chart_stress !== null)) {
+                jobs_done._pdf_chart_stress = true;
+                check();
+            };
+
+            if ((this._pdf_chart_hilfreich !== undefined) && (this._pdf_chart_hilfreich !== null)) {
+                jobs_done._pdf_chart_hilfreich = true;
                 check();
             };
 
@@ -290,7 +401,8 @@
                 if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
                     if (this._sr.have_data === false) {
                         // Confirm all "jobs" with "false"
-                        jobs_done._pdf_chart = false;
+                        jobs_done._pdf_chart_stress = false;
+                        jobs_done._pdf_chart_hilfreich = false;
 
                         build_full = false;
                         check();
@@ -306,7 +418,7 @@
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         // -----------------------------

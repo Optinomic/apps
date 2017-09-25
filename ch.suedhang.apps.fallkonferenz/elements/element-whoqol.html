@@ -7,7 +7,7 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
-<dom-module id="aase-element">
+<dom-module id="element-whoqol">
     <template>
         <style include="shared-styles">
          :host {
@@ -32,7 +32,7 @@
             margin-bottom: 12px;
         }
         </style>
-        <div id="aase_element">
+        <div id="whoqol_element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
@@ -54,11 +54,11 @@
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.aase.options_pdf]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        <optinomic-pdf-chart-profile language="de" options="[[_d.whoqol.options_pdf]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                     </div>
                     <div id="data_content">
                         <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                            <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
                         </div>
                     </div>
                 </template>
@@ -73,7 +73,7 @@
     </template>
     <script>
     Polymer({
-        is: 'aase-element',
+        is: 'element-whoqol',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
@@ -150,14 +150,14 @@
 
             var d = {};
 
-            d.name = "AASE-G";
-            d.title = "Alcohol Abstinence Self-Efficacy - Skala Versuchung";
+            d.name = "WHOQOL-BREF";
+            d.title = "WHO Quality of Life - Kurzform";
 
 
-            include(definitions/aase.js)
+            include(definitions/whoqol.js)
             // Clone options for pdf - nothing is overwritten
-            d.aase.options_pdf = JSON.parse(JSON.stringify(d.aase.options));
-            d.aase.options_pdf.item_height = d.aase.options_pdf.item_height - 12;
+            d.whoqol.options_pdf = JSON.parse(JSON.stringify(d.whoqol.options));
+            d.whoqol.options_pdf.item_height = d.whoqol.options_pdf.item_height - 24;
 
 
             // Set & Log
@@ -224,7 +224,7 @@
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
@@ -306,7 +306,7 @@
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         // -----------------------------

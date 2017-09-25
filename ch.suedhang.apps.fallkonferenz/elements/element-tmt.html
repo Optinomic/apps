@@ -10,7 +10,7 @@
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
-<dom-module id="tmt-element">
+<dom-module id="element-tmt">
     <template>
         <style include="shared-styles">
          :host {
@@ -173,7 +173,7 @@
     </template>
     <script>
     Polymer({
-        is: 'tmt-element',
+        is: 'element-tmt',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
@@ -581,7 +581,7 @@
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
 

@@ -7,7 +7,7 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
-<dom-module id="actinfo-element">
+<dom-module id="element-actinfo">
     <template>
         <style include="shared-styles">
          :host {
@@ -89,7 +89,7 @@
     </template>
     <script>
     Polymer({
-        is: 'actinfo-element',
+        is: 'element-actinfo',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
 
@@ -430,7 +430,7 @@
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
         },
 
         // -----------------------------
