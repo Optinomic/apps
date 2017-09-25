@@ -178,7 +178,7 @@
             d.name = "SCI";
             d.title = "Stress-Coping-Inventar";
 
-            include(definitions/sci.js)
+            include(definitions / sci.js)
             // Clone options for pdf - nothing is overwritten
             d.sci_stress.options_pdf = JSON.parse(JSON.stringify(d.sci_stress.options));
             d.sci_hilfreich.options_pdf = JSON.parse(JSON.stringify(d.sci_hilfreich.options));
@@ -289,20 +289,38 @@
                 // --------------------------
 
                 if (build_full) {
+
+                    var stanine_beschriftung = {
+                        "id": "stanine_beschriftung",
+                        "stack": [
+                            { "text": population, "style": "p", "alignment": "center", "margin": [0, 6, 0, 0] },
+                            { "text": "Stanine", "style": "chart_p", "alignment": "center", "margin": [0, 0, 0, 0] },
+                        ]
+                    };
+
+
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
 
                     _pdf_content.push(this._heading("Stressereignisse und Syptome", "", 'h2'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._text(population));
-                    _pdf_content.push(this._pdf_chart_stress);
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    
+
+                    var chart_stress = [];
+                    chart_stress.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart_stress.push(stanine_beschriftung);
+                    chart_stress.push(this._pdf_chart_stress);
+                    chart_stress.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart_stress, "chart_stanine_stress"));
+
 
                     _pdf_content.push(this._heading("Copingstrategien", "", 'h2'));
                     _pdf_content.push(this._text("Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut."));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._text(population));
-                    _pdf_content.push(this._pdf_chart_hilfreich);
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+
+                    var chart_hilfreich = [];
+                    chart_hilfreich.push(this._horizontalLine(100, "#F5F5F5"));
+                    chart_hilfreich.push(stanine_beschriftung);
+                    chart_hilfreich.push(this._pdf_chart_stress);
+                    chart_hilfreich.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(chart_hilfreich, "chart_stanine_hilfreich"));
 
                     _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
                     _pdf_content.push(this._pdf_app_info);
@@ -320,7 +338,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BDI: ', this._pdf_content);
+                console.log('(PDF | Ready) SCI: ', this._pdf_content);
 
             }.bind(this);
 
