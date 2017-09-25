@@ -419,13 +419,13 @@
 
                 var messung = [
                     [
-                        { "text": item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text.mz_typ, "style": "p", "margin": [0, 6, 0, 0] },
-                        { "text": item.date, "style": "chart_p", "margin": [0, 0, 0, 6] },
+                        { "text": item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text, "style": "p", "margin": [0, 6, 0, 0] },
+                        { "text": this._computeNiceDate(item.date), "style": "chart_p", "margin": [0, 0, 0, 6] },
                     ],
-                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] }
+                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "margin": [0, 10, 0, 0] }
                 ];
 
                 if (this._show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)) {
@@ -452,7 +452,7 @@
             return_stack.stack.push(this._heading("Datenblatt", null, 'h2'));
             return_stack.stack.push(table);
 
-            console.log('datenblatt', JSON.stringify(return_stack, null, 2));
+            console.log(JSON.stringify(return_stack, null, 2));
 
             return return_stack;
         },
