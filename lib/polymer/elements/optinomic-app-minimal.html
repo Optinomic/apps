@@ -78,7 +78,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 "apiURL": helpers.getApiURL(),
             };
             
-            this.dispatch('setObject', '_app_params', params);
+            this.dispatch('actionSaveParams', params);
         },
 
         _viewPageChanged: function(page) {
