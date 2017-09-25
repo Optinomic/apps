@@ -292,17 +292,17 @@
 
 
 
-                    var problemsubstanzen_text = "";
-                    var zusatzangaben_text = "";
+                    var problemsubstanzen = "";
+                    var zusatzangaben = "";
                     this._sr_actinfo_ein.data.forEach(function(current, ID) {
-                        problemsubstanzen_text = current.calculation.actinfo_ein_calc.pdfmake.problemsubstanzen_text;
-                        zusatzangaben_text = current.calculation.actinfo_ein_calc.pdfmake.zusatzangaben_text;
+                        problemsubstanzen = current.calculation.actinfo_ein_calc.pdfmake.problemsubstanzen_ol;
+                        zusatzangaben = current.calculation.actinfo_ein_calc.pdfmake.zusatzangaben_text;
                     });
 
                     var ps = [];
-                    ps.push(problemsubstanzen_text);
+                    ps.push(problemsubstanzen);
                     ps.push(this._heading("Zusatzinformationen", null, 'h3'));
-                    ps.push(zusatzangaben_text);
+                    ps.push(zusatzangaben);
                     _pdf_content.push(this._keepTogether(ps, "problemsubstanzen"));
 
 
@@ -399,7 +399,19 @@
                 if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
                     if (this._sr_actinfo_ein.have_data === false) {
                         // Confirm all "jobs" with "false"
-                        jobs_done._pdf_chart = false;
+                        jobs_done._pdf_chart_alkohol = false;
+
+                        build_full = false;
+                        check();
+                    };
+                };
+            };
+
+            if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
+                if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
+                    if (this._sr_actinfo_aus.have_data === false) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart_nikotin = false;
 
                         build_full = false;
                         check();
