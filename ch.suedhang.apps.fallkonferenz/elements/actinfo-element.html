@@ -67,10 +67,9 @@
                         <div class="chart">
                             <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
                         </div>
-                        
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
-                            <h3>Nikotinabhängigkeit (Fagerström)</h3>
-                            <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
+                            <h2>Nikotinabhängigkeit (Fagerström)</h2>
+                            <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
                         </template>
                     </div>
                 </template>
@@ -185,7 +184,7 @@
             d.title = "Information network on addiction care and therapy";
 
 
-            include(definitions/actinfo.js)
+            include(definitions / actinfo.js)
             // Clone options for pdf - nothing is overwritten
             d.actinfo_audit.options_pdf = JSON.parse(JSON.stringify(d.actinfo_audit.options));
             d.actinfo_fagerstroem.options_pdf = JSON.parse(JSON.stringify(d.actinfo_fagerstroem.options));
@@ -203,33 +202,45 @@
 
                 if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== null)) {
                     if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
-                        if ((this._sr_actinfo_ein.have_data === true) && (this._sr_actinfo_aus.have_data === true)) {
 
-                            var _sr_actinfo = [];
 
+                        var _sr_actinfo = [];
+
+                        if (this._sr_actinfo_ein.have_data === true) {
                             this._sr_actinfo_ein.data.forEach(function(current, ID) {
                                 current.app_name = 'Eintritt';
                                 current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
+                        };
+
+                        if (this._sr_actinfo_aus.have_data === true) {
                             this._sr_actinfo_aus.data.forEach(function(current, ID) {
                                 current.app_name = 'Austritt';
                                 current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
+                        };
 
-                            var actinfo_obj = {
-                                "merged": true,
-                                "data": _sr_actinfo,
-                                "app_id": "actinfo - Ein & Austritt"
-                            }
-                            this.set('_sr_actinfo_merged', actinfo_obj);
-                            console.warn('_sr_actinfo_merged', this._sr_actinfo_merged);
+                        var actinfo_obj = {
+                            "merged": true,
+                            "actinfo_ein_data": this._sr_actinfo_ein.have_data,
+                            "actinfo_aus_data": this._sr_actinfo_aus.have_data,
+                            "actinfo_ein_aus_data": false,
+                            "data": _sr_actinfo,
+                            "app_id": "actinfo - Ein & Austritt"
+                        };
 
+                        if ((this._sr_actinfo_ein.have_data === true) && (this._sr_actinfo_aus.have_data === true)) {
+                            actinfo_obj.actinfo_ein_aus_data = true;
+                        };
 
-                        } else {
+                        this.set('_sr_actinfo_merged', actinfo_obj);
+                        console.warn('_sr_actinfo_merged', this._sr_actinfo_merged);
+
+                        if (_sr_actinfo.length === 0) {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };

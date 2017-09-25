@@ -65,26 +65,6 @@
                 <div id="content_actinfo" class="content_block">
                     <actinfo-element app-id-eintritt="ch.suedhang.apps.actinfo_ein" app-id-austritt="ch.suedhang.apps.actinfo_aus" on-pdfready="_event_pdf_full_actinfo"></actinfo-element>
                 </div>
-                <div id="content_actinfo_alt" class="content_block">
-                    <optinomic-title small h1="act-info" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich - Statistik der stationären Behandlung der Alkoholabhängigkeit in der Schweiz" h3="Information network on addiction care and therapy"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
-                        <h3>Keine act-info-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
-                        <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
-                        <h3>Zusatzinformationen</h3>
-                        <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
-                            <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
-                            <p class="caption">&nbsp;</p>
-                        </template>
-                        <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
-                        <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
-                    </template>
-                    <template is="dom-if" if="[[_sr_actinfo.merged]]">
-                        <h3>Nikotinabhängigkeit (Fagerström)</h3>
-                        <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
-                    </template>
-                </div>
                 <div id="content_tmt" class="content_block">
                     <tmt-element app-id="ch.suedhang.apps.tmt_V3" on-pdfready="_event_pdf_full_tmt"></tmt-element>
                 </div>
@@ -413,9 +393,7 @@
         // Lifecycle
         // -----------------------------
 
-        _loadData: function() {
-            include(_loadData.m4)
-        },
+        _loadData: function() {},
 
         ready: function() {
             this._loadData();
