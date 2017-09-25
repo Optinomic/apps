@@ -1,5 +1,5 @@
 <script>
-optinomicAppBehavior = {
+optinomicApp = {
 
 
     behaviors: [ReduxBehavior, AsyncActionsBehavior],
@@ -9,6 +9,10 @@ optinomicAppBehavior = {
         _clinic: {
             type: Object,
             statePath: 'clinic.data'
+        },
+        _app_params: {
+            type: Object,
+            statePath: '_app_params'
         },
         _current_patient: {
             type: Object,
@@ -27,27 +31,21 @@ optinomicAppBehavior = {
             type: Object,
             statePath: function(state) {
                 var return_obj = null;
-                if ((state.patient !== null) && (state.patient !== undefined)) {
-                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
-                        if ((state.patient.data.stay_id !== null) && (state.patient.data.stay_id !== undefined)) {
-                            var stay_id = state.patient.data.stay_id;
+                var stay_id = helpers.getStayID();
 
-                            if ((state.stays !== null) && (state.stays !== undefined)) {
-                                if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
+                if ((state.stays !== null) && (state.stays !== undefined)) {
+                    if ((state.stays.data !== null) && (state.stays.data !== undefined)) {
 
-                                    state.stays.data.forEach(function(stay, stayID) {
-                                        if (stay.id === stay_id) {
-                                            return_obj = stay.data;
-                                            console.log('(_B_) Stay:', return_obj);
-                                        };
-                                    });
-
-                                };
+                        state.stays.data.forEach(function(stay, stayID) {
+                            if (stay.id === stay_id) {
+                                return_obj = stay.data;
+                                console.log('(_B_) Stay:', return_obj);
                             };
+                        });
 
-                        };
                     };
                 };
+
                 return return_obj;
             }
         }
