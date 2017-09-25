@@ -1,12 +1,5 @@
 properties: {
-    _clinic: {
-        type: Object,
-        statePath: 'clinic.data'
-    },
-    _current_app: {
-        type: Object,
-        statePath: 'apps.current.data'
-    },
+
 
     _pdf_full_actinfo: {
         type: Object,
