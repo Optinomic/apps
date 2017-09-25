@@ -73,7 +73,7 @@
                         </div>
                     </template>
                     <template is="dom-if" if="[[!_sr_sci.done]]">
-                        <optinomic-indication sign=":" title="Erstelle Stanine Score..." color="#3F51B5"></optinomic-indication>
+                        <optinomic-indication sign=":" title="Erstelle Stanine Scores..." color="#3F51B5"></optinomic-indication>
                     </template>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
@@ -102,7 +102,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
-                            console.log('(sci-element) _sr:', state.survey_responses.data[this.appId]);
+                            // console.log('(sci-element) _sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -198,62 +198,55 @@
                         if (this._sr.have_data === true) {
 
 
-
                             var _sr_sci = [];
                             var population = ""
-                            if ((this._sr_sci_response !== undefined) && (this._sr_sci_response !== null)) {
-                                if (this._sr_sci_response.data !== undefined) {
-                                    this._sr_sci_response.data.forEach(function(current, ID) {
 
-                                        // console.warn('_processSCI - Current', ID, current);
 
-                                        current.info = {};
-                                        current.info.app_zeitpunkt = 'Unbekannt';
-                                        if ("Erhebungszeitpunkt" in current.calculation.scores.response.data.response) {
+                            this._sr.data.forEach(function(current, ID) {
 
-                                            if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "1") {
-                                                current.info.app_zeitpunkt = 'Eintritt';
-                                            } else {
-                                                if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "2") {
-                                                    current.info.app_zeitpunkt = 'Austritt';
-                                                } else {
-                                                    current.info.app_zeitpunkt = 'Verlauf';
-                                                };
-                                            };
-                                        };
+                                // console.warn('_processSCI - Current', ID, current);
 
-                                        current.info.score_0 = parseInt(current.calculation.scores.scores["0"].stanine);
-                                        current.info.score_1 = parseInt(current.calculation.scores.scores["1"].stanine);
-                                        current.info.score_2 = parseInt(current.calculation.scores.scores["2"].stanine);
-                                        current.info.score_3 = parseInt(current.calculation.scores.scores["3"].stanine);
-                                        current.info.score_4 = parseInt(current.calculation.scores.scores["4"].stanine);
-                                        current.info.score_5 = parseInt(current.calculation.scores.scores["5"].stanine);
-                                        current.info.score_6 = 10 - parseInt(current.calculation.scores.scores["6"].stanine);
+                                current.info = {};
+                                current.info.app_zeitpunkt = 'Unbekannt';
+                                if ("Erhebungszeitpunkt" in current.calculation.scores.response.data.response) {
 
-                                        population = current.calculation.scores.population.name;
-
-                                        _sr_sci.push(current);
-
-                                    });
-
-                                    var return_obj = {
-                                        "done": true,
-                                        "population": population,
-                                        "data": _sr_sci
-                                    }
-
-                                    if (_sr_sci.length > 0) {
-                                        return_obj.have_data = true;
+                                    if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "1") {
+                                        current.info.app_zeitpunkt = 'Eintritt';
                                     } else {
-                                        return_obj.have_data = false;
+                                        if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "2") {
+                                            current.info.app_zeitpunkt = 'Austritt';
+                                        } else {
+                                            current.info.app_zeitpunkt = 'Verlauf';
+                                        };
                                     };
-                                    this.set('_sr_sci', return_obj);
-                                    console.warn('_processSCI', this._sr_sci);
                                 };
+
+                                current.info.score_0 = parseInt(current.calculation.scores.scores["0"].stanine);
+                                current.info.score_1 = parseInt(current.calculation.scores.scores["1"].stanine);
+                                current.info.score_2 = parseInt(current.calculation.scores.scores["2"].stanine);
+                                current.info.score_3 = parseInt(current.calculation.scores.scores["3"].stanine);
+                                current.info.score_4 = parseInt(current.calculation.scores.scores["4"].stanine);
+                                current.info.score_5 = parseInt(current.calculation.scores.scores["5"].stanine);
+                                current.info.score_6 = 10 - parseInt(current.calculation.scores.scores["6"].stanine);
+
+                                population = current.calculation.scores.population.name;
+
+                                _sr_sci.push(current);
+
+                            });
+
+                            var return_obj = {
+                                "done": true,
+                                "population": population,
+                                "data": _sr_sci
+                            }
+
+                            if (_sr_sci.length > 0) {
+                                return_obj.have_data = true;
+                            } else {
+                                return_obj.have_data = false;
                             };
-
-
-
+                            this.set('_sr_sci', return_obj);
 
 
                         } else {
