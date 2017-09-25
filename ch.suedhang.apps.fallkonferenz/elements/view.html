@@ -205,14 +205,9 @@
                 </div>
 
                 <div id="content_aase" class="content_block">
-                    <optinomic-title small h1="AASE-G" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(Alcohol Abstinence Self-Efficacy - Skala Versuchung)"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_aase.have_data]]">
-                        <h3>Keine AASE-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_aase.have_data]]">
-                        <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
-                    </template>
+                    <aase-element app-id="ch.suedhang.apps.aase-g" on-pdfready="_event_pdf_full_aase"></aase-element>
                 </div>
+
                 <div id="content_bscl" class="content_block">
                     <bscl-element app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></bscl-element>
                 </div>
@@ -312,7 +307,8 @@
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_asrs);
                     
-                    _pdf_content.push(this._indication(">", "ToDo: AASE", "#3F51B5"));
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_aase);
 
                     _pdf_content.push(this._pageBreak());
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
@@ -414,6 +410,10 @@
                 check();
             };
             
+            if ((this._pdf_full_aase !== undefined) && (this._pdf_full_aase !== null)) {
+                jobs_done._pdf_full_aase = true;
+                check();
+            };
             
 
             if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
@@ -604,38 +604,34 @@
 
         _event_pdf_full_bscl: function(e) {
             this.set('_pdf_full_bscl', e.detail);
-            // console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
         },
 
         _event_pdf_full_asrs: function(e) {
             this.set('_pdf_full_asrs', e.detail);
-            // console.log('(event) _pdf_full_asrs ==> ', this._pdf_full_asrs);
         },
 
         _event_pdf_full_bdi: function(e) {
             this.set('_pdf_full_bdi', e.detail);
-            // console.log('(event) _pdf_full_bdi ==> ', this._pdf_full_bdi);
         },
 
         _event_pdf_full_whoqol: function(e) {
             this.set('_pdf_full_whoqol', e.detail);
-            // console.log('(event) _pdf_full_whoqol ==> ', this._pdf_full_whoqol);
         },
 
         _event_pdf_full_isk: function(e) {
             this.set('_pdf_full_isk', e.detail);
-            // console.log('(event) _pdf_full_isk ==> ', this._pdf_full_isk);
         },
         
         _event_pdf_full_sci: function(e) {
             this.set('_pdf_full_sci', e.detail);
-            // console.log('(event) _pdf_full_isk ==> ', this._pdf_full_sci);
         },
-        
+
+        _event_pdf_full_aase: function(e) {
+            this.set('_pdf_full_aase', e.detail);
+        },
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            // console.log('(event) _pdf_app_info ==> ', this._pdf_app_info);
         },
 
 

@@ -84,6 +84,11 @@ properties: {
         value: null,
         observer: '_buildPDF'
     },
+    _pdf_full_aase: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
     _pdf_full_bdi: {
         type: Object,
         value: null,
