@@ -74,25 +74,6 @@ properties: {
         }
     },
 
-    _sr_sci_response: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'ch.suedhang.apps.sci'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        },
-        observer: '_processSCI'
-    },
-    _sr_sci: {
-        type: Object,
-        value: {
-            "done": false
-        }
-    },
-
     _pdf_full_bscl: {
         type: Object,
         value: null,

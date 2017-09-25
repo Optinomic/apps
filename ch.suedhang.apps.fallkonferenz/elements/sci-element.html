@@ -102,7 +102,7 @@
                 statePath: function(state) {
                     if ((this.appId !== null) && (this.appId !== undefined)) {
                         if (this.appId in state.survey_responses.data) {
-                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            console.log('(sci-element) _sr:', state.survey_responses.data[this.appId]);
                             return state.survey_responses.data[this.appId]
                         } else {
                             return null
@@ -112,6 +112,12 @@
                     };
                 },
                 observer: '_srChanged'
+            },
+            _sr_sci: {
+                type: Object,
+                value: {
+                    "done": false
+                }
             },
             _patient: {
                 type: Object,
@@ -283,7 +289,7 @@
                 var d = this.get('_d');
                 var _sr_sci = this.get('_sr_sci');
                 var population = _sr_sci.population;
-                
+
 
                 // --------------------------
                 // Build PDF
