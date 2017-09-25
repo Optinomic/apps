@@ -301,9 +301,8 @@
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
 
 
-                    _pdf_content.push(this._heading("Stressereignisse und Syptome", "", 'h2'));
-
                     var chart_stress = [];
+                    chart_stress.push(this._heading("Stressereignisse und Syptome", "", 'h2'));
                     chart_stress.push(this._horizontalLine(100, "#F5F5F5"));
                     chart_stress.push(stanine_beschriftung);
                     chart_stress.push(this._pdf_chart_stress);
@@ -311,11 +310,9 @@
                     _pdf_content.push(this._keepTogether(chart_stress, "chart_stanine_stress"));
 
 
-                    _pdf_content.push(this._heading("Copingstrategien", "", 'h2'));
-
-                    _pdf_content.push(this._text("Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut."));
-
                     var chart_hilfreich = [];
+                    chart_hilfreich.push(this._heading("Copingstrategien", "", 'h2'));
+                    chart_hilfreich.push(this._text("Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut."));
                     chart_hilfreich.push(this._horizontalLine(100, "#F5F5F5"));
                     chart_hilfreich.push(stanine_beschriftung);
                     chart_hilfreich.push(this._pdf_chart_stress);
@@ -330,7 +327,7 @@
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
