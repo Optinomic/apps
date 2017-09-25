@@ -214,13 +214,20 @@
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
-                    _pdf_content.push(this._pdf_app_info);
+                    
+                    var app_beschreibung = [];
+                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
+                    app_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
+
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    _pdf_content.push(this._heading("Beschreibung", null, 'h2'));
-                    _pdf_content.push(this._pdf_app_info);
+                    
+                    var app_beschreibung = [];
+                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
+                    app_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 };
 
                 // --------------------------
