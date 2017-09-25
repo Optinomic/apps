@@ -54,7 +54,7 @@
         </div>
         <template is="dom-if" if="[[_pdf_ready]]">
             <iron-collapse id="collapse_print" horizontal>
-                <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                <optinomic-pdfmake header-left="Patient" header-right="Klinik" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
             </iron-collapse>
         </template>
         <template is="dom-if" if="[[_d.init_done]]">
@@ -178,6 +178,7 @@
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_bdi);
 
+                    _pdf_content.push(this._pageBreak());
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_isk);
 
@@ -296,45 +297,6 @@
         },
 
 
-
-        _mergeActinfo: function() {
-            this.debounce('_mergeActinfo', function() {
-
-                var _sr_actinfo = [];
-                if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== undefined)) {
-                    if ((this._sr_actinfo_ein !== null) && (this._sr_actinfo_aus !== null)) {
-                        if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
-                            if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
-
-                                this._sr_actinfo_ein.data.forEach(function(current, ID) {
-                                    current.app_name = 'Eintritt';
-                                    current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
-                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                    _sr_actinfo.push(current);
-                                });
-                                this._sr_actinfo_aus.data.forEach(function(current, ID) {
-                                    current.app_name = 'Austritt';
-                                    current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
-                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                    _sr_actinfo.push(current);
-                                });
-
-                                var actinfo_obj = {
-                                    "merged": true,
-                                    "data": _sr_actinfo,
-                                    "app_id": "actinfo - Ein & Austritt"
-                                }
-                                this.set('_sr_actinfo', actinfo_obj);
-                                console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
-                            };
-                        };
-                    };
-                };
-
-            }, 350);
-        },
-
-
         // -----------------------------
         // User-Click Functions
         // -----------------------------
@@ -347,7 +309,7 @@
         },
 
         // -----------------------------
-        // Event Handler
+        // Event Handler's
         // -----------------------------
 
         _event_pdf_full_actinfo: function(e) {
