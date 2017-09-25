@@ -157,6 +157,7 @@
             include(definitions/asrs.js)
             // Clone options for pdf - nothing is overwritten
             d.asrs.options_pdf = JSON.parse(JSON.stringify(d.asrs.options));
+            d.asrs.options_pdf.item_height = d.asrs.options_pdf.item_height - 12;
 
 
             // Set & Log

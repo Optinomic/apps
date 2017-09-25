@@ -198,6 +198,8 @@
             // Clone options for pdf - nothing is overwritten
             d.actinfo_audit.options_pdf = JSON.parse(JSON.stringify(d.actinfo_audit.options));
             d.actinfo_fagerstroem.options_pdf = JSON.parse(JSON.stringify(d.actinfo_fagerstroem.options));
+            d.actinfo_audit.options_pdf.item_height = d.actinfo_audit.options_pdf.item_height - 12;
+            d.actinfo_fagerstroem.options_pdf.item_height = d.actinfo_fagerstroem.options_pdf.item_height - 12;
 
 
             // Set & Log

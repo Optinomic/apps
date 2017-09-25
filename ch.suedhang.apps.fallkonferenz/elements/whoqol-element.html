@@ -157,6 +157,7 @@
             include(definitions/whoqol.js)
             // Clone options for pdf - nothing is overwritten
             d.whoqol.options_pdf = JSON.parse(JSON.stringify(d.whoqol.options));
+            d.whoqol.options_pdf.item_height = d.whoqol.options_pdf.item_height - 24;
 
 
             // Set & Log
@@ -223,7 +224,7 @@
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);

@@ -157,6 +157,7 @@
             include(definitions/aase.js)
             // Clone options for pdf - nothing is overwritten
             d.aase.options_pdf = JSON.parse(JSON.stringify(d.aase.options));
+            d.aase.options_pdf.item_height = d.aase.options_pdf.item_height - 12;
 
 
             // Set & Log
