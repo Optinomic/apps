@@ -291,6 +291,21 @@
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
 
 
+
+                    var problemsubstanzen_text = "";
+                    var zusatzangaben_text = "";
+                    this._sr_actinfo_ein.data.forEach(function(current, ID) {
+                        problemsubstanzen_text = current.calculation.actinfo_ein_calc.pdfmake.problemsubstanzen_text;
+                        zusatzangaben_text = current.calculation.actinfo_ein_calc.pdfmake.zusatzangaben_text;
+                    });
+
+                    var ps = [];
+                    ps.push(problemsubstanzen_text);
+                    ps.push(this._heading("Zusatzinformationen", null, 'h3'));
+                    ps.push(zusatzangaben_text);
+                    _pdf_content.push(this._keepTogether(ps, "problemsubstanzen"));
+
+
                     var audit = [];
                     audit.push(this._heading("AUDIT", "Alcohol Use Disorders Identification", 'h2'));
                     audit.push(this._horizontalLine(100, "#F5F5F5"));
@@ -365,13 +380,11 @@
 
             if ((this._pdf_chart_alkohol !== undefined) && (this._pdf_chart_alkohol !== null)) {
                 jobs_done._pdf_chart_alkohol = true;
-                console.error('this._pdf_chart_alkohol', this._pdf_chart_alkohol);
                 check();
             };
 
             if ((this._pdf_chart_nikotin !== undefined) && (this._pdf_chart_nikotin !== null)) {
                 jobs_done._pdf_chart_nikotin = true;
-                console.error('this._pdf_chart_nikotin', this._pdf_chart_nikotin);
                 check();
             };
 
@@ -382,9 +395,9 @@
 
             //  Check "No Data"
 
-            if ((this._sr !== undefined) && (this._sr !== null)) {
-                if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
-                    if (this._sr.have_data === false) {
+            if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
+                if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
+                    if (this._sr_actinfo_ein.have_data === false) {
                         // Confirm all "jobs" with "false"
                         jobs_done._pdf_chart = false;
 
