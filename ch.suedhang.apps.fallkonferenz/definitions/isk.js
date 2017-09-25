@@ -3,7 +3,7 @@ d.isk = {
         "min": -8,
         "max": 4,
         "item_height": 76,
-        "item_text_left": 256,
+        "item_text_left": 262,
         "item_text_right": 140,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
