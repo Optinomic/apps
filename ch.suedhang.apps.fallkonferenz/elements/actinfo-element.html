@@ -73,11 +73,11 @@
                         </template>
                     </div>
                 </template>
-                <template is="dom-if" if="[[!_d.init_done]]">
+                <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
                     <optinomic-indication sign="!" title="Keine Eintrittsdaten vorhanden." color="#F44336"></optinomic-indication>
                 </template>
             </template>
-            <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
+            <template is="dom-if" if="[[!_d.init_done]]">
                 <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
             </template>
         </div>
