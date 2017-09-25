@@ -63,6 +63,9 @@
             </div>
             <div id="main_content">
                 <div id="content_actinfo" class="content_block">
+                    <actinfo-element app-id-eintritt="ch.suedhang.apps.actinfo_ein" app-id-austritt="ch.suedhang.apps.actinfo_aus" on-pdfready="_event_pdf_full_actinfo"></actinfo-element>
+                </div>
+                <div id="content_actinfo_alt" class="content_block">
                     <optinomic-title small h1="act-info" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich - Statistik der stationären Behandlung der Alkoholabhängigkeit in der Schweiz" h3="Information network on addiction care and therapy"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
                         <h3>Keine act-info-Daten vorhanden.</h3>
@@ -145,7 +148,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 9;
+            var jobs_total = 10;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -175,8 +178,9 @@
 
                     _pdf_content.push(this._pageBreak());
 
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_actinfo);
 
-                    _pdf_content.push(this._indication(">", "ToDo: actInfo", "#3F51B5"));
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_tmt);
 
@@ -255,6 +259,13 @@
 
             //  Jobs Done?
             //  Check incoming Data
+
+
+            if ((this._pdf_full_actinfo !== undefined) && (this._pdf_full_actinfo !== null)) {
+                jobs_done._pdf_full_actinfo = true;
+                check();
+            };
+
             if ((this._pdf_full_tmt !== undefined) && (this._pdf_full_tmt !== null)) {
                 jobs_done._pdf_full_tmt = true;
                 check();
