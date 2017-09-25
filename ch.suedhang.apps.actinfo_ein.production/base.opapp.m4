@@ -2,18 +2,12 @@
 id = ch.suedhang.apps.actinfo_ein.production
 name = ActInfo | Eintritt
 parent = ch.suedhang.apps.actinfo_ein
-short_description = actInfo Eintrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
+short_description = act-info: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 
 [description]
 act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe.
-
-Das nationale Dokumentationssystem umfasst Angebote der ambulanten und stationären Behandlung von Problemen mit legalen und illegalen Substanzen sowie von nicht-substanzgebundener Abhängigkeit. act-info ist das Resultat der Harmonisierung der bestehenden Suchthilfestatistiken.
-
-Die beteiligten Forschungsinstitute (Sucht Schweiz Lausanne, ISGF Zürich) sind für die Datenerhebung und die Auswertungen in den einzelnen Behandlungssektoren verantwortlich.
-
-act-info wird durch das Bundesamt für Gesundheit BAG finanziert und koordiniert. Die Verantwortung für das Gesamtprojekt act-info liegt beim BAG.
 
 
 [developer]

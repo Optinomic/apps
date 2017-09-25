@@ -2,7 +2,7 @@
 id = ch.suedhang.apps.actinfo_aus.production
 name = ActInfo | Austritt
 parent = ch.suedhang.apps.actinfo_aus
-short_description = actInfo Austrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
+short_description = act-info: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 

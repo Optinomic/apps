@@ -1,13 +1,13 @@
 [module]
 id = ch.suedhang.apps.actinfo_aus
 name = ActInfo | Austritt
-short_description = actInfo Austrittsfragebogen: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
+short_description = act-info: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 
 [description]
-act-info (addiction, care and therapy information) Austrittsversion
-Themenbereiche: Behandlung/Nachsorge, soziodemografische Angaben, Problemsubstanzen, Psychisches Befinden | Correct Survey
+act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe.
+
 
 
 [developer]
