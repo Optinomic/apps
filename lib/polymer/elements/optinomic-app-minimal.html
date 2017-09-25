@@ -69,9 +69,9 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
         _init: function() {
 
             var params = {
-                "userID": helpers.getUserID(),
-                "patientID": helpers.getPatientID(),
-                "stayID": helpers.getStayID(),
+                "userID": parseInt(helpers.getUserID()),
+                "patientID": parseInt(helpers.getPatientID()),
+                "stayID": parseInt(helpers.getStayID()),
                 "token": helpers.getToken(),
                 "appName": helpers.getAppName(),
                 "appID": helpers.getAppID(),
