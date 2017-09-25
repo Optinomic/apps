@@ -222,19 +222,9 @@
                 </div>
 
                 <div id="content_isk" class="content_block">
-                    <optinomic-title small h1="ISK-K" h2="ISK Kurzform" h3="(Inventar Sozialer Kompetenzen)"></optinomic-title>
-                    <template is="dom-if" if="[[!_sr_isk.have_data]]">
-                        <h3>Keine ISK-Daten vorhanden.</h3>
-                    </template>
-                    <template is="dom-if" if="[[_sr_isk.have_data]]">
-                        <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
-                            <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                        </template>
-                        <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
-                            <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                        </template>
-                    </template>
+                    <isk-element app-id="ch.suedhang.apps.isk" on-pdfready="_event_pdf_full_isk"></isk-element>
                 </div>
+
                 <div id="content_sci" class="content_block">
                     <optinomic-title small h1="SCI" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(Stress-Coping-Inventar)"></optinomic-title>
                     <template is="dom-if" if="[[!_sr_sci.have_data]]">
@@ -292,7 +282,6 @@
             include(definitions/tmt.js)
             include(definitions/aase.js)
             include(definitions/asrs.js)
-            include(definitions/isk.js)
             include(definitions/sci.js)
             
 
@@ -304,7 +293,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 4;
+            var jobs_total = 5;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -350,7 +339,8 @@
                     _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
                     _pdf_content.push(this._pdf_full_bdi);
                     
-                    _pdf_content.push(this._indication(">", "ToDo: ISK", "#3F51B5"));
+                    _pdf_content.push(this._horizontalLine(100, "#EEEEEE"));
+                    _pdf_content.push(this._pdf_full_isk);
                     
                     _pdf_content.push(this._indication(">", "ToDo: SCI", "#3F51B5"));
                     
@@ -425,6 +415,18 @@
                 jobs_done._pdf_full_bdi = true;
                 check();
             };
+
+           if ((this._pdf_full_isk !== undefined) && (this._pdf_full_isk !== null)) {
+                jobs_done._pdf_full_isk = true;
+                check();
+            };
+
+            if ((this._pdf_full_whoqol !== undefined) && (this._pdf_full_whoqol !== null)) {
+                jobs_done._pdf_full_whoqol = true;
+                check();
+            };
+            
+            
 
             if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
                 jobs_done._pdf_app_info = true;
@@ -673,28 +675,33 @@
 
         _event_pdf_full_bscl: function(e) {
             this.set('_pdf_full_bscl', e.detail);
-            console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
+            // console.log('(event) _pdf_full_bscl ==> ', this._pdf_full_bscl);
         },
 
         _event_pdf_full_asrs: function(e) {
             this.set('_pdf_full_asrs', e.detail);
-            console.log('(event) _pdf_full_asrs ==> ', this._pdf_full_asrs);
+            // console.log('(event) _pdf_full_asrs ==> ', this._pdf_full_asrs);
         },
 
         _event_pdf_full_bdi: function(e) {
             this.set('_pdf_full_bdi', e.detail);
-            console.log('(event) _pdf_full_bdi ==> ', this._pdf_full_bdi);
+            // console.log('(event) _pdf_full_bdi ==> ', this._pdf_full_bdi);
         },
 
         _event_pdf_full_whoqol: function(e) {
             this.set('_pdf_full_whoqol', e.detail);
-            console.log('(event) _pdf_full_whoqol ==> ', this._pdf_full_whoqol);
+            // console.log('(event) _pdf_full_whoqol ==> ', this._pdf_full_whoqol);
+        },
+
+        _event_pdf_full_isk: function(e) {
+            this.set('_pdf_full_isk', e.detail);
+            // console.log('(event) _pdf_full_isk ==> ', this._pdf_full_isk);
         },
         
 
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
-            console.log('(event) _pdf_app_info ==> ', this._pdf_app_info);
+            // console.log('(event) _pdf_app_info ==> ', this._pdf_app_info);
         },
 
 

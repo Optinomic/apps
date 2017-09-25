@@ -32,18 +32,6 @@ properties: {
         },
         observer: '_sr_tmtChanged'
     },
-    _sr_isk: {
-        type: Object,
-        statePath: function(state) {
-            var app_id = 'ch.suedhang.apps.isk'
-            if (app_id in state.survey_responses.data) {
-                return state.survey_responses.data[app_id]
-            } else {
-                return null
-            };
-        },
-        observer: '_sr_iskChanged'
-    },
     _sr_whoqol: {
         type: Object,
         statePath: function(state) {
@@ -121,6 +109,11 @@ properties: {
         observer: '_buildPDF'
     },
     _pdf_full_whoqol: {
+        type: Object,
+        value: null,
+        observer: '_buildPDF'
+    },
+    _pdf_full_isk: {
         type: Object,
         value: null,
         observer: '_buildPDF'
