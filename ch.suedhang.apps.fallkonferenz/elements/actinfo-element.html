@@ -49,14 +49,14 @@
                 </iron-collapse>
             </template>
             <div id="app_info">
-                <optinomic-app-info app-id="[[appId]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
+                <optinomic-app-info app-id="[[appIdEintritt]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
             <template is="dom-if" if="[[_d.init_done]]">
                 <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
                     <div id="pdf_get_chart">
                         <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart_alkohol}}"></optinomic-pdf-chart-profile>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>  
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options_pdf]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>  
                         </template>
                     </div>
                     <div id="data_content">

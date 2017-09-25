@@ -82,22 +82,22 @@ d.actinfo_fagerstroem = {
     "ranges": [{
         "range_start": 0,
         "range_stop": 2.5,
-        "text": "Gering ausgeprägt",
+        "text": "Gering",
         "color": "#2E7D32"
     }, {
         "range_start": 2.5,
         "range_stop": 4.5,
-        "text": "Mittelstark ausgeprägt",
+        "text": "Mittelstark",
         "color": "#FFA000"
     }, {
         "range_start": 4.5,
         "range_stop": 6.5,
-        "text": "Stark ausgeprägt",
+        "text": "Stark",
         "color": "#FB7200"
     }, {
         "range_start": 6.5,
         "range_stop": 10,
-        "text": "Sehr stark ausgeprägt",
+        "text": "Sehr stark",
         "color": "#C62828"
     }]
 };
