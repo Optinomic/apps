@@ -8,7 +8,6 @@ properties: {
         statePath: 'apps.current.data'
     },
 
-
     _pdf_full_actinfo: {
         type: Object,
         value: null,
