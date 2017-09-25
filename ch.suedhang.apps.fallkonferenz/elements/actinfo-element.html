@@ -54,7 +54,10 @@
             <template is="dom-if" if="[[_d.init_done]]">
                 <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
                     <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart_alkohol}}"></optinomic-pdf-chart-profile>
+                        <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>  
+                        </template>
                     </div>
                     <div id="data_content">
                         <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
@@ -69,7 +72,9 @@
                         </div>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-                            <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
+                            </div>
                         </template>
                     </div>
                 </template>
@@ -149,7 +154,12 @@
                     };
                 }
             },
-            _pdf_chart: {
+            _pdf_chart_alkohol: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
+            _pdf_chart_nikotin: {
                 type: Object,
                 value: null,
                 observer: '_buildPDF'
@@ -252,7 +262,7 @@
 
         _buildPDF: function() {
             var jobs_count = 0;
-            var jobs_total = 2;
+            var jobs_total = 3;
             var jobs_done = {};
             var build_full = true;
             var loading_string = jobs_count + "/" + jobs_total;
@@ -279,9 +289,22 @@
 
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._pdf_chart);
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+
+
+                    var audit = [];
+                    audit.push(this._heading("AUDIT", "Alcohol Use Disorders Identification", 'h2'));
+                    audit.push(this._horizontalLine(100, "#F5F5F5"));
+                    audit.push(this._pdf_chart_alkohol);
+                    audit.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(audit, "audit"));
+                    
+
+                    var fagerstroem = [];
+                    fagerstroem.push(this._heading("Nikotinabhängigkeit", "Fagerström", 'h2'));
+                    fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
+                    fagerstroem.push(this._pdf_chart_nikotin);
+                    fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._keepTogether(fagerstroem, "fagerstroem"));
 
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
@@ -304,7 +327,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BDI: ', this._pdf_content);
+                console.log('(PDF | Ready) actInfo: ', this._pdf_content);
 
             }.bind(this);
 
@@ -340,8 +363,13 @@
             //  Jobs Done?
             //  Check incoming Data
 
-            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
-                jobs_done._pdf_chart = true;
+            if ((this._pdf_chart_alkohol !== undefined) && (this._pdf_chart_alkohol !== null)) {
+                jobs_done._pdf_chart_alkohol = true;
+                check();
+            };
+
+            if ((this._pdf_chart_nikotin !== undefined) && (this._pdf_chart_nikotin !== null)) {
+                jobs_done._pdf_chart_nikotin = true;
                 check();
             };
 
