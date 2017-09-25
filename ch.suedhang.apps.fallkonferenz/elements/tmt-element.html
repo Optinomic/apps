@@ -375,7 +375,7 @@
                 "layout": "lightHorizontalLines",
                 "margin": [0, 6, 0, 12],
                 "table": {
-                    "widths": [145, "*", "*", "*", "*", "*"],
+                    "widths": [170, "*", "*", "*", "*", "*"],
                     "body": []
                 }
             };
@@ -415,23 +415,21 @@
 
             _sr.data.forEach(function(item, resultID) {
 
-                // console.log(resultID, result);
-
                 var messung = [
                     [
                         { "text": item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text, "style": "p", "margin": [0, 6, 0, 0] },
                         { "text": this._computeNiceDate(item.date), "style": "chart_p", "margin": [0, 0, 0, 6] },
                     ],
-                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "margin": [0, 10, 0, 0] },
-                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "margin": [0, 10, 0, 0] }
+                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "margin": [0, 11, 0, 0] }
                 ];
 
                 if (this._show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)) {
-                    var ba = { "text": item.calculation.tmt_score.quotient_rounded, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
+                    var ba = { "text": item.calculation.tmt_score.quotient_rounded, "style": "p", "margin": [0, 11, 0, 0] };
                 } else {
-                    var ba = { "text": "-", "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
+                    var ba = { "text": "-", "style": "p", "margin": [0, 11, 0, 0] };
                 }
 
                 messung.push(ba);
@@ -452,7 +450,7 @@
             return_stack.stack.push(this._heading("Datenblatt", null, 'h2'));
             return_stack.stack.push(table);
 
-            console.log(JSON.stringify(return_stack, null, 2));
+            // console.log(JSON.stringify(return_stack, null, 2));
 
             return return_stack;
         },
@@ -491,7 +489,7 @@
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
 
-                    _pdf_content.push(this._keepTogether(this._pdfmake_datenblatt(), "tmt_datenblatt"));
+                    _pdf_content.push(this._pdfmake_datenblatt());
 
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
