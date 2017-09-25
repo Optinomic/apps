@@ -183,6 +183,9 @@
             d.sci_stress.options_pdf = JSON.parse(JSON.stringify(d.sci_stress.options));
             d.sci_hilfreich.options_pdf = JSON.parse(JSON.stringify(d.sci_hilfreich.options));
 
+            d.sci_stress.options_pdf.item_height = d.sci_stress.options_pdf.item_height - 12;
+            d.sci_hilfreich.options_pdf.item_height = d.sci_hilfreich.options_pdf.item_height - 12;
+
             // Set & Log
             d.init_done = true;
             console.log('(INIT) ' + d.name, d);
