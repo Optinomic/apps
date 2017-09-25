@@ -9,14 +9,14 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 <dom-module id="optinomic-app">
     <template>
         <style is="custom-style" include="shared-styles">
-        :host {
+         :host {
             --app-primary-color: #FAFAFA;
             --app-secondary-color: #424242;
             --drawer-primary-color: #424242;
             --drawer-secondary-color: #EEEEEE;
             padding: 6px;
         }
-        
+
         paper-progress {
             display: block;
             width: 100%;
@@ -67,7 +67,18 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 
 
         _init: function() {
-            // this._viewPageChanged();
+
+            var params = {
+                "userID": helpers.getUserID(),
+                "patientID": helpers.getPatientID(),
+                "stayID": helpers.getStayID(),
+                "token": helpers.getToken(),
+                "appName": helpers.getAppName(),
+                "appID": helpers.getAppID(),
+                "apiURL": helpers.getApiURL(),
+            };
+            
+            this.dispatch('setObject', '_app_params', params);
         },
 
         _viewPageChanged: function(page) {
