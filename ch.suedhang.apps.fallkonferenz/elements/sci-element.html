@@ -55,20 +55,20 @@
                 <template is="dom-if" if="[[_d.init_done]]">
                     <template is="dom-if" if="[[_sr_sci.done]]">
                         <div id="pdf_get_chart">
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_stress.options_pdf]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_stress}}"></optinomic-pdf-chart-profile>
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_hilfreich.options_pdf]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_hilfreich}}"></optinomic-pdf-chart-profile>
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_stress.options_pdf]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_stress}}"></optinomic-pdf-chart-profile>
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.sci_hilfreich.options_pdf]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]" pdf-content="{{_pdf_chart_hilfreich}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="data_content">
                             <h3>Stressereignisse und Syptome</h3>
-                            <div class="chart" style="margin-top:-36px;">
+                            <div class="chart">
                                 <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                                <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                                <optinomic-chart-profile style="margin-top:-36px;" language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                             </div>
                             <h3>Copingstrategien</h3>
                             <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
-                            <div class="chart" style="margin-top:-36px;">
+                            <div class="chart">
                                 <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                                <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
+                                <optinomic-chart-profile style="margin-top:-36px;" language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
                             </div>
                         </div>
                     </template>

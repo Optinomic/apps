@@ -36,6 +36,52 @@ d.sci_stress = {
         "right_text": "Viele körperliche und psychische Stressreaktionen",
         "score_path": "info.score_1",
         "clinic_sample_var": null
+    }],
+    "ranges": [{
+        "range_start": 0.5,
+        "range_stop": 1.5,
+        "text": "Stanine: 1 | 4%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 1.5,
+        "range_stop": 2.5,
+        "text": "Stanine: 2 | 7%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 2.5,
+        "range_stop": 3.5,
+        "text": "Stanine: 3 | 12%",
+        "color": "#FFA000"
+    }, {
+        "range_start": 3.5,
+        "range_stop": 4.5,
+        "text": "Stanine: 4 | 17%",
+        "color": "#FFA000"
+    }, {
+        "range_start": 4.5,
+        "range_stop": 5.5,
+        "text": "Stanine: 5 | 20%",
+        "color": "#FBB100"
+    }, {
+        "range_start": 5.5,
+        "range_stop": 6.5,
+        "text": "Stanine: 6 | 17%",
+        "color": "#FBB100"
+    }, {
+        "range_start": 6.5,
+        "range_stop": 7.5,
+        "text": "Stanine: 7 | 12%",
+        "color": "#FB7200"
+    }, {
+        "range_start": 7.5,
+        "range_stop": 8.5,
+        "text": "Stanine: 8 | 7%",
+        "color": "#FB7200"
+    }, {
+        "range_start": 8.5,
+        "range_stop": 9.5,
+        "text": "Stanine: 9 | 4%",
+        "color": "#C62828"
     }]
 };
 
@@ -98,52 +144,51 @@ d.sci_hilfreich = {
         "right_text": "Kein erhöhter Akohol- oder Zigarettenkonsum",
         "score_path": "info.score_6",
         "clinic_sample_var": null
+    }],
+    "ranges": [{
+        "range_start": 0.5,
+        "range_stop": 1.5,
+        "text": "Stanine: 1 | 4%",
+        "color": "#C62828"
+    }, {
+        "range_start": 1.5,
+        "range_stop": 2.5,
+        "text": "Stanine: 2 | 7%",
+        "color": "#FB7200"
+    }, {
+        "range_start": 2.5,
+        "range_stop": 3.5,
+        "text": "Stanine: 3 | 12%",
+        "color": "#FFA000"
+    }, {
+        "range_start": 3.5,
+        "range_stop": 4.5,
+        "text": "Stanine: 4 | 17%",
+        "color": "#FBB100"
+    }, {
+        "range_start": 4.5,
+        "range_stop": 5.5,
+        "text": "Stanine: 5 | 20%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 5.5,
+        "range_stop": 6.5,
+        "text": "Stanine: 6 | 17%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 6.5,
+        "range_stop": 7.5,
+        "text": "Stanine: 7 | 12%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 7.5,
+        "range_stop": 8.5,
+        "text": "Stanine: 8 | 7%",
+        "color": "#2E7D32"
+    }, {
+        "range_start": 8.5,
+        "range_stop": 9.5,
+        "text": "Stanine: 9 | 4%",
+        "color": "#2E7D32"
     }]
 };
-
-d.sci_ranges = [{
-    "range_start": 0.5,
-    "range_stop": 1.5,
-    "text": "Stanine: 1 | 4%",
-    "color": "#2E7D32"
-}, {
-    "range_start": 1.5,
-    "range_stop": 2.5,
-    "text": "Stanine: 2 | 7%",
-    "color": "#2E7D32"
-}, {
-    "range_start": 2.5,
-    "range_stop": 3.5,
-    "text": "Stanine: 3 | 12%",
-    "color": "#FFA000"
-}, {
-    "range_start": 3.5,
-    "range_stop": 4.5,
-    "text": "Stanine: 4 | 17%",
-    "color": "#FFA000"
-}, {
-    "range_start": 4.5,
-    "range_stop": 5.5,
-    "text": "Stanine: 5 | 20%",
-    "color": "#FBB100"
-}, {
-    "range_start": 5.5,
-    "range_stop": 6.5,
-    "text": "Stanine: 6 | 17%",
-    "color": "#FBB100"
-}, {
-    "range_start": 6.5,
-    "range_stop": 7.5,
-    "text": "Stanine: 7 | 12%",
-    "color": "#FB7200"
-}, {
-    "range_start": 7.5,
-    "range_stop": 8.5,
-    "text": "Stanine: 8 | 7%",
-    "color": "#FB7200"
-}, {
-    "range_start": 8.5,
-    "range_stop": 9.5,
-    "text": "Stanine: 9 | 4%",
-    "color": "#C62828"
-}];
