@@ -92,12 +92,12 @@
             appIdEintritt: {
                 type: String,
                 value: null,
-                observer: '_loadData'
+                observer: '_loadEintrittData'
             },
             appIdAustritt: {
                 type: String,
                 value: null,
-                observer: '_loadData'
+                observer: '_loadAustrittData'
             },
             _sr_actinfo_ein: {
                 type: Object,
@@ -379,9 +379,15 @@
         // Lifecycle
         // -----------------------------
 
-        _loadData: function() {
-            if ((this.appId !== null) && (this.appId !== undefined)) {
-                this.dispatch('actionGetSurveyResponses', this.appId);
+        _loadEintrittData: function() {
+            if ((this.appIdEintritt !== null) && (this.appIdEintritt !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appIdEintritt);
+            };
+        },
+
+        _loadAustrittData: function() {
+            if ((this.appIdAustritt !== null) && (this.appIdAustritt !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appIdAustritt);
             };
         },
 
