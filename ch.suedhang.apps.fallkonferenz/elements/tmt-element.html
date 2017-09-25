@@ -62,7 +62,7 @@
                         </div>
                         <div id="data_content">
                             <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" start="[[_d.tmt.start]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
                             </div>
                             <div id="datenblatt">
                                 <h3>Datenblatt</h3>
@@ -254,7 +254,7 @@
             d.title = "Trail Making Test";
 
 
-            include(definitions/tmt.js)
+            include(definitions / tmt.js)
             // Clone options for pdf - nothing is overwritten
             d.tmt.options_pdf = JSON.parse(JSON.stringify(d.tmt.options));
 
@@ -332,6 +332,101 @@
             }, 250);
         },
 
+
+        _pdfmake_datenblatt: function() {
+
+            var _sr = this.get('_sr');
+
+            // -----------------------------------------------
+            // Build pdfmake Table
+            // -----------------------------------------------
+
+            var table = {
+                "headerRows": 1,
+                "layout": "lightHorizontalLines",
+                "margin": [0, 6, 0, 12],
+                "table": {
+                    "widths": [95, "*", "*", "*", "*", "*"],
+                    "body": []
+                }
+            };
+
+            var talbe_header = [
+                [
+                    { "text": "Messzeitpunkt", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "Datum", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                [
+                    { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                [
+                    { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                [
+                    { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                [
+                    { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ],
+                [
+                    { "text": "Quotient", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "B/A", "style": "chart_p", "margin": [0, 0, 0, 6] },
+                ]
+            ];
+
+
+
+            table.table.body.push(talbe_header);
+
+
+
+            _sr.forEach(function(item, resultID) {
+
+                // console.log(resultID, result);
+
+                var messung = [
+                    [
+                        { "text": item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text.mz_typ, "style": "p", "margin": [0, 6, 0, 0] },
+                        { "text": item.date, "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    ],
+                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] }
+                ];
+
+                if (this._show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)) {
+                    var ba = { "text": item.calculation.tmt_score.TMTBError, "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
+                } else {
+                    var ba = { "text": "-", "style": "p", "alignment": "center", "margin": [0, 10, 0, 0] };
+                }
+
+                messung.push(ba);
+
+
+                table.table.body.push(messung);
+
+
+            });
+
+
+
+            var return_stack = {
+                "id": "tmt_datenblatt",
+                "stack": []
+            };
+
+            return_stack.stack.push(this._heading("Datenblatt", null, 'h2'));
+            return_stack.stack.push(table);
+
+            return return_stack;
+        },
+
+
         _buildPDF: function() {
             var jobs_count = 0;
             var jobs_total = 2;
@@ -364,6 +459,8 @@
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+
+                    _pdf_content.push(this._keepTogether(this._pdfmake_datenblatt(), "tmt_datenblatt"));
 
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
@@ -460,7 +557,7 @@
         // -----------------------------
         // Computed Functions
         // -----------------------------
-        
+
         _computeNiceDate: function(date_string) {
             date_string = date_string || null
             if (date_string !== null) {

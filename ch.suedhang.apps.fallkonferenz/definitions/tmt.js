@@ -54,7 +54,7 @@ d.tmt = {
     "ranges": [{
         "range_start": -999,
         "range_stop": -1,
-        "text": "Verlangsamung",
+        "text": "Verlangsamung gegenüber Norm",
         "color": "#C62828"
     }, {
         "range_start": 2,
