@@ -253,7 +253,12 @@
                         console.log('(Response | Ready) ' + this._d.name + ': ', actinfo_obj);
 
 
-                        if (actinfo_obj.actinfo_ein_aus_data !== true) {
+                        if (this._sr_actinfo_ein.have_data !== true) {
+                            // Build PDF even with no Data.
+                            this._buildPDF();
+                        };
+
+                        if (this._sr_actinfo_aus.have_data !== true) {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
@@ -371,6 +376,8 @@
                     jobs_count = countProperties(jobs_done);
                     loading_string = jobs_count + "/" + jobs_total;
                     this.set('_d.loading_string', loading_string);
+
+                    console.log('(PDF | check) ' + d.name + ': ', loading_string, jobs_done);
 
                     if (jobs_count >= jobs_total) {
                         do_build();
