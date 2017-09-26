@@ -56,7 +56,7 @@
                     <div id="pdf_get_chart">
                         <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart_alkohol}}"></optinomic-pdf-chart-profile>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options_pdf]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>  
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options_pdf]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>
                         </template>
                     </div>
                     <div id="data_content">
@@ -321,7 +321,7 @@
                     audit.push(this._pdf_chart_alkohol);
                     audit.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._keepTogether(audit, "audit"));
-                    
+
 
                     var fagerstroem = [];
                     fagerstroem.push(this._heading("Nikotinabhängigkeit", "Fagerström", 'h2'));
@@ -377,7 +377,7 @@
                     loading_string = jobs_count + "/" + jobs_total;
                     this.set('_d.loading_string', loading_string);
 
-                    console.log('(PDF | check) ', loading_string, jobs_done, this._sr_actinfo_ein, this._sr_actinfo_aus);
+                    // console.log('(PDF | check) ', loading_string, jobs_done, this._sr_actinfo_ein, this._sr_actinfo_aus);
 
                     if (jobs_count >= jobs_total) {
                         do_build();
@@ -426,6 +426,19 @@
 
                         build_full = false;
                         check();
+                    } else {
+                        // Sonderfall:
+                        // Check if aus=true and ein=false
+                        if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
+                            if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
+                                if (this._sr_actinfo_ein.have_data !== true) {
+                                    // Confirm all "jobs" with "false"
+                                    jobs_done._pdf_chart_nikotin = false;
+                                    build_full = false;
+                                    check();
+                                };
+                            };
+                        };
                     };
                 };
             };
