@@ -370,7 +370,7 @@
                             this.set('_d.bscl_zusatzitems', zusatzitems);
                             this.set('_d.bscl_zusatzitems_full', zusatzitems_full);
                             this.set('_d.bscl_dropouts', dopouts);
-                            
+
 
                             console.log('(Response | Ready) ' + this._d.name + ': ', clinic_sample_dive, zusatzitems, dopouts);
 
@@ -538,11 +538,13 @@
                 // Should we print charts?  
                 // If only dropouts === no
                 var should_print_chart = false;
-                var haveResults = d.bscl_zusatzitems.array;
-                if (haveResults.length > 0) {
-                    should_print_chart = true;    
-                };
 
+                if ((d.bscl_zusatzitems !== undefined) && (d.bscl_zusatzitems !== null)) {
+                    var haveResults = d.bscl_zusatzitems.array;
+                    if (haveResults.length > 0) {
+                        should_print_chart = true;
+                    };
+                };
 
                 // --------------------------
                 // Build PDF
@@ -557,7 +559,7 @@
                         _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     };
                     _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems(), "zusatzitems"));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
@@ -565,7 +567,7 @@
                 } else {
                     _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                     var app_beschreibung = [];
                     app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
                     app_beschreibung.push(this._pdf_app_info);
@@ -604,7 +606,7 @@
                     jobs_count = countProperties(jobs_done);
                     loading_string = jobs_count + "/" + jobs_total;
                     this.set('_d.loading_string', loading_string);
-                    
+
                     if (jobs_count >= jobs_total) {
                         do_build();
                     };
