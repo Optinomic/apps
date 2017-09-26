@@ -253,7 +253,7 @@
                         console.log('(Response | Ready) ' + this._d.name + ': ', actinfo_obj);
 
 
-                        if (_sr_actinfo.length === 0) {
+                        if (actinfo_obj.actinfo_ein_aus_data !== true) {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
