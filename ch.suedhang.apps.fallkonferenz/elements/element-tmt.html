@@ -349,7 +349,7 @@
                             clinic_sample_dive.defined = true;
                             this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
 
-                            console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
+                            console.log('(Response | Ready) ' + d.name + ': ', latest_sr, this._d);
 
 
                         } else {
@@ -513,7 +513,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) WHOQOL-BREF: ', this._pdf_content);
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
 
             }.bind(this);
 

@@ -251,6 +251,8 @@
                             };
                             this.set('_sr_sci', return_obj);
 
+                            console.log('(Response | Ready) ' + d.name + ': ', return_obj);
+
 
                         } else {
                             // Build PDF even with no Data.
@@ -344,7 +346,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) SCI: ', this._pdf_content);
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
 
             }.bind(this);
 

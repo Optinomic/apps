@@ -250,7 +250,8 @@
                         };
 
                         this.set('_sr_actinfo_merged', actinfo_obj);
-                        console.warn('_sr_actinfo_merged', this._sr_actinfo_merged);
+                        console.log('(Response | Ready) ' + d.name + ': ', actinfo_obj);
+
 
                         if (_sr_actinfo.length === 0) {
                             // Build PDF even with no Data.
@@ -345,7 +346,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) actInfo: ', this._pdf_content);
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
 
             }.bind(this);
 

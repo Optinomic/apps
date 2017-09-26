@@ -370,7 +370,10 @@
                             this.set('_d.bscl_zusatzitems', zusatzitems);
                             this.set('_d.bscl_zusatzitems_full', zusatzitems_full);
                             this.set('_d.bscl_dropouts', dopouts);
-                            console.log('(bscl-element) Klinikstichprobe, Zusatzitems:', clinic_sample_dive, zusatzitems, dopouts);
+                            
+
+                            console.log('(Response | Ready) ' + d.name + ': ', clinic_sample_dive, zusatzitems, dopouts);
+
                         } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
@@ -576,7 +579,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) BSCL: ', this._pdf_content);
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
 
             }.bind(this);
 
