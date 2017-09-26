@@ -192,6 +192,7 @@
             var loading_string = jobs_count + "/" + jobs_total;
 
 
+            console.log('(PDF | BUILD) AASE-G: ', loading_string, jobs_done, this._pdf_chart, this._pdf_app_info);
 
             this.set('_d.loading_string', loading_string);
 
@@ -238,7 +239,7 @@
                 this._pdf_content = _pdf_content;
                 this.set('_pdf_ready', true);
 
-                console.log('(PDF | Ready) WHOQOL-BREF: ', this._pdf_content);
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
 
             }.bind(this);
 
