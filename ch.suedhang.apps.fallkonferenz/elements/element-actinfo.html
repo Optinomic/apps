@@ -401,7 +401,7 @@
 
             if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
                 if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-                    if (this._sr_actinfo_ein.have_data === false) {
+                    if (this._sr_actinfo_ein.have_data !== true) {
                         // Confirm all "jobs" with "false"
                         jobs_done._pdf_chart_alkohol = false;
 
@@ -413,7 +413,7 @@
 
             if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
                 if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
-                    if (this._sr_actinfo_aus.have_data === false) {
+                    if (this._sr_actinfo_aus.have_data !== true) {
                         // Confirm all "jobs" with "false"
                         jobs_done._pdf_chart_nikotin = false;
 
