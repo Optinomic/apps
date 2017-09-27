@@ -45,7 +45,7 @@
         .scroll_top {
             text-align:right;
             cursor:n-resize;
-            margin-top: -6px;
+            margin-top: 6px;
         }
         </style>
         <div id="top" class="layout horizontal flex">
@@ -59,7 +59,14 @@
             </div>
         </div>
         <template is="dom-if" if="[[_d.init_done]]">
-            <div it="toc" style="margin-left:64px;">
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <div style="margin-left:32px;">
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                    </div>
+                </iron-collapse>
+            </template>
+            <div id="toc">
                 <h3 style="margin-left:24px;">Inhaltsverzeichnis</h3>
                 <nav id="toc" style="margin-top:-6px;margin-bottom:6px;">
                     <ol>
@@ -69,13 +76,7 @@
                     </ol>
                 </nav>
             </div>
-            <template is="dom-if" if="[[_pdf_ready]]">
-                <iron-collapse id="collapse_print" horizontal>
-                    <div style="margin-left:88px;">
-                        <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
-                    </div>
-                </iron-collapse>
-            </template>
+            
             <div id="app_info">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
