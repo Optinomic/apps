@@ -42,7 +42,7 @@
             border-top-width: 1px;
         }
         </style>
-        <div id="title" class="layout horizontal flex">
+        <div id="top" class="layout horizontal flex">
             <div class="flex">
                 <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
             </div>
@@ -52,28 +52,22 @@
                 </template>
             </div>
         </div>
-        <div it="toc">
-            <h3>Inhaltsverzeichnis</h3>
-            <nav id="toc">
-                <ul>
-                    <li><a href="#content_actinfo">act-info</a></li>
-                    <li><a href="#content_tmt">TMT</a></li>
-                    <li><a href="#content_asrs">ASRS</a></li>
-                    <li><a href="#content_aase">AASE</a></li>
-                    <li><a on-tap="scrollIntoViewTap">--> BSCL</a></li>
-                    <li><a href="#content_bdi">BDI</a></li>
-                    <li><a href="#content_isk">ISK</a></li>
-                    <li><a href="#content_sci">SCI</a></li>
-                    <li><a href="#content_whoqol">WHOQOL</a></li>
-                </ul>
-            </nav>
-        </div>
         <template is="dom-if" if="[[_pdf_ready]]">
             <iron-collapse id="collapse_print" horizontal>
                 <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
             </iron-collapse>
         </template>
         <template is="dom-if" if="[[_d.init_done]]">
+            <div it="toc">
+                <h3>Inhaltsverzeichnis</h3>
+                <nav id="toc">
+                    <ul>
+                        <template is="dom-repeat" items="_d.toc">
+                            <li><a on-tap="__scroll_target">[[item.name]]</a></li>
+                        </template>
+                    </ul>
+                </nav>
+            </div>
             <div id="app_info">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
@@ -82,6 +76,9 @@
                     <element-actinfo app-id-eintritt="ch.suedhang.apps.actinfo_ein" app-id-austritt="ch.suedhang.apps.actinfo_aus" on-pdfready="_event_pdf_full_actinfo"></element-actinfo>
                 </div>
                 <div id="content_tmt" class="content_block">
+                    <div style="float:right;">
+                        <paper-icon-button class="grey" on-tap="__scroll_top" icon="vertical-align-top"></paper-icon-button>
+                    </div>
                     <element-tmt app-id="ch.suedhang.apps.tmt_V3" on-pdfready="_event_pdf_full_tmt"></element-tmt>
                 </div>
                 <div id="content_asrs" class="content_block">
@@ -132,9 +129,8 @@
             d.title = "Assessment";
             d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
-
+            include(_data_toc.js)
             include(definitions/actinfo.js)
-
 
             d.init_done = true;
             this.set('_d', d);
@@ -324,6 +320,20 @@
             };
         },
 
+        __scroll_target: function(e) {
+            var model = e.model.get('item');
+            console.log('(SCROLL)', model);
+            var target = this.$$('#' + model.anchor);
+            target.scrollIntoView();
+        },
+
+        __scroll_top: function() {
+            var top = this.$$('#top');
+            console.log('(SCROLL) top');
+            top.scrollIntoView();
+        },
+
+
         // -----------------------------
         // Event Handler's
         // -----------------------------
@@ -369,10 +379,7 @@
         },
 
 
-        scrollIntoViewTap: function() {
-            var target = this.$$('#content_bscl');
-            target.scrollIntoView();
-        },
+
 
         // -----------------------------
         // Lifecycle
