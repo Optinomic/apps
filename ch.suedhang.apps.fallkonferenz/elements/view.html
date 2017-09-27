@@ -41,6 +41,12 @@
             border-top-style: solid;
             border-top-width: 1px;
         }
+
+        .scroll_top {
+            text-align:right;
+            cursor:n-resize;
+            margin-top: -6px;
+        }
         </style>
         <div id="top" class="layout horizontal flex">
             <div class="flex">
@@ -76,40 +82,40 @@
             <div id="main_content">
                 <div id="content_actinfo" class="content_block">
                     <element-actinfo app-id-eintritt="ch.suedhang.apps.actinfo_ein" app-id-austritt="ch.suedhang.apps.actinfo_aus" on-pdfready="_event_pdf_full_actinfo"></element-actinfo>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_tmt" class="content_block">
                     <element-tmt app-id="ch.suedhang.apps.tmt_V3" on-pdfready="_event_pdf_full_tmt"></element-tmt>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_asrs" class="content_block">
                     <element-asrs app-id="ch.suedhang.apps.asrs" on-pdfready="_event_pdf_full_asrs"></element-asrs>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_aase" class="content_block">
                     <element-aase app-id="ch.suedhang.apps.aase-g" on-pdfready="_event_pdf_full_aase"></element-aase>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_bscl" class="content_block">
                     <element-bscl app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></element-bscl>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_bdi" class="content_block">
                     <element-bdi app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></element-bdi>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_isk" class="content_block">
                     <element-isk app-id="ch.suedhang.apps.isk" on-pdfready="_event_pdf_full_isk"></element-isk>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_sci" class="content_block">
                     <element-sci app-id="ch.suedhang.apps.sci" on-pdfready="_event_pdf_full_sci"></element-sci>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 <div id="content_whoqol" class="content_block">
                     <element-whoqol app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></element-whoqol>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                 </div>
-                <p class="caption" on-tap="__scroll_top" style="float:right;cursor:n-resize;">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
             </div>
         </template>
         <template is="dom-if" if="[[!_d.init_done]]">
