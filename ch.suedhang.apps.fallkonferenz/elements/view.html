@@ -57,18 +57,16 @@
                 <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
             </iron-collapse>
         </template>
-        <template is="dom-if" if="[[!_pdf_ready]]">
-            <p class="span">PDF:  [[_d.loading_string]]</p>
-        </template>
+        
         <template is="dom-if" if="[[_d.init_done]]">
             <div it="toc">
                 <h3>Inhaltsverzeichnis</h3>
-                <nav id="toc">
-                    <ul>
+                <nav id="toc" style="margin-top:-6px;">
+                    <ol>
                         <template is="dom-repeat" items="[[_d.toc]]">
                             <li><a on-tap="__scroll_target">[[item.name]]</a></li>
                         </template>
-                    </ul>
+                    </ol>
                 </nav>
             </div>
             <div id="app_info">
@@ -76,33 +74,39 @@
             </div>
             <div id="main_content">
                 <div id="content_actinfo" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-actinfo app-id-eintritt="ch.suedhang.apps.actinfo_ein" app-id-austritt="ch.suedhang.apps.actinfo_aus" on-pdfready="_event_pdf_full_actinfo"></element-actinfo>
                 </div>
                 <div id="content_tmt" class="content_block">
-                    <div style="float:right;">
-                        <paper-icon-button class="grey" on-tap="__scroll_top" icon="vertical-align-top"></paper-icon-button>
-                    </div>
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-tmt app-id="ch.suedhang.apps.tmt_V3" on-pdfready="_event_pdf_full_tmt"></element-tmt>
                 </div>
                 <div id="content_asrs" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-asrs app-id="ch.suedhang.apps.asrs" on-pdfready="_event_pdf_full_asrs"></element-asrs>
                 </div>
                 <div id="content_aase" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-aase app-id="ch.suedhang.apps.aase-g" on-pdfready="_event_pdf_full_aase"></element-aase>
                 </div>
                 <div id="content_bscl" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-bscl app-id="ch.suedhang.apps.bscl_anq" on-pdfready="_event_pdf_full_bscl"></element-bscl>
                 </div>
                 <div id="content_bdi" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-bdi app-id="ch.suedhang.apps.bdi" on-pdfready="_event_pdf_full_bdi"></element-bdi>
                 </div>
                 <div id="content_isk" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-isk app-id="ch.suedhang.apps.isk" on-pdfready="_event_pdf_full_isk"></element-isk>
                 </div>
                 <div id="content_sci" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-sci app-id="ch.suedhang.apps.sci" on-pdfready="_event_pdf_full_sci"></element-sci>
                 </div>
                 <div id="content_whoqol" class="content_block">
+                    <p class="caption" style="float:right;">[&nbsp;↑&nbsp;Inhaltsverzeichnis&nbsp;]</p>
                     <element-whoqol app-id="com.optinomic.apps.whoqol" on-pdfready="_event_pdf_full_whoqol"></element-whoqol>
                 </div>
             </div>

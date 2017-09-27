@@ -1,31 +1,3 @@
-d.toc = [{
-    "name": "act-Info",
-    "anchor": "content_actinfo"
-}, {
-    "name": "TMT",
-    "anchor": "content_tmt"
-}, {
-    "name": "ASRS",
-    "anchor": "content_asrs"
-}, {
-    "name": "AASE",
-    "anchor": "content_aase"
-}, {
-    "name": "BSCL",
-    "anchor": "content_bscl"
-}, {
-    "name": "BDI-II",
-    "anchor": "content_bdi"
-}, {
-    "name": "ISK",
-    "anchor": "content_isk"
-}, {
-    "name": "SCI",
-    "anchor": "content_sci"
-}, {
-    "name": "WHOQOL",
-    "anchor": "content_whoqol"
-}];
 
 d.data_app = {
     "actinfo_ein": "ch.suedhang.apps.actinfo_ein",
@@ -39,3 +11,32 @@ d.data_app = {
     "sci": "ch.suedhang.apps.sci",
     "whoqol": "com.optinomic.apps.whoqol"
 };
+
+d.toc = [{
+    "name": "Klientenmonitoringsystem (act-Info)",
+    "anchor": "content_actinfo"
+}, {
+    "name": "Trail Making Test (TMT)",
+    "anchor": "content_tmt"
+}, {
+    "name": "ADHS-Screening (ASRS)",
+    "anchor": "content_asrs"
+}, {
+    "name": "Alcohol Abstinence Self-Efficacy (AASE)",
+    "anchor": "content_aase"
+}, {
+    "name": "Brief Symptom Checklist (BSCL)",
+    "anchor": "content_bscl"
+}, {
+    "name": "Beck Depressions-Inventar (BDI-II)",
+    "anchor": "content_bdi"
+}, {
+    "name": "Inventar Sozialer Kompetenzen (ISK)",
+    "anchor": "content_isk"
+}, {
+    "name": "Stress-Coping-Inventar (SCI)",
+    "anchor": "content_sci"
+}, {
+    "name": "WHO Quality of Life (WHOQOL-BREF)",
+    "anchor": "content_whoqol"
+}];
