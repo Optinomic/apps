@@ -63,7 +63,7 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
-                    <div style="margin-left:26px;">
+                    <div style="margin-left:18px;">
                         <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
                     </div>
                 </iron-collapse>
@@ -79,7 +79,7 @@
                 </nav>
             </div>
             
-            <div id="app_info">
+            <div id="app_info" style="margin-bottom:54px;">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
             <div id="main_content">
