@@ -41,7 +41,6 @@
             border-top-style: solid;
             border-top-width: 1px;
         }
-
         </style>
         <div id="top" class="layout horizontal flex">
             <div class="flex">
@@ -53,18 +52,10 @@
                 </template>
             </div>
         </div>
-        <template is="dom-if" if="[[_pdf_ready]]">
-            <iron-collapse id="collapse_print" horizontal>
-                <div style="margin-left:88px;">
-                    <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
-                </div>
-            </iron-collapse>
-        </template>
-        
         <template is="dom-if" if="[[_d.init_done]]">
             <div it="toc" style="margin-left:64px;">
-                <h3>Inhaltsverzeichnis</h3>
-                <nav id="toc" style="margin-top:-6px;margin-bottom:6px;margin-left:24px;">
+                <h3 style="margin-left:24px;">Inhaltsverzeichnis</h3>
+                <nav id="toc" style="margin-top:-6px;margin-bottom:6px;">
                     <ol>
                         <template is="dom-repeat" items="[[_d.toc]]">
                             <li><a on-tap="__scroll_target" style="cursor:s-resize;">[[item.name]]</a></li>
@@ -72,6 +63,13 @@
                     </ol>
                 </nav>
             </div>
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <div style="margin-left:88px;">
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                    </div>
+                </iron-collapse>
+            </template>
             <div id="app_info">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
