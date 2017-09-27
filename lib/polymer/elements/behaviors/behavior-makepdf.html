@@ -229,7 +229,7 @@ makepdfBehavior = {
         return_obj.stack.push(no_data);
         return_obj.stack.push(this._horizontalLine(100, "#F5F5F5"));
 
-        return return_obj;
+        return this._keepTogether(return_obj, "no_data");
     },
 
     _indication: function(sign, title, color) {
