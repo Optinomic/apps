@@ -370,7 +370,8 @@
 
 
         scrollIntoViewTap: function() {
-            this.$.content_bscl.scrollIntoView()
+            var target = this.$$('#content_bscl');
+            target.scrollIntoView();
         },
 
         // -----------------------------
