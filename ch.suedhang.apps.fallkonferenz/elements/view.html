@@ -52,6 +52,7 @@
                 </template>
             </div>
         </div>
+        <!--
         <div it="toc">
             <h3>Inhaltsverzeichnis</h3>
             <nav class="nav">
@@ -68,6 +69,7 @@
                 </ul>
             </nav>
         </div>
+        -->
         <template is="dom-if" if="[[_pdf_ready]]">
             <iron-collapse id="collapse_print" horizontal>
                 <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
