@@ -57,12 +57,15 @@
                 <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
             </iron-collapse>
         </template>
+        <template is="dom-if" if="[[!_pdf_ready]]">
+            <p class="span">PDF:  [[_d.loading_string]]</p>
+        </template>
         <template is="dom-if" if="[[_d.init_done]]">
             <div it="toc">
                 <h3>Inhaltsverzeichnis</h3>
                 <nav id="toc">
                     <ul>
-                        <template is="dom-repeat" items="_d.toc">
+                        <template is="dom-repeat" items="[[_d.toc]]">
                             <li><a on-tap="__scroll_target">[[item.name]]</a></li>
                         </template>
                     </ul>
