@@ -45,7 +45,7 @@
         .scroll_top {
             text-align:right;
             cursor:n-resize;
-            margin-top: 12px;
+            margin-top: 24px;
             margin-bottom:0px !important;
             padding-bottom:0px !important;
         }
@@ -56,7 +56,7 @@
             </div>
             <div>
                 <template is="dom-if" if="[[_pdf_ready]]">
-                    <paper-icon-button class="pink" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    <paper-icon-button class="indigo" on-tap="__toggle_print" icon="print"></paper-icon-button>
                 </template>
             </div>
         </div>
@@ -70,7 +70,7 @@
             </template>
             <div id="toc">
                 <h3 style="margin-left:24px;">Inhaltsverzeichnis</h3>
-                <nav id="toc" style="margin-top:-6px;margin-bottom:18px;">
+                <nav id="toc" style="margin-top:-6px;margin-bottom:24px;">
                     <ol>
                         <template is="dom-repeat" items="[[_d.toc]]">
                             <li><a on-tap="__scroll_target" style="cursor:s-resize;">[[item.name]]</a></li>
