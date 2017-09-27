@@ -61,14 +61,14 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
-                    <div style="margin-left:32px;">
+                    <div style="margin-left:26px;">
                         <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
                     </div>
                 </iron-collapse>
             </template>
             <div id="toc">
                 <h3 style="margin-left:24px;">Inhaltsverzeichnis</h3>
-                <nav id="toc" style="margin-top:-6px;margin-bottom:6px;">
+                <nav id="toc" style="margin-top:-6px;margin-bottom:18px;">
                     <ol>
                         <template is="dom-repeat" items="[[_d.toc]]">
                             <li><a on-tap="__scroll_target" style="cursor:s-resize;">[[item.name]]</a></li>
