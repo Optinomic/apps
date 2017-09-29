@@ -32,8 +32,8 @@
         <div hidden$="[[_d.show_help]]">
             <h2 class="indigo">Export</h2>
             <div>
-                <paper-button on-click="onDownload" raised class="pink">Download: Survey Responses</paper-button>
-                <a href="#" id="fileLink" hidden download="survey_responses.json"></a>
+                <paper-button on-click="onDownload" raised class="pink">Download: TMT (Full, all_patients)</paper-button>
+                <a href="#" id="fileLink" hidden download="tmt_full_all_patients.json"></a>
             </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
@@ -69,13 +69,17 @@
                 type: Object
             },
 
-            _sr: {
+            _all_paitent_results: {
                 type: Object,
                 statePath: function(state) {
                     return_obj = null;
-                    if ((state.survey_responses !== null) && (state.survey_responses !== undefined)) {
-                        if ((state.survey_responses.data !== null) && (state.survey_responses.data !== undefined)) {
-                            return_obj = state.survey_responses.data;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full !== null) && (state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full !== undefined)) {
+                            if ((state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data !== null) && (state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data !== undefined)) {
+
+                                return state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data.patients;
+                            };
+
                         };
                     };
                     return return_obj;
@@ -89,11 +93,9 @@
         onDownload(e) {
             e.preventDefault();
 
-
             // File Content
-            var content = JSON.stringify(this._sr, null, 2);
+            var content = JSON.stringify(this._all_paitent_results, null, 2);
             console.log('File Content', content);
-
 
             const link = this.createFile(content);
             this.$.fileLink.href = link;
