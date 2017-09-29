@@ -1,0 +1,164 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-button/paper-button.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .app_title {
+            margin-bottom: 24px;
+        }
+
+        .readme_container {
+            margin-bottom: 24px;
+        }
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+            </div>
+            <div>
+                <div hidden$="[[_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                </div>
+                <div hidden$="[[!_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                </div>
+            </div>
+        </div>
+        <div hidden$="[[_d.show_help]]">
+            <h2 class="indigo">Export</h2>
+            <div>
+                <paper-button on-click="onDownload" raised class="pink">Download: Survey Responses</paper-button>
+                <a href="#" id="fileLink" hidden download="survey_responses.json"></a>
+            </div>
+        </div>
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
+            },
+
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            },
+
+            _d: {
+                type: Object
+            },
+
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state.survey_responses !== null) && (state.survey_responses !== undefined)) {
+                        if ((state.survey_responses.data !== null) && (state.survey_responses.data !== undefined)) {
+                            return_obj = state.survey_responses.data;
+                        };
+                    };
+                    return return_obj;
+                }
+            },
+        },
+
+
+        // --------------------------- Data --------------------------- 
+
+        onDownload(e) {
+            e.preventDefault();
+
+
+            // File Content
+            var content = JSON.stringify(this._sr, null, 2);
+            console.log('File Content', content);
+
+
+            const link = this.createFile(content);
+            this.$.fileLink.href = link;
+            this.$.fileLink.click();
+        },
+
+        createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+
+            return window.URL.createObjectURL(textBlob);
+        },
+
+
+        // --------------------------- Data --------------------------- 
+
+        _toggleHelp: function() {
+            var d = this.get('_d');
+            this._d = {};
+            d.show_help = !d.show_help;
+
+            var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme_html;
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+        // --------------------------- Data --------------------------- 
+
+        __loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // loadData
+                this.dispatch('actionGetUserAppCalculation', 'ch.suedhang.apps.tmt_V3', 'tmt_full');
+
+            });
+        },
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.show_help = false;
+
+            d.some_data = {
+                "test": true
+            };
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+
+        // --------------------------- Lifecycle --------------------------- 
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                this.__loadData();
+                this.__init();
+
+            });
+        }
+    });
+    </script>
+</dom-module>
