@@ -140,7 +140,9 @@
                         var delimitter = ";";
                         var newline = "\n";
 
-                        var header = "Name" + delimitter +
+                        var header = 
+                            "Geschlecht" + delimitter +
+                            "Name" + delimitter +
                             "Vorname" + delimitter +
                             "Alter" + delimitter +
                             "MZ_Code" + delimitter +
@@ -152,6 +154,11 @@
                         _all_patient_results.forEach(function(r, rID) {
                             r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
 
+                                if (r.patient.data.last_name === 'male') {
+                                    f = f + 'Herr' + delimitter;
+                                } else {
+                                    f = f + 'Frau' + delimitter;
+                                };
                                 f = f + r.patient.data.last_name + delimitter;
                                 f = f + r.patient.data.first_name + delimitter;
                                 f = f + calc.set_age + delimitter;
