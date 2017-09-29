@@ -403,7 +403,10 @@
         // Lifecycle
         // -----------------------------
 
-        _loadData: function() {},
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
 
         ready: function() {
             this._loadData();
