@@ -27,7 +27,17 @@ include(readme.md)
 [template overview 6 7]
 include(../lib/polymer/index.m4)
 include(elements/actinfo-problemsubstanzen.html)
+include(elements/element-actinfo.html)
+include(elements/element-tmt.html)
+include(elements/element-asrs.html)
+include(elements/element-aase.html)
+include(elements/element-bscl.html)
+include(elements/element-bdi.html)
+include(elements/element-isk.html)
+include(elements/element-sci.html)
+include(elements/element-whoqol.html)
 include(elements/view.html)
+
 
 
 [javascript]
