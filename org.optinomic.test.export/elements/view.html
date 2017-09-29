@@ -32,8 +32,8 @@
         <div hidden$="[[_d.show_help]]">
             <h2 class="indigo">Export</h2>
             <div>
-                <paper-button on-click="onDownload" class="pink">Create & Download</paper-button>
-                <a href="#" id="fileLink" hidden download="bscl_survey_response.json"></a>
+                <paper-button on-click="onDownload" raised class="pink">Download: Survey Responses</paper-button>
+                <a href="#" id="fileLink" hidden download="survey_responses.json"></a>
             </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
@@ -69,16 +69,13 @@
                 type: Object
             },
 
-            _sr_bscl: {
+            _sr: {
                 type: Object,
                 statePath: function(state) {
                     return_obj = null;
                     if ((state.survey_responses !== null) && (state.survey_responses !== undefined)) {
                         if ((state.survey_responses.data !== null) && (state.survey_responses.data !== undefined)) {
-                            if ('ch.suedhang.apps.bscl_anq' in state.survey_responses.data) {
-                                // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
-                                return_obj = state.survey_responses.data['ch.suedhang.apps.bscl_anq']
-                            };
+                            return_obj = state.survey_responses.data;
                         };
                     };
                     return return_obj;
@@ -94,7 +91,7 @@
 
 
             // File Content
-            var content = this._sr_bscl;
+            var content = JSON.stringify(this._sr, null, 2);
             console.log('File Content', content);
 
 
