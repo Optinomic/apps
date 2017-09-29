@@ -30,3 +30,7 @@ include(elements/view.html)
 
 [css]
 
+
+[calculation tmt_full javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
+include(calculations/full.js)
+
