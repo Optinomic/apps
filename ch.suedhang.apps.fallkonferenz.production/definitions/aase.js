@@ -1,7 +1,7 @@
 d.aase = {
     "options": {
-        "min": -0.5,
-        "max": 4.5,
+        "min": -1,
+        "max": 5,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,
@@ -13,8 +13,10 @@ d.aase = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
         "response_date_path": "date"
@@ -33,7 +35,7 @@ d.aase = {
         "right_text": "Starke Versuchung",
         "score_path": "calculation.another_calculation.mean_soziale_situationen",
         "clinic_sample_var": null
-    },{
+    }, {
         "left_title": "Somatisches Unwohlsein",
         "left_text": "Keine Versuchung",
         "right_title": "Somatisches Unwohlsein",
@@ -55,23 +57,19 @@ d.aase = {
         "score_path": "calculation.another_calculation.score_mean",
         "clinic_sample_var": null
     }],
-
-
-
-
     "ranges": [{
-        "range_start": 0,
-        "range_stop": 0.9,
+        "range_start": -999,
+        "range_stop": 0.999,
         "text": "sehr geringe Versuchung",
         "color": "#2E7D32"
     }, {
         "range_start": 1,
-        "range_stop": 1.9,
+        "range_stop": 1.999,
         "text": "geringe Versuchung",
         "color": "#FFA000"
     }, {
         "range_start": 2,
-        "range_stop": 2.9,
+        "range_stop": 2.999,
         "text": "hohe Versuchung",
         "color": "#FB7200"
     }, {

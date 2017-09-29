@@ -1,8 +1,11 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
-<link rel="import" href="vaadin-grid/vaadin-grid.html">
-<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -21,561 +24,390 @@
             border-right-style: none;
             border-bottom-style: none;
         }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-top: -48px;
+            margin-bottom: 48px;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+        .scroll_top {
+            text-align:right;
+            cursor:n-resize;
+            margin-top: 24px;
+            margin-bottom:0px !important;
+            padding-bottom:0px !important;
+        }
         </style>
-        <div class="horizontal wrap">
-            <div class="flex app_title">
-                <optinomic-title nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+        <div id="top" class="layout horizontal flex">
+            <div class="flex">
+                <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.name]]"></optinomic-title>
             </div>
             <div>
-                <div hidden$="[[_d.show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
-                </div>
-                <div hidden$="[[!_d.show_help]]">
-                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
-                </div>
+                <template is="dom-if" if="[[_pdf_ready]]">
+                    <paper-icon-button class="indigo" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                </template>
             </div>
         </div>
-        <div hidden$="[[!_d.show_help]]">
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
-                <p>[[_current_app.description]]</p>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <div style="margin-left:18px;">
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]"></optinomic-pdfmake>
+                    </div>
+                </iron-collapse>
+            </template>
+            <div id="toc">
+                <h3 style="margin-left:24px;">Inhaltsverzeichnis</h3>
+                <nav id="toc" style="margin-top:-6px;margin-bottom:24px;">
+                    <ol>
+                        <template is="dom-repeat" items="[[_d.toc]]">
+                            <li><a on-tap="__scroll_target" style="cursor:s-resize;">[[item.name]]</a></li>
+                        </template>
+                    </ol>
+                </nav>
             </div>
-            <div class="readme_container">
-                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
-                <div id="readme"></div>
+            
+            <div id="app_info" style="margin-bottom:54px;">
+                <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
-        </div>
-        <template is="dom-if" if="[[!_d.show_help]]" restamp="true">
-            <div>
-                <optinomic-title small h1="Suchtmittelkonsum" h2="Sonderversion für den stationären Alkohol- und Medikamentenbereich." h3="ActInfo"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_actinfo_ein.have_data]]">
-                    <h3>Keine ActInfo-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
-                    <actinfo-problemsubstanzen data="[[_sr_actinfo_ein]]"></actinfo-problemsubstanzen>
-                    <h3>Zusatzinformationen</h3>
-                    <template is="dom-repeat" items="[[_sr_actinfo_ein.data]]" as="actinfo_ein">
-                        <p>[[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.kunsumalter_text]] [[actinfo_ein.calculation.actinfo_ein_calc.zusatzangaben.entzuege_text]]</p>
-                        <p class="caption">&nbsp;</p>
-                    </template>
-                    <h3>AUDIT (Alcohol Use Disorders Identification)</h3>
-                    <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"> </optinomic-chart-profile>
-                </template>
-                <template is="dom-if" if="[[_sr_actinfo.merged]]">
-                    <h3>Nikotinabhängigkeit (Fagerström)</h3>
-                    <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo]]"> </optinomic-chart-profile>
-                </template>
+            <div id="main_content">
+                <p class="caption scroll_top" on-tap="__scroll_top">&nbsp;</p>
+                <div id="content_actinfo" class="content_block">
+                    <element-actinfo app-id-eintritt="[[_d.data_app.actinfo_ein]]" app-id-austritt="[[_d.data_app.actinfo_aus]]" on-pdfready="_event_pdf_full_actinfo"></element-actinfo>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_tmt" class="content_block">
+                    <element-tmt app-id="[[_d.data_app.tmt]]" on-pdfready="_event_pdf_full_tmt"></element-tmt>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_asrs" class="content_block">
+                    <element-asrs app-id="[[_d.data_app.asrs]]" on-pdfready="_event_pdf_full_asrs"></element-asrs>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_aase" class="content_block">
+                    <element-aase app-id="[[_d.data_app.aase]]" on-pdfready="_event_pdf_full_aase"></element-aase>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_bscl" class="content_block">
+                    <element-bscl app-id="[[_d.data_app.bscl]]" on-pdfready="_event_pdf_full_bscl"></element-bscl>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_bdi" class="content_block">
+                    <element-bdi app-id="[[_d.data_app.bdi]]" on-pdfready="_event_pdf_full_bdi"></element-bdi>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_isk" class="content_block">
+                    <element-isk app-id="[[_d.data_app.isk]]" on-pdfready="_event_pdf_full_isk"></element-isk>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_sci" class="content_block">
+                    <element-sci app-id="[[_d.data_app.sci]]" on-pdfready="_event_pdf_full_sci"></element-sci>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
+                <div id="content_whoqol" class="content_block">
+                    <element-whoqol app-id="[[_d.data_app.whoqol]]" on-pdfready="_event_pdf_full_whoqol"></element-whoqol>
+                    <p class="caption scroll_top" on-tap="__scroll_top">[&nbsp;Inhaltsverzeichnis&nbsp;]</p>
+                </div>
             </div>
-            <div>
-                <optinomic-title small h1="Trail Making Test (TMT)" h2="Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen." h3="TMT"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_tmt.have_data]]">
-                    <h3>Keine TMT-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_tmt.have_data]]">
-                    <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr_tmt]]" clinic_samples='include(includes/ks_tmt_smaller_statistics_only_stat.json)' clinic_sample_dive="[[_d.tmt_clinic_sample_dive.array]]"> </optinomic-chart-profile>
-                        <h3>Datenblatt: Trail Making Test (TMT)</h3>
-                        <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr_tmt.data]]" column-reordering-allowed="true">
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
-                                <vaadin-grid-column width="100px" flex-grow="0">
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="date">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1" style="text-align: right">
-                                            {{_computeNiceDate(item.date)}}
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column width="180px" flex-grow="0">
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT A</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTATime]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTAError]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT B</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template resizable>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTBTime]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.TMTBError]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                            <vaadin-grid-column-group>
-                                <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Quotient</span></template>
-                                <vaadin-grid-column>
-                                    <template class="header">
-                                        <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
-                                            <span class="body-1" stlye="color:#424242;font-weight:400;">B/A</span>
-                                        </vaadin-grid-sorter>
-                                    </template>
-                                    <template>
-                                        <span draggable="true" class="body-1">
-                                            [[item.calculation.tmt_score.quotient_rounded]]
-                                        </span>
-                                    </template>
-                                </vaadin-grid-column>
-                            </vaadin-grid-column-group>
-                        </vaadin-grid>
-                    </template>
-                    <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                    </template>
-                </template>
-            </div>
-            <div>
-                <template is="dom-if" if="[[_sr_asrs.have_data]]">
-                    <optinomic-title small h1="ADHS" h2="ADHS-Screening mit Selbstbeurteilungs-Skala für Erwachsene" h3="(ASRS)"></optinomic-title>
-                    <optinomic-chart-profile language="de" options="[[_d.asrs.options]]" scales="[[_d.asrs.scales]]" ranges="[[_d.asrs.ranges]]" scores="[[_sr_asrs]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Suchtdruck" h2="Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren." h3="(AASE-G)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_aase.have_data]]">
-                    <h3>Keine AASE-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_aase.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.aase.options]]" scales="[[_d.aase.scales]]" ranges="[[_d.aase.ranges]]" scores="[[_sr_aase]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Symptomcheckliste" h2="Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome." h3="(BSCL)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bscl.have_data]]">
-                    <h3>Keine BSCL-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_bscl.have_data]]">
-                    <template is="dom-if" if="[[_d.bscl_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.bscl.options]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_samples='include(includes/ks_bscl.json)' clinic_sample_dive="[[_d.bscl_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                    </template>
-                    <template is="dom-if" if="[[!_d.bscl_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                    </template>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Depressions-Inventar" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="(BDI-II)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_bdi.have_data]]">
-                    <h3>Keine BDI-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_bdi.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.bdi.options]]" scales="[[_d.bdi.scales]]" ranges="[[_d.bdi.ranges]]" scores="[[_sr_bdi]]"> </optinomic-chart-profile>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Inventar Sozialer Kompetenzen" h2="ISK Kurzform" h3="(ISK)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_isk.have_data]]">
-                    <h3>Keine ISK-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_isk.have_data]]">
-                    <template is="dom-if" if="[[_d.isk_clinic_sample_dive.defined]]" restamp="true">
-                        <optinomic-chart-profile language="de" options="[[_d.isk.options_text]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr_isk]]" clinic_samples='include(includes/ks_isk.json)' clinic_sample_dive="[[_d.isk_clinic_sample_dive.array]]"></optinomic-chart-profile>
-                    </template>
-                    <template is="dom-if" if="[[!_d.isk_clinic_sample_dive.defined]]">
-                        <p style="color:#3F51B5">Erstelle Klinikstichprobe aus letzter Messung...</p>
-                    </template>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Stress-Coping-Inventar" h2="Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)" h3="(SCI)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_sci.have_data]]">
-                    <h3>Keine SCI-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_sci.have_data]]">
-                    <template is="dom-if" if="[[_sr_sci.done]]">
-                        <h3>Stressereignisse und Syptome</h3>
-                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                        <optinomic-chart-profile language="de" options="[[_d.sci_stress.options]]" scales="[[_d.sci_stress.scales]]" ranges="[[_d.sci_stress.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                        <h3>Copingstrategien</h3>
-                        <p>Diese helfen die möglichen körperlichen und psychischen Stressreaktionen, welche nicht gesund sind, zu reduzieren. Hohe Ausprägungen sind daher gut.</p>
-                        <p style="text-align: center; color:#3F51B5">[[_sr_sci.population]] <span class="caption">(Stanine)</span></p>
-                        <optinomic-chart-profile language="de" options="[[_d.sci_hilfreich.options]]" scales="[[_d.sci_hilfreich.scales]]" ranges="[[_d.sci_hilfreich.ranges]]" scores="[[_sr_sci]]"></optinomic-chart-profile>
-                    </template>
-                    <template is="dom-if" if="[[!_sr_sci.done]]">
-                        <p style="color:#3F51B5">Erweitere vorhandene Resultate...</p>
-                    </template>
-                </template>
-            </div>
-            <div>
-                <optinomic-title small h1="Lebensqualität" h2="Beurteilung der Physischen und Psychischen Lebensqualität" h3="WHOQOL-BREF (WHO Quality of Life)"></optinomic-title>
-                <template is="dom-if" if="[[!_sr_whoqol.have_data]]">
-                    <h3>Keine WHOQOL-BREF-Daten vorhanden.</h3>
-                </template>
-                <template is="dom-if" if="[[_sr_whoqol.have_data]]">
-                    <optinomic-chart-profile language="de" options="[[_d.whoqol.options_text]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr_whoqol]]"></optinomic-chart-profile>
-                </template>
-            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
         </template>
     </template>
     <script>
     Polymer({
         is: 'optinomic-template',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp, makepdfBehavior],
 
         include(_properties.js)
 
-        __loadData: function() {
-            include(_loadData.m4)
-        },
 
-        __init: function() {
+        // -----------------------------
+        // Functions
+        // -----------------------------
 
-            this._d = this._d === undefined ? {} : this._d;
+        _init: function() {
 
-            var d = this.get('_d');
+            var d = {};
 
-            d.show_help = false;
+            d.name = "Fallkonferenz";
+            d.title = "Assessment";
+            d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
+            include(_data_toc.js)
             include(definitions/actinfo.js)
-            include(definitions/tmt.js)
-            include(definitions/aase.js)
-            include(definitions/asrs.js)
-            include(definitions/bscl.js)
-            include(definitions/bdi.js)
-            include(definitions/isk.js)
-            include(definitions/sci.js)
-            include(definitions/whoqol.js)
 
+            d.init_done = true;
             this.set('_d', d);
-            console.log('INIT _d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
         },
 
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 10;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
 
-        _computeNiceDate: function(date_string) {
-            date_string = date_string || null
-            if (date_string !== null) {
+            this.set('_d.loading_string', loading_string);
 
-                // 1952-11-19T00:00:00.000000000000Z
-                var year = parseInt(date_string.substring(0, 4));
-                var month = parseInt(date_string.substring(5, 7));
-                var day = parseInt(date_string.substring(8, 10));
-                var date_string_return = day + "." + month + "." + year
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
 
-                return date_string_return;
-            } else {
-                return null;
+            var do_build = function() {
+
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+
+                if (build_full) {
+                    _pdf_content.push(this._spacer(120));
+                    _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
+                    _pdf_content.push(this._pdf_app_info);
+
+                    _pdf_content.push(this._pageBreak());
+
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_actinfo);
+
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_tmt);
+
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_asrs);
+
+                    _pdf_content.push(this._pageBreak());
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_aase);
+
+                    _pdf_content.push(this._pageBreak());
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_bscl);
+
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_bdi);
+
+                    _pdf_content.push(this._pageBreak());
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_isk);
+
+                    _pdf_content.push(this._pageBreak());
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_sci);
+
+                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
+                    _pdf_content.push(this._pdf_full_whoqol);
+
+                } else {
+                    _pdf_content.push(this._spacer(120));
+                    _pdf_content.push(this._title(d.title, d.subtitle + " (" + d.name + ")"));
+                    _pdf_content.push(this._spacer(12));
+                    _pdf_content.push(this._indication("!", "Uuups, hier ging etwas schief!", "#F44336"));
+                };
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+                this.fire('pdfready', _pdf_content);
+
+                console.log('(PDF | Ready) Fallkonferenz: ', this._pdf_content);
+
+                // Open "Collapse" when ready | Only in "Master-Document".
+                setTimeout(function() {
+                    this.__toggle_print();
+                }.bind(this), 50);
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
             }
-        },
 
+            var check = function() {
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
 
-
-        _toggleHelp: function() {
-            var d = this.get('_d');
-            this._d = {};
-            d.show_help = !d.show_help;
-
-            var readme_box = this.$.readme;
-            readme_box.innerHTML = this._current_app.readme_html;
-
-            this.set('_d', d);
-            console.log('INIT _d', d);
-        },
-
-
-        _mergeActinfo: function() {
-            this.debounce('_mergeActinfo', function() {
-
-                var _sr_actinfo = [];
-                if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== undefined)) {
-                    if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== undefined)) {
-
-                        this._sr_actinfo_ein.data.forEach(function(current, ID) {
-                            current.app_name = 'Eintritt';
-                            current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
-                            current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                            _sr_actinfo.push(current);
-                        });
-                        this._sr_actinfo_aus.data.forEach(function(current, ID) {
-                            current.app_name = 'Austritt';
-                            current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
-                            current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                            _sr_actinfo.push(current);
-                        });
-
-                        var actinfo_obj = {
-                            "merged": true,
-                            "data": _sr_actinfo,
-                            "app_id": "actinfo - Ein & Austritt"
-                        }
-                        this.set('_sr_actinfo', actinfo_obj);
-                        console.warn('_mergeActinfo', this._sr_actinfo_ein, this._sr_actinfo_ein, this._sr_actinfo);
+                    if (jobs_count >= jobs_total) {
+                        do_build();
                     };
                 };
+            }.bind(this);
 
-            }, 250);
-        },
 
-        _processSCI: function() {
-            this.debounce('_processSCI', function() {
+            //  Jobs Done?
+            //  Check incoming Data
 
-                var _sr_sci = [];
-                var population = ""
-                if ((this._sr_sci_response !== undefined) && (this._sr_sci_response !== null)) {
-                    if (this._sr_sci_response.data !== undefined) {
-                        this._sr_sci_response.data.forEach(function(current, ID) {
 
-                            // console.warn('_processSCI - Current', ID, current);
+            if ((this._pdf_full_actinfo !== undefined) && (this._pdf_full_actinfo !== null)) {
+                jobs_done._pdf_full_actinfo = true;
+                check();
+            };
 
-                            current.info = {};
-                            current.info.app_zeitpunkt = 'Unbekannt';
-                            if ("Erhebungszeitpunkt" in current.calculation.scores.response.data.response) {
+            if ((this._pdf_full_tmt !== undefined) && (this._pdf_full_tmt !== null)) {
+                jobs_done._pdf_full_tmt = true;
+                check();
+            };
 
-                                if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "1") {
-                                    current.info.app_zeitpunkt = 'Eintritt';
-                                } else {
-                                    if (current.calculation.scores.response.data.response.Erhebungszeitpunkt === "2") {
-                                        current.info.app_zeitpunkt = 'Austritt';
-                                    } else {
-                                        current.info.app_zeitpunkt = 'Verlauf';
-                                    };
-                                };
-                            };
+            if ((this._pdf_full_bscl !== undefined) && (this._pdf_full_bscl !== null)) {
+                jobs_done._pdf_full_bscl = true;
+                check();
+            };
 
-                            current.info.score_0 = parseInt(current.calculation.scores.scores["0"].stanine);
-                            current.info.score_1 = parseInt(current.calculation.scores.scores["1"].stanine);
-                            current.info.score_2 = parseInt(current.calculation.scores.scores["2"].stanine);
-                            current.info.score_3 = parseInt(current.calculation.scores.scores["3"].stanine);
-                            current.info.score_4 = parseInt(current.calculation.scores.scores["4"].stanine);
-                            current.info.score_5 = parseInt(current.calculation.scores.scores["5"].stanine);
-                            current.info.score_6 = 10 - parseInt(current.calculation.scores.scores["6"].stanine);
+            if ((this._pdf_full_asrs !== undefined) && (this._pdf_full_asrs !== null)) {
+                jobs_done._pdf_full_asrs = true;
+                check();
+            };
 
-                            population = current.calculation.scores.population.name;
+            if ((this._pdf_full_bdi !== undefined) && (this._pdf_full_bdi !== null)) {
+                jobs_done._pdf_full_bdi = true;
+                check();
+            };
 
-                            _sr_sci.push(current);
+            if ((this._pdf_full_isk !== undefined) && (this._pdf_full_isk !== null)) {
+                jobs_done._pdf_full_isk = true;
+                check();
+            };
 
-                        });
+            if ((this._pdf_full_sci !== undefined) && (this._pdf_full_sci !== null)) {
+                jobs_done._pdf_full_sci = true;
+                check();
+            };
 
-                        var return_obj = {
-                            "done": true,
-                            "population": population,
-                            "data": _sr_sci
-                        }
+            if ((this._pdf_full_whoqol !== undefined) && (this._pdf_full_whoqol !== null)) {
+                jobs_done._pdf_full_whoqol = true;
+                check();
+            };
 
-                        if (_sr_sci.length > 0) {
-                           return_obj.have_data = true; 
-                        } else {
-                           return_obj.have_data = false; 
-                        };
-                        this.set('_sr_sci', return_obj);
-                        console.warn('_processSCI', this._sr_sci);
-                    };
-                };
+            if ((this._pdf_full_aase !== undefined) && (this._pdf_full_aase !== null)) {
+                jobs_done._pdf_full_aase = true;
+                check();
+            };
 
-            }, 250);
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
         },
 
 
-        _sr_bsclChanged: function() {
-            this.debounce('_sr_bsclChanged', function() {
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
 
-                if ((this._sr_bscl !== undefined) && (this._sr_bscl !== null)) {
-                    if ((this._sr_bscl.data !== undefined) && (this._sr_bscl.data !== null)) {
-
-
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_bscl.data[this._sr_bscl.data.length - 1];
-
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Messzeitpunkt
-                        if (latest_sr.calculation.scores_calculation.info.mz.mz_id !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.scores_calculation.info.mz.mz_id);
-                        } else {
-                            clinic_sample_dive.array.push(5);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-                        // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
-                        clinic_sample_dive.array.push(4);
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_bscl - Klinikstichprobe gesetzt:', latest_sr, this._d);
-                    };
-                };
-
-            }, 250);
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            if ((print_button !== null) && (print_button !== undefined)) {
+                print_button.toggle();
+            };
         },
 
-        _sr_iskChanged: function() {
-            this.debounce('_sr_iskChanged', function() {
-
-                if ((this._sr_isk !== undefined) && (this._sr_isk !== null)) {
-                    if ((this._sr_isk.data !== undefined) && (this._sr_isk.data !== null)) {
-
-
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_isk.data[this._sr_isk.data.length - 1];
-
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Messzeitpunkt
-                        var mz = latest_sr.calculation.scores_calculation.info.mz.mz_id - 1;
-                        if (mz !== 99) {
-                            clinic_sample_dive.array.push(mz);
-                        } else {
-                            clinic_sample_dive.array.push(3);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.isk_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_isk - Klinikstichprobe gesetzt:', latest_sr, this._d);
-                    };
-                };
-
-            }, 250);
+        __scroll_target: function(e) {
+            var model = e.model.get('item');
+            console.log('(SCROLL)', model);
+            var target = this.$$('#' + model.anchor);
+            target.scrollIntoView();
         },
 
-        _sr_tmtChanged: function() {
-            this.debounce('_sr_tmtChanged', function() {
-
-                if ((this._sr_tmt !== undefined) && (this._sr_tmt !== null)) {
-                    if ((this._sr_tmt.data !== undefined) && (this._sr_tmt.data !== null)) {
-
-
-                        // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
-                        var latest_sr = this._sr_tmt.data[this._sr_tmt.data.length - 1];
-
-                        var clinic_sample_dive = {
-                            "defined": false,
-                            "array": []
-                        };
-
-                        // ---- Gewünschte Klinikstichprobe schreiben ----
-
-
-                        // Altersgruppe
-                        if (latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe !== 99) {
-                            clinic_sample_dive.array.push(latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe);
-                        } else {
-                            clinic_sample_dive.array.push(11);
-                        };
-
-                        // Ausbildungsgrad
-                        var ausbildungsgrad = latest_sr.calculation.tmt_score.percentile.age_perz.education_high;
-                        if (ausbildungsgrad === true) {
-                            clinic_sample_dive.array.push(1);
-                        } else {
-                            clinic_sample_dive.array.push(0);
-                        };
-
-                        // Messzeitpunkt
-                        var mz = latest_sr.calculation.tmt_score.mz - 1;
-                        if ((mz === 0) || (mz === 1) || (mz === 2)) {
-                            clinic_sample_dive.array.push(mz);
-                        } else {
-                            clinic_sample_dive.array.push(3);
-                        };
-
-                        // Geschlecht
-                        if (latest_sr.patient.gender === "female") {
-                            clinic_sample_dive.array.push(0);
-                        } else {
-                            clinic_sample_dive.array.push(1);
-                        };
-
-
-                        // ---- Set ----
-                        clinic_sample_dive.defined = true;
-                        this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
-
-                        console.warn('_sr_tmt - Klinikstichprobe gesetzt:', latest_sr, this._d);
-                    };
-                };
-
-            }, 250);
+        __scroll_top: function() {
+            var top = this.$$('#top');
+            console.log('(SCROLL) top');
+            top.scrollIntoView();
         },
+
+
+        // -----------------------------
+        // Event Handler's
+        // -----------------------------
+
+        _event_pdf_full_actinfo: function(e) {
+            this.set('_pdf_full_actinfo', e.detail);
+        },
+
+        _event_pdf_full_tmt: function(e) {
+            this.set('_pdf_full_tmt', e.detail);
+        },
+
+        _event_pdf_full_bscl: function(e) {
+            this.set('_pdf_full_bscl', e.detail);
+        },
+
+        _event_pdf_full_asrs: function(e) {
+            this.set('_pdf_full_asrs', e.detail);
+        },
+
+        _event_pdf_full_bdi: function(e) {
+            this.set('_pdf_full_bdi', e.detail);
+        },
+
+        _event_pdf_full_whoqol: function(e) {
+            this.set('_pdf_full_whoqol', e.detail);
+        },
+
+        _event_pdf_full_isk: function(e) {
+            this.set('_pdf_full_isk', e.detail);
+        },
+
+        _event_pdf_full_sci: function(e) {
+            this.set('_pdf_full_sci', e.detail);
+        },
+
+        _event_pdf_full_aase: function(e) {
+            this.set('_pdf_full_aase', e.detail);
+        },
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+        },
+
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {},
 
         ready: function() {
-            this.__loadData();
-            this.__init();
+            this._loadData();
+            this._init();
         }
     });
     </script>

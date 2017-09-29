@@ -1,10 +1,10 @@
 d.isk = {
-    "options_text": {
+    "options": {
         "min": -8,
         "max": 4,
-        "item_height": 75,
-        "item_text_left": 240,
-        "item_text_right": 140,
+        "item_height": 76,
+        "item_text_left": 256,
+        "item_text_right": 164,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
@@ -13,37 +13,15 @@ d.isk = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "show_ranges_overview": false,
+        "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": false,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
+        "norm_sample": "Z-Werte aufgrund der Normstichprobe nach Kanning (2009) berechnet.",
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
         "response_date_path": "date"
-    },
-    "options_ohne_text": {
-        "min": -4,
-        "max": "auto",
-        "item_height": 50,
-        "item_text_left": 150,
-        "item_text_right": 150,
-        "color_grid": "#9E9E9E",
-        "color_clinic_sample": "#888888",
-        "color_skin": "grey_dark_to_light",
-        "show_baseline": false,
-        "show_scale_text": false,
-        "show_score_vertical_line": false,
-        "show_score_profile_line": true,
-        "show_score_circles": true,
-        "range_alpha": 0.1,
-        "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
-        "response_date_path": "calculation.scores_calculation.info.filled"
-    },
-    "start": {
-        "left_title": "Geringe Ausprägung",
-        "left_text": "Eine längere Beschreibung bzgl. der geringen Ausprägung.",
-        "left_color": "#4CAF50",
-        "right_title": "Starke Ausprägung",
-        "right_text": "Eine längere Beschreibung bzgl. der starken Ausprägung. Eine längere Beschreibung bzgl. der starken Ausprägung.",
-        "right_color": "#F44336"
     },
     "scales": [{
         "left_title": "Soziale Orientierung",

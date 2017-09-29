@@ -1,8 +1,8 @@
 d.sci_stress = {
     "options": {
-        "min": -0.5,
-        "max": 10.5,
-        "item_height": 65,
+        "min": 0,
+        "max": 10,
+        "item_height": 58,
         "item_text_left": 200,
         "item_text_right": 200,
         "color_grid": "#9E9E9E",
@@ -13,8 +13,11 @@ d.sci_stress = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "show_ranges_overview": false,
+        "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "info.app_zeitpunkt",
         "response_date_path": "date"
@@ -84,9 +87,9 @@ d.sci_stress = {
 
 d.sci_hilfreich = {
     "options": {
-        "min": -0.5,
-        "max": 10.5,
-        "item_height": 65,
+        "min": 0,
+        "max": 10,
+        "item_height": 58,
         "item_text_left": 200,
         "item_text_right": 200,
         "color_grid": "#9E9E9E",
@@ -97,8 +100,11 @@ d.sci_hilfreich = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "show_ranges_overview": false,
+        "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "info.app_zeitpunkt",
         "response_date_path": "date"

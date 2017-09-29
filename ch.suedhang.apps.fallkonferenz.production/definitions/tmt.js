@@ -2,7 +2,7 @@ d.tmt = {
     "options": {
         "min": -5,
         "max": 5,
-        "item_height": 75,
+        "item_height": 58,
         "item_text_left": 100,
         "item_text_right": 100,
         "color_grid": "#9E9E9E",
@@ -13,9 +13,12 @@ d.tmt = {
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "range_alpha": 0.1,
+        "range_alpha": 0.09,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": false,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text_Quotient",
+        "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text",
         "response_date_path": "date"
     },
     "start": {
@@ -51,7 +54,7 @@ d.tmt = {
     "ranges": [{
         "range_start": -999,
         "range_stop": -1,
-        "text": "Verlangsamung",
+        "text": "Verlangsamung gegenüber Norm",
         "color": "#C62828"
     }, {
         "range_start": 2,

@@ -1,0 +1,604 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<dom-module id="element-tmt">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="tmt_element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                </div>
+                <div>
+                    <template is="dom-if" if="[[_pdf_ready]]">
+                        <paper-icon-button class="grey" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                    </template>
+                </div>
+            </div>
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <optinomic-pdfmake header-left="[[_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" document-title="[[_d.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                </iron-collapse>
+            </template>
+            <div id="app_info">
+                <optinomic-app-info app-id="[[appId]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
+            </div>
+            <template is="dom-if" if="[[_sr.have_data]]">
+                <template is="dom-if" if="[[_d.init_done]]">
+                    <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.tmt.options_pdf]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        </div>
+                        <div id="data_content">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                            </div>
+                            <div id="datenblatt">
+                                <h3>Datenblatt</h3>
+                                <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr.data]]" column-reordering-allowed="true">
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
+                                        <vaadin-grid-column width="100px" flex-grow="0">
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="date">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1" style="text-align: right">{{_computeNiceDate(item.date)}}</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                        <vaadin-grid-column width="180px" flex-grow="0">
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT A</span></template>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTATime]]</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTAError]]</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT B</span></template>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.TMTBTime">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template resizable>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTBTime]]</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.TMTBError">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTBError]]</span>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                    <vaadin-grid-column-group>
+                                        <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Quotient</span></template>
+                                        <vaadin-grid-column>
+                                            <template class="header">
+                                                <vaadin-grid-sorter path="calculation.tmt_score.quotient_rounded">
+                                                    <span class="body-1" stlye="color:#424242;font-weight:400;">B/A</span>
+                                                </vaadin-grid-sorter>
+                                            </template>
+                                            <template>
+                                                <template is="dom-if" if="{{_show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)}}">
+                                                    <span draggable="true" class="body-1">[[item.calculation.tmt_score.quotient_rounded]]</span>
+                                                </template>
+                                                <template is="dom-if" if="{{!_show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)}}">
+                                                    <span draggable="true" class="body-1">-</span>
+                                                </template>
+                                            </template>
+                                        </vaadin-grid-column>
+                                    </vaadin-grid-column-group>
+                                </vaadin-grid>
+                            </div>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[!_d.tmt_clinic_sample_dive.defined]]" restamp="true">
+                        <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
+                    </template>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
+            </template>
+            <template is="dom-if" if="[[!_sr.have_data]]">
+                <optinomic-indication sign="!" title="Keine Daten vorhanden." color="#F44336"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-tmt',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, makepdfBehavior],
+
+        properties: {
+            appId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    if ((this.appId !== null) && (this.appId !== undefined)) {
+                        if (this.appId in state.survey_responses.data) {
+                            // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                            return state.survey_responses.data[this.appId]
+                        } else {
+                            return null
+                        };
+                    } else {
+                        return null
+                    };
+                },
+                observer: '_srChanged'
+            },
+            _patient: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.patient.data !== null) && (state.patient.data !== undefined)) {
+                        return state.patient.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _clinic: {
+                type: Object,
+                statePath: function(state) {
+                    if ((state.clinic.data !== null) && (state.clinic.data !== undefined)) {
+                        return state.clinic.data;
+                    } else {
+                        return null
+                    };
+                }
+            },
+            _pdf_chart: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            },
+            _pdf_app_info: {
+                type: Object,
+                value: null,
+                observer: '_buildPDF'
+            }
+        },
+
+        // -----------------------------
+        // Computed Functions
+        // -----------------------------
+
+        _computeNiceDate: function(date_string) {
+            date_string = date_string || null
+            if (date_string !== null) {
+
+                // 1952-11-19T00:00:00.000000000000Z
+                var year = parseInt(date_string.substring(0, 4));
+                var month = parseInt(date_string.substring(5, 7));
+                var day = parseInt(date_string.substring(8, 10));
+                var date_string_return = day + "." + month + "." + year
+
+                return date_string_return;
+            } else {
+                return null;
+            }
+        },
+
+        _show_BA: function(mz) {
+            mz = mz || 999
+            if (mz === 1) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            print_button.toggle();
+        },
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.name = "TMT";
+            d.title = "Trail Making Test";
+
+
+            include(definitions/tmt.js)
+            // Clone options for pdf - nothing is overwritten
+            d.tmt.options_pdf = JSON.parse(JSON.stringify(d.tmt.options));
+            d.tmt.options_pdf.item_height = d.tmt.options_pdf.item_height - 12;
+
+
+            // Set & Log
+            d.init_done = true;
+            console.log('(INIT) ' + d.name, d);
+            this.set('_d', d);
+            this._d = d;
+        },
+
+        _srChanged: function() {
+            this.debounce('_srChanged', function() {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                        if (this._sr.have_data === true) {
+
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            var latest_sr = this._sr.data[this._sr.data.length - 1];
+
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+
+                            // Altersgruppe
+                            if (latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe !== 99) {
+                                clinic_sample_dive.array.push(latest_sr.calculation.tmt_score.percentile.age_perz.altersgruppe);
+                            } else {
+                                clinic_sample_dive.array.push(11);
+                            };
+
+                            // Ausbildungsgrad
+                            var ausbildungsgrad = latest_sr.calculation.tmt_score.percentile.age_perz.education_high;
+                            if (ausbildungsgrad === true) {
+                                clinic_sample_dive.array.push(1);
+                            } else {
+                                clinic_sample_dive.array.push(0);
+                            };
+
+                            // Messzeitpunkt
+                            var mz = latest_sr.calculation.tmt_score.mz - 1;
+                            if ((mz === 0) || (mz === 1) || (mz === 2)) {
+                                clinic_sample_dive.array.push(mz);
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.tmt_clinic_sample_dive', clinic_sample_dive);
+
+                            console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
+
+
+                        } else {
+                            // Build PDF even with no Data.
+                            this._buildPDF();
+                        };
+                    };
+                };
+
+            }, 250);
+        },
+
+
+        _pdfmake_datenblatt: function() {
+
+            var _sr = this.get('_sr');
+
+            // -----------------------------------------------
+            // Build pdfmake Table
+            // -----------------------------------------------
+
+            var table = {
+                "headerRows": 1,
+                "layout": "lightHorizontalLines",
+                "margin": [0, 6, 0, 12],
+                "table": {
+                    "widths": [170, "*", "*", "*", "*", "*"],
+                    "body": []
+                }
+            };
+
+            var talbe_header = [
+                [
+                    { "text": "Messzeitpunkt", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "Datum", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ],
+                [
+                    { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ],
+                [
+                    { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT A", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ],
+                [
+                    { "text": "Zeit", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ],
+                [
+                    { "text": "Fehler", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "TMT B", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ],
+                [
+                    { "text": "Quotient", "style": "p", "margin": [0, 0, 0, 0] },
+                    { "text": "B/A", "style": "chart_p", "margin": [0, 0, 0, 6] }
+                ]
+            ];
+
+
+
+            table.table.body.push(talbe_header);
+
+
+
+            _sr.data.forEach(function(item, resultID) {
+
+                var messung = [
+                    [
+                        { "text": item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text, "style": "p", "margin": [0, 6, 0, 0] },
+                        { "text": this._computeNiceDate(item.date), "style": "chart_p", "margin": [0, 0, 0, 6] },
+                    ],
+                    { "text": item.calculation.tmt_score.TMTATime, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTAError, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBTime, "style": "p", "margin": [0, 11, 0, 0] },
+                    { "text": item.calculation.tmt_score.TMTBError, "style": "p", "margin": [0, 11, 0, 0] }
+                ];
+
+                if (this._show_BA(item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt)) {
+                    var ba = { "text": item.calculation.tmt_score.quotient_rounded, "style": "p", "margin": [0, 11, 0, 0] };
+                } else {
+                    var ba = { "text": "-", "style": "p", "margin": [0, 11, 0, 0] };
+                }
+
+                messung.push(ba);
+
+
+                table.table.body.push(messung);
+
+
+            }.bind(this));
+
+
+
+            var return_stack = {
+                "id": "tmt_datenblatt",
+                "stack": []
+            };
+
+            return_stack.stack.push(this._heading("Datenblatt", null, 'h2'));
+            return_stack.stack.push(table);
+
+            // console.log(JSON.stringify(return_stack, null, 2));
+
+            return return_stack;
+        },
+
+
+        _buildPDF: function() {
+            var jobs_count = 0;
+            var jobs_total = 2;
+            var jobs_done = {};
+            var build_full = true;
+            var loading_string = jobs_count + "/" + jobs_total;
+
+
+
+            this.set('_d.loading_string', loading_string);
+
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+
+                if (build_full) {
+                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._pdf_chart);
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+
+                    _pdf_content.push(this._pdfmake_datenblatt());
+
+                    var app_beschreibung = [];
+                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
+                    app_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
+                } else {
+                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
+                    _pdf_content.push(this._noData(d.name, 24));
+
+                    var app_beschreibung = [];
+                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
+                    app_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
+                };
+
+                // --------------------------
+                // Store
+                // --------------------------
+                this.fire('pdfready', _pdf_content);
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+
+                console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
+
+            }.bind(this);
+
+
+            // ------------------------------
+            // Check if all content is ready
+            // ------------------------------
+
+            var countProperties = function(obj) {
+                var count = 0;
+
+                for (var prop in obj) {
+                    if (obj.hasOwnProperty(prop))
+                        ++count;
+                }
+
+                return count;
+            }
+
+            var check = function() {
+                if (this._pdf_ready !== true) {
+                    jobs_count = countProperties(jobs_done);
+                    loading_string = jobs_count + "/" + jobs_total;
+                    this.set('_d.loading_string', loading_string);
+
+                    if (jobs_count >= jobs_total) {
+                        do_build();
+                    };
+                };
+            }.bind(this);
+
+
+            //  Jobs Done?
+            //  Check incoming Data
+
+            if ((this._pdf_chart !== undefined) && (this._pdf_chart !== null)) {
+                jobs_done._pdf_chart = true;
+                check();
+            };
+
+            if ((this._pdf_app_info !== undefined) && (this._pdf_app_info !== null)) {
+                jobs_done._pdf_app_info = true;
+                check();
+            };
+
+            //  Check "No Data"
+
+            if ((this._sr !== undefined) && (this._sr !== null)) {
+                if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
+                    if (this._sr.have_data === false) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart = false;
+
+                        build_full = false;
+                        check();
+                    };
+                };
+            };
+        },
+
+
+        // -----------------------------
+        // Event Handler
+        // -----------------------------
+
+        _event_pdf_app_info: function(e) {
+            this.set('_pdf_app_info', e.detail);
+            // console.log('(event) _pdf_app_info ==> ', e.detail);
+        },
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            if ((this.appId !== null) && (this.appId !== undefined)) {
+                this.dispatch('actionGetSurveyResponses', this.appId);
+            };
+        },
+
+        ready: function() {
+            this._init();
+        }
+    });
+    </script>
+</dom-module>

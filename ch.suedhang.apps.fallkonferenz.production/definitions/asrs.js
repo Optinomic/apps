@@ -1,7 +1,7 @@
 d.asrs = {
     "options": {
-        "min": -0.5,
-        "max": 6.5,
+        "min": -1,
+        "max": 7,
         "item_height": 50,
         "item_text_left": 135,
         "item_text_right": 135,
@@ -13,8 +13,10 @@ d.asrs = {
         "show_score_vertical_line": true,
         "show_score_profile_line": true,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.05,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": true,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "calculation.asrs_score.score.current_range.interpretation",
         "response_date_path": "calculation.asrs_score.messzeitpunkt.mz_date"

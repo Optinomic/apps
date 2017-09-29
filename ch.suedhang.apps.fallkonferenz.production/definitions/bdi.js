@@ -1,7 +1,7 @@
 d.bdi = {
     "options": {
-        "min": -0.5,
-        "max": 63.5,
+        "min": -1.5,
+        "max": 64.5,
         "item_height": 50,
         "item_text_left": 130,
         "item_text_right": 130,
@@ -13,14 +13,16 @@ d.bdi = {
         "show_score_vertical_line": true,
         "show_score_profile_line": false,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 3,
         "response_title_path": "calculation.bdi_score.score.current_range.interpretation_de",
         "response_date_path": "date"
     },
     "scales": [{
-        "left_title": "Kein Verdacht auf eine Depression",
+        "left_title": "Keine Depression",
         "left_text": "",
         "right_title": "Verdacht auf eine schwere Depression",
         "right_text": "",
@@ -30,27 +32,27 @@ d.bdi = {
     "ranges": [{
         "range_start": 0,
         "range_stop": 8.5,
-        "text": "Kein Verdacht auf eine Depression",
+        "text": "Keine Depression",
         "color": "#2E7D32"
     }, {
         "range_start": 8.5,
         "range_stop": 13.5,
-        "text": "Verdacht auf eine minimale Depression",
+        "text": "V.a. eine minimale Depression",
         "color": "#FFA000"
     }, {
         "range_start": 13.5,
         "range_stop": 19.5,
-        "text": "Verdacht auf eine leichte Depression",
+        "text": "V.a. eine leichte Depression",
         "color": "#FBB100"
     }, {
         "range_start": 19.5,
         "range_stop": 28.5,
-        "text": "Verdacht auf eine mittelschwere Depression",
+        "text": "V.a. eine mittelschwere Depression",
         "color": "#FB7200"
     }, {
         "range_start": 28.5,
         "range_stop": 63,
-        "text": "Verdacht auf eine schwere Depression",
+        "text": "V.a. eine schwere Depression",
         "color": "#C62828"
     }]
 };

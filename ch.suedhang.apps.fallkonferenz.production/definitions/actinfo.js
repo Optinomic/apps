@@ -1,10 +1,10 @@
 d.actinfo_audit = {
     "options": {
-        "min": -0.5,
-        "max": 40.5,
+        "min": -1,
+        "max": 41,
         "item_height": 50,
-        "item_text_left": 100,
-        "item_text_right": 100,
+        "item_text_left": 130,
+        "item_text_right": 130,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
@@ -13,8 +13,10 @@ d.actinfo_audit = {
         "show_score_vertical_line": true,
         "show_score_profile_line": false,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 5,
         "response_title_path": "calculation.actinfo_ein_calc.messzeitpunkt.mz_text",
         "response_date_path": "date"
@@ -48,11 +50,11 @@ d.actinfo_audit = {
 
 d.actinfo_fagerstroem = {
     "options": {
-        "min": -0.5,
-        "max": 10.5,
+        "min": -1,
+        "max": 11,
         "item_height": 50,
-        "item_text_left": 100,
-        "item_text_right": 100,
+        "item_text_left": 130,
+        "item_text_right": 130,
         "color_grid": "#9E9E9E",
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
@@ -61,8 +63,10 @@ d.actinfo_fagerstroem = {
         "show_score_vertical_line": true,
         "show_score_profile_line": false,
         "show_score_circles": true,
-        "show_settings_block": true,
-        "range_alpha": 0.1,
+        "show_settings_block": false,
+        "allow_toggle_settings_block": false,
+        "topnumber_hide_first_last": true,
+        "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
         "response_title_path": "app_name",
         "response_date_path": "date"
@@ -78,22 +82,22 @@ d.actinfo_fagerstroem = {
     "ranges": [{
         "range_start": 0,
         "range_stop": 2.5,
-        "text": "Gering ausgeprägte körperliche Abhängigkeit.",
+        "text": "Gering",
         "color": "#2E7D32"
     }, {
         "range_start": 2.5,
         "range_stop": 4.5,
-        "text": "Mittelstark ausgeprägte körperliche Abhängigkeit.",
+        "text": "Mittelstark",
         "color": "#FFA000"
     }, {
         "range_start": 4.5,
         "range_stop": 6.5,
-        "text": "Stark ausgeprägte körperliche Abhängigkeit.",
+        "text": "Stark",
         "color": "#FB7200"
     }, {
         "range_start": 6.5,
-        "range_stop": 10.5,
-        "text": "Sehr stark ausgeprägte körperliche Abhängigkeit.",
+        "range_stop": 10,
+        "text": "Sehr stark",
         "color": "#C62828"
     }]
 };
