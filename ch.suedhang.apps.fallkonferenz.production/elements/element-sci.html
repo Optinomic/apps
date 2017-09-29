@@ -282,7 +282,9 @@
 
             var do_build = function() {
 
+                this.set('_pdf_content', null);
                 this._pdf_content = null;
+                
                 var _pdf_content = [];
                 var d = this.get('_d');
                 var _sr_sci = this.get('_sr_sci');
@@ -343,7 +345,7 @@
                 // Store
                 // --------------------------
                 this.fire('pdfready', _pdf_content);
-                this._pdf_content = _pdf_content;
+                this.set('_pdf_content', _pdf_content);
                 this.set('_pdf_ready', true);
 
                 console.log('(PDF | Ready) ' + d.name + ': ', this._pdf_content);
