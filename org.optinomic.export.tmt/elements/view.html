@@ -140,11 +140,12 @@
                         var delimitter = ",";
                         var newline = "\n";
 
-                        var header = "Name, Vorname, Alter, TMTAError, tmtA_z" + newline
+                        var header = "Name, Vorname, Alter, TMTAError, tmtA_z" + newline;
+                        f = f + header;
 
                         _all_patient_results.forEach(function(r, rID) {
-                            f = f + r.data.last_name;
-                            f = f + r.data.first_name;
+                            f = f + r.patient.data.last_name;
+                            f = f + r.patient.data.first_name;
 
                             r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
                                 f = f + calc.set_age;
