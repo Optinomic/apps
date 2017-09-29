@@ -137,7 +137,7 @@
                         var _all_patient_results = this.get('_all_patient_results');
 
                         var f = "";
-                        var delimitter = ",";
+                        var delimitter = ";";
                         var newline = "\n";
 
                         var header = "Name" + delimitter +
@@ -150,17 +150,18 @@
                         f = f + header;
 
                         _all_patient_results.forEach(function(r, rID) {
-                            f = f + r.patient.data.last_name + delimitter;
-                            f = f + r.patient.data.first_name + delimitter;
-
                             r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
+
+                                f = f + r.patient.data.last_name + delimitter;
+                                f = f + r.patient.data.first_name + delimitter;
                                 f = f + calc.set_age + delimitter;
                                 f = f + calc.Messzeitpunkt.Messzeitpunkt + delimitter;
                                 f = f + calc.Messzeitpunkt.Messzeitpunkt_Text + delimitter;
                                 f = f + calc.TMTAError + delimitter;
                                 f = f + calc.percentile.z_scores.tmtA_z;
+                                f = f + newline;
+
                             });
-                            f = f + newline;
                         });
 
                         this.set('tmt_csv_file', f);
