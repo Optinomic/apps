@@ -35,6 +35,10 @@
                 <paper-button on-click="onDownload" raised class="pink">Download: TMT (Full, all_patients)</paper-button>
                 <a href="#" id="fileLink" hidden download="tmt_full_all_patients.json"></a>
             </div>
+            <div>
+                <paper-button on-click="onDownloadCSV" raised class="pink">TMT CSV</paper-button>
+                <a href="#" id="fileLinkCSV" hidden download="tmt_full.csv"></a>
+            </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
@@ -69,7 +73,7 @@
                 type: Object
             },
 
-            _all_paitent_results: {
+            _all_patient_results: {
                 type: Object,
                 statePath: function(state) {
                     return_obj = null;
@@ -83,7 +87,8 @@
                         };
                     };
                     return return_obj;
-                }
+                },
+                observer: '_createTMTFile'
             },
         },
 
@@ -94,7 +99,7 @@
             e.preventDefault();
 
             // File Content
-            var content = JSON.stringify(this._all_paitent_results, null, 2);
+            var content = JSON.stringify(this._all_patient_results, null, 2);
             console.log('File Content', content);
 
             const link = this.createFile(content);
@@ -102,14 +107,59 @@
             this.$.fileLink.click();
         },
 
+        onDownloadCSV(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this.tmt_csv_file;
+            console.log('CSV: File Content', content);
+
+            const link = this.createFile(content);
+            this.$.fileLinkCSV.href = link;
+            this.$.fileLinkCSV.click();
+        },
+
         createFile(text) {
             const textBlob = new Blob([text], { type: 'text/plain' });
 
             return window.URL.createObjectURL(textBlob);
         },
-
+    
 
         // --------------------------- Data --------------------------- 
+
+        _createTMTFile: function() {
+            this.debounce('_createTMTFile', function() {
+                if ((this._all_patient_results !== undefined) && (this._all_patient_results !== null)) {
+                    if (this._all_patient_results.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _all_patient_results = this.get('_all_patient_results');
+
+                        var f = "";
+                        var delimitter = ",";
+                        var newline = "\n";
+
+                        var header = "Name, Vorname, Alter, TMTAError, tmtA_z" + newline
+
+                        _all_patient_results.forEach(function(r, rID) {
+                            f = f + r.data.last_name;
+                            f = f + r.data.first_name;
+
+                            r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
+                                f = f + calc.set_age;
+                                f = f + calc.TMTAError;
+                                f = f + calc.percentile.z_scores.tmtA_z;
+                            });
+                            f = f + newline;
+                        });
+
+                        this.set('tmt_csv_file', f);
+
+                    };
+                };
+            }, 250);
+        },
 
         _toggleHelp: function() {
             var d = this.get('_d');
