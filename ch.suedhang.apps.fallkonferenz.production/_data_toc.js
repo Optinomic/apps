@@ -1,7 +1,7 @@
 
 d.data_app = {
     "actinfo_ein": "ch.suedhang.apps.actinfo_ein.production",
-    "actinfo_aus": "ch.suedhang.apps.actinfo_ein.production",
+    "actinfo_aus": "ch.suedhang.apps.actinfo_aus.production",
     "tmt": "ch.suedhang.apps.tmt.production",
     "asrs": "ch.suedhang.apps.asrs.production",
     "aase": "ch.suedhang.apps.aase-g.production",
