@@ -3,14 +3,14 @@
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
-        :host {
+         :host {
             display: block;
         }
-        
+
         .app_title {
             margin-bottom: 24px;
         }
-        
+
         .readme_container {
             margin-bottom: 24px;
         }
@@ -30,7 +30,9 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <h2 class="indigo">Export</h2>
-            <p>Whatever we want here! :-)</p>
+            <p>Create & Export:</p>
+            <a href="#" on-click="onDownload">File</a>
+            <a href="#" id="fileLink" hidden download="file.txt"></a>
         </div>
         <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
@@ -64,6 +66,23 @@
             _d: {
                 type: Object
             }
+        },
+
+
+        // --------------------------- Data --------------------------- 
+
+        onDownload(e) {
+            e.preventDefault();
+
+            const link = this.createFile('some text content');
+            this.$.fileLink.href = link;
+            this.$.fileLink.click();
+        },
+
+        createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+
+            return window.URL.createObjectURL(textBlob);
         },
 
 
