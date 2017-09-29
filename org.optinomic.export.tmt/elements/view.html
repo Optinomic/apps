@@ -141,6 +141,7 @@
                         var newline = "\n";
 
                         var header = 
+                            "Datum" + delimitter +
                             "Geschlecht" + delimitter +
                             "Name" + delimitter +
                             "Vorname" + delimitter +
@@ -159,6 +160,7 @@
                         _all_patient_results.forEach(function(r, rID) {
                             r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
 
+                                f = f + calc.date + delimitter;
                                 if (r.patient.data.gender === 'male') {
                                     f = f + 'Herr' + delimitter;
                                 } else {
