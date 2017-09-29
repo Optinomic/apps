@@ -1,5 +1,6 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-button/paper-button.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -30,9 +31,10 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <h2 class="indigo">Export</h2>
-            <p>Create & Export:</p>
-            <a href="#" on-click="onDownload">File</a>
-            <a href="#" id="fileLink" hidden download="file.txt"></a>
+            <div>
+                <paper-button on-click="onDownload" class="pink">Create & Download</paper-button>
+                <a href="#" id="fileLink" hidden download="bscl_survey_response.json"></a>
+            </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
@@ -65,7 +67,23 @@
 
             _d: {
                 type: Object
-            }
+            },
+
+            _sr_bscl: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state.survey_responses !== null) && (state.survey_responses !== undefined)) {
+                        if ((state.survey_responses.data !== null) && (state.survey_responses.data !== undefined)) {
+                            if ('ch.suedhang.apps.bscl_anq' in state.survey_responses.data) {
+                                // console.log('(bscl-element) _sr:', state.survey_responses.data[this.appId]);
+                                return_obj = state.survey_responses.data['ch.suedhang.apps.bscl_anq']
+                            };
+                        };
+                    };
+                    return return_obj;
+                }
+            },
         },
 
 
@@ -74,7 +92,13 @@
         onDownload(e) {
             e.preventDefault();
 
-            const link = this.createFile('some text content');
+
+            // File Content
+            var content = this._sr_bscl;
+            console.log('File Content', content);
+
+
+            const link = this.createFile(content);
             this.$.fileLink.href = link;
             this.$.fileLink.click();
         },
@@ -107,7 +131,6 @@
 
                 // loadData
                 this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bscl_anq');
-                this.dispatch('actionGetSurveyResponses', 'ch.suedhang.apps.bdi');
 
             });
         },
