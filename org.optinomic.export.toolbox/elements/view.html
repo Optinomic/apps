@@ -15,6 +15,14 @@
         .readme_container {
             margin-bottom: 24px;
         }
+
+        .content_block {
+            margin-top: -48px;
+            margin-bottom: 48px;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -30,15 +38,16 @@
             </div>
         </div>
         <div id="content">
-            <h2 class="indigo">Export (TMT)</h2>
-            <element-export app-id="org.optinomic.export.toolbox" calc-id="tmt_full"></element-export>
-            <h2 class="indigo">Export (BSCL)</h2>
-            <element-export app-id="org.optinomic.export.toolbox" calc-id="bscl_full"></element-export>
-            <h2 class="indigo">Export (ISK)</h2>
-            <element-export app-id="org.optinomic.export.toolbox" calc-id="isk_full"></element-export>
+            <div class="content_block">
+                <element-export name="BSCL" calc-id="bscl_full"></element-export>
+            </div>
+            <div class="content_block">
+                <element-export name="ISK" calc-id="isk_full"></element-export>
+            </div>
+            <div class="content_block">
+                <element-export name="TMT" calc-id="tmt_full"></element-export>
+            </div>
         </div>
-
-
         <div hidden$="[[_d.show_help]]">
             <h2 class="indigo">Export (Test)</h2>
             <div>
@@ -50,9 +59,6 @@
                 <a href="#" id="fileLinkCSV" hidden download="tmt_full.csv"></a>
             </div>
         </div>
-
-        
-
         <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
                 <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>

@@ -1,7 +1,7 @@
 
-# Optinomic-App-Template.
+# Optinomic Export-Toolbox.
 
-Export-Toolbox :: Direct Export
+Easy export of survey responses with calculation values.
 
 
 # Anschrift
