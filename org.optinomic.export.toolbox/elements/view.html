@@ -17,7 +17,7 @@
         }
 
         .content_block {
-            margin-top: -48px;
+            margin-top: 24px;
             margin-bottom: 48px;
             border-top-color: #BDBDBD;
             border-top-style: solid;
@@ -37,18 +37,18 @@
                 </div>
             </div>
         </div>
-        <div id="content">
-            <div class="content_block">
-                <element-export name="BSCL" calc-id="bscl_full"></element-export>
-            </div>
-            <div class="content_block">
-                <element-export name="ISK" calc-id="isk_full"></element-export>
-            </div>
-            <div class="content_block">
-                <element-export name="TMT" calc-id="tmt_full"></element-export>
-            </div>
-        </div>
         <div hidden$="[[_d.show_help]]">
+            <div id="content">
+                <div class="content_block">
+                    <element-export name="BSCL" calc-id="bscl_full"></element-export>
+                </div>
+                <div class="content_block">
+                    <element-export name="ISK" calc-id="isk_full"></element-export>
+                </div>
+                <div class="content_block">
+                    <element-export name="TMT" calc-id="tmt_full"></element-export>
+                </div>
+            </div>
             <h2 class="indigo">Export (Test)</h2>
             <div>
                 <paper-button on-click="onDownload" raised class="pink">Download: TMT (Full, all_patients)</paper-button>
