@@ -48,12 +48,10 @@
                         <paper-button on-click="onDownloadCSV" raised class="pink">CSV: [[name]]</paper-button>
                         <a href="#" id="fileLinkCSV" hidden download$="[[calcId]].csv"></a>
                     </div>
-                    <template is="dom-if" if="[[_all_patient_results_ready]]">
-                        <div>
-                            <paper-icon-button class="grey" on-tap="__onDownload" icon="bug"></paper-icon-button>
-                            <a href="#" id="fileLink" hidden download$="[[calcId]].json"></a>
-                        </div>
-                    </template>
+                    <div>
+                        <paper-icon-button class="grey" on-tap="__onDownload" icon="bug"></paper-icon-button>
+                        <a href="#" id="fileLink" hidden download$="[[calcId]].json"></a>
+                    </div>
                 </div>
             </template>
             <template is="dom-if" if="[[!_d.init_done]]">
@@ -89,14 +87,14 @@
 
                             var path = "org_optinomic_export_toolbox___" + this.calcId;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
-                                this.set('_all_patient_results_ready', true);
                                 return state._app_userapp_calculations[path].data;
 
                             };
                         };
                     };
                     return return_obj;
-                }
+                },
+                observer: '_all_patient_results_ready'
             }
         },
 
@@ -135,6 +133,9 @@
 
             var d = {};
 
+            d.name = this.name;
+            d.calcId = this.calcId;
+
 
             // Set & Log
             d.init_done = true;
@@ -142,6 +143,11 @@
             this.set('_d', d);
             this._d = d;
         },
+
+        _all_patient_results_ready: function() {
+            this._init();
+        },
+
 
 
         // -----------------------------
@@ -161,9 +167,7 @@
             }, 250);
         },
 
-        ready: function() {
-            this._init();
-        }
+        ready: function() {}
     });
     </script>
 </dom-module>
