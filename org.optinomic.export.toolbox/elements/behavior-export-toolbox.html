@@ -1,0 +1,27 @@
+<script>
+optinomicExportToolbox = {
+
+
+    behaviors: [],
+
+
+    properties: {},
+
+
+
+    // --------------------------------
+    // Helpers
+    // --------------------------------
+    _createFile(text) {
+        const textBlob = new Blob([text], { type: 'text/plain' });
+        return window.URL.createObjectURL(textBlob);
+    },
+
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {}
+};
+</script>

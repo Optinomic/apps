@@ -29,8 +29,18 @@
                 </div>
             </div>
         </div>
+        <div id="content">
+            <h2 class="indigo">Export (TMT)</h2>
+            <element-export app-id="org.optinomic.export.toolbox" calc-id="tmt_full"></element-export>
+            <h2 class="indigo">Export (BSCL)</h2>
+            <element-export app-id="org.optinomic.export.toolbox" calc-id="bscl_full"></element-export>
+            <h2 class="indigo">Export (ISK)</h2>
+            <element-export app-id="org.optinomic.export.toolbox" calc-id="isk_full"></element-export>
+        </div>
+
+
         <div hidden$="[[_d.show_help]]">
-            <h2 class="indigo">Export</h2>
+            <h2 class="indigo">Export (Test)</h2>
             <div>
                 <paper-button on-click="onDownload" raised class="pink">Download: TMT (Full, all_patients)</paper-button>
                 <a href="#" id="fileLink" hidden download="tmt_full_all_patients.json"></a>
@@ -40,6 +50,9 @@
                 <a href="#" id="fileLinkCSV" hidden download="tmt_full.csv"></a>
             </div>
         </div>
+
+        
+
         <div hidden$="[[!_d.show_help]]">
             <div class="readme_container">
                 <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
@@ -55,7 +68,7 @@
     Polymer({
         is: 'optinomic-template',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
 
         properties: {
 
@@ -102,7 +115,7 @@
             var content = JSON.stringify(this._all_patient_results, null, 2);
             console.log('File Content', content);
 
-            const link = this.createFile(content);
+            const link = this._createFile(content);
             this.$.fileLink.href = link;
             this.$.fileLink.click();
         },
@@ -114,16 +127,11 @@
             var content = this.tmt_csv_file;
             console.log('CSV: File Content', content);
 
-            const link = this.createFile(content);
+            const link = this._createFile(content);
             this.$.fileLinkCSV.href = link;
             this.$.fileLinkCSV.click();
         },
 
-        createFile(text) {
-            const textBlob = new Blob([text], { type: 'text/plain' });
-
-            return window.URL.createObjectURL(textBlob);
-        },
 
 
         // --------------------------- Data --------------------------- 
@@ -140,7 +148,7 @@
                         var delimitter = ";";
                         var newline = "\n";
 
-                        var header = 
+                        var header =
                             "Datum" + delimitter +
                             "Geschlecht" + delimitter +
                             "Name" + delimitter +
@@ -205,6 +213,8 @@
         // --------------------------- Data --------------------------- 
 
         __loadData: function() {
+
+
             Polymer.RenderStatus.afterNextRender(this, function() {
 
                 // loadData
@@ -212,7 +222,7 @@
 
                 //this.dispatch('actionGetUserAppCalculation', 'ch.suedhang.apps.tmt_V3', 'tmt_full');
 
-                this.dispatch('actionGetUserAppCalculation', 'org.optinomic.export.tmt', 'tmt_full');
+                this.dispatch('actionGetUserAppCalculation', 'org.optinomic.export.toolbox', 'tmt_full');
 
 
                 //this.dispatch('actionGetUserAppCalculation', 'ch.suedhang.apps.tmt_V3', 'tmt_score');

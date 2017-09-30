@@ -1,0 +1,128 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdf-chart-profile/optinomic-pdf-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<dom-module id="element-export">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+            </div>
+            <template is="dom-if" if="[[_d.init_done]]">
+                <p>Element ready</p>
+            </template>
+            <template is="dom-if" if="[[!_d.init_done]]">
+                <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-export',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+            appId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            calcId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            _d: {
+                type: Object
+            },
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.name = "TMT";
+            d.title = "Trail Making Test";
+
+
+
+            // Set & Log
+            d.init_done = true;
+            console.log('(INIT) ' + d.name, d);
+            this.set('_d', d);
+            this._d = d;
+        },
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+                if ((this.appId !== null) && (this.appId !== undefined)) {
+                    if ((this.calcId !== null) && (this.calcId !== undefined)) {
+                        Polymer.RenderStatus.afterNextRender(this, function() {
+
+                            this.dispatch('actionGetUserAppCalculation', this.appId, this.calcId);
+
+                        });
+                    };
+                };
+
+            }, 250);
+        },
+
+        ready: function() {
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
