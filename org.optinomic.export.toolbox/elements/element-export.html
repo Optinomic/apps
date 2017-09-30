@@ -108,11 +108,14 @@
 
             // File Content
             var content = JSON.stringify(this._all_patient_results, null, 2);
-            console.log('File Content', content);
 
+            var jsonLink = this.$$('#fileLink');
             const link = this._createFile(content);
-            this.$.fileLink.href = link;
-            this.$.fileLink.click();
+
+            console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
         },
 
         // --------------------------------
@@ -144,14 +147,8 @@
             this._d = d;
         },
 
-        _all_patient_results_ready: function() {
-            this._init();
-        },
-
-
-
         // -----------------------------
-        // Lifecycle
+        // Observer
         // -----------------------------
 
         _loadData: function() {
@@ -166,6 +163,21 @@
 
             }, 250);
         },
+
+        _all_patient_results_ready: function() {
+            this.debounce('_all_patient_results_ready', function() {
+                if ((this._all_patient_results !== null) && (this._all_patient_results !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+                        this._init();
+                    });
+                };
+
+            }, 250);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
 
         ready: function() {}
     });
