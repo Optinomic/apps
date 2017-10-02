@@ -259,6 +259,16 @@ function main(responses) {
             myResults.messzeitpunkt.mz_datum = calc.formatDateCH(myResults.messzeitpunkt.mz_date);
 
 
+            // Ausgefuellt in Bezug auf Substanz
+            if (result.Substanz == 2) {
+                myResults.messzeitpunkt.substanz = result.SubstAndere;
+            } else {
+                myResults.messzeitpunkt.substanz = "Alkohol";
+            };
+            myResults.messzeitpunkt.mz_text_substanz = myResults.messzeitpunkt.mz_text + " | " + myResults.messzeitpunkt.substanz;
+            myResults.messzeitpunkt.full_text = "Am " + myResults.messzeitpunkt.mz_datum + " (" + myResults.messzeitpunkt.mz_text + ") wurde der AASE-G in Bezug auf «" + myResults.messzeitpunkt.substanz + "» ausgefüllt.";
+
+
             // Write Results for the Return
             // Do not modify stuff here
             myResults.hash = result['optinomixHASH'];
