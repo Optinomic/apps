@@ -67,14 +67,21 @@
                             <p class="caption">&nbsp;</p>
                         </template>
                         <h2>AUDIT (Alcohol Use Disorders Identification)</h2>
-                        <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
-                        </div>
+                        <p>[[_sr_actinfo_merged.audit_text]]</p>
+                        <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
+                            </div>
+                        </template>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-                            <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
-                            </div>
+                            <p>[[_sr_actinfo_merged.fagerstroem_text]]</p>
+                            
+                            <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
+                                <div class="chart">
+                                    <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
+                                </div>
+                            </template>
                         </template>
                     </div>
                 </template>
@@ -217,11 +224,23 @@
 
 
                         var _sr_actinfo = [];
+                        var show_audit = false;
+                        var show_fagerstoem = false;
 
                         if (this._sr_actinfo_ein.have_data === true) {
                             this._sr_actinfo_ein.data.forEach(function(current, ID) {
                                 current.app_name = 'Eintritt';
+                                current.actinfo_ein_data = true;
+                                current.actinfo_aus_data = false;
                                 current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if (current.FAGERSTROEM.smoker.smoker === true) {
+                                        show_fagerstoem = true;    
+                                    };
+                                };
+                                if ((current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== 0) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== null) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== undefined)) {
+                                    show_audit = true;
+                                };
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
@@ -230,17 +249,64 @@
                         if (this._sr_actinfo_aus.have_data === true) {
                             this._sr_actinfo_aus.data.forEach(function(current, ID) {
                                 current.app_name = 'Austritt';
+                                current.actinfo_ein_data = false;
+                                current.actinfo_aus_data = true;
                                 current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if (current.FAGERSTROEM.smoker.smoker === true) {
+                                        show_fagerstoem = true;    
+                                    };
+                                };
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
                         };
+
+                        // Build some Texts
+                        var audit_text = "";
+                        var fagerstroem_text = "";
+                        _sr_actinfo.forEach(function(item, itemID) {
+                            if (item.actinfo_ein_data) {
+
+                                audit_text = "Bei Eintritt bestand eine «" + item.calculation.actinfo_ein_calc.AUDIT.interpretation.result + "» (∑=" + item.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score + ")."
+                                
+
+                                if ("smoker" in item.FAGERSTROEM) {
+                                    if ("summyary" in item.FAGERSTROEM.smoker) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.summyary;
+                                    };
+                                };
+                            };
+                            if (item.actinfo_aus_data) {
+                                if ("smoker" in item.FAGERSTROEM) {
+                                    if ("summyary" in item.FAGERSTROEM.smoker) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.summyary;
+                                    };
+                                    if (item.FAGERSTROEM.smoker.motivation_data) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.motivation_full_text;
+                                    };
+                                };
+                            };
+                        });
 
                         var actinfo_obj = {
                             "merged": true,
                             "actinfo_ein_data": this._sr_actinfo_ein.have_data,
                             "actinfo_aus_data": this._sr_actinfo_aus.have_data,
                             "actinfo_ein_aus_data": false,
+                            "show_audit": show_audit,
+                            "audit_text": audit_text,
+                            "show_fagerstoem": show_fagerstoem,
+                            "fagerstroem_text": fagerstroem_text,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
                         };
@@ -248,6 +314,8 @@
                         if ((this._sr_actinfo_ein.have_data === true) && (this._sr_actinfo_aus.have_data === true)) {
                             actinfo_obj.actinfo_ein_aus_data = true;
                         };
+
+
 
                         this.set('_sr_actinfo_merged', actinfo_obj);
                         console.log('(Response | Ready) ' + this._d.name + ': ', actinfo_obj);
