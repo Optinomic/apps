@@ -259,28 +259,28 @@
                         var fagerstroem_text = "";
                         _sr_actinfo.forEach(function(item, itemID) {
                             if (item.actinfo_ein_data) {
-                                if ("smoker" in current.FAGERSTROEM) {
-                                    if ("summyary" in current.FAGERSTROEM.smoker) {
+                                if ("smoker" in item.FAGERSTROEM) {
+                                    if ("summyary" in item.FAGERSTROEM.smoker) {
                                         if (fagerstroem_text !== "") {
                                             fagerstroem_text = fagerstroem_text + " "
                                         };
-                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.summary;
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.summary;
                                     };
                                 };
                             };
                             if (item.actinfo_aus_data) {
-                                if ("smoker" in current.FAGERSTROEM) {
-                                    if ("summyary" in current.FAGERSTROEM.smoker) {
+                                if ("smoker" in item.FAGERSTROEM) {
+                                    if ("summyary" in item.FAGERSTROEM.smoker) {
                                         if (fagerstroem_text !== "") {
                                             fagerstroem_text = fagerstroem_text + " "
                                         };
-                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.summary;
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.summary;
                                     };
-                                    if (current.FAGERSTROEM.smoker.motivation_data) {
+                                    if (item.FAGERSTROEM.smoker.motivation_data) {
                                         if (fagerstroem_text !== "") {
                                             fagerstroem_text = fagerstroem_text + " "
                                         };
-                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.motivation_full_text;
+                                        fagerstroem_text = fagerstroem_text + item.FAGERSTROEM.smoker.motivation_full_text;
                                     };
                                 };
                             };
