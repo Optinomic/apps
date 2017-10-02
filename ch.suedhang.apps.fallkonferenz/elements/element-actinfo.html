@@ -72,9 +72,29 @@
                         </div>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-                            <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
-                            </div>
+
+                            <template is="dom-repeat" items="[[_sr_actinfo_merged.data]]">
+                                <p>
+                                <template is="dom-if" if="[[item.actinfo_ein_data]]">
+                                    <span>[[item.FAGERSTROEM.smoker.summyary]]</span>    
+                                </template>
+                                <template is="dom-if" if="[[item.actinfo_aus_data]]">
+                                    <span>[[item.FAGERSTROEM.smoker.summyary]]</span>    
+                                </template>
+                                <template is="dom-if" if="[[item.actinfo_aus_data]]">
+                                    <span>[[item.FAGERSTROEM.smoker.summyary]]</span>  
+                                    <template is="dom-if" if="[[item.FAGERSTROEM.smoker.motivation_data]]">
+                                        <span>[[item.FAGERSTROEM.smoker.motivation_full_text]]</span>    
+                                    </template>
+                                </template>
+                                </p>
+                            </template>
+                            
+                            <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
+                                <div class="chart">
+                                    <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
+                                </div>
+                            </template>
                         </template>
                     </div>
                 </template>
@@ -217,11 +237,19 @@
 
 
                         var _sr_actinfo = [];
+                        var show_fagerstoem = false;
 
                         if (this._sr_actinfo_ein.have_data === true) {
                             this._sr_actinfo_ein.data.forEach(function(current, ID) {
                                 current.app_name = 'Eintritt';
+                                current.actinfo_ein_data = true;
+                                current.actinfo_aus_data = false;
                                 current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if (current.FAGERSTROEM.smoker.smoker === true) {
+                                        show_fagerstoem = true;    
+                                    };
+                                };
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
@@ -230,7 +258,14 @@
                         if (this._sr_actinfo_aus.have_data === true) {
                             this._sr_actinfo_aus.data.forEach(function(current, ID) {
                                 current.app_name = 'Austritt';
+                                current.actinfo_ein_data = false;
+                                current.actinfo_aus_data = true;
                                 current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if (current.FAGERSTROEM.smoker.smoker === true) {
+                                        show_fagerstoem = true;    
+                                    };
+                                };
                                 current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
                                 _sr_actinfo.push(current);
                             });
@@ -241,6 +276,7 @@
                             "actinfo_ein_data": this._sr_actinfo_ein.have_data,
                             "actinfo_aus_data": this._sr_actinfo_aus.have_data,
                             "actinfo_ein_aus_data": false,
+                            "show_fagerstoem": show_fagerstoem,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
                         };
