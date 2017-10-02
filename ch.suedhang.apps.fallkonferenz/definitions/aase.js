@@ -18,7 +18,7 @@ d.aase = {
         "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
-        "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text",
+        "response_title_path": "calculation.another_calculation.messzeitpunkt.mz_text_substanz",
         "response_date_path": "date"
     },
     "scales": [{
