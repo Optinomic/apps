@@ -93,7 +93,7 @@
                 type: Object
             },
 
-            _all_patient_results: {
+            _tmt_full_patients: {
                 type: Object,
                 statePath: function(state) {
                     return_obj = null;
@@ -101,7 +101,9 @@
                         if ((state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full !== null) && (state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full !== undefined)) {
                             if ((state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data !== null) && (state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data !== undefined)) {
 
-                                return state._app_userapp_calculations.org_optinomic_export_tmt___tmt_full.data.patients;
+                                console.log('-> _tmt_full_patients PROP', state._app_userapp_calculations.org_optinomic_export_toolbox___tmt_full.data.patients);
+
+                                return state._app_userapp_calculations.org_optinomic_export_toolbox___tmt_full.data.patients;
                             };
 
                         };
@@ -124,7 +126,7 @@
             e.preventDefault();
 
             // File Content
-            var content = JSON.stringify(this._all_patient_results, null, 2);
+            var content = JSON.stringify(this._tmt_full_patients, null, 2);
             console.log('File Content', content);
 
             const link = this._createFile(content);
@@ -150,12 +152,15 @@
 
         _createTMTFile: function() {
             this.debounce('_createTMTFile', function() {
-                if ((this._all_patient_results !== undefined) && (this._all_patient_results !== null)) {
-                    if (this._all_patient_results.length > 0) {
+
+                console.log('-> _createTMTFile', this._tmt_full_patients);
+
+                if ((this._tmt_full_patients !== undefined) && (this._tmt_full_patients !== null)) {
+                    if (this._tmt_full_patients.length > 0) {
 
                         // We have data -> Proceed.
-                        var _all_patient_results = this.get('_all_patient_results');
-                        console.log('-> _all_patient_results', _all_patient_results);
+                        var _tmt_full_patients = this.get('_tmt_full_patients');
+                        console.log('-> _tmt_full_patients', _tmt_full_patients);
 
                         var f = "";
                         var delimitter = ";";
@@ -178,7 +183,7 @@
                             "TMTB_ZScore" + newline;
                         f = f + header;
 
-                        _all_patient_results.forEach(function(r, rID) {
+                        _tmt_full_patients.forEach(function(r, rID) {
                             r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
 
                                 f = f + calc.date + delimitter;
