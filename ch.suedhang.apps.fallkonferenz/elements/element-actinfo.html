@@ -72,20 +72,7 @@
                         </div>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-
-                            <template is="dom-repeat" items="[[_sr_actinfo_merged.data]]">
-                                <p>
-                                <template is="dom-if" if="[[item.actinfo_ein_data]]">
-                                    <span>[[item.FAGERSTROEM.smoker.summyary]]</span>    
-                                </template>
-                                <template is="dom-if" if="[[item.actinfo_aus_data]]">
-                                    <span>[[item.FAGERSTROEM.smoker.summyary]]</span>  
-                                    <template is="dom-if" if="[[item.FAGERSTROEM.smoker.motivation_data]]">
-                                        <span>[[item.FAGERSTROEM.smoker.motivation_full_text]]</span>    
-                                    </template>
-                                </template>
-                                </p>
-                            </template>
+                            <p>[[_sr_actinfo_merged.fagerstroem_text]]</p>
                             
                             <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
                                 <div class="chart">
@@ -268,12 +255,44 @@
                             });
                         };
 
+                        // Build some Texts
+                        var fagerstroem_text = "";
+                        _sr_actinfo.forEach(function(item, itemID) {
+                            if (item.actinfo_ein_data) {
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if ("summyary" in current.FAGERSTROEM.smoker) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.summary;
+                                    };
+                                };
+                            };
+                            if (item.actinfo_aus_data) {
+                                if ("smoker" in current.FAGERSTROEM) {
+                                    if ("summyary" in current.FAGERSTROEM.smoker) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.summary;
+                                    };
+                                    if (current.FAGERSTROEM.smoker.motivation_data) {
+                                        if (fagerstroem_text !== "") {
+                                            fagerstroem_text = fagerstroem_text + " "
+                                        };
+                                        fagerstroem_text = fagerstroem_text + current.FAGERSTROEM.smoker.motivation_full_text;
+                                    };
+                                };
+                            };
+                        });
+
                         var actinfo_obj = {
                             "merged": true,
                             "actinfo_ein_data": this._sr_actinfo_ein.have_data,
                             "actinfo_aus_data": this._sr_actinfo_aus.have_data,
                             "actinfo_ein_aus_data": false,
                             "show_fagerstoem": show_fagerstoem,
+                            "fagerstroem_text": fagerstroem_text,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
                         };
@@ -281,6 +300,8 @@
                         if ((this._sr_actinfo_ein.have_data === true) && (this._sr_actinfo_aus.have_data === true)) {
                             actinfo_obj.actinfo_ein_aus_data = true;
                         };
+
+
 
                         this.set('_sr_actinfo_merged', actinfo_obj);
                         console.log('(Response | Ready) ' + this._d.name + ': ', actinfo_obj);
