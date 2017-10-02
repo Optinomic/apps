@@ -41,8 +41,8 @@
                     &nbsp;
                 </div>
             </div>
-            <template is="dom-if" if="[[_d.init_done]]">
-                <p>Element ready</p>
+            <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                <optinomic-indication sign="!" title="Data ready" color="#3F51B5"></optinomic-indication>
                 <div class="horizontal">
                     <div>
                         <!--
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </template>
-            <template is="dom-if" if="[[!_d.init_done]]">
+            <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
                 <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
             </template>
         </div>
