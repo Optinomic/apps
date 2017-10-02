@@ -115,6 +115,11 @@
 
         // --------------------------- Data --------------------------- 
 
+        _createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
         onDownload(e) {
             e.preventDefault();
 
@@ -150,6 +155,7 @@
 
                         // We have data -> Proceed.
                         var _all_patient_results = this.get('_all_patient_results');
+                        console.log('-> _all_patient_results', _all_patient_results);
 
                         var f = "";
                         var delimitter = ";";
