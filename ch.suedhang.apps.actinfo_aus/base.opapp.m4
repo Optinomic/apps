@@ -71,7 +71,7 @@ include(emails/overdue.html)
 
 
 [calculation another_calculation javascript]
-include(calculations/another_calculation.js)
+include(calculations/actinfo_aus_calc.js)
 
 
 [sql_init]
