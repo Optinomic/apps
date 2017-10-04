@@ -1,0 +1,199 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="google-chart/google-chart.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<dom-module id="element-chart">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        google-chart {
+            height: 300px;
+            width: 400px;
+        }
+        </style>
+        <div id="element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[name]]" h2="[[calcId]]"></optinomic-title>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+            </div>
+            <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div>
+                        <p>Data ready</p>
+                        <!--
+                        <paper-button on-click="onDownloadCSV" raised class="pink">CSV: [[name]]</paper-button>
+                        <a href="#" id="fileLinkCSV" hidden download$="[[calcId]].csv"></a>
+                        -->
+                    </div>
+                    <div>
+                        <paper-icon-button class="grey" on-tap="__onDownload" icon="bug-report"></paper-icon-button>
+                        <a href="#" id="fileLink" hidden download$="[[calcId]].json"></a>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
+                <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-chart',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+            name: {
+                type: String,
+                value: null
+            },
+            calcId: {
+                type: String,
+                value: null,
+                observer: '_loadData'
+            },
+            _d: {
+                type: Object
+            },
+            _all_patient_results: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((this.calcId !== null) && (this.calcId !== undefined)) {
+
+                            var path = "org_optinomic_export_toolbox___" + this.calcId;
+                            if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+                                return state._app_userapp_calculations[path].data;
+
+                            };
+                        };
+                    };
+                    return return_obj;
+                },
+                observer: '_all_patient_results_ready'
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __onDownload(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._all_patient_results, null, 2);
+
+            var jsonLink = this.$$('#fileLink');
+            const link = this._createFile(content);
+
+            console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        // --------------------------------
+        // Helpers
+        // --------------------------------
+        _createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.name = this.name;
+            d.calcId = this.calcId;
+
+
+            // Set & Log
+            d.init_done = true;
+            console.log('(INIT) ' + d.name, d);
+            this.set('_d', d);
+            this._d = d;
+        },
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+                if ((this.calcId !== null) && (this.calcId !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        this.dispatch('actionGetUserAppCalculation', 'org.optinomic.chart.test', this.calcId);
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _all_patient_results_ready: function() {
+            this.debounce('_all_patient_results_ready', function() {
+                if ((this._all_patient_results !== null) && (this._all_patient_results !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+                        this._init();
+                    });
+                };
+
+            }, 250);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+
+        }
+    });
+    </script>
+</dom-module>

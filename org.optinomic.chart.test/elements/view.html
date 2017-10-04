@@ -1,0 +1,260 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="google-chart/google-chart.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .app_title {
+            margin-bottom: 24px;
+        }
+
+        .readme_container {
+            margin-bottom: 24px;
+        }
+
+        .content_block {
+            margin-top: 24px;
+            margin-bottom: 48px;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+            </div>
+            <div>
+                <div hidden$="[[_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                </div>
+                <div hidden$="[[!_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                </div>
+            </div>
+        </div>
+        <div hidden$="[[_d.show_help]]">
+            <div id="content">
+                <div class="content_block">
+                    <element-chart name="BSCL" calc-id="bscl_full"></element-chart>
+                </div>
+            </div>
+            <div>
+                <p>A simple <code>google-chart</code> looks like this:</p>
+                <google-chart cols='[{"label": "Data", "type": "string"},{"label": "Value", "type": "number"}]' rows='[["Something", 1]]'>
+                </google-chart>
+                <p>Charts can be resized with CSS, but you'll need to call the <code>redraw</code> method when the size changes.</p>
+                <p>Here's a basic responsive example using only CSS and JS (You could also use <code>&lt;iron-media-query&gt;</code>):</p>
+                <style>
+                /* Phone and tablet */
+
+                #resizing-chart {
+                    height: 300px;
+                    width: 400px;
+                }
+                /* Desktop */
+
+                @media screen and (min-width: 1024px) {
+                    #resizing-chart {
+                        width: 800px;
+                    }
+                }
+                </style>
+                <google-chart id="resizing-chart" type="column" options='{"title": "Responsive chart",
+              "vAxis": {"minValue" : 0, "maxValue": 10}}' cols='[{"label": "Data", "type": "string"},{"label": "Value", "type": "number"}]' rows='[ ["Col1", 5.0],["Col2", 5.0],["Col3", 5.0] ]'>
+                </google-chart>
+                <script>
+                var media = window.matchMedia('(min-width: 1024px)');
+                media.addListener(function() {
+                    document.getElementById('resizing-chart').redraw();
+                });
+                </script>
+                <p>Here's a chart that changes data every 3 seconds:</p>
+                <google-chart id="mutating-chart" type="column" options='{"title": "Random data",
+              "vAxis": {"minValue" : 0, "maxValue": 10},
+              "animation": {"duration": "1000"}}' cols='[{"label": "Data", "type": "string"},{"label": "Value", "type": "number"}]' rows='[ ["Col1", 5.0],["Col2", 5.0],["Col3", 5.0] ]'>
+                </google-chart>
+                <script>
+                (function() {
+                    function getRandomValue() {
+                        return Math.random() * 10;
+                    }
+                    var chart = document.getElementById('mutating-chart');
+                    window.setInterval(function() {
+                        chart.rows = [
+                            ["Col1", getRandomValue()],
+                            ["Col2", getRandomValue()],
+                            ["Col3", getRandomValue()]
+                        ];
+                    }, 3000);
+                }());
+                </script>
+                <p>Here's a pie chart with an area selection:</p>
+                <style>
+                #selection-demo {
+                    position: relative;
+                    height: 300px;
+                }
+
+                #selection-chart {
+                    float: left;
+                }
+
+                #selection-display {
+                    display: inline-block;
+                    position: relative;
+                    top: 50%;
+                }
+                </style>
+                <div id="selection-demo">
+                    <google-chart id="selection-chart" type="pie" options='{"title": "Distribution of days in 2001H1"}' cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"}]' rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30] ]' selection='[{"row": 1}]'>
+                    </google-chart>
+                    <div id="selection-display">
+                        Selected row: <span id="selection-label">None</span>.
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var chart = document.getElementById('selection-chart');
+                    var label = document.getElementById('selection-label');
+                    label.textContent = chart.selection[0].row;
+                    chart.addEventListener('google-chart-select', function(e) {
+                        var newSelection = e.detail.chart.getSelection()[0]; // From the event details
+                        label.textContent = newSelection ? newSelection.row : 'None';
+                    });
+                    chart.addEventListener('selection-changed', function(e) {
+                        var newSelection = e.detail.value[0]; // From the event details
+                        label.textContent = newSelection ? newSelection.row : 'None';
+                    });
+                }());
+                </script>
+                <p>Here's a pie chart listening for `onmouseover`:</p>
+                <style>
+                #mouseover-demo {
+                    position: relative;
+                    height: 300px;
+                }
+
+                #mouseover-chart {
+                    float: left;
+                }
+
+                #mouseover-display {
+                    display: inline-block;
+                    position: relative;
+                    top: 50%;
+                }
+                </style>
+                <div id="mouseover-demo">
+                    <google-chart id="mouseover-chart" type="pie" options='{"title": "Distribution of days in 2001H1"}' cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"}]' rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30] ]' events='["onmouseover"]'>
+                    </google-chart>
+                    <div id="mouseover-display">
+                        Moused over row: <span id="mouseover-label">None</span>.
+                    </div>
+                </div>
+                <script>
+                (function() {
+                    var chart = document.getElementById('mouseover-chart');
+                    var label = document.getElementById('mouseover-label');
+                    chart.addEventListener('google-chart-onmouseover', function(e) {
+                        label.textContent = e.detail.data.row;
+                    });
+                }());
+                </script>
+            </div>
+        </div>
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
+            },
+
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            },
+
+            _d: {
+                type: Object
+            }
+        },
+
+
+
+        _toggleHelp: function() {
+            var d = this.get('_d');
+            this._d = {};
+            d.show_help = !d.show_help;
+
+            var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme_html;
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+        // --------------------------- Data --------------------------- 
+
+        __loadData: function() {
+
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // loadData
+
+            });
+        },
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.show_help = false;
+
+            d.some_data = {
+                "test": true
+            };
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+
+        // --------------------------- Lifecycle --------------------------- 
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                this.__loadData();
+                this.__init();
+
+            });
+        }
+    });
+    </script>
+</dom-module>
