@@ -22,8 +22,8 @@ include(readme.md)
 
 [template main 6 7]
 include(../lib/polymer/index.m4)
-include(elements/behavior-export-toolbox.html)
-include(elements/element-export.html)
+include(elements/behavior-charts.html)
+include(elements/element-chart.html)
 include(elements/view.html)
 
 
