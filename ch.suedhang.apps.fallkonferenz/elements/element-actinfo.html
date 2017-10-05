@@ -219,8 +219,8 @@
         _srChanged: function() {
             this.debounce('_srChanged', function() {
 
-                if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_aus !== null)) {
-                    if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
+                if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null) && (this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
+                    if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null) && (this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
 
 
                         var _sr_actinfo = [];
