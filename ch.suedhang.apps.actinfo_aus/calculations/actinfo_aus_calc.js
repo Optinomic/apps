@@ -155,14 +155,8 @@ function main(responses) {
             var anser_motivation_rauchstopp = parseInt(d.VZAT100);
             if (anser_motivation_rauchstopp === 1) {
                 motivation_rauchstopp_angabe = true;
-
-                if (app_scope_ein.smoker === true) {
-                    motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                    austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                } else {
-                    motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
-                    austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
-                };
+                motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
+                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
             };
             if (anser_motivation_rauchstopp === 2) {
                 motivation_rauchstopp_angabe = true;
@@ -195,8 +189,6 @@ function main(responses) {
                 austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
             };
         };
-
-
 
 
         switch (nikotin_konsum) {
