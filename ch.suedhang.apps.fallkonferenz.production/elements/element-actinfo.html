@@ -76,7 +76,6 @@
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
                             <p>[[_sr_actinfo_merged.fagerstroem_text]]</p>
-                            
                             <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
                                 <div class="chart">
                                     <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
@@ -229,36 +228,41 @@
 
                         if (this._sr_actinfo_ein.have_data === true) {
                             this._sr_actinfo_ein.data.forEach(function(current, ID) {
-                                current.app_name = 'Eintritt';
-                                current.actinfo_ein_data = true;
-                                current.actinfo_aus_data = false;
-                                current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
-                                if ("smoker" in current.FAGERSTROEM) {
-                                    if (current.FAGERSTROEM.smoker.smoker === true) {
-                                        show_fagerstoem = true;    
+                                if (current.all_found === true) {
+                                    current.app_name = 'Eintritt';
+                                    current.actinfo_ein_data = true;
+                                    current.actinfo_aus_data = false;
+                                    current.FAGERSTROEM = current.calculation.actinfo_ein_calc.FAGERSTROEM;
+                                    if ("smoker" in current.FAGERSTROEM) {
+                                        if (current.FAGERSTROEM.smoker.smoker === true) {
+                                            show_fagerstoem = true;
+                                        };
                                     };
+                                    if ((current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== 0) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== null) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== undefined)) {
+                                        show_audit = true;
+                                    };
+                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
+                                    _sr_actinfo.push(current);
                                 };
-                                if ((current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== 0) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== null) && (current.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score !== undefined)) {
-                                    show_audit = true;
-                                };
-                                current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                _sr_actinfo.push(current);
                             });
                         };
 
                         if (this._sr_actinfo_aus.have_data === true) {
                             this._sr_actinfo_aus.data.forEach(function(current, ID) {
-                                current.app_name = 'Austritt';
-                                current.actinfo_ein_data = false;
-                                current.actinfo_aus_data = true;
-                                current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
-                                if ("smoker" in current.FAGERSTROEM) {
-                                    if (current.FAGERSTROEM.smoker.smoker === true) {
-                                        show_fagerstoem = true;    
+                                if (current.all_found === true) {
+                                    current.app_name = 'Austritt';
+                                    current.actinfo_ein_data = false;
+                                    current.actinfo_aus_data = true;
+                                    current.FAGERSTROEM = current.calculation.another_calculation.FAGERSTROEM;
+                                    if ("smoker" in current.FAGERSTROEM) {
+                                        if (current.FAGERSTROEM.smoker.smoker === true) {
+                                            show_fagerstoem = true;
+                                        };
                                     };
+                                    current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
+                                    _sr_actinfo.push(current);
                                 };
-                                current.info = current.app_name + ': ' + current.FAGERSTROEM.interpretation.result;
-                                _sr_actinfo.push(current);
+
                             });
                         };
 
@@ -269,7 +273,7 @@
                             if (item.actinfo_ein_data) {
 
                                 audit_text = "Bei Eintritt bestand eine «" + item.calculation.actinfo_ein_calc.AUDIT.interpretation.result + "» (∑=" + item.calculation.actinfo_ein_calc.AUDIT.AUDIT_Score + ")."
-                                
+
 
                                 if ("smoker" in item.FAGERSTROEM) {
                                     if ("summyary" in item.FAGERSTROEM.smoker) {
@@ -476,7 +480,7 @@
 
             if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
                 if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-                    if ((this._sr_actinfo_ein.have_data !== true) && (this._sr_actinfo_ein.all_found !== true)) {
+                    if (this._sr_actinfo_ein.have_data !== true) {
                         // Confirm all "jobs" with "false"
                         jobs_done._pdf_chart_alkohol = false;
 
@@ -488,7 +492,7 @@
 
             if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
                 if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
-                    if ((this._sr_actinfo_aus.have_data !== true) && (this._sr_actinfo_aus.all_found !== true)) {
+                    if (this._sr_actinfo_aus.have_data !== true) {
                         // Confirm all "jobs" with "false"
                         jobs_done._pdf_chart_nikotin = false;
 
@@ -499,7 +503,7 @@
                         // Check if aus=true and ein=false
                         if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
                             if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-                                if ((this._sr_actinfo_ein.have_data !== true) && (this._sr_actinfo_ein.all_found !== true)) {
+                                if (this._sr_actinfo_ein.have_data !== true) {
                                     // Confirm all "jobs" with "false"
                                     jobs_done._pdf_chart_nikotin = false;
                                     build_full = false;
