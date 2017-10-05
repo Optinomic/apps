@@ -184,8 +184,8 @@ function main(responses) {
                 austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
             };
             if (anser_motivation_rauchstopp === 999) {
-                motivation_rauchstopp_angabe = true;
-                motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
+                motivation_rauchstopp_angabe = false;
+                motivation_rauchstopp = "Keine Angabe zur Abstinenzmotivation vorhanden.";
                 austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
             };
         };
