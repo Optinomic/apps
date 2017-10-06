@@ -393,17 +393,21 @@
 
                     var audit = [];
                     audit.push(this._heading("AUDIT", "Alcohol Use Disorders Identification", 'h2'));
-                    audit.push(this._horizontalLine(100, "#F5F5F5"));
-                    audit.push(this._pdf_chart_alkohol);
-                    audit.push(this._horizontalLine(100, "#F5F5F5"));
+                    if (jobs_done._pdf_chart_alkohol) {
+                        audit.push(this._horizontalLine(100, "#F5F5F5"));
+                        audit.push(this._pdf_chart_alkohol);
+                        audit.push(this._horizontalLine(100, "#F5F5F5"));
+                    };
                     _pdf_content.push(this._keepTogether(audit, "audit"));
 
 
                     var fagerstroem = [];
                     fagerstroem.push(this._heading("Nikotinabhängigkeit", "Fagerström", 'h2'));
-                    fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
-                    fagerstroem.push(this._pdf_chart_nikotin);
-                    fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
+                    if (jobs_done._pdf_chart_nikotin) {
+                        audit.push(this._horizontalLine(100, "#F5F5F5"));
+                        audit.push(this._pdf_chart_nikotin);
+                        audit.push(this._horizontalLine(100, "#F5F5F5"));
+                    };
                     _pdf_content.push(this._keepTogether(fagerstroem, "fagerstroem"));
 
                     var app_beschreibung = [];
@@ -411,6 +415,8 @@
                     app_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 } else {
+
+                    // I am never here! I guess.  :-)
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
 
@@ -480,44 +486,46 @@
                 check();
             };
 
-            //  Check "No Data"
+            //  Check "No Chart"
 
-            if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
-                if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-                    if (this._sr_actinfo_ein.have_data !== true) {
-                        // Confirm all "jobs" with "false"
-                        jobs_done._pdf_chart_alkohol = false;
-
-                        build_full = false;
-                        check();
-                    };
+            if ((this._sr_actinfo_merged !== undefined) && (this._sr_actinfo_merged !== null)) {
+                if (this.show_audit !== true) {
+                    // Confirm all "jobs" with "false"
+                    jobs_done._pdf_chart_alkohol = false;
+                    check();
+                };
+                if (this.show_fagerstoem !== true) {
+                    // Confirm all "jobs" with "false"
+                    jobs_done._pdf_chart_nikotin = false;
+                    check();
                 };
             };
 
-            if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
-                if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
-                    if (this._sr_actinfo_aus.have_data !== true) {
-                        // Confirm all "jobs" with "false"
-                        jobs_done._pdf_chart_nikotin = false;
 
-                        build_full = false;
-                        check();
-                    } else {
-                        // Sonderfall:
-                        // Check if aus=true and ein=false
-                        if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
-                            if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-                                if (this._sr_actinfo_ein.have_data !== true) {
-                                    // Confirm all "jobs" with "false"
-                                    jobs_done._pdf_chart_nikotin = false;
-                                    build_full = false;
-                                    check();
-                                };
-                            };
-                        };
-                    };
-                };
-            };
+
+            //  if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
+            //      if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
+            //          if (this._sr_actinfo_aus.have_data !== true) {
+            //              // Confirm all "jobs" with "false"
+            //              jobs_done._pdf_chart_nikotin = false;
+            //              build_full = false;
+            //              check();
+            //          } else {
+            //              // Sonderfall:
+            //              // Check if aus=true and ein=false
+            //              if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
+            //                  if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
+            //                      if (this._sr_actinfo_ein.have_data !== true) {
+            //                          // Confirm all "jobs" with "false"
+            //                          jobs_done._pdf_chart_nikotin = false;
+            //                          build_full = false;
+            //                          check();
+            //                      };
+            //                  };
+            //              };
+            //          };
+            //      };
+            //  };
         },
 
 
