@@ -39,7 +39,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation whoqol_klinikstichprobe javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
+[calculation whoqolbref_klinikstichprobe javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
 include(calculations/klinikstichprobe.js)
 
 
