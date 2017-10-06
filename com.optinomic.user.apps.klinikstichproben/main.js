@@ -401,7 +401,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         });
                     });
                     md_variants_pg = getAllVariants(pg_list);
-                    // console.log('-> Varianten: ', pid, md_variants_pg);
+                    console.log('-> Varianten: ', pid, md_variants_pg);
 
 
 
