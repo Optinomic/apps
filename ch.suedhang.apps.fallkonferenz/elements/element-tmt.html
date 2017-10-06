@@ -39,6 +39,7 @@
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                    <p>Defined :: [[_d.clinic_sample_dive.defined]]</p>
                 </div>
                 <div>
                     <template is="dom-if" if="[[_pdf_ready]]">
@@ -291,7 +292,7 @@
 
 
             d.clinic_samples = JSON.parse(include_as_js_string(ks_tmt.json));
-            d.clinic_sample_dive = clinic_sample_dive = {
+            d.clinic_sample_dive = {
                 "defined": false,
                 "array": null
             };
@@ -362,6 +363,7 @@
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
                             this.set('_d.clinic_sample_dive', clinic_sample_dive);
+                            this._d.clinic_sample_dive = {};
 
                             console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
 
