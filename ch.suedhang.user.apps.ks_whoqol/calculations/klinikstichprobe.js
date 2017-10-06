@@ -644,7 +644,7 @@ function main(responses) {
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
-        var patient_scores = calc.getScoresInVars(d.full.patients, vars, info);
+        var patient_scores = calc.getScoresInVars(d.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var md_patient_scores = calc.writePatientScoresMD(patient_scores, md_app_scores);
 
