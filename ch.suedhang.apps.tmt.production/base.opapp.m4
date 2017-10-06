@@ -1,13 +1,13 @@
 [module]
 id = ch.suedhang.apps.tmt.production
 name = Trail Making Test (TMT)
-short_description = Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen.
+short_description =
 parent = ch.suedhang.apps.tmt_V3
 version = include(VERSION)
 type = patient
 
 [description]
-Mit dem TMT wird die Fähigkeit zum visuellen Scannen, die psychomotorische Geschwindigkeit (TMT A) sowie die Leistungen der exekutiven Funktionen, insbesondere kognitive Flexibilität und Switching (TMT B) erfasst.
+Die psychomotorische Geschwindigkeit (TMT A) und kognitive Flexibilität (TMT B) werden erfasst.
 
 
 [developer]
