@@ -82,8 +82,7 @@ d.sci_stress = {
         "range_stop": 9.5,
         "text": "Stanine: 9 | 4%",
         "color": "#C62828"
-    }]
-
+    }],
     "ranges": [{
         "range_start": 0.5,
         "range_stop": 1.5,
