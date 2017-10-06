@@ -161,16 +161,17 @@ makepdfBehavior = {
         };
     },
 
-    _horizontalLine: function(width, color) {
+    _horizontalLine: function(width, color, space) {
         width = width === undefined ? 100 : width;
         color = color === undefined ? "#E0E0E0" : color;
+        space = space === undefined ? 6 : space;
 
 
         var length = 514 / 100 * width;
 
         var return_obj = {
             "id": "horizontal_line",
-            "margin": [0, 6, 0, 0],
+            "margin": [0, space, 0, 0],
             "canvas": [{
                 "type": "line",
                 "x1": 0,

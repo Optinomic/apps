@@ -53,13 +53,20 @@
             </div>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.whoqol.options_pdf]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    </div>
-                    <div id="data_content">
-                        <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                    <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.whoqol.options_pdf]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
+                    </template>
+                    <div id="data_content">
+                        <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
+                        </template>
+                        <template is="dom-if" if="[[!_d.clinic_sample_dive.defined]]">
+                            <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
+                        </template>
                     </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
@@ -153,6 +160,12 @@
             d.name = "WHOQOL-BREF";
             d.title = "WHO Quality of Life - Kurzform";
 
+            d.clinic_samples = JSON.parse(include_as_js_string(ks_whoqol.json));
+            d.clinic_sample_dive = clinic_sample_dive = {
+                "defined": false,
+                "array": null
+            };
+
 
             include(definitions/whoqol.js)
             // Clone options for pdf - nothing is overwritten
@@ -173,7 +186,42 @@
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if ((this._sr.data !== undefined) && (this._sr.data !== null)) {
                         if (this._sr.have_data === true) {
-                            // Nothing ToDo here.
+
+                            // ---------------------------------------------------------------------
+                            // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
+                            // ---------------------------------------------------------------------
+                            var latest_sr = this._sr.data[this._sr.data.length - 1];
+
+                            var clinic_sample_dive = {
+                                "defined": false,
+                                "array": []
+                            };
+
+                            // ---- Gewünschte Klinikstichprobe schreiben ----
+
+                            // Messzeitpunkt
+
+                            if (latest_sr.calculation.phys_psych_calculation.info.mz.mz_id !== 99) {
+                                clinic_sample_dive.array.push((latest_sr.calculation.phys_psych_calculation.info.mz.mz_id - 1));
+                            } else {
+                                clinic_sample_dive.array.push(3);
+                            };
+
+                            // Geschlecht
+                            if (latest_sr.patient.gender === "female") {
+                                clinic_sample_dive.array.push(0);
+                            } else {
+                                clinic_sample_dive.array.push(1);
+                            };
+
+
+                            // ---- Set ----
+                            clinic_sample_dive.defined = true;
+                            this.set('_d.clinic_sample_dive', clinic_sample_dive);
+
+                            console.log('(WHOQOL-BREF) Klinikstichprobe', clinic_sample_dive);
+
+
                            } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
@@ -213,14 +261,10 @@
 
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._pdf_app_info);
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5", 0));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-
-                    var app_beschreibung = [];
-                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
-                    app_beschreibung.push(this._pdf_app_info);
-                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 } else {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._noData(d.name, 24));
