@@ -9,6 +9,7 @@ d.actinfo_audit = {
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
         "show_baseline": false,
+        "show_ranges_overview": false,
         "show_scale_text": true,
         "show_score_vertical_line": true,
         "show_score_profile_line": false,
