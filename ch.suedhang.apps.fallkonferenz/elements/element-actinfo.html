@@ -204,7 +204,7 @@
             d.title = "Information network on addiction care and therapy";
 
 
-            include(definitions/actinfo.js)
+            include(definitions / actinfo.js)
             // Clone options for pdf - nothing is overwritten
             d.actinfo_audit.options_pdf = JSON.parse(JSON.stringify(d.actinfo_audit.options));
             d.actinfo_fagerstroem.options_pdf = JSON.parse(JSON.stringify(d.actinfo_fagerstroem.options));
@@ -373,7 +373,6 @@
 
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-
                     _pdf_content.push(this._pdf_app_info);
 
                     var problemsubstanzen = "";
@@ -413,15 +412,11 @@
                     _pdf_content.push(this._keepTogether(fagerstroem, "fagerstroem"));
 
                 } else {
-
-                    // I am never here! I guess.  :-)
+                    // No Data
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
+                    _pdf_content.push(this._pdf_app_info);
+                    
                     _pdf_content.push(this._noData(d.name, 24));
-
-                    var app_beschreibung = [];
-                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
-                    app_beschreibung.push(this._pdf_app_info);
-                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 };
 
                 // --------------------------
@@ -484,46 +479,28 @@
                 check();
             };
 
-            //  Check "No Chart"
+            //  Check "No Chart" & "No Data"
 
             if ((this._sr_actinfo_merged !== undefined) && (this._sr_actinfo_merged !== null)) {
-                if (this._sr_actinfo_merged.show_audit !== true) {
-                    // Confirm all "jobs" with "false"
-                    jobs_done._pdf_chart_alkohol = false;
-                    check();
-                };
-                if (this._sr_actinfo_merged.show_fagerstoem !== true) {
-                    // Confirm all "jobs" with "false"
-                    jobs_done._pdf_chart_nikotin = false;
-                    check();
+                if (this._sr_actinfo_merged.actinfo_ein_data === false) {
+                        jobs_done._pdf_chart_alkohol = false;
+                        jobs_done._pdf_chart_nikotin = false;
+                        build_full = false;
+                } else {
+
+                    if (this._sr_actinfo_merged.show_audit !== true) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart_alkohol = false;
+                        check();
+                    };
+                    if (this._sr_actinfo_merged.show_fagerstoem !== true) {
+                        // Confirm all "jobs" with "false"
+                        jobs_done._pdf_chart_nikotin = false;
+                        check();
+                    };
                 };
             };
 
-
-
-            //  if ((this._sr_actinfo_aus !== undefined) && (this._sr_actinfo_aus !== null)) {
-            //      if ((this._sr_actinfo_aus.data !== undefined) && (this._sr_actinfo_aus.data !== null)) {
-            //          if (this._sr_actinfo_aus.have_data !== true) {
-            //              // Confirm all "jobs" with "false"
-            //              jobs_done._pdf_chart_nikotin = false;
-            //              build_full = false;
-            //              check();
-            //          } else {
-            //              // Sonderfall:
-            //              // Check if aus=true and ein=false
-            //              if ((this._sr_actinfo_ein !== undefined) && (this._sr_actinfo_ein !== null)) {
-            //                  if ((this._sr_actinfo_ein.data !== undefined) && (this._sr_actinfo_ein.data !== null)) {
-            //                      if (this._sr_actinfo_ein.have_data !== true) {
-            //                          // Confirm all "jobs" with "false"
-            //                          jobs_done._pdf_chart_nikotin = false;
-            //                          build_full = false;
-            //                          check();
-            //                      };
-            //                  };
-            //              };
-            //          };
-            //      };
-            //  };
         },
 
 
