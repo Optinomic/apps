@@ -1,8 +1,6 @@
 function main(responses) {
 
 
-
-
     var calc = {};
 
 
@@ -41,16 +39,68 @@ function main(responses) {
     }];
 
 
+    calc.group_gender_props = [{
+        "id": 0,
+        "text": "Frauen"
+    }, {
+        "id": 1,
+        "text": "Männer"
+    }, {
+        "id": 2,
+        "text": "Alle Patienten"
+    }];
+
+
+    calc.group_age_props = [{
+        "id": 0,
+        "text": "18 - 25"
+    }, {
+        "id": 1,
+        "text": "26 - 35"
+    }, {
+        "id": 2,
+        "text": "36 - 45"
+    }, {
+        "id": 3,
+        "text": "46 - 55"
+    }, {
+        "id": 4,
+        "text": "56 - 65"
+    }, {
+        "id": 5,
+        "text": "66 - 75"
+    }, {
+        "id": 6,
+        "text": "76 - 85"
+    }, {
+        "id": 7,
+        "text": "ab 86"
+    }, {
+        "id": 8,
+        "text": "Jede Altersgruppe"
+    }];
+
+
     // ------------------------------------------
     // What Dimensions are given from App
     // Arrange them in the following array
     // ------------------------------------------
 
     calc.dimensions_app = [{
-        "id": 2,
+        "id": 0,
         "name": "Messzeitpunkt",
         "source": "app",
         "array": JSON.parse(JSON.stringify(calc.group_mz_props))
+    }, {
+        "id": 1,
+        "name": "Altersgurppe",
+        "source": "app",
+        "array": JSON.parse(JSON.stringify(calc.group_age_props))
+    }, {
+        "id": 2,
+        "name": "Geschlecht",
+        "source": "app",
+        "array": JSON.parse(JSON.stringify(calc.group_gender_props))
     }];
 
 
@@ -118,7 +168,18 @@ function main(responses) {
         if (given_mz_group !== 99) {
             given_mz_group = given_mz_group - 1;
         };
+        if (isNaN(given_mz_group)) {
+            given_mz_group = 3;
+        };
 
+        var given_age_group = parseInt(current_source.info.age_norm.altersgruppe);
+
+
+        if (current_source.info.age_norm.gender === "male") {
+            var given_gender_group = 1;
+        } else {
+            var given_gender_group = 0;
+        };
 
         // Existieren 99'er (Alle)?  Ebenfalls hinzufügen.
 
@@ -137,6 +198,24 @@ function main(responses) {
 
                 // Immer in alle Messzeitpunkte
                 cd.dimensions.push(3);
+            };
+
+            if (dIndex === 1) {
+
+                if (given_mz_group !== 99) {
+                    cd.dimensions.push(given_age_group);
+                };
+
+                // Immer in 'jedes Alter'
+                cd.dimensions.push(8);
+            };
+
+            if (dIndex === 2) {
+
+                cd.dimensions.push(given_gender_group);
+
+                // Immer in 'Alle Patienten'
+                cd.dimensions.push(2);
             };
         };
 
@@ -565,7 +644,7 @@ function main(responses) {
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
-        var patient_scores = calc.getScoresInVars(d.patients, vars, info);
+        var patient_scores = calc.getScoresInVars(d.full.patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var md_patient_scores = calc.writePatientScoresMD(patient_scores, md_app_scores);
 
@@ -592,6 +671,7 @@ function main(responses) {
 
 
     return calc.getResults(responses);
+
 
 
 }
