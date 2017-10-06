@@ -202,7 +202,7 @@
                             // Messzeitpunkt
 
                             if (latest_sr.calculation.phys_psych_calculation.info.mz.mz_id !== 99) {
-                                clinic_sample_dive.array.push(latest_sr.calculation.phys_psych_calculation.info.mz.mz_id);
+                                clinic_sample_dive.array.push((latest_sr.calculation.phys_psych_calculation.info.mz.mz_id - 1));
                             } else {
                                 clinic_sample_dive.array.push(3);
                             };
