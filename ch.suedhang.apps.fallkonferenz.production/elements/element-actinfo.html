@@ -374,7 +374,7 @@
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
 
-
+                    _pdf_content.push(this._pdf_app_info);
 
                     var problemsubstanzen = "";
                     var zusatzangaben = "";
@@ -392,7 +392,7 @@
 
 
                     var audit = [];
-                    audit.push(this._heading("AUDIT (Alcohol Use Disorders Identification)", null, 'h2'));
+                    audit.push(this._heading("AUDIT (Alcohol Use Disorders Identification)", null, 'h3'));
                     audit.push(this._text(this._sr_actinfo_merged.audit_text));
                     if (jobs_done._pdf_chart_alkohol) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
@@ -403,7 +403,7 @@
 
 
                     var fagerstroem = [];
-                    fagerstroem.push(this._heading("Nikotinabhängigkeit (Fagerström)", null, 'h2'));
+                    fagerstroem.push(this._heading("Nikotinabhängigkeit (Fagerström)", null, 'h3'));
                     fagerstroem.push(this._text(this._sr_actinfo_merged.fagerstroem_text));
                     if (jobs_done._pdf_chart_nikotin) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
@@ -412,10 +412,6 @@
                     };
                     _pdf_content.push(this._keepTogether(fagerstroem, "fagerstroem"));
 
-                    var app_beschreibung = [];
-                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
-                    app_beschreibung.push(this._pdf_app_info);
-                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
                 } else {
 
                     // I am never here! I guess.  :-)
