@@ -39,7 +39,6 @@
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
-                    <p>Defined :: [[_d.clinic_sample_dive.defined]]</p>
                 </div>
                 <div>
                     <template is="dom-if" if="[[_pdf_ready]]">
@@ -57,21 +56,14 @@
             </div>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <template is="dom-if" if="[[_d.tmt_clinic_sample_dive.defined]]" restamp="true">
-                        <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
-                            <div id="pdf_get_chart">
-                                <optinomic-pdf-chart-profile language="de" options="[[_d.tmt.options_pdf]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                            </div>
-                        </template>
+                    <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.tmt.options_pdf]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                        </div>
                         <div id="data_content">
-                            <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
-                                <div class="chart">
-                                    <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
-                                </div>
-                            </template>
-                            <template is="dom-if" if="[[!_d.clinic_sample_dive.defined]]">
-                                <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
-                            </template>
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.tmt.options]]" scales="[[_d.tmt.scales]]" ranges="[[_d.tmt.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
                             <div id="datenblatt">
                                 <h3>Datenblatt</h3>
                                 <vaadin-grid class="full_grid" aria-label="TMT - Datenblatt" items="[[_sr.data]]" column-reordering-allowed="true">
@@ -298,7 +290,7 @@
             };
 
 
-            include(definitions/tmt.js)
+            include(definitions / tmt.js)
             // Clone options for pdf - nothing is overwritten
             d.tmt.options_pdf = JSON.parse(JSON.stringify(d.tmt.options));
             d.tmt.options_pdf.item_height = d.tmt.options_pdf.item_height - 12;
@@ -363,7 +355,7 @@
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
                             this.set('_d.clinic_sample_dive', clinic_sample_dive);
-                            this._d.clinic_sample_dive = {};
+                            this._d.clinic_sample_dive = clinic_sample_dive;
 
                             console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
 

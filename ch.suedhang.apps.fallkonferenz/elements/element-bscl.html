@@ -258,7 +258,7 @@
 
 
             d.clinic_samples = JSON.parse(include_as_js_string(ks_bscl.json));
-            d.bscl_clinic_sample_dive = clinic_sample_dive = {
+            d.bscl_clinic_sample_dive = {
                 "defined": false,
                 "array": null
             };
@@ -316,7 +316,7 @@
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
                             this.set('_d.bscl_clinic_sample_dive', clinic_sample_dive);
-
+                            this._d.bscl_clinic_sample_dive = clinic_sample_dive;
 
                             // ---------------------------------------------------------------------
                             // Erstelle Zusatzitems - Array
