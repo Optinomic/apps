@@ -7,7 +7,7 @@ version = include(VERSION)
 type = patient
 
 [description]
-Die psychomotorische Geschwindigkeit (TMT A) und kognitive Flexibilität (TMT B) werden erfasst.
+Der TMT erfasst die psychomotorische Geschwindigkeit (TMT A) und kognitive Flexibilität (TMT B).
 
 
 [developer]
