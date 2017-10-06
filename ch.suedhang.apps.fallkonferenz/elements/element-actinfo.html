@@ -392,7 +392,8 @@
 
 
                     var audit = [];
-                    audit.push(this._heading("AUDIT", "Alcohol Use Disorders Identification", 'h2'));
+                    audit.push(this._heading("AUDIT (Alcohol Use Disorders Identification)", null, 'h2'));
+                    audit.push(this._text(this._sr_actinfo_merged.audit_text));
                     if (jobs_done._pdf_chart_alkohol) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
                         audit.push(this._pdf_chart_alkohol);
@@ -402,7 +403,8 @@
 
 
                     var fagerstroem = [];
-                    fagerstroem.push(this._heading("Nikotinabhängigkeit", "Fagerström", 'h2'));
+                    fagerstroem.push(this._heading("Nikotinabhängigkeit (Fagerström)", null, 'h2'));
+                    fagerstroem.push(this._text(this._sr_actinfo_merged.fagerstroem_text));
                     if (jobs_done._pdf_chart_nikotin) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
                         audit.push(this._pdf_chart_nikotin);
@@ -489,12 +491,12 @@
             //  Check "No Chart"
 
             if ((this._sr_actinfo_merged !== undefined) && (this._sr_actinfo_merged !== null)) {
-                if (this.show_audit !== true) {
+                if (this._sr_actinfo_merged.show_audit !== true) {
                     // Confirm all "jobs" with "false"
                     jobs_done._pdf_chart_alkohol = false;
                     check();
                 };
-                if (this.show_fagerstoem !== true) {
+                if (this._sr_actinfo_merged.show_fagerstoem !== true) {
                     // Confirm all "jobs" with "false"
                     jobs_done._pdf_chart_nikotin = false;
                     check();
