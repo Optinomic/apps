@@ -415,8 +415,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         var ziel = null;
                         var md_data = null;
 
-                        console.log('->  ', myVarID, current_pg_list);
+                        console.log('->  ', myVarID, current_pg_list, data_dive);
 
+                        if (data_dive !== undefined) {
 
                         if (current_pg_list.length === 1) {
                             md_data = data_dive[current_pg_list[0]];
@@ -476,6 +477,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                             md_data = data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
                             data_dive[current_pg_list[0]][current_pg_list[1]][current_pg_list[2]][current_pg_list[3]][current_pg_list[4]][current_pg_list[5]][current_pg_list[6]][current_pg_list[7]][current_pg_list[8]][current_pg_list[9]] = md_data;
+                        };
                         };
                     });
 
