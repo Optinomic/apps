@@ -415,6 +415,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                         var ziel = null;
                         var md_data = null;
 
+                        console.log('->  ', myVarID, current_pg_list);
+
+
                         if (current_pg_list.length === 1) {
                             md_data = data_dive[current_pg_list[0]];
                             md_data = concatAndStatistics(md_data, current_score, pid, vars_array);
