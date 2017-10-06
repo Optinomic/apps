@@ -265,11 +265,12 @@
                     var clone = JSON.parse(JSON.stringify(this._pdf_app_info));
 
                     console.log('1', clone.text);
-                    clone.text.replace(/(\r\n|\n|\r)/gm,"");
-                    clone.text.replace(/[^\x20-\x7E]/gmi, "");
-                    clone.text.trim();    
-                    clone.text.replace(/^\s+|\s+$/gm, '');
-                    console.log('2', JSON.parse(JSON.stringify(clone.text)));
+                    clone.text = clone.text.replace(/(\r\n|\n|\r)/gm, "");
+                    clone.text = clone.text.replace(/^\s+|\s+$/g, '');
+                    // clone.text = clone.text.replace(/[^\x20-\x7E]/gmi, "");
+                    clone.text = clone.text.trim();    
+                    clone.text = clone.text.replace(/^\s+|\s+$/gm, '');
+                    clone.text = console.log('2', JSON.parse(JSON.stringify(clone.text)));
 
 
                     var app_info_text = {
