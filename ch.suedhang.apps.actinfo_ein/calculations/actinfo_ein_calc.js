@@ -1045,7 +1045,7 @@ function main(responses) {
                 entzuege.text = "Vor dem aktuellen Entzug wurde eine professionell begleitete Entzugsbehandlung durchgeführt."
             };
 
-            if (anz_entzuege === 3) || (anz_entzuege === 4) || (anz_entzuege === 5)) || (anz_entzuege === 6){
+            if ((anz_entzuege === 3) || (anz_entzuege === 4) || (anz_entzuege === 5) || (anz_entzuege === 6)){
                 var count_text = "";
                 if (anz_entzuege === 3) {count_text = "zwei"};
                 if (anz_entzuege === 4) {count_text = "drei"};
