@@ -972,6 +972,7 @@ function main(responses) {
             scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC16);
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = 10 - scores_array[score_id].stanine;
 
         score_id = 3;
         scores_array[score_id].name = 'coping_ab';
@@ -989,6 +990,7 @@ function main(responses) {
             scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC17);
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = 10 - scores_array[score_id].stanine;
 
         score_id = 4;
         scores_array[score_id].name = 'coping_su';
@@ -1006,6 +1008,7 @@ function main(responses) {
             scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC19);
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = 10 - scores_array[score_id].stanine;
 
         score_id = 5;
         scores_array[score_id].name = 'coping_rel';
@@ -1023,6 +1026,7 @@ function main(responses) {
             scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC18);
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = 10 - scores_array[score_id].stanine;
 
         score_id = 6;
         scores_array[score_id].name = 'coping_alk';
@@ -1042,6 +1046,7 @@ function main(responses) {
             scores_array[score_id].sum_score = scores_array[score_id].sum_score + parseInt(d.ESCICoping_ESCIC20);
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
+        scores_array[score_id].stanine = 10 - scores_array[score_id].stanine;
 
 
         return scores_array;
