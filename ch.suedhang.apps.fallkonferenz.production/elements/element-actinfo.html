@@ -483,9 +483,12 @@
 
             if ((this._sr_actinfo_merged !== undefined) && (this._sr_actinfo_merged !== null)) {
                 if (this._sr_actinfo_merged.actinfo_ein_data === false) {
+
                         jobs_done._pdf_chart_alkohol = false;
                         jobs_done._pdf_chart_nikotin = false;
                         build_full = false;
+                        check();
+
                 } else {
 
                     if (this._sr_actinfo_merged.show_audit !== true) {
