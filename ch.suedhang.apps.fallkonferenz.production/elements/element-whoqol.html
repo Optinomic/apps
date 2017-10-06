@@ -161,7 +161,7 @@
             d.title = "WHO Quality of Life - Kurzform";
 
             d.clinic_samples = JSON.parse(include_as_js_string(ks_whoqol.json));
-            d.clinic_sample_dive = {
+            d.clinic_sample_dive = clinic_sample_dive = {
                 "defined": false,
                 "array": null
             };
@@ -200,11 +200,17 @@
                             // ---- Gewünschte Klinikstichprobe schreiben ----
 
                             // Messzeitpunkt
-
                             if (latest_sr.calculation.phys_psych_calculation.info.mz.mz_id !== 99) {
                                 clinic_sample_dive.array.push((latest_sr.calculation.phys_psych_calculation.info.mz.mz_id - 1));
                             } else {
                                 clinic_sample_dive.array.push(3);
+                            };
+
+                            // Altersgruppe
+                            if (latest_sr.calculation.phys_psych_calculation.info.age_norm.altersgruppe !== 99) {
+                                clinic_sample_dive.array.push((latest_sr.calculation.phys_psych_calculation.info.age_norm.altersgruppe));
+                            } else {
+                                clinic_sample_dive.array.push(8);
                             };
 
                             // Geschlecht
@@ -218,6 +224,7 @@
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
                             this.set('_d.clinic_sample_dive', clinic_sample_dive);
+                            this._d.clinic_sample_dive = clinic_sample_dive;
 
                             console.log('(WHOQOL-BREF) Klinikstichprobe', clinic_sample_dive);
 
