@@ -68,7 +68,7 @@ include(emails/new_event.html)
 include(emails/overdue.html)
 
 
-[calculation actinfo_ein_calc javascript]
+[calculation actinfo_ein javascript]
 include(calculations/actinfo_ein_calc.js)
 
 
