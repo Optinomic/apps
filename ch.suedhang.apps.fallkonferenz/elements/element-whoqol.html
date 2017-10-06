@@ -222,7 +222,7 @@
                             console.log('(WHOQOL-BREF) Klinikstichprobe', clinic_sample_dive);
 
 
-                           } else {
+                        } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
@@ -258,6 +258,8 @@
                 // --------------------------
                 // Build PDF
                 // --------------------------
+
+
 
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
