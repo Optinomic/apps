@@ -265,21 +265,26 @@
                     var clone = JSON.parse(JSON.stringify(this._pdf_app_info));
 
                     console.log('1', clone.text);
-                    clone.text.split("↵").join("");
                     clone.text.replace(/(\r\n|\n|\r)/gm,"");
                     clone.text.replace(/[^\x20-\x7E]/gmi, "");
                     clone.text.trim();    
-                    console.log('2', clone.text);
+                    clone.text.replace(/^\s+|\s+$/gm, '');
+                    console.log('2', JSON.parse(JSON.stringify(clone.text));
+
 
                     var app_info_text = {
                         "text": clone.text,
-                        "margin": [0, 0, 0, 0]
+                        "stype": "p"
                     };
+
+                    app_info_text.text.split("↵").join("");
+                    console.log('3', app_info_text);
+
 
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p"});
                     _pdf_content.push(app_info_text);
-                    _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT", "style": "p"});
+                    _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT", "style": "p"});
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5", 0));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
