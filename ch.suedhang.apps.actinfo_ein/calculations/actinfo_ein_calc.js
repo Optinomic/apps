@@ -1038,20 +1038,20 @@ function main(responses) {
             };
 
             if (anz_entzuege === 1) {
-                entzuege.text = "Es liegt eine professionell begleitete Entzugsbehandlung vor."
+                entzuege.text = "Es handelt sich um die erste professionell begleitete Entzugsbehandlung."
             };
 
-            if ((anz_entzuege === 2) || (anz_entzuege === 3) || (anz_entzuege === 4) || (anz_entzuege === 5)) {
+            if (anz_entzuege === 2) {
+                entzuege.text = "Vor dem aktuellen Entzug wurde eine professionell begleitete Entzugsbehandlung durchgeführt."
+            };
+
+            if (anz_entzuege === 3) || (anz_entzuege === 4) || (anz_entzuege === 5)) || (anz_entzuege === 6){
                 var count_text = "";
-                if (anz_entzuege === 2) {count_text = "zwei"};
-                if (anz_entzuege === 3) {count_text = "drei"};
-                if (anz_entzuege === 4) {count_text = "vier"};
-                if (anz_entzuege === 5) {count_text = "fünf"};
-                entzuege.text = "Es liegen " + count_text + " professionell begleitete Entzugsbehandlungen vor."
-            };
-
-            if (anz_entzuege === 6) {
-                entzuege.text = "Es liegen sechs oder mehr professionell begleitete Entzugsbehandlungen vor."
+                if (anz_entzuege === 3) {count_text = "zwei"};
+                if (anz_entzuege === 4) {count_text = "drei"};
+                if (anz_entzuege === 5) {count_text = "vier"};
+                if (anz_entzuege === 6) {count_text = "fünf oder mehr"};
+                entzuege.text = "Vor dem aktuellen Entzug wurden " + count_text + " professionell begleitete Entzugsbehandlungen durchgeführt."
             };
 
 
