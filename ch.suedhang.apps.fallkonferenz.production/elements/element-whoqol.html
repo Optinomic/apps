@@ -262,16 +262,17 @@
 
 
                 if (build_full) {
+                    var clone = JSON.parse(JSON.stringify(this._pdf_app_info));
                     var app_info_text = {
-                        "text": JSON.parse(JSON.stringify(this._pdf_app_info.text)),
+                        "text": clone.text,
                         "margin": [0, 0, 0, 0]
                     };
 
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p"});
                     _pdf_content.push(app_info_text);
-                    _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p"});
-                    _pdf_content.push(app_info_text);
+                    _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT TTTTTTEEEEEXXXXTT", "style": "p"});
+                    _pdf_content.push(JSON.parse(JSON.stringify(app_info_text)));
                     _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p"});
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5", 0));
                     _pdf_content.push(this._pdf_chart);
