@@ -55,11 +55,11 @@
                 <template is="dom-if" if="[[_d.init_done]]">
                     <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
                         <div id="pdf_get_chart">
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.isk.options_pdf]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.isk.options_pdf]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
                         <div id="data_content">
                             <div class="chart">
-                                <optinomic-chart-profile language="de" options="[[_d.isk.options]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                                <optinomic-chart-profile language="de" options="[[_d.isk.options]]" scales="[[_d.isk.scales]]" ranges="[[_d.isk.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
                             </div>
                         </div>
                     </template>
