@@ -19,7 +19,7 @@ d.actinfo_audit = {
         "topnumber_hide_first_last": true,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 5,
-        "response_title_path": "calculation.actinfo_ein_calc.messzeitpunkt.mz_text",
+        "response_title_path": "calculation.actinfo_ein.messzeitpunkt.mz_text",
         "response_date_path": "date"
     },
     "scales": [{
@@ -27,7 +27,7 @@ d.actinfo_audit = {
         "left_text": "Risikoarmer Alkoholkonsum",
         "right_title": "",
         "right_text": "Verdacht auf Alkoholabhängigkeit",
-        "score_path": "calculation.actinfo_ein_calc.AUDIT.AUDIT_Score",
+        "score_path": "calculation.actinfo_ein.AUDIT.AUDIT_Score",
         "clinic_sample_var": null
     }],
     "ranges": [{
