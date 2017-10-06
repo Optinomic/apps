@@ -205,17 +205,17 @@ d.sci_hilfreich = {
         "range_start": 2.5,
         "range_stop": 3.5,
         "text": "Stanine: 3 | 12%",
-        "color": "#FFA000"
+        "color": "#2E7D32"
     }, {
         "range_start": 3.5,
         "range_stop": 4.5,
         "text": "Stanine: 4 | 17%",
-        "color": "#FFA000"
+        "color": "#2E7D32"
     }, {
         "range_start": 4.5,
         "range_stop": 5.5,
         "text": "Stanine: 5 | 20%",
-        "color": "#FBB100"
+        "color": "#2E7D32"
     }, {
         "range_start": 5.5,
         "range_stop": 6.5,
@@ -225,7 +225,7 @@ d.sci_hilfreich = {
         "range_start": 6.5,
         "range_stop": 7.5,
         "text": "Stanine: 7 | 12%",
-        "color": "#FB7200"
+        "color": "#FFA000"
     }, {
         "range_start": 7.5,
         "range_stop": 8.5,
