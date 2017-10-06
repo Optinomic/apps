@@ -1,13 +1,13 @@
 [module]
-id = ch.suedhang.user.apps.ks_isk
-name = Klinische Stichprobe | ISK
-short_description = Klinische Stichproben | Inventar Sozialer Kompetenzen - Kurzform
+id = ch.suedhang.user.apps.ks_whoqol
+name = Klinische Stichprobe | WHOQOL-BREF
+short_description = Klinische Stichproben | The World Health Organization Quality of Life (WHOQOL) 
 version = include(VERSION)
 type = user
 
 
 [description]
-Erstellen der klinischen Stichprobe des ISK. Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität. Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.
+Erstellen der klinischen Stichprobe des WHOQOL-BREF. Beurteilung der Physischen und Psychischen Lebensqualität. 
 
 
 [developer]
