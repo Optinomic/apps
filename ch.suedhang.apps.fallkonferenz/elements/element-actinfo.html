@@ -54,9 +54,13 @@
             <template is="dom-if" if="[[_d.init_done]]">
                 <template is="dom-if" if="[[_sr_actinfo_ein.have_data]]">
                     <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart_alkohol}}"></optinomic-pdf-chart-profile>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
-                            <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options_pdf]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>
+                            <template is="dom-if" if="[[_sr_actinfo_merged.show_audit]]" restamp="true">
+                                <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_audit.options_pdf]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]" pdf-content="{{_pdf_chart_alkohol}}"></optinomic-pdf-chart-profile>
+                            </template>
+                            <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]" restamp="true">
+                                <optinomic-pdf-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options_pdf]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]" pdf-content="{{_pdf_chart_nikotin}}"></optinomic-pdf-chart-profile>
+                            </template>
                         </template>
                     </div>
                     <div id="data_content">
@@ -68,7 +72,7 @@
                         </template>
                         <h2>AUDIT (Alcohol Use Disorders Identification)</h2>
                         <p>[[_sr_actinfo_merged.audit_text]]</p>
-                        <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
+                        <template is="dom-if" if="[[_sr_actinfo_merged.show_audit]]" restamp="true">
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
                             </div>
@@ -76,7 +80,7 @@
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
                             <p>[[_sr_actinfo_merged.fagerstroem_text]]</p>
-                            <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]">
+                            <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]" restamp="true">
                                 <div class="chart">
                                     <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
                                 </div>
@@ -320,17 +324,17 @@
                         };
 
 
-
                         this.set('_sr_actinfo_merged', actinfo_obj);
-                        console.log('(Response | Ready) ' + this._d.name + ': ', actinfo_obj);
+                        this._sr_actinfo_merged = actinfo_obj;
+                        console.log('(Response | Ready) ' + this._d.name + ': ', this._sr_actinfo_merged);
 
 
-                        if (this._sr_actinfo_ein.have_data !== true) {
+                        if (actinfo_obj.show_audit !== true) {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
 
-                        if (this._sr_actinfo_aus.have_data !== true) {
+                        if (actinfo_obj.show_fagerstoem !== true) {
                             // Build PDF even with no Data.
                             this._buildPDF();
                         };
