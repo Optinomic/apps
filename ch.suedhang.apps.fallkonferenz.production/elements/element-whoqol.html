@@ -262,9 +262,9 @@
                 if (build_full) {
                     _pdf_content.push(this._heading(d.name, d.title, 'h1'));
                     _pdf_content.push(this._pdf_app_info);
+                    console.error('this._pdf_app_info', this._pdf_app_info);
                     _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p", "margin": [0,0,0,0]});
-                    _pdf_content.push(this._pdf_app_info);
-                    _pdf_content.push({"text": "TTTTTTEEEEEXXXXTT", "style": "p", "margin": [0,0,0,0]});
+
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5", 0));
                     _pdf_content.push(this._pdf_chart);
                     _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
