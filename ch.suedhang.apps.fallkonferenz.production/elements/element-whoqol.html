@@ -263,7 +263,12 @@
 
                 if (build_full) {
                     var clone = JSON.parse(JSON.stringify(this._pdf_app_info));
+
+                    console.log('1', clone.text);
                     clone.text.split("↵").join("");
+                    clone.text.replace(/(\r\n|\n|\r)/gm,"");
+                    console.log('2', clone.text);
+
                     var app_info_text = {
                         "text": clone.text,
                         "margin": [0, 0, 0, 0]
