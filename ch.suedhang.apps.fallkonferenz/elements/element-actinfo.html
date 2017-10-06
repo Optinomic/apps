@@ -385,7 +385,7 @@
                     var ps = [];
                     ps.push(problemsubstanzen);
                     ps.push(this._spacer(6));
-                    ps.push(this._heading("Zusatzinformationen", null, 'h3'));
+                    zusatzangaben.stack["0"].text = "Zusatzinformationen: " + zusatzangaben.stack["0"].text
                     ps.push(zusatzangaben);
                     _pdf_content.push(this._keepTogether(ps, "problemsubstanzen"));
 
