@@ -267,7 +267,8 @@
                     console.log('1', clone.text);
                     clone.text.split("↵").join("");
                     clone.text.replace(/(\r\n|\n|\r)/gm,"");
-                    clone.text.replace(/[^\x20-\x7E]/gmi, "")
+                    clone.text.replace(/[^\x20-\x7E]/gmi, "");
+                    clone.text.trim();    
                     console.log('2', clone.text);
 
                     var app_info_text = {
