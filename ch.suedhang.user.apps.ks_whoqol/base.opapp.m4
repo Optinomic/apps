@@ -1,13 +1,13 @@
 [module]
 id = ch.suedhang.user.apps.ks_whoqol
-name = Klinische Stichprobe | WHOQOL-BREF
-short_description = Klinische Stichproben | The World Health Organization Quality of Life (WHOQOL) 
+name = Klinische Stichprobe | WHOQOL
+short_description = Klinische Stichproben | WHOQOL-BREF 
 version = include(VERSION)
 type = user
 
 
 [description]
-Erstellen der klinischen Stichprobe des WHOQOL-BREF. Beurteilung der Physischen und Psychischen Lebensqualität. 
+Erstellen der klinischen Stichprobe des WHOQOL-BREF (The World Health Organization Quality of Life). Beurteilung der Physischen und Psychischen Lebensqualität. 
 
 
 [developer]
@@ -21,6 +21,7 @@ website = http://www.optinomic.com/
 
 
 [dependencies]
+ch.suedhang.apps.whoqol.production >= 1.0
 
 
 [template score_overview 4 4]
