@@ -21,7 +21,6 @@ website = http://www.optinomic.com/
 
 
 [dependencies]
-ch.suedhang.apps.whoqol.production >= 1.0
 
 
 [template score_overview 4 4]
@@ -40,7 +39,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation isk_klinikstichprobe javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
+[calculation whoqol_klinikstichprobe javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
 include(calculations/klinikstichprobe.js)
 
 
