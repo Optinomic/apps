@@ -53,13 +53,20 @@
             </div>
             <template is="dom-if" if="[[_sr.have_data]]">
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <div id="pdf_get_chart">
-                        <optinomic-pdf-chart-profile language="de" options="[[_d.whoqol.options_pdf]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
-                    </div>
-                    <div id="data_content">
-                        <div class="chart">
-                            <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]"></optinomic-chart-profile>
+                    <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                        <div id="pdf_get_chart">
+                            <optinomic-pdf-chart-profile language="de" options="[[_d.whoqol.options_pdf]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" pdf-content="{{_pdf_chart}}"></optinomic-pdf-chart-profile>
                         </div>
+                    </template>
+                    <div id="data_content">
+                        <template is="dom-if" if="[[_d.clinic_sample_dive.defined]]" restamp="true">
+                            <div class="chart">
+                                <optinomic-chart-profile language="de" options="[[_d.whoqol.options]]" scales="[[_d.whoqol.scales]]" ranges="[[_d.whoqol.ranges]]" scores="[[_sr]]" clinic_samples="[[_d.clinic_samples]]" clinic_sample_dive="[[_d.clinic_sample_dive.array]]"></optinomic-chart-profile>
+                            </div>
+                        </template>
+                        <template is="dom-if" if="[[!_d.clinic_sample_dive.defined]]">
+                            <optinomic-indication sign=":" title="Erstelle Klinikstichprobe aus letzter Messung..." color="#3F51B5"></optinomic-indication>
+                        </template>
                     </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
