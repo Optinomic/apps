@@ -405,9 +405,9 @@
                     fagerstroem.push(this._heading("Nikotinabhängigkeit (Fagerström)", null, 'h3'));
                     fagerstroem.push(this._text(this._sr_actinfo_merged.fagerstroem_text));
                     if (jobs_done._pdf_chart_nikotin) {
-                        audit.push(this._horizontalLine(100, "#F5F5F5"));
-                        audit.push(this._pdf_chart_nikotin);
-                        audit.push(this._horizontalLine(100, "#F5F5F5"));
+                        fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
+                        fagerstroem.push(this._pdf_chart_nikotin);
+                        fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
                     };
                     _pdf_content.push(this._keepTogether(fagerstroem, "fagerstroem"));
 
