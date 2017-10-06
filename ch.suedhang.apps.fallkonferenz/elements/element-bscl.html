@@ -309,9 +309,6 @@
                                 clinic_sample_dive.array.push(1);
                             };
 
-                            // Behandlung (Stammt aus PatientGroup => Schwierig => Alle)
-                            clinic_sample_dive.array.push(4);
-
 
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
@@ -372,7 +369,7 @@
                             this.set('_d.bscl_dropouts', dopouts);
 
 
-                            console.log('(Response | Ready) ' + this._d.name + ': ', clinic_sample_dive, zusatzitems, dopouts);
+                            console.log('(Response | Ready) ' + this._d.name + ': ', this._d);
 
                         } else {
                             // Build PDF even with no Data.
