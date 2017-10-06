@@ -1043,7 +1043,6 @@ function main(responses) {
         };
         scores_array[score_id].stanine = calc.get_stanine(current_population.current[score_id], scores_array[score_id].sum_score);
 
-
         return scores_array;
     };
 
