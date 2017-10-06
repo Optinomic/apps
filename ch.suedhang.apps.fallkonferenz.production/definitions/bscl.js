@@ -9,7 +9,7 @@ d.bscl = {
         "color_clinic_sample": "#888888",
         "color_skin": "grey_dark_to_light",
         "show_baseline": false,
-        "show_scale_text": true,
+        "show_scale_text": false,
         "show_score_vertical_line": false,
         "show_score_profile_line": true,
         "show_score_circles": true,
@@ -20,7 +20,7 @@ d.bscl = {
         "vertical_grid_every_x": 2,
         "response_title_path": "calculation.scores_calculation.info.mz.mz_typ",
         "response_date_path": "calculation.scores_calculation.info.mz.mz_date",
-        "norm_sample": "Z-Werte wurden aufgrund der Normstichprobe nach Franke (2000) berechnet (N=300).",
+        "norm_sample": "Gesunde Normstichprobe (N=300).",
         "dropout": "calculation.scores_calculation.info.mz.dropout",
         "dropout_reason": "calculation.scores_calculation.info.mz.dropout_reason"
     },
