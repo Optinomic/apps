@@ -39,6 +39,7 @@
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
                     <optinomic-title small h1="[[_d.name]]" h2="[[_d.title]]"></optinomic-title>
+                    <p>Defined :: [[_d.clinic_sample_dive.defined]]</p>
                 </div>
                 <div>
                     <template is="dom-if" if="[[_pdf_ready]]">
@@ -319,7 +320,6 @@
 
                             // Check latest survey_response and build "_d.bscl.clinic_sample_dive.array"
                             var latest_sr = this._sr.data[this._sr.data.length - 1];
-                            console.log('(TMT) latest_sr', latest_sr);
 
                             var clinic_sample_dive = {
                                 "defined": false,
@@ -362,7 +362,8 @@
 
                             // ---- Set ----
                             clinic_sample_dive.defined = true;
-                            this.set('_d.clinic_sample_dive', clinic_sample_dive);
+                            this._d.clinic_sample_dive = clinic_sample_dive;
+                            // this.set('_d.clinic_sample_dive', clinic_sample_dive);
 
                             console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
 
