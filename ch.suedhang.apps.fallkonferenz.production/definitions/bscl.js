@@ -1,8 +1,8 @@
 d.bscl = {
     "options": {
         "min": -2,
-        "max": 16,
-        "item_height": 58,
+        "max": 14,
+        "item_height": 50,
         "item_text_left": 100,
         "item_text_right": 370,
         "color_grid": "#9E9E9E",
@@ -48,7 +48,7 @@ d.bscl = {
         "left_title": "Unsicherheit im Sozialkontakt",
         "left_text": "",
         "right_title": "",
-        "right_text": "Unzulänglichkeits- und Minderwertigkeitsgefühle, Selbstabwertungen im sozialen Kontakt, Selbstzweifel, Selbstunsicherheit und negative Erwartungen bzgl. dem eigenen zwischenmenschlichen Verhalten.",
+        "right_text": "Minderwertigkeitsgefühle, Selbstabwertungen, Selbstzweifel, Selbstunsicherheit und negative Erwartungen bzgl. dem eigenen zwischenmenschlichen Verhalten.",
         "m_norm": [0.35, 0.49],
         "sd_norm": [0.40, 0.45],
         "score_path": "calculation.scores_calculation.all_results.unsicherheit_im_sozialkontakt_z_score",
