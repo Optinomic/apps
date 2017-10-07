@@ -190,9 +190,9 @@
                     _pdf_content.push(this._text(stay_text));
 
                     _pdf_content.push(this._spacer(30));
-                    chart.push(this._horizontalLine(100, "#F5F5F5"));
-                    _pdf_content.push(this._stamp(this._current_patient.extras.full_name));
-                    chart.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                    _pdf_content.push(this._stamp(this._current_patient.extras.full_name, 6));
+                    _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pageBreak());
 
 
