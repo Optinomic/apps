@@ -215,7 +215,7 @@
                 if (build_full) {
                     var titel_beschreibung = [];
                     titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
-                    titel_beschreibung.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
                     titel_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
 
@@ -229,7 +229,7 @@
 
                     var titel_beschreibung = [];
                     titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
-                    titel_beschreibung.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
                     titel_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
                     

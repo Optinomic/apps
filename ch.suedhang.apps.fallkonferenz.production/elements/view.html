@@ -188,14 +188,14 @@
                     title_block_stack = [];
                     title_block_stack.push(this._title(d.title, d.name + ": " + d.subtitle));
                     title_block_stack.push({ "text": "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "».", "style": "p" });
-                    title_block_stack.push(this._spacer(90));
+                    title_block_stack.push(this._spacer(96));
                     title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
                     title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
                     title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
                     var title_block = {
                         "id": "document_title",
                         "alignment": "left",
-                        "margin": [0, 12, 0, 0],
+                        "margin": [0, 18, 0, 0],
                         "columns": [{}, {
                             "width": "480",
                             "stack": title_block_stack
