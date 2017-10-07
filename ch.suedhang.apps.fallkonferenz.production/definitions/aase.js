@@ -75,7 +75,7 @@ d.aase = {
         "color": "#FB7200"
     }, {
         "range_start": 3,
-        "range_stop": 4,
+        "range_stop": 999,
         "text": "sehr hohe Versuchung",
         "color": "#C62828"
     }]
