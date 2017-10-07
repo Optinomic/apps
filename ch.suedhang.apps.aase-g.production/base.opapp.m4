@@ -2,14 +2,12 @@
 id = ch.suedhang.apps.aase-g.production
 name = AASE-G
 parent = ch.suedhang.apps.aase-g
-short_description = Versuchung - Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren
+short_description = Versuchung
 version = include(VERSION)
 type = patient
 
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
-Die allgemeine Versuchung ergibt sich aus dem Summenwert aller Items (Wert 0-80), die Subskalen stellen den Mittelwert der dazugehörigen 5 Items dar (Wert 0-4).
-Tiefe Werte entsprechen einer niedrigen Versuchung, hohe Werte einer hohen Versuchung.
 
 
 [developer]

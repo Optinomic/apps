@@ -2,12 +2,12 @@
 id = ch.suedhang.apps.isk.production
 name = ISK-K
 parent = ch.suedhang.apps.isk
-short_description = Inventar Sozialer Kompetenzen - Kurzform.
+short_description = Inventar Sozialer Kompetenzen
 version = include(VERSION)
 type = patient
 
 [description]
-Das Inventar Sozialer Kompetenzen (Kurzversion) erfasst in 33 Aussagen persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität. Soziale Kompetenzen sind für unser Funktionieren in der Gesellschaft notwendig. Sind sie zu sehr auf einen selber oder zu sehr auf die Gesellschaft ausgerichtet, dann funktioniert das Zusammenspiel nicht. Mittlere Ausprägungen, welche beide Aspekte berücksichtigen sind daher am günstigsten.
+Persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.
 
 
 [developer]

@@ -1,13 +1,12 @@
 [module]
 id = ch.suedhang.apps.aase-g
-name = AASE-G V2
-short_description = Versuchung - Erfassung der Versuchung in spezifischen Situationen die Hauptproblemsubstanz zu konsumieren
+name = AASE-G
+short_description = Versuchung
 version = include(VERSION)
 type = patient
 
 [description]
 Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
-0 Punkte entsprechen keiner Versuchung, eine maximale Versuchung liegt bei 80 (allgemeiner Summenwert) respektive 4 (Subskalen) Punkten vor.
 
 [developer]
 first_name = Beat

@@ -1,12 +1,12 @@
 [module]
 id = ch.suedhang.apps.sci
 name = Stress-Coping-Inventar (SCI)
-short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
+short_description = Stress-Coping-Inventar
 version = include(VERSION)
 type = patient
 
 [description]
-Das SCI ist ein wissenschaftliches Fragebogen-Instrument zur zuverlässigen Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping). Alle Skalen erreichen überzeugende psychometrische Kennwerte. Eine detaillierte Faktorenanalyse konnte zudem die Annahme von fünf unterschiedlichen Coping-Strategien bestätigen. Weitere Untersuchungen lieferten überzeugende Belege für die Aussagekraft der Skalen. So zeigte sich, dass Personen, die unter viel Stress leiden aber trotzdem nur wenige Folgesymptome aufweisen, mehr adaptive Coping-Strategien einsetzen.
+Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
 
 [developer]
 first_name = Beat
