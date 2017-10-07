@@ -1,7 +1,7 @@
 [module]
 id = ch.suedhang.apps.tmt_V3
 name = Trail Making Test (TMT)
-short_description =
+short_description = TMT
 version = include(VERSION)
 type = patient
 
