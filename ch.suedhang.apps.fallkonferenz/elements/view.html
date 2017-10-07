@@ -185,8 +185,16 @@
                     _pdf_content.push(this._suedhang_logo_anschrift());
                     _pdf_content.push(this._spacer(20));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
+
+                    var stay_text = "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "»."
+                    _pdf_content.push(this._text(stay_text));
+
+                    _pdf_content.push(this._spacer(30));
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._stamp(this._current_patient.extras.full_name));
+                    chart.push(this._horizontalLine(100, "#F5F5F5"));
                     _pdf_content.push(this._pageBreak());
+
 
                     _pdf_content.push(this._pdf_full_actinfo);
 
