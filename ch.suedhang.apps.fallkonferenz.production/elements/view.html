@@ -184,39 +184,25 @@
                 if (build_full) {
                     _pdf_content.push(this._spacer(120));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
+
+                    _pdf_content.push(this._pageBreak());
+
                     _pdf_content.push(this._pdf_app_info);
 
-                    _pdf_content.push(this._pageBreak());
-
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_actinfo);
 
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_tmt);
 
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
-                    _pdf_content.push(this._pdf_full_asrs);
-
-                    _pdf_content.push(this._pageBreak());
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_aase);
 
-                    _pdf_content.push(this._pageBreak());
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_bscl);
 
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_bdi);
 
-                    _pdf_content.push(this._pageBreak());
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_isk);
 
-                    _pdf_content.push(this._pageBreak());
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_sci);
 
-                    _pdf_content.push(this._horizontalLine(100, "#E0E0E0"));
                     _pdf_content.push(this._pdf_full_whoqol);
 
                 } else {
@@ -395,7 +381,6 @@
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
         },
-
 
 
 

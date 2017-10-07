@@ -372,8 +372,12 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-                    _pdf_content.push(this._pdf_app_info);
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+                    
 
                     var problemsubstanzen = "";
                     var zusatzangaben = "";
@@ -413,8 +417,11 @@
 
                 } else {
                     // No Data
-                    _pdf_content.push(this._heading(d.name, d.title, 'h1'));
-                    _pdf_content.push(this._pdf_app_info);
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._horizontalLine(100, "#E0E0E0"));
+                    titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
                     
                     _pdf_content.push(this._noData(d.name, 24));
                 };
