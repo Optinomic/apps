@@ -183,10 +183,10 @@
 
                 if (build_full) {
                     _pdf_content.push(this._suedhang_logo_anschrift());
-                    _pdf_content.push(this._spacer(30));
+                    _pdf_content.push(this._spacer(12));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
 
-                    var stay_text = "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "»."
+                    var stay_text = "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "»."
                     _pdf_content.push({"text": stay_text, "style": "p"});
 
                     _pdf_content.push(this._spacer(90));
