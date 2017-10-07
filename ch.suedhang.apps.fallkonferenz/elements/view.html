@@ -182,9 +182,10 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._spacer(120));
+                    _pdf_content.push(this._suedhang_logo_anschrift());
+                    _pdf_content.push(this._spacer(20));
                     _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
-
+                    _pdf_content.push(this._stamp(this._current_patient.extras.full_name));
                     _pdf_content.push(this._pageBreak());
 
                     _pdf_content.push(this._pdf_full_actinfo);
@@ -383,7 +384,6 @@
         _event_pdf_app_info: function(e) {
             this.set('_pdf_app_info', e.detail);
         },
-
 
 
 

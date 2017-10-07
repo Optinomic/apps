@@ -278,6 +278,109 @@ makepdfBehavior = {
         return this._keepTogether(return_obj, sign + "_indication");
     },
 
+    _suedhang_logo_anschrift: function(space) {
+        space = space === undefined ? 60 : space;
+
+        return {
+            "id": "suedhang_logo_anschrift",
+            "alignment": "left",
+            "margin": [0, space, 0, 0],
+            "columns": [{}, {
+                "width": 220,
+                "stack": [{
+                    "width": 220,
+                    "image": _getImage(südhang)
+                }, {
+                    "margin": [0, 6, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Kompetenzzentrum für Mensch und Sucht"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " Südhang 1"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " CH - 3038 Kirchlindach"
+                }, {
+                    "margin": [0, 12, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 14  |  Telefon"
+                }, {
+                    "margin": [0, 3, 0, 0],
+                    "fontSize": 10,
+                    "color": "#69604d",
+                    "alignment": "left",
+                    "text": " +41 31 828 14 24  |  Fax"
+                }]
+            }]
+        };
+    },
+
+    _stamp: function(documentTitle, space) {
+        documentTitle = documentTitle === undefined ? "Optinomic" : documentTitle;
+        space = space === undefined ? 36 : space;
+
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var t = d.getUTCDate();
+
+        var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+
+
+        var Optionmic = {
+            "margin": [0, space, 0, space],
+            "alignment": "left",
+            "columnGap": 12,
+            "columns": [{
+                "width": 48,
+                "margin": [0, 6, 0, 0],
+                "image": _getImage(optinomic_trademark)
+            }, {
+                "width": "*",
+                "stack": [{
+                    "fontSize": 12,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 2, 0, 0],
+                    "text": "«" + documentTitle + "»"
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#616161",
+                    "margin": [0, 4, 0, 0],
+                    "alignment": "left",
+                    "text": "Datenstand: " + _date_time
+                }, {
+                    "fontSize": 10,
+                    "bold": false,
+                    "color": "#3F51B5",
+                    "alignment": "left",
+                    "margin": [0, 6, 0, 0],
+                    "text": "www.optinomic.com"
+                }, {
+                    "fontSize": 9,
+                    "bold": false,
+                    "color": "#616161",
+                    "alignment": "left",
+                    "text": "Erkenntnisgewinn für den Behandlungsalltag"
+                }]
+            }]
+        };
+
+        return Optionmic;
+    },
+
     // --------------------------------
     // Helpers
     // --------------------------------
