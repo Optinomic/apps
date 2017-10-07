@@ -548,28 +548,33 @@
                 // --------------------------
 
                 if (build_full) {
-                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
 
                     if (should_print_chart === true) {
-                        _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
-                        _pdf_content.push(this._pdf_chart);
-                        _pdf_content.push(this._horizontalLine(100, "#F5F5F5"));
+                        var chart = [];
+                        chart.push(this._horizontalLine(100, "#F5F5F5", 1));
+                        chart.push(this._pdf_chart);
+                        chart.push(this._horizontalLine(100, "#F5F5F5"));
+                        _pdf_content.push(this._keepTogether(chart, "chart_" + d.name));
                     };
+
                     _pdf_content.push(this._keepTogether(this._pdfmake_zusatzitems(), "zusatzitems"));
 
-                    var app_beschreibung = [];
-                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
-                    app_beschreibung.push(this._pdf_app_info);
-                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
-                } else {
-                    _pdf_content.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
-                    _pdf_content.push(this._noData(d.name, 24));
 
-                    var app_beschreibung = [];
-                    app_beschreibung.push(this._heading("Beschreibung", null, 'h2'));
-                    app_beschreibung.push(this._pdf_app_info);
-                    _pdf_content.push(this._keepTogether(app_beschreibung, "app_beschreibung_" + d.name));
+                } else {
+
+                    var titel_beschreibung = [];
+                    titel_beschreibung.push(this._heading(d.name + " (" + d.title + ")", d.subtitle, 'h1'));
+                    titel_beschreibung.push(this._pdf_app_info);
+                    _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
+                    
+                    _pdf_content.push(this._noData(d.name, 24));
+                    
                 };
+
 
                 // --------------------------
                 // Store
