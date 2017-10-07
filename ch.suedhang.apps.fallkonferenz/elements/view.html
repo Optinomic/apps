@@ -43,11 +43,11 @@
         }
 
         .scroll_top {
-            text-align:right;
-            cursor:n-resize;
+            text-align: right;
+            cursor: pointer;
             margin-top: 24px;
-            margin-bottom:0px !important;
-            padding-bottom:0px !important;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
         }
         </style>
         <div id="top" class="layout horizontal flex">
@@ -73,12 +73,11 @@
                 <nav id="toc" style="margin-top:-6px;margin-bottom:24px;">
                     <ol>
                         <template is="dom-repeat" items="[[_d.toc]]">
-                            <li><a on-tap="__scroll_target" style="cursor:s-resize;">[[item.name]]</a></li>
+                            <li><a on-tap="__scroll_target" style="cursor:pointer;">[[item.name]]</a></li>
                         </template>
                     </ol>
                 </nav>
             </div>
-            
             <div id="app_info" style="margin-bottom:54px;">
                 <optinomic-app-info app-id="[[_current_app.identifier]]" on-pdfready-app-info="_event_pdf_app_info"></optinomic-app-info>
             </div>
@@ -148,7 +147,6 @@
             d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
             include(_data_toc.js)
-            include(definitions/actinfo.js)
 
             d.init_done = true;
             this.set('_d', d);
@@ -183,19 +181,32 @@
 
                 if (build_full) {
                     _pdf_content.push(this._suedhang_logo_anschrift());
-                    _pdf_content.push(this._spacer(12));
-                    _pdf_content.push(this._title(d.title, d.name + ": " + d.subtitle));
 
-                    var stay_text = "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "»."
-                    _pdf_content.push({"text": stay_text, "style": "p"});
-
-                    _pdf_content.push(this._spacer(90));
-                    _pdf_content.push(this._horizontalLine(62, "#F5F5F5"));
-                    _pdf_content.push(this._stamp(this._current_patient.extras.full_name, 18));
-                    _pdf_content.push(this._horizontalLine(62, "#F5F5F5"));
+                    // ------------------------------------------
+                    // Titelseite
+                    // ------------------------------------------
+                    title_block_stack = [];
+                    title_block_stack.push(this._title(d.title, d.name + ": " + d.subtitle));
+                    title_block_stack.push({ "text": "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "».", "style": "p" });
+                    title_block_stack.push(this._spacer(90));
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    var title_block = {
+                        "id": "document_title"
+                        "alignment": "left",
+                        "margin": [0, 12, 0, 0],
+                        "columns": [{}, {
+                            "width": "480",
+                            "stack": title_block_stack
+                        }]
+                    };
+                    _pdf_content.push(title_block);
                     _pdf_content.push(this._pageBreak());
 
-
+                    // ------------------------------------------
+                    // Inhalt
+                    // ------------------------------------------
                     _pdf_content.push(this._pdf_full_actinfo);
 
                     _pdf_content.push(this._pdf_full_tmt);
