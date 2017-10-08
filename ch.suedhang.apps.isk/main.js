@@ -60,13 +60,11 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         $scope.d.ks = {};
 
         var ks_file = include_as_js_string(
-            ks_current.json)
+            ks_isk.json)
 
         ks_file = JSON.parse(ks_file);
 
         $scope.d.ks = ks_file;
-
-        console.log('DEBUG 1', $scope.d.ks);
 
 
         $scope.d.ks.text = '';
@@ -80,8 +78,6 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var datum_ks = $filter('date')($scope.d.ks.date);
         $scope.d.ks.text = $scope.d.ks.text + ' (' + datum_ks + ')'
 
-
-        console.log('DEBUG 2', $scope.d.dataMain.calculations["0"].calculation_results["0"]);
 
         $scope.d.ks.normgurppe = {};
         //$scope.d.ks.normgurppe.n = '(N=' + $scope.d.dataMain.calculations["0"].calculation_results["0"].percentile.age_perz.n + ')';
@@ -126,7 +122,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var statistics = null;
         if (data_dive !== null) {
             statistics = data_dive.statistics;
-            current_location_n = data_dive.patients.length;
+            current_location_n = statistics.selbststeuerung_z_score.length;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
         } else {
