@@ -59,12 +59,9 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks = {};
 
-        var ks_file = include_as_js_string(
-            ch_suedhang_user_apps_tmt_activated.json)
+        var ks_file = include_as_js_string(ks_tmt.json)
 
-        ks_file = JSON.parse(ks_file);
-
-        $scope.d.ks = ks_file;
+        $scope.d.ks = JSON.parse(ks_file);
 
 
 
