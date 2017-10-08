@@ -191,7 +191,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var statistics = null;
         if (data_dive !== null) {
             statistics = data_dive.statistics;
-            current_location_n = statistics.somatisierung_scale_score.length;
+            current_location_n = statistics.somatisierung_scale_score.n;
             current_location_n_text = 'N=' + current_location_n;
             current_location_full = current_location_text + ' (' + current_location_n_text + ')';
         } else {
