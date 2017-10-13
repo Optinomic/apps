@@ -75,9 +75,9 @@ d.actinfo_fagerstroem = {
     },
     "scales": [{
         "left_title": "",
-        "left_text": "Gering",
+        "left_text": "Geringe Abhängigkeit",
         "right_title": "",
-        "right_text": "Stark",
+        "right_text": "Starke Abhängigkeit",
         "score_path": "FAGERSTROEM.FAGERSTROEM_Score",
         "clinic_sample_var": null
     }],
