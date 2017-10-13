@@ -22,7 +22,9 @@ function main(responses) {
 
         // Calculate stuff
         var tmtA_z = (TMTATime - m_norm[0]) / sd_norm[0] * -1;
+        var tmtA_z_neu = tmtA_z * -1;
         var tmtB_z = (TMTBTime - m_norm[1]) / sd_norm[1] * -1;
+        var tmtB_z_neu = tmtB_z * -1;
         var tmtA_z_abbruch = (180 - m_norm[0]) / sd_norm[0] * -1;
         var tmtB_z_abbruch = (300 - m_norm[1]) / sd_norm[1] * -1;
         var quotient = TMTBTime / TMTATime;
@@ -31,8 +33,12 @@ function main(responses) {
         var return_obj = {
             "tmtA_z": tmtA_z,
             "tmtA_z_rounded": calc.roundToTwo(tmtA_z),
+            "tmtA_z_neu": tmtA_z_neu,
+            "tmtA_z_neu_rounded": calc.roundToTwo(tmtA_z_neu),
             "tmtB_z": tmtB_z,
             "tmtB_z_rounded": calc.roundToTwo(tmtB_z),
+            "tmtB_z_neu": tmtB_z_neu,
+            "tmtB_z_neu_rounded": calc.roundToTwo(tmtB_z_neu),
             "tmtA_z_zeitabbruch": tmtA_z_abbruch,
             "tmtA_z_zeitabbruch_rounded": calc.roundToTwo(tmtA_z_abbruch),
             "tmtB_z_zeitabbruch": tmtB_z_abbruch,
