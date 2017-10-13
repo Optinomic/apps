@@ -21,8 +21,10 @@ function main(responses) {
     calc.z_scores = function(TMTATime, TMTBTime, m_norm, sd_norm) {
 
         // Calculate stuff
-        var tmtA_z = (TMTATime - m_norm[0]) / sd_norm[0] * -1;
-        var tmtB_z = (TMTBTime - m_norm[1]) / sd_norm[1] * -1;
+        var tmtA_z = (TMTATime - m_norm[0]) / sd_norm[0];
+        var tmtA_z_export = (TMTATime - m_norm[0]) / sd_norm[0] * -1;
+        var tmtB_z = (TMTBTime - m_norm[1]) / sd_norm[1];
+        var tmtB_z_export = (TMTBTime - m_norm[1]) / sd_norm[1] * -1;
         var tmtA_z_abbruch = (180 - m_norm[0]) / sd_norm[0] * -1;
         var tmtB_z_abbruch = (300 - m_norm[1]) / sd_norm[1] * -1;
         var quotient = TMTBTime / TMTATime;
@@ -31,8 +33,12 @@ function main(responses) {
         var return_obj = {
             "tmtA_z": tmtA_z,
             "tmtA_z_rounded": calc.roundToTwo(tmtA_z),
+            "tmtA_z_export":tmtA_z_export,
+            "tmtA_z_export_rounded":calc.roundToTwo(tmtA_z_export),
             "tmtB_z": tmtB_z,
             "tmtB_z_rounded": calc.roundToTwo(tmtB_z),
+            "tmtB_z_export": tmtB_z_export,
+            "tmtB_z_export_rounded":calc.roundToTwo(tmtB_z_export),
             "tmtA_z_zeitabbruch": tmtA_z_abbruch,
             "tmtA_z_zeitabbruch_rounded": calc.roundToTwo(tmtA_z_abbruch),
             "tmtB_z_zeitabbruch": tmtB_z_abbruch,
