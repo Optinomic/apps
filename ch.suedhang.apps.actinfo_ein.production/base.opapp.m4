@@ -2,13 +2,11 @@
 id = ch.suedhang.apps.actinfo_ein.production
 name = ActInfo | Eintritt
 parent = ch.suedhang.apps.actinfo_ein
-short_description = act-info: Sonderversion für den stationären Alkohol- und Medikamentenbereich.
+short_description = Sonderversion für den stationären Alkohol- und Medikamentenbereich.
 version = include(VERSION)
 type = patient
 
 [description]
-act-info (addiction, care and therapy information) ist ein einheitliches, gesamtschweizerisches Klientenmonitoringsystem für den Bereich der Suchthilfe.
-
 
 [developer]
 first_name = Nora
