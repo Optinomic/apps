@@ -161,26 +161,26 @@ function main(responses) {
             if (anser_motivation_rauchstopp === 2) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
-                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angegeben: "
                 austritt_text = austritt_text + motivation_rauchstopp + ".";
 
             };
             if (anser_motivation_rauchstopp === 3) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
-                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angegeben: "
                 austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 4) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
-                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angegeben: "
                 austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 5) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angegeben: "
                 austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 999) {
