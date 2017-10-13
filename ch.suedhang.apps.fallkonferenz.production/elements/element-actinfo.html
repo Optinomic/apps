@@ -71,7 +71,7 @@
                             <p class="caption">&nbsp;</p>
                         </template>
                         <h2>AUDIT (Alcohol Use Disorders Identification)</h2>
-                        <p>[[_sr_actinfo_merged.audit_text]]</p>
+
                         <template is="dom-if" if="[[_sr_actinfo_merged.show_audit]]" restamp="true">
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
@@ -396,7 +396,7 @@
 
                     var audit = [];
                     audit.push(this._heading("AUDIT (Alcohol Use Disorders Identification)", null, 'h3'));
-                    audit.push(this._text(this._sr_actinfo_merged.audit_text));
+
                     if (jobs_done._pdf_chart_alkohol) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
                         audit.push(this._pdf_chart_alkohol);

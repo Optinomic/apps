@@ -97,34 +97,34 @@ function main(responses) {
         var scale_ranges_men = [{
             "from": 0,
             "to": 7,
-            "result": "Risikoarmer Alkoholkonsum",
+            "result": "ein risikoarmer Alkoholkonsum",
             "result_color": "#4CAF50"
         }, {
             "from": 8,
             "to": 15,
-            "result": "Verdacht auf eine alkoholbezogene Störung",
+            "result": "ein Verdacht auf eine alkoholbezogene Störung",
             "result_color": "#FF9800"
         }, {
             "from": 16,
             "to": 40,
-            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+            "result": "eine hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
             "result_color": "#F44336"
         }];
 
         var scale_ranges_woman = [{
             "from": 0,
             "to": 4,
-            "result": "Risikoarmer Alkoholkonsum",
+            "result": "ein risikoarmer Alkoholkonsum",
             "result_color": "#4CAF50"
         }, {
             "from": 5,
             "to": 14,
-            "result": "Verdacht auf eine alkoholbezogene Störung",
+            "result": "ein Verdacht auf eine alkoholbezogene Störung",
             "result_color": "#FF9800"
         }, {
             "from": 15,
             "to": 40,
-            "result": "Hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
+            "result": "eine hohe Wahrscheinlichkeit einer Alkoholabhängigkeit",
             "result_color": "#F44336"
         }];
 
@@ -228,25 +228,25 @@ function main(responses) {
         var scale_ranges_fagerstoem = [{
             "from": 0,
             "to": 2,
-            "result": "Gering ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "gering ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
-            "result": "Mittelstark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "mittelstark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
-            "result": "Stark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "stark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
-            "result": "Sehr stark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "sehr stark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 55
         }];
@@ -565,7 +565,7 @@ function main(responses) {
             var audit = calc.AUDIT_Score(response, patient.gender);
             var audit_text = audit.interpretation.result;
             var audit_score = audit.AUDIT_Score;
-            audit_text = "Bei Eintritt bestand eine «" + audit_text + "» (∑=" + audit_score + ")."
+            audit_text = "Bei Eintritt bestand " + audit_text + " (∑=" + audit_score + ")."
 
             obj_to_push = {
                 "audit": audit_text,
@@ -591,7 +591,7 @@ function main(responses) {
             var FAGERSTROEM = calc.FAGERSTROEM_Score(response, patient);
             var fagerstroem_text = FAGERSTROEM.interpretation.result;
             var fagerstroem_score = FAGERSTROEM.FAGERSTROEM_Score;
-            fagerstroem_text = "Bei Eintritt bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+            fagerstroem_text = "Bei Eintritt bestand eine " + fagerstroem_text + " (∑=" + fagerstroem_score + ")."
 
             answer_option = 2;
             my_result = problemsubstanzen_label.answer_options[answer_option];
@@ -1131,6 +1131,7 @@ function main(responses) {
 
         return zusatz;
     };
+
 
 
     // ------------------------------------------

@@ -85,25 +85,25 @@ function main(responses) {
         var scale_ranges_fagerstoem = [{
             "from": 0,
             "to": 2,
-            "result": "Gering ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "gering ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#4CAF50",
             "logo_speed": 10
         }, {
             "from": 3,
             "to": 4,
-            "result": "Mittelstark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "mittelstark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#FF9800",
             "logo_speed": 25
         }, {
             "from": 5,
             "to": 6,
-            "result": "Stark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "stark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 50
         }, {
             "from": 7,
             "to": 10,
-            "result": "Sehr stark ausgeprägte körperliche Nikotinabhängigkeit.",
+            "result": "sehr stark ausgeprägte körperliche Nikotinabhängigkeit.",
             "result_color": "#F44336",
             "logo_speed": 55
         }];
@@ -156,37 +156,37 @@ function main(responses) {
             if (anser_motivation_rauchstopp === 1) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Kein Nikotinkonsum im Behandlungszeitraum";
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                austritt_text = motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 2) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Aktuell keine Motivation zum Rauchstop vorhanden";
-                austritt_text = austritt_text + "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = austritt_text + motivation_rauchstopp + ".";
 
             };
             if (anser_motivation_rauchstopp === 3) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Motivation zum Rauchstop vorhanden, Planung weiterer Schritte ist sinnvoll";
-                austritt_text = austritt_text + "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 4) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Erste Schritte zum Rauchstop unternommen, Planung weiterer Schritte ist sinnvoll";
-                austritt_text = austritt_text + "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 5) {
                 motivation_rauchstopp_angabe = true;
                 motivation_rauchstopp = "Erfolgreicher Rauchstop im Behandlungszeitraum";
-                austritt_text = austritt_text + "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
-                austritt_text = austritt_text + "«" + motivation_rauchstopp + "».";
+                austritt_text = "Bei Austritt wurde folgende Abstinenzmotivation angebeben: "
+                austritt_text = austritt_text + motivation_rauchstopp + ".";
             };
             if (anser_motivation_rauchstopp === 999) {
                 motivation_rauchstopp_angabe = false;
                 motivation_rauchstopp = "Keine Angabe zur Abstinenzmotivation vorhanden.";
-                austritt_text = austritt_text + "Keine Angabe zur Abstinenzmotivation vorhanden.";
+                austritt_text = "Keine Angabe zur Abstinenzmotivation vorhanden.";
             };
         };
 
@@ -212,7 +212,7 @@ function main(responses) {
                 var fagerstroem_score = score;
                 smoker = true;
 
-                fagerstroem_text = "Bei Austritt bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                fagerstroem_text = "Bei Austritt bestand eine " + fagerstroem_text + " (∑=" + fagerstroem_score + ")."
 
                 if ((score === 999) || (score === null)) {
                     fagerstroem_text = "Das Rauchverhalten ist bei Austritt nicht bekannt.";
