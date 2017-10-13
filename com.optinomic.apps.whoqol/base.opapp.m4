@@ -1,12 +1,11 @@
 [module]
 id = com.optinomic.apps.whoqol
 name = WHOQOL - Phys. / Psych.
-short_description = The World Health Organization Quality of Life (WHOQOL)
+short_description = Beurteilung der Physischen und Psychischen Lebensqualität.
 version = include(VERSION)
 type = patient
 
 [description]
-Beurteilung der Physischen und Psychischen Lebensqualität.
 
 [developer]
 first_name = Beat

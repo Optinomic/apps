@@ -7,7 +7,6 @@ version = include(VERSION)
 type = patient
 
 [description]
-Der Summenwert aus den 21 Fragebereichen des Beck-Depressions-Inventar liefert einen Hinweis auf den Schweregrad einer möglichen depressiven Symptomatik.
 
 [developer]
 first_name = Nora

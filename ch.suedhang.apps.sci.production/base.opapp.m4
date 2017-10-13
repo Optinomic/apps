@@ -2,13 +2,11 @@
 id = ch.suedhang.apps.sci.production
 name = Stress-Coping-Inventar (SCI)
 parent = ch.suedhang.apps.sci
-short_description = Stress-Coping-Inventar
+short_description = Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
 version = include(VERSION)
 type = patient
 
 [description]
-Messung von Stressbelastung, Stresssymptomen und Stressbewältigungs-Strategien (Coping)
-
 
 [developer]
 first_name = Nora

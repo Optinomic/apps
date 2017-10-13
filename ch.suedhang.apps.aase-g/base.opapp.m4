@@ -1,12 +1,11 @@
 [module]
 id = ch.suedhang.apps.aase-g
 name = AASE-G
-short_description = Versuchung
+short_description = Versuchung in spezifischen Situationen
 version = include(VERSION)
 type = patient
 
 [description]
-Einschätzung von 20 Situationen auf ihre Versuchung, die Hauptproblemsubstanz zu konsumieren. Die Skala wurde ursprünglich für Alkoholabhängige konzipiert.
 
 [developer]
 first_name = Beat

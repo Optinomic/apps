@@ -1,14 +1,12 @@
 [module]
 id = ch.suedhang.apps.tmt.production
 name = Trail Making Test (TMT)
-short_description = TMT
+short_description = Die psychomotorische Geschwindigkeit (TMT A) und kognitive Flexibilität (TMT B) werden erfasst.
 parent = ch.suedhang.apps.tmt_V3
 version = include(VERSION)
 type = patient
 
 [description]
-Die psychomotorische Geschwindigkeit (TMT A) und kognitive Flexibilität (TMT B) werden erfasst.
-
 
 [developer]
 first_name = Nora

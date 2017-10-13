@@ -1,12 +1,11 @@
 [module]
 id = ch.suedhang.apps.isk
 name = ISK-K
-short_description = Inventar Sozialer Kompetenzen
+short_description = Persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.
 version = include(VERSION)
 type = patient
 
 [description]
-Persönliche Verhaltensweisen und Gewohnheiten zu den vier Bereichen: Soziale Orientierung, Offensivität, Selbststeuerung und Reflexibilität.
 
 [developer]
 first_name = Beat

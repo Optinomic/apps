@@ -7,7 +7,6 @@ version = include(VERSION)
 type = patient
 
 [description]
-Die „Brief Symptom Checklist“ (BSCL) ist die Kurzform der SCL-90.
 
 [developer]
 first_name = Nora

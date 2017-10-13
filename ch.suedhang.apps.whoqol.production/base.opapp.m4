@@ -1,15 +1,12 @@
 [module]
 id = ch.suedhang.apps.whoqol.production
 name = WHOQOL-BREF
-short_description = The World Health Organization Quality of Life (WHOQOL)
+short_description = Beurteilung der Physischen und Psychischen Lebensqualität.
 parent = com.optinomic.apps.whoqol
 version = include(VERSION)
 type = patient
 
 [description]
-Beurteilung der Physischen und Psychischen Lebensqualität.
-
-
 
 [developer]
 first_name = Nora
