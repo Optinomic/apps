@@ -79,12 +79,12 @@
                         </template>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-                            <p>[[_sr_actinfo_merged.motivation_text]]</p>
                             <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]" restamp="true">
                                 <div class="chart">
                                     <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
                                 </div>
                             </template>
+                            <p>[[_sr_actinfo_merged.motivation_text]]</p>
                         </template>
                     </div>
                 </template>
