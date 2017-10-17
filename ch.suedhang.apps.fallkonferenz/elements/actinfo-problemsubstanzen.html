@@ -21,7 +21,7 @@
                     <template is="dom-repeat" items="[[item.calculation.actinfo_ein.problemsubstanzen.substanzen]]" as="ps">
                         <li>
                             <p>
-                                <b>[[ps.substanz]]: </b>&nbsp;[[ps.label]]
+                                <b>[[ps.substanz]]: </b>[[ps.label]]
                                 <template is="dom-if" if="[[ps.audit]]">
                                     <span> AUDIT: [[ps.audit]]</span>
                                 </template>
