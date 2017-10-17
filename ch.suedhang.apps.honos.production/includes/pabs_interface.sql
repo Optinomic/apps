@@ -17,10 +17,18 @@ SELECT
 
   'PH' as Rekordart,
   71286515 as betriebsnummer_bur,
-  ((cast(response AS json))->>'q401V04') as zeitpunkt_honos,
+
+
+  CASE WHEN ((cast(response AS json))->>'q401V04')~E'^\\d+$' THEN ((cast(response AS json))->>'q401V04')::integer ELSE 3 END as zeitpunkt_honos,
   ((cast(response AS json))->>'q401V05') as dropoutcode_honos,
   ((cast(response AS json))->>'q401V06') as spezifikation_dropout_honos_andere,
-  TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD') as datum_erhebung_honos,
+  
+  CASE (CASE WHEN ((cast(response AS json))->>'q401V04')~E'^\\d+$' THEN ((cast(response AS json))->>'q401V04')::integer ELSE 3 END) 
+  WHEN 1 THEN to_char(stay.start, 'YYYYMMDD') 
+  WHEN 2 THEN to_char(stay.stop, 'YYYYMMDD')  
+  ELSE TO_CHAR(TO_DATE(((cast(response AS json))->>'q402V00'), 'YYYY-MM-DD'), 'YYYYMMDD') 
+  END as datum_erhebung_honos,
+
   ((cast(response AS json))->>'H1[402V01]') as honos_h1,
   ((cast(response AS json))->>'H1[402V02]') as honos_h2,
   ((cast(response AS json))->>'H1[402V03]') as honos_h3,
