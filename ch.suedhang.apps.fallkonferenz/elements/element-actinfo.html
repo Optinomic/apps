@@ -79,7 +79,7 @@
                         </template>
                         <template is="dom-if" if="[[_sr_actinfo_merged.merged]]">
                             <h2>Nikotinabhängigkeit (Fagerström)</h2>
-                            <p>[[_sr_actinfo_merged.motivation_text]]</p>
+                            <p>[[_sr_actinfo_merged.fagerstroem_text]]</p>
                             <template is="dom-if" if="[[_sr_actinfo_merged.show_fagerstoem]]" restamp="true">
                                 <div class="chart">
                                     <optinomic-chart-profile language="de" options="[[_d.actinfo_fagerstroem.options]]" scales="[[_d.actinfo_fagerstroem.scales]]" ranges="[[_d.actinfo_fagerstroem.ranges]]" scores="[[_sr_actinfo_merged]]"> </optinomic-chart-profile>
@@ -316,6 +316,7 @@
                             "show_audit": show_audit,
                             "audit_text": audit_text,
                             "show_fagerstoem": show_fagerstoem,
+                            "fagerstroem_text": fagerstroem_text,                            
                             "motivation_text": motivation_text,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
@@ -409,7 +410,7 @@
 
                     var fagerstroem = [];
                     fagerstroem.push(this._heading("Nikotinabhängigkeit (Fagerström)", null, 'h3'));
-                    fagerstroem.push(this._text(this._sr_actinfo_merged.motivation_text));
+                    fagerstroem.push(this._text(this._sr_actinfo_merged.fagerstroem_text));
                     if (jobs_done._pdf_chart_nikotin) {
                         fagerstroem.push(this._horizontalLine(100, "#F5F5F5"));
                         fagerstroem.push(this._pdf_chart_nikotin);
