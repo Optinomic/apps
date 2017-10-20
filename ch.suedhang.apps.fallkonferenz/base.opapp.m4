@@ -6,7 +6,7 @@ version = 1.0
 type = patient
 
 [description]
-Eine schnelle Übersicht über die wichtigsten Ergebnisse, bestehend aus Suchtmittelkonsum (actInfo); Visuelles Scannen, psychomotorische Geschwindigkeit und Leistung der exekutiven Funktionen (TMT); ADHS-Screening (ASRS); Suchtdruck (AASE-G); Symptomcheckliste (BSCL); Depressions-Inventar (BDI), Inventar Sozialer Kompetenzen (ISK), Stress-Coping-Inventar (SCI) und der Lebensqualität (WHQOL).
+Übersicht der wichtigsten Ergebnisse zu Suchtmittelkonsum (actInfo); Visuellem Scannen, psychomotorischer Geschwindigkeit und Leistung der exekutiven Funktionen (TMT); ADHS-Screening (ASRS); Suchtdruck (AASE-G); Symptomcheckliste (BSCL); Depressions-Inventar (BDI), Inventar Sozialer Kompetenzen (ISK), Stress-Coping-Inventar (SCI) und der Lebensqualität (WHQOL).
 
 Hinweis: Wenn Sie sich nicht im "client.new" befinden, öffnen Sie diese App über das Icon [öffnen] oder [frame].   
 
