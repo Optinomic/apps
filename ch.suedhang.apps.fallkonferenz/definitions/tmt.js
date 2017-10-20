@@ -19,6 +19,7 @@ d.tmt = {
         "allow_toggle_settings_block": true,
         "topnumber_hide_first_last": false,
         "vertical_grid_every_x": 1,
+        "norm_sample": "Z-Normierung anhand von Gesunden",
         "response_title_path": "calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text",
         "response_date_path": "date"
     },

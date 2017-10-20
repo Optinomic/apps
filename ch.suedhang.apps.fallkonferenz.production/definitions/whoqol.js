@@ -19,6 +19,7 @@ d.whoqol = {
         "topnumber_hide_first_last": false,
         "range_alpha": 0.09,
         "vertical_grid_every_x": 1,
+        "norm_sample": "Z-Normierung anhand von Gesunden",
         "response_title_path": "calculation.phys_psych_calculation.info.mz.mz_typ",
         "response_date_path": "date"
     },
