@@ -202,7 +202,7 @@ function main(responses) {
                     nichtraucher = "Nichtraucher";
                 };
 
-                var fagerstroem_text = "Am " + mz_datum + " gab " + patient_name + " gab an, «" + nichtraucher + "» zu sein.";
+                var fagerstroem_text = "Am " + mz_datum + " gab " + patient_name + " an, " + nichtraucher + " zu sein.";
 
 
                 break;

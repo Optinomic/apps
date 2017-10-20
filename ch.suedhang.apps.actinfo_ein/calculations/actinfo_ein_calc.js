@@ -303,7 +303,7 @@ function main(responses) {
                     nichtraucher = "Nichtraucher";
                 };
 
-                var fagerstroem_text = "Am " + mz_datum + " gab " + patient_name + " gab an, «" + nichtraucher + "» zu sein.";
+                var fagerstroem_text = "Am " + mz_datum + " gab " + patient_name + " an, " + nichtraucher + " zu sein.";
 
 
                 break;
@@ -313,7 +313,7 @@ function main(responses) {
                 var fagerstroem_score = score;
                 smoker = true;
 
-                fagerstroem_text = "Bei Eintritt bestand eine «" + fagerstroem_text + "» (∑=" + fagerstroem_score + ")."
+                fagerstroem_text = "Bei Eintritt bestand eine " + fagerstroem_text + " (∑=" + fagerstroem_score + ")."
 
                 if (score === 999) {
                     fagerstroem_text = "Das Rauchverhalten ist bei Eintritt nicht bekannt.";
