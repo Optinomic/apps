@@ -143,7 +143,7 @@
             var d = {};
 
             d.name = "Fallkonferenz";
-            d.title = "Assessment";
+            d.title = "Fragebogenauswertung";
             d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
             include(_data_toc.js)
@@ -186,7 +186,7 @@
                     // Titelseite
                     // ------------------------------------------
                     title_block_stack = [];
-                    title_block_stack.push(this._title(d.title, d.name + ": " + d.subtitle));
+                    title_block_stack.push(this._title(d.title, d.subtitle));
                     title_block_stack.push({ "text": "Wir berichten über den Aufenthalt von " + this._current_patient.extras.anrede + " vom «" + this._current_stay.extras.from_to + "».", "style": "p" });
                     title_block_stack.push(this._spacer(96));
                     title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
