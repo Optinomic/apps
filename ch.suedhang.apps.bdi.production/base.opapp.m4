@@ -22,11 +22,6 @@ include(readme.md)
 
 [dependencies]
 
-[template BDI_neu 6 35]
-include(../lib/polymer/index.m4)
-include(../ch.suedhang.apps.bdi/elements/element-bdi.html)
-include(elements/view.html)
-
 
 [survey]
 id = bdi2
