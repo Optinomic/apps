@@ -360,6 +360,16 @@
                             console.log('(Response | Ready) ' + this._d.name + ': ', latest_sr, this._d);
 
 
+                            // Normstichprobe mit Angabe (N=) ergänzen.
+                            var d = this.get('_d');
+                            d.tmt.options.norm_sample = d.tmt.options.norm_sample + " (N = " + latest_sr.calculation.tmt_score.percentile.age_perz.n + ")";
+                            // Clone options for pdf - nothing is overwritten
+                            d.tmt.options_pdf = JSON.parse(JSON.stringify(d.tmt.options));
+                            d.tmt.options_pdf.item_height = d.tmt.options_pdf.item_height - 12;
+                            console.log('(INIT enhanced) ' + d.name, d);
+                            this.set('_d', d);
+
+
                         } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
