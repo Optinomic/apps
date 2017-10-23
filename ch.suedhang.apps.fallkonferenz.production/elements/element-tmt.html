@@ -362,7 +362,7 @@
 
                             // Normstichprobe mit Angabe (N=) ergänzen.
                             var d = this.get('_d');
-                            d.tmt.options.norm_sample = d.tmt.options.norm_sample + " (N = " + latest_sr.calculation.tmt_score.percentile.age_perz.n + ")";
+                            d.tmt.options.norm_sample = d.tmt.options.norm_sample + " (N=" + latest_sr.calculation.tmt_score.percentile.age_perz.n + ")";
                             // Clone options for pdf - nothing is overwritten
                             d.tmt.options_pdf = JSON.parse(JSON.stringify(d.tmt.options));
                             d.tmt.options_pdf.item_height = d.tmt.options_pdf.item_height - 12;
