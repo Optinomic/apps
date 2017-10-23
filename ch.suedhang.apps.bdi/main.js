@@ -37,7 +37,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
                 // Run Specific Functions only when needed.
-                if (current_template === 'simple_score') {
+                if (current_template === 'BDI_simple_score') {
                     $scope.enhance_sr();
                     $scope.bdi_init();
                 };
