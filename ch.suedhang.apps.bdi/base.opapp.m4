@@ -22,10 +22,6 @@ website = http://suedhang.ch/de/
 [template BDI_simple_score 6 6]
 include(templates/score.html)
 
-[template BDI_simple_score_neu 6 12]
-include(../lib/polymer/index.m4)
-include(elements/element-bdi.html)
-include(elements/view.html)
 
 
 [readme]
