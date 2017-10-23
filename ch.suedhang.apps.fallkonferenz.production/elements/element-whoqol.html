@@ -229,6 +229,16 @@
                             console.log('(WHOQOL-BREF) Klinikstichprobe', clinic_sample_dive);
 
 
+                            // Normstichprobe mit Angabe (N=) ergänzen.
+                            var d = this.get('_d');
+                            d.whoqol.options.norm_sample = d.whoqol.options.norm_sample + " (N = " + latest_sr.calculation.phys_psych_calculation.info.age_norm.n + ")";
+                            // Clone options for pdf - nothing is overwritten
+                            d.whoqol.options_pdf = JSON.parse(JSON.stringify(d.whoqol.options));
+                            d.whoqol.options_pdf.item_height = d.whoqol.options_pdf.item_height - 24;
+                            console.log('(INIT enhanced) ' + d.name, d);
+                            this.set('_d', d);
+
+
                         } else {
                             // Build PDF even with no Data.
                             this._buildPDF();
