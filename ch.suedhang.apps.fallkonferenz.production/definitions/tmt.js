@@ -1,7 +1,7 @@
 d.tmt = {
     "options": {
         "min": -6,
-        "max": 5,
+        "max": 6,
         "item_height": 58,
         "item_text_left": 100,
         "item_text_right": 100,
@@ -24,44 +24,40 @@ d.tmt = {
         "response_date_path": "date"
     },
     "start": {
-        "left_title": "langsam",
-        "left_text": "Verlangsamung gegenüber Norm",
-        "left_color": "#F44336",
-        "right_title": "schnell",
-        "right_text": "Schneller im Vergleich zur Norm",
-        "right_color": "#4CAF50"
+        "left_title": "schnell",
+        "left_text": "Schneller im Vergleich zur Norm",
+        "left_color": "#4CAF50",
+        "right_title": "langsam",
+        "right_text": "Verlangsamung gegenüber Norm",
+        "right_color": "#F44336"
     },
     "scales": [{
         "left_title": "TMT A",
-        "left_text": "langsam",
+        "left_text": "schnell",
         "right_title": "TMT A",
-        "right_text": "schnell",
-        "m_norm": "?",
-        "sd_norm": "?",
+        "right_text": "langsam",
         "score_path": "calculation.tmt_score.percentile.z_scores.tmtA_z_rounded",
         "clinic_sample_var": "TMTAZ",
         "items": 1
     }, {
         "id": 1,
         "left_title": "TMT B",
-        "left_text": "langsam",
+        "left_text": "schnell",
         "right_title": "TMT B",
-        "right_text": "schnell",
-        "m_norm": "?",
-        "sd_norm": "?",
+        "right_text": "langsam",
         "score_path": "calculation.tmt_score.percentile.z_scores.tmtB_z_rounded",
         "clinic_sample_var": "TMTBZ",
         "items": 5
     }],
     "ranges": [{
         "range_start": -999,
-        "range_stop": -1,
-        "text": "Verlangsamung gegenüber Norm",
-        "color": "#C62828"
-    }, {
-        "range_start": 2,
-        "range_stop": 999,
+        "range_stop": -2,
         "text": "Normale Geschwindigkeit",
         "color": "#2E7D32"
+    }, {
+        "range_start": 1,
+        "range_stop": 999,
+        "text": "Verlangsamung gegenüber Norm",
+        "color": "#C62828"
     }]
 };
