@@ -71,7 +71,7 @@
                             <p class="caption">&nbsp;</p>
                         </template>
                         <h2>AUDIT (Alcohol Use Disorders Identification)</h2>
-
+                        <p>[[_sr_actinfo_merged.audit_text]]</p>
                         <template is="dom-if" if="[[_sr_actinfo_merged.show_audit]]" restamp="true">
                             <div class="chart">
                                 <optinomic-chart-profile language="de" options="[[_d.actinfo_audit.options]]" scales="[[_d.actinfo_audit.scales]]" ranges="[[_d.actinfo_audit.ranges]]" scores="[[_sr_actinfo_ein]]"></optinomic-chart-profile>
@@ -180,6 +180,20 @@
                 observer: '_buildPDF'
             }
         },
+
+
+        // -----------------------------
+        // Computed Functions
+        // -----------------------------
+
+        _is_last: function(id, length) {
+            if (parseInt(id) === parseInt(length-1)) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
 
 
         // -----------------------------
@@ -316,7 +330,7 @@
                             "show_audit": show_audit,
                             "audit_text": audit_text,
                             "show_fagerstoem": show_fagerstoem,
-                            "fagerstroem_text": fagerstroem_text,                            
+                            "fagerstroem_text": fagerstroem_text,
                             "motivation_text": motivation_text,
                             "data": _sr_actinfo,
                             "app_id": "actinfo - Ein & Austritt"
