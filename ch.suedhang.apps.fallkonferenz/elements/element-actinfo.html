@@ -413,7 +413,7 @@
 
                     var audit = [];
                     audit.push(this._heading("AUDIT (Alcohol Use Disorders Identification)", null, 'h3'));
-
+                    audit.push(this._text(this._sr_actinfo_merged.audit_text));
                     if (jobs_done._pdf_chart_alkohol) {
                         audit.push(this._horizontalLine(100, "#F5F5F5"));
                         audit.push(this._pdf_chart_alkohol);
