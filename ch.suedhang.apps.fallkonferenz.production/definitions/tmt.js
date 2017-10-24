@@ -36,7 +36,7 @@ d.tmt = {
         "left_text": "schnell",
         "right_title": "TMT A",
         "right_text": "langsam",
-        "score_path": "calculation.tmt_score.percentile.z_scores.tmtA_z_rounded",
+        "score_path": "calculation.tmt_score.percentile.z_scores.tmtA_z_neu_rounded",
         "clinic_sample_var": "TMTAZ",
         "items": 1
     }, {
@@ -45,7 +45,7 @@ d.tmt = {
         "left_text": "schnell",
         "right_title": "TMT B",
         "right_text": "langsam",
-        "score_path": "calculation.tmt_score.percentile.z_scores.tmtB_z_rounded",
+        "score_path": "calculation.tmt_score.percentile.z_scores.tmtB_z_neu_rounded",
         "clinic_sample_var": "TMTBZ",
         "items": 5
     }],
