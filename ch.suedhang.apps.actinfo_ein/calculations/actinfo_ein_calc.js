@@ -1187,14 +1187,14 @@ function main(responses) {
             ps_text.text.push(line.text[0]);
             ps_text.text.push(line.text[1]);
 
-            if ("audit" in s) {
-                line.text.push({ "text": " " + s.audit, "bold": false });
-                ps_text.text.push({ "text": " " + s.audit, "bold": false });
-            };
-            if ("fagerstroem" in s) {
-                line.text.push({ "text": " " + s.fagerstroem, "bold": false });
-                ps_text.text.push({ "text": " " + s.fagerstroem, "bold": false });
-            };
+            // if ("audit" in s) {
+            //     line.text.push({ "text": " " + s.audit, "bold": false });
+            //     ps_text.text.push({ "text": " " + s.audit, "bold": false });
+            // };
+            // if ("fagerstroem" in s) {
+            //     line.text.push({ "text": " " + s.fagerstroem, "bold": false });
+            //     ps_text.text.push({ "text": " " + s.fagerstroem, "bold": false });
+            // };
             ps_list.ol.push(line);
         });
 
