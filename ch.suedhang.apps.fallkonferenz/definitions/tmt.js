@@ -51,11 +51,11 @@ d.tmt = {
     }],
     "ranges": [{
         "range_start": -999,
-        "range_stop": -2,
+        "range_stop": 1,
         "text": "Normale Geschwindigkeit",
         "color": "#2E7D32"
     }, {
-        "range_start": 1,
+        "range_start": 2,
         "range_stop": 999,
         "text": "Verlangsamung gegenüber Norm",
         "color": "#C62828"
