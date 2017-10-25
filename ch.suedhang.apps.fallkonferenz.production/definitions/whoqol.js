@@ -50,16 +50,16 @@ d.whoqol = {
         "left_text": "Hoch",
         "right_title": "Körperliche Lebensqualität",
         "right_text": "Vermindert",
-        "score_path": "calculation.phys_psych_calculation.all_results.koerperliche_lebensqualitaet_z_score",
-        "clinic_sample_var": "koerperliche_lebensqualitaet_z_score_inverted"
+        "score_path": "calculation.phys_psych_calculation.all_results.koerperliche_lebensqualitaet_z_score_inverted",
+        "clinic_sample_var": "koerperliche_lebensqualitaet_z_score"
     }, {
         "id": 1,
         "left_title": "Psychische Lebensqualität",
         "left_text": "Hoch",
         "right_title": "Psychische Lebensqualität",
         "right_text": "Vermindert",
-        "score_path": "calculation.phys_psych_calculation.all_results.psychische_lebensqualitaet_z_score",
-        "clinic_sample_var": "psychische_lebensqualitaet_z_score_inverted"
+        "score_path": "calculation.phys_psych_calculation.all_results.psychische_lebensqualitaet_z_score_inverted",
+        "clinic_sample_var": "psychische_lebensqualitaet_z_score"
     }],
     "ranges_sum": [{
         "range_start": 0,
