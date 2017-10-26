@@ -24,8 +24,8 @@ include(readme.md)
 
 [template print_access 6 12]
 <head>
-	<script src='https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.test.pdf_make/pdfmake/pdfmake.min.js'></script>
-	<script src='https://cdn.rawgit.com/Optinomic/apps/master/com.optinomic.test.pdf_make/pdfmake/vfs_fonts.js'></script>
+    <script src='https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.26/lib/optinomic-pdfmake/pdfmake.min.js'></script>
+    <script src='https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.26/lib/optinomic-pdfmake/vfs_fonts.js'></script>
 </head>
 include(templates/app.html)
 
