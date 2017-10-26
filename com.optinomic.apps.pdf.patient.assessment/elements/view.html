@@ -62,7 +62,7 @@
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
                     <div style="margin-left:18px;">
-                        <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
                     </div>
                 </iron-collapse>
             </template>
@@ -103,11 +103,13 @@
             // Doc: Patienten-Assessment
             // ----------------------------
             d.doc = {
-                "name": "Einladung :: Patienten-Assessment",
+                "name": "Patienten-Assessment",
+                "title": "Einladung :: Patienten-Assessment"
                 "version": "1.0",
                 "description": "Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.",
                 "content": []
             };
+
 
             // var zugangsdaten = this.setAssessmentCredentials($scope.d.dataMain.patient);
 
