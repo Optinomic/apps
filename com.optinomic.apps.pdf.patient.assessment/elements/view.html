@@ -1,0 +1,251 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+
+        vaadin-grid {
+            height: auto;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-top: -48px;
+            margin-bottom: 48px;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+        .scroll_top {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        </style>
+        <div id="top" class="layout horizontal flex">
+            <div class="flex">
+                <optinomic-title h1="[[_d.doc.name]]" h2="[[_d.doc.description]]" h3="[[_d.doc.version]]"></optinomic-title>
+            </div>
+            <div>
+                <template is="dom-if" if="[[_pdf_ready]]">
+                    <paper-icon-button class="indigo" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                </template>
+            </div>
+        </div>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <template is="dom-if" if="[[_pdf_ready]]">
+                <iron-collapse id="collapse_print" horizontal>
+                    <div style="margin-left:18px;">
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.secure]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                    </div>
+                </iron-collapse>
+            </template>
+            <div id="main_content">
+                <p>[[_d.text_1]]</p>
+                <p>[[_d.text_2]]</p>
+                <p>[[_d.text_3]]</p>
+                <p>[[_d.text_4]]</p>
+            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        properties: {},
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp, makepdfBehavior],
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            // ----------------------------
+            // Doc: Patienten-Assessment
+            // ----------------------------
+            d.doc = {
+                "name": "Patienten-Assessment",
+                "version": "1.0",
+                "description": "Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.",
+                "content": []
+            };
+
+            // var zugangsdaten = this.setAssessmentCredentials($scope.d.dataMain.patient);
+
+            d.text_1 = "Sie finden auf unserer Fragebogen-Plattform einige Fragebögen, in denen Sie Aussagen zu verschiedenen Themen und Zeiträumen einschätzen sollen. Am Anfang jedes Fragebogens finden Sie eine kurze Anleitung. Lesen Sie diese bitte sorgfältig durch.Achten Sie dabei auf die hervorgehobenen Angaben zu den Zeiträumen, auf die sich die Fragen und Aussagen beziehen. Diese können von Fragebogen zu Fragebogen unterschiedlich sein.";
+            d.text_2 = "Alle Fragebögen enthalten Aussagen. Ihre Aufgabe ist zu bewerten, inwieweit diese Aussagen auf Sie bzw. Ihre Situation zutreffen. Antworten Sie möglichst spontan – es gibt keine richtigen oder falschen Antworten. Wichtig ist, dass die jeweilige Antwort für Sie persönlich stimmt.";
+            d.text_3 = "Wir bitten Sie, die aufgeführten Fragebögen in der bestehenden Reihenfolge lückenlos zu bearbeiten. Zum starten JEDES EINZELNEN Fragebogens klicken Sie am rechten Rand des angegebenen Fragebogens auf «START». Wenn Sie einen Fragebogen fertig bearbeitet und abgeschickt haben, schliessen sie den entsprechenden Tab und gelangen somit wieder auf die Startseite.";
+            d.text_4 = "Falls Sie Fragen nicht verstehen oder etwas unklar ist, wenden Sie sich an die anwesende Betreuungsperson.";
+
+
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
+        },
+
+        _setAssessmentCredentials: function() {
+            var assessment = {};
+            assessment.login_pid = patient.data.cis_pid + "";
+
+            // Password = YYYYMMDD
+            var pw = "Fehler";
+
+            // console.log("?", patient.data.birthdate);
+
+            if ((patient.data.birthdate !== "") && (patient.data.birthdate !== null) && (patient.data.birthdate !== undefined)) {
+                pw = patient.data.birthdate;
+                pw = pw.substring(0, 10);
+                pw = pw.replace("-", "");
+                pw = pw.replace("-", "");
+            };
+
+            assessment.login_pw = pw;
+
+            return assessment;
+        },
+
+        _buildPDF: function() {
+
+            // ------------------------------
+            // Create PDF
+            // ------------------------------
+
+            var do_build = function() {
+
+
+                this._pdf_content = null;
+                var _pdf_content = [];
+                var d = this.get('_d');
+
+
+                // --------------------------
+                // Build PDF
+                // --------------------------
+
+                if (build_full) {
+                    _pdf_content.push(this._suedhang_logo_anschrift());
+
+                    // ------------------------------------------
+                    // Titelseite
+                    // ------------------------------------------
+                    title_block_stack = [];
+                    title_block_stack.push(this._title(d.doc.name, d.doc.description));
+
+
+
+
+                    title_block_stack.push(this._spacer(96));
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    var title_block = {
+                        "id": "document_title",
+                        "alignment": "left",
+                        "margin": [0, 18, 0, 0],
+                        "columns": [{}, {
+                            "width": "480",
+                            "stack": title_block_stack
+                        }]
+                    };
+                    _pdf_content.push(title_block);
+
+                } else {
+                    _pdf_content.push(this._spacer(120));
+                    _pdf_content.push(this._title("Fehler"); _pdf_content.push(this._spacer(12)); _pdf_content.push(this._indication("!", "Uuups, hier ging etwas schief!", "#F44336"));
+                    };
+
+                    // --------------------------
+                    // Store
+                    // --------------------------
+                    this._pdf_content = _pdf_content;
+                    this.set('_pdf_ready', true);
+                    this.fire('pdfready', _pdf_content);
+
+                    console.log('(PDF | Ready) Fallkonferenz: ', this._pdf_content);
+
+                    // Open "Collapse" when ready | Only in "Master-Document".
+                    setTimeout(function() {
+                        this.__toggle_print();
+                    }.bind(this), 50);
+                }.bind(this);
+            };
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            if ((print_button !== null) && (print_button !== undefined)) {
+                print_button.toggle();
+            };
+        },
+
+        __scroll_target: function(e) {
+            var model = e.model.get('item');
+            console.log('(SCROLL)', model);
+            var target = this.$$('#' + model.anchor);
+            target.scrollIntoView();
+        },
+
+        __scroll_top: function() {
+            var top = this.$$('#top');
+            console.log('(SCROLL) top');
+            top.scrollIntoView();
+        },
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
+
+        ready: function() {
+            this._loadData();
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
