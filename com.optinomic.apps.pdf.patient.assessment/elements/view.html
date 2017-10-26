@@ -187,65 +187,67 @@
 
                 } else {
                     _pdf_content.push(this._spacer(120));
-                    _pdf_content.push(this._title("Fehler"); _pdf_content.push(this._spacer(12)); _pdf_content.push(this._indication("!", "Uuups, hier ging etwas schief!", "#F44336"));
-                    };
+                    _pdf_content.push(this._title("Fehler"));
+                    _pdf_content.push(this._spacer(12));
+                    _pdf_content.push(this._indication("!", "Uuups, hier ging etwas schief.   :-(", "#F44336"));
+                };
 
-                    // --------------------------
-                    // Store
-                    // --------------------------
-                    this._pdf_content = _pdf_content;
-                    this.set('_pdf_ready', true);
-                    this.fire('pdfready', _pdf_content);
+                // --------------------------
+                // Store
+                // --------------------------
+                this._pdf_content = _pdf_content;
+                this.set('_pdf_ready', true);
+                this.fire('pdfready', _pdf_content);
 
-                    console.log('(PDF | Ready) Fallkonferenz: ', this._pdf_content);
+                console.log('(PDF | Ready) Druckvorlage: ', this._pdf_content);
 
-                    // Open "Collapse" when ready | Only in "Master-Document".
-                    setTimeout(function() {
-                        this.__toggle_print();
-                    }.bind(this), 50);
-                }.bind(this);
-            };
-        },
-
-
-        // -----------------------------
-        // User-Click Functions
-        // -----------------------------
-
-        __toggle_print: function() {
-            var print_button = this.$$('#collapse_print');
-            if ((print_button !== null) && (print_button !== undefined)) {
-                print_button.toggle();
-            };
-        },
-
-        __scroll_target: function(e) {
-            var model = e.model.get('item');
-            console.log('(SCROLL)', model);
-            var target = this.$$('#' + model.anchor);
-            target.scrollIntoView();
-        },
-
-        __scroll_top: function() {
-            var top = this.$$('#top');
-            console.log('(SCROLL) top');
-            top.scrollIntoView();
-        },
+                // Open "Collapse" when ready | Only in "Master-Document".
+                setTimeout(function() {
+                    this.__toggle_print();
+                }.bind(this), 50);
+            }.bind(this);
+        };
+    },
 
 
-        // -----------------------------
-        // Lifecycle
-        // -----------------------------
+    // -----------------------------
+    // User-Click Functions
+    // -----------------------------
 
-        _loadData: function() {
-            this.dispatch('actionGetCurrentPatient');
-            this.dispatch('actionGetCurrentPatientStays');
-        },
+    __toggle_print: function() {
+        var print_button = this.$$('#collapse_print');
+        if ((print_button !== null) && (print_button !== undefined)) {
+            print_button.toggle();
+        };
+    },
 
-        ready: function() {
-            this._loadData();
-            this._init();
-        }
+    __scroll_target: function(e) {
+        var model = e.model.get('item');
+        console.log('(SCROLL)', model);
+        var target = this.$$('#' + model.anchor);
+        target.scrollIntoView();
+    },
+
+    __scroll_top: function() {
+        var top = this.$$('#top');
+        console.log('(SCROLL) top');
+        top.scrollIntoView();
+    },
+
+
+    // -----------------------------
+    // Lifecycle
+    // -----------------------------
+
+    _loadData: function() {
+        this.dispatch('actionGetCurrentPatient');
+        this.dispatch('actionGetCurrentPatientStays');
+    },
+
+    ready: function() {
+        this._loadData();
+        this._init();
+    }
     });
     </script>
 </dom-module>
