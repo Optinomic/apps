@@ -74,7 +74,7 @@ d.whoqol = {
     }],
     "ranges": [{
         "range_start": -999,
-        "range_stop": 2,
+        "range_stop": 1,
         "text": "Normale Lebensqualität",
         "color": "#2E7D32"
     },{
