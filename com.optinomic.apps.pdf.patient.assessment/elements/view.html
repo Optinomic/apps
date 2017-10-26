@@ -81,7 +81,15 @@
     Polymer({
         is: 'optinomic-template',
 
-        properties: {},
+        properties: {
+
+            _assessment_info: {
+                type: Object,
+                statePath: 'patient.data.assessment',
+                observer: '_buildPDF'
+            },
+
+        },
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp, makepdfBehavior],
 
@@ -118,77 +126,81 @@
             this._d = d;
             console.log('INIT _d', this._d);
 
-            setTimeout(function() {
-                this._buildPDF();
-            }.bind(this), 50);
         },
 
 
 
         _buildPDF: function() {
 
-            // ------------------------------
-            // Create PDF
-            // ------------------------------
-
-            var do_build = function() {
+            this.debounce('_buildPDF', function() {
 
 
-                this._pdf_content = null;
-                var _pdf_content = [];
-                var d = this.get('_d');
+
+                // ------------------------------
+                // Create PDF
+                // ------------------------------
+
+                var do_build = function() {
 
 
-                // --------------------------
-                // Build PDF
-                // --------------------------
+                    this._pdf_content = null;
+                    var _pdf_content = [];
+                    var d = this.get('_d');
 
-                _pdf_content.push(this._suedhang_logo_anschrift());
 
-                // ------------------------------------------
-                // Titelseite
-                // ------------------------------------------
-                title_block_stack = [];
-                title_block_stack.push(this._title(d.doc.name, d.doc.description));
+                    // --------------------------
+                    // Build PDF
+                    // --------------------------
 
-                title_block_stack.push(this._spacer(96));
-                title_block_stack.push(this._text(d.text_1));
-                title_block_stack.push(this._text(d.text_2));
-                title_block_stack.push(this._text(d.text_3));
-                title_block_stack.push(this._text(d.text_4));
+                    _pdf_content.push(this._suedhang_logo_anschrift());
 
-                title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
-                title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
-                title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
-                var title_block = {
-                    "id": "document_title",
-                    "alignment": "left",
-                    "margin": [0, 18, 0, 0],
-                    "columns": [{}, {
-                        "width": "480",
-                        "stack": title_block_stack
-                    }]
+                    // ------------------------------------------
+                    // Titelseite
+                    // ------------------------------------------
+                    title_block_stack = [];
+                    title_block_stack.push(this._title(d.doc.name, d.doc.description));
+
+                    title_block_stack.push(this._spacer(96));
+                    title_block_stack.push(this._text(d.text_1));
+                    title_block_stack.push(this._text(d.text_2));
+                    title_block_stack.push(this._text(d.text_3));
+                    title_block_stack.push(this._text(d.text_4));
+
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
+                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
+                    var title_block = {
+                        "id": "document_title",
+                        "alignment": "left",
+                        "margin": [0, 18, 0, 0],
+                        "columns": [{}, {
+                            "width": "480",
+                            "stack": title_block_stack
+                        }]
+                    };
+                    _pdf_content.push(title_block);
+
+
+                    // --------------------------
+                    // Store
+                    // --------------------------
+                    this._pdf_content = _pdf_content;
+                    this.set('_pdf_ready', true);
+                    this.fire('pdfready', _pdf_content);
+
+                    console.log('(PDF | Ready) Druckvorlage: ', this._pdf_content);
+
+                    // Open "Collapse" when ready | Only in "Master-Document".
+                    setTimeout(function() {
+                        this.__toggle_print();
+                    }.bind(this), 50);
+                }.bind(this);
+
+
+                if ((this._assessment_info !== null) && (this._assessment_info !== undefined)) {
+                    do_build();
                 };
-                _pdf_content.push(title_block);
-
-
-                // --------------------------
-                // Store
-                // --------------------------
-                this._pdf_content = _pdf_content;
-                this.set('_pdf_ready', true);
-                this.fire('pdfready', _pdf_content);
-
-                console.log('(PDF | Ready) Druckvorlage: ', this._pdf_content);
-
-                // Open "Collapse" when ready | Only in "Master-Document".
-                setTimeout(function() {
-                    this.__toggle_print();
-                }.bind(this), 50);
-            }.bind(this);
-
-
-            do_build();
+            }, 250);
         },
 
 
