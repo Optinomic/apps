@@ -61,9 +61,13 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
-                    <div style="margin-left:18px;">
-                        <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.title]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
-                    </div>
+
+                    <template is="dom-repeat" items="[[_d.docs]]">
+                        <div style="margin-left:18px;">
+                            <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[item.name]]" document-title="[[item.title]]" content="[[item.content]]" loading-string="[[item.loading_string]]" hide-logo></optinomic-pdfmake>
+                        </div>
+                    </template>
+
                 </iron-collapse>
             </template>
             <div id="main_content">
@@ -102,22 +106,27 @@
             // ----------------------------
             // Doc: Patienten-Assessment
             // ----------------------------
-            d.doc = {
+            d.docs = [{
                 "name": "Patienten-Assessment",
-                "title": "Einladung :: Patienten-Assessment"
-                "version": "1.0",
+                "title": "Einladung :: Patienten-Assessment",
+                "version": "1.1",
                 "description": "Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.",
-                "content": []
-            };
-
-
-            // var zugangsdaten = this.setAssessmentCredentials($scope.d.dataMain.patient);
-
-            d.text_1 = "Sie finden auf unserer Fragebogen-Plattform einige Fragebögen, in denen Sie Aussagen zu verschiedenen Themen und Zeiträumen einschätzen sollen. Am Anfang jedes Fragebogens finden Sie eine kurze Anleitung. Lesen Sie diese bitte sorgfältig durch.Achten Sie dabei auf die hervorgehobenen Angaben zu den Zeiträumen, auf die sich die Fragen und Aussagen beziehen. Diese können von Fragebogen zu Fragebogen unterschiedlich sein.";
-            d.text_2 = "Alle Fragebögen enthalten Aussagen. Ihre Aufgabe ist zu bewerten, inwieweit diese Aussagen auf Sie bzw. Ihre Situation zutreffen. Antworten Sie möglichst spontan – es gibt keine richtigen oder falschen Antworten. Wichtig ist, dass die jeweilige Antwort für Sie persönlich stimmt.";
-            d.text_3 = "Wir bitten Sie, die aufgeführten Fragebögen in der bestehenden Reihenfolge lückenlos zu bearbeiten. Zum starten JEDES EINZELNEN Fragebogens klicken Sie am rechten Rand des angegebenen Fragebogens auf «START». Wenn Sie einen Fragebogen fertig bearbeitet und abgeschickt haben, schliessen sie den entsprechenden Tab und gelangen somit wieder auf die Startseite.";
-            d.text_4 = "Falls Sie Fragen nicht verstehen oder etwas unklar ist, wenden Sie sich an die anwesende Betreuungsperson.";
-
+                "source": {
+                    "text_1": "Sie finden auf unserer Fragebogen-Plattform einige Fragebögen, in denen Sie Aussagen zu verschiedenen Themen und Zeiträumen einschätzen sollen. Am Anfang jedes Fragebogens finden Sie eine kurze Anleitung. Lesen Sie diese bitte sorgfältig durch.Achten Sie dabei auf die hervorgehobenen Angaben zu den Zeiträumen, auf die sich die Fragen und Aussagen beziehen. Diese können von Fragebogen zu Fragebogen unterschiedlich sein.",
+                    "text_2": "Alle Fragebögen enthalten Aussagen. Ihre Aufgabe ist zu bewerten, inwieweit diese Aussagen auf Sie bzw. Ihre Situation zutreffen. Antworten Sie möglichst spontan – es gibt keine richtigen oder falschen Antworten. Wichtig ist, dass die jeweilige Antwort für Sie persönlich stimmt.",
+                    "text_3": "Wir bitten Sie, die aufgeführten Fragebögen in der bestehenden Reihenfolge lückenlos zu bearbeiten. Zum starten JEDES EINZELNEN Fragebogens klicken Sie am rechten Rand des angegebenen Fragebogens auf «START». Wenn Sie einen Fragebogen fertig bearbeitet und abgeschickt haben, schliessen sie den entsprechenden Tab und gelangen somit wieder auf die Startseite.",
+                    "text_4": "Falls Sie Fragen nicht verstehen oder etwas unklar ist, wenden Sie sich an die anwesende Betreuungsperson."
+                },
+                "loading_string": "",
+                "content": null
+            },{
+                "name": "Notizblatt",
+                "title": "Notizblatt",
+                "version": "1.0",
+                "description": "Drucken eines leeren Verlaufsblattes.",
+                "loading_string": "",
+                "content": null
+            }];
 
 
             d.init_done = true;
@@ -186,6 +195,10 @@
                     // Store
                     // --------------------------
                     this._pdf_content = _pdf_content;
+                    this.d.docs[0].content = _pdf_content;
+                    this.d.docs[1].content = _pdf_content;
+
+
                     this.set('_pdf_ready', true);
                     this.fire('pdfready', _pdf_content);
 

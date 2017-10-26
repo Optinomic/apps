@@ -1,12 +1,12 @@
 [module]
-id = com.optinomic.apps.pdf.patient.assessment
-name = Patienten-Assessment-Einladung (PDF)
-short_description = Zugangsdaten und Kurzeinführung für das Optinomic Patienten-Assessment.
+id = com.optinomic.apps.pdf.patient.allgemein
+name = Druckvorlagen (PDF)
+short_description = Allgeime Druckvorlagen (PDF).
 version = 1.0
 type = patient
 
 [description]
-Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.  
+Eine Sammel-Applikation für allgeime Druckvorlagen (PDF). 
 
 
 [developer]
