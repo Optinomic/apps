@@ -50,7 +50,7 @@
         </style>
         <div id="top" class="layout horizontal flex">
             <div class="flex">
-                <optinomic-title h1="[[_d.doc.name]]" h2="[[_d.doc.description]]" h3="[[_d.doc.version]]"></optinomic-title>
+                <optinomic-title h1="[[_d.doc.title]]" h2="[[_d.doc.subtitle]]" h3="[[_d.doc.small]]"></optinomic-title>
             </div>
             <div>
                 <template is="dom-if" if="[[_pdf_ready]]">
@@ -101,6 +101,10 @@
 
             var d = {};
 
+            d.title = "Druckvorlagen",
+            d.subtitle = "Allgeime (Patienten-)Druckvorlagen",
+            d.small = "PDF"
+
             // ----------------------------
             // Doc: Patienten-Assessment
             // ----------------------------
@@ -149,9 +153,15 @@
                 var do_build = function() {
 
 
+                    // ------------------------------------------
+                    // Init
+                    // ------------------------------------------
                     this._pdf_content = null;
                     var _pdf_content = [];
                     var d = this.get('_d');
+
+                    var date = new Date();
+                    var iso_date = date.toISOString();
 
                     var credentials = {
                         table: {
@@ -165,19 +175,13 @@
                     };
 
 
-                    // --------------------------
-                    // Build PDF
-                    // --------------------------
-
-                    _pdf_content.push(this._suedhang_logo_anschrift());
 
                     // ------------------------------------------
                     // Einladung Assessment
                     // ------------------------------------------
-                    title_block_stack = [];
+                    _pdf_content.push(this._suedhang_logo_anschrift());
                     _pdf_content.push(this._title(d.docs[0].name, this._current_patient.extras.full_name));
 
-                    // title_block_stack.push(this._spacer(12));
                     _pdf_content.push(this._text(d.docs[0].source.text_1));
                     _pdf_content.push(this._text(d.docs[0].source.text_2));
                     _pdf_content.push(this._text(d.docs[0].source.text_3));
@@ -200,10 +204,9 @@
                     // Notizen
                     // ----------------------------------
                     var content_1 = []
-                    var d = new Date();
-                    var n = d.toISOString();
+                    
 
-                    content_1.push(this._text(this._formatDateCH(n)));
+                    content_1.push(this._text(this._formatDateCH(iso_date)));
 
                     var vertical_line = {
                         "margin": [0, 0, 0, 0],
