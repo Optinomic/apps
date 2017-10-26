@@ -206,48 +206,47 @@
                     this.__toggle_print();
                 }.bind(this), 50);
             }.bind(this);
-        };
-    },
+        },
 
 
-    // -----------------------------
-    // User-Click Functions
-    // -----------------------------
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
 
-    __toggle_print: function() {
-        var print_button = this.$$('#collapse_print');
-        if ((print_button !== null) && (print_button !== undefined)) {
-            print_button.toggle();
-        };
-    },
+        __toggle_print: function() {
+            var print_button = this.$$('#collapse_print');
+            if ((print_button !== null) && (print_button !== undefined)) {
+                print_button.toggle();
+            };
+        },
 
-    __scroll_target: function(e) {
-        var model = e.model.get('item');
-        console.log('(SCROLL)', model);
-        var target = this.$$('#' + model.anchor);
-        target.scrollIntoView();
-    },
+        __scroll_target: function(e) {
+            var model = e.model.get('item');
+            console.log('(SCROLL)', model);
+            var target = this.$$('#' + model.anchor);
+            target.scrollIntoView();
+        },
 
-    __scroll_top: function() {
-        var top = this.$$('#top');
-        console.log('(SCROLL) top');
-        top.scrollIntoView();
-    },
+        __scroll_top: function() {
+            var top = this.$$('#top');
+            console.log('(SCROLL) top');
+            top.scrollIntoView();
+        },
 
 
-    // -----------------------------
-    // Lifecycle
-    // -----------------------------
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
 
-    _loadData: function() {
-        this.dispatch('actionGetCurrentPatient');
-        this.dispatch('actionGetCurrentPatientStays');
-    },
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
 
-    ready: function() {
-        this._loadData();
-        this._init();
-    }
+        ready: function() {
+            this._loadData();
+            this._init();
+        }
     });
     </script>
 </dom-module>
