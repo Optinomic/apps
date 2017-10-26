@@ -147,6 +147,17 @@
                     var _pdf_content = [];
                     var d = this.get('_d');
 
+                    var credentials = {
+                        table: {
+                            widths: [60, "*"],
+                            body: [
+                                [{ text: "Login", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                                [{ text: "Passwort", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
+                            ]
+                        },
+                        layout: "noBorders"
+                    };
+
 
                     // --------------------------
                     // Build PDF
@@ -158,40 +169,18 @@
                     // Titelseite
                     // ------------------------------------------
                     title_block_stack = [];
-                    title_block_stack.push(this._title(d.doc.name, this._current_patient.extras.full_name));
+                    _pdf_content.push(this._title(d.doc.name, this._current_patient.extras.full_name));
 
                     // title_block_stack.push(this._spacer(12));
-                    title_block_stack.push(this._text(d.text_1));
-                    title_block_stack.push(this._text(d.text_2));
-                    title_block_stack.push(this._text(d.text_3));
-                    title_block_stack.push(this._text(d.text_4));
+                    _pdf_content.push(this._text(d.text_1));
+                    _pdf_content.push(this._text(d.text_2));
+                    _pdf_content.push(this._text(d.text_3));
+                    _pdf_content.push(this._text(d.text_4));
 
-                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
-                    title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
-                    title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
-                    var title_block = {
-                        "id": "document_title",
-                        "alignment": "left",
-                        "margin": [0, 18, 0, 0],
-                        "columns": [{}, {
-                            "width": "480",
-                            "stack": title_block_stack
-                        }]
-                    };
-                    _pdf_content.push(title_block);
-
-
-                    var credentials = {
-                        table: {
-                            widths: [60, "*"],
-                            body: [
-                                [{ text: "Login", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
-                                [{ text: "Passwort", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
-                            ]
-                        },
-                        layout: "noBorders"
-                    };
+                    _pdf_content.push(this._horizontalLine(62, "#F5F5F5"));
                     _pdf_content.push(credentials);
+                    _pdf_content.push(this._horizontalLine(62, "#F5F5F5"));
+
 
 
                     // --------------------------
