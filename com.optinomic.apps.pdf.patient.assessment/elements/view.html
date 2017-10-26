@@ -62,7 +62,7 @@
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
                     <div style="margin-left:18px;">
-                        <optinomic-pdfmake header-left="[[_current_patient.extras.secure]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
+                        <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[_d.doc.name]]" document-title="[[_d.doc.name]]" content="[[_pdf_content]]" loading-string="[[_d.loading_string]]" hide-logo></optinomic-pdfmake>
                     </div>
                 </iron-collapse>
             </template>
@@ -158,9 +158,9 @@
                     // Titelseite
                     // ------------------------------------------
                     title_block_stack = [];
-                    title_block_stack.push(this._title(d.doc.name, d.doc.description));
+                    title_block_stack.push(this._title(d.doc.name, this._current_patient.extras.full_name));
 
-                    title_block_stack.push(this._spacer(96));
+                    // title_block_stack.push(this._spacer(12));
                     title_block_stack.push(this._text(d.text_1));
                     title_block_stack.push(this._text(d.text_2));
                     title_block_stack.push(this._text(d.text_3));
@@ -179,6 +179,19 @@
                         }]
                     };
                     _pdf_content.push(title_block);
+
+
+                    var credentials = {
+                        table: {
+                            widths: [60, "*"],
+                            body: [
+                                [{ text: "Login", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pid, fontSize: 16, margin: [0, 6, 0, 6] }],
+                                [{ text: "Passwort", color: "grey", margin: [0, 6, 0, 6] }, { text: this._current_patient.assessment.login_pw, fontSize: 16, margin: [0, 6, 0, 6] }]
+                            ]
+                        },
+                        layout: "noBorders"
+                    };
+                    _pdf_content.push(credentials);
 
 
                     // --------------------------
