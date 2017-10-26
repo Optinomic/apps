@@ -117,28 +117,13 @@
             this.set('_d', d);
             this._d = d;
             console.log('INIT _d', this._d);
+
+            setTimeout(function() {
+                this._buildPDF();
+            }.bind(this), 50);
         },
 
-        _setAssessmentCredentials: function() {
-            var assessment = {};
-            assessment.login_pid = patient.data.cis_pid + "";
 
-            // Password = YYYYMMDD
-            var pw = "Fehler";
-
-            // console.log("?", patient.data.birthdate);
-
-            if ((patient.data.birthdate !== "") && (patient.data.birthdate !== null) && (patient.data.birthdate !== undefined)) {
-                pw = patient.data.birthdate;
-                pw = pw.substring(0, 10);
-                pw = pw.replace("-", "");
-                pw = pw.replace("-", "");
-            };
-
-            assessment.login_pw = pw;
-
-            return assessment;
-        },
 
         _buildPDF: function() {
 
@@ -167,10 +152,12 @@
                     title_block_stack = [];
                     title_block_stack.push(this._title(d.doc.name, d.doc.description));
 
-
-
-
                     title_block_stack.push(this._spacer(96));
+                    title_block_stack.push(this._text(d.text_1));
+                    title_block_stack.push(this._text(d.text_2));
+                    title_block_stack.push(this._text(d.text_3));
+                    title_block_stack.push(this._text(d.text_4));
+
                     title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
                     title_block_stack.push(this._stamp(this._current_patient.extras.full_name, 18));
                     title_block_stack.push(this._horizontalLine(62, "#F5F5F5"));
@@ -206,6 +193,9 @@
                     this.__toggle_print();
                 }.bind(this), 50);
             }.bind(this);
+
+
+            do_build();
         },
 
 
