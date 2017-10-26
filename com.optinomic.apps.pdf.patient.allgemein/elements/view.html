@@ -61,11 +61,23 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <template is="dom-if" if="[[_pdf_ready]]">
                 <iron-collapse id="collapse_print" horizontal>
+                    <h2>Allgemeine Druckvorlagen</h2>
                     <template is="dom-repeat" items="[[_d.docs]]">
                         <div style="margin-left:18px;">
                             <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[item.name]]" document-title="[[item.title]]" content="[[item.content]]" loading-string="[[item.loading_string]]" hide-logo></optinomic-pdfmake>
                         </div>
                     </template>
+                    <h2>Spezifische Druckvorlagen</h2>
+                    <a class="iron-list-link alias_link" href$="#/patient/[[_current_patient_pid]]/stay/[[_current_patient_fid]]/app/ch.suedhang.apps.fallkonferenz.production/template/overview" tabindex="-1">
+                        <div id="top" class="layout horizontal flex">
+                            <div>
+                                <paper-icon-button icon="icons:timeline" class="alias_link" style="color:grey;"></paper-icon-button>
+                            </div>
+                            <div class="flex">
+                                Fragebogenauswertung: Eine Übersicht der wichtigsten Ergebnisse und Auswertungen
+                            </div>
+                        </div>
+                    </a>
                 </iron-collapse>
             </template>
             <div id="main_content">
@@ -102,8 +114,8 @@
             var d = {};
 
             d.title = "Druckvorlagen",
-            d.subtitle = "Allgeime (Patienten-)Druckvorlagen",
-            d.small = "PDF"
+                d.subtitle = "Allgeime (Patienten-)Druckvorlagen",
+                d.small = "PDF"
 
             // ----------------------------
             // Doc: Patienten-Assessment
@@ -204,7 +216,7 @@
                     // Notizen
                     // ----------------------------------
                     var content_1 = []
-                    
+
 
                     content_1.push(this._text(this._formatDateCH(iso_date)));
 

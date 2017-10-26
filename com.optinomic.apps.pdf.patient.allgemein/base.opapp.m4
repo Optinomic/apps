@@ -21,7 +21,7 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template overview 6 35]
+[template PDF 6 35]
 include(../lib/polymer/index.m4)
 include(elements/view.html)
 
