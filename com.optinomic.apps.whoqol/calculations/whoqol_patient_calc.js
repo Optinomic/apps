@@ -368,7 +368,7 @@ function main(responses) {
                 res.result.scale_score = calc.roundToOne(avg);
 
                 if (age_norm.altersgruppe_found === true) {
-                    res.result.z_score = calc.roundToOne((res.result.sum_score - age_norm.m_norm[myResID]) / age_norm.sd_norm[myResID]);
+                    res.result.z_score = calc.roundToOne((res.result.scale_score - age_norm.m_norm[myResID]) / age_norm.sd_norm[myResID]);
                     res.result.z_score_inverted = res.result.z_score * -1;
                 };
             });
