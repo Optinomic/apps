@@ -63,7 +63,7 @@
                 <iron-collapse id="collapse_print" horizontal>
                     <template is="dom-repeat" items="[[_d.docs]]">
                         <div style="margin-left:18px;">
-                            <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[item.name]]" document-title="[[item.title]]" content="[[item.content]]" loading-string="[[item.loading_string]]" hide-logo></optinomic-pdfmake>
+                            <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[item.name]]" document-title="[[item.title]]" content="[[item.content]]" loading-string="[[item.loading_string]]" hide-logo></optinomic-pdfmake>
                         </div>
                     </template>
                 </iron-collapse>
