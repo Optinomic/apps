@@ -177,13 +177,13 @@
                     // Titelseite
                     // ------------------------------------------
                     title_block_stack = [];
-                    _pdf_content.push(this._title(d.doc.name, this._current_patient.extras.full_name));
+                    _pdf_content.push(this._title(d.docs[0].name, this._current_patient.extras.full_name));
 
                     // title_block_stack.push(this._spacer(12));
-                    _pdf_content.push(this._text(d.text_1));
-                    _pdf_content.push(this._text(d.text_2));
-                    _pdf_content.push(this._text(d.text_3));
-                    _pdf_content.push(this._text(d.text_4));
+                    _pdf_content.push(this._text(d.docs[0].source.text_1));
+                    _pdf_content.push(this._text(d.docs[0].source.text_2));
+                    _pdf_content.push(this._text(d.docs[0].source.text_3));
+                    _pdf_content.push(this._text(d.docs[0].source.text_4));
 
                     _pdf_content.push(this._horizontalLine(62, "#F5F5F5"));
                     _pdf_content.push(this._heading("Persönliche Zugangsdaten", null, "h1"));
