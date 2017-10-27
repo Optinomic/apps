@@ -5,19 +5,19 @@ function get_ks_task() {
     callODBC().then(function(response) {
         console.log('(!) DATA callODBC: ', response.rows.length);
 
-        for (var rID = 0; rID < response.rows.length; rID++) {
-                var row = response.rows[rID];
-
-                console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
-
-
-                // STATISTIK_KANTON_AUSTRITTSART
-                var TYP_AUSTRITTSART = '90';
-
-                row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
-                row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-                row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
-            };
+        //  for (var rID = 0; rID < response.rows.length; rID++) {
+        //      var row = response.rows[rID];
+        //  
+        //      console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
+        //  
+        //  
+        //      // STATISTIK_KANTON_AUSTRITTSART
+        //      var TYP_AUSTRITTSART = '90';
+        //  
+        //      row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+        //      row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+        //      row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
+        //  };
 
 
         writeKS(response).then(function(log_json) {
@@ -91,8 +91,8 @@ function writeKS(odbc_data) {
             "value": JSON.stringify(save_obj)
         };
 
-        helpers.callAPI("PUT", apiStr, null, body, function(odbc_data) {
-            resolve(JSON.stringify(odbc_data));
+        helpers.callAPI("PUT", apiStr, null, body, function() {
+            resolve(JSON.stringify(body));
         });
 
     });
