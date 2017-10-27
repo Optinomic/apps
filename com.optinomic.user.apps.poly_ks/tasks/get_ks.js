@@ -9,7 +9,14 @@ function get_ks_task() {
                 var row = response.rows[rID];
 
                 console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
-                row.TYP_AUSTRITTSART = '90';
+
+
+                // STATISTIK_KANTON_AUSTRITTSART
+                var TYP_AUSTRITTSART = '90';
+
+                row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+                row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+                row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
             };
 
 
