@@ -1,39 +1,62 @@
 function get_ks_task() {
 
-    var sql = include_as_js_string(odbc_kantonsstatistik.sql);
-
-    var body = {
-        "query": sql,
-        "direct": "True",
-        "format": "json"
-    };
 
 
-    var api_call = "/data_sources/Polypoint/query";
+    callODBC(response).then(function(log_json) {
+        console.log('(!) callODBC DATA! ');
 
-    helpers.callAPI("POST", api_call, null, body, function(resp_odbc) {
+        writeKS(response).then(function(log_json) {
+            console.log('(!) FINISHED! ');
+        }).then(null, function(error) {
+            console.log('(!) ANNOTATION-ERROR, ', error);
+        });
 
-        if (resp_odbc.status != 200) {
-            console.error(resp_odbc.responseText);
+    }).then(null, function(error) {
+        console.log('(!) callODBC-ERROR, ', error);
+    });
 
-        } else {
 
-            if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
-                var response = JSON.parse(resp_odbc.responseText);
+};
 
-                console.log('response', response);
 
-                writeKS(response).then(function(log_json) {
-                    console.log('(!) FINISHED! ');
-                }).then(null, function(error) {
-                    console.log('(!) ANNOTATION-ERROR, ', error);
-                });
+function callODBC() {
+
+    return new Promise(function(resolve, reject) {
+
+        var sql = include_as_js_string(odbc_kantonsstatistik.sql);
+
+        var body = {
+            "query": sql,
+            "direct": "True",
+            "format": "json"
+        };
+
+
+        var api_call = "/data_sources/Polypoint/query";
+
+        helpers.callAPI("POST", api_call, null, body, function(resp_odbc) {
+
+            if (resp_odbc.status != 200) {
+                console.error(resp_odbc.responseText);
 
             } else {
-                var response = null;
+
+                if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
+                    var response = JSON.parse(resp_odbc.responseText);
+
+                    console.log('response', response);
+
+
+
+                } else {
+                    var response = null;
+                };
+
             };
 
-        };
+            resolve(response);
+        });
+
     });
 
 };
