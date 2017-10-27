@@ -21,7 +21,7 @@ function get_ks_task() {
             if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
                 var response = JSON.parse(resp_odbc.responseText);
 
-                console.log('response', response.data.rows.length);
+                console.log('response', response);
 
                 writeKS(response).then(function(log_json) {
                     console.log('(!) FINISHED! ');
