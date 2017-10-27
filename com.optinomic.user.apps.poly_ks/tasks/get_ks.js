@@ -3,7 +3,7 @@ function get_ks_task() {
 
 
     callODBC().then(function(response) {
-        console.log('(!) DATA callODBC! ');
+        console.log('(!) DATA callODBC: ', response.rows.length);
 
         writeKS(response).then(function(log_json) {
             console.log('(!) FINISHED! ');
