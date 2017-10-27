@@ -1,0 +1,49 @@
+<vaadin-grid class="full_grid" aria-label="Kantonsstatistik" items="[[_sr.data]]" column-reordering-allowed="true">
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Messung</span></template>
+                            <vaadin-grid-column width="100px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="date">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Datum</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">{{_computeNiceDate(item.date)}}</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="180px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.Messzeitpunkt.Messzeitpunkt">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Zeitpunkt</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.calculation.tmt_score.Messzeitpunkt.Messzeitpunkt_Text]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">TMT A</span></template>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTATime">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Zeit</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTATime]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="calculation.tmt_score.TMTAError">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Fehler</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.calculation.tmt_score.TMTAError]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        
+                    </vaadin-grid>
