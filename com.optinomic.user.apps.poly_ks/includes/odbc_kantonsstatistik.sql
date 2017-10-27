@@ -37,7 +37,64 @@ SELECT
     ELSE '?' 
   END ORG,  
 
+  CASE BELEGUNG.STATISTIK_KANTON_AUSTRITTSART
+    WHEN 'regulärer Austritt' THEN 1
+    WHEN 'Abbruch PatientIn' THEN 2
+    WHEN 'Abbruch Klinik' THEN 3
+    WHEN 'Uebertritt in andere Klinik' THEN 4
+    WHEN 'Uebertritt innerhalb des Südhangs' THEN 5
+    WHEN 'auf Initiative Dritter' THEN 6
+    WHEN 'Tod (nicht Suizid)' THEN 7
+    WHEN 'Suizid während der Behandlungsdauer' THEN 8
+    WHEN 'anderer Grund' THEN 9
+    ELSE 90 
+  END AUSTRITT_TYP,  
 
+  CASE BELEGUNG.STATISTIK_KANTON_WEITERBEH
+    WHEN 'Patient gestorben' THEN 1
+    WHEN 'somatische Klinik' THEN 2
+    WHEN 'psychiatrische Klinik stationär' THEN 3
+    WHEN 'psychiatrische Klinik teilstationär' THEN 4
+    WHEN 'teilstationäre Nachbetreuung' THEN 4
+    WHEN 'andere Klinik / Rehab.-zentrum' THEN 5
+    WHEN 'Strafvollzugsanstalt' THEN 6
+    WHEN 'andere stationäre Behandlung' THEN 7
+    WHEN 'Südhang stationär' THEN 8
+    WHEN 'Fachstelle für Alkoholprobleme' THEN 9
+    WHEN 'Therapeutische WG' THEN 10
+    WHEN 'Sozialdienst' THEN 11
+    WHEN 'Sozialdienst / Fachstelle' THEN 11
+    WHEN 'Vormund / Beistand' THEN 12
+    WHEN 'PsychiaterIn' THEN 13
+    WHEN 'Hausarzt / Hausärztin' THEN 14
+    WHEN 'Psychologe / Psychologin' THEN 15
+    WHEN 'TherapeutIn der Klinik ambulant' THEN 16
+    WHEN 'andere ambulante Betreuung' THEN 17
+    WHEN 'keine Nachbetreuung nötig' THEN 18
+    WHEN 'Angehörige' THEN 19
+    WHEN 'keine Nachbetreuung, obwohl nötig' THEN 20
+    WHEN 'Pflegepersonal, Spitex' THEN 21
+    WHEN 'Tagesklinik Südhang' THEN 22
+    WHEN 'sonstige' THEN 23
+    ELSE 90 
+  END WEITERBEHANDLUNG_TYP,  
+
+  CASE BELEGUNG.STATISTIK_KANTON_WOHNSITUATION
+    WHEN '00 gestorben' THEN 00
+    WHEN '11 Zuhause, alleine' THEN 11
+    WHEN '12 Zuhause, mit anderen' THEN 12
+    WHEN 'alte Wohnung / Wohnort' THEN 12
+    WHEN '20 Krankenheim, Pflegeheim' THEN 20
+    WHEN '31 Wohnheim' THEN 31
+    WHEN '32 Altersheim, andere sozialmed. Instit.' THEN 32
+    WHEN '40 Psychiatrische Klinik' THEN 40
+    WHEN '50 Rehabilitationsklinik' THEN 50
+    WHEN '60 anderes Krankenhaus (Akutspital)' THEN 60
+    WHEN '70 Strafvollzugsanstalt' THEN 70
+    WHEN '81 ohne festen Wohnsitz' THEN 81
+    WHEN '82 andere' THEN 82
+    ELSE 90 
+  END WOHNSITUATION_TYP,  
 
   CASE BELEGUNG.STATISTIK_KANTON_NEUEADRESSE
     WHEN 'Neue Adresse oder Telefonnummer' THEN 1
