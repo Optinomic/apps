@@ -56,5 +56,9 @@ FROM
      Dokument_Version.Dokument_Id = ELDAT_CUST_1151.Dokument_Id AND
      Dokument_Version.Ist_Aktuell = 'T'
   ) BELEGUNG
-WHERE ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID))
+  
+WHERE 
+   ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID)) AND
+   FA.FID is not null
+
 
