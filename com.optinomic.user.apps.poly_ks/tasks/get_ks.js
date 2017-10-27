@@ -13,8 +13,8 @@ function get_ks_task() {
 
     helpers.callAPI("POST", api_call, null, body, function(resp_odbc) {
 
-        if (resp_bel.status != 200) {
-            console.error(resp_bel.responseText);
+        if (resp_odbc.status != 200) {
+            console.error(resp_odbc.responseText);
         } else {
 
             if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
