@@ -24,7 +24,7 @@ function get_ks_task() {
                 // console.log('response', response);
 
                 writeKS(response).then(function(log_json) {
-                    console.log('(✓) FINISHED! ');
+                    console.log('(!) FINISHED! ');
                 }).then(null, function(error) {
                     console.log('(!) ANNOTATION-ERROR, ', error);
                 });
