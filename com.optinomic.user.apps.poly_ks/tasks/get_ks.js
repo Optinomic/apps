@@ -91,7 +91,7 @@ function writeKS(odbc_data) {
             "value": JSON.stringify(save_obj)
         };
 
-        helpers.callAPI("PUT", apiStr, null, body, function(resp_put_annotations) {
+        helpers.callAPI("PUT", apiStr, null, body, function(odbc_data) {
             resolve(JSON.stringify(odbc_data));
         });
 
