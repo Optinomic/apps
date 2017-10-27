@@ -5,6 +5,14 @@ function get_ks_task() {
     callODBC().then(function(response) {
         console.log('(!) DATA callODBC: ', response.rows.length);
 
+        for (var srID = 0; rID < response.rows.length; sID++) {
+                var row = response.rows[rID];
+
+                console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
+                row.TYP_AUSTRITTSART = '90';
+            };
+
+
         writeKS(response).then(function(log_json) {
             console.log('(!) FINISHED! ');
         }).then(null, function(error) {
@@ -44,10 +52,6 @@ function callODBC() {
                 if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
                     var response = JSON.parse(resp_odbc.responseText);
 
-                    console.log('response', response);
-
-
-
                 } else {
                     var response = null;
                 };
@@ -58,7 +62,6 @@ function callODBC() {
         });
 
     });
-
 };
 
 
