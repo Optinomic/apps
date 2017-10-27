@@ -1,4 +1,4 @@
-function get_belegung_task() {
+function get_ks_task() {
 
     var sql = include_as_js_string(odbc_kantonsstatistik.sql);
 
