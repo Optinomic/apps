@@ -67,7 +67,7 @@
                             <optinomic-pdfmake header-left="[[_current_patient.extras.ansprache]] [[_current_patient.extras.full_name]]" header-right="[[_clinic.clinic_name]]" footer-left="[[item.name]]" document-title="[[item.title]]" content="[[item.content]]" loading-string="[[item.loading_string]]" hide-logo></optinomic-pdfmake>
                         </div>
                     </template>
-                    <div style="margin-top:24px;">
+                    <div style="margin-top:36px;">
                         <h2>Spezifische Druckvorlagen</h2>
                         <div style="margin-left:18px;">
                             <a class="iron-list-link alias_link" href$="[[_hrefAppTemplate('ch.suedhang.apps.fallkonferenz.production', 'overview')]]" tabindex="-1">
@@ -139,7 +139,7 @@
                 "content": null
             }, {
                 "name": "Notizblatt",
-                "title": "Notizblatt",
+                "title": "Notizblatt :: Gesprächsnotiz",
                 "version": "1.0",
                 "description": "Drucken eines leeren Verlaufsblattes.",
                 "loading_string": "",
@@ -220,8 +220,6 @@
                     // Notizen
                     // ----------------------------------
                     var content_1 = []
-
-
                     content_1.push(this._text(this._formatDateCH(iso_date)));
 
                     var vertical_line = {
@@ -237,7 +235,6 @@
                         }]
                     };
                     content_1.push(vertical_line);
-
                     this._d.docs[1].content = content_1;
 
 

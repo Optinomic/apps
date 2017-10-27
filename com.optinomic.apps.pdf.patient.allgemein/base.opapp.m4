@@ -1,12 +1,12 @@
 [module]
 id = com.optinomic.apps.pdf.patient.allgemein
 name = Druckvorlagen (PDF)
-short_description = Allgeime Druckvorlagen (PDF).
+short_description = (Patienten-)Druckvorlagen (PDF).
 version = 1.0
 type = patient
 
 [description]
-Eine Sammel-Applikation für allgeime Druckvorlagen (PDF). 
+Allgemeine und spezifische Patienten-Druckvorlagen im PDF Format. 
 
 
 [developer]
