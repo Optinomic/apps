@@ -5,7 +5,7 @@ function get_ks_task() {
     callODBC().then(function(response) {
         console.log('(!) DATA callODBC: ', response.rows.length);
 
-        for (var srID = 0; rID < response.rows.length; sID++) {
+        for (var rID = 0; rID < response.rows.length; rID++) {
                 var row = response.rows[rID];
 
                 console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
