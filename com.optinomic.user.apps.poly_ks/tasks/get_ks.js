@@ -19,14 +19,51 @@ function get_ks_task() {
 
             if ((resp_odbc.responseText !== null) && (resp_odbc.responseText !== '')) {
                 var response = JSON.parse(resp_odbc.responseText);
+
+                // console.log('response', response);
+
+                writeKS(response).then(function(log_json) {
+                    console.log('(✓) FINISHED! ');
+                }).then(null, function(error) {
+                    console.log('(!) ANNOTATION-ERROR, ', error);
+                });
+
             } else {
                 var response = null;
             };
 
-            console.log('response', response);
         };
     });
 
+};
+
+function writeKS(odbc_data) {
+
+    return new Promise(function(resolve, reject) {
+
+        var d = new Date();
+        var n = d.toISOString();
+
+        var save_obj = {
+            "date": n,
+            "data": odbc_data
+        };
+
+        // Write Annotations
+        var apiStr = '/modules/com.optinomic.user.apps.poly_ks/annotations';
+
+        var body = {
+            "value": JSON.stringify(save_obj)
+        };
+
+        // console.log('writeBelegung:', patient_id, body.value);
+
+        helpers.callAPI("PUT", apiStr, null, body, function(resp_put_annotations) {
+            console.log(' -> Done: writeKS');
+            resolve(JSON.stringify(odbc_data));
+        });
+
+    });
 };
 
 
@@ -82,72 +119,7 @@ function get_belegung() {
     return belegung;
 };
 
-function writeLog(log) {
 
-    return new Promise(function(resolve, reject) {
-
-        log.timings.end = new Date();
-        log.timings.duration = log.timings.end - log.timings.start;
-        log.timings.duration_min = log.timings.duration / 1000 / 60;
-
-        // Get current logs - array
-        var apiStr = '/modules/com.optinomic.apps.poly_stay/annotations';
-        helpers.callAPI("GET", apiStr, null, null, function(resp_get_logs) {
-            var all_logs = JSON.parse(resp_get_logs.responseText);
-
-
-            // Check isEmpty
-            var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-            function isEmpty(obj) {
-
-                // null and undefined are "empty"
-                if (obj == null) return true;
-
-                // Assume if it has a length property with a non-zero value
-                // that that property is correct.
-                if (obj.length > 0) return false;
-                if (obj.length === 0) return true;
-
-                // If it isn't an object at this point
-                // it is empty, but it can't be anything *but* empty
-                // Is it empty?  Depends on your application.
-                if (typeof obj !== "object") return true;
-
-                // Otherwise, does it have any properties of its own?
-                // Note that this doesn't handle
-                // toString and valueOf enumeration bugs in IE < 9
-                for (var key in obj) {
-                    if (hasOwnProperty.call(obj, key)) return false;
-                }
-
-                return true;
-            };
-
-
-            if (isEmpty(all_logs)) {
-                all_logs.logs = []
-            };
-
-            all_logs.logs.push(log);
-
-
-            var body = {
-                "value": JSON.stringify(all_logs)
-            };
-
-            // console.log('writeBelegung:', patient_id, body.value);
-
-            helpers.callAPI("PUT", apiStr, null, body, function(resp_put_logs) {
-                console.log(' -> Done:', all_logs.logs.length);
-                resolve(JSON.stringify(all_logs));
-            });
-
-
-        });
-
-    });
-};
 
 function job_finised() {
     writeLog(log).then(function(log_json) {
