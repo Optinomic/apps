@@ -64,9 +64,92 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <div id="main_content">
                 <div id="datenblatt">
-                    <h3>Kantonsstatistik: [[_annotations.date]]</h3>
-                    <p>Anzahl Einträge: [[_annotations.data.rows.length]]</p>
+                    <p>Anzahl Einträge: [[_annotations.data.rows.length]] | Datenstand: [[_annotations.date]]</p>
                     
+
+                    <vaadin-grid class="full_grid" aria-label="Kantonsstatistik" items="[[_annotations.data.rows]]" column-reordering-allowed="true">
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">ID</span></template>
+                            <vaadin-grid-column width="70px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ID_PID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">PID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.ID_PID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="70px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ID_FID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">FID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.ID_FID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="70px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="CIS_FID">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">FID</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.CIS_FID]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="70px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="ORG_CURRENT">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">ORG</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.ORG_CURRENT]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Kantonsstatistik</span></template>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_AUSTRITTSART">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Austrittsart</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.STATISTIK_KANTON_AUSTRITTSART]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_WEITERBEH">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Weiterbehandlung</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.STATISTIK_KANTON_WEITERBEH]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column flex-grow="1">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="STATISTIK_KANTON_WOHNSITUATION">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Wohnsituation</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1" style="text-align: right">[[item.STATISTIK_KANTON_WOHNSITUATION]]</span>
+                                </template>
+                            </vaadin-grid-column>
+                            
+                        </vaadin-grid-column-group>
+                        
+                        
+                    </vaadin-grid>
+
+
                 </div>
             </div>
         </template>
