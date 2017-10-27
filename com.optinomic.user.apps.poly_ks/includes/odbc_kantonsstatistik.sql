@@ -37,10 +37,6 @@ SELECT
     ELSE '?' 
   END ORG,  
 
-  CASE BELEGUNG.STATISTIK_KANTON_NEUEADRESSE
-    WHEN 'Neue Adresse oder Telefonnummer' THEN 1
-    ELSE 0 
-  END ADRESSE_TYP,  
 
   BELEGUNG.*
 
