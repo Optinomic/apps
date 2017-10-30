@@ -95,7 +95,7 @@
 
                                 var home_str = this.calcHome.split('.').join("_");
                                 var path = home_str + "___" + this.calcId;
-                                console.log('path', path);
+                                // console.log('path', path);
                                 if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
                                     return state._app_userapp_calculations[path].data;
 
