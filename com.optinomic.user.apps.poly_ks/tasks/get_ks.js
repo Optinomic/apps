@@ -3,27 +3,27 @@ function get_ks_task() {
 
 
     callODBC().then(function(response) {
-        console.log('(!) DATA callODBC: ', response.rows.length);
+
+        var rows = JSON.parse(JSON.stringify(response.rows));
+        console.log('(!) DATA callODBC: ', rows.length);
 
 
-        // Take a COPY of RESPONSE an PROCEED!!!
+        for (var rID = 0; rID < response.rows.length; rID++) {
+            var row = response.rows[rID];
 
-        //  for (var rID = 0; rID < response.rows.length; rID++) {
-        //      var row = response.rows[rID];
-        //  
-        //      console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
-        //  
-        //  
-        //      // STATISTIK_KANTON_AUSTRITTSART
-        //      var TYP_AUSTRITTSART = '90';
-        //  
-        //      row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
-        //      row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-        //      row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
-        //  };
+            console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
 
 
-        writeKS(response).then(function(log_json) {
+            // STATISTIK_KANTON_AUSTRITTSART
+            var TYP_AUSTRITTSART = '90';
+
+            row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+            row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+            row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
+        };
+
+
+        writeKS(rows).then(function(log_json) {
             console.log('(!) FINISHED! ');
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
