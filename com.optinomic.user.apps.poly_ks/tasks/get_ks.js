@@ -41,7 +41,7 @@ function get_ks_task() {
 
         console.log('(!) DATA SAVE: ', saved_data.length);
 
-        writeKS(saved_data).then(function(log_json) {
+        writeKS(JSON.parse(JSON.stringify(saved_data))).then(function(log_json) {
             console.log('(!) FINISHED! ');
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
