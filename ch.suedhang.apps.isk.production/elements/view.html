@@ -1,0 +1,101 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-chart-profile/optinomic-chart-profile.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+
+        vaadin-grid {
+            height: auto;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-bottom: 48px;
+        }
+
+        .scroll_top {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        </style>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <div id="main_content">
+                <div id="content_bdi" class="content_block">
+                    <element-isk app-id="[[_d.app_id]]"></element-isk>
+                </div>
+            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        properties: {},
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp],
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.app_id = "ch.suedhang.apps.isk.production";
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
+        },
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        _loadData: function() {
+            this.dispatch('actionGetCurrentPatient');
+            this.dispatch('actionGetCurrentPatientStays');
+        },
+
+        ready: function() {
+            this._loadData();
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
