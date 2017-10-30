@@ -78,22 +78,24 @@ function enhanceODBCData(odbc_data) {
             //  // STATISTIK_KANTON_AUSTRITTSART
             //  var TYP_AUSTRITTSART = '90';
             //  row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
-//  
+            //  
             //  //STATISTIK_KANTON_WEITERBEH
             //  row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-//  
+            //  
             //  //STATISTIK_KANTON_WOHNSITUATION
             //  row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
-//  
+            //  
             //  //STATISTIK_KANTON_NEUEADRESSE
             //  if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
             //      row.TYP_NEUE_ADRESSE = '0';
             //  } else {
             //      row.TYP_NEUE_ADRESSE = '1';
             //  };
-//  
-//  
+            //  
+            //  
             //  console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
+
+            row.test = "TEST";
 
             //Save
             saved_data.push(row);
