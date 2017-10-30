@@ -72,8 +72,8 @@ function enhanceODBCData(odbc_data) {
     return new Promise(function(resolve, reject) {
         var saved_data = [];
 
-        for (var rID = 0; rID < rows.length; rID++) {
-            var row = JSON.parse(JSON.stringify(rows[rID]));
+        for (var rID = 0; rID < odbc_data.length; rID++) {
+            var row = JSON.parse(JSON.stringify(odbc_data[rID]));
 
             // STATISTIK_KANTON_AUSTRITTSART
             var TYP_AUSTRITTSART = '90';
