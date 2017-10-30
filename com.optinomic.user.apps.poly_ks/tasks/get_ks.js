@@ -12,7 +12,7 @@ function get_ks_task() {
         enhanceODBCData(rows).then(function(saved_data) {
             console.log('(!) enhanceODBCData FINISHED! ', saved_data.length);
             doWrite(saved_data);
-            
+
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
         });
@@ -76,9 +76,7 @@ function enhanceODBCData(odbc_data) {
         var saved_data = [];
 
         for (var rID = 0; rID < rows.length; rID++) {
-            var row = response.rows[rID];
-
-
+            var row = rows[rID];
 
             // STATISTIK_KANTON_AUSTRITTSART
             var TYP_AUSTRITTSART = '90';
