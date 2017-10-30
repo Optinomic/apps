@@ -161,7 +161,7 @@
         _loadData: function() {
             this.debounce('_loadData', function() {
                 if ((this.calcId !== null) && (this.calcId !== undefined)) {
-                    if ((this.calcHome !== null) && (this.calcId !== calcHome)) {
+                    if ((this.calcHome !== null) && (this.calcHome !== undefined)) {
                         Polymer.RenderStatus.afterNextRender(this, function() {
 
                             this.dispatch('actionGetUserAppCalculation', this.calcHome, this.calcId);
