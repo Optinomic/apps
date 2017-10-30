@@ -25,8 +25,8 @@ include(readme.md)
 
 [template overview 6 35]
 include(../lib/polymer/index.m4)
-include(elements/actinfo-problemsubstanzen.html)
-include(elements/element-actinfo.html)
+include(../ch.suedhang.apps.actinfo_ein/elements/actinfo-problemsubstanzen.html)
+include(../ch.suedhang.apps.actinfo_ein/elements/element-actinfo.html)
 include(elements/element-tmt.html)
 include(elements/element-asrs.html)
 include(../ch.suedhang.apps.aase-g/elements/element-aase.html)
