@@ -75,23 +75,23 @@ function enhanceODBCData(odbc_data) {
         for (var rID = 0; rID < odbc_data.length; rID++) {
             var row = JSON.parse(JSON.stringify(odbc_data[rID]));
 
-            // STATISTIK_KANTON_AUSTRITTSART
-            var TYP_AUSTRITTSART = "90";
-            row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+            //  // STATISTIK_KANTON_AUSTRITTSART
+            //  var TYP_AUSTRITTSART = "90";
+            //  row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+            //  
+            //  //STATISTIK_KANTON_WEITERBEH
+            //  row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+            //  
+            //  //STATISTIK_KANTON_WOHNSITUATION
+            //  row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
 
-            //STATISTIK_KANTON_WEITERBEH
-            row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-
-            //STATISTIK_KANTON_WOHNSITUATION
-            row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
 
             //STATISTIK_KANTON_NEUEADRESSE
             if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
-                row.TYP_NEUE_ADRESSE = "0";
+                row.typ_neue_adresse = "0";
             } else {
-                row.TYP_NEUE_ADRESSE = "1";
+                row.typ_neue_adresse = "1";
             };
-
 
             // console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
 
