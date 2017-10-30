@@ -11,16 +11,8 @@ function get_ks_task() {
 
         enhanceODBCData(rows).then(function(saved_data) {
             console.log('(!) enhanceODBCData FINISHED! ', saved_data.length);
-
-
-            writeKS(JSON.parse(JSON.stringify(saved_data))).then(function(log_json) {
-                console.log('(!) FINISHED! ');
-            }).then(null, function(error) {
-                console.log('(!) ANNOTATION-ERROR, ', error);
-            });
-
-
-
+            doWrite(saved_data);
+            
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
         });
@@ -117,6 +109,14 @@ function enhanceODBCData(odbc_data) {
     });
 };
 
+
+function doWrite(data) {
+    writeKS(JSON.parse(JSON.stringify(data))).then(function(log_json) {
+        console.log('(!) FINISHED! ');
+    }).then(null, function(error) {
+        console.log('(!) ANNOTATION-ERROR, ', error);
+    });
+};
 
 function writeKS(odbc_data) {
 
