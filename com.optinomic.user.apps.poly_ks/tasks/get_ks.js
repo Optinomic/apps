@@ -75,15 +75,15 @@ function enhanceODBCData(odbc_data) {
         for (var rID = 0; rID < odbc_data.length; rID++) {
             var row = JSON.parse(JSON.stringify(odbc_data[rID]));
 
-            //  // STATISTIK_KANTON_AUSTRITTSART
-            //  var TYP_AUSTRITTSART = "90";
-            //  row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
-            //  
-            //  //STATISTIK_KANTON_WEITERBEH
-            //  row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-            //  
-            //  //STATISTIK_KANTON_WOHNSITUATION
-            //  row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
+            // STATISTIK_KANTON_AUSTRITTSART
+            var typ_austrittsart = "90";
+            row.typ_austrittsart = typ_austrittsart;
+
+            //STATISTIK_KANTON_WEITERBEH
+            row.typ_weiterbehandlung = typ_austrittsart;
+
+            //STATISTIK_KANTON_WOHNSITUATION
+            row.typ_wohnsituation = typ_austrittsart;
 
 
             //STATISTIK_KANTON_NEUEADRESSE
