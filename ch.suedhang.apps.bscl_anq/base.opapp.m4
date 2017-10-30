@@ -6,6 +6,7 @@ version = include(VERSION)
 type = patient
 
 [description]
+Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
 
 [developer]
 first_name = Beat

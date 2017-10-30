@@ -7,6 +7,7 @@ type = patient
 
 
 [description]
+Schweregrad depressiver Symptomatik im klinischen Bereich.
 
 [developer]
 first_name = Nora
