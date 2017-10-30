@@ -34,7 +34,7 @@ include(../ch.suedhang.apps.bscl_anq/elements/element-bscl.html)
 include(../ch.suedhang.apps.bdi/elements/element-bdi.html)
 include(../ch.suedhang.apps.isk/elements/element-isk.html)
 include(../ch.suedhang.apps.sci/elements/element-sci.html)
-include(elements/element-whoqol.html)
+include(../com.optinomic.apps.whoqol/elements/element-whoqol.html)
 include(elements/view.html)
 
 
