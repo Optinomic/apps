@@ -93,6 +93,8 @@ function enhanceODBCData(odbc_data) {
                 row.typ_neue_adresse = "1";
             };
 
+            row.typ_wohnsituation = "1";
+
             // console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
 
 
