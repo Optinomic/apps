@@ -76,14 +76,14 @@ function enhanceODBCData(odbc_data) {
             var row = JSON.parse(JSON.stringify(odbc_data[rID]));
 
             // STATISTIK_KANTON_AUSTRITTSART
-            var typ_austrittsart = "90";
-            row.typ_austrittsart = "90";
+            // var typ_austrittsart = "90";
+            // row.typ_austrittsart = "90";
 
             //  //STATISTIK_KANTON_WEITERBEH
             //  row.typ_weiterbehandlung = "90";
 //  
             //  //STATISTIK_KANTON_WOHNSITUATION
-            //  row.typ_wohnsituation = "90";
+            row.typ_wohnsituation = "90";
 
 
             //STATISTIK_KANTON_NEUEADRESSE
