@@ -8,6 +8,8 @@ function get_ks_task() {
         console.log('(!) DATA callODBC: ', rows.length);
 
 
+        var saved_data = [];
+
         for (var rID = 0; rID < rows.length; rID++) {
             var row = response.rows[rID];
 
@@ -16,14 +18,27 @@ function get_ks_task() {
 
             // STATISTIK_KANTON_AUSTRITTSART
             var TYP_AUSTRITTSART = '90';
-
             row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_WEITERBEH
             row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_WOHNSITUATION
             row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_NEUEADRESSE
+            if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
+                row.TYP_NEUE_ADRESSE = true;
+            } else {
+                row.TYP_NEUE_ADRESSE = false;
+            };
+
+            //Save
+            saved_data.push(row);
         };
 
 
-        writeKS(rows).then(function(log_json) {
+        writeKS(saved_data).then(function(log_json) {
             console.log('(!) FINISHED! ');
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
