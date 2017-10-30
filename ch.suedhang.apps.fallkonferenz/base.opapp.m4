@@ -33,7 +33,7 @@ include(../ch.suedhang.apps.aase-g/elements/element-aase.html)
 include(../ch.suedhang.apps.bscl_anq/elements/element-bscl.html)
 include(../ch.suedhang.apps.bdi/elements/element-bdi.html)
 include(../ch.suedhang.apps.isk/elements/element-isk.html)
-include(elements/element-sci.html)
+include(../ch.suedhang.apps.sci/elements/element-sci.html)
 include(elements/element-whoqol.html)
 include(elements/view.html)
 
