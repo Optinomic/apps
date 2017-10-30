@@ -93,7 +93,8 @@
                         if ((this.calcId !== null) && (this.calcId !== undefined)) {
                             if ((this.calcHome !== null) && (this.calcHome !== undefined)) {
 
-                                var path = this.calcHome.replace(new RegExp(".", "gm"), "_") + "___" + this.calcId;
+                                var home_str = this.calcHome.split('.').join("_");
+                                var path = home_str + "___" + this.calcId;
                                 console.log('path', path);
                                 if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
                                     return state._app_userapp_calculations[path].data;
