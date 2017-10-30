@@ -8,44 +8,24 @@ function get_ks_task() {
         console.log('(!) DATA callODBC: ', rows.length);
 
 
-        var saved_data = [];
+        enhanceODBCData(rows).then(function(saved_data) {
+            console.log('(!) ROWS - Enhanced! ', saved_data);
 
-        for (var rID = 0; rID < rows.length; rID++) {
-            var row = response.rows[rID];
+            console.log('(!) DATA SAVE: ', saved_data.length);
 
-
-
-            // STATISTIK_KANTON_AUSTRITTSART
-            var TYP_AUSTRITTSART = "90";
-            row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
-
-            //STATISTIK_KANTON_WEITERBEH
-            row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
-
-            //STATISTIK_KANTON_WOHNSITUATION
-            row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
-
-            //STATISTIK_KANTON_NEUEADRESSE
-            if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
-                row.TYP_NEUE_ADRESSE = "0";
-            } else {
-                row.TYP_NEUE_ADRESSE = "1";
-            };
+            writeKS(JSON.parse(JSON.stringify(saved_data))).then(function(log_json) {
+                console.log('(!) FINISHED! ');
+            }).then(null, function(error) {
+                console.log('(!) ANNOTATION-ERROR, ', error);
+            });
 
 
-            console.log('(!) row =', rID, row.TYP_AUSTRITTSART, row.STATISTIK_KANTON_AUSTRITTSART);
-
-            //Save
-            saved_data.push(row);
-        };
-
-        console.log('(!) DATA SAVE: ', saved_data.length);
-
-        writeKS(JSON.parse(JSON.stringify(saved_data))).then(function(log_json) {
-            console.log('(!) FINISHED! ');
         }).then(null, function(error) {
-            console.log('(!) ANNOTATION-ERROR, ', error);
+            console.log('(!) ROWS - Enhanced-ERROR, ', error);
         });
+
+
+
 
     }).then(null, function(error) {
         console.log('(!) callODBC-ERROR, ', error);
@@ -88,6 +68,50 @@ function callODBC() {
 
             resolve(response);
         });
+
+    });
+};
+
+
+
+function enhanceODBCData(odbc_data) {
+
+    return new Promise(function(resolve, reject) {
+        var rows = JSON.parse(JSON.stringify(odbc_data));
+
+
+        var saved_data = [];
+
+        for (var rID = 0; rID < rows.length; rID++) {
+            var row = response.rows[rID];
+
+
+
+            // STATISTIK_KANTON_AUSTRITTSART
+            var TYP_AUSTRITTSART = '90';
+            row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_WEITERBEH
+            row.TYP_WEITERBEHANDLUNG = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_WOHNSITUATION
+            row.TYP_WOHNSITUATION = TYP_AUSTRITTSART;
+
+            //STATISTIK_KANTON_NEUEADRESSE
+            if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
+                row.TYP_NEUE_ADRESSE = '0';
+            } else {
+                row.TYP_NEUE_ADRESSE = '1';
+            };
+
+
+            console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
+
+            //Save
+            saved_data.push(row);
+        };
+
+        resolve(saved_data);
 
     });
 };
