@@ -70,13 +70,10 @@ function callODBC() {
 function enhanceODBCData(odbc_data) {
 
     return new Promise(function(resolve, reject) {
-        var rows = JSON.parse(JSON.stringify(odbc_data));
-
-
         var saved_data = [];
 
         for (var rID = 0; rID < rows.length; rID++) {
-            var row = rows[rID];
+            var row = JSON.parse(JSON.stringify(rows[rID]));
 
             // STATISTIK_KANTON_AUSTRITTSART
             var TYP_AUSTRITTSART = '90';
