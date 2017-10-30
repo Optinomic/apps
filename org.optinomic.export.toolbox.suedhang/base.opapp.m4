@@ -24,7 +24,7 @@ include(readme.md)
 include(../lib/polymer/index.m4)
 include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
-include(../org.optinomic.export.toolbox/elements/view.html)
+include(elements/view.html)
 
 
 [javascript]
