@@ -8,11 +8,24 @@ function get_ks_task() {
         console.log('(!) DATA callODBC: ', rows.length);
 
 
-        writeKS(JSON.parse(JSON.stringify(rows))).then(function(log_json) {
-            console.log('(!) FINISHED! ');
+
+        enhanceODBCData(rows).then(function(saved_data) {
+            console.log('(!) enhanceODBCData FINISHED! ', saved_data.length);
+
+
+            writeKS(JSON.parse(JSON.stringify(saved_data))).then(function(log_json) {
+                console.log('(!) FINISHED! ');
+            }).then(null, function(error) {
+                console.log('(!) ANNOTATION-ERROR, ', error);
+            });
+
+
+
         }).then(null, function(error) {
             console.log('(!) ANNOTATION-ERROR, ', error);
         });
+
+
 
 
     }).then(null, function(error) {
