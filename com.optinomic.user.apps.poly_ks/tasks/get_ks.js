@@ -5,6 +5,9 @@ function get_ks_task() {
     callODBC().then(function(response) {
         console.log('(!) DATA callODBC: ', response.rows.length);
 
+
+        // Take a COPY of RESPONSE an PROCEED!!!
+
         //  for (var rID = 0; rID < response.rows.length; rID++) {
         //      var row = response.rows[rID];
         //  
