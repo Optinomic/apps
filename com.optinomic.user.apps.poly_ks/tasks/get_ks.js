@@ -13,11 +13,10 @@ function get_ks_task() {
         for (var rID = 0; rID < rows.length; rID++) {
             var row = response.rows[rID];
 
-            console.log('(!) row =', rID, row.STATISTIK_KANTON_AUSTRITTSART);
 
 
             // STATISTIK_KANTON_AUSTRITTSART
-            var TYP_AUSTRITTSART = '90';
+            var TYP_AUSTRITTSART = "90";
             row.TYP_AUSTRITTSART = TYP_AUSTRITTSART;
 
             //STATISTIK_KANTON_WEITERBEH
@@ -28,15 +27,19 @@ function get_ks_task() {
 
             //STATISTIK_KANTON_NEUEADRESSE
             if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
-                row.TYP_NEUE_ADRESSE = true;
+                row.TYP_NEUE_ADRESSE = "0";
             } else {
-                row.TYP_NEUE_ADRESSE = false;
+                row.TYP_NEUE_ADRESSE = "1";
             };
+
+
+            console.log('(!) row =', rID, row.TYP_AUSTRITTSART, row.STATISTIK_KANTON_AUSTRITTSART);
 
             //Save
             saved_data.push(row);
         };
 
+        console.log('(!) DATA SAVE: ', saved_data.length);
 
         writeKS(saved_data).then(function(log_json) {
             console.log('(!) FINISHED! ');
