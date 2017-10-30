@@ -83,7 +83,7 @@ function enhanceODBCData(odbc_data) {
             //  row.typ_weiterbehandlung = "90";
 //  
             //  //STATISTIK_KANTON_WOHNSITUATION
-            row.typ_wohnsituation = "90";
+            // row.typ_wohnsituation = "90";
 
 
             //STATISTIK_KANTON_NEUEADRESSE
