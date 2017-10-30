@@ -77,13 +77,13 @@ function enhanceODBCData(odbc_data) {
 
             // STATISTIK_KANTON_AUSTRITTSART
             var typ_austrittsart = "90";
-            row.typ_austrittsart = typ_austrittsart;
+            row.typ_austrittsart = "90";
 
             //STATISTIK_KANTON_WEITERBEH
-            row.typ_weiterbehandlung = typ_austrittsart;
+            row.typ_weiterbehandlung = "90";
 
             //STATISTIK_KANTON_WOHNSITUATION
-            row.typ_wohnsituation = typ_austrittsart;
+            row.typ_wohnsituation = "90";
 
 
             //STATISTIK_KANTON_NEUEADRESSE
