@@ -64,10 +64,10 @@
         <template is="dom-if" if="[[_d.init_done]]">
             <div id="main_content">
                 <div id="datenblatt">
-                    <p>Anzahl Einträge: [[_annotations.data.rows.length]] | Datenstand: [[_annotations.date]]</p>
+                    <p>Anzahl Einträge: [[_annotations.data.length]] | Datenstand: [[_annotations.date]]</p>
                     
 
-                    <vaadin-grid class="full_grid" aria-label="Kantonsstatistik" items="[[_annotations.data.rows]]" column-reordering-allowed="true">
+                    <vaadin-grid class="full_grid" aria-label="Kantonsstatistik" items="[[_annotations.data]]" column-reordering-allowed="true">
                         <vaadin-grid-column-group>
                             <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">ID</span></template>
                             <vaadin-grid-column width="73px" flex-grow="0">
