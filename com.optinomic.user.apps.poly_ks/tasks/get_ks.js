@@ -93,9 +93,9 @@ function enhanceODBCData(odbc_data) {
                 row.typ_neue_adresse = "1";
             };
 
-            // row.code_austritt = "90";
-            // row.code_weiterbeh = "90";
-            // row.code_wohnsituation = "90";
+            row.code_austritt = "90";
+            row.code_weiterbeh = "90";
+            row.code_wohnsituation = "90";
 
             // console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
 
