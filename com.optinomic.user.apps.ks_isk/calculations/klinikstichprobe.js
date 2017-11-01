@@ -66,6 +66,7 @@ function main(responses) {
     // ------------------------------------------
 
     calc.info = {
+        "user_app_id": "com.optinomic.user.apps.ks_isk",
         "patient_app_id": "ch.suedhang.apps.isk",
         "patient_app_calculation": "scores_calculation"
     };
@@ -577,7 +578,8 @@ function main(responses) {
         info.other_calculation = info.patient_app_id + ':' + info.patient_app_calculation;
 
         // Arrange Stuff as 'variables'
-        var patient_scores = calc.getScoresInVars(d.patients, vars, info);
+        // d.patients array => identifier = info.user_app_calculation
+        var patient_scores = calc.getScoresInVars(d.patients["0"].patients, vars, info);
         var md_app_scores = calc.getMDScoresArray(calc.cloneObj(calc.dimensions_app));
         var md_patient_scores = calc.writePatientScoresMD(patient_scores, md_app_scores);
 

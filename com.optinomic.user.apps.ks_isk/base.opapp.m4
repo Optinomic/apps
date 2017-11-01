@@ -42,7 +42,7 @@ include(style.css)
 
 
 
-[calculation isk_full javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
-include(calculations/full.js)
+[calculation isk_klinikstichprobe javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
+include(calculations/klinikstichprobe.js)
 
 
