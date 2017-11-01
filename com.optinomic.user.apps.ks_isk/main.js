@@ -47,8 +47,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getCalculation = function() {
         $scope.d.loaded = false;
         $scope.d.app = 'com.optinomic.user.apps.ks_isk';
-        //$scope.d.calculation = 'isk_klinikstichprobe';
-        $scope.d.calculation = 'isk_full';
+        $scope.d.calculation = 'isk_klinikstichprobe';
+        //$scope.d.calculation = 'isk_full';
 
 
         // Get specific calculation
