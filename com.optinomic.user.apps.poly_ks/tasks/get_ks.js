@@ -137,8 +137,12 @@ function writeKS(odbc_data) {
             "value": JSON.stringify(save_obj)
         };
 
-        helpers.callAPI("PUT", apiStr, null, body, function() {
-            resolve(JSON.stringify(body));
+        helpers.callAPI("PUT", apiStr, null, body, function(resp) {
+            if(resp.status != 204) {
+                console.error("PUT", apiStr, resp);
+            } else {
+                resolve(JSON.stringify(body));
+            }
         });
 
     });
