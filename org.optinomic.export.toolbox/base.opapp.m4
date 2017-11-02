@@ -33,12 +33,12 @@ include(elements/view.html)
 [css]
 
 
-[calculation tmt javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
+[calculation tmt_full javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
 include(calculations/tmt.m4)
 
-[calculation bscl javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
+[calculation bscl_full javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
 include(calculations/bscl.m4)
 
-[calculation isk javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
+[calculation isk_full javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
 include(calculations/isk.m4)
 
