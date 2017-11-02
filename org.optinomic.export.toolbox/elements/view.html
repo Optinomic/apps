@@ -41,24 +41,14 @@
         <div hidden$="[[_d.show_help]]">
             <div id="content">
                 <div class="content_block">
-                    <element-export name="BSCL" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    <element-export name="BSCL" calc-id="bscl" calc-home="org.optinomic.export.toolbox"></element-export>
                 </div>
                 <div class="content_block">
-                    <element-export name="ISK" calc-id="isk_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    <element-export name="ISK" calc-id="isk" calc-home="org.optinomic.export.toolbox"></element-export>
                 </div>
                 <div class="content_block">
-                    <element-export name="TMT" calc-id="tmt_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    <element-export name="TMT" calc-id="tmt" calc-home="org.optinomic.export.toolbox"></element-export>
                 </div>
-            </div>
-            <h2 class="indigo">Export (Test)</h2>
-
-            <div>
-                <paper-button on-click="onDownload" raised class="pink">Download: TMT (Full, all_patients)</paper-button>
-                <a href="#" id="fileLink" hidden download="tmt_full_all_patients.json"></a>
-            </div>
-            <div>
-                <paper-button on-click="onDownloadCSV" raised class="pink">TMT CSV</paper-button>
-                <a href="#" id="fileLinkCSV" hidden download="tmt_full.csv"></a>
             </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
@@ -92,13 +82,7 @@
 
             _d: {
                 type: Object
-            },
-
-            _tmt_full_patients: {
-                type: Object,
-                statePath: '_app_userapp_calculations.org_optinomic_export_toolbox___tmt_full.data.patients',
-                observer: '_createTMTFile'
-            },
+            }
         },
 
 
