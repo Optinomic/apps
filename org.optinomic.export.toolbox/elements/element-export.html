@@ -185,11 +185,11 @@
         },
 
 
-        _dataDive: function(source, path) {
+        _dataDive: function(source, field) {
 
-            var path_array = path.split(".");
+            var path_array = field.path.split(".");
 
-            console.log('(_dataDive) ', source, path, path_array);
+            console.log('(_dataDive) ', source, field, path_array);
 
             return path;
         },
@@ -239,7 +239,7 @@
                                         };
 
                                         // Rows
-                                        rows_str = rows_str + this._dataDive(sr, field.path);
+                                        rows_str = rows_str + this._dataDive(sr, field);
                                         if (fieldID === fields.length - 1) {
                                             // Last
                                             if (srID !== survey_responses.length - 1) {
