@@ -41,11 +41,11 @@
                     <div class="horizontal">
                         <div>
                             <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
-                            <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                            <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
                         </div>
                         <div>
                             <paper-button class="grey" on-tap="__onDownload">Speichern</paper-button>
-                            <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].csv"></a>
+                            <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].csv"></a>
                         </div>
                     </div>
                 </template>
