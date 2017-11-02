@@ -40,7 +40,8 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="content">
-                <template is="dom-if" if="[[!_d.init_done]]">
+                <p>[[_d.init_done]]</p>
+                <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
                         <element-export file-definitions="[[_d.bscl]]"></element-export>
                     </div>
@@ -240,8 +241,8 @@
 
 
             d.init_done = true;
-            this.set('_d', d);
             this._d = d;
+            this.set('_d', d);
 
             console.log('TOP (__init)', this._d);
         },
