@@ -1,5 +1,5 @@
 // The following fields do have all definitions!
-d.default_fields = [
+d.default_bottom_fields = [
     { "name": "optinomic_patient_id", "path": "patient_id" },
     { "name": "optinomic_stay_id", "path": "stay_id" },
     { "name": "optinomic_cis_fid", "path": "stay.cis_fid" },
