@@ -1,8 +1,8 @@
-d.tmt = {
+d.bscl = {
     "options": {
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "tmt_full",
-        "name": "TMT",
+        "name": "bscl_full",
         "delimitter": ";"
     },
     "fields": [

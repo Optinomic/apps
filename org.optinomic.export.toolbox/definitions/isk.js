@@ -1,8 +1,8 @@
-d.tmt = {
+d.isk = {
     "options": {
         "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "tmt_full",
-        "name": "TMT",
+        "calculation_id": "isk_full",
+        "name": "ISK",
         "delimitter": ";"
     },
     "fields": [

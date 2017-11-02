@@ -43,13 +43,13 @@
                 <p>calculation_id: [[_d.tmt.options.calculation_id]]</p>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <div class="content_block">
-                        <element-export name="BSCL" file-definitions="[[_d.tmt]]" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                        <element-export file-definitions="[[_d.tmt]]"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export name="ISK" file-definitions="[[_d.tmt]]" calc-id="isk_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                        <element-export file-definitions="[[_d.tmt]]"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export name="TMT" file-definitions="[[_d.tmt]]" calc-id="tmt_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                        <element-export file-definitions="[[_d.tmt]]"></element-export>
                     </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
@@ -227,6 +227,8 @@
 
             d.show_help = false;
 
+            include(definitions/bscl.js)
+            include(definitions/isk.js)
             include(definitions/tmt.js)
 
 

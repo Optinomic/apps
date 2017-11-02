@@ -35,7 +35,7 @@
         <div id="element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
-                    <optinomic-title small h1="[[name]]" h2="[[calcId]] ([[_sr.survey_responses.length]])"></optinomic-title>
+                    <optinomic-title small h1="[[fileDefinitions.options.name]]" h2="[[fileDefinitions.options.calculation_id]] ([[_sr.survey_responses.length]])"></optinomic-title>
                 </div>
                 <div>
                     &nbsp;
@@ -45,18 +45,14 @@
                 <div class="horizontal">
                     <div class="flex">
                         <p>Data ready</p>
-                        <!--
-                        <paper-button on-click="onDownloadCSV" raised class="pink">CSV: [[name]]</paper-button>
-                        <a href="#" id="fileLinkCSV" hidden download$="[[calcId]].csv"></a>
-                        -->
                     </div>
                     <div>
                         <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
-                        <a href="#" id="fileLink" hidden download$="[[calcId]].json"></a>
+                        <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].json"></a>
                     </div>
                     <div>
                         <paper-button class="grey" on-tap="__onDownload">Speichern</paper-button>
-                        <a href="#" id="fileLinkDebug" hidden download$="[[calcId]].json"></a>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].csv"></a>
                     </div>
                 </div>
             </template>
@@ -72,20 +68,6 @@
         behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
 
         properties: {
-            name: {
-                type: String,
-                value: null
-            },
-            calcId: {
-                type: String,
-                value: null,
-                observer: '_loadData'
-            },
-            calcHome: {
-                type: String,
-                value: null,
-                observer: '_loadData'
-            },
             fileDefinitions: {
                 type: Object,
                 observer: '_loadData'
@@ -98,17 +80,15 @@
                 statePath: function(state) {
                     return_obj = null;
                     if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
-                        if ((this.calcId !== null) && (this.calcId !== undefined)) {
-                            if ((this.calcHome !== null) && (this.calcHome !== undefined)) {
+                        if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
 
                                 var home_str = this.calcHome.split('.').join("_");
-                                var path = home_str + "___" + this.calcId;
+                                var path = home_str + "___" + this.fileDefinitions.options.calculation_id;
                                 if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
                                     return state._app_userapp_calculations[path].data;
 
                                 };
-                            };
                         };
                     };
                     return return_obj;
@@ -131,7 +111,7 @@
             var jsonLink = this.$$('#fileLink');
             const link = this._createFile(content);
 
-            console.log('File Content', content, jsonLink);
+            // console.log('File Content', content, jsonLink);
 
             jsonLink.href = link;
             jsonLink.click();
@@ -170,12 +150,8 @@
 
             var d = {};
 
-            d.name = this.name;
-            d.calcId = this.calcId;
-
             d.fileDefinitions = this.fileDefinitions;
-
-            this._createCSVFile(this.fileDefinitions);
+            this._createCSVFile(d.fileDefinitions);
 
             // Set & Log
             d.init_done = true;
@@ -192,7 +168,6 @@
             var value = Object.assign({}, source);
             if ((value !== null) && (value !== undefined)) {
                 path_array.forEach(function(path, pathID) {
-
                     try {
                         value = value[path];
                     } catch (err) {
@@ -200,12 +175,13 @@
                     };
                     
                 });
-            } else {
-                value = ""
             };
 
+            if ((value === undefined) || (value === null)) {
+                value = "";
+            };
 
-            console.log('(_dataDive) ', value, source, path_array);
+            // console.log('(_dataDive) ', value, source, path_array);
 
             return value;
         },
@@ -277,7 +253,7 @@
                             }.bind(this));
 
                             var file = header_str + rows_str;
-                            console.log('-> file', file);
+                            // console.log('-> file', file);
 
                             this.set('_csv_file', file);
 
@@ -297,7 +273,7 @@
                 if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
                     Polymer.RenderStatus.afterNextRender(this, function() {
 
-                        this.dispatch('actionGetUserAppCalculation', this.calcHome, this.calcId);
+                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.app_id, this.fileDefinitions.options.calculation_id);
 
                     });
                 };
