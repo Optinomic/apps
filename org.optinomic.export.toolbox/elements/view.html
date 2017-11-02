@@ -41,7 +41,7 @@
         <div hidden$="[[_d.show_help]]">
             <div id="content">
                 <div class="content_block">
-                    <element-export name="BSCL" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    <element-export name="BSCL" calc-id="bscl_full" definitions="[[_d.definitions.tmt]]" calc-home="org.optinomic.export.toolbox"></element-export>
                 </div>
                 <div class="content_block">
                     <element-export name="ISK" calc-id="isk_full" calc-home="org.optinomic.export.toolbox"></element-export>
@@ -228,6 +228,8 @@
             d.some_data = {
                 "test": true
             };
+
+            include(definitions/tmt.html)
 
             this.set('_d', d);
             console.log('INIT _d', d);

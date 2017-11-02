@@ -51,8 +51,12 @@
                         -->
                     </div>
                     <div>
-                        <paper-icon-button class="grey" on-tap="__onDownload" icon="bug-report"></paper-icon-button>
+                        <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
                         <a href="#" id="fileLink" hidden download$="[[calcId]].json"></a>
+                    </div>
+                    <div>
+                        <paper-button class="grey" on-tap="__onDownload">Speichern</paper-button>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[calcId]].json"></a>
                     </div>
                 </div>
             </template>
@@ -82,10 +86,13 @@
                 value: null,
                 observer: '_loadData'
             },
+            definitions: {
+                type: Object
+            },
             _d: {
                 type: Object
             },
-            _all_patient_results: {
+            _sr: {
                 type: Object,
                 statePath: function(state) {
                     return_obj = null;
@@ -105,7 +112,7 @@
                     };
                     return return_obj;
                 },
-                observer: '_all_patient_results_ready'
+                observer: '_sr_ready'
             }
         },
 
@@ -118,12 +125,27 @@
             e.preventDefault();
 
             // File Content
-            var content = JSON.stringify(this._all_patient_results, null, 2);
+            var content = this._csv_file;
 
             var jsonLink = this.$$('#fileLink');
             const link = this._createFile(content);
 
             console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadDebug(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._sr, null, 2);
+
+            var jsonLink = this.$$('#fileLinkDebug');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
 
             jsonLink.href = link;
             jsonLink.click();
@@ -150,6 +172,9 @@
             d.name = this.name;
             d.calcId = this.calcId;
 
+            d.definitions = this.definitions;
+
+            this._createCSVFile(this.definitions);
 
             // Set & Log
             d.init_done = true;
@@ -157,6 +182,57 @@
             this.set('_d', d);
             this._d = d;
         },
+
+
+        _createCSVFile: function(def) {
+
+            this.debounce('_createCSVFile', function() {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if (this._sr.survey_responses.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _sr = this.get('_sr');
+
+                        if ("survey_responses" in _sr) {
+                            var survey_responses = Object.assign({}, this._sr.survey_responses);
+
+                            console.log('-> survey_responses', survey_responses);
+
+                            var f = "";
+                            var header_str = "";
+                            var rows_str = "";
+                            var delimitter = def.options.delimitter;
+                            var newline = "\n";
+
+                            survey_responses.forEach(function(sr, srID) {
+
+                                header_str = header_str + sr.name;
+                                rows_str = rows_str + sr.path;
+
+                                if (srID === survey_responses.length - 1) {
+                                    // Last
+                                    header_str = header_str + newline;
+                                    rows_str = rows_str + newline;
+                                } else {
+                                    // Not last
+                                    header_str = header_str + delimitter;
+                                    rows_str = rows_str + delimitter;
+                                };
+
+                            });
+
+                            var file = header_str + rows_str;
+                            console.log('-> file', file);
+
+                            this.set('_csv_file', file);
+
+                        };
+                    };
+                };
+            }, 250);
+        },
+
 
         // -----------------------------
         // Observer
@@ -177,12 +253,14 @@
             }, 250);
         },
 
-        _all_patient_results_ready: function() {
-            this.debounce('_all_patient_results_ready', function() {
-                if ((this._all_patient_results !== null) && (this._all_patient_results !== undefined)) {
-                    Polymer.RenderStatus.afterNextRender(this, function() {
-                        this._init();
-                    });
+        _sr_ready: function() {
+            this.debounce('_sr_ready', function() {
+                if ((this._sr !== null) && (this._sr !== undefined)) {
+                    if ((this.definitions !== null) && (this.definitions !== undefined)) {
+                        Polymer.RenderStatus.afterNextRender(this, function() {
+                            this._init();
+                        });
+                    };
                 };
 
             }, 250);
