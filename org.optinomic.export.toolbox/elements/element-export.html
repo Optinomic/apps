@@ -105,8 +105,6 @@
                                 var path = home_str + "___" + this.calcId;
                                 if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
-                                    console.log('_sr', state._app_userapp_calculations[path].data);
-
                                     return state._app_userapp_calculations[path].data;
 
                                 };
@@ -199,7 +197,7 @@
                         var _sr = this.get('_sr');
 
                         if ("survey_responses" in _sr) {
-                            var survey_responses = Object.assign({}, this._sr.survey_responses);
+                            var survey_responses = this._sr.survey_responses;
 
                             console.log('-> survey_responses', survey_responses);
 
