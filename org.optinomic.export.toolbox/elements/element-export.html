@@ -259,11 +259,11 @@
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {
                 if ((this._sr !== null) && (this._sr !== undefined)) {
-                    console.log('1 _sr_ready', this._sr);
-                    if ((this.definitions !== null) && (this.definitions !== undefined)) {
-                        console.log('2 _sr_ready', this._sr);
+                    var definitions = this.get('definitions');
+                    console.log('1 _sr_ready', this._sr, definitions);
+                    if ((definitions !== null) && (definitions !== undefined)) {
+                        console.log('2 _sr_ready', this._sr, definitions);
                         Polymer.RenderStatus.afterNextRender(this, function() {
-                            console.log('3 _sr_ready', this._sr);
                             this._init();
                         });
                     };
