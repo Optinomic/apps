@@ -225,14 +225,11 @@
 
             d.show_help = false;
 
-            d.some_data = {
-                "test": true
-            };
+            include(definitions/tmt.js)
 
-            include(definitions/tmt.html)
 
             this.set('_d', d);
-            console.log('INIT _d', d);
+            console.log('TOP (__init)', this._d);
         },
 
 
