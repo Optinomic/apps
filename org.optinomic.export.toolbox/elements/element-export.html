@@ -35,7 +35,7 @@
         <div id="element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
-                    <optinomic-title small h1="[[name]]" h2="[[calcId]]"></optinomic-title>
+                    <optinomic-title small h1="[[name]]" h2="[[calcId]] ([[_sr.survey_responses.length]])"></optinomic-title>
                 </div>
                 <div>
                     &nbsp;
@@ -215,21 +215,29 @@
                                 if ((fields !== null) && (fields !== undefined)) {
                                     fields.forEach(function(field, fieldID) {
 
+                                        // Header
                                         if ((header_written === false) && (sr.all_found)) {
                                             header_str = header_str + field.name;
+
+                                            if (fieldID === fields.length - 1) {
+                                                // Last
+                                                header_str = header_str + newline;
+                                            } else {
+                                                // Not last
+                                                header_str = header_str + delimitter;
+                                            };
                                         };
 
+                                        // Rows
                                         rows_str = rows_str + field.path;
-
                                         if (fieldID === fields.length - 1) {
                                             // Last
-                                            header_str = header_str + newline;
                                             rows_str = rows_str + newline;
                                         } else {
                                             // Not last
-                                            header_str = header_str + delimitter;
                                             rows_str = rows_str + delimitter;
                                         };
+
                                     });
 
                                     if (header_str !== "") {
