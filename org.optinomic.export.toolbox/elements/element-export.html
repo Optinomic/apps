@@ -190,9 +190,19 @@
             var path_array = field.path.split(".");
 
             var value = Object.assign({}, source);
-            path_array.forEach(function(path, pathID) {
-                value = value[path];    
-            });
+            if ((value !== null) && (value !== undefined)) {
+                path_array.forEach(function(path, pathID) {
+
+                    try {
+                        value = value[path];
+                    } catch (err) {
+                        value = "";
+                    };
+                    
+                });
+            } else {
+                value = ""
+            };
 
 
             console.log('(_dataDive) ', value, source, path_array);
