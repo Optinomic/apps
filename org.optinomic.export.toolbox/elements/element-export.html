@@ -185,6 +185,16 @@
         },
 
 
+        _dataDive: function(source, path) {
+
+            var path_array = path.split(".");
+
+            console.log('(_dataDive) ', source, path, path_array);
+
+            return path;
+        },
+
+
         _createCSVFile: function(def) {
 
             this.debounce('_createCSVFile', function() {
@@ -229,10 +239,13 @@
                                         };
 
                                         // Rows
-                                        rows_str = rows_str + field.path;
+                                        rows_str = rows_str + this._dataDive(sr, field.path);
                                         if (fieldID === fields.length - 1) {
                                             // Last
-                                            rows_str = rows_str + newline;
+                                            if (srID !== survey_responses.length - 1) {
+                                                // Not File-End
+                                                rows_str = rows_str + newline;
+                                            };
                                         } else {
                                             // Not last
                                             rows_str = rows_str + delimitter;
