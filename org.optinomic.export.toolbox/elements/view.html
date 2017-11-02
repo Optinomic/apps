@@ -226,9 +226,15 @@
 
             d.show_help = false;
 
+            include(definitions/_default_fields.js)
             include(definitions/bscl.js)
             include(definitions/isk.js)
             include(definitions/tmt.js)
+
+            // Defaultfields setzen
+            d.bscl.fields = d.default_fields.concat(d.bscl.fields);
+            d.isk.fields = d.default_fields.concat(d.isk.fields);
+            d.tmt.fields = d.default_fields.concat(d.tmt.fields);
 
 
             d.init_done = true;
