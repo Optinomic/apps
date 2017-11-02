@@ -41,15 +41,20 @@
         <div hidden$="[[_d.show_help]]">
             <div id="content">
                 <p>calculation_id: [[_d.tmt.options.calculation_id]]</p>
-                <div class="content_block">
-                    <element-export name="BSCL" file-definitions="[[_d.tmt]]" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
-                </div>
-                <div class="content_block">
-                    <element-export name="ISK" file-definitions="[[_d.tmt]]" calc-id="isk_full" calc-home="org.optinomic.export.toolbox"></element-export>
-                </div>
-                <div class="content_block">
-                    <element-export name="TMT" file-definitions="[[_d.tmt]]" calc-id="tmt_full" calc-home="org.optinomic.export.toolbox"></element-export>
-                </div>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <div class="content_block">
+                        <element-export name="BSCL" file-definitions="[[_d.tmt]]" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    </div>
+                    <div class="content_block">
+                        <element-export name="ISK" file-definitions="[[_d.tmt]]" calc-id="isk_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    </div>
+                    <div class="content_block">
+                        <element-export name="TMT" file-definitions="[[_d.tmt]]" calc-id="tmt_full" calc-home="org.optinomic.export.toolbox"></element-export>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
             </div>
         </div>
         <div hidden$="[[!_d.show_help]]">
@@ -79,9 +84,6 @@
             _clinic: {
                 type: String,
                 statePath: 'clinic.data'
-            },
-            _d: {
-                type: Object
             }
         },
 
@@ -225,11 +227,13 @@
 
             d.show_help = false;
 
-            include(definitions/tmt.js)
+            include(definitions / tmt.js)
 
 
-            this._d = d;
+            d.init_done = true;
             this.set('_d', d);
+            this._d = d;
+
             console.log('TOP (__init)', this._d);
         },
 
