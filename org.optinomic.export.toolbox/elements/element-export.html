@@ -243,8 +243,6 @@
         // -----------------------------
 
         _loadData: function() {
-            console.log('(1) _loadData', this.fileDefinitions);
-
             this.debounce('_loadData', function() {
                 if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
                         Polymer.RenderStatus.afterNextRender(this, function() {
@@ -260,10 +258,8 @@
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {
                 if ((this._sr !== null) && (this._sr !== undefined)) {
-                    var definitions = this.get('fileDefinitions');
-                    console.log('(1) _sr_ready', this._sr, this.fileDefinitions, definitions);
+                    var fileDefinitions = this.get('fileDefinitions');
                     if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
-                        console.log('2 _sr_ready', this._sr, fileDefinitions);
                         Polymer.RenderStatus.afterNextRender(this, function() {
                             this._init();
                         });
