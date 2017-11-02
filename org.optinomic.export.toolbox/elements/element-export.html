@@ -189,9 +189,15 @@
 
             var path_array = field.path.split(".");
 
-            console.log('(_dataDive) ', source, field, path_array);
+            var value = Object.assign({}, source);
+            path_array.forEach(function(path, pathID) {
+                value = value[path];    
+            });
 
-            return path;
+
+            console.log('(_dataDive) ', value, source, path_array);
+
+            return value;
         },
 
 
