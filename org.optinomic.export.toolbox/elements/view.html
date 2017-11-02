@@ -241,8 +241,9 @@
 
 
             d.init_done = true;
-            this._d = d;
+            this._d = {};
             this.set('_d', d);
+            this._d = d;
 
             console.log('TOP (__init)', this._d);
         },
