@@ -144,9 +144,9 @@
             var d = {};
 
             d.fileDefinitions = this.fileDefinitions;
-            
+
             // Defaultfields setzen
-            include(definitions/_default_fields.js)
+            include(../definitions/_default_fields.js)
             d.fileDefinitions.fields = d.default_fields.concat(d.fileDefinitions.fields);
 
             this._createCSVFile(d.fileDefinitions);
