@@ -40,6 +40,7 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="content">
+                <p>calculation_id: [[_d.tmt.options.calculation_id]]</p>
                 <div class="content_block">
                     <element-export name="BSCL" file-definitions="[[_d.tmt]]" calc-id="bscl_full" calc-home="org.optinomic.export.toolbox"></element-export>
                 </div>
@@ -79,7 +80,6 @@
                 type: String,
                 statePath: 'clinic.data'
             },
-
             _d: {
                 type: Object
             }
@@ -228,6 +228,7 @@
             include(definitions/tmt.js)
 
 
+            this._d = d;
             this.set('_d', d);
             console.log('TOP (__init)', this._d);
         },
