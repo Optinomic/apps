@@ -43,7 +43,7 @@
             </div>
             <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                 <div class="horizontal">
-                    <div>
+                    <div class="flex">
                         <p>Data ready</p>
                         <!--
                         <paper-button on-click="onDownloadCSV" raised class="pink">CSV: [[name]]</paper-button>
@@ -203,25 +203,35 @@
 
                             var f = "";
                             var header_str = "";
+                            var header_written = false;
                             var rows_str = "";
                             var delimitter = def.options.delimitter;
                             var newline = "\n";
 
                             survey_responses.forEach(function(sr, srID) {
 
-                                header_str = header_str + sr.name;
-                                rows_str = rows_str + sr.path;
+                                var fields = def.fields;
 
-                                if (srID === survey_responses.length - 1) {
-                                    // Last
-                                    header_str = header_str + newline;
-                                    rows_str = rows_str + newline;
-                                } else {
-                                    // Not last
-                                    header_str = header_str + delimitter;
-                                    rows_str = rows_str + delimitter;
+                                if ((fields !== null) && (fields !== undefined)) {
+                                    fields.forEach(function(field, fieldID) {
+                                        
+                                        if ((header_written === false) && (sr.all_found)) {
+                                            header_str = header_str + field.name;
+                                            rows_str = rows_str + field.path;
+                                        };
+
+                                        if (srID === survey_responses.length - 1) {
+                                            // Last
+                                            header_str = header_str + newline;
+                                            rows_str = rows_str + newline;
+                                        } else {
+                                            // Not last
+                                            header_str = header_str + delimitter;
+                                            rows_str = rows_str + delimitter;
+                                        };
+                                    });
+
                                 };
-
                             });
 
                             var file = header_str + rows_str;
@@ -243,11 +253,11 @@
         _loadData: function() {
             this.debounce('_loadData', function() {
                 if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
-                        Polymer.RenderStatus.afterNextRender(this, function() {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
 
-                            this.dispatch('actionGetUserAppCalculation', this.calcHome, this.calcId);
+                        this.dispatch('actionGetUserAppCalculation', this.calcHome, this.calcId);
 
-                        });
+                    });
                 };
 
             }, 250);
