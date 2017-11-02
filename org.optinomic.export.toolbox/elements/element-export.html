@@ -102,8 +102,10 @@
 
                                 var home_str = this.calcHome.split('.').join("_");
                                 var path = home_str + "___" + this.calcId;
-                                // console.log('path', path);
                                 if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                                    console.log('_sr', state._app_userapp_calculations[path].data);
+
                                     return state._app_userapp_calculations[path].data;
 
                                 };
@@ -178,9 +180,9 @@
 
             // Set & Log
             d.init_done = true;
-            console.log('(INIT) ' + d.name, d);
             this.set('_d', d);
             this._d = d;
+            console.log('(INIT) ' + d.name, d);
         },
 
 
@@ -254,6 +256,8 @@
         },
 
         _sr_ready: function() {
+            console.log('_sr_ready', this._sr);
+            
             this.debounce('_sr_ready', function() {
                 if ((this._sr !== null) && (this._sr !== undefined)) {
                     if ((this.definitions !== null) && (this.definitions !== undefined)) {
