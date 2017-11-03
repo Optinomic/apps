@@ -25,7 +25,7 @@ include(elements/element-bdi.html)
 include(elements/view.html)
 
 
-[template BDI_OLD 6 6]
+[template BDI_simple_score 6 6]
 <head>
 	<style>	
 		include(../lib/css/set/optinomic_material_bootstrap.m4)
