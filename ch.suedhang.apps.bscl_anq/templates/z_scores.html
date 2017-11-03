@@ -94,7 +94,7 @@
     </div>
     <div class="no-page-break" ng-repeat="data in item.data" style="margin-top: -6px;">
         <div class="no-page-break" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between start">
-            <div flex>
+            <div flex="80">
                 <div style="padding-left: 12px;">
                     <p class="md-body-2">{{data.zscore.text_left}}</p>
                     <p ng-if="!data.calculation.info.response.q504V00" class="md-body-1" style="margin-top: -12px;">{{data.calculation.info.filled | date}}</p>
