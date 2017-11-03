@@ -37,6 +37,8 @@
                 <div class="flex">
                     <optinomic-title small h1="[[fileDefinitions.options.name]]" h3="[[fileDefinitions.options.paitent_app_id]]:[[fileDefinitions.options.calculation_id]] ([[_sr.survey_responses.length]])"></optinomic-title>
                 </div>
+            </div>
+            <div>
                 <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                     <div class="horizontal">
                         <div>
@@ -44,7 +46,9 @@
                             <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
                         </div>
                         <div>
-                            <paper-button class="grey" on-tap="__onDownload">Speichern</paper-button>
+                            <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
+                            <a href="#" id="fileLinkJSON" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                            <paper-button class="grey" on-tap="__onDownload">CSV</paper-button>
                             <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].csv"></a>
                         </div>
                     </div>
@@ -111,6 +115,21 @@
             jsonLink.click();
         },
 
+        __onDownloadJSON(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSON');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
         __onDownloadDebug(e) {
             e.preventDefault();
 
@@ -145,6 +164,7 @@
 
             d.fileDefinitions = this.fileDefinitions;
 
+            this._createJSONFile(d.fileDefinitions);
             this._createCSVFile(d.fileDefinitions);
 
             // Set & Log
@@ -178,6 +198,75 @@
             // console.log('(_dataDive) ', value, source, path_array);
 
             return value;
+        },
+
+
+        _createJSONFile: function(def) {
+
+            this.debounce('_createJSONFile', function() {
+                // console.log('_createCSVFile', this._sr);
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if (this._sr.survey_responses.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _sr = this.get('_sr');
+
+                        if ("survey_responses" in _sr) {
+                            var survey_responses = this._sr.survey_responses;
+
+                            // console.log('-> survey_responses', survey_responses);
+
+                            var header_array = [];
+                            var rows_array = [];
+                            var header_written = false;
+
+                            survey_responses.forEach(function(sr, srID) {
+
+                                var fields_array = [];
+                                var fields = def.fields;
+
+                                if ((fields !== null) && (fields !== undefined)) {
+                                    fields.forEach(function(field, fieldID) {
+
+                                        // Header
+                                        if ((header_written === false) && (sr.all_found)) {
+                                            header_array.push(field.name);
+                                        };
+
+                                        // Rows
+                                        var current_field = {
+                                            "name": field.name,
+                                            "value": this._dataDive(sr, field)
+                                        };
+                                        
+                                        // console.log('current_field', current_field)
+                                        
+                                        fields_array.push(current_field);
+
+                                    }.bind(this));
+
+                                    rows_array.push(fields_array);
+                                    
+                                    if (header_array.length > 0) {
+                                        header_written = true;
+                                    };
+
+                                };
+                            }.bind(this));
+
+                            var file = {
+                                "header": header_array,
+                                "data": rows_array
+                            };
+                            console.log('-> JSON file', file);
+
+                            this.set('_json_file', file);
+
+                        };
+                    };
+                };
+            }, 250);
         },
 
 
