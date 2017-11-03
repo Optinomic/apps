@@ -26,19 +26,15 @@ include(elements/view.html)
 
 
 [template BDI_simple_score 6 6]
-<head>
-	<style>	
-		include(../lib/css/set/optinomic_material_bootstrap.m4)
-		include(style.css)
-	</style>	
-	<script>
-		include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-	</script>
-</head>
-<script>
-include(main.js)
-</script>
+<style>	
+	include(../lib/css/set/optinomic_material_bootstrap.m4)
+	include(style.css)
+</style>	
 include(templates/score.html)
+<script>
+	include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+	include(main.js)
+</script>
 
 
 
