@@ -19,22 +19,25 @@ phone = +41 (0)31 828 14 14
 website = http://suedhang.ch/de/
 
 
-[template BDI 6 35]
+[template BDI 6 12]
 include(../lib/polymer/index.m4)
 include(elements/element-bdi.html)
 include(elements/view.html)
 
 
 [template BDI_OLD 6 6]
-<style>	
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
-</style>	
-<script>
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
-</script>
-include(templates/score.html)
+<head>
+	<style>	
+		include(../lib/css/set/optinomic_material_bootstrap.m4)
+		include(style.css)
+	</style>	
+	<script>
+		include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+		include(main.js)
+	</script>
+	include(templates/score.html)
+</head>
+
 
 
 
