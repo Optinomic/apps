@@ -245,6 +245,13 @@
             d.tmt.fields = d.tmt.fields.concat(d.default_bottom_fields);
 
 
+            // Create Array of all Files
+            d.export_files = [];
+            d.export_files.push(d.bscl);
+            d.export_files.push(d.isk);
+            d.export_files.push(d.tmt);
+
+
             d.init_done = true;
             this._d = {};
             this.set('_d', d);
