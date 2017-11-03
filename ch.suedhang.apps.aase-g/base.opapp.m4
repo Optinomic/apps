@@ -17,8 +17,23 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template score 4 6]
+[template AASE 6 12]
+include(../lib/polymer/index.m4)
+include(elements/element-aase.html)
+include(elements/view.html)
+
+
+[template AASE_score 4 6]
+<style>	
+	include(../lib/css/set/optinomic_material_bootstrap.m4)
+	include(style.css)
+</style>	
 include(templates/score_scales.html)
+<script>
+	include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+	include(main.js)
+</script>
+
 
 [readme]
 include(readme.md)
@@ -26,14 +41,6 @@ include(readme.md)
 
 [dependencies]
 
-[javascript]
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
-
-
-[css]
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
 
 [survey]
 id = aase
