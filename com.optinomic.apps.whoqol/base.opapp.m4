@@ -17,23 +17,27 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
+[template WHOQOL 6 12]
+include(../lib/polymer/index.m4)
+include(elements/element-whoqol.html)
+include(elements/view.html)
+
 [template simple_score 6 7]
+<style>
+include(../lib/css/set/optinomic_material_bootstrap.m4)
+include(style.css)
+</style>
 include(templates/score.html)
+<script>
+include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+include(main.js)
+</script>
 
 [readme]
 include(readme.md)
 
 [dependencies]
 
-
-[javascript]
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
-
-
-[css]
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
 
 [survey]
 id = WHOQOL
