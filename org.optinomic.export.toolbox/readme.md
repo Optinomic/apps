@@ -6,7 +6,7 @@ Easy export of survey responses with calculation values.
 
 ## Definitions - Example
 
-```JS
+
 d.bscl = {
     "options": {
         "app_id": "org.optinomic.export.toolbox",
@@ -20,17 +20,17 @@ d.bscl = {
         { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score", "type": "number" }
     ]
 };
-```
+
 
 ### Fields
 #### Name
-Define the `name` of the filed.
+Define the _name_ of the filed.
 
 #### Path
-The path to the value is defined in  `path`. Based from the `survey_responses` Array.
+The path to the value is defined in  _path_. Based from the _survey_responses_ Array.
 
 #### Data-Types
-The following data types (`type`) are supportet:
+The following data types (_type_) are supportet:
 
 - number
 - string
