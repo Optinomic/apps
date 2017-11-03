@@ -35,7 +35,7 @@
         <div id="element">
             <div id="title" class="layout horizontal flex">
                 <div class="flex">
-                    <optinomic-title small h1="[[fileDefinitions.options.name]]" h3="[[fileDefinitions.options.calculation_id]] ([[_sr.survey_responses.length]])"></optinomic-title>
+                    <optinomic-title small h1="[[fileDefinitions.options.name]]" h3="[[fileDefinitions.options.paitent_app_id]]:[[fileDefinitions.options.calculation_id]] ([[_sr.survey_responses.length]])"></optinomic-title>
                 </div>
                 <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                     <div class="horizontal">
@@ -145,6 +145,7 @@
 
             d.fileDefinitions = this.fileDefinitions;
 
+            include(definitions/_default_bottom_fields.js)
 
             this._createCSVFile(d.fileDefinitions);
 
