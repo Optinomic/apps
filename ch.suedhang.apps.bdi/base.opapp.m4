@@ -33,10 +33,12 @@ include(elements/view.html)
 	</style>	
 	<script>
 		include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-		include(main.js)
 	</script>
-	include(templates/score.html)
 </head>
+<script>
+include(main.js)
+</script>
+include(templates/score.html)
 
 
 
