@@ -20,21 +20,20 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template BSCL 6 12]
-include(../lib/polymer/index.m4)
-include(elements/element-bscl.html)
-include(elements/view.html)
-
 [template z_scores 6 10]
-<style>
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
-</style>
 include(templates/score_page.html)
-<script>
+
+
+
+[javascript]
 include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
 include(main.js)
-</script>
+
+
+[css]
+include(../lib/css/set/optinomic_material_bootstrap.m4)
+include(style.css)
+
 
 
 [survey]
