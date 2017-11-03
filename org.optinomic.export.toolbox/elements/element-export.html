@@ -33,30 +33,28 @@
         }
         </style>
         <div id="element">
-            <div id="title" class="layout horizontal flex">
-                <div class="flex">
-                    <optinomic-title small h1="[[fileDefinitions.options.name]]" h3="[[fileDefinitions.options.paitent_app_id]]:[[fileDefinitions.options.calculation_id]] ([[_sr.survey_responses.length]])"></optinomic-title>
-                </div>
-            </div>
-            <div>
-                <template is="dom-if" if="[[_d.init_done]]" restamp="true">
-                    <div class="horizontal">
-                        <div>
-                            <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
-                            <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
-                        </div>
-                        <div>
-                            <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
-                            <a href="#" id="fileLinkJSON" hidden download$="[[fileDefinitions.options.name]].json"></a>
-                            <paper-button class="grey" on-tap="__onDownload">CSV</paper-button>
-                            <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].csv"></a>
-                        </div>
+            <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] | [[_sr.survey_responses.length]]</b>
+                            <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
                     </div>
-                </template>
-                <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
-                    <optinomic-indication sign=":" title="Daten bereitstellen..." color="#3F51B5"></optinomic-indication>
-                </template>
-            </div>
+                    <div>
+                        <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                    </div>
+                    <div>
+                        <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
+                        <a href="#" id="fileLinkJSON" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                        <paper-button class="grey" on-tap="__onDownload">CSV</paper-button>
+                        <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].csv"></a>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
+                <p style="height:42px;"><b>[[fileDefinitions.options.name]] | laden...</b>
+                    <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
+            </template>
         </div>
     </template>
     <script>
@@ -239,15 +237,15 @@
                                             "name": field.name,
                                             "value": this._dataDive(sr, field)
                                         };
-                                        
+
                                         // console.log('current_field', current_field)
-                                        
+
                                         fields_array.push(current_field);
 
                                     }.bind(this));
 
                                     rows_array.push(fields_array);
-                                    
+
                                     if (header_array.length > 0) {
                                         header_written = true;
                                     };
