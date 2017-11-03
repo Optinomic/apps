@@ -23,7 +23,7 @@ include(elements/element-aase.html)
 include(elements/view.html)
 
 
-[template AASE_score 4 6]
+[template score 4 6]
 <style>	
 	include(../lib/css/set/optinomic_material_bootstrap.m4)
 	include(style.css)
