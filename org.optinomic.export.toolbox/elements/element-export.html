@@ -36,7 +36,7 @@
             <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                 <div class="horizontal">
                     <div class="flex">
-                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] | [[_sr.survey_responses.length]]</b>
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] ([[_sr.survey_responses.length]])</b>
                             <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
                     </div>
                     <div>
@@ -52,7 +52,7 @@
                 </div>
             </template>
             <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
-                <p style="height:42px;"><b>[[fileDefinitions.options.name]] | laden...</b>
+                <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
                     <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
             </template>
         </div>
