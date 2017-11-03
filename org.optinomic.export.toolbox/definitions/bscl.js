@@ -6,8 +6,8 @@ d.bscl = {
         "delimitter": ";"
     },
     "fields": [
-        { "name": "bscl_paranoides_denken_scale_score", "path": "calculation.all_results.paranoides_denken_scale_score" },
-        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score" },
-        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score" }
+        { "name": "bscl_paranoides_denken_scale_score", "path": "calculation.all_results.paranoides_denken_scale_score", "type": "number" },
+        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score", "type": "number" },
+        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score", "type": "number" }
     ]
 };

@@ -185,7 +185,7 @@
         _createCSVFile: function(def) {
 
             this.debounce('_createCSVFile', function() {
-                console.log('_createCSVFile', this._sr);
+                // console.log('_createCSVFile', this._sr);
 
                 if ((this._sr !== undefined) && (this._sr !== null)) {
                     if (this._sr.survey_responses.length > 0) {
@@ -196,7 +196,7 @@
                         if ("survey_responses" in _sr) {
                             var survey_responses = this._sr.survey_responses;
 
-                            console.log('-> survey_responses', survey_responses);
+                            // console.log('-> survey_responses', survey_responses);
 
                             var f = "";
                             var header_str = "";
