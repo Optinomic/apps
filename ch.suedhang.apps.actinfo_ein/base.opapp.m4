@@ -17,7 +17,7 @@ phone = +41 (0)44 508 26 76
 website = http://www.optinomic.com/
 
 
-[template ActInfo 6 12]
+[template ActInfo 6 35]
 include(../lib/polymer/index.m4)
 include(elements/element-actinfo.html)
 include(elements/actinfo-problemsubstanzen.html)
