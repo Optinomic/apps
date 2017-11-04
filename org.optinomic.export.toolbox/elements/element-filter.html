@@ -1,0 +1,153 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-listbox/paper-listbox.html">
+<link rel="import" href="paper-item/paper-item.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box-light.html">
+<link rel="import" href="iron-dropdown/iron-dropdown.html">
+<dom-module id="element-filter">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+        </style>
+        <div id="element">
+            <div>
+                <h3>Erhebungszeitraum</h3>
+                <div class="horizontal">
+                    <paper-input label="Von" placeholder="YYYY-MM-DD"></paper-input>
+                    <paper-input label="Bis" placeholder="YYYY-MM-DD"></paper-input>
+                </div>
+            </div>
+            <h3>Falltypen</h3>
+            <iron-dropdown horizontal-align="right" vertical-align="top">
+                <div slot="dropdown-content">Hello!</div>
+            </iron-dropdown>
+            <h3>Patientengruppen</h3>
+            <p>vaadin-combo-box</p>
+            <vaadin-combo-box items="[[_d.falltyp.all]]" item-value-path="typ" item-label-path="typ">
+                <template>
+                    <paper-icon-item>
+                        <paper-item-body two-line>
+                            <div>[[item.typ]] [[item.name]]</div>
+                            <div secondary>[[item.name]]</div>
+                        </paper-item-body>
+                    </paper-icon-item>
+                </template>
+            </vaadin-combo-box>
+            <p>vaadin-combo-box</p>
+            <vaadin-combo-box-light items="[[_d.falltyp.all]]" item-value-path="typ" item-label-path="typ">
+                <template>
+                    <paper-icon-item>
+                        <paper-item-body two-line>
+                            <div>[[item.typ]] [[item.name]]</div>
+                            <div secondary>[[item.name]]</div>
+                        </paper-item-body>
+                    </paper-icon-item>
+                </template>
+            </vaadin-combo-box-light>
+            <p>listbox</p>
+            <paper-listbox selected="0">
+                <paper-item>Inbox</paper-item>
+                <paper-item disabled>Starred</paper-item>
+                <paper-item>Sent mail</paper-item>
+                <paper-item>Drafts</paper-item>
+            </paper-listbox>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-filter',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+            srInput: {
+                type: Object,
+                observer: '_loadData'
+            },
+            _d: {
+                type: Object
+            },
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+
+        // --------------------------------
+        // Helpers
+        // --------------------------------
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            // Falltyp
+            d.falltyp = {
+                "all": [{
+                    "id": 0,
+                    "typ": "Alle",
+                    "name": "Alle Messungen im Erhebungszeitraum ausgeben"
+                }, {
+                    "id": 1,
+                    "typ": "A1",
+                    "name": "Ein- und Austritt im Erhebungszeitraum"
+                }, {
+                    "id": 2,
+                    "typ": "A2",
+                    "name": "Einritt vor Erhebungszeitraum und Austritt im Erhebungszeitraum"
+                }, {
+                    "id": 3,
+                    "typ": "B",
+                    "name": "Einritt im Erhebungszeitraum und Austritt nach Erhebungszeitraum"
+                }, {
+                    "id": 4,
+                    "typ": "C",
+                    "name": "Eintritt vor Erhebungszeitraum und Austritt nach Erhebungszeitraum"
+                }]
+            };
+
+            // Set & Log
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('(INIT) ' + d.fileDefinitions.options.name, d);
+        },
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+
+            this._init();
+
+        }
+    });
+    </script>
+</dom-module>

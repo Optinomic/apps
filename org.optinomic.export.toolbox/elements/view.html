@@ -42,6 +42,9 @@
             </div>
         </div>
         <div hidden$="[[_d.show_help]]">
+            <div id="filter">
+                <element-filter></element-filter>
+            </div>
             <div id="content">
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
