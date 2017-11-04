@@ -3,10 +3,7 @@
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="iron-collapse/iron-collapse.html">
-<link rel="import" href="vaadin-grid/vaadin-grid.html">
-<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+
 <dom-module id="element-export">
     <template>
         <style include="shared-styles">
@@ -31,29 +28,66 @@
             margin-top: 24px;
             margin-bottom: 12px;
         }
+
+        .button_description {
+            font-size: 12px;
+            color: #9E9E9E;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .result_group {
+            border-left-style: solid;
+            border-left-color: #F5F5F5;
+            border-left-width: 1px;
+        }
         </style>
         <div id="element">
             <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                 <div class="horizontal">
+                    <div style="width:52px;">
+                        <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                    </div>
                     <div class="flex">
-                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] ([[_sr.survey_responses.length]])</b>
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b>
                             <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
+                    </div>
+                    <template is="dom-if" if="[[_filtered_sr]]" restamp="true">
+                        <div class="result_group">
+                            <p class="button_description">Gefiltert: [[_filtered_sr.length]]</p>
+                            <div class="horizontal">
+                                <paper-button class="grey" on-tap="__onDownloadJSONFiltered">JSON</paper-button>
+                                <a href="#" id="fileLinkJSONFiltered" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                                <paper-button class="grey" on-tap="__onDownloadCSVFiltered">CSV</paper-button>
+                                <a href="#" id="fileLinkCSVFiltered" hidden download$="[[fileDefinitions.options.name]].csv"></a>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="result_group">
+                        <p class="button_description">Ungefiltert: [[_sr.survey_responses.length]]</p>
+                        <div class="horizontal">
+                            <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
+                            <a href="#" id="fileLinkJSON" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                            <paper-button class="grey" on-tap="__onDownloadCSV">CSV</paper-button>
+                            <a href="#" id="fileLinkCSV" hidden download$="[[fileDefinitions.options.name]].csv"></a>
+                        </div>
                     </div>
                     <div>
                         <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
                         <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
                     </div>
-                    <div>
-                        <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
-                        <a href="#" id="fileLinkJSON" hidden download$="[[fileDefinitions.options.name]].json"></a>
-                        <paper-button class="grey" on-tap="__onDownload">CSV</paper-button>
-                        <a href="#" id="fileLink" hidden download$="[[fileDefinitions.options.name]].csv"></a>
-                    </div>
                 </div>
             </template>
             <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
-                <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
-                    <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
+                <div class="horizontal">
+                    <div style="width:52px;">&nbsp;</div>
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
+                            <br><span class="caption">[[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]]</span></p>
+                    </div>
+                </div>
             </template>
         </div>
     </template>
@@ -61,7 +95,7 @@
     Polymer({
         is: 'element-export',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
 
         properties: {
             fileDefinitions: {
@@ -102,13 +136,13 @@
         // User-Click Functions
         // -----------------------------
 
-        __onDownload(e) {
+        __onDownloadCSV(e) {
             e.preventDefault();
 
             // File Content
             var content = this._csv_file;
 
-            var jsonLink = this.$$('#fileLink');
+            var jsonLink = this.$$('#fileLinkCSV');
             const link = this._createFile(content);
 
             // console.log('File Content', content, jsonLink);
@@ -132,6 +166,36 @@
             jsonLink.click();
         },
 
+        __onDownloadCSVFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this._csv_file_filtered;
+
+            var jsonLink = this.$$('#fileLinkCSVFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadJSONFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file_filtered, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSONFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
         __onDownloadDebug(e) {
             e.preventDefault();
 
@@ -147,9 +211,6 @@
             jsonLink.click();
         },
 
-        // --------------------------------
-        // Helpers
-        // --------------------------------
         _createFile(text) {
             const textBlob = new Blob([text], { type: 'text/plain' });
             return window.URL.createObjectURL(textBlob);
@@ -160,13 +221,13 @@
         // Functions
         // -----------------------------
 
-        _createFiles: function() {
+        _createFiles: function(filtered) {
 
-            this._createJSONFile(this.fileDefinitions);
-            this._createCSVFile(this.fileDefinitions);
+            filtered = filtered || false;
 
+            this._createJSONFile(this.fileDefinitions, filtered);
+            this._createCSVFile(this.fileDefinitions, filtered);
         },
-
 
         _init: function() {
 
@@ -181,9 +242,8 @@
             d.init_done = true;
             this.set('_d', d);
             this._d = d;
-            console.log('(INIT) ' + d.fileDefinitions.options.name, d);
+            // console.log('(INIT) ' + d.fileDefinitions.options.name, d);
         },
-
 
         _filterSR: function() {
             function dateCheck(from, to, check) {
@@ -198,13 +258,23 @@
                 return false;
             };
 
+            function inGroup(a, id) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].id === id) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
             var sr_filtered = [];
             var survey_responses = this._sr.survey_responses;
+            var patient_groups = this._sr.patient_groups;
             var filter = this.filter;
 
-            console.warn('_filterSR', filter, survey_responses);
+            // console.warn('_filterSR', filter, survey_responses, patient_groups);
 
-
+            // Falltypen
             survey_responses.forEach(function(sr, srID) {
                 var filled = sr.survey_response.filled;
 
@@ -249,13 +319,36 @@
 
             });
 
-            console.error('_filteredSR', sr_filtered);
+            // Patientengruppe
+            if (filter.patient_group !== 9999) {
+                var pre_sr = sr_filtered.slice(0);
+                var filter_group = null;
+                sr_filtered = [];
 
+                // Gruppe finden
+                patient_groups.forEach(function(pg, pgID) {
+                    if (pg.entity.id === filter.patient_group) {
+                        filter_group = Object.assign({}, pg);
+                    };
+                });
 
-            // if((check.getTime() <= to.getTime() && check.getTime() >= from.getTime()))      alert("date contained");
-            // new Date(dateString)
+                // Gruppe finden
+                if (filter_group !== null) {
+
+                    pre_sr.forEach(function(sr, srID) {
+                        if (inGroup(filter_group.patients, sr.patient_id)) {
+                            sr_filtered.push(sr);
+                            // console.error('FOUND', filter_group.patients, sr.patient_id);
+                        };
+                    });
+                };
+
+            };
+
+            this.set('_filtered_sr', sr_filtered);
+            this._createFiles(true);
+            // console.error('_filteredSR', sr_filtered.length, sr_filtered);
         },
-
 
         _dataDive: function(source, field) {
 
@@ -282,148 +375,181 @@
             return value;
         },
 
-
-        _createJSONFile: function(def) {
+        _createJSONFile: function(def, filtered) {
 
             this.debounce('_createJSONFile', function() {
-                // console.log('_createCSVFile', this._sr);
 
-                if ((this._sr !== undefined) && (this._sr !== null)) {
-                    if (this._sr.survey_responses.length > 0) {
+                function create(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
 
-                        // We have data -> Proceed.
-                        var _sr = this.get('_sr');
+                    var header_array = [];
+                    var rows_array = [];
+                    var header_written = false;
 
-                        if ("survey_responses" in _sr) {
-                            var survey_responses = this._sr.survey_responses;
+                    survey_responses.forEach(function(sr, srID) {
 
-                            // console.log('-> survey_responses', survey_responses);
+                        var fields_array = [];
+                        var fields = def.fields;
 
-                            var header_array = [];
-                            var rows_array = [];
-                            var header_written = false;
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
 
-                            survey_responses.forEach(function(sr, srID) {
-
-                                var fields_array = [];
-                                var fields = def.fields;
-
-                                if ((fields !== null) && (fields !== undefined)) {
-                                    fields.forEach(function(field, fieldID) {
-
-                                        // Header
-                                        if ((header_written === false) && (sr.all_found)) {
-                                            header_array.push(field.name);
-                                        };
-
-                                        // Rows
-                                        var current_field = {
-                                            "name": field.name,
-                                            "value": this._dataDive(sr, field)
-                                        };
-
-                                        // console.log('current_field', current_field)
-
-                                        fields_array.push(current_field);
-
-                                    }.bind(this));
-
-                                    rows_array.push(fields_array);
-
-                                    if (header_array.length > 0) {
-                                        header_written = true;
-                                    };
-
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_array.push(field.name);
                                 };
+
+                                // Rows
+                                var current_field = {
+                                    "name": field.name,
+                                    "value": _dataDive(sr, field)
+                                };
+
+                                // console.log('current_field', current_field)
+
+                                fields_array.push(current_field);
+
                             }.bind(this));
 
-                            var file = {
-                                "header": header_array,
-                                "data": rows_array
-                            };
-                            console.log('-> JSON file', file);
+                            rows_array.push(fields_array);
 
-                            this.set('_json_file', file);
+                            if (header_array.length > 0) {
+                                header_written = true;
+                            };
 
                         };
+                    }.bind(this));
+
+                    var file = {
+                        "header": header_array,
+                        "data": rows_array
                     };
+                    // console.log('-> JSON file', file);
+
+                    return file;
+                };
+
+
+                // console.log('_createJSONFile', this._sr, filtered);
+
+                if (filtered === true) {
+
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
+
+                            // We have data -> Proceed.
+                            this.set('_json_file_filtered', create(this._filtered_sr, this._dataDive));
+                        };
+                    };
+
+                } else {
+
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _sr = this.get('_sr');
+
+                            if ("survey_responses" in _sr) {
+
+                                this.set('_json_file', create(_sr.survey_responses, this._dataDive));
+
+                            };
+                        };
+                    };
+
                 };
             }, 250);
         },
 
-
-        _createCSVFile: function(def) {
+        _createCSVFile: function(def, filtered) {
 
             this.debounce('_createCSVFile', function() {
-                // console.log('_createCSVFile', this._sr);
 
-                if ((this._sr !== undefined) && (this._sr !== null)) {
-                    if (this._sr.survey_responses.length > 0) {
+                function create(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
 
-                        // We have data -> Proceed.
-                        var _sr = this.get('_sr');
+                    var f = "";
+                    var header_str = "";
+                    var header_written = false;
+                    var rows_str = "";
+                    var delimitter = def.options.delimitter;
+                    var newline = "\n";
 
-                        if ("survey_responses" in _sr) {
-                            var survey_responses = this._sr.survey_responses;
+                    survey_responses.forEach(function(sr, srID) {
 
-                            // console.log('-> survey_responses', survey_responses);
+                        var fields = def.fields;
 
-                            var f = "";
-                            var header_str = "";
-                            var header_written = false;
-                            var rows_str = "";
-                            var delimitter = def.options.delimitter;
-                            var newline = "\n";
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
 
-                            survey_responses.forEach(function(sr, srID) {
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_str = header_str + field.name;
 
-                                var fields = def.fields;
-
-                                if ((fields !== null) && (fields !== undefined)) {
-                                    fields.forEach(function(field, fieldID) {
-
-                                        // Header
-                                        if ((header_written === false) && (sr.all_found)) {
-                                            header_str = header_str + field.name;
-
-                                            if (fieldID === fields.length - 1) {
-                                                // Last
-                                                header_str = header_str + newline;
-                                            } else {
-                                                // Not last
-                                                header_str = header_str + delimitter;
-                                            };
-                                        };
-
-                                        // Rows
-                                        rows_str = rows_str + this._dataDive(sr, field);
-                                        if (fieldID === fields.length - 1) {
-                                            // Last
-                                            if (srID !== survey_responses.length - 1) {
-                                                // Not File-End
-                                                rows_str = rows_str + newline;
-                                            };
-                                        } else {
-                                            // Not last
-                                            rows_str = rows_str + delimitter;
-                                        };
-
-                                    }.bind(this));
-
-                                    if (header_str !== "") {
-                                        header_written = true;
+                                    if (fieldID === fields.length - 1) {
+                                        // Last
+                                        header_str = header_str + newline;
+                                    } else {
+                                        // Not last
+                                        header_str = header_str + delimitter;
                                     };
-
                                 };
+
+                                // Rows
+                                rows_str = rows_str + _dataDive(sr, field);
+                                if (fieldID === fields.length - 1) {
+                                    // Last
+                                    if (srID !== survey_responses.length - 1) {
+                                        // Not File-End
+                                        rows_str = rows_str + newline;
+                                    };
+                                } else {
+                                    // Not last
+                                    rows_str = rows_str + delimitter;
+                                };
+
                             }.bind(this));
 
-                            var file = header_str + rows_str;
-                            // console.log('-> file', file);
-
-                            this.set('_csv_file', file);
+                            if (header_str !== "") {
+                                header_written = true;
+                            };
 
                         };
+                    }.bind(this));
+
+                    var file = header_str + rows_str;
+                    // console.log('-> file', file);
+
+                    return file;
+                };
+
+
+                if (filtered === true) {
+
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
+
+                            // We have data -> Proceed.
+                            this.set('_csv_file_filtered', create(this._filtered_sr, this._dataDive));
+                        };
                     };
+
+                } else {
+
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _sr = this.get('_sr');
+
+                            if ("survey_responses" in _sr) {
+                                var survey_responses = this._sr.survey_responses;
+                                this.set('_csv_file', create(survey_responses, this._dataDive));
+                            };
+                        };
+                    };
+
                 };
             }, 250);
         },
@@ -466,8 +592,6 @@
             }, 250);
         },
 
-
-
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {
                 if ((this._sr !== null) && (this._sr !== undefined)) {
@@ -494,8 +618,8 @@
             var d = {};
             d.init_done = false;
             this.set('_d', d);
-
         }
+
     });
     </script>
 </dom-module>

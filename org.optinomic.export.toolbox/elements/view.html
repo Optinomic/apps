@@ -46,6 +46,7 @@
                 <element-filter input="[[]]" patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
             </div>
             <div id="content">
+                <h3>Files</h3>
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
                         <element-export file-definitions="[[_d.bscl]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
