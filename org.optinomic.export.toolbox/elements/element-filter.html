@@ -44,9 +44,26 @@
                     </div>
                 </div>
                 <div class="horizontal">
+                    <template is="dom-if" if="[[patientGroupsReady]]" restamp="true">
+                        <div class="flex">
+                            <vaadin-combo-box id="patient_group" value="[[pg_groups.selected.id]]" label="Patientengruppe" items="[[pg_groups.all]]" item-value-path="id" item-label-path="name">
+                                <template>
+                                    <paper-icon-item>
+                                        <paper-item-body>
+                                            <div><b>[[item.typ]]:</b> [[item.name]]</div>
+                                        </paper-item-body>
+                                    </paper-icon-item>
+                                </template>
+                            </vaadin-combo-box>
+                        </div>
+                    </template>
+                </div>
+                <div class="horizontal">
                     <div class="flex">&nbsp;</div>
-                    <div>
-                        <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
+                    <div style="height:42px;">
+                        <template is="dom-if" if="[[patientGroupsReady]]" restamp="true">
+                            <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -59,13 +76,9 @@
         behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
 
         properties: {
-            input: {
-                type: Object,
-                observer: '_loadData'
-            },
             patientGroups: {
                 type: Object,
-                observer: '_loadData'
+                observer: '_setPatientGroups'
             },
             _d: {
                 type: Object
@@ -142,6 +155,7 @@
 
         _getFilter: function() {
             var falltyp = this.$$('#falltyp');
+            var patient_group = this.$$('#patient_group');
             var erhebungszeitraum_von = this.$$('#erhebungszeitraum_von');
             var erhebungszeitraum_bis = this.$$('#erhebungszeitraum_bis');
 
@@ -149,6 +163,7 @@
                 "erhebungszeitraum_von": erhebungszeitraum_von.value,
                 "erhebungszeitraum_bis": erhebungszeitraum_bis.value,
                 "falltyp": falltyp.value,
+                "patient_group": patient_group.value
             };
 
             this.fire('filter', filter);
@@ -159,8 +174,44 @@
         // Observer
         // -----------------------------
 
-        _loadData: function() {
-            console.log('_loadData (element-filter)', this.input, this.patientGroups);
+        _setPatientGroups: function() {
+            if ((this.patientGroups !== null) && (this.patientGroups !== undefined)) {
+                console.log('_setPatientGroups (element-filter)', this.patientGroups);
+
+
+
+                // Patienten-Gruppen
+                var pg_groups = {
+                    "all": [{
+                        "id": 9999,
+                        "typ": "Alle",
+                        "name": "Messungen aller Patienten ausgeben"
+                    }]
+                };
+
+                this.patientGroups.forEach(function(pg, pgID) {
+                    var pg_to_add = {
+                        "id": pg.entity.id,
+                        "typ": "PG",
+                        "name": pg.entity.data.name
+                    };
+
+                    pg_to_add.name = pg_to_add.name + " (" + pg.patients.length + ")";
+
+                    pg_groups.all.push(pg_to_add);
+                });
+
+                pg_groups.selected = pg_groups.all[0];
+
+
+                this.set('pg_groups', pg_groups);
+                this.set('patientGroupsReady', true);
+
+                console.log('pg_groups', pg_groups);
+
+
+
+            };
         },
 
         // -----------------------------

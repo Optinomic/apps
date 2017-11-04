@@ -68,6 +68,10 @@
                 type: Object,
                 observer: '_loadData'
             },
+            filter: {
+                type: Object,
+                observer: '_filterChanged'
+            },
             _d: {
                 type: Object
             },
@@ -178,6 +182,78 @@
             this.set('_d', d);
             this._d = d;
             console.log('(INIT) ' + d.fileDefinitions.options.name, d);
+        },
+
+
+        _filterSR: function() {
+            function dateCheck(from, to, check) {
+                var fDate, lDate, cDate;
+                fDate = Date.parse(from);
+                lDate = Date.parse(to);
+                cDate = Date.parse(check);
+
+                if ((cDate <= lDate && cDate >= fDate)) {
+                    return true;
+                }
+                return false;
+            };
+
+            var sr_filtered = [];
+            var survey_responses = this._sr.survey_responses;
+            var filter = this.filter;
+
+            console.warn('_filterSR', filter, survey_responses);
+
+
+            survey_responses.forEach(function(sr, srID) {
+                var filled = sr.survey_response.filled;
+
+                var eintritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.start);
+                var austritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.stop);
+
+
+                // Falltyp: Alle
+                if (filter.falltyp === "Alle") {
+                    if (dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, filled)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A1
+                if (filter.falltyp === "A1") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A2
+                if (filter.falltyp === "A2") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: B
+                if (filter.falltyp === "B") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: C
+                if (filter.falltyp === "C") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+            });
+
+            console.error('_filteredSR', sr_filtered);
+
+
+            // if((check.getTime() <= to.getTime() && check.getTime() >= from.getTime()))      alert("date contained");
+            // new Date(dateString)
         },
 
 
@@ -369,6 +445,28 @@
 
             }, 250);
         },
+
+        _filterChanged: function() {
+            this.debounce('_filterChanged', function() {
+                if ((this.filter !== null) && (this.filter !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+
+                        if ((this._sr !== undefined) && (this._sr !== null)) {
+                            this._filterSR(this.filter, this._sr);
+                        } else {
+                            setTimeout(function() {
+                                this._filterChanged();
+                            }.bind(this), 800);
+                        };
+
+                    });
+                };
+
+            }, 250);
+        },
+
+
 
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {

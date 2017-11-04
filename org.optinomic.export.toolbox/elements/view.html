@@ -43,18 +43,18 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="filter">
-                <element-filter patient-groups="[[patient_groups]]" on-filter="[[_event_filter]]"></element-filter>
+                <element-filter input="[[]]" patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
             </div>
             <div id="content">
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.bscl]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
+                        <element-export file-definitions="[[_d.bscl]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.isk]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
+                        <element-export file-definitions="[[_d.isk]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.tmt]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
+                        <element-export file-definitions="[[_d.tmt]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
                     </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
@@ -139,7 +139,7 @@
 
         _event_filter: function(e) {
             this.set('export_filter', e.detail);
-            console.warn('_event_filter', this.export_filter);
+            // console.warn('_event_filter', this.export_filter);
         },
 
         _toggleHelp: function() {
