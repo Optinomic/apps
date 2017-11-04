@@ -43,18 +43,18 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="filter">
-                <element-filter></element-filter>
+                <element-filter patient-groups="[[patient_groups]]" on-filter="[[_event_filter]]"></element-filter>
             </div>
             <div id="content">
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.bscl]]"></element-export>
+                        <element-export file-definitions="[[_d.bscl]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.isk]]"></element-export>
+                        <element-export file-definitions="[[_d.isk]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
                     </div>
                     <div class="content_block">
-                        <element-export file-definitions="[[_d.tmt]]"></element-export>
+                        <element-export file-definitions="[[_d.tmt]]" on-patientgroups="[[_set_patient_groups]]"></element-export>
                     </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
@@ -130,68 +130,16 @@
 
         // --------------------------- Data --------------------------- 
 
-        _createTMTFile: function() {
-            this.debounce('_createTMTFile', function() {
+        _set_patient_groups: function(e) {
+            if ((this.patient_groups === undefined) || (this.patient_groups === null)) {
+                this.set('patient_groups', e.detail);
+                console.warn('_set_patient_groups', this.patient_groups);
+            };
+        },
 
-                if ((this._tmt_full_patients !== undefined) && (this._tmt_full_patients !== null)) {
-                    if (this._tmt_full_patients.length > 0) {
-
-                        // We have data -> Proceed.
-                        var _tmt_full_patients = this.get('_tmt_full_patients');
-                        console.log('-> _tmt_full_patients', _tmt_full_patients);
-
-                        var f = "";
-                        var delimitter = ";";
-                        var newline = "\n";
-
-                        var header =
-                            "Datum" + delimitter +
-                            "Geschlecht" + delimitter +
-                            "Name" + delimitter +
-                            "Vorname" + delimitter +
-                            "Alter" + delimitter +
-                            "Ausbildung" + delimitter +
-                            "MZ_Code" + delimitter +
-                            "MZ_Text" + delimitter +
-                            "TMTA_Error" + delimitter +
-                            "TMTA_Time" + delimitter +
-                            "TMTA_ZScore" + delimitter +
-                            "TMTB_Error" + delimitter +
-                            "TMTB_Time" + delimitter +
-                            "TMTB_ZScore" + newline;
-                        f = f + header;
-
-                        _tmt_full_patients.forEach(function(r, rID) {
-                            r.other_calculations["ch.suedhang.apps.tmt_V3:tmt_score"].forEach(function(calc, calcID) {
-
-                                f = f + calc.date + delimitter;
-                                if (r.patient.data.gender === 'male') {
-                                    f = f + 'Herr' + delimitter;
-                                } else {
-                                    f = f + 'Frau' + delimitter;
-                                };
-                                f = f + r.patient.data.last_name + delimitter;
-                                f = f + r.patient.data.first_name + delimitter;
-                                f = f + calc.set_age + delimitter;
-                                f = f + calc.percentile.vars.edu_years + delimitter;
-                                f = f + calc.Messzeitpunkt.Messzeitpunkt + delimitter;
-                                f = f + calc.Messzeitpunkt.Messzeitpunkt_Text + delimitter;
-                                f = f + calc.TMTAError + delimitter;
-                                f = f + calc.TMTATime + delimitter;
-                                f = f + calc.percentile.z_scores.tmtA_z_rounded + delimitter;
-                                f = f + calc.TMTBError + delimitter;
-                                f = f + calc.TMTBTime + delimitter;
-                                f = f + calc.percentile.z_scores.tmtB_z_rounded;
-                                f = f + newline;
-
-                            });
-                        });
-
-                        this.set('tmt_csv_file', f);
-
-                    };
-                };
-            }, 250);
+        _event_filter: function(e) {
+            this.set('export_filter', e.detail);
+            console.warn('_event_filter', this.export_filter);
         },
 
         _toggleHelp: function() {

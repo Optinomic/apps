@@ -156,14 +156,22 @@
         // Functions
         // -----------------------------
 
+        _createFiles: function() {
+
+            this._createJSONFile(this.fileDefinitions);
+            this._createCSVFile(this.fileDefinitions);
+
+        },
+
+
         _init: function() {
 
             var d = {};
 
             d.fileDefinitions = this.fileDefinitions;
 
-            this._createJSONFile(d.fileDefinitions);
-            this._createCSVFile(d.fileDefinitions);
+            this._createFiles();
+
 
             // Set & Log
             d.init_done = true;
@@ -365,6 +373,9 @@
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {
                 if ((this._sr !== null) && (this._sr !== undefined)) {
+                    // Fire Event with patient-groups
+                    this.fire('patientgroups', this._sr.patient_groups);
+
                     var fileDefinitions = this.get('fileDefinitions');
                     if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
                         Polymer.RenderStatus.afterNextRender(this, function() {
