@@ -2,7 +2,7 @@ d.tmt = {
     "options": {
         "app_id": "org.optinomic.export.toolbox.suedhang",
         "calculation_id": "tmt_full",
-        "name": "TMT",
+        "name": "TMT1",
         "delimitter": ";"
     },
     "fields": [

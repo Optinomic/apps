@@ -1,7 +1,7 @@
 d.bscl = {
     "options": {
         "app_id": "org.optinomic.export.toolbox.suedhang",
-        "calculation_id": "bscl_full",
+        "calculation_id": "bscl_full1",
         "name": "BSCL",
         "delimitter": ";"
     },

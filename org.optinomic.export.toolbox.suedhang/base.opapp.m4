@@ -36,12 +36,12 @@ include(readme.md)
 [css]
 
 
-[calculation tmt_full javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
+[calculation tmt_full1 javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
 include(calculations/tmt.m4)
 
-[calculation bscl_full javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
+[calculation bscl_full1 javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
 include(calculations/bscl.m4)
 
-[calculation isk_full javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
+[calculation isk_full1 javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/isk.m4)
 
