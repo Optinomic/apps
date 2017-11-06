@@ -1,8 +1,8 @@
 d.isk = {
     "options": {
         "app_id": "org.optinomic.export.toolbox.suedhang",
-        "calculation_id": "isk_full",
-        "name": "ISK1",
+        "calculation_id": "isk_full1",
+        "name": "ISK",
         "delimitter": ";"
     },
     "fields": [
