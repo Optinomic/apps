@@ -10,5 +10,12 @@ include(../lib/polymer/elements/optinomic-redux-store/helpers.js)
 include(../lib/polymer/elements/store/_session.js)
 include(../lib/polymer/elements/store/_user_store.js)
 
+const store = Redux.createStore(
+    reducer,
+    Redux.applyMiddleware(ReduxThunk.default)
+);
+
+const ReduxBehavior = PolymerRedux(store);
+
 UserStore.start();
 </script>
