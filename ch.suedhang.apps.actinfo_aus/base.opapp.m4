@@ -18,8 +18,11 @@ website = http://www.optinomic.com/
 
 
 
-[template score 6 6]
-include(templates/score.html)
+[template ActInfo 6 35]
+include(../lib/polymer/index.m4)
+include(../ch.suedhang.apps.actinfo_ein/elements/actinfo-problemsubstanzen.html)
+include(../ch.suedhang.apps.actinfo_ein/elements/element-actinfo.html)
+include(../ch.suedhang.apps.actinfo_ein/elements/view.html)
 
 [readme]
 include(readme.md)
@@ -27,13 +30,9 @@ include(readme.md)
 [dependencies]
 
 [javascript]
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
 
 
 [css]
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
 
 
 [survey]

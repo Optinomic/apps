@@ -17,6 +17,12 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/
 
+[template ActInfo 6 35]
+include(../lib/polymer/index.m4)
+include(../ch.suedhang.apps.actinfo_ein/elements/actinfo-problemsubstanzen.html)
+include(../ch.suedhang.apps.actinfo_ein/elements/element-actinfo.html)
+include(../ch.suedhang.apps.actinfo_ein.production/elements/view.html)
+
 [readme]
 include(readme.md)
 

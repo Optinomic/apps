@@ -17,6 +17,11 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/de/Forschung
 
+[template ISK-K 6 12]
+include(../lib/polymer/index.m4)
+include(../ch.suedhang.apps.isk/elements/element-isk.html)
+include(elements/view.html)
+
 [readme]
 include(readme.md)
 

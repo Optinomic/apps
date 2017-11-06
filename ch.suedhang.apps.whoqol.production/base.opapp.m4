@@ -17,6 +17,11 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/de/Forschung
 
+[template WHOQOL 6 12]
+include(../lib/polymer/index.m4)
+include(../com.optinomic.apps.whoqol/elements/element-whoqol.html)
+include(elements/view.html)
+
 [readme]
 include(readme.md)
 

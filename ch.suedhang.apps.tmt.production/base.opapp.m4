@@ -17,6 +17,11 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/de/Forschung
 
+[template TMT 6 12]
+include(../lib/polymer/index.m4)
+include(../ch.suedhang.apps.tmt_V3/elements/element-tmt.html)
+include(elements/view.html)
+
 [readme]
 include(readme.md)
 

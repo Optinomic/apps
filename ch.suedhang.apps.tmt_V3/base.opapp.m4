@@ -22,18 +22,6 @@ include(../lib/polymer/index.m4)
 include(elements/element-tmt.html)
 include(elements/view.html)
 
-[template tmt_scores 4 4]
-<style>
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
-
-</style>
-include(templates/score_page.html)
-<script>
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
-</script>
-
 
 [readme]
 include(readme.md)
