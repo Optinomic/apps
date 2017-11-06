@@ -17,6 +17,10 @@ company = Suedhang
 phone = +41 (0)31 828 14 92
 website = http://suedhang.ch/de/
 
+[template BDI 6 12]
+include(../ch.suedhang.apps.bdi/elements/element-bdi.html)
+include(elements/view.html)
+
 [readme]
 include(readme.md)
 
