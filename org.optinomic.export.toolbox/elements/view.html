@@ -183,24 +183,13 @@
 
             d.show_help = false;
 
-            include(definitions/_default_top_fields.js)
-            include(definitions/_default_bottom_fields.js)
+            // Inculde Export-File Definitons
             include(definitions/bscl.js)
             include(definitions/isk.js)
             include(definitions/tmt.js)
 
-            // Defaultfields (Top & Bottom) setzen
-            d.bscl.fields = d.default_top_fields.concat(d.bscl.fields);
-            d.bscl.fields = d.bscl.fields.concat(d.default_bottom_fields);
 
-            d.isk.fields = d.default_top_fields.concat(d.isk.fields);
-            d.isk.fields = d.isk.fields.concat(d.default_bottom_fields);
-
-            d.tmt.fields = d.default_top_fields.concat(d.tmt.fields);
-            d.tmt.fields = d.tmt.fields.concat(d.default_bottom_fields);
-
-
-            // Create Array of all Files
+            // Create Array of all Export-File Definitons
             d.export_files = [];
             d.export_files.push(d.bscl);
             d.export_files.push(d.isk);

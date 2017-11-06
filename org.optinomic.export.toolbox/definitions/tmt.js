@@ -1,8 +1,11 @@
 d.tmt = {
     "options": {
+        "name": "TMT",
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "tmt_full",
-        "name": "TMT",
+        "export_header": true,
+        "export_default_top": true,
+        "export_default_bottom": true,
         "delimitter": ";"
     },
     "fields": [

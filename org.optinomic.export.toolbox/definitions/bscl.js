@@ -1,8 +1,11 @@
 d.bscl = {
     "options": {
+        "name": "BSCL",
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "bscl_full",
-        "name": "BSCL",
+        "export_header": false,
+        "export_default_top": true,
+        "export_default_bottom": true,
         "delimitter": ";"
     },
     "fields": [
