@@ -3,6 +3,7 @@ id = org.optinomic.export.toolbox.suedhang
 name = Export-Toolbox
 short_description = Export-Toolbox
 version = 1.0
+parent = org.optinomic.export.toolbox
 type = user
 
 [description]
