@@ -20,7 +20,7 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template main 6 7]
+[template export 6 7]
 include(../lib/polymer/index.m4)
 include(elements/behavior-export-toolbox.html)
 include(elements/element-export.html)
