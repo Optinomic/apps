@@ -399,18 +399,23 @@
 
         _dataDive: function(source, field) {
 
-            var path_array = field.path.split(".");
+            if (field.path === "_function") {
 
-            var value = Object.assign({}, source);
-            if ((value !== null) && (value !== undefined)) {
-                path_array.forEach(function(path, pathID) {
-                    try {
-                        value = value[path];
-                    } catch (err) {
-                        value = "";
-                    };
+            } else {
 
-                });
+                var path_array = field.path.split(".");
+
+                var value = Object.assign({}, source);
+                if ((value !== null) && (value !== undefined)) {
+                    path_array.forEach(function(path, pathID) {
+                        try {
+                            value = value[path];
+                        } catch (err) {
+                            value = "";
+                        };
+
+                    });
+                };
             };
 
             if ((value === undefined) || (value === null)) {
