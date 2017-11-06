@@ -20,12 +20,6 @@ website = http://www.optinomic.com/
 [readme]
 include(readme.md)
 
-[template main 6 7]
-include(../lib/polymer/index.m4)
-include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
-include(../org.optinomic.export.toolbox/elements/element-export.html)
-include(elements/view.html)
-
 
 [javascript]
 
