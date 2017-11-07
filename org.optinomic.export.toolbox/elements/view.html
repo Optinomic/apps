@@ -2,6 +2,7 @@
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -43,10 +44,25 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="filter">
-                <element-filter input="[[]]" patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
+                <iron-collapse id="start" opened="[[_d.show_filter]]" horizontal class="collapse-content">
+                    <element-filter patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
+                </iron-collapse>
             </div>
             <div id="content">
-                <h3>Files</h3>
+                <div class="horizontal">
+                    <h3>Export - Files</h3>
+                    <div>
+                        <template is="dom-if" if="[[patient_groups]]">
+                            <template is="dom-if" if="[[!_d.show_filter]]">
+                                <paper-button class="indigo" on-tap="_openFilter">Filter</paper-button>
+                            </template>
+                            <template is="dom-if" if="[[_d.show_filter]]">
+                                <paper-button class="grey" on-tap="_closeFilter">Filter schliessen</paper-button>
+                            </template>
+                        </template>
+                     </div> 
+                </div>
+                
                 <template is="dom-if" if="[[_d.init_done]]">
                     <div class="content_block">
                         <element-export file-definitions="[[_d.bscl]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
@@ -95,39 +111,23 @@
             }
         },
 
+        // --------------------------- User --------------------------- 
 
-        // --------------------------- Data --------------------------- 
-
-        _createFile(text) {
-            const textBlob = new Blob([text], { type: 'text/plain' });
-            return window.URL.createObjectURL(textBlob);
+        _openFilter: function() {
+            d = this.get('_d');
+            d.show_filter = true;
+            this._d = {};
+            this.set('_d', d);
+            console.log('_openFilter', this._d);
         },
-
-        onDownload(e) {
-            e.preventDefault();
-
-            // File Content
-            var content = JSON.stringify(this._tmt_full_patients, null, 2);
-            console.log('File Content', content);
-
-            const link = this._createFile(content);
-            this.$.fileLink.href = link;
-            this.$.fileLink.click();
+        
+        _closeFilter: function() {
+            d = this.get('_d');
+            d.show_filter = false;
+            this._d = {};
+            this.set('_d', d);
+            console.log('_closeFilter', this._d);
         },
-
-        onDownloadCSV(e) {
-            e.preventDefault();
-
-            // File Content
-            var content = this.tmt_csv_file;
-            console.log('CSV: File Content', content);
-
-            const link = this._createFile(content);
-            this.$.fileLinkCSV.href = link;
-            this.$.fileLinkCSV.click();
-        },
-
-
 
         // --------------------------- Data --------------------------- 
 
@@ -158,21 +158,7 @@
         // --------------------------- Data --------------------------- 
 
         __loadData: function() {
-
-
-            Polymer.RenderStatus.afterNextRender(this, function() {
-
-                // loadData
-
-
-                //this.dispatch('actionGetUserAppCalculation', 'ch.suedhang.apps.tmt_V3', 'tmt_full');
-
-                //this.dispatch('actionGetUserAppCalculation', 'org.optinomic.export.toolbox', 'tmt_full');
-
-                //this.dispatch('actionGetUserAppCalculation', 'ch.suedhang.apps.tmt_V3', 'tmt_score');
-
-
-            });
+            Polymer.RenderStatus.afterNextRender(this, function() {});
         },
 
         __init: function() {
@@ -182,6 +168,7 @@
             var d = this.get('_d');
 
             d.show_help = false;
+            d.show_filter = false;
 
             // Inculde Export-File Definitons
             include(definitions/bscl.js)
@@ -210,7 +197,7 @@
         ready: function() {
             Polymer.RenderStatus.afterNextRender(this, function() {
 
-                this.__loadData();
+                // this.__loadData();
                 this.__init();
 
             });
