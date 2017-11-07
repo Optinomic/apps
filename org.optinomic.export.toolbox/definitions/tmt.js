@@ -2,7 +2,7 @@ d.tmt = {
     "options": {
         "name": "TMT",
         "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "tmt_full",
+        "calculation_id": "tmt",
         "export_header": true,
         "export_optinomic_ids": true,
         "export_default_top": true,

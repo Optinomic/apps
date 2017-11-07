@@ -2,7 +2,7 @@ d.isk = {
     "options": {
         "name": "ISK",
         "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "isk_full",
+        "calculation_id": "isk",
         "export_header": true,
         "export_optinomic_ids": true,
         "export_default_top": true,
