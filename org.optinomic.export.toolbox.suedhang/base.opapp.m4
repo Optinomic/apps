@@ -20,7 +20,6 @@ website = http://www.optinomic.com/
 
 [template export 6 7]
 include(../lib/polymer/index.m4)
-include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
 include(../org.optinomic.export.toolbox/elements/element-filter.html)
 include(../org.optinomic.export.toolbox/elements/view.html)
