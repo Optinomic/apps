@@ -39,7 +39,7 @@
                 </div>
                 <template is="dom-if" if="[[_d.init_done]]">
                     <h3>Datenquelle selektieren</h3>
-                    <element-select-datasource sources="[[_calculation_data_source]]"></element-select-datasource>
+                    <element-select-datasource sources="[[_d._calculation_sources]]"></element-select-datasource>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -98,6 +98,8 @@
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
+            
+            d._calculation_sources = this.get('_calculation_sources');
 
 
 
