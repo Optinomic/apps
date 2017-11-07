@@ -198,10 +198,11 @@
             })
     
             sortedKeys.forEach(function(key) {
-                var split = key.split(delimiter)
-                var key1 = getkey(split.shift())
-                var key2 = getkey(split[0])
-                var recipient = result
+                var split = key.split(delimiter);
+                var shift = split.shift();
+                var key1 = getkey(shift);
+                var key2 = getkey(split[0]);
+                var recipient = result;
     
                 while (key2 !== undefined) {
                     var type = Object.prototype.toString.call(recipient[key1])
