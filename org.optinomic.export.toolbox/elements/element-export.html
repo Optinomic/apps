@@ -305,12 +305,13 @@
 
 
             // Check Options & Add _Default_Top && _Default_Footer Fields
-            if (d.fileDefinitions.options.export_optinomic_ids !== false) {
-                d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
-            };
-
+            
             if (d.fileDefinitions.options.export_default_top !== false) {
                 d.fileDefinitions.fields = d.default_top_fields.concat(d.fileDefinitions.fields);
+            };
+
+            if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+                d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
             };
 
             if (d.fileDefinitions.options.export_default_bottom !== false) {
