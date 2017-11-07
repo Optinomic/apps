@@ -44,7 +44,7 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="filter">
-                <iron-collapse id="start" opened="[[_d.show_filter]]" horizontal class="collapse-content">
+                <iron-collapse id="start" opened="[[_filterOpen]]" horizontal class="collapse-content">
                     <element-filter patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
                 </iron-collapse>
             </div>
@@ -53,10 +53,10 @@
                     <h3>Export - Files</h3>
                     <div>
                         <template is="dom-if" if="[[patient_groups]]">
-                            <template is="dom-if" if="[[!_d.show_filter]]">
+                            <template is="dom-if" if="[[!_filterOpen]]">
                                 <paper-button class="indigo" on-tap="_openFilter">Filter</paper-button>
                             </template>
-                            <template is="dom-if" if="[[_d.show_filter]]">
+                            <template is="dom-if" if="[[_filterOpen]]">
                                 <paper-button class="grey" on-tap="_closeFilter">Filter schliessen</paper-button>
                             </template>
                         </template>
@@ -114,19 +114,11 @@
         // --------------------------- User --------------------------- 
 
         _openFilter: function() {
-            d = this.get('_d');
-            d.show_filter = true;
-            this._d = {};
-            this.set('_d', d);
-            console.log('_openFilter', this._d);
+            this.set('_filterOpen', true);
         },
         
         _closeFilter: function() {
-            d = this.get('_d');
-            d.show_filter = false;
-            this._d = {};
-            this.set('_d', d);
-            console.log('_closeFilter', this._d);
+            this.set('_filterOpen', false);
         },
 
         // --------------------------- Data --------------------------- 
@@ -163,12 +155,14 @@
 
         __init: function() {
 
+            this.set('_filterOpen', false);
+
+
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
 
             d.show_help = false;
-            d.show_filter = false;
 
             // Inculde Export-File Definitons
             include(definitions/bscl.js)
