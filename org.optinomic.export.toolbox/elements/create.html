@@ -3,6 +3,9 @@
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-button/paper-button.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-selection-column.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -18,6 +21,10 @@
             margin-bottom: 24px;
         }
 
+        .editor {
+            height: calc(100vh - 253px);
+            margin-right: 24px;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -38,8 +45,46 @@
                     <h2>Export-Definitionen erstellen</h2>
                 </div>
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <h3>Datenquelle selektieren</h3>
-                    <element-select-datasource sources="[[_d._calculation_sources]]"></element-select-datasource>
+                    <h3>1.) Datenquelle selektieren</h3>
+                    <element-select-datasource on-data="_setSource" sources="[[_d._calculation_sources]]"></element-select-datasource>
+                    <template is="dom-if" if="[[_data]]">
+                        <h3>2.) Felder selektieren</h3>
+                        <p>Anzahl Datenfelder: [[_data.field_paths.length]]</p>
+                        <vaadin-grid id="grid" class="editor" style="margin-left: 24px;" aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
+                            <vaadin-grid-selection-column auto-select>
+                            </vaadin-grid-selection-column>
+                            <vaadin-grid-column resizable>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="path">Path</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.path]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column resizable>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="example_data">Example Data</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.example_data]]</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                        <paper-button class="pink" on-tap="_goStepFieldDetails">Weiter</paper-button>
+                    </template>
+                    <template is="dom-if" if="[[selectedItems]]">
+                        <h3>3.) Felddetails (Dev.)</h3>
+                        <vaadin-grid id="grid" class="editor" style="margin-left: 24px;" aria-label="Field - Details" items="[[selectedItems]]" column-reordering-allowed>
+                            <vaadin-grid-column resizable>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="path">Path</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.path]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column resizable>
+                                <template class="header">
+                                    <vaadin-grid-sorter path="example_data">Name</vaadin-grid-sorter>
+                                </template>
+                                <template>[[item.name]]</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                    </template>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -87,6 +132,23 @@
             console.log('INIT _d', d);
         },
 
+        _goStepFieldDetails: function() {
+
+            var grid = this.$$('#grid');
+            this.set('selectedItems', grid.selectedItems);
+
+            console.warn('_goStepFieldDetails', this.selectedItems);
+
+        },
+
+
+        // --------------------------- Events --------------------------- 
+
+        _setSource: function(e) {
+            this.set('_data', e.detail);
+            console.warn('_data', this._data);
+        },
+
         // --------------------------- Data --------------------------- 
 
         __loadData: function() {
@@ -98,10 +160,7 @@
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
-            
             d._calculation_sources = this.get('_calculation_sources');
-
-
 
             d.init_done = true;
             this._d = {};
