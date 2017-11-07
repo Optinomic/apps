@@ -22,10 +22,13 @@ include(readme.md)
 
 [template export 6 7]
 include(../lib/polymer/index.m4)
-include(elements/behavior-export-toolbox.html)
 include(elements/element-export.html)
 include(elements/element-filter.html)
 include(elements/view.html)
+
+[template create 6 7]
+include(../lib/polymer/index.m4)
+include(elements/create.html)
 
 
 [javascript]
