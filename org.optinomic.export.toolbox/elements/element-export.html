@@ -276,16 +276,19 @@
 
             var d = {};
 
-            d.default_top_fields = [
+            d.default_optinomic_fields = [
                 { "name": "optinomic_patient_id", "path": "patient_id" },
                 { "name": "optinomic_cis_pid", "path": "stay.cis_pid" },
                 { "name": "optinomic_stay_id", "path": "stay_id" },
                 { "name": "optinomic_cis_fid", "path": "stay.cis_fid" },
                 { "name": "optinomic_event_id", "path": "event_id" },
                 { "name": "optinomic_pum_id", "path": "pum_id" },
-                { "name": "optinomic_survey_response_id", "path": "survey_response_id" },
+                { "name": "optinomic_survey_response_id", "path": "survey_response_id" }
+            ];
+
+            d.default_top_fields = [
                 { "name": "PID", "path": "patient.cis_pid" },
-                { "name": "FID", "path": "_function", "function": "_createFID" },
+                { "name": "Fall", "path": "_function", "function": "_createFID" },
                 { "name": "MedStatFid", "path": "_function", "function": "_createMedStatFID" }
             ];
 
@@ -302,6 +305,10 @@
 
 
             // Check Options & Add _Default_Top && _Default_Footer Fields
+            if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+                d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+            };
+
             if (d.fileDefinitions.options.export_default_top !== false) {
                 d.fileDefinitions.fields = d.default_top_fields.concat(d.fileDefinitions.fields);
             };

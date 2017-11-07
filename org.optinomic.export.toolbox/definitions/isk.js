@@ -4,6 +4,7 @@ d.isk = {
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "isk_full",
         "export_header": true,
+        "export_optinomic_ids": true,
         "export_default_top": true,
         "export_default_bottom": false,
         "delimitter": ";"

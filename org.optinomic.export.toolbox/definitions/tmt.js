@@ -4,6 +4,7 @@ d.tmt = {
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "tmt_full",
         "export_header": true,
+        "export_optinomic_ids": true,
         "export_default_top": true,
         "export_default_bottom": true,
         "delimitter": ";"

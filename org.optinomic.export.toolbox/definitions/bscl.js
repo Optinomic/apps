@@ -4,6 +4,7 @@ d.bscl = {
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "bscl_full",
         "export_header": false,
+        "export_optinomic_ids": false,
         "export_default_top": true,
         "export_default_bottom": true,
         "delimitter": ";"
