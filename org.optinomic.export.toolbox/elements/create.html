@@ -35,10 +35,11 @@
         <div hidden$="[[_d.show_help]]">
             <div id="content">
                 <div class="horizontal">
-                    <h3>Export-Definitionen erstellen</h3>
+                    <h2>Export-Definitionen erstellen</h2>
                 </div>
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <optinomic-indication sign="!" title="Initialisiert" color="#3F51B5"></optinomic-indication>
+                    <h3>Datenquelle selektieren</h3>
+                    <element-select-datasource sources="[[_calculation_data_source]]"></element-select-datasource>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>

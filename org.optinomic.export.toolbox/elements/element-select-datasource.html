@@ -1,0 +1,124 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<dom-module id="element-select-datasource">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        </style>
+        <div id="element">
+            <div class="horizontal">
+                    <template is="dom-if" if="[[sources]]" restamp="true">
+                        <div class="flex">
+                            <vaadin-combo-box id="patient_group" value="[[_selected_source_index]]" label="Datenquelle" items="[[sources.array]]" item-value-path="index" item-label-path="name">
+                                <template>
+                                    <paper-icon-item>
+                                        <paper-item-body>
+                                            <div><b>[[item.index]]:</b> [[item.name]]</div>
+                                        </paper-item-body>
+                                    </paper-icon-item>
+                                </template>
+                            </vaadin-combo-box>
+                        </div>
+                    </template>
+                </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-select-datasource',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            sources: {
+                type: Object
+            },
+            _selected_source_index: {
+                type: String,
+                observer: '_loadData',
+                value: null
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((this._selected_source_index !== null) && (this._selected_source_index !== undefined)) {
+
+                            var source = sources[this._selected_source_index];
+
+                            var home_str = source.userapp_id.split('.').join("_");
+                            var path = home_str + "___" + source.userapp_calculation_id;
+                            if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                                return state._app_userapp_calculations[path].data;
+
+                            };
+                        };
+                    };
+                    return return_obj;
+                },
+                observer: '_sr_ready'
+            }
+        },
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+                if ((this._selected_source_index !== null) && (this._selected_source_index !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        var source = sources[this._selected_source_index];
+                        this.dispatch('actionGetUserAppCalculation', source.userapp_id, source.userapp_calculation_id);
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _sr_ready: function() {
+            this.debounce('_sr_ready', function() {
+                if ((this._sr !== null) && (this._sr !== undefined)) {
+                    // Fire Event with patient-groups
+                    this.fire('data', this._sr);
+                    console.log('_sr_ready', this._sr);
+
+                };
+
+            }, 250);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+        }
+
+    });
+    </script>
+</dom-module>
