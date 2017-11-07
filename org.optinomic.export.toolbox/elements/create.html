@@ -60,11 +60,15 @@
     Polymer({
         is: 'optinomic-template',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
 
         properties: {
             _d: {
                 type: Object
+            },
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
             }
         },
 
