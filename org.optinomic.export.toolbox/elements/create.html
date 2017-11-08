@@ -23,8 +23,8 @@
 
         .editor {
             height: calc(100vh - 253px);
-            margin-right: 24px;
         }
+        
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -50,7 +50,7 @@
                     <template is="dom-if" if="[[_data]]">
                         <h3>2.) Felder selektieren</h3>
                         <p>Anzahl Datenfelder: [[_data.field_paths.length]]</p>
-                        <vaadin-grid id="grid" class="editor" style="margin-left: 24px;" aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
+                        <vaadin-grid id="grid" class="editor"  aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
                             <vaadin-grid-selection-column auto-select>
                             </vaadin-grid-selection-column>
                             <vaadin-grid-column resizable>
@@ -70,7 +70,7 @@
                     </template>
                     <template is="dom-if" if="[[selectedItems]]">
                         <h3>3.) Felddetails (Dev.)</h3>
-                        <vaadin-grid id="grid" class="editor" style="margin-left: 24px;" aria-label="Field - Details" items="[[selectedItems]]" column-reordering-allowed>
+                        <vaadin-grid id="grid" class="editor"  aria-label="Field - Details" items="[[selectedItems]]" column-reordering-allowed>
                             <vaadin-grid-column resizable>
                                 <template class="header">
                                     <vaadin-grid-sorter path="path">Path</vaadin-grid-sorter>
