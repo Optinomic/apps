@@ -60,7 +60,9 @@
                             var path = home_str + "___" + source.userapp_calculation_id;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
-                                return state._app_userapp_calculations[path].data;
+                                var return_obj = Object.assign({}, state._app_userapp_calculations[path].data);
+                                return_obj.selected_source = source;
+                                return return_obj;
 
                             };
                         };

@@ -8,6 +8,8 @@
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-filter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -58,7 +60,6 @@
                         <div step="2">
                             <template is="dom-if" if="[[_data]]">
                                 <div class="horizontal">
-                                    <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
                                     <h3 class="flex">Selektieren Sie die gewünschten Felder ([[_data.field_paths.length]]):</h3>
                                     <paper-button class="pink" on-tap="_goStepFieldDetails">Weiter</paper-button>
                                 </div>
@@ -90,8 +91,7 @@
                         <div step="3">
                             <template is="dom-if" if="[[selectedItems]]" restamp="true">
                                 <div class="horizontal">
-                                    <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
-                                    <h3 class="flex">Benennen Sie die selektierten Felder ([[selectedItems.length]]):</h3>
+                                    <h3 class="flex">Benennen Sie die selektierten Felder ([[selectedItems.length]]) und bringen diese in die gewünschte Reihenfolge:</h3>
                                     <paper-button class="pink" on-tap="_goStepFinal">Weiter</paper-button>
                                 </div>
                                 <template is="dom-repeat" items="[[selectedItems]]">
@@ -106,19 +106,28 @@
                         </div>
                         <div step="4">
                             <div class="horizontal">
-                                <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
-                                <h3 class="flex">Bringen Sie die selektierten Felder ([[selectedItems.length]]) in die gewünschte Reihenfolgt:</h3>
-                                <paper-button class="pink" on-tap="_wizardNext">Weiter</paper-button>
+                                <h3 class="flex">Benennen Sie dieses Export-File-Definition und selektieren Sie deren Default-Optionen:</h3>
                             </div>
-                            <template is="dom-if" if="[[namedItems]]" restamp="true">
-                                <template is="dom-repeat" items="[[namedItems]]">
-                                    <div class="horizontal">
-                                        <p class="flex">[[item.name]] <span>([[item.path]])</span></p>
-                                        <paper-icon-button class="grey" icon="arrow-upward" on-tap="_sortUp"></paper-icon-button>
-                                        <paper-icon-button class="grey" icon="arrow-downward" on-tap="_sortDown"></paper-icon-button>
-                                    </div>
-                                </template>
+                            <h4 class="grid-border-top">Beschriftung</h4>
+                            <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
+                                <paper-input id="name" label="Name" value="[[_data.selected_source.name]]"></paper-input>
+                                <paper-input id="description" label="Beschreibung" value="[[_data.selected_source.index]]"></paper-input>
                             </template>
+                            <h4 class="grid-border-top">Inhalt</h4>
+                            <div class="horizontal">
+                                <paper-checkbox id="export_optinomic_ids" checked>Optinomic - ID's</paper-checkbox>
+                                <paper-checkbox id="export_patient_details" checked>Patienten-Details</paper-checkbox>
+                                <paper-checkbox id="export_stay_details" checked>Fall-Details</paper-checkbox>
+                            </div>
+                            <h4 class="grid-border-top">CSV - Optionen</h4>
+                            <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
+                                <paper-input id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+                            </template>
+                            <div class="horizontal">
+                                <div>&nbsp;</div>
+                                <a href="#" id="fileLink" hidden download$="[[_data.selected_source.name]].json"></a>
+                                <paper-button class="indigo" on-tap="_saveFile">Speichern</paper-button>
+                            </div>
                         </div>
                     </iron-pages>
                 </template>
@@ -208,17 +217,61 @@
             console.warn('_goStepFinal', this.namedItems);
         },
 
+        _createFile: function(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
+        _saveFile: function(e){
+            e.preventDefault();
+            
+            var name = this.$$('#name');
+            var description = this.$$('#description');
+            
+            var export_optinomic_ids = this.$$('#export_optinomic_ids');
+            var export_patient_details = this.$$('#export_patient_details');
+            var export_stay_details = this.$$('#export_stay_details');
+            var delimter = this.$$('#csv_delimter');
+            
+            var options = {};
+            options.name = name.value;
+            options.description = description.value;
+            options.export_optinomic_ids = export_optinomic_ids.checked;
+            options.export_patient_details = export_patient_details.checked;
+            options.export_stay_details = export_stay_details.checked;
+            options.delimter = delimter.value;
+            options.source = this._data.selected_source.index;
+            
+            var namedItems = this.namedItems.slice(0);
+            namedItems.forEach(function(i, iID) {
+                delete i.id;
+            });
+            
+            var file = {
+                "options": options,
+                "fields": namedItems
+            };
+            console.warn('_saveFile', file);
+            
+            
+            var fileLink = this.$$('#fileLink');
+            var content = JSON.stringify(file, null, 2);
+            const link = this._createFile(content);
+
+            fileLink.href = link;
+            fileLink.click();
+        },
+
         _arraymove: function(arr, fromIndex, toIndex) {
             var element = arr[fromIndex];
             arr.splice(fromIndex, 1);
             arr.splice(toIndex, 0, element);
-            console.warn('_arraymove', arr, fromIndex, toIndex);
 
             return arr.slice(0);
         },
 
         _sortUp: function(e) {
-            var id = e.target.getAttribute("id");
+            var id = e.model.item.id;
 
             var selectedItems = this.get('selectedItems');
 
@@ -231,19 +284,38 @@
             };
             selectedItems = this._arraymove(selectedItems, fromIndex, toIndex);
 
+            selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+            });
+
             this.selectedItems = null;
             this.set('selectedItems', selectedItems);
             this.selectedItems = selectedItems;
-            console.warn('_goStepFieldDetails', this.selectedItems, e.model.item);
+            console.warn('_sortUp');
         },
 
         _sortDown: function(e) {
+            var id = e.model.item.id;
+
             var selectedItems = this.get('selectedItems');
+
+            if (id === selectedItems.length - 1) {
+                var fromIndex = selectedItems.length - 1;
+                var toIndex = 0;
+            } else {
+                var fromIndex = id;
+                var toIndex = id + 1;
+            };
+            selectedItems = this._arraymove(selectedItems, fromIndex, toIndex);
+
+            selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+            });
 
             this.selectedItems = null;
             this.set('selectedItems', selectedItems);
             this.selectedItems = selectedItems;
-            console.warn('_goStepFieldDetails', this.selectedItems, e);
+            console.warn('_sortDown', this.selectedItems);
         },
 
         _inputId: function(index) {
