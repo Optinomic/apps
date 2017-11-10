@@ -10,13 +10,13 @@
         "source": "bscl"
     },
     "fields": [
-        { "name": "rekordart", "path": "_function", "function": 'return "PB";' },
-        { "name": "betriebsnummer_bur", "path": "_function", "function": 'return "71286515";' },
-        { "name": "MedStatFid", "path": "_function", "function": 'var cis_pid = source.patient.cis_pid + "00"; var cis_fid = source.stay.cis_fid + ""; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;' },
+        { "name": "rekordart", "path": "_function", "function": "return 'PB';" },
+        { "name": "betriebsnummer_bur", "path": "_function", "function": "return '71286515';" },
+        { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" },
         { "name": "zeitpunkt_bscl", "path": "survey_response.response.q501V04" },
         { "name": "dropoutcode_bscl", "path": "survey_response.response.q501V05" },
         { "name": "spezifikation_dropout_bscl_andere", "path": "survey_response.response.q501V06" },
-        { "name": "datum_erhebung_bscl", "path": "_function", "function": 'var mzp = source.survey_response.response.q501V04; if (mzp === "1") { return source.stay.start; }; if (mzp === "2") { return source.stay.stop; }; if ((mzp !== "1") && ((mzp !== "2"))) {return source.survey_response.response.q504V00;}' },
+        { "name": "datum_erhebung_bscl", "path": "_function", "function": "var mzp = source.survey_response.response.q501V04; if (mzp === '1') { return source.stay.start; }; if (mzp === '2') { return source.stay.stop; }; if ((mzp !== '1') && ((mzp !== '2'))) {return source.survey_response.response.q504V00;}" },
         { "name": "bscl_b1", "path": "survey_response.response.BSCL[sq504V01]" },
         { "name": "bscl_b2", "path": "survey_response.response.BSCL[sq504V02]" },
         { "name": "bscl_b3", "path": "survey_response.response.BSCL[sq504V03]" },
