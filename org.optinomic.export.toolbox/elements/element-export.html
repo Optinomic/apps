@@ -444,7 +444,7 @@
             // console.error('_filteredSR', sr_filtered.length, sr_filtered);
         },
 
-       _dataDive: function(source, field) {
+        _dataDive: function(source, field) {
 
             if (field.path === "_function") {
 
@@ -452,15 +452,17 @@
                     // Call given Function
                     if ((field.function !== null) && (field.function !== undefined)) {
                         //console.warn('field.function', field.function);
-                        
+
                         try {
                             var fn = new Function('source', field.function);
                             value = fn(source);
                         } catch (err) {
-                            value = "";
+                            value = "Error";
                         };
-                        
+
                     };
+                } else {
+                   value = "Undefined Function"; 
                 };
 
             } else {
