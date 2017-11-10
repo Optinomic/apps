@@ -96,7 +96,7 @@ d.bscl = {
         { "name": "psychotizismus_mean", "path": "calculation.all_results.psychotizismus_scale_score" },
         { "name": "psychotizismus_sum", "path": "calculation.all_results.psychotizismus_sum_score" },
         { "name": "psychotizismus_zscore", "path": "calculation.all_results.psychotizismus_z_score" },
-        { "name": "gsi_mean", "path": "calculation.all_results.gsi_global_severity_index_scale_score" }
+        { "name": "gsi_mean", "path": "calculation.all_results.gsi_global_severity_index_scale_score" },
         { "name": "gsi_sum", "path": "calculation.all_results.gsi_global_severity_index_sum_score" },
         { "name": "gsi_zscore", "path": "calculation.all_results.gsi_global_severity_index_z_score" }
     ]
