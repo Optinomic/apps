@@ -64,6 +64,5 @@ d.bscl = {
         { "name": "bscl_b52", "path": "survey_response.response.BSCL[sq504V52]"},
         { "name": "bscl_b53", "path": "survey_response.response.BSCL[sq504V53]"},
         { "name": "bscl_paranoides_denken_scale_score", "path": "calculation.all_results.paranoides_denken_scale_score" },
-        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score" },
         { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score" }
-}
+};
