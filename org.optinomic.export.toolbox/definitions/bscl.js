@@ -4,12 +4,17 @@ d.bscl = {
         "app_id": "org.optinomic.export.toolbox",
         "calculation_id": "bscl",
         "export_header": false,
-        "export_optinomic_ids": false,
+        "export_optinomic_ids": true,
         "export_stay_details": true,
         "export_patient_details": true,
         "delimitter": ";"
     },
     "fields": [
+        { "name": "MedStatFid", "path": "_function", "function": "_createMedStatFID" },
+        { "name": "zeitpunkt_bscl", "path": "survey_response.response.q501V04" },
+        { "name": "dropoutcode_bscl", "path": "survey_response.response.q501V05" },
+        { "name": "spezifikation_dropout_bscl_andere", "path": "survey_response.response.q501V06" },
+        { "name": "datum_erhebung_bscl", "path": "survey_response.response.q504V00" },
         { "name": "bscl_b1", "path": "survey_response.response.BSCL[sq504V01]" },
         { "name": "bscl_b2", "path": "survey_response.response.BSCL[sq504V02]" },
         { "name": "bscl_b3", "path": "survey_response.response.BSCL[sq504V03]" },
