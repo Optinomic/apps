@@ -1,4 +1,4 @@
-d.isk = {
+{
     "options": {
         "name": "ISK",
         "description": "Komplettexport",
@@ -59,4 +59,4 @@ d.isk = {
         { "name": "reflexibilitaet_sum_score", "path": "calculation.all_results.reflexibilit__t_sum_score" },
         { "name": "reflexibilitaet_z_score", "path": "calculation.all_results.reflexibilit__t_z_score" }
     ]
-};
+}

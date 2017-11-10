@@ -1,4 +1,4 @@
-d.tmt = {
+{
     "options": {
         "name": "TMT",
         "description": "Komplettexport",
@@ -17,4 +17,4 @@ d.tmt = {
         { "name": "TMTB_Error", "path": "calculation.TMTBError", "type": "number" },
         { "name": "TMTB_Z", "path": "calculation.percentile.z_scores.tmtB_z_rounded", "type": "number" }
     ]
-};
+}
