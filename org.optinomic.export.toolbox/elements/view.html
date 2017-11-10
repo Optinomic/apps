@@ -252,6 +252,7 @@
 
 
             // Find Sources Index and enhance options!
+            d._calculation_sources = this.get('_calculation_sources');
             d.export_files.forEach(function(f, fID) {
                 if ("options" in f) {
                     if ("source" in f.options) {
