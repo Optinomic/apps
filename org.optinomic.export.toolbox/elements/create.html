@@ -34,6 +34,15 @@
             border-top-style: solid;
             border-top-width: 1px;
         }
+
+        .section {
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+            margin-top: 36px;
+            margin-bottom: 36px;
+            padding-top: 12px;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
@@ -108,20 +117,23 @@
                             <div class="horizontal">
                                 <h3 class="flex">Benennen Sie dieses Export-File-Definition und selektieren Sie deren Default-Optionen:</h3>
                             </div>
-                            <h4 class="grid-border-top">Beschriftung</h4>
+                            <h4 class="section">Beschriftung</h4>
                             <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
                                 <paper-input id="name" label="Name" value="[[_data.selected_source.name]]"></paper-input>
                                 <paper-input id="description" label="Beschreibung" value="[[_data.selected_source.index]]"></paper-input>
                             </template>
-                            <h4 class="grid-border-top">Inhalt</h4>
+                            <h4 class="section">Inhalt</h4>
                             <div class="horizontal">
                                 <paper-checkbox id="export_optinomic_ids" checked>Optinomic - ID's</paper-checkbox>
                                 <paper-checkbox id="export_patient_details" checked>Patienten-Details</paper-checkbox>
                                 <paper-checkbox id="export_stay_details" checked>Fall-Details</paper-checkbox>
                             </div>
-                            <h4 class="grid-border-top">CSV - Optionen</h4>
+                            <h4 class="section">CSV - Optionen</h4>
                             <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
-                                <paper-input id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+                                <div class="horizontal">
+                                    <paper-input class="flex" id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+                                    <paper-checkbox id="export_header" checked>Header-Zeile exportieren</paper-checkbox>
+                                </div>
                             </template>
                             <div class="horizontal">
                                 <div>&nbsp;</div>
@@ -222,38 +234,41 @@
             return window.URL.createObjectURL(textBlob);
         },
 
-        _saveFile: function(e){
+        _saveFile: function(e) {
             e.preventDefault();
-            
+
             var name = this.$$('#name');
             var description = this.$$('#description');
-            
+
             var export_optinomic_ids = this.$$('#export_optinomic_ids');
             var export_patient_details = this.$$('#export_patient_details');
             var export_stay_details = this.$$('#export_stay_details');
             var delimter = this.$$('#csv_delimter');
-            
+            var export_header = this.$$('#export_header');
+
+
             var options = {};
             options.name = name.value;
             options.description = description.value;
             options.export_optinomic_ids = export_optinomic_ids.checked;
             options.export_patient_details = export_patient_details.checked;
             options.export_stay_details = export_stay_details.checked;
+            options.export_header = export_header.checked;
             options.delimter = delimter.value;
             options.source = this._data.selected_source.index;
-            
+
             var namedItems = this.namedItems.slice(0);
             namedItems.forEach(function(i, iID) {
                 delete i.id;
             });
-            
+
             var file = {
                 "options": options,
                 "fields": namedItems
             };
             console.warn('_saveFile', file);
-            
-            
+
+
             var fileLink = this.$$('#fileLink');
             var content = JSON.stringify(file, null, 2);
             const link = this._createFile(content);
