@@ -68,6 +68,9 @@
                         <element-export file-definitions="[[_d.bscl]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
                     </div>
                     <div class="content_block">
+                        <element-export file-definitions="[[_d.bscl_anq]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
+                    </div>
+                    <div class="content_block">
                         <element-export file-definitions="[[_d.isk]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
                     </div>
                     <div class="content_block">
@@ -166,6 +169,7 @@
 
             // Inculde Export-File Definitons
             include(definitions/bscl.js)
+            include(definitions/bscl_anq.js)
             include(definitions/isk.js)
             include(definitions/tmt.js)
 
@@ -173,6 +177,7 @@
             // Create Array of all Export-File Definitons
             d.export_files = [];
             d.export_files.push(d.bscl);
+            d.export_files.push(d.bscl_anq);
             d.export_files.push(d.isk);
             d.export_files.push(d.tmt);
 
