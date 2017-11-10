@@ -10,7 +10,6 @@ d.bscl = {
         "delimitter": ";"
     },
     "fields": [
-        { "name": "gaga", "path": "_function", "function": 'return "gaga";' },
         { "name": "MedStatFid", "path": "_function", "function": 'var cis_pid = source.patient.cis_pid + "00"; var cis_fid = source.stay.cis_fid + ""; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;' },
         { "name": "zeitpunkt_bscl", "path": "survey_response.response.q501V04" },
         { "name": "dropoutcode_bscl", "path": "survey_response.response.q501V05" },
