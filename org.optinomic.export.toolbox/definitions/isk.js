@@ -1,13 +1,13 @@
 d.isk = {
     "options": {
         "name": "ISK",
-        "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "isk",
-        "export_header": true,
+        "description": "Komplettexport",
         "export_optinomic_ids": true,
-        "export_default_top": true,
-        "export_default_bottom": false,
-        "delimitter": ";"
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "isk"
     },
     "fields": [
         { "name": "Erhebungszeitpunkt", "path": "survey_response.response.Erhebungszeitpunkt" },
@@ -15,6 +15,7 @@ d.isk = {
         { "name": "isk_01", "path": "survey_response.response.AISK[AISK1]" },
         { "name": "isk_02", "path": "survey_response.response.AISK[AISK2]" },
         { "name": "isk_03", "path": "survey_response.response.AISK[AISK3]" },
+        { "name": "isk_99", "path": "survey_response.response.AISK[AISK3]" },
         { "name": "isk_04", "path": "survey_response.response.AISK[AISK4]" },
         { "name": "isk_05", "path": "survey_response.response.AISK[AISK5]" },
         { "name": "isk_06", "path": "survey_response.response.AISK[AISK6]" },

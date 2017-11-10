@@ -51,7 +51,7 @@
                     </div>
                     <div class="flex">
                         <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b> [[fileDefinitions.options.description]]
-                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.app_id]]:[[fileDefinitions.options.calculation_id]])</span></p>
+                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.calculation_id]])</span></p>
                     </div>
                     <template is="dom-if" if="[[_filtered_sr]]" restamp="true">
                         <div class="result_group">
@@ -589,7 +589,7 @@
                     var header_str = "";
                     var header_written = false;
                     var rows_str = "";
-                    var delimitter = def.options.delimitter;
+                    var delimitter = def.options.delimter;
                     var newline = "\n";
 
                     survey_responses.forEach(function(sr, srID) {

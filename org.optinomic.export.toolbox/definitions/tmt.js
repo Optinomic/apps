@@ -1,13 +1,13 @@
 d.tmt = {
     "options": {
         "name": "TMT",
-        "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "tmt",
-        "export_header": true,
+        "description": "Komplettexport",
         "export_optinomic_ids": true,
-        "export_default_top": true,
-        "export_default_bottom": true,
-        "delimitter": ";"
+        "export_patient_details": false,
+        "export_stay_details": false,
+        "export_header": true,
+        "delimter": ";",
+        "source": "tmt"
     },
     "fields": [
         { "name": "TMTA_Time", "path": "calculation.TMTATime", "type": "number" },

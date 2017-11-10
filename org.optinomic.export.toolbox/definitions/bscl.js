@@ -1,13 +1,13 @@
 d.bscl = {
     "options": {
         "name": "BSCL",
-        "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "bscl",
-        "export_header": true,
+        "description": "Komplettexport",
         "export_optinomic_ids": true,
-        "export_stay_details": true,
         "export_patient_details": true,
-        "delimitter": ";"
+        "export_stay_details": true,
+        "export_header": true,
+        "delimter": ";",
+        "source": "bscl"
     },
     "fields": [
         { "name": "MedStatFid", "path": "_function", "function": 'var cis_pid = source.patient.cis_pid + "00"; var cis_fid = source.stay.cis_fid + ""; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;' },
