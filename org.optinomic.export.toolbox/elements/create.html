@@ -2,9 +2,11 @@
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-pages/iron-pages.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
 <link rel="import" href="vaadin-grid/vaadin-grid.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-filter.html">
 <link rel="import" href="vaadin-grid/vaadin-grid-selection-column.html">
 <dom-module id="optinomic-template">
     <template>
@@ -24,11 +26,16 @@
         .editor {
             height: calc(100vh - 253px);
         }
-        
+
+        .grid-border-top {
+            border-top-color: #EEEEEE;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
         </style>
         <div class="horizontal wrap">
             <div class="flex app_title">
-                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="Export-Definitionen erstellen" h3="[[_current_app.version]]"></optinomic-title>
             </div>
             <div>
                 <div hidden$="[[_d.show_help]]">
@@ -41,50 +48,79 @@
         </div>
         <div hidden$="[[_d.show_help]]">
             <div id="content">
-                <div class="horizontal">
-                    <h2>Export-Definitionen erstellen</h2>
-                </div>
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <h3>1.) Datenquelle selektieren</h3>
-                    <element-select-datasource on-data="_setSource" sources="[[_d._calculation_sources]]"></element-select-datasource>
-                    <template is="dom-if" if="[[_data]]">
-                        <h3>2.) Felder selektieren</h3>
-                        <p>Anzahl Datenfelder: [[_data.field_paths.length]]</p>
-                        <vaadin-grid id="grid" class="editor"  aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
-                            <vaadin-grid-selection-column auto-select>
-                            </vaadin-grid-selection-column>
-                            <vaadin-grid-column resizable>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="path">Path</vaadin-grid-sorter>
+                    <timeu-wizard steps='["Datenquelle","Felder selektieren","Felder organisieren", "Optionen"]' step="[[wizard_step]]"></timeu-wizard>
+                    <iron-pages selected="[[wizard_step]]" attr-for-selected="step" fallback-selection="1" role="main">
+                        <div step="1">
+                            <h3>Selektieren Sie die gewünschte Datenquelle:</h3>
+                            <element-select-datasource on-data="_setSource" sources="[[_d._calculation_sources]]"></element-select-datasource>
+                        </div>
+                        <div step="2">
+                            <template is="dom-if" if="[[_data]]">
+                                <div class="horizontal">
+                                    <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
+                                    <h3 class="flex">Selektieren Sie die gewünschten Felder ([[_data.field_paths.length]]):</h3>
+                                    <paper-button class="pink" on-tap="_goStepFieldDetails">Weiter</paper-button>
+                                </div>
+                                <vaadin-grid id="grid" class="editor" aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
+                                    <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+                                    <vaadin-grid-column resizable>
+                                        <template class="header">
+                                            <vaadin-grid-sorter direction="asc" path="path">Path</vaadin-grid-sorter>
+                                            <vaadin-grid-filter aria-label="Path" path="path" value="[[_filterUser]]">
+                                                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen" value="{{_filterUser}}" focus-target>
+                                                </paper-input>
+                                            </vaadin-grid-filter>
+                                        </template>
+                                        <template>[[item.path]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column resizable>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="example_data">Example Data</vaadin-grid-sorter>
+                                            <vaadin-grid-filter aria-label="Example" path="example_data" value="[[_filterExample]]">
+                                                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen" value="{{_filterExample}}">
+                                                </paper-input>
+                                            </vaadin-grid-filter>
+                                        </template>
+                                        <template>[[item.example_data]]</template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </template>
+                        </div>
+                        <div step="3">
+                            <template is="dom-if" if="[[selectedItems]]" restamp="true">
+                                <div class="horizontal">
+                                    <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
+                                    <h3 class="flex">Benennen Sie die selektierten Felder ([[selectedItems.length]]):</h3>
+                                    <paper-button class="pink" on-tap="_goStepFinal">Weiter</paper-button>
+                                </div>
+                                <template is="dom-repeat" items="[[selectedItems]]">
+                                    <div class="horizontal grid-border-top">
+                                        <paper-input class="flex" on-change="_inputChanged" id="{{_inputId(item.index)}}" style="margin-top:-20px;" placeholder="Feldname" value$="[[item.name]]"></paper-input>
+                                        <p>&nbsp;[[item.path]]</p>
+                                        <paper-icon-button class="grey" icon="arrow-upward" on-tap="_sortUp"></paper-icon-button>
+                                        <paper-icon-button class="grey" icon="arrow-downward" on-tap="_sortDown"></paper-icon-button>
+                                    </div>
                                 </template>
-                                <template>[[item.path]]</template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column resizable>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="example_data">Example Data</vaadin-grid-sorter>
+                            </template>
+                        </div>
+                        <div step="4">
+                            <div class="horizontal">
+                                <paper-button class="grey" on-tap="_wizardBack">Zurück</paper-button>
+                                <h3 class="flex">Bringen Sie die selektierten Felder ([[selectedItems.length]]) in die gewünschte Reihenfolgt:</h3>
+                                <paper-button class="pink" on-tap="_wizardNext">Weiter</paper-button>
+                            </div>
+                            <template is="dom-if" if="[[namedItems]]" restamp="true">
+                                <template is="dom-repeat" items="[[namedItems]]">
+                                    <div class="horizontal">
+                                        <p class="flex">[[item.name]] <span>([[item.path]])</span></p>
+                                        <paper-icon-button class="grey" icon="arrow-upward" on-tap="_sortUp"></paper-icon-button>
+                                        <paper-icon-button class="grey" icon="arrow-downward" on-tap="_sortDown"></paper-icon-button>
+                                    </div>
                                 </template>
-                                <template>[[item.example_data]]</template>
-                            </vaadin-grid-column>
-                        </vaadin-grid>
-                        <paper-button class="pink" on-tap="_goStepFieldDetails">Weiter</paper-button>
-                    </template>
-                    <template is="dom-if" if="[[selectedItems]]">
-                        <h3>3.) Felddetails (Dev.)</h3>
-                        <vaadin-grid id="grid" class="editor"  aria-label="Field - Details" items="[[selectedItems]]" column-reordering-allowed>
-                            <vaadin-grid-column resizable>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="path">Path</vaadin-grid-sorter>
-                                </template>
-                                <template>[[item.path]]</template>
-                            </vaadin-grid-column>
-                            <vaadin-grid-column resizable>
-                                <template class="header">
-                                    <vaadin-grid-sorter path="example_data">Name</vaadin-grid-sorter>
-                                </template>
-                                <template>[[item.name]]</template>
-                            </vaadin-grid-column>
-                        </vaadin-grid>
-                    </template>
+                            </template>
+                        </div>
+                    </iron-pages>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -120,6 +156,15 @@
 
         // --------------------------- User --------------------------- 
 
+        _wizardNext: function() {
+            this.wizard_step = this.wizard_step + 1;
+        },
+
+        _wizardBack: function() {
+            this.wizard_step = this.wizard_step - 1;
+        },
+
+
         _toggleHelp: function() {
             var d = this.get('_d');
             this._d = {};
@@ -133,12 +178,89 @@
         },
 
         _goStepFieldDetails: function() {
-
             var grid = this.$$('#grid');
-            this.set('selectedItems', grid.selectedItems);
 
+            var selectedItems = [];
+            grid.selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+                i.name = i.path.split('.').join('__');
+                selectedItems.push(i);
+            });
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            this._wizardNext();
             console.warn('_goStepFieldDetails', this.selectedItems);
+        },
 
+        _goStepFinal: function() {
+            var namedItems = this.get('selectedItems').slice(0);
+
+            namedItems.forEach(function(i, iID) {
+                delete i.example_data;
+            });
+
+            this.namedItems = null;
+            this.set('namedItems', namedItems);
+            this.namedItems = namedItems;
+            this._wizardNext();
+            console.warn('_goStepFinal', this.namedItems);
+        },
+
+        _arraymove: function(arr, fromIndex, toIndex) {
+            var element = arr[fromIndex];
+            arr.splice(fromIndex, 1);
+            arr.splice(toIndex, 0, element);
+            console.warn('_arraymove', arr, fromIndex, toIndex);
+
+            return arr.slice(0);
+        },
+
+        _sortUp: function(e) {
+            var id = e.target.getAttribute("id");
+
+            var selectedItems = this.get('selectedItems');
+
+            if (id === 0) {
+                var fromIndex = 0;
+                var toIndex = selectedItems.length - 1;
+            } else {
+                var fromIndex = id;
+                var toIndex = id - 1;
+            };
+            selectedItems = this._arraymove(selectedItems, fromIndex, toIndex);
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_goStepFieldDetails', this.selectedItems, e.model.item);
+        },
+
+        _sortDown: function(e) {
+            var selectedItems = this.get('selectedItems');
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_goStepFieldDetails', this.selectedItems, e);
+        },
+
+        _inputId: function(index) {
+            return index;
+        },
+
+        _inputChanged: function(e) {
+            var id = e.model.item.id;
+            var selectedItems = this.get('selectedItems');
+
+            // Change
+            selectedItems[id].name = e.srcElement.value;
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_inputChanged', this.selectedItems, id, e.srcElement.value);
         },
 
 
@@ -146,6 +268,7 @@
 
         _setSource: function(e) {
             this.set('_data', e.detail);
+            this._wizardNext();
             console.warn('_data', this._data);
         },
 
@@ -162,10 +285,13 @@
             var d = this.get('_d');
             d._calculation_sources = this.get('_calculation_sources');
 
+
             d.init_done = true;
             this._d = {};
             this.set('_d', d);
             this._d = d;
+
+            this.wizard_step = 1;
 
             console.log('CREATE (__init)', this._d);
         },
