@@ -3,6 +3,7 @@
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <link rel="import" href="paper-button/paper-button.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="juicy-ace-editor/juicy-ace-editor.html">
 <dom-module id="optinomic-template">
     <template>
         <style include="shared-styles">
@@ -27,6 +28,19 @@
             border-top-style: solid;
             border-top-width: 1px;
             overflow: hidden;
+        }
+
+        .editor {
+            height: calc(100vh - 453px);
+            margin-right: 24px;
+            min-width: 100%;
+        }
+
+        .code {
+            margin-top: 24px;
+            padding: 24px;
+            background-color: #F5F5F5 !important;
+            background: #F5F5F5 !important;
         }
         </style>
         <div class="horizontal wrap">
@@ -62,14 +76,28 @@
                         </template>
                     </div>
                 </div>
-                <template is="dom-if" if="[[_d.init_done]]">
-                    <template is="dom-if" if="[[_d.init_done]]">
-                        <template is="dom-repeat" items="[[_d.export_files]]">
-                            <div class="content_block">
-                                <element-export file-definitions="[[item]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
-                            </div>
-                        </template>
+                <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                    <template is="dom-repeat" items="[[_export_files]]">
+                        <div class="content_block">
+                            <element-export file-definitions="[[item]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
+                        </div>
                     </template>
+                    <div id="runner">
+                        <iron-collapse id="start" opened="[[_runOpen]]" horizontal class="collapse-content">
+                            <div class="code">
+                                <h3>Export - Definition (Syntax)</h3>
+                                <p>(LIVE-RUN) Um die Ergebnisse der neu erstellten Definition zu testen, fügen Sie hier den (den über [CREATE] erstellten) Syntax ein:</p>
+                                <juicy-ace-editor id="code_editor" class="editor" value="[[definition_code]]" theme="ace/theme/chrome" mode="ace/mode/json" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+                                <div class="horizontal" style="margin-top:6px;">
+                                    <paper-button class="grey" on-tap="_closeRunner">Schliessen</paper-button>
+                                    <paper-button class="pink" on-tap="_runRunner">Ausführen</paper-button>
+                                </div>
+                            </div>
+                        </iron-collapse>
+                        <iron-collapse id="start" opened="[[!_runOpen]]" class="collapse-content">
+                            <paper-button style="margin-left:12px;" class="grey" on-tap="_openRunner">+ Hinzufügen (Live-RUN)</paper-button>
+                        </iron-collapse>
+                    </div>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -118,6 +146,59 @@
             this.set('_filterOpen', false);
         },
 
+        _openRunner: function() {
+            this.set('_runOpen', true);
+        },
+
+        _closeRunner: function() {
+            this.set('_runOpen', false);
+        },
+
+        _runRunner: function() {
+
+            var d = Object.assign({}, this.get('_d'));
+            var code_editor = this.$$('#code_editor');
+
+            try {
+                var given_code = JSON.parse(code_editor.editor.getValue());
+
+
+
+
+                if ("options" in given_code) {
+                    if ("source" in given_code.options) {
+                        _export_files = this.get('_export_files');
+                        this._export_files = [];
+
+                        var source_options = Object.assign({}, d._calculation_sources.object[given_code.options.source]);
+                        delete source_options.name;
+                        given_code.options = Object.assign(given_code.options, source_options);
+                        given_code.options.app_id = given_code.options.userapp_id;
+                        given_code.options.calculation_id = given_code.options.userapp_calculation_id;
+                        given_code.options.id = d.export_files.length;
+                        given_code.options.name = given_code.options.name + " | LIVE";
+                        given_code.options.description = "Ungesichert | " + given_code.options.description;
+
+                        _export_files.push(given_code);
+
+
+                        this._export_files = _export_files.slice(0);
+
+                        console.log('given_code', given_code, this._export_files);
+
+                    } else {
+                        console.error("ERROR: Missing source in options!", given_code.options);
+                    };
+                } else {
+                    console.error("ERROR: Missing options!", given_code);
+                };
+
+            } catch (err) {
+                console.error("ERROR: ", err.message);
+            }
+        },
+
+
         // --------------------------- Data --------------------------- 
 
         _set_patient_groups: function(e) {
@@ -153,6 +234,7 @@
         __init: function() {
 
             this.set('_filterOpen', false);
+            this.set('_runOpen', false);
 
 
             this._d = this._d === undefined ? {} : this._d;
@@ -172,9 +254,6 @@
             d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.js));
             d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.js));
             d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.js));
-
-
-
 
 
             // Find Sources Index and enhance options!
@@ -198,6 +277,9 @@
             this._d = {};
             this.set('_d', d);
             this._d = d;
+
+            this.set('_export_files', d.export_files);
+
 
             console.log('TOP (__init)', this._d);
         },
