@@ -286,14 +286,14 @@
                 { "name": "optinomic_survey_response_id", "path": "survey_response_id" }
             ];
 
-            d.default_top_fields = [
+            d.default_patient = [
                 { "name": "PID", "path": "patient.cis_pid" },
-                { "name": "Fall", "path": "_function", "function": "_createFID" },
-                { "name": "MedStatFid", "path": "_function", "function": "_createMedStatFID" }
+                { "name": "optinomic_patient_gender", "path": "patient.gender" },
             ];
 
-            d.default_bottom_fields = [
-                { "name": "optinomic_patient_gender", "path": "patient.gender" },
+            d.default_stay = [
+                { "name": "Fall", "path": "_function", "function": "_createFID" },
+                { "name": "MedStatFid", "path": "_function", "function": "_createMedStatFID" },
                 { "name": "optinomic_patient_age_when_filled", "path": "patient.extras.age_when_filled" },
                 { "name": "optinomic_filled", "path": "survey_response.filled" },
                 { "name": "optinomic_start", "path": "stay.start" },
@@ -305,18 +305,26 @@
 
 
             // Check Options & Add _Default_Top && _Default_Footer Fields
-            
-            if (d.fileDefinitions.options.export_default_top !== false) {
-                d.fileDefinitions.fields = d.default_top_fields.concat(d.fileDefinitions.fields);
+
+            if (d.fileDefinitions.options.export_stay_details !== false) {
+                d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+            };
+
+            if (d.fileDefinitions.options.export_patient_details !== false) {
+                d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
             };
 
             if (d.fileDefinitions.options.export_optinomic_ids !== false) {
                 d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
             };
 
-            if (d.fileDefinitions.options.export_default_bottom !== false) {
-                d.fileDefinitions.fields = d.fileDefinitions.fields.concat(d.default_bottom_fields);
-            };
+            // if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+            //     d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+            // };
+            // 
+            // if (d.fileDefinitions.options.export_default_bottom !== false) {
+            //     d.fileDefinitions.fields = d.fileDefinitions.fields.concat(d.default_bottom_fields);
+            // };
 
 
             this._createFileName(true);
@@ -456,7 +464,6 @@
                 } else {
                     return "";
                 };
-
             };
 
             if (field.path === "_function") {
