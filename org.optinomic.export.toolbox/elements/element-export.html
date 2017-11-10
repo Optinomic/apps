@@ -444,35 +444,22 @@
             // console.error('_filteredSR', sr_filtered.length, sr_filtered);
         },
 
-        _dataDive: function(source, field) {
-
-            var _createMedStatFID = function() {
-                var cis_pid = source.patient.cis_pid + "00";
-                var cis_fid = source.stay.cis_fid + "";
-                var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2));
-                return medstatfid;
-            };
-
-            var _createFID = function() {
-                var cis_fid = source.stay.cis_fid + "";
-                cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)
-                var fid = parseInt(cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2));
-                if (fid > 0) {
-                    return fid;
-                } else {
-                    return "";
-                };
-            };
+       _dataDive: function(source, field) {
 
             if (field.path === "_function") {
 
                 if ("function" in field) {
                     // Call given Function
                     if ((field.function !== null) && (field.function !== undefined)) {
-                    {
                         //console.warn('field.function', field.function);
-                        var fn = new Function('source', field.function);
-                        value = fn(source);
+                        
+                        try {
+                            var fn = new Function('source', field.function);
+                            value = fn(source);
+                        } catch (err) {
+                            value = "";
+                        };
+                        
                     };
                 };
 
