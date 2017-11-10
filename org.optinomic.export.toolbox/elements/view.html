@@ -63,18 +63,13 @@
                     </div>
                 </div>
                 <template is="dom-if" if="[[_d.init_done]]">
-                    <div class="content_block">
-                        <element-export file-definitions="[[_d.bscl]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
-                    </div>
-                    <div class="content_block">
-                        <element-export file-definitions="[[_d.bscl_anq]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
-                    </div>
-                    <div class="content_block">
-                        <element-export file-definitions="[[_d.isk]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
-                    </div>
-                    <div class="content_block">
-                        <element-export file-definitions="[[_d.tmt]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
-                    </div>
+                    <template is="dom-if" if="[[_d.init_done]]">
+                        <template is="dom-repeat" items="[[_d.export_files]]">
+                            <div class="content_block">
+                                <element-export file-definitions="[[item]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
+                            </div>
+                        </template>
+                    </template>
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -168,21 +163,24 @@
 
             // Inculde Export-File Definitons
             include(definitions/bscl.js)
-
             include(definitions/isk.js)
-
             include(definitions/tmt.js)
 
-            d.bscl_anq = {
+
+            // Create Array of all Export-File Definitons
+
+            d.export_files = [];
+            d.export_files.push(d.bscl);
+            d.export_files.push({
                 "options": {
-                    "name": "BSCL ANQ-Export",
-                    "app_id": "org.optinomic.export.toolbox",
-                    "calculation_id": "bscl",
+                    "name": "BSCL (Export - ANQ)",
+                    "description": "Exportsyntax für ANQ",
+                    "export_optinomic_ids": true,
+                    "export_patient_details": true,
+                    "export_stay_details": true,
                     "export_header": true,
-                    "export_optinomic_ids": false,
-                    "export_stay_details": false,
-                    "export_patient_details": false,
-                    "delimitter": "|"
+                    "delimter": ";",
+                    "source": "bscl"
                 },
                 "fields": [
                     { "name": "rekordart", "path": "_function", "function": 'return "PB";' },
@@ -246,16 +244,27 @@
                     { "name": "bscl_b52", "path": "survey_response.response.BSCL[sq504V52]" },
                     { "name": "bscl_b53", "path": "survey_response.response.BSCL[sq504V53]" }
                 ]
-            };
-
-
-
-            // Create Array of all Export-File Definitons
-            d.export_files = [];
-            d.export_files.push(d.bscl);
-            d.export_files.push(d.bscl_anq);
+            });
             d.export_files.push(d.isk);
+
+
             d.export_files.push(d.tmt);
+
+
+            // Find Sources Index and enhance options!
+            d.export_files.forEach(function(f, fID) {
+                if ("options" in f) {
+                    if ("source" in f.options) {
+                        var source_options = Object.assign({}, d._calculation_sources.object[f.options.source]);
+                        delete source_options.name;
+
+                        f.options = Object.assign(f.options, source_options);
+                        f.options.app_id = f.options.userapp_id;
+                        f.options.calculation_id = f.options.userapp_calculation_id;
+                    }
+                };
+                console.log('f', f);
+            });
 
 
             d.init_done = true;
