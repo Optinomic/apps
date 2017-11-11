@@ -559,7 +559,8 @@
                         if (this._filtered_sr.length > 0) {
 
                             // We have data -> Proceed.
-                            this.set('_json_file_filtered', create(this._filtered_sr, this._dataDive));
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
                         };
                     };
 
@@ -569,8 +570,7 @@
                         if (this._sr.survey_responses.length > 0) {
 
                             // We have data -> Proceed.
-                            var _sr = this.get('_sr');
-
+                            var _sr = Object.assign({}, this.get('_sr'));
                             if ("survey_responses" in _sr) {
 
                                 this.set('_json_file', create(_sr.survey_responses, this._dataDive));
@@ -655,7 +655,8 @@
                         if (this._filtered_sr.length > 0) {
 
                             // We have data -> Proceed.
-                            this.set('_csv_file_filtered', create(this._filtered_sr, this._dataDive));
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
                         };
                     };
 
@@ -677,6 +678,7 @@
                 };
             }, 250);
         },
+
 
 
         // -----------------------------
