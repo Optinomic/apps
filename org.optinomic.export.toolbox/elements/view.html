@@ -72,16 +72,13 @@
                     <h3 class="flex">Export - Files</h3>
                     <div>
                         <template is="dom-if" if="[[!_overrideSettings.override]]">
-                            <paper-button class="indigo" on-tap="_openFilter">Einstellungen</paper-button>
-                        </template>
-                        <template is="dom-if" if="[[_overrideSettings.override]]">
-                            <paper-button class="grey" on-tap="_closeFilter">Einstellungen schliessen</paper-button>
+                            <paper-button class="pink" on-tap="_openSettings">Einstellungen</paper-button>
                         </template>
                     </div>
                     <div>
                         <template is="dom-if" if="[[patient_groups]]">
                             <template is="dom-if" if="[[!_filterOpen]]">
-                                <paper-button class="indigo" on-tap="_openFilter">Filter</paper-button>
+                                <paper-button class="pink" on-tap="_openFilter">Filter</paper-button>
                             </template>
                             <template is="dom-if" if="[[_filterOpen]]">
                                 <paper-button class="grey" on-tap="_closeFilter">Filter schliessen</paper-button>
@@ -207,6 +204,12 @@
             } catch (err) {
                 console.error("ERROR: ", err.message);
             }
+        },
+
+        _openSettings: function() {
+            var _overrideSettings = Object.assign({}, this.get('_overrideSettings'));
+            _overrideSettings.override = true;
+            this.set('_overrideSettings', _overrideSettings);
         },
 
 
