@@ -227,12 +227,14 @@
             var d = Object.assign({}, this.get('_d'));
             console.log('_createFiles', d);
 
-            if (d.overrideSettings.override) {
-                var options = Object.assign({}, d.overrideSettings);
-                options.name = d.fileDefinitions.options.name;
-                options.description = d.fileDefinitions.options.description;
-                options.source = d.fileDefinitions.options.source;
-                d.fileDefinitions.options = Object.assign({}, options);
+            if ((d.overrideSettings !== undefined) && (d.overrideSettings !== null)) {
+                if (d.overrideSettings.override) {
+                    var options = Object.assign({}, d.overrideSettings);
+                    options.name = d.fileDefinitions.options.name;
+                    options.description = d.fileDefinitions.options.description;
+                    options.source = d.fileDefinitions.options.source;
+                    d.fileDefinitions.options = Object.assign({}, options);
+                };
             };
 
             this._createJSONFile(d.fileDefinitions, filtered);
