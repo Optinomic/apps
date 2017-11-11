@@ -230,10 +230,9 @@
             if (e.detail.override !== true) {
                 this._overrideSettings_open = false;
             };
-            if (JSON.stringify(e.detail) !== JSON.stringify(this._overrideSettings) ) {
-                this.set('_overrideSettings', e.detail);
-                // console.warn('_event_settings', this._overrideSettings);
-            };
+
+              this.set('_overrideSettings', e.detail);
+                console.warn('_event_settings', this._overrideSettings);
         },
 
         _toggleHelp: function() {

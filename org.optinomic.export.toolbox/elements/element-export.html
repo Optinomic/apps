@@ -232,6 +232,7 @@
                 options.name = d.fileDefinitions.options.name;
                 options.description = d.fileDefinitions.options.description;
                 options.source = d.fileDefinitions.options.source;
+                d.fileDefinitions.options = Object.assign({}, options);
             };
 
             this._createJSONFile(d.fileDefinitions, filtered);
@@ -292,7 +293,6 @@
             include(../org.optinomic.export.toolbox/definitions/_default_patient.js)
             include(../org.optinomic.export.toolbox/definitions/_default_stay.js)
 
-
             d.fileDefinitions = Object.assign({}, this.fileDefinitions);
             d.overrideSettings = Object.assign({}, this.overrideSettings);
 
@@ -300,7 +300,7 @@
             // Check Options & Add _Default_Blocks if needed
 
             if (d.overrideSettings.override) {
-                // console.warn('OVERRIDE', d.overrideSettings, d.fileDefinitions.fields.length);
+                console.log('OVERRIDE', d.overrideSettings, d.fileDefinitions.fields.length);
 
                 if (d.overrideSettings.export_stay_details !== false) {
                     d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
@@ -315,7 +315,7 @@
                 };
 
             } else {
-                // console.warn('NOT OVERRIDE', d.fileDefinitions.fields.length);
+                console.log('NOT OVERRIDE', d.fileDefinitions.fields.length);
 
                 if (d.fileDefinitions.options.export_stay_details !== false) {
                     d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
@@ -735,6 +735,7 @@
 
             }, 250);
         },
+
 
 
         // -----------------------------
