@@ -63,18 +63,13 @@
                 </iron-collapse>
             </div>
             <div id="settings">
-                <iron-collapse id="start" opened="[[_overrideSettings.override]]" horizontal class="collapse-content">
+                <iron-collapse id="start" opened="[[_overrideSettings_open]]" horizontal class="collapse-content">
                     <element-override-settings settings="[[_overrideSettings]]" on-settings="_event_settings"></element-override-settings>
                 </iron-collapse>
             </div>
             <div id="content">
                 <div class="horizontal">
                     <h3 class="flex">Export - Files</h3>
-                    <div>
-                        <template is="dom-if" if="[[!_overrideSettings.override]]">
-                            <paper-button class="pink" on-tap="_openSettings">Einstellungen</paper-button>
-                        </template>
-                    </div>
                     <div>
                         <template is="dom-if" if="[[patient_groups]]">
                             <template is="dom-if" if="[[!_filterOpen]]">
@@ -83,6 +78,11 @@
                             <template is="dom-if" if="[[_filterOpen]]">
                                 <paper-button class="grey" on-tap="_closeFilter">Filter schliessen</paper-button>
                             </template>
+                        </template>
+                    </div>
+                    <div>
+                        <template is="dom-if" if="[[!_overrideSettings_open]]">
+                            <paper-button class="pink" on-tap="_openSettings">Einstellungen</paper-button>
                         </template>
                     </div>
                 </div>
@@ -207,9 +207,8 @@
         },
 
         _openSettings: function() {
-            var _overrideSettings = Object.assign({}, this.get('_overrideSettings'));
-            _overrideSettings.override = true;
-            this.set('_overrideSettings', _overrideSettings);
+            this._overrideSettings_open = true;
+            this.set('_overrideSettings_open', true);
         },
 
 
@@ -228,8 +227,13 @@
         },
 
         _event_settings: function(e) {
-            this.set('_overrideSettings', e.detail);
-            console.warn('_event_settings', this._overrideSettings);
+            if (e.detail.override !== true) {
+                this._overrideSettings_open = false;
+            };
+            if (JSON.stringify(e.detail) !== JSON.stringify(this._overrideSettings) ) {
+                this.set('_overrideSettings', e.detail);
+                // console.warn('_event_settings', this._overrideSettings);
+            };
         },
 
         _toggleHelp: function() {
@@ -254,10 +258,10 @@
 
             this.set('_filterOpen', false);
             this.set('_runOpen', false);
+            this.set('_overrideSettings_open', false);
             this.set('_overrideSettings', {
                 "override": false
             });
-            
 
 
             this._d = this._d === undefined ? {} : this._d;
@@ -273,10 +277,10 @@
             // Add NEW Files here!
 
             d.export_files = [];
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.js));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.json));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.json));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.json));
 
 
             // Find Sources Index and enhance options!
@@ -289,7 +293,6 @@
                         f.options = Object.assign(f.options, source_options);
                     }
                 };
-                console.log('f', f);
             });
 
             this.set('_export_files', d.export_files);

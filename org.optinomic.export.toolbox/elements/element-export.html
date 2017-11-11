@@ -50,7 +50,7 @@
                         <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
                     </div>
                     <div class="flex">
-                        <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b> 
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b>
                             <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
                     </div>
                     <template is="dom-if" if="[[_filtered_sr]]" restamp="true">
@@ -79,7 +79,7 @@
                 <div class="horizontal">
                     <div style="width:52px;">&nbsp;</div>
                     <div class="flex">
-                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b> 
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
                             <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
             },
             overrideSettings: {
                 type: Object,
-                observer: '_overrideSettingsChanged'
+                observer: '_sr_ready'
             },
             _d: {
                 type: Object
@@ -224,8 +224,18 @@
 
             filtered = filtered || false;
 
-            this._createJSONFile(this.fileDefinitions, filtered);
-            this._createCSVFile(this.fileDefinitions, filtered);
+            var d = Object.assign({}, this.get('_d'));
+            console.log('_createFiles', d);
+
+            if (d.overrideSettings.override) {
+                var options = Object.assign({}, d.overrideSettings);
+                options.name = d.fileDefinitions.options.name;
+                options.description = d.fileDefinitions.options.description;
+                options.source = d.fileDefinitions.options.source;
+            };
+
+            this._createJSONFile(d.fileDefinitions, filtered);
+            this._createCSVFile(d.fileDefinitions, filtered);
         },
 
         _createFileName: function(full) {
@@ -278,65 +288,56 @@
 
             var d = {};
 
-            d.default_optinomic_fields = [
-                { "name": "optinomic_patient_id", "path": "patient_id" },
-                { "name": "optinomic_cis_pid", "path": "stay.cis_pid" },
-                { "name": "optinomic_stay_id", "path": "stay_id" },
-                { "name": "optinomic_cis_fid", "path": "stay.cis_fid" },
-                { "name": "optinomic_event_id", "path": "event_id" },
-                { "name": "optinomic_pum_id", "path": "pum_id" },
-                { "name": "optinomic_survey_response_id", "path": "survey_response_id" }
-            ];
-
-            d.default_patient = [
-                { "name": "PID", "path": "patient.cis_pid" },
-                { "name": "optinomic_patient_gender", "path": "patient.gender" },
-            ];
-
-            d.default_stay = [
-                { "name": "Fall", "path": "_function", "function": "var cis_fid = source.stay.cis_fid + ''; cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2); var fid = parseInt(cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); if (fid > 0) { return fid; } else { return ''; };" },
-                { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" },
-                { "name": "optinomic_patient_age_when_filled", "path": "patient.extras.age_when_filled" },
-                { "name": "optinomic_filled", "path": "survey_response.filled" },
-                { "name": "optinomic_start", "path": "stay.start" },
-                { "name": "optinomic_stop", "path": "stay.stop" }
-            ];
+            include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js)
+            include(../org.optinomic.export.toolbox/definitions/_default_patient.js)
+            include(../org.optinomic.export.toolbox/definitions/_default_stay.js)
 
 
-            d.fileDefinitions = this.fileDefinitions;
+            d.fileDefinitions = Object.assign({}, this.fileDefinitions);
+            d.overrideSettings = Object.assign({}, this.overrideSettings);
 
 
-            // Check Options & Add _Default_Top && _Default_Footer Fields
+            // Check Options & Add _Default_Blocks if needed
 
-            if (d.fileDefinitions.options.export_stay_details !== false) {
-                d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+            if (d.overrideSettings.override) {
+                // console.warn('OVERRIDE', d.overrideSettings, d.fileDefinitions.fields.length);
+
+                if (d.overrideSettings.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
+
+            } else {
+                // console.warn('NOT OVERRIDE', d.fileDefinitions.fields.length);
+
+                if (d.fileDefinitions.options.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
             };
-
-            if (d.fileDefinitions.options.export_patient_details !== false) {
-                d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
-            };
-
-            if (d.fileDefinitions.options.export_optinomic_ids !== false) {
-                d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
-            };
-
-            // if (d.fileDefinitions.options.export_optinomic_ids !== false) {
-            //     d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
-            // };
-            // 
-            // if (d.fileDefinitions.options.export_default_bottom !== false) {
-            //     d.fileDefinitions.fields = d.fileDefinitions.fields.concat(d.default_bottom_fields);
-            // };
-
-
-            this._createFileName(true);
-            this._createFiles();
-
 
             // Set & Log
             d.init_done = true;
             this.set('_d', d);
             this._d = d;
+
+            this._createFileName(true);
+            this._createFiles();
+
             console.log('(INIT) ' + d.fileDefinitions.options.name, d);
         },
 
@@ -664,10 +665,10 @@
                         if (this._sr.survey_responses.length > 0) {
 
                             // We have data -> Proceed.
-                            var _sr = this.get('_sr');
+                            var _sr = Object.assign({}, this.get('_sr'));
 
                             if ("survey_responses" in _sr) {
-                                var survey_responses = this._sr.survey_responses;
+                                var survey_responses = _sr.survey_responses;
                                 this.set('_csv_file', create(survey_responses, this._dataDive));
                             };
                         };
@@ -717,28 +718,24 @@
 
         _sr_ready: function() {
             this.debounce('_sr_ready', function() {
-                if ((this._sr !== null) && (this._sr !== undefined)) {
-                    // Fire Event with patient-groups
-                    this.fire('patientgroups', this._sr.patient_groups);
-
-                    var fileDefinitions = this.get('fileDefinitions');
-                    if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
-                        Polymer.RenderStatus.afterNextRender(this, function() {
-                            this._init();
-                        });
-                    };
-                };
-
-            }, 250);
-        },
-
-        _overrideSettingsChanged: function() {
-            this.debounce('_overrideSettingsChanged', function() {
                 if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
-                    console.warn('overrideSettings', this.overrideSettings);
+                    if ((this._sr !== null) && (this._sr !== undefined)) {
+                        // Fire Event with patient-groups
+                        this.fire('patientgroups', this._sr.patient_groups);
+
+                        var fileDefinitions = this.get('fileDefinitions');
+                        if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
+                            Polymer.RenderStatus.afterNextRender(this, function() {
+                                this._init();
+                            });
+                        };
+                    };
+
                 };
+
             }, 250);
         },
+
 
         // -----------------------------
         // Lifecycle
