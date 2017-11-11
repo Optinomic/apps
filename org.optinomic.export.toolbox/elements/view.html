@@ -62,9 +62,22 @@
                     <element-filter patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
                 </iron-collapse>
             </div>
+            <div id="settings">
+                <iron-collapse id="start" opened="[[_overrideSettings.override]]" horizontal class="collapse-content">
+                    <element-override-settings on-settings="_event_settings"></element-override-settings>
+                </iron-collapse>
+            </div>
             <div id="content">
                 <div class="horizontal">
-                    <h3>Export - Files</h3>
+                    <h3 class="flex">Export - Files</h3>
+                    <div>
+                        <template is="dom-if" if="[[!_overrideSettings.override]]">
+                            <paper-button class="indigo" on-tap="_openFilter">Einstellungen</paper-button>
+                        </template>
+                        <template is="dom-if" if="[[_overrideSettings.override]]">
+                            <paper-button class="grey" on-tap="_closeFilter">Einstellungen schliessen</paper-button>
+                        </template>
+                    </div>
                     <div>
                         <template is="dom-if" if="[[patient_groups]]">
                             <template is="dom-if" if="[[!_filterOpen]]">
@@ -79,7 +92,7 @@
                 <template is="dom-if" if="[[_d.init_done]]" restamp="true">
                     <template is="dom-repeat" items="[[_export_files]]">
                         <div class="content_block">
-                            <element-export file-definitions="[[item]]" filter="[[export_filter]]" on-patientgroups="_set_patient_groups"></element-export>
+                            <element-export file-definitions="[[item]]" filter="[[export_filter]]" override-settings="[[_overrideSettings]]" on-patientgroups="_set_patient_groups"></element-export>
                         </div>
                     </template>
                     <div id="runner">
@@ -173,11 +186,9 @@
                         var source_options = Object.assign({}, d._calculation_sources.object[given_code.options.source]);
                         delete source_options.name;
                         given_code.options = Object.assign(given_code.options, source_options);
-                        given_code.options.app_id = given_code.options.userapp_id;
-                        given_code.options.calculation_id = given_code.options.userapp_calculation_id;
                         given_code.options.id = d.export_files.length;
-                        given_code.options.name = given_code.options.name + " | LIVE";
-                        given_code.options.description = "Ungesichert | " + given_code.options.description;
+                        given_code.options.name = "(LIVE) " + given_code.options.name;
+                        given_code.options.description = "=> Ungesichert | " + given_code.options.description;
 
                         _export_files.push(given_code);
 
@@ -213,6 +224,11 @@
             // console.warn('_event_filter', this.export_filter);
         },
 
+        _event_settings: function(e) {
+            this.set('_overrideSettings', e.detail);
+            console.warn('_event_settings', this._overrideSettings);
+        },
+
         _toggleHelp: function() {
             var d = this.get('_d');
             this._d = {};
@@ -235,6 +251,10 @@
 
             this.set('_filterOpen', false);
             this.set('_runOpen', false);
+            this.set('_overrideSettings', {
+                "override": false
+            });
+            
 
 
             this._d = this._d === undefined ? {} : this._d;
@@ -250,10 +270,10 @@
             // Add NEW Files here!
 
             d.export_files = [];
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.js));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.js));
+            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / bscl.js));
+            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / bscl_anq.js));
+            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / isk.js));
+            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / tmt.js));
 
 
             // Find Sources Index and enhance options!
@@ -263,10 +283,7 @@
                     if ("source" in f.options) {
                         var source_options = Object.assign({}, d._calculation_sources.object[f.options.source]);
                         delete source_options.name;
-
                         f.options = Object.assign(f.options, source_options);
-                        f.options.app_id = f.options.userapp_id;
-                        f.options.calculation_id = f.options.userapp_calculation_id;
                     }
                 };
                 console.log('f', f);

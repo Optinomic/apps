@@ -101,6 +101,10 @@
                 type: Object,
                 observer: '_filterChanged'
             },
+            overrideSettings: {
+                type: Object,
+                observer: '_overrideSettingsChanged'
+            },
             _d: {
                 type: Object
             },
@@ -683,7 +687,7 @@
                 if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
                     Polymer.RenderStatus.afterNextRender(this, function() {
 
-                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.app_id, this.fileDefinitions.options.calculation_id);
+                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.userapp_id, this.fileDefinitions.options.userapp_calculation_id);
 
                     });
                 };
@@ -725,6 +729,14 @@
                     };
                 };
 
+            }, 250);
+        },
+
+        _overrideSettingsChanged: function() {
+            this.debounce('_overrideSettingsChanged', function() {
+                if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
+                    console.warn('overrideSettings', overrideSettings);
+                };
             }, 250);
         },
 

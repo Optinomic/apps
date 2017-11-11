@@ -1,0 +1,124 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="iron-dropdown/iron-dropdown.html">
+<dom-module id="element-override-settings">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .field {
+            padding-right: 6px;
+        }
+
+        .filter_container {
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="element">
+            <div class="filter_container">
+                <h3 style="padding:0; margin:0;">Einstellungen</h3>
+                <div class="horizontal">
+                    <h4 class="section">Inhalt</h4>
+                    <div class="horizontal">
+                        <paper-checkbox id="export_optinomic_ids" checked>Optinomic - ID's</paper-checkbox>
+                        <paper-checkbox id="export_patient_details" checked>Patienten-Details</paper-checkbox>
+                        <paper-checkbox id="export_stay_details" checked>Fall-Details</paper-checkbox>
+                    </div>
+                    <h4 class="section">CSV - Optionen</h4>
+                    <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
+                        <div class="horizontal">
+                            <paper-input class="flex" id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+                            <paper-checkbox id="export_header" checked>Header-Zeile exportieren</paper-checkbox>
+                        </div>
+                    </template>
+                </div>
+                <div class="horizontal">
+                    <div class="flex">&nbsp;</div>
+                    <div style="height:42px;">
+                        <template is="dom-if" if="[[patientGroupsReady]]" restamp="true">
+                            <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-override-settings',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            settings: {
+                type: Object,
+                observer: '_setOverrideSettings'
+            },
+            _d: {
+                type: Object
+            },
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        _saveOverrideSettings: function() {
+            var settings = this.get('settings');
+            this.fire('settings', settings);
+            console.log('settings', settings);
+        },
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            // Set & Log
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('(INIT) <element-filter>', d);
+        },
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _setOverrideSettings: function() {
+            this.debounce('_setOverrideSettings', function() {
+                if ((this.settings !== undefined) && (this.settings !== null)) {
+                    console.warn('_setOverrideSettings ==> settings', this.settings);
+                };
+            }, 250);
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            // var d = {};
+            // d.init_done = false;
+            // this.set('_d', d);
+            // this._init();
+
+        }
+    });
+    </script>
+</dom-module>

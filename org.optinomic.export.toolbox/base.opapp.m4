@@ -25,6 +25,7 @@ include(../lib/polymer/index.m4)
 include(elements/behavior-export-toolbox.html)
 include(elements/element-export.html)
 include(elements/element-filter.html)
+include(elements/element-override-settings.html)
 include(elements/view.html)
 
 [template create 6 7]
