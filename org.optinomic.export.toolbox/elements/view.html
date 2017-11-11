@@ -270,10 +270,10 @@
             // Add NEW Files here!
 
             d.export_files = [];
-            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / bscl.js));
-            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / bscl_anq.js));
-            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / isk.js));
-            d.export_files.push(include(.. / org.optinomic.export.toolbox / definitions / tmt.js));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.js));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.js));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.js));
+            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.js));
 
 
             // Find Sources Index and enhance options!
@@ -289,14 +289,12 @@
                 console.log('f', f);
             });
 
+            this.set('_export_files', d.export_files);
 
             d.init_done = true;
             this._d = {};
             this.set('_d', d);
             this._d = d;
-
-            this.set('_export_files', d.export_files);
-
 
             console.log('TOP (__init)', this._d);
         },
