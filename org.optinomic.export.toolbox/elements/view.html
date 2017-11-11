@@ -64,7 +64,7 @@
             </div>
             <div id="settings">
                 <iron-collapse id="start" opened="[[_overrideSettings.override]]" horizontal class="collapse-content">
-                    <element-override-settings on-settings="_event_settings"></element-override-settings>
+                    <element-override-settings settings="[[_overrideSettings]]" on-settings="_event_settings"></element-override-settings>
                 </iron-collapse>
             </div>
             <div id="content">

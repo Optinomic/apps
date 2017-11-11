@@ -115,8 +115,8 @@
                     if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
                         if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
 
-                            var home_str = this.fileDefinitions.options.app_id.split('.').join("_");
-                            var path = home_str + "___" + this.fileDefinitions.options.calculation_id;
+                            var home_str = this.fileDefinitions.options.userapp_id.split('.').join("_");
+                            var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
                                 return state._app_userapp_calculations[path].data;
@@ -735,7 +735,7 @@
         _overrideSettingsChanged: function() {
             this.debounce('_overrideSettingsChanged', function() {
                 if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
-                    console.warn('overrideSettings', overrideSettings);
+                    console.warn('overrideSettings', this.overrideSettings);
                 };
             }, 250);
         },
