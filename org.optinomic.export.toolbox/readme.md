@@ -31,7 +31,7 @@ Das so erzeugte JSON-File, kann direkt unter  [ +  HINZUFÜGEN (LIVE-RUN) ] ausg
  
 ### Entwickler-Info
 Weitere Details für Entwickler sind hier dokumentiert:
-[Development](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/readme_dev.md)
+https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/readme_dev.md
 
 
 # Anschrift
