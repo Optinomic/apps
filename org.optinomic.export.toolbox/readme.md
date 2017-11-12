@@ -21,12 +21,17 @@ Implementierte Features:
 
 ### Export-Toolbox | CREATE
 Die Export-Toolbox verfügt über einen CREATE-Prozess:
-1. Datenquelle selektieren     
-2. Datenfelder benennen und sortieren     
-3. Optionen festlegen      
-4. Export-Definition JSON-File herunterladen.     
 
-Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN)]" ausgeführt, getestet und modifiziert werden.
+1. Datenquelle selektieren     
+
+2. Datenfelder benennen und sortieren     
+
+3. Optionen festlegen      
+
+4. Export-Definition JSON-File herunterladen.   
+  
+
+Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN) ]" ausgeführt, getestet und modifiziert werden.
 
 
 ### Entwickler
