@@ -20,23 +20,19 @@ Implementierte Features:
 
 
 ### Export-Toolbox | CREATE
-Die Export-Toolbox verfügt über einen CREATE-Prozess:
-
-1. Datenquelle selektieren     
-
+Die Export-Toolbox verfügt über einen CREATE-Prozess:    
+1. Datenquelle selektieren      
 2. Datenfelder benennen und sortieren     
-
 3. Optionen festlegen      
+4. Export-Definition JSON-File herunterladen.     
 
-4. Export-Definition JSON-File herunterladen.   
-  
-
-Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN) ]" ausgeführt, getestet und modifiziert werden.
+Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN)]" ausgeführt, getestet und modifiziert werden.
 
 
 ### Entwickler
 
-In der Export-Definiton können auch Funktionen übergeben werden. [Vgl. hier](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/definitions/_default_stay.js#L3-L8).
+In der Export-Definiton können auch Funktionen übergeben werden. [Vgl. z.B. ier](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/definitions/_default_stay.js#L3-L8)
+
 
 
 #### Technical
@@ -59,4 +55,3 @@ Alle Definitionen werden im folgenden Verzeichnis abgelegt:
 *+41(0)44 508 26 76*    
 *info@optinomic.com*   
 *[www.optinomic.com](http://www.optinomic.com)*   
-
