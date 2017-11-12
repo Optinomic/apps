@@ -4,38 +4,45 @@
 Easy export of survey responses with calculation values.
 
 
-## Definitions - Example
+![bildschirmfoto 2017-11-11 um 13 10 28](https://user-images.githubusercontent.com/2470873/32689283-e595bace-c6e1-11e7-96a9-0a79d4ce1b7a.png)
 
 
-d.bscl = {
-    "options": {
-        "app_id": "org.optinomic.export.toolbox",
-        "calculation_id": "bscl_full",
-        "name": "BSCL",
-        "delimitter": ";"
-    },
-    "fields": [
-        { "name": "bscl_paranoides_denken_scale_score", "path": "calculation.all_results.paranoides_denken_scale_score", "type": "number" },
-        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score", "type": "number" },
-        { "name": "bscl_paranoides_denken_sum_score", "path": "calculation.all_results.paranoides_denken_sum_score", "type": "number" }
-    ]
-};
+Implementierte Features:
+- [x] Filter
+- [x] Einstellungen (Delimiter, Inhaltsblöcke) global übersteuern
+- [x] Run über den Button "[ +  HINZUFÜGEN (LIVE-RUN)]"
+
+![bildschirmfoto 2017-11-11 um 13 10 58](https://user-images.githubusercontent.com/2470873/32689285-ef12dbd6-c6e1-11e7-9bf0-fc94aed048c3.png)
 
 
-### Fields
-#### Name
-Define the _name_ of the filed.
 
-#### Path
-The path to the value is defined in  _path_. Based from the _survey_responses_ Array.
+=> Falls Filter aktiv sind und die Optionen übersteuert werden, muss allenfalls erneut der Filter [ANWENDEN] erneut gedrückt werden, damit diese Optionen übersteuert werden. 
 
-#### Data-Types
-The following data types (_type_) are supportet:
 
-- number
-- string
-- boolean
-- date
+### Export-Toolbox | CREATE
+Die Export-Toolbox verfügt über einen CREATE-Prozess:
+1. Datenquelle selektieren  
+2. Datenfelder benennen und sortieren
+3. Optionen festlegen 
+4. Export-Definition JSON-File herunterladen.
+
+Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN)]" ausgeführt, getestet und modifiziert werden.
+
+
+### Entwickler
+
+In der Export-Definiton können auch Funktionen übergeben werden:
+~~~~
+{ "name": "feldname", "path": "_function", "function": "return 'TODO';" },
+~~~~
+
+
+#### Technical
+Alle Definitionen werden im folgenden Verzeichnis abgelegt:
+https://github.com/Optinomic/apps/tree/master/org.optinomic.export.toolbox/definitions
+
+=>  Neu erstellte Export-Definitionen (welche dauerhaft zur Verfügung gestellt werden sollen) einfach in dieses Verzeichnis kopieren und [hier den Import hinzufügen](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/elements/view.html#L278-L282).  
+
 
 
 # Anschrift
