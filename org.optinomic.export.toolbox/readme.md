@@ -31,10 +31,7 @@ Das so erzeugte JSON-File, kann direkt unter "[ +  HINZUFÜGEN (LIVE-RUN)]" ausg
 
 ### Entwickler
 
-In der Export-Definiton können auch Funktionen übergeben werden:
-
-    { "name": "feldname", "path": "_function", "function": "return 'TODO';" },
-
+In der Export-Definiton können auch Funktionen übergeben werden. [Vgl. hier](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/definitions/_default_stay.js#L3-L8).
 
 
 #### Technical
