@@ -29,9 +29,6 @@ Das so erzeugte JSON-File, kann direkt unter  [ +  HINZUFÜGEN (LIVE-RUN) ] ausg
 ![bildschirmfoto 2017-11-11 um 13 10 58](https://user-images.githubusercontent.com/2470873/32689285-ef12dbd6-c6e1-11e7-9bf0-fc94aed048c3.png)
 
  
- ### Entwickler-Info
-Weitere Details für Entwickler sind hier dokumentiert:
-[Development](https://github.com/Optinomic/apps/blob/master/org.optinomic.export.toolbox/readme_dev.md)
 
 
 # Anschrift
