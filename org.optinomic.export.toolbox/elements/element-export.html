@@ -453,305 +453,352 @@
 
         _dataDive: function(source, field) {
 
-            if (field.path === "_function") {
+            var ExportHelpers = (function() {
 
-                if ("function" in field) {
-                    // Call given Function
-                    if ((field.function !== null) && (field.function !== undefined)) {
-                        //console.warn('field.function', field.function);
+                var formatDateCH = function(date_string) {
+                    date_string = date_string || null
+                    if (date_string !== null) {
 
-                        try {
-                            var fn = new Function('source', field.function);
-                            value = fn(source);
-                        } catch (err) {
-                            value = "Error";
+                        // 1952-11-19T00:00:00.000000000000Z
+                        var year = parseInt(date_string.substring(0, 4));
+                        var month = parseInt(date_string.substring(5, 7));
+                        var day = parseInt(date_string.substring(8, 10));
+                        var date_string_return = day + "." + month + "." + year
+
+                        return date_string_return;
+                    } else {
+                        return null;
+                    }
+                };
+
+                var formatDateISONoTime = function(date_string) {
+                    date_string = date_string || null
+                    if (date_string !== null) {
+                        var date_string_return = date_string.substring(0, 10);
+                        return date_string_return;
+                    } else {
+                        return null;
+                    }
+                };
+
+                var formatDateISO = function(date_string) {
+                    date_string = date_string || null
+                    if (date_string !== null) {
+
+                        var date = new Date(date_string);
+                        date_string_return = date.toISOString();
+
+                        return date_string_return;
+                    } else {
+                        return null;
+                    }
+                };
+
+                return {
+                    formatDateCH: formatDateCH,
+                    formatDateISO: formatDateISO,
+                    formatDateISONoTime: formatDateISONoTime
+                };
+            })();
+
+
+            if ("function" in field) {
+                // Call given Function
+                if ((field.function !== null) && (field.function !== undefined)) {
+                    //console.warn('field.function', field.function);
+
+                    try {
+                        var fn = new Function('source', 'ExportHelpers', field.function);
+                        value = fn(source, ExportHelpers);
+                    } catch (err) {
+                        value = "Error";
+                    };
+
+                };
+            } else {
+                value = "Undefined Function";
+            };
+
+        } else {
+
+            var path_array = field.path.split(".");
+
+            var value = Object.assign({}, source);
+            if ((value !== null) && (value !== undefined)) {
+                path_array.forEach(function(path, pathID) {
+                    try {
+                        value = value[path];
+                    } catch (err) {
+                        value = "";
+                    };
+
+                });
+            };
+        };
+
+        if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+            value = "";
+        };
+
+        // console.log('(_dataDive) ', value, source, path_array);
+
+        return value;
+    },
+
+    _createJSONFile: function(def, filtered) {
+
+        this.debounce('_createJSONFile', function() {
+
+            function create(survey_responses, _dataDive) {
+                // console.log('-> survey_responses', survey_responses);
+
+                var header_array = [];
+                var rows_array = [];
+                var header_written = false;
+
+                survey_responses.forEach(function(sr, srID) {
+
+                    var fields_array = [];
+                    var fields = def.fields;
+
+                    if ((fields !== null) && (fields !== undefined)) {
+                        fields.forEach(function(field, fieldID) {
+
+                            // Header
+                            if ((header_written === false) && (sr.all_found)) {
+                                header_array.push(field.name);
+                            };
+
+                            // Rows
+                            var current_field = {
+                                "name": field.name,
+                                "value": _dataDive(sr, field)
+                            };
+
+                            // console.log('current_field', current_field)
+
+                            fields_array.push(current_field);
+
+                        }.bind(this));
+
+                        rows_array.push(fields_array);
+
+                        if (header_array.length > 0) {
+                            header_written = true;
                         };
 
                     };
-                } else {
-                    value = "Undefined Function";
+                }.bind(this));
+
+                var file = {
+                    "header": header_array,
+                    "data": rows_array
+                };
+                // console.log('-> JSON file', file);
+
+                return file;
+            };
+
+
+            // console.log('_createJSONFile', this._sr, filtered);
+
+            if (filtered === true) {
+
+                if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                    if (this._filtered_sr.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _filtered_sr = this.get('_filtered_sr');
+                        this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                    };
                 };
 
             } else {
 
-                var path_array = field.path.split(".");
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if (this._sr.survey_responses.length > 0) {
 
-                var value = Object.assign({}, source);
-                if ((value !== null) && (value !== undefined)) {
-                    path_array.forEach(function(path, pathID) {
-                        try {
-                            value = value[path];
-                        } catch (err) {
-                            value = "";
+                        // We have data -> Proceed.
+                        var _sr = Object.assign({}, this.get('_sr'));
+                        if ("survey_responses" in _sr) {
+
+                            this.set('_json_file', create(_sr.survey_responses, this._dataDive));
+
                         };
-
-                    });
+                    };
                 };
+
             };
+        }, 250);
+    },
 
-            if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
-                value = "";
-            };
+    _createCSVFile: function(def, filtered) {
 
-            // console.log('(_dataDive) ', value, source, path_array);
+        this.debounce('_createCSVFile', function() {
 
-            return value;
-        },
+            function create(survey_responses, _dataDive) {
+                // console.log('-> survey_responses', survey_responses);
 
-        _createJSONFile: function(def, filtered) {
+                var f = "";
+                var header_str = "";
+                var header_written = false;
+                var rows_str = "";
+                var delimitter = def.options.delimter;
+                var newline = "\n";
 
-            this.debounce('_createJSONFile', function() {
+                survey_responses.forEach(function(sr, srID) {
 
-                function create(survey_responses, _dataDive) {
-                    // console.log('-> survey_responses', survey_responses);
+                    var fields = def.fields;
 
-                    var header_array = [];
-                    var rows_array = [];
-                    var header_written = false;
+                    if ((fields !== null) && (fields !== undefined)) {
+                        fields.forEach(function(field, fieldID) {
 
-                    survey_responses.forEach(function(sr, srID) {
+                            // Header
+                            if ((header_written === false) && (sr.all_found)) {
+                                header_str = header_str + field.name;
 
-                        var fields_array = [];
-                        var fields = def.fields;
-
-                        if ((fields !== null) && (fields !== undefined)) {
-                            fields.forEach(function(field, fieldID) {
-
-                                // Header
-                                if ((header_written === false) && (sr.all_found)) {
-                                    header_array.push(field.name);
-                                };
-
-                                // Rows
-                                var current_field = {
-                                    "name": field.name,
-                                    "value": _dataDive(sr, field)
-                                };
-
-                                // console.log('current_field', current_field)
-
-                                fields_array.push(current_field);
-
-                            }.bind(this));
-
-                            rows_array.push(fields_array);
-
-                            if (header_array.length > 0) {
-                                header_written = true;
-                            };
-
-                        };
-                    }.bind(this));
-
-                    var file = {
-                        "header": header_array,
-                        "data": rows_array
-                    };
-                    // console.log('-> JSON file', file);
-
-                    return file;
-                };
-
-
-                // console.log('_createJSONFile', this._sr, filtered);
-
-                if (filtered === true) {
-
-                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
-                        if (this._filtered_sr.length > 0) {
-
-                            // We have data -> Proceed.
-                            var _filtered_sr = this.get('_filtered_sr');
-                            this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
-                        };
-                    };
-
-                } else {
-
-                    if ((this._sr !== undefined) && (this._sr !== null)) {
-                        if (this._sr.survey_responses.length > 0) {
-
-                            // We have data -> Proceed.
-                            var _sr = Object.assign({}, this.get('_sr'));
-                            if ("survey_responses" in _sr) {
-
-                                this.set('_json_file', create(_sr.survey_responses, this._dataDive));
-
-                            };
-                        };
-                    };
-
-                };
-            }, 250);
-        },
-
-        _createCSVFile: function(def, filtered) {
-
-            this.debounce('_createCSVFile', function() {
-
-                function create(survey_responses, _dataDive) {
-                    // console.log('-> survey_responses', survey_responses);
-
-                    var f = "";
-                    var header_str = "";
-                    var header_written = false;
-                    var rows_str = "";
-                    var delimitter = def.options.delimter;
-                    var newline = "\n";
-
-                    survey_responses.forEach(function(sr, srID) {
-
-                        var fields = def.fields;
-
-                        if ((fields !== null) && (fields !== undefined)) {
-                            fields.forEach(function(field, fieldID) {
-
-                                // Header
-                                if ((header_written === false) && (sr.all_found)) {
-                                    header_str = header_str + field.name;
-
-                                    if (fieldID === fields.length - 1) {
-                                        // Last
-                                        header_str = header_str + newline;
-                                    } else {
-                                        // Not last
-                                        header_str = header_str + delimitter;
-                                    };
-                                };
-
-                                // Rows
-                                rows_str = rows_str + _dataDive(sr, field);
                                 if (fieldID === fields.length - 1) {
                                     // Last
-                                    if (srID !== survey_responses.length - 1) {
-                                        // Not File-End
-                                        rows_str = rows_str + newline;
-                                    };
+                                    header_str = header_str + newline;
                                 } else {
                                     // Not last
-                                    rows_str = rows_str + delimitter;
+                                    header_str = header_str + delimitter;
                                 };
-
-                            }.bind(this));
-
-                            if (header_str !== "") {
-                                header_written = true;
                             };
 
+                            // Rows
+                            rows_str = rows_str + _dataDive(sr, field);
+                            if (fieldID === fields.length - 1) {
+                                // Last
+                                if (srID !== survey_responses.length - 1) {
+                                    // Not File-End
+                                    rows_str = rows_str + newline;
+                                };
+                            } else {
+                                // Not last
+                                rows_str = rows_str + delimitter;
+                            };
+
+                        }.bind(this));
+
+                        if (header_str !== "") {
+                            header_written = true;
                         };
-                    }.bind(this));
 
-                    if (def.options.export_header !== false) {
-                        var file = header_str + rows_str;
-                    } else {
-                        var file = rows_str;
                     };
+                }.bind(this));
 
-                    return file;
+                if (def.options.export_header !== false) {
+                    var file = header_str + rows_str;
+                } else {
+                    var file = rows_str;
                 };
 
+                return file;
+            };
 
-                if (filtered === true) {
 
-                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
-                        if (this._filtered_sr.length > 0) {
+            if (filtered === true) {
 
-                            // We have data -> Proceed.
-                            var _filtered_sr = this.get('_filtered_sr');
-                            this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                    if (this._filtered_sr.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _filtered_sr = this.get('_filtered_sr');
+                        this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                    };
+                };
+
+            } else {
+
+                if ((this._sr !== undefined) && (this._sr !== null)) {
+                    if (this._sr.survey_responses.length > 0) {
+
+                        // We have data -> Proceed.
+                        var _sr = Object.assign({}, this.get('_sr'));
+
+                        if ("survey_responses" in _sr) {
+                            var survey_responses = _sr.survey_responses;
+                            this.set('_csv_file', create(survey_responses, this._dataDive));
                         };
                     };
+                };
 
-                } else {
+            };
+        }, 250);
+    },
+
+
+
+    // -----------------------------
+    // Observer
+    // -----------------------------
+
+    _loadData: function() {
+        this.debounce('_loadData', function() {
+            if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
+                    this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.userapp_id, this.fileDefinitions.options.userapp_calculation_id);
+
+                });
+            };
+
+        }, 250);
+    },
+
+    _filterChanged: function() {
+        this.debounce('_filterChanged', function() {
+            if ((this.filter !== null) && (this.filter !== undefined)) {
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
 
                     if ((this._sr !== undefined) && (this._sr !== null)) {
-                        if (this._sr.survey_responses.length > 0) {
-
-                            // We have data -> Proceed.
-                            var _sr = Object.assign({}, this.get('_sr'));
-
-                            if ("survey_responses" in _sr) {
-                                var survey_responses = _sr.survey_responses;
-                                this.set('_csv_file', create(survey_responses, this._dataDive));
-                            };
-                        };
+                        this._filterSR(this.filter, this._sr);
+                    } else {
+                        setTimeout(function() {
+                            this._filterChanged();
+                        }.bind(this), 800);
                     };
 
-                };
-            }, 250);
-        },
+                });
+            };
 
+        }, 250);
+    },
 
+    _sr_ready: function() {
+        this.debounce('_sr_ready', function() {
+            if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
+                if ((this._sr !== null) && (this._sr !== undefined)) {
+                    // Fire Event with patient-groups
+                    this.fire('patientgroups', this._sr.patient_groups);
 
-        // -----------------------------
-        // Observer
-        // -----------------------------
-
-        _loadData: function() {
-            this.debounce('_loadData', function() {
-                if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
-                    Polymer.RenderStatus.afterNextRender(this, function() {
-
-                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.userapp_id, this.fileDefinitions.options.userapp_calculation_id);
-
-                    });
-                };
-
-            }, 250);
-        },
-
-        _filterChanged: function() {
-            this.debounce('_filterChanged', function() {
-                if ((this.filter !== null) && (this.filter !== undefined)) {
-                    Polymer.RenderStatus.afterNextRender(this, function() {
-
-
-                        if ((this._sr !== undefined) && (this._sr !== null)) {
-                            this._filterSR(this.filter, this._sr);
-                        } else {
-                            setTimeout(function() {
-                                this._filterChanged();
-                            }.bind(this), 800);
-                        };
-
-                    });
-                };
-
-            }, 250);
-        },
-
-        _sr_ready: function() {
-            this.debounce('_sr_ready', function() {
-                if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
-                    if ((this._sr !== null) && (this._sr !== undefined)) {
-                        // Fire Event with patient-groups
-                        this.fire('patientgroups', this._sr.patient_groups);
-
-                        var fileDefinitions = this.get('fileDefinitions');
-                        if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
-                            Polymer.RenderStatus.afterNextRender(this, function() {
-                                this._init();
-                            });
-                        };
+                    var fileDefinitions = this.get('fileDefinitions');
+                    if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
+                        Polymer.RenderStatus.afterNextRender(this, function() {
+                            this._init();
+                        });
                     };
-
                 };
 
-            }, 250);
-        },
+            };
+
+        }, 250);
+    },
 
 
 
-        // -----------------------------
-        // Lifecycle
-        // -----------------------------
+    // -----------------------------
+    // Lifecycle
+    // -----------------------------
 
-        ready: function() {
+    ready: function() {
 
-            var d = {};
-            d.init_done = false;
-            this.set('_d', d);
-        }
+        var d = {};
+        d.init_done = false;
+        this.set('_d', d);
+    }
 
     });
     </script>
