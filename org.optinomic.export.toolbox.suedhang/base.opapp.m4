@@ -60,3 +60,6 @@ include(calculations/aase.m4)
 
 [calculation bdi javascript ch.suedhang.apps.bdi.production ch.suedhang.apps.bdi.production:bdi_score]
 include(calculations/bdi.m4)
+
+[calculation case javascript ch.suedhang.apps.case.production ch.suedhang.apps.case.production:another_calculation]
+include(calculations/case.m4)
