@@ -127,7 +127,8 @@
                 observer: '_filterChanged'
             },
             overrideSettings: {
-                type: Object
+                type: Object,
+                observer: '_sr_ready'
             },
             _d: {
                 type: Object
@@ -143,7 +144,7 @@
                             var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
-                                if ((this._sr === null) || (this._sr === undefined)) {
+                                if (this._d.init_done === false) {
                                     return state._app_userapp_calculations[path].data;
                                 };
 
