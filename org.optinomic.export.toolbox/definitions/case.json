@@ -34,6 +34,7 @@
     { "path": "survey_response.response.MorgenTr", "name": "MorgenTr" },
     { "path": "survey_response.response.posErw", "name": "posErw" },
     { "path": "survey_response.response.AbstZuv", "name": "AbstZuv" },
-    { "path": "survey_response.response.AbstMot", "name": "AbstMot" }
+    { "path": "survey_response.response.AbstMot", "name": "AbstMot" },
+    { "path": "calculation.score", "name": "CASE_Summe"}
   ]
 }
