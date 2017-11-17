@@ -487,7 +487,7 @@
 
             if (field.path === "_function") {
 
-                var ExportHelpers = (function() {
+                var (ExportHelpers) = (function() {
 
                     var formatDateCH = function(date_string) {
                         date_string = date_string || null
@@ -530,24 +530,8 @@
                         }
                     };
 
-                    var getValue = function(path) {
-                        var path_array = path.split(".");
-
-                        var value = Object.assign({}, source);
-                        if ((value !== null) && (value !== undefined)) {
-                            path_array.forEach(function(path, pathID) {
-                                try {
-                                    value = value[path];
-                                } catch (err) {
-                                    value = "";
-                                };
-                            });
-                        };
-                    };
-
 
                     return {
-                        getValue: getValue,
                         formatDateCH: formatDateCH,
                         formatDateISO: formatDateISO,
                         formatDateISONoTime: formatDateISONoTime
