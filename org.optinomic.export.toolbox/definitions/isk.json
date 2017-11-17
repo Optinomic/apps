@@ -2,7 +2,7 @@
     "options": {
         "name": "ISK",
         "description": "Komplettexport",
-        "export_optinomic_ids": true,
+        "export_optinomic_ids": false,
         "export_patient_details": false,
         "export_stay_details": false,
         "export_header": true,

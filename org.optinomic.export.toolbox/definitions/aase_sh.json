@@ -2,9 +2,9 @@
   "options": {
     "name": "AASE-G",
     "description": "aase",
-    "export_optinomic_ids": true,
-    "export_patient_details": true,
-    "export_stay_details": true,
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
     "export_header": true,
     "delimter": ";",
     "source": "aase"
