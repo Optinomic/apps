@@ -127,8 +127,7 @@
                 observer: '_filterChanged'
             },
             overrideSettings: {
-                type: Object,
-                observer: '_sr_ready'
+                type: Object
             },
             _d: {
                 type: Object
@@ -144,7 +143,9 @@
                             var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
-                                return state._app_userapp_calculations[path].data;
+                                if ((this._sr === null) || (this._sr === undefined)) {
+                                    return state._app_userapp_calculations[path].data;
+                                };
 
                             };
                         };
@@ -250,7 +251,6 @@
             filtered = filtered || false;
 
             var d = Object.assign({}, this.get('_d'));
-            console.log('_createFiles', d);
 
             if ((d.overrideSettings !== undefined) && (d.overrideSettings !== null)) {
                 if (d.overrideSettings.override) {
@@ -261,6 +261,8 @@
                     d.fileDefinitions.options = Object.assign({}, options);
                 };
             };
+
+            console.log('_createFiles', d.fileDefinitions.options.name, d.fileDefinitions, filtered);
 
             this._createJSONFile(d.fileDefinitions, filtered);
             this._createCSVFile(d.fileDefinitions, filtered);
@@ -342,7 +344,7 @@
                 };
 
             } else {
-                console.log('NOT OVERRIDE', d.fileDefinitions.fields.length);
+                // console.log('NOT OVERRIDE', d.fileDefinitions.fields.length);
 
                 if (d.fileDefinitions.options.export_stay_details !== false) {
                     d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
