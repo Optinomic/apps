@@ -13,9 +13,9 @@
   "fields": [
     { "path": "survey_response.response.PID" , "name": "PID" },
     { "path": "survey_response.response.FID", "name": "FID" },
-    { "path": "survey_response.filled", "name": "filled" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateCH(source.survey_response.filled);", "name": "filled" },
     { "path": "survey_response.response.Messzeitpunkt", "name": "Messzeitpunkt" },
-    { "path": "survey_response.response.Date", "name": "Datum" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date);", "name": "Datum" },
     { "path": "survey_response.response.Ausbildungsjahre", "name": "Ausbildungsjahre" },
     { "path": "survey_response.response.TMTATime", "name": "TMTATime" },
     { "path": "survey_response.response.TMTAError", "name": "TMTAError" },
