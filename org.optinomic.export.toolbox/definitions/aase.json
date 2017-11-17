@@ -1,4 +1,3 @@
-/*
 {
   "options": {
     "name": "AASE-G",
@@ -15,50 +14,7 @@
     { "path": "survey_response.response.FID", "name": "FID" },
     { "path": "survey_response.response.Erhebungszeitpunkt", "name": "Erhebungszeitpunkt" },
     { "path": "survey_response.response.andererZeitpunkt", "name": "andererZeitpunkt" },
-    { "path": "survey_response.response.Datum", "name": "Datum" },
-    { "path": "survey_response.response.Substanz", "name": "Substanzangabe"},
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz ==='2') { return source.survey_response.response.SubstAndere; }; if (substanz !== '2') {return ' ';}", "name": "Substanz"},
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE1];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE1];}", "name": "AASE01" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE2];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE2];}", "name": "AASE02" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE3];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE3];}", "name": "AASE03" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE4];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE4];}", "name": "AASE04" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE5];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE5];}", "name": "AASE05" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE6];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE6];}", "name": "AASE06" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE7];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE7];}", "name": "AASE07" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE8];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE8];}", "name": "AASE08" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE9];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE9];}", "name": "AASE09" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE10];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE10];}", "name": "AASE10" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE11];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE11];}", "name": "AASE11" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE12];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE12];}", "name": "AASE12" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE13];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE13];}", "name": "AASE13" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE14];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE14];}", "name": "AASE14" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE15];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE15];}", "name": "AASE15" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE16];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE16];}", "name": "AASE16" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE17];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE17];}", "name": "AASE17" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE18];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE18];}", "name": "AASE18" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE19];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE19];}", "name": "AASE19" },
-    { "path": "_function" , "function": "var substanz = source.survey_response.response.Substanz; if (substanz === '2') { return source.survey_response.response.AASEandere[AASE20];} if (substanz !== '2') { return source.survey_response.response.AASE[AASE20];}", "name": "AASE20" }
-  ]
-}
-*/
-
-{
-  "options": {
-    "name": "AASE-G",
-    "description": "aase",
-    "export_optinomic_ids": true,
-    "export_patient_details": true,
-    "export_stay_details": true,
-    "export_header": true,
-    "delimter": ";",
-    "source": "aase"
-  },
-  "fields": [
-    { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" },
-    { "path": "survey_response.response.FID", "name": "FID" },
-    { "path": "survey_response.response.Erhebungszeitpunkt", "name": "Erhebungszeitpunkt" },
-    { "path": "survey_response.response.andererZeitpunkt", "name": "andererZeitpunkt" },
-    { "path": "survey_response.response.Datum", "name": "Datum" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Datum);", "name": "Datum" },
     { "path": "survey_response.response.Substanz", "name": "Substanzangabe"},    
     { "path": "survey_response.response.AASE[AASE1]", "name": "AASE01" },
     { "path": "survey_response.response.AASE[AASE2]", "name": "AASE02" },
