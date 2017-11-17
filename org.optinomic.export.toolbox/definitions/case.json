@@ -1,0 +1,39 @@
+{
+  "options": {
+    "name": "CASE",
+    "description": "case",
+    "export_optinomic_ids": false,
+    "export_patient_details": false,
+    "export_stay_details": false,
+    "export_header": true,
+    "delimter": ";",
+    "source": "case"
+  },
+  "fields": [
+    { "name": "MedStatFid", "path": "_function", "function": "var cis_pid = source.patient.cis_pid + '00'; var cis_fid = source.stay.cis_fid + ''; var medstatfid = parseInt(cis_pid + cis_fid.slice(cis_fid.length - 4, cis_fid.length - 2)); return medstatfid;" }, 
+    { "path": "survey_response.response.FID", "name": "FID" },
+    { "path": "survey_response.response.PID", "name": "PID" },
+    { "path": "_function", "function": "return ExportHelpers.formatDateCH(source.survey_response.response.datestamp);", "name": "datestamp" },
+    { "path": "survey_response.response.DauerAbh", "name": "DauerAbh" },
+    { "path": "survey_response.response.statEnzug", "name": "statEnzug" },
+    { "path": "survey_response.response.ambEntzugMedi", "name": "ambEntzugMedi" },
+    { "path": "survey_response.response.Craving", "name": "Craving" },
+    { "path": "survey_response.response.statEntwoehnung", "name": "statEntwoehnung" },
+    { "path": "survey_response.response.ambEntwoehnung", "name": "ambEntwoehnung" },
+    { "path": "survey_response.response.Abbrueche", "name": "Abbrueche" },
+    { "path": "survey_response.response.Rueckfaelle", "name": "Rueckfaelle" },
+    { "path": "survey_response.response.Leber", "name": "Leber" },
+    { "path": "survey_response.response.Somat", "name": "Somat" },
+    { "path": "survey_response.response.Neurol", "name": "Neurol" },
+    { "path": "survey_response.response.Psych", "name": "Psych" },
+    { "path": "survey_response.response.Arbeitslos", "name": "Arbeitslos" },
+    { "path": "survey_response.response.Wohnen", "name": "Wohnen" },
+    { "path": "survey_response.response.Allein", "name": "Allein" },
+    { "path": "survey_response.response.Alter", "name": "Alter" },
+    { "path": "survey_response.response.Kontrollv", "name": "Kontrollv" },
+    { "path": "survey_response.response.MorgenTr", "name": "MorgenTr" },
+    { "path": "survey_response.response.posErw", "name": "posErw" },
+    { "path": "survey_response.response.AbstZuv", "name": "AbstZuv" },
+    { "path": "survey_response.response.AbstMot", "name": "AbstMot" }
+  ]
+}
