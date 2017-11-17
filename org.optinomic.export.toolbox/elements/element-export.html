@@ -144,10 +144,12 @@
                             var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
                             if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
 
-                                if (this._d.init_done === false) {
-                                    return_obj = state._app_userapp_calculations[path].data;
-                                } else {
-                                    return_obj = this._sr;
+                                if ((this._d !== null) && (this._d !== undefined)) {
+                                    if (this._d.init_done === false) {
+                                        return_obj = state._app_userapp_calculations[path].data;
+                                    } else {
+                                        return_obj = this._sr;
+                                    };
                                 };
 
                             };
