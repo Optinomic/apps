@@ -3,6 +3,7 @@
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-spinner/paper-spinner.html">
 <dom-module id="element-export">
     <template>
         <style include="shared-styles">
@@ -67,17 +68,41 @@
                     <div class="result_group">
                         <p class="button_description">Ungefiltert: <span style="color:#212121">[[_sr.survey_responses.length]]</span></p>
                         <div class="horizontal">
-                            <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
-                            <a href="#" id="fileLinkJSON" hidden download$="[[_filename_full]].json"></a>
-                            <paper-button class="grey" on-tap="__onDownloadCSV">CSV</paper-button>
-                            <a href="#" id="fileLinkCSV" hidden download$="[[_filename_full]].csv"></a>
+                            <div>
+                                <template is="dom-if" if="[[_created_JSON]]" restamp="true">
+                                    <div style="width:52px;">
+                                        <paper-button class="grey" on-tap="__onDownloadJSONFiltered">JSON</paper-button>
+                                        <a href="#" id="fileLinkJSONFiltered" hidden download$="[[_filename_filtered]].json"></a>
+                                    </div>
+                                </template>
+                                <template is="dom-if" if="[[!_created_JSON]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+                                    <paper-button class="grey" on-tap="__onDownloadCSV">CSV</paper-button>
+                                </template>
+                                <a href="#" id="fileLinkCSV" hidden download$="[[_filename_full]].csv"></a>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
             </template>
             <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
                 <div class="horizontal">
-                    <div style="width:52px;">&nbsp;</div>
+                    <div style="width:52px;">
+                        <paper-spinner active></paper-spinner>
+                    </div>
                     <div class="flex">
                         <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
                             <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
@@ -553,6 +578,9 @@
 
             this.debounce('_createJSONFile', function() {
 
+                this.set('_created_JSON', false);
+
+
                 function create(survey_responses, _dataDive) {
                     // console.log('-> survey_responses', survey_responses);
 
@@ -614,6 +642,7 @@
                             // We have data -> Proceed.
                             var _filtered_sr = this.get('_filtered_sr');
                             this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_JSON', true);
                         };
                     };
 
@@ -627,6 +656,7 @@
                             if ("survey_responses" in _sr) {
 
                                 this.set('_json_file', create(_sr.survey_responses, this._dataDive));
+                                this.set('_created_JSON', true);
 
                             };
                         };
@@ -639,6 +669,8 @@
         _createCSVFile: function(def, filtered) {
 
             this.debounce('_createCSVFile', function() {
+
+                this.set('_created_CSV', false);
 
                 function create(survey_responses, _dataDive) {
                     // console.log('-> survey_responses', survey_responses);
@@ -710,6 +742,7 @@
                             // We have data -> Proceed.
                             var _filtered_sr = this.get('_filtered_sr');
                             this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_CSV', true);
                         };
                     };
 
@@ -724,6 +757,8 @@
                             if ("survey_responses" in _sr) {
                                 var survey_responses = _sr.survey_responses;
                                 this.set('_csv_file', create(survey_responses, this._dataDive));
+                                this.set('_created_CSV', true);
+
                             };
                         };
                     };
@@ -802,6 +837,8 @@
             var d = {};
             d.init_done = false;
             this.set('_d', d);
+            this.set('_created_CSV', false);
+            this.set('_created_JSON', false);
         }
 
     });
