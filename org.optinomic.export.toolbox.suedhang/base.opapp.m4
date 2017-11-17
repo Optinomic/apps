@@ -52,3 +52,7 @@ include(calculations/bscl.m4)
 [calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/isk.m4)
 
+[calculation actinfo_ein javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
+include(calculations/actinfo_ein.m4)
+
+
