@@ -23,6 +23,7 @@ include(../lib/polymer/index.m4)
 include(elements/behavior-export-toolbox.html)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
 include(../org.optinomic.export.toolbox/elements/element-filter.html)
+include(../org.optinomic.export.toolbox/elements/element-override-settings.html)
 include(../org.optinomic.export.toolbox/elements/view.html)
 
 [template create 6 7]
