@@ -1,0 +1,83 @@
+<script>
+optinomicExportToolbox = {
+
+
+    behaviors: [],
+
+
+    properties: {
+        _calculation_data_source: {
+            type: Object
+        }
+    },
+
+
+    // --------------------------------
+    // INIT
+    // --------------------------------
+
+    __setSources: function() {
+        var _array_source = [];
+
+        // --------------------------------------------
+        // Datenquellen definieren!
+        // --------------------------------------------
+
+
+        // "userapp_calculation_id" muss mit .opapp übereinstimmen!   Bsp.: "tmt_full" bei:
+        // [calculation tmt_full javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
+
+        // Index ist eine ID zur Quelle :: Nicht ändern, auch falls "userapp_calculation_id" ändert!
+
+        _array_source.push({
+            "name": "Soziale Kompetenzen (ISK)",
+            "index": "isk",
+            "userapp_calculation_id": "isk"
+        });
+
+        _array_source.push({
+            "name": "BSCL (ANQ)",
+            "index": "bscl",
+            "userapp_calculation_id": "bscl"
+        });
+
+        _array_source.push({
+            "name": "Trail Making Test (TMT)",
+            "index": "tmt",
+            "userapp_calculation_id": "tmt"
+        });
+
+
+        // Create Indexed Object & Default for all
+        var _object_source = {};
+
+        _array_source.forEach(function(d, dID) {
+            d.id = dID;
+            d.userapp_id = "org.optinomic.export.toolbox.suedhang";
+
+            _object_source[d.index] = d;
+        });
+
+        var save_object = {
+            "array": _array_source,
+            "object": _object_source,
+            "init_done": true
+        };
+
+        // Save
+        this.set('_calculation_sources', save_object);
+        this._calculation_sources = {};
+        this._calculation_sources = save_object;
+
+        // console.log('optinomicExportToolbox (Behavior)', this._calculation_sources);
+    },
+
+    // --------------------------------
+    // Liefecycle
+    // --------------------------------
+
+    created: function() {
+        this.__setSources();
+    }
+};
+</script>

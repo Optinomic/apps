@@ -20,10 +20,17 @@ website = http://www.optinomic.com/
 
 [template export 6 7]
 include(../lib/polymer/index.m4)
-include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
+include(elements/behavior-export-toolbox.html)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
 include(../org.optinomic.export.toolbox/elements/element-filter.html)
 include(../org.optinomic.export.toolbox/elements/view.html)
+
+[template create 6 7]
+include(../lib/polymer/index.m4)
+include(../org.optinomic.export.toolbox/elements/timeu-wizard.html)
+include(elements/behavior-export-toolbox.html)
+include(../org.optinomic.export.toolbox/elements/element-select-datasource.html)
+include(../org.optinomic.export.toolbox/elements/create.html)
 
 
 [readme]
@@ -36,12 +43,12 @@ include(readme.md)
 [css]
 
 
-[calculation tmt_full1 javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
+[calculation tmt javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
 include(calculations/tmt.m4)
 
-[calculation bscl_full1 javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
+[calculation bscl javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
 include(calculations/bscl.m4)
 
-[calculation isk_full1 javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
+[calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/isk.m4)
 
