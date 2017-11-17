@@ -57,3 +57,6 @@ include(calculations/actinfo_ein.m4)
 
 [calculation aase_new javascript ch.suedhang.apps.aase-g.production ch.suedhang.apps.aase-g.production:another_calculation]
 include(calculations/aase.m4)
+
+[calculation bdi javascript ch.suedhang.apps.bdi.production ch.suedhang.apps.bdi.production:bdi_score]
+include(calculations/bdi.m4)
