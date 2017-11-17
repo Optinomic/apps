@@ -55,5 +55,5 @@ include(calculations/isk.m4)
 [calculation actinfo_ein_new javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
 include(calculations/actinfo_ein.m4)
 
-[calculation aase javascript ch.suedhang.apps.aase-g.production ch.suedhang.apps.aase-g.production:another_calculation]
+[calculation aase_new javascript ch.suedhang.apps.aase-g.production ch.suedhang.apps.aase-g.production:another_calculation]
 include(calculations/aase.m4)
