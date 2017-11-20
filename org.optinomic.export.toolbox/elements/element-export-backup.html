@@ -269,10 +269,8 @@
 
             console.log('_createFiles', d.fileDefinitions.options.name, d.fileDefinitions, filtered);
 
-            //this._createJSONFile(d.fileDefinitions, filtered);
-            //this._createCSVFile(d.fileDefinitions, filtered);
-
-            this._createCSVandJSONFile(d.fileDefinitions, filtered);
+            this._createJSONFile(d.fileDefinitions, filtered);
+            this._createCSVFile(d.fileDefinitions, filtered);
         },
 
         _createFileName: function(full) {
@@ -576,26 +574,26 @@
                             var fn = new Function('source', 'ExportHelpers', field.function);
                             value = fn(source, ExportHelpers);
                         } catch (err) {
-                            value = "Error: Undefined Function";
+                            value = "Error: Function";
                         };
 
                     };
                 } else {
-                    value = "Undefined Function";
+                    value = "Error: Undefined Function";
                 };
 
             } else {
 
 
-                var getMyVal = function(path, origin) {
-                    return path.split('.').reduce(function(prev, curr) {
+                var getMyVal = function(path, origin){
+                  return path.split('.').reduce( function( prev, curr ) {
                         return prev[curr];
-                    }, origin || this);
+                    }, origin || this );
                 };
-
+                
                 var value = getMyVal(field.path, source);
 
-
+                
             };
 
             if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
@@ -607,11 +605,30 @@
             return value;
         },
 
+
         _createCSVandJSONFile: function(def, filtered) {
             this.debounce('_createCSVandJSONFile', function() {
+                this.set('_created_JSON', false);
+                this.set('_created_CSV', false);
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        
+
+                });
 
 
-                function create_json(survey_responses, _dataDive) {
+            }, 250);
+        },
+
+        _createJSONFile: function(def, filtered) {
+
+            this.debounce('_createJSONFile', function() {
+
+                this.set('_created_JSON', false);
+
+
+                function create(survey_responses, _dataDive) {
                     // console.log('-> survey_responses', survey_responses);
 
                     var header_array = [];
@@ -661,7 +678,49 @@
                     return file;
                 };
 
-                function create_csv(json) {
+
+                // console.log('_createJSONFile', this._sr, filtered);
+
+                if (filtered === true) {
+
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_JSON', true);
+                        };
+                    };
+
+                } else {
+
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _sr = Object.assign({}, this.get('_sr'));
+                            if ("survey_responses" in _sr) {
+
+                                this.set('_json_file', create(_sr.survey_responses, this._dataDive));
+                                this.set('_created_JSON', true);
+
+                            };
+                        };
+                    };
+
+                };
+            }, 250);
+        },
+
+        _createCSVFile: function(def, filtered) {
+
+            this.debounce('_createCSVFile', function() {
+
+                this.set('_created_CSV', false);
+
+                function create(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
 
                     var f = "";
                     var header_str = "";
@@ -670,18 +729,31 @@
                     var delimitter = def.options.delimter;
                     var newline = "\n";
 
+                    survey_responses.forEach(function(sr, srID) {
 
+                        var fields = def.fields;
 
-                    json.data.forEach(function(sr, srID) {
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
 
-                        if ((sr !== null) && (sr !== undefined)) {
-                            sr.forEach(function(field, fieldID) {
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_str = header_str + field.name;
+
+                                    if (fieldID === fields.length - 1) {
+                                        // Last
+                                        header_str = header_str + newline;
+                                    } else {
+                                        // Not last
+                                        header_str = header_str + delimitter;
+                                    };
+                                };
 
                                 // Rows
-                                rows_str = rows_str + field.value;
-                                if (fieldID === json.header.length - 1) {
+                                rows_str = rows_str + _dataDive(sr, field);
+                                if (fieldID === fields.length - 1) {
                                     // Last
-                                    if (srID !== json.data.length - 1) {
+                                    if (srID !== survey_responses.length - 1) {
                                         // Not File-End
                                         rows_str = rows_str + newline;
                                     };
@@ -690,25 +762,16 @@
                                     rows_str = rows_str + delimitter;
                                 };
 
-                            });
+                            }.bind(this));
+
+                            if (header_str !== "") {
+                                header_written = true;
+                            };
 
                         };
-                    });
+                    }.bind(this));
 
                     if (def.options.export_header !== false) {
-
-                        json.header.forEach(function(h, hID) {
-                            header_str = header_str + h;
-
-                            if (hID === json.header.length - 1) {
-                                // Last
-                                header_str = header_str + newline;
-                            } else {
-                                // Not last
-                                header_str = header_str + delimitter;
-                            };
-                        });
-
                         var file = header_str + rows_str;
                     } else {
                         var file = rows_str;
@@ -717,72 +780,41 @@
                     return file;
                 };
 
-                Polymer.RenderStatus.afterNextRender(this, function() {
 
-                    // console.log('_createCSVandJSONFile', def, filtered);
+                if (filtered === true) {
 
-                    if (filtered === true) {
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
 
-                        if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
-
-                            if (this._filtered_sr.length > 0) {
-
-                                this.set('_created_CSV_filtered', false);
-                                this.set('_created_JSON_filtered', false);
-
-                                // We have data -> Proceed.
-                                var _sr = this.get('_filtered_sr');
-
-                                this.set('_json_file_filtered', null);
-                                this.set('_json_file_filtered', create_json(_sr, this._dataDive));
-                                this.set('_created_JSON_filtered', true);
-
-
-                                this.set('_csv_file_filtered', create_csv(this._json_file_filtered));
-                                this.set('_created_CSV_filtered', true);
-
-
-                            };
+                            // We have data -> Proceed.
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_CSV', true);
                         };
-
-
-                    } else {
-
-
-
-                        if ((this._sr !== undefined) && (this._sr !== null)) {
-                            if (this._sr.survey_responses.length > 0) {
-
-                                this.set('_created_JSON', false);
-                                this.set('_created_CSV', false);
-
-                                // We have data -> Proceed.
-                                var _sr = Object.assign({}, this.get('_sr'));
-                                if ("survey_responses" in _sr) {
-                                    this.set('_json_file', null);
-                                    this.set('_json_file', create_json(_sr.survey_responses, this._dataDive));
-                                    this.set('_created_JSON', true);
-
-
-                                    this.set('_csv_file', create_csv(this._json_file));
-                                    this.set('_created_CSV', true);
-
-                                };
-                            };
-                        };
-
-
-
                     };
 
-                    // this.set('_created_JSON', true);
-                    //this.set('_created_CSV', true);
+                } else {
 
-                });
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
 
+                            // We have data -> Proceed.
+                            var _sr = Object.assign({}, this.get('_sr'));
 
+                            if ("survey_responses" in _sr) {
+                                var survey_responses = _sr.survey_responses;
+                                this.set('_csv_file', create(survey_responses, this._dataDive));
+                                this.set('_created_CSV', true);
+
+                            };
+                        };
+                    };
+
+                };
             }, 250);
         },
+
+
 
         // -----------------------------
         // Observer
