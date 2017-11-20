@@ -112,41 +112,77 @@
                             </vaadin-grid-column>
                         </vaadin-grid-column-group>
                         <vaadin-grid-column-group>
-                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Kantonsstatistik</span></template>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Austrittsart</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="AUSTRITT_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.AUSTRITT_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
                             <vaadin-grid-column flex-grow="1">
                                 <template class="header">
                                     <vaadin-grid-sorter path="STATISTIK_KANTON_AUSTRITTSART">
-                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Austrittsart</span>
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
                                     </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_AUSTRITTSART]]</span>
                                 </template>
                             </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Weiterbehandlung</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="WEITERBEHANDLUNG_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.WEITERBEHANDLUNG_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
                             <vaadin-grid-column flex-grow="1">
                                 <template class="header">
                                     <vaadin-grid-sorter path="STATISTIK_KANTON_WEITERBEH">
-                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Weiterbehandlung</span>
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
                                     </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_WEITERBEH]]</span>
                                 </template>
                             </vaadin-grid-column>
+                        </vaadin-grid-column-group>
+
+
+                        <vaadin-grid-column-group>
+                            <template class="header"><span class="body-1" stlye="color:#212121;font-weight:400;">Wohnsituation</span></template>
+                            <vaadin-grid-column width="73px" flex-grow="0">
+                                <template class="header">
+                                    <vaadin-grid-sorter path="WOHNSITUATION_TYP">
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Typ</span>
+                                    </vaadin-grid-sorter>
+                                </template>
+                                <template>
+                                    <span draggable="true" class="body-1">[[item.WOHNSITUATION_TYP]]</span>
+                                </template>
+                            </vaadin-grid-column>
                             <vaadin-grid-column flex-grow="1">
                                 <template class="header">
                                     <vaadin-grid-sorter path="STATISTIK_KANTON_WOHNSITUATION">
-                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Wohnsituation</span>
+                                        <span class="body-1" stlye="color:#424242;font-weight:400;">Bezeichnung</span>
                                     </vaadin-grid-sorter>
                                 </template>
                                 <template>
                                     <span draggable="true" class="body-1">[[item.STATISTIK_KANTON_WOHNSITUATION]]</span>
                                 </template>
                             </vaadin-grid-column>
-                            
                         </vaadin-grid-column-group>
-                        
-                        
                     </vaadin-grid>
 
 

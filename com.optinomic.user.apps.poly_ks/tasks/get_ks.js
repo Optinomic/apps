@@ -11,18 +11,56 @@ function get_ks_task() {
 
         enhanceODBCData(rows).then(function(saved_data) {
             console.log('(!) enhanceODBCData FINISHED! ', saved_data.length);
-            doWrite(saved_data);
+            // doWrite(saved_data);
+
+
+            getPatients().then(function(patients_data) {
+            
+            
+                function patientFound(value) {
+                    return value = cis_pid;
+                };
+                
+                var found_patients = [];
+                
+                for (var pID = 0; pID < patients_data.length; pID++) {
+                    var patient = patients_data[pID];
+
+                    var cis_pid = parseInt(patient.data.cis_pid);
+                    
+                    for (var odbcID = 0; odbcID < saved_data.length; odbcID++) {
+                        var odbc_patient = saved_data[odbcID];
+                        // console.log('(?) ', odbc_patient.PID, cis_pid);
+                        
+                        if (parseInt(odbc_patient.ID_PID) === cis_pid) {
+                            found_patients.push(patient);
+                            odbc_patient.optinomic_pid = parseInt(patient.id);
+                            odbc_patient.optinomic_pid_found = true;
+                            break;
+                        };
+                    };
+                };
+                
+                doWrite(saved_data);
+                
+                
+                console.log('(!) getPatients FINISHED! ', patients_data.length, found_patients.length);
+                
+            }).then(null, function(error) {
+                console.log('(!) patients_data-ERROR, ', error);
+            });
+
 
         }).then(null, function(error) {
-            console.log('(!) ANNOTATION-ERROR, ', error);
+            console.log('(!) enhanceODBCData-ERROR, ', error);
         });
-
 
 
 
     }).then(null, function(error) {
         console.log('(!) callODBC-ERROR, ', error);
     });
+
 
 
 };
@@ -66,6 +104,39 @@ function callODBC() {
 };
 
 
+function getPatients(patients_data) {
+
+    return new Promise(function(resolve, reject) {
+
+        var api_call = "/patients";
+        // console.log('(?) api_call, ', api_call);
+
+        helpers.callAPI("GET", api_call, null, null, function(resp_patients) {
+            var resp = JSON.parse(resp_patients.responseText);
+            var patients = resp.patients;
+
+            resolve(patients);
+        });
+
+    });
+};
+
+function getPatientStays(patient_id) {
+    // GET /patients/:patient_id/stays
+    return new Promise(function(resolve, reject) {
+
+        var api_call = "/patients/" + patient_id + "/stays";
+        // console.log('(?) api_call, ', api_call);
+
+        helpers.callAPI("GET", api_call, null, null, function(resp_stay) {
+            var stay_response = JSON.parse(resp_stay.responseText);
+            var stays = stay_response.stays;
+
+            resolve(stays);
+        });
+    });
+};
+
 
 function enhanceODBCData(odbc_data) {
 
@@ -75,29 +146,10 @@ function enhanceODBCData(odbc_data) {
         for (var rID = 0; rID < odbc_data.length; rID++) {
             var row = JSON.parse(JSON.stringify(odbc_data[rID]));
 
-            // STATISTIK_KANTON_AUSTRITTSART
-            // var typ_austrittsart = "90";
-            // row.typ_austrittsart = "90";
 
-            //  //STATISTIK_KANTON_WEITERBEH
-            //  row.typ_weiterbehandlung = "90";
-            //  
-            //  //STATISTIK_KANTON_WOHNSITUATION
-            // row.typ_wohnsituation = "90";
-
-
-            //STATISTIK_KANTON_NEUEADRESSE
-            if (row.STATISTIK_KANTON_NEUEADRESSE === "Keine neue Adresse oder Telefonnummer") {
-                row.typ_neue_adresse = "0";
-            } else {
-                row.typ_neue_adresse = "1";
-            };
-
-            row.code_austritt = "90";
-            row.code_weiterbeh = "90";
-            row.code_wohnsituation = "90";
-
-            // console.log('(!) row =', rID, row.TYP_NEUE_ADRESSE, row.STATISTIK_KANTON_AUSTRITTSART);
+            row.WOHNSITUATION_TYP = parseInt(row.WOHNSITUATION_TYP);
+            row.WEITERBEHANDLUNG_TYP = parseInt(row.WEITERBEHANDLUNG_TYP);
+            row.AUSTRITT_TYP = parseInt(row.AUSTRITT_TYP);
 
 
             //Save
@@ -138,7 +190,7 @@ function writeKS(odbc_data) {
         };
 
         helpers.callAPI("PUT", apiStr, null, body, function(resp) {
-            if(resp.status != 204) {
+            if (resp.status != 204) {
                 console.error("PUT", apiStr, resp);
             } else {
                 resolve(JSON.stringify(body));
