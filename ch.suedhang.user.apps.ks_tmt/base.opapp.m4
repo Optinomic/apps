@@ -40,7 +40,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation tmt_klinikstichprobe javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
+[calculation tmt_klinikstichprobe_new javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
 include(calculations/klinikstichprobe.js)
 
 

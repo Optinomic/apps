@@ -47,7 +47,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getCalculation = function() {
         $scope.d.loaded = false;
         $scope.d.app = 'ch.suedhang.user.apps.ks_tmt';
-        $scope.d.calculation = 'tmt_klinikstichprobe';
+        $scope.d.calculation = 'tmt_klinikstichprobe_new';
 
 
         // Get specific calculation

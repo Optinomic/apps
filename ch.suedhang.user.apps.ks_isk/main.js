@@ -47,7 +47,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     $scope.getCalculation = function() {
         $scope.d.loaded = false;
         $scope.d.app = 'ch.suedhang.user.apps.ks_isk';
-        $scope.d.calculation = 'isk_klinikstichprobe';
+        $scope.d.calculation = 'isk_klinikstichprobe_new';
 
 
         // Get specific calculation
@@ -56,6 +56,8 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         call.success(function(data) {
             // Save Data to $scope.d
             $scope.d.calculations = data.calculation_result;
+
+            
             console.log('(DATA): getCalculation | Klinikstichprobe: ', $scope.d.calculations);
 
 

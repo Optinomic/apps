@@ -40,7 +40,7 @@ include(../lib/css/set/optinomic_material_bootstrap.m4)
 include(style.css)
 
 
-[calculation isk_klinikstichprobe javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
+[calculation isk_klinikstichprobe_new javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/klinikstichprobe.js)
 
 
