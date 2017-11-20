@@ -517,6 +517,19 @@
                         }
                     };
 
+                    var formatDateYYYYMMDD = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            var date_string_return = date_string.substring(0, 10);
+                            date_string_return = date_string_return.split('-').join('');
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
                     var formatDateISO = function(date_string) {
                         date_string = date_string || null
                         if (date_string !== null) {
