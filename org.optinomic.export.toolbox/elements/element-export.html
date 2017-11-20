@@ -541,17 +541,16 @@
                         }
                     };
 
-                    var stringToDate = function(_date,_format,_delimiter)
-                    {
-                        var formatLowerCase=_format.toLowerCase();
-                        var formatItems=formatLowerCase.split(_delimiter);
-                        var dateItems=_date.split(_delimiter);
-                        var monthIndex=formatItems.indexOf("mm");
-                        var dayIndex=formatItems.indexOf("dd");
-                        var yearIndex=formatItems.indexOf("yyyy");
-                        var month=parseInt(dateItems[monthIndex]);
-                        month-=1;
-                        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                    var stringToDate = function(_date, _format, _delimiter) {
+                        var formatLowerCase = _format.toLowerCase();
+                        var formatItems = formatLowerCase.split(_delimiter);
+                        var dateItems = _date.split(_delimiter);
+                        var monthIndex = formatItems.indexOf("mm");
+                        var dayIndex = formatItems.indexOf("dd");
+                        var yearIndex = formatItems.indexOf("yyyy");
+                        var month = parseInt(dateItems[monthIndex]);
+                        month -= 1;
+                        var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
                         return formatedDate;
                     }
 
@@ -575,7 +574,7 @@
                             var fn = new Function('source', 'ExportHelpers', field.function);
                             value = fn(source, ExportHelpers);
                         } catch (err) {
-                            value = "Error";
+                            value = "Error: Undefined Function";
                         };
 
                     };
@@ -585,18 +584,28 @@
 
             } else {
 
-                var path_array = field.path.split(".");
+                try {
 
-                var value = Object.assign({}, source);
-                if ((value !== null) && (value !== undefined)) {
-                    path_array.forEach(function(path, pathID) {
-                        try {
-                            value = value[path];
-                        } catch (err) {
-                            value = "";
-                        };
+                    // Direct Value
+                    value = source[field.path];
 
-                    });
+                } catch (err) {
+
+                    // Dive into Variable
+                    var path_array = field.path.split(".");
+
+                    var value = Object.assign({}, source);
+                    if ((value !== null) && (value !== undefined)) {
+                        path_array.forEach(function(path, pathID) {
+                            try {
+                                value = value[path];
+                            } catch (err) {
+                                value = "";
+                            };
+
+                        });
+                    };
+
                 };
             };
 
