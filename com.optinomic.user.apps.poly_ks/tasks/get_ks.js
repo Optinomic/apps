@@ -32,7 +32,7 @@ function callODBC() {
 
     return new Promise(function(resolve, reject) {
 
-        var sql = include_as_js_string(odbc_kantonsstatistik.sql);
+        var sql = include_as_js_string(odbc_kantonsstatistik_typ.sql);
 
         var body = {
             "query": sql,
