@@ -574,39 +574,26 @@
                             var fn = new Function('source', 'ExportHelpers', field.function);
                             value = fn(source, ExportHelpers);
                         } catch (err) {
-                            value = "Error: Undefined Function";
+                            value = "Error: Function";
                         };
 
                     };
                 } else {
-                    value = "Undefined Function";
+                    value = "Error: Undefined Function";
                 };
 
             } else {
 
-                try {
 
-                    // Direct Value
-                    value = source[field.path];
-
-                } catch (err) {
-
-                    // Dive into Variable
-                    var path_array = field.path.split(".");
-
-                    var value = Object.assign({}, source);
-                    if ((value !== null) && (value !== undefined)) {
-                        path_array.forEach(function(path, pathID) {
-                            try {
-                                value = value[path];
-                            } catch (err) {
-                                value = "";
-                            };
-
-                        });
-                    };
-
+                var getMyVal = function(path, origin){
+                  return path.split('.').reduce( function( prev, curr ) {
+                        return prev[curr];
+                    }, origin || this );
                 };
+                
+                var value = getMyVal(field.path, source);
+
+                
             };
 
             if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
