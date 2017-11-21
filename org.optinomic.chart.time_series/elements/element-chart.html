@@ -33,16 +33,18 @@
         </style>
         <div id="element">
             <template is="dom-if" if="[[init_done]]" restamp="true">
-                <div class="chart">
-                    <h2 class="title">[[name]]</h2>
-                    <div class="plot">
-                        <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
-                        </plotly-plot>
+                <template is="dom-if" if="[[data_ready]]" restamp="true">
+                    <div class="chart">
+                        <h2 class="title">[[name]]</h2>
+                        <div class="plot">
+                            <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
+                            </plotly-plot>
+                        </div>
+                        <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
                     </div>
-                    <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
-                </div>
+                </template>
                 <div>
-                    <h2>Datenquelle :: [[_override_settings.export_optinomic_ids]]</h2>
+                    <h2>Datenquelle</h2>
                     <vaadin-combo-box id="datasource" on-change="_setDataSource" label="Datenquelle" items="[[_data_definitions]]" item-value-path="id" item-label-path="options.name">
                         <template>
                             <paper-icon-item>
@@ -54,6 +56,17 @@
                     </vaadin-combo-box>
                     <template is="dom-if" if="[[_selected_datasource]]" restamp="true">
                         <element-export file-definitions="[[_selected_data_definition]]" filter="[[export_filter]]" override-settings="[[_override_settings]]" on-json="_set_data"></element-export>
+                    </template>
+                    <template is="dom-if" if="[[data_ready]]" restamp="true">
+                        <vaadin-combo-box id="datafield" on-change="_setFocusField" label="Feld" items="[[data.header]]">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body>
+                                        [[item]]
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
                     </template>
                 </div>
             </template>
@@ -80,6 +93,7 @@
         // -----------------------------
 
         _setDataSource: function() {
+            this.set('_selected_datasource', false);
             var datasource = this.$$('#datasource');
 
             var selected_id = parseInt(datasource.value);
@@ -97,11 +111,22 @@
         },
 
 
+        _setFocusField: function() {
+            var datafield = this.$$('#datafield');
+            console.warn('(_setFocusField)', datafield.value);
+        },
+
+
+
         // -----------------------------
         // Functions
         // -----------------------------
         _dataChanged: function() {
-            this.set('init_done', true);
+            this.set('data_ready', true);
+
+            var data = this.get('data');
+            console.warn('(_dataChanged) data', data);
+
         },
 
 
@@ -112,7 +137,7 @@
 
         _set_data: function(e) {
             this.set('data', e.detail);
-            console.warn('(event) data', this.data);
+            //console.warn('(event) data', this.data);
             this._dataChanged();
         },
 
@@ -121,7 +146,8 @@
         // -----------------------------
 
         ready: function() {
-            this.set('init_done', false);
+            this.set('init_done', true);
+            this.set('data_ready', false);
             this.set('_selected_datasource', false);
 
         }
