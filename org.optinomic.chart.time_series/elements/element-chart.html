@@ -33,12 +33,11 @@
         </style>
         <div id="element">
             <template is="dom-if" if="[[init_done]]" restamp="true">
-                <template is="dom-if" if="[[data_ready]]" restamp="true">
+                <template is="dom-if" if="[[plotdata_ready]]" restamp="true">
                     <div class="chart">
                         <h2 class="title">[[name]]</h2>
                         <div class="plot">
-                            <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
-                            </plotly-plot>
+                            <plotly-plot data$='[[plotdata]]' layout$='[[plotlayout]]'></plotly-plot>
                         </div>
                         <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
                     </div>
@@ -114,6 +113,9 @@
         _setFocusField: function() {
             var datafield = this.$$('#datafield');
             console.warn('(_setFocusField)', datafield.value);
+
+            var data = this.get('data');
+            this._createPlotdata(data.data, datafield.value);
         },
 
 
@@ -124,10 +126,116 @@
         _dataChanged: function() {
             this.set('data_ready', true);
 
-            var data = this.get('data');
-            console.warn('(_dataChanged) data', data);
+
+            console.warn('(_dataChanged) data', this.data);
 
         },
+
+
+        _createPlotdata: function(rows, focus_field) {
+
+            function unpack(rows, key) {
+                var unpacked = [];
+                rows.forEach(function(row, rowID) {
+                    row.forEach(function(valItem, valItemID) {
+                        if (valItem.name === key) {
+                            unpacked.push(valItem.value);
+                        };
+                    });
+                });
+                return unpacked;
+            };
+
+            var trace1 = {
+                type: "scatter",
+                mode: "markers",
+                x: unpack(rows, 'optinomic_filled'),
+                y: unpack(rows, focus_field),
+                line: { color: '#17BECF' },
+                marker: { size: 12 }
+            };
+
+            var trace2 = {
+                type: 'scatter',
+                uid: '5ef80a'
+            };
+
+            
+
+
+            var plotdata = [];
+            plotdata.push(trace1);
+            plotdata.push(trace2);
+            this.set('plotdata', plotdata);
+
+
+
+
+            var layout = {
+                "autosize": true,
+                "yaxis": {
+                    "range": [-10.957755390597384,
+                        3.7377553905973846
+                    ],
+                    "type": "linear",
+                    "autorange": true,
+                    "title": focus_field
+                },
+                "title": this.name,
+                "showlegend": true,
+                "titlefont": {
+                    "family": "Roboto",
+                    "size": 32
+                },
+                "xaxis": {
+                    "title": "Erfassung",
+                    "range": [
+                        "2015-01-12 03:46:53.9538",
+                        "2017-05-25 14:51:39.3939"
+                    ],
+                    "showline": false,
+                    "rangeselector": {
+                        "buttons": [{
+                                "step": "all",
+                                "label": "reset"
+                            },
+                            {
+                                "label": "#1"
+                            }
+                        ]
+                    },
+                    "type": "date",
+                    "autorange": false,
+                    "rangeslider": {
+                        "bordercolor": "#444",
+                        "thickness": 0.15,
+                        "bgcolor": "white",
+                        "range": [
+                            "2015-01-12 03:46:53.9538",
+                            "2017-06-01 07:54:03.3675"
+                        ],
+                        "borderwidth": 0,
+                        "autorange": true
+                    }
+                },
+                "hovermode": "closest",
+                "font": {
+                    "family": "Roboto"
+                },
+                "legend": {
+                    "y": 1.1534810126582278,
+                    "x": 0.9339656783568188
+                }
+            };
+
+            this.set('plotlayout', layout);
+            this.set('plotdata_ready', true);
+
+            console.warn('_createPlotdata :: ', rows, focus_field, plotdata, layout);
+
+        },
+
+
 
 
         // -----------------------------
@@ -148,6 +256,8 @@
         ready: function() {
             this.set('init_done', true);
             this.set('data_ready', false);
+            this.set('plotdata_ready', false);
+
             this.set('_selected_datasource', false);
 
         }
