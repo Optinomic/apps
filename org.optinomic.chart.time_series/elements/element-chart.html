@@ -3,18 +3,25 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
 <link rel="import" href="plotly-plot/plotly-plot.html">
-<dom-module id="element-timeseries-chart">
+<dom-module id="element-chart">
     <template>
         <style include="shared-styles">
          :host {
             display: block;
         }
+
+        .chart {
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
         </style>
         <div id="element">
             <template is="dom-if" if="[[init_done]]" restamp="true">
-                <div>
-                    <h2>Chart: Time-Series</h2>
-                    <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
+                <div class="chart">
+                    <h2>Chart: [[name]]</h2>
+                    <plotly-plot style="margin-top:-24px;" data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
                     </plotly-plot>
                 </div>
             </template>
@@ -25,11 +32,15 @@
     </template>
     <script>
     Polymer({
-        is: 'element-timeseries-chart',
+        is: 'element-chart',
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicCharts],
 
-        properties: {},
+        properties: {
+            name: {
+                type: String
+            }
+        },
 
 
         // -----------------------------

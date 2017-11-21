@@ -20,9 +20,6 @@
         .content_block {
             margin-top: 24px;
             margin-bottom: 48px;
-            border-top-color: #BDBDBD;
-            border-top-style: solid;
-            border-top-width: 1px;
         }
 
         google-chart {
@@ -34,7 +31,6 @@
         <div class="horizontal wrap">
             <div class="flex app_title">
                 <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
-                <optinomic-app-info app-id="[[_current_app.identifier]]"></optinomic-app-info>
             </div>
             <div>
                 <div hidden$="[[_d.show_help]]">
@@ -45,10 +41,11 @@
                 </div>
             </div>
         </div>
+        <optinomic-app-info app-id="[[_current_app.identifier]]"></optinomic-app-info>
         <div hidden$="[[_d.show_help]]">
             <div id="content">
                 <div class="content_block">
-                    <element-timeseries-chart></element-timeseries-chart>
+                    <element-chart name="Time-Series" data="" layout=""></element-chart>
                 </div>
             </div>
         </div>
