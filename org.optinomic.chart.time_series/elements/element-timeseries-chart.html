@@ -1,5 +1,3 @@
-<link rel="import" href="optinomic-title/optinomic-title.html">
-<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
@@ -13,21 +11,11 @@
         }
         </style>
         <div id="element">
-            <div id="title" class="layout horizontal flex">
-                <div class="flex">
-                    <optinomic-title small h1="[[name]]" h2="[[calcId]]"></optinomic-title>
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-            </div>
             <template is="dom-if" if="[[init_done]]" restamp="true">
-                <div class="horizontal">
-                    <div>
-                        <h2>Chart: Time-Series</h2>
-                        <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
-                        </plotly-plot>
-                    </div>
+                <div>
+                    <h2>Chart: Time-Series</h2>
+                    <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
+                    </plotly-plot>
                 </div>
             </template>
             <template is="dom-if" if="[[!init_done]]" restamp="true">

@@ -1,4 +1,5 @@
 <link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
 <link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
 <link rel="import" href="paper-icon-button/paper-icon-button.html">
 <dom-module id="optinomic-template">
@@ -33,6 +34,7 @@
         <div class="horizontal wrap">
             <div class="flex app_title">
                 <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+                <optinomic-app-info app-id="[[_current_app.identifier]]"></optinomic-app-info>
             </div>
             <div>
                 <div hidden$="[[_d.show_help]]">

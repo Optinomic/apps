@@ -1,6 +1,6 @@
 [module]
 id = org.optinomic.chart.time_series
-name = Chart-Test
+name = Chart: Time-Series
 short_description = Time-Series analyses
 version = include(VERSION)
 type = user
