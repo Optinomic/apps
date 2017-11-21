@@ -2,18 +2,78 @@
 optinomicCharts = {
 
 
-    behaviors: [],
+    behaviors: [optinomicExportToolbox],
 
 
     properties: {},
 
 
 
+    // --------------------------------
+    // Functions
+    // --------------------------------
+
+    __setOverrideSettings: function() {
+    	var settings = {};
+        settings.export_optinomic_ids = true;
+        settings.export_patient_details = true;
+        settings.export_stay_details = true;
+        settings.export_header = true;
+        settings.delimter = ";";
+        settings.override = true;
+
+        this.set('_override_settings', export_files);
+
+    },
+
+
+
+    __setDataDefinitions: function() {
+        var _array_source = [];
+
+        // --------------------------------------------
+        // Datenquellen definieren!
+        // --------------------------------------------
+
+        var export_files = [];
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/aase.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/bdi.json));
+        export_files.push(include(../org.optinomic.export.toolbox/definitions/case .json));
+
+        // Save
+        this.set('_data_files', save_object);
+        this._calculation_sources = {};
+        this._calculation_sources = save_object;
+
+
+        // Find Sources Index and enhance options!
+        var _calculation_sources = this.get('_calculation_sources');
+        export_files.forEach(function(f, fID) {
+            if ("options" in f) {
+                if ("source" in f.options) {
+                    var source_options = Object.assign({}, _calculation_sources.object[f.options.source]);
+                    delete source_options.name;
+                    f.options = Object.assign(f.options, source_options);
+                }
+            };
+        });
+
+        this.set('_data_definitions', export_files);
+
+        console.log('optinomicCharts (Behavior)', this._data_definitions);
+    },
+
 
     // --------------------------------
     // Liefecycle
     // --------------------------------
 
-    created: function() {}
+    created: function() {
+        this.__setDataDefinitions();
+    }
 };
 </script>

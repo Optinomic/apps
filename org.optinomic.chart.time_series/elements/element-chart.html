@@ -3,6 +3,7 @@
 <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="iron-collapse/iron-collapse.html">
 <link rel="import" href="plotly-plot/plotly-plot.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
 <dom-module id="element-chart">
     <template>
         <style include="shared-styles">
@@ -11,18 +12,47 @@
         }
 
         .chart {
-            border-top-color: #BDBDBD;
+            border-top-color: #EEEEEE;
             border-top-style: solid;
             border-top-width: 1px;
         }
 
+        .title {
+            z-index: 10;
+            position: relative;
+            left: 6px;
+            top: 0;
+        }
+
+        .plot {
+            margin-top: -48px;
+            border-bottom-color: #EEEEEE;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+        }
         </style>
         <div id="element">
             <template is="dom-if" if="[[init_done]]" restamp="true">
                 <div class="chart">
-                    <h2>Chart: [[name]]</h2>
-                    <plotly-plot style="margin-top:-24px;" data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
-                    </plotly-plot>
+                    <h2 class="title">[[name]]</h2>
+                    <div class="plot">
+                        <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
+                        </plotly-plot>
+                    </div>
+                    <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
+                </div>
+                <div>
+                    <h2>Datasource</h2>
+                    <vaadin-combo-box id="falltyp" value="[[_selected_data_definition]]" label="Datasource" items="[[_data_definitions]]" item-value-path="options.name" item-label-path="options.name">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body two-line>
+                                        <div><b>[[item.options.name]]:</b> [[item.fields.length]]</div>
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    <element-export file-definitions="[[_selected_data_definition]]" filter="[[export_filter]]" override-settings="[[_override_settings]]" on-json="_set_data"></element-export>
                 </div>
             </template>
             <template is="dom-if" if="[[!init_done]]" restamp="true">
@@ -34,7 +64,7 @@
     Polymer({
         is: 'element-chart',
 
-        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicCharts],
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox, optinomicCharts],
 
         properties: {
             name: {
@@ -53,7 +83,9 @@
         // -----------------------------
         // Functions
         // -----------------------------
-
+        _dataChanged: function() {
+            this.set('init_done', true);
+        }
 
 
         // -----------------------------
@@ -61,6 +93,10 @@
         // -----------------------------
 
 
+        _set_data: function(e) {
+            this.set('data', e.detail);
+            // console.warn('_event_filter', this.export_filter);
+        },
 
         // -----------------------------
         // Lifecycle

@@ -23,6 +23,7 @@ include(readme.md)
 [template main 6 7]
 include(../lib/polymer/index.m4)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
+include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
 include(elements/behavior-charts.html)
 include(elements/element-chart.html)
 include(elements/view.html)
