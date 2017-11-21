@@ -24,7 +24,7 @@ include(readme.md)
 include(../lib/polymer/index.m4)
 include(../org.optinomic.export.toolbox/elements/element-export.html)
 include(elements/behavior-charts.html)
-include(elements/element-timeseries-chart.html)
+include(elements/element-chart.html)
 include(elements/view.html)
 
 
