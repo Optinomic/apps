@@ -1,0 +1,75 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="plotly-plot/plotly-plot.html">
+<dom-module id="element-timeseries-chart">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+        </style>
+        <div id="element">
+            <div id="title" class="layout horizontal flex">
+                <div class="flex">
+                    <optinomic-title small h1="[[name]]" h2="[[calcId]]"></optinomic-title>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+            </div>
+            <template is="dom-if" if="[[init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div>
+                        <h2>Chart: Time-Series</h2>
+                        <plotly-plot data='[{"x": [1, 2, 3], "y": [4, 11, 23]}]'>
+                        </plotly-plot>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!init_done]]" restamp="true">
+                <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-timeseries-chart',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicCharts],
+
+        properties: {},
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+            this.set('init_done', true);
+        }
+    });
+    </script>
+</dom-module>

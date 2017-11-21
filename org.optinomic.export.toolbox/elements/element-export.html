@@ -736,10 +736,13 @@
                                 this.set('_json_file_filtered', null);
                                 this.set('_json_file_filtered', create_json(_sr, this._dataDive));
                                 this.set('_created_JSON_filtered', true);
+                                this.fire('json_filtered', this._json_file_filtered);
+
 
 
                                 this.set('_csv_file_filtered', create_csv(this._json_file_filtered));
                                 this.set('_created_CSV_filtered', true);
+                                this.fire('csv_filtered', this._csv_file_filtered);
 
 
                             };
@@ -762,10 +765,12 @@
                                     this.set('_json_file', null);
                                     this.set('_json_file', create_json(_sr.survey_responses, this._dataDive));
                                     this.set('_created_JSON', true);
+                                    this.fire('json', this._json_file);
 
 
                                     this.set('_csv_file', create_csv(this._json_file));
                                     this.set('_created_CSV', true);
+                                    this.fire('csv', this._csv_file);
 
                                 };
                             };
