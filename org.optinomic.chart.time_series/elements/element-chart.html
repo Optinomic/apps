@@ -42,17 +42,19 @@
                     <p class="caption" style="text-align:right;padding-right:6px;">Abbildung: [[name]]</p>
                 </div>
                 <div>
-                    <h2>Datasource</h2>
-                    <vaadin-combo-box id="falltyp" value="[[_selected_data_definition]]" label="Datasource" items="[[_data_definitions]]" item-value-path="options.name" item-label-path="options.name">
-                            <template>
-                                <paper-icon-item>
-                                    <paper-item-body two-line>
-                                        <div><b>[[item.options.name]]:</b> [[item.fields.length]]</div>
-                                    </paper-item-body>
-                                </paper-icon-item>
-                            </template>
-                        </vaadin-combo-box>
-                    <element-export file-definitions="[[_selected_data_definition]]" filter="[[export_filter]]" override-settings="[[_override_settings]]" on-json="_set_data"></element-export>
+                    <h2>Datenquelle :: [[_override_settings.export_optinomic_ids]]</h2>
+                    <vaadin-combo-box id="datasource" on-change="_setDataSource" label="Datenquelle" items="[[_data_definitions]]" item-value-path="id" item-label-path="options.name">
+                        <template>
+                            <paper-icon-item>
+                                <paper-item-body two-line>
+                                    <div><b>[[item.options.name]]:</b> [[item.fields.length]]</div>
+                                </paper-item-body>
+                            </paper-icon-item>
+                        </template>
+                    </vaadin-combo-box>
+                    <template is="dom-if" if="[[_selected_datasource]]" restamp="true">
+                        <element-export file-definitions="[[_selected_data_definition]]" filter="[[export_filter]]" override-settings="[[_override_settings]]" on-json="_set_data"></element-export>
+                    </template>
                 </div>
             </template>
             <template is="dom-if" if="[[!init_done]]" restamp="true">
@@ -77,7 +79,22 @@
         // User-Click Functions
         // -----------------------------
 
+        _setDataSource: function() {
+            var datasource = this.$$('#datasource');
 
+            var selected_id = parseInt(datasource.value);
+            var _data_definitions = this.get('_data_definitions');
+            var _override_settings = this.get('_override_settings');
+
+            _data_definitions.forEach(function(d, dID) {
+                if (d.id === selected_id) {
+                    var _selected_data_definition = Object.assign({}, d);
+                    this.set('_selected_data_definition', _selected_data_definition);
+                    this.set('_selected_datasource', true);
+                    console.log('_setDataSource', this._selected_data_definition);
+                };
+            }.bind(this));
+        },
 
 
         // -----------------------------
@@ -85,7 +102,7 @@
         // -----------------------------
         _dataChanged: function() {
             this.set('init_done', true);
-        }
+        },
 
 
         // -----------------------------
@@ -95,7 +112,8 @@
 
         _set_data: function(e) {
             this.set('data', e.detail);
-            // console.warn('_event_filter', this.export_filter);
+            console.warn('(event) data', this.data);
+            this._dataChanged();
         },
 
         // -----------------------------
@@ -103,7 +121,9 @@
         // -----------------------------
 
         ready: function() {
-            this.set('init_done', true);
+            this.set('init_done', false);
+            this.set('_selected_datasource', false);
+
         }
     });
     </script>
