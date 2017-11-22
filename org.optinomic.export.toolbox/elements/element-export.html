@@ -621,8 +621,8 @@
 
                     survey_responses.forEach(function(sr, srID) {
 
-                        var fields_array = [];
                         var fields = def.fields;
+                        var fields_obj = {};
 
                         if ((fields !== null) && (fields !== undefined)) {
                             fields.forEach(function(field, fieldID) {
@@ -633,18 +633,11 @@
                                 };
 
                                 // Rows
-                                var current_field = {
-                                    "name": field.name,
-                                    "value": _dataDive(sr, field)
-                                };
-
-                                // console.log('current_field', current_field)
-
-                                fields_array.push(current_field);
-
+                                fields_obj[field.name] = _dataDive(sr, field);
+                                
                             }.bind(this));
 
-                            rows_array.push(fields_array);
+                            rows_array.push(fields_obj);
 
                             if (header_array.length > 0) {
                                 header_written = true;
@@ -655,7 +648,7 @@
 
                     var file = {
                         "header": header_array,
-                        "data": rows_array
+                        "rows": rows_array
                     };
                     // console.log('-> JSON file', file);
 
@@ -673,16 +666,16 @@
 
 
 
-                    json.data.forEach(function(sr, srID) {
+                    json.rows.forEach(function(sr, srID) {
 
                         if ((sr !== null) && (sr !== undefined)) {
-                            sr.forEach(function(field, fieldID) {
+                            json.header.forEach(function(field, fieldID) {
 
                                 // Rows
-                                rows_str = rows_str + field.value;
+                                rows_str = rows_str + sr[field];
                                 if (fieldID === json.header.length - 1) {
                                     // Last
-                                    if (srID !== json.data.length - 1) {
+                                    if (srID !== json.rows.length - 1) {
                                         // Not File-End
                                         rows_str = rows_str + newline;
                                     };
@@ -696,6 +689,7 @@
                         };
                     });
 
+                    // Header
                     if (def.options.export_header !== false) {
 
                         json.header.forEach(function(h, hID) {
@@ -788,6 +782,7 @@
 
             }, 250);
         },
+
 
         // -----------------------------
         // Observer
