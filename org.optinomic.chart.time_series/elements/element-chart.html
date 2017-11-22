@@ -114,8 +114,20 @@
             var datafield = this.$$('#datafield');
             console.warn('(_setFocusField)', datafield.value);
 
-            var data = this.get('data');
-            this._createPlotdata(data.data, datafield.value);
+            var rows = this.get('data.rows');
+
+            rows.sort(function(a, b) {
+                var a = a.optinomic_filled.toLowerCase(),
+                    b = b.optinomic_filled.toLowerCase()
+                if (a < b) //sort string ascending
+                    return -1
+                if (a > b)
+                    return 1
+                return 0 //default return value (no sorting)
+            })
+
+
+            this._createPlotdata(rows, datafield.value);
         },
 
 
@@ -134,23 +146,28 @@
 
         _createPlotdata: function(rows, focus_field) {
 
+
             function unpack(rows, key) {
-                var unpacked = [];
-                rows.forEach(function(row, rowID) {
-                    row.forEach(function(valItem, valItemID) {
-                        if (valItem.name === key) {
-                            unpacked.push(valItem.value);
-                        };
-                    });
-                });
-                return unpacked;
+                return rows.map(function(row) { return row[key]; });
             };
+
 
             var trace1 = {
                 type: "scatter",
-                mode: "markers",
+                mode: "lines",
+                name: "Erfassung"
                 x: unpack(rows, 'optinomic_filled'),
                 y: unpack(rows, focus_field),
+                line: { color: '#3F51B5' },
+                marker: { size: 12 }
+            };
+
+            var trace_gender = {
+                type: "scatter",
+                mode: "markers",
+                name: "Gender"
+                x: unpack(rows, 'optinomic_filled'),
+                y: unpack(rows, 'optinomic_patient_gender'),
                 line: { color: '#17BECF' },
                 marker: { size: 12 }
             };
@@ -160,12 +177,13 @@
                 uid: '5ef80a'
             };
 
-            
+
 
 
             var plotdata = [];
             plotdata.push(trace1);
             plotdata.push(trace2);
+            plotdata.push(trace_gender);
             this.set('plotdata', plotdata);
 
 
