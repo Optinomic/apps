@@ -159,8 +159,43 @@
                 x: unpack(rows, 'optinomic_filled'),
                 y: unpack(rows, focus_field),
                 line: { color: '#3F51B5' },
-                marker: { size: 12 }
+                marker: { size: 12 },
+                "hoverinfo": "x+y+name",
+                "transforms": [{
+                    "styles": [{
+                            "target": "male",
+                            "value": {
+                                "visible": true,
+                                "line": {
+                                    "color": "rgba(63, 81, 181, 0.8)",
+                                    "width": 3
+                                },
+                                "name": "Männer",
+                                "hoverinfo": "x+y+name"
+                            }
+                        },
+                        {
+                            "target": "female",
+                            "value": {
+                                "visible": true,
+                                "line": {
+                                    "color": "rgb(233, 30, 99, 0.8)",
+                                    "width": 3
+                                },
+                                "name": "Frauen",
+                                "hoverinfo": "x+y+name"
+                            }
+                        }
+                    ],
+                    "style": [],
+                    "enabled": true,
+                    "groups": unpack(rows, 'optinomic_patient_gender'),
+                    "groupbyId": "1e93e4",
+                    "groupssrc": "optinomic:6:7c847d",
+                    "type": "groupby"
+                }]
             };
+
 
             var trace_gender = {
                 type: "scatter",
