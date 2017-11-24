@@ -52,61 +52,35 @@ SELECT
   END AUSTRITT_TYP,
 
 
-  CASE BELEGUNG.STATISTIK_KANTON_AUSTRITTSART
-    WHEN 'regulärer Austritt' THEN 1
-    WHEN 'regularer Austritt' THEN 1
-    WHEN 'Abbruch PatientIn' THEN 2
-    WHEN 'Abbruch Klinik' THEN 3
-    WHEN 'Uebertritt in andere Klinik' THEN 4
-    WHEN 'Uebertritt innerhalb des Südhangs' THEN 5
-    WHEN 'Uebertritt innerhalb des Sudhangs' THEN 5
-    WHEN 'auf Initiative Dritter' THEN 6
-    WHEN 'Tod (nicht Suizid)' THEN 7
-    WHEN 'Suizid während der Behandlungsdauer' THEN 8
-    WHEN 'Suizid wahrend der Behandlungsdauer' THEN 8
-    WHEN 'anderer Grund' THEN 9
+  CASE 
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Patient gestorben' THEN 1
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'somatische Klinik' THEN 2
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'psychiatrische Klinik station%r' THEN 3
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'psychiatrische Klinik teilstation%r' THEN 4
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'teilstation%re Nachbetreuung' THEN 4
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'andere Klinik / Rehab.-zentrum' THEN 5
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Strafvollzugsanstalt' THEN 6
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'andere station%re Behandlung' THEN 7
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'S%dhang station%r' THEN 8
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Fachstelle fur Alkoholprobleme' THEN 9
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Therapeutische WG' THEN 10
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Sozialdienst' THEN 11
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Sozialdienst / Fachstelle' THEN 11
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Vormund / Beistand' THEN 12
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'PsychiaterIn' THEN 13
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Hausarzt / Haus%rztin' THEN 14
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Psychologe / Psychologin' THEN 15
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'TherapeutIn der Klinik ambulant' THEN 16
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'andere ambulante Betreuung' THEN 17
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'keine Nachbetreuung n%tig' THEN 18
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Angeh%rige' THEN 19
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'keine Nachbetreuung, obwohl n%tig' THEN 20
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Pflegepersonal, Spitex' THEN 21
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'Tagesklinik Sudhang' THEN 22
+    WHEN BELEGUNG.STATISTIK_KANTON_WEITERBEH LIKE 'sonstige' THEN 23
     ELSE 90 
-  END AUSTRITT_TYP_OLD,  
+  END WEITERBEHANDLUNG_TYP,
 
-  CASE BELEGUNG.STATISTIK_KANTON_WEITERBEH
-    WHEN 'Patient gestorben' THEN 1
-    WHEN 'somatische Klinik' THEN 2
-    WHEN 'psychiatrische Klinik stationär' THEN 3
-    WHEN 'psychiatrische Klinik stationar' THEN 3
-    WHEN 'psychiatrische Klinik teilstationär' THEN 4
-    WHEN 'psychiatrische Klinik teilstationar' THEN 4
-    WHEN 'teilstationäre Nachbetreuung' THEN 4
-    WHEN 'teilstationare Nachbetreuung' THEN 4
-    WHEN 'andere Klinik / Rehab.-zentrum' THEN 5
-    WHEN 'Strafvollzugsanstalt' THEN 6
-    WHEN 'andere stationäre Behandlung' THEN 7
-    WHEN 'andere stationare Behandlung' THEN 7
-    WHEN 'Südhang stationär' THEN 8
-    WHEN 'Sudhang stationar' THEN 8
-    WHEN 'Fachstelle für Alkoholprobleme' THEN 9
-    WHEN 'Fachstelle fur Alkoholprobleme' THEN 9
-    WHEN 'Therapeutische WG' THEN 10
-    WHEN 'Sozialdienst' THEN 11
-    WHEN 'Sozialdienst / Fachstelle' THEN 11
-    WHEN 'Vormund / Beistand' THEN 12
-    WHEN 'PsychiaterIn' THEN 13
-    WHEN 'Hausarzt / Hausärztin' THEN 14
-    WHEN 'Hausarzt / Hausarztin' THEN 14
-    WHEN 'Psychologe / Psychologin' THEN 15
-    WHEN 'TherapeutIn der Klinik ambulant' THEN 16
-    WHEN 'andere ambulante Betreuung' THEN 17
-    WHEN 'keine Nachbetreuung nötig' THEN 18
-    WHEN 'keine Nachbetreuung notig' THEN 18
-    WHEN 'Angehörige' THEN 19
-    WHEN 'Angehorige' THEN 19
-    WHEN 'keine Nachbetreuung, obwohl nötig' THEN 20
-    WHEN 'keine Nachbetreuung, obwohl notig' THEN 20
-    WHEN 'Pflegepersonal, Spitex' THEN 21
-    WHEN 'Tagesklinik Südhang' THEN 22
-    WHEN 'Tagesklinik Sudhang' THEN 22
-    WHEN 'sonstige' THEN 23
-    ELSE 90 
-  END WEITERBEHANDLUNG_TYP,  
 
   CASE BELEGUNG.STATISTIK_KANTON_WOHNSITUATION
     WHEN '00 gestorben' THEN 00
