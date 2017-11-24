@@ -13,9 +13,11 @@
   "fields": [
     { "path": "survey_response.response.PID" , "name": "PID" },
     { "path": "survey_response.response.FID", "name": "FID" },
+    { "path": "_function", "function": "return source.stay.cis_fid/100", "name":"FID_berechnet" },
     { "path": "_function", "function": "return ExportHelpers.formatDateCH(source.survey_response.filled);", "name": "filled" },
     { "path": "survey_response.response.Messzeitpunkt", "name": "Messzeitpunkt" },
     { "path": "_function", "function": "return ExportHelpers.formatDateISONoTime(source.survey_response.response.Date);", "name": "Datum" },
+    { "path": "_function", "function": "var datum = source.survey_response.response.Date; if (datum === '') {return ExportHelpers.formatDateISONoTime(source.survey_response.response.filled)} else {return ExportHelpers.formatDateISONoTime(datum)};", "name": "Datum_berechnet" },
     { "path": "survey_response.response.Ausbildungsjahre", "name": "Ausbildungsjahre" },
     { "path": "survey_response.response.TMTATime", "name": "TMTATime" },
     { "path": "survey_response.response.TMTAError", "name": "TMTAError" },
