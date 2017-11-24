@@ -1,6 +1,6 @@
 [module]
 id = ch.suedhang.bot.poly_ks
-name = Austritt (Kantonsstatistik)
+name = BOT (Kantonsstatistik)
 short_description = Austritt (Kantonsstatistik) aus Polypoint.
 version = include(VERSION)
 type = user
@@ -31,5 +31,5 @@ include(elements/view.html)
 [css]
 
 [data_source_query kantonsstatistik Polypoint 0 */12 *]
-include(../lib/polymer/index.m4)
+include(includes/odbc_kantonsstatistik_typ.sql)
 
