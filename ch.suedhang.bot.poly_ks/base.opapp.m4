@@ -30,6 +30,5 @@ include(elements/view.html)
 
 [css]
 
-[data_source_query kantonsstatistik Polypoint 0*/12*]
+[data_source_query kantonsstatistik Polypoint 0 */12 *]
 include(includes/odbc_kantonsstatistik_typ.sql)
-

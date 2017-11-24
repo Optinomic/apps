@@ -136,8 +136,6 @@ FROM
   ) BELEGUNG
 
 WHERE 
-   ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID)) AND
-   FA.FID is not null
-
-
+   ((PA.PAID = FA.PAID) AND (FA.FAID = BELEGUNG.FAID)) 
+   AND FA.FID is not null
 
