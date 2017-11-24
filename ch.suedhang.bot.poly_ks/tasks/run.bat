@@ -1,0 +1,1 @@
+sudo -u therapyserver sh -c 'cd /var/therapyserver; therapy-server-components task-runner /var/therapyserver/config/config.json com.optinomic.user.apps.poly_ks get_ks'

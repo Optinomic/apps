@@ -1,0 +1,122 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-pdfmake/optinomic-pdfmake.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-column-group.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+            padding: 6px;
+        }
+
+        vaadin-grid {
+            height: auto;
+        }
+
+        .full_grid {
+            height: 500px;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .readme_container {
+            background-color: #FAFAFA;
+            border-style: solid;
+            border-color: #EEEEEE;
+            border-width: 1px;
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .content_block {
+            margin-top: -48px;
+            margin-bottom: 48px;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+        .scroll_top {
+            text-align: right;
+            cursor: pointer;
+            margin-top: 24px;
+            margin-bottom: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        </style>
+        <div id="top" class="layout horizontal flex">
+            <div class="flex">
+                <optinomic-title h1="[[_d.title]]" h2="[[_d.subtitle]]" h3="[[_d.small]]"></optinomic-title>
+            </div>
+            <div>
+                <template is="dom-if" if="[[_pdf_ready]]">
+                    <paper-icon-button class="indigo" on-tap="__toggle_print" icon="print"></paper-icon-button>
+                </template>
+            </div>
+        </div>
+        <template is="dom-if" if="[[_d.init_done]]">
+            <div id="main_content">
+                <div id="datenblatt">
+                    
+                    <p>:-)</p>
+
+                </div>
+            </div>
+        </template>
+        <template is="dom-if" if="[[!_d.init_done]]">
+            <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        properties: {},
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            d.title = "Kantonsstatistik";
+            d.subtitle = "Angaben für die Kantonsstatistik";
+            d.small = "Polypoint";
+
+
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('INIT _d', this._d);
+
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+
+        ready: function() {
+            this._init();
+        }
+    });
+    </script>
+</dom-module>
