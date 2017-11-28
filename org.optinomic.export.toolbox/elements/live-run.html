@@ -92,7 +92,6 @@
                             <element-export file-definitions="[[item]]" filter="[[export_filter]]" override-settings="[[_overrideSettings]]" on-patientgroups="_set_patient_groups"></element-export>
                         </div>
                     </template>
-                    <!--
                     <div id="runner">
                         <iron-collapse id="start" opened="[[_runOpen]]" horizontal class="collapse-content">
                             <div class="code">
@@ -109,7 +108,6 @@
                             <paper-button style="margin-left:12px;" class="grey" on-tap="_openRunner">+ Hinzufügen (Live-RUN)</paper-button>
                         </iron-collapse>
                     </div>
-                    -->
                 </template>
                 <template is="dom-if" if="[[!_d.init_done]]">
                     <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
@@ -265,6 +263,7 @@
             });
 
 
+
             this._d = this._d === undefined ? {} : this._d;
 
             var d = this.get('_d');
@@ -278,14 +277,7 @@
             // Add NEW Files here!
 
             d.export_files = [];
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/aase.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bdi.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/case.json));
-
+            
 
             // Find Sources Index and enhance options!
             d._calculation_sources = this.get('_calculation_sources');
@@ -305,6 +297,9 @@
             this._d = {};
             this.set('_d', d);
             this._d = d;
+
+
+            this._openRunner();
 
             console.log('TOP (__init)', this._d);
         },
