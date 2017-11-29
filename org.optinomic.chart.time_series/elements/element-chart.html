@@ -160,8 +160,10 @@
                 y: unpack(rows, focus_field),
                 line: { color: '#3F51B5' },
                 marker: { size: 12 },
-                "hoverinfo": "x+y+name",
-                "transforms": [{
+                hoverinfo: "x+y+name"
+            };
+
+            var transforms = [{
                     "styles": [{
                             "target": "male",
                             "value": {
@@ -194,7 +196,6 @@
                     "groupssrc": "optinomic:6:7c847d",
                     "type": "groupby"
                 }]
-            };
 
 
             var trace_gender = {
