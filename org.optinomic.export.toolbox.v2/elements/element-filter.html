@@ -1,0 +1,235 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="iron-dropdown/iron-dropdown.html">
+<dom-module id="element-filter">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .field {
+            padding-right: 6px;
+        }
+
+        .filter_container {
+            padding: 24px;
+            background-color: #F5F5F5;
+            border-radius: 24px;
+            margin-bottom: 12px;
+        }
+        </style>
+        <div id="element">
+            <div class="filter_container">
+                <h3 style="padding:0; margin:0;">Export - Filter</h3>
+                <div class="horizontal">
+                    <div class="field">
+                        <paper-input id="erhebungszeitraum_von" label="Von" placeholder="YYYY-MM-DD"></paper-input>
+                    </div>
+                    <div class="field">
+                        <paper-input id="erhebungszeitraum_bis" label="Bis" placeholder="YYYY-MM-DD"></paper-input>
+                    </div>
+                    <div class="flex">
+                        <vaadin-combo-box id="falltyp" value="[[_d.falltyp.selected.typ]]" label="Falltyp" items="[[_d.falltyp.all]]" item-value-path="typ" item-label-path="typ">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body two-line>
+                                        <div><b>[[item.typ]]:</b> [[item.name]]</div>
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    </div>
+                </div>
+                <div class="horizontal">
+                    <template is="dom-if" if="[[patientGroupsReady]]" restamp="true">
+                        <div class="flex">
+                            <vaadin-combo-box id="patient_group" value="[[pg_groups.selected.id]]" label="Patientengruppe" items="[[pg_groups.all]]" item-value-path="id" item-label-path="name">
+                                <template>
+                                    <paper-icon-item>
+                                        <paper-item-body>
+                                            <div><b>[[item.typ]]:</b> [[item.name]]</div>
+                                        </paper-item-body>
+                                    </paper-icon-item>
+                                </template>
+                            </vaadin-combo-box>
+                        </div>
+                    </template>
+                </div>
+                <div class="horizontal">
+                    <div class="flex">&nbsp;</div>
+                    <div style="height:42px;">
+                        <template is="dom-if" if="[[patientGroupsReady]]" restamp="true">
+                            <paper-button class="pink" on-tap="_getFilter">Anwenden</paper-button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-filter',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            patientGroups: {
+                type: Object,
+                observer: '_setPatientGroups'
+            },
+            _d: {
+                type: Object
+            },
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+
+
+        // --------------------------------
+        // Helpers
+        // --------------------------------
+
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _init: function() {
+
+            var d = {};
+
+            // Falltyp
+            d.falltyp = {
+                "all": [{
+                    "id": 0,
+                    "typ": "Alle",
+                    "name": "Alle Messungen im Erhebungszeitraum ausgeben"
+                }, {
+                    "id": 1,
+                    "typ": "A1",
+                    "name": "Ein- und Austritt im Erhebungszeitraum"
+                }, {
+                    "id": 2,
+                    "typ": "A2",
+                    "name": "Einritt vor Erhebungszeitraum und Austritt im Erhebungszeitraum"
+                }, {
+                    "id": 3,
+                    "typ": "B",
+                    "name": "Einritt im Erhebungszeitraum und Austritt nach Erhebungszeitraum"
+                }, {
+                    "id": 4,
+                    "typ": "C",
+                    "name": "Eintritt vor Erhebungszeitraum und Austritt nach Erhebungszeitraum"
+                }]
+            };
+            d.falltyp.selected = d.falltyp.all[0];
+
+
+            this._setDefaultFilter();
+
+            // Set & Log
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+            console.log('(INIT) <element-filter>', d);
+        },
+
+
+        _setDefaultFilter: function() {
+            var falltyp = this.$$('#falltyp');
+            var erhebungszeitraum_von = this.$$('#erhebungszeitraum_von');
+            var erhebungszeitraum_bis = this.$$('#erhebungszeitraum_bis');
+
+            var current_year = new Date().getFullYear();
+            erhebungszeitraum_von.value = current_year + "-01-01";
+            erhebungszeitraum_bis.value = current_year + "-12-31";
+        },
+
+        _getFilter: function() {
+            var falltyp = this.$$('#falltyp');
+            var patient_group = this.$$('#patient_group');
+            var erhebungszeitraum_von = this.$$('#erhebungszeitraum_von');
+            var erhebungszeitraum_bis = this.$$('#erhebungszeitraum_bis');
+
+            var filter = {
+                "erhebungszeitraum_von": erhebungszeitraum_von.value,
+                "erhebungszeitraum_bis": erhebungszeitraum_bis.value,
+                "falltyp": falltyp.value,
+                "patient_group": patient_group.value
+            };
+
+            this.fire('filter', filter);
+            console.log('filter', filter);
+        },
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _setPatientGroups: function() {
+            if ((this.patientGroups !== null) && (this.patientGroups !== undefined)) {
+                console.log('_setPatientGroups (element-filter)', this.patientGroups);
+
+
+
+                // Patienten-Gruppen
+                var pg_groups = {
+                    "all": [{
+                        "id": 9999,
+                        "typ": "Alle",
+                        "name": "Messungen aller Patienten ausgeben"
+                    }]
+                };
+
+                this.patientGroups.forEach(function(pg, pgID) {
+                    var pg_to_add = {
+                        "id": pg.entity.id,
+                        "typ": "PG",
+                        "name": pg.entity.data.name
+                    };
+
+                    pg_to_add.name = pg_to_add.name + " (" + pg.patients.length + ")";
+
+                    pg_groups.all.push(pg_to_add);
+                });
+
+                pg_groups.selected = pg_groups.all[0];
+
+
+                this.set('pg_groups', pg_groups);
+                this.set('patientGroupsReady', true);
+
+                console.log('pg_groups', pg_groups);
+
+
+
+            };
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+
+            this._init();
+
+        }
+    });
+    </script>
+</dom-module>

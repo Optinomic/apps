@@ -1,0 +1,320 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="juicy-ace-editor/juicy-ace-editor.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .app_title {
+            margin-bottom: 24px;
+        }
+
+        .readme_container {
+            margin-bottom: 24px;
+        }
+
+        .content_block {
+            max-height: 72px;
+            min-height: 72px;
+            margin: 0;
+            padding: 0;
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+            overflow: hidden;
+        }
+
+        .editor {
+            height: calc(100vh - 453px);
+            margin-right: 24px;
+            min-width: 100%;
+        }
+
+        .code {
+            margin-top: 24px;
+            padding: 24px;
+            background-color: #F5F5F5 !important;
+            background: #F5F5F5 !important;
+        }
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="[[_current_app.version]]"></optinomic-title>
+            </div>
+            <div>
+                <div hidden$="[[_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                </div>
+                <div hidden$="[[!_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                </div>
+            </div>
+        </div>
+        <div hidden$="[[_d.show_help]]">
+            <div id="filter">
+                <iron-collapse id="start" opened="[[_filterOpen]]" horizontal class="collapse-content">
+                    <element-filter patient-groups="[[patient_groups]]" on-filter="_event_filter"></element-filter>
+                </iron-collapse>
+            </div>
+            <div id="settings">
+                <iron-collapse id="start" opened="[[_overrideSettings_open]]" horizontal class="collapse-content">
+                    <element-override-settings settings="[[_overrideSettings]]" on-settings="_event_settings"></element-override-settings>
+                </iron-collapse>
+            </div>
+            <div id="content">
+                <div class="horizontal">
+                    <h3 class="flex">Export - Files</h3>
+                    <div>
+                        <template is="dom-if" if="[[patient_groups]]">
+                            <template is="dom-if" if="[[!_filterOpen]]">
+                                <paper-button class="pink" on-tap="_openFilter">Filter</paper-button>
+                            </template>
+                            <template is="dom-if" if="[[_filterOpen]]">
+                                <paper-button class="grey" on-tap="_closeFilter">Filter schliessen</paper-button>
+                            </template>
+                        </template>
+                    </div>
+                    <div>
+                        <template is="dom-if" if="[[!_overrideSettings_open]]">
+                            <paper-button class="pink" on-tap="_openSettings">Einstellungen</paper-button>
+                        </template>
+                    </div>
+                </div>
+                <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                    <template is="dom-repeat" items="[[_export_files]]">
+                        <div class="content_block">
+                            <element-export file-definitions="[[item]]" filter="[[export_filter]]" override-settings="[[_overrideSettings]]" on-patientgroups="_set_patient_groups"></element-export>
+                        </div>
+                    </template>
+                    <div id="runner">
+                        <iron-collapse id="start" opened="[[_runOpen]]" horizontal class="collapse-content">
+                            <div class="code">
+                                <h3>Export - Definition (Syntax)</h3>
+                                <p>(LIVE-RUN) Um die Ergebnisse der neu erstellten Definition zu testen, fügen Sie hier den (den über [CREATE] erstellten) Syntax ein:</p>
+                                <juicy-ace-editor id="code_editor" class="editor" value="[[definition_code]]" theme="ace/theme/chrome" mode="ace/mode/json" fontsize="14px" softtabs="true" wrapmode="false"></juicy-ace-editor>
+                                <div class="horizontal" style="margin-top:6px;">
+                                    <paper-button class="grey" on-tap="_closeRunner">Schliessen</paper-button>
+                                    <paper-button class="pink" on-tap="_runRunner">Ausführen</paper-button>
+                                </div>
+                            </div>
+                        </iron-collapse>
+                        <iron-collapse id="start" opened="[[!_runOpen]]" class="collapse-content">
+                            <paper-button style="margin-left:12px;" class="grey" on-tap="_openRunner">+ Hinzufügen (Live-RUN)</paper-button>
+                        </iron-collapse>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
+            </div>
+        </div>
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+            _d: {
+                type: Object
+            },
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
+            },
+
+            _clinic: {
+                type: String,
+                statePath: 'clinic.data'
+            }
+        },
+
+        // --------------------------- User --------------------------- 
+
+        _openFilter: function() {
+            this.set('_filterOpen', true);
+        },
+
+        _closeFilter: function() {
+            this.set('_filterOpen', false);
+        },
+
+        _openRunner: function() {
+            this.set('_runOpen', true);
+        },
+
+        _closeRunner: function() {
+            this.set('_runOpen', false);
+        },
+
+        _runRunner: function() {
+
+            var d = Object.assign({}, this.get('_d'));
+            var code_editor = this.$$('#code_editor');
+
+            try {
+                var given_code = JSON.parse(code_editor.editor.getValue());
+
+
+
+
+                if ("options" in given_code) {
+                    if ("source" in given_code.options) {
+                        _export_files = this.get('_export_files');
+                        this._export_files = [];
+
+                        var source_options = Object.assign({}, d._calculation_sources.object[given_code.options.source]);
+                        delete source_options.name;
+                        given_code.options = Object.assign(given_code.options, source_options);
+                        given_code.options.id = d.export_files.length;
+                        given_code.options.name = "(LIVE) " + given_code.options.name;
+                        given_code.options.description = "=> Ungesichert | " + given_code.options.description;
+
+                        _export_files.push(given_code);
+
+
+                        this._export_files = _export_files.slice(0);
+
+                        console.log('given_code', given_code, this._export_files);
+
+                    } else {
+                        console.error("ERROR: Missing source in options!", given_code.options);
+                    };
+                } else {
+                    console.error("ERROR: Missing options!", given_code);
+                };
+
+            } catch (err) {
+                console.error("ERROR: ", err.message);
+            }
+        },
+
+        _openSettings: function() {
+            this._overrideSettings_open = true;
+            this.set('_overrideSettings_open', true);
+        },
+
+
+        // --------------------------- Data --------------------------- 
+
+        _set_patient_groups: function(e) {
+            if ((this.patient_groups === undefined) || (this.patient_groups === null)) {
+                this.set('patient_groups', e.detail);
+                console.warn('_set_patient_groups', this.patient_groups);
+            };
+        },
+
+        _event_filter: function(e) {
+            this.set('export_filter', e.detail);
+            // console.warn('_event_filter', this.export_filter);
+        },
+
+        _event_settings: function(e) {
+            if (e.detail.override !== true) {
+                this._overrideSettings_open = false;
+            };
+
+              this.set('_overrideSettings', e.detail);
+                console.warn('_event_settings', this._overrideSettings);
+        },
+
+        _toggleHelp: function() {
+            var d = this.get('_d');
+            this._d = {};
+            d.show_help = !d.show_help;
+
+            var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme.html;
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+        // --------------------------- Data --------------------------- 
+
+        __loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {});
+        },
+
+        __init: function() {
+
+            this.set('_filterOpen', false);
+            this.set('_runOpen', false);
+            this.set('_overrideSettings_open', false);
+            this.set('_overrideSettings', {
+                "override": false
+            });
+
+
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+
+            d.show_help = false;
+
+
+            // -------------------------------------------------------------
+            // Inculde Export-File Definitons
+            // Create Array of all Export-File Definitons
+            // Add NEW Files here!
+
+            d.export_files = [];
+            
+
+            // Find Sources Index and enhance options!
+            d._calculation_sources = this.get('_calculation_sources');
+            d.export_files.forEach(function(f, fID) {
+                if ("options" in f) {
+                    if ("source" in f.options) {
+                        var source_options = Object.assign({}, d._calculation_sources.object[f.options.source]);
+                        delete source_options.name;
+                        f.options = Object.assign(f.options, source_options);
+                    }
+                };
+            });
+
+            this.set('_export_files', d.export_files);
+
+            d.init_done = true;
+            this._d = {};
+            this.set('_d', d);
+            this._d = d;
+
+
+            this._openRunner();
+
+            console.log('TOP (__init)', this._d);
+        },
+
+
+        // --------------------------- Lifecycle --------------------------- 
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // this.__loadData();
+                this.__init();
+
+            });
+        }
+    });
+    </script>
+</dom-module>

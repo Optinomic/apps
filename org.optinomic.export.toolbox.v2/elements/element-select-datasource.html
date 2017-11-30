@@ -1,0 +1,214 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+<dom-module id="element-select-datasource">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+        </style>
+        <div id="element">
+            <div class="horizontal">
+                <template is="dom-if" if="[[sources]]" restamp="true">
+                    <div class="flex">
+                        <vaadin-combo-box id="patient_group" on-change="_loadData" value="[[_selected_source_index]]" label="Datenquelle" items="[[sources.array]]" item-value-path="index" item-label-path="name">
+                            <template>
+                                <paper-icon-item>
+                                    <paper-item-body>
+                                        <div><b>[[item.index]]:</b> [[item.name]]</div>
+                                    </paper-item-body>
+                                </paper-icon-item>
+                            </template>
+                        </vaadin-combo-box>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-select-datasource',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            sources: {
+                type: Object
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((this._selected_source_index !== null) && (this._selected_source_index !== undefined)) {
+
+                            var source = this.sources.object[this._selected_source_index];
+
+                            var home_str = source.userapp_id.split('.').join("_");
+                            var path = home_str + "___" + source.userapp_calculation_id;
+                            if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                                var return_obj = Object.assign({}, state._app_userapp_calculations[path].data);
+                                return_obj.selected_source = source;
+                                return return_obj;
+
+                            };
+                        };
+                    };
+                    return return_obj;
+                },
+                observer: '_sr_ready'
+            }
+        },
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+
+                var patient_group = this.$$('#patient_group');
+                // this._selected_source_index = patient_group.value;
+                this.set('_selected_source_index', patient_group.value);
+
+                if ((patient_group.value !== null) && (patient_group.value !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+                        console.log('_loadData', patient_group.value, this.sources);
+
+                        if ((this.sources.object !== null) && (this.sources.object !== undefined)) {
+                            var source = this.sources.object[patient_group.value];
+                            if ((source !== null) && (source !== undefined)) {
+                                this.dispatch('actionGetUserAppCalculation', source.userapp_id, source.userapp_calculation_id);
+                            };
+                        };
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _sr_ready: function() {
+            this.debounce('_sr_ready', function() {
+                if ((this._sr !== null) && (this._sr !== undefined)) {
+
+                    var firstAllFound = this.findFirstAllFound(this._sr.survey_responses);
+                    var flatten = this.flatten(firstAllFound);
+                    var field_paths = this.getFieldsArray(flatten);
+
+
+                    var fire_object = Object.assign({}, this._sr);
+                    fire_object.field_paths = field_paths;
+
+                    console.log('===>', firstAllFound, flatten);
+
+                    // Fire Event with patient-groups
+                    this.fire('data', fire_object);
+                    console.log('_sr_ready', fire_object);
+
+                };
+
+            }, 250);
+        },
+
+
+        // -----------------------------
+        // Flatten Object
+        // -----------------------------
+
+        flatten: function(target, opts) {
+            opts = opts || {}
+
+            var delimiter = opts.delimiter || '.'
+            var maxDepth = opts.maxDepth
+            var output = {}
+
+
+            function step(object, prev, currentDepth) {
+                currentDepth = currentDepth || 1
+                Object.keys(object).forEach(function(key) {
+                    var value = object[key]
+                    var isarray = opts.safe && Array.isArray(value)
+                    var type = Object.prototype.toString.call(value)
+                    // var isbuffer = isBuffer(value)
+                    var isbuffer = false
+                    var isobject = (
+                        type === '[object Object]' ||
+                        type === '[object Array]'
+                    )
+
+                    var newKey = prev ?
+                        prev + delimiter + key :
+                        key
+
+                    if (!isarray && !isbuffer && isobject && Object.keys(value).length &&
+                        (!opts.maxDepth || currentDepth < maxDepth)) {
+                        return step(value, newKey, currentDepth + 1)
+                    }
+
+                    output[newKey] = value
+                })
+            }
+
+            step(target)
+
+            return output
+        },
+
+        getFieldsArray: function(object) {
+            var return_array = [];
+            for (var property in object) {
+                if (object.hasOwnProperty(property)) {
+                    var def = {
+                        "path": property,
+                        "example_data": object[property]
+                    };
+                    return_array.push(def);
+                };
+            };
+            return return_array;
+        },
+
+        findFirstAllFound: function(sr) {
+            var return_object = null;
+            var BreakException = {};
+
+            sr.forEach(function(fsr, fsrID) {
+                if (fsr.all_found === true) {
+                    return_object = fsr;
+                }
+            });
+
+            return return_object;
+        },
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+            this.set('_selected_source_index', null);
+
+        }
+
+    });
+    </script>
+</dom-module>

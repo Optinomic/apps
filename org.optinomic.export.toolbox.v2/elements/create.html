@@ -1,0 +1,399 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="paper-icon-button/paper-icon-button.html">
+<link rel="import" href="paper-button/paper-button.html">
+<link rel="import" href="iron-pages/iron-pages.html">
+<link rel="import" href="iron-collapse/iron-collapse.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-filter.html">
+<link rel="import" href="vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="paper-input/paper-input.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+<dom-module id="optinomic-template">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .app_title {
+            margin-bottom: 24px;
+        }
+
+        .readme_container {
+            margin-bottom: 24px;
+        }
+
+        .editor {
+            height: calc(100vh - 253px);
+        }
+
+        .grid-border-top {
+            border-top-color: #EEEEEE;
+            border-top-style: solid;
+            border-top-width: 1px;
+        }
+
+        .section {
+            border-top-color: #BDBDBD;
+            border-top-style: solid;
+            border-top-width: 1px;
+            margin-top: 36px;
+            margin-bottom: 36px;
+            padding-top: 12px;
+        }
+        </style>
+        <div class="horizontal wrap">
+            <div class="flex app_title">
+                <optinomic-title small nomargin h1="[[_current_app.name]]" h2="Export-Definitionen erstellen" h3="[[_current_app.version]]"></optinomic-title>
+            </div>
+            <div>
+                <div hidden$="[[_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+                </div>
+                <div hidden$="[[!_d.show_help]]">
+                    <paper-icon-button class="grey" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+                </div>
+            </div>
+        </div>
+        <div hidden$="[[_d.show_help]]">
+            <div id="content">
+                <template is="dom-if" if="[[_d.init_done]]">
+                    <timeu-wizard steps='["Datenquelle","Felder selektieren","Felder organisieren", "Optionen"]' step="[[wizard_step]]"></timeu-wizard>
+                    <iron-pages selected="[[wizard_step]]" attr-for-selected="step" fallback-selection="1" role="main">
+                        <div step="1">
+                            <h3>Selektieren Sie die gewünschte Datenquelle:</h3>
+                            <element-select-datasource on-data="_setSource" sources="[[_d._calculation_sources]]"></element-select-datasource>
+                        </div>
+                        <div step="2">
+                            <template is="dom-if" if="[[_data]]">
+                                <div class="horizontal">
+                                    <h3 class="flex">Selektieren Sie die gewünschten Felder ([[_data.field_paths.length]]):</h3>
+                                    <paper-button class="pink" on-tap="_goStepFieldDetails">Weiter</paper-button>
+                                </div>
+                                <vaadin-grid id="grid" class="editor" aria-label="Field - Data" items="[[_data.field_paths]]" column-reordering-allowed>
+                                    <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+                                    <vaadin-grid-column resizable>
+                                        <template class="header">
+                                            <vaadin-grid-sorter direction="asc" path="path">Path</vaadin-grid-sorter>
+                                            <vaadin-grid-filter aria-label="Path" path="path" value="[[_filterUser]]">
+                                                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen" value="{{_filterUser}}" focus-target>
+                                                </paper-input>
+                                            </vaadin-grid-filter>
+                                        </template>
+                                        <template>[[item.path]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column resizable>
+                                        <template class="header">
+                                            <vaadin-grid-sorter path="example_data">Example Data</vaadin-grid-sorter>
+                                            <vaadin-grid-filter aria-label="Example" path="example_data" value="[[_filterExample]]">
+                                                <paper-input style="width:90%;margin-top:-24px;" placeholder="Suchen" value="{{_filterExample}}">
+                                                </paper-input>
+                                            </vaadin-grid-filter>
+                                        </template>
+                                        <template>[[item.example_data]]</template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </template>
+                        </div>
+                        <div step="3">
+                            <template is="dom-if" if="[[selectedItems]]" restamp="true">
+                                <div class="horizontal">
+                                    <h3 class="flex">Benennen Sie die selektierten Felder ([[selectedItems.length]]) und bringen diese in die gewünschte Reihenfolge:</h3>
+                                    <paper-button class="pink" on-tap="_goStepFinal">Weiter</paper-button>
+                                </div>
+                                <template is="dom-repeat" items="[[selectedItems]]">
+                                    <div class="horizontal grid-border-top">
+                                        <paper-input class="flex" on-change="_inputChanged" id="{{_inputId(item.index)}}" style="margin-top:-20px;" placeholder="Feldname" value$="[[item.name]]"></paper-input>
+                                        <p>&nbsp;[[item.path]]</p>
+                                        <paper-icon-button class="grey" icon="arrow-upward" on-tap="_sortUp"></paper-icon-button>
+                                        <paper-icon-button class="grey" icon="arrow-downward" on-tap="_sortDown"></paper-icon-button>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                        <div step="4">
+                            <div class="horizontal">
+                                <h3 class="flex">Benennen Sie dieses Export-File-Definition und selektieren Sie deren Default-Optionen:</h3>
+                            </div>
+                            <h4 class="section">Beschriftung</h4>
+                            <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
+                                <paper-input id="name" label="Name" value="[[_data.selected_source.name]]"></paper-input>
+                                <paper-input id="description" label="Beschreibung" value="[[_data.selected_source.index]]"></paper-input>
+                            </template>
+                            <h4 class="section">Inhalt</h4>
+                            <div class="horizontal">
+                                <paper-checkbox id="export_optinomic_ids" checked>Optinomic - ID's</paper-checkbox>
+                                <paper-checkbox id="export_patient_details" checked>Patienten-Details</paper-checkbox>
+                                <paper-checkbox id="export_stay_details" checked>Fall-Details</paper-checkbox>
+                            </div>
+                            <h4 class="section">CSV - Optionen</h4>
+                            <template id="delimter" is="dom-if" if="[[namedItems]]" restamp="true">
+                                <div class="horizontal">
+                                    <paper-input class="flex" id="csv_delimter" label="CSV : delimter" placeholder="CSV : delimter" value=";"></paper-input>
+                                    <paper-checkbox id="export_header" checked>Header-Zeile exportieren</paper-checkbox>
+                                </div>
+                            </template>
+                            <div class="horizontal">
+                                <div>&nbsp;</div>
+                                <a href="#" id="fileLink" hidden download$="[[_data.selected_source.name]].json"></a>
+                                <paper-button class="indigo" on-tap="_saveFile">Speichern</paper-button>
+                            </div>
+                        </div>
+                    </iron-pages>
+                </template>
+                <template is="dom-if" if="[[!_d.init_done]]">
+                    <optinomic-indication sign=":" title="Initialisiere..." color="#3F51B5"></optinomic-indication>
+                </template>
+            </div>
+        </div>
+        <div hidden$="[[!_d.show_help]]">
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Beschreibung</h2>
+                <p>[[_current_app.description]]</p>
+            </div>
+            <div class="readme_container">
+                <h2 style="margin:0;color:#3F51B5">Hilfe (Readme)</h2>
+                <div id="readme"></div>
+            </div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'optinomic-template',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicExportToolbox],
+
+        properties: {
+            _d: {
+                type: Object
+            },
+            _current_app: {
+                type: Object,
+                statePath: 'apps.current.data'
+            }
+        },
+
+        // --------------------------- User --------------------------- 
+
+        _wizardNext: function() {
+            this.wizard_step = this.wizard_step + 1;
+        },
+
+        _wizardBack: function() {
+            this.wizard_step = this.wizard_step - 1;
+        },
+
+
+        _toggleHelp: function() {
+            var d = this.get('_d');
+            this._d = {};
+            d.show_help = !d.show_help;
+
+            var readme_box = this.$.readme;
+            readme_box.innerHTML = this._current_app.readme.html;
+
+            this.set('_d', d);
+            console.log('INIT _d', d);
+        },
+
+        _goStepFieldDetails: function() {
+            var grid = this.$$('#grid');
+
+            var selectedItems = [];
+            grid.selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+                i.name = i.path.split('.').join('__');
+                selectedItems.push(i);
+            });
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            this._wizardNext();
+            console.warn('_goStepFieldDetails', this.selectedItems);
+        },
+
+        _goStepFinal: function() {
+            var namedItems = this.get('selectedItems').slice(0);
+
+            namedItems.forEach(function(i, iID) {
+                delete i.example_data;
+            });
+
+            this.namedItems = null;
+            this.set('namedItems', namedItems);
+            this.namedItems = namedItems;
+            this._wizardNext();
+            console.warn('_goStepFinal', this.namedItems);
+        },
+
+        _createFile: function(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
+        _saveFile: function(e) {
+            e.preventDefault();
+
+            var name = this.$$('#name');
+            var description = this.$$('#description');
+
+            var export_optinomic_ids = this.$$('#export_optinomic_ids');
+            var export_patient_details = this.$$('#export_patient_details');
+            var export_stay_details = this.$$('#export_stay_details');
+            var delimter = this.$$('#csv_delimter');
+            var export_header = this.$$('#export_header');
+
+
+            var options = {};
+            options.name = name.value;
+            options.description = description.value;
+            options.export_optinomic_ids = export_optinomic_ids.checked;
+            options.export_patient_details = export_patient_details.checked;
+            options.export_stay_details = export_stay_details.checked;
+            options.export_header = export_header.checked;
+            options.delimter = delimter.value;
+            options.source = this._data.selected_source.index;
+
+            var namedItems = this.namedItems.slice(0);
+            namedItems.forEach(function(i, iID) {
+                delete i.id;
+            });
+
+            var file = {
+                "options": options,
+                "fields": namedItems
+            };
+            console.warn('_saveFile', file);
+
+
+            var fileLink = this.$$('#fileLink');
+            var content = JSON.stringify(file, null, 2);
+            const link = this._createFile(content);
+
+            fileLink.href = link;
+            fileLink.click();
+        },
+
+        _arraymove: function(arr, fromIndex, toIndex) {
+            var element = arr[fromIndex];
+            arr.splice(fromIndex, 1);
+            arr.splice(toIndex, 0, element);
+
+            return arr.slice(0);
+        },
+
+        _sortUp: function(e) {
+            var id = e.model.item.id;
+
+            var selectedItems = this.get('selectedItems');
+
+            if (id === 0) {
+                var fromIndex = 0;
+                var toIndex = selectedItems.length - 1;
+            } else {
+                var fromIndex = id;
+                var toIndex = id - 1;
+            };
+            selectedItems = this._arraymove(selectedItems, fromIndex, toIndex);
+
+            selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+            });
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_sortUp');
+        },
+
+        _sortDown: function(e) {
+            var id = e.model.item.id;
+
+            var selectedItems = this.get('selectedItems');
+
+            if (id === selectedItems.length - 1) {
+                var fromIndex = selectedItems.length - 1;
+                var toIndex = 0;
+            } else {
+                var fromIndex = id;
+                var toIndex = id + 1;
+            };
+            selectedItems = this._arraymove(selectedItems, fromIndex, toIndex);
+
+            selectedItems.forEach(function(i, iID) {
+                i.id = iID;
+            });
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_sortDown', this.selectedItems);
+        },
+
+        _inputId: function(index) {
+            return index;
+        },
+
+        _inputChanged: function(e) {
+            var id = e.model.item.id;
+            var selectedItems = this.get('selectedItems');
+
+            // Change
+            selectedItems[id].name = e.srcElement.value;
+
+            this.selectedItems = null;
+            this.set('selectedItems', selectedItems);
+            this.selectedItems = selectedItems;
+            console.warn('_inputChanged', this.selectedItems, id, e.srcElement.value);
+        },
+
+
+        // --------------------------- Events --------------------------- 
+
+        _setSource: function(e) {
+            this.set('_data', e.detail);
+            this._wizardNext();
+            console.warn('_data', this._data);
+        },
+
+        // --------------------------- Data --------------------------- 
+
+        __loadData: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {});
+        },
+
+        __init: function() {
+
+            this._d = this._d === undefined ? {} : this._d;
+
+            var d = this.get('_d');
+            d._calculation_sources = this.get('_calculation_sources');
+
+
+            d.init_done = true;
+            this._d = {};
+            this.set('_d', d);
+            this._d = d;
+
+            this.wizard_step = 1;
+
+            console.log('CREATE (__init)', this._d);
+        },
+
+
+        // --------------------------- Lifecycle --------------------------- 
+
+        ready: function() {
+            Polymer.RenderStatus.afterNextRender(this, function() {
+
+                // this.__loadData();
+                this.__init();
+
+            });
+        }
+    });
+    </script>
+</dom-module>

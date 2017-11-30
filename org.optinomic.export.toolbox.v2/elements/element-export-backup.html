@@ -1,0 +1,893 @@
+<link rel="import" href="optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-app-info.html">
+<link rel="import" href="optinomic-elements-helpers/optinomic-indication.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="paper-spinner/paper-spinner.html">
+<dom-module id="element-export">
+    <template>
+        <style include="shared-styles">
+         :host {
+            display: block;
+        }
+
+        .full_grid {
+            height: 100%;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+
+        .chart {
+            border-top-style: solid;
+            border-top-color: #F5F5F5;
+            border-top-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #F5F5F5;
+            border-bottom-width: 1px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .button_description {
+            font-size: 12px;
+            color: #9E9E9E;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .result_group {
+            border-left-style: solid;
+            border-left-color: #F5F5F5;
+            border-left-width: 1px;
+        }
+        </style>
+        <div id="element">
+            <template is="dom-if" if="[[_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div style="width:52px;">
+                        <paper-icon-button class="grey" on-tap="__onDownloadDebug" icon="bug-report"></paper-icon-button>
+                        <a href="#" id="fileLinkDebug" hidden download$="[[fileDefinitions.options.name]].json"></a>
+                    </div>
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]]</b>
+                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
+                    </div>
+                    <template is="dom-if" if="[[_filtered_sr]]" restamp="true">
+                        <div class="result_group">
+                            <p class="button_description">Gefiltert: <span style="color:#212121">[[_filtered_sr.length]]</span></p>
+                            <div class="horizontal">
+                                <paper-button class="grey" on-tap="__onDownloadJSONFiltered">JSON</paper-button>
+                                <a href="#" id="fileLinkJSONFiltered" hidden download$="[[_filename_filtered]].json"></a>
+                                <paper-button class="grey" on-tap="__onDownloadCSVFiltered">CSV</paper-button>
+                                <a href="#" id="fileLinkCSVFiltered" hidden download$="[[_filename_filtered]].csv"></a>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="result_group">
+                        <p class="button_description">Ungefiltert: <span style="color:#212121">[[_sr.survey_responses.length]]</span></p>
+                        <div class="horizontal">
+                            <div>
+                                <template is="dom-if" if="[[_created_JSON]]" restamp="true">
+                                    <div style="width:52px;">
+                                        <paper-button class="grey" on-tap="__onDownloadJSON">JSON</paper-button>
+                                        <a href="#" id="fileLinkJSON" hidden download$="[[_filename_full]].json"></a>
+                                    </div>
+                                </template>
+                                <template is="dom-if" if="[[!_created_JSON]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[_created_CSV]]" restamp="true">
+                                    <paper-button class="grey" on-tap="__onDownloadCSV">CSV</paper-button>
+                                </template>
+                                <a href="#" id="fileLinkCSV" hidden download$="[[_filename_full]].csv"></a>
+                            </div>
+                            <div>
+                                <template is="dom-if" if="[[!_created_CSV]]" restamp="true">
+                                    <div style="width:52px;margin-left:18px;">
+                                        <paper-spinner active></paper-spinner>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="[[!_d.init_done]]" restamp="true">
+                <div class="horizontal">
+                    <div style="width:52px;">
+                        <paper-spinner active></paper-spinner>
+                    </div>
+                    <div class="flex">
+                        <p style="height:42px;"><b>[[fileDefinitions.options.name]] (laden...)</b>
+                            <br><span class="caption">[[fileDefinitions.options.description]] &nbsp; ([[fileDefinitions.options.index]])</span></p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'element-export',
+
+        behaviors: [ReduxBehavior, AsyncActionsBehavior],
+
+        properties: {
+            fileDefinitions: {
+                type: Object,
+                observer: '_loadData'
+            },
+            filter: {
+                type: Object,
+                observer: '_filterChanged'
+            },
+            overrideSettings: {
+                type: Object,
+                observer: '_sr_ready'
+            },
+            _d: {
+                type: Object
+            },
+            _sr: {
+                type: Object,
+                statePath: function(state) {
+                    return_obj = null;
+                    if ((state._app_userapp_calculations !== null) && (state._app_userapp_calculations !== undefined)) {
+                        if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
+
+                            var home_str = this.fileDefinitions.options.userapp_id.split('.').join("_");
+                            var path = home_str + "___" + this.fileDefinitions.options.userapp_calculation_id;
+                            if ((state._app_userapp_calculations[path] !== null) && (state._app_userapp_calculations[path] !== undefined)) {
+
+                                if ((this._d !== null) && (this._d !== undefined)) {
+                                    if (this._d.init_done === false) {
+                                        return_obj = state._app_userapp_calculations[path].data;
+                                    } else {
+                                        return_obj = this._sr;
+                                    };
+                                };
+
+                            };
+                        };
+                    };
+                    return return_obj;
+                },
+                observer: '_sr_ready'
+            }
+        },
+
+
+        // -----------------------------
+        // User-Click Functions
+        // -----------------------------
+
+        __onDownloadCSV(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this._csv_file;
+
+            var jsonLink = this.$$('#fileLinkCSV');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadJSON(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSON');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadCSVFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = this._csv_file_filtered;
+
+            var jsonLink = this.$$('#fileLinkCSVFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadJSONFiltered(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._json_file_filtered, null, 2);
+
+            var jsonLink = this.$$('#fileLinkJSONFiltered');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        __onDownloadDebug(e) {
+            e.preventDefault();
+
+            // File Content
+            var content = JSON.stringify(this._sr, null, 2);
+
+            var jsonLink = this.$$('#fileLinkDebug');
+            const link = this._createFile(content);
+
+            // console.log('File Content', content, jsonLink);
+
+            jsonLink.href = link;
+            jsonLink.click();
+        },
+
+        _createFile(text) {
+            const textBlob = new Blob([text], { type: 'text/plain' });
+            return window.URL.createObjectURL(textBlob);
+        },
+
+
+        // -----------------------------
+        // Functions
+        // -----------------------------
+
+        _createFiles: function(filtered) {
+
+            filtered = filtered || false;
+
+            var d = Object.assign({}, this.get('_d'));
+
+            if ((d.overrideSettings !== undefined) && (d.overrideSettings !== null)) {
+                if (d.overrideSettings.override) {
+                    var options = Object.assign({}, d.overrideSettings);
+                    options.name = d.fileDefinitions.options.name;
+                    options.description = d.fileDefinitions.options.description;
+                    options.source = d.fileDefinitions.options.source;
+                    d.fileDefinitions.options = Object.assign({}, options);
+                };
+            };
+
+            console.log('_createFiles', d.fileDefinitions.options.name, d.fileDefinitions, filtered);
+
+            this._createJSONFile(d.fileDefinitions, filtered);
+            this._createCSVFile(d.fileDefinitions, filtered);
+        },
+
+        _createFileName: function(full) {
+
+            var d = new Date();
+            var y = d.getFullYear();
+            var m = d.getMonth() + 1;
+            var t = d.getUTCDate();
+
+            var _date_time = t + "." + m + "." + y + ", " + d.getHours() + ":" + d.getMinutes();
+            this.set('_date_time', _date_time);
+
+            if (m < 10) {
+                m = "0" + m;
+            };
+
+            if (t < 10) {
+                t = "0" + t;
+            };
+
+            var fn = ""
+            if (full) {
+                fn = y + "_" + m + "_" + t;
+                fn = fn + " - " + this.fileDefinitions.options.name;
+                fn = fn + " - Full";
+
+                this.set('_filename_full', fn);
+                // console.warn('_filename_full', this._filename_full);
+            } else {
+                var filter = this.filter;
+
+                fn = y + "_" + m + "_" + t;
+                fn = fn + " - " + this.fileDefinitions.options.name;
+                fn = fn + " - Filter";
+                fn = fn + " - Falltyp " + filter.falltyp + " im Zeitraum " + filter.erhebungszeitraum_von + " bis " + filter.erhebungszeitraum_bis;
+
+                if (filter.patient_group !== 9999) {
+                    fn = fn + " - PG " + filter.patient_group;
+                } else {
+                    fn = fn + " - PG Alle";
+                };
+
+
+                this.set('_filename_filtered', fn);
+                // console.warn('_filename_filtered', this._filename_filtered);
+            };
+        },
+
+        _init: function() {
+
+            var d = {};
+
+            include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js)
+            include(../org.optinomic.export.toolbox/definitions/_default_patient.js)
+            include(../org.optinomic.export.toolbox/definitions/_default_stay.js)
+
+            d.fileDefinitions = Object.assign({}, this.fileDefinitions);
+            d.overrideSettings = Object.assign({}, this.overrideSettings);
+
+
+            // Check Options & Add _Default_Blocks if needed
+
+            if (d.overrideSettings.override) {
+                console.log('OVERRIDE', d.overrideSettings, d.fileDefinitions.fields.length);
+
+                if (d.overrideSettings.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.overrideSettings.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
+
+            } else {
+                // console.log('NOT OVERRIDE', d.fileDefinitions.fields.length);
+
+                if (d.fileDefinitions.options.export_stay_details !== false) {
+                    d.fileDefinitions.fields = d.default_stay.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_patient_details !== false) {
+                    d.fileDefinitions.fields = d.default_patient.concat(d.fileDefinitions.fields);
+                };
+
+                if (d.fileDefinitions.options.export_optinomic_ids !== false) {
+                    d.fileDefinitions.fields = d.default_optinomic_fields.concat(d.fileDefinitions.fields);
+                };
+            };
+
+            // Set & Log
+            d.init_done = true;
+            this.set('_d', d);
+            this._d = d;
+
+            this._createFileName(true);
+            this._createFiles();
+
+            console.log('(INIT) ' + d.fileDefinitions.options.name, d);
+        },
+
+        _filterSR: function() {
+            function dateCheck(from, to, check) {
+                var fDate, lDate, cDate;
+                fDate = Date.parse(from);
+                lDate = Date.parse(to);
+                cDate = Date.parse(check);
+
+                if ((cDate <= lDate && cDate >= fDate)) {
+                    return true;
+                }
+                return false;
+            };
+
+            function inGroup(a, id) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].id === id) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            this._createFileName(false);
+            var sr_filtered = [];
+            var survey_responses = this._sr.survey_responses;
+            var patient_groups = this._sr.patient_groups;
+            var filter = this.filter;
+
+            // console.warn('_filterSR', filter, survey_responses, patient_groups);
+
+            // Falltypen
+            survey_responses.forEach(function(sr, srID) {
+                var filled = sr.survey_response.filled;
+
+                var eintritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.start);
+                var austritt_in_range = dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, sr.stay.stop);
+
+
+                // Falltyp: Alle
+                if (filter.falltyp === "Alle") {
+                    if (dateCheck(filter.erhebungszeitraum_von, filter.erhebungszeitraum_bis, filled)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A1
+                if (filter.falltyp === "A1") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: A2
+                if (filter.falltyp === "A2") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === true)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: B
+                if (filter.falltyp === "B") {
+                    if ((eintritt_in_range === true) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+                // Falltyp: C
+                if (filter.falltyp === "C") {
+                    if ((eintritt_in_range === false) && (austritt_in_range === false)) {
+                        sr_filtered.push(sr);
+                    };
+                };
+
+            });
+
+            // Patientengruppe
+            if (filter.patient_group !== 9999) {
+                var pre_sr = sr_filtered.slice(0);
+                var filter_group = null;
+                sr_filtered = [];
+
+                // Gruppe finden
+                patient_groups.forEach(function(pg, pgID) {
+                    if (pg.entity.id === filter.patient_group) {
+                        filter_group = Object.assign({}, pg);
+                    };
+                });
+
+                // Gruppe finden
+                if (filter_group !== null) {
+
+                    pre_sr.forEach(function(sr, srID) {
+                        if (inGroup(filter_group.patients, sr.patient_id)) {
+                            sr_filtered.push(sr);
+                            // console.error('FOUND', filter_group.patients, sr.patient_id);
+                        };
+                    });
+                };
+
+            };
+
+            // Filter - Filename
+
+            this.set('_filtered_sr', sr_filtered);
+            this._createFiles(true);
+            // console.error('_filteredSR', sr_filtered.length, sr_filtered);
+        },
+
+        _dataDive: function(source, field) {
+
+            if (field.path === "_function") {
+
+                var ExportHelpers = (function() {
+
+                    var formatDateCH = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            // 1952-11-19T00:00:00.000000000000Z
+                            var year = parseInt(date_string.substring(0, 4));
+                            var month = parseInt(date_string.substring(5, 7));
+                            var day = parseInt(date_string.substring(8, 10));
+                            var date_string_return = day + "." + month + "." + year
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateISONoTime = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            var date_string_return = date_string.substring(0, 10);
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateYYYYMMDD = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+                            var date_string_return = date_string.substring(0, 10);
+                            date_string_return = date_string_return.split('-').join('');
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var formatDateISO = function(date_string) {
+                        date_string = date_string || null
+                        if (date_string !== null) {
+
+                            var date = new Date(date_string);
+                            date_string_return = date.toISOString();
+
+                            return date_string_return;
+                        } else {
+                            return null;
+                        }
+                    };
+
+                    var stringToDate = function(_date, _format, _delimiter) {
+                        var formatLowerCase = _format.toLowerCase();
+                        var formatItems = formatLowerCase.split(_delimiter);
+                        var dateItems = _date.split(_delimiter);
+                        var monthIndex = formatItems.indexOf("mm");
+                        var dayIndex = formatItems.indexOf("dd");
+                        var yearIndex = formatItems.indexOf("yyyy");
+                        var month = parseInt(dateItems[monthIndex]);
+                        month -= 1;
+                        var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+                        return formatedDate;
+                    }
+
+
+                    return {
+                        formatDateCH: formatDateCH,
+                        formatDateISO: formatDateISO,
+                        formatDateISONoTime: formatDateISONoTime,
+                        formatDateYYYYMMDD: formatDateYYYYMMDD,
+                        stringToDate: stringToDate
+                    };
+                })();
+
+
+                if ("function" in field) {
+                    // Call given Function
+                    if ((field.function !== null) && (field.function !== undefined)) {
+                        //console.warn('field.function', field.function);
+
+                        try {
+                            var fn = new Function('source', 'ExportHelpers', field.function);
+                            value = fn(source, ExportHelpers);
+                        } catch (err) {
+                            value = "Error: Function";
+                        };
+
+                    };
+                } else {
+                    value = "Error: Undefined Function";
+                };
+
+            } else {
+
+
+                var getMyVal = function(path, origin){
+                  return path.split('.').reduce( function( prev, curr ) {
+                        return prev[curr];
+                    }, origin || this );
+                };
+                
+                var value = getMyVal(field.path, source);
+
+                
+            };
+
+            if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
+                value = "";
+            };
+
+            // console.log('(_dataDive) ', value, source, path_array);
+
+            return value;
+        },
+
+
+        _createCSVandJSONFile: function(def, filtered) {
+            this.debounce('_createCSVandJSONFile', function() {
+                this.set('_created_JSON', false);
+                this.set('_created_CSV', false);
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        
+
+                });
+
+
+            }, 250);
+        },
+
+        _createJSONFile: function(def, filtered) {
+
+            this.debounce('_createJSONFile', function() {
+
+                this.set('_created_JSON', false);
+
+
+                function create(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
+
+                    var header_array = [];
+                    var rows_array = [];
+                    var header_written = false;
+
+                    survey_responses.forEach(function(sr, srID) {
+
+                        var fields_array = [];
+                        var fields = def.fields;
+
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
+
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_array.push(field.name);
+                                };
+
+                                // Rows
+                                var current_field = {
+                                    "name": field.name,
+                                    "value": _dataDive(sr, field)
+                                };
+
+                                // console.log('current_field', current_field)
+
+                                fields_array.push(current_field);
+
+                            }.bind(this));
+
+                            rows_array.push(fields_array);
+
+                            if (header_array.length > 0) {
+                                header_written = true;
+                            };
+
+                        };
+                    }.bind(this));
+
+                    var file = {
+                        "header": header_array,
+                        "data": rows_array
+                    };
+                    // console.log('-> JSON file', file);
+
+                    return file;
+                };
+
+
+                // console.log('_createJSONFile', this._sr, filtered);
+
+                if (filtered === true) {
+
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_json_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_JSON', true);
+                        };
+                    };
+
+                } else {
+
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _sr = Object.assign({}, this.get('_sr'));
+                            if ("survey_responses" in _sr) {
+
+                                this.set('_json_file', create(_sr.survey_responses, this._dataDive));
+                                this.set('_created_JSON', true);
+
+                            };
+                        };
+                    };
+
+                };
+            }, 250);
+        },
+
+        _createCSVFile: function(def, filtered) {
+
+            this.debounce('_createCSVFile', function() {
+
+                this.set('_created_CSV', false);
+
+                function create(survey_responses, _dataDive) {
+                    // console.log('-> survey_responses', survey_responses);
+
+                    var f = "";
+                    var header_str = "";
+                    var header_written = false;
+                    var rows_str = "";
+                    var delimitter = def.options.delimter;
+                    var newline = "\n";
+
+                    survey_responses.forEach(function(sr, srID) {
+
+                        var fields = def.fields;
+
+                        if ((fields !== null) && (fields !== undefined)) {
+                            fields.forEach(function(field, fieldID) {
+
+                                // Header
+                                if ((header_written === false) && (sr.all_found)) {
+                                    header_str = header_str + field.name;
+
+                                    if (fieldID === fields.length - 1) {
+                                        // Last
+                                        header_str = header_str + newline;
+                                    } else {
+                                        // Not last
+                                        header_str = header_str + delimitter;
+                                    };
+                                };
+
+                                // Rows
+                                rows_str = rows_str + _dataDive(sr, field);
+                                if (fieldID === fields.length - 1) {
+                                    // Last
+                                    if (srID !== survey_responses.length - 1) {
+                                        // Not File-End
+                                        rows_str = rows_str + newline;
+                                    };
+                                } else {
+                                    // Not last
+                                    rows_str = rows_str + delimitter;
+                                };
+
+                            }.bind(this));
+
+                            if (header_str !== "") {
+                                header_written = true;
+                            };
+
+                        };
+                    }.bind(this));
+
+                    if (def.options.export_header !== false) {
+                        var file = header_str + rows_str;
+                    } else {
+                        var file = rows_str;
+                    };
+
+                    return file;
+                };
+
+
+                if (filtered === true) {
+
+                    if ((this._filtered_sr !== undefined) && (this._filtered_sr !== null)) {
+                        if (this._filtered_sr.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _filtered_sr = this.get('_filtered_sr');
+                            this.set('_csv_file_filtered', create(_filtered_sr.slice(0), this._dataDive));
+                            this.set('_created_CSV', true);
+                        };
+                    };
+
+                } else {
+
+                    if ((this._sr !== undefined) && (this._sr !== null)) {
+                        if (this._sr.survey_responses.length > 0) {
+
+                            // We have data -> Proceed.
+                            var _sr = Object.assign({}, this.get('_sr'));
+
+                            if ("survey_responses" in _sr) {
+                                var survey_responses = _sr.survey_responses;
+                                this.set('_csv_file', create(survey_responses, this._dataDive));
+                                this.set('_created_CSV', true);
+
+                            };
+                        };
+                    };
+
+                };
+            }, 250);
+        },
+
+
+
+        // -----------------------------
+        // Observer
+        // -----------------------------
+
+        _loadData: function() {
+            this.debounce('_loadData', function() {
+                if ((this.fileDefinitions !== null) && (this.fileDefinitions !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+                        this.dispatch('actionGetUserAppCalculation', this.fileDefinitions.options.userapp_id, this.fileDefinitions.options.userapp_calculation_id);
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _filterChanged: function() {
+            this.debounce('_filterChanged', function() {
+                if ((this.filter !== null) && (this.filter !== undefined)) {
+                    Polymer.RenderStatus.afterNextRender(this, function() {
+
+
+                        if ((this._sr !== undefined) && (this._sr !== null)) {
+                            this._filterSR(this.filter, this._sr);
+                        } else {
+                            setTimeout(function() {
+                                this._filterChanged();
+                            }.bind(this), 800);
+                        };
+
+                    });
+                };
+
+            }, 250);
+        },
+
+        _sr_ready: function() {
+            this.debounce('_sr_ready', function() {
+                if ((this.overrideSettings !== null) && (this.overrideSettings !== undefined)) {
+                    if ((this._sr !== null) && (this._sr !== undefined)) {
+                        // Fire Event with patient-groups
+                        this.fire('patientgroups', this._sr.patient_groups);
+
+                        var fileDefinitions = this.get('fileDefinitions');
+                        if ((fileDefinitions !== null) && (fileDefinitions !== undefined)) {
+                            Polymer.RenderStatus.afterNextRender(this, function() {
+                                this._init();
+                            });
+                        };
+                    };
+
+                };
+
+            }, 250);
+        },
+
+
+
+        // -----------------------------
+        // Lifecycle
+        // -----------------------------
+
+        ready: function() {
+
+            var d = {};
+            d.init_done = false;
+            this.set('_d', d);
+            this.set('_created_CSV', false);
+            this.set('_created_JSON', false);
+        }
+
+    });
+    </script>
+</dom-module>
