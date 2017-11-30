@@ -1,12 +1,12 @@
 [module]
-id = org.optinomic.export.toolbox
-name = Export-Toolbox
-short_description = Export-Toolbox
+id = org.optinomic.export.toolbox.v2
+name = Export-Toolbox (V2)
+short_description = Export-Toolbox (Beta-Channel)
 version = include(VERSION)
 type = user
 
 [description]
-Export Survey Responses
+Export Survey Responses :: This is the Beta-Channel from org.optinomic.export.toolbox (as soon as stable).
 
 [developer]
 first_name = Beat
