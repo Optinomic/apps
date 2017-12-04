@@ -88,3 +88,5 @@ include(calculations/tmt.m4)
 [calculation whoqol javascript com.optinomic.apps.whoqol com.optinomic.apps.whoqol:phys_psych_calculation]
 include(calculations/whoqol.m4)
 
+[calculation zuepaz javascript ch.suedhang.apps.zuepaz ch.suedhang.apps.zuepaz:another_calculation]
+include(calculations/zuepaz.m4)

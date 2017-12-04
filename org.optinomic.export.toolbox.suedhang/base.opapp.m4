@@ -80,3 +80,6 @@ include(calculations/tmt.m4)
 
 [calculation whoqol javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
 include(calculations/whoqol.m4)
+
+[calculation zuepaz javascript ch.suedhang.apps.zuepaz.production ch.suedhang.apps.zuepaz.production:another_calculation]
+include(calculations/zuepaz.m4)
