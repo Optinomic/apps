@@ -72,6 +72,10 @@ include(calculations/bdi.m4)
 [calculation case javascript ch.suedhang.apps.case.new ch.suedhang.apps.case.new:another_calculation]
 include(calculations/case.m4)
 
+[calculation einzelassessment javascript ch.suedhang.apps.neuroanamnese ch.suedhang.apps.neuroanamnese:another_calculation]
+include(calculations/einzelassessment.m4)
+
+
 [calculation isk javascript ch.suedhang.apps.isk ch.suedhang.apps.isk:scores_calculation]
 include(calculations/isk.m4)
 

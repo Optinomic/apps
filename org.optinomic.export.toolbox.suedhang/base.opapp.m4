@@ -66,6 +66,9 @@ include(calculations/bscl.m4)
 [calculation case javascript ch.suedhang.apps.case.production ch.suedhang.apps.case.production:another_calculation]
 include(calculations/case.m4)
 
+[calculation einzelassessment javascript ch.suedhang.apps.neuroanamnese.production ch.suedhang.apps.neuroanamnese.production:another_calculation]
+include(calculations/einzelassessment.m4)
+
 [calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/isk.m4)
 
