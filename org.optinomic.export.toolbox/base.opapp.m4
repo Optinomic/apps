@@ -54,6 +54,9 @@ include(elements/create.html)
 [calculation aase javascript ch.suedhang.apps.aase-g ch.suedhang.apps.aase-g:another_calculation]
 include(calculations/aase.m4)
 
+[calculation actinfo_aus javascript ch.suedhang.apps.actinfo_aus ch.suedhang.apps.actinfo_aus:another_calculation]
+include(calculations/actinfo_aus.m4)
+
 [calculation actinfo_ein javascript ch.suedhang.apps.actinfo_ein ch.suedhang.apps.actinfo_ein:actinfo_ein]
 include(calculations/actinfo_ein.m4)
 

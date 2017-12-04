@@ -48,6 +48,9 @@ include(readme.md)
 [calculation aase_new javascript ch.suedhang.apps.aase-g.production ch.suedhang.apps.aase-g.production:another_calculation]
 include(calculations/aase.m4)
 
+[calculation actinfo_aus javascript ch.suedhang.apps.actinfo_aus.production ch.suedhang.apps.actinfo_aus.production:another_calculation]
+include(calculations/actinfo_aus.m4)
+
 [calculation actinfo_ein_new javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
 include(calculations/actinfo_ein.m4)
 
