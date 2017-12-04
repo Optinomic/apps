@@ -72,5 +72,8 @@ include(calculations/einzelassessment.m4)
 [calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
 include(calculations/isk.m4)
 
+[calculation sci javascript ch.suedhang.apps.sci.production ch.suedhang.apps.sci.production:scores]
+include(calculations/sci.m4)
+
 [calculation tmt javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
 include(calculations/tmt.m4)
