@@ -77,3 +77,6 @@ include(calculations/sci.m4)
 
 [calculation tmt javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
 include(calculations/tmt.m4)
+
+[calculation whoqol javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
+include(calculations/whoqol.m4)

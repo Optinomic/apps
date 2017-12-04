@@ -84,3 +84,7 @@ include(calculations/sci.m4)
 
 [calculation tmt javascript ch.suedhang.apps.tmt_V3 ch.suedhang.apps.tmt_V3:tmt_score]
 include(calculations/tmt.m4)
+
+[calculation whoqol javascript com.optinomic.apps.whoqol com.optinomic.apps.whoqol:phys_psych_calculation]
+include(calculations/whoqol.m4)
+
