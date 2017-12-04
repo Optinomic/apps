@@ -60,6 +60,9 @@ include(calculations/actinfo_aus.m4)
 [calculation actinfo_ein javascript ch.suedhang.apps.actinfo_ein ch.suedhang.apps.actinfo_ein:actinfo_ein]
 include(calculations/actinfo_ein.m4)
 
+[calculation asrs javascript ch.suedhang.apps.asrs ch.suedhang.apps.asrs:asrs_score]
+include(calculations/asrs.m4)
+
 [calculation bscl javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
 include(calculations/bscl.m4)
 

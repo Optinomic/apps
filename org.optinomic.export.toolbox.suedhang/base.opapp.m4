@@ -54,6 +54,9 @@ include(calculations/actinfo_aus.m4)
 [calculation actinfo_ein_new javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
 include(calculations/actinfo_ein.m4)
 
+[calculation asrs javascript ch.suedhang.apps.asrs.production ch.suedhang.apps.asrs.production:asrs_score]
+include(calculations/asrs.m4)
+
 [calculation bdi javascript ch.suedhang.apps.bdi.production ch.suedhang.apps.bdi.production:bdi_score]
 include(calculations/bdi.m4)
 
