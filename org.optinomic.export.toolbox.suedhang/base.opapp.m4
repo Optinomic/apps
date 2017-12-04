@@ -44,23 +44,24 @@ include(readme.md)
 [css]
 
 
-[calculation tmt javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
-include(calculations/tmt.m4)
-
-[calculation bscl javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
-include(calculations/bscl.m4)
-
-[calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
-include(calculations/isk.m4)
-
-[calculation actinfo_ein_new javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
-include(calculations/actinfo_ein.m4)
 
 [calculation aase_new javascript ch.suedhang.apps.aase-g.production ch.suedhang.apps.aase-g.production:another_calculation]
 include(calculations/aase.m4)
 
+[calculation actinfo_ein_new javascript ch.suedhang.apps.actinfo_ein.production ch.suedhang.apps.actinfo_ein.production:actinfo_ein]
+include(calculations/actinfo_ein.m4)
+
 [calculation bdi javascript ch.suedhang.apps.bdi.production ch.suedhang.apps.bdi.production:bdi_score]
 include(calculations/bdi.m4)
 
+[calculation bscl javascript ch.suedhang.apps.bscl_anq.production ch.suedhang.apps.bscl_anq.production:scores_calculation]
+include(calculations/bscl.m4)
+
 [calculation case javascript ch.suedhang.apps.case.production ch.suedhang.apps.case.production:another_calculation]
 include(calculations/case.m4)
+
+[calculation isk javascript ch.suedhang.apps.isk.production ch.suedhang.apps.isk.production:scores_calculation]
+include(calculations/isk.m4)
+
+[calculation tmt javascript ch.suedhang.apps.tmt.production ch.suedhang.apps.tmt.production:tmt_score]
+include(calculations/tmt.m4)
