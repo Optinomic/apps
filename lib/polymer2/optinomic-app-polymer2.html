@@ -38,7 +38,8 @@ include(../lib/polymer2/optinomic-app-includes.m4)
 
     </style>
     <div class="app_actions">
-      <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+      <paper-icon-button id="btn-help" class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+      <paper-tooltip for="btn-help" position="left">Hilfe | Readme</paper-tooltip>
     </div>
 
     <template is="dom-if" if="[[_loading]]">
@@ -50,13 +51,12 @@ include(../lib/polymer2/optinomic-app-includes.m4)
     </template>
 
     <div hidden$="[[!_show_help]]">
-
-      <h1>Readme: [[_current_app.name]]</h1>
-      <p style="margin-top:-24px;">&nbsp;[[_current_app.short_description]]
-        <span style="color:#BDBDBD">( V.[[_current_app.version]] | [[_current_app.identifier]])</span>
-      </p>
-
+      <optinomic-title h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="Readme"></optinomic-title>
       <div id="readme" class="readme_container"></div>
+      <div class="horizontal">
+        <p class="caption">&nbsp;V.[[_current_app.version]] | [[_current_app.identifier]]</p>
+        <paper-button class="grey" on-click="_toggleHelp">Schliessen</paper-button>
+      </div>
     </div>
 
     <template is="dom-if" if="[[_user.isAdmin]]">
