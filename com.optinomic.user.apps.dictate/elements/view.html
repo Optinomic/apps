@@ -1,5 +1,8 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="obvi/voice-button.html">
+<link rel="import" href="paper-input/paper-textarea.html">
+<link rel="import" href="iron-ajax/iron-ajax.html"/>
 
 <dom-module id="optinomic-template">
   <template>
@@ -8,8 +11,69 @@
         display: block;
       }
 
+      #voicebutton {
+        width: 64px;
+        margin-top: 24px;
+      }
+
+      .speech_text {
+        color: grey;
+        font-style: italic;
+      }
+
+      .lt_match {
+        background-color: #FAFAFA;
+        padding: 6px;
+        margin-top: 3px;
+      }
+
+      .lt_replacement {
+        cursor: pointer;
+        color: #3F51B5;
+        margin-right: 3px;
+        padding-left: 6px;
+        padding-right: 6px;
+        background-color: #E8EAF6;
+      }
+
+      .lt_message {
+        color: #424242;
+        font-size: 16px;
+      }
+
+      .lt_context {
+        color: #616161;
+        margin-top: -10px;
+      }
+
     </style>
     <optinomic-title h1="Diktieren mit Textprüfung" h2="Texte schreiben/diktieren mit Textprüfung für Grammatik, Stil und Rechtschreibung"></optinomic-title>
+
+    <div class="horizontal">
+      <voice-button id="voicebutton" language="de-CH" autodetect keyboard-trigger="none" diameter="50"></voice-button>
+      <p class="speech_text flex">[[_speech_text]]</p>
+    </div>
+
+    <paper-textarea id="textarea" style="margin:1px;padding:1px;" placeholder="Diktieren oder schreiben Sie hier Ihren Text." value="{{_full_text}}" on-blur="_textareaBlur"></paper-textarea>
+    <iron-ajax auto url="https://languagetool.org/api/v2/check" params$="[[_language_tool_params]]" handle-as="json" last-response="{{languageTool}}" debounce-duration="300"></iron-ajax>
+    <template is="dom-if" if="[[_language_tool_warnings]]" restamp="true">
+      <div>
+        <h3>Textprüfung für Grammatik, Stil und Rechtschreibung ({{languageTool.matches.length}}
+          Hinweise)</h3>
+        <template is="dom-repeat" items="[[languageToolMatches]]" index-as="index">
+          <div class="lt_match" style$="border-left: 12px solid [[item.rule.color]];">
+            <p class="lt_message">[[item.message]]</p>
+            <p class="lt_context">«[[item.context.text_left]]<span style$="color:#212121;background-color: [[item.rule.color]];">[[item.context.text_error]]</span>[[item.context.text_right]]»</p>
+            <p>
+              <template is="dom-repeat" items="[[item.replacements]]" as="replacements">
+                <span class="lt_replacement" on-click="_languageToolReplace">[[replacements.value]]</span>
+                <span style="display: none; visibility: hidden;font-size: 0;width:0;">[[item]]</span>
+              </template>
+            </p>
+          </div>
+        </template>
+      </div>
+    </template>
 
   </template>
 
@@ -24,11 +88,186 @@
       }
       static get properties() {
         return {
-          prop1: {
+          welcome: {
             type: String,
-            value: 'Optinomic @ Polymer 2'
+            value: 'optinomic-polymer2-test',
+            observer: '_welcomeChanged'
+          },
+          languageTool: {
+            type: Object,
+            observer: '_languageToolChanged'
           }
         };
+      }
+
+      _welcomeChanged() {
+        console.log(`welcome is ${this.welcome}`);
+      }
+
+      _languageToolCheck() {
+        var languageToolParams = {
+          "language": "de-CH",
+          "content-type": "application/json"
+        };
+        languageToolParams.text = this._full_text;
+        this.set('_language_tool_params', languageToolParams);
+      }
+
+      _languageToolChanged() {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(550), () => {
+
+          if ((this.languageTool !== null) && (this.languageTool !== undefined)) {
+            if (this.languageTool.matches.length > 0) {
+              this.set('_language_tool_warnings', true);
+
+              var matches = this.get('languageTool.matches');
+              matches = matches.slice(0);
+              console.log('_languageToolChanged :: matches', matches, this.languageTool);
+
+              matches.forEach(function (m) {
+                m.context.text_left = m.context.text.substring(0, m.context.offset);
+                m.context.text_right = m.context.text.substring(m.context.length + m.context.offset);
+                m.context.text_error = m.context.text.substring(m.context.offset, m.context.offset + m.context.length);
+                m.context.text = m.context.text.trim();
+
+                m.rule.color = "#FFECB3";
+
+                if (m.rule.issueType === "register") {
+                  m.rule.color = "#C5CAE9";
+                };
+
+                if (m.rule.issueType === "misspelling") {
+                  m.rule.color = "#FFCDD2";
+                };
+              });
+
+              this.set('languageToolMatches', matches);
+
+            } else {
+              this.set('_language_tool_warnings', false);
+            };
+
+            console.log('_languageToolChanged', this.languageTool, this._language_tool_warnings);
+          };
+        });
+      }
+
+      _languageToolReplace(e) {
+
+        var item = e.model.item;
+        var replacement = e.model.replacements;
+        var _full_text = this.get('_full_text');
+
+        // Replace & Recheck.
+        var start = _full_text.substring(0, item.offset);
+        var end = _full_text.substring(item.length + item.offset);
+        this.set('_full_text', start + replacement.value + end);
+        this._languageToolCheck();
+
+        console.log('_languageToolReplace', e, item, replacement);
+      }
+
+      _getInputSelection(el) {
+        var start = 0,
+          end = 0,
+          normalizedValue,
+          range,
+          textInputRange,
+          len,
+          endRange;
+
+        if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+          start = el.selectionStart;
+          end = el.selectionEnd;
+        } else {
+          range = document.selection.createRange();
+
+          if (range && range.parentElement() == el) {
+            len = el.value.length;
+            normalizedValue = el.value.replace(/\r\n/g, "\n");
+
+            // Create a working TextRange that lives only in the input
+            textInputRange = el.createTextRange();
+            textInputRange.moveToBookmark(range.getBookmark());
+
+            // Check if the start and end of the selection are at the very end of the input, since moveStart/moveEnd doesn't return what we want in those cases
+            endRange = el.createTextRange();
+            endRange.collapse(false);
+
+            if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+              start = end = len;
+            } else {
+              start = -textInputRange.moveStart("character", -len);
+              start += normalizedValue.slice(0, start).split("\n").length - 1;
+
+              if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+                end = len;
+              } else {
+                end = -textInputRange.moveEnd("character", -len);
+                end += normalizedValue.slice(0, end).split("\n").length - 1;
+              }
+            }
+          }
+        }
+
+        return {start: start, end: end};
+      }
+
+      _textareaBlur() {
+
+        var input = this.$.textarea;
+        // input.focus();
+        console.log('CursorPosition', this._getInputSelection(input));
+        this._languageToolCheck();
+      }
+
+      _logSpeech(e) {
+        //console.warn('_logSpeech', e.detail.speechResult);
+        this.set('_speech_text', e.detail.speechResult);
+      }
+
+      _mergeSpeech(e) {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer, Polymer.Async.timeOut.after(450), () => {
+
+          var stateChange = e.detail;
+          if ((stateChange.newValue === 'idle') && (stateChange.oldValue === 'user-input')) {
+
+            // ToDo: Insert _speech @ CursorPosition: https://stackoverflow.com/questions/34968174/set-text-cursor-position-in-a-textarea
+
+            if (this.get('_full_text') !== "") {
+              this.set('_full_text', this.get('_full_text') + '\n\n' + this.get('_speech_text'));
+            } else {
+              this.set('_full_text', this.get('_speech_text'));
+            };
+
+            this._languageToolCheck();
+
+            setTimeout(function () {
+              this.set('_speech_text', '');
+            }.bind(this), 2000);
+
+            //console.warn('_mergeSpeech', e.detail, this._full_text);
+          };
+
+        });
+      }
+
+      ready() {
+        super.ready();
+        this.set('_speech_text', '');
+        this.set('_full_text', '');
+        this.set('_language_tool_warnings', false);
+        this.set('languageToolMatches', []);
+        var languageToolParams = {
+          "language": "de-CH",
+          "content-type": "application/json",
+          "text": ""
+        };
+        this.set('_language_tool_params', languageToolParams);
+
+        const voicebutton = this.$.voicebutton;
+        voicebutton.addEventListener('onSpeech', event => this._logSpeech(event));
+        voicebutton.addEventListener('onStateChange', event => this._mergeSpeech(event));
       }
     }
 

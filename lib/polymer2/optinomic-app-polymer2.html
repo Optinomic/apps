@@ -54,7 +54,7 @@ include(../lib/polymer2/optinomic-app-includes.m4)
 
     <template is="dom-if" if="[[!_show_help]]" restamp="true">
       <optinomic-template name="template"></optinomic-template>
-      <div class="horizontal">
+      <div class="horizontal" style="margin-top:48px;">
         <p class="caption">&nbsp;[[_current_app.developer.company]]</p>
         <paper-button class="grey" on-click="_toggleHelp">Hilfe</paper-button>
       </div>
