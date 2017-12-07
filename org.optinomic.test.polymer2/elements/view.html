@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+    </style>
+    <h2>Hallo, [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class optinomicTemplate extends Polymer.Element {
+      static get is() {
+        return 'optinomic-template';
+      }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'Optinomic @ Polymer 2'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

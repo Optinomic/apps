@@ -1,1 +1,1 @@
-include(../lib/polymer/index_3.html)
+include(../lib/polymer/index_polymer1.html)
