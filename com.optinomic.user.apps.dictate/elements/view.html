@@ -88,20 +88,11 @@
       }
       static get properties() {
         return {
-          welcome: {
-            type: String,
-            value: 'optinomic-polymer2-test',
-            observer: '_welcomeChanged'
-          },
           languageTool: {
             type: Object,
             observer: '_languageToolChanged'
           }
         };
-      }
-
-      _welcomeChanged() {
-        console.log(`welcome is ${this.welcome}`);
       }
 
       _languageToolCheck() {
