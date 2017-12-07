@@ -5,6 +5,12 @@ Copyright (c) 2018 Optionmic GmbH. All rights reserved.
 include(../lib/polymer2/optinomic-app-includes.m4)
 
 <dom-module id="optinomic-app">
+  <style include="optinomic-styles">
+    :host {
+      display: block;
+    }
+
+  </style>
   <template>
     <template is="dom-if" if="[[_loading]]">
       <paper-progress value="90" indeterminate bottom-item></paper-progress>
@@ -51,7 +57,7 @@ include(../lib/polymer2/optinomic-app-includes.m4)
       _logState() {
         var state = this.getState();
         console.log('(✔) state', state);
-      },
+      }
 
       _loadData() {
         Polymer.RenderStatus.afterNextRender(this, function () {
