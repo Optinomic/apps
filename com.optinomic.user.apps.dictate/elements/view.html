@@ -1,0 +1,37 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+    <optinomic-title h1="Diktieren mit Textprüfung" h2="Texte schreiben/diktieren mit Textprüfung für Grammatik, Stil und Rechtschreibung"></optinomic-title>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class optinomicTemplate extends Polymer.Element {
+      static get is() {
+        return 'optinomic-template';
+      }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'Optinomic @ Polymer 2'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>
