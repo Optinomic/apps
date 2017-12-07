@@ -25,8 +25,8 @@ include(../lib/polymer2/optinomic-app-includes.m4)
       .app_actions {
         display: block;
         position: absolute;
-        top: 16px;
-        right: 24px;
+        top: 1px;
+        right: 52px;
         z-index: 10;
       }
 
@@ -38,8 +38,14 @@ include(../lib/polymer2/optinomic-app-includes.m4)
 
     </style>
     <div class="app_actions">
-      <paper-icon-button id="btn-help" class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
-      <paper-tooltip for="btn-help" position="left">Hilfe | Readme</paper-tooltip>
+      <template is="dom-if" if="[[!_show_help]]" restamp="true">
+        <paper-icon-button id="btn-help" class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+        <paper-tooltip for="btn-help" position="left">Hilfe | Readme anzeigen</paper-tooltip>
+      </template>
+      <template is="dom-if" if="[[_show_help]]" restamp="true">
+        <paper-icon-button id="btn-help" class="pink" on-tap="_toggleHelp" icon="close"></paper-icon-button>
+        <paper-tooltip for="btn-help" position="left">Hilfe | Readme schliessen</paper-tooltip>
+      </template>
     </div>
 
     <template is="dom-if" if="[[_loading]]">
@@ -48,6 +54,10 @@ include(../lib/polymer2/optinomic-app-includes.m4)
 
     <template is="dom-if" if="[[!_show_help]]" restamp="true">
       <optinomic-template name="template"></optinomic-template>
+      <div class="horizontal">
+        <p class="caption">&nbsp;[[_current_app.developer.company]]</p>
+        <paper-button class="grey" on-click="_toggleHelp">Hilfe</paper-button>
+      </div>
     </template>
 
     <div hidden$="[[!_show_help]]">
