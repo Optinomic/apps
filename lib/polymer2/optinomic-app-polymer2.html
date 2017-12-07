@@ -5,16 +5,18 @@ Copyright (c) 2018 Optionmic GmbH. All rights reserved.
 include(../lib/polymer2/optinomic-app-includes.m4)
 
 <dom-module id="optinomic-app">
-  <style include="optinomic-styles">
-    :host {
-      display: block;
-    }
-
-  </style>
   <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
     <template is="dom-if" if="[[_loading]]">
       <paper-progress value="90" indeterminate bottom-item></paper-progress>
     </template>
+
     <optinomic-template name="template"></optinomic-template>
     <template is="dom-if" if="[[_isAdmin]]">
       <div style="margin-top: 64px;margin-bottom: 24px;">
@@ -22,6 +24,7 @@ include(../lib/polymer2/optinomic-app-includes.m4)
         <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
       </div>
     </template>
+
   </template>
   <script>
     /**
