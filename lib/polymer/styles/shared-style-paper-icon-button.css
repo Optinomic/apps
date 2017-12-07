@@ -1,32 +1,30 @@
 paper-icon-button.grey {
-    color: #BDBDBD;
-    transition: all 0.3s ease-in-out;
-    --paper-icon-button-ink-color: #424242;
+  color: var(--paper-grey-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-grey-500);
 }
 
 paper-icon-button.grey:hover {
-    color: #424242;
-    transform: scale(1.1);
+  color: var(--paper-grey-800);
+  transform: scale(1.1);
 }
 
 paper-icon-button.pink {
-    color: #E91E63;
-    transition: all 0.3s ease-in-out;
-    --paper-icon-button-ink-color: #3F51B5;
+  color: var(--paper-pink-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-pink-500);
 }
 
 paper-icon-button.pink:hover {
-    color: #3F51B5;
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 paper-icon-button.indigo {
-    color: #3F51B5;
-    transition: all 0.3s ease-in-out;
-    --paper-icon-button-ink-color: #E91E63;
+  color: var(--paper-indigo-500);
+  transition: all 0.3s ease-in-out;
+  --paper-icon-button-ink-color: var(--paper-indigo-500);
 }
 
 paper-icon-button.indigo:hover {
-    color: #E91E63;
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
