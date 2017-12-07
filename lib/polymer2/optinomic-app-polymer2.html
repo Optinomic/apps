@@ -6,27 +6,6 @@ include(../lib/polymer2/optinomic-app-includes.m4)
 
 <dom-module id="optinomic-app">
   <template>
-    <style is="custom-style" include="shared-styles">
-      :host {
-        --app-primary-color: #FAFAFA;
-        --app-secondary-color: #424242;
-        --drawer-primary-color: #424242;
-        --drawer-secondary-color: #EEEEEE;
-        padding: 6px;
-      }
-
-      paper-progress {
-        display: block;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        --paper-progress-active-color: rgba(255, 255, 255, 0.5);
-        --paper-progress-container-color: #9E9E9E;
-      }
-
-    </style>
     <template is="dom-if" if="[[_loading]]">
       <paper-progress value="90" indeterminate bottom-item></paper-progress>
     </template>

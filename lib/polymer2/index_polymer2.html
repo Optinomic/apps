@@ -7,45 +7,7 @@
   <script src="redux-thunk/dist/redux-thunk.min.js"></script>
   <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
   <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
-  include(../lib/polymer/styles/shared-styles.m4)
-  <style is="custom-style" include="shared-styles iron-flex iron-flex-alignment">
-    :host {
-      display: block;
-    }
-
-    body,
-    html {
-      padding: 8px 2px 24px;
-      max-width: 1024px;
-      margin-left: auto;
-      margin-right: auto;
-      font-family: 'Roboto', sans-serif !important;
-      -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
-      min-height: 100%;
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    @media only screen and (min-width: 641px) and (max-width: 1023px) {
-      body,
-      html {
-        padding-top: 12px;
-        padding-left: 12px;
-        padding-right: 12px;
-      }
-    }
-    @media only screen and (min-width: 1024px) {
-      body,
-      html {
-        padding-top: 24px;
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-    }
-
-  </style>
+  include(../lib/polymer2/styles/custom-style.html)
 </head>
 include(../lib/polymer2/optinomic-app-polymer2.html)
 <optinomic-app name="main"></optinomic-app>
