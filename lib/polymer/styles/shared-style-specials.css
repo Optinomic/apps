@@ -1,41 +1,41 @@
         .horizontal {
-            @apply(--layout-horizontal);
-            @apply(--layout-center);
-            @apply(--layout-justified);
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-justified);
         }
-        
+
         .flex {
-            @apply(--layout-flex);
+          @apply(--layout-flex);
         }
-        
+
         .wrap {
-            @apply(--layout-wrap);
+          @apply(--layout-wrap);
         }
-        
+
         .circle {
-            display: inline-block;
-            width: 58px;
-            height: 58px;
-            text-align: center;
-            color: #424242;
-            border-radius: 50%;
-            background: #E0E0E0;
-            font-size: 28px;
-            font-weight: 100;
-            font-family: 'Roboto', sans-serif;
-            line-height: 60px;
+          display: inline-block;
+          width: 58px;
+          height: 58px;
+          text-align: center;
+          color: #424242;
+          border-radius: 50%;
+          background: #E0E0E0;
+          font-size: 28px;
+          font-weight: 100;
+          font-family: 'Roboto', sans-serif;
+          line-height: 60px;
         }
-        
+
         .grid-border-top {
-            border-top-color: #E0E0E0;
-            border-top-style: solid;
-            border-top-width: 1px;
+          border-top-color: #E0E0E0;
+          border-top-style: solid;
+          border-top-width: 1px;
         }
-        
+
         .indigo {
-            color: #3F51B5;
+          color: #3F51B5;
         }
-        
+
         .pink {
-            color: #E91E63;
+          color: #E91E63;
         }

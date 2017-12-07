@@ -1,12 +1,10 @@
 
-# Optinomic-App-Template.
+# Optinomic-Apps running with Polymer2.
 
 Testing Optiomic-Apps with Polymer2.
 
 
-# Anschrift
-
-![image](http://www.ottiger.org/optinomic_logo/optinomic_logo_small.png)     
+## Anschrift
 
 *Optinomic GmbH*   
 *Haldenstrasse 7*     

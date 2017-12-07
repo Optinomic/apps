@@ -11,33 +11,125 @@ include(../lib/polymer2/optinomic-app-includes.m4)
         display: block;
       }
 
+      paper-progress {
+        display: block;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        --paper-progress-active-color: rgba(255, 255, 255, 0.5);
+        --paper-progress-container-color: #9E9E9E;
+      }
+
+      .app_actions {
+        display: block;
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        z-index: 10;
+      }
+
+      .readme_container {
+        background-color: #FAFAFA;
+        padding: 24px 48px;
+        border-radius: 24px;
+      }
+
     </style>
+    <div class="app_actions">
+      <paper-icon-button class="grey" on-tap="_toggleHelp" icon="help-outline"></paper-icon-button>
+    </div>
 
     <template is="dom-if" if="[[_loading]]">
       <paper-progress value="90" indeterminate bottom-item></paper-progress>
     </template>
 
-    <optinomic-template name="template"></optinomic-template>
-    <template is="dom-if" if="[[_isAdmin]]">
+    <template is="dom-if" if="[[!_show_help]]" restamp="true">
+      <optinomic-template name="template"></optinomic-template>
+    </template>
+
+    <div hidden$="[[!_show_help]]">
+
+      <h1>Readme: [[_current_app.name]]</h1>
+      <p style="margin-top:-24px;">&nbsp;[[_current_app.short_description]]
+        <span style="color:#BDBDBD">( V.[[_current_app.version]] | [[_current_app.identifier]])</span>
+      </p>
+
+      <div id="readme" class="readme_container"></div>
+    </div>
+
+    <template is="dom-if" if="[[_user.isAdmin]]">
       <div style="margin-top: 64px;margin-bottom: 24px;">
         <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
         <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
       </div>
     </template>
-
   </template>
   <script>
     /**
      * @customElement
      * @polymer
      */
-    class optinomicApp extends Polymer.Element {
+    class optinomicApp extends ReduxBehavior(Polymer.Element) {
       static get is() {
         return 'optinomic-app';
       }
 
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
       static get properties() {
-        return {};
+        return {
+
+          _loading: {
+            type: Boolean,
+            statePath: 'loading'
+          },
+          _user: {
+            type: Object,
+            statePath: '_app_user.data'
+          },
+          _current_app: {
+            type: Object,
+            statePath: 'apps.current.data'
+          }
+        };
+      }
+
+      // Functions
+
+      _toggleHelp() {
+        this.set('_show_help', !this._show_help);
+
+        if (this._show_help) {
+          Polymer.RenderStatus.afterNextRender(this, function () {
+            var readme = this.$.readme;
+            readme.innerHTML = this._current_app.readme.html;
+          });
+        };
+      }
+
+      _logState() {
+        var state = this.getState();
+        console.warn('(✔) App-State', state);
+      }
+
+      _loadData() {
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          console.warn('(START) _loadData');
+
+          // loadData
+          this.dispatch('actionGetCurrentUser');
+          this.dispatch('actionGetApps');
+          this.dispatch('actionGetClinic');
+
+          setTimeout(function () {
+            this._logState();
+          }.bind(this), 1000);
+
+        });
       }
 
       _init() {
@@ -53,34 +145,17 @@ include(../lib/polymer2/optinomic-app-includes.m4)
         };
 
         this.set('params', params);
-        console.log('(✔) init', this.params);
-        // this.dispatch('actionSaveParams', params);
-      }
+        this.dispatch('actionSaveParams', params);
+        console.log('(✔) App-Params', this.params);
 
-      _logState() {
-        var state = this.getState();
-        console.log('(✔) state', state);
-      }
-
-      _loadData() {
-        Polymer.RenderStatus.afterNextRender(this, function () {
-          console.warn('(START) _loadData');
-
-          // loadData
-          this.dispatch('actionGetCurrentUser');
-          this.dispatch('actionGetApps');
-          // this.dispatch('actionGetCurrentPatient'); this.dispatch('actionGetCurrentPatientStays');
-          this.dispatch('actionGetClinic');
-
-          this._logState();
-        });
+        this.set('_show_help', false);
       }
 
       // Lifecycle
       ready() {
         super.ready();
         this._init();
-        // this._logState();
+        this._loadData();
       }
     }
 
