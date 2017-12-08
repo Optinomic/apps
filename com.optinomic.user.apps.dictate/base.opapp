@@ -21,8 +21,8 @@ website = http://www.optinomic.com/
 include(readme.md)
 
 [template main 6 7]
-include(../lib/polymer2/index.m4)
-include(elements/view.html)
+__opapp_include(../lib/polymer2/index.m4)
+__opapp_include(elements/view.html)
 
 
 [javascript]

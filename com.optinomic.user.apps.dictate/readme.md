@@ -2,7 +2,7 @@
 # Diktieren & Textprüfung
 
 Diese Applikation ermöglicht das einfache schreiben oder diktieren von Texten.
-Der so erstellte Text wird auf Grammatik, Stil und Rechtschreibung geprüft.
+Der so erstellte Text wird auf `Grammatik, Stil und Rechtschreibung` geprüft.
 
 ### Diktieren
 Damit Sie die Diktieren Funktion nutzen können, muss ein Mikrofon vorhanden sein. Zudem müssen Sie die Berechtigung zur Verwendung des Mikrofons zulassen.
