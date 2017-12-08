@@ -1,5 +1,6 @@
 <link rel="import" href="polymer/polymer-element.html">
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
 <link rel="import" href="obvi/voice-button.html">
 <link rel="import" href="paper-input/paper-textarea.html">
 <link rel="import" href="iron-ajax/iron-ajax.html"/>
@@ -47,6 +48,8 @@
       }
 
     </style>
+    <iron-ajax auto url="https://languagetool.org/api/v2/check" params$="[[_language_tool_params]]" handle-as="json" last-response="{{languageTool}}" debounce-duration="300"></iron-ajax>
+
     <optinomic-title h1="Diktieren mit Textprüfung" h2="Texte schreiben/diktieren mit Textprüfung für Grammatik, Stil und Rechtschreibung"></optinomic-title>
 
     <div class="horizontal">
@@ -55,9 +58,12 @@
     </div>
 
     <paper-textarea id="textarea" style="margin:1px;padding:1px;" placeholder="Diktieren oder schreiben Sie hier Ihren Text." value="{{_full_text}}" on-blur="_textareaBlur"></paper-textarea>
-    <iron-ajax auto url="https://languagetool.org/api/v2/check" params$="[[_language_tool_params]]" handle-as="json" last-response="{{languageTool}}" debounce-duration="300"></iron-ajax>
+    <div class="horizontal">
+      <p>&nbsp;</p>
+      <optinomic-clipboard text="[[_full_text]]"></optinomic-clipboard>
+    </div>
     <template is="dom-if" if="[[_language_tool_warnings]]" restamp="true">
-      <div>
+      <div style="margin-top:24px;">
         <h3>Textprüfung für Grammatik, Stil und Rechtschreibung ({{languageTool.matches.length}}
           Hinweise)</h3>
         <template is="dom-repeat" items="[[languageToolMatches]]" index-as="index">
