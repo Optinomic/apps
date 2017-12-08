@@ -1,7 +1,16 @@
 <link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
 <link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
 <link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
 
+<link rel="import" href="vaadin-material-theme/vaadin-grid.html">
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="vaadin-material-theme/vaadin-text-field.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
+<link rel="import" href="vaadin-material-theme/vaadin-date-picker.html">
+<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
 <dom-module id="optinomic-template">
   <template>
     <style include="optinomic-styles">
@@ -9,14 +18,91 @@
         display: block;
       }
 
+      .editor {
+        min-height: calc(100vh - 253px);
+      }
+
+      .details {
+        border-bottom: 1px solid #EEEEEE;
+      }
+
     </style>
 
     <optinomic-title h1="Fragebogen-Daten" h2="Anzeigen und Editieren"></optinomic-title>
 
+    <p>DATA: [[_sr.have_data]], [[_sr.data.length]]</p>
+
+    <template is="dom-repeat" items="[[_sr.data['0'].response_fields]]" as="r">
+      <p>[[r]]</p>
+    </template>
+
+    <div class="">
+      <vaadin-grid class="editor" visible-rows="[[_sr.data.length]]" aria-label="Edit Response" items="[[_sr.data]]">
+
+        <template class="row-details">
+          <div class="details" style="height:440px!important;">
+
+            <div class="horizontal">
+              <h2>Bearbeiten</h2>
+              <vaadin-date-picker label="Datum" value="{{item.date_only}}"></vaadin-date-picker>
+            </div>
+
+            <juicy-jsoneditor name="response" history mode="tree" modes="[[modes]]" json="{{item.response}}"></juicy-jsoneditor>
+            <div class="horizontal">
+              <p>&nbsp</p>
+              <paper-button class="indigo" on-tap="_saveResponse">Speichern (toDo)</paper-button>
+            </div>
+          </div>
+        </template>
+
+        <vaadin-grid-column width="50px" flex-grow="0">
+          <template class="header">#</template>
+          <template>[[index]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="250px" flex-grow="0">
+          <template class="header">date</template>
+          <template>[[item.date_only]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">patient_id</template>
+          <template>[[item.patient_id]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">stay_id</template>
+          <template>[[item.stay_id]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">response_id</template>
+          <template>[[item.response_id]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">pum_id</template>
+          <template>[[item.patient_uses_module_id]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">event_id</template>
+          <template>[[item.event_id]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column width="100px">
+          <template class="header"></template>
+          <template>
+            <paper-checkbox aria-label="Bearbeiten" checked="{{detailsOpened}}">Bearbeiten</paper-checkbox>
+          </template>
+        </vaadin-grid-column>
+
+      </vaadin-grid>
+    </div>
   </template>
 
   <script>
-    class optinomicApp extends ReduxBehavior(Polymer.Element) {
+    class optinomicTemplate extends ReduxBehavior(Polymer.Element) {
       static get is() {
         return 'optinomic-template';
       }
@@ -27,15 +113,95 @@
 
       // Properties
       static get properties() {
-        return {};
+        return {
+
+          _user: {
+            type: Object,
+            statePath: '_app_user.data'
+          },
+
+          _focus_app: {
+            type: String,
+            value: 'com.optinomic.apps.aus'
+          },
+
+          _sr: {
+            type: Object,
+            statePath: function (state) {
+              try {
+
+                function arrayUnique(array) {
+                  var a = array.concat();
+                  for (var i = 0; i < a.length; ++i) {
+                    for (var j = i + 1; j < a.length; ++j) {
+                      if (a[i] === a[j])
+                        a.splice(j--, 1);
+                      }
+                    }
+
+                  return a;
+                }
+                var srs = Object.assign({}, state.survey_responses.data[this._focus_app]);
+
+                srs.response_fields = [];
+
+                srs.data.forEach(function (sr) {
+                  sr.response_fields = [];
+                  sr.date_only = sr.date.substring(0, 10);
+                  Object.keys(sr.response).forEach(function (key, index) {
+                    sr.response_fields.push(key);
+                  });
+                  sr.response_fields.sort(function (a, b) {
+                    var nameA = a.toUpperCase(); // ignore upper and lowercase
+                    var nameB = b.toUpperCase(); // ignore upper and lowercase
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    return 0;
+                  });
+                  srs.response_fields = srs.response_fields.concat(sr.response_fields);
+                });
+
+                srs.response_fields = arrayUnique(srs.response_fields);
+
+                console.warn('(!) _sr', srs);
+
+                return srs
+              } catch (err) {
+                return null;
+              }
+
+            }
+          }
+
+        };
       }
 
       // Functions
-      _init() {
-        // Replace later with: opapp_identifier()...
-        var current_app_id = 'com.optinomic.apps.aus';
+      _saveResponse(e) {
+        var data = e.model.item;
+        console.log('_saveResponse', data);
 
-        this.dispatch('actionGetSurveyResponses', current_app_id);
+        // https://doc.optinomic.org/V2/Developers/api.html#put-surveyresponsessurveyresponseid
+      }
+
+      _init() {
+        // Replace later with: op app_identifier()...
+
+        this.dispatch('actionGetSurveyResponses', this._focus_app);
+
+        // Set Modes
+        var modes = [];
+        modes.push("tree");
+        modes.push("view");
+        modes.push("form");
+        modes.push("code");
+        modes.push("text");
+
+        this.set('modes', modes);
         console.warn('_init :: Fragebogen-Daten');
       }
 
