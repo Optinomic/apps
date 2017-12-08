@@ -1,0 +1,51 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+    </style>
+
+    <optinomic-title h1="Fragebogen-Daten" h2="Anzeigen und Editieren"></optinomic-title>
+
+  </template>
+
+  <script>
+    class optinomicApp extends ReduxBehavior(Polymer.Element) {
+      static get is() {
+        return 'optinomic-template';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {};
+      }
+
+      // Functions
+      _init() {
+        // Replace later with: opapp_identifier()...
+        var current_app_id = 'com.optinomic.apps.aus';
+
+        this.dispatch('actionGetSurveyResponses', current_app_id);
+        console.warn('_init :: Fragebogen-Daten');
+      }
+
+      // Lifecycle
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

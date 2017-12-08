@@ -1,12 +1,12 @@
 [module]
 id = __opapp_identifier()
-name = Diktieren mit Textprüfung
-short_description = Texte schreiben oder diktieren mit Textprüfung für Grammatik, Stil und Rechtschreibung.
+name = Fragebogen-Daten bearbeiten
+short_description = Fragebogen-Daten anzeigen und bearbeiten.
 version = __opapp_version()
-type = user
+type = patient
 
 [description]
-Textblock schreiben oder diktieren mit Textprüfung für Grammatik, Stil und Rechtschreibung.
+Fragebogen-Daten anzeigen und bearbeiten.
 
 [developer]
 first_name = Beat
@@ -22,7 +22,7 @@ __opapp_include(readme.md)
 
 [template main 6 7]
 __opapp_include(../lib/polymer2/index.m4)
-__opapp_include(elements/view.html)
+__opapp_include(elements/edit-sr.html)
 
 
 [javascript]
