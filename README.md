@@ -14,11 +14,19 @@ for you to install on your server.
 
 ## Generating the apps
 
-Apps are generated simply by typing:
+With stack installed, you can compile the preprocessor with
 
-```$ ./gen.sh```
+```
+$ stack build
+```
 
-For an app defined in `some_name/base.opapp.m4`, it will generate a file like
+Once, the preprocessor is ready, you can generate the apps simply by typing:
+
+```
+$ ./gen.sh
+```
+
+For an app defined in `some_name/base.opapp`, it will generate a file like
 `some-name-2.12.opapp` where the version is stored in `some_name/VERSION`.
 
 Versions are always as such: `M.m` where M is the major version changing with
@@ -29,9 +37,22 @@ versions must stay in the repo.
 
 ## Creating a new app
 
-A new directory named after the app containing a file called `base.opapp.m4` is
-enough to have a new app generated. For more documentation about M4, see
-http://www.gnu.org/software/m4/manual/.
+A new directory named after the app containing a file called `base.opapp` is
+enough to have a new app generated.
+
+## Preprocessor
+
+Some functions are provided by the preprocessor:
+
+* `__opapp_identifier()` is replaced by the current module's identifier.
+ALWAYS use this instead of typing it manually.
+* `__opapp_version()` is replaced the current module's version.
+ALWAYS use this instead of typing it manually.
+* `__opapp_include(PATH)` is replaced by the contents of the file at `PATH`.
+That file is itself preprocessed. Paths are relative to the module directory.
+* `__opapp_include_as_js_string(PATH)` is replaced by a JavaScript string of the
+contents of the file. For example, if `PATH` contains `SELECT * FROM "users";`,
+it will be replaced by `"SELECT * FROM \"users\";"`.
 
 # Contact
 
