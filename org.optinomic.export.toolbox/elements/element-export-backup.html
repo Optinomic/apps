@@ -323,9 +323,9 @@
 
             var d = {};
 
-            include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js)
-            include(../org.optinomic.export.toolbox/definitions/_default_patient.js)
-            include(../org.optinomic.export.toolbox/definitions/_default_stay.js)
+            __opapp_include(../org.optinomic.export.toolbox/definitions/_optinomic_ids.js)
+            __opapp_include(../org.optinomic.export.toolbox/definitions/_default_patient.js)
+            __opapp_include(../org.optinomic.export.toolbox/definitions/_default_stay.js)
 
             d.fileDefinitions = Object.assign({}, this.fileDefinitions);
             d.overrideSettings = Object.assign({}, this.overrideSettings);
@@ -590,10 +590,10 @@
                         return prev[curr];
                     }, origin || this );
                 };
-                
+
                 var value = getMyVal(field.path, source);
 
-                
+
             };
 
             if ((value === undefined) || (value === null) || (value === NaN) || (value === "NaN")) {
@@ -613,7 +613,7 @@
 
                 Polymer.RenderStatus.afterNextRender(this, function() {
 
-                        
+
 
                 });
 

@@ -4,7 +4,7 @@ $pageTitle = "Stepping it Up, ag-Grid Focuses on Agnostic in 2016";
 $pageDescription = "2015 was a busy year for ag-Grid. This article discuses how things have gone and what 2016 holds in store for ag-Grid.";
 $pageKeyboards = "javscript ag-grid grid agnostic component";
 
-include('../mediaHeader.php');
+__opapp_include('../mediaHeader.php');
 ?>
 
 <div class="row">
@@ -267,5 +267,5 @@ include('../mediaHeader.php');
 </footer>
 
 <?php
-include('../mediaFooter.php');
+__opapp_include('../mediaFooter.php');
 ?>

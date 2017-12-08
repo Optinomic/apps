@@ -5,5 +5,5 @@ function main(responses) {
         "calculation_id": "phys_psych_calculation"
     };
 
-    include(../lib/calculations/user/survey_responses.js)
+    __opapp_include(../lib/calculations/user/survey_responses.js)
 }

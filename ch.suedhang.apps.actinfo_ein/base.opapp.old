@@ -1,8 +1,8 @@
 [module]
-id = ch.suedhang.apps.actinfo_ein
+id = __opapp_identifier()
 name = ActInfo | Eintritt
 short_description = Sonderversion für den stationären Alkohol- und Medikamentenbereich.
-version = include(VERSION)
+version = __opapp_version()
 type = patient
 
 [description]
@@ -18,24 +18,24 @@ website = http://www.optinomic.com/
 
 
 [template ActInfo 6 35]
-include(../lib/polymer/index.m4)
-include(elements/element-actinfo.html)
-include(elements/actinfo-problemsubstanzen.html)
-include(elements/view.html)
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(elements/element-actinfo.html)
+__opapp_include(elements/actinfo-problemsubstanzen.html)
+__opapp_include(elements/view.html)
 
 [template score 6 6]
 <style>
-include(../lib/css/set/optinomic_material_bootstrap.m4)
-include(style.css)
+__opapp_include(../lib/css/set/optinomic_material_bootstrap.m4)
+__opapp_include(style.css)
 </style>
-include(templates/score.html)
+__opapp_include(templates/score.html)
 <script>
-include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
-include(main.js)
+__opapp_include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+__opapp_include(main.js)
 </script>
 
 [readme]
-include(readme.md)
+__opapp_include(readme.md)
 
 [dependencies]
 
@@ -64,19 +64,15 @@ survey = actinfo_eintritt
 
 
 [email new_event html]
-include(emails/new_event.html)
+__opapp_include(emails/new_event.html)
 
 [email overdue html]
-include(emails/overdue.html)
+__opapp_include(emails/overdue.html)
 
 
 [calculation actinfo_ein javascript]
-include(calculations/actinfo_ein_calc.js)
+__opapp_include(calculations/actinfo_ein_calc.js)
 
 
 [sql_init]
-include(includes/create_view.sql)
-
-
-
-
+__opapp_include(includes/create_view.sql)

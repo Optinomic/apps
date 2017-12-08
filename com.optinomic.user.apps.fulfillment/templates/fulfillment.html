@@ -1,28 +1,28 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div style="margin-top: 4px;">
     <md-content>
         <md-tabs md-selected="d.app.selectedTabIndex" md-dynamic-height md-border-bottom>
             <md-tab label="Applikation">
                 <md-content class="md-padding">
-                    include(templates/selector_application.html)
+                    __opapp_include(templates/selector_application.html)
                 </md-content>
             </md-tab>
             <md-tab ng-if="d.app.app_selected" label="Patienten">
                 <md-content class="md-padding">
-                    include(templates/selector_patient_list.html)
+                    __opapp_include(templates/selector_patient_list.html)
                 </md-content>
             </md-tab>
             <md-tab ng-if="d.app.patients.loaded" label="Ergebnis">
                 <md-content class="md-padding">
-                    include(templates/overview.html)
+                    __opapp_include(templates/overview.html)
                 </md-content>
             </md-tab>
             <md-tab ng-if="d.app.details.have_data" label="Details">
                 <md-content class="md-padding">
-                    include(templates/details.html)
+                    __opapp_include(templates/details.html)
                 </md-content>
             </md-tab>
         </md-tabs>
     </md-content>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

@@ -1,0 +1,20 @@
+name:         opapp-preprocessor
+version:      0.1.0.0
+license:      AllRightsReserved
+license-file: LICENSE
+author:       Thomas Feron
+maintainer:   thomas.feron@redspline.com
+
+default-extensions:
+  - OverloadedStrings
+
+executables:
+  opapp-preprocessor:
+    source-dirs: src
+    ghc-options: -Wall
+    main: Main.hs
+    dependencies:
+      - base >= 4.9 && < 5
+      - directory
+      - filepath
+      - text

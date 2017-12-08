@@ -196,8 +196,7 @@ d.tmt_loadKS = function(calculation_results) {
 
     var ks = {};
 
-    var ks_file = include_as_js_string(
-        ks_tmt.json)
+    var ks_file = __opapp_include_as_js_string(includes/ks_tmt.json)
 
     ks_file = JSON.parse(ks_file);
     ks = ks_file;
@@ -352,7 +351,7 @@ d.tmt_initTMT = function() {
         "data": []
     }];
 
-    // Build 
+    // Build
 
     var alle_messungen = angular.copy($scope.d.appData["ch.suedhang.apps.tmt_V3"].data.calculations[0].calculation_results);
 

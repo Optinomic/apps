@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <!--
 Anzeige von allen Faktoren, die mit ja (=2!; 1 = nein) beantwortet wurden:
 - Eintritt: d.dataMain.calculations[0].calculation_results.response.data.response.NeuroAnamEin_SQ001-SQ011 + SQ013 + Bemerkungen
@@ -45,7 +45,7 @@ item {
 }
 
 
-NORA: 
+NORA:
 -->
 <div>
     <md-card>
@@ -65,7 +65,7 @@ NORA:
                 <div ng-repeat="für alle Fragen vom Block NeuroAnamEin resp. NeuroAnamAus">
                     <div ng-if="item.variable='1'">
                         <p>{{item.aussage}}</p>
-                    </div>                    
+                    </div>
                 </div>
                 <div ng-if="falls items == '0'">
                     <p> Es sind keine neurologischen Auffälligkeiten vorhanden.
@@ -156,12 +156,12 @@ BEAT:
                                     <p>Erkrankung / Unfallfolgen: {{resp.entity.data.response.Erkrankung}}</p>
                                 </div>
                         </div>
-                    </div>  
+                    </div>
             </div>
         </md-card-content>
     </md-card>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)
 
 
 

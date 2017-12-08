@@ -4,7 +4,7 @@ $pageTitle = "ag-Grid Media";
 $pageDescription = "A discussion on why I built ag-Grid after experience with ui-grid, ng-grid, jqxGrid and Slickgrid";
 $pageKeyboards = "angularjs ag-grid grid ui-grid ng-grid jqxgrid slickgrid";
 
-include('mediaHeader.php');
+__opapp_include('mediaHeader.php');
 ?>
 
 <div style="overflow: hidden; border: 1px solid darkgrey; background-color: #eee; padding: 10px; margin: 30px 5px 5px 5px;">
@@ -175,5 +175,5 @@ include('mediaHeader.php');
 </div>
 
 <?php
-include('mediaFooter.php');
+__opapp_include('mediaFooter.php');
 ?>

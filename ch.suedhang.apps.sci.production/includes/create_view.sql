@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW sci_view AS 
+CREATE OR REPLACE VIEW sci_view AS
 
-include(includes/export_production_neu.sql)
+__opapp_include(includes/export_production_neu.sql)

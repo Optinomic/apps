@@ -2,11 +2,11 @@
 Rückfall-Angaben Actinfo Austritt
 
 VYAZ010 = Wie häufig haben Sie während der Behandlung, Beratung oder Betreuung Rückfallperioden hinsichtlich Ihrer Suchtprobleme erlebt?
-999 = nicht bekannt   
-1 = keine   
-2 = einmal  
-3 = zweimal 
-4 = drei- oder viermal  
+999 = nicht bekannt
+1 = keine
+2 = einmal
+3 = zweimal
+4 = drei- oder viermal
 5 = fünfmal oder mehr
 
 ng-if = {VYAZ010 == '999'} "Es ist nicht bekannt, ob und wie oft während der Behandlung Rückfälle erlebt wurden."
@@ -17,28 +17,28 @@ ng-if = {VYAZ010 == '4'} "Während der Behandlung wurden 3-4 Rückfälle erlebt.
 ng-if = {VYAZ010 == '5'} "Während der Behandlung wurden 5 oder mehr Rückfälle erlebt."
 
 
-QYAZ020 = Um welche Substanz(en) oder suchtähnliche(n) Verhaltensweise(n) handelte es sich bei dieser Rückfallperiode(n)?   
+QYAZ020 = Um welche Substanz(en) oder suchtähnliche(n) Verhaltensweise(n) handelte es sich bei dieser Rückfallperiode(n)?
 
-QYAZ020_VYAZ020x = nicht bekannt   
-QYAZ020_VYAZ020a = Alkohol 
-QYAZ020_VYAZ020b = Opioide (Heroin, Methadon, Codein, usw.)    
-QYAZ020_VYAZ020c = Kokain oder Derivate    
-QYAZ020_VYAZ020d = andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)  
-QYAZ020_VYAZ020e = Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)    
-QYAZ020_VYAZ020f = Halluzinogene (LSD, Ketamin, usw.)  
-QYAZ020_VYAZ020g = flüchtige Stoffe    
-QYAZ020_VYAZ020h = Cannabis    
-QYAZ020_VYAZ020i = Tabak   
-QYAZ020_VYAZ020j = andere Substanze(n) 
+QYAZ020_VYAZ020x = nicht bekannt
+QYAZ020_VYAZ020a = Alkohol
+QYAZ020_VYAZ020b = Opioide (Heroin, Methadon, Codein, usw.)
+QYAZ020_VYAZ020c = Kokain oder Derivate
+QYAZ020_VYAZ020d = andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)
+QYAZ020_VYAZ020e = Schlafmittel/Beruhigungsmittel (Benzodiazepine usw.)
+QYAZ020_VYAZ020f = Halluzinogene (LSD, Ketamin, usw.)
+QYAZ020_VYAZ020g = flüchtige Stoffe
+QYAZ020_VYAZ020h = Cannabis
+QYAZ020_VYAZ020i = Tabak
+QYAZ020_VYAZ020j = andere Substanze(n)
 falls andere -> VYAZ021j = Welche andere(n) Substanz(en)
-QYAZ020_VYAZ020k = Glücksspielsucht    
-QYAZ020_VYAZ020l = Computer- bzw. Internetsucht    
-QYAZ020_VYAZ020m = Essstörungen    
-QYAZ020_VYAZ020n = andere suchtähnliche Verhaltensweise(n) 
+QYAZ020_VYAZ020k = Glücksspielsucht
+QYAZ020_VYAZ020l = Computer- bzw. Internetsucht
+QYAZ020_VYAZ020m = Essstörungen
+QYAZ020_VYAZ020n = andere suchtähnliche Verhaltensweise(n)
 falls andere -> VYAZ021n = Welche andere(n) suchtähnliche(n) Verhaltensweise(n)
 -->
 
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div ng-repeat="response in d.dataMain.survey_responses_group[0]">
     <div style="margin-top: 48px;">
         <div class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
@@ -65,7 +65,7 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div flex="45" ng-if="(response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== null) && (response.calculations[0].calculation_result.FAGERSTROEM.FAGERSTROEM_Score !== 999)">
                 <h5 class="md-subhead">
-                    Fagerström Summenwerte  
+                    Fagerström Summenwerte
                 </h5>
                 <table class="table table-condensed" style="width: 80%;">
                     <tr ng-repeat="range in response.calculations[0].calculation_result.FAGERSTROEM.ranges.ranges">
@@ -102,7 +102,7 @@ include(../lib/html/optinomic/page/start.m4)
         </div>
     </div>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)
 
 
 
@@ -143,7 +143,7 @@ include(../lib/html/optinomic/page/end.m4)
                 result.relapsesubstanzen.push(text);
             };
 
-            
+
             // Andere Stimulanzien
             if (response['QYAZ020[VYAZ020d]'] === 'Y') {
                 text = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)';

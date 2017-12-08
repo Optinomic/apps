@@ -1,0 +1,34 @@
+[module]
+id = __opapp_identifier()
+name = BOT (Kantonsstatistik)
+short_description = Austritt (Kantonsstatistik) aus Polypoint.
+version = __opapp_version()
+type = user
+
+[description]
+Diese Applikation dient zur Sammlung der Austritt (Kantonsstatistik). Die Daten werden anhand einem Polypoint-Lookup via ODBC gewonnen und als data_source_query gespeichert.
+
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template KANTONSSTATISTIK 6 7]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(elements/view.html)
+
+
+[javascript]
+
+[css]
+
+[data_source_query kantonsstatistik Polypoint 0 */12 *]
+__opapp_include(includes/odbc_kantonsstatistik_typ.sql)

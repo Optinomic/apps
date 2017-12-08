@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <md-tabs md-dynamic-height md-border-bottom>
     <md-tab label="{{d.app.sections[0].name}} ({{d.app.sections[0].count}})" md-on-select="changeSection(0)">
         <md-content class="md-padding">
@@ -11,12 +11,12 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 0">
-                    include(../lib/html/optinomic/templates/data_table.html)
+                    __opapp_include(../lib/html/optinomic/templates/data_table.html)
                     <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
-                include(templates/medication_edit.html)
+                __opapp_include(templates/medication_edit.html)
             </div>
         </md-content>
     </md-tab>
@@ -31,12 +31,12 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 1">
-                    include(../lib/html/optinomic/templates/data_table.html)
+                    __opapp_include(../lib/html/optinomic/templates/data_table.html)
                     <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
-                include(templates/medication_reserve_edit.html)
+                __opapp_include(templates/medication_reserve_edit.html)
             </div>
         </md-content>
     </md-tab>
@@ -51,14 +51,14 @@ include(../lib/html/optinomic/page/start.m4)
             </div>
             <div ng-if="d.appState === 'show'">
                 <div ng-if="d.app.selected_section.id === 2">
-                    include(../lib/html/optinomic/templates/data_table.html)
+                    __opapp_include(../lib/html/optinomic/templates/data_table.html)
                     <div ag-grid="d.grid.options" class="ag-optinomic" style="width: 100%; height: 800px;"></div>
                 </div>
             </div>
             <div ng-if="(d.appState === 'edit') || (d.appState === 'new')">
-                include(templates/medication_reserve_abgabe_edit.html)
+                __opapp_include(templates/medication_reserve_abgabe_edit.html)
             </div>
         </md-content>
     </md-tab>
 </md-tabs>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

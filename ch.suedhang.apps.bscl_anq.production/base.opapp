@@ -1,0 +1,72 @@
+[module]
+id = __opapp_identifier()
+name = BSCL (ANQ)
+parent = ch.suedhang.apps.bscl_anq
+short_description = Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
+version = __opapp_version()
+type = patient
+
+[description]
+
+[developer]
+first_name = Nora
+last_name = Schönenberger
+github_user = schoenenb
+email = nora.schoenenberger@suedhang.ch
+company = Suedhang
+phone = +41 (0)31 828 14 92
+website = http://suedhang.ch/de/
+
+[template BSCL 6 12]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(../ch.suedhang.apps.bscl_anq/elements/element-bscl.html)
+__opapp_include(elements/view.html)
+
+[readme]
+__opapp_include(readme.md)
+
+[dependencies]
+
+[survey]
+id = bscl_anq
+type = lime
+responsibility = patient_via_assessment
+name = BSCL
+host = limesurvey_v2
+survey_id = 366636
+hash = X36X1188
+pid = X36X1183
+fid = X36X1187
+min_questions =
+min_lastpage = 2
+
+[survey]
+id = bscl_admin
+type = lime
+responsibility = Admin
+name = BSCL - Admin
+host = limesurvey_v2
+survey_id = 264947
+hash = X81X2070
+pid = X81X2065
+fid = X81X2069
+min_questions =
+min_lastpage = 2
+
+
+[event activation]
+type = on_activation
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = BSCL - Eintritt
+survey = bscl_anq
+
+[event exit]
+type = before_exit
+days = 10
+time = 08:00
+due_after = 259200
+overdue = ignore
+description = BSCL - Austritt
+survey = bscl_anq

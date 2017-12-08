@@ -1,0 +1,39 @@
+[module]
+id = __opapp_identifier()
+name = Chart: Time-Series
+short_description = Time-Series analyses
+version = __opapp_version()
+type = user
+
+[description]
+Easy Time-Series analyses.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template main 6 7]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(../org.optinomic.export.toolbox/elements/element-export.html)
+__opapp_include(../org.optinomic.export.toolbox/elements/behavior-export-toolbox.html)
+__opapp_include(elements/behavior-charts.html)
+__opapp_include(elements/element-chart.html)
+__opapp_include(elements/view.html)
+
+
+[javascript]
+
+
+[css]
+
+
+[calculation bscl_full javascript ch.suedhang.apps.bscl_anq ch.suedhang.apps.bscl_anq:scores_calculation]
+__opapp_include(calculations/full.js)

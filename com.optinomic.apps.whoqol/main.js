@@ -88,7 +88,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // ------------------------------------------------
         // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // i n c l u d e _ a s _ j s _ s t r i n g
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
@@ -98,8 +98,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data_query = {};
         data_query = {
             name: 'WHQOL (with stay)',
-            sql: include_as_js_string(
-                WHQOL.sql)
+            sql: __opapp_include_as_js_string(includes/WHQOL.sql)
         };
         module_packages.push(data_query);
 

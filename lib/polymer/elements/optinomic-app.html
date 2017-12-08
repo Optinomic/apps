@@ -2,7 +2,7 @@
 @license
 Copyright (c) 2017 Optionmic GmbH. All rights reserved.
 -->
-<link rel="import" href="polymer/polymer.html"> include(../lib/polymer/elements/optinomic-redux-store/optinomic-redux-store.html)
+<link rel="import" href="polymer/polymer.html"> __opapp_include(../lib/polymer/elements/optinomic-redux-store/optinomic-redux-store.html)
 <link rel="import" href="app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="app-layout/app-header/app-header.html">
@@ -23,7 +23,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             --drawer-secondary-color: #EEEEEE;
             padding: 6px;
         }
-        
+
         app-header {
             @apply(--layout-fixed-top);
             color: var(--app-secondary-color);
@@ -32,16 +32,16 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 background-color: #F5F5F5;
             }
         }
-        
+
         app-header paper-icon-button {
             color: #757575;
             --paper-icon-button-ink-color: var(--app-secondary-color);
         }
-        
+
         app-header paper-icon-button:hover {
             color: var(--app-secondary-color);
         }
-        
+
         app-drawer {
             --app-drawer-scrim-background: rgba(0, 0, 0, 0.6);
             --app-drawer-width: 256px;
@@ -50,22 +50,22 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 color: var(--drawer-secondary-color);
             }
         }
-        
+
         paper-icon-button + [main-title] {
             margin-left: 24px;
         }
-        
+
         paper-progress {
             display: block;
             width: 100%;
             --paper-progress-active-color: rgba(255, 255, 255, 0.5);
             --paper-progress-container-color: #9E9E9E;
         }
-        
+
         .drawer-list {
             margin: 0 20px;
         }
-        
+
         .drawer-list a {
             display: block;
             padding: 0 16px;
@@ -73,7 +73,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
             color: var(--drawer-secondary-color);
             line-height: 40px;
         }
-        
+
         .drawer-list a.iron-selected {
             color: var(--drawer-secondary-color);
             font-weight: bold;
@@ -111,7 +111,7 @@ Copyright (c) 2017 Optionmic GmbH. All rights reserved.
                 </app-header>
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <optinomic-template name="template"></optinomic-template>
-                    <optinomic-app-page-readme language="de" name="app-page-readme" markdown="include(readme.md)"></optinomic-app-page-readme>
+                    <optinomic-app-page-readme language="de" name="app-page-readme" markdown="__opapp_include(readme.md)"></optinomic-app-page-readme>
                     <optinomic-app-page-admin language="de" name="app-page-admin"></optinomic-app-page-admin>
                     <optinomic-404 name="404"></optinomic-404>
                 </iron-pages>

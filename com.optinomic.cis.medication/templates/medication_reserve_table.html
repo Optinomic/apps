@@ -7,7 +7,7 @@
     </div>
     <div hide-xs show-gt-xs flex ng-if="d.grid_reserve.is_row_selected" style="height:84px; padding:5px; margin:5px;">
         <div layout="row" layout-gt-xs="row" layout-sm="row" layout-align="start center" ayout-padding class="md-whiteframe-2dp">
-            include(templates/partial/template_selected_detail_reserve.html)
+            __opapp_include(templates/partial/template_selected_detail_reserve.html)
             <md-button style="font-size: 18px; color:#9E9E9E" ng-click="d.functions.unselectRow()" class="md-primary md-icon-button" aria-label="Close">
                 <i class="mdi mdi-close"></i>
                 <md-tooltip md-direction="bottom">
@@ -61,7 +61,7 @@
                 Toolpanel ein-/ausblenden
             </md-tooltip>
         </md-button>
-        include(templates/partial/template_add_reserve_button.html)
+        __opapp_include(templates/partial/template_add_reserve_button.html)
     </div>
 </div>
 <div ag-grid="d.grid_reserve.options" class="ag-optinomic" style="width: 100%; height: 410px;"></div>

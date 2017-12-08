@@ -1,0 +1,39 @@
+[module]
+id = __opapp_identifier()
+name = Diagnosen
+short_description = Diagnosen nach ICD-10
+version = 1.0
+type = patient
+
+[description]
+Internationale statistische Klassifikation der Krankheiten und verwandter Gesundheitsprobleme (ICD-10)
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template diagnoses_list 6 12]
+__opapp_include(templates/diagnoses.html)
+
+[template diagnoses_report_only 6 6]
+__opapp_include(templates/diagnoses_report.html)
+
+
+[dependencies]
+
+[javascript]
+__opapp_include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+__opapp_include(main.js)
+
+
+[css]
+__opapp_include(../lib/css/set/optinomic_material_bootstrap.m4)
+__opapp_include(style.css)

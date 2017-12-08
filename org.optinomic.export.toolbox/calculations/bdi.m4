@@ -5,5 +5,5 @@ function main(responses) {
         "calculation_id": "bdi_score"
     };
 
-    include(../lib/calculations/user/survey_responses.js)
+    __opapp_include(../lib/calculations/user/survey_responses.js)
 }

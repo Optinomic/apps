@@ -80,7 +80,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // ------------------------------------------------
         // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // i n c l u d e _ a s _ j s _ s t r i n g
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
@@ -91,8 +91,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
         var data_query = {};
         data_query = {
             name: 'SCI - Export',
-            sql: include_as_js_string(
-                SCI_Export.sql)
+            sql: __opapp_include_as_js_string(includes/SCI_Export.sql)
         };
         module_packages.push(data_query);
 
@@ -321,7 +320,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             // var geringe_ausp_vorhanden = false;
             // var hohe_ausp_aufzaehlung = "";
             // var hohe_ausp_vorhanden = false;
-            // 
+            //
             // if ($scope.d.text_sci.data.eintritt.scores[2].stanine >= 5) {
             //     hohe_ausp_vorhanden = true;
             //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
@@ -329,7 +328,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //     geringe_ausp_vorhanden = true;
             //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[2].question);
             // };
-            // 
+            //
             // if ($scope.d.text_sci.data.eintritt.scores[3].stanine >= 5) {
             //     hohe_ausp_vorhanden = true;
             //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
@@ -337,7 +336,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //     geringe_ausp_vorhanden = true;
             //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[3].question);
             // };
-            // 
+            //
             // if ($scope.d.text_sci.data.eintritt.scores[4].stanine >= 5) {
             //     hohe_ausp_vorhanden = true;
             //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
@@ -345,7 +344,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //     geringe_ausp_vorhanden = true;
             //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[4].question);
             // };
-            // 
+            //
             // if ($scope.d.text_sci.data.eintritt.scores[5].stanine >= 5) {
             //     hohe_ausp_vorhanden = true;
             //     hohe_ausp_aufzaehlung = concat_aufzaehlung(hohe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
@@ -353,17 +352,17 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             //     geringe_ausp_vorhanden = true;
             //     geringe_ausp_aufzaehlung = concat_aufzaehlung(geringe_ausp_aufzaehlung, $scope.d.text_sci.data.eintritt.scores[5].question);
             // };
-            // 
+            //
             // if (hohe_ausp_vorhanden) {
             //     text = text + patient_in + " verfügt über folgende hilfreiche Stressbewältigungsstrategien: "
             //     text = text + hohe_ausp_aufzaehlung + ". ";
             // };
-            // 
+            //
             // if (geringe_ausp_vorhanden) {
             //     text = text + patient_anrede + " hat wenig hilfreiche Strategien im Umgang mit Stress zur Verfügung. Daher führen Belastungen sehr wahrscheinlich zu vermehrten körperlichen und psychischen Stressreaktionen. Ein Ausbau folgender Stressbewältigungsfähigkeiten ist empfohlen: "
             //     text = text + geringe_ausp_aufzaehlung + ". ";
             // };
-            // 
+            //
             // // Skala 7
             // if ($scope.d.text_sci.data.eintritt.scores[6].stanine >= 6) {
             //     text = text + " Als ungünstige Strategie im Umgang mit Stress weist " + patient_anrede
@@ -505,7 +504,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             if (current_response.entity.data.response.Erhebungszeitpunkt === '3') {
                 label_type = 'Verlauf';
             };
-            
+
             var label = label_type + ": " + date;
 
 

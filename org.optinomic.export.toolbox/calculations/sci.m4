@@ -5,5 +5,5 @@ function main(responses) {
         "calculation_id": "scores"
     };
 
-    include(../lib/calculations/user/survey_responses.js)
+    __opapp_include(../lib/calculations/user/survey_responses.js)
 }

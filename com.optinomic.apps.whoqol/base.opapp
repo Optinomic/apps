@@ -1,0 +1,66 @@
+[module]
+id = __opapp_identifier()
+name = WHOQOL - Phys. / Psych.
+short_description = Beurteilung der Physischen und Psychischen Lebensqualität.
+version = __opapp_version()
+type = patient
+
+[description]
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+
+[template WHOQOL 6 12]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(elements/element-whoqol.html)
+__opapp_include(elements/view.html)
+
+
+[readme]
+__opapp_include(readme.md)
+
+[dependencies]
+
+
+[survey]
+id = WHOQOL
+type = lime
+responsibility = patient_via_assessment
+name = WHOQOL
+host = default
+survey_id = 663948
+hash = X8X140
+pid = X8X141
+fid = X8X142
+min_questions =
+min_lastpage = 2
+
+
+[event activation]
+type = on_activation
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = WHOQOL ausfüllen.
+survey = WHOQOL
+
+[event exit]
+type = before_exit
+days = 7
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = WHOQOL ausfüllen.
+survey = WHOQOL
+
+
+
+[calculation phys_psych_calculation javascript]
+__opapp_include(calculations/whoqol_patient_calc.js)

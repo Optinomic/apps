@@ -1,0 +1,37 @@
+[module]
+id = __opapp_identifier()
+name = Erfüllungsgrad | Liste
+short_description = Erfasste Fragebögen mit Angaben zu Patient, Aufenthalt und zugrundeliegendem Ereignis.
+version = __opapp_version()
+type = user
+
+[description]
+Diese Userapp ermöglicht einem Datenverantwortlichen / Administrator den Erfüllungsgrad einelner Applikationen im Auge zu behalten. Dies Applikation listet sämtliche erfasste Fragebögen mit Angaben zu Patient, Aufenthalt und zugrundeliegendem Ereignis auf.
+
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+
+[template fulfillment 6 8]
+__opapp_include(templates/fulfillment.html)
+
+[sql_init]
+__opapp_include(includes/create_view.sql)
+
+
+[javascript]
+__opapp_include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+__opapp_include(main.js)
+
+[css]
+__opapp_include(../lib/css/set/optinomic_material.m4)
+__opapp_include(style.css)

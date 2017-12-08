@@ -1,1 +1,1 @@
-include(lib/css/optinomic/basic.css)
+__opapp_include(lib/css/optinomic/basic.css)

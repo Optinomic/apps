@@ -60,8 +60,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks = {};
 
-        var ks_file = include_as_js_string(
-            ch_suedhang_user_apps_tmt_activated.json)
+        var ks_file = __opapp_include_as_js_string(includes/ch_suedhang_user_apps_tmt_activated.json)
 
         ks_file = JSON.parse(ks_file);
 
@@ -152,7 +151,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             "data": []
         }];
 
-        // Build 
+        // Build
 
         var alle_messungen = $scope.d.dataMain.calculations[0].calculation_results;
 
@@ -443,7 +442,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            // Set zscore_min | zscore_max  if zscore >= +/-3
             if (Math.abs(A_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
                 $scope.d.zScore.options.zscore_min = (Math.abs(A_messung.zscore) + 1) * -1;
             };
@@ -463,7 +462,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     };
 
                     if (A_messung.zscore > A_messung.clinicsample_end) {
-                        // Besser als Stichprobe: Grün 
+                        // Besser als Stichprobe: Grün
                         A_messung.zscore_color = '#4CAF50';
                     };
 
@@ -487,7 +486,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
             B_messung.clinicsample_color = current_cs_color;
 
 
-            // Set zscore_min | zscore_max  if zscore >= +/-3 
+            // Set zscore_min | zscore_max  if zscore >= +/-3
             if (Math.abs(B_messung.zscore) > (Math.abs($scope.d.zScore.options.zscore_min) - 0.5)) {
                 $scope.d.zScore.options.zscore_min = (Math.abs(B_messung.zscore) + 1) * -1;
             };
@@ -508,7 +507,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                     };
 
                     if (B_messung.zscore > B_messung.clinicsample_end) {
-                        // Besser als Stichprobe: Grün 
+                        // Besser als Stichprobe: Grün
                         B_messung.zscore_color = '#4CAF50';
                     };
                 };
@@ -522,7 +521,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
 
 
-            // TMT - B/A Quotient  
+            // TMT - B/A Quotient
             // -  Nur bei Eintritt
             // -  Kritischer Wert:  2,5
             if (current_messung.mz === 1) {
@@ -546,7 +545,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
-                // Set zscore_min | zscore_max  if zscore >= +/-3 
+                // Set zscore_min | zscore_max  if zscore >= +/-3
                 if (Math.abs(BA_quotient.zscore) > (Math.abs($scope.d.zScore.options_ba.zscore_min) - 0.5)) {
                     $scope.d.zScore.options_ba.zscore_min = (Math.abs(BA_quotient.zscore) + 1) * -1;
                 };
@@ -650,7 +649,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // ------------------------------------------------
         // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // i n c l u d e _ a s _ j s _ s t r i n g
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
@@ -661,8 +660,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         data_query = {
             name: 'WHQOL-Example (with stay)',
-            sql: include_as_js_string(
-                export.sql)
+            sql: __opapp_include_as_js_string(includes/export.sql)
         };
         module_packages.push(data_query);
 
@@ -675,7 +673,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------------------------------
 
     $scope.roundToTwo = function(num) {
-        // Round a Number to 0.X 
+        // Round a Number to 0.X
         return +(Math.round(num + "e+2") + "e-2");
     };
 

@@ -1,0 +1,40 @@
+[module]
+id = __opapp_identifier()
+name = Patienten-Assessment (Einladung)
+short_description = Zugangsdaten und Beschreibung drucken
+version = __opapp_version()
+type = user
+
+
+[description]
+Diese Applikation ermöglicht das Drucken der Zugangsdaten sowie einer Kurzeinführung für das Optinomic Patienten-Assessment.
+
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template print_access 6 12]
+<head>
+    <script src='https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.26/lib/optinomic-pdfmake/pdfmake.min.js'></script>
+    <script src='https://cdn.rawgit.com/Optinomic/polymer-cdn/optinomic-0.1.26/lib/optinomic-pdfmake/vfs_fonts.js'></script>
+</head>
+__opapp_include(templates/app.html)
+
+
+[javascript]
+__opapp_include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+__opapp_include(main.js)
+
+
+[css]
+__opapp_include(../lib/css/set/optinomic_material_bootstrap.m4)
+__opapp_include(style.css)

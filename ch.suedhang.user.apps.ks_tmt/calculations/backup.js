@@ -402,7 +402,7 @@ function main(responses) {
             var current_age_edu_mz_name = age_edu_mz_obj_prop_array[prop_id];
             var current_age_edu_mz = age_edu_obj_scores[current_age_edu_mz_name];
 
-            // Make Sure 'n' is correct - everywhere. 
+            // Make Sure 'n' is correct - everywhere.
             var update_n = current_age_edu_mz.scores.BA_Quotient.length;
             current_age_edu_mz.n = update_n;
             current_age_edu_mz.scores.n = update_n;
@@ -499,7 +499,7 @@ function main(responses) {
     //  S T A T I S T I C S   &   Helpers
     // ------------------------------------------
 
-    include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
+    __opapp_include(../lib/js/optinomic/statistics/calculation_simplestatistics.js)
 
 
     // ------------------------------------------

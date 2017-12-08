@@ -1,0 +1,34 @@
+[module]
+id = __opapp_identifier()
+name = Komed-Health <-> Optinomic
+short_description = Intelligent communication in healthcare
+version = 1.0
+type = patient
+
+[description]
+Intelligent communication in healthcare | Optinomic-Integration into Komed-Health
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+
+[template main 6 7]
+__opapp_include(../lib/polymer/templates/template_start.m4)
+__opapp_include(elements/komed-iframe.html)
+__opapp_include(elements/index.html)
+__opapp_include(../lib/polymer/templates/template_end.m4)
+
+
+[javascript]
+__opapp_include(../lib/polymer/elements/main.m4)
+
+
+[css]

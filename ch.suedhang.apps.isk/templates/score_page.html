@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <md-content ng-if="d.haveData">
     <div ng-if="!d.ISK.init">
         <h3 class="md-headline">ISK</h3>
@@ -7,10 +7,10 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
     <div ng-if="d.ISK.init">
         <div ng-if="!d.ISK.settings">
-            include(templates/score.html)
+            __opapp_include(templates/score.html)
         </div>
         <div ng-if="d.ISK.settings">
-            include(templates/settings.html)
+            __opapp_include(templates/settings.html)
         </div>
     </div>
 </md-content>
@@ -18,4 +18,4 @@ include(../lib/html/optinomic/page/start.m4)
     <h3 class="md-headline">Keine Daten</h3>
     <h3 class="md-subhead">Kein Assessment | Messungen vorhanden.</h3>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

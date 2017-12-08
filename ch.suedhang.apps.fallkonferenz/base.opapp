@@ -1,0 +1,44 @@
+[module]
+id = __opapp_identifier()
+name = Fallkonferenz
+short_description = Diese Applikation dient zur schnellen Ergebnis-Übersicht (z.B. für die Fallkonferenz).
+version = 1.0
+type = patient
+
+[description]
+Übersicht der wichtigsten Ergebnisse zu Suchtmittelkonsum (actInfo); Visuellem Scannen, psychomotorischer Geschwindigkeit und Leistung der exekutiven Funktionen (TMT); ADHS-Screening (ASRS); Suchtdruck (AASE-G); Symptomcheckliste (BSCL); Depressions-Inventar (BDI), Inventar Sozialer Kompetenzen (ISK), Stress-Coping-Inventar (SCI) und der Lebensqualität (WHQOL).
+
+Hinweis: Wenn Sie sich nicht im "client.new" befinden, öffnen Sie diese App über das Icon [öffnen] oder [frame].
+
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+[template overview 6 35]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(../ch.suedhang.apps.actinfo_ein/elements/actinfo-problemsubstanzen.html)
+__opapp_include(../ch.suedhang.apps.actinfo_ein/elements/element-actinfo.html)
+__opapp_include(../ch.suedhang.apps.tmt_V3/elements/element-tmt.html)
+__opapp_include(../ch.suedhang.apps.asrs/elements/element-asrs.html)
+__opapp_include(../ch.suedhang.apps.aase-g/elements/element-aase.html)
+__opapp_include(../ch.suedhang.apps.bscl_anq/elements/element-bscl.html)
+__opapp_include(../ch.suedhang.apps.bdi/elements/element-bdi.html)
+__opapp_include(../ch.suedhang.apps.isk/elements/element-isk.html)
+__opapp_include(../ch.suedhang.apps.sci/elements/element-sci.html)
+__opapp_include(../com.optinomic.apps.whoqol/elements/element-whoqol.html)
+__opapp_include(elements/view.html)
+
+
+[javascript]
+
+
+[css]

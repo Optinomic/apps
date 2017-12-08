@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <md-content class="md-padding" ng-init="d.navigator = 0">
     <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">
@@ -12,7 +12,7 @@ include(../lib/html/optinomic/page/start.m4)
             <p>&nbsp;</p>
             <h3 class="md-subhead">Depression
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].depression_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
+
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
@@ -24,9 +24,9 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <p>&nbsp;</p>
-            <h3 class="md-subhead">Angst 
+            <h3 class="md-subhead">Angst
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].angst_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
+
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
@@ -38,9 +38,9 @@ include(../lib/html/optinomic/page/start.m4)
                 </div>
             </div>
             <p>&nbsp;</p>
-            <h3 class="md-subhead">Stress 
+            <h3 class="md-subhead">Stress
                 <i ng-if="d.dataMain.calculations[0].calculation_results[d.navigator].stress_cutoff_reached" class="mdi mdi-fire" style="color:#F44336"></i>
-                
+
             </h3>
             <div layout="row" layout-gt-xs="row" layout-align="start center" layout-margin>
                 <div flex>
@@ -64,4 +64,4 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-actions>
     </md-card>
 </md-content>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

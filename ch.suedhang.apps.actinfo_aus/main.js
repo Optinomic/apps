@@ -85,7 +85,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
                 result.relapsesubstanzen.push(text);
             };
 
-            
+
             // Andere Stimulanzien
             if (response['QYAZ020[VYAZ020d]'] === 'Y') {
                 text = 'andere Stimulanzien (Amphetamine, MDMA, Methamphetamine, usw.)';
@@ -138,7 +138,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         // ------------------------------------------------
         // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // i n c l u d e _ a s _ j s _ s t r i n g
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
@@ -149,8 +149,7 @@ app.controller('AppCtrl', function($scope, dataService, scopeDService) {
 
         data_query = {
             name: 'actInfo - Austritt',
-            sql: include_as_js_string(
-                export_Nora.sql)
+            sql: __opapp_include_as_js_string(includes/export_Nora.sql)
         };
         module_packages.push(data_query);
 

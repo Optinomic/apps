@@ -13,7 +13,7 @@
             <h2>Keine BSCL-Daten vorhanden.  :-(</h2>
         </template>
         <template is="dom-if" if="[[_sr_bscl]]">
-            <optinomic-chart-profile language="de" options="[[_d.bscl.options_ohne_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='include(includes/ks_bscl.json)'> </optinomic-chart-profile>
+            <optinomic-chart-profile language="de" options="[[_d.bscl.options_ohne_text]]" start="[[_d.bscl.start]]" scales="[[_d.bscl.scales]]" ranges="[[_d.bscl.ranges]]" scores="[[_sr_bscl]]" clinic_sample_dive="[1, 1, 4]" clinic_samples='__opapp_include(includes/ks_bscl.json)'> </optinomic-chart-profile>
         </template>
         <optinomic-title show_toggle_button small h1="Depressions-Inventar (BDI-II)" h2="Schweregrad depressiver Symptomatik im klinischen Bereich." h3="Chart"></optinomic-title>
         <template is="dom-if" if="[[!_sr_bdi]]">

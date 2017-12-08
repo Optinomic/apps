@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW actinfo_audit_view AS 
+CREATE OR REPLACE VIEW actinfo_audit_view AS
 
-include(includes/export_audit.sql)
+__opapp_include(includes/export_audit.sql)

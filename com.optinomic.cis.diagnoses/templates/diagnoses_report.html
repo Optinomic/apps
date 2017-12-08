@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <md-content>
     <div ng-if="d.diagnoses.length > 0" ng-repeat="entry in d.diagnoses | orderBy:d.appInit.predicate">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="start start" layout-margin>
@@ -16,4 +16,4 @@ include(../lib/html/optinomic/page/start.m4)
         <p class="flow-text">Keine Diagnosen.</p>
     </div>
 </md-content>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

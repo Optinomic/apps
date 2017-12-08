@@ -5,19 +5,16 @@ set -e
 get_names() {
     find . -type d -maxdepth 1 -name '[a-zA-Z0-9]*' \
         | sed 's/^\.\///g' \
-        | sed 's/lib$//g'
+        | sed 's/lib$//g' \
+        | sed 's/opapp-preprocessor$//g'
 }
 
 generate() {
     local name="$1"
-    local path="$(pwd)"
-    local version="$(cat $path/$name/VERSION)"
-    local filename="$name-$version.opapp"
+    local base="$(pwd)"
 
-    echo Generating $filename ...
-    cd "$path/$name"
-    m4 "$path/helpers.m4" base.opapp.m4 > "$path/$filename"
-    cd "$path"
+    echo "Generating $name ..."
+    stack exec opapp-preprocessor -- "$name"
 }
 
 main() {

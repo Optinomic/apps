@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div>
     <md-card>
         <md-card-title style="background-color: #424242; color: #FAFAFA">
@@ -35,12 +35,12 @@ include(../lib/html/optinomic/page/start.m4)
         </md-card-content>
         <md-divider></md-divider>
         <md-card-actions layout-gt-xs="row" layout-align="start center">
-            <!--            
+            <!--
             <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculation_results.response.data.response.Datum | date}}</p>
             -->
             <p flex class="md-subhead" style="text-align:center;">{{d.dataMain.calculations[0].calculated_date}}</p>
         </md-card-actions>
-        <!--        
+        <!--
             <md-card-content ng-if="d.show_answers" layout-margin>
             <div layout="row" layout-align="space-between center">
                 <div>
@@ -65,4 +65,4 @@ include(../lib/html/optinomic/page/start.m4)
         -->
     </md-card>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

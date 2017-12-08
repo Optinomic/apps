@@ -257,7 +257,7 @@
             d.subtitle = "Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.";
 
 
-            d.clinic_samples = JSON.parse(include_as_js_string(ks_bscl.json));
+            d.clinic_samples = JSON.parse(__opapp_include_as_js_string(includes/ks_bscl.json));
             d.bscl_clinic_sample_dive = {
                 "defined": false,
                 "array": null
@@ -677,7 +677,7 @@
                 var _pdf_content = [];
                 var d = this.get('_d');
 
-                // Should we print charts?  
+                // Should we print charts?
                 // If only dropouts === no
                 var should_print_chart = false;
 

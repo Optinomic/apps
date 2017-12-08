@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW actinfo_aus_view AS 
+CREATE OR REPLACE VIEW actinfo_aus_view AS
 
-include(includes/export.sql)
+__opapp_include(includes/export.sql)

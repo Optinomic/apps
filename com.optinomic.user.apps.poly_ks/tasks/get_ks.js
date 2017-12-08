@@ -15,23 +15,23 @@ function get_ks_task() {
 
 
             getPatients().then(function(patients_data) {
-            
-            
+
+
                 function patientFound(value) {
                     return value = cis_pid;
                 };
-                
+
                 var found_patients = [];
-                
+
                 for (var pID = 0; pID < patients_data.length; pID++) {
                     var patient = patients_data[pID];
 
                     var cis_pid = parseInt(patient.data.cis_pid);
-                    
+
                     for (var odbcID = 0; odbcID < saved_data.length; odbcID++) {
                         var odbc_patient = saved_data[odbcID];
                         // console.log('(?) ', odbc_patient.PID, cis_pid);
-                        
+
                         if (parseInt(odbc_patient.ID_PID) === cis_pid) {
                             found_patients.push(patient);
                             odbc_patient.optinomic_pid = parseInt(patient.id);
@@ -40,12 +40,12 @@ function get_ks_task() {
                         };
                     };
                 };
-                
+
                 doWrite(saved_data);
-                
-                
+
+
                 console.log('(!) getPatients FINISHED! ', patients_data.length, found_patients.length);
-                
+
             }).then(null, function(error) {
                 console.log('(!) patients_data-ERROR, ', error);
             });
@@ -70,7 +70,7 @@ function callODBC() {
 
     return new Promise(function(resolve, reject) {
 
-        var sql = include_as_js_string(odbc_kantonsstatistik_typ.sql);
+        var sql = __opapp_include_as_js_string(includes/odbc_kantonsstatistik_typ.sql);
 
         var body = {
             "query": sql,

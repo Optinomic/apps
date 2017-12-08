@@ -1,15 +1,15 @@
-include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
+__opapp_include(../lib/html/optinomic/page/start.m4) __opapp_include(templates/toolbar.html)
 <div ng-if="d.appState === 'show'">
-    include(templates/medication_list.html)
+    __opapp_include(templates/medication_list.html)
 </div>
 <div ng-if="d.appState === 'edit'">
-    include(templates/medication_edit.html)
+    __opapp_include(templates/medication_edit.html)
 </div>
 <div ng-if="d.appState === 'new'">
-    include(templates/medication_edit.html)
+    __opapp_include(templates/medication_edit.html)
 </div>
 <div ng-if="d.appState === 'settings'">
-    include(templates/medication_settings.html)
+    __opapp_include(templates/medication_settings.html)
 </div>
 <div>&nbsp;</div>
 <div class="optinomic-page-fab" ng-if="d.appState === 'show'">
@@ -20,4 +20,4 @@ include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
         </md-tooltip>
     </md-button>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

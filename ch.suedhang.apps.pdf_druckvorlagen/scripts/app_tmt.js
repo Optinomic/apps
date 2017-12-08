@@ -196,8 +196,7 @@ d.tmt_loadKS = function(calculation_results) {
 
     var ks = {};
 
-    var ks_file = include_as_js_string(
-        ks_tmt.json)
+    var ks_file = __opapp_include_as_js_string(includes/ks_tmt.json)
 
     ks_file = JSON.parse(ks_file);
     ks = ks_file;
@@ -492,7 +491,7 @@ d.tmt_initTMT = function() {
             };
 
 
-            // Auffällige Testleistung |  Vergleich mit den Gesunden 
+            // Auffällige Testleistung |  Vergleich mit den Gesunden
             if (messung_obj.zscore.zscore >= 2) {
                 // Auffällige Testleistung: Grün
                 messung_obj.zscore.zscore_color = '#4CAF50';

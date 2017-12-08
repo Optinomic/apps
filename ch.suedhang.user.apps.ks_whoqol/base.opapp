@@ -1,0 +1,43 @@
+[module]
+id = __opapp_identifier()
+name = Klinische Stichprobe | WHOQOL-BREF
+short_description = Klinische Stichproben | WHOQOL-BREF
+version = __opapp_version()
+type = user
+
+
+[description]
+Erstellen der klinischen Stichprobe des WHOQOL-BREF (The World Health Organization Quality of Life). Beurteilung der Physischen und Psychischen Lebensqualität.
+
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+
+[dependencies]
+
+
+[template score_overview 4 4]
+__opapp_include(templates/score.html)
+
+[readme]
+__opapp_include(readme.md)
+
+[javascript]
+__opapp_include(../lib/js/optinomic/data_module/optinomic_app_api.m4)
+__opapp_include(main.js)
+
+
+[css]
+__opapp_include(../lib/css/set/optinomic_material_bootstrap.m4)
+__opapp_include(style.css)
+
+
+[calculation whoqolbref_klinikstichprobe javascript ch.suedhang.apps.whoqol.production ch.suedhang.apps.whoqol.production:phys_psych_calculation]
+__opapp_include(calculations/klinikstichprobe.js)

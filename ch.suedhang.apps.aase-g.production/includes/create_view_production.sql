@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW aase_view AS 
+CREATE OR REPLACE VIEW aase_view AS
 
-include(includes/export_production.sql)
+__opapp_include(includes/export_production.sql)

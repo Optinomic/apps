@@ -148,7 +148,7 @@
             }
         },
 
-        // --------------------------- User --------------------------- 
+        // --------------------------- User ---------------------------
 
         _openFilter: function() {
             this.set('_filterOpen', true);
@@ -214,7 +214,7 @@
         },
 
 
-        // --------------------------- Data --------------------------- 
+        // --------------------------- Data ---------------------------
 
         _set_patient_groups: function(e) {
             if ((this.patient_groups === undefined) || (this.patient_groups === null)) {
@@ -249,7 +249,7 @@
             console.log('INIT _d', d);
         },
 
-        // --------------------------- Data --------------------------- 
+        // --------------------------- Data ---------------------------
 
         __loadData: function() {
             Polymer.RenderStatus.afterNextRender(this, function() {});
@@ -278,13 +278,13 @@
             // Add NEW Files here!
 
             d.export_files = [];
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/aase.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/bdi.json));
-            d.export_files.push(include(../org.optinomic.export.toolbox/definitions/case.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/isk.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/tmt.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/aase.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bdi.json));
+            d.export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/case.json));
 
 
             // Find Sources Index and enhance options!
@@ -310,7 +310,7 @@
         },
 
 
-        // --------------------------- Lifecycle --------------------------- 
+        // --------------------------- Lifecycle ---------------------------
 
         ready: function() {
             Polymer.RenderStatus.afterNextRender(this, function() {

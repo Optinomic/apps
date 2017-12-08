@@ -325,7 +325,7 @@ function process_stay(stay) {
         var poly_pid = parseInt(cis_fid_str.substring(0, (cis_fid_str.length - 2)));
         var poly_fid = parseInt(cis_fid_str.substring((cis_fid_str.length - 2), (cis_fid_str.length)));
 
-        var sql = include_as_js_string(belegung_history_from_fid.sql);
+        var sql = __opapp_include_as_js_string(includes/belegung_history_from_fid.sql);
         sql = sql.replace("%poly_pid%", poly_pid);
         sql = sql.replace("%poly_fid%", poly_fid);
 

@@ -1,17 +1,17 @@
-include(../lib/html/optinomic/page/start.m4) include(templates/toolbar.html)
+__opapp_include(../lib/html/optinomic/page/start.m4) __opapp_include(templates/toolbar.html)
 <div ng-if="d.appState === 'show'">
-    include(templates/verlaufseintrag_all.html)
+    __opapp_include(templates/verlaufseintrag_all.html)
 </div>
 <div ng-if="d.appState === 'edit'">
-    include(templates/verlaufseintrag_edit.html)
+    __opapp_include(templates/verlaufseintrag_edit.html)
 </div>
 <div ng-if="d.appState === 'new'">
-    include(templates/verlaufseintrag_edit.html)
+    __opapp_include(templates/verlaufseintrag_edit.html)
 </div>
 <div ng-if="d.appState === 'settings'">
-    include(templates/verlaufseintrag_settings.html)
+    __opapp_include(templates/verlaufseintrag_settings.html)
 </div>
-include(templates/toolbar.html)
+__opapp_include(templates/toolbar.html)
 <div>&nbsp;</div>
 <div class="optinomic-page-fab" ng-if="d.appState === 'show'">
     <md-button ng-click="entryNew()" class="md-fab" aria-label="Hinzufügen" style="background-color: #E91E63;">
@@ -21,4 +21,4 @@ include(templates/toolbar.html)
         </md-tooltip>
     </md-button>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

@@ -555,8 +555,7 @@ d.bscl = function() {
 
     $scope.d.appData["ch.suedhang.apps.bscl_anq"].app_scope.ks = {};
 
-    var ks_file = include_as_js_string(
-        ks_bscl.json)
+    var ks_file = __opapp_include_as_js_string(includes/ks_bscl.json)
 
     ks_file = JSON.parse(ks_file);
 

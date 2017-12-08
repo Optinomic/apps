@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.loader.done">
     <div ng-repeat="doc in d.docs" ng-if="(doc.name === 'Austritts-Assessment') || (doc.name === 'Eintritts-Assessment')" class="grid-border-bottom" layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center" layout-padding>
         <div flex=15>
@@ -24,4 +24,4 @@ include(../lib/html/optinomic/page/start.m4)
     </div>
 </div>
 <div id="iframeContainer" style="position: absolute; width: 100%;"></div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

@@ -1,3 +1,3 @@
-CREATE OR REPLACE VIEW whoqol_view AS 
+CREATE OR REPLACE VIEW whoqol_view AS
 
-include(includes/WHQOL.sql)
+__opapp_include(includes/WHQOL.sql)

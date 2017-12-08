@@ -1,0 +1,68 @@
+[module]
+id = __opapp_identifier()
+name = ActInfo | Eintritt
+short_description = Sonderversion für den stationären Alkohol- und Medikamentenbereich.
+version = __opapp_version()
+type = patient
+
+[description]
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+
+[template ActInfo 6 35]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(elements/element-actinfo.html)
+__opapp_include(elements/actinfo-problemsubstanzen.html)
+__opapp_include(elements/view.html)
+
+
+[readme]
+__opapp_include(readme.md)
+
+[dependencies]
+
+
+[survey]
+id = actinfo_eintritt
+type = lime
+responsibility = lead_therapist
+name = actInfo - Eintritt
+host = default
+survey_id = 275667
+hash = X48X652
+pid = X48X646
+fid = X48X645
+min_questions =
+min_lastpage = 5
+
+
+[event activation]
+type = on_activation
+time = 8:00
+due_after = 259200
+overdue = ignore
+description = actInfo - Eintritt
+survey = actinfo_eintritt
+
+
+[email new_event html]
+__opapp_include(emails/new_event.html)
+
+[email overdue html]
+__opapp_include(emails/overdue.html)
+
+
+[calculation actinfo_ein javascript]
+__opapp_include(calculations/actinfo_ein_calc.js)
+
+
+[sql_init]
+__opapp_include(includes/create_view.sql)

@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div>
     <h3 class="md-headline">Klinikstichprobe</h3>
     <md-tabs md-dynamic-height md-border-bottom md-autoselect md-selected="d.ks.ks_versions.tabs.selectedIndex">
@@ -81,7 +81,7 @@ include(../lib/html/optinomic/page/start.m4)
                     <!-- Explorer | Klinische Stichproben -->
                     <div ng-if="(d.ks.ks_versions.tabs.selectedIndex > 1) && (d.ks.ks_versions.tabs.content==='Explorer')">
                         <div>
-                            include(templates/content_data_explorer.html)
+                            __opapp_include(templates/content_data_explorer.html)
                         </div>
                     </div>
                     <div ng-if="(d.ks.ks_versions.tabs.selectedIndex > 1) && (d.ks.ks_versions.tabs.content==='Erstellen')">
@@ -172,4 +172,4 @@ include(../lib/html/optinomic/page/start.m4)
         </md-tab>
     </md-tabs>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

@@ -1,0 +1,33 @@
+[module]
+id = __opapp_identifier()
+name = optinomic-redux-store
+short_description = Development of "optinomic-redux-store"
+version = 1.0
+type = patient
+
+[description]
+Optinomic-App helps development of "optinomic-redux-store".
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+
+
+
+[template main 6 7]
+__opapp_include(elements/index.html)
+__opapp_include(../lib/polymer/templates/template_end.m4)
+
+
+[javascript]
+__opapp_include(../lib/polymer/elements/main.js)
+
+
+[css]

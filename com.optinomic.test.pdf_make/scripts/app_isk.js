@@ -214,8 +214,7 @@ d.isk = function() {
 
     $scope.d.appData["ch.suedhang.apps.isk"].app_scope.ks = {};
 
-    var ks_file = include_as_js_string(
-        ks_isk.json)
+    var ks_file = __opapp_include_as_js_string(includes/ks_isk.json)
 
     ks_file = JSON.parse(ks_file);
 

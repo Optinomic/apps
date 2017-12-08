@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
-include(../lib/html/optinomic/email/head.html)
+__opapp_include(../lib/html/optinomic/email/head.html)
 
 <body style="margin: 0; padding: 0;" bgcolor="#ffffff" align="center">
-    include(../lib/html/optinomic/email/preheder.html)
+    __opapp_include(../lib/html/optinomic/email/preheder.html)
     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="ko_onecolumnBlock_3">
         <tbody>
             <tr class="row-a">
@@ -12,5 +12,3 @@ include(../lib/html/optinomic/email/head.html)
                         <tbody>
                             <tr>
                                 <td>
-
-                                

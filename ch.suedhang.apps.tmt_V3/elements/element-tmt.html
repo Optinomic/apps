@@ -283,7 +283,7 @@
             d.title = "Trail Making Test";
 
 
-            d.clinic_samples = JSON.parse(include_as_js_string(ks_tmt.json));
+            d.clinic_samples = JSON.parse(__opapp_include_as_js_string(includes/ks_tmt.json));
             d.clinic_sample_dive = {
                 "defined": false,
                 "array": null
@@ -586,9 +586,9 @@
                     titel_beschreibung.push(this._heading(d.name, d.title, 'h1'));
                     titel_beschreibung.push(this._pdf_app_info);
                     _pdf_content.push(this._keepTogether(titel_beschreibung, "app_beschreibung_" + d.name));
-                    
+
                     _pdf_content.push(this._noData(d.name, 24));
-                    
+
                 };
 
 

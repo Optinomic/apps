@@ -1,0 +1,63 @@
+[module]
+id = __opapp_identifier()
+name = BSCL (ANQ)
+short_description = Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
+version = __opapp_version()
+type = patient
+
+[description]
+Erfassung subjektiver Beeinträchtigung durch körperliche und psychische Symptome.
+
+[developer]
+first_name = Beat
+last_name = Ottiger
+github_user = ottigerb
+email = beat@optinomic.com
+company = Optinomic Gmbh
+phone = +41 (0)44 508 26 76
+website = http://www.optinomic.com/
+
+[readme]
+__opapp_include(readme.md)
+
+
+[template BSCL 6 12]
+__opapp_include(../lib/polymer/index.m4)
+__opapp_include(elements/element-bscl.html)
+__opapp_include(elements/view.html)
+
+
+[survey]
+id = bscl_anq
+type = lime
+responsibility = patient_via_assessment
+name = BSCL - ANQ
+host = default
+survey_id = 693172
+hash = X6X78
+pid = X6X73
+fid = X6X77
+min_questions =
+min_lastpage = 2
+
+
+[event activation]
+type = on_activation
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = BSCL - ANQ
+survey = bscl_anq
+
+[event exit]
+type = before_exit
+days = 7
+time = 08:00
+due_after = 86400
+overdue = ignore
+description = BSCL - ANQ
+survey = bscl_anq
+
+
+[calculation scores_calculation javascript]
+__opapp_include(calculations/bscl_patient_calc.js)

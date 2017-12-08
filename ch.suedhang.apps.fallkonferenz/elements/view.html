@@ -131,7 +131,7 @@
 
         behaviors: [ReduxBehavior, AsyncActionsBehavior, optinomicApp, makepdfBehavior],
 
-        include(_properties.js)
+        __opapp_include(_properties.js)
 
 
         // -----------------------------
@@ -146,7 +146,7 @@
             d.title = "Fragebogenauswertung";
             d.subtitle = "Eine Übersicht der wichtigsten Ergebnisse und Auswertungen.";
 
-            include(_data_toc.js)
+            __opapp_include(_data_toc.js)
 
             d.init_done = true;
             this.set('_d', d);

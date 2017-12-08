@@ -1,12 +1,12 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <div ng-if="d.haveData">
     <div ng-repeat="resp in d.dataMain.survey_responses">
         <div layout="row" layout-xs="row" layout-gt-xs="row" layout-align="space-between center">
             <div flex>
             <md-button ng-disabled="true" style="background-color: #C8E6C9; color: black" ng-if="resp.entity.data.response.Erhebungszeitpunkt === '1'">Das Eintrittsassessment wurde am <br><strong>{{resp.entity.data.response.datestamp | date}}</strong><br> ausgefüllt.</md-button>
             <md-button ng-disabled="true" style="background-color: #C8E6C9; color:black" ng-if="resp.entity.data.response.Erhebungszeitpunkt !== '1'">Das Austrittsassessment wurde am <br><strong>{{resp.entity.data.response.datestamp | date}}</strong><br> ausgefüllt.</md-button>
-            </div>            
+            </div>
         </div>
     </div>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

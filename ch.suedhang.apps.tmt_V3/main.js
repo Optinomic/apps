@@ -59,7 +59,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         $scope.d.ks = {};
 
-        var ks_file = include_as_js_string(ks_tmt.json)
+        var ks_file = __opapp_include_as_js_string(includes/ks_tmt.json)
 
         $scope.d.ks = JSON.parse(ks_file);
 
@@ -328,7 +328,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
                 };
 
 
-                // Auffällige Testleistung |  Vergleich mit den Gesunden 
+                // Auffällige Testleistung |  Vergleich mit den Gesunden
                 if (messung_obj.zscore.zscore >= 2) {
                     // Auffällige Testleistung: Grün
                     messung_obj.zscore.zscore_color = '#4CAF50';
@@ -402,7 +402,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         // ------------------------------------------------
         // Export - Pakete definieren
-        // i n c l u d e _ a s _ j s _ s t r i n g 
+        // i n c l u d e _ a s _ j s _ s t r i n g
         // => (export.sql) muss sich in /includes befinden
         // ------------------------------------------------
 
@@ -413,8 +413,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
 
         data_query = {
             name: 'WHQOL-Example (with stay)',
-            sql: include_as_js_string(
-                export.sql)
+            sql: __opapp_include_as_js_string(includes/export.sql)
         };
         module_packages.push(data_query);
 
@@ -427,7 +426,7 @@ app.controller('AppCtrl', function($scope, $filter, dataService, scopeDService) 
     // -------------------------------------------
 
     $scope.roundToTwo = function(num) {
-        // Round a Number to 0.X 
+        // Round a Number to 0.X
         return +(Math.round(num + "e+2") + "e-2");
     };
 

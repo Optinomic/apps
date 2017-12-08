@@ -1,7 +1,7 @@
 <dom-module id="shared-styles">
     <template>
         <style>
-        
+
         body {
             display: block;
             margin: 0;
@@ -19,12 +19,12 @@
 
 
 
-        include(../lib/polymer/styles/shared-style-typography.css) 
-        include(../lib/polymer/styles/shared-style-paper-button.css) 
-        include(../lib/polymer/styles/shared-style-paper-icon-button.css) 
-        include(../lib/polymer/styles/shared-style-paper-progress.css) 
-        include(../lib/polymer/styles/shared-style-specials.css)
-        
+        __opapp_include(../lib/polymer/styles/shared-style-typography.css)
+        __opapp_include(../lib/polymer/styles/shared-style-paper-button.css)
+        __opapp_include(../lib/polymer/styles/shared-style-paper-icon-button.css)
+        __opapp_include(../lib/polymer/styles/shared-style-paper-progress.css)
+        __opapp_include(../lib/polymer/styles/shared-style-specials.css)
+
         </style>
     </template>
 </dom-module>

@@ -1,4 +1,4 @@
-include(../lib/html/optinomic/page/start.m4)
+__opapp_include(../lib/html/optinomic/page/start.m4)
 <p class="flow-text">{{d.text.text_start}}</p>
 <div ng-repeat="res in d.dataMain.calculations[0].calculation_results">
     <p class="flow-text">
@@ -7,4 +7,4 @@ include(../lib/html/optinomic/page/start.m4)
         <span ng-if="!res.response.data.response.Datum">{{res.response.data.filled | date}}</span> wurden {{res.score.score}} Punkte erreicht, was als eine «{{res.score.current_range.interpretation_de}}» interpretiert werden kann.
     </p>
 </div>
-include(../lib/html/optinomic/page/end.m4)
+__opapp_include(../lib/html/optinomic/page/end.m4)

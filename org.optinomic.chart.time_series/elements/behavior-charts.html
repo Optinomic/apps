@@ -49,7 +49,7 @@ optinomicCharts = {
             "index": "bscl",
             "userapp_calculation_id": "bscl"
         });
-        
+
         _array_source.push({
             "name": "BDI-II",
             "index": "bdi",
@@ -61,7 +61,7 @@ optinomicCharts = {
             "index": "case",
             "userapp_calculation_id": "case"
         });
-        
+
         _array_source.push({
             "name": "Trail Making Test (TMT)",
             "index": "tmt",
@@ -101,13 +101,13 @@ optinomicCharts = {
         // --------------------------------------------
 
         var export_files = [];
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/isk.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/tmt.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/aase.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/bdi.json));
-        export_files.push(include(../org.optinomic.export.toolbox/definitions/case.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bscl_anq.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/isk.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/tmt.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/aase.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/bdi.json));
+        export_files.push(__opapp_include(../org.optinomic.export.toolbox/definitions/case.json));
 
 
         // Find Sources Index and enhance options!
