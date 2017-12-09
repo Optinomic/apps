@@ -1,0 +1,301 @@
+<link rel="import" href="polymer/polymer-element.html">
+<link rel="import" href="paper-checkbox/paper-checkbox.html">
+<link rel="import" href="optinomic-elements/optinomic-title/optinomic-title.html">
+<link rel="import" href="optinomic-elements/optinomic-clipboard/optinomic-clipboard.html">
+<link rel="import" href="juicy-jsoneditor/juicy-jsoneditor.html">
+
+<link rel="import" href="vaadin-valo-theme/vaadin-button.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-checkbox.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-date-picker.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-dialog.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-text-field.html">
+
+<link rel="import" href="vaadin-valo-theme/vaadin-combo-box.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-item.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-form-layout.html">
+<link rel="import" href="vaadin-valo-theme/vaadin-overlay.html">
+
+<link rel="import" href="vaadin-grid/vaadin-grid.html">
+<link rel="import" href="vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="vaadin-text-field/vaadin-text-field.html">
+<link rel="import" href="vaadin-date-picker/vaadin-date-picker.html">
+<link rel="import" href="vaadin-split-layout/vaadin-split-layout.html">
+<link rel="import" href="vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="vaadin-combo-box/vaadin-combo-box.html">
+
+<link rel="stylesheet" type="text/css" href="jsoneditor/examples/css/darktheme.css">
+
+<dom-module id="optinomic-template">
+  <template>
+    <style include="optinomic-styles">
+      :host {
+        display: block;
+      }
+
+      .fullscreen {
+        height: calc(100vh);
+        min-height: calc(100vh);
+      }
+
+      .editor {
+        min-height: calc(100vh - 253px);
+      }
+
+      .details {
+        border-bottom: 1px solid #EEEEEE;
+      }
+
+      .left_bar {
+        background: #E0E0E0;
+        min-width: 110px;
+        max-width: 220px;
+      }
+
+      .right_top {
+        height: 25%;
+      }
+
+      .right_bottom {
+        height: 75%;
+      }
+
+      .page {
+
+        margin: 12px;
+      }
+
+      /* dark styling of the editor */
+      jsoneditor,
+      jsoneditor-menu {
+        border-color: #4b4b4b;
+      }
+      jsoneditor-menu {
+        background-color: #4b4b4b;
+      }
+      jsoneditor textarea.jsoneditor-text,
+      jsoneditor-tree {
+        background-color: #666666;
+        color: #ffffff;
+      }
+      jsoneditor-field,
+      jsoneditor-value {
+        color: #ffffff;
+      }
+      jsoneditor-search div.jsoneditor-frame {
+        background: #808080;
+      }
+
+      tr.jsoneditor-highlight,
+      tr.jsoneditor-selected {
+        background-color: #808080;
+      }
+      div.jsoneditor-field.jsoneditor-highlight,
+      div.jsoneditor-field[contenteditable=true]:focus,
+      div.jsoneditor-field[contenteditable=true]:hover,
+      div.jsoneditor-value.jsoneditor-highlight,
+      div.jsoneditor-value[contenteditable=true]:focus,
+      div.jsoneditor-value[contenteditable=true]:hover {
+        background-color: #808080;
+        border-color: #808080;
+      }
+      div.jsoneditor-field.highlight-active,
+      div.jsoneditor-field.highlight-active:focus,
+      div.jsoneditor-field.highlight-active:hover,
+      div.jsoneditor-value.highlight-active,
+      div.jsoneditor-value.highlight-active:focus,
+      div.jsoneditor-value.highlight-active:hover {
+        background-color: #b1b1b1;
+        border-color: #b1b1b1;
+      }
+      div.jsoneditor-tree button:focus {
+        background-color: #868686;
+      }
+
+      /* coloring of JSON in tree mode */
+      div.jsoneditor-readonly {
+        color: #acacac;
+      }
+      div.jsoneditor td.jsoneditor-separator {
+        color: #acacac;
+      }
+      div.jsoneditor-value.jsoneditor-string {
+        color: #00ff88;
+      }
+      div.jsoneditor-value.jsoneditor-array,
+      div.jsoneditor-value.jsoneditor-object {
+        color: #bababa;
+      }
+      div.jsoneditor-value.jsoneditor-number {
+        color: #ff4040;
+      }
+      div.jsoneditor-value.jsoneditor-boolean {
+        color: #ff8048;
+      }
+      div.jsoneditor-value.jsoneditor-null {
+        color: #49a7fc;
+      }
+      div.jsoneditor-value.jsoneditor-invalid {
+        color: white;
+      }
+
+    </style>
+
+    <vaadin-dialog id="dialog" no-close-on-esc no-close-on-outside-click>
+      <template>
+        <div style>
+          <div>Press any button to close</div>
+          <br>
+          <vaadin-button on-click="_closeDialog">Ok</vaadin-button>
+          <vaadin-button on-click="_closeDialog">Cancel</vaadin-button>
+        </div>
+      </template>
+    </vaadin-dialog>
+
+    <vaadin-split-layout class="fullscreen">
+      <div class="left_bar">
+        <p>First content element</p>
+        <vaadin-button on-click="_openDialog">Show dialog</vaadin-button>
+
+      </div>
+
+      <vaadin-split-layout vertical>
+        <div class="right_top page">
+          <optinomic-title h1="Fragebogen-Daten" h2="Anzeigen und Editieren"></optinomic-title>
+          <p>DATA: [[_sr.have_data]], [[_sr.data.length]]</p>
+          <vaadin-combo-box id="demo1-1" label="Element" items="[[_sr.data]]"></vaadin-combo-box>
+        </div>
+        <div class="right_bottom">
+          <juicy-jsoneditor style="height:100%" name="response" history mode="tree" modes="[[modes]]" json="{{_sr}}"></juicy-jsoneditor>
+        </div>
+      </vaadin-split-layout>
+    </vaadin-split-layout>
+
+  </template>
+
+  <script>
+    class optinomicTemplate extends ReduxBehavior(Polymer.Element) {
+      static get is() {
+        return 'optinomic-template';
+      }
+
+      static get actions() {
+        return AsyncActionsBehavior.actions;
+      }
+
+      // Properties
+      static get properties() {
+        return {
+
+          _user: {
+            type: Object,
+            statePath: '_app_user.data'
+          },
+
+          _focus_app: {
+            type: String,
+            value: 'com.optinomic.apps.aus'
+          },
+
+          _sr: {
+            type: Object,
+            statePath: function (state) {
+              try {
+
+                function arrayUnique(array) {
+                  var a = array.concat();
+                  for (var i = 0; i < a.length; ++i) {
+                    for (var j = i + 1; j < a.length; ++j) {
+                      if (a[i] === a[j])
+                        a.splice(j--, 1);
+                      }
+                    }
+
+                  return a;
+                }
+                var srs = Object.assign({}, state.survey_responses.data[this._focus_app]);
+
+                srs.response_fields = [];
+
+                srs.data.forEach(function (sr) {
+                  sr.response_fields = [];
+                  sr.date_only = sr.date.substring(0, 10);
+                  sr.label = sr.date_only;
+                  sr.value = sr.response_id;
+                  Object.keys(sr.response).forEach(function (key, index) {
+                    sr.response_fields.push(key);
+                  });
+                  sr.response_fields.sort(function (a, b) {
+                    var nameA = a.toUpperCase(); // ignore upper and lowercase
+                    var nameB = b.toUpperCase(); // ignore upper and lowercase
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    return 0;
+                  });
+                  srs.response_fields = srs.response_fields.concat(sr.response_fields);
+                });
+
+                srs.response_fields = arrayUnique(srs.response_fields);
+
+                console.warn('(!) _sr', srs);
+
+                return srs
+              } catch (err) {
+                return null;
+              }
+
+            }
+          }
+
+        };
+      }
+
+      // Functions
+      _openDialog() {
+        this.$.dialog.opened = true;
+        console.log('_openDialog');
+      }
+
+      _closeDialog() {
+        this.$.dialog.opened = false;
+        console.log('_closeDialog');
+      }
+
+      _saveResponse(e) {
+        var data = e.model.item;
+        console.log('_saveResponse', data);
+
+        // https://doc.optinomic.org/V2/Developers/api.html#put-surveyresponsessurveyresponseid
+      }
+
+      _init() {
+        // Replace later with: op app_identifier()...
+
+        this.dispatch('actionGetSurveyResponses', this._focus_app);
+
+        // Set Modes
+        var modes = [];
+        modes.push("tree");
+        modes.push("view");
+        modes.push("form");
+        modes.push("code");
+        modes.push("text");
+
+        this.set('modes', modes);
+        console.warn('_init :: Fragebogen-Daten');
+      }
+
+      // Lifecycle
+      ready() {
+        super.ready();
+        this._init();
+      }
+    }
+
+    window.customElements.define(optinomicTemplate.is, optinomicTemplate);
+  </script>
+</dom-module>

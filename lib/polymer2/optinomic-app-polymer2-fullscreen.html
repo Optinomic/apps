@@ -54,27 +54,24 @@ __opapp_include(../lib/polymer2/optinomic-app-includes.m4)
 
     <template is="dom-if" if="[[!_show_help]]" restamp="true">
       <optinomic-template name="template"></optinomic-template>
-      <div class="horizontal" style="margin-top:48px;">
-        <p class="caption">&nbsp;[[_current_app.developer.company]]</p>
-        <paper-button class="grey" on-click="_toggleHelp">Hilfe</paper-button>
-      </div>
     </template>
 
-    <div hidden$="[[!_show_help]]">
+    <div hidden$="[[!_show_help]]" style="padding:48px;">
       <optinomic-title h1="[[_current_app.name]]" h2="[[_current_app.short_description]]" h3="Readme"></optinomic-title>
       <div id="readme" class="readme_container"></div>
       <div class="horizontal">
         <p class="caption">&nbsp;V.[[_current_app.version]] | [[_current_app.identifier]]</p>
         <paper-button class="grey" on-click="_toggleHelp">Schliessen</paper-button>
       </div>
+
+      <template is="dom-if" if="[[_user.isAdmin]]">
+        <div style="margin-top: 64px;margin-bottom: 24px;">
+          <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
+          <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
+        </div>
+      </template>
     </div>
 
-    <template is="dom-if" if="[[_user.isAdmin]]">
-      <div style="margin-top: 64px;margin-bottom: 24px;">
-        <paper-icon-button class="pink" on-tap="_logState" icon="bug-report"></paper-icon-button>
-        <paper-icon-button class="indigo" on-tap="_loadData" icon="refresh"></paper-icon-button>
-      </div>
-    </template>
   </template>
   <script>
     __opapp_include(../lib/polymer2/optinomic-app-main.js)

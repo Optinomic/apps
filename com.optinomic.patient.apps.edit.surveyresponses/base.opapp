@@ -20,6 +20,10 @@ website = http://www.optinomic.com/
 [readme]
 __opapp_include(readme.md)
 
+[template app 6 7]
+__opapp_include(../lib/polymer2/index_fullscreen.m4)
+__opapp_include(elements/app.html)
+
 [template main 6 7]
 __opapp_include(../lib/polymer2/index.m4)
 __opapp_include(elements/edit-sr.html)
