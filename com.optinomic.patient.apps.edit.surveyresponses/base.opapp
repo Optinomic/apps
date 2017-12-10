@@ -30,6 +30,7 @@ __opapp_include(elements/edit-sr.html)
 
 
 [javascript]
+__opapp_include(../lib/polymer2/global-js.m4)
 
 
 [css]
