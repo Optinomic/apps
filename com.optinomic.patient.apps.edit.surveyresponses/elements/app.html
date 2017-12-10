@@ -48,6 +48,7 @@
         background: #E0E0E0;
         min-width: 110px;
         max-width: 220px;
+        padding: 12px;
       }
 
       .right_top {
@@ -59,82 +60,18 @@
       }
 
       .page {
-
-        margin: 12px;
+        padding: 12px;
       }
 
-      /* dark styling of the editor */
-      jsoneditor,
-      jsoneditor-menu {
-        border-color: #4b4b4b;
-      }
-      jsoneditor-menu {
-        background-color: #4b4b4b;
-      }
-      jsoneditor textarea.jsoneditor-text,
-      jsoneditor-tree {
-        background-color: #666666;
-        color: #ffffff;
-      }
-      jsoneditor-field,
-      jsoneditor-value {
-        color: #ffffff;
-      }
-      jsoneditor-search div.jsoneditor-frame {
-        background: #808080;
-      }
-
-      tr.jsoneditor-highlight,
-      tr.jsoneditor-selected {
-        background-color: #808080;
-      }
-      div.jsoneditor-field.jsoneditor-highlight,
-      div.jsoneditor-field[contenteditable=true]:focus,
-      div.jsoneditor-field[contenteditable=true]:hover,
-      div.jsoneditor-value.jsoneditor-highlight,
-      div.jsoneditor-value[contenteditable=true]:focus,
-      div.jsoneditor-value[contenteditable=true]:hover {
-        background-color: #808080;
-        border-color: #808080;
-      }
-      div.jsoneditor-field.highlight-active,
-      div.jsoneditor-field.highlight-active:focus,
-      div.jsoneditor-field.highlight-active:hover,
-      div.jsoneditor-value.highlight-active,
-      div.jsoneditor-value.highlight-active:focus,
-      div.jsoneditor-value.highlight-active:hover {
-        background-color: #b1b1b1;
-        border-color: #b1b1b1;
-      }
-      div.jsoneditor-tree button:focus {
-        background-color: #868686;
-      }
-
-      /* coloring of JSON in tree mode */
-      div.jsoneditor-readonly {
-        color: #acacac;
-      }
-      div.jsoneditor td.jsoneditor-separator {
-        color: #acacac;
-      }
-      div.jsoneditor-value.jsoneditor-string {
-        color: #00ff88;
-      }
-      div.jsoneditor-value.jsoneditor-array,
-      div.jsoneditor-value.jsoneditor-object {
-        color: #bababa;
-      }
-      div.jsoneditor-value.jsoneditor-number {
-        color: #ff4040;
-      }
-      div.jsoneditor-value.jsoneditor-boolean {
-        color: #ff8048;
-      }
-      div.jsoneditor-value.jsoneditor-null {
-        color: #49a7fc;
-      }
-      div.jsoneditor-value.jsoneditor-invalid {
-        color: white;
+      .jsoneditor {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding: 0;
+        line-height: 100%;
       }
 
     </style>
@@ -164,7 +101,7 @@
           <vaadin-combo-box id="demo1-1" label="Element" items="[[_sr.data]]"></vaadin-combo-box>
         </div>
         <div class="right_bottom">
-          <juicy-jsoneditor style="height:100%" name="response" history mode="tree" modes="[[modes]]" json="{{_sr}}"></juicy-jsoneditor>
+          <juicy-jsoneditor class="jsoneditor" name="response" history mode="tree" modes="[[modes]]" json="{{_sr}}"></juicy-jsoneditor>
         </div>
       </vaadin-split-layout>
     </vaadin-split-layout>
